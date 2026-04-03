@@ -231,6 +231,11 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     if not code or not code.strip():
         return {"error": "Agent code is required"}
 
+    # Reject unmodified starter templates
+    if "@your-username/" in code:
+        return {"error": "This looks like an unmodified starter template. "
+                "Customize the name, description, and code before submitting."}
+
     manifest = extract_manifest_from_code(code)
     if manifest is None:
         return {"error": "No valid __manifest__ dict found in agent code"}

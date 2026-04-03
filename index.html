@@ -353,6 +353,48 @@
   .tier-card.t-official { border-left: 4px solid var(--accent); }
   .tier-card.t-official li::before { content: '\2611'; color: var(--accent); }
 
+  /* ─── Roadmap Panel ──────────────────────────────── */
+  .roadmap-section { max-width: 800px; margin: 0 auto; }
+  .roadmap-section h2 { font-size: 1.5rem; margin-bottom: 6px; }
+  .roadmap-section > p { color: var(--text-dim); margin-bottom: 28px; }
+  .roadmap-lane { margin-bottom: 32px; }
+  .roadmap-lane h3 { font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .roadmap-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 18px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .roadmap-item .rm-status {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: .7rem; margin-top: 2px;
+  }
+  .rm-done { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+  .rm-progress { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
+  .rm-planned { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+  .roadmap-item .rm-body { flex: 1; }
+  .roadmap-item .rm-title { font-weight: 600; font-size: .95rem; }
+  .roadmap-item .rm-desc { color: var(--text-dim); font-size: .85rem; margin-top: 2px; }
+  .rm-exp-lane { border-left: 2px dashed var(--purple); padding-left: 16px; }
+  .rm-exp-lane h3 { color: var(--purple); }
+  .rm-legend { display: flex; gap: 16px; margin-bottom: 24px; font-size: .8rem; color: var(--text-muted); }
+  .rm-legend span { display: flex; align-items: center; gap: 4px; }
+  .rm-legend .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ─── Starter Templates ──────────────────────────── */
+  .template-picker { margin-bottom: 20px; }
+  .template-picker label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
+  .template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .template-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; cursor: pointer; transition: all .15s;
+  }
+  .template-card:hover { border-color: var(--accent); background: var(--accent-bg); }
+  .template-card.selected { border-color: var(--accent); background: var(--accent-bg); }
+  .template-card .tc-name { font-weight: 600; font-size: .9rem; margin-bottom: 2px; }
+  .template-card .tc-desc { color: var(--text-dim); font-size: .78rem; }
+  .template-hint {
+    color: var(--text-muted); font-size: .8rem; margin-top: 8px; font-style: italic;
+  }
+
   /* ─── Toast ───────────────────────────────────────── */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -479,6 +521,7 @@
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
+    <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
   <div class="header-actions" id="header-actions">
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
@@ -618,13 +661,37 @@
     <div class="submit-container">
       <h2>Submit a Community Agent</h2>
       <p>Paste your single-file agent.py below. It must include a valid <code>__manifest__</code>. Your agent publishes under <code>@your-github-username/</code>.</p>
+
+      <div class="template-picker">
+        <label>Start from a template</label>
+        <div class="template-grid">
+          <div class="template-card" onclick="loadTemplate('blank')">
+            <div class="tc-name">Blank Agent</div>
+            <div class="tc-desc">Minimal skeleton with manifest</div>
+          </div>
+          <div class="template-card" onclick="loadTemplate('hello')">
+            <div class="tc-name">Hello World</div>
+            <div class="tc-desc">Simple agent that returns a greeting</div>
+          </div>
+          <div class="template-card" onclick="loadTemplate('api')">
+            <div class="tc-name">API Caller</div>
+            <div class="tc-desc">Agent that calls an external API</div>
+          </div>
+          <div class="template-card" onclick="loadTemplate('data')">
+            <div class="tc-name">Data Processor</div>
+            <div class="tc-desc">Agent that transforms input data</div>
+          </div>
+        </div>
+        <div class="template-hint">Pick a template to get started, then customize it. Unchanged templates will be rejected.</div>
+      </div>
+
       <div class="form-group">
         <label>Agent Code</label>
         <textarea id="agent-code" placeholder='"""My Agent — one-line description."""
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/my-agent",
+    "name": "@your-username/my_agent",
     "version": "1.0.0",
     "display_name": "My Agent",
     "description": "A useful agent",
@@ -650,8 +717,53 @@ class MyAgent(BasicAgent):
       <div class="manifest-preview" id="manifest-preview" style="display:none"></div>
       <button class="submit-btn" id="submit-btn" onclick="submitAgent()" disabled>Submit Agent via GitHub Issue</button>
       <p style="color:var(--text-muted);font-size:.8rem;margin-top:10px">
-        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> tier.
+        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> or <span class="tier tier-experimental">EXPERIMENTAL</span> tier.
       </p>
+    </div>
+  </div>
+
+  <!-- Roadmap -->
+  <div class="panel" id="panel-roadmap">
+    <div class="roadmap-section">
+      <h2>Roadmap</h2>
+      <p>Where RAR is headed. Features move from planned to shipped as development progresses.</p>
+
+      <div class="rm-legend">
+        <span><span class="dot" style="background:var(--green)"></span> Shipped</span>
+        <span><span class="dot" style="background:var(--accent)"></span> In Progress</span>
+        <span><span class="dot" style="background:var(--surface3)"></span> Planned</span>
+      </div>
+
+      <div class="roadmap-lane">
+        <h3>Core Platform</h3>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Single-file agent registry</div><div class="rm-desc">Browse, search, and install agents from the registry</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Issues-as-API backend</div><div class="rm-desc">Submit, vote, and review agents via GitHub Issues</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">4-tier quality system</div><div class="rm-desc">Experimental, Community, Verified, Official tiers with promotion path</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">OAuth authentication</div><div class="rm-desc">GitHub Device Flow shared with RAPPterBook</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Federation support</div><div class="rm-desc">Template repos as federated instances that submit upstream</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent dependency resolution</div><div class="rm-desc">Auto-install declared dependencies when adding an agent</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Version history & rollback</div><div class="rm-desc">View previous versions and rollback to earlier releases</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent analytics</div><div class="rm-desc">Download counts, usage trends, and popularity metrics</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent collections</div><div class="rm-desc">Curated lists of agents for common use cases</div></div></div>
+      </div>
+
+      <div class="roadmap-lane">
+        <h3>Developer Experience</h3>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Starter templates</div><div class="rm-desc">Pre-built agent templates for common patterns</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Agent cart & download</div><div class="rm-desc">Add agents to cart and download as zip</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">CLI agent installer</div><div class="rm-desc"><code>rapp install @publisher/agent</code> from the terminal</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">In-browser agent playground</div><div class="rm-desc">Test agents directly in the browser before installing</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent scaffolding wizard</div><div class="rm-desc">Step-by-step agent builder with live preview</div></div></div>
+      </div>
+
+      <div class="roadmap-lane rm-exp-lane">
+        <h3>&#9878; Experimental</h3>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent-to-agent communication</div><div class="rm-desc">Agents that can invoke other agents in the registry</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Multi-model runtime</div><div class="rm-desc">Support for Claude, GPT, Gemini, and local models</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent stacks (composable pipelines)</div><div class="rm-desc">Chain multiple agents into declarative workflows</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Wasm agent runtime</div><div class="rm-desc">Sandboxed execution of agents in WebAssembly</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent marketplace</div><div class="rm-desc">Premium agents with revenue sharing for publishers</div></div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1146,6 +1258,215 @@ function hlPy(c) {
 }
 
 // ═══════════════════════════════════════════════════════
+// Starter Templates
+// ═══════════════════════════════════════════════════════
+const STARTER_TEMPLATES = {
+  blank: `"""My Agent — one-line description."""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/my_agent",
+    "version": "1.0.0",
+    "display_name": "My Agent",
+    "description": "A useful agent",
+    "author": "Your Name",
+    "tags": ["utility"],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+from agents.basic_agent import BasicAgent
+
+
+class MyAgent(BasicAgent):
+    def __init__(self):
+        self.name = "My Agent"
+        self.metadata = {
+            "name": self.name,
+            "description": "A useful agent.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input": {"type": "string", "description": "The input to process"}
+                },
+                "required": ["input"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        user_input = kwargs.get("input", "")
+        return f"Processed: {user_input}"
+`,
+  hello: `"""Hello World Agent — A friendly greeting agent that demonstrates the basics."""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/hello_world",
+    "version": "1.0.0",
+    "display_name": "Hello World",
+    "description": "A friendly greeting agent that says hello.",
+    "author": "Your Name",
+    "tags": ["tutorial", "hello-world", "starter"],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+from agents.basic_agent import BasicAgent
+
+
+class HelloWorldAgent(BasicAgent):
+    def __init__(self):
+        self.name = "Hello World"
+        self.metadata = {
+            "name": self.name,
+            "description": "Says hello to the user.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "Name to greet"}
+                },
+                "required": []
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        name = kwargs.get("name", "World")
+        return f"Hello, {name}! Welcome to the RAPP Agent ecosystem."
+`,
+  api: `"""API Caller Agent — Demonstrates calling an external REST API."""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/api_caller",
+    "version": "1.0.0",
+    "display_name": "API Caller",
+    "description": "Calls an external API and returns the result.",
+    "author": "Your Name",
+    "tags": ["api", "http", "integration"],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": ["API_BASE_URL"],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+import os
+import json
+import urllib.request
+from agents.basic_agent import BasicAgent
+
+
+class APICallerAgent(BasicAgent):
+    def __init__(self):
+        self.name = "API Caller"
+        self.metadata = {
+            "name": self.name,
+            "description": "Calls an external API endpoint.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "endpoint": {"type": "string", "description": "API endpoint path (e.g. /users)"},
+                    "method": {"type": "string", "description": "HTTP method", "default": "GET"}
+                },
+                "required": ["endpoint"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        base = os.environ.get("API_BASE_URL", "")
+        if not base:
+            return "Error: API_BASE_URL environment variable not set."
+        endpoint = kwargs.get("endpoint", "/")
+        url = f"{base.rstrip('/')}{endpoint}"
+        try:
+            req = urllib.request.Request(url)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode())
+            return json.dumps(data, indent=2)
+        except Exception as e:
+            return f"API call failed: {e}"
+`,
+  data: `"""Data Processor Agent — Transforms and analyzes input data."""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/data_processor",
+    "version": "1.0.0",
+    "display_name": "Data Processor",
+    "description": "Transforms and analyzes input data.",
+    "author": "Your Name",
+    "tags": ["data", "transform", "analysis"],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+import json
+from agents.basic_agent import BasicAgent
+
+
+class DataProcessorAgent(BasicAgent):
+    def __init__(self):
+        self.name = "Data Processor"
+        self.metadata = {
+            "name": self.name,
+            "description": "Transforms and summarizes data.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "data": {"type": "string", "description": "JSON data to process"},
+                    "operation": {"type": "string", "description": "Operation: summarize, filter, sort"}
+                },
+                "required": ["data"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        raw = kwargs.get("data", "[]")
+        operation = kwargs.get("operation", "summarize")
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            return "Error: Invalid JSON input."
+        if not isinstance(data, list):
+            data = [data]
+        if operation == "summarize":
+            return f"Records: {len(data)}, Keys: {list(data[0].keys()) if data and isinstance(data[0], dict) else 'N/A'}"
+        elif operation == "sort":
+            return json.dumps(sorted(data, key=str), indent=2)
+        elif operation == "filter":
+            return json.dumps([d for d in data if d], indent=2)
+        return f"Unknown operation: {operation}"
+`
+};
+
+// Fingerprints of unmodified templates (check name field hasn't changed)
+const TEMPLATE_MARKER = '@your-username/';
+
+function loadTemplate(key) {
+  const code = STARTER_TEMPLATES[key];
+  if (!code) return;
+  const ta = document.getElementById('agent-code');
+  ta.value = code;
+  document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  previewManifest();
+}
+
+function isUnmodifiedTemplate(code) {
+  // Check if the name field still has the placeholder
+  return code.includes('"name": "' + TEMPLATE_MARKER);
+}
+
+// ═══════════════════════════════════════════════════════
 // Voting
 // ═══════════════════════════════════════════════════════
 function quickVote(n) { doVote(n, 'up'); }
@@ -1220,6 +1541,7 @@ function previewManifest() {
     if (!desc) errs.push('description required');
     if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
     if (tier && tier !== 'community' && tier !== 'experimental') errs.push('quality_tier must be "community" or "experimental"');
+    if (isUnmodifiedTemplate(code)) errs.push('Customize the template — change name, description, and code');
     pv.style.display = 'block';
     pv.innerHTML = `<h4>Manifest Preview</h4>
       ${[['name',name],['version',ver],['display',disp],['description',desc],['author',auth],['category',cat],['tier',tier]].filter(x=>x[1]).map(x=>`<div class="fld"><span class="k">${x[0]}</span><span class="v">${esc(x[1])}</span></div>`).join('')}
@@ -1232,6 +1554,10 @@ async function submitAgent() {
   if (!ghUser) { loginWithGitHub(); return; }
   const code = document.getElementById('agent-code').value;
   if (!code.trim()) return;
+  if (isUnmodifiedTemplate(code)) {
+    showToast('Customize the template first — change the name, description, and code to make it yours!', 'error');
+    return;
+  }
   const btn = document.getElementById('submit-btn');
   btn.disabled = true; btn.textContent = 'Submitting...';
   const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
