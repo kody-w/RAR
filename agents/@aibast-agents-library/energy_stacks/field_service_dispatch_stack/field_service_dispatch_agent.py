@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["field-service", "dispatch", "routing", "technicians", "emergency", "energy"],
     "category": "energy",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["grants", "oversight", "compliance", "audit", "federal", "reporting"],
     "category": "federal_government",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

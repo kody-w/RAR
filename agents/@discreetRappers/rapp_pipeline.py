@@ -36,7 +36,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["pipeline", "rapp", "transcript-to-agent", "code-gen", "quality-gates"],
     "category": "pipeline",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": ["AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_DEPLOYMENT_NAME", "AZURE_OPENAI_ENDPOINT"],
     "dependencies": ["@rapp/basic-agent"],
 }

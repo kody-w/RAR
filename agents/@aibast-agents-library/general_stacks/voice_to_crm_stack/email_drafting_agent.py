@@ -25,7 +25,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["voice", "email", "meeting-recap", "action-items", "follow-up"],
     "category": "general",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

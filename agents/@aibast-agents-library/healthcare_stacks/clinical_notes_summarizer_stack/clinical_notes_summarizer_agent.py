@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["clinical-notes", "ehr", "encounters", "medications", "referrals", "healthcare"],
     "category": "healthcare",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

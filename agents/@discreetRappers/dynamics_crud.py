@@ -17,7 +17,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["integrations", "dynamics-365", "crm", "crud", "microsoft"],
     "category": "integrations",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

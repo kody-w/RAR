@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["pipeline", "project-management", "tracking"],
     "category": "pipeline",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

@@ -12,7 +12,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["integrations", "email", "power-automate", "microsoft"],
     "category": "integrations",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

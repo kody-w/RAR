@@ -31,7 +31,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["pipeline", "generator", "scaffolding", "auto-generate"],
     "category": "pipeline",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

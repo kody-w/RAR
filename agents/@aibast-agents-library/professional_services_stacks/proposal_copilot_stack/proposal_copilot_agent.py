@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["proposal", "RFP", "pricing", "competitive-intelligence", "professional-services"],
     "category": "professional_services",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

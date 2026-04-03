@@ -39,7 +39,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["productivity", "diagrams", "architecture", "visualization", "mermaid"],
     "category": "productivity",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

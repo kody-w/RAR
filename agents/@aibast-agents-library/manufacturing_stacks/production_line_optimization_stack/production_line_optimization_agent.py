@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["production", "OEE", "bottleneck", "throughput", "manufacturing"],
     "category": "manufacturing",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

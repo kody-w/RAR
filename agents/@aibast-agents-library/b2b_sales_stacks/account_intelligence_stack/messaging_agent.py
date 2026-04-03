@@ -29,7 +29,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["b2b", "sales", "messaging", "outreach", "email-sequences"],
     "category": "b2b_sales",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

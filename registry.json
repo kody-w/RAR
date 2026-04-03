@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-03T20:25:57.703649+00:00",
+  "generated_at": "2026-04-03T20:50:53.121461+00:00",
   "stats": {
-    "total_agents": 122,
+    "total_agents": 123,
     "publishers": 4,
     "categories": 19,
     "publisher_list": [
@@ -50,7 +50,7 @@
         "competitive-intel"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -74,7 +74,7 @@
         "account-intelligence"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -98,7 +98,7 @@
         "resource-allocation"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -122,7 +122,7 @@
         "win-loss"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -146,7 +146,7 @@
         "forecasting"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -170,7 +170,7 @@
         "objection-handling"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -194,7 +194,7 @@
         "email-sequences"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -218,7 +218,7 @@
         "deal-risk"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -242,7 +242,7 @@
         "buying-committee"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -266,7 +266,7 @@
         "pipeline"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -290,7 +290,7 @@
         "strategy"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -314,7 +314,7 @@
         "pipeline"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -338,7 +338,7 @@
         "forecasting"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -362,7 +362,7 @@
         "pipeline"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -386,7 +386,7 @@
         "recommendations"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -410,7 +410,7 @@
         "analytics"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -434,7 +434,7 @@
         "analytics"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -458,7 +458,7 @@
         "relationships"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -482,7 +482,7 @@
         "pipeline"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -506,7 +506,7 @@
         "forecasting"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -531,7 +531,7 @@
         "competitive-positioning"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -556,7 +556,7 @@
         "lead-routing"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -580,7 +580,7 @@
         "revenue-recovery"
       ],
       "category": "b2b_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -605,7 +605,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -630,7 +630,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -655,7 +655,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -680,7 +680,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -705,7 +705,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -730,7 +730,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -755,7 +755,7 @@
         "b2c"
       ],
       "category": "b2c_sales",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -780,7 +780,7 @@
         "budget"
       ],
       "category": "energy",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -805,7 +805,7 @@
         "energy"
       ],
       "category": "energy",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -830,7 +830,7 @@
         "energy"
       ],
       "category": "energy",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -855,7 +855,7 @@
         "renewals"
       ],
       "category": "energy",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -881,7 +881,7 @@
         "energy"
       ],
       "category": "energy",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -906,7 +906,7 @@
         "federal"
       ],
       "category": "federal_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -931,7 +931,7 @@
         "reporting"
       ],
       "category": "federal_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -956,7 +956,7 @@
         "dashboard"
       ],
       "category": "federal_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -982,7 +982,7 @@
         "regulatory"
       ],
       "category": "federal_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1007,7 +1007,7 @@
         "access"
       ],
       "category": "federal_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1032,7 +1032,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1056,7 +1056,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1081,7 +1081,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1105,7 +1105,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1130,7 +1130,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1155,7 +1155,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1180,7 +1180,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1206,7 +1206,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1231,7 +1231,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1256,7 +1256,7 @@
         "financial-services"
       ],
       "category": "financial_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1280,7 +1280,7 @@
         "satisfaction"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1305,7 +1305,7 @@
         "general"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1330,7 +1330,7 @@
         "opportunities"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1355,7 +1355,7 @@
         "schema"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1379,13 +1379,13 @@
         "import"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
-      "_size_kb": 15.5,
+      "_size_kb": 15.6,
       "_lines": 293
     },
     {
@@ -1403,7 +1403,7 @@
         "recommendations"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1427,7 +1427,7 @@
         "crm"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1452,7 +1452,7 @@
         "templates"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1477,7 +1477,7 @@
         "deployment"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1501,7 +1501,7 @@
         "approval"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1526,7 +1526,7 @@
         "resolution"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1550,7 +1550,7 @@
         "spend-analysis"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1574,7 +1574,7 @@
         "budget"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1598,7 +1598,7 @@
         "compatibility"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1622,7 +1622,7 @@
         "call-review"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1647,7 +1647,7 @@
         "scoring"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1671,7 +1671,7 @@
         "nlp"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1695,7 +1695,7 @@
         "handoff"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1720,7 +1720,7 @@
         "sync"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1744,7 +1744,7 @@
         "follow-up"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1768,7 +1768,7 @@
         "search"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1792,7 +1792,7 @@
         "routing"
       ],
       "category": "general",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1817,7 +1817,7 @@
         "healthcare"
       ],
       "category": "healthcare",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1842,7 +1842,7 @@
         "healthcare"
       ],
       "category": "healthcare",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1867,7 +1867,7 @@
         "healthcare"
       ],
       "category": "healthcare",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1892,7 +1892,7 @@
         "healthcare"
       ],
       "category": "healthcare",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1917,7 +1917,7 @@
         "healthcare"
       ],
       "category": "healthcare",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1941,7 +1941,7 @@
         "employee-self-service"
       ],
       "category": "human_resources",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1965,7 +1965,7 @@
         "support"
       ],
       "category": "it_management",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -1989,7 +1989,7 @@
         "manufacturing"
       ],
       "category": "manufacturing",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2013,7 +2013,7 @@
         "IoT"
       ],
       "category": "manufacturing",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2037,7 +2037,7 @@
         "manufacturing"
       ],
       "category": "manufacturing",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2061,7 +2061,7 @@
         "manufacturing"
       ],
       "category": "manufacturing",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2085,7 +2085,7 @@
         "manufacturing"
       ],
       "category": "manufacturing",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2109,7 +2109,7 @@
         "churn"
       ],
       "category": "professional_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2133,7 +2133,7 @@
         "professional-services"
       ],
       "category": "professional_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2157,7 +2157,7 @@
         "professional-services"
       ],
       "category": "professional_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2181,7 +2181,7 @@
         "professional-services"
       ],
       "category": "professional_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2205,7 +2205,7 @@
         "professional-services"
       ],
       "category": "professional_services",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2229,7 +2229,7 @@
         "retail"
       ],
       "category": "retail_cpg",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2253,7 +2253,7 @@
         "retail"
       ],
       "category": "retail_cpg",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2277,7 +2277,7 @@
         "retail"
       ],
       "category": "retail_cpg",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2301,7 +2301,7 @@
         "retail"
       ],
       "category": "retail_cpg",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2325,7 +2325,7 @@
         "retail"
       ],
       "category": "retail_cpg",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2350,7 +2350,7 @@
         "fees"
       ],
       "category": "slg_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2375,7 +2375,7 @@
         "local-government"
       ],
       "category": "slg_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2399,7 +2399,7 @@
         "government"
       ],
       "category": "slg_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2423,7 +2423,7 @@
         "state-government"
       ],
       "category": "slg_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2448,7 +2448,7 @@
         "municipal"
       ],
       "category": "slg_government",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2472,7 +2472,7 @@
         "threat-assessment"
       ],
       "category": "software_digital_products",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2496,7 +2496,7 @@
         "milestones"
       ],
       "category": "software_digital_products",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2521,7 +2521,7 @@
         "saas"
       ],
       "category": "software_digital_products",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2546,7 +2546,7 @@
         "nps"
       ],
       "category": "software_digital_products",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2571,7 +2571,7 @@
         "escalation"
       ],
       "category": "software_digital_products",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2594,7 +2594,7 @@
         "auto-generate"
       ],
       "category": "pipeline",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2618,7 +2618,7 @@
         "multi-platform"
       ],
       "category": "pipeline",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [
         "AI_PROJECT_CONNECTION_STRING"
       ],
@@ -2644,7 +2644,7 @@
         "mermaid"
       ],
       "category": "productivity",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2668,7 +2668,7 @@
         "no-code"
       ],
       "category": "pipeline",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [
         "AZURE_TENANT_ID",
         "COPILOT_STUDIO_CLIENT_ID",
@@ -2696,7 +2696,7 @@
         "scripted"
       ],
       "category": "productivity",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [
         "AZURE_OPENAI_API_VERSION",
         "AZURE_OPENAI_DEPLOYMENT_NAME",
@@ -2724,7 +2724,7 @@
         "microsoft"
       ],
       "category": "integrations",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2747,7 +2747,7 @@
         "microsoft"
       ],
       "category": "integrations",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2771,7 +2771,7 @@
         "microsoft"
       ],
       "category": "productivity",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2793,7 +2793,7 @@
         "tracking"
       ],
       "category": "pipeline",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2817,7 +2817,7 @@
         "quality-gates"
       ],
       "category": "pipeline",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [
         "AZURE_OPENAI_API_VERSION",
         "AZURE_OPENAI_DEPLOYMENT_NAME",
@@ -2844,7 +2844,7 @@
         "natural-language"
       ],
       "category": "integrations",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2868,7 +2868,7 @@
         "sales"
       ],
       "category": "productivity",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2892,7 +2892,7 @@
         "legal"
       ],
       "category": "integrations",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [
         "AZURE_FILES_SHARE_NAME",
         "AZURE_OPENAI_API_VERSION",
@@ -2909,6 +2909,31 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/agent_workbench",
+      "version": "1.0.0",
+      "display_name": "Agent Workbench",
+      "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
+      "author": "RAPP Core Team",
+      "tags": [
+        "devtools",
+        "workbench",
+        "scaffolding",
+        "validation",
+        "testing",
+        "publishing"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody/agent_workbench_agent.py",
+      "_size_kb": 28.6,
+      "_lines": 723
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/context_memory",
       "version": "1.0.0",
       "display_name": "ContextMemory",
@@ -2921,7 +2946,7 @@
         "recall"
       ],
       "category": "core",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2944,7 +2969,7 @@
         "discovery"
       ],
       "category": "core",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2967,7 +2992,7 @@
         "persistence"
       ],
       "category": "core",
-      "quality_tier": "verified",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -2993,7 +3018,7 @@
         "community"
       ],
       "category": "core",
-      "quality_tier": "official",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"

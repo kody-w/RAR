@@ -26,7 +26,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["b2b", "sales", "proposal", "rfp", "pricing", "competitive-positioning"],
     "category": "b2b_sales",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

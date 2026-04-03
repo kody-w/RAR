@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["maintenance", "predictive", "scheduling", "manufacturing", "IoT"],
     "category": "manufacturing",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

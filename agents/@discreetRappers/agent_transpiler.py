@@ -29,7 +29,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["pipeline", "transpiler", "m365", "copilot-studio", "multi-platform"],
     "category": "pipeline",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": ["AI_PROJECT_CONNECTION_STRING"],
     "dependencies": ["@rapp/basic-agent"],
 }

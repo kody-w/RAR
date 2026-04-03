@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["integrations", "sales", "crm", "natural-language"],
     "category": "integrations",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

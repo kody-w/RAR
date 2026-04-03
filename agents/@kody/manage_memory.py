@@ -13,7 +13,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["core", "memory", "storage", "persistence"],
     "category": "core",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

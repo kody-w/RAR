@@ -428,6 +428,117 @@
   .local-mgmt-btn:hover { border-color: var(--accent); color: var(--accent); }
   .local-mgmt-btn.danger:hover { border-color: var(--red); color: var(--red); }
 
+  /* ─── Agent Cards ─────────────────────────────────── */
+  .cards-header { text-align: center; margin-bottom: 24px; }
+  .cards-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; color: var(--text); }
+  .cards-header .sub { color: var(--text-muted); font-size: .88rem; text-transform: uppercase; letter-spacing: 2px; }
+  .cards-toolbar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
+  .cards-toolbar .pill { font-size: .78rem; padding: 5px 12px; }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;
+    perspective: 1200px;
+  }
+  .agent-card-wrap {
+    position: relative; width: 100%; aspect-ratio: 5/7; cursor: pointer;
+    transform-style: preserve-3d; transition: transform .6s;
+  }
+  .agent-card-wrap.flipped { transform: rotateY(180deg); }
+  .agent-card-front, .agent-card-back {
+    position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
+    overflow: hidden; border: 2px solid var(--border);
+  }
+  .agent-card-back { transform: rotateY(180deg); background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+  .agent-card-front {
+    background: var(--surface); display: flex; flex-direction: column; padding: 0;
+  }
+  /* Card color bands by category */
+  .ac-color-core { border-color: #ffd700; }
+  .ac-color-integrations { border-color: #42a5f5; }
+  .ac-color-productivity { border-color: #4caf50; }
+  .ac-color-devtools { border-color: #f44336; }
+  .ac-color-pipeline { border-color: #ab47bc; }
+  .ac-color-general { border-color: #78909c; }
+  /* Fallback for other categories */
+  .ac-color-default { border-color: #546e7a; }
+
+  .ac-top-bar {
+    height: 6px; width: 100%;
+  }
+  .ac-avatar {
+    width: 100%; aspect-ratio: 5/3; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,.03) 0%, transparent 70%);
+  }
+  .ac-avatar svg { width: 80%; height: 80%; }
+  .ac-avatar .ac-gen-art {
+    width: 100%; height: 100%; position: absolute; inset: 0;
+  }
+  .ac-body {
+    flex: 1; padding: 10px 14px 8px; display: flex; flex-direction: column;
+  }
+  .ac-name { font-size: .95rem; font-weight: 700; line-height: 1.2; }
+  .ac-title { font-size: .7rem; color: var(--text-muted); font-style: italic; margin-bottom: 4px; }
+  .ac-type {
+    font-size: .65rem; color: var(--text-dim); border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); padding: 3px 0; margin: 4px 0;
+    text-transform: capitalize;
+  }
+  .ac-abilities {
+    flex: 1; overflow: hidden; font-size: .68rem; color: var(--text-dim); line-height: 1.4;
+  }
+  .ac-ability { margin-bottom: 3px; }
+  .ac-ability .kw { font-weight: 700; color: var(--text); }
+  .ac-flavor {
+    font-size: .62rem; color: var(--text-muted); font-style: italic;
+    border-top: 1px solid var(--border); padding-top: 4px; margin-top: auto;
+  }
+  .ac-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 14px 8px; font-size: .65rem;
+  }
+  .ac-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
+  .ac-rarity.mythic { color: #ff6d00; }
+  .ac-rarity.rare { color: #ffd700; }
+  .ac-rarity.uncommon { color: #c0c0c0; }
+  .ac-rarity.common { color: #78909c; }
+  .ac-stats { font-weight: 800; font-size: .85rem; }
+
+  /* Back of card */
+  .ac-back-logo { font-size: 2rem; font-weight: 900; margin-bottom: 8px; opacity: .3; }
+  .ac-qr { margin: 12px 0; }
+  .ac-qr img { width: 140px; height: 140px; border-radius: 8px; }
+  .ac-back-name { font-size: .85rem; font-weight: 600; text-align: center; margin-top: 8px; }
+  .ac-back-hint { font-size: .7rem; color: var(--text-muted); text-align: center; }
+  .ac-back-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .ac-back-actions button {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: .75rem; transition: all .15s;
+  }
+  .ac-back-actions button:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Deck builder */
+  .deck-bar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .deck-bar .deck-count { font-weight: 700; color: var(--accent); }
+  .deck-bar button {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .82rem; transition: all .15s;
+  }
+  .deck-bar button:hover { border-color: var(--accent); color: var(--accent); }
+  .deck-bar .primary { background: linear-gradient(135deg, var(--accent), var(--purple)); color: #fff; border: none; }
+
+  /* Print styles */
+  @media print {
+    body * { visibility: hidden; }
+    .print-card, .print-card * { visibility: visible; }
+    .print-card {
+      position: fixed; top: 0; left: 0; width: 2.5in; height: 3.5in;
+      border: 1px solid #333; border-radius: 8px; background: #161b22;
+    }
+  }
+
   /* ─── Toast ───────────────────────────────────────── */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -553,6 +664,7 @@
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
+    <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
@@ -613,6 +725,36 @@
     <h2 style="margin-bottom:4px">Agent Leaderboard</h2>
     <p style="color:var(--text-dim);margin-bottom:20px">Ranked by community votes and reviews</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
+  </div>
+
+  <!-- Agent Cards -->
+  <div class="panel" id="panel-cards">
+    <div class="cards-header">
+      <div class="sub">Agent Trading Card Collection</div>
+      <h2>AGENT CARDS</h2>
+      <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();showModal('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
+    </div>
+    <div class="deck-bar" id="deck-bar">
+      <span>Deck: <span class="deck-count" id="deck-count">0</span> cards</span>
+      <input type="text" id="deck-name" placeholder="Deck name..." style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
+      <button onclick="shareDeck()">Share Deck</button>
+      <button onclick="clearDeck()">Clear</button>
+      <div style="margin-left:auto;display:flex;gap:6px">
+        <input type="text" id="card-search" placeholder="Search cards..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
+      </div>
+    </div>
+    <div class="cards-toolbar" id="cards-filter">
+      <span class="pill active" data-cf="all" onclick="setCardFilter('all',this)">All</span>
+      <span class="pill" data-cf="mythic" onclick="setCardFilter('mythic',this)" style="color:#ff6d00;border-color:rgba(255,109,0,.3)">Official</span>
+      <span class="pill" data-cf="rare" onclick="setCardFilter('rare',this)" style="color:#ffd700;border-color:rgba(255,215,0,.3)">Verified</span>
+      <span class="pill" data-cf="uncommon" onclick="setCardFilter('uncommon',this)">Community</span>
+      <span class="pill" data-cf="common" onclick="setCardFilter('common',this)" style="color:#bc8cff;border-color:rgba(188,140,255,.3)">Experimental</span>
+      <span style="color:var(--text-muted);margin:0 4px">|</span>
+      <span class="pill" data-cf="deck" onclick="setCardFilter('deck',this)" style="color:var(--accent);border-color:rgba(88,166,255,.3)">My Deck</span>
+    </div>
+    <div class="cards-grid" id="cards-grid">
+      <div class="loading"><div class="spinner"></div><br>Loading cards...</div>
+    </div>
   </div>
 
   <!-- Quality Seal -->
@@ -769,7 +911,7 @@ class MyAgent(BasicAgent):
   <div class="panel" id="panel-roadmap">
     <div class="roadmap-section">
       <h2>Roadmap</h2>
-      <p>Where RAR is headed. Features move from planned to shipped as development progresses.</p>
+      <p>RAR is an agent workbench. Everything serves one purpose: make it trivially easy to build, share, and run single-file AI agents.</p>
 
       <div class="rm-legend">
         <span><span class="dot" style="background:var(--green)"></span> Shipped</span>
@@ -778,34 +920,55 @@ class MyAgent(BasicAgent):
       </div>
 
       <div class="roadmap-lane">
-        <h3>Core Platform</h3>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Single-file agent registry</div><div class="rm-desc">Browse, search, and install agents from the registry</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Issues-as-API backend</div><div class="rm-desc">Submit, vote, and review agents via GitHub Issues</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">4-tier quality system</div><div class="rm-desc">Experimental, Community, Verified, Official tiers with promotion path</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">OAuth authentication</div><div class="rm-desc">GitHub Device Flow shared with RAPPterBook</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Federation support</div><div class="rm-desc">Template repos as federated instances that submit upstream</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent dependency resolution</div><div class="rm-desc">Auto-install declared dependencies when adding an agent</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Version history & rollback</div><div class="rm-desc">View previous versions and rollback to earlier releases</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent analytics</div><div class="rm-desc">Download counts, usage trends, and popularity metrics</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent collections</div><div class="rm-desc">Curated lists of agents for common use cases</div></div></div>
+        <h3>The Registry</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">The single source of truth for agent discovery. One file = one agent = one card in the registry.</p>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">AST-based manifest extraction</div><div class="rm-desc">Parse __manifest__ from .py files without executing code. Safe, fast, deterministic.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Issues-as-API</div><div class="rm-desc">Submit, vote, and review agents through GitHub Issues. No server. GitHub Actions processes, validates, commits, closes.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">4-tier quality seal</div><div class="rm-desc">Experimental &rarr; Community &rarr; Verified &rarr; Official. Only community and experimental are self-submittable.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Federation</div><div class="rm-desc">Clone as template. Run your own store. Submit deltas upstream. The main store signs and distributes.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent dependency graph</div><div class="rm-desc">Resolve <code>dependencies</code> declared in manifests. Show the graph. Auto-bundle when downloading.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Version diffing</div><div class="rm-desc">Compare versions of an agent side-by-side. See what changed in perform(), manifest, and dependencies.</div></div></div>
       </div>
 
       <div class="roadmap-lane">
-        <h3>Developer Experience</h3>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Starter templates</div><div class="rm-desc">Pre-built agent templates for common patterns</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Agent cart & download</div><div class="rm-desc">Add agents to cart and download as zip</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">CLI agent installer</div><div class="rm-desc"><code>rapp install @publisher/agent</code> from the terminal</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">In-browser agent playground</div><div class="rm-desc">Test agents directly in the browser before installing</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent scaffolding wizard</div><div class="rm-desc">Step-by-step agent builder with live preview</div></div></div>
+        <h3>The Workbench</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Build agents locally, test them, iterate, then publish. The browser is your IDE.</p>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Local-first agent loading</div><div class="rm-desc">Drag and drop .py files into the browser. Stored in IndexedDB. Persists across sessions. No upload needed.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Starter templates</div><div class="rm-desc">Blank, Hello World, API Caller, Data Processor. Customize and submit. Unmodified templates are caught and rejected.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Manifest validation</div><div class="rm-desc">Real-time validation as you type. Name, version, publisher match, tier enforcement &mdash; all checked before submit.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">In-browser code editor</div><div class="rm-desc">Edit local agents directly in the workbench. Syntax highlighting, manifest preview, one-click submit.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent testing sandbox</div><div class="rm-desc">Invoke perform() with test inputs and inspect outputs. Mock env vars. Dry-run before publishing.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Fork &amp; remix</div><div class="rm-desc">Take any registry agent, fork it to your namespace, modify it, and republish. One-click workflow.</div></div></div>
+      </div>
+
+      <div class="roadmap-lane">
+        <h3>The Sneakernet</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Share agents like trading cards. QR codes, decks, and AirDrop. The agent lives on the card.</p>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Agent cards</div><div class="rm-desc">Every agent renders as a trading card. Front: name, category art, abilities, tier seal. Back: QR code that loads the agent.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Decks</div><div class="rm-desc">Collect agents into a personal deck. Name it, share it via URL. "The Howard Starter Pack."</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">QR sharing</div><div class="rm-desc">Scan the back of a card with your phone. It opens RAR and loads the agent. No app install needed.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Printable cards</div><div class="rm-desc">Print agent cards at trading card size (2.5&times;3.5"). Front + back. Hand them out at meetups.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Card-embedded agents</div><div class="rm-desc">For small agents, encode the full .py source in the QR code itself. The card IS the agent &mdash; no network needed.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Deck packs for Brainstem</div><div class="rm-desc">Drop a deck URL into Brainstem. All agents in the pack install at once. Personality starter kits.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">NFC / AirDrop cards</div><div class="rm-desc">Tap your phone to share an agent. Write the QR URL to an NFC tag. Physical agent distribution.</div></div></div>
+      </div>
+
+      <div class="roadmap-lane">
+        <h3>Trust &amp; Signing</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">RAR signs agents like Apple signs apps. The seal means something.</p>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Publisher namespaces</div><div class="rm-desc">@yourname/ is yours. Enforced at submission. No impersonation. No squatting.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Automated contract tests</div><div class="rm-desc">Every agent in the registry passes AST parsing, manifest validation, and structural contract checks on every push.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Code signing via commit</div><div class="rm-desc">The main repo is the certificate authority. An agent in the registry = signed by RAR. Git commit hash = signature.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Integrity verification</div><div class="rm-desc">Verify a local .py against the registry hash. Detect tampering. "This card is authentic."</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Security scanning</div><div class="rm-desc">Automated scan for hardcoded secrets, network calls in __init__, obfuscated code. Block before merge.</div></div></div>
       </div>
 
       <div class="roadmap-lane rm-exp-lane">
         <h3>&#9878; Experimental</h3>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent-to-agent communication</div><div class="rm-desc">Agents that can invoke other agents in the registry</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Multi-model runtime</div><div class="rm-desc">Support for Claude, GPT, Gemini, and local models</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent stacks (composable pipelines)</div><div class="rm-desc">Chain multiple agents into declarative workflows</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Wasm agent runtime</div><div class="rm-desc">Sandboxed execution of agents in WebAssembly</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent marketplace</div><div class="rm-desc">Premium agents with revenue sharing for publishers</div></div></div>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Ideas being explored. May ship, may not. Feedback welcome.</p>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent-to-agent invocation</div><div class="rm-desc">An agent calls another agent's perform() by name. Declared in dependencies, resolved at runtime.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Offline-first PWA</div><div class="rm-desc">Install RAR as a PWA. Browse your local agents with no network. Sync when you're back online.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent canvas</div><div class="rm-desc">Visual drag-and-drop wiring of agents into pipelines. Each node is a card. Connections are data flows.</div></div></div>
       </div>
     </div>
   </div>
@@ -1283,6 +1446,7 @@ function switchTab(tab) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
   if (tab === 'leaderboard') renderLeaderboard();
+  if (tab === 'cards') renderCards();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2073,7 +2237,263 @@ document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { e.preventDefault(); document.getElementById('search')?.focus(); }
 });
 
-init();
+// ═══════════════════════════════════════════════════════
+// Agent Cards — Trading card system
+// ═══════════════════════════════════════════════════════
+let deck = new Set(JSON.parse(localStorage.getItem('rar_deck') || '[]'));
+let cardFilter = 'all';
+
+const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'uncommon', experimental: 'common' };
+const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Experimental' };
+
+// Color mapping by category
+const CAT_COLORS = {
+  core: { border: '#ffd700', bg: '#2a2000', primary: '#ffd700' },
+  integrations: { border: '#42a5f5', bg: '#0a1a2e', primary: '#42a5f5' },
+  productivity: { border: '#4caf50', bg: '#0a1e0a', primary: '#4caf50' },
+  devtools: { border: '#f44336', bg: '#2a0a0a', primary: '#f44336' },
+  pipeline: { border: '#ab47bc', bg: '#1a0a2e', primary: '#ab47bc' },
+  general: { border: '#78909c', bg: '#1a1a1a', primary: '#90a4ae' },
+};
+
+function getCatColor(cat) {
+  return CAT_COLORS[cat] || CAT_COLORS.general;
+}
+
+// Generate unique SVG art from agent name (deterministic hash-based)
+function genCardArt(agent) {
+  const h = Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0);
+  const abs = Math.abs(h);
+  const cc = getCatColor(agent.category);
+  const p = cc.primary;
+  const shapes = [];
+  // Background
+  shapes.push(`<rect width="200" height="120" fill="${cc.bg}"/>`);
+  // Generate geometric patterns based on hash
+  const type = abs % 4;
+  if (type === 0) { // Concentric circles
+    for (let i = 4; i > 0; i--) {
+      const op = (0.15 + i * 0.1).toFixed(2);
+      shapes.push(`<circle cx="100" cy="60" r="${i * 18}" fill="none" stroke="${p}" stroke-width="1.5" opacity="${op}"/>`);
+    }
+    shapes.push(`<circle cx="100" cy="60" r="8" fill="${p}" opacity="0.4"/>`);
+  } else if (type === 1) { // Grid
+    for (let x = 20; x < 200; x += 30) for (let y = 10; y < 120; y += 25) {
+      const op = ((abs + x * y) % 5 > 2 ? 0.3 : 0.08).toFixed(2);
+      shapes.push(`<rect x="${x}" y="${y}" width="20" height="16" rx="3" fill="${p}" opacity="${op}"/>`);
+    }
+  } else if (type === 2) { // Hexagon web
+    const cx = 100, cy = 60;
+    for (let r = 20; r < 80; r += 20) {
+      const pts = Array.from({length: 6}, (_, i) => {
+        const a = Math.PI / 3 * i - Math.PI / 6;
+        return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
+      }).join(' ');
+      shapes.push(`<polygon points="${pts}" fill="none" stroke="${p}" stroke-width="1" opacity="${(0.5 - r * 0.005).toFixed(2)}"/>`);
+    }
+    shapes.push(`<circle cx="${cx}" cy="${cy}" r="6" fill="${p}" opacity="0.5"/>`);
+  } else { // Diamond pattern
+    for (let i = 0; i < 5; i++) {
+      const x = 40 + (abs + i * 31) % 120, y = 15 + (abs + i * 17) % 90;
+      const s = 8 + (abs + i) % 15;
+      shapes.push(`<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="2" fill="${p}" opacity="${(0.1 + (i * 0.08)).toFixed(2)}" transform="rotate(45 ${x + s/2} ${y + s/2})"/>`);
+    }
+    shapes.push(`<line x1="30" y1="60" x2="170" y2="60" stroke="${p}" stroke-width="1" opacity="0.15"/>`);
+    shapes.push(`<line x1="100" y1="5" x2="100" y2="115" stroke="${p}" stroke-width="1" opacity="0.15"/>`);
+  }
+  // Accent dots from name hash
+  for (let i = 0; i < 3; i++) {
+    const dx = 30 + ((abs >> (i * 4)) & 0xf) * 9;
+    const dy = 15 + ((abs >> (i * 4 + 2)) & 0x7) * 13;
+    shapes.push(`<circle cx="${dx}" cy="${dy}" r="3" fill="${p}" opacity="0.6"/>`);
+  }
+  return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
+}
+
+function agentToCard(a) {
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  const cc = getCatColor(a.category);
+  const inDeck = deck.has(a.name);
+  const tags = (a.tags || []).slice(0, 3);
+  const desc = (a.description || '').slice(0, 120);
+  // Build abilities from tags + description
+  const abilities = [];
+  if (a.description) abilities.push({ kw: 'Perform', text: desc });
+  if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
+  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+  const lines = a._lines || '?';
+  const sizeKb = a._size_kb || '?';
+  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+
+  return `
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ondblclick="this.classList.toggle('flipped')">
+    <div class="agent-card-front" style="border-color:${cc.border}">
+      <div class="ac-top-bar" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
+      <div class="ac-avatar">${genCardArt(a)}</div>
+      <div class="ac-body">
+        <div class="ac-name">${esc(a.display_name)}</div>
+        <div class="ac-title">${esc(a.name)}</div>
+        <div class="ac-type">Agent &mdash; ${a.category.replace(/_/g, ' ')}</div>
+        <div class="ac-abilities">
+          ${abilities.map(ab => `<div class="ac-ability"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
+        </div>
+        ${tags.length ? `<div class="ac-flavor">${tags.map(t => '#' + t).join(' ')}</div>` : ''}
+      </div>
+      <div class="ac-footer">
+        <span class="ac-rarity ${rarity}">${RARITY_LABELS[rarity]}</span>
+        <span style="color:var(--text-muted)">${lines}L / ${sizeKb}KB</span>
+        <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:var(--accent)' : 'color:var(--text-muted)'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')" title="${inDeck ? 'Remove from deck' : 'Add to deck'}">${inDeck ? '&#9733;' : '&#9734;'}</span>
+      </div>
+    </div>
+    <div class="agent-card-back" style="border-color:${cc.border}">
+      <div class="ac-back-logo">RAR</div>
+      <div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
+      <div class="ac-back-name">${esc(a.display_name)}</div>
+      <div class="ac-back-hint">Scan to load this agent</div>
+      <div class="ac-back-actions">
+        <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
+        <button onclick="event.stopPropagation();printCard('${esc(a.name)}')">Print</button>
+        <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setCardFilter(f, el) {
+  cardFilter = f;
+  document.querySelectorAll('#cards-filter .pill').forEach(p => p.classList.toggle('active', p.dataset.cf === f));
+  renderCards();
+}
+
+function renderCards() {
+  const q = (document.getElementById('card-search')?.value || '').toLowerCase();
+  let filtered = allAgents.filter(a => {
+    if (q && !a.name.toLowerCase().includes(q) && !a.display_name.toLowerCase().includes(q) && !a.description.toLowerCase().includes(q)) return false;
+    if (cardFilter === 'all') return true;
+    if (cardFilter === 'deck') return deck.has(a.name);
+    const tier = a.quality_tier || 'community';
+    const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+    return rarity === cardFilter;
+  });
+  document.getElementById('deck-count').textContent = deck.size;
+  if (!filtered.length) {
+    document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>No cards found</h3></div>';
+    return;
+  }
+  document.getElementById('cards-grid').innerHTML = filtered.map(agentToCard).join('');
+}
+
+function toggleDeckCard(name) {
+  if (deck.has(name)) deck.delete(name); else deck.add(name);
+  localStorage.setItem('rar_deck', JSON.stringify([...deck]));
+  renderCards();
+}
+
+function clearDeck() {
+  deck.clear();
+  localStorage.setItem('rar_deck', '[]');
+  renderCards();
+}
+
+function shareDeck() {
+  if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
+  const dn = document.getElementById('deck-name')?.value || 'My Deck';
+  const agents = [...deck].join(',');
+  const url = `${location.origin}${location.pathname}#deck/${encodeURIComponent(dn)}/${encodeURIComponent(agents)}`;
+  navigator.clipboard?.writeText(url);
+  showToast(`Deck "${dn}" link copied! ${deck.size} cards`, 'success');
+}
+
+function printCard(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+  const cc = getCatColor(a.category);
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  const w = window.open('', '_blank', 'width=400,height=600');
+  w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Agent Card</title>
+  <style>
+    @page { size: 2.5in 3.5in; margin: 0; }
+    body { margin: 0; background: #0d1117; color: #e6edf3; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { width: 2.5in; height: 3.5in; background: #161b22; border: 2px solid ${cc.border}; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+    .top-bar { height: 4px; background: linear-gradient(90deg, ${cc.primary}, transparent); }
+    .art { height: 1in; display: flex; align-items: center; justify-content: center; background: ${cc.bg}; }
+    .art svg { width: 80%; height: 80%; }
+    .body { padding: 6px 10px; flex: 1; display: flex; flex-direction: column; }
+    .name { font-size: 11pt; font-weight: 700; }
+    .ns { font-size: 7pt; color: #8b949e; font-style: italic; }
+    .type { font-size: 6.5pt; color: #8b949e; border-top: 1px solid #30363d; border-bottom: 1px solid #30363d; padding: 2px 0; margin: 3px 0; }
+    .desc { font-size: 7pt; color: #8b949e; flex: 1; line-height: 1.4; }
+    .footer { display: flex; justify-content: space-between; padding: 3px 10px 6px; font-size: 7pt; }
+    .rarity { text-transform: uppercase; font-weight: 700; letter-spacing: .5px; }
+    .back { width: 2.5in; height: 3.5in; background: #161b22; border: 2px solid ${cc.border}; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: 20px; }
+    .qr img { width: 1.4in; height: 1.4in; border-radius: 6px; }
+    .back-name { font-size: 9pt; font-weight: 600; margin-top: 6px; }
+    .back-hint { font-size: 7pt; color: #8b949e; }
+    .back-logo { font-size: 18pt; font-weight: 900; opacity: .2; margin-bottom: 8px; }
+    .print-row { display: flex; gap: 20px; }
+  </style></head><body>
+  <div class="print-row">
+    <div class="card">
+      <div class="top-bar"></div>
+      <div class="art">${genCardArt(a)}</div>
+      <div class="body">
+        <div class="name">${esc(a.display_name)}</div>
+        <div class="ns">${esc(a.name)}</div>
+        <div class="type">Agent — ${a.category.replace(/_/g,' ')}</div>
+        <div class="desc">${esc(a.description || '')}</div>
+      </div>
+      <div class="footer">
+        <span class="rarity" style="color:${{mythic:'#ff6d00',rare:'#ffd700',uncommon:'#c0c0c0',common:'#78909c'}[rarity]}">${RARITY_LABELS[rarity]}</span>
+        <span style="color:#8b949e">v${a.version}</span>
+      </div>
+    </div>
+    <div class="back">
+      <div class="back-logo">RAR</div>
+      <div class="qr"><img src="${qrUrl}"></div>
+      <div class="back-name">${esc(a.display_name)}</div>
+      <div class="back-hint">Scan to load agent</div>
+    </div>
+  </div>
+  </body></html>`);
+  w.document.close();
+  setTimeout(() => w.print(), 500);
+}
+
+// Handle hash routing for cards and decks
+function handleCardHash() {
+  const hash = location.hash;
+  if (hash.startsWith('#card/')) {
+    const name = decodeURIComponent(hash.slice(6));
+    switchTab('browse');
+    // Wait for agents to load
+    const check = setInterval(() => {
+      if (allAgents.length) {
+        clearInterval(check);
+        openAgent(name);
+      }
+    }, 200);
+  } else if (hash.startsWith('#deck/')) {
+    const parts = hash.slice(6).split('/');
+    const dn = decodeURIComponent(parts[0] || 'Shared Deck');
+    const agents = decodeURIComponent(parts[1] || '').split(',').filter(Boolean);
+    if (agents.length) {
+      agents.forEach(n => deck.add(n));
+      localStorage.setItem('rar_deck', JSON.stringify([...deck]));
+      document.getElementById('deck-name').value = dn;
+      switchTab('cards');
+      setCardFilter('deck', null);
+      showToast(`Loaded deck "${dn}" with ${agents.length} cards`, 'success');
+    }
+  }
+}
+window.addEventListener('hashchange', handleCardHash);
+
+init().then(() => handleCardHash());
 loadSharedCart();
 updateCartUI();
 </script>

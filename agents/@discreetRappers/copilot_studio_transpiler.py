@@ -30,7 +30,7 @@ __manifest__ = {
     "author": "Bill Whalen",
     "tags": ["pipeline", "transpiler", "copilot-studio", "native", "no-code"],
     "category": "pipeline",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": ["AZURE_TENANT_ID", "COPILOT_STUDIO_CLIENT_ID", "DATAVERSE_ENVIRONMENT_URL"],
     "dependencies": ["@rapp/basic-agent"],
 }
