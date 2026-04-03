@@ -3756,7 +3756,129 @@ function startTour() {
   showStep();
 }
 
-init().then(() => handleCardHash());
+// ═══════════════════════════════════════════════════════
+// Secret Demo Mode — type "demo" or use #demo
+// Fills the store with realistic fake engagement data
+// ═══════════════════════════════════════════════════════
+const DEMO_USERS = [
+  'sarah-eng', 'mike-devops', 'jtran-ai', 'cmorales', 'howard-h',
+  'priya-k', 'alex-data', 'chen-w', 'garcia-m', 'taylor-ops',
+  'kim-swe', 'patel-r', 'johnson-b', 'lee-ml', 'nguyen-d'
+];
+
+const DEMO_REVIEW_TEXTS = [
+  'Solid agent. Dropped it into our pipeline and it just worked. No config needed.',
+  'This saved us hours on the CRM integration. Clean code, easy to follow.',
+  'Good foundation but needs better error handling for edge cases. Promising.',
+  'Exactly what I needed for the demo. Client was impressed.',
+  'We use this daily. Reliable and the manifest is well-documented.',
+  'Great starting point — forked it and added our custom logic in 20 minutes.',
+  'The perform() method is clean. One of the better agents in the registry.',
+  'Works well with the brainstem runtime. No issues in production for 3 weeks.',
+  'Neat concept. Would love to see env var support for the API endpoint.',
+  'This replaced our internal tool. Simpler and more maintainable.',
+  'Perfect for onboarding new team members to the RAPP ecosystem.',
+  'Used this as a reference when building our own agent. Very well structured.',
+  'The single-file approach makes deployment trivial. Just copy and go.',
+  'Integrated with our Dynamics instance in under an hour. Impressive.',
+  'A must-have for any RAPP setup. Should be official tier.',
+];
+
+function activateDemoMode() {
+  if (window._demoActive) return;
+  window._demoActive = true;
+
+  // Seed random from current time (but deterministic within a session)
+  const seed = 42;
+  let rng = seed;
+  function rand() { rng = (rng * 16807 + 0) % 2147483647; return rng / 2147483647; }
+
+  // Generate votes for agents (weighted: top agents get more)
+  const shuffled = [...allAgents].sort(() => rand() - 0.5);
+  votes = { agents: {}, updated_at: new Date().toISOString() };
+
+  shuffled.forEach((a, i) => {
+    // Top 20% get heavy votes, rest get lighter
+    const isTop = i < shuffled.length * 0.2;
+    const upCount = isTop ? Math.floor(rand() * 25 + 10) : Math.floor(rand() * 8);
+    const downCount = Math.floor(rand() * Math.max(1, upCount * 0.15));
+    const voters = {};
+    const voterPool = [...DEMO_USERS].sort(() => rand() - 0.5);
+    for (let v = 0; v < Math.min(upCount, voterPool.length); v++) {
+      voters[voterPool[v]] = 'up';
+    }
+    if (downCount > 0 && voterPool.length > upCount) {
+      for (let v = 0; v < Math.min(downCount, voterPool.length - upCount); v++) {
+        voters[voterPool[upCount + v]] = 'down';
+      }
+    }
+    if (upCount > 0) {
+      votes.agents[a.name] = {
+        up: upCount, down: downCount,
+        score: upCount - downCount, voters
+      };
+    }
+  });
+
+  // Generate reviews (top ~30 agents get 1-4 reviews)
+  reviews = { agents: {}, updated_at: new Date().toISOString() };
+  const reviewable = shuffled.slice(0, 30);
+  reviewable.forEach(a => {
+    const count = Math.floor(rand() * 4) + 1;
+    const agentReviews = [];
+    const reviewerPool = [...DEMO_USERS].sort(() => rand() - 0.5);
+    for (let r = 0; r < count && r < reviewerPool.length; r++) {
+      const rating = Math.floor(rand() * 3) + 3; // 3-5 stars
+      const textIdx = Math.floor(rand() * DEMO_REVIEW_TEXTS.length);
+      const daysAgo = Math.floor(rand() * 30) + 1;
+      const ts = new Date(Date.now() - daysAgo * 86400000).toISOString();
+      agentReviews.push({
+        user: reviewerPool[r],
+        rating,
+        text: DEMO_REVIEW_TEXTS[textIdx],
+        timestamp: ts
+      });
+    }
+    reviews.agents[a.name] = agentReviews;
+  });
+
+  // Re-render everything
+  renderAgents();
+  renderLeaderboard();
+  if (document.getElementById('cards-grid')) renderCards();
+  showToast('Demo mode activated — showing simulated community data', 'success');
+}
+
+function deactivateDemoMode() {
+  if (!window._demoActive) return;
+  window._demoActive = false;
+  votes = { agents: {} };
+  reviews = { agents: {} };
+  renderAgents();
+  renderLeaderboard();
+  if (document.getElementById('cards-grid')) renderCards();
+  showToast('Demo mode off — back to live data', 'success');
+}
+
+// Secret keyboard trigger: type "demo" anywhere
+let _demoBuffer = '';
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  _demoBuffer += e.key.toLowerCase();
+  if (_demoBuffer.length > 10) _demoBuffer = _demoBuffer.slice(-10);
+  if (_demoBuffer.endsWith('demo')) {
+    _demoBuffer = '';
+    if (window._demoActive) deactivateDemoMode();
+    else activateDemoMode();
+  }
+});
+
+// URL trigger: #demo
+if (location.hash === '#demo') {
+  init().then(() => { handleCardHash(); activateDemoMode(); });
+} else {
+  init().then(() => handleCardHash());
+}
 loadSharedCart();
 updateCartUI();
 </script>
