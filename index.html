@@ -1301,6 +1301,356 @@
     .filter-pills { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
     .cart-sidebar { width: 100%; right: -100%; }
   }
+
+  /* ─── Slab Viewer ────────────────────────────────── */
+  .slab-overlay {
+    position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.92);
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    padding: 20px; overflow-y: auto;
+  }
+  .slab-inner {
+    display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; justify-content: center;
+    max-width: 1100px; width: 100%; position: relative;
+  }
+  .slab-close {
+    position: absolute; top: -12px; right: -12px;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text-dim); width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.1rem; z-index: 10; transition: all .15s;
+  }
+  .slab-close:hover { color: var(--red); border-color: var(--red); }
+  .slab-case {
+    position: relative; width: 320px; flex-shrink: 0;
+    background: linear-gradient(160deg, #1e1a10 0%, #2a2010 50%, #1e1a10 100%);
+    border: 4px solid #8b7332;
+    border-radius: 16px; padding: 12px 14px 20px;
+    box-shadow: 0 0 40px rgba(139,115,50,.25), 0 16px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,215,0,.1);
+  }
+  .slab-grade-label {
+    background: linear-gradient(135deg, #ffd700, #b8860b);
+    color: #0d0a00; border-radius: 8px 8px 0 0; margin: -12px -14px 12px;
+    padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;
+    font-weight: 800; font-size: .9rem; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .slab-grade-number {
+    font-size: 2rem; font-weight: 900; color: #0d0a00; line-height: 1;
+  }
+  .slab-card-window {
+    background: rgba(0,0,0,.3); border-radius: 10px;
+    border: 2px solid rgba(139,115,50,.4); padding: 8px;
+    position: relative; cursor: pointer;
+  }
+  .slab-card-window canvas { width: 100%; border-radius: 6px; display: block; }
+  .slab-zoom-hint {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,.7); color: rgba(255,255,255,.6); font-size: .62rem;
+    padding: 3px 10px; border-radius: 10px; white-space: nowrap; pointer-events: none;
+    opacity: 0; transition: opacity .2s;
+  }
+  .slab-card-window:hover .slab-zoom-hint { opacity: 1; }
+  .slab-serial {
+    text-align: center; margin-top: 10px; font-family: 'SF Mono', Consolas, monospace;
+    font-size: .65rem; color: #8b7332; letter-spacing: .5px;
+  }
+  .slab-panels { display: flex; flex-direction: column; gap: 14px; min-width: 240px; max-width: 320px; flex: 1; }
+  .slab-panel {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .slab-panel h4 {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .6px;
+    color: var(--text-muted); margin-bottom: 10px; font-weight: 700;
+  }
+  .slab-subgrades { display: flex; flex-direction: column; gap: 8px; }
+  .slab-subgrade-row { display: flex; align-items: center; gap: 8px; }
+  .slab-subgrade-label { font-size: .78rem; color: var(--text-dim); min-width: 72px; }
+  .slab-subgrade-bar {
+    flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden;
+  }
+  .slab-subgrade-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    transition: width .4s ease;
+  }
+  .slab-subgrade-val { font-size: .78rem; font-weight: 700; min-width: 24px; text-align: right; }
+  .slab-pop-row { display: flex; justify-content: space-between; font-size: .82rem; padding: 4px 0; border-bottom: 1px solid var(--border); }
+  .slab-pop-row:last-child { border-bottom: none; }
+  .slab-pop-key { color: var(--text-dim); }
+  .slab-pop-val { font-weight: 700; color: var(--accent); }
+  .slab-value-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, rgba(255,215,0,.15), rgba(255,140,0,.1));
+    border: 1px solid rgba(255,215,0,.3); border-radius: 8px;
+    padding: 8px 14px; font-size: 1.1rem; font-weight: 800;
+    color: var(--gold); margin-bottom: 4px;
+  }
+  .slab-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .slab-btn {
+    flex: 1; min-width: 80px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text-dim); font-size: .78rem; font-weight: 600;
+    cursor: pointer; transition: all .15s; text-align: center;
+  }
+  .slab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .slab-btn.primary { background: linear-gradient(135deg, var(--accent), var(--purple)); color: #fff; border: none; }
+
+  /* Centering grid overlay (zoom mode) */
+  .slab-zoom-overlay {
+    position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,.96);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px;
+  }
+  .slab-zoom-overlay canvas { border-radius: 8px; box-shadow: 0 0 60px rgba(88,166,255,.2); }
+  .slab-zoom-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
+  }
+  .slab-zoom-close:hover { color: var(--text); }
+  .slab-zoom-info { color: var(--text-dim); font-size: .82rem; text-align: center; }
+
+  /* ─── Card Value ─────────────────────────────────── */
+  .card-value {
+    position: absolute; bottom: 50px; right: 8px;
+    background: linear-gradient(135deg, rgba(255,215,0,.9), rgba(255,140,0,.8));
+    color: #0d0a00; font-size: .62rem; font-weight: 800; padding: 2px 6px;
+    border-radius: 5px; font-family: 'SF Mono', Consolas, monospace;
+    z-index: 5; letter-spacing: .3px;
+  }
+
+  /* ─── Binder View ────────────────────────────────── */
+  .binder-page {
+    background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 2px solid rgba(88,166,255,.2); border-radius: 16px;
+    padding: 20px; position: relative; box-shadow: var(--shadow-lg);
+  }
+  .binder-page-inner {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .binder-pocket {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px; aspect-ratio: 5/7; position: relative;
+    overflow: hidden; cursor: pointer; transition: all .2s;
+  }
+  .binder-pocket:hover { border-color: rgba(88,166,255,.4); transform: translateY(-2px); }
+  .binder-pocket canvas { width: 100%; height: 100%; display: block; }
+  .binder-pocket::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 50%);
+    border-radius: 10px;
+  }
+  .binder-pocket.empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: default;
+  }
+  .binder-pocket.empty:hover { transform: none; border-color: rgba(255,255,255,.08); }
+  .binder-empty-icon { font-size: 2rem; opacity: .2; }
+  .binder-empty-text { font-size: .65rem; color: var(--text-muted); margin-top: 6px; opacity: .5; }
+  .binder-nav {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-top: 16px;
+  }
+  .binder-nav-btn {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; font-size: 1rem; transition: all .15s;
+  }
+  .binder-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .binder-nav-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+  .binder-page-num { font-size: .85rem; color: var(--text-dim); min-width: 80px; text-align: center; }
+  .set-completion-bar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 16px; margin-bottom: 14px;
+  }
+  .set-completion-label { font-size: .78rem; color: var(--text-dim); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .set-completion-track { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .set-completion-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--green), var(--accent)); transition: width .5s ease; }
+  .binder-controls {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .binder-view-toggle {
+    display: flex; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; font-size: .78rem;
+  }
+  .binder-view-toggle button {
+    padding: 6px 14px; border: none; background: transparent;
+    color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all .15s;
+  }
+  .binder-view-toggle button.active { background: var(--accent); color: #fff; }
+
+  /* ─── Pack Opening Enhancements ─────────────────── */
+  @keyframes packTear {
+    0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(1); }
+    30% { clip-path: polygon(0 0, 50% 5%, 100% 0, 100% 100%, 50% 95%, 0 100%); transform: scale(1.05); }
+    60% { clip-path: polygon(0 0, 30% 20%, 70% 15%, 100% 0, 100% 100%, 70% 85%, 30% 80%, 0 100%); transform: scale(1.1) rotate(2deg); }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(0); opacity: 0; }
+  }
+  @keyframes cardSlideUp {
+    0% { opacity: 0; transform: translateY(80px) scale(0.8); }
+    70% { opacity: 1; transform: translateY(-8px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes particleBurst {
+    0% { opacity: 1; transform: translate(0,0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--px), var(--py)) scale(0); }
+  }
+  @keyframes mythicFlash {
+    0% { opacity: 0; } 15% { opacity: .6; } 30% { opacity: 0; } 45% { opacity: .3; } 60% { opacity: 0; }
+  }
+  @keyframes mythicPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,109,0,.4); }
+    50% { box-shadow: 0 0 60px rgba(255,109,0,.9), 0 0 120px rgba(255,109,0,.3); }
+  }
+  .pack-intro-overlay {
+    position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.97);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  }
+  .pack-intro-art {
+    font-size: 6rem; animation: packGlow 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+  .pack-intro-click {
+    font-size: 1rem; color: var(--text-dim); cursor: pointer;
+    animation: fadeIn .5s ease .5s both;
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 12px 32px; border-radius: 10px; font-weight: 600;
+    transition: all .2s;
+  }
+  .pack-intro-click:hover { border-color: var(--accent); color: var(--accent); }
+  .pack-intro-name { font-size: 1.4rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+  .pack-intro-sub { font-size: .85rem; color: var(--text-muted); }
+  .pack-intro-odds {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 20px; display: flex; gap: 16px; font-size: .78rem;
+  }
+  .pack-intro-odds span { display: flex; align-items: center; gap: 5px; }
+  .particle {
+    position: absolute; width: 6px; height: 6px; border-radius: 50%;
+    animation: particleBurst .8s ease-out forwards; pointer-events: none;
+  }
+  .pack-summary {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 20px; margin-top: 8px; font-size: .88rem; text-align: center;
+    min-width: 300px;
+  }
+  .pack-summary-title { font-weight: 700; margin-bottom: 8px; color: var(--text-dim); font-size: .75rem; text-transform: uppercase; letter-spacing: .5px; }
+  .pack-summary-pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .pack-summary-pill {
+    padding: 4px 12px; border-radius: 12px; font-size: .78rem; font-weight: 700;
+  }
+  .pack-summary-pill.mythic { background: rgba(255,109,0,.2); color: #ff6d00; border: 1px solid rgba(255,109,0,.4); }
+  .pack-summary-pill.rare { background: rgba(255,215,0,.15); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
+  .pack-summary-pill.uncommon { background: rgba(192,192,192,.1); color: #c0c0c0; border: 1px solid rgba(192,192,192,.2); }
+  .pack-summary-pill.common { background: rgba(188,140,255,.1); color: var(--purple); border: 1px solid rgba(188,140,255,.2); }
+  .pull-odds {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    margin-top: 8px; font-size: .72rem; color: var(--text-muted);
+  }
+  .pull-odds span { display: flex; align-items: center; gap: 4px; }
+
+  /* ─── Trophy Case ────────────────────────────────── */
+  .trophy-case {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    background: linear-gradient(160deg, #1a0a2e, #2a1040);
+    border: 2px solid rgba(188,140,255,.3); border-radius: 16px;
+    padding: 20px; margin-top: 20px;
+  }
+  .trophy-slot {
+    aspect-ratio: 5/7; border-radius: 10px; position: relative;
+    cursor: pointer; transition: all .2s; overflow: hidden;
+  }
+  .trophy-slot.filled {
+    box-shadow: 0 4px 20px rgba(188,140,255,.2);
+  }
+  .trophy-slot.filled:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(188,140,255,.35); }
+  .trophy-slot.empty {
+    background: rgba(255,255,255,.03); border: 2px dashed rgba(188,140,255,.2);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    font-size: .72rem; color: rgba(188,140,255,.4);
+  }
+  .trophy-slot.empty:hover { border-color: rgba(188,140,255,.5); color: rgba(188,140,255,.7); }
+  .trophy-frame {
+    position: absolute; inset: 0; border-radius: 10px; pointer-events: none; z-index: 5;
+    background: linear-gradient(135deg, rgba(188,140,255,.12) 0%, transparent 40%, transparent 60%, rgba(255,215,0,.08) 100%);
+    border: 2px solid rgba(188,140,255,.3);
+  }
+  .trophy-frame-grade {
+    position: absolute; top: 6px; right: 6px; z-index: 6;
+    background: rgba(0,0,0,.8); color: var(--gold); font-size: .6rem;
+    font-weight: 800; padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(255,215,0,.3);
+  }
+  .trophy-slot canvas { width: 100%; height: 100%; display: block; }
+  .trophy-case-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+  }
+  .trophy-case-header h3 { font-size: .9rem; font-weight: 700; }
+  .trophy-share-btn {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: .75rem; transition: all .15s;
+  }
+  .trophy-share-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+  /* ─── Pull History ────────────────────────────────── */
+  .pull-history-log {
+    max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px;
+    margin-top: 10px;
+  }
+  .pull-entry {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface); border-radius: 6px; padding: 7px 12px; font-size: .78rem;
+  }
+  .pull-entry-rarity {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .pull-entry-rarity.mythic { background: #ff6d00; box-shadow: 0 0 6px rgba(255,109,0,.5); }
+  .pull-entry-rarity.rare { background: var(--gold); box-shadow: 0 0 6px rgba(255,215,0,.4); }
+  .pull-entry-rarity.uncommon { background: #c0c0c0; }
+  .pull-entry-rarity.common { background: var(--purple); }
+  .pull-entry-name { flex: 1; font-weight: 500; }
+  .pull-entry-time { color: var(--text-muted); font-size: .68rem; }
+  .pull-entry-set { background: var(--surface2); padding: 1px 6px; border-radius: 4px; font-size: .65rem; color: var(--text-muted); }
+
+  /* ─── Quiz Mode ──────────────────────────────────── */
+  .quiz-overlay {
+    position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.92);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .quiz-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    max-width: 540px; width: 100%; padding: 28px; text-align: center;
+  }
+  .quiz-progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+  .quiz-pip {
+    height: 4px; width: 40px; border-radius: 2px; background: var(--surface2);
+  }
+  .quiz-pip.done { background: var(--accent); }
+  .quiz-pip.current { background: var(--accent); opacity: .5; }
+  .quiz-agent-art {
+    width: 140px; height: 200px; margin: 0 auto 16px; border-radius: 10px; overflow: hidden;
+    border: 2px solid var(--border);
+  }
+  .quiz-agent-art canvas { width: 100%; height: 100%; display: block; }
+  .quiz-question { font-size: 1.05rem; font-weight: 700; margin-bottom: 20px; }
+  .quiz-choices { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-choice {
+    padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); font-size: .88rem;
+    cursor: pointer; text-align: left; transition: all .15s;
+  }
+  .quiz-choice:hover { border-color: var(--accent); color: var(--accent); }
+  .quiz-choice.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .quiz-choice.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+  .quiz-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
+  }
+  .quiz-result {
+    text-align: center; padding: 20px 0;
+  }
+  .quiz-result .score-big { font-size: 3rem; font-weight: 900; color: var(--accent); }
+  .quiz-result p { color: var(--text-dim); margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -1757,16 +2107,56 @@ class MyAgent(BasicAgent):
     <div class="pack-shelf" id="pack-shelf"></div>
 
     <div style="margin-top:32px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
         <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Your Collection <span id="coll-count" style="color:var(--text-muted);font-weight:400">(0 cards)</span></h3>
-        <button onclick="exportCollection()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Export All</button>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <div class="binder-view-toggle" id="view-toggle">
+            <button class="active" onclick="switchCollView('grid',this)">Grid</button>
+            <button onclick="switchCollView('binder',this)">Binder</button>
+          </div>
+          <select id="coll-sort" onchange="renderCollection()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.78rem;cursor:pointer">
+            <option value="grade">By Grade</option>
+            <option value="mintnum">By Card #</option>
+            <option value="rarity">By Rarity</option>
+            <option value="date">By Date</option>
+          </select>
+          <button onclick="exportCollection()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Export All</button>
+        </div>
       </div>
-      <div class="collection-grid" id="collection-grid">
+      <div id="collection-grid">
         <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0">
           <h3>No cards minted yet</h3>
           <p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p>
         </div>
       </div>
+    </div>
+
+    <!-- Trophy Case -->
+    <div style="margin-top:32px">
+      <div class="trophy-case-header">
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Trophy Case <span style="color:var(--text-muted);font-weight:400;font-size:.78rem">(showcase up to 6 cards)</span></h3>
+        <button class="trophy-share-btn" onclick="shareTrophyCase()">Share Trophy Case</button>
+      </div>
+      <div class="trophy-case" id="trophy-case-grid"></div>
+    </div>
+
+    <!-- Pull History -->
+    <div style="margin-top:32px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Pull History</h3>
+        <button onclick="clearPullHistory()" style="padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.72rem;cursor:pointer">Clear</button>
+      </div>
+      <div class="pull-history-log" id="pull-history-log">
+        <div style="text-align:center;color:var(--text-muted);font-size:.82rem;padding:20px">No pulls yet — open a pack!</div>
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div style="margin-top:32px;text-align:center;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px">Agent Challenge</div>
+      <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px">Agent Quiz</h3>
+      <p style="color:var(--text-dim);font-size:.82rem;margin-bottom:14px">Test your knowledge! Identify 5 agents from your collection.</p>
+      <button onclick="startQuiz()" style="padding:10px 28px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Start Quiz</button>
     </div>
   </div>
 
@@ -2319,7 +2709,7 @@ function switchTab(tab) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
   if (tab === 'leaderboard') renderLeaderboard();
   if (tab === 'cards') renderCards();
-  if (tab === 'packs') { renderPackShelf(); renderCollection(); }
+  if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -4354,19 +4744,88 @@ function gradeLabel(grade) {
   return { label: 'POOR ' + Math.floor(grade), cls: 'poor' };
 }
 
+// ── Sub-Grades (PSA-style component scores) ──
+function subGrades(card) {
+  const v = card.variations;
+
+  // Centering: based on offset from center
+  const centerOffset = Math.abs(v.centeringX) + Math.abs(v.centeringY);
+  const centering = Math.max(1, Math.min(10, Math.round(10 - centerOffset * 14)));
+
+  // Edges: based on transfer count and age wear
+  const ageDays = (Date.now() - card.mintedAt) / (1000 * 60 * 60 * 24);
+  const edgeWear = card.transfers * 1.2 + (ageDays > 365 ? 2 : ageDays > 180 ? 1.2 : ageDays > 90 ? 0.7 : ageDays > 30 ? 0.3 : 0);
+  const edges = Math.max(1, Math.min(10, Math.round(10 - edgeWear)));
+
+  // Surface: based on surfaceNoise uniqueness + ink saturation
+  const noiseScore = 1 - Math.abs((v.surfaceNoise % 50) - 25) / 25; // 0-1, peaks at middle values
+  const surfaceScore = noiseScore * 5 + (v.inkSaturation - 0.7) * 10;
+  const surface = Math.max(1, Math.min(10, Math.round(5 + surfaceScore)));
+
+  // Corners: based on cornerSharpness variation around 1.0
+  const cornerDev = Math.abs(v.cornerSharpness - 1.0);
+  const corners = Math.max(1, Math.min(10, Math.round(10 - cornerDev * 40)));
+
+  // Overall: weighted average (centering 30%, edges 20%, surface 25%, corners 25%)
+  const overall = Math.max(1, Math.min(10, Math.round(
+    (centering * 0.30 + edges * 0.20 + surface * 0.25 + corners * 0.25) * 10
+  ) / 10));
+
+  return { centering, edges, surface, corners, overall };
+}
+
+// ── Value Engine ──
+function calculateValue(card) {
+  // Base value by rarity
+  const rarityBase = { mythic: 200, rare: 100, uncommon: 40, common: 10 };
+  const tier = card.tier || card.tierAtMint || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  let value = rarityBase[rarity] || 40;
+
+  // Grade multiplier
+  const g = card.grade || 5;
+  const gradeMultiplier = g >= 9.5 ? 5 : g >= 9 ? 3 : g >= 8 ? 2 : g >= 7 ? 1.5 : g >= 5 ? 1.2 : 1;
+  value *= gradeMultiplier;
+
+  // 1st Edition bonus
+  if (card.isFirstEdition) value *= 3;
+
+  // Low mint number bonus
+  const m = card.mintNum || 99;
+  const mintBonus = m === 1 ? 10 : m <= 5 ? 3 : m <= 10 ? 2 : m <= 50 ? 1.5 : 1;
+  value *= mintBonus;
+
+  // Votes at mint (popularity premium)
+  const votes = card.votesAtMint || 0;
+  value *= (1 + votes / 100);
+
+  // Tier promotion bonus (rookie card effect)
+  if (card.tier && card.tierAtMint && card.tier !== card.tierAtMint) {
+    const tierOrder = { community: 1, experimental: 1, verified: 2, official: 3 };
+    if ((tierOrder[card.tier] || 1) > (tierOrder[card.tierAtMint] || 1)) value *= 2;
+  }
+
+  return Math.min(1000, Math.round(value));
+}
+
+// ── Population Report ──
+async function getPopulationReport(agentName) {
+  const all = await getAllMinted();
+  const copies = all.filter(c => c.agentName === agentName);
+  const byGrade = {};
+  copies.forEach(c => {
+    const g = Math.round(c.grade);
+    byGrade[g] = (byGrade[g] || 0) + 1;
+  });
+  const firstEdition = copies.filter(c => c.isFirstEdition).length;
+  const highestGrade = copies.length ? Math.max(...copies.map(c => c.grade)) : 0;
+  const lowestMint = copies.length ? Math.min(...copies.map(c => c.mintNum)) : 0;
+  return { total: copies.length, byGrade, firstEdition, highestGrade, lowestMint };
+}
+
 // ── Pack Opening ──
 function renderPackShelf() {
-  const el = document.getElementById('pack-shelf');
-  if (!el) return;
-  el.innerHTML = PACK_SETS.map(p => {
-    const pool = allAgents.filter(p.filter);
-    return `<div class="pack-box ${p.cssClass}" onclick="openPack('${p.id}')">
-      <div class="pack-icon">${p.icon}</div>
-      <div class="pack-name">${p.name}</div>
-      <div class="pack-sub">${p.sub}</div>
-      <div class="pack-count">${p.cards} cards &middot; ${pool.length} in pool</div>
-    </div>`;
-  }).join('');
+  renderPackShelfWithOdds();
 }
 
 function pickPackCards(setDef) {
@@ -4400,40 +4859,78 @@ async function openPack(setId) {
   const picks = pickPackCards(setDef);
   if (!picks.length) { showToast('No agents available for this pack', 'error'); return; }
 
-  // Mint each card
+  // ── Phase 1: Intro overlay with click-to-open ──
+  await new Promise(resolve => {
+    const intro = document.createElement('div');
+    intro.className = 'pack-intro-overlay';
+    intro.id = 'pack-intro-overlay';
+    intro.innerHTML = `
+      <div class="pack-intro-art">${setDef.icon}</div>
+      <div class="pack-intro-name">${setDef.name} Pack</div>
+      <div class="pack-intro-sub">${setDef.sub}</div>
+      <div class="pack-intro-odds">
+        <span><span style="width:8px;height:8px;border-radius:50%;background:#ff6d00;display:inline-block"></span> Official: 1%</span>
+        <span><span style="width:8px;height:8px;border-radius:50%;background:#ffd700;display:inline-block"></span> Verified: 3%</span>
+        <span><span style="width:8px;height:8px;border-radius:50%;background:#c0c0c0;display:inline-block"></span> Community: 26%</span>
+        <span><span style="width:8px;height:8px;border-radius:50%;background:#bc8cff;display:inline-block"></span> Frontier: 70%</span>
+      </div>
+      <button class="pack-intro-click" id="pack-open-btn">Click to Open</button>`;
+    document.body.appendChild(intro);
+    document.body.style.overflow = 'hidden';
+    document.getElementById('pack-open-btn').addEventListener('click', () => {
+      // Pack tear animation
+      intro.style.animation = 'packTear .5s ease-out forwards';
+      setTimeout(() => { intro.remove(); resolve(); }, 500);
+    });
+  });
+
+  // ── Phase 2: Mint each card & record pull history ──
   const minted = [];
   for (const a of picks) {
     const card = await mintCard(a.name, setId);
-    if (card) minted.push(card);
+    if (card) {
+      minted.push(card);
+      recordPull(card, setId);
+    }
   }
 
-  // Show pack opening overlay
+  // ── Phase 3: Reveal overlay ──
   const overlay = document.createElement('div');
   overlay.className = 'pack-open-overlay';
   overlay.innerHTML = `
     <div style="color:var(--text-dim);font-size:.9rem;margin-bottom:20px">${setDef.name} Pack — ${minted.length} cards</div>
     <div class="pack-reveal-row" id="pack-reveal-row"></div>
+    <div id="pack-summary-area"></div>
     <div class="pack-open-actions">
-      <button onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection()">Add to Collection</button>
+      <button onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add to Collection</button>
       <button onclick="exportPackCards()" class="primary">Export All as .card</button>
     </div>`;
   document.body.appendChild(overlay);
-  document.body.style.overflow = 'hidden';
 
-  // Reveal cards one by one with delay
   const row = document.getElementById('pack-reveal-row');
   window._lastPackMinted = minted;
 
+  // ── Phase 4: Animate each card ──
   for (let i = 0; i < minted.length; i++) {
-    await new Promise(r => setTimeout(r, 400 + i * 300));
+    await new Promise(r => setTimeout(r, 300 + i * 350));
     const c = minted[i];
     const rarity = TIER_TO_RARITY[c.tier] || 'uncommon';
     const gl = gradeLabel(c.grade);
+    const isMythic = rarity === 'mythic';
+    const isRare = rarity === 'rare';
+
+    // Mythic: screen flash
+    if (isMythic) {
+      const flash = document.createElement('div');
+      flash.style.cssText = 'position:fixed;inset:0;background:#fff;z-index:999;pointer-events:none;animation:mythicFlash .6s ease-out forwards';
+      document.body.appendChild(flash);
+      setTimeout(() => flash.remove(), 600);
+    }
+
     const div = document.createElement('div');
     div.className = `pack-card-reveal ${rarity}`;
-    div.style.animationDelay = '0s';
+    div.style.cssText = `animation: cardSlideUp .5s ease-out ${i * 0.1}s both;${isMythic ? 'animation: cardSlideUp .5s ease-out both, mythicPulse 2s ease-in-out infinite;' : ''}`;
 
-    // Render mini card to canvas
     const canvas = document.createElement('canvas');
     canvas.width = 250; canvas.height = 350;
     renderMiniCard(canvas, c);
@@ -4444,8 +4941,50 @@ async function openPack(setId) {
     if (c.isFirstEdition) {
       div.innerHTML += `<div style="position:absolute;top:8px;left:8px;background:rgba(255,215,0,.9);color:#000;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px">1ST EDITION</div>`;
     }
-    div.onclick = () => exportSingleCard(c);
+    div.onclick = () => openSlabViewer(c.mintId);
     row.appendChild(div);
+
+    // Particle burst for rare+ cards
+    if (isRare || isMythic) {
+      const rect = div.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const color = isMythic ? '#ff6d00' : '#ffd700';
+      for (let p = 0; p < 18; p++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const angle = (p / 18) * Math.PI * 2;
+        const dist = 60 + Math.random() * 80;
+        particle.style.cssText = `left:${cx}px;top:${cy}px;background:${color};--px:${Math.cos(angle) * dist}px;--py:${Math.sin(angle) * dist}px;animation-delay:${Math.random() * 0.2}s`;
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 900);
+      }
+    }
+  }
+
+  // ── Phase 5: Summary stats ──
+  await new Promise(r => setTimeout(r, 600));
+  const rarityCount = {};
+  minted.forEach(c => {
+    const r = TIER_TO_RARITY[c.tier] || 'uncommon';
+    rarityCount[r] = (rarityCount[r] || 0) + 1;
+  });
+  const summaryArea = document.getElementById('pack-summary-area');
+  if (summaryArea) {
+    const pills = Object.entries(rarityCount).map(([r, n]) =>
+      `<span class="pack-summary-pill ${r}">${n} ${RARITY_LABELS[r] || r}</span>`
+    ).join('');
+    summaryArea.innerHTML = `
+      <div class="pack-summary">
+        <div class="pack-summary-title">Pack Summary</div>
+        <div class="pack-summary-pills">${pills}</div>
+        <div class="pull-odds" style="margin-top:10px">
+          <span><span style="width:7px;height:7px;border-radius:50%;background:#ff6d00;display:inline-block"></span> Official: 1%</span>
+          <span><span style="width:7px;height:7px;border-radius:50%;background:#ffd700;display:inline-block"></span> Verified: 3%</span>
+          <span><span style="width:7px;height:7px;border-radius:50%;background:#c0c0c0;display:inline-block"></span> Community: 26%</span>
+          <span><span style="width:7px;height:7px;border-radius:50%;background:#bc8cff;display:inline-block"></span> Frontier: 70%</span>
+        </div>
+      </div>`;
   }
 }
 
@@ -4684,6 +5223,16 @@ async function exportPackCards() {
 }
 
 // ── Collection Viewer ──
+let _collView = 'grid'; // 'grid' | 'binder'
+let _binderPage = 0;
+
+function switchCollView(mode, btn) {
+  _collView = mode;
+  _binderPage = 0;
+  document.querySelectorAll('#view-toggle button').forEach(b => b.classList.toggle('active', b === btn));
+  renderCollection();
+}
+
 async function renderCollection() {
   const cards = await getAllMinted();
   const countEl = document.getElementById('coll-count');
@@ -4692,7 +5241,6 @@ async function renderCollection() {
 
   // Re-grade all cards (grades change over time)
   cards.forEach(c => { c.grade = gradeCard(c); });
-
   countEl.textContent = `(${cards.length} cards)`;
 
   if (!cards.length) {
@@ -4700,14 +5248,32 @@ async function renderCollection() {
     return;
   }
 
-  // Sort by grade desc, then mint date
-  cards.sort((a, b) => b.grade - a.grade || b.mintedAt - a.mintedAt);
+  // Sort
+  const sortSel = document.getElementById('coll-sort');
+  const sort = sortSel ? sortSel.value : 'grade';
+  if (sort === 'grade') cards.sort((a, b) => b.grade - a.grade || b.mintedAt - a.mintedAt);
+  else if (sort === 'mintnum') cards.sort((a, b) => a.mintNum - b.mintNum);
+  else if (sort === 'rarity') {
+    const ro = { mythic: 4, rare: 3, uncommon: 2, common: 1 };
+    cards.sort((a, b) => (ro[TIER_TO_RARITY[b.tier]] || 2) - (ro[TIER_TO_RARITY[a.tier]] || 2));
+  } else if (sort === 'date') cards.sort((a, b) => b.mintedAt - a.mintedAt);
 
+  if (_collView === 'binder') {
+    renderBinderView(cards, gridEl);
+  } else {
+    renderGridView(cards, gridEl);
+  }
+}
+
+function renderGridView(cards, gridEl) {
+  gridEl.className = 'collection-grid';
   gridEl.innerHTML = cards.map(c => {
     const gl = gradeLabel(c.grade);
+    const val = calculateValue(c);
     const age = Math.floor((Date.now() - c.mintedAt) / 86400000);
-    return `<div class="coll-card" onclick="exportSingleCard(${JSON.stringify(c).replace(/"/g, '&quot;')})">
+    return `<div class="coll-card" onclick="openSlabViewer('${c.mintId}')" style="position:relative">
       <canvas width="250" height="350" data-mint="${c.mintId}"></canvas>
+      <div class="card-value">$${val}</div>
       <div class="coll-card-info">
         <div class="coll-card-name">${esc(c.displayName)}</div>
         <div class="coll-card-meta">
@@ -4719,9 +5285,66 @@ async function renderCollection() {
     </div>`;
   }).join('');
 
-  // Render canvases
   cards.forEach(c => {
     const canvas = gridEl.querySelector(`canvas[data-mint="${c.mintId}"]`);
+    if (canvas) renderMiniCard(canvas, c);
+  });
+}
+
+function renderBinderView(cards, gridEl) {
+  gridEl.className = ''; // remove collection-grid styles
+  const pageSize = 9;
+  const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
+  _binderPage = Math.min(_binderPage, totalPages - 1);
+  const pageCards = cards.slice(_binderPage * pageSize, (_binderPage + 1) * pageSize);
+
+  // Set completion stats
+  const sets = {};
+  cards.forEach(c => { sets[c.setId] = (sets[c.setId] || 0) + 1; });
+  const totalInPool = allAgents.length;
+  const uniqueOwned = new Set(cards.map(c => c.agentName)).size;
+  const pct = totalInPool > 0 ? Math.round((uniqueOwned / totalInPool) * 100) : 0;
+
+  let html = `
+    <div class="set-completion-bar">
+      <div class="set-completion-label">
+        <span>Genesis Collection Progress</span>
+        <span>${uniqueOwned}/${totalInPool} agents (${pct}%)</span>
+      </div>
+      <div class="set-completion-track">
+        <div class="set-completion-fill" style="width:${pct}%"></div>
+      </div>
+    </div>
+    <div class="binder-page">
+      <div class="binder-page-inner">`;
+
+  for (let i = 0; i < pageSize; i++) {
+    const c = pageCards[i];
+    if (c) {
+      const gl = gradeLabel(c.grade);
+      html += `<div class="binder-pocket" onclick="openSlabViewer('${c.mintId}')" title="${esc(c.displayName)} — ${gl.label}">
+        <canvas width="200" height="280" data-bind-mint="${c.mintId}"></canvas>
+      </div>`;
+    } else {
+      html += `<div class="binder-pocket empty">
+        <div class="binder-empty-icon">?</div>
+        <div class="binder-empty-text">Empty</div>
+      </div>`;
+    }
+  }
+
+  html += `</div></div>
+    <div class="binder-nav">
+      <button class="binder-nav-btn" onclick="_binderPage=Math.max(0,_binderPage-1);renderCollection()" ${_binderPage === 0 ? 'disabled' : ''}>&#8592;</button>
+      <div class="binder-page-num">Page ${_binderPage + 1} of ${totalPages}</div>
+      <button class="binder-nav-btn" onclick="_binderPage=Math.min(${totalPages-1},_binderPage+1);renderCollection()" ${_binderPage >= totalPages - 1 ? 'disabled' : ''}>&#8594;</button>
+    </div>`;
+
+  gridEl.innerHTML = html;
+
+  pageCards.forEach(c => {
+    if (!c) return;
+    const canvas = gridEl.querySelector(`canvas[data-bind-mint="${c.mintId}"]`);
     if (canvas) renderMiniCard(canvas, c);
   });
 }
@@ -4734,6 +5357,399 @@ async function exportCollection() {
     await new Promise(r => setTimeout(r, 300));
   }
   showToast(`Exported ${cards.length} cards`, 'success');
+}
+
+// ═══════════════════════════════════════════════════════
+// Slab Viewer — PSA-style full-screen card display
+// ═══════════════════════════════════════════════════════
+async function openSlabViewer(mintId) {
+  const all = await getAllMinted();
+  const card = all.find(c => c.mintId === mintId);
+  if (!card) return;
+  card.grade = gradeCard(card);
+
+  const gl = gradeLabel(card.grade);
+  const sg = subGrades(card);
+  const val = calculateValue(card);
+  const pop = await getPopulationReport(card.agentName);
+  const trophyCase = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
+  const inTrophy = trophyCase.includes(mintId);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'slab-overlay';
+  overlay.id = 'slab-overlay';
+
+  // Sub-grade bar helper
+  const subBar = (label, score) => {
+    const color = score >= 9 ? '#3fb950' : score >= 7 ? '#58a6ff' : score >= 5 ? '#d29922' : '#f85149';
+    return `<div class="slab-subgrade-row">
+      <div class="slab-subgrade-label">${label}</div>
+      <div class="slab-subgrade-bar"><div class="slab-subgrade-fill" style="width:${score * 10}%;background:${color}"></div></div>
+      <div class="slab-subgrade-val" style="color:${color}">${score}</div>
+    </div>`;
+  };
+
+  const gradeColor = card.grade >= 9.5 ? '#ffd700' : card.grade >= 9 ? '#3fb950' : card.grade >= 8 ? '#58a6ff' : card.grade >= 6 ? '#d29922' : '#f85149';
+
+  overlay.innerHTML = `
+    <div class="slab-inner">
+      <button class="slab-close" onclick="document.getElementById('slab-overlay').remove()">&#10005;</button>
+
+      <div class="slab-case">
+        <div class="slab-grade-label">
+          <div>
+            <div style="font-size:.6rem;opacity:.7;margin-bottom:2px">PSA</div>
+            <div>${esc(card.displayName)}</div>
+          </div>
+          <div class="slab-grade-number" style="color:${gradeColor}">${card.grade >= 9.5 ? '10' : Math.round(card.grade)}</div>
+        </div>
+        <div class="slab-card-window" onclick="openSlabZoom('${mintId}')">
+          <canvas width="290" height="406" id="slab-canvas-${mintId}"></canvas>
+          <div class="slab-zoom-hint">Click to zoom + centering grid</div>
+        </div>
+        <div class="slab-serial">${card.serial}</div>
+        ${card.isFirstEdition ? '<div style="text-align:center;margin-top:6px;font-size:.65rem;font-weight:800;color:#ffd700;letter-spacing:1px">1ST EDITION</div>' : ''}
+      </div>
+
+      <div class="slab-panels">
+        <!-- Grade + Value -->
+        <div class="slab-panel">
+          <h4>Grade Report</h4>
+          <div style="margin-bottom:10px">
+            <div class="slab-value-badge">
+              <span>&#127942;</span> ${gl.label} &nbsp; <span style="font-size:.7rem;font-weight:400;opacity:.7">Overall</span>
+            </div>
+          </div>
+          <div class="slab-subgrades">
+            ${subBar('Centering', sg.centering)}
+            ${subBar('Edges', sg.edges)}
+            ${subBar('Surface', sg.surface)}
+            ${subBar('Corners', sg.corners)}
+          </div>
+        </div>
+
+        <!-- Value -->
+        <div class="slab-panel">
+          <h4>Estimated Value</h4>
+          <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px">&#128176; ${val} pts</div>
+          <div style="font-size:.72rem;color:var(--text-muted);margin-top:6px">
+            Based on rarity, grade, mint #, votes at mint${card.isFirstEdition ? ', 1st Edition' : ''}
+          </div>
+        </div>
+
+        <!-- Pop Report -->
+        <div class="slab-panel">
+          <h4>Pop Report &mdash; ${esc(card.displayName)}</h4>
+          <div class="slab-pop-row"><span class="slab-pop-key">Total Copies</span><span class="slab-pop-val">${pop.total}</span></div>
+          <div class="slab-pop-row"><span class="slab-pop-key">Highest Grade</span><span class="slab-pop-val">${pop.highestGrade}</span></div>
+          <div class="slab-pop-row"><span class="slab-pop-key">1st Editions</span><span class="slab-pop-val">${pop.firstEdition}</span></div>
+          <div class="slab-pop-row"><span class="slab-pop-key">Lowest Mint #</span><span class="slab-pop-val">${pop.lowestMint || '—'}</span></div>
+          ${Object.entries(pop.byGrade).sort((a,b)=>b[0]-a[0]).map(([g,n]) =>
+            `<div class="slab-pop-row" style="font-size:.72rem"><span class="slab-pop-key">Grade ${g}</span><span class="slab-pop-val">${n}</span></div>`
+          ).join('')}
+        </div>
+
+        <!-- Actions -->
+        <div class="slab-panel">
+          <h4>Actions</h4>
+          <div class="slab-actions">
+            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .card</button>
+            <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
+            <button class="slab-btn" id="trophy-pin-btn" onclick="toggleTrophyCase('${mintId}')">${inTrophy ? 'Unpin' : 'Pin Trophy'}</button>
+            <button class="slab-btn" onclick="document.getElementById('slab-overlay').remove()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+  // Render card on slab canvas
+  const slabCanvas = document.getElementById(`slab-canvas-${mintId}`);
+  if (slabCanvas) renderMiniCard(slabCanvas, card);
+}
+
+async function openSlabZoom(mintId) {
+  const all = await getAllMinted();
+  const card = all.find(c => c.mintId === mintId);
+  if (!card) return;
+
+  const W = 500, H = 700;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  renderMiniCard(canvas, card);
+
+  // Draw centering grid overlay
+  const ctx = canvas.getContext('2d');
+  const v = card.variations;
+  const ox = v.centeringX * (W * 0.1);
+  const oy = v.centeringY * (H * 0.1);
+
+  // Center crosshair (ideal center)
+  ctx.strokeStyle = 'rgba(88,166,255,.5)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
+
+  // Card center (actual)
+  ctx.strokeStyle = 'rgba(255,100,100,.8)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(W/2 + ox, 0); ctx.lineTo(W/2 + ox, H); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, H/2 + oy); ctx.lineTo(W, H/2 + oy); ctx.stroke();
+
+  // Offset labels
+  ctx.fillStyle = 'rgba(255,100,100,.9)';
+  ctx.font = 'bold 12px -apple-system, sans-serif';
+  ctx.setLineDash([]);
+  if (Math.abs(ox) > 2) ctx.fillText(`${ox > 0 ? '+' : ''}${ox.toFixed(1)}px`, W/2 + ox + 4, 20);
+  if (Math.abs(oy) > 2) ctx.fillText(`${oy > 0 ? '+' : ''}${oy.toFixed(1)}px`, W - 60, H/2 + oy - 4);
+
+  const zoom = document.createElement('div');
+  zoom.className = 'slab-zoom-overlay';
+  zoom.innerHTML = `
+    <button class="slab-zoom-close" onclick="this.closest('.slab-zoom-overlay').remove()">&#10005;</button>
+    <div class="slab-zoom-info"><strong>${esc(card.displayName)}</strong> — Centering Analysis<br>
+    <span style="color:rgba(88,166,255,.7)">Blue = ideal center</span> &nbsp; <span style="color:rgba(255,100,100,.8)">Red = card center</span></div>`;
+  zoom.appendChild(canvas);
+  canvas.style.cssText = `max-width:90vw;max-height:70vh;border-radius:8px;box-shadow:0 0 60px rgba(88,166,255,.2)`;
+
+  const cenLabel = document.createElement('div');
+  cenLabel.className = 'slab-zoom-info';
+  cenLabel.textContent = `Offset: X=${(v.centeringX * 100).toFixed(1)}%  Y=${(v.centeringY * 100).toFixed(1)}%  Score: ${v.centerScore}/10`;
+  zoom.appendChild(cenLabel);
+
+  document.body.appendChild(zoom);
+  zoom.addEventListener('click', e => { if (e.target === zoom) zoom.remove(); });
+}
+
+// ═══════════════════════════════════════════════════════
+// Pull History
+// ═══════════════════════════════════════════════════════
+function recordPull(card, setId) {
+  const history = JSON.parse(localStorage.getItem('rar_pull_history') || '[]');
+  history.unshift({
+    agentName: card.agentName,
+    displayName: card.displayName,
+    tier: card.tier,
+    setId: setId,
+    timestamp: Date.now(),
+    mintId: card.mintId,
+  });
+  // Keep last 50
+  localStorage.setItem('rar_pull_history', JSON.stringify(history.slice(0, 50)));
+}
+
+function renderPullHistory() {
+  const log = document.getElementById('pull-history-log');
+  if (!log) return;
+  const history = JSON.parse(localStorage.getItem('rar_pull_history') || '[]');
+  if (!history.length) {
+    log.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:.82rem;padding:20px">No pulls yet — open a pack!</div>';
+    return;
+  }
+  log.innerHTML = history.map(h => {
+    const rarity = TIER_TO_RARITY[h.tier] || 'uncommon';
+    const ago = Math.round((Date.now() - h.timestamp) / 60000);
+    const agoStr = ago < 60 ? `${ago}m ago` : `${Math.round(ago/60)}h ago`;
+    return `<div class="pull-entry">
+      <div class="pull-entry-rarity ${rarity}"></div>
+      <div class="pull-entry-name">${esc(h.displayName || h.agentName)}</div>
+      <div class="pull-entry-set">${(h.setId || '').toUpperCase()}</div>
+      <div class="pull-entry-time">${agoStr}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearPullHistory() {
+  if (!confirm('Clear pull history?')) return;
+  localStorage.removeItem('rar_pull_history');
+  renderPullHistory();
+}
+
+// ═══════════════════════════════════════════════════════
+// Trophy Case
+// ═══════════════════════════════════════════════════════
+async function renderTrophyCase() {
+  const el = document.getElementById('trophy-case-grid');
+  if (!el) return;
+  const mintIds = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
+  const allCards = await getAllMinted();
+
+  el.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    const slot = document.createElement('div');
+    const mid = mintIds[i];
+    if (mid) {
+      const card = allCards.find(c => c.mintId === mid);
+      if (card) {
+        card.grade = gradeCard(card);
+        const gl = gradeLabel(card.grade);
+        slot.className = 'trophy-slot filled';
+        slot.title = `${card.displayName} — ${gl.label}`;
+        slot.onclick = () => openSlabViewer(mid);
+        const canvas = document.createElement('canvas');
+        canvas.width = 200; canvas.height = 280;
+        slot.appendChild(canvas);
+        const frame = document.createElement('div');
+        frame.className = 'trophy-frame';
+        const gradeEl = document.createElement('div');
+        gradeEl.className = 'trophy-frame-grade';
+        gradeEl.textContent = gl.label;
+        slot.appendChild(frame);
+        slot.appendChild(gradeEl);
+        el.appendChild(slot);
+        renderMiniCard(canvas, card);
+        continue;
+      }
+    }
+    slot.className = 'trophy-slot empty';
+    slot.innerHTML = '<span style="font-size:1.5rem;opacity:.3">&#128081;</span><span>Empty</span>';
+    el.appendChild(slot);
+  }
+}
+
+async function toggleTrophyCase(mintId) {
+  const tc = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
+  const idx = tc.indexOf(mintId);
+  if (idx >= 0) {
+    tc.splice(idx, 1);
+    showToast('Removed from Trophy Case', 'success');
+  } else {
+    if (tc.length >= 6) { showToast('Trophy Case full (max 6 cards)', 'error'); return; }
+    tc.push(mintId);
+    showToast('Pinned to Trophy Case!', 'success');
+  }
+  localStorage.setItem('rar_trophy_case', JSON.stringify(tc));
+  const btn = document.getElementById('trophy-pin-btn');
+  if (btn) btn.textContent = tc.includes(mintId) ? 'Unpin' : 'Pin Trophy';
+  renderTrophyCase();
+}
+
+function shareTrophyCase() {
+  const tc = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
+  if (!tc.length) { showToast('Trophy Case is empty', 'error'); return; }
+  const encoded = btoa(JSON.stringify(tc));
+  const url = `${location.origin}${location.pathname}#trophy/${encoded}`;
+  navigator.clipboard?.writeText(url);
+  showToast('Trophy Case link copied!', 'success');
+}
+
+// ═══════════════════════════════════════════════════════
+// Quiz Mode
+// ═══════════════════════════════════════════════════════
+async function startQuiz() {
+  const all = await getAllMinted();
+  if (all.length < 4) { showToast('Need at least 4 cards in your collection to start the quiz!', 'error'); return; }
+
+  // Pick 5 unique agents for questions
+  const shuffled = all.slice().sort(() => Math.random() - 0.5);
+  const questions = shuffled.slice(0, Math.min(5, all.length));
+  let qIdx = 0;
+  let score = 0;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'quiz-overlay';
+  overlay.id = 'quiz-overlay';
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  function closeQuiz() {
+    overlay.remove();
+    document.body.style.overflow = '';
+  }
+
+  function showQuestion() {
+    if (qIdx >= questions.length) { showResults(); return; }
+    const card = questions[qIdx];
+    card.grade = gradeCard(card);
+    const agent = allAgents.find(a => a.name === card.agentName);
+    if (!agent) { qIdx++; showQuestion(); return; }
+
+    // Build choices: correct + 3 distractors from allAgents
+    const correct = kidsExplain(agent.description || agent.name);
+    const distractors = allAgents
+      .filter(a => a.name !== agent.name)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map(a => kidsExplain(a.description || a.name));
+    const choices = [correct, ...distractors].sort(() => Math.random() - 0.5);
+
+    const pips = questions.map((_, i) =>
+      `<div class="quiz-pip ${i < qIdx ? 'done' : i === qIdx ? 'current' : ''}"></div>`
+    ).join('');
+
+    overlay.innerHTML = `
+      <button class="quiz-close" onclick="document.getElementById('quiz-overlay').remove();document.body.style.overflow=''">&#10005;</button>
+      <div class="quiz-card">
+        <div class="quiz-progress">${pips}</div>
+        <div class="quiz-agent-art">
+          <canvas width="140" height="200" id="quiz-canvas"></canvas>
+        </div>
+        <div class="quiz-question">What does this agent do?</div>
+        <div class="quiz-choices">
+          ${choices.map((c, i) => `<button class="quiz-choice" data-correct="${c === correct}" onclick="quizAnswer(this, '${c === correct}')">${esc(c)}</button>`).join('')}
+        </div>
+        <div style="font-size:.72rem;color:var(--text-muted);margin-top:12px">Question ${qIdx + 1} of ${questions.length} &nbsp;·&nbsp; Score: ${score}</div>
+      </div>`;
+
+    const qCanvas = document.getElementById('quiz-canvas');
+    if (qCanvas) renderMiniCard(qCanvas, card);
+  }
+
+  function quizAnswer(btn, isCorrectStr) {
+    const isCorrect = isCorrectStr === 'true';
+    if (isCorrect) { score++; btn.classList.add('correct'); }
+    else {
+      btn.classList.add('wrong');
+      // Highlight the correct one
+      overlay.querySelectorAll('.quiz-choice[data-correct="true"]').forEach(b => b.classList.add('correct'));
+    }
+    overlay.querySelectorAll('.quiz-choice').forEach(b => { b.disabled = true; b.onclick = null; });
+    setTimeout(() => { qIdx++; showQuestion(); }, 1200);
+  }
+
+  window.quizAnswer = quizAnswer;
+
+  function showResults() {
+    const pct = Math.round((score / questions.length) * 100);
+    const msg = pct === 100 ? 'Perfect score! You know your agents!' :
+                pct >= 60 ? 'Nice work! Keep collecting and learning.' :
+                'Keep opening packs to learn more agents!';
+    overlay.innerHTML = `
+      <button class="quiz-close" onclick="document.getElementById('quiz-overlay').remove();document.body.style.overflow=''">&#10005;</button>
+      <div class="quiz-card">
+        <div class="quiz-result">
+          <div class="score-big">${score}/${questions.length}</div>
+          <div style="font-size:1.5rem;margin:8px 0">${pct === 100 ? '&#127942;' : pct >= 60 ? '&#127881;' : '&#128218;'}</div>
+          <p>${msg}</p>
+          <button onclick="startQuiz()" style="margin-top:20px;padding:10px 28px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;font-size:.88rem;font-weight:700;cursor:pointer">Play Again</button>
+        </div>
+      </div>`;
+  }
+
+  showQuestion();
+}
+
+// Update renderPackShelf to show odds
+function renderPackShelfWithOdds() {
+  const el = document.getElementById('pack-shelf');
+  if (!el) return;
+  el.innerHTML = PACK_SETS.map(p => {
+    const pool = allAgents.filter(p.filter);
+    const mythicCount = pool.filter(a => (TIER_TO_RARITY[a.quality_tier] || 'uncommon') === 'mythic').length;
+    const rareCount = pool.filter(a => (TIER_TO_RARITY[a.quality_tier] || 'uncommon') === 'rare').length;
+    return `<div class="pack-box ${p.cssClass}" onclick="openPack('${p.id}')">
+      <div class="pack-icon">${p.icon}</div>
+      <div class="pack-name">${p.name}</div>
+      <div class="pack-sub">${p.sub}</div>
+      <div class="pack-count">${p.cards} cards &middot; ${pool.length} in pool</div>
+      <div class="pull-odds" style="margin-top:8px;font-size:.62rem;opacity:.7">
+        ${mythicCount ? `<span><span style="width:6px;height:6px;border-radius:50%;background:#ff6d00;display:inline-block"></span>${mythicCount} Official</span>` : ''}
+        ${rareCount ? `<span><span style="width:6px;height:6px;border-radius:50%;background:#ffd700;display:inline-block"></span>${rareCount} Verified</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -5705,6 +6721,16 @@ function handleCardHash() {
       setCardFilter('deck', null);
       showToast(`Loaded deck "${dn}" with ${agents.length} cards`, 'success');
     }
+  } else if (hash.startsWith('#trophy/')) {
+    try {
+      const encoded = hash.slice(8);
+      const mintIds = JSON.parse(atob(encoded));
+      if (Array.isArray(mintIds) && mintIds.length) {
+        localStorage.setItem('rar_trophy_case', JSON.stringify(mintIds.slice(0, 6)));
+        switchTab('packs');
+        showToast(`Trophy Case loaded with ${mintIds.length} card${mintIds.length > 1 ? 's' : ''}!`, 'success');
+      }
+    } catch {}
   }
 }
 window.addEventListener('hashchange', handleCardHash);
