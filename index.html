@@ -395,6 +395,39 @@
     color: var(--text-muted); font-size: .8rem; margin-top: 8px; font-style: italic;
   }
 
+  /* ─── Local-First Drop Zone ──────────────────────── */
+  .drop-zone {
+    border: 2px dashed var(--border); border-radius: var(--radius);
+    padding: 20px; text-align: center; color: var(--text-muted);
+    font-size: .88rem; cursor: pointer; transition: all .2s;
+    margin-bottom: 16px; position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--accent); color: var(--accent); background: var(--accent-bg);
+  }
+  .drop-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  }
+  .drop-zone .dz-icon { font-size: 1.5rem; margin-bottom: 4px; }
+  .drop-zone .dz-hint { font-size: .75rem; color: var(--text-muted); margin-top: 4px; }
+  .local-badge {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: rgba(63,185,80,.12); color: var(--green); border: 1px solid rgba(63,185,80,.3);
+    padding: 1px 7px; border-radius: 4px; font-size: .65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .3px;
+  }
+  .local-count {
+    background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,.3);
+    border-radius: 20px; padding: 4px 12px; font-size: .8rem; font-weight: 600;
+  }
+  .local-mgmt { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .local-mgmt-btn {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: .8rem; transition: all .15s;
+  }
+  .local-mgmt-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .local-mgmt-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
   /* ─── Toast ───────────────────────────────────────── */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -560,6 +593,16 @@
       </select>
     </div>
     <div class="filter-pills" id="category-pills"></div>
+    <div class="local-mgmt" id="local-mgmt" style="display:none;margin-top:12px">
+      <span class="local-count" id="local-count">0 Local</span>
+      <button class="local-mgmt-btn" onclick="exportLocalAgents()">Export All</button>
+      <button class="local-mgmt-btn danger" onclick="clearLocalAgents()">Clear Local</button>
+      <div class="drop-zone" id="drop-zone" style="flex:1;padding:10px;margin-bottom:0">
+        <input type="file" accept=".py" multiple onchange="handleFileDrop(this.files)">
+        <span>Drop .py files here or click to add local agents</span>
+      </div>
+    </div>
+    <div id="drop-zone-full" style="display:none"></div>
     <div style="margin-top:16px" id="agents-container">
       <div class="loading"><div class="spinner"></div><br>Loading registry...</div>
     </div>
@@ -818,6 +861,218 @@ let ghToken = localStorage.getItem('rb_access_token') || localStorage.getItem('g
 let cart = new Set(JSON.parse(localStorage.getItem('rar_cart') || '[]'));
 
 // ═══════════════════════════════════════════════════════
+// Local-First: IndexedDB for local agents
+// ═══════════════════════════════════════════════════════
+const DB_NAME = 'rar_local';
+const DB_VERSION = 1;
+const STORE_NAME = 'agents';
+let _db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    if (_db) return resolve(_db);
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'name' });
+      }
+    };
+    req.onsuccess = e => { _db = e.target.result; resolve(_db); };
+    req.onerror = e => reject(e.target.error);
+  });
+}
+
+async function getAllLocalAgents() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readonly');
+    const store = tx.objectStore(STORE_NAME);
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function putLocalAgent(agent) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.put(agent);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function deleteLocalAgent(name) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.delete(name);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function clearAllLocalAgents() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function parseManifestFromPython(code) {
+  // Regex-based manifest extraction (mirrors the AST approach in Python)
+  const m = code.match(/__manifest__\s*=\s*\{([\s\S]*?)\n\}/);
+  if (!m) return null;
+  try {
+    // Convert Python dict syntax to JSON-ish
+    let raw = '{' + m[1] + '}';
+    // Handle trailing commas, single quotes, True/False/None
+    raw = raw.replace(/'/g, '"')
+      .replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null')
+      .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+    return JSON.parse(raw);
+  } catch { return null; }
+}
+
+async function handleFileDrop(files) {
+  let added = 0;
+  for (const file of files) {
+    if (!file.name.endsWith('.py')) continue;
+    const code = await file.text();
+    const manifest = parseManifestFromPython(code);
+    if (!manifest || !manifest.name) {
+      showToast(`${file.name}: no valid __manifest__ found`, 'error');
+      continue;
+    }
+    const lines = code.split('\n').length;
+    const sizeKb = (new Blob([code]).size / 1024).toFixed(1);
+    await putLocalAgent({
+      ...manifest,
+      _code: code,
+      _source: 'local-device',
+      _file: file.name,
+      _lines: lines,
+      _size_kb: sizeKb,
+      _added: new Date().toISOString(),
+      quality_tier: manifest.quality_tier || 'community',
+      tags: manifest.tags || [],
+      requires_env: manifest.requires_env || [],
+      dependencies: manifest.dependencies || [],
+    });
+    added++;
+  }
+  if (added > 0) {
+    showToast(`Added ${added} local agent${added > 1 ? 's' : ''}`, 'success');
+    await mergeLocalAgents();
+    refreshUI();
+  }
+}
+
+async function mergeLocalAgents() {
+  const locals = await getAllLocalAgents();
+  // Remove any existing local-device entries from allAgents
+  allAgents = allAgents.filter(a => a._source !== 'local-device');
+  allAgents = [...locals, ...allAgents];
+  updateLocalMgmt(locals.length);
+}
+
+function updateLocalMgmt(count) {
+  const el = document.getElementById('local-mgmt');
+  if (count > 0) {
+    el.style.display = 'flex';
+    document.getElementById('local-count').textContent = `${count} Local`;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function refreshUI() {
+  const stats = {
+    total_agents: allAgents.length,
+    publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size,
+    categories: new Set(allAgents.map(a => a.category)).size,
+    category_list: [...new Set(allAgents.map(a => a.category))].sort()
+  };
+  renderStats(stats);
+  buildCategoryPills(stats);
+  renderAgents();
+}
+
+async function clearLocalAgents() {
+  if (!confirm('Remove all local agents from this browser?')) return;
+  await clearAllLocalAgents();
+  await mergeLocalAgents();
+  refreshUI();
+  showToast('Local agents cleared', 'success');
+}
+
+async function removeLocalAgent(name) {
+  await deleteLocalAgent(name);
+  await mergeLocalAgents();
+  refreshUI();
+  closeModal();
+  showToast('Local agent removed', 'success');
+}
+
+async function exportLocalAgents() {
+  const locals = await getAllLocalAgents();
+  if (!locals.length) { showToast('No local agents to export', 'error'); return; }
+  // Create and download a zip-like concatenated export (or individual files)
+  if (locals.length === 1) {
+    const a = locals[0];
+    const blob = new Blob([a._code], { type: 'text/x-python' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = a._file || `${a.name.split('/')[1]}.py`;
+    link.click(); URL.revokeObjectURL(url);
+  } else {
+    // Download as individual files in sequence
+    for (const a of locals) {
+      const blob = new Blob([a._code], { type: 'text/x-python' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = a._file || `${a.name.split('/')[1]}.py`;
+      link.click(); URL.revokeObjectURL(url);
+      await new Promise(r => setTimeout(r, 200));
+    }
+  }
+  showToast(`Exported ${locals.length} agent${locals.length > 1 ? 's' : ''}`, 'success');
+}
+
+// Global drag-and-drop on page body
+document.addEventListener('DOMContentLoaded', () => {
+  let dragCount = 0;
+  document.body.addEventListener('dragenter', e => {
+    e.preventDefault();
+    dragCount++;
+    if (dragCount === 1) {
+      const dz = document.getElementById('drop-zone-full');
+      dz.style.display = 'block';
+      dz.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(88,166,255,.08);border:3px dashed var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--accent);pointer-events:none';
+      dz.textContent = 'Drop .py files to add local agents';
+    }
+  });
+  document.body.addEventListener('dragleave', e => {
+    dragCount--;
+    if (dragCount <= 0) { dragCount = 0; document.getElementById('drop-zone-full').style.display = 'none'; }
+  });
+  document.body.addEventListener('dragover', e => e.preventDefault());
+  document.body.addEventListener('drop', e => {
+    e.preventDefault(); dragCount = 0;
+    document.getElementById('drop-zone-full').style.display = 'none';
+    if (e.dataTransfer?.files?.length) handleFileDrop(e.dataTransfer.files);
+  });
+});
+
+// ═══════════════════════════════════════════════════════
 // Auth — GitHub OAuth Device Flow (shared with RAPPterBook)
 // ═══════════════════════════════════════════════════════
 const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
@@ -878,6 +1133,10 @@ async function init() {
   }
 
   if (IS_INSTANCE) renderInstanceBanner();
+
+  // Merge local agents from IndexedDB
+  await mergeLocalAgents();
+
   const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
   renderStats(stats);
   buildCategoryPills(stats);
@@ -1116,6 +1375,7 @@ function agentCard(a) {
           <span>${a._size_kb || '?'} KB</span>
           <span>${a._lines || '?'} lines</span>
           <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
+          ${a._source === 'local-device' ? '<span class="local-badge">LOCAL</span>' : ''}
           ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
@@ -1171,10 +1431,11 @@ function openAgent(name) {
   const env = (a.requires_env || []).length > 0
     ? a.requires_env.map(e => `<code style="background:var(--surface2);color:var(--orange);padding:2px 8px;border-radius:4px;font-size:.85rem">${esc(e)}</code>`).join(' ')
     : '<span style="color:var(--green)">None</span>';
+  const isLocalDevice = a._source === 'local-device';
   const sourceRaw = a._source === 'upstream' && UPSTREAM_RAW ? UPSTREAM_RAW : RAW;
   const sourceRepo = a._source === 'upstream' && UPSTREAM_REPO ? UPSTREAM_REPO : REPO;
-  const rawUrl = `${sourceRaw}/${a._file}`;
-  const ghUrl = `https://github.com/${sourceRepo}/blob/main/${a._file}`;
+  const rawUrl = isLocalDevice ? '#' : `${sourceRaw}/${a._file}`;
+  const ghUrl = isLocalDevice ? '#' : `https://github.com/${sourceRepo}/blob/main/${a._file}`;
 
   const sealHtml = tier === 'verified'
     ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAR VERIFIED</span>'
@@ -1213,8 +1474,10 @@ function openAgent(name) {
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
       </div>
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
-      <div class="modal-section"><h3>Install</h3>
-        <div class="cmd-box"><code id="install-cmd">curl -sO ${rawUrl}</code><button class="copy-btn" onclick="copyEl('install-cmd')">Copy</button></div>
+      <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Install'}</h3>
+        ${isLocalDevice
+          ? '<div style="color:var(--green);font-size:.88rem"><span class="local-badge" style="font-size:.75rem;padding:3px 10px">LOCAL AGENT</span> Loaded from your device. Not published to any registry.</div>'
+          : `<div class="cmd-box"><code id="install-cmd">curl -sO ${rawUrl}</code><button class="copy-btn" onclick="copyEl('install-cmd')">Copy</button></div>`}
       </div>
       <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
       <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
@@ -1231,18 +1494,26 @@ function openAgent(name) {
         <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">&#9998; Write a Review</button>
       </div>
       <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; Download .py</a>
-        <a href="${ghUrl}" target="_blank" style="color:var(--accent);font-size:.9rem">&#128279; View on GitHub</a>
+        ${isLocalDevice
+          ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">&#128465; Remove Local Agent</a>
+             <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#8593; Submit to Store</a>`
+          : `<a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; Download .py</a>
+             <a href="${ghUrl}" target="_blank" style="color:var(--accent);font-size:.9rem">&#128279; View on GitHub</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
         <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
       </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  fetch(rawUrl + '?t=' + Date.now()).then(r => r.ok ? r.text() : 'Error loading source').then(code => {
-    window._code = code;
-    document.getElementById('code-body').innerHTML = hlPy(code);
-  });
+  if (isLocalDevice && a._code) {
+    window._code = a._code;
+    document.getElementById('code-body').innerHTML = hlPy(a._code);
+  } else {
+    fetch(rawUrl + '?t=' + Date.now()).then(r => r.ok ? r.text() : 'Error loading source').then(code => {
+      window._code = code;
+      document.getElementById('code-body').innerHTML = hlPy(code);
+    });
+  }
 }
 
 function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; }
@@ -1600,6 +1871,32 @@ async function submitToUpstream(agentName) {
       const err = await res.json().catch(() => ({}));
       showToast(`Submission failed: ${err.message || res.status}`, 'error');
     }
+  } catch (e) { showToast('Network error: ' + e.message, 'error'); }
+}
+
+// Submit local agent to store
+async function submitLocalToStore(agentName) {
+  if (!ghUser) { loginWithGitHub(); return; }
+  const agent = allAgents.find(a => a.name === agentName);
+  if (!agent || !agent._code) { showToast('Agent code not found', 'error'); return; }
+  if (isUnmodifiedTemplate(agent._code)) {
+    showToast('Customize the agent first — this is still a template', 'error');
+    return;
+  }
+  const code = agent._code;
+  const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
+  try {
+    const targetRepo = UPSTREAM_REPO || REPO;
+    const res = await fetch(`https://api.github.com/repos/${targetRepo}/issues`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: '[RAR] submit_agent', body: '```json\n' + body + '\n```', labels: ['rar-action', 'agent-submission', 'local-upload'] })
+    });
+    if (res.ok) {
+      const issue = await res.json();
+      showToast(`Submitted! Issue #${issue.number} created.`, 'success');
+      closeModal();
+    } else { showToast('Submission failed', 'error'); }
   } catch (e) { showToast('Network error: ' + e.message, 'error'); }
 }
 
