@@ -3605,34 +3605,70 @@ window.addEventListener('hashchange', handleCardHash);
 // ═══════════════════════════════════════════════════════
 const TOUR_STEPS = [
   {
-    target: '[data-tab="browse"]',
-    title: 'Browse Agents',
-    text: 'Discover 120+ single-file AI agents. Search, filter by category, sort by votes. Drag and drop .py files to add your own local agents.',
+    target: '.logo',
+    title: 'Welcome to the RAPP Agent Store',
+    text: 'This is the open registry for single-file AI agents. Every agent is one .py file — no packages, no dependencies, no complexity. Let me show you around.',
+    tab: 'browse'
+  },
+  {
+    target: '#agents-container',
+    title: 'Browse 120+ Agents',
+    text: 'Each card is a real agent you can download and run. Filter by category, sort by votes, or search by name. Try clicking one to see its full details and source code.',
+    tab: 'browse'
+  },
+  {
+    target: '#sort-select',
+    title: 'Local-First: Drag & Drop',
+    text: 'Have your own .py agents? Drag them anywhere on this page. They get stored locally on your device and appear alongside the cloud agents. No upload, no server — your files stay on your machine.',
     tab: 'browse'
   },
   {
     target: '[data-tab="cards"]',
     title: 'Agent Cards',
-    text: 'Every agent is a collectible card. Switch between Business and Holo views. Double-click any card to flip it. Build decks, present them as slides, share via URL.',
+    text: 'Every agent is also a collectible card. This is where it gets fun.',
+    tab: 'cards'
+  },
+  {
+    target: '.card-mode-toggle',
+    title: 'Two Skins: Business & Holo',
+    text: '<strong>Business</strong> — clean professional cards, like the kind you\'d hand someone at a conference.<br><br><strong>Holo</strong> — full trading cards with art, mana pips, creature types, abilities, and power/toughness. Inspired by Howard\'s CardSmith.',
+    tab: 'cards'
+  },
+  {
+    target: '#deck-select',
+    title: 'Build Your Decks',
+    text: 'Organize agents into named decks. A "Client Demo" deck. A "My Builds" deck. A "Sales Stack." Star any card to add it. Switch between decks with the dropdown.',
+    tab: 'cards'
+  },
+  {
+    target: '[onclick="presentDeck()"]',
+    title: 'Present Your Deck',
+    text: 'Turn any deck into a full-screen slideshow. Arrow keys to navigate, Escape to exit. Business mode gives you clean slides. Holo mode gives you the art treatment. Perfect for demos.',
     tab: 'cards'
   },
   {
     target: '[data-tab="workbench"]',
-    title: 'Workbench',
-    text: 'Write agents directly in your browser. Real-time validation against the RAPP Constitution. Preview your agent as a card before publishing.',
+    title: 'Build Agents in Your Browser',
+    text: 'The Workbench lets you write, validate, and preview agents without installing anything. Start from a template, the validator checks your code against the Constitution in real time, and you can see your agent as a card before publishing.',
     tab: 'workbench'
   },
   {
     target: '[data-tab="submit"]',
-    title: 'Submit Agents',
-    text: 'Publish your agent to the registry. Start from a template, paste your code, and submit. Your agent gets a namespace under your GitHub username.',
+    title: 'Publish to the Registry',
+    text: 'When you\'re ready, submit your agent. It gets a namespace under your GitHub username (@you/agent_name), goes through automated validation, and appears in the store. Start from the templates if it\'s your first time.',
     tab: 'submit'
   },
   {
     target: '[data-tab="quality"]',
-    title: 'Quality Tiers',
-    text: 'Agents earn trust through tiers: Experimental, Community, Verified, Official. Higher tiers mean more review, more trust.',
+    title: 'Trust Through Tiers',
+    text: 'Agents earn trust: <strong>Frontier</strong> (pushing the edge) → <strong>Community</strong> (validated) → <strong>Verified</strong> (reviewed by maintainers) → <strong>Official</strong> (core team). The tier is the reputation.',
     tab: 'quality'
+  },
+  {
+    target: '[data-tab="roadmap"]',
+    title: 'See What\'s Coming',
+    text: 'The roadmap shows where this is heading — agent workbench, sneakernet sharing, code signing, and more. You\'re looking at the beginning of an ecosystem. Welcome aboard.',
+    tab: 'roadmap'
   }
 ];
 
@@ -3692,13 +3728,16 @@ function startTour() {
 
       tt.style.cssText = `top:${ttTop}px;left:${ttLeft}px;`;
       tt.innerHTML = `
-        <div class="tour-dots">${TOUR_STEPS.map((_, i) => `<div class="tour-dot${i === step ? ' active' : ''}"></div>`).join('')}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div class="tour-dots">${TOUR_STEPS.map((_, i) => `<div class="tour-dot${i === step ? ' active' : ''}"></div>`).join('')}</div>
+          <span style="font-size:.65rem;color:var(--text-muted)">${step + 1} of ${TOUR_STEPS.length}</span>
+        </div>
         <h3>${s.title}</h3>
         <p>${s.text}</p>
         <div class="tour-btns">
-          <button onclick="endTour()">Skip</button>
+          <button onclick="endTour()">Skip tour</button>
           ${step > 0 ? `<button onclick="tourPrev()">Back</button>` : ''}
-          <button class="primary" onclick="tourNext()">${step === TOUR_STEPS.length - 1 ? 'Done' : 'Next'}</button>
+          <button class="primary" onclick="tourNext()">${step === TOUR_STEPS.length - 1 ? 'Get started' : 'Next'}</button>
         </div>
       `;
       document.body.appendChild(tt);
