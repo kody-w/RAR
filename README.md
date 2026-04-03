@@ -1,227 +1,156 @@
-# RAPP Agent Repo
+# RAR — RAPP Agent Registry
 
-**The open agent registry for [CommunityRAPP](https://github.com/kody-w/CommunityRAPP).**
+**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents from your browser.
 
-121 agents. 4 publishers. 19 categories. 14 industry verticals. Drop any agent into your `agents/` folder — it just works.
+124 agents. 5 publishers. 19 categories. Every agent is one `.py` file.
 
-> **This repo scales to thousands of agents.** Each agent is a namespaced package (`@publisher/agent-name`) with its own manifest, versioning, and docs. No collisions. No chaos.
+**[Open the Agent Store](https://kody-w.github.io/RAR/)**
+
+---
+
+## What is this?
+
+RAR is the package registry for [CommunityRAPP](https://github.com/kody-w/CommunityRAPP) agents. But unlike a typical registry, it ships with a complete web store — no install, no build step, just open `index.html`.
+
+Every agent follows the **single-file principle**: one `.py` file with the manifest, documentation, and code all in one place. One HTTP GET to fetch. One file write to install. One context window for an LLM to read.
+
+---
+
+## The Agent Store
+
+The store (`index.html`) is itself a single file. Open it in any browser — including from `file://`.
+
+### Browse & Discover
+Search 124 agents across 19 categories. Filter by tier. Sort by votes. Click any agent to see source code, reviews, and details.
+
+### Agent Cards
+Every agent is a collectible card. Two skins:
+- **Business** — clean professional layout, like a business card you'd hand someone
+- **Holo** — trading card with generative art, mana pips, creature types, abilities, and power/toughness (inspired by [@borg/cardsmith_agent](agents/@borg/cardsmith_agent.py))
+
+### Decks & Presentation
+Collect agents into named decks. "Client Demo", "Sales Stack", "My Builds". Share via URL. Hit **Present** to turn any deck into a full-screen slideshow — arrow keys to navigate, toggle between Business and Holo slides.
+
+### Workbench
+Write agents in your browser. Start from a template, validate against the [Constitution](CONSTITUTION.md), preview your agent as a card, download as `.py`, or add to your local collection.
+
+### Local-First
+Drag `.py` files into the browser. They're stored in IndexedDB on your device and appear alongside cloud agents. No upload, no server, no account. Works offline and air-gapped.
+
+### Submit
+Publish agents through the store UI — it creates a GitHub Issue that gets processed by automation. Your agent publishes under `@your-github-username/`.
 
 ---
 
 ## Install an Agent
 
-### From Chat (Headless)
+### From the Store
+Browse → Click an agent → Download `.py` → Drop it in your `agents/` folder.
 
-The `GitHubAgentLibraryManager` agent reads this repo autonomously:
+### From Chat
+The `@kody/rar_remote_agent` reads this registry autonomously:
 
 > *"Install the dynamics-crud agent"*
 > *"What agents are available for CRM?"*
-> *"Show me all @billwhalen agents"*
 
-No repo visit needed.
-
-### Give Your AI Agent Access
-
-Point any LLM or AI agent at the skill manifest — one line:
-
-```
-https://raw.githubusercontent.com/billwhalenmsft/RAPP-Agent-Repo/main/skill.md
-```
-
-### Manual
-
+### Direct Fetch
 ```bash
-# Browse → pick an agent → copy to your CommunityRAPP
-cp RAPP-Agent-Repo/agents/@billwhalen/dynamics-crud/agent.py \
-   /path/to/CommunityRAPP/agents/dynamics_crud_agent.py
-
-# Restart your function app — agents auto-load
-func start
+curl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rar_remote_agent.py
 ```
 
 ---
 
-## Agent Registry
+## Quality Tiers
 
-### 🧠 Core — Memory & Orchestration
+| Tier | Display | Meaning |
+|------|---------|---------|
+| `official` | **Official** | Core team maintained. Guaranteed compatibility. |
+| `verified` | **Verified** | Reviewed by maintainers. Tested. Follows standards. |
+| `community` | **Community** | Submitted by anyone. Passes automated validation. |
+| `experimental` | **Frontier** | Pushing the edge. May evolve rapidly. |
 
-| Package | Description |
-|---------|-------------|
-| [`@kody/context-memory`](agents/@kody/context-memory.py) | Recalls conversation history and stored memories |
-| [`@kody/manage-memory`](agents/@kody/manage-memory.py) | Stores facts, preferences, insights to persistent memory |
-| [`@kody/github-agent-library`](agents/@kody/github-agent-library.py) | Browse, search, install agents from this repo via chat |
-
-### 🔧 Pipeline — RAPP Agent Factory
-
-| Package | Description |
-|---------|-------------|
-| [`@billwhalen/rapp-pipeline`](agents/@billwhalen/rapp-pipeline.py) | Full RAPP pipeline — transcript → agent, discovery, MVP, code gen, QG1-QG6 |
-| [`@billwhalen/agent-generator`](agents/@billwhalen/agent-generator.py) | Auto-generates new agents from configurations |
-| [`@billwhalen/agent-transpiler`](agents/@billwhalen/agent-transpiler.py) | Converts agents between M365 Copilot, Copilot Studio, Azure AI Foundry |
-| [`@billwhalen/copilot-studio-transpiler`](agents/@billwhalen/copilot-studio-transpiler.py) | Transpiles to native Copilot Studio without Azure Function dependency |
-| [`@billwhalen/project-tracker`](agents/@billwhalen/project-tracker.py) | RAPP project management and engagement tracking |
-
-### 🔌 Integrations — Microsoft 365 & CRM
-
-| Package | Description |
-|---------|-------------|
-| [`@billwhalen/dynamics-crud`](agents/@billwhalen/dynamics-crud.py) | Dynamics 365 CRUD — accounts, contacts, opportunities, leads, tasks |
-| [`@billwhalen/sharepoint-contract-analysis`](agents/@billwhalen/sharepoint-contract-analysis.py) | Contract analysis from Azure File Storage / SharePoint |
-| [`@billwhalen/sales-assistant`](agents/@billwhalen/sales-assistant.py) | Natural language sales CRM assistant |
-| [`@billwhalen/email-drafting`](agents/@billwhalen/email-drafting.py) | Email drafting with Power Automate delivery |
-
-### 📊 Productivity — Content & Demos
-
-| Package | Description |
-|---------|-------------|
-| [`@billwhalen/powerpoint-generator`](agents/@billwhalen/powerpoint-generator.py) | Template-based PowerPoint generation (Microsoft design) |
-| [`@billwhalen/architecture-diagram`](agents/@billwhalen/architecture-diagram.py) | Architecture diagram visualization (Mermaid, SVG, ASCII) |
-| [`@billwhalen/scripted-demo`](agents/@billwhalen/scripted-demo.py) | Interactive demo automation from JSON scripts |
-| [`@billwhalen/demo-script-generator`](agents/@billwhalen/demo-script-generator.py) | Generates demo script JSON files for ScriptedDemoAgent |
-
-### 🛠️ Dev Tools
-
-| Package | Description |
-|---------|-------------|
-| [`@rapp/basic-agent`](agents/@rapp/basic-agent.py) | Base class — every agent inherits from this |
-
-### 🏭 Industry Agent Stacks — @aibast-agents-library
-
-104 industry agent **templates** across 14 verticals, sourced from [AI-Agent-Templates](https://kody-w.github.io/AI-Agent-Templates/). These are starting points — each template provides the structure, prompts, and logic for a business function, but must be customized with AI (e.g., via the RAPP pipeline or Copilot) to fit your specific data sources, business rules, and integrations before deployment.
-
-| Vertical | Agents | Examples |
-|----------|--------|----------|
-| B2B Sales | 23 | Account intelligence, deal progression, proposal generation, win/loss analysis |
-| General | 22 | AI customer assistant, CRM data seeder, sales coach, triage bot |
-| Financial Services | 10 | Claims processing, fraud detection, loan origination, portfolio rebalancing |
-| B2C Sales | 7 | Cart abandonment, loyalty rewards, omnichannel engagement, personalized shopping |
-| Energy | 5 | Asset maintenance, emission tracking, field service dispatch |
-| Federal Government | 5 | Acquisition support, grants oversight, regulatory compliance |
-| Healthcare | 5 | Care gap closure, clinical notes, patient intake, prior authorization |
-| Manufacturing | 5 | Inventory rebalancing, maintenance scheduling, production optimization |
-| Professional Services | 5 | Client health score, contract risk review, resource utilization |
-| Retail / CPG | 5 | Inventory visibility, personalized marketing, supply chain alerts |
-| State & Local Government | 5 | Building permits, citizen services, FOIA requests, grants management |
-| Software / Digital Products | 5 | Competitive intel, customer onboarding, license renewal, support tickets |
-| Human Resources | 1 | Ask HR |
-| IT Management | 1 | IT Helpdesk |
+Promotion path: **Frontier → Community → Verified → Official**
 
 ---
 
-## How It Works
-
-### Package Structure
-
-Every agent is a **single `.py` file** with a `__manifest__` dict embedded inside. No separate manifest.json. No README.md. One file = one agent.
+## Repo Structure
 
 ```
-agents/@publisher/agent-slug.py    ← that's the whole package
+RAR/
+├── agents/
+│   ├── @rapp/basic-agent.py          # Base class (official)
+│   ├── @kody/                         # Core agents (verified + community)
+│   │   ├── rar_remote_agent.py        # Registry client
+│   │   ├── agent_workbench_agent.py   # Build/validate/test agents
+│   │   ├── context_memory.py          # Memory recall
+│   │   ├── github_agent_library.py    # Agent discovery
+│   │   └── manage_memory.py           # Memory storage
+│   ├── @borg/cardsmith_agent.py       # Howard's card system
+│   ├── @discreetRappers/              # 13 agents — pipeline, sales, integrations
+│   └── @aibast-agents-library/        # 104 industry templates across 14 verticals
+├── index.html                         # The Agent Store (single file, zero dependencies)
+├── registry.json                      # Auto-generated agent index (CI builds on push)
+├── build_registry.py                  # AST-based manifest extractor
+├── CONSTITUTION.md                    # Governing document
+├── rar.config.json                    # Federation and feature config
+├── scripts/process_issues.py          # Issues-as-API processor
+└── .github/workflows/                 # CI automation
 ```
 
-The `__manifest__` inside each file declares name, version, tags, dependencies, and required env vars. The registry builder reads it via AST parsing — no imports, no execution.
+---
 
-### Namespaces
+## Federation
 
-Publishers own their namespace forever. No collisions at any scale.
+RAR is a **GitHub template repository**. Clone it to run your own agent store. Your instance can:
 
-```
-@kody/context-memory         # Kody's memory agent
-@billwhalen/dynamics-crud    # Bill's Dynamics agent
-@acme-corp/invoice-parser    # Acme Corp's invoice agent
-@yourname/your-agent         # Your agent
-```
+- Host agents under your own namespace
+- Submit agents upstream to the main store
+- Pull agents from the main store
+- Operate independently with `"allow_upstream_sync": false`
 
-### Quality Tiers
-
-| Tier | Badge | Meaning |
-|------|-------|---------|
-| `official` | 🔷 | Maintained by RAPP core team |
-| `verified` | ✅ | Reviewed, tested, follows standards |
-| `community` | 🌐 | Submitted by community, basic validation |
-
-### Discovery
-
-- **`registry.json`** — auto-generated index of all agents (built by CI on every push)
-- **`skill.md`** — machine-readable interface for AI agents to use this repo autonomously
-- **Tags** — every agent has searchable tags for keyword discovery
+See [CONSTITUTION.md — Article XIV](CONSTITUTION.md#article-xiv--federation) for details.
 
 ---
 
 ## Contributing
 
-See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the full guide. Quick version:
+The fastest path:
+
+1. Open the [Agent Store](https://kody-w.github.io/RAR/)
+2. Go to **Workbench** — write or paste your agent
+3. Click **Validate** — fix any errors
+4. Switch to **Submit** — publish
+
+Or via PR:
 
 ```bash
-# 1. Fork & clone
-git clone https://github.com/YOUR_USERNAME/RAPP-Agent-Repo.git
-
-# 2. Create your agent package
-mkdir -p agents/@yourname/my-agent
-# Add: agent.py, manifest.json, README.md
-
-# 3. Validate
-python build_registry.py
-
-# 4. PR
-git push && open PR
+1. Fork this repo
+2. Create: agents/@yourname/my_agent.py
+3. Include: __manifest__ + BasicAgent subclass + perform()
+4. Validate: python build_registry.py
+5. PR: Open pull request
 ```
+
+Read the full rules in [CONSTITUTION.md](CONSTITUTION.md).
 
 ---
 
-## Architecture
-
-```
-RAPP-Agent-Repo/
-├── agents/
-│   ├── @kody/                    # Publisher namespace
-│   │   ├── context-memory.py     # Single-file agent (manifest embedded)
-│   │   ├── manage-memory.py
-│   │   └── github-agent-library.py
-│   ├── @billwhalen/
-│   │   ├── dynamics-crud.py
-│   │   ├── rapp-pipeline.py
-│   │   └── ... (13 agents)
-│   ├── @rapp/
-│   │   └── basic-agent.py        # Base class
-│   └── @aibast-agents-library/
-│       ├── b2b_sales_stacks/     # 23 agents across 5 stacks
-│       ├── b2c_sales_stacks/     # 7 agents
-│       ├── energy_stacks/        # 5 agents
-│       ├── financial_services_stacks/  # 10 agents
-│       ├── general_stacks/       # 22 agents
-│       ├── healthcare_stacks/    # 5 agents
-│       ├── manufacturing_stacks/ # 5 agents
-│       ├── ... (14 verticals, 104 agents total)
-│       └── templates/            # BasicAgent base class for stacks
-├── registry.json                 # Auto-generated from __manifest__ dicts (CI)
-├── skill.md                      # Machine-readable AI interface
-├── build_registry.py             # Scans .py files, extracts __manifest__, builds registry
-├── CONTRIBUTING.md               # How to submit agents
-├── CONSTITUTION.md               # Governing document — single file principle, rules
-└── .github/workflows/            # CI: auto-build registry on push
-```
-
----
-
-## Compatibility
-
-- **Python**: 3.11+ (required for Azure Functions v4)
-- **Runtime**: [CommunityRAPP](https://github.com/kody-w/CommunityRAPP)
-- **AI Model**: Azure OpenAI (GPT-4o, GPT-5.1+)
-
----
-
-## Contributors
+## Publishers
 
 | Publisher | Agents | Focus |
 |-----------|--------|-------|
-| **@aibast-agents-library** | 104 | Industry vertical agent stacks (14 verticals) |
-| **@billwhalen** | 13 | Pipeline, integrations, productivity |
-| **@kody** | 3 | Core memory, agent library |
-| **@rapp** | 1 | Base classes |
+| **@aibast-agents-library** | 104 | Industry vertical templates (14 verticals) |
+| **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
+| **@kody** | 5 | Core infrastructure, registry client, workbench |
+| **@borg** | 1 | CardSmith (trading cards for agents) |
+| **@rapp** | 1 | BasicAgent base class |
 
 ---
 
-<p align="center">
-  <strong>Build an agent. Namespace it. Share it with the world.</strong>
-</p>
+## License
+
+[MIT](LICENSE)
+
+---
+
+*Single file. Single principle. Single source of truth.*

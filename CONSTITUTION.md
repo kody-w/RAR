@@ -10,6 +10,8 @@ This repository is the **open agent registry** for the RAPP ecosystem. It is a s
 
 **One principle above all: Single File Agent.** Every agent is one `.py` file. The manifest lives inside it. The docstring is the documentation. There is nothing else.
 
+The registry ships with a **zero-install web store** (`index.html`) that lets anyone browse, collect, build, and share agents from a browser — including offline.
+
 ---
 
 ## Article II — The Single File Principle
@@ -37,7 +39,7 @@ agents/@yourname/my_agent.py    ← this is the entire package
 - Subdirectory per agent — the file IS the package
 - Multi-file agents — if it can't fit in one file, split it into two agents
 
-**Why:** A single file can be fetched with one HTTP GET, installed with one file write, read by an LLM in one context window, and understood by a human in one sitting. This is the competitive advantage.
+**Why:** A single file can be fetched with one HTTP GET, installed with one file write, read by an LLM in one context window, understood by a human in one sitting, and printed on a trading card. This is the competitive advantage.
 
 ---
 
@@ -45,7 +47,7 @@ agents/@yourname/my_agent.py    ← this is the entire package
 
 ### Publishers
 
-Every agent lives under a publisher namespace: `@publisher/agent-slug.py`
+Every agent lives under a publisher namespace: `@publisher/agent_slug.py`
 
 - **`@yourname`** = your GitHub username. You own it forever.
 - **`@orgname`** = your GitHub org. The org owns it.
@@ -72,7 +74,7 @@ Every agent file must contain a `__manifest__` dict. The registry builder extrac
 ```python
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@yourname/my-agent",
+    "name": "@yourname/my_agent",
     "version": "1.0.0",
     "display_name": "MyAgent",
     "description": "What this agent does in one sentence.",
@@ -90,14 +92,14 @@ __manifest__ = {
 | Field | Rules |
 |-------|-------|
 | `schema` | Always `"rapp-agent/1.0"` |
-| `name` | `@publisher/slug` — must match file path |
+| `name` | `@publisher/slug` — must match file path, underscores only |
 | `version` | Semver: `MAJOR.MINOR.PATCH` |
 | `display_name` | Must match `self.name` in the class |
 | `description` | One sentence. Searchable. |
 | `author` | Your name (not your namespace) |
 | `tags` | List of lowercase keywords for search |
-| `category` | One of: `core`, `pipeline`, `integrations`, `productivity`, `devtools` |
-| `quality_tier` | `experimental`, `community` (default), `verified`, or `official` |
+| `category` | One of the categories defined in Article VI |
+| `quality_tier` | `frontier`, `community` (default), `verified`, or `official` |
 | `requires_env` | List of env var names the agent needs. Empty = no config needed. |
 | `dependencies` | Other `@publisher/slug` agents this depends on |
 
@@ -105,12 +107,14 @@ __manifest__ = {
 
 ## Article V — Quality Tiers
 
-| Tier | Who Sets It | Meaning |
-|------|-------------|---------|
-| `experimental` | Author on submission | Work-in-progress or prototype. May be unstable, incomplete, or change without notice. |
-| `community` | Automatic on submission (default) | Passes `build_registry.py` validation. Not reviewed. |
-| `verified` | Repo maintainer | Reviewed, tested, follows standards, no security issues. |
-| `official` | RAPP core team | Maintained by core team. Guaranteed compatibility. SLA on bugs. |
+| Tier | Display Name | Who Sets It | Meaning |
+|------|-------------|-------------|---------|
+| `experimental` | **Frontier** | Author on submission | Pushing the edge. May be evolving rapidly. |
+| `community` | **Community** | Automatic on submission (default) | Passes `build_registry.py` validation. Not reviewed. |
+| `verified` | **Verified** | Repo maintainer | Reviewed, tested, follows standards, no security issues. |
+| `official` | **Official** | RAPP core team | Maintained by core team. Guaranteed compatibility. SLA on bugs. |
+
+> **Note:** The internal tier value is `experimental` but the UI displays it as **Frontier**. Use `"quality_tier": "experimental"` in manifests.
 
 ### Submittable tiers
 
@@ -119,17 +123,17 @@ Only `experimental` and `community` tiers can be used when submitting agents. Th
 ### Promotion path
 
 ```
-experimental → community → verified → official
+frontier → community → verified → official
 ```
 
-1. Submit with `"quality_tier": "experimental"` → visible with warning banner, not counted in main stats
+1. Submit with `"quality_tier": "experimental"` → visible as Frontier, not counted in main stats
 2. Author stabilizes, bumps tier to `community` in a new version → standard submission
 3. Maintainer reviews → tests pass → real users confirm it works → promoted to `verified`
 4. Core team adopts maintenance → promoted to `official`
 
-### Experimental tier requirements
+### Frontier tier requirements
 
-Agents submitted as `experimental` must still:
+Agents submitted as `experimental` (Frontier) must still:
 - Contain a valid `__manifest__` with all required fields
 - Parse without syntax errors
 - Follow the single-file principle
@@ -157,8 +161,12 @@ Agents can be demoted if:
 | `core` | Provide fundamental capabilities — memory, orchestration, agent management |
 | `pipeline` | Build, generate, transpile, or deploy other agents |
 | `integrations` | Connect to external systems — Dynamics 365, SharePoint, Salesforce, ServiceNow |
-| `productivity` | Create content or automate tasks — PowerPoint, diagrams, email, demos |
-| `devtools` | Help developers — base classes, testing utilities, scaffolding |
+| `productivity` | Create content or automate tasks — PowerPoint, diagrams, email, demos, cards |
+| `devtools` | Help developers — base classes, testing utilities, scaffolding, workbench |
+| `general` | Agents that don't fit neatly into the above — or span multiple categories |
+
+Industry-specific categories are also supported:
+`b2b_sales`, `b2c_sales`, `healthcare`, `financial_services`, `manufacturing`, `energy`, `federal_government`, `slg_government`, `human_resources`, `it_management`, `professional_services`, `retail_cpg`, `software_digital_products`
 
 New categories can be proposed via PR to this file.
 
@@ -185,13 +193,54 @@ Bump the version in `__manifest__` when you update. The registry tracks the late
 3. **Never hand-edited** — if you edit it manually, CI will overwrite it
 4. **The source of truth** for programmatic discovery and installation
 
-### How AI agents use it
+### How agents are discovered
 
-The `GitHubAgentLibraryManager` agent in CommunityRAPP fetches `registry.json` and `skill.md` to autonomously browse, search, and install agents — no human repo visit needed.
+| Method | How |
+|--------|-----|
+| **Web Store** | Open `index.html` — browse, search, filter, vote |
+| **Brainstem** | `@kody/rar_remote_agent` fetches `registry.json` and operates autonomously |
+| **Direct fetch** | `curl https://raw.githubusercontent.com/kody-w/RAR/main/registry.json` |
+| **Local-first** | Drag `.py` files into the web store — they're stored in IndexedDB, no upload |
 
 ---
 
-## Article IX — Security & Trust
+## Article IX — The Agent Store
+
+The registry ships with a single-file web store (`index.html`) that provides:
+
+### Browse & Discovery
+- Search, filter by category, sort by votes/rating/name
+- Agent detail modals with source code viewer
+- Community voting and reviews via GitHub Issues
+
+### Agent Cards
+Every agent renders as a collectible card with two skins:
+
+- **Business** — Clean professional card. Publisher, description, tier badge, version.
+- **Holo** — Trading card with generative art, mana pips, creature type, abilities, power/toughness stats. Inspired by `@borg/cardsmith_agent` by Howard.
+
+### Decks
+Collect agents into named decks. "Client Demo", "Sales Stack", "My Builds". Share decks via URL. Pre-populated starter decks on first visit.
+
+### Presentation Mode
+Turn any deck into a full-screen slideshow. Arrow keys navigate. Business slides for client demos, Holo slides for the art treatment.
+
+### Workbench
+Write agents directly in the browser:
+- Start from templates (blank or API)
+- Real-time validation against this Constitution
+- Preview your agent as a card
+- Download as `.py` or add to local collection
+
+### Local-First
+Drag and drop `.py` files into the browser. They're stored in IndexedDB on your device and appear alongside cloud agents. No upload, no server. Works offline, works air-gapped.
+
+### Guided Tour
+First-time visitors get an 11-step walkthrough of every feature. Replay anytime via the "Tour" button in the header.
+
+---
+
+## Article X — Security & Trust
 
 ### Agents MUST NOT:
 
@@ -212,9 +261,21 @@ The `GitHubAgentLibraryManager` agent in CommunityRAPP fetches `registry.json` a
 
 All PRs are reviewed. Agents that violate security rules are rejected. Repeat offenders lose publishing rights.
 
+### Template guard
+
+Unmodified starter templates (containing `@your-username/`) are rejected at three layers: browser validation, frontend submission, and backend `process_issues.py`.
+
 ---
 
-## Article X — Contributing
+## Article XI — Contributing
+
+### Submit an agent (via the Web Store)
+
+1. Open the **Workbench** tab — write or paste your agent
+2. Click **Validate** — fix any errors
+3. Click **Preview Card** — see how it looks
+4. Switch to the **Submit** tab — paste your code and submit
+5. GitHub Actions validates, writes the file, and closes the Issue
 
 ### Submit an agent (via PR)
 
@@ -228,7 +289,7 @@ All PRs are reviewed. Agents that violate security rules are rejected. Repeat of
 
 ### Submit an agent (via Issues-as-API)
 
-The RAPP Agent Store frontend allows direct submission through GitHub Issues. The frontend creates an Issue with a JSON payload:
+The store frontend creates a GitHub Issue with a JSON payload:
 
 ```json
 {
@@ -260,7 +321,7 @@ GitHub Actions processes the Issue, validates the manifest, writes the file, and
 
 ---
 
-## Article XI — Governance
+## Article XII — Governance
 
 ### Maintainers
 
@@ -278,7 +339,7 @@ Maintainers can:
 
 ---
 
-## Article XII — Compatibility
+## Article XIII — Compatibility
 
 All agents in this registry target:
 
@@ -291,7 +352,7 @@ Agents that require a specific CommunityRAPP version should declare it in their 
 
 ---
 
-## Article XIII — Federation
+## Article XIV — Federation
 
 RAR can be used as a **GitHub template repository**. Instances cloned from the template operate as independent agent stores that can optionally federate back to the main registry.
 
@@ -339,7 +400,7 @@ Federation behavior is controlled by `rar.config.json`:
 
 ---
 
-## Article XIV — Amendments
+## Article XV — Amendments
 
 This constitution can be amended by:
 
@@ -351,4 +412,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. The single file is the law.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, Holo cards, and Frontier tier. The single file is the law.*
