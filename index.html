@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR — RAPP Agent Registry</title>
-<meta name="description" content="The open single-file agent ecosystem. Browse, vote, review, and share AI agents.">
+<title>RAR — The Open Agent.py Ecosystem</title>
+<meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
 <style>
   :root {
     --bg: #0d1117;
@@ -957,7 +957,7 @@
     <div class="toolbar">
       <div class="search-box">
         <span class="si">&#128269;</span>
-        <input type="text" id="search" placeholder="Search agents..." oninput="renderAgents()">
+        <input type="text" id="search" placeholder="What are you looking for?" oninput="renderAgents()">
         <span class="kbd">/</span>
       </div>
       <select class="sort-select" id="sort-select" onchange="renderAgents()">
@@ -986,17 +986,18 @@
 
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
-    <h2 style="margin-bottom:4px">Agent Leaderboard</h2>
-    <p style="color:var(--text-dim);margin-bottom:20px">Ranked by community votes and reviews</p>
+    <h2 style="margin-bottom:4px">Community Favorites</h2>
+    <p style="color:var(--text-dim);margin-bottom:20px">The agents people love most — ranked by votes and reviews</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
   <!-- Agent Cards -->
   <div class="panel" id="panel-cards">
     <div class="cards-header">
-      <div class="sub">Brainstem Trading Card Collection</div>
+      <div class="sub">Every agent tells a story</div>
       <h2>AGENT CARDS</h2>
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();showModal('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
+      <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">One file, one purpose<br>A thousand agents waiting<br>Which deck will you build?</p>
     </div>
     <div class="deck-bar" id="deck-bar">
       <select id="deck-select" onchange="switchDeck(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;min-width:140px;cursor:pointer"></select>
@@ -1033,7 +1034,7 @@
     <div style="text-align:center;margin-bottom:16px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Build &bull; Validate &bull; Preview</div>
       <h2 style="font-size:1.4rem;font-weight:800">AGENT WORKBENCH</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:600px;margin:8px auto 0">Write and test single-file agents directly in your browser. No install needed.</p>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:600px;margin:8px auto 0">Write your agent right here. Start from a template, validate as you go, preview it as a card. No install, no setup — just code.</p>
     </div>
     <div class="wb-actions" style="justify-content:center">
       <button onclick="wbLoadTemplate('blank')">Blank Template</button>
@@ -1074,7 +1075,7 @@
 
       <div class="tier-card t-experimental">
         <h3><span class="tier tier-experimental">&#9878; FRONTIER</span> Preview Tier</h3>
-        <div class="subtitle">For work-in-progress agents, prototypes, and alpha-quality experiments. Use at your own risk.</div>
+        <div class="subtitle">For agents pushing the edge. Ship early, iterate fast, break new ground.</div>
         <ul>
           <li>Valid <code>__manifest__</code> with all required fields</li>
           <li>Follows the single-file <code>agent.py</code> pattern</li>
@@ -1088,7 +1089,7 @@
 
       <div class="tier-card t-community">
         <h3><span class="tier tier-community">COMMUNITY</span> Open Tier</h3>
-        <div class="subtitle">Anyone with a GitHub account can submit. The starting point for all agents.</div>
+        <div class="subtitle">The starting line. Submit your agent and join the community.</div>
         <ul>
           <li>Valid <code>__manifest__</code> with all required fields</li>
           <li>Follows the single-file <code>agent.py</code> pattern</li>
@@ -1107,7 +1108,7 @@
           </span>
           Quality Seal
         </h3>
-        <div class="subtitle">Earned through community review and maintainer audit. The gold standard.</div>
+        <div class="subtitle">Reviewed by real humans. Tested in production. The ones you can count on.</div>
         <ul>
           <li>All Community tier requirements</li>
           <li>Extends <code>BasicAgent</code> properly with correct <code>perform()</code> signature</li>
@@ -1126,7 +1127,7 @@
 
       <div class="tier-card t-official">
         <h3><span class="tier tier-official">OFFICIAL</span> Core Agents</h3>
-        <div class="subtitle">Maintained by the RAR/RAPP core team. The foundation of the ecosystem.</div>
+        <div class="subtitle">Built and maintained by the core team. The bedrock of the ecosystem.</div>
         <ul>
           <li>All Verified tier requirements</li>
           <li>Maintained by core team with guaranteed SLA</li>
@@ -1153,8 +1154,8 @@
   <!-- Submit -->
   <div class="panel" id="panel-submit">
     <div class="submit-container">
-      <h2>Submit a Community Agent</h2>
-      <p>Paste your single-file agent.py below. It must include a valid <code>__manifest__</code>. Your agent publishes under <code>@your-github-username/</code>.</p>
+      <h2>Share Your Agent</h2>
+      <p>Paste your agent code below. Every agent needs a <code>__manifest__</code> — the templates have one ready to go. Your agent gets its own home under <code>@your-github-username/</code>.</p>
 
       <div class="template-picker">
         <label>Start from a template</label>
@@ -1221,6 +1222,7 @@ class MyAgent(BasicAgent):
     <div class="roadmap-section">
       <h2>Roadmap</h2>
       <p>RAR is an agent workbench. Everything serves one purpose: make it trivially easy to build, share, and run single-file AI agents.</p>
+      <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">Seeds planted today<br>Will grow into tomorrow's<br>Agent forest deep</p>
 
       <div class="rm-legend">
         <span><span class="dot" style="background:var(--green)"></span> Shipped</span>
@@ -2348,7 +2350,7 @@ function wbValidate() {
   const mEl = document.getElementById('wb-manifest')
 
   if (!code.trim()) {
-    el.innerHTML = '<span class="warn">No code to validate. Paste an agent.py or load a template.</span>'
+    el.innerHTML = '<span class="warn">Paste some code or pick a template above to get started.</span>'
     mEl.innerHTML = 'No manifest found.'
     return null
   }
@@ -2462,9 +2464,9 @@ function wbValidate() {
     warnings.forEach(w => html += `<span class="warn">  ! ${w}</span>\n`)
   }
   if (!errors.length && !warnings.length) {
-    html += '<span class="ok">\u2713 All clear. This agent is ready to publish.</span>'
+    html += '<span class="ok">\u2713 Looking good. Your agent is ready to share with the world.</span>'
   } else if (!errors.length) {
-    html += '\n<span class="ok">No errors — warnings are suggestions, not blockers.</span>'
+    html += '\n<span class="ok">No errors found. The warnings below are just suggestions — nothing blocking.</span>'
   } else {
     html += '\n<span class="err">Fix errors before publishing.</span>'
   }
@@ -3344,7 +3346,7 @@ function renderCards() {
   });
   document.getElementById('deck-count').textContent = deck.size;
   if (!filtered.length) {
-    document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>No cards match your filter</h3><p style="color:var(--text-dim);margin-top:8px">Try a different filter, or switch to <strong>All</strong> to see every agent as a card.</p></div>';
+    document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>Nothing here yet</h3><p style="color:var(--text-dim);margin-top:8px">Try a different filter, or go back to <strong>All</strong> to see everything.</p></div>';
     return;
   }
   document.getElementById('cards-grid').innerHTML = filtered.map(agentToCard).join('');
@@ -3607,7 +3609,7 @@ const TOUR_STEPS = [
   {
     target: '.logo',
     title: 'Welcome to the RAPP Agent Store',
-    text: 'This is the open registry for single-file AI agents. Every agent is one .py file — no packages, no dependencies, no complexity. Let me show you around.',
+    text: 'This is the open registry for single-file AI agents. Every agent is one .py file — simple enough to read, powerful enough to automate anything. Let me show you around.',
     tab: 'browse'
   },
   {
@@ -3667,7 +3669,7 @@ const TOUR_STEPS = [
   {
     target: '[data-tab="roadmap"]',
     title: 'See What\'s Coming',
-    text: 'The roadmap shows where this is heading — agent workbench, sneakernet sharing, code signing, and more. You\'re looking at the beginning of an ecosystem. Welcome aboard.',
+    text: 'The roadmap shows where we\'re headed. This is early — you\'re one of the first people here. What you build today shapes what this becomes.',
     tab: 'roadmap'
   }
 ];
