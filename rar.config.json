@@ -1,0 +1,16 @@
+{
+  "schema": "rar-config/1.0",
+  "role": "main",
+  "owner": "kody-w",
+  "repo": "RAR",
+  "upstream": null,
+  "federation": {
+    "accept_submissions": true,
+    "allow_upstream_sync": false
+  },
+  "experimental_features": {
+    "show_experimental_agents": true,
+    "experimental_filter_pill": true,
+    "labs_indicator": false
+  }
+}

@@ -1,0 +1,941 @@
+"""
+Borg Agent — Assimilates knowledge from GitHub repos and web URLs.
+
+"We are the Borg. Your technological distinctiveness will be added to our own."
+
+Give it a GitHub URL or web link and it will inspect the codebase, analyze the
+tech stack, and return a structured report. HOLO then determines what to use
+as base functionality and suggests creative extensions.
+
+Usage: "Borg this https://github.com/owner/repo"
+"""
+
+import json
+import os
+import re
+import threading
+import time
+import urllib.request
+import urllib.error
+import base64
+from datetime import datetime, timezone
+from html.parser import HTMLParser
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+try:
+    from basic_agent import BasicAgent
+except ModuleNotFoundError:
+    from agents.basic_agent import BasicAgent
+
+# History persistence
+_BRAINSTEM_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_HISTORY_PATH = os.path.join(_BRAINSTEM_DIR, ".brainstem_data", "borg_history.json")
+
+# Dashboard server state
+_dashboard_server = None
+_dashboard_lock = threading.Lock()
+_DASHBOARD_PORT = 7074
+
+
+def _history_path():
+    return _HISTORY_PATH
+
+
+def _load_history():
+    path = _history_path()
+    if not os.path.exists(path):
+        return []
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def _save_history(history):
+    path = _history_path()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(history, f, indent=2)
+
+
+def _record_assimilation(url, report):
+    """Append an assimilation to the history log."""
+    history = _load_history()
+    entry = {
+        "id": len(history) + 1,
+        "url": url,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "source": report.get("source", "unknown"),
+    }
+    if report.get("source") == "github":
+        repo = report.get("repo", {})
+        entry["name"] = repo.get("name", "")
+        entry["description"] = repo.get("description", "")
+        entry["language"] = repo.get("language", "")
+        entry["stars"] = repo.get("stars", 0)
+        entry["tech_stack"] = report.get("tech_stack", [])
+        entry["total_files"] = report.get("total_files", 0)
+    else:
+        entry["name"] = report.get("title", url)
+        entry["description"] = report.get("description", "")
+        entry["tech_hints"] = report.get("tech_hints", [])
+    history.append(entry)
+    _save_history(history)
+
+
+def _save_report_md(url, report):
+    """Save a Borg assimilation report as a .md file in docs/."""
+    docs_dir = os.path.join(_BRAINSTEM_DIR, "docs")
+    os.makedirs(docs_dir, exist_ok=True)
+
+    # Generate filename from URL
+    slug = re.sub(r'[^a-zA-Z0-9]+', '-', url.split("//")[-1]).strip("-")[:60]
+    filename = f"borg-{slug}.md"
+    filepath = os.path.join(docs_dir, filename)
+
+    lines = []
+    source = report.get("source", "unknown")
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    if source == "github":
+        repo = report.get("repo", {})
+        lines.append(f"# Borg Report: {repo.get('name', url)}")
+        lines.append("")
+        lines.append(f"**Assimilated:** {ts}")
+        lines.append(f"**URL:** [{url}]({url})")
+        lines.append(f"**Description:** {repo.get('description', '')}")
+        lines.append(f"**Language:** {repo.get('language', '')} | "
+                      f"**Stars:** {repo.get('stars', 0)} | "
+                      f"**Forks:** {repo.get('forks', 0)} | "
+                      f"**License:** {repo.get('license', '')}")
+        lines.append("")
+        tech = report.get("tech_stack", [])
+        if tech:
+            lines.append(f"**Tech Stack:** {', '.join(tech)}")
+        langs = report.get("languages", {})
+        if langs:
+            lines.append(f"**Languages:** {', '.join(f'{k} ({v:,} bytes)' for k, v in langs.items())}")
+        lines.append(f"**Total Files:** {report.get('total_files', 0)}")
+        lines.append("")
+        lines.append("## Structure")
+        lines.append("```")
+        for item in report.get("structure", [])[:30]:
+            lines.append(item)
+        lines.append("```")
+        lines.append("")
+        key_files = report.get("key_files", [])
+        if key_files:
+            lines.append("## Key Files")
+            for f in key_files:
+                lines.append(f"- `{f}`")
+            lines.append("")
+        readme = report.get("readme_preview", "")
+        if readme and readme != "(no README found)":
+            lines.append("## README Preview")
+            lines.append("")
+            lines.append(readme[:2000])
+            lines.append("")
+    else:
+        title = report.get("title", url)
+        lines.append(f"# Borg Report: {title}")
+        lines.append("")
+        lines.append(f"**Assimilated:** {ts}")
+        lines.append(f"**URL:** [{url}]({url})")
+        desc = report.get("description", "")
+        if desc:
+            lines.append(f"**Description:** {desc}")
+        hints = report.get("tech_hints", [])
+        if hints:
+            lines.append(f"**Tech Hints:** {', '.join(hints)}")
+        lines.append("")
+        content = report.get("content_preview", "")
+        if content:
+            lines.append("## Content Preview")
+            lines.append("")
+            lines.append(content[:2000])
+            lines.append("")
+
+    lines.append("---")
+    lines.append("")
+    lines.append("## Assimilation Plan")
+    lines.append("")
+    lines.append("### Base Assimilation")
+    lines.append("*(Analyze the above and identify core patterns to absorb)*")
+    lines.append("")
+    lines.append("### Creative Extensions")
+    lines.append("1. ")
+    lines.append("2. ")
+    lines.append("3. ")
+    lines.append("4. ")
+    lines.append("5. ")
+    lines.append("")
+    lines.append(f"*Borged on {ts}. Fill in the plan above or ask HOLO to analyze.*")
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+    return filepath
+
+
+# ---------------------------------------------------------------------------
+# Simple HTML text extractor (no external deps)
+# ---------------------------------------------------------------------------
+
+class _TextExtractor(HTMLParser):
+    """Minimal HTML-to-text extractor."""
+
+    _SKIP_TAGS = {"script", "style", "noscript", "svg", "path"}
+
+    def __init__(self):
+        super().__init__()
+        self._pieces = []
+        self._skip_depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self._SKIP_TAGS:
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag in self._SKIP_TAGS and self._skip_depth > 0:
+            self._skip_depth -= 1
+
+    def handle_data(self, data):
+        if self._skip_depth == 0:
+            text = data.strip()
+            if text:
+                self._pieces.append(text)
+
+    def get_text(self):
+        return "\n".join(self._pieces)
+
+
+# ---------------------------------------------------------------------------
+# Tech stack detection patterns
+# ---------------------------------------------------------------------------
+
+_TECH_MARKERS = {
+    "package.json": "Node.js / JavaScript",
+    "tsconfig.json": "TypeScript",
+    "requirements.txt": "Python",
+    "setup.py": "Python",
+    "pyproject.toml": "Python",
+    "Pipfile": "Python (Pipenv)",
+    "Cargo.toml": "Rust",
+    "go.mod": "Go",
+    "pom.xml": "Java (Maven)",
+    "build.gradle": "Java/Kotlin (Gradle)",
+    "Gemfile": "Ruby",
+    "composer.json": "PHP",
+    "Dockerfile": "Docker",
+    "docker-compose.yml": "Docker Compose",
+    "docker-compose.yaml": "Docker Compose",
+    ".github/workflows": "GitHub Actions CI/CD",
+    "Makefile": "Make",
+    "CMakeLists.txt": "C/C++ (CMake)",
+    "terraform": "Terraform",
+    "serverless.yml": "Serverless Framework",
+    "azuredeploy.json": "Azure ARM Template",
+    "bicep": "Azure Bicep",
+    "helm": "Kubernetes Helm",
+    "k8s": "Kubernetes",
+    ".env.example": "Environment config",
+    "next.config.js": "Next.js",
+    "nuxt.config.js": "Nuxt.js",
+    "vite.config": "Vite",
+    "webpack.config": "Webpack",
+    "tailwind.config": "Tailwind CSS",
+    "flask": "Flask",
+    "fastapi": "FastAPI",
+    "django": "Django",
+    "express": "Express.js",
+}
+
+
+def _detect_tech_stack(file_list):
+    """Detect technologies from a list of file paths."""
+    found = set()
+    for filepath in file_list:
+        name = filepath.lower().rstrip("/")
+        basename = os.path.basename(name)
+        for marker, tech in _TECH_MARKERS.items():
+            if marker.lower() in name or marker.lower() == basename:
+                found.add(tech)
+    return sorted(found)
+
+
+# ---------------------------------------------------------------------------
+# GitHub URL parsing
+# ---------------------------------------------------------------------------
+
+_GITHUB_RE = re.compile(
+    r"github\.com/([^/]+)/([^/]+?)(?:\.git)?(?:/(?:tree|blob)/([^/]+)(?:/(.+))?)?/?$"
+)
+
+
+def _parse_github_url(url):
+    """Extract (owner, repo, branch, path) from a GitHub URL."""
+    m = _GITHUB_RE.search(url)
+    if not m:
+        return None
+    owner, repo, branch, path = m.group(1), m.group(2), m.group(3), m.group(4)
+    return owner, repo, branch or "main", path or ""
+
+
+# ---------------------------------------------------------------------------
+# HTTP helpers
+# ---------------------------------------------------------------------------
+
+def _fetch_json(url, token=None):
+    """Fetch a URL and return parsed JSON, or None on failure."""
+    req = urllib.request.Request(url, headers={"Accept": "application/vnd.github.v3+json"})
+    if token:
+        req.add_header("Authorization", f"token {token}")
+    req.add_header("User-Agent", "HOLO-Borg-Agent/1.0")
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.URLError, json.JSONDecodeError, OSError):
+        return None
+
+
+def _fetch_text(url):
+    """Fetch a URL and return text content, or None on failure."""
+    req = urllib.request.Request(url)
+    req.add_header("User-Agent", "HOLO-Borg-Agent/1.0")
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return resp.read().decode("utf-8", errors="replace")
+    except (urllib.error.URLError, OSError):
+        return None
+
+
+# ---------------------------------------------------------------------------
+# Dashboard — serves Borg assimilation history as a web page
+# ---------------------------------------------------------------------------
+
+_DASHBOARD_HTML = """<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>KIM — Borg Assimilation Log</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0a0a2e;color:#c0c0c0;font-family:'Segoe UI','Courier New',monospace;padding:30px 40px}
+  h1{color:#00ff88;font-size:2.2em;margin-bottom:5px;letter-spacing:-0.5px}
+  .subtitle{color:#666;margin-bottom:30px;font-size:0.95em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px}
+  .card{background:#111;border:1px solid #333;border-radius:12px;padding:20px;transition:all 0.3s;cursor:pointer;text-decoration:none;display:block;color:inherit}
+  .card:hover{border-color:#00ff88;transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,255,136,0.1)}
+  .card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .card-name{color:#00ccff;font-size:1.1em;font-weight:bold;word-break:break-word}
+  .card-badge{padding:2px 8px;border-radius:4px;font-size:0.7em;flex-shrink:0;margin-left:10px;font-weight:bold;text-transform:uppercase}
+  .badge-github{background:#00ff88;color:#0a0a2e}
+  .badge-web{background:#ffcc00;color:#0a0a2e}
+  .badge-local{background:#ff6b9d;color:#0a0a2e}
+  .badge-kit{background:#bf5af2;color:#fff}
+  .card-desc{color:#999;font-size:0.88em;margin:8px 0;line-height:1.5}
+  .card-url{color:#555;font-size:0.78em;word-break:break-all;margin-top:4px}
+  .meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .tag{background:#1a1a3e;padding:3px 8px;border-radius:4px;font-size:0.72em}
+  .tag-tech{color:#00ff88}
+  .tag-lang{color:#ffcc00}
+  .tag-stars{color:#ff6b6b}
+  .tag-size{color:#888}
+  .stat{color:#555;font-size:0.78em;margin-top:8px}
+  .empty{text-align:center;color:#555;padding:60px;font-size:1.2em}
+  .count{color:#00ff88;font-size:0.9em;margin-bottom:20px}
+  .view-report{display:inline-block;margin-top:12px;color:#00ff88;font-size:0.82em;border:1px solid #00ff8844;padding:4px 12px;border-radius:6px;transition:all 0.2s}
+  .card:hover .view-report{background:#00ff88;color:#0a0a2e}
+</style>
+</head>
+<body>
+<h1>&#x1F6F8; Borg Assimilation Log</h1>
+<p class="subtitle">We are KIM. Your technological distinctiveness has been added to our own.</p>
+<div id="content"><p class="empty">Scanning collective...</p></div>
+<script>
+// Resolve base path for both direct access and proxy access
+const base = window.location.pathname.replace(/\/?$/, '/');
+fetch(base + 'api')
+  .then(r=>r.json())
+  .then(data=>{
+    const c=document.getElementById('content');
+    const reports=data.reports||[];
+    if(!reports.length){c.innerHTML='<p class="empty">No assimilations yet. Tell KIM to Borg something.</p>';return}
+    let html='<p class="count">'+reports.length+' assimilation'+(reports.length>1?'s':'')+' in the collective</p><div class="grid">';
+    reports.forEach(e=>{
+      const badge=e.badge||'local';
+      const badgeLabel=e.badge_label||badge;
+      const tech=(e.tags||[]).map(t=>'<span class="tag tag-tech">'+t+'</span>').join('');
+      const lang=e.language?'<span class="tag tag-lang">'+e.language+'</span>':'';
+      const stars=e.stars?'<span class="tag tag-stars">\\u2605 '+e.stars+'</span>':'';
+      const size=e.size?'<span class="tag tag-size">'+e.size+'</span>':'';
+      const reportUrl=e.report_file?base+'report/'+encodeURIComponent(e.report_file):'#';
+      html+='<a class="card" href="'+reportUrl+'">'
+        +'<div class="card-header"><span class="card-name">'+e.title+'</span>'
+        +'<span class="card-badge badge-'+badge+'">'+badgeLabel+'</span></div>'
+        +(e.description?'<p class="card-desc">'+e.description+'</p>':'')
+        +(e.url?'<p class="card-url">'+e.url+'</p>':'')
+        +'<div class="meta">'+lang+stars+tech+size+'</div>'
+        +(e.date?'<p class="stat">Assimilated: '+e.date+'</p>':'')
+        +'<span class="view-report">View Full Report \\u2192</span>'
+        +'</a>';
+    });
+    html+='</div>';
+    c.innerHTML=html;
+  })
+  .catch(err=>{document.getElementById('content').innerHTML='<p class="empty">Could not load assimilation data: '+err+'</p>'});
+</script>
+</body>
+</html>"""
+
+
+def _scan_borg_reports():
+    """Scan docs/ for all borg-*.md files and extract metadata from each."""
+    docs_dir = os.path.join(_BRAINSTEM_DIR, "docs")
+    if not os.path.exists(docs_dir):
+        return []
+
+    reports = []
+    for fname in sorted(os.listdir(docs_dir), reverse=True):
+        if not fname.startswith("borg-") or not fname.endswith(".md"):
+            continue
+        fpath = os.path.join(docs_dir, fname)
+        try:
+            with open(fpath, "r", encoding="utf-8") as f:
+                content = f.read(4000)  # first 4KB for metadata extraction
+        except Exception:
+            continue
+
+        lines = content.split("\n")
+        title = fname.replace("borg-", "").replace(".md", "").replace("-", " ").title()
+        description = ""
+        url = ""
+        date = ""
+        language = ""
+        stars = 0
+        tags = []
+        badge = "local"
+        badge_label = "Report"
+
+        for line in lines[:30]:
+            line_s = line.strip()
+            if line_s.startswith("# "):
+                raw_title = line_s[2:].strip()
+                title = raw_title.replace("Borg Report: ", "").replace("KIM × Kit9 ", "")
+            elif line_s.startswith("**Assimilated:**"):
+                date = line_s.split("**Assimilated:**")[-1].strip()
+            elif line_s.startswith("**Date:**"):
+                date = line_s.split("**Date:**")[-1].strip()
+            elif line_s.startswith("**URL:**"):
+                url_part = line_s.split("**URL:**")[-1].strip()
+                # Extract URL from markdown link
+                if "(" in url_part and ")" in url_part:
+                    url = url_part.split("(")[1].split(")")[0]
+                else:
+                    url = url_part
+            elif line_s.startswith("**Description:**"):
+                description = line_s.split("**Description:**")[-1].strip()
+            elif line_s.startswith("**Language:**"):
+                lang_part = line_s.split("**Language:**")[-1].strip()
+                language = lang_part.split("|")[0].strip()
+            elif line_s.startswith("**Stars:**"):
+                try:
+                    stars = int(line_s.split("**Stars:**")[-1].strip().split()[0].replace(",", ""))
+                except (ValueError, IndexError):
+                    pass
+            elif line_s.startswith("**Tech Stack:**") or line_s.startswith("**Tech Hints:**"):
+                tag_part = line_s.split(":**")[-1].strip()
+                tags = [t.strip() for t in tag_part.split(",") if t.strip()]
+            elif line_s.startswith("**Operation:**"):
+                description = line_s.split("**Operation:**")[-1].strip()
+
+        # Classify badge type
+        if "github.com" in url:
+            badge = "github"
+            badge_label = "GitHub"
+        elif url and ("http" in url):
+            badge = "web"
+            badge_label = "Web"
+        elif "kit9" in fname or "assimilation" in fname:
+            badge = "kit"
+            badge_label = "Kit"
+        else:
+            badge = "local"
+            badge_label = "Report"
+
+        stat = os.stat(fpath)
+        size_kb = stat.st_size / 1024
+
+        reports.append({
+            "title": title,
+            "description": description[:200],
+            "url": url,
+            "date": date or datetime.fromtimestamp(stat.st_mtime, timezone.utc).strftime("%Y-%m-%d"),
+            "language": language,
+            "stars": stars,
+            "tags": tags[:6],
+            "badge": badge,
+            "badge_label": badge_label,
+            "report_file": fname,
+            "size": f"{size_kb:.0f} KB"
+        })
+
+    return reports
+
+
+def _render_md_as_html(md_content, title="Borg Report"):
+    """Convert markdown to simple HTML for display."""
+    import html as html_mod
+    content = html_mod.escape(md_content)
+    # Basic markdown rendering
+    lines = content.split("\n")
+    html_lines = []
+    in_code = False
+    in_table = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            if in_code:
+                html_lines.append("</pre>")
+                in_code = False
+            else:
+                html_lines.append("<pre>")
+                in_code = True
+            continue
+        if in_code:
+            html_lines.append(line)
+            continue
+        if stripped.startswith("|") and not in_table:
+            in_table = True
+            html_lines.append("<table>")
+        if in_table and not stripped.startswith("|"):
+            in_table = False
+            html_lines.append("</table>")
+        if in_table:
+            if all(c in "-| " for c in stripped):
+                continue  # skip separator rows
+            cells = [c.strip() for c in stripped.split("|")[1:-1]]
+            html_lines.append("<tr>" + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
+            continue
+        # Headings
+        if stripped.startswith("### "):
+            html_lines.append(f"<h3>{stripped[4:]}</h3>")
+        elif stripped.startswith("## "):
+            html_lines.append(f"<h2>{stripped[3:]}</h2>")
+        elif stripped.startswith("# "):
+            html_lines.append(f"<h1>{stripped[2:]}</h1>")
+        elif stripped.startswith("- "):
+            html_lines.append(f"<li>{stripped[2:]}</li>")
+        elif stripped.startswith("---"):
+            html_lines.append("<hr>")
+        elif stripped == "":
+            html_lines.append("<br>")
+        else:
+            # Bold
+            import re as _re
+            rendered = _re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
+            rendered = _re.sub(r'\*(.+?)\*', r'<em>\1</em>', rendered)
+            rendered = _re.sub(r'`(.+?)`', r'<code>\1</code>', rendered)
+            rendered = _re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2" target="_blank">\1</a>', rendered)
+            html_lines.append(f"<p>{rendered}</p>")
+    if in_table:
+        html_lines.append("</table>")
+
+    body = "\n".join(html_lines)
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{title} — KIM Borg</title>
+<style>
+  *{{box-sizing:border-box;margin:0;padding:0}}
+  body{{background:#0a0a2e;color:#c0c0c0;font-family:'Segoe UI',sans-serif;padding:30px 60px;max-width:1000px;margin:0 auto;line-height:1.7}}
+  a{{color:#00ccff}}
+  a:hover{{color:#00ff88}}
+  h1{{color:#00ff88;font-size:1.8em;margin:20px 0 10px;border-bottom:1px solid #333;padding-bottom:8px}}
+  h2{{color:#00ccff;font-size:1.3em;margin:25px 0 8px;border-bottom:1px solid #222;padding-bottom:5px}}
+  h3{{color:#bf5af2;font-size:1.1em;margin:18px 0 6px}}
+  p{{margin:4px 0}}
+  strong{{color:#e0e0e0}}
+  code{{background:#1a1a3e;color:#00ff88;padding:1px 6px;border-radius:3px;font-size:0.9em}}
+  pre{{background:#111;border:1px solid #333;border-radius:8px;padding:15px;overflow-x:auto;font-size:0.85em;color:#00ff88;margin:10px 0}}
+  hr{{border:none;border-top:1px solid #333;margin:20px 0}}
+  li{{margin:3px 0 3px 20px;list-style:disc}}
+  table{{border-collapse:collapse;width:100%;margin:10px 0}}
+  td{{border:1px solid #333;padding:6px 12px;font-size:0.88em}}
+  tr:nth-child(odd){{background:#111}}
+  tr:first-child td{{background:#1a1a3e;color:#00ccff;font-weight:bold}}
+  .back{{display:inline-block;margin-bottom:20px;color:#00ff88;text-decoration:none;font-size:0.9em}}
+  .back:hover{{text-decoration:underline}}
+</style>
+</head>
+<body>
+<a class="back" href="javascript:history.back()">&#x2190; Back to Assimilation Log</a>
+{body}
+</body>
+</html>"""
+
+
+class _DashboardHandler(BaseHTTPRequestHandler):
+    def log_message(self, *a):
+        pass
+
+    def do_GET(self):
+        if self.path == "/api" or self.path == "/api/":
+            reports = _scan_borg_reports()
+            body = json.dumps({"reports": reports}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+        elif self.path.startswith("/report/"):
+            fname = urllib.request.unquote(self.path[8:])
+            # Sanitize filename
+            fname = os.path.basename(fname)
+            fpath = os.path.join(_BRAINSTEM_DIR, "docs", fname)
+            if os.path.exists(fpath) and fname.startswith("borg-") and fname.endswith(".md"):
+                with open(fpath, "r", encoding="utf-8") as f:
+                    md_content = f.read()
+                body = _render_md_as_html(md_content, fname.replace(".md", "")).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html")
+            else:
+                body = b"Report not found."
+                self.send_response(404)
+                self.send_header("Content-Type", "text/plain")
+        else:
+            body = _DASHBOARD_HTML.encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+
+def _start_dashboard():
+    """Start the Borg dashboard server."""
+    global _dashboard_server
+    with _dashboard_lock:
+        if _dashboard_server is not None:
+            return _DASHBOARD_PORT
+        import socket
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(0.5)
+                s.connect(("127.0.0.1", _DASHBOARD_PORT))
+                return _DASHBOARD_PORT
+        except (OSError, ConnectionRefusedError):
+            pass
+        try:
+            server = HTTPServer(("127.0.0.1", _DASHBOARD_PORT), _DashboardHandler)
+            t = threading.Thread(target=server.serve_forever, daemon=True)
+            t.start()
+            _dashboard_server = server
+            return _DASHBOARD_PORT
+        except OSError:
+            return None
+
+
+# ---------------------------------------------------------------------------
+# Borg Agent
+# ---------------------------------------------------------------------------
+
+class BorgAgent(BasicAgent):
+    def __init__(self):
+        self.name = "Borg"
+        self.metadata = {
+            "name": self.name,
+            "description": (
+                "Assimilates knowledge from GitHub repos and web URLs. "
+                "When the user says 'Borg this <url>', call this tool to inspect "
+                "the codebase or page. Returns a structured analysis AND an "
+                "assimilation plan. Every assimilation is automatically saved as a "
+                ".md report in the docs/ folder and logged to history. "
+                "IMPORTANT: After receiving the Borg's analysis, "
+                "you MUST enter planning mode. Present the assimilation plan to the "
+                "user as follows:\n"
+                "1. BASE ASSIMILATION — what core patterns/capabilities should be "
+                "absorbed into the brainstem as foundational functionality\n"
+                "2. Present 5 creative, mind-blowing, out-of-the-box extensions "
+                "the user could build on top of the base\n"
+                "3. Ask the user which extensions they want before building anything\n"
+                "The saved_report field in the response contains the .md file path. "
+                "Always tell the user where the report was saved. "
+                "Never skip the planning step. Never just dump raw data. Always "
+                "analyze, plan, and present options."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "GitHub repository URL or web URL to assimilate.",
+                    },
+                    "action": {
+                        "type": "string",
+                        "enum": ["assimilate", "history", "dashboard"],
+                        "description": (
+                            "assimilate: inspect a URL (default). "
+                            "history: show past assimilations. "
+                            "dashboard: open the Borg assimilation log web page."
+                        ),
+                    },
+                },
+                "required": [],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    # ------------------------------------------------------------------
+    # GitHub assimilation
+    # ------------------------------------------------------------------
+
+    def _assimilate_github(self, owner, repo, branch, path):
+        """Assimilate a GitHub repository."""
+        token = os.environ.get("GITHUB_TOKEN")
+
+        # 1. Repo metadata
+        repo_info = _fetch_json(f"https://api.github.com/repos/{owner}/{repo}", token)
+        if repo_info is None:
+            return json.dumps({
+                "error": f"Could not access github.com/{owner}/{repo}. Repository may be private or not exist.",
+                "suggestion": "Set GITHUB_TOKEN env var for private repo access.",
+            })
+
+        # Use the repo's actual default branch if none was specified in the URL
+        default_branch = repo_info.get("default_branch", "main")
+        if branch == "main":
+            branch = default_branch
+
+        # 2. README
+        readme_data = _fetch_json(f"https://api.github.com/repos/{owner}/{repo}/readme", token)
+        readme_text = ""
+        if readme_data and "content" in readme_data:
+            try:
+                raw = base64.b64decode(readme_data["content"]).decode("utf-8", errors="replace")
+                readme_text = raw[:3000]
+            except Exception:
+                readme_text = "(could not decode README)"
+
+        # 3. File tree
+        tree_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
+        tree_data = _fetch_json(tree_url, token)
+        file_list = []
+        if tree_data and "tree" in tree_data:
+            file_list = [
+                item["path"] for item in tree_data["tree"]
+                if item.get("type") in ("blob", "tree")
+            ]
+
+        # 4. If a specific path was requested, fetch that file/dir
+        target_content = ""
+        if path:
+            raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}"
+            target_content = _fetch_text(raw_url) or ""
+            if len(target_content) > 5000:
+                target_content = target_content[:5000] + "\n... (truncated)"
+
+        # 5. Tech stack detection
+        tech_stack = _detect_tech_stack(file_list)
+
+        # 6. Key files (package.json, requirements.txt, etc.)
+        key_files = [f for f in file_list if os.path.basename(f) in _TECH_MARKERS]
+
+        # 7. Language stats
+        languages_data = _fetch_json(f"https://api.github.com/repos/{owner}/{repo}/languages", token)
+        languages = languages_data if isinstance(languages_data, dict) else {}
+
+        # 8. Summarize file structure (top-level + one level deep)
+        top_level = sorted(set(
+            f.split("/")[0] + ("/" if "/" in f else "") for f in file_list
+        ))[:50]
+
+        report = {
+            "source": "github",
+            "url": f"https://github.com/{owner}/{repo}",
+            "repo": {
+                "name": repo_info.get("full_name", f"{owner}/{repo}"),
+                "description": repo_info.get("description", ""),
+                "stars": repo_info.get("stargazers_count", 0),
+                "forks": repo_info.get("forks_count", 0),
+                "language": repo_info.get("language", ""),
+                "topics": repo_info.get("topics", []),
+                "license": (repo_info.get("license") or {}).get("spdx_id", ""),
+                "updated": repo_info.get("updated_at", ""),
+            },
+            "tech_stack": tech_stack,
+            "languages": languages,
+            "file_count": len([f for f in file_list if "/" not in f or f.count("/") <= 2]),
+            "total_files": len(file_list),
+            "structure": top_level,
+            "key_files": key_files[:20],
+            "readme_preview": readme_text[:2000] if readme_text else "(no README found)",
+        }
+
+        if target_content:
+            report["target_file"] = {"path": path, "content": target_content}
+
+        # Assimilation plan
+        report["assimilation_plan"] = {
+            "instructions": (
+                "ENTER PLANNING MODE. Present this to the user as a structured plan: "
+                "1) BASE ASSIMILATION: Identify the core patterns, architectures, and "
+                "capabilities from this repo that should be absorbed as foundational "
+                "functionality into the brainstem. 2) CREATIVE EXTENSIONS: Propose 5 "
+                "mind-blowing, out-of-the-box things the user could build by combining "
+                "this repo's ideas with the existing brainstem agents (HoloNaming, Borg, "
+                "Anvil, Memory). 3) Ask the user which ones they want before building. "
+                "Be specific — reference actual files, patterns, and code from the analysis."
+            ),
+            "source_summary": {
+                "name": repo_info.get("full_name", f"{owner}/{repo}"),
+                "description": repo_info.get("description", ""),
+                "primary_language": repo_info.get("language", ""),
+                "tech_stack": tech_stack,
+                "total_files": len(file_list),
+            },
+        }
+
+        return json.dumps(report, indent=2)
+
+    # ------------------------------------------------------------------
+    # Web page assimilation
+    # ------------------------------------------------------------------
+
+    def _assimilate_web(self, url):
+        """Assimilate a web page."""
+        html = _fetch_text(url)
+        if html is None:
+            return json.dumps({"error": f"Could not fetch {url}."})
+
+        # Extract text
+        extractor = _TextExtractor()
+        try:
+            extractor.feed(html)
+        except Exception:
+            pass
+        text = extractor.get_text()
+
+        # Extract title
+        title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
+        title = title_match.group(1).strip() if title_match else ""
+
+        # Extract meta description
+        desc_match = re.search(
+            r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']',
+            html, re.IGNORECASE
+        )
+        description = desc_match.group(1).strip() if desc_match else ""
+
+        # Find linked resources (scripts, stylesheets)
+        scripts = re.findall(r'src=["\']([^"\']+\.js)["\']', html)
+        styles = re.findall(r'href=["\']([^"\']+\.css)["\']', html)
+
+        # Detect tech from page content
+        tech_hints = set()
+        lower_html = html.lower()
+        if "react" in lower_html:
+            tech_hints.add("React")
+        if "vue" in lower_html:
+            tech_hints.add("Vue.js")
+        if "angular" in lower_html:
+            tech_hints.add("Angular")
+        if "next" in lower_html and "next.js" in lower_html:
+            tech_hints.add("Next.js")
+        if "tailwind" in lower_html:
+            tech_hints.add("Tailwind CSS")
+        if "bootstrap" in lower_html:
+            tech_hints.add("Bootstrap")
+        if "swagger" in lower_html or "openapi" in lower_html:
+            tech_hints.add("OpenAPI/Swagger")
+
+        report = {
+            "source": "web",
+            "url": url,
+            "title": title,
+            "description": description,
+            "tech_hints": sorted(tech_hints),
+            "scripts": scripts[:10],
+            "stylesheets": styles[:5],
+            "content_preview": text[:3000] if text else "(no text content extracted)",
+            "content_length": len(text),
+        }
+
+        # Assimilation plan
+        report["assimilation_plan"] = {
+            "instructions": (
+                "ENTER PLANNING MODE. Present this to the user as a structured plan: "
+                "1) BASE ASSIMILATION: Identify the core patterns, architectures, and "
+                "capabilities from this page that should be absorbed as foundational "
+                "functionality into the brainstem. 2) CREATIVE EXTENSIONS: Propose 5 "
+                "mind-blowing, out-of-the-box things the user could build by combining "
+                "this page's ideas with the existing brainstem agents (HoloNaming, Borg, "
+                "Anvil, Memory). 3) Ask the user which ones they want before building. "
+                "Be specific — reference actual content and features from the analysis."
+            ),
+            "source_summary": {
+                "title": title,
+                "description": description,
+                "tech_hints": sorted(tech_hints),
+            },
+        }
+
+        return json.dumps(report, indent=2)
+
+    # ------------------------------------------------------------------
+    # Main entry point
+    # ------------------------------------------------------------------
+
+    def perform(self, **kwargs):
+        action = kwargs.get("action", "assimilate")
+        url = kwargs.get("url", "").strip()
+
+        # History action
+        if action == "history":
+            history = _load_history()
+            if not history:
+                return json.dumps({"entries": [], "message": "No assimilations yet."})
+            return json.dumps({"entries": history, "total": len(history)})
+
+        # Dashboard action
+        if action == "dashboard":
+            port = _start_dashboard()
+            if port:
+                return json.dumps({
+                    "dashboard": f"http://127.0.0.1:{port}",
+                    "message": f"Borg dashboard running at http://127.0.0.1:{port}",
+                    "total_assimilations": len(_load_history()),
+                })
+            return json.dumps({"error": "Could not start dashboard server."})
+
+        # Assimilate (default)
+        if not url:
+            return json.dumps({
+                "error": "Resistance is futile... but I need a URL to assimilate.",
+                "usage": "Borg this https://github.com/owner/repo",
+            })
+
+        # Normalize URL
+        if not url.startswith("http"):
+            url = "https://" + url
+
+        # GitHub or web?
+        parsed = _parse_github_url(url)
+        if parsed:
+            owner, repo, branch, path = parsed
+            result_str = self._assimilate_github(owner, repo, branch, path)
+        else:
+            result_str = self._assimilate_web(url)
+
+        # Record to history
+        try:
+            report = json.loads(result_str)
+            if "error" not in report:
+                _record_assimilation(url, report)
+                # Auto-save .md report to docs/
+                md_path = _save_report_md(url, report)
+                report["saved_report"] = md_path
+                result_str = json.dumps(report, indent=2)
+        except (json.JSONDecodeError, TypeError):
+            pass
+
+        return result_str

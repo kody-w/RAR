@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+local.settings.json
+*.env
+
+# Customer-specific agents (local only)
+agents/@billwhalen/customer-*/

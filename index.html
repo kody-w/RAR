@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR — RAPP Agent Registry</title>
+<meta name="description" content="The open single-file agent ecosystem. Browse, vote, review, and share AI agents.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --surface3: #30363d;
+    --border: #30363d;
+    --border-hover: #484f58;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --text-muted: #656d76;
+    --accent: #58a6ff;
+    --accent-bg: rgba(88,166,255,.1);
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,.12);
+    --orange: #d29922;
+    --orange-bg: rgba(210,153,34,.12);
+    --purple: #bc8cff;
+    --purple-bg: rgba(188,140,255,.12);
+    --red: #f85149;
+    --red-bg: rgba(248,81,73,.12);
+    --yellow: #e3b341;
+    --gold: #ffd700;
+    --shadow: 0 3px 12px rgba(0,0,0,.4);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,.5);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, .mono { font-family: 'SF Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace; }
+
+  /* ─── Header ──────────────────────────────────────── */
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; cursor: pointer; }
+  .logo-mark {
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    color: #fff; width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 800;
+  }
+  nav { display: flex; gap: 4px; background: var(--surface2); border-radius: 8px; padding: 3px; }
+  .nav-btn {
+    background: none; border: none; color: var(--text-dim); padding: 8px 18px;
+    border-radius: 6px; cursor: pointer; font-size: .9rem; font-weight: 500; transition: all .15s;
+  }
+  .nav-btn:hover { color: var(--text); background: var(--surface); }
+  .nav-btn.active { color: var(--text); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .gh-login {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 7px 16px; border-radius: 8px; cursor: pointer; font-size: .85rem; transition: all .15s;
+  }
+  .gh-login:hover { border-color: var(--border-hover); background: var(--surface3); }
+  .gh-login svg { width: 18px; height: 18px; fill: currentColor; }
+  .user-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 4px 12px 4px 4px; border-radius: 20px; font-size: .85rem;
+  }
+  .user-pill img { width: 26px; height: 26px; border-radius: 50%; }
+  .user-pill .logout { color: var(--text-muted); cursor: pointer; margin-left: 4px; font-size: .75rem; }
+  .user-pill .logout:hover { color: var(--red); }
+
+  /* ─── Hero ────────────────────────────────────────── */
+  .hero {
+    text-align: center; padding: 48px 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
+  .hero h1 .gradient {
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 600px; margin: 0 auto 24px; }
+  .stats-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .stat-chip {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 8px 20px; display: flex; align-items: center; gap: 8px; font-size: .9rem;
+  }
+  .stat-chip .num { font-weight: 700; color: var(--accent); }
+  .stat-chip .lbl { color: var(--text-dim); }
+
+  /* ─── Container / Panels ──────────────────────────── */
+  .container { max-width: 1280px; margin: 0 auto; padding: 24px 32px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ─── Toolbar ─────────────────────────────────────── */
+  .toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+  .search-box { flex: 1; min-width: 240px; position: relative; }
+  .search-box input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 16px 10px 38px; color: var(--text); font-size: .95rem; outline: none; transition: border-color .15s;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box input::placeholder { color: var(--text-muted); }
+  .search-box .si { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: .9rem; }
+  .search-box .kbd {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;
+    padding: 1px 6px; font-size: .7rem; color: var(--text-muted);
+  }
+  .sort-select {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; color: var(--text); font-size: .9rem; cursor: pointer; outline: none;
+  }
+  .filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: .82rem;
+    transition: all .15s; white-space: nowrap;
+  }
+  .pill:hover { border-color: var(--border-hover); color: var(--text); }
+  .pill.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+  .pill .ct { background: var(--surface2); padding: 1px 6px; border-radius: 10px; font-size: .72rem; margin-left: 4px; }
+  .pill.active .ct { background: rgba(88,166,255,.2); }
+
+  /* ─── Agent Grid ──────────────────────────────────── */
+  .agents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+  .agent-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 20px; cursor: pointer; transition: all .2s; position: relative;
+  }
+  .agent-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .agent-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0; opacity: 0; transition: opacity .2s;
+  }
+  .agent-card:hover::before { opacity: 1; }
+  .agent-card.tier-community::before { background: linear-gradient(90deg, var(--text-muted), var(--text-dim)); }
+  .agent-card.tier-verified::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+  .agent-card.tier-official::before { background: linear-gradient(90deg, var(--accent), var(--purple)); }
+  .agent-card.tier-verified { border-color: rgba(255,215,0,.2); }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; gap: 8px; }
+  .card-title { font-size: 1.05rem; font-weight: 600; }
+  .card-ns { font-size: .78rem; color: var(--text-muted); font-family: 'SF Mono', Consolas, monospace; margin-bottom: 8px; }
+  .card-desc {
+    color: var(--text-dim); font-size: .88rem; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; margin-bottom: 12px; min-height: 2.6em;
+  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .tag { background: var(--surface2); color: var(--text-dim); padding: 2px 9px; border-radius: 10px; font-size: .72rem; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: .78rem; color: var(--text-muted); }
+  .card-meta { display: flex; gap: 12px; align-items: center; }
+  .vote-chip {
+    display: flex; align-items: center; gap: 4px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 3px 8px; font-size: .78rem; color: var(--text-dim); cursor: pointer; transition: all .15s;
+  }
+  .vote-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .vote-chip.voted { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+  /* ─── Quality Tiers ───────────────────────────────── */
+  .tier {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 4px; font-size: .68rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: .4px;
+  }
+  .tier-community { background: rgba(139,148,158,.12); color: var(--text-muted); }
+  .tier-verified {
+    background: linear-gradient(135deg, rgba(255,215,0,.15), rgba(210,153,34,.15));
+    color: var(--gold); border: 1px solid rgba(255,215,0,.25);
+  }
+  .tier-official { background: var(--accent-bg); color: var(--accent); }
+  .tier-experimental { background: rgba(188,140,255,.12); color: #bc8cff; border: 1px dashed rgba(188,140,255,.4); }
+  .agent-card.tier-experimental::before { background: linear-gradient(90deg, #bc8cff, #ff6bff); }
+  .agent-card.tier-experimental { border-style: dashed; border-color: rgba(188,140,255,.2); }
+  .tier-card.t-experimental { border-left: 4px dashed #bc8cff; }
+  .tier-card.t-experimental li::before { content: '\26A0'; color: #bc8cff; }
+  .cat-badge { background: var(--purple-bg); color: var(--purple); padding: 2px 8px; border-radius: 4px; font-size: .72rem; }
+
+  /* Verified seal */
+  .seal {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #1a1a2e; padding: 4px 12px; border-radius: 6px;
+    font-size: .75rem; font-weight: 700; letter-spacing: .3px;
+  }
+  .seal svg { width: 14px; height: 14px; }
+
+  /* ─── Leaderboard ─────────────────────────────────── */
+  .lb-table { width: 100%; border-collapse: collapse; }
+  .lb-table th {
+    text-align: left; padding: 10px 16px; font-size: .75rem; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--text-muted); border-bottom: 1px solid var(--border);
+  }
+  .lb-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: .9rem; }
+  .lb-table tr:hover td { background: var(--surface); }
+  .lb-rank { font-weight: 700; color: var(--text-muted); width: 50px; }
+  .lb-name { font-weight: 600; cursor: pointer; }
+  .lb-name:hover { color: var(--accent); }
+  .lb-score { font-weight: 700; color: var(--accent); }
+  .lb-stars { color: var(--yellow); }
+
+  /* ─── Modal ───────────────────────────────────────── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65);
+    backdrop-filter: blur(4px); z-index: 100;
+    align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    max-width: 820px; width: 100%; padding: 0; position: relative; box-shadow: var(--shadow-lg);
+  }
+  .modal-header { padding: 24px 28px 16px; border-bottom: 1px solid var(--border); }
+  .modal-header h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .modal-header .ns { color: var(--text-muted); font-family: 'SF Mono', Consolas, monospace; font-size: .85rem; }
+  .modal-header .badges { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+  .modal-body { padding: 20px 28px 28px; }
+  .modal-section { margin-bottom: 24px; }
+  .modal-section h3 {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--text-muted); margin-bottom: 8px; font-weight: 600;
+  }
+  .modal-desc { color: var(--text-dim); line-height: 1.7; }
+  .close-modal {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.1rem; transition: all .15s;
+  }
+  .close-modal:hover { border-color: var(--border-hover); color: var(--text); }
+  .cmd-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 16px; font-family: 'SF Mono', Consolas, monospace; font-size: .84rem;
+    color: var(--green); overflow-x: auto; position: relative;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .cmd-box code { flex: 1; white-space: nowrap; }
+  .copy-btn {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 4px 12px; border-radius: 5px; cursor: pointer; font-size: .75rem;
+    white-space: nowrap; transition: all .15s;
+  }
+  .copy-btn:hover { color: var(--text); border-color: var(--border-hover); }
+
+  /* Code viewer */
+  .code-viewer { background: #1e1e1e; border-radius: 8px; overflow: hidden; margin-top: 8px; }
+  .code-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 14px; background: #2d2d2d; font-size: .78rem; color: #858585;
+  }
+  .code-toolbar .fn { font-family: 'SF Mono', Consolas, monospace; }
+  .code-body {
+    padding: 16px; overflow-x: auto; max-height: 400px; overflow-y: auto;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: .82rem; line-height: 1.6; color: #d4d4d4; white-space: pre; tab-size: 4;
+  }
+  .code-body .kw { color: #569cd6; } .code-body .str { color: #ce9178; }
+  .code-body .cmt { color: #6a9955; } .code-body .num { color: #b5cea8; }
+  .code-body .dec { color: #ffd700; }
+
+  /* Vote + Review in modal */
+  .modal-vote { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .vote-btn {
+    display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim);
+    cursor: pointer; font-size: .9rem; font-weight: 500; transition: all .15s;
+  }
+  .vote-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .vote-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+  .vote-score { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+
+  .reviews-list { max-height: 300px; overflow-y: auto; }
+  .review-item { background: var(--surface2); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; }
+  .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: .82rem; }
+  .review-user { font-weight: 600; }
+  .review-date { color: var(--text-muted); font-size: .75rem; }
+  .review-stars { color: var(--yellow); }
+  .review-text { color: var(--text-dim); font-size: .88rem; line-height: 1.5; }
+  .write-review-btn {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: .85rem; transition: all .15s; margin-top: 8px;
+  }
+  .write-review-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ─── Submit Panel ────────────────────────────────── */
+  .submit-container { max-width: 700px; margin: 0 auto; }
+  .submit-container h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  .submit-container > p { color: var(--text-dim); margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
+  .form-group textarea {
+    width: 100%; min-height: 300px; background: #1e1e1e; border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; color: #d4d4d4;
+    font-family: 'SF Mono', Consolas, monospace; font-size: .85rem; line-height: 1.6;
+    tab-size: 4; resize: vertical; outline: none;
+  }
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea::placeholder { color: #555; }
+  .submit-btn {
+    background: linear-gradient(135deg, var(--accent), var(--purple)); color: #fff; border: none;
+    padding: 12px 28px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: opacity .15s;
+  }
+  .submit-btn:hover { opacity: .9; }
+  .submit-btn:disabled { opacity: .5; cursor: default; }
+  .manifest-preview {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; margin-bottom: 16px;
+  }
+  .manifest-preview h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .4px; color: var(--text-muted); margin-bottom: 8px; }
+  .manifest-preview .fld { display: flex; gap: 8px; font-size: .85rem; margin-bottom: 4px; }
+  .manifest-preview .fld .k { color: var(--text-muted); min-width: 100px; }
+  .manifest-preview .fld .v { color: var(--text); font-weight: 500; }
+  .manifest-preview .err { color: var(--red); font-size: .85rem; margin-top: 8px; }
+  .manifest-preview .ok { color: var(--green); font-size: .85rem; margin-top: 8px; }
+
+  /* ─── Quality Standards Panel ─────────────────────── */
+  .quality-section { max-width: 800px; margin: 0 auto; }
+  .quality-section h2 { font-size: 1.5rem; margin-bottom: 6px; }
+  .quality-section > p { color: var(--text-dim); margin-bottom: 28px; }
+  .tier-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 24px; margin-bottom: 16px; position: relative; overflow: hidden;
+  }
+  .tier-card h3 { font-size: 1.15rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .tier-card .subtitle { color: var(--text-dim); font-size: .9rem; margin-bottom: 16px; }
+  .tier-card ul { list-style: none; padding: 0; }
+  .tier-card li {
+    padding: 6px 0; font-size: .9rem; color: var(--text-dim);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .tier-card li::before { content: ''; flex-shrink: 0; }
+  .tier-card.t-community { border-left: 4px solid var(--text-muted); }
+  .tier-card.t-community li::before { content: '\2610'; color: var(--text-muted); }
+  .tier-card.t-verified { border-left: 4px solid var(--gold); }
+  .tier-card.t-verified li::before { content: '\2611'; color: var(--gold); }
+  .tier-card.t-official { border-left: 4px solid var(--accent); }
+  .tier-card.t-official li::before { content: '\2611'; color: var(--accent); }
+
+  /* ─── Toast ───────────────────────────────────────── */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 20px; font-size: .9rem; box-shadow: var(--shadow-lg); z-index: 200;
+    display: flex; align-items: center; gap: 10px; animation: slideUp .3s ease; max-width: 400px;
+  }
+  .toast.success { border-color: var(--green); }
+  .toast.error { border-color: var(--red); }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+  .empty-state h3 { color: var(--text); margin-bottom: 8px; font-size: 1.2rem; }
+  .loading { text-align: center; padding: 60px; color: var(--text-muted); }
+  .spinner {
+    display: inline-block; width: 28px; height: 28px;
+    border: 3px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin .6s linear infinite; margin-bottom: 10px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── Cart Sidebar ─────────────────────────────────── */
+  .cart-toggle {
+    position: relative;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    width: 38px; height: 38px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.1rem; transition: all .15s;
+  }
+  .cart-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .cart-badge {
+    position: absolute; top: -6px; right: -6px;
+    background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700;
+    min-width: 18px; height: 18px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; padding: 0 4px;
+  }
+  .cart-sidebar {
+    position: fixed; top: 0; right: -440px; width: 420px; height: 100vh;
+    background: var(--surface); border-left: 1px solid var(--border);
+    z-index: 60; transition: right .3s ease; display: flex; flex-direction: column;
+    box-shadow: -4px 0 30px rgba(0,0,0,.4);
+  }
+  .cart-sidebar.open { right: 0; }
+  .cart-header {
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-header h3 { font-size: 1.1rem; font-weight: 600; }
+  .cart-close {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem;
+  }
+  .cart-close:hover { color: var(--text); }
+  .cart-body { flex: 1; overflow-y: auto; padding: 16px 24px; }
+  .cart-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface2); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-weight: 600; font-size: .9rem; }
+  .cart-item-ns { font-size: .75rem; color: var(--text-muted); font-family: 'SF Mono', Consolas, monospace; }
+  .cart-item-remove {
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-size: .9rem; padding: 4px 8px; border-radius: 4px;
+  }
+  .cart-item-remove:hover { color: var(--red); background: var(--red-bg); }
+  .cart-empty { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: .9rem; }
+  .cart-footer {
+    padding: 16px 24px; border-top: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .cart-btn {
+    width: 100%; padding: 10px; border-radius: 8px; border: none;
+    font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .cart-btn:hover { opacity: .9; }
+  .cart-btn.primary { background: linear-gradient(135deg, var(--accent), var(--purple)); color: #fff; }
+  .cart-btn.secondary { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+  .cart-btn.danger { background: none; border: 1px solid var(--border); color: var(--red); font-weight: 400; font-size: .82rem; }
+
+  /* Share link box */
+  .share-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 8px; margin-top: 8px;
+  }
+  .share-box input {
+    flex: 1; background: none; border: none; color: var(--green);
+    font-family: 'SF Mono', Consolas, monospace; font-size: .8rem; outline: none;
+  }
+
+  /* Add to cart button in card */
+  .add-cart-btn {
+    background: none; border: 1px solid var(--border); color: var(--text-dim);
+    padding: 2px 8px; border-radius: 5px; font-size: .72rem; cursor: pointer; transition: all .15s;
+  }
+  .add-cart-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .add-cart-btn.in-cart { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+
+  @media (max-width: 768px) {
+    header { padding: 10px 16px; flex-wrap: wrap; gap: 10px; }
+    nav { width: 100%; justify-content: center; overflow-x: auto; }
+    .nav-btn { padding: 6px 10px; font-size: .8rem; white-space: nowrap; }
+    .container { padding: 16px; }
+    .hero { padding: 32px 16px 24px; }
+    .hero h1 { font-size: 1.7rem; }
+    .agents-grid { grid-template-columns: 1fr; }
+    .toolbar { flex-direction: column; }
+    .filter-pills { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+    .cart-sidebar { width: 100%; right: -100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="switchTab('browse')">
+    <div class="logo-mark">R</div><span>RAR</span>
+  </div>
+  <nav>
+    <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
+    <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
+    <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
+    <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
+  </nav>
+  <div class="header-actions" id="header-actions">
+    <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
+      &#128722;
+      <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+    </div>
+    <button class="gh-login" id="login-btn" onclick="loginWithGitHub()">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Sign in
+    </button>
+  </div>
+</header>
+
+<div class="hero" id="hero">
+  <h1>The Open <span class="gradient">Agent.py</span> Ecosystem</h1>
+  <p>Browse, vote, review, and share single-file AI agents. Community-driven quality. No servers — everything runs on GitHub.</p>
+  <div class="stats-row" id="stats-row"></div>
+</div>
+
+<div class="container">
+
+  <!-- Browse -->
+  <div class="panel active" id="panel-browse">
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="si">&#128269;</span>
+        <input type="text" id="search" placeholder="Search agents..." oninput="renderAgents()">
+        <span class="kbd">/</span>
+      </div>
+      <select class="sort-select" id="sort-select" onchange="renderAgents()">
+        <option value="popular">Most Voted</option>
+        <option value="name">A-Z</option>
+        <option value="newest">Newest</option>
+        <option value="rating">Top Rated</option>
+        <option value="verified">Verified First</option>
+      </select>
+    </div>
+    <div class="filter-pills" id="category-pills"></div>
+    <div style="margin-top:16px" id="agents-container">
+      <div class="loading"><div class="spinner"></div><br>Loading registry...</div>
+    </div>
+  </div>
+
+  <!-- Leaderboard -->
+  <div class="panel" id="panel-leaderboard">
+    <h2 style="margin-bottom:4px">Agent Leaderboard</h2>
+    <p style="color:var(--text-dim);margin-bottom:20px">Ranked by community votes and reviews</p>
+    <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
+  </div>
+
+  <!-- Quality Seal -->
+  <div class="panel" id="panel-quality">
+    <div class="quality-section">
+      <h2>RAR Quality Seal Program</h2>
+      <p>Every agent in the registry carries a quality tier. Like Nintendo's Seal of Quality, the <strong>RAR Verified</strong> seal means an agent meets a rigorous standard of reliability, security, and usefulness.</p>
+
+      <div class="tier-card t-experimental">
+        <h3><span class="tier tier-experimental">&#9878; EXPERIMENTAL</span> Preview Tier</h3>
+        <div class="subtitle">For work-in-progress agents, prototypes, and alpha-quality experiments. Use at your own risk.</div>
+        <ul>
+          <li>Valid <code>__manifest__</code> with all required fields</li>
+          <li>Follows the single-file <code>agent.py</code> pattern</li>
+          <li>Parseable by AST (no syntax errors)</li>
+          <li>No hardcoded secrets, API keys, or credentials</li>
+          <li>Clearly marked as experimental in the registry</li>
+          <li>May have incomplete features or known issues</li>
+          <li>Can be promoted to Community when stable</li>
+        </ul>
+      </div>
+
+      <div class="tier-card t-community">
+        <h3><span class="tier tier-community">COMMUNITY</span> Open Tier</h3>
+        <div class="subtitle">Anyone with a GitHub account can submit. The starting point for all agents.</div>
+        <ul>
+          <li>Valid <code>__manifest__</code> with all required fields</li>
+          <li>Follows the single-file <code>agent.py</code> pattern</li>
+          <li>Parseable by AST (no syntax errors)</li>
+          <li>Passes automated contract tests (<code>test_agent_contract.py</code>)</li>
+          <li>No hardcoded secrets, API keys, or credentials</li>
+          <li>No PII (scanned by pre-commit scrubber)</li>
+        </ul>
+      </div>
+
+      <div class="tier-card t-verified">
+        <h3>
+          <span class="seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            RAR VERIFIED
+          </span>
+          Quality Seal
+        </h3>
+        <div class="subtitle">Earned through community review and maintainer audit. The gold standard.</div>
+        <ul>
+          <li>All Community tier requirements</li>
+          <li>Extends <code>BasicAgent</code> properly with correct <code>perform()</code> signature</li>
+          <li>Meaningful <code>perform()</code> implementation (not just a stub)</li>
+          <li>Docstring serves as useful documentation</li>
+          <li>Proper error handling — graceful failures, no bare <code>except:</code></li>
+          <li>Environment variables declared in <code>requires_env</code> are actually used</li>
+          <li>Dependencies declared in <code>dependencies</code> are accurate</li>
+          <li>Minimum 3 community upvotes</li>
+          <li>At least 1 review with rating >= 3 stars</li>
+          <li>Code reviewed by a registry maintainer</li>
+          <li>No obfuscated code, no minification, no encoded payloads</li>
+          <li>Clean separation of concerns — single responsibility</li>
+        </ul>
+      </div>
+
+      <div class="tier-card t-official">
+        <h3><span class="tier tier-official">OFFICIAL</span> Core Agents</h3>
+        <div class="subtitle">Maintained by the RAR/RAPP core team. The foundation of the ecosystem.</div>
+        <ul>
+          <li>All Verified tier requirements</li>
+          <li>Maintained by core team with guaranteed SLA</li>
+          <li>Backwards-compatible across RAPP versions</li>
+          <li>Integration tested against live infrastructure</li>
+          <li>Versioned with semantic versioning (breaking changes = major bump)</li>
+          <li>Included in the RAPP release validation suite</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-top:24px">
+        <h3 style="margin-bottom:8px">How to Get Verified</h3>
+        <ol style="color:var(--text-dim);font-size:.9rem;padding-left:20px;line-height:2">
+          <li>Submit your agent through the <a href="#" onclick="switchTab('submit');return false">Submit</a> tab</li>
+          <li>Accumulate at least <strong>3 community upvotes</strong> and <strong>1 review</strong></li>
+          <li>Open an issue titled <code>[RAR] verify: @your-name/agent-slug</code></li>
+          <li>A maintainer will audit the code against the Verified checklist above</li>
+          <li>Once approved, the agent's <code>quality_tier</code> is upgraded to <code>"verified"</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="panel" id="panel-submit">
+    <div class="submit-container">
+      <h2>Submit a Community Agent</h2>
+      <p>Paste your single-file agent.py below. It must include a valid <code>__manifest__</code>. Your agent publishes under <code>@your-github-username/</code>.</p>
+      <div class="form-group">
+        <label>Agent Code</label>
+        <textarea id="agent-code" placeholder='"""My Agent — one-line description."""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/my-agent",
+    "version": "1.0.0",
+    "display_name": "My Agent",
+    "description": "A useful agent",
+    "author": "Your Name",
+    "tags": ["utility"],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+from agents.basic_agent import BasicAgent
+
+class MyAgent(BasicAgent):
+    def __init__(self):
+        self.name = "My Agent"
+        self.metadata = {}
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        return "result"' oninput="previewManifest()"></textarea>
+      </div>
+      <div class="manifest-preview" id="manifest-preview" style="display:none"></div>
+      <button class="submit-btn" id="submit-btn" onclick="submitAgent()" disabled>Submit Agent via GitHub Issue</button>
+      <p style="color:var(--text-muted);font-size:.8rem;margin-top:10px">
+        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> tier.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3>&#128722; Agent Cart (<span id="cart-count">0</span>)</h3>
+    <button class="cart-close" onclick="toggleCart()">&#10005;</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty">Your cart is empty. Browse agents and click + to add them.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="share-box" id="share-box" style="display:none">
+      <input type="text" id="share-url" readonly>
+      <button class="copy-btn" onclick="copyEl('share-url')">Copy</button>
+    </div>
+    <button class="cart-btn primary" onclick="downloadCart()" id="download-cart-btn" style="display:none">&#11015; Download All (.zip)</button>
+    <button class="cart-btn secondary" onclick="shareCart()" id="share-cart-btn" style="display:none">&#128279; Share Collection</button>
+    <button class="cart-btn danger" onclick="clearCart()" id="clear-cart-btn" style="display:none">Clear cart</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// Config — loaded from rar.config.json (federation-aware)
+// ═══════════════════════════════════════════════════════
+let OWNER = 'kody-w';
+let REPO_NAME = 'RAR';
+let REPO = `${OWNER}/${REPO_NAME}`;
+let RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+let UPSTREAM_REPO = null;
+let UPSTREAM_RAW = null;
+let IS_INSTANCE = false;
+
+// ═══════════════════════════════════════════════════════
+// State
+// ═══════════════════════════════════════════════════════
+let allAgents = [];
+let votes = { agents: {} };
+let reviews = { agents: {} };
+let currentCat = 'all';
+let ghUser = null;
+// Shared auth with RAPPterBook — check rb_access_token first, then gh_token
+let ghToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token');
+let cart = new Set(JSON.parse(localStorage.getItem('rar_cart') || '[]'));
+
+// ═══════════════════════════════════════════════════════
+// Auth — GitHub OAuth Device Flow (shared with RAPPterBook)
+// ═══════════════════════════════════════════════════════
+const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
+const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
+let _devicePollTimer = null;
+
+// ═══════════════════════════════════════════════════════
+// Config loading
+// ═══════════════════════════════════════════════════════
+async function loadConfig() {
+  try {
+    const resp = await fetch('rar.config.json?t=' + Date.now());
+    if (resp.ok) {
+      const cfg = await resp.json();
+      if (cfg.owner) OWNER = cfg.owner;
+      if (cfg.repo) REPO_NAME = cfg.repo;
+      REPO = `${OWNER}/${REPO_NAME}`;
+      RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+      if (cfg.role === 'instance' && cfg.upstream) {
+        IS_INSTANCE = true;
+        UPSTREAM_REPO = cfg.upstream;
+        UPSTREAM_RAW = `https://raw.githubusercontent.com/${UPSTREAM_REPO}/main`;
+      }
+      window.RAR_FEATURES = cfg.experimental_features || {};
+    }
+  } catch {}
+}
+
+// ═══════════════════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════════════════
+async function init() {
+  await loadConfig();
+  checkAuth();
+  const [reg, v, r] = await Promise.all([
+    fetchJSON(`${RAW}/registry.json`),
+    fetchJSON(`${RAW}/state/votes.json`),
+    fetchJSON(`${RAW}/state/reviews.json`),
+  ]);
+  if (reg) { allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' })); }
+  if (v) votes = v;
+  if (r) reviews = r;
+
+  // If instance, merge upstream registry
+  if (IS_INSTANCE && UPSTREAM_RAW) {
+    const [uReg, uV, uR] = await Promise.all([
+      fetchJSON(`${UPSTREAM_RAW}/registry.json`),
+      fetchJSON(`${UPSTREAM_RAW}/state/votes.json`),
+      fetchJSON(`${UPSTREAM_RAW}/state/reviews.json`),
+    ]);
+    if (uReg) {
+      const localNames = new Set(allAgents.map(a => a.name));
+      const upstream = (uReg.agents || []).filter(a => !localNames.has(a.name)).map(a => ({ ...a, _source: 'upstream' }));
+      allAgents = [...allAgents, ...upstream];
+    }
+    if (uV) { for (const [k, d] of Object.entries(uV.agents || {})) { if (!votes.agents[k]) votes.agents[k] = d; } }
+    if (uR) { for (const [k, d] of Object.entries(uR.agents || {})) { if (!reviews.agents[k]) reviews.agents[k] = d; } }
+  }
+
+  if (IS_INSTANCE) renderInstanceBanner();
+  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
+  renderStats(stats);
+  buildCategoryPills(stats);
+  renderAgents();
+  renderLeaderboard();
+}
+
+function renderInstanceBanner() {
+  const banner = document.createElement('div');
+  banner.className = 'instance-banner';
+  banner.innerHTML = `&#127760; This is a RAR instance. <a href="https://github.com/${UPSTREAM_REPO}" target="_blank">View main store &rarr;</a>`;
+  banner.style.cssText = 'background:var(--surface2);text-align:center;padding:8px;font-size:.85rem;color:var(--text-muted);border-bottom:1px solid var(--border)';
+  document.body.insertBefore(banner, document.body.firstChild);
+}
+
+function getTargetRepo(agentName) {
+  const a = allAgents.find(x => x.name === agentName);
+  if (IS_INSTANCE && a?._source === 'upstream' && UPSTREAM_REPO) return UPSTREAM_REPO;
+  return REPO;
+}
+
+async function fetchJSON(url) {
+  try { const r = await fetch(url + '?t=' + Date.now()); return r.ok ? r.json() : null; }
+  catch { return null; }
+}
+
+// ═══════════════════════════════════════════════════════
+// Auth — shared with RAPPterBook (OAuth Device Flow)
+// ═══════════════════════════════════════════════════════
+function checkAuth() {
+  if (!ghToken) return;
+  fetch('https://api.github.com/user', { headers: { Authorization: `Bearer ${ghToken}` } })
+    .then(r => r.ok ? r.json() : null)
+    .then(u => {
+      if (u) { ghUser = u; renderUserPill(); }
+      else { ghToken = null; localStorage.removeItem('rb_access_token'); localStorage.removeItem('gh_token'); }
+    })
+    .catch(() => {});
+}
+
+async function loginWithGitHub() {
+  // Start GitHub OAuth Device Flow (same as RAPPterBook)
+  try {
+    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/device-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ client_id: AUTH_CLIENT_ID, scope: 'public_repo' }),
+    });
+    if (!resp.ok) throw new Error('Device code request failed');
+    const data = await resp.json();
+    if (!data.user_code || !data.device_code) throw new Error('Invalid response');
+
+    showDeviceCodeModal(data.user_code, data.verification_uri || 'https://github.com/login/device');
+    pollDeviceCode(data.device_code, data.interval || 5, data.expires_in || 900);
+  } catch (e) {
+    // Fallback to manual PAT entry
+    const t = prompt('GitHub sign-in unavailable. Enter a Personal Access Token (public_repo scope).\n\nCreate one at: https://github.com/settings/tokens/new');
+    if (t && t.trim()) {
+      ghToken = t.trim();
+      localStorage.setItem('rb_access_token', ghToken);
+      checkAuth();
+      showToast('Signed in!', 'success');
+    }
+  }
+}
+
+function showDeviceCodeModal(code, uri) {
+  dismissDeviceModal();
+  const m = document.createElement('div');
+  m.id = 'device-modal';
+  m.innerHTML = `
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center" onclick="if(event.target===this)dismissDeviceModal()">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:400px;text-align:center">
+        <h3 style="margin:0 0 12px;color:var(--text)">Sign in with GitHub</h3>
+        <p style="color:var(--text-muted);font-size:.9rem;margin:0 0 8px">1. Copy this code:</p>
+        <div id="device-code-val" style="font-family:monospace;font-size:2em;font-weight:700;letter-spacing:4px;color:var(--accent);background:var(--bg);border:2px solid var(--accent);border-radius:8px;padding:12px 20px;margin:8px 0 12px;cursor:pointer;user-select:all" onclick="navigator.clipboard.writeText(this.textContent);showToast('Code copied!','success')">${code}</div>
+        <p style="color:var(--text-muted);font-size:.9rem;margin:0 0 12px">2. Open GitHub and paste the code:</p>
+        <a href="${uri}" target="_blank" rel="noopener" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin-bottom:16px">Open github.com/login/device &rarr;</a>
+        <p id="device-status" style="color:var(--text-muted);font-size:.85rem;margin:8px 0">Waiting for authorization...</p>
+        <button onclick="dismissDeviceModal()" style="background:none;border:1px solid var(--border);color:var(--text-muted);padding:6px 16px;border-radius:6px;cursor:pointer;font-size:.85rem">Cancel</button>
+      </div>
+    </div>`;
+  document.body.appendChild(m);
+}
+
+function dismissDeviceModal() {
+  if (_devicePollTimer) { clearTimeout(_devicePollTimer); _devicePollTimer = null; }
+  const m = document.getElementById('device-modal');
+  if (m) m.remove();
+}
+
+function pollDeviceCode(deviceCode, interval, expiresIn) {
+  const deadline = Date.now() + (expiresIn * 1000);
+  const poll = async () => {
+    if (Date.now() > deadline) { dismissDeviceModal(); showToast('Code expired. Try again.', 'error'); return; }
+    try {
+      const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ client_id: AUTH_CLIENT_ID, device_code: deviceCode, grant_type: 'urn:ietf:params:oauth:grant-type:device_code' }),
+      });
+      const data = await resp.json();
+      if (data.access_token) {
+        ghToken = data.access_token;
+        localStorage.setItem('rb_access_token', ghToken);
+        dismissDeviceModal();
+        checkAuth();
+        showToast('Signed in!', 'success');
+        return;
+      }
+      if (data.error === 'slow_down') { _devicePollTimer = setTimeout(poll, (interval + 5) * 1000); return; }
+      if (data.error === 'authorization_pending') { _devicePollTimer = setTimeout(poll, interval * 1000); return; }
+      dismissDeviceModal();
+      showToast('Auth failed: ' + (data.error || 'unknown'), 'error');
+    } catch { _devicePollTimer = setTimeout(poll, interval * 1000); }
+  };
+  _devicePollTimer = setTimeout(poll, interval * 1000);
+}
+
+function logout() {
+  ghToken = null; ghUser = null;
+  localStorage.removeItem('rb_access_token');
+  localStorage.removeItem('gh_token');
+  document.getElementById('header-actions').innerHTML = `
+    <button class="gh-login" onclick="loginWithGitHub()">
+      <svg viewBox="0 0 16 16" style="width:18px;height:18px;fill:currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Sign in</button>`;
+  showToast('Signed out.', 'success');
+}
+
+function renderUserPill() {
+  document.getElementById('header-actions').innerHTML = `
+    <div class="user-pill">
+      <img src="${ghUser.avatar_url}" alt="">
+      <span>@${ghUser.login}</span>
+      <span class="logout" onclick="logout()">sign out</span>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// Navigation
+// ═══════════════════════════════════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
+  if (tab === 'leaderboard') renderLeaderboard();
+}
+
+// ═══════════════════════════════════════════════════════
+// Stats & Filters
+// ═══════════════════════════════════════════════════════
+function renderStats(stats) {
+  if (!stats) return;
+  const tv = Object.values(votes.agents || {}).reduce((s, v) => s + (v.up || 0), 0);
+  const tr = Object.values(reviews.agents || {}).reduce((s, a) => s + (a.length || 0), 0);
+  const vc = allAgents.filter(a => a.quality_tier === 'verified').length;
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
+    <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
+    <div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>
+    <div class="stat-chip"><span class="num">${tv}</span><span class="lbl">Votes</span></div>
+    <div class="stat-chip"><span class="num">${tr}</span><span class="lbl">Reviews</span></div>`;
+}
+
+function buildCategoryPills(stats) {
+  if (!stats?.category_list) return;
+  const c = {}; allAgents.forEach(a => { c[a.category] = (c[a.category] || 0) + 1; });
+  let h = `<span class="pill active" data-cat="all" onclick="setCat('all',this)">All <span class="ct">${allAgents.length}</span></span>`;
+  stats.category_list.forEach(cat => {
+    if (c[cat]) h += `<span class="pill" data-cat="${cat}" onclick="setCat('${cat}',this)">${cat.replace(/_/g,' ')} <span class="ct">${c[cat]}</span></span>`;
+  });
+  const expCount = allAgents.filter(a => a.quality_tier === 'experimental').length;
+  if (expCount > 0 && window.RAR_FEATURES?.experimental_filter_pill !== false) {
+    h += `<span class="pill" data-cat="__experimental" onclick="setCat('__experimental',this)" style="border-color:rgba(188,140,255,.3);color:#bc8cff">&#9878; Experimental <span class="ct">${expCount}</span></span>`;
+  }
+  document.getElementById('category-pills').innerHTML = h;
+}
+
+function setCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  renderAgents();
+}
+
+// ═══════════════════════════════════════════════════════
+// Agent Grid
+// ═══════════════════════════════════════════════════════
+function score(a) { return (votes.agents?.[a.name]?.score) || 0; }
+function rating(a) {
+  const r = reviews.agents?.[a.name]; if (!r?.length) return 0;
+  return r.reduce((s, x) => s + x.rating, 0) / r.length;
+}
+
+const TIER_ORDER = { official: 0, verified: 1, community: 2, experimental: 3 };
+
+function renderAgents() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const sort = document.getElementById('sort-select').value;
+  let f = allAgents.filter(a => {
+    const catOk = currentCat === 'all' || (currentCat === '__experimental' ? a.quality_tier === 'experimental' : a.category === currentCat);
+    const qOk = !q || a.name.toLowerCase().includes(q) || a.display_name.toLowerCase().includes(q) ||
+      a.description.toLowerCase().includes(q) || (a.tags || []).some(t => t.toLowerCase().includes(q)) ||
+      (a.author || '').toLowerCase().includes(q);
+    return catOk && qOk;
+  });
+  if (sort === 'popular') f.sort((a, b) => score(b) - score(a));
+  else if (sort === 'name') f.sort((a, b) => a.display_name.localeCompare(b.display_name));
+  else if (sort === 'rating') f.sort((a, b) => rating(b) - rating(a));
+  else if (sort === 'newest') f.sort((a, b) => (b._lines || 0) - (a._lines || 0));
+  else if (sort === 'verified') f.sort((a, b) => (TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2));
+
+  if (!f.length) {
+    document.getElementById('agents-container').innerHTML = '<div class="empty-state"><h3>No agents found</h3><p>Try a different search or category.</p></div>';
+    return;
+  }
+  document.getElementById('agents-container').innerHTML = `<div class="agents-grid">${f.map(agentCard).join('')}</div>`;
+}
+
+function agentCard(a) {
+  const s = score(a);
+  const tier = a.quality_tier || 'community';
+  const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
+  const sealHtml = tier === 'verified'
+    ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
+    : tier === 'experimental'
+    ? '<span class="tier tier-experimental">&#9878; experimental</span>'
+    : `<span class="tier tier-${tier}">${tier}</span>`;
+  return `
+    <div class="agent-card tier-${tier}" onclick='openAgent(${JSON.stringify(a.name)})'>
+      <div class="card-top"><span class="card-title">${esc(a.display_name)}</span>${sealHtml}</div>
+      <div class="card-ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
+      <div class="card-desc">${esc(a.description)}</div>
+      <div class="card-tags">${(a.tags || []).slice(0, 4).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="card-footer">
+        <div class="card-meta">
+          <span>${a._size_kb || '?'} KB</span>
+          <span>${a._lines || '?'} lines</span>
+          <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
+          ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
+          <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
+          <div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// Leaderboard
+// ═══════════════════════════════════════════════════════
+function renderLeaderboard() {
+  const ranked = [...allAgents].map(a => ({
+    ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
+  })).sort((a, b) => b.s - a.s || b.r - a.r);
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No data yet</h3></div>'; return; }
+
+  let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
+  ranked.slice(0, 50).forEach((a, i) => {
+    const tier = a.quality_tier || 'community';
+    const stars = a.r > 0 ? '&#9733;'.repeat(Math.round(a.r)) + ` ${a.r.toFixed(1)}` : '&mdash;';
+    const sealHtml = tier === 'verified'
+      ? '<span class="seal" style="font-size:.6rem;padding:1px 5px">VERIFIED</span>'
+      : tier === 'experimental'
+      ? '<span class="tier tier-experimental">&#9878; exp</span>'
+      : `<span class="tier tier-${tier}">${tier}</span>`;
+    h += `<tr>
+      <td class="lb-rank">${i + 1}</td>
+      <td class="lb-name" onclick='openAgent(${JSON.stringify(a.name)})'>${esc(a.display_name)}</td>
+      <td>${sealHtml}</td>
+      <td><span class="cat-badge">${a.category.replace(/_/g,' ')}</span></td>
+      <td class="lb-stars">${stars}</td>
+      <td class="lb-score">${a.s}</td></tr>`;
+  });
+  h += '</tbody></table>';
+  document.getElementById('leaderboard-container').innerHTML = h;
+}
+
+// ═══════════════════════════════════════════════════════
+// Agent Detail Modal
+// ═══════════════════════════════════════════════════════
+function openAgent(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+  const s = score(a);
+  const ar = reviews.agents?.[a.name] || [];
+  const avg = ar.length ? (ar.reduce((s, r) => s + r.rating, 0) / ar.length).toFixed(1) : null;
+  const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
+  const tier = a.quality_tier || 'community';
+  const env = (a.requires_env || []).length > 0
+    ? a.requires_env.map(e => `<code style="background:var(--surface2);color:var(--orange);padding:2px 8px;border-radius:4px;font-size:.85rem">${esc(e)}</code>`).join(' ')
+    : '<span style="color:var(--green)">None</span>';
+  const sourceRaw = a._source === 'upstream' && UPSTREAM_RAW ? UPSTREAM_RAW : RAW;
+  const sourceRepo = a._source === 'upstream' && UPSTREAM_REPO ? UPSTREAM_REPO : REPO;
+  const rawUrl = `${sourceRaw}/${a._file}`;
+  const ghUrl = `https://github.com/${sourceRepo}/blob/main/${a._file}`;
+
+  const sealHtml = tier === 'verified'
+    ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAR VERIFIED</span>'
+    : tier === 'experimental'
+    ? '<span class="tier tier-experimental" style="font-size:.85rem">&#9878; EXPERIMENTAL</span>'
+    : `<span class="tier tier-${tier}">${tier}</span>`;
+
+  const experimentalWarning = tier === 'experimental'
+    ? '<div style="background:rgba(188,140,255,.08);border:1px dashed rgba(188,140,255,.3);border-radius:8px;padding:10px 16px;margin-bottom:16px;color:#bc8cff;font-size:.88rem">&#9878; <strong>Experimental Agent</strong> — This agent is work-in-progress. It may have incomplete features or known issues.</div>'
+    : '';
+
+  const revHtml = ar.length > 0
+    ? `<div class="reviews-list">${ar.map(r => `<div class="review-item">
+        <div class="review-header"><span><span class="review-user">@${esc(r.user)}</span> <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
+        <span class="review-date">${new Date(r.timestamp).toLocaleDateString()}</span></div>
+        <div class="review-text">${esc(r.text)}</div></div>`).join('')}</div>`
+    : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet. Be the first!</p>';
+
+  document.getElementById('modal-content').innerHTML = `
+    <button class="close-modal" onclick="closeModal()">&#10005;</button>
+    <div class="modal-header">
+      <h2>${esc(a.display_name)}</h2>
+      <div class="ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
+      <div class="badges">
+        ${sealHtml}
+        <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
+        <span style="color:var(--text-muted);font-size:.82rem">${a._size_kb} KB &middot; ${a._lines} lines &middot; by ${esc(a.author)}</span>
+        ${avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
+      </div>
+    </div>
+    <div class="modal-body">
+      ${experimentalWarning}
+      <div class="modal-vote">
+        <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
+        <span class="vote-score">${s}</span>
+        <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
+      </div>
+      <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
+      <div class="modal-section"><h3>Install</h3>
+        <div class="cmd-box"><code id="install-cmd">curl -sO ${rawUrl}</code><button class="copy-btn" onclick="copyEl('install-cmd')">Copy</button></div>
+      </div>
+      <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
+      <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
+      <div class="modal-section"><h3>Source Code</h3>
+        <div class="code-viewer">
+          <div class="code-toolbar"><span class="fn">${a._file.split('/').pop()}</span>
+            <div><button class="copy-btn" onclick="copyCode()">Copy code</button>
+            <a href="${ghUrl}" target="_blank" style="margin-left:8px;color:#858585;font-size:.78rem">GitHub</a></div>
+          </div>
+          <div class="code-body" id="code-body"><span style="color:#858585">Loading...</span></div>
+        </div>
+      </div>
+      <div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
+        <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">&#9998; Write a Review</button>
+      </div>
+      <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; Download .py</a>
+        <a href="${ghUrl}" target="_blank" style="color:var(--accent);font-size:.9rem">&#128279; View on GitHub</a>
+        <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
+        <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  fetch(rawUrl + '?t=' + Date.now()).then(r => r.ok ? r.text() : 'Error loading source').then(code => {
+    window._code = code;
+    document.getElementById('code-body').innerHTML = hlPy(code);
+  });
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; }
+
+function hlPy(c) {
+  return esc(c)
+    .replace(/(#.*)/gm, '<span class="cmt">$1</span>')
+    .replace(/("""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\')/g, '<span class="str">$1</span>')
+    .replace(/(&quot;.*?&quot;|&#39;.*?&#39;)/g, '<span class="str">$1</span>')
+    .replace(/\b(def|class|return|import|from|if|elif|else|for|while|try|except|finally|with|as|yield|raise|pass|break|continue|and|or|not|in|is|None|True|False|self|lambda|async|await)\b/g, '<span class="kw">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>')
+    .replace(/@(\w+)/g, '<span class="dec">@$1</span>');
+}
+
+// ═══════════════════════════════════════════════════════
+// Voting
+// ═══════════════════════════════════════════════════════
+function quickVote(n) { doVote(n, 'up'); }
+
+async function doVote(agent, dir) {
+  if (!ghUser) { loginWithGitHub(); return; }
+  const targetRepo = getTargetRepo(agent);
+  const body = JSON.stringify({ action: 'vote', payload: { agent, direction: dir } }, null, 2);
+  try {
+    const res = await fetch(`https://api.github.com/repos/${targetRepo}/issues`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: `[RAR] vote: ${agent}`, body: '```json\n' + body + '\n```', labels: ['rar-action'] })
+    });
+    if (res.ok) {
+      if (!votes.agents[agent]) votes.agents[agent] = { up: 0, down: 0, score: 0, voters: {} };
+      const v = votes.agents[agent], prev = v.voters[ghUser.login];
+      if (prev === dir) { delete v.voters[ghUser.login]; v[dir]--; }
+      else { if (prev) v[prev]--; v.voters[ghUser.login] = dir; v[dir]++; }
+      v.score = v.up - v.down;
+      renderAgents(); showToast(`Vote recorded for ${agent}`, 'success');
+    } else { showToast('Vote failed', 'error'); }
+  } catch (e) { showToast('Network error', 'error'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// Reviews
+// ═══════════════════════════════════════════════════════
+function writeReview(agent) {
+  if (!ghUser) { loginWithGitHub(); return; }
+  const r = prompt('Rating (1-5 stars):');
+  if (!r) return;
+  const rating = parseInt(r);
+  if (isNaN(rating) || rating < 1 || rating > 5) { showToast('Rating must be 1-5', 'error'); return; }
+  const text = prompt('Your review:');
+  if (!text?.trim()) return;
+  const targetRepo = getTargetRepo(agent);
+  const body = JSON.stringify({ action: 'review', payload: { agent, rating, text: text.trim() } }, null, 2);
+  fetch(`https://api.github.com/repos/${targetRepo}/issues`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title: `[RAR] review: ${agent}`, body: '```json\n' + body + '\n```', labels: ['rar-action'] })
+  }).then(res => {
+    if (res.ok) {
+      if (!reviews.agents[agent]) reviews.agents[agent] = [];
+      reviews.agents[agent] = reviews.agents[agent].filter(rv => rv.user !== ghUser.login);
+      reviews.agents[agent].push({ user: ghUser.login, rating, text: text.trim(), timestamp: new Date().toISOString() });
+      openAgent(agent);
+      showToast('Review submitted!', 'success');
+    } else { showToast('Review failed', 'error'); }
+  }).catch(() => showToast('Network error', 'error'));
+}
+
+// ═══════════════════════════════════════════════════════
+// Submit Agent
+// ═══════════════════════════════════════════════════════
+function previewManifest() {
+  const code = document.getElementById('agent-code').value;
+  const pv = document.getElementById('manifest-preview');
+  const btn = document.getElementById('submit-btn');
+  if (!code.trim()) { pv.style.display = 'none'; btn.disabled = true; return; }
+  const m = code.match(/__manifest__\s*=\s*\{[\s\S]*?\n\}/);
+  if (!m) { pv.style.display = 'block'; pv.innerHTML = '<h4>Manifest Preview</h4><div class="err">No __manifest__ found.</div>'; btn.disabled = true; return; }
+  try {
+    const t = m[0].replace('__manifest__ =', '').trim();
+    const g = k => { const x = t.match(new RegExp(`"${k}"\\s*:\\s*"([^"]*)"`)); return x?.[1]; };
+    const name = g('name'), ver = g('version'), disp = g('display_name'), desc = g('description'), auth = g('author'), cat = g('category'), tier = g('quality_tier');
+    const errs = [];
+    if (!name?.startsWith('@') || !name?.includes('/')) errs.push('name must be @publisher/slug');
+    if (!ver || ver.split('.').length !== 3) errs.push('version must be semver');
+    if (!disp) errs.push('display_name required');
+    if (!desc) errs.push('description required');
+    if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
+    if (tier && tier !== 'community' && tier !== 'experimental') errs.push('quality_tier must be "community" or "experimental"');
+    pv.style.display = 'block';
+    pv.innerHTML = `<h4>Manifest Preview</h4>
+      ${[['name',name],['version',ver],['display',disp],['description',desc],['author',auth],['category',cat],['tier',tier]].filter(x=>x[1]).map(x=>`<div class="fld"><span class="k">${x[0]}</span><span class="v">${esc(x[1])}</span></div>`).join('')}
+      ${errs.length ? `<div class="err">${errs.join('<br>')}</div>` : '<div class="ok">&#10003; Manifest valid</div>'}`;
+    btn.disabled = errs.length > 0;
+  } catch { pv.style.display = 'block'; pv.innerHTML = '<h4>Manifest Preview</h4><div class="err">Parse error.</div>'; btn.disabled = true; }
+}
+
+async function submitAgent() {
+  if (!ghUser) { loginWithGitHub(); return; }
+  const code = document.getElementById('agent-code').value;
+  if (!code.trim()) return;
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Submitting...';
+  const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: '[RAR] submit_agent', body: '```json\n' + body + '\n```', labels: ['rar-action', 'agent-submission'] })
+    });
+    if (res.ok) {
+      const issue = await res.json();
+      showToast(`Submitted! Issue #${issue.number} created.`, 'success');
+      document.getElementById('agent-code').value = '';
+      document.getElementById('manifest-preview').style.display = 'none';
+    } else { showToast('Submission failed', 'error'); }
+  } catch (e) { showToast('Network error', 'error'); }
+  btn.disabled = false; btn.textContent = 'Submit Agent via GitHub Issue';
+}
+
+// ═══════════════════════════════════════════════════════
+// Federation — Submit to upstream
+// ═══════════════════════════════════════════════════════
+async function submitToUpstream(agentName) {
+  if (!ghUser) { loginWithGitHub(); return; }
+  if (!UPSTREAM_REPO) { showToast('No upstream configured', 'error'); return; }
+  const agent = allAgents.find(a => a.name === agentName);
+  if (!agent) return;
+  try {
+    const code = await fetch(`${RAW}/${agent._file}?t=${Date.now()}`).then(r => r.text());
+    const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
+    const res = await fetch(`https://api.github.com/repos/${UPSTREAM_REPO}/issues`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: '[RAR] submit_agent', body: '```json\n' + body + '\n```', labels: ['rar-action', 'agent-submission', 'federated'] })
+    });
+    if (res.ok) {
+      const issue = await res.json();
+      showToast(`Submitted to RAR! Issue #${issue.number}`, 'success');
+    } else {
+      const err = await res.json().catch(() => ({}));
+      showToast(`Submission failed: ${err.message || res.status}`, 'error');
+    }
+  } catch (e) { showToast('Network error: ' + e.message, 'error'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// Cart / Download / Share
+// ═══════════════════════════════════════════════════════
+function saveCart() {
+  localStorage.setItem('rar_cart', JSON.stringify([...cart]));
+  updateCartUI();
+}
+
+function toggleCartItem(name) {
+  if (cart.has(name)) cart.delete(name); else cart.add(name);
+  saveCart(); renderAgents();
+}
+
+function clearCart() { cart.clear(); saveCart(); renderAgents(); }
+
+function toggleCart() {
+  document.getElementById('cart-sidebar').classList.toggle('open');
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const badge = document.getElementById('cart-badge');
+  const n = cart.size;
+  badge.style.display = n > 0 ? 'flex' : 'none';
+  badge.textContent = n;
+  document.getElementById('cart-count').textContent = n;
+
+  const body = document.getElementById('cart-body');
+  const show = n > 0 ? '' : 'none';
+  document.getElementById('download-cart-btn').style.display = show;
+  document.getElementById('share-cart-btn').style.display = show;
+  document.getElementById('clear-cart-btn').style.display = show;
+
+  if (n === 0) {
+    body.innerHTML = '<div class="cart-empty">Your cart is empty. Browse agents and click <strong>+</strong> to add them.</div>';
+    document.getElementById('share-box').style.display = 'none';
+    return;
+  }
+
+  body.innerHTML = [...cart].map(name => {
+    const a = allAgents.find(x => x.name === name);
+    if (!a) return '';
+    return `<div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(a.display_name)}</div>
+        <div class="cart-item-ns">${esc(a.name)}</div>
+      </div>
+      <button class="cart-item-remove" onclick="toggleCartItem('${esc(name)}');renderAgents()">&#10005;</button>
+    </div>`;
+  }).join('');
+}
+
+async function downloadCart() {
+  if (cart.size === 0) return;
+
+  showToast('Preparing download...', 'success');
+
+  // Fetch all agent source files
+  const files = [];
+  for (const name of cart) {
+    const a = allAgents.find(x => x.name === name);
+    if (!a) continue;
+    try {
+      const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+      if (res.ok) {
+        const code = await res.text();
+        const filename = a._file.split('/').pop();
+        files.push({ name: filename, content: code, agent: a });
+      }
+    } catch {}
+  }
+
+  if (files.length === 0) { showToast('No files to download', 'error'); return; }
+
+  // Single file — download directly
+  if (files.length === 1) {
+    const blob = new Blob([files[0].content], { type: 'text/x-python' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = files[0].name;
+    link.click(); URL.revokeObjectURL(url);
+    showToast(`Downloaded ${files[0].name}`, 'success');
+    return;
+  }
+
+  // Multiple files — create a zip using JSZip
+  if (typeof JSZip === 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    document.head.appendChild(s);
+    await new Promise(r => s.onload = r);
+  }
+
+  const zip = new JSZip();
+  const agentsFolder = zip.folder('agents');
+
+  // Add each agent
+  files.forEach(f => agentsFolder.file(f.name, f.content));
+
+  // Add a README
+  const readme = `# RAR Agent Collection
+Downloaded from the RAPP Agent Registry
+Date: ${new Date().toISOString().split('T')[0]}
+
+## Agents included (${files.length})
+${files.map(f => `- ${f.agent.display_name} (${f.agent.name}) v${f.agent.version}`).join('\n')}
+
+## Installation
+Copy the .py files into your project's agents/ directory.
+
+## More agents
+Browse the full registry at: https://${OWNER}.github.io/${REPO_NAME}/
+`;
+  zip.file('README.md', readme);
+
+  // Generate and download
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url; link.download = `rar-agents-${files.length}.zip`;
+  link.click(); URL.revokeObjectURL(url);
+  showToast(`Downloaded ${files.length} agents as ZIP`, 'success');
+}
+
+function shareCart() {
+  if (cart.size === 0) return;
+  const agents = [...cart].map(n => encodeURIComponent(n)).join(',');
+  const url = `${window.location.origin}${window.location.pathname}?agents=${agents}`;
+  document.getElementById('share-url').value = url;
+  document.getElementById('share-box').style.display = 'flex';
+  navigator.clipboard.writeText(url);
+  showToast('Share link copied to clipboard!', 'success');
+}
+
+function loadSharedCart() {
+  const params = new URLSearchParams(window.location.search);
+  const agents = params.get('agents');
+  if (agents) {
+    agents.split(',').forEach(a => cart.add(decodeURIComponent(a)));
+    saveCart();
+    window.history.replaceState({}, '', window.location.pathname);
+    setTimeout(() => {
+      toggleCart();
+      showToast(`Loaded ${cart.size} shared agents into your cart`, 'success');
+    }, 1000);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Utils
+// ═══════════════════════════════════════════════════════
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+function copyEl(id) { navigator.clipboard.writeText(document.getElementById(id)?.value || document.getElementById(id)?.textContent?.trim()); showToast('Copied!', 'success'); }
+function shareAgent(name) {
+  const url = `${window.location.origin}${window.location.pathname}?agents=${encodeURIComponent(name)}`;
+  navigator.clipboard.writeText(url);
+  showToast('Agent share link copied!', 'success');
+}
+function copyCode() { if (window._code) { navigator.clipboard.writeText(window._code); showToast('Code copied!', 'success'); } }
+function showToast(msg, type) {
+  document.querySelector('.toast')?.remove();
+  const t = document.createElement('div');
+  t.className = `toast ${type || ''}`;
+  t.innerHTML = `<span>${type === 'success' ? '&#10003;' : '&#10007;'}</span> ${esc(msg)}`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { e.preventDefault(); document.getElementById('search')?.focus(); }
+});
+
+init();
+loadSharedCart();
+updateCartUI();
+</script>
+</body>
+</html>
