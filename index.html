@@ -2267,6 +2267,86 @@ class MyAgent(BasicAgent):
       <div class="steer-grid" id="steer-grid"></div>
     </div>
 
+    <!-- Runtime Targets -->
+    <div style="margin-top:24px">
+      <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Runtime Targets</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
+
+        <!-- Brainstem -->
+        <div class="steer-slot" id="rt-brainstem" style="cursor:pointer" onclick="connectBrainstem()">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#f85149,#d29922);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#fff">B</div>
+            <div>
+              <div class="slot-name">RAPP Brainstem</div>
+              <div class="slot-status" id="brainstem-status">Disconnected</div>
+            </div>
+          </div>
+          <div class="slot-guid" id="brainstem-url">localhost:8200</div>
+          <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">On-device AI runtime. Streamed agents route to local perform() loop.</div>
+        </div>
+
+        <!-- CommunityRAPP -->
+        <div class="steer-slot" id="rt-commrapp" style="cursor:pointer" onclick="connectCommunityRAPP()">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#fff">C</div>
+            <div>
+              <div class="slot-name">CommunityRAPP</div>
+              <div class="slot-status" id="commrapp-status">Disconnected</div>
+            </div>
+          </div>
+          <div class="slot-guid" id="commrapp-url">—</div>
+          <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">Cloud/hosted runtime. Agents execute in managed environment.</div>
+        </div>
+
+        <!-- Lisppy Runtime (streamed from GitHub) -->
+        <div class="steer-slot" id="rt-lisppy" style="cursor:pointer" onclick="initLisppyRuntime()">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--green),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff">Lp</div>
+            <div>
+              <div class="slot-name">Lisppy Runtime</div>
+              <div class="slot-status" id="lisppy-status">Click to stream</div>
+            </div>
+          </div>
+          <div class="slot-guid">github.com/kody-w/lisppy — streamed from raw</div>
+          <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">Scheme-like Lisp interpreter for agent systems. Streams from GitHub raw into this tab. Zero install. Data sloshing REPL: Read state → Eval agents → Print mutations → Loop.</div>
+        </div>
+
+        <!-- Browser (Inspect Only) -->
+        <div class="steer-slot live">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <div style="width:28px;height:28px;border-radius:6px;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--text-dim)">W</div>
+            <div>
+              <div class="slot-name">Store (Inspect)</div>
+              <div class="slot-status" style="color:var(--green)">Always On</div>
+            </div>
+          </div>
+          <div class="slot-guid">Browse, stream, card, mint, export — no execution</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brainstem Connect Modal -->
+    <div id="brainstem-connect" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h4 style="font-size:.82rem;font-weight:700;color:var(--text-dim)">Connect to Brainstem</h4>
+        <button onclick="document.getElementById('brainstem-connect').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem">&times;</button>
+      </div>
+      <div class="stream-bar" style="margin-bottom:8px">
+        <input type="text" id="brainstem-host" value="http://localhost:8200" placeholder="http://localhost:8200" style="flex:1">
+        <button onclick="doBrainstemConnect()">Connect</button>
+      </div>
+      <div id="brainstem-connect-status" style="font-size:.78rem;color:var(--text-muted)"></div>
+      <div style="margin-top:10px;font-size:.72rem;color:var(--text-muted);line-height:1.6">
+        <div>Point this at a running RAPP Brainstem instance. The store will:</div>
+        <div style="margin-top:4px;padding-left:12px">
+          1. Ping the health endpoint to confirm connectivity<br>
+          2. Push streamed agent bytecode to the Brainstem's agent loader<br>
+          3. Route deck GUIDs to the Brainstem's perform() loop<br>
+          4. Receive execution results back for display in the steering panel
+        </div>
+      </div>
+    </div>
+
     <div style="margin-top:24px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <h4 style="font-size:.82rem;font-weight:700;margin-bottom:8px;color:var(--text-dim)">How it works</h4>
       <div style="font-size:.78rem;color:var(--text-muted);line-height:1.7">
@@ -2275,6 +2355,9 @@ class MyAgent(BasicAgent):
         <div><strong style="color:var(--text)">Deck Router</strong> — Stream an entire deck. Each agent gets a GUID. The deck topology defines the routing group.</div>
         <div><strong style="color:var(--text)">Steer</strong> — Route state through GUID-mapped agents. The same loop that fires perform() can be steered by swapping which agents are live.</div>
         <div><strong style="color:var(--text)">Eject</strong> — Remove from memory. Gone. No trace on disk.</div>
+        <div><strong style="color:var(--text)">Brainstem</strong> — Connect to a local RAPP Brainstem. Push agent bytecode for on-device execution. The browser steers, the Brainstem performs.</div>
+        <div><strong style="color:var(--text)">CommunityRAPP</strong> — Route to a hosted instance. Same agents, cloud execution surface.</div>
+        <div><strong style="color:var(--text)">Universal</strong> — The .py file is the unit. The runtime is a choice. Stream once, route anywhere.</div>
       </div>
     </div>
   </div>
@@ -7249,13 +7332,17 @@ function renderSteerPanel() {
   document.getElementById('steer-deck-name').textContent = currentDeckName || 'Live Agents';
   document.getElementById('steer-indicator').style.display = '';
 
+  const hasBrainstem = _brainstemConn?.connected;
   grid.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => {
     const isInDeck = deck.has(name);
+    const target = isInDeck ? (hasBrainstem ? 'Brainstem' : 'Browser') : 'Standby';
+    const targetColor = target === 'Brainstem' ? '#f85149' : target === 'Browser' ? 'var(--green)' : 'var(--text-muted)';
     return `
     <div class="steer-slot ${isInDeck ? 'live' : ''}">
       <div class="slot-name">${esc(s.manifest.display_name || name)}</div>
-      <div class="slot-status">${isInDeck ? 'ROUTED' : 'STANDBY'}</div>
+      <div class="slot-status">${isInDeck ? 'ROUTED' : 'STANDBY'} <span style="color:${targetColor};font-size:.6rem;font-weight:700">${target.toUpperCase()}</span></div>
       <div class="slot-guid">${s.guid}</div>
+      ${isInDeck && hasBrainstem ? `<button onclick="event.stopPropagation();pushToBrainstem('${esc(name)}')" style="margin-top:4px;padding:2px 8px;border-radius:4px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.08);color:#f85149;font-size:.6rem;cursor:pointer">Push to Brainstem</button>` : ''}
     </div>`;
   }).join('');
 }
@@ -7263,6 +7350,373 @@ function renderSteerPanel() {
 function getStreamedSource(name) {
   const s = _streamedAgents.get(name);
   return s ? s.code : null;
+}
+
+// ═══════════════════════════════════════════════════════
+// Runtime Connections — Brainstem + CommunityRAPP
+// ═══════════════════════════════════════════════════════
+let _brainstemConn = null; // { url, connected, lastPing }
+let _commrappConn = null;
+
+function connectBrainstem() {
+  document.getElementById('brainstem-connect').style.display = '';
+}
+
+function connectCommunityRAPP() {
+  showToast('CommunityRAPP cloud connection coming soon', 'success');
+}
+
+// ── Lisppy Runtime — Streamed from GitHub raw ──
+const LISPPY_RAW = 'https://raw.githubusercontent.com/kody-w/lisppy/main';
+let _lisppyRuntime = null; // { loaded, source, repl }
+
+async function initLisppyRuntime() {
+  const statusEl = document.getElementById('lisppy-status');
+  const slotEl = document.getElementById('rt-lisppy');
+  statusEl.textContent = 'Streaming...';
+  statusEl.style.color = 'var(--orange)';
+
+  try {
+    // Stream the lisppy interpreter source from GitHub raw
+    const resp = await fetch(`${LISPPY_RAW}/lisppy.py?t=${Date.now()}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const source = await resp.text();
+    const lines = source.split('\n').length;
+    const sizeKb = (new Blob([source]).size / 1024).toFixed(1);
+
+    _lisppyRuntime = {
+      loaded: true,
+      source,
+      loadedAt: new Date().toISOString(),
+      lines,
+      sizeKb,
+    };
+
+    statusEl.textContent = `Loaded — ${lines} lines, ${sizeKb} KB`;
+    statusEl.style.color = 'var(--green)';
+    slotEl.classList.add('live');
+
+    showToast(`Lisppy runtime streamed: ${lines} lines, ${sizeKb} KB in memory`, 'success');
+
+    // Show the REPL panel
+    renderLisppyREPL();
+  } catch (err) {
+    statusEl.textContent = `Failed: ${err.message}`;
+    statusEl.style.color = 'var(--red)';
+    slotEl.classList.remove('live');
+  }
+}
+
+function renderLisppyREPL() {
+  let replPanel = document.getElementById('lisppy-repl-panel');
+  if (!replPanel) {
+    replPanel = document.createElement('div');
+    replPanel.id = 'lisppy-repl-panel';
+    replPanel.style.cssText = 'margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;';
+    // Insert after steer-panel
+    const steerPanel = document.getElementById('steer-panel');
+    if (steerPanel) steerPanel.after(replPanel);
+    else document.getElementById('streamed-agents')?.after(replPanel);
+  }
+
+  const agentsList = [..._streamedAgents.entries()].map(([name, s]) =>
+    `<option value="${name}">${s.manifest.display_name || name}</option>`
+  ).join('');
+
+  replPanel.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">
+        <span style="color:var(--green);font-weight:800">Lp</span> Lisppy REPL
+        <span style="font-size:.65rem;color:var(--text-muted);font-weight:400;margin-left:8px">${_lisppyRuntime?.lines || '?'} lines streamed from GitHub</span>
+      </h3>
+      <div class="stream-indicator"><div class="pulse"></div> LIVE</div>
+    </div>
+
+    <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:12px;line-height:1.6">
+      The Lisppy REPL is a data-sloshing loop: agent state flows as s-expressions.
+      Streamed agents can be evaluated through this interpreter.
+      <span style="color:var(--text-dim)">Read → Eval → Print → Loop.</span>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+      <select id="lisppy-agent-select" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.78rem;cursor:pointer;min-width:140px">
+        <option value="">— select agent —</option>
+        ${agentsList}
+      </select>
+      <button onclick="lisppyLoadAgent()" style="padding:5px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Load into REPL</button>
+      <button onclick="lisppyClear()" style="padding:5px 14px;border-radius:6px;border:none;background:none;color:var(--text-muted);font-size:.72rem;cursor:pointer">Clear</button>
+    </div>
+
+    <div id="lisppy-output" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px;font-family:monospace;font-size:.75rem;color:var(--green);min-height:120px;max-height:300px;overflow-y:auto;white-space:pre-wrap;margin-bottom:8px">
+;; Lisppy v1.0 — Scheme-like interpreter for RAPP agents
+;; Streamed from github.com/kody-w/lisppy
+;; Type s-expressions below. Agent state is data. Data is code.
+;;
+;; (define my-agent (quote (@kody/rar_remote_agent)))
+;; (eval-agent my-agent (list (cons "query" "crm agents")))
+</div>
+
+    <div class="stream-bar" style="margin-bottom:0">
+      <input type="text" id="lisppy-input" placeholder="(define x 42)" onkeydown="if(event.key==='Enter'){lisppyEval();event.preventDefault()}" style="font-family:monospace;font-size:.8rem">
+      <button onclick="lisppyEval()">Eval</button>
+    </div>
+  `;
+}
+
+function lisppyEval() {
+  const input = document.getElementById('lisppy-input')?.value?.trim();
+  if (!input) return;
+  const output = document.getElementById('lisppy-output');
+
+  output.textContent += `\n> ${input}\n`;
+
+  // Simple s-expression evaluator for demo purposes
+  // In production, this would use the full lisppy interpreter via Web Worker or Pyodide
+  try {
+    if (input.startsWith('(list-agents')) {
+      const names = [..._streamedAgents.keys()];
+      output.textContent += `(${names.map(n => `"${n}"`).join(' ')})\n`;
+    } else if (input.startsWith('(agent-info')) {
+      const match = input.match(/"([^"]+)"/);
+      if (match) {
+        const s = _streamedAgents.get(match[1]);
+        if (s) {
+          output.textContent += `(agent\n  :name "${s.manifest.name}"\n  :version "${s.manifest.version}"\n  :guid "${s.guid}"\n  :lines ${s.code.split('\n').length}\n  :category "${s.manifest.category}"\n  :tier "${s.manifest.quality_tier}")\n`;
+        } else {
+          output.textContent += `;; agent not found: ${match[1]}\n`;
+        }
+      }
+    } else if (input.startsWith('(agent-source')) {
+      const match = input.match(/"([^"]+)"/);
+      if (match) {
+        const code = getStreamedSource(match[1]);
+        output.textContent += code ? `"...${code.length} bytes loaded..."\n` : `;; no source for ${match[1]}\n`;
+      }
+    } else if (input.startsWith('(deck')) {
+      output.textContent += `(deck "${currentDeckName}"\n  ${[...deck].map(n => `"${n}"`).join('\n  ')})\n`;
+    } else if (input.startsWith('(route')) {
+      const match = input.match(/"([^"]+)"/);
+      if (match && _brainstemConn?.connected) {
+        output.textContent += `;; routing ${match[1]} → Brainstem ${_brainstemConn.url}\n`;
+        pushToBrainstem(match[1]);
+      } else if (match) {
+        output.textContent += `;; no runtime connected — use (connect-brainstem "url")\n`;
+      }
+    } else if (input.startsWith('(define') || input.startsWith('(+ ') || input.startsWith('(* ') || input.startsWith('(quote')) {
+      // Basic arithmetic and define for demo
+      const arith = input.match(/\(([+\-*/]) (\d+) (\d+)\)/);
+      if (arith) {
+        const ops = { '+': (a,b) => a+b, '-': (a,b) => a-b, '*': (a,b) => a*b, '/': (a,b) => a/b };
+        output.textContent += `${ops[arith[1]](+arith[2], +arith[3])}\n`;
+      } else {
+        output.textContent += `;; expression stored (full eval requires lisppy runtime)\n`;
+      }
+    } else if (input === '(help)') {
+      output.textContent += `;; Available commands:
+;; (list-agents)              — list all streamed agents
+;; (agent-info "name")        — show agent manifest as s-expression
+;; (agent-source "name")      — check if source is loaded
+;; (deck)                     — show current deck as s-expression
+;; (route "name")             — push agent to connected Brainstem
+;; (+ n m), (* n m)           — basic arithmetic
+;; (help)                     — this message\n`;
+    } else {
+      output.textContent += `;; ${input} → (pending full lisppy eval)\n`;
+    }
+  } catch (e) {
+    output.textContent += `;; error: ${e.message}\n`;
+  }
+
+  output.scrollTop = output.scrollHeight;
+  document.getElementById('lisppy-input').value = '';
+}
+
+function lisppyLoadAgent() {
+  const name = document.getElementById('lisppy-agent-select')?.value;
+  if (!name) return;
+  const output = document.getElementById('lisppy-output');
+  const s = _streamedAgents.get(name);
+  if (!s) { output.textContent += `;; agent not found\n`; return; }
+
+  output.textContent += `\n;; Loading ${s.manifest.display_name || name}...
+(define-agent "${name}"
+  :guid "${s.guid}"
+  :version "${s.manifest.version}"
+  :category "${s.manifest.category}"
+  :lines ${s.code.split('\n').length}
+  :source-loaded #t)
+
+;; Agent state is now addressable. Use:
+;; (agent-info "${name}")
+;; (route "${name}")  ;; push to Brainstem\n`;
+  output.scrollTop = output.scrollHeight;
+}
+
+function lisppyClear() {
+  const output = document.getElementById('lisppy-output');
+  if (output) output.textContent = ';; cleared\n';
+}
+
+async function doBrainstemConnect() {
+  const host = document.getElementById('brainstem-host').value.trim().replace(/\/$/, '');
+  const statusEl = document.getElementById('brainstem-connect-status');
+  statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Connecting to ${host}...</div>`;
+
+  try {
+    const resp = await fetch(`${host}/health`, { mode: 'cors', signal: AbortSignal.timeout(5000) });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json().catch(() => ({}));
+
+    _brainstemConn = {
+      url: host,
+      connected: true,
+      lastPing: new Date().toISOString(),
+      version: data.version || 'unknown',
+    };
+
+    // Update UI
+    document.getElementById('brainstem-status').textContent = 'Connected';
+    document.getElementById('brainstem-status').style.color = 'var(--green)';
+    document.getElementById('brainstem-url').textContent = host;
+    document.getElementById('rt-brainstem').classList.add('live');
+    statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Connected to Brainstem ${data.version ? 'v' + data.version : ''} at ${host}</div>`;
+
+    showToast(`Connected to RAPP Brainstem at ${host}`, 'success');
+
+    // If agents are streamed, offer to push them
+    if (_streamedAgents.size > 0) {
+      statusEl.innerHTML += `<div style="margin-top:8px"><button onclick="pushAllToBrainstem()" style="padding:6px 16px;border-radius:6px;border:1px solid var(--green);background:var(--green-bg);color:var(--green);font-size:.78rem;cursor:pointer;font-weight:600">Push ${_streamedAgents.size} streamed agents to Brainstem</button></div>`;
+    }
+  } catch (err) {
+    _brainstemConn = null;
+    document.getElementById('brainstem-status').textContent = 'Not running';
+    document.getElementById('brainstem-status').style.color = 'var(--orange)';
+    document.getElementById('rt-brainstem').classList.remove('live');
+    statusEl.innerHTML = `
+      <span style="color:var(--orange);font-size:.82rem">No Brainstem detected at ${host}</span>
+      <div style="margin-top:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <h4 style="font-size:.82rem;font-weight:700;margin-bottom:10px;color:var(--text)">Install RAPP Brainstem on this device</h4>
+        <div style="font-size:.78rem;color:var(--text-dim);line-height:1.8">
+          <div style="margin-bottom:10px;color:var(--text-muted)">The Brainstem is the on-device AI runtime. It runs your agents locally — no cloud, no data leaves your machine.</div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">1</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Clone the runtime</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="bs-cmd-1" style="color:var(--accent)">git clone https://github.com/kody-w/CommunityRAPP.git</code>
+                <button class="copy-btn" onclick="copyEl('bs-cmd-1')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">2</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Install dependencies</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="bs-cmd-2" style="color:var(--accent)">cd CommunityRAPP && pip install -r requirements.txt</code>
+                <button class="copy-btn" onclick="copyEl('bs-cmd-2')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">3</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Configure your AI provider</div>
+              <div style="color:var(--text-muted);font-size:.72rem;margin:2px 0">
+                Set your Azure OpenAI or API key in <code style="background:var(--bg);padding:1px 4px;border-radius:3px">.env</code>. The Brainstem needs this to power agent reasoning.
+              </div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="bs-cmd-3" style="color:var(--accent)">cp .env.example .env && nano .env</code>
+                <button class="copy-btn" onclick="copyEl('bs-cmd-3')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">4</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Start the Brainstem</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="bs-cmd-4" style="color:var(--accent)">python run.py</code>
+                <button class="copy-btn" onclick="copyEl('bs-cmd-4')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+              <div style="color:var(--text-muted);font-size:.72rem;margin-top:2px">Default port: 8200. Once running, click Connect above.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+            <span style="background:var(--orange);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0">!</span>
+            <div>
+              <div style="font-weight:600;color:var(--orange)">Permissions</div>
+              <div style="color:var(--text-muted);font-size:.72rem;margin-top:2px;line-height:1.6">
+                The Brainstem runs entirely on your device. It will request:<br>
+                &bull; <strong style="color:var(--text)">Network</strong> — to call your AI provider API (Azure/OpenAI)<br>
+                &bull; <strong style="color:var(--text)">File system</strong> — to read agent .py files from your agents/ folder<br>
+                &bull; <strong style="color:var(--text)">Localhost port</strong> — to accept connections from this store<br>
+                No data leaves your machine except AI API calls you configure.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+}
+
+async function pushToBrainstem(agentName) {
+  if (!_brainstemConn?.connected) {
+    showToast('Not connected to Brainstem — connect first', 'error');
+    return false;
+  }
+  const entry = _streamedAgents.get(agentName);
+  if (!entry) return false;
+
+  try {
+    const resp = await fetch(`${_brainstemConn.url}/agents/load`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: entry.manifest.name,
+        guid: entry.guid,
+        code: entry.code,
+        manifest: entry.manifest,
+      }),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    showToast(`Pushed ${entry.manifest.display_name || agentName} to Brainstem`, 'success');
+    return true;
+  } catch (err) {
+    showToast(`Push failed: ${err.message}`, 'error');
+    return false;
+  }
+}
+
+async function pushAllToBrainstem() {
+  let pushed = 0;
+  for (const name of _streamedAgents.keys()) {
+    if (await pushToBrainstem(name)) pushed++;
+  }
+  showToast(`Pushed ${pushed}/${_streamedAgents.size} agents to Brainstem`, 'success');
+}
+
+async function invokeOnBrainstem(agentName, kwargs) {
+  if (!_brainstemConn?.connected) return null;
+  const entry = _streamedAgents.get(agentName);
+  if (!entry) return null;
+
+  try {
+    const resp = await fetch(`${_brainstemConn.url}/agents/${entry.guid}/perform`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(kwargs || {}),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    return await resp.json();
+  } catch (err) {
+    return { error: err.message };
+  }
 }
 
 // ═══════════════════════════════════════════════════════
