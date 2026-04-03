@@ -3842,6 +3842,31 @@ function activateDemoMode() {
     reviews.agents[a.name] = agentReviews;
   });
 
+  // Set up demo decks — curated from the top-voted agents
+  const topAgents = [...allAgents]
+    .map(a => ({ ...a, s: (votes.agents?.[a.name]?.score) || 0 }))
+    .sort((a, b) => b.s - a.s);
+  const topNames = topAgents.slice(0, 40).map(a => a.name);
+
+  // Curated demo decks
+  const demoCoreTools = topNames.filter(n =>
+    n.includes('@rapp/') || n.includes('@kody/')
+  ).slice(0, 5);
+  const demoSalesStack = topNames.filter(n =>
+    n.includes('sales') || n.includes('crm') || n.includes('deal') || n.includes('dynamics') || n.includes('email')
+  ).slice(0, 6);
+  const demoShowcase = topNames.slice(0, 8);
+
+  allDecks = {
+    'Top Agents': demoShowcase,
+    'Core Toolkit': demoCoreTools.length >= 3 ? demoCoreTools : topNames.slice(0, 5),
+    'Sales & CRM': demoSalesStack.length >= 3 ? demoSalesStack : topNames.slice(5, 11),
+  };
+  currentDeckName = 'Top Agents';
+  deck = new Set(allDecks[currentDeckName]);
+  saveDecks();
+  renderDeckSelect();
+
   // Re-render everything
   renderAgents();
   renderLeaderboard();
