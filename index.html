@@ -556,6 +556,64 @@
   /* Artist attribution in creative mode */
   .ac-artist { font-size: .55rem; color: var(--text-muted); text-align: right; padding: 2px 8px; font-style: italic; }
 
+  /* ─── Holo Card Skin (inspired by Howard's CardSmith) ─── */
+  .agent-card-holo {
+    position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
+    overflow: hidden; border: 2px solid #8b7332;
+    background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
+    display: flex; flex-direction: column; padding: 0;
+  }
+  .holo-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px 4px;
+  }
+  .holo-name { font-size: .9rem; font-weight: 700; color: #e8dcc8; }
+  .holo-pips { display: flex; gap: 3px; }
+  .holo-pip {
+    width: 16px; height: 16px; border-radius: 50%; font-size: .55rem;
+    font-weight: 800; display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(0,0,0,.4); text-shadow: 0 1px 1px rgba(0,0,0,.5);
+  }
+  .holo-pip.W { background: #f9faf4; color: #333; }
+  .holo-pip.U { background: #0e68ab; color: #fff; }
+  .holo-pip.B { background: #150b00; color: #cbc2b6; border-color: #4a3f32; }
+  .holo-pip.R { background: #d3202a; color: #fff; }
+  .holo-pip.G { background: #00733e; color: #fff; }
+  .holo-pip.N { background: #9e9e9e; color: #333; }
+  .holo-art {
+    margin: 0 10px; aspect-ratio: 5/3; border: 1px solid #5a4a2a;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    background: #0d0a06;
+  }
+  .holo-art svg { width: 90%; height: 90%; }
+  .holo-type {
+    font-size: .62rem; color: #b8a88a; padding: 4px 12px;
+    border-top: 1px solid #3d3322; border-bottom: 1px solid #3d3322;
+    margin: 4px 0; background: rgba(50,40,25,.5);
+  }
+  .holo-text {
+    flex: 1; padding: 4px 12px; overflow: hidden;
+    font-size: .65rem; color: #c8b89a; line-height: 1.4;
+    background: rgba(30,25,15,.4); margin: 0 1px;
+  }
+  .holo-ability { margin-bottom: 4px; }
+  .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
+  .holo-flavor {
+    font-style: italic; font-size: .58rem; color: #8a7e6a;
+    border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 4px;
+  }
+  .holo-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 12px 6px; font-size: .58rem;
+  }
+  .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; }
+  .holo-rarity.mythic { color: #ff8c00; }
+  .holo-rarity.rare { color: #ffd700; }
+  .holo-rarity.uncommon { color: #c0c0c0; }
+  .holo-rarity.common { color: #78909c; }
+  .holo-stats { font-weight: 800; font-size: .85rem; color: #e8dcc8; }
+  .holo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
   /* Deck builder */
   .deck-bar {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
@@ -936,7 +994,7 @@
   <!-- Agent Cards -->
   <div class="panel" id="panel-cards">
     <div class="cards-header">
-      <div class="sub">Agent Trading Card Collection</div>
+      <div class="sub">Brainstem Trading Card Collection</div>
       <h2>AGENT CARDS</h2>
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();showModal('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
     </div>
@@ -951,7 +1009,7 @@
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <div class="card-mode-toggle">
           <button class="active" onclick="setCardMode('business',this)">Business</button>
-          <button onclick="setCardMode('creative',this)">Creative</button>
+          <button onclick="setCardMode('creative',this)">Holo</button>
         </div>
         <input type="text" id="card-search" placeholder="Search cards..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
       </div>
@@ -961,7 +1019,7 @@
       <span class="pill" data-cf="mythic" onclick="setCardFilter('mythic',this)" style="color:#ff6d00;border-color:rgba(255,109,0,.3)">Official</span>
       <span class="pill" data-cf="rare" onclick="setCardFilter('rare',this)" style="color:#ffd700;border-color:rgba(255,215,0,.3)">Verified</span>
       <span class="pill" data-cf="uncommon" onclick="setCardFilter('uncommon',this)">Community</span>
-      <span class="pill" data-cf="common" onclick="setCardFilter('common',this)" style="color:#bc8cff;border-color:rgba(188,140,255,.3)">Experimental</span>
+      <span class="pill" data-cf="common" onclick="setCardFilter('common',this)" style="color:#bc8cff;border-color:rgba(188,140,255,.3)">Frontier</span>
       <span style="color:var(--text-muted);margin:0 4px">|</span>
       <span class="pill" data-cf="deck" onclick="setCardFilter('deck',this)" style="color:var(--accent);border-color:rgba(88,166,255,.3)">My Deck</span>
     </div>
@@ -1015,15 +1073,15 @@
       <p>Every agent in the registry carries a quality tier. Like Nintendo's Seal of Quality, the <strong>RAR Verified</strong> seal means an agent meets a rigorous standard of reliability, security, and usefulness.</p>
 
       <div class="tier-card t-experimental">
-        <h3><span class="tier tier-experimental">&#9878; EXPERIMENTAL</span> Preview Tier</h3>
+        <h3><span class="tier tier-experimental">&#9878; FRONTIER</span> Preview Tier</h3>
         <div class="subtitle">For work-in-progress agents, prototypes, and alpha-quality experiments. Use at your own risk.</div>
         <ul>
           <li>Valid <code>__manifest__</code> with all required fields</li>
           <li>Follows the single-file <code>agent.py</code> pattern</li>
           <li>Parseable by AST (no syntax errors)</li>
           <li>No hardcoded secrets, API keys, or credentials</li>
-          <li>Clearly marked as experimental in the registry</li>
-          <li>May have incomplete features or known issues</li>
+          <li>Clearly marked as frontier in the registry</li>
+          <li>Pushing the edge — may be evolving rapidly</li>
           <li>Can be promoted to Community when stable</li>
         </ul>
       </div>
@@ -1153,7 +1211,7 @@ class MyAgent(BasicAgent):
       <div class="manifest-preview" id="manifest-preview" style="display:none"></div>
       <button class="submit-btn" id="submit-btn" onclick="submitAgent()" disabled>Submit Agent via GitHub Issue</button>
       <p style="color:var(--text-muted);font-size:.8rem;margin-top:10px">
-        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> or <span class="tier tier-experimental">EXPERIMENTAL</span> tier.
+        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> or <span class="tier tier-experimental">FRONTIER</span> tier.
       </p>
     </div>
   </div>
@@ -1215,8 +1273,8 @@ class MyAgent(BasicAgent):
       </div>
 
       <div class="roadmap-lane rm-exp-lane">
-        <h3>&#9878; Experimental</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Ideas being explored. May ship, may not. Feedback welcome.</p>
+        <h3>&#9878; Frontier</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Pushing the edge. These features are actively being explored. Feedback shapes their direction.</p>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent-to-agent invocation</div><div class="rm-desc">An agent calls another agent's perform() by name. Declared in dependencies, resolved at runtime.</div></div></div>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Offline-first PWA</div><div class="rm-desc">Install RAR as a PWA. Browse your local agents with no network. Sync when you're back online.</div></div></div>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent canvas</div><div class="rm-desc">Visual drag-and-drop wiring of agents into pipelines. Each node is a card. Connections are data flows.</div></div></div>
@@ -1730,7 +1788,7 @@ function buildCategoryPills(stats) {
   });
   const expCount = allAgents.filter(a => a.quality_tier === 'experimental').length;
   if (expCount > 0 && window.RAR_FEATURES?.experimental_filter_pill !== false) {
-    h += `<span class="pill" data-cat="__experimental" onclick="setCat('__experimental',this)" style="border-color:rgba(188,140,255,.3);color:#bc8cff">&#9878; Experimental <span class="ct">${expCount}</span></span>`;
+    h += `<span class="pill" data-cat="__experimental" onclick="setCat('__experimental',this)" style="border-color:rgba(188,140,255,.3);color:#bc8cff">&#9878; Frontier <span class="ct">${expCount}</span></span>`;
   }
   document.getElementById('category-pills').innerHTML = h;
 }
@@ -1860,11 +1918,11 @@ function openAgent(name) {
   const sealHtml = tier === 'verified'
     ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAR VERIFIED</span>'
     : tier === 'experimental'
-    ? '<span class="tier tier-experimental" style="font-size:.85rem">&#9878; EXPERIMENTAL</span>'
+    ? '<span class="tier tier-experimental" style="font-size:.85rem">&#9878; FRONTIER</span>'
     : `<span class="tier tier-${tier}">${tier}</span>`;
 
   const experimentalWarning = tier === 'experimental'
-    ? '<div style="background:rgba(188,140,255,.08);border:1px dashed rgba(188,140,255,.3);border-radius:8px;padding:10px 16px;margin-bottom:16px;color:#bc8cff;font-size:.88rem">&#9878; <strong>Experimental Agent</strong> — This agent is work-in-progress. It may have incomplete features or known issues.</div>'
+    ? '<div style="background:rgba(188,140,255,.08);border:1px dashed rgba(188,140,255,.3);border-radius:8px;padding:10px 16px;margin-bottom:16px;color:#bc8cff;font-size:.88rem">&#9878; <strong>Frontier Agent</strong> — This agent is pushing the edge. It may have incomplete features or be evolving rapidly.</div>'
     : '';
 
   const revHtml = ar.length > 0
@@ -2920,7 +2978,7 @@ function deleteDeck() {
 }
 
 const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'uncommon', experimental: 'common' };
-const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Experimental' };
+const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Frontier' };
 
 // Color mapping by category
 const CAT_COLORS = {
@@ -2935,6 +2993,46 @@ const CAT_COLORS = {
 function getCatColor(cat) {
   return CAT_COLORS[cat] || CAT_COLORS.general;
 }
+
+// ── Holo card data (MTG-style, inspired by Howard's CardSmith) ──
+const CAT_TO_PIPS = {
+  core: ['W','U'], integrations: ['U','B'], productivity: ['G','W'],
+  devtools: ['R','U'], pipeline: ['B','R'], general: ['N'],
+  b2b_sales: ['R','W'], b2c_sales: ['G','W'], healthcare: ['W','G'],
+  financial_services: ['U','B'], manufacturing: ['R','G'], energy: ['R','G'],
+  federal_government: ['W','U'], slg_government: ['W','U'],
+  human_resources: ['G','W'], it_management: ['U','R'],
+  professional_services: ['U','W'], retail_cpg: ['G','R'],
+  software_digital_products: ['U','R'],
+};
+const CAT_TO_TYPE = {
+  core: 'Agent Architect', integrations: 'Agent Conduit', productivity: 'Agent Scribe',
+  devtools: 'Agent Artificer', pipeline: 'Agent Forgemaster', general: 'Agent',
+  b2b_sales: 'Agent Enforcer', b2c_sales: 'Agent Merchant', healthcare: 'Agent Healer',
+  financial_services: 'Agent Banker', manufacturing: 'Agent Machinist', energy: 'Agent Warden',
+  federal_government: 'Agent Sentinel', slg_government: 'Agent Steward',
+  human_resources: 'Agent Counselor', it_management: 'Agent Operator',
+  professional_services: 'Agent Advisor', retail_cpg: 'Agent Vendor',
+  software_digital_products: 'Agent Builder',
+};
+const FLAVOR_PHRASES = {
+  core: '"The foundation holds when everything else shifts."',
+  integrations: '"It speaks every protocol. It forgets none."',
+  productivity: '"What took hours now takes a thought."',
+  devtools: '"The tools that build the tools."',
+  pipeline: '"Code flows in. Agents flow out."',
+  general: '"One file. One purpose. Infinite potential."',
+  b2b_sales: '"Know the account. Close the deal. Leave nothing to chance."',
+  b2c_sales: '"Every customer is a story waiting to convert."',
+  healthcare: '"First, do no harm. Then, automate everything else."',
+  financial_services: '"Numbers don\'t lie, but they do need interpreting."',
+  manufacturing: '"Precision at scale. No tolerance for waste."',
+  energy: '"The grid remembers every watt."',
+  federal_government: '"Compliance is not optional. Efficiency is."',
+  human_resources: '"People are not resources. But their paperwork is."',
+  it_management: '"If it\'s not monitored, it\'s not managed."',
+  retail_cpg: '"Shelf space is a battlefield."',
+};
 
 // Generate unique SVG art from agent name (deterministic hash-based)
 function genCardArt(agent) {
@@ -3141,11 +3239,21 @@ function agentToCard(a) {
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
 
-  // Abilities for creative mode
+  // Abilities for holo mode
   const abilities = [];
   if (a.description) abilities.push({ kw: 'Perform', text: desc });
   if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
   if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+
+  // Holo card data (from module-scope constants)
+  const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
+  const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
+  const isLegendary = tier === 'official' || tier === 'verified';
+  const depCount = (a.dependencies || []).length;
+  const envCount = (a.requires_env || []).length;
+  const power = Math.max(1, tags.length + depCount);
+  const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
+  const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
 
   // ── Business Card Face ──
   const bizFace = `
@@ -3167,25 +3275,23 @@ function agentToCard(a) {
       </div>
     </div>`;
 
-  // ── Creative Art Face ──
-  const creativeFace = `
-    <div class="agent-card-front" style="border-color:${cc.border}">
-      <div class="ac-top-bar" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
-      <div class="ac-avatar">${genCreativeArt(a)}</div>
-      <div class="ac-artist">style: ${artStyle.name}</div>
-      <div class="ac-body">
-        <div class="ac-name">${esc(a.display_name)}</div>
-        <div class="ac-title">${esc(a.name)}</div>
-        <div class="ac-type">Agent &mdash; ${a.category.replace(/_/g, ' ')}</div>
-        <div class="ac-abilities">
-          ${abilities.map(ab => `<div class="ac-ability"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
-        </div>
-        ${tags.length ? `<div class="ac-flavor">${tags.map(t => '#' + t).join(' ')}</div>` : ''}
+  // ── Holo Card Face (Howard's CardSmith style) ──
+  const holoFace = `
+    <div class="agent-card-holo">
+      <div class="holo-header">
+        <span class="holo-name">${esc(a.display_name)}</span>
+        <div class="holo-pips">${pips.map(p => `<span class="holo-pip ${p}">${p}</span>`).join('')}</div>
       </div>
-      <div class="ac-footer">
-        <span class="ac-rarity ${rarity}">${RARITY_LABELS[rarity]}</span>
-        <span style="color:var(--text-muted)">${lines}L / ${sizeKb}KB</span>
-        <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:var(--accent)' : 'color:var(--text-muted)'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')" title="${inDeck ? 'Remove from deck' : 'Add to deck'}">${inDeck ? '&#9733;' : '&#9734;'}</span>
+      <div class="holo-art">${genCreativeArt(a)}</div>
+      <div class="holo-type">${isLegendary ? 'Legendary ' : ''}Creature &mdash; ${creatureType}</div>
+      <div class="holo-text">
+        ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
+        <div class="holo-flavor">${flavor}</div>
+      </div>
+      <div class="holo-footer">
+        <span class="holo-rarity ${rarity}">HOLO${rarity === 'mythic' ? ' &bull; Mythic' : rarity === 'rare' ? ' &bull; Rare' : ''}</span>
+        <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:#ffd700' : 'color:#5a4a2a'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? '&#9733;' : '&#9734;'}</span>
+        <span class="holo-stats">${power}/${toughness}</span>
       </div>
     </div>`;
 
@@ -3207,9 +3313,9 @@ function agentToCard(a) {
   let front, back;
   if (cardMode === 'business') {
     front = bizFace;
-    back = creativeFace;
+    back = holoFace;
   } else {
-    front = creativeFace;
+    front = holoFace;
     back = qrFace;
   }
 
@@ -3387,20 +3493,25 @@ function renderPresentation() {
       </div>`;
   } else {
     slideContent = `
-      <div class="pres-slide-creative">
-        <div class="pres-creative-art" style="background:${cc.bg}">
-          ${typeof genCreativeArt === 'function' ? genCreativeArt(a) : (typeof genCardArt === 'function' ? genCardArt(a) : '')}
+      <div class="pres-slide-creative" style="background:linear-gradient(180deg, #2a2418, #1a1510)">
+        <div class="pres-creative-art" style="background:#0d0a06;border-right:1px solid #3d3322">
+          ${typeof genCreativeArt === 'function' ? genCreativeArt(a) : ''}
         </div>
-        <div class="pres-creative-info">
-          <div class="pres-creative-name">${esc(a.display_name)}</div>
-          <div class="pres-creative-ns">${esc(a.name)}</div>
-          <div class="pres-creative-type">Agent &mdash; ${(a.category || '').replace(/_/g, ' ')} &mdash; <span class="ac-rarity ${rarity}">${RARITY_LABELS[rarity]}</span></div>
-          <div class="pres-creative-abilities">
-            ${abilities.map(ab => `<div style="margin-bottom:8px"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
+        <div class="pres-creative-info" style="border-left:none;color:#c8b89a">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="pres-creative-name" style="color:#e8dcc8">${esc(a.display_name)}</div>
+            <div class="holo-pips" style="font-size:.7rem">${(CAT_TO_PIPS[a.category] || ['N']).map(p => `<span class="holo-pip ${p}" style="width:22px;height:22px">${p}</span>`).join('')}</div>
           </div>
-          <div class="pres-creative-footer">
-            <span class="pres-creative-style">style: ${artStyle.name}</span>
-            <span style="font-size:.75rem;color:var(--text-muted)">v${a.version || '?'} &bull; ${a.author || 'Unknown'}</span>
+          <div class="pres-creative-ns" style="color:#8a7e6a">${esc(a.name)}</div>
+          <div class="pres-creative-type" style="color:#b8a88a;border-color:#3d3322;background:rgba(50,40,25,.5)">
+            ${tier === 'official' || tier === 'verified' ? 'Legendary ' : ''}Creature &mdash; ${CAT_TO_TYPE[a.category] || 'Agent'} &mdash; <span class="holo-rarity ${rarity}">${RARITY_LABELS[rarity]}</span>
+          </div>
+          <div class="pres-creative-abilities" style="color:#c8b89a">
+            ${abilities.map(ab => `<div style="margin-bottom:8px"><span class="kw" style="color:#e8dcc8">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
+          </div>
+          <div class="pres-creative-footer" style="border-top:1px solid #3d3322;padding-top:12px">
+            <span style="font-style:italic;color:#8a7e6a;font-size:.8rem">${FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general}</span>
+            <span class="holo-stats" style="font-size:1.2rem;color:#e8dcc8">${Math.max(1, (a.tags||[]).length + (a.dependencies||[]).length)}/${Math.max(1, parseInt(a.version||'1') * 2 + (a.requires_env||[]).length)}</span>
           </div>
         </div>
       </div>`;
@@ -3412,7 +3523,7 @@ function renderPresentation() {
       <div class="slide-counter">${presSlideIndex + 1} / ${total}</div>
       <div style="display:flex;gap:8px">
         <button onclick="setCardMode(cardMode==='business'?'creative':'business',null);renderPresentation()">
-          ${cardMode === 'business' ? 'Creative View' : 'Business View'}
+          ${cardMode === 'business' ? 'Holo View' : 'Business View'}
         </button>
         <button onclick="closePresentation()">Exit (Esc)</button>
       </div>
@@ -3502,7 +3613,7 @@ const TOUR_STEPS = [
   {
     target: '[data-tab="cards"]',
     title: 'Agent Cards',
-    text: 'Every agent is a collectible card. Switch between Business and Creative views. Double-click any card to flip it. Build decks and share them.',
+    text: 'Every agent is a collectible card. Switch between Business and Holo views. Double-click any card to flip it. Build decks, present them as slides, share via URL.',
     tab: 'cards'
   },
   {
