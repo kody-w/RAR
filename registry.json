@@ -1,13 +1,14 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-03T20:51:37.609932+00:00",
+  "generated_at": "2026-04-03T21:06:00.124352+00:00",
   "stats": {
-    "total_agents": 123,
-    "publishers": 4,
+    "total_agents": 124,
+    "publishers": 5,
     "categories": 19,
     "publisher_list": [
       "@aibast-agents-library",
+      "@borg",
       "@discreetRappers",
       "@kody",
       "@rapp"
@@ -2582,6 +2583,30 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@borg/cardsmith_agent",
+      "version": "1.0.0",
+      "display_name": "CardSmith",
+      "description": "Forges trading cards for AI agents. Turn any agent into a collectible card with stats, abilities, and art.",
+      "author": "Howard",
+      "tags": [
+        "productivity",
+        "cards",
+        "visualization",
+        "trading-cards",
+        "sneakernet"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@borg/cardsmith_agent.py",
+      "_size_kb": 32.4,
+      "_lines": 318
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@discreetRappers/agent_generator",
       "version": "1.0.0",
       "display_name": "AgentGenerator",
@@ -2923,7 +2948,7 @@
         "publishing"
       ],
       "category": "devtools",
-      "quality_tier": "community",
+      "quality_tier": "verified",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"
@@ -3018,7 +3043,7 @@
         "community"
       ],
       "category": "core",
-      "quality_tier": "community",
+      "quality_tier": "verified",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic-agent"

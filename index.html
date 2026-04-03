@@ -539,6 +539,42 @@
     }
   }
 
+  /* ─── Workbench ───────────────────────────────────── */
+  .wb-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .wb-editor { display: flex; flex-direction: column; }
+  .wb-editor textarea {
+    width: 100%; min-height: 500px; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: .82rem; line-height: 1.5; background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px;
+    resize: vertical; tab-size: 4;
+  }
+  .wb-sidebar { display: flex; flex-direction: column; gap: 12px; }
+  .wb-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; }
+  .wb-card h3 { font-size: .9rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .wb-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .wb-actions button {
+    padding: 8px 16px; border-radius: var(--radius); font-size: .82rem; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text);
+    transition: all .15s;
+  }
+  .wb-actions button:hover { border-color: var(--accent); color: var(--accent); }
+  .wb-actions button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wb-actions button.primary:hover { opacity: .9; }
+  .wb-result {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px; font-family: monospace; font-size: .8rem; color: var(--text-dim);
+    max-height: 300px; overflow-y: auto; white-space: pre-wrap;
+  }
+  .wb-result .err { color: #ff6b6b; }
+  .wb-result .warn { color: #ffd93d; }
+  .wb-result .ok { color: #6bff6b; }
+  .wb-manifest-preview { font-size: .82rem; }
+  .wb-manifest-preview table { width: 100%; border-collapse: collapse; }
+  .wb-manifest-preview td { padding: 4px 8px; border-bottom: 1px solid var(--border); }
+  .wb-manifest-preview td:first-child { color: var(--text-muted); font-weight: 600; width: 120px; }
+  .wb-card-preview { display: flex; justify-content: center; padding: 12px; }
+  @media (max-width: 900px) { .wb-layout { grid-template-columns: 1fr; } }
+
   /* ─── Toast ───────────────────────────────────────── */
   .toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -665,6 +701,7 @@
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
+    <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">&#128295; Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
@@ -754,6 +791,44 @@
     </div>
     <div class="cards-grid" id="cards-grid">
       <div class="loading"><div class="spinner"></div><br>Loading cards...</div>
+    </div>
+  </div>
+
+  <!-- Workbench -->
+  <div class="panel" id="panel-workbench">
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Build &bull; Validate &bull; Preview</div>
+      <h2 style="font-size:1.4rem;font-weight:800">AGENT WORKBENCH</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:600px;margin:8px auto 0">Write and test single-file agents directly in your browser. No install needed.</p>
+    </div>
+    <div class="wb-actions" style="justify-content:center">
+      <button onclick="wbLoadTemplate('blank')">Blank Template</button>
+      <button onclick="wbLoadTemplate('api')">API Template</button>
+      <button onclick="wbValidate()" class="primary">Validate</button>
+      <button onclick="wbPreviewCard()">Preview Card</button>
+      <button onclick="wbDownload()">Download .py</button>
+      <button onclick="wbAddToLocal()">Add to Local</button>
+    </div>
+    <div class="wb-layout">
+      <div class="wb-editor">
+        <textarea id="wb-code" spellcheck="false" placeholder="Paste or write your agent.py here..."></textarea>
+      </div>
+      <div class="wb-sidebar">
+        <div class="wb-card" id="wb-validation">
+          <h3>Validation</h3>
+          <div class="wb-result" id="wb-result">Click "Validate" to check your agent against the RAPP Constitution.</div>
+        </div>
+        <div class="wb-card" id="wb-manifest-card">
+          <h3>Manifest Preview</h3>
+          <div class="wb-manifest-preview" id="wb-manifest">Manifest fields will appear here when code is validated.</div>
+        </div>
+        <div class="wb-card">
+          <h3>Card Preview</h3>
+          <div class="wb-card-preview" id="wb-card-preview">
+            <div style="color:var(--text-muted);font-size:.82rem">Click "Preview Card" to see your agent as a trading card.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1899,6 +1974,342 @@ function loadTemplate(key) {
 function isUnmodifiedTemplate(code) {
   // Check if the name field still has the placeholder
   return code.includes('"name": "' + TEMPLATE_MARKER);
+}
+
+// ═══════════════════════════════════════════════════════
+// Workbench
+// ═══════════════════════════════════════════════════════
+
+const WB_TEMPLATES = {
+  blank: `"""
+My Agent — Describe what it does here.
+
+Longer explanation, usage notes, configuration.
+"""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/my_agent",
+    "version": "0.1.0",
+    "display_name": "My Agent",
+    "description": "One-line description of what this agent does.",
+    "author": "Your Name",
+    "tags": ["general"],
+    "category": "general",
+    "quality_tier": "experimental",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+from agents.basic_agent import BasicAgent
+
+
+class MyAgent(BasicAgent):
+    def __init__(self):
+        self.name = "My Agent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "task": {
+                        "type": "string",
+                        "description": "What to do"
+                    }
+                },
+                "required": ["task"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    async def perform(self, **kwargs):
+        task = kwargs.get("task", "")
+        return f"{self.name} received: {task}"
+`,
+  api: `"""
+API Agent — Connects to an external API.
+
+Requires: MY_API_KEY environment variable.
+"""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@your-username/api_agent",
+    "version": "0.1.0",
+    "display_name": "API Agent",
+    "description": "Connects to an external API.",
+    "author": "Your Name",
+    "tags": ["integrations"],
+    "category": "integrations",
+    "quality_tier": "experimental",
+    "requires_env": ["MY_API_KEY"],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+import os
+import json
+from agents.basic_agent import BasicAgent
+
+
+class ApiAgent(BasicAgent):
+    def __init__(self):
+        self.name = "API Agent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Query to send to the API"
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    async def perform(self, **kwargs):
+        api_key = os.environ.get("MY_API_KEY")
+        if not api_key:
+            return "Error: MY_API_KEY not set."
+        query = kwargs.get("query", "")
+        return f"{self.name} would query: {query}"
+`
+}
+
+function wbLoadTemplate(key) {
+  const ta = document.getElementById('wb-code')
+  if (ta.value.trim() && !confirm('Replace current code with template?')) return
+  ta.value = WB_TEMPLATES[key] || WB_TEMPLATES.blank
+  wbValidate()
+}
+
+function wbExtractManifest(code) {
+  // Regex-based manifest extraction for browser (no AST available)
+  const match = code.match(/__manifest__\s*=\s*(\{[\s\S]*?\n\})/)
+  if (!match) return null
+  try {
+    // Convert Python dict to JSON: replace single quotes, True/False/None, trailing commas
+    let jsonStr = match[1]
+      .replace(/'/g, '"')
+      .replace(/True/g, 'true')
+      .replace(/False/g, 'false')
+      .replace(/None/g, 'null')
+      .replace(/,\s*([\]}])/g, '$1')
+    return JSON.parse(jsonStr)
+  } catch { return null }
+}
+
+function wbValidate() {
+  const code = document.getElementById('wb-code').value
+  const el = document.getElementById('wb-result')
+  const mEl = document.getElementById('wb-manifest')
+
+  if (!code.trim()) {
+    el.innerHTML = '<span class="warn">No code to validate. Paste an agent.py or load a template.</span>'
+    mEl.innerHTML = 'No manifest found.'
+    return null
+  }
+
+  const errors = []
+  const warnings = []
+
+  // 1. Check for __manifest__
+  const manifest = wbExtractManifest(code)
+  if (!manifest) {
+    errors.push('No __manifest__ dict found')
+  } else {
+    // Required fields
+    const required = ['schema', 'name', 'version', 'display_name', 'description', 'author', 'tags', 'category']
+    for (const f of required) {
+      if (!(f in manifest)) errors.push(`Missing required field: ${f}`)
+    }
+
+    // Name format
+    const name = manifest.name || ''
+    if (!name.startsWith('@') || !name.includes('/')) {
+      errors.push(`Invalid name '${name}' — must be @publisher/slug`)
+    } else {
+      const slug = name.split('/')[1] || ''
+      if (slug !== slug.toLowerCase()) warnings.push(`Slug '${slug}' should be lowercase`)
+      if (slug.includes('-')) warnings.push(`Slug '${slug}' should use underscores, not dashes`)
+      if (name.includes('@your-username/')) warnings.push('Still using template placeholder name — customize it!')
+    }
+
+    // Version
+    const ver = manifest.version || ''
+    const vParts = ver.split('.')
+    if (vParts.length !== 3 || !vParts.every(p => /^\d+$/.test(p))) {
+      errors.push(`Invalid version '${ver}' — must be semver (e.g. 1.0.0)`)
+    }
+
+    // Category
+    const validCats = ['core', 'pipeline', 'integrations', 'productivity', 'devtools', 'general']
+    if (manifest.category && !validCats.includes(manifest.category)) {
+      warnings.push(`Unknown category '${manifest.category}'. Standard: ${validCats.join(', ')}`)
+    }
+
+    // Tier
+    const validTiers = ['official', 'verified', 'community', 'experimental']
+    const tier = manifest.quality_tier || 'community'
+    if (!validTiers.includes(tier)) {
+      errors.push(`Invalid quality_tier '${tier}'`)
+    } else if (tier === 'official' || tier === 'verified') {
+      warnings.push(`Tier '${tier}' is assigned by maintainers. Use 'community' or 'experimental'.`)
+    }
+
+    // Tags
+    if (!Array.isArray(manifest.tags)) {
+      errors.push('tags must be a list')
+    } else if (manifest.tags.length === 0) {
+      warnings.push('Empty tags — add keywords for discoverability')
+    }
+
+    // Show manifest preview
+    if (manifest) {
+      let html = '<table>'
+      for (const [k, v] of Object.entries(manifest)) {
+        const display = Array.isArray(v) ? v.join(', ') || '<em>none</em>' : String(v)
+        html += `<tr><td>${k}</td><td>${display}</td></tr>`
+      }
+      html += '</table>'
+      mEl.innerHTML = html
+    }
+  }
+
+  // 2. Check for class inheriting BasicAgent
+  if (!/class\s+\w+\s*\(.*BasicAgent.*\)/.test(code)) {
+    errors.push('No class inheriting BasicAgent found')
+  }
+
+  // 3. Check for perform method
+  if (!/def\s+perform\s*\(/.test(code)) {
+    errors.push('No perform() method found')
+  }
+
+  // 4. Check for docstring
+  if (!code.trim().startsWith('"""') && !code.trim().startsWith("'''")) {
+    warnings.push('No module docstring — this serves as the agent\'s README')
+  }
+
+  // 5. Security checks
+  const secretPatterns = [
+    /(?:api[_-]?key|token|secret|password)\s*=\s*["'][^"']{8,}["']/i,
+    /sk-[A-Za-z0-9]{20,}/,
+  ]
+  for (const p of secretPatterns) {
+    if (p.test(code)) {
+      errors.push('Possible hardcoded secret detected — use requires_env + os.environ.get()')
+      break
+    }
+  }
+
+  // 6. Unmodified template check
+  if (code.includes('"@your-username/')) {
+    warnings.push('Template placeholder detected — customize @your-username/ before submitting')
+  }
+
+  // Format output
+  let html = ''
+  if (errors.length) {
+    html += `<span class="err">${errors.length} ERROR(S):</span>\n`
+    errors.forEach(e => html += `<span class="err">  \u2717 ${e}</span>\n`)
+  }
+  if (warnings.length) {
+    html += `<span class="warn">${warnings.length} WARNING(S):</span>\n`
+    warnings.forEach(w => html += `<span class="warn">  ! ${w}</span>\n`)
+  }
+  if (!errors.length && !warnings.length) {
+    html += '<span class="ok">\u2713 All clear. This agent is ready to publish.</span>'
+  } else if (!errors.length) {
+    html += '\n<span class="ok">No errors — warnings are suggestions, not blockers.</span>'
+  } else {
+    html += '\n<span class="err">Fix errors before publishing.</span>'
+  }
+  el.innerHTML = html
+
+  return manifest
+}
+
+function wbPreviewCard() {
+  const manifest = wbValidate()
+  const el = document.getElementById('wb-card-preview')
+  if (!manifest) {
+    el.innerHTML = '<div style="color:var(--text-muted);font-size:.82rem">Fix validation errors first.</div>'
+    return
+  }
+  // Build a temporary agent object and render a card
+  const agent = {
+    name: manifest.name || '@unknown/agent',
+    display_name: manifest.display_name || 'Unknown',
+    description: manifest.description || '',
+    category: manifest.category || 'general',
+    quality_tier: manifest.quality_tier || 'community',
+    version: manifest.version || '0.0.0',
+    author: manifest.author || 'Unknown',
+    tags: manifest.tags || [],
+    requires_env: manifest.requires_env || [],
+    dependencies: manifest.dependencies || [],
+  }
+  // Use the existing agentToCard function if available
+  if (typeof agentToCard === 'function') {
+    el.innerHTML = agentToCard(agent)
+  } else {
+    el.innerHTML = `<div style="color:var(--text-muted);font-size:.82rem">Card preview: ${agent.display_name} (${agent.quality_tier})</div>`
+  }
+}
+
+function wbDownload() {
+  const code = document.getElementById('wb-code').value
+  if (!code.trim()) { alert('Nothing to download'); return }
+  const manifest = wbExtractManifest(code)
+  let filename = 'agent.py'
+  if (manifest && manifest.name) {
+    const slug = manifest.name.split('/')[1] || 'agent'
+    filename = slug + '.py'
+  }
+  const blob = new Blob([code], { type: 'text/x-python' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(a.href)
+}
+
+async function wbAddToLocal() {
+  const code = document.getElementById('wb-code').value
+  if (!code.trim()) { alert('Nothing to add'); return }
+  const manifest = wbExtractManifest(code)
+  if (!manifest || !manifest.name) {
+    alert('Valid manifest required. Run Validate first.')
+    return
+  }
+  // Reuse the existing local agent storage
+  if (typeof putLocalAgent === 'function') {
+    await putLocalAgent({
+      name: manifest.name,
+      display_name: manifest.display_name || manifest.name,
+      description: manifest.description || '',
+      category: manifest.category || 'general',
+      quality_tier: manifest.quality_tier || 'community',
+      version: manifest.version || '0.0.0',
+      author: manifest.author || 'Unknown',
+      tags: manifest.tags || [],
+      requires_env: manifest.requires_env || [],
+      dependencies: manifest.dependencies || [],
+      _code: code,
+      _source: 'local',
+      _local: true,
+    })
+    await mergeLocalAgents()
+    renderAgents()
+    alert(`Added ${manifest.name} to your local agents!`)
+  } else {
+    alert('Local storage not available.')
+  }
 }
 
 // ═══════════════════════════════════════════════════════

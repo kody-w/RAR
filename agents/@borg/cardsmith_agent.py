@@ -6,6 +6,20 @@ except ModuleNotFoundError:
 import os
 import json
 
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@borg/cardsmith_agent",
+    "version": "1.0.0",
+    "display_name": "CardSmith",
+    "description": "Forges trading cards for AI agents. Turn any agent into a collectible card with stats, abilities, and art.",
+    "author": "Howard",
+    "tags": ["productivity", "cards", "visualization", "trading-cards", "sneakernet"],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
 
 class CardSmithAgent(BasicAgent):
     """Forges Magic: The Gathering style trading cards for brainstem agents."""

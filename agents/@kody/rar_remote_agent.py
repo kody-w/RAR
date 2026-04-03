@@ -22,7 +22,7 @@ __manifest__ = {
     "author": "RAPP Core Team",
     "tags": ["core", "registry", "package-manager", "install", "discovery", "voting", "community"],
     "category": "core",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
