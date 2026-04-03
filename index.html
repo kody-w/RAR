@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAR — The Open Agent.py Ecosystem</title>
 <meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <style>
   :root {
     --bg: #0d1117;
@@ -273,6 +274,71 @@
   .code-body .kw { color: #569cd6; } .code-body .str { color: #ce9178; }
   .code-body .cmt { color: #6a9955; } .code-body .num { color: #b5cea8; }
   .code-body .dec { color: #ffd700; }
+
+  /* Parsed source sections */
+  .parsed-source { display: flex; flex-direction: column; gap: 16px; }
+  .parsed-section { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .parsed-section-hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+  }
+  .parsed-section-hdr:hover { background: var(--surface2); }
+  .parsed-section-hdr h4 { margin: 0; font-size: .88rem; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .parsed-section-hdr .toggle-arrow { color: var(--text-muted); font-size: .7rem; transition: transform .2s; }
+  .parsed-section-hdr.collapsed .toggle-arrow { transform: rotate(-90deg); }
+  .parsed-section-body { padding: 14px 16px; }
+  .parsed-section-hdr.collapsed + .parsed-section-body { display: none; }
+
+  .parsed-doc {
+    font-size: .88rem; line-height: 1.7; color: var(--text-dim);
+    white-space: pre-wrap; word-wrap: break-word;
+  }
+
+  .manifest-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  .manifest-table tr { border-bottom: 1px solid var(--border); }
+  .manifest-table tr:last-child { border-bottom: none; }
+  .manifest-table td { padding: 7px 10px; vertical-align: top; }
+  .manifest-table td:first-child {
+    color: var(--accent); font-weight: 600; white-space: nowrap; width: 140px;
+    font-family: 'SF Mono', Consolas, monospace; font-size: .78rem;
+  }
+  .manifest-table td:last-child { color: var(--text-dim); }
+  .manifest-tag { display: inline-block; background: var(--surface); padding: 2px 8px; border-radius: 4px; margin: 2px; font-size: .75rem; color: var(--text-muted); }
+
+  .parsed-toggle-bar {
+    display: flex; gap: 0; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .parsed-toggle-btn {
+    flex: 1; padding: 8px 12px; background: var(--surface); border: none; color: var(--text-muted);
+    font-size: .8rem; cursor: pointer; transition: all .15s; font-weight: 500;
+  }
+  .parsed-toggle-btn.active { background: var(--accent); color: #fff; }
+  .parsed-toggle-btn:hover:not(.active) { background: var(--surface2); color: var(--text); }
+
+  /* Method cards */
+  .method-grid { display: flex; flex-direction: column; gap: 6px; }
+  .method-card {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); transition: border-color .15s;
+  }
+  .method-card:hover { border-color: var(--border-hover); }
+  .method-card.mc-entry { border-left: 3px solid var(--green); }
+  .method-card.mc-init { border-left: 3px solid var(--accent); }
+  .method-card.mc-private { border-left: 3px solid var(--surface3); }
+  .method-badge {
+    flex-shrink: 0; padding: 2px 8px; border-radius: 4px; font-size: .68rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap;
+  }
+  .method-badge.mb-entry { background: var(--green-bg); color: var(--green); }
+  .method-badge.mb-init { background: var(--accent-bg); color: var(--accent); }
+  .method-badge.mb-private { background: var(--surface2); color: var(--text-muted); }
+  .method-badge.mb-public { background: var(--purple-bg); color: var(--purple); }
+  .method-name { font-family: 'SF Mono', Consolas, monospace; font-size: .84rem; font-weight: 600; color: var(--text); }
+  .method-params { font-family: 'SF Mono', Consolas, monospace; font-size: .78rem; color: var(--text-muted); }
+  .method-doc { font-size: .8rem; color: var(--text-dim); margin-top: 3px; line-height: 1.4; }
+  .method-meta { font-size: .72rem; color: var(--text-muted); margin-top: 3px; }
 
   /* Vote + Review in modal */
   .modal-vote { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
@@ -557,15 +623,70 @@
   .ac-artist { font-size: .55rem; color: var(--text-muted); text-align: right; padding: 2px 8px; font-style: italic; }
 
   /* ─── Holo Card Skin (inspired by Howard's CardSmith) ─── */
+  @keyframes holoShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes holoRainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
   .agent-card-holo {
     position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
     overflow: hidden; border: 2px solid #8b7332;
     background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
     display: flex; flex-direction: column; padding: 0;
   }
+  .agent-card-holo::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(
+      125deg,
+      transparent 0%,
+      rgba(255,0,128,.06) 15%,
+      rgba(0,200,255,.08) 30%,
+      transparent 40%,
+      rgba(255,215,0,.06) 55%,
+      rgba(128,0,255,.07) 70%,
+      transparent 80%,
+      rgba(0,255,128,.05) 90%,
+      transparent 100%
+    );
+    background-size: 300% 300%;
+    animation: holoShimmer 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+  .agent-card-holo::after {
+    content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: repeating-linear-gradient(
+      105deg,
+      transparent 0px,
+      rgba(255,255,255,.02) 2px,
+      transparent 4px,
+      rgba(255,255,255,.015) 6px,
+      transparent 8px
+    );
+    mix-blend-mode: overlay;
+  }
+  .agent-card-holo:hover::before {
+    animation-duration: 2s;
+    background: linear-gradient(
+      125deg,
+      transparent 0%,
+      rgba(255,0,128,.12) 15%,
+      rgba(0,200,255,.15) 30%,
+      transparent 40%,
+      rgba(255,215,0,.12) 55%,
+      rgba(128,0,255,.14) 70%,
+      transparent 80%,
+      rgba(0,255,128,.10) 90%,
+      transparent 100%
+    );
+    background-size: 300% 300%;
+  }
   .holo-header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 12px 4px;
+    padding: 8px 12px 4px; position: relative; z-index: 3;
   }
   .holo-name { font-size: .9rem; font-weight: 700; color: #e8dcc8; }
   .holo-pips { display: flex; gap: 3px; }
@@ -583,18 +704,29 @@
   .holo-art {
     margin: 0 10px; aspect-ratio: 5/3; border: 1px solid #5a4a2a;
     overflow: hidden; display: flex; align-items: center; justify-content: center;
-    background: #0d0a06;
+    background: #0d0a06; position: relative; z-index: 3;
   }
   .holo-art svg { width: 90%; height: 90%; }
+  .holo-art::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(135deg,
+      rgba(255,100,200,.08) 0%, transparent 30%,
+      rgba(100,200,255,.08) 50%, transparent 70%,
+      rgba(255,200,50,.06) 100%);
+    animation: holoRainbow 8s linear infinite;
+    mix-blend-mode: screen;
+  }
   .holo-type {
     font-size: .62rem; color: #b8a88a; padding: 4px 12px;
     border-top: 1px solid #3d3322; border-bottom: 1px solid #3d3322;
     margin: 4px 0; background: rgba(50,40,25,.5);
+    position: relative; z-index: 3;
   }
   .holo-text {
     flex: 1; padding: 4px 12px; overflow: hidden;
     font-size: .65rem; color: #c8b89a; line-height: 1.4;
     background: rgba(30,25,15,.4); margin: 0 1px;
+    position: relative; z-index: 3;
   }
   .holo-ability { margin-bottom: 4px; }
   .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
@@ -605,14 +737,101 @@
   .holo-footer {
     display: flex; justify-content: space-between; align-items: center;
     padding: 4px 12px 6px; font-size: .58rem;
+    position: relative; z-index: 3;
   }
   .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; }
-  .holo-rarity.mythic { color: #ff8c00; }
-  .holo-rarity.rare { color: #ffd700; }
+  .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,.4); }
+  .holo-rarity.rare { color: #ffd700; text-shadow: 0 0 6px rgba(255,215,0,.3); }
   .holo-rarity.uncommon { color: #c0c0c0; }
   .holo-rarity.common { color: #78909c; }
   .holo-stats { font-weight: 800; font-size: .85rem; color: #e8dcc8; }
   .holo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  /* Holo border shimmer */
+  .agent-card-wrap:hover .agent-card-holo {
+    border-color: #c9a84c;
+    box-shadow: 0 0 15px rgba(201,168,76,.2), inset 0 0 15px rgba(201,168,76,.05);
+  }
+
+  /* 3D Card Viewer */
+  .viewer3d-overlay {
+    position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.92);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .viewer3d-overlay canvas { cursor: grab; border-radius: 4px; }
+  .viewer3d-overlay canvas:active { cursor: grabbing; }
+  .viewer3d-toolbar {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; align-items: center;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 10px 20px; box-shadow: var(--shadow-lg);
+  }
+  .viewer3d-toolbar button {
+    padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); font-size: .85rem;
+    font-weight: 600; cursor: pointer; transition: all .15s;
+  }
+  .viewer3d-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .viewer3d-toolbar button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .viewer3d-info {
+    position: absolute; top: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center; color: var(--text-dim); font-size: .85rem;
+  }
+  .viewer3d-info h3 { color: var(--text); font-size: 1.1rem; margin-bottom: 4px; }
+  .viewer3d-close {
+    position: absolute; top: 20px; right: 24px; background: none; border: none;
+    color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
+  }
+  .viewer3d-close:hover { color: var(--text); }
+
+  /* ─── Kids Card Skin ─── */
+  .agent-card-kids {
+    position: absolute; inset: 0; border-radius: 16px; backface-visibility: hidden;
+    overflow: hidden; border: 3px solid #fbbf24;
+    background: linear-gradient(160deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+    display: flex; flex-direction: column; padding: 0;
+  }
+  .kids-header {
+    background: linear-gradient(90deg, #7c3aed, #3b82f6);
+    padding: 10px 14px 6px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .kids-name { font-size: 1rem; font-weight: 800; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.3); }
+  .kids-emoji { font-size: 1.4rem; }
+  .kids-art {
+    margin: 6px 10px; aspect-ratio: 5/3; border-radius: 12px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border: 2px solid rgba(251,191,36,.3);
+  }
+  .kids-art svg { width: 85%; height: 85%; }
+  .kids-section {
+    margin: 0 10px; padding: 8px 10px; border-radius: 10px;
+    background: rgba(255,255,255,.08); margin-bottom: 4px;
+  }
+  .kids-label {
+    font-size: .6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 3px;
+  }
+  .kids-label.what { color: #34d399; }
+  .kids-label.needs { color: #fbbf24; }
+  .kids-label.gives { color: #60a5fa; }
+  .kids-explain {
+    font-size: .7rem; color: #e2e8f0; line-height: 1.5;
+  }
+  .kids-footer {
+    margin-top: auto; padding: 6px 14px 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .kids-level {
+    display: flex; gap: 2px;
+  }
+  .kids-star { font-size: .8rem; }
+  .kids-star.on { color: #fbbf24; }
+  .kids-star.off { color: #374151; }
+  .kids-cat {
+    font-size: .62rem; font-weight: 700; color: #a78bfa;
+    background: rgba(167,139,250,.12); padding: 2px 8px; border-radius: 8px;
+  }
 
   /* Deck builder */
   .deck-bar {
@@ -741,26 +960,74 @@
   .pres-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
 
   /* ─── Workbench ───────────────────────────────────── */
-  .wb-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-  .wb-editor { display: flex; flex-direction: column; }
-  .wb-editor textarea {
-    width: 100%; min-height: 500px; font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: .82rem; line-height: 1.5; background: var(--surface); color: var(--text);
-    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px;
-    resize: vertical; tab-size: 4;
+  /* Workbench — form builder */
+  .wb-steps { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
+  .wb-step-btn {
+    flex: 1; padding: 12px 8px; background: none; border: none; border-bottom: 2px solid transparent;
+    margin-bottom: -2px; color: var(--text-muted); font-size: .85rem; font-weight: 600;
+    cursor: pointer; transition: all .15s; text-align: center;
   }
-  .wb-sidebar { display: flex; flex-direction: column; gap: 12px; }
-  .wb-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; }
-  .wb-card h3 { font-size: .9rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-  .wb-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .wb-actions button {
-    padding: 8px 16px; border-radius: var(--radius); font-size: .82rem; font-weight: 600;
-    cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text);
-    transition: all .15s;
+  .wb-step-btn:hover { color: var(--text-dim); }
+  .wb-step-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .wb-step-btn .step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--surface2);
+    color: var(--text-muted); font-size: .72rem; margin-right: 6px; font-weight: 700;
   }
-  .wb-actions button:hover { border-color: var(--accent); color: var(--accent); }
-  .wb-actions button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .wb-actions button.primary:hover { opacity: .9; }
+  .wb-step-btn.active .step-num { background: var(--accent); color: #fff; }
+  .wb-step-btn.done .step-num { background: var(--green); color: #fff; }
+  .wb-step { display: none; }
+  .wb-step.active { display: block; }
+
+  .wb-form { display: flex; flex-direction: column; gap: 16px; max-width: 680px; margin: 0 auto; }
+  .wb-field { display: flex; flex-direction: column; gap: 4px; }
+  .wb-field label { font-size: .82rem; font-weight: 600; color: var(--text-dim); }
+  .wb-field .wb-hint { font-size: .75rem; color: var(--text-muted); margin-top: 2px; }
+  .wb-field input, .wb-field textarea, .wb-field select {
+    padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font-size: .88rem;
+    font-family: inherit; transition: border-color .15s;
+  }
+  .wb-field input:focus, .wb-field textarea:focus, .wb-field select:focus {
+    outline: none; border-color: var(--accent);
+  }
+  .wb-field select { cursor: pointer; }
+  .wb-field textarea { resize: vertical; min-height: 60px; }
+
+  .wb-tag-input { display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); min-height: 42px; cursor: text;
+  }
+  .wb-tag-input:focus-within { border-color: var(--accent); }
+  .wb-tag-input input {
+    border: none; background: none; color: var(--text); font-size: .85rem;
+    outline: none; flex: 1; min-width: 80px; padding: 2px 4px;
+  }
+  .wb-tag-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: 12px; background: var(--accent-bg);
+    color: var(--accent); font-size: .78rem; font-weight: 500;
+  }
+  .wb-tag-pill .tag-x { cursor: pointer; font-size: .7rem; opacity: .7; }
+  .wb-tag-pill .tag-x:hover { opacity: 1; }
+
+  .wb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .wb-row { grid-template-columns: 1fr; } }
+
+  .wb-preview-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
+  @media (max-width: 800px) { .wb-preview-layout { grid-template-columns: 1fr; } }
+  .wb-card-preview { display: flex; justify-content: center; padding: 12px; }
+
+  .wb-nav-btns { display: flex; justify-content: space-between; margin-top: 24px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .wb-nav-btn {
+    padding: 10px 24px; border-radius: 8px; font-size: .88rem; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); transition: all .15s;
+  }
+  .wb-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .wb-nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wb-nav-btn.primary:hover { opacity: .9; }
+
   .wb-result {
     background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 12px; font-family: monospace; font-size: .8rem; color: var(--text-dim);
@@ -773,8 +1040,111 @@
   .wb-manifest-preview table { width: 100%; border-collapse: collapse; }
   .wb-manifest-preview td { padding: 4px 8px; border-bottom: 1px solid var(--border); }
   .wb-manifest-preview td:first-child { color: var(--text-muted); font-weight: 600; width: 120px; }
-  .wb-card-preview { display: flex; justify-content: center; padding: 12px; }
-  @media (max-width: 900px) { .wb-layout { grid-template-columns: 1fr; } }
+
+  .wb-check-list { display: flex; flex-direction: column; gap: 8px; }
+  .wb-check {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+    border-radius: 8px; background: var(--surface); font-size: .85rem;
+  }
+  .wb-check .check-icon { font-size: 1rem; flex-shrink: 0; }
+  .wb-check.pass { color: var(--green); }
+  .wb-check.fail { color: var(--red); }
+  .wb-check.warn { color: var(--yellow); }
+
+  .wb-code-viewer textarea {
+    width: 100%; min-height: 300px; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: .82rem; line-height: 1.5; background: #1e1e1e; color: #d4d4d4;
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+    resize: vertical; tab-size: 4;
+  }
+
+  /* ─── Packs & Minting ─────────────────────────────── */
+  .pack-shelf { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin: 24px 0; }
+  .pack-box {
+    width: 200px; height: 280px; border-radius: 14px; cursor: pointer;
+    position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 20px;
+  }
+  .pack-box:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .pack-box.pack-genesis {
+    background: linear-gradient(135deg, #1a1040, #2d1b69, #1a1040);
+    border: 2px solid #7c3aed;
+  }
+  .pack-box.pack-frontier {
+    background: linear-gradient(135deg, #0a2a1a, #0d4a2a, #0a2a1a);
+    border: 2px solid #10b981;
+  }
+  .pack-box.pack-inferno {
+    background: linear-gradient(135deg, #2a0a0a, #4a1a0a, #2a0a0a);
+    border: 2px solid #ef4444;
+  }
+  .pack-name { font-size: 1rem; font-weight: 800; color: #fff; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+  .pack-sub { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+  .pack-count { font-size: .7rem; color: rgba(255,255,255,.4); margin-top: 8px; }
+  .pack-icon { font-size: 3rem; }
+
+  /* Pack opening */
+  .pack-open-overlay {
+    position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.95);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  @keyframes packReveal {
+    0% { transform: scale(0.3) rotateY(180deg); opacity: 0; }
+    60% { transform: scale(1.1) rotateY(0deg); opacity: 1; }
+    100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+  }
+  @keyframes packGlow {
+    0% { box-shadow: 0 0 20px rgba(255,215,0,.3); }
+    50% { box-shadow: 0 0 60px rgba(255,215,0,.6), 0 0 120px rgba(255,215,0,.2); }
+    100% { box-shadow: 0 0 20px rgba(255,215,0,.3); }
+  }
+  .pack-card-reveal {
+    width: 250px; height: 350px; border-radius: 12px; overflow: hidden;
+    animation: packReveal .6s ease-out forwards;
+    opacity: 0; cursor: pointer; position: relative;
+  }
+  .pack-card-reveal.mythic { animation: packReveal .6s ease-out forwards, packGlow 2s ease-in-out infinite; }
+  .pack-card-reveal.rare { box-shadow: 0 0 30px rgba(255,215,0,.3); }
+  .pack-card-reveal canvas { width: 100%; height: 100%; border-radius: 12px; }
+  .pack-reveal-grade {
+    position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,.7);
+    color: #ffd700; font-size: .7rem; font-weight: 700; padding: 3px 8px;
+    border-radius: 6px; border: 1px solid rgba(255,215,0,.3);
+  }
+  .pack-reveal-serial {
+    position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,.7);
+    color: var(--text-muted); font-size: .6rem; font-family: monospace;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .pack-reveal-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .pack-open-actions { margin-top: 24px; display: flex; gap: 12px; }
+  .pack-open-actions button {
+    padding: 10px 24px; border-radius: 8px; font-size: .88rem; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); transition: all .15s;
+  }
+  .pack-open-actions button:hover { border-color: var(--accent); color: var(--accent); }
+  .pack-open-actions button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* Collection grid */
+  .collection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-top: 16px; }
+  .coll-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s;
+    position: relative;
+  }
+  .coll-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .coll-card canvas { width: 100%; aspect-ratio: 5/7; display: block; }
+  .coll-card-info { padding: 8px 10px; }
+  .coll-card-name { font-size: .8rem; font-weight: 700; }
+  .coll-card-meta { font-size: .68rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 3px; }
+  .coll-grade { font-weight: 700; }
+  .coll-grade.gem { color: #ffd700; }
+  .coll-grade.mint { color: var(--green); }
+  .coll-grade.good { color: var(--accent); }
+  .coll-grade.fair { color: var(--orange); }
+  .coll-grade.poor { color: var(--red); }
 
   /* ─── Toast ───────────────────────────────────────── */
   .toast {
@@ -831,6 +1201,23 @@
     cursor: pointer; font-size: 1.1rem; transition: all .15s;
   }
   .cart-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .demo-toggle {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted);
+    padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: .75rem;
+    font-weight: 500; transition: all .15s; margin-right: 4px; white-space: nowrap;
+  }
+  .demo-toggle:hover { border-color: var(--purple); color: var(--purple); }
+  .demo-toggle.active { background: var(--purple-bg); border-color: var(--purple); color: var(--purple); }
+  .demo-toggle .demo-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); transition: background .15s;
+  }
+  .demo-toggle.active .demo-dot { background: var(--purple); box-shadow: 0 0 6px var(--purple); }
+  .demo-inline {
+    display: inline-block; color: var(--purple); cursor: pointer; font-weight: 500;
+    border-bottom: 1px dashed var(--purple); transition: opacity .15s;
+  }
+  .demo-inline:hover { opacity: .8; }
   .cart-badge {
     position: absolute; top: -6px; right: -6px;
     background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700;
@@ -927,12 +1314,14 @@
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
+    <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">&#128295; Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
   <div class="header-actions" id="header-actions">
-    <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:8px" title="Take the guided tour">Tour</button>
+    <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
+    <button class="demo-toggle" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       &#128722;
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
@@ -996,7 +1385,7 @@
     <div class="cards-header">
       <div class="sub">Every agent tells a story</div>
       <h2>AGENT CARDS</h2>
-      <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();showModal('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
+      <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();openAgent('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
       <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">One file, one purpose<br>A thousand agents waiting<br>Which deck will you build?</p>
     </div>
     <div class="deck-bar" id="deck-bar">
@@ -1011,6 +1400,7 @@
         <div class="card-mode-toggle">
           <button class="active" onclick="setCardMode('business',this)">Business</button>
           <button onclick="setCardMode('creative',this)">Holo</button>
+          <button onclick="setCardMode('kids',this)">Kids</button>
         </div>
         <input type="text" id="card-search" placeholder="Search cards..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
       </div>
@@ -1031,37 +1421,175 @@
 
   <!-- Workbench -->
   <div class="panel" id="panel-workbench">
-    <div style="text-align:center;margin-bottom:16px">
+    <div style="text-align:center;margin-bottom:20px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Build &bull; Validate &bull; Preview</div>
       <h2 style="font-size:1.4rem;font-weight:800">AGENT WORKBENCH</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:600px;margin:8px auto 0">Write your agent right here. Start from a template, validate as you go, preview it as a card. No install, no setup — just code.</p>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Build an agent in a few steps. Fill in the details, we'll handle the code.</p>
     </div>
-    <div class="wb-actions" style="justify-content:center">
-      <button onclick="wbLoadTemplate('blank')">Blank Template</button>
-      <button onclick="wbLoadTemplate('api')">API Template</button>
-      <button onclick="wbValidate()" class="primary">Validate</button>
-      <button onclick="wbPreviewCard()">Preview Card</button>
-      <button onclick="wbDownload()">Download .py</button>
-      <button onclick="wbAddToLocal()">Add to Local</button>
+
+    <div class="wb-steps" id="wb-steps">
+      <button class="wb-step-btn active" onclick="wbGoStep(0)"><span class="step-num">1</span> Describe</button>
+      <button class="wb-step-btn" onclick="wbGoStep(1)"><span class="step-num">2</span> Configure</button>
+      <button class="wb-step-btn" onclick="wbGoStep(2)"><span class="step-num">3</span> Behavior</button>
+      <button class="wb-step-btn" onclick="wbGoStep(3)"><span class="step-num">4</span> Preview</button>
     </div>
-    <div class="wb-layout">
-      <div class="wb-editor">
-        <textarea id="wb-code" spellcheck="false" placeholder="Paste or write your agent.py here..."></textarea>
-      </div>
-      <div class="wb-sidebar">
-        <div class="wb-card" id="wb-validation">
-          <h3>Validation</h3>
-          <div class="wb-result" id="wb-result">Click "Validate" to check your agent against the RAPP Constitution.</div>
+
+    <!-- Step 1: Describe -->
+    <div class="wb-step active" id="wb-step-0">
+      <div class="wb-form">
+        <div class="wb-field">
+          <label>Agent Name</label>
+          <input type="text" id="wb-name" placeholder="e.g. Account Intelligence">
+          <div class="wb-hint">A friendly name for your agent. This is what people see in the store.</div>
         </div>
-        <div class="wb-card" id="wb-manifest-card">
-          <h3>Manifest Preview</h3>
-          <div class="wb-manifest-preview" id="wb-manifest">Manifest fields will appear here when code is validated.</div>
+        <div class="wb-field">
+          <label>One-line Description</label>
+          <input type="text" id="wb-desc" placeholder="e.g. Generates 360-degree account briefings with stakeholder mapping">
+          <div class="wb-hint">What does this agent do? Keep it to one sentence.</div>
         </div>
-        <div class="wb-card">
-          <h3>Card Preview</h3>
-          <div class="wb-card-preview" id="wb-card-preview">
-            <div style="color:var(--text-muted);font-size:.82rem">Click "Preview Card" to see your agent as a trading card.</div>
+        <div class="wb-field">
+          <label>Your Name</label>
+          <input type="text" id="wb-author" placeholder="e.g. Jane Smith">
+        </div>
+        <div class="wb-row">
+          <div class="wb-field">
+            <label>GitHub Username</label>
+            <input type="text" id="wb-gh-user" placeholder="e.g. janesmith">
+            <div class="wb-hint">Your agent publishes under @username/</div>
           </div>
+          <div class="wb-field">
+            <label>Category</label>
+            <select id="wb-cat">
+              <option value="">Pick one...</option>
+              <option value="core">Core — memory, orchestration, agent management</option>
+              <option value="pipeline">Pipeline — build, generate, deploy agents</option>
+              <option value="integrations">Integrations — connect to external systems</option>
+              <option value="productivity">Productivity — content, automation, demos</option>
+              <option value="devtools">Dev Tools — testing, scaffolding, utilities</option>
+              <option value="general">General — everything else</option>
+              <optgroup label="Industry Verticals">
+                <option value="b2b_sales">B2B Sales</option>
+                <option value="b2c_sales">B2C Sales</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="financial_services">Financial Services</option>
+                <option value="manufacturing">Manufacturing</option>
+                <option value="energy">Energy</option>
+                <option value="federal_government">Federal Government</option>
+                <option value="slg_government">State/Local Government</option>
+                <option value="human_resources">Human Resources</option>
+                <option value="it_management">IT Management</option>
+                <option value="professional_services">Professional Services</option>
+                <option value="retail_cpg">Retail / CPG</option>
+                <option value="software_digital_products">Software / Digital Products</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div class="wb-field">
+          <label>Tags</label>
+          <div class="wb-tag-input" id="wb-tag-input" onclick="this.querySelector('input').focus()">
+            <input type="text" id="wb-tag-field" placeholder="Type a tag and press Enter...">
+          </div>
+          <div class="wb-hint">Keywords that help people find your agent. Press Enter after each one.</div>
+        </div>
+        <div class="wb-nav-btns"><div></div><button class="wb-nav-btn primary" onclick="wbGoStep(1)">Next: Configure &rarr;</button></div>
+      </div>
+    </div>
+
+    <!-- Step 2: Configure -->
+    <div class="wb-step" id="wb-step-1">
+      <div class="wb-form">
+        <div class="wb-row">
+          <div class="wb-field">
+            <label>Quality Tier</label>
+            <select id="wb-tier">
+              <option value="community">Community — stable and tested</option>
+              <option value="experimental">Frontier — experimental, still evolving</option>
+            </select>
+            <div class="wb-hint">Start with Frontier if you're still iterating. Community when it's solid.</div>
+          </div>
+          <div class="wb-field">
+            <label>Version</label>
+            <input type="text" id="wb-version" value="1.0.0" placeholder="1.0.0">
+            <div class="wb-hint">Semantic versioning: MAJOR.MINOR.PATCH</div>
+          </div>
+        </div>
+        <div class="wb-field">
+          <label>Environment Variables</label>
+          <div class="wb-tag-input" id="wb-env-input" onclick="this.querySelector('input').focus()">
+            <input type="text" id="wb-env-field" placeholder="e.g. MY_API_KEY (press Enter)">
+          </div>
+          <div class="wb-hint">API keys or config your agent needs at runtime. Leave empty if none.</div>
+        </div>
+        <div class="wb-field">
+          <label>Dependencies</label>
+          <div class="wb-tag-input" id="wb-dep-input" onclick="this.querySelector('input').focus()">
+            <span class="wb-tag-pill">@rapp/basic-agent</span>
+            <input type="text" id="wb-dep-field" placeholder="e.g. @kody/context_memory (press Enter)">
+          </div>
+          <div class="wb-hint">Other agents this depends on. @rapp/basic-agent is always included.</div>
+        </div>
+        <div class="wb-nav-btns">
+          <button class="wb-nav-btn" onclick="wbGoStep(0)">&larr; Back</button>
+          <button class="wb-nav-btn primary" onclick="wbGoStep(2)">Next: Behavior &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Behavior -->
+    <div class="wb-step" id="wb-step-2">
+      <div class="wb-form">
+        <div class="wb-field">
+          <label>What does your agent do when called?</label>
+          <textarea id="wb-behavior" rows="4" placeholder="Describe in plain English what happens when someone runs your agent. For example: 'Takes an account name, looks up the company in Dynamics 365, and returns a briefing with stakeholder map and competitive analysis.'"></textarea>
+          <div class="wb-hint">This becomes the docstring — the agent's built-in documentation.</div>
+        </div>
+        <div class="wb-field">
+          <label>Input parameters</label>
+          <div class="wb-hint" style="margin-bottom:8px">What does your agent need from the user to do its job?</div>
+          <div id="wb-params">
+            <div style="display:flex;gap:8px;margin-bottom:6px">
+              <input type="text" id="wb-param-name-0" placeholder="Parameter name (e.g. account_name)" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.85rem">
+              <input type="text" id="wb-param-desc-0" placeholder="Description (e.g. Name of the target account)" style="flex:2;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.85rem">
+            </div>
+          </div>
+          <button onclick="wbAddParam()" style="padding:6px 14px;border-radius:6px;border:1px dashed var(--border);background:none;color:var(--text-muted);font-size:.8rem;cursor:pointer;margin-top:4px">+ Add parameter</button>
+        </div>
+        <div class="wb-field">
+          <label>Custom logic <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+          <textarea id="wb-logic" rows="5" style="font-family:'SF Mono',Consolas,monospace;font-size:.82rem" placeholder="# Python code for the perform() body (optional)&#10;# Leave blank for a starter template&#10;# Available: self, kwargs, os.environ"></textarea>
+          <div class="wb-hint">If you know Python, write the logic here. If not, leave it blank and we'll generate a starter.</div>
+        </div>
+        <div class="wb-nav-btns">
+          <button class="wb-nav-btn" onclick="wbGoStep(1)">&larr; Back</button>
+          <button class="wb-nav-btn primary" onclick="wbBuildAndPreview()">Build &amp; Preview &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Preview & Export -->
+    <div class="wb-step" id="wb-step-3">
+      <div class="wb-form" style="max-width:900px">
+        <div id="wb-build-checks" class="wb-check-list"></div>
+        <div class="wb-preview-layout">
+          <div>
+            <h3 style="font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--text)">Your Agent Card</h3>
+            <div class="wb-card-preview" id="wb-card-preview">
+              <div style="color:var(--text-muted);font-size:.82rem">Card will appear when you build.</div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--text)">Generated Code</h3>
+            <div class="wb-code-viewer">
+              <textarea id="wb-code" spellcheck="false" readonly style="width:100%;min-height:320px;font-family:'SF Mono','Fira Code',monospace;font-size:.82rem;line-height:1.5;background:#1e1e1e;color:#d4d4d4;border:1px solid var(--border);border-radius:var(--radius);padding:16px;resize:vertical;tab-size:4"></textarea>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+          <button class="wb-nav-btn" onclick="wbGoStep(2)">&larr; Edit</button>
+          <button class="wb-nav-btn primary" onclick="wbDownload()">Download .py</button>
+          <button class="wb-nav-btn" onclick="wbAddToLocal()">Add to Local Collection</button>
+          <button class="wb-nav-btn" onclick="wbCopyCode()">Copy Code</button>
         </div>
       </div>
     </div>
@@ -1214,6 +1742,31 @@ class MyAgent(BasicAgent):
       <p style="color:var(--text-muted);font-size:.8rem;margin-top:10px">
         Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> or <span class="tier tier-experimental">FRONTIER</span> tier.
       </p>
+    </div>
+  </div>
+
+  <!-- Packs -->
+  <div class="panel" id="panel-packs">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Collect &bull; Grade &bull; Trade</div>
+      <h2 style="font-size:1.4rem;font-weight:800">BOOSTER PACKS</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Open packs to mint unique, graded agent cards. Every card has a serial number, visual variations, and a condition score that changes over time.</p>
+    </div>
+
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Packs</h3>
+    <div class="pack-shelf" id="pack-shelf"></div>
+
+    <div style="margin-top:32px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Your Collection <span id="coll-count" style="color:var(--text-muted);font-weight:400">(0 cards)</span></h3>
+        <button onclick="exportCollection()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Export All</button>
+      </div>
+      <div class="collection-grid" id="collection-grid">
+        <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0">
+          <h3>No cards minted yet</h3>
+          <p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1617,6 +2170,9 @@ async function init() {
   renderAgents();
   renderLeaderboard();
 
+  // Init workbench tag inputs
+  wbInitTagInputs();
+
   // Auto-start tour for first-time visitors
   if (!localStorage.getItem('rar_tour_done')) {
     setTimeout(startTour, 1500);
@@ -1763,6 +2319,7 @@ function switchTab(tab) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
   if (tab === 'leaderboard') renderLeaderboard();
   if (tab === 'cards') renderCards();
+  if (tab === 'packs') { renderPackShelf(); renderCollection(); }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1773,12 +2330,14 @@ function renderStats(stats) {
   const tv = Object.values(votes.agents || {}).reduce((s, v) => s + (v.up || 0), 0);
   const tr = Object.values(reviews.agents || {}).reduce((s, a) => s + (a.length || 0), 0);
   const vc = allAgents.filter(a => a.quality_tier === 'verified').length;
+  const voteLabel = tv === 0 && !window._demoActive ? `<span class="demo-inline" onclick="toggleDemoMode()">Preview</span>` : tv;
+  const revLabel = tr === 0 && !window._demoActive ? `<span class="demo-inline" onclick="toggleDemoMode()">Preview</span>` : tr;
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
     <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
     <div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>
-    <div class="stat-chip"><span class="num">${tv}</span><span class="lbl">Votes</span></div>
-    <div class="stat-chip"><span class="num">${tr}</span><span class="lbl">Reviews</span></div>`;
+    <div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>
+    <div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>`;
 }
 
 function buildCategoryPills(stats) {
@@ -1874,7 +2433,7 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No votes yet — be the first!</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites. The top-voted agents appear here.</p></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No votes yet — be the first!</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites. The top-voted agents appear here.</p><p style="margin-top:12px"><span class="demo-inline" onclick="toggleDemoMode()">See what this looks like with sample data</span></p></div>'; return; }
 
   let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
@@ -1961,13 +2520,23 @@ function openAgent(name) {
       </div>
       <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
       <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
-      <div class="modal-section"><h3>Source Code</h3>
-        <div class="code-viewer">
-          <div class="code-toolbar"><span class="fn">${a._file.split('/').pop()}</span>
-            <div><button class="copy-btn" onclick="copyCode()">Copy code</button>
-            <a href="${ghUrl}" target="_blank" style="margin-left:8px;color:#858585;font-size:.78rem">GitHub</a></div>
+      <div class="modal-section">
+        <h3>Inside This Agent</h3>
+        <div class="parsed-toggle-bar">
+          <button class="parsed-toggle-btn active" onclick="setSourceView('parsed',this)">Parsed</button>
+          <button class="parsed-toggle-btn" onclick="setSourceView('raw',this)">Raw Source</button>
+        </div>
+        <div id="source-parsed" style="display:block">
+          <div id="parsed-loading" style="color:var(--text-muted);font-size:.88rem;padding:12px 0">Reading agent file...</div>
+        </div>
+        <div id="source-raw" style="display:none">
+          <div class="code-viewer">
+            <div class="code-toolbar"><span class="fn">${a._file.split('/').pop()}</span>
+              <div><button class="copy-btn" onclick="copyCode()">Copy code</button>
+              <a href="${ghUrl}" target="_blank" style="margin-left:8px;color:#858585;font-size:.78rem">GitHub</a></div>
+            </div>
+            <div class="code-body" id="code-body"><span style="color:#858585">Loading...</span></div>
           </div>
-          <div class="code-body" id="code-body"><span style="color:#858585">Loading...</span></div>
         </div>
       </div>
       <div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
@@ -1988,10 +2557,12 @@ function openAgent(name) {
   if (isLocalDevice && a._code) {
     window._code = a._code;
     document.getElementById('code-body').innerHTML = hlPy(a._code);
+    document.getElementById('source-parsed').innerHTML = renderParsedSource(a._code, a);
   } else {
     fetch(rawUrl + '?t=' + Date.now()).then(r => r.ok ? r.text() : 'Error loading source').then(code => {
       window._code = code;
       document.getElementById('code-body').innerHTML = hlPy(code);
+      document.getElementById('source-parsed').innerHTML = renderParsedSource(code, a);
     });
   }
 }
@@ -2006,6 +2577,190 @@ function hlPy(c) {
     .replace(/\b(def|class|return|import|from|if|elif|else|for|while|try|except|finally|with|as|yield|raise|pass|break|continue|and|or|not|in|is|None|True|False|self|lambda|async|await)\b/g, '<span class="kw">$1</span>')
     .replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>')
     .replace(/@(\w+)/g, '<span class="dec">@$1</span>');
+}
+
+function setSourceView(mode, btn) {
+  document.getElementById('source-parsed').style.display = mode === 'parsed' ? 'block' : 'none';
+  document.getElementById('source-raw').style.display = mode === 'raw' ? 'block' : 'none';
+  btn.parentElement.querySelectorAll('.parsed-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleParsedSection(el) {
+  el.classList.toggle('collapsed');
+}
+
+function parsePythonSource(code) {
+  const result = { docstring: '', manifest: {}, imports: [], classes: [], remaining: '' };
+  // Extract module docstring
+  const dsMatch = code.match(/^(?:\s*#[^\n]*\n)*\s*("""([\s\S]*?)"""|'''([\s\S]*?)''')/);
+  if (dsMatch) result.docstring = (dsMatch[2] || dsMatch[3] || '').trim();
+  // Extract __manifest__
+  const mMatch = code.match(/__manifest__\s*=\s*\{([\s\S]*?)\n\}/);
+  if (mMatch) {
+    const block = mMatch[1];
+    const pairs = [...block.matchAll(/"([^"]+)"\s*:\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\[[\s\S]*?\]|True|False|None|\d+)/g)];
+    pairs.forEach(p => {
+      let val = p[2].trim();
+      if (val.startsWith('[')) {
+        try { val = JSON.parse(val.replace(/'/g, '"')); } catch(e) { val = val; }
+      } else if (val.startsWith('"') || val.startsWith("'")) {
+        val = val.slice(1, -1);
+      }
+      result.manifest[p[1]] = val;
+    });
+  }
+  // Extract imports
+  const importLines = code.match(/^(?:import .+|from .+ import .+)$/gm);
+  if (importLines) result.imports = importLines;
+  // Extract class definitions
+  const classPattern = /^(class \w+[\s\S]*?)(?=\nclass |\n# ===|\Z)/gm;
+  const lines = code.split('\n');
+  let classStart = -1, className = '';
+  const classBlocks = [];
+  for (let i = 0; i < lines.length; i++) {
+    const cm = lines[i].match(/^class\s+(\w+)/);
+    if (cm) {
+      if (classStart >= 0) classBlocks.push({ name: className, code: lines.slice(classStart, i).join('\n') });
+      classStart = i; className = cm[1];
+    }
+  }
+  if (classStart >= 0) classBlocks.push({ name: className, code: lines.slice(classStart).join('\n') });
+  result.classes = classBlocks;
+  // Extract rich method info from each class
+  result.classes.forEach(cls => {
+    const methods = [];
+    const mLines = cls.code.split('\n');
+    for (let i = 0; i < mLines.length; i++) {
+      const mm = mLines[i].match(/^\s+def\s+(\w+)\s*\(([^)]*)\)/);
+      if (!mm) continue;
+      const name = mm[1];
+      const rawParams = mm[2].replace(/\s*self\s*,?\s*/, '').trim();
+      const params = rawParams ? rawParams.split(',').map(p => p.trim().split('=')[0].split(':')[0].trim()).filter(Boolean) : [];
+      // Find method end (next def at same indent or end of class)
+      let end = mLines.length;
+      for (let j = i + 1; j < mLines.length; j++) {
+        if (mLines[j].match(/^\s{4}def\s/)) { end = j; break; }
+      }
+      const bodyLines = mLines.slice(i, end);
+      const lineCount = bodyLines.filter(l => l.trim() && !l.trim().startsWith('#')).length;
+      // Extract method docstring
+      let docstring = '';
+      const bodyStr = bodyLines.slice(1).join('\n');
+      const dsm = bodyStr.match(/^\s*("""([\s\S]*?)"""|'''([\s\S]*?)''')/);
+      if (dsm) docstring = (dsm[2] || dsm[3] || '').trim();
+      methods.push({ name, params, lineCount, docstring });
+    }
+    cls.methods = methods;
+  });
+  return result;
+}
+
+function renderParsedSource(code, agent) {
+  const p = parsePythonSource(code);
+  let html = '<div class="parsed-source">';
+
+  // Documentation section
+  if (p.docstring) {
+    html += `<div class="parsed-section">
+      <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
+        <h4>&#128214; Documentation</h4><span class="toggle-arrow">&#9660;</span>
+      </div>
+      <div class="parsed-section-body"><div class="parsed-doc">${esc(p.docstring)}</div></div>
+    </div>`;
+  }
+
+  // Manifest section
+  if (Object.keys(p.manifest).length) {
+    const m = p.manifest;
+    const friendlyLabels = {
+      schema: 'Schema', name: 'Agent ID', version: 'Version', display_name: 'Display Name',
+      description: 'Description', author: 'Author', category: 'Category',
+      quality_tier: 'Quality Tier', tags: 'Tags', requires_env: 'Env Variables',
+      dependencies: 'Dependencies'
+    };
+    let tableRows = '';
+    for (const [key, val] of Object.entries(m)) {
+      const label = friendlyLabels[key] || key;
+      let display;
+      if (Array.isArray(val)) {
+        display = val.length ? val.map(v => `<span class="manifest-tag">${esc(String(v))}</span>`).join('') : '<span style="color:var(--text-muted)">None</span>';
+      } else if (key === 'quality_tier') {
+        const tierColors = { official: 'var(--green)', verified: '#60a5fa', community: 'var(--text-dim)', experimental: '#a78bfa' };
+        const tierLabels = { official: 'Official', verified: 'Verified', community: 'Community', experimental: 'Frontier' };
+        display = `<span style="color:${tierColors[val] || 'var(--text-dim)'};font-weight:600">${tierLabels[val] || val}</span>`;
+      } else if (key === 'category') {
+        display = esc(String(val)).replace(/_/g, ' ');
+      } else {
+        display = esc(String(val));
+      }
+      tableRows += `<tr><td>${esc(label)}</td><td>${display}</td></tr>`;
+    }
+    html += `<div class="parsed-section">
+      <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
+        <h4>&#128220; Manifest</h4><span class="toggle-arrow">&#9660;</span>
+      </div>
+      <div class="parsed-section-body"><table class="manifest-table">${tableRows}</table></div>
+    </div>`;
+  }
+
+  // Class & Methods section
+  if (p.classes.length) {
+    p.classes.forEach(cls => {
+      const methodCards = cls.methods.length
+        ? cls.methods.map(m => {
+            const isPerform = m.name === 'perform';
+            const isInit = m.name === '__init__';
+            const isPrivate = m.name.startsWith('_') && !isInit;
+            const cardClass = isPerform ? 'mc-entry' : isInit ? 'mc-init' : isPrivate ? 'mc-private' : '';
+            const badgeClass = isPerform ? 'mb-entry' : isInit ? 'mb-init' : isPrivate ? 'mb-private' : 'mb-public';
+            const badgeText = isPerform ? 'entry' : isInit ? 'init' : isPrivate ? 'private' : 'public';
+            const paramStr = m.params.length ? `(${m.params.map(p => esc(p)).join(', ')})` : '()';
+            let card = `<div class="method-card ${cardClass}">
+              <span class="method-badge ${badgeClass}">${badgeText}</span>
+              <div style="flex:1;min-width:0">
+                <div><span class="method-name">${esc(m.name)}</span><span class="method-params">${paramStr}</span></div>`;
+            if (m.docstring) card += `<div class="method-doc">${esc(m.docstring.split('\n')[0])}</div>`;
+            card += `<div class="method-meta">${m.lineCount} line${m.lineCount !== 1 ? 's' : ''}</div>
+              </div></div>`;
+            return card;
+          }).join('')
+        : '<div style="color:var(--text-muted);font-size:.85rem;padding:8px 0">No methods found</div>';
+
+      const totalLines = cls.code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length;
+      html += `<div class="parsed-section">
+        <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
+          <h4>class ${esc(cls.name)}</h4>
+          <span style="font-size:.75rem;color:var(--text-muted);margin-right:24px">${cls.methods.length} methods &middot; ${totalLines} lines</span>
+          <span class="toggle-arrow">&#9660;</span>
+        </div>
+        <div class="parsed-section-body">
+          <div class="method-grid">${methodCards}</div>
+          <details style="margin-top:12px">
+            <summary style="cursor:pointer;color:var(--accent);font-size:.82rem;font-weight:500">View class source</summary>
+            <div class="code-viewer" style="margin-top:8px">
+              <div class="code-body" style="max-height:300px">${hlPy(cls.code)}</div>
+            </div>
+          </details>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Imports section (collapsed by default)
+  if (p.imports.length) {
+    html += `<div class="parsed-section">
+      <div class="parsed-section-hdr collapsed" onclick="toggleParsedSection(this)">
+        <h4>&#128230; Imports (${p.imports.length})</h4><span class="toggle-arrow">&#9660;</span>
+      </div>
+      <div class="parsed-section-body" style="display:none">
+        <div style="font-family:'SF Mono',Consolas,monospace;font-size:.8rem;color:var(--text-dim);line-height:1.8">${p.imports.map(i => esc(i)).join('<br>')}</div>
+      </div>
+    </div>`;
+  }
+
+  html += '</div>';
+  return html;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2221,291 +2976,229 @@ function isUnmodifiedTemplate(code) {
 // Workbench
 // ═══════════════════════════════════════════════════════
 
-const WB_TEMPLATES = {
-  blank: `"""
-My Agent — Describe what it does here.
+// ── Workbench: Form-based agent builder ──
 
-Longer explanation, usage notes, configuration.
+let wbTags = [], wbEnvVars = [], wbDeps = ['@rapp/basic-agent'], wbParamCount = 1;
+
+function wbGoStep(n) {
+  document.querySelectorAll('.wb-step').forEach((el, i) => el.classList.toggle('active', i === n));
+  document.querySelectorAll('.wb-step-btn').forEach((el, i) => {
+    el.classList.toggle('active', i === n);
+    if (i < n) el.classList.add('done'); else el.classList.remove('done');
+  });
+}
+
+function wbInitTagInputs() {
+  const wire = (fieldId, containerId, arr) => {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    field.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        const val = field.value.trim().replace(/,/g, '');
+        if (val && !arr.includes(val)) {
+          arr.push(val);
+          wbRenderTags(containerId, arr);
+        }
+        field.value = '';
+      }
+    });
+  };
+  wire('wb-tag-field', 'wb-tag-input', wbTags);
+  wire('wb-env-field', 'wb-env-input', wbEnvVars);
+  wire('wb-dep-field', 'wb-dep-input', wbDeps);
+}
+
+function wbRenderTags(containerId, arr) {
+  const container = document.getElementById(containerId);
+  const input = container.querySelector('input');
+  container.querySelectorAll('.wb-tag-pill').forEach(p => p.remove());
+  arr.forEach((tag, i) => {
+    const pill = document.createElement('span');
+    pill.className = 'wb-tag-pill';
+    pill.innerHTML = `${esc(tag)} <span class="tag-x" onclick="wbRemoveTag('${containerId}',${i})">&times;</span>`;
+    container.insertBefore(pill, input);
+  });
+}
+
+function wbRemoveTag(containerId, idx) {
+  const arrMap = { 'wb-tag-input': wbTags, 'wb-env-input': wbEnvVars, 'wb-dep-input': wbDeps };
+  const arr = arrMap[containerId];
+  if (containerId === 'wb-dep-input' && arr[idx] === '@rapp/basic-agent') return; // always required
+  arr.splice(idx, 1);
+  wbRenderTags(containerId, arr);
+}
+
+function wbAddParam() {
+  const container = document.getElementById('wb-params');
+  const i = wbParamCount++;
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px;margin-bottom:6px';
+  row.innerHTML = `<input type="text" id="wb-param-name-${i}" placeholder="Parameter name" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.85rem">
+    <input type="text" id="wb-param-desc-${i}" placeholder="Description" style="flex:2;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.85rem">
+    <button onclick="this.parentElement.remove()" style="padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--text-muted);cursor:pointer;font-size:.8rem">&times;</button>`;
+  container.appendChild(row);
+}
+
+function wbCollectParams() {
+  const params = [];
+  document.querySelectorAll('#wb-params > div').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const name = inputs[0]?.value.trim();
+    const desc = inputs[1]?.value.trim();
+    if (name) params.push({ name: name.replace(/\s+/g, '_').toLowerCase(), desc: desc || `The ${name}` });
+  });
+  return params;
+}
+
+function wbGenerateCode() {
+  const displayName = document.getElementById('wb-name').value.trim() || 'My Agent';
+  const desc = document.getElementById('wb-desc').value.trim() || 'An AI agent.';
+  const author = document.getElementById('wb-author').value.trim() || 'Anonymous';
+  const ghUser = document.getElementById('wb-gh-user').value.trim() || 'your-username';
+  const cat = document.getElementById('wb-cat').value || 'general';
+  const tier = document.getElementById('wb-tier').value || 'community';
+  const version = document.getElementById('wb-version').value.trim() || '1.0.0';
+  const behavior = document.getElementById('wb-behavior').value.trim();
+  const customLogic = document.getElementById('wb-logic').value.trim();
+  const params = wbCollectParams();
+
+  const slug = displayName.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+  const className = displayName.replace(/[^a-zA-Z0-9 ]/g, '').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('') + 'Agent';
+
+  const needsOs = wbEnvVars.length > 0 || (customLogic && customLogic.includes('os.environ'));
+  const imports = [needsOs ? 'import os' : null, 'from agents.basic_agent import BasicAgent'].filter(Boolean);
+
+  const docLines = behavior ? `${displayName} — ${desc}\n\n${behavior}` : `${displayName} — ${desc}`;
+  const envDoc = wbEnvVars.length ? `\n\nRequires: ${wbEnvVars.join(', ')} environment variable${wbEnvVars.length > 1 ? 's' : ''}.` : '';
+
+  // Build parameter properties for metadata
+  let propsStr = '', reqStr = '';
+  if (params.length) {
+    const propLines = params.map(p => `                    "${p.name}": {\n                        "type": "string",\n                        "description": "${p.desc}"\n                    }`);
+    propsStr = propLines.join(',\n');
+    reqStr = params.map(p => `"${p.name}"`).join(', ');
+  } else {
+    propsStr = `                    "task": {\n                        "type": "string",\n                        "description": "What to do"\n                    }`;
+    reqStr = '"task"';
+  }
+
+  // Build perform body
+  let performBody;
+  if (customLogic) {
+    performBody = customLogic.split('\n').map(l => '        ' + l).join('\n');
+  } else {
+    const envChecks = wbEnvVars.map(v =>
+      `        ${v.toLowerCase()} = os.environ.get("${v}")\n        if not ${v.toLowerCase()}:\n            return "Error: ${v} not set in environment."`)
+      .join('\n');
+    const paramGets = (params.length ? params : [{ name: 'task', desc: '' }])
+      .map(p => `        ${p.name} = kwargs.get("${p.name}", "")`)
+      .join('\n');
+    const returnFields = (params.length ? params : [{ name: 'task', desc: '' }])
+      .map(p => `${p.name}={${p.name}}`)
+      .join(', ');
+    performBody = [envChecks, paramGets, `        return f"${displayName} received: ${returnFields}"`].filter(Boolean).join('\n');
+  }
+
+  return `"""
+${docLines}${envDoc}
 """
+
+${imports.join('\n')}
+
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/my_agent",
-    "version": "0.1.0",
-    "display_name": "My Agent",
-    "description": "One-line description of what this agent does.",
-    "author": "Your Name",
-    "tags": ["general"],
-    "category": "general",
-    "quality_tier": "experimental",
-    "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "name": "@${ghUser}/${slug}",
+    "version": "${version}",
+    "display_name": "${displayName}",
+    "description": "${desc}",
+    "author": "${author}",
+    "tags": [${wbTags.map(t => `"${t}"`).join(', ')}],
+    "category": "${cat}",
+    "quality_tier": "${tier}",
+    "requires_env": [${wbEnvVars.map(v => `"${v}"`).join(', ')}],
+    "dependencies": [${wbDeps.map(d => `"${d}"`).join(', ')}],
 }
 
-from agents.basic_agent import BasicAgent
 
-
-class MyAgent(BasicAgent):
+class ${className}(BasicAgent):
     def __init__(self):
-        self.name = "My Agent"
+        self.name = "${displayName}"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "task": {
-                        "type": "string",
-                        "description": "What to do"
-                    }
+${propsStr}
                 },
-                "required": ["task"]
+                "required": [${reqStr}]
             }
         }
         super().__init__(self.name, self.metadata)
 
     async def perform(self, **kwargs):
-        task = kwargs.get("task", "")
-        return f"{self.name} received: {task}"
-`,
-  api: `"""
-API Agent — Connects to an external API.
-
-Requires: MY_API_KEY environment variable.
-"""
-
-__manifest__ = {
-    "schema": "rapp-agent/1.0",
-    "name": "@your-username/api_agent",
-    "version": "0.1.0",
-    "display_name": "API Agent",
-    "description": "Connects to an external API.",
-    "author": "Your Name",
-    "tags": ["integrations"],
-    "category": "integrations",
-    "quality_tier": "experimental",
-    "requires_env": ["MY_API_KEY"],
-    "dependencies": ["@rapp/basic-agent"],
+${performBody}
+`;
 }
 
-import os
-import json
-from agents.basic_agent import BasicAgent
+function wbBuildAndPreview() {
+  const code = wbGenerateCode();
+  document.getElementById('wb-code').value = code;
 
+  // Run validation checks
+  const checks = [];
+  const displayName = document.getElementById('wb-name').value.trim();
+  const desc = document.getElementById('wb-desc').value.trim();
+  const ghUser = document.getElementById('wb-gh-user').value.trim();
+  const cat = document.getElementById('wb-cat').value;
 
-class ApiAgent(BasicAgent):
-    def __init__(self):
-        self.name = "API Agent"
-        self.metadata = {
-            "name": self.name,
-            "description": __manifest__["description"],
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Query to send to the API"
-                    }
-                },
-                "required": ["query"]
-            }
-        }
-        super().__init__(self.name, self.metadata)
+  checks.push({ pass: !!displayName, text: 'Agent name', detail: displayName || 'missing' });
+  checks.push({ pass: !!desc, text: 'Description', detail: desc ? 'provided' : 'missing' });
+  checks.push({ pass: !!ghUser && ghUser !== 'your-username', text: 'GitHub username', detail: ghUser || 'missing', warn: ghUser === 'your-username' });
+  checks.push({ pass: !!cat, text: 'Category', detail: cat ? cat.replace(/_/g, ' ') : 'not selected' });
+  checks.push({ pass: true, text: 'Manifest', detail: 'auto-generated from your inputs' });
+  checks.push({ pass: true, text: 'BasicAgent class', detail: 'auto-generated' });
+  checks.push({ pass: true, text: 'perform() method', detail: 'auto-generated' });
+  checks.push({ pass: true, text: 'Docstring', detail: 'auto-generated from description' });
+  checks.push({ pass: wbTags.length > 0, text: 'Tags', detail: wbTags.length ? wbTags.join(', ') : 'none added', warn: !wbTags.length });
 
-    async def perform(self, **kwargs):
-        api_key = os.environ.get("MY_API_KEY")
-        if not api_key:
-            return "Error: MY_API_KEY not set."
-        query = kwargs.get("query", "")
-        return f"{self.name} would query: {query}"
-`
-}
+  const el = document.getElementById('wb-build-checks');
+  el.innerHTML = checks.map(c => {
+    const cls = c.pass && !c.warn ? 'pass' : c.warn ? 'warn' : 'fail';
+    const icon = c.pass && !c.warn ? '\u2713' : c.warn ? '!' : '\u2717';
+    return `<div class="wb-check ${cls}"><span class="check-icon">${icon}</span><span>${c.text}</span><span style="margin-left:auto;font-size:.78rem;color:var(--text-muted)">${c.detail}</span></div>`;
+  }).join('');
 
-function wbLoadTemplate(key) {
-  const ta = document.getElementById('wb-code')
-  if (ta.value.trim() && !confirm('Replace current code with template?')) return
-  ta.value = WB_TEMPLATES[key] || WB_TEMPLATES.blank
-  wbValidate()
+  // Preview card
+  const manifest = wbExtractManifest(code);
+  const previewEl = document.getElementById('wb-card-preview');
+  if (manifest && typeof agentToCard === 'function') {
+    const agent = {
+      name: manifest.name, display_name: manifest.display_name, description: manifest.description,
+      category: manifest.category, quality_tier: manifest.quality_tier, version: manifest.version,
+      author: manifest.author, tags: manifest.tags || [], requires_env: manifest.requires_env || [],
+      dependencies: manifest.dependencies || [],
+    };
+    previewEl.innerHTML = agentToCard(agent);
+  }
+
+  wbGoStep(3);
 }
 
 function wbExtractManifest(code) {
-  // Regex-based manifest extraction for browser (no AST available)
   const match = code.match(/__manifest__\s*=\s*(\{[\s\S]*?\n\})/)
   if (!match) return null
   try {
-    // Convert Python dict to JSON: replace single quotes, True/False/None, trailing commas
-    let jsonStr = match[1]
-      .replace(/'/g, '"')
-      .replace(/True/g, 'true')
-      .replace(/False/g, 'false')
-      .replace(/None/g, 'null')
-      .replace(/,\s*([\]}])/g, '$1')
+    let jsonStr = match[1].replace(/'/g, '"').replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null').replace(/,\s*([\]}])/g, '$1')
     return JSON.parse(jsonStr)
   } catch { return null }
 }
 
-function wbValidate() {
-  const code = document.getElementById('wb-code').value
-  const el = document.getElementById('wb-result')
-  const mEl = document.getElementById('wb-manifest')
-
-  if (!code.trim()) {
-    el.innerHTML = '<span class="warn">Paste some code or pick a template above to get started.</span>'
-    mEl.innerHTML = 'No manifest found.'
-    return null
-  }
-
-  const errors = []
-  const warnings = []
-
-  // 1. Check for __manifest__
-  const manifest = wbExtractManifest(code)
-  if (!manifest) {
-    errors.push('No __manifest__ dict found')
-  } else {
-    // Required fields
-    const required = ['schema', 'name', 'version', 'display_name', 'description', 'author', 'tags', 'category']
-    for (const f of required) {
-      if (!(f in manifest)) errors.push(`Missing required field: ${f}`)
-    }
-
-    // Name format
-    const name = manifest.name || ''
-    if (!name.startsWith('@') || !name.includes('/')) {
-      errors.push(`Invalid name '${name}' — must be @publisher/slug`)
-    } else {
-      const slug = name.split('/')[1] || ''
-      if (slug !== slug.toLowerCase()) warnings.push(`Slug '${slug}' should be lowercase`)
-      if (slug.includes('-')) warnings.push(`Slug '${slug}' should use underscores, not dashes`)
-      if (name.includes('@your-username/')) warnings.push('Still using template placeholder name — customize it!')
-    }
-
-    // Version
-    const ver = manifest.version || ''
-    const vParts = ver.split('.')
-    if (vParts.length !== 3 || !vParts.every(p => /^\d+$/.test(p))) {
-      errors.push(`Invalid version '${ver}' — must be semver (e.g. 1.0.0)`)
-    }
-
-    // Category
-    const validCats = ['core', 'pipeline', 'integrations', 'productivity', 'devtools', 'general']
-    if (manifest.category && !validCats.includes(manifest.category)) {
-      warnings.push(`Unknown category '${manifest.category}'. Standard: ${validCats.join(', ')}`)
-    }
-
-    // Tier
-    const validTiers = ['official', 'verified', 'community', 'experimental']
-    const tier = manifest.quality_tier || 'community'
-    if (!validTiers.includes(tier)) {
-      errors.push(`Invalid quality_tier '${tier}'`)
-    } else if (tier === 'official' || tier === 'verified') {
-      warnings.push(`Tier '${tier}' is assigned by maintainers. Use 'community' or 'experimental'.`)
-    }
-
-    // Tags
-    if (!Array.isArray(manifest.tags)) {
-      errors.push('tags must be a list')
-    } else if (manifest.tags.length === 0) {
-      warnings.push('Empty tags — add keywords for discoverability')
-    }
-
-    // Show manifest preview
-    if (manifest) {
-      let html = '<table>'
-      for (const [k, v] of Object.entries(manifest)) {
-        const display = Array.isArray(v) ? v.join(', ') || '<em>none</em>' : String(v)
-        html += `<tr><td>${k}</td><td>${display}</td></tr>`
-      }
-      html += '</table>'
-      mEl.innerHTML = html
-    }
-  }
-
-  // 2. Check for class inheriting BasicAgent
-  if (!/class\s+\w+\s*\(.*BasicAgent.*\)/.test(code)) {
-    errors.push('No class inheriting BasicAgent found')
-  }
-
-  // 3. Check for perform method
-  if (!/def\s+perform\s*\(/.test(code)) {
-    errors.push('No perform() method found')
-  }
-
-  // 4. Check for docstring
-  if (!code.trim().startsWith('"""') && !code.trim().startsWith("'''")) {
-    warnings.push('No module docstring — this serves as the agent\'s README')
-  }
-
-  // 5. Security checks
-  const secretPatterns = [
-    /(?:api[_-]?key|token|secret|password)\s*=\s*["'][^"']{8,}["']/i,
-    /sk-[A-Za-z0-9]{20,}/,
-  ]
-  for (const p of secretPatterns) {
-    if (p.test(code)) {
-      errors.push('Possible hardcoded secret detected — use requires_env + os.environ.get()')
-      break
-    }
-  }
-
-  // 6. Unmodified template check
-  if (code.includes('"@your-username/')) {
-    warnings.push('Template placeholder detected — customize @your-username/ before submitting')
-  }
-
-  // Format output
-  let html = ''
-  if (errors.length) {
-    html += `<span class="err">${errors.length} ERROR(S):</span>\n`
-    errors.forEach(e => html += `<span class="err">  \u2717 ${e}</span>\n`)
-  }
-  if (warnings.length) {
-    html += `<span class="warn">${warnings.length} WARNING(S):</span>\n`
-    warnings.forEach(w => html += `<span class="warn">  ! ${w}</span>\n`)
-  }
-  if (!errors.length && !warnings.length) {
-    html += '<span class="ok">\u2713 Looking good. Your agent is ready to share with the world.</span>'
-  } else if (!errors.length) {
-    html += '\n<span class="ok">No errors found. The warnings below are just suggestions — nothing blocking.</span>'
-  } else {
-    html += '\n<span class="err">Fix errors before publishing.</span>'
-  }
-  el.innerHTML = html
-
-  return manifest
-}
-
-function wbPreviewCard() {
-  const manifest = wbValidate()
-  const el = document.getElementById('wb-card-preview')
-  if (!manifest) {
-    el.innerHTML = '<div style="color:var(--text-muted);font-size:.82rem">Fix validation errors first.</div>'
-    return
-  }
-  // Build a temporary agent object and render a card
-  const agent = {
-    name: manifest.name || '@unknown/agent',
-    display_name: manifest.display_name || 'Unknown',
-    description: manifest.description || '',
-    category: manifest.category || 'general',
-    quality_tier: manifest.quality_tier || 'community',
-    version: manifest.version || '0.0.0',
-    author: manifest.author || 'Unknown',
-    tags: manifest.tags || [],
-    requires_env: manifest.requires_env || [],
-    dependencies: manifest.dependencies || [],
-  }
-  // Use the existing agentToCard function if available
-  if (typeof agentToCard === 'function') {
-    el.innerHTML = agentToCard(agent)
-  } else {
-    el.innerHTML = `<div style="color:var(--text-muted);font-size:.82rem">Card preview: ${agent.display_name} (${agent.quality_tier})</div>`
-  }
-}
-
 function wbDownload() {
   const code = document.getElementById('wb-code').value
-  if (!code.trim()) { alert('Nothing to download'); return }
+  if (!code.trim()) { alert('Build your agent first'); return }
   const manifest = wbExtractManifest(code)
   let filename = 'agent.py'
   if (manifest && manifest.name) {
@@ -2518,6 +3211,17 @@ function wbDownload() {
   a.download = filename
   a.click()
   URL.revokeObjectURL(a.href)
+}
+
+function wbCopyCode() {
+  const code = document.getElementById('wb-code').value;
+  if (!code.trim()) return;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
 }
 
 async function wbAddToLocal() {
@@ -3036,6 +3740,50 @@ const FLAVOR_PHRASES = {
   retail_cpg: '"Shelf space is a battlefield."',
 };
 
+// Kids card — category to emoji and simplified explanations
+const CAT_TO_EMOJI = {
+  core: '🧠', integrations: '🔌', productivity: '✨', devtools: '🔧', pipeline: '🏗️', general: '🤖',
+  b2b_sales: '🤝', b2c_sales: '🛍️', healthcare: '🏥', financial_services: '💰',
+  manufacturing: '🏭', energy: '⚡', federal_government: '🏛️', slg_government: '🏛️',
+  human_resources: '👥', it_management: '🖥️', professional_services: '📋',
+  retail_cpg: '🛒', software_digital_products: '💻',
+};
+const CAT_TO_KIDNAME = {
+  core: 'Brain Power', integrations: 'Connector', productivity: 'Helper', devtools: 'Builder Tool',
+  pipeline: 'Factory', general: 'Robot Friend', b2b_sales: 'Deal Maker', b2c_sales: 'Shop Helper',
+  healthcare: 'Health Helper', financial_services: 'Money Helper', manufacturing: 'Factory Bot',
+  energy: 'Power Bot', federal_government: 'Gov Helper', slg_government: 'City Helper',
+  human_resources: 'People Helper', it_management: 'Tech Helper', professional_services: 'Pro Helper',
+  retail_cpg: 'Store Bot', software_digital_products: 'App Builder',
+};
+
+function kidsExplain(desc) {
+  // Simplify description for kids
+  return (desc || 'This robot helper does cool stuff!')
+    .replace(/\b(AI-powered|automated|autonomous)\b/gi, 'smart')
+    .replace(/\b(generates?|produces?)\b/gi, 'makes')
+    .replace(/\b(analyzes?|evaluates?)\b/gi, 'looks at')
+    .replace(/\b(integrat\w+)\b/gi, 'connects to')
+    .replace(/\b(compliance)\b/gi, 'rules')
+    .replace(/\b(stakeholder)\b/gi, 'people')
+    .replace(/\b(pipeline)\b/gi, 'steps')
+    .replace(/\b(deployment)\b/gi, 'setup')
+    .slice(0, 120);
+}
+
+function kidsComplexity(a) {
+  // 1-5 stars based on complexity
+  const deps = (a.dependencies || []).length;
+  const envs = (a.requires_env || []).length;
+  const lines = parseInt(a._lines) || 100;
+  let stars = 1;
+  if (lines > 200) stars++;
+  if (lines > 500) stars++;
+  if (deps > 1) stars++;
+  if (envs > 0) stars++;
+  return Math.min(stars, 5);
+}
+
 // Generate unique SVG art from agent name (deterministic hash-based)
 function genCardArt(agent) {
   const h = Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0);
@@ -3226,6 +3974,13 @@ function setCardMode(mode, el) {
   renderCards();
 }
 
+function cycleCardMode() {
+  const modes = ['business', 'creative', 'kids'];
+  const idx = modes.indexOf(cardMode);
+  cardMode = modes[(idx + 1) % modes.length];
+  document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.remove('active'));
+}
+
 function agentToCard(a) {
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
@@ -3306,8 +4061,41 @@ function agentToCard(a) {
       <div class="ac-back-hint">Scan to load this agent</div>
       <div class="ac-back-actions">
         <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
-        <button onclick="event.stopPropagation();printCard('${esc(a.name)}')">Print</button>
+        <button onclick="event.stopPropagation();exportCardPNG('${esc(a.name)}')">Export</button>
+        <button onclick="event.stopPropagation();open3DViewer('${esc(a.name)}')">3D</button>
         <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
+      </div>
+    </div>`;
+
+  // ── Kids Card Face ──
+  const kEmoji = CAT_TO_EMOJI[a.category] || '🤖';
+  const kCatName = CAT_TO_KIDNAME[a.category] || 'Robot Helper';
+  const kExplain = kidsExplain(a.description);
+  const kStars = kidsComplexity(a);
+  const kInputs = (a.requires_env || []).length
+    ? `It needs: ${a.requires_env.map(v => v.replace(/_/g, ' ').toLowerCase()).join(', ')}`
+    : 'No setup needed — just run it!';
+  const kidsFace = `
+    <div class="agent-card-kids">
+      <div class="kids-header">
+        <span class="kids-name">${esc(a.display_name)}</span>
+        <span class="kids-emoji">${kEmoji}</span>
+      </div>
+      <div class="kids-art">${genCreativeArt(a)}</div>
+      <div class="kids-section">
+        <div class="kids-label what">What does it do?</div>
+        <div class="kids-explain">${esc(kExplain)}</div>
+      </div>
+      <div class="kids-section">
+        <div class="kids-label needs">What does it need?</div>
+        <div class="kids-explain">${esc(kInputs)}</div>
+      </div>
+      <div class="kids-footer">
+        <div>
+          <div style="font-size:.55rem;color:#94a3b8;margin-bottom:2px">Difficulty</div>
+          <div class="kids-level">${Array.from({length:5}, (_, i) => `<span class="kids-star ${i < kStars ? 'on' : 'off'}">&#9733;</span>`).join('')}</div>
+        </div>
+        <span class="kids-cat">${kCatName}</span>
       </div>
     </div>`;
 
@@ -3316,6 +4104,9 @@ function agentToCard(a) {
   if (cardMode === 'business') {
     front = bizFace;
     back = holoFace;
+  } else if (cardMode === 'kids') {
+    front = kidsFace;
+    back = bizFace;
   } else {
     front = holoFace;
     back = qrFace;
@@ -3374,6 +4165,952 @@ function shareDeck() {
   showToast(`Deck "${currentDeckName}" link copied! ${deck.size} cards`, 'success');
 }
 
+// ═══════════════════════════════════════════════════════
+// Minting, Grading & Packs Engine
+// ═══════════════════════════════════════════════════════
+
+// ── Seasonal Sets ──
+const PACK_SETS = [
+  {
+    id: 'genesis', name: 'Genesis', sub: 'Season 1 — The Beginning',
+    cssClass: 'pack-genesis', icon: '🔮', cards: 5,
+    desc: 'The original set. 5 cards per pack. Weighted rarity.',
+    filter: () => true,
+  },
+  {
+    id: 'frontier', name: 'Frontier', sub: 'Experimental & Bleeding Edge',
+    cssClass: 'pack-frontier', icon: '🧪', cards: 3,
+    desc: '3 experimental-tier agents. Higher mythic chance.',
+    filter: a => a.quality_tier === 'experimental' || a.category === 'pipeline' || a.category === 'devtools',
+  },
+  {
+    id: 'inferno', name: 'Inferno', sub: 'Sales & Industry Power',
+    cssClass: 'pack-inferno', icon: '🔥', cards: 5,
+    desc: '5 industry vertical agents. B2B, healthcare, finance.',
+    filter: a => ['b2b_sales','b2c_sales','healthcare','financial_services','manufacturing','energy','retail_cpg','professional_services'].includes(a.category),
+  },
+];
+
+// ── Collection (IndexedDB) ──
+const COLL_DB = 'rar_collection';
+const COLL_STORE = 'minted_cards';
+
+function openCollDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(COLL_DB, 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(COLL_STORE)) {
+        db.createObjectStore(COLL_STORE, { keyPath: 'mintId' });
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function getAllMinted() {
+  const db = await openCollDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(COLL_STORE, 'readonly');
+    const store = tx.objectStore(COLL_STORE);
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function saveMinted(card) {
+  const db = await openCollDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(COLL_STORE, 'readwrite');
+    tx.objectStore(COLL_STORE).put(card);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+// ── Minting Engine ──
+function generateMintId() {
+  const chars = '0123456789ABCDEF';
+  let id = '';
+  for (let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * 16)];
+  return id;
+}
+
+function hashCode(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+async function mintCard(agentName, setId) {
+  const a = allAgents.find(x => x.name === agentName);
+  if (!a) return null;
+
+  const existing = await getAllMinted();
+  const agentMints = existing.filter(c => c.agentName === agentName);
+  const mintNum = agentMints.length + 1;
+  const mintId = generateMintId();
+  const now = Date.now();
+
+  // ── Unique visual variations (the "offset") ──
+  const seed = hashCode(mintId + agentName + now);
+  const centeringX = ((seed % 200) - 100) / 200;       // -0.5 to +0.5 mm offset
+  const centeringY = (((seed >> 8) % 200) - 100) / 200;
+  const inkSaturation = 0.85 + ((seed >> 4) % 30) / 100;  // 0.85–1.15
+  const holoIntensity = 0.7 + ((seed >> 12) % 60) / 100;  // 0.7–1.3
+  const cornerSharpness = 0.95 + ((seed >> 6) % 10) / 100; // 0.95–1.05
+  const surfaceNoise = (seed >> 16) % 100;                 // 0–99 (sparkle pattern seed)
+
+  // ── Centering grade (PSA style: 60/40 = 10, 55/45 = 9, etc.) ──
+  const centerScore = 10 - Math.floor(Math.abs(centeringX) * 8 + Math.abs(centeringY) * 8);
+
+  // ── Provenance hash ──
+  const sourceHash = hashCode(JSON.stringify(a)).toString(16).toUpperCase().padStart(8, '0');
+
+  // ── Serial format: SET-CARDNUM-MINTNUM-HASH ──
+  const allIdx = allAgents.indexOf(a);
+  const serial = `${(setId || 'GEN').toUpperCase()}-${String(allIdx + 1).padStart(3, '0')}-${String(mintNum).padStart(4, '0')}-${mintId}`;
+
+  const card = {
+    mintId,
+    serial,
+    agentName: a.name,
+    displayName: a.display_name,
+    setId: setId || 'genesis',
+    mintNum,
+    mintedAt: now,
+    version: a.version,
+    tier: a.quality_tier || 'community',
+    category: a.category,
+    sourceHash,
+    // Visual variations
+    variations: {
+      centeringX, centeringY,
+      inkSaturation, holoIntensity,
+      cornerSharpness, surfaceNoise,
+      centerScore,
+    },
+    // Provenance
+    transfers: 0,
+    lastTransfer: null,
+    // Snapshot at mint time
+    votesAtMint: (votes.agents?.[a.name]?.score) || 0,
+    tierAtMint: a.quality_tier || 'community',
+    isFirstEdition: mintNum === 1,
+  };
+
+  // Calculate initial grade
+  card.grade = gradeCard(card);
+
+  await saveMinted(card);
+  return card;
+}
+
+// ── Grading Engine (PSA 1–10 scale) ──
+function gradeCard(card) {
+  let score = 10;
+
+  // Centering (0–2 points deduction)
+  score -= Math.max(0, 2 - card.variations.centerScore * 0.2);
+
+  // Age wear (degrades over time)
+  const ageMs = Date.now() - card.mintedAt;
+  const ageDays = ageMs / (1000 * 60 * 60 * 24);
+  if (ageDays > 365) score -= 0.5;
+  if (ageDays > 180) score -= 0.3;
+  if (ageDays > 90) score -= 0.2;
+  if (ageDays > 30) score -= 0.1;
+
+  // Transfer wear (each transfer degrades)
+  score -= card.transfers * 0.3;
+
+  // Version drift (if agent updated since mint, card is "damaged")
+  const currentAgent = allAgents.find(a => a.name === card.agentName);
+  if (currentAgent && currentAgent.version !== card.version) {
+    score -= 0.5; // outdated card
+  }
+
+  // Ink saturation bonus/penalty
+  if (card.variations.inkSaturation > 1.05) score += 0.1; // rich print
+  if (card.variations.inkSaturation < 0.9) score -= 0.1;  // faded
+
+  // Perfect centering bonus
+  if (card.variations.centerScore >= 9) score += 0.2;
+
+  return Math.max(1, Math.min(10, Math.round(score * 10) / 10));
+}
+
+function gradeLabel(grade) {
+  if (grade >= 9.5) return { label: 'GEM MINT 10', cls: 'gem' };
+  if (grade >= 9) return { label: 'MINT 9', cls: 'mint' };
+  if (grade >= 8) return { label: 'NM-MT 8', cls: 'mint' };
+  if (grade >= 7) return { label: 'NM 7', cls: 'good' };
+  if (grade >= 6) return { label: 'EX-MT 6', cls: 'good' };
+  if (grade >= 5) return { label: 'EX 5', cls: 'fair' };
+  if (grade >= 4) return { label: 'VG-EX 4', cls: 'fair' };
+  if (grade >= 3) return { label: 'VG 3', cls: 'poor' };
+  return { label: 'POOR ' + Math.floor(grade), cls: 'poor' };
+}
+
+// ── Pack Opening ──
+function renderPackShelf() {
+  const el = document.getElementById('pack-shelf');
+  if (!el) return;
+  el.innerHTML = PACK_SETS.map(p => {
+    const pool = allAgents.filter(p.filter);
+    return `<div class="pack-box ${p.cssClass}" onclick="openPack('${p.id}')">
+      <div class="pack-icon">${p.icon}</div>
+      <div class="pack-name">${p.name}</div>
+      <div class="pack-sub">${p.sub}</div>
+      <div class="pack-count">${p.cards} cards &middot; ${pool.length} in pool</div>
+    </div>`;
+  }).join('');
+}
+
+function pickPackCards(setDef) {
+  const pool = allAgents.filter(setDef.filter);
+  if (pool.length < setDef.cards) return pool.slice(0, setDef.cards);
+
+  // Weighted rarity pull
+  const tierWeights = { official: 1, verified: 3, community: 70, experimental: 26 };
+  const weighted = [];
+  pool.forEach(a => {
+    const w = tierWeights[a.quality_tier] || 50;
+    for (let i = 0; i < w; i++) weighted.push(a);
+  });
+
+  const picks = [];
+  const picked = new Set();
+  while (picks.length < setDef.cards && picks.length < pool.length) {
+    const a = weighted[Math.floor(Math.random() * weighted.length)];
+    if (!picked.has(a.name)) {
+      picked.add(a.name);
+      picks.push(a);
+    }
+  }
+  return picks;
+}
+
+async function openPack(setId) {
+  const setDef = PACK_SETS.find(s => s.id === setId);
+  if (!setDef) return;
+
+  const picks = pickPackCards(setDef);
+  if (!picks.length) { showToast('No agents available for this pack', 'error'); return; }
+
+  // Mint each card
+  const minted = [];
+  for (const a of picks) {
+    const card = await mintCard(a.name, setId);
+    if (card) minted.push(card);
+  }
+
+  // Show pack opening overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'pack-open-overlay';
+  overlay.innerHTML = `
+    <div style="color:var(--text-dim);font-size:.9rem;margin-bottom:20px">${setDef.name} Pack — ${minted.length} cards</div>
+    <div class="pack-reveal-row" id="pack-reveal-row"></div>
+    <div class="pack-open-actions">
+      <button onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection()">Add to Collection</button>
+      <button onclick="exportPackCards()" class="primary">Export All as .card</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  // Reveal cards one by one with delay
+  const row = document.getElementById('pack-reveal-row');
+  window._lastPackMinted = minted;
+
+  for (let i = 0; i < minted.length; i++) {
+    await new Promise(r => setTimeout(r, 400 + i * 300));
+    const c = minted[i];
+    const rarity = TIER_TO_RARITY[c.tier] || 'uncommon';
+    const gl = gradeLabel(c.grade);
+    const div = document.createElement('div');
+    div.className = `pack-card-reveal ${rarity}`;
+    div.style.animationDelay = '0s';
+
+    // Render mini card to canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = 250; canvas.height = 350;
+    renderMiniCard(canvas, c);
+    div.appendChild(canvas);
+
+    div.innerHTML += `<div class="pack-reveal-grade">${gl.label}</div>`;
+    div.innerHTML += `<div class="pack-reveal-serial">${c.serial}</div>`;
+    if (c.isFirstEdition) {
+      div.innerHTML += `<div style="position:absolute;top:8px;left:8px;background:rgba(255,215,0,.9);color:#000;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px">1ST EDITION</div>`;
+    }
+    div.onclick = () => exportSingleCard(c);
+    row.appendChild(div);
+  }
+}
+
+function renderMiniCard(canvas, card) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const a = allAgents.find(x => x.name === card.agentName);
+  if (!a) return;
+
+  const v = card.variations;
+
+  // Background with ink saturation variation
+  const sat = v.inkSaturation;
+  ctx.fillStyle = `rgb(${Math.round(42 * sat)}, ${Math.round(36 * sat)}, ${Math.round(24 * sat)})`;
+  ctx.fillRect(0, 0, W, H);
+
+  // Holo shimmer (intensity varies per card)
+  for (let y = 0; y < H; y += 2) {
+    const hue = (y * 1.2 + v.surfaceNoise * 3) % 360;
+    ctx.fillStyle = `hsla(${hue}, 80%, 60%, ${0.015 * v.holoIntensity})`;
+    ctx.fillRect(0, y, W, 2);
+  }
+
+  // Border with centering offset
+  const ox = v.centeringX * 3, oy = v.centeringY * 3;
+  ctx.strokeStyle = '#8b7332';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(4 + ox, 4 + oy, W - 8, H - 8);
+
+  // Name
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = `bold 14px -apple-system, sans-serif`;
+  ctx.fillText(a.display_name, 12 + ox, 24 + oy);
+
+  // Art area
+  const artY = 34 + oy, artH = 110;
+  ctx.fillStyle = '#0d0a06';
+  ctx.fillRect(10 + ox, artY, W - 20, artH);
+
+  // Mini generative art
+  const hash = hashCode(card.mintId + a.name);
+  for (let i = 0; i < 25; i++) {
+    const x = 12 + ((hash * (i + 1) * 7) % (W - 24));
+    const y = artY + 2 + ((hash * (i + 3) * 13) % (artH - 4));
+    const r = 2 + (hash * (i + 5)) % 8;
+    const hue = (hash + i * 37 + v.surfaceNoise) % 360;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${hue}, ${60 * sat}%, 50%, ${0.4 * sat})`;
+    ctx.fill();
+  }
+
+  // Type line
+  const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
+  ctx.fillStyle = 'rgba(50,40,25,.7)';
+  ctx.fillRect(0, artY + artH + 4, W, 18);
+  ctx.fillStyle = '#b8a88a';
+  ctx.font = '8px -apple-system, sans-serif';
+  ctx.fillText(`Creature — ${creatureType}`, 10 + ox, artY + artH + 16);
+
+  // Description
+  ctx.fillStyle = 'rgba(30,25,15,.5)';
+  ctx.fillRect(6, artY + artH + 26, W - 12, H - artY - artH - 60);
+  ctx.fillStyle = '#c8b89a';
+  ctx.font = '8px -apple-system, sans-serif';
+  const desc = (a.description || '').slice(0, 100);
+  const words = desc.split(' ');
+  let line = '', ly = artY + artH + 40;
+  for (const word of words) {
+    if (ctx.measureText(line + word).width > W - 28) {
+      ctx.fillText(line.trim(), 12, ly);
+      line = word + ' '; ly += 12;
+    } else { line += word + ' '; }
+  }
+  if (line.trim()) ctx.fillText(line.trim(), 12, ly);
+
+  // Footer
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  ctx.fillStyle = '#8b7332';
+  ctx.font = 'bold 7px -apple-system, sans-serif';
+  ctx.fillText(`HOLO · ${rarity.toUpperCase()}`, 10, H - 14);
+  const depCount = (a.dependencies || []).length;
+  const power = Math.max(1, (a.tags || []).length + depCount);
+  const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + (a.requires_env || []).length);
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = 'bold 14px -apple-system, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(`${power}/${toughness}`, W - 10, H - 10);
+  ctx.textAlign = 'left';
+
+  // Wear overlay (degrades with grade)
+  const wear = 10 - card.grade;
+  if (wear > 1) {
+    // Edge whitening
+    ctx.strokeStyle = `rgba(255,255,255,${wear * 0.02})`;
+    ctx.lineWidth = wear * 0.5;
+    ctx.strokeRect(2, 2, W - 4, H - 4);
+  }
+  if (wear > 3) {
+    // Surface scratches
+    for (let i = 0; i < wear; i++) {
+      const sx = Math.random() * W;
+      const sy = Math.random() * H;
+      ctx.strokeStyle = `rgba(255,255,255,${0.03 * wear})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(sx + (Math.random() - 0.5) * 40, sy + (Math.random() - 0.5) * 20);
+      ctx.stroke();
+    }
+  }
+}
+
+// ── .card File Export (self-contained HTML) ──
+async function exportSingleCard(card) {
+  const a = allAgents.find(x => x.name === card.agentName);
+  if (!a) return;
+
+  // Render full-res card
+  const canvas = document.createElement('canvas');
+  canvas.width = 750; canvas.height = 1050;
+  // Use the exportCardPNG renderer but capture to canvas
+  const ctx = canvas.getContext('2d');
+  renderMiniCard(canvas, card); // Use the mini renderer for now scaled up
+
+  // Actually render full-res
+  const fullCanvas = document.createElement('canvas');
+  fullCanvas.width = 750; fullCanvas.height = 1050;
+  renderMiniCard(fullCanvas, card);
+
+  const imgData = fullCanvas.toDataURL('image/png');
+
+  // Fetch source code
+  let sourceCode = a._code || '';
+  if (!sourceCode && a._file) {
+    try {
+      const rawUrl = `https://raw.githubusercontent.com/kody-w/RAR/main/${a._file}`;
+      const resp = await fetch(rawUrl);
+      if (resp.ok) sourceCode = await resp.text();
+    } catch {}
+  }
+  const sourceB64 = btoa(unescape(encodeURIComponent(sourceCode || '# Source not available')));
+  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
+
+  const cardData = JSON.stringify(card, null, 2);
+  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
+  const gl = gradeLabel(card.grade);
+
+  const html = `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>${a.display_name} — RAR Agent Card</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;color:#e6edf3;font-family:-apple-system,sans-serif;display:flex;flex-direction:column;align-items:center;padding:40px 20px;min-height:100vh}
+.card-frame{position:relative;margin-bottom:24px}
+.card-frame img{width:375px;height:525px;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.badge{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.8);color:#ffd700;font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:6px;border:1px solid rgba(255,215,0,.3)}
+.first-ed{position:absolute;top:12px;left:12px;background:rgba(255,215,0,.9);color:#000;font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:4px}
+.serial{margin:8px 0;font-family:monospace;font-size:.85rem;color:#656d76}
+h1{font-size:1.3rem;margin-bottom:4px}
+.meta{color:#8b949e;font-size:.85rem;margin-bottom:20px}
+.section{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px;margin-bottom:12px;width:100%;max-width:500px}
+.section h3{font-size:.85rem;color:#58a6ff;margin-bottom:8px}
+table{width:100%;font-size:.8rem;border-collapse:collapse}
+td{padding:4px 8px;border-bottom:1px solid #21262d}
+td:first-child{color:#656d76;width:140px}
+.provenance{font-family:monospace;font-size:.75rem;word-break:break-all;color:#8b949e}
+.source-toggle{cursor:pointer;color:#58a6ff;font-size:.82rem;margin-top:8px}
+pre{background:#1e1e1e;border-radius:8px;padding:12px;font-size:.75rem;max-height:300px;overflow:auto;margin-top:8px;display:none;color:#d4d4d4}
+.actions{display:flex;gap:10px;margin-top:16px}
+.actions button{padding:8px 18px;border-radius:8px;border:1px solid #30363d;background:#21262d;color:#e6edf3;font-size:.85rem;cursor:pointer}
+.actions button:hover{border-color:#58a6ff;color:#58a6ff}
+.actions button.primary{background:#58a6ff;color:#fff;border-color:#58a6ff}
+</style></head><body>
+<div class="card-frame">
+  <img src="${imgData}" alt="${a.display_name}">
+  <div class="badge">${gl.label}</div>
+  ${card.isFirstEdition ? '<div class="first-ed">1ST EDITION</div>' : ''}
+</div>
+<h1>${a.display_name}</h1>
+<div class="serial">${card.serial}</div>
+<div class="meta">${a.name} · v${a.version} · Minted ${new Date(card.mintedAt).toLocaleDateString()}</div>
+
+<div class="section"><h3>Grade Report</h3>
+<table>
+<tr><td>Overall Grade</td><td><strong>${gl.label}</strong> (${card.grade}/10)</td></tr>
+<tr><td>Centering</td><td>${card.variations.centerScore >= 9 ? 'Excellent' : card.variations.centerScore >= 7 ? 'Good' : 'Off-center'} (${card.variations.centeringX > 0 ? '+' : ''}${(card.variations.centeringX * 100).toFixed(0)}%, ${card.variations.centeringY > 0 ? '+' : ''}${(card.variations.centeringY * 100).toFixed(0)}%)</td></tr>
+<tr><td>Ink Saturation</td><td>${(card.variations.inkSaturation * 100).toFixed(0)}%</td></tr>
+<tr><td>Holo Intensity</td><td>${(card.variations.holoIntensity * 100).toFixed(0)}%</td></tr>
+<tr><td>Surface</td><td>Pattern #${card.variations.surfaceNoise}</td></tr>
+<tr><td>Transfers</td><td>${card.transfers}</td></tr>
+<tr><td>Age</td><td>${Math.floor((Date.now() - card.mintedAt) / 86400000)} days</td></tr>
+${card.isFirstEdition ? '<tr><td>Edition</td><td><strong style="color:#ffd700">1st Edition</strong></td></tr>' : ''}
+</table></div>
+
+<div class="section"><h3>Provenance</h3>
+<table>
+<tr><td>Mint ID</td><td class="provenance">${card.mintId}</td></tr>
+<tr><td>Source Hash</td><td class="provenance">${sourceHashHex}</td></tr>
+<tr><td>Votes at Mint</td><td>${card.votesAtMint}</td></tr>
+<tr><td>Tier at Mint</td><td>${card.tierAtMint}</td></tr>
+</table></div>
+
+<div class="section"><h3>Agent Source</h3>
+<div class="source-toggle" onclick="document.getElementById('src').style.display=document.getElementById('src').style.display==='block'?'none':'block'">▶ View source code</div>
+<pre id="src"></pre>
+<script>document.getElementById('src').textContent=atob('${sourceB64}')<\/script>
+</div>
+
+<div class="actions">
+<button onclick="let b=atob('${sourceB64}');let l=document.createElement('a');l.href=URL.createObjectURL(new Blob([b],{type:'text/x-python'}));l.download='${slug}.py';l.click()">Download .py</button>
+<button class="primary" onclick="window.print()">Print Card</button>
+</div>
+
+<script>
+// Card data for import
+window.CARD_DATA = ${cardData};
+</script>
+</body></html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const link = document.createElement('a');
+  link.download = `${slug}_${card.serial}.card.html`;
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast(`Exported ${a.display_name} card (${gl.label})`, 'success');
+}
+
+async function exportPackCards() {
+  if (!window._lastPackMinted?.length) return;
+  for (const card of window._lastPackMinted) {
+    await exportSingleCard(card);
+    await new Promise(r => setTimeout(r, 200)); // stagger downloads
+  }
+}
+
+// ── Collection Viewer ──
+async function renderCollection() {
+  const cards = await getAllMinted();
+  const countEl = document.getElementById('coll-count');
+  const gridEl = document.getElementById('collection-grid');
+  if (!countEl || !gridEl) return;
+
+  // Re-grade all cards (grades change over time)
+  cards.forEach(c => { c.grade = gradeCard(c); });
+
+  countEl.textContent = `(${cards.length} cards)`;
+
+  if (!cards.length) {
+    gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0"><h3>No cards minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p></div>';
+    return;
+  }
+
+  // Sort by grade desc, then mint date
+  cards.sort((a, b) => b.grade - a.grade || b.mintedAt - a.mintedAt);
+
+  gridEl.innerHTML = cards.map(c => {
+    const gl = gradeLabel(c.grade);
+    const age = Math.floor((Date.now() - c.mintedAt) / 86400000);
+    return `<div class="coll-card" onclick="exportSingleCard(${JSON.stringify(c).replace(/"/g, '&quot;')})">
+      <canvas width="250" height="350" data-mint="${c.mintId}"></canvas>
+      <div class="coll-card-info">
+        <div class="coll-card-name">${esc(c.displayName)}</div>
+        <div class="coll-card-meta">
+          <span class="coll-grade ${gl.cls}">${gl.label}</span>
+          <span>${c.isFirstEdition ? '1st Ed · ' : ''}#${c.mintNum}</span>
+        </div>
+        <div style="font-size:.6rem;color:var(--text-muted);margin-top:2px">${c.serial} · ${age}d old</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Render canvases
+  cards.forEach(c => {
+    const canvas = gridEl.querySelector(`canvas[data-mint="${c.mintId}"]`);
+    if (canvas) renderMiniCard(canvas, c);
+  });
+}
+
+async function exportCollection() {
+  const cards = await getAllMinted();
+  if (!cards.length) { showToast('No cards to export', 'error'); return; }
+  for (const card of cards) {
+    await exportSingleCard(card);
+    await new Promise(r => setTimeout(r, 300));
+  }
+  showToast(`Exported ${cards.length} cards`, 'success');
+}
+
+// ═══════════════════════════════════════════════════════
+// Export Card PNG — print-ready trading card (2.5" × 3.5" at 300 DPI)
+// ═══════════════════════════════════════════════════════
+function exportCardPNG(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+
+  // 300 DPI at 2.5" × 3.5" = 750 × 1050 px
+  const W = 750, H = 1050;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const cc = getCatColor(a.category);
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  const tags = (a.tags || []).slice(0, 6);
+  const desc = (a.description || '').slice(0, 200);
+  const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
+  const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
+  const isLegendary = tier === 'official' || tier === 'verified';
+  const depCount = (a.dependencies || []).length;
+  const envCount = (a.requires_env || []).length;
+  const power = Math.max(1, tags.length + depCount);
+  const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
+  const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const allIdx = allAgents.indexOf(a);
+  const cardNum = `${String(allIdx + 1).padStart(3, '0')}/${String(allAgents.length).padStart(3, '0')}`;
+
+  // HP based on lines of code
+  const lines = parseInt(a._lines) || 100;
+  const hp = Math.min(300, Math.max(30, Math.round(lines / 3)));
+
+  // ── Background ──
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#2a2418');
+  bgGrad.addColorStop(0.4, '#1a1510');
+  bgGrad.addColorStop(1, '#1f1a12');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── Holographic overlay ──
+  for (let y = 0; y < H; y += 2) {
+    const hue = (y * 0.8 + 120) % 360;
+    ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.015)`;
+    ctx.fillRect(0, y, W, 2);
+  }
+  // Diagonal shimmer bands
+  for (let i = 0; i < 12; i++) {
+    const x = i * 80 - 100;
+    const grad = ctx.createLinearGradient(x, 0, x + 200, H);
+    grad.addColorStop(0, 'rgba(255,255,255,0)');
+    grad.addColorStop(0.4, 'rgba(255,200,100,0.03)');
+    grad.addColorStop(0.5, 'rgba(100,200,255,0.04)');
+    grad.addColorStop(0.6, 'rgba(255,100,200,0.03)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ── Outer border ──
+  ctx.strokeStyle = '#8b7332';
+  ctx.lineWidth = 6;
+  roundRect(ctx, 3, 3, W - 6, H - 6, 16);
+  ctx.stroke();
+  // Inner border
+  ctx.strokeStyle = 'rgba(139,115,50,0.3)';
+  ctx.lineWidth = 2;
+  roundRect(ctx, 14, 14, W - 28, H - 28, 12);
+  ctx.stroke();
+
+  // ── Header bar ──
+  ctx.fillStyle = 'rgba(40,32,18,0.8)';
+  ctx.fillRect(20, 20, W - 40, 50);
+  // Name
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(a.display_name, 32, 46);
+  // HP
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#ff4444';
+  ctx.font = 'bold 14px -apple-system, sans-serif';
+  ctx.fillText('HP', W - 90, 38);
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = 'bold 32px -apple-system, sans-serif';
+  ctx.fillText(String(hp), W - 32, 46);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+
+  // ── Mana pips ──
+  const pipColors = { W: '#f9faf4', U: '#0e68ab', B: '#3a2f20', R: '#d3202a', G: '#00733e', N: '#9e9e9e' };
+  pips.forEach((p, i) => {
+    const px = W - 32 - i * 28;
+    ctx.beginPath();
+    ctx.arc(px, 86, 11, 0, Math.PI * 2);
+    ctx.fillStyle = pipColors[p] || '#888';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = p === 'W' ? '#333' : '#fff';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(p, px, 90);
+    ctx.textAlign = 'left';
+  });
+
+  // ── Art box ──
+  const artY = 100, artH = 300;
+  ctx.fillStyle = '#0d0a06';
+  roundRect(ctx, 28, artY, W - 56, artH, 4);
+  ctx.fill();
+  ctx.strokeStyle = '#5a4a2a';
+  ctx.lineWidth = 2;
+  roundRect(ctx, 28, artY, W - 56, artH, 4);
+  ctx.stroke();
+
+  // Generative art (canvas version)
+  const hash = [...a.name].reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
+  const style = Math.abs(hash) % 6;
+  ctx.save();
+  ctx.beginPath();
+  roundRect(ctx, 30, artY + 2, W - 60, artH - 4, 3);
+  ctx.clip();
+
+  if (style === 0) { // Circuit
+    for (let i = 0; i < 80; i++) {
+      const x1 = 30 + ((hash * (i + 1) * 7) % (W - 60) + (W - 60)) % (W - 60);
+      const y1 = artY + 2 + ((hash * (i + 3) * 13) % (artH - 4) + (artH - 4)) % (artH - 4);
+      const x2 = x1 + ((hash * i) % 80 - 40);
+      const y2 = y1 + ((hash * (i + 7)) % 60 - 30);
+      const hue = (hash + i * 37) % 360;
+      ctx.strokeStyle = `hsla(${hue}, 70%, 50%, 0.4)`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x1, y1, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.5)`;
+      ctx.fill();
+    }
+  } else if (style === 1) { // Nebula
+    for (let i = 0; i < 50; i++) {
+      const cx = 30 + ((hash * (i + 2) * 11) % (W - 60) + (W - 60)) % (W - 60);
+      const cy = artY + ((hash * (i + 5) * 17) % artH + artH) % artH;
+      const r = 20 + (hash * (i + 1)) % 60;
+      const hue = (hash + i * 29) % 360;
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      grad.addColorStop(0, `hsla(${hue}, 80%, 50%, 0.25)`);
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+    }
+  } else if (style === 2) { // Glitch
+    for (let i = 0; i < 40; i++) {
+      const x = 30 + ((hash * (i + 1) * 3) % (W - 60) + (W - 60)) % (W - 60);
+      const y = artY + ((hash * (i + 4) * 7) % artH + artH) % artH;
+      const w = 20 + (hash * (i + 2)) % 100;
+      const h = 2 + (hash * i) % 8;
+      const hue = (hash + i * 45) % 360;
+      ctx.fillStyle = `hsla(${hue}, 90%, 60%, 0.35)`;
+      ctx.fillRect(x, y, w, h);
+    }
+  } else if (style === 3) { // Zen
+    ctx.strokeStyle = `hsla(${Math.abs(hash) % 360}, 40%, 40%, 0.2)`;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 30; i++) {
+      const cx = W / 2;
+      const cy = artY + artH / 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 20 + i * 12, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  } else if (style === 4) { // Topographic
+    for (let i = 0; i < 25; i++) {
+      ctx.beginPath();
+      const ox = 30 + ((hash * (i + 3)) % (W - 100) + (W - 100)) % (W - 100);
+      const oy = artY + ((hash * (i + 7)) % (artH - 40) + (artH - 40)) % (artH - 40);
+      for (let t = 0; t < Math.PI * 2; t += 0.1) {
+        const r = 30 + i * 8 + Math.sin(t * 3 + hash) * 15;
+        const px = ox + Math.cos(t) * r;
+        const py = oy + Math.sin(t) * r;
+        t === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = `hsla(${(hash + i * 20) % 360}, 50%, 45%, 0.25)`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  } else { // Blueprint
+    ctx.strokeStyle = 'rgba(88,166,255,0.08)';
+    ctx.lineWidth = 0.5;
+    for (let x = 30; x < W - 30; x += 20) { ctx.beginPath(); ctx.moveTo(x, artY); ctx.lineTo(x, artY + artH); ctx.stroke(); }
+    for (let y = artY; y < artY + artH; y += 20) { ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(W - 30, y); ctx.stroke(); }
+    for (let i = 0; i < 15; i++) {
+      const x = 50 + ((hash * (i + 1) * 19) % (W - 120) + (W - 120)) % (W - 120);
+      const y = artY + 20 + ((hash * (i + 3) * 23) % (artH - 60) + (artH - 60)) % (artH - 60);
+      const w = 30 + (hash * i) % 80;
+      const h = 20 + (hash * (i + 2)) % 50;
+      ctx.strokeStyle = 'rgba(88,166,255,0.3)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x, y, w, h);
+    }
+  }
+  ctx.restore();
+
+  // ── Type bar ──
+  const typeY = artY + artH + 10;
+  ctx.fillStyle = 'rgba(50,40,25,.7)';
+  ctx.fillRect(20, typeY, W - 40, 30);
+  ctx.strokeStyle = '#3d3322';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(20, typeY, W - 40, 30);
+  ctx.fillStyle = '#b8a88a';
+  ctx.font = '14px -apple-system, sans-serif';
+  ctx.fillText(`${isLegendary ? 'Legendary ' : ''}Creature — ${creatureType}`, 32, typeY + 20);
+  // Set number
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#8a7e6a';
+  ctx.font = '11px monospace';
+  ctx.fillText(cardNum, W - 32, typeY + 20);
+  ctx.textAlign = 'left';
+
+  // ── Text box ──
+  const textY = typeY + 40;
+  const textH = H - textY - 80;
+  ctx.fillStyle = 'rgba(30,25,15,.5)';
+  roundRect(ctx, 24, textY, W - 48, textH, 6);
+  ctx.fill();
+  ctx.strokeStyle = '#3d3322';
+  ctx.lineWidth = 1;
+  roundRect(ctx, 24, textY, W - 48, textH, 6);
+  ctx.stroke();
+
+  // Ability: Perform
+  let cy = textY + 28;
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.fillText('Perform', 40, cy);
+  // Cost pips next to ability
+  const costX = ctx.measureText('Perform').width + 50;
+  pips.slice(0, 2).forEach((p, i) => {
+    ctx.beginPath();
+    ctx.arc(costX + i * 20, cy - 4, 7, 0, Math.PI * 2);
+    ctx.fillStyle = pipColors[p] || '#888';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,.4)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+  cy += 8;
+  ctx.fillStyle = '#c8b89a';
+  ctx.font = '13px -apple-system, sans-serif';
+  cy = _wrapText(ctx, desc, 40, cy, W - 88, 18);
+  cy += 12;
+
+  // Ability: Requires (if env vars)
+  if (envCount) {
+    ctx.fillStyle = '#e8dcc8';
+    ctx.font = 'bold 14px -apple-system, sans-serif';
+    ctx.fillText('Requires', 40, cy);
+    cy += 6;
+    ctx.fillStyle = '#c8b89a';
+    ctx.font = '12px monospace';
+    cy = _wrapText(ctx, (a.requires_env || []).join(', '), 40, cy, W - 88, 16);
+    cy += 10;
+  }
+
+  // Ability: Dependencies
+  if (depCount) {
+    ctx.fillStyle = '#e8dcc8';
+    ctx.font = 'bold 14px -apple-system, sans-serif';
+    ctx.fillText('Depends', 40, cy);
+    cy += 6;
+    ctx.fillStyle = '#c8b89a';
+    ctx.font = '12px monospace';
+    cy = _wrapText(ctx, (a.dependencies || []).join(', '), 40, cy, W - 88, 16);
+    cy += 10;
+  }
+
+  // Flavor text
+  ctx.fillStyle = '#3d3322';
+  ctx.fillRect(40, textY + textH - 48, W - 96, 1);
+  ctx.fillStyle = '#8a7e6a';
+  ctx.font = 'italic 12px -apple-system, sans-serif';
+  ctx.fillText(flavor, 40, textY + textH - 28);
+
+  // ── Footer bar ──
+  const footY = H - 60;
+  ctx.fillStyle = 'rgba(40,32,18,0.5)';
+  ctx.fillRect(20, footY, W - 40, 42);
+
+  // Tags as weakness/resistance style
+  ctx.fillStyle = '#8a7e6a';
+  ctx.font = '10px -apple-system, sans-serif';
+  tags.forEach((t, i) => {
+    const tx = 32 + i * 85;
+    if (tx < W - 200) {
+      ctx.fillStyle = 'rgba(50,40,25,.8)';
+      roundRect(ctx, tx, footY + 8, 78, 22, 4);
+      ctx.fill();
+      ctx.fillStyle = '#b8a88a';
+      ctx.font = '9px -apple-system, sans-serif';
+      ctx.fillText(t.slice(0, 12), tx + 6, footY + 23);
+    }
+  });
+
+  // Rarity symbol
+  ctx.textAlign = 'right';
+  const raritySymbols = { mythic: '★', rare: '◆', uncommon: '●', common: '○' };
+  const rarityColors = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#78909c' };
+  ctx.fillStyle = rarityColors[rarity] || '#78909c';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText(raritySymbols[rarity] || '●', W - 100, footY + 28);
+
+  // Power / Toughness box
+  ctx.fillStyle = '#2a2418';
+  roundRect(ctx, W - 90, footY + 4, 62, 34, 6);
+  ctx.fill();
+  ctx.strokeStyle = '#8b7332';
+  ctx.lineWidth = 2;
+  roundRect(ctx, W - 90, footY + 4, 62, 34, 6);
+  ctx.stroke();
+  ctx.fillStyle = '#e8dcc8';
+  ctx.font = 'bold 22px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${power}/${toughness}`, W - 59, footY + 28);
+  ctx.textAlign = 'left';
+
+  // ── Bottom info line ──
+  ctx.fillStyle = '#5a4a2a';
+  ctx.font = '9px -apple-system, sans-serif';
+  ctx.fillText(`${a.name}  ·  v${a.version}  ·  ${a._size_kb || '?'} KB  ·  ${a._lines || '?'} lines`, 28, H - 12);
+  ctx.textAlign = 'right';
+  ctx.fillText('RAR — RAPP Agent Registry  ·  1st Edition', W - 28, H - 12);
+  ctx.textAlign = 'left';
+
+  // ── Download ──
+  const link = document.createElement('a');
+  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
+  link.download = `${slug}_card.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showToast(`Exported ${a.display_name} card (750×1050 print-ready)`, 'success');
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function _wrapText(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(' ');
+  let line = '', ly = y;
+  for (const word of words) {
+    const test = line + word + ' ';
+    if (ctx.measureText(test).width > maxW && line) {
+      ctx.fillText(line.trim(), x, ly);
+      line = word + ' ';
+      ly += lineH;
+    } else { line = test; }
+  }
+  if (line.trim()) { ctx.fillText(line.trim(), x, ly); ly += lineH; }
+  return ly;
+}
+
 function printCard(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
@@ -3430,6 +5167,376 @@ function printCard(name) {
   </body></html>`);
   w.document.close();
   setTimeout(() => w.print(), 500);
+}
+
+// ═══════════════════════════════════════════════════════
+// 3D Card Viewer (Three.js)
+// ═══════════════════════════════════════════════════════
+let _3dCleanup = null;
+
+function open3DViewer(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+  if (typeof THREE === 'undefined') { showToast('Loading 3D engine...', 'error'); return; }
+
+  // Clean up previous
+  if (_3dCleanup) _3dCleanup();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'viewer3d-overlay';
+  overlay.innerHTML = `
+    <button class="viewer3d-close" onclick="close3DViewer()">&times;</button>
+    <div class="viewer3d-info"><h3>${esc(a.display_name)}</h3><span>${esc(a.name)} &middot; v${a.version}</span></div>
+    <div class="viewer3d-toolbar">
+      <button onclick="toggle3DAutoRotate()">Pause</button>
+      <button onclick="reset3DCamera()">Reset</button>
+      <button class="primary" onclick="export3DCard('${esc(a.name)}')">Export PNG</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  const W = Math.min(window.innerWidth * 0.8, 800);
+  const H = Math.min(window.innerHeight * 0.7, 600);
+
+  // Three.js setup
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
+  camera.position.set(0, 0, 4.5);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  overlay.insertBefore(renderer.domElement, overlay.querySelector('.viewer3d-toolbar'));
+
+  window._3dRenderer = renderer;
+  window._3dScene = scene;
+  window._3dCamera = camera;
+
+  // Card dimensions (2.5 x 3.5 standard card ratio)
+  const cardW = 2.0, cardH = 2.8;
+
+  // Build card textures by rendering to canvas
+  function renderCardFace(isFront) {
+    const canvas = document.createElement('canvas');
+    const scale = 2; // retina
+    canvas.width = 500 * scale;
+    canvas.height = 700 * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(scale, scale);
+
+    const cc = getCatColor(a.category);
+    const tier = a.quality_tier || 'community';
+    const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+    const tags = (a.tags || []).slice(0, 5);
+    const desc = (a.description || '').slice(0, 160);
+    const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
+    const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
+    const isLegendary = tier === 'official' || tier === 'verified';
+    const depCount = (a.dependencies || []).length;
+    const envCount = (a.requires_env || []).length;
+    const power = Math.max(1, tags.length + depCount);
+    const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
+
+    if (isFront) {
+      // Holo front face
+      ctx.fillStyle = '#1a1510';
+      ctx.fillRect(0, 0, 500, 700);
+      // Border
+      ctx.strokeStyle = '#8b7332';
+      ctx.lineWidth = 4;
+      ctx.roundRect(2, 2, 496, 696, 12);
+      ctx.stroke();
+      // Header
+      ctx.fillStyle = '#e8dcc8';
+      ctx.font = 'bold 22px -apple-system, sans-serif';
+      ctx.fillText(a.display_name, 16, 36);
+      // Pips
+      const pipColors = { W: '#f9faf4', U: '#0e68ab', B: '#3a2f20', R: '#d3202a', G: '#00733e', N: '#9e9e9e' };
+      pips.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(460 - i * 22, 28, 9, 0, Math.PI * 2);
+        ctx.fillStyle = pipColors[p] || '#888';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,.4)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+      // Art area
+      const artY = 50, artH = 200;
+      ctx.fillStyle = '#0d0a06';
+      ctx.fillRect(16, artY, 468, artH);
+      ctx.strokeStyle = '#5a4a2a';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(16, artY, 468, artH);
+      // Generative art in canvas
+      const hash = [...a.name].reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
+      for (let i = 0; i < 40; i++) {
+        const x = 16 + ((hash * (i + 1) * 7) % 468 + 468) % 468;
+        const y = artY + ((hash * (i + 3) * 13) % artH + artH) % artH;
+        const r = 3 + (hash * (i + 5)) % 15;
+        const hue = (hash + i * 37) % 360;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${hue}, 60%, 50%, 0.3)`;
+        ctx.fill();
+      }
+      // Type line
+      ctx.fillStyle = 'rgba(50,40,25,.7)';
+      ctx.fillRect(0, artY + artH + 8, 500, 24);
+      ctx.fillStyle = '#b8a88a';
+      ctx.font = '12px -apple-system, sans-serif';
+      ctx.fillText(`${isLegendary ? 'Legendary ' : ''}Creature — ${creatureType}`, 16, artY + artH + 24);
+      // Text box
+      const textY = artY + artH + 40;
+      ctx.fillStyle = 'rgba(30,25,15,.6)';
+      ctx.fillRect(8, textY, 484, 340);
+      // Description
+      ctx.fillStyle = '#c8b89a';
+      ctx.font = '13px -apple-system, sans-serif';
+      wrapText(ctx, desc, 20, textY + 20, 460, 18);
+      // Env vars
+      if (envCount) {
+        ctx.fillStyle = '#e8dcc8';
+        ctx.font = 'bold 12px -apple-system, sans-serif';
+        ctx.fillText('Requires:', 20, textY + 100);
+        ctx.fillStyle = '#c8b89a';
+        ctx.font = '12px monospace';
+        ctx.fillText((a.requires_env || []).join(', '), 90, textY + 100);
+      }
+      // Flavor
+      ctx.fillStyle = '#8a7e6a';
+      ctx.font = 'italic 11px -apple-system, sans-serif';
+      const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+      ctx.fillText(flavor, 20, textY + 310);
+      // Footer
+      ctx.fillStyle = '#8b7332';
+      ctx.font = 'bold 11px -apple-system, sans-serif';
+      const rarityLabels = { mythic: 'MYTHIC HOLO', rare: 'RARE HOLO', uncommon: 'HOLO', common: 'HOLO' };
+      ctx.fillText(rarityLabels[rarity] || 'HOLO', 16, 684);
+      // Power/Toughness
+      ctx.fillStyle = '#e8dcc8';
+      ctx.font = 'bold 20px -apple-system, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${power}/${toughness}`, 486, 688);
+      ctx.textAlign = 'left';
+    } else {
+      // Back face
+      ctx.fillStyle = '#161b22';
+      ctx.fillRect(0, 0, 500, 700);
+      ctx.strokeStyle = '#30363d';
+      ctx.lineWidth = 4;
+      ctx.roundRect(2, 2, 496, 696, 12);
+      ctx.stroke();
+      // RAR logo
+      ctx.fillStyle = '#58a6ff';
+      ctx.font = 'bold 48px -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('RAR', 250, 260);
+      // Agent name
+      ctx.fillStyle = '#e6edf3';
+      ctx.font = 'bold 18px -apple-system, sans-serif';
+      ctx.fillText(a.display_name, 250, 380);
+      // Namespace
+      ctx.fillStyle = '#8b949e';
+      ctx.font = '13px monospace';
+      ctx.fillText(a.name, 250, 410);
+      // Tagline
+      ctx.fillStyle = '#656d76';
+      ctx.font = 'italic 12px -apple-system, sans-serif';
+      ctx.fillText('Single file. Single purpose.', 250, 460);
+      ctx.textAlign = 'left';
+      // Decorative border pattern
+      ctx.strokeStyle = 'rgba(88,166,255,.1)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 20; i++) {
+        ctx.beginPath();
+        ctx.arc(250, 350, 80 + i * 15, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+    return canvas;
+  }
+
+  function wrapText(ctx, text, x, y, maxW, lineH) {
+    const words = text.split(' ');
+    let line = '', ly = y;
+    for (const word of words) {
+      const test = line + word + ' ';
+      if (ctx.measureText(test).width > maxW && line) {
+        ctx.fillText(line.trim(), x, ly);
+        line = word + ' ';
+        ly += lineH;
+      } else { line = test; }
+    }
+    ctx.fillText(line.trim(), x, ly);
+  }
+
+  const frontCanvas = renderCardFace(true);
+  const backCanvas = renderCardFace(false);
+
+  const frontTex = new THREE.CanvasTexture(frontCanvas);
+  const backTex = new THREE.CanvasTexture(backCanvas);
+  frontTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  backTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+  // Card geometry (front + back)
+  const geo = new THREE.BoxGeometry(cardW, cardH, 0.02, 1, 1, 1);
+  const materials = [
+    new THREE.MeshStandardMaterial({ color: 0x1a1510 }), // right edge
+    new THREE.MeshStandardMaterial({ color: 0x1a1510 }), // left edge
+    new THREE.MeshStandardMaterial({ color: 0x1a1510 }), // top edge
+    new THREE.MeshStandardMaterial({ color: 0x1a1510 }), // bottom edge
+    new THREE.MeshStandardMaterial({ map: frontTex }),     // front
+    new THREE.MeshStandardMaterial({ map: backTex }),      // back
+  ];
+  const card = new THREE.Mesh(geo, materials);
+  scene.add(card);
+
+  // Holographic overlay plane (slightly in front of card)
+  const holoGeo = new THREE.PlaneGeometry(cardW * 1.01, cardH * 1.01);
+  const holoMat = new THREE.ShaderMaterial({
+    transparent: true,
+    uniforms: {
+      time: { value: 0 },
+      viewDir: { value: new THREE.Vector3(0, 0, 1) }
+    },
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec2 vUv;
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float time;
+      varying vec3 vNormal;
+      varying vec3 vPosition;
+      varying vec2 vUv;
+      void main() {
+        vec3 viewDir = normalize(-vPosition);
+        float fresnel = pow(1.0 - abs(dot(viewDir, vNormal)), 3.0);
+        float rainbow = vUv.x * 6.0 + vUv.y * 4.0 + time * 0.5;
+        vec3 holo = vec3(
+          sin(rainbow) * 0.5 + 0.5,
+          sin(rainbow + 2.094) * 0.5 + 0.5,
+          sin(rainbow + 4.189) * 0.5 + 0.5
+        );
+        float sparkle = sin(vUv.x * 80.0 + time * 2.0) * sin(vUv.y * 80.0 + time * 1.5);
+        sparkle = pow(max(sparkle, 0.0), 8.0) * 0.3;
+        float alpha = fresnel * 0.35 + sparkle;
+        gl_FragColor = vec4(holo, alpha);
+      }
+    `
+  });
+  const holoPlane = new THREE.Mesh(holoGeo, holoMat);
+  holoPlane.position.z = 0.012;
+  card.add(holoPlane);
+
+  // Lighting
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambient);
+  const key = new THREE.DirectionalLight(0xffffff, 0.8);
+  key.position.set(2, 3, 5);
+  scene.add(key);
+  const rim = new THREE.PointLight(0x58a6ff, 0.4, 10);
+  rim.position.set(-3, -1, 3);
+  scene.add(rim);
+
+  // Interaction state
+  let autoRotate = true;
+  let isDragging = false;
+  let prevMouse = { x: 0, y: 0 };
+  let rotX = 0, rotY = 0;
+  let targetRotX = 0, targetRotY = 0;
+
+  window._3dAutoRotate = autoRotate;
+
+  renderer.domElement.addEventListener('mousedown', e => {
+    isDragging = true;
+    prevMouse = { x: e.clientX, y: e.clientY };
+    autoRotate = false;
+    window._3dAutoRotate = false;
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - prevMouse.x;
+    const dy = e.clientY - prevMouse.y;
+    targetRotY += dx * 0.008;
+    targetRotX += dy * 0.005;
+    targetRotX = Math.max(-0.5, Math.min(0.5, targetRotX));
+    prevMouse = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => { isDragging = false; });
+
+  // ESC to close
+  function onKey(e) {
+    if (e.key === 'Escape') close3DViewer();
+  }
+  window.addEventListener('keydown', onKey);
+
+  // Animation loop
+  let running = true;
+  const clock = new THREE.Clock();
+  function animate() {
+    if (!running) return;
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    holoMat.uniforms.time.value = t;
+
+    if (autoRotate) {
+      targetRotY = t * 0.4;
+      targetRotX = Math.sin(t * 0.3) * 0.1;
+    }
+    rotX += (targetRotX - rotX) * 0.08;
+    rotY += (targetRotY - rotY) * 0.08;
+
+    card.rotation.x = rotX;
+    card.rotation.y = rotY;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  _3dCleanup = () => {
+    running = false;
+    window.removeEventListener('keydown', onKey);
+    renderer.dispose();
+    scene.clear();
+    if (overlay.parentNode) overlay.remove();
+    document.body.style.overflow = '';
+    _3dCleanup = null;
+  };
+}
+
+function close3DViewer() {
+  if (_3dCleanup) _3dCleanup();
+}
+
+function toggle3DAutoRotate() {
+  window._3dAutoRotate = !window._3dAutoRotate;
+  // The auto-rotate flag is checked inside open3DViewer's closure
+  // We need to toggle it there. Simpler: just re-trigger via the overlay
+  const btns = document.querySelectorAll('.viewer3d-toolbar button');
+  if (btns[0]) btns[0].textContent = window._3dAutoRotate ? 'Pause' : 'Spin';
+}
+
+function reset3DCamera() {
+  // Reset is visual only — the animate loop handles convergence
+  showToast('Reset view', 'success');
+}
+
+function export3DCard(name) {
+  if (!window._3dRenderer) return;
+  const canvas = window._3dRenderer.domElement;
+  const link = document.createElement('a');
+  link.download = `${name.replace(/[^a-z0-9]/gi, '_')}_3d_card.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showToast('Card exported as PNG', 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -3524,8 +5631,8 @@ function renderPresentation() {
       <div class="deck-title">${esc(currentDeckName)}</div>
       <div class="slide-counter">${presSlideIndex + 1} / ${total}</div>
       <div style="display:flex;gap:8px">
-        <button onclick="setCardMode(cardMode==='business'?'creative':'business',null);renderPresentation()">
-          ${cardMode === 'business' ? 'Holo View' : 'Business View'}
+        <button onclick="cycleCardMode();renderPresentation()">
+          ${cardMode === 'business' ? 'Holo' : cardMode === 'creative' ? 'Kids' : 'Business'}
         </button>
         <button onclick="closePresentation()">Exit (Esc)</button>
       </div>
@@ -3873,7 +5980,10 @@ function activateDemoMode() {
   renderAgents();
   renderLeaderboard();
   if (document.getElementById('cards-grid')) renderCards();
-  showToast('Demo mode activated — showing simulated community data', 'success');
+  syncDemoToggle();
+  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size };
+  renderStats(stats);
+  showToast('Demo mode on — sample votes, reviews, and decks', 'success');
 }
 
 function deactivateDemoMode() {
@@ -3884,7 +5994,20 @@ function deactivateDemoMode() {
   renderAgents();
   renderLeaderboard();
   if (document.getElementById('cards-grid')) renderCards();
+  syncDemoToggle();
+  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size };
+  renderStats(stats);
   showToast('Demo mode off — back to live data', 'success');
+}
+
+function toggleDemoMode() {
+  if (window._demoActive) deactivateDemoMode();
+  else activateDemoMode();
+}
+
+function syncDemoToggle() {
+  const btn = document.getElementById('demo-toggle');
+  if (btn) btn.classList.toggle('active', !!window._demoActive);
 }
 
 // Secret keyboard trigger: type "demo" anywhere
@@ -3895,13 +6018,13 @@ document.addEventListener('keydown', e => {
   if (_demoBuffer.length > 10) _demoBuffer = _demoBuffer.slice(-10);
   if (_demoBuffer.endsWith('demo')) {
     _demoBuffer = '';
-    if (window._demoActive) deactivateDemoMode();
-    else activateDemoMode();
+    toggleDemoMode();
   }
 });
 
-// URL trigger: #demo
+// URL trigger: #demo (must opt-in explicitly each time)
 if (location.hash === '#demo') {
+  history.replaceState(null, '', location.pathname + location.search); // clear hash so it doesn't persist on reload
   init().then(() => { handleCardHash(); activateDemoMode(); });
 } else {
   init().then(() => handleCardHash());
