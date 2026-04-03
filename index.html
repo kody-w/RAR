@@ -1212,6 +1212,85 @@
   .demo-toggle .demo-dot {
     width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); transition: background .15s;
   }
+
+  /* ─── Creative Mode Gating ──────────────────────── */
+  .creative-only { display: none !important; }
+  body.creative-active .creative-only { display: flex !important; }
+  body.creative-active .creative-only-block { display: block !important; }
+  body.creative-active .creative-only-inline { display: inline !important; }
+  .nav-btn.creative-only { display: none !important; }
+  body.creative-active .nav-btn.creative-only { display: inline-block !important; }
+
+  /* ─── Stream Panel ──────────────────────────────── */
+  .stream-bar {
+    display: flex; gap: 8px; align-items: center; padding: 10px 20px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 16px;
+  }
+  .stream-bar input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 12px; color: var(--text); font-family: 'SF Mono', monospace; font-size: .82rem;
+  }
+  .stream-bar input::placeholder { color: var(--text-muted); }
+  .stream-bar button {
+    background: linear-gradient(135deg, var(--accent), var(--purple)); border: none;
+    color: #fff; padding: 8px 20px; border-radius: 6px; cursor: pointer;
+    font-weight: 600; font-size: .82rem; white-space: nowrap; transition: opacity .15s;
+  }
+  .stream-bar button:hover { opacity: .85; }
+  .stream-indicator {
+    display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; color: var(--green);
+  }
+  .stream-indicator .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+    animation: streamPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes streamPulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  .streamed-agents {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+  }
+  .streamed-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: .8rem; cursor: pointer; transition: all .15s;
+  }
+  .streamed-chip:hover { border-color: var(--accent); }
+  .streamed-chip .sc-name { font-weight: 600; color: var(--text); }
+  .streamed-chip .sc-status { font-size: .65rem; color: var(--green); }
+  .streamed-chip .sc-eject {
+    color: var(--text-muted); cursor: pointer; font-size: .7rem; margin-left: 4px;
+  }
+  .streamed-chip .sc-eject:hover { color: var(--red); }
+
+  /* ─── Deck Router / Steering Panel ──────────────── */
+  .steer-panel {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 20px; margin-top: 16px;
+  }
+  .steer-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+  }
+  .steer-header h3 { font-size: .9rem; font-weight: 700; color: var(--text-dim); }
+  .steer-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;
+  }
+  .steer-slot {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px; position: relative; transition: all .2s;
+  }
+  .steer-slot.live { border-color: var(--green); box-shadow: 0 0 12px rgba(63,185,80,.15); }
+  .steer-slot .slot-name { font-weight: 600; font-size: .82rem; }
+  .steer-slot .slot-status { font-size: .65rem; color: var(--text-muted); margin-top: 2px; }
+  .steer-slot .slot-guid { font-family: monospace; font-size: .6rem; color: var(--text-muted); margin-top: 4px; }
+  .steer-slot.live .slot-status { color: var(--green); }
+
+  /* ─── RAD Export Badge ──────────────────────────── */
+  .rad-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: linear-gradient(135deg, #2a1a3a, #1a0a2a); border: 1px solid var(--purple);
+    border-radius: 4px; padding: 2px 8px; font-size: .6rem; color: var(--purple);
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  }
   .demo-toggle.active .demo-dot { background: var(--purple); box-shadow: 0 0 6px var(--purple); }
   .demo-inline {
     display: inline-block; color: var(--purple); cursor: pointer; font-weight: 500;
@@ -1664,7 +1743,8 @@
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
-    <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
+    <button class="nav-btn creative-only" data-tab="packs" onclick="switchTab('packs')">Packs</button>
+    <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">&#128295; Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
@@ -2160,6 +2240,45 @@ class MyAgent(BasicAgent):
     </div>
   </div>
 
+  <!-- Stream -->
+  <div class="panel" id="panel-stream">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Stream &bull; Hot-Load &bull; Steer</div>
+      <h2 style="font-size:1.4rem;font-weight:800">AGENT STREAMING</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Stream agent bytecode from GitHub into memory. No download. No disk write. Hot-load, steer, eject. Close the tab and it's gone.</p>
+    </div>
+
+    <div class="stream-bar">
+      <input type="text" id="stream-url" placeholder="@publisher/agent_slug  or  full raw GitHub URL" onkeydown="if(event.key==='Enter')streamAgent()">
+      <button onclick="streamAgent()">Stream</button>
+      <button onclick="streamDeck()" style="background:linear-gradient(135deg, var(--green), #1a8a3a)">Stream Deck</button>
+    </div>
+    <div id="stream-status"></div>
+    <div class="streamed-agents" id="streamed-agents"></div>
+
+    <div class="steer-panel" id="steer-panel" style="display:none">
+      <div class="steer-header">
+        <h3>Deck Router — <span id="steer-deck-name">—</span></h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="stream-indicator" id="steer-indicator" style="display:none"><div class="pulse"></div> LIVE</div>
+          <button onclick="ejectAll()" style="padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.72rem;cursor:pointer">Eject All</button>
+        </div>
+      </div>
+      <div class="steer-grid" id="steer-grid"></div>
+    </div>
+
+    <div style="margin-top:24px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+      <h4 style="font-size:.82rem;font-weight:700;margin-bottom:8px;color:var(--text-dim)">How it works</h4>
+      <div style="font-size:.78rem;color:var(--text-muted);line-height:1.7">
+        <div><strong style="color:var(--text)">Stream</strong> — Fetches raw .py from GitHub into a JS Map. No file write. Purely in-memory.</div>
+        <div><strong style="color:var(--text)">Hot-Load</strong> — Manifest is parsed, agent appears in browse/cards/search instantly.</div>
+        <div><strong style="color:var(--text)">Deck Router</strong> — Stream an entire deck. Each agent gets a GUID. The deck topology defines the routing group.</div>
+        <div><strong style="color:var(--text)">Steer</strong> — Route state through GUID-mapped agents. The same loop that fires perform() can be steered by swapping which agents are live.</div>
+        <div><strong style="color:var(--text)">Eject</strong> — Remove from memory. Gone. No trace on disk.</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Roadmap -->
   <div class="panel" id="panel-roadmap">
     <div class="roadmap-section">
@@ -2362,6 +2481,12 @@ function parseManifestFromPython(code) {
 async function handleFileDrop(files) {
   let added = 0;
   for (const file of files) {
+    // Handle .rad.eggs imports
+    if (file.name.endsWith('.rad.eggs')) {
+      const card = await importRAD(file);
+      if (card) added++;
+      continue;
+    }
     if (!file.name.endsWith('.py')) continue;
     const code = await file.text();
     const manifest = parseManifestFromPython(code);
@@ -2710,6 +2835,7 @@ function switchTab(tab) {
   if (tab === 'leaderboard') renderLeaderboard();
   if (tab === 'cards') renderCards();
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
+  if (tab === 'stream') renderStreamedAgents();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2805,6 +2931,7 @@ function agentCard(a) {
           <span>${a._lines || '?'} lines</span>
           <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
           ${a._source === 'local-device' ? '<span class="local-badge">LOCAL</span>' : ''}
+          ${a._streamed ? '<span class="local-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">STREAMED</span>' : ''}
           ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
@@ -2940,11 +3067,18 @@ function openAgent(name) {
              <a href="${ghUrl}" target="_blank" style="color:var(--accent);font-size:.9rem">&#128279; View on GitHub</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
         <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
+        ${!isLocalDevice ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">&#9889; Stream into Memory</a>` : ''}
       </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (isLocalDevice && a._code) {
+  // Prefer streamed source, then local, then fetch
+  const streamedSrc = getStreamedSource(a.name);
+  if (streamedSrc) {
+    window._code = streamedSrc;
+    document.getElementById('code-body').innerHTML = hlPy(streamedSrc);
+    document.getElementById('source-parsed').innerHTML = renderParsedSource(streamedSrc, a);
+  } else if (isLocalDevice && a._code) {
     window._code = a._code;
     document.getElementById('code-body').innerHTML = hlPy(a._code);
     document.getElementById('source-parsed').innerHTML = renderParsedSource(a._code, a);
@@ -4224,134 +4358,150 @@ function genCardArt(agent) {
   return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
 }
 
-// ── Creative Art Styles (diverse artist interpretations) ──
+// ── Semantic Art Engine (Howard's CardSmith style) ──
+// Art is intentional: shapes represent what each agent DOES.
+// A CRM agent shows database + people. A memory agent shows a brain.
+// An API agent shows connection endpoints. The art tells the story.
+
 const ARTIST_STYLES = [
-  { name: 'Circuit', artist: 'sys::circuit' },
-  { name: 'Nebula', artist: 'sys::nebula' },
-  { name: 'Glitch', artist: 'sys::glitch' },
-  { name: 'Zen', artist: 'sys::zen' },
-  { name: 'Topographic', artist: 'sys::topo' },
-  { name: 'Blueprint', artist: 'sys::blueprint' },
+  { name: 'Semantic', artist: 'sys::semantic' },
 ];
 
 function getArtistStyle(agent) {
-  const h = Math.abs(Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0));
-  return ARTIST_STYLES[h % ARTIST_STYLES.length];
+  return ARTIST_STYLES[0];
 }
+
+// Keyword → visual glyph mapping
+const SEMANTIC_GLYPHS = {
+  // Data/Storage
+  database: (p, x, y) => `<ellipse cx="${x}" cy="${y-8}" rx="16" ry="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><path d="M${x-16},${y-8} v16 a16,6 0 0,0 32,0 v-16" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><ellipse cx="${x}" cy="${y+8}" rx="16" ry="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`,
+  memory: (p, x, y) => `<ellipse cx="${x}" cy="${y}" rx="18" ry="14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><path d="M${x-8},${y+2} Q${x-4},${y-10} ${x},${y-2} T${x+8},${y+2}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><circle cx="${x}" cy="${y}" r="3" fill="${p}" opacity="0.3"/>`,
+  // People/Communication
+  person: (p, x, y) => `<circle cx="${x}" cy="${y-8}" r="5" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><path d="M${x-10},${y+8} Q${x-10},${y-2} ${x},${y-2} Q${x+10},${y-2} ${x+10},${y+8}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  email: (p, x, y) => `<rect x="${x-14}" y="${y-8}" width="28" height="18" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><polyline points="${x-14},${y-8} ${x},${y+2} ${x+14},${y-8}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/>`,
+  // Connectivity/API
+  api: (p, x, y) => `<circle cx="${x-12}" cy="${y}" r="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><circle cx="${x+12}" cy="${y}" r="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x-6}" y1="${y}" x2="${x+6}" y2="${y}" stroke="${p}" stroke-width="2" opacity="0.5"/><circle cx="${x-12}" cy="${y}" r="2" fill="${p}" opacity="0.3"/><circle cx="${x+12}" cy="${y}" r="2" fill="${p}" opacity="0.3"/>`,
+  cloud: (p, x, y) => `<path d="M${x-12},${y+4} a8,8 0 0,1 4,-12 a10,10 0 0,1 16,0 a8,8 0 0,1 4,12 Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  // Tools/Build
+  gear: (p, x, y) => `<circle cx="${x}" cy="${y}" r="8" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><circle cx="${x}" cy="${y}" r="3" fill="${p}" opacity="0.25"/>${[0,60,120,180,240,300].map(a=>{const r=Math.PI*a/180;return`<line x1="${x+8*Math.cos(r)}" y1="${y+8*Math.sin(r)}" x2="${x+12*Math.cos(r)}" y2="${y+12*Math.sin(r)}" stroke="${p}" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>`}).join('')}`,
+  code: (p, x, y) => `<text x="${x-10}" y="${y+4}" fill="${p}" font-size="14" font-family="monospace" opacity="0.45">&lt;/&gt;</text>`,
+  wrench: (p, x, y) => `<path d="M${x-6},${y+8} L${x+4},${y-2} L${x+8},${y+2} L${x-2},${y+12} Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><circle cx="${x+6}" cy="${y-6}" r="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`,
+  // Flow/Pipeline
+  pipeline: (p, x, y) => `<rect x="${x-20}" y="${y-4}" width="12" height="8" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><rect x="${x-3}" y="${y-4}" width="12" height="8" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><rect x="${x+14}" y="${y-4}" width="12" height="8" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><line x1="${x-8}" y1="${y}" x2="${x-3}" y2="${y}" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="${x+9}" y1="${y}" x2="${x+14}" y2="${y}" stroke="${p}" stroke-width="1" opacity="0.3"/>`,
+  arrow: (p, x, y) => `<line x1="${x-14}" y1="${y}" x2="${x+10}" y2="${y}" stroke="${p}" stroke-width="1.5" opacity="0.4"/><polyline points="${x+6},${y-4} ${x+14},${y} ${x+6},${y+4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  // Domain specific
+  chart: (p, x, y) => `<polyline points="${x-14},${y+8} ${x-8},${y-2} ${x-2},${y+4} ${x+4},${y-8} ${x+14},${y-4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><line x1="${x-16}" y1="${y+10}" x2="${x+16}" y2="${y+10}" stroke="${p}" stroke-width="1" opacity="0.2"/>`,
+  shield: (p, x, y) => `<path d="M${x},${y-12} L${x+14},${y-6} L${x+12},${y+6} L${x},${y+14} L${x-12},${y+6} L${x-14},${y-6} Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><polyline points="${x-4},${y+2} ${x-1},${y+5} ${x+6},${y-4}" fill="none" stroke="${p}" stroke-width="2" opacity="0.35"/>`,
+  heart: (p, x, y) => `<path d="M${x},${y+8} C${x-16},${y-4} ${x-8},${y-14} ${x},${y-4} C${x+8},${y-14} ${x+16},${y-4} ${x},${y+8} Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  money: (p, x, y) => `<circle cx="${x}" cy="${y}" r="12" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><text x="${x-4}" y="${y+5}" fill="${p}" font-size="14" font-weight="700" opacity="0.4">$</text>`,
+  factory: (p, x, y) => `<rect x="${x-16}" y="${y-2}" width="32" height="16" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><rect x="${x-12}" y="${y-10}" width="6" height="8" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/><rect x="${x-2}" y="${y-10}" width="6" height="8" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/><rect x="${x+8}" y="${y-10}" width="6" height="8" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/>`,
+  lightning: (p, x, y) => `<polyline points="${x-2},${y-14} ${x-6},${y} ${x+2},${y} ${x-2},${y+14}" fill="none" stroke="${p}" stroke-width="2" stroke-linejoin="round" opacity="0.5"/>`,
+  building: (p, x, y) => `<rect x="${x-10}" y="${y-14}" width="20" height="28" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>${[0,1,2].map(r=>[0,1].map(c=>`<rect x="${x-6+c*8}" y="${y-10+r*8}" width="4" height="4" fill="${p}" opacity="0.2"/>`).join('')).join('')}`,
+  document: (p, x, y) => `<rect x="${x-10}" y="${y-12}" width="20" height="24" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><line x1="${x-6}" y1="${y-6}" x2="${x+6}" y2="${y-6}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y-1}" x2="${x+6}" y2="${y-1}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y+4}" x2="${x+2}" y2="${y+4}" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  brain: (p, x, y) => `<ellipse cx="${x}" cy="${y}" rx="16" ry="14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><path d="M${x},${y-14} v28" fill="none" stroke="${p}" stroke-width="1" opacity="0.2"/><path d="M${x-8},${y-4} Q${x-2},${y-8} ${x},${y-4} T${x+8},${y-4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/><path d="M${x-6},${y+4} Q${x},${y} ${x+6},${y+4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`,
+};
+
+// Map categories/keywords to glyph compositions
+const SEMANTIC_COMPOSITIONS = {
+  core: ['brain', 'gear', 'arrow'],
+  integrations: ['api', 'cloud', 'arrow'],
+  productivity: ['document', 'gear', 'arrow'],
+  devtools: ['code', 'wrench', 'gear'],
+  pipeline: ['pipeline', 'arrow', 'gear'],
+  general: ['gear', 'arrow', 'code'],
+  b2b_sales: ['person', 'chart', 'money'],
+  b2c_sales: ['person', 'chart', 'money'],
+  healthcare: ['heart', 'shield', 'person'],
+  financial_services: ['money', 'chart', 'shield'],
+  manufacturing: ['factory', 'gear', 'pipeline'],
+  energy: ['lightning', 'chart', 'factory'],
+  federal_government: ['building', 'shield', 'document'],
+  slg_government: ['building', 'shield', 'document'],
+  human_resources: ['person', 'document', 'gear'],
+  it_management: ['gear', 'cloud', 'code'],
+  professional_services: ['person', 'document', 'chart'],
+  retail_cpg: ['money', 'chart', 'person'],
+  software_digital_products: ['code', 'cloud', 'gear'],
+};
+
+// Keyword detection from agent name/description/tags for extra glyphs
+const KEYWORD_GLYPHS = [
+  [/crm|customer|account|contact/i, 'person'],
+  [/database|data|sql|crud/i, 'database'],
+  [/memory|recall|context/i, 'memory'],
+  [/email|mail|outlook/i, 'email'],
+  [/api|endpoint|rest|http/i, 'api'],
+  [/cloud|azure|aws/i, 'cloud'],
+  [/code|script|python|dev/i, 'code'],
+  [/build|compile|deploy/i, 'wrench'],
+  [/pipeline|flow|process/i, 'pipeline'],
+  [/chart|report|analyt/i, 'chart'],
+  [/secur|auth|encrypt/i, 'shield'],
+  [/health|patient|medical/i, 'heart'],
+  [/financ|money|payment|invoice/i, 'money'],
+  [/manufactur|production/i, 'factory'],
+  [/energy|power|grid/i, 'lightning'],
+  [/government|compliance|policy/i, 'building'],
+  [/document|pdf|word|file/i, 'document'],
+];
 
 function genCreativeArt(agent) {
   const h = Math.abs(Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0));
   const cc = getCatColor(agent.category);
   const p = cc.primary;
-  const style = getArtistStyle(agent);
   const shapes = [`<rect width="200" height="120" fill="${cc.bg}"/>`];
 
-  switch(style.artist) {
-    case 'sys::circuit': {
-      for (let i = 0; i < 8; i++) {
-        const x1 = (h + i * 37) % 180 + 10;
-        const y1 = (h + i * 23) % 100 + 10;
-        const x2 = (h + i * 53) % 180 + 10;
-        const y2 = (h + i * 41) % 100 + 10;
-        const mx = (x1 + x2) / 2;
-        shapes.push(`<path d="M${x1},${y1} L${mx},${y1} L${mx},${y2} L${x2},${y2}" fill="none" stroke="${p}" stroke-width="1.5" opacity="${(0.2 + i * 0.08).toFixed(2)}"/>`);
-        shapes.push(`<circle cx="${x1}" cy="${y1}" r="3" fill="${p}" opacity="${(0.3 + i * 0.06).toFixed(2)}"/>`);
-        shapes.push(`<circle cx="${x2}" cy="${y2}" r="2" fill="${p}" opacity="${(0.2 + i * 0.05).toFixed(2)}"/>`);
-      }
-      shapes.push(`<rect x="75" y="35" width="50" height="50" rx="4" fill="none" stroke="${p}" stroke-width="2" opacity="0.4"/>`);
-      for (let i = 0; i < 4; i++) {
-        shapes.push(`<line x1="${85 + i * 10}" y1="35" x2="${85 + i * 10}" y2="25" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`);
-        shapes.push(`<line x1="${85 + i * 10}" y1="85" x2="${85 + i * 10}" y2="95" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`);
-      }
-      break;
+  // Pick glyphs: start with category composition, then augment from keywords
+  let glyphs = [...(SEMANTIC_COMPOSITIONS[agent.category] || SEMANTIC_COMPOSITIONS.general)];
+  const searchText = `${agent.name} ${agent.description || ''} ${(agent.tags || []).join(' ')}`;
+  for (const [rx, glyph] of KEYWORD_GLYPHS) {
+    if (rx.test(searchText) && !glyphs.includes(glyph)) {
+      glyphs.unshift(glyph); // keyword matches get priority
+      if (glyphs.length > 4) glyphs.pop();
     }
-    case 'sys::nebula': {
-      for (let i = 0; i < 5; i++) {
-        const cx = 40 + (h + i * 31) % 120;
-        const cy = 20 + (h + i * 19) % 80;
-        const rx = 20 + (h + i * 7) % 40;
-        const ry = 15 + (h + i * 11) % 30;
-        const rot = (h + i * 47) % 360;
-        shapes.push(`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${p}" opacity="${(0.04 + i * 0.02).toFixed(2)}" transform="rotate(${rot} ${cx} ${cy})"/>`);
-      }
-      for (let i = 0; i < 15; i++) {
-        const sx = (h + i * 13) % 190 + 5;
-        const sy = (h + i * 17) % 110 + 5;
-        const sr = (h + i * 3) % 2 + 0.5;
-        shapes.push(`<circle cx="${sx}" cy="${sy}" r="${sr}" fill="#fff" opacity="${(0.3 + (h + i) % 5 * 0.12).toFixed(2)}"/>`);
-      }
-      shapes.push(`<circle cx="100" cy="60" r="25" fill="${p}" opacity="0.08"/>`);
-      shapes.push(`<circle cx="100" cy="60" r="12" fill="${p}" opacity="0.12"/>`);
-      shapes.push(`<circle cx="100" cy="60" r="3" fill="#fff" opacity="0.6"/>`);
-      break;
+  }
+
+  // Position glyphs in a balanced composition
+  const positions = glyphs.length <= 2
+    ? [[70, 60], [130, 60]]
+    : glyphs.length === 3
+    ? [[50, 55], [100, 45], [150, 65]]
+    : [[40, 50], [90, 40], [140, 50], [180, 65]];
+
+  glyphs.forEach((g, i) => {
+    const fn = SEMANTIC_GLYPHS[g];
+    if (!fn) return;
+    const [px, py] = positions[i] || [100, 60];
+    // Add slight hash-based offset for uniqueness
+    const ox = ((h + i * 17) % 10) - 5;
+    const oy = ((h + i * 23) % 8) - 4;
+    shapes.push(fn(p, px + ox, py + oy));
+  });
+
+  // Connecting lines between glyphs (flow arrows)
+  for (let i = 0; i < glyphs.length - 1; i++) {
+    const [x1, y1] = positions[i] || [100, 60];
+    const [x2, y2] = positions[i + 1] || [100, 60];
+    const mx = (x1 + x2) / 2;
+    shapes.push(`<path d="M${x1 + 16},${y1} Q${mx},${Math.min(y1, y2) - 8} ${x2 - 16},${y2}" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.15" stroke-dasharray="3,3"/>`);
+  }
+
+  // Subtle background pattern (agent-name hash driven)
+  const patternType = h % 3;
+  if (patternType === 0) {
+    // Dot grid
+    for (let x = 10; x < 200; x += 20) for (let y = 10; y < 120; y += 20) {
+      if ((h + x + y) % 5 === 0) shapes.push(`<circle cx="${x}" cy="${y}" r="0.8" fill="${p}" opacity="0.08"/>`);
     }
-    case 'sys::glitch': {
-      for (let y = 0; y < 120; y += 3) {
-        if ((h + y) % 7 === 0) {
-          const offset = ((h + y) % 20) - 10;
-          const w = 40 + (h + y * 3) % 80;
-          shapes.push(`<rect x="${60 + offset}" y="${y}" width="${w}" height="2" fill="${p}" opacity="${(0.1 + (y % 5) * 0.04).toFixed(2)}"/>`);
-        }
-      }
-      for (let i = 0; i < 4; i++) {
-        const bx = (h + i * 47) % 150 + 10;
-        const by = (h + i * 29) % 80 + 10;
-        const bw = 20 + (h + i * 11) % 30;
-        const bh = 10 + (h + i * 7) % 20;
-        shapes.push(`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${p}" opacity="${(0.08 + i * 0.04).toFixed(2)}"/>`);
-        shapes.push(`<rect x="${bx + 3}" y="${by + 2}" width="${bw}" height="${bh}" fill="${p}" opacity="${(0.05 + i * 0.02).toFixed(2)}"/>`);
-      }
-      for (let i = 0; i < 20; i++) {
-        shapes.push(`<rect x="${(h + i * 11) % 196}" y="${(h + i * 7) % 116}" width="2" height="2" fill="${(h + i) % 3 === 0 ? '#fff' : p}" opacity="${(0.2 + (i % 4) * 0.1).toFixed(2)}"/>`);
-      }
-      break;
-    }
-    case 'sys::zen': {
-      for (let i = 0; i < 3; i++) {
-        const x1 = 20 + (h + i * 43) % 60;
-        const y1 = 20 + (h + i * 29) % 40;
-        const cx1 = x1 + 30 + (h + i * 17) % 40;
-        const cy1 = y1 - 20 + (h + i * 11) % 40;
-        const x2 = x1 + 80 + (h + i * 23) % 40;
-        const y2 = y1 + (h + i * 13) % 30;
-        shapes.push(`<path d="M${x1},${y1} Q${cx1},${cy1} ${x2},${y2}" fill="none" stroke="${p}" stroke-width="${2 + i}" stroke-linecap="round" opacity="${(0.15 + i * 0.08).toFixed(2)}"/>`);
-      }
-      shapes.push(`<circle cx="${80 + (h % 40)}" cy="${40 + (h % 40)}" r="${4 + h % 6}" fill="${p}" opacity="0.12"/>`);
-      shapes.push(`<circle cx="${120 + (h % 30)}" cy="${70 + (h % 20)}" r="${2 + h % 4}" fill="${p}" opacity="0.08"/>`);
-      const ensoR = 25 + h % 15;
-      shapes.push(`<path d="M${100 - ensoR},60 A${ensoR},${ensoR} 0 1,1 ${100 + ensoR * 0.7},${60 - ensoR * 0.7}" fill="none" stroke="${p}" stroke-width="2.5" stroke-linecap="round" opacity="0.2"/>`);
-      break;
-    }
-    case 'sys::topo': {
-      const cx = 100, cy = 60;
-      for (let r = 10; r < 70; r += 8) {
-        const wobble = (h + r * 3) % 10;
-        const pts = [];
-        for (let a = 0; a < Math.PI * 2; a += 0.3) {
-          const rr = r + Math.sin(a * 3 + h) * wobble;
-          pts.push(`${(cx + rr * Math.cos(a)).toFixed(1)},${(cy + rr * Math.sin(a) * 0.6).toFixed(1)}`);
-        }
-        shapes.push(`<polyline points="${pts.join(' ')}" fill="none" stroke="${p}" stroke-width="0.8" opacity="${(0.12 + r * 0.003).toFixed(2)}" stroke-linejoin="round"/>`);
-      }
-      shapes.push(`<circle cx="${cx}" cy="${cy}" r="2" fill="${p}" opacity="0.5"/>`);
-      shapes.push(`<text x="${cx + 5}" y="${cy + 1}" fill="${p}" font-size="6" opacity="0.3" font-family="monospace">${(h % 9000 + 1000)}m</text>`);
-      break;
-    }
-    case 'sys::blueprint': {
-      for (let x = 0; x <= 200; x += 20) shapes.push(`<line x1="${x}" y1="0" x2="${x}" y2="120" stroke="${p}" stroke-width="0.3" opacity="0.12"/>`);
-      for (let y = 0; y <= 120; y += 20) shapes.push(`<line x1="0" y1="${y}" x2="200" y2="${y}" stroke="${p}" stroke-width="0.3" opacity="0.12"/>`);
-      const bw = 60 + h % 40, bh = 30 + h % 25;
-      const bx = 100 - bw/2, by = 60 - bh/2;
-      shapes.push(`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="none" stroke="${p}" stroke-width="1" opacity="0.35" stroke-dasharray="4,2"/>`);
-      shapes.push(`<line x1="${bx}" y1="${by + bh + 8}" x2="${bx + bw}" y2="${by + bh + 8}" stroke="${p}" stroke-width="0.5" opacity="0.25"/>`);
-      shapes.push(`<text x="${100}" y="${by + bh + 14}" fill="${p}" font-size="5" text-anchor="middle" opacity="0.3" font-family="monospace">${bw.toFixed(0)}u</text>`);
-      shapes.push(`<circle cx="${bx}" cy="${by}" r="1.5" fill="${p}" opacity="0.4"/>`);
-      shapes.push(`<circle cx="${bx + bw}" cy="${by}" r="1.5" fill="${p}" opacity="0.4"/>`);
-      shapes.push(`<circle cx="${bx + bw}" cy="${by + bh}" r="1.5" fill="${p}" opacity="0.4"/>`);
-      shapes.push(`<circle cx="${bx}" cy="${by + bh}" r="1.5" fill="${p}" opacity="0.4"/>`);
-      shapes.push(`<text x="185" y="112" fill="${p}" font-size="5" text-anchor="end" opacity="0.2" font-family="monospace">REV.${(h % 9) + 1}</text>`);
-      break;
-    }
+  } else if (patternType === 1) {
+    // Horizontal scan lines
+    for (let y = 0; y < 120; y += 6) shapes.push(`<line x1="0" y1="${y}" x2="200" y2="${y}" stroke="${p}" stroke-width="0.3" opacity="0.04"/>`);
+  } else {
+    // Corner accents
+    shapes.push(`<path d="M0,20 L0,0 L20,0" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+    shapes.push(`<path d="M180,0 L200,0 L200,20" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+    shapes.push(`<path d="M0,100 L0,120 L20,120" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+    shapes.push(`<path d="M180,120 L200,120 L200,100" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
   }
 
   return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
@@ -4361,7 +4511,13 @@ function setCardMode(mode, el) {
   cardMode = mode;
   document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.toggle('active', false));
   if (el) el.classList.add('active');
+  syncCreativeGating();
   renderCards();
+}
+
+function syncCreativeGating() {
+  const isCreative = cardMode !== 'business';
+  document.body.classList.toggle('creative-active', isCreative);
 }
 
 function cycleCardMode() {
@@ -5454,6 +5610,7 @@ async function openSlabViewer(mintId) {
           <h4>Actions</h4>
           <div class="slab-actions">
             <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .card</button>
+            <button class="slab-btn" style="background:var(--purple-bg);color:var(--purple);border-color:var(--purple)" onclick="exportRAD(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .rad.eggs</button>
             <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
             <button class="slab-btn" id="trophy-pin-btn" onclick="toggleTrophyCase('${mintId}')">${inTrophy ? 'Unpin' : 'Pin Trophy'}</button>
             <button class="slab-btn" onclick="document.getElementById('slab-overlay').remove()">Close</button>
@@ -6918,6 +7075,301 @@ const DEMO_REVIEW_TEXTS = [
   'Integrated with our Dynamics instance in under an hour. Impressive.',
   'A must-have for any RAPP setup. Should be official tier.',
 ];
+
+// ═══════════════════════════════════════════════════════
+// Streaming Engine — Hot-load agents from GitHub raw
+// ═══════════════════════════════════════════════════════
+const _streamedAgents = new Map(); // name → { code, manifest, loadedAt, guid }
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main/agents/';
+
+function generateGUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
+function resolveStreamUrl(input) {
+  input = input.trim();
+  if (input.startsWith('http')) return input;
+  // @publisher/slug → full URL
+  let name = input.startsWith('@') ? input : `@${input}`;
+  if (!name.includes('.py')) name += '.py';
+  return GITHUB_RAW_BASE + name;
+}
+
+function parseManifestFromSource(code) {
+  // Extract __manifest__ dict from Python source
+  const match = code.match(/__manifest__\s*=\s*\{([^}]+(?:\{[^}]*\}[^}]*)*)\}/s);
+  if (!match) return null;
+  try {
+    // Convert Python dict to JSON-ish
+    let raw = '{' + match[1] + '}';
+    raw = raw.replace(/#[^\n]*/g, '');
+    raw = raw.replace(/'/g, '"');
+    raw = raw.replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null');
+    raw = raw.replace(/,\s*([}\]])/g, '$1');
+    return JSON.parse(raw);
+  } catch { return null; }
+}
+
+async function streamAgent(url) {
+  const input = url || document.getElementById('stream-url')?.value;
+  if (!input) return;
+  const statusEl = document.getElementById('stream-status');
+  const resolvedUrl = resolveStreamUrl(input);
+
+  statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Streaming from ${resolvedUrl.split('/').slice(-2).join('/')}...</div>`;
+
+  try {
+    const resp = await fetch(resolvedUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const code = await resp.text();
+    const manifest = parseManifestFromSource(code);
+    if (!manifest || !manifest.name) throw new Error('No valid __manifest__ found in source');
+
+    const guid = generateGUID();
+    const entry = {
+      code,
+      manifest,
+      loadedAt: new Date().toISOString(),
+      guid,
+      url: resolvedUrl,
+      sizeBytes: new Blob([code]).size,
+    };
+    _streamedAgents.set(manifest.name, entry);
+
+    // Hot-inject into allAgents (if not already present)
+    const existing = allAgents.findIndex(a => a.name === manifest.name);
+    const agentObj = {
+      ...manifest,
+      _source: 'streamed',
+      _streamed: true,
+      _guid: guid,
+      _streamedCode: code,
+      _lines: code.split('\n').length,
+      _size_kb: (entry.sizeBytes / 1024).toFixed(1),
+    };
+    if (existing >= 0) allAgents[existing] = agentObj;
+    else allAgents.push(agentObj);
+
+    statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> ${manifest.display_name || manifest.name} loaded — ${agentObj._lines} lines, ${agentObj._size_kb} KB in memory</div>`;
+    document.getElementById('stream-url').value = '';
+
+    // Re-render
+    renderStreamedAgents();
+    renderAgents();
+    if (document.getElementById('cards-grid')) renderCards();
+
+    showToast(`Streamed ${manifest.display_name || manifest.name} into memory`, 'success');
+    return manifest.name;
+  } catch (err) {
+    statusEl.innerHTML = `<span style="color:var(--red);font-size:.82rem">Failed: ${err.message}</span>`;
+    return null;
+  }
+}
+
+async function streamDeck() {
+  const deckNames = [...deck];
+  if (!deckNames.length) {
+    showToast('No agents in current deck — add some first', 'error');
+    return;
+  }
+
+  const statusEl = document.getElementById('stream-status');
+  statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Streaming deck "${currentDeckName}" — ${deckNames.length} agents...</div>`;
+
+  let loaded = 0;
+  for (const name of deckNames) {
+    // Skip if already streamed
+    if (_streamedAgents.has(name)) { loaded++; continue; }
+    const result = await streamAgent(name);
+    if (result) loaded++;
+  }
+
+  statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Deck "${currentDeckName}" — ${loaded}/${deckNames.length} agents live in memory</div>`;
+  renderSteerPanel();
+  showToast(`Deck streamed: ${loaded} agents hot-loaded`, 'success');
+}
+
+function ejectAgent(name) {
+  _streamedAgents.delete(name);
+  // Remove from allAgents if streamed
+  const idx = allAgents.findIndex(a => a.name === name && a._streamed);
+  if (idx >= 0) allAgents.splice(idx, 1);
+  renderStreamedAgents();
+  renderAgents();
+  if (document.getElementById('cards-grid')) renderCards();
+  showToast(`Ejected ${name} from memory`, 'success');
+}
+
+function ejectAll() {
+  const names = [..._streamedAgents.keys()];
+  names.forEach(n => {
+    _streamedAgents.delete(n);
+    const idx = allAgents.findIndex(a => a.name === n && a._streamed);
+    if (idx >= 0) allAgents.splice(idx, 1);
+  });
+  renderStreamedAgents();
+  renderSteerPanel();
+  renderAgents();
+  if (document.getElementById('cards-grid')) renderCards();
+  showToast(`Ejected ${names.length} agents from memory`, 'success');
+}
+
+function renderStreamedAgents() {
+  const el = document.getElementById('streamed-agents');
+  if (!el) return;
+  if (_streamedAgents.size === 0) {
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => `
+    <div class="streamed-chip" onclick="openAgent('${esc(name)}')">
+      <div>
+        <div class="sc-name">${esc(s.manifest.display_name || name)}</div>
+        <div class="sc-status">LIVE &bull; ${s.manifest.version || '?'} &bull; GUID ${s.guid.slice(0,8)}</div>
+      </div>
+      <span class="sc-eject" onclick="event.stopPropagation();ejectAgent('${esc(name)}')" title="Eject from memory">&times;</span>
+    </div>
+  `).join('');
+  renderSteerPanel();
+}
+
+function renderSteerPanel() {
+  const panel = document.getElementById('steer-panel');
+  const grid = document.getElementById('steer-grid');
+  if (!panel || !grid) return;
+
+  if (_streamedAgents.size === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+  panel.style.display = '';
+  document.getElementById('steer-deck-name').textContent = currentDeckName || 'Live Agents';
+  document.getElementById('steer-indicator').style.display = '';
+
+  grid.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => {
+    const isInDeck = deck.has(name);
+    return `
+    <div class="steer-slot ${isInDeck ? 'live' : ''}">
+      <div class="slot-name">${esc(s.manifest.display_name || name)}</div>
+      <div class="slot-status">${isInDeck ? 'ROUTED' : 'STANDBY'}</div>
+      <div class="slot-guid">${s.guid}</div>
+    </div>`;
+  }).join('');
+}
+
+function getStreamedSource(name) {
+  const s = _streamedAgents.get(name);
+  return s ? s.code : null;
+}
+
+// ═══════════════════════════════════════════════════════
+// RAD — RAPP Agent Deck (.rad.eggs) Format
+// ═══════════════════════════════════════════════════════
+function buildRADPayload(card) {
+  // Build the full holographic artifact
+  const agent = allAgents.find(a => a.name === card.agentName);
+  const source = getStreamedSource(card.agentName) || card._sourceCode || '';
+  return {
+    format: 'rad.eggs/1.0',
+    type: 'holographic',
+    minted: card.mintedAt,
+    card: {
+      mintId: card.mintId,
+      mintNum: card.mintNum,
+      agentName: card.agentName,
+      displayName: card.displayName,
+      tier: card.tier,
+      tierAtMint: card.tierAtMint,
+      set: card.set,
+      rarity: card.rarity,
+      isFirstEdition: card.isFirstEdition,
+      grade: card.grade,
+      subGrades: typeof subGrades === 'function' ? subGrades(card) : null,
+      value: typeof calculateValue === 'function' ? calculateValue(card) : 0,
+      variations: card.variations,
+      provenance: card.provenance || [],
+    },
+    agent: {
+      name: agent?.name || card.agentName,
+      version: agent?.version || card.versionAtMint,
+      category: agent?.category || '',
+      tags: agent?.tags || [],
+      manifest: agent || {},
+    },
+    source: btoa(unescape(encodeURIComponent(source))),
+    signature: card.mintId + ':' + Date.now().toString(36),
+  };
+}
+
+function exportRAD(card) {
+  const payload = buildRADPayload(card);
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${(card.displayName || card.agentName).replace(/[^a-z0-9]/gi, '_')}.rad.eggs`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Exported ${card.displayName} as .rad.eggs`, 'success');
+}
+
+async function importRAD(file) {
+  try {
+    const text = await file.text();
+    const payload = JSON.parse(text);
+    if (!payload.format || !payload.format.startsWith('rad.eggs')) {
+      throw new Error('Not a valid .rad.eggs file');
+    }
+    // Reconstruct card
+    const card = {
+      ...payload.card,
+      mintedAt: payload.minted,
+      versionAtMint: payload.agent.version,
+      _sourceCode: payload.source ? decodeURIComponent(escape(atob(payload.source))) : '',
+      _imported: true,
+      _importedAt: new Date().toISOString(),
+    };
+    // Add provenance entry
+    if (!card.provenance) card.provenance = [];
+    card.provenance.push({
+      action: 'import',
+      timestamp: new Date().toISOString(),
+      from: 'rad.eggs',
+    });
+    // Save to collection
+    await saveMinted(card);
+    // If source present, inject agent into memory
+    if (card._sourceCode) {
+      const manifest = parseManifestFromSource(card._sourceCode);
+      if (manifest && manifest.name) {
+        const guid = generateGUID();
+        _streamedAgents.set(manifest.name, {
+          code: card._sourceCode,
+          manifest,
+          loadedAt: new Date().toISOString(),
+          guid,
+          url: 'imported:rad.eggs',
+          sizeBytes: new Blob([card._sourceCode]).size,
+        });
+      }
+    }
+    renderCollection();
+    renderStreamedAgents();
+    showToast(`Imported ${card.displayName} from .rad.eggs`, 'success');
+    return card;
+  } catch (err) {
+    showToast(`Import failed: ${err.message}`, 'error');
+    return null;
+  }
+}
+
+// .rad.eggs import handled in handleFileDrop above
 
 function activateDemoMode() {
   if (window._demoActive) return;
