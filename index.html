@@ -516,12 +516,53 @@
   }
   .ac-back-actions button:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* Card mode toggle */
+  .card-mode-toggle {
+    display: flex; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; font-size: .78rem;
+  }
+  .card-mode-toggle button {
+    padding: 6px 16px; border: none; background: transparent;
+    color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all .15s;
+  }
+  .card-mode-toggle button.active {
+    background: var(--accent); color: #fff;
+  }
+
+  /* Business card style */
+  .agent-card-biz {
+    position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
+    overflow: hidden; border: 2px solid var(--border);
+    background: var(--surface); display: flex; flex-direction: column;
+    padding: 20px; justify-content: space-between;
+  }
+  .biz-publisher { font-size: .65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+  .biz-name { font-size: 1.1rem; font-weight: 800; margin: 4px 0 2px; line-height: 1.2; }
+  .biz-desc { font-size: .72rem; color: var(--text-dim); line-height: 1.4; flex: 1; margin: 8px 0; }
+  .biz-divider { height: 1px; background: var(--border); margin: 8px 0; }
+  .biz-meta { display: flex; gap: 12px; font-size: .65rem; color: var(--text-muted); }
+  .biz-meta span { display: flex; align-items: center; gap: 3px; }
+  .biz-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+  .biz-tag { font-size: .6rem; padding: 2px 6px; background: var(--surface2); border-radius: 3px; color: var(--text-dim); }
+  .biz-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
+  .biz-tier { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 2px 8px; border-radius: 3px; }
+  .biz-tier.mythic { background: rgba(255,109,0,.15); color: #ff6d00; }
+  .biz-tier.rare { background: rgba(255,215,0,.15); color: #ffd700; }
+  .biz-tier.uncommon { background: rgba(192,192,192,.1); color: #c0c0c0; }
+  .biz-tier.common { background: rgba(188,140,255,.1); color: #bc8cff; }
+  .biz-version { font-size: .6rem; color: var(--text-muted); font-family: monospace; }
+  .biz-stripe { height: 4px; border-radius: 2px; margin-bottom: 12px; }
+
+  /* Artist attribution in creative mode */
+  .ac-artist { font-size: .55rem; color: var(--text-muted); text-align: right; padding: 2px 8px; font-style: italic; }
+
   /* Deck builder */
   .deck-bar {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   }
-  .deck-bar .deck-count { font-weight: 700; color: var(--accent); }
+  .deck-bar .deck-count { font-weight: 700; color: var(--accent); font-size: 1rem; }
+  .deck-bar select { font-weight: 600; }
   .deck-bar button {
     background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
     padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .82rem; transition: all .15s;
@@ -772,11 +813,17 @@
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();showModal('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
     </div>
     <div class="deck-bar" id="deck-bar">
-      <span>Deck: <span class="deck-count" id="deck-count">0</span> cards</span>
-      <input type="text" id="deck-name" placeholder="Deck name..." style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
-      <button onclick="shareDeck()">Share Deck</button>
-      <button onclick="clearDeck()">Clear</button>
-      <div style="margin-left:auto;display:flex;gap:6px">
+      <select id="deck-select" onchange="switchDeck(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;min-width:140px;cursor:pointer"></select>
+      <span class="deck-count" id="deck-count">0</span> <span style="font-size:.82rem;color:var(--text-dim)">cards</span>
+      <button onclick="newDeck()">+ New Deck</button>
+      <button onclick="renameDeck()">Rename</button>
+      <button onclick="deleteDeck()">Delete</button>
+      <button onclick="shareDeck()">Share</button>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <div class="card-mode-toggle">
+          <button class="active" onclick="setCardMode('business',this)">Business</button>
+          <button onclick="setCardMode('creative',this)">Creative</button>
+        </div>
         <input type="text" id="card-search" placeholder="Search cards..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
       </div>
     </div>
@@ -2651,8 +2698,92 @@ document.addEventListener('keydown', e => {
 // ═══════════════════════════════════════════════════════
 // Agent Cards — Trading card system
 // ═══════════════════════════════════════════════════════
-let deck = new Set(JSON.parse(localStorage.getItem('rar_deck') || '[]'));
+// ── Multi-deck system ──
+let allDecks = JSON.parse(localStorage.getItem('rar_decks') || '{}');
+// Migrate or initialize with starter decks
+if (!Object.keys(allDecks).length) {
+  const old = JSON.parse(localStorage.getItem('rar_deck') || '[]');
+  if (old.length) {
+    allDecks = { 'My Deck': old };
+  } else {
+    // Pre-populated starter decks — like exhibits, interact to make them yours
+    allDecks = {
+      'Core Toolkit': ['@rapp/basic-agent', '@kody/rar_remote_agent', '@kody/agent_workbench', '@kody/github_agent_library', '@kody/manage_memory'],
+      'Sales Suite': ['@discreetRappers/sales_assistant', '@discreetRappers/demo_script_generator', '@discreetRappers/email_drafting', '@discreetRappers/dynamics_crud'],
+      'Builder Stack': ['@kody/agent_workbench', '@discreetRappers/agent_generator', '@discreetRappers/agent_transpiler', '@borg/cardsmith_agent', '@discreetRappers/rapp_pipeline'],
+    };
+  }
+  localStorage.setItem('rar_decks', JSON.stringify(allDecks));
+}
+let currentDeckName = localStorage.getItem('rar_current_deck') || Object.keys(allDecks)[0] || 'My Deck';
+if (!allDecks[currentDeckName]) { allDecks[currentDeckName] = []; saveDecks(); }
+let deck = new Set(allDecks[currentDeckName]);
 let cardFilter = 'all';
+let cardMode = 'business';
+
+function saveDecks() {
+  allDecks[currentDeckName] = [...deck];
+  localStorage.setItem('rar_decks', JSON.stringify(allDecks));
+  localStorage.setItem('rar_current_deck', currentDeckName);
+}
+
+function renderDeckSelect() {
+  const sel = document.getElementById('deck-select');
+  if (!sel) return;
+  sel.innerHTML = Object.keys(allDecks).map(n =>
+    `<option value="${esc(n)}" ${n === currentDeckName ? 'selected' : ''}>${esc(n)} (${(allDecks[n] || []).length})</option>`
+  ).join('');
+}
+
+function switchDeck(name) {
+  if (!allDecks[name]) return;
+  saveDecks();
+  currentDeckName = name;
+  deck = new Set(allDecks[name]);
+  localStorage.setItem('rar_current_deck', name);
+  renderDeckSelect();
+  renderCards();
+}
+
+function newDeck() {
+  const name = prompt('Deck name:');
+  if (!name || !name.trim()) return;
+  const n = name.trim();
+  if (allDecks[n]) { showToast(`Deck "${n}" already exists`, 'error'); return; }
+  saveDecks();
+  allDecks[n] = [];
+  currentDeckName = n;
+  deck = new Set();
+  saveDecks();
+  renderDeckSelect();
+  renderCards();
+  showToast(`Created deck "${n}"`, 'success');
+}
+
+function renameDeck() {
+  const name = prompt('New name for "' + currentDeckName + '":', currentDeckName);
+  if (!name || !name.trim() || name.trim() === currentDeckName) return;
+  const n = name.trim();
+  if (allDecks[n]) { showToast(`Deck "${n}" already exists`, 'error'); return; }
+  allDecks[n] = allDecks[currentDeckName];
+  delete allDecks[currentDeckName];
+  currentDeckName = n;
+  saveDecks();
+  renderDeckSelect();
+  showToast(`Renamed to "${n}"`, 'success');
+}
+
+function deleteDeck() {
+  if (Object.keys(allDecks).length <= 1) { showToast('Cannot delete your only deck', 'error'); return; }
+  if (!confirm(`Delete deck "${currentDeckName}" and its ${deck.size} cards?`)) return;
+  delete allDecks[currentDeckName];
+  currentDeckName = Object.keys(allDecks)[0];
+  deck = new Set(allDecks[currentDeckName]);
+  saveDecks();
+  renderDeckSelect();
+  renderCards();
+  showToast('Deck deleted', 'success');
+}
 
 const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'uncommon', experimental: 'common' };
 const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Experimental' };
@@ -2721,28 +2852,193 @@ function genCardArt(agent) {
   return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
 }
 
+// ── Creative Art Styles (diverse artist interpretations) ──
+const ARTIST_STYLES = [
+  { name: 'Circuit', artist: 'sys::circuit' },
+  { name: 'Nebula', artist: 'sys::nebula' },
+  { name: 'Glitch', artist: 'sys::glitch' },
+  { name: 'Zen', artist: 'sys::zen' },
+  { name: 'Topographic', artist: 'sys::topo' },
+  { name: 'Blueprint', artist: 'sys::blueprint' },
+];
+
+function getArtistStyle(agent) {
+  const h = Math.abs(Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0));
+  return ARTIST_STYLES[h % ARTIST_STYLES.length];
+}
+
+function genCreativeArt(agent) {
+  const h = Math.abs(Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0));
+  const cc = getCatColor(agent.category);
+  const p = cc.primary;
+  const style = getArtistStyle(agent);
+  const shapes = [`<rect width="200" height="120" fill="${cc.bg}"/>`];
+
+  switch(style.artist) {
+    case 'sys::circuit': {
+      for (let i = 0; i < 8; i++) {
+        const x1 = (h + i * 37) % 180 + 10;
+        const y1 = (h + i * 23) % 100 + 10;
+        const x2 = (h + i * 53) % 180 + 10;
+        const y2 = (h + i * 41) % 100 + 10;
+        const mx = (x1 + x2) / 2;
+        shapes.push(`<path d="M${x1},${y1} L${mx},${y1} L${mx},${y2} L${x2},${y2}" fill="none" stroke="${p}" stroke-width="1.5" opacity="${(0.2 + i * 0.08).toFixed(2)}"/>`);
+        shapes.push(`<circle cx="${x1}" cy="${y1}" r="3" fill="${p}" opacity="${(0.3 + i * 0.06).toFixed(2)}"/>`);
+        shapes.push(`<circle cx="${x2}" cy="${y2}" r="2" fill="${p}" opacity="${(0.2 + i * 0.05).toFixed(2)}"/>`);
+      }
+      shapes.push(`<rect x="75" y="35" width="50" height="50" rx="4" fill="none" stroke="${p}" stroke-width="2" opacity="0.4"/>`);
+      for (let i = 0; i < 4; i++) {
+        shapes.push(`<line x1="${85 + i * 10}" y1="35" x2="${85 + i * 10}" y2="25" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`);
+        shapes.push(`<line x1="${85 + i * 10}" y1="85" x2="${85 + i * 10}" y2="95" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`);
+      }
+      break;
+    }
+    case 'sys::nebula': {
+      for (let i = 0; i < 5; i++) {
+        const cx = 40 + (h + i * 31) % 120;
+        const cy = 20 + (h + i * 19) % 80;
+        const rx = 20 + (h + i * 7) % 40;
+        const ry = 15 + (h + i * 11) % 30;
+        const rot = (h + i * 47) % 360;
+        shapes.push(`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${p}" opacity="${(0.04 + i * 0.02).toFixed(2)}" transform="rotate(${rot} ${cx} ${cy})"/>`);
+      }
+      for (let i = 0; i < 15; i++) {
+        const sx = (h + i * 13) % 190 + 5;
+        const sy = (h + i * 17) % 110 + 5;
+        const sr = (h + i * 3) % 2 + 0.5;
+        shapes.push(`<circle cx="${sx}" cy="${sy}" r="${sr}" fill="#fff" opacity="${(0.3 + (h + i) % 5 * 0.12).toFixed(2)}"/>`);
+      }
+      shapes.push(`<circle cx="100" cy="60" r="25" fill="${p}" opacity="0.08"/>`);
+      shapes.push(`<circle cx="100" cy="60" r="12" fill="${p}" opacity="0.12"/>`);
+      shapes.push(`<circle cx="100" cy="60" r="3" fill="#fff" opacity="0.6"/>`);
+      break;
+    }
+    case 'sys::glitch': {
+      for (let y = 0; y < 120; y += 3) {
+        if ((h + y) % 7 === 0) {
+          const offset = ((h + y) % 20) - 10;
+          const w = 40 + (h + y * 3) % 80;
+          shapes.push(`<rect x="${60 + offset}" y="${y}" width="${w}" height="2" fill="${p}" opacity="${(0.1 + (y % 5) * 0.04).toFixed(2)}"/>`);
+        }
+      }
+      for (let i = 0; i < 4; i++) {
+        const bx = (h + i * 47) % 150 + 10;
+        const by = (h + i * 29) % 80 + 10;
+        const bw = 20 + (h + i * 11) % 30;
+        const bh = 10 + (h + i * 7) % 20;
+        shapes.push(`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${p}" opacity="${(0.08 + i * 0.04).toFixed(2)}"/>`);
+        shapes.push(`<rect x="${bx + 3}" y="${by + 2}" width="${bw}" height="${bh}" fill="${p}" opacity="${(0.05 + i * 0.02).toFixed(2)}"/>`);
+      }
+      for (let i = 0; i < 20; i++) {
+        shapes.push(`<rect x="${(h + i * 11) % 196}" y="${(h + i * 7) % 116}" width="2" height="2" fill="${(h + i) % 3 === 0 ? '#fff' : p}" opacity="${(0.2 + (i % 4) * 0.1).toFixed(2)}"/>`);
+      }
+      break;
+    }
+    case 'sys::zen': {
+      for (let i = 0; i < 3; i++) {
+        const x1 = 20 + (h + i * 43) % 60;
+        const y1 = 20 + (h + i * 29) % 40;
+        const cx1 = x1 + 30 + (h + i * 17) % 40;
+        const cy1 = y1 - 20 + (h + i * 11) % 40;
+        const x2 = x1 + 80 + (h + i * 23) % 40;
+        const y2 = y1 + (h + i * 13) % 30;
+        shapes.push(`<path d="M${x1},${y1} Q${cx1},${cy1} ${x2},${y2}" fill="none" stroke="${p}" stroke-width="${2 + i}" stroke-linecap="round" opacity="${(0.15 + i * 0.08).toFixed(2)}"/>`);
+      }
+      shapes.push(`<circle cx="${80 + (h % 40)}" cy="${40 + (h % 40)}" r="${4 + h % 6}" fill="${p}" opacity="0.12"/>`);
+      shapes.push(`<circle cx="${120 + (h % 30)}" cy="${70 + (h % 20)}" r="${2 + h % 4}" fill="${p}" opacity="0.08"/>`);
+      const ensoR = 25 + h % 15;
+      shapes.push(`<path d="M${100 - ensoR},60 A${ensoR},${ensoR} 0 1,1 ${100 + ensoR * 0.7},${60 - ensoR * 0.7}" fill="none" stroke="${p}" stroke-width="2.5" stroke-linecap="round" opacity="0.2"/>`);
+      break;
+    }
+    case 'sys::topo': {
+      const cx = 100, cy = 60;
+      for (let r = 10; r < 70; r += 8) {
+        const wobble = (h + r * 3) % 10;
+        const pts = [];
+        for (let a = 0; a < Math.PI * 2; a += 0.3) {
+          const rr = r + Math.sin(a * 3 + h) * wobble;
+          pts.push(`${(cx + rr * Math.cos(a)).toFixed(1)},${(cy + rr * Math.sin(a) * 0.6).toFixed(1)}`);
+        }
+        shapes.push(`<polyline points="${pts.join(' ')}" fill="none" stroke="${p}" stroke-width="0.8" opacity="${(0.12 + r * 0.003).toFixed(2)}" stroke-linejoin="round"/>`);
+      }
+      shapes.push(`<circle cx="${cx}" cy="${cy}" r="2" fill="${p}" opacity="0.5"/>`);
+      shapes.push(`<text x="${cx + 5}" y="${cy + 1}" fill="${p}" font-size="6" opacity="0.3" font-family="monospace">${(h % 9000 + 1000)}m</text>`);
+      break;
+    }
+    case 'sys::blueprint': {
+      for (let x = 0; x <= 200; x += 20) shapes.push(`<line x1="${x}" y1="0" x2="${x}" y2="120" stroke="${p}" stroke-width="0.3" opacity="0.12"/>`);
+      for (let y = 0; y <= 120; y += 20) shapes.push(`<line x1="0" y1="${y}" x2="200" y2="${y}" stroke="${p}" stroke-width="0.3" opacity="0.12"/>`);
+      const bw = 60 + h % 40, bh = 30 + h % 25;
+      const bx = 100 - bw/2, by = 60 - bh/2;
+      shapes.push(`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="none" stroke="${p}" stroke-width="1" opacity="0.35" stroke-dasharray="4,2"/>`);
+      shapes.push(`<line x1="${bx}" y1="${by + bh + 8}" x2="${bx + bw}" y2="${by + bh + 8}" stroke="${p}" stroke-width="0.5" opacity="0.25"/>`);
+      shapes.push(`<text x="${100}" y="${by + bh + 14}" fill="${p}" font-size="5" text-anchor="middle" opacity="0.3" font-family="monospace">${bw.toFixed(0)}u</text>`);
+      shapes.push(`<circle cx="${bx}" cy="${by}" r="1.5" fill="${p}" opacity="0.4"/>`);
+      shapes.push(`<circle cx="${bx + bw}" cy="${by}" r="1.5" fill="${p}" opacity="0.4"/>`);
+      shapes.push(`<circle cx="${bx + bw}" cy="${by + bh}" r="1.5" fill="${p}" opacity="0.4"/>`);
+      shapes.push(`<circle cx="${bx}" cy="${by + bh}" r="1.5" fill="${p}" opacity="0.4"/>`);
+      shapes.push(`<text x="185" y="112" fill="${p}" font-size="5" text-anchor="end" opacity="0.2" font-family="monospace">REV.${(h % 9) + 1}</text>`);
+      break;
+    }
+  }
+
+  return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
+}
+
+function setCardMode(mode, el) {
+  cardMode = mode;
+  document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.toggle('active', false));
+  if (el) el.classList.add('active');
+  renderCards();
+}
+
 function agentToCard(a) {
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
   const cc = getCatColor(a.category);
   const inDeck = deck.has(a.name);
-  const tags = (a.tags || []).slice(0, 3);
-  const desc = (a.description || '').slice(0, 120);
-  // Build abilities from tags + description
-  const abilities = [];
-  if (a.description) abilities.push({ kw: 'Perform', text: desc });
-  if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
-  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+  const tags = (a.tags || []).slice(0, 4);
+  const desc = (a.description || '').slice(0, 140);
+  const artStyle = getArtistStyle(a);
   const lines = a._lines || '?';
   const sizeKb = a._size_kb || '?';
   const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  const publisher = a.name.split('/')[0] || '';
+  const slug = a.name.split('/')[1] || '';
 
-  return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ondblclick="this.classList.toggle('flipped')">
+  // Abilities for creative mode
+  const abilities = [];
+  if (a.description) abilities.push({ kw: 'Perform', text: desc });
+  if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
+  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+
+  // ── Business Card Face ──
+  const bizFace = `
+    <div class="agent-card-biz" style="border-color:${cc.border}">
+      <div>
+        <div class="biz-stripe" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
+        <div class="biz-publisher">${esc(publisher)}</div>
+        <div class="biz-name">${esc(a.display_name)}</div>
+        <div class="biz-desc">${esc(desc)}</div>
+        <div class="biz-divider"></div>
+        <div class="biz-tags">${tags.map(t => `<span class="biz-tag">${esc(t)}</span>`).join('')}</div>
+      </div>
+      <div class="biz-footer">
+        <span class="biz-tier ${rarity}">${RARITY_LABELS[rarity]}</span>
+        <div style="text-align:right">
+          <div class="biz-version">v${a.version || '?'}</div>
+          <div style="font-size:.55rem;color:var(--text-muted)">${a.category.replace(/_/g, ' ')}</div>
+        </div>
+      </div>
+    </div>`;
+
+  // ── Creative Art Face ──
+  const creativeFace = `
     <div class="agent-card-front" style="border-color:${cc.border}">
       <div class="ac-top-bar" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
-      <div class="ac-avatar">${genCardArt(a)}</div>
+      <div class="ac-avatar">${genCreativeArt(a)}</div>
+      <div class="ac-artist">style: ${artStyle.name}</div>
       <div class="ac-body">
         <div class="ac-name">${esc(a.display_name)}</div>
         <div class="ac-title">${esc(a.name)}</div>
@@ -2757,7 +3053,10 @@ function agentToCard(a) {
         <span style="color:var(--text-muted)">${lines}L / ${sizeKb}KB</span>
         <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:var(--accent)' : 'color:var(--text-muted)'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')" title="${inDeck ? 'Remove from deck' : 'Add to deck'}">${inDeck ? '&#9733;' : '&#9734;'}</span>
       </div>
-    </div>
+    </div>`;
+
+  // ── QR Back Face ──
+  const qrFace = `
     <div class="agent-card-back" style="border-color:${cc.border}">
       <div class="ac-back-logo">RAR</div>
       <div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
@@ -2768,7 +3067,22 @@ function agentToCard(a) {
         <button onclick="event.stopPropagation();printCard('${esc(a.name)}')">Print</button>
         <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
       </div>
-    </div>
+    </div>`;
+
+  // ── Compose based on mode ──
+  let front, back;
+  if (cardMode === 'business') {
+    front = bizFace;
+    back = creativeFace;
+  } else {
+    front = creativeFace;
+    back = qrFace;
+  }
+
+  return `
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ondblclick="this.classList.toggle('flipped')">
+    ${front}
+    <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg)">${back}</div>
   </div>`;
 }
 
@@ -2798,23 +3112,24 @@ function renderCards() {
 
 function toggleDeckCard(name) {
   if (deck.has(name)) deck.delete(name); else deck.add(name);
-  localStorage.setItem('rar_deck', JSON.stringify([...deck]));
+  saveDecks();
+  renderDeckSelect();
   renderCards();
 }
 
 function clearDeck() {
+  if (!confirm(`Clear all ${deck.size} cards from "${currentDeckName}"?`)) return;
   deck.clear();
-  localStorage.setItem('rar_deck', '[]');
+  saveDecks();
   renderCards();
 }
 
 function shareDeck() {
   if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
-  const dn = document.getElementById('deck-name')?.value || 'My Deck';
   const agents = [...deck].join(',');
-  const url = `${location.origin}${location.pathname}#deck/${encodeURIComponent(dn)}/${encodeURIComponent(agents)}`;
+  const url = `${location.origin}${location.pathname}#deck/${encodeURIComponent(currentDeckName)}/${encodeURIComponent(agents)}`;
   navigator.clipboard?.writeText(url);
-  showToast(`Deck "${dn}" link copied! ${deck.size} cards`, 'success');
+  showToast(`Deck "${currentDeckName}" link copied! ${deck.size} cards`, 'success');
 }
 
 function printCard(name) {
@@ -2851,7 +3166,7 @@ function printCard(name) {
   <div class="print-row">
     <div class="card">
       <div class="top-bar"></div>
-      <div class="art">${genCardArt(a)}</div>
+      <div class="art">${genCreativeArt(a)}</div>
       <div class="body">
         <div class="name">${esc(a.display_name)}</div>
         <div class="ns">${esc(a.name)}</div>
@@ -2893,9 +3208,13 @@ function handleCardHash() {
     const dn = decodeURIComponent(parts[0] || 'Shared Deck');
     const agents = decodeURIComponent(parts[1] || '').split(',').filter(Boolean);
     if (agents.length) {
-      agents.forEach(n => deck.add(n));
-      localStorage.setItem('rar_deck', JSON.stringify([...deck]));
-      document.getElementById('deck-name').value = dn;
+      // Create or merge into a deck with this name
+      if (!allDecks[dn]) allDecks[dn] = [];
+      agents.forEach(n => { if (!allDecks[dn].includes(n)) allDecks[dn].push(n); });
+      currentDeckName = dn;
+      deck = new Set(allDecks[dn]);
+      saveDecks();
+      renderDeckSelect();
       switchTab('cards');
       setCardFilter('deck', null);
       showToast(`Loaded deck "${dn}" with ${agents.length} cards`, 'success');
