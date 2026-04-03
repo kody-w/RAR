@@ -580,6 +580,108 @@
     }
   }
 
+  /* ─── Presentation Mode ─────────────────────────────── */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .pres-overlay {
+    position: fixed; inset: 0; z-index: 1000; background: var(--bg);
+    display: flex; flex-direction: column; animation: fadeIn .3s;
+  }
+  .pres-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--border);
+  }
+  .pres-toolbar .deck-title { font-weight: 700; font-size: 1rem; }
+  .pres-toolbar .slide-counter { color: var(--text-muted); font-size: .85rem; }
+  .pres-toolbar button {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .82rem;
+  }
+  .pres-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .pres-stage {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px; overflow: hidden; position: relative;
+  }
+  .pres-slide {
+    width: 100%; max-width: 900px; aspect-ratio: 16/9; background: var(--surface);
+    border-radius: 16px; border: 1px solid var(--border); overflow: hidden;
+    display: flex; box-shadow: var(--shadow-lg); animation: slideIn .3s;
+  }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: none; } }
+
+  /* Business slide layout */
+  .pres-slide-biz {
+    display: flex; flex-direction: row; width: 100%; height: 100%;
+  }
+  .pres-biz-left {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 48px; position: relative;
+  }
+  .pres-biz-right {
+    width: 35%; display: flex; align-items: center; justify-content: center;
+    border-left: 1px solid var(--border); padding: 32px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,.02) 0%, transparent 70%);
+  }
+  .pres-biz-publisher { font-size: .85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  .pres-biz-name { font-size: 2.4rem; font-weight: 800; line-height: 1.1; margin-bottom: 12px; }
+  .pres-biz-desc { font-size: 1.1rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 24px; }
+  .pres-biz-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .pres-biz-chip {
+    display: flex; align-items: center; gap: 6px; font-size: .82rem;
+    padding: 6px 14px; background: var(--surface2); border-radius: 6px; color: var(--text-dim);
+  }
+  .pres-biz-chip .label { color: var(--text-muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; }
+  .pres-biz-stripe { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+  .pres-biz-qr { position: absolute; bottom: 24px; right: 24px; }
+  .pres-biz-qr img { width: 80px; height: 80px; border-radius: 6px; opacity: .6; }
+
+  /* Creative slide layout */
+  .pres-slide-creative {
+    display: flex; flex-direction: row; width: 100%; height: 100%;
+  }
+  .pres-creative-art {
+    width: 50%; display: flex; align-items: center; justify-content: center; padding: 24px;
+    position: relative; overflow: hidden;
+  }
+  .pres-creative-art svg { width: 90%; height: 90%; }
+  .pres-creative-info {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 48px; border-left: 1px solid var(--border);
+  }
+  .pres-creative-name { font-size: 2rem; font-weight: 800; margin-bottom: 4px; }
+  .pres-creative-ns { font-size: .85rem; color: var(--text-muted); font-style: italic; margin-bottom: 16px; }
+  .pres-creative-type {
+    font-size: .8rem; color: var(--text-dim); text-transform: capitalize;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 8px 0; margin-bottom: 16px;
+  }
+  .pres-creative-abilities { font-size: .9rem; color: var(--text-dim); line-height: 1.8; }
+  .pres-creative-abilities .kw { font-weight: 700; color: var(--text); }
+  .pres-creative-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+  .pres-creative-style { font-size: .7rem; color: var(--text-muted); font-style: italic; }
+
+  /* Navigation arrows */
+  .pres-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text-dim); font-size: 1.2rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s; z-index: 10;
+  }
+  .pres-nav:hover { border-color: var(--accent); color: var(--accent); }
+  .pres-nav.prev { left: 24px; }
+  .pres-nav.next { right: 24px; }
+
+  /* Slide dots */
+  .pres-dots {
+    display: flex; gap: 6px; justify-content: center; padding: 12px;
+  }
+  .pres-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--surface3);
+    cursor: pointer; transition: all .2s;
+  }
+  .pres-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
   /* ─── Workbench ───────────────────────────────────── */
   .wb-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
   .wb-editor { display: flex; flex-direction: column; }
@@ -636,6 +738,31 @@
     border-radius: 50%; animation: spin .6s linear infinite; margin-bottom: 10px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── Guided Tour ────────────────────────────────── */
+  .tour-overlay { position: fixed; inset: 0; z-index: 900; background: rgba(0,0,0,.7); }
+  .tour-highlight {
+    position: fixed; z-index: 901; border-radius: 12px;
+    box-shadow: 0 0 0 4px var(--accent), 0 0 40px rgba(88,166,255,.3);
+    pointer-events: none; transition: all .4s ease;
+  }
+  .tour-tooltip {
+    position: fixed; z-index: 902; background: var(--surface); border: 1px solid var(--accent);
+    border-radius: var(--radius-lg); padding: 20px; max-width: 360px;
+    box-shadow: var(--shadow-lg); animation: fadeIn .3s;
+  }
+  .tour-tooltip h3 { font-size: 1rem; margin-bottom: 6px; }
+  .tour-tooltip p { font-size: .85rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 14px; }
+  .tour-tooltip .tour-btns { display: flex; gap: 8px; justify-content: flex-end; }
+  .tour-tooltip button {
+    padding: 6px 16px; border-radius: 6px; font-size: .82rem; cursor: pointer; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text-dim); transition: all .15s;
+  }
+  .tour-tooltip button:hover { border-color: var(--accent); color: var(--accent); }
+  .tour-tooltip button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tour-dots { display: flex; gap: 4px; margin-bottom: 10px; }
+  .tour-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--surface3); }
+  .tour-dot.active { background: var(--accent); }
 
   /* ─── Cart Sidebar ─────────────────────────────────── */
   .cart-toggle {
@@ -747,6 +874,7 @@
     <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
   <div class="header-actions" id="header-actions">
+    <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:8px" title="Take the guided tour">Tour</button>
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       &#128722;
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
@@ -819,6 +947,7 @@
       <button onclick="renameDeck()">Rename</button>
       <button onclick="deleteDeck()">Delete</button>
       <button onclick="shareDeck()">Share</button>
+      <button onclick="presentDeck()">Present</button>
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <div class="card-mode-toggle">
           <button class="active" onclick="setCardMode('business',this)">Business</button>
@@ -1427,6 +1556,11 @@ async function init() {
   buildCategoryPills(stats);
   renderAgents();
   renderLeaderboard();
+
+  // Auto-start tour for first-time visitors
+  if (!localStorage.getItem('rar_tour_done')) {
+    setTimeout(startTour, 1500);
+  }
 }
 
 function renderInstanceBanner() {
@@ -1680,7 +1814,7 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No data yet</h3></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No votes yet — be the first!</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites. The top-voted agents appear here.</p></div>'; return; }
 
   let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
@@ -1738,7 +1872,7 @@ function openAgent(name) {
         <div class="review-header"><span><span class="review-user">@${esc(r.user)}</span> <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
         <span class="review-date">${new Date(r.timestamp).toLocaleDateString()}</span></div>
         <div class="review-text">${esc(r.text)}</div></div>`).join('')}</div>`
-    : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet. Be the first!</p>';
+    : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
   document.getElementById('modal-content').innerHTML = `
     <button class="close-modal" onclick="closeModal()">&#10005;</button>
@@ -3104,7 +3238,7 @@ function renderCards() {
   });
   document.getElementById('deck-count').textContent = deck.size;
   if (!filtered.length) {
-    document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>No cards found</h3></div>';
+    document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>No cards match your filter</h3><p style="color:var(--text-dim);margin-top:8px">Try a different filter, or switch to <strong>All</strong> to see every agent as a card.</p></div>';
     return;
   }
   document.getElementById('cards-grid').innerHTML = filtered.map(agentToCard).join('');
@@ -3190,6 +3324,138 @@ function printCard(name) {
   setTimeout(() => w.print(), 500);
 }
 
+// ═══════════════════════════════════════════════════════
+// Presentation Mode
+// ═══════════════════════════════════════════════════════
+let presSlideIndex = 0;
+let presAgents = [];
+
+function presentDeck() {
+  presAgents = allAgents.filter(a => deck.has(a.name));
+  if (!presAgents.length) { showToast('Add cards to your deck first', 'error'); return; }
+  presSlideIndex = 0;
+  renderPresentation();
+}
+
+function renderPresentation() {
+  // Remove existing overlay
+  document.getElementById('pres-overlay')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'pres-overlay';
+  overlay.id = 'pres-overlay';
+
+  const a = presAgents[presSlideIndex];
+  const total = presAgents.length;
+  const cc = getCatColor(a.category);
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  const publisher = a.name.split('/')[0] || '';
+  const tags = (a.tags || []).slice(0, 5);
+  const desc = (a.description || '').slice(0, 200);
+  const artStyle = typeof getArtistStyle === 'function' ? getArtistStyle(a) : { name: 'Classic' };
+
+  // Build abilities
+  const abilities = [];
+  if (a.description) abilities.push({ kw: 'Perform', text: desc });
+  if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
+  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+
+  // Choose slide layout based on cardMode
+  let slideContent;
+  if (cardMode === 'business') {
+    slideContent = `
+      <div class="pres-slide-biz">
+        <div class="pres-biz-left">
+          <div class="pres-biz-stripe" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
+          <div class="pres-biz-publisher">${esc(publisher)}</div>
+          <div class="pres-biz-name">${esc(a.display_name)}</div>
+          <div class="pres-biz-desc">${esc(desc)}</div>
+          <div class="pres-biz-meta">
+            <div class="pres-biz-chip"><span class="label">Tier</span> <span class="ac-rarity ${rarity}">${RARITY_LABELS[rarity]}</span></div>
+            <div class="pres-biz-chip"><span class="label">Version</span> v${a.version || '?'}</div>
+            <div class="pres-biz-chip"><span class="label">Category</span> ${(a.category || '').replace(/_/g, ' ')}</div>
+            ${tags.length ? `<div class="pres-biz-chip"><span class="label">Tags</span> ${tags.join(', ')}</div>` : ''}
+          </div>
+        </div>
+        <div class="pres-biz-right">
+          ${typeof genCreativeArt === 'function' ? `<div style="width:80%;opacity:.3">${genCreativeArt(a)}</div>` : ''}
+          <div class="pres-biz-qr"><img src="${qrUrl}" alt="QR" loading="lazy"></div>
+        </div>
+      </div>`;
+  } else {
+    slideContent = `
+      <div class="pres-slide-creative">
+        <div class="pres-creative-art" style="background:${cc.bg}">
+          ${typeof genCreativeArt === 'function' ? genCreativeArt(a) : (typeof genCardArt === 'function' ? genCardArt(a) : '')}
+        </div>
+        <div class="pres-creative-info">
+          <div class="pres-creative-name">${esc(a.display_name)}</div>
+          <div class="pres-creative-ns">${esc(a.name)}</div>
+          <div class="pres-creative-type">Agent &mdash; ${(a.category || '').replace(/_/g, ' ')} &mdash; <span class="ac-rarity ${rarity}">${RARITY_LABELS[rarity]}</span></div>
+          <div class="pres-creative-abilities">
+            ${abilities.map(ab => `<div style="margin-bottom:8px"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
+          </div>
+          <div class="pres-creative-footer">
+            <span class="pres-creative-style">style: ${artStyle.name}</span>
+            <span style="font-size:.75rem;color:var(--text-muted)">v${a.version || '?'} &bull; ${a.author || 'Unknown'}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  overlay.innerHTML = `
+    <div class="pres-toolbar">
+      <div class="deck-title">${esc(currentDeckName)}</div>
+      <div class="slide-counter">${presSlideIndex + 1} / ${total}</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="setCardMode(cardMode==='business'?'creative':'business',null);renderPresentation()">
+          ${cardMode === 'business' ? 'Creative View' : 'Business View'}
+        </button>
+        <button onclick="closePresentation()">Exit (Esc)</button>
+      </div>
+    </div>
+    <div class="pres-stage">
+      ${total > 1 ? `<div class="pres-nav prev" onclick="presNavigate(-1)">&#8249;</div>` : ''}
+      <div class="pres-slide">${slideContent}</div>
+      ${total > 1 ? `<div class="pres-nav next" onclick="presNavigate(1)">&#8250;</div>` : ''}
+    </div>
+    <div class="pres-dots">
+      ${presAgents.map((_, i) => `<div class="pres-dot${i === presSlideIndex ? ' active' : ''}" onclick="presGoTo(${i})"></div>`).join('')}
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Keyboard handler
+  overlay._keyHandler = function(e) {
+    if (e.key === 'Escape') closePresentation();
+    else if (e.key === 'ArrowRight' || e.key === ' ') presNavigate(1);
+    else if (e.key === 'ArrowLeft') presNavigate(-1);
+  };
+  document.addEventListener('keydown', overlay._keyHandler);
+}
+
+function presNavigate(dir) {
+  presSlideIndex = (presSlideIndex + dir + presAgents.length) % presAgents.length;
+  renderPresentation();
+}
+
+function presGoTo(i) {
+  presSlideIndex = i;
+  renderPresentation();
+}
+
+function closePresentation() {
+  const overlay = document.getElementById('pres-overlay');
+  if (overlay) {
+    document.removeEventListener('keydown', overlay._keyHandler);
+    overlay.remove();
+  }
+}
+
 // Handle hash routing for cards and decks
 function handleCardHash() {
   const hash = location.hash;
@@ -3222,6 +3488,123 @@ function handleCardHash() {
   }
 }
 window.addEventListener('hashchange', handleCardHash);
+
+// ═══════════════════════════════════════════════════════
+// Guided Tour
+// ═══════════════════════════════════════════════════════
+const TOUR_STEPS = [
+  {
+    target: '[data-tab="browse"]',
+    title: 'Browse Agents',
+    text: 'Discover 120+ single-file AI agents. Search, filter by category, sort by votes. Drag and drop .py files to add your own local agents.',
+    tab: 'browse'
+  },
+  {
+    target: '[data-tab="cards"]',
+    title: 'Agent Cards',
+    text: 'Every agent is a collectible card. Switch between Business and Creative views. Double-click any card to flip it. Build decks and share them.',
+    tab: 'cards'
+  },
+  {
+    target: '[data-tab="workbench"]',
+    title: 'Workbench',
+    text: 'Write agents directly in your browser. Real-time validation against the RAPP Constitution. Preview your agent as a card before publishing.',
+    tab: 'workbench'
+  },
+  {
+    target: '[data-tab="submit"]',
+    title: 'Submit Agents',
+    text: 'Publish your agent to the registry. Start from a template, paste your code, and submit. Your agent gets a namespace under your GitHub username.',
+    tab: 'submit'
+  },
+  {
+    target: '[data-tab="quality"]',
+    title: 'Quality Tiers',
+    text: 'Agents earn trust through tiers: Experimental, Community, Verified, Official. Higher tiers mean more review, more trust.',
+    tab: 'quality'
+  }
+];
+
+function startTour() {
+  if (document.getElementById('tour-overlay')) return;
+  let step = 0;
+
+  function showStep() {
+    // Clean up previous
+    document.getElementById('tour-overlay')?.remove();
+    document.getElementById('tour-highlight')?.remove();
+    document.getElementById('tour-tooltip')?.remove();
+
+    if (step >= TOUR_STEPS.length) {
+      localStorage.setItem('rar_tour_done', '1');
+      return;
+    }
+
+    const s = TOUR_STEPS[step];
+
+    // Switch to the right tab
+    if (s.tab) switchTab(s.tab);
+
+    // Wait a tick for DOM to update
+    setTimeout(() => {
+      const el = document.querySelector(s.target);
+      if (!el) { step++; showStep(); return; }
+      const rect = el.getBoundingClientRect();
+
+      // Overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'tour-overlay';
+      overlay.id = 'tour-overlay';
+      overlay.onclick = function() { endTour(); };
+      document.body.appendChild(overlay);
+
+      // Highlight box
+      const hl = document.createElement('div');
+      hl.className = 'tour-highlight';
+      hl.id = 'tour-highlight';
+      hl.style.cssText = `top:${rect.top - 4}px;left:${rect.left - 4}px;width:${rect.width + 8}px;height:${rect.height + 8}px;`;
+      document.body.appendChild(hl);
+
+      // Tooltip
+      const tt = document.createElement('div');
+      tt.className = 'tour-tooltip';
+      tt.id = 'tour-tooltip';
+
+      // Position tooltip below the target
+      let ttTop = rect.bottom + 16;
+      let ttLeft = rect.left;
+      // If too low, put above
+      if (ttTop + 200 > window.innerHeight) ttTop = rect.top - 200;
+      // Keep on screen
+      if (ttLeft + 360 > window.innerWidth) ttLeft = window.innerWidth - 380;
+      if (ttLeft < 16) ttLeft = 16;
+
+      tt.style.cssText = `top:${ttTop}px;left:${ttLeft}px;`;
+      tt.innerHTML = `
+        <div class="tour-dots">${TOUR_STEPS.map((_, i) => `<div class="tour-dot${i === step ? ' active' : ''}"></div>`).join('')}</div>
+        <h3>${s.title}</h3>
+        <p>${s.text}</p>
+        <div class="tour-btns">
+          <button onclick="endTour()">Skip</button>
+          ${step > 0 ? `<button onclick="tourPrev()">Back</button>` : ''}
+          <button class="primary" onclick="tourNext()">${step === TOUR_STEPS.length - 1 ? 'Done' : 'Next'}</button>
+        </div>
+      `;
+      document.body.appendChild(tt);
+    }, 100);
+  }
+
+  window.tourNext = function() { step++; showStep(); };
+  window.tourPrev = function() { step--; showStep(); };
+  window.endTour = function() {
+    document.getElementById('tour-overlay')?.remove();
+    document.getElementById('tour-highlight')?.remove();
+    document.getElementById('tour-tooltip')?.remove();
+    localStorage.setItem('rar_tour_done', '1');
+  };
+
+  showStep();
+}
 
 init().then(() => handleCardHash());
 loadSharedCart();
