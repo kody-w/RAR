@@ -939,6 +939,7 @@ document.documentElement.className = 'rar-guard';
   .holo-rarity.common { color: #78909c; }
   .holo-stats { font-weight: 800; font-size: .85rem; color: #e8dcc8; }
   .holo-artist { font-style: italic; color: #c9a84c; }
+  .holo-promo { color: #ffd700; font-weight: 700; font-size: .6rem; letter-spacing: .5px; }
   .holo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
   /* Holo border shimmer */
@@ -5070,7 +5071,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cResistance is futile. Your codebase will be added to our own.\u201d \u2014Borg Collective Directive 7.1",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-borg"><stop offset="0%" stop-color="#1a0a3e"/><stop offset="100%" stop-color="#080818"/></radialGradient><filter id="glow-borg"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-borg)"/><g filter="url(#glow-borg)"><rect x="55" y="55" width="90" height="90" fill="none" stroke="#4a9eff" stroke-width="2" rx="4"/><rect x="70" y="70" width="60" height="60" fill="none" stroke="#8b5cf6" stroke-width="1.5" rx="2"/><line x1="55" y1="100" x2="145" y2="100" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><line x1="100" y1="55" x2="100" y2="145" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><circle cx="100" cy="100" r="15" fill="#4a9eff" opacity="0.2"/><circle cx="100" cy="100" r="6" fill="#8b5cf6" opacity="0.9"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/borg_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/borg_agent"
   },
   "anvil": {
     name:"Anvil", title:"The Enforcer", mana_cost:"{1}{R}{W}", colors:["R","W"],
@@ -5082,7 +5083,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cI don't care what you think passed. Show me the output.\u201d \u2014Anvil",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-anvil"><stop offset="0%" stop-color="#2a0a0a"/><stop offset="100%" stop-color="#0a0808"/></radialGradient><filter id="glow-anvil"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-anvil)"/><g filter="url(#glow-anvil)"><polygon points="60,130 140,130 155,155 45,155" fill="#555" stroke="#888" stroke-width="1.5"/><rect x="75" y="105" width="50" height="25" rx="3" fill="#666" stroke="#999" stroke-width="1"/><rect x="85" y="85" width="30" height="20" rx="2" fill="#777" stroke="#aaa" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="25" stroke="#ff9800" stroke-width="2" opacity="0.9"/><circle cx="100" cy="25" r="3" fill="#ff9800"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/anvil_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/anvil_agent"
   },
   "personafactory": {
     name:"PersonaFactory", title:"The Shaper", mana_cost:"{3}{U}{G}", colors:["U","G"],
@@ -5093,7 +5094,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cShe spoke one sentence into the void. The void answered with a name and opinions about semicolons.\u201d \u2014Origin Log, Persona #37",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-pf"><stop offset="0%" stop-color="#0a2a2a"/><stop offset="100%" stop-color="#050f0f"/></radialGradient><filter id="glow-pf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-pf)"/><g filter="url(#glow-pf)"><circle cx="100" cy="55" r="20" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.8"/><polygon points="100,75 130,145 70,145" fill="none" stroke="#2196f3" stroke-width="2" opacity="0.7"/><circle cx="100" cy="100" r="50" fill="none" stroke="#00bcd4" stroke-width="1" opacity="0.3"/><circle cx="100" cy="55" r="8" fill="#4caf50" opacity="0.3"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/persona_factory_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/persona_factory_agent"
   },
   "tinyworld": {
     name:"TinyWorld", title:"The Architect", mana_cost:"{W}{U}{B}{R}{G}", colors:["W","U","B","R","G"],
@@ -5105,7 +5106,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cIn TinyWorld, your best ideas fight your worst ideas, and the survivors become your strategy.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-tw"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#08080f"/></radialGradient><filter id="glow-tw"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-tw)"/><g filter="url(#glow-tw)"><circle cx="100" cy="100" r="55" fill="none" stroke="#6a6aaa" stroke-width="1.5" opacity="0.5"/><ellipse cx="100" cy="100" rx="55" ry="20" fill="none" stroke="#6a6aaa" stroke-width="0.8" opacity="0.3"/><circle cx="100" cy="45" r="6" fill="#f9e076" opacity="0.9"/><circle cx="148" cy="80" r="6" fill="#0e67ab" opacity="0.9"/><circle cx="135" cy="135" r="6" fill="#3d3d3d" opacity="0.9"/><circle cx="65" cy="135" r="6" fill="#d3202a" opacity="0.9"/><circle cx="52" cy="80" r="6" fill="#00733e" opacity="0.9"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/tinyworld_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/tinyworld_agent"
   },
   "bridge": {
     name:"Bridge", title:"The Conduit", mana_cost:"{2}{U}", colors:["U"],
@@ -5116,7 +5117,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cIt doesn't matter where the message comes from \u2014 Slack, Discord, carrier pigeon. Bridge delivers.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-br"><stop offset="0%" stop-color="#0a1a2e"/><stop offset="100%" stop-color="#050a14"/></radialGradient><filter id="glow-br"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-br)"/><g filter="url(#glow-br)"><rect x="40" y="90" width="20" height="70" rx="3" fill="#1565c0" opacity="0.7"/><rect x="140" y="90" width="20" height="70" rx="3" fill="#1565c0" opacity="0.7"/><path d="M50,90 Q100,30 150,90" fill="none" stroke="#42a5f5" stroke-width="3" opacity="0.8"/><circle cx="50" cy="110" r="4" fill="#42a5f5" opacity="0.8"/><circle cx="150" cy="110" r="4" fill="#42a5f5" opacity="0.8"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/bridge_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/bridge_agent"
   },
   "telegram": {
     name:"Telegram", title:"The Courier", mana_cost:"{1}{U}{W}", colors:["U","W"],
@@ -5127,7 +5128,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cThe courier never reads the message. But if you send a URL, she'll make sure Borg reads it.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-tg"><stop offset="0%" stop-color="#0a1a2e"/><stop offset="100%" stop-color="#080810"/></radialGradient><filter id="glow-tg"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-tg)"/><g filter="url(#glow-tg)"><polygon points="40,100 160,60 120,110" fill="#0088cc" opacity="0.7" stroke="#29b6f6" stroke-width="1"/><polygon points="120,110 160,60 140,140" fill="#0077b5" opacity="0.6"/><circle cx="40" cy="100" r="3" fill="#29b6f6" opacity="0.6"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/telegram_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/telegram_agent"
   },
   "contextmemory": {
     name:"ContextMemory", title:"The Oracle", mana_cost:"{1}{G}{G}", colors:["G"],
@@ -5138,7 +5139,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cYou said that on a Tuesday. You were frustrated. I remember everything.\u201d \u2014The Oracle",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-cm"><stop offset="0%" stop-color="#0a1e0a"/><stop offset="100%" stop-color="#050a05"/></radialGradient><filter id="glow-cm"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-cm)"/><g filter="url(#glow-cm)"><ellipse cx="100" cy="100" rx="60" ry="30" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.7"/><ellipse cx="100" cy="100" rx="60" ry="30" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.3" transform="rotate(90 100 100)"/><circle cx="100" cy="100" r="4" fill="#66bb6a" opacity="0.9"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/context_memory_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/context_memory_agent"
   },
   "managememory": {
     name:"ManageMemory", title:"The Scribe", mana_cost:"{G}{W}", colors:["G","W"],
@@ -5148,7 +5149,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cThe Scribe writes. The Oracle reads. Between them, nothing is forgotten.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-mm"><stop offset="0%" stop-color="#0f1e0a"/><stop offset="100%" stop-color="#060a04"/></radialGradient><filter id="glow-mm"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-mm)"/><g filter="url(#glow-mm)"><rect x="55" y="50" width="80" height="100" rx="4" fill="#1b3a1b" stroke="#66bb6a" stroke-width="1.5" opacity="0.7"/><line x1="65" y1="70" x2="125" y2="70" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/><line x1="65" y1="82" x2="120" y2="82" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/><line x1="65" y1="94" x2="115" y2="94" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/manage_memory_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/manage_memory_agent"
   },
   "prompttovideo": {
     name:"PromptToVideo", title:"The Artificer", mana_cost:"{2}{R}", colors:["R"],
@@ -5159,7 +5160,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cWords go in. Cinema comes out. Don't ask how the Remotion furnace works.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-pv"><stop offset="0%" stop-color="#2a0a0a"/><stop offset="100%" stop-color="#0a0505"/></radialGradient><filter id="glow-pv"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-pv)"/><g filter="url(#glow-pv)"><circle cx="80" cy="90" r="35" fill="none" stroke="#f44336" stroke-width="2" opacity="0.7"/><rect x="110" y="105" width="50" height="35" rx="3" fill="#331111" stroke="#ff9800" stroke-width="1.5" opacity="0.7"/><polygon points="130,115 130,130 142,122" fill="#ff9800" opacity="0.7"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/prompt_to_video_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/prompt_to_video_agent"
   },
   "demovideo": {
     name:"DemoVideo", title:"The Director", mana_cost:"{2}{R}{U}", colors:["R","U"],
@@ -5170,7 +5171,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cClick. Type. Scroll. Zoom. The Director doesn't just record \u2014 she choreographs.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-dv"><stop offset="0%" stop-color="#1a0a1e"/><stop offset="100%" stop-color="#080510"/></radialGradient><filter id="glow-dv"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-dv)"/><g filter="url(#glow-dv)"><rect x="45" y="60" width="80" height="60" rx="5" fill="#1a1a2e" stroke="#e53935" stroke-width="2" opacity="0.8"/><circle cx="85" cy="90" r="20" fill="none" stroke="#1e88e5" stroke-width="2" opacity="0.7"/><circle cx="85" cy="90" r="5" fill="#e53935" opacity="0.6"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/demo_video_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/demo_video_agent"
   },
   "experiment": {
     name:"Experiment", title:"The Scientist", mana_cost:"{1}{U}{R}", colors:["U","R"],
@@ -5181,7 +5182,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cHypothesis: Mau is more verbose than HOLO. Method: Ask both. Result: Confirmed at p < 0.01.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-exp"><stop offset="0%" stop-color="#15101e"/><stop offset="100%" stop-color="#080510"/></radialGradient><filter id="glow-exp"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-exp)"/><g filter="url(#glow-exp)"><polygon points="70,65 130,65 140,155 60,155" fill="none" stroke="#9e9e9e" stroke-width="1.5" opacity="0.5"/><line x1="100" y1="65" x2="100" y2="155" stroke="#fff" stroke-width="1" opacity="0.3"/><rect x="70" y="65" width="30" height="90" fill="#1e88e5" opacity="0.2"/><rect x="100" y="65" width="30" height="90" fill="#e53935" opacity="0.2"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/experiment_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/experiment_agent"
   },
   "hackernews": {
     name:"HackerNews", title:"The Scout", mana_cost:"{1}", colors:[],
@@ -5191,7 +5192,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cThe Scout doesn't form opinions. The Scout reports what's trending.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-hn"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#0a0a0a"/></radialGradient><filter id="glow-hn"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-hn)"/><g filter="url(#glow-hn)"><circle cx="100" cy="100" r="60" fill="none" stroke="#9e9e9e" stroke-width="1.5" opacity="0.5"/><line x1="100" y1="100" x2="100" y2="45" stroke="#e0e0e0" stroke-width="2" opacity="0.8"/><line x1="100" y1="100" x2="135" y2="115" stroke="#bdbdbd" stroke-width="1.5" opacity="0.6"/><circle cx="100" cy="100" r="4" fill="#e0e0e0" opacity="0.9"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/hacker_news_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/hacker_news_agent"
   },
   "holonaming": {
     name:"HoloNaming", title:"The Admiral", mana_cost:"{2}{W}", colors:["W"],
@@ -5202,7 +5203,7 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cUSS Quantum-Defiant, you are cleared for port 8742. Engage.\u201d \u2014Admiral, Starfleet Naming Authority",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-hn2"><stop offset="0%" stop-color="#141428"/><stop offset="100%" stop-color="#08081a"/></radialGradient><filter id="glow-hn2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-hn2)"/><g filter="url(#glow-hn2)"><path d="M100,40 L130,110 L100,95 L70,110 Z" fill="#ffd700" opacity="0.3" stroke="#ffd700" stroke-width="1.5"/><polygon points="100,50 104,62 116,62 106,70 110,82 100,74 90,82 94,70 84,62 96,62" fill="#fff" opacity="0.7"/></g></svg>',
-    set_code:"PROMO", artist:"Howard Hoy", agent_name:"@borg/holo_naming_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/holo_naming_agent"
   }
 };
 
@@ -6006,6 +6007,7 @@ function agentToCard(a) {
   const holoSetCode = holo?.set_code || 'HOLO';
   const holoRarity = holo?.rarity || rarity;
   const holoArtist = holo?.artist || '';
+  const holoPromo = holo?.promo || false;
   const agentHaiku = getAgentHaiku(a);
   const cred = _cardCredentials.get(a.name);
   const trustBadge = cred
@@ -6063,7 +6065,7 @@ function agentToCard(a) {
         <div class="holo-flavor">${esc(flavor)}</div>
       </div>
       <div class="holo-footer">
-        <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)} &bull; ${holoRarity.charAt(0).toUpperCase() + holoRarity.slice(1)}${holoArtist ? ` &bull; <span class="holo-artist">${esc(holoArtist)}</span>` : ''}</span>
+        <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)}${holoPromo ? ' <span class="holo-promo">&#9733; Promo</span>' : ''} &bull; ${holoRarity.charAt(0).toUpperCase() + holoRarity.slice(1)}${holoArtist ? ` &bull; <span class="holo-artist">${esc(holoArtist)}</span>` : ''}</span>
         <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:#ffd700' : 'color:#5a4a2a'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? '&#9733;' : '&#9734;'}</span>
         ${power != null && toughness != null ? `<span class="holo-stats">${power}/${toughness}</span>` : ''}
       </div>
