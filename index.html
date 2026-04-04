@@ -677,18 +677,57 @@ document.documentElement.className = 'rar-guard';
   .ac-rarity.common { color: #78909c; }
   .ac-stats { font-weight: 800; font-size: .85rem; }
 
-  /* Back of card */
-  .ac-back-logo { font-size: 2rem; font-weight: 900; margin-bottom: 8px; opacity: .3; }
-  .ac-qr { margin: 12px 0; }
-  .ac-qr img { width: 140px; height: 140px; border-radius: 8px; }
-  .ac-back-name { font-size: .85rem; font-weight: 600; text-align: center; margin-top: 8px; }
-  .ac-back-hint { font-size: .7rem; color: var(--text-muted); text-align: center; }
-  .ac-back-actions { display: flex; gap: 8px; margin-top: 12px; }
-  .ac-back-actions button {
-    background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
-    padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: .75rem; transition: all .15s;
+  /* Back of card — universal design like Pokemon/MTG card backs */
+  .agent-card-back {
+    background: linear-gradient(180deg, #1a1510 0%, #2a2418 30%, #1a1510 70%, #0f0c08 100%) !important;
+    border-color: #8b7332 !important;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; position: absolute; inset: 0; border-radius: 12px;
+    backface-visibility: hidden; transform: rotateY(180deg);
+    overflow: hidden; border: 2px solid #8b7332;
   }
-  .ac-back-actions button:hover { border-color: var(--accent); color: var(--accent); }
+  .agent-card-back::before {
+    content: ''; position: absolute; inset: 8px; border-radius: 8px;
+    border: 1px solid rgba(139,115,50,.4);
+    background: radial-gradient(ellipse at center, rgba(139,115,50,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .agent-card-back::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-conic-gradient(
+      rgba(139,115,50,.03) 0deg 10deg,
+      transparent 10deg 20deg
+    );
+    opacity: .5;
+  }
+  .ac-back-logo {
+    font-size: 1.4rem; font-weight: 900; letter-spacing: 3px;
+    color: #8b7332; opacity: .6; text-transform: uppercase;
+    position: relative; z-index: 1; margin-bottom: 8px;
+  }
+  .ac-qr { margin: 10px 0; position: relative; z-index: 1; }
+  .ac-qr img {
+    width: 120px; height: 120px; border-radius: 8px;
+    border: 2px solid rgba(139,115,50,.4); padding: 4px;
+    background: #0d0a06;
+  }
+  .ac-back-name {
+    font-size: .78rem; font-weight: 600; text-align: center;
+    color: #c8b89a; margin-top: 6px; position: relative; z-index: 1;
+  }
+  .ac-back-hint {
+    font-size: .6rem; color: #6a5d4a; text-align: center;
+    position: relative; z-index: 1;
+  }
+  .ac-back-actions {
+    display: flex; gap: 6px; margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+  .ac-back-actions button {
+    background: rgba(42,36,24,.8); border: 1px solid rgba(139,115,50,.4); color: #c8b89a;
+    padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: .7rem; transition: all .15s;
+  }
+  .ac-back-actions button:hover { border-color: #c9a84c; color: #e8dcc8; }
 
   /* Card mode toggle */
   .card-mode-toggle {
@@ -5983,14 +6022,12 @@ function agentToCard(a) {
   const qrImgHtml = `<div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
        <div class="ac-back-hint">Scan to download agent.py${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
-    <div class="agent-card-back" style="border-color:${cc.border}">
-      <div class="ac-back-logo">RAR</div>
+    <div class="agent-card-back">
+      <div class="ac-back-logo">RAPP</div>
       ${qrImgHtml}
       <div class="ac-back-name">${esc(a.display_name)}</div>
       <div class="ac-back-actions">
         <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
-        <button onclick="event.stopPropagation();exportCardPNG('${esc(a.name)}')">Export</button>
-        <button onclick="event.stopPropagation();open3DViewer('${esc(a.name)}')">3D</button>
         <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
       </div>
     </div>`;
@@ -6046,7 +6083,7 @@ function agentToCard(a) {
   return `
   <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ${canFlip ? `onclick="this.classList.toggle('flipped')"` : `onclick="openAgent('${esc(a.name)}')"`}>
     ${front}
-    ${back ? `<div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg)">${back}</div>` : ''}
+    ${back || ''}
   </div>`;
 }
 
