@@ -1,7 +1,7 @@
 {
   "index": 37,
   "timestamp": "2026-04-04T00:00:37.000Z",
-  "prevHash": "4a1dbfaa0f593863a85f8f61ffb646aa927a825207a3f6cdfe17c63f4b1fb307",
+  "prevHash": "a99445b3d217990e543879c52f4615a066f08c66f47048ffc118f855c61f4b3b",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-cart-abandonment-recovery-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "6c540f52192e153f2eefe9b3171c4e5bc2abc63dc4220ef2f81a8cd64b68f1eb"
+  "hash": "24b63b1434a9867075f8b73822e73d6a0c45e6bcffcedbf19ccf9154ecb6a798"
 }

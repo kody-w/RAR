@@ -1,7 +1,7 @@
 {
   "index": 138,
   "timestamp": "2026-04-04T00:02:18.000Z",
-  "prevHash": "9a38ca5fdd1a39a45940ce2394016b55c52d225abe58898a1871979104ffa347",
+  "prevHash": "e91466862ea54c95d751d16babec691a38efab69c25de5e84f9d355272a32c01",
   "type": "forge",
   "data": {
     "mintId": "CORE--rapp-basic-agent-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "43dff72970246ac6086eebe5c0d98e9e1c414863dfed82be2e3e65bc572fafcd"
+  "hash": "e421af139b24407a80fd849282e1d4b3301aee776a98193577dff09ab63b25fb"
 }

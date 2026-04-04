@@ -1,7 +1,7 @@
 {
   "index": 84,
   "timestamp": "2026-04-04T00:01:24.000Z",
-  "prevHash": "69e217f3cdc82448cf09c3c0de879c53961fdcb1ccbb5540badeebcbcb52def1",
+  "prevHash": "c3554f2e6b5a0c0d1a3a18bd15dbceea8251da5493381f705c086fcd231a8f72",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-sharepoint-document-extractor-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "2c416beca366d86afb0da38ea0630a606c59d3c90ed02099c37b4c9a61684214"
+  "hash": "92a9abe178e6d1d69f1dcc6df8c95fe54db3b0ddc14cf22d7879afe8fbdccc7e"
 }

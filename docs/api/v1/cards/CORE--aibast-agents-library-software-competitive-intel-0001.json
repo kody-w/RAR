@@ -1,7 +1,7 @@
 {
   "index": 113,
   "timestamp": "2026-04-04T00:01:53.000Z",
-  "prevHash": "01ad88529566001c1f5d7c985b2e79d9e9e5b1648db93c07e982b9593b13abd6",
+  "prevHash": "d8337cac58d423cd859531e533428adf65d84d9ad2f789045ef3a81e68f2a298",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-software-competitive-intel-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "c99eed597ccd1f88a6890d2c935af0fde61ecb93a5f6ec8a055840c8806f3f16"
+  "hash": "8f6cec53cc8bb5d8df91f24311cb8d3daf4bd9873d1a7b3b88d343e3a89abb7d"
 }

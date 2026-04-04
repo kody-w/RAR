@@ -1,7 +1,7 @@
 {
   "index": 30,
   "timestamp": "2026-04-04T00:00:30.000Z",
-  "prevHash": "cce1a8af45ee6b8be78d291910da2b25f2e63adc976e5eef85de4d74130bb570",
+  "prevHash": "5b9e10155cf77b4bb760730137b2163d5e66c5129fa51130abebc7f7ff60fac5",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-revenue-forecast-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "47f50c226aa69436537a17b5883263b295ec71ddccf92762f817d5b4ea11197a"
+  "hash": "22107d38689a2d7d30ffc171d851cd11e25b8ffbe761a31c9b3a48c215d1b201"
 }

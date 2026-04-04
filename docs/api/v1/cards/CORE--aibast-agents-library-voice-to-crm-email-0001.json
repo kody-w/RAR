@@ -1,7 +1,7 @@
 {
   "index": 83,
   "timestamp": "2026-04-04T00:01:23.000Z",
-  "prevHash": "b6fae4c22ee467aac76f7eabbe9d91986ed58fcee9f02d407729e1401419d2e0",
+  "prevHash": "3824ba66904168798af987c3519ac75e205e05e3fa84a45b9a6be1e26c3ea947",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-voice-to-crm-email-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "69e217f3cdc82448cf09c3c0de879c53961fdcb1ccbb5540badeebcbcb52def1"
+  "hash": "c3554f2e6b5a0c0d1a3a18bd15dbceea8251da5493381f705c086fcd231a8f72"
 }

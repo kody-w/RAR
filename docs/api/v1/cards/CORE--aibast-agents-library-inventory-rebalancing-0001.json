@@ -1,7 +1,7 @@
 {
   "index": 93,
   "timestamp": "2026-04-04T00:01:33.000Z",
-  "prevHash": "d4fd21eed5ba3d90a1169a77bd583eb8b39cdf03c2db56390a81de468c4e8d58",
+  "prevHash": "c613e6d893dd84f604f6d8b2db2262efbcc0621ee399bec957bf3c6c9379a78f",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-inventory-rebalancing-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "40e96fa2ddd8adfca0068569f85b333e55a13d6b98b0a65beacd11133fa467f5"
+  "hash": "f1b8afbb2927aeeb767cd2bde54d34959f93acc86e91c0596c7d50c27d24a6dd"
 }

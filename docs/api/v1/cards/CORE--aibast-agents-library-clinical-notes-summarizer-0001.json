@@ -1,7 +1,7 @@
 {
   "index": 87,
   "timestamp": "2026-04-04T00:01:27.000Z",
-  "prevHash": "adc39d875cf19b5e20dfcfb4a13c66590b0cfd517ea41ee7713c3702a5a6e4a2",
+  "prevHash": "9584ad74681d855cc9c7dd5a73a1f00f7089da19f357906c4ca5c1d776a14537",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-clinical-notes-summarizer-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "d0dc4538d14bd740af8a8e6834886a29db0a94b8b5bd6834bc219edb45759403"
+  "hash": "2afa0719b4f8b45ceb002c2af32c13ac329c12e811d521d00d8bbb6ccff286eb"
 }

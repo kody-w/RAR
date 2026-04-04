@@ -1,7 +1,7 @@
 {
   "index": 67,
   "timestamp": "2026-04-04T00:01:07.000Z",
-  "prevHash": "9f49078d233411d5c90587698df50b6cbd838fb38d5aaba5ba15217c4272d51e",
+  "prevHash": "a668f40af3bdd2a03f36e3b7a38e42696aafc96985dc405f2f33c72f5e7c4a55",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-dynamics-365-connector-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "02a59861610a4b3cedf53c2bc91e5f5775d59e285cb19add22a56100b2cd0e53"
+  "hash": "2b58876533892e2754fcdf928f1960d0c0c4665bbfe6f89ee87b368ac96fa207"
 }

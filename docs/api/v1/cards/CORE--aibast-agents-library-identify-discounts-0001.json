@@ -1,7 +1,7 @@
 {
   "index": 73,
   "timestamp": "2026-04-04T00:01:13.000Z",
-  "prevHash": "2ee627532549e4c42fe2aefe08747d8db20ed3a41810a64ef2d47bd72d40d468",
+  "prevHash": "bdc5c2efe7a140c24b045057bed6dc92401f4e48e71f5f34ca67850197e1d2e4",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-identify-discounts-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "46ec0914338414700c4dc3b7ce63f05c019e585b9ca7a6c098fc21bec4cdb4d5"
+  "hash": "34b30839d2fed26587c486de7ec675d696a9fa8438e3f38504651e29b17f65b9"
 }

@@ -1,7 +1,7 @@
 {
   "index": 38,
   "timestamp": "2026-04-04T00:00:38.000Z",
-  "prevHash": "6c540f52192e153f2eefe9b3171c4e5bc2abc63dc4220ef2f81a8cd64b68f1eb",
+  "prevHash": "24b63b1434a9867075f8b73822e73d6a0c45e6bcffcedbf19ccf9154ecb6a798",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-customer-360-speech-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "a7e4f959717ef3a056f476f03d72eb8face0de7567ac8589d1f02711dea8fa0d"
+  "hash": "3f6dde4c6db9da8cfd5f6d30055e17167fbdca93325153f980bab3e56902b5a5"
 }

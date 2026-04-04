@@ -1,7 +1,7 @@
 {
   "index": 127,
   "timestamp": "2026-04-04T00:02:07.000Z",
-  "prevHash": "dac0e19fe0a956dda63c2737063e33bf3e56c0b255804c427a589a5f2332b9a2",
+  "prevHash": "1ec8779fce93c71c4ac957591f92f22b49c80e623ab3b94d1b21719f05942f7a",
   "type": "forge",
   "data": {
     "mintId": "CORE--discreetRappers-powerpoint-generator-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "4385883b414dee5b186481688609a6c1aee71616f38cf48967fc35647a6cc0cf"
+  "hash": "dbbf27a1ef096260db2d3a4acbac5b24494b4a3355170370ab4361d46e331f53"
 }

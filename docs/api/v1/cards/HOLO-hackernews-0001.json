@@ -1,7 +1,7 @@
 {
   "index": 12,
   "timestamp": "2026-04-04T00:00:12.000Z",
-  "prevHash": "c54f75abd7c07e033ea4842f133b727fea82d9f3abccd0aae8bca50992bc3ea5",
+  "prevHash": "f4a21b3f68bd55c4ed7409f12b8a809dd675155f5aaf67c7c3f6783073157f9b",
   "type": "forge",
   "data": {
     "mintId": "HOLO-hackernews-0001",
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "hash": "f6d05f76b1a4cc564800631304cae4acdc7a51b368a09aa3d6f9e5657c2be8ae"
+  "hash": "d1e7f0b0f8f1e2913a192ef6e64878afb07ec7ace602dc8da394798d297631e6"
 }

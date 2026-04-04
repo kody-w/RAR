@@ -1,7 +1,7 @@
 {
   "index": 130,
   "timestamp": "2026-04-04T00:02:10.000Z",
-  "prevHash": "f015a6200984872264143fb658205877619f3d117dd595882f2c359e261ea6bd",
+  "prevHash": "bd7e5cb10825f42f20866e02adcd5f38f0b29daae0b583010569ff8231eb5bfd",
   "type": "forge",
   "data": {
     "mintId": "CORE--discreetRappers-sales-assistant-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "6963b3d221ea4434a61108e93fa7af3422f457e88562c2a723552c770995f7c6"
+  "hash": "b5602f49b1e2404cad5b47ecaa6dd6b6df848d64e24f29905988f5a3cf0fae6b"
 }

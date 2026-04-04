@@ -1,7 +1,7 @@
 {
   "index": 47,
   "timestamp": "2026-04-04T00:00:47.000Z",
-  "prevHash": "a37a4510db64e322c8918d76303c335368835f0ad5e40d3dbc712c6063d7c8a1",
+  "prevHash": "785db4a5839578ab5ef0886f96ded7c4ac921399b9ea4ae9b921e0310646815c",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-permit-license-management-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "1545403adb92c6a3215945416cf5e10edb040013cf10bcc85305c1748df5fcf2"
+  "hash": "0985cd81eadc0f91ae2e02bc58bb94d270b9d9f927efe17b09f7716e2907ae6b"
 }

@@ -1,7 +1,7 @@
 {
   "index": 64,
   "timestamp": "2026-04-04T00:01:04.000Z",
-  "prevHash": "776c562d5c048ea2cefeea45c4adaf4f93ad6ea089eabc6e5f54b6195ccf4042",
+  "prevHash": "6371bafc3fbfaac05a9c7db098d920e82ea4dd711d4a91e1968231086fb5c9c2",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-ai-customer-assistant-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "a7c153b40fad43700b05c6b78994007c0504701767fce5dac50695ed6a645268"
+  "hash": "b165022fa06159a3fc4e5439acad99880e482cb13aeb25fee6c6f516ad0e37f4"
 }

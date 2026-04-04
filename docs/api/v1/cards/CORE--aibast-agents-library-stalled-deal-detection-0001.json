@@ -1,7 +1,7 @@
 {
   "index": 32,
   "timestamp": "2026-04-04T00:00:32.000Z",
-  "prevHash": "d00298df7faeb29bf3e1a14bb6b94570d301e8772e2799ae02a953700b8978db",
+  "prevHash": "58754203c6e112de278d035adfdf9403e28fbef053c9e13c96c89365d27ecb34",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-stalled-deal-detection-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "5a6370a57591e3e627da775fe3c5ff94b8052a741403e44d750925f749f8f5db"
+  "hash": "60d8c1ae4b8fadde25fe1ac9607c47c5d7941ceee91d4fc9360d6ed768f340b9"
 }

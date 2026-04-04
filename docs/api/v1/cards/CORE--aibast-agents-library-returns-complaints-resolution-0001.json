@@ -1,7 +1,7 @@
 {
   "index": 105,
   "timestamp": "2026-04-04T00:01:45.000Z",
-  "prevHash": "e566cc07fb7e55c46f69b45c970c108b9a7b617b3079aa1b0effd9e2a6777eca",
+  "prevHash": "08d213697102644674a26aa50392b1a94d2dbd3d4375d5ae4c6fd1f5df8659d2",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-returns-complaints-resolution-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "7b1ae8e386653739ecada42cf80dcadc7298e3fc8bdd34de83ce87b7e719b7c2"
+  "hash": "9bfa8bd1d5a32f24286f2704fb71267be3951591582ff13469f4dd8e4acef1fe"
 }

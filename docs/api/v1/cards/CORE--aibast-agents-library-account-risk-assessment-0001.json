@@ -1,7 +1,7 @@
 {
   "index": 21,
   "timestamp": "2026-04-04T00:00:21.000Z",
-  "prevHash": "ab42bd13863886884b0b46672cd1e8d562ec8dceb264aa3e6a243bdecc15b746",
+  "prevHash": "c9fb44a7741c515c25509245ef14817f10acdd57049119cb05aced51042cb27e",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-account-risk-assessment-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "c1b3087fb0e2622d6e1ca38701ca4f094566bb4c99d727655be094722c8edfdb"
+  "hash": "94697088e7a9874f3f470e39d09bd75270b67e3befea414f6c18bd81facf1d16"
 }

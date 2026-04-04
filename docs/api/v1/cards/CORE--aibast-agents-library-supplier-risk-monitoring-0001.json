@@ -1,7 +1,7 @@
 {
   "index": 97,
   "timestamp": "2026-04-04T00:01:37.000Z",
-  "prevHash": "0d14a5a08c375890101cb903a2c6efec6bf074714ae0a9eb8f531451ed67e8b4",
+  "prevHash": "d4f5793debe977b5b4ce55db58dc45b3c583777f72b9530dadc45956babee822",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-supplier-risk-monitoring-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "b1bc1363c845cc968118d8174e2a6d5cfff3448b844fb2d0164f6bcabc78fdb5"
+  "hash": "572db85f8f9e20119855f660f680e01f1317c6638ab2b635601a6e96f76fdb1e"
 }

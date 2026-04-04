@@ -1,7 +1,7 @@
 {
   "index": 80,
   "timestamp": "2026-04-04T00:01:20.000Z",
-  "prevHash": "f2991da3f7518a31af77ec10850d61971692e342b9f992cf631e81b0f2348700",
+  "prevHash": "cabf7331c4d0878b7b8c01441fea29184f20d8b19b1fe5b39846d8bed475436a",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-speech-to-crm-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "ebf3f017167b3520b56097e9ba5ff1a55c4fa549f5c79679e4b20c17f2008efd"
+  "hash": "ea97653aa14214ea59ffe1c0e80c87cd5e9d4f53cf04dd051666de66bc147ae3"
 }

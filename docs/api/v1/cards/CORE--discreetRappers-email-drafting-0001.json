@@ -1,7 +1,7 @@
 {
   "index": 126,
   "timestamp": "2026-04-04T00:02:06.000Z",
-  "prevHash": "7523a8e20d510a3e09d0017434e8dc3d8881fcb311aabb6fb2f240a70e6f6218",
+  "prevHash": "007107859f718bfeb96be5607975a51d0d01c0cd97bda8e54c8ef6202ceb55a8",
   "type": "forge",
   "data": {
     "mintId": "CORE--discreetRappers-email-drafting-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "dac0e19fe0a956dda63c2737063e33bf3e56c0b255804c427a589a5f2332b9a2"
+  "hash": "1ec8779fce93c71c4ac957591f92f22b49c80e623ab3b94d1b21719f05942f7a"
 }

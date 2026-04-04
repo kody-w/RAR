@@ -1,7 +1,7 @@
 {
   "index": 86,
   "timestamp": "2026-04-04T00:01:26.000Z",
-  "prevHash": "26324b440b440ef6302099722f1c8f51354a5e1fcc98a13122211293e0e5785a",
+  "prevHash": "a6b82f0ad4f99300e9f9126bc25c8271ff2ab0218206ad563bb31d209116fc1c",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-care-gap-closure-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "adc39d875cf19b5e20dfcfb4a13c66590b0cfd517ea41ee7713c3702a5a6e4a2"
+  "hash": "9584ad74681d855cc9c7dd5a73a1f00f7089da19f357906c4ca5c1d776a14537"
 }

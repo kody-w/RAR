@@ -1,7 +1,7 @@
 {
   "index": 68,
   "timestamp": "2026-04-04T00:01:08.000Z",
-  "prevHash": "02a59861610a4b3cedf53c2bc91e5f5775d59e285cb19add22a56100b2cd0e53",
+  "prevHash": "2b58876533892e2754fcdf928f1960d0c0c4665bbfe6f89ee87b368ac96fa207",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-one-click-crm-intake-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "70b40da20f21172570a39ac42073ccb27e078a8e1e93a33d7abaa7425ea98839"
+  "hash": "e257a270d0ea29eee562531f9387047dcecf740588be54a24f0d8d2dbc1aa418"
 }

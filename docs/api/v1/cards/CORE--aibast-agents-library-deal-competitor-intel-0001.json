@@ -1,7 +1,7 @@
 {
   "index": 24,
   "timestamp": "2026-04-04T00:00:24.000Z",
-  "prevHash": "48d04716797d63b6bc084715dcc9146f4f6fd1ecf30f26f2fe690136ef9dceda",
+  "prevHash": "93522d7a23cc91f0ea14638d95de0be253fb501d553cf5095d137cd45ae25859",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-deal-competitor-intel-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "af1808714bad3147454b013bf0da45e25c1531c518828df59f54d66f910d5268"
+  "hash": "07f1fee78083b179d0d082be8611fee0a83fa2b5c109524d7480d5e5ecbe503c"
 }

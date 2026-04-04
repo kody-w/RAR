@@ -1,7 +1,7 @@
 {
   "index": 98,
   "timestamp": "2026-04-04T00:01:38.000Z",
-  "prevHash": "b1bc1363c845cc968118d8174e2a6d5cfff3448b844fb2d0164f6bcabc78fdb5",
+  "prevHash": "572db85f8f9e20119855f660f680e01f1317c6638ab2b635601a6e96f76fdb1e",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-client-health-score-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "bf5ce370068dc002b606da3525317b1aaffe03219c96a61376801c138e356c31"
+  "hash": "03d17a8275d0e5532195323d60e437104b10bf0363c2d67fcf3e165dba95ccba"
 }

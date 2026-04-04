@@ -1,7 +1,7 @@
 {
   "index": 41,
   "timestamp": "2026-04-04T00:00:41.000Z",
-  "prevHash": "8e43c06b2d27a17ae65386f604e194dd0f5971bc8062c92653654518cfef44bc",
+  "prevHash": "d6c6713a5c3163b19a7cdbb74da1750f2fd3a49cadb754f1ce93af008405c28b",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-personalized-shopping-assistant-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "2a6e00f1639358d88b3a0c22a31db60d38f9702d2c52239e41308cba2d4d0b03"
+  "hash": "059c66d489a0e52f3020fafa547e5cd63ea93b71c14bb851909111c0e492b9d1"
 }

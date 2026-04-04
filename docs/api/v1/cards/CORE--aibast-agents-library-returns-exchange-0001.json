@@ -1,7 +1,7 @@
 {
   "index": 42,
   "timestamp": "2026-04-04T00:00:42.000Z",
-  "prevHash": "2a6e00f1639358d88b3a0c22a31db60d38f9702d2c52239e41308cba2d4d0b03",
+  "prevHash": "059c66d489a0e52f3020fafa547e5cd63ea93b71c14bb851909111c0e492b9d1",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-returns-exchange-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "d5e9c65e8bedda58c0b5e0b0716971f441cca0d4398b80c80f68f412503343e1"
+  "hash": "7c0f87385030deb7bb51cda15052b1e271312ce11195c5a3fa77a21b7a2a219a"
 }

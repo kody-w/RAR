@@ -1,7 +1,7 @@
 {
   "index": 17,
   "timestamp": "2026-04-04T00:00:17.000Z",
-  "prevHash": "9a4c77f0934f128ade0058c83ea7de0b7aabc2dfaaf8bea819bbeda76250e575",
+  "prevHash": "934260040cd5cdc98f3caf62c578ab9c3bf750bda5d061d7f04b23ff602a9396",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-competitive-intelligence-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "fd0602382e433d6079cf81edcc5a5652f13f88e16ff8b6d23bb2cbce94524056"
+  "hash": "972404f4fd0be913f5e99e2fe2ab76a84748943b2cb2728cc2fae4fa8e548ff3"
 }

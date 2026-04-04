@@ -1,7 +1,7 @@
 {
   "index": 40,
   "timestamp": "2026-04-04T00:00:40.000Z",
-  "prevHash": "c17724faa5318912485eb9084109431ea0abcbf26efa1272aff0e0075cac3262",
+  "prevHash": "972986a0bbf637e1ec66a2ac1ca4920fc497a056359c1b95f26bda4b809ed6ae",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-omnichannel-engagement-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "8e43c06b2d27a17ae65386f604e194dd0f5971bc8062c92653654518cfef44bc"
+  "hash": "d6c6713a5c3163b19a7cdbb74da1750f2fd3a49cadb754f1ce93af008405c28b"
 }

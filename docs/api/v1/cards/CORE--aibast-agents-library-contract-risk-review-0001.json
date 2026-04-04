@@ -1,7 +1,7 @@
 {
   "index": 99,
   "timestamp": "2026-04-04T00:01:39.000Z",
-  "prevHash": "bf5ce370068dc002b606da3525317b1aaffe03219c96a61376801c138e356c31",
+  "prevHash": "03d17a8275d0e5532195323d60e437104b10bf0363c2d67fcf3e165dba95ccba",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-contract-risk-review-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "ddce70c07004ae27b9f2de09c74590f666dafd97c3a37d1d3c449002a7c615cf"
+  "hash": "58d57d7d890874639e2151b317511445069830f4600e19fe6895c3fb6dddf5fe"
 }

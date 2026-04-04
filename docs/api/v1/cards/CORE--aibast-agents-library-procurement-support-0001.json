@@ -1,7 +1,7 @@
 {
   "index": 76,
   "timestamp": "2026-04-04T00:01:16.000Z",
-  "prevHash": "eab3440d3d57cfcffc967e2e539dad28edf6493373f91c39045897eee8a6746d",
+  "prevHash": "c1996a7e2ec6cc4e5494f58bbe34c90c06603f1f6a99686bd5c41174616cbf37",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-procurement-support-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "994a1977cf4151e50f279f0be034051055af9252d5d204bd1c2beff62c8599f7"
+  "hash": "a3385b18bef923e5415dbd06ba65bbad62f1d7e1e0a95ae8e5bf54863f4f9167"
 }

@@ -1,7 +1,7 @@
 {
   "index": 27,
   "timestamp": "2026-04-04T00:00:27.000Z",
-  "prevHash": "317652fa6cb6ce30bd30f2f82c8f9a64975d96923c77754fa71314bd48687916",
+  "prevHash": "dc53695210be3efda3d56c6684440dc6623b6665002b3e829cd40e4c4e9debb6",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-deal-risk-assessment-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "9a7711bbf841114a3df46e72a9a84506704fc5b8923c8ff3c07e8ac6236e04b3"
+  "hash": "a74993b6eec359146920da8c9bd0c1b0b5ad738952891126ee74f1013355f6a5"
 }

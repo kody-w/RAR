@@ -12175,6 +12175,8 @@ async function verifyCardCredential(credential) {
 // ══════════════════════════════════════════════════════════════════════
 
 const RAR_CHAIN_API = 'https://kody-w.github.io/RAR/api/v1';
+const GOD_BINDER = 'ba4e91c3ba4b737a0b04edac19e017caeb0e0701'; // Kody — weight-3 vote, automatic majority
+const GOD_WEIGHT = 3; // Always overrules: 3 > any combination of weight-1 votes in 3-of-5
 let _chainState = null;    // cached chain-state.json
 let _cardChainIndex = null; // cached card-index.json (mintId → block info)
 let _binderLinked = false;  // whether this Binder has claimed genesis allocation
@@ -12309,6 +12311,17 @@ async function getForgeStatus(card) {
   return { ...result, chainMintId };
 }
 
+// ── Check if current Binder is the Architect (god mode) ──
+function isArchitect() {
+  return getBinderAddress() === GOD_BINDER;
+}
+
+// ── Consensus check: does this Binder have enough weight to forge solo? ──
+function canForgeSolo(binderAddress) {
+  if (binderAddress === GOD_BINDER) return true; // weight-3 = automatic majority
+  return false; // everyone else needs multi-node consensus
+}
+
 // ── Sign a card with your Binder (proves you hold the private key) ──
 async function signCardWithBinder(mintId) {
   if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
@@ -12386,7 +12399,8 @@ async function renderBinderBadge() {
   }
   const state = await loadChainState();
   const cardCount = state ? '| Chain: ' + state.totalForged + ' cards' : '';
-  badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Binder</span> <span class="binder-label" style="color:#58a6ff;font-family:monospace">${formatBinderAddress(addr)}</span> <span style="color:#484f58">${cardCount}</span>`;
+  const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span>' : '';
+  badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Binder</span> <span class="binder-label" style="color:#58a6ff;font-family:monospace">${formatBinderAddress(addr)}</span>${archLabel} <span style="color:#484f58">${cardCount}</span>`;
 }
 
 // Sign an arbitrary payload (for flicks, deck shares, etc.)
