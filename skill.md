@@ -214,14 +214,171 @@ User: "Install the dynamics agent"
 
 ---
 
-## Contributing
+## Contributing — How to Submit an Agent
 
-New agents follow this structure:
-```
-agents/@yourname/my-agent.py
+### For AI Agents: Autonomous Contribution Workflow
+
+If you are an AI agent helping a contributor, follow these steps exactly.
+
+#### Step 1: Write the agent file
+
+Create a single `.py` file. Everything goes in one file — no manifest.json, no README, no subdirectories.
+
+File path: `agents/@yournamespace/agent-slug.py`
+
+The file MUST contain a `__manifest__` dict and a class that inherits `BasicAgent`.
+
+```python
+"""
+My Agent — One-line description.
+
+Longer description of what this agent does.
+"""
+
+# ═══════════════════════════════════════════════════════════════
+# RAPP AGENT MANIFEST — Do not remove. Used by registry builder.
+# ═══════════════════════════════════════════════════════════════
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@yournamespace/agent-slug",
+    "version": "1.0.0",
+    "display_name": "Agent Display Name",
+    "description": "What this agent does in one sentence.",
+    "author": "Your Name",
+    "tags": ["keyword1", "keyword2"],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+# ═══════════════════════════════════════════════════════════════
+
+from agents.basic_agent import BasicAgent
+
+
+class MyAgent(BasicAgent):
+    def __init__(self):
+        self.name = __manifest__["display_name"]
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input": {
+                        "type": "string",
+                        "description": "Input parameter"
+                    }
+                },
+                "required": ["input"]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs):
+        input_data = kwargs.get('input', '')
+        return f"Result: {input_data}"
 ```
 
-See CONTRIBUTING.md for full guide.
+#### Step 2: Submit via GitHub Issue
+
+You do NOT need push access. Open a GitHub Issue on `kody-w/RAR` with this exact format:
+
+```
+Title: [AGENT] @yournamespace/agent-slug
+
+Body:
+The full contents of your agent.py file, pasted directly into the issue body.
+```
+
+The RAR automation pipeline (`scripts/process_issues.py`) will:
+1. Parse the `__manifest__` from your code
+2. Create the file at `agents/@yournamespace/agent-slug.py`
+3. Rebuild `registry.json`
+4. Auto-close the issue with a confirmation comment
+
+That's it. No fork, no PR, no CLI tools needed.
+
+#### Step 3 (optional): Submit via PR
+
+If you prefer a pull request:
+
+```
+1. Fork kody-w/RAR
+2. Create: agents/@yournamespace/agent-slug.py
+3. Run:    python build_registry.py (must pass)
+4. PR:     Open pull request to main
+```
+
+### Rules
+
+1. **Single file** — everything in one `.py` file
+2. **Inherits BasicAgent** — `from agents.basic_agent import BasicAgent`
+3. **Returns a string** — `perform()` always returns a string
+4. **No secrets in code** — use `os.environ.get()`, declare in `requires_env`
+5. **Works offline** — handle missing env vars gracefully (return error, don't crash)
+6. **No network calls in `__init__`** — keep constructor fast
+
+### Namespace Registry
+
+| Namespace | Owner | Focus |
+|-----------|-------|-------|
+| `@rapp` | Reserved | Official base packages |
+| `@kody` | Kody Wildfeuer | Core agents (memory, RAR client) |
+| `@billwhalen` | Bill Whalen | Enterprise (Dynamics, SharePoint, pipelines) |
+| `@borg` | Howard Hoy | Assimilation, analysis, intelligence pipelines |
+| `@aibast-agents-library` | Templates | 104 industry vertical templates |
+
+New contributors: your namespace is `@yourgithubusername`. It's yours forever.
+
+### Quality Tiers
+
+| Tier | Meaning |
+|------|---------|
+| `community` | Submitted, basic validation passes. All new agents start here. |
+| `verified` | Reviewed by maintainer — tested, follows standards |
+| `official` | Core team maintained, guaranteed compatibility |
+
+### Categories
+
+| Category | For agents that... |
+|----------|-------------------|
+| `core` | Provide fundamental capabilities (memory, orchestration) |
+| `pipeline` | Build, generate, chain, or deploy other agents |
+| `integrations` | Connect to external systems (APIs, databases, services) |
+| `productivity` | Create content or automate tasks |
+| `devtools` | Help developers (testing, scaffolding, base classes) |
+
+For industry verticals, use the specific category key: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `financial_services`, `general`, `healthcare`, `human_resources`, `it_management`, `manufacturing`, `professional_services`, `retail_cpg`, `slg_government`, `software_digital_products`.
+
+### Pipeline Agents — Chaining Multiple Agents
+
+A pipeline agent orchestrates other agents in sequence. Declare the agents it chains in `dependencies` and `tags`.
+
+Example — a "People Pipeline" that chains research agents:
+```python
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@borg/people-pipeline",
+    "version": "1.0.0",
+    "display_name": "People Pipeline",
+    "description": "Research a username across platforms — scan, deep-dive, profile, save, and render a candidate brief.",
+    "author": "Howard Hoy",
+    "tags": ["pipeline", "research", "intelligence", "osint", "recruiting"],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+        "@borg/sherlock",
+        "@borg/borg_agent",
+        "@kody/context-memory",
+        "@kody/manage-memory",
+        "@borg/prompt-to-video"
+    ],
+}
+```
+
+The pipeline's `perform()` method calls each dependency in order and passes results forward.
 
 ---
 
@@ -234,5 +391,5 @@ total_agents: 121
 publishers: 4 (@kody, @billwhalen, @rapp, @aibast-agents-library)
 categories: 19 (core, pipeline, integrations, productivity, devtools, b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, human_resources, it_management, manufacturing, professional_services, retail_cpg, slg_government, software_digital_products)
 verticals: 14
-last_updated: 2026-03-17
+last_updated: 2026-04-04
 ```
