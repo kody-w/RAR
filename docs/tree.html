@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Tree</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0c10; color: #e6edf3; font-family: 'SF Mono', 'Consolas', 'Fira Code', monospace; overflow-x: hidden; }
+
+  /* ── Header ── */
+  .header { text-align: center; padding: 32px 20px 16px; position: relative; z-index: 10; }
+  .header h1 { font-size: 1.4rem; font-weight: 900; letter-spacing: 4px; color: #e3b341; text-transform: uppercase; }
+  .header .sub { font-size: .72rem; color: #8b949e; margin-top: 4px; letter-spacing: 1px; }
+
+  /* ── Stats Bar ── */
+  .stats-bar { display: flex; justify-content: center; gap: 32px; padding: 12px 20px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat .val { font-size: 1.6rem; font-weight: 900; }
+  .stat .lbl { font-size: .58rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+  /* ── Tree Canvas ── */
+  #tree-canvas { display: block; margin: 0 auto; }
+
+  /* ── Legend ── */
+  .legend { display: flex; justify-content: center; gap: 20px; padding: 12px 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: .68rem; color: #8b949e; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ── Activity Feed ── */
+  .feed { max-width: 700px; margin: 20px auto; padding: 0 20px; }
+  .feed h2 { font-size: .8rem; color: #58a6ff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+  .feed-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #161b22; font-size: .72rem; align-items: flex-start; }
+  .feed-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .feed-text { color: #c9d1d9; flex: 1; }
+  .feed-text .ns { color: #d2a8ff; font-weight: 700; }
+  .feed-text .agent { color: #58a6ff; }
+  .feed-text .cat { color: #8b949e; }
+  .feed-time { color: #484f58; font-size: .6rem; flex-shrink: 0; }
+
+  /* ── Namespace Cards ── */
+  .ns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; max-width: 900px; margin: 24px auto; padding: 0 20px; }
+  .ns-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 14px 18px; transition: border-color .2s; }
+  .ns-card:hover { border-color: #30363d; }
+  .ns-card .ns-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .ns-card .ns-name { font-size: .88rem; font-weight: 700; }
+  .ns-card .ns-count { font-size: .68rem; color: #8b949e; background: #0d1117; padding: 2px 8px; border-radius: 10px; }
+  .ns-card .ns-agents { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ns-card .ns-agent { font-size: .6rem; padding: 2px 7px; border-radius: 4px; background: #0d1117; border: 1px solid #21262d; color: #8b949e; transition: all .15s; cursor: default; }
+  .ns-card .ns-agent:hover { border-color: #58a6ff; color: #58a6ff; }
+
+  /* ── Chain ── */
+  .chain-bar { text-align: center; padding: 20px; font-size: .62rem; color: #484f58; border-top: 1px solid #161b22; margin-top: 24px; }
+  .chain-bar a { color: #58a6ff; text-decoration: none; }
+  .chain-bar .hash { font-family: monospace; color: #39d353; }
+
+  /* ── Loading ── */
+  .loading { text-align: center; padding: 60px; color: #8b949e; font-size: .82rem; }
+  .loading::after { content: ''; display: inline-block; width: 12px; height: 12px; border: 2px solid #30363d; border-top-color: #58a6ff; border-radius: 50%; animation: spin .8s linear infinite; margin-left: 8px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>RAPP Tree</h1>
+  <div class="sub">Watch the ecosystem grow</div>
+</div>
+
+<div class="stats-bar" id="stats-bar">
+  <div class="stat"><div class="val" id="s-agents" style="color:#58a6ff">--</div><div class="lbl">Agents</div></div>
+  <div class="stat"><div class="val" id="s-publishers" style="color:#d2a8ff">--</div><div class="lbl">Publishers</div></div>
+  <div class="stat"><div class="val" id="s-categories" style="color:#39d353">--</div><div class="lbl">Categories</div></div>
+  <div class="stat"><div class="val" id="s-chain" style="color:#e3b341">--</div><div class="lbl">Forged Cards</div></div>
+</div>
+
+<canvas id="tree-canvas"></canvas>
+
+<div class="legend" id="legend"></div>
+
+<div class="ns-grid" id="ns-grid"></div>
+
+<div class="feed" id="feed-section" style="display:none">
+  <h2>Recent Growth</h2>
+  <div id="feed"></div>
+</div>
+
+<div class="chain-bar" id="chain-bar"></div>
+
+<div class="loading" id="loading">Growing the tree</div>
+
+<script>
+const BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+const API = 'https://kody-w.github.io/RAR/api/v1';
+
+const NS_COLORS = {
+  '@rapp': '#f0883e',
+  '@kody': '#58a6ff',
+  '@borg': '#f85149',
+  '@discreetRappers': '#d2a8ff',
+  '@aibast-agents-library': '#39d353',
+};
+const NS_LABELS = {
+  '@rapp': 'Foundation',
+  '@kody': 'Core',
+  '@borg': 'Howard Hoy',
+  '@discreetRappers': 'Bill Whalen',
+  '@aibast-agents-library': 'Industry Templates',
+};
+
+function nsColor(ns) { return NS_COLORS[ns] || '#8b949e'; }
+
+// ── Fetch Data ──
+async function load() {
+  const [reg, chain] = await Promise.all([
+    fetch(`${BASE}/registry.json`).then(r => r.json()).catch(() => null),
+    fetch(`${API}/chain-state.json`).then(r => r.json()).catch(() => null),
+  ]);
+  return { reg, chain };
+}
+
+// ── Group Agents by Namespace ──
+function groupByNs(agents) {
+  const groups = {};
+  for (const a of agents) {
+    const ns = a.name.split('/')[0];
+    if (!groups[ns]) groups[ns] = [];
+    groups[ns].push(a);
+  }
+  return groups;
+}
+
+// ── Group by Category ──
+function groupByCat(agents) {
+  const groups = {};
+  for (const a of agents) {
+    const cat = a.category || 'other';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(a);
+  }
+  return groups;
+}
+
+// ── Draw Tree ──
+function drawTree(canvas, groups) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = Math.min(window.innerWidth, 900);
+  const namespaces = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length);
+  const totalAgents = Object.values(groups).reduce((s, g) => s + g.length, 0);
+
+  // Height scales with total agents
+  const H = Math.max(500, Math.min(800, 300 + totalAgents * 2));
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const cx = W / 2;
+  const rootY = H - 40;
+  const topY = 60;
+
+  // ── Draw trunk ──
+  const trunkTop = topY + 40;
+  ctx.beginPath();
+  ctx.moveTo(cx - 3, rootY);
+  ctx.lineTo(cx - 2, trunkTop);
+  ctx.lineTo(cx + 2, trunkTop);
+  ctx.lineTo(cx + 3, rootY);
+  ctx.fillStyle = '#3d2e1a';
+  ctx.fill();
+
+  // Trunk glow
+  ctx.shadowColor = '#e3b34140';
+  ctx.shadowBlur = 20;
+  ctx.strokeStyle = '#5a4420';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(cx, rootY);
+  ctx.lineTo(cx, trunkTop);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Root label
+  ctx.fillStyle = '#e3b341';
+  ctx.font = '700 11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('RAR', cx, rootY + 16);
+
+  // ── Draw branches ──
+  const branchSpan = W * 0.85;
+  const branchStartX = (W - branchSpan) / 2;
+
+  // Allocate vertical space for each namespace
+  const branchHeight = (trunkTop - topY + 60) / namespaces.length;
+
+  const allNodes = []; // for animation
+
+  namespaces.forEach((ns, ni) => {
+    const agents = groups[ns];
+    const color = nsColor(ns);
+    const side = ni % 2 === 0 ? 1 : -1; // alternate left/right
+    const branchY = trunkTop + 20 - ni * branchHeight * 0.6;
+    const clampedY = Math.max(topY + 10, Math.min(rootY - 80, branchY));
+
+    // Branch endpoint
+    const spread = Math.min(agents.length * 14, branchSpan * 0.42);
+    const endX = cx + side * spread;
+
+    // Draw branch line
+    ctx.beginPath();
+    ctx.moveTo(cx, clampedY);
+    const cpx = cx + side * spread * 0.3;
+    const cpy = clampedY - 15;
+    ctx.quadraticCurveTo(cpx, cpy, endX, clampedY - 10);
+    ctx.strokeStyle = color + '40';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Namespace label
+    ctx.fillStyle = color;
+    ctx.font = '700 9px monospace';
+    ctx.textAlign = side === 1 ? 'left' : 'right';
+    const labelX = endX + side * 4;
+    ctx.fillText(NS_LABELS[ns] || ns, labelX, clampedY - 16);
+    ctx.fillStyle = color + '80';
+    ctx.font = '8px monospace';
+    ctx.fillText(`${agents.length} agents`, labelX, clampedY - 6);
+
+    // Draw agent nodes along the branch
+    const nodeCount = Math.min(agents.length, 60); // cap visual nodes
+    const isTemplate = ns === '@aibast-agents-library';
+    const nodeSpacing = spread / Math.max(nodeCount, 1);
+
+    for (let i = 0; i < nodeCount; i++) {
+      const t = nodeCount > 1 ? i / (nodeCount - 1) : 0.5;
+      // Position along the quadratic curve
+      const mt = 1 - t;
+      const nx = mt * mt * cx + 2 * mt * t * cpx + t * t * endX;
+      const ny = mt * mt * clampedY + 2 * mt * t * cpy + t * t * (clampedY - 10);
+
+      // Slight vertical scatter
+      const scatter = (Math.sin(i * 7.3 + ni * 2.1) * 12) + (Math.cos(i * 3.7) * 8);
+      const fy = ny + scatter;
+
+      const agent = agents[i];
+      const tier = agent?.quality_tier || 'community';
+      const radius = isTemplate ? 2 : tier === 'official' ? 5 : tier === 'verified' ? 4 : 3;
+
+      allNodes.push({ x: nx, y: fy, r: radius, color, agent, delay: ni * 80 + i * 15 });
+    }
+
+    // If more agents than drawn, show overflow count
+    if (agents.length > nodeCount) {
+      ctx.fillStyle = color + '60';
+      ctx.font = '8px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(`+${agents.length - nodeCount}`, endX, clampedY + 8);
+    }
+  });
+
+  // ── Animate Nodes ──
+  const startTime = performance.now();
+  const duration = 2500;
+
+  function frame(now) {
+    const elapsed = now - startTime;
+
+    for (const node of allNodes) {
+      if (elapsed < node.delay) continue;
+      const progress = Math.min(1, (elapsed - node.delay) / 400);
+      const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const r = node.r * ease;
+      if (r < 0.5) continue;
+
+      // Glow
+      ctx.shadowColor = node.color + '60';
+      ctx.shadowBlur = r * 3;
+
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+    }
+
+    if (elapsed < duration + 500) {
+      requestAnimationFrame(frame);
+    } else {
+      // Final pass: add subtle twinkle
+      addTwinkle(ctx, allNodes);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+function addTwinkle(ctx, nodes) {
+  function tick() {
+    // Pick a random node to twinkle
+    const node = nodes[Math.floor(Math.random() * nodes.length)];
+    if (!node) return;
+
+    ctx.shadowColor = node.color;
+    ctx.shadowBlur = node.r * 6;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, node.r * 1.3, 0, Math.PI * 2);
+    ctx.fillStyle = node.color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Restore normal size after a beat
+    setTimeout(() => {
+      // Redraw at normal size
+      ctx.clearRect(node.x - node.r * 2, node.y - node.r * 2, node.r * 4, node.r * 4);
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.shadowColor = node.color + '60';
+      ctx.shadowBlur = node.r * 3;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }, 200);
+
+    setTimeout(tick, 300 + Math.random() * 800);
+  }
+  setTimeout(tick, 1000);
+}
+
+// ── Render Stats ──
+function renderStats(agents, chain) {
+  const publishers = new Set(agents.map(a => a.name.split('/')[0]));
+  const categories = new Set(agents.map(a => a.category));
+
+  document.getElementById('s-agents').textContent = agents.length;
+  document.getElementById('s-publishers').textContent = publishers.size;
+  document.getElementById('s-categories').textContent = categories.size;
+  document.getElementById('s-chain').textContent = chain?.totalForged || '--';
+}
+
+// ── Render Legend ──
+function renderLegend(groups) {
+  const el = document.getElementById('legend');
+  el.innerHTML = Object.keys(groups)
+    .sort((a, b) => groups[b].length - groups[a].length)
+    .map(ns => `<div class="legend-item"><div class="legend-dot" style="background:${nsColor(ns)}"></div>${NS_LABELS[ns] || ns} (${groups[ns].length})</div>`)
+    .join('');
+}
+
+// ── Render Namespace Cards ──
+function renderNsCards(groups) {
+  const el = document.getElementById('ns-grid');
+  const sorted = Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+
+  el.innerHTML = sorted.map(([ns, agents]) => {
+    const color = nsColor(ns);
+    const isTemplate = ns === '@aibast-agents-library';
+    const shown = isTemplate ? agents.slice(0, 12) : agents;
+    const overflow = isTemplate ? agents.length - 12 : 0;
+
+    return `<div class="ns-card" style="border-color:${color}30">
+      <div class="ns-head">
+        <div class="ns-name" style="color:${color}">${NS_LABELS[ns] || ns}</div>
+        <div class="ns-count">${agents.length} agent${agents.length !== 1 ? 's' : ''}</div>
+      </div>
+      <div class="ns-agents">
+        ${shown.map(a => `<div class="ns-agent" title="${a.description || ''}">${a.display_name || a.name.split('/')[1]}</div>`).join('')}
+        ${overflow > 0 ? `<div class="ns-agent" style="color:#484f58;border-color:transparent">+${overflow} more</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── Render Activity Feed ──
+function renderFeed(agents) {
+  // Sort by version (newer versions = more recent activity) and show last 15
+  // Since we don't have timestamps, we'll show the agents in registry order (most recently added last)
+  const recent = agents.slice(-15).reverse();
+  const feedEl = document.getElementById('feed');
+  const section = document.getElementById('feed-section');
+
+  if (!recent.length) return;
+  section.style.display = '';
+
+  feedEl.innerHTML = recent.map(a => {
+    const ns = a.name.split('/')[0];
+    const color = nsColor(ns);
+    return `<div class="feed-item">
+      <div class="feed-dot" style="background:${color}"></div>
+      <div class="feed-text">
+        <span class="ns">${ns}</span> added <span class="agent">${a.display_name || a.name.split('/')[1]}</span>
+        <span class="cat">${a.category?.replace(/_/g, ' ') || ''} &middot; v${a.version || '?'}</span>
+      </div>
+      <div class="feed-time">${a.quality_tier || 'community'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Render Chain Info ──
+function renderChain(chain) {
+  const el = document.getElementById('chain-bar');
+  if (!chain) {
+    el.innerHTML = 'Chain data unavailable';
+    return;
+  }
+  el.innerHTML = `
+    Chain: <span class="hash">${chain.genesisHash?.slice(0, 16)}...</span>
+    &middot; ${chain.chainLength || '?'} blocks
+    &middot; Head: <span class="hash">${chain.chainHead?.slice(0, 16)}...</span>
+    &middot; Protocol: ${chain.protocol || 'rar-chain/1.0'}
+    &middot; <a href="https://kody-w.github.io/RAR/" target="_blank">Open RAR</a>
+  `;
+}
+
+// ── Init ──
+async function init() {
+  const { reg, chain } = await load();
+  document.getElementById('loading').remove();
+
+  if (!reg || !reg.agents?.length) {
+    document.body.innerHTML += '<div style="text-align:center;padding:40px;color:#f85149">Failed to load registry</div>';
+    return;
+  }
+
+  const agents = reg.agents;
+  const groups = groupByNs(agents);
+
+  renderStats(agents, chain);
+  drawTree(document.getElementById('tree-canvas'), groups);
+  renderLegend(groups);
+  renderNsCards(groups);
+  renderFeed(agents);
+  renderChain(chain);
+}
+
+// Handle resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => location.reload(), 300);
+});
+
+init();
+</script>
+
+</body>
+</html>
