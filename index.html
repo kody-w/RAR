@@ -1872,23 +1872,25 @@
 
   /* Centering grid overlay (zoom mode) */
   .slab-zoom-overlay {
-    position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,.96);
+    position: fixed; inset: 0; z-index: 400;
+    background: radial-gradient(ellipse at center, rgba(20,15,8,.98), rgba(0,0,0,.99));
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 16px;
+    gap: 0;
   }
-  .slab-zoom-overlay canvas { border-radius: 8px; box-shadow: 0 0 60px rgba(88,166,255,.2); }
   .slab-zoom-close {
     position: absolute; top: 20px; right: 24px;
-    background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
+    background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; z-index: 5;
   }
   .slab-zoom-close:hover { color: var(--text); }
-  .slab-zoom-info { color: var(--text-dim); font-size: .82rem; text-align: center; }
+  @keyframes showcaseFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes showcaseCardIn { from { opacity: 0; transform: scale(0.4) rotateY(180deg); } 70% { transform: scale(1.05) rotateY(0); } to { opacity: 1; transform: scale(1) rotateY(0); } }
+  @keyframes showcasePulse { 0%, 100% { opacity: .4; transform: scale(1); } 50% { opacity: .8; transform: scale(1.1); } }
 
   /* ─── Card Value ─────────────────────────────────── */
   .card-value {
     position: absolute; bottom: 50px; right: 8px;
-    background: linear-gradient(135deg, rgba(255,215,0,.9), rgba(255,140,0,.8));
-    color: #0d0a00; font-size: .62rem; font-weight: 800; padding: 2px 6px;
+    background: linear-gradient(135deg, rgba(210,168,255,.85), rgba(140,100,220,.8));
+    color: #fff; font-size: .6rem; font-weight: 800; padding: 2px 6px;
     border-radius: 5px; font-family: 'SF Mono', Consolas, monospace;
     z-index: 5; letter-spacing: .3px;
   }
@@ -2269,6 +2271,7 @@
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
+    <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
   </nav>
@@ -2332,6 +2335,7 @@
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
       <h2 id="lb-tab-votes" class="lb-tab active" onclick="switchLbTab('votes')" style="cursor:pointer">Community Favorites</h2>
       <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
+      <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
     <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">The agents people love most — ranked by votes and reviews</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
@@ -2900,6 +2904,17 @@ class MyAgent(BasicAgent):
         <div><strong style="color:var(--text)">Universal</strong> — The .py file is the unit. The runtime is a choice. Stream once, route anywhere.</div>
       </div>
     </div>
+  </div>
+
+  <!-- Market Exchange -->
+  <div class="panel" id="panel-market">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">RAR Card Chain &bull; Live Market</div>
+      <h2 style="font-size:1.4rem;font-weight:800">CARD EXCHANGE</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Real-time BTC valuation. Every forged card is verifiable, transferable, and permanently on-chain.</p>
+    </div>
+    <div id="market-ticker" style="margin-bottom:20px"></div>
+    <div id="market-grid"></div>
   </div>
 
 </div>
@@ -3618,6 +3633,7 @@ function switchTab(tab) {
   if (tab === 'cards') renderCards();
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
+  if (tab === 'market') renderMarketExchange();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -3793,6 +3809,9 @@ function switchLbTab(tab) {
   if (tab === 'cards') {
     if (sub) sub.textContent = 'Global card rankings — agents ranked by play condition across all players';
     renderCardRankings();
+  } else if (tab === 'gauntlet') {
+    if (sub) sub.textContent = 'Public chain leaderboard — oldest cards with highest Gauntlet Points. Queryable via GitHub raw API.';
+    renderGauntletLeaderboard();
   } else {
     if (sub) sub.textContent = 'The agents people love most — ranked by votes and reviews';
     renderLeaderboard();
@@ -3800,7 +3819,7 @@ function switchLbTab(tab) {
 }
 
 // ── Global Card Rankings — emergent leaderboard from play ratings ──
-// PSA 10 = perfect agents that never fail. Supply diminishes as cards degrade.
+// RAR 10 = perfect agents that never fail. Supply diminishes as cards degrade.
 async function renderCardRankings() {
   const container = document.getElementById('leaderboard-container');
   const all = await getAllMinted();
@@ -3824,7 +3843,7 @@ async function renderCardRankings() {
         totalBad: 0,
         copies: 0,
         bestGrade: 0,
-        gemMintCount: 0,  // PSA 10 copies still in existence
+        gemMintCount: 0,  // RAR 10 copies still in existence
         nmCount: 0,       // Near Mint
         lpCount: 0,       // Lightly Played
         mpCount: 0,       // Moderately Played
@@ -3872,7 +3891,7 @@ async function renderCardRankings() {
   let h = `<table class="lb-table"><thead><tr>
     <th>#</th><th>Agent</th><th style="cursor:pointer" title="Confidence = inverse risk. Sort: most confident agent first.">Conf.</th>
     <th>Cube</th><th>Burn</th><th>Plays</th><th>Win %</th>
-    <th>PSA 10</th><th>Supply</th>
+    <th>RAR 10</th><th>Supply</th>
   </tr></thead><tbody>`;
 
   ranked.slice(0, 50).forEach((s, i) => {
@@ -3902,6 +3921,109 @@ async function renderCardRankings() {
     <strong>Burn</strong> = blocks lost per play &middot; <strong>Supply</strong> = pristine / total<br>
     <em>Sorted by confidence. High confidence = agent completes tasks reliably = card holds value as currency.</em><br>
     <em>Cards are .egg containers that hatch into .py or .lisp depending on runtime. Burn rate is deflationary pressure.</em>
+  </div>`;
+
+  container.innerHTML = h;
+}
+
+// ── Gauntlet Leaderboard — Public chain GP rankings ──
+// Every forged card starts at 1000 GP. Queryable at:
+// https://kody-w.github.io/RAR/api/v1/chain.json (full chain)
+// https://kody-w.github.io/RAR/api/v1/card-index.json (lookup)
+// https://kody-w.github.io/RAR/api/v1/cards/{mintId}.json (individual)
+async function renderGauntletLeaderboard() {
+  const container = document.getElementById('leaderboard-container');
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted)">Loading chain...</div>';
+
+  await fetchBtcPrice();
+
+  let chainBlocks, chainState;
+  try {
+    const [bRes, sRes] = await Promise.all([
+      fetch(`${RAR_CHAIN_API}/chain.json`),
+      fetch(`${RAR_CHAIN_API}/chain-state.json`)
+    ]);
+    chainBlocks = await bRes.json();
+    chainState = await sRes.json();
+  } catch(e) {
+    container.innerHTML = '<div class="empty-state"><h3>Chain offline</h3><p style="color:var(--text-dim);margin-top:8px">Deploy to GitHub Pages to enable the public Gauntlet leaderboard.</p></div>';
+    return;
+  }
+
+  const forgeBlocks = chainBlocks.filter(b => b.type === 'forge');
+  const btcForge = chainState.btcAtForge || 0;
+  const now = Date.now();
+
+  // Build leaderboard: each card gets base 1000 GP, modified by rarity + age
+  const rarityGP = { genesis: 1000, mythic: 800, rare: 500, uncommon: 200, common: 100 };
+  const entries = forgeBlocks.map(block => {
+    const d = block.data;
+    const baseGP = rarityGP[d.rarity] || 100;
+    const ageMs = now - new Date(block.timestamp).getTime();
+    const ageDays = Math.max(0, Math.floor(ageMs / 86400000));
+    const ownerInfo = chainState.binders?.[d.owner];
+    const rawUrl = `https://kody-w.github.io/RAR/api/v1/cards/${encodeURIComponent(d.mintId)}.json`;
+    return {
+      mintId: d.mintId,
+      title: d.title || d.agentSlug,
+      agentName: d.agentName,
+      rarity: d.rarity || 'common',
+      setId: d.setId,
+      gp: baseGP,
+      ageDays,
+      blockIndex: block.index,
+      owner: ownerInfo?.alias || `${d.owner.slice(0,8)}...`,
+      edition: `${d.edition || 1}/${d.maxEdition || '\u221e'}`,
+      cardHash: d.cardHash,
+      apiUrl: rawUrl,
+    };
+  });
+
+  // Sort by GP desc, then by age desc (oldest first as tiebreaker)
+  entries.sort((a, b) => b.gp - a.gp || b.ageDays - a.ageDays);
+
+  let h = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${entries.length}</div>
+        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">Forged Cards</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#f7931a">$${_btcPrice.toLocaleString()}</div>
+        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">BTC/USD Now</div>
+      </div>
+      ${btcForge ? `<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#e6edf3">$${btcForge.toLocaleString()}</div>
+        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">BTC at Forge</div>
+      </div>` : ''}
+    </div>
+    <table class="lb-table"><thead><tr>
+      <th>#</th><th>Card</th><th>Set</th><th>Rarity</th><th style="color:#d2a8ff">GP</th><th>Age</th><th>Binder</th><th>Edition</th><th>Block</th>
+    </tr></thead><tbody>`;
+
+  const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+
+  entries.forEach((e, i) => {
+    const rc = rarityColors[e.rarity] || '#8899aa';
+    h += `<tr style="cursor:pointer" onclick="window.open('${e.apiUrl}','_blank')" title="Click to view public chain record">
+      <td class="lb-rank">${i + 1}</td>
+      <td class="lb-name">${esc(e.title)}</td>
+      <td style="text-align:center;color:#e3b341;font-size:.75rem">${e.setId}</td>
+      <td style="text-align:center;color:${rc};font-weight:700;font-size:.72rem;text-transform:uppercase">${e.rarity}</td>
+      <td style="text-align:center;font-weight:900;color:#d2a8ff;font-size:.95rem">${e.gp}</td>
+      <td style="text-align:center;font-size:.78rem;color:var(--text-dim)">${e.ageDays}d</td>
+      <td style="text-align:center;font-size:.72rem;color:#58a6ff">${e.owner}</td>
+      <td style="text-align:center;font-size:.72rem">${e.edition}</td>
+      <td style="text-align:center;font-size:.7rem;color:#484f58;font-family:monospace">#${e.blockIndex}</td>
+    </tr>`;
+  });
+
+  h += '</tbody></table>';
+  h += `<div style="font-size:.62rem;color:#484f58;margin-top:12px;text-align:center">
+    All data publicly queryable: <a href="${RAR_CHAIN_API}/chain.json" target="_blank" style="color:#58a6ff">chain.json</a>
+    &middot; <a href="${RAR_CHAIN_API}/card-index.json" target="_blank" style="color:#58a6ff">card-index.json</a>
+    &middot; <a href="${RAR_CHAIN_API}/chain-state.json" target="_blank" style="color:#58a6ff">chain-state.json</a>
+    <br>Click any row to view its public chain record via GitHub raw API.
   </div>`;
 
   container.innerHTML = h;
@@ -7099,7 +7221,7 @@ async function mintCard(agentName, setId) {
   const cornerSharpness = 0.95 + ((seed >> 6) % 10) / 100; // 0.95–1.05
   const surfaceNoise = (seed >> 16) % 100;                 // 0–99 (sparkle pattern seed)
 
-  // ── Centering grade (PSA style: 60/40 = 10, 55/45 = 9, etc.) ──
+  // ── Centering grade (RAR scale: 60/40 = 10, 55/45 = 9, etc.) ──
   const centerScore = 10 - Math.floor(Math.abs(centeringX) * 8 + Math.abs(centeringY) * 8);
 
   // ── Provenance hash ──
@@ -7140,10 +7262,11 @@ async function mintCard(agentName, setId) {
       brainstemFingerprint: _thirdSpaceIdentity?.fingerprint || null,
       credentialHash: credential ? await sha256(JSON.stringify(credential)) : null,
     }],
-    // Snapshot at mint time
+    // Snapshot at mint time — BTC rate frozen at forge
     votesAtMint: (votes.agents?.[a.name]?.score) || 0,
     tierAtMint: a.quality_tier || 'community',
     isFirstEdition: mintNum === 1,
+    btcAtMint: _btcPrice || 0,
     // Virtual Cube — 512 blocks of holographic data
     cube: cubeToHex(initCube()),
     // Third Space
@@ -7235,7 +7358,7 @@ async function provisionStarterPack() {
   }
 }
 
-// ── Grading Engine (PSA 1–10 scale) ──
+// ── Grading Engine (RAR 1–10 scale) ──
 // Grade is driven primarily by PLAY CONDITION — how the user rated the agent's work.
 // A card that never fails stays GEM MINT. Bad ratings wear the holo and drop the grade.
 function gradeCard(card) {
@@ -7291,7 +7414,7 @@ function gradeLabel(grade) {
   return { label: 'POOR ' + Math.floor(grade), cls: 'poor' };
 }
 
-// ── Sub-Grades (PSA-style component scores) ──
+// ── Sub-Grades (RAR component scores) ──
 function subGrades(card) {
   const v = card.variations;
 
@@ -7352,8 +7475,49 @@ function calculateValue(card) {
     if ((tierOrder[card.tier] || 1) > (tierOrder[card.tierAtMint] || 1)) value *= 2;
   }
 
-  return Math.min(1000, Math.round(value));
+  return Math.round(value); // uncapped — raw points, converted to BTC at display
 }
+
+// ── BTC Market Value Oracle ──
+// Card value is denominated in BTC. 1000 points = 1 BTC.
+// The USD display is always the live market rate — if you transfer
+// a card, the buyer pays the current BTC-to-USD rate for ownership.
+let _btcPrice = 0;
+let _btcPriceLastFetch = 0;
+
+async function fetchBtcPrice() {
+  if (Date.now() - _btcPriceLastFetch < 300000 && _btcPrice > 0) return _btcPrice;
+  try {
+    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    const d = await r.json();
+    _btcPrice = d.bitcoin.usd;
+    _btcPriceLastFetch = Date.now();
+  } catch(e) {
+    try {
+      const r2 = await fetch('https://blockchain.info/ticker');
+      const d2 = await r2.json();
+      _btcPrice = d2.USD.last;
+      _btcPriceLastFetch = Date.now();
+    } catch(e2) {
+      if (!_btcPrice) _btcPrice = 65000;
+    }
+  }
+  return _btcPrice;
+}
+
+function formatBtcValue(pts) {
+  const btc = Math.min(pts, 10000) / 1000;
+  if (_btcPrice > 0) {
+    const usd = btc * _btcPrice;
+    const btcStr = btc >= 1 ? btc.toFixed(2) : btc >= 0.01 ? btc.toFixed(3) : btc.toFixed(4);
+    const usdStr = usd >= 1000000 ? `$${(usd / 1000000).toFixed(2)}M` : usd >= 1000 ? `$${(usd / 1000).toFixed(1)}k` : `$${Math.round(usd)}`;
+    return { btc: btcStr, usd: usdStr, raw: usd, rawBtc: btc };
+  }
+  return { btc: (pts / 1000).toFixed(3), usd: `${pts} pts`, raw: pts, rawBtc: pts / 1000 };
+}
+
+// Fetch on load
+fetchBtcPrice();
 
 // ── Play History & Card Wear ──
 // Cards wear based on the USER'S rating of the agent's work.
@@ -8354,98 +8518,101 @@ async function openPack(setId) {
     }
   }
 
-  // ── Phase 3: Reveal overlay ──
+  // ── Phase 3: Twitch-style reveal — one card at a time ──
+  await fetchBtcPrice();
   const overlay = document.createElement('div');
   overlay.className = 'pack-open-overlay';
-  overlay.innerHTML = `
-    <div style="color:var(--text-dim);font-size:.9rem;margin-bottom:20px">${setDef.name} Pack — ${minted.length} cards</div>
-    <div class="pack-reveal-row" id="pack-reveal-row"></div>
-    <div id="pack-summary-area"></div>
-    <div class="pack-open-actions">
-      <button onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add to Collection</button>
-      <button onclick="exportPackCards()" class="primary">Export All as .card</button>
-    </div>`;
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:radial-gradient(ellipse at center,rgba(10,8,4,.99),#000);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden';
   document.body.appendChild(overlay);
-
-  const row = document.getElementById('pack-reveal-row');
   window._lastPackMinted = minted;
 
-  // ── Phase 4: Animate each card ──
-  for (let i = 0; i < minted.length; i++) {
-    await new Promise(r => setTimeout(r, 300 + i * 350));
-    const c = minted[i];
+  let _revealIdx = 0;
+
+  async function showRevealCard(idx) {
+    const c = minted[idx];
     const rarity = TIER_TO_RARITY[c.tier] || 'uncommon';
     const gl = gradeLabel(c.grade);
+    const pts = calculateValue(c);
+    const bv = formatBtcValue(pts);
     const isMythic = rarity === 'mythic';
     const isRare = rarity === 'rare';
+    const glowColor = isMythic ? '#ff6d00' : isRare ? '#ffd700' : rarity === 'uncommon' ? '#c0c0c0' : '#bc8cff';
+    const isLast = idx === minted.length - 1;
 
-    // Mythic: screen flash
+    // Mythic flash
     if (isMythic) {
       const flash = document.createElement('div');
-      flash.style.cssText = 'position:fixed;inset:0;background:#fff;z-index:999;pointer-events:none;animation:mythicFlash .6s ease-out forwards';
+      flash.style.cssText = `position:fixed;inset:0;background:${glowColor};z-index:999999;pointer-events:none;animation:mythicFlash .6s ease-out forwards`;
       document.body.appendChild(flash);
       setTimeout(() => flash.remove(), 600);
     }
 
-    const div = document.createElement('div');
-    div.className = `pack-card-reveal ${rarity}`;
-    div.style.cssText = `animation: cardSlideUp .5s ease-out ${i * 0.1}s both;${isMythic ? 'animation: cardSlideUp .5s ease-out both, mythicPulse 2s ease-in-out infinite;' : ''}`;
-
+    // Render card on canvas
     const canvas = document.createElement('canvas');
-    canvas.width = 250; canvas.height = 350;
+    canvas.width = 400; canvas.height = 560;
     await renderMiniCard(canvas, c);
-    div.appendChild(canvas);
 
-    div.insertAdjacentHTML('beforeend', `<div class="pack-reveal-grade">${gl.label}</div>`);
-    div.insertAdjacentHTML('beforeend', `<div class="pack-reveal-serial">${c.serial}</div>`);
-    if (c.isFirstEdition) {
-      div.insertAdjacentHTML('beforeend', `<div style="position:absolute;top:8px;left:8px;background:rgba(255,215,0,.9);color:#000;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px">1ST EDITION</div>`);
-    }
-    div.onclick = () => openSlabViewer(c.mintId);
-    row.appendChild(div);
+    overlay.innerHTML = `
+      <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:5">
+        <div style="font-size:.75rem;color:#8b949e;letter-spacing:2px;text-transform:uppercase">${setDef.name} Pack</div>
+        <div style="display:flex;gap:6px">${minted.map((_, i) => `<div style="width:${i === idx ? 12 : 8}px;height:${i === idx ? 12 : 8}px;border-radius:50%;background:${i < idx ? '#39d353' : i === idx ? glowColor : '#30363d'};transition:all .3s;${i === idx ? `box-shadow:0 0 12px ${glowColor}` : ''}"></div>`).join('')}</div>
+        <div style="font-size:.75rem;color:#58a6ff">${idx + 1} / ${minted.length}</div>
+      </div>
 
-    // Particle burst for rare+ cards
-    if (isRare || isMythic) {
-      const rect = div.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const color = isMythic ? '#ff6d00' : '#ffd700';
-      for (let p = 0; p < 18; p++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        const angle = (p / 18) * Math.PI * 2;
-        const dist = 60 + Math.random() * 80;
-        particle.style.cssText = `left:${cx}px;top:${cy}px;background:${color};--px:${Math.cos(angle) * dist}px;--py:${Math.sin(angle) * dist}px;animation-delay:${Math.random() * 0.2}s`;
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 900);
-      }
-    }
-  }
+      <div style="font-size:.7rem;color:${glowColor};font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;animation:showcaseFadeIn .4s ease-out both">${rarity.toUpperCase()}${c.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
 
-  // ── Phase 5: Summary stats ──
-  await new Promise(r => setTimeout(r, 600));
-  const rarityCount = {};
-  minted.forEach(c => {
-    const r = TIER_TO_RARITY[c.tier] || 'uncommon';
-    rarityCount[r] = (rarityCount[r] || 0) + 1;
-  });
-  const summaryArea = document.getElementById('pack-summary-area');
-  if (summaryArea) {
-    const pills = Object.entries(rarityCount).map(([r, n]) =>
-      `<span class="pack-summary-pill ${r}">${n} ${RARITY_LABELS[r] || r}</span>`
-    ).join('');
-    summaryArea.innerHTML = `
-      <div class="pack-summary">
-        <div class="pack-summary-title">Pack Summary</div>
-        <div class="pack-summary-pills">${pills}</div>
-        <div class="pull-odds" style="margin-top:10px">
-          <span><span style="width:7px;height:7px;border-radius:50%;background:#ff6d00;display:inline-block"></span> Official: 1%</span>
-          <span><span style="width:7px;height:7px;border-radius:50%;background:#ffd700;display:inline-block"></span> Verified: 3%</span>
-          <span><span style="width:7px;height:7px;border-radius:50%;background:#c0c0c0;display:inline-block"></span> Community: 26%</span>
-          <span><span style="width:7px;height:7px;border-radius:50%;background:#bc8cff;display:inline-block"></span> Frontier: 70%</span>
-        </div>
+      <div id="reveal-card-area" style="position:relative;animation:showcaseCardIn .7s cubic-bezier(.23,1,.32,1) both;cursor:pointer">
+        <div style="position:absolute;inset:-60px;background:radial-gradient(circle,${glowColor}25 0%,transparent 65%);animation:showcasePulse 2.5s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
+      </div>
+
+      <div style="font-size:1.8rem;font-weight:900;color:#f0e6d0;letter-spacing:2px;text-transform:uppercase;margin-top:16px;text-shadow:0 0 30px ${glowColor}60;animation:showcaseFadeIn .5s ease-out .3s both;opacity:0">${esc(c.displayName)}</div>
+
+      <div style="display:flex;gap:28px;margin-top:12px;animation:showcaseFadeIn .5s ease-out .5s both;opacity:0">
+        <div style="text-align:center"><div style="font-size:1.3rem;font-weight:900;color:#ffd700">${gl.label}</div><div style="font-size:.6rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px">Grade</div></div>
+        <div style="text-align:center"><div style="font-size:1.3rem;font-weight:900;color:#d2a8ff">${pts} GP</div><div style="font-size:.6rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px">Reputation</div></div>
+        <div style="text-align:center"><div style="font-size:1.3rem;font-weight:900;color:#e6edf3">#${c.mintNum}</div><div style="font-size:.6rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px">Mint</div></div>
+      </div>
+
+      <div style="margin-top:24px;animation:showcaseFadeIn .5s ease-out .7s both;opacity:0;display:flex;gap:12px">
+        ${isLast ? `
+          <button id="reveal-next-btn" style="padding:12px 32px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all .2s;letter-spacing:1px" onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add All to Collection</button>
+          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export .card</button>
+        ` : `
+          <button id="reveal-next-btn" style="padding:14px 48px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;border:2px solid ${glowColor};background:transparent;color:${glowColor};transition:all .2s;letter-spacing:2px;text-transform:uppercase;animation:showcasePulse 2s ease-in-out infinite" onclick="revealNext()">Next Card</button>
+        `}
       </div>`;
+
+    const cardArea = document.getElementById('reveal-card-area');
+    canvas.style.cssText = `max-width:min(70vw,360px);max-height:55vh;border-radius:12px;box-shadow:0 0 80px ${glowColor}35,0 20px 60px rgba(0,0,0,.8);position:relative;z-index:1;cursor:pointer`;
+    canvas.onclick = () => openSlabViewer(c.mintId);
+    cardArea.appendChild(canvas);
+
+    // Particles for rare+
+    if (isRare || isMythic) {
+      setTimeout(() => {
+        const rect = canvas.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        for (let p = 0; p < 24; p++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          const angle = (p / 24) * Math.PI * 2;
+          const dist = 80 + Math.random() * 120;
+          particle.style.cssText = `left:${cx}px;top:${cy}px;background:${glowColor};--px:${Math.cos(angle) * dist}px;--py:${Math.sin(angle) * dist}px;animation-delay:${Math.random() * 0.2}s`;
+          document.body.appendChild(particle);
+          setTimeout(() => particle.remove(), 1000);
+        }
+      }, 300);
+    }
   }
+
+  window.revealNext = function() {
+    _revealIdx++;
+    if (_revealIdx < minted.length) showRevealCard(_revealIdx);
+  };
+
+  // Start with first card
+  await showRevealCard(0);
 }
 
 async function renderMiniCard(canvas, card) {
@@ -8807,6 +8974,7 @@ function switchCollView(mode, btn) {
 }
 
 async function renderCollection() {
+  await fetchBtcPrice();
   const cards = await getAllMinted();
   const countEl = document.getElementById('coll-count');
   const gridEl = document.getElementById('collection-grid');
@@ -8842,18 +9010,16 @@ async function renderGridView(cards, gridEl) {
   gridEl.className = 'collection-grid';
   gridEl.innerHTML = cards.map(c => {
     const gl = gradeLabel(c.grade);
-    const val = calculateValue(c);
-    const age = Math.floor((Date.now() - c.mintedAt) / 86400000);
+    const gp = calculateValue(c);
     return `<div class="coll-card" onclick="openSlabViewer('${c.mintId}')" style="position:relative">
       <canvas width="250" height="350" data-mint="${c.mintId}"></canvas>
-      <div class="card-value">$${val}</div>
+      <div class="card-value" title="Gauntlet Points — public reputation">${gp} GP</div>
       <div class="coll-card-info">
         <div class="coll-card-name">${esc(c.displayName)}</div>
         <div class="coll-card-meta">
           <span class="coll-grade ${gl.cls}">${gl.label}</span>
           <span>${c.isFirstEdition ? '1st Ed · ' : ''}#${c.mintNum}</span>
         </div>
-        <div style="font-size:.6rem;color:var(--text-muted);margin-top:2px">${c.serial} · ${age}d old</div>
       </div>
     </div>`;
   }).join('');
@@ -9027,6 +9193,7 @@ async function renderSlide() {
   const holoManaCost = holo?.mana_cost;
   const holoTypeLine = holo?.type_line || `Creature — Agent ${a.category ? a.category.split('_').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') : ''}`;
   const val = calculateValue(card);
+  const bv = formatBtcValue(val);
 
   // Mana pip HTML
   const pipsHtml = holoManaCost
@@ -9058,9 +9225,9 @@ async function renderSlide() {
           <div class="slide-stat"><span class="slide-stat-val">${power}</span><span class="slide-stat-label">Power</span></div>
           <div class="slide-stat"><span class="slide-stat-val">${toughness}</span><span class="slide-stat-label">Guard</span></div>
           <div class="slide-stat"><span class="slide-stat-val" style="color:${gl.cls === 'gem' ? '#ffd700' : gl.cls === 'mint' ? '#39d353' : '#aaa'}">${gl.label}</span><span class="slide-stat-label">Grade</span></div>
-          <div class="slide-stat"><span class="slide-stat-val" style="color:#39d353">$${val}</span><span class="slide-stat-label">Value</span></div>
+          <div class="slide-stat"><span class="slide-stat-val" style="color:#d2a8ff">${val} GP</span><span class="slide-stat-label">Reputation</span></div>
         </div>
-        <div class="slide-meta">${esc(a.name)} v${a.version || '?'} &middot; ${card.serial} &middot; ${card.isFirstEdition ? '1st Ed' : '#' + card.mintNum}</div>
+        <div class="slide-meta">${esc(a.name)} v${a.version || '?'} &middot; ${card.isFirstEdition ? '1st Ed' : '#' + card.mintNum}</div>
       </div>
     </div>
   `;
@@ -9151,7 +9318,7 @@ async function openAgentSlides() {
 }
 
 // ═══════════════════════════════════════════════════════
-// Slab Viewer — PSA-style full-screen card display
+// Slab Viewer — RAR graded full-screen card display
 // ═══════════════════════════════════════════════════════
 async function openSlabViewer(mintId) {
   const all = await getAllMinted();
@@ -9162,6 +9329,7 @@ async function openSlabViewer(mintId) {
   const gl = gradeLabel(card.grade);
   const sg = subGrades(card);
   const val = calculateValue(card);
+  const bv = formatBtcValue(val);
   const pop = await getPopulationReport(card.agentName);
   const trophyCase = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
   const inTrophy = trophyCase.includes(mintId);
@@ -9192,16 +9360,16 @@ async function openSlabViewer(mintId) {
       <div class="slab-case">
         <div class="slab-grade-label">
           <div>
-            <div style="font-size:.6rem;opacity:.7;margin-bottom:2px">PSA</div>
+            <div style="font-size:.6rem;opacity:.7;margin-bottom:2px">RAR</div>
             <div>${esc(card.displayName)}</div>
           </div>
           <div class="slab-grade-number" style="color:${gradeColor}">${card.grade >= 9.5 ? '10' : Math.round(card.grade)}</div>
         </div>
         <div class="slab-card-window" onclick="openSlabZoom('${mintId}')">
           <canvas width="290" height="406" id="slab-canvas-${mintId}"></canvas>
-          <div class="slab-zoom-hint">Click to zoom + centering grid</div>
+          <div class="slab-zoom-hint">Click to showcase</div>
         </div>
-        <div class="slab-serial">${card.serial}</div>
+        <div class="slab-serial" style="display:none">${card.serial}</div>
         ${card.isFirstEdition ? '<div style="text-align:center;margin-top:6px;font-size:.65rem;font-weight:800;color:#ffd700;letter-spacing:1px">1ST EDITION</div>' : ''}
       </div>
 
@@ -9222,12 +9390,27 @@ async function openSlabViewer(mintId) {
           </div>
         </div>
 
-        <!-- Value -->
+        <!-- Gauntlet Points + Market Value -->
         <div class="slab-panel">
-          <h4>Estimated Value</h4>
-          <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px">${svgIcon('money','#ffd700',24)} ${val} pts</div>
-          <div style="font-size:.72rem;color:var(--text-muted);margin-top:6px">
-            Based on rarity, grade, mint #, votes at mint${card.isFirstEdition ? ', 1st Edition' : ''}
+          <h4>Reputation & Market</h4>
+          <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px;background:linear-gradient(135deg,rgba(210,168,255,.15),rgba(140,100,220,.1));border-color:rgba(210,168,255,.3)">${svgIcon('trophy','#d2a8ff',24)} ${val} GP</div>
+          <div style="font-size:.68rem;color:var(--text-muted);margin-top:4px;margin-bottom:10px">Gauntlet Points — public reputation score</div>
+          <div style="border-top:1px solid var(--border);padding-top:10px">
+            <div style="font-size:.68rem;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Transfer Value</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#f7931a">${bv.btc} BTC <span style="font-size:.8rem;color:#39d353;font-weight:600">${bv.usd}</span></div>
+          </div>
+          <div style="font-size:.68rem;color:var(--text-muted);margin-top:6px">
+            Live rate${_btcPrice > 0 ? ` &middot; 1 BTC = $${_btcPrice.toLocaleString()}` : ''}
+          </div>
+          ${card.btcAtMint ? `
+          <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:.68rem">
+            <div style="color:var(--text-muted)">Forged at <span style="color:#f7931a;font-weight:600">1 BTC = $${card.btcAtMint.toLocaleString()}</span></div>
+            <div style="color:${_btcPrice > card.btcAtMint ? '#39d353' : _btcPrice < card.btcAtMint ? '#f85149' : '#8b949e'};font-weight:600;margin-top:2px">
+              ${_btcPrice > card.btcAtMint ? '+' : ''}${((_btcPrice - card.btcAtMint) / card.btcAtMint * 100).toFixed(1)}% since mint
+            </div>
+          </div>` : ''}
+          <div style="font-size:.58rem;color:#484f58;margin-top:4px">
+            Transfer price for verified ownership on the RAR Card Chain
           </div>
         </div>
 
@@ -9257,8 +9440,8 @@ async function openSlabViewer(mintId) {
           </div>
         </div>
 
-        <!-- Chain Verification -->
-        <div class="slab-panel" id="slab-chain-panel">
+        <!-- Chain Verification (hidden by default — visible via console or after forge) -->
+        <div class="slab-panel" id="slab-chain-panel" style="display:none">
           <h4 style="color:#d2a8ff">Binder & Chain</h4>
           <div id="slab-chain-status" style="font-size:.8rem;color:var(--text-dim)">Checking chain...</div>
         </div>
@@ -9277,12 +9460,14 @@ async function openSlabViewer(mintId) {
 // ── Slab Chain Verification Display ──
 async function renderSlabChainStatus(card) {
   const el = document.getElementById('slab-chain-status');
+  const panel = document.getElementById('slab-chain-panel');
   if (!el) return;
 
   const myBinder = getBinderAddress();
   const status = await getForgeStatus(card);
 
   if (status.verified) {
+    if (panel) panel.style.display = '';
     const isMyCard = myBinder && status.owner === myBinder;
     const ownerLabel = status.ownerAlias || formatBinderAddress(status.owner);
     el.innerHTML = `
@@ -9368,59 +9553,180 @@ async function verifyFullChainUI() {
   }
 }
 
+// ═══════════════════════════════════════════════════════
+// Market Exchange — Public Chain Dashboard
+// ═══════════════════════════════════════════════════════
+async function renderMarketExchange() {
+  const ticker = document.getElementById('market-ticker');
+  const grid = document.getElementById('market-grid');
+  if (!ticker || !grid) return;
+
+  await fetchBtcPrice();
+
+  // Load chain data
+  let chainState, chainBlocks;
+  try {
+    const [stateRes, blocksRes] = await Promise.all([
+      fetch(`${RAR_CHAIN_API}/chain-state.json`),
+      fetch(`${RAR_CHAIN_API}/chain.json`)
+    ]);
+    chainState = await stateRes.json();
+    chainBlocks = await blocksRes.json();
+  } catch(e) {
+    grid.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px">Chain offline. Deploy to GitHub Pages to enable.</div>';
+    return;
+  }
+
+  const forgeBlocks = chainBlocks.filter(b => b.type === 'forge');
+  const btcForge = chainState.btcAtForge || 0;
+
+  // Ticker bar
+  const btcChange = btcForge > 0 && _btcPrice > 0 ? ((_btcPrice - btcForge) / btcForge * 100) : 0;
+  const totalCards = forgeBlocks.length;
+  const totalBinders = Object.keys(chainState.binders || {}).length;
+
+  ticker.innerHTML = `
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;display:flex;align-items:center;gap:10px;min-width:200px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f7931a,#ff6d00);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:.8rem">BTC</div>
+        <div>
+          <div style="font-size:1.1rem;font-weight:800;color:#f7931a">$${_btcPrice.toLocaleString()}</div>
+          <div style="font-size:.65rem;color:#8b949e">Live BTC/USD</div>
+        </div>
+      </div>
+      ${btcForge > 0 ? `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#e6edf3">$${btcForge.toLocaleString()}</div>
+        <div style="font-size:.65rem;color:#8b949e">BTC at Genesis Forge</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:${btcChange >= 0 ? '#39d353' : '#f85149'}">${btcChange >= 0 ? '+' : ''}${btcChange.toFixed(2)}%</div>
+        <div style="font-size:.65rem;color:#8b949e">Since Forge</div>
+      </div>` : ''}
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${totalCards}</div>
+        <div style="font-size:.65rem;color:#8b949e">Forged Cards</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#58a6ff">${totalBinders}</div>
+        <div style="font-size:.65rem;color:#8b949e">Binders</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:#39d353">${chainBlocks.length}</div>
+        <div style="font-size:.65rem;color:#8b949e">Chain Length</div>
+      </div>
+    </div>`;
+
+  // Sort by rarity (mythic first), then alphabetically
+  const rarityOrder = { genesis: 5, mythic: 4, rare: 3, uncommon: 2, common: 1 };
+  forgeBlocks.sort((a, b) => (rarityOrder[b.data.rarity] || 1) - (rarityOrder[a.data.rarity] || 1));
+
+  // Build exchange table
+  const rows = forgeBlocks.map(block => {
+    const d = block.data;
+    const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+    const rc = rarityColors[d.rarity] || '#8899aa';
+    const ownerInfo = chainState.binders?.[d.owner];
+    const ownerLabel = ownerInfo?.alias || `${d.owner.slice(0,8)}...`;
+    const setLabel = d.setId === 'GENESIS' ? 'GENESIS' : d.setId === 'HOLO' ? 'HOLO' : 'CORE';
+    const agentUrl = d.agentSlug ? `https://raw.githubusercontent.com/kody-w/RAR/main/agents/${d.agentName?.split('/')[0] || 'unknown'}/${d.agentSlug}/agent.py` : '#';
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(agentUrl)}`;
+
+    return `
+      <div class="market-row" style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;transition:background .15s;cursor:default" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
+        <div style="font-size:.65rem;color:#484f58;font-family:monospace">#${block.index}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <img src="${qrUrl}" alt="" width="28" height="28" style="border-radius:4px;opacity:.7" loading="lazy">
+          <div>
+            <div style="font-weight:700;color:var(--text)">${esc(d.title || d.agentSlug)}</div>
+            <div style="font-size:.62rem;color:#484f58">${d.mintId}</div>
+          </div>
+        </div>
+        <div style="text-align:center"><span style="color:${rc};font-weight:700;font-size:.72rem;text-transform:uppercase">${d.rarity || 'common'}</span></div>
+        <div style="text-align:center;color:#e3b341;font-weight:600">${setLabel}</div>
+        <div style="text-align:center;color:#d2a8ff;font-size:.72rem">${ownerLabel}</div>
+        <div style="text-align:right;font-family:monospace;color:#e6edf3;font-size:.72rem">${d.cardHash?.slice(0,12)}...</div>
+        <div style="text-align:right;color:${d.rarity === 'genesis' || d.rarity === 'mythic' ? '#f7931a' : '#8b949e'};font-weight:600">${d.edition || 1}/${d.maxEdition || '\u221e'}</div>
+      </div>`;
+  }).join('');
+
+  grid.innerHTML = `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;padding:10px 14px;font-size:.68rem;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);font-weight:700">
+        <div>Block</div>
+        <div>Card</div>
+        <div style="text-align:center">Rarity</div>
+        <div style="text-align:center">Set</div>
+        <div style="text-align:center">Binder</div>
+        <div style="text-align:right">Hash</div>
+        <div style="text-align:right">Edition</div>
+      </div>
+      <div style="max-height:600px;overflow-y:auto">${rows}</div>
+    </div>
+    <div style="text-align:center;margin-top:12px;font-size:.68rem;color:#484f58">
+      Chain head: <span style="font-family:monospace;color:#58a6ff">${chainState.chainHead?.slice(0,24)}...</span>
+      &middot; Genesis: <span style="font-family:monospace;color:#39d353">${chainState.genesisHash?.slice(0,16)}...</span>
+      &middot; Protocol: ${chainState.protocol}
+    </div>`;
+}
+
 async function openSlabZoom(mintId) {
   const all = await getAllMinted();
   const card = all.find(c => c.mintId === mintId);
   if (!card) return;
+
+  const a = allAgents.find(x => x.name === card.agentName);
+  const rarity = TIER_TO_RARITY[card.tier] || 'uncommon';
+  const gl = gradeLabel(card.grade);
+  const pts = calculateValue(card);
+  const bv = formatBtcValue(pts);
+  const isMythic = rarity === 'mythic';
+  const isRare = rarity === 'rare';
+  const glowColor = isMythic ? '#ff6d00' : isRare ? '#ffd700' : rarity === 'uncommon' ? '#c0c0c0' : '#58a6ff';
 
   const W = 500, H = 700;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   await renderMiniCard(canvas, card);
 
-  // Draw centering grid overlay
-  const ctx = canvas.getContext('2d');
-  const v = card.variations;
-  const ox = v.centeringX * (W * 0.1);
-  const oy = v.centeringY * (H * 0.1);
-
-  // Center crosshair (ideal center)
-  ctx.strokeStyle = 'rgba(88,166,255,.5)';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([4, 4]);
-  ctx.beginPath(); ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
-
-  // Card center (actual)
-  ctx.strokeStyle = 'rgba(255,100,100,.8)';
-  ctx.lineWidth = 1.5;
-  ctx.setLineDash([]);
-  ctx.beginPath(); ctx.moveTo(W/2 + ox, 0); ctx.lineTo(W/2 + ox, H); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(0, H/2 + oy); ctx.lineTo(W, H/2 + oy); ctx.stroke();
-
-  // Offset labels
-  ctx.fillStyle = 'rgba(255,100,100,.9)';
-  ctx.font = 'bold 12px -apple-system, sans-serif';
-  ctx.setLineDash([]);
-  if (Math.abs(ox) > 2) ctx.fillText(`${ox > 0 ? '+' : ''}${ox.toFixed(1)}px`, W/2 + ox + 4, 20);
-  if (Math.abs(oy) > 2) ctx.fillText(`${oy > 0 ? '+' : ''}${oy.toFixed(1)}px`, W - 60, H/2 + oy - 4);
-
   const zoom = document.createElement('div');
   zoom.className = 'slab-zoom-overlay';
+  zoom.style.cssText = `position:fixed;inset:0;z-index:400;background:radial-gradient(ellipse at center, rgba(20,15,8,.98) 0%, rgba(0,0,0,.99) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer`;
   zoom.innerHTML = `
-    <button class="slab-zoom-close" onclick="this.closest('.slab-zoom-overlay').remove()">&#10005;</button>
-    <div class="slab-zoom-info"><strong>${esc(card.displayName)}</strong> — Centering Analysis<br>
-    <span style="color:rgba(88,166,255,.7)">Blue = ideal center</span> &nbsp; <span style="color:rgba(255,100,100,.8)">Red = card center</span></div>`;
-  zoom.appendChild(canvas);
-  canvas.style.cssText = `max-width:90vw;max-height:70vh;border-radius:8px;box-shadow:0 0 60px rgba(88,166,255,.2)`;
+    <button class="slab-zoom-close" onclick="event.stopPropagation();this.closest('.slab-zoom-overlay').remove()">&#10005;</button>
+    <div class="showcase-name" style="font-size:2rem;font-weight:900;color:#f0e6d0;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 40px ${glowColor}80;margin-bottom:4px;animation:showcaseFadeIn .6s ease-out both">${esc(card.displayName)}</div>
+    <div style="font-size:.85rem;color:${glowColor};font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;animation:showcaseFadeIn .6s ease-out .1s both;opacity:0">${rarity.toUpperCase()}${card.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
+    <div class="showcase-card-wrap" style="position:relative;animation:showcaseCardIn .8s cubic-bezier(.23,1,.32,1) .2s both;opacity:0">
+      <div class="showcase-glow" style="position:absolute;inset:-40px;background:radial-gradient(circle,${glowColor}20 0%,transparent 70%);animation:showcasePulse 3s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
+    </div>
+    <div style="display:flex;gap:32px;margin-top:20px;animation:showcaseFadeIn .6s ease-out .5s both;opacity:0">
+      <div style="text-align:center"><div style="font-size:1.6rem;font-weight:900;color:#ffd700">${gl.label}</div><div style="font-size:.65rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-top:2px">Grade</div></div>
+      <div style="text-align:center"><div style="font-size:1.6rem;font-weight:900;color:#d2a8ff">${pts} GP</div><div style="font-size:.65rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-top:2px">Reputation</div></div>
+      <div style="text-align:center"><div style="font-size:1.6rem;font-weight:900;color:#e6edf3">#${card.mintNum}</div><div style="font-size:.65rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-top:2px">Mint</div></div>
+    </div>`;
 
-  const cenLabel = document.createElement('div');
-  cenLabel.className = 'slab-zoom-info';
-  cenLabel.textContent = `Offset: X=${(v.centeringX * 100).toFixed(1)}%  Y=${(v.centeringY * 100).toFixed(1)}%  Score: ${v.centerScore}/10`;
-  zoom.appendChild(cenLabel);
+  const cardWrap = zoom.querySelector('.showcase-card-wrap');
+  canvas.style.cssText = `max-width:min(80vw, 400px);max-height:65vh;border-radius:12px;box-shadow:0 0 80px ${glowColor}40, 0 20px 60px rgba(0,0,0,.8);position:relative;z-index:1`;
+  cardWrap.appendChild(canvas);
 
   document.body.appendChild(zoom);
   zoom.addEventListener('click', e => { if (e.target === zoom) zoom.remove(); });
+
+  // Particle burst on entry
+  setTimeout(() => {
+    const rect = canvas.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    for (let p = 0; p < 24; p++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const angle = (p / 24) * Math.PI * 2;
+      const dist = 80 + Math.random() * 120;
+      particle.style.cssText = `left:${cx}px;top:${cy}px;background:${glowColor};--px:${Math.cos(angle) * dist}px;--py:${Math.sin(angle) * dist}px;animation-delay:${Math.random() * 0.3}s`;
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1000);
+    }
+  }, 400);
 }
 
 // ═══════════════════════════════════════════════════════

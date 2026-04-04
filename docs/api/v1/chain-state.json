@@ -7,6 +7,7 @@
   "genesisTimestamp": "2026-04-04T00:00:00.000Z",
   "lastBlockTimestamp": "2026-04-04T00:02:19.000Z",
   "authority": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+  "btcAtForge": 67347,
   "consensus": {
     "model": "3-of-5",
     "threshold": 0.6

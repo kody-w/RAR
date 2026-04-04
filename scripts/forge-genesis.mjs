@@ -192,6 +192,20 @@ for (const agent of registry.agents) {
   prevHash = block.hash;
 }
 
+// ── Fetch BTC price snapshot at forge time ──
+let btcAtForge = 0;
+try {
+  const resp = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+  const data = await resp.json();
+  btcAtForge = data.bitcoin.usd;
+} catch(e) {
+  try {
+    const resp2 = await fetch('https://blockchain.info/ticker');
+    const data2 = await resp2.json();
+    btcAtForge = data2.USD.last;
+  } catch(e2) { btcAtForge = 0; }
+}
+
 // ── Write Chain Files ──
 const apiDir = join(ROOT, 'docs', 'api', 'v1');
 mkdirSync(join(apiDir, 'cards'), { recursive: true });
@@ -207,11 +221,10 @@ const chainState = {
   genesisTimestamp: genesis.timestamp,
   lastBlockTimestamp: blocks[blocks.length - 1].timestamp,
   authority: AUTHORITY_BINDER,
+  btcAtForge,
   consensus: {
     model: '3-of-5',
     threshold: 0.6,
-    model: '3-of-5',
-    threshold: 0.6
   },
   binders: {
     [HOWARD_BINDER]: { alias: 'Howard Hoy', cards: 13, role: 'genesis-holder' },
