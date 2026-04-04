@@ -620,12 +620,9 @@ document.documentElement.className = 'rar-guard';
   }
   .agent-card-wrap:active { cursor: grabbing; }
   .agent-card-wrap.flipped { transform: perspective(800px) rotateX(var(--tilt-x)) rotateY(calc(180deg + var(--tilt-y))); }
-  .agent-card-front, .agent-card-back {
+  .agent-card-front {
     position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
     overflow: hidden; border: 2px solid var(--border);
-  }
-  .agent-card-back { transform: rotateY(180deg); background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-  .agent-card-front {
     background: var(--surface); display: flex; flex-direction: column; padding: 0;
   }
   /* Card color bands by category */
@@ -6089,9 +6086,7 @@ function agentToCard(a) {
   const trustBadge = cred
     ? `<span class="ts-badge signed" title="Signed by ${cred.brainstem?.slice(0,12)}">&#x2713; signed</span>`
     : `<span class="ts-badge" title="No Third Space credential">unsigned</span>`;
-  const haikuHtml = agentHaiku
-    ? `<div class="agent-haiku">${esc(agentHaiku)}<br>${trustBadge}</div>`
-    : `<div class="agent-haiku">${esc(getAgentHaiku(a))} ${trustBadge}</div>`;
+  const haikuHtml = `<div class="agent-haiku">${esc(agentHaiku)}<br>${trustBadge}</div>`;
 
   // ── Business Card Face ──
   const bizFace = `
@@ -6295,14 +6290,8 @@ function showAndTellNav(dir) {
   const overlay = document.querySelector('.showntell-overlay');
   if (!overlay) return;
   const current = overlay._agentName;
-  // Get visible cards in current filter
   const grid = document.getElementById('cards-grid');
   const wraps = grid ? Array.from(grid.querySelectorAll('.agent-card-wrap')) : [];
-  const names = wraps.map(w => w.id.replace(/^card-/, '').replace(/_/g, '/').replace(/\/@/g, '/@'));
-  // Find by matching agent
-  const idx = allAgents.findIndex(a => a.name === current);
-  if (idx < 0) return;
-  // Navigate through allAgents in order
   const visible = allAgents.filter(a => wraps.some(w => w.id === 'card-' + a.name.replace(/[^a-z0-9]/gi, '_')));
   const curIdx = visible.findIndex(a => a.name === current);
   const nextIdx = (curIdx + dir + visible.length) % visible.length;
