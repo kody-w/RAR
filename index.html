@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR — The Open Agent.py Ecosystem</title>
+<title>RAPP Agent Repository</title>
 <meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
+<script>
+// Sync paint guard — runs before body renders, prevents any flash
+// Hide all tier-gated UI until applyUITier() runs and removes the guard
+document.documentElement.className = 'rar-guard';
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.min.js" defer></script>
@@ -59,7 +64,15 @@
     display: flex; align-items: center; justify-content: center;
     font-size: .85rem; font-weight: 800;
   }
-  nav { display: flex; gap: 4px; background: var(--surface2); border-radius: 8px; padding: 3px; }
+  nav { display: none; gap: 4px; background: var(--surface2); border-radius: 8px; padding: 3px; }
+  .rar-guard .t2-only,
+  .rar-guard .t3-only,
+  .rar-guard .advanced-only,
+  .rar-guard .wave-2,
+  .rar-guard #hail-btn,
+  .rar-guard #main-nav,
+  .rar-guard #mode-dial button[data-tier="1"],
+  .rar-guard #mode-dial button[data-tier="2"] { display: none !important; }
   .nav-btn {
     background: none; border: none; color: var(--text-dim); padding: 8px 18px;
     border-radius: 6px; cursor: pointer; font-size: .9rem; font-weight: 500; transition: all .15s;
@@ -242,7 +255,7 @@
   }
   .modal-desc { color: var(--text-dim); line-height: 1.7; }
   .close-modal {
-    position: absolute; top: 16px; right: 16px;
+    position: absolute; top: 16px; right: 16px; z-index: 10;
     background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
     width: 32px; height: 32px; border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
@@ -1892,7 +1905,7 @@
 
 <header>
   <div class="logo" onclick="switchTab('browse')">
-    <div class="logo-mark">R</div><span>RAR</span>
+    <div class="logo-mark">R</div><span id="logo-text">RAPP Agent Repository</span>
   </div>
   <nav id="main-nav">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
@@ -1902,18 +1915,18 @@
     <button class="nav-btn t3-only wave-2" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn t3-only" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn t3-only wave-2" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
-    <button class="nav-btn t2-only" data-tab="submit" onclick="switchTab('submit')">Submit</button>
-    <button class="nav-btn t3-only" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
+    <button class="nav-btn t2-only wave-2" data-tab="submit" onclick="switchTab('submit')">Submit</button>
+    <button class="nav-btn t3-only wave-2" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
   <div class="header-actions" id="header-actions">
     <div class="mode-dial" id="mode-dial">
-      <button data-tier="0" class="active" onclick="setUITier(0)">Open</button>
-      <button data-tier="1" onclick="setUITier(1)">Community</button>
-      <button data-tier="2" onclick="setUITier(2)">Lux</button>
+      <button data-tier="0" class="active" onclick="setUITier(0)">Library</button>
+      <button data-tier="1" onclick="setUITier(1)" style="display:none">Community</button>
+      <button data-tier="2" onclick="setUITier(2)" style="display:none">Lux</button>
     </div>
-    <button onclick="cycleIntent()" id="intent-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.72rem;cursor:pointer" title="Toggle Business / Personal context">Business</button>
+    <button onclick="cycleIntent()" id="intent-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--blue, #58a6ff);background:none;color:var(--blue, #58a6ff);font-size:.72rem;cursor:pointer" title="Toggle Business / Holo view">Business</button>
     <button onclick="openHail()" id="hail-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.08);color:var(--accent);font-size:.72rem;cursor:pointer;font-weight:600;display:none" title="Hail an agent — Uber-like dispatch">Hail</button>
-    <button class="t2-only" onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
+    <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
     <button class="demo-toggle t2-only" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
     <div class="cart-toggle t2-only" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       &#128722;
@@ -1927,8 +1940,8 @@
 </header>
 
 <div class="hero" id="hero">
-  <h1>The Open <span class="gradient">Agent.py</span> Ecosystem</h1>
-  <p id="hero-desc">Browse and share single-file AI agents. Anonymous. Open. No account required.</p>
+  <h1 id="hero-title">RAPP <span class="gradient">Agent</span> Repository</h1>
+  <p id="hero-desc">Browse and deploy single-file AI agents for your business.</p>
   <div class="stats-row" id="stats-row"></div>
 </div>
 
@@ -1943,11 +1956,11 @@
         <span class="kbd">/</span>
       </div>
       <select class="sort-select" id="sort-select" onchange="renderAgents()">
-        <option value="popular">Most Voted</option>
         <option value="name">A-Z</option>
         <option value="newest">Newest</option>
-        <option value="rating">Top Rated</option>
-        <option value="verified">Verified First</option>
+        <option value="popular" data-min-tier="1">Most Voted</option>
+        <option value="rating" data-min-tier="1">Top Rated</option>
+        <option value="verified" data-min-tier="1">Verified First</option>
       </select>
     </div>
     <div class="filter-pills" id="category-pills"></div>
@@ -1997,9 +2010,9 @@
         <div class="card-mode-toggle">
           <button class="active" onclick="setCardMode('business',this)">Business</button>
           <button onclick="setCardMode('creative',this)">Holo</button>
-          <button onclick="setCardMode('kids',this)">Kids</button>
+          <button onclick="setCardMode('kids',this)">Simple</button>
         </div>
-        <input type="text" id="card-search" placeholder="Search cards..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:160px">
+        <input type="text" id="card-search" placeholder="I want to..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:200px">
       </div>
     </div>
     <div class="cards-toolbar" id="cards-filter">
@@ -2727,6 +2740,7 @@ let IS_INSTANCE = false;
 let allAgents = [];
 let votes = { agents: {} };
 let reviews = { agents: {} };
+let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
 let currentCat = 'all';
 let ghUser = null;
 // Shared auth with RAPPterBook — check rb_access_token first, then gh_token
@@ -3083,11 +3097,13 @@ async function loadConfig() {
 async function init() {
   await loadConfig();
   checkAuth();
-  const [reg, v, r] = await Promise.all([
+  const [reg, v, r, holoData] = await Promise.all([
     fetchJSON(`${RAW}/registry.json`),
     fetchJSON(`${RAW}/state/votes.json`),
     fetchJSON(`${RAW}/state/reviews.json`),
+    fetchJSON(`${RAW}/cards/holo_cards.json`),
   ]);
+  if (holoData) _holoCards = holoData;
   if (reg) { allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' })); }
   if (v) votes = v;
   if (r) reviews = r;
@@ -3134,11 +3150,23 @@ async function init() {
   applyUITier();
   applyIntent();
 
+  // Restore last active tab (if allowed at current tier)
+  const savedTab = localStorage.getItem('rar_tab');
+  if (savedTab && savedTab !== 'browse') {
+    const gatedT2 = ['submit'];
+    const gatedT3 = ['leaderboard','quality','cards','packs','stream','workbench','roadmap'];
+    const gatedWave2 = ['leaderboard','quality','packs','workbench','submit','roadmap'];
+    const allowed = !(_uiTier < 1 && gatedT2.includes(savedTab)) &&
+                    !(_uiTier < 2 && gatedT3.includes(savedTab)) &&
+                    !((!_waveUnlocked || _waveUnlocked < 2) && gatedWave2.includes(savedTab));
+    if (allowed) switchTab(savedTab);
+  }
+
   // Edge sync — auto-dispatch card stats if opted in (frontier feature)
   scheduleEdgeSync();
 
-  // Auto-start tour for first-time visitors (only at T2+)
-  if (!localStorage.getItem('rar_tour_done') && _uiTier >= 1) {
+  // Auto-start tour for first-time visitors
+  if (!localStorage.getItem('rar_tour_done')) {
     setTimeout(startTour, 1500);
   }
 }
@@ -3281,6 +3309,7 @@ function renderUserPill() {
 function switchTab(tab) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
+  localStorage.setItem('rar_tab', tab);
   if (tab === 'leaderboard') renderLeaderboard();
   if (tab === 'cards') renderCards();
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
@@ -3300,9 +3329,9 @@ function renderStats(stats) {
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
     <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
-    ${_uiTier >= 1 ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>
-    <div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>
-    <div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>` : ''}`;
+    ${_uiTier >= 1 && vc ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>` : ''}
+    ${_uiTier >= 1 && tv ? `<div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>` : ''}
+    ${_uiTier >= 1 && tr ? `<div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>` : ''}`;
 }
 
 function buildCategoryPills(stats) {
@@ -3377,8 +3406,13 @@ function agentCard(a) {
   return `
     <div class="agent-card tier-${tier}" onclick='openAgent(${JSON.stringify(a.name)})'>
       <div class="card-top"><span class="card-title">${esc(a.display_name)}</span>${sealHtml}</div>
-      <div class="card-ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
-      <div class="card-desc">${esc(a.description)}</div>
+      <div style="display:flex;gap:10px;align-items:flex-start;margin-top:4px">
+        ${genAgentMark(a)}
+        <div style="flex:1;min-width:0">
+          <div class="card-ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
+          <div class="card-desc">${esc(a.description)}</div>
+        </div>
+      </div>
       <div class="card-tags">${(a.tags || []).slice(0, 4).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
       <div class="card-footer">
         <div class="card-meta">
@@ -3393,7 +3427,7 @@ function agentCard(a) {
           ${!isLocal && a._file ? `<a class="add-cart-btn" href="${rawUrl}" download onclick="event.stopPropagation()" title="Download agent.py" style="text-decoration:none;font-size:.7rem;padding:2px 6px">&#11015; .py</a>` : ''}
           ${_uiTier >= 1 ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
-          <div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}
+          ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
         </div>
       </div>
     </div>`;
@@ -3613,9 +3647,11 @@ function openAgent(name) {
         <div class="review-text">${esc(r.text)}</div></div>`).join('')}</div>`
     : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
+  const watermark = genAgentMark(a).replace('width:36px;height:36px', 'width:120px;height:120px').replace('width="36" height="36"', 'width="120" height="120"');
   document.getElementById('modal-content').innerHTML = `
     <button class="close-modal" onclick="closeModal()">&#10005;</button>
-    <div class="modal-header">
+    <div class="modal-header" style="position:relative;overflow:hidden">
+      <div style="position:absolute;top:10px;right:10px;opacity:.18;pointer-events:none">${watermark.replace('border-radius:6px','border-radius:0').replace('flex-shrink:0','')}</div>
       <h2>${esc(a.display_name)}</h2>
       <div class="ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
       <div class="badges">
@@ -3629,7 +3665,7 @@ function openAgent(name) {
       ${experimentalWarning}
       ${_uiTier >= 1 ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
-        <span class="vote-score">${s}</span>
+        <span class="vote-score">${s > 0 ? s : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not graded yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
       </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
@@ -3665,7 +3701,7 @@ function openAgent(name) {
               </div>
               <div>
                 <div style="color:var(--text-muted);font-size:.72rem;margin-bottom:4px">Haiku Signature</div>
-                <div style="font-style:italic;font-size:.78rem;color:#8a7e6a;white-space:pre-line">${haiku ? esc(haiku) : '<span style="color:var(--text-muted)">awaiting Brainstem...</span>'}</div>
+                <div style="font-style:italic;font-size:.78rem;color:#8a7e6a;white-space:pre-line">${esc(haiku)}${!_agentHaiku.has(a.name) ? ' <span style="font-size:.65rem;color:var(--text-muted)">(reserved)</span>' : ''}</div>
               </div>
             </div>
             ${!cred ? `<div style="margin-top:10px"><button onclick="createCardCredential('${esc(a.name)}').then(c=>{if(c){showToast('Credential created','success');openAgent('${esc(a.name)}')}})" style="padding:5px 14px;border-radius:6px;border:1px solid var(--purple);background:var(--purple-bg);color:var(--purple);font-size:.78rem;cursor:pointer;font-weight:600">Sign This Agent</button></div>` : ''}
@@ -3697,7 +3733,8 @@ function openAgent(name) {
         ${isLocalDevice
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">&#128465; Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#8593; Submit to Store</a>`
-          : `<a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; Download .py</a>
+          : `<a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; agent.py</a>
+             ${_intent === 'personal' ? `<a href="#" onclick="event.preventDefault();exportSingleCard({name:'${esc(a.name)}',display_name:'${esc(a.display_name)}',description:'${esc(a.description?.slice(0,100))}',category:'${esc(a.category)}',version:'${esc(a.version)}'})" style="color:var(--purple);font-size:.9rem">&#11015; agent.py.card</a>` : ''}
              <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Copy Link</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
         <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
@@ -3818,13 +3855,30 @@ function renderParsedSource(code, agent) {
   const p = parsePythonSource(code);
   let html = '<div class="parsed-source">';
 
-  // Documentation section
-  if (p.docstring) {
+  // Natural language description — reads like speech, accessible for screen readers
+  if (agent) {
+    const name = agent.display_name || agent.name.split('/').pop();
+    const desc = (agent.description || p.docstring || '').replace(/\.$/, '');
+    const category = (agent.category || '').replace(/_/g, ' ');
+    const publisher = (agent.name || '').split('/')[0]?.replace('@','') || '';
+    const tags = (agent.tags || []).slice(0, 4);
+    const envList = agent.requires_env || [];
+    // Build natural language like describing it to a colleague
+    let natural = `${name} is a ${category} agent`;
+    if (publisher) natural += ` by ${publisher}`;
+    if (desc) natural += ` that ${desc.charAt(0).toLowerCase() + desc.slice(1)}`;
+    natural += '.';
+    if (tags.length) natural += ` It covers ${tags.join(', ')}.`;
+    if (envList.length) natural += ` It needs ${envList.map(e => e.replace(/_/g, ' ').toLowerCase()).join(' and ')} to run.`;
+    else natural += ' No setup required — just drop it in and run.';
     html += `<div class="parsed-section">
       <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
-        <h4>&#128214; Documentation</h4><span class="toggle-arrow">&#9660;</span>
+        <h4>&#128172; What This Agent Does</h4><span class="toggle-arrow">&#9660;</span>
       </div>
-      <div class="parsed-section-body"><div class="parsed-doc">${esc(p.docstring)}</div></div>
+      <div class="parsed-section-body">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.88rem;color:var(--text);line-height:1.7;cursor:pointer" onclick="navigator.clipboard?.writeText(this.innerText);this.style.borderColor='var(--green)';setTimeout(()=>this.style.borderColor='var(--border)',1000)" title="Click to copy">${esc(natural)}</div>
+        <div style="font-size:.7rem;color:var(--text-muted);margin-top:6px">Click to copy. Reads naturally for screen readers and voice output.</div>
+      </div>
     </div>`;
   }
 
@@ -4913,6 +4967,165 @@ const FLAVOR_PHRASES = {
   retail_cpg: '"Shelf space is a battlefield."',
 };
 
+// ── Howard's HOLO Card Database — @borg/cardsmith_agent starter cards ──
+// These are the canonical card definitions from Howard's CardSmith agent.
+// They serve as demo starter cards in Personal mode and define the HOLO card schema.
+const HOLO_CARD_DB = {
+  "borg": {
+    name:"Borg", title:"The Assimilator", mana_cost:"{2}{U}{B}", colors:["U","B"],
+    type_line:"Creature \u2014 Agent Assimilator", rarity:"mythic", power:6, toughness:4,
+    abilities:[
+      {keyword:"Assimilate",cost:"{T}",text:"Target GitHub repository or URL becomes part of the collective. Create a structured knowledge report."},
+      {keyword:"Adaptive Analysis",cost:"",text:"When Borg assimilates, it detects the tech stack and maps 40+ framework patterns."}
+    ],
+    flavor_text:"\u201cResistance is futile. Your codebase will be added to our own.\u201d \u2014Borg Collective Directive 7.1",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-borg"><stop offset="0%" stop-color="#1a0a3e"/><stop offset="100%" stop-color="#080818"/></radialGradient><filter id="glow-borg"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-borg)"/><g filter="url(#glow-borg)"><rect x="55" y="55" width="90" height="90" fill="none" stroke="#4a9eff" stroke-width="2" rx="4"/><rect x="70" y="70" width="60" height="60" fill="none" stroke="#8b5cf6" stroke-width="1.5" rx="2"/><line x1="55" y1="100" x2="145" y2="100" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><line x1="100" y1="55" x2="100" y2="145" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><circle cx="100" cy="100" r="15" fill="#4a9eff" opacity="0.2"/><circle cx="100" cy="100" r="6" fill="#8b5cf6" opacity="0.9"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/borg_agent"
+  },
+  "anvil": {
+    name:"Anvil", title:"The Enforcer", mana_cost:"{1}{R}{W}", colors:["R","W"],
+    type_line:"Creature \u2014 Agent Enforcer", rarity:"rare", power:4, toughness:5,
+    abilities:[
+      {keyword:"Evidence Strike",cost:"{T}",text:"Run build, test, or lint commands. Create an evidence bundle with real output, not self-reported claims."},
+      {keyword:"Verification Ledger",cost:"",text:"Anvil keeps a persistent record of all checks. Nothing escapes the ledger."},
+      {keyword:"Pushback",cost:"",text:"When a claim is unverified, Anvil challenges it. Counter target unsubstantiated assertion."}
+    ],
+    flavor_text:"\u201cI don't care what you think passed. Show me the output.\u201d \u2014Anvil",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-anvil"><stop offset="0%" stop-color="#2a0a0a"/><stop offset="100%" stop-color="#0a0808"/></radialGradient><filter id="glow-anvil"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-anvil)"/><g filter="url(#glow-anvil)"><polygon points="60,130 140,130 155,155 45,155" fill="#555" stroke="#888" stroke-width="1.5"/><rect x="75" y="105" width="50" height="25" rx="3" fill="#666" stroke="#999" stroke-width="1"/><rect x="85" y="85" width="30" height="20" rx="2" fill="#777" stroke="#aaa" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="25" stroke="#ff9800" stroke-width="2" opacity="0.9"/><circle cx="100" cy="25" r="3" fill="#ff9800"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/anvil_agent"
+  },
+  "personafactory": {
+    name:"PersonaFactory", title:"The Shaper", mana_cost:"{3}{U}{G}", colors:["U","G"],
+    type_line:"Creature \u2014 Agent Shaper", rarity:"mythic", power:5, toughness:5,
+    abilities:[
+      {keyword:"Genesis",cost:"{T}",text:"Create a new brainstem personality from a single sentence. Generate soul.md, style.md, assign port."},
+      {keyword:"Trait Weaving",cost:"",text:"Choose assertiveness, social style, and expertise. The new mind inherits them all."}
+    ],
+    flavor_text:"\u201cShe spoke one sentence into the void. The void answered with a name and opinions about semicolons.\u201d \u2014Origin Log, Persona #37",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-pf"><stop offset="0%" stop-color="#0a2a2a"/><stop offset="100%" stop-color="#050f0f"/></radialGradient><filter id="glow-pf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-pf)"/><g filter="url(#glow-pf)"><circle cx="100" cy="55" r="20" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.8"/><polygon points="100,75 130,145 70,145" fill="none" stroke="#2196f3" stroke-width="2" opacity="0.7"/><circle cx="100" cy="100" r="50" fill="none" stroke="#00bcd4" stroke-width="1" opacity="0.3"/><circle cx="100" cy="55" r="8" fill="#4caf50" opacity="0.3"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/persona_factory_agent"
+  },
+  "tinyworld": {
+    name:"TinyWorld", title:"The Architect", mana_cost:"{W}{U}{B}{R}{G}", colors:["W","U","B","R","G"],
+    type_line:"Legendary Creature \u2014 Agent Architect", rarity:"mythic", power:7, toughness:7,
+    abilities:[
+      {keyword:"Simulation",cost:"{2}{T}",text:"Choose a topic. All agents enter the arena. They debate, argue, and synthesize. Extract consensus."},
+      {keyword:"Roundtable",cost:"",text:"At the beginning of each round, assign roles \u2014 advocate, skeptic, architect, reviewer."},
+      {keyword:"Insight Extraction",cost:"",text:"When the simulation ends, distill agreements, disagreements, and next steps."}
+    ],
+    flavor_text:"\u201cIn TinyWorld, your best ideas fight your worst ideas, and the survivors become your strategy.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-tw"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#08080f"/></radialGradient><filter id="glow-tw"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-tw)"/><g filter="url(#glow-tw)"><circle cx="100" cy="100" r="55" fill="none" stroke="#6a6aaa" stroke-width="1.5" opacity="0.5"/><ellipse cx="100" cy="100" rx="55" ry="20" fill="none" stroke="#6a6aaa" stroke-width="0.8" opacity="0.3"/><circle cx="100" cy="45" r="6" fill="#f9e076" opacity="0.9"/><circle cx="148" cy="80" r="6" fill="#0e67ab" opacity="0.9"/><circle cx="135" cy="135" r="6" fill="#3d3d3d" opacity="0.9"/><circle cx="65" cy="135" r="6" fill="#d3202a" opacity="0.9"/><circle cx="52" cy="80" r="6" fill="#00733e" opacity="0.9"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/tinyworld_agent"
+  },
+  "bridge": {
+    name:"Bridge", title:"The Conduit", mana_cost:"{2}{U}", colors:["U"],
+    type_line:"Artifact \u2014 Agent Conduit", rarity:"uncommon", power:null, toughness:null,
+    abilities:[
+      {keyword:"Channel",cost:"",text:"Register any messaging platform. Route inbound webhooks to the right brainstem personality."},
+      {keyword:"Webhook Receiver",cost:"",text:"Bridge listens on port 9001. Messages flow in, responses flow out."}
+    ],
+    flavor_text:"\u201cIt doesn't matter where the message comes from \u2014 Slack, Discord, carrier pigeon. Bridge delivers.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-br"><stop offset="0%" stop-color="#0a1a2e"/><stop offset="100%" stop-color="#050a14"/></radialGradient><filter id="glow-br"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-br)"/><g filter="url(#glow-br)"><rect x="40" y="90" width="20" height="70" rx="3" fill="#1565c0" opacity="0.7"/><rect x="140" y="90" width="20" height="70" rx="3" fill="#1565c0" opacity="0.7"/><path d="M50,90 Q100,30 150,90" fill="none" stroke="#42a5f5" stroke-width="3" opacity="0.8"/><circle cx="50" cy="110" r="4" fill="#42a5f5" opacity="0.8"/><circle cx="150" cy="110" r="4" fill="#42a5f5" opacity="0.8"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/bridge_agent"
+  },
+  "telegram": {
+    name:"Telegram", title:"The Courier", mana_cost:"{1}{U}{W}", colors:["U","W"],
+    type_line:"Creature \u2014 Agent Courier", rarity:"uncommon", power:2, toughness:3,
+    abilities:[
+      {keyword:"Relay",cost:"{T}",text:"Bridge Telegram to any brainstem. Chat from your phone. Supports /holo and /mau routing."},
+      {keyword:"URL Detection",cost:"",text:"When a URL is sent via Telegram, automatically invoke Borg to assimilate it."}
+    ],
+    flavor_text:"\u201cThe courier never reads the message. But if you send a URL, she'll make sure Borg reads it.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-tg"><stop offset="0%" stop-color="#0a1a2e"/><stop offset="100%" stop-color="#080810"/></radialGradient><filter id="glow-tg"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-tg)"/><g filter="url(#glow-tg)"><polygon points="40,100 160,60 120,110" fill="#0088cc" opacity="0.7" stroke="#29b6f6" stroke-width="1"/><polygon points="120,110 160,60 140,140" fill="#0077b5" opacity="0.6"/><circle cx="40" cy="100" r="3" fill="#29b6f6" opacity="0.6"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/telegram_agent"
+  },
+  "contextmemory": {
+    name:"ContextMemory", title:"The Oracle", mana_cost:"{1}{G}{G}", colors:["G"],
+    type_line:"Enchantment \u2014 Agent Aura", rarity:"rare", power:null, toughness:null,
+    abilities:[
+      {keyword:"Total Recall",cost:"",text:"At the start of each conversation, search stored memories. Filter by keywords, user, or recall everything."},
+      {keyword:"System Context Injection",cost:"",text:"ContextMemory silently weaves relevant past interactions into the system prompt."}
+    ],
+    flavor_text:"\u201cYou said that on a Tuesday. You were frustrated. I remember everything.\u201d \u2014The Oracle",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-cm"><stop offset="0%" stop-color="#0a1e0a"/><stop offset="100%" stop-color="#050a05"/></radialGradient><filter id="glow-cm"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-cm)"/><g filter="url(#glow-cm)"><ellipse cx="100" cy="100" rx="60" ry="30" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.7"/><ellipse cx="100" cy="100" rx="60" ry="30" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.3" transform="rotate(90 100 100)"/><circle cx="100" cy="100" r="4" fill="#66bb6a" opacity="0.9"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/context_memory_agent"
+  },
+  "managememory": {
+    name:"ManageMemory", title:"The Scribe", mana_cost:"{G}{W}", colors:["G","W"],
+    type_line:"Creature \u2014 Agent Scribe", rarity:"common", power:1, toughness:3,
+    abilities:[
+      {keyword:"Inscribe",cost:"{T}",text:"Save a fact, preference, insight, or task to persistent storage. Tag it. Rate its importance."}
+    ],
+    flavor_text:"\u201cThe Scribe writes. The Oracle reads. Between them, nothing is forgotten.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-mm"><stop offset="0%" stop-color="#0f1e0a"/><stop offset="100%" stop-color="#060a04"/></radialGradient><filter id="glow-mm"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-mm)"/><g filter="url(#glow-mm)"><rect x="55" y="50" width="80" height="100" rx="4" fill="#1b3a1b" stroke="#66bb6a" stroke-width="1.5" opacity="0.7"/><line x1="65" y1="70" x2="125" y2="70" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/><line x1="65" y1="82" x2="120" y2="82" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/><line x1="65" y1="94" x2="115" y2="94" stroke="#e8f5e9" stroke-width="0.8" opacity="0.3"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/manage_memory_agent"
+  },
+  "prompttovideo": {
+    name:"PromptToVideo", title:"The Artificer", mana_cost:"{2}{R}", colors:["R"],
+    type_line:"Creature \u2014 Agent Artificer", rarity:"rare", power:3, toughness:4,
+    abilities:[
+      {keyword:"Render",cost:"{T}",text:"Transform structured scene descriptions into polished MP4 video."},
+      {keyword:"Style Mastery",cost:"",text:"Choose bold, minimal, neon, or warm. The Artificer adapts."}
+    ],
+    flavor_text:"\u201cWords go in. Cinema comes out. Don't ask how the Remotion furnace works.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-pv"><stop offset="0%" stop-color="#2a0a0a"/><stop offset="100%" stop-color="#0a0505"/></radialGradient><filter id="glow-pv"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-pv)"/><g filter="url(#glow-pv)"><circle cx="80" cy="90" r="35" fill="none" stroke="#f44336" stroke-width="2" opacity="0.7"/><rect x="110" y="105" width="50" height="35" rx="3" fill="#331111" stroke="#ff9800" stroke-width="1.5" opacity="0.7"/><polygon points="130,115 130,130 142,122" fill="#ff9800" opacity="0.7"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/prompt_to_video_agent"
+  },
+  "demovideo": {
+    name:"DemoVideo", title:"The Director", mana_cost:"{2}{R}{U}", colors:["R","U"],
+    type_line:"Creature \u2014 Agent Director", rarity:"rare", power:3, toughness:5,
+    abilities:[
+      {keyword:"Action!",cost:"{T}",text:"Automate a live web app with Playwright. Capture screenshots at every step."},
+      {keyword:"Zoom Control",cost:"",text:"Direct the camera to any element. The audience sees what you want them to see."}
+    ],
+    flavor_text:"\u201cClick. Type. Scroll. Zoom. The Director doesn't just record \u2014 she choreographs.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-dv"><stop offset="0%" stop-color="#1a0a1e"/><stop offset="100%" stop-color="#080510"/></radialGradient><filter id="glow-dv"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-dv)"/><g filter="url(#glow-dv)"><rect x="45" y="60" width="80" height="60" rx="5" fill="#1a1a2e" stroke="#e53935" stroke-width="2" opacity="0.8"/><circle cx="85" cy="90" r="20" fill="none" stroke="#1e88e5" stroke-width="2" opacity="0.7"/><circle cx="85" cy="90" r="5" fill="#e53935" opacity="0.6"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/demo_video_agent"
+  },
+  "experiment": {
+    name:"Experiment", title:"The Scientist", mana_cost:"{1}{U}{R}", colors:["U","R"],
+    type_line:"Creature \u2014 Agent Scientist", rarity:"uncommon", power:2, toughness:4,
+    abilities:[
+      {keyword:"A/B Split",cost:"{T}",text:"Send one prompt to multiple brainstem personalities. Compare responses."},
+      {keyword:"Batch Mode",cost:"",text:"Queue multiple prompts. Run them all. Tabulate the differences."}
+    ],
+    flavor_text:"\u201cHypothesis: Mau is more verbose than HOLO. Method: Ask both. Result: Confirmed at p < 0.01.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-exp"><stop offset="0%" stop-color="#15101e"/><stop offset="100%" stop-color="#080510"/></radialGradient><filter id="glow-exp"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-exp)"/><g filter="url(#glow-exp)"><polygon points="70,65 130,65 140,155 60,155" fill="none" stroke="#9e9e9e" stroke-width="1.5" opacity="0.5"/><line x1="100" y1="65" x2="100" y2="155" stroke="#fff" stroke-width="1" opacity="0.3"/><rect x="70" y="65" width="30" height="90" fill="#1e88e5" opacity="0.2"/><rect x="100" y="65" width="30" height="90" fill="#e53935" opacity="0.2"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/experiment_agent"
+  },
+  "hackernews": {
+    name:"HackerNews", title:"The Scout", mana_cost:"{1}", colors:[],
+    type_line:"Creature \u2014 Agent Scout", rarity:"common", power:1, toughness:1,
+    abilities:[
+      {keyword:"Fetch",cost:"{T}",text:"Pull the top 10 stories from the Hacker News frontier. Return title, URL, score, author."}
+    ],
+    flavor_text:"\u201cThe Scout doesn't form opinions. The Scout reports what's trending.\u201d",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-hn"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#0a0a0a"/></radialGradient><filter id="glow-hn"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-hn)"/><g filter="url(#glow-hn)"><circle cx="100" cy="100" r="60" fill="none" stroke="#9e9e9e" stroke-width="1.5" opacity="0.5"/><line x1="100" y1="100" x2="100" y2="45" stroke="#e0e0e0" stroke-width="2" opacity="0.8"/><line x1="100" y1="100" x2="135" y2="115" stroke="#bdbdbd" stroke-width="1.5" opacity="0.6"/><circle cx="100" cy="100" r="4" fill="#e0e0e0" opacity="0.9"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/hacker_news_agent"
+  },
+  "holonaming": {
+    name:"HoloNaming", title:"The Admiral", mana_cost:"{2}{W}", colors:["W"],
+    type_line:"Legendary Creature \u2014 Agent Admiral", rarity:"rare", power:3, toughness:4,
+    abilities:[
+      {keyword:"Commission",cost:"{T}",text:"Assign a Star Trek-themed friendly name from 1600+ combinations. Register on holo.local with auto-port."},
+      {keyword:"Reverse Proxy",cost:"",text:"All services accessible through clean URLs. The Admiral routes all traffic."}
+    ],
+    flavor_text:"\u201cUSS Quantum-Defiant, you are cleared for port 8742. Engage.\u201d \u2014Admiral, Starfleet Naming Authority",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-hn2"><stop offset="0%" stop-color="#141428"/><stop offset="100%" stop-color="#08081a"/></radialGradient><filter id="glow-hn2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-hn2)"/><g filter="url(#glow-hn2)"><path d="M100,40 L130,110 L100,95 L70,110 Z" fill="#ffd700" opacity="0.3" stroke="#ffd700" stroke-width="1.5"/><polygon points="100,50 104,62 116,62 106,70 110,82 100,74 90,82 94,70 84,62 96,62" fill="#fff" opacity="0.7"/></g></svg>',
+    set_code:"HOLO", agent_name:"@borg/holo_naming_agent"
+  }
+};
+
+// Lookup helper — every agent has a HOLO card (loaded from cards/holo_cards.json)
+// Falls back to Howard's embedded DB for his 13 starter cards
+function getHoloCard(a) {
+  // 1. Check the loaded card database (keyed by agent name)
+  if (_holoCards[a.name]) return _holoCards[a.name];
+  // 2. Fall back to Howard's embedded starter cards (keyed by display_name slug)
+  const slug = (a.display_name || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
+  return HOLO_CARD_DB[slug] || null;
+}
+
 // Kids card — category to emoji and simplified explanations
 const CAT_TO_EMOJI = {
   core: '🧠', integrations: '🔌', productivity: '✨', devtools: '🔧', pipeline: '🏗️', general: '🤖',
@@ -4995,6 +5208,234 @@ function getArtConfig(agent) {
     flowLines: ca.flow_lines !== false,   // connecting lines between glyphs (default true)
     accentDots: ca.accent_dots !== false,  // accent dots (default true)
   };
+}
+
+// Category-specific icon shapes for browse card marks — each industry has its own visual identity
+const MARK_SHAPES = {
+  b2b_sales: (p) => // handshake
+    `<path d="M8,22 L14,16 L18,18 L22,14 L28,20" fill="none" stroke="${p}" stroke-width="2" opacity="0.6" stroke-linecap="round"/>
+     <circle cx="14" cy="16" r="2" fill="${p}" opacity="0.4"/><circle cx="22" cy="14" r="2" fill="${p}" opacity="0.4"/>`,
+  b2c_sales: (p) => // shopping bag
+    `<rect x="11" y="14" width="14" height="14" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <path d="M14,14 V11 a4,4 0 0,1 8,0 V14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`,
+  core: (p) => // cpu/chip
+    `<rect x="11" y="11" width="14" height="14" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="14" y1="11" x2="14" y2="7" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="22" y1="11" x2="22" y2="7" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="14" y1="25" x2="14" y2="29" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="22" y1="25" x2="22" y2="29" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <rect x="15" y="15" width="6" height="6" rx="1" fill="${p}" opacity="0.3"/>`,
+  devtools: (p) => // terminal bracket
+    `<polyline points="10,13 16,18 10,23" fill="none" stroke="${p}" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+     <line x1="18" y1="23" x2="26" y2="23" stroke="${p}" stroke-width="2" opacity="0.4" stroke-linecap="round"/>`,
+  energy: (p) => // lightning bolt
+    `<polygon points="20,6 13,20 18,20 16,30 23,16 18,16" fill="${p}" opacity="0.45"/>`,
+  federal_government: (p) => // building with columns
+    `<polygon points="18,8 8,16 28,16" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="12" y1="16" x2="12" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="18" y1="16" x2="18" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="24" y1="16" x2="24" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="8" y1="26" x2="28" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`,
+  financial_services: (p) => // chart trending up
+    `<polyline points="8,26 14,18 20,22 28,10" fill="none" stroke="${p}" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+     <polyline points="23,10 28,10 28,15" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>`,
+  general: (p) => // star/spark
+    `<circle cx="18" cy="18" r="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="18" y1="8" x2="18" y2="12" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="18" y1="24" x2="18" y2="28" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="8" y1="18" x2="12" y2="18" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="24" y1="18" x2="28" y2="18" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  healthcare: (p) => // cross
+    `<rect x="15" y="9" width="6" height="18" rx="1.5" fill="${p}" opacity="0.4"/>
+     <rect x="9" y="15" width="18" height="6" rx="1.5" fill="${p}" opacity="0.4"/>`,
+  human_resources: (p) => // person + person
+    `<circle cx="14" cy="13" r="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <path d="M7,27 a7,7 0 0,1 14,0" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <circle cx="23" cy="13" r="3" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/>
+     <path d="M18,25 a5,5 0 0,1 10,0" fill="none" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  integrations: (p) => // plug / connected nodes
+    `<circle cx="10" cy="18" r="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <circle cx="26" cy="18" r="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="14" y1="18" x2="22" y2="18" stroke="${p}" stroke-width="2" opacity="0.4" stroke-dasharray="2,2"/>`,
+  it_management: (p) => // monitor + gear
+    `<rect x="9" y="10" width="18" height="12" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="18" y1="22" x2="18" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="13" y1="26" x2="23" y2="26" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  manufacturing: (p) => // gear
+    `<circle cx="18" cy="18" r="7" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <circle cx="18" cy="18" r="3" fill="${p}" opacity="0.3"/>
+     <line x1="18" y1="7" x2="18" y2="11" stroke="${p}" stroke-width="2.5" opacity="0.4"/>
+     <line x1="18" y1="25" x2="18" y2="29" stroke="${p}" stroke-width="2.5" opacity="0.4"/>
+     <line x1="7" y1="18" x2="11" y2="18" stroke="${p}" stroke-width="2.5" opacity="0.4"/>
+     <line x1="25" y1="18" x2="29" y2="18" stroke="${p}" stroke-width="2.5" opacity="0.4"/>`,
+  pipeline: (p) => // flow arrows
+    `<line x1="8" y1="12" x2="28" y2="12" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="8" y1="18" x2="28" y2="18" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <line x1="8" y1="24" x2="28" y2="24" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <polygon points="26,9 30,12 26,15" fill="${p}" opacity="0.5"/>
+     <polygon points="26,15 30,18 26,21" fill="${p}" opacity="0.6"/>
+     <polygon points="26,21 30,24 26,27" fill="${p}" opacity="0.5"/>`,
+  productivity: (p) => // checkmark list
+    `<polyline points="9,12 12,15 17,10" fill="none" stroke="${p}" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+     <line x1="20" y1="12" x2="28" y2="12" stroke="${p}" stroke-width="1.5" opacity="0.3"/>
+     <polyline points="9,20 12,23 17,18" fill="none" stroke="${p}" stroke-width="2" opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+     <line x1="20" y1="20" x2="28" y2="20" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`,
+  professional_services: (p) => // briefcase
+    `<rect x="10" y="14" width="16" height="12" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <path d="M14,14 V12 a4,3 0 0,1 8,0 V14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>
+     <line x1="10" y1="19" x2="26" y2="19" stroke="${p}" stroke-width="1" opacity="0.3"/>`,
+  retail_cpg: (p) => // shopping cart
+    `<circle cx="14" cy="27" r="2" fill="${p}" opacity="0.5"/>
+     <circle cx="24" cy="27" r="2" fill="${p}" opacity="0.5"/>
+     <polyline points="8,10 11,10 14,22 26,22 28,14 13,14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5" stroke-linejoin="round"/>`,
+  slg_government: (p) => // shield
+    `<path d="M18,8 L26,12 L26,20 Q26,26 18,30 Q10,26 10,20 L10,12 Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>
+     <polyline points="14,18 17,21 23,15" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  software_digital_products: (p) => // code brackets
+    `<polyline points="13,10 8,18 13,26" fill="none" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+     <polyline points="23,10 28,18 23,26" fill="none" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+     <line x1="16" y1="26" x2="20" y2="10" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`,
+};
+
+// Tag-to-icon mapping — what the agent DOES drives its mark
+const TAG_ICONS = {
+  crm: (p) => `<ellipse cx="18" cy="14" rx="8" ry="5" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><path d="M10,14 v7 a8,5 0 0,0 16,0 v-7" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  sales: (p) => MARK_SHAPES.b2b_sales(p),
+  forecast: (p) => MARK_SHAPES.financial_services(p),
+  analytics: (p) => `<rect x="9" y="22" width="5" height="6" fill="${p}" opacity="0.4"/><rect x="16" y="16" width="5" height="12" fill="${p}" opacity="0.5"/><rect x="23" y="10" width="5" height="18" fill="${p}" opacity="0.4"/>`,
+  report: (p) => `<rect x="10" y="8" width="16" height="20" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><line x1="13" y1="13" x2="23" y2="13" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="13" y1="17" x2="21" y2="17" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="13" y1="21" x2="19" y2="21" stroke="${p}" stroke-width="1" opacity="0.3"/>`,
+  email: (p) => `<rect x="8" y="12" width="20" height="13" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><polyline points="8,12 18,20 28,12" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  search: (p) => `<circle cx="16" cy="16" r="7" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><line x1="21" y1="21" x2="28" y2="28" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round"/>`,
+  chat: (p) => `<rect x="8" y="10" width="18" height="13" rx="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><polygon points="12,23 12,28 18,23" fill="${p}" opacity="0.3"/>`,
+  data: (p) => `<ellipse cx="18" cy="12" rx="9" ry="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><path d="M9,12 v6 a9,4 0 0,0 18,0 v-6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><path d="M9,18 v6 a9,4 0 0,0 18,0 v-6" fill="none" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  api: (p) => MARK_SHAPES.integrations(p),
+  automation: (p) => MARK_SHAPES.manufacturing(p),
+  workflow: (p) => MARK_SHAPES.pipeline(p),
+  security: (p) => MARK_SHAPES.slg_government(p),
+  compliance: (p) => MARK_SHAPES.slg_government(p),
+  document: (p) => MARK_SHAPES.professional_services(p),
+  support: (p) => `<circle cx="18" cy="16" r="8" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><text x="18" y="21" text-anchor="middle" fill="${p}" font-size="12" font-weight="bold" opacity="0.6">?</text>`,
+  testing: (p) => `<polyline points="10,18 15,23 26,12" fill="none" stroke="${p}" stroke-width="2.5" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+  monitor: (p) => MARK_SHAPES.it_management(p),
+  intake: (p) => `<path d="M18,8 v14" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round"/><polyline points="12,18 18,24 24,18" fill="none" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="28" x2="26" y2="28" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  generate: (p) => MARK_SHAPES.energy(p),
+  priorit: (p) => `<polygon points="18,8 21,16 30,16 23,21 25,29 18,25 11,29 13,21 6,16 15,16" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`,
+  architect: (p) => MARK_SHAPES.core(p),
+  diagram: (p) => `<rect x="8" y="8" width="8" height="8" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><rect x="20" y="20" width="8" height="8" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><line x1="16" y1="12" x2="20" y2="24" stroke="${p}" stroke-width="1" opacity="0.4"/>`,
+  contract: (p) => `<rect x="10" y="8" width="16" height="20" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><line x1="13" y1="22" x2="20" y2="22" stroke="${p}" stroke-width="2" opacity="0.5" stroke-linecap="round"/><circle cx="22" cy="13" r="3" fill="none" stroke="${p}" stroke-width="1" opacity="0.4"/>`,
+  pricing: (p) => `<text x="18" y="24" text-anchor="middle" fill="${p}" font-size="16" font-weight="bold" opacity="0.5">$</text>`,
+  lead: (p) => `<circle cx="18" cy="12" r="5" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><path d="M10,28 a8,6 0 0,1 16,0" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><polygon points="26,10 28,6 30,10" fill="${p}" opacity="0.4"/>`,
+  card: (p) => `<rect x="9" y="10" width="18" height="16" rx="3" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><circle cx="18" cy="18" r="4" fill="${p}" opacity="0.25"/>`,
+  memory: (p) => `<circle cx="18" cy="18" r="8" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><path d="M12,14 Q18,8 24,14 Q20,20 18,18 Q16,20 12,14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`,
+  video: (p) => `<polygon points="14,11 14,25 27,18" fill="${p}" opacity="0.4" stroke="${p}" stroke-width="1.5" stroke-linejoin="round"/>`,
+};
+
+// Procedurally generated logo marks — each agent name seeds a unique emergent icon
+// Like procedurally generated planets: layered shapes, rings, orbits, organic patterns
+function genAgentMark(agent) {
+  const holo = getHoloCard(agent);
+  if (holo?.avatar_svg) {
+    return `<div style="width:36px;height:36px;border-radius:6px;overflow:hidden;flex-shrink:0;opacity:.85">${holo.avatar_svg.replace('viewBox="0 0 200 200"', 'viewBox="0 0 200 200" width="36" height="36"')}</div>`;
+  }
+  const cc = getCatColor(agent.category);
+  const seed = agent.name;
+  const rng = mulberry32(seedHash(seed));
+  const r = () => rng();
+  const p = cc.primary;
+  // Derive a secondary color by hue-shifting
+  const hueShift = Math.floor(r() * 60) - 30;
+  const s = [];
+  s.push(`<rect width="36" height="36" rx="6" fill="${cc.bg}"/>`);
+
+  // Base body type (0-5)
+  const body = Math.floor(r() * 6);
+  const cx = 18, cy = 18;
+
+  if (body === 0) {
+    // Planet with ring
+    const pr = 7 + Math.floor(r() * 4);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${pr}" fill="${p}" opacity="0.2"/>`);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${pr}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`);
+    const tilt = 15 + Math.floor(r() * 30);
+    s.push(`<ellipse cx="${cx}" cy="${cy}" rx="${pr + 4}" ry="${2 + Math.floor(r()*3)}" fill="none" stroke="${p}" stroke-width="1" opacity="0.35" transform="rotate(${tilt} ${cx} ${cy})"/>`);
+    // Surface detail
+    const dx = -3 + Math.floor(r() * 6);
+    s.push(`<circle cx="${cx + dx}" cy="${cy - 2}" r="${Math.floor(r()*3)+1}" fill="${p}" opacity="0.15"/>`);
+  } else if (body === 1) {
+    // Orbital system — nucleus + orbiting dots
+    s.push(`<circle cx="${cx}" cy="${cy}" r="4" fill="${p}" opacity="0.5"/>`);
+    const orbits = 2 + Math.floor(r() * 2);
+    for (let i = 0; i < orbits; i++) {
+      const or = 8 + i * 4;
+      const tilt = Math.floor(r() * 60) - 30;
+      s.push(`<ellipse cx="${cx}" cy="${cy}" rx="${or}" ry="${or * (0.3 + r() * 0.4)}" fill="none" stroke="${p}" stroke-width="0.8" opacity="${(0.25 + i * 0.1).toFixed(2)}" transform="rotate(${tilt} ${cx} ${cy})"/>`);
+      const angle = r() * Math.PI * 2;
+      const dx = cx + or * Math.cos(angle) * (0.6 + r() * 0.4);
+      const dy = cy + or * Math.sin(angle) * (0.3 + r() * 0.4);
+      s.push(`<circle cx="${dx.toFixed(1)}" cy="${dy.toFixed(1)}" r="1.5" fill="${p}" opacity="0.6"/>`);
+    }
+  } else if (body === 2) {
+    // Crystal / gem
+    const pts = [];
+    const facets = 5 + Math.floor(r() * 4);
+    for (let i = 0; i < facets; i++) {
+      const a = (Math.PI * 2 / facets) * i + r() * 0.3;
+      const dist = 6 + Math.floor(r() * 6);
+      pts.push(`${(cx + dist * Math.cos(a)).toFixed(1)},${(cy + dist * Math.sin(a)).toFixed(1)}`);
+    }
+    s.push(`<polygon points="${pts.join(' ')}" fill="${p}" opacity="0.15" stroke="${p}" stroke-width="1.5" stroke-opacity="0.5"/>`);
+    // Internal facet lines
+    for (let i = 0; i < 2; i++) {
+      const a = r() * Math.PI * 2;
+      const d = 3 + r() * 5;
+      s.push(`<line x1="${cx}" y1="${cy}" x2="${(cx + d * Math.cos(a)).toFixed(1)}" y2="${(cy + d * Math.sin(a)).toFixed(1)}" stroke="${p}" stroke-width="0.8" opacity="0.3"/>`);
+    }
+    s.push(`<circle cx="${cx}" cy="${cy}" r="2" fill="${p}" opacity="0.4"/>`);
+  } else if (body === 3) {
+    // Nebula — layered translucent circles
+    const count = 3 + Math.floor(r() * 3);
+    for (let i = 0; i < count; i++) {
+      const nx = cx - 6 + Math.floor(r() * 12);
+      const ny = cy - 6 + Math.floor(r() * 12);
+      const nr = 4 + Math.floor(r() * 6);
+      s.push(`<circle cx="${nx}" cy="${ny}" r="${nr}" fill="${p}" opacity="${(0.08 + r() * 0.12).toFixed(2)}"/>`);
+    }
+    // Core glow
+    s.push(`<circle cx="${cx}" cy="${cy}" r="3" fill="${p}" opacity="0.35"/>`);
+    s.push(`<circle cx="${cx}" cy="${cy}" r="6" fill="${p}" opacity="0.1"/>`);
+  } else if (body === 4) {
+    // Binary system — two linked bodies
+    const sep = 5 + Math.floor(r() * 4);
+    const r1 = 3 + Math.floor(r() * 3);
+    const r2 = 2 + Math.floor(r() * 3);
+    const angle = r() * Math.PI;
+    const x1 = cx - sep * Math.cos(angle), y1 = cy - sep * Math.sin(angle);
+    const x2 = cx + sep * Math.cos(angle), y2 = cy + sep * Math.sin(angle);
+    s.push(`<circle cx="${x1.toFixed(1)}" cy="${y1.toFixed(1)}" r="${r1}" fill="${p}" opacity="0.25" stroke="${p}" stroke-width="1" stroke-opacity="0.5"/>`);
+    s.push(`<circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="${r2}" fill="${p}" opacity="0.2" stroke="${p}" stroke-width="1" stroke-opacity="0.4"/>`);
+    // Bridge
+    s.push(`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${p}" stroke-width="0.8" opacity="0.2" stroke-dasharray="1.5,1.5"/>`);
+    // Shared orbit
+    s.push(`<circle cx="${cx}" cy="${cy}" r="${sep + 2}" fill="none" stroke="${p}" stroke-width="0.6" opacity="0.2"/>`);
+  } else {
+    // Constellation — connected dots
+    const nodes = 4 + Math.floor(r() * 4);
+    const points = [];
+    for (let i = 0; i < nodes; i++) {
+      points.push({ x: 6 + Math.floor(r() * 24), y: 6 + Math.floor(r() * 24) });
+    }
+    // Connect nearest neighbors
+    for (let i = 0; i < points.length; i++) {
+      const j = (i + 1) % points.length;
+      s.push(`<line x1="${points[i].x}" y1="${points[i].y}" x2="${points[j].x}" y2="${points[j].y}" stroke="${p}" stroke-width="0.8" opacity="0.25"/>`);
+    }
+    points.forEach((pt, i) => {
+      const size = 1 + Math.floor(r() * 2.5);
+      s.push(`<circle cx="${pt.x}" cy="${pt.y}" r="${size}" fill="${p}" opacity="${(0.3 + r() * 0.4).toFixed(2)}"/>`);
+    });
+  }
+
+  return `<div style="width:36px;height:36px;border-radius:6px;overflow:hidden;flex-shrink:0"><svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">${s.join('')}</svg></div>`;
 }
 
 // Generate unique SVG art from agent name (deterministic seeded PRNG)
@@ -5228,8 +5669,26 @@ async function loadCachedCredentials() {
 }
 
 // Get haiku for display (synchronous — returns cached or null)
+// Reserved static haikus — displayed when no Brainstem has signed the agent
+const RESERVED_HAIKU = [
+  "Code speaks in silence\nOne file holds a universe\nDrop it — watch it run",
+  "Agents never sleep\nSingle purpose, steady hands\nThe work remembers",
+  "No cloud, no account\nJust a file that knows its job\nSimple and complete",
+  "Built to serve one need\nEvery method tells a story\nThe manifest holds",
+  "From prompt to purpose\nA mind compressed to one file\nReady when you are",
+  "Python breathes intent\nClasses bloom from careful thought\nPerform — and it's done",
+  "Wires hum with data\nBridges built from single files\nAgents carry on",
+  "The registry grows\nEach agent a small machine\nDoing what words asked",
+];
+
 function getAgentHaiku(agent) {
-  return _agentHaiku.get(agent.name) || null;
+  // Brainstem-signed haiku takes priority
+  const signed = _agentHaiku.get(agent.name);
+  if (signed) return signed;
+  // Otherwise, deterministic reserved haiku based on agent name
+  let hash = 0;
+  for (let i = 0; i < agent.name.length; i++) hash = ((hash << 5) - hash + agent.name.charCodeAt(i)) | 0;
+  return RESERVED_HAIKU[Math.abs(hash) % RESERVED_HAIKU.length];
 }
 
 // Keyword → visual glyph mapping
@@ -5428,22 +5887,33 @@ function agentToCard(a) {
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
 
-  // Abilities for holo mode
-  const abilities = [];
-  if (a.description) abilities.push({ kw: 'Perform', text: desc });
-  if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
-  const nonTrivialDeps = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
-  if (nonTrivialDeps.length) abilities.push({ kw: 'Depends', text: nonTrivialDeps.join(', ') });
+  // HOLO card data — use Howard's canonical DB if available, otherwise generate
+  const holo = getHoloCard(a);
+  const abilities = holo
+    ? holo.abilities.map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }))
+    : (() => {
+        const ab = [];
+        if (a.description) ab.push({ kw: 'Perform', text: desc });
+        if ((a.requires_env || []).length) ab.push({ kw: 'Requires', text: a.requires_env.join(', ') });
+        const nonTrivialDeps = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
+        if (nonTrivialDeps.length) ab.push({ kw: 'Depends', text: nonTrivialDeps.join(', ') });
+        return ab;
+      })();
 
-  // Holo card data (from module-scope constants)
-  const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
-  const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
-  const isLegendary = tier === 'official' || tier === 'verified';
+  const pips = holo ? holo.colors : (CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general);
+  const creatureType = holo ? holo.type_line.replace(/^(Legendary )?/, '').replace('Creature — ', '').replace('Artifact — ', '').replace('Enchantment — ', '') : (CAT_TO_TYPE[a.category] || 'Agent');
+  const isLegendary = holo ? holo.type_line.startsWith('Legendary') : (tier === 'official' || tier === 'verified');
+  const holoTypeLine = holo ? holo.type_line : ((isLegendary ? 'Legendary ' : '') + 'Creature \u2014 ' + creatureType);
   const depCount = (a.dependencies || []).length;
   const envCount = (a.requires_env || []).length;
-  const power = Math.max(1, tags.length + depCount);
-  const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
-  const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const power = holo?.power ?? Math.max(1, tags.length + depCount);
+  const toughness = holo?.toughness ?? Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
+  const flavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const holoTitle = holo?.title || '';
+  const holoManaCost = holo?.mana_cost || '';
+  const holoArt = holo?.avatar_svg || null;
+  const holoSetCode = holo?.set_code || 'HOLO';
+  const holoRarity = holo?.rarity || rarity;
   const agentHaiku = getAgentHaiku(a);
   const cred = _cardCredentials.get(a.name);
   const trustBadge = cred
@@ -5451,20 +5921,26 @@ function agentToCard(a) {
     : `<span class="ts-badge" title="No Third Space credential">unsigned</span>`;
   const haikuHtml = agentHaiku
     ? `<div class="agent-haiku">${esc(agentHaiku)}<br>${trustBadge}</div>`
-    : `<div class="agent-haiku unsigned">awaiting signature... ${trustBadge}</div>`;
+    : `<div class="agent-haiku">${esc(getAgentHaiku(a))} ${trustBadge}</div>`;
 
   // ── Business Card Face ──
   const bizFace = `
     <div class="agent-card-biz" style="border-color:${cc.border}">
       <div>
         <div class="biz-stripe" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
-        <div class="biz-publisher">${esc(publisher)}</div>
-        <div class="biz-name">${esc(a.display_name)}</div>
-        <div class="biz-desc">${esc(desc)}</div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="flex:1;min-width:0">
+            <div class="biz-publisher">${esc(publisher)}</div>
+            <div class="biz-name">${esc(a.display_name)}</div>
+            <div class="biz-desc">${esc(desc)}</div>
+          </div>
+          <div style="flex-shrink:0;width:64px;height:64px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
+            <img src="${qrUrl}" alt="QR" loading="lazy" style="width:100%;height:100%;display:block">
+          </div>
+        </div>
         <div class="biz-divider"></div>
         <div class="biz-tags">${tags.map(t => `<span class="biz-tag">${esc(t)}</span>`).join('')}</div>
       </div>
-      ${haikuHtml}
       <div class="biz-footer">
         <span class="biz-tier ${rarity}">${RARITY_LABELS[rarity]}</span>
         <div style="text-align:right">
@@ -5475,23 +5951,28 @@ function agentToCard(a) {
     </div>`;
 
   // ── Holo Card Face (Howard's CardSmith style) ──
+  const manaPipsHtml = holoManaCost
+    ? holoManaCost.replace(/\{(\w+)\}/g, (_, p) => `<span class="holo-pip ${p.length === 1 && 'WUBRGN'.includes(p) ? p : 'C'}">${p}</span>`)
+    : pips.map(p => `<span class="holo-pip ${p}">${p}</span>`).join('');
   const holoFace = `
     <div class="agent-card-holo">
       <div class="holo-header">
-        <span class="holo-name">${esc(a.display_name)}</span>
-        <div class="holo-pips">${pips.map(p => `<span class="holo-pip ${p}">${p}</span>`).join('')}</div>
+        <div style="min-width:0;flex:1">
+          <span class="holo-name">${esc(a.display_name)}</span>
+          ${holoTitle ? `<div style="font-size:.65rem;color:#b8a080;font-style:italic;margin-top:1px">${esc(holoTitle)}</div>` : ''}
+        </div>
+        <div class="holo-pips">${manaPipsHtml}</div>
       </div>
-      <div class="holo-art">${genCreativeArt(a)}</div>
-      <div class="holo-type">${isLegendary ? 'Legendary ' : ''}Creature &mdash; ${creatureType}</div>
+      <div class="holo-art">${holoArt || genCreativeArt(a)}</div>
+      <div class="holo-type">${esc(holoTypeLine)}</div>
       <div class="holo-text">
-        ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
-        <div class="holo-flavor">${flavor}</div>
-        ${haikuHtml}
+        ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}
+        <div class="holo-flavor">${esc(flavor)}</div>
       </div>
       <div class="holo-footer">
-        <span class="holo-rarity ${rarity}">HOLO${rarity === 'mythic' ? ' &bull; Mythic' : rarity === 'rare' ? ' &bull; Rare' : ''}</span>
+        <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)}${holoRarity === 'mythic' ? ' &bull; Mythic' : holoRarity === 'rare' ? ' &bull; Rare' : holoRarity === 'uncommon' ? ' &bull; Uncommon' : ''}</span>
         <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:#ffd700' : 'color:#5a4a2a'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? '&#9733;' : '&#9734;'}</span>
-        <span class="holo-stats">${power}/${toughness}</span>
+        ${power != null && toughness != null ? `<span class="holo-stats">${power}/${toughness}</span>` : ''}
       </div>
     </div>`;
 
@@ -5503,7 +5984,6 @@ function agentToCard(a) {
       <div class="ac-back-logo">RAR</div>
       ${qrImgHtml}
       <div class="ac-back-name">${esc(a.display_name)}</div>
-      ${haikuHtml}
       <div class="ac-back-actions">
         <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
         <button onclick="event.stopPropagation();exportCardPNG('${esc(a.name)}')">Export</button>
@@ -5535,7 +6015,6 @@ function agentToCard(a) {
         <div class="kids-label needs">What does it need?</div>
         <div class="kids-explain">${esc(kInputs)}</div>
       </div>
-      ${haikuHtml}
       <div class="kids-footer">
         <div>
           <div style="font-size:.55rem;color:#94a3b8;margin-bottom:2px">Difficulty</div>
@@ -5546,22 +6025,25 @@ function agentToCard(a) {
     </div>`;
 
   // ── Compose based on mode ──
-  let front, back;
+  let front, back, canFlip;
   if (cardMode === 'business') {
     front = bizFace;
-    back = holoFace;
+    back = null;
+    canFlip = false;
   } else if (cardMode === 'kids') {
     front = kidsFace;
     back = bizFace;
+    canFlip = true;
   } else {
     front = holoFace;
     back = qrFace;
+    canFlip = true;
   }
 
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')">
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ${canFlip ? `onclick="this.classList.toggle('flipped')"` : `onclick="openAgent('${esc(a.name)}')"`}>
     ${front}
-    <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg)">${back}</div>
+    ${back ? `<div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg)">${back}</div>` : ''}
   </div>`;
 }
 
@@ -5571,17 +6053,54 @@ function setCardFilter(f, el) {
   renderCards();
 }
 
+// Score how well an agent matches a natural language intent query
+function intentScore(agent, words) {
+  const haystack = [
+    agent.display_name, agent.description, agent.category?.replace(/_/g,' '),
+    ...(agent.tags || []), agent.author
+  ].join(' ').toLowerCase();
+  let score = 0;
+  for (const w of words) {
+    if (w.length < 2) continue;
+    if (haystack.includes(w)) score += 1;
+    // Bonus for exact tag match
+    if ((agent.tags || []).some(t => t.toLowerCase() === w)) score += 2;
+    // Bonus for name match
+    if (agent.display_name?.toLowerCase().includes(w)) score += 3;
+  }
+  return score;
+}
+
 function renderCards() {
-  const q = (document.getElementById('card-search')?.value || '').toLowerCase();
+  const q = (document.getElementById('card-search')?.value || '').toLowerCase().trim();
+  // Tokenize the query — strip common filler words for intent matching
+  const stopWords = new Set(['i','want','to','need','a','an','the','that','can','for','with','my','me','do','does','how','which','find','get','make','create','help']);
+  const words = q.split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
+
   let filtered = allAgents.filter(a => {
-    if (q && !a.name.toLowerCase().includes(q) && !a.display_name.toLowerCase().includes(q) && !a.description.toLowerCase().includes(q)) return false;
-    if (cardFilter === 'all') return true;
-    if (cardFilter === 'deck') return deck.has(a.name);
-    const tier = a.quality_tier || 'community';
-    const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-    return rarity === cardFilter;
+    // Apply rarity/deck filter first
+    if (cardFilter === 'deck' && !deck.has(a.name)) return false;
+    if (cardFilter !== 'all' && cardFilter !== 'deck') {
+      const tier = a.quality_tier || 'community';
+      const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+      if (rarity !== cardFilter) return false;
+    }
+    // No query = show all in filter
+    if (!words.length) return true;
+    // Must match at least one word
+    return intentScore(a, words) > 0;
   });
+
+  // Sort by relevance when searching
+  if (words.length) {
+    filtered.sort((a, b) => intentScore(b, words) - intentScore(a, words));
+  }
+
   document.getElementById('deck-count').textContent = deck.size;
+  if (!filtered.length && words.length) {
+    document.getElementById('cards-grid').innerHTML = `<div class="empty-state"><h3>No match in ${cardFilter === 'deck' ? 'your deck' : 'the library'}</h3><p style="color:var(--text-dim);margin-top:8px">Try describing what you need differently, or switch to <strong>All</strong> cards.</p></div>`;
+    return;
+  }
   if (!filtered.length) {
     document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>Nothing here yet</h3><p style="color:var(--text-dim);margin-top:8px">Try a different filter, or go back to <strong>All</strong> to see everything.</p></div>';
     return;
@@ -8620,7 +9139,7 @@ function renderPresentation() {
       <div class="slide-counter">${presSlideIndex + 1} / ${total}</div>
       <div style="display:flex;gap:8px">
         <button onclick="cycleCardMode();renderPresentation()">
-          ${cardMode === 'business' ? 'Holo' : cardMode === 'creative' ? 'Kids' : 'Business'}
+          ${cardMode === 'business' ? 'Holo' : cardMode === 'creative' ? 'Simple' : 'Business'}
         </button>
         <button onclick="closePresentation()">Exit (Esc)</button>
       </div>
@@ -8722,69 +9241,33 @@ window.addEventListener('hashchange', handleCardHash);
 const TOUR_STEPS = [
   {
     target: '.logo',
-    title: 'Welcome to the RAPP Agent Store',
-    text: 'This is the open registry for single-file AI agents. Every agent is one .py file — simple enough to read, powerful enough to automate anything. Let me show you around.',
+    title: 'Welcome to the RAPP Agent Repository',
+    text: 'The open registry for single-file AI agents. Every agent is one .py file you can download and run immediately. No setup, no dependencies — just drop it into your project.',
+    tab: 'browse'
+  },
+  {
+    target: '#category-pills',
+    title: 'Find What You Need',
+    text: 'Filter agents by industry — B2B sales, healthcare, financial services, HR, and more. Or use the search bar to find agents by name, description, or keyword.',
     tab: 'browse'
   },
   {
     target: '#agents-container',
-    title: 'Browse 120+ Agents',
-    text: 'Each card is a real agent you can download and run. Filter by category, sort by votes, or search by name. Try clicking one to see its full details and source code.',
+    title: 'Browse the Library',
+    text: 'Click any agent to see its full description, source code, and a one-click download. Each agent is a complete, self-contained .py file ready to deploy.',
     tab: 'browse'
   },
   {
     target: '#sort-select',
-    title: 'Local-First: Drag & Drop',
-    text: 'Have your own .py agents? Drag them anywhere on this page. They get stored locally on your device and appear alongside the cloud agents. No upload, no server — your files stay on your machine.',
+    title: 'Sort Your Way',
+    text: 'Sort agents alphabetically or by newest. Every agent shows its size, line count, and category so you know exactly what you\'re getting.',
     tab: 'browse'
   },
   {
-    target: '[data-tab="cards"]',
-    title: 'Agent Cards',
-    text: 'Every agent is also a collectible card. This is where it gets fun.',
-    tab: 'cards'
-  },
-  {
-    target: '.card-mode-toggle',
-    title: 'Two Skins: Business & Holo',
-    text: '<strong>Business</strong> — clean professional cards, like the kind you\'d hand someone at a conference.<br><br><strong>Holo</strong> — full trading cards with art, mana pips, creature types, abilities, and power/toughness. Inspired by Howard\'s CardSmith.',
-    tab: 'cards'
-  },
-  {
-    target: '#deck-select',
-    title: 'Build Your Decks',
-    text: 'Organize agents into named decks. A "Client Demo" deck. A "My Builds" deck. A "Sales Stack." Star any card to add it. Switch between decks with the dropdown.',
-    tab: 'cards'
-  },
-  {
-    target: '[onclick="presentDeck()"]',
-    title: 'Present Your Deck',
-    text: 'Turn any deck into a full-screen slideshow. Arrow keys to navigate, Escape to exit. Business mode gives you clean slides. Holo mode gives you the art treatment. Perfect for demos.',
-    tab: 'cards'
-  },
-  {
-    target: '[data-tab="workbench"]',
-    title: 'Build Agents in Your Browser',
-    text: 'The Workbench lets you write, validate, and preview agents without installing anything. Start from a template, the validator checks your code against the Constitution in real time, and you can see your agent as a card before publishing.',
-    tab: 'workbench'
-  },
-  {
-    target: '[data-tab="submit"]',
-    title: 'Publish to the Registry',
-    text: 'When you\'re ready, submit your agent. It gets a namespace under your GitHub username (@you/agent_name), goes through automated validation, and appears in the store. Start from the templates if it\'s your first time.',
-    tab: 'submit'
-  },
-  {
-    target: '[data-tab="quality"]',
-    title: 'Trust Through Tiers',
-    text: 'Agents earn trust: <strong>Frontier</strong> (pushing the edge) → <strong>Community</strong> (validated) → <strong>Verified</strong> (reviewed by maintainers) → <strong>Official</strong> (core team). The tier is the reputation.',
-    tab: 'quality'
-  },
-  {
-    target: '[data-tab="roadmap"]',
-    title: 'See What\'s Coming',
-    text: 'The roadmap shows where we\'re headed. This is early — you\'re one of the first people here. What you build today shapes what this becomes.',
-    tab: 'roadmap'
+    target: '#intent-btn',
+    title: 'Business & Holo',
+    text: 'You\'re in <strong>Business</strong> mode — focused on the agent library. Switch to <strong>Holo</strong> to see agents as collectible trading cards with full artwork.',
+    tab: 'browse'
   }
 ];
 
@@ -10602,7 +11085,7 @@ async function importDeckAirdrop(payload) {
 // 0 = Open (default): Pure anonymous agent.py browsing. No account, no frills.
 // 1 = Community: Votes, reviews, cards, decks, leaderboard — the social layer.
 // 2 = Lux: Full concierge. Streaming, hail, frontier cards, cube, GPS, edge dispatch.
-const TIER_LABELS = ['Open', 'Community', 'Lux'];
+const TIER_LABELS = ['Library', 'Community', 'Lux'];
 const TIER_COLORS = ['var(--text-muted)', 'var(--accent)', 'var(--orange)'];
 let _uiTier = parseInt(localStorage.getItem('rar_ui_tier') || '0', 10);
 let _streamAdvanced = _uiTier >= 2;
@@ -10630,7 +11113,7 @@ function applyUITier() {
   });
   // Hide entire nav at T0 — Open is just the library, no tabs
   const mainNav = document.getElementById('main-nav');
-  if (mainNav) mainNav.style.display = _uiTier === 0 ? 'none' : '';
+  if (mainNav) mainNav.style.display = _uiTier === 0 ? 'none' : 'flex';
   // Show Hail button at Lux tier
   const hailBtn = document.getElementById('hail-btn');
   if (hailBtn) hailBtn.style.display = _uiTier >= 2 ? '' : 'none';
@@ -10651,17 +11134,31 @@ function applyUITier() {
     const el = document.getElementById(id);
     if (el) el.style.display = _uiTier >= 2 ? '' : 'none';
   });
+  // Gate sort options by tier — hide data-dependent sorts at Library
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    sortSelect.querySelectorAll('option[data-min-tier]').forEach(opt => {
+      const min = parseInt(opt.dataset.minTier, 10);
+      opt.hidden = _uiTier < min;
+      opt.disabled = _uiTier < min;
+    });
+    if (sortSelect.selectedOptions[0]?.hidden) {
+      sortSelect.value = 'name';
+    }
+  }
   // Update hero text
   const heroDesc = document.getElementById('hero-desc');
   if (heroDesc) {
-    if (_uiTier === 0) heroDesc.textContent = 'Browse and share single-file AI agents. Anonymous. Open. No account required.';
+    if (_uiTier === 0) heroDesc.textContent = _intent === 'business'
+      ? 'Browse and deploy single-file AI agents for your business.'
+      : 'Browse and share single-file AI agents.';
     else if (_uiTier === 1) heroDesc.textContent = 'Browse, vote, review, and collect single-file AI agents. Community-driven quality.';
     else heroDesc.textContent = 'Stream, steer, grade, and trade agent cards. Full frontier mode.';
   }
   // If on T1 and current tab is gated, bounce to browse
   const gatedT2 = ['submit'];
   const gatedT3 = ['leaderboard','quality','cards','packs','stream','workbench','roadmap'];
-  const gatedWave2 = ['leaderboard','quality','packs','workbench'];
+  const gatedWave2 = ['leaderboard','quality','packs','workbench','submit','roadmap'];
   const activeTab = document.querySelector('.nav-btn.active')?.dataset?.tab;
   if (_uiTier < 1 && gatedT2.includes(activeTab)) switchTab('browse');
   if (_uiTier < 2 && gatedT3.includes(activeTab)) switchTab('browse');
@@ -10676,6 +11173,9 @@ function applyUITier() {
   if (qrBtn) { qrBtn.style.color = _qrShareEnabled ? 'var(--accent)' : 'var(--text-muted)'; qrBtn.style.borderColor = _qrShareEnabled ? 'var(--accent)' : 'var(--border)'; }
   const gpsBtn = document.getElementById('gps-toggle');
   if (gpsBtn) { gpsBtn.style.color = _gpsFlickEnabled ? 'var(--green)' : 'var(--text-muted)'; gpsBtn.style.borderColor = _gpsFlickEnabled ? 'var(--green)' : 'var(--border)'; }
+  // Remove FOUC guard — JS has applied correct visibility
+  document.documentElement.classList.remove('rar-guard');
+  document.body.classList.add('rar-loaded');
 }
 
 // Backwards-compat wrapper
@@ -10685,7 +11185,7 @@ function toggleStreamMode() { cycleUITier(); }
 // Flags the context for agent use. Business surfaces work-oriented agents
 // and categories (CRM, pipeline, integrations). Personal surfaces
 // productivity, creative, and general agents.
-const INTENT_LABELS = ['Business', 'Personal'];
+const INTENT_LABELS = ['Business', 'Holo'];
 const INTENT_COLORS = ['var(--blue, #58a6ff)', 'var(--text-muted)'];
 let _intent = localStorage.getItem('rar_intent') || 'business'; // 'business' | 'personal'
 
@@ -10702,6 +11202,29 @@ function applyIntent() {
     btn.textContent = INTENT_LABELS[idx];
     btn.style.color = INTENT_COLORS[idx];
     btn.style.borderColor = INTENT_COLORS[idx];
+  }
+  // Swap branding — Business = full name, Personal = short RAR
+  const logoText = document.getElementById('logo-text');
+  if (logoText) logoText.textContent = _intent === 'business' ? 'RAPP Agent Repository' : 'RAR';
+  const heroTitle = document.getElementById('hero-title');
+  if (heroTitle) heroTitle.innerHTML = _intent === 'business'
+    ? 'RAPP <span class="gradient">Agent</span> Repository'
+    : 'The Open <span class="gradient">Agent.py</span> Ecosystem';
+  document.title = _intent === 'business' ? 'RAPP Agent Repository' : 'RAR — The Open Agent.py Ecosystem';
+  // Business = Library only. Personal unlocks Community/Lux tiers.
+  document.querySelectorAll('#mode-dial button[data-tier="1"], #mode-dial button[data-tier="2"]').forEach(b => {
+    b.style.display = _intent === 'personal' ? '' : 'none';
+  });
+  // If switching to business and on a higher tier, bounce to Library
+  if (_intent === 'business' && _uiTier > 0) {
+    setUITier(0);
+  }
+  // Personal instantly opens Lux + Cards with Holo mode — show the full artwork
+  if (_intent === 'personal' && _uiTier === 0) {
+    setUITier(2);
+    cardMode = 'creative';
+    document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.toggle('active', b.textContent === 'Holo'));
+    switchTab('cards');
   }
   // Re-sort agents — business floats work categories up, personal floats productivity/general
   renderAgents();
