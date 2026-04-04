@@ -3225,6 +3225,7 @@ async function submitDroppedAgents() {
 
     try {
       if (ghToken) {
+        // Don't include labels — non-collaborators can't set them (422 error)
         const resp = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
           method: 'POST',
           headers: {
@@ -3234,21 +3235,21 @@ async function submitDroppedAgents() {
           body: JSON.stringify({
             title: issueTitle,
             body: issueBody,
-            labels: ['rar-action', 'agent-submission'],
           }),
         });
         if (resp.ok) {
           const issue = await resp.json();
-          showToast(`Issue #${issue.number} created for ${agentTitle}`, 'success');
+          showToast(`Submitted! Issue #${issue.number} created`, 'success');
           submitted++;
         } else {
-          // Auth failed or insufficient scope — fall back to browser
+          const err = await resp.json().catch(() => ({}));
+          console.error('Issue creation failed:', resp.status, err);
+          showToast(`Submission failed (${resp.status}) — opening GitHub...`, 'error');
           const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
           window.open(issueUrl, '_blank');
           submitted++;
         }
       } else {
-        // Not authenticated — open in browser
         const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
         window.open(issueUrl, '_blank');
         submitted++;
