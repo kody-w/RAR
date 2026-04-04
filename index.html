@@ -989,31 +989,16 @@ document.documentElement.className = 'rar-guard';
   }
   .showntell-overlay.open { opacity: 1; }
   .showntell-card {
-    width: min(420px, 85vw); aspect-ratio: 5/7;
-    position: relative; transform-style: preserve-3d;
+    transform-style: preserve-3d;
     --tilt-x: 0deg; --tilt-y: 0deg;
-    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--st-scale, 2.5));
     transition: transform .1s ease-out;
     cursor: grab;
+    filter: drop-shadow(0 0 40px rgba(201,168,76,.2));
   }
   .showntell-card:active { cursor: grabbing; }
-  .showntell-card .agent-card-holo {
-    position: absolute; inset: 0; border-radius: 16px;
-    overflow: hidden; border: 3px solid #c9a84c;
-    background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
-    display: grid; padding: 0;
-    grid-template-rows: minmax(0, auto) 40% minmax(0, auto) 1fr minmax(0, auto);
-    box-shadow: 0 0 60px rgba(201,168,76,.15), 0 0 120px rgba(201,168,76,.08);
-  }
-  .showntell-card .holo-name { font-size: 1.1rem; }
-  .showntell-card .holo-title { font-size: .8rem; }
-  .showntell-card .holo-type { font-size: .82rem; }
-  .showntell-card .holo-text { font-size: .82rem; }
-  .showntell-card .holo-ability { -webkit-line-clamp: unset; }
-  .showntell-card .holo-flavor { font-size: .75rem; -webkit-line-clamp: unset; }
-  .showntell-card .holo-footer { font-size: .72rem; }
-  .showntell-card .holo-stats { font-size: 1.1rem; }
-  .showntell-card .holo-pip { width: 22px; height: 22px; font-size: .7rem; }
+  /* Remove flip on spotlight clone */
+  .showntell-card.flipped { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--st-scale, 2.5)); }
   .showntell-toolbar {
     position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
     z-index: 10000; display: flex; gap: 12px; align-items: center;
@@ -6228,66 +6213,39 @@ function agentToCard(a) {
   </div>`;
 }
 
-// ── Show & Tell: fullscreen card spotlight ──
+// ── Show & Tell: fullscreen card spotlight (clones the real card, just scales up) ──
 function showAndTell(name) {
-  const a = allAgents.find(x => x.name === name);
-  if (!a) return;
-  // Build full holo card HTML (reuse data from agentToCard)
-  const holo = getHoloCard(a);
-  const tier = a.quality_tier || 'community';
-  const rarity = holo?.rarity || (TIER_TO_RARITY[tier] || 'uncommon');
-  const pips = holo ? holo.colors : (CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general);
-  const desc = (a.description || '').slice(0, 140);
-  const tags = (a.tags || []).slice(0, 4);
-  const abilities = holo
-    ? holo.abilities.map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }))
-    : [{ kw: 'Perform', text: desc }];
-  const manaCost = holo?.mana_cost || '';
-  const manaPipsHtml = manaCost
-    ? manaCost.replace(/\{(\w+)\}/g, (_, p) => `<span class="holo-pip ${p.length === 1 && 'WUBRGN'.includes(p) ? p : 'C'}">${p}</span>`)
-    : pips.map(p => `<span class="holo-pip ${p}">${p}</span>`).join('');
-  const typeLine = holo?.type_line || 'Creature \u2014 Agent';
-  const flavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
-  const power = holo?.power ?? Math.max(1, tags.length);
-  const toughness = holo?.toughness ?? Math.max(1, 2);
-  const setCode = holo?.set_code || 'HOLO';
-  const artist = holo?.artist || '';
-  const promo = holo?.promo || false;
-  const holoTitle = holo?.title || '';
-  const holoArt = holo?.avatar_svg || genCreativeArt(a);
+  const cardId = 'card-' + name.replace(/[^a-z0-9]/gi, '_');
+  const src = document.getElementById(cardId);
+  if (!src) return;
+
+  // Calculate scale: fit card to ~70% of viewport height
+  const srcRect = src.getBoundingClientRect();
+  const targetH = window.innerHeight * 0.7;
+  const scale = targetH / srcRect.height;
 
   const overlay = document.createElement('div');
   overlay.className = 'showntell-overlay';
-  overlay.innerHTML = `
-    <div class="showntell-label">SHOW &amp; TELL</div>
-    <div class="showntell-card">
-      <div class="agent-card-holo">
-        <div class="holo-shimmer-track"></div>
-        <div class="holo-prism"></div>
-        <div class="holo-header">
-          <div style="min-width:0;flex:1;overflow:hidden">
-            <div class="holo-name">${esc(a.display_name)}</div>
-            ${holoTitle ? `<div class="holo-title">${esc(holoTitle)}</div>` : ''}
-          </div>
-          <div class="holo-pips" style="flex-shrink:0">${manaPipsHtml}</div>
-        </div>
-        <div class="holo-art">${holoArt}</div>
-        <div class="holo-type">${esc(typeLine)}</div>
-        <div class="holo-text">
-          ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}
-          <div class="holo-flavor">${esc(flavor)}</div>
-        </div>
-        <div class="holo-footer">
-          <span class="holo-rarity ${rarity}">${esc(setCode)}${promo ? ' <span class="holo-promo">&#9733; Promo</span>' : ''} &bull; ${rarity.charAt(0).toUpperCase() + rarity.slice(1)}${artist ? ` &bull; <span class="holo-artist">${esc(artist)}</span>` : ''}</span>
-          ${power != null && toughness != null ? `<span class="holo-stats">${power}/${toughness}</span>` : ''}
-        </div>
-      </div>
-    </div>
-    <div class="showntell-toolbar">
-      <button onclick="event.stopPropagation();showAndTellNav(-1)">&#9664; Prev</button>
-      <button onclick="event.stopPropagation();closeShowAndTell()">Close</button>
-      <button onclick="event.stopPropagation();showAndTellNav(1)">Next &#9654;</button>
-    </div>`;
+
+  // Clone the actual card — identical pixel layout
+  const clone = src.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.classList.remove('flipped');
+  clone.classList.add('showntell-card');
+  clone.style.setProperty('--st-scale', scale.toFixed(2));
+  clone.removeAttribute('onclick');
+  clone.removeAttribute('ondblclick');
+
+  overlay.innerHTML = `<div class="showntell-label">SHOW &amp; TELL &mdash; double-click card or press Esc to close</div>`;
+  overlay.appendChild(clone);
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'showntell-toolbar';
+  toolbar.innerHTML = `
+    <button onclick="event.stopPropagation();showAndTellNav(-1)">&#9664; Prev</button>
+    <button onclick="event.stopPropagation();closeShowAndTell()">Close</button>
+    <button onclick="event.stopPropagation();showAndTellNav(1)">Next &#9654;</button>`;
+  overlay.appendChild(toolbar);
 
   document.body.appendChild(overlay);
   document.body.style.overflow = 'hidden';
@@ -6295,32 +6253,30 @@ function showAndTell(name) {
   requestAnimationFrame(() => overlay.classList.add('open'));
 
   // Tilt handler for the fullscreen card
-  const card = overlay.querySelector('.showntell-card');
-  const holoEl = card.querySelector('.agent-card-holo');
+  const holoEl = clone.querySelector('.agent-card-holo');
   overlay.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-    const tiltX = ((0.5 - y) * 25).toFixed(1);
-    const tiltY = ((x - 0.5) * 25).toFixed(1);
-    const angle = (Math.atan2(y - 0.5, x - 0.5) * 180 / Math.PI).toFixed(0);
-    card.style.setProperty('--tilt-x', tiltX + 'deg');
-    card.style.setProperty('--tilt-y', tiltY + 'deg');
+    // Use full overlay area for tilt input
+    const cx = e.clientX / window.innerWidth;
+    const cy = e.clientY / window.innerHeight;
+    const tiltX = ((0.5 - cy) * 20).toFixed(1);
+    const tiltY = ((cx - 0.5) * 20).toFixed(1);
+    const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
+    clone.style.setProperty('--tilt-x', tiltX + 'deg');
+    clone.style.setProperty('--tilt-y', tiltY + 'deg');
     if (holoEl) {
-      const mxPct = (x * 100).toFixed(0) + '%';
-      const myPct = (y * 100).toFixed(0) + '%';
+      const mxPct = (cx * 100).toFixed(0) + '%';
+      const myPct = (cy * 100).toFixed(0) + '%';
       holoEl.style.setProperty('--mx', mxPct);
       holoEl.style.setProperty('--my', myPct);
-      holoEl.style.setProperty('--px', x.toFixed(3));
-      holoEl.style.setProperty('--py', y.toFixed(3));
+      holoEl.style.setProperty('--px', cx.toFixed(3));
+      holoEl.style.setProperty('--py', cy.toFixed(3));
       holoEl.style.setProperty('--angle', angle + 'deg');
       const shimmer = holoEl.querySelector('.holo-shimmer-track');
       if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
     }
   });
-  // Close on background click
   overlay.addEventListener('click', e => { if (e.target === overlay) closeShowAndTell(); });
-  // Close on Escape
+  clone.addEventListener('dblclick', e => { e.stopPropagation(); closeShowAndTell(); });
   overlay._keyHandler = e => { if (e.key === 'Escape') closeShowAndTell(); else if (e.key === 'ArrowLeft') showAndTellNav(-1); else if (e.key === 'ArrowRight') showAndTellNav(1); };
   document.addEventListener('keydown', overlay._keyHandler);
 }
