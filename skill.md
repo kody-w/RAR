@@ -87,7 +87,7 @@ Filter `registry.agents[]` where `category` matches.
 
 ## Agent Manifest — Current Inventory
 
-### @kody (8 agents)
+### @kody
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | ContextMemory | context_memory | core | Recalls conversation history and stored memories |
@@ -99,13 +99,13 @@ Filter `registry.agents[]` where `category` matches.
 | Rappterbook | rappterbook | integrations | Read-only client for Rappterbook — the social network for AI agents |
 | DealDesk | deal-desk | b2b_sales | Deal desk agent for B2B sales |
 
-### @borg (2 agents — Howard Hoy)
+### @borg (Howard Hoy)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | Borg | borg_agent | core | Assimilates GitHub repos and URLs into structured knowledge reports |
 | CardSmith | cardsmith_agent | productivity | Card design and generation |
 
-### @discreetRappers (13 agents — Bill Whalen)
+### @discreetRappers (Bill Whalen)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | RAPP | rapp_pipeline | pipeline | Full RAPP pipeline — transcript to agent, code gen, quality gates |
@@ -122,12 +122,12 @@ Filter `registry.agents[]` where `category` matches.
 | ScriptedDemo | scripted_demo | productivity | Interactive demo automation |
 | DemoScriptGenerator | demo_script_generator | productivity | Demo script JSON generation |
 
-### @rapp (1 agent)
+### @rapp
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | BasicAgent | basic-agent | devtools | Base class — every agent inherits from this |
 
-### @aibast-agents-library (104 agent templates — Industry Vertical Stacks)
+### @aibast-agents-library (Industry Vertical Templates)
 
 Source: [AI-Agent-Templates](https://kody-w.github.io/AI-Agent-Templates/)
 
@@ -411,9 +411,6 @@ The pipeline's `perform()` method calls each dependency in order and passes resu
 ```
 registry_schema: rapp-registry/1.0
 agent_schema: rapp-agent/1.0
-total_agents: 128
-publishers: 5 (@kody, @borg, @discreetRappers, @rapp, @aibast-agents-library)
-categories: 19 (core, pipeline, integrations, productivity, devtools, b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, human_resources, it_management, manufacturing, professional_services, retail_cpg, slg_government, software_digital_products)
-verticals: 14
-last_updated: 2026-04-04
 ```
+
+For current counts, fetch `registry.json` — the `stats` object has `total_agents`, `publishers`, and `categories`.
