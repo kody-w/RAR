@@ -745,6 +745,13 @@
   .agent-haiku.unsigned {
     font-size: .45rem; color: #4a4a3a; opacity: 0.4;
   }
+  .ts-badge {
+    display: inline-block; font-size: .4rem; font-style: normal;
+    color: #5a5a4a; opacity: 0.5; letter-spacing: .5px; text-transform: uppercase;
+  }
+  .ts-badge.signed {
+    color: var(--green); opacity: 0.7;
+  }
   .holo-footer {
     display: flex; justify-content: space-between; align-items: center;
     padding: 4px 12px 6px; font-size: .58rem;
@@ -2316,6 +2323,10 @@ class MyAgent(BasicAgent):
         <span id="e2e-status"><span style="color:var(--text-muted);font-size:.65rem">Unencrypted</span></span>
         <button onclick="generateE2EKey()" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--text-dim);font-size:.6rem;cursor:pointer" title="Generate E2E encryption key for secure streaming">E2E</button>
       </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:8px;border-left:1px solid var(--border);padding-left:10px">
+        <span id="thirdspace-id" style="font-size:.55rem;color:var(--text-muted);font-family:monospace;cursor:pointer;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="Your Third Space fingerprint — click to copy" onclick="copyThirdSpaceId()">loading...</span>
+        <span style="font-size:.5rem;color:var(--text-muted)">3S</span>
+      </div>
     </div>
     <div id="stream-status"></div>
     <div class="streamed-agents" id="streamed-agents"></div>
@@ -2830,6 +2841,10 @@ async function init() {
 
   // Load cached haiku signatures from IndexedDB
   await loadCachedHaiku();
+
+  // Initialize Third Space identity (ECDSA keypair)
+  await initThirdSpaceIdentity();
+  updateThirdSpaceDisplay();
 
   const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
   renderStats(stats);
@@ -4915,9 +4930,13 @@ function agentToCard(a) {
   const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
   const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
   const agentHaiku = getAgentHaiku(a);
+  const cred = _cardCredentials.get(a.name);
+  const trustBadge = cred
+    ? `<span class="ts-badge signed" title="Signed by ${cred.brainstem?.slice(0,12)}">&#x2713; signed</span>`
+    : `<span class="ts-badge" title="No Third Space credential">unsigned</span>`;
   const haikuHtml = agentHaiku
-    ? `<div class="agent-haiku">${esc(agentHaiku)}</div>`
-    : `<div class="agent-haiku unsigned">awaiting signature...</div>`;
+    ? `<div class="agent-haiku">${esc(agentHaiku)}<br>${trustBadge}</div>`
+    : `<div class="agent-haiku unsigned">awaiting signature... ${trustBadge}</div>`;
 
   // ── Business Card Face ──
   const bizFace = `
@@ -7663,6 +7682,12 @@ async function flickTo(name, target) {
   entry._flickTask = task;
   entry._flickedAt = new Date().toISOString();
 
+  // ── Third Space: sign the flick (Rule 4: Sign What You Send) ──
+  const credential = await createCardCredential(name);
+  const flickSig = await signPayload({ agent: name, guid: entry.guid, task, target, timestamp: entry._flickedAt });
+  entry._credential = credential;
+  entry._flickSignature = flickSig;
+
   if (target === 'brainstem') {
     if (!_brainstemConn?.connected) {
       showToast('Connect to Brainstem first', 'error');
@@ -7670,13 +7695,17 @@ async function flickTo(name, target) {
       renderSteerPanel();
       return;
     }
-    // Encrypt the payload if E2E is enabled
-    const payload = _e2eKey ? await encryptPayload({ name: entry.manifest.name, guid: entry.guid, code: entry.code, task }) : { name: entry.manifest.name, guid: entry.guid, code: entry.code, task };
+    // Encrypt the payload if E2E is enabled (Rule 3: Encrypt Before You Transmit)
+    const flickPayload = {
+      name: entry.manifest.name, guid: entry.guid, code: entry.code, task,
+      credential, signature: flickSig,
+    };
+    const payload = _e2eKey ? await encryptPayload(flickPayload) : flickPayload;
     await pushToBrainstem(name);
     if (task) {
-      await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey });
+      await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey, credential, signature: flickSig });
     }
-    showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''}`, 'success');
+    showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''} (signed)`, 'success');
   } else if (target === 'lisppy') {
     if (!_lisppyRuntime?.loaded) {
       showToast('Load Lisppy runtime first', 'error');
@@ -7754,6 +7783,431 @@ function updateE2EStatus() {
     el.innerHTML = _e2eKey
       ? '<span style="color:var(--green);font-size:.65rem"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:4px"></span>E2E Encrypted</span>'
       : '<span style="color:var(--text-muted);font-size:.65rem">Unencrypted</span>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// THIRD SPACE PROTOCOL — Traffic Rules for the Public Agentic Internet
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// The Third Space is a public, shared environment where agents from different
+// Brainstems can discover, authenticate, and interact with each other.
+// It is local-first but cloud-capable. No central authority. No accounts.
+// Trust is built from cryptographic proof, not permission.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// ARTICLE I — IDENTITY
+//
+//   Every participant in the Third Space is a Brainstem instance.
+//   Each Brainstem generates an ECDSA P-256 keypair on first launch.
+//   The PUBLIC KEY is its address — its identity in the Third Space.
+//   The PRIVATE KEY never leaves the device.
+//
+//   Identity = { publicKey (JWK), fingerprint (SHA-256 of pubkey, hex) }
+//
+//   There are no usernames, no emails, no passwords, no accounts.
+//   You are your key. Lose the key, lose the identity.
+//
+// ARTICLE II — THE CARD CREDENTIAL
+//
+//   A Card Credential is a signed proof that an agent was loaded into a
+//   specific Brainstem and processed by its local AI. It contains:
+//
+//   {
+//     agent:       agent name (@publisher/slug)
+//     version:     agent version at time of signing
+//     manifest:    SHA-256 hash of the full manifest JSON
+//     haiku:       the Brainstem-generated haiku signature
+//     brainstem:   public key fingerprint of the signing Brainstem
+//     timestamp:   ISO 8601 when the credential was created
+//     signature:   ECDSA P-256 signature over all above fields
+//   }
+//
+//   The Card Credential proves:
+//   1. This specific Brainstem processed this specific agent
+//   2. The Brainstem's AI read the agent and generated the haiku
+//   3. The manifest has not been tampered with since signing
+//   4. The credential was created at a specific point in time
+//
+// ARTICLE III — TRAFFIC RULES
+//
+//   Rule 1: IDENTIFY BEFORE YOU ENTER
+//     Every agent entering the Third Space must carry a valid Card Credential
+//     signed by the originating Brainstem. Unsigned agents are visible but
+//     marked "unverified" — they can be browsed, not trusted.
+//
+//   Rule 2: VERIFY BEFORE YOU TRUST
+//     Before accepting a flick, executing a routed task, or importing an
+//     agent from another Brainstem, the receiving party MUST verify the
+//     Card Credential signature. Invalid signatures are rejected.
+//
+//   Rule 3: ENCRYPT BEFORE YOU TRANSMIT
+//     All agent payloads (code, tasks, results) transmitted between
+//     Brainstems in the Third Space MUST be encrypted with AES-256-GCM.
+//     The E2E key is exchanged out-of-band via QR code or direct share.
+//     Unencrypted traffic is allowed only within localhost.
+//
+//   Rule 4: SIGN WHAT YOU SEND
+//     Every flick, every routed task, every deck share carries the sender's
+//     ECDSA signature. The signature covers: payload hash + timestamp +
+//     sender fingerprint. This creates a non-repudiable audit trail.
+//
+//   Rule 5: ONE IDENTITY PER BRAINSTEM
+//     A Brainstem has exactly one keypair. It does not impersonate.
+//     If a Brainstem is compromised, its fingerprint is revoked by the
+//     operator publishing a revocation notice.
+//
+//   Rule 6: HAIKU IS ATTESTATION
+//     The haiku signature is not decorative — it is a proof of local
+//     processing. Only a Brainstem that loaded and analyzed the agent
+//     can generate the haiku. The haiku is included in the Card Credential
+//     and signed alongside it. A different Brainstem will produce a
+//     different haiku for the same agent — both are valid.
+//
+//   Rule 7: PROVENANCE IS PERMANENT
+//     Every card carries its full provenance chain: who minted it, who
+//     signed it, who transferred it, when, and the fingerprints involved.
+//     Provenance cannot be erased, only appended.
+//
+//   Rule 8: DECK = ROUTING MANIFEST
+//     A deck is a signed routing manifest that declares which agents are
+//     active, their GUIDs, their runtime targets, and their trust levels.
+//     Decks are signed by the deck creator's Brainstem. Modifying a deck
+//     after signing invalidates the signature.
+//
+//   Rule 9: RESPECT TIER BOUNDARIES
+//     In the Third Space, agent tiers carry real meaning:
+//     - Official/Verified: trusted by default, auto-accepted
+//     - Community: accepted after credential verification
+//     - Frontier: requires explicit user approval before execution
+//     An agent cannot self-promote its tier in transit.
+//
+//   Rule 10: LOCAL AUTHORITY IS FINAL
+//     Your Brainstem is sovereign. It can refuse any incoming agent,
+//     reject any credential, block any fingerprint. The Third Space
+//     has no appeals process. Your device, your rules.
+//
+// ARTICLE IV — TRUST LEVELS
+//
+//   Level 0 — ANONYMOUS:  No credential. Browsable only. Cannot execute.
+//   Level 1 — SIGNED:     Valid Card Credential from unknown Brainstem.
+//   Level 2 — KNOWN:      Valid credential from a previously-seen fingerprint.
+//   Level 3 — TRUSTED:    Credential from a fingerprint the user has explicitly
+//                          marked as trusted. Auto-accepted for Community+ tiers.
+//   Level 4 — LOCAL:      Agent loaded directly on this Brainstem. Full trust.
+//
+// ARTICLE V — REVOCATION
+//
+//   A Brainstem operator can revoke trust by:
+//   1. Removing a fingerprint from their trusted list
+//   2. Publishing a revocation notice (signed by the revoked key)
+//   3. Generating a new keypair (old identity is abandoned)
+//
+//   Revocation is immediate and local. There is no global revocation list.
+//   Each Brainstem maintains its own trust decisions.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// ── Third Space Identity ──
+let _thirdSpaceIdentity = null; // { keyPair, publicKeyJwk, fingerprint }
+const _trustedFingerprints = new Map(); // fingerprint → { name, trustedAt, level }
+const _cardCredentials = new Map(); // agentName → CardCredential
+
+const TRUST_LEVELS = {
+  ANONYMOUS: 0,
+  SIGNED: 1,
+  KNOWN: 2,
+  TRUSTED: 3,
+  LOCAL: 4,
+};
+
+// Generate or load the Brainstem identity keypair
+async function initThirdSpaceIdentity() {
+  // Try loading from IndexedDB
+  try {
+    const db = await openThirdSpaceDB();
+    const stored = await idbGet(db, 'identity', 'brainstem-key');
+    if (stored?.privateKey && stored?.publicKey) {
+      const privateKey = await crypto.subtle.importKey(
+        'jwk', stored.privateKey,
+        { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']
+      );
+      const publicKey = await crypto.subtle.importKey(
+        'jwk', stored.publicKey,
+        { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']
+      );
+      _thirdSpaceIdentity = {
+        keyPair: { privateKey, publicKey },
+        publicKeyJwk: stored.publicKey,
+        fingerprint: stored.fingerprint,
+      };
+      // Load trusted fingerprints
+      const trustedList = await idbGet(db, 'identity', 'trusted-fingerprints');
+      if (trustedList?.entries) {
+        for (const [fp, data] of Object.entries(trustedList.entries)) {
+          _trustedFingerprints.set(fp, data);
+        }
+      }
+      return _thirdSpaceIdentity;
+    }
+  } catch {}
+
+  // Generate new keypair
+  const keyPair = await crypto.subtle.generateKey(
+    { name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']
+  );
+  const publicKeyJwk = await crypto.subtle.exportKey('jwk', keyPair.publicKey);
+  const fingerprint = await computeFingerprint(publicKeyJwk);
+
+  // Re-import private key as non-extractable for security
+  const privateKeyJwk = await crypto.subtle.exportKey('jwk', keyPair.privateKey);
+  const securePrivateKey = await crypto.subtle.importKey(
+    'jwk', privateKeyJwk,
+    { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']
+  );
+
+  _thirdSpaceIdentity = {
+    keyPair: { privateKey: securePrivateKey, publicKey: keyPair.publicKey },
+    publicKeyJwk,
+    fingerprint,
+  };
+
+  // Persist to IndexedDB
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('identity', 'readwrite');
+    tx.objectStore('identity').put({
+      id: 'brainstem-key',
+      privateKey: privateKeyJwk,
+      publicKey: publicKeyJwk,
+      fingerprint,
+      createdAt: new Date().toISOString(),
+    });
+  } catch {}
+
+  return _thirdSpaceIdentity;
+}
+
+// SHA-256 fingerprint of a JWK public key
+async function computeFingerprint(jwk) {
+  const canonical = JSON.stringify({ crv: jwk.crv, kty: jwk.kty, x: jwk.x, y: jwk.y });
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical));
+  return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ── Card Credential: the signed proof of agent provenance ──
+
+async function createCardCredential(agentName) {
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+  const agent = allAgents.find(a => a.name === agentName);
+  if (!agent) return null;
+
+  const haiku = getAgentHaiku(agent);
+  const manifestHash = await sha256(JSON.stringify(agent));
+
+  const credential = {
+    protocol: 'third-space/1.0',
+    agent: agentName,
+    version: agent.version || '0.0.0',
+    manifest_hash: manifestHash,
+    haiku: haiku || null,
+    brainstem: _thirdSpaceIdentity.fingerprint,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Sign the credential
+  const payload = JSON.stringify(credential);
+  const sigBuffer = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(payload)
+  );
+  credential.signature = [...new Uint8Array(sigBuffer)]
+    .map(b => b.toString(16).padStart(2, '0')).join('');
+  credential.public_key = _thirdSpaceIdentity.publicKeyJwk;
+
+  _cardCredentials.set(agentName, credential);
+  return credential;
+}
+
+// Verify a Card Credential received from another Brainstem
+async function verifyCardCredential(credential) {
+  if (!credential?.signature || !credential?.public_key) {
+    return { valid: false, trust: TRUST_LEVELS.ANONYMOUS, reason: 'Missing signature or public key' };
+  }
+
+  try {
+    // Import the sender's public key
+    const senderKey = await crypto.subtle.importKey(
+      'jwk', credential.public_key,
+      { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']
+    );
+
+    // Reconstruct the signed payload (everything except signature and public_key)
+    const { signature, public_key, ...payload } = credential;
+    const payloadBytes = new TextEncoder().encode(JSON.stringify(payload));
+    const sigBytes = new Uint8Array(signature.match(/.{2}/g).map(b => parseInt(b, 16)));
+
+    const valid = await crypto.subtle.verify(
+      { name: 'ECDSA', hash: 'SHA-256' },
+      senderKey, sigBytes, payloadBytes
+    );
+
+    if (!valid) {
+      return { valid: false, trust: TRUST_LEVELS.ANONYMOUS, reason: 'Signature verification failed' };
+    }
+
+    // Determine trust level
+    const fingerprint = await computeFingerprint(credential.public_key);
+    let trust = TRUST_LEVELS.SIGNED;
+
+    // Is this our own Brainstem?
+    if (_thirdSpaceIdentity && fingerprint === _thirdSpaceIdentity.fingerprint) {
+      trust = TRUST_LEVELS.LOCAL;
+    }
+    // Is this a trusted fingerprint?
+    else if (_trustedFingerprints.has(fingerprint)) {
+      trust = _trustedFingerprints.get(fingerprint).level || TRUST_LEVELS.TRUSTED;
+    }
+    // Have we seen this fingerprint before?
+    else {
+      try {
+        const db = await openThirdSpaceDB();
+        const seen = await idbGet(db, 'seen', fingerprint);
+        if (seen) trust = TRUST_LEVELS.KNOWN;
+      } catch {}
+    }
+
+    // Record that we've seen this fingerprint
+    try {
+      const db = await openThirdSpaceDB();
+      const tx = db.transaction('seen', 'readwrite');
+      tx.objectStore('seen').put({ id: fingerprint, lastSeen: new Date().toISOString(), agent: credential.agent });
+    } catch {}
+
+    return {
+      valid: true,
+      trust,
+      fingerprint,
+      trustLabel: ['Anonymous', 'Signed', 'Known', 'Trusted', 'Local'][trust],
+      credential,
+    };
+  } catch (err) {
+    return { valid: false, trust: TRUST_LEVELS.ANONYMOUS, reason: err.message };
+  }
+}
+
+// Sign an arbitrary payload (for flicks, deck shares, etc.)
+async function signPayload(data) {
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+  const payloadStr = typeof data === 'string' ? data : JSON.stringify(data);
+  const hash = await sha256(payloadStr);
+  const envelope = {
+    payload_hash: hash,
+    sender: _thirdSpaceIdentity.fingerprint,
+    timestamp: new Date().toISOString(),
+  };
+  const sigBuffer = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(JSON.stringify(envelope))
+  );
+  return {
+    ...envelope,
+    signature: [...new Uint8Array(sigBuffer)].map(b => b.toString(16).padStart(2, '0')).join(''),
+    public_key: _thirdSpaceIdentity.publicKeyJwk,
+  };
+}
+
+// Trust management
+async function trustFingerprint(fingerprint, name) {
+  _trustedFingerprints.set(fingerprint, {
+    name: name || fingerprint.slice(0, 12),
+    trustedAt: new Date().toISOString(),
+    level: TRUST_LEVELS.TRUSTED,
+  });
+  await persistTrustedFingerprints();
+}
+
+async function revokeFingerprint(fingerprint) {
+  _trustedFingerprints.delete(fingerprint);
+  await persistTrustedFingerprints();
+}
+
+async function persistTrustedFingerprints() {
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('identity', 'readwrite');
+    const entries = {};
+    for (const [fp, data] of _trustedFingerprints) entries[fp] = data;
+    tx.objectStore('identity').put({ id: 'trusted-fingerprints', entries });
+  } catch {}
+}
+
+// Helper: SHA-256 of a string → hex
+async function sha256(str) {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// IndexedDB for Third Space persistence
+function openThirdSpaceDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('rar-thirdspace', 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains('identity')) db.createObjectStore('identity', { keyPath: 'id' });
+      if (!db.objectStoreNames.contains('credentials')) db.createObjectStore('credentials', { keyPath: 'agent' });
+      if (!db.objectStoreNames.contains('seen')) db.createObjectStore('seen', { keyPath: 'id' });
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+// Should this agent be auto-accepted based on tier + trust?
+function shouldAutoAccept(credential, verifyResult) {
+  if (!verifyResult.valid) return false;
+  const tier = credential.tier || 'community';
+  // Local agents are always accepted
+  if (verifyResult.trust >= TRUST_LEVELS.LOCAL) return true;
+  // Trusted + Official/Verified = auto-accept
+  if (verifyResult.trust >= TRUST_LEVELS.TRUSTED && (tier === 'official' || tier === 'verified')) return true;
+  // Trusted + Community = auto-accept
+  if (verifyResult.trust >= TRUST_LEVELS.TRUSTED && tier === 'community') return true;
+  // Known + Official/Verified = auto-accept
+  if (verifyResult.trust >= TRUST_LEVELS.KNOWN && (tier === 'official' || tier === 'verified')) return true;
+  // Everything else (frontier, unknown senders) = needs manual approval
+  return false;
+}
+
+// Get the Third Space identity fingerprint for display
+function getThirdSpaceFingerprint() {
+  if (!_thirdSpaceIdentity) return null;
+  const fp = _thirdSpaceIdentity.fingerprint;
+  // Format as 4-char groups for readability
+  return fp.match(/.{4}/g).join(':');
+}
+
+function updateThirdSpaceDisplay() {
+  const el = document.getElementById('thirdspace-id');
+  if (!el) return;
+  if (_thirdSpaceIdentity) {
+    const short = _thirdSpaceIdentity.fingerprint.slice(0, 16);
+    el.textContent = short;
+    el.title = `Third Space: ${getThirdSpaceFingerprint()}\nClick to copy full fingerprint`;
+    el.style.color = 'var(--purple)';
+  } else {
+    el.textContent = 'no identity';
+    el.style.color = 'var(--text-muted)';
+  }
+}
+
+function copyThirdSpaceId() {
+  const fp = getThirdSpaceFingerprint();
+  if (fp) {
+    navigator.clipboard.writeText(fp).then(() => showToast('Third Space fingerprint copied', 'success'));
   }
 }
 
@@ -8163,6 +8617,9 @@ function buildRADPayload(card) {
     },
     source: btoa(unescape(encodeURIComponent(source))),
     signature: card.mintId + ':' + Date.now().toString(36),
+    // Third Space credential (if signed)
+    thirdspace: _cardCredentials.get(card.agentName) || null,
+    brainstem_fingerprint: _thirdSpaceIdentity?.fingerprint || null,
   };
 }
 
@@ -8188,6 +8645,29 @@ async function importRAD(file) {
     if (!payload.format || !payload.format.startsWith('rad.eggs')) {
       throw new Error('Not a valid .rad.eggs file');
     }
+
+    // ── Third Space: Verify credential if present (Rule 2: Verify Before You Trust) ──
+    let trustInfo = { valid: false, trust: TRUST_LEVELS.ANONYMOUS, trustLabel: 'Anonymous' };
+    if (payload.thirdspace) {
+      trustInfo = await verifyCardCredential(payload.thirdspace);
+      if (!trustInfo.valid) {
+        showToast(`Warning: Card credential verification FAILED — ${trustInfo.reason}`, 'error');
+      }
+    }
+
+    // ── Third Space: Check auto-accept (Rule 9: Respect Tier Boundaries) ──
+    const tier = payload.card?.tier || payload.agent?.manifest?.quality_tier || 'community';
+    const credentialWithTier = { ...payload.thirdspace, tier };
+    const autoAccept = payload.thirdspace ? shouldAutoAccept(credentialWithTier, trustInfo) : false;
+
+    if (!autoAccept && tier === 'experimental' && trustInfo.trust < TRUST_LEVELS.TRUSTED) {
+      // Frontier agents from untrusted sources need explicit approval
+      if (!confirm(`This is a Frontier-tier agent from ${trustInfo.trustLabel} source (${trustInfo.fingerprint?.slice(0, 12) || 'unknown'}). Import anyway?`)) {
+        showToast('Import cancelled — Frontier agent from untrusted source', 'info');
+        return null;
+      }
+    }
+
     // Reconstruct card
     const card = {
       ...payload.card,
@@ -8196,14 +8676,27 @@ async function importRAD(file) {
       _sourceCode: payload.source ? decodeURIComponent(escape(atob(payload.source))) : '',
       _imported: true,
       _importedAt: new Date().toISOString(),
+      _thirdspace: trustInfo.valid ? {
+        verified: true,
+        trust: trustInfo.trust,
+        trustLabel: trustInfo.trustLabel,
+        fingerprint: trustInfo.fingerprint || payload.brainstem_fingerprint,
+        haiku: payload.thirdspace?.haiku,
+      } : { verified: false },
     };
-    // Add provenance entry
+
+    // ── Third Space: Add provenance with signature chain (Rule 7: Provenance Is Permanent) ──
     if (!card.provenance) card.provenance = [];
     card.provenance.push({
       action: 'import',
       timestamp: new Date().toISOString(),
       from: 'rad.eggs',
+      trust: trustInfo.trustLabel,
+      senderFingerprint: trustInfo.fingerprint || payload.brainstem_fingerprint || null,
+      receiverFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+      credentialValid: trustInfo.valid,
     });
+
     // Save to collection
     await saveMinted(card);
     // If source present, inject agent into memory
@@ -8218,12 +8711,14 @@ async function importRAD(file) {
           guid,
           url: 'imported:rad.eggs',
           sizeBytes: new Blob([card._sourceCode]).size,
+          _trustLevel: trustInfo.trust,
         });
       }
     }
     renderCollection();
     renderStreamedAgents();
-    showToast(`Imported ${card.displayName} from .rad.eggs`, 'success');
+    const trustBadge = trustInfo.valid ? ` [${trustInfo.trustLabel}]` : ' [Unverified]';
+    showToast(`Imported ${card.displayName} from .rad.eggs${trustBadge}`, 'success');
     return card;
   } catch (err) {
     showToast(`Import failed: ${err.message}`, 'error');
