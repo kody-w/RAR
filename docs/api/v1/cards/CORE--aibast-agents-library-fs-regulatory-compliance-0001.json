@@ -1,0 +1,30 @@
+{
+  "index": 61,
+  "timestamp": "2026-04-04T00:01:01.000Z",
+  "prevHash": "04198804cf178ef8c275b8c355deeb7c5185ca9e5c964c1c8e040eb1686ec81c",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-fs-regulatory-compliance-0001",
+    "agentSlug": "fs-regulatory-compliance",
+    "agentName": "@aibast-agents-library/fs-regulatory-compliance",
+    "setId": "CORE",
+    "title": "FS Regulatory Compliance Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "a2745947910c91b32ee4d0e1458d2ac61847f90ff622d97cb6506fc2303bebc8",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:01.000Z"
+      }
+    ]
+  },
+  "hash": "c64c31f430900b71f487aa25dbe0173d3eec2eab54555aca789b2547759145e1"
+}

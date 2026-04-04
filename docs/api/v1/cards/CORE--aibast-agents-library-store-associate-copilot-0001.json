@@ -1,0 +1,30 @@
+{
+  "index": 106,
+  "timestamp": "2026-04-04T00:01:46.000Z",
+  "prevHash": "7b1ae8e386653739ecada42cf80dcadc7298e3fc8bdd34de83ce87b7e719b7c2",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-store-associate-copilot-0001",
+    "agentSlug": "store-associate-copilot",
+    "agentName": "@aibast-agents-library/store-associate-copilot",
+    "setId": "CORE",
+    "title": "Store Associate Copilot Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "retail_cpg",
+    "version": "1.0.0",
+    "cardHash": "45fd8b46af6d71e1c53bf0feabb848b126c96a45fe6b7e046f79d93903fbedcb",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:46.000Z"
+      }
+    ]
+  },
+  "hash": "55832cc80abc361ea7a340e34a601b9707436d8b330ace8161fbfc08cf3c40f0"
+}

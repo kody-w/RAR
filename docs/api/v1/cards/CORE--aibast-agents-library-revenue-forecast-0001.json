@@ -1,0 +1,30 @@
+{
+  "index": 30,
+  "timestamp": "2026-04-04T00:00:30.000Z",
+  "prevHash": "cce1a8af45ee6b8be78d291910da2b25f2e63adc976e5eef85de4d74130bb570",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-revenue-forecast-0001",
+    "agentSlug": "revenue-forecast",
+    "agentName": "@aibast-agents-library/revenue-forecast",
+    "setId": "CORE",
+    "title": "Revenue Forecast",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "dc2e433e5eadafc54856db128c692974498d5675bd34f47bb9f95a662c885f00",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:30.000Z"
+      }
+    ]
+  },
+  "hash": "47f50c226aa69436537a17b5883263b295ec71ddccf92762f817d5b4ea11197a"
+}

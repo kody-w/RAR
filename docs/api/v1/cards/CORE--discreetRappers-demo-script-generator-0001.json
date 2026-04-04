@@ -1,0 +1,30 @@
+{
+  "index": 124,
+  "timestamp": "2026-04-04T00:02:04.000Z",
+  "prevHash": "26ad31912161491eae45a462258401a7b2c2c413019894bb0b12f4ac3acb4756",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-demo-script-generator-0001",
+    "agentSlug": "demo_script_generator",
+    "agentName": "@discreetRappers/demo_script_generator",
+    "setId": "CORE",
+    "title": "DemoScriptGenerator",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "productivity",
+    "version": "1.0.0",
+    "cardHash": "b69b2b715b0dc4cbea1b3630cdf302feda1848d5f851344190446486c57a5538",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:04.000Z"
+      }
+    ]
+  },
+  "hash": "5ea20de74696f04c6860e4d979fe4ce446a84b9c878bb03f1ce6c559dbdb4749"
+}

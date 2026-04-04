@@ -1,0 +1,30 @@
+{
+  "index": 15,
+  "timestamp": "2026-04-04T00:00:15.000Z",
+  "prevHash": "b97644c4b5c5e99de4fa3a6217f49a7642cdce95cd5a4b2ffa67fbee008adc44",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-account-intelligence-orchestrator-0001",
+    "agentSlug": "account-intelligence-orchestrator",
+    "agentName": "@aibast-agents-library/account-intelligence-orchestrator",
+    "setId": "CORE",
+    "title": "Account Intelligence Orchestrator",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "2870248652170100ea0b20ba08361e059cf0bcd060d0ef0e24e6c49122bd6e6b",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:15.000Z"
+      }
+    ]
+  },
+  "hash": "daf318ebba598ae29116d8e5f1d2cf9d686cf2bed7d14b5a18f2df42c56f8255"
+}

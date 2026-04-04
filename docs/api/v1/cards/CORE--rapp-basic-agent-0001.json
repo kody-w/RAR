@@ -1,0 +1,30 @@
+{
+  "index": 138,
+  "timestamp": "2026-04-04T00:02:18.000Z",
+  "prevHash": "9a38ca5fdd1a39a45940ce2394016b55c52d225abe58898a1871979104ffa347",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--rapp-basic-agent-0001",
+    "agentSlug": "basic-agent",
+    "agentName": "@rapp/basic-agent",
+    "setId": "CORE",
+    "title": "BasicAgent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "devtools",
+    "version": "1.0.0",
+    "cardHash": "46639ae343ceb4f712c97882977fbac2f76111b68e7c68a4324c52a1e0ad484f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:18.000Z"
+      }
+    ]
+  },
+  "hash": "43dff72970246ac6086eebe5c0d98e9e1c414863dfed82be2e3e65bc572fafcd"
+}

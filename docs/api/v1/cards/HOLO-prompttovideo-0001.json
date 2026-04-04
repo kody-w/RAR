@@ -1,0 +1,28 @@
+{
+  "index": 9,
+  "timestamp": "2026-04-04T00:00:09.000Z",
+  "prevHash": "ec0ae5e653be6c0e9c4c9b588bfc0f19ed5bf0eb6eec96363e00d93cee2581f1",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-prompttovideo-0001",
+    "agentSlug": "prompttovideo",
+    "agentName": "@borg/prompttovideo",
+    "setId": "HOLO",
+    "title": "The Director",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "mythic",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "3a5fd400c88019f73c13343d6bb3ba382f8f8204b45e969442cc64b0962cea86",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:09.000Z"
+      }
+    ]
+  },
+  "hash": "95d05ef3bf5faaae99384567e63ece1f56a5d79d2f8864b3a5245e4c144f1f12"
+}

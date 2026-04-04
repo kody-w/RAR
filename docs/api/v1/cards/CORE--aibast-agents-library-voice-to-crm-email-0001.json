@@ -1,0 +1,30 @@
+{
+  "index": 83,
+  "timestamp": "2026-04-04T00:01:23.000Z",
+  "prevHash": "b6fae4c22ee467aac76f7eabbe9d91986ed58fcee9f02d407729e1401419d2e0",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-voice-to-crm-email-0001",
+    "agentSlug": "voice-to-crm-email",
+    "agentName": "@aibast-agents-library/voice-to-crm-email",
+    "setId": "CORE",
+    "title": "Voice to CRM Email",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "c706b4706d8f80cc24e4fefd255feac5f88d05af1a8f79858f32e1afda879b31",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:23.000Z"
+      }
+    ]
+  },
+  "hash": "69e217f3cdc82448cf09c3c0de879c53961fdcb1ccbb5540badeebcbcb52def1"
+}

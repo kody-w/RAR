@@ -1,0 +1,28 @@
+{
+  "index": 6,
+  "timestamp": "2026-04-04T00:00:06.000Z",
+  "prevHash": "139013dec91740411dc40ad4240c3deacdec24902aa27a37d75526b4ae25da54",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-telegram-0001",
+    "agentSlug": "telegram",
+    "agentName": "@borg/telegram",
+    "setId": "HOLO",
+    "title": "The Signal",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "3fbd428daa4b32b3b07f537eaa8ced4247d887c95e3236ddf823f821aa1877d3",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:06.000Z"
+      }
+    ]
+  },
+  "hash": "1910e1c372ef91dc354e818c8de2b551aebbd30bed507bea5ddd536594db4a47"
+}

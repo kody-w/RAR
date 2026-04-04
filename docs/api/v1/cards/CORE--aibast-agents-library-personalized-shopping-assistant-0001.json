@@ -1,0 +1,30 @@
+{
+  "index": 41,
+  "timestamp": "2026-04-04T00:00:41.000Z",
+  "prevHash": "8e43c06b2d27a17ae65386f604e194dd0f5971bc8062c92653654518cfef44bc",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-personalized-shopping-assistant-0001",
+    "agentSlug": "personalized-shopping-assistant",
+    "agentName": "@aibast-agents-library/personalized-shopping-assistant",
+    "setId": "CORE",
+    "title": "Personalized Shopping Assistant Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "93f3f1d2bdca01449038cbb03748791449fef8db108c9ef4a96b948a08cc6dde",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:41.000Z"
+      }
+    ]
+  },
+  "hash": "2a6e00f1639358d88b3a0c22a31db60d38f9702d2c52239e41308cba2d4d0b03"
+}

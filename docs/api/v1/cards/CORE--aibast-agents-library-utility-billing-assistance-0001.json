@@ -1,0 +1,30 @@
+{
+  "index": 112,
+  "timestamp": "2026-04-04T00:01:52.000Z",
+  "prevHash": "d38144bd721958c8dc5a9f7dba640ae96243d96b3f24b54f5ea92754a922d728",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-utility-billing-assistance-0001",
+    "agentSlug": "utility-billing-assistance",
+    "agentName": "@aibast-agents-library/utility-billing-assistance",
+    "setId": "CORE",
+    "title": "Utility Billing Assistance Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "slg_government",
+    "version": "1.0.0",
+    "cardHash": "ba729ccd89253625fffd377345af45a48d5b7cb1085455c44628e4fbd9f523ae",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:52.000Z"
+      }
+    ]
+  },
+  "hash": "01ad88529566001c1f5d7c985b2e79d9e9e5b1648db93c07e982b9593b13abd6"
+}

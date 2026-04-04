@@ -1,0 +1,30 @@
+{
+  "index": 43,
+  "timestamp": "2026-04-04T00:00:43.000Z",
+  "prevHash": "d5e9c65e8bedda58c0b5e0b0716971f441cca0d4398b80c80f68f412503343e1",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-sales-chat-0001",
+    "agentSlug": "sales-chat",
+    "agentName": "@aibast-agents-library/sales-chat",
+    "setId": "CORE",
+    "title": "Sales Chat Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "b015be1e8c61e84f53f3b986127e12d93b3260769b7289071e4aadaa1a4566cf",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:43.000Z"
+      }
+    ]
+  },
+  "hash": "7a926f9347fde82a536060a36c13e8d1b5d5fd0b465fbda9a76137a482fe55e6"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 28,
+  "timestamp": "2026-04-04T00:00:28.000Z",
+  "prevHash": "9a7711bbf841114a3df46e72a9a84506704fc5b8923c8ff3c07e8ac6236e04b3",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-next-best-action-0001",
+    "agentSlug": "next-best-action",
+    "agentName": "@aibast-agents-library/next-best-action",
+    "setId": "CORE",
+    "title": "Next Best Action",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "8b001e1606c481a5149806c3c758b5e4e79c0bea1ef1dbebc842919da6f20403",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:28.000Z"
+      }
+    ]
+  },
+  "hash": "33f3f9a9dc6acb4b9188aa80d97a2fc74e24376deec337a82d25abd5da764926"
+}

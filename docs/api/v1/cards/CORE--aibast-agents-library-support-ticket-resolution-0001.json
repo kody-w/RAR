@@ -1,0 +1,30 @@
+{
+  "index": 117,
+  "timestamp": "2026-04-04T00:01:57.000Z",
+  "prevHash": "4de0779cc7bef59f8b5e6f73d0309f1abb51b797e4317103cf10f73b0b64e76d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-support-ticket-resolution-0001",
+    "agentSlug": "support-ticket-resolution",
+    "agentName": "@aibast-agents-library/support-ticket-resolution",
+    "setId": "CORE",
+    "title": "Support Ticket Resolution Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "software_digital_products",
+    "version": "1.0.0",
+    "cardHash": "6c8afed8f1bf6dbcf6fe6bb100210a1f06a937620c9238319f1b40bcf71d0dca",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:57.000Z"
+      }
+    ]
+  },
+  "hash": "df4e8e30c7ba6a2cd8a973e8df7d9524a517b9733c319111ceeaa0f7910a686d"
+}

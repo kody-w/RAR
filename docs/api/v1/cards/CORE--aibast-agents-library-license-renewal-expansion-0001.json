@@ -1,0 +1,30 @@
+{
+  "index": 115,
+  "timestamp": "2026-04-04T00:01:55.000Z",
+  "prevHash": "0f4f1b28cfac408deccb2a643d4b382d94b1b1ca8e03e7782fbfe1180eaf2166",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-license-renewal-expansion-0001",
+    "agentSlug": "license-renewal-expansion",
+    "agentName": "@aibast-agents-library/license-renewal-expansion",
+    "setId": "CORE",
+    "title": "License Renewal & Expansion Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "software_digital_products",
+    "version": "1.0.0",
+    "cardHash": "1a01f78b6bf57276571001e5536458f1f133b8c7cee84fecf647baed15db63b5",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:55.000Z"
+      }
+    ]
+  },
+  "hash": "6c646c89e0f5a125c2d4a485a2cb5fbdb894b195df20b36a7958db635606fa56"
+}

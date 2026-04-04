@@ -1,0 +1,30 @@
+{
+  "index": 134,
+  "timestamp": "2026-04-04T00:02:14.000Z",
+  "prevHash": "33cb4c67c27c4622c108f03005a376da888d148170dc2577af4146c7ddc410d8",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--kody-context-memory-0001",
+    "agentSlug": "context_memory",
+    "agentName": "@kody/context_memory",
+    "setId": "CORE",
+    "title": "ContextMemory",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "core",
+    "version": "1.0.0",
+    "cardHash": "f8242c00b2fb4a62cb800fe32341d8a71ed27dba5bf58147a2777670f70e018d",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:14.000Z"
+      }
+    ]
+  },
+  "hash": "17e2ab1ee7ada37e79709c85e71bf86942bf059194ed241421c1e2aaf6c9f415"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 37,
+  "timestamp": "2026-04-04T00:00:37.000Z",
+  "prevHash": "4a1dbfaa0f593863a85f8f61ffb646aa927a825207a3f6cdfe17c63f4b1fb307",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-cart-abandonment-recovery-0001",
+    "agentSlug": "cart-abandonment-recovery",
+    "agentName": "@aibast-agents-library/cart-abandonment-recovery",
+    "setId": "CORE",
+    "title": "Cart Abandonment Recovery Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "cf7b0c7dcff688ece20e3bf24ae2905a064f6cd26db6cf9475f31c04e6683b2d",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:37.000Z"
+      }
+    ]
+  },
+  "hash": "6c540f52192e153f2eefe9b3171c4e5bc2abc63dc4220ef2f81a8cd64b68f1eb"
+}

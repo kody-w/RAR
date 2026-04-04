@@ -1,0 +1,30 @@
+{
+  "index": 96,
+  "timestamp": "2026-04-04T00:01:36.000Z",
+  "prevHash": "d5f38b790d85715a29020748a286dcc301042195d0db3a856c42b2f7934cb92d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-production-line-optimization-0001",
+    "agentSlug": "production-line-optimization",
+    "agentName": "@aibast-agents-library/production-line-optimization",
+    "setId": "CORE",
+    "title": "Production Line Optimization Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "manufacturing",
+    "version": "1.0.0",
+    "cardHash": "3ab82965b972ebc6e108094fda4c5a6e619c5df2bc856747ab125ac87c131db5",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:36.000Z"
+      }
+    ]
+  },
+  "hash": "0d14a5a08c375890101cb903a2c6efec6bf074714ae0a9eb8f531451ed67e8b4"
+}

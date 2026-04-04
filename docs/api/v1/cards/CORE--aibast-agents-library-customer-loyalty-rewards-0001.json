@@ -1,0 +1,30 @@
+{
+  "index": 39,
+  "timestamp": "2026-04-04T00:00:39.000Z",
+  "prevHash": "a7e4f959717ef3a056f476f03d72eb8face0de7567ac8589d1f02711dea8fa0d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-customer-loyalty-rewards-0001",
+    "agentSlug": "customer-loyalty-rewards",
+    "agentName": "@aibast-agents-library/customer-loyalty-rewards",
+    "setId": "CORE",
+    "title": "Customer Loyalty & Rewards Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "d7c2a35d106c6ef097eb679825f60f9161d1f157fb3118753003448656f86be6",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:39.000Z"
+      }
+    ]
+  },
+  "hash": "c17724faa5318912485eb9084109431ea0abcbf26efa1272aff0e0075cac3262"
+}

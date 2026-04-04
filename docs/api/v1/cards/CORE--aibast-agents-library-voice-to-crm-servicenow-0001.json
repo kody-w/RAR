@@ -1,0 +1,30 @@
+{
+  "index": 85,
+  "timestamp": "2026-04-04T00:01:25.000Z",
+  "prevHash": "2c416beca366d86afb0da38ea0630a606c59d3c90ed02099c37b4c9a61684214",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-voice-to-crm-servicenow-0001",
+    "agentSlug": "voice-to-crm-servicenow",
+    "agentName": "@aibast-agents-library/voice-to-crm-servicenow",
+    "setId": "CORE",
+    "title": "Voice to CRM (ServiceNow)",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "05fd0ab9d2ac68ee0b590befe23df7a995024716e188bdd33462b3dd2058506a",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:25.000Z"
+      }
+    ]
+  },
+  "hash": "26324b440b440ef6302099722f1c8f51354a5e1fcc98a13122211293e0e5785a"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 135,
+  "timestamp": "2026-04-04T00:02:15.000Z",
+  "prevHash": "17e2ab1ee7ada37e79709c85e71bf86942bf059194ed241421c1e2aaf6c9f415",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--kody-github-agent-library-0001",
+    "agentSlug": "github_agent_library",
+    "agentName": "@kody/github_agent_library",
+    "setId": "CORE",
+    "title": "GitHubAgentLibrary",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "core",
+    "version": "1.0.0",
+    "cardHash": "31825cae5dbc6b737d2af54f92cc5b7cab7d085900249871d4a1d24fdfc0d84b",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:15.000Z"
+      }
+    ]
+  },
+  "hash": "c12edfd29362a4b1f56dbacf96a4bac0c5b67c4b7b08bb168687bf410d3fd0bb"
+}

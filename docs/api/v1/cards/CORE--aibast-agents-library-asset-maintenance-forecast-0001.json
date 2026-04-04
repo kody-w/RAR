@@ -1,0 +1,30 @@
+{
+  "index": 44,
+  "timestamp": "2026-04-04T00:00:44.000Z",
+  "prevHash": "7a926f9347fde82a536060a36c13e8d1b5d5fd0b465fbda9a76137a482fe55e6",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-asset-maintenance-forecast-0001",
+    "agentSlug": "asset-maintenance-forecast",
+    "agentName": "@aibast-agents-library/asset-maintenance-forecast",
+    "setId": "CORE",
+    "title": "Asset Maintenance Forecast Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "energy",
+    "version": "1.0.0",
+    "cardHash": "b50d02a52961404bf60914e4f49a25437bfd06ea23fa4af5df7e2216927e78fa",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:44.000Z"
+      }
+    ]
+  },
+  "hash": "1bd586ccf85204f8ff43dcfc004745b1c9d53d188ffd9ecd12b4c4d7ade734e6"
+}

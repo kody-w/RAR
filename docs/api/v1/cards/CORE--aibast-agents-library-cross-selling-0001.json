@@ -1,0 +1,30 @@
+{
+  "index": 69,
+  "timestamp": "2026-04-04T00:01:09.000Z",
+  "prevHash": "70b40da20f21172570a39ac42073ccb27e078a8e1e93a33d7abaa7425ea98839",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-cross-selling-0001",
+    "agentSlug": "cross-selling",
+    "agentName": "@aibast-agents-library/cross-selling",
+    "setId": "CORE",
+    "title": "Cross-Selling Opportunities",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "c49aa20f36a94c05f6ec2d678a7f7a263de96c0c2eb9ac6da867cf406e8906a0",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:09.000Z"
+      }
+    ]
+  },
+  "hash": "d9038cc8cea821a72ec18bb75febb7499fc308daef632c9edc2a80cab09403b8"
+}

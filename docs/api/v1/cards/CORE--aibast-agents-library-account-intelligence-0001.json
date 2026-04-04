@@ -1,0 +1,30 @@
+{
+  "index": 14,
+  "timestamp": "2026-04-04T00:00:14.000Z",
+  "prevHash": "9a6ddb8dd333317f6e983a3297a4dde69a79512acf2d607df1e72f69dadc9578",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-account-intelligence-0001",
+    "agentSlug": "account-intelligence",
+    "agentName": "@aibast-agents-library/account-intelligence",
+    "setId": "CORE",
+    "title": "Account Intelligence",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "bd8e1b2062ac46e08dc48f7f944db2c374a4189af342fa8590eb5090af042b3c",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:14.000Z"
+      }
+    ]
+  },
+  "hash": "b97644c4b5c5e99de4fa3a6217f49a7642cdce95cd5a4b2ffa67fbee008adc44"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 77,
+  "timestamp": "2026-04-04T00:01:17.000Z",
+  "prevHash": "994a1977cf4151e50f279f0be034051055af9252d5d204bd1c2beff62c8599f7",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-product-reference-0001",
+    "agentSlug": "product-reference",
+    "agentName": "@aibast-agents-library/product-reference",
+    "setId": "CORE",
+    "title": "Product Reference",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "764450e0060cccef08464bccedbd5fba6d6666da4385277ae4c20e3df2f3b2bc",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:17.000Z"
+      }
+    ]
+  },
+  "hash": "1e0cd8219d42b3e9ac80b1c46e370979c0bdd2368e8b591386550b3813f7c1a3"
+}

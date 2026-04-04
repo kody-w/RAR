@@ -1,0 +1,30 @@
+{
+  "index": 63,
+  "timestamp": "2026-04-04T00:01:03.000Z",
+  "prevHash": "31021c65a6f18e7cbfcb9f5a9355cd672ca5de782ef8c1423151bdb779061251",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-wealth-insights-generator-0001",
+    "agentSlug": "wealth-insights-generator",
+    "agentName": "@aibast-agents-library/wealth-insights-generator",
+    "setId": "CORE",
+    "title": "Wealth Insights Generator Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "6d9b6e7a8e8b8ef940580c8f0f447f93ea677bf8ad48af006c918c7af5db2b53",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:03.000Z"
+      }
+    ]
+  },
+  "hash": "776c562d5c048ea2cefeea45c4adaf4f93ad6ea089eabc6e5f54b6195ccf4042"
+}

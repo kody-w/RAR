@@ -1,0 +1,30 @@
+{
+  "index": 48,
+  "timestamp": "2026-04-04T00:00:48.000Z",
+  "prevHash": "1545403adb92c6a3215945416cf5e10edb040013cf10bcc85305c1748df5fcf2",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-energy-regulatory-reporting-0001",
+    "agentSlug": "energy-regulatory-reporting",
+    "agentName": "@aibast-agents-library/energy-regulatory-reporting",
+    "setId": "CORE",
+    "title": "Energy Regulatory Reporting Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "energy",
+    "version": "1.0.0",
+    "cardHash": "575492f2576697f6a79225af90d5d2563d4479b56019e62b01f1d47b30c47b8a",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:48.000Z"
+      }
+    ]
+  },
+  "hash": "77fa3d126368f658af683ebc524c96f3479132b533f6e2095166439a0a4fe436"
+}

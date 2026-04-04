@@ -1,0 +1,30 @@
+{
+  "index": 84,
+  "timestamp": "2026-04-04T00:01:24.000Z",
+  "prevHash": "69e217f3cdc82448cf09c3c0de879c53961fdcb1ccbb5540badeebcbcb52def1",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-sharepoint-document-extractor-0001",
+    "agentSlug": "sharepoint-document-extractor",
+    "agentName": "@aibast-agents-library/sharepoint-document-extractor",
+    "setId": "CORE",
+    "title": "SharePoint Document Extractor",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "051fb779af6fdd48c8b089aa232e66802deb852b02f3ddcba1a4da8ea4f788d2",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:24.000Z"
+      }
+    ]
+  },
+  "hash": "2c416beca366d86afb0da38ea0630a606c59d3c90ed02099c37b4c9a61684214"
+}

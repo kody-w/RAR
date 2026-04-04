@@ -1,0 +1,30 @@
+{
+  "index": 26,
+  "timestamp": "2026-04-04T00:00:26.000Z",
+  "prevHash": "fab79892bdc6f6240e323bb28ba30bc95bafa21799933473069523bcf724a212",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-deal-progression-0001",
+    "agentSlug": "deal-progression",
+    "agentName": "@aibast-agents-library/deal-progression",
+    "setId": "CORE",
+    "title": "Deal Progression",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "5ce69880b028a517b074726c4c5aa8093105cfd42cccdf3cf54dadf6b45a02af",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:26.000Z"
+      }
+    ]
+  },
+  "hash": "317652fa6cb6ce30bd30f2f82c8f9a64975d96923c77754fa71314bd48687916"
+}

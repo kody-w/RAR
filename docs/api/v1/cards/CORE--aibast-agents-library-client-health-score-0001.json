@@ -1,0 +1,30 @@
+{
+  "index": 98,
+  "timestamp": "2026-04-04T00:01:38.000Z",
+  "prevHash": "b1bc1363c845cc968118d8174e2a6d5cfff3448b844fb2d0164f6bcabc78fdb5",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-client-health-score-0001",
+    "agentSlug": "client-health-score",
+    "agentName": "@aibast-agents-library/client-health-score",
+    "setId": "CORE",
+    "title": "Client Health Score Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "professional_services",
+    "version": "1.0.0",
+    "cardHash": "cb105ffbbbf990d5adf8f9a3df5ba821e2a15f51fbfed187dab345474905a6ad",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:38.000Z"
+      }
+    ]
+  },
+  "hash": "bf5ce370068dc002b606da3525317b1aaffe03219c96a61376801c138e356c31"
+}

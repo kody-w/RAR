@@ -1,0 +1,30 @@
+{
+  "index": 38,
+  "timestamp": "2026-04-04T00:00:38.000Z",
+  "prevHash": "6c540f52192e153f2eefe9b3171c4e5bc2abc63dc4220ef2f81a8cd64b68f1eb",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-customer-360-speech-0001",
+    "agentSlug": "customer-360-speech",
+    "agentName": "@aibast-agents-library/customer-360-speech",
+    "setId": "CORE",
+    "title": "Customer 360 & Speech Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "cb14fbc17c8d5d63a222d577a95a585f46daf8c290d9c50269f1390bb8c96043",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:38.000Z"
+      }
+    ]
+  },
+  "hash": "a7e4f959717ef3a056f476f03d72eb8face0de7567ac8589d1f02711dea8fa0d"
+}

@@ -1,0 +1,152 @@
+{
+  "address": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+  "alias": "Howard Hoy",
+  "role": "genesis-holder",
+  "forgedAt": "2026-04-04T00:00:00.000Z",
+  "cards": [
+    {
+      "mintId": "HOLO-borg-0001",
+      "agentName": "@borg/borg",
+      "title": "The Assimilator",
+      "setId": "HOLO",
+      "rarity": "mythic",
+      "edition": "1/1",
+      "blockIndex": 1,
+      "blockHash": "1bd720f49ee618a9f1e8c7ba2977d9da4beba667f7e44b5fa10504106eb603e1",
+      "cardHash": "8233575219de43ce3f3c726ca8094ebf5c88ff70f14c58287abbbf61707e6ddb"
+    },
+    {
+      "mintId": "HOLO-anvil-0001",
+      "agentName": "@borg/anvil",
+      "title": "The Enforcer",
+      "setId": "HOLO",
+      "rarity": "mythic",
+      "edition": "1/1",
+      "blockIndex": 2,
+      "blockHash": "e2c75592d6fe56beeee1d3e48a32f2d4ca3ea77c4fa0bf3728d5bd836f95cad1",
+      "cardHash": "9b156d07b478a70240048dee8d1df566f33bb013b75dd6b7830da981d2cd8749"
+    },
+    {
+      "mintId": "HOLO-personafactory-0001",
+      "agentName": "@borg/personafactory",
+      "title": "The Shapeshifter",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 3,
+      "blockHash": "a84c5f917235afe641caea205d657493289c63689f36ea095186977c9d1c3b7b",
+      "cardHash": "32725ccbfe06d64b4a3cba7eb25fcc4e1fef4d056471e663e6975734cbdb01d9"
+    },
+    {
+      "mintId": "HOLO-tinyworld-0001",
+      "agentName": "@borg/tinyworld",
+      "title": "The Architect",
+      "setId": "HOLO",
+      "rarity": "mythic",
+      "edition": "1/1",
+      "blockIndex": 4,
+      "blockHash": "508c91b7b40d906407d613b6a617dffc2c18d35ad2ab8333ce0a982eac8f432b",
+      "cardHash": "61a0d2861621314783b1b3c0ce4480c1c3bb832f52f81c9a06458926b6ac1503"
+    },
+    {
+      "mintId": "HOLO-bridge-0001",
+      "agentName": "@borg/bridge",
+      "title": "The Connector",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 5,
+      "blockHash": "139013dec91740411dc40ad4240c3deacdec24902aa27a37d75526b4ae25da54",
+      "cardHash": "5a6088dc87970d5258b2552148703a2ff8800312ac02d5dfcf171397a55ece16"
+    },
+    {
+      "mintId": "HOLO-telegram-0001",
+      "agentName": "@borg/telegram",
+      "title": "The Signal",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 6,
+      "blockHash": "1910e1c372ef91dc354e818c8de2b551aebbd30bed507bea5ddd536594db4a47",
+      "cardHash": "3fbd428daa4b32b3b07f537eaa8ced4247d887c95e3236ddf823f821aa1877d3"
+    },
+    {
+      "mintId": "HOLO-contextmemory-0001",
+      "agentName": "@borg/contextmemory",
+      "title": "The Archivist",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 7,
+      "blockHash": "4e3ec6f45376a2e39da615fd374859fc45a284c6befbc6afb0991ace5a81df1c",
+      "cardHash": "75acde549630b224d49875662d3f67964439d70daa67feba43ff5b2c3aa74d7e"
+    },
+    {
+      "mintId": "HOLO-managememory-0001",
+      "agentName": "@borg/managememory",
+      "title": "The Librarian",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 8,
+      "blockHash": "ec0ae5e653be6c0e9c4c9b588bfc0f19ed5bf0eb6eec96363e00d93cee2581f1",
+      "cardHash": "15e591c917f5470871a85a821d3ccbd2f612636ee4e064101ebf33ce1a913fc2"
+    },
+    {
+      "mintId": "HOLO-prompttovideo-0001",
+      "agentName": "@borg/prompttovideo",
+      "title": "The Director",
+      "setId": "HOLO",
+      "rarity": "mythic",
+      "edition": "1/1",
+      "blockIndex": 9,
+      "blockHash": "95d05ef3bf5faaae99384567e63ece1f56a5d79d2f8864b3a5245e4c144f1f12",
+      "cardHash": "3a5fd400c88019f73c13343d6bb3ba382f8f8204b45e969442cc64b0962cea86"
+    },
+    {
+      "mintId": "HOLO-demovideo-0001",
+      "agentName": "@borg/demovideo",
+      "title": "The Presenter",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 10,
+      "blockHash": "d7aa5ad877efb5556d6623aad95e012e1c90f0c774bff9114a66be15912955b9",
+      "cardHash": "89754b799e05ecb92578fc06a8f1ffaf7b61bb0c8170490bdc02bac8b86d3d66"
+    },
+    {
+      "mintId": "HOLO-experiment-0001",
+      "agentName": "@borg/experiment",
+      "title": "The Alchemist",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 11,
+      "blockHash": "c54f75abd7c07e033ea4842f133b727fea82d9f3abccd0aae8bca50992bc3ea5",
+      "cardHash": "37f94f580e2b8d6450f4a839d07851a5313fac42f74b3f72d1f02fb25ffb484a"
+    },
+    {
+      "mintId": "HOLO-hackernews-0001",
+      "agentName": "@borg/hackernews",
+      "title": "The Herald",
+      "setId": "HOLO",
+      "rarity": "rare",
+      "edition": "1/1",
+      "blockIndex": 12,
+      "blockHash": "f6d05f76b1a4cc564800631304cae4acdc7a51b368a09aa3d6f9e5657c2be8ae",
+      "cardHash": "416b589266d1ff0d1619d0eb6bd8b67db8de5d8a26206a4a6b613bb189c1c1ec"
+    },
+    {
+      "mintId": "HOLO-holonaming-0001",
+      "agentName": "@borg/holonaming",
+      "title": "The Admiral",
+      "setId": "HOLO",
+      "rarity": "mythic",
+      "edition": "1/1",
+      "blockIndex": 13,
+      "blockHash": "9a6ddb8dd333317f6e983a3297a4dde69a79512acf2d607df1e72f69dadc9578",
+      "cardHash": "468487f9aa1bea82b0719c62734da983a78c63b38e5a19b915e818fe1aa1fb8f"
+    }
+  ],
+  "totalCards": 13
+}

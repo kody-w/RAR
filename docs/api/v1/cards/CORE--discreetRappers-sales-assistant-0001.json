@@ -1,0 +1,30 @@
+{
+  "index": 130,
+  "timestamp": "2026-04-04T00:02:10.000Z",
+  "prevHash": "f015a6200984872264143fb658205877619f3d117dd595882f2c359e261ea6bd",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-sales-assistant-0001",
+    "agentSlug": "sales_assistant",
+    "agentName": "@discreetRappers/sales_assistant",
+    "setId": "CORE",
+    "title": "SalesAssistant",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "integrations",
+    "version": "1.0.0",
+    "cardHash": "d74b81edd2b38d6916d70c3e60b9acb296780eb0e22b9ee2b55bee6dfff8221e",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:10.000Z"
+      }
+    ]
+  },
+  "hash": "6963b3d221ea4434a61108e93fa7af3422f457e88562c2a723552c770995f7c6"
+}

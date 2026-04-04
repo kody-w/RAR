@@ -1,0 +1,30 @@
+{
+  "index": 21,
+  "timestamp": "2026-04-04T00:00:21.000Z",
+  "prevHash": "ab42bd13863886884b0b46672cd1e8d562ec8dceb264aa3e6a243bdecc15b746",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-account-risk-assessment-0001",
+    "agentSlug": "account-risk-assessment",
+    "agentName": "@aibast-agents-library/account-risk-assessment",
+    "setId": "CORE",
+    "title": "Account Risk Assessment",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "d5cfc84ae658b805245b77a41709a116537b9808cdd70abf84bca5f8810f77c2",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:21.000Z"
+      }
+    ]
+  },
+  "hash": "c1b3087fb0e2622d6e1ca38701ca4f094566bb4c99d727655be094722c8edfdb"
+}

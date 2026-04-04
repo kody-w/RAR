@@ -1,0 +1,30 @@
+{
+  "index": 31,
+  "timestamp": "2026-04-04T00:00:31.000Z",
+  "prevHash": "47f50c226aa69436537a17b5883263b295ec71ddccf92762f817d5b4ea11197a",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-deal-stakeholder-engagement-0001",
+    "agentSlug": "deal-stakeholder-engagement",
+    "agentName": "@aibast-agents-library/deal-stakeholder-engagement",
+    "setId": "CORE",
+    "title": "Stakeholder Engagement",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "dac05d7c7c0c23494f6f8504c85839cd31916d271224ce74a0d0466f5d49cacc",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:31.000Z"
+      }
+    ]
+  },
+  "hash": "d00298df7faeb29bf3e1a14bb6b94570d301e8772e2799ae02a953700b8978db"
+}

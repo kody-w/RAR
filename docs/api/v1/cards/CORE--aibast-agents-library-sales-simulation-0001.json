@@ -1,0 +1,30 @@
+{
+  "index": 79,
+  "timestamp": "2026-04-04T00:01:19.000Z",
+  "prevHash": "c5737aaa271dbcd6235dead12fd1a3ad158cea70a8b802bc32aa2c4f6522e205",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-sales-simulation-0001",
+    "agentSlug": "sales-simulation",
+    "agentName": "@aibast-agents-library/sales-simulation",
+    "setId": "CORE",
+    "title": "Sales Simulation",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "cd37f16bf44010ef7dab0487f1a8b4215fb5b404b3e87b049e2732b14ce69efa",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:19.000Z"
+      }
+    ]
+  },
+  "hash": "f2991da3f7518a31af77ec10850d61971692e342b9f992cf631e81b0f2348700"
+}

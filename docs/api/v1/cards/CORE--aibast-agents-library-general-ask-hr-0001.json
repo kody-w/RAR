@@ -1,0 +1,30 @@
+{
+  "index": 65,
+  "timestamp": "2026-04-04T00:01:05.000Z",
+  "prevHash": "a7c153b40fad43700b05c6b78994007c0504701767fce5dac50695ed6a645268",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-general-ask-hr-0001",
+    "agentSlug": "general-ask-hr",
+    "agentName": "@aibast-agents-library/general-ask-hr",
+    "setId": "CORE",
+    "title": "General Ask HR",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "22a6d55882e4aec4ef7105d5d14977336d73b3340c1d0e286af710416df77ef8",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:05.000Z"
+      }
+    ]
+  },
+  "hash": "94b3e51a60cf18a5fe52e98d754b4a276201baaf7bfa38409233f4ced1578493"
+}

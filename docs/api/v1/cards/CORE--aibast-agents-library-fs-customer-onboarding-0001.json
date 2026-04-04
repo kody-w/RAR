@@ -1,0 +1,30 @@
+{
+  "index": 55,
+  "timestamp": "2026-04-04T00:00:55.000Z",
+  "prevHash": "4042fcde191724e2865dd65e66a61eac8a75a34e7797e09b54826f9ca72720d3",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-fs-customer-onboarding-0001",
+    "agentSlug": "fs-customer-onboarding",
+    "agentName": "@aibast-agents-library/fs-customer-onboarding",
+    "setId": "CORE",
+    "title": "FS Customer Onboarding Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "36c55bcc60a37b7104520ec0022cffdebdb5fc9de5005edc52884120dc21f344",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:55.000Z"
+      }
+    ]
+  },
+  "hash": "a5d8708c761d448cb14629599ba43747da5afd3a88ca4b76b1de9492eef66dbc"
+}

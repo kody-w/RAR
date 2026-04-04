@@ -1,0 +1,30 @@
+{
+  "index": 57,
+  "timestamp": "2026-04-04T00:00:57.000Z",
+  "prevHash": "8a2c71254af9531d91b18d79d92928d217792f502278b19acfbc68bc88c48d25",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-financial-advisor-copilot-0001",
+    "agentSlug": "financial-advisor-copilot",
+    "agentName": "@aibast-agents-library/financial-advisor-copilot",
+    "setId": "CORE",
+    "title": "Financial Advisor Copilot Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "2314c1c97b2358bfc8e8b5414e3cf07d9fb1e8b8fbfc3c1f573afadda8ca3efa",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:57.000Z"
+      }
+    ]
+  },
+  "hash": "435768ff2b4976c906aa7fd11d6194ede134a967879923b314ff8334e03a1ab5"
+}

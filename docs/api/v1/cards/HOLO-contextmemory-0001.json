@@ -1,0 +1,28 @@
+{
+  "index": 7,
+  "timestamp": "2026-04-04T00:00:07.000Z",
+  "prevHash": "1910e1c372ef91dc354e818c8de2b551aebbd30bed507bea5ddd536594db4a47",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-contextmemory-0001",
+    "agentSlug": "contextmemory",
+    "agentName": "@borg/contextmemory",
+    "setId": "HOLO",
+    "title": "The Archivist",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "75acde549630b224d49875662d3f67964439d70daa67feba43ff5b2c3aa74d7e",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:07.000Z"
+      }
+    ]
+  },
+  "hash": "4e3ec6f45376a2e39da615fd374859fc45a284c6befbc6afb0991ace5a81df1c"
+}

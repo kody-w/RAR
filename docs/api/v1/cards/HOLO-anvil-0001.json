@@ -1,0 +1,28 @@
+{
+  "index": 2,
+  "timestamp": "2026-04-04T00:00:02.000Z",
+  "prevHash": "1bd720f49ee618a9f1e8c7ba2977d9da4beba667f7e44b5fa10504106eb603e1",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-anvil-0001",
+    "agentSlug": "anvil",
+    "agentName": "@borg/anvil",
+    "setId": "HOLO",
+    "title": "The Enforcer",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "mythic",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "9b156d07b478a70240048dee8d1df566f33bb013b75dd6b7830da981d2cd8749",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:02.000Z"
+      }
+    ]
+  },
+  "hash": "e2c75592d6fe56beeee1d3e48a32f2d4ca3ea77c4fa0bf3728d5bd836f95cad1"
+}

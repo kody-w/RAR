@@ -1,0 +1,28 @@
+{
+  "index": 13,
+  "timestamp": "2026-04-04T00:00:13.000Z",
+  "prevHash": "f6d05f76b1a4cc564800631304cae4acdc7a51b368a09aa3d6f9e5657c2be8ae",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-holonaming-0001",
+    "agentSlug": "holonaming",
+    "agentName": "@borg/holonaming",
+    "setId": "HOLO",
+    "title": "The Admiral",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "mythic",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "468487f9aa1bea82b0719c62734da983a78c63b38e5a19b915e818fe1aa1fb8f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:13.000Z"
+      }
+    ]
+  },
+  "hash": "9a6ddb8dd333317f6e983a3297a4dde69a79512acf2d607df1e72f69dadc9578"
+}

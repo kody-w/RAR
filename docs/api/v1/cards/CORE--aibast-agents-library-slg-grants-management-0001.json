@@ -1,0 +1,30 @@
+{
+  "index": 111,
+  "timestamp": "2026-04-04T00:01:51.000Z",
+  "prevHash": "9f513d17f603cfd1b90add1282d0a5a7b16f2edc221b11e460c7ae4156b81dde",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-slg-grants-management-0001",
+    "agentSlug": "slg-grants-management",
+    "agentName": "@aibast-agents-library/slg-grants-management",
+    "setId": "CORE",
+    "title": "SLG Grants Management Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "slg_government",
+    "version": "1.0.0",
+    "cardHash": "5cf4a11207045d7fbfc369794563175a7a243b5efae0ca8cad12af19d912a3d5",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:51.000Z"
+      }
+    ]
+  },
+  "hash": "d38144bd721958c8dc5a9f7dba640ae96243d96b3f24b54f5ea92754a922d728"
+}

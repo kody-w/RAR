@@ -1,0 +1,30 @@
+{
+  "index": 47,
+  "timestamp": "2026-04-04T00:00:47.000Z",
+  "prevHash": "a37a4510db64e322c8918d76303c335368835f0ad5e40d3dbc712c6063d7c8a1",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-permit-license-management-0001",
+    "agentSlug": "permit-license-management",
+    "agentName": "@aibast-agents-library/permit-license-management",
+    "setId": "CORE",
+    "title": "Permit & License Management Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "energy",
+    "version": "1.0.0",
+    "cardHash": "db6fa38e2d609ded19834e387d0f67c3a6a40d708135a13d5a4a6be5355c5c55",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:47.000Z"
+      }
+    ]
+  },
+  "hash": "1545403adb92c6a3215945416cf5e10edb040013cf10bcc85305c1748df5fcf2"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 58,
+  "timestamp": "2026-04-04T00:00:58.000Z",
+  "prevHash": "435768ff2b4976c906aa7fd11d6194ede134a967879923b314ff8334e03a1ab5",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-fraud-detection-alert-0001",
+    "agentSlug": "fraud-detection-alert",
+    "agentName": "@aibast-agents-library/fraud-detection-alert",
+    "setId": "CORE",
+    "title": "Fraud Detection & Alert Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "64fa264d963137dbdd178073c0c090e8f320803b0f07252bb6386b033ec7abae",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:58.000Z"
+      }
+    ]
+  },
+  "hash": "1b9d6ebd11328e6e5e8f9a19a5cdd3473b56b4654b6d4eeb9a378ecbb9d7ae8c"
+}

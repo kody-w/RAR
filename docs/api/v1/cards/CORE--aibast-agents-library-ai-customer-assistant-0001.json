@@ -1,0 +1,30 @@
+{
+  "index": 64,
+  "timestamp": "2026-04-04T00:01:04.000Z",
+  "prevHash": "776c562d5c048ea2cefeea45c4adaf4f93ad6ea089eabc6e5f54b6195ccf4042",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-ai-customer-assistant-0001",
+    "agentSlug": "ai-customer-assistant",
+    "agentName": "@aibast-agents-library/ai-customer-assistant",
+    "setId": "CORE",
+    "title": "AI Customer Assistant",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "3f6dd2acdc08d539e779123de4046f7dd6b2d8803d44451627a07d85576dd479",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:04.000Z"
+      }
+    ]
+  },
+  "hash": "a7c153b40fad43700b05c6b78994007c0504701767fce5dac50695ed6a645268"
+}

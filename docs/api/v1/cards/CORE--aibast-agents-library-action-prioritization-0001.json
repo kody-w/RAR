@@ -1,0 +1,30 @@
+{
+  "index": 16,
+  "timestamp": "2026-04-04T00:00:16.000Z",
+  "prevHash": "daf318ebba598ae29116d8e5f1d2cf9d686cf2bed7d14b5a18f2df42c56f8255",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-action-prioritization-0001",
+    "agentSlug": "action-prioritization",
+    "agentName": "@aibast-agents-library/action-prioritization",
+    "setId": "CORE",
+    "title": "Action Prioritization",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "be44504d21c1db766fef98ed05387ffb38d1958e210bcd57e9ecf0687e0258e7",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:16.000Z"
+      }
+    ]
+  },
+  "hash": "9a4c77f0934f128ade0058c83ea7de0b7aabc2dfaaf8bea819bbeda76250e575"
+}

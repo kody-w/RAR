@@ -1,0 +1,30 @@
+{
+  "index": 125,
+  "timestamp": "2026-04-04T00:02:05.000Z",
+  "prevHash": "5ea20de74696f04c6860e4d979fe4ce446a84b9c878bb03f1ce6c559dbdb4749",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-dynamics-crud-0001",
+    "agentSlug": "dynamics_crud",
+    "agentName": "@discreetRappers/dynamics_crud",
+    "setId": "CORE",
+    "title": "DynamicsCRUD",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "integrations",
+    "version": "1.0.0",
+    "cardHash": "7f2b7dc25e6e6c2114036eaa582dfa2b770cb45b2b235bc0637002108fabd778",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:05.000Z"
+      }
+    ]
+  },
+  "hash": "7523a8e20d510a3e09d0017434e8dc3d8881fcb311aabb6fb2f240a70e6f6218"
+}

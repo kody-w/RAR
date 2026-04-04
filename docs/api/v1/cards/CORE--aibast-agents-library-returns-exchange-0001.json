@@ -1,0 +1,30 @@
+{
+  "index": 42,
+  "timestamp": "2026-04-04T00:00:42.000Z",
+  "prevHash": "2a6e00f1639358d88b3a0c22a31db60d38f9702d2c52239e41308cba2d4d0b03",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-returns-exchange-0001",
+    "agentSlug": "returns-exchange",
+    "agentName": "@aibast-agents-library/returns-exchange",
+    "setId": "CORE",
+    "title": "Returns & Exchange Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2c_sales",
+    "version": "1.0.0",
+    "cardHash": "b1704f06dd9517b3e319b73b571f5526c18ead5bf3970e309d2d683cf0330a02",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:42.000Z"
+      }
+    ]
+  },
+  "hash": "d5e9c65e8bedda58c0b5e0b0716971f441cca0d4398b80c80f68f412503343e1"
+}

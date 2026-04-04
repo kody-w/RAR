@@ -1,0 +1,28 @@
+{
+  "index": 11,
+  "timestamp": "2026-04-04T00:00:11.000Z",
+  "prevHash": "d7aa5ad877efb5556d6623aad95e012e1c90f0c774bff9114a66be15912955b9",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-experiment-0001",
+    "agentSlug": "experiment",
+    "agentName": "@borg/experiment",
+    "setId": "HOLO",
+    "title": "The Alchemist",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "37f94f580e2b8d6450f4a839d07851a5313fac42f74b3f72d1f02fb25ffb484a",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:11.000Z"
+      }
+    ]
+  },
+  "hash": "c54f75abd7c07e033ea4842f133b727fea82d9f3abccd0aae8bca50992bc3ea5"
+}

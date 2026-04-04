@@ -1,0 +1,28 @@
+{
+  "index": 8,
+  "timestamp": "2026-04-04T00:00:08.000Z",
+  "prevHash": "4e3ec6f45376a2e39da615fd374859fc45a284c6befbc6afb0991ace5a81df1c",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-managememory-0001",
+    "agentSlug": "managememory",
+    "agentName": "@borg/managememory",
+    "setId": "HOLO",
+    "title": "The Librarian",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "15e591c917f5470871a85a821d3ccbd2f612636ee4e064101ebf33ce1a913fc2",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:08.000Z"
+      }
+    ]
+  },
+  "hash": "ec0ae5e653be6c0e9c4c9b588bfc0f19ed5bf0eb6eec96363e00d93cee2581f1"
+}

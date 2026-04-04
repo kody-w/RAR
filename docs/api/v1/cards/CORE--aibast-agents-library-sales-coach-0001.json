@@ -1,0 +1,30 @@
+{
+  "index": 78,
+  "timestamp": "2026-04-04T00:01:18.000Z",
+  "prevHash": "1e0cd8219d42b3e9ac80b1c46e370979c0bdd2368e8b591386550b3813f7c1a3",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-sales-coach-0001",
+    "agentSlug": "sales-coach",
+    "agentName": "@aibast-agents-library/sales-coach",
+    "setId": "CORE",
+    "title": "Sales Coach",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "02b5bce8c1eacdab83a9a0ddabb962121f43146b669f07e8062aaf8050ee143d",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:18.000Z"
+      }
+    ]
+  },
+  "hash": "c5737aaa271dbcd6235dead12fd1a3ad158cea70a8b802bc32aa2c4f6522e205"
+}

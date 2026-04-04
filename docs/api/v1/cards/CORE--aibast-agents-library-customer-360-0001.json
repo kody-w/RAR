@@ -1,0 +1,30 @@
+{
+  "index": 70,
+  "timestamp": "2026-04-04T00:01:10.000Z",
+  "prevHash": "d9038cc8cea821a72ec18bb75febb7499fc308daef632c9edc2a80cab09403b8",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-customer-360-0001",
+    "agentSlug": "customer-360",
+    "agentName": "@aibast-agents-library/customer-360",
+    "setId": "CORE",
+    "title": "Customer 360",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "7e262a3df51ef7da13bb335fea1e8cba19f90b7047a5bb997f6bff03a02afb17",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:10.000Z"
+      }
+    ]
+  },
+  "hash": "8dd59a19f51b35971c389f782fa956513e0b6c6c85c298f1c04bf7084d1a8dc3"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 50,
+  "timestamp": "2026-04-04T00:00:50.000Z",
+  "prevHash": "8473dbc219ebb78790ad6d7b076a996002d0225d2ae7552cbbdbd961166e85c2",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-federal-grants-oversight-0001",
+    "agentSlug": "federal-grants-oversight",
+    "agentName": "@aibast-agents-library/federal-grants-oversight",
+    "setId": "CORE",
+    "title": "Federal Grants Oversight Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "federal_government",
+    "version": "1.0.0",
+    "cardHash": "b4d06e0df7a79b433998fbdcef408a7aecd2820c3ff2e6edf74a31137823a784",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:50.000Z"
+      }
+    ]
+  },
+  "hash": "9557c199cd5c5c6775fe00ee269dc3efa3c6125fbcb0027955e41dc12f23f911"
+}

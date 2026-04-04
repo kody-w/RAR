@@ -1,0 +1,30 @@
+{
+  "index": 123,
+  "timestamp": "2026-04-04T00:02:03.000Z",
+  "prevHash": "dfec1700b40d1fe74f31330fb44c511642e1e74b037f7c035d794af06308b56d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-copilot-studio-transpiler-0001",
+    "agentSlug": "copilot_studio_transpiler",
+    "agentName": "@discreetRappers/copilot_studio_transpiler",
+    "setId": "CORE",
+    "title": "CopilotStudioTranspiler",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "pipeline",
+    "version": "1.0.0",
+    "cardHash": "19bee654c049f449d13816fdacb2f2fc9c2f2fe8d3198e94b15df974e570f3f6",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:03.000Z"
+      }
+    ]
+  },
+  "hash": "26ad31912161491eae45a462258401a7b2c2c413019894bb0b12f4ac3acb4756"
+}

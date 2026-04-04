@@ -1,0 +1,30 @@
+{
+  "index": 49,
+  "timestamp": "2026-04-04T00:00:49.000Z",
+  "prevHash": "77fa3d126368f658af683ebc524c96f3479132b533f6e2095166439a0a4fe436",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-acquisition-support-0001",
+    "agentSlug": "acquisition-support",
+    "agentName": "@aibast-agents-library/acquisition-support",
+    "setId": "CORE",
+    "title": "Acquisition Support Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "federal_government",
+    "version": "1.0.0",
+    "cardHash": "07356f181a53b500e7dbde81a5b3b056e9442970b1d0c2e93b44e591c8e23ce5",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:49.000Z"
+      }
+    ]
+  },
+  "hash": "8473dbc219ebb78790ad6d7b076a996002d0225d2ae7552cbbdbd961166e85c2"
+}

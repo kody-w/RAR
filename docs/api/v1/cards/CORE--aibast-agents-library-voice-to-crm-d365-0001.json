@@ -1,0 +1,30 @@
+{
+  "index": 82,
+  "timestamp": "2026-04-04T00:01:22.000Z",
+  "prevHash": "20f96b7c08e93786ee933ce813b932dfc0c0ca6917d6ba63c533029f38da0497",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-voice-to-crm-d365-0001",
+    "agentSlug": "voice-to-crm-d365",
+    "agentName": "@aibast-agents-library/voice-to-crm-d365",
+    "setId": "CORE",
+    "title": "Voice to CRM (D365)",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "f8feafb5babec7313680d600c2ad23bd5f77b7ecc2868f4dac959218217d617f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:22.000Z"
+      }
+    ]
+  },
+  "hash": "b6fae4c22ee467aac76f7eabbe9d91986ed58fcee9f02d407729e1401419d2e0"
+}

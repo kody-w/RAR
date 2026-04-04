@@ -1,0 +1,30 @@
+{
+  "index": 105,
+  "timestamp": "2026-04-04T00:01:45.000Z",
+  "prevHash": "e566cc07fb7e55c46f69b45c970c108b9a7b617b3079aa1b0effd9e2a6777eca",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-returns-complaints-resolution-0001",
+    "agentSlug": "returns-complaints-resolution",
+    "agentName": "@aibast-agents-library/returns-complaints-resolution",
+    "setId": "CORE",
+    "title": "Returns & Complaints Resolution Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "retail_cpg",
+    "version": "1.0.0",
+    "cardHash": "3c8fdb592feb59c97c2088548ff5abc8d80a3bc8d69a82d3448336a45d45db26",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:45.000Z"
+      }
+    ]
+  },
+  "hash": "7b1ae8e386653739ecada42cf80dcadc7298e3fc8bdd34de83ce87b7e719b7c2"
+}

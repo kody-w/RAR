@@ -1,0 +1,28 @@
+{
+  "index": 3,
+  "timestamp": "2026-04-04T00:00:03.000Z",
+  "prevHash": "e2c75592d6fe56beeee1d3e48a32f2d4ca3ea77c4fa0bf3728d5bd836f95cad1",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-personafactory-0001",
+    "agentSlug": "personafactory",
+    "agentName": "@borg/personafactory",
+    "setId": "HOLO",
+    "title": "The Shapeshifter",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "32725ccbfe06d64b4a3cba7eb25fcc4e1fef4d056471e663e6975734cbdb01d9",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:03.000Z"
+      }
+    ]
+  },
+  "hash": "a84c5f917235afe641caea205d657493289c63689f36ea095186977c9d1c3b7b"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 118,
+  "timestamp": "2026-04-04T00:01:58.000Z",
+  "prevHash": "df4e8e30c7ba6a2cd8a973e8df7d9524a517b9733c319111ceeaa0f7910a686d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--borg-borg-agent-0001",
+    "agentSlug": "borg_agent",
+    "agentName": "@borg/borg_agent",
+    "setId": "CORE",
+    "title": "Borg",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "uncommon",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "core",
+    "version": "1.0.0",
+    "cardHash": "ed38c26483f9800b0d2e067383948635cf27f77d0b316b7a57959b0ef529695b",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:58.000Z"
+      }
+    ]
+  },
+  "hash": "db0047e75f147f7b6b00fcc8fb96b5f500c89f73662148577df2f86e79cd36e2"
+}

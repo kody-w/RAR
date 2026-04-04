@@ -1,0 +1,28 @@
+{
+  "index": 5,
+  "timestamp": "2026-04-04T00:00:05.000Z",
+  "prevHash": "508c91b7b40d906407d613b6a617dffc2c18d35ad2ab8333ce0a982eac8f432b",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-bridge-0001",
+    "agentSlug": "bridge",
+    "agentName": "@borg/bridge",
+    "setId": "HOLO",
+    "title": "The Connector",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "5a6088dc87970d5258b2552148703a2ff8800312ac02d5dfcf171397a55ece16",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:05.000Z"
+      }
+    ]
+  },
+  "hash": "139013dec91740411dc40ad4240c3deacdec24902aa27a37d75526b4ae25da54"
+}

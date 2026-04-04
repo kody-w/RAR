@@ -1,0 +1,30 @@
+{
+  "index": 99,
+  "timestamp": "2026-04-04T00:01:39.000Z",
+  "prevHash": "bf5ce370068dc002b606da3525317b1aaffe03219c96a61376801c138e356c31",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-contract-risk-review-0001",
+    "agentSlug": "contract-risk-review",
+    "agentName": "@aibast-agents-library/contract-risk-review",
+    "setId": "CORE",
+    "title": "Contract Risk Review Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "professional_services",
+    "version": "1.0.0",
+    "cardHash": "ae4b776ac8dc7b48ac6163c6f70ddd780269f987cfd622f348aaba0e15ddaa2e",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:39.000Z"
+      }
+    ]
+  },
+  "hash": "ddce70c07004ae27b9f2de09c74590f666dafd97c3a37d1d3c449002a7c615cf"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 24,
+  "timestamp": "2026-04-04T00:00:24.000Z",
+  "prevHash": "48d04716797d63b6bc084715dcc9146f4f6fd1ecf30f26f2fe690136ef9dceda",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-deal-competitor-intel-0001",
+    "agentSlug": "deal-competitor-intel",
+    "agentName": "@aibast-agents-library/deal-competitor-intel",
+    "setId": "CORE",
+    "title": "Deal Competitor Intelligence",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "42c41e08d6ed01a63d9e17e29672d348a8b86375cd0519003937040d1463f1c1",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:24.000Z"
+      }
+    ]
+  },
+  "hash": "af1808714bad3147454b013bf0da45e25c1531c518828df59f54d66f910d5268"
+}

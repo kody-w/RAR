@@ -1,0 +1,30 @@
+{
+  "index": 74,
+  "timestamp": "2026-04-04T00:01:14.000Z",
+  "prevHash": "46ec0914338414700c4dc3b7ce63f05c019e585b9ca7a6c098fc21bec4cdb4d5",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-it-ticket-management-0001",
+    "agentSlug": "it-ticket-management",
+    "agentName": "@aibast-agents-library/it-ticket-management",
+    "setId": "CORE",
+    "title": "IT Ticket Management",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "6f820c2b69c3fc2131c36d0fbe60b99615cb3c1e34267a3dfbb6ae8155c07502",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:14.000Z"
+      }
+    ]
+  },
+  "hash": "9af0be0e6df40ca90a445bf9478346d0273cdd2e7019c5dd0ab30fb1238a16f4"
+}

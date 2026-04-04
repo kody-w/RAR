@@ -1,0 +1,30 @@
+{
+  "index": 127,
+  "timestamp": "2026-04-04T00:02:07.000Z",
+  "prevHash": "dac0e19fe0a956dda63c2737063e33bf3e56c0b255804c427a589a5f2332b9a2",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-powerpoint-generator-0001",
+    "agentSlug": "powerpoint_generator",
+    "agentName": "@discreetRappers/powerpoint_generator",
+    "setId": "CORE",
+    "title": "PowerPointGeneratorV2",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "productivity",
+    "version": "1.0.0",
+    "cardHash": "df7199b9ef2a3aa7583ea01a855fecbab8e0505a0977837ad54ef119fb8c0b82",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:07.000Z"
+      }
+    ]
+  },
+  "hash": "4385883b414dee5b186481688609a6c1aee71616f38cf48967fc35647a6cc0cf"
+}

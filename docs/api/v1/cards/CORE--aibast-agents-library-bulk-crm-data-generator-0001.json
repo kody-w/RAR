@@ -1,0 +1,30 @@
+{
+  "index": 66,
+  "timestamp": "2026-04-04T00:01:06.000Z",
+  "prevHash": "94b3e51a60cf18a5fe52e98d754b4a276201baaf7bfa38409233f4ced1578493",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-bulk-crm-data-generator-0001",
+    "agentSlug": "bulk-crm-data-generator",
+    "agentName": "@aibast-agents-library/bulk-crm-data-generator",
+    "setId": "CORE",
+    "title": "Bulk CRM Data Generator",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "02dba419bb5307931f331480fcd0e8cecf5dc6809a5a6e2a1642f8d2ac49ee1d",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:06.000Z"
+      }
+    ]
+  },
+  "hash": "9f49078d233411d5c90587698df50b6cbd838fb38d5aaba5ba15217c4272d51e"
+}

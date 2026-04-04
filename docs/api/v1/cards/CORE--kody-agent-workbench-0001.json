@@ -1,0 +1,30 @@
+{
+  "index": 133,
+  "timestamp": "2026-04-04T00:02:13.000Z",
+  "prevHash": "aae165d3a018e4526dce27c4c9234fd5a656f813f3b462eea24bb3c099c32e1b",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--kody-agent-workbench-0001",
+    "agentSlug": "agent_workbench",
+    "agentName": "@kody/agent_workbench",
+    "setId": "CORE",
+    "title": "Agent Workbench",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "uncommon",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "devtools",
+    "version": "1.0.0",
+    "cardHash": "fe92de9fdf1a54d87a9e9a30644321e0cbce9352c32ca20cb205d9414ec6e340",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:13.000Z"
+      }
+    ]
+  },
+  "hash": "33cb4c67c27c4622c108f03005a376da888d148170dc2577af4146c7ddc410d8"
+}

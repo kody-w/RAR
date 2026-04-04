@@ -1,0 +1,30 @@
+{
+  "index": 137,
+  "timestamp": "2026-04-04T00:02:17.000Z",
+  "prevHash": "8e01660eead4f1ccf16f2463c5c376bf8a14e8f5bb56f25a800fc281ca3c8703",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--kody-rar-remote-agent-0001",
+    "agentSlug": "rar_remote_agent",
+    "agentName": "@kody/rar_remote_agent",
+    "setId": "CORE",
+    "title": "RAR Remote Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "uncommon",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "core",
+    "version": "1.1.0",
+    "cardHash": "016bba60c8d37502f15e6a52858d84ad4057bec72e31c4ea997ebf3f8032c13e",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:17.000Z"
+      }
+    ]
+  },
+  "hash": "9a38ca5fdd1a39a45940ce2394016b55c52d225abe58898a1871979104ffa347"
+}

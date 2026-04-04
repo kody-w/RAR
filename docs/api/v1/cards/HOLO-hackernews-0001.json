@@ -1,0 +1,28 @@
+{
+  "index": 12,
+  "timestamp": "2026-04-04T00:00:12.000Z",
+  "prevHash": "c54f75abd7c07e033ea4842f133b727fea82d9f3abccd0aae8bca50992bc3ea5",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-hackernews-0001",
+    "agentSlug": "hackernews",
+    "agentName": "@borg/hackernews",
+    "setId": "HOLO",
+    "title": "The Herald",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "rare",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "416b589266d1ff0d1619d0eb6bd8b67db8de5d8a26206a4a6b613bb189c1c1ec",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:12.000Z"
+      }
+    ]
+  },
+  "hash": "f6d05f76b1a4cc564800631304cae4acdc7a51b368a09aa3d6f9e5657c2be8ae"
+}

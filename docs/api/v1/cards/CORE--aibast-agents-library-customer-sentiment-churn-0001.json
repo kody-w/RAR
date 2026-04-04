@@ -1,0 +1,30 @@
+{
+  "index": 56,
+  "timestamp": "2026-04-04T00:00:56.000Z",
+  "prevHash": "a5d8708c761d448cb14629599ba43747da5afd3a88ca4b76b1de9492eef66dbc",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-customer-sentiment-churn-0001",
+    "agentSlug": "customer-sentiment-churn",
+    "agentName": "@aibast-agents-library/customer-sentiment-churn",
+    "setId": "CORE",
+    "title": "Customer Sentiment & Churn Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "0e9bcf0bf14a8a001f0405cacb68f17df89415295295340a2efad1735bbd5716",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:56.000Z"
+      }
+    ]
+  },
+  "hash": "8a2c71254af9531d91b18d79d92928d217792f502278b19acfbc68bc88c48d25"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 32,
+  "timestamp": "2026-04-04T00:00:32.000Z",
+  "prevHash": "d00298df7faeb29bf3e1a14bb6b94570d301e8772e2799ae02a953700b8978db",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-stalled-deal-detection-0001",
+    "agentSlug": "stalled-deal-detection",
+    "agentName": "@aibast-agents-library/stalled-deal-detection",
+    "setId": "CORE",
+    "title": "Stalled Deal Detection",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "2446fc500fd4868ffec7452c4d2ff0288cb3b101085b6394bf6261fd49d0526e",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:32.000Z"
+      }
+    ]
+  },
+  "hash": "5a6370a57591e3e627da775fe3c5ff94b8052a741403e44d750925f749f8f5db"
+}

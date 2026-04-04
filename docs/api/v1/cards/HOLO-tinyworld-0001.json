@@ -1,0 +1,28 @@
+{
+  "index": 4,
+  "timestamp": "2026-04-04T00:00:04.000Z",
+  "prevHash": "a84c5f917235afe641caea205d657493289c63689f36ea095186977c9d1c3b7b",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-tinyworld-0001",
+    "agentSlug": "tinyworld",
+    "agentName": "@borg/tinyworld",
+    "setId": "HOLO",
+    "title": "The Architect",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "mythic",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "61a0d2861621314783b1b3c0ce4480c1c3bb832f52f81c9a06458926b6ac1503",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:04.000Z"
+      }
+    ]
+  },
+  "hash": "508c91b7b40d906407d613b6a617dffc2c18d35ad2ab8333ce0a982eac8f432b"
+}

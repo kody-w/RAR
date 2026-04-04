@@ -1,0 +1,30 @@
+{
+  "index": 97,
+  "timestamp": "2026-04-04T00:01:37.000Z",
+  "prevHash": "0d14a5a08c375890101cb903a2c6efec6bf074714ae0a9eb8f531451ed67e8b4",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-supplier-risk-monitoring-0001",
+    "agentSlug": "supplier-risk-monitoring",
+    "agentName": "@aibast-agents-library/supplier-risk-monitoring",
+    "setId": "CORE",
+    "title": "Supplier Risk Monitoring Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "manufacturing",
+    "version": "1.0.0",
+    "cardHash": "2b933705f96b4d3f58086e8d3c30ab44b2d3e3569d4d99bf583a3d0a2f0ea2fe",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:37.000Z"
+      }
+    ]
+  },
+  "hash": "b1bc1363c845cc968118d8174e2a6d5cfff3448b844fb2d0164f6bcabc78fdb5"
+}

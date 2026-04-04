@@ -1,0 +1,30 @@
+{
+  "index": 19,
+  "timestamp": "2026-04-04T00:00:19.000Z",
+  "prevHash": "59604883b43f7de85cb1ca78f72ea18dc78eb2ca9bab5cb0267c87ffefb9d662",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-meeting-prep-0001",
+    "agentSlug": "meeting-prep",
+    "agentName": "@aibast-agents-library/meeting-prep",
+    "setId": "CORE",
+    "title": "Meeting Prep",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "a08d6e203740353de597f924b79ce51379515dc1194a2d800e0c0b71efcdb42f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:19.000Z"
+      }
+    ]
+  },
+  "hash": "1938ddc49fa0c418de7dea241bd9db8dc3e78109db2b4e9180461b323477928e"
+}

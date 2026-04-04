@@ -1,0 +1,30 @@
+{
+  "index": 35,
+  "timestamp": "2026-04-04T00:00:35.000Z",
+  "prevHash": "42268a5ef2a753ea86ef3c1e5b0c66c452f7acff3e000c23821424713bb8c227",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-sales-qualification-0001",
+    "agentSlug": "sales-qualification",
+    "agentName": "@aibast-agents-library/sales-qualification",
+    "setId": "CORE",
+    "title": "Sales Qualification",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "1d41d19257ab147e9beab74df64fcc4df8b50046f773a6b2c88c344fac442c24",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:35.000Z"
+      }
+    ]
+  },
+  "hash": "88725b9a3155d34324eb3d30f91cbc8b28b94b876db9cb2fa29a144ffddfe1a6"
+}

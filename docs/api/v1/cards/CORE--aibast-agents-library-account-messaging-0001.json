@@ -1,0 +1,30 @@
+{
+  "index": 20,
+  "timestamp": "2026-04-04T00:00:20.000Z",
+  "prevHash": "1938ddc49fa0c418de7dea241bd9db8dc3e78109db2b4e9180461b323477928e",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-account-messaging-0001",
+    "agentSlug": "account-messaging",
+    "agentName": "@aibast-agents-library/account-messaging",
+    "setId": "CORE",
+    "title": "Account Messaging",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "603391406b63fa1cc5c51460c7889b276c47c3c6a1b5b2cb6eb2c5ef63b1e308",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:20.000Z"
+      }
+    ]
+  },
+  "hash": "ab42bd13863886884b0b46672cd1e8d562ec8dceb264aa3e6a243bdecc15b746"
+}

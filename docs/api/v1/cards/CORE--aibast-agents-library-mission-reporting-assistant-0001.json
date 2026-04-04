@@ -1,0 +1,30 @@
+{
+  "index": 51,
+  "timestamp": "2026-04-04T00:00:51.000Z",
+  "prevHash": "9557c199cd5c5c6775fe00ee269dc3efa3c6125fbcb0027955e41dc12f23f911",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-mission-reporting-assistant-0001",
+    "agentSlug": "mission-reporting-assistant",
+    "agentName": "@aibast-agents-library/mission-reporting-assistant",
+    "setId": "CORE",
+    "title": "Mission Reporting Assistant Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "federal_government",
+    "version": "1.0.0",
+    "cardHash": "110ce6fb9e34b8ebd93499c185e5b604fbd9ab26f550ddd9fb507aa38c262f7a",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:51.000Z"
+      }
+    ]
+  },
+  "hash": "52b15b119d4ea4631b4a993243034cd90d9763172026059732a58c0b4040858c"
+}

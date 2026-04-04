@@ -1,0 +1,30 @@
+{
+  "index": 18,
+  "timestamp": "2026-04-04T00:00:18.000Z",
+  "prevHash": "fd0602382e433d6079cf81edcc5a5652f13f88e16ff8b6d23bb2cbce94524056",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-deal-tracking-0001",
+    "agentSlug": "deal-tracking",
+    "agentName": "@aibast-agents-library/deal-tracking",
+    "setId": "CORE",
+    "title": "Deal Tracking",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "f7690245dca8be483a8c6a5daf4923a7f27d1ea2810ecc94c0d63e382886e2bf",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:18.000Z"
+      }
+    ]
+  },
+  "hash": "59604883b43f7de85cb1ca78f72ea18dc78eb2ca9bab5cb0267c87ffefb9d662"
+}

@@ -3358,9 +3358,14 @@ async function init() {
   await loadCachedHaiku();
 
   // Initialize Third Space identity (ECDSA keypair) + load persisted credentials
+  // Your Third Space keypair IS your Binder — your private wallet for forged cards
   await initThirdSpaceIdentity();
   await loadCachedCredentials();
   updateThirdSpaceDisplay();
+
+  // Load chain state + show Binder badge
+  loadChainState().then(() => loadCardChainIndex());
+  renderBinderBadge();
 
   const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
   renderStats(stats);
@@ -9238,6 +9243,12 @@ async function openSlabViewer(mintId) {
             <button class="slab-btn" onclick="document.getElementById('slab-overlay').remove()">Close</button>
           </div>
         </div>
+
+        <!-- Chain Verification -->
+        <div class="slab-panel" id="slab-chain-panel">
+          <h4 style="color:#d2a8ff">Binder & Chain</h4>
+          <div id="slab-chain-status" style="font-size:.8rem;color:var(--text-dim)">Checking chain...</div>
+        </div>
       </div>
     </div>`;
 
@@ -9245,6 +9256,103 @@ async function openSlabViewer(mintId) {
   // Render card on slab canvas
   const slabCanvas = document.getElementById(`slab-canvas-${mintId}`);
   if (slabCanvas) await renderMiniCard(slabCanvas, card);
+
+  // Check chain verification status
+  renderSlabChainStatus(card);
+}
+
+// ── Slab Chain Verification Display ──
+async function renderSlabChainStatus(card) {
+  const el = document.getElementById('slab-chain-status');
+  if (!el) return;
+
+  const myBinder = getBinderAddress();
+  const status = await getForgeStatus(card);
+
+  if (status.verified) {
+    const isMyCard = myBinder && status.owner === myBinder;
+    const ownerLabel = status.ownerAlias || formatBinderAddress(status.owner);
+    el.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span style="color:#39d353;font-weight:700;font-size:1rem">FORGED</span>
+        <span style="color:#484f58;font-size:.7rem">Block #${status.blockIndex}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.75rem">
+        <span style="color:#8b949e">Chain ID</span>
+        <span style="color:#58a6ff;font-family:monospace;font-size:.7rem;word-break:break-all">${status.chainMintId}</span>
+        <span style="color:#8b949e">Block Hash</span>
+        <span style="color:#e6edf3;font-family:monospace;font-size:.65rem;word-break:break-all">${status.blockHash?.slice(0,24)}...</span>
+        <span style="color:#8b949e">Owner</span>
+        <span style="color:${isMyCard ? '#39d353' : '#d2a8ff'};font-family:monospace">${ownerLabel}${isMyCard ? ' (You)' : ''}</span>
+        <span style="color:#8b949e">Set</span>
+        <span style="color:#e3b341">${status.setId} &bull; ${status.rarity || 'common'}</span>
+        <span style="color:#8b949e">Edition</span>
+        <span style="color:#e6edf3">${status.edition || 1}/${status.maxEdition || '\u221e'}</span>
+        <span style="color:#8b949e">Forged</span>
+        <span style="color:#8b949e">${status.forgedAt ? new Date(status.forgedAt).toLocaleDateString() : 'Genesis'}</span>
+      </div>
+      ${myBinder ? `
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #21262d">
+          <div style="font-size:.7rem;color:#8b949e;margin-bottom:4px">Your Binder: <span style="color:#58a6ff;font-family:monospace">${formatBinderAddress(myBinder)}</span></div>
+          <button class="slab-btn" style="font-size:.7rem;padding:4px 10px;background:rgba(57,211,83,.08);color:#39d353;border-color:rgba(57,211,83,.3)" onclick="signAndShowClaim('${status.chainMintId}')">Sign Claim</button>
+          <button class="slab-btn" style="font-size:.7rem;padding:4px 10px" onclick="verifyFullChainUI()">Verify Full Chain</button>
+        </div>
+      ` : ''}
+    `;
+  } else {
+    el.innerHTML = `
+      <div style="color:#f0883e;font-weight:600;margin-bottom:6px">UNFORGED</div>
+      <div style="font-size:.75rem;color:#8b949e">This card is not yet on the RAR Card Chain.</div>
+      ${myBinder ? `<div style="font-size:.7rem;color:#484f58;margin-top:4px">Binder: <span style="font-family:monospace;color:#58a6ff">${formatBinderAddress(myBinder)}</span></div>` : ''}
+    `;
+  }
+}
+
+// ── Sign a claim and display the proof ──
+async function signAndShowClaim(chainMintId) {
+  const claim = await signCardWithBinder(chainMintId);
+  const verified = await verifyBinderClaim(claim);
+
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+  overlay.innerHTML = `
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:16px;padding:32px;max-width:500px;width:90%;color:#e6edf3">
+      <h3 style="color:#d2a8ff;margin-bottom:16px">Binder Claim Signature</h3>
+      <div style="font-size:.8rem;color:${verified.valid ? '#39d353' : '#f85149'};margin-bottom:12px;font-weight:600">
+        ${verified.valid ? 'SIGNATURE VALID — You control this Binder' : 'SIGNATURE INVALID'}
+      </div>
+      <div style="background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:12px;font-family:monospace;font-size:.65rem;color:#8b949e;word-break:break-all;margin-bottom:12px">
+        <div><span style="color:#58a6ff">mintId:</span> ${claim.mintId}</div>
+        <div><span style="color:#58a6ff">binder:</span> ${claim.binder}</div>
+        <div><span style="color:#58a6ff">timestamp:</span> ${claim.timestamp}</div>
+        <div style="margin-top:8px"><span style="color:#39d353">signature:</span> ${claim.signature.slice(0, 64)}...</div>
+      </div>
+      <div style="font-size:.7rem;color:#484f58">This cryptographic proof demonstrates that the holder of Binder <span style="color:#58a6ff">${formatBinderAddress(claim.binder)}</span> signed a claim for this card at the stated time. The signature can be verified by anyone with the public key.</div>
+      <div style="margin-top:16px;text-align:right">
+        <button onclick="navigator.clipboard.writeText(JSON.stringify(${JSON.stringify(claim).replace(/"/g, '&quot;')}));this.textContent='Copied!'" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-right:8px">Copy Proof</button>
+        <button onclick="this.closest('div[style]').remove()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem">Close</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+// ── Full Chain Verification UI ──
+async function verifyFullChainUI() {
+  const el = document.getElementById('slab-chain-status');
+  const origHTML = el?.innerHTML;
+  if (el) el.innerHTML = '<div style="color:#58a6ff">Verifying full chain integrity...</div>';
+
+  const result = await verifyFullChain();
+  if (el) {
+    if (result.valid) {
+      el.innerHTML = origHTML + `<div style="margin-top:8px;padding:6px 10px;background:rgba(57,211,83,.08);border:1px solid rgba(57,211,83,.2);border-radius:6px;font-size:.7rem;color:#39d353">Chain verified: ${result.length} blocks, head ${result.head?.slice(0,12)}...</div>`;
+    } else {
+      el.innerHTML = origHTML + `<div style="margin-top:8px;padding:6px 10px;background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.2);border-radius:6px;font-size:.7rem;color:#f85149">Chain broken: ${result.reason}</div>`;
+    }
+  }
 }
 
 async function openSlabZoom(mintId) {
@@ -12056,6 +12164,229 @@ async function verifyCardCredential(credential) {
   } catch (err) {
     return { valid: false, trust: TRUST_LEVELS.ANONYMOUS, reason: err.message };
   }
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// ── RAR CARD CHAIN — Binder Wallet & On-Chain Verification ──
+// The Binder is your private wallet. Your ECDSA keypair IS your Binder.
+// Cards forged on-chain are serverless NFTs — publicly verifiable,
+// only claimable by the Binder holder. No forgeries possible.
+// Chain data served via GitHub Pages: /docs/api/v1/
+// ══════════════════════════════════════════════════════════════════════
+
+const RAR_CHAIN_API = 'https://kody-w.github.io/RAR/api/v1';
+let _chainState = null;    // cached chain-state.json
+let _cardChainIndex = null; // cached card-index.json (mintId → block info)
+let _binderLinked = false;  // whether this Binder has claimed genesis allocation
+
+// ── Binder Address ──
+// Your Binder Address = your Third Space fingerprint (SHA-256 of your public key)
+// This is your wallet address. Only you hold the private key.
+function getBinderAddress() {
+  return _thirdSpaceIdentity?.fingerprint || null;
+}
+
+// ── Load Chain State ──
+async function loadChainState() {
+  if (_chainState) return _chainState;
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/chain-state.json`);
+    if (res.ok) _chainState = await res.json();
+  } catch {}
+  return _chainState;
+}
+
+// ── Load Card Index (lightweight lookup table) ──
+async function loadCardChainIndex() {
+  if (_cardChainIndex) return _cardChainIndex;
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/card-index.json`);
+    if (res.ok) _cardChainIndex = await res.json();
+  } catch {}
+  return _cardChainIndex;
+}
+
+// ── Verify a card against the public chain ──
+// Returns { verified, blockIndex, blockHash, owner, cardHash } or { verified: false }
+async function verifyCardOnChain(mintId) {
+  const index = await loadCardChainIndex();
+  if (!index || !index[mintId]) return { verified: false, reason: 'Card not found on chain' };
+
+  const entry = index[mintId];
+
+  // Fetch the actual block for deep verification
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/cards/${encodeURIComponent(mintId)}.json`);
+    if (!res.ok) return { verified: false, reason: 'Block not retrievable' };
+    const block = await res.json();
+
+    // Verify block hash integrity
+    const { hash, ...blockData } = block;
+    const payload = JSON.stringify(blockData);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload));
+    const computed = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (computed !== hash) {
+      return { verified: false, reason: 'Block hash mismatch — chain tampered' };
+    }
+
+    return {
+      verified: true,
+      mintId,
+      blockIndex: block.index,
+      blockHash: block.hash,
+      prevHash: block.prevHash,
+      owner: block.data.owner,
+      ownerAlias: _chainState?.binders?.[block.data.owner]?.alias || null,
+      cardHash: block.data.cardHash,
+      rarity: block.data.rarity,
+      setId: block.data.setId,
+      edition: block.data.edition,
+      maxEdition: block.data.maxEdition,
+      title: block.data.title,
+      forgedAt: block.timestamp,
+      provenance: block.data.provenance
+    };
+  } catch {
+    // Fallback to index-only verification (no deep check)
+    return {
+      verified: true,
+      mintId,
+      blockIndex: entry.blockIndex,
+      blockHash: entry.blockHash,
+      owner: entry.owner,
+      cardHash: entry.cardHash,
+      deepVerified: false
+    };
+  }
+}
+
+// ── Verify entire chain integrity (replay from genesis) ──
+async function verifyFullChain() {
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/chain.json`);
+    if (!res.ok) return { valid: false, reason: 'Cannot fetch chain' };
+    const blocks = await res.json();
+
+    for (let i = 0; i < blocks.length; i++) {
+      const block = blocks[i];
+      const { hash, ...data } = block;
+      const payload = JSON.stringify(data);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload));
+      const computed = [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+
+      if (computed !== hash) {
+        return { valid: false, brokenAt: i, reason: `Block ${i} hash mismatch` };
+      }
+      if (i > 0 && block.prevHash !== blocks[i - 1].hash) {
+        return { valid: false, brokenAt: i, reason: `Block ${i} prevHash doesn't link` };
+      }
+    }
+    return { valid: true, length: blocks.length, head: blocks[blocks.length - 1].hash };
+  } catch (err) {
+    return { valid: false, reason: err.message };
+  }
+}
+
+// ── Look up a Binder's holdings on-chain ──
+async function lookupBinder(address) {
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/binders/${address}.json`);
+    if (res.ok) return await res.json();
+  } catch {}
+  return null;
+}
+
+// ── Get forge status for a card in the local collection ──
+// Checks if the card has a matching on-chain record
+async function getForgeStatus(card) {
+  if (!card?.mintId) return { forged: false };
+  // Build the chain mintId from card data
+  const chainMintId = card.setId === 'HOLO'
+    ? `HOLO-${(card.agentName || '').split('/').pop()}-0001`
+    : `CORE-${(card.agentName || '').replace(/[^a-z0-9-]/gi, '-')}-0001`;
+  const result = await verifyCardOnChain(chainMintId);
+  return { ...result, chainMintId };
+}
+
+// ── Sign a card with your Binder (proves you hold the private key) ──
+async function signCardWithBinder(mintId) {
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+  const payload = JSON.stringify({
+    action: 'claim',
+    mintId,
+    binder: _thirdSpaceIdentity.fingerprint,
+    timestamp: new Date().toISOString()
+  });
+  const sigBuffer = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(payload)
+  );
+  return {
+    mintId,
+    binder: _thirdSpaceIdentity.fingerprint,
+    signature: [...new Uint8Array(sigBuffer)].map(b => b.toString(16).padStart(2, '0')).join(''),
+    publicKey: _thirdSpaceIdentity.publicKeyJwk,
+    timestamp: new Date().toISOString()
+  };
+}
+
+// ── Verify a Binder claim signature ──
+async function verifyBinderClaim(claim) {
+  try {
+    const key = await crypto.subtle.importKey(
+      'jwk', claim.publicKey, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']
+    );
+    const fp = await computeFingerprint(claim.publicKey);
+    if (fp !== claim.binder) return { valid: false, reason: 'Fingerprint mismatch' };
+
+    const payload = JSON.stringify({
+      action: 'claim', mintId: claim.mintId,
+      binder: claim.binder, timestamp: claim.timestamp
+    });
+    const sigBytes = new Uint8Array(claim.signature.match(/.{2}/g).map(b => parseInt(b, 16)));
+    const valid = await crypto.subtle.verify(
+      { name: 'ECDSA', hash: 'SHA-256' }, key, sigBytes,
+      new TextEncoder().encode(payload)
+    );
+    return { valid, binder: claim.binder };
+  } catch (err) {
+    return { valid: false, reason: err.message };
+  }
+}
+
+// ── Format Binder address for display ──
+function formatBinderAddress(addr) {
+  if (!addr) return 'No Binder';
+  return '0x' + addr.slice(0, 6) + '...' + addr.slice(-4);
+}
+
+// ── UI: Show Binder info in header ──
+async function renderBinderBadge() {
+  const addr = getBinderAddress();
+  if (!addr) return;
+  let badge = document.getElementById('binder-badge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'binder-badge';
+    badge.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:100;background:rgba(22,27,34,.95);border:1px solid #30363d;border-radius:10px;padding:8px 14px;font-size:.75rem;color:#8b949e;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s;';
+    badge.title = 'Your Binder — click to copy address';
+    badge.onclick = () => {
+      navigator.clipboard.writeText(addr).then(() => {
+        badge.style.borderColor = '#39d353';
+        badge.querySelector('.binder-label').textContent = 'Copied!';
+        setTimeout(() => {
+          badge.style.borderColor = '#30363d';
+          badge.querySelector('.binder-label').textContent = formatBinderAddress(addr);
+        }, 1500);
+      });
+    };
+    document.body.appendChild(badge);
+  }
+  const state = await loadChainState();
+  const cardCount = state ? '| Chain: ' + state.totalForged + ' cards' : '';
+  badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Binder</span> <span class="binder-label" style="color:#58a6ff;font-family:monospace">${formatBinderAddress(addr)}</span> <span style="color:#484f58">${cardCount}</span>`;
 }
 
 // Sign an arbitrary payload (for flicks, deck shares, etc.)

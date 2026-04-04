@@ -1,0 +1,30 @@
+{
+  "index": 81,
+  "timestamp": "2026-04-04T00:01:21.000Z",
+  "prevHash": "ebf3f017167b3520b56097e9ba5ff1a55c4fa549f5c79679e4b20c17f2008efd",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-triage-bot-0001",
+    "agentSlug": "triage-bot",
+    "agentName": "@aibast-agents-library/triage-bot",
+    "setId": "CORE",
+    "title": "Triage Bot",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "0583666ece82c6b51642c4c70f755fcf139ee049b8cf06e6063f6b46b12d66f4",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:21.000Z"
+      }
+    ]
+  },
+  "hash": "20f96b7c08e93786ee933ce813b932dfc0c0ca6917d6ba63c533029f38da0497"
+}

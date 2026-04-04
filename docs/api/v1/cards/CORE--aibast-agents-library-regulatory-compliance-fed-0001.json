@@ -1,0 +1,30 @@
+{
+  "index": 52,
+  "timestamp": "2026-04-04T00:00:52.000Z",
+  "prevHash": "52b15b119d4ea4631b4a993243034cd90d9763172026059732a58c0b4040858c",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-regulatory-compliance-fed-0001",
+    "agentSlug": "regulatory-compliance-fed",
+    "agentName": "@aibast-agents-library/regulatory-compliance-fed",
+    "setId": "CORE",
+    "title": "Regulatory Compliance (Federal) Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "federal_government",
+    "version": "1.0.0",
+    "cardHash": "40e456efdff7269093218dd00b7b04d633552b0056c3b15ba3bd8422e04cb7a6",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:52.000Z"
+      }
+    ]
+  },
+  "hash": "e92b382a0e13742ca882fe51877a30e88addb6aac390021f2a0a47699a086e7a"
+}

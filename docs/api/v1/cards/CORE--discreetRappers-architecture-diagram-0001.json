@@ -1,0 +1,30 @@
+{
+  "index": 122,
+  "timestamp": "2026-04-04T00:02:02.000Z",
+  "prevHash": "8998f95b381d0f0b916f5598e53ec55b52ff9c81b95b893db0c4c45025a1b028",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-architecture-diagram-0001",
+    "agentSlug": "architecture_diagram",
+    "agentName": "@discreetRappers/architecture_diagram",
+    "setId": "CORE",
+    "title": "ArchitectureDiagramAgent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "productivity",
+    "version": "1.0.0",
+    "cardHash": "b30d9f63ba5d0e88847b0caf31125fabf430c69a3d9c124254242c70cb30bf52",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:02.000Z"
+      }
+    ]
+  },
+  "hash": "dfec1700b40d1fe74f31330fb44c511642e1e74b037f7c035d794af06308b56d"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 22,
+  "timestamp": "2026-04-04T00:00:22.000Z",
+  "prevHash": "c1b3087fb0e2622d6e1ca38701ca4f094566bb4c99d727655be094722c8edfdb",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-stakeholder-intelligence-0001",
+    "agentSlug": "stakeholder-intelligence",
+    "agentName": "@aibast-agents-library/stakeholder-intelligence",
+    "setId": "CORE",
+    "title": "Stakeholder Intelligence",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "3a93d5aae42057ac8c2e18392d31e69adc4fe1cf0c89adbaa1c7448c5f0c7008",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:22.000Z"
+      }
+    ]
+  },
+  "hash": "fc8ec6ca2337b9b006d04f8cadd496d75631ec45080d803211ac389d7bc0fa52"
+}

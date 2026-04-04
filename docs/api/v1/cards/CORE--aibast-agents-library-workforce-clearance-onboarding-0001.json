@@ -1,0 +1,30 @@
+{
+  "index": 53,
+  "timestamp": "2026-04-04T00:00:53.000Z",
+  "prevHash": "e92b382a0e13742ca882fe51877a30e88addb6aac390021f2a0a47699a086e7a",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-workforce-clearance-onboarding-0001",
+    "agentSlug": "workforce-clearance-onboarding",
+    "agentName": "@aibast-agents-library/workforce-clearance-onboarding",
+    "setId": "CORE",
+    "title": "Workforce Clearance & Onboarding Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "federal_government",
+    "version": "1.0.0",
+    "cardHash": "56b0007e6ef0df2592d7c82bd2796679e92e80afac1f8eb4d5b9b95112db2280",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:53.000Z"
+      }
+    ]
+  },
+  "hash": "6cea286f1f1e0714c2d37dc0043f802de3760e522f2f6aa081ebab7830b5104d"
+}

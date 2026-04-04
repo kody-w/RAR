@@ -1,0 +1,30 @@
+{
+  "index": 93,
+  "timestamp": "2026-04-04T00:01:33.000Z",
+  "prevHash": "d4fd21eed5ba3d90a1169a77bd583eb8b39cdf03c2db56390a81de468c4e8d58",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-inventory-rebalancing-0001",
+    "agentSlug": "inventory-rebalancing",
+    "agentName": "@aibast-agents-library/inventory-rebalancing",
+    "setId": "CORE",
+    "title": "Inventory Rebalancing Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "manufacturing",
+    "version": "1.0.0",
+    "cardHash": "72a4efd7e149897182e4275941436a5a3d4518ebaff043f06529e2ee9e9a86f6",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:33.000Z"
+      }
+    ]
+  },
+  "hash": "40e96fa2ddd8adfca0068569f85b333e55a13d6b98b0a65beacd11133fa467f5"
+}

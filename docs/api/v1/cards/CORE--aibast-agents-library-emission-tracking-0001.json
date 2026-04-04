@@ -1,0 +1,30 @@
+{
+  "index": 45,
+  "timestamp": "2026-04-04T00:00:45.000Z",
+  "prevHash": "1bd586ccf85204f8ff43dcfc004745b1c9d53d188ffd9ecd12b4c4d7ade734e6",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-emission-tracking-0001",
+    "agentSlug": "emission-tracking",
+    "agentName": "@aibast-agents-library/emission-tracking",
+    "setId": "CORE",
+    "title": "Emission Tracking Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "energy",
+    "version": "1.0.0",
+    "cardHash": "b96a4ef1c6eda57bab95c2f720335478b0dc25391784c3200e70959727b338cd",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:45.000Z"
+      }
+    ]
+  },
+  "hash": "8ba14bbb33b37f97f0d3453dd12d20d9b5e5d384d3e42f46a8653f9eae6151b6"
+}

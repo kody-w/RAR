@@ -1,0 +1,30 @@
+{
+  "index": 76,
+  "timestamp": "2026-04-04T00:01:16.000Z",
+  "prevHash": "eab3440d3d57cfcffc967e2e539dad28edf6493373f91c39045897eee8a6746d",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-procurement-support-0001",
+    "agentSlug": "procurement-support",
+    "agentName": "@aibast-agents-library/procurement-support",
+    "setId": "CORE",
+    "title": "Procurement Support",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "7888d5c05065aa16ab3880c90ff5bdddbe10cbf21117efce071ee8b29e1ba26c",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:16.000Z"
+      }
+    ]
+  },
+  "hash": "994a1977cf4151e50f279f0be034051055af9252d5d204bd1c2beff62c8599f7"
+}

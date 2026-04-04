@@ -1,0 +1,30 @@
+{
+  "index": 114,
+  "timestamp": "2026-04-04T00:01:54.000Z",
+  "prevHash": "c99eed597ccd1f88a6890d2c935af0fde61ecb93a5f6ec8a055840c8806f3f16",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-software-customer-onboarding-0001",
+    "agentSlug": "software-customer-onboarding",
+    "agentName": "@aibast-agents-library/software-customer-onboarding",
+    "setId": "CORE",
+    "title": "Customer Onboarding Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "software_digital_products",
+    "version": "1.0.0",
+    "cardHash": "d42524f5f8202b66690e2de103f521e3e053fae28909c492be28a275ed7d7bb7",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:54.000Z"
+      }
+    ]
+  },
+  "hash": "0f4f1b28cfac408deccb2a643d4b382d94b1b1ca8e03e7782fbfe1180eaf2166"
+}

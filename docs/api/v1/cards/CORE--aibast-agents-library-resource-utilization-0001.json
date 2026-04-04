@@ -1,0 +1,30 @@
+{
+  "index": 101,
+  "timestamp": "2026-04-04T00:01:41.000Z",
+  "prevHash": "587fcf49b4d8ebaabc00c8ebc4e50c96735c5b6b7947ac71e62d989ab7a82001",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-resource-utilization-0001",
+    "agentSlug": "resource-utilization",
+    "agentName": "@aibast-agents-library/resource-utilization",
+    "setId": "CORE",
+    "title": "Resource Utilization Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "professional_services",
+    "version": "1.0.0",
+    "cardHash": "3948c36a6dd58b497eb2e41dd2e2c0484401a493a25f64c0297640a8595d7c41",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:41.000Z"
+      }
+    ]
+  },
+  "hash": "943626bb02e2b10536689c8bbedd3281ae20e1a15571636247852e9f5cce978f"
+}

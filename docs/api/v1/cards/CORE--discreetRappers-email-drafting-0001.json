@@ -1,0 +1,30 @@
+{
+  "index": 126,
+  "timestamp": "2026-04-04T00:02:06.000Z",
+  "prevHash": "7523a8e20d510a3e09d0017434e8dc3d8881fcb311aabb6fb2f240a70e6f6218",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-email-drafting-0001",
+    "agentSlug": "email_drafting",
+    "agentName": "@discreetRappers/email_drafting",
+    "setId": "CORE",
+    "title": "EmailDrafting",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "integrations",
+    "version": "1.0.0",
+    "cardHash": "6b317b21d93667a3601545fe5beea3de5fc2e715328b8aff9a3a2ea7555d0b89",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:06.000Z"
+      }
+    ]
+  },
+  "hash": "dac0e19fe0a956dda63c2737063e33bf3e56c0b255804c427a589a5f2332b9a2"
+}

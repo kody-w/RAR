@@ -1,0 +1,30 @@
+{
+  "index": 132,
+  "timestamp": "2026-04-04T00:02:12.000Z",
+  "prevHash": "3b5e7fe1a9b7941c402288e62381b6b903af994f7f52518a1559d7233c47ce1a",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-sharepoint-contract-analysis-0001",
+    "agentSlug": "sharepoint_contract_analysis",
+    "agentName": "@discreetRappers/sharepoint_contract_analysis",
+    "setId": "CORE",
+    "title": "ContractAnalysis",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "integrations",
+    "version": "1.0.0",
+    "cardHash": "2449f7841b4be7220aabad81a096f202b75d85ddd39b1729957790cf1e063a5c",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:12.000Z"
+      }
+    ]
+  },
+  "hash": "aae165d3a018e4526dce27c4c9234fd5a656f813f3b462eea24bb3c099c32e1b"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 113,
+  "timestamp": "2026-04-04T00:01:53.000Z",
+  "prevHash": "01ad88529566001c1f5d7c985b2e79d9e9e5b1648db93c07e982b9593b13abd6",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-software-competitive-intel-0001",
+    "agentSlug": "software-competitive-intel",
+    "agentName": "@aibast-agents-library/software-competitive-intel",
+    "setId": "CORE",
+    "title": "Competitive Intelligence Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "software_digital_products",
+    "version": "1.0.0",
+    "cardHash": "d62b9994b1da9f07cb877f5219d1540a278f91287ea802ef26373be1cdf073e8",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:53.000Z"
+      }
+    ]
+  },
+  "hash": "c99eed597ccd1f88a6890d2c935af0fde61ecb93a5f6ec8a055840c8806f3f16"
+}

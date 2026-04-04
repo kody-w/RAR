@@ -1,0 +1,30 @@
+{
+  "index": 34,
+  "timestamp": "2026-04-04T00:00:34.000Z",
+  "prevHash": "0cabe90a0593f006e46ccfc8a474fe617f922d4133c07250deab52c5ba848180",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-proposal-generation-0001",
+    "agentSlug": "proposal-generation",
+    "agentName": "@aibast-agents-library/proposal-generation",
+    "setId": "CORE",
+    "title": "Proposal Generation",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "630e84c7992f1dedc344a88d28629b975a8fc433dd15b71c35bfa69a16007e9f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:34.000Z"
+      }
+    ]
+  },
+  "hash": "42268a5ef2a753ea86ef3c1e5b0c66c452f7acff3e000c23821424713bb8c227"
+}

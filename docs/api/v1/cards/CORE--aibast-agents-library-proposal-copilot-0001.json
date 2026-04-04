@@ -1,0 +1,30 @@
+{
+  "index": 100,
+  "timestamp": "2026-04-04T00:01:40.000Z",
+  "prevHash": "ddce70c07004ae27b9f2de09c74590f666dafd97c3a37d1d3c449002a7c615cf",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-proposal-copilot-0001",
+    "agentSlug": "proposal-copilot",
+    "agentName": "@aibast-agents-library/proposal-copilot",
+    "setId": "CORE",
+    "title": "Proposal Copilot Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "professional_services",
+    "version": "1.0.0",
+    "cardHash": "afbcb880002050bc26ea8686d6cacc0e27e7e17681ea796cce84b19240130c7b",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:40.000Z"
+      }
+    ]
+  },
+  "hash": "587fcf49b4d8ebaabc00c8ebc4e50c96735c5b6b7947ac71e62d989ab7a82001"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 128,
+  "timestamp": "2026-04-04T00:02:08.000Z",
+  "prevHash": "4385883b414dee5b186481688609a6c1aee71616f38cf48967fc35647a6cc0cf",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-project-tracker-0001",
+    "agentSlug": "project_tracker",
+    "agentName": "@discreetRappers/project_tracker",
+    "setId": "CORE",
+    "title": "ProjectTracker",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "pipeline",
+    "version": "1.0.0",
+    "cardHash": "fb1e9978808a3a4b00219869e4e46f72c5d978bba5f4a6c21e4a5cbfb440f442",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:08.000Z"
+      }
+    ]
+  },
+  "hash": "1a8025f636ea1c2d77a8ee6943ac065a14e123adfc32ff2dbc20e761473d2e07"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 102,
+  "timestamp": "2026-04-04T00:01:42.000Z",
+  "prevHash": "943626bb02e2b10536689c8bbedd3281ae20e1a15571636247852e9f5cce978f",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-time-entry-billing-0001",
+    "agentSlug": "time-entry-billing",
+    "agentName": "@aibast-agents-library/time-entry-billing",
+    "setId": "CORE",
+    "title": "Time Entry & Billing Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "professional_services",
+    "version": "1.0.0",
+    "cardHash": "013b761718d106f7375faadf8c186fafc9785bc59a28e11af7e12200d7bed7d7",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:42.000Z"
+      }
+    ]
+  },
+  "hash": "a7d8fa654925704f23a1bf03fd7c881e1f602e0bfe0392eb07c1a48199719c9f"
+}

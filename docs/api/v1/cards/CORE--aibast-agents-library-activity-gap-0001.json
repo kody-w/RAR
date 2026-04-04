@@ -1,0 +1,30 @@
+{
+  "index": 23,
+  "timestamp": "2026-04-04T00:00:23.000Z",
+  "prevHash": "fc8ec6ca2337b9b006d04f8cadd496d75631ec45080d803211ac389d7bc0fa52",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-activity-gap-0001",
+    "agentSlug": "activity-gap",
+    "agentName": "@aibast-agents-library/activity-gap",
+    "setId": "CORE",
+    "title": "Activity Gap Analyzer",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "e02e481a6bf25efdb06cc0898bf8eeb1a231486b14dbcdc0ca799ff0aee1995c",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:23.000Z"
+      }
+    ]
+  },
+  "hash": "48d04716797d63b6bc084715dcc9146f4f6fd1ecf30f26f2fe690136ef9dceda"
+}

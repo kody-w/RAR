@@ -1,0 +1,30 @@
+{
+  "index": 116,
+  "timestamp": "2026-04-04T00:01:56.000Z",
+  "prevHash": "6c646c89e0f5a125c2d4a485a2cb5fbdb894b195df20b36a7958db635606fa56",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-product-feedback-synthesizer-0001",
+    "agentSlug": "product-feedback-synthesizer",
+    "agentName": "@aibast-agents-library/product-feedback-synthesizer",
+    "setId": "CORE",
+    "title": "Product Feedback Synthesizer Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "software_digital_products",
+    "version": "1.0.0",
+    "cardHash": "af4d6720a3c08ef50e5cacb17ce9a1200340426e24f40f73b1a117ce9afab285",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:56.000Z"
+      }
+    ]
+  },
+  "hash": "4de0779cc7bef59f8b5e6f73d0309f1abb51b797e4317103cf10f73b0b64e76d"
+}

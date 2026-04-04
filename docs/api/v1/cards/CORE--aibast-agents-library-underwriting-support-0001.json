@@ -1,0 +1,30 @@
+{
+  "index": 62,
+  "timestamp": "2026-04-04T00:01:02.000Z",
+  "prevHash": "c64c31f430900b71f487aa25dbe0173d3eec2eab54555aca789b2547759145e1",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-underwriting-support-0001",
+    "agentSlug": "underwriting-support",
+    "agentName": "@aibast-agents-library/underwriting-support",
+    "setId": "CORE",
+    "title": "Underwriting Support Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "f88467cfeac25c5c6dd9d977b9a6d310e4409bf3119a4b606b9831c67a47c158",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:02.000Z"
+      }
+    ]
+  },
+  "hash": "31021c65a6f18e7cbfcb9f5a9355cd672ca5de782ef8c1423151bdb779061251"
+}

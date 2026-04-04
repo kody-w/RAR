@@ -1,0 +1,30 @@
+{
+  "index": 94,
+  "timestamp": "2026-04-04T00:01:34.000Z",
+  "prevHash": "40e96fa2ddd8adfca0068569f85b333e55a13d6b98b0a65beacd11133fa467f5",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-maintenance-scheduling-0001",
+    "agentSlug": "maintenance-scheduling",
+    "agentName": "@aibast-agents-library/maintenance-scheduling",
+    "setId": "CORE",
+    "title": "Maintenance Scheduling Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "manufacturing",
+    "version": "1.0.0",
+    "cardHash": "cfef5547a19089623074a36cf3c3c4007b9fa67528f15f44cd5a8f7f1ba81fb3",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:34.000Z"
+      }
+    ]
+  },
+  "hash": "d20ae849fb6cd29933023369fbdedc74447df56ddc34dae89c7a2178c4bda4a4"
+}

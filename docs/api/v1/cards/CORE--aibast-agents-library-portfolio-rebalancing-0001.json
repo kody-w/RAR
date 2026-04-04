@@ -1,0 +1,30 @@
+{
+  "index": 60,
+  "timestamp": "2026-04-04T00:01:00.000Z",
+  "prevHash": "914579228d93419c3b86a3f1d9ce975c3bb7e4b141ebac3d46918ae6b38f40ea",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-portfolio-rebalancing-0001",
+    "agentSlug": "portfolio-rebalancing",
+    "agentName": "@aibast-agents-library/portfolio-rebalancing",
+    "setId": "CORE",
+    "title": "Portfolio Rebalancing Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "b10ec6f38cf793282858764ab0a96b488ffe75586022d1e40e6e0b62d6bebd80",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:00.000Z"
+      }
+    ]
+  },
+  "hash": "04198804cf178ef8c275b8c355deeb7c5185ca9e5c964c1c8e040eb1686ec81c"
+}

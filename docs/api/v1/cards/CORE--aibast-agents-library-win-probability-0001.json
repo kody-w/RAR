@@ -1,0 +1,30 @@
+{
+  "index": 33,
+  "timestamp": "2026-04-04T00:00:33.000Z",
+  "prevHash": "5a6370a57591e3e627da775fe3c5ff94b8052a741403e44d750925f749f8f5db",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-win-probability-0001",
+    "agentSlug": "win-probability",
+    "agentName": "@aibast-agents-library/win-probability",
+    "setId": "CORE",
+    "title": "Win Probability",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "ca29d38ec077f960177a2481bf72c93117bcfe9ef379d0b3c2b5487242f19b40",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:33.000Z"
+      }
+    ]
+  },
+  "hash": "0cabe90a0593f006e46ccfc8a474fe617f922d4133c07250deab52c5ba848180"
+}

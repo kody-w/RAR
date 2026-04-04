@@ -1,0 +1,26 @@
+{
+  "protocol": "rar-chain/1.0",
+  "chainHead": "43dff72970246ac6086eebe5c0d98e9e1c414863dfed82be2e3e65bc572fafcd",
+  "chainLength": 139,
+  "totalForged": 138,
+  "genesisHash": "309c38d72f5c28673b3ab89c9286f7b5f8839fd941ffa32bbc59e5cb670d0c6a",
+  "genesisTimestamp": "2026-04-04T00:00:00.000Z",
+  "lastBlockTimestamp": "2026-04-04T00:02:18.000Z",
+  "authority": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+  "binders": {
+    "41eacba49218b45e9e3c8cccfdaccc107b40e87d": {
+      "alias": "Howard Hoy",
+      "cards": 13,
+      "role": "genesis-holder"
+    },
+    "ba4e91c3ba4b737a0b04edac19e017caeb0e0701": {
+      "alias": "Kody Wildfeuer",
+      "cards": 125,
+      "role": "genesis-holder"
+    }
+  },
+  "verification": {
+    "method": "sha256-hash-chain",
+    "description": "Each block hash = SHA-256 of block contents. prevHash links to prior block. Replay from genesis to verify integrity."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "index": 71,
+  "timestamp": "2026-04-04T00:01:11.000Z",
+  "prevHash": "8dd59a19f51b35971c389f782fa956513e0b6c6c85c298f1c04bf7084d1a8dc3",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-email-drafting-0001",
+    "agentSlug": "email-drafting",
+    "agentName": "@aibast-agents-library/email-drafting",
+    "setId": "CORE",
+    "title": "Email Drafting",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "5ce2c42c1836a777f5cec1d2e77688623d45ce482cf59bae09850b7962385792",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:11.000Z"
+      }
+    ]
+  },
+  "hash": "d9daa29945e2cbbaf726e3eb2fc9252a3a60cb354f072150d5abd5ad41543f54"
+}

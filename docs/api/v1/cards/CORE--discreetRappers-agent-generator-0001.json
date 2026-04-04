@@ -1,0 +1,30 @@
+{
+  "index": 120,
+  "timestamp": "2026-04-04T00:02:00.000Z",
+  "prevHash": "d521ffccae5788584b8f1b3e1152d513dbcb64cb70509ee964b4d748722ad337",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--discreetRappers-agent-generator-0001",
+    "agentSlug": "agent_generator",
+    "agentName": "@discreetRappers/agent_generator",
+    "setId": "CORE",
+    "title": "AgentGenerator",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "pipeline",
+    "version": "1.0.0",
+    "cardHash": "a3644d0d71cedbc06881d4c9b8d66eedbc8cbc595c1fb330915f1ecce8a954cb",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:02:00.000Z"
+      }
+    ]
+  },
+  "hash": "133a0c67e1ac74b23c3894146cd2f3b005a483a675fff5fe4ca94eab92c15cd8"
+}

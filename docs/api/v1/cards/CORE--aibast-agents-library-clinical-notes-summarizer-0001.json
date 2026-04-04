@@ -1,0 +1,30 @@
+{
+  "index": 87,
+  "timestamp": "2026-04-04T00:01:27.000Z",
+  "prevHash": "adc39d875cf19b5e20dfcfb4a13c66590b0cfd517ea41ee7713c3702a5a6e4a2",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-clinical-notes-summarizer-0001",
+    "agentSlug": "clinical-notes-summarizer",
+    "agentName": "@aibast-agents-library/clinical-notes-summarizer",
+    "setId": "CORE",
+    "title": "Clinical Notes Summarizer Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "healthcare",
+    "version": "1.0.0",
+    "cardHash": "35c84ab6f7c6d3a89ea90b5f859d0d0c8d7b218745d23325ad88a98ace3ddd49",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:27.000Z"
+      }
+    ]
+  },
+  "hash": "d0dc4538d14bd740af8a8e6834886a29db0a94b8b5bd6834bc219edb45759403"
+}

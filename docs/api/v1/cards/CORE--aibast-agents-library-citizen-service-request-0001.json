@@ -1,0 +1,30 @@
+{
+  "index": 109,
+  "timestamp": "2026-04-04T00:01:49.000Z",
+  "prevHash": "fb7f9372af56ed7a2b235ee695fea44aaf5d2dd764e94d4625448ceb3b71436c",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-citizen-service-request-0001",
+    "agentSlug": "citizen-service-request",
+    "agentName": "@aibast-agents-library/citizen-service-request",
+    "setId": "CORE",
+    "title": "Citizen Service Request Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "slg_government",
+    "version": "1.0.0",
+    "cardHash": "ed7001a67503c6fb4fa7f8728f2068c0de204c926e4da537f5a0c97dfcda3d63",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:49.000Z"
+      }
+    ]
+  },
+  "hash": "ccb71a10fc4975d22eac1b59cb3c4481ceebb7db0d5399bf33b7922d950b2b08"
+}

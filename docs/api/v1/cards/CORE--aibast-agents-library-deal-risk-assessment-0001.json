@@ -1,0 +1,30 @@
+{
+  "index": 27,
+  "timestamp": "2026-04-04T00:00:27.000Z",
+  "prevHash": "317652fa6cb6ce30bd30f2f82c8f9a64975d96923c77754fa71314bd48687916",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-deal-risk-assessment-0001",
+    "agentSlug": "deal-risk-assessment",
+    "agentName": "@aibast-agents-library/deal-risk-assessment",
+    "setId": "CORE",
+    "title": "Deal Risk Assessment",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "ae55157199fa647bfb190371017f1f4c709ffddaf4774d015111cdee3ce71764",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:27.000Z"
+      }
+    ]
+  },
+  "hash": "9a7711bbf841114a3df46e72a9a84506704fc5b8923c8ff3c07e8ac6236e04b3"
+}

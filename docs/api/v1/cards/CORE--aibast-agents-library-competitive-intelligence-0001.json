@@ -1,0 +1,30 @@
+{
+  "index": 17,
+  "timestamp": "2026-04-04T00:00:17.000Z",
+  "prevHash": "9a4c77f0934f128ade0058c83ea7de0b7aabc2dfaaf8bea819bbeda76250e575",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-competitive-intelligence-0001",
+    "agentSlug": "competitive-intelligence",
+    "agentName": "@aibast-agents-library/competitive-intelligence",
+    "setId": "CORE",
+    "title": "Competitive Intelligence",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "c5b49ec9cdacba96bccbe23967933f6f3000a23b7f7c152eefe1669981be83a3",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:17.000Z"
+      }
+    ]
+  },
+  "hash": "fd0602382e433d6079cf81edcc5a5652f13f88e16ff8b6d23bb2cbce94524056"
+}

@@ -1,0 +1,30 @@
+{
+  "index": 59,
+  "timestamp": "2026-04-04T00:00:59.000Z",
+  "prevHash": "1b9d6ebd11328e6e5e8f9a19a5cdd3473b56b4654b6d4eeb9a378ecbb9d7ae8c",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-loan-origination-assistant-0001",
+    "agentSlug": "loan-origination-assistant",
+    "agentName": "@aibast-agents-library/loan-origination-assistant",
+    "setId": "CORE",
+    "title": "Loan Origination Assistant Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "financial_services",
+    "version": "1.0.0",
+    "cardHash": "367fa942034a7846c78870e47ddfb2ad9523146727042ab0ea8ceb6686252517",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:59.000Z"
+      }
+    ]
+  },
+  "hash": "914579228d93419c3b86a3f1d9ce975c3bb7e4b141ebac3d46918ae6b38f40ea"
+}

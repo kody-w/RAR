@@ -1,0 +1,30 @@
+{
+  "index": 73,
+  "timestamp": "2026-04-04T00:01:13.000Z",
+  "prevHash": "2ee627532549e4c42fe2aefe08747d8db20ed3a41810a64ef2d47bd72d40d468",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-identify-discounts-0001",
+    "agentSlug": "identify-discounts",
+    "agentName": "@aibast-agents-library/identify-discounts",
+    "setId": "CORE",
+    "title": "Identify Discounts",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "9ee94ef1f42758909cd466511d8291c2d5c3889c62f6140c1ad44d19ef848e14",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:13.000Z"
+      }
+    ]
+  },
+  "hash": "46ec0914338414700c4dc3b7ce63f05c019e585b9ca7a6c098fc21bec4cdb4d5"
+}

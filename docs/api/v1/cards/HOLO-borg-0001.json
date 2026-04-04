@@ -1,0 +1,28 @@
+{
+  "index": 1,
+  "timestamp": "2026-04-04T00:00:01.000Z",
+  "prevHash": "309c38d72f5c28673b3ab89c9286f7b5f8839fd941ffa32bbc59e5cb670d0c6a",
+  "type": "forge",
+  "data": {
+    "mintId": "HOLO-borg-0001",
+    "agentSlug": "borg",
+    "agentName": "@borg/borg",
+    "setId": "HOLO",
+    "title": "The Assimilator",
+    "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "mythic",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "8233575219de43ce3f3c726ca8094ebf5c88ff70f14c58287abbbf61707e6ddb",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
+        "timestamp": "2026-04-04T00:00:01.000Z"
+      }
+    ]
+  },
+  "hash": "1bd720f49ee618a9f1e8c7ba2977d9da4beba667f7e44b5fa10504106eb603e1"
+}

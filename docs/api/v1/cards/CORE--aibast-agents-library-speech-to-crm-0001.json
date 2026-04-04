@@ -1,0 +1,30 @@
+{
+  "index": 80,
+  "timestamp": "2026-04-04T00:01:20.000Z",
+  "prevHash": "f2991da3f7518a31af77ec10850d61971692e342b9f992cf631e81b0f2348700",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-speech-to-crm-0001",
+    "agentSlug": "speech-to-crm",
+    "agentName": "@aibast-agents-library/speech-to-crm",
+    "setId": "CORE",
+    "title": "Speech to CRM",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "general",
+    "version": "1.0.0",
+    "cardHash": "437d369c01d3f2a80aaf3dbdd09bb438de7a281107c4862510aca7a8e12eb693",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:20.000Z"
+      }
+    ]
+  },
+  "hash": "ebf3f017167b3520b56097e9ba5ff1a55c4fa549f5c79679e4b20c17f2008efd"
+}

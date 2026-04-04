@@ -1,0 +1,30 @@
+{
+  "index": 108,
+  "timestamp": "2026-04-04T00:01:48.000Z",
+  "prevHash": "8e373e2455717a398c4d22246f5710e0e376aac0e26943748ab0602c2c483583",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-building-permit-processing-0001",
+    "agentSlug": "building-permit-processing",
+    "agentName": "@aibast-agents-library/building-permit-processing",
+    "setId": "CORE",
+    "title": "Building Permit Processing Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "slg_government",
+    "version": "1.0.0",
+    "cardHash": "f23f5910fafffe4d8283b5801f2796896adb560f643f979c5fe86257d6acc99f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:48.000Z"
+      }
+    ]
+  },
+  "hash": "fb7f9372af56ed7a2b235ee695fea44aaf5d2dd764e94d4625448ceb3b71436c"
+}

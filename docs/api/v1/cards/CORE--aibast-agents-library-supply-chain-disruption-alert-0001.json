@@ -1,0 +1,30 @@
+{
+  "index": 107,
+  "timestamp": "2026-04-04T00:01:47.000Z",
+  "prevHash": "55832cc80abc361ea7a340e34a601b9707436d8b330ace8161fbfc08cf3c40f0",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-supply-chain-disruption-alert-0001",
+    "agentSlug": "supply-chain-disruption-alert",
+    "agentName": "@aibast-agents-library/supply-chain-disruption-alert",
+    "setId": "CORE",
+    "title": "Supply Chain Disruption Alert Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "retail_cpg",
+    "version": "1.0.0",
+    "cardHash": "5add343803b49c2179510049a37cf232690725c24a96dfb5bac4ea8d0b3a007f",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:47.000Z"
+      }
+    ]
+  },
+  "hash": "8e373e2455717a398c4d22246f5710e0e376aac0e26943748ab0602c2c483583"
+}

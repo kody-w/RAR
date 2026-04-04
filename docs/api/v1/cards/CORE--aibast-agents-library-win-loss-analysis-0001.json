@@ -1,0 +1,30 @@
+{
+  "index": 36,
+  "timestamp": "2026-04-04T00:00:36.000Z",
+  "prevHash": "88725b9a3155d34324eb3d30f91cbc8b28b94b876db9cb2fa29a144ffddfe1a6",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-win-loss-analysis-0001",
+    "agentSlug": "win-loss-analysis",
+    "agentName": "@aibast-agents-library/win-loss-analysis",
+    "setId": "CORE",
+    "title": "Win/Loss Analysis",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "b2b_sales",
+    "version": "1.0.0",
+    "cardHash": "d24fb62765e139b8e663dee84385d73ade221f90139ba46ef5fab8bf2646dfdd",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:36.000Z"
+      }
+    ]
+  },
+  "hash": "4a1dbfaa0f593863a85f8f61ffb646aa927a825207a3f6cdfe17c63f4b1fb307"
+}

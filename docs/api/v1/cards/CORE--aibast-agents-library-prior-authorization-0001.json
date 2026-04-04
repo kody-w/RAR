@@ -1,0 +1,30 @@
+{
+  "index": 89,
+  "timestamp": "2026-04-04T00:01:29.000Z",
+  "prevHash": "c9891e35b347a0f62ff02cdbd10ecc755c8b0bbe93b4e8dc5736a209027092f1",
+  "type": "forge",
+  "data": {
+    "mintId": "CORE--aibast-agents-library-prior-authorization-0001",
+    "agentSlug": "prior-authorization",
+    "agentName": "@aibast-agents-library/prior-authorization",
+    "setId": "CORE",
+    "title": "Prior Authorization Agent",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": null,
+    "rarity": "common",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "category": "healthcare",
+    "version": "1.0.0",
+    "cardHash": "843001f3669da53758ba666b7440340e7f722f5331f06f7329349964f2adec50",
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:01:29.000Z"
+      }
+    ]
+  },
+  "hash": "5c684b4a2114da8360eeda8d0bbe2abab07f7751d0cfdc5f2b16dd69d85ccf4d"
+}
