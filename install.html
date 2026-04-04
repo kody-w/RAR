@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Brainstem Installer</title>
+<meta name="description" content="RAR Brainstem — local-first AI agent server. Cloud or local AI. Your choice.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0d1117; color: #e6edf3;
+    min-height: 100vh; padding: 48px 24px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "SF Mono", "Fira Code", monospace; font-size: 13px;
+    background: #161b22; padding: 2px 6px; border-radius: 4px;
+  }
+  .hero { text-align: center; max-width: 620px; margin-bottom: 48px; }
+  .hero .logo { font-size: 64px; margin-bottom: 16px; }
+  .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+  .hero p { color: #8b949e; font-size: 16px; line-height: 1.6; }
+  .hero .tagline { color: #58a6ff; font-weight: 600; font-size: 14px; margin-top: 12px; }
+
+  /* ── Install widget ── */
+  .install-widget {
+    max-width: 620px; width: 100%; margin-bottom: 48px;
+    background: #161b22; border: 2px solid #238636; border-radius: 12px;
+    overflow: hidden; transition: border-color 0.15s;
+  }
+  .install-tabs {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 16px; border-bottom: 1px solid #21262d; height: 40px;
+  }
+  .install-tabs-left {
+    display: flex; align-items: center; gap: 2px;
+  }
+  .install-tabs-left .dots {
+    display: flex; gap: 5px; margin-right: 14px;
+  }
+  .install-tabs-left .dots span {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .install-tabs-left .dots span:nth-child(1) { background: #f85149; }
+  .install-tabs-left .dots span:nth-child(2) { background: #d29922; }
+  .install-tabs-left .dots span:nth-child(3) { background: #3fb950; }
+  .install-tab {
+    background: none; border: none; color: #484f58; font-size: 12px;
+    padding: 8px 14px; cursor: pointer; font-family: "SF Mono", "Fira Code", monospace;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .install-tab:hover { color: #8b949e; }
+  .install-tab.active {
+    color: #e6edf3; border-bottom-color: #238636;
+  }
+  .install-tabs-right {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .os-toggle {
+    display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e;
+  }
+  .os-toggle .os-name { font-family: "SF Mono", "Fira Code", monospace; }
+  .os-toggle .change-btn {
+    background: none; border: none; color: #58a6ff; font-size: 12px;
+    cursor: pointer; text-decoration: none;
+    font-family: "SF Mono", "Fira Code", monospace;
+  }
+  .os-toggle .change-btn:hover { text-decoration: underline; }
+  .install-body {
+    padding: 20px 24px; cursor: pointer;
+  }
+  .install-body .comment {
+    color: #3fb950; font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 13px; margin-bottom: 8px;
+  }
+  .install-body .prompt {
+    font-family: "SF Mono", "Fira Code", monospace; font-size: 14px;
+    color: #e6edf3; display: flex; align-items: center; gap: 8px;
+  }
+  .install-body .prompt .dollar { color: #8b949e; user-select: none; }
+  .install-body .copy-icon {
+    margin-left: auto; font-size: 16px; opacity: 0.3;
+    transition: opacity 0.15s; cursor: pointer; flex-shrink: 0;
+  }
+  .install-body:hover .copy-icon { opacity: 1; }
+  .install-body.copied .copy-icon { opacity: 1; }
+  .install-hint {
+    padding: 0 24px 14px; font-size: 11px; color: #484f58; text-align: center;
+  }
+
+  .tiers { max-width: 620px; width: 100%; }
+
+  .tier {
+    background: #161b22; border: 1px solid #21262d; border-radius: 12px;
+    margin-bottom: 24px; overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .tier:hover { border-color: #30363d; }
+  .tier-header {
+    padding: 20px 24px; display: flex; align-items: center; gap: 16px;
+    cursor: pointer; user-select: none;
+  }
+  .tier-icon { font-size: 32px; flex-shrink: 0; }
+  .tier-title h2 { font-size: 18px; font-weight: 600; margin-bottom: 2px; }
+  .tier-title .subtitle { font-size: 13px; color: #8b949e; }
+  .tier-badge {
+    margin-left: auto; font-size: 11px; font-weight: 600; padding: 4px 10px;
+    border-radius: 12px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tier-badge.start { background: #238636; color: #fff; }
+  .tier-badge.local { background: rgba(63,185,80,.15); color: #3fb950; border: 1px solid #3fb950; }
+  .tier-badge.next { background: #1f6feb33; color: #58a6ff; border: 1px solid #1f6feb; }
+  .tier-badge.advanced { background: #8b5cf633; color: #a78bfa; border: 1px solid #8b5cf6; }
+  .tier-arrow {
+    color: #484f58; font-size: 18px; transition: transform 0.2s; flex-shrink: 0;
+  }
+  .tier.open .tier-arrow { transform: rotate(90deg); }
+  .tier-body {
+    display: none; padding: 0 24px 24px; border-top: 1px solid #21262d;
+  }
+  .tier.open .tier-body { display: block; }
+
+  .tier-body p { color: #8b949e; font-size: 14px; line-height: 1.6; margin-top: 16px; }
+  .tier-body .metaphor { color: #d2a8ff; font-style: italic; font-size: 13px; margin-top: 12px; }
+
+  .steps { margin-top: 16px; }
+  .step {
+    background: #0d1117; border: 1px solid #21262d; border-radius: 8px;
+    padding: 14px 16px; margin-top: 10px;
+  }
+  .step h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .step p { color: #8b949e; font-size: 13px; margin: 0; }
+  .cmd {
+    display: block; background: #0d1117; border: 1px solid #21262d;
+    border-radius: 8px; padding: 10px 14px; margin-top: 8px;
+    font-family: "SF Mono", "Fira Code", monospace; font-size: 13px;
+    color: #e6edf3; cursor: pointer; position: relative;
+    transition: border-color 0.15s; white-space: pre-wrap;
+  }
+  .cmd:hover { border-color: #30363d; }
+  .cmd::after {
+    content: "copy"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; opacity: 0.3; transition: opacity 0.15s; color: #8b949e;
+  }
+  .cmd:hover::after { opacity: 1; }
+  .cmd.copied::after { content: "copied"; color: #3fb950; opacity: 1; }
+
+  /* ── AI mode toggle ── */
+  .ai-toggle {
+    max-width: 620px; width: 100%; margin-bottom: 24px;
+    display: flex; border-radius: 12px; overflow: hidden;
+    border: 1px solid #21262d;
+  }
+  .ai-toggle button {
+    flex: 1; padding: 14px 20px; background: #161b22; border: none;
+    color: #8b949e; cursor: pointer; font-size: 14px; font-weight: 600;
+    transition: all 0.15s; text-align: center;
+  }
+  .ai-toggle button:first-child { border-right: 1px solid #21262d; }
+  .ai-toggle button:hover { color: #e6edf3; }
+  .ai-toggle button.active-cloud {
+    background: #1f6feb22; color: #58a6ff; border-bottom: 2px solid #58a6ff;
+  }
+  .ai-toggle button.active-local {
+    background: rgba(63,185,80,.1); color: #3fb950; border-bottom: 2px solid #3fb950;
+  }
+  .ai-toggle .label-sub {
+    display: block; font-size: 11px; font-weight: 400; color: #484f58; margin-top: 2px;
+  }
+
+  .model-grid {
+    display: grid; grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 4px 16px; font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 12px; color: #8b949e; margin-top: 12px; padding: 12px;
+    background: #0d1117; border-radius: 8px; border: 1px solid #21262d;
+  }
+  .model-grid .mh { color: #e6edf3; font-weight: 700; }
+
+  .status-bar {
+    max-width: 620px; width: 100%; margin-top: 16px;
+    background: #161b22; border: 1px solid #21262d; border-radius: 12px;
+    padding: 16px 24px; text-align: center;
+  }
+  .dot {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    margin-right: 8px; vertical-align: middle;
+  }
+  .dot.online { background: #3fb950; }
+  .dot.offline { background: #f85149; }
+  .dot.checking { background: #d29922; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .status-label { font-size: 14px; vertical-align: middle; }
+  .open-btn {
+    display: inline-block; margin-top: 12px;
+    background: #238636; color: #fff; border: none; border-radius: 8px;
+    padding: 10px 24px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .open-btn:hover { background: #2ea043; }
+  .open-btn:disabled { opacity: 0.4; cursor: default; }
+
+  .links {
+    margin-top: 32px; text-align: center; font-size: 13px; color: #484f58;
+  }
+  .links a { margin: 0 12px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">R</div>
+  <h1>RAR Brainstem</h1>
+  <p>A local-first AI agent server for the RAPP Agent Registry.<br>Cloud AI or fully on-device with Ollama. Your choice.</p>
+  <div class="tagline">Start simple. Layer up when you're ready.</div>
+</div>
+
+<!-- AI Mode Toggle -->
+<div class="ai-toggle" id="ai-toggle">
+  <button class="active-cloud" onclick="setAIMode('cloud', this)">
+    GitHub Copilot
+    <span class="label-sub">Cloud AI — needs GitHub account</span>
+  </button>
+  <button onclick="setAIMode('local', this)">
+    Ollama (Local-First)
+    <span class="label-sub">On-device AI — no account, no API keys</span>
+  </button>
+</div>
+
+<div class="install-widget" id="install-widget">
+  <div class="install-tabs">
+    <div class="install-tabs-left">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <button class="install-tab active" data-tab="one-liner" onclick="switchInstallTab(this)">One-liner</button>
+      <button class="install-tab" data-tab="manual" onclick="switchInstallTab(this)">Manual</button>
+    </div>
+    <div class="install-tabs-right">
+      <div class="os-toggle">
+        <span class="os-name" id="os-label">macOS/Linux</span>
+        <button class="change-btn" onclick="flipOS()">change</button>
+      </div>
+    </div>
+  </div>
+  <div class="install-body" onclick="copyInstall(this)">
+    <div class="comment" id="install-comment"># Works everywhere. Installs everything.</div>
+    <div class="prompt">
+      <span class="dollar">$</span>
+      <span id="install-cmd"></span>
+      <span class="copy-icon" id="copy-icon">copy</span>
+    </div>
+  </div>
+  <div class="install-hint" id="install-hint"></div>
+</div>
+
+<div class="tiers">
+
+  <!-- TIER 0: OLLAMA LOCAL-FIRST -->
+  <div class="tier" id="ollama" onclick="toggleTier(event, this)">
+    <div class="tier-header">
+      <div class="tier-icon" style="font-size:28px;font-weight:800;color:#3fb950">O</div>
+      <div class="tier-title">
+        <h2>Ollama — Local-First AI</h2>
+        <div class="subtitle">True on-device inference — no cloud, no keys, no data leaves your machine</div>
+      </div>
+      <span class="tier-badge local">Local-First</span>
+      <span class="tier-arrow">&gt;</span>
+    </div>
+    <div class="tier-body">
+      <p class="metaphor">Cloud AI is a phone call. Local AI is thinking with your own brain. Ollama runs Gemma 4 directly on your hardware — the Brainstem reasons locally. Zero network calls for inference. Air-gapped capable.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>1. Install Ollama</h3>
+          <p>One command. Works on macOS, Linux, and Windows.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">curl -fsSL https://ollama.com/install.sh | sh</div>
+          <p style="margin-top:6px;font-size:12px;color:#8b949e;">Or download from <a href="https://ollama.com/download">ollama.com/download</a> for macOS / Windows.</p>
+        </div>
+        <div class="step">
+          <h3>2. Pull a model</h3>
+          <p>Pick based on your hardware. E2B for phones, E4B for laptops, 26B/31B for workstations.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">ollama pull gemma4</div>
+        </div>
+        <div class="step">
+          <h3>3. Launch the Brainstem with local AI</h3>
+          <p>One command — starts Ollama, loads the model, launches the Brainstem runtime. No API key needed.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">ollama launch brainstem --model gemma4</div>
+        </div>
+        <div class="step">
+          <h3>4. Connect the Agent Store</h3>
+          <p>Open the <a href="index.html">RAR Agent Store</a>, go to Stream > Ollama, and connect to <code>localhost:11434</code>. Flick agents to the Brainstem — they reason locally.</p>
+        </div>
+      </div>
+
+      <div class="model-grid">
+        <span class="mh">Model</span><span class="mh">Size</span><span class="mh">Context</span><span class="mh">Best for</span>
+        <span>gemma4:e2b</span><span>7.2 GB</span><span>128K</span><span style="color:#3fb950">Phone / tablet</span>
+        <span>gemma4:e4b</span><span>9.6 GB</span><span>128K</span><span style="color:#3fb950">Laptop</span>
+        <span>gemma4:26b</span><span>18 GB</span><span>256K</span><span style="color:#58a6ff">Workstation (MoE)</span>
+        <span>gemma4:31b</span><span>20 GB</span><span>256K</span><span style="color:#a78bfa">Frontier local (Dense)</span>
+      </div>
+
+      <p style="margin-top:16px;font-size:13px;color:#8b949e;">
+        Gemma 4 by Google DeepMind. Multimodal (text + image + audio on edge models). Native function calling. 256K context on workstation models. Reasoning, coding, agentic workflows — all on-device.
+      </p>
+    </div>
+  </div>
+
+  <!-- TIER 1: BRAINSTEM -->
+  <div class="tier open" id="brainstem" onclick="toggleTier(event, this)">
+    <div class="tier-header">
+      <div class="tier-icon" style="font-size:28px">B</div>
+      <div class="tier-title">
+        <h2>The Brainstem</h2>
+        <div class="subtitle">Local agent server — the survival basics</div>
+      </div>
+      <span class="tier-badge start">Start here</span>
+      <span class="tier-arrow">&gt;</span>
+    </div>
+    <div class="tier-body">
+      <p class="metaphor">The biological brainstem keeps you alive — breathing, heartbeat, reflexes. Your AI brainstem does the same: it runs the core agent loop, calls tools, and responds. Everything else builds on top of this.</p>
+      <div class="steps">
+        <div class="step" id="step-auth">
+          <h3>1. Authenticate with GitHub</h3>
+          <p>Your GitHub Copilot subscription IS the AI engine. No OpenAI keys needed.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">gh auth login</div>
+        </div>
+        <div class="step">
+          <h3>2. Start the brainstem</h3>
+          <p>The server starts on port 7071 with a chat UI, health endpoint, and agent auto-discovery.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">brainstem</div>
+        </div>
+        <div class="step">
+          <h3>3. Talk to it</h3>
+          <p>Open <code>localhost:7071</code> in your browser, or hit the API directly.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">curl -s localhost:7071/health | python3 -m json.tool</div>
+        </div>
+        <div class="step">
+          <h3>4. Make it yours</h3>
+          <p>Write a <code>soul.md</code> to define its personality. Drop <code>*_agent.py</code> files into the agents folder to give it skills. Point <code>SOUL_PATH</code> and <code>AGENTS_PATH</code> in <code>.env</code> to your private files.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 2: HIPPOCAMPUS -->
+  <div class="tier" id="hippocampus" onclick="toggleTier(event, this)">
+    <div class="tier-header">
+      <div class="tier-icon" style="font-size:28px">H</div>
+      <div class="tier-title">
+        <h2>The Hippocampus</h2>
+        <div class="subtitle">Persistent memory — runs local, deploys to Azure</div>
+      </div>
+      <span class="tier-badge next">Next step</span>
+      <span class="tier-arrow">&gt;</span>
+    </div>
+    <div class="tier-body">
+      <p class="metaphor">The hippocampus is where memories form. One command sets up everything — Python, Azure Functions Core Tools, venv, dependencies, start script. No Azure account or API keys needed. Auth happens through the chat UI.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>Run the one-liner</h3>
+          <p>This is the only step. It clones <a href="https://github.com/kody-w/CommunityRAPP">CommunityRAPP</a>, installs everything, and tells you what to do next.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">curl -fsSL https://raw.githubusercontent.com/kody-w/RAR/main/scripts/install_hippocampus.sh | bash</div>
+          <p style="margin-top:6px;font-size:12px;color:#8b949e;">Windows: <code style="cursor:pointer" onclick="copyCmd(event, this)">irm https://raw.githubusercontent.com/kody-w/RAR/main/scripts/install_hippocampus.ps1 | iex</code></p>
+        </div>
+      </div>
+      <p style="margin-top:16px"><a href="https://kody-w.github.io/CommunityRAPP/onboard.html">Full onboarding guide</a></p>
+
+      <!-- Advanced: manual steps -->
+      <div style="margin-top:20px;border-top:1px solid #21262d;padding-top:16px;">
+        <div style="cursor:pointer;font-size:13px;color:#484f58;" onclick="var b=this.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none';this.textContent=b.style.display==='none'?'&gt; Advanced: manual steps':'v Advanced: manual steps'">&gt; Advanced: manual steps</div>
+        <div style="display:none;">
+          <div class="steps">
+            <div class="step">
+              <h3>Start it &amp; authenticate</h3>
+              <p>Open <code>index.html</code> in your browser and send a message. The chat UI walks you through GitHub device-code auth — no env vars to set.</p>
+              <div class="cmd" onclick="copyCmd(event, this)">cd ~/rapp-projects/my-project && ./start.sh</div>
+            </div>
+            <div class="step">
+              <h3>Deploy to Azure (when ready)</h3>
+              <p>Edit <code>local.settings.json</code> with your Azure OpenAI credentials, then publish.</p>
+              <div class="cmd" onclick="copyCmd(event, this)">func azure functionapp publish YOUR_APP_NAME --build remote</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 3: COPILOT STUDIO -->
+  <div class="tier" id="nervous-system" onclick="toggleTier(event, this)">
+    <div class="tier-header">
+      <div class="tier-icon" style="font-size:28px">N</div>
+      <div class="tier-title">
+        <h2>The Nervous System</h2>
+        <div class="subtitle">Connect to Copilot Studio — reach into M365</div>
+      </div>
+      <span class="tier-badge advanced">Advanced</span>
+      <span class="tier-arrow">&gt;</span>
+    </div>
+    <div class="tier-body">
+      <p class="metaphor">Your nervous system extends your brain's reach to every part of your body — eyes, ears, hands. Copilot Studio does the same: it connects your agent to Teams, M365 Copilot, and the entire Microsoft ecosystem. Your brainstem becomes an enterprise AI.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>1. Download the solution</h3>
+          <p>Grab the Power Platform solution package. This <code>.zip</code> contains the declarative agent, connectors, and flows preconfigured for your Azure Function.</p>
+          <div class="cmd" onclick="copyCmd(event, this)">curl -fsSL -o MSFTAIBASMultiAgentCopilot.zip https://raw.githubusercontent.com/kody-w/RAR/main/scripts/MSFTAIBASMultiAgentCopilot.zip</div>
+        </div>
+        <div class="step">
+          <h3>2. Import into Power Platform</h3>
+          <p>Go to <a href="https://make.powerapps.com" target="_blank">make.powerapps.com</a> &gt; Solutions &gt; Import &gt; upload the <code>.zip</code>. This creates the Copilot Studio agent and Power Automate flows in your environment.</p>
+        </div>
+        <div class="step">
+          <h3>3. Wire the connector</h3>
+          <p>Open the imported Power Automate flow and update the HTTP action URL to point to your deployed Azure Function endpoint from Step 2. Add your Function Key if using key-based auth.</p>
+        </div>
+        <div class="step">
+          <h3>4. Publish to Teams &amp; M365 Copilot</h3>
+          <p>In Copilot Studio, publish the agent. Your users can now talk to it in Teams, M365 Copilot, and any channel Copilot Studio supports. Same agent logic you tested locally — now enterprise-wide.</p>
+        </div>
+      </div>
+      <p><strong>What you learn:</strong> Copilot Studio, declarative agents, Power Platform solutions, Teams integration, enterprise AI deployment.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="status-bar" id="status-bar">
+  <span class="dot checking" id="dot"></span>
+  <span class="status-label" id="status-label">Checking brainstem...</span>
+  <br>
+  <button class="open-btn" id="open-btn" disabled onclick="window.open('http://localhost:7071','_blank')">Open Chat UI</button>
+</div>
+
+<div class="links">
+  <a href="index.html">Agent Store</a>
+  <a href="https://github.com/kody-w/RAR">RAR Repo</a>
+  <a href="https://github.com/kody-w/CommunityRAPP">CommunityRAPP</a>
+  <a href="https://ollama.com">Ollama</a>
+</div>
+
+<script>
+  // ── AI Mode: cloud (GitHub Copilot) vs local (Ollama) ──
+  let aiMode = 'cloud'; // 'cloud' | 'local'
+
+  const RAR_RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+
+  // Install commands — all point to RAR repo raw
+  const installs = {
+    cloud: {
+      'macOS/Linux': {
+        'one-liner': {
+          comment: '# Installs Brainstem + GitHub Copilot AI engine.',
+          cmd: `curl -fsSL ${RAR_RAW}/scripts/install.sh | bash`,
+          hint: 'Works on macOS & Linux. Auto-installs Python 3.11 if missing. Requires GitHub account.'
+        },
+        'manual': {
+          comment: '# Clone from RAR, install deps, done.',
+          cmd: `git clone https://github.com/kody-w/RAR.git ~/.brainstem/src && cd ~/.brainstem/src && pip3 install -r requirements.txt && python3 brainstem.py`,
+          hint: 'Requires Python 3.11+ and Git already installed.'
+        }
+      },
+      'Windows': {
+        'one-liner': {
+          comment: '# Factory Windows 11 ready. Installs everything via winget.',
+          cmd: `irm ${RAR_RAW}/scripts/install.ps1 | iex`,
+          hint: 'Run in PowerShell. Auto-installs Python, Git & GitHub CLI via winget.'
+        },
+        'manual': {
+          comment: '# Clone from RAR, install deps, done.',
+          cmd: `git clone https://github.com/kody-w/RAR.git %USERPROFILE%\\.brainstem\\src && cd %USERPROFILE%\\.brainstem\\src && pip install -r requirements.txt && python brainstem.py`,
+          hint: 'Requires Python 3.11+ and Git already installed.'
+        }
+      }
+    },
+    local: {
+      'macOS/Linux': {
+        'one-liner': {
+          comment: '# Full local-first install: Ollama + Gemma 4 + Brainstem. No cloud.',
+          cmd: `curl -fsSL ${RAR_RAW}/scripts/install_local.sh | bash`,
+          hint: 'Installs Ollama, pulls Gemma 4, starts Brainstem with local inference. No API keys.'
+        },
+        'manual': {
+          comment: '# Step by step: Ollama, model, Brainstem.',
+          cmd: 'curl -fsSL https://ollama.com/install.sh | sh && ollama pull gemma4 && ollama launch brainstem --model gemma4',
+          hint: 'Installs Ollama, pulls Gemma 4 (9.6 GB), launches Brainstem.'
+        }
+      },
+      'Windows': {
+        'one-liner': {
+          comment: '# Full local-first install: Ollama + Gemma 4 + Brainstem. No cloud.',
+          cmd: `irm ${RAR_RAW}/scripts/install_local.ps1 | iex`,
+          hint: 'Installs Ollama, pulls Gemma 4, starts Brainstem with local inference. No API keys.'
+        },
+        'manual': {
+          comment: '# Step by step: install Ollama from ollama.com, then:',
+          cmd: 'ollama pull gemma4 && ollama launch brainstem --model gemma4',
+          hint: 'Download Ollama from ollama.com/download first, then run this in PowerShell.'
+        }
+      }
+    }
+  };
+
+  let currentOS = navigator.platform.includes('Win') ? 'Windows' : 'macOS/Linux';
+  let currentTab = 'one-liner';
+
+  function setAIMode(mode, btn) {
+    aiMode = mode;
+    document.querySelectorAll('#ai-toggle button').forEach(b => {
+      b.className = '';
+    });
+    btn.className = mode === 'cloud' ? 'active-cloud' : 'active-local';
+    // Update install widget border color
+    const widget = document.getElementById('install-widget');
+    widget.style.borderColor = mode === 'local' ? '#3fb950' : '#238636';
+    // Show/hide Ollama tier
+    const ollamaTier = document.getElementById('ollama');
+    if (mode === 'local') {
+      ollamaTier.classList.add('open');
+      ollamaTier.style.display = '';
+      // Update brainstem step 1 for local mode
+      document.getElementById('step-auth').innerHTML = `
+        <h3>1. Ollama is your AI engine</h3>
+        <p>No GitHub auth needed. Ollama runs inference locally — the Brainstem connects to it on localhost.</p>
+        <div class="cmd" onclick="copyCmd(event, this)">ollama serve</div>
+      `;
+    } else {
+      ollamaTier.classList.remove('open');
+      document.getElementById('step-auth').innerHTML = `
+        <h3>1. Authenticate with GitHub</h3>
+        <p>Your GitHub Copilot subscription IS the AI engine. No OpenAI keys needed.</p>
+        <div class="cmd" onclick="copyCmd(event, this)">gh auth login</div>
+      `;
+    }
+    renderInstall();
+  }
+
+  function renderInstall() {
+    const data = installs[aiMode][currentOS][currentTab];
+    document.getElementById('os-label').textContent = currentOS;
+    document.getElementById('install-comment').textContent = data.comment;
+    document.getElementById('install-cmd').textContent = data.cmd;
+    document.getElementById('install-hint').innerHTML = data.hint;
+    document.getElementById('copy-icon').textContent = 'copy';
+  }
+
+  function flipOS() {
+    currentOS = currentOS === 'macOS/Linux' ? 'Windows' : 'macOS/Linux';
+    renderInstall();
+  }
+
+  function switchInstallTab(btn) {
+    document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    renderInstall();
+  }
+
+  function copyInstall(el) {
+    const text = document.getElementById('install-cmd').textContent;
+    navigator.clipboard.writeText(text);
+    document.getElementById('copy-icon').textContent = 'copied';
+    el.classList.add('copied');
+    setTimeout(() => {
+      document.getElementById('copy-icon').textContent = 'copy';
+      el.classList.remove('copied');
+    }, 2000);
+  }
+
+  renderInstall();
+
+  // ── Tier commands ──
+  function copyCmd(e, el) {
+    e.stopPropagation();
+    const text = el.textContent.trim();
+    navigator.clipboard.writeText(text);
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 1500);
+  }
+
+  function toggleTier(e, el) {
+    if (e.target.closest('.cmd') || e.target.closest('a')) return;
+    el.classList.toggle('open');
+    if (el.id && el.classList.contains('open')) {
+      history.replaceState(null, '', '#' + el.id);
+    } else if (location.hash) {
+      history.replaceState(null, '', location.pathname);
+    }
+  }
+
+  // ── Status bar: check both Brainstem and Ollama ──
+  async function checkBrainstem() {
+    const dot = document.getElementById('dot');
+    const label = document.getElementById('status-label');
+    const btn = document.getElementById('open-btn');
+
+    // Check Brainstem
+    let brainstemUp = false;
+    try {
+      const r = await fetch('http://localhost:7071/health', { signal: AbortSignal.timeout(3000) });
+      const d = await r.json();
+      if (d.status === 'ok') {
+        brainstemUp = true;
+        const agents = d.agents ? d.agents.length : 0;
+        label.textContent = `Brainstem running \u00b7 ${d.model} \u00b7 ${agents} agent${agents !== 1 ? 's' : ''}`;
+        btn.disabled = false;
+      }
+    } catch {}
+
+    // Check Ollama
+    let ollamaUp = false;
+    try {
+      const r = await fetch('http://localhost:11434/api/tags', { signal: AbortSignal.timeout(2000) });
+      if (r.ok) ollamaUp = true;
+    } catch {}
+
+    if (brainstemUp) {
+      dot.className = 'dot online';
+      if (ollamaUp) label.textContent += ' \u00b7 Ollama running';
+    } else if (ollamaUp) {
+      dot.className = 'dot online';
+      label.textContent = 'Ollama running on localhost:11434 \u2014 start the Brainstem to connect';
+      btn.disabled = true;
+    } else {
+      dot.className = 'dot offline';
+      label.textContent = 'No runtime detected \u2014 install and run the Brainstem to get started';
+      btn.disabled = true;
+    }
+  }
+  checkBrainstem();
+  setInterval(checkBrainstem, 5000);
+
+  // ── Deep link ──
+  function applyHash() {
+    const hash = location.hash.replace('#', '');
+    if (!hash) return;
+    const target = document.getElementById(hash);
+    if (!target || !target.classList.contains('tier')) return;
+    document.querySelectorAll('.tier').forEach(t => t.classList.remove('open'));
+    target.classList.add('open');
+    if (hash === 'ollama') setAIMode('local', document.querySelectorAll('#ai-toggle button')[1]);
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+  applyHash();
+  window.addEventListener('hashchange', applyHash);
+</script>
+</body>
+</html>

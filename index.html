@@ -187,6 +187,8 @@
     color: var(--gold); border: 1px solid rgba(255,215,0,.25);
   }
   .tier-official { background: var(--accent-bg); color: var(--accent); }
+  .tier-unverified { background: rgba(139,148,158,.1); color: #8b949e; border: 1px dotted rgba(139,148,158,.4); font-size: .65rem; }
+  .agent-card.tier-unverified { border-color: rgba(139,148,158,.15); }
   .tier-experimental { background: rgba(188,140,255,.12); color: #bc8cff; border: 1px dashed rgba(188,140,255,.4); }
   .agent-card.tier-experimental::before { background: linear-gradient(90deg, #bc8cff, #ff6bff); }
   .agent-card.tier-experimental { border-style: dashed; border-color: rgba(188,140,255,.2); }
@@ -495,6 +497,97 @@
   }
   .local-mgmt-btn:hover { border-color: var(--accent); color: var(--accent); }
   .local-mgmt-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+  /* ─── Mode Dial ──────────────────────────────────── */
+  .mode-dial {
+    display: flex; align-items: center; gap: 0;
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  .mode-dial button {
+    padding: 4px 10px; border: none; background: none;
+    color: var(--text-muted); font-size: .68rem; font-weight: 600;
+    cursor: pointer; font-family: inherit; letter-spacing: .3px;
+    transition: all .15s; border-right: 1px solid var(--border);
+  }
+  .mode-dial button:last-child { border-right: none; }
+  .mode-dial button:hover { background: var(--surface2); }
+  .mode-dial button.active { color: #fff; }
+  .mode-dial button.active[data-tier="0"] { background: var(--text-muted); }
+  .mode-dial button.active[data-tier="1"] { background: var(--accent); }
+  .mode-dial button.active[data-tier="2"] { background: var(--orange); }
+
+  /* ─── Hail Overlay (Uber-like agent dispatch) ───── */
+  .hail-overlay {
+    position: fixed; inset: 0; z-index: 99998;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(12px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    animation: fadeIn .2s ease;
+  }
+  .hail-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    width: 90%; max-width: 480px; overflow: hidden;
+  }
+  .hail-search {
+    padding: 20px; border-bottom: 1px solid var(--border);
+  }
+  .hail-search input {
+    width: 100%; padding: 14px 16px; font-size: 1rem;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+    color: var(--text); font-family: inherit;
+  }
+  .hail-search input::placeholder { color: var(--text-muted); }
+  .hail-results {
+    max-height: 340px; overflow-y: auto; padding: 8px;
+  }
+  .hail-result {
+    display: flex; align-items: center; gap: 12px; padding: 12px;
+    border-radius: 10px; cursor: pointer; transition: background .15s;
+  }
+  .hail-result:hover { background: var(--surface2); }
+  .hail-result.selected { background: rgba(88,166,255,.1); border: 1px solid var(--accent); }
+  .hail-avatar {
+    width: 44px; height: 44px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .hail-info { flex: 1; min-width: 0; }
+  .hail-name { font-weight: 700; font-size: .92rem; }
+  .hail-desc { font-size: .76rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hail-meta { display: flex; gap: 8px; font-size: .68rem; color: var(--text-dim); margin-top: 2px; }
+  .hail-eta { font-weight: 700; color: var(--green); font-size: .82rem; text-align: right; min-width: 50px; }
+  .hail-services {
+    display: flex; gap: 0; border-top: 1px solid var(--border);
+  }
+  .hail-svc {
+    flex: 1; padding: 14px 8px; text-align: center; cursor: pointer;
+    border: none; background: none; color: var(--text-muted); font-size: .78rem;
+    font-family: inherit; transition: all .15s; border-bottom: 2px solid transparent;
+  }
+  .hail-svc:hover { color: var(--text); background: var(--surface2); }
+  .hail-svc.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+  .hail-dispatch {
+    padding: 16px 20px; border-top: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center;
+  }
+  .hail-go {
+    flex: 1; padding: 14px; border-radius: 12px; border: none;
+    background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700;
+    cursor: pointer; font-family: inherit; letter-spacing: .02em;
+  }
+  .hail-go:hover { filter: brightness(1.1); }
+  .hail-go:disabled { opacity: .4; cursor: not-allowed; }
+  .hail-close {
+    position: absolute; top: 16px; right: 20px; background: none; border: none;
+    color: var(--text-muted); font-size: 1.4rem; cursor: pointer;
+  }
+  .hail-arriving {
+    text-align: center; padding: 40px 20px;
+  }
+  .hail-arriving .spinner {
+    width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ─── Agent Cards ─────────────────────────────────── */
   .cards-header { text-align: center; margin-bottom: 24px; }
@@ -1104,8 +1197,9 @@
 
   /* Pack opening */
   .pack-open-overlay {
-    position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.95);
+    position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,.97);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow-y: auto; padding: 24px;
   }
   @keyframes packReveal {
     0% { transform: scale(0.3) rotateY(180deg); opacity: 0; }
@@ -1643,7 +1737,7 @@
     50% { box-shadow: 0 0 60px rgba(255,109,0,.9), 0 0 120px rgba(255,109,0,.3); }
   }
   .pack-intro-overlay {
-    position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.97);
+    position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,.97);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
   }
   .pack-intro-art {
@@ -1800,25 +1894,32 @@
   <div class="logo" onclick="switchTab('browse')">
     <div class="logo-mark">R</div><span>RAR</span>
   </div>
-  <nav>
+  <nav id="main-nav">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
-    <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
-    <button class="nav-btn" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
-    <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
-    <button class="nav-btn creative-only" data-tab="packs" onclick="switchTab('packs')">Packs</button>
-    <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
-    <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">&#128295; Workbench</button>
-    <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
-    <button class="nav-btn" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
+    <button class="nav-btn t3-only wave-2" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
+    <button class="nav-btn t3-only wave-2" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
+    <button class="nav-btn t3-only" data-tab="cards" onclick="switchTab('cards')">Cards</button>
+    <button class="nav-btn t3-only wave-2" data-tab="packs" onclick="switchTab('packs')">Packs</button>
+    <button class="nav-btn t3-only" data-tab="stream" onclick="switchTab('stream')">Stream</button>
+    <button class="nav-btn t3-only wave-2" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
+    <button class="nav-btn t2-only" data-tab="submit" onclick="switchTab('submit')">Submit</button>
+    <button class="nav-btn t3-only" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
   </nav>
   <div class="header-actions" id="header-actions">
-    <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
-    <button class="demo-toggle" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
-    <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
+    <div class="mode-dial" id="mode-dial">
+      <button data-tier="0" class="active" onclick="setUITier(0)">Open</button>
+      <button data-tier="1" onclick="setUITier(1)">Community</button>
+      <button data-tier="2" onclick="setUITier(2)">Lux</button>
+    </div>
+    <button onclick="cycleIntent()" id="intent-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.72rem;cursor:pointer" title="Toggle Business / Personal context">Business</button>
+    <button onclick="openHail()" id="hail-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.08);color:var(--accent);font-size:.72rem;cursor:pointer;font-weight:600;display:none" title="Hail an agent — Uber-like dispatch">Hail</button>
+    <button class="t2-only" onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
+    <button class="demo-toggle t2-only" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
+    <div class="cart-toggle t2-only" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       &#128722;
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
     </div>
-    <button class="gh-login" id="login-btn" onclick="loginWithGitHub()">
+    <button class="gh-login t3-only" id="login-btn" onclick="loginWithGitHub()">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       Sign in
     </button>
@@ -1827,7 +1928,7 @@
 
 <div class="hero" id="hero">
   <h1>The Open <span class="gradient">Agent.py</span> Ecosystem</h1>
-  <p>Browse, vote, review, and share single-file AI agents. Community-driven quality. No servers — everything runs on GitHub.</p>
+  <p id="hero-desc">Browse and share single-file AI agents. Anonymous. Open. No account required.</p>
   <div class="stats-row" id="stats-row"></div>
 </div>
 
@@ -1883,13 +1984,14 @@
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();openAgent('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
       <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">One file, one purpose<br>A thousand agents waiting<br>Which deck will you build?</p>
     </div>
-    <div class="deck-bar" id="deck-bar">
+    <div class="deck-bar t2-only" id="deck-bar">
       <select id="deck-select" onchange="switchDeck(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;min-width:140px;cursor:pointer"></select>
       <span class="deck-count" id="deck-count">0</span> <span style="font-size:.82rem;color:var(--text-dim)">cards</span>
       <button onclick="newDeck()">+ New Deck</button>
       <button onclick="renameDeck()">Rename</button>
       <button onclick="deleteDeck()">Delete</button>
       <button onclick="shareDeck()">Share</button>
+      <button onclick="airdropDeck()" style="color:#8884d8">Airdrop</button>
       <button onclick="presentDeck()">Present</button>
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <div class="card-mode-toggle">
@@ -1919,7 +2021,7 @@
     <div style="text-align:center;margin-bottom:20px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Build &bull; Validate &bull; Preview</div>
       <h2 style="font-size:1.4rem;font-weight:800">AGENT WORKBENCH</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Build an agent in a few steps. Fill in the details, we'll handle the code.</p>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Agents are generated by <strong style="color:var(--text)">LearnNewAgent</strong> — describe what you want and it builds the agent.py for you. Use this workbench to inspect, validate, and preview before publishing.</p>
     </div>
 
     <div class="wb-steps" id="wb-steps">
@@ -2216,7 +2318,7 @@ __manifest__ = {
     "author": "Your Name",
     "tags": ["utility"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "unverified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
@@ -2312,7 +2414,6 @@ class MyAgent(BasicAgent):
       <h2 style="font-size:1.4rem;font-weight:800">AGENT STREAMING</h2>
       <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Stream agent bytecode from GitHub into memory. No download. No disk write. Hot-load, steer, eject. Close the tab and it's gone.</p>
       <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
-        <button onclick="toggleStreamMode()" id="stream-mode-btn" style="padding:4px 14px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.7rem;cursor:pointer">Advanced Mode</button>
         <button class="gesture-btn" data-mode="gesture" onclick="toggleGestureMode()" style="display:none" id="gesture-toggle"><span class="dot"></span>Gesture</button>
         <button class="gesture-btn" data-mode="voice" onclick="toggleVoiceMode()" style="display:none" id="voice-toggle"><span class="dot"></span>Voice</button>
       </div>
@@ -2329,6 +2430,10 @@ class MyAgent(BasicAgent):
       <div style="display:flex;align-items:center;gap:6px;margin-left:8px;border-left:1px solid var(--border);padding-left:10px">
         <span id="thirdspace-id" style="font-size:.55rem;color:var(--text-muted);font-family:monospace;cursor:pointer;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="Your Third Space fingerprint — click to copy" onclick="copyThirdSpaceId()">loading...</span>
         <span style="font-size:.5rem;color:var(--text-muted)">3S</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:8px;border-left:1px solid var(--border);padding-left:10px">
+        <button onclick="toggleQRShare()" id="qr-toggle" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-size:.6rem;cursor:pointer" title="Toggle QR code sharing on cards">QR</button>
+        <button onclick="toggleGPSFlick()" id="gps-toggle" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-size:.6rem;cursor:pointer" title="Attach GPS location to flicks">GPS</button>
       </div>
     </div>
     <div id="stream-status"></div>
@@ -2389,6 +2494,19 @@ class MyAgent(BasicAgent):
           <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">Scheme-like Lisp interpreter for agent systems. Streams from GitHub raw into this tab. Zero install. Data sloshing REPL: Read state → Eval agents → Print mutations → Loop.</div>
         </div>
 
+        <!-- Ollama (Local-First AI) -->
+        <div class="steer-slot" id="rt-ollama" style="cursor:pointer" onclick="connectOllama()">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#fff,#e0e0e0);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#222">O</div>
+            <div>
+              <div class="slot-name">Ollama</div>
+              <div class="slot-status" id="ollama-status">Click to configure</div>
+            </div>
+          </div>
+          <div class="slot-guid" id="ollama-url">localhost:11434</div>
+          <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">True local-first AI. Run Gemma 4 on-device — no cloud, no API key, no data leaves your machine. Brainstem reasons with local models.</div>
+        </div>
+
         <!-- Browser (Inspect Only) -->
         <div class="steer-slot live">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
@@ -2425,6 +2543,60 @@ class MyAgent(BasicAgent):
       </div>
     </div>
 
+    <!-- Ollama Connect Panel -->
+    <div id="ollama-connect" class="advanced-only" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h4 style="font-size:.82rem;font-weight:700;color:var(--text-dim)">Ollama — Local-First AI for Brainstem</h4>
+        <button onclick="document.getElementById('ollama-connect').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem">&times;</button>
+      </div>
+
+      <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:12px;line-height:1.6">
+        Replace cloud AI providers with on-device inference. Ollama runs Gemma 4 locally — the Brainstem routes agent reasoning through it. Zero API keys. Zero data leaves your machine.
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <label style="font-size:.72rem;color:var(--text-dim);font-weight:600;align-self:center">Model:</label>
+        <select id="ollama-model" style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.78rem;font-family:monospace">
+          <option value="gemma4" selected>gemma4 (9.6 GB) — 128K ctx, vision</option>
+          <option value="gemma4:e2b">gemma4:e2b (7.2 GB) — 128K ctx, vision+audio, edge</option>
+          <option value="gemma4:e4b">gemma4:e4b (9.6 GB) — 128K ctx, vision+audio, edge</option>
+          <option value="gemma4:26b">gemma4:26b (18 GB) — 256K ctx, vision, MoE</option>
+          <option value="gemma4:31b">gemma4:31b (20 GB) — 256K ctx, vision, dense</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <div style="font-size:.72rem;color:var(--text-dim);font-weight:600;margin-bottom:6px">Launch command:</div>
+        <div class="cmd-box" style="font-size:.78rem;padding:8px 12px;background:var(--bg);border-radius:6px;font-family:monospace;display:flex;align-items:center;gap:8px">
+          <code id="ollama-cmd" style="color:var(--accent);flex:1">ollama launch brainstem --model gemma4</code>
+          <button class="copy-btn" onclick="copyEl('ollama-cmd')" style="font-size:.6rem;padding:2px 6px">Copy</button>
+        </div>
+        <div style="font-size:.65rem;color:var(--text-muted);margin-top:4px">This starts Ollama, pulls the model if needed, and launches the Brainstem runtime backed by local inference.</div>
+      </div>
+
+      <div class="stream-bar" style="margin-bottom:8px">
+        <input type="text" id="ollama-host" value="http://localhost:11434" placeholder="http://localhost:11434" style="flex:1">
+        <button onclick="doOllamaConnect()">Connect</button>
+      </div>
+      <div id="ollama-connect-status" style="font-size:.78rem;color:var(--text-muted)"></div>
+
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="font-size:.72rem;color:var(--text-dim);font-weight:600;margin-bottom:8px">Model Comparison</div>
+        <div style="font-size:.72rem;color:var(--text-muted);line-height:1.7">
+          <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:4px 12px;font-family:monospace">
+            <span style="font-weight:700;color:var(--text)">Model</span><span style="font-weight:700;color:var(--text)">Size</span><span style="font-weight:700;color:var(--text)">Context</span><span style="font-weight:700;color:var(--text)">Best for</span>
+            <span>e2b</span><span>7.2 GB</span><span>128K</span><span style="color:var(--green)">Phone / tablet</span>
+            <span>e4b</span><span>9.6 GB</span><span>128K</span><span style="color:var(--green)">Laptop</span>
+            <span>26b MoE</span><span>18 GB</span><span>256K</span><span style="color:var(--accent)">Workstation</span>
+            <span>31b Dense</span><span>20 GB</span><span>256K</span><span style="color:var(--purple)">Frontier local</span>
+          </div>
+        </div>
+        <div style="font-size:.65rem;color:var(--text-muted);margin-top:8px;line-height:1.5">
+          Gemma 4 by Google DeepMind. Multimodal (text + image), native function calling, 256K context on workstation models. Reasoning, coding, agentic workflows — all on-device.
+        </div>
+      </div>
+    </div>
+
     <div style="margin-top:24px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <h4 style="font-size:.82rem;font-weight:700;margin-bottom:8px;color:var(--text-dim)">How it works</h4>
       <div style="font-size:.78rem;color:var(--text-muted);line-height:1.7">
@@ -2434,6 +2606,7 @@ class MyAgent(BasicAgent):
         <div><strong style="color:var(--text)">Steer</strong> — Route state through GUID-mapped agents. The same loop that fires perform() can be steered by swapping which agents are live.</div>
         <div><strong style="color:var(--text)">Eject</strong> — Remove from memory. Gone. No trace on disk.</div>
         <div><strong style="color:var(--text)">Brainstem</strong> — Connect to a local RAPP Brainstem. Push agent bytecode for on-device execution. The browser steers, the Brainstem performs.</div>
+        <div><strong style="color:var(--text)">Ollama</strong> — True local-first AI. Run Gemma 4 on-device via Ollama. The Brainstem reasons with local models — no cloud, no API key. <code style="font-size:.72rem;background:var(--bg);padding:1px 4px;border-radius:3px">ollama launch brainstem --model gemma4</code></div>
         <div><strong style="color:var(--text)">CommunityRAPP</strong> — Route to a hosted instance. Same agents, cloud execution surface.</div>
         <div><strong style="color:var(--text)">Flick</strong> — Pick a card, attach a task, flick it to a runtime. The card carries bytecode, the flick carries intent. Multiple flicks in parallel = multiple agents with their own data streams.</div>
         <div><strong style="color:var(--text)">Encrypt</strong> — E2E encryption via AES-256-GCM. Generate a key, share via QR code on the card back. From scan to stream to steer — encrypted end-to-end.</div>
@@ -2503,6 +2676,7 @@ class MyAgent(BasicAgent):
         <h3>&#9878; Frontier</h3>
         <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Pushing the edge. These features are actively being explored. Feedback shapes their direction.</p>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent-to-agent invocation</div><div class="rm-desc">An agent calls another agent's perform() by name. Declared in dependencies, resolved at runtime.</div></div></div>
+        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Ollama — Local-First AI</div><div class="rm-desc">Run Gemma 4 on-device via Ollama. Brainstem reasons locally — no cloud API, no keys, no data leaves your machine. <code>ollama launch brainstem --model gemma4</code></div></div></div>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Offline-first PWA</div><div class="rm-desc">Install RAR as a PWA. Browse your local agents with no network. Sync when you're back online.</div></div></div>
         <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent canvas</div><div class="rm-desc">Visual drag-and-drop wiring of agents into pipelines. Each node is a card. Connections are data flows.</div></div></div>
       </div>
@@ -2650,6 +2824,12 @@ async function handleFileDrop(files) {
       if (card) added++;
       continue;
     }
+    // Handle .egg imports (agent_card.egg containers)
+    if (file.name.endsWith('.egg')) {
+      const card = await importEgg(file);
+      if (card) added++;
+      continue;
+    }
     if (!file.name.endsWith('.py')) continue;
     const code = await file.text();
     const manifest = parseManifestFromPython(code);
@@ -2667,18 +2847,94 @@ async function handleFileDrop(files) {
       _lines: lines,
       _size_kb: sizeKb,
       _added: new Date().toISOString(),
-      quality_tier: manifest.quality_tier || 'community',
+      quality_tier: manifest.quality_tier || 'unverified',
       tags: manifest.tags || [],
       requires_env: manifest.requires_env || [],
       dependencies: manifest.dependencies || [],
     });
     added++;
+    // Offer to submit to the store via Issues API
+    _pendingSubmissions.push({ manifest, code, fileName: file.name });
   }
   if (added > 0) {
     showToast(`Added ${added} local agent${added > 1 ? 's' : ''}`, 'success');
     await mergeLocalAgents();
     refreshUI();
+    // Prompt submission
+    if (_pendingSubmissions.length) showSubmitPrompt();
   }
+}
+
+// ── Drop-to-Submit via GitHub Issues API ──
+let _pendingSubmissions = [];
+
+function showSubmitPrompt() {
+  const agents = _pendingSubmissions.map(s => s.manifest.display_name || s.manifest.name).join(', ');
+  const count = _pendingSubmissions.length;
+
+  const existing = document.getElementById('submit-prompt');
+  if (existing) existing.remove();
+
+  const bar = document.createElement('div');
+  bar.id = 'submit-prompt';
+  bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99997;background:var(--surface);border-top:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:12px;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,.3);animation:slideUp .3s ease';
+  bar.innerHTML = `
+    <div style="flex:1;min-width:0">
+      <div style="font-weight:700;font-size:.92rem">${count} agent${count > 1 ? 's' : ''} loaded</div>
+      <div style="font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(agents)}</div>
+    </div>
+    <button onclick="submitDroppedAgents()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap">Submit to Store</button>
+    <button onclick="dismissSubmitPrompt()" style="padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.82rem;cursor:pointer">Keep Local</button>
+  `;
+  document.body.appendChild(bar);
+}
+
+function dismissSubmitPrompt() {
+  _pendingSubmissions = [];
+  document.getElementById('submit-prompt')?.remove();
+}
+
+async function submitDroppedAgents() {
+  const btn = document.querySelector('#submit-prompt button');
+  if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+
+  let submitted = 0;
+  for (const sub of _pendingSubmissions) {
+    try {
+      const payload = {
+        action: 'submit_agent',
+        payload: { code: sub.code },
+      };
+      const resp = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+          ...(ghUser?.token ? { 'Authorization': `token ${ghUser.token}` } : {}),
+        },
+        body: JSON.stringify({
+          title: `[submit-agent] ${sub.manifest.name || sub.fileName}`,
+          body: '```json\n' + JSON.stringify(payload, null, 2) + '\n```',
+          labels: ['submit-agent'],
+        }),
+      });
+      if (resp.ok) {
+        submitted++;
+      } else if (resp.status === 401 || resp.status === 403) {
+        // No auth or insufficient — fall back to opening an issue manually
+        const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent('[submit-agent] ' + (sub.manifest.name || sub.fileName))}&body=${encodeURIComponent('```json\n' + JSON.stringify(payload, null, 2) + '\n```')}&labels=submit-agent`;
+        window.open(issueUrl, '_blank');
+        submitted++;
+      }
+    } catch (err) {
+      showToast(`Failed to submit ${sub.manifest.name}: ${err.message}`, 'error');
+    }
+  }
+
+  if (submitted > 0) {
+    showToast(`Submitted ${submitted} agent${submitted > 1 ? 's' : ''} to the store (unverified)`, 'success');
+  }
+  dismissSubmitPrompt();
 }
 
 async function mergeLocalAgents() {
@@ -2859,8 +3115,15 @@ async function init() {
   // Init workbench tag inputs
   wbInitTagInputs();
 
-  // Auto-start tour for first-time visitors
-  if (!localStorage.getItem('rar_tour_done')) {
+  // Apply persisted UI tier (T1/T2/T3) + intent (Personal/Business)
+  applyUITier();
+  applyIntent();
+
+  // Edge sync — auto-dispatch card stats if opted in (frontier feature)
+  scheduleEdgeSync();
+
+  // Auto-start tour for first-time visitors (only at T2+)
+  if (!localStorage.getItem('rar_tour_done') && _uiTier >= 1) {
     setTimeout(startTour, 1500);
   }
 }
@@ -3017,14 +3280,14 @@ function renderStats(stats) {
   const tv = Object.values(votes.agents || {}).reduce((s, v) => s + (v.up || 0), 0);
   const tr = Object.values(reviews.agents || {}).reduce((s, a) => s + (a.length || 0), 0);
   const vc = allAgents.filter(a => a.quality_tier === 'verified').length;
-  const voteLabel = tv === 0 && !window._demoActive ? `<span class="demo-inline" onclick="toggleDemoMode()">Preview</span>` : tv;
-  const revLabel = tr === 0 && !window._demoActive ? `<span class="demo-inline" onclick="toggleDemoMode()">Preview</span>` : tr;
+  const voteLabel = tv;
+  const revLabel = tr;
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
     <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
-    <div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>
+    ${_uiTier >= 1 ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>
     <div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>
-    <div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>`;
+    <div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>` : ''}`;
 }
 
 function buildCategoryPills(stats) {
@@ -3056,7 +3319,7 @@ function rating(a) {
   return r.reduce((s, x) => s + x.rating, 0) / r.length;
 }
 
-const TIER_ORDER = { official: 0, verified: 1, community: 2, experimental: 3 };
+const TIER_ORDER = { official: 0, verified: 1, community: 2, experimental: 3, unverified: 4 };
 
 function renderAgents() {
   const q = document.getElementById('search').value.toLowerCase();
@@ -3068,11 +3331,13 @@ function renderAgents() {
       (a.author || '').toLowerCase().includes(q);
     return catOk && qOk;
   });
-  if (sort === 'popular') f.sort((a, b) => score(b) - score(a));
-  else if (sort === 'name') f.sort((a, b) => a.display_name.localeCompare(b.display_name));
-  else if (sort === 'rating') f.sort((a, b) => rating(b) - rating(a));
-  else if (sort === 'newest') f.sort((a, b) => (b._lines || 0) - (a._lines || 0));
-  else if (sort === 'verified') f.sort((a, b) => (TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2));
+  // Intent-aware sort — float matching categories to the top, then apply chosen sort within groups
+  f.sort((a, b) => intentWeight(b) - intentWeight(a));
+  if (sort === 'popular') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (score(b) - score(a)));
+  else if (sort === 'name') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || a.display_name.localeCompare(b.display_name));
+  else if (sort === 'rating') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (rating(b) - rating(a)));
+  else if (sort === 'newest') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((b._lines || 0) - (a._lines || 0)));
+  else if (sort === 'verified') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2)));
 
   if (!f.length) {
     document.getElementById('agents-container').innerHTML = '<div class="empty-state"><h3>No agents found</h3><p>Try a different search or category.</p></div>';
@@ -3085,11 +3350,15 @@ function agentCard(a) {
   const s = score(a);
   const tier = a.quality_tier || 'community';
   const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
-  const sealHtml = tier === 'verified'
-    ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
-    : tier === 'experimental'
-    ? '<span class="tier tier-experimental">&#9878; experimental</span>'
-    : `<span class="tier tier-${tier}">${tier}</span>`;
+  const sealHtml = _uiTier >= 1
+    ? (tier === 'verified'
+      ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
+      : tier === 'experimental'
+      ? '<span class="tier tier-experimental">&#9878; experimental</span>'
+      : `<span class="tier tier-${tier}">${tier}</span>`)
+    : '';
+  const isLocal = a._source === 'local-device';
+  const rawUrl = isLocal || !a._file ? '#' : `${RAW}/${a._file}`;
   return `
     <div class="agent-card tier-${tier}" onclick='openAgent(${JSON.stringify(a.name)})'>
       <div class="card-top"><span class="card-title">${esc(a.display_name)}</span>${sealHtml}</div>
@@ -3101,14 +3370,15 @@ function agentCard(a) {
           <span>${a._size_kb || '?'} KB</span>
           <span>${a._lines || '?'} lines</span>
           <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
-          ${a._source === 'local-device' ? '<span class="local-badge">LOCAL</span>' : ''}
+          ${isLocal ? '<span class="local-badge">LOCAL</span>' : ''}
           ${a._streamed ? '<span class="local-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">STREAMED</span>' : ''}
           ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
-          ${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
+          ${!isLocal && a._file ? `<a class="add-cart-btn" href="${rawUrl}" download onclick="event.stopPropagation()" title="Download agent.py" style="text-decoration:none;font-size:.7rem;padding:2px 6px">&#11015; .py</a>` : ''}
+          ${_uiTier >= 1 ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
-          <div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>
+          <div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}
         </div>
       </div>
     </div>`;
@@ -3212,50 +3482,59 @@ async function renderCardRankings() {
     else if (cond.code === 'HP') s.hpCount++;
     else s.dmgCount++;
     s.avgHolo += holoRemaining(card);
+    // Cube integrity
+    const cube = card.cube ? (typeof card.cube === 'string' ? hexToCube(card.cube) : card.cube) : initCube();
+    s.totalBlocks = (s.totalBlocks || 0) + cubeBlocksAlive(cube);
+    // Confidence
+    s.totalConfidence = (s.totalConfidence || 0) + confidenceScore(card);
   }
 
-  // Calculate averages and sort
+  // Calculate averages and sort by CONFIDENCE (the marketplace value)
   const ranked = Object.values(agentStats).map(s => {
     s.avgHolo = s.copies ? s.avgHolo / s.copies : 0;
-    s.winRate = s.totalPlays > 0 ? ((s.totalGood / s.totalPlays) * 100) : 100; // unplayed = perfect
-    s.failRate = s.totalPlays > 0 ? ((s.totalBad / s.totalPlays) * 100) : 0;
-    // Sort score: win rate (primary), then holo retention, then gem mint count
-    s.rankScore = s.winRate * 100 + s.avgHolo * 50 + s.gemMintCount * 10 - s.dmgCount * 5;
+    s.avgBlocks = s.copies ? Math.round(s.totalBlocks / s.copies) : CUBE_TOTAL;
+    s.avgCubeIntegrity = Math.round((s.avgBlocks / CUBE_TOTAL) * 100);
+    s.winRate = s.totalPlays > 0 ? ((s.totalGood / s.totalPlays) * 100) : 100;
+    s.confidence = s.copies ? Math.round((s.totalConfidence / s.copies) * 10) / 10 : 100;
+    s.burnRate = s.totalPlays > 0 ? ((s.copies * CUBE_TOTAL - s.totalBlocks) / s.totalPlays).toFixed(1) : '0.0';
+    const pristine = s.gemMintCount + s.nmCount;
+    s.pristineSupply = pristine;
     return s;
-  }).sort((a, b) => b.rankScore - a.rankScore);
+  }).sort((a, b) => b.confidence - a.confidence); // SORT BY CONFIDENCE
 
   let h = `<table class="lb-table"><thead><tr>
-    <th>#</th><th>Agent</th><th>Plays</th><th>Win %</th>
-    <th>Holo</th><th>Best</th><th>PSA 10</th><th>Supply</th>
+    <th>#</th><th>Agent</th><th style="cursor:pointer" title="Confidence = inverse risk. Sort: most confident agent first.">Conf.</th>
+    <th>Cube</th><th>Burn</th><th>Plays</th><th>Win %</th>
+    <th>PSA 10</th><th>Supply</th>
   </tr></thead><tbody>`;
 
   ranked.slice(0, 50).forEach((s, i) => {
+    const confColor = s.confidence >= 90 ? 'var(--green)' : s.confidence >= 70 ? 'var(--yellow)' : s.confidence >= 50 ? 'var(--orange)' : 'var(--red)';
+    const cubeBar = s.avgCubeIntegrity;
+    const cubeBg = `linear-gradient(90deg, var(--purple) ${cubeBar}%, var(--surface2) ${cubeBar}%)`;
     const winColor = s.winRate >= 90 ? 'var(--green)' : s.winRate >= 70 ? 'var(--yellow)' : 'var(--red)';
-    const holoBar = Math.round(s.avgHolo * 100);
-    const holoBg = `linear-gradient(90deg, var(--purple) ${holoBar}%, var(--surface2) ${holoBar}%)`;
-    const gradeInfo = gradeLabel(s.bestGrade);
-    // Supply = how many NM+ copies still exist (diminishing)
-    const pristineSupply = s.gemMintCount + s.nmCount;
-    const totalSupply = s.copies;
-    const supplyColor = pristineSupply === 0 ? 'var(--red)' : pristineSupply <= 2 ? 'var(--orange)' : 'var(--green)';
+    const burnColor = parseFloat(s.burnRate) <= 1 ? 'var(--green)' : parseFloat(s.burnRate) <= 3 ? 'var(--yellow)' : 'var(--red)';
+    const supplyColor = s.pristineSupply === 0 ? 'var(--red)' : s.pristineSupply <= 2 ? 'var(--orange)' : 'var(--green)';
 
     h += `<tr onclick="openAgent('${esc(s.name)}')" style="cursor:pointer">
       <td class="lb-rank">${i + 1}</td>
       <td class="lb-name">${esc(s.displayName)}</td>
+      <td style="text-align:center;font-weight:800;font-size:.9rem;color:${confColor}">${s.confidence}</td>
+      <td><div style="background:${cubeBg};border-radius:4px;padding:1px 6px;font-size:.6rem;color:#fff;text-align:center;min-width:40px">${cubeBar}%</div></td>
+      <td style="text-align:center;font-size:.75rem;color:${burnColor}">${s.burnRate}/play</td>
       <td style="text-align:center;font-size:.8rem">${s.totalPlays}</td>
       <td style="text-align:center;color:${winColor};font-weight:600;font-size:.8rem">${s.winRate.toFixed(0)}%</td>
-      <td><div style="background:${holoBg};border-radius:4px;padding:1px 6px;font-size:.65rem;color:#fff;text-align:center;min-width:45px">${holoBar}%</div></td>
-      <td><span class="grade-badge ${gradeInfo.cls}" style="font-size:.6rem;padding:1px 5px">${gradeInfo.label}</span></td>
       <td style="text-align:center;font-size:.8rem;font-weight:700;color:${s.gemMintCount > 0 ? 'var(--gold)' : 'var(--text-muted)'}">${s.gemMintCount}</td>
-      <td style="text-align:center;font-size:.75rem"><span style="color:${supplyColor};font-weight:600">${pristineSupply}</span><span style="color:var(--text-muted)">/${totalSupply}</span></td>
+      <td style="text-align:center;font-size:.75rem"><span style="color:${supplyColor};font-weight:600">${s.pristineSupply}</span><span style="color:var(--text-muted)">/${s.copies}</span></td>
     </tr>`;
   });
 
   h += '</tbody></table>';
   h += `<div style="font-size:.65rem;color:var(--text-muted);margin-top:12px;text-align:center">
-    Win % = tasks rated 4-5 / total plays &middot; Holo = average holographic data remaining &middot;
-    PSA 10 = GEM MINT copies (never failed) &middot; Supply = pristine copies / total minted<br>
-    <em>Cards degrade from bad ratings. PSA 10 supply diminishes over time. Perfect agents stay pristine.</em>
+    <strong>Confidence</strong> = inverse risk &middot; <strong>Cube</strong> = avg blocks remaining (512 max) &middot;
+    <strong>Burn</strong> = blocks lost per play &middot; <strong>Supply</strong> = pristine / total<br>
+    <em>Sorted by confidence. High confidence = agent completes tasks reliably = card holds value as currency.</em><br>
+    <em>Cards are .egg containers that hatch into .py or .lisp depending on runtime. Burn rate is deflationary pressure.</em>
   </div>`;
 
   container.innerHTML = h;
@@ -3264,6 +3543,27 @@ async function renderCardRankings() {
 // ═══════════════════════════════════════════════════════
 // Agent Detail Modal
 // ═══════════════════════════════════════════════════════
+function buildInstallBlock(a, rawUrl, repo) {
+  const fileName = (a._file || a.name || 'agent.py').split('/').pop();
+  const publisher = a.name.split('/')[0] || '';
+  const lbl = '<span style="color:var(--text-muted);font-size:.72rem;text-transform:uppercase;letter-spacing:1px">';
+  return '<div style="display:flex;flex-direction:column;gap:12px">'
+    + '<div style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.84rem;align-items:center">'
+    + lbl + 'Registry</span><span style="font-weight:600;color:var(--text)">' + esc(repo) + '</span>'
+    + lbl + 'Branch</span><span style="color:var(--green);font-family:monospace;font-size:.82rem">main</span>'
+    + lbl + 'Publisher</span><span style="color:var(--accent);font-weight:600">' + esc(publisher) + '</span>'
+    + lbl + 'Agent</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">' + esc(fileName) + '</span>'
+    + lbl + 'Size</span><span style="color:var(--text-dim)">' + (a._size_kb || '?') + ' KB &middot; ' + (a._lines || '?') + ' lines</span>'
+    + lbl + 'Version</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">v' + esc(a.version) + '</span>'
+    + '</div>'
+    + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+    + '<a href="' + rawUrl + '" download style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-size:.85rem;font-weight:600">&#11015; agent.py</a>'
+    + '<button class="copy-btn" onclick="copyEl(\'install-cmd\')" style="padding:6px 14px;border-radius:8px;font-size:.82rem">Copy one-liner</button>'
+    + '</div>'
+    + '<code id="install-cmd" style="display:none">curl -sO ' + rawUrl + '</code>'
+    + '</div>';
+}
+
 function openAgent(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
@@ -3278,8 +3578,8 @@ function openAgent(name) {
   const isLocalDevice = a._source === 'local-device';
   const sourceRaw = a._source === 'upstream' && UPSTREAM_RAW ? UPSTREAM_RAW : RAW;
   const sourceRepo = a._source === 'upstream' && UPSTREAM_REPO ? UPSTREAM_REPO : REPO;
-  const rawUrl = isLocalDevice ? '#' : `${sourceRaw}/${a._file}`;
-  const ghUrl = isLocalDevice ? '#' : `https://github.com/${sourceRepo}/blob/main/${a._file}`;
+  const rawUrl = isLocalDevice || !a._file ? '#' : `${sourceRaw}/${a._file}`;
+  const ghUrl = isLocalDevice || !a._file ? '#' : `https://github.com/${sourceRepo}/blob/main/${a._file}`;
 
   const sealHtml = tier === 'verified'
     ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAR VERIFIED</span>'
@@ -3312,20 +3612,20 @@ function openAgent(name) {
     </div>
     <div class="modal-body">
       ${experimentalWarning}
-      <div class="modal-vote">
+      ${_uiTier >= 1 ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
         <span class="vote-score">${s}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
-      </div>
+      </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
-      <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Install'}</h3>
-        ${isLocalDevice
+      <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Get agent.py'}</h3>
+        <div id="modal-install">${isLocalDevice
           ? '<div style="color:var(--green);font-size:.88rem"><span class="local-badge" style="font-size:.75rem;padding:3px 10px">LOCAL AGENT</span> Loaded from your device. Not published to any registry.</div>'
-          : `<div class="cmd-box"><code id="install-cmd">curl -sO ${rawUrl}</code><button class="copy-btn" onclick="copyEl('install-cmd')">Copy</button></div>`}
+          : buildInstallBlock(a, rawUrl, sourceRepo)}</div>
       </div>
       <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
       <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
-      <div class="modal-section" id="modal-thirdspace">
+      <div class="modal-section" id="modal-thirdspace" style="${_uiTier >= 2 ? '' : 'display:none'}">
         <h3>Third Space</h3>
         ${(() => {
           const cred = _cardCredentials.get(a.name);
@@ -3368,26 +3668,25 @@ function openAgent(name) {
         </div>
         <div id="source-raw" style="display:none">
           <div class="code-viewer">
-            <div class="code-toolbar"><span class="fn">${a._file.split('/').pop()}</span>
-              <div><button class="copy-btn" onclick="copyCode()">Copy code</button>
-              <a href="${ghUrl}" target="_blank" style="margin-left:8px;color:#858585;font-size:.78rem">GitHub</a></div>
+            <div class="code-toolbar"><span class="fn">${(a._file || a.name || 'agent.py').split('/').pop()}</span>
+              <div><button class="copy-btn" onclick="copyCode()">Copy code</button></div>
             </div>
             <div class="code-body" id="code-body"><span style="color:#858585">Loading...</span></div>
           </div>
         </div>
       </div>
-      <div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
+      ${_uiTier >= 1 ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
         <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">&#9998; Write a Review</button>
-      </div>
+      </div>` : ''}
       <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
         ${isLocalDevice
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">&#128465; Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#8593; Submit to Store</a>`
           : `<a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; Download .py</a>
-             <a href="${ghUrl}" target="_blank" style="color:var(--accent);font-size:.9rem">&#128279; View on GitHub</a>`}
+             <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Copy Link</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
         <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
-        ${!isLocalDevice ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">&#9889; Stream into Memory</a>` : ''}
+        ${!isLocalDevice && _uiTier >= 2 ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">&#9889; Stream into Memory</a>` : ''}
       </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
@@ -3548,28 +3847,19 @@ function renderParsedSource(code, agent) {
     </div>`;
   }
 
-  // Class & Methods section
+  // Class & Methods — shown as keyword tags for search
   if (p.classes.length) {
     p.classes.forEach(cls => {
-      const methodCards = cls.methods.length
-        ? cls.methods.map(m => {
-            const isPerform = m.name === 'perform';
-            const isInit = m.name === '__init__';
-            const isPrivate = m.name.startsWith('_') && !isInit;
-            const cardClass = isPerform ? 'mc-entry' : isInit ? 'mc-init' : isPrivate ? 'mc-private' : '';
-            const badgeClass = isPerform ? 'mb-entry' : isInit ? 'mb-init' : isPrivate ? 'mb-private' : 'mb-public';
-            const badgeText = isPerform ? 'entry' : isInit ? 'init' : isPrivate ? 'private' : 'public';
-            const paramStr = m.params.length ? `(${m.params.map(p => esc(p)).join(', ')})` : '()';
-            let card = `<div class="method-card ${cardClass}">
-              <span class="method-badge ${badgeClass}">${badgeText}</span>
-              <div style="flex:1;min-width:0">
-                <div><span class="method-name">${esc(m.name)}</span><span class="method-params">${paramStr}</span></div>`;
-            if (m.docstring) card += `<div class="method-doc">${esc(m.docstring.split('\n')[0])}</div>`;
-            card += `<div class="method-meta">${m.lineCount} line${m.lineCount !== 1 ? 's' : ''}</div>
-              </div></div>`;
-            return card;
-          }).join('')
-        : '<div style="color:var(--text-muted);font-size:.85rem;padding:8px 0">No methods found</div>';
+      const methodTags = cls.methods
+        .map(m => {
+          const isPerform = m.name === 'perform';
+          const isInit = m.name === '__init__';
+          const color = isPerform ? 'var(--green)' : isInit ? 'var(--accent)' : 'var(--text-dim)';
+          const bg = isPerform ? 'rgba(63,185,80,.1)' : isInit ? 'rgba(88,166,255,.1)' : 'rgba(255,255,255,.04)';
+          const border = isPerform ? 'rgba(63,185,80,.3)' : isInit ? 'rgba(88,166,255,.3)' : 'var(--border)';
+          const label = m.name.replace(/^_+/, '').replace(/_/g, ' ');
+          return `<span style="display:inline-block;padding:3px 10px;margin:3px;border-radius:12px;font-size:.72rem;font-family:'SF Mono',Consolas,monospace;color:${color};background:${bg};border:1px solid ${border};cursor:default" title="${esc(m.name)}(${m.params.join(', ')}) — ${m.lineCount} lines">${esc(label)}</span>`;
+        }).join('');
 
       const totalLines = cls.code.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).length;
       html += `<div class="parsed-section">
@@ -3579,7 +3869,7 @@ function renderParsedSource(code, agent) {
           <span class="toggle-arrow">&#9660;</span>
         </div>
         <div class="parsed-section-body">
-          <div class="method-grid">${methodCards}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:2px;padding:4px 0">${methodTags}</div>
           <details style="margin-top:12px">
             <summary style="cursor:pointer;color:var(--accent);font-size:.82rem;font-weight:500">View class source</summary>
             <div class="code-viewer" style="margin-top:8px">
@@ -3622,7 +3912,7 @@ __manifest__ = {
     "author": "Your Name",
     "tags": ["utility"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "unverified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
@@ -3661,7 +3951,7 @@ __manifest__ = {
     "author": "Your Name",
     "tags": ["tutorial", "hello-world", "starter"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "unverified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
@@ -3700,7 +3990,7 @@ __manifest__ = {
     "author": "Your Name",
     "tags": ["api", "http", "integration"],
     "category": "integrations",
-    "quality_tier": "community",
+    "quality_tier": "unverified",
     "requires_env": ["API_BASE_URL"],
     "dependencies": ["@rapp/basic-agent"],
 }
@@ -3753,7 +4043,7 @@ __manifest__ = {
     "author": "Your Name",
     "tags": ["data", "transform", "analysis"],
     "category": "productivity",
-    "quality_tier": "community",
+    "quality_tier": "unverified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
@@ -4083,7 +4373,7 @@ async function wbAddToLocal() {
       display_name: manifest.display_name || manifest.name,
       description: manifest.description || '',
       category: manifest.category || 'general',
-      quality_tier: manifest.quality_tier || 'community',
+      quality_tier: manifest.quality_tier || 'unverified',
       version: manifest.version || '0.0.0',
       author: manifest.author || 'Unknown',
       tags: manifest.tags || [],
@@ -4175,7 +4465,7 @@ function previewManifest() {
     if (!disp) errs.push('display_name required');
     if (!desc) errs.push('description required');
     if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
-    if (tier && tier !== 'community' && tier !== 'experimental') errs.push('quality_tier must be "community" or "experimental"');
+    if (tier && !['unverified', 'community', 'experimental'].includes(tier)) errs.push('quality_tier must be "unverified", "community", or "experimental"');
     if (isUnmodifiedTemplate(code)) errs.push('Customize the template — change name, description, and code');
     pv.style.display = 'block';
     pv.innerHTML = `<h4>Manifest Preview</h4>
@@ -4402,13 +4692,24 @@ function loadSharedCart() {
   const params = new URLSearchParams(window.location.search);
   const agents = params.get('agents');
   if (agents) {
-    agents.split(',').forEach(a => cart.add(decodeURIComponent(a)));
-    saveCart();
+    const names = agents.split(',').map(a => decodeURIComponent(a)).filter(Boolean);
     window.history.replaceState({}, '', window.location.pathname);
-    setTimeout(() => {
-      toggleCart();
-      showToast(`Loaded ${cart.size} shared agents into your cart`, 'success');
-    }, 1000);
+    if (names.length === 1) {
+      // Single agent — open directly in-app
+      const check = setInterval(() => {
+        if (allAgents.length) {
+          clearInterval(check);
+          openAgent(names[0]);
+        }
+      }, 200);
+    } else if (names.length > 1) {
+      names.forEach(a => cart.add(a));
+      saveCart();
+      setTimeout(() => {
+        toggleCart();
+        showToast(`Loaded ${cart.size} shared agents into your cart`, 'success');
+      }, 1000);
+    }
   }
 }
 
@@ -4418,9 +4719,9 @@ function loadSharedCart() {
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
 function copyEl(id) { navigator.clipboard.writeText(document.getElementById(id)?.value || document.getElementById(id)?.textContent?.trim()); showToast('Copied!', 'success'); }
 function shareAgent(name) {
-  const url = `${window.location.origin}${window.location.pathname}?agents=${encodeURIComponent(name)}`;
+  const url = `${window.location.origin}${window.location.pathname}#agent/${encodeURIComponent(name)}`;
   navigator.clipboard.writeText(url);
-  showToast('Agent share link copied!', 'success');
+  showToast('Agent link copied!', 'success');
 }
 function copyCode() { if (window._code) { navigator.clipboard.writeText(window._code); showToast('Code copied!', 'success'); } }
 function showToast(msg, type) {
@@ -5103,8 +5404,12 @@ function agentToCard(a) {
   const artStyle = getArtistStyle(a);
   const lines = a._lines || '?';
   const sizeKb = a._size_kb || '?';
-  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  // QR encodes the raw agent.py URL — scan = get the file directly
+  const agentRawUrl = a._file ? `https://raw.githubusercontent.com/${REPO}/main/${a._file}` : `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
+  // Salt: append a fingerprint fragment so each QR is unique per brainstem
+  const qrSalt = _thirdSpaceIdentity?.fingerprint?.slice(0, 8) || '';
+  const qrData = qrSalt ? `${agentRawUrl}#${qrSalt}` : agentRawUrl;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(qrData)}`;
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
 
@@ -5112,7 +5417,8 @@ function agentToCard(a) {
   const abilities = [];
   if (a.description) abilities.push({ kw: 'Perform', text: desc });
   if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
-  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+  const nonTrivialDeps = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
+  if (nonTrivialDeps.length) abilities.push({ kw: 'Depends', text: nonTrivialDeps.join(', ') });
 
   // Holo card data (from module-scope constants)
   const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
@@ -5175,12 +5481,13 @@ function agentToCard(a) {
     </div>`;
 
   // ── QR Back Face ──
+  const qrImgHtml = `<div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
+       <div class="ac-back-hint">Scan to download agent.py${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
     <div class="agent-card-back" style="border-color:${cc.border}">
       <div class="ac-back-logo">RAR</div>
-      <div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
+      ${qrImgHtml}
       <div class="ac-back-name">${esc(a.display_name)}</div>
-      <div class="ac-back-hint">Scan to load this agent</div>
       ${haikuHtml}
       <div class="ac-back-actions">
         <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
@@ -5237,7 +5544,7 @@ function agentToCard(a) {
   }
 
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ondblclick="this.classList.toggle('flipped')">
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')">
     ${front}
     <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg)">${back}</div>
   </div>`;
@@ -5441,6 +5748,8 @@ async function mintCard(agentName, setId) {
     votesAtMint: (votes.agents?.[a.name]?.score) || 0,
     tierAtMint: a.quality_tier || 'community',
     isFirstEdition: mintNum === 1,
+    // Virtual Cube — 512 blocks of holographic data
+    cube: cubeToHex(initCube()),
     // Third Space
     _thirdspace: credential ? {
       verified: true,
@@ -5630,11 +5939,30 @@ async function rateCardWork(mintId, rating) {
     brainstem: _thirdSpaceIdentity?.fingerprint?.slice(0, 16) || null,
   });
 
+  // ── CUBE BURN: bad ratings burn blocks from the virtual cube ──
+  // Rating 1 = 8 blocks burned. Rating 2 = 3 blocks burned.
+  // Rating 3 = 0. Rating 4 = 0. Rating 5 = 0 (preserves the card).
+  let cube = card.cube ? (typeof card.cube === 'string' ? hexToCube(card.cube) : card.cube) : initCube();
+  let blocksBurned = 0;
+  if (rating === 1) blocksBurned = 8;   // catastrophic failure burns 8 blocks
+  else if (rating === 2) blocksBurned = 3; // poor performance burns 3 blocks
+
+  if (blocksBurned > 0) {
+    const burnSeed = mintId + card.playHistory.total + Date.now();
+    cube = burnBlocks(cube, blocksBurned, burnSeed);
+    card.cube = cubeToHex(cube);
+  }
+
+  const integrity = cubeIntegrity(card);
+
   // Log to provenance chain (public ledger — Rule 7: Provenance Is Permanent)
   if (!card.provenance) card.provenance = [];
   card.provenance.push({
     action: 'play-rating',
     rating,
+    blocksBurned,
+    cubeIntegrity: integrity,
+    blocksRemaining: cubeBlocksAlive(cube),
     timestamp: new Date().toISOString(),
     condition: getPlayCondition(card).code,
     holoRemaining: holoRemaining(card),
@@ -5704,6 +6032,778 @@ async function submitFlickRating(mintId, rating) {
 
   // Re-render collection if visible
   if (typeof renderCollection === 'function') renderCollection();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// VIRTUAL CUBE — The card as currency
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Every card is a 8×8×8 virtual cube (512 blocks). Each block is a unit of
+// holographic data — the card's stored energy. Blocks burn from bad ratings.
+// Good ratings preserve. The cube IS the card. When blocks burn, the card
+// physically changes — holo fades, art degrades, rarity drops.
+//
+// Burn rate = average blocks lost per play across all players globally.
+// This is the card's deflationary pressure. High burn rate = fast decay.
+// Low burn rate = the agent does its job well = currency holds value.
+//
+// The cube hatches into an agent_card.egg — a universal format that can
+// hatch into .py (Brainstem/CommunityRAPP) or Lisppy s-expressions
+// depending on what runtime the hardware needs at that moment.
+
+const CUBE_SIZE = 8; // 8×8×8 = 512 blocks
+const CUBE_TOTAL = CUBE_SIZE ** 3; // 512
+
+// Initialize a fresh cube — all 512 blocks alive
+function initCube() {
+  // Each block is a bit: 1 = alive, 0 = burned
+  // Stored as a Uint8Array of 64 bytes (512 bits)
+  const cube = new Uint8Array(64);
+  cube.fill(0xFF); // all bits set = all blocks alive
+  return cube;
+}
+
+// Count alive blocks in a cube
+function cubeBlocksAlive(cube) {
+  if (!cube || !cube.length) return CUBE_TOTAL;
+  let count = 0;
+  for (let i = 0; i < cube.length; i++) {
+    let byte = cube[i];
+    while (byte) { count += byte & 1; byte >>= 1; }
+  }
+  return count;
+}
+
+// Burn N blocks from the cube (deterministic from seed)
+function burnBlocks(cube, count, seed) {
+  if (!cube) return initCube();
+  const rng = mulberry32(seedHash(String(seed)));
+  let burned = 0;
+  let attempts = 0;
+  while (burned < count && attempts < count * 10) {
+    const blockIdx = Math.floor(rng() * CUBE_TOTAL);
+    const byteIdx = blockIdx >> 3;
+    const bitIdx = blockIdx & 7;
+    if (cube[byteIdx] & (1 << bitIdx)) {
+      cube[byteIdx] &= ~(1 << bitIdx); // burn the block
+      burned++;
+    }
+    attempts++;
+  }
+  return cube;
+}
+
+// Get cube integrity as a percentage (0–100)
+function cubeIntegrity(card) {
+  const alive = cubeBlocksAlive(card.cube);
+  return Math.round((alive / CUBE_TOTAL) * 100);
+}
+
+// Calculate burn rate: average blocks lost per play across all copies
+async function getGlobalBurnRate(agentName) {
+  const all = await getAllMinted();
+  const copies = all.filter(c => c.agentName === agentName);
+  if (!copies.length) return 0;
+
+  let totalBurned = 0;
+  let totalPlays = 0;
+  for (const card of copies) {
+    const alive = cubeBlocksAlive(card.cube);
+    totalBurned += (CUBE_TOTAL - alive);
+    totalPlays += (card.playHistory?.total || 0);
+  }
+  return totalPlays > 0 ? totalBurned / totalPlays : 0;
+}
+
+// Serialize cube to hex string for storage/transport
+function cubeToHex(cube) {
+  if (!cube) return null;
+  return [...cube].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Deserialize cube from hex string
+function hexToCube(hex) {
+  if (!hex) return initCube();
+  return new Uint8Array(hex.match(/.{2}/g).map(b => parseInt(b, 16)));
+}
+
+// Render a visual representation of the cube as an SVG (top-down 8×8 face with depth shading)
+function renderCubeVisual(card, size) {
+  const w = size || 64;
+  const cube = card.cube ? (typeof card.cube === 'string' ? hexToCube(card.cube) : card.cube) : initCube();
+  const cellSize = w / CUBE_SIZE;
+  let svg = `<svg viewBox="0 0 ${w} ${w}" width="${w}" height="${w}" xmlns="http://www.w3.org/2000/svg">`;
+  // Render top face (XY plane), shaded by Z depth of alive blocks
+  for (let x = 0; x < CUBE_SIZE; x++) {
+    for (let y = 0; y < CUBE_SIZE; y++) {
+      // Count alive blocks in this column (z-axis depth)
+      let depth = 0;
+      for (let z = 0; z < CUBE_SIZE; z++) {
+        const idx = x * CUBE_SIZE * CUBE_SIZE + y * CUBE_SIZE + z;
+        const byteIdx = idx >> 3;
+        const bitIdx = idx & 7;
+        if (cube[byteIdx] & (1 << bitIdx)) depth++;
+      }
+      const opacity = depth / CUBE_SIZE;
+      const color = depth === CUBE_SIZE ? '#bc8cff' : depth > 0 ? '#7c5cbf' : '#1a1a2e';
+      svg += `<rect x="${x * cellSize}" y="${y * cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}" opacity="${Math.max(0.08, opacity)}" rx="0.5"/>`;
+    }
+  }
+  svg += '</svg>';
+  return svg;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// AGENT_CARD.EGG — Universal container that hatches into .py or .lisp
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// The egg is the card's executable form. It carries:
+// - The virtual cube (integrity state)
+// - The agent source code
+// - The manifest
+// - The Third Space credential
+// - The play history and provenance
+//
+// When the egg hatches, it detects the available runtime and produces
+// the right format:
+// - Brainstem / CommunityRAPP → .py single file agent
+// - Lisppy (browser) → s-expression agent definition
+// - No runtime → inspect-only (card view)
+
+function buildEgg(card) {
+  const agent = allAgents.find(a => a.name === card.agentName);
+  const source = getStreamedSource(card.agentName) || card._sourceCode || '';
+  const cube = card.cube ? cubeToHex(card.cube) : cubeToHex(initCube());
+  const credential = _cardCredentials.get(card.agentName) || null;
+
+  return {
+    format: 'agent_card.egg/1.0',
+    hatched: false,
+    // The cube — card integrity as currency
+    cube: {
+      data: cube,
+      size: CUBE_SIZE,
+      total: CUBE_TOTAL,
+      alive: cubeBlocksAlive(card.cube || initCube()),
+      integrity: cubeIntegrity(card),
+      burnRate: null, // set asynchronously
+    },
+    // The card
+    card: {
+      mintId: card.mintId,
+      serial: card.serial,
+      agentName: card.agentName,
+      displayName: card.displayName,
+      tier: card.tier,
+      grade: card.grade,
+      condition: getPlayCondition(card).code,
+      playHistory: card.playHistory || { total: 0, good: 0, bad: 0 },
+      provenance: card.provenance || [],
+      variations: card.variations,
+    },
+    // The agent — source in both formats, hatch picks the right one
+    agent: {
+      name: agent?.name || card.agentName,
+      version: agent?.version || card.version,
+      manifest: agent || {},
+      // .py form (native)
+      python: source ? btoa(unescape(encodeURIComponent(source))) : null,
+      // Lisppy form (s-expression translation)
+      lisppy: source ? btoa(unescape(encodeURIComponent(pyToLisppy(agent, source)))) : null,
+    },
+    // Third Space identity
+    credential,
+    brainstem: _thirdSpaceIdentity?.fingerprint || null,
+    signature: card.mintId + ':' + Date.now().toString(36),
+  };
+}
+
+// Translate a Python agent to a Lisppy s-expression (structural, not literal execution)
+function pyToLisppy(agent, source) {
+  const name = agent?.name || 'unknown';
+  const desc = agent?.description || '';
+  const tags = (agent?.tags || []).join(' ');
+  const env = (agent?.requires_env || []).map(e => `"${e}"`).join(' ');
+  const deps = (agent?.dependencies || []).map(d => `"${d}"`).join(' ');
+  // Generate a Lisppy-compatible agent definition
+  return `;;; agent_card.egg → Lisppy hatched form
+;;; ${name} — ${desc}
+(define-agent "${name}"
+  :version "${agent?.version || '1.0.0'}"
+  :display-name "${agent?.display_name || name}"
+  :description "${desc}"
+  :category "${agent?.category || 'general'}"
+  :tags (list ${tags.split(' ').map(t => `"${t}"`).join(' ')})
+  :requires-env (list ${env})
+  :dependencies (list ${deps})
+  :perform (lambda (kwargs)
+    ;; Hatched from .py source — ${(source || '').split('\n').length} lines
+    ;; In Lisppy, invoke via: (perform "${name}" (list (cons "task" "your task")))
+    (display "Agent ${agent?.display_name || name} invoked via Lisppy")
+    (display (assoc "task" kwargs))
+    ;; Full Python source available via (agent-source "${name}")
+    "performed"))
+`;
+}
+
+// Hatch an egg into the appropriate runtime format
+function hatchEgg(egg, targetRuntime) {
+  if (!egg || egg.format !== 'agent_card.egg/1.0') return null;
+
+  // Check cube integrity — heavily damaged eggs may refuse to hatch
+  if (egg.cube.integrity < 5) {
+    return { hatched: false, reason: 'Cube integrity too low — card is effectively destroyed', integrity: egg.cube.integrity };
+  }
+
+  const runtime = targetRuntime || detectRuntime();
+  egg.hatched = true;
+  egg.hatchedAt = new Date().toISOString();
+  egg.hatchedTo = runtime;
+
+  if (runtime === 'python' || runtime === 'brainstem') {
+    // Hatch into .py
+    const code = egg.agent.python ? decodeURIComponent(escape(atob(egg.agent.python))) : null;
+    return { hatched: true, runtime: 'python', code, manifest: egg.agent.manifest, cube: egg.cube };
+  } else if (runtime === 'lisppy') {
+    // Hatch into Lisppy s-expression
+    const code = egg.agent.lisppy ? decodeURIComponent(escape(atob(egg.agent.lisppy))) : null;
+    return { hatched: true, runtime: 'lisppy', code, manifest: egg.agent.manifest, cube: egg.cube };
+  } else {
+    // Inspect only
+    return { hatched: true, runtime: 'inspect', manifest: egg.agent.manifest, cube: egg.cube };
+  }
+}
+
+// Detect which runtime is available
+function detectRuntime() {
+  if (_brainstemConn?.connected) return 'brainstem';
+  if (_lisppyRuntime?.loaded) return 'lisppy';
+  return 'inspect';
+}
+
+// Export an egg file (.egg)
+function exportEgg(card) {
+  const egg = buildEgg(card);
+  const json = JSON.stringify(egg, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${(card.displayName || card.agentName).replace(/[^a-z0-9]/gi, '_')}.egg`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  const integrity = cubeIntegrity(card);
+  showToast(`Exported ${card.displayName} as .egg (${integrity}% integrity)`, 'success');
+}
+
+// Import an egg file
+async function importEgg(file) {
+  try {
+    const text = await file.text();
+    const egg = JSON.parse(text);
+    if (!egg.format?.startsWith('agent_card.egg')) throw new Error('Not a valid .egg file');
+
+    // Verify credential if present (Rule 2)
+    let trustInfo = { valid: false, trust: TRUST_LEVELS.ANONYMOUS, trustLabel: 'Anonymous' };
+    if (egg.credential) {
+      trustInfo = await verifyCardCredential(egg.credential);
+    }
+
+    // Hatch into the best available runtime
+    const hatched = hatchEgg(egg);
+    if (!hatched?.hatched) {
+      showToast(`Egg cannot hatch: ${hatched?.reason || 'unknown error'}`, 'error');
+      return null;
+    }
+
+    // Reconstruct cube from hex
+    const cube = hexToCube(egg.cube?.data);
+
+    // Inject as streamed agent if code available
+    if (hatched.code && hatched.manifest?.name) {
+      const guid = generateGUID();
+      _streamedAgents.set(hatched.manifest.name, {
+        code: hatched.code,
+        manifest: hatched.manifest,
+        loadedAt: new Date().toISOString(),
+        guid,
+        url: `hatched:${hatched.runtime}`,
+        sizeBytes: new Blob([hatched.code]).size,
+        _trustLevel: trustInfo.trust,
+        _credential: egg.credential,
+        _hatchedFrom: 'egg',
+        _cubeIntegrity: egg.cube?.integrity,
+      });
+
+      // Hot-inject into allAgents
+      const existing = allAgents.findIndex(a => a.name === hatched.manifest.name);
+      const agentObj = { ...hatched.manifest, _source: 'hatched', _streamed: true, _guid: guid };
+      if (existing >= 0) allAgents[existing] = agentObj;
+      else allAgents.push(agentObj);
+    }
+
+    // Save as minted card if card data present
+    if (egg.card?.mintId) {
+      const card = {
+        ...egg.card,
+        cube,
+        _imported: true,
+        _importedAt: new Date().toISOString(),
+        _hatchedTo: hatched.runtime,
+        _thirdspace: trustInfo.valid ? { verified: true, trust: trustInfo.trust, trustLabel: trustInfo.trustLabel } : null,
+      };
+      if (!card.provenance) card.provenance = [];
+      card.provenance.push({
+        action: 'egg-hatch',
+        runtime: hatched.runtime,
+        timestamp: new Date().toISOString(),
+        cubeIntegrity: egg.cube?.integrity,
+        brainstemFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+      });
+      await saveMinted(card);
+    }
+
+    renderStreamedAgents();
+    renderAgents();
+    if (document.getElementById('cards-grid')) renderCards();
+
+    const badge = trustInfo.valid ? `[${trustInfo.trustLabel}]` : '[Unverified]';
+    showToast(`Hatched ${egg.card?.displayName || 'agent'} → ${hatched.runtime} (${egg.cube?.integrity}% integrity) ${badge}`, 'success');
+    return hatched;
+  } catch (err) {
+    showToast(`Egg import failed: ${err.message}`, 'error');
+    return null;
+  }
+}
+
+// ── Confidence Score — inverse risk, the card's marketplace value ──
+// High confidence = low burn rate = agent does its job = card holds value.
+// This is what you sort by to find the best agent for a task.
+// Confidence = (win rate × cube integrity × trust weight) / risk factor
+function confidenceScore(card) {
+  const ph = card.playHistory || { total: 0, good: 0, bad: 0 };
+  const integrity = cubeIntegrity(card) / 100; // 0–1
+  const winRate = ph.total > 0 ? ph.good / ph.total : 1; // unplayed = full confidence
+  const failRate = ph.total > 0 ? ph.bad / ph.total : 0;
+
+  // Risk factor: increases with failures, decreases with plays (more data = more certain)
+  const dataWeight = Math.min(1, ph.total / 20); // ramps up to 1 over 20 plays
+  const risk = failRate * dataWeight; // risk is only meaningful with data
+
+  // Trust multiplier: local/trusted agents get a boost
+  const trustLevel = card._thirdspace?.trust || 0;
+  const trustWeight = 1 + (trustLevel * 0.05); // 0–4 → 1.0–1.2
+
+  // Confidence: inverse of risk, weighted by integrity and trust
+  const confidence = ((1 - risk) * integrity * trustWeight) * 100;
+
+  return Math.max(0, Math.min(100, Math.round(confidence * 10) / 10));
+}
+
+// Aggregate confidence across all copies of an agent (global marketplace value)
+async function getAgentConfidence(agentName) {
+  const all = await getAllMinted();
+  const copies = all.filter(c => c.agentName === agentName);
+  if (!copies.length) return { confidence: 100, copies: 0, totalPlays: 0, burnRate: 0 };
+
+  let totalConf = 0;
+  let totalPlays = 0;
+  let totalBurned = 0;
+
+  for (const card of copies) {
+    totalConf += confidenceScore(card);
+    totalPlays += (card.playHistory?.total || 0);
+    const alive = card.cube ? cubeBlocksAlive(typeof card.cube === 'string' ? hexToCube(card.cube) : card.cube) : CUBE_TOTAL;
+    totalBurned += (CUBE_TOTAL - alive);
+  }
+
+  const avgConfidence = totalConf / copies.length;
+  const burnRate = totalPlays > 0 ? (totalBurned / totalPlays).toFixed(2) : 0;
+
+  return {
+    confidence: Math.round(avgConfidence * 10) / 10,
+    copies: copies.length,
+    totalPlays,
+    burnRate: parseFloat(burnRate),
+  };
+}
+
+// ── Edge Dispatch — sync card stats back to repo via GitHub Issues API ──
+// Opt-in only. When enabled, periodically dispatches aggregate confidence
+// and burn data as a GitHub Issue, which CI processes to update global stats.
+// Users can opt out at any time. No PII is sent — only agent stats.
+
+let _edgeSyncEnabled = localStorage.getItem('rar_edge_sync') === 'true';
+
+function toggleEdgeSync() {
+  _edgeSyncEnabled = !_edgeSyncEnabled;
+  localStorage.setItem('rar_edge_sync', _edgeSyncEnabled);
+  showToast(_edgeSyncEnabled ? 'Edge sync enabled — card stats will sync to the registry' : 'Edge sync disabled — your card stats stay local', _edgeSyncEnabled ? 'success' : 'info');
+}
+
+// ── QR Share — opt-in public shareability ──
+// When enabled, cards get a QR code on the back that points to the raw agent.py
+// on GitHub. The QR data is salted with the brainstem fingerprint so each code
+// is unique per identity. GPS pin can be embedded for spatial tasks.
+let _qrShareEnabled = localStorage.getItem('rar_qr_share') === 'true';
+
+function toggleQRShare() {
+  _qrShareEnabled = !_qrShareEnabled;
+  localStorage.setItem('rar_qr_share', _qrShareEnabled);
+  showToast(_qrShareEnabled ? 'QR sharing enabled — cards get scannable codes' : 'QR sharing disabled — cards are private', _qrShareEnabled ? 'success' : 'info');
+  renderCards();
+}
+
+// ── GPS Pin — spatial context for cards ──
+// Opt-in: user drops a pin that gets salted into the card/QR data.
+// When the card is flicked, the agent gets the location as context.
+// "Go to the closest pizza place around HERE and order a pepperoni pizza"
+let _gpsPin = JSON.parse(localStorage.getItem('rar_gps_pin') || 'null'); // { lat, lng, label }
+let _gpsFlickEnabled = localStorage.getItem('rar_gps_flick') === 'true';
+
+function toggleGPSFlick() {
+  _gpsFlickEnabled = !_gpsFlickEnabled;
+  localStorage.setItem('rar_gps_flick', _gpsFlickEnabled);
+  if (_gpsFlickEnabled && !_gpsPin) {
+    // Request location and set the pin
+    dropGPSPin();
+  }
+  showToast(_gpsFlickEnabled ? 'GPS enabled — flicks include your location' : 'GPS disabled — no location data sent', _gpsFlickEnabled ? 'success' : 'info');
+}
+
+function dropGPSPin(callback) {
+  if (!navigator.geolocation) {
+    showToast('Geolocation not available', 'error');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      _gpsPin = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+        accuracy: pos.coords.accuracy,
+        label: 'Current Location',
+        droppedAt: new Date().toISOString(),
+      };
+      localStorage.setItem('rar_gps_pin', JSON.stringify(_gpsPin));
+      showToast(`Pin dropped: ${_gpsPin.lat.toFixed(4)}, ${_gpsPin.lng.toFixed(4)}`, 'success');
+      if (callback) callback(_gpsPin);
+    },
+    (err) => {
+      showToast(`Location error: ${err.message}`, 'error');
+      _gpsFlickEnabled = false;
+      localStorage.setItem('rar_gps_flick', 'false');
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+function clearGPSPin() {
+  _gpsPin = null;
+  localStorage.removeItem('rar_gps_pin');
+  showToast('GPS pin cleared', 'info');
+}
+
+// ═══════════════════════════════════════════════════════
+// Hail — Uber-like agent dispatch
+// ═══════════════════════════════════════════════════════
+// Search by task → pick an agent → select service → dispatch to device.
+// Service tiers:
+//   agent.py  — download the file (default, always available)
+//   Stream    — hot-load into browser memory
+//   Flick     — stream + auto-execute with your task + GPS
+let _hailSelected = null;
+let _hailService = 'download'; // 'download' | 'stream' | 'flick'
+
+function openHail() {
+  // Close existing
+  document.getElementById('hail-overlay')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'hail-overlay';
+  overlay.id = 'hail-overlay';
+  overlay.innerHTML = `
+    <button class="hail-close" onclick="closeHail()">&times;</button>
+    <div class="hail-card">
+      <div class="hail-search">
+        <input type="text" id="hail-input" placeholder="What do you need done?" oninput="hailSearch(this.value)" autofocus>
+      </div>
+      <div class="hail-results" id="hail-results">
+        <div style="text-align:center;padding:24px;color:var(--text-muted);font-size:.88rem">
+          Describe your task — we'll find the right agent.
+          ${_gpsPin ? `<div style="margin-top:8px;font-size:.72rem;color:var(--green)">&#9679; Location: ${_gpsPin.lat.toFixed(4)}, ${_gpsPin.lng.toFixed(4)}</div>` : ''}
+        </div>
+      </div>
+      <div class="hail-services" id="hail-services">
+        <button class="hail-svc active" onclick="setHailService('download',this)">agent.py</button>
+        ${_uiTier >= 2 ? `<button class="hail-svc" onclick="setHailService('stream',this)">Stream</button>
+        <button class="hail-svc" onclick="setHailService('flick',this)">Flick</button>` : ''}
+      </div>
+      <div class="hail-dispatch">
+        <button class="hail-go" id="hail-go" onclick="dispatchHail()" disabled>Select an agent</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  // Focus the input
+  setTimeout(() => document.getElementById('hail-input')?.focus(), 100);
+}
+
+function closeHail() {
+  document.getElementById('hail-overlay')?.remove();
+  _hailSelected = null;
+}
+
+function setHailService(svc, btn) {
+  _hailService = svc;
+  document.querySelectorAll('.hail-svc').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  updateHailButton();
+}
+
+function updateHailButton() {
+  const btn = document.getElementById('hail-go');
+  if (!btn) return;
+  if (!_hailSelected) {
+    btn.disabled = true;
+    btn.textContent = 'Select an agent';
+    return;
+  }
+  btn.disabled = false;
+  const a = allAgents.find(x => x.name === _hailSelected);
+  const name = a?.display_name || _hailSelected;
+  const labels = { download: 'Download', stream: 'Stream', flick: 'Flick' };
+  btn.textContent = `${labels[_hailService]} ${name}`;
+}
+
+function hailSearch(query) {
+  const q = query.toLowerCase().trim();
+  const container = document.getElementById('hail-results');
+  if (!container) return;
+
+  if (!q) {
+    container.innerHTML = `<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:.88rem">
+      Describe your task — we'll find the right agent.
+      ${_gpsPin ? `<div style="margin-top:8px;font-size:.72rem;color:var(--green)">&#9679; Location: ${_gpsPin.lat.toFixed(4)}, ${_gpsPin.lng.toFixed(4)}</div>` : ''}
+    </div>`;
+    return;
+  }
+
+  // Score agents by task relevance
+  let results = allAgents.map(a => {
+    let score = 0;
+    const name = (a.display_name || '').toLowerCase();
+    const desc = (a.description || '').toLowerCase();
+    const tags = (a.tags || []).join(' ').toLowerCase();
+    const cat = (a.category || '').toLowerCase();
+
+    // Direct name/description match
+    if (name.includes(q)) score += 10;
+    if (desc.includes(q)) score += 5;
+    if (tags.includes(q)) score += 3;
+    if (cat.includes(q)) score += 2;
+
+    // Word-level matching for multi-word queries
+    const words = q.split(/\s+/);
+    for (const w of words) {
+      if (w.length < 3) continue;
+      if (name.includes(w)) score += 3;
+      if (desc.includes(w)) score += 2;
+      if (tags.includes(w)) score += 1;
+    }
+
+    // Intent boost
+    score += intentWeight(a) * 2;
+
+    return { ...a, _hailScore: score };
+  }).filter(a => a._hailScore > 0)
+    .sort((a, b) => b._hailScore - a._hailScore)
+    .slice(0, 8);
+
+  if (!results.length) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:.88rem">No agents found for that task.</div>';
+    return;
+  }
+
+  const cc = cat => getCatColor(cat);
+  container.innerHTML = results.map(a => {
+    const c = cc(a.category);
+    const eta = Math.max(1, Math.round((a._size_kb || 10) / 50)); // ~50KB/s estimate
+    const selected = _hailSelected === a.name;
+    return `
+      <div class="hail-result ${selected ? 'selected' : ''}" onclick="selectHailAgent('${esc(a.name)}')">
+        <div class="hail-avatar" style="background:${c.bg};color:${c.primary}">
+          ${(a.category || 'general').slice(0, 2).toUpperCase()}
+        </div>
+        <div class="hail-info">
+          <div class="hail-name">${esc(a.display_name)}</div>
+          <div class="hail-desc">${esc(a.description || '')}</div>
+          <div class="hail-meta">
+            <span>${a._size_kb || '?'} KB</span>
+            <span>${a.category?.replace(/_/g, ' ')}</span>
+            <span>v${a.version}</span>
+          </div>
+        </div>
+        <div class="hail-eta">${eta}s</div>
+      </div>`;
+  }).join('');
+}
+
+function selectHailAgent(name) {
+  _hailSelected = name;
+  // Re-render to show selection
+  const q = document.getElementById('hail-input')?.value || '';
+  hailSearch(q);
+  updateHailButton();
+}
+
+async function dispatchHail() {
+  if (!_hailSelected) return;
+  const a = allAgents.find(x => x.name === _hailSelected);
+  if (!a) return;
+
+  const task = document.getElementById('hail-input')?.value || '';
+  const name = a.display_name || _hailSelected;
+
+  if (_hailService === 'download') {
+    // Simple download
+    const rawUrl = a._file ? `${RAW}/${a._file}` : '#';
+    if (rawUrl !== '#') {
+      const link = document.createElement('a');
+      link.href = rawUrl; link.download = 'agent.py';
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+    showToast(`Downloaded ${name}`, 'success');
+    closeHail();
+    return;
+  }
+
+  // Show arriving animation
+  const card = document.querySelector('.hail-card');
+  if (card) {
+    card.innerHTML = `
+      <div class="hail-arriving">
+        <div class="spinner"></div>
+        <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">${esc(name)}</div>
+        <div style="color:var(--text-muted);font-size:.88rem">
+          ${_hailService === 'flick' ? 'Arriving with task...' : 'Streaming to your device...'}
+        </div>
+        ${_gpsPin && _hailService === 'flick' ? `<div style="color:var(--green);font-size:.72rem;margin-top:8px">&#9679; ${_gpsPin.lat.toFixed(4)}, ${_gpsPin.lng.toFixed(4)}</div>` : ''}
+      </div>`;
+  }
+
+  // Stream the agent
+  const rawUrl = a._file ? `${RAW}/${a._file}` : null;
+  if (rawUrl) {
+    try {
+      const resp = await fetch(rawUrl);
+      if (!resp.ok) throw new Error('fetch failed');
+      const code = await resp.text();
+      const manifest = parseManifestFromSource(code) || a;
+      const guid = generateGUID();
+      _streamedAgents.set(a.name, {
+        code, manifest, loadedAt: new Date().toISOString(), guid,
+        url: rawUrl, sizeBytes: new Blob([code]).size,
+        _trustLevel: TRUST_LEVELS.LOCAL,
+      });
+      renderStreamedAgents();
+      renderSteerPanel();
+
+      if (_hailService === 'flick' && task) {
+        // Auto-flick with task + GPS
+        const entry = _streamedAgents.get(a.name);
+        if (entry) {
+          const inputEl = document.getElementById(`flick-task-${guid.slice(0,8)}`);
+          if (inputEl) inputEl.value = task;
+          // Small delay to let UI render, then flick
+          setTimeout(() => flickTo(a.name, _brainstemConn?.connected ? 'brainstem' : 'browser'), 500);
+        }
+      }
+
+      showToast(`${name} arrived${_hailService === 'flick' && task ? ' — executing task' : ''}`, 'success');
+    } catch (err) {
+      showToast(`Failed to stream ${name}: ${err.message}`, 'error');
+    }
+  }
+
+  setTimeout(closeHail, 1200);
+  // Switch to stream tab if not already there
+  if (_hailService !== 'download') switchTab('stream');
+}
+
+async function dispatchEdgeStats() {
+  if (!_edgeSyncEnabled) return;
+  if (!ghUser?.login) return; // need auth for Issues API
+
+  const all = await getAllMinted();
+  if (!all.length) return;
+
+  // Aggregate per-agent stats (no PII, no identifying data)
+  const stats = {};
+  for (const card of all) {
+    if (!stats[card.agentName]) {
+      stats[card.agentName] = { plays: 0, good: 0, bad: 0, copies: 0, totalBlocks: 0 };
+    }
+    const s = stats[card.agentName];
+    const ph = card.playHistory || { total: 0, good: 0, bad: 0 };
+    s.plays += ph.total;
+    s.good += ph.good;
+    s.bad += ph.bad;
+    s.copies++;
+    const cube = card.cube ? (typeof card.cube === 'string' ? hexToCube(card.cube) : card.cube) : initCube();
+    s.totalBlocks += cubeBlocksAlive(cube);
+  }
+
+  // Only dispatch if there's actual play data
+  const withPlays = Object.entries(stats).filter(([_, s]) => s.plays > 0);
+  if (!withPlays.length) return;
+
+  const payload = {
+    action: 'edge_dispatch',
+    payload: {
+      timestamp: new Date().toISOString(),
+      brainstem: _thirdSpaceIdentity?.fingerprint?.slice(0, 16) || 'anonymous',
+      agents: Object.fromEntries(withPlays.map(([name, s]) => [name, {
+        plays: s.plays,
+        winRate: s.plays > 0 ? Math.round((s.good / s.plays) * 100) : 100,
+        burnRate: s.plays > 0 ? parseFloat(((s.copies * CUBE_TOTAL - s.totalBlocks) / s.plays).toFixed(2)) : 0,
+        copies: s.copies,
+        cubeIntegrity: Math.round((s.totalBlocks / (s.copies * CUBE_TOTAL)) * 100),
+      }])),
+    },
+  };
+
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${ghUser.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: `[edge-dispatch] Card stats from ${payload.payload.brainstem}`,
+        body: '```json\n' + JSON.stringify(payload, null, 2) + '\n```',
+        labels: ['edge-dispatch'],
+      }),
+    });
+    if (resp.ok) {
+      localStorage.setItem('rar_last_dispatch', new Date().toISOString());
+      console.log('Edge dispatch sent');
+    }
+  } catch {}
+}
+
+// Auto-dispatch every 24 hours if opted in
+function scheduleEdgeSync() {
+  if (!_edgeSyncEnabled) return;
+  const last = localStorage.getItem('rar_last_dispatch');
+  const dayAgo = Date.now() - 24 * 60 * 60 * 1000;
+  if (!last || new Date(last).getTime() < dayAgo) {
+    dispatchEdgeStats();
+  }
 }
 
 // ── Population Report ──
@@ -6097,10 +7197,10 @@ ${card.isFirstEdition ? '<tr><td>Edition</td><td><strong style="color:#ffd700">1
 <button class="primary" onclick="window.print()">Print Card</button>
 </div>
 
-<script>
+<scr` + `ipt>
 // Card data for import
 window.CARD_DATA = ${cardData};
-</script>
+</scr` + `ipt>
 </body></html>`;
 
   const blob = new Blob([html], { type: 'text/html' });
@@ -6919,15 +8019,16 @@ function exportCardPNG(name) {
     cy += 10;
   }
 
-  // Ability: Dependencies
-  if (depCount) {
+  // Ability: Dependencies (skip @rapp/basic-agent — universal)
+  const canvasDeps = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
+  if (canvasDeps.length) {
     ctx.fillStyle = '#e8dcc8';
     ctx.font = 'bold 14px -apple-system, sans-serif';
     ctx.fillText('Depends', 40, cy);
     cy += 6;
     ctx.fillStyle = '#c8b89a';
     ctx.font = '12px monospace';
-    cy = _wrapText(ctx, (a.dependencies || []).join(', '), 40, cy, W - 88, 16);
+    cy = _wrapText(ctx, canvasDeps.join(', '), 40, cy, W - 88, 16);
     cy += 10;
   }
 
@@ -7032,8 +8133,11 @@ function printCard(name) {
   const cc = getCatColor(a.category);
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  const agentFile = a._file || `agents/${a.name}.py`;
+  const printRawUrl = `https://raw.githubusercontent.com/${sourceRepo}/main/${agentFile}`;
+  const printSalt = _thirdSpaceIdentity?.fingerprint?.slice(0, 8) || '';
+  const printQrData = printSalt ? `${printRawUrl}#${printSalt}` : printRawUrl;
+  const qrUrl = _qrShareEnabled ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(printQrData)}` : '';
   const w = window.open('', '_blank', 'width=400,height=600');
   w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Agent Card</title>
   <style>
@@ -7074,9 +8178,9 @@ function printCard(name) {
     </div>
     <div class="back">
       <div class="back-logo">RAR</div>
-      <div class="qr"><img src="${qrUrl}"></div>
+      ${qrUrl ? `<div class="qr"><img src="${qrUrl}"></div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
       <div class="back-name">${esc(a.display_name)}</div>
-      <div class="back-hint">Scan to load agent</div>
+      <div class="back-hint">${qrUrl ? 'Scan → raw agent.py' : ''}</div>
     </div>
   </div>
   </body></html>`);
@@ -7483,8 +8587,10 @@ function renderPresentation() {
   const cc = getCatColor(a.category);
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-  const storeUrl = `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(storeUrl)}`;
+  const presRawUrl = a._file ? `https://raw.githubusercontent.com/${REPO}/main/${a._file}` : `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
+  const presSalt = _thirdSpaceIdentity?.fingerprint?.slice(0, 8) || '';
+  const presQrData = presSalt ? `${presRawUrl}#${presSalt}` : presRawUrl;
+  const qrUrl = _qrShareEnabled ? `https://api.qrserver.com/v1/create-qr-code/?size=100x100&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(presQrData)}` : '';
   const publisher = a.name.split('/')[0] || '';
   const tags = (a.tags || []).slice(0, 5);
   const desc = (a.description || '').slice(0, 200);
@@ -7494,7 +8600,8 @@ function renderPresentation() {
   const abilities = [];
   if (a.description) abilities.push({ kw: 'Perform', text: desc });
   if ((a.requires_env || []).length) abilities.push({ kw: 'Requires', text: a.requires_env.join(', ') });
-  if ((a.dependencies || []).length) abilities.push({ kw: 'Depends', text: a.dependencies.join(', ') });
+  const nonTrivialDeps2 = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
+  if (nonTrivialDeps2.length) abilities.push({ kw: 'Depends', text: nonTrivialDeps2.join(', ') });
 
   // Choose slide layout based on cardMode
   let slideContent;
@@ -7515,7 +8622,7 @@ function renderPresentation() {
         </div>
         <div class="pres-biz-right">
           ${typeof genCreativeArt === 'function' ? `<div style="width:80%;opacity:.3">${genCreativeArt(a)}</div>` : ''}
-          <div class="pres-biz-qr"><img src="${qrUrl}" alt="QR" loading="lazy"></div>
+          ${qrUrl ? `<div class="pres-biz-qr"><img src="${qrUrl}" alt="QR" loading="lazy"></div>` : ''}
         </div>
       </div>`;
   } else {
@@ -7597,7 +8704,16 @@ function closePresentation() {
 // Handle hash routing for cards and decks
 function handleCardHash() {
   const hash = location.hash;
-  if (hash.startsWith('#card/')) {
+  if (hash.startsWith('#agent/')) {
+    const name = decodeURIComponent(hash.slice(7));
+    switchTab('browse');
+    const check = setInterval(() => {
+      if (allAgents.length) {
+        clearInterval(check);
+        openAgent(name);
+      }
+    }, 200);
+  } else if (hash.startsWith('#card/')) {
     const name = decodeURIComponent(hash.slice(6));
     switchTab('browse');
     // Wait for agents to load
@@ -8008,8 +9124,8 @@ function renderSteerPanel() {
     const isInDeck = deck.has(name);
     const safeName = esc(name).replace(/'/g, "\\'");
     const flicked = s._flickTarget || null;
-    const flickLabel = flicked === 'brainstem' ? 'BRAINSTEM' : flicked === 'lisppy' ? 'LISPPY' : flicked ? 'ACTIVE' : null;
-    const flickColor = flicked === 'brainstem' ? '#f85149' : flicked === 'lisppy' ? 'var(--green)' : 'var(--accent)';
+    const flickLabel = flicked === 'brainstem' ? 'BRAINSTEM' : flicked === 'lisppy' ? 'LISPPY' : flicked === 'airdrop' ? 'AIRDROP' : flicked ? 'ACTIVE' : null;
+    const flickColor = flicked === 'brainstem' ? '#f85149' : flicked === 'lisppy' ? 'var(--green)' : flicked === 'airdrop' ? '#8884d8' : 'var(--accent)';
     return `
     <div class="steer-slot ${isInDeck ? 'live' : ''} ${flicked ? 'live' : ''}">
       <div style="display:flex;align-items:center;justify-content:space-between">
@@ -8024,6 +9140,8 @@ function renderSteerPanel() {
       <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
         ${hasBrainstem ? `<button onclick="flickTo('${safeName}','brainstem')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.08);color:#f85149;font-size:.58rem;cursor:pointer;font-weight:600">Flick &rarr; Brainstem</button>` : ''}
         ${hasLisppy ? `<button onclick="flickTo('${safeName}','lisppy')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(63,185,80,.3);background:rgba(63,185,80,.08);color:var(--green);font-size:.58rem;cursor:pointer;font-weight:600">Flick &rarr; Lisppy</button>` : ''}
+        <button onclick="flickTo('${safeName}','airdrop')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(136,132,216,.3);background:rgba(136,132,216,.08);color:#8884d8;font-size:.58rem;cursor:pointer;font-weight:600">Airdrop</button>
+        <button onclick="airdropPy('${safeName}')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(136,132,216,.2);background:none;color:#8884d8;font-size:.58rem;cursor:pointer">agent.py</button>
         <button onclick="flickTo('${safeName}','browser')" style="padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.58rem;cursor:pointer">Inspect</button>
         <button onclick="ejectAgent('${safeName}')" style="padding:2px 8px;border-radius:4px;border:none;background:none;color:var(--text-muted);font-size:.55rem;cursor:pointer">&times; Eject</button>
       </div>
@@ -8051,9 +9169,17 @@ async function flickTo(name, target) {
   entry._flickTask = task;
   entry._flickedAt = new Date().toISOString();
 
+  // ── GPS: attach location if enabled — gives the agent spatial context ──
+  if (_gpsFlickEnabled && _gpsPin) {
+    entry._gpsPin = _gpsPin;
+  } else if (_gpsFlickEnabled && !_gpsPin) {
+    // Get fresh location for this flick
+    await new Promise(resolve => dropGPSPin(() => { entry._gpsPin = _gpsPin; resolve(); }));
+  }
+
   // ── Third Space: sign the flick (Rule 4: Sign What You Send) ──
   const credential = await createCardCredential(name);
-  const flickSig = await signPayload({ agent: name, guid: entry.guid, task, target, timestamp: entry._flickedAt });
+  const flickSig = await signPayload({ agent: name, guid: entry.guid, task, target, timestamp: entry._flickedAt, gps: entry._gpsPin || null });
   entry._credential = credential;
   entry._flickSignature = flickSig;
 
@@ -8068,15 +9194,17 @@ async function flickTo(name, target) {
     const flickPayload = {
       name: entry.manifest.name, guid: entry.guid, code: entry.code, task,
       credential, signature: flickSig,
+      gps: entry._gpsPin || null,
     };
     const payload = _e2eKey ? await encryptPayload(flickPayload) : flickPayload;
     await pushToBrainstem(name);
     if (task) {
-      await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey, credential, signature: flickSig });
+      await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey, credential, signature: flickSig, gps: entry._gpsPin || null });
     }
-    showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''} (signed)`, 'success');
-    // Show play rating UI after flick (user rates the work, wears the card)
-    setTimeout(() => showFlickRating(name), 2000);
+    const gpsLabel = entry._gpsPin ? ` @ ${entry._gpsPin.lat.toFixed(3)},${entry._gpsPin.lng.toFixed(3)}` : '';
+    showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''}${gpsLabel} (signed)`, 'success');
+    // Show play rating UI after flick (frontier feature — user rates the work, wears the card)
+    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
   } else if (target === 'lisppy') {
     if (!_lisppyRuntime?.loaded) {
       showToast('Load Lisppy runtime first', 'error');
@@ -8093,13 +9221,203 @@ async function flickTo(name, target) {
       output.scrollTop = output.scrollHeight;
     }
     showToast(`Flicked ${entry.manifest.display_name} → Lisppy REPL${task ? ' with task' : ''}`, 'success');
-    setTimeout(() => showFlickRating(name), 2000);
+    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
+  } else if (target === 'airdrop') {
+    // Airdrop — share the signed card with someone else
+    await airdropCard(name, entry, task);
+    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
   } else {
     // Browser — just inspect
     openAgent(name);
     entry._flickTarget = null;
   }
   renderSteerPanel();
+}
+
+// ═══════════════════════════════════════════════════════
+// Airdrop — Share a signed card or deck with someone else
+// ═══════════════════════════════════════════════════════
+async function airdropCard(name, entry, task) {
+  // Build the .rad.eggs payload from a minted card, or a live card if not minted
+  const allCards = await getAllMinted();
+  const minted = allCards.filter(c => c.agentName === name).sort((a, b) => (b.mintedAt || 0) - (a.mintedAt || 0))[0];
+
+  let payload;
+  if (minted) {
+    payload = buildRADPayload(minted);
+  } else {
+    // No minted card — build a lightweight airdrop payload from streamed agent
+    const agent = allAgents.find(a => a.name === name);
+    const credential = await createCardCredential(name);
+    payload = {
+      format: 'rad.eggs/1.0',
+      type: 'airdrop',
+      airdropped: new Date().toISOString(),
+      card: {
+        agentName: name,
+        displayName: agent?.display_name || entry?.manifest?.display_name || name,
+        tier: agent?.quality_tier || 'community',
+      },
+      agent: {
+        name: agent?.name || name,
+        version: agent?.version || '1.0.0',
+        category: agent?.category || '',
+        tags: agent?.tags || [],
+        manifest: agent || entry?.manifest || {},
+      },
+      source: entry?.code ? btoa(unescape(encodeURIComponent(entry.code))) : null,
+      thirdspace: credential,
+      brainstem_fingerprint: _thirdSpaceIdentity?.fingerprint || null,
+      task: task || null,
+    };
+  }
+
+  // Add airdrop provenance
+  if (!payload.provenance) payload.provenance = [];
+  if (Array.isArray(payload.card?.provenance)) {
+    payload.card.provenance.push({
+      action: 'airdrop',
+      timestamp: new Date().toISOString(),
+      senderFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+      task: task || null,
+    });
+  }
+
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const fileName = `${(payload.card?.displayName || name).replace(/[^a-z0-9]/gi, '_')}.rad.eggs`;
+
+  // Try Web Share API first (mobile + modern browsers), fall back to download + copy
+  if (navigator.share && navigator.canShare?.({ files: [new File([blob], fileName)] })) {
+    try {
+      await navigator.share({
+        title: `${payload.card?.displayName || name} — Agent Card Airdrop`,
+        text: task ? `Agent card with task: ${task}` : 'Signed agent card from the Third Space',
+        files: [new File([blob], fileName, { type: 'application/json' })],
+      });
+      showToast(`Airdropped ${payload.card?.displayName || name} (signed)`, 'success');
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') { showToast('Airdrop cancelled', 'info'); return; }
+    }
+  }
+
+  // Fallback: download the file + copy a share URL
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Airdrop: ${fileName} downloaded — send it to someone!`, 'success');
+}
+
+// Airdrop just the .py file — lightweight share of the raw agent
+async function airdropPy(name) {
+  const entry = _streamedAgents.get(name);
+  const agent = allAgents.find(a => a.name === name);
+  // Try streamed source first, then fetch from raw URL
+  let source = entry?.code || getStreamedSource(name);
+  if (!source && agent?._file) {
+    try {
+      const resp = await fetch(`${RAW}/${agent._file}`);
+      if (resp.ok) source = await resp.text();
+    } catch {}
+  }
+  if (!source) {
+    showToast('No source code available for this agent', 'error');
+    return;
+  }
+
+  const fileName = 'agent.py';
+  const blob = new Blob([source], { type: 'text/x-python' });
+
+  // Web Share API for file sharing (mobile/modern browsers)
+  if (navigator.share && navigator.canShare?.({ files: [new File([blob], fileName)] })) {
+    try {
+      await navigator.share({
+        title: `${agent?.display_name || name}`,
+        text: `${agent?.description || 'RAPP agent'} — single-file agent`,
+        files: [new File([blob], fileName, { type: 'text/x-python' })],
+      });
+      showToast(`Shared ${fileName}`, 'success');
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') { showToast('Share cancelled', 'info'); return; }
+    }
+  }
+
+  // Fallback: download
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Downloaded ${fileName} — send it to someone!`, 'success');
+}
+
+// Airdrop an entire deck
+async function airdropDeck() {
+  if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
+
+  const allCards = await getAllMinted();
+  const deckCards = [];
+  for (const agentName of deck) {
+    const card = allCards.filter(c => c.agentName === agentName).sort((a, b) => (b.mintedAt || 0) - (a.mintedAt || 0))[0];
+    if (card) deckCards.push(buildRADPayload(card));
+    else {
+      const agent = allAgents.find(a => a.name === agentName);
+      deckCards.push({
+        format: 'rad.eggs/1.0',
+        type: 'airdrop',
+        card: { agentName, displayName: agent?.display_name || agentName, tier: agent?.quality_tier || 'community' },
+        agent: { name: agent?.name || agentName, version: agent?.version || '1.0.0', manifest: agent || {} },
+      });
+    }
+  }
+
+  const deckSig = await signPayload({ deck: currentDeckName, agents: [...deck], count: deck.size, timestamp: new Date().toISOString() });
+  const deckPayload = {
+    format: 'rad.deck/1.0',
+    name: currentDeckName,
+    count: deckCards.length,
+    airdropped: new Date().toISOString(),
+    cards: deckCards,
+    thirdspace: { senderFingerprint: _thirdSpaceIdentity?.fingerprint || null, signature: deckSig },
+  };
+
+  const json = JSON.stringify(deckPayload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const fileName = `${currentDeckName.replace(/[^a-z0-9]/gi, '_')}_deck.rad.eggs`;
+
+  if (navigator.share && navigator.canShare?.({ files: [new File([blob], fileName)] })) {
+    try {
+      await navigator.share({
+        title: `${currentDeckName} — Agent Deck Airdrop`,
+        text: `Deck of ${deckCards.length} signed agent cards`,
+        files: [new File([blob], fileName, { type: 'application/json' })],
+      });
+      showToast(`Airdropped deck "${currentDeckName}" (${deckCards.length} cards, signed)`, 'success');
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') { showToast('Airdrop cancelled', 'info'); return; }
+    }
+  }
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Deck airdrop: ${fileName} downloaded — send it to someone!`, 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -8589,9 +9907,146 @@ function copyThirdSpaceId() {
 // ═══════════════════════════════════════════════════════
 let _brainstemConn = null; // { url, connected, lastPing }
 let _commrappConn = null;
+let _ollamaConn = null; // { url, connected, model }
 
 function connectBrainstem() {
   document.getElementById('brainstem-connect').style.display = '';
+}
+
+function connectOllama() {
+  document.getElementById('ollama-connect').style.display = '';
+  // Update command when model changes
+  const sel = document.getElementById('ollama-model');
+  if (sel && !sel._bound) {
+    sel._bound = true;
+    sel.addEventListener('change', () => {
+      const cmd = document.getElementById('ollama-cmd');
+      if (cmd) cmd.textContent = `ollama launch brainstem --model ${sel.value}`;
+    });
+  }
+}
+
+async function doOllamaConnect() {
+  const host = document.getElementById('ollama-host').value.trim().replace(/\/$/, '');
+  const model = document.getElementById('ollama-model').value;
+  const statusEl = document.getElementById('ollama-connect-status');
+  statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Connecting to Ollama at ${host}...</div>`;
+
+  try {
+    // Ollama exposes a REST API — check if it's running
+    const resp = await fetch(`${host}/api/tags`, { mode: 'cors', signal: AbortSignal.timeout(5000) });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json().catch(() => ({ models: [] }));
+    const models = (data.models || []).map(m => m.name || m.model || '');
+    const hasModel = models.some(m => m.startsWith(model.split(':')[0]));
+
+    _ollamaConn = {
+      url: host,
+      connected: true,
+      model,
+      availableModels: models,
+      lastPing: new Date().toISOString(),
+    };
+
+    document.getElementById('ollama-status').textContent = 'Connected';
+    document.getElementById('ollama-status').style.color = 'var(--green)';
+    document.getElementById('ollama-url').textContent = host;
+    document.getElementById('rt-ollama').classList.add('live');
+
+    let modelStatus = '';
+    if (hasModel) {
+      modelStatus = `<div style="margin-top:6px;color:var(--green);font-size:.78rem">&#10003; ${model} is available locally</div>`;
+    } else {
+      modelStatus = `<div style="margin-top:6px;color:var(--orange);font-size:.78rem">&#9888; ${model} not found locally. Pull it:</div>
+        <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+          <code id="ollama-pull-cmd" style="color:var(--accent)">ollama pull ${model}</code>
+          <button class="copy-btn" onclick="copyEl('ollama-pull-cmd')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+        </div>`;
+    }
+
+    statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Ollama running — ${models.length} model${models.length !== 1 ? 's' : ''} available</div>${modelStatus}`;
+
+    if (models.length) {
+      statusEl.innerHTML += `<div style="margin-top:8px;font-size:.72rem;color:var(--text-muted)">Available: ${models.slice(0, 8).join(', ')}${models.length > 8 ? ` +${models.length - 8} more` : ''}</div>`;
+    }
+
+    // If Brainstem is also connected, offer to wire them together
+    if (_brainstemConn?.connected) {
+      statusEl.innerHTML += `<div style="margin-top:8px"><button onclick="wireOllamaToBrainstem()" style="padding:6px 16px;border-radius:6px;border:1px solid var(--green);background:rgba(63,185,80,.08);color:var(--green);font-size:.78rem;cursor:pointer;font-weight:600">Wire Ollama &rarr; Brainstem</button></div>`;
+    }
+
+    showToast(`Ollama connected — ${models.length} models available`, 'success');
+  } catch (err) {
+    _ollamaConn = null;
+    document.getElementById('ollama-status').textContent = 'Not running';
+    document.getElementById('ollama-status').style.color = 'var(--orange)';
+    document.getElementById('rt-ollama').classList.remove('live');
+    statusEl.innerHTML = `
+      <span style="color:var(--orange);font-size:.82rem">No Ollama instance detected at ${host}</span>
+      <div style="margin-top:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <h4 style="font-size:.82rem;font-weight:700;margin-bottom:10px;color:var(--text)">Install Ollama</h4>
+        <div style="font-size:.78rem;color:var(--text-dim);line-height:1.8">
+          <div style="margin-bottom:10px;color:var(--text-muted)">Ollama runs open-weight models locally. One command to install, one command to run.</div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">1</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Install Ollama</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="ol-cmd-1" style="color:var(--accent)">curl -fsSL https://ollama.com/install.sh | sh</code>
+                <button class="copy-btn" onclick="copyEl('ol-cmd-1')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+              <div style="font-size:.65rem;color:var(--text-muted);margin-top:2px">Or download from <strong>ollama.com</strong> for macOS / Windows / Linux.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">2</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Pull Gemma 4</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="ol-cmd-2" style="color:var(--accent)">ollama pull ${model}</code>
+                <button class="copy-btn" onclick="copyEl('ol-cmd-2')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+            <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0">3</span>
+            <div>
+              <div style="font-weight:600;color:var(--text)">Launch Brainstem with local AI</div>
+              <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
+                <code id="ol-cmd-3" style="color:var(--accent)">ollama launch brainstem --model ${model}</code>
+                <button class="copy-btn" onclick="copyEl('ol-cmd-3')" style="font-size:.6rem;padding:2px 6px;margin-left:8px">Copy</button>
+              </div>
+              <div style="font-size:.65rem;color:var(--text-muted);margin-top:2px">Starts the Brainstem runtime backed by local Gemma 4 inference. No API key needed.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+            <span style="background:var(--green);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0">&#10003;</span>
+            <div>
+              <div style="font-weight:600;color:var(--green)">True Local-First</div>
+              <div style="color:var(--text-muted);font-size:.72rem;margin-top:2px;line-height:1.6">
+                No cloud. No API key. No data leaves your machine.<br>
+                &bull; <strong style="color:var(--text)">Gemma 4 E2B</strong> — 7.2 GB, runs on phone/tablet<br>
+                &bull; <strong style="color:var(--text)">Gemma 4 E4B</strong> — 9.6 GB, runs on any laptop<br>
+                &bull; <strong style="color:var(--text)">Gemma 4 26B MoE</strong> — 18 GB, workstation-class, 256K context<br>
+                &bull; <strong style="color:var(--text)">Gemma 4 31B Dense</strong> — 20 GB, frontier local intelligence
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+}
+
+function wireOllamaToBrainstem() {
+  if (!_ollamaConn?.connected || !_brainstemConn?.connected) {
+    showToast('Both Ollama and Brainstem must be connected', 'error');
+    return;
+  }
+  showToast(`Brainstem now routing to Ollama (${_ollamaConn.model}) at ${_ollamaConn.url}`, 'success');
 }
 
 function connectCommunityRAPP() {
@@ -8861,7 +10316,7 @@ async function doBrainstemConnect() {
             <div>
               <div style="font-weight:600;color:var(--text)">Configure your AI provider</div>
               <div style="color:var(--text-muted);font-size:.72rem;margin:2px 0">
-                Set your Azure OpenAI or API key in <code style="background:var(--bg);padding:1px 4px;border-radius:3px">.env</code>. The Brainstem needs this to power agent reasoning.
+                Set your Azure OpenAI or API key in <code style="background:var(--bg);padding:1px 4px;border-radius:3px">.env</code> — or skip this step and use <strong style="color:var(--green)">Ollama</strong> for fully local AI (no API key needed).
               </div>
               <div class="cmd-box" style="margin:4px 0;font-size:.72rem;padding:6px 10px;background:var(--bg);border-radius:6px;font-family:monospace">
                 <code id="bs-cmd-3" style="color:var(--accent)">cp .env.example .env && nano .env</code>
@@ -9034,6 +10489,12 @@ async function importRAD(file) {
   try {
     const text = await file.text();
     const payload = JSON.parse(text);
+
+    // Handle deck airdrops (multiple cards in one file)
+    if (payload.format?.startsWith('rad.deck')) {
+      return await importDeckAirdrop(payload);
+    }
+
     if (!payload.format || !payload.format.startsWith('rad.eggs')) {
       throw new Error('Not a valid .rad.eggs file');
     }
@@ -9118,29 +10579,176 @@ async function importRAD(file) {
   }
 }
 
+// Import a deck airdrop (rad.deck/1.0 — multiple cards in one file)
+async function importDeckAirdrop(payload) {
+  if (!payload.cards?.length) { showToast('Empty deck airdrop', 'error'); return null; }
+
+  // Verify deck signature
+  let deckTrust = 'Unverified';
+  if (payload.thirdspace?.signature) {
+    const fp = payload.thirdspace.senderFingerprint;
+    if (fp && _trustedFingerprints.has(fp)) deckTrust = 'Trusted';
+    else if (fp) deckTrust = 'Signed';
+  }
+
+  // Create a new deck for the imported cards
+  const deckName = payload.name || `Airdrop ${new Date().toLocaleDateString()}`;
+  if (!allDecks[deckName]) allDecks[deckName] = [];
+
+  let imported = 0;
+  for (const cardPayload of payload.cards) {
+    if (!cardPayload.card?.agentName) continue;
+    // Reconstruct and save each card (reuse importRAD logic inline)
+    const card = {
+      ...cardPayload.card,
+      mintedAt: cardPayload.minted || Date.now(),
+      versionAtMint: cardPayload.agent?.version,
+      _sourceCode: cardPayload.source ? decodeURIComponent(escape(atob(cardPayload.source))) : '',
+      _imported: true,
+      _importedAt: new Date().toISOString(),
+      _airdropped: true,
+    };
+    if (!card.provenance) card.provenance = [];
+    card.provenance.push({
+      action: 'deck-airdrop',
+      timestamp: new Date().toISOString(),
+      deckName,
+      senderFingerprint: payload.thirdspace?.senderFingerprint || null,
+      receiverFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+    });
+    if (card.mintId) {
+      await saveMinted(card);
+    }
+    allDecks[deckName].push(card.agentName);
+    imported++;
+  }
+
+  saveDecks();
+  renderCollection();
+  renderDeckSelect();
+  showToast(`Imported deck "${deckName}" — ${imported} cards [${deckTrust}]`, 'success');
+  return { imported, deckName };
+}
+
 // .rad.eggs import handled in handleFileDrop above
 
 // ═══════════════════════════════════════════════════════
 // Gesture Controls — MediaPipe Hands + Voice
 // ═══════════════════════════════════════════════════════
-let _streamAdvanced = false;
-function toggleStreamMode() {
-  _streamAdvanced = !_streamAdvanced;
-  const btn = document.getElementById('stream-mode-btn');
-  if (btn) {
-    btn.textContent = _streamAdvanced ? 'Simple Mode' : 'Advanced Mode';
-    btn.style.color = _streamAdvanced ? 'var(--accent)' : 'var(--text-muted)';
-    btn.style.borderColor = _streamAdvanced ? 'var(--accent)' : 'var(--border)';
-  }
-  // Show/hide advanced controls
+// ── UI Tiers — Radio Dial ──
+// 0 = Open (default): Pure anonymous agent.py browsing. No account, no frills.
+// 1 = Community: Votes, reviews, cards, decks, leaderboard — the social layer.
+// 2 = Lux: Full concierge. Streaming, hail, frontier cards, cube, GPS, edge dispatch.
+const TIER_LABELS = ['Open', 'Community', 'Lux'];
+const TIER_COLORS = ['var(--text-muted)', 'var(--accent)', 'var(--orange)'];
+let _uiTier = parseInt(localStorage.getItem('rar_ui_tier') || '0', 10);
+let _streamAdvanced = _uiTier >= 2;
+// Wave release system — increment to unlock gated features
+// Wave 1 (now): Browse, Cards, Stream, Submit, Roadmap
+// Wave 2 (later): Quality Seal, Leaderboard, Packs, Workbench
+// Wave 3 (future): Agent canvas, PWA, NFC cards
+let _waveUnlocked = parseInt(localStorage.getItem('rar_wave') || '1', 10);
+
+function setUITier(tier) {
+  _uiTier = tier;
+  _streamAdvanced = _uiTier >= 2;
+  localStorage.setItem('rar_ui_tier', _uiTier);
+  applyUITier();
+}
+
+function cycleUITier() {
+  setUITier((_uiTier + 1) % 3);
+}
+
+function applyUITier() {
+  // Sync the mode dial buttons
+  document.querySelectorAll('#mode-dial button').forEach(b => {
+    b.classList.toggle('active', +b.dataset.tier === _uiTier);
+  });
+  // Hide entire nav at T0 — Open is just the library, no tabs
+  const mainNav = document.getElementById('main-nav');
+  if (mainNav) mainNav.style.display = _uiTier === 0 ? 'none' : '';
+  // Show Hail button at Lux tier
+  const hailBtn = document.getElementById('hail-btn');
+  if (hailBtn) hailBtn.style.display = _uiTier >= 2 ? '' : 'none';
+  // T2+ elements (community layer)
+  document.querySelectorAll('.t2-only').forEach(el => {
+    el.style.display = _uiTier >= 1 ? '' : 'none';
+  });
+  // T3 elements (frontier layer)
+  document.querySelectorAll('.t3-only, .advanced-only').forEach(el => {
+    el.style.display = _uiTier >= 2 ? '' : 'none';
+  });
+  // Wave-gated features — hidden until explicitly released
+  // To release a wave: set _waveUnlocked = 2 (or remove the .wave-2 class)
+  document.querySelectorAll('.wave-2').forEach(el => {
+    if (!_waveUnlocked || _waveUnlocked < 2) el.style.display = 'none';
+  });
   ['gesture-toggle', 'voice-toggle'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.style.display = _streamAdvanced ? '' : 'none';
+    if (el) el.style.display = _uiTier >= 2 ? '' : 'none';
   });
-  // Show/hide runtime targets, lisppy, brainstem installer
-  document.querySelectorAll('.advanced-only').forEach(el => {
-    el.style.display = _streamAdvanced ? '' : 'none';
-  });
+  // Update hero text
+  const heroDesc = document.getElementById('hero-desc');
+  if (heroDesc) {
+    if (_uiTier === 0) heroDesc.textContent = 'Browse and share single-file AI agents. Anonymous. Open. No account required.';
+    else if (_uiTier === 1) heroDesc.textContent = 'Browse, vote, review, and collect single-file AI agents. Community-driven quality.';
+    else heroDesc.textContent = 'Stream, steer, grade, and trade agent cards. Full frontier mode.';
+  }
+  // If on T1 and current tab is gated, bounce to browse
+  const gatedT2 = ['submit'];
+  const gatedT3 = ['leaderboard','quality','cards','packs','stream','workbench','roadmap'];
+  const gatedWave2 = ['leaderboard','quality','packs','workbench'];
+  const activeTab = document.querySelector('.nav-btn.active')?.dataset?.tab;
+  if (_uiTier < 1 && gatedT2.includes(activeTab)) switchTab('browse');
+  if (_uiTier < 2 && gatedT3.includes(activeTab)) switchTab('browse');
+  if ((!_waveUnlocked || _waveUnlocked < 2) && gatedWave2.includes(activeTab)) switchTab('browse');
+  // Re-render stats and agents with tier awareness
+  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
+  renderStats(stats);
+  renderAgents();
+  renderSteerPanel();
+  // Update QR/GPS button colors
+  const qrBtn = document.getElementById('qr-toggle');
+  if (qrBtn) { qrBtn.style.color = _qrShareEnabled ? 'var(--accent)' : 'var(--text-muted)'; qrBtn.style.borderColor = _qrShareEnabled ? 'var(--accent)' : 'var(--border)'; }
+  const gpsBtn = document.getElementById('gps-toggle');
+  if (gpsBtn) { gpsBtn.style.color = _gpsFlickEnabled ? 'var(--green)' : 'var(--text-muted)'; gpsBtn.style.borderColor = _gpsFlickEnabled ? 'var(--green)' : 'var(--border)'; }
+}
+
+// Backwards-compat wrapper
+function toggleStreamMode() { cycleUITier(); }
+
+// ── Intent — Business vs Personal ──
+// Flags the context for agent use. Business surfaces work-oriented agents
+// and categories (CRM, pipeline, integrations). Personal surfaces
+// productivity, creative, and general agents.
+const INTENT_LABELS = ['Business', 'Personal'];
+const INTENT_COLORS = ['var(--blue, #58a6ff)', 'var(--text-muted)'];
+let _intent = localStorage.getItem('rar_intent') || 'business'; // 'business' | 'personal'
+
+function cycleIntent() {
+  _intent = _intent === 'personal' ? 'business' : 'personal';
+  localStorage.setItem('rar_intent', _intent);
+  applyIntent();
+}
+
+function applyIntent() {
+  const idx = _intent === 'business' ? 0 : 1;
+  const btn = document.getElementById('intent-btn');
+  if (btn) {
+    btn.textContent = INTENT_LABELS[idx];
+    btn.style.color = INTENT_COLORS[idx];
+    btn.style.borderColor = INTENT_COLORS[idx];
+  }
+  // Re-sort agents — business floats work categories up, personal floats productivity/general
+  renderAgents();
+}
+
+function intentWeight(agent) {
+  const biz = ['b2b_sales','b2c_sales','healthcare','financial_services','manufacturing','energy','federal_government','slg_government','human_resources','it_management','professional_services','retail_cpg','software_digital_products','integrations','pipeline'];
+  const personal = ['productivity','general','devtools','core'];
+  if (_intent === 'business') return biz.includes(agent.category) ? 1 : 0;
+  return personal.includes(agent.category) ? 1 : 0;
 }
 
 let _gestureActive = false;

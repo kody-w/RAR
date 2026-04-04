@@ -37,8 +37,8 @@ REQUIRED_MANIFEST_FIELDS = [
     "description", "author", "tags", "category",
 ]
 
-VALID_TIERS = {"official", "verified", "community", "experimental"}
-SUBMITTABLE_TIERS = {"community", "experimental"}
+VALID_TIERS = {"official", "verified", "community", "experimental", "unverified"}
+SUBMITTABLE_TIERS = {"unverified", "community", "experimental"}
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -135,7 +135,7 @@ def validate_manifest(manifest: dict) -> list[str]:
     if not isinstance(manifest.get("tags", []), list):
         errors.append("tags must be a list")
 
-    tier = manifest.get("quality_tier", "community")
+    tier = manifest.get("quality_tier", "unverified")
     if tier not in VALID_TIERS:
         errors.append(
             f"Invalid quality_tier '{tier}' — must be one of: "
@@ -244,7 +244,7 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     if errors:
         return {"error": f"Manifest validation failed: {'; '.join(errors)}"}
 
-    tier = manifest.get("quality_tier", "community")
+    tier = manifest.get("quality_tier", "unverified")
     if tier not in SUBMITTABLE_TIERS:
         return {
             "error": f"quality_tier '{tier}' cannot be used for submissions. "
