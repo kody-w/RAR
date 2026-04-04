@@ -2393,6 +2393,9 @@
       <button onclick="shareDeck()">Share</button>
       <button onclick="airdropDeck()" style="color:#8884d8">Airdrop</button>
       <button onclick="presentDeck()">Present</button>
+      <button onclick="exportDeckFile()" title="Save deck to file">Backup</button>
+      <button onclick="document.getElementById('deck-import-file').click()" title="Load deck from file">Restore</button>
+      <input type="file" id="deck-import-file" accept=".deck,.json" style="display:none" onchange="importDeckFile(this.files)">
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <div class="card-mode-toggle">
           <button class="active" onclick="setCardMode('business',this)">Icon</button>
@@ -3415,6 +3418,7 @@ async function init() {
   buildCategoryPills(stats);
   renderAgents();
   renderLeaderboard();
+  renderDeckSelect();
 
   // Howard Starter Pack — auto-mint HOLO cards for first-time users
   await provisionStarterPack();
@@ -5405,6 +5409,59 @@ function deleteDeck() {
   renderDeckSelect();
   renderCards();
   showToast('Deck deleted', 'success');
+}
+
+function exportDeckFile() {
+  if (!deck.size) { showToast('Deck is empty', 'error'); return; }
+  const data = {
+    format: 'rar-deck/1.0',
+    name: currentDeckName,
+    cards: [...deck],
+    companion: getCompanion() || null,
+    exportedAt: new Date().toISOString(),
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${currentDeckName.replace(/[^a-z0-9]/gi, '_')}.deck`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`Exported "${currentDeckName}" (${deck.size} cards)`, 'success');
+}
+
+function importDeckFile(files) {
+  if (!files || !files.length) return;
+  const file = files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.cards || !Array.isArray(data.cards)) { showToast('Invalid deck file', 'error'); return; }
+      const name = data.name || file.name.replace(/\.(deck|json)$/, '');
+      // Avoid overwriting — add suffix if name exists
+      let finalName = name;
+      if (allDecks[finalName]) {
+        let i = 2;
+        while (allDecks[finalName + ' (' + i + ')']) i++;
+        finalName = finalName + ' (' + i + ')';
+      }
+      allDecks[finalName] = data.cards;
+      currentDeckName = finalName;
+      deck = new Set(data.cards);
+      if (data.companion) setCompanion(data.companion);
+      saveDecks();
+      renderDeckSelect();
+      renderCards();
+      renderCompanion();
+      showToast(`Restored "${finalName}" — ${data.cards.length} cards`, 'success');
+    } catch (err) {
+      showToast('Could not read deck file', 'error');
+    }
+  };
+  reader.readAsText(file);
+  // Reset input so same file can be re-imported
+  document.getElementById('deck-import-file').value = '';
 }
 
 // ── Companion + Forge System ──
