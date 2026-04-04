@@ -1837,9 +1837,10 @@
   .slab-card-window {
     background: rgba(0,0,0,.3); border-radius: 10px;
     border: 2px solid rgba(139,115,50,.4); padding: 8px;
-    position: relative; cursor: pointer;
+    position: relative; cursor: pointer; perspective: 800px;
   }
   .slab-card-window canvas { width: 100%; border-radius: 6px; display: block; }
+  .slab-card-window .agent-card-wrap { transform-style: preserve-3d; }
   .slab-zoom-hint {
     position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
     background: rgba(0,0,0,.7); color: rgba(255,255,255,.6); font-size: .62rem;
@@ -9451,8 +9452,7 @@ async function openSlabViewer(mintId) {
           </div>
           <div class="slab-grade-number" style="color:${gradeColor}">${card.grade >= 9.5 ? '10' : Math.round(card.grade)}</div>
         </div>
-        <div class="slab-card-window" onclick="openSlabZoom('${mintId}')">
-          <canvas width="290" height="406" id="slab-canvas-${mintId}"></canvas>
+        <div class="slab-card-window" id="slab-card-window-${mintId}" onclick="openSlabZoom('${mintId}')">
           <div class="slab-zoom-hint">Click to showcase</div>
         </div>
         <div class="slab-serial" style="display:none">${card.serial}</div>
@@ -9535,9 +9535,54 @@ async function openSlabViewer(mintId) {
     </div>`;
 
   document.body.appendChild(overlay);
-  // Render card on slab canvas
-  const slabCanvas = document.getElementById(`slab-canvas-${mintId}`);
-  if (slabCanvas) await renderMiniCard(slabCanvas, card);
+
+  // Insert live interactive card instead of flat canvas
+  const slabWindow = document.getElementById(`slab-card-window-${mintId}`);
+  if (slabWindow && _slabAgent) {
+    const cardHtml = agentToCard(_slabAgent);
+    const temp = document.createElement('div');
+    temp.innerHTML = cardHtml;
+    const liveCard = temp.firstElementChild;
+    liveCard.removeAttribute('id');
+    liveCard.removeAttribute('onclick'); // Don't flip in slab viewer — click opens showcase
+    liveCard.style.cssText = 'width:100%;aspect-ratio:5/7;position:relative;pointer-events:none';
+    slabWindow.insertBefore(liveCard, slabWindow.firstChild);
+
+    // Tilt tracking within the slab case
+    const holoEl = liveCard.querySelector('.agent-card-holo');
+    slabWindow.addEventListener('mousemove', e => {
+      const rect = slabWindow.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width;
+      const cy = (e.clientY - rect.top) / rect.height;
+      const tiltX = ((0.5 - cy) * 20).toFixed(1);
+      const tiltY = ((cx - 0.5) * 20).toFixed(1);
+      const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
+      liveCard.style.setProperty('--tilt-x', tiltX + 'deg');
+      liveCard.style.setProperty('--tilt-y', tiltY + 'deg');
+      if (holoEl) {
+        const mxPct = (cx * 100).toFixed(0) + '%';
+        const myPct = (cy * 100).toFixed(0) + '%';
+        holoEl.style.setProperty('--mx', mxPct);
+        holoEl.style.setProperty('--my', myPct);
+        holoEl.style.setProperty('--px', cx.toFixed(3));
+        holoEl.style.setProperty('--py', cy.toFixed(3));
+        holoEl.style.setProperty('--angle', angle + 'deg');
+        const shimmer = holoEl.querySelector('.holo-shimmer-track');
+        if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
+      }
+    });
+    slabWindow.addEventListener('mouseleave', () => {
+      liveCard.style.setProperty('--tilt-x', '0deg');
+      liveCard.style.setProperty('--tilt-y', '0deg');
+    });
+  } else {
+    // Fallback: canvas if agent not in registry
+    const slabCanvas = document.createElement('canvas');
+    slabCanvas.width = 290; slabCanvas.height = 406;
+    slabCanvas.style.cssText = 'width:100%;border-radius:6px;display:block';
+    if (slabWindow) slabWindow.insertBefore(slabCanvas, slabWindow.firstChild);
+    await renderMiniCard(slabCanvas, card);
+  }
 
   // Check chain verification status
   renderSlabChainStatus(card);
