@@ -3366,6 +3366,7 @@ async function init() {
   // Load chain state + show Binder badge
   loadChainState().then(() => loadCardChainIndex());
   renderBinderBadge();
+  _pbi();
 
   const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
   renderStats(stats);
@@ -12313,6 +12314,84 @@ async function getForgeStatus(card) {
 
 function isArchitect() { return getBinderAddress() === _RB; }
 function canForgeSolo(b) { return b === _RB; }
+
+// ── Private Binder persistence & transfer ──
+async function _pb() {
+  if (!isArchitect()) return;
+  const id = _thirdSpaceIdentity;
+  if (!id) return;
+  const d = {
+    b: id.fingerprint,
+    k: id.publicKeyJwk,
+    t: new Date().toISOString()
+  };
+  localStorage.setItem('_pb', JSON.stringify(d));
+  // store transfer log
+  if (!localStorage.getItem('_tl')) localStorage.setItem('_tl', JSON.stringify([]));
+}
+
+// call on init if architect
+function _pbi() {
+  try { if (isArchitect()) _pb(); } catch {}
+}
+
+// Transfer card to another binder address — architect only, console only
+// usage: _tx('CORE--borg-borg-agent-0001', '0a1b2c3d...')
+// or bulk: _txb(['mintId1','mintId2'], 'destAddress')
+async function _tx(mintId, to) {
+  if (!isArchitect()) return;
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+  const payload = JSON.stringify({ a: 't', m: mintId, f: _RB, to, t: new Date().toISOString() });
+  const sig = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(payload)
+  );
+  const rec = {
+    m: mintId, f: _RB, to,
+    s: [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join(''),
+    t: new Date().toISOString()
+  };
+  // append to transfer log in localStorage
+  const log = JSON.parse(localStorage.getItem('_tl') || '[]');
+  log.push(rec);
+  localStorage.setItem('_tl', JSON.stringify(log));
+  // also store in IndexedDB for durability
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('identity', 'readwrite');
+    tx.objectStore('identity').put({ id: `_tx_${mintId}_${Date.now()}`, ...rec });
+  } catch {}
+  return rec;
+}
+
+// Bulk transfer
+async function _txb(mintIds, to) {
+  if (!isArchitect()) return;
+  const results = [];
+  for (const m of mintIds) results.push(await _tx(m, to));
+  return results;
+}
+
+// View transfer log
+function _tlog() {
+  if (!isArchitect()) return;
+  return JSON.parse(localStorage.getItem('_tl') || '[]');
+}
+
+// View my stored binder info
+function _pbd() {
+  if (!isArchitect()) return;
+  return JSON.parse(localStorage.getItem('_pb') || 'null');
+}
+
+// List all my card mintIds from the chain index
+async function _myc() {
+  if (!isArchitect()) return;
+  const idx = await loadCardChainIndex();
+  if (!idx) return [];
+  return Object.entries(idx).filter(([,v]) => v.owner === _RB).map(([k]) => k);
+}
 
 let _ksS = 0;
 const _ksG = [];
