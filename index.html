@@ -1867,8 +1867,11 @@
 
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
-    <h2 style="margin-bottom:4px">Community Favorites</h2>
-    <p style="color:var(--text-dim);margin-bottom:20px">The agents people love most — ranked by votes and reviews</p>
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
+      <h2 id="lb-tab-votes" class="lb-tab active" onclick="switchLbTab('votes')" style="cursor:pointer">Community Favorites</h2>
+      <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
+    </div>
+    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">The agents people love most — ranked by votes and reviews</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
@@ -3139,6 +3142,123 @@ function renderLeaderboard() {
   });
   h += '</tbody></table>';
   document.getElementById('leaderboard-container').innerHTML = h;
+}
+
+let _lbTab = 'votes';
+function switchLbTab(tab) {
+  _lbTab = tab;
+  document.querySelectorAll('.lb-tab').forEach(el => {
+    el.classList.toggle('active', el.id === `lb-tab-${tab}`);
+    el.style.color = el.id === `lb-tab-${tab}` ? '' : 'var(--text-muted)';
+    el.style.fontSize = el.id === `lb-tab-${tab}` ? '' : '1.1rem';
+  });
+  const sub = document.getElementById('lb-subtitle');
+  if (tab === 'cards') {
+    if (sub) sub.textContent = 'Global card rankings — agents ranked by play condition across all players';
+    renderCardRankings();
+  } else {
+    if (sub) sub.textContent = 'The agents people love most — ranked by votes and reviews';
+    renderLeaderboard();
+  }
+}
+
+// ── Global Card Rankings — emergent leaderboard from play ratings ──
+// PSA 10 = perfect agents that never fail. Supply diminishes as cards degrade.
+async function renderCardRankings() {
+  const container = document.getElementById('leaderboard-container');
+  const all = await getAllMinted();
+  if (!all.length) {
+    container.innerHTML = '<div class="empty-state"><h3>No cards minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open <a href="#" onclick="switchTab(\'packs\');return false">Packs</a> to mint cards, then flick them to rate their work. Ratings drive the global rankings.</p></div>';
+    return;
+  }
+
+  // Aggregate: group by agent, compute global play stats
+  const agentStats = {};
+  for (const card of all) {
+    const key = card.agentName;
+    if (!agentStats[key]) {
+      agentStats[key] = {
+        name: key,
+        displayName: card.displayName,
+        tier: card.tier,
+        category: card.category,
+        totalPlays: 0,
+        totalGood: 0,
+        totalBad: 0,
+        copies: 0,
+        bestGrade: 0,
+        gemMintCount: 0,  // PSA 10 copies still in existence
+        nmCount: 0,       // Near Mint
+        lpCount: 0,       // Lightly Played
+        mpCount: 0,       // Moderately Played
+        hpCount: 0,       // Heavily Played
+        dmgCount: 0,      // Damaged
+        avgHolo: 0,
+      };
+    }
+    const s = agentStats[key];
+    const ph = card.playHistory || { total: 0, good: 0, bad: 0 };
+    s.totalPlays += ph.total;
+    s.totalGood += ph.good;
+    s.totalBad += ph.bad;
+    s.copies++;
+    const grade = gradeCard(card);
+    if (grade > s.bestGrade) s.bestGrade = grade;
+    if (grade >= 9.5) s.gemMintCount++;
+    const cond = getPlayCondition(card);
+    if (cond.code === 'NM') s.nmCount++;
+    else if (cond.code === 'LP') s.lpCount++;
+    else if (cond.code === 'MP') s.mpCount++;
+    else if (cond.code === 'HP') s.hpCount++;
+    else s.dmgCount++;
+    s.avgHolo += holoRemaining(card);
+  }
+
+  // Calculate averages and sort
+  const ranked = Object.values(agentStats).map(s => {
+    s.avgHolo = s.copies ? s.avgHolo / s.copies : 0;
+    s.winRate = s.totalPlays > 0 ? ((s.totalGood / s.totalPlays) * 100) : 100; // unplayed = perfect
+    s.failRate = s.totalPlays > 0 ? ((s.totalBad / s.totalPlays) * 100) : 0;
+    // Sort score: win rate (primary), then holo retention, then gem mint count
+    s.rankScore = s.winRate * 100 + s.avgHolo * 50 + s.gemMintCount * 10 - s.dmgCount * 5;
+    return s;
+  }).sort((a, b) => b.rankScore - a.rankScore);
+
+  let h = `<table class="lb-table"><thead><tr>
+    <th>#</th><th>Agent</th><th>Plays</th><th>Win %</th>
+    <th>Holo</th><th>Best</th><th>PSA 10</th><th>Supply</th>
+  </tr></thead><tbody>`;
+
+  ranked.slice(0, 50).forEach((s, i) => {
+    const winColor = s.winRate >= 90 ? 'var(--green)' : s.winRate >= 70 ? 'var(--yellow)' : 'var(--red)';
+    const holoBar = Math.round(s.avgHolo * 100);
+    const holoBg = `linear-gradient(90deg, var(--purple) ${holoBar}%, var(--surface2) ${holoBar}%)`;
+    const gradeInfo = gradeLabel(s.bestGrade);
+    // Supply = how many NM+ copies still exist (diminishing)
+    const pristineSupply = s.gemMintCount + s.nmCount;
+    const totalSupply = s.copies;
+    const supplyColor = pristineSupply === 0 ? 'var(--red)' : pristineSupply <= 2 ? 'var(--orange)' : 'var(--green)';
+
+    h += `<tr onclick="openAgent('${esc(s.name)}')" style="cursor:pointer">
+      <td class="lb-rank">${i + 1}</td>
+      <td class="lb-name">${esc(s.displayName)}</td>
+      <td style="text-align:center;font-size:.8rem">${s.totalPlays}</td>
+      <td style="text-align:center;color:${winColor};font-weight:600;font-size:.8rem">${s.winRate.toFixed(0)}%</td>
+      <td><div style="background:${holoBg};border-radius:4px;padding:1px 6px;font-size:.65rem;color:#fff;text-align:center;min-width:45px">${holoBar}%</div></td>
+      <td><span class="grade-badge ${gradeInfo.cls}" style="font-size:.6rem;padding:1px 5px">${gradeInfo.label}</span></td>
+      <td style="text-align:center;font-size:.8rem;font-weight:700;color:${s.gemMintCount > 0 ? 'var(--gold)' : 'var(--text-muted)'}">${s.gemMintCount}</td>
+      <td style="text-align:center;font-size:.75rem"><span style="color:${supplyColor};font-weight:600">${pristineSupply}</span><span style="color:var(--text-muted)">/${totalSupply}</span></td>
+    </tr>`;
+  });
+
+  h += '</tbody></table>';
+  h += `<div style="font-size:.65rem;color:var(--text-muted);margin-top:12px;text-align:center">
+    Win % = tasks rated 4-5 / total plays &middot; Holo = average holographic data remaining &middot;
+    PSA 10 = GEM MINT copies (never failed) &middot; Supply = pristine copies / total minted<br>
+    <em>Cards degrade from bad ratings. PSA 10 supply diminishes over time. Perfect agents stay pristine.</em>
+  </div>`;
+
+  container.innerHTML = h;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -5342,35 +5462,45 @@ async function mintCard(agentName, setId) {
 }
 
 // ── Grading Engine (PSA 1–10 scale) ──
+// Grade is driven primarily by PLAY CONDITION — how the user rated the agent's work.
+// A card that never fails stays GEM MINT. Bad ratings wear the holo and drop the grade.
 function gradeCard(card) {
   let score = 10;
 
-  // Centering (0–2 points deduction)
-  score -= Math.max(0, 2 - card.variations.centerScore * 0.2);
+  // ── PLAY CONDITION (primary factor: 0–5 points deduction) ──
+  const ph = card.playHistory || { total: 0, good: 0, bad: 0 };
+  const badRatio = ph.total > 0 ? ph.bad / ph.total : 0;
+  score -= badRatio * 5; // 100% bad ratings = -5 points
+  // Each individual failure chips the card
+  score -= Math.min(3, ph.bad * 0.3);
+  // Perfect record bonus
+  if (ph.total >= 5 && ph.bad === 0) score += 0.3;
 
-  // Age wear (degrades over time)
+  // Centering (0–1 points deduction, less important now)
+  score -= Math.max(0, 1 - card.variations.centerScore * 0.1);
+
+  // Age wear (mild — old cards are vintage, not damaged)
   const ageMs = Date.now() - card.mintedAt;
   const ageDays = ageMs / (1000 * 60 * 60 * 24);
-  if (ageDays > 365) score -= 0.5;
-  if (ageDays > 180) score -= 0.3;
-  if (ageDays > 90) score -= 0.2;
-  if (ageDays > 30) score -= 0.1;
+  if (ageDays > 365) score -= 0.3;
+  else if (ageDays > 180) score -= 0.2;
+  else if (ageDays > 90) score -= 0.1;
 
-  // Transfer wear (each transfer degrades)
-  score -= card.transfers * 0.3;
+  // Transfer wear (each transfer slightly degrades)
+  score -= (card.transfers || 0) * 0.2;
 
-  // Version drift (if agent updated since mint, card is "damaged")
+  // Version drift (agent updated since mint = card is outdated)
   const currentAgent = allAgents.find(a => a.name === card.agentName);
   if (currentAgent && currentAgent.version !== card.version) {
-    score -= 0.5; // outdated card
+    score -= 0.5;
   }
 
   // Ink saturation bonus/penalty
-  if (card.variations.inkSaturation > 1.05) score += 0.1; // rich print
-  if (card.variations.inkSaturation < 0.9) score -= 0.1;  // faded
+  if (card.variations.inkSaturation > 1.05) score += 0.1;
+  if (card.variations.inkSaturation < 0.9) score -= 0.1;
 
   // Perfect centering bonus
-  if (card.variations.centerScore >= 9) score += 0.2;
+  if (card.variations.centerScore >= 9) score += 0.1;
 
   return Math.max(1, Math.min(10, Math.round(score * 10) / 10));
 }
@@ -5449,6 +5579,131 @@ function calculateValue(card) {
   }
 
   return Math.min(1000, Math.round(value));
+}
+
+// ── Play History & Card Wear ──
+// Cards wear based on the USER'S rating of the agent's work.
+// Good work keeps the card mint. Bad ratings degrade the holo.
+// A perfect record = GEM MINT = highest rarity.
+// The player (user) decides what wears the card.
+//
+// Play conditions:
+//   NM  (Near Mint)      — 0 failures, card is pristine
+//   LP  (Lightly Played) — 1-2 bad ratings, slight holo fade
+//   MP  (Moderately Played) — 3-5 bad ratings, noticeable wear
+//   HP  (Heavily Played) — 6-9 bad ratings, significant holo loss
+//   DMG (Damaged)        — 10+ bad ratings, holo nearly gone
+
+function getPlayCondition(card) {
+  const bad = card.playHistory?.bad || 0;
+  if (bad === 0) return { code: 'NM', label: 'Near Mint', holoRetention: 1.0 };
+  if (bad <= 2) return { code: 'LP', label: 'Lightly Played', holoRetention: 0.82 };
+  if (bad <= 5) return { code: 'MP', label: 'Moderately Played', holoRetention: 0.6 };
+  if (bad <= 9) return { code: 'HP', label: 'Heavily Played', holoRetention: 0.35 };
+  return { code: 'DMG', label: 'Damaged', holoRetention: 0.1 };
+}
+
+// Calculate holo data remaining (0.0–1.0) — drives visual degradation
+function holoRemaining(card) {
+  const cond = getPlayCondition(card);
+  // Also factor in the original holoIntensity variation
+  const baseHolo = card.variations?.holoIntensity || 1.0;
+  return Math.max(0, Math.min(1, cond.holoRetention * baseHolo));
+}
+
+// Rate the agent's work after a flick/invoke — this is how the card wears
+async function rateCardWork(mintId, rating) {
+  // rating: 1-5 stars (1-2 = bad, 3 = neutral, 4-5 = good)
+  const all = await getAllMinted();
+  const card = all.find(c => c.mintId === mintId);
+  if (!card) return;
+
+  if (!card.playHistory) card.playHistory = { total: 0, good: 0, bad: 0, ratings: [] };
+
+  card.playHistory.total++;
+  if (rating >= 4) card.playHistory.good++;
+  if (rating <= 2) card.playHistory.bad++;
+
+  card.playHistory.ratings.push({
+    rating,
+    timestamp: new Date().toISOString(),
+    brainstem: _thirdSpaceIdentity?.fingerprint?.slice(0, 16) || null,
+  });
+
+  // Log to provenance chain (public ledger — Rule 7: Provenance Is Permanent)
+  if (!card.provenance) card.provenance = [];
+  card.provenance.push({
+    action: 'play-rating',
+    rating,
+    timestamp: new Date().toISOString(),
+    condition: getPlayCondition(card).code,
+    holoRemaining: holoRemaining(card),
+    brainstemFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+  });
+
+  // Recalculate grade with wear factored in
+  card.grade = gradeCard(card);
+
+  await saveMinted(card);
+  return card;
+}
+
+// Show the rating UI after a flick completes
+function showFlickRating(agentName) {
+  // Find the most recent minted card for this agent
+  getAllMinted().then(all => {
+    const cards = all.filter(c => c.agentName === agentName).sort((a, b) => b.mintedAt - a.mintedAt);
+    const card = cards[0];
+    if (!card) return; // not minted, no rating
+
+    const cond = getPlayCondition(card);
+    const holo = Math.round(holoRemaining(card) * 100);
+    const id = `flick-rating-${card.mintId}`;
+
+    // Insert rating overlay near the toast area
+    const existing = document.getElementById(id);
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = id;
+    overlay.style.cssText = 'position:fixed;bottom:80px;right:24px;z-index:99999;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;box-shadow:var(--shadow-lg);min-width:260px;animation:slideUp .3s ease';
+    overlay.innerHTML = `
+      <div style="font-size:.82rem;font-weight:700;margin-bottom:6px">${esc(card.displayName || agentName)}</div>
+      <div style="font-size:.68rem;color:var(--text-muted);margin-bottom:10px">
+        Condition: <strong style="color:${cond.code === 'NM' ? 'var(--green)' : cond.code === 'LP' ? 'var(--yellow)' : 'var(--orange)'}">${cond.label}</strong>
+        &middot; Holo: ${holo}% &middot; Grade: ${card.grade}
+      </div>
+      <div style="font-size:.75rem;margin-bottom:8px;color:var(--text-dim)">Rate this agent's work:</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        ${[1,2,3,4,5].map(s => `<button onclick="submitFlickRating('${card.mintId}',${s})" style="width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:${s <= 2 ? 'rgba(248,81,73,.06)' : s >= 4 ? 'rgba(63,185,80,.06)' : 'var(--surface2)'};color:${s <= 2 ? 'var(--red)' : s >= 4 ? 'var(--green)' : 'var(--text-dim)'};font-size:.85rem;cursor:pointer;font-weight:700" title="${['','Failed','Poor','OK','Good','Perfect'][s]}">${s}</button>`).join('')}
+        <button onclick="document.getElementById('${id}').remove()" style="margin-left:8px;border:none;background:none;color:var(--text-muted);cursor:pointer;font-size:.7rem">skip</button>
+      </div>
+      <div style="font-size:.55rem;color:var(--text-muted);margin-top:8px">1-2 = card wears &middot; 4-5 = card stays mint &middot; logged to provenance</div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Auto-remove after 30 seconds
+    setTimeout(() => { const el = document.getElementById(id); if (el) el.remove(); }, 30000);
+  });
+}
+
+async function submitFlickRating(mintId, rating) {
+  const card = await rateCardWork(mintId, rating);
+  if (!card) return;
+  const cond = getPlayCondition(card);
+  const el = document.getElementById(`flick-rating-${mintId}`);
+  if (el) el.remove();
+
+  if (rating <= 2) {
+    showToast(`Rated ${rating}/5 — card condition: ${cond.label} (holo fading)`, 'info');
+  } else if (rating >= 4) {
+    showToast(`Rated ${rating}/5 — card stays ${cond.label}`, 'success');
+  } else {
+    showToast(`Rated ${rating}/5 — condition unchanged`, 'info');
+  }
+
+  // Re-render collection if visible
+  if (typeof renderCollection === 'function') renderCollection();
 }
 
 // ── Population Report ──
@@ -7820,6 +8075,8 @@ async function flickTo(name, target) {
       await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey, credential, signature: flickSig });
     }
     showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''} (signed)`, 'success');
+    // Show play rating UI after flick (user rates the work, wears the card)
+    setTimeout(() => showFlickRating(name), 2000);
   } else if (target === 'lisppy') {
     if (!_lisppyRuntime?.loaded) {
       showToast('Load Lisppy runtime first', 'error');
@@ -7836,6 +8093,7 @@ async function flickTo(name, target) {
       output.scrollTop = output.scrollHeight;
     }
     showToast(`Flicked ${entry.manifest.display_name} → Lisppy REPL${task ? ' with task' : ''}`, 'success');
+    setTimeout(() => showFlickRating(name), 2000);
   } else {
     // Browser — just inspect
     openAgent(name);
