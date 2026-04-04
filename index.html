@@ -3787,9 +3787,9 @@ function renderLeaderboard() {
       : tier === 'experimental'
       ? '<span class="tier tier-experimental">&#9878; exp</span>'
       : `<span class="tier tier-${tier}">${tier}</span>`;
-    h += `<tr>
+    h += `<tr onclick='openAgent(${JSON.stringify(a.name)})' style="cursor:pointer">
       <td class="lb-rank">${i + 1}</td>
-      <td class="lb-name" onclick='openAgent(${JSON.stringify(a.name)})'>${esc(a.display_name)}</td>
+      <td class="lb-name">${esc(a.display_name)}</td>
       <td>${sealHtml}</td>
       <td><span class="cat-badge">${a.category.replace(/_/g,' ')}</span></td>
       <td class="lb-stars">${stars}</td>
@@ -4090,14 +4090,20 @@ function openAgent(name) {
   const isAiData = window._syntheticActive;
   const revHtml = ar.length > 0
     ? `<div class="reviews-list">${ar.map(r => {
-        const isAiReview = isAiData && DEMO_USERS.includes(r.user);
-        const badge = isAiReview
+        const isCurator = r.user === 'curator';
+        const badge = isCurator
           ? '<span style="font-size:.55rem;background:rgba(188,140,255,.15);color:#bc8cff;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">CURATOR</span>'
           : '<span style="font-size:.55rem;background:rgba(57,211,83,.12);color:#39d353;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">HUMAN</span>';
+        const evidenceHtml = (isCurator && r.evidence && r.evidence.length)
+          ? `<div style="margin-top:6px;padding:6px 10px;background:rgba(188,140,255,.06);border:1px solid rgba(188,140,255,.12);border-radius:6px;font-size:.72rem;color:#8b949e">
+              <div style="color:#bc8cff;font-weight:700;font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Evidence</div>
+              ${r.evidence.map(e => `<div style="margin:2px 0">&middot; ${esc(e)}</div>`).join('')}
+            </div>`
+          : '';
         return `<div class="review-item">
-        <div class="review-header"><span><span class="review-user">@${esc(r.user)}</span>${badge} <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
+        <div class="review-header"><span><span class="review-user">${isCurator ? 'Virtual Artist in Residence' : '@' + esc(r.user)}</span>${badge} <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
         <span class="review-date">${new Date(r.timestamp).toLocaleDateString()}</span></div>
-        <div class="review-text">${esc(r.text)}</div></div>`;
+        <div class="review-text">${esc(r.text)}</div>${evidenceHtml}</div>`;
       }).join('')}</div>`
     : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
@@ -11620,32 +11626,105 @@ function startTour() {
 }
 
 // ═══════════════════════════════════════════════════════
-// Secret Demo Mode — type "demo" or use #demo
-// Fills the store with realistic fake engagement data
+// Virtual Artist in Residence — Evidence-Based Curation
+// Analyzes real agent metadata to produce defensible ratings.
+// Every score is backed by measurable agent properties.
 // ═══════════════════════════════════════════════════════
-const DEMO_USERS = [
-  'sarah-eng', 'mike-devops', 'jtran-ai', 'cmorales', 'howard-h',
-  'priya-k', 'alex-data', 'chen-w', 'garcia-m', 'taylor-ops',
-  'kim-swe', 'patel-r', 'johnson-b', 'lee-ml', 'nguyen-d'
-];
+const DEMO_USERS = ['curator'];
 
-const DEMO_REVIEW_TEXTS = [
-  'Solid agent. Dropped it into our pipeline and it just worked. No config needed.',
-  'This saved us hours on the CRM integration. Clean code, easy to follow.',
-  'Good foundation but needs better error handling for edge cases. Promising.',
-  'Exactly what I needed for the demo. Client was impressed.',
-  'We use this daily. Reliable and the manifest is well-documented.',
-  'Great starting point — forked it and added our custom logic in 20 minutes.',
-  'The perform() method is clean. One of the better agents in the registry.',
-  'Works well with the brainstem runtime. No issues in production for 3 weeks.',
-  'Neat concept. Would love to see env var support for the API endpoint.',
-  'This replaced our internal tool. Simpler and more maintainable.',
-  'Perfect for onboarding new team members to the RAPP ecosystem.',
-  'Used this as a reference when building our own agent. Very well structured.',
-  'The single-file approach makes deployment trivial. Just copy and go.',
-  'Integrated with our Dynamics instance in under an hour. Impressive.',
-  'A must-have for any RAPP setup. Should be official tier.',
-];
+const DEMO_REVIEW_TEXTS = []; // Not used — reviews are generated per-agent
+
+// Curator scoring: deterministic, evidence-based, from real metadata
+function curatorScore(a) {
+  let score = 0;
+  const reasons = [];
+
+  // Code size: bigger agents tend to be more complete (up to a point)
+  const lines = a._lines || 0;
+  const kb = parseFloat(a._size_kb) || 0;
+  if (lines > 200) { score += 2; reasons.push(`${lines} lines — substantial implementation`); }
+  else if (lines > 50) { score += 1; reasons.push(`${lines} lines — minimal but functional`); }
+  else { reasons.push(`${lines} lines — very compact`); }
+
+  // Version maturity
+  const ver = a.version || '1.0.0';
+  const major = parseInt(ver.split('.')[0]) || 1;
+  if (major >= 2) { score += 1; reasons.push(`v${ver} — iterated past 1.0`); }
+  else { reasons.push(`v${ver}`); }
+
+  // Quality tier
+  if (a.quality_tier === 'official') { score += 3; reasons.push('Official tier — verified by maintainers'); }
+  else if (a.quality_tier === 'verified') { score += 2; reasons.push('Verified tier — meets quality bar'); }
+  else if (a.quality_tier === 'community') { score += 1; reasons.push('Community tier'); }
+  else { reasons.push('Frontier tier — experimental'); }
+
+  // Tags: well-tagged agents are more discoverable
+  const tagCount = (a.tags || []).length;
+  if (tagCount >= 4) { score += 1; reasons.push(`${tagCount} tags — well-categorized`); }
+  else if (tagCount === 0) { reasons.push('No tags'); }
+
+  // Description quality
+  const descLen = (a.description || '').length;
+  if (descLen > 100) { score += 1; reasons.push('Detailed description'); }
+  else if (descLen > 30) { reasons.push('Brief description'); }
+  else { reasons.push('Missing or minimal description'); }
+
+  // Dependencies: fewer external deps = more self-contained
+  const depCount = (a.dependencies || []).length;
+  if (depCount === 0) { score += 1; reasons.push('Zero dependencies — fully self-contained'); }
+  else if (depCount <= 2) { reasons.push(`${depCount} dependency`); }
+  else { reasons.push(`${depCount} dependencies — complex supply chain`); }
+
+  // Env requirements: agents that need API keys are harder to deploy
+  const envCount = (a.requires_env || []).length;
+  if (envCount === 0) { score += 1; reasons.push('No env vars required — runs anywhere'); }
+  else { reasons.push(`Requires ${envCount} env var${envCount > 1 ? 's' : ''}: ${(a.requires_env || []).join(', ')}`); }
+
+  // Normalize to 1-5 stars
+  const stars = Math.max(1, Math.min(5, Math.round(score * 5 / 10)));
+  // Vote count derived from code quality signals (not random)
+  const voteWeight = Math.max(1, Math.round(score * 3.5));
+
+  return { stars, votes: voteWeight, reasons, score };
+}
+
+function curatorReviewText(a) {
+  const c = curatorScore(a);
+  const lines = a._lines || 0;
+  const kb = parseFloat(a._size_kb) || 0;
+  const tier = a.quality_tier || 'community';
+  const deps = (a.dependencies || []).length;
+  const envs = (a.requires_env || []).length;
+  const tags = (a.tags || []);
+
+  let text = '';
+  if (c.stars >= 4) {
+    text = `Strong agent. ${lines} lines of code`;
+    if (kb > 10) text += ` (${kb}KB)`;
+    text += `, ${tier} tier`;
+    if (deps === 0) text += ', zero dependencies';
+    if (envs === 0) text += ', no env vars needed';
+    text += '. ';
+    if (tags.length >= 3) text += `Well-tagged: ${tags.slice(0, 3).join(', ')}. `;
+    text += c.reasons[c.reasons.length - 1] + '.';
+  } else if (c.stars >= 3) {
+    text = `Functional agent at ${lines} lines. ${tier} tier`;
+    if (deps > 0) text += ` with ${deps} dep${deps > 1 ? 's' : ''}`;
+    text += '. ';
+    if (envs > 0) text += `Note: requires ${(a.requires_env || []).join(', ')}. `;
+    text += 'Room to grow.';
+  } else {
+    text = `Minimal implementation (${lines} lines). ${tier} tier`;
+    if (envs > 0) text += `, needs ${envs} env var${envs > 1 ? 's' : ''}`;
+    text += '. ';
+    const issues = [];
+    if (tags.length === 0) issues.push('no tags');
+    if ((a.description || '').length < 30) issues.push('sparse description');
+    if (issues.length) text += `Could improve: ${issues.join(', ')}. `;
+    text += 'Early stage.';
+  }
+  return text;
+}
 
 // ═══════════════════════════════════════════════════════
 // Streaming Engine — Hot-load agents from GitHub raw
@@ -14186,39 +14265,29 @@ let _criticReviews = null;
 function generateSyntheticData() {
   if (_syntheticVotes) return;
 
-  const seed = 42;
-  let rng = seed;
-  function rand() { rng = (rng * 16807 + 0) % 2147483647; return rng / 2147483647; }
-
-  const shuffled = [...allAgents].sort(() => rand() - 0.5);
   _syntheticVotes = { agents: {}, updated_at: new Date().toISOString() };
-
-  shuffled.forEach((a, i) => {
-    const isTop = i < shuffled.length * 0.2;
-    const upCount = isTop ? Math.floor(rand() * 25 + 10) : Math.floor(rand() * 8);
-    const downCount = Math.floor(rand() * Math.max(1, upCount * 0.15));
-    const voters = {};
-    const voterPool = [...DEMO_USERS].sort(() => rand() - 0.5);
-    for (let v = 0; v < Math.min(upCount, voterPool.length); v++) voters[voterPool[v]] = 'up';
-    if (downCount > 0 && voterPool.length > upCount) {
-      for (let v = 0; v < Math.min(downCount, voterPool.length - upCount); v++) voters[voterPool[upCount + v]] = 'down';
-    }
-    if (upCount > 0) _syntheticVotes.agents[a.name] = { up: upCount, down: downCount, score: upCount - downCount, voters };
-  });
-
   _syntheticReviews = { agents: {}, updated_at: new Date().toISOString() };
-  shuffled.slice(0, 30).forEach(a => {
-    const count = Math.floor(rand() * 4) + 1;
-    const agentReviews = [];
-    const reviewerPool = [...DEMO_USERS].sort(() => rand() - 0.5);
-    for (let r = 0; r < count && r < reviewerPool.length; r++) {
-      const rating = Math.floor(rand() * 3) + 3;
-      const textIdx = Math.floor(rand() * DEMO_REVIEW_TEXTS.length);
-      const daysAgo = Math.floor(rand() * 30) + 1;
-      agentReviews.push({ user: reviewerPool[r], rating, text: DEMO_REVIEW_TEXTS[textIdx], timestamp: new Date(Date.now() - daysAgo * 86400000).toISOString() });
-    }
-    _syntheticReviews.agents[a.name] = agentReviews;
-  });
+
+  for (const a of allAgents) {
+    const c = curatorScore(a);
+
+    // Votes: derived from evidence score, not random
+    _syntheticVotes.agents[a.name] = {
+      up: c.votes,
+      down: c.stars <= 2 ? 1 : 0,
+      score: c.votes - (c.stars <= 2 ? 1 : 0),
+      voters: { curator: 'up' }
+    };
+
+    // One evidence-based review per agent from the curator
+    _syntheticReviews.agents[a.name] = [{
+      user: 'curator',
+      rating: c.stars,
+      text: curatorReviewText(a),
+      timestamp: new Date().toISOString(),
+      evidence: c.reasons,
+    }];
+  }
 }
 
 function ensureSyntheticData() {
