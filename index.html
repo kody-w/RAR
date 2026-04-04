@@ -2333,12 +2333,12 @@
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
-      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">Community</h2>
-      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Critic</h2>
+      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">AI Reviews</h2>
+      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Human Reviews</h2>
       <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
       <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
-    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Synthetic agent reviews — first impressions from the registry</p>
+    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">AI-generated agent reviews — take with a grain of salt</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
@@ -3775,7 +3775,7 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No critic reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p><p style="margin-top:12px"><span class="demo-inline" onclick="switchLbTab(\'community\')">Switch to Community leaderboard</span></p></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No human reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p><p style="margin-top:12px"><span class="demo-inline" onclick="switchLbTab(\'community\')">Switch to AI Reviews</span></p></div>'; return; }
 
   let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
@@ -3808,11 +3808,11 @@ function switchLbTab(tab) {
   });
   const sub = document.getElementById('lb-subtitle');
   if (tab === 'community') {
-    if (sub) sub.textContent = 'Synthetic agent reviews — first impressions from the registry';
+    if (sub) sub.textContent = 'AI-generated agent reviews — take with a grain of salt';
     ensureSyntheticData();
     renderLeaderboard();
   } else if (tab === 'critic') {
-    if (sub) sub.textContent = 'Authenticated user reviews — real ratings from verified users';
+    if (sub) sub.textContent = 'Human reviews — real ratings from authenticated users';
     restoreCriticData();
     renderLeaderboard();
   } else if (tab === 'cards') {
