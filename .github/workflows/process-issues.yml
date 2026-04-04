@@ -40,11 +40,12 @@ jobs:
           python scripts/process_issues.py --event-path "$GITHUB_EVENT_PATH" 2>&1 | tee /tmp/result.txt
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
-      - name: Rebuild registry (if agent submitted)
+      - name: Rebuild registry and forge cards (if agent submitted)
         if: steps.process.outputs.exit_code == '0'
         run: |
           if git diff --name-only | grep -q "^agents/"; then
             python build_registry.py
+            python scripts/generate_holo_cards.py
           fi
 
       - name: Commit state changes
@@ -52,7 +53,7 @@ jobs:
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add state/ registry.json agents/ || true
+          git add state/ registry.json agents/ cards/ || true
           if ! git diff --cached --quiet; then
             git pull --rebase origin main || true
             git commit -m "Process issue #${{ github.event.issue.number }} [skip ci]"
