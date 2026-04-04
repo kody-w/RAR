@@ -2842,8 +2842,9 @@ async function init() {
   // Load cached haiku signatures from IndexedDB
   await loadCachedHaiku();
 
-  // Initialize Third Space identity (ECDSA keypair)
+  // Initialize Third Space identity (ECDSA keypair) + load persisted credentials
   await initThirdSpaceIdentity();
+  await loadCachedCredentials();
   updateThirdSpaceDisplay();
 
   const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
@@ -3204,6 +3205,38 @@ function openAgent(name) {
       </div>
       <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
       <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
+      <div class="modal-section" id="modal-thirdspace">
+        <h3>Third Space</h3>
+        ${(() => {
+          const cred = _cardCredentials.get(a.name);
+          const haiku = getAgentHaiku(a);
+          const streamed = _streamedAgents.get(a.name);
+          const trustLvl = streamed?._trustLevel ?? (cred ? TRUST_LEVELS.LOCAL : TRUST_LEVELS.ANONYMOUS);
+          const trustLabels = ['Anonymous', 'Signed', 'Known', 'Trusted', 'Local'];
+          const trustColors = ['var(--text-muted)', 'var(--orange)', 'var(--accent)', 'var(--green)', 'var(--green)'];
+          return `
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.85rem">
+              <div>
+                <div style="color:var(--text-muted);font-size:.72rem;margin-bottom:4px">Trust Level</div>
+                <div style="color:${trustColors[trustLvl]};font-weight:600">${trustLabels[trustLvl]} (${trustLvl}/4)</div>
+              </div>
+              <div>
+                <div style="color:var(--text-muted);font-size:.72rem;margin-bottom:4px">Credential</div>
+                <div style="color:${cred ? 'var(--green)' : 'var(--text-muted)'}">${cred ? '&#x2713; Signed' : 'Not signed'}</div>
+              </div>
+              <div>
+                <div style="color:var(--text-muted);font-size:.72rem;margin-bottom:4px">Brainstem</div>
+                <div style="font-family:monospace;font-size:.72rem;color:var(--purple)">${cred?.brainstem?.slice(0, 16) || _thirdSpaceIdentity?.fingerprint?.slice(0, 16) || '—'}${cred?.brainstem ? '...' : ''}</div>
+              </div>
+              <div>
+                <div style="color:var(--text-muted);font-size:.72rem;margin-bottom:4px">Haiku Signature</div>
+                <div style="font-style:italic;font-size:.78rem;color:#8a7e6a;white-space:pre-line">${haiku ? esc(haiku) : '<span style="color:var(--text-muted)">awaiting Brainstem...</span>'}</div>
+              </div>
+            </div>
+            ${!cred ? `<div style="margin-top:10px"><button onclick="createCardCredential('${esc(a.name)}').then(c=>{if(c){showToast('Credential created','success');openAgent('${esc(a.name)}')}})" style="padding:5px 14px;border-radius:6px;border:1px solid var(--purple);background:var(--purple-bg);color:var(--purple);font-size:.78rem;cursor:pointer;font-weight:600">Sign This Agent</button></div>` : ''}
+          `;
+        })()}
+      </div>
       <div class="modal-section">
         <h3>Inside This Agent</h3>
         <div class="parsed-toggle-bar">
@@ -4717,6 +4750,34 @@ async function loadCachedHaiku() {
   } catch {}
 }
 
+// Persist a card credential to IndexedDB
+async function persistCredential(credential) {
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('credentials', 'readwrite');
+    tx.objectStore('credentials').put(credential);
+  } catch {}
+}
+
+// Load all persisted credentials on startup
+async function loadCachedCredentials() {
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('credentials', 'readonly');
+    const store = tx.objectStore('credentials');
+    const req = store.getAll();
+    await new Promise((resolve, reject) => {
+      req.onsuccess = () => {
+        for (const cred of (req.result || [])) {
+          if (cred.agent) _cardCredentials.set(cred.agent, cred);
+        }
+        resolve();
+      };
+      req.onerror = () => reject(req.error);
+    });
+  } catch {}
+}
+
 // Get haiku for display (synchronous — returns cached or null)
 function getAgentHaiku(agent) {
   return _agentHaiku.get(agent.name) || null;
@@ -5087,12 +5148,21 @@ function clearDeck() {
   renderCards();
 }
 
-function shareDeck() {
+async function shareDeck() {
   if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
   const agents = [...deck].join(',');
-  const url = `${location.origin}${location.pathname}#deck/${encodeURIComponent(currentDeckName)}/${encodeURIComponent(agents)}`;
+  // Third Space: sign the deck manifest (Rule 8: Deck = Routing Manifest)
+  const deckManifest = {
+    name: currentDeckName,
+    agents: [...deck],
+    count: deck.size,
+    sharedAt: new Date().toISOString(),
+  };
+  const deckSig = await signPayload(deckManifest);
+  const sigCompact = deckSig.signature.slice(0, 32); // compact for URL
+  const url = `${location.origin}${location.pathname}#deck/${encodeURIComponent(currentDeckName)}/${encodeURIComponent(agents)}/${sigCompact}`;
   navigator.clipboard?.writeText(url);
-  showToast(`Deck "${currentDeckName}" link copied! ${deck.size} cards`, 'success');
+  showToast(`Deck "${currentDeckName}" link copied — signed by ${_thirdSpaceIdentity?.fingerprint?.slice(0, 8) || 'you'}`, 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -5203,6 +5273,9 @@ async function mintCard(agentName, setId) {
   const allIdx = allAgents.indexOf(a);
   const serial = `${(setId || 'GEN').toUpperCase()}-${String(allIdx + 1).padStart(3, '0')}-${String(mintNum).padStart(4, '0')}-${mintId}`;
 
+  // Third Space: create credential for minted card (Rule 7: Provenance Is Permanent)
+  const credential = await createCardCredential(a.name);
+
   const card = {
     mintId,
     serial,
@@ -5225,14 +5298,31 @@ async function mintCard(agentName, setId) {
     // Provenance
     transfers: 0,
     lastTransfer: null,
+    provenance: [{
+      action: 'mint',
+      timestamp: new Date(now).toISOString(),
+      brainstemFingerprint: _thirdSpaceIdentity?.fingerprint || null,
+      credentialHash: credential ? await sha256(JSON.stringify(credential)) : null,
+    }],
     // Snapshot at mint time
     votesAtMint: (votes.agents?.[a.name]?.score) || 0,
     tierAtMint: a.quality_tier || 'community',
     isFirstEdition: mintNum === 1,
+    // Third Space
+    _thirdspace: credential ? {
+      verified: true,
+      trust: TRUST_LEVELS.LOCAL,
+      trustLabel: 'Local',
+      fingerprint: _thirdSpaceIdentity?.fingerprint,
+      haiku: credential.haiku,
+    } : null,
   };
 
   // Calculate initial grade
   card.grade = gradeCard(card);
+
+  // Persist credential to IndexedDB
+  if (credential) await persistCredential(credential);
 
   await saveMinted(card);
   return card;
@@ -7543,12 +7633,17 @@ async function streamAgent(url) {
     statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> ${manifest.display_name || manifest.name} loaded — ${agentObj._lines} lines, ${agentObj._size_kb} KB in memory</div>`;
     document.getElementById('stream-url').value = '';
 
+    // Third Space: sign the streamed agent (Rule 1: Identify Before You Enter)
+    const credential = await createCardCredential(manifest.name);
+    entry._credential = credential;
+    entry._trustLevel = TRUST_LEVELS.LOCAL;
+
     // Re-render
     renderStreamedAgents();
     renderAgents();
     if (document.getElementById('cards-grid')) renderCards();
 
-    showToast(`Streamed ${manifest.display_name || manifest.name} into memory`, 'success');
+    showToast(`Streamed ${manifest.display_name || manifest.name} into memory (signed)`, 'success');
     return manifest.name;
   } catch (err) {
     statusEl.innerHTML = `<span style="color:var(--red);font-size:.82rem">Failed: ${err.message}</span>`;
@@ -7611,15 +7706,18 @@ function renderStreamedAgents() {
     el.innerHTML = '';
     return;
   }
-  el.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => `
+  el.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => {
+    const trustIcon = s._credential ? `<span style="color:var(--green)" title="Signed credential">&#x2713;</span>` : `<span style="color:var(--text-muted)" title="Unsigned">&#x26A0;</span>`;
+    const trustLabel = ['anon','signed','known','trusted','local'][s._trustLevel || 0];
+    return `
     <div class="streamed-chip" onclick="openAgent('${esc(name)}')">
       <div>
-        <div class="sc-name">${esc(s.manifest.display_name || name)}</div>
-        <div class="sc-status">LIVE &bull; ${s.manifest.version || '?'} &bull; GUID ${s.guid.slice(0,8)}</div>
+        <div class="sc-name">${trustIcon} ${esc(s.manifest.display_name || name)}</div>
+        <div class="sc-status">LIVE &bull; ${s.manifest.version || '?'} &bull; ${trustLabel} &bull; ${s.guid.slice(0,8)}</div>
       </div>
       <span class="sc-eject" onclick="event.stopPropagation();ejectAgent('${esc(name)}')" title="Eject from memory">&times;</span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   renderSteerPanel();
 }
 
@@ -7648,9 +7746,12 @@ function renderSteerPanel() {
     <div class="steer-slot ${isInDeck ? 'live' : ''} ${flicked ? 'live' : ''}">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div class="slot-name">${esc(s.manifest.display_name || name)}</div>
-        ${flickLabel ? `<span style="font-size:.55rem;font-weight:800;color:${flickColor};letter-spacing:1px">${flickLabel}</span>` : ''}
+        <div style="display:flex;align-items:center;gap:4px">
+          <span style="font-size:.5rem;color:${s._credential ? 'var(--green)' : 'var(--text-muted)'};font-weight:600">${s._credential ? '&#x2713;' : '&#x26A0;'}</span>
+          ${flickLabel ? `<span style="font-size:.55rem;font-weight:800;color:${flickColor};letter-spacing:1px">${flickLabel}</span>` : ''}
+        </div>
       </div>
-      <div class="slot-guid">${s.guid.slice(0,8)}</div>
+      <div class="slot-guid">${s.guid.slice(0,8)} &middot; <span style="color:${['var(--text-muted)','var(--orange)','var(--accent)','var(--green)','var(--green)'][s._trustLevel || 0]};font-size:.55rem">${['anon','signed','known','trusted','local'][s._trustLevel || 0]}</span></div>
       <input type="text" placeholder="task payload..." id="flick-task-${s.guid.slice(0,8)}" style="width:100%;margin-top:6px;padding:4px 8px;font-size:.7rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:monospace">
       <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
         ${hasBrainstem ? `<button onclick="flickTo('${safeName}','brainstem')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.08);color:#f85149;font-size:.58rem;cursor:pointer;font-weight:600">Flick &rarr; Brainstem</button>` : ''}
@@ -8028,6 +8129,7 @@ async function createCardCredential(agentName) {
   credential.public_key = _thirdSpaceIdentity.publicKeyJwk;
 
   _cardCredentials.set(agentName, credential);
+  await persistCredential(credential);
   return credential;
 }
 
@@ -8536,6 +8638,10 @@ async function pushToBrainstem(agentName) {
   if (!entry) return false;
 
   try {
+    // Third Space: include credential + signature (Rule 4: Sign What You Send)
+    const credential = _cardCredentials.get(agentName) || await createCardCredential(agentName);
+    const pushSig = await signPayload({ agent: agentName, guid: entry.guid, action: 'push' });
+
     const resp = await fetch(`${_brainstemConn.url}/agents/load`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -8544,10 +8650,12 @@ async function pushToBrainstem(agentName) {
         guid: entry.guid,
         code: entry.code,
         manifest: entry.manifest,
+        credential,
+        signature: pushSig,
       }),
     });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    showToast(`Pushed ${entry.manifest.display_name || agentName} to Brainstem`, 'success');
+    showToast(`Pushed ${entry.manifest.display_name || agentName} to Brainstem (signed)`, 'success');
     return true;
   } catch (err) {
     showToast(`Push failed: ${err.message}`, 'error');
@@ -8569,13 +8677,26 @@ async function invokeOnBrainstem(agentName, kwargs) {
   if (!entry) return null;
 
   try {
+    // Third Space: include invoke signature (Rule 4: Sign What You Send)
+    const invokeSig = await signPayload({ agent: agentName, guid: entry.guid, action: 'invoke' });
+    const payload = { ...(kwargs || {}), _signature: invokeSig };
+
     const resp = await fetch(`${_brainstemConn.url}/agents/${entry.guid}/perform`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(kwargs || {}),
+      body: JSON.stringify(payload),
     });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    return await resp.json();
+    const result = await resp.json();
+
+    // Third Space: verify response credential if Brainstem returns one (Rule 2)
+    if (result._credential) {
+      const verification = await verifyCardCredential(result._credential);
+      result._verified = verification.valid;
+      result._trustLevel = verification.trust;
+    }
+
+    return result;
   } catch (err) {
     return { error: err.message };
   }
