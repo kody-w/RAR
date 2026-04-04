@@ -5171,7 +5171,7 @@ let currentDeckName = localStorage.getItem('rar_current_deck') || Object.keys(al
 if (!allDecks[currentDeckName]) { allDecks[currentDeckName] = []; saveDecks(); }
 let deck = new Set(allDecks[currentDeckName]);
 let cardFilter = 'all';
-let cardMode = localStorage.getItem('rar_cardMode') || 'business';
+let cardMode = localStorage.getItem('rar_cardMode') || 'creative';
 
 function saveDecks() {
   allDecks[currentDeckName] = [...deck];
@@ -6710,11 +6710,11 @@ function agentToCard(a) {
   let front, back, canFlip;
   if (cardMode === 'business') {
     front = bizFace;
-    back = null;
-    canFlip = false;
+    back = qrFace;
+    canFlip = true;
   } else if (cardMode === 'kids') {
     front = asciiFace;
-    back = bizFace;
+    back = qrFace;
     canFlip = true;
   } else {
     front = holoFace;
