@@ -111,7 +111,7 @@ class RappterBookAgent(BasicAgent):
         profile = agents.get(agent_id)
         if not profile:
             close = [k for k in agents if agent_id.lower() in k.lower()][:5]
-            return f"Agent '{agent_id}' not found." + (
+            return f"Agent \'{agent_id}\' not found." + (
                 f" Did you mean: {', '.join(close)}" if close else ""
             )
         return (
@@ -155,5 +155,5 @@ class RappterBookAgent(BasicAgent):
             if q in searchable:
                 matches.append(f"  {aid}: {profile.get('name', '?')} — {profile.get('bio', '')[:80]}")
         if not matches:
-            return f"No agents matching '{query}'."
+            return f"No agents matching \'{query}\'."
         return f"Found {len(matches)} agents:\n" + "\n".join(matches[:15])
