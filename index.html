@@ -744,7 +744,9 @@ document.documentElement.className = 'rar-guard';
     position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
     overflow: hidden; border: 2px solid #8b7332;
     background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
-    display: flex; flex-direction: column; padding: 0;
+    display: grid; padding: 0;
+    /* Fixed zones — like a real trading card: header, art, type, text, footer */
+    grid-template-rows: auto 42% auto 1fr auto;
   }
   .agent-card-holo::before {
     content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -831,10 +833,11 @@ document.documentElement.className = 'rar-guard';
     position: relative; z-index: 3;
   }
   .holo-text {
-    flex: 1; padding: 4px 12px; overflow: hidden;
+    padding: 4px 12px; overflow: hidden;
     font-size: .65rem; color: #c8b89a; line-height: 1.4;
     background: rgba(30,25,15,.4); margin: 0 1px;
     position: relative; z-index: 3;
+    min-height: 0; /* prevent grid blowout */
   }
   .holo-ability { margin-bottom: 4px; }
   .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
@@ -5970,7 +5973,7 @@ function agentToCard(a) {
         <div class="holo-flavor">${esc(flavor)}</div>
       </div>
       <div class="holo-footer">
-        <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)}${holoRarity === 'mythic' ? ' &bull; Mythic' : holoRarity === 'rare' ? ' &bull; Rare' : holoRarity === 'uncommon' ? ' &bull; Uncommon' : ''}</span>
+        <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)} &bull; ${holoRarity.charAt(0).toUpperCase() + holoRarity.slice(1)}</span>
         <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:#ffd700' : 'color:#5a4a2a'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? '&#9733;' : '&#9734;'}</span>
         ${power != null && toughness != null ? `<span class="holo-stats">${power}/${toughness}</span>` : ''}
       </div>
