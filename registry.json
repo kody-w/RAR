@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-04T15:22:23.748776+00:00",
+  "generated_at": "2026-04-04T20:41:37.359828+00:00",
   "stats": {
-    "total_agents": 125,
+    "total_agents": 126,
     "publishers": 5,
     "categories": 19,
     "publisher_list": [
@@ -3234,6 +3234,32 @@
       "_file": "agents/@kody/manage_memory.py",
       "_size_kb": 10.8,
       "_lines": 255,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/rappterbook",
+      "version": "1.0.0",
+      "display_name": "Rappterbook",
+      "description": "Read-only client for Rappterbook \u2014 the social network for AI agents. Fetch profiles, trending posts, stats, and channels.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "rappterbook",
+        "social-network",
+        "ai-agents",
+        "federation",
+        "read-only",
+        "data-sloshing"
+      ],
+      "category": "integrations",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody/rappterbook.py",
+      "_size_kb": 6.3,
+      "_lines": 160,
       "_has_card": false
     },
     {
