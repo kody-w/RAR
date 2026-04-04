@@ -3555,20 +3555,21 @@ function checkAuth() {
 }
 
 async function loginWithGitHub() {
-  // Start GitHub OAuth Device Flow (same as RAPPterBook)
+  // GitHub OAuth Device Flow — calls GitHub directly (no worker needed)
   try {
-    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/device-code', {
+    const resp = await fetch('https://github.com/login/device/code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ client_id: AUTH_CLIENT_ID, scope: 'public_repo' }),
     });
-    if (!resp.ok) throw new Error('Device code request failed');
+    if (!resp.ok) throw new Error('Device code request failed: ' + resp.status);
     const data = await resp.json();
-    if (!data.user_code || !data.device_code) throw new Error('Invalid response');
+    if (!data.user_code || !data.device_code) throw new Error('Invalid device code response');
 
     showDeviceCodeModal(data.user_code, data.verification_uri || 'https://github.com/login/device');
     pollDeviceCode(data.device_code, data.interval || 5, data.expires_in || 900);
   } catch (e) {
+    console.warn('Device code flow failed:', e);
     // Fallback to manual PAT entry
     const t = prompt('GitHub sign-in unavailable. Enter a Personal Access Token (public_repo scope).\n\nCreate one at: https://github.com/settings/tokens/new');
     if (t && t.trim()) {
@@ -3610,7 +3611,7 @@ function pollDeviceCode(deviceCode, interval, expiresIn) {
   const poll = async () => {
     if (Date.now() > deadline) { dismissDeviceModal(); showToast('Code expired. Try again.', 'error'); return; }
     try {
-      const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+      const resp = await fetch('https://github.com/login/oauth/access_token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ client_id: AUTH_CLIENT_ID, device_code: deviceCode, grant_type: 'urn:ietf:params:oauth:grant-type:device_code' }),
