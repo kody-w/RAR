@@ -6582,8 +6582,7 @@ function agentToCard(a) {
 
   // HOLO card data — use Howard's canonical DB if available, otherwise generate
   const holo = getHoloCard(a);
-  const abilities = holo
-    generateCardAbilities(a).map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }));
+  const abilities = generateCardAbilities(a).map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }));
 
   const pips = holo ? holo.colors : (CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general);
   const creatureType = holo ? holo.type_line.replace(/^(Legendary )?/, '').replace('Creature — ', '').replace('Artifact — ', '').replace('Enchantment — ', '') : (CAT_TO_TYPE[a.category] || 'Agent');
