@@ -3240,6 +3240,26 @@ async function fetchJSON(url) {
   catch { return null; }
 }
 
+// Download agent.py via fetch+blob (cross-origin download attribute doesn't work)
+async function downloadAgentPy(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a?._file) return;
+  try {
+    const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+    if (!res.ok) throw new Error(res.status);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = a._file.split('/').pop() || `${a.name.split('/')[1]}.py`;
+    link.click();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    // Fallback: open in new tab
+    window.open(`${RAW}/${a._file}`, '_blank');
+  }
+}
+
 // ═══════════════════════════════════════════════════════
 // Auth — shared with RAPPterBook (OAuth Device Flow)
 // ═══════════════════════════════════════════════════════
@@ -3474,7 +3494,7 @@ function agentCard(a) {
           ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
-          ${!isLocal && a._file ? `<a class="add-cart-btn" href="${rawUrl}" download onclick="event.stopPropagation()" title="Download agent.py" style="text-decoration:none;font-size:.7rem;padding:2px 6px">&#11015; .py</a>` : ''}
+          ${!isLocal && a._file ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
           ${_uiTier >= 1 ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
@@ -3656,7 +3676,7 @@ function buildInstallBlock(a, rawUrl, repo) {
     + lbl + 'Version</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">v' + esc(a.version) + '</span>'
     + '</div>'
     + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
-    + '<a href="' + rawUrl + '" download style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-size:.85rem;font-weight:600">&#11015; agent.py</a>'
+    + '<button onclick="downloadAgentPy(\'' + esc(a.name) + '\')" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:.85rem;font-weight:600">&#11015; agent.py</button>'
     + '<button class="copy-btn" onclick="copyEl(\'install-cmd\')" style="padding:6px 14px;border-radius:8px;font-size:.82rem">Copy one-liner</button>'
     + '</div>'
     + '<code id="install-cmd" style="display:none">curl -sO ' + rawUrl + '</code>'
@@ -3783,7 +3803,7 @@ function openAgent(name) {
         ${isLocalDevice
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">&#128465; Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#8593; Submit to Store</a>`
-          : `<a href="${rawUrl}" download style="color:var(--accent);font-size:.9rem">&#11015; agent.py</a>
+          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#11015; agent.py</a>
              ${_intent === 'personal' ? `<a href="#" onclick="event.preventDefault();exportSingleCard({name:'${esc(a.name)}',display_name:'${esc(a.display_name)}',description:'${esc(a.description?.slice(0,100))}',category:'${esc(a.category)}',version:'${esc(a.version)}'})" style="color:var(--purple);font-size:.9rem">&#11015; agent.py.card</a>` : ''}
              <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Copy Link</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
