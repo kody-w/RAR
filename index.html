@@ -3306,6 +3306,15 @@ async function init() {
     if (allowed) switchTab(savedTab);
   }
 
+  // Restore saved card mode (Holo/Business/Simple)
+  if (cardMode !== 'business') {
+    const modeMap = { business: 'Business', creative: 'Holo', kids: 'Simple' };
+    document.querySelectorAll('.card-mode-toggle button').forEach(b => {
+      b.classList.toggle('active', b.textContent === modeMap[cardMode]);
+    });
+    syncCreativeGating();
+  }
+
   // Edge sync — auto-dispatch card stats if opted in (frontier feature)
   scheduleEdgeSync();
 
@@ -5008,7 +5017,7 @@ let currentDeckName = localStorage.getItem('rar_current_deck') || Object.keys(al
 if (!allDecks[currentDeckName]) { allDecks[currentDeckName] = []; saveDecks(); }
 let deck = new Set(allDecks[currentDeckName]);
 let cardFilter = 'all';
-let cardMode = 'business';
+let cardMode = localStorage.getItem('rar_cardMode') || 'business';
 
 function saveDecks() {
   allDecks[currentDeckName] = [...deck];
@@ -6014,6 +6023,7 @@ function genCreativeArt(agent) {
 
 function setCardMode(mode, el) {
   cardMode = mode;
+  localStorage.setItem('rar_cardMode', mode);
   document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.toggle('active', false));
   if (el) el.classList.add('active');
   syncCreativeGating();
