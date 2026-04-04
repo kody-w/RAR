@@ -3337,7 +3337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════════════════
 const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
 const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
-let _devicePollTimer = null;
+
 
 // ═══════════════════════════════════════════════════════
 // Config loading
@@ -3366,6 +3366,7 @@ async function loadConfig() {
 // ═══════════════════════════════════════════════════════
 async function init() {
   await loadConfig();
+  await handleAuthCallback();
   checkAuth();
   const [reg, v, r, holoData] = await Promise.all([
     fetchJSON(`${RAW}/registry.json`),
@@ -3555,83 +3556,37 @@ function checkAuth() {
 }
 
 async function loginWithGitHub() {
-  // GitHub OAuth Device Flow — calls GitHub directly (no worker needed)
-  try {
-    const resp = await fetch('https://github.com/login/device/code', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ client_id: AUTH_CLIENT_ID, scope: 'public_repo' }),
-    });
-    if (!resp.ok) throw new Error('Device code request failed: ' + resp.status);
-    const data = await resp.json();
-    if (!data.user_code || !data.device_code) throw new Error('Invalid device code response');
+  // Primary: GitHub OAuth redirect flow (works in all browsers)
+  const redirectUri = window.location.origin + window.location.pathname;
+  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=public_repo`;
+  window.location.href = url;
+}
 
-    showDeviceCodeModal(data.user_code, data.verification_uri || 'https://github.com/login/device');
-    pollDeviceCode(data.device_code, data.interval || 5, data.expires_in || 900);
-  } catch (e) {
-    console.warn('Device code flow failed:', e);
-    // Fallback to manual PAT entry
-    const t = prompt('GitHub sign-in unavailable. Enter a Personal Access Token (public_repo scope).\n\nCreate one at: https://github.com/settings/tokens/new');
-    if (t && t.trim()) {
-      ghToken = t.trim();
+async function handleAuthCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+  // Clean URL immediately
+  window.history.replaceState({}, '', window.location.origin + window.location.pathname + (window.location.hash || ''));
+  try {
+    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await resp.json();
+    if (data.access_token) {
+      ghToken = data.access_token;
       localStorage.setItem('rb_access_token', ghToken);
       checkAuth();
       showToast('Signed in!', 'success');
-    }
-  }
-}
-
-function showDeviceCodeModal(code, uri) {
-  dismissDeviceModal();
-  const m = document.createElement('div');
-  m.id = 'device-modal';
-  m.innerHTML = `
-    <div style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center" onclick="if(event.target===this)dismissDeviceModal()">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:400px;text-align:center">
-        <h3 style="margin:0 0 12px;color:var(--text)">Sign in with GitHub</h3>
-        <p style="color:var(--text-muted);font-size:.9rem;margin:0 0 8px">1. Copy this code:</p>
-        <div id="device-code-val" style="font-family:monospace;font-size:2em;font-weight:700;letter-spacing:4px;color:var(--accent);background:var(--bg);border:2px solid var(--accent);border-radius:8px;padding:12px 20px;margin:8px 0 12px;cursor:pointer;user-select:all" onclick="navigator.clipboard.writeText(this.textContent);showToast('Code copied!','success')">${code}</div>
-        <p style="color:var(--text-muted);font-size:.9rem;margin:0 0 12px">2. Open GitHub and paste the code:</p>
-        <a href="${uri}" target="_blank" rel="noopener" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin-bottom:16px">Open github.com/login/device &rarr;</a>
-        <p id="device-status" style="color:var(--text-muted);font-size:.85rem;margin:8px 0">Waiting for authorization...</p>
-        <button onclick="dismissDeviceModal()" style="background:none;border:1px solid var(--border);color:var(--text-muted);padding:6px 16px;border-radius:6px;cursor:pointer;font-size:.85rem">Cancel</button>
-      </div>
-    </div>`;
-  document.body.appendChild(m);
-}
-
-function dismissDeviceModal() {
-  if (_devicePollTimer) { clearTimeout(_devicePollTimer); _devicePollTimer = null; }
-  const m = document.getElementById('device-modal');
-  if (m) m.remove();
-}
-
-function pollDeviceCode(deviceCode, interval, expiresIn) {
-  const deadline = Date.now() + (expiresIn * 1000);
-  const poll = async () => {
-    if (Date.now() > deadline) { dismissDeviceModal(); showToast('Code expired. Try again.', 'error'); return; }
-    try {
-      const resp = await fetch('https://github.com/login/oauth/access_token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ client_id: AUTH_CLIENT_ID, device_code: deviceCode, grant_type: 'urn:ietf:params:oauth:grant-type:device_code' }),
-      });
-      const data = await resp.json();
-      if (data.access_token) {
-        ghToken = data.access_token;
-        localStorage.setItem('rb_access_token', ghToken);
-        dismissDeviceModal();
-        checkAuth();
-        showToast('Signed in!', 'success');
-        return;
-      }
-      if (data.error === 'slow_down') { _devicePollTimer = setTimeout(poll, (interval + 5) * 1000); return; }
-      if (data.error === 'authorization_pending') { _devicePollTimer = setTimeout(poll, interval * 1000); return; }
-      dismissDeviceModal();
+    } else {
       showToast('Auth failed: ' + (data.error || 'unknown'), 'error');
-    } catch { _devicePollTimer = setTimeout(poll, interval * 1000); }
-  };
-  _devicePollTimer = setTimeout(poll, interval * 1000);
+    }
+  } catch (e) {
+    console.error('Token exchange failed:', e);
+    showToast('Sign-in failed. Try again.', 'error');
+  }
 }
 
 function logout() {
