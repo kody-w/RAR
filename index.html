@@ -2277,7 +2277,7 @@
   </nav>
   <div class="header-actions" id="header-actions">
     <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
-    <button class="demo-toggle active" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle between Community (synthetic) and Critic (real) data"><span class="demo-dot"></span>Community</button>
+    <button class="demo-toggle active" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle between virtual artist in residence and human reviews"><span class="demo-dot"></span>Curator</button>
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="currentColor" opacity="0.5"/><circle cx="18" cy="19" r="2" fill="currentColor" opacity="0.5"/></svg>
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
@@ -2333,12 +2333,12 @@
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
-      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">AI Reviews</h2>
-      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Human Reviews</h2>
+      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">Curator</h2>
+      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Human</h2>
       <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
       <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
-    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">AI-generated agent reviews — take with a grain of salt</p>
+    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Curated by our virtual artist in residence — take with a grain of salt</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
@@ -3775,9 +3775,10 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No human reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p><p style="margin-top:12px"><span class="demo-inline" onclick="switchLbTab(\'community\')">Switch to AI Reviews</span></p></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No human reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p><p style="margin-top:12px"><span class="demo-inline" onclick="switchLbTab(\'community\')">Switch to Curator reviews</span></p></div>'; return; }
 
-  let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
+  const srcLabel = window._syntheticActive ? ' <span style="font-size:.55rem;background:rgba(188,140,255,.15);color:#bc8cff;padding:1px 5px;border-radius:3px;font-weight:700">CURATOR</span>' : ' <span style="font-size:.55rem;background:rgba(57,211,83,.12);color:#39d353;padding:1px 5px;border-radius:3px;font-weight:700">HUMAN</span>';
+  let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating${srcLabel}</th><th>Votes${srcLabel}</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
     const tier = a.quality_tier || 'community';
     const stars = a.r > 0 ? '&#9733;'.repeat(Math.round(a.r)) + ` ${a.r.toFixed(1)}` : '&mdash;';
@@ -3808,7 +3809,7 @@ function switchLbTab(tab) {
   });
   const sub = document.getElementById('lb-subtitle');
   if (tab === 'community') {
-    if (sub) sub.textContent = 'AI-generated agent reviews — take with a grain of salt';
+    if (sub) sub.textContent = 'Curated by our virtual artist in residence — take with a grain of salt';
     ensureSyntheticData();
     renderLeaderboard();
   } else if (tab === 'critic') {
@@ -4086,11 +4087,18 @@ function openAgent(name) {
     ? '<div style="background:rgba(188,140,255,.08);border:1px dashed rgba(188,140,255,.3);border-radius:8px;padding:10px 16px;margin-bottom:16px;color:#bc8cff;font-size:.88rem">&#9878; <strong>Frontier Agent</strong> — This agent is pushing the edge. It may have incomplete features or be evolving rapidly.</div>'
     : '';
 
+  const isAiData = window._syntheticActive;
   const revHtml = ar.length > 0
-    ? `<div class="reviews-list">${ar.map(r => `<div class="review-item">
-        <div class="review-header"><span><span class="review-user">@${esc(r.user)}</span> <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
+    ? `<div class="reviews-list">${ar.map(r => {
+        const isAiReview = isAiData && DEMO_USERS.includes(r.user);
+        const badge = isAiReview
+          ? '<span style="font-size:.55rem;background:rgba(188,140,255,.15);color:#bc8cff;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">CURATOR</span>'
+          : '<span style="font-size:.55rem;background:rgba(57,211,83,.12);color:#39d353;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">HUMAN</span>';
+        return `<div class="review-item">
+        <div class="review-header"><span><span class="review-user">@${esc(r.user)}</span>${badge} <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
         <span class="review-date">${new Date(r.timestamp).toLocaleDateString()}</span></div>
-        <div class="review-text">${esc(r.text)}</div></div>`).join('')}</div>`
+        <div class="review-text">${esc(r.text)}</div></div>`;
+      }).join('')}</div>`
     : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
   const heroIcon = genAgentMark(a).replace('width:36px;height:36px', 'width:80px;height:80px').replace('width="36" height="36"', 'width="80" height="80"').replace('border-radius:6px','border-radius:12px');
@@ -4132,7 +4140,7 @@ function openAgent(name) {
       ${experimentalWarning}
       ${true ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
-        <span class="vote-score">${s > 0 ? s : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not graded yet</span>'}</span>
+        <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : '') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not rated yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
       </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
@@ -14238,11 +14246,11 @@ function toggleDemoMode() {
   if (window._syntheticActive) {
     restoreCriticData();
     renderAgents(); renderLeaderboard();
-    showToast('Switched to Critic view — real user data', 'info');
+    showToast('Human reviews — real ratings from authenticated users', 'info');
   } else {
     ensureSyntheticData();
     renderAgents(); renderLeaderboard();
-    showToast('Switched to Community view — synthetic data', 'info');
+    showToast('Virtual artist in residence — curated reviews', 'info');
   }
   syncDemoToggle();
 }
