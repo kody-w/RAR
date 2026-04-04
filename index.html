@@ -2277,7 +2277,7 @@
   </nav>
   <div class="header-actions" id="header-actions">
     <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
-    <button class="demo-toggle" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
+    <button class="demo-toggle active" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle between Community (synthetic) and Critic (real) data"><span class="demo-dot"></span>Community</button>
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="currentColor" opacity="0.5"/><circle cx="18" cy="19" r="2" fill="currentColor" opacity="0.5"/></svg>
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
@@ -2333,11 +2333,12 @@
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
-      <h2 id="lb-tab-votes" class="lb-tab active" onclick="switchLbTab('votes')" style="cursor:pointer">Community Favorites</h2>
+      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">Community</h2>
+      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Critic</h2>
       <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
       <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
-    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">The agents people love most — ranked by votes and reviews</p>
+    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Synthetic agent reviews — first impressions from the registry</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
@@ -3774,7 +3775,7 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No votes yet — be the first!</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites. The top-voted agents appear here.</p><p style="margin-top:12px"><span class="demo-inline" onclick="toggleDemoMode()">See what this looks like with sample data</span></p></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No critic reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p><p style="margin-top:12px"><span class="demo-inline" onclick="switchLbTab(\'community\')">Switch to Community leaderboard</span></p></div>'; return; }
 
   let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating</th><th>Votes</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
@@ -3797,7 +3798,7 @@ function renderLeaderboard() {
   document.getElementById('leaderboard-container').innerHTML = h;
 }
 
-let _lbTab = 'votes';
+let _lbTab = 'community';
 function switchLbTab(tab) {
   _lbTab = tab;
   document.querySelectorAll('.lb-tab').forEach(el => {
@@ -3806,15 +3807,20 @@ function switchLbTab(tab) {
     el.style.fontSize = el.id === `lb-tab-${tab}` ? '' : '1.1rem';
   });
   const sub = document.getElementById('lb-subtitle');
-  if (tab === 'cards') {
+  if (tab === 'community') {
+    if (sub) sub.textContent = 'Synthetic agent reviews — first impressions from the registry';
+    ensureSyntheticData();
+    renderLeaderboard();
+  } else if (tab === 'critic') {
+    if (sub) sub.textContent = 'Authenticated user reviews — real ratings from verified users';
+    restoreCriticData();
+    renderLeaderboard();
+  } else if (tab === 'cards') {
     if (sub) sub.textContent = 'Global card rankings — agents ranked by play condition across all players';
     renderCardRankings();
   } else if (tab === 'gauntlet') {
     if (sub) sub.textContent = 'Public chain leaderboard — oldest cards with highest Gauntlet Points. Queryable via GitHub raw API.';
     renderGauntletLeaderboard();
-  } else {
-    if (sub) sub.textContent = 'The agents people love most — ranked by votes and reviews';
-    renderLeaderboard();
   }
 }
 
@@ -14160,141 +14166,101 @@ function processVoiceCommand(text) {
   if (text.includes('encrypt') || text.includes('e2e')) { generateE2EKey(); return; }
 }
 
-function activateDemoMode() {
-  if (window._demoActive) return;
-  window._demoActive = true;
+// ── Synthetic Community Data ──
+// Generates deterministic agent reviews so the leaderboard is never empty.
+// Community = synthetic first-impression data from the registry.
+// Critic = authenticated user-submitted reviews (real data).
+let _syntheticVotes = null;
+let _syntheticReviews = null;
+let _criticVotes = null;
+let _criticReviews = null;
 
-  // Seed random from current time (but deterministic within a session)
+function generateSyntheticData() {
+  if (_syntheticVotes) return;
+
   const seed = 42;
   let rng = seed;
   function rand() { rng = (rng * 16807 + 0) % 2147483647; return rng / 2147483647; }
 
-  // Generate votes for agents (weighted: top agents get more)
   const shuffled = [...allAgents].sort(() => rand() - 0.5);
-  votes = { agents: {}, updated_at: new Date().toISOString() };
+  _syntheticVotes = { agents: {}, updated_at: new Date().toISOString() };
 
   shuffled.forEach((a, i) => {
-    // Top 20% get heavy votes, rest get lighter
     const isTop = i < shuffled.length * 0.2;
     const upCount = isTop ? Math.floor(rand() * 25 + 10) : Math.floor(rand() * 8);
     const downCount = Math.floor(rand() * Math.max(1, upCount * 0.15));
     const voters = {};
     const voterPool = [...DEMO_USERS].sort(() => rand() - 0.5);
-    for (let v = 0; v < Math.min(upCount, voterPool.length); v++) {
-      voters[voterPool[v]] = 'up';
-    }
+    for (let v = 0; v < Math.min(upCount, voterPool.length); v++) voters[voterPool[v]] = 'up';
     if (downCount > 0 && voterPool.length > upCount) {
-      for (let v = 0; v < Math.min(downCount, voterPool.length - upCount); v++) {
-        voters[voterPool[upCount + v]] = 'down';
-      }
+      for (let v = 0; v < Math.min(downCount, voterPool.length - upCount); v++) voters[voterPool[upCount + v]] = 'down';
     }
-    if (upCount > 0) {
-      votes.agents[a.name] = {
-        up: upCount, down: downCount,
-        score: upCount - downCount, voters
-      };
-    }
+    if (upCount > 0) _syntheticVotes.agents[a.name] = { up: upCount, down: downCount, score: upCount - downCount, voters };
   });
 
-  // Generate reviews (top ~30 agents get 1-4 reviews)
-  reviews = { agents: {}, updated_at: new Date().toISOString() };
-  const reviewable = shuffled.slice(0, 30);
-  reviewable.forEach(a => {
+  _syntheticReviews = { agents: {}, updated_at: new Date().toISOString() };
+  shuffled.slice(0, 30).forEach(a => {
     const count = Math.floor(rand() * 4) + 1;
     const agentReviews = [];
     const reviewerPool = [...DEMO_USERS].sort(() => rand() - 0.5);
     for (let r = 0; r < count && r < reviewerPool.length; r++) {
-      const rating = Math.floor(rand() * 3) + 3; // 3-5 stars
+      const rating = Math.floor(rand() * 3) + 3;
       const textIdx = Math.floor(rand() * DEMO_REVIEW_TEXTS.length);
       const daysAgo = Math.floor(rand() * 30) + 1;
-      const ts = new Date(Date.now() - daysAgo * 86400000).toISOString();
-      agentReviews.push({
-        user: reviewerPool[r],
-        rating,
-        text: DEMO_REVIEW_TEXTS[textIdx],
-        timestamp: ts
-      });
+      agentReviews.push({ user: reviewerPool[r], rating, text: DEMO_REVIEW_TEXTS[textIdx], timestamp: new Date(Date.now() - daysAgo * 86400000).toISOString() });
     }
-    reviews.agents[a.name] = agentReviews;
+    _syntheticReviews.agents[a.name] = agentReviews;
   });
-
-  // Set up demo decks — curated from the top-voted agents
-  const topAgents = [...allAgents]
-    .map(a => ({ ...a, s: (votes.agents?.[a.name]?.score) || 0 }))
-    .sort((a, b) => b.s - a.s);
-  const topNames = topAgents.slice(0, 40).map(a => a.name);
-
-  // Curated demo decks
-  const demoCoreTools = topNames.filter(n =>
-    n.includes('@rapp/') || n.includes('@kody/')
-  ).slice(0, 5);
-  const demoSalesStack = topNames.filter(n =>
-    n.includes('sales') || n.includes('crm') || n.includes('deal') || n.includes('dynamics') || n.includes('email')
-  ).slice(0, 6);
-  const demoShowcase = topNames.slice(0, 8);
-
-  allDecks = {
-    'Top Agents': demoShowcase,
-    'Core Toolkit': demoCoreTools.length >= 3 ? demoCoreTools : topNames.slice(0, 5),
-    'Sales & CRM': demoSalesStack.length >= 3 ? demoSalesStack : topNames.slice(5, 11),
-  };
-  currentDeckName = 'Top Agents';
-  deck = new Set(allDecks[currentDeckName]);
-  saveDecks();
-  renderDeckSelect();
-
-  // Re-render everything
-  renderAgents();
-  renderLeaderboard();
-  if (document.getElementById('cards-grid')) renderCards();
-  syncDemoToggle();
-  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size };
-  renderStats(stats);
-  showToast('Demo mode on — sample votes, reviews, and decks', 'success');
 }
 
-function deactivateDemoMode() {
-  if (!window._demoActive) return;
-  window._demoActive = false;
-  votes = { agents: {} };
-  reviews = { agents: {} };
-  renderAgents();
-  renderLeaderboard();
-  if (document.getElementById('cards-grid')) renderCards();
-  syncDemoToggle();
-  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size };
-  renderStats(stats);
-  showToast('Demo mode off — back to live data', 'success');
+function ensureSyntheticData() {
+  generateSyntheticData();
+  // Save real data before swapping
+  if (!window._syntheticActive) {
+    _criticVotes = votes;
+    _criticReviews = reviews;
+  }
+  votes = _syntheticVotes;
+  reviews = _syntheticReviews;
+  window._syntheticActive = true;
 }
 
+function restoreCriticData() {
+  if (window._syntheticActive) {
+    votes = _criticVotes || { agents: {} };
+    reviews = _criticReviews || { agents: {} };
+    window._syntheticActive = false;
+  }
+}
+
+// Legacy toggle (keyboard shortcut still works)
 function toggleDemoMode() {
-  if (window._demoActive) deactivateDemoMode();
-  else activateDemoMode();
+  if (window._syntheticActive) {
+    restoreCriticData();
+    renderAgents(); renderLeaderboard();
+    showToast('Switched to Critic view — real user data', 'info');
+  } else {
+    ensureSyntheticData();
+    renderAgents(); renderLeaderboard();
+    showToast('Switched to Community view — synthetic data', 'info');
+  }
+  syncDemoToggle();
 }
+
+function activateDemoMode() { ensureSyntheticData(); renderAgents(); renderLeaderboard(); syncDemoToggle(); }
+function deactivateDemoMode() { restoreCriticData(); renderAgents(); renderLeaderboard(); syncDemoToggle(); }
 
 function syncDemoToggle() {
   const btn = document.getElementById('demo-toggle');
-  if (btn) btn.classList.toggle('active', !!window._demoActive);
+  if (btn) btn.classList.toggle('active', !!window._syntheticActive);
 }
 
-// Secret keyboard trigger: type "demo" anywhere
-let _demoBuffer = '';
-document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
-  _demoBuffer += e.key.toLowerCase();
-  if (_demoBuffer.length > 10) _demoBuffer = _demoBuffer.slice(-10);
-  if (_demoBuffer.endsWith('demo')) {
-    _demoBuffer = '';
-    toggleDemoMode();
-  }
-});
-
-// URL trigger: #demo (must opt-in explicitly each time)
-if (location.hash === '#demo') {
-  history.replaceState(null, '', location.pathname + location.search); // clear hash so it doesn't persist on reload
-  init().then(() => { handleCardHash(); activateDemoMode(); });
+// Auto-activate Community (synthetic) data on load so leaderboard is never empty
+if (location.hash === '#critic') {
+  history.replaceState(null, '', location.pathname + location.search);
+  init().then(() => { handleCardHash(); });
 } else {
-  init().then(() => handleCardHash());
+  init().then(() => { handleCardHash(); ensureSyntheticData(); renderAgents(); syncDemoToggle(); });
 }
 loadSharedCart();
 updateCartUI();
