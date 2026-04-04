@@ -10,12 +10,10 @@
       }
     },
     "@kody/agent_workbench": {
-      "up": 1,
+      "up": 0,
       "down": 0,
-      "score": 1,
-      "voters": {
-        "kody-w": "up"
-      }
+      "score": 0,
+      "voters": {}
     },
     "@your-username/my_agent": {
       "up": 1,
@@ -26,5 +24,5 @@
       }
     }
   },
-  "updated_at": "2026-04-04T22:17:28.261402+00:00"
+  "updated_at": "2026-04-04T22:37:49.154394+00:00"
 }
