@@ -275,22 +275,56 @@ class MyAgent(BasicAgent):
 
 #### Step 2: Submit via GitHub Issue
 
-You do NOT need push access. Open a GitHub Issue on `kody-w/RAR` with this exact format:
+You do NOT need push access. Open a GitHub Issue on `kody-w/RAR`.
 
-```
-Title: [AGENT] @yournamespace/agent-slug
+**Title must start with `[RAR]`** — this triggers the automation pipeline.
 
-Body:
-The full contents of your agent.py file, pasted directly into the issue body.
+**Body must be JSON** with this exact format:
+
+```json
+{
+  "action": "submit_agent",
+  "payload": {
+    "code": "\"\"\"\\nMy Agent — description.\\n\"\"\"\\n\\n__manifest__ = {\\n    \"schema\": \"rapp-agent/1.0\",\\n    \"name\": \"@yourgithubusername/agent-slug\",\\n    ...\\n}\\n\\nfrom agents.basic_agent import BasicAgent\\n\\nclass MyAgent(BasicAgent):\\n    ..."
+  }
+}
 ```
+
+Or use a fenced JSON block in the issue body:
+
+````
+```json
+{
+  "action": "submit_agent",
+  "payload": {
+    "code": "full agent.py contents as a JSON string"
+  }
+}
+```
+````
+
+**Important:** Your `__manifest__` name MUST use `@yourgithubusername` as the namespace — the pipeline enforces that the publisher matches the GitHub account that opened the issue. For example, if your GitHub username is `howardhoy`, use `@howardhoy/agent-slug`.
+
+Reserved namespaces (`@borg`, `@kody`, `@rapp`) are managed by repo maintainers. To publish under a reserved namespace, submit a PR instead.
 
 The RAR automation pipeline (`scripts/process_issues.py`) will:
-1. Parse the `__manifest__` from your code
-2. Create the file at `agents/@yournamespace/agent-slug.py`
-3. Rebuild `registry.json`
-4. Auto-close the issue with a confirmation comment
+1. Parse the JSON from the issue body
+2. Extract and validate the `__manifest__` from your code
+3. Create the file at `agents/@yourgithubusername/agent-slug.py`
+4. Rebuild `registry.json`
+5. Auto-close the issue with a confirmation comment
 
-That's it. No fork, no PR, no CLI tools needed.
+**Other issue actions** (same `[RAR]` title prefix, JSON body):
+
+Vote on an agent:
+```json
+{"action": "vote", "payload": {"agent": "@borg/borg_agent", "direction": "up"}}
+```
+
+Review an agent:
+```json
+{"action": "review", "payload": {"agent": "@borg/borg_agent", "rating": 5, "text": "Excellent assimilation capabilities."}}
+```
 
 #### Step 3 (optional): Submit via PR
 
