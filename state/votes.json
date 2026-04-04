@@ -1,4 +1,13 @@
 {
-  "agents": {},
-  "updated_at": "2026-04-03T00:00:00Z"
+  "agents": {
+    "@aibast-agents-library/account-intelligence": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
+    }
+  },
+  "updated_at": "2026-04-04T19:10:14.969732+00:00"
 }
