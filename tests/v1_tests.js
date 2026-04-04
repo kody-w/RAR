@@ -1,6 +1,7 @@
-// RAR v1 Ship — Automated Test Suite
+// RAR v1 Ship — Final Test Suite
 // Run in browser console at localhost:8080
-// Tests: Feature 1 (Sharing), Feature 2 (Starter Pack), Feature 3 (Holo Effects)
+// Tests: Feature 1 (Sharing), Feature 2 (Starter Pack), Feature 3 (Holo Effects),
+//        Feature 4 (Hologram Viewer), Regression
 
 (async function runV1Tests() {
   const results = [];
@@ -12,7 +13,7 @@
     else { fail++; console.error(`  FAIL: ${name} — ${detail || ''}`); }
   }
 
-  console.log('\n=== RAR v1 TEST SUITE ===\n');
+  console.log('\n=== RAR v1 FINAL TEST SUITE ===\n');
 
   // ── Feature 1: Core Sharing ──
   console.log('--- Feature 1: Core Sharing ---');
@@ -92,9 +93,6 @@
         hasFields,
         `mintId=${!!testCard.mintId}, serial=${!!testCard.serial}, variations=${!!testCard.variations}`
       );
-
-      // Clean up test card
-      // (leave it — it's fine, the user will clear if needed)
     }
   } else {
     test('T10: mintCard (SKIP — no agents loaded)', false, 'allAgents empty');
@@ -162,7 +160,7 @@
     `unique=${holoMintIds.size}, total=${holoCards.length}`
   );
 
-  // ── Feature 3: BothAngles Holo Effects ──
+  // ── Feature 3: BothAngles Holo Effects (CSS) ──
   console.log('\n--- Feature 3: BothAngles Holo Effects ---');
 
   // T20: Fresnel CSS class exists
@@ -232,42 +230,150 @@
     'checked styleSheets'
   );
 
+  // ── Feature 4: Hologram Viewer (BothAngles + Star Wars) ──
+  console.log('\n--- Feature 4: Hologram Viewer ---');
+
+  // T26: openHologramViewer function exists
+  test('T26: openHologramViewer function exists',
+    typeof openHologramViewer === 'function',
+    typeof openHologramViewer
+  );
+
+  // T27: closeHologramViewer function exists
+  test('T27: closeHologramViewer function exists',
+    typeof closeHologramViewer === 'function',
+    typeof closeHologramViewer
+  );
+
+  // T28: toggleHoloAutoRotate function exists
+  test('T28: toggleHoloAutoRotate function exists',
+    typeof toggleHoloAutoRotate === 'function',
+    typeof toggleHoloAutoRotate
+  );
+
+  // T29: exportHologram function exists
+  test('T29: exportHologram function exists',
+    typeof exportHologram === 'function',
+    typeof exportHologram
+  );
+
+  // T30: HOLO_CARD_DB has holoTheme for Star Wars cards
+  const swCards = Object.entries(HOLO_CARD_DB).filter(([k,v]) => v.holoTheme === 'starwars');
+  test('T30: Star Wars holoTheme tagged on 4 cards',
+    swCards.length === 4,
+    `found=${swCards.length}, cards=${swCards.map(([k])=>k).join(',')}`
+  );
+
+  // T31: Borg has starwars theme
+  test('T31: Borg has holoTheme starwars',
+    HOLO_CARD_DB.borg?.holoTheme === 'starwars',
+    `theme=${HOLO_CARD_DB.borg?.holoTheme}`
+  );
+
+  // T32: Non-SW cards have no holoTheme (defaults to bothangles)
+  test('T32: Telegram has no holoTheme (defaults bothangles)',
+    !HOLO_CARD_DB.telegram?.holoTheme,
+    `theme=${HOLO_CARD_DB.telegram?.holoTheme || 'undefined (good)'}`
+  );
+
+  // T33: Three.js loaded
+  test('T33: Three.js (THREE) is available',
+    typeof THREE !== 'undefined',
+    typeof THREE
+  );
+
+  // T34: getHoloCard function exists
+  test('T34: getHoloCard function exists',
+    typeof getHoloCard === 'function',
+    typeof getHoloCard
+  );
+
+  // T35: Hologram viewer CSS exists
+  const holoViewerCSS = [...document.styleSheets].some(ss => {
+    try { return [...ss.cssRules].some(r => r.selectorText?.includes('.holo-viewer-overlay')); }
+    catch { return false; }
+  });
+  test('T35: .holo-viewer-overlay CSS rule exists',
+    holoViewerCSS,
+    'checked styleSheets'
+  );
+
+  // T36: Hologram viewer label CSS exists (incl SW theme)
+  const holoLabelCSS = [...document.styleSheets].some(ss => {
+    try { return [...ss.cssRules].some(r => r.selectorText?.includes('.holo-viewer-label')); }
+    catch { return false; }
+  });
+  test('T36: .holo-viewer-label CSS rule exists',
+    holoLabelCSS,
+    'checked styleSheets'
+  );
+
   // ── Regression Tests ──
   console.log('\n--- Regression ---');
 
-  // T26: Card mode switching
-  test('T26: cardMode variable exists',
+  // T37: Card mode switching
+  test('T37: cardMode variable exists',
     typeof cardMode !== 'undefined',
     `cardMode=${typeof cardMode !== 'undefined' ? cardMode : 'undefined'}`
   );
 
-  // T27: genCreativeArt generates valid SVG
+  // T38: genCreativeArt generates valid SVG
   if (allAgents.length > 0) {
     const svg = genCreativeArt(allAgents[0]);
-    test('T27: genCreativeArt returns valid SVG',
+    test('T38: genCreativeArt returns valid SVG',
       svg.startsWith('<svg') && svg.includes('viewBox="0 0 200 200"'),
       `starts with <svg: ${svg.startsWith('<svg')}, has 200x200: ${svg.includes('200 200')}`
     );
   } else {
-    test('T27: genCreativeArt (SKIP)', false, 'no agents');
+    test('T38: genCreativeArt (SKIP)', false, 'no agents');
   }
 
-  // T28: renderMiniCard is async
-  test('T28: renderMiniCard is async function',
+  // T39: renderMiniCard is async
+  test('T39: renderMiniCard is async function',
     renderMiniCard.constructor.name === 'AsyncFunction',
     renderMiniCard.constructor.name
   );
 
-  // T29: Collection view functions exist
-  test('T29: renderCollection exists',
+  // T40: Collection view functions exist
+  test('T40: renderCollection exists',
     typeof renderCollection === 'function',
     typeof renderCollection
   );
 
-  // T30: Slide presentation exists
-  test('T30: openSlidesPresentation exists',
+  // T41: Slide presentation exists
+  test('T41: openSlidesPresentation exists',
     typeof openSlidesPresentation === 'function',
     typeof openSlidesPresentation
+  );
+
+  // T42: 3D viewer functions exist
+  test('T42: open3DViewer exists',
+    typeof open3DViewer === 'function',
+    typeof open3DViewer
+  );
+
+  // T43: Slab viewer exists
+  test('T43: openSlabViewer exists',
+    typeof openSlabViewer === 'function',
+    typeof openSlabViewer
+  );
+
+  // T44: All 13 HOLO cards have required fields
+  let holoFieldsOk = 0;
+  for (const [slug, card] of Object.entries(HOLO_CARD_DB)) {
+    if (card.name && card.title && card.abilities && card.flavor_text && card.avatar_svg && card.set_code === 'HOLO') {
+      holoFieldsOk++;
+    }
+  }
+  test('T44: All 13 HOLO cards have required fields (name, title, abilities, flavor, svg, set)',
+    holoFieldsOk === 13,
+    `${holoFieldsOk}/13 complete`
+  );
+
+  // T45: gradeCard function exists
+  test('T45: gradeCard function exists',
+    typeof gradeCard === 'function',
+    typeof gradeCard
   );
 
   // ── Summary ──

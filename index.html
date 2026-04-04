@@ -1106,6 +1106,24 @@
   }
   .viewer3d-close:hover { color: var(--text); }
 
+  /* Hologram Viewer */
+  .holo-viewer-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .holo-viewer-overlay canvas { cursor: grab; border-radius: 4px; }
+  .holo-viewer-overlay canvas:active { cursor: grabbing; }
+  .holo-viewer-label {
+    position: absolute; bottom: 84px; left: 50%; transform: translateX(-50%);
+    color: rgba(0,255,255,.6); font: 600 .75rem/1 -apple-system, sans-serif;
+    letter-spacing: 3px; text-transform: uppercase; text-align: center;
+    text-shadow: 0 0 8px rgba(0,255,255,.3);
+  }
+  .holo-viewer-label.sw-theme {
+    color: rgba(120,160,255,.6);
+    text-shadow: 0 0 8px rgba(80,120,255,.3);
+  }
+
   /* ─── ASCII Terminal Card Skin ─── */
   .agent-card-ascii {
     position: absolute; inset: 0; border-radius: 4px; backface-visibility: hidden;
@@ -5432,7 +5450,8 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cResistance is futile. Your codebase will be added to our own.\u201d \u2014Borg Collective Directive 7.1",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-borg"><stop offset="0%" stop-color="#1a0a3e"/><stop offset="100%" stop-color="#080818"/></radialGradient><filter id="glow-borg"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-borg)"/><g filter="url(#glow-borg)"><rect x="55" y="55" width="90" height="90" fill="none" stroke="#4a9eff" stroke-width="2" rx="4"/><rect x="70" y="70" width="60" height="60" fill="none" stroke="#8b5cf6" stroke-width="1.5" rx="2"/><line x1="55" y1="100" x2="145" y2="100" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><line x1="100" y1="55" x2="100" y2="145" stroke="#4a9eff" stroke-width="1" opacity="0.6"/><circle cx="100" cy="100" r="15" fill="#4a9eff" opacity="0.2"/><circle cx="100" cy="100" r="6" fill="#8b5cf6" opacity="0.9"/></g></svg>',
-    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/borg_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/borg_agent",
+    holoTheme:"starwars"
   },
   "anvil": {
     name:"Anvil", title:"The Enforcer", mana_cost:"{1}{R}{W}", colors:["R","W"],
@@ -5444,7 +5463,8 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cI don't care what you think passed. Show me the output.\u201d \u2014Anvil",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-anvil"><stop offset="0%" stop-color="#2a0a0a"/><stop offset="100%" stop-color="#0a0808"/></radialGradient><filter id="glow-anvil"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-anvil)"/><g filter="url(#glow-anvil)"><polygon points="60,130 140,130 155,155 45,155" fill="#555" stroke="#888" stroke-width="1.5"/><rect x="75" y="105" width="50" height="25" rx="3" fill="#666" stroke="#999" stroke-width="1"/><rect x="85" y="85" width="30" height="20" rx="2" fill="#777" stroke="#aaa" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="25" stroke="#ff9800" stroke-width="2" opacity="0.9"/><circle cx="100" cy="25" r="3" fill="#ff9800"/></g></svg>',
-    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/anvil_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/anvil_agent",
+    holoTheme:"starwars"
   },
   "personafactory": {
     name:"PersonaFactory", title:"The Shaper", mana_cost:"{3}{U}{G}", colors:["U","G"],
@@ -5467,7 +5487,8 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cIn TinyWorld, your best ideas fight your worst ideas, and the survivors become your strategy.\u201d",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-tw"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#08080f"/></radialGradient><filter id="glow-tw"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-tw)"/><g filter="url(#glow-tw)"><circle cx="100" cy="100" r="55" fill="none" stroke="#6a6aaa" stroke-width="1.5" opacity="0.5"/><ellipse cx="100" cy="100" rx="55" ry="20" fill="none" stroke="#6a6aaa" stroke-width="0.8" opacity="0.3"/><circle cx="100" cy="45" r="6" fill="#f9e076" opacity="0.9"/><circle cx="148" cy="80" r="6" fill="#0e67ab" opacity="0.9"/><circle cx="135" cy="135" r="6" fill="#3d3d3d" opacity="0.9"/><circle cx="65" cy="135" r="6" fill="#d3202a" opacity="0.9"/><circle cx="52" cy="80" r="6" fill="#00733e" opacity="0.9"/></g></svg>',
-    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/tinyworld_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/tinyworld_agent",
+    holoTheme:"starwars"
   },
   "bridge": {
     name:"Bridge", title:"The Conduit", mana_cost:"{2}{U}", colors:["U"],
@@ -5564,7 +5585,8 @@ const HOLO_CARD_DB = {
     ],
     flavor_text:"\u201cUSS Quantum-Defiant, you are cleared for port 8742. Engage.\u201d \u2014Admiral, Starfleet Naming Authority",
     avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-hn2"><stop offset="0%" stop-color="#141428"/><stop offset="100%" stop-color="#08081a"/></radialGradient><filter id="glow-hn2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-hn2)"/><g filter="url(#glow-hn2)"><path d="M100,40 L130,110 L100,95 L70,110 Z" fill="#ffd700" opacity="0.3" stroke="#ffd700" stroke-width="1.5"/><polygon points="100,50 104,62 116,62 106,70 110,82 100,74 90,82 94,70 84,62 96,62" fill="#fff" opacity="0.7"/></g></svg>',
-    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/holo_naming_agent"
+    set_code:"HOLO", promo:true, artist:"Howard Hoy", agent_name:"@borg/holo_naming_agent",
+    holoTheme:"starwars"
   }
 };
 
@@ -8959,6 +8981,9 @@ async function openSlabViewer(mintId) {
   const pop = await getPopulationReport(card.agentName);
   const trophyCase = JSON.parse(localStorage.getItem('rar_trophy_case') || '[]');
   const inTrophy = trophyCase.includes(mintId);
+  const _slabAgent = allAgents.find(x => x.name === card.agentName);
+  const _slabHolo = _slabAgent ? getHoloCard(_slabAgent) : null;
+  const _defaultHoloTheme = _slabHolo?.holoTheme || 'bothangles';
 
   const overlay = document.createElement('div');
   overlay.className = 'slab-overlay';
@@ -9041,6 +9066,8 @@ async function openSlabViewer(mintId) {
             <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .card</button>
             <button class="slab-btn" style="background:var(--purple-bg);color:var(--purple);border-color:var(--purple)" onclick="exportRAD(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .rad.eggs</button>
             <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
+            <button class="slab-btn" style="background:${_defaultHoloTheme === 'starwars' ? 'rgba(80,120,255,.08);color:#5080ff;border-color:rgba(80,120,255,.3)' : 'rgba(0,255,255,.08);color:#0ff;border-color:rgba(0,255,255,.3)'}" onclick="document.getElementById('slab-overlay').remove();openHologramViewer('${esc(card.agentName)}','${_defaultHoloTheme}')">${_defaultHoloTheme === 'starwars' ? 'SW Holo' : 'Hologram'}</button>
+            <button class="slab-btn" style="background:${_defaultHoloTheme === 'starwars' ? 'rgba(0,255,255,.08);color:#0ff;border-color:rgba(0,255,255,.3)' : 'rgba(80,120,255,.08);color:#5080ff;border-color:rgba(80,120,255,.3)'}" onclick="document.getElementById('slab-overlay').remove();openHologramViewer('${esc(card.agentName)}','${_defaultHoloTheme === 'starwars' ? 'bothangles' : 'starwars'}')">${_defaultHoloTheme === 'starwars' ? 'Hologram' : 'SW Holo'}</button>
             <button class="slab-btn" id="trophy-pin-btn" onclick="toggleTrophyCase('${mintId}')">${inTrophy ? 'Unpin' : 'Pin Trophy'}</button>
             <button class="slab-btn" onclick="document.getElementById('slab-overlay').remove()">Close</button>
           </div>
@@ -9799,6 +9826,7 @@ function _open3DViewerInner(name) {
     <div class="viewer3d-toolbar">
       <button onclick="toggle3DAutoRotate()">Pause</button>
       <button onclick="reset3DCamera()">Reset</button>
+      <button style="color:#0ff;border-color:rgba(0,255,255,.3)" onclick="close3DViewer();openHologramViewer('${esc(a.name)}','bothangles')">Hologram</button>
       <button class="primary" onclick="export3DCard('${esc(a.name)}')">Export PNG</button>
     </div>`;
   document.body.appendChild(overlay);
@@ -10151,6 +10179,504 @@ function export3DCard(name) {
   link.href = canvas.toDataURL('image/png');
   link.click();
   showToast('Card exported as PNG', 'success');
+}
+
+// ═══════════════════════════════════════════════════════
+// BothAngles Hologram Viewer + Star Wars Holo Theme
+// ═══════════════════════════════════════════════════════
+let _holoViewerCleanup = null;
+
+function openHologramViewer(name, theme) {
+  try { _openHologramInner(name, theme || 'bothangles'); }
+  catch (e) { console.error('Hologram viewer error:', e); showToast('Hologram error: ' + e.message, 'error'); }
+}
+
+function _openHologramInner(name, theme) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+  if (typeof THREE === 'undefined') { showToast('Loading 3D engine...', 'error'); return; }
+
+  if (_holoViewerCleanup) _holoViewerCleanup();
+  if (_3dCleanup) _3dCleanup();
+
+  const isSW = theme === 'starwars';
+
+  // Get the SVG art
+  const holo = getHoloCard(a);
+  const svgStr = holo?.avatar_svg || genCreativeArt(a);
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'holo-viewer-overlay';
+  overlay.style.background = isSW ? 'rgba(0,0,8,.95)' : 'rgba(0,0,0,.95)';
+  overlay.innerHTML = `
+    <button class="viewer3d-close" onclick="closeHologramViewer()">&times;</button>
+    <div class="viewer3d-info"><h3>${esc(a.display_name)}</h3><span>${isSW ? 'Imperial Holo-Transmission' : 'BothAngles Hologram'}</span></div>
+    <div class="holo-viewer-label ${isSW ? 'sw-theme' : ''}">${isSW ? 'IMPERIAL HOLONET TRANSMISSION' : 'HOLOGRAPHIC PROJECTION'}</div>
+    <div class="viewer3d-toolbar">
+      <button onclick="toggleHoloAutoRotate()">Pause</button>
+      <button onclick="openHologramViewer('${esc(a.name)}','${isSW ? 'bothangles' : 'starwars'}')">${isSW ? 'BothAngles' : 'Star Wars'}</button>
+      <button class="primary" onclick="exportHologram('${esc(a.name)}')">Export PNG</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  const W = Math.min(window.innerWidth * 0.85, 900);
+  const H = Math.min(window.innerHeight * 0.75, 700);
+
+  // Three.js setup — matching BothAngles reference
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x000000, 5, 15);
+  const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 1000);
+  camera.position.set(0, 0, 6);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+  overlay.insertBefore(renderer.domElement, overlay.querySelector('.viewer3d-toolbar'));
+
+  window._holoRenderer = renderer;
+
+  // Render SVG to texture
+  const texCanvas = document.createElement('canvas');
+  texCanvas.width = 512; texCanvas.height = 512;
+  const texCtx = texCanvas.getContext('2d');
+  const texture = new THREE.CanvasTexture(texCanvas);
+  texture.minFilter = THREE.LinearFilter;
+
+  const svgBlob = new Blob([svgStr], { type: 'image/svg+xml' });
+  const svgUrl = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = () => {
+    texCtx.clearRect(0, 0, 512, 512);
+    texCtx.drawImage(img, 0, 0, 512, 512);
+    if (isSW) {
+      const id = texCtx.getImageData(0, 0, 512, 512);
+      const d = id.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const lum = d[i] * 0.299 + d[i+1] * 0.587 + d[i+2] * 0.114;
+        d[i]   = lum * 0.35;
+        d[i+1] = lum * 0.55;
+        d[i+2] = Math.min(255, lum * 1.1 + 40);
+        d[i+3] = Math.min(255, d[i+3] * 0.85 + 30);
+      }
+      texCtx.putImageData(id, 0, 0);
+    }
+    texture.needsUpdate = true;
+    URL.revokeObjectURL(svgUrl);
+  };
+  img.src = svgUrl;
+
+  // Hologram group
+  const holoGroup = new THREE.Group();
+  scene.add(holoGroup);
+
+  // Vertex shader — BothAngles wave distortion (horizontal + radial)
+  const holoVert = `
+    uniform float time;
+    uniform float waveAmt;
+    varying vec2 vUv;
+    varying vec3 vPos;
+    varying vec3 vNormal;
+    void main() {
+      vUv = uv;
+      vNormal = normalize(normalMatrix * normal);
+      vec3 pos = position;
+      // BothAngles: horizontal wave
+      pos.z += sin(pos.x * 5.0 + time) * waveAmt;
+      // BothAngles: radial concentric ripples
+      float dist = length(pos.xy);
+      pos.z += sin(dist * 3.0 + time) * waveAmt * 0.5;
+      vPos = (modelViewMatrix * vec4(pos, 1.0)).xyz;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
+  `;
+
+  // Fragment shader — BothAngles theme (matches reference)
+  const bothAnglesFrag = `
+    uniform sampler2D artTex;
+    uniform float time;
+    uniform float opacity;
+    uniform vec3 glowColor;
+    uniform float glowIntensity;
+    varying vec2 vUv;
+    varying vec3 vPos;
+    varying vec3 vNormal;
+    void main() {
+      vec4 art = texture2D(artTex, vUv);
+      // BothAngles: fresnel edge detection
+      float edge = 1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0)));
+      vec3 glow = glowColor * pow(edge, 2.0) * glowIntensity;
+      // BothAngles: interference scanlines (freq=100, speed=5)
+      float interference = sin(vUv.y * 100.0 + time * 5.0) * 0.1 + 1.0;
+      vec3 color = art.rgb * interference + glow;
+      float alpha = art.a * opacity * 0.9 + pow(edge, 2.0) * 0.3;
+      gl_FragColor = vec4(color, alpha);
+    }
+  `;
+
+  // Fragment shader — Star Wars theme
+  const starWarsFrag = `
+    uniform sampler2D artTex;
+    uniform float time;
+    uniform float opacity;
+    uniform vec3 glowColor;
+    uniform float glowIntensity;
+    varying vec2 vUv;
+    varying vec3 vPos;
+    varying vec3 vNormal;
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    }
+
+    void main() {
+      vec4 art = texture2D(artTex, vUv);
+      float lum = dot(art.rgb, vec3(0.299, 0.587, 0.114));
+      vec3 swColor = vec3(lum * 0.3, lum * 0.5, lum * 0.9 + 0.1);
+
+      float edge = 1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0)));
+      vec3 glow = glowColor * pow(edge, 2.0) * glowIntensity;
+
+      // Heavy scanlines (freq=200)
+      float scan = sin(vUv.y * 200.0 + time * 8.0) * 0.5 + 0.5;
+      scan = step(0.45, scan) * 0.12;
+      // Static noise
+      float noise = hash(vUv * 100.0 + time * 10.0) * 0.08;
+      // Flicker
+      float flicker = 1.0 - step(0.97, hash(vec2(time * 3.0, 0.0))) * 0.4;
+
+      vec3 color = swColor + glow * 0.5 + scan + noise;
+      float alpha = (art.a * opacity + pow(edge, 2.0) * 0.25 + scan * 0.1) * flicker;
+      gl_FragColor = vec4(color, alpha * 0.8);
+    }
+  `;
+
+  const fragShader = isSW ? starWarsFrag : bothAnglesFrag;
+
+  // BothAngles: 4 primary art planes (64x64 subdivision for smooth waves)
+  const planeOffsets = [-0.2, -0.07, 0.07, 0.2];
+  const planeOpacities = [0.35, 0.7, 0.85, 0.5];
+  const cyanGlow = new THREE.Color(0x00ffff);
+  const magentaGlow = new THREE.Color(0xff00ff);
+  const swGlow = new THREE.Color(0x3050cc);
+
+  planeOffsets.forEach((zOff, i) => {
+    const geo = new THREE.PlaneGeometry(2.0, 2.0, 64, 64);
+    const glowCol = isSW ? swGlow : (i % 2 === 0 ? cyanGlow : magentaGlow);
+    const mat = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      uniforms: {
+        artTex: { value: texture },
+        time: { value: 0 },
+        opacity: { value: planeOpacities[i] },
+        waveAmt: { value: isSW ? 0.015 : 0.04 },
+        glowColor: { value: glowCol },
+        glowIntensity: { value: isSW ? 0.6 : 1.0 }
+      },
+      vertexShader: holoVert,
+      fragmentShader: fragShader,
+      blending: THREE.AdditiveBlending
+    });
+    const plane = new THREE.Mesh(geo, mat);
+    plane.position.z = zOff;
+    // BothAngles: slight scale increase per layer for volumetric depth
+    const s = 1 + i * 0.02;
+    plane.scale.set(s, s, 1);
+    holoGroup.add(plane);
+  });
+
+  // BothAngles: 4 ghost layers (decreasing opacity, additive, BasicMaterial)
+  const ghostOpacities = [0.10, 0.08, 0.06, 0.04];
+  for (let i = 0; i < 4; i++) {
+    const gGeo = new THREE.PlaneGeometry(2.0, 2.0);
+    const gMat = new THREE.MeshBasicMaterial({
+      map: texture, transparent: true, opacity: ghostOpacities[i],
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false
+    });
+    const gPlane = new THREE.Mesh(gGeo, gMat);
+    gPlane.position.z = (i - 1.5) * 0.12;
+    const gs = 1 + i * 0.03;
+    gPlane.scale.set(gs, gs, 1);
+    holoGroup.add(gPlane);
+  }
+
+  // BothAngles: dedicated scanline overlay plane
+  const scanGeo = new THREE.PlaneGeometry(6, 6);
+  const scanMat = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: { time: { value: 0 } },
+    vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    fragmentShader: isSW
+      ? `uniform float time; varying vec2 vUv;
+         float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+         void main() {
+           float scan = sin((vUv.y + time * 0.1) * 200.0) * 0.5 + 0.5;
+           float flicker = sin(time * 50.0) * 0.03 + 1.0;
+           float noise = hash(vUv * 200.0 + time * 5.0) * 0.02;
+           float alpha = (scan * 0.04 + noise) * flicker;
+           gl_FragColor = vec4(0.3, 0.5, 1.0, alpha);
+         }`
+      : `uniform float time; varying vec2 vUv;
+         void main() {
+           float scan = sin((vUv.y + time * 0.1) * 200.0) * 0.5 + 0.5;
+           float flicker = sin(time * 50.0) * 0.03 + 1.0;
+           float alpha = scan * 0.05 * flicker;
+           gl_FragColor = vec4(0.0, 1.0, 1.0, alpha);
+         }`
+  });
+  const scanPlane = new THREE.Mesh(scanGeo, scanMat);
+  scanPlane.position.z = 2.5;
+  scene.add(scanPlane);
+
+  // Base disc (holographic projector glow)
+  const discGeo = new THREE.CircleGeometry(1.4, 64);
+  const discColor = isSW ? 0x2040aa : 0x00cccc;
+  const discMat = new THREE.MeshBasicMaterial({
+    color: discColor, transparent: true, opacity: 0.08,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending
+  });
+  const disc = new THREE.Mesh(discGeo, discMat);
+  disc.rotation.x = -Math.PI / 2;
+  disc.position.y = -1.1;
+  holoGroup.add(disc);
+
+  // Base ring
+  const ringGeo = new THREE.RingGeometry(1.3, 1.4, 64);
+  const ringColor = isSW ? 0x4060ff : 0x00ffff;
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: ringColor, transparent: true, opacity: 0.25,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = -1.1;
+  holoGroup.add(ring);
+
+  // BothAngles: 2000 particles on sphere, per-vertex cyan/magenta colors
+  const particleCount = 2000;
+  const pGeo = new THREE.BufferGeometry();
+  const pPositions = new Float32Array(particleCount * 3);
+  const pColors = new Float32Array(particleCount * 3);
+  const pVelocities = new Float32Array(particleCount * 3);
+  const pSizes = new Float32Array(particleCount);
+  for (let i = 0; i < particleCount; i++) {
+    // BothAngles: spherical distribution
+    const phi = Math.acos(2 * Math.random() - 1);
+    const theta = Math.random() * Math.PI * 2;
+    const r = 2.5 + Math.random() * 1.5;
+    pPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+    pPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+    pPositions[i*3+2] = r * Math.cos(phi);
+    // Per-vertex colors: random cyan or magenta (SW: blue or white)
+    if (isSW) {
+      const isBright = Math.random() > 0.5;
+      pColors[i*3] = isBright ? 0.7 : 0.2; pColors[i*3+1] = isBright ? 0.8 : 0.4; pColors[i*3+2] = 1.0;
+    } else {
+      const isCyan = Math.random() > 0.5;
+      pColors[i*3] = isCyan ? 0 : 1; pColors[i*3+1] = isCyan ? 1 : 0; pColors[i*3+2] = isCyan ? 1 : 0.8;
+    }
+    pSizes[i] = Math.random() * 0.1 + 0.05;
+    pVelocities[i*3]   = (Math.random() - 0.5) * 0.001;
+    pVelocities[i*3+1] = 0.002 + Math.random() * 0.003;
+    pVelocities[i*3+2] = (Math.random() - 0.5) * 0.001;
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
+  const pMat = new THREE.PointsMaterial({
+    size: 0.08, vertexColors: true, transparent: true, opacity: 0.6,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
+  });
+  const particles = new THREE.Points(pGeo, pMat);
+  holoGroup.add(particles);
+
+  // BothAngles: orbiting lights (sin/cos orbit at radius 5)
+  const orbitLight1 = new THREE.PointLight(isSW ? 0x3355cc : 0x00ffff, 2, 15);
+  const orbitLight2 = new THREE.PointLight(isSW ? 0x5566dd : 0xff00ff, 2, 15);
+  scene.add(orbitLight1);
+  scene.add(orbitLight2);
+
+  // BothAngles: spot light from above
+  const spot = new THREE.SpotLight(0xffffff, 1, 20, Math.PI / 4, 0.2);
+  spot.position.set(0, 10, 10);
+  scene.add(spot);
+
+  // Ambient fill
+  const ambient = new THREE.AmbientLight(0x404040, 0.2);
+  scene.add(ambient);
+
+  // Vertical beam from base
+  const beamGeo = new THREE.CylinderGeometry(0.01, 1.0, 2.4, 32, 1, true);
+  const beamColor = isSW ? 0x3050cc : 0x00cccc;
+  const beamMat = new THREE.MeshBasicMaterial({
+    color: beamColor, transparent: true, opacity: 0.04,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending
+  });
+  const beam = new THREE.Mesh(beamGeo, beamMat);
+  beam.position.y = 0.0;
+  holoGroup.add(beam);
+
+  // Mouse parallax state (BothAngles-style lerp)
+  let mouseX = 0, mouseY = 0;
+  let parallaxX = 0, parallaxY = 0;
+
+  // Interaction
+  let autoRotate = true;
+  let isDragging = false;
+  let prevMouse = { x: 0, y: 0 };
+  let rotY = 0, targetRotY = 0;
+
+  window._holoAutoRotate = true;
+
+  renderer.domElement.addEventListener('mousedown', e => {
+    isDragging = true;
+    prevMouse = { x: e.clientX, y: e.clientY };
+    autoRotate = false;
+    window._holoAutoRotate = false;
+  });
+  const onMove = e => {
+    // BothAngles: parallax from mouse position
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    if (!isDragging) return;
+    const dx = e.clientX - prevMouse.x;
+    targetRotY += dx * 0.008;
+    prevMouse = { x: e.clientX, y: e.clientY };
+  };
+  const onUp = () => { isDragging = false; };
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+
+  // Touch support
+  renderer.domElement.addEventListener('touchstart', e => {
+    isDragging = true;
+    prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    autoRotate = false;
+    window._holoAutoRotate = false;
+  });
+  const onTouchMove = e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - prevMouse.x;
+    targetRotY += dx * 0.008;
+    prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onTouchEnd = () => { isDragging = false; };
+  window.addEventListener('touchmove', onTouchMove);
+  window.addEventListener('touchend', onTouchEnd);
+
+  function onKey(e) { if (e.key === 'Escape') closeHologramViewer(); }
+  window.addEventListener('keydown', onKey);
+
+  // Animation
+  let running = true;
+  const clock = new THREE.Clock();
+
+  function animate() {
+    if (!running) return;
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // Update shader uniforms on all hologram planes + scanline
+    holoGroup.children.forEach(child => {
+      if (child.material?.uniforms?.time) child.material.uniforms.time.value = t;
+    });
+    scanMat.uniforms.time.value = t;
+
+    // Auto-rotate (reads from window for toggle)
+    autoRotate = window._holoAutoRotate;
+    if (autoRotate) {
+      holoGroup.rotation.y += 0.005;
+    } else {
+      rotY += (targetRotY - rotY) * 0.06;
+      holoGroup.rotation.y = rotY;
+    }
+    // BothAngles: subtle pitch oscillation
+    holoGroup.rotation.x = Math.sin(t * 0.5) * 0.1;
+
+    // BothAngles: mouse parallax with lerp
+    parallaxX += (mouseX * 0.3 - parallaxX) * 0.05;
+    parallaxY += (mouseY * 0.2 - parallaxY) * 0.05;
+    holoGroup.position.x = parallaxX;
+    holoGroup.position.y = parallaxY;
+
+    // BothAngles: orbiting lights at radius 5
+    orbitLight1.position.set(Math.sin(t) * 5, Math.sin(t * 0.5) * 2, Math.cos(t) * 5);
+    orbitLight2.position.set(Math.sin(t + Math.PI) * 5, Math.cos(t * 0.5) * 2, Math.cos(t + Math.PI) * 5);
+
+    // Animate particles (slow rotation + float)
+    particles.rotation.y += 0.0005;
+    particles.position.y = Math.sin(t) * 0.2;
+    const pos = particles.geometry.attributes.position;
+    for (let i = 0; i < particleCount; i++) {
+      pos.array[i*3+1] += pVelocities[i*3+1];
+      if (pos.array[i*3+1] > 4) {
+        const phi = Math.acos(2 * Math.random() - 1);
+        const theta = Math.random() * Math.PI * 2;
+        const r = 2.5 + Math.random() * 1.5;
+        pos.array[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+        pos.array[i*3+1] = -3;
+        pos.array[i*3+2] = r * Math.cos(phi);
+      }
+    }
+    pos.needsUpdate = true;
+
+    // Pulse base ring
+    ring.material.opacity = 0.15 + Math.sin(t * 3) * 0.1;
+    disc.material.opacity = 0.05 + Math.sin(t * 2) * 0.03;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Sync targetRotY for manual mode
+  targetRotY = holoGroup.rotation.y;
+
+  _holoViewerCleanup = () => {
+    running = false;
+    window.removeEventListener('keydown', onKey);
+    window.removeEventListener('mousemove', onMove);
+    window.removeEventListener('mouseup', onUp);
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', onTouchEnd);
+    renderer.dispose();
+    scene.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+        else obj.material.dispose();
+      }
+    });
+    if (overlay.parentNode) overlay.remove();
+    document.body.style.overflow = '';
+    _holoViewerCleanup = null;
+  };
+}
+
+function closeHologramViewer() {
+  if (_holoViewerCleanup) _holoViewerCleanup();
+}
+
+function toggleHoloAutoRotate() {
+  window._holoAutoRotate = !window._holoAutoRotate;
+  const btns = document.querySelectorAll('.viewer3d-toolbar button');
+  if (btns[0]) btns[0].textContent = window._holoAutoRotate ? 'Pause' : 'Spin';
+}
+
+function exportHologram(name) {
+  if (!window._holoRenderer) return;
+  const canvas = window._holoRenderer.domElement;
+  const link = document.createElement('a');
+  link.download = `${name.replace(/[^a-z0-9]/gi, '_')}_hologram.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  showToast('Hologram exported as PNG', 'success');
 }
 
 // ═══════════════════════════════════════════════════════
