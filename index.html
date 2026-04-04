@@ -2071,7 +2071,7 @@ document.documentElement.className = 'rar-guard';
       <button data-tier="2" onclick="setUITier(2)" style="display:none">Lux</button>
     </div>
     <button onclick="cycleIntent()" id="intent-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--blue, #58a6ff);background:none;color:var(--blue, #58a6ff);font-size:.72rem;cursor:pointer" title="Toggle Business / Holo view">Business</button>
-    <button onclick="openHail()" id="hail-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.08);color:var(--accent);font-size:.72rem;cursor:pointer;font-weight:600;display:none" title="Hail an agent — Uber-like dispatch">Hail</button>
+    <!-- Hail is now built into the search bar -->
     <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
     <button class="demo-toggle t2-only" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
     <div class="cart-toggle t2-only" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
@@ -2098,7 +2098,7 @@ document.documentElement.className = 'rar-guard';
     <div class="toolbar">
       <div class="search-box">
         <span class="si">&#128269;</span>
-        <input type="text" id="search" placeholder="What are you looking for?" oninput="renderAgents()">
+        <input type="text" id="search" placeholder="What do you need done?" oninput="renderAgents()">
         <span class="kbd">/</span>
       </div>
       <select class="sort-select" id="sort-select" onchange="renderAgents()">
@@ -3541,22 +3541,40 @@ function rating(a) {
 const TIER_ORDER = { official: 0, verified: 1, community: 2, experimental: 3, unverified: 4 };
 
 function renderAgents() {
-  const q = document.getElementById('search').value.toLowerCase();
+  const q = document.getElementById('search').value.toLowerCase().trim();
   const sort = document.getElementById('sort-select').value;
   let f = allAgents.filter(a => {
     const catOk = currentCat === 'all' || (currentCat === '__experimental' ? a.quality_tier === 'experimental' : a.category === currentCat);
-    const qOk = !q || a.name.toLowerCase().includes(q) || a.display_name.toLowerCase().includes(q) ||
-      a.description.toLowerCase().includes(q) || (a.tags || []).some(t => t.toLowerCase().includes(q)) ||
-      (a.author || '').toLowerCase().includes(q);
-    return catOk && qOk;
+    if (!catOk) return false;
+    if (!q) return true;
+    const haystack = [a.name, a.display_name, a.description, a.category?.replace(/_/g,' '), ...(a.tags||[]), a.author||''].join(' ').toLowerCase();
+    return q.split(/\s+/).some(w => w.length > 1 && haystack.includes(w));
   });
-  // Intent-aware sort — float matching categories to the top, then apply chosen sort within groups
-  f.sort((a, b) => intentWeight(b) - intentWeight(a));
-  if (sort === 'popular') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (score(b) - score(a)));
-  else if (sort === 'name') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || a.display_name.localeCompare(b.display_name));
-  else if (sort === 'rating') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (rating(b) - rating(a)));
-  else if (sort === 'newest') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((b._lines || 0) - (a._lines || 0)));
-  else if (sort === 'verified') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2)));
+
+  // When searching, sort by relevance (word match scoring)
+  if (q) {
+    const words = q.split(/\s+/).filter(w => w.length > 1);
+    f.forEach(a => {
+      let s = 0;
+      const name = (a.display_name||'').toLowerCase(), desc = (a.description||'').toLowerCase();
+      const tags = (a.tags||[]).join(' ').toLowerCase();
+      for (const w of words) {
+        if (name.includes(w)) s += 10;
+        if (desc.includes(w)) s += 5;
+        if (tags.includes(w)) s += 3;
+      }
+      s += intentWeight(a) * 2;
+      a._searchScore = s;
+    });
+    f.sort((a, b) => b._searchScore - a._searchScore);
+  } else {
+    f.sort((a, b) => intentWeight(b) - intentWeight(a));
+    if (sort === 'popular') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (score(b) - score(a)));
+    else if (sort === 'name') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || a.display_name.localeCompare(b.display_name));
+    else if (sort === 'rating') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (rating(b) - rating(a)));
+    else if (sort === 'newest') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((b._lines || 0) - (a._lines || 0)));
+    else if (sort === 'verified') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2)));
+  }
 
   if (!f.length) {
     document.getElementById('agents-container').innerHTML = '<div class="empty-state"><h3>No agents found</h3><p>Try a different search or category.</p></div>';
