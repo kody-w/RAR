@@ -957,12 +957,12 @@ document.documentElement.className = 'rar-guard';
     );
     transition: transform .1s ease-out;
   }
-  .holo-ability { margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .holo-ability { margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
   .holo-flavor {
     font-style: italic; font-size: .55rem; color: #8a7e6a;
     border-top: 1px solid #3d3322; padding-top: 3px; margin-top: 3px;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .agent-haiku {
     font-style: italic; font-size: .5rem; line-height: 1.35;
@@ -6173,7 +6173,7 @@ function agentToCard(a) {
       <div class="holo-art">${holoArt || genCreativeArt(a)}</div>
       <div class="holo-type">${esc(holoTypeLine)}</div>
       <div class="holo-text">
-        ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}
+        ${abilities.slice(0, 2).map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}
         <div class="holo-flavor">${esc(flavor)}</div>
       </div>
       <div class="holo-footer">
