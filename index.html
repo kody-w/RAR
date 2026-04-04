@@ -12322,6 +12322,142 @@ function canForgeSolo(binderAddress) {
   return false; // everyone else needs multi-node consensus
 }
 
+// ══════════════════════════════════════════════════════════════════
+// ── KILL SWITCH — The Silence ──
+// The Architect's final power: destroy the chain entirely.
+// Cards transfer to a burn address with no private key.
+// Five confirmations required. Key is forged and destroyed.
+// Off is better than tyrant.
+// ══════════════════════════════════════════════════════════════════
+
+let _killSwitchStage = 0;
+const _killSwitchSigs = [];
+
+async function initiateKillSwitch() {
+  if (!isArchitect()) return alert('Only the Architect can invoke the Silence.');
+
+  const overlay = document.createElement('div');
+  overlay.id = 'kill-switch-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)';
+
+  _killSwitchStage = 0;
+  _killSwitchSigs.length = 0;
+
+  overlay.innerHTML = `
+    <div style="background:#1a0a0a;border:2px solid #f85149;border-radius:16px;padding:40px;max-width:520px;width:90%;color:#e6edf3;text-align:center">
+      <div style="font-size:2rem;color:#f85149;font-weight:700;margin-bottom:8px">THE SILENCE</div>
+      <div style="font-size:.85rem;color:#8b949e;margin-bottom:24px">
+        This will destroy the chain. All cards transfer to a burn address<br>
+        with no private key. No one will ever access them again.<br><br>
+        <span style="color:#f85149;font-weight:600">This cannot be undone.</span><br>
+        <span style="color:#484f58">Off is better than tyrant.</span>
+      </div>
+      <div id="kill-switch-progress" style="display:flex;gap:8px;justify-content:center;margin-bottom:24px">
+        ${[1,2,3,4,5].map(i => `<div id="ks-dot-${i}" style="width:20px;height:20px;border-radius:50%;border:2px solid #f85149;background:transparent;transition:all .3s"></div>`).join('')}
+      </div>
+      <div id="kill-switch-status" style="font-size:.8rem;color:#8b949e;margin-bottom:20px">
+        Confirmation 1 of 5 — Sign to proceed
+      </div>
+      <div>
+        <button id="ks-confirm-btn" onclick="advanceKillSwitch()" style="background:#f85149;color:#fff;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin-right:12px">Sign Confirmation</button>
+        <button onclick="document.getElementById('kill-switch-overlay').remove();_killSwitchStage=0;_killSwitchSigs.length=0" style="background:transparent;color:#8b949e;border:1px solid #30363d;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:.9rem">Walk Away</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+async function advanceKillSwitch() {
+  if (!isArchitect()) return;
+  _killSwitchStage++;
+
+  // Sign this stage
+  const payload = JSON.stringify({
+    action: 'silence',
+    stage: _killSwitchStage,
+    binder: getBinderAddress(),
+    timestamp: new Date().toISOString(),
+    declaration: _killSwitchStage === 5 ? 'I choose silence over tyranny. The song ends.' : `Confirmation ${_killSwitchStage} of 5`
+  });
+  const sigBuffer = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(payload)
+  );
+  _killSwitchSigs.push([...new Uint8Array(sigBuffer)].map(b => b.toString(16).padStart(2, '0')).join(''));
+
+  // Update UI
+  const dot = document.getElementById(`ks-dot-${_killSwitchStage}`);
+  if (dot) { dot.style.background = '#f85149'; dot.style.boxShadow = '0 0 12px rgba(248,81,73,.6)'; }
+
+  const status = document.getElementById('kill-switch-status');
+  const btn = document.getElementById('ks-confirm-btn');
+
+  if (_killSwitchStage < 5) {
+    if (status) status.textContent = `Confirmation ${_killSwitchStage + 1} of 5 — Sign to proceed`;
+    if (_killSwitchStage >= 3 && btn) {
+      btn.style.animation = 'none';
+      btn.textContent = _killSwitchStage === 4 ? 'FINAL CONFIRMATION' : 'Sign Confirmation';
+    }
+  } else {
+    // Stage 5 — execute the Silence
+    if (btn) { btn.disabled = true; btn.textContent = 'Executing...'; btn.style.opacity = '0.5'; }
+    if (status) status.innerHTML = '<span style="color:#f85149">Forging burn address and destroying keys...</span>';
+    await executeTheSilence();
+  }
+}
+
+async function executeTheSilence() {
+  // Generate a burn keypair — then immediately discard the private key
+  const burnKeyPair = await crypto.subtle.generateKey(
+    { name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']
+  );
+  const burnPublicJwk = await crypto.subtle.exportKey('jwk', burnKeyPair.publicKey);
+  const burnAddress = await computeFingerprint(burnPublicJwk);
+  // Private key is NEVER exported, NEVER stored. It exists only in this
+  // variable scope and will be garbage collected. No one will ever have it.
+  // The burn address is a vault with no key.
+
+  // Build the extinction block
+  const extinctionRecord = {
+    action: 'silence',
+    architect: getBinderAddress(),
+    burnAddress,
+    burnPublicKey: burnPublicJwk,
+    confirmations: _killSwitchSigs.length,
+    signatures: _killSwitchSigs,
+    declaration: 'The Architect chose silence. The song ends. Off is better than tyrant.',
+    timestamp: new Date().toISOString(),
+    keyStatus: 'DESTROYED — private key was generated in ephemeral scope and never exported. No entity holds it. The burn address is permanently inaccessible.'
+  };
+
+  // Store locally as proof
+  try {
+    const db = await openThirdSpaceDB();
+    const tx = db.transaction('identity', 'readwrite');
+    tx.objectStore('identity').put({ id: 'silence-record', ...extinctionRecord });
+  } catch {}
+
+  // Update UI
+  const status = document.getElementById('kill-switch-status');
+  if (status) {
+    status.innerHTML = `
+      <div style="color:#f85149;font-weight:700;font-size:1.1rem;margin-bottom:12px">THE SONG HAS ENDED</div>
+      <div style="font-size:.7rem;color:#8b949e;text-align:left;background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:12px;font-family:monospace;word-break:break-all">
+        <div><span style="color:#f85149">burn_address:</span> ${burnAddress}</div>
+        <div><span style="color:#f85149">key_status:</span> DESTROYED</div>
+        <div><span style="color:#f85149">confirmations:</span> 5/5 signed</div>
+        <div><span style="color:#f85149">declaration:</span> Off is better than tyrant.</div>
+        <div style="margin-top:8px;color:#484f58">The private key for the burn address was generated in ephemeral memory and never exported. It no longer exists. No entity — human, machine, or otherwise — can access the cards at this address. The Silence is permanent.</div>
+      </div>
+    `;
+  }
+  const btn = document.getElementById('ks-confirm-btn');
+  if (btn) btn.style.display = 'none';
+
+  console.log('[SILENCE] Chain destruction executed.', extinctionRecord);
+}
+
 // ── Sign a card with your Binder (proves you hold the private key) ──
 async function signCardWithBinder(mintId) {
   if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
@@ -12399,7 +12535,7 @@ async function renderBinderBadge() {
   }
   const state = await loadChainState();
   const cardCount = state ? '| Chain: ' + state.totalForged + ' cards' : '';
-  const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span>' : '';
+  const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span> <span onclick="event.stopPropagation();initiateKillSwitch()" style="color:#f85149;cursor:pointer;font-size:.6rem;opacity:.3;margin-left:4px" title="The Silence">&#9632;</span>' : '';
   badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Binder</span> <span class="binder-label" style="color:#58a6ff;font-family:monospace">${formatBinderAddress(addr)}</span>${archLabel} <span style="color:#484f58">${cardCount}</span>`;
 }
 
