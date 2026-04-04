@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["311", "citizen-services", "municipal", "routing", "SLA", "local-government"],
     "category": "slg_government",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

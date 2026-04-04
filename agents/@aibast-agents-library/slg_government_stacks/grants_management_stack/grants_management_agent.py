@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["grants", "budget", "reporting", "local-government", "state-government"],
     "category": "slg_government",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

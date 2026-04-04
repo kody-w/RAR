@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["loyalty", "rewards", "points", "retention", "tier", "b2c"],
     "category": "b2c_sales",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

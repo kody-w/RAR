@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["FOIA", "public-records", "redaction", "transparency", "government"],
     "category": "slg_government",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

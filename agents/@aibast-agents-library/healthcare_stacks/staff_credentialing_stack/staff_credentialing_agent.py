@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["credentialing", "licenses", "certifications", "dea", "compliance", "healthcare"],
     "category": "healthcare",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

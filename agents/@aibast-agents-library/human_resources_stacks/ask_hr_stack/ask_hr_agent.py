@@ -26,7 +26,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["hr", "human-resources", "benefits", "time-off", "employee-self-service"],
     "category": "human_resources",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["contract", "risk", "legal", "compliance", "professional-services"],
     "category": "professional_services",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

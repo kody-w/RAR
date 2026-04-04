@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["onboarding", "customer-success", "saas", "adoption", "milestones"],
     "category": "software_digital_products",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

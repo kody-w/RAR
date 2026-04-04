@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["mission", "reporting", "KPI", "stakeholder", "federal", "dashboard"],
     "category": "federal_government",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

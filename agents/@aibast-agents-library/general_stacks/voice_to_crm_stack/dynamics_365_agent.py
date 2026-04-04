@@ -25,7 +25,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["voice", "d365", "crm", "speech", "entity-extraction", "sync"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

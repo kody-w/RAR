@@ -25,7 +25,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["sales", "simulation", "training", "objections", "personas", "scoring"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

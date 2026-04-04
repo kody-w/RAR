@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["emissions", "carbon", "compliance", "ghg", "sustainability", "energy"],
     "category": "energy",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

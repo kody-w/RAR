@@ -21,7 +21,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["supplier", "risk", "procurement", "supply-chain", "manufacturing"],
     "category": "manufacturing",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

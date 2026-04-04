@@ -25,7 +25,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["cross-sell", "upsell", "revenue", "product-affinity", "recommendations"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

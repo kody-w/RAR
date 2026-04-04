@@ -25,7 +25,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["procurement", "purchasing", "vendor", "approval", "spend-analysis"],
     "category": "general",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

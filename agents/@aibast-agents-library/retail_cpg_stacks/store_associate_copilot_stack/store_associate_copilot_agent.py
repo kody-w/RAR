@@ -33,7 +33,7 @@ __manifest__ = {
         "retail",
     ],
     "category": "retail_cpg",
-    "quality_tier": "community",
+    "quality_tier": "verified",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }
