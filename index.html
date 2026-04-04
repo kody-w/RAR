@@ -4231,14 +4231,14 @@ function openAgent(name) {
       </div>` : ''}
       <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
         ${isLocalDevice
-          ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',14)} Remove Local Agent</a>
-             <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',14)} Submit to Store</a>`
-          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',14)} agent.py</a>
-             <a href="#" onclick="event.preventDefault();downloadAsciiCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',14)} card.txt</a>
-             <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',14)} Copy Link</a>`}
-        <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?svgIcon('cart','#39d353',14)+' In Cart':svgIcon('cart','#58a6ff',14)+' Add to Cart'}</a>
-        <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',14)} Share</a>
-        ${!isLocalDevice ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('lightning','#d2a8ff',14)} Stream into Memory</a>` : ''}
+          ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',32)} Remove Local Agent</a>
+             <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} Submit to Store</a>`
+          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} agent.py</a>
+             <a href="#" onclick="event.preventDefault();downloadAsciiCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} card.txt</a>
+             <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',32)} Copy Link</a>`}
+        <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?svgIcon('cart','#39d353',32)+' In Cart':svgIcon('cart','#58a6ff',32)+' Add to Cart'}</a>
+        <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',32)} Share</a>
+        ${!isLocalDevice ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('lightning','#d2a8ff',32)} Stream into Memory</a>` : ''}
       </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
