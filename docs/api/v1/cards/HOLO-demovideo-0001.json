@@ -1,7 +1,7 @@
 {
   "index": 10,
   "timestamp": "2026-04-04T00:00:10.000Z",
-  "prevHash": "ceca662dd280993337f49b749a1bf308a34a0795205f9671c32adf89bac5d34e",
+  "prevHash": "8493500a04d42e97322724d1008fd0b49fe7b4f2a4315a2dad7a1cf47f0ddf6c",
   "type": "forge",
   "data": {
     "mintId": "HOLO-demovideo-0001",
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "hash": "c2c382f3d6e9c6295dcdbdd907f578697c32f007c9ba5acc4c74b47a85b8e6b2"
+  "hash": "864f4b8ce06232d0f5f8f3c79a7f155931162a01a7ceb64e789b359c2e9f0aae"
 }

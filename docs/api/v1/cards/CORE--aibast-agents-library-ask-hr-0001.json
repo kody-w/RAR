@@ -1,7 +1,7 @@
 {
   "index": 91,
   "timestamp": "2026-04-04T00:01:31.000Z",
-  "prevHash": "c079b0e12c492a5788d37c54934d29a081f0aca0d0c61186f6839afa28167ecf",
+  "prevHash": "f84a8084bc826d72e9ff9ed0560fdfb3fab744d9a93e9e941adf03efa4c5c7db",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-ask-hr-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "51424d4add1d7e0de7532eed3d1589ac2e9b76643a7e9b185a7460fd6c8a5d2b"
+  "hash": "ad255508f57af2d1bb68002bae6d2a24564a09e2ba368eddf9ee8df35b003d3a"
 }

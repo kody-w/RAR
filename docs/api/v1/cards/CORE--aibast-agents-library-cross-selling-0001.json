@@ -1,7 +1,7 @@
 {
   "index": 69,
   "timestamp": "2026-04-04T00:01:09.000Z",
-  "prevHash": "e257a270d0ea29eee562531f9387047dcecf740588be54a24f0d8d2dbc1aa418",
+  "prevHash": "1d24b3638b3a9830281e68ea14fb04a7899875ef42e3700e40b41391f6fa4b17",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-cross-selling-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "35a79b110908921fc42edfd6fc7cac2fc43a5f088080684ec276eaccdb608145"
+  "hash": "5c254ad5c371f6369ebbc7ebe6af8db281fa67df701565f9e8ec171134ae587f"
 }

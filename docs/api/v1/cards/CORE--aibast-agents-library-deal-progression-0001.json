@@ -1,7 +1,7 @@
 {
   "index": 26,
   "timestamp": "2026-04-04T00:00:26.000Z",
-  "prevHash": "550374a1c56912ecc2247dfc64e4379ce201d729c81c2faa72a8b778e47d1f17",
+  "prevHash": "3f65cd4bd226364e1715b8a9f8219866af3211bda76e738cd7fc9043d7e82e52",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-deal-progression-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "dc53695210be3efda3d56c6684440dc6623b6665002b3e829cd40e4c4e9debb6"
+  "hash": "0c0da4de48f5b7d2355e2af0f9e746d2f8fe232d71f77d0676cc1f3cb7c841b3"
 }

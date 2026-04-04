@@ -1,7 +1,7 @@
 {
   "index": 4,
   "timestamp": "2026-04-04T00:00:04.000Z",
-  "prevHash": "6d4111d0e347308335f8353e3d004370809d7480175d159916774642b3de6ae2",
+  "prevHash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c",
   "type": "forge",
   "data": {
     "mintId": "HOLO-tinyworld-0001",
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "hash": "93a1985d10606124f40f3c408cd56bbf3fd3e1b4f6eeeb310f911268ce9f967d"
+  "hash": "64708f8eed1416244d11140dda53196a1c705c77ad55b9fed02c85792d9d0ad1"
 }

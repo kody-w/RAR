@@ -1,7 +1,7 @@
 {
   "index": 136,
   "timestamp": "2026-04-04T00:02:16.000Z",
-  "prevHash": "bc82751d24fd73e65f28cefac2d53f5cc37edd1e355d6b60d47aed49920a52b4",
+  "prevHash": "feed22982b7f3a7057bfbf4c0f42c56d8dbb624a8144b879a81a30ce98fbbe42",
   "type": "forge",
   "data": {
     "mintId": "CORE--kody-manage-memory-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "be1b706d1a42573f5f7a2d53b70b76b436084a16d42adc4c0bf4281222cfcaa4"
+  "hash": "045991740fb2d8c02f478762f149623748b624c5fdab157ab597fe422f65a21e"
 }

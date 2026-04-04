@@ -1,7 +1,7 @@
 {
   "index": 78,
   "timestamp": "2026-04-04T00:01:18.000Z",
-  "prevHash": "1c8bf77c18fab773d057b7bef887e7f4f56b86cb1ea3016b3f91f5b5e7fd9d4b",
+  "prevHash": "77b06eb74af3bb06de22350a29d3b2b2f97e085c6d48d9d02de53757c9dd2549",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-sales-coach-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "abefb79830f17433afd58e2f99113001720fbea8df2f4f7e830bd8dc7660c0d6"
+  "hash": "6b37b6211e9c62f34b5192f660603a2d52c07e74d9b911c6a82e2ee385f6a297"
 }

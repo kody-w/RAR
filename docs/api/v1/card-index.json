@@ -1,829 +1,829 @@
 {
   "HOLO-borg-0001": {
     "blockIndex": 1,
-    "blockHash": "95daeb7762e11187e9ffd2f20b56eab3544630743fc10f947c7d9da54a9a3c7b",
+    "blockHash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "8233575219de43ce3f3c726ca8094ebf5c88ff70f14c58287abbbf61707e6ddb"
   },
   "HOLO-anvil-0001": {
     "blockIndex": 2,
-    "blockHash": "a1a996bf3fcdb4b22935fd39a3ed47862127054f467d0d53815997c3b18a1dbe",
+    "blockHash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "9b156d07b478a70240048dee8d1df566f33bb013b75dd6b7830da981d2cd8749"
   },
   "HOLO-personafactory-0001": {
     "blockIndex": 3,
-    "blockHash": "6d4111d0e347308335f8353e3d004370809d7480175d159916774642b3de6ae2",
+    "blockHash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "32725ccbfe06d64b4a3cba7eb25fcc4e1fef4d056471e663e6975734cbdb01d9"
   },
   "HOLO-tinyworld-0001": {
     "blockIndex": 4,
-    "blockHash": "93a1985d10606124f40f3c408cd56bbf3fd3e1b4f6eeeb310f911268ce9f967d",
+    "blockHash": "64708f8eed1416244d11140dda53196a1c705c77ad55b9fed02c85792d9d0ad1",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "61a0d2861621314783b1b3c0ce4480c1c3bb832f52f81c9a06458926b6ac1503"
   },
   "HOLO-bridge-0001": {
     "blockIndex": 5,
-    "blockHash": "35869153802aa1945efd380ac84e76650f8860fbe4e66364c64874906ba381c1",
+    "blockHash": "cf051629533016fc03ca4ddfc494cb266f324adfaa4484346acee438a30476c3",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "5a6088dc87970d5258b2552148703a2ff8800312ac02d5dfcf171397a55ece16"
   },
   "HOLO-telegram-0001": {
     "blockIndex": 6,
-    "blockHash": "9d72b0d422cd9fcefaf64df3716ead4f612f33193d789431021cec7c8b3eb74d",
+    "blockHash": "fae19870c51629950a17f9ade441bc7e8409ff4f653d8d2a9ce86b7bd6c0d6c7",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "3fbd428daa4b32b3b07f537eaa8ced4247d887c95e3236ddf823f821aa1877d3"
   },
   "HOLO-contextmemory-0001": {
     "blockIndex": 7,
-    "blockHash": "84cfbef80cfc492d60669799fd1316701d7a24dde530bae338f7b200002e46b6",
+    "blockHash": "afb3601b37a264b81f8bc22eefffefdb6c31cbb8656cfec20d83dd2a39a486af",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "75acde549630b224d49875662d3f67964439d70daa67feba43ff5b2c3aa74d7e"
   },
   "HOLO-managememory-0001": {
     "blockIndex": 8,
-    "blockHash": "6f1574b2dfd091f7908c92a2d9d962c2d8d5d7ef915a8d026d10a46ff067e0ba",
+    "blockHash": "f6d7c2058176610d3ef55ff84eb721f94ba81b39c2564be057ef93f35ba113d9",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "15e591c917f5470871a85a821d3ccbd2f612636ee4e064101ebf33ce1a913fc2"
   },
   "HOLO-prompttovideo-0001": {
     "blockIndex": 9,
-    "blockHash": "ceca662dd280993337f49b749a1bf308a34a0795205f9671c32adf89bac5d34e",
+    "blockHash": "8493500a04d42e97322724d1008fd0b49fe7b4f2a4315a2dad7a1cf47f0ddf6c",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "3a5fd400c88019f73c13343d6bb3ba382f8f8204b45e969442cc64b0962cea86"
   },
   "HOLO-demovideo-0001": {
     "blockIndex": 10,
-    "blockHash": "c2c382f3d6e9c6295dcdbdd907f578697c32f007c9ba5acc4c74b47a85b8e6b2",
+    "blockHash": "864f4b8ce06232d0f5f8f3c79a7f155931162a01a7ceb64e789b359c2e9f0aae",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "89754b799e05ecb92578fc06a8f1ffaf7b61bb0c8170490bdc02bac8b86d3d66"
   },
   "HOLO-experiment-0001": {
     "blockIndex": 11,
-    "blockHash": "f4a21b3f68bd55c4ed7409f12b8a809dd675155f5aaf67c7c3f6783073157f9b",
+    "blockHash": "83b097e901db0720f8a9718af735b83d59b09040ac14748e8d18e15cf25c6973",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "37f94f580e2b8d6450f4a839d07851a5313fac42f74b3f72d1f02fb25ffb484a"
   },
   "HOLO-hackernews-0001": {
     "blockIndex": 12,
-    "blockHash": "d1e7f0b0f8f1e2913a192ef6e64878afb07ec7ace602dc8da394798d297631e6",
+    "blockHash": "6ad930d91da01b01263a1069e3492a1ef8eb1e5a4ca325e0634feaee22994f05",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "416b589266d1ff0d1619d0eb6bd8b67db8de5d8a26206a4a6b613bb189c1c1ec"
   },
   "HOLO-holonaming-0001": {
     "blockIndex": 13,
-    "blockHash": "fc57bb1450fad831ab7abc9560b19ff3e42658ca4ea18f699b5a7295f1129bc8",
+    "blockHash": "5e0ec588ef62f43f27ee290a39dafca4324ad4fdb726f95aa96864b06980eb27",
     "owner": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
     "cardHash": "468487f9aa1bea82b0719c62734da983a78c63b38e5a19b915e818fe1aa1fb8f"
   },
   "CORE--aibast-agents-library-account-intelligence-0001": {
     "blockIndex": 14,
-    "blockHash": "30e00adbb6b604dfe76de8dba128ec5feeb8639e12cb5f4478834fd85ab43413",
+    "blockHash": "88a86bcb0045aa8d2b3174520357ad565fb5fcc5e88019d6b21e28225aea446d",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "bd8e1b2062ac46e08dc48f7f944db2c374a4189af342fa8590eb5090af042b3c"
   },
   "CORE--aibast-agents-library-account-intelligence-orchestrator-0001": {
     "blockIndex": 15,
-    "blockHash": "202e639bd7580c5b603457ecb3bf413ac6fb9fe596817f61a24b06fb12032628",
+    "blockHash": "07682b9f00f0a838319a3c007142376412283a15e9d7bd49c0838f0dcc8bc22f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "2870248652170100ea0b20ba08361e059cf0bcd060d0ef0e24e6c49122bd6e6b"
   },
   "CORE--aibast-agents-library-action-prioritization-0001": {
     "blockIndex": 16,
-    "blockHash": "934260040cd5cdc98f3caf62c578ab9c3bf750bda5d061d7f04b23ff602a9396",
+    "blockHash": "fc58c3b4c4d97fd76106660c0864acdae876efc95f9363380fa361aca49d41a6",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "be44504d21c1db766fef98ed05387ffb38d1958e210bcd57e9ecf0687e0258e7"
   },
   "CORE--aibast-agents-library-competitive-intelligence-0001": {
     "blockIndex": 17,
-    "blockHash": "972404f4fd0be913f5e99e2fe2ab76a84748943b2cb2728cc2fae4fa8e548ff3",
+    "blockHash": "c0bbdcdc160b0a3ce2ddf9d09ba7bfff9d7f607fde5fd5c3ba68309ce1a75127",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "c5b49ec9cdacba96bccbe23967933f6f3000a23b7f7c152eefe1669981be83a3"
   },
   "CORE--aibast-agents-library-deal-tracking-0001": {
     "blockIndex": 18,
-    "blockHash": "932e0a678ab160d852370ac4aca3c17943bcdbeb8ea1a289032b955b13d81c26",
+    "blockHash": "4139206ed9e0761cc27dd66ffc231de5c6bc75318b7abf27d919b37eb46e4f8f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f7690245dca8be483a8c6a5daf4923a7f27d1ea2810ecc94c0d63e382886e2bf"
   },
   "CORE--aibast-agents-library-meeting-prep-0001": {
     "blockIndex": 19,
-    "blockHash": "dfc315446ffe6074d83cb40ac255ca4d015d177678e23fa25fea72bc373e494f",
+    "blockHash": "84d5649af8b8b3c39d761ae54e47611b1d235215f550b65df0656463d897e3b1",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "a08d6e203740353de597f924b79ce51379515dc1194a2d800e0c0b71efcdb42f"
   },
   "CORE--aibast-agents-library-account-messaging-0001": {
     "blockIndex": 20,
-    "blockHash": "c9fb44a7741c515c25509245ef14817f10acdd57049119cb05aced51042cb27e",
+    "blockHash": "637a9cee637ab2704e1c8695e6a67580cb6ece1fcd6926b57be35251102836f5",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "603391406b63fa1cc5c51460c7889b276c47c3c6a1b5b2cb6eb2c5ef63b1e308"
   },
   "CORE--aibast-agents-library-account-risk-assessment-0001": {
     "blockIndex": 21,
-    "blockHash": "94697088e7a9874f3f470e39d09bd75270b67e3befea414f6c18bd81facf1d16",
+    "blockHash": "709ce97b408787416c683a32c960803517d7e38982310937e9ab1c7799226ae5",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d5cfc84ae658b805245b77a41709a116537b9808cdd70abf84bca5f8810f77c2"
   },
   "CORE--aibast-agents-library-stakeholder-intelligence-0001": {
     "blockIndex": 22,
-    "blockHash": "bf1cd49961e0cfce6f333b52ec7eda3add9766c2b129ad351806fc229cf5f84b",
+    "blockHash": "67400b5986ba7723a7c13f58d8ace36f4f63ad132b1e554c0d3995edacdecb9f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "3a93d5aae42057ac8c2e18392d31e69adc4fe1cf0c89adbaa1c7448c5f0c7008"
   },
   "CORE--aibast-agents-library-activity-gap-0001": {
     "blockIndex": 23,
-    "blockHash": "93522d7a23cc91f0ea14638d95de0be253fb501d553cf5095d137cd45ae25859",
+    "blockHash": "39c75084f8d3a072966a24435af84b4710fb2874726995e03fd2d00673058941",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "e02e481a6bf25efdb06cc0898bf8eeb1a231486b14dbcdc0ca799ff0aee1995c"
   },
   "CORE--aibast-agents-library-deal-competitor-intel-0001": {
     "blockIndex": 24,
-    "blockHash": "07f1fee78083b179d0d082be8611fee0a83fa2b5c109524d7480d5e5ecbe503c",
+    "blockHash": "445f6a16563973a9a103b2f29a7e6a89845f821dc2196500e5035d2f0c36625f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "42c41e08d6ed01a63d9e17e29672d348a8b86375cd0519003937040d1463f1c1"
   },
   "CORE--aibast-agents-library-deal-health-score-0001": {
     "blockIndex": 25,
-    "blockHash": "550374a1c56912ecc2247dfc64e4379ce201d729c81c2faa72a8b778e47d1f17",
+    "blockHash": "3f65cd4bd226364e1715b8a9f8219866af3211bda76e738cd7fc9043d7e82e52",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "51398564053d6e883edc806c5f93d66b0f9e537201676dd9ccf23d990ad0c521"
   },
   "CORE--aibast-agents-library-deal-progression-0001": {
     "blockIndex": 26,
-    "blockHash": "dc53695210be3efda3d56c6684440dc6623b6665002b3e829cd40e4c4e9debb6",
+    "blockHash": "0c0da4de48f5b7d2355e2af0f9e746d2f8fe232d71f77d0676cc1f3cb7c841b3",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "5ce69880b028a517b074726c4c5aa8093105cfd42cccdf3cf54dadf6b45a02af"
   },
   "CORE--aibast-agents-library-deal-risk-assessment-0001": {
     "blockIndex": 27,
-    "blockHash": "a74993b6eec359146920da8c9bd0c1b0b5ad738952891126ee74f1013355f6a5",
+    "blockHash": "a4bfa9343190dae81d3c8ee439af2ca709baee64edb9b768206dd74071909755",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ae55157199fa647bfb190371017f1f4c709ffddaf4774d015111cdee3ce71764"
   },
   "CORE--aibast-agents-library-next-best-action-0001": {
     "blockIndex": 28,
-    "blockHash": "326ea0a4e2a5f07d44914d4f611b3889d4a954d6e81537a12a5859fe21d30a76",
+    "blockHash": "7cfd04f92bf2ee9dcf852637cac3a6458482800335e5cd736978e758aef0eea4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "8b001e1606c481a5149806c3c758b5e4e79c0bea1ef1dbebc842919da6f20403"
   },
   "CORE--aibast-agents-library-pipeline-velocity-0001": {
     "blockIndex": 29,
-    "blockHash": "5b9e10155cf77b4bb760730137b2163d5e66c5129fa51130abebc7f7ff60fac5",
+    "blockHash": "5e33937d05a04f8663ac58e0bf96bd1d9c75e7b459761f5dc7742c3894cd4aab",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "29c32368d00b920c64ff7e2847a1ac50ee95628cdc9ca5281117a358e1dc905d"
   },
   "CORE--aibast-agents-library-revenue-forecast-0001": {
     "blockIndex": 30,
-    "blockHash": "22107d38689a2d7d30ffc171d851cd11e25b8ffbe761a31c9b3a48c215d1b201",
+    "blockHash": "76b50874d24f06e40bd94cbd039306a20308e9560ee3b4f8047d05ea29a48b19",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "dc2e433e5eadafc54856db128c692974498d5675bd34f47bb9f95a662c885f00"
   },
   "CORE--aibast-agents-library-deal-stakeholder-engagement-0001": {
     "blockIndex": 31,
-    "blockHash": "58754203c6e112de278d035adfdf9403e28fbef053c9e13c96c89365d27ecb34",
+    "blockHash": "95b117ea36228a5b077861e18ffcbf425581328b18489455d5ec77993b88e557",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "dac05d7c7c0c23494f6f8504c85839cd31916d271224ce74a0d0466f5d49cacc"
   },
   "CORE--aibast-agents-library-stalled-deal-detection-0001": {
     "blockIndex": 32,
-    "blockHash": "60d8c1ae4b8fadde25fe1ac9607c47c5d7941ceee91d4fc9360d6ed768f340b9",
+    "blockHash": "61bb7bda8c808b4ca3f93ae9af5a79bc6247e9b89a064b6c323b5fa56a78cd62",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "2446fc500fd4868ffec7452c4d2ff0288cb3b101085b6394bf6261fd49d0526e"
   },
   "CORE--aibast-agents-library-win-probability-0001": {
     "blockIndex": 33,
-    "blockHash": "c78c161b356be1a8ff88ea893f9be49b1001a56d276e17aded21e73f50783e3c",
+    "blockHash": "3f6be7e8daaf88a5760bb15a2cf7fad5e61c8148ee785d0241bc30259c93a66b",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ca29d38ec077f960177a2481bf72c93117bcfe9ef379d0b3c2b5487242f19b40"
   },
   "CORE--aibast-agents-library-proposal-generation-0001": {
     "blockIndex": 34,
-    "blockHash": "914f122209120d4151bd5638a6fd3feb9ae2105f5c8f43d5cc2687ee953f5f44",
+    "blockHash": "77240fc521f664f2c202d33147a7a054cfc296ef72052df4cf75bc5b571e9eba",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "630e84c7992f1dedc344a88d28629b975a8fc433dd15b71c35bfa69a16007e9f"
   },
   "CORE--aibast-agents-library-sales-qualification-0001": {
     "blockIndex": 35,
-    "blockHash": "40c230ac712b8dfd4f185a83b1de99a34b8ec6da7b6651423bdc9d8a30d023ac",
+    "blockHash": "b96ab2abecb4913de6212c3281bac2b00b856af2fedf6d03732f60a471c8a9aa",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "1d41d19257ab147e9beab74df64fcc4df8b50046f773a6b2c88c344fac442c24"
   },
   "CORE--aibast-agents-library-win-loss-analysis-0001": {
     "blockIndex": 36,
-    "blockHash": "a99445b3d217990e543879c52f4615a066f08c66f47048ffc118f855c61f4b3b",
+    "blockHash": "61b9339a59fa99ef7d6841f2db9c2c62f1ba273a08df8ccde72841ffdb29d76d",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d24fb62765e139b8e663dee84385d73ade221f90139ba46ef5fab8bf2646dfdd"
   },
   "CORE--aibast-agents-library-cart-abandonment-recovery-0001": {
     "blockIndex": 37,
-    "blockHash": "24b63b1434a9867075f8b73822e73d6a0c45e6bcffcedbf19ccf9154ecb6a798",
+    "blockHash": "e9b131401095ffd05295457c1a3c0188b8c07a437c8452b954568d970a836fd7",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "cf7b0c7dcff688ece20e3bf24ae2905a064f6cd26db6cf9475f31c04e6683b2d"
   },
   "CORE--aibast-agents-library-customer-360-speech-0001": {
     "blockIndex": 38,
-    "blockHash": "3f6dde4c6db9da8cfd5f6d30055e17167fbdca93325153f980bab3e56902b5a5",
+    "blockHash": "39369dfd986c8d244922d0df9e9b43caf5c5bf63fc092ba33cfd857f80c73d48",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "cb14fbc17c8d5d63a222d577a95a585f46daf8c290d9c50269f1390bb8c96043"
   },
   "CORE--aibast-agents-library-customer-loyalty-rewards-0001": {
     "blockIndex": 39,
-    "blockHash": "972986a0bbf637e1ec66a2ac1ca4920fc497a056359c1b95f26bda4b809ed6ae",
+    "blockHash": "1787cc94f61252d13450a031cc1a28213753360adcc93dd6b4d4a21502e9d2b4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d7c2a35d106c6ef097eb679825f60f9161d1f157fb3118753003448656f86be6"
   },
   "CORE--aibast-agents-library-omnichannel-engagement-0001": {
     "blockIndex": 40,
-    "blockHash": "d6c6713a5c3163b19a7cdbb74da1750f2fd3a49cadb754f1ce93af008405c28b",
+    "blockHash": "a32ef3fad5cb9ee8fe565b76f8eb5dba36b977d25adf5b04cad4dffc4d34cb8c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "204aaf5c985b03732e8248f5f3e317d936331ca62a47bc0b5bc66c6e713419eb"
   },
   "CORE--aibast-agents-library-personalized-shopping-assistant-0001": {
     "blockIndex": 41,
-    "blockHash": "059c66d489a0e52f3020fafa547e5cd63ea93b71c14bb851909111c0e492b9d1",
+    "blockHash": "15c780a983ab5f67809cb1e29d743bed2fba4cb00a4247b8458f1ad6743677ce",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "93f3f1d2bdca01449038cbb03748791449fef8db108c9ef4a96b948a08cc6dde"
   },
   "CORE--aibast-agents-library-returns-exchange-0001": {
     "blockIndex": 42,
-    "blockHash": "7c0f87385030deb7bb51cda15052b1e271312ce11195c5a3fa77a21b7a2a219a",
+    "blockHash": "4cc4174fd15d9914ae2c7ef7bfe3cf8359931a13c2295fc51e30f4e5a0505b0b",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b1704f06dd9517b3e319b73b571f5526c18ead5bf3970e309d2d683cf0330a02"
   },
   "CORE--aibast-agents-library-sales-chat-0001": {
     "blockIndex": 43,
-    "blockHash": "0c8bbc58f3d4ab9fd001f7f71c16c6a58572cf2cb122868108aec7a9853a1b9c",
+    "blockHash": "1f2a843787a71ff18ecf592a1a9032f03ab61d3404c64e149db4bd10b7ce09dd",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b015be1e8c61e84f53f3b986127e12d93b3260769b7289071e4aadaa1a4566cf"
   },
   "CORE--aibast-agents-library-asset-maintenance-forecast-0001": {
     "blockIndex": 44,
-    "blockHash": "3487e37c7af07938d70396966f0d013030fd25e1188e97732eec7ee7ea3ef512",
+    "blockHash": "3717318a64b14613479f23ba0a71e4cd72f2f63b7e724efcdf92072b17043d8f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b50d02a52961404bf60914e4f49a25437bfd06ea23fa4af5df7e2216927e78fa"
   },
   "CORE--aibast-agents-library-emission-tracking-0001": {
     "blockIndex": 45,
-    "blockHash": "3518507e5bc2dd7414dc91b514134cdf76c6a400affccb3079f3b87ea5b484db",
+    "blockHash": "75a8fb0de1aae60843f484ac1adaabb192f292e4f5bfc80705d6e502cbaaf825",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b96a4ef1c6eda57bab95c2f720335478b0dc25391784c3200e70959727b338cd"
   },
   "CORE--aibast-agents-library-field-service-dispatch-0001": {
     "blockIndex": 46,
-    "blockHash": "785db4a5839578ab5ef0886f96ded7c4ac921399b9ea4ae9b921e0310646815c",
+    "blockHash": "ab97d514785057501469a67383fd5a6ab692776de8fc982a5b3c46034cae1afa",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "7d2199334b65bc5c343ccddb4614626ba2955a601fe4af647a8fb3368498b986"
   },
   "CORE--aibast-agents-library-permit-license-management-0001": {
     "blockIndex": 47,
-    "blockHash": "0985cd81eadc0f91ae2e02bc58bb94d270b9d9f927efe17b09f7716e2907ae6b",
+    "blockHash": "ceefa3bf1e0b9ec36ddc22f909bd31e52df2c4c680b6125a8b0107dad4955c14",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "db6fa38e2d609ded19834e387d0f67c3a6a40d708135a13d5a4a6be5355c5c55"
   },
   "CORE--aibast-agents-library-energy-regulatory-reporting-0001": {
     "blockIndex": 48,
-    "blockHash": "b8cff5e7875034b9640c785e7f91453f1017db41d8b6b1b71e3636a02580eab1",
+    "blockHash": "3e9bbebd8ff690153713d51b5295fff100fa288f2b1df6d1ec53100539b701a9",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "575492f2576697f6a79225af90d5d2563d4479b56019e62b01f1d47b30c47b8a"
   },
   "CORE--aibast-agents-library-acquisition-support-0001": {
     "blockIndex": 49,
-    "blockHash": "658ef67dfe16f648a1c1b37ef6b25c1537e3b706f8ad488d53ceb2218db06134",
+    "blockHash": "94e22b1805ff1110ed7bec17afb5f00369edf6c449d9c1149c211383cdba1a9b",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "07356f181a53b500e7dbde81a5b3b056e9442970b1d0c2e93b44e591c8e23ce5"
   },
   "CORE--aibast-agents-library-federal-grants-oversight-0001": {
     "blockIndex": 50,
-    "blockHash": "7379ef1fea7092fbe0551f2cb95a937c5d34fc6c79b7ccee6de3b77bbcb45717",
+    "blockHash": "a9b3501f47bceda36358bee3f618c4d6627194cae44b06c88b059df0ed9d8b48",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b4d06e0df7a79b433998fbdcef408a7aecd2820c3ff2e6edf74a31137823a784"
   },
   "CORE--aibast-agents-library-mission-reporting-assistant-0001": {
     "blockIndex": 51,
-    "blockHash": "710b30aeaa67fda0b3f6d62a924b5f93bc69597bdfdaad43c4d665fb2e733bf4",
+    "blockHash": "6e1720d788cc6a2d73ec94a4a48fc1588073cabbc41411e17291b83d5e10d8cc",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "110ce6fb9e34b8ebd93499c185e5b604fbd9ab26f550ddd9fb507aa38c262f7a"
   },
   "CORE--aibast-agents-library-regulatory-compliance-fed-0001": {
     "blockIndex": 52,
-    "blockHash": "a1824304bfa381bc7418f478cbbb76c3b65cd82042b518936669a0446d4eebba",
+    "blockHash": "a86880f4378b6265c7f1c46083c9d792b340e85665b2ca4610e1be51f319c631",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "40e456efdff7269093218dd00b7b04d633552b0056c3b15ba3bd8422e04cb7a6"
   },
   "CORE--aibast-agents-library-workforce-clearance-onboarding-0001": {
     "blockIndex": 53,
-    "blockHash": "bafee8b63826ebc39877219f12416503ffbd037c00704c906ca1ef5d3e789e79",
+    "blockHash": "e65726388540db57ae871dfa4244b735036bfd03fcad3feef85e1b95bd58e248",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "56b0007e6ef0df2592d7c82bd2796679e92e80afac1f8eb4d5b9b95112db2280"
   },
   "CORE--aibast-agents-library-claims-processing-0001": {
     "blockIndex": 54,
-    "blockHash": "4b11291aac9e01db5c9ced65c8f0003e13de3a4ee5506583ea9e7fe1d4ab1dd3",
+    "blockHash": "be661340c3d7079014a045661da9583624d21176d09842442989e7171c3ce859",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ce0b10826bfffb91f5b1dda9cf58b66cc97aa6090645596f9d7d8db51e8c8275"
   },
   "CORE--aibast-agents-library-fs-customer-onboarding-0001": {
     "blockIndex": 55,
-    "blockHash": "49b658d87d9173cd6f4e01dee55e0e0b5781e3817ce82b8d5e09298c8be31011",
+    "blockHash": "292d0034dee6a97939394b1160d8156bcd3b39ddd16ed115d4497e3a0784dab2",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "36c55bcc60a37b7104520ec0022cffdebdb5fc9de5005edc52884120dc21f344"
   },
   "CORE--aibast-agents-library-customer-sentiment-churn-0001": {
     "blockIndex": 56,
-    "blockHash": "f34c243f1b9cb8359871393026061a3f7687c10d8f203040a873ffa544058558",
+    "blockHash": "9fb974a1a5b45edee202f245fcb7a4b8cf1af1b2fcba9f902367fc09def8de51",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "0e9bcf0bf14a8a001f0405cacb68f17df89415295295340a2efad1735bbd5716"
   },
   "CORE--aibast-agents-library-financial-advisor-copilot-0001": {
     "blockIndex": 57,
-    "blockHash": "f9795d2d9c0ce67c4393fbf35c42902a39748d303aa5ba3173cb1cca3881019b",
+    "blockHash": "fda56a77f52a09cdd23d308bd8398df82dfa6a53334a2e2e2ef81259a0f9ee97",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "2314c1c97b2358bfc8e8b5414e3cf07d9fb1e8b8fbfc3c1f573afadda8ca3efa"
   },
   "CORE--aibast-agents-library-fraud-detection-alert-0001": {
     "blockIndex": 58,
-    "blockHash": "15264c96b8c31909bd7190b4496bf223ed0228483022d1e7caaabe6e362dc039",
+    "blockHash": "182291b445e47e3fc162c710b454c0e5c4fae65d404b9fd1ea467a5c207d8d13",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "64fa264d963137dbdd178073c0c090e8f320803b0f07252bb6386b033ec7abae"
   },
   "CORE--aibast-agents-library-loan-origination-assistant-0001": {
     "blockIndex": 59,
-    "blockHash": "e222d6e6c16c6c7d2338cda4f21cef04ba1b15024de6a5fbe432f75de3a7dadb",
+    "blockHash": "7dc7039c2fa3b10e63a2621963e58cc61a03184ab84fa07bf673937c55af7e2a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "367fa942034a7846c78870e47ddfb2ad9523146727042ab0ea8ceb6686252517"
   },
   "CORE--aibast-agents-library-portfolio-rebalancing-0001": {
     "blockIndex": 60,
-    "blockHash": "c4943d87f1008281cfc17137ad3aea10f5a82ddfeaab55d4c55bfb889de8188b",
+    "blockHash": "ee167e527f6144ba0c4d328ece5ef05229490fcb33a712c50b4c61a153a1516e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b10ec6f38cf793282858764ab0a96b488ffe75586022d1e40e6e0b62d6bebd80"
   },
   "CORE--aibast-agents-library-fs-regulatory-compliance-0001": {
     "blockIndex": 61,
-    "blockHash": "57428853ad6a48e124489297c205fa6e0d40fea2be8f1dee6b91361bffe7d63e",
+    "blockHash": "666e04148effa8708eade32a1776729fa81e92d800bfb852ceba6f1e5ca5a561",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "a2745947910c91b32ee4d0e1458d2ac61847f90ff622d97cb6506fc2303bebc8"
   },
   "CORE--aibast-agents-library-underwriting-support-0001": {
     "blockIndex": 62,
-    "blockHash": "57ccc1ebdaf8e635f3d733d87f43185382c74709432516714f7abb94066b6d3c",
+    "blockHash": "6b714c5e217c4b608e1c3eb1fc0d3fc98fa0b3d418567e240b440ff5d946b4e2",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f88467cfeac25c5c6dd9d977b9a6d310e4409bf3119a4b606b9831c67a47c158"
   },
   "CORE--aibast-agents-library-wealth-insights-generator-0001": {
     "blockIndex": 63,
-    "blockHash": "6371bafc3fbfaac05a9c7db098d920e82ea4dd711d4a91e1968231086fb5c9c2",
+    "blockHash": "3ba3b2de1036fd6e7661b6e9b7224e536384863e5aca36bfa6ab6eef3cc52282",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "6d9b6e7a8e8b8ef940580c8f0f447f93ea677bf8ad48af006c918c7af5db2b53"
   },
   "CORE--aibast-agents-library-ai-customer-assistant-0001": {
     "blockIndex": 64,
-    "blockHash": "b165022fa06159a3fc4e5439acad99880e482cb13aeb25fee6c6f516ad0e37f4",
+    "blockHash": "b244dbdb343ebc4bdb913fcc0bf482970c24fc1783a9f6fcad5d7498fa68d571",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "3f6dd2acdc08d539e779123de4046f7dd6b2d8803d44451627a07d85576dd479"
   },
   "CORE--aibast-agents-library-general-ask-hr-0001": {
     "blockIndex": 65,
-    "blockHash": "6e603b994cdfa50032e0621c9934088fd0e4b1c177c685c1a99bad20d64b0eff",
+    "blockHash": "0ac60313de4faabed11980e2218a6da15033da3fb5d6c59f115dde955290743a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "22a6d55882e4aec4ef7105d5d14977336d73b3340c1d0e286af710416df77ef8"
   },
   "CORE--aibast-agents-library-bulk-crm-data-generator-0001": {
     "blockIndex": 66,
-    "blockHash": "a668f40af3bdd2a03f36e3b7a38e42696aafc96985dc405f2f33c72f5e7c4a55",
+    "blockHash": "8a9cf8377244b2143088c3c4c3d72ad73c096c7bf1ac23c042a2ba480f1e2730",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "02dba419bb5307931f331480fcd0e8cecf5dc6809a5a6e2a1642f8d2ac49ee1d"
   },
   "CORE--aibast-agents-library-dynamics-365-connector-0001": {
     "blockIndex": 67,
-    "blockHash": "2b58876533892e2754fcdf928f1960d0c0c4665bbfe6f89ee87b368ac96fa207",
+    "blockHash": "f46f6650428252a9c26572df80993e7f72a595e2b69b6deb42cd972c96a5d6a4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "de1e8a5844a598d617b4bd45b178ead3988594b3fca6d2c6ec9340adbff6b930"
   },
   "CORE--aibast-agents-library-one-click-crm-intake-0001": {
     "blockIndex": 68,
-    "blockHash": "e257a270d0ea29eee562531f9387047dcecf740588be54a24f0d8d2dbc1aa418",
+    "blockHash": "1d24b3638b3a9830281e68ea14fb04a7899875ef42e3700e40b41391f6fa4b17",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f857ea31ef734197d8e50243c813ecb7bfc0916c81cb4e4bee9230022a622b19"
   },
   "CORE--aibast-agents-library-cross-selling-0001": {
     "blockIndex": 69,
-    "blockHash": "35a79b110908921fc42edfd6fc7cac2fc43a5f088080684ec276eaccdb608145",
+    "blockHash": "5c254ad5c371f6369ebbc7ebe6af8db281fa67df701565f9e8ec171134ae587f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "c49aa20f36a94c05f6ec2d678a7f7a263de96c0c2eb9ac6da867cf406e8906a0"
   },
   "CORE--aibast-agents-library-customer-360-0001": {
     "blockIndex": 70,
-    "blockHash": "6efd1a39dbb4a8a7116453c8f23d10f259db4e570ed0fa0f64df652081b086e0",
+    "blockHash": "2ed1e86634edb49bf1c44cc7c68fd0174f390b0fbe0d1207cf6094477acf3661",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "7e262a3df51ef7da13bb335fea1e8cba19f90b7047a5bb997f6bff03a02afb17"
   },
   "CORE--aibast-agents-library-email-drafting-0001": {
     "blockIndex": 71,
-    "blockHash": "9ab72897df3781190ffedeebbf64c81921dc0cb785744856f74301728727aff6",
+    "blockHash": "76b519840535b487ac98640d05af8b25f54cfb4a4e383772ed86b1554a016608",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "5ce2c42c1836a777f5cec1d2e77688623d45ce482cf59bae09850b7962385792"
   },
   "CORE--aibast-agents-library-find-accurate-models-0001": {
     "blockIndex": 72,
-    "blockHash": "bdc5c2efe7a140c24b045057bed6dc92401f4e48e71f5f34ca67850197e1d2e4",
+    "blockHash": "cd8ab7cd82f3171a2490622685a9607b6dfdb2e6771d7ff11b834953d4c503c1",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "28d0384454115facef8c8950553d7df3e665a073c59ca49ae2aa6bf7161789e9"
   },
   "CORE--aibast-agents-library-identify-discounts-0001": {
     "blockIndex": 73,
-    "blockHash": "34b30839d2fed26587c486de7ec675d696a9fa8438e3f38504651e29b17f65b9",
+    "blockHash": "6539b3e32f4e6ddf2fb53513a3f668897d9bf9662239e03c01a5c4c05786d756",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "9ee94ef1f42758909cd466511d8291c2d5c3889c62f6140c1ad44d19ef848e14"
   },
   "CORE--aibast-agents-library-it-ticket-management-0001": {
     "blockIndex": 74,
-    "blockHash": "041d67736e7a2f8b1d6c394ce71acebe11dab9833ad322ca95f771898d686579",
+    "blockHash": "00e31c5d13bc0927908e62d0526a886fa09d83fa96ad9b21b9cdf8c5ba1edf34",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "6f820c2b69c3fc2131c36d0fbe60b99615cb3c1e34267a3dfbb6ae8155c07502"
   },
   "CORE--aibast-agents-library-procurement-agent-0001": {
     "blockIndex": 75,
-    "blockHash": "c1996a7e2ec6cc4e5494f58bbe34c90c06603f1f6a99686bd5c41174616cbf37",
+    "blockHash": "ca55d61f1616e7dc02b8b9990de8c4360d2ed33b774315dd7fc898d5fc320d1f",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d340882d6bad64ed55a1705127ff5b1111037ce54a897dc24b97ef7855a11ba9"
   },
   "CORE--aibast-agents-library-procurement-support-0001": {
     "blockIndex": 76,
-    "blockHash": "a3385b18bef923e5415dbd06ba65bbad62f1d7e1e0a95ae8e5bf54863f4f9167",
+    "blockHash": "f24fcf5a4645d6dc2c3178c001710e45f527c30e63c4702a9902d793293ca288",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "7888d5c05065aa16ab3880c90ff5bdddbe10cbf21117efce071ee8b29e1ba26c"
   },
   "CORE--aibast-agents-library-product-reference-0001": {
     "blockIndex": 77,
-    "blockHash": "1c8bf77c18fab773d057b7bef887e7f4f56b86cb1ea3016b3f91f5b5e7fd9d4b",
+    "blockHash": "77b06eb74af3bb06de22350a29d3b2b2f97e085c6d48d9d02de53757c9dd2549",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "764450e0060cccef08464bccedbd5fba6d6666da4385277ae4c20e3df2f3b2bc"
   },
   "CORE--aibast-agents-library-sales-coach-0001": {
     "blockIndex": 78,
-    "blockHash": "abefb79830f17433afd58e2f99113001720fbea8df2f4f7e830bd8dc7660c0d6",
+    "blockHash": "6b37b6211e9c62f34b5192f660603a2d52c07e74d9b911c6a82e2ee385f6a297",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "02b5bce8c1eacdab83a9a0ddabb962121f43146b669f07e8062aaf8050ee143d"
   },
   "CORE--aibast-agents-library-sales-simulation-0001": {
     "blockIndex": 79,
-    "blockHash": "cabf7331c4d0878b7b8c01441fea29184f20d8b19b1fe5b39846d8bed475436a",
+    "blockHash": "a8cd38b4509a1290a8cc1486421132b4a183ae26e07fb924f6e8202c015821cf",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "cd37f16bf44010ef7dab0487f1a8b4215fb5b404b3e87b049e2732b14ce69efa"
   },
   "CORE--aibast-agents-library-speech-to-crm-0001": {
     "blockIndex": 80,
-    "blockHash": "ea97653aa14214ea59ffe1c0e80c87cd5e9d4f53cf04dd051666de66bc147ae3",
+    "blockHash": "a5021dea0b0cd26ab17472545374ea3daa7cd18f21eaf54065bca7391f6dfd18",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "437d369c01d3f2a80aaf3dbdd09bb438de7a281107c4862510aca7a8e12eb693"
   },
   "CORE--aibast-agents-library-triage-bot-0001": {
     "blockIndex": 81,
-    "blockHash": "705fe23d581aed6aeaa2155647cac5b9ac38bfcf9ed3613d2852a03c59a890c3",
+    "blockHash": "dd4d33e04103ef30e6edfa969163fbed71edf907069614efecae124733fc1325",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "0583666ece82c6b51642c4c70f755fcf139ee049b8cf06e6063f6b46b12d66f4"
   },
   "CORE--aibast-agents-library-voice-to-crm-d365-0001": {
     "blockIndex": 82,
-    "blockHash": "3824ba66904168798af987c3519ac75e205e05e3fa84a45b9a6be1e26c3ea947",
+    "blockHash": "a6f35f1e78026f2e17749c57dfd2687b60a6731bc5e565ef5fb37b7818656b5a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f8feafb5babec7313680d600c2ad23bd5f77b7ecc2868f4dac959218217d617f"
   },
   "CORE--aibast-agents-library-voice-to-crm-email-0001": {
     "blockIndex": 83,
-    "blockHash": "c3554f2e6b5a0c0d1a3a18bd15dbceea8251da5493381f705c086fcd231a8f72",
+    "blockHash": "da39fad8b0bc0db2688bf5f42ed99911999fad4cb5ced538f7a74d01ea30686d",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "c706b4706d8f80cc24e4fefd255feac5f88d05af1a8f79858f32e1afda879b31"
   },
   "CORE--aibast-agents-library-sharepoint-document-extractor-0001": {
     "blockIndex": 84,
-    "blockHash": "92a9abe178e6d1d69f1dcc6df8c95fe54db3b0ddc14cf22d7879afe8fbdccc7e",
+    "blockHash": "bb9f5e8eeca6eadf770d705ba49af962a46cbc0b8151593818db14be87277756",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "051fb779af6fdd48c8b089aa232e66802deb852b02f3ddcba1a4da8ea4f788d2"
   },
   "CORE--aibast-agents-library-voice-to-crm-servicenow-0001": {
     "blockIndex": 85,
-    "blockHash": "a6b82f0ad4f99300e9f9126bc25c8271ff2ab0218206ad563bb31d209116fc1c",
+    "blockHash": "82adb2ce7d6080e1aa478619964196a77699f4852704c65f3cc1c4fe619aa843",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "05fd0ab9d2ac68ee0b590befe23df7a995024716e188bdd33462b3dd2058506a"
   },
   "CORE--aibast-agents-library-care-gap-closure-0001": {
     "blockIndex": 86,
-    "blockHash": "9584ad74681d855cc9c7dd5a73a1f00f7089da19f357906c4ca5c1d776a14537",
+    "blockHash": "e1eb8eea9f48fb3344d311b74b54ce172b3f9cea69f52fd76a51fd2d782a6f33",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "53348e60ed862fae48bceb36d90ece7e7541668dba8caf816a81424217be4e28"
   },
   "CORE--aibast-agents-library-clinical-notes-summarizer-0001": {
     "blockIndex": 87,
-    "blockHash": "2afa0719b4f8b45ceb002c2af32c13ac329c12e811d521d00d8bbb6ccff286eb",
+    "blockHash": "ff1c1a930f0894e7b27240c55fe18321eca5ac8deec6993c3e8b0f85e2f8ecac",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "35c84ab6f7c6d3a89ea90b5f859d0d0c8d7b218745d23325ad88a98ace3ddd49"
   },
   "CORE--aibast-agents-library-patient-intake-0001": {
     "blockIndex": 88,
-    "blockHash": "446cded8284eb463d4442a8e6eb985086e47140f3ca64e7c538da211c8f445c2",
+    "blockHash": "4e8d0c7c5dbe15f5e54113a409fa30cf213a0cad32581e6c1ab5b37198ddf16a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "e3c3a4064719d66c2bd70ec5fe47dcc3d23747d6bca08ad6ea89e0128d6ac2bf"
   },
   "CORE--aibast-agents-library-prior-authorization-0001": {
     "blockIndex": 89,
-    "blockHash": "354620b63a7b83ff987b84ef94b70f5fc003cc0b5bb0ff0a3ad9eacd9fd6742e",
+    "blockHash": "e457b5f9c9cffb1737cc54347a34ce32a2ca9c22f2871647470c780947d192c4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "843001f3669da53758ba666b7440340e7f722f5331f06f7329349964f2adec50"
   },
   "CORE--aibast-agents-library-staff-credentialing-0001": {
     "blockIndex": 90,
-    "blockHash": "c079b0e12c492a5788d37c54934d29a081f0aca0d0c61186f6839afa28167ecf",
+    "blockHash": "f84a8084bc826d72e9ff9ed0560fdfb3fab744d9a93e9e941adf03efa4c5c7db",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "a6f47b7d1566bd3b7d124dbe836c30c3052babd6a25e567220832edbc8f07e0e"
   },
   "CORE--aibast-agents-library-ask-hr-0001": {
     "blockIndex": 91,
-    "blockHash": "51424d4add1d7e0de7532eed3d1589ac2e9b76643a7e9b185a7460fd6c8a5d2b",
+    "blockHash": "ad255508f57af2d1bb68002bae6d2a24564a09e2ba368eddf9ee8df35b003d3a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "74bcccd5d128e04337a3574024ee451299f84bc7a62cc59f28896e4acbcf2b44"
   },
   "CORE--aibast-agents-library-it-helpdesk-0001": {
     "blockIndex": 92,
-    "blockHash": "c613e6d893dd84f604f6d8b2db2262efbcc0621ee399bec957bf3c6c9379a78f",
+    "blockHash": "1009a2bc2615a321837a10e56056b552e672a6f6b29477996775c4cb14fbc875",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d71be68fd467da5ea15e74fbcac9106146d18009ae1a909311c201e7c535b8ca"
   },
   "CORE--aibast-agents-library-inventory-rebalancing-0001": {
     "blockIndex": 93,
-    "blockHash": "f1b8afbb2927aeeb767cd2bde54d34959f93acc86e91c0596c7d50c27d24a6dd",
+    "blockHash": "4e93a34beb97f7cdae033bfcb3775aa00af239ea27ea3f6f929ae8f32f164b1e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "72a4efd7e149897182e4275941436a5a3d4518ebaff043f06529e2ee9e9a86f6"
   },
   "CORE--aibast-agents-library-maintenance-scheduling-0001": {
     "blockIndex": 94,
-    "blockHash": "9da239806d3c7c446d039b9a0c7ccdf4bd549c45ef2881794f92a09f5d82f79e",
+    "blockHash": "ae0e039883bc4abef88fe88978ab7d2a6f767cb1febcd0a4bbdfb66b6eeba94e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "cfef5547a19089623074a36cf3c3c4007b9fa67528f15f44cd5a8f7f1ba81fb3"
   },
   "CORE--aibast-agents-library-order-status-communication-0001": {
     "blockIndex": 95,
-    "blockHash": "f0be48b7483431ac98981721b1b1cb5fa5bd3c9d03ff3b9b20e4920f42197f76",
+    "blockHash": "f9b602329def0ba5b782b0e4ac88e9369c32c54fb0baf5083264ec60439ffc5c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "fdd06da33b65ab604cab14b725ab40e4315cc4b1ccd2312420d0297eac56eb64"
   },
   "CORE--aibast-agents-library-production-line-optimization-0001": {
     "blockIndex": 96,
-    "blockHash": "d4f5793debe977b5b4ce55db58dc45b3c583777f72b9530dadc45956babee822",
+    "blockHash": "21cc33f167e75d6488e4c3fbf83f46985b439817616b13225a2aa1830ebd1bdb",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "3ab82965b972ebc6e108094fda4c5a6e619c5df2bc856747ab125ac87c131db5"
   },
   "CORE--aibast-agents-library-supplier-risk-monitoring-0001": {
     "blockIndex": 97,
-    "blockHash": "572db85f8f9e20119855f660f680e01f1317c6638ab2b635601a6e96f76fdb1e",
+    "blockHash": "1086775add97161dc27c0e02b54aadcb5407d831395200d647e2b574aed426bc",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "2b933705f96b4d3f58086e8d3c30ab44b2d3e3569d4d99bf583a3d0a2f0ea2fe"
   },
   "CORE--aibast-agents-library-client-health-score-0001": {
     "blockIndex": 98,
-    "blockHash": "03d17a8275d0e5532195323d60e437104b10bf0363c2d67fcf3e165dba95ccba",
+    "blockHash": "831f104e75b4b73f7884c13e1d232163c025cef8c5b49c98541c4e0ac51d6a71",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "cb105ffbbbf990d5adf8f9a3df5ba821e2a15f51fbfed187dab345474905a6ad"
   },
   "CORE--aibast-agents-library-contract-risk-review-0001": {
     "blockIndex": 99,
-    "blockHash": "58d57d7d890874639e2151b317511445069830f4600e19fe6895c3fb6dddf5fe",
+    "blockHash": "354e20e952bb6dc79b7dfdd95e827e6c1aabdcbe6de6a7b261f8c1ea3084fed4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ae4b776ac8dc7b48ac6163c6f70ddd780269f987cfd622f348aaba0e15ddaa2e"
   },
   "CORE--aibast-agents-library-proposal-copilot-0001": {
     "blockIndex": 100,
-    "blockHash": "bc81ee86d103a5a4f4ad30806ec0fc32dcd3e1aafafbd04b40c36fb9ed273cd8",
+    "blockHash": "a5a8fafeb6ae77d68e9b8aa75a9c61f95ddb42c26cc21988532ecbadbba78aa4",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "afbcb880002050bc26ea8686d6cacc0e27e7e17681ea796cce84b19240130c7b"
   },
   "CORE--aibast-agents-library-resource-utilization-0001": {
     "blockIndex": 101,
-    "blockHash": "0030f327625606008b8b60bbf358996392bec1ffcf9e3f9a83f1c5a1a8604d14",
+    "blockHash": "645a6f9300fcf888d13e0afd76e3c7c3f5eebe944684e1e11fb8d0307e7f63e9",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "3948c36a6dd58b497eb2e41dd2e2c0484401a493a25f64c0297640a8595d7c41"
   },
   "CORE--aibast-agents-library-time-entry-billing-0001": {
     "blockIndex": 102,
-    "blockHash": "c04f0f2dae080819fd5aa6d567da635b75b55c2a548dfb7e83b23726feb10edd",
+    "blockHash": "24f3da2a28c8dbab80ff69f2c900b582b90b6275730a8dbfeaef7c0deec2388c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "013b761718d106f7375faadf8c186fafc9785bc59a28e11af7e12200d7bed7d7"
   },
   "CORE--aibast-agents-library-inventory-visibility-0001": {
     "blockIndex": 103,
-    "blockHash": "72fb4032dd4d5fa89fbdc5df8162e28f304cdf7f6144ae6d2310f4e7330b9777",
+    "blockHash": "8ea81daea5736d10a3c551764e1be5cc85d7c8a617f6cc3cf91e2a5e06b4da6b",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "dcc02eb3ad9825126d691e947f9a675ec1e80934bcdefe4a13e6f8a753bf7d7c"
   },
   "CORE--aibast-agents-library-personalized-marketing-0001": {
     "blockIndex": 104,
-    "blockHash": "08d213697102644674a26aa50392b1a94d2dbd3d4375d5ae4c6fd1f5df8659d2",
+    "blockHash": "eb58eed31484d4565f735ec5506ba730341452280da2e12e9a22b9e5448414ee",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "59c790f2b096c0540e37031958ea1b9fb9c867fe1eb02a6d20f7fb4c8c70b0e6"
   },
   "CORE--aibast-agents-library-returns-complaints-resolution-0001": {
     "blockIndex": 105,
-    "blockHash": "9bfa8bd1d5a32f24286f2704fb71267be3951591582ff13469f4dd8e4acef1fe",
+    "blockHash": "ed7d689dd3593a8db34cd073cb0527e96023fd68e8ad4fab36d57db0e7939d59",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "3c8fdb592feb59c97c2088548ff5abc8d80a3bc8d69a82d3448336a45d45db26"
   },
   "CORE--aibast-agents-library-store-associate-copilot-0001": {
     "blockIndex": 106,
-    "blockHash": "e87d3462bae1488899485efa11ed8c4d4259a9336c952671334f89badb746030",
+    "blockHash": "9ec092e89d227f57058b9f69cd99957886098292978cf2b58345edc54c3acae7",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "45fd8b46af6d71e1c53bf0feabb848b126c96a45fe6b7e046f79d93903fbedcb"
   },
   "CORE--aibast-agents-library-supply-chain-disruption-alert-0001": {
     "blockIndex": 107,
-    "blockHash": "322d6dba4a2e0088b61d57543d4343887acb05616085da7f56d8fbd61179066a",
+    "blockHash": "f278e9f42b639de7987e2eb136251ae332c8ecbf7df7b0c83ef7f6f3748cd22e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "5add343803b49c2179510049a37cf232690725c24a96dfb5bac4ea8d0b3a007f"
   },
   "CORE--aibast-agents-library-building-permit-processing-0001": {
     "blockIndex": 108,
-    "blockHash": "22aead6d15a994374043ad49e0185a5af4138d3fa861089cdeb8b6d17acacee8",
+    "blockHash": "b95cdab2a22c979be40aed42100cfd0d478341ad2f3c466d3b0339febdfbf431",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f23f5910fafffe4d8283b5801f2796896adb560f643f979c5fe86257d6acc99f"
   },
   "CORE--aibast-agents-library-citizen-service-request-0001": {
     "blockIndex": 109,
-    "blockHash": "0686da1648b505fbb3b16ebe9e22a036f2b980d9e0892428c4a9252916c1058b",
+    "blockHash": "32918eeca22ba779d8e294b1c9de17f074fae6f56ab169f4d1dcdea3e6024518",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ed7001a67503c6fb4fa7f8728f2068c0de204c926e4da537f5a0c97dfcda3d63"
   },
   "CORE--aibast-agents-library-foia-request-assistant-0001": {
     "blockIndex": 110,
-    "blockHash": "73f5463a09b054e35b5689cec1de6750f5cb690499e4723be36641a5541fe552",
+    "blockHash": "0dbf4d0a213b83ac018c2acbc280a08740e5d37c2e2c993f02cf50040b67c8f9",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "e9f0f4b7cb23b11560a2822e52624a282ae8b4492f0f34c79836d59214b90e41"
   },
   "CORE--aibast-agents-library-slg-grants-management-0001": {
     "blockIndex": 111,
-    "blockHash": "905b0d872e51446aa6e37f777fd6ce6c74e820a08203634dd9275f46a0796642",
+    "blockHash": "1451a5ddf0a447fdfe7d91d74e87ea829fee46fc5e8c1452cc857ea69240a7a8",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "5cf4a11207045d7fbfc369794563175a7a243b5efae0ca8cad12af19d912a3d5"
   },
   "CORE--aibast-agents-library-utility-billing-assistance-0001": {
     "blockIndex": 112,
-    "blockHash": "d8337cac58d423cd859531e533428adf65d84d9ad2f789045ef3a81e68f2a298",
+    "blockHash": "953af852af4f70f60e389912e476bd1b07f903cafe758de96eaeb6de159d6213",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ba729ccd89253625fffd377345af45a48d5b7cb1085455c44628e4fbd9f523ae"
   },
   "CORE--aibast-agents-library-software-competitive-intel-0001": {
     "blockIndex": 113,
-    "blockHash": "8f6cec53cc8bb5d8df91f24311cb8d3daf4bd9873d1a7b3b88d343e3a89abb7d",
+    "blockHash": "2673096601fe40849194380b15868bb53bf87dfd4ff63c04790108b7ac8edfde",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d62b9994b1da9f07cb877f5219d1540a278f91287ea802ef26373be1cdf073e8"
   },
   "CORE--aibast-agents-library-software-customer-onboarding-0001": {
     "blockIndex": 114,
-    "blockHash": "5d1b6cbe2cb371279671d67aecbb005c94ebee3d4615f34b6c79018de591896c",
+    "blockHash": "df86a3aa5905fdb46b631d505851dce1a40d3cbbd97bc89042af6c79948ccde8",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d42524f5f8202b66690e2de103f521e3e053fae28909c492be28a275ed7d7bb7"
   },
   "CORE--aibast-agents-library-license-renewal-expansion-0001": {
     "blockIndex": 115,
-    "blockHash": "ceed72631e6f734ecfb8732699f2dd1bf7b04dbaee865afefd6c8488b295fc0b",
+    "blockHash": "5a10d96b5950e94c32f6baf741a938eaaf9ad99f8fbcad172ef170a8eb345d06",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "1a01f78b6bf57276571001e5536458f1f133b8c7cee84fecf647baed15db63b5"
   },
   "CORE--aibast-agents-library-product-feedback-synthesizer-0001": {
     "blockIndex": 116,
-    "blockHash": "ff9117bb23d1c652616969dc4f0e569aaebe9078fa29385901108ea57628415a",
+    "blockHash": "4e7fe36ac4d26f0a17e1398a512ca88db9d6dde61b24a4e4374fca393caf190e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "af4d6720a3c08ef50e5cacb17ce9a1200340426e24f40f73b1a117ce9afab285"
   },
   "CORE--aibast-agents-library-support-ticket-resolution-0001": {
     "blockIndex": 117,
-    "blockHash": "e59d1ac3592eee4ce209e8f62c1552eea7224b3bcbedb01efdd97b3e3bba81ba",
+    "blockHash": "821ef3e1389aa386cf31ed99e26ce7cb81f29b107fa411f60c2c9db74aae1498",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "6c8afed8f1bf6dbcf6fe6bb100210a1f06a937620c9238319f1b40bcf71d0dca"
   },
   "CORE--borg-borg-agent-0001": {
     "blockIndex": 118,
-    "blockHash": "f09f44e8a7312ad4869072c86ab00ede5e734c9d4d184a9845cec72d7f6cfc42",
+    "blockHash": "ed545a84366b99d99c18942cf4cf3e97bbb8700f42ff1f935ad8cee4d1b25286",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "ed38c26483f9800b0d2e067383948635cf27f77d0b316b7a57959b0ef529695b"
   },
   "CORE--borg-cardsmith-agent-0001": {
     "blockIndex": 119,
-    "blockHash": "47e0359d8d2fb00eba930fc598ac71029db12bdfcf03d02c2f4c000073c8718c",
+    "blockHash": "f6f9b10155be9af287aa5bb824fe1b97c95e7923b8eb0dafd8918fc458a3be1c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "14708ab79114af561c450ba1768f3dc8a0c2c6040b285f409ea14656cd03cddd"
   },
   "CORE--discreetRappers-agent-generator-0001": {
     "blockIndex": 120,
-    "blockHash": "916e99e241953935a38fdd1661a321bc6892410097d58789383d6fcd738dd5b2",
+    "blockHash": "5f66f11c9999e4e5286a878cb60ac79761c4127f5f01d952f8ab07bafc8cf952",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "a3644d0d71cedbc06881d4c9b8d66eedbc8cbc595c1fb330915f1ecce8a954cb"
   },
   "CORE--discreetRappers-agent-transpiler-0001": {
     "blockIndex": 121,
-    "blockHash": "6104415931e989d11e61950caa810e2f7774c125c922175099f8f3a28165a825",
+    "blockHash": "8a59e0c184cd3d0018ce740f5551711a2860cb147986dc55c4643a92d4ad1c9e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "de96fb02855325cc002036ce30537b719ce8e98bc36e6dc399ad499fbb8acad2"
   },
   "CORE--discreetRappers-architecture-diagram-0001": {
     "blockIndex": 122,
-    "blockHash": "ac8116054cf4092dc14ab64515290823c3ca341489021f5bb2f5f7b2259d3a61",
+    "blockHash": "f5573e3f58f48181ace951210cf5ee9e9e238ab66606f0eef30b8f9b780daa31",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b30d9f63ba5d0e88847b0caf31125fabf430c69a3d9c124254242c70cb30bf52"
   },
   "CORE--discreetRappers-copilot-studio-transpiler-0001": {
     "blockIndex": 123,
-    "blockHash": "ca6200df363b72063a790e609f9e64899f9fb438aef8dc05bc0249c3a34b84bd",
+    "blockHash": "433c12581c11f6c55d95deeae1a3ba4c1aa04fdf11de1190faefc5ab0cf9b7a0",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "19bee654c049f449d13816fdacb2f2fc9c2f2fe8d3198e94b15df974e570f3f6"
   },
   "CORE--discreetRappers-demo-script-generator-0001": {
     "blockIndex": 124,
-    "blockHash": "823ccec512fdfecb67f25704795244df1b5471d281ad63320756a18bd1c113d6",
+    "blockHash": "5c8deed191f1434222bba1c4393240a90d3fc3db49b4fabc0b65072e8124311c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b69b2b715b0dc4cbea1b3630cdf302feda1848d5f851344190446486c57a5538"
   },
   "CORE--discreetRappers-dynamics-crud-0001": {
     "blockIndex": 125,
-    "blockHash": "007107859f718bfeb96be5607975a51d0d01c0cd97bda8e54c8ef6202ceb55a8",
+    "blockHash": "f07d12091f4f4d8c35ac64f91a1061d5a31c8b2d8b329622d2a24e6ba57c5d7a",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "7f2b7dc25e6e6c2114036eaa582dfa2b770cb45b2b235bc0637002108fabd778"
   },
   "CORE--discreetRappers-email-drafting-0001": {
     "blockIndex": 126,
-    "blockHash": "1ec8779fce93c71c4ac957591f92f22b49c80e623ab3b94d1b21719f05942f7a",
+    "blockHash": "c70ec36532cda9f104f9dfcc53695c3029953334df86f86f0d00f1b241036cff",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "6b317b21d93667a3601545fe5beea3de5fc2e715328b8aff9a3a2ea7555d0b89"
   },
   "CORE--discreetRappers-powerpoint-generator-0001": {
     "blockIndex": 127,
-    "blockHash": "dbbf27a1ef096260db2d3a4acbac5b24494b4a3355170370ab4361d46e331f53",
+    "blockHash": "03886d717640aed16ea9cfafbd3911d87d6ee15b970116461e6b745cbc3cd785",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "df7199b9ef2a3aa7583ea01a855fecbab8e0505a0977837ad54ef119fb8c0b82"
   },
   "CORE--discreetRappers-project-tracker-0001": {
     "blockIndex": 128,
-    "blockHash": "02d522aead0f1b7b3735db381be136d88a4432ef1f049200ffb4ae847de5a541",
+    "blockHash": "cc1cda8b247b7cd2cb8d870295ea07f7b6e6d2d54210f8e6c0643c306ebb374c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "fb1e9978808a3a4b00219869e4e46f72c5d978bba5f4a6c21e4a5cbfb440f442"
   },
   "CORE--discreetRappers-rapp-pipeline-0001": {
     "blockIndex": 129,
-    "blockHash": "bd7e5cb10825f42f20866e02adcd5f38f0b29daae0b583010569ff8231eb5bfd",
+    "blockHash": "d4d290e20a39809d741923c3cbabde6738c95a247b68b5cc1fe7233c5cdb07fa",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "7b4aad031733779f9667d0a649b46564f1168b2fea06ad48a53d9ef44114bccd"
   },
   "CORE--discreetRappers-sales-assistant-0001": {
     "blockIndex": 130,
-    "blockHash": "b5602f49b1e2404cad5b47ecaa6dd6b6df848d64e24f29905988f5a3cf0fae6b",
+    "blockHash": "d590ffb0a4d443442f066106327a8c0fe4159fab0838d30ea6073b69e5e02580",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "d74b81edd2b38d6916d70c3e60b9acb296780eb0e22b9ee2b55bee6dfff8221e"
   },
   "CORE--discreetRappers-scripted-demo-0001": {
     "blockIndex": 131,
-    "blockHash": "9a54336fbbab592ce4b7130a329a8341e7b2501fa36b983f7aef8f4b257a52ba",
+    "blockHash": "ac6bd67d8dbc30a1babeddb9f4d65be5b8416af983f056ca8773f10c71be353c",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "b35e482ef7ee3ee180ca3191f90d7ecda27b1d4c07cdd71b6ae589a6cf769299"
   },
   "CORE--discreetRappers-sharepoint-contract-analysis-0001": {
     "blockIndex": 132,
-    "blockHash": "ea82a1df4f2cde320639887694473f4b906b338642d56cb6ab09fdcfeaf32524",
+    "blockHash": "513b838c5da1b8b3136acafa8fee1a6219a1d4aedad5f6fb308408618384f5bd",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "2449f7841b4be7220aabad81a096f202b75d85ddd39b1729957790cf1e063a5c"
   },
   "CORE--kody-agent-workbench-0001": {
     "blockIndex": 133,
-    "blockHash": "3accf6c30a3ee08ff062d810472c1b8d975edb133e36bf3c587fbd4888d19995",
+    "blockHash": "f35f38b17d84c37910ed0ab890ebeac402810edfb46d5d7e35364665d84091a1",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "fe92de9fdf1a54d87a9e9a30644321e0cbce9352c32ca20cb205d9414ec6e340"
   },
   "CORE--kody-context-memory-0001": {
     "blockIndex": 134,
-    "blockHash": "1f9c93b1b79e9f82bb9950abb50c245c4833c40e24d52da8da479b6c3dc7a5a6",
+    "blockHash": "7acadafa0f7dfee18a1593466b7afbb32d3d620b60a092e02e563c4767aef9f0",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "f8242c00b2fb4a62cb800fe32341d8a71ed27dba5bf58147a2777670f70e018d"
   },
   "CORE--kody-github-agent-library-0001": {
     "blockIndex": 135,
-    "blockHash": "bc82751d24fd73e65f28cefac2d53f5cc37edd1e355d6b60d47aed49920a52b4",
+    "blockHash": "feed22982b7f3a7057bfbf4c0f42c56d8dbb624a8144b879a81a30ce98fbbe42",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "31825cae5dbc6b737d2af54f92cc5b7cab7d085900249871d4a1d24fdfc0d84b"
   },
   "CORE--kody-manage-memory-0001": {
     "blockIndex": 136,
-    "blockHash": "be1b706d1a42573f5f7a2d53b70b76b436084a16d42adc4c0bf4281222cfcaa4",
+    "blockHash": "045991740fb2d8c02f478762f149623748b624c5fdab157ab597fe422f65a21e",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "167bedc560095dce1cc5315fb1ea0124aa7ea6daa67792392fc63fd133f26750"
   },
   "CORE--kody-rar-remote-agent-0001": {
     "blockIndex": 137,
-    "blockHash": "e91466862ea54c95d751d16babec691a38efab69c25de5e84f9d355272a32c01",
+    "blockHash": "8c3386d028ee7a7ce3cca767cfdaefe45761ac1f2e65d6dcbcee4b6372103f3d",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "016bba60c8d37502f15e6a52858d84ad4057bec72e31c4ea997ebf3f8032c13e"
   },
   "CORE--rapp-basic-agent-0001": {
     "blockIndex": 138,
-    "blockHash": "e421af139b24407a80fd849282e1d4b3301aee776a98193577dff09ab63b25fb",
+    "blockHash": "4caceec517fd10e840da2ffad1ede57fe8adcc7638b9c4997519ccc71b59b9eb",
     "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
     "cardHash": "46639ae343ceb4f712c97882977fbac2f76111b68e7c68a4324c52a1e0ad484f"
   }

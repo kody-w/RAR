@@ -1,7 +1,7 @@
 {
   "index": 104,
   "timestamp": "2026-04-04T00:01:44.000Z",
-  "prevHash": "72fb4032dd4d5fa89fbdc5df8162e28f304cdf7f6144ae6d2310f4e7330b9777",
+  "prevHash": "8ea81daea5736d10a3c551764e1be5cc85d7c8a617f6cc3cf91e2a5e06b4da6b",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-personalized-marketing-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "08d213697102644674a26aa50392b1a94d2dbd3d4375d5ae4c6fd1f5df8659d2"
+  "hash": "eb58eed31484d4565f735ec5506ba730341452280da2e12e9a22b9e5448414ee"
 }

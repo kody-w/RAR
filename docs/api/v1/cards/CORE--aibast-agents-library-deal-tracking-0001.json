@@ -1,7 +1,7 @@
 {
   "index": 18,
   "timestamp": "2026-04-04T00:00:18.000Z",
-  "prevHash": "972404f4fd0be913f5e99e2fe2ab76a84748943b2cb2728cc2fae4fa8e548ff3",
+  "prevHash": "c0bbdcdc160b0a3ce2ddf9d09ba7bfff9d7f607fde5fd5c3ba68309ce1a75127",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-deal-tracking-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "932e0a678ab160d852370ac4aca3c17943bcdbeb8ea1a289032b955b13d81c26"
+  "hash": "4139206ed9e0761cc27dd66ffc231de5c6bc75318b7abf27d919b37eb46e4f8f"
 }

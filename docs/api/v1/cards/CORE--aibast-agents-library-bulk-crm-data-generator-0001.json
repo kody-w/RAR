@@ -1,7 +1,7 @@
 {
   "index": 66,
   "timestamp": "2026-04-04T00:01:06.000Z",
-  "prevHash": "6e603b994cdfa50032e0621c9934088fd0e4b1c177c685c1a99bad20d64b0eff",
+  "prevHash": "0ac60313de4faabed11980e2218a6da15033da3fb5d6c59f115dde955290743a",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-bulk-crm-data-generator-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "a668f40af3bdd2a03f36e3b7a38e42696aafc96985dc405f2f33c72f5e7c4a55"
+  "hash": "8a9cf8377244b2143088c3c4c3d72ad73c096c7bf1ac23c042a2ba480f1e2730"
 }

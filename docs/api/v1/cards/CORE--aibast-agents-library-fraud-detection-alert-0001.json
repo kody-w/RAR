@@ -1,7 +1,7 @@
 {
   "index": 58,
   "timestamp": "2026-04-04T00:00:58.000Z",
-  "prevHash": "f9795d2d9c0ce67c4393fbf35c42902a39748d303aa5ba3173cb1cca3881019b",
+  "prevHash": "fda56a77f52a09cdd23d308bd8398df82dfa6a53334a2e2e2ef81259a0f9ee97",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-fraud-detection-alert-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "15264c96b8c31909bd7190b4496bf223ed0228483022d1e7caaabe6e362dc039"
+  "hash": "182291b445e47e3fc162c710b454c0e5c4fae65d404b9fd1ea467a5c207d8d13"
 }

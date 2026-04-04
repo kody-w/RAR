@@ -1,7 +1,7 @@
 {
   "index": 134,
   "timestamp": "2026-04-04T00:02:14.000Z",
-  "prevHash": "3accf6c30a3ee08ff062d810472c1b8d975edb133e36bf3c587fbd4888d19995",
+  "prevHash": "f35f38b17d84c37910ed0ab890ebeac402810edfb46d5d7e35364665d84091a1",
   "type": "forge",
   "data": {
     "mintId": "CORE--kody-context-memory-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "1f9c93b1b79e9f82bb9950abb50c245c4833c40e24d52da8da479b6c3dc7a5a6"
+  "hash": "7acadafa0f7dfee18a1593466b7afbb32d3d620b60a092e02e563c4767aef9f0"
 }

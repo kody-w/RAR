@@ -1,7 +1,7 @@
 {
   "index": 63,
   "timestamp": "2026-04-04T00:01:03.000Z",
-  "prevHash": "57ccc1ebdaf8e635f3d733d87f43185382c74709432516714f7abb94066b6d3c",
+  "prevHash": "6b714c5e217c4b608e1c3eb1fc0d3fc98fa0b3d418567e240b440ff5d946b4e2",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-wealth-insights-generator-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "6371bafc3fbfaac05a9c7db098d920e82ea4dd711d4a91e1968231086fb5c9c2"
+  "hash": "3ba3b2de1036fd6e7661b6e9b7224e536384863e5aca36bfa6ab6eef3cc52282"
 }

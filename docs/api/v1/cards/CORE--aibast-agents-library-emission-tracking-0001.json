@@ -1,7 +1,7 @@
 {
   "index": 45,
   "timestamp": "2026-04-04T00:00:45.000Z",
-  "prevHash": "3487e37c7af07938d70396966f0d013030fd25e1188e97732eec7ee7ea3ef512",
+  "prevHash": "3717318a64b14613479f23ba0a71e4cd72f2f63b7e724efcdf92072b17043d8f",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-emission-tracking-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "3518507e5bc2dd7414dc91b514134cdf76c6a400affccb3079f3b87ea5b484db"
+  "hash": "75a8fb0de1aae60843f484ac1adaabb192f292e4f5bfc80705d6e502cbaaf825"
 }

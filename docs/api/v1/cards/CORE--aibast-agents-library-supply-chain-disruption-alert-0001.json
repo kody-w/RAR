@@ -1,7 +1,7 @@
 {
   "index": 107,
   "timestamp": "2026-04-04T00:01:47.000Z",
-  "prevHash": "e87d3462bae1488899485efa11ed8c4d4259a9336c952671334f89badb746030",
+  "prevHash": "9ec092e89d227f57058b9f69cd99957886098292978cf2b58345edc54c3acae7",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-supply-chain-disruption-alert-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "322d6dba4a2e0088b61d57543d4343887acb05616085da7f56d8fbd61179066a"
+  "hash": "f278e9f42b639de7987e2eb136251ae332c8ecbf7df7b0c83ef7f6f3748cd22e"
 }

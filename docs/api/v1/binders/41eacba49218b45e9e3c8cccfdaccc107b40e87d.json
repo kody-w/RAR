@@ -12,7 +12,7 @@
       "rarity": "mythic",
       "edition": "1/1",
       "blockIndex": 1,
-      "blockHash": "95daeb7762e11187e9ffd2f20b56eab3544630743fc10f947c7d9da54a9a3c7b",
+      "blockHash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8",
       "cardHash": "8233575219de43ce3f3c726ca8094ebf5c88ff70f14c58287abbbf61707e6ddb"
     },
     {
@@ -23,7 +23,7 @@
       "rarity": "mythic",
       "edition": "1/1",
       "blockIndex": 2,
-      "blockHash": "a1a996bf3fcdb4b22935fd39a3ed47862127054f467d0d53815997c3b18a1dbe",
+      "blockHash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e",
       "cardHash": "9b156d07b478a70240048dee8d1df566f33bb013b75dd6b7830da981d2cd8749"
     },
     {
@@ -34,7 +34,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 3,
-      "blockHash": "6d4111d0e347308335f8353e3d004370809d7480175d159916774642b3de6ae2",
+      "blockHash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c",
       "cardHash": "32725ccbfe06d64b4a3cba7eb25fcc4e1fef4d056471e663e6975734cbdb01d9"
     },
     {
@@ -45,7 +45,7 @@
       "rarity": "mythic",
       "edition": "1/1",
       "blockIndex": 4,
-      "blockHash": "93a1985d10606124f40f3c408cd56bbf3fd3e1b4f6eeeb310f911268ce9f967d",
+      "blockHash": "64708f8eed1416244d11140dda53196a1c705c77ad55b9fed02c85792d9d0ad1",
       "cardHash": "61a0d2861621314783b1b3c0ce4480c1c3bb832f52f81c9a06458926b6ac1503"
     },
     {
@@ -56,7 +56,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 5,
-      "blockHash": "35869153802aa1945efd380ac84e76650f8860fbe4e66364c64874906ba381c1",
+      "blockHash": "cf051629533016fc03ca4ddfc494cb266f324adfaa4484346acee438a30476c3",
       "cardHash": "5a6088dc87970d5258b2552148703a2ff8800312ac02d5dfcf171397a55ece16"
     },
     {
@@ -67,7 +67,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 6,
-      "blockHash": "9d72b0d422cd9fcefaf64df3716ead4f612f33193d789431021cec7c8b3eb74d",
+      "blockHash": "fae19870c51629950a17f9ade441bc7e8409ff4f653d8d2a9ce86b7bd6c0d6c7",
       "cardHash": "3fbd428daa4b32b3b07f537eaa8ced4247d887c95e3236ddf823f821aa1877d3"
     },
     {
@@ -78,7 +78,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 7,
-      "blockHash": "84cfbef80cfc492d60669799fd1316701d7a24dde530bae338f7b200002e46b6",
+      "blockHash": "afb3601b37a264b81f8bc22eefffefdb6c31cbb8656cfec20d83dd2a39a486af",
       "cardHash": "75acde549630b224d49875662d3f67964439d70daa67feba43ff5b2c3aa74d7e"
     },
     {
@@ -89,7 +89,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 8,
-      "blockHash": "6f1574b2dfd091f7908c92a2d9d962c2d8d5d7ef915a8d026d10a46ff067e0ba",
+      "blockHash": "f6d7c2058176610d3ef55ff84eb721f94ba81b39c2564be057ef93f35ba113d9",
       "cardHash": "15e591c917f5470871a85a821d3ccbd2f612636ee4e064101ebf33ce1a913fc2"
     },
     {
@@ -100,7 +100,7 @@
       "rarity": "mythic",
       "edition": "1/1",
       "blockIndex": 9,
-      "blockHash": "ceca662dd280993337f49b749a1bf308a34a0795205f9671c32adf89bac5d34e",
+      "blockHash": "8493500a04d42e97322724d1008fd0b49fe7b4f2a4315a2dad7a1cf47f0ddf6c",
       "cardHash": "3a5fd400c88019f73c13343d6bb3ba382f8f8204b45e969442cc64b0962cea86"
     },
     {
@@ -111,7 +111,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 10,
-      "blockHash": "c2c382f3d6e9c6295dcdbdd907f578697c32f007c9ba5acc4c74b47a85b8e6b2",
+      "blockHash": "864f4b8ce06232d0f5f8f3c79a7f155931162a01a7ceb64e789b359c2e9f0aae",
       "cardHash": "89754b799e05ecb92578fc06a8f1ffaf7b61bb0c8170490bdc02bac8b86d3d66"
     },
     {
@@ -122,7 +122,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 11,
-      "blockHash": "f4a21b3f68bd55c4ed7409f12b8a809dd675155f5aaf67c7c3f6783073157f9b",
+      "blockHash": "83b097e901db0720f8a9718af735b83d59b09040ac14748e8d18e15cf25c6973",
       "cardHash": "37f94f580e2b8d6450f4a839d07851a5313fac42f74b3f72d1f02fb25ffb484a"
     },
     {
@@ -133,7 +133,7 @@
       "rarity": "rare",
       "edition": "1/1",
       "blockIndex": 12,
-      "blockHash": "d1e7f0b0f8f1e2913a192ef6e64878afb07ec7ace602dc8da394798d297631e6",
+      "blockHash": "6ad930d91da01b01263a1069e3492a1ef8eb1e5a4ca325e0634feaee22994f05",
       "cardHash": "416b589266d1ff0d1619d0eb6bd8b67db8de5d8a26206a4a6b613bb189c1c1ec"
     },
     {
@@ -144,7 +144,7 @@
       "rarity": "mythic",
       "edition": "1/1",
       "blockIndex": 13,
-      "blockHash": "fc57bb1450fad831ab7abc9560b19ff3e42658ca4ea18f699b5a7295f1129bc8",
+      "blockHash": "5e0ec588ef62f43f27ee290a39dafca4324ad4fdb726f95aa96864b06980eb27",
       "cardHash": "468487f9aa1bea82b0719c62734da983a78c63b38e5a19b915e818fe1aa1fb8f"
     }
   ],

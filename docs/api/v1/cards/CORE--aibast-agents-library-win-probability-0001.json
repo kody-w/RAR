@@ -1,7 +1,7 @@
 {
   "index": 33,
   "timestamp": "2026-04-04T00:00:33.000Z",
-  "prevHash": "60d8c1ae4b8fadde25fe1ac9607c47c5d7941ceee91d4fc9360d6ed768f340b9",
+  "prevHash": "61bb7bda8c808b4ca3f93ae9af5a79bc6247e9b89a064b6c323b5fa56a78cd62",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-win-probability-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "c78c161b356be1a8ff88ea893f9be49b1001a56d276e17aded21e73f50783e3c"
+  "hash": "3f6be7e8daaf88a5760bb15a2cf7fad5e61c8148ee785d0241bc30259c93a66b"
 }

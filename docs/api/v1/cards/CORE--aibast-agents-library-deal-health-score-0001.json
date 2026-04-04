@@ -1,7 +1,7 @@
 {
   "index": 25,
   "timestamp": "2026-04-04T00:00:25.000Z",
-  "prevHash": "07f1fee78083b179d0d082be8611fee0a83fa2b5c109524d7480d5e5ecbe503c",
+  "prevHash": "445f6a16563973a9a103b2f29a7e6a89845f821dc2196500e5035d2f0c36625f",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-deal-health-score-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "550374a1c56912ecc2247dfc64e4379ce201d729c81c2faa72a8b778e47d1f17"
+  "hash": "3f65cd4bd226364e1715b8a9f8219866af3211bda76e738cd7fc9043d7e82e52"
 }

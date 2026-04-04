@@ -1,7 +1,7 @@
 {
   "index": 6,
   "timestamp": "2026-04-04T00:00:06.000Z",
-  "prevHash": "35869153802aa1945efd380ac84e76650f8860fbe4e66364c64874906ba381c1",
+  "prevHash": "cf051629533016fc03ca4ddfc494cb266f324adfaa4484346acee438a30476c3",
   "type": "forge",
   "data": {
     "mintId": "HOLO-telegram-0001",
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "hash": "9d72b0d422cd9fcefaf64df3716ead4f612f33193d789431021cec7c8b3eb74d"
+  "hash": "fae19870c51629950a17f9ade441bc7e8409ff4f653d8d2a9ce86b7bd6c0d6c7"
 }

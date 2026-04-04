@@ -67,8 +67,8 @@ const genesis = {
     version: '1.0.0',
     protocol: 'rar-chain/1.0',
     authority: AUTHORITY_BINDER,
-    architect: KODY_BINDER, // God mode — weight-3 vote, automatic majority
-    consensus: { model: '3-of-5', threshold: 0.6, godWeight: 3 },
+    architect: KODY_BINDER,
+    consensus: { model: '3-of-5', threshold: 0.6 },
     totalSupply: null, // uncapped — new agents can always be forged
     message: 'The first bond. The oldest love in the world. — The Architect'
   }
@@ -181,13 +181,12 @@ const chainState = {
   consensus: {
     model: '3-of-5',
     threshold: 0.6,
-    godMode: KODY_BINDER,
-    godWeight: 3,
-    description: "Architect Binder carries weight-3 vote (automatic majority). No chain mutation passes without this signature."
+    model: '3-of-5',
+    threshold: 0.6
   },
   binders: {
-    [HOWARD_BINDER]: { alias: 'Howard Hoy', cards: 13, role: 'genesis-holder', weight: 1 },
-    [KODY_BINDER]: { alias: 'Kody Wildfeuer', cards: blocks.length - 14, role: 'architect', weight: 3 }
+    [HOWARD_BINDER]: { alias: 'Howard Hoy', cards: 13, role: 'genesis-holder' },
+    [KODY_BINDER]: { alias: 'Kody Wildfeuer', cards: blocks.length - 14, role: 'genesis-holder' }
   },
   verification: {
     method: 'sha256-hash-chain',

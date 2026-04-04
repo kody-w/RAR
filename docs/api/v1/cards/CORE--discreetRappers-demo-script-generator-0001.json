@@ -1,7 +1,7 @@
 {
   "index": 124,
   "timestamp": "2026-04-04T00:02:04.000Z",
-  "prevHash": "ca6200df363b72063a790e609f9e64899f9fb438aef8dc05bc0249c3a34b84bd",
+  "prevHash": "433c12581c11f6c55d95deeae1a3ba4c1aa04fdf11de1190faefc5ab0cf9b7a0",
   "type": "forge",
   "data": {
     "mintId": "CORE--discreetRappers-demo-script-generator-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "823ccec512fdfecb67f25704795244df1b5471d281ad63320756a18bd1c113d6"
+  "hash": "5c8deed191f1434222bba1c4393240a90d3fc3db49b4fabc0b65072e8124311c"
 }

@@ -1,7 +1,7 @@
 {
   "index": 14,
   "timestamp": "2026-04-04T00:00:14.000Z",
-  "prevHash": "fc57bb1450fad831ab7abc9560b19ff3e42658ca4ea18f699b5a7295f1129bc8",
+  "prevHash": "5e0ec588ef62f43f27ee290a39dafca4324ad4fdb726f95aa96864b06980eb27",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-account-intelligence-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "30e00adbb6b604dfe76de8dba128ec5feeb8639e12cb5f4478834fd85ab43413"
+  "hash": "88a86bcb0045aa8d2b3174520357ad565fb5fcc5e88019d6b21e28225aea446d"
 }

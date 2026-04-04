@@ -1,7 +1,7 @@
 {
   "index": 61,
   "timestamp": "2026-04-04T00:01:01.000Z",
-  "prevHash": "c4943d87f1008281cfc17137ad3aea10f5a82ddfeaab55d4c55bfb889de8188b",
+  "prevHash": "ee167e527f6144ba0c4d328ece5ef05229490fcb33a712c50b4c61a153a1516e",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-fs-regulatory-compliance-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "57428853ad6a48e124489297c205fa6e0d40fea2be8f1dee6b91361bffe7d63e"
+  "hash": "666e04148effa8708eade32a1776729fa81e92d800bfb852ceba6f1e5ca5a561"
 }

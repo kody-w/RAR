@@ -1,7 +1,7 @@
 {
   "index": 53,
   "timestamp": "2026-04-04T00:00:53.000Z",
-  "prevHash": "a1824304bfa381bc7418f478cbbb76c3b65cd82042b518936669a0446d4eebba",
+  "prevHash": "a86880f4378b6265c7f1c46083c9d792b340e85665b2ca4610e1be51f319c631",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-workforce-clearance-onboarding-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "bafee8b63826ebc39877219f12416503ffbd037c00704c906ca1ef5d3e789e79"
+  "hash": "e65726388540db57ae871dfa4244b735036bfd03fcad3feef85e1b95bd58e248"
 }

@@ -1,7 +1,7 @@
 {
   "index": 112,
   "timestamp": "2026-04-04T00:01:52.000Z",
-  "prevHash": "905b0d872e51446aa6e37f777fd6ce6c74e820a08203634dd9275f46a0796642",
+  "prevHash": "1451a5ddf0a447fdfe7d91d74e87ea829fee46fc5e8c1452cc857ea69240a7a8",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-utility-billing-assistance-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "d8337cac58d423cd859531e533428adf65d84d9ad2f789045ef3a81e68f2a298"
+  "hash": "953af852af4f70f60e389912e476bd1b07f903cafe758de96eaeb6de159d6213"
 }

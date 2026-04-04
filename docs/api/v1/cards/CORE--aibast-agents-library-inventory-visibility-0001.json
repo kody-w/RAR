@@ -1,7 +1,7 @@
 {
   "index": 103,
   "timestamp": "2026-04-04T00:01:43.000Z",
-  "prevHash": "c04f0f2dae080819fd5aa6d567da635b75b55c2a548dfb7e83b23726feb10edd",
+  "prevHash": "24f3da2a28c8dbab80ff69f2c900b582b90b6275730a8dbfeaef7c0deec2388c",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-inventory-visibility-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "72fb4032dd4d5fa89fbdc5df8162e28f304cdf7f6144ae6d2310f4e7330b9777"
+  "hash": "8ea81daea5736d10a3c551764e1be5cc85d7c8a617f6cc3cf91e2a5e06b4da6b"
 }

@@ -1,7 +1,7 @@
 {
   "index": 48,
   "timestamp": "2026-04-04T00:00:48.000Z",
-  "prevHash": "0985cd81eadc0f91ae2e02bc58bb94d270b9d9f927efe17b09f7716e2907ae6b",
+  "prevHash": "ceefa3bf1e0b9ec36ddc22f909bd31e52df2c4c680b6125a8b0107dad4955c14",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-energy-regulatory-reporting-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "b8cff5e7875034b9640c785e7f91453f1017db41d8b6b1b71e3636a02580eab1"
+  "hash": "3e9bbebd8ff690153713d51b5295fff100fa288f2b1df6d1ec53100539b701a9"
 }

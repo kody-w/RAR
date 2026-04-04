@@ -1,7 +1,7 @@
 {
   "index": 59,
   "timestamp": "2026-04-04T00:00:59.000Z",
-  "prevHash": "15264c96b8c31909bd7190b4496bf223ed0228483022d1e7caaabe6e362dc039",
+  "prevHash": "182291b445e47e3fc162c710b454c0e5c4fae65d404b9fd1ea467a5c207d8d13",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-loan-origination-assistant-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "e222d6e6c16c6c7d2338cda4f21cef04ba1b15024de6a5fbe432f75de3a7dadb"
+  "hash": "7dc7039c2fa3b10e63a2621963e58cc61a03184ab84fa07bf673937c55af7e2a"
 }

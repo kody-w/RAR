@@ -1,7 +1,7 @@
 {
   "index": 85,
   "timestamp": "2026-04-04T00:01:25.000Z",
-  "prevHash": "92a9abe178e6d1d69f1dcc6df8c95fe54db3b0ddc14cf22d7879afe8fbdccc7e",
+  "prevHash": "bb9f5e8eeca6eadf770d705ba49af962a46cbc0b8151593818db14be87277756",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-voice-to-crm-servicenow-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "a6b82f0ad4f99300e9f9126bc25c8271ff2ab0218206ad563bb31d209116fc1c"
+  "hash": "82adb2ce7d6080e1aa478619964196a77699f4852704c65f3cc1c4fe619aa843"
 }

@@ -1,7 +1,7 @@
 {
   "index": 3,
   "timestamp": "2026-04-04T00:00:03.000Z",
-  "prevHash": "a1a996bf3fcdb4b22935fd39a3ed47862127054f467d0d53815997c3b18a1dbe",
+  "prevHash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e",
   "type": "forge",
   "data": {
     "mintId": "HOLO-personafactory-0001",
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "hash": "6d4111d0e347308335f8353e3d004370809d7480175d159916774642b3de6ae2"
+  "hash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c"
 }

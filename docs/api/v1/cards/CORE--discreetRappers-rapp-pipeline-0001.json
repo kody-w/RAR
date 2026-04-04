@@ -1,7 +1,7 @@
 {
   "index": 129,
   "timestamp": "2026-04-04T00:02:09.000Z",
-  "prevHash": "02d522aead0f1b7b3735db381be136d88a4432ef1f049200ffb4ae847de5a541",
+  "prevHash": "cc1cda8b247b7cd2cb8d870295ea07f7b6e6d2d54210f8e6c0643c306ebb374c",
   "type": "forge",
   "data": {
     "mintId": "CORE--discreetRappers-rapp-pipeline-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "bd7e5cb10825f42f20866e02adcd5f38f0b29daae0b583010569ff8231eb5bfd"
+  "hash": "d4d290e20a39809d741923c3cbabde6738c95a247b68b5cc1fe7233c5cdb07fa"
 }

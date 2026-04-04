@@ -1,7 +1,7 @@
 {
   "index": 133,
   "timestamp": "2026-04-04T00:02:13.000Z",
-  "prevHash": "ea82a1df4f2cde320639887694473f4b906b338642d56cb6ab09fdcfeaf32524",
+  "prevHash": "513b838c5da1b8b3136acafa8fee1a6219a1d4aedad5f6fb308408618384f5bd",
   "type": "forge",
   "data": {
     "mintId": "CORE--kody-agent-workbench-0001",
@@ -26,5 +26,5 @@
       }
     ]
   },
-  "hash": "3accf6c30a3ee08ff062d810472c1b8d975edb133e36bf3c587fbd4888d19995"
+  "hash": "f35f38b17d84c37910ed0ab890ebeac402810edfb46d5d7e35364665d84091a1"
 }
