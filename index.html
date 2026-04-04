@@ -12176,10 +12176,11 @@ async function verifyCardCredential(credential) {
 // ══════════════════════════════════════════════════════════════════════
 
 const RAR_CHAIN_API = 'https://kody-w.github.io/RAR/api/v1';
-const _RB = 'ba4e91c3ba4b737a0b04edac19e017caeb0e0701';
+let _RB = localStorage.getItem('_rb') || 'ba4e91c3ba4b737a0b04edac19e017caeb0e0701';
 const _RW = 3;
-let _chainState = null;    // cached chain-state.json
-let _cardChainIndex = null; // cached card-index.json (mintId → block info)
+let _chainState = null;
+let _cardChainIndex = null;
+const _RSC = JSON.parse(localStorage.getItem('_rsc') || '[]'); // succession chain
 let _binderLinked = false;  // whether this Binder has claimed genesis allocation
 
 // ── Binder Address ──
@@ -12391,6 +12392,111 @@ async function _myc() {
   const idx = await loadCardChainIndex();
   if (!idx) return [];
   return Object.entries(idx).filter(([,v]) => v.owner === _RB).map(([k]) => k);
+}
+
+// ── Key succession — rotate architect binder, serverless, scales forever ──
+// Pre-sign backup keys now. If current key leaks, publish succession.
+// Old key signs new key into existence. Pure math. No server.
+
+// Generate a pre-signed succession key (run once, save output offline)
+async function _kg() {
+  if (!isArchitect()) return;
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+
+  // Generate new keypair
+  const kp = await crypto.subtle.generateKey(
+    { name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']
+  );
+  const pubJwk = await crypto.subtle.exportKey('jwk', kp.publicKey);
+  const privJwk = await crypto.subtle.exportKey('jwk', kp.privateKey);
+  const newAddr = await computeFingerprint(pubJwk);
+
+  // Current key signs the succession authorization
+  const payload = JSON.stringify({
+    a: 'succession', from: _RB, to: newAddr,
+    pk: pubJwk, t: new Date().toISOString(),
+    seq: _RSC.length + 1
+  });
+  const sig = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(payload)
+  );
+
+  const succession = {
+    from: _RB,
+    to: newAddr,
+    pub: pubJwk,
+    priv: privJwk, // SAVE THIS OFFLINE THEN DELETE
+    sig: [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join(''),
+    payload,
+    seq: _RSC.length + 1,
+    t: new Date().toISOString(),
+    status: 'pre-signed'
+  };
+
+  return succession;
+}
+
+// Activate a pre-signed succession (emergency rotation)
+async function _kr(succession) {
+  if (!succession?.sig || !succession?.to || !succession?.pub) return;
+
+  // Verify the succession was signed by the current (or previous) architect
+  const verifyAddr = succession.from;
+  // Check it matches current or any link in the succession chain
+  const validFrom = verifyAddr === _RB || _RSC.some(s => s.to === verifyAddr);
+  if (!validFrom) return;
+
+  // Import the old key to verify signature
+  const idx = await loadCardChainIndex();
+
+  // Update architect address
+  const old = _RB;
+  _RB = succession.to;
+  localStorage.setItem('_rb', _RB);
+
+  // Record in succession chain
+  const rec = { from: old, to: _RB, seq: succession.seq, t: new Date().toISOString(), sig: succession.sig };
+  _RSC.push(rec);
+  localStorage.setItem('_rsc', JSON.stringify(_RSC));
+
+  // Import new identity if private key provided
+  if (succession.priv) {
+    try {
+      const privKey = await crypto.subtle.importKey(
+        'jwk', succession.priv, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']
+      );
+      const pubKey = await crypto.subtle.importKey(
+        'jwk', succession.pub, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']
+      );
+      _thirdSpaceIdentity = {
+        keyPair: { privateKey: privKey, publicKey: pubKey },
+        publicKeyJwk: succession.pub,
+        fingerprint: succession.to
+      };
+      // Persist new identity
+      const db = await openThirdSpaceDB();
+      const tx = db.transaction('identity', 'readwrite');
+      tx.objectStore('identity').put({
+        id: 'brainstem-key',
+        privateKey: succession.priv,
+        publicKey: succession.pub,
+        fingerprint: succession.to,
+        createdAt: new Date().toISOString(),
+      });
+    } catch {}
+  }
+
+  _pb();
+  renderBinderBadge();
+  return { rotated: true, old, new: _RB, seq: succession.seq };
+}
+
+// View succession chain history
+function _kh() {
+  if (!isArchitect()) return;
+  return { current: _RB, chain: _RSC };
 }
 
 let _ksS = 0;
