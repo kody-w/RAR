@@ -3195,8 +3195,8 @@ function showSubmitPrompt() {
       <div style="font-weight:700;font-size:.92rem">${count} agent${count > 1 ? 's' : ''} loaded</div>
       <div style="font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(agents)}</div>
     </div>
-    <button onclick="submitDroppedAgents()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap">Submit to Store</button>
-    <button onclick="dismissSubmitPrompt()" style="padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.82rem;cursor:pointer">Keep Local</button>
+    <button onclick="submitDroppedAgents()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap">Submit to RAR</button>
+    <button onclick="dismissSubmitPrompt()" style="padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.82rem;cursor:pointer">Keep Local Only</button>
   `;
   document.body.appendChild(bar);
 }
@@ -3207,44 +3207,57 @@ function dismissSubmitPrompt() {
 }
 
 async function submitDroppedAgents() {
+  if (!ghUser) { loginWithGitHub(); return; }
   const btn = document.querySelector('#submit-prompt button');
   if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
 
   let submitted = 0;
   for (const sub of _pendingSubmissions) {
+    const agentTitle = sub.manifest.name || sub.fileName;
+    const payload = {
+      action: 'submit_agent',
+      payload: { code: sub.code },
+    };
+    const issueBody = '```json\n' + JSON.stringify(payload, null, 2) + '\n```';
+    const issueTitle = `[AGENT] ${agentTitle}`;
+
     try {
-      const payload = {
-        action: 'submit_agent',
-        payload: { code: sub.code },
-      };
-      const resp = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-          ...(ghUser?.token ? { 'Authorization': `token ${ghUser.token}` } : {}),
-        },
-        body: JSON.stringify({
-          title: `[submit-agent] ${sub.manifest.name || sub.fileName}`,
-          body: '```json\n' + JSON.stringify(payload, null, 2) + '\n```',
-          labels: ['submit-agent'],
-        }),
-      });
-      if (resp.ok) {
-        submitted++;
-      } else if (resp.status === 401 || resp.status === 403) {
-        // No auth or insufficient — fall back to opening an issue manually
-        const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent('[submit-agent] ' + (sub.manifest.name || sub.fileName))}&body=${encodeURIComponent('```json\n' + JSON.stringify(payload, null, 2) + '\n```')}&labels=submit-agent`;
+      if (ghToken) {
+        const resp = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${ghToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: issueTitle,
+            body: issueBody,
+            labels: ['rar-action', 'agent-submission'],
+          }),
+        });
+        if (resp.ok) {
+          const issue = await resp.json();
+          showToast(`Issue #${issue.number} created for ${agentTitle}`, 'success');
+          submitted++;
+        } else {
+          // Auth failed or insufficient scope — fall back to browser
+          const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
+          window.open(issueUrl, '_blank');
+          submitted++;
+        }
+      } else {
+        // Not authenticated — open in browser
+        const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
         window.open(issueUrl, '_blank');
         submitted++;
       }
     } catch (err) {
-      showToast(`Failed to submit ${sub.manifest.name}: ${err.message}`, 'error');
+      showToast(`Failed to submit ${agentTitle}: ${err.message}`, 'error');
     }
   }
 
-  if (submitted > 0) {
-    showToast(`Submitted ${submitted} agent${submitted > 1 ? 's' : ''} to the store (unverified)`, 'success');
+  if (submitted > 0 && submitted !== 1) {
+    showToast(`Submitted ${submitted} agents to the store`, 'success');
   }
   dismissSubmitPrompt();
 }
@@ -3330,7 +3343,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dz = document.getElementById('drop-zone-full');
       dz.style.display = 'block';
       dz.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(88,166,255,.08);border:3px dashed var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--accent);pointer-events:none';
-      dz.textContent = 'Drop .py files to add local agents';
+      dz.textContent = 'Drop agent.py to preview and submit to RAR';
     }
   });
   document.body.addEventListener('dragleave', e => {
