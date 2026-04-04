@@ -4448,17 +4448,55 @@ function kidsComplexity(a) {
   return Math.min(stars, 5);
 }
 
-// Generate unique SVG art from agent name (deterministic hash-based)
-function genCardArt(agent) {
-  const h = Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0);
-  const abs = Math.abs(h);
+// ── Seeded PRNG (mulberry32) — deterministic art from any seed ──
+// Same seed = same art, every time, every browser, every device.
+// Artists can override the seed via __manifest__.card_art.seed
+function seedHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return h >>> 0; // unsigned 32-bit
+}
+function mulberry32(seed) {
+  let s = seed | 0;
+  return function() {
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+// Get the art config for an agent — merges manifest card_art with defaults
+function getArtConfig(agent) {
+  const ca = (agent.card_art || agent.__card_art) || {};
   const cc = getCatColor(agent.category);
-  const p = cc.primary;
+  const seedStr = ca.seed != null ? String(ca.seed) : agent.name;
+  const rng = mulberry32(seedHash(seedStr));
+  return {
+    rng,
+    seed: seedStr,
+    primary: ca.primary || cc.primary,
+    bg: ca.bg || cc.bg,
+    border: ca.border || cc.border,
+    glyphs: ca.glyphs || null,           // array of glyph names to force
+    positions: ca.positions || null,      // array of [x,y] to force glyph positions
+    background: ca.background || null,    // 'dots' | 'scanlines' | 'corners' | 'none'
+    opacity: ca.opacity != null ? ca.opacity : 1.0,
+    scale: ca.scale != null ? ca.scale : 1.0,
+    svg: ca.svg || null,                  // raw SVG string to inject
+    flowLines: ca.flow_lines !== false,   // connecting lines between glyphs (default true)
+    accentDots: ca.accent_dots !== false,  // accent dots (default true)
+  };
+}
+
+// Generate unique SVG art from agent name (deterministic seeded PRNG)
+function genCardArt(agent) {
+  const ac = getArtConfig(agent);
+  const rng = ac.rng;
+  const p = ac.primary;
   const shapes = [];
-  // Background
-  shapes.push(`<rect width="200" height="120" fill="${cc.bg}"/>`);
-  // Generate geometric patterns based on hash
-  const type = abs % 4;
+  shapes.push(`<rect width="200" height="120" fill="${ac.bg}"/>`);
+  // Generate geometric patterns based on seeded PRNG
+  const type = Math.floor(rng() * 4);
   if (type === 0) { // Concentric circles
     for (let i = 4; i > 0; i--) {
       const op = (0.15 + i * 0.1).toFixed(2);
@@ -4467,7 +4505,7 @@ function genCardArt(agent) {
     shapes.push(`<circle cx="100" cy="60" r="8" fill="${p}" opacity="0.4"/>`);
   } else if (type === 1) { // Grid
     for (let x = 20; x < 200; x += 30) for (let y = 10; y < 120; y += 25) {
-      const op = ((abs + x * y) % 5 > 2 ? 0.3 : 0.08).toFixed(2);
+      const op = (rng() > 0.4 ? 0.3 : 0.08).toFixed(2);
       shapes.push(`<rect x="${x}" y="${y}" width="20" height="16" rx="3" fill="${p}" opacity="${op}"/>`);
     }
   } else if (type === 2) { // Hexagon web
@@ -4482,19 +4520,23 @@ function genCardArt(agent) {
     shapes.push(`<circle cx="${cx}" cy="${cy}" r="6" fill="${p}" opacity="0.5"/>`);
   } else { // Diamond pattern
     for (let i = 0; i < 5; i++) {
-      const x = 40 + (abs + i * 31) % 120, y = 15 + (abs + i * 17) % 90;
-      const s = 8 + (abs + i) % 15;
+      const x = 40 + Math.floor(rng() * 120), y = 15 + Math.floor(rng() * 90);
+      const s = 8 + Math.floor(rng() * 15);
       shapes.push(`<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="2" fill="${p}" opacity="${(0.1 + (i * 0.08)).toFixed(2)}" transform="rotate(45 ${x + s/2} ${y + s/2})"/>`);
     }
     shapes.push(`<line x1="30" y1="60" x2="170" y2="60" stroke="${p}" stroke-width="1" opacity="0.15"/>`);
     shapes.push(`<line x1="100" y1="5" x2="100" y2="115" stroke="${p}" stroke-width="1" opacity="0.15"/>`);
   }
-  // Accent dots from name hash
-  for (let i = 0; i < 3; i++) {
-    const dx = 30 + ((abs >> (i * 4)) & 0xf) * 9;
-    const dy = 15 + ((abs >> (i * 4 + 2)) & 0x7) * 13;
-    shapes.push(`<circle cx="${dx}" cy="${dy}" r="3" fill="${p}" opacity="0.6"/>`);
+  // Accent dots from seeded PRNG
+  if (ac.accentDots) {
+    for (let i = 0; i < 3; i++) {
+      const dx = 30 + Math.floor(rng() * 140);
+      const dy = 15 + Math.floor(rng() * 90);
+      shapes.push(`<circle cx="${dx}" cy="${dy}" r="3" fill="${p}" opacity="0.6"/>`);
+    }
   }
+  // Inject artist custom SVG if provided
+  if (ac.svg) shapes.push(ac.svg);
   return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
 }
 
@@ -4586,63 +4628,84 @@ const KEYWORD_GLYPHS = [
 ];
 
 function genCreativeArt(agent) {
-  const h = Math.abs(Array.from(agent.name).reduce((s, c) => ((s << 5) - s + c.charCodeAt(0)) | 0, 0));
-  const cc = getCatColor(agent.category);
-  const p = cc.primary;
-  const shapes = [`<rect width="200" height="120" fill="${cc.bg}"/>`];
+  const ac = getArtConfig(agent);
+  const rng = ac.rng;
+  const p = ac.primary;
+  const shapes = [`<rect width="200" height="120" fill="${ac.bg}"/>`];
 
-  // Pick glyphs: start with category composition, then augment from keywords
-  let glyphs = [...(SEMANTIC_COMPOSITIONS[agent.category] || SEMANTIC_COMPOSITIONS.general)];
-  const searchText = `${agent.name} ${agent.description || ''} ${(agent.tags || []).join(' ')}`;
-  for (const [rx, glyph] of KEYWORD_GLYPHS) {
-    if (rx.test(searchText) && !glyphs.includes(glyph)) {
-      glyphs.unshift(glyph); // keyword matches get priority
-      if (glyphs.length > 4) glyphs.pop();
+  // Pick glyphs: artist override > category composition > keyword augmentation
+  let glyphs;
+  if (ac.glyphs && ac.glyphs.length) {
+    // Artist explicitly chose their glyphs
+    glyphs = ac.glyphs.filter(g => SEMANTIC_GLYPHS[g]);
+  } else {
+    glyphs = [...(SEMANTIC_COMPOSITIONS[agent.category] || SEMANTIC_COMPOSITIONS.general)];
+    const searchText = `${agent.name} ${agent.description || ''} ${(agent.tags || []).join(' ')}`;
+    for (const [rx, glyph] of KEYWORD_GLYPHS) {
+      if (rx.test(searchText) && !glyphs.includes(glyph)) {
+        glyphs.unshift(glyph);
+        if (glyphs.length > 4) glyphs.pop();
+      }
     }
   }
 
-  // Position glyphs in a balanced composition
-  const positions = glyphs.length <= 2
+  // Position glyphs: artist override or balanced defaults with PRNG jitter
+  const defaultPositions = glyphs.length <= 2
     ? [[70, 60], [130, 60]]
     : glyphs.length === 3
     ? [[50, 55], [100, 45], [150, 65]]
     : [[40, 50], [90, 40], [140, 50], [180, 65]];
 
+  const positions = ac.positions && ac.positions.length >= glyphs.length
+    ? ac.positions
+    : defaultPositions;
+
+  const glyphScale = ac.scale;
+  const glyphOpacity = ac.opacity;
+
   glyphs.forEach((g, i) => {
     const fn = SEMANTIC_GLYPHS[g];
     if (!fn) return;
     const [px, py] = positions[i] || [100, 60];
-    // Add slight hash-based offset for uniqueness
-    const ox = ((h + i * 17) % 10) - 5;
-    const oy = ((h + i * 23) % 8) - 4;
-    shapes.push(fn(p, px + ox, py + oy));
+    // Seeded PRNG offset for uniqueness (deterministic per seed)
+    const ox = Math.floor(rng() * 10) - 5;
+    const oy = Math.floor(rng() * 8) - 4;
+    const gx = px + ox, gy = py + oy;
+    if (glyphScale !== 1.0 || glyphOpacity !== 1.0) {
+      shapes.push(`<g transform="translate(${gx},${gy}) scale(${glyphScale}) translate(${-gx},${-gy})" opacity="${glyphOpacity}">${fn(p, gx, gy)}</g>`);
+    } else {
+      shapes.push(fn(p, gx, gy));
+    }
   });
 
-  // Connecting lines between glyphs (flow arrows)
-  for (let i = 0; i < glyphs.length - 1; i++) {
-    const [x1, y1] = positions[i] || [100, 60];
-    const [x2, y2] = positions[i + 1] || [100, 60];
-    const mx = (x1 + x2) / 2;
-    shapes.push(`<path d="M${x1 + 16},${y1} Q${mx},${Math.min(y1, y2) - 8} ${x2 - 16},${y2}" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.15" stroke-dasharray="3,3"/>`);
+  // Connecting flow lines between glyphs (can be disabled via card_art.flow_lines: false)
+  if (ac.flowLines) {
+    for (let i = 0; i < glyphs.length - 1; i++) {
+      const [x1, y1] = positions[i] || [100, 60];
+      const [x2, y2] = positions[i + 1] || [100, 60];
+      const mx = (x1 + x2) / 2;
+      shapes.push(`<path d="M${x1 + 16},${y1} Q${mx},${Math.min(y1, y2) - 8} ${x2 - 16},${y2}" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.15" stroke-dasharray="3,3"/>`);
+    }
   }
 
-  // Subtle background pattern (agent-name hash driven)
-  const patternType = h % 3;
-  if (patternType === 0) {
-    // Dot grid
+  // Background pattern: artist override or seeded PRNG selection
+  const bgChoice = ac.background || ['dots', 'scanlines', 'corners'][Math.floor(rng() * 3)];
+  if (bgChoice === 'dots') {
     for (let x = 10; x < 200; x += 20) for (let y = 10; y < 120; y += 20) {
-      if ((h + x + y) % 5 === 0) shapes.push(`<circle cx="${x}" cy="${y}" r="0.8" fill="${p}" opacity="0.08"/>`);
+      if (rng() < 0.2) shapes.push(`<circle cx="${x}" cy="${y}" r="0.8" fill="${p}" opacity="0.08"/>`);
     }
-  } else if (patternType === 1) {
-    // Horizontal scan lines
+  } else if (bgChoice === 'scanlines') {
     for (let y = 0; y < 120; y += 6) shapes.push(`<line x1="0" y1="${y}" x2="200" y2="${y}" stroke="${p}" stroke-width="0.3" opacity="0.04"/>`);
-  } else {
-    // Corner accents
+  } else if (bgChoice === 'corners') {
     shapes.push(`<path d="M0,20 L0,0 L20,0" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
     shapes.push(`<path d="M180,0 L200,0 L200,20" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
     shapes.push(`<path d="M0,100 L0,120 L20,120" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
     shapes.push(`<path d="M180,120 L200,120 L200,100" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
   }
+  // bgChoice === 'none' → no background pattern
+
+  // Inject artist custom SVG if provided
+  if (ac.svg) shapes.push(ac.svg);
 
   return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
 }
