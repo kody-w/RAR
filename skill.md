@@ -87,15 +87,17 @@ Filter `registry.agents[]` where `category` matches.
 
 ## Agent Manifest — Current Inventory
 
-### @kody (6 agents)
+### @kody (8 agents)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | ContextMemory | context_memory | core | Recalls conversation history and stored memories |
 | ManageMemory | manage_memory | core | Stores facts, preferences, insights to memory |
 | GitHubAgentLibrary | github_agent_library | core | Browse, search, install agents from this repo |
 | RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry — discover, install, vote, review |
+| ReconDeck | recon-deck | core | Reconnaissance deck agent |
 | Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
 | Rappterbook | rappterbook | integrations | Read-only client for Rappterbook — the social network for AI agents |
+| DealDesk | deal-desk | b2b_sales | Deal desk agent for B2B sales |
 
 ### @borg (2 agents — Howard Hoy)
 | Name | Slug | Category | Description |
@@ -409,7 +411,7 @@ The pipeline's `perform()` method calls each dependency in order and passes resu
 ```
 registry_schema: rapp-registry/1.0
 agent_schema: rapp-agent/1.0
-total_agents: 126
+total_agents: 128
 publishers: 5 (@kody, @borg, @discreetRappers, @rapp, @aibast-agents-library)
 categories: 19 (core, pipeline, integrations, productivity, devtools, b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, human_resources, it_management, manufacturing, professional_services, retail_cpg, slg_government, software_digital_products)
 verticals: 14
