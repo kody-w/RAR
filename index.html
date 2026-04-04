@@ -2830,8 +2830,15 @@ async function handleFileDrop(files) {
       if (card) added++;
       continue;
     }
-    if (!file.name.endsWith('.py')) continue;
-    const code = await file.text();
+    if (!file.name.endsWith('.py') && !file.name.endsWith('.card')) continue;
+    let code = await file.text();
+    // Strip card metadata header if present (# __card__ = {...} lines)
+    let cardMeta = null;
+    const cardMatch = code.match(/^# __card__ = (.+)\n/);
+    if (cardMatch) {
+      try { cardMeta = JSON.parse(cardMatch[1]); } catch {}
+      code = code.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
+    }
     const manifest = parseManifestFromPython(code);
     if (!manifest || !manifest.name) {
       showToast(`${file.name}: no valid __manifest__ found`, 'error');
@@ -2853,6 +2860,14 @@ async function handleFileDrop(files) {
       dependencies: manifest.dependencies || [],
     });
     added++;
+    // If this was a .card file with card metadata, import the card too
+    if (cardMeta && cardMeta.format === 'rar-card/1.0') {
+      const existingCards = JSON.parse(localStorage.getItem('rar_cards') || '[]');
+      if (!existingCards.find(c => c.mintId === cardMeta.mintId)) {
+        existingCards.push({ ...cardMeta, agentName: manifest.name });
+        localStorage.setItem('rar_cards', JSON.stringify(existingCards));
+      }
+    }
     // Offer to submit to the store via Issues API
     _pendingSubmissions.push({ manifest, code, fileName: file.name });
   }
@@ -7097,119 +7112,67 @@ function renderMiniCard(canvas, card) {
   }
 }
 
-// ── .card File Export (self-contained HTML) ──
+// ── .card File Export (wrapped agent.py — backward compatible) ──
+// A .card IS a .py file. Drop it into agents/ and the Brainstem loads it.
+// Card metadata lives in a # __card__ = {...} comment block that Python ignores
+// but the store can parse to reconstruct the card view.
 async function exportSingleCard(card) {
   const a = allAgents.find(x => x.name === card.agentName);
   if (!a) return;
-
-  // Render full-res card
-  const canvas = document.createElement('canvas');
-  canvas.width = 750; canvas.height = 1050;
-  // Use the exportCardPNG renderer but capture to canvas
-  const ctx = canvas.getContext('2d');
-  renderMiniCard(canvas, card); // Use the mini renderer for now scaled up
-
-  // Actually render full-res
-  const fullCanvas = document.createElement('canvas');
-  fullCanvas.width = 750; fullCanvas.height = 1050;
-  renderMiniCard(fullCanvas, card);
-
-  const imgData = fullCanvas.toDataURL('image/png');
 
   // Fetch source code
   let sourceCode = a._code || '';
   if (!sourceCode && a._file) {
     try {
-      const rawUrl = `https://raw.githubusercontent.com/kody-w/RAR/main/${a._file}`;
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
       const resp = await fetch(rawUrl);
       if (resp.ok) sourceCode = await resp.text();
     } catch {}
   }
-  const sourceB64 = btoa(unescape(encodeURIComponent(sourceCode || '# Source not available')));
-  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
+  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
 
-  const cardData = JSON.stringify(card, null, 2);
+  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
   const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
   const gl = gradeLabel(card.grade);
 
-  const html = `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>${a.display_name} — RAR Agent Card</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d1117;color:#e6edf3;font-family:-apple-system,sans-serif;display:flex;flex-direction:column;align-items:center;padding:40px 20px;min-height:100vh}
-.card-frame{position:relative;margin-bottom:24px}
-.card-frame img{width:375px;height:525px;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
-.badge{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.8);color:#ffd700;font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:6px;border:1px solid rgba(255,215,0,.3)}
-.first-ed{position:absolute;top:12px;left:12px;background:rgba(255,215,0,.9);color:#000;font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:4px}
-.serial{margin:8px 0;font-family:monospace;font-size:.85rem;color:#656d76}
-h1{font-size:1.3rem;margin-bottom:4px}
-.meta{color:#8b949e;font-size:.85rem;margin-bottom:20px}
-.section{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px;margin-bottom:12px;width:100%;max-width:500px}
-.section h3{font-size:.85rem;color:#58a6ff;margin-bottom:8px}
-table{width:100%;font-size:.8rem;border-collapse:collapse}
-td{padding:4px 8px;border-bottom:1px solid #21262d}
-td:first-child{color:#656d76;width:140px}
-.provenance{font-family:monospace;font-size:.75rem;word-break:break-all;color:#8b949e}
-.source-toggle{cursor:pointer;color:#58a6ff;font-size:.82rem;margin-top:8px}
-pre{background:#1e1e1e;border-radius:8px;padding:12px;font-size:.75rem;max-height:300px;overflow:auto;margin-top:8px;display:none;color:#d4d4d4}
-.actions{display:flex;gap:10px;margin-top:16px}
-.actions button{padding:8px 18px;border-radius:8px;border:1px solid #30363d;background:#21262d;color:#e6edf3;font-size:.85rem;cursor:pointer}
-.actions button:hover{border-color:#58a6ff;color:#58a6ff}
-.actions button.primary{background:#58a6ff;color:#fff;border-color:#58a6ff}
-</style></head><body>
-<div class="card-frame">
-  <img src="${imgData}" alt="${a.display_name}">
-  <div class="badge">${gl.label}</div>
-  ${card.isFirstEdition ? '<div class="first-ed">1ST EDITION</div>' : ''}
-</div>
-<h1>${a.display_name}</h1>
-<div class="serial">${card.serial}</div>
-<div class="meta">${a.name} · v${a.version} · Minted ${new Date(card.mintedAt).toLocaleDateString()}</div>
+  // Build card metadata block — valid Python comment, parseable by the store
+  const cardMeta = {
+    format: 'rar-card/1.0',
+    serial: card.serial,
+    mintId: card.mintId,
+    mintedAt: card.mintedAt,
+    grade: card.grade,
+    gradeLabel: gl.label,
+    isFirstEdition: card.isFirstEdition || false,
+    tierAtMint: card.tierAtMint,
+    votesAtMint: card.votesAtMint,
+    transfers: card.transfers,
+    sourceHash: sourceHashHex,
+    variations: card.variations,
+  };
 
-<div class="section"><h3>Grade Report</h3>
-<table>
-<tr><td>Overall Grade</td><td><strong>${gl.label}</strong> (${card.grade}/10)</td></tr>
-<tr><td>Centering</td><td>${card.variations.centerScore >= 9 ? 'Excellent' : card.variations.centerScore >= 7 ? 'Good' : 'Off-center'} (${card.variations.centeringX > 0 ? '+' : ''}${(card.variations.centeringX * 100).toFixed(0)}%, ${card.variations.centeringY > 0 ? '+' : ''}${(card.variations.centeringY * 100).toFixed(0)}%)</td></tr>
-<tr><td>Ink Saturation</td><td>${(card.variations.inkSaturation * 100).toFixed(0)}%</td></tr>
-<tr><td>Holo Intensity</td><td>${(card.variations.holoIntensity * 100).toFixed(0)}%</td></tr>
-<tr><td>Surface</td><td>Pattern #${card.variations.surfaceNoise}</td></tr>
-<tr><td>Transfers</td><td>${card.transfers}</td></tr>
-<tr><td>Age</td><td>${Math.floor((Date.now() - card.mintedAt) / 86400000)} days</td></tr>
-${card.isFirstEdition ? '<tr><td>Edition</td><td><strong style="color:#ffd700">1st Edition</strong></td></tr>' : ''}
-</table></div>
+  // Prepend card metadata as a Python comment block
+  // The Brainstem ignores these lines (they're comments)
+  // The store parses them to reconstruct the card
+  const cardHeader = [
+    `# __card__ = ${JSON.stringify(cardMeta)}`,
+    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# This file IS the agent. Drop it into agents/ and it runs.`,
+    `# Card metadata above is ignored by Python but parsed by the store.`,
+    ``,
+  ].join('\n');
 
-<div class="section"><h3>Provenance</h3>
-<table>
-<tr><td>Mint ID</td><td class="provenance">${card.mintId}</td></tr>
-<tr><td>Source Hash</td><td class="provenance">${sourceHashHex}</td></tr>
-<tr><td>Votes at Mint</td><td>${card.votesAtMint}</td></tr>
-<tr><td>Tier at Mint</td><td>${card.tierAtMint}</td></tr>
-</table></div>
+  // If source already has a card header, strip it
+  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
+  const cardFile = cardHeader + cleanSource;
 
-<div class="section"><h3>Agent Source</h3>
-<div class="source-toggle" onclick="document.getElementById('src').style.display=document.getElementById('src').style.display==='block'?'none':'block'">▶ View source code</div>
-<pre id="src"></pre>
-<script>document.getElementById('src').textContent=atob('${sourceB64}')<\/script>
-</div>
-
-<div class="actions">
-<button onclick="let b=atob('${sourceB64}');let l=document.createElement('a');l.href=URL.createObjectURL(new Blob([b],{type:'text/x-python'}));l.download='${slug}.py';l.click()">Download .py</button>
-<button class="primary" onclick="window.print()">Print Card</button>
-</div>
-
-<scr` + `ipt>
-// Card data for import
-window.CARD_DATA = ${cardData};
-</scr` + `ipt>
-</body></html>`;
-
-  const blob = new Blob([html], { type: 'text/html' });
+  const blob = new Blob([cardFile], { type: 'text/x-python' });
   const link = document.createElement('a');
-  link.download = `${slug}_${card.serial}.card.html`;
+  link.download = `${slug}.py.card`;
   link.href = URL.createObjectURL(blob);
   link.click();
   URL.revokeObjectURL(link.href);
-  showToast(`Exported ${a.display_name} card (${gl.label})`, 'success');
+  showToast(`Exported ${a.display_name} — drop into agents/ to run`, 'success');
 }
 
 async function exportPackCards() {
