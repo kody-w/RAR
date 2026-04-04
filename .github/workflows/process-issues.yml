@@ -40,12 +40,12 @@ jobs:
           python scripts/process_issues.py --event-path "$GITHUB_EVENT_PATH" 2>&1 | tee /tmp/result.txt
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
-      - name: Rebuild registry and forge cards (if agent submitted)
+      - name: Forge cards and rebuild registry (if agent submitted)
         if: steps.process.outputs.exit_code == '0'
         run: |
           if git diff --name-only | grep -q "^agents/"; then
-            python build_registry.py
             python scripts/generate_holo_cards.py
+            python build_registry.py
           fi
 
       - name: Commit state changes

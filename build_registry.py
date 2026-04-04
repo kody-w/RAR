@@ -24,6 +24,20 @@ from datetime import datetime, timezone
 
 AGENTS_DIR = Path("agents")
 REGISTRY_FILE = Path("registry.json")
+HOLO_CARDS_FILE = Path("cards/holo_cards.json")
+
+# Cache holo card slugs for _has_card check
+_holo_slugs = None
+def _has_holo_card(agent_name):
+    global _holo_slugs
+    if _holo_slugs is None:
+        try:
+            data = json.loads(HOLO_CARDS_FILE.read_text())
+            _holo_slugs = set(data.keys()) if isinstance(data, dict) else set()
+        except (FileNotFoundError, json.JSONDecodeError):
+            _holo_slugs = set()
+    # holo_cards.json keys are full agent names like "@kody/deal-desk"
+    return agent_name in _holo_slugs or agent_name.replace('_', '-') in _holo_slugs or agent_name.replace('-', '_') in _holo_slugs
 REQUIRED_MANIFEST_FIELDS = [
     "schema", "name", "version", "display_name",
     "description", "author", "tags", "category"
@@ -137,7 +151,7 @@ def build_registry():
         manifest["_file"] = str(py_path)
         manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
-        manifest["_has_card"] = is_card
+        manifest["_has_card"] = is_card or _has_holo_card(name)
 
         # Extract __card__ shell from .py.card files
         if is_card:
