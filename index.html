@@ -989,16 +989,19 @@ document.documentElement.className = 'rar-guard';
   }
   .showntell-overlay.open { opacity: 1; }
   .showntell-card {
+    /* Fixed size — override the grid's width:100% */
+    width: var(--st-w) !important; aspect-ratio: 5/7;
     transform-style: preserve-3d;
     --tilt-x: 0deg; --tilt-y: 0deg;
-    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--st-scale, 2.5));
+    transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
     transition: transform .1s ease-out;
     cursor: grab;
     filter: drop-shadow(0 0 40px rgba(201,168,76,.2));
+    flex-shrink: 0;
   }
   .showntell-card:active { cursor: grabbing; }
   /* Remove flip on spotlight clone */
-  .showntell-card.flipped { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--st-scale, 2.5)); }
+  .showntell-card.flipped { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); }
   .showntell-toolbar {
     position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
     z-index: 10000; display: flex; gap: 12px; align-items: center;
@@ -6219,20 +6222,19 @@ function showAndTell(name) {
   const src = document.getElementById(cardId);
   if (!src) return;
 
-  // Calculate scale: fit card to ~70% of viewport height
-  const srcRect = src.getBoundingClientRect();
+  // Calculate width so card fills ~70% of viewport height (aspect 5:7)
   const targetH = window.innerHeight * 0.7;
-  const scale = targetH / srcRect.height;
+  const targetW = targetH * (5 / 7);
 
   const overlay = document.createElement('div');
   overlay.className = 'showntell-overlay';
 
-  // Clone the actual card — identical pixel layout
+  // Clone the actual card — identical layout, just larger
   const clone = src.cloneNode(true);
   clone.removeAttribute('id');
   clone.classList.remove('flipped');
   clone.classList.add('showntell-card');
-  clone.style.setProperty('--st-scale', scale.toFixed(2));
+  clone.style.setProperty('--st-w', Math.round(targetW) + 'px');
   clone.removeAttribute('onclick');
   clone.removeAttribute('ondblclick');
 
