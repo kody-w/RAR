@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "009-prior-art",
+    "date": "2026-04-04",
+    "title": "Prior Art: The Complete Innovation Timeline With Cryptographic Proof",
+    "excerpt": "Every innovation in the RAR ecosystem \u2014 timestamped, commit-hashed, and publicly verifiable. Single-file agents, trading card identity, three universal faces, the forge, deck hotloading, federation, and 10 more. If someone says they built it too, show them the commits.",
+    "tags": ["prior-art", "timeline", "proof", "IP"]
+  },
+  {
+    "slug": "001-foundation",
+    "date": "2026-04-04",
+    "title": "Foundation: The Single File Principle and Why It Changes Everything",
+    "excerpt": "How one constraint \u2014 every agent is one .py file \u2014 became the foundation for an entire ecosystem. The manifest, the registry, the store, and the zero-install web app all flow from this single decision.",
+    "tags": ["architecture", "foundation", "single-file"]
+  },
+  {
+    "slug": "002-card-system",
+    "date": "2026-04-04",
+    "title": "Three Faces: Making Agent Cards Universal",
+    "excerpt": "Every agent card has three renderings \u2014 Icon, Full Art, and ASCII \u2014 so it can exist anywhere in space and time, virtual or real. From terminal to trading card to holographic display.",
+    "tags": ["cards", "design", "universal"]
+  },
+  {
+    "slug": "003-simplicity-audit",
+    "date": "2026-04-04",
+    "title": "The Simplicity Audit: Killing Five Systems to Ship One",
+    "excerpt": "We removed tier gating, wave unlocks, intent toggles, mode dials, and progressive disclosure. The result: every feature visible to every user with zero concepts to learn.",
+    "tags": ["ux", "simplicity", "audit"]
+  },
+  {
+    "slug": "004-forge-system",
+    "date": "2026-04-04",
+    "title": "The Forge: Emergent Identity From Agent x Owner x Time",
+    "excerpt": "The companion card forge system fuses three inputs you can't control \u2014 the agent's hash, your identity, and the current 15-minute time epoch \u2014 into a unique card that shifts over time.",
+    "tags": ["forge", "emergence", "companion"]
+  },
+  {
+    "slug": "005-no-emojis",
+    "date": "2026-04-04",
+    "title": "Killing Every Emoji: Why SVG Glyphs Beat Unicode Art",
+    "excerpt": "We found 87 emoji usages across the codebase. We replaced every one with hand-crafted SVG glyphs from the same art system that renders trading cards. The visual identity is now unified.",
+    "tags": ["design", "svg", "art"]
+  },
+  {
+    "slug": "006-py-card-format",
+    "date": "2026-04-04",
+    "title": "The .py.card Format: Shedding and Re-Shelling Agent Identity",
+    "excerpt": "An agent can exist as a bare .py (just code) or a .py.card (code + trading card shell). Strip the shell, the agent works. Add it back from the registry, the card returns. One file, two modes.",
+    "tags": ["format", "cards", "protocol"]
+  },
+  {
+    "slug": "007-hatching",
+    "date": "2026-04-04",
+    "title": "Hatching: What It Means for a Card to Start Its Public Life",
+    "excerpt": "A card isn't alive until it's hatched \u2014 deployed to the global network with all three faces rendering, all metadata valid, all 10 requirements met. This is the definition of production-ready.",
+    "tags": ["lifecycle", "hatching", "production"]
+  },
+  {
+    "slug": "008-deck-extensions",
+    "date": "2026-04-04",
+    "title": "The Deck Extension: .py.card.DeckName and Runtime Hotloading",
+    "excerpt": "The file extension chain encodes the full packaging hierarchy. Strip layers to simplify, add layers to package. Decks hotload into the runtime like models \u2014 switch decks, switch agents, no restart.",
+    "tags": ["decks", "hotloading", "runtime", "format"]
+  }
+]

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """
-Registry Builder — Auto-generates registry.json from __manifest__ dicts in agent .py files.
+Registry Builder — Auto-generates registry.json from __manifest__ dicts in agent files.
 
 Run manually:   python build_registry.py
 Or via CI:      Triggered on every push by .github/workflows/build-registry.yml
 
-Scans agents/@publisher/slug.py for __manifest__ dicts and builds:
+Scans agents/@publisher/ for .py and .py.card files with __manifest__ dicts and builds:
 - registry.json (full index for programmatic access)
 - Validates all manifests against schema
 - Reports errors for malformed agents
+
+Supports two file formats:
+- slug.py      — bare agent (code + manifest)
+- slug.py.card — complete agent+card package (code + manifest + __card__ shell)
 """
 
 import ast
@@ -70,25 +74,60 @@ def validate_manifest(py_path: Path, manifest: dict) -> list:
     return errors
 
 
+def extract_card(py_path: Path) -> dict:
+    """Extract __card__ dict from a .py.card file using AST parsing."""
+    try:
+        source = py_path.read_text()
+        tree = ast.parse(source)
+    except SyntaxError:
+        return None
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and target.id == "__card__":
+                    try:
+                        return ast.literal_eval(node.value)
+                    except (ValueError, TypeError):
+                        return None
+    return None
+
+
 def build_registry():
-    """Scan all agent .py files and build registry.json."""
+    """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
     publishers = set()
     categories = set()
     errors = []
-    
-    for py_path in sorted(AGENTS_DIR.rglob("*.py")):
+    seen_names = set()
+
+    # Scan both .py and .py.card files; .py.card takes priority if both exist
+    all_files = sorted(set(
+        list(AGENTS_DIR.rglob("*.py")) +
+        [p for p in AGENTS_DIR.rglob("*.py.card")]
+    ))
+
+    for py_path in all_files:
         manifest = extract_manifest(py_path)
         if manifest is None:
             continue
-        
+
         validation_errors = validate_manifest(py_path, manifest)
         if validation_errors:
             for err in validation_errors:
                 errors.append(f"{py_path}: {err}")
             continue
-        
+
         name = manifest["name"]
+
+        # .py.card takes priority over .py for the same agent name
+        is_card = str(py_path).endswith('.py.card')
+        if name in seen_names and not is_card:
+            continue  # skip .py if .py.card already registered
+        if name in seen_names and is_card:
+            agents[:] = [a for a in agents if a["name"] != name]  # replace .py with .py.card
+        seen_names.add(name)
+
         publisher = name.split("/")[0]
         publishers.add(publisher)
         categories.add(manifest.get("category", "uncategorized"))
@@ -98,7 +137,14 @@ def build_registry():
         manifest["_file"] = str(py_path)
         manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
-        
+        manifest["_has_card"] = is_card
+
+        # Extract __card__ shell from .py.card files
+        if is_card:
+            card_data = extract_card(py_path)
+            if card_data:
+                manifest["_card"] = card_data
+
         agents.append(manifest)
     
     registry = {

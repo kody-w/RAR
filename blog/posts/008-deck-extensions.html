@@ -1,0 +1,79 @@
+<h2>The Extension Chain Is the Manifest</h2>
+
+<p>Most packaging systems need a separate manifest to describe their contents. npm has <code>package.json</code>. Docker has <code>Dockerfile</code>. Kubernetes has YAML files. RAR has... the file extension.</p>
+
+<pre><code>agent.py                         → bare agent
+agent.py.card                    → agent + card shell
+agent.py.card.Genesis            → agent + card shell + deck membership</code></pre>
+
+<p>Each layer of the extension chain adds metadata without changing the core content. Strip a layer, you lose that metadata. Add a layer, you gain it. The agent code is always intact at every level.</p>
+
+<h3>Why the Extension Chain Works</h3>
+
+<p>Traditional packaging creates a separation between content and metadata. The content lives in one file, the metadata in another. This creates synchronization problems: what happens when the manifest says one thing and the file says another?</p>
+
+<p>RAR's answer: there is no separation. The file IS the manifest. The extension IS the deck membership. Everything travels together.</p>
+
+<table>
+  <tr><th>Layer</th><th>What It Adds</th><th>Reversible?</th></tr>
+  <tr><td><code>.py</code></td><td>Agent code + <code>__manifest__</code></td><td>This is the base</td></tr>
+  <tr><td><code>.card</code></td><td><code>__card__</code> dict (visual identity, stats, art)</td><td>Yes &mdash; strip to get bare .py, re-add from registry</td></tr>
+  <tr><td><code>.DeckName</code></td><td>Deck membership</td><td>Yes &mdash; rename to remove deck association</td></tr>
+</table>
+
+<h3>Deck Import/Export</h3>
+
+<p>To share a deck: collect all files ending in <code>.py.card.DeckName</code> for that deck name. To import: drop them into any RAR binder. The deck name, card data, and agent code all travel together in a single file per agent. No zip files. No manifests. No configuration.</p>
+
+<pre><code># Export: find all Genesis deck cards
+ls agents/@borg/*.py.card.Genesis
+
+# Import: copy into another binder
+cp *.py.card.Genesis ~/my-binder/decks/Genesis/</code></pre>
+
+<h3>Runtime Hotloading</h3>
+
+<p>This is where the deck extension gets powerful. In a RAPP Brainstem runtime, the <code>agents/</code> folder stays pristine &mdash; only bare <code>.py</code> files live there. These are the base agents that are always available.</p>
+
+<p>Deck files live in a separate <code>decks/</code> directory, organized by deck name:</p>
+
+<pre><code>brainstem/
+  agents/                          ← always loaded (base set)
+    basic_agent.py
+    borg_agent.py
+  decks/                           ← hotloadable
+    Genesis/
+      borg_agent.py.card.Genesis
+      anvil_agent.py.card.Genesis
+    Frontier/
+      experiment_agent.py.card.Frontier</code></pre>
+
+<p>When the user selects a deck from the frontend, the runtime hotloads the agents from that deck. Switch decks, switch active agents. No restart. No config change. Just like selecting a different AI model to drive the conversation &mdash; but for the agent set.</p>
+
+<h3>The Model Switcher Analogy</h3>
+
+<p>In the RAPP Brainstem, users already choose which AI model powers the system (cloud GPT, local Gemma, etc.). The deck hotloader works the same way but for agents:</p>
+
+<table>
+  <tr><th>Switcher</th><th>What It Controls</th><th>Lives In</th></tr>
+  <tr><td>Model selector</td><td>Which AI model drives responses</td><td><code>.env</code> / config</td></tr>
+  <tr><td>Deck selector</td><td>Which agents are active</td><td><code>decks/DeckName/</code></td></tr>
+</table>
+
+<p>Both are user-facing, real-time switches. Both require zero restart. Both keep the core system clean.</p>
+
+<h3>Keeping agents/ Pristine</h3>
+
+<p>The <code>agents/</code> directory is git-tracked and CI-validated. Injecting deck files into it would create noise. The <code>decks/</code> directory is user-managed and gitignored by default. This separation means:</p>
+
+<ul>
+  <li><code>agents/</code> is the source of truth for what agents exist</li>
+  <li><code>decks/</code> is the user's curation of which agents are active</li>
+  <li>The registry builder scans <code>agents/</code></li>
+  <li>The runtime loader scans <code>decks/</code> for the active deck</li>
+  <li>No conflict between the two</li>
+</ul>
+
+<h3>Field Note</h3>
+
+<p>The realization that triggered this design: file extensions are metadata that survives every operation. You can copy, move, rename, zip, email, airdrop, or sneakernet a file &mdash; and the extension survives. It's the most portable metadata format possible. Using it for deck membership means decks are as portable as the files themselves. No database. No manifest. No sync. Just filenames.</p>

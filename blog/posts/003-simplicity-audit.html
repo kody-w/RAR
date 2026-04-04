@@ -1,0 +1,50 @@
+<h2>Five Systems That Had to Die</h2>
+
+<p>Before the simplicity audit, RAR's store had five independent complexity systems. Each one sounded reasonable in isolation. Together, they created an interface that required a manual.</p>
+
+<h3>What We Killed</h3>
+
+<table>
+  <tr><th>System</th><th>What It Did</th><th>Why It Died</th></tr>
+  <tr><td><strong>Tier Gating</strong></td><td>Hid tabs and features based on user "tier" (1-3)</td><td>Users had to earn features they could already see existed</td></tr>
+  <tr><td><strong>Wave Unlocks</strong></td><td>Progressively revealed UI sections after actions</td><td>Created an invisible queue users couldn't predict</td></tr>
+  <tr><td><strong>Intent Toggle</strong></td><td>Switched between "explore" and "deploy" modes, reweighting search results</td><td>Required users to understand a new concept ("intent")</td></tr>
+  <tr><td><strong>Mode Dial</strong></td><td>Rotated between interface complexity levels</td><td>Three modes = three products to learn</td></tr>
+  <tr><td><strong>Quality Seal Tab</strong></td><td>Separate tab explaining what tier badges meant</td><td>If badges need explanation, the badges are wrong</td></tr>
+</table>
+
+<h3>The Principle</h3>
+
+<blockquote>Don't make users learn concepts. If a feature requires explanation, rename it or remove it. No jargon. No gating. No progressive disclosure that hides useful things behind walls.</blockquote>
+
+<p>This became the governing design principle, written directly into the Constitution (Article IX).</p>
+
+<h3>What Replaced It</h3>
+
+<p>Nothing. That's the point.</p>
+
+<ul>
+  <li><strong>All tabs visible</strong> &mdash; Browse, Leaderboard, Cards, Packs, Stream, Workbench, Submit. Always.</li>
+  <li><strong>No mode dial</strong> &mdash; one interface for everyone.</li>
+  <li><strong>No intent toggle</strong> &mdash; search returns results. Period.</li>
+  <li><strong>No tier gating</strong> &mdash; <code>_uiTier</code> is hardcoded to 2 (max). Every feature unlocked.</li>
+  <li><strong>No Roadmap tab</strong> &mdash; the roadmap is the git log.</li>
+</ul>
+
+<h3>The Cleanup</h3>
+
+<p>Removing five systems from a 500KB+ single-file app required careful surgery:</p>
+
+<ul>
+  <li>Stub functions that previously gated UI: <code>setUITier()</code>, <code>applyUITier()</code>, <code>intentWeight()</code> &mdash; all now return constants</li>
+  <li>CSS classes like <code>.rar-guard</code>, <code>.wave-2</code>, <code>.tier-3</code> &mdash; removed from elements</li>
+  <li>Navigation buttons for Quality Seal and Roadmap &mdash; deleted</li>
+  <li>Mode dial button and its handler &mdash; deleted</li>
+  <li>Intent button and sort reweighting &mdash; deleted</li>
+</ul>
+
+<p>The sort comparators in <code>renderAgents()</code> lost their <code>intentWeight()</code> terms. The header actions lost their dial button. The nav lost two tabs. The codebase got simpler and the product got better.</p>
+
+<h3>Field Note</h3>
+
+<p>The user's exact words: <em>"I don't need to train users on what a 'hail' is."</em> That line killed the hail button, and the principle behind it killed everything else. Complexity is easy to add and hard to remove. Remove it early.</p>

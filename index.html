@@ -6,9 +6,7 @@
 <title>RAPP Agent Repository</title>
 <meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
 <script>
-// Sync paint guard — runs before body renders, prevents any flash
-// Hide all tier-gated UI until applyUITier() runs and removes the guard
-document.documentElement.className = 'rar-guard';
+// Ready guard — removed before body renders
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.min.js" defer></script>
@@ -64,15 +62,7 @@ document.documentElement.className = 'rar-guard';
     display: flex; align-items: center; justify-content: center;
     font-size: .85rem; font-weight: 800;
   }
-  nav { display: none; gap: 4px; background: var(--surface2); border-radius: 8px; padding: 3px; }
-  .rar-guard .t2-only,
-  .rar-guard .t3-only,
-  .rar-guard .advanced-only,
-  .rar-guard .wave-2,
-  .rar-guard #hail-btn,
-  .rar-guard #main-nav,
-  .rar-guard #mode-dial button[data-tier="1"],
-  .rar-guard #mode-dial button[data-tier="2"] { display: none !important; }
+  nav { display: flex; gap: 4px; background: var(--surface2); border-radius: 8px; padding: 3px; }
   .nav-btn {
     background: none; border: none; color: var(--text-dim); padding: 8px 18px;
     border-radius: 6px; cursor: pointer; font-size: .9rem; font-weight: 500; transition: all .15s;
@@ -205,8 +195,6 @@ document.documentElement.className = 'rar-guard';
   .tier-experimental { background: rgba(188,140,255,.12); color: #bc8cff; border: 1px dashed rgba(188,140,255,.4); }
   .agent-card.tier-experimental::before { background: linear-gradient(90deg, #bc8cff, #ff6bff); }
   .agent-card.tier-experimental { border-style: dashed; border-color: rgba(188,140,255,.2); }
-  .tier-card.t-experimental { border-left: 4px dashed #bc8cff; }
-  .tier-card.t-experimental li::before { content: '\26A0'; color: #bc8cff; }
   .cat-badge { background: var(--purple-bg); color: var(--purple); padding: 2px 8px; border-radius: 4px; font-size: .72rem; }
 
   /* Verified seal */
@@ -414,54 +402,6 @@ document.documentElement.className = 'rar-guard';
   .manifest-preview .ok { color: var(--green); font-size: .85rem; margin-top: 8px; }
 
   /* ─── Quality Standards Panel ─────────────────────── */
-  .quality-section { max-width: 800px; margin: 0 auto; }
-  .quality-section h2 { font-size: 1.5rem; margin-bottom: 6px; }
-  .quality-section > p { color: var(--text-dim); margin-bottom: 28px; }
-  .tier-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-    padding: 24px; margin-bottom: 16px; position: relative; overflow: hidden;
-  }
-  .tier-card h3 { font-size: 1.15rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
-  .tier-card .subtitle { color: var(--text-dim); font-size: .9rem; margin-bottom: 16px; }
-  .tier-card ul { list-style: none; padding: 0; }
-  .tier-card li {
-    padding: 6px 0; font-size: .9rem; color: var(--text-dim);
-    display: flex; align-items: flex-start; gap: 8px;
-  }
-  .tier-card li::before { content: ''; flex-shrink: 0; }
-  .tier-card.t-community { border-left: 4px solid var(--text-muted); }
-  .tier-card.t-community li::before { content: '\2610'; color: var(--text-muted); }
-  .tier-card.t-verified { border-left: 4px solid var(--gold); }
-  .tier-card.t-verified li::before { content: '\2611'; color: var(--gold); }
-  .tier-card.t-official { border-left: 4px solid var(--accent); }
-  .tier-card.t-official li::before { content: '\2611'; color: var(--accent); }
-
-  /* ─── Roadmap Panel ──────────────────────────────── */
-  .roadmap-section { max-width: 800px; margin: 0 auto; }
-  .roadmap-section h2 { font-size: 1.5rem; margin-bottom: 6px; }
-  .roadmap-section > p { color: var(--text-dim); margin-bottom: 28px; }
-  .roadmap-lane { margin-bottom: 32px; }
-  .roadmap-lane h3 { font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .roadmap-item {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 14px 18px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px;
-  }
-  .roadmap-item .rm-status {
-    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: .7rem; margin-top: 2px;
-  }
-  .rm-done { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
-  .rm-progress { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
-  .rm-planned { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
-  .roadmap-item .rm-body { flex: 1; }
-  .roadmap-item .rm-title { font-weight: 600; font-size: .95rem; }
-  .roadmap-item .rm-desc { color: var(--text-dim); font-size: .85rem; margin-top: 2px; }
-  .rm-exp-lane { border-left: 2px dashed var(--purple); padding-left: 16px; }
-  .rm-exp-lane h3 { color: var(--purple); }
-  .rm-legend { display: flex; gap: 16px; margin-bottom: 24px; font-size: .8rem; color: var(--text-muted); }
-  .rm-legend span { display: flex; align-items: center; gap: 4px; }
-  .rm-legend .dot { width: 10px; height: 10px; border-radius: 50%; }
-
   /* ─── Starter Templates ──────────────────────────── */
   .template-picker { margin-bottom: 20px; }
   .template-picker label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
@@ -510,24 +450,6 @@ document.documentElement.className = 'rar-guard';
   }
   .local-mgmt-btn:hover { border-color: var(--accent); color: var(--accent); }
   .local-mgmt-btn.danger:hover { border-color: var(--red); color: var(--red); }
-
-  /* ─── Mode Dial ──────────────────────────────────── */
-  .mode-dial {
-    display: flex; align-items: center; gap: 0;
-    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
-  }
-  .mode-dial button {
-    padding: 4px 10px; border: none; background: none;
-    color: var(--text-muted); font-size: .68rem; font-weight: 600;
-    cursor: pointer; font-family: inherit; letter-spacing: .3px;
-    transition: all .15s; border-right: 1px solid var(--border);
-  }
-  .mode-dial button:last-child { border-right: none; }
-  .mode-dial button:hover { background: var(--surface2); }
-  .mode-dial button.active { color: #fff; }
-  .mode-dial button.active[data-tier="0"] { background: var(--text-muted); }
-  .mode-dial button.active[data-tier="1"] { background: var(--accent); }
-  .mode-dial button.active[data-tier="2"] { background: var(--orange); }
 
   /* ─── Hail Overlay (Uber-like agent dispatch) ───── */
   .hail-overlay {
@@ -609,7 +531,7 @@ document.documentElement.className = 'rar-guard';
   .cards-toolbar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
   .cards-toolbar .pill { font-size: .78rem; padding: 5px 12px; }
   .cards-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;
     perspective: 1200px;
   }
   .agent-card-wrap {
@@ -743,6 +665,34 @@ document.documentElement.className = 'rar-guard';
     background: var(--accent); color: #fff;
   }
 
+  /* ─── Companion Card ─── */
+  .companion-slot {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 10px; border-radius: 8px;
+    border: 1px dashed var(--border); cursor: pointer;
+    transition: all .2s; min-width: 0;
+  }
+  .companion-slot:hover { border-color: var(--accent); }
+  .companion-slot.has-companion { border-style: solid; border-color: var(--accent); background: rgba(88,166,255,.06); }
+  .companion-avatar {
+    width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+    background: var(--surface2); display: flex; align-items: center; justify-content: center;
+    font-size: .6rem; color: var(--text-muted); overflow: hidden;
+  }
+  .companion-slot.has-companion .companion-avatar { color: var(--accent); background: rgba(88,166,255,.12); }
+  .companion-name {
+    font-size: .7rem; font-weight: 600; color: var(--text-dim);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;
+  }
+  .companion-slot.has-companion .companion-name { color: var(--text); }
+  .companion-label { font-size: .5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+  .companion-badge {
+    position: absolute; top: -3px; right: -3px; width: 14px; height: 14px;
+    background: var(--accent); border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: .5rem; color: #fff;
+    border: 2px solid var(--bg); z-index: 2;
+  }
+
   /* Business card style */
   .agent-card-biz {
     position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
@@ -781,13 +731,14 @@ document.documentElement.className = 'rar-guard';
     100% { filter: hue-rotate(360deg); }
   }
   .agent-card-holo {
-    position: absolute; inset: 0; border-radius: 12px;
+    position: absolute; inset: 0; border-radius: 14px;
     -webkit-backface-visibility: hidden; backface-visibility: hidden;
-    overflow: hidden; border: 2px solid #8b7332;
-    background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
+    overflow: hidden; border: 3px solid #c9a84c;
+    background: linear-gradient(160deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
     display: grid; padding: 0;
     /* Fixed zones — rigid like a real trading card: header, art, type, text, footer */
-    grid-template-rows: 12% 38% 6% 1fr 7%;
+    grid-template-rows: 13% 40% 5% 1fr 7%;
+    box-shadow: 0 4px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,215,0,.08);
   }
   .agent-card-holo::before {
     content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -841,6 +792,62 @@ document.documentElement.className = 'rar-guard';
     mix-blend-mode: screen;
   }
   .agent-card-wrap:hover .holo-prism { opacity: 1; }
+
+  /* ─── BothAngles Effects ─── */
+  /* Fresnel edge glow — cyan/magenta, transparent center, shifts with cursor */
+  .holo-fresnel {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(ellipse at var(--mx, 50%) var(--my, 50%),
+      transparent 30%, rgba(0,255,255,.1) 60%, rgba(255,0,255,.15) 100%);
+    mix-blend-mode: screen;
+  }
+  .agent-card-wrap:hover .holo-fresnel { opacity: 1; }
+
+  /* Interference scanlines — scrolling horizontal lines */
+  .holo-scanlines {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    background: repeating-linear-gradient(0deg,
+      transparent 0px, transparent 2px,
+      rgba(0,255,255,.025) 2px, rgba(0,255,255,.025) 4px);
+    animation: holoScanScroll 4s linear infinite;
+    mix-blend-mode: screen;
+  }
+  .agent-card-wrap:hover .holo-scanlines { opacity: 1; }
+  @keyframes holoScanScroll { to { background-position-y: 200px; } }
+
+  /* Orbiting lights — cyan + magenta blobs */
+  .holo-orbit-cyan, .holo-orbit-magenta {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    mix-blend-mode: screen; background-size: 200% 200%;
+  }
+  .agent-card-wrap:hover .holo-orbit-cyan,
+  .agent-card-wrap:hover .holo-orbit-magenta { opacity: 1; }
+  .holo-orbit-cyan {
+    background: radial-gradient(circle at 30% 30%, rgba(0,255,255,.1), transparent 50%);
+    animation: holoOrbitA 6s linear infinite;
+  }
+  .holo-orbit-magenta {
+    background: radial-gradient(circle at 70% 70%, rgba(255,0,255,.1), transparent 50%);
+    animation: holoOrbitB 6s linear infinite;
+  }
+  @keyframes holoOrbitA {
+    0%   { background-position: 0% 0%; }
+    25%  { background-position: 100% 0%; }
+    50%  { background-position: 100% 100%; }
+    75%  { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  @keyframes holoOrbitB {
+    0%   { background-position: 100% 100%; }
+    25%  { background-position: 0% 100%; }
+    50%  { background-position: 0% 0%; }
+    75%  { background-position: 100% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
   /* Fine holographic foil texture — shifts with tilt */
   .agent-card-holo::after {
     content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
@@ -874,22 +881,24 @@ document.documentElement.className = 'rar-guard';
   }
   .holo-header {
     display: flex; justify-content: space-between; align-items: flex-start;
-    padding: 6px 10px 2px; position: relative; z-index: 5;
+    padding: 8px 12px 2px; position: relative; z-index: 5;
     min-height: 0; overflow: hidden;
   }
   .holo-name {
-    font-size: .75rem; font-weight: 700; color: #e8dcc8;
+    font-size: .95rem; font-weight: 700; color: #f0e6d0;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6);
   }
   .holo-title {
-    font-size: .6rem; color: #b8a080; font-style: italic;
+    font-size: .7rem; color: #c8a870; font-style: italic;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .holo-pips { display: flex; gap: 3px; }
+  .holo-pips { display: flex; gap: 4px; }
   .holo-pip {
-    width: 16px; height: 16px; border-radius: 50%; font-size: .55rem;
+    width: 20px; height: 20px; border-radius: 50%; font-size: .65rem;
     font-weight: 800; display: flex; align-items: center; justify-content: center;
-    border: 1px solid rgba(0,0,0,.4); text-shadow: 0 1px 1px rgba(0,0,0,.5);
+    border: 1.5px solid rgba(0,0,0,.5); text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    box-shadow: 0 1px 4px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.2);
   }
   .holo-pip.W { background: #f9faf4; color: #333; }
   .holo-pip.U { background: #0e68ab; color: #fff; }
@@ -898,12 +907,19 @@ document.documentElement.className = 'rar-guard';
   .holo-pip.G { background: #00733e; color: #fff; }
   .holo-pip.N { background: #9e9e9e; color: #333; }
   .holo-art {
-    margin: 0 8px; border: 1px solid #5a4a2a;
+    margin: 0 10px; border: 2px solid #6a5a30;
+    border-radius: 4px;
     overflow: hidden; display: flex; align-items: center; justify-content: center;
-    background: #0d0a06; position: relative; z-index: 5;
+    background: radial-gradient(ellipse at 50% 40%, rgba(40,35,20,.9) 0%, #0d0a06 70%);
+    position: relative; z-index: 5;
+  }
+  /* Inner glow vignette — makes art area feel alive */
+  .holo-art::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.12) 0%, rgba(201,168,76,.04) 40%, transparent 70%);
   }
   .holo-art svg {
-    width: 90%; height: 90%;
+    width: 92%; height: 92%; position: relative; z-index: 2;
     /* Parallax: art is deepest layer — shifts OPPOSITE to tilt for depth */
     transform: translate(
       calc((0.5 - var(--px, 0.5)) * 6px),
@@ -912,12 +928,12 @@ document.documentElement.className = 'rar-guard';
     transition: transform .1s ease-out;
   }
   .holo-art::after {
-    content: ''; position: absolute; inset: -10%; pointer-events: none;
+    content: ''; position: absolute; inset: -10%; pointer-events: none; z-index: 3;
     background: linear-gradient(
       calc(135deg + var(--angle, 0deg)),
-      rgba(255,100,200,.10) 0%, transparent 25%,
-      rgba(100,200,255,.12) 45%, transparent 55%,
-      rgba(255,200,50,.08) 75%, transparent 100%);
+      rgba(255,100,200,.12) 0%, transparent 25%,
+      rgba(100,200,255,.15) 45%, transparent 55%,
+      rgba(255,200,50,.10) 75%, transparent 100%);
     background-size: 200% 200%;
     background-position: var(--mx, 50%) var(--my, 50%);
     animation: holoRainbow 8s linear infinite;
@@ -926,24 +942,24 @@ document.documentElement.className = 'rar-guard';
   }
   .agent-card-wrap:hover .holo-art::after { animation: none; }
   .holo-type {
-    font-size: .62rem; color: #b8a88a; padding: 3px 10px;
-    border-top: 1px solid #3d3322; border-bottom: 1px solid #3d3322;
-    background: rgba(50,40,25,.5);
+    font-size: .72rem; color: #c8b89a; padding: 4px 12px;
+    border-top: 1px solid #4d4332; border-bottom: 1px solid #4d4332;
+    background: rgba(50,40,25,.6);
     position: relative; z-index: 5;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .holo-text {
-    padding: 3px 10px; overflow: hidden;
-    font-size: .62rem; color: #c8b89a; line-height: 1.35;
+    padding: 6px 12px; overflow: hidden;
+    font-size: .78rem; color: #d8c8a8; line-height: 1.45;
     background: rgba(30,25,15,.4); margin: 0;
     position: relative; z-index: 5;
     min-height: 0;
   }
-  .holo-ability { margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
+  .holo-ability { margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .holo-ability .kw { font-weight: 700; color: #ffd700; }
   .holo-flavor {
-    font-style: italic; font-size: .55rem; color: #8a7e6a;
-    border-top: 1px solid #3d3322; padding-top: 3px; margin-top: 3px;
+    font-style: italic; font-size: .65rem; color: #9a8e7a;
+    border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 4px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .agent-haiku {
@@ -964,19 +980,53 @@ document.documentElement.className = 'rar-guard';
   }
   .holo-footer {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 3px 10px 4px; font-size: .55rem;
+    padding: 4px 12px 5px; font-size: .65rem;
     position: relative; z-index: 5;
     white-space: nowrap; overflow: hidden;
   }
   .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
-  .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,.4); }
-  .holo-rarity.rare { color: #ffd700; text-shadow: 0 0 6px rgba(255,215,0,.3); }
-  .holo-rarity.uncommon { color: #c0c0c0; }
-  .holo-rarity.common { color: #78909c; }
-  .holo-stats { font-weight: 800; font-size: .85rem; color: #e8dcc8; }
+  .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 10px rgba(255,140,0,.6), 0 0 20px rgba(255,140,0,.3); }
+  .holo-rarity.rare { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,.5), 0 0 16px rgba(255,215,0,.2); }
+  .holo-rarity.uncommon { color: #c0c0c0; text-shadow: 0 0 4px rgba(192,192,192,.3); }
+  .holo-rarity.common { color: #8899aa; }
+  .holo-stats {
+    font-weight: 800; font-size: 1.1rem; color: #f0e6d0;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    background: rgba(40,35,20,.6); padding: 1px 8px; border-radius: 4px;
+    border: 1px solid rgba(201,168,76,.3);
+  }
   .holo-artist { font-style: italic; color: #c9a84c; }
   .holo-promo { color: #ffd700; font-weight: 700; font-size: .6rem; letter-spacing: .5px; }
   .holo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  /* Rarity glow indicator — top-right corner gem */
+  .holo-rarity-gem {
+    position: absolute; top: 8px; right: -1px; z-index: 6;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.4);
+    pointer-events: none;
+  }
+  .holo-rarity-gem.mythic {
+    background: radial-gradient(circle, #ffaa00, #ff6600);
+    box-shadow: 0 0 10px rgba(255,140,0,.8), 0 0 20px rgba(255,140,0,.4);
+    animation: rarityPulse 2s ease-in-out infinite;
+  }
+  .holo-rarity-gem.rare {
+    background: radial-gradient(circle, #ffe44d, #ffc800);
+    box-shadow: 0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.3);
+    animation: rarityPulse 2.5s ease-in-out infinite;
+  }
+  .holo-rarity-gem.uncommon {
+    background: radial-gradient(circle, #e0e0e0, #a0a0a0);
+    box-shadow: 0 0 6px rgba(192,192,192,.5);
+  }
+  .holo-rarity-gem.common {
+    background: radial-gradient(circle, #8899aa, #667788);
+    box-shadow: 0 0 4px rgba(100,120,140,.3);
+  }
+  @keyframes rarityPulse {
+    0%, 100% { box-shadow: 0 0 10px currentColor; transform: scale(1); }
+    50% { box-shadow: 0 0 18px currentColor, 0 0 30px currentColor; transform: scale(1.15); }
+  }
 
   /* ── Show & Tell: fullscreen card spotlight ── */
   .showntell-overlay {
@@ -1017,11 +1067,13 @@ document.documentElement.className = 'rar-guard';
     text-transform: uppercase;
   }
 
-  /* Holo border shimmer */
+  /* Holo border shimmer + lift glow on hover */
   .agent-card-wrap:hover .agent-card-holo {
-    border-color: #c9a84c;
-    box-shadow: 0 0 15px rgba(201,168,76,.2), inset 0 0 15px rgba(201,168,76,.05);
+    box-shadow: 0 8px 30px rgba(201,168,76,.35), 0 0 20px rgba(201,168,76,.2), inset 0 0 15px rgba(201,168,76,.05);
+    filter: brightness(1.1);
   }
+  .agent-card-wrap { transition: transform .4s ease-out, filter .3s ease; }
+  .agent-card-wrap:hover { filter: brightness(1.05) drop-shadow(0 6px 20px rgba(201,168,76,.25)); }
 
   /* 3D Card Viewer */
   .viewer3d-overlay {
@@ -1054,53 +1106,58 @@ document.documentElement.className = 'rar-guard';
   }
   .viewer3d-close:hover { color: var(--text); }
 
-  /* ─── Kids Card Skin ─── */
-  .agent-card-kids {
-    position: absolute; inset: 0; border-radius: 16px; backface-visibility: hidden;
-    overflow: hidden; border: 3px solid #fbbf24;
-    background: linear-gradient(160deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+  /* ─── ASCII Terminal Card Skin ─── */
+  .agent-card-ascii {
+    position: absolute; inset: 0; border-radius: 4px; backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden; border: 1px solid #30363d;
+    background: #0d1117;
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
     display: flex; flex-direction: column; padding: 0;
+    color: #c9d1d9;
   }
-  .kids-header {
-    background: linear-gradient(90deg, #7c3aed, #3b82f6);
-    padding: 10px 14px 6px; display: flex; justify-content: space-between; align-items: center;
-  }
-  .kids-name { font-size: 1rem; font-weight: 800; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.3); }
-  .kids-emoji { font-size: 1.4rem; }
-  .kids-art {
-    margin: 6px 10px; aspect-ratio: 5/3; border-radius: 12px;
-    overflow: hidden; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    border: 2px solid rgba(251,191,36,.3);
-  }
-  .kids-art svg { width: 85%; height: 85%; }
-  .kids-section {
-    margin: 0 10px; padding: 8px 10px; border-radius: 10px;
-    background: rgba(255,255,255,.08); margin-bottom: 4px;
-  }
-  .kids-label {
-    font-size: .6rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1px; margin-bottom: 3px;
-  }
-  .kids-label.what { color: #34d399; }
-  .kids-label.needs { color: #fbbf24; }
-  .kids-label.gives { color: #60a5fa; }
-  .kids-explain {
-    font-size: .7rem; color: #e2e8f0; line-height: 1.5;
-  }
-  .kids-footer {
-    margin-top: auto; padding: 6px 14px 8px;
+  .ascii-header {
+    padding: 6px 10px 4px; border-bottom: 1px solid #21262d;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .kids-level {
-    display: flex; gap: 2px;
+  .ascii-name { font-size: .72rem; font-weight: 700; color: #58a6ff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ascii-tier { font-size: .55rem; color: #8b949e; flex-shrink: 0; }
+  .ascii-art {
+    flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+    padding: 4px 10px; font-size: .5rem; line-height: 1.15; color: #39d353;
+    white-space: pre; overflow: hidden; letter-spacing: .5px;
   }
-  .kids-star { font-size: .8rem; }
-  .kids-star.on { color: #fbbf24; }
-  .kids-star.off { color: #374151; }
-  .kids-cat {
-    font-size: .62rem; font-weight: 700; color: #a78bfa;
-    background: rgba(167,139,250,.12); padding: 2px 8px; border-radius: 8px;
+  .ascii-stats {
+    padding: 4px 10px; border-top: 1px solid #21262d;
+  }
+  .ascii-stat-row {
+    display: flex; align-items: center; gap: 4px; margin-bottom: 2px;
+    font-size: .5rem; line-height: 1.3;
+  }
+  .ascii-stat-label { color: #8b949e; width: 52px; flex-shrink: 0; text-transform: uppercase; font-size: .42rem; letter-spacing: .5px; }
+  .ascii-stat-bar { flex: 1; height: 6px; background: #161b22; border-radius: 1px; overflow: hidden; }
+  .ascii-stat-fill { height: 100%; border-radius: 1px; transition: width .4s ease; }
+  .ascii-flavor {
+    padding: 4px 10px 3px; border-top: 1px solid #21262d;
+    font-size: .48rem; color: #8b949e; font-style: italic;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ascii-footer {
+    padding: 3px 10px 5px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #21262d; font-size: .45rem; color: #484f58;
+  }
+  .ascii-pt { color: #58a6ff; font-weight: 700; font-size: .6rem; }
+  @keyframes ascii-scan {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% { opacity: .15; }
+    90% { opacity: .15; }
+    100% { transform: translateY(400%); opacity: 0; }
+  }
+  .agent-card-ascii::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #58a6ff, transparent);
+    animation: ascii-scan 3s linear infinite;
+    pointer-events: none;
   }
 
   /* Deck builder */
@@ -1352,7 +1409,7 @@ document.documentElement.className = 'rar-guard';
   .pack-name { font-size: 1rem; font-weight: 800; color: #fff; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
   .pack-sub { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 4px; }
   .pack-count { font-size: .7rem; color: rgba(255,255,255,.4); margin-top: 8px; }
-  .pack-icon { font-size: 3rem; }
+  .pack-icon { display: flex; align-items: center; justify-content: center; min-height: 48px; }
 
   /* Pack opening */
   .pack-open-overlay {
@@ -1872,6 +1929,133 @@ document.documentElement.className = 'rar-guard';
   }
   .binder-view-toggle button.active { background: var(--accent); color: #fff; }
 
+  /* ─── Slide Presentation View ─────────────────── */
+  .slides-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0a0a0a;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .slides-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; background: rgba(20,20,20,.95);
+    border-bottom: 1px solid #222; flex-shrink: 0;
+  }
+  .slides-toolbar-left { display: flex; align-items: center; gap: 12px; }
+  .slides-toolbar-right { display: flex; align-items: center; gap: 12px; }
+  .slides-counter { font-size: .8rem; color: #888; font-family: 'SF Mono', Consolas, monospace; }
+  .slides-close {
+    background: none; border: 1px solid #333; color: #aaa;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .78rem;
+    transition: all .15s;
+  }
+  .slides-close:hover { border-color: #666; color: #fff; }
+  .slides-nav-btn {
+    background: none; border: 1px solid #333; color: #aaa;
+    width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .slides-nav-btn:hover { border-color: #666; color: #fff; background: rgba(255,255,255,.05); }
+  .slides-nav-btn:disabled { opacity: .25; cursor: default; }
+  .slides-stage {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px; overflow: hidden; position: relative;
+  }
+  .slide {
+    width: 100%; max-width: 960px; aspect-ratio: 16/9;
+    background: linear-gradient(160deg, #181818 0%, #111 50%, #161616 100%);
+    border: 1px solid #2a2a2a; border-radius: 16px;
+    display: grid; grid-template-columns: 320px 1fr; gap: 0;
+    overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    position: relative;
+  }
+  .slide-art-panel {
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, rgba(30,28,22,.9) 0%, rgba(15,13,10,.95) 100%);
+    border-right: 1px solid #2a2a2a; padding: 32px; position: relative;
+    overflow: hidden;
+  }
+  .slide-art-panel::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .slide-art-canvas {
+    width: 240px; height: 240px; border-radius: 12px;
+    border: 2px solid rgba(201,168,76,.2); background: #0a0806;
+    position: relative; z-index: 1;
+  }
+  .slide-content {
+    padding: 40px 48px; display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .slide-cat-stripe {
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .slide-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .65rem; color: #888; text-transform: uppercase; letter-spacing: 2px;
+    font-family: 'SF Mono', Consolas, monospace; margin-bottom: 12px;
+  }
+  .slide-badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .slide-title {
+    font-size: 2rem; font-weight: 800; color: #f0e6d0;
+    letter-spacing: -.5px; line-height: 1.15; margin-bottom: 8px;
+  }
+  .slide-subtitle {
+    font-size: .85rem; color: #888; font-style: italic;
+    margin-bottom: 20px; line-height: 1.5;
+  }
+  .slide-desc {
+    font-size: .92rem; color: #ccc; line-height: 1.65;
+    margin-bottom: 20px; max-height: 100px; overflow: hidden;
+  }
+  .slide-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .slide-tag {
+    font-size: .65rem; padding: 3px 10px; border-radius: 99px;
+    background: rgba(88,166,255,.08); border: 1px solid rgba(88,166,255,.15);
+    color: #58a6ff; font-family: 'SF Mono', Consolas, monospace;
+  }
+  .slide-stats-row {
+    display: flex; gap: 24px; align-items: center;
+    padding-top: 16px; border-top: 1px solid #222;
+  }
+  .slide-stat {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .slide-stat-val {
+    font-size: 1.4rem; font-weight: 800; color: #f0e6d0;
+    font-family: 'SF Mono', Consolas, monospace;
+  }
+  .slide-stat-label { font-size: .6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .slide-meta {
+    position: absolute; bottom: 16px; right: 24px;
+    font-size: .6rem; color: #444; font-family: 'SF Mono', Consolas, monospace;
+  }
+  .slide-pips { display: flex; gap: 4px; margin-bottom: 16px; }
+  .slide-pip {
+    width: 16px; height: 16px; border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  @media (max-width: 800px) {
+    .slide { grid-template-columns: 1fr; aspect-ratio: auto; max-height: 90vh; }
+    .slide-art-panel { padding: 24px; border-right: none; border-bottom: 1px solid #2a2a2a; }
+    .slide-art-canvas { width: 160px; height: 160px; }
+    .slide-content { padding: 24px; }
+    .slide-title { font-size: 1.4rem; }
+  }
+
+  /* Slide dots */
+  .slides-dots {
+    display: flex; gap: 4px; align-items: center; justify-content: center;
+    padding: 12px; flex-shrink: 0;
+  }
+  .slides-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #333;
+    cursor: pointer; transition: all .2s;
+  }
+  .slides-dot.active { background: var(--accent); width: 18px; border-radius: 3px; }
+
   /* ─── Pack Opening Enhancements ─────────────────── */
   @keyframes packTear {
     0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(1); }
@@ -1900,9 +2084,11 @@ document.documentElement.className = 'rar-guard';
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
   }
   .pack-intro-art {
-    font-size: 6rem; animation: packGlow 2s ease-in-out infinite;
+    animation: packGlow 2s ease-in-out infinite;
     filter: drop-shadow(0 0 20px currentColor);
+    display: flex; align-items: center; justify-content: center;
   }
+  .pack-intro-art svg { width: 96px; height: 96px; }
   .pack-intro-click {
     font-size: 1rem; color: var(--text-dim); cursor: pointer;
     animation: fadeIn .5s ease .5s both;
@@ -2055,30 +2241,21 @@ document.documentElement.className = 'rar-guard';
   </div>
   <nav id="main-nav">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
-    <button class="nav-btn t3-only wave-2" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
-    <button class="nav-btn t3-only wave-2" data-tab="quality" onclick="switchTab('quality')">Quality Seal</button>
-    <button class="nav-btn t3-only" data-tab="cards" onclick="switchTab('cards')">Cards</button>
-    <button class="nav-btn t3-only wave-2" data-tab="packs" onclick="switchTab('packs')">Packs</button>
-    <button class="nav-btn t3-only" data-tab="stream" onclick="switchTab('stream')">Stream</button>
-    <button class="nav-btn t3-only wave-2" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
-    <button class="nav-btn t2-only wave-2" data-tab="submit" onclick="switchTab('submit')">Submit</button>
-    <button class="nav-btn t3-only wave-2" data-tab="roadmap" onclick="switchTab('roadmap')" style="color:var(--text-muted);font-size:.82rem">Roadmap</button>
+    <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
+    <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
+    <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
+    <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
+    <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
+    <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
   </nav>
   <div class="header-actions" id="header-actions">
-    <div class="mode-dial" id="mode-dial">
-      <button data-tier="0" class="active" onclick="setUITier(0)">Library</button>
-      <button data-tier="1" onclick="setUITier(1)" style="display:none">Community</button>
-      <button data-tier="2" onclick="setUITier(2)" style="display:none">Lux</button>
-    </div>
-    <button onclick="cycleIntent()" id="intent-btn" style="padding:4px 12px;border-radius:6px;border:1px solid var(--blue, #58a6ff);background:none;color:var(--blue, #58a6ff);font-size:.72rem;cursor:pointer" title="Toggle Business / Holo view">Business</button>
-    <!-- Hail is now built into the search bar -->
     <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
-    <button class="demo-toggle t2-only" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
-    <div class="cart-toggle t2-only" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
-      &#128722;
+    <button class="demo-toggle" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle sample data to preview what the store looks like with community activity"><span class="demo-dot"></span>Demo</button>
+    <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="currentColor" opacity="0.5"/><circle cx="18" cy="19" r="2" fill="currentColor" opacity="0.5"/></svg>
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
     </div>
-    <button class="gh-login t3-only" id="login-btn" onclick="loginWithGitHub()">
+    <button class="gh-login" id="login-btn" onclick="loginWithGitHub()">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       Sign in
     </button>
@@ -2097,17 +2274,18 @@ document.documentElement.className = 'rar-guard';
   <div class="panel active" id="panel-browse">
     <div class="toolbar">
       <div class="search-box">
-        <span class="si">&#128269;</span>
+        <span class="si"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" style="vertical-align:middle"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/><line x1="12" y1="12" x2="17" y2="17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/></svg></span>
         <input type="text" id="search" placeholder="What do you need done?" oninput="renderAgents()">
         <span class="kbd">/</span>
       </div>
       <select class="sort-select" id="sort-select" onchange="renderAgents()">
         <option value="name">A-Z</option>
         <option value="newest">Newest</option>
-        <option value="popular" data-min-tier="1">Most Voted</option>
-        <option value="rating" data-min-tier="1">Top Rated</option>
-        <option value="verified" data-min-tier="1">Verified First</option>
+        <option value="popular">Most Voted</option>
+        <option value="rating">Top Rated</option>
+        <option value="verified">Verified First</option>
       </select>
+      <button onclick="openAgentSlides()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer;white-space:nowrap">Present</button>
     </div>
     <div class="filter-pills" id="category-pills"></div>
     <div class="local-mgmt" id="local-mgmt" style="display:none;margin-top:12px">
@@ -2115,8 +2293,8 @@ document.documentElement.className = 'rar-guard';
       <button class="local-mgmt-btn" onclick="exportLocalAgents()">Export All</button>
       <button class="local-mgmt-btn danger" onclick="clearLocalAgents()">Clear Local</button>
       <div class="drop-zone" id="drop-zone" style="flex:1;padding:10px;margin-bottom:0">
-        <input type="file" accept=".py" multiple onchange="handleFileDrop(this.files)">
-        <span>Drop .py files here or click to add local agents</span>
+        <input type="file" accept=".py,.card,.rad.eggs,.egg" multiple onchange="handleFileDrop(this.files)">
+        <span>Drop .py / .card / .rad.eggs files here</span>
       </div>
     </div>
     <div id="drop-zone-full" style="display:none"></div>
@@ -2143,9 +2321,17 @@ document.documentElement.className = 'rar-guard';
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();openAgent('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
       <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">One file, one purpose<br>A thousand agents waiting<br>Which deck will you build?</p>
     </div>
-    <div class="deck-bar t2-only" id="deck-bar">
+    <div class="deck-bar" id="deck-bar">
       <select id="deck-select" onchange="switchDeck(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;min-width:140px;cursor:pointer"></select>
       <span class="deck-count" id="deck-count">0</span> <span style="font-size:.82rem;color:var(--text-dim)">cards</span>
+      <div class="companion-slot" id="companion-slot" onclick="pickCompanion()" title="Set a companion card for this deck">
+        <div class="companion-avatar" id="companion-avatar">?</div>
+        <div style="min-width:0">
+          <div class="companion-label">Companion</div>
+          <div class="companion-name" id="companion-name">None</div>
+          <div class="companion-label" id="companion-forge" style="display:none;color:var(--purple);margin-top:1px"></div>
+        </div>
+      </div>
       <button onclick="newDeck()">+ New Deck</button>
       <button onclick="renameDeck()">Rename</button>
       <button onclick="deleteDeck()">Delete</button>
@@ -2154,9 +2340,9 @@ document.documentElement.className = 'rar-guard';
       <button onclick="presentDeck()">Present</button>
       <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <div class="card-mode-toggle">
-          <button class="active" onclick="setCardMode('business',this)">Business</button>
-          <button onclick="setCardMode('creative',this)">Holo</button>
-          <button onclick="setCardMode('kids',this)">Simple</button>
+          <button class="active" onclick="setCardMode('business',this)">Icon</button>
+          <button onclick="setCardMode('creative',this)">Full Art</button>
+          <button onclick="setCardMode('kids',this)">ASCII</button>
         </div>
         <input type="text" id="card-search" placeholder="I want to..." oninput="renderCards()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;width:200px">
       </div>
@@ -2351,89 +2537,6 @@ document.documentElement.className = 'rar-guard';
     </div>
   </div>
 
-  <!-- Quality Seal -->
-  <div class="panel" id="panel-quality">
-    <div class="quality-section">
-      <h2>RAR Quality Seal Program</h2>
-      <p>Every agent in the registry carries a quality tier. Like Nintendo's Seal of Quality, the <strong>RAR Verified</strong> seal means an agent meets a rigorous standard of reliability, security, and usefulness.</p>
-
-      <div class="tier-card t-experimental">
-        <h3><span class="tier tier-experimental">&#9878; FRONTIER</span> Preview Tier</h3>
-        <div class="subtitle">For agents pushing the edge. Ship early, iterate fast, break new ground.</div>
-        <ul>
-          <li>Valid <code>__manifest__</code> with all required fields</li>
-          <li>Follows the single-file <code>agent.py</code> pattern</li>
-          <li>Parseable by AST (no syntax errors)</li>
-          <li>No hardcoded secrets, API keys, or credentials</li>
-          <li>Clearly marked as frontier in the registry</li>
-          <li>Pushing the edge — may be evolving rapidly</li>
-          <li>Can be promoted to Community when stable</li>
-        </ul>
-      </div>
-
-      <div class="tier-card t-community">
-        <h3><span class="tier tier-community">COMMUNITY</span> Open Tier</h3>
-        <div class="subtitle">The starting line. Submit your agent and join the community.</div>
-        <ul>
-          <li>Valid <code>__manifest__</code> with all required fields</li>
-          <li>Follows the single-file <code>agent.py</code> pattern</li>
-          <li>Parseable by AST (no syntax errors)</li>
-          <li>Passes automated contract tests (<code>test_agent_contract.py</code>)</li>
-          <li>No hardcoded secrets, API keys, or credentials</li>
-          <li>No PII (scanned by pre-commit scrubber)</li>
-        </ul>
-      </div>
-
-      <div class="tier-card t-verified">
-        <h3>
-          <span class="seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            RAR VERIFIED
-          </span>
-          Quality Seal
-        </h3>
-        <div class="subtitle">Reviewed by real humans. Tested in production. The ones you can count on.</div>
-        <ul>
-          <li>All Community tier requirements</li>
-          <li>Extends <code>BasicAgent</code> properly with correct <code>perform()</code> signature</li>
-          <li>Meaningful <code>perform()</code> implementation (not just a stub)</li>
-          <li>Docstring serves as useful documentation</li>
-          <li>Proper error handling — graceful failures, no bare <code>except:</code></li>
-          <li>Environment variables declared in <code>requires_env</code> are actually used</li>
-          <li>Dependencies declared in <code>dependencies</code> are accurate</li>
-          <li>Minimum 3 community upvotes</li>
-          <li>At least 1 review with rating >= 3 stars</li>
-          <li>Code reviewed by a registry maintainer</li>
-          <li>No obfuscated code, no minification, no encoded payloads</li>
-          <li>Clean separation of concerns — single responsibility</li>
-        </ul>
-      </div>
-
-      <div class="tier-card t-official">
-        <h3><span class="tier tier-official">OFFICIAL</span> Core Agents</h3>
-        <div class="subtitle">Built and maintained by the core team. The bedrock of the ecosystem.</div>
-        <ul>
-          <li>All Verified tier requirements</li>
-          <li>Maintained by core team with guaranteed SLA</li>
-          <li>Backwards-compatible across RAPP versions</li>
-          <li>Integration tested against live infrastructure</li>
-          <li>Versioned with semantic versioning (breaking changes = major bump)</li>
-          <li>Included in the RAPP release validation suite</li>
-        </ul>
-      </div>
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-top:24px">
-        <h3 style="margin-bottom:8px">How to Get Verified</h3>
-        <ol style="color:var(--text-dim);font-size:.9rem;padding-left:20px;line-height:2">
-          <li>Submit your agent through the <a href="#" onclick="switchTab('submit');return false">Submit</a> tab</li>
-          <li>Accumulate at least <strong>3 community upvotes</strong> and <strong>1 review</strong></li>
-          <li>Open an issue titled <code>[RAR] verify: @your-name/agent-slug</code></li>
-          <li>A maintainer will audit the code against the Verified checklist above</li>
-          <li>Once approved, the agent's <code>quality_tier</code> is upgraded to <code>"verified"</code></li>
-        </ol>
-      </div>
-    </div>
-  </div>
 
   <!-- Submit -->
   <div class="panel" id="panel-submit">
@@ -2520,6 +2623,7 @@ class MyAgent(BasicAgent):
             <button class="active" onclick="switchCollView('grid',this)">Grid</button>
             <button onclick="switchCollView('binder',this)">Binder</button>
           </div>
+          <button onclick="openSlidesPresentation()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Present</button>
           <select id="coll-sort" onchange="renderCollection()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.78rem;cursor:pointer">
             <option value="grade">By Grade</option>
             <option value="mintnum">By Card #</option>
@@ -2610,7 +2714,7 @@ class MyAgent(BasicAgent):
     </div>
 
     <!-- Runtime Targets (Advanced) -->
-    <div class="advanced-only" style="margin-top:24px;display:none">
+    <div style="margin-top:24px">
       <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Runtime Targets</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
 
@@ -2681,7 +2785,7 @@ class MyAgent(BasicAgent):
     </div>
 
     <!-- Brainstem Connect Modal (Advanced) -->
-    <div id="brainstem-connect" class="advanced-only" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+    <div id="brainstem-connect" class="" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <h4 style="font-size:.82rem;font-weight:700;color:var(--text-dim)">Connect to Brainstem</h4>
         <button onclick="document.getElementById('brainstem-connect').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem">&times;</button>
@@ -2703,7 +2807,7 @@ class MyAgent(BasicAgent):
     </div>
 
     <!-- Ollama Connect Panel -->
-    <div id="ollama-connect" class="advanced-only" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+    <div id="ollama-connect" class="" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <h4 style="font-size:.82rem;font-weight:700;color:var(--text-dim)">Ollama — Local-First AI for Brainstem</h4>
         <button onclick="document.getElementById('ollama-connect').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem">&times;</button>
@@ -2774,79 +2878,12 @@ class MyAgent(BasicAgent):
     </div>
   </div>
 
-  <!-- Roadmap -->
-  <div class="panel" id="panel-roadmap">
-    <div class="roadmap-section">
-      <h2>Roadmap</h2>
-      <p>RAR is an agent workbench. Everything serves one purpose: make it trivially easy to build, share, and run single-file AI agents.</p>
-      <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">Seeds planted today<br>Will grow into tomorrow's<br>Agent forest deep</p>
-
-      <div class="rm-legend">
-        <span><span class="dot" style="background:var(--green)"></span> Shipped</span>
-        <span><span class="dot" style="background:var(--accent)"></span> In Progress</span>
-        <span><span class="dot" style="background:var(--surface3)"></span> Planned</span>
-      </div>
-
-      <div class="roadmap-lane">
-        <h3>The Registry</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">The single source of truth for agent discovery. One file = one agent = one card in the registry.</p>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">AST-based manifest extraction</div><div class="rm-desc">Parse __manifest__ from .py files without executing code. Safe, fast, deterministic.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Issues-as-API</div><div class="rm-desc">Submit, vote, and review agents through GitHub Issues. No server. GitHub Actions processes, validates, commits, closes.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">4-tier quality seal</div><div class="rm-desc">Experimental &rarr; Community &rarr; Verified &rarr; Official. Only community and experimental are self-submittable.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Federation</div><div class="rm-desc">Clone as template. Run your own store. Submit deltas upstream. The main store signs and distributes.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Agent dependency graph</div><div class="rm-desc">Resolve <code>dependencies</code> declared in manifests. Show the graph. Auto-bundle when downloading.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Version diffing</div><div class="rm-desc">Compare versions of an agent side-by-side. See what changed in perform(), manifest, and dependencies.</div></div></div>
-      </div>
-
-      <div class="roadmap-lane">
-        <h3>The Workbench</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Build agents locally, test them, iterate, then publish. The browser is your IDE.</p>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Local-first agent loading</div><div class="rm-desc">Drag and drop .py files into the browser. Stored in IndexedDB. Persists across sessions. No upload needed.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Starter templates</div><div class="rm-desc">Blank, Hello World, API Caller, Data Processor. Customize and submit. Unmodified templates are caught and rejected.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Manifest validation</div><div class="rm-desc">Real-time validation as you type. Name, version, publisher match, tier enforcement &mdash; all checked before submit.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">In-browser code editor</div><div class="rm-desc">Edit local agents directly in the workbench. Syntax highlighting, manifest preview, one-click submit.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent testing sandbox</div><div class="rm-desc">Invoke perform() with test inputs and inspect outputs. Mock env vars. Dry-run before publishing.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Fork &amp; remix</div><div class="rm-desc">Take any registry agent, fork it to your namespace, modify it, and republish. One-click workflow.</div></div></div>
-      </div>
-
-      <div class="roadmap-lane">
-        <h3>The Sneakernet</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Share agents like trading cards. QR codes, decks, and AirDrop. The agent lives on the card.</p>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Agent cards</div><div class="rm-desc">Every agent renders as a trading card. Front: name, category art, abilities, tier seal. Back: QR code that loads the agent.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Decks</div><div class="rm-desc">Collect agents into a personal deck. Name it, share it via URL. "The Howard Starter Pack."</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">QR sharing</div><div class="rm-desc">Scan the back of a card with your phone. It opens RAR and loads the agent. No app install needed.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Printable cards</div><div class="rm-desc">Print agent cards at trading card size (2.5&times;3.5"). Front + back. Hand them out at meetups.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Card-embedded agents</div><div class="rm-desc">For small agents, encode the full .py source in the QR code itself. The card IS the agent &mdash; no network needed.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Deck packs for Brainstem</div><div class="rm-desc">Drop a deck URL into Brainstem. All agents in the pack install at once. Personality starter kits.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">NFC / AirDrop cards</div><div class="rm-desc">Tap your phone to share an agent. Write the QR URL to an NFC tag. Physical agent distribution.</div></div></div>
-      </div>
-
-      <div class="roadmap-lane">
-        <h3>Trust &amp; Signing</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">RAR signs agents like Apple signs apps. The seal means something.</p>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Publisher namespaces</div><div class="rm-desc">@yourname/ is yours. Enforced at submission. No impersonation. No squatting.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-done">&#10003;</div><div class="rm-body"><div class="rm-title">Automated contract tests</div><div class="rm-desc">Every agent in the registry passes AST parsing, manifest validation, and structural contract checks on every push.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Code signing via commit</div><div class="rm-desc">The main repo is the certificate authority. An agent in the registry = signed by RAR. Git commit hash = signature.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Integrity verification</div><div class="rm-desc">Verify a local .py against the registry hash. Detect tampering. "This card is authentic."</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Security scanning</div><div class="rm-desc">Automated scan for hardcoded secrets, network calls in __init__, obfuscated code. Block before merge.</div></div></div>
-      </div>
-
-      <div class="roadmap-lane rm-exp-lane">
-        <h3>&#9878; Frontier</h3>
-        <p style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">Pushing the edge. These features are actively being explored. Feedback shapes their direction.</p>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent-to-agent invocation</div><div class="rm-desc">An agent calls another agent's perform() by name. Declared in dependencies, resolved at runtime.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-progress">&#9679;</div><div class="rm-body"><div class="rm-title">Ollama — Local-First AI</div><div class="rm-desc">Run Gemma 4 on-device via Ollama. Brainstem reasons locally — no cloud API, no keys, no data leaves your machine. <code>ollama launch brainstem --model gemma4</code></div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Offline-first PWA</div><div class="rm-desc">Install RAR as a PWA. Browse your local agents with no network. Sync when you're back online.</div></div></div>
-        <div class="roadmap-item"><div class="rm-status rm-planned">&#9675;</div><div class="rm-body"><div class="rm-title">Agent canvas</div><div class="rm-desc">Visual drag-and-drop wiring of agents into pipelines. Each node is a card. Connections are data flows.</div></div></div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Cart Sidebar -->
 <div class="cart-sidebar" id="cart-sidebar">
   <div class="cart-header">
-    <h3>&#128722; Agent Cart (<span id="cart-count">0</span>)</h3>
+    <h3><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="#fff" opacity="0.4"/><circle cx="18" cy="19" r="2" fill="#fff" opacity="0.4"/></svg> Agent Cart (<span id="cart-count">0</span>)</h3>
     <button class="cart-close" onclick="toggleCart()">&#10005;</button>
   </div>
   <div class="cart-body" id="cart-body">
@@ -2857,8 +2894,8 @@ class MyAgent(BasicAgent):
       <input type="text" id="share-url" readonly>
       <button class="copy-btn" onclick="copyEl('share-url')">Copy</button>
     </div>
-    <button class="cart-btn primary" onclick="downloadCart()" id="download-cart-btn" style="display:none">&#11015; Download All (.zip)</button>
-    <button class="cart-btn secondary" onclick="shareCart()" id="share-cart-btn" style="display:none">&#128279; Share Collection</button>
+    <button class="cart-btn primary" onclick="downloadCart()" id="download-cart-btn" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle"><line x1="4" y1="10" x2="16" y2="10" stroke="#fff" stroke-width="1.5" opacity="0.4"/><polyline points="7,14 10,18 13,14" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/></svg> Download All (.zip)</button>
+    <button class="cart-btn secondary" onclick="shareCart()" id="share-cart-btn" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle"><path d="M6,8 l4,-4 a4,4 0 0,1 6,6 l-4,4" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.45"/><path d="M14,12 l-4,4 a4,4 0 0,1 -6,-6 l4,-4" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.45"/></svg> Share Collection</button>
     <button class="cart-btn danger" onclick="clearCart()" id="clear-cart-btn" style="display:none">Clear cart</button>
   </div>
 </div>
@@ -3020,12 +3057,30 @@ async function handleFileDrop(files) {
       dependencies: manifest.dependencies || [],
     });
     added++;
-    // If this was a .card file with card metadata, import the card too
+    // If this was a .card file with card metadata, import the minted card to IndexedDB
     if (cardMeta && cardMeta.format === 'rar-card/1.0') {
-      const existingCards = JSON.parse(localStorage.getItem('rar_cards') || '[]');
+      const existingCards = await getAllMinted();
       if (!existingCards.find(c => c.mintId === cardMeta.mintId)) {
-        existingCards.push({ ...cardMeta, agentName: manifest.name });
-        localStorage.setItem('rar_cards', JSON.stringify(existingCards));
+        const importedCard = {
+          ...cardMeta,
+          agentName: manifest.name,
+          displayName: manifest.display_name || manifest.name.split('/').pop(),
+          category: manifest.category || 'general',
+          // Ensure required fields exist
+          variations: cardMeta.variations || {
+            centeringX: 0, centeringY: 0, inkSaturation: 1,
+            holoIntensity: 1, cornerSharpness: 1, surfaceNoise: 0, centerScore: 10,
+          },
+          cube: cardMeta.cube || cubeToHex(initCube()),
+          provenance: [
+            ...(cardMeta.provenance || []),
+            { action: 'import', timestamp: new Date().toISOString(), source: file.name },
+          ],
+          transfers: (cardMeta.transfers || 0) + 1,
+          lastTransfer: new Date().toISOString(),
+        };
+        importedCard.grade = gradeCard(importedCard);
+        await saveMinted(importedCard);
       }
     }
     // Offer to submit to the store via Issues API
@@ -3289,28 +3344,25 @@ async function init() {
   renderAgents();
   renderLeaderboard();
 
+  // Howard Starter Pack — auto-mint HOLO cards for first-time users
+  await provisionStarterPack();
+
   // Init workbench tag inputs
   wbInitTagInputs();
 
-  // Apply persisted UI tier (T1/T2/T3) + intent (Personal/Business)
-  applyUITier();
-  applyIntent();
+  // Show nav and mark loaded
+  document.getElementById('main-nav').style.display = 'flex';
+  document.body.classList.add('rar-loaded');
 
-  // Restore last active tab (if allowed at current tier)
+  // Restore last active tab
   const savedTab = localStorage.getItem('rar_tab');
   if (savedTab && savedTab !== 'browse') {
-    const gatedT2 = ['submit'];
-    const gatedT3 = ['leaderboard','quality','cards','packs','stream','workbench','roadmap'];
-    const gatedWave2 = ['leaderboard','quality','packs','workbench','submit','roadmap'];
-    const allowed = !(_uiTier < 1 && gatedT2.includes(savedTab)) &&
-                    !(_uiTier < 2 && gatedT3.includes(savedTab)) &&
-                    !((!_waveUnlocked || _waveUnlocked < 2) && gatedWave2.includes(savedTab));
-    if (allowed) switchTab(savedTab);
+    switchTab(savedTab);
   }
 
   // Restore saved card mode (Holo/Business/Simple)
   if (cardMode !== 'business') {
-    const modeMap = { business: 'Business', creative: 'Holo', kids: 'Simple' };
+    const modeMap = { business: 'Icon', creative: 'Full Art', kids: 'ASCII' };
     document.querySelectorAll('.card-mode-toggle button').forEach(b => {
       b.classList.toggle('active', b.textContent === modeMap[cardMode]);
     });
@@ -3329,7 +3381,7 @@ async function init() {
 function renderInstanceBanner() {
   const banner = document.createElement('div');
   banner.className = 'instance-banner';
-  banner.innerHTML = `&#127760; This is a RAR instance. <a href="https://github.com/${UPSTREAM_REPO}" target="_blank">View main store &rarr;</a>`;
+  banner.innerHTML = `${svgIcon('globe','#8b949e',16)} This is a RAR instance. <a href="https://github.com/${UPSTREAM_REPO}" target="_blank">View main store &rarr;</a>`;
   banner.style.cssText = 'background:var(--surface2);text-align:center;padding:8px;font-size:.85rem;color:var(--text-muted);border-bottom:1px solid var(--border)';
   document.body.insertBefore(banner, document.body.firstChild);
 }
@@ -3363,6 +3415,53 @@ async function downloadAgentPy(name) {
     // Fallback: open in new tab
     window.open(`${RAW}/${a._file}`, '_blank');
   }
+}
+
+function downloadAsciiCard(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+  const tier = a.quality_tier || 'community';
+  const holo = getHoloCard(a);
+  const power = holo?.power ?? Math.max(1, (a.tags||[]).length + (a.dependencies||[]).length);
+  const toughness = holo?.toughness ?? Math.max(1, (a.version||'1.0.0').split('.')[0] * 2 + (a.requires_env||[]).length);
+  const stats = asciiAgentStats(a);
+  const art = genAsciiArt(a);
+  const flavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const w = 42;
+  const hr = '+' + '-'.repeat(w - 2) + '+';
+  const pad = (s, len) => { s = s || ''; return s.length > len ? s.slice(0, len) : s + ' '.repeat(len - s.length); };
+  const center = (s, len) => { const sp = Math.max(0, len - s.length); const l = Math.floor(sp / 2); return ' '.repeat(l) + s + ' '.repeat(sp - l); };
+  const inner = w - 4;
+  let lines = [];
+  lines.push(hr);
+  const tierTag = '[' + tier.toUpperCase() + ']';
+  lines.push('| ' + pad(a.display_name, inner - tierTag.length) + tierTag + ' |');
+  lines.push(hr);
+  const artLines = art.split('\n');
+  for (const al of artLines) { lines.push('| ' + center(al, inner) + ' |'); }
+  lines.push(hr);
+  for (const s of stats) {
+    const label = pad(s.label, 7);
+    const barLen = inner - 8;
+    const filled = Math.round(barLen * s.pct / 100);
+    lines.push('| ' + label + '#'.repeat(filled) + '.'.repeat(barLen - filled) + ' |');
+  }
+  lines.push(hr);
+  const fl = flavor.length > inner ? flavor.slice(0, inner - 3) + '...' : flavor;
+  lines.push('| ' + pad(fl, inner) + ' |');
+  lines.push(hr);
+  const footer = a.name + ' v' + (a.version || '?');
+  const pt = power + '/' + toughness;
+  lines.push('| ' + pad(footer, inner - pt.length) + pt + ' |');
+  lines.push(hr);
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = (a.name.split('/')[1] || 'agent') + '.card.txt';
+  link.click();
+  URL.revokeObjectURL(url);
+  showToast('Card downloaded', 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -3504,9 +3603,9 @@ function renderStats(stats) {
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
     <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
-    ${_uiTier >= 1 && vc ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>` : ''}
-    ${_uiTier >= 1 && tv ? `<div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>` : ''}
-    ${_uiTier >= 1 && tr ? `<div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>` : ''}`;
+    ${ vc ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>` : ''}
+    ${ tv ? `<div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>` : ''}
+    ${ tr ? `<div class="stat-chip"><span class="num">${revLabel}</span><span class="lbl">Reviews</span></div>` : ''}`;
 }
 
 function buildCategoryPills(stats) {
@@ -3563,17 +3662,15 @@ function renderAgents() {
         if (desc.includes(w)) s += 5;
         if (tags.includes(w)) s += 3;
       }
-      s += intentWeight(a) * 2;
       a._searchScore = s;
     });
     f.sort((a, b) => b._searchScore - a._searchScore);
   } else {
-    f.sort((a, b) => intentWeight(b) - intentWeight(a));
-    if (sort === 'popular') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (score(b) - score(a)));
-    else if (sort === 'name') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || a.display_name.localeCompare(b.display_name));
-    else if (sort === 'rating') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || (rating(b) - rating(a)));
-    else if (sort === 'newest') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((b._lines || 0) - (a._lines || 0)));
-    else if (sort === 'verified') f.sort((a, b) => (intentWeight(b) - intentWeight(a)) || ((TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2)));
+    if (sort === 'popular') f.sort((a, b) => score(b) - score(a));
+    else if (sort === 'name') f.sort((a, b) => a.display_name.localeCompare(b.display_name));
+    else if (sort === 'rating') f.sort((a, b) => rating(b) - rating(a));
+    else if (sort === 'newest') f.sort((a, b) => (b._lines || 0) - (a._lines || 0));
+    else if (sort === 'verified') f.sort((a, b) => (TIER_ORDER[a.quality_tier] || 2) - (TIER_ORDER[b.quality_tier] || 2));
   }
 
   if (!f.length) {
@@ -3587,13 +3684,11 @@ function agentCard(a) {
   const s = score(a);
   const tier = a.quality_tier || 'community';
   const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
-  const sealHtml = _uiTier >= 1
-    ? (tier === 'verified'
-      ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
-      : tier === 'experimental'
-      ? '<span class="tier tier-experimental">&#9878; experimental</span>'
-      : `<span class="tier tier-${tier}">${tier}</span>`)
-    : '';
+  const sealHtml = tier === 'verified'
+    ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
+    : tier === 'experimental'
+    ? '<span class="tier tier-experimental">&#9878; experimental</span>'
+    : `<span class="tier tier-${tier}">${tier}</span>`;
   const isLocal = a._source === 'local-device';
   const rawUrl = isLocal || !a._file ? '#' : `${RAW}/${a._file}`;
   return `
@@ -3618,7 +3713,7 @@ function agentCard(a) {
         </div>
         <div style="display:flex;gap:6px;align-items:center">
           ${!isLocal && a._file ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
-          ${_uiTier >= 1 ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
+          ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
         </div>
@@ -3840,23 +3935,44 @@ function openAgent(name) {
         <div class="review-text">${esc(r.text)}</div></div>`).join('')}</div>`
     : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
-  const watermark = genAgentMark(a).replace('width:36px;height:36px', 'width:120px;height:120px').replace('width="36" height="36"', 'width="120" height="120"');
+  const heroIcon = genAgentMark(a).replace('width:36px;height:36px', 'width:80px;height:80px').replace('width="36" height="36"', 'width="80" height="80"').replace('border-radius:6px','border-radius:12px');
+  const holo = getHoloCard(a);
+  const modalPower = holo?.power ?? Math.max(1, (a.tags||[]).length + (a.dependencies||[]).length);
+  const modalTough = holo?.toughness ?? Math.max(1, (a.version||'1.0.0').split('.')[0] * 2 + (a.requires_env||[]).length);
+  const modalIsForged = getCompanion() === a.name;
+  const modalAsciiStats = modalIsForged ? forgeStats(a.name) : asciiAgentStats(a);
+  const modalAsciiArt = modalIsForged ? forgeAsciiArt(a.name) : genAsciiArt(a);
+  const modalFlavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
   document.getElementById('modal-content').innerHTML = `
     <button class="close-modal" onclick="closeModal()">&#10005;</button>
     <div class="modal-header" style="position:relative;overflow:hidden">
-      <div style="position:absolute;top:10px;right:10px;opacity:.18;pointer-events:none">${watermark.replace('border-radius:6px','border-radius:0').replace('flex-shrink:0','')}</div>
-      <h2>${esc(a.display_name)}</h2>
-      <div class="ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
-      <div class="badges">
-        ${sealHtml}
-        <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
-        <span style="color:var(--text-muted);font-size:.82rem">${a._size_kb} KB &middot; ${a._lines} lines &middot; by ${esc(a.author)}</span>
-        ${avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="flex-shrink:0">${heroIcon}</div>
+        <div style="flex:1;min-width:0">
+          <h2 style="margin:0">${esc(a.display_name)}</h2>
+          <div class="ns">${esc(a.name)} &middot; v${esc(a.version)}</div>
+          <div class="badges" style="margin-top:6px">
+            ${sealHtml}
+            <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
+            <span style="color:var(--text-muted);font-size:.82rem">${a._size_kb} KB &middot; ${a._lines} lines &middot; by ${esc(a.author)}</span>
+            ${avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
+          </div>
+        </div>
       </div>
+      <details style="margin-top:12px;border:1px solid #21262d;border-radius:6px;background:#0d1117;overflow:hidden">
+        <summary style="padding:6px 10px;cursor:pointer;font-family:'SF Mono','Consolas',monospace;font-size:.65rem;color:${modalIsForged ? '#d2a8ff' : '#58a6ff'};user-select:none">${modalIsForged ? 'FORGED Card' : 'ASCII Card'}</summary>
+        <div style="padding:6px 10px;font-family:'SF Mono','Consolas',monospace;font-size:.6rem;line-height:1.2;color:#c9d1d9">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="color:#58a6ff;font-weight:700">${esc(a.display_name)}</span><span style="color:#484f58">[${tier.toUpperCase()}]</span></div>
+          <pre style="color:#39d353;margin:4px 0;text-align:center;font-size:.5rem;line-height:1.15">${modalAsciiArt}</pre>
+          ${modalAsciiStats.map(s => `<div style="display:flex;align-items:center;gap:4px;margin-bottom:1px"><span style="color:#8b949e;width:44px;font-size:.45rem;text-transform:uppercase">${s.label}</span><div style="flex:1;height:5px;background:#161b22;border-radius:1px"><div style="height:100%;width:${s.pct}%;background:${s.color};border-radius:1px"></div></div></div>`).join('')}
+          <div style="color:#8b949e;font-style:italic;font-size:.48rem;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(modalFlavor)}</div>
+          <div style="display:flex;justify-content:space-between;margin-top:3px;font-size:.45rem;color:#484f58"><span>${esc(a.name)}</span><span style="color:#58a6ff;font-weight:700">${modalPower}/${modalTough}</span></div>
+        </div>
+      </details>
     </div>
     <div class="modal-body">
       ${experimentalWarning}
-      ${_uiTier >= 1 ? `<div class="modal-vote">
+      ${true ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
         <span class="vote-score">${s > 0 ? s : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not graded yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
@@ -3869,7 +3985,7 @@ function openAgent(name) {
       </div>
       <div class="modal-section"><h3>Environment Variables</h3><div>${env}</div></div>
       <div class="modal-section"><h3>Tags</h3><div class="card-tags">${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
-      <div class="modal-section" id="modal-thirdspace" style="${_uiTier >= 2 ? '' : 'display:none'}">
+      <div class="modal-section" id="modal-thirdspace">
         <h3>Third Space</h3>
         ${(() => {
           const cred = _cardCredentials.get(a.name);
@@ -3919,19 +4035,19 @@ function openAgent(name) {
           </div>
         </div>
       </div>
-      ${_uiTier >= 1 ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
-        <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">&#9998; Write a Review</button>
+      ${true ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
+        <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">${svgIcon('pencil','#fff',14)} Write a Review</button>
       </div>` : ''}
       <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
         ${isLocalDevice
-          ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">&#128465; Remove Local Agent</a>
-             <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#8593; Submit to Store</a>`
-          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#11015; agent.py</a>
-             ${_intent === 'personal' ? `<a href="#" onclick="event.preventDefault();exportSingleCard({name:'${esc(a.name)}',display_name:'${esc(a.display_name)}',description:'${esc(a.description?.slice(0,100))}',category:'${esc(a.category)}',version:'${esc(a.version)}'})" style="color:var(--purple);font-size:.9rem">&#11015; agent.py.card</a>` : ''}
-             <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Copy Link</a>`}
-        <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?'&#10003; In Cart':'&#128722; Add to Cart'}</a>
-        <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">&#128279; Share</a>
-        ${!isLocalDevice && _uiTier >= 2 ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">&#9889; Stream into Memory</a>` : ''}
+          ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',14)} Remove Local Agent</a>
+             <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',14)} Submit to Store</a>`
+          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',14)} agent.py</a>
+             <a href="#" onclick="event.preventDefault();downloadAsciiCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',14)} card.txt</a>
+             <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',14)} Copy Link</a>`}
+        <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?svgIcon('cart','#39d353',14)+' In Cart':svgIcon('cart','#58a6ff',14)+' Add to Cart'}</a>
+        <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',14)} Share</a>
+        ${!isLocalDevice ? `<a href="#" onclick="event.preventDefault();streamAgent('${esc(a.name)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('lightning','#d2a8ff',14)} Stream into Memory</a>` : ''}
       </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
@@ -4066,7 +4182,7 @@ function renderParsedSource(code, agent) {
     else natural += ' No setup required — just drop it in and run.';
     html += `<div class="parsed-section">
       <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
-        <h4>&#128172; What This Agent Does</h4><span class="toggle-arrow">&#9660;</span>
+        <h4>${svgIcon('speech','#8b949e',16)} What This Agent Does</h4><span class="toggle-arrow">&#9660;</span>
       </div>
       <div class="parsed-section-body">
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.88rem;color:var(--text);line-height:1.7;cursor:pointer" onclick="navigator.clipboard?.writeText(this.innerText);this.style.borderColor='var(--green)';setTimeout(()=>this.style.borderColor='var(--border)',1000)" title="Click to copy">${esc(natural)}</div>
@@ -4103,7 +4219,7 @@ function renderParsedSource(code, agent) {
     }
     html += `<div class="parsed-section">
       <div class="parsed-section-hdr" onclick="toggleParsedSection(this)">
-        <h4>&#128220; Manifest</h4><span class="toggle-arrow">&#9660;</span>
+        <h4>${svgIcon('document','#8b949e',16)} Manifest</h4><span class="toggle-arrow">&#9660;</span>
       </div>
       <div class="parsed-section-body"><table class="manifest-table">${tableRows}</table></div>
     </div>`;
@@ -4147,7 +4263,7 @@ function renderParsedSource(code, agent) {
   if (p.imports.length) {
     html += `<div class="parsed-section">
       <div class="parsed-section-hdr collapsed" onclick="toggleParsedSection(this)">
-        <h4>&#128230; Imports (${p.imports.length})</h4><span class="toggle-arrow">&#9660;</span>
+        <h4>${svgIcon('memo','#8b949e',16)} Imports (${p.imports.length})</h4><span class="toggle-arrow">&#9660;</span>
       </div>
       <div class="parsed-section-body" style="display:none">
         <div style="font-family:'SF Mono',Consolas,monospace;font-size:.8rem;color:var(--text-dim);line-height:1.8">${p.imports.map(i => esc(i)).join('<br>')}</div>
@@ -5060,6 +5176,7 @@ function switchDeck(name) {
   deck = new Set(allDecks[name]);
   localStorage.setItem('rar_current_deck', name);
   renderDeckSelect();
+  renderCompanion();
   renderCards();
 }
 
@@ -5102,6 +5219,148 @@ function deleteDeck() {
   renderCards();
   showToast('Deck deleted', 'success');
 }
+
+// ── Companion + Forge System ──
+// Each deck gets one companion. The companion's ASCII card is "forged" —
+// fused with the owner's identity and the current time. You don't control
+// the output. The forge is emergent: agent hash × owner fingerprint × epoch.
+let _companions = {};
+try { _companions = JSON.parse(localStorage.getItem('rar_companions') || '{}'); } catch(e) {}
+
+function getCompanion() {
+  return _companions[currentDeckName] || null;
+}
+
+function setCompanion(agentName) {
+  if (agentName) {
+    _companions[currentDeckName] = agentName;
+  } else {
+    delete _companions[currentDeckName];
+  }
+  localStorage.setItem('rar_companions', JSON.stringify(_companions));
+  renderCompanion();
+}
+
+// ── The Forge ──
+// Combines three inputs you can't control:
+//   1. The companion agent's identity (name hash)
+//   2. Your identity (Third Space fingerprint or session)
+//   3. The current time epoch (shifts every 15 minutes)
+// Output: a unique ASCII character + blended stats that change over time.
+
+function getOwnerSeed() {
+  // Your identity — fingerprint if signed, otherwise a persistent session hash
+  if (_thirdSpaceIdentity?.fingerprint) return _thirdSpaceIdentity.fingerprint;
+  let sid = localStorage.getItem('rar_session_seed');
+  if (!sid) { sid = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('rar_session_seed', sid); }
+  return sid;
+}
+
+function getTimeSeed() {
+  // Shifts every 15 minutes — the forge output changes on this cycle
+  return Math.floor(Date.now() / (15 * 60 * 1000));
+}
+
+function forgeHash(agentName, ownerSeed, timeSeed) {
+  const raw = agentName + '|' + ownerSeed + '|' + timeSeed;
+  return Math.abs(Array.from(raw).reduce((acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0));
+}
+
+function forgeAsciiArt(agentName) {
+  const h = forgeHash(agentName, getOwnerSeed(), getTimeSeed());
+  const pick = (arr, offset) => arr[Math.abs((h * (offset + 7) * 13) % arr.length)];
+  return [
+    pick(ASCII_PARTS.heads, 1),
+    pick(ASCII_PARTS.eyes, 2),
+    pick(ASCII_PARTS.mouths, 3),
+    pick(ASCII_PARTS.bodies, 4),
+    pick(ASCII_PARTS.legs, 5),
+    pick(ASCII_PARTS.bases, 6),
+  ].join('\n');
+}
+
+function forgeStats(agentName) {
+  const h = forgeHash(agentName, getOwnerSeed(), getTimeSeed());
+  return ASCII_STAT_NAMES.map((label, i) => {
+    const seed = Math.abs((h * (i + 11) * 37) % 100);
+    const pct = 15 + (seed % 80);
+    return { label, pct, color: ASCII_STAT_COLORS[i] };
+  });
+}
+
+function forgeBondLabel() {
+  const t = getTimeSeed();
+  const mins = 15 - (Math.floor(Date.now() / 60000) % 15);
+  return `Bond shifts in ${mins}m`;
+}
+
+function renderCompanion() {
+  const slot = document.getElementById('companion-slot');
+  const avatar = document.getElementById('companion-avatar');
+  const nameEl = document.getElementById('companion-name');
+  const forgeEl = document.getElementById('companion-forge');
+  if (!slot || !avatar || !nameEl) return;
+  const comp = getCompanion();
+  if (comp) {
+    const a = allAgents.find(x => x.name === comp);
+    slot.classList.add('has-companion');
+    nameEl.textContent = a?.display_name || comp.split('/').pop();
+    // Show the forged avatar — first 2 chars shift with the bond
+    const fh = forgeHash(comp, getOwnerSeed(), getTimeSeed());
+    const glyphs = ['\u2666','\u2663','\u2665','\u2660','\u263A','\u2726','\u2736','\u00A7'];
+    avatar.textContent = glyphs[fh % glyphs.length];
+    avatar.style.color = ASCII_STAT_COLORS[fh % ASCII_STAT_COLORS.length];
+    slot.title = `Companion: ${a?.display_name || comp} — ${forgeBondLabel()}`;
+    if (forgeEl) {
+      forgeEl.style.display = '';
+      forgeEl.textContent = forgeBondLabel();
+    }
+  } else {
+    slot.classList.remove('has-companion');
+    nameEl.textContent = 'None';
+    avatar.textContent = '?';
+    avatar.style.color = '';
+    slot.title = 'Set a companion card for this deck';
+    if (forgeEl) forgeEl.style.display = 'none';
+  }
+}
+
+function pickCompanion() {
+  const current = getCompanion();
+  const deckAgents = allAgents.filter(a => deck.has(a.name));
+  if (deckAgents.length === 0) {
+    showToast('Add cards to your deck first', 'info');
+    return;
+  }
+  const choices = deckAgents.map(a => a.display_name).join('\n');
+  const pick = prompt(
+    `Pick a companion for "${currentDeckName}"\n` +
+    (current ? `Current: ${allAgents.find(a => a.name === current)?.display_name || current}\n\n` : '\n') +
+    `Type the name (or "clear" to remove):\n\n` +
+    choices
+  );
+  if (!pick) return;
+  if (pick.toLowerCase() === 'clear') {
+    setCompanion(null);
+    showToast('Companion removed', 'success');
+    renderCards();
+    return;
+  }
+  const match = deckAgents.find(a =>
+    a.display_name.toLowerCase() === pick.toLowerCase() ||
+    a.name.toLowerCase() === pick.toLowerCase()
+  );
+  if (match) {
+    setCompanion(match.name);
+    showToast(`${match.display_name} is now your companion`, 'success');
+    renderCards();
+  } else {
+    showToast('No matching card in deck', 'error');
+  }
+}
+
+// Refresh the forge bond every 60 seconds so the countdown stays accurate
+setInterval(() => { if (getCompanion()) renderCompanion(); }, 60000);
 
 const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'uncommon', experimental: 'common' };
 const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Frontier' };
@@ -5319,14 +5578,7 @@ function getHoloCard(a) {
   return HOLO_CARD_DB[slug] || null;
 }
 
-// Kids card — category to emoji and simplified explanations
-const CAT_TO_EMOJI = {
-  core: '🧠', integrations: '🔌', productivity: '✨', devtools: '🔧', pipeline: '🏗️', general: '🤖',
-  b2b_sales: '🤝', b2c_sales: '🛍️', healthcare: '🏥', financial_services: '💰',
-  manufacturing: '🏭', energy: '⚡', federal_government: '🏛️', slg_government: '🏛️',
-  human_resources: '👥', it_management: '🖥️', professional_services: '📋',
-  retail_cpg: '🛒', software_digital_products: '💻',
-};
+// Category icon helper — uses catIcon() / CAT_TO_GLYPH (SVG art, no emojis)
 const CAT_TO_KIDNAME = {
   core: 'Brain Power', integrations: 'Connector', productivity: 'Helper', devtools: 'Builder Tool',
   pipeline: 'Factory', general: 'Robot Friend', b2b_sales: 'Deal Maker', b2c_sales: 'Shop Helper',
@@ -5914,6 +6166,51 @@ const SEMANTIC_GLYPHS = {
   brain: (p, x, y) => `<ellipse cx="${x}" cy="${y}" rx="16" ry="14" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/><path d="M${x},${y-14} v28" fill="none" stroke="${p}" stroke-width="1" opacity="0.2"/><path d="M${x-8},${y-4} Q${x-2},${y-8} ${x},${y-4} T${x+8},${y-4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/><path d="M${x-6},${y+4} Q${x},${y} ${x+6},${y+4}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.3"/>`,
 };
 
+// ── UI Icon Glyphs — Howard-style SVG art for UI elements (no emojis) ──
+const UI_GLYPHS = {
+  search: (p, x, y) => `<circle cx="${x-3}" cy="${y-3}" r="6" fill="none" stroke="${p}" stroke-width="2" opacity="0.6"/><line x1="${x+1}" y1="${y+1}" x2="${x+7}" y2="${y+7}" stroke="${p}" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>`,
+  cart: (p, x, y) => `<path d="M${x-10},${y-8} l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5" stroke-linejoin="round"/><circle cx="${x-3}" cy="${y+9}" r="2" fill="${p}" opacity="0.4"/><circle cx="${x+8}" cy="${y+9}" r="2" fill="${p}" opacity="0.4"/>`,
+  globe: (p, x, y) => `<circle cx="${x}" cy="${y}" r="10" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><ellipse cx="${x}" cy="${y}" rx="5" ry="10" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  pencil: (p, x, y) => `<path d="M${x-6},${y+8} l10,-14 l4,3 l-10,14 z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><line x1="${x-6}" y1="${y+8}" x2="${x-3}" y2="${y+11}" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  trash: (p, x, y) => `<rect x="${x-7}" y="${y-3}" width="14" height="14" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x-9}" y1="${y-3}" x2="${x+9}" y2="${y-3}" stroke="${p}" stroke-width="1.5" opacity="0.45"/><rect x="${x-3}" y="${y-7}" width="6" height="4" rx="1" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.35"/>`,
+  link: (p, x, y) => `<path d="M${x-4},${y-2} l4,-4 a4,4 0 0,1 6,6 l-4,4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><path d="M${x+4},${y+2} l-4,4 a4,4 0 0,1 -6,-6 l4,-4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/>`,
+  trophy: (p, x, y) => `<path d="M${x-6},${y-10} h12 l-2,12 h-8 z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><path d="M${x-6},${y-8} h-4 a4,4 0 0,0 4,8" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/><path d="M${x+6},${y-8} h4 a4,4 0 0,1 -4,8" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/><rect x="${x-3}" y="${y+2}" width="6" height="3" fill="none" stroke="${p}" stroke-width="1" opacity="0.35"/><line x1="${x-5}" y1="${y+5}" x2="${x+5}" y2="${y+5}" stroke="${p}" stroke-width="1.5" opacity="0.4"/>`,
+  confetti: (p, x, y) => `<line x1="${x}" y1="${y-10}" x2="${x+1}" y2="${y-4}" stroke="${p}" stroke-width="2" opacity="0.5"/><line x1="${x-8}" y1="${y-6}" x2="${x-4}" y2="${y-1}" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x+8}" y1="${y-6}" x2="${x+4}" y2="${y-1}" stroke="${p}" stroke-width="1.5" opacity="0.4"/><circle cx="${x-6}" cy="${y+4}" r="1.5" fill="${p}" opacity="0.3"/><circle cx="${x+6}" cy="${y+4}" r="1.5" fill="${p}" opacity="0.3"/><circle cx="${x}" cy="${y+8}" r="1.5" fill="${p}" opacity="0.25"/>`,
+  book: (p, x, y) => `<rect x="${x-10}" y="${y-10}" width="20" height="22" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x}" y1="${y-10}" x2="${x}" y2="${y+12}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y-4}" x2="${x-2}" y2="${y-4}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x+2}" y1="${y-4}" x2="${x+6}" y2="${y-4}" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  crown: (p, x, y) => `<path d="M${x-10},${y+4} l3,-12 l5,6 l5,-8 l5,6 l3,-4 l-2,12 z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/>`,
+  crystal: (p, x, y) => `<circle cx="${x}" cy="${y-2}" r="10" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><ellipse cx="${x}" cy="${y-2}" rx="10" ry="6" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.25"/><path d="M${x-4},${y+8} l-3,5 h14 l-3,-5" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  flask: (p, x, y) => `<path d="M${x-3},${y-10} v6 l-7,12 a2,2 0 0,0 2,2 h16 a2,2 0 0,0 2,-2 l-7,-12 v-6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><line x1="${x-4}" y1="${y-10}" x2="${x+4}" y2="${y-10}" stroke="${p}" stroke-width="1.5" opacity="0.4"/><circle cx="${x-2}" cy="${y+4}" r="1.5" fill="${p}" opacity="0.3"/><circle cx="${x+2}" cy="${y+2}" r="1" fill="${p}" opacity="0.25"/>`,
+  flame: (p, x, y) => `<path d="M${x},${y-12} C${x+8},${y-4} ${x+10},${y+2} ${x+6},${y+8} C${x+4},${y+12} ${x-4},${y+12} ${x-6},${y+8} C${x-10},${y+2} ${x-8},${y-4} ${x},${y-12} Z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><path d="M${x},${y-4} C${x+4},${y} ${x+4},${y+4} ${x+2},${y+8} C${x},${y+10} ${x-2},${y+8} ${x-2},${y+6} C${x-4},${y+4} ${x-4},${y} ${x},${y-4} Z" fill="none" stroke="${p}" stroke-width="1" opacity="0.3"/>`,
+  speech: (p, x, y) => `<rect x="${x-12}" y="${y-10}" width="24" height="16" rx="4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><path d="M${x-4},${y+6} l-2,6 l6,-4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  memo: (p, x, y) => `<rect x="${x-10}" y="${y-12}" width="20" height="24" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x-6}" y1="${y-6}" x2="${x+6}" y2="${y-6}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y-1}" x2="${x+6}" y2="${y-1}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y+4}" x2="${x+6}" y2="${y+4}" stroke="${p}" stroke-width="1" opacity="0.25"/><line x1="${x-6}" y1="${y+9}" x2="${x+2}" y2="${y+9}" stroke="${p}" stroke-width="1" opacity="0.25"/>`,
+  bag: (p, x, y) => `<rect x="${x-8}" y="${y-2}" width="16" height="14" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><path d="M${x-4},${y-2} v-4 a4,4 0 0,1 8,0 v4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  handshake: (p, x, y) => `<path d="M${x-12},${y} h6 l4,-4 l4,4 h6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><path d="M${x-12},${y+4} l6,-4" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/><path d="M${x+12},${y+4} l-6,-4" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/>`,
+  desktop: (p, x, y) => `<rect x="${x-14}" y="${y-10}" width="28" height="18" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x-4}" y1="${y+8}" x2="${x+4}" y2="${y+8}" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="${x}" y1="${y+8}" x2="${x}" y2="${y+12}" stroke="${p}" stroke-width="1.5" opacity="0.35"/><line x1="${x-6}" y1="${y+12}" x2="${x+6}" y2="${y+12}" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
+  sparkle: (p, x, y) => `<path d="M${x},${y-10} l2,6 l6,2 l-6,2 l-2,6 l-2,-6 l-6,-2 l6,-2 z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><circle cx="${x+8}" cy="${y-6}" r="1.5" fill="${p}" opacity="0.3"/><circle cx="${x-7}" cy="${y+7}" r="1" fill="${p}" opacity="0.25"/>`,
+};
+
+// Render any glyph as an inline SVG icon — no emojis needed
+function svgIcon(name, color, size) {
+  const fn = UI_GLYPHS[name] || SEMANTIC_GLYPHS[name];
+  if (!fn) return '';
+  const s = size || 20;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" style="display:inline-block;vertical-align:middle">${fn(color || '#fff', s/2, s/2)}</svg>`;
+}
+
+// Category → glyph name mapping (replaces emoji mapping)
+const CAT_TO_GLYPH = {
+  core: 'brain', integrations: 'api', productivity: 'sparkle', devtools: 'code',
+  pipeline: 'pipeline', general: 'gear', b2b_sales: 'handshake', b2c_sales: 'bag',
+  healthcare: 'heart', financial_services: 'money', manufacturing: 'factory',
+  energy: 'lightning', federal_government: 'building', slg_government: 'building',
+  human_resources: 'person', it_management: 'desktop', professional_services: 'document',
+  retail_cpg: 'chart', software_digital_products: 'code',
+};
+
+function catIcon(category, color, size) {
+  return svgIcon(CAT_TO_GLYPH[category] || 'gear', color || '#fff', size || 20);
+}
+
 // Map categories/keywords to glyph compositions
 const SEMANTIC_COMPOSITIONS = {
   core: ['brain', 'gear', 'arrow'],
@@ -5958,17 +6255,66 @@ const KEYWORD_GLYPHS = [
   [/document|pdf|word|file/i, 'document'],
 ];
 
+// ── ASCII Terminal Card Helpers ──
+const ASCII_STAT_NAMES = ['POWER', 'SPEED', 'LOGIC', 'CHAOS', 'GUARD'];
+const ASCII_STAT_COLORS = ['#58a6ff', '#39d353', '#d2a8ff', '#f97583', '#e3b341'];
+
+function asciiAgentStats(a) {
+  // Deterministic stats from agent name hash
+  const h = Array.from(a.name).reduce((acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0);
+  return ASCII_STAT_NAMES.map((label, i) => {
+    const seed = Math.abs((h * (i + 7) * 31) % 100);
+    const pct = 20 + (seed % 75); // 20-94%
+    return { label, pct, color: ASCII_STAT_COLORS[i] };
+  });
+}
+
+// Procedural ASCII art — unique per agent, deterministic from name hash
+const ASCII_PARTS = {
+  heads:   ['  .---.', '  /===\\', '  {===}', '  <===>', '  [===]', '  (===)', '  |===|', '  #===#'],
+  eyes:    [' |o  o|', ' |*  *|', ' |@  @|', ' |>  <|', ' |^  ^|', ' |-  -|', ' |.  .|', ' |0  0|'],
+  mouths:  [' | -- |', ' | \\/ |', ' | .. |', ' | == |', ' | <> |', ' | ~~ |', ' | :: |', ' | ## |'],
+  bodies:  [' |####|', ' |/\\/\\|', ' |++++|', ' |~~~~|', ' |::::|', ' |<><>|', ' |%%%%|', ' |xxxx|'],
+  legs:    ['  /||\\', '  /  \\', '  |  |', '  \\  /', '  _/\\_', '  ][  ', '  {  }', '  \\||/'],
+  bases:   [' /    \\', ' ======', ' ------', ' ~~~~~~', ' ######', ' ||||||', ' <<<>>>', ' ......'],
+};
+
+function genAsciiArt(a) {
+  const h = Math.abs(Array.from(a.name).reduce((acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0));
+  const pick = (arr, offset) => arr[Math.abs((h * (offset + 3)) % arr.length)];
+  const lines = [
+    pick(ASCII_PARTS.heads, 1),
+    pick(ASCII_PARTS.eyes, 2),
+    pick(ASCII_PARTS.mouths, 3),
+    pick(ASCII_PARTS.bodies, 4),
+    pick(ASCII_PARTS.legs, 5),
+    pick(ASCII_PARTS.bases, 6),
+  ];
+  return lines.join('\n');
+}
+
 function genCreativeArt(agent) {
   const ac = getArtConfig(agent);
   const rng = ac.rng;
   const p = ac.primary;
-  const shapes = [`<rect width="200" height="120" fill="${ac.bg}"/>`];
 
-  // Pick glyphs: artist override > category composition > keyword augmentation
+  // If artist injected raw SVG, just wrap it
+  if (ac.svg) return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${ac.bg}"/>${ac.svg}</svg>`;
+
+  // Derive a unique ID suffix so filter/gradient IDs don't collide
+  const uid = 'g' + seedHash(agent.name).toString(36).slice(0, 6);
+
+  // Pick color palette: primary + derived secondary
+  const hexToRgb = h => { const n = parseInt(h.replace('#',''),16); return [(n>>16)&255,(n>>8)&255,n&255]; };
+  const [r,g,b] = hexToRgb(p);
+  const darken = (r,g,b,f) => '#' + [r,g,b].map(c => Math.round(c*f).toString(16).padStart(2,'0')).join('');
+  const bgDeep = darken(r, g, b, 0.08);
+  const bgMid = darken(r, g, b, 0.15);
+
+  // Pick glyphs
   let glyphs;
   if (ac.glyphs && ac.glyphs.length) {
-    // Artist explicitly chose their glyphs
-    glyphs = ac.glyphs.filter(g => SEMANTIC_GLYPHS[g]);
+    glyphs = ac.glyphs.filter(gl => SEMANTIC_GLYPHS[gl]);
   } else {
     glyphs = [...(SEMANTIC_COMPOSITIONS[agent.category] || SEMANTIC_COMPOSITIONS.general)];
     const searchText = `${agent.name} ${agent.description || ''} ${(agent.tags || []).join(' ')}`;
@@ -5980,65 +6326,104 @@ function genCreativeArt(agent) {
     }
   }
 
-  // Position glyphs: artist override or balanced defaults with PRNG jitter
-  const defaultPositions = glyphs.length <= 2
-    ? [[70, 60], [130, 60]]
-    : glyphs.length === 3
-    ? [[50, 55], [100, 45], [150, 65]]
-    : [[40, 50], [90, 40], [140, 50], [180, 65]];
+  // ── Build SVG with Howard-quality defs ──
+  let svg = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<defs>`;
+  svg += `<radialGradient id="bg-${uid}"><stop offset="0%" stop-color="${bgMid}"/><stop offset="100%" stop-color="${bgDeep}"/></radialGradient>`;
+  svg += `<filter id="glow-${uid}"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+  svg += `<filter id="glow2-${uid}"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+  svg += `</defs>`;
 
-  const positions = ac.positions && ac.positions.length >= glyphs.length
-    ? ac.positions
-    : defaultPositions;
+  // Background
+  svg += `<rect width="200" height="200" fill="url(#bg-${uid})"/>`;
 
-  const glyphScale = ac.scale;
-  const glyphOpacity = ac.opacity;
+  // Ambient glow at center
+  svg += `<ellipse cx="100" cy="95" rx="60" ry="50" fill="${p}" opacity="0.06"/>`;
 
-  glyphs.forEach((g, i) => {
-    const fn = SEMANTIC_GLYPHS[g];
-    if (!fn) return;
-    const [px, py] = positions[i] || [100, 60];
-    // Seeded PRNG offset for uniqueness (deterministic per seed)
-    const ox = Math.floor(rng() * 10) - 5;
-    const oy = Math.floor(rng() * 8) - 4;
-    const gx = px + ox, gy = py + oy;
-    if (glyphScale !== 1.0 || glyphOpacity !== 1.0) {
-      shapes.push(`<g transform="translate(${gx},${gy}) scale(${glyphScale}) translate(${-gx},${-gy})" opacity="${glyphOpacity}">${fn(p, gx, gy)}</g>`);
-    } else {
-      shapes.push(fn(p, gx, gy));
-    }
-  });
+  // ── Geometric frame: orbital rings/arcs unique per agent ──
+  const frameStyle = Math.floor(rng() * 5);
+  const frameGroup = [];
+  if (frameStyle === 0) {
+    // Concentric circles
+    frameGroup.push(`<circle cx="100" cy="95" r="65" fill="none" stroke="${p}" stroke-width="1" opacity="0.15"/>`);
+    frameGroup.push(`<circle cx="100" cy="95" r="45" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`);
+    frameGroup.push(`<circle cx="100" cy="95" r="25" fill="${p}" opacity="0.06"/>`);
+  } else if (frameStyle === 1) {
+    // Diamond frame
+    frameGroup.push(`<polygon points="100,30 170,95 100,160 30,95" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`);
+    frameGroup.push(`<polygon points="100,50 150,95 100,140 50,95" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+  } else if (frameStyle === 2) {
+    // Hexagon
+    const hex = (cx,cy,rr) => {
+      const pts = [];
+      for (let i=0;i<6;i++) { const a=Math.PI/3*i-Math.PI/6; pts.push(`${cx+rr*Math.cos(a)},${cy+rr*Math.sin(a)}`); }
+      return pts.join(' ');
+    };
+    frameGroup.push(`<polygon points="${hex(100,95,60)}" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`);
+    frameGroup.push(`<polygon points="${hex(100,95,40)}" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+  } else if (frameStyle === 3) {
+    // Orbital ellipses (like ContextMemory)
+    frameGroup.push(`<ellipse cx="100" cy="95" rx="60" ry="30" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.25"/>`);
+    frameGroup.push(`<ellipse cx="100" cy="95" rx="60" ry="30" fill="none" stroke="${p}" stroke-width="1" opacity="0.15" transform="rotate(90 100 95)"/>`);
+    frameGroup.push(`<ellipse cx="100" cy="95" rx="60" ry="30" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.1" transform="rotate(45 100 95)"/>`);
+  } else {
+    // Square/tech frame
+    frameGroup.push(`<rect x="40" y="40" width="120" height="110" rx="6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.18"/>`);
+    frameGroup.push(`<rect x="55" y="55" width="90" height="80" rx="3" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
+    // Crosshair lines
+    frameGroup.push(`<line x1="40" y1="95" x2="160" y2="95" stroke="${p}" stroke-width="0.5" opacity="0.1"/>`);
+    frameGroup.push(`<line x1="100" y1="40" x2="100" y2="150" stroke="${p}" stroke-width="0.5" opacity="0.1"/>`);
+  }
+  svg += `<g filter="url(#glow-${uid})">${frameGroup.join('')}</g>`;
 
-  // Connecting flow lines between glyphs (can be disabled via card_art.flow_lines: false)
-  if (ac.flowLines) {
-    for (let i = 0; i < glyphs.length - 1; i++) {
-      const [x1, y1] = positions[i] || [100, 60];
-      const [x2, y2] = positions[i + 1] || [100, 60];
-      const mx = (x1 + x2) / 2;
-      shapes.push(`<path d="M${x1 + 16},${y1} Q${mx},${Math.min(y1, y2) - 8} ${x2 - 16},${y2}" fill="none" stroke="${p}" stroke-width="0.8" opacity="0.15" stroke-dasharray="3,3"/>`);
+  // ── Hero glyph: large, centered, glowing ──
+  const heroGlyph = glyphs[0];
+  const heroFn = SEMANTIC_GLYPHS[heroGlyph];
+  if (heroFn) {
+    // Render hero glyph at 2.5x scale, centered
+    svg += `<g filter="url(#glow2-${uid})" transform="translate(100,95) scale(2.5) translate(-100,-95)" opacity="0.8">${heroFn(p, 100, 95)}</g>`;
+    // Filled center dot for presence
+    svg += `<circle cx="100" cy="95" r="4" fill="${p}" opacity="0.5"/>`;
+  }
+
+  // ── Supporting glyphs: smaller, positioned around the hero ──
+  const supportPositions = [
+    [45, 45], [155, 45], [45, 145], [155, 145],  // corners
+  ];
+  for (let i = 1; i < glyphs.length && i < 4; i++) {
+    const fn = SEMANTIC_GLYPHS[glyphs[i]];
+    if (!fn) continue;
+    const [sx, sy] = supportPositions[i - 1];
+    const ox = Math.floor(rng() * 12) - 6;
+    const oy = Math.floor(rng() * 12) - 6;
+    svg += `<g opacity="0.35" transform="translate(${sx+ox},${sy+oy}) scale(0.9) translate(${-(sx+ox)},${-(sy+oy)})">${fn(p, sx + ox, sy + oy)}</g>`;
+  }
+
+  // ── Accent dots: small glowing nodes at deterministic positions ──
+  const dotCount = 4 + Math.floor(rng() * 5);
+  for (let i = 0; i < dotCount; i++) {
+    const dx = 20 + Math.floor(rng() * 160);
+    const dy = 20 + Math.floor(rng() * 160);
+    const dr = 1 + rng() * 2;
+    svg += `<circle cx="${dx}" cy="${dy}" r="${dr}" fill="${p}" opacity="${0.15 + rng() * 0.2}"/>`;
+  }
+
+  // ── Connecting lines between hero and supports ──
+  if (ac.flowLines && glyphs.length > 1) {
+    for (let i = 1; i < glyphs.length && i < 4; i++) {
+      const [sx, sy] = supportPositions[i - 1];
+      svg += `<line x1="100" y1="95" x2="${sx}" y2="${sy}" stroke="${p}" stroke-width="0.8" opacity="0.1" stroke-dasharray="3,4"/>`;
     }
   }
 
-  // Background pattern: artist override or seeded PRNG selection
-  const bgChoice = ac.background || ['dots', 'scanlines', 'corners'][Math.floor(rng() * 3)];
-  if (bgChoice === 'dots') {
-    for (let x = 10; x < 200; x += 20) for (let y = 10; y < 120; y += 20) {
-      if (rng() < 0.2) shapes.push(`<circle cx="${x}" cy="${y}" r="0.8" fill="${p}" opacity="0.08"/>`);
-    }
-  } else if (bgChoice === 'scanlines') {
-    for (let y = 0; y < 120; y += 6) shapes.push(`<line x1="0" y1="${y}" x2="200" y2="${y}" stroke="${p}" stroke-width="0.3" opacity="0.04"/>`);
-  } else if (bgChoice === 'corners') {
-    shapes.push(`<path d="M0,20 L0,0 L20,0" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
-    shapes.push(`<path d="M180,0 L200,0 L200,20" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
-    shapes.push(`<path d="M0,100 L0,120 L20,120" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
-    shapes.push(`<path d="M180,120 L200,120 L200,100" fill="none" stroke="${p}" stroke-width="1" opacity="0.12"/>`);
-  }
-  // bgChoice === 'none' → no background pattern
+  // ── Corner tech marks ──
+  svg += `<path d="M8,24 L8,8 L24,8" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`;
+  svg += `<path d="M176,8 L192,8 L192,24" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`;
+  svg += `<path d="M8,176 L8,192 L24,192" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`;
+  svg += `<path d="M176,192 L192,192 L192,176" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.2"/>`;
 
-  // Inject artist custom SVG if provided
-  if (ac.svg) shapes.push(ac.svg);
-
-  return `<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">${shapes.join('')}</svg>`;
+  svg += `</svg>`;
+  return svg;
 }
 
 function setCardMode(mode, el) {
@@ -6150,9 +6535,14 @@ function agentToCard(a) {
     ? holoManaCost.replace(/\{(\w+)\}/g, (_, p) => `<span class="holo-pip ${p.length === 1 && 'WUBRGN'.includes(p) ? p : 'C'}">${p}</span>`)
     : pips.map(p => `<span class="holo-pip ${p}">${p}</span>`).join('');
   const holoFace = `
-    <div class="agent-card-holo">
+    <div class="agent-card-holo" style="border-color:${cc.border}">
+      <div class="holo-rarity-gem ${holoRarity}"></div>
       <div class="holo-shimmer-track"></div>
       <div class="holo-prism"></div>
+      <div class="holo-fresnel"></div>
+      <div class="holo-scanlines"></div>
+      <div class="holo-orbit-cyan"></div>
+      <div class="holo-orbit-magenta"></div>
       <div class="holo-header">
         <div style="min-width:0;flex:1;overflow:hidden">
           <div class="holo-name">${esc(a.display_name)}</div>
@@ -6186,35 +6576,29 @@ function agentToCard(a) {
       </div>
     </div>`;
 
-  // ── Kids Card Face ──
-  const kEmoji = CAT_TO_EMOJI[a.category] || '🤖';
-  const kCatName = CAT_TO_KIDNAME[a.category] || 'Robot Helper';
-  const kExplain = kidsExplain(a.description);
-  const kStars = kidsComplexity(a);
-  const kInputs = (a.requires_env || []).length
-    ? `It needs: ${a.requires_env.map(v => v.replace(/_/g, ' ').toLowerCase()).join(', ')}`
-    : 'No setup needed — just run it!';
-  const kidsFace = `
-    <div class="agent-card-kids">
-      <div class="kids-header">
-        <span class="kids-name">${esc(a.display_name)}</span>
-        <span class="kids-emoji">${kEmoji}</span>
+  // ── ASCII Terminal Card Face ──
+  // If this is the companion, the forge takes over — art and stats
+  // are fused from agent × owner × time. You can't control it.
+  const isForged = getCompanion() === a.name;
+  const asciiStats = isForged ? forgeStats(a.name) : asciiAgentStats(a);
+  const asciiArtStr = isForged ? forgeAsciiArt(a.name) : genAsciiArt(a);
+  const forgedLabel = isForged ? `<span style="color:var(--purple);font-size:.4rem;margin-left:4px">FORGED</span>` : '';
+  const forgeBorder = isForged ? 'border-color:var(--purple)' : '';
+  const forgeScan = isForged ? 'animation-duration:1.5s' : '';
+  const asciiFace = `
+    <div class="agent-card-ascii" style="${forgeBorder}">
+      <div class="ascii-header">
+        <span class="ascii-name">${esc(a.display_name)}${forgedLabel}</span>
+        <span class="ascii-tier">[${(tier || 'community').toUpperCase()}]</span>
       </div>
-      <div class="kids-art">${genCreativeArt(a)}</div>
-      <div class="kids-section">
-        <div class="kids-label what">What does it do?</div>
-        <div class="kids-explain">${esc(kExplain)}</div>
+      <div class="ascii-art" style="${isForged ? 'color:#d2a8ff' : ''}">${asciiArtStr}</div>
+      <div class="ascii-stats">
+        ${asciiStats.map(s => `<div class="ascii-stat-row"><span class="ascii-stat-label">${s.label}</span><div class="ascii-stat-bar"><div class="ascii-stat-fill" style="width:${s.pct}%;background:${s.color}"></div></div></div>`).join('')}
       </div>
-      <div class="kids-section">
-        <div class="kids-label needs">What does it need?</div>
-        <div class="kids-explain">${esc(kInputs)}</div>
-      </div>
-      <div class="kids-footer">
-        <div>
-          <div style="font-size:.55rem;color:#94a3b8;margin-bottom:2px">Difficulty</div>
-          <div class="kids-level">${Array.from({length:5}, (_, i) => `<span class="kids-star ${i < kStars ? 'on' : 'off'}">&#9733;</span>`).join('')}</div>
-        </div>
-        <span class="kids-cat">${kCatName}</span>
+      <div class="ascii-flavor">${isForged ? esc(forgeBondLabel()) : esc(flavor)}</div>
+      <div class="ascii-footer">
+        <span>${esc(a.name)} v${a.version || '?'}</span>
+        <span class="ascii-pt">${power}/${toughness}</span>
       </div>
     </div>`;
 
@@ -6225,7 +6609,7 @@ function agentToCard(a) {
     back = null;
     canFlip = false;
   } else if (cardMode === 'kids') {
-    front = kidsFace;
+    front = asciiFace;
     back = bizFace;
     canFlip = true;
   } else {
@@ -6391,6 +6775,21 @@ function renderCards() {
     return;
   }
   document.getElementById('cards-grid').innerHTML = filtered.map(agentToCard).join('');
+  // Mark companion card with badge
+  const comp = getCompanion();
+  if (comp) {
+    const compId = 'card-' + comp.replace(/[^a-z0-9]/gi, '_');
+    const compEl = document.getElementById(compId);
+    if (compEl) {
+      compEl.style.position = 'relative';
+      const badge = document.createElement('div');
+      badge.className = 'companion-badge';
+      badge.textContent = '\u2605';
+      badge.title = 'Companion card';
+      compEl.appendChild(badge);
+    }
+  }
+  renderCompanion();
 }
 
 // ── Holographic tilt: grab & move cards to see shimmer ──
@@ -6440,7 +6839,13 @@ function renderCards() {
 })();
 
 function toggleDeckCard(name) {
-  if (deck.has(name)) deck.delete(name); else deck.add(name);
+  if (deck.has(name)) {
+    deck.delete(name);
+    // If removed card was the companion, clear it
+    if (getCompanion() === name) setCompanion(null);
+  } else {
+    deck.add(name);
+  }
   saveDecks();
   renderDeckSelect();
   renderCards();
@@ -6478,19 +6883,19 @@ async function shareDeck() {
 const PACK_SETS = [
   {
     id: 'genesis', name: 'Genesis', sub: 'Season 1 — The Beginning',
-    cssClass: 'pack-genesis', icon: '🔮', cards: 5,
+    cssClass: 'pack-genesis', get icon() { return svgIcon('crystal', '#d2a8ff', 48); }, cards: 5,
     desc: 'The original set. 5 cards per pack. Weighted rarity.',
     filter: () => true,
   },
   {
     id: 'frontier', name: 'Frontier', sub: 'Experimental & Bleeding Edge',
-    cssClass: 'pack-frontier', icon: '🧪', cards: 3,
+    cssClass: 'pack-frontier', get icon() { return svgIcon('flask', '#39d353', 48); }, cards: 3,
     desc: '3 experimental-tier agents. Higher mythic chance.',
     filter: a => a.quality_tier === 'experimental' || a.category === 'pipeline' || a.category === 'devtools',
   },
   {
     id: 'inferno', name: 'Inferno', sub: 'Sales & Industry Power',
-    cssClass: 'pack-inferno', icon: '🔥', cards: 5,
+    cssClass: 'pack-inferno', get icon() { return svgIcon('flame', '#f97583', 48); }, cards: 5,
     desc: '5 industry vertical agents. B2B, healthcare, finance.',
     filter: a => ['b2b_sales','b2c_sales','healthcare','financial_services','manufacturing','energy','retail_cpg','professional_services'].includes(a.category),
   },
@@ -6633,6 +7038,75 @@ async function mintCard(agentName, setId) {
 
   await saveMinted(card);
   return card;
+}
+
+// ── Howard Starter Pack ──
+// Every new user gets Howard's 13 HOLO promo cards on first visit.
+async function mintHoloCard(slug) {
+  const holoData = HOLO_CARD_DB[slug];
+  if (!holoData) return null;
+
+  // Find matching agent in registry by agent_name field or display_name slug
+  let a = holoData.agent_name ? allAgents.find(x => x.name === holoData.agent_name) : null;
+  if (!a) a = allAgents.find(x => (x.display_name || '').replace(/[^a-zA-Z]/g, '').toLowerCase() === slug);
+  if (!a) return null; // Agent not in registry
+
+  const existing = await getAllMinted();
+  const agentMints = existing.filter(c => c.agentName === a.name);
+  const mintNum = agentMints.length + 1;
+  const mintId = generateMintId();
+  const now = Date.now();
+  const seed = hashCode(mintId + a.name + now);
+
+  const card = {
+    mintId,
+    serial: `HOLO-${String(Object.keys(HOLO_CARD_DB).indexOf(slug) + 1).padStart(3, '0')}-${String(mintNum).padStart(4, '0')}-${mintId}`,
+    agentName: a.name,
+    displayName: a.display_name,
+    setId: 'HOLO',
+    mintNum,
+    mintedAt: now,
+    version: a.version,
+    tier: holoData.rarity === 'mythic' ? 'official' : holoData.rarity === 'rare' ? 'verified' : 'community',
+    category: a.category,
+    sourceHash: hashCode(JSON.stringify(a)).toString(16).toUpperCase().padStart(8, '0'),
+    variations: {
+      centeringX: ((seed % 200) - 100) / 200,
+      centeringY: (((seed >> 8) % 200) - 100) / 200,
+      inkSaturation: 0.85 + ((seed >> 4) % 30) / 100,
+      holoIntensity: 0.7 + ((seed >> 12) % 60) / 100,
+      cornerSharpness: 0.95 + ((seed >> 6) % 10) / 100,
+      surfaceNoise: (seed >> 16) % 100,
+      centerScore: 10 - Math.floor(Math.abs(((seed % 200) - 100) / 200) * 8 + Math.abs((((seed >> 8) % 200) - 100) / 200) * 8),
+    },
+    transfers: 0,
+    lastTransfer: null,
+    provenance: [{ action: 'mint', timestamp: new Date(now).toISOString(), source: 'howard-starter-pack' }],
+    votesAtMint: 0,
+    tierAtMint: a.quality_tier || 'community',
+    isFirstEdition: true,
+    cube: cubeToHex(initCube()),
+    _thirdspace: null,
+  };
+  card.grade = gradeCard(card);
+  await saveMinted(card);
+  return card;
+}
+
+async function provisionStarterPack() {
+  if (localStorage.getItem('rar_howard_starter')) return;
+  if (!allAgents.length) return; // Registry not loaded yet
+
+  let minted = 0;
+  for (const slug of Object.keys(HOLO_CARD_DB)) {
+    const card = await mintHoloCard(slug);
+    if (card) minted++;
+  }
+  if (minted > 0) {
+    localStorage.setItem('rar_howard_starter', String(Date.now()));
+    showToast(`Howard's Starter Pack \u2014 ${minted} HOLO cards added`, 'success');
+    renderCollection();
+  }
 }
 
 // ── Grading Engine (PSA 1–10 scale) ──
@@ -7403,8 +7877,8 @@ function openHail() {
       </div>
       <div class="hail-services" id="hail-services">
         <button class="hail-svc active" onclick="setHailService('download',this)">agent.py</button>
-        ${_uiTier >= 2 ? `<button class="hail-svc" onclick="setHailService('stream',this)">Stream</button>
-        <button class="hail-svc" onclick="setHailService('flick',this)">Flick</button>` : ''}
+        <button class="hail-svc" onclick="setHailService('stream',this)">Stream</button>
+        <button class="hail-svc" onclick="setHailService('flick',this)">Send</button>
       </div>
       <div class="hail-dispatch">
         <button class="hail-go" id="hail-go" onclick="dispatchHail()" disabled>Select an agent</button>
@@ -7478,9 +7952,6 @@ function hailSearch(query) {
       if (desc.includes(w)) score += 2;
       if (tags.includes(w)) score += 1;
     }
-
-    // Intent boost
-    score += intentWeight(a) * 2;
 
     return { ...a, _hailScore: score };
   }).filter(a => a._hailScore > 0)
@@ -7796,13 +8267,13 @@ async function openPack(setId) {
 
     const canvas = document.createElement('canvas');
     canvas.width = 250; canvas.height = 350;
-    renderMiniCard(canvas, c);
+    await renderMiniCard(canvas, c);
     div.appendChild(canvas);
 
-    div.innerHTML += `<div class="pack-reveal-grade">${gl.label}</div>`;
-    div.innerHTML += `<div class="pack-reveal-serial">${c.serial}</div>`;
+    div.insertAdjacentHTML('beforeend', `<div class="pack-reveal-grade">${gl.label}</div>`);
+    div.insertAdjacentHTML('beforeend', `<div class="pack-reveal-serial">${c.serial}</div>`);
     if (c.isFirstEdition) {
-      div.innerHTML += `<div style="position:absolute;top:8px;left:8px;background:rgba(255,215,0,.9);color:#000;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px">1ST EDITION</div>`;
+      div.insertAdjacentHTML('beforeend', `<div style="position:absolute;top:8px;left:8px;background:rgba(255,215,0,.9);color:#000;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px">1ST EDITION</div>`);
     }
     div.onclick = () => openSlabViewer(c.mintId);
     row.appendChild(div);
@@ -7851,104 +8322,194 @@ async function openPack(setId) {
   }
 }
 
-function renderMiniCard(canvas, card) {
+async function renderMiniCard(canvas, card) {
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
   const a = allAgents.find(x => x.name === card.agentName);
   if (!a) return;
 
   const v = card.variations;
-
-  // Background with ink saturation variation
   const sat = v.inkSaturation;
-  ctx.fillStyle = `rgb(${Math.round(42 * sat)}, ${Math.round(36 * sat)}, ${Math.round(24 * sat)})`;
+  const cc = getCatColor(a.category);
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
+  const ox = v.centeringX * 2, oy = v.centeringY * 2;
+
+  // ── Background gradient ──
+  const bgGrad = ctx.createLinearGradient(0, 0, W * 0.3, H);
+  bgGrad.addColorStop(0, `rgb(${Math.round(44 * sat)}, ${Math.round(38 * sat)}, ${Math.round(26 * sat)})`);
+  bgGrad.addColorStop(0.5, `rgb(${Math.round(28 * sat)}, ${Math.round(22 * sat)}, ${Math.round(16 * sat)})`);
+  bgGrad.addColorStop(1, `rgb(${Math.round(34 * sat)}, ${Math.round(28 * sat)}, ${Math.round(20 * sat)})`);
+  ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, W, H);
 
-  // Holo shimmer (intensity varies per card)
+  // ── Holo shimmer bands ──
   for (let y = 0; y < H; y += 2) {
     const hue = (y * 1.2 + v.surfaceNoise * 3) % 360;
-    ctx.fillStyle = `hsla(${hue}, 80%, 60%, ${0.015 * v.holoIntensity})`;
+    ctx.fillStyle = `hsla(${hue}, 80%, 60%, ${0.02 * v.holoIntensity})`;
     ctx.fillRect(0, y, W, 2);
   }
 
-  // Border with centering offset
-  const ox = v.centeringX * 3, oy = v.centeringY * 3;
-  ctx.strokeStyle = '#8b7332';
-  ctx.lineWidth = 3;
-  ctx.strokeRect(4 + ox, 4 + oy, W - 8, H - 8);
+  // ── Category-colored border ──
+  ctx.strokeStyle = cc.border;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  const br = 12;
+  ctx.roundRect(3 + ox, 3 + oy, W - 6, H - 6, br);
+  ctx.stroke();
 
-  // Name
-  ctx.fillStyle = '#e8dcc8';
-  ctx.font = `bold 14px -apple-system, sans-serif`;
-  ctx.fillText(a.display_name, 12 + ox, 24 + oy);
+  // Inner border shadow
+  ctx.strokeStyle = 'rgba(0,0,0,.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(7 + ox, 7 + oy, W - 14, H - 14, br - 2);
+  ctx.stroke();
 
-  // Art area
-  const artY = 34 + oy, artH = 110;
-  ctx.fillStyle = '#0d0a06';
-  ctx.fillRect(10 + ox, artY, W - 20, artH);
+  // ── Header: Name ──
+  ctx.fillStyle = '#f0e6d0';
+  ctx.font = `bold 16px -apple-system, sans-serif`;
+  ctx.shadowColor = 'rgba(0,0,0,.6)';
+  ctx.shadowBlur = 3;
+  ctx.fillText(a.display_name, 14 + ox, 28 + oy, W - 60);
+  ctx.shadowBlur = 0;
 
-  // Mini generative art
-  const hash = hashCode(card.mintId + a.name);
-  for (let i = 0; i < 25; i++) {
-    const x = 12 + ((hash * (i + 1) * 7) % (W - 24));
-    const y = artY + 2 + ((hash * (i + 3) * 13) % (artH - 4));
-    const r = 2 + (hash * (i + 5)) % 8;
-    const hue = (hash + i * 37 + v.surfaceNoise) % 360;
+  // Mana pips (small circles top-right)
+  const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
+  const PIP_COLORS = { W:'#f9faf4', U:'#0e68ab', B:'#2a1f10', R:'#d3202a', G:'#00733e', N:'#9e9e9e' };
+  pips.forEach((p, i) => {
+    const px = W - 18 - i * 18 + ox, py = 18 + oy;
     ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fillStyle = `hsla(${hue}, ${60 * sat}%, 50%, ${0.4 * sat})`;
+    ctx.arc(px, py, 8, 0, Math.PI * 2);
+    ctx.fillStyle = PIP_COLORS[p] || '#9e9e9e';
     ctx.fill();
-  }
+    ctx.strokeStyle = 'rgba(0,0,0,.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = p === 'W' ? '#333' : '#fff';
+    ctx.font = 'bold 9px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(p, px, py + 3);
+    ctx.textAlign = 'left';
+  });
 
-  // Type line
+  // ── Art area with inner glow ──
+  const artY = 40 + oy, artH = H * 0.36;
+  // Art background
+  ctx.fillStyle = '#0d0a06';
+  ctx.fillRect(12 + ox, artY, W - 24, artH);
+  // Art border
+  ctx.strokeStyle = cc.border + '80';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(12 + ox, artY, W - 24, artH);
+  // Radial glow vignette inside art area
+  const artGlow = ctx.createRadialGradient(W / 2, artY + artH / 2, 0, W / 2, artY + artH / 2, artH * 0.8);
+  artGlow.addColorStop(0, cc.primary + '20');
+  artGlow.addColorStop(0.5, cc.primary + '0a');
+  artGlow.addColorStop(1, 'transparent');
+  ctx.fillStyle = artGlow;
+  ctx.fillRect(12 + ox, artY, W - 24, artH);
+
+  // ── Card art: use custom avatar_svg if available, else generate ──
+  const holo = getHoloCard(a);
+  const svgStr = holo?.avatar_svg || genCreativeArt(a);
+  const artW = W - 24, artHInner = artH;
+  await new Promise(resolve => {
+    const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      ctx.drawImage(img, 12 + ox, artY, artW, artHInner);
+      URL.revokeObjectURL(url);
+      resolve();
+    };
+    img.onerror = resolve; // Don't block if SVG fails
+    img.src = url;
+  });
+
+  // ── Type line ──
   const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
-  ctx.fillStyle = 'rgba(50,40,25,.7)';
-  ctx.fillRect(0, artY + artH + 4, W, 18);
-  ctx.fillStyle = '#b8a88a';
-  ctx.font = '8px -apple-system, sans-serif';
-  ctx.fillText(`Creature — ${creatureType}`, 10 + ox, artY + artH + 16);
-
-  // Description
-  ctx.fillStyle = 'rgba(30,25,15,.5)';
-  ctx.fillRect(6, artY + artH + 26, W - 12, H - artY - artH - 60);
+  ctx.fillStyle = 'rgba(50,40,25,.8)';
+  ctx.fillRect(10, artY + artH + 4, W - 20, 20);
   ctx.fillStyle = '#c8b89a';
-  ctx.font = '8px -apple-system, sans-serif';
-  const desc = (a.description || '').slice(0, 100);
+  ctx.font = '10px -apple-system, sans-serif';
+  ctx.fillText(`Creature \u2014 ${creatureType}`, 14 + ox, artY + artH + 18);
+
+  // ── Ability text ──
+  const textTop = artY + artH + 28;
+  const textH = H - textTop - 40;
+  ctx.fillStyle = 'rgba(30,25,15,.5)';
+  ctx.fillRect(10, textTop, W - 20, textH);
+  ctx.fillStyle = '#d8c8a8';
+  ctx.font = '10px -apple-system, sans-serif';
+  const desc = (a.description || '').slice(0, 120);
   const words = desc.split(' ');
-  let line = '', ly = artY + artH + 40;
+  let line = '', ly = textTop + 16;
   for (const word of words) {
-    if (ctx.measureText(line + word).width > W - 28) {
-      ctx.fillText(line.trim(), 12, ly);
-      line = word + ' '; ly += 12;
+    if (ctx.measureText(line + word).width > W - 36) {
+      ctx.fillText(line.trim(), 16, ly);
+      line = word + ' '; ly += 14;
+      if (ly > textTop + textH - 4) break;
     } else { line += word + ' '; }
   }
-  if (line.trim()) ctx.fillText(line.trim(), 12, ly);
+  if (line.trim() && ly <= textTop + textH - 4) ctx.fillText(line.trim(), 16, ly);
 
-  // Footer
-  const tier = a.quality_tier || 'community';
-  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-  ctx.fillStyle = '#8b7332';
-  ctx.font = 'bold 7px -apple-system, sans-serif';
-  ctx.fillText(`HOLO · ${rarity.toUpperCase()}`, 10, H - 14);
+  // ── Footer ──
+  // Rarity text with glow
+  const rarityColors = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+  ctx.fillStyle = rarityColors[rarity] || '#8b7332';
+  ctx.font = 'bold 9px -apple-system, sans-serif';
+  ctx.fillText(`HOLO \u00B7 ${rarity.toUpperCase()}`, 14, H - 16);
+
+  // P/T stats — big, bold, pill background
   const depCount = (a.dependencies || []).length;
   const power = Math.max(1, (a.tags || []).length + depCount);
   const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + (a.requires_env || []).length);
-  ctx.fillStyle = '#e8dcc8';
-  ctx.font = 'bold 14px -apple-system, sans-serif';
+  const ptText = `${power}/${toughness}`;
+  ctx.font = 'bold 18px -apple-system, sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText(`${power}/${toughness}`, W - 10, H - 10);
+  const ptW = ctx.measureText(ptText).width + 16;
+  // Pill background
+  ctx.fillStyle = 'rgba(40,35,20,.7)';
+  ctx.beginPath();
+  ctx.roundRect(W - ptW - 8, H - 30, ptW, 22, 4);
+  ctx.fill();
+  ctx.strokeStyle = cc.border + '60';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(W - ptW - 8, H - 30, ptW, 22, 4);
+  ctx.stroke();
+  // P/T text
+  ctx.fillStyle = '#f0e6d0';
+  ctx.shadowColor = 'rgba(0,0,0,.5)';
+  ctx.shadowBlur = 2;
+  ctx.fillText(ptText, W - 12, H - 13);
+  ctx.shadowBlur = 0;
   ctx.textAlign = 'left';
 
-  // Wear overlay (degrades with grade)
+  // ── Rarity gem (top-right corner) ──
+  const gemColors = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+  const gemX = W - 16, gemY = 42 + oy;
+  ctx.beginPath();
+  ctx.arc(gemX, gemY, 7, 0, Math.PI * 2);
+  const gemGrad = ctx.createRadialGradient(gemX - 2, gemY - 2, 0, gemX, gemY, 7);
+  gemGrad.addColorStop(0, '#fff');
+  gemGrad.addColorStop(1, gemColors[rarity] || '#8b7332');
+  ctx.fillStyle = gemGrad;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.4)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // ── Wear overlay (degrades with grade) ──
   const wear = 10 - card.grade;
   if (wear > 1) {
-    // Edge whitening
     ctx.strokeStyle = `rgba(255,255,255,${wear * 0.02})`;
     ctx.lineWidth = wear * 0.5;
-    ctx.strokeRect(2, 2, W - 4, H - 4);
+    ctx.beginPath();
+    ctx.roundRect(2, 2, W - 4, H - 4, br);
+    ctx.stroke();
   }
   if (wear > 3) {
-    // Surface scratches
     for (let i = 0; i < wear; i++) {
       const sx = Math.random() * W;
       const sy = Math.random() * H;
@@ -8070,13 +8631,13 @@ async function renderCollection() {
   } else if (sort === 'date') cards.sort((a, b) => b.mintedAt - a.mintedAt);
 
   if (_collView === 'binder') {
-    renderBinderView(cards, gridEl);
+    await renderBinderView(cards, gridEl);
   } else {
-    renderGridView(cards, gridEl);
+    await renderGridView(cards, gridEl);
   }
 }
 
-function renderGridView(cards, gridEl) {
+async function renderGridView(cards, gridEl) {
   gridEl.className = 'collection-grid';
   gridEl.innerHTML = cards.map(c => {
     const gl = gradeLabel(c.grade);
@@ -8096,13 +8657,13 @@ function renderGridView(cards, gridEl) {
     </div>`;
   }).join('');
 
-  cards.forEach(c => {
+  for (const c of cards) {
     const canvas = gridEl.querySelector(`canvas[data-mint="${c.mintId}"]`);
-    if (canvas) renderMiniCard(canvas, c);
-  });
+    if (canvas) await renderMiniCard(canvas, c);
+  }
 }
 
-function renderBinderView(cards, gridEl) {
+async function renderBinderView(cards, gridEl) {
   gridEl.className = ''; // remove collection-grid styles
   const pageSize = 9;
   const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
@@ -8153,11 +8714,11 @@ function renderBinderView(cards, gridEl) {
 
   gridEl.innerHTML = html;
 
-  pageCards.forEach(c => {
-    if (!c) return;
+  for (const c of pageCards) {
+    if (!c) continue;
     const canvas = gridEl.querySelector(`canvas[data-bind-mint="${c.mintId}"]`);
-    if (canvas) renderMiniCard(canvas, c);
-  });
+    if (canvas) await renderMiniCard(canvas, c);
+  }
 }
 
 async function exportCollection() {
@@ -8168,6 +8729,219 @@ async function exportCollection() {
     await new Promise(r => setTimeout(r, 300));
   }
   showToast(`Exported ${cards.length} cards`, 'success');
+}
+
+// ═══════════════════════════════════════════════════════
+// Slide Presentation — virtual PowerPoint for cards
+// ═══════════════════════════════════════════════════════
+let _slideIdx = 0;
+let _slideCards = [];
+let _slideOverlay = null;
+
+async function openSlidesPresentation() {
+  _slideCards = await getAllMinted();
+  if (!_slideCards.length) { showToast('No cards to present', 'error'); return; }
+  _slideCards.forEach(c => { c.grade = gradeCard(c); });
+  _slideIdx = 0;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'slides-overlay';
+  overlay.id = 'slides-overlay';
+  _slideOverlay = overlay;
+
+  overlay.innerHTML = `
+    <div class="slides-toolbar">
+      <div class="slides-toolbar-left">
+        <button class="slides-close" onclick="closeSlidesPresentation()">Exit</button>
+        <span class="slides-counter" id="slide-counter">1 / ${_slideCards.length}</span>
+      </div>
+      <div class="slides-toolbar-right">
+        <button class="slides-nav-btn" id="slide-prev" onclick="slideNav(-1)">&#8592;</button>
+        <button class="slides-nav-btn" id="slide-next" onclick="slideNav(1)">&#8594;</button>
+      </div>
+    </div>
+    <div class="slides-stage" id="slides-stage"></div>
+    <div class="slides-dots" id="slides-dots">
+      ${_slideCards.map((_, i) => `<div class="slides-dot ${i === 0 ? 'active' : ''}" onclick="slideGo(${i})"></div>`).join('')}
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  // Keyboard nav
+  overlay._keyHandler = (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); slideNav(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); slideNav(-1); }
+    else if (e.key === 'Escape') closeSlidesPresentation();
+  };
+  document.addEventListener('keydown', overlay._keyHandler);
+
+  await renderSlide();
+}
+
+function closeSlidesPresentation() {
+  const overlay = document.getElementById('slides-overlay');
+  if (overlay) {
+    if (overlay._keyHandler) document.removeEventListener('keydown', overlay._keyHandler);
+    overlay.remove();
+  }
+  document.body.style.overflow = '';
+  _slideOverlay = null;
+}
+
+async function slideNav(dir) {
+  const next = _slideIdx + dir;
+  if (next < 0 || next >= _slideCards.length) return;
+  _slideIdx = next;
+  await renderSlide();
+}
+
+async function slideGo(idx) {
+  if (idx < 0 || idx >= _slideCards.length) return;
+  _slideIdx = idx;
+  await renderSlide();
+}
+
+async function renderSlide() {
+  const stage = document.getElementById('slides-stage');
+  const counter = document.getElementById('slide-counter');
+  const prevBtn = document.getElementById('slide-prev');
+  const nextBtn = document.getElementById('slide-next');
+  if (!stage) return;
+
+  const card = _slideCards[_slideIdx];
+  const a = allAgents.find(x => x.name === card.agentName);
+  if (!a) return;
+
+  const cc = getCatColor(a.category);
+  const holo = getHoloCard(a);
+  const tier = a.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'common';
+  const gl = gradeLabel(card.grade);
+  const power = holo?.power ?? Math.max(1, (a.tags||[]).length + (a.dependencies||[]).length);
+  const toughness = holo?.toughness ?? Math.max(1, (a.version||'1.0.0').split('.')[0] * 2 + (a.requires_env||[]).length);
+  const flavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const pips = holo ? holo.colors : (CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general);
+  const holoManaCost = holo?.mana_cost;
+  const holoTypeLine = holo?.type_line || `Creature — Agent ${a.category ? a.category.split('_').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') : ''}`;
+  const val = calculateValue(card);
+
+  // Mana pip HTML
+  const pipsHtml = holoManaCost
+    ? holoManaCost.replace(/\{(\w+)\}/g, (_, p) => `<span class="slide-pip holo-pip ${p.length === 1 && 'WUBRGN'.includes(p) ? p : 'C'}">${p}</span>`)
+    : pips.map(p => `<span class="slide-pip holo-pip ${p}">${p}</span>`).join('');
+
+  stage.innerHTML = `
+    <div class="slide">
+      <div class="slide-art-panel">
+        <canvas class="slide-art-canvas" width="240" height="240" id="slide-canvas"></canvas>
+      </div>
+      <div class="slide-content">
+        <div class="slide-cat-stripe" style="background:linear-gradient(90deg,${cc.primary},transparent)"></div>
+        <div class="slide-badge">
+          <span class="slide-badge-dot" style="background:${cc.primary}"></span>
+          ${esc(a.category.replace(/_/g, ' '))} &middot; ${rarity.toUpperCase()}
+        </div>
+        <div class="slide-title">${esc(a.display_name)}</div>
+        <div class="slide-subtitle">${esc(holoTypeLine)}</div>
+        <div class="slide-pips">${pipsHtml}</div>
+        <div class="slide-desc">${esc(a.description)}</div>
+        <div class="slide-tags">${(a.tags || []).slice(0, 6).map(t => `<span class="slide-tag">${esc(t)}</span>`).join('')}</div>
+        <div class="slide-stats-row">
+          <div class="slide-stat"><span class="slide-stat-val">${power}</span><span class="slide-stat-label">Power</span></div>
+          <div class="slide-stat"><span class="slide-stat-val">${toughness}</span><span class="slide-stat-label">Guard</span></div>
+          <div class="slide-stat"><span class="slide-stat-val" style="color:${gl.cls === 'gem' ? '#ffd700' : gl.cls === 'mint' ? '#39d353' : '#aaa'}">${gl.label}</span><span class="slide-stat-label">Grade</span></div>
+          <div class="slide-stat"><span class="slide-stat-val" style="color:#39d353">$${val}</span><span class="slide-stat-label">Value</span></div>
+        </div>
+        <div class="slide-meta">${esc(a.name)} v${a.version || '?'} &middot; ${card.serial} &middot; ${card.isFirstEdition ? '1st Ed' : '#' + card.mintNum}</div>
+      </div>
+    </div>
+  `;
+
+  // Render art on canvas
+  const canvas = document.getElementById('slide-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#0a0806';
+    ctx.fillRect(0, 0, 240, 240);
+    const _holo = getHoloCard(a);
+    const svgStr = _holo?.avatar_svg || genCreativeArt(a);
+    try {
+      await new Promise((resolve) => {
+        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+        img.onload = () => { ctx.drawImage(img, 0, 0, 240, 240); URL.revokeObjectURL(url); resolve(); };
+        img.onerror = () => { URL.revokeObjectURL(url); resolve(); };
+        img.src = url;
+      });
+    } catch(e) {}
+  }
+
+  // Update nav state
+  counter.textContent = `${_slideIdx + 1} / ${_slideCards.length}`;
+  prevBtn.disabled = _slideIdx === 0;
+  nextBtn.disabled = _slideIdx === _slideCards.length - 1;
+
+  // Update dots
+  document.querySelectorAll('.slides-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === _slideIdx);
+  });
+}
+
+// Present from Browse tab — creates virtual card data from agent catalog
+async function openAgentSlides() {
+  if (!allAgents.length) { showToast('No agents loaded', 'error'); return; }
+  // Build virtual "card" objects from agents so renderSlide can consume them
+  _slideCards = allAgents.map(a => ({
+    agentName: a.name,
+    displayName: a.display_name,
+    category: a.category,
+    grade: 10, // virtual
+    serial: a.name,
+    mintNum: 1,
+    isFirstEdition: false,
+    mintedAt: Date.now(),
+    tier: a.quality_tier || 'community',
+    variations: { centeringX: 0, centeringY: 0, inkSaturation: 1, holoIntensity: 1, cornerSharpness: 1, surfaceNoise: 0, centerScore: 10 },
+  }));
+  _slideIdx = 0;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'slides-overlay';
+  overlay.id = 'slides-overlay';
+  _slideOverlay = overlay;
+
+  overlay.innerHTML = `
+    <div class="slides-toolbar">
+      <div class="slides-toolbar-left">
+        <button class="slides-close" onclick="closeSlidesPresentation()">Exit</button>
+        <span class="slides-counter" id="slide-counter">1 / ${_slideCards.length}</span>
+      </div>
+      <div class="slides-toolbar-right">
+        <button class="slides-nav-btn" id="slide-prev" onclick="slideNav(-1)">&#8592;</button>
+        <button class="slides-nav-btn" id="slide-next" onclick="slideNav(1)">&#8594;</button>
+      </div>
+    </div>
+    <div class="slides-stage" id="slides-stage"></div>
+    <div class="slides-dots" id="slides-dots">
+      ${_slideCards.slice(0, 50).map((_, i) => `<div class="slides-dot ${i === 0 ? 'active' : ''}" onclick="slideGo(${i})"></div>`).join('')}
+      ${_slideCards.length > 50 ? `<span style="color:#444;font-size:.6rem;margin-left:4px">+${_slideCards.length - 50}</span>` : ''}
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  overlay._keyHandler = (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); slideNav(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); slideNav(-1); }
+    else if (e.key === 'Escape') closeSlidesPresentation();
+  };
+  document.addEventListener('keydown', overlay._keyHandler);
+
+  await renderSlide();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -8228,7 +9002,7 @@ async function openSlabViewer(mintId) {
           <h4>Grade Report</h4>
           <div style="margin-bottom:10px">
             <div class="slab-value-badge">
-              <span>&#127942;</span> ${gl.label} &nbsp; <span style="font-size:.7rem;font-weight:400;opacity:.7">Overall</span>
+              ${svgIcon('trophy','#ffd700',20)} ${gl.label} &nbsp; <span style="font-size:.7rem;font-weight:400;opacity:.7">Overall</span>
             </div>
           </div>
           <div class="slab-subgrades">
@@ -8242,7 +9016,7 @@ async function openSlabViewer(mintId) {
         <!-- Value -->
         <div class="slab-panel">
           <h4>Estimated Value</h4>
-          <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px">&#128176; ${val} pts</div>
+          <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px">${svgIcon('money','#ffd700',24)} ${val} pts</div>
           <div style="font-size:.72rem;color:var(--text-muted);margin-top:6px">
             Based on rarity, grade, mint #, votes at mint${card.isFirstEdition ? ', 1st Edition' : ''}
           </div>
@@ -8277,7 +9051,7 @@ async function openSlabViewer(mintId) {
   document.body.appendChild(overlay);
   // Render card on slab canvas
   const slabCanvas = document.getElementById(`slab-canvas-${mintId}`);
-  if (slabCanvas) renderMiniCard(slabCanvas, card);
+  if (slabCanvas) await renderMiniCard(slabCanvas, card);
 }
 
 async function openSlabZoom(mintId) {
@@ -8288,7 +9062,7 @@ async function openSlabZoom(mintId) {
   const W = 500, H = 700;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
-  renderMiniCard(canvas, card);
+  await renderMiniCard(canvas, card);
 
   // Draw centering grid overlay
   const ctx = canvas.getContext('2d');
@@ -8411,12 +9185,12 @@ async function renderTrophyCase() {
         slot.appendChild(frame);
         slot.appendChild(gradeEl);
         el.appendChild(slot);
-        renderMiniCard(canvas, card);
+        await renderMiniCard(canvas, card);
         continue;
       }
     }
     slot.className = 'trophy-slot empty';
-    slot.innerHTML = '<span style="font-size:1.5rem;opacity:.3">&#128081;</span><span>Empty</span>';
+    slot.innerHTML = `<span style="opacity:.3">${svgIcon('crown','#ffd700',28)}</span><span>Empty</span>`;
     el.appendChild(slot);
   }
 }
@@ -8471,7 +9245,7 @@ async function startQuiz() {
     document.body.style.overflow = '';
   }
 
-  function showQuestion() {
+  async function showQuestion() {
     if (qIdx >= questions.length) { showResults(); return; }
     const card = questions[qIdx];
     card.grade = gradeCard(card);
@@ -8506,7 +9280,7 @@ async function startQuiz() {
       </div>`;
 
     const qCanvas = document.getElementById('quiz-canvas');
-    if (qCanvas) renderMiniCard(qCanvas, card);
+    if (qCanvas) await renderMiniCard(qCanvas, card);
   }
 
   function quizAnswer(btn, isCorrectStr) {
@@ -8533,7 +9307,7 @@ async function startQuiz() {
       <div class="quiz-card">
         <div class="quiz-result">
           <div class="score-big">${score}/${questions.length}</div>
-          <div style="font-size:1.5rem;margin:8px 0">${pct === 100 ? '&#127942;' : pct >= 60 ? '&#127881;' : '&#128218;'}</div>
+          <div style="margin:8px 0">${pct === 100 ? svgIcon('trophy','#ffd700',32) : pct >= 60 ? svgIcon('confetti','#39d353',32) : svgIcon('book','#8b949e',32)}</div>
           <p>${msg}</p>
           <button onclick="startQuiz()" style="margin-top:20px;padding:10px 28px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;font-size:.88rem;font-weight:700;cursor:pointer">Play Again</button>
         </div>
@@ -9261,10 +10035,15 @@ function _open3DViewerInner(name) {
           sin(rainbow + 2.094) * 0.5 + 0.5,
           sin(rainbow + 4.189) * 0.5 + 0.5
         );
+        // BothAngles: interference scanlines
+        float scanline = sin(vUv.y * 100.0 + time * 5.0) * 0.1;
+        scanline = max(scanline, 0.0);
+        // BothAngles: cyan/magenta fresnel split
+        vec3 fresnelColor = mix(vec3(0.0, 0.86, 1.0), vec3(1.0, 0.0, 0.8), fresnel);
         float sparkle = sin(vUv.x * 80.0 + time * 2.0) * sin(vUv.y * 80.0 + time * 1.5);
         sparkle = pow(max(sparkle, 0.0), 8.0) * 0.3;
-        float alpha = fresnel * 0.35 + sparkle;
-        gl_FragColor = vec4(holo, alpha);
+        float alpha = fresnel * 0.4 + sparkle + scanline * 0.15;
+        gl_FragColor = vec4(mix(holo, fresnelColor, fresnel * 0.3), alpha);
       }
     `
   });
@@ -9470,7 +10249,7 @@ function renderPresentation() {
       <div class="slide-counter">${presSlideIndex + 1} / ${total}</div>
       <div style="display:flex;gap:8px">
         <button onclick="cycleCardMode();renderPresentation()">
-          ${cardMode === 'business' ? 'Holo' : cardMode === 'creative' ? 'Simple' : 'Business'}
+          ${cardMode === 'business' ? 'Full Art' : cardMode === 'creative' ? 'ASCII' : 'Icon'}
         </button>
         <button onclick="closePresentation()">Exit (Esc)</button>
       </div>
@@ -9592,12 +10371,6 @@ const TOUR_STEPS = [
     target: '#sort-select',
     title: 'Sort Your Way',
     text: 'Sort agents alphabetically or by newest. Every agent shows its size, line count, and category so you know exactly what you\'re getting.',
-    tab: 'browse'
-  },
-  {
-    target: '#intent-btn',
-    title: 'Business & Holo',
-    text: 'You\'re in <strong>Business</strong> mode — focused on the agent library. Switch to <strong>Holo</strong> to see agents as collectible trading cards with full artwork.',
     tab: 'browse'
   }
 ];
@@ -9981,7 +10754,7 @@ async function flickTo(name, target) {
     const gpsLabel = entry._gpsPin ? ` @ ${entry._gpsPin.lat.toFixed(3)},${entry._gpsPin.lng.toFixed(3)}` : '';
     showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''}${gpsLabel} (signed)`, 'success');
     // Show play rating UI after flick (frontier feature — user rates the work, wears the card)
-    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
+    setTimeout(() => showFlickRating(name), 2000);
   } else if (target === 'lisppy') {
     if (!_lisppyRuntime?.loaded) {
       showToast('Load Lisppy runtime first', 'error');
@@ -9998,11 +10771,11 @@ async function flickTo(name, target) {
       output.scrollTop = output.scrollHeight;
     }
     showToast(`Flicked ${entry.manifest.display_name} → Lisppy REPL${task ? ' with task' : ''}`, 'success');
-    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
+    setTimeout(() => showFlickRating(name), 2000);
   } else if (target === 'airdrop') {
     // Airdrop — share the signed card with someone else
     await airdropCard(name, entry, task);
-    if (_uiTier >= 2) setTimeout(() => showFlickRating(name), 2000);
+    setTimeout(() => showFlickRating(name), 2000);
   } else {
     // Browser — just inspect
     openAgent(name);
@@ -11412,161 +12185,21 @@ async function importDeckAirdrop(payload) {
 // ═══════════════════════════════════════════════════════
 // Gesture Controls — MediaPipe Hands + Voice
 // ═══════════════════════════════════════════════════════
-// ── UI Tiers — Radio Dial ──
-// 0 = Open (default): Pure anonymous agent.py browsing. No account, no frills.
-// 1 = Community: Votes, reviews, cards, decks, leaderboard — the social layer.
-// 2 = Lux: Full concierge. Streaming, hail, frontier cards, cube, GPS, edge dispatch.
-const TIER_LABELS = ['Library', 'Community', 'Lux'];
-const TIER_COLORS = ['var(--text-muted)', 'var(--accent)', 'var(--orange)'];
-let _uiTier = parseInt(localStorage.getItem('rar_ui_tier') || '0', 10);
-let _streamAdvanced = _uiTier >= 2;
-// Wave release system — increment to unlock gated features
-// Wave 1 (now): Browse, Cards, Stream, Submit, Roadmap
-// Wave 2 (later): Quality Seal, Leaderboard, Packs, Workbench
-// Wave 3 (future): Agent canvas, PWA, NFC cards
-let _waveUnlocked = parseInt(localStorage.getItem('rar_wave') || '1', 10);
+// ── UI Init ──
+let _uiTier = 2; // All features visible
+let _streamAdvanced = true;
 
-function setUITier(tier) {
-  _uiTier = tier;
-  _streamAdvanced = _uiTier >= 2;
-  localStorage.setItem('rar_ui_tier', _uiTier);
-  applyUITier();
-}
-
-function cycleUITier() {
-  setUITier((_uiTier + 1) % 3);
-}
-
+// Stubs for backwards compat with any remaining references
+function setUITier() {}
+function cycleUITier() {}
 function applyUITier() {
-  // Sync the mode dial buttons
-  document.querySelectorAll('#mode-dial button').forEach(b => {
-    b.classList.toggle('active', +b.dataset.tier === _uiTier);
-  });
-  // Hide entire nav at T0 — Open is just the library, no tabs
-  const mainNav = document.getElementById('main-nav');
-  if (mainNav) mainNav.style.display = _uiTier === 0 ? 'none' : 'flex';
-  // Show Hail button at Lux tier
-  const hailBtn = document.getElementById('hail-btn');
-  if (hailBtn) hailBtn.style.display = _uiTier >= 2 ? '' : 'none';
-  // T2+ elements (community layer)
-  document.querySelectorAll('.t2-only').forEach(el => {
-    el.style.display = _uiTier >= 1 ? '' : 'none';
-  });
-  // T3 elements (frontier layer)
-  document.querySelectorAll('.t3-only, .advanced-only').forEach(el => {
-    el.style.display = _uiTier >= 2 ? '' : 'none';
-  });
-  // Wave-gated features — hidden until explicitly released
-  // To release a wave: set _waveUnlocked = 2 (or remove the .wave-2 class)
-  document.querySelectorAll('.wave-2').forEach(el => {
-    if (!_waveUnlocked || _waveUnlocked < 2) el.style.display = 'none';
-  });
-  ['gesture-toggle', 'voice-toggle'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = _uiTier >= 2 ? '' : 'none';
-  });
-  // Gate sort options by tier — hide data-dependent sorts at Library
-  const sortSelect = document.getElementById('sort-select');
-  if (sortSelect) {
-    sortSelect.querySelectorAll('option[data-min-tier]').forEach(opt => {
-      const min = parseInt(opt.dataset.minTier, 10);
-      opt.hidden = _uiTier < min;
-      opt.disabled = _uiTier < min;
-    });
-    if (sortSelect.selectedOptions[0]?.hidden) {
-      sortSelect.value = 'name';
-    }
-  }
-  // Update hero text
-  const heroDesc = document.getElementById('hero-desc');
-  if (heroDesc) {
-    if (_uiTier === 0) heroDesc.textContent = _intent === 'business'
-      ? 'Browse and deploy single-file AI agents for your business.'
-      : 'Browse and share single-file AI agents.';
-    else if (_uiTier === 1) heroDesc.textContent = 'Browse, vote, review, and collect single-file AI agents. Community-driven quality.';
-    else heroDesc.textContent = 'Stream, steer, grade, and trade agent cards. Full frontier mode.';
-  }
-  // If on T1 and current tab is gated, bounce to browse
-  const gatedT2 = ['submit'];
-  const gatedT3 = ['leaderboard','quality','cards','packs','stream','workbench','roadmap'];
-  const gatedWave2 = ['leaderboard','quality','packs','workbench','submit','roadmap'];
-  const activeTab = document.querySelector('.nav-btn.active')?.dataset?.tab;
-  if (_uiTier < 1 && gatedT2.includes(activeTab)) switchTab('browse');
-  if (_uiTier < 2 && gatedT3.includes(activeTab)) switchTab('browse');
-  if ((!_waveUnlocked || _waveUnlocked < 2) && gatedWave2.includes(activeTab)) switchTab('browse');
-  // Re-render stats and agents with tier awareness
-  const stats = { total_agents: allAgents.length, publishers: new Set(allAgents.map(a => a.name.split('/')[0])).size, categories: new Set(allAgents.map(a => a.category)).size, category_list: [...new Set(allAgents.map(a => a.category))].sort() };
-  renderStats(stats);
-  renderAgents();
-  renderSteerPanel();
-  // Update QR/GPS button colors
-  const qrBtn = document.getElementById('qr-toggle');
-  if (qrBtn) { qrBtn.style.color = _qrShareEnabled ? 'var(--accent)' : 'var(--text-muted)'; qrBtn.style.borderColor = _qrShareEnabled ? 'var(--accent)' : 'var(--border)'; }
-  const gpsBtn = document.getElementById('gps-toggle');
-  if (gpsBtn) { gpsBtn.style.color = _gpsFlickEnabled ? 'var(--green)' : 'var(--text-muted)'; gpsBtn.style.borderColor = _gpsFlickEnabled ? 'var(--green)' : 'var(--border)'; }
-  // Remove FOUC guard — JS has applied correct visibility
-  document.documentElement.classList.remove('rar-guard');
+  document.getElementById('main-nav').style.display = 'flex';
   document.body.classList.add('rar-loaded');
 }
-
-// Backwards-compat wrapper
-function toggleStreamMode() { cycleUITier(); }
-
-// ── Intent — Business vs Personal ──
-// Flags the context for agent use. Business surfaces work-oriented agents
-// and categories (CRM, pipeline, integrations). Personal surfaces
-// productivity, creative, and general agents.
-const INTENT_LABELS = ['Business', 'Holo'];
-const INTENT_COLORS = ['var(--blue, #58a6ff)', 'var(--text-muted)'];
-let _intent = localStorage.getItem('rar_intent') || 'business'; // 'business' | 'personal'
-
-function cycleIntent() {
-  _intent = _intent === 'personal' ? 'business' : 'personal';
-  localStorage.setItem('rar_intent', _intent);
-  applyIntent();
-}
-
-function applyIntent() {
-  const idx = _intent === 'business' ? 0 : 1;
-  const btn = document.getElementById('intent-btn');
-  if (btn) {
-    btn.textContent = INTENT_LABELS[idx];
-    btn.style.color = INTENT_COLORS[idx];
-    btn.style.borderColor = INTENT_COLORS[idx];
-  }
-  // Swap branding — Business = full name, Personal = short RAR
-  const logoText = document.getElementById('logo-text');
-  if (logoText) logoText.textContent = _intent === 'business' ? 'RAPP Agent Repository' : 'RAR';
-  const heroTitle = document.getElementById('hero-title');
-  if (heroTitle) heroTitle.innerHTML = _intent === 'business'
-    ? 'RAPP <span class="gradient">Agent</span> Repository'
-    : 'The Open <span class="gradient">Agent.py</span> Ecosystem';
-  document.title = _intent === 'business' ? 'RAPP Agent Repository' : 'RAR — The Open Agent.py Ecosystem';
-  // Business = Library only. Personal unlocks Community/Lux tiers.
-  document.querySelectorAll('#mode-dial button[data-tier="1"], #mode-dial button[data-tier="2"]').forEach(b => {
-    b.style.display = _intent === 'personal' ? '' : 'none';
-  });
-  // If switching to business and on a higher tier, bounce to Library
-  if (_intent === 'business' && _uiTier > 0) {
-    setUITier(0);
-  }
-  // Personal instantly opens Lux + Cards with Holo mode — show the full artwork
-  if (_intent === 'personal' && _uiTier === 0) {
-    setUITier(2);
-    cardMode = 'creative';
-    document.querySelectorAll('.card-mode-toggle button').forEach(b => b.classList.toggle('active', b.textContent === 'Holo'));
-    switchTab('cards');
-  }
-  // Re-sort agents — business floats work categories up, personal floats productivity/general
-  renderAgents();
-}
-
-function intentWeight(agent) {
-  const biz = ['b2b_sales','b2c_sales','healthcare','financial_services','manufacturing','energy','federal_government','slg_government','human_resources','it_management','professional_services','retail_cpg','software_digital_products','integrations','pipeline'];
-  const personal = ['productivity','general','devtools','core'];
-  if (_intent === 'business') return biz.includes(agent.category) ? 1 : 0;
-  return personal.includes(agent.category) ? 1 : 0;
-}
+function toggleStreamMode() {}
+function cycleIntent() {}
+function applyIntent() {}
+function intentWeight() { return 0; }
 
 let _gestureActive = false;
 let _voiceActive = false;
@@ -11866,9 +12499,9 @@ function processVoiceCommand(text) {
   if (text.includes('workbench') || text.includes('build')) { switchTab('workbench'); return; }
 
   // Card mode
-  if (text.includes('business') || text.includes('professional')) { setCardMode('business'); return; }
-  if (text.includes('holo') || text.includes('holographic')) { setCardMode('creative'); return; }
-  if (text.includes('kids') || text.includes('children')) { setCardMode('kids'); return; }
+  if (text.includes('icon') || text.includes('business')) { setCardMode('business'); return; }
+  if (text.includes('full art') || text.includes('holo')) { setCardMode('creative'); return; }
+  if (text.includes('ascii') || text.includes('terminal')) { setCardMode('kids'); return; }
 
   // Connect brainstem
   if (text.includes('connect') && text.includes('brainstem')) { connectBrainstem(); return; }

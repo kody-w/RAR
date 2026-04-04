@@ -1,0 +1,64 @@
+<h2>When Does a Card Start Living?</h2>
+
+<p>A card can exist locally forever &mdash; in a binder, in IndexedDB, in a workbench draft. But it doesn't have a <em>public life</em> until it's hatched: deployed to the global network with everything in place.</p>
+
+<h3>The Lifecycle</h3>
+
+<pre><code>DRAFT  ──▶  REGISTERED  ──▶  HATCHED  ──▶  FORGING
+local       in registry      on the net    companion</code></pre>
+
+<table>
+  <tr><th>Stage</th><th>Where</th><th>What's True</th></tr>
+  <tr><td><strong>Draft</strong></td><td>Your machine</td><td>The .py file exists. You can preview it. No public identity.</td></tr>
+  <tr><td><strong>Registered</strong></td><td>registry.json</td><td>Passed validation. Appears in a store. All three card faces render.</td></tr>
+  <tr><td><strong>Hatched</strong></td><td>Global network</td><td>Accepted into the main store. Discoverable by anyone. Collectible, downloadable, tradeable, forgeable.</td></tr>
+  <tr><td><strong>Forging</strong></td><td>Any deck</td><td>Set as companion. Fused with owner identity and time. The card is alive and shifting.</td></tr>
+</table>
+
+<h3>The 10 Hatching Requirements</h3>
+
+<p>A card is hatched when ALL of these are true:</p>
+
+<ol>
+  <li>Valid single <code>.py</code> or <code>.py.card</code> file at <code>agents/@namespace/slug</code></li>
+  <li>Valid <code>__manifest__</code> with all required fields</li>
+  <li><code>BasicAgent</code> subclass with a <code>perform()</code> method</li>
+  <li>Tier is <code>community</code> or <code>experimental</code> (or promoted by maintainers)</li>
+  <li>No secrets, PII, or obfuscated code</li>
+  <li>Docstring present</li>
+  <li>All three card faces render (Icon, Full Art, ASCII)</li>
+  <li>Deterministic identity &mdash; same name always produces the same card</li>
+  <li>Present in <code>registry.json</code> on the main store</li>
+  <li>Publicly accessible via the main RAR store or raw GitHub fetch</li>
+</ol>
+
+<p>If any requirement fails, the card is still a draft or local registration &mdash; not hatched.</p>
+
+<h3>What Hatching Unlocks</h3>
+
+<p>Once hatched, the card can:</p>
+
+<ul>
+  <li>Be found via search, browse, or direct link</li>
+  <li>Be added to any deck</li>
+  <li>Be downloaded as <code>.py</code> or <code>.card.txt</code></li>
+  <li>Be shared via URL</li>
+  <li>Be set as a companion and forged</li>
+  <li>Appear in slideshows, leaderboards, and stream views</li>
+  <li>Be pulled into federated instances</li>
+  <li>Be printed &mdash; Icon as badge, Full Art as card, ASCII as text</li>
+</ul>
+
+<h3>The Identity Is Permanent</h3>
+
+<p>The most important property: once hatched, the card's identity hash is locked. The name produces the same hash, which produces the same ASCII art, same base stats, same procedural art seed. Version bumps update metadata (description, tags, abilities), but the core visual identity persists.</p>
+
+<p>This is what makes cards collectible. A card from version 1.0.0 and a card from version 2.0.0 are the same card. Different metadata, same identity. Same character looking back at you from the terminal.</p>
+
+<h3>Cards That Never Hatch</h3>
+
+<p>Not every card needs to go public. Binder-only cards, drag-and-drop imports, workbench drafts, and private agents all have full card identities &mdash; three faces, stats, everything. They just don't exist on the global network. A card doesn't need to hatch to be complete. It needs to hatch to be <em>public</em>.</p>
+
+<h3>Field Note</h3>
+
+<p>The hatching concept emerged from the question: "what makes an agent card <em>done</em>?" The answer wasn't code quality or test coverage &mdash; it was completeness of identity. Can the card exist everywhere? Can anyone find it? Can it be collected? If yes, it's hatched. If not, keep working.</p>

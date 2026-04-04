@@ -1,0 +1,60 @@
+<h2>The Constraint That Built the Ecosystem</h2>
+
+<p>RAR (RAPP Agent Repository) started with one non-negotiable constraint: <strong>every agent is one Python file</strong>. Not a package. Not a directory. Not a manifest.json plus a README plus a requirements.txt. One <code>.py</code> file.</p>
+
+<p>This sounds limiting. It is. That's the point.</p>
+
+<h3>What One File Gets You</h3>
+
+<ul>
+  <li><strong>Fetch</strong> &mdash; one HTTP GET downloads the entire agent</li>
+  <li><strong>Install</strong> &mdash; one file write deploys it</li>
+  <li><strong>Read</strong> &mdash; an LLM can process it in one context window</li>
+  <li><strong>Understand</strong> &mdash; a human can read it in one sitting</li>
+  <li><strong>Print</strong> &mdash; it fits on a trading card</li>
+</ul>
+
+<p>That last one wasn't a joke. It became the foundation for the entire card system.</p>
+
+<h3>The Manifest Lives Inside</h3>
+
+<p>Instead of a separate <code>manifest.json</code>, every agent contains a <code>__manifest__</code> dict. The registry builder extracts it using AST parsing &mdash; no imports, no execution, just static analysis:</p>
+
+<pre><code>__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@yourname/my_agent",
+    "version": "1.0.0",
+    "display_name": "My Agent",
+    "description": "What this agent does.",
+    "author": "Your Name",
+    "tags": ["keyword"],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}</code></pre>
+
+<p>The docstring is the README. The class is the agent. <code>perform()</code> is the entry point. There is nothing else.</p>
+
+<h3>The Registry Flows From the Files</h3>
+
+<p><code>build_registry.py</code> walks the <code>agents/</code> directory, extracts every <code>__manifest__</code>, validates it, and writes <code>registry.json</code>. CI runs this on every push. The registry is never hand-edited.</p>
+
+<p>From <code>registry.json</code>, everything else is derived:</p>
+
+<ul>
+  <li>The web store loads the registry and renders cards</li>
+  <li>The card generator reads the registry and produces trading cards</li>
+  <li>The runtime agent fetches the registry and operates autonomously</li>
+  <li>Federation instances sync registries</li>
+</ul>
+
+<p>One constraint. One file per agent. Everything else flows from that.</p>
+
+<h3>125 Agents and Counting</h3>
+
+<p>At the time of writing, RAR hosts 125 agents across 5 publishers and 19 categories. Every one of them is a single <code>.py</code> file. The constraint didn't limit growth &mdash; it enabled it.</p>
+
+<blockquote>If it can't fit in one file, split it into two agents.</blockquote>
+
+<p>That's Article II of the Constitution. It's non-negotiable.</p>

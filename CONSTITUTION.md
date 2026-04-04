@@ -41,6 +41,103 @@ agents/@yourname/my_agent.py    ← this is the entire package
 
 **Why:** A single file can be fetched with one HTTP GET, installed with one file write, read by an LLM in one context window, understood by a human in one sitting, and printed on a trading card. This is the competitive advantage.
 
+### Two file formats, one principle
+
+| Format | Extension | What It Is |
+|--------|-----------|------------|
+| **Bare agent** | `.py` | Agent code + `__manifest__`. The minimal deployable unit. |
+| **Agent card** | `.py.card` | Agent code + `__manifest__` + `__card__`. The complete package with trading card shell. |
+
+A `.py.card` file is a valid Python file that contains everything a `.py` has, plus a `__card__` dict — the Howard-compatible trading card metadata (name, title, mana cost, colors, type line, rarity, power/toughness, abilities, flavor text, SVG art, set code, artist).
+
+**Shedding and re-shelling:**
+- **Shed**: Strip `__card__` from a `.py.card` to produce a bare `.py`. The agent works identically without its card shell.
+- **Re-shell**: Add `__card__` back to a bare `.py` from `holo_cards.json` or the registry to produce a `.py.card`. The card data is reconstructed from the agent's first public publish point.
+
+The `.py.card` is the complete package — the agent in its card shell, ready to be collected, traded, displayed, and run. The `.py` is the agent freed from its visual identity. Both are valid. Both are one file.
+
+```python
+# Example: slug.py.card
+__manifest__ = { ... }  # Standard agent identity (Article IV)
+__card__ = {             # Trading card shell (CardSmith-compatible)
+    "name": "Display Name",
+    "title": "The Subtitle",
+    "mana_cost": "{2}{U}{B}",
+    "colors": ["U", "B"],
+    "type_line": "Creature \u2014 Agent Type",
+    "rarity": "mythic",
+    "power": 6, "toughness": 4,
+    "abilities": [{"keyword": "Name", "cost": "{T}", "text": "Description"}],
+    "flavor_text": "Lore text.",
+    "avatar_svg": "<svg>...</svg>",
+    "set_code": "HOLO",
+    "artist": "Howard",
+}
+class MyAgent(BasicAgent):
+    def perform(self, **kwargs): ...
+```
+
+When both `slug.py` and `slug.py.card` exist, the registry builder prefers the `.py.card`. The `_has_card` and `_card` fields in `registry.json` indicate which agents carry their card shell.
+
+### The Deck Extension: `.py.card.DeckName`
+
+The file extension chain is the full packaging hierarchy:
+
+```
+agent.py                         → bare agent (code + manifest)
+agent.py.card                    → agent + card shell
+agent.py.card.Genesis            → agent + card shell + deck membership
+```
+
+A `.py.card.DeckName` file is a `.py.card` that belongs to a named deck. The deck name is the final extension — it tells any system which deck this card is part of without requiring an external manifest or directory structure.
+
+**The extension chain is additive and reversible:**
+
+| Strip | From | To | What's Lost |
+|-------|------|----|-------------|
+| `.DeckName` | `.py.card.Genesis` | `.py.card` | Deck membership only |
+| `.card` | `.py.card` | `.py` | Card shell (visual identity) |
+
+| Add | From | To | What's Gained |
+|-----|------|----|---------------|
+| `.card` | `.py` | `.py.card` | Card shell from registry/holo_cards.json |
+| `.DeckName` | `.py.card` | `.py.card.Genesis` | Deck membership |
+
+Nothing is lost that can't be re-added. The agent code is always intact at every level.
+
+**Deck import/export:** To share a deck, collect all `.py.card.DeckName` files with the same deck name. To import a deck, drop the files into any RAR binder. The deck name, card data, and agent code all travel together. No separate deck manifest needed — the file extension IS the manifest.
+
+### Deck Hotloading (Runtime)
+
+In a RAPP Brainstem runtime, the `agents/` folder stays pristine — only bare `.py` files live there. Deck files (`.py.card.DeckName`) sit in a `decks/` directory:
+
+```
+brainstem/
+  agents/           ← pristine, bare .py files only
+    basic_agent.py
+    borg_agent.py
+    cardsmith_agent.py
+  decks/            ← deck bundles, one directory per deck
+    Genesis/
+      borg_agent.py.card.Genesis
+      anvil_agent.py.card.Genesis
+      personafactory_agent.py.card.Genesis
+    Frontier/
+      experiment_agent.py.card.Frontier
+      hackernews_agent.py.card.Frontier
+```
+
+When the user selects a deck, the runtime hotloads the agents from that deck — the same way a user selects which model drives the AI layer. Switch decks, switch active agents. The card data rides along so the store/binder can display them correctly.
+
+**Hotloading rules:**
+- Switching decks loads only the agents in the new deck
+- Agents in `agents/` are always available as the base set
+- Deck agents override base agents if both exist (the `.py.card` has the same code plus the card shell)
+- The active deck name is persisted (localStorage in the store, config file in the runtime)
+- No restart required — hotloading is live
+
+This pattern keeps the core `agents/` folder clean, organized, and git-friendly while letting users curate agent sets via decks — swappable, portable, and complete.
+
 ---
 
 ## Article III — Namespace Ownership
@@ -197,8 +294,8 @@ Bump the version in `__manifest__` when you update. The registry tracks the late
 
 | Method | How |
 |--------|-----|
-| **Web Store** | Open `index.html` — browse, search, filter, vote |
-| **Brainstem** | `@kody/rar_remote_agent` fetches `registry.json` and operates autonomously |
+| **Web Store** | Open `index.html` — Browse, Leaderboard, Cards, Packs, Stream, Workbench, Submit |
+| **Runtime agent** | `@kody/rar_remote_agent` fetches `registry.json` and operates autonomously |
 | **Direct fetch** | `curl https://raw.githubusercontent.com/kody-w/RAR/main/registry.json` |
 | **Local-first** | Drag `.py` files into the web store — they're stored in IndexedDB, no upload |
 
@@ -206,24 +303,38 @@ Bump the version in `__manifest__` when you update. The registry tracks the late
 
 ## Article IX — The Agent Store
 
-The registry ships with a single-file web store (`index.html`) that provides:
+The registry ships with a single-file web store (`index.html`). Everything is visible. There are no hidden features, no unlock tiers, no modes to learn. You open it and it works.
+
+### Design Principle
+
+**Don't make users learn concepts.** If a feature requires explanation, it should be renamed or removed. No jargon. No gating. No progressive disclosure that hides useful things behind walls.
 
 ### Browse & Discovery
-- Search, filter by category, sort by votes/rating/name
-- Agent detail modals with source code viewer
+- Search with natural language ("I need something that generates PowerPoints")
+- Filter by category, sort by votes/rating/name/tier
+- Agent detail modals with source code viewer, reviews, and download
 - Community voting and reviews via GitHub Issues
 
-### Agent Cards
-Every agent renders as a collectible card with two skins:
+### Agent Cards — Three Universal Faces
 
-- **Business** — Clean professional card. Publisher, description, tier badge, version.
-- **Holo** — Trading card with generative art, mana pips, creature type, abilities, power/toughness stats. Inspired by `@borg/cardsmith_agent` by Howard.
+Every agent renders as a card. Every card has **three faces** so it can exist anywhere — on a screen, in a terminal, on paper, or in the physical world.
 
-### Decks
-Collect agents into named decks. "Client Demo", "Sales Stack", "My Builds". Share decks via URL. Pre-populated starter decks on first visit.
+| Face | Internal Mode | What It Is | Where It Works |
+|------|--------------|------------|----------------|
+| **Icon** | `business` | Compact info card. Publisher, description, QR code, tier badge, version, tags. | Web, print, email, thumbnails |
+| **Full Art** | `creative` | Trading card with holographic effects. Generative art, mana pips, creature type, abilities, power/toughness. Parallax depth on mouse move, prismatic refraction, specular shimmer. Inspired by `@borg/cardsmith_agent` by Howard. | Web, print, physical cards |
+| **ASCII** | `kids` | Pure monospace terminal card. ASCII character art, stat bars (POWER/SPEED/LOGIC/CHAOS/GUARD), flavor text, scanline animation. No images, no SVG, no special fonts. | CLI, terminal UIs, plain text, any interface |
+
+The card mode persists across reloads via `localStorage`. Full Art cards can be flipped to reveal a QR back face. Double-click any card for full-screen "Show & Tell" mode.
+
+### Decks & Companions
+
+Collect agents into named decks. Share decks via URL. Pre-populated starter decks on first visit.
+
+Each deck can have one **companion card** — a single agent that represents the deck's identity. The companion is shown in the deck bar and marked with a star badge in the card grid. One companion per deck, like a signature agent.
 
 ### Presentation Mode
-Turn any deck into a full-screen slideshow. Arrow keys navigate. Business slides for client demos, Holo slides for the art treatment.
+Turn any deck into a full-screen slideshow. Arrow keys navigate. Icon slides for client demos, Full Art slides for the visual treatment.
 
 ### Workbench
 Write agents directly in the browser:
@@ -236,11 +347,119 @@ Write agents directly in the browser:
 Drag and drop `.py` files into the browser. They're stored in IndexedDB on your device and appear alongside cloud agents. No upload, no server. Works offline, works air-gapped.
 
 ### Guided Tour
-First-time visitors get an 11-step walkthrough of every feature. Replay anytime via the "Tour" button in the header.
+First-time visitors get a walkthrough of every feature. Replay anytime via the "Tour" button in the header.
 
 ---
 
-## Article X — Security & Trust
+## Article X — The Complete Agent Card
+
+An agent card is not just a visual. It is the **portable, universal identity** of an agent — the thing that travels across screens, terminals, paper, binders, decks, and the physical world. A card is incomplete until it can survive anywhere.
+
+This article defines what a card must carry to be considered **complete** — ready for public deployment, trading, sharing, and forging on the global network.
+
+### Card Anatomy
+
+A complete agent card is the union of **seven properties**, all derived deterministically from the agent file:
+
+| Property | Source | What It Is |
+|----------|--------|------------|
+| **Name** | `__manifest__["display_name"]` | The card's title. Appears on all three faces. |
+| **Identity Hash** | `hash(name)` | A deterministic integer derived from the agent name. Seeds all procedural generation — art, stats, abilities. Two agents with the same name always produce the same card. |
+| **Three Faces** | Rendered from manifest + hash | Icon, Full Art, and ASCII. All three must render. See below. |
+| **Stats** | Hash-derived | Five stats (POWER / SPEED / LOGIC / CHAOS / GUARD), each 20–94%, deterministic from name hash. Displayed as bars on the ASCII face. |
+| **Power / Toughness** | Tags, version, env, dependencies | Numeric combat stats displayed on Full Art and ASCII faces. Derived from manifest metadata. |
+| **Flavor Text** | Holo card DB or category fallback | One line of lore. Every card has one. |
+| **Metadata** | `__manifest__` | Publisher, version, tier, category, tags, dependencies, description. The card's facts. |
+
+### Three Faces — Non-Negotiable
+
+A card is not complete unless all three faces render:
+
+| Face | What It Proves | If It Fails |
+|------|---------------|-------------|
+| **Icon** | The card can be a thumbnail, a business card, an email signature, a printed badge | The agent has no compact identity |
+| **Full Art** | The card can be collected, traded, displayed, presented, printed as a physical card | The agent has no visual presence |
+| **ASCII** | The card can exist in a terminal, a CLI tool, a plain-text log, a monospace printout, an air-gapped system | The agent can't go everywhere |
+
+All three faces are generated from the same manifest and identity hash. No face requires assets, images, or network access. A card renders from data alone.
+
+### Card Lifecycle
+
+```
+┌─────────┐     ┌────────────┐     ┌──────────┐     ┌──────────┐
+│  DRAFT  │ ──▶ │ REGISTERED │ ──▶ │ HATCHED  │ ──▶ │ FORGING  │
+└─────────┘     └────────────┘     └──────────┘     └──────────┘
+   local           in registry       on the network    companion
+```
+
+| Stage | Where It Lives | What's True |
+|-------|---------------|-------------|
+| **Draft** | Your machine, your binder | The `.py` file exists. You can preview the card locally. It has no public identity yet. |
+| **Registered** | `registry.json` (local or upstream) | The agent passed `build_registry.py` validation. It appears in a store. All three card faces render. The card has an identity hash but hasn't been deployed publicly. |
+| **Hatched** | The global public network (main RAR registry) | The card has been accepted into the main store, either via PR, Issue submission, or federated upstream push. It is now discoverable by anyone. It can be collected into any deck, traded via URL, downloaded as `.py` or `.card.txt`. **This is the start of the card's public life.** |
+| **Forging** | Any deck where it is the companion | The card has been chosen as a companion. Its ASCII face is fused with the owner's identity and the current time epoch. The forged card shifts every 15 minutes. You don't control the output — it is emergent. |
+
+### Hatching Requirements
+
+A card is **hatched** — deployed to the global network and starting its public life — when ALL of the following are true:
+
+| # | Requirement | Verified By |
+|---|-------------|-------------|
+| 1 | **Valid single `.py` file** at `agents/@namespace/slug.py` | `build_registry.py` |
+| 2 | **Valid `__manifest__`** with all required fields (Article IV) | AST parser in `build_registry.py` |
+| 3 | **`BasicAgent` subclass** with a `perform()` method | `build_registry.py` class check |
+| 4 | **Tier is `community` or `experimental`** (or promoted by maintainers) | `process_issues.py` tier validation |
+| 5 | **No secrets, PII, or obfuscated code** | PR review + automated checks |
+| 6 | **Docstring present** | Manifest extraction |
+| 7 | **All three card faces render** from the manifest data | The store's `agentToCard()` function; Icon, Full Art, and ASCII all generated from `__manifest__` + identity hash |
+| 8 | **Deterministic identity** — same name always produces the same card | Guaranteed by the hash-based procedural generation |
+| 9 | **Present in `registry.json`** on the main store | CI build via `build_registry.py` on push to `main` |
+| 10 | **Publicly accessible** via the main RAR store URL or raw GitHub fetch | GitHub Pages deployment |
+
+If any requirement is missing, the card is still a draft or local registration — not hatched.
+
+### What Hatching Means
+
+Once hatched, a card is alive on the public network:
+
+- **Discoverable** — anyone can find it in the store via search, browse, or direct link
+- **Collectible** — anyone can add it to a deck
+- **Downloadable** — the `.py` file and `.card.txt` ASCII card are available to all
+- **Tradeable** — decks containing the card can be shared via URL
+- **Forgeable** — any user can set it as their companion, and the forge will fuse it with their identity
+- **Presentable** — it can appear in slideshows, Show & Tell mode, leaderboards, and stream views
+- **Federable** — instances can pull it into their local stores
+- **Printable** — the Icon face works as a badge, the Full Art as a physical card, the ASCII as a terminal printout
+- **Permanent** — the card's identity hash is locked. Same name, same card, forever. Version bumps update metadata but the core identity persists.
+
+### Cards That Never Hatch
+
+Some cards live locally forever, and that's fine:
+
+- **Binder-only cards** — agents in a local binder that never push upstream
+- **Drag-and-drop cards** — `.py` files dropped into the browser, stored in IndexedDB
+- **Workbench drafts** — agents written in the Workbench but never submitted
+- **Private agents** — agents with proprietary logic that stay in a private fork
+
+These cards still have all three faces and a full identity. They just don't exist on the global network. A card doesn't need to hatch to be complete — it needs to hatch to be *public*.
+
+### The Card Is the Agent Is the File
+
+There is no separation between the agent and the card. The card is not a wrapper around the agent — it IS the agent, rendered visually. Every property of the card comes from the `.py` file:
+
+```
+agent.py  ──▶  __manifest__  ──▶  identity hash  ──▶  3 faces + stats + abilities
+   │                │                    │                         │
+   │           metadata              deterministic              the card
+   │                                 generation
+   └── the single file IS the complete package
+```
+
+If you change the agent, the card changes. If you read the card, you know the agent. One file. One card. One identity. That's it.
+
+---
+
+## Article XI — Security & Trust
 
 ### Agents MUST NOT:
 
@@ -267,7 +486,7 @@ Unmodified starter templates (containing `@your-username/`) are rejected at thre
 
 ---
 
-## Article XI — Contributing
+## Article XII — Contributing
 
 ### Submit an agent (via the Web Store)
 
@@ -321,7 +540,7 @@ GitHub Actions processes the Issue, validates the manifest, writes the file, and
 
 ---
 
-## Article XII — Governance
+## Article XIII — Governance
 
 ### Maintainers
 
@@ -339,20 +558,29 @@ Maintainers can:
 
 ---
 
-## Article XIII — Compatibility
+## Article XIV — Compatibility
 
 All agents in this registry target:
 
 - **Python**: 3.11+
 - **Runtime**: [CommunityRAPP](https://github.com/kody-w/CommunityRAPP) v2.0+
 - **Base class**: `@rapp/basic-agent` (BasicAgent)
-- **AI Model**: Azure OpenAI (agents should not hardcode model names)
+- **AI Model**: Cloud (GitHub Copilot / Azure OpenAI) or local (Ollama + Gemma 4). Agents should not hardcode model names or providers.
+
+### Runtime Options
+
+| Runtime | Install | AI Provider |
+|---------|---------|-------------|
+| **Cloud** | `irm .../install.ps1 \| iex` or `curl .../install.sh \| bash` | GitHub Copilot |
+| **Local-first** | `irm .../install_local.ps1 \| iex` or `curl .../install_local.sh \| bash` | Ollama + Gemma 4 |
+
+Local-first mode runs entirely on-device. No cloud. No API keys. No data leaves the machine.
 
 Agents that require a specific CommunityRAPP version should declare it in their docstring.
 
 ---
 
-## Article XIV — Federation
+## Article XV — Federation
 
 RAR can be used as a **GitHub template repository**. Instances cloned from the template operate as independent agent stores that can optionally federate back to the main registry.
 
@@ -400,7 +628,160 @@ Federation behavior is controlled by `rar.config.json`:
 
 ---
 
-## Article XV — Amendments
+## Article XVI — Local-First Agent Binder
+
+Any user can run their own local copy of RAR as a personal **agent binder** — a self-contained store that works offline, manages their own cards, decks, and companions, and optionally syncs with the main registry.
+
+### What is an Agent Binder?
+
+An agent binder is a local RAR instance that serves as your personal card collection and agent workbench. It runs entirely on your machine with no server. You own your cards, your decks, your companions, and your agents.
+
+### Setup
+
+```bash
+# 1. Fork or clone RAR
+git clone https://github.com/kody-w/RAR.git my-binder
+cd my-binder
+
+# 2. Configure as a local instance
+GITHUB_REPOSITORY=yourname/my-binder python scripts/setup_instance.py
+# This writes rar.config.json with role: "instance"
+
+# 3. Build the registry from your local agents
+python build_registry.py
+
+# 4. Generate cards for your agents
+python scripts/generate_holo_cards.py
+
+# 5. Open the store
+open index.html
+# Or serve it: python -m http.server 8080
+```
+
+That's it. You now have a local agent store with browse, cards, decks, workbench — everything.
+
+### What you get
+
+| Feature | How it works locally |
+|---------|---------------------|
+| **Browse** | All agents in your `agents/` directory appear in the store |
+| **Cards** | All three faces (Icon / Full Art / ASCII) render from `cards/holo_cards.json` |
+| **Decks** | Saved in `localStorage` in your browser — persist across reloads |
+| **Companions** | One companion per deck, persisted locally |
+| **Workbench** | Write and validate agents directly in the browser |
+| **Drag & drop** | Drop `.py` files into the browser — stored in IndexedDB alongside registry agents |
+| **Offline** | No network needed after clone. The store is a single HTML file. |
+
+### Managing your cards
+
+Cards are generated from the registry. When you add or change agents:
+
+```bash
+# Rebuild registry after adding/changing agents
+python build_registry.py
+
+# Regenerate all cards (stats, art, abilities, flavor text)
+python scripts/generate_holo_cards.py
+
+# Refresh the browser
+```
+
+The card generator creates deterministic cards — same agent always produces the same power, toughness, abilities, and art. Promo cards (like Howard's originals) are defined in the generator's `HOWARD_DB` and override the generated defaults.
+
+### Adding your own agents
+
+```bash
+# Create your namespace directory
+mkdir -p agents/@yourname
+
+# Write an agent
+cat > agents/@yourname/my_agent.py << 'EOF'
+"""My custom agent that does something useful."""
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@yourname/my_agent",
+    "version": "1.0.0",
+    "display_name": "My Agent",
+    "description": "Does something useful.",
+    "author": "Your Name",
+    "tags": ["custom"],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic-agent"],
+}
+
+from basic_agent import BasicAgent
+
+class MyAgent(BasicAgent):
+    def perform(self, **kwargs):
+        return "Hello from my agent"
+EOF
+
+# Rebuild
+python build_registry.py
+python scripts/generate_holo_cards.py
+```
+
+### Syncing with the main store
+
+Your binder can pull agents from the main RAR store and push your agents upstream:
+
+```bash
+# See what's different between your binder and the main store
+python scripts/federate.py diff
+
+# Pull new agents from the main store into your binder
+python scripts/federate.py sync --pull
+
+# Submit one of your agents to the main store
+python scripts/federate.py submit @yourname/my_agent
+
+# Check federation status
+python scripts/federate.py status
+```
+
+Federation is optional. Your binder works perfectly standalone — it's just a git repo with an HTML file.
+
+### Example: Howard's Binder
+
+Howard wants to manage his `@borg/` agents locally with his own card collection:
+
+```bash
+git clone https://github.com/kody-w/RAR.git howard-binder
+cd howard-binder
+GITHUB_REPOSITORY=borg/howard-binder python scripts/setup_instance.py
+
+# Howard already has agents in agents/@borg/ — rebuild
+python build_registry.py
+python scripts/generate_holo_cards.py
+
+# Open the store — Howard sees all his @borg agents with cards
+open index.html
+
+# Howard builds a new agent locally, tests it, then pushes upstream
+python scripts/federate.py submit @borg/new_agent
+```
+
+Howard's promo cards (the originals in `HOWARD_DB`) render with the `HOLO ★ Promo` badge and his artist credit regardless of whether he's viewing the main store or his local binder.
+
+### Binder vs. Instance vs. Main
+
+| | Main Store | Instance | Binder |
+|---|-----------|----------|--------|
+| **Hosted** | GitHub Pages | GitHub Pages or local | Local only |
+| **`role`** | `main` | `instance` | `instance` |
+| **Network** | Required | Optional | Not needed |
+| **Agents** | All community | Own + synced | Own + synced |
+| **Cards** | Generated by CI | Generated locally | Generated locally |
+| **Push upstream** | N/A | Yes | Yes (if you want) |
+| **Accept submissions** | Yes | Optional | No |
+
+A binder is just an instance that lives on your machine. The distinction is conceptual, not technical.
+
+---
+
+## Article XVII — Amendments
 
 This constitution can be amended by:
 
@@ -412,4 +793,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, Holo cards, and Frontier tier. The single file is the law.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, and the simplicity audit. The single file is the law. The card is the agent. The agent is the file. The deck is the binder.*

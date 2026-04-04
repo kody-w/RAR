@@ -1,0 +1,63 @@
+<h2>The Problem With Controlled Fusion</h2>
+
+<p>The companion card needed to be special. Not just "your favorite card" but something uniquely yours &mdash; something that couldn't be manually engineered or gamed. The inspiration came from emergent systems: what if the card's visual identity was determined by factors you don't control?</p>
+
+<h3>Three Inputs, No Controls</h3>
+
+<p>The Forge combines three values:</p>
+
+<table>
+  <tr><th>Input</th><th>Source</th><th>You Control It?</th></tr>
+  <tr><td><strong>Agent Identity</strong></td><td>Hash of the companion agent's name</td><td>You chose the agent, but not its hash</td></tr>
+  <tr><td><strong>Owner Identity</strong></td><td>Your cryptographic fingerprint (if signed) or a persistent session seed</td><td>No &mdash; derived from your signing key or randomized on first visit</td></tr>
+  <tr><td><strong>Time Epoch</strong></td><td>Current 15-minute time window: <code>Math.floor(Date.now() / (15 * 60 * 1000))</code></td><td>No &mdash; shifts automatically</td></tr>
+</table>
+
+<p>These three values are concatenated and hashed:</p>
+
+<pre><code>function forgeHash(agentName, ownerSeed, timeSeed) {
+  const raw = agentName + '|' + ownerSeed + '|' + timeSeed;
+  return Math.abs(Array.from(raw).reduce(
+    (acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0
+  ));
+}</code></pre>
+
+<p>The forge hash drives everything: ASCII art parts, stat distributions, and the companion's visual identity. Every 15 minutes, the time epoch shifts and the card transforms.</p>
+
+<h3>What the Forge Produces</h3>
+
+<ul>
+  <li><strong>Forged ASCII Art</strong> &mdash; same procedural system as regular cards, but seeded with the forge hash instead of the agent name hash. Different body parts, different character.</li>
+  <li><strong>Forged Stats</strong> &mdash; POWER, SPEED, LOGIC, CHAOS, GUARD are recalculated from the forge hash. The ranges shift (15-94% instead of 20-94%). Every forge cycle produces different stats.</li>
+  <li><strong>Purple Styling</strong> &mdash; forged cards get a purple border, purple-colored art, and a "FORGED" label to distinguish them from base cards.</li>
+  <li><strong>Bond Countdown</strong> &mdash; the deck bar shows a countdown to the next forge shift: "Bond shifts in 7m".</li>
+</ul>
+
+<h3>Why Emergence Matters</h3>
+
+<p>If users could control the forge output, they'd optimize for the "best" card. The forge prevents this by design:</p>
+
+<ul>
+  <li>You can't choose when the epoch shifts</li>
+  <li>You can't change your fingerprint</li>
+  <li>You can't predict what the hash will produce</li>
+  <li>The same companion + same owner at a different time = different card</li>
+</ul>
+
+<p>This is family-friendly emergence. No manual engineering. The card emerges from the intersection of who you are, what agent you chose, and when. Every forged card is a snapshot of that moment.</p>
+
+<h3>Implementation Details</h3>
+
+<p>The forge integrates into the existing card rendering pipeline:</p>
+
+<ol>
+  <li><code>agentToCard()</code> checks if the current agent is the deck companion via <code>getCompanion()</code></li>
+  <li>If forged: uses <code>forgeStats()</code> and <code>forgeAsciiArt()</code> instead of the base functions</li>
+  <li>The modal ASCII peek also detects forge state and shows "FORGED Card" in the collapsible details</li>
+  <li>A 60-second interval refreshes the bond countdown timer</li>
+  <li>Owner identity prefers the cryptographic fingerprint from the signing system, falling back to a <code>localStorage</code> session seed</li>
+</ol>
+
+<h3>Field Note</h3>
+
+<p>The key design constraint: <em>"the forge should not be possible for the person to manually engineer."</em> This ruled out any UI that lets users pick parts, choose colors, or influence the output. The forge just happens. You watch. That's the point.</p>

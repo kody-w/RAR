@@ -1,0 +1,68 @@
+<h2>The Problem: Cards That Can't Go Everywhere</h2>
+
+<p>The original agent cards were beautiful. Full Art holographic trading cards with parallax depth, prismatic refraction, and specular shimmer. They looked incredible on a screen.</p>
+
+<p>But they couldn't exist in a terminal. They couldn't be printed as plain text. They couldn't travel through a CLI pipeline or render on an air-gapped system. They were screen-only.</p>
+
+<p>The insight that changed everything came from a collaborator: <em>"every card should have each of these so it can exist ANYWHERE in space and time, virtual or real."</em></p>
+
+<h3>Three Faces, One Identity</h3>
+
+<table>
+  <tr><th>Face</th><th>Internal Mode</th><th>What It Is</th><th>Where It Works</th></tr>
+  <tr><td><strong>Icon</strong></td><td><code>business</code></td><td>Compact info card with QR, tags, tier badge</td><td>Web, print, email, thumbnails</td></tr>
+  <tr><td><strong>Full Art</strong></td><td><code>creative</code></td><td>Trading card with holo effects, abilities, power/toughness</td><td>Web, print, physical cards</td></tr>
+  <tr><td><strong>ASCII</strong></td><td><code>kids</code></td><td>Monospace terminal card with procedural art and stat bars</td><td>CLI, terminal, plain text, anywhere</td></tr>
+</table>
+
+<p>All three faces are generated from the same data: the agent's <code>__manifest__</code> and a deterministic identity hash derived from the agent's name.</p>
+
+<h3>Procedural ASCII Art</h3>
+
+<p>The ASCII face needed unique characters per agent &mdash; not one generic robot per category. We built a procedural generation system with 8 variants for each of 6 body parts:</p>
+
+<pre><code>const ASCII_PARTS = {
+  heads:   ['  .---.', '  /===\\', '  {===}', ...],
+  eyes:    [' |o  o|', ' |*  *|', ' |@  @|', ...],
+  mouths:  [' | -- |', ' | \\/ |', ' | .. |', ...],
+  bodies:  [' |####|', ' |/\\/\\|', ' |++++|', ...],
+  legs:    ['  /||\\', '  /  \\',  '  |  |', ...],
+  bases:   [' /    \\', ' ======', ' ------', ...],
+};</code></pre>
+
+<p>Each part is selected using a hash of the agent name: <code>8^6 = 262,144</code> possible unique characters. Same agent name, same character, always.</p>
+
+<h3>The Card.txt Download</h3>
+
+<p>Any card can be downloaded as a <code>.card.txt</code> file &mdash; a box-drawn ASCII card with name, tier, art, stats, flavor text, and footer. Pure text. Works everywhere:</p>
+
+<pre><code>+----------------------------------------+
+| Borg                      [VERIFIED]   |
++----------------------------------------+
+|              {===}                      |
+|             |@  @|                      |
+|             | \/ |                      |
+|             |<><>|                      |
+|              /  \                       |
+|             ======                      |
++----------------------------------------+
+| POWER  ###############..............   |
+| SPEED  ########.....................   |
+| LOGIC  ####################.........   |
+| CHAOS  ######........................   |
+| GUARD  ############.................   |
++----------------------------------------+
+| Resistance is futile.                  |
++----------------------------------------+
+| @borg/borg_agent v1.0.0        6/4    |
++----------------------------------------+</code></pre>
+
+<h3>The Companion System</h3>
+
+<p>Each deck gets one companion card &mdash; a single agent that represents the deck's identity. The companion is marked with a star badge and shown in the deck bar. When the companion is set, the Forge takes over its ASCII face (see the Forge post for details).</p>
+
+<p>One companion per deck. Like a signature agent. Persisted in localStorage, keyed by deck name.</p>
+
+<h3>Why It Matters</h3>
+
+<p>A card that only works on screens is a decoration. A card that works in a terminal, on paper, in a CLI tool, and on a phone is a <em>universal identity</em>. The agent goes everywhere its card goes.</p>

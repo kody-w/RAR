@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-04T03:31:53.744050+00:00",
+  "generated_at": "2026-04-04T14:44:33.381922+00:00",
   "stats": {
-    "total_agents": 124,
+    "total_agents": 125,
     "publishers": 5,
     "categories": 19,
     "publisher_list": [
@@ -58,7 +58,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
       "_size_kb": 23.3,
-      "_lines": 456
+      "_lines": 456,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -82,7 +83,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator.py",
       "_size_kb": 20.8,
-      "_lines": 457
+      "_lines": 457,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -106,7 +108,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
       "_size_kb": 19.7,
-      "_lines": 398
+      "_lines": 398,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -130,7 +133,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
       "_size_kb": 21.3,
-      "_lines": 441
+      "_lines": 441,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -154,7 +158,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
       "_size_kb": 18.6,
-      "_lines": 402
+      "_lines": 402,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -178,7 +183,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
       "_size_kb": 25.1,
-      "_lines": 521
+      "_lines": 521,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -202,7 +208,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
       "_size_kb": 20.3,
-      "_lines": 429
+      "_lines": 429,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -226,7 +233,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
       "_size_kb": 23.0,
-      "_lines": 495
+      "_lines": 495,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -250,7 +258,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
       "_size_kb": 23.4,
-      "_lines": 440
+      "_lines": 440,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -274,7 +283,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
       "_size_kb": 18.0,
-      "_lines": 393
+      "_lines": 393,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -298,7 +308,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
       "_size_kb": 16.5,
-      "_lines": 334
+      "_lines": 334,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -322,7 +333,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py",
       "_size_kb": 17.6,
-      "_lines": 378
+      "_lines": 378,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -346,7 +358,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
       "_size_kb": 41.6,
-      "_lines": 643
+      "_lines": 643,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -370,7 +383,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
       "_size_kb": 19.2,
-      "_lines": 424
+      "_lines": 424,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -394,7 +408,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py",
       "_size_kb": 19.7,
-      "_lines": 430
+      "_lines": 430,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -418,7 +433,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py",
       "_size_kb": 17.1,
-      "_lines": 380
+      "_lines": 380,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -442,7 +458,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
       "_size_kb": 16.1,
-      "_lines": 348
+      "_lines": 348,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -466,7 +483,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
       "_size_kb": 19.2,
-      "_lines": 398
+      "_lines": 398,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -490,7 +508,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py",
       "_size_kb": 20.6,
-      "_lines": 453
+      "_lines": 453,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -514,7 +533,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py",
       "_size_kb": 20.4,
-      "_lines": 414
+      "_lines": 414,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -539,7 +559,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
       "_size_kb": 34.6,
-      "_lines": 673
+      "_lines": 673,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -564,7 +585,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py",
       "_size_kb": 47.4,
-      "_lines": 570
+      "_lines": 570,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -588,7 +610,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
       "_size_kb": 89.7,
-      "_lines": 921
+      "_lines": 921,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -613,7 +636,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
       "_size_kb": 13.0,
-      "_lines": 289
+      "_lines": 289,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -638,7 +662,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
       "_size_kb": 14.6,
-      "_lines": 289
+      "_lines": 289,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -663,7 +688,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
       "_size_kb": 13.0,
-      "_lines": 292
+      "_lines": 292,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -688,7 +714,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
       "_size_kb": 12.9,
-      "_lines": 273
+      "_lines": 273,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -713,7 +740,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
       "_size_kb": 13.7,
-      "_lines": 266
+      "_lines": 266,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -738,7 +766,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
       "_size_kb": 15.3,
-      "_lines": 331
+      "_lines": 331,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -763,7 +792,8 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
       "_size_kb": 14.8,
-      "_lines": 360
+      "_lines": 360,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -788,7 +818,8 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py",
       "_size_kb": 13.3,
-      "_lines": 328
+      "_lines": 328,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -813,7 +844,8 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
       "_size_kb": 13.8,
-      "_lines": 328
+      "_lines": 328,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -838,7 +870,8 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
       "_size_kb": 14.4,
-      "_lines": 369
+      "_lines": 369,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -863,7 +896,8 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
       "_size_kb": 12.9,
-      "_lines": 341
+      "_lines": 341,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -889,7 +923,8 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py",
       "_size_kb": 12.8,
-      "_lines": 326
+      "_lines": 326,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -914,7 +949,8 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
       "_size_kb": 16.9,
-      "_lines": 398
+      "_lines": 398,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -939,7 +975,8 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
       "_size_kb": 15.1,
-      "_lines": 328
+      "_lines": 328,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -964,7 +1001,8 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
       "_size_kb": 13.0,
-      "_lines": 286
+      "_lines": 286,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -990,7 +1028,8 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
       "_size_kb": 14.8,
-      "_lines": 290
+      "_lines": 290,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1015,7 +1054,8 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
       "_size_kb": 14.9,
-      "_lines": 338
+      "_lines": 338,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1040,7 +1080,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py",
       "_size_kb": 13.9,
-      "_lines": 295
+      "_lines": 295,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1064,7 +1105,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py",
       "_size_kb": 13.6,
-      "_lines": 317
+      "_lines": 317,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1089,7 +1131,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
       "_size_kb": 15.0,
-      "_lines": 327
+      "_lines": 327,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1113,7 +1156,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
       "_size_kb": 13.2,
-      "_lines": 292
+      "_lines": 292,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1138,7 +1182,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
       "_size_kb": 14.6,
-      "_lines": 272
+      "_lines": 272,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1163,7 +1208,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py",
       "_size_kb": 14.0,
-      "_lines": 327
+      "_lines": 327,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1188,7 +1234,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
       "_size_kb": 14.1,
-      "_lines": 306
+      "_lines": 306,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1214,7 +1261,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
       "_size_kb": 12.8,
-      "_lines": 268
+      "_lines": 268,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1239,7 +1287,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py",
       "_size_kb": 14.4,
-      "_lines": 329
+      "_lines": 329,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1264,7 +1313,8 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
       "_size_kb": 12.6,
-      "_lines": 280
+      "_lines": 280,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1288,7 +1338,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py",
       "_size_kb": 18.2,
-      "_lines": 369
+      "_lines": 369,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1313,7 +1364,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
       "_size_kb": 18.9,
-      "_lines": 402
+      "_lines": 402,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1338,7 +1390,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator.py",
       "_size_kb": 15.9,
-      "_lines": 264
+      "_lines": 264,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1363,7 +1416,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
       "_size_kb": 16.8,
-      "_lines": 325
+      "_lines": 325,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1387,7 +1441,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
       "_size_kb": 15.6,
-      "_lines": 293
+      "_lines": 293,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1411,7 +1466,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
       "_size_kb": 15.2,
-      "_lines": 300
+      "_lines": 300,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1435,7 +1491,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
       "_size_kb": 17.7,
-      "_lines": 317
+      "_lines": 317,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1460,7 +1517,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
       "_size_kb": 14.7,
-      "_lines": 284
+      "_lines": 284,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1485,7 +1543,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
       "_size_kb": 14.9,
-      "_lines": 285
+      "_lines": 285,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1509,7 +1568,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
       "_size_kb": 15.8,
-      "_lines": 296
+      "_lines": 296,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1534,7 +1594,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py",
       "_size_kb": 15.8,
-      "_lines": 258
+      "_lines": 258,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1558,7 +1619,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
       "_size_kb": 14.4,
-      "_lines": 250
+      "_lines": 250,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1582,7 +1644,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
       "_size_kb": 14.8,
-      "_lines": 240
+      "_lines": 240,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1606,7 +1669,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py",
       "_size_kb": 14.8,
-      "_lines": 267
+      "_lines": 267,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1630,7 +1694,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py",
       "_size_kb": 15.9,
-      "_lines": 283
+      "_lines": 283,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1655,7 +1720,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py",
       "_size_kb": 16.2,
-      "_lines": 306
+      "_lines": 306,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1679,7 +1745,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py",
       "_size_kb": 14.6,
-      "_lines": 265
+      "_lines": 265,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1703,7 +1770,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py",
       "_size_kb": 14.3,
-      "_lines": 253
+      "_lines": 253,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1728,7 +1796,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py",
       "_size_kb": 12.8,
-      "_lines": 253
+      "_lines": 253,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1752,7 +1821,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
       "_size_kb": 12.9,
-      "_lines": 258
+      "_lines": 258,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1776,7 +1846,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
       "_size_kb": 14.2,
-      "_lines": 243
+      "_lines": 243,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1800,7 +1871,8 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
       "_size_kb": 14.5,
-      "_lines": 264
+      "_lines": 264,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1825,7 +1897,8 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
       "_size_kb": 12.7,
-      "_lines": 324
+      "_lines": 324,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1850,7 +1923,8 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py",
       "_size_kb": 15.8,
-      "_lines": 354
+      "_lines": 354,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1875,7 +1949,8 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py",
       "_size_kb": 14.0,
-      "_lines": 369
+      "_lines": 369,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1900,7 +1975,8 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
       "_size_kb": 15.0,
-      "_lines": 364
+      "_lines": 364,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1925,7 +2001,8 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
       "_size_kb": 14.7,
-      "_lines": 310
+      "_lines": 310,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1949,7 +2026,8 @@
       ],
       "_file": "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py",
       "_size_kb": 17.3,
-      "_lines": 390
+      "_lines": 390,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1973,7 +2051,8 @@
       ],
       "_file": "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
       "_size_kb": 18.7,
-      "_lines": 425
+      "_lines": 425,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1997,7 +2076,8 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py",
       "_size_kb": 15.0,
-      "_lines": 353
+      "_lines": 353,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2021,7 +2101,8 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
       "_size_kb": 16.2,
-      "_lines": 367
+      "_lines": 367,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2045,7 +2126,8 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
       "_size_kb": 12.5,
-      "_lines": 321
+      "_lines": 321,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2069,7 +2151,8 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
       "_size_kb": 14.9,
-      "_lines": 319
+      "_lines": 319,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2093,7 +2176,8 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
       "_size_kb": 13.8,
-      "_lines": 330
+      "_lines": 330,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2117,7 +2201,8 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
       "_size_kb": 13.0,
-      "_lines": 342
+      "_lines": 342,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2141,7 +2226,8 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py",
       "_size_kb": 13.8,
-      "_lines": 315
+      "_lines": 315,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2165,7 +2251,8 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py",
       "_size_kb": 13.7,
-      "_lines": 333
+      "_lines": 333,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2189,7 +2276,8 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py",
       "_size_kb": 15.6,
-      "_lines": 335
+      "_lines": 335,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2213,7 +2301,8 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
       "_size_kb": 17.7,
-      "_lines": 362
+      "_lines": 362,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2237,7 +2326,8 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
       "_size_kb": 15.6,
-      "_lines": 370
+      "_lines": 370,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2261,7 +2351,8 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
       "_size_kb": 17.2,
-      "_lines": 436
+      "_lines": 436,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2285,7 +2376,8 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
       "_size_kb": 20.4,
-      "_lines": 506
+      "_lines": 506,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2309,7 +2401,8 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
       "_size_kb": 22.4,
-      "_lines": 538
+      "_lines": 538,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2333,7 +2426,8 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
       "_size_kb": 23.8,
-      "_lines": 631
+      "_lines": 631,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2358,7 +2452,8 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
       "_size_kb": 14.6,
-      "_lines": 349
+      "_lines": 349,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2383,7 +2478,8 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
       "_size_kb": 14.6,
-      "_lines": 327
+      "_lines": 327,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2407,7 +2503,8 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py",
       "_size_kb": 14.7,
-      "_lines": 308
+      "_lines": 308,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2431,7 +2528,8 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py",
       "_size_kb": 12.9,
-      "_lines": 307
+      "_lines": 307,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2456,7 +2554,8 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py",
       "_size_kb": 16.3,
-      "_lines": 372
+      "_lines": 372,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2480,7 +2579,8 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
       "_size_kb": 15.8,
-      "_lines": 421
+      "_lines": 421,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2504,7 +2604,8 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py",
       "_size_kb": 14.3,
-      "_lines": 379
+      "_lines": 379,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2529,7 +2630,8 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
       "_size_kb": 13.6,
-      "_lines": 351
+      "_lines": 351,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2554,7 +2656,8 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
       "_size_kb": 13.1,
-      "_lines": 363
+      "_lines": 363,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2579,7 +2682,62 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py",
       "_size_kb": 13.1,
-      "_lines": 324
+      "_lines": 324,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@borg/borg_agent",
+      "version": "1.0.0",
+      "display_name": "Borg",
+      "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
+      "author": "Howard",
+      "tags": [
+        "core",
+        "analysis",
+        "github",
+        "web",
+        "assimilation"
+      ],
+      "category": "core",
+      "quality_tier": "verified",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@borg/borg_agent.py.card",
+      "_size_kb": 5.0,
+      "_lines": 102,
+      "_has_card": true,
+      "_card": {
+        "name": "Borg",
+        "title": "The Assimilator",
+        "mana_cost": "{2}{U}{B}",
+        "colors": [
+          "U",
+          "B"
+        ],
+        "type_line": "Creature \u2014 Agent Assimilator",
+        "rarity": "mythic",
+        "power": 6,
+        "toughness": 4,
+        "abilities": [
+          {
+            "keyword": "Assimilate",
+            "cost": "{T}",
+            "text": "Target GitHub repository or URL becomes part of the collective. Create a structured knowledge report."
+          },
+          {
+            "keyword": "Adaptive Analysis",
+            "cost": "",
+            "text": "When Borg assimilates, it detects the tech stack and maps 40+ framework patterns."
+          }
+        ],
+        "flavor_text": "\"Resistance is futile. Your codebase will be added to our own. Your architectural distinctiveness will be catalogued.\" \u2014Borg Collective Directive 7.1",
+        "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-borg\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"glow-borg\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-borg)\"/><g filter=\"url(#glow-borg)\"><rect x=\"55\" y=\"55\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"2\" rx=\"4\"/><rect x=\"70\" y=\"70\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1.5\" rx=\"2\"/><line x1=\"55\" y1=\"100\" x2=\"145\" y2=\"100\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"100\" y1=\"55\" x2=\"100\" y2=\"145\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><polygon points=\"100,25 135,45 135,85 100,105 65,85 65,45\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1\" opacity=\"0.4\"/><polygon points=\"100,95 135,115 135,155 100,175 65,155 65,115\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.4\"/><circle cx=\"100\" cy=\"100\" r=\"15\" fill=\"#4a9eff\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"6\" fill=\"#8b5cf6\" opacity=\"0.9\"/><circle cx=\"85\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"85\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/></g></svg>",
+        "set_code": "HOLO",
+        "artist": "Howard"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2601,9 +2759,44 @@
       "dependencies": [
         "@rapp/basic-agent"
       ],
-      "_file": "agents/@borg/cardsmith_agent.py",
-      "_size_kb": 32.4,
-      "_lines": 318
+      "_file": "agents/@borg/cardsmith_agent.py.card",
+      "_size_kb": 5.1,
+      "_lines": 104,
+      "_has_card": true,
+      "_card": {
+        "name": "CardSmith",
+        "title": "The Forgemaster",
+        "mana_cost": "{2}{R}{W}",
+        "colors": [
+          "R",
+          "W"
+        ],
+        "type_line": "Legendary Creature \u2014 Agent Artificer",
+        "rarity": "mythic",
+        "power": 4,
+        "toughness": 6,
+        "abilities": [
+          {
+            "keyword": "Forge",
+            "cost": "{T}",
+            "text": "Target agent becomes a trading card. Generate stats, abilities, art, and flavor text from its manifest."
+          },
+          {
+            "keyword": "Mass Production",
+            "cost": "{3}{T}",
+            "text": "Forge cards for all agents in the registry. Each card is deterministic \u2014 same agent, same card, always."
+          },
+          {
+            "keyword": "Howard's Touch",
+            "cost": "",
+            "text": "Cards forged by CardSmith that match the original 13 use Howard's hand-crafted art and stats instead of procedural generation."
+          }
+        ],
+        "flavor_text": "\"Every agent deserves a card. Every card deserves to be held.\" \u2014Howard, on why sneakernet matters",
+        "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-cs\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0804\"/></radialGradient><filter id=\"glow-cs\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-cs)\"/><g filter=\"url(#glow-cs)\"><polygon points=\"100,30 130,50 130,90 100,110 70,90 70,50\" fill=\"none\" stroke=\"#ff9800\" stroke-width=\"2\" opacity=\"0.7\"/><rect x=\"60\" y=\"110\" width=\"80\" height=\"50\" rx=\"4\" fill=\"none\" stroke=\"#ef6c00\" stroke-width=\"2\" opacity=\"0.6\"/><line x1=\"60\" y1=\"125\" x2=\"140\" y2=\"125\" stroke=\"#ff9800\" stroke-width=\"1\" opacity=\"0.3\"/><line x1=\"60\" y1=\"140\" x2=\"140\" y2=\"140\" stroke=\"#ff9800\" stroke-width=\"1\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"70\" r=\"20\" fill=\"#ff9800\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"70\" r=\"10\" fill=\"#ef6c00\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"70\" r=\"4\" fill=\"#ffb74d\" opacity=\"0.9\"/><line x1=\"100\" y1=\"50\" x2=\"100\" y2=\"30\" stroke=\"#ffb74d\" stroke-width=\"1.5\" opacity=\"0.5\"/><line x1=\"80\" y1=\"60\" x2=\"70\" y2=\"50\" stroke=\"#ff9800\" stroke-width=\"1\" opacity=\"0.4\"/><line x1=\"120\" y1=\"60\" x2=\"130\" y2=\"50\" stroke=\"#ff9800\" stroke-width=\"1\" opacity=\"0.4\"/><circle cx=\"75\" cy=\"130\" r=\"3\" fill=\"#ff9800\" opacity=\"0.4\"/><circle cx=\"100\" cy=\"130\" r=\"3\" fill=\"#ef6c00\" opacity=\"0.5\"/><circle cx=\"125\" cy=\"130\" r=\"3\" fill=\"#ff9800\" opacity=\"0.4\"/></g></svg>",
+        "set_code": "HOLO",
+        "artist": "Howard"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2626,7 +2819,8 @@
       ],
       "_file": "agents/@discreetRappers/agent_generator.py",
       "_size_kb": 47.9,
-      "_lines": 1257
+      "_lines": 1257,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2652,7 +2846,8 @@
       ],
       "_file": "agents/@discreetRappers/agent_transpiler.py",
       "_size_kb": 39.1,
-      "_lines": 1035
+      "_lines": 1035,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2676,7 +2871,8 @@
       ],
       "_file": "agents/@discreetRappers/architecture_diagram.py",
       "_size_kb": 38.3,
-      "_lines": 996
+      "_lines": 996,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2704,7 +2900,8 @@
       ],
       "_file": "agents/@discreetRappers/copilot_studio_transpiler.py",
       "_size_kb": 88.5,
-      "_lines": 2154
+      "_lines": 2154,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2732,7 +2929,8 @@
       ],
       "_file": "agents/@discreetRappers/demo_script_generator.py",
       "_size_kb": 58.4,
-      "_lines": 1201
+      "_lines": 1201,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2756,7 +2954,8 @@
       ],
       "_file": "agents/@discreetRappers/dynamics_crud.py",
       "_size_kb": 21.1,
-      "_lines": 418
+      "_lines": 418,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2779,7 +2978,8 @@
       ],
       "_file": "agents/@discreetRappers/email_drafting.py",
       "_size_kb": 6.0,
-      "_lines": 149
+      "_lines": 149,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2803,7 +3003,8 @@
       ],
       "_file": "agents/@discreetRappers/powerpoint_generator.py",
       "_size_kb": 61.2,
-      "_lines": 1549
+      "_lines": 1549,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2825,7 +3026,8 @@
       ],
       "_file": "agents/@discreetRappers/project_tracker.py",
       "_size_kb": 39.1,
-      "_lines": 894
+      "_lines": 894,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2853,7 +3055,8 @@
       ],
       "_file": "agents/@discreetRappers/rapp_pipeline.py",
       "_size_kb": 121.0,
-      "_lines": 2984
+      "_lines": 2984,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2876,7 +3079,8 @@
       ],
       "_file": "agents/@discreetRappers/sales_assistant.py",
       "_size_kb": 26.7,
-      "_lines": 631
+      "_lines": 631,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2900,7 +3104,8 @@
       ],
       "_file": "agents/@discreetRappers/scripted_demo.py",
       "_size_kb": 54.2,
-      "_lines": 1301
+      "_lines": 1301,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2930,7 +3135,8 @@
       ],
       "_file": "agents/@discreetRappers/sharepoint_contract_analysis.py",
       "_size_kb": 119.8,
-      "_lines": 2468
+      "_lines": 2468,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2955,7 +3161,8 @@
       ],
       "_file": "agents/@kody/agent_workbench_agent.py",
       "_size_kb": 28.6,
-      "_lines": 723
+      "_lines": 723,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2978,7 +3185,8 @@
       ],
       "_file": "agents/@kody/context_memory.py",
       "_size_kb": 8.4,
-      "_lines": 183
+      "_lines": 183,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3001,7 +3209,8 @@
       ],
       "_file": "agents/@kody/github_agent_library.py",
       "_size_kb": 43.7,
-      "_lines": 957
+      "_lines": 957,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3024,7 +3233,8 @@
       ],
       "_file": "agents/@kody/manage_memory.py",
       "_size_kb": 10.8,
-      "_lines": 255
+      "_lines": 255,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3050,7 +3260,8 @@
       ],
       "_file": "agents/@kody/rar_remote_agent.py",
       "_size_kb": 33.4,
-      "_lines": 839
+      "_lines": 839,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3070,7 +3281,8 @@
       "dependencies": [],
       "_file": "agents/@rapp/basic-agent.py",
       "_size_kb": 1.3,
-      "_lines": 29
+      "_lines": 29,
+      "_has_card": false
     }
   ],
   "instance": {

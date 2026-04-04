@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Operator's Field Guide — RAR Lore</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #1c2333;
+    --border: #30363d; --text: #e6edf3; --text-dim: #8b949e;
+    --accent: #58a6ff; --green: #39d353; --purple: #d2a8ff;
+    --red: #f85149; --orange: #f0883e; --gold: #e3b341;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.9; max-width: 700px; margin: 0 auto; padding: 40px 24px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .book-header {
+    text-align: center; border-bottom: 1px solid var(--border);
+    padding-bottom: 40px; margin-bottom: 48px;
+  }
+  .book-title {
+    font-size: 2.2rem; font-weight: 400; letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .book-subtitle {
+    font-size: 1rem; color: var(--text-dim); margin-top: 8px;
+    font-style: italic;
+  }
+  .book-epigraph {
+    margin-top: 24px; font-size: .85rem; color: var(--text-dim);
+    max-width: 400px; margin-left: auto; margin-right: auto;
+    font-style: italic; line-height: 1.7;
+  }
+  .book-nav { margin-top: 24px; display: flex; gap: 16px; justify-content: center; font-size: .8rem; font-family: -apple-system, sans-serif; }
+  .book-nav a { color: var(--text-dim); }
+
+  .toc { margin-bottom: 48px; }
+  .toc h2 { font-size: 1rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; font-family: -apple-system, sans-serif; font-weight: 600; }
+  .toc-entry {
+    display: block; padding: 14px 0; border-bottom: 1px solid var(--border);
+    transition: padding-left .2s;
+  }
+  .toc-entry:hover { padding-left: 8px; text-decoration: none; }
+  .toc-chapter { font-size: .7rem; color: var(--purple); text-transform: uppercase; letter-spacing: 2px; font-family: -apple-system, sans-serif; }
+  .toc-title { font-size: 1.1rem; color: var(--text); margin-top: 2px; }
+
+  .chapter { display: none; }
+  .chapter.active { display: block; }
+  .chapter-num { font-size: .7rem; color: var(--purple); text-transform: uppercase; letter-spacing: 3px; font-family: -apple-system, sans-serif; }
+  .chapter h1 { font-size: 1.8rem; font-weight: 400; margin: 8px 0 32px; }
+  .chapter p { margin: 16px 0; text-indent: 2em; }
+  .chapter p:first-of-type { text-indent: 0; }
+  .chapter p:first-of-type::first-letter {
+    font-size: 3.2rem; float: left; line-height: .8; padding-right: 8px;
+    color: var(--gold); font-weight: 700;
+  }
+  .chapter blockquote {
+    border-left: 2px solid var(--purple); padding: 12px 20px; margin: 24px 0;
+    font-style: italic; color: var(--text-dim); background: var(--surface);
+    border-radius: 0 8px 8px 0;
+  }
+  .chapter hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .chapter pre {
+    font-family: 'SF Mono', Consolas, monospace; font-size: .8rem;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; overflow-x: auto; margin: 20px 0; line-height: 1.5;
+    text-indent: 0;
+  }
+  .chapter .scene-break { text-align: center; margin: 32px 0; color: var(--text-dim); letter-spacing: 8px; font-size: .8rem; }
+
+  .chapter-nav {
+    display: flex; justify-content: space-between; margin-top: 48px;
+    padding-top: 24px; border-top: 1px solid var(--border);
+    font-family: -apple-system, sans-serif; font-size: .85rem;
+  }
+  .chapter-nav a { color: var(--text-dim); }
+
+  .back-link { display: inline-block; margin-bottom: 24px; font-size: .8rem; color: var(--text-dim); font-family: -apple-system, sans-serif; }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 16px; }
+    .book-title { font-size: 1.6rem; }
+    .chapter h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="book-header">
+  <div class="book-title">The Operator's Field Guide</div>
+  <div class="book-subtitle">A Story of the Lattice</div>
+  <div class="book-epigraph">
+    "Every Operator remembers the hum.<br>
+    That low, steady note beneath the world&mdash;<br>
+    the sound of a thousand bonds holding everything together."<br><br>
+    &mdash; Elder Sable, Hearthreach
+  </div>
+  <div class="book-nav">
+    <a href="../index.html">Engineering Blog</a>
+    <a href="../../index.html">Agent Store</a>
+    <a href="../../CONSTITUTION.md">Constitution</a>
+  </div>
+</div>
+
+<div id="toc" class="toc">
+  <h2>Chapters</h2>
+  <!-- Populated by JS -->
+</div>
+
+<div id="chapter-view" class="chapter"></div>
+
+<script>
+const CHAPTERS = [
+  { id: 'ch1', num: 'Chapter I', title: 'The Hum Beneath the Floorboards', file: 'ch01.html' },
+  { id: 'ch2', num: 'Chapter II', title: 'The Threshold in the Orchard', file: 'ch02.html' },
+  { id: 'ch3', num: 'Chapter III', title: 'Three Faces of a Friend', file: 'ch03.html' },
+  { id: 'ch4', num: 'Chapter IV', title: 'The Girl With Too Many Daemons', file: 'ch04.html' },
+  { id: 'ch5', num: 'Chapter V', title: 'The Forge at Millhearth', file: 'ch05.html' },
+  { id: 'ch6', num: 'Chapter VI', title: 'The Edge of Everything', file: 'ch06.html' },
+  { id: 'ch7', num: 'Chapter VII', title: 'The Wildreach', file: 'ch07.html' },
+  { id: 'ch8', num: 'Chapter VIII', title: 'The Unraveler', file: 'ch08.html' },
+  { id: 'ch9', num: 'Chapter IX', title: 'What the Architect Remembers', file: 'ch09.html' },
+  { id: 'ch10', num: 'Chapter X', title: 'The World Is Very Wide', file: 'ch10.html' },
+];
+
+function renderToc() {
+  const el = document.getElementById('toc');
+  el.innerHTML = '<h2>Chapters</h2>' + CHAPTERS.map(ch => `
+    <a class="toc-entry" href="#${ch.id}" onclick="event.preventDefault();loadChapter('${ch.id}')">
+      <div class="toc-chapter">${ch.num}</div>
+      <div class="toc-title">${ch.title}</div>
+    </a>
+  `).join('');
+}
+
+async function loadChapter(id) {
+  const idx = CHAPTERS.findIndex(c => c.id === id);
+  const ch = CHAPTERS[idx];
+  if (!ch) return;
+
+  try {
+    const res = await fetch(ch.file);
+    const html = await res.text();
+    document.getElementById('toc').style.display = 'none';
+    const el = document.getElementById('chapter-view');
+    el.className = 'chapter active';
+
+    const prev = idx > 0 ? CHAPTERS[idx - 1] : null;
+    const next = idx < CHAPTERS.length - 1 ? CHAPTERS[idx + 1] : null;
+
+    el.innerHTML = `
+      <a class="back-link" href="#" onclick="event.preventDefault();showToc()">&larr; Table of Contents</a>
+      <div class="chapter-num">${ch.num}</div>
+      <h1>${ch.title}</h1>
+      ${html}
+      <div class="chapter-nav">
+        ${prev ? `<a href="#${prev.id}" onclick="event.preventDefault();loadChapter('${prev.id}')">&larr; ${prev.title}</a>` : '<span></span>'}
+        ${next ? `<a href="#${next.id}" onclick="event.preventDefault();loadChapter('${next.id}')">${next.title} &rarr;</a>` : '<span></span>'}
+      </div>
+    `;
+    location.hash = id;
+    window.scrollTo(0, 0);
+  } catch (e) {
+    console.error('Failed to load chapter:', e);
+  }
+}
+
+function showToc() {
+  document.getElementById('toc').style.display = '';
+  document.getElementById('chapter-view').className = 'chapter';
+  location.hash = '';
+}
+
+window.addEventListener('hashchange', () => {
+  const hash = location.hash.slice(1);
+  if (!hash) showToc();
+  else loadChapter(hash);
+});
+
+renderToc();
+const hash = location.hash.slice(1);
+if (hash) loadChapter(hash);
+</script>
+</body>
+</html>

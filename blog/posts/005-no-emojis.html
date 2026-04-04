@@ -1,0 +1,63 @@
+<h2>87 Emojis Found. 87 Emojis Killed.</h2>
+
+<p>A thorough audit of the RAR codebase found 87 emoji usages: 21 Unicode emoji characters and 66 HTML entity emojis. They were everywhere &mdash; category icons, pack art, section headers, modal buttons, slab badges, quiz results, the cart, the search bar.</p>
+
+<p>They all had to go.</p>
+
+<h3>Why Emojis Are Wrong for RAR</h3>
+
+<p>Emojis look different on every platform. An emoji that looks polished on macOS looks completely different on Windows, Android, and Linux. They're rendered by the OS, not by us. We have zero control over their visual identity.</p>
+
+<p>RAR already had a hand-crafted SVG glyph system &mdash; <code>SEMANTIC_GLYPHS</code> &mdash; used by the card art generator. These glyphs are consistent, scalable, and part of the same visual language as the trading cards. Using emojis alongside them was a visual contradiction.</p>
+
+<h3>The Solution: Two Glyph Libraries</h3>
+
+<table>
+  <tr><th>Library</th><th>Purpose</th><th>Glyphs</th></tr>
+  <tr><td><code>SEMANTIC_GLYPHS</code></td><td>Card art composition (existing)</td><td>brain, gear, code, wrench, pipeline, person, email, api, cloud, chart, shield, heart, money, factory, lightning, building, document, arrow, database, memory</td></tr>
+  <tr><td><code>UI_GLYPHS</code></td><td>UI icons (new)</td><td>search, cart, globe, pencil, trash, link, trophy, confetti, book, crown, crystal, flask, flame, speech, memo, bag, handshake, desktop, sparkle</td></tr>
+</table>
+
+<p>Both libraries share the same rendering signature: <code>(primaryColor, centerX, centerY) => svgContent</code>. Both are rendered via the same <code>svgIcon()</code> function:</p>
+
+<pre><code>function svgIcon(name, color, size) {
+  const fn = UI_GLYPHS[name] || SEMANTIC_GLYPHS[name];
+  if (!fn) return '';
+  const s = size || 20;
+  return `&lt;svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"
+    style="display:inline-block;vertical-align:middle"&gt;
+    ${fn(color || '#fff', s/2, s/2)}&lt;/svg&gt;`;
+}</code></pre>
+
+<h3>What Changed</h3>
+
+<ul>
+  <li><strong>Category icons</strong> &mdash; <code>CAT_TO_EMOJI</code> (dead code) replaced with <code>CAT_TO_GLYPH</code> mapping categories to glyph names</li>
+  <li><strong>Pack icons</strong> &mdash; crystal ball / test tube / fire emojis replaced with <code>crystal</code>, <code>flask</code>, <code>flame</code> SVG art rendered at 48px</li>
+  <li><strong>Cart</strong> &mdash; shopping bag emoji replaced with <code>cart</code> SVG glyph</li>
+  <li><strong>Search</strong> &mdash; magnifying glass emoji replaced with <code>search</code> SVG</li>
+  <li><strong>Section headers</strong> &mdash; speech bubble, document, memo emojis replaced with matching SVGs</li>
+  <li><strong>Modal actions</strong> &mdash; trash, link, lightning, pencil, cart emojis all replaced</li>
+  <li><strong>Slab viewer</strong> &mdash; trophy and money bag emojis replaced</li>
+  <li><strong>Quiz results</strong> &mdash; trophy, confetti, book emojis replaced</li>
+  <li><strong>Trophy case</strong> &mdash; crown emoji replaced</li>
+</ul>
+
+<h3>What We Kept</h3>
+
+<p>Functional typographic symbols were left alone:</p>
+
+<ul>
+  <li>Checkmarks, X marks, stars (rating system)</li>
+  <li>Up/down triangles (voting)</li>
+  <li>Left/right arrows (navigation)</li>
+  <li>Warning signs (status indicators)</li>
+</ul>
+
+<p>These aren't emojis &mdash; they're Unicode typographic symbols that render identically everywhere. They serve a functional purpose, not a decorative one.</p>
+
+<h3>The Rule</h3>
+
+<blockquote>No emojis. If you need a visual, use <code>svgIcon()</code>. If it doesn't exist yet, add it to <code>UI_GLYPHS</code>.</blockquote>
+
+<p>The visual identity is now unified: cards, UI, pack art, and badges all use the same SVG art system. No more platform-dependent rendering. No more visual contradictions.</p>
