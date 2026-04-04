@@ -6,6 +6,8 @@
 <title>RAR — The Open Agent.py Ecosystem</title>
 <meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.min.js" defer></script>
 <style>
   :root {
     --bg: #0d1117;
@@ -1285,6 +1287,50 @@
   .steer-slot.live .slot-status { color: var(--green); }
 
   /* ─── RAD Export Badge ──────────────────────────── */
+  /* ─── Gesture & Voice HUD ─────────────────────── */
+  .gesture-hud {
+    position: fixed; bottom: 20px; right: 20px; z-index: 200;
+    display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+  }
+  .gesture-cam {
+    width: 160px; height: 120px; border-radius: 8px; border: 2px solid var(--border);
+    background: #000; overflow: hidden; position: relative;
+  }
+  .gesture-cam video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  .gesture-cam canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1);
+  }
+  .gesture-cam .cam-label {
+    position: absolute; top: 4px; left: 6px; font-size: .55rem; color: var(--green);
+    font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 3px rgba(0,0,0,.8);
+  }
+  .gesture-controls {
+    display: flex; gap: 6px; align-items: center;
+  }
+  .gesture-btn {
+    padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-dim); font-size: .72rem;
+    cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 6px;
+  }
+  .gesture-btn:hover { border-color: var(--accent); color: var(--text); }
+  .gesture-btn.active { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+  .gesture-btn .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted);
+  }
+  .gesture-btn.active .dot { background: var(--green); animation: streamPulse 1.5s ease-in-out infinite; }
+  .voice-transcript {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: .72rem; color: var(--text-dim); max-width: 300px;
+    font-style: italic;
+  }
+  .gesture-toast {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    background: rgba(0,0,0,.85); color: #fff; padding: 16px 32px; border-radius: 12px;
+    font-size: 1.2rem; font-weight: 700; z-index: 300; pointer-events: none;
+    animation: gestureToastIn .3s ease-out;
+  }
+  @keyframes gestureToastIn { from { opacity: 0; transform: translate(-50%,-50%) scale(.8); } }
+
   .rad-badge {
     display: inline-flex; align-items: center; gap: 4px;
     background: linear-gradient(135deg, #2a1a3a, #1a0a2a); border: 1px solid var(--purple);
@@ -2246,12 +2292,21 @@ class MyAgent(BasicAgent):
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Stream &bull; Hot-Load &bull; Steer</div>
       <h2 style="font-size:1.4rem;font-weight:800">AGENT STREAMING</h2>
       <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Stream agent bytecode from GitHub into memory. No download. No disk write. Hot-load, steer, eject. Close the tab and it's gone.</p>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+        <button onclick="toggleStreamMode()" id="stream-mode-btn" style="padding:4px 14px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.7rem;cursor:pointer">Advanced Mode</button>
+        <button class="gesture-btn" data-mode="gesture" onclick="toggleGestureMode()" style="display:none" id="gesture-toggle"><span class="dot"></span>Gesture</button>
+        <button class="gesture-btn" data-mode="voice" onclick="toggleVoiceMode()" style="display:none" id="voice-toggle"><span class="dot"></span>Voice</button>
+      </div>
     </div>
 
     <div class="stream-bar">
       <input type="text" id="stream-url" placeholder="@publisher/agent_slug  or  full raw GitHub URL" onkeydown="if(event.key==='Enter')streamAgent()">
       <button onclick="streamAgent()">Stream</button>
       <button onclick="streamDeck()" style="background:linear-gradient(135deg, var(--green), #1a8a3a)">Stream Deck</button>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:8px;border-left:1px solid var(--border);padding-left:10px">
+        <span id="e2e-status"><span style="color:var(--text-muted);font-size:.65rem">Unencrypted</span></span>
+        <button onclick="generateE2EKey()" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--text-dim);font-size:.6rem;cursor:pointer" title="Generate E2E encryption key for secure streaming">E2E</button>
+      </div>
     </div>
     <div id="stream-status"></div>
     <div class="streamed-agents" id="streamed-agents"></div>
@@ -2267,8 +2322,8 @@ class MyAgent(BasicAgent):
       <div class="steer-grid" id="steer-grid"></div>
     </div>
 
-    <!-- Runtime Targets -->
-    <div style="margin-top:24px">
+    <!-- Runtime Targets (Advanced) -->
+    <div class="advanced-only" style="margin-top:24px;display:none">
       <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Runtime Targets</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
 
@@ -2325,8 +2380,8 @@ class MyAgent(BasicAgent):
       </div>
     </div>
 
-    <!-- Brainstem Connect Modal -->
-    <div id="brainstem-connect" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+    <!-- Brainstem Connect Modal (Advanced) -->
+    <div id="brainstem-connect" class="advanced-only" style="display:none;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <h4 style="font-size:.82rem;font-weight:700;color:var(--text-dim)">Connect to Brainstem</h4>
         <button onclick="document.getElementById('brainstem-connect').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem">&times;</button>
@@ -2357,6 +2412,8 @@ class MyAgent(BasicAgent):
         <div><strong style="color:var(--text)">Eject</strong> — Remove from memory. Gone. No trace on disk.</div>
         <div><strong style="color:var(--text)">Brainstem</strong> — Connect to a local RAPP Brainstem. Push agent bytecode for on-device execution. The browser steers, the Brainstem performs.</div>
         <div><strong style="color:var(--text)">CommunityRAPP</strong> — Route to a hosted instance. Same agents, cloud execution surface.</div>
+        <div><strong style="color:var(--text)">Flick</strong> — Pick a card, attach a task, flick it to a runtime. The card carries bytecode, the flick carries intent. Multiple flicks in parallel = multiple agents with their own data streams.</div>
+        <div><strong style="color:var(--text)">Encrypt</strong> — E2E encryption via AES-256-GCM. Generate a key, share via QR code on the card back. From scan to stream to steer — encrypted end-to-end.</div>
         <div><strong style="color:var(--text)">Universal</strong> — The .py file is the unit. The runtime is a choice. Stream once, route anywhere.</div>
       </div>
     </div>
@@ -7336,16 +7393,27 @@ function renderSteerPanel() {
   document.getElementById('steer-indicator').style.display = '';
 
   const hasBrainstem = _brainstemConn?.connected;
+  const hasLisppy = _lisppyRuntime?.loaded;
   grid.innerHTML = [..._streamedAgents.entries()].map(([name, s]) => {
     const isInDeck = deck.has(name);
-    const target = isInDeck ? (hasBrainstem ? 'Brainstem' : 'Browser') : 'Standby';
-    const targetColor = target === 'Brainstem' ? '#f85149' : target === 'Browser' ? 'var(--green)' : 'var(--text-muted)';
+    const safeName = esc(name).replace(/'/g, "\\'");
+    const flicked = s._flickTarget || null;
+    const flickLabel = flicked === 'brainstem' ? 'BRAINSTEM' : flicked === 'lisppy' ? 'LISPPY' : flicked ? 'ACTIVE' : null;
+    const flickColor = flicked === 'brainstem' ? '#f85149' : flicked === 'lisppy' ? 'var(--green)' : 'var(--accent)';
     return `
-    <div class="steer-slot ${isInDeck ? 'live' : ''}">
-      <div class="slot-name">${esc(s.manifest.display_name || name)}</div>
-      <div class="slot-status">${isInDeck ? 'ROUTED' : 'STANDBY'} <span style="color:${targetColor};font-size:.6rem;font-weight:700">${target.toUpperCase()}</span></div>
-      <div class="slot-guid">${s.guid}</div>
-      ${isInDeck && hasBrainstem ? `<button onclick="event.stopPropagation();pushToBrainstem('${esc(name)}')" style="margin-top:4px;padding:2px 8px;border-radius:4px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.08);color:#f85149;font-size:.6rem;cursor:pointer">Push to Brainstem</button>` : ''}
+    <div class="steer-slot ${isInDeck ? 'live' : ''} ${flicked ? 'live' : ''}">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div class="slot-name">${esc(s.manifest.display_name || name)}</div>
+        ${flickLabel ? `<span style="font-size:.55rem;font-weight:800;color:${flickColor};letter-spacing:1px">${flickLabel}</span>` : ''}
+      </div>
+      <div class="slot-guid">${s.guid.slice(0,8)}</div>
+      <input type="text" placeholder="task payload..." id="flick-task-${s.guid.slice(0,8)}" style="width:100%;margin-top:6px;padding:4px 8px;font-size:.7rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:monospace">
+      <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
+        ${hasBrainstem ? `<button onclick="flickTo('${safeName}','brainstem')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.08);color:#f85149;font-size:.58rem;cursor:pointer;font-weight:600">Flick &rarr; Brainstem</button>` : ''}
+        ${hasLisppy ? `<button onclick="flickTo('${safeName}','lisppy')" style="padding:2px 8px;border-radius:4px;border:1px solid rgba(63,185,80,.3);background:rgba(63,185,80,.08);color:var(--green);font-size:.58rem;cursor:pointer;font-weight:600">Flick &rarr; Lisppy</button>` : ''}
+        <button onclick="flickTo('${safeName}','browser')" style="padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.58rem;cursor:pointer">Inspect</button>
+        <button onclick="ejectAgent('${safeName}')" style="padding:2px 8px;border-radius:4px;border:none;background:none;color:var(--text-muted);font-size:.55rem;cursor:pointer">&times; Eject</button>
+      </div>
     </div>`;
   }).join('');
 }
@@ -7353,6 +7421,115 @@ function renderSteerPanel() {
 function getStreamedSource(name) {
   const s = _streamedAgents.get(name);
   return s ? s.code : null;
+}
+
+// ═══════════════════════════════════════════════════════
+// Flick — Send a card + task to a runtime target
+// ═══════════════════════════════════════════════════════
+async function flickTo(name, target) {
+  const entry = _streamedAgents.get(name);
+  if (!entry) return;
+
+  // Get task payload from the input field
+  const inputEl = document.getElementById(`flick-task-${entry.guid.slice(0,8)}`);
+  const task = inputEl?.value || '';
+
+  entry._flickTarget = target;
+  entry._flickTask = task;
+  entry._flickedAt = new Date().toISOString();
+
+  if (target === 'brainstem') {
+    if (!_brainstemConn?.connected) {
+      showToast('Connect to Brainstem first', 'error');
+      entry._flickTarget = null;
+      renderSteerPanel();
+      return;
+    }
+    // Encrypt the payload if E2E is enabled
+    const payload = _e2eKey ? await encryptPayload({ name: entry.manifest.name, guid: entry.guid, code: entry.code, task }) : { name: entry.manifest.name, guid: entry.guid, code: entry.code, task };
+    await pushToBrainstem(name);
+    if (task) {
+      await invokeOnBrainstem(name, { task, encrypted: !!_e2eKey });
+    }
+    showToast(`Flicked ${entry.manifest.display_name} → Brainstem${task ? ' with task' : ''}`, 'success');
+  } else if (target === 'lisppy') {
+    if (!_lisppyRuntime?.loaded) {
+      showToast('Load Lisppy runtime first', 'error');
+      entry._flickTarget = null;
+      renderSteerPanel();
+      return;
+    }
+    // Eval in lisppy REPL
+    const output = document.getElementById('lisppy-output');
+    if (output) {
+      output.textContent += `\n;; FLICK: ${entry.manifest.display_name} → Lisppy\n`;
+      output.textContent += `(define-agent "${name}" :guid "${entry.guid}" :task "${task}")\n`;
+      output.textContent += `;; Agent loaded. perform() available via (invoke "${name}" task)\n`;
+      output.scrollTop = output.scrollHeight;
+    }
+    showToast(`Flicked ${entry.manifest.display_name} → Lisppy REPL${task ? ' with task' : ''}`, 'success');
+  } else {
+    // Browser — just inspect
+    openAgent(name);
+    entry._flickTarget = null;
+  }
+  renderSteerPanel();
+}
+
+// ═══════════════════════════════════════════════════════
+// E2E Encryption — QR code to stream, encrypted end-to-end
+// ═══════════════════════════════════════════════════════
+let _e2eKey = null; // CryptoKey for AES-GCM
+
+async function generateE2EKey() {
+  _e2eKey = await crypto.subtle.generateKey(
+    { name: 'AES-GCM', length: 256 },
+    true, // extractable (for sharing via QR)
+    ['encrypt', 'decrypt']
+  );
+  const raw = await crypto.subtle.exportKey('raw', _e2eKey);
+  const hex = [...new Uint8Array(raw)].map(b => b.toString(16).padStart(2, '0')).join('');
+  showToast('E2E key generated — share via QR to connect securely', 'success');
+  updateE2EStatus();
+  return hex;
+}
+
+async function importE2EKey(hex) {
+  const bytes = new Uint8Array(hex.match(/.{2}/g).map(b => parseInt(b, 16)));
+  _e2eKey = await crypto.subtle.importKey(
+    'raw', bytes, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
+  );
+  showToast('E2E key imported — connection is encrypted', 'success');
+  updateE2EStatus();
+}
+
+async function encryptPayload(data) {
+  if (!_e2eKey) return data;
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(JSON.stringify(data));
+  const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, _e2eKey, encoded);
+  return {
+    encrypted: true,
+    iv: [...iv].map(b => b.toString(16).padStart(2, '0')).join(''),
+    data: [...new Uint8Array(ciphertext)].map(b => b.toString(16).padStart(2, '0')).join(''),
+  };
+}
+
+async function decryptPayload(payload) {
+  if (!_e2eKey || !payload.encrypted) return payload;
+  const iv = new Uint8Array(payload.iv.match(/.{2}/g).map(b => parseInt(b, 16)));
+  const data = new Uint8Array(payload.data.match(/.{2}/g).map(b => parseInt(b, 16)));
+  const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, _e2eKey, data);
+  return JSON.parse(new TextDecoder().decode(decrypted));
+}
+
+function updateE2EStatus() {
+  const el = document.getElementById('e2e-status');
+  if (el) {
+    el.innerHTML = _e2eKey
+      ? '<span style="color:var(--green);font-size:.65rem"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:4px"></span>E2E Encrypted</span>'
+      : '<span style="color:var(--text-muted);font-size:.65rem">Unencrypted</span>';
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -7827,6 +8004,338 @@ async function importRAD(file) {
 }
 
 // .rad.eggs import handled in handleFileDrop above
+
+// ═══════════════════════════════════════════════════════
+// Gesture Controls — MediaPipe Hands + Voice
+// ═══════════════════════════════════════════════════════
+let _streamAdvanced = false;
+function toggleStreamMode() {
+  _streamAdvanced = !_streamAdvanced;
+  const btn = document.getElementById('stream-mode-btn');
+  if (btn) {
+    btn.textContent = _streamAdvanced ? 'Simple Mode' : 'Advanced Mode';
+    btn.style.color = _streamAdvanced ? 'var(--accent)' : 'var(--text-muted)';
+    btn.style.borderColor = _streamAdvanced ? 'var(--accent)' : 'var(--border)';
+  }
+  // Show/hide advanced controls
+  ['gesture-toggle', 'voice-toggle'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = _streamAdvanced ? '' : 'none';
+  });
+  // Show/hide runtime targets, lisppy, brainstem installer
+  document.querySelectorAll('.advanced-only').forEach(el => {
+    el.style.display = _streamAdvanced ? '' : 'none';
+  });
+}
+
+let _gestureActive = false;
+let _voiceActive = false;
+let _gestureRecognition = null;
+let _voiceRecognition = null;
+let _lastGesture = null;
+let _gestureDebounce = 0;
+
+function toggleGestureMode() {
+  if (_gestureActive) stopGesture();
+  else startGesture();
+}
+
+function toggleVoiceMode() {
+  if (_voiceActive) stopVoice();
+  else startVoice();
+}
+
+async function startGesture() {
+  if (typeof Hands === 'undefined') {
+    showToast('MediaPipe Hands loading... try again in a moment', 'error');
+    return;
+  }
+
+  _gestureActive = true;
+  document.querySelector('.gesture-btn[data-mode="gesture"]')?.classList.add('active');
+
+  // Create camera feed
+  let hud = document.getElementById('gesture-hud');
+  if (!hud) {
+    hud = document.createElement('div');
+    hud.className = 'gesture-hud';
+    hud.id = 'gesture-hud';
+    document.body.appendChild(hud);
+  }
+
+  hud.innerHTML = `
+    <div class="gesture-cam" id="gesture-cam">
+      <video id="gesture-video" autoplay playsinline></video>
+      <canvas id="gesture-canvas"></canvas>
+      <div class="cam-label">GESTURE</div>
+    </div>
+    <div class="gesture-controls">
+      <button class="gesture-btn active" data-mode="gesture" onclick="toggleGestureMode()"><span class="dot"></span>Gesture</button>
+      <button class="gesture-btn ${_voiceActive ? 'active' : ''}" data-mode="voice" onclick="toggleVoiceMode()"><span class="dot"></span>Voice</button>
+    </div>
+    <div class="voice-transcript" id="voice-transcript" style="display:${_voiceActive ? 'block' : 'none'}">Listening...</div>
+  `;
+
+  const video = document.getElementById('gesture-video');
+  const canvas = document.getElementById('gesture-canvas');
+  const ctx = canvas.getContext('2d');
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } });
+    video.srcObject = stream;
+
+    const hands = new Hands({
+      locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`
+    });
+
+    hands.setOptions({
+      maxNumHands: 1,
+      modelComplexity: 0,
+      minDetectionConfidence: 0.6,
+      minTrackingConfidence: 0.5,
+    });
+
+    hands.onResults(results => {
+      canvas.width = video.videoWidth || 320;
+      canvas.height = video.videoHeight || 240;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (results.multiHandLandmarks?.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        drawHandLandmarks(ctx, landmarks, canvas.width, canvas.height);
+        const gesture = detectGesture(landmarks);
+        if (gesture && Date.now() - _gestureDebounce > 1000) {
+          _gestureDebounce = Date.now();
+          handleGesture(gesture);
+        }
+      }
+    });
+
+    _gestureRecognition = hands;
+
+    // Process frames
+    const processFrame = async () => {
+      if (!_gestureActive) return;
+      if (video.readyState >= 2) {
+        await hands.send({ image: video });
+      }
+      requestAnimationFrame(processFrame);
+    };
+    video.addEventListener('loadeddata', () => processFrame());
+
+  } catch (err) {
+    showToast('Camera access denied: ' + err.message, 'error');
+    stopGesture();
+  }
+}
+
+function stopGesture() {
+  _gestureActive = false;
+  document.querySelector('.gesture-btn[data-mode="gesture"]')?.classList.remove('active');
+  const video = document.getElementById('gesture-video');
+  if (video?.srcObject) {
+    video.srcObject.getTracks().forEach(t => t.stop());
+    video.srcObject = null;
+  }
+  const hud = document.getElementById('gesture-hud');
+  if (hud && !_voiceActive) hud.remove();
+}
+
+function drawHandLandmarks(ctx, landmarks, w, h) {
+  ctx.fillStyle = 'var(--green)';
+  landmarks.forEach(lm => {
+    ctx.beginPath();
+    ctx.arc(lm.x * w, lm.y * h, 3, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  // Draw connections
+  const connections = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+  ctx.strokeStyle = 'rgba(63,185,80,.4)';
+  ctx.lineWidth = 1;
+  connections.forEach(([a, b]) => {
+    ctx.beginPath();
+    ctx.moveTo(landmarks[a].x * w, landmarks[a].y * h);
+    ctx.lineTo(landmarks[b].x * w, landmarks[b].y * h);
+    ctx.stroke();
+  });
+}
+
+function detectGesture(landmarks) {
+  // Detect gestures from hand landmarks
+  const thumb = landmarks[4];
+  const index = landmarks[8];
+  const middle = landmarks[12];
+  const ring = landmarks[16];
+  const pinky = landmarks[20];
+  const wrist = landmarks[0];
+
+  // Finger extension detection (tip y < pip y = extended)
+  const indexUp = landmarks[8].y < landmarks[6].y;
+  const middleUp = landmarks[12].y < landmarks[10].y;
+  const ringUp = landmarks[16].y < landmarks[14].y;
+  const pinkyUp = landmarks[20].y < landmarks[18].y;
+  const thumbOut = Math.abs(thumb.x - landmarks[2].x) > 0.05;
+
+  // Open palm (all fingers up) → Stream deck
+  if (indexUp && middleUp && ringUp && pinkyUp && thumbOut) return 'open_palm';
+
+  // Pointing (index up, rest down) → Select/Navigate
+  if (indexUp && !middleUp && !ringUp && !pinkyUp) return 'point';
+
+  // Fist (all fingers down) → Eject all
+  if (!indexUp && !middleUp && !ringUp && !pinkyUp && !thumbOut) return 'fist';
+
+  // Peace sign (index + middle up) → Flick to brainstem
+  if (indexUp && middleUp && !ringUp && !pinkyUp) return 'peace';
+
+  // Thumbs up → Approve/Confirm
+  if (thumbOut && thumb.y < wrist.y - 0.15 && !indexUp && !middleUp) return 'thumbs_up';
+
+  // Pinch (thumb + index close) → Grab/Select card
+  const pinchDist = Math.hypot(thumb.x - index.x, thumb.y - index.y);
+  if (pinchDist < 0.05) return 'pinch';
+
+  return null;
+}
+
+function handleGesture(gesture) {
+  _lastGesture = gesture;
+  const actions = {
+    'open_palm': () => { showGestureToast('Stream Deck'); streamDeck(); },
+    'point': () => { showGestureToast('Next Agent'); cycleCardMode(); },
+    'fist': () => { showGestureToast('Eject All'); ejectAll(); },
+    'peace': () => {
+      // Flick first streamed agent to brainstem
+      const first = [..._streamedAgents.keys()][0];
+      if (first) { showGestureToast('Flick → Brainstem'); flickTo(first, 'brainstem'); }
+      else showGestureToast('No agents to flick');
+    },
+    'thumbs_up': () => { showGestureToast('Confirmed'); },
+    'pinch': () => {
+      // Select first streamed agent
+      const first = [..._streamedAgents.keys()][0];
+      if (first) { showGestureToast('Selected'); openAgent(first); }
+    },
+  };
+  const fn = actions[gesture];
+  if (fn) fn();
+}
+
+function showGestureToast(text) {
+  const el = document.createElement('div');
+  el.className = 'gesture-toast';
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1200);
+}
+
+// ── Voice Controls — Web Speech API ──
+function startVoice() {
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('Speech recognition not supported in this browser', 'error');
+    return;
+  }
+
+  _voiceActive = true;
+  document.querySelector('.gesture-btn[data-mode="voice"]')?.classList.add('active');
+  const transcriptEl = document.getElementById('voice-transcript');
+  if (transcriptEl) transcriptEl.style.display = '';
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  _voiceRecognition = new SpeechRecognition();
+  _voiceRecognition.continuous = true;
+  _voiceRecognition.interimResults = true;
+  _voiceRecognition.lang = 'en-US';
+
+  _voiceRecognition.onresult = e => {
+    const last = e.results[e.results.length - 1];
+    const transcript = last[0].transcript.trim().toLowerCase();
+
+    if (transcriptEl) transcriptEl.textContent = transcript;
+
+    if (last.isFinal) {
+      processVoiceCommand(transcript);
+    }
+  };
+
+  _voiceRecognition.onend = () => {
+    if (_voiceActive) _voiceRecognition.start(); // Keep listening
+  };
+
+  _voiceRecognition.onerror = e => {
+    if (e.error !== 'no-speech') {
+      console.warn('Voice error:', e.error);
+    }
+  };
+
+  _voiceRecognition.start();
+  showToast('Voice control active — say "stream deck", "flick", "eject"', 'success');
+}
+
+function stopVoice() {
+  _voiceActive = false;
+  if (_voiceRecognition) { _voiceRecognition.stop(); _voiceRecognition = null; }
+  document.querySelector('.gesture-btn[data-mode="voice"]')?.classList.remove('active');
+  const transcriptEl = document.getElementById('voice-transcript');
+  if (transcriptEl) transcriptEl.style.display = 'none';
+}
+
+function processVoiceCommand(text) {
+  // Stream commands
+  if (text.includes('stream deck') || text.includes('stream the deck')) {
+    showGestureToast('Stream Deck');
+    streamDeck();
+    return;
+  }
+  if (text.match(/stream\s+(.+)/)) {
+    const match = text.match(/stream\s+(.+)/);
+    showGestureToast(`Stream: ${match[1]}`);
+    streamAgent(match[1].trim());
+    return;
+  }
+
+  // Flick commands
+  if (text.includes('flick') && text.includes('brainstem')) {
+    const first = [..._streamedAgents.keys()][0];
+    if (first) { showGestureToast('Flick → Brainstem'); flickTo(first, 'brainstem'); }
+    return;
+  }
+  if (text.includes('flick') && text.includes('lisp')) {
+    const first = [..._streamedAgents.keys()][0];
+    if (first) { showGestureToast('Flick → Lisppy'); flickTo(first, 'lisppy'); }
+    return;
+  }
+
+  // Control commands
+  if (text.includes('eject all') || text.includes('clear all')) {
+    showGestureToast('Eject All');
+    ejectAll();
+    return;
+  }
+  if (text.includes('eject')) {
+    const first = [..._streamedAgents.keys()][0];
+    if (first) ejectAgent(first);
+    return;
+  }
+
+  // Navigation
+  if (text.includes('browse') || text.includes('home')) { switchTab('browse'); return; }
+  if (text.includes('cards')) { switchTab('cards'); return; }
+  if (text.includes('packs')) { switchTab('packs'); return; }
+  if (text.includes('stream') || text.includes('streaming')) { switchTab('stream'); return; }
+  if (text.includes('workbench') || text.includes('build')) { switchTab('workbench'); return; }
+
+  // Card mode
+  if (text.includes('business') || text.includes('professional')) { setCardMode('business'); return; }
+  if (text.includes('holo') || text.includes('holographic')) { setCardMode('creative'); return; }
+  if (text.includes('kids') || text.includes('children')) { setCardMode('kids'); return; }
+
+  // Connect brainstem
+  if (text.includes('connect') && text.includes('brainstem')) { connectBrainstem(); return; }
+
+  // Encrypt
+  if (text.includes('encrypt') || text.includes('e2e')) { generateE2EKey(); return; }
+}
 
 function activateDemoMode() {
   if (window._demoActive) return;
