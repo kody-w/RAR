@@ -4330,9 +4330,22 @@ if (!Object.keys(allDecks).length) {
   } else {
     // Pre-populated starter decks — like exhibits, interact to make them yours
     allDecks = {
+      'Starter Deck': [
+        '@aibast-agents-library/email-drafting',
+        '@aibast-agents-library/meeting-prep',
+        '@aibast-agents-library/it-ticket-management',
+        '@aibast-agents-library/voice-to-crm-email',
+        '@aibast-agents-library/ai-customer-assistant',
+        '@kody/context_memory',
+        '@kody/manage_memory',
+        '@aibast-agents-library/sharepoint-document-extractor',
+        '@aibast-agents-library/triage-bot',
+        '@aibast-agents-library/next-best-action',
+      ],
       'Core Toolkit': ['@rapp/basic-agent', '@kody/rar_remote_agent', '@kody/agent_workbench', '@kody/github_agent_library', '@kody/manage_memory'],
       'Sales Suite': ['@discreetRappers/sales_assistant', '@discreetRappers/demo_script_generator', '@discreetRappers/email_drafting', '@discreetRappers/dynamics_crud'],
       'Builder Stack': ['@kody/agent_workbench', '@discreetRappers/agent_generator', '@discreetRappers/agent_transpiler', '@borg/cardsmith_agent', '@discreetRappers/rapp_pipeline'],
+      'Creative Studio': ['@borg/cardsmith_agent', '@discreetRappers/powerpoint_generator', '@discreetRappers/architecture_diagram', '@discreetRappers/demo_script_generator', '@discreetRappers/scripted_demo'],
     };
   }
   localStorage.setItem('rar_decks', JSON.stringify(allDecks));
