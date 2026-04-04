@@ -652,6 +652,28 @@
   }
   .ac-back-actions button:hover { border-color: #c9a84c; color: #e8dcc8; }
 
+  /* Front-face hover action bar */
+  .card-actions-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    display: flex; gap: 6px; justify-content: center; padding: 8px;
+    background: linear-gradient(transparent, rgba(0,0,0,.85) 40%);
+    opacity: 0; transition: opacity .25s ease; pointer-events: none;
+    border-radius: 0 0 12px 12px;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  }
+  .agent-card-wrap:hover .card-actions-bar { opacity: 1; pointer-events: auto; }
+  .agent-card-wrap.flipped .card-actions-bar { opacity: 0; pointer-events: none; }
+  .card-actions-bar button {
+    background: rgba(42,36,24,.9); border: 1px solid rgba(139,115,50,.5); color: #c8b89a;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .72rem;
+    font-weight: 600; transition: all .15s; letter-spacing: .02em;
+  }
+  .card-actions-bar button:hover { border-color: #c9a84c; color: #e8dcc8; background: rgba(60,50,30,.95); }
+  .card-actions-bar .btn-deck { border-color: rgba(106,90,205,.5); color: #b8a9e6; }
+  .card-actions-bar .btn-deck:hover { border-color: #7c6fd4; color: #d4c8ff; background: rgba(40,30,70,.95); }
+  .card-actions-bar .btn-deck.in-deck { border-color: rgba(200,60,60,.5); color: #e6a9a9; }
+  .card-actions-bar .btn-deck.in-deck:hover { border-color: #d44; color: #ffb8b8; }
+
   /* Card mode toggle */
   .card-mode-toggle {
     display: flex; background: var(--surface); border: 1px solid var(--border);
@@ -6885,10 +6907,18 @@ function agentToCard(a) {
     holoOverlay = '';
   }
 
+  const actionBar = `
+    <div class="card-actions-bar">
+      <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
+      <button class="btn-deck${inDeck ? ' in-deck' : ''}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
+      <button onclick="event.stopPropagation();showAndTell('${esc(a.name)}')">Showcase</button>
+    </div>`;
+
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')" ondblclick="event.stopPropagation();showAndTell('${esc(a.name)}')">
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')">
     ${front}
     ${holoOverlay}
+    ${actionBar}
     ${qrFace}
   </div>`;
 }
@@ -7508,18 +7538,18 @@ let _btcPriceLastFetch = 0;
 async function fetchBtcPrice() {
   if (Date.now() - _btcPriceLastFetch < 300000 && _btcPrice > 0) return _btcPrice;
   try {
-    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    const r = await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot');
     const d = await r.json();
-    _btcPrice = d.bitcoin.usd;
+    _btcPrice = parseFloat(d.data.amount);
     _btcPriceLastFetch = Date.now();
   } catch(e) {
     try {
-      const r2 = await fetch('https://blockchain.info/ticker');
+      const r2 = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
       const d2 = await r2.json();
-      _btcPrice = d2.USD.last;
+      _btcPrice = parseFloat(d2.price);
       _btcPriceLastFetch = Date.now();
     } catch(e2) {
-      if (!_btcPrice) _btcPrice = 65000;
+      if (!_btcPrice) _btcPrice = 67000;
     }
   }
   return _btcPrice;
@@ -12586,7 +12616,7 @@ async function verifyCardCredential(credential) {
 // Chain data served via GitHub Pages: /docs/api/v1/
 // ══════════════════════════════════════════════════════════════════════
 
-const RAR_CHAIN_API = 'https://kody-w.github.io/RAR/api/v1';
+const RAR_CHAIN_API = 'https://kody-w.github.io/RAR/docs/api/v1';
 let _RB = localStorage.getItem('_rb') || 'ba4e91c3ba4b737a0b04edac19e017caeb0e0701';
 const _RW = 3;
 let _chainState = null;
