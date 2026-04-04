@@ -2339,6 +2339,8 @@
         <option value="verified">Verified First</option>
       </select>
       <button onclick="openAgentSlides()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer;white-space:nowrap">Present</button>
+      <button onclick="document.getElementById('submit-file-input').click()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-size:.78rem;cursor:pointer;white-space:nowrap;font-weight:600">Submit agent.py</button>
+      <input type="file" id="submit-file-input" accept=".py,.card" multiple style="display:none" onchange="handleFileDrop(this.files);this.value=''">
     </div>
     <div class="filter-pills" id="category-pills"></div>
     <div class="local-mgmt" id="local-mgmt" style="display:none;margin-top:12px">
