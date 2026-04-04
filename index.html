@@ -2935,7 +2935,7 @@ class MyAgent(BasicAgent):
     <div style="text-align:center;margin-bottom:24px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">RAR Card Chain &bull; Live Market</div>
       <h2 style="font-size:1.4rem;font-weight:800">CARD EXCHANGE</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Real-time BTC valuation. Every forged card is verifiable, transferable, and permanently on-chain.</p>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Every forged card is verifiable, transferable, and permanently on-chain.</p>
     </div>
     <div id="market-ticker" style="margin-bottom:20px"></div>
     <div id="market-grid"></div>
@@ -3965,8 +3965,6 @@ async function renderGauntletLeaderboard() {
   const container = document.getElementById('leaderboard-container');
   container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted)">Loading chain...</div>';
 
-  await fetchBtcPrice();
-
   let chainBlocks, chainState;
   try {
     const [bRes, sRes] = await Promise.all([
@@ -3981,7 +3979,6 @@ async function renderGauntletLeaderboard() {
   }
 
   const forgeBlocks = chainBlocks.filter(b => b.type === 'forge');
-  const btcForge = chainState.btcAtForge || 0;
   const now = Date.now();
 
   // Build leaderboard: each card gets base 1000 GP, modified by rarity + age
@@ -4018,14 +4015,6 @@ async function renderGauntletLeaderboard() {
         <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${entries.length}</div>
         <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">Forged Cards</div>
       </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
-        <div style="font-size:1.1rem;font-weight:800;color:#f7931a">$${_btcPrice.toLocaleString()}</div>
-        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">BTC/USD Now</div>
-      </div>
-      ${btcForge ? `<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
-        <div style="font-size:1.1rem;font-weight:800;color:#e6edf3">$${btcForge.toLocaleString()}</div>
-        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">BTC at Forge</div>
-      </div>` : ''}
     </div>
     <table class="lb-table"><thead><tr>
       <th>#</th><th>Card</th><th>Set</th><th>Rarity</th><th style="color:#d2a8ff">GP</th><th>Age</th><th>Binder</th><th>Edition</th><th>Block</th>
@@ -9476,28 +9465,11 @@ async function openSlabViewer(mintId) {
           </div>
         </div>
 
-        <!-- Gauntlet Points + Market Value -->
+        <!-- Gauntlet Points -->
         <div class="slab-panel">
-          <h4>Reputation & Market</h4>
+          <h4>Reputation</h4>
           <div class="slab-value-badge" style="font-size:1.4rem;padding:10px 16px;background:linear-gradient(135deg,rgba(210,168,255,.15),rgba(140,100,220,.1));border-color:rgba(210,168,255,.3)">${svgIcon('trophy','#d2a8ff',24)} ${val} GP</div>
-          <div style="font-size:.68rem;color:var(--text-muted);margin-top:4px;margin-bottom:10px">Gauntlet Points — public reputation score</div>
-          <div style="border-top:1px solid var(--border);padding-top:10px">
-            <div style="font-size:.68rem;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Transfer Value</div>
-            <div style="font-size:1.1rem;font-weight:800;color:#f7931a">${bv.btc} BTC <span style="font-size:.8rem;color:#39d353;font-weight:600">${bv.usd}</span></div>
-          </div>
-          <div style="font-size:.68rem;color:var(--text-muted);margin-top:6px">
-            Live rate${_btcPrice > 0 ? ` &middot; 1 BTC = $${_btcPrice.toLocaleString()}` : ''}
-          </div>
-          ${card.btcAtMint ? `
-          <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:.68rem">
-            <div style="color:var(--text-muted)">Forged at <span style="color:#f7931a;font-weight:600">1 BTC = $${card.btcAtMint.toLocaleString()}</span></div>
-            <div style="color:${_btcPrice > card.btcAtMint ? '#39d353' : _btcPrice < card.btcAtMint ? '#f85149' : '#8b949e'};font-weight:600;margin-top:2px">
-              ${_btcPrice > card.btcAtMint ? '+' : ''}${((_btcPrice - card.btcAtMint) / card.btcAtMint * 100).toFixed(1)}% since mint
-            </div>
-          </div>` : ''}
-          <div style="font-size:.58rem;color:#484f58;margin-top:4px">
-            Transfer price for verified ownership on the RAR Card Chain
-          </div>
+          <div style="font-size:.68rem;color:var(--text-muted);margin-top:4px">Gauntlet Points — public reputation score</div>
         </div>
 
         <!-- Pop Report -->
@@ -9692,8 +9664,6 @@ async function renderMarketExchange() {
   const grid = document.getElementById('market-grid');
   if (!ticker || !grid) return;
 
-  await fetchBtcPrice();
-
   // Load chain data
   let chainState, chainBlocks;
   try {
@@ -9709,31 +9679,11 @@ async function renderMarketExchange() {
   }
 
   const forgeBlocks = chainBlocks.filter(b => b.type === 'forge');
-  const btcForge = chainState.btcAtForge || 0;
-
-  // Ticker bar
-  const btcChange = btcForge > 0 && _btcPrice > 0 ? ((_btcPrice - btcForge) / btcForge * 100) : 0;
   const totalCards = forgeBlocks.length;
   const totalBinders = Object.keys(chainState.binders || {}).length;
 
   ticker.innerHTML = `
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;display:flex;align-items:center;gap:10px;min-width:200px">
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#f7931a,#ff6d00);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:.8rem">BTC</div>
-        <div>
-          <div style="font-size:1.1rem;font-weight:800;color:#f7931a">$${_btcPrice.toLocaleString()}</div>
-          <div style="font-size:.65rem;color:#8b949e">Live BTC/USD</div>
-        </div>
-      </div>
-      ${btcForge > 0 ? `
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
-        <div style="font-size:1.1rem;font-weight:800;color:#e6edf3">$${btcForge.toLocaleString()}</div>
-        <div style="font-size:.65rem;color:#8b949e">BTC at Genesis Forge</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
-        <div style="font-size:1.1rem;font-weight:800;color:${btcChange >= 0 ? '#39d353' : '#f85149'}">${btcChange >= 0 ? '+' : ''}${btcChange.toFixed(2)}%</div>
-        <div style="font-size:.65rem;color:#8b949e">Since Forge</div>
-      </div>` : ''}
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
         <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${totalCards}</div>
         <div style="font-size:.65rem;color:#8b949e">Forged Cards</div>
