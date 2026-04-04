@@ -736,6 +736,11 @@
     font-style: italic; font-size: .58rem; color: #8a7e6a;
     border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 4px;
   }
+  .daily-koan {
+    font-style: italic; font-size: .5rem; line-height: 1.35;
+    color: #6a6a5a; text-align: center; padding: 3px 6px;
+    white-space: pre-line; opacity: 0.7;
+  }
   .holo-footer {
     display: flex; justify-content: space-between; align-items: center;
     padding: 4px 12px 6px; font-size: .58rem;
@@ -4553,6 +4558,46 @@ function getArtistStyle(agent) {
   return ARTIST_STYLES[0];
 }
 
+// ── Daily Koan — one haiku per day, same everywhere ──
+const DAILY_HAIKU = [
+  "One file, one purpose—\nthe agent wakes and performs.\nSimplicity wins.",
+  "Bits cross the network,\na single mind finds its task—\nsilence, then the act.",
+  "No install required.\nOpen the page, browse, discover—\nthe store is the door.",
+  "The card knows its name,\nholographic light reveals\nwhat the code can do.",
+  "Stream the bytecode in,\nhot-load purpose into RAM—\nclose the tab, it's gone.",
+  "Seed becomes the tree,\nevery branch deterministic—\nsame wind, same forest.",
+  "Flick the card forward.\nThe agent catches midair—\ntask already done.",
+  "Deck of chosen ones,\neach a specialist in wait—\nroute them all at once.",
+  "The manifest speaks:\nname, version, what it requires—\ntruth in seven fields.",
+  "One fetch, one file write.\nThe agent lives where you place it.\nThat is the whole trick.",
+  "Local-first, cloud-free.\nYour device, your data, your call—\nno server required.",
+  "From frontier to core,\nthe agent earns trust with time—\npromotion by proof.",
+  "Howard drew the cards.\nHolographic ink meets code—\ncollect what you build.",
+  "Three runtimes await:\nbrain on device, cloud above,\nLisp in the browser.",
+  "Art seeded by name—\nthe same shapes bloom every time.\nDeterminism.",
+  "The QR code hides\na handshake with the future—\nscan to load, then run.",
+  "Gesture in the air,\nthe camera reads your intent—\nhands-free, voice-free flow.",
+  "Encrypted end-to-end,\nthe flick carries its own key—\nno one else can read.",
+  "Twenty agents steer\nin parallel through one deck—\norchestration art.",
+  "Fork the template, build.\nYour own store, your own namespace—\nfederation works.",
+  "Python in one file,\nmanifest inside the code—\nno folder, no fuss.",
+  "The brain remembers\nwhat the session forgets fast—\nmemory persists.",
+  "Single principle:\nif it can't fit in one file,\nsplit it into two.",
+  "The registry builds\nitself from AST parsing—\nno imports, no run.",
+  "Collect your agents,\narrange them into a deck—\npresent to the room.",
+  "Midnight resets all.\nA new koan greets the dawn—\nread your card today.",
+  "Stars measure the weight\nof complexity in code—\nfive means it thinks hard.",
+  "The constitution\ngoverns what the agents do—\nlaw in markdown form.",
+  "Namespace is yours—\nno collision at any scale.\nA million agents.",
+  "The web store opens.\nNo build step, no bundler runs—\njust open the file.",
+  "Drag the dot-py in.\nIndexedDB holds it safe—\noffline, it still works.",
+];
+function getDailyHaiku() {
+  const d = new Date();
+  const dayIndex = (d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate()) % DAILY_HAIKU.length;
+  return DAILY_HAIKU[dayIndex];
+}
+
 // Keyword → visual glyph mapping
 const SEMANTIC_GLYPHS = {
   // Data/Storage
@@ -4760,6 +4805,7 @@ function agentToCard(a) {
   const power = Math.max(1, tags.length + depCount);
   const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
   const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const dailyKoan = getDailyHaiku();
 
   // ── Business Card Face ──
   const bizFace = `
@@ -4772,6 +4818,7 @@ function agentToCard(a) {
         <div class="biz-divider"></div>
         <div class="biz-tags">${tags.map(t => `<span class="biz-tag">${esc(t)}</span>`).join('')}</div>
       </div>
+      <div class="daily-koan">${esc(dailyKoan)}</div>
       <div class="biz-footer">
         <span class="biz-tier ${rarity}">${RARITY_LABELS[rarity]}</span>
         <div style="text-align:right">
@@ -4793,6 +4840,7 @@ function agentToCard(a) {
       <div class="holo-text">
         ${abilities.map(ab => `<div class="holo-ability"><span class="kw">${ab.kw}:</span> ${esc(ab.text)}</div>`).join('')}
         <div class="holo-flavor">${flavor}</div>
+        <div class="daily-koan">${esc(dailyKoan)}</div>
       </div>
       <div class="holo-footer">
         <span class="holo-rarity ${rarity}">HOLO${rarity === 'mythic' ? ' &bull; Mythic' : rarity === 'rare' ? ' &bull; Rare' : ''}</span>
@@ -4808,6 +4856,7 @@ function agentToCard(a) {
       <div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
       <div class="ac-back-name">${esc(a.display_name)}</div>
       <div class="ac-back-hint">Scan to load this agent</div>
+      <div class="daily-koan">${esc(dailyKoan)}</div>
       <div class="ac-back-actions">
         <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
         <button onclick="event.stopPropagation();exportCardPNG('${esc(a.name)}')">Export</button>
@@ -4839,6 +4888,7 @@ function agentToCard(a) {
         <div class="kids-label needs">What does it need?</div>
         <div class="kids-explain">${esc(kInputs)}</div>
       </div>
+      <div class="daily-koan">${esc(dailyKoan)}</div>
       <div class="kids-footer">
         <div>
           <div style="font-size:.55rem;color:#94a3b8;margin-bottom:2px">Difficulty</div>
