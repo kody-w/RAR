@@ -834,10 +834,18 @@ document.documentElement.className = 'rar-guard';
     background-size: 300% 300%;
   }
   .holo-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 12px 4px; position: relative; z-index: 3;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 6px 10px 2px; position: relative; z-index: 3;
+    min-height: 0; /* prevent grid blowout */
   }
-  .holo-name { font-size: .9rem; font-weight: 700; color: #e8dcc8; }
+  .holo-name {
+    font-size: .82rem; font-weight: 700; color: #e8dcc8;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .holo-title {
+    font-size: .6rem; color: #b8a080; font-style: italic;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
   .holo-pips { display: flex; gap: 3px; }
   .holo-pip {
     width: 16px; height: 16px; border-radius: 50%; font-size: .55rem;
@@ -5999,11 +6007,11 @@ function agentToCard(a) {
   const holoFace = `
     <div class="agent-card-holo">
       <div class="holo-header">
-        <div style="min-width:0;flex:1">
-          <span class="holo-name">${esc(a.display_name)}</span>
-          ${holoTitle ? `<div style="font-size:.65rem;color:#b8a080;font-style:italic;margin-top:1px">${esc(holoTitle)}</div>` : ''}
+        <div style="min-width:0;flex:1;overflow:hidden">
+          <div class="holo-name">${esc(a.display_name)}</div>
+          ${holoTitle ? `<div class="holo-title">${esc(holoTitle)}</div>` : ''}
         </div>
-        <div class="holo-pips">${manaPipsHtml}</div>
+        <div class="holo-pips" style="flex-shrink:0">${manaPipsHtml}</div>
       </div>
       <div class="holo-art">${holoArt || genCreativeArt(a)}</div>
       <div class="holo-type">${esc(holoTypeLine)}</div>
