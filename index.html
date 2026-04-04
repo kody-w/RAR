@@ -3096,7 +3096,9 @@ async function handleFileDrop(files) {
       if (card) added++;
       continue;
     }
-    if (!file.name.endsWith('.py') && !file.name.endsWith('.card')) continue;
+    // Accept .py, .card, and .py.card.DeckName files
+    const isPyOrCard = file.name.endsWith('.py') || file.name.endsWith('.card') || /\.py\.card\..+$/.test(file.name);
+    if (!isPyOrCard) continue;
     let code = await file.text();
     // Strip card metadata header if present (# __card__ = {...} lines)
     let cardMeta = null;
@@ -3151,6 +3153,17 @@ async function handleFileDrop(files) {
         importedCard.grade = gradeCard(importedCard);
         await saveMinted(importedCard);
       }
+    }
+    // Auto-add to deck if .py.card.DeckName file or card metadata contains deck
+    const deckFromFile = file.name.match(/\.py\.card\.(.+)$/)?.[1]?.replace(/_/g, ' ');
+    const deckFromMeta = cardMeta?.deck;
+    const importDeckName = deckFromFile || deckFromMeta;
+    if (importDeckName && manifest.name) {
+      if (!allDecks[importDeckName]) allDecks[importDeckName] = [];
+      if (!allDecks[importDeckName].includes(manifest.name)) {
+        allDecks[importDeckName].push(manifest.name);
+      }
+      saveDecks();
     }
     // Offer to submit to the store via Issues API
     _pendingSubmissions.push({ manifest, code, fileName: file.name });
@@ -4211,7 +4224,10 @@ function openAgent(name) {
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',32)} Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} Submit to Store</a>`
           : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} agent.py</a>
-             <a href="#" onclick="event.preventDefault();downloadAsciiCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} card.txt</a>
+             <a href="#" onclick="event.preventDefault();exportAgentCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} agent.py.card</a>
+             ${Object.entries(allDecks).filter(([_, cards]) => cards.includes(a.name)).map(([dn]) =>
+               `<a href="#" onclick="event.preventDefault();exportAgentDeckCard('${esc(a.name)}','${esc(dn)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('arrow','#d2a8ff',32)} .py.card.${esc(dn)}</a>`
+             ).join('')}
              <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',32)} Copy Link</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?svgIcon('cart','#39d353',32)+' In Cart':svgIcon('cart','#58a6ff',32)+' Add to Cart'}</a>
         <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',32)} Share</a>
@@ -9048,6 +9064,121 @@ async function exportPackCards() {
     await exportSingleCard(card);
     await new Promise(r => setTimeout(r, 200)); // stagger downloads
   }
+}
+
+// Export agent.py.card from agent detail modal (works with or without a minted card)
+async function exportAgentCard(name) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+
+  // Check if user has a minted card for this agent
+  const allCards = await getAllMinted();
+  const minted = allCards.find(c => c.agentName === name);
+  if (minted) { await exportSingleCard(minted); return; }
+
+  // No minted card — build a lightweight .py.card with agent metadata only
+  let sourceCode = a._code || '';
+  if (!sourceCode && a._file) {
+    try {
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
+      const resp = await fetch(rawUrl);
+      if (resp.ok) sourceCode = await resp.text();
+    } catch {}
+  }
+  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
+
+  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
+  const cardMeta = {
+    format: 'rar-card/1.0',
+    agentName: a.name,
+    displayName: a.display_name,
+    version: a.version,
+    category: a.category,
+    tier: a.quality_tier || 'community',
+    sourceHash: hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0'),
+  };
+  const cardHeader = [
+    `# __card__ = ${JSON.stringify(cardMeta)}`,
+    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# This file IS the agent. Drop it into agents/ and it runs.`,
+    `# Card metadata above is ignored by Python but parsed by the store.`,
+    ``,
+  ].join('\n');
+  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
+  const blob = new Blob([cardHeader + cleanSource], { type: 'text/x-python' });
+  const link = document.createElement('a');
+  link.download = `${slug}.py.card`;
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast(`Exported ${a.display_name}.py.card`, 'success');
+}
+
+// Export agent.py.card.DeckName — .py.card bundled with deck membership
+async function exportAgentDeckCard(name, deckName) {
+  const a = allAgents.find(x => x.name === name);
+  if (!a) return;
+
+  let sourceCode = a._code || '';
+  if (!sourceCode && a._file) {
+    try {
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
+      const resp = await fetch(rawUrl);
+      if (resp.ok) sourceCode = await resp.text();
+    } catch {}
+  }
+  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
+
+  // Build card metadata — include minted data if available
+  const allCards = await getAllMinted();
+  const minted = allCards.find(c => c.agentName === name);
+  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
+  const deckSlug = deckName.replace(/[^a-z0-9]/gi, '_');
+  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
+
+  const cardMeta = minted ? {
+    format: 'rar-card/1.0',
+    serial: minted.serial,
+    mintId: minted.mintId,
+    mintedAt: minted.mintedAt,
+    grade: minted.grade,
+    gradeLabel: gradeLabel(minted.grade).label,
+    isFirstEdition: minted.isFirstEdition || false,
+    tierAtMint: minted.tierAtMint,
+    votesAtMint: minted.votesAtMint,
+    transfers: minted.transfers,
+    sourceHash: sourceHashHex,
+    variations: minted.variations,
+    deck: deckName,
+    deckCards: allDecks[deckName] || [],
+  } : {
+    format: 'rar-card/1.0',
+    agentName: a.name,
+    displayName: a.display_name,
+    version: a.version,
+    category: a.category,
+    tier: a.quality_tier || 'community',
+    sourceHash: sourceHashHex,
+    deck: deckName,
+    deckCards: allDecks[deckName] || [],
+  };
+
+  const cardHeader = [
+    `# __card__ = ${JSON.stringify(cardMeta)}`,
+    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# Deck: ${deckName}`,
+    `# This file IS the agent. Drop it into agents/ and it runs.`,
+    `# Card metadata above is ignored by Python but parsed by the store.`,
+    ``,
+  ].join('\n');
+  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
+  const blob = new Blob([cardHeader + cleanSource], { type: 'text/x-python' });
+  const link = document.createElement('a');
+  link.download = `${slug}.py.card.${deckSlug}`;
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast(`Exported ${a.display_name} with deck "${deckName}"`, 'success');
 }
 
 // ── Collection Viewer ──
