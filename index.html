@@ -6431,6 +6431,9 @@ function printCard(name) {
 let _3dCleanup = null;
 
 function open3DViewer(name) {
+  try { _open3DViewerInner(name); } catch (e) { console.error('3D viewer error:', e); showToast('3D viewer error: ' + e.message, 'error'); }
+}
+function _open3DViewerInner(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
   if (typeof THREE === 'undefined') { showToast('Loading 3D engine...', 'error'); return; }
@@ -6501,7 +6504,7 @@ function open3DViewer(name) {
       // Border
       ctx.strokeStyle = '#8b7332';
       ctx.lineWidth = 4;
-      ctx.roundRect(2, 2, 496, 696, 12);
+      roundRect(ctx, 2, 2, 496, 696, 12);
       ctx.stroke();
       // Header
       ctx.fillStyle = '#e8dcc8';
@@ -6582,7 +6585,7 @@ function open3DViewer(name) {
       ctx.fillRect(0, 0, 500, 700);
       ctx.strokeStyle = '#30363d';
       ctx.lineWidth = 4;
-      ctx.roundRect(2, 2, 496, 696, 12);
+      roundRect(ctx, 2, 2, 496, 696, 12);
       ctx.stroke();
       // RAR logo
       ctx.fillStyle = '#58a6ff';
