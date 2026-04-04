@@ -5437,6 +5437,97 @@ const FLAVOR_PHRASES = {
   retail_cpg: '"Shelf space is a battlefield."',
 };
 
+// ── Ability & Flavor Generator — makes every card worth reading ──
+const ABILITY_KEYWORDS = {
+  core: ['Architect','Design','Foundation','Configure'],
+  integrations: ['Channel','Bridge','Connect','Relay'],
+  productivity: ['Accelerate','Automate','Optimize','Streamline'],
+  devtools: ['Forge','Build','Compile','Debug'],
+  pipeline: ['Deploy','Orchestrate','Pipeline','Transform'],
+  general: ['Process','Execute','Analyze','Dispatch'],
+  b2b_sales: ['Prospect','Negotiate','Qualify','Close'],
+  b2c_sales: ['Engage','Convert','Upsell','Retain'],
+  healthcare: ['Diagnose','Prescribe','Monitor','Triage'],
+  financial_services: ['Audit','Forecast','Hedge','Reconcile'],
+  manufacturing: ['Calibrate','Schedule','Inspect','Produce'],
+  energy: ['Regulate','Grid Sync','Meter','Conserve'],
+  federal_government: ['Authorize','Comply','Classify','Mandate'],
+  slg_government: ['Permit','Zone','Allocate','Legislate'],
+  human_resources: ['Recruit','Onboard','Evaluate','Retain'],
+  it_management: ['Provision','Monitor','Patch','Escalate'],
+  professional_services: ['Consult','Scope','Deliver','Invoice'],
+  retail_cpg: ['Stock','Price','Promote','Fulfill'],
+  software_digital_products: ['Ship','Iterate','Scale','Refactor'],
+};
+
+function generateCardAbilities(a) {
+  const holo = getHoloCard(a);
+  if (holo?.abilities) return holo.abilities;
+
+  const cat = a.category || 'general';
+  const keywords = ABILITY_KEYWORDS[cat] || ABILITY_KEYWORDS.general;
+  const tags = a.tags || [];
+  const envs = a.requires_env || [];
+  const deps = a.dependencies || [];
+  const desc = a.description || '';
+  const abilities = [];
+
+  // Primary ability from description
+  const firstSentence = desc.split(/[.!]/)[0]?.trim();
+  if (firstSentence && firstSentence.length > 10) {
+    abilities.push({
+      keyword: keywords[0],
+      cost: '{T}',
+      text: firstSentence + '.'
+    });
+  }
+
+  // Secondary ability from tags
+  if (tags.length > 0) {
+    const tagText = tags.slice(0, 3).join(', ');
+    abilities.push({
+      keyword: keywords[1] || 'Adapt',
+      cost: '',
+      text: `Specializes in ${tagText}. Gains +1/+1 for each matching agent in your deck.`
+    });
+  }
+
+  // Env var ability
+  if (envs.length > 0) {
+    abilities.push({
+      keyword: 'Attune',
+      cost: '',
+      text: `Requires ${envs.slice(0, 2).join(', ')} to activate. Without attunement, enters tapped.`
+    });
+  }
+
+  // Dependency synergy
+  if (deps.length > 0) {
+    abilities.push({
+      keyword: 'Synergy',
+      cost: '',
+      text: `When ${deps[0]} is in play, untap ${a.display_name} at the beginning of your upkeep.`
+    });
+  }
+
+  // If still empty, generic category ability
+  if (abilities.length === 0) {
+    abilities.push({
+      keyword: keywords[0],
+      cost: '{T}',
+      text: `Deploy as a ${(CAT_TO_TYPE[cat] || 'Agent').split(' ').pop().toLowerCase()}. Tap to process one task from the queue.`
+    });
+  }
+
+  return abilities.slice(0, 3);
+}
+
+function generateFlavorText(a) {
+  const holo = getHoloCard(a);
+  if (holo?.flavor_text) return holo.flavor_text;
+  return FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+}
+
 // ── Howard's HOLO Card Database — @borg/cardsmith_agent starter cards ──
 // These are the canonical card definitions from Howard's CardSmith agent.
 // They serve as demo starter cards in Personal mode and define the HOLO card schema.
@@ -8356,6 +8447,8 @@ async function renderMiniCard(canvas, card) {
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
   const ox = v.centeringX * 2, oy = v.centeringY * 2;
+  const isLegendary = tier === 'official' || tier === 'verified';
+  const br = 12;
 
   // ── Background gradient ──
   const bgGrad = ctx.createLinearGradient(0, 0, W * 0.3, H);
@@ -8376,30 +8469,37 @@ async function renderMiniCard(canvas, card) {
   ctx.strokeStyle = cc.border;
   ctx.lineWidth = 4;
   ctx.beginPath();
-  const br = 12;
   ctx.roundRect(3 + ox, 3 + oy, W - 6, H - 6, br);
   ctx.stroke();
 
-  // Inner border shadow
+  // Inner border
   ctx.strokeStyle = 'rgba(0,0,0,.4)';
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.roundRect(7 + ox, 7 + oy, W - 14, H - 14, br - 2);
   ctx.stroke();
 
-  // ── Header: Name ──
+  // ── Name bar with gradient background ──
+  const nameBarH = 32;
+  const nameGrad = ctx.createLinearGradient(0, 8 + oy, 0, 8 + oy + nameBarH);
+  nameGrad.addColorStop(0, 'rgba(50,42,28,.9)');
+  nameGrad.addColorStop(1, 'rgba(35,28,18,.7)');
+  ctx.fillStyle = nameGrad;
+  ctx.fillRect(10, 8 + oy, W - 20, nameBarH);
+
   ctx.fillStyle = '#f0e6d0';
-  ctx.font = `bold 16px -apple-system, sans-serif`;
+  ctx.font = `bold 15px -apple-system, sans-serif`;
   ctx.shadowColor = 'rgba(0,0,0,.6)';
   ctx.shadowBlur = 3;
-  ctx.fillText(a.display_name, 14 + ox, 28 + oy, W - 60);
+  const nameStr = (isLegendary ? '\u2605 ' : '') + a.display_name;
+  ctx.fillText(nameStr, 14 + ox, 30 + oy, W - 70);
   ctx.shadowBlur = 0;
 
-  // Mana pips (small circles top-right)
+  // Mana pips
   const pips = CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general;
   const PIP_COLORS = { W:'#f9faf4', U:'#0e68ab', B:'#2a1f10', R:'#d3202a', G:'#00733e', N:'#9e9e9e' };
   pips.forEach((p, i) => {
-    const px = W - 18 - i * 18 + ox, py = 18 + oy;
+    const px = W - 18 - i * 18 + ox, py = 24 + oy;
     ctx.beginPath();
     ctx.arc(px, py, 8, 0, Math.PI * 2);
     ctx.fillStyle = PIP_COLORS[p] || '#9e9e9e';
@@ -8414,103 +8514,169 @@ async function renderMiniCard(canvas, card) {
     ctx.textAlign = 'left';
   });
 
-  // ── Art area with inner glow ──
-  const artY = 40 + oy, artH = H * 0.36;
-  // Art background
+  // ── Art area — 46% of card height for full-bleed feel ──
+  const artY = 42 + oy, artH = Math.round(H * 0.46);
+  const artX = 10, artW = W - 20;
   ctx.fillStyle = '#0d0a06';
-  ctx.fillRect(12 + ox, artY, W - 24, artH);
-  // Art border
-  ctx.strokeStyle = cc.border + '80';
+  ctx.fillRect(artX + ox, artY, artW, artH);
+  // Art border glow
+  ctx.strokeStyle = cc.border + '60';
   ctx.lineWidth = 2;
-  ctx.strokeRect(12 + ox, artY, W - 24, artH);
-  // Radial glow vignette inside art area
-  const artGlow = ctx.createRadialGradient(W / 2, artY + artH / 2, 0, W / 2, artY + artH / 2, artH * 0.8);
-  artGlow.addColorStop(0, cc.primary + '20');
-  artGlow.addColorStop(0.5, cc.primary + '0a');
+  ctx.strokeRect(artX + ox, artY, artW, artH);
+  // Inner vignette
+  const artGlow = ctx.createRadialGradient(W / 2, artY + artH / 2, 0, W / 2, artY + artH / 2, artW * 0.6);
+  artGlow.addColorStop(0, cc.primary + '18');
+  artGlow.addColorStop(0.7, cc.primary + '06');
   artGlow.addColorStop(1, 'transparent');
   ctx.fillStyle = artGlow;
-  ctx.fillRect(12 + ox, artY, W - 24, artH);
+  ctx.fillRect(artX + ox, artY, artW, artH);
 
-  // ── Card art: use custom avatar_svg if available, else generate ──
+  // ── Card art: render SVG to fill art area ──
   const holo = getHoloCard(a);
   const svgStr = holo?.avatar_svg || genCreativeArt(a);
-  const artW = W - 24, artHInner = artH;
   await new Promise(resolve => {
     const blob = new Blob([svgStr], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const img = new Image();
     img.onload = () => {
-      ctx.drawImage(img, 12 + ox, artY, artW, artHInner);
+      // Draw art to fill the entire art area (stretch to fit, art is 200x200)
+      ctx.drawImage(img, artX + ox, artY, artW, artH);
       URL.revokeObjectURL(url);
       resolve();
     };
-    img.onerror = resolve; // Don't block if SVG fails
+    img.onerror = resolve;
     img.src = url;
   });
 
   // ── Type line ──
   const creatureType = CAT_TO_TYPE[a.category] || 'Agent';
-  ctx.fillStyle = 'rgba(50,40,25,.8)';
-  ctx.fillRect(10, artY + artH + 4, W - 20, 20);
+  const typeLine = `${isLegendary ? 'Legendary ' : ''}Creature \u2014 ${creatureType}`;
+  const typeY = artY + artH + 2;
+  ctx.fillStyle = 'rgba(50,40,25,.85)';
+  ctx.fillRect(10, typeY, W - 20, 18);
   ctx.fillStyle = '#c8b89a';
-  ctx.font = '10px -apple-system, sans-serif';
-  ctx.fillText(`Creature \u2014 ${creatureType}`, 14 + ox, artY + artH + 18);
+  ctx.font = 'bold 9px -apple-system, sans-serif';
+  ctx.fillText(typeLine, 14 + ox, typeY + 13);
+  // Set symbol (right side of type line)
+  ctx.textAlign = 'right';
+  ctx.fillStyle = cc.border;
+  ctx.fillText(card.setId || 'HOLO', W - 14, typeY + 13);
+  ctx.textAlign = 'left';
 
-  // ── Ability text ──
-  const textTop = artY + artH + 28;
-  const textH = H - textTop - 40;
-  ctx.fillStyle = 'rgba(30,25,15,.5)';
+  // ── Ability text box ──
+  const textTop = typeY + 22;
+  const footerH = 28;
+  const textH = H - textTop - footerH - 4;
+  ctx.fillStyle = 'rgba(25,20,12,.65)';
   ctx.fillRect(10, textTop, W - 20, textH);
-  ctx.fillStyle = '#d8c8a8';
-  ctx.font = '10px -apple-system, sans-serif';
-  const desc = (a.description || '').slice(0, 120);
-  const words = desc.split(' ');
-  let line = '', ly = textTop + 16;
-  for (const word of words) {
-    if (ctx.measureText(line + word).width > W - 36) {
-      ctx.fillText(line.trim(), 16, ly);
-      line = word + ' '; ly += 14;
-      if (ly > textTop + textH - 4) break;
-    } else { line += word + ' '; }
-  }
-  if (line.trim() && ly <= textTop + textH - 4) ctx.fillText(line.trim(), 16, ly);
+  ctx.strokeStyle = 'rgba(200,184,154,.08)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(10, textTop, W - 20, textH);
 
-  // ── Footer ──
-  // Rarity text with glow
+  // Generate abilities
+  const abilities = generateCardAbilities(a);
+  const flavor = generateFlavorText(a);
+  const maxTextW = W - 36;
+  let ty = textTop + 14;
+  const lineH = 13;
+  const maxY = textTop + textH - 6;
+
+  // Word-wrap helper
+  function wrapFill(text, x, startY, maxW, lh, maxBottom) {
+    const words = text.split(' ');
+    let ln = '', cy = startY;
+    for (const word of words) {
+      if (ctx.measureText(ln + word).width > maxW && ln) {
+        ctx.fillText(ln.trim(), x, cy);
+        ln = word + ' '; cy += lh;
+        if (cy > maxBottom) return cy;
+      } else { ln += word + ' '; }
+    }
+    if (ln.trim() && cy <= maxBottom) ctx.fillText(ln.trim(), x, cy);
+    return cy + lh;
+  }
+
+  // Render each ability
+  for (const ab of abilities) {
+    if (ty > maxY - lineH) break;
+    // Keyword in bold
+    ctx.fillStyle = '#f0e6d0';
+    ctx.font = 'bold 10px -apple-system, sans-serif';
+    const keyStr = ab.cost ? `${ab.keyword} ${ab.cost}` : ab.keyword;
+    ctx.fillText(keyStr, 16, ty);
+    // Dash separator
+    const keyW = ctx.measureText(keyStr + ' ').width;
+    ctx.fillStyle = '#b8a87a';
+    ctx.font = '10px -apple-system, sans-serif';
+    const abilityText = '\u2014 ' + ab.text;
+    ty = wrapFill(abilityText, 16 + keyW, ty, maxTextW - keyW, lineH, maxY);
+    ty += 4; // spacing between abilities
+  }
+
+  // Divider line before flavor
+  if (ty < maxY - lineH * 2 && flavor) {
+    ty += 2;
+    ctx.strokeStyle = 'rgba(200,184,154,.15)';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(20, ty - 4);
+    ctx.lineTo(W - 20, ty - 4);
+    ctx.stroke();
+    // Flavor text in italic
+    ctx.fillStyle = '#8a7e6a';
+    ctx.font = 'italic 9px -apple-system, sans-serif';
+    wrapFill(flavor, 16, ty, maxTextW, 12, maxY);
+  }
+
+  // ── Footer bar ──
+  const footY = H - footerH - 2;
+  ctx.fillStyle = 'rgba(40,35,20,.6)';
+  ctx.fillRect(10, footY, W - 20, footerH);
+
+  // Rarity text
   const rarityColors = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
   ctx.fillStyle = rarityColors[rarity] || '#8b7332';
   ctx.font = 'bold 9px -apple-system, sans-serif';
-  ctx.fillText(`HOLO \u00B7 ${rarity.toUpperCase()}`, 14, H - 16);
-
-  // P/T stats — big, bold, pill background
-  const depCount = (a.dependencies || []).length;
-  const power = Math.max(1, (a.tags || []).length + depCount);
-  const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + (a.requires_env || []).length);
-  const ptText = `${power}/${toughness}`;
-  ctx.font = 'bold 18px -apple-system, sans-serif';
-  ctx.textAlign = 'right';
-  const ptW = ctx.measureText(ptText).width + 16;
-  // Pill background
-  ctx.fillStyle = 'rgba(40,35,20,.7)';
-  ctx.beginPath();
-  ctx.roundRect(W - ptW - 8, H - 30, ptW, 22, 4);
-  ctx.fill();
-  ctx.strokeStyle = cc.border + '60';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.roundRect(W - ptW - 8, H - 30, ptW, 22, 4);
-  ctx.stroke();
-  // P/T text
-  ctx.fillStyle = '#f0e6d0';
-  ctx.shadowColor = 'rgba(0,0,0,.5)';
-  ctx.shadowBlur = 2;
-  ctx.fillText(ptText, W - 12, H - 13);
+  ctx.shadowColor = rarityColors[rarity] || '#8b7332';
+  ctx.shadowBlur = rarity === 'mythic' ? 4 : 0;
+  ctx.fillText(`HOLO \u00B7 ${rarity.toUpperCase()}`, 16, footY + 18);
   ctx.shadowBlur = 0;
-  ctx.textAlign = 'left';
 
-  // ── Rarity gem (top-right corner) ──
+  // P/T stats
+  const hData = getHoloCard(a);
+  let power, toughness;
+  if (hData?.power != null) {
+    power = hData.power; toughness = hData.toughness;
+  } else {
+    const depCount = (a.dependencies || []).length;
+    power = Math.max(1, (a.tags || []).length + depCount);
+    toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + (a.requires_env || []).length);
+  }
+  if (power != null && toughness != null) {
+    const ptText = `${power}/${toughness}`;
+    ctx.font = 'bold 16px -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+    const ptW = ctx.measureText(ptText).width + 14;
+    ctx.fillStyle = 'rgba(30,25,15,.8)';
+    ctx.beginPath();
+    ctx.roundRect(W - ptW - 14, footY + 3, ptW, 22, 4);
+    ctx.fill();
+    ctx.strokeStyle = cc.border + '60';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(W - ptW - 14, footY + 3, ptW, 22, 4);
+    ctx.stroke();
+    ctx.fillStyle = '#f0e6d0';
+    ctx.shadowColor = 'rgba(0,0,0,.5)';
+    ctx.shadowBlur = 2;
+    ctx.fillText(ptText, W - 16, footY + 20);
+    ctx.shadowBlur = 0;
+    ctx.textAlign = 'left';
+  }
+
+  // ── Rarity gem ──
   const gemColors = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
-  const gemX = W - 16, gemY = 42 + oy;
+  const gemX = W - 16, gemY = artY + 10;
   ctx.beginPath();
   ctx.arc(gemX, gemY, 7, 0, Math.PI * 2);
   const gemGrad = ctx.createRadialGradient(gemX - 2, gemY - 2, 0, gemX, gemY, 7);
@@ -8522,7 +8688,7 @@ async function renderMiniCard(canvas, card) {
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
-  // ── Wear overlay (degrades with grade) ──
+  // ── Wear overlay ──
   const wear = 10 - card.grade;
   if (wear > 1) {
     ctx.strokeStyle = `rgba(255,255,255,${wear * 0.02})`;
@@ -9807,10 +9973,10 @@ function printCard(name) {
 // ═══════════════════════════════════════════════════════
 let _3dCleanup = null;
 
-function open3DViewer(name) {
-  try { _open3DViewerInner(name); } catch (e) { console.error('3D viewer error:', e); showToast('3D viewer error: ' + e.message, 'error'); }
+async function open3DViewer(name) {
+  try { await _open3DViewerInner(name); } catch (e) { console.error('3D viewer error:', e); showToast('3D viewer error: ' + e.message, 'error'); }
 }
-function _open3DViewerInner(name) {
+async function _open3DViewerInner(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
   if (typeof THREE === 'undefined') { showToast('Loading 3D engine...', 'error'); return; }
@@ -9854,7 +10020,7 @@ function _open3DViewerInner(name) {
   const cardW = 2.0, cardH = 2.8;
 
   // Build card textures by rendering to canvas
-  function renderCardFace(isFront) {
+  async function renderCardFace(isFront) {
     const canvas = document.createElement('canvas');
     const scale = 2; // retina
     canvas.width = 500 * scale;
@@ -9876,18 +10042,20 @@ function _open3DViewerInner(name) {
     const toughness = Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
 
     if (isFront) {
-      // Holo front face
+      // Background
       ctx.fillStyle = '#1a1510';
       ctx.fillRect(0, 0, 500, 700);
       // Border
-      ctx.strokeStyle = '#8b7332';
+      ctx.strokeStyle = cc.border;
       ctx.lineWidth = 4;
       roundRect(ctx, 2, 2, 496, 696, 12);
       ctx.stroke();
-      // Header
-      ctx.fillStyle = '#e8dcc8';
-      ctx.font = 'bold 22px -apple-system, sans-serif';
-      ctx.fillText(a.display_name, 16, 36);
+      // Name bar
+      ctx.fillStyle = 'rgba(50,42,28,.9)';
+      ctx.fillRect(10, 8, 480, 38);
+      ctx.fillStyle = '#f0e6d0';
+      ctx.font = 'bold 20px -apple-system, sans-serif';
+      ctx.fillText((isLegendary ? '\u2605 ' : '') + a.display_name, 16, 34, 380);
       // Pips
       const pipColors = { W: '#f9faf4', U: '#0e68ab', B: '#3a2f20', R: '#d3202a', G: '#00733e', N: '#9e9e9e' };
       pips.forEach((p, i) => {
@@ -9899,64 +10067,88 @@ function _open3DViewerInner(name) {
         ctx.lineWidth = 1;
         ctx.stroke();
       });
-      // Art area
-      const artY = 50, artH = 200;
+      // Art area — large, 46% of card
+      const artY = 50, artH = 320;
       ctx.fillStyle = '#0d0a06';
-      ctx.fillRect(16, artY, 468, artH);
-      ctx.strokeStyle = '#5a4a2a';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(16, artY, 468, artH);
-      // Generative art in canvas
-      const hash = [...a.name].reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
-      for (let i = 0; i < 40; i++) {
-        const x = 16 + ((hash * (i + 1) * 7) % 468 + 468) % 468;
-        const y = artY + ((hash * (i + 3) * 13) % artH + artH) % artH;
-        const r = 3 + (hash * (i + 5)) % 15;
-        const hue = (hash + i * 37) % 360;
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${hue}, 60%, 50%, 0.3)`;
-        ctx.fill();
-      }
+      ctx.fillRect(10, artY, 480, artH);
+      ctx.strokeStyle = cc.border + '60';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(10, artY, 480, artH);
+      // Render actual SVG art
+      const holo3d = getHoloCard(a);
+      const svg3d = holo3d?.avatar_svg || genCreativeArt(a);
+      const artImg = new Image();
+      const artBlob = new Blob([svg3d], { type: 'image/svg+xml' });
+      const artUrl = URL.createObjectURL(artBlob);
+      try {
+        await new Promise((resolve) => {
+          artImg.onload = () => { ctx.drawImage(artImg, 10, artY, 480, artH); resolve(); };
+          artImg.onerror = resolve;
+          artImg.src = artUrl;
+        });
+      } catch(e) {}
+      URL.revokeObjectURL(artUrl);
       // Type line
-      ctx.fillStyle = 'rgba(50,40,25,.7)';
-      ctx.fillRect(0, artY + artH + 8, 500, 24);
-      ctx.fillStyle = '#b8a88a';
-      ctx.font = '12px -apple-system, sans-serif';
-      ctx.fillText(`${isLegendary ? 'Legendary ' : ''}Creature — ${creatureType}`, 16, artY + artH + 24);
-      // Text box
-      const textY = artY + artH + 40;
-      ctx.fillStyle = 'rgba(30,25,15,.6)';
-      ctx.fillRect(8, textY, 484, 340);
-      // Description
+      ctx.fillStyle = 'rgba(50,40,25,.85)';
+      ctx.fillRect(10, artY + artH + 4, 480, 22);
       ctx.fillStyle = '#c8b89a';
-      ctx.font = '13px -apple-system, sans-serif';
-      wrapText(ctx, desc, 20, textY + 20, 460, 18);
-      // Env vars
-      if (envCount) {
-        ctx.fillStyle = '#e8dcc8';
-        ctx.font = 'bold 12px -apple-system, sans-serif';
-        ctx.fillText('Requires:', 20, textY + 100);
-        ctx.fillStyle = '#c8b89a';
-        ctx.font = '12px monospace';
-        ctx.fillText((a.requires_env || []).join(', '), 90, textY + 100);
-      }
-      // Flavor
-      ctx.fillStyle = '#8a7e6a';
-      ctx.font = 'italic 11px -apple-system, sans-serif';
-      const flavor = FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
-      ctx.fillText(flavor, 20, textY + 310);
-      // Footer
-      ctx.fillStyle = '#8b7332';
       ctx.font = 'bold 11px -apple-system, sans-serif';
-      const rarityLabels = { mythic: 'MYTHIC HOLO', rare: 'RARE HOLO', uncommon: 'HOLO', common: 'HOLO' };
-      ctx.fillText(rarityLabels[rarity] || 'HOLO', 16, 684);
-      // Power/Toughness
-      ctx.fillStyle = '#e8dcc8';
-      ctx.font = 'bold 20px -apple-system, sans-serif';
+      ctx.fillText(`${isLegendary ? 'Legendary ' : ''}Creature \u2014 ${creatureType}`, 16, artY + artH + 19);
       ctx.textAlign = 'right';
-      ctx.fillText(`${power}/${toughness}`, 486, 688);
+      ctx.fillStyle = cc.border;
+      ctx.fillText('HOLO', 484, artY + artH + 19);
       ctx.textAlign = 'left';
+      // Ability text box
+      const textY = artY + artH + 30;
+      const textH = 700 - textY - 36;
+      ctx.fillStyle = 'rgba(25,20,12,.6)';
+      ctx.fillRect(10, textY, 480, textH);
+      // Generate abilities
+      const abs3d = generateCardAbilities(a);
+      const flav3d = generateFlavorText(a);
+      let ty3 = textY + 18;
+      const maxTy = textY + textH - 8;
+      for (const ab of abs3d) {
+        if (ty3 > maxTy - 18) break;
+        ctx.fillStyle = '#f0e6d0';
+        ctx.font = 'bold 12px -apple-system, sans-serif';
+        const keyStr = ab.cost ? `${ab.keyword} ${ab.cost}` : ab.keyword;
+        ctx.fillText(keyStr, 20, ty3);
+        const kw = ctx.measureText(keyStr + ' ').width;
+        ctx.fillStyle = '#b8a87a';
+        ctx.font = '12px -apple-system, sans-serif';
+        ty3 = wrapText(ctx, '\u2014 ' + ab.text, 20 + kw, ty3, 460 - kw, 16);
+        ty3 += 6;
+      }
+      // Flavor text
+      if (ty3 < maxTy - 20 && flav3d) {
+        ty3 += 4;
+        ctx.strokeStyle = 'rgba(200,184,154,.15)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(24, ty3 - 6); ctx.lineTo(476, ty3 - 6); ctx.stroke();
+        ctx.fillStyle = '#8a7e6a';
+        ctx.font = 'italic 11px -apple-system, sans-serif';
+        wrapText(ctx, flav3d, 20, ty3, 460, 14);
+      }
+      // Footer
+      const rarityColors3 = { mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+      ctx.fillStyle = rarityColors3[rarity] || '#8b7332';
+      ctx.font = 'bold 11px -apple-system, sans-serif';
+      ctx.shadowColor = rarityColors3[rarity] || '#8b7332';
+      ctx.shadowBlur = rarity === 'mythic' ? 4 : 0;
+      ctx.fillText(`HOLO \u00B7 ${rarity.toUpperCase()}`, 16, 684);
+      ctx.shadowBlur = 0;
+      // P/T
+      const hData3d = getHoloCard(a);
+      const pw = hData3d?.power != null ? hData3d.power : power;
+      const th = hData3d?.toughness != null ? hData3d.toughness : toughness;
+      if (pw != null && th != null) {
+        ctx.fillStyle = '#f0e6d0';
+        ctx.font = 'bold 20px -apple-system, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(`${pw}/${th}`, 486, 688);
+        ctx.textAlign = 'left';
+      }
     } else {
       // Back face
       ctx.fillStyle = '#161b22';
@@ -10006,11 +10198,12 @@ function _open3DViewerInner(name) {
         ly += lineH;
       } else { line = test; }
     }
-    ctx.fillText(line.trim(), x, ly);
+    if (line.trim()) { ctx.fillText(line.trim(), x, ly); ly += lineH; }
+    return ly;
   }
 
-  const frontCanvas = renderCardFace(true);
-  const backCanvas = renderCardFace(false);
+  const frontCanvas = await renderCardFace(true);
+  const backCanvas = await renderCardFace(false);
 
   const frontTex = new THREE.CanvasTexture(frontCanvas);
   const backTex = new THREE.CanvasTexture(backCanvas);
