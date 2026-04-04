@@ -23,7 +23,8 @@ jobs:
     # Only process issues with the RAR action prefix in title
     if: >
       github.event_name == 'workflow_dispatch' ||
-      startsWith(github.event.issue.title, '[RAR]')
+      startsWith(github.event.issue.title, '[RAR]') ||
+      startsWith(github.event.issue.title, '[AGENT]')
     steps:
       - uses: actions/checkout@v4
 

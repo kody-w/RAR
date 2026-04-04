@@ -277,44 +277,33 @@ class MyAgent(BasicAgent):
 
 You do NOT need push access. Open a GitHub Issue on `kody-w/RAR`.
 
-**Title must start with `[RAR]`** — this triggers the automation pipeline.
+**Title** must start with `[AGENT]` or `[RAR]`. Include the agent name to declare the namespace:
 
-**Body must be JSON** with this exact format:
-
-```json
-{
-  "action": "submit_agent",
-  "payload": {
-    "code": "\"\"\"\\nMy Agent — description.\\n\"\"\"\\n\\n__manifest__ = {\\n    \"schema\": \"rapp-agent/1.0\",\\n    \"name\": \"@yourgithubusername/agent-slug\",\\n    ...\\n}\\n\\nfrom agents.basic_agent import BasicAgent\\n\\nclass MyAgent(BasicAgent):\\n    ..."
-  }
-}
+```
+[AGENT] @borg/sherlock
 ```
 
-Or use a fenced JSON block in the issue body:
+**Body** — paste your agent code directly. Any of these formats work:
 
-````
-```json
-{
-  "action": "submit_agent",
-  "payload": {
-    "code": "full agent.py contents as a JSON string"
-  }
-}
-```
-````
+1. Raw Python (just paste the `.py` contents)
+2. Fenced Python block (` ```python ... ``` `)
+3. JSON (`{"action": "submit_agent", "payload": {"code": "..."}}`)
 
-**Important:** Your `__manifest__` name MUST use `@yourgithubusername` as the namespace — the pipeline enforces that the publisher matches the GitHub account that opened the issue. For example, if your GitHub username is `howardhoy`, use `@howardhoy/agent-slug`.
+The pipeline auto-detects the format. If it finds `__manifest__` in your code, it wraps it as a submission automatically.
 
-Reserved namespaces (`@borg`, `@kody`, `@rapp`) are managed by repo maintainers. To publish under a reserved namespace, submit a PR instead.
+**Namespace rules:**
+- By default, your namespace is `@yourgithubusername`
+- To publish under a different namespace (e.g. `@borg`), include it in the issue title: `[AGENT] @borg/my-agent`
+- The `__manifest__` name must match the title namespace
 
 The RAR automation pipeline (`scripts/process_issues.py`) will:
-1. Parse the JSON from the issue body
-2. Extract and validate the `__manifest__` from your code
-3. Create the file at `agents/@yourgithubusername/agent-slug.py`
+1. Detect Python code or JSON in the issue body
+2. Extract and validate the `__manifest__`
+3. Create the file at `agents/@namespace/agent-slug.py`
 4. Rebuild `registry.json`
 5. Auto-close the issue with a confirmation comment
 
-**Other issue actions** (same `[RAR]` title prefix, JSON body):
+**Other issue actions** (JSON body):
 
 Vote on an agent:
 ```json

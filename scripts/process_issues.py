@@ -67,11 +67,18 @@ def now_iso() -> str:
 # ──────────────────────────────────────────────────────────────────────
 
 def extract_json_from_body(body: str) -> dict:
-    """Extract JSON from issue body. Supports raw JSON or ```json fenced blocks."""
+    """Extract action from issue body.
+
+    Supports:
+      1. ```json fenced block with action JSON
+      2. Raw JSON object with action
+      3. ```python fenced block with agent code (auto-wraps as submit_agent)
+      4. Raw Python with __manifest__ (auto-wraps as submit_agent)
+    """
     if not body or not body.strip():
         raise ValueError("Issue body is empty")
 
-    # Try fenced code block first
+    # Try fenced JSON block first
     match = re.search(r"```json\s*\n(.*?)\n\s*```", body, re.DOTALL)
     if match:
         return json.loads(match.group(1))
@@ -79,9 +86,23 @@ def extract_json_from_body(body: str) -> dict:
     # Try raw JSON
     stripped = body.strip()
     if stripped.startswith("{"):
-        return json.loads(stripped)
+        try:
+            return json.loads(stripped)
+        except json.JSONDecodeError:
+            pass
 
-    raise ValueError("No valid JSON found in issue body")
+    # Try fenced Python block — auto-wrap as submit_agent
+    py_match = re.search(r"```(?:python)?\s*\n(.*?)\n\s*```", body, re.DOTALL)
+    if py_match:
+        code = py_match.group(1)
+        if "__manifest__" in code:
+            return {"action": "submit_agent", "payload": {"code": code}}
+
+    # Try raw Python (has __manifest__ and looks like Python)
+    if "__manifest__" in stripped and ("class " in stripped or "def " in stripped):
+        return {"action": "submit_agent", "payload": {"code": stripped}}
+
+    raise ValueError("No valid JSON or Python agent code found in issue body")
 
 
 def extract_manifest_from_code(code: str) -> dict | None:
@@ -256,12 +277,16 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     publisher = parts[0]
     slug = parts[1]
 
-    # Community submissions go under the submitter's namespace
+    # Namespace check: publisher must match GitHub username,
+    # UNLESS the issue title explicitly declares the agent name (e.g. [AGENT] @borg/sherlock).
+    # This allows maintainers to grant namespace access by accepting the issue.
     expected_publisher = f"@{user}"
-    if publisher != expected_publisher:
+    title_ns = payload.get("_title_namespace")  # injected by dispatcher
+    if publisher != expected_publisher and publisher != title_ns:
         return {
             "error": f"Publisher must be '{expected_publisher}' for community submissions. "
-                     f"Got '{publisher}'"
+                     f"Got '{publisher}'. To use a reserved namespace, include it in the "
+                     f"issue title: [AGENT] {name}"
         }
 
     # Build file path
@@ -334,6 +359,7 @@ def main() -> int:
     issue = event.get("issue", {})
     user = issue.get("user", {}).get("login", "unknown")
     body = issue.get("body", "")
+    title = issue.get("title", "")
     issue_number = issue.get("number", 0)
 
     # Skip issues with special labels
@@ -349,6 +375,12 @@ def main() -> int:
         # Output for the workflow to comment on the issue
         print(f"RESULT_ERROR=Could not parse JSON from issue body: {e}")
         return 1
+
+    # Extract namespace from title (e.g. "[AGENT] @borg/sherlock" → "@borg")
+    # This grants namespace access when the title explicitly declares the agent
+    title_ns_match = re.search(r"\[(?:AGENT|RAR)\]\s*(@[\w-]+)/", title)
+    if title_ns_match and data.get("action") == "submit_agent":
+        data.setdefault("payload", {})["_title_namespace"] = title_ns_match.group(1)
 
     result = process(data, user)
     result_json = json.dumps(result, indent=2)
