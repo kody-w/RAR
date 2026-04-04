@@ -1,4 +1,4 @@
-# RAPP Agent Repo — Machine-Readable Skill Interface
+# RAR — Machine-Readable Skill Interface
 
 > **This file is read by AI agents, not humans.** It enables autonomous agent discovery, search, install, and management without any human visiting GitHub.
 
@@ -7,11 +7,11 @@
 ## Repo Identity
 
 ```
-repo: billwhalenmsft/RAPP-Agent-Repo
+repo: kody-w/RAR
 type: agent-registry
 registry: registry.json
-base_url: https://raw.githubusercontent.com/billwhalenmsft/RAPP-Agent-Repo/main
-compatible_with: kody-w/CommunityRAPP
+base_url: https://raw.githubusercontent.com/kody-w/RAR/main
+site: https://kody-w.github.io/RAR
 agent_base_class: BasicAgent (@rapp/basic-agent)
 package_structure: agents/@publisher/slug.py (single file, __manifest__ embedded)
 ```
@@ -23,7 +23,7 @@ package_structure: agents/@publisher/slug.py (single file, __manifest__ embedded
 ### 1. Fetch the Registry
 
 ```
-GET https://raw.githubusercontent.com/billwhalenmsft/RAPP-Agent-Repo/main/registry.json
+GET https://raw.githubusercontent.com/kody-w/RAR/main/registry.json
 ```
 
 Returns JSON with:
@@ -31,34 +31,28 @@ Returns JSON with:
 - `agents[]` — array of all agent manifests
 
 Each agent entry has:
-- `name` — namespaced identifier (e.g., `@billwhalen/dynamics-crud`)
+- `name` — namespaced identifier (e.g., `@discreetRappers/dynamics_crud`)
 - `version` — semver (e.g., `1.0.0`)
 - `display_name` — the agent's `self.name`
 - `class` — Python class name
 - `description` — what it does
 - `author` — contributor name
 - `tags` — searchable keyword list
-- `category` — `core`, `pipeline`, `integrations`, `productivity`, `devtools`
+- `category` — `core`, `pipeline`, `integrations`, `productivity`, `devtools`, or an industry vertical
 - `requires_env` — environment variables needed (empty = no extra config)
 - `dependencies` — other agents this depends on
 - `quality_tier` — `community`, `verified`, or `official`
-- `_path` — directory path in repo (e.g., `agents/@billwhalen/dynamics-crud`)
+- `_file` — file path in repo (e.g., `agents/@discreetRappers/dynamics_crud.py`)
 
-### 2. Fetch an Agent's Manifest
-
-```
-GET https://raw.githubusercontent.com/billwhalenmsft/RAPP-Agent-Repo/main/agents/@publisher/agent-slug.py
-```
-
-### 3. Download an Agent
+### 2. Fetch an Agent
 
 ```
-GET https://raw.githubusercontent.com/billwhalenmsft/RAPP-Agent-Repo/main/agents/@publisher/agent-slug.py
+GET https://raw.githubusercontent.com/kody-w/RAR/main/agents/@publisher/agent-slug.py
 ```
 
-### 4. Install an Agent
+### 3. Install an Agent
 
-Save the downloaded `agent.py` to the CommunityRAPP `agents/` folder:
+Save the downloaded `agent.py` to your local `agents/` folder:
 
 ```python
 # Autonomous install workflow
@@ -66,27 +60,27 @@ registry = http_get(f"{base_url}/registry.json")
 agent = find_agent(registry, query)
 content = http_get(f"{base_url}/{agent['_file']}")
 
-# Determine filename: @billwhalen/dynamics-crud → dynamics_crud_agent.py
-filename = agent['name'].split('/')[-1].replace('-', '_') + '_agent.py'
+# Determine filename: @discreetRappers/dynamics_crud → dynamics_crud_agent.py
+filename = agent['name'].split('/')[-1] + '_agent.py'
 storage.write_file('agents', filename, content)
 ```
 
-### 5. Search
+### 4. Search
 
 Match against `name`, `display_name`, `description`, `tags`, `category`, and `author`.
 
 Example searches:
-- "dynamics" → matches `@billwhalen/dynamics-crud` (tag: dynamics-365)
-- "memory" → matches `@kody/context-memory`, `@kody/manage-memory`
-- "transpiler" → matches `@billwhalen/agent-transpiler`, `@billwhalen/copilot-studio-transpiler`
-- "@billwhalen" → all 13 agents by Bill
-- "integrations" → all 4 integration agents
+- "dynamics" → matches `@discreetRappers/dynamics_crud` (tag: dynamics-365)
+- "memory" → matches `@kody/context_memory`, `@kody/manage_memory`
+- "borg" → matches `@borg/borg_agent` (assimilation, analysis)
+- "@borg" → all agents by Howard Hoy
+- "integrations" → all integration agents
 
-### 6. List by Publisher
+### 5. List by Publisher
 
 Filter `registry.agents[]` where `name` starts with `@publisher/`.
 
-### 7. List by Category
+### 6. List by Category
 
 Filter `registry.agents[]` where `category` matches.
 
@@ -94,29 +88,37 @@ Filter `registry.agents[]` where `category` matches.
 
 ## Agent Manifest — Current Inventory
 
-### @kody (3 agents)
+### @kody (5 agents)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
-| ContextMemory | context-memory | core | Recalls conversation history and stored memories |
-| ManageMemory | manage-memory | core | Stores facts, preferences, insights to memory |
-| GitHubAgentLibrary | github-agent-library | core | Browse, search, install agents from this repo |
+| ContextMemory | context_memory | core | Recalls conversation history and stored memories |
+| ManageMemory | manage_memory | core | Stores facts, preferences, insights to memory |
+| GitHubAgentLibrary | github_agent_library | core | Browse, search, install agents from this repo |
+| RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry — discover, install, vote, review |
+| Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
 
-### @billwhalen (13 agents)
+### @borg (2 agents — Howard Hoy)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
-| RAPP | rapp-pipeline | pipeline | Full RAPP pipeline — transcript to agent, code gen, quality gates |
-| AgentGenerator | agent-generator | pipeline | Auto-generates agents from configurations |
-| AgentTranspiler | agent-transpiler | pipeline | Converts agents between M365, Copilot Studio, Azure AI Foundry |
-| CopilotStudioTranspiler | copilot-studio-transpiler | pipeline | Native Copilot Studio transpilation |
-| ProjectTracker | project-tracker | pipeline | RAPP project management and tracking |
-| DynamicsCRUD | dynamics-crud | integrations | Dynamics 365 CRUD operations |
-| ContractAnalysis | sharepoint-contract-analysis | integrations | Contract analysis from SharePoint/Azure Storage |
-| SalesAssistant | sales-assistant | integrations | Natural language sales CRM assistant |
-| EmailDrafting | email-drafting | integrations | Email drafting via Power Automate |
-| PowerPointGeneratorV2 | powerpoint-generator | productivity | Template-based PowerPoint generation |
-| ArchitectureDiagramAgent | architecture-diagram | productivity | Architecture diagram visualization |
-| ScriptedDemo | scripted-demo | productivity | Interactive demo automation |
-| DemoScriptGenerator | demo-script-generator | productivity | Demo script JSON generation |
+| Borg | borg_agent | core | Assimilates GitHub repos and URLs into structured knowledge reports |
+| CardSmith | cardsmith_agent | productivity | Card design and generation |
+
+### @discreetRappers (13 agents — Bill Whalen)
+| Name | Slug | Category | Description |
+|------|------|----------|-------------|
+| RAPP | rapp_pipeline | pipeline | Full RAPP pipeline — transcript to agent, code gen, quality gates |
+| AgentGenerator | agent_generator | pipeline | Auto-generates agents from configurations |
+| AgentTranspiler | agent_transpiler | pipeline | Converts agents between M365, Copilot Studio, Azure AI Foundry |
+| CopilotStudioTranspiler | copilot_studio_transpiler | pipeline | Native Copilot Studio transpilation |
+| ProjectTracker | project_tracker | pipeline | RAPP project management and tracking |
+| DynamicsCRUD | dynamics_crud | integrations | Dynamics 365 CRUD operations |
+| ContractAnalysis | sharepoint_contract_analysis | integrations | Contract analysis from SharePoint/Azure Storage |
+| SalesAssistant | sales_assistant | integrations | Natural language sales CRM assistant |
+| EmailDrafting | email_drafting | integrations | Email drafting via Power Automate |
+| PowerPointGeneratorV2 | powerpoint_generator | productivity | Template-based PowerPoint generation |
+| ArchitectureDiagramAgent | architecture_diagram | productivity | Architecture diagram visualization |
+| ScriptedDemo | scripted_demo | productivity | Interactive demo automation |
+| DemoScriptGenerator | demo_script_generator | productivity | Demo script JSON generation |
 
 ### @rapp (1 agent)
 | Name | Slug | Category | Description |
@@ -127,7 +129,7 @@ Filter `registry.agents[]` where `category` matches.
 
 Source: [AI-Agent-Templates](https://kody-w.github.io/AI-Agent-Templates/)
 
-These are **templates, not turnkey agents.** Each template provides the agent structure, system prompts, and logic scaffold for a specific business function. Users should mutate them with AI (e.g., the RAPP pipeline, Copilot, or manual editing) to adapt to their specific data sources, business rules, APIs, and deployment environment.
+These are **templates, not turnkey agents.** Each template provides the agent structure, system prompts, and logic scaffold for a specific business function. Users should adapt them to their specific data sources, business rules, APIs, and deployment environment.
 
 | Vertical | Agents | Key Capabilities |
 |----------|--------|-----------------|
@@ -159,19 +161,19 @@ User: "Install the dynamics agent"
 
 1. GET registry.json
 2. Search agents[] for "dynamics" in name/tags/description
-3. Match: @billwhalen/dynamics-crud
-4. GET agents/@billwhalen/dynamics-crud.py
-5. Save as dynamics_crud_agent.py in CommunityRAPP agents/
+3. Match: @discreetRappers/dynamics_crud
+4. GET agents/@discreetRappers/dynamics_crud.py
+5. Save as dynamics_crud_agent.py in local agents/
 6. Check requires_env — warn if non-empty
-7. Report: "Installed @billwhalen/dynamics-crud v1.0.0"
+7. Report: "Installed @discreetRappers/dynamics_crud v1.0.0"
 ```
 
-### "Show all agents by @billwhalen"
+### "Show all agents by @borg"
 
 ```
 1. GET registry.json
-2. Filter where name starts with "@billwhalen/"
-3. Return 13 agents grouped by category
+2. Filter where name starts with "@borg/"
+3. Return 2 agents: borg_agent, cardsmith_agent
 ```
 
 ### "Find agents for healthcare"
@@ -183,21 +185,12 @@ User: "Install the dynamics agent"
 4. Present with descriptions, quality_tier, requires_env
 ```
 
-### "Install all integration agents"
+### "What agent can help with assimilation/research?"
 
 ```
 1. GET registry.json
-2. Filter where category == "integrations"
-3. Download and install each agent.py
-4. Report summary with any required env vars
-```
-
-### "What agent can help with PowerPoint?"
-
-```
-1. GET registry.json
-2. Search tags/description for "powerpoint"
-3. Match: @billwhalen/powerpoint-generator
+2. Search tags/description for "assimilate" or "research"
+3. Match: @borg/borg_agent
 4. Present: name, description, version, quality_tier, requires_env
 5. Ask: "Want me to install it?"
 ```
@@ -206,7 +199,7 @@ User: "Install the dynamics agent"
 
 ```
 1. GET registry.json
-2. List installed agents in CommunityRAPP agents/
+2. List installed agents in local agents/
 3. Match filenames to registry entries
 4. Compare versions
 5. Download newer versions
@@ -324,9 +317,9 @@ If you prefer a pull request:
 | Namespace | Owner | Focus |
 |-----------|-------|-------|
 | `@rapp` | Reserved | Official base packages |
-| `@kody` | Kody Wildfeuer | Core agents (memory, RAR client) |
-| `@billwhalen` | Bill Whalen | Enterprise (Dynamics, SharePoint, pipelines) |
+| `@kody` | Kody Wildfeuer | Core agents (memory, RAR client, workbench) |
 | `@borg` | Howard Hoy | Assimilation, analysis, intelligence pipelines |
+| `@discreetRappers` | Bill Whalen | Enterprise (Dynamics, SharePoint, transpilers, pipelines) |
 | `@aibast-agents-library` | Templates | 104 industry vertical templates |
 
 New contributors: your namespace is `@yourgithubusername`. It's yours forever.
@@ -371,8 +364,8 @@ __manifest__ = {
     "dependencies": [
         "@borg/sherlock",
         "@borg/borg_agent",
-        "@kody/context-memory",
-        "@kody/manage-memory",
+        "@kody/context_memory",
+        "@kody/manage_memory",
         "@borg/prompt-to-video"
     ],
 }
@@ -387,8 +380,8 @@ The pipeline's `perform()` method calls each dependency in order and passes resu
 ```
 registry_schema: rapp-registry/1.0
 agent_schema: rapp-agent/1.0
-total_agents: 121
-publishers: 4 (@kody, @billwhalen, @rapp, @aibast-agents-library)
+total_agents: 125
+publishers: 5 (@kody, @borg, @discreetRappers, @rapp, @aibast-agents-library)
 categories: 19 (core, pipeline, integrations, productivity, devtools, b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, human_resources, it_management, manufacturing, professional_services, retail_cpg, slg_government, software_digital_products)
 verticals: 14
 last_updated: 2026-04-04
