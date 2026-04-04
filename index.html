@@ -652,26 +652,25 @@
   }
   .ac-back-actions button:hover { border-color: #c9a84c; color: #e8dcc8; }
 
-  /* Front-face hover action bar */
-  .card-actions-bar {
-    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
-    display: flex; gap: 6px; justify-content: center; padding: 8px;
-    background: linear-gradient(transparent, rgba(0,0,0,.85) 40%);
-    opacity: 0; transition: opacity .25s ease; pointer-events: none;
-    border-radius: 0 0 12px 12px;
-    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  /* Card cell — wraps card + action bar */
+  .card-cell {
+    display: flex; flex-direction: column; gap: 0;
   }
-  .agent-card-wrap:hover .card-actions-bar { opacity: 1; pointer-events: auto; }
-  .agent-card-wrap.flipped .card-actions-bar { opacity: 0; pointer-events: none; }
+  /* Action bar below card — appears on hover */
+  .card-actions-bar {
+    display: flex; gap: 6px; justify-content: center; padding: 8px 4px 4px;
+    opacity: 0; transition: opacity .2s ease; pointer-events: none;
+  }
+  .card-cell:hover .card-actions-bar { opacity: 1; pointer-events: auto; }
   .card-actions-bar button {
-    background: rgba(42,36,24,.9); border: 1px solid rgba(139,115,50,.5); color: #c8b89a;
+    background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
     padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .72rem;
     font-weight: 600; transition: all .15s; letter-spacing: .02em;
   }
-  .card-actions-bar button:hover { border-color: #c9a84c; color: #e8dcc8; background: rgba(60,50,30,.95); }
-  .card-actions-bar .btn-deck { border-color: rgba(106,90,205,.5); color: #b8a9e6; }
-  .card-actions-bar .btn-deck:hover { border-color: #7c6fd4; color: #d4c8ff; background: rgba(40,30,70,.95); }
-  .card-actions-bar .btn-deck.in-deck { border-color: rgba(200,60,60,.5); color: #e6a9a9; }
+  .card-actions-bar button:hover { border-color: var(--accent); color: var(--text); background: var(--surface2); }
+  .card-actions-bar .btn-deck { border-color: rgba(106,90,205,.4); color: #b8a9e6; }
+  .card-actions-bar .btn-deck:hover { border-color: #7c6fd4; color: #d4c8ff; background: rgba(40,30,70,.6); }
+  .card-actions-bar .btn-deck.in-deck { border-color: rgba(200,60,60,.4); color: #e6a9a9; }
   .card-actions-bar .btn-deck.in-deck:hover { border-color: #d44; color: #ffb8b8; }
 
   /* Card mode toggle */
@@ -6902,19 +6901,18 @@ function agentToCard(a) {
     holoOverlay = '';
   }
 
-  const actionBar = `
-    <div class="card-actions-bar">
-      <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
-      <button class="btn-deck${inDeck ? ' in-deck' : ''}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
-      <button onclick="event.stopPropagation();showAndTell('${esc(a.name)}')">Showcase</button>
-    </div>`;
-
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')">
-    ${front}
-    ${holoOverlay}
-    ${actionBar}
-    ${qrFace}
+  <div class="card-cell">
+    <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')">
+      ${front}
+      ${holoOverlay}
+      ${qrFace}
+    </div>
+    <div class="card-actions-bar">
+      <button onclick="openAgent('${esc(a.name)}')">View</button>
+      <button class="btn-deck${inDeck ? ' in-deck' : ''}" onclick="toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
+      <button onclick="showAndTell('${esc(a.name)}')">Showcase</button>
+    </div>
   </div>`;
 }
 
