@@ -12318,7 +12318,7 @@ let _ksS = 0;
 const _ksG = [];
 
 async function _rq() {
-  if (!isArchitect()) return alert('Only the Architect can invoke the Silence.');
+  if (!isArchitect()) return;
 
   const overlay = document.createElement('div');
   overlay.id = '_rq-ov';
@@ -12482,7 +12482,7 @@ async function renderBinderBadge() {
   }
   const state = await loadChainState();
   const cardCount = state ? '| Chain: ' + state.totalForged + ' cards' : '';
-  const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span> <span onclick="event.stopPropagation();_rq()" style="color:#f85149;cursor:pointer;font-size:.5rem;opacity:.15;margin-left:4px">&#9632;</span>' : '';
+  const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span>' : '';
   badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Binder</span> <span class="binder-label" style="color:#58a6ff;font-family:monospace">${formatBinderAddress(addr)}</span>${archLabel} <span style="color:#484f58">${cardCount}</span>`;
 }
 
