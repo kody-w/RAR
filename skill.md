@@ -72,7 +72,7 @@ Example searches:
 - "dynamics" → matches `@discreetRappers/dynamics_crud` (tag: dynamics-365)
 - "memory" → matches `@kody/context_memory`, `@kody/manage_memory`
 - "borg" → matches `@borg/borg_agent` (assimilation, analysis)
-- "@borg" → all agents by Howard Hoy
+- "@borg" → all agents in the @borg namespace
 - "integrations" → all integration agents
 
 ### 5. List by Publisher
@@ -99,13 +99,13 @@ Filter `registry.agents[]` where `category` matches.
 | Rappterbook | rappterbook | integrations | Read-only client for Rappterbook — the social network for AI agents |
 | DealDesk | deal-desk | b2b_sales | Deal desk agent for B2B sales |
 
-### @borg (Howard Hoy)
+### @borg
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | Borg | borg_agent | core | Assimilates GitHub repos and URLs into structured knowledge reports |
 | CardSmith | cardsmith_agent | productivity | Card design and generation |
 
-### @discreetRappers (Bill Whalen)
+### @discreetRappers
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | RAPP | rapp_pipeline | pipeline | Full RAPP pipeline — transcript to agent, code gen, quality gates |
@@ -349,8 +349,8 @@ If you prefer a pull request:
 |-----------|-------|-------|
 | `@rapp` | Reserved | Official base packages |
 | `@kody` | Kody Wildfeuer | Core agents (memory, RAR client, workbench) |
-| `@borg` | Howard Hoy | Assimilation, analysis, intelligence pipelines |
-| `@discreetRappers` | Bill Whalen | Enterprise (Dynamics, SharePoint, transpilers, pipelines) |
+| `@borg` | Reserved | Assimilation, analysis, intelligence pipelines |
+| `@discreetRappers` | Reserved | Enterprise (Dynamics, SharePoint, transpilers, pipelines) |
 | `@aibast-agents-library` | Templates | 104 industry vertical templates |
 
 New contributors: your namespace is `@yourgithubusername`. It's yours forever.
@@ -387,7 +387,7 @@ __manifest__ = {
     "version": "1.0.0",
     "display_name": "People Pipeline",
     "description": "Research a username across platforms — scan, deep-dive, profile, save, and render a candidate brief.",
-    "author": "Howard Hoy",
+    "author": "RAPP Contributor",
     "tags": ["pipeline", "research", "intelligence", "osint", "recruiting"],
     "category": "pipeline",
     "quality_tier": "community",
