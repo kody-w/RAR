@@ -2,7 +2,7 @@
 
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents from your browser.
 
-125 agents. 5 publishers. 19 categories. Every agent is one `.py` file.
+126 agents. 5 publishers. 19 categories. Every agent is one `.py` file.
 
 **[Open the Agent Store](https://kody-w.github.io/RAR/)**
 
@@ -21,7 +21,7 @@ Every agent follows the **single-file principle**: one `.py` file with the manif
 The store (`index.html`) is itself a single file. Open it in any browser — including from `file://`.
 
 ### Browse & Discover
-Search 125 agents across 19 categories. Filter by tier. Sort by votes. Click any agent to see source code, reviews, and details.
+Search 126 agents across 19 categories. Filter by tier. Sort by votes. Click any agent to see source code, reviews, and details.
 
 ### Agent Cards
 Every agent is a collectible card. Two skins:
@@ -141,7 +141,7 @@ Read the full rules in [CONSTITUTION.md](CONSTITUTION.md).
 |-----------|--------|-------|
 | **@aibast-agents-library** | 104 | Industry vertical templates (14 verticals) |
 | **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
-| **@kody** | 5 | Core infrastructure, registry client, workbench |
+| **@kody** | 6 | Core infrastructure, registry client, workbench, Rappterbook |
 | **@borg** | 2 | Borg assimilator + CardSmith (Howard Hoy) |
 | **@rapp** | 1 | BasicAgent base class |
 

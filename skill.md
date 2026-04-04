@@ -34,7 +34,6 @@ Each agent entry has:
 - `name` — namespaced identifier (e.g., `@discreetRappers/dynamics_crud`)
 - `version` — semver (e.g., `1.0.0`)
 - `display_name` — the agent's `self.name`
-- `class` — Python class name
 - `description` — what it does
 - `author` — contributor name
 - `tags` — searchable keyword list
@@ -60,8 +59,8 @@ registry = http_get(f"{base_url}/registry.json")
 agent = find_agent(registry, query)
 content = http_get(f"{base_url}/{agent['_file']}")
 
-# Determine filename: @discreetRappers/dynamics_crud → dynamics_crud_agent.py
-filename = agent['name'].split('/')[-1] + '_agent.py'
+# Use the _file basename directly — preserves the source filename
+filename = agent['_file'].split('/')[-1]
 storage.write_file('agents', filename, content)
 ```
 
@@ -88,7 +87,7 @@ Filter `registry.agents[]` where `category` matches.
 
 ## Agent Manifest — Current Inventory
 
-### @kody (5 agents)
+### @kody (6 agents)
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | ContextMemory | context_memory | core | Recalls conversation history and stored memories |
@@ -96,6 +95,7 @@ Filter `registry.agents[]` where `category` matches.
 | GitHubAgentLibrary | github_agent_library | core | Browse, search, install agents from this repo |
 | RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry — discover, install, vote, review |
 | Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
+| Rappterbook | rappterbook | integrations | Read-only client for Rappterbook — the social network for AI agents |
 
 ### @borg (2 agents — Howard Hoy)
 | Name | Slug | Category | Description |
@@ -246,7 +246,13 @@ __manifest__ = {
 }
 # ═══════════════════════════════════════════════════════════════
 
-from agents.basic_agent import BasicAgent
+try:
+    from openrappter.agents.basic_agent import BasicAgent
+except ModuleNotFoundError:
+    try:
+        from basic_agent import BasicAgent
+    except ModuleNotFoundError:
+        from agents.basic_agent import BasicAgent
 
 
 class MyAgent(BasicAgent):
@@ -329,7 +335,7 @@ If you prefer a pull request:
 ### Rules
 
 1. **Single file** — everything in one `.py` file
-2. **Inherits BasicAgent** — `from agents.basic_agent import BasicAgent`
+2. **Inherits BasicAgent** — use portable import (try openrappter, then basic_agent, then agents.basic_agent)
 3. **Returns a string** — `perform()` always returns a string
 4. **No secrets in code** — use `os.environ.get()`, declare in `requires_env`
 5. **Works offline** — handle missing env vars gracefully (return error, don't crash)
@@ -403,7 +409,7 @@ The pipeline's `perform()` method calls each dependency in order and passes resu
 ```
 registry_schema: rapp-registry/1.0
 agent_schema: rapp-agent/1.0
-total_agents: 125
+total_agents: 126
 publishers: 5 (@kody, @borg, @discreetRappers, @rapp, @aibast-agents-library)
 categories: 19 (core, pipeline, integrations, productivity, devtools, b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, human_resources, it_management, manufacturing, professional_services, retail_cpg, slg_government, software_digital_products)
 verticals: 14
