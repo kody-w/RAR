@@ -1,16 +1,17 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-04T22:43:55.336800+00:00",
+  "generated_at": "2026-04-04T22:44:26.881060+00:00",
   "stats": {
-    "total_agents": 128,
-    "publishers": 5,
+    "total_agents": 129,
+    "publishers": 6,
     "categories": 19,
     "publisher_list": [
       "@aibast-agents-library",
       "@borg",
       "@discreetRappers",
       "@kody",
+      "@kody-w",
       "@rapp"
     ],
     "category_list": [
@@ -3346,6 +3347,29 @@
       "_size_kb": 6.9,
       "_lines": 175,
       "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/hello_world",
+      "version": "1.0.0",
+      "display_name": "Hello World",
+      "description": "A friendly greeting agent that says hello.",
+      "author": "kody-w",
+      "tags": [
+        "tutorial",
+        "hello-world",
+        "starter"
+      ],
+      "category": "general",
+      "quality_tier": "unverified",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody-w/hello_world.py",
+      "_size_kb": 1.2,
+      "_lines": 39,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
