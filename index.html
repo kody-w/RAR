@@ -621,7 +621,8 @@ document.documentElement.className = 'rar-guard';
   .agent-card-wrap:active { cursor: grabbing; }
   .agent-card-wrap.flipped { transform: perspective(800px) rotateX(var(--tilt-x)) rotateY(calc(180deg + var(--tilt-y))); }
   .agent-card-front {
-    position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
+    position: absolute; inset: 0; border-radius: 12px;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
     overflow: hidden; border: 2px solid var(--border);
     background: var(--surface); display: flex; flex-direction: column; padding: 0;
   }
@@ -683,7 +684,7 @@ document.documentElement.className = 'rar-guard';
     border-color: #8b7332 !important;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 20px; position: absolute; inset: 0; border-radius: 12px;
-    backface-visibility: hidden; transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg);
     overflow: hidden; border: 2px solid #8b7332;
   }
   .agent-card-back::before {
@@ -780,7 +781,8 @@ document.documentElement.className = 'rar-guard';
     100% { filter: hue-rotate(360deg); }
   }
   .agent-card-holo {
-    position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden;
+    position: absolute; inset: 0; border-radius: 12px;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
     overflow: hidden; border: 2px solid #8b7332;
     background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
     display: grid; padding: 0;
@@ -6379,6 +6381,8 @@ function renderCards() {
   document.addEventListener('mousemove', e => {
     const wrap = e.target.closest('.agent-card-wrap');
     if (!wrap) { if (activeCard) resetTilt(activeCard); activeCard = null; return; }
+    // Don't tilt when flipped — prevents bleed-through
+    if (wrap.classList.contains('flipped')) { if (activeCard) resetTilt(activeCard); activeCard = null; return; }
     activeCard = wrap;
     const rect = wrap.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;   // 0..1
