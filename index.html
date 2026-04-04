@@ -8597,11 +8597,6 @@ async function openPack(setId) {
       setTimeout(() => flash.remove(), 600);
     }
 
-    // Render card on canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = 400; canvas.height = 560;
-    await renderMiniCard(canvas, c);
-
     overlay.innerHTML = `
       <div style="position:absolute;top:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:5">
         <div style="font-size:.75rem;color:#8b949e;letter-spacing:2px;text-transform:uppercase">${setDef.name} Pack</div>
@@ -8611,7 +8606,7 @@ async function openPack(setId) {
 
       <div style="font-size:.7rem;color:${glowColor};font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;animation:showcaseFadeIn .4s ease-out both">${rarity.toUpperCase()}${c.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
 
-      <div id="reveal-card-area" style="position:relative;animation:showcaseCardIn .7s cubic-bezier(.23,1,.32,1) both;cursor:pointer">
+      <div id="reveal-card-area" style="position:relative;animation:showcaseCardIn .7s cubic-bezier(.23,1,.32,1) both;cursor:pointer;width:min(70vw,340px);aspect-ratio:5/7;perspective:800px">
         <div style="position:absolute;inset:-60px;background:radial-gradient(circle,${glowColor}25 0%,transparent 65%);animation:showcasePulse 2.5s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
       </div>
 
@@ -8632,15 +8627,56 @@ async function openPack(setId) {
         `}
       </div>`;
 
+    // Insert real interactive HTML card instead of flat canvas
     const cardArea = document.getElementById('reveal-card-area');
-    canvas.style.cssText = `max-width:min(70vw,360px);max-height:55vh;border-radius:12px;box-shadow:0 0 80px ${glowColor}35,0 20px 60px rgba(0,0,0,.8);position:relative;z-index:1;cursor:pointer`;
-    canvas.onclick = () => openSlabViewer(c.mintId);
-    cardArea.appendChild(canvas);
+    const agentData = allAgents.find(x => x.name === c.agentName);
+    if (agentData) {
+      const cardHtml = agentToCard(agentData);
+      const temp = document.createElement('div');
+      temp.innerHTML = cardHtml;
+      const liveCard = temp.firstElementChild;
+      liveCard.removeAttribute('id');
+      liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 0 60px ' + glowColor + '35) drop-shadow(0 20px 60px rgba(0,0,0,.8));cursor:pointer';
+      liveCard.onclick = () => openSlabViewer(c.mintId);
+      cardArea.appendChild(liveCard);
+
+      // Tilt tracking across the overlay
+      const holoEl = liveCard.querySelector('.agent-card-holo');
+      overlay.addEventListener('mousemove', e => {
+        const rect = cardArea.getBoundingClientRect();
+        const cx = (e.clientX - rect.left) / rect.width;
+        const cy = (e.clientY - rect.top) / rect.height;
+        const tiltX = ((0.5 - cy) * 25).toFixed(1);
+        const tiltY = ((cx - 0.5) * 25).toFixed(1);
+        const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
+        liveCard.style.setProperty('--tilt-x', tiltX + 'deg');
+        liveCard.style.setProperty('--tilt-y', tiltY + 'deg');
+        if (holoEl) {
+          const mxPct = (cx * 100).toFixed(0) + '%';
+          const myPct = (cy * 100).toFixed(0) + '%';
+          holoEl.style.setProperty('--mx', mxPct);
+          holoEl.style.setProperty('--my', myPct);
+          holoEl.style.setProperty('--px', cx.toFixed(3));
+          holoEl.style.setProperty('--py', cy.toFixed(3));
+          holoEl.style.setProperty('--angle', angle + 'deg');
+          const shimmer = holoEl.querySelector('.holo-shimmer-track');
+          if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
+        }
+      });
+    } else {
+      // Fallback: render canvas if agent not in registry
+      const canvas = document.createElement('canvas');
+      canvas.width = 400; canvas.height = 560;
+      await renderMiniCard(canvas, c);
+      canvas.style.cssText = `width:100%;height:100%;border-radius:12px;position:relative;z-index:1;cursor:pointer`;
+      canvas.onclick = () => openSlabViewer(c.mintId);
+      cardArea.appendChild(canvas);
+    }
 
     // Particles for rare+
     if (isRare || isMythic) {
       setTimeout(() => {
-        const rect = canvas.getBoundingClientRect();
+        const rect = cardArea.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         for (let p = 0; p < 24; p++) {
@@ -9734,19 +9770,14 @@ async function openSlabZoom(mintId) {
   const isRare = rarity === 'rare';
   const glowColor = isMythic ? '#ff6d00' : isRare ? '#ffd700' : rarity === 'uncommon' ? '#c0c0c0' : '#58a6ff';
 
-  const W = 500, H = 700;
-  const canvas = document.createElement('canvas');
-  canvas.width = W; canvas.height = H;
-  await renderMiniCard(canvas, card);
-
   const zoom = document.createElement('div');
   zoom.className = 'slab-zoom-overlay';
-  zoom.style.cssText = `position:fixed;inset:0;z-index:400;background:radial-gradient(ellipse at center, rgba(20,15,8,.98) 0%, rgba(0,0,0,.99) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer`;
+  zoom.style.cssText = `position:fixed;inset:0;z-index:400;background:radial-gradient(ellipse at center, rgba(20,15,8,.98) 0%, rgba(0,0,0,.99) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;overflow-y:auto`;
   zoom.innerHTML = `
     <button class="slab-zoom-close" onclick="event.stopPropagation();this.closest('.slab-zoom-overlay').remove()">&#10005;</button>
     <div class="showcase-name" style="font-size:2rem;font-weight:900;color:#f0e6d0;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 40px ${glowColor}80;margin-bottom:4px;animation:showcaseFadeIn .6s ease-out both">${esc(card.displayName)}</div>
     <div style="font-size:.85rem;color:${glowColor};font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;animation:showcaseFadeIn .6s ease-out .1s both;opacity:0">${rarity.toUpperCase()}${card.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
-    <div class="showcase-card-wrap" style="position:relative;animation:showcaseCardIn .8s cubic-bezier(.23,1,.32,1) .2s both;opacity:0">
+    <div class="showcase-card-wrap" style="position:relative;animation:showcaseCardIn .8s cubic-bezier(.23,1,.32,1) .2s both;opacity:0;width:min(80vw,360px);aspect-ratio:5/7;perspective:800px">
       <div class="showcase-glow" style="position:absolute;inset:-40px;background:radial-gradient(circle,${glowColor}20 0%,transparent 70%);animation:showcasePulse 3s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
     </div>
     <div style="display:flex;gap:32px;margin-top:20px;animation:showcaseFadeIn .6s ease-out .5s both;opacity:0">
@@ -9755,16 +9786,57 @@ async function openSlabZoom(mintId) {
       <div style="text-align:center"><div style="font-size:1.6rem;font-weight:900;color:#e6edf3">#${card.mintNum}</div><div style="font-size:.65rem;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-top:2px">Mint</div></div>
     </div>`;
 
+  // Insert the real interactive HTML card instead of a flat canvas
   const cardWrap = zoom.querySelector('.showcase-card-wrap');
-  canvas.style.cssText = `max-width:min(80vw, 400px);max-height:65vh;border-radius:12px;box-shadow:0 0 80px ${glowColor}40, 0 20px 60px rgba(0,0,0,.8);position:relative;z-index:1`;
-  cardWrap.appendChild(canvas);
+  if (a) {
+    // Build the real card HTML using agentToCard
+    const cardHtml = agentToCard(a);
+    const temp = document.createElement('div');
+    temp.innerHTML = cardHtml;
+    const liveCard = temp.firstElementChild;
+    liveCard.removeAttribute('id');
+    liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 0 60px ' + glowColor + '40) drop-shadow(0 20px 60px rgba(0,0,0,.8))';
+    cardWrap.appendChild(liveCard);
+
+    // Tilt tracking on mousemove across the whole overlay
+    const holoEl = liveCard.querySelector('.agent-card-holo');
+    zoom.addEventListener('mousemove', e => {
+      const rect = cardWrap.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width;
+      const cy = (e.clientY - rect.top) / rect.height;
+      const tiltX = ((0.5 - cy) * 25).toFixed(1);
+      const tiltY = ((cx - 0.5) * 25).toFixed(1);
+      const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
+      liveCard.style.setProperty('--tilt-x', tiltX + 'deg');
+      liveCard.style.setProperty('--tilt-y', tiltY + 'deg');
+      if (holoEl) {
+        const mxPct = (cx * 100).toFixed(0) + '%';
+        const myPct = (cy * 100).toFixed(0) + '%';
+        holoEl.style.setProperty('--mx', mxPct);
+        holoEl.style.setProperty('--my', myPct);
+        holoEl.style.setProperty('--px', cx.toFixed(3));
+        holoEl.style.setProperty('--py', cy.toFixed(3));
+        holoEl.style.setProperty('--angle', angle + 'deg');
+        const shimmer = holoEl.querySelector('.holo-shimmer-track');
+        if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
+      }
+    });
+  } else {
+    // Fallback: render canvas if agent not found in registry
+    const W = 500, H = 700;
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    await renderMiniCard(canvas, card);
+    canvas.style.cssText = `width:100%;height:100%;border-radius:12px;position:relative;z-index:1`;
+    cardWrap.appendChild(canvas);
+  }
 
   document.body.appendChild(zoom);
   zoom.addEventListener('click', e => { if (e.target === zoom) zoom.remove(); });
 
   // Particle burst on entry
   setTimeout(() => {
-    const rect = canvas.getBoundingClientRect();
+    const rect = cardWrap.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
     for (let p = 0; p < 24; p++) {
