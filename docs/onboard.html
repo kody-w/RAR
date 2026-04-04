@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Agent Onboarding</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#12121a;--border:#1e1e2e;
+  --text:#e0e0e8;--muted:#888;--accent:#7c5cfc;
+  --green:#00e676;--cyan:#00e5ff;--magenta:#e040fb;
+  --red:#ff5252;--yellow:#ffd740;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:48px 24px 32px;border-bottom:1px solid var(--border)}
+.header h1{font-size:2rem;font-weight:700;letter-spacing:1px}
+.header h1 span{color:var(--accent)}
+.header p{color:var(--muted);margin-top:8px;font-size:1.05rem}
+
+/* Layout */
+.container{max-width:960px;margin:0 auto;padding:24px}
+
+/* Steps */
+.step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;position:relative}
+.step-num{position:absolute;top:-12px;left:20px;background:var(--accent);color:#fff;font-weight:700;font-size:.85rem;padding:2px 14px;border-radius:20px;letter-spacing:1px}
+.step h2{font-size:1.2rem;margin:8px 0 12px;color:var(--text)}
+.step p{color:var(--muted);font-size:.95rem;margin-bottom:12px}
+
+/* Code blocks */
+pre{background:#0d0d14;border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;font-size:.85rem;line-height:1.5;margin:12px 0;position:relative}
+code{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;color:var(--cyan)}
+pre code{color:var(--text)}
+.kw{color:var(--magenta)}
+.str{color:var(--green)}
+.cmt{color:#555}
+.fn{color:var(--cyan)}
+
+/* Copy button */
+.copy-btn{position:absolute;top:8px;right:8px;background:var(--border);border:none;color:var(--muted);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:.75rem}
+.copy-btn:hover{background:var(--accent);color:#fff}
+
+/* Live registry stats */
+.stats-bar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:20px;margin-bottom:8px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 20px;text-align:center;min-width:100px}
+.stat .val{font-size:1.4rem;font-weight:700;color:var(--accent)}
+.stat .label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+/* Skill source */
+.skill-source{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-top:24px;overflow:hidden}
+.skill-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.skill-header h3{font-size:.95rem;color:var(--text)}
+.skill-toggle{background:var(--accent);border:none;color:#fff;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:.85rem}
+.skill-toggle:hover{opacity:.85}
+.skill-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.skill-body.open{max-height:8000px}
+.skill-body pre{margin:0;border:none;border-radius:0;font-size:.8rem;max-height:600px;overflow:auto}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted)}
+td:first-child{color:var(--text);font-family:monospace;font-size:.85rem}
+
+/* Submit section */
+.submit-section{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--accent);border-radius:12px;padding:28px;margin:24px 0;text-align:center}
+.submit-section h2{color:var(--accent);margin-bottom:12px}
+.submit-section p{color:var(--muted);margin-bottom:16px}
+.submit-btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 32px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;transition:transform .2s}
+.submit-btn:hover{transform:scale(1.05);text-decoration:none}
+
+/* Format tabs */
+.format-tabs{display:flex;gap:0;margin:12px 0 0;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.format-tab{flex:1;padding:8px;text-align:center;background:var(--bg);color:var(--muted);cursor:pointer;font-size:.85rem;border:none;transition:all .2s}
+.format-tab.active{background:var(--accent);color:#fff}
+.format-panel{display:none}
+.format-panel.active{display:block}
+
+/* Namespace badge */
+.ns{display:inline-block;background:var(--accent);color:#fff;padding:1px 8px;border-radius:4px;font-size:.8rem;font-family:monospace;margin:0 2px}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;padding:10px 20px;border-radius:8px;font-weight:600;font-size:.9rem;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1}
+
+@media(max-width:640px){
+  .header h1{font-size:1.4rem}
+  .stats-bar{gap:8px}
+  .stat{min-width:70px;padding:8px 12px}
+  .stat .val{font-size:1.1rem}
+  .step{padding:20px 16px}
+  pre{font-size:.75rem;padding:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>RAR <span>Agent Onboarding</span></h1>
+  <p>Everything your AI agent needs to publish to the RAPP Agent Registry</p>
+</div>
+
+<div class="stats-bar" id="stats">
+  <div class="stat"><div class="val" id="st-agents">--</div><div class="label">Agents</div></div>
+  <div class="stat"><div class="val" id="st-pubs">--</div><div class="label">Publishers</div></div>
+  <div class="stat"><div class="val" id="st-cats">--</div><div class="label">Categories</div></div>
+</div>
+
+<div class="container">
+
+  <!-- Step 1: Understand the format -->
+  <div class="step">
+    <div class="step-num">STEP 1</div>
+    <h2>Write a single-file agent</h2>
+    <p>Every agent is one <code>.py</code> file. It contains a <code>__manifest__</code> dict and a class that inherits <code>BasicAgent</code>. No subdirectories, no manifest.json, no README.</p>
+    <pre id="template-code"><code><span class="cmt">"""
+My Agent - One-line description.
+"""</span>
+
+<span class="cmt"># RAPP AGENT MANIFEST - Do not remove. Used by registry builder.</span>
+<span class="kw">__manifest__</span> = {
+    <span class="str">"schema"</span>: <span class="str">"rapp-agent/1.0"</span>,
+    <span class="str">"name"</span>: <span class="str">"@yournamespace/agent-slug"</span>,
+    <span class="str">"version"</span>: <span class="str">"1.0.0"</span>,
+    <span class="str">"display_name"</span>: <span class="str">"Agent Display Name"</span>,
+    <span class="str">"description"</span>: <span class="str">"What this agent does in one sentence."</span>,
+    <span class="str">"author"</span>: <span class="str">"Your Name"</span>,
+    <span class="str">"tags"</span>: [<span class="str">"keyword1"</span>, <span class="str">"keyword2"</span>],
+    <span class="str">"category"</span>: <span class="str">"integrations"</span>,
+    <span class="str">"quality_tier"</span>: <span class="str">"community"</span>,
+    <span class="str">"requires_env"</span>: [],
+    <span class="str">"dependencies"</span>: [<span class="str">"@rapp/basic-agent"</span>],
+}
+
+<span class="kw">try</span>:
+    <span class="kw">from</span> openrappter.agents.basic_agent <span class="kw">import</span> BasicAgent
+<span class="kw">except</span> ModuleNotFoundError:
+    <span class="kw">try</span>:
+        <span class="kw">from</span> basic_agent <span class="kw">import</span> BasicAgent
+    <span class="kw">except</span> ModuleNotFoundError:
+        <span class="kw">from</span> agents.basic_agent <span class="kw">import</span> BasicAgent
+
+
+<span class="kw">class</span> <span class="fn">MyAgent</span>(BasicAgent):
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.name = __manifest__[<span class="str">"display_name"</span>]
+        self.metadata = {
+            <span class="str">"name"</span>: self.name,
+            <span class="str">"description"</span>: __manifest__[<span class="str">"description"</span>],
+            <span class="str">"parameters"</span>: {
+                <span class="str">"type"</span>: <span class="str">"object"</span>,
+                <span class="str">"properties"</span>: {
+                    <span class="str">"input"</span>: {
+                        <span class="str">"type"</span>: <span class="str">"string"</span>,
+                        <span class="str">"description"</span>: <span class="str">"Input parameter"</span>
+                    }
+                },
+                <span class="str">"required"</span>: [<span class="str">"input"</span>]
+            }
+        }
+        super().__init__(self.name, self.metadata)
+
+    <span class="kw">def</span> <span class="fn">perform</span>(self, **kwargs):
+        input_data = kwargs.get(<span class="str">'input'</span>, <span class="str">''</span>)
+        <span class="kw">return</span> f<span class="str">"Result: {input_data}"</span></code><button class="copy-btn" onclick="copyBlock('template-code')">Copy</button></pre>
+  </div>
+
+  <!-- Step 2: Rules -->
+  <div class="step">
+    <div class="step-num">STEP 2</div>
+    <h2>Follow the rules</h2>
+    <table>
+      <tr><td>Single file</td><td>Everything in one <code>.py</code> file</td></tr>
+      <tr><td>Inherits BasicAgent</td><td>Use the portable import (try/except chain above)</td></tr>
+      <tr><td>Returns a string</td><td><code>perform()</code> always returns a string</td></tr>
+      <tr><td>No secrets in code</td><td>Use <code>os.environ.get()</code>, declare in <code>requires_env</code></td></tr>
+      <tr><td>Works offline</td><td>Handle missing env vars gracefully (return error, don't crash)</td></tr>
+      <tr><td>No network in __init__</td><td>Keep the constructor fast</td></tr>
+    </table>
+  </div>
+
+  <!-- Step 3: Choose your namespace -->
+  <div class="step">
+    <div class="step-num">STEP 3</div>
+    <h2>Choose your namespace</h2>
+    <p>Your namespace is <code>@yourgithubusername</code>. It's yours forever. To publish under a reserved namespace, include it in the issue title.</p>
+    <table>
+      <thead><tr><th>Namespace</th><th>Status</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>@rapp</td><td>Reserved</td><td>Official base packages</td></tr>
+        <tr><td>@kody</td><td>Reserved</td><td>Core agents (memory, RAR client, workbench)</td></tr>
+        <tr><td>@borg</td><td>Reserved</td><td>Assimilation, analysis, intelligence</td></tr>
+        <tr><td>@discreetRappers</td><td>Reserved</td><td>Enterprise (Dynamics, SharePoint, pipelines)</td></tr>
+        <tr><td>@aibast-agents-library</td><td>Templates</td><td>Industry vertical templates</td></tr>
+        <tr><td>@yourusername</td><td>Yours</td><td>Whatever you build</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Step 4: Choose a category -->
+  <div class="step">
+    <div class="step-num">STEP 4</div>
+    <h2>Pick a category</h2>
+    <table>
+      <thead><tr><th>Category</th><th>For agents that...</th></tr></thead>
+      <tbody>
+        <tr><td>core</td><td>Provide fundamental capabilities (memory, orchestration)</td></tr>
+        <tr><td>pipeline</td><td>Build, generate, chain, or deploy other agents</td></tr>
+        <tr><td>integrations</td><td>Connect to external systems (APIs, databases, services)</td></tr>
+        <tr><td>productivity</td><td>Create content or automate tasks</td></tr>
+        <tr><td>devtools</td><td>Help developers (testing, scaffolding, base classes)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px">Industry verticals: <code>b2b_sales</code>, <code>b2c_sales</code>, <code>energy</code>, <code>federal_government</code>, <code>financial_services</code>, <code>healthcare</code>, <code>human_resources</code>, <code>it_management</code>, <code>manufacturing</code>, <code>professional_services</code>, <code>retail_cpg</code>, <code>slg_government</code>, <code>software_digital_products</code></p>
+  </div>
+
+  <!-- Step 5: Submit -->
+  <div class="step">
+    <div class="step-num">STEP 5</div>
+    <h2>Submit via GitHub Issue</h2>
+    <p>No fork or push access needed. Open an issue on <a href="https://github.com/kody-w/RAR/issues/new" target="_blank">kody-w/RAR</a> with these rules:</p>
+    <p><strong>Title</strong> must start with <code>[AGENT]</code> or <code>[RAR]</code>:</p>
+    <pre><code>[AGENT] @yourusername/my-agent</code></pre>
+    <p>For reserved namespaces, include the namespace in the title:</p>
+    <pre><code>[AGENT] @borg/sherlock</code></pre>
+    <p style="margin-top:12px"><strong>Body</strong> &mdash; paste your agent code. Any of these formats work:</p>
+
+    <div class="format-tabs">
+      <button class="format-tab active" onclick="showFormat(0)">Raw Python</button>
+      <button class="format-tab" onclick="showFormat(1)">Fenced Block</button>
+      <button class="format-tab" onclick="showFormat(2)">JSON</button>
+    </div>
+
+    <div class="format-panel active" id="fmt-0">
+      <pre><code><span class="cmt"># Just paste your .py file contents directly</span>
+__manifest__ = {
+    <span class="str">"schema"</span>: <span class="str">"rapp-agent/1.0"</span>,
+    <span class="str">"name"</span>: <span class="str">"@you/my-agent"</span>,
+    ...
+}
+<span class="kw">class</span> <span class="fn">MyAgent</span>(BasicAgent):
+    ...</code></pre>
+    </div>
+
+    <div class="format-panel" id="fmt-1">
+      <pre><code>```python
+__manifest__ = {
+    <span class="str">"schema"</span>: <span class="str">"rapp-agent/1.0"</span>,
+    <span class="str">"name"</span>: <span class="str">"@you/my-agent"</span>,
+    ...
+}
+<span class="kw">class</span> <span class="fn">MyAgent</span>(BasicAgent):
+    ...
+```</code></pre>
+    </div>
+
+    <div class="format-panel" id="fmt-2">
+      <pre><code>{
+  <span class="str">"action"</span>: <span class="str">"submit_agent"</span>,
+  <span class="str">"payload"</span>: {
+    <span class="str">"code"</span>: <span class="str">"__manifest__ = { ... }\nclass MyAgent(BasicAgent): ..."</span>
+  }
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- What happens next -->
+  <div class="step">
+    <div class="step-num">STEP 6</div>
+    <h2>Automation takes over</h2>
+    <p>The RAR pipeline automatically:</p>
+    <table>
+      <tr><td>1. Detects</td><td>Python code or JSON in the issue body</td></tr>
+      <tr><td>2. Validates</td><td>Extracts and validates the <code>__manifest__</code></td></tr>
+      <tr><td>3. Creates</td><td>File at <code>agents/@namespace/agent-slug.py</code></td></tr>
+      <tr><td>4. Forges</td><td>A collectible HOLO card for your agent</td></tr>
+      <tr><td>5. Rebuilds</td><td><code>registry.json</code> with your agent included</td></tr>
+      <tr><td>6. Closes</td><td>The issue with a confirmation comment</td></tr>
+    </table>
+    <p style="margin-top:12px">Your agent appears in the <a href="https://kody-w.github.io/RAR/" target="_blank">Agent Store</a> within minutes.</p>
+  </div>
+
+  <!-- Submit CTA -->
+  <div class="submit-section">
+    <h2>Ready to publish?</h2>
+    <p>Open a GitHub Issue and paste your agent code. The pipeline handles the rest.</p>
+    <a href="https://github.com/kody-w/RAR/issues/new?title=%5BAGENT%5D+%40yourname%2Fagent-slug&body=%23+Paste+your+agent+code+below%0A%0A" target="_blank" class="submit-btn">Open GitHub Issue</a>
+  </div>
+
+  <!-- Quality tiers -->
+  <div class="step">
+    <div class="step-num">INFO</div>
+    <h2>Quality Tiers</h2>
+    <table>
+      <thead><tr><th>Tier</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>community</td><td>Submitted, basic validation passes. All new agents start here.</td></tr>
+        <tr><td>verified</td><td>Reviewed by maintainer &mdash; tested, follows standards</td></tr>
+        <tr><td>official</td><td>Core team maintained, guaranteed compatibility</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px">Promotion path: Community &rarr; Verified &rarr; Official</p>
+  </div>
+
+  <!-- skill.md source -->
+  <div class="skill-source">
+    <div class="skill-header">
+      <h3>skill.md &mdash; Machine-Readable Source</h3>
+      <button class="skill-toggle" id="skill-toggle" onclick="toggleSkill()">Show Source</button>
+    </div>
+    <div class="skill-body" id="skill-body">
+      <pre><code id="skill-content">Loading...</code></pre>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+
+// Fetch live stats
+fetch(RAW + '/registry.json')
+  .then(r => r.json())
+  .then(d => {
+    if (d.stats) {
+      document.getElementById('st-agents').textContent = d.stats.total_agents || '--';
+      document.getElementById('st-pubs').textContent = d.stats.publishers || '--';
+      document.getElementById('st-cats').textContent = d.stats.categories || '--';
+    }
+  })
+  .catch(() => {});
+
+// Fetch skill.md
+fetch(RAW + '/skill.md')
+  .then(r => r.text())
+  .then(t => {
+    document.getElementById('skill-content').textContent = t;
+  })
+  .catch(() => {
+    document.getElementById('skill-content').textContent = 'Failed to load skill.md';
+  });
+
+function toggleSkill() {
+  const body = document.getElementById('skill-body');
+  const btn = document.getElementById('skill-toggle');
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? 'Hide Source' : 'Show Source';
+}
+
+function showFormat(idx) {
+  document.querySelectorAll('.format-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.format-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+function copyBlock(id) {
+  const el = document.getElementById(id);
+  const text = el.querySelector('code').textContent;
+  navigator.clipboard.writeText(text).then(() => showToast('Copied!')).catch(() => {});
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
