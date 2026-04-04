@@ -1075,6 +1075,12 @@
   .agent-card-wrap { transition: transform .4s ease-out, filter .3s ease; }
   .agent-card-wrap:hover { filter: brightness(1.05) drop-shadow(0 6px 20px rgba(201,168,76,.25)); }
 
+  /* Hover peek — always show holo face on hover regardless of mode */
+  .agent-card-holo.holo-peek {
+    z-index: 5; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+  }
+  .agent-card-wrap:hover .agent-card-holo.holo-peek { opacity: 1; }
+
   /* 3D Card Viewer */
   .viewer3d-overlay {
     position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.92);
@@ -6707,25 +6713,23 @@ function agentToCard(a) {
     </div>`;
 
   // ── Compose based on mode ──
-  let front, back, canFlip;
+  let front, holoOverlay;
   if (cardMode === 'business') {
     front = bizFace;
-    back = qrFace;
-    canFlip = true;
+    holoOverlay = holoFace.replace('class="agent-card-holo"', 'class="agent-card-holo holo-peek"');
   } else if (cardMode === 'kids') {
     front = asciiFace;
-    back = qrFace;
-    canFlip = true;
+    holoOverlay = holoFace.replace('class="agent-card-holo"', 'class="agent-card-holo holo-peek"');
   } else {
     front = holoFace;
-    back = qrFace;
-    canFlip = true;
+    holoOverlay = '';
   }
 
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ${canFlip ? `onclick="this.classList.toggle('flipped')" ondblclick="event.stopPropagation();showAndTell('${esc(a.name)}')"` : `onclick="openAgent('${esc(a.name)}')"`}>
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" onclick="this.classList.toggle('flipped')" ondblclick="event.stopPropagation();showAndTell('${esc(a.name)}')">
     ${front}
-    ${back || ''}
+    ${holoOverlay}
+    ${qrFace}
   </div>`;
 }
 
