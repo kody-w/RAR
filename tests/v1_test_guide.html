@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR v1 Test Guide — Howard</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --dim: #8b949e; --accent: #58a6ff;
+    --green: #39d353; --purple: #d2a8ff; --orange: #f0883e;
+    --cyan: #00ffff; --magenta: #ff00ff; --gold: #e3b341;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 1.8rem; margin-bottom: 8px; background: linear-gradient(135deg, var(--cyan), var(--magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { color: var(--dim); margin-bottom: 32px; font-size: .9rem; }
+  h2 { font-size: 1.1rem; color: var(--gold); margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: .95rem; color: var(--accent); margin: 20px 0 8px; }
+  p, li { color: var(--text); font-size: .9rem; }
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 6px 0; }
+  .check { list-style: none; padding-left: 0; }
+  .check li { position: relative; padding-left: 28px; }
+  .check li::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border: 2px solid var(--border); border-radius: 4px; }
+  .pass { color: var(--green); font-weight: 600; }
+  .fail { color: #f85149; font-weight: 600; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: .75rem; font-weight: 600; margin-right: 6px; }
+  .tag-new { background: rgba(0,255,255,.1); color: var(--cyan); border: 1px solid rgba(0,255,255,.2); }
+  .tag-fix { background: rgba(57,211,83,.1); color: var(--green); border: 1px solid rgba(57,211,83,.2); }
+  .tag-visual { background: rgba(210,168,255,.1); color: var(--purple); border: 1px solid rgba(210,168,255,.2); }
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: .85rem; color: var(--orange); }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; margin: 12px 0; font-size: .8rem; line-height: 1.5; color: var(--text); }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+  .priority { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .p-high { background: rgba(248,81,73,.15); color: #f85149; border: 1px solid rgba(248,81,73,.3); }
+  .p-med { background: rgba(227,179,65,.15); color: var(--gold); border: 1px solid rgba(227,179,65,.3); }
+  .p-low { background: rgba(88,166,255,.15); color: var(--accent); border: 1px solid rgba(88,166,255,.3); }
+  .note { background: rgba(88,166,255,.08); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: .85rem; color: var(--dim); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>RAR v1 Test Guide</h1>
+<p class="subtitle">Howard — here's what changed and what to test. Check each box as you go.</p>
+
+<div class="note">
+  <strong>Quick start:</strong> Pull latest <code>main</code>, serve locally (<code>python3 -m http.server 8080</code>), open <code>localhost:8080</code>.
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>1. Card Design Overhaul <span class="tag tag-visual">Visual</span> <span class="priority p-high">High Priority</span></h2>
+
+<p>Every card now has generated abilities, flavor text, and full-bleed art. Your 13 HOLO cards use the CardSmith data directly.</p>
+
+<h3>What to look for</h3>
+<ul class="check">
+  <li>Cards show <strong>keyword abilities</strong> (bold keyword + dash + text), not just a truncated description</li>
+  <li>Cards show <strong>italic flavor text</strong> below a divider line</li>
+  <li>Your 13 HOLO cards display their original abilities and flavor from CardSmith (Borg should say "Resistance is futile...")</li>
+  <li>Art fills ~46% of the card — no huge black void above/below the art</li>
+  <li>Name bar has a gradient background, legendary cards get a star</li>
+  <li>Power/Toughness uses your HOLO_CARD_DB values (Borg = 6/4, TinyWorld = 7/7)</li>
+  <li>Non-HOLO cards generate abilities from their tags, env vars, and description</li>
+  <li>Rarity footer glows orange for mythic cards</li>
+</ul>
+
+<h3>Where to test</h3>
+<ul>
+  <li><strong>Collection view</strong> — click any card to open slab, check the card face</li>
+  <li><strong>Slab zoom</strong> — click "Zoom" in slab viewer for centering analysis</li>
+  <li><strong>3D viewer</strong> — the card texture should match (art + abilities + flavor)</li>
+  <li><strong>Slide presentation</strong> — abilities + flavor now appear in slides too</li>
+  <li><strong>Card flip</strong> — HOLO face should show abilities, Business face unchanged</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>2. BothAngles Hologram Viewer <span class="tag tag-new">New</span> <span class="priority p-high">High Priority</span></h2>
+
+<p>Full 3D holographic projection of card art. Ported directly from the BothAngles dual-camera-recorder reference — same shaders, same particle system, same lighting rig.</p>
+
+<h3>How to open it</h3>
+<ul>
+  <li><strong>From slab viewer:</strong> Collection &rarr; click card &rarr; Slab &rarr; <code>Hologram</code> button (cyan) or <code>SW Holo</code> button (blue)</li>
+  <li><strong>From 3D viewer:</strong> 3D card viewer toolbar &rarr; <code>Hologram</code> button</li>
+</ul>
+
+<h3>What to test</h3>
+<ul class="check">
+  <li>Card SVG art renders on <strong>4 layered transparent planes</strong> with wave distortion</li>
+  <li><strong>Cyan/magenta fresnel edge glow</strong> visible on art planes</li>
+  <li><strong>Scrolling scanline overlay</strong> — subtle horizontal lines across the scene</li>
+  <li><strong>2000 particles</strong> — cyan and magenta motes on a spherical shell, drifting upward</li>
+  <li><strong>Base disc + pulsing ring</strong> at the bottom (holographic projector)</li>
+  <li><strong>Vertical beam</strong> from base through the hologram</li>
+  <li><strong>Orbiting lights</strong> — two colored point lights circling the hologram</li>
+  <li><strong>Auto-rotation</strong> — hologram spins slowly by default</li>
+  <li><strong>Mouse parallax</strong> — move mouse (without clicking) and hologram follows slightly</li>
+  <li><strong>Click + drag</strong> — manually rotate the hologram</li>
+  <li><strong>Pause/Spin button</strong> — toggles auto-rotation</li>
+  <li><strong>Export PNG</strong> — captures current frame</li>
+  <li><strong>ESC</strong> closes the viewer</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>3. Star Wars Holo Theme <span class="tag tag-new">New</span> <span class="priority p-med">Medium Priority</span></h2>
+
+<p>Alt art hologram style — blue monochrome transmission with static, noise, and flicker. Like Princess Leia's hologram.</p>
+
+<h3>Auto-detection</h3>
+<p>These 4 cards default to Star Wars theme (their slab buttons show <code>SW Holo</code> first):</p>
+<ul>
+  <li><strong>Borg</strong> — "The Assimilator"</li>
+  <li><strong>Anvil</strong> — "The Enforcer"</li>
+  <li><strong>TinyWorld</strong> — "The Architect"</li>
+  <li><strong>HoloNaming</strong> — "The Admiral"</li>
+</ul>
+
+<h3>What to test</h3>
+<ul class="check">
+  <li>Art is <strong>blue-white monochrome</strong> (desaturated with blue boost)</li>
+  <li><strong>Heavy scanlines</strong> — more visible than BothAngles theme</li>
+  <li><strong>Static noise</strong> — random pixel noise across the art</li>
+  <li><strong>Flicker</strong> — occasional brief opacity drop (like a bad transmission)</li>
+  <li>Particles are <strong>blue/white</strong> instead of cyan/magenta</li>
+  <li>Label says <strong>"IMPERIAL HOLONET TRANSMISSION"</strong></li>
+  <li><strong>Theme toggle</strong> — toolbar button switches between BothAngles and Star Wars</li>
+  <li>All other cards default to BothAngles theme (cyan/magenta)</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>4. Howard Starter Pack <span class="tag tag-fix">Verify</span> <span class="priority p-high">High Priority</span></h2>
+
+<p>First-time users get your 13 HOLO cards auto-minted. Already built — just verify it works.</p>
+
+<h3>How to test fresh</h3>
+<pre>// In browser console:
+localStorage.clear();
+indexedDB.deleteDatabase('rar_collection');
+// Then reload the page</pre>
+
+<h3>What to test</h3>
+<ul class="check">
+  <li>Toast appears: "Howard's Starter Pack — 13 HOLO cards added"</li>
+  <li>Collection shows 13 cards with <code>setId: HOLO</code></li>
+  <li>Each card has your CardSmith art, abilities, and flavor text</li>
+  <li>Reload again — still 13 cards (no duplicates)</li>
+  <li>Mint new cards from packs — starter cards coexist with new mints</li>
+</ul>
+
+<h3>Console verification</h3>
+<pre>// Should return 13 on fresh session:
+getAllMinted().then(c => console.log(c.length));
+
+// Check HOLO cards specifically:
+getAllMinted().then(c => console.log(c.filter(x => x.setId === 'HOLO').length));</pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>5. Core Sharing Round-Trip <span class="tag tag-fix">Verify</span> <span class="priority p-med">Medium Priority</span></h2>
+
+<h3>Export test</h3>
+<ul class="check">
+  <li>Slab viewer &rarr; "Export .card" &rarr; <code>.py.card</code> file downloads</li>
+  <li>Slab viewer &rarr; "Export .rad.eggs" &rarr; <code>.rad.eggs</code> JSON file downloads</li>
+</ul>
+
+<h3>Import test</h3>
+<ul class="check">
+  <li>Open incognito window &rarr; load RAR</li>
+  <li>Drag a <code>.py.card</code> file onto the drop zone &rarr; card appears in collection with import provenance</li>
+  <li>Drag a <code>.rad.eggs</code> file onto the drop zone &rarr; card imports with Third Space badge</li>
+  <li>Drop zone accepts <code>.py</code>, <code>.card</code>, <code>.rad.eggs</code>, <code>.egg</code> files</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>6. BothAngles CSS Effects (Card Grid) <span class="tag tag-visual">Visual</span> <span class="priority p-low">Low Priority</span></h2>
+
+<p>Hover effects on HOLO cards in the main grid.</p>
+
+<ul class="check">
+  <li>Hover a holo card &rarr; <strong>cyan/magenta edge glow</strong> (fresnel)</li>
+  <li>Hover a holo card &rarr; <strong>horizontal scanlines</strong> scroll upward</li>
+  <li>Hover a holo card &rarr; <strong>two colored blobs</strong> orbit slowly</li>
+  <li>Mouse leave &rarr; all effects fade out smoothly</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>7. Regression Checks <span class="priority p-low">Low Priority</span></h2>
+
+<ul class="check">
+  <li>Card flip still works (click toggles HOLO/Business/ASCII)</li>
+  <li>Card mode switching (Icon/Full Art/ASCII toggle in header) works</li>
+  <li>Tilt tracking still smooth on hover</li>
+  <li>Pack opening ceremony animates correctly</li>
+  <li>Collection sort/filter works</li>
+  <li>Search bar finds agents</li>
+  <li>Deck builder — add/remove cards, export deck</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>8. Automated Test Suite</h2>
+
+<p>45 automated tests. Run in browser console:</p>
+
+<div class="section">
+<p><strong>Steps:</strong></p>
+<ol>
+  <li>Open browser console (<code>Cmd+Option+J</code>)</li>
+  <li>Copy the contents of <code>tests/v1_tests.js</code></li>
+  <li>Paste and press Enter</li>
+  <li>Expected: <span class="pass">45 passed, 0 failed</span></li>
+</ol>
+</div>
+
+<p>If any tests fail, note the test name and failure detail.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Feedback Format</h2>
+
+<p>For each section, just reply with:</p>
+<pre>Section 1 (Cards): PASS / FAIL — [notes]
+Section 2 (Hologram): PASS / FAIL — [notes]
+Section 3 (SW Holo): PASS / FAIL — [notes]
+Section 4 (Starter Pack): PASS / FAIL — [notes]
+Section 5 (Sharing): PASS / FAIL — [notes]
+Section 6 (CSS Effects): PASS / FAIL — [notes]
+Section 7 (Regression): PASS / FAIL — [notes]
+Section 8 (Auto Tests): XX/45 passed</pre>
+
+<div class="note" style="margin-top: 32px;">
+  <strong>Known:</strong> The hologram viewer requires Three.js (loaded via CDN). If you're offline, the 3D/hologram viewers won't work but everything else will.
+</div>
+
+<p style="margin-top: 40px; color: var(--dim); font-size: .8rem; text-align: center;">RAR v1 Pre-Release Test Guide &mdash; April 2026</p>
+
+</body>
+</html>
