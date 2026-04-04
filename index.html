@@ -4226,6 +4226,27 @@ function openAgent(name) {
           </div>
         </div>
       </div>
+      ${(() => {
+        const containingDecks = Object.entries(allDecks).filter(([_, cards]) => cards.includes(a.name));
+        if (!containingDecks.length) return `<div class="modal-section"><h3>Decks</h3><p style="color:var(--text-muted);font-size:.88rem">This card is not in any deck yet.</p></div>`;
+        return `<div class="modal-section"><h3>Decks (${containingDecks.length})</h3>
+          ${containingDecks.map(([deckName, cards]) => `
+            <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface2);overflow:hidden">
+              <summary style="padding:10px 14px;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px;user-select:none">
+                <span style="color:var(--accent)">${esc(deckName)}</span>
+                <span style="font-size:.72rem;color:var(--text-muted);font-weight:400">${cards.length} card${cards.length !== 1 ? 's' : ''}</span>
+              </summary>
+              <div style="padding:4px 10px 10px;display:flex;flex-wrap:wrap;gap:6px">
+                ${cards.map(cn => {
+                  const ca = allAgents.find(x => x.name === cn);
+                  const isCurrent = cn === a.name;
+                  return `<button onclick="closeModal();setTimeout(()=>openAgent('${esc(cn)}'),150)" style="padding:4px 10px;border-radius:6px;font-size:.75rem;cursor:pointer;border:1px solid ${isCurrent ? 'var(--accent)' : 'var(--border)'};background:${isCurrent ? 'rgba(88,166,255,.12)' : 'var(--surface)'};color:${isCurrent ? 'var(--accent)' : 'var(--text)'};font-weight:${isCurrent ? '700' : '400'};transition:all .15s">${esc(ca?.display_name || cn)}</button>`;
+                }).join('')}
+              </div>
+            </details>
+          `).join('')}
+        </div>`;
+      })()}
       ${true ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
         <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">${svgIcon('pencil','#fff',14)} Write a Review</button>
       </div>` : ''}
@@ -6913,8 +6934,8 @@ function agentToCard(a) {
       ${qrImgHtml}
       <div class="ac-back-name">${esc(a.display_name)}</div>
       <div class="ac-back-actions">
-        <button onclick="event.stopPropagation();openAgent('${esc(a.name)}')">View</button>
-        <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
+        <button onclick="event.stopPropagation();var zo=this.closest('.slab-zoom-overlay')||this.closest('.pack-open-overlay');if(zo){zo.remove();document.body.style.overflow=''}openAgent('${esc(a.name)}')">View</button>
+        <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}');var b=this;b.textContent=b.textContent==='+ Deck'?'Remove':'+ Deck'">${inDeck ? 'Remove' : '+ Deck'}</button>
       </div>
     </div>`;
 
