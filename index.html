@@ -788,7 +788,7 @@ document.documentElement.className = 'rar-guard';
     background: linear-gradient(180deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
     display: grid; padding: 0;
     /* Fixed zones — like a real trading card: header, art, type, text, footer */
-    grid-template-rows: auto 42% auto 1fr auto;
+    grid-template-rows: minmax(0, auto) 40% minmax(0, auto) 1fr minmax(0, auto);
   }
   .agent-card-holo::before {
     content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -885,7 +885,7 @@ document.documentElement.className = 'rar-guard';
     transition: transform .1s ease-out;
   }
   .holo-name {
-    font-size: .82rem; font-weight: 700; color: #e8dcc8;
+    font-size: .75rem; font-weight: 700; color: #e8dcc8;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .holo-title {
@@ -957,11 +957,12 @@ document.documentElement.className = 'rar-guard';
     );
     transition: transform .1s ease-out;
   }
-  .holo-ability { margin-bottom: 4px; }
+  .holo-ability { margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .holo-ability .kw { font-weight: 700; color: #e8dcc8; }
   .holo-flavor {
-    font-style: italic; font-size: .58rem; color: #8a7e6a;
-    border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 4px;
+    font-style: italic; font-size: .55rem; color: #8a7e6a;
+    border-top: 1px solid #3d3322; padding-top: 3px; margin-top: 3px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
   .agent-haiku {
     font-style: italic; font-size: .5rem; line-height: 1.35;
@@ -981,8 +982,9 @@ document.documentElement.className = 'rar-guard';
   }
   .holo-footer {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 4px 12px 6px; font-size: .58rem;
+    padding: 4px 8px 4px; font-size: .55rem;
     position: relative; z-index: 5;
+    white-space: nowrap; overflow: hidden;
     /* Parallax: footer floats above like header */
     transform: translate(
       calc((var(--px, 0.5) - 0.5) * 3px),
@@ -990,7 +992,7 @@ document.documentElement.className = 'rar-guard';
     );
     transition: transform .1s ease-out;
   }
-  .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; }
+  .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
   .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,.4); }
   .holo-rarity.rare { color: #ffd700; text-shadow: 0 0 6px rgba(255,215,0,.3); }
   .holo-rarity.uncommon { color: #c0c0c0; }

@@ -561,7 +561,6 @@ def generate_card(agent, rng):
         "flavor_text": flavor,
         "avatar_svg": art_svg,
         "set_code": "HOLO",
-        "artist": "RAPP Generator",
         "agent_name": agent["name"],
     }
 
