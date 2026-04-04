@@ -3650,6 +3650,13 @@ function switchTab(tab) {
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
   if (tab === 'market') renderMarketExchange();
+  if (tab === 'submit' && ghUser?.login) {
+    const ta = document.getElementById('agent-code');
+    if (!ta.value || ta.value.includes('@your-username/')) {
+      ta.value = (ta.value || ta.placeholder).replaceAll('@your-username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
+      previewManifest();
+    }
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -4670,8 +4677,13 @@ class DataProcessorAgent(BasicAgent):
 const TEMPLATE_MARKER = '@your-username/';
 
 function loadTemplate(key) {
-  const code = STARTER_TEMPLATES[key];
+  let code = STARTER_TEMPLATES[key];
   if (!code) return;
+  // Auto-fill the logged-in user's namespace and name
+  if (ghUser?.login) {
+    code = code.replaceAll('@your-username/', `@${ghUser.login}/`);
+    code = code.replaceAll('"Your Name"', `"${ghUser.login}"`);
+  }
   const ta = document.getElementById('agent-code');
   ta.value = code;
   document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
@@ -5044,7 +5056,7 @@ function previewManifest() {
     if (!desc) errs.push('description required');
     if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
     if (tier && !['unverified', 'community', 'experimental'].includes(tier)) errs.push('quality_tier must be "unverified", "community", or "experimental"');
-    if (isUnmodifiedTemplate(code)) errs.push('Customize the template — change name, description, and code');
+    if (code.includes('@your-username/')) errs.push('Sign in so your namespace is auto-filled');
     pv.style.display = 'block';
     pv.innerHTML = `<h4>Manifest Preview</h4>
       ${[['name',name],['version',ver],['display',disp],['description',desc],['author',auth],['category',cat],['tier',tier]].filter(x=>x[1]).map(x=>`<div class="fld"><span class="k">${x[0]}</span><span class="v">${esc(x[1])}</span></div>`).join('')}
@@ -5055,20 +5067,23 @@ function previewManifest() {
 
 async function submitAgent() {
   if (!ghUser) { loginWithGitHub(); return; }
-  const code = document.getElementById('agent-code').value;
+  let code = document.getElementById('agent-code').value;
   if (!code.trim()) return;
-  if (isUnmodifiedTemplate(code)) {
-    showToast('Customize the template first — change the name, description, and code to make it yours!', 'error');
-    return;
+  // Auto-fill namespace if still placeholder
+  if (code.includes('@your-username/')) {
+    code = code.replaceAll('@your-username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
+    document.getElementById('agent-code').value = code;
   }
   const btn = document.getElementById('submit-btn');
   btn.disabled = true; btn.textContent = 'Submitting...';
+  const m = code.match(/"name"\s*:\s*"([^"]+)"/);
+  const agentName = m?.[1] || 'agent';
   const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
   try {
     const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: '[RAR] submit_agent', body: '```json\n' + body + '\n```', labels: ['rar-action', 'agent-submission'] })
+      body: JSON.stringify({ title: `[AGENT] ${agentName}`, body: '```json\n' + body + '\n```' })
     });
     if (res.ok) {
       const issue = await res.json();
@@ -5111,10 +5126,6 @@ async function submitLocalToStore(agentName) {
   if (!ghUser) { loginWithGitHub(); return; }
   const agent = allAgents.find(a => a.name === agentName);
   if (!agent || !agent._code) { showToast('Agent code not found', 'error'); return; }
-  if (isUnmodifiedTemplate(agent._code)) {
-    showToast('Customize the agent first — this is still a template', 'error');
-    return;
-  }
   const code = agent._code;
   const body = JSON.stringify({ action: 'submit_agent', payload: { code } }, null, 2);
   try {
@@ -5122,7 +5133,7 @@ async function submitLocalToStore(agentName) {
     const res = await fetch(`https://api.github.com/repos/${targetRepo}/issues`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: '[RAR] submit_agent', body: '```json\n' + body + '\n```', labels: ['rar-action', 'agent-submission', 'local-upload'] })
+      body: JSON.stringify({ title: `[AGENT] ${agentName}`, body: '```json\n' + body + '\n```' })
     });
     if (res.ok) {
       const issue = await res.json();
