@@ -6178,8 +6178,6 @@ function agentToCard(a) {
       </div>
       <div class="holo-footer">
         <span class="holo-rarity ${holoRarity}">${esc(holoSetCode)}${holoPromo ? ' <span class="holo-promo">&#9733; Promo</span>' : ''} &bull; ${holoRarity.charAt(0).toUpperCase() + holoRarity.slice(1)}${holoArtist ? ` &bull; <span class="holo-artist">${esc(holoArtist)}</span>` : ''}</span>
-        <span style="font-size:.65rem;cursor:pointer;color:#5a4a2a;margin:0 2px" onclick="event.stopPropagation();showAndTell('${esc(a.name)}')" title="Show &amp; Tell">&#9906;</span>
-        <span style="font-size:.7rem;cursor:pointer;${inDeck ? 'color:#ffd700' : 'color:#5a4a2a'}" onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}')">${inDeck ? '&#9733;' : '&#9734;'}</span>
         ${power != null && toughness != null ? `<span class="holo-stats">${power}/${toughness}</span>` : ''}
       </div>
     </div>`;
@@ -6247,7 +6245,7 @@ function agentToCard(a) {
   }
 
   return `
-  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ${canFlip ? `onclick="this.classList.toggle('flipped')"` : `onclick="openAgent('${esc(a.name)}')"`}>
+  <div class="agent-card-wrap" id="card-${a.name.replace(/[^a-z0-9]/gi,'_')}" ${canFlip ? `onclick="this.classList.toggle('flipped')" ondblclick="event.stopPropagation();showAndTell('${esc(a.name)}')"` : `onclick="openAgent('${esc(a.name)}')"`}>
     ${front}
     ${back || ''}
   </div>`;
