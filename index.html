@@ -6583,15 +6583,7 @@ function agentToCard(a) {
   // HOLO card data — use Howard's canonical DB if available, otherwise generate
   const holo = getHoloCard(a);
   const abilities = holo
-    ? holo.abilities.map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }))
-    : (() => {
-        const ab = [];
-        if (a.description) ab.push({ kw: 'Perform', text: desc });
-        if ((a.requires_env || []).length) ab.push({ kw: 'Requires', text: a.requires_env.join(', ') });
-        const nonTrivialDeps = (a.dependencies || []).filter(d => d !== '@rapp/basic-agent');
-        if (nonTrivialDeps.length) ab.push({ kw: 'Depends', text: nonTrivialDeps.join(', ') });
-        return ab;
-      })();
+    generateCardAbilities(a).map(ab => ({ kw: ab.keyword + (ab.cost ? ` ${ab.cost}` : ''), text: ab.text }));
 
   const pips = holo ? holo.colors : (CAT_TO_PIPS[a.category] || CAT_TO_PIPS.general);
   const creatureType = holo ? holo.type_line.replace(/^(Legendary )?/, '').replace('Creature — ', '').replace('Artifact — ', '').replace('Enchantment — ', '') : (CAT_TO_TYPE[a.category] || 'Agent');
@@ -6601,7 +6593,7 @@ function agentToCard(a) {
   const envCount = (a.requires_env || []).length;
   const power = holo?.power ?? Math.max(1, tags.length + depCount);
   const toughness = holo?.toughness ?? Math.max(1, (a.version || '1.0.0').split('.')[0] * 2 + envCount);
-  const flavor = holo?.flavor_text || FLAVOR_PHRASES[a.category] || FLAVOR_PHRASES.general;
+  const flavor = generateFlavorText(a);
   const holoTitle = holo?.title || '';
   const holoManaCost = holo?.mana_cost || '';
   const holoArt = holo?.avatar_svg || null;
@@ -9034,7 +9026,12 @@ async function renderSlide() {
         <div class="slide-title">${esc(a.display_name)}</div>
         <div class="slide-subtitle">${esc(holoTypeLine)}</div>
         <div class="slide-pips">${pipsHtml}</div>
-        <div class="slide-desc">${esc(a.description)}</div>
+        <div class="slide-abilities" style="margin:10px 0;font-size:.85rem;line-height:1.5;color:var(--text)">
+          ${generateCardAbilities(a).map(ab =>
+            `<div style="margin-bottom:6px"><strong style="color:var(--gold)">${esc(ab.keyword)}${ab.cost ? ' ' + esc(ab.cost) : ''}</strong> <span style="color:var(--text-dim)">\u2014 ${esc(ab.text)}</span></div>`
+          ).join('')}
+          <div style="font-style:italic;color:var(--text-muted);margin-top:8px;border-top:1px solid var(--border);padding-top:6px">${esc(flavor)}</div>
+        </div>
         <div class="slide-tags">${(a.tags || []).slice(0, 6).map(t => `<span class="slide-tag">${esc(t)}</span>`).join('')}</div>
         <div class="slide-stats-row">
           <div class="slide-stat"><span class="slide-stat-val">${power}</span><span class="slide-stat-label">Power</span></div>
