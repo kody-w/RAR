@@ -7,7 +7,15 @@
       "voters": {
         "kody-w": "up"
       }
+    },
+    "@kody/agent_workbench": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
     }
   },
-  "updated_at": "2026-04-04T19:10:14.969732+00:00"
+  "updated_at": "2026-04-04T21:57:51.987137+00:00"
 }
