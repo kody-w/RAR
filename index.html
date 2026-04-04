@@ -1911,7 +1911,7 @@
   }
   .slab-zoom-close:hover { color: var(--text); }
   @keyframes showcaseFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes showcaseCardIn { from { opacity: 0; transform: scale(0.4) rotateY(180deg); } 70% { transform: scale(1.05) rotateY(0); } to { opacity: 1; transform: scale(1) rotateY(0); } }
+  @keyframes showcaseCardIn { from { opacity: 0; transform: scale(0.6); } 70% { transform: scale(1.03); } to { opacity: 1; transform: scale(1); } }
   @keyframes showcasePulse { 0%, 100% { opacity: .4; transform: scale(1); } 50% { opacity: .8; transform: scale(1.1); } }
 
   /* ─── Card Value ─────────────────────────────────── */
@@ -8601,7 +8601,7 @@ async function openPack(setId) {
 
       <div style="font-size:.7rem;color:${glowColor};font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;animation:showcaseFadeIn .4s ease-out both">${rarity.toUpperCase()}${c.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
 
-      <div id="reveal-card-area" style="position:relative;animation:showcaseCardIn .7s cubic-bezier(.23,1,.32,1) both;cursor:pointer;width:min(70vw,340px);aspect-ratio:5/7;perspective:800px">
+      <div id="reveal-card-area" style="position:relative;animation:showcaseCardIn .7s cubic-bezier(.23,1,.32,1) both;cursor:pointer;width:min(70vw,340px);aspect-ratio:5/7;perspective:800px;transform-style:preserve-3d">
         <div style="position:absolute;inset:-60px;background:radial-gradient(circle,${glowColor}25 0%,transparent 65%);animation:showcasePulse 2.5s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
       </div>
 
@@ -9777,7 +9777,7 @@ async function openSlabZoom(mintId) {
     <button class="slab-zoom-close" onclick="event.stopPropagation();this.closest('.slab-zoom-overlay').remove()">&#10005;</button>
     <div class="showcase-name" style="font-size:2rem;font-weight:900;color:#f0e6d0;letter-spacing:2px;text-transform:uppercase;text-shadow:0 0 40px ${glowColor}80;margin-bottom:4px;animation:showcaseFadeIn .6s ease-out both">${esc(card.displayName)}</div>
     <div style="font-size:.85rem;color:${glowColor};font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;animation:showcaseFadeIn .6s ease-out .1s both;opacity:0">${rarity.toUpperCase()}${card.isFirstEdition ? ' &middot; 1ST EDITION' : ''}</div>
-    <div class="showcase-card-wrap" style="position:relative;animation:showcaseCardIn .8s cubic-bezier(.23,1,.32,1) .2s both;opacity:0;width:min(80vw,360px);aspect-ratio:5/7;perspective:800px">
+    <div class="showcase-card-wrap" style="position:relative;animation:showcaseCardIn .8s cubic-bezier(.23,1,.32,1) .2s both;opacity:0;width:min(80vw,360px);aspect-ratio:5/7;perspective:800px;transform-style:preserve-3d">
       <div class="showcase-glow" style="position:absolute;inset:-40px;background:radial-gradient(circle,${glowColor}20 0%,transparent 70%);animation:showcasePulse 3s ease-in-out infinite;pointer-events:none;border-radius:24px"></div>
     </div>
     <div style="display:flex;gap:32px;margin-top:20px;animation:showcaseFadeIn .6s ease-out .5s both;opacity:0">
