@@ -1,0 +1,33 @@
+{
+  "index": 1,
+  "timestamp": "2026-04-04T00:00:01.000Z",
+  "prevHash": "7542ad06e9ed6f1b71f845d171ec2bba953e42c717a4b2ccc540f157e39c9c5b",
+  "type": "forge",
+  "data": {
+    "mintId": "GENESIS-0000",
+    "agentSlug": "architect",
+    "agentName": "@rar/architect",
+    "setId": "GENESIS",
+    "title": "The First Voice",
+    "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+    "edition": 1,
+    "maxEdition": 1,
+    "rarity": "genesis",
+    "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+    "cardHash": "4245e7e561fca44c35be0b04b9e46c9a50aed188f1e13650a5467c35bac433dc",
+    "flags": [
+      "succession",
+      "transfer",
+      "rotation"
+    ],
+    "provenance": [
+      {
+        "action": "forge",
+        "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+        "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+        "timestamp": "2026-04-04T00:00:01.000Z"
+      }
+    ]
+  },
+  "hash": "6b5cb443f3698aa283cd326be42965da2341d818ebff131dbef0c535e94e1a67"
+}

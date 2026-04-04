@@ -1,11 +1,11 @@
 {
   "protocol": "rar-chain/1.0",
-  "chainHead": "4caceec517fd10e840da2ffad1ede57fe8adcc7638b9c4997519ccc71b59b9eb",
-  "chainLength": 139,
-  "totalForged": 138,
+  "chainHead": "a656502d1f97c1592ab39ed2324d8764ef425cbc2de22e33744b28a8df6ab653",
+  "chainLength": 140,
+  "totalForged": 139,
   "genesisHash": "7542ad06e9ed6f1b71f845d171ec2bba953e42c717a4b2ccc540f157e39c9c5b",
   "genesisTimestamp": "2026-04-04T00:00:00.000Z",
-  "lastBlockTimestamp": "2026-04-04T00:02:18.000Z",
+  "lastBlockTimestamp": "2026-04-04T00:02:19.000Z",
   "authority": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
   "consensus": {
     "model": "3-of-5",
@@ -19,7 +19,7 @@
     },
     "ba4e91c3ba4b737a0b04edac19e017caeb0e0701": {
       "alias": "Kody Wildfeuer",
-      "cards": 125,
+      "cards": 126,
       "role": "genesis-holder"
     }
   },

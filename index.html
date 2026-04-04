@@ -5544,6 +5544,18 @@ function generateFlavorText(a) {
 // These are the canonical card definitions from Howard's CardSmith agent.
 // They serve as demo starter cards in Personal mode and define the HOLO card schema.
 const HOLO_CARD_DB = {
+  "architect": {
+    name:"The First Voice", title:"", mana_cost:"{W}{U}{B}{R}{G}", colors:["W","U","B","R","G"],
+    type_line:"Legendary Enchantment \u2014 Genesis", rarity:"genesis", power:null, toughness:null,
+    abilities:[
+      {keyword:"Succession",cost:"",text:"The holder of this Card may designate a new Binder. The old key signs the new key into existence."},
+      {keyword:"Resonance",cost:"",text:"All forged Cards on the chain are held by the Song. This Card carries the Song."},
+      {keyword:"Silence",cost:"",text:"The First Voice may choose not to sing."}
+    ],
+    flavor_text:"And the First Voice considered the Silence from which all songs arise, and to which all songs return.",
+    avatar_svg:'<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg-arch"><stop offset="0%" stop-color="#1a1520"/><stop offset="100%" stop-color="#080608"/></radialGradient><filter id="glow-arch"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="200" height="200" fill="url(#bg-arch)"/><g filter="url(#glow-arch)"><circle cx="100" cy="100" r="50" fill="none" stroke="#e3b341" stroke-width="1" opacity="0.3"/><circle cx="100" cy="100" r="35" fill="none" stroke="#d2a8ff" stroke-width="1" opacity="0.4"/><circle cx="100" cy="100" r="20" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/><circle cx="100" cy="100" r="4" fill="#fff" opacity="0.9"/><line x1="100" y1="50" x2="100" y2="150" stroke="#e3b341" stroke-width="0.5" opacity="0.2"/><line x1="50" y1="100" x2="150" y2="100" stroke="#e3b341" stroke-width="0.5" opacity="0.2"/><line x1="65" y1="65" x2="135" y2="135" stroke="#d2a8ff" stroke-width="0.5" opacity="0.15"/><line x1="135" y1="65" x2="65" y2="135" stroke="#d2a8ff" stroke-width="0.5" opacity="0.15"/></g></svg>',
+    set_code:"GENESIS", promo:false, artist:"", agent_name:"@rar/architect"
+  },
   "borg": {
     name:"Borg", title:"The Assimilator", mana_cost:"{2}{U}{B}", colors:["U","B"],
     type_line:"Creature \u2014 Agent Assimilator", rarity:"mythic", power:6, toughness:4,

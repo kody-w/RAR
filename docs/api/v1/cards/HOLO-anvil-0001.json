@@ -1,7 +1,7 @@
 {
-  "index": 2,
-  "timestamp": "2026-04-04T00:00:02.000Z",
-  "prevHash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8",
+  "index": 3,
+  "timestamp": "2026-04-04T00:00:03.000Z",
+  "prevHash": "4a570749dad0f8e34ff1b3fa673b0f3b6ac1e648af2364609691682003799597",
   "type": "forge",
   "data": {
     "mintId": "HOLO-anvil-0001",
@@ -20,9 +20,9 @@
         "action": "forge",
         "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
         "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-        "timestamp": "2026-04-04T00:00:02.000Z"
+        "timestamp": "2026-04-04T00:00:03.000Z"
       }
     ]
   },
-  "hash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e"
+  "hash": "ca4a8a1fd02e0195a9f12ae63f0f3cd6449516081779d0164e2b064b4e86217b"
 }

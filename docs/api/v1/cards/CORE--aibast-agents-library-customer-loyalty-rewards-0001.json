@@ -1,7 +1,7 @@
 {
-  "index": 39,
-  "timestamp": "2026-04-04T00:00:39.000Z",
-  "prevHash": "39369dfd986c8d244922d0df9e9b43caf5c5bf63fc092ba33cfd857f80c73d48",
+  "index": 40,
+  "timestamp": "2026-04-04T00:00:40.000Z",
+  "prevHash": "e0524d021c673f06769d5082583b8cc6f3adb05dcdb2ba0d57663f8c242cf0b4",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-customer-loyalty-rewards-0001",
@@ -22,9 +22,9 @@
         "action": "forge",
         "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
         "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-        "timestamp": "2026-04-04T00:00:39.000Z"
+        "timestamp": "2026-04-04T00:00:40.000Z"
       }
     ]
   },
-  "hash": "1787cc94f61252d13450a031cc1a28213753360adcc93dd6b4d4a21502e9d2b4"
+  "hash": "9da8f0b1ccf944f3f4e94a4ab08393ff6da03b62e988d745ab89be996ac71ce1"
 }

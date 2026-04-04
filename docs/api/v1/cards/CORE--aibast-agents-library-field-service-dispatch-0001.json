@@ -1,7 +1,7 @@
 {
-  "index": 46,
-  "timestamp": "2026-04-04T00:00:46.000Z",
-  "prevHash": "75a8fb0de1aae60843f484ac1adaabb192f292e4f5bfc80705d6e502cbaaf825",
+  "index": 47,
+  "timestamp": "2026-04-04T00:00:47.000Z",
+  "prevHash": "7278f9d1df8ba5ae3b588b6b8203b5f293049d8e15b1a8c36903e2d3e1175074",
   "type": "forge",
   "data": {
     "mintId": "CORE--aibast-agents-library-field-service-dispatch-0001",
@@ -22,9 +22,9 @@
         "action": "forge",
         "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
         "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-        "timestamp": "2026-04-04T00:00:46.000Z"
+        "timestamp": "2026-04-04T00:00:47.000Z"
       }
     ]
   },
-  "hash": "ab97d514785057501469a67383fd5a6ab692776de8fc982a5b3c46034cae1afa"
+  "hash": "b8bb0fb02f7edc47cea6e9038f3de441d75722d61fa107de90965669fdb38a0e"
 }

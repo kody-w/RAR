@@ -78,7 +78,36 @@ blocks.push(genesis);
 
 let prevHash = genesis.hash;
 
-// Blocks 1-13: Howard's HOLO cards
+// Block 1: The First Card — forged before all others
+const firstCard = {
+  index: blocks.length,
+  timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString(),
+  prevHash,
+  type: 'forge',
+  data: {
+    mintId: 'GENESIS-0000',
+    agentSlug: 'architect',
+    agentName: '@rar/architect',
+    setId: 'GENESIS',
+    title: 'The First Voice',
+    owner: KODY_BINDER,
+    edition: 1,
+    maxEdition: 1,
+    rarity: 'genesis',
+    forgedBy: AUTHORITY_BINDER,
+    cardHash: sha256(`GENESIS-0000:architect:GENESIS:${KODY_BINDER}`),
+    flags: ['succession', 'transfer', 'rotation'],
+    provenance: [
+      { action: 'forge', by: AUTHORITY_BINDER, to: KODY_BINDER, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
+    ]
+  }
+};
+firstCard.hash = computeBlockHash(firstCard);
+blocks.push(firstCard);
+cardIndex['GENESIS-0000'] = firstCard;
+prevHash = firstCard.hash;
+
+// Blocks 2-14: Howard's HOLO cards
 for (let i = 0; i < HOLO_SLUGS.length; i++) {
   const slug = HOLO_SLUGS[i];
   const meta = HOLO_META[slug] || { title: '', rarity: 'rare' };

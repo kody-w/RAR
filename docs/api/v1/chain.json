@@ -25,6 +25,39 @@
     "prevHash": "7542ad06e9ed6f1b71f845d171ec2bba953e42c717a4b2ccc540f157e39c9c5b",
     "type": "forge",
     "data": {
+      "mintId": "GENESIS-0000",
+      "agentSlug": "architect",
+      "agentName": "@rar/architect",
+      "setId": "GENESIS",
+      "title": "The First Voice",
+      "owner": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+      "edition": 1,
+      "maxEdition": 1,
+      "rarity": "genesis",
+      "forgedBy": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+      "cardHash": "4245e7e561fca44c35be0b04b9e46c9a50aed188f1e13650a5467c35bac433dc",
+      "flags": [
+        "succession",
+        "transfer",
+        "rotation"
+      ],
+      "provenance": [
+        {
+          "action": "forge",
+          "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
+          "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
+          "timestamp": "2026-04-04T00:00:01.000Z"
+        }
+      ]
+    },
+    "hash": "6b5cb443f3698aa283cd326be42965da2341d818ebff131dbef0c535e94e1a67"
+  },
+  {
+    "index": 2,
+    "timestamp": "2026-04-04T00:00:02.000Z",
+    "prevHash": "6b5cb443f3698aa283cd326be42965da2341d818ebff131dbef0c535e94e1a67",
+    "type": "forge",
+    "data": {
       "mintId": "HOLO-borg-0001",
       "agentSlug": "borg",
       "agentName": "@borg/borg",
@@ -41,16 +74,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:01.000Z"
+          "timestamp": "2026-04-04T00:00:02.000Z"
         }
       ]
     },
-    "hash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8"
+    "hash": "4a570749dad0f8e34ff1b3fa673b0f3b6ac1e648af2364609691682003799597"
   },
   {
-    "index": 2,
-    "timestamp": "2026-04-04T00:00:02.000Z",
-    "prevHash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8",
+    "index": 3,
+    "timestamp": "2026-04-04T00:00:03.000Z",
+    "prevHash": "4a570749dad0f8e34ff1b3fa673b0f3b6ac1e648af2364609691682003799597",
     "type": "forge",
     "data": {
       "mintId": "HOLO-anvil-0001",
@@ -69,16 +102,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:02.000Z"
+          "timestamp": "2026-04-04T00:00:03.000Z"
         }
       ]
     },
-    "hash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e"
+    "hash": "ca4a8a1fd02e0195a9f12ae63f0f3cd6449516081779d0164e2b064b4e86217b"
   },
   {
-    "index": 3,
-    "timestamp": "2026-04-04T00:00:03.000Z",
-    "prevHash": "d6b870fe00c95956bbcffc492f48f93663c37a5bff238033f3731b7007fea27e",
+    "index": 4,
+    "timestamp": "2026-04-04T00:00:04.000Z",
+    "prevHash": "ca4a8a1fd02e0195a9f12ae63f0f3cd6449516081779d0164e2b064b4e86217b",
     "type": "forge",
     "data": {
       "mintId": "HOLO-personafactory-0001",
@@ -97,16 +130,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:03.000Z"
+          "timestamp": "2026-04-04T00:00:04.000Z"
         }
       ]
     },
-    "hash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c"
+    "hash": "a9e9e6ec8454c61b030f2c588960945c00ec0952012616709e2e0c2b3e8c1487"
   },
   {
-    "index": 4,
-    "timestamp": "2026-04-04T00:00:04.000Z",
-    "prevHash": "ae6b036740da40dd1de017bc90755f123969520ae3c9b70746ffb20d27796c3c",
+    "index": 5,
+    "timestamp": "2026-04-04T00:00:05.000Z",
+    "prevHash": "a9e9e6ec8454c61b030f2c588960945c00ec0952012616709e2e0c2b3e8c1487",
     "type": "forge",
     "data": {
       "mintId": "HOLO-tinyworld-0001",
@@ -125,16 +158,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:04.000Z"
+          "timestamp": "2026-04-04T00:00:05.000Z"
         }
       ]
     },
-    "hash": "64708f8eed1416244d11140dda53196a1c705c77ad55b9fed02c85792d9d0ad1"
+    "hash": "1e9ae3766fd8b5f0d94e54378e2fdb37918862174f50ed806f5c45ef10f8de2e"
   },
   {
-    "index": 5,
-    "timestamp": "2026-04-04T00:00:05.000Z",
-    "prevHash": "64708f8eed1416244d11140dda53196a1c705c77ad55b9fed02c85792d9d0ad1",
+    "index": 6,
+    "timestamp": "2026-04-04T00:00:06.000Z",
+    "prevHash": "1e9ae3766fd8b5f0d94e54378e2fdb37918862174f50ed806f5c45ef10f8de2e",
     "type": "forge",
     "data": {
       "mintId": "HOLO-bridge-0001",
@@ -153,16 +186,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:05.000Z"
+          "timestamp": "2026-04-04T00:00:06.000Z"
         }
       ]
     },
-    "hash": "cf051629533016fc03ca4ddfc494cb266f324adfaa4484346acee438a30476c3"
+    "hash": "7bbe2d7eec62eda9ff6d69a20717eee3e3ded8fe42197862c6ba7d685ef70d54"
   },
   {
-    "index": 6,
-    "timestamp": "2026-04-04T00:00:06.000Z",
-    "prevHash": "cf051629533016fc03ca4ddfc494cb266f324adfaa4484346acee438a30476c3",
+    "index": 7,
+    "timestamp": "2026-04-04T00:00:07.000Z",
+    "prevHash": "7bbe2d7eec62eda9ff6d69a20717eee3e3ded8fe42197862c6ba7d685ef70d54",
     "type": "forge",
     "data": {
       "mintId": "HOLO-telegram-0001",
@@ -181,16 +214,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:06.000Z"
+          "timestamp": "2026-04-04T00:00:07.000Z"
         }
       ]
     },
-    "hash": "fae19870c51629950a17f9ade441bc7e8409ff4f653d8d2a9ce86b7bd6c0d6c7"
+    "hash": "079a24fed86a5302013d655ce7a64356b36c94effb2cf606020edaecb57d3a71"
   },
   {
-    "index": 7,
-    "timestamp": "2026-04-04T00:00:07.000Z",
-    "prevHash": "fae19870c51629950a17f9ade441bc7e8409ff4f653d8d2a9ce86b7bd6c0d6c7",
+    "index": 8,
+    "timestamp": "2026-04-04T00:00:08.000Z",
+    "prevHash": "079a24fed86a5302013d655ce7a64356b36c94effb2cf606020edaecb57d3a71",
     "type": "forge",
     "data": {
       "mintId": "HOLO-contextmemory-0001",
@@ -209,16 +242,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:07.000Z"
+          "timestamp": "2026-04-04T00:00:08.000Z"
         }
       ]
     },
-    "hash": "afb3601b37a264b81f8bc22eefffefdb6c31cbb8656cfec20d83dd2a39a486af"
+    "hash": "03cf214d6e97365757ed39fae1e73203c62051fa8c6f1cfdbec4b2bbf1abfcf4"
   },
   {
-    "index": 8,
-    "timestamp": "2026-04-04T00:00:08.000Z",
-    "prevHash": "afb3601b37a264b81f8bc22eefffefdb6c31cbb8656cfec20d83dd2a39a486af",
+    "index": 9,
+    "timestamp": "2026-04-04T00:00:09.000Z",
+    "prevHash": "03cf214d6e97365757ed39fae1e73203c62051fa8c6f1cfdbec4b2bbf1abfcf4",
     "type": "forge",
     "data": {
       "mintId": "HOLO-managememory-0001",
@@ -237,16 +270,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:08.000Z"
+          "timestamp": "2026-04-04T00:00:09.000Z"
         }
       ]
     },
-    "hash": "f6d7c2058176610d3ef55ff84eb721f94ba81b39c2564be057ef93f35ba113d9"
+    "hash": "3ed0e626ad323b9ef324f3df354de4f5691b752dcbbf8b98e0f0b2d8a1f53bfc"
   },
   {
-    "index": 9,
-    "timestamp": "2026-04-04T00:00:09.000Z",
-    "prevHash": "f6d7c2058176610d3ef55ff84eb721f94ba81b39c2564be057ef93f35ba113d9",
+    "index": 10,
+    "timestamp": "2026-04-04T00:00:10.000Z",
+    "prevHash": "3ed0e626ad323b9ef324f3df354de4f5691b752dcbbf8b98e0f0b2d8a1f53bfc",
     "type": "forge",
     "data": {
       "mintId": "HOLO-prompttovideo-0001",
@@ -265,16 +298,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:09.000Z"
+          "timestamp": "2026-04-04T00:00:10.000Z"
         }
       ]
     },
-    "hash": "8493500a04d42e97322724d1008fd0b49fe7b4f2a4315a2dad7a1cf47f0ddf6c"
+    "hash": "21afa505968d8722aaab99271cf228df247393e55278faa109d0191209088504"
   },
   {
-    "index": 10,
-    "timestamp": "2026-04-04T00:00:10.000Z",
-    "prevHash": "8493500a04d42e97322724d1008fd0b49fe7b4f2a4315a2dad7a1cf47f0ddf6c",
+    "index": 11,
+    "timestamp": "2026-04-04T00:00:11.000Z",
+    "prevHash": "21afa505968d8722aaab99271cf228df247393e55278faa109d0191209088504",
     "type": "forge",
     "data": {
       "mintId": "HOLO-demovideo-0001",
@@ -293,16 +326,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:10.000Z"
+          "timestamp": "2026-04-04T00:00:11.000Z"
         }
       ]
     },
-    "hash": "864f4b8ce06232d0f5f8f3c79a7f155931162a01a7ceb64e789b359c2e9f0aae"
+    "hash": "b710c53d25d83449134eb998c2b7d68e0ab187cbd95b5d627b3dcc50ac2ed9bf"
   },
   {
-    "index": 11,
-    "timestamp": "2026-04-04T00:00:11.000Z",
-    "prevHash": "864f4b8ce06232d0f5f8f3c79a7f155931162a01a7ceb64e789b359c2e9f0aae",
+    "index": 12,
+    "timestamp": "2026-04-04T00:00:12.000Z",
+    "prevHash": "b710c53d25d83449134eb998c2b7d68e0ab187cbd95b5d627b3dcc50ac2ed9bf",
     "type": "forge",
     "data": {
       "mintId": "HOLO-experiment-0001",
@@ -321,16 +354,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:11.000Z"
+          "timestamp": "2026-04-04T00:00:12.000Z"
         }
       ]
     },
-    "hash": "83b097e901db0720f8a9718af735b83d59b09040ac14748e8d18e15cf25c6973"
+    "hash": "a4e7193f573ba94f09a6049559036eae2cab79b6c53b078574069f333c5a07f1"
   },
   {
-    "index": 12,
-    "timestamp": "2026-04-04T00:00:12.000Z",
-    "prevHash": "83b097e901db0720f8a9718af735b83d59b09040ac14748e8d18e15cf25c6973",
+    "index": 13,
+    "timestamp": "2026-04-04T00:00:13.000Z",
+    "prevHash": "a4e7193f573ba94f09a6049559036eae2cab79b6c53b078574069f333c5a07f1",
     "type": "forge",
     "data": {
       "mintId": "HOLO-hackernews-0001",
@@ -349,16 +382,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:12.000Z"
+          "timestamp": "2026-04-04T00:00:13.000Z"
         }
       ]
     },
-    "hash": "6ad930d91da01b01263a1069e3492a1ef8eb1e5a4ca325e0634feaee22994f05"
+    "hash": "66884320c25470b3c5f846c9f7ec4626922a758904fb49fbb2e767d0ef31dc33"
   },
   {
-    "index": 13,
-    "timestamp": "2026-04-04T00:00:13.000Z",
-    "prevHash": "6ad930d91da01b01263a1069e3492a1ef8eb1e5a4ca325e0634feaee22994f05",
+    "index": 14,
+    "timestamp": "2026-04-04T00:00:14.000Z",
+    "prevHash": "66884320c25470b3c5f846c9f7ec4626922a758904fb49fbb2e767d0ef31dc33",
     "type": "forge",
     "data": {
       "mintId": "HOLO-holonaming-0001",
@@ -377,16 +410,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-          "timestamp": "2026-04-04T00:00:13.000Z"
+          "timestamp": "2026-04-04T00:00:14.000Z"
         }
       ]
     },
-    "hash": "5e0ec588ef62f43f27ee290a39dafca4324ad4fdb726f95aa96864b06980eb27"
+    "hash": "1e42cc7343c62418c6c92093240cc52f29cb47f4fb0983ac4668d11aa561f42d"
   },
   {
-    "index": 14,
-    "timestamp": "2026-04-04T00:00:14.000Z",
-    "prevHash": "5e0ec588ef62f43f27ee290a39dafca4324ad4fdb726f95aa96864b06980eb27",
+    "index": 15,
+    "timestamp": "2026-04-04T00:00:15.000Z",
+    "prevHash": "1e42cc7343c62418c6c92093240cc52f29cb47f4fb0983ac4668d11aa561f42d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-account-intelligence-0001",
@@ -407,16 +440,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:14.000Z"
+          "timestamp": "2026-04-04T00:00:15.000Z"
         }
       ]
     },
-    "hash": "88a86bcb0045aa8d2b3174520357ad565fb5fcc5e88019d6b21e28225aea446d"
+    "hash": "2f0dcf27c07901c6c9279db9c45b18f72472e58f44d5a8a8bfd7d991d33c4b2c"
   },
   {
-    "index": 15,
-    "timestamp": "2026-04-04T00:00:15.000Z",
-    "prevHash": "88a86bcb0045aa8d2b3174520357ad565fb5fcc5e88019d6b21e28225aea446d",
+    "index": 16,
+    "timestamp": "2026-04-04T00:00:16.000Z",
+    "prevHash": "2f0dcf27c07901c6c9279db9c45b18f72472e58f44d5a8a8bfd7d991d33c4b2c",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-account-intelligence-orchestrator-0001",
@@ -437,16 +470,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:15.000Z"
+          "timestamp": "2026-04-04T00:00:16.000Z"
         }
       ]
     },
-    "hash": "07682b9f00f0a838319a3c007142376412283a15e9d7bd49c0838f0dcc8bc22f"
+    "hash": "5fb22c8f444e70ec1852bfe68992ad95635147d0bbcb4b1bfcb2fb850f8f5e8d"
   },
   {
-    "index": 16,
-    "timestamp": "2026-04-04T00:00:16.000Z",
-    "prevHash": "07682b9f00f0a838319a3c007142376412283a15e9d7bd49c0838f0dcc8bc22f",
+    "index": 17,
+    "timestamp": "2026-04-04T00:00:17.000Z",
+    "prevHash": "5fb22c8f444e70ec1852bfe68992ad95635147d0bbcb4b1bfcb2fb850f8f5e8d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-action-prioritization-0001",
@@ -467,16 +500,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:16.000Z"
+          "timestamp": "2026-04-04T00:00:17.000Z"
         }
       ]
     },
-    "hash": "fc58c3b4c4d97fd76106660c0864acdae876efc95f9363380fa361aca49d41a6"
+    "hash": "228910d4404a7f4eca69d9b8039c9d2967d36fae2504af57db38a785e9b721be"
   },
   {
-    "index": 17,
-    "timestamp": "2026-04-04T00:00:17.000Z",
-    "prevHash": "fc58c3b4c4d97fd76106660c0864acdae876efc95f9363380fa361aca49d41a6",
+    "index": 18,
+    "timestamp": "2026-04-04T00:00:18.000Z",
+    "prevHash": "228910d4404a7f4eca69d9b8039c9d2967d36fae2504af57db38a785e9b721be",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-competitive-intelligence-0001",
@@ -497,16 +530,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:17.000Z"
+          "timestamp": "2026-04-04T00:00:18.000Z"
         }
       ]
     },
-    "hash": "c0bbdcdc160b0a3ce2ddf9d09ba7bfff9d7f607fde5fd5c3ba68309ce1a75127"
+    "hash": "619e004760298e7fdae964a15a48fdeee30e98ef9ca1860441caa533b7a8944f"
   },
   {
-    "index": 18,
-    "timestamp": "2026-04-04T00:00:18.000Z",
-    "prevHash": "c0bbdcdc160b0a3ce2ddf9d09ba7bfff9d7f607fde5fd5c3ba68309ce1a75127",
+    "index": 19,
+    "timestamp": "2026-04-04T00:00:19.000Z",
+    "prevHash": "619e004760298e7fdae964a15a48fdeee30e98ef9ca1860441caa533b7a8944f",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-tracking-0001",
@@ -527,16 +560,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:18.000Z"
+          "timestamp": "2026-04-04T00:00:19.000Z"
         }
       ]
     },
-    "hash": "4139206ed9e0761cc27dd66ffc231de5c6bc75318b7abf27d919b37eb46e4f8f"
+    "hash": "7c2e371809dca88102fb39d4b1d41b99823c5e8608242207eb4ce04ebfe507f9"
   },
   {
-    "index": 19,
-    "timestamp": "2026-04-04T00:00:19.000Z",
-    "prevHash": "4139206ed9e0761cc27dd66ffc231de5c6bc75318b7abf27d919b37eb46e4f8f",
+    "index": 20,
+    "timestamp": "2026-04-04T00:00:20.000Z",
+    "prevHash": "7c2e371809dca88102fb39d4b1d41b99823c5e8608242207eb4ce04ebfe507f9",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-meeting-prep-0001",
@@ -557,16 +590,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:19.000Z"
+          "timestamp": "2026-04-04T00:00:20.000Z"
         }
       ]
     },
-    "hash": "84d5649af8b8b3c39d761ae54e47611b1d235215f550b65df0656463d897e3b1"
+    "hash": "3770d4fd203accbc51bec7abad48ad25278fe792e2c13af24b2913858813834d"
   },
   {
-    "index": 20,
-    "timestamp": "2026-04-04T00:00:20.000Z",
-    "prevHash": "84d5649af8b8b3c39d761ae54e47611b1d235215f550b65df0656463d897e3b1",
+    "index": 21,
+    "timestamp": "2026-04-04T00:00:21.000Z",
+    "prevHash": "3770d4fd203accbc51bec7abad48ad25278fe792e2c13af24b2913858813834d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-account-messaging-0001",
@@ -587,16 +620,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:20.000Z"
+          "timestamp": "2026-04-04T00:00:21.000Z"
         }
       ]
     },
-    "hash": "637a9cee637ab2704e1c8695e6a67580cb6ece1fcd6926b57be35251102836f5"
+    "hash": "9321c614c5508989449a34a8c06094fad0ce9ec98c1620c6ec6d61cfe2bee49c"
   },
   {
-    "index": 21,
-    "timestamp": "2026-04-04T00:00:21.000Z",
-    "prevHash": "637a9cee637ab2704e1c8695e6a67580cb6ece1fcd6926b57be35251102836f5",
+    "index": 22,
+    "timestamp": "2026-04-04T00:00:22.000Z",
+    "prevHash": "9321c614c5508989449a34a8c06094fad0ce9ec98c1620c6ec6d61cfe2bee49c",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-account-risk-assessment-0001",
@@ -617,16 +650,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:21.000Z"
+          "timestamp": "2026-04-04T00:00:22.000Z"
         }
       ]
     },
-    "hash": "709ce97b408787416c683a32c960803517d7e38982310937e9ab1c7799226ae5"
+    "hash": "e6f11a69df4cc260ad9fdd7af7c39b9c4f5f4fcdfb9be3163e74d706ae5ed88e"
   },
   {
-    "index": 22,
-    "timestamp": "2026-04-04T00:00:22.000Z",
-    "prevHash": "709ce97b408787416c683a32c960803517d7e38982310937e9ab1c7799226ae5",
+    "index": 23,
+    "timestamp": "2026-04-04T00:00:23.000Z",
+    "prevHash": "e6f11a69df4cc260ad9fdd7af7c39b9c4f5f4fcdfb9be3163e74d706ae5ed88e",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-stakeholder-intelligence-0001",
@@ -647,16 +680,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:22.000Z"
+          "timestamp": "2026-04-04T00:00:23.000Z"
         }
       ]
     },
-    "hash": "67400b5986ba7723a7c13f58d8ace36f4f63ad132b1e554c0d3995edacdecb9f"
+    "hash": "4a0d01fa45eb8bd634543e56e4d4d197a8218af0c39b20843258183dbcb95b3a"
   },
   {
-    "index": 23,
-    "timestamp": "2026-04-04T00:00:23.000Z",
-    "prevHash": "67400b5986ba7723a7c13f58d8ace36f4f63ad132b1e554c0d3995edacdecb9f",
+    "index": 24,
+    "timestamp": "2026-04-04T00:00:24.000Z",
+    "prevHash": "4a0d01fa45eb8bd634543e56e4d4d197a8218af0c39b20843258183dbcb95b3a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-activity-gap-0001",
@@ -677,16 +710,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:23.000Z"
+          "timestamp": "2026-04-04T00:00:24.000Z"
         }
       ]
     },
-    "hash": "39c75084f8d3a072966a24435af84b4710fb2874726995e03fd2d00673058941"
+    "hash": "c3d6f27dc340785ce0581ee00d906be943f2173cc4cb79554646fc66cd773681"
   },
   {
-    "index": 24,
-    "timestamp": "2026-04-04T00:00:24.000Z",
-    "prevHash": "39c75084f8d3a072966a24435af84b4710fb2874726995e03fd2d00673058941",
+    "index": 25,
+    "timestamp": "2026-04-04T00:00:25.000Z",
+    "prevHash": "c3d6f27dc340785ce0581ee00d906be943f2173cc4cb79554646fc66cd773681",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-competitor-intel-0001",
@@ -707,16 +740,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:24.000Z"
+          "timestamp": "2026-04-04T00:00:25.000Z"
         }
       ]
     },
-    "hash": "445f6a16563973a9a103b2f29a7e6a89845f821dc2196500e5035d2f0c36625f"
+    "hash": "369e8d2b9df5e924afb2ed2c620fa9947261ca3c62fa4fd1959cec7437f13446"
   },
   {
-    "index": 25,
-    "timestamp": "2026-04-04T00:00:25.000Z",
-    "prevHash": "445f6a16563973a9a103b2f29a7e6a89845f821dc2196500e5035d2f0c36625f",
+    "index": 26,
+    "timestamp": "2026-04-04T00:00:26.000Z",
+    "prevHash": "369e8d2b9df5e924afb2ed2c620fa9947261ca3c62fa4fd1959cec7437f13446",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-health-score-0001",
@@ -737,16 +770,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:25.000Z"
+          "timestamp": "2026-04-04T00:00:26.000Z"
         }
       ]
     },
-    "hash": "3f65cd4bd226364e1715b8a9f8219866af3211bda76e738cd7fc9043d7e82e52"
+    "hash": "733a5221aeb9a5954d4690b2d20355c997f9aecb99c734d32fdf2278fc2a037b"
   },
   {
-    "index": 26,
-    "timestamp": "2026-04-04T00:00:26.000Z",
-    "prevHash": "3f65cd4bd226364e1715b8a9f8219866af3211bda76e738cd7fc9043d7e82e52",
+    "index": 27,
+    "timestamp": "2026-04-04T00:00:27.000Z",
+    "prevHash": "733a5221aeb9a5954d4690b2d20355c997f9aecb99c734d32fdf2278fc2a037b",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-progression-0001",
@@ -767,16 +800,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:26.000Z"
+          "timestamp": "2026-04-04T00:00:27.000Z"
         }
       ]
     },
-    "hash": "0c0da4de48f5b7d2355e2af0f9e746d2f8fe232d71f77d0676cc1f3cb7c841b3"
+    "hash": "084e48cc8e8de25ea08d808ffbfb64ec2fec6cd18443e09256345a8978f1f779"
   },
   {
-    "index": 27,
-    "timestamp": "2026-04-04T00:00:27.000Z",
-    "prevHash": "0c0da4de48f5b7d2355e2af0f9e746d2f8fe232d71f77d0676cc1f3cb7c841b3",
+    "index": 28,
+    "timestamp": "2026-04-04T00:00:28.000Z",
+    "prevHash": "084e48cc8e8de25ea08d808ffbfb64ec2fec6cd18443e09256345a8978f1f779",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-risk-assessment-0001",
@@ -797,16 +830,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:27.000Z"
+          "timestamp": "2026-04-04T00:00:28.000Z"
         }
       ]
     },
-    "hash": "a4bfa9343190dae81d3c8ee439af2ca709baee64edb9b768206dd74071909755"
+    "hash": "7ef8f930f502754138faf88d42ca47b7526296dd6ec4a160761b13b3af783bdd"
   },
   {
-    "index": 28,
-    "timestamp": "2026-04-04T00:00:28.000Z",
-    "prevHash": "a4bfa9343190dae81d3c8ee439af2ca709baee64edb9b768206dd74071909755",
+    "index": 29,
+    "timestamp": "2026-04-04T00:00:29.000Z",
+    "prevHash": "7ef8f930f502754138faf88d42ca47b7526296dd6ec4a160761b13b3af783bdd",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-next-best-action-0001",
@@ -827,16 +860,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:28.000Z"
+          "timestamp": "2026-04-04T00:00:29.000Z"
         }
       ]
     },
-    "hash": "7cfd04f92bf2ee9dcf852637cac3a6458482800335e5cd736978e758aef0eea4"
+    "hash": "c1d42d221e3a48bb7d371d19588c755acd453ba0326ef5d0bdb401aef66a61c6"
   },
   {
-    "index": 29,
-    "timestamp": "2026-04-04T00:00:29.000Z",
-    "prevHash": "7cfd04f92bf2ee9dcf852637cac3a6458482800335e5cd736978e758aef0eea4",
+    "index": 30,
+    "timestamp": "2026-04-04T00:00:30.000Z",
+    "prevHash": "c1d42d221e3a48bb7d371d19588c755acd453ba0326ef5d0bdb401aef66a61c6",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-pipeline-velocity-0001",
@@ -857,16 +890,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:29.000Z"
+          "timestamp": "2026-04-04T00:00:30.000Z"
         }
       ]
     },
-    "hash": "5e33937d05a04f8663ac58e0bf96bd1d9c75e7b459761f5dc7742c3894cd4aab"
+    "hash": "9c9ceca7a768b94e7c9032633c47d318bf7e5d1b8b16ef0c79118120bdc6f9db"
   },
   {
-    "index": 30,
-    "timestamp": "2026-04-04T00:00:30.000Z",
-    "prevHash": "5e33937d05a04f8663ac58e0bf96bd1d9c75e7b459761f5dc7742c3894cd4aab",
+    "index": 31,
+    "timestamp": "2026-04-04T00:00:31.000Z",
+    "prevHash": "9c9ceca7a768b94e7c9032633c47d318bf7e5d1b8b16ef0c79118120bdc6f9db",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-revenue-forecast-0001",
@@ -887,16 +920,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:30.000Z"
+          "timestamp": "2026-04-04T00:00:31.000Z"
         }
       ]
     },
-    "hash": "76b50874d24f06e40bd94cbd039306a20308e9560ee3b4f8047d05ea29a48b19"
+    "hash": "d20cc921615a3fb907bbfd6d3d097880af63ad1b8b55ccfddb1275e7b133c3a2"
   },
   {
-    "index": 31,
-    "timestamp": "2026-04-04T00:00:31.000Z",
-    "prevHash": "76b50874d24f06e40bd94cbd039306a20308e9560ee3b4f8047d05ea29a48b19",
+    "index": 32,
+    "timestamp": "2026-04-04T00:00:32.000Z",
+    "prevHash": "d20cc921615a3fb907bbfd6d3d097880af63ad1b8b55ccfddb1275e7b133c3a2",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-deal-stakeholder-engagement-0001",
@@ -917,16 +950,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:31.000Z"
+          "timestamp": "2026-04-04T00:00:32.000Z"
         }
       ]
     },
-    "hash": "95b117ea36228a5b077861e18ffcbf425581328b18489455d5ec77993b88e557"
+    "hash": "4adc3159de102d272ea0a161131a700efb7b79b975717fde595eb85ebb918750"
   },
   {
-    "index": 32,
-    "timestamp": "2026-04-04T00:00:32.000Z",
-    "prevHash": "95b117ea36228a5b077861e18ffcbf425581328b18489455d5ec77993b88e557",
+    "index": 33,
+    "timestamp": "2026-04-04T00:00:33.000Z",
+    "prevHash": "4adc3159de102d272ea0a161131a700efb7b79b975717fde595eb85ebb918750",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-stalled-deal-detection-0001",
@@ -947,16 +980,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:32.000Z"
+          "timestamp": "2026-04-04T00:00:33.000Z"
         }
       ]
     },
-    "hash": "61bb7bda8c808b4ca3f93ae9af5a79bc6247e9b89a064b6c323b5fa56a78cd62"
+    "hash": "fdaa25bca6bf3fce7297c3fb63bff694bca234d52d5a97905300aca590a3c674"
   },
   {
-    "index": 33,
-    "timestamp": "2026-04-04T00:00:33.000Z",
-    "prevHash": "61bb7bda8c808b4ca3f93ae9af5a79bc6247e9b89a064b6c323b5fa56a78cd62",
+    "index": 34,
+    "timestamp": "2026-04-04T00:00:34.000Z",
+    "prevHash": "fdaa25bca6bf3fce7297c3fb63bff694bca234d52d5a97905300aca590a3c674",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-win-probability-0001",
@@ -977,16 +1010,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:33.000Z"
+          "timestamp": "2026-04-04T00:00:34.000Z"
         }
       ]
     },
-    "hash": "3f6be7e8daaf88a5760bb15a2cf7fad5e61c8148ee785d0241bc30259c93a66b"
+    "hash": "2f2e0e92562767d901747fed26b6f0a5fed96ba5cd4e484daca5dd7c1d19e6b7"
   },
   {
-    "index": 34,
-    "timestamp": "2026-04-04T00:00:34.000Z",
-    "prevHash": "3f6be7e8daaf88a5760bb15a2cf7fad5e61c8148ee785d0241bc30259c93a66b",
+    "index": 35,
+    "timestamp": "2026-04-04T00:00:35.000Z",
+    "prevHash": "2f2e0e92562767d901747fed26b6f0a5fed96ba5cd4e484daca5dd7c1d19e6b7",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-proposal-generation-0001",
@@ -1007,16 +1040,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:34.000Z"
+          "timestamp": "2026-04-04T00:00:35.000Z"
         }
       ]
     },
-    "hash": "77240fc521f664f2c202d33147a7a054cfc296ef72052df4cf75bc5b571e9eba"
+    "hash": "bd371c6c658bd306a3233c2afb5a2c3f98cf6e1d369c3af3912515e2401608a5"
   },
   {
-    "index": 35,
-    "timestamp": "2026-04-04T00:00:35.000Z",
-    "prevHash": "77240fc521f664f2c202d33147a7a054cfc296ef72052df4cf75bc5b571e9eba",
+    "index": 36,
+    "timestamp": "2026-04-04T00:00:36.000Z",
+    "prevHash": "bd371c6c658bd306a3233c2afb5a2c3f98cf6e1d369c3af3912515e2401608a5",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-sales-qualification-0001",
@@ -1037,16 +1070,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:35.000Z"
+          "timestamp": "2026-04-04T00:00:36.000Z"
         }
       ]
     },
-    "hash": "b96ab2abecb4913de6212c3281bac2b00b856af2fedf6d03732f60a471c8a9aa"
+    "hash": "b32ccafce4ce9e75b433c575e7d15a3a0dcbbff0521bc716247aeffb74215063"
   },
   {
-    "index": 36,
-    "timestamp": "2026-04-04T00:00:36.000Z",
-    "prevHash": "b96ab2abecb4913de6212c3281bac2b00b856af2fedf6d03732f60a471c8a9aa",
+    "index": 37,
+    "timestamp": "2026-04-04T00:00:37.000Z",
+    "prevHash": "b32ccafce4ce9e75b433c575e7d15a3a0dcbbff0521bc716247aeffb74215063",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-win-loss-analysis-0001",
@@ -1067,16 +1100,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:36.000Z"
+          "timestamp": "2026-04-04T00:00:37.000Z"
         }
       ]
     },
-    "hash": "61b9339a59fa99ef7d6841f2db9c2c62f1ba273a08df8ccde72841ffdb29d76d"
+    "hash": "46d195967f43d2f57948073f6749801dd73aed65ac0a1f40a1b89ee53df72338"
   },
   {
-    "index": 37,
-    "timestamp": "2026-04-04T00:00:37.000Z",
-    "prevHash": "61b9339a59fa99ef7d6841f2db9c2c62f1ba273a08df8ccde72841ffdb29d76d",
+    "index": 38,
+    "timestamp": "2026-04-04T00:00:38.000Z",
+    "prevHash": "46d195967f43d2f57948073f6749801dd73aed65ac0a1f40a1b89ee53df72338",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-cart-abandonment-recovery-0001",
@@ -1097,16 +1130,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:37.000Z"
+          "timestamp": "2026-04-04T00:00:38.000Z"
         }
       ]
     },
-    "hash": "e9b131401095ffd05295457c1a3c0188b8c07a437c8452b954568d970a836fd7"
+    "hash": "920fd95a79d73cab2e4e22a1454dae6c1f15e4292dd96866ea6af176716193b8"
   },
   {
-    "index": 38,
-    "timestamp": "2026-04-04T00:00:38.000Z",
-    "prevHash": "e9b131401095ffd05295457c1a3c0188b8c07a437c8452b954568d970a836fd7",
+    "index": 39,
+    "timestamp": "2026-04-04T00:00:39.000Z",
+    "prevHash": "920fd95a79d73cab2e4e22a1454dae6c1f15e4292dd96866ea6af176716193b8",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-customer-360-speech-0001",
@@ -1127,16 +1160,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:38.000Z"
+          "timestamp": "2026-04-04T00:00:39.000Z"
         }
       ]
     },
-    "hash": "39369dfd986c8d244922d0df9e9b43caf5c5bf63fc092ba33cfd857f80c73d48"
+    "hash": "e0524d021c673f06769d5082583b8cc6f3adb05dcdb2ba0d57663f8c242cf0b4"
   },
   {
-    "index": 39,
-    "timestamp": "2026-04-04T00:00:39.000Z",
-    "prevHash": "39369dfd986c8d244922d0df9e9b43caf5c5bf63fc092ba33cfd857f80c73d48",
+    "index": 40,
+    "timestamp": "2026-04-04T00:00:40.000Z",
+    "prevHash": "e0524d021c673f06769d5082583b8cc6f3adb05dcdb2ba0d57663f8c242cf0b4",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-customer-loyalty-rewards-0001",
@@ -1157,16 +1190,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:39.000Z"
+          "timestamp": "2026-04-04T00:00:40.000Z"
         }
       ]
     },
-    "hash": "1787cc94f61252d13450a031cc1a28213753360adcc93dd6b4d4a21502e9d2b4"
+    "hash": "9da8f0b1ccf944f3f4e94a4ab08393ff6da03b62e988d745ab89be996ac71ce1"
   },
   {
-    "index": 40,
-    "timestamp": "2026-04-04T00:00:40.000Z",
-    "prevHash": "1787cc94f61252d13450a031cc1a28213753360adcc93dd6b4d4a21502e9d2b4",
+    "index": 41,
+    "timestamp": "2026-04-04T00:00:41.000Z",
+    "prevHash": "9da8f0b1ccf944f3f4e94a4ab08393ff6da03b62e988d745ab89be996ac71ce1",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-omnichannel-engagement-0001",
@@ -1187,16 +1220,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:40.000Z"
+          "timestamp": "2026-04-04T00:00:41.000Z"
         }
       ]
     },
-    "hash": "a32ef3fad5cb9ee8fe565b76f8eb5dba36b977d25adf5b04cad4dffc4d34cb8c"
+    "hash": "b31f82135a078f4a90d22067b6daf18189a94c9c39b1dd066796d93b09bf5d1a"
   },
   {
-    "index": 41,
-    "timestamp": "2026-04-04T00:00:41.000Z",
-    "prevHash": "a32ef3fad5cb9ee8fe565b76f8eb5dba36b977d25adf5b04cad4dffc4d34cb8c",
+    "index": 42,
+    "timestamp": "2026-04-04T00:00:42.000Z",
+    "prevHash": "b31f82135a078f4a90d22067b6daf18189a94c9c39b1dd066796d93b09bf5d1a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-personalized-shopping-assistant-0001",
@@ -1217,16 +1250,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:41.000Z"
+          "timestamp": "2026-04-04T00:00:42.000Z"
         }
       ]
     },
-    "hash": "15c780a983ab5f67809cb1e29d743bed2fba4cb00a4247b8458f1ad6743677ce"
+    "hash": "949ab1c1ad57cb6d145dc8a0d8bc136a5aac9ae6e0770373b5d5b658e4b80ccf"
   },
   {
-    "index": 42,
-    "timestamp": "2026-04-04T00:00:42.000Z",
-    "prevHash": "15c780a983ab5f67809cb1e29d743bed2fba4cb00a4247b8458f1ad6743677ce",
+    "index": 43,
+    "timestamp": "2026-04-04T00:00:43.000Z",
+    "prevHash": "949ab1c1ad57cb6d145dc8a0d8bc136a5aac9ae6e0770373b5d5b658e4b80ccf",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-returns-exchange-0001",
@@ -1247,16 +1280,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:42.000Z"
+          "timestamp": "2026-04-04T00:00:43.000Z"
         }
       ]
     },
-    "hash": "4cc4174fd15d9914ae2c7ef7bfe3cf8359931a13c2295fc51e30f4e5a0505b0b"
+    "hash": "ac12bf03e1302e9499dd76a46f4901a85dc306b048e96cd0999d6426c0b386b0"
   },
   {
-    "index": 43,
-    "timestamp": "2026-04-04T00:00:43.000Z",
-    "prevHash": "4cc4174fd15d9914ae2c7ef7bfe3cf8359931a13c2295fc51e30f4e5a0505b0b",
+    "index": 44,
+    "timestamp": "2026-04-04T00:00:44.000Z",
+    "prevHash": "ac12bf03e1302e9499dd76a46f4901a85dc306b048e96cd0999d6426c0b386b0",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-sales-chat-0001",
@@ -1277,16 +1310,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:43.000Z"
+          "timestamp": "2026-04-04T00:00:44.000Z"
         }
       ]
     },
-    "hash": "1f2a843787a71ff18ecf592a1a9032f03ab61d3404c64e149db4bd10b7ce09dd"
+    "hash": "d98d2bbc3430ae860a7d715fdf8d24c36323512b646b5ba4cb8b5f562d8d8a33"
   },
   {
-    "index": 44,
-    "timestamp": "2026-04-04T00:00:44.000Z",
-    "prevHash": "1f2a843787a71ff18ecf592a1a9032f03ab61d3404c64e149db4bd10b7ce09dd",
+    "index": 45,
+    "timestamp": "2026-04-04T00:00:45.000Z",
+    "prevHash": "d98d2bbc3430ae860a7d715fdf8d24c36323512b646b5ba4cb8b5f562d8d8a33",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-asset-maintenance-forecast-0001",
@@ -1307,16 +1340,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:44.000Z"
+          "timestamp": "2026-04-04T00:00:45.000Z"
         }
       ]
     },
-    "hash": "3717318a64b14613479f23ba0a71e4cd72f2f63b7e724efcdf92072b17043d8f"
+    "hash": "b1efe4532c7d483ca667ecc17bedc753a71b9da50632a2e92acae4405e601a5b"
   },
   {
-    "index": 45,
-    "timestamp": "2026-04-04T00:00:45.000Z",
-    "prevHash": "3717318a64b14613479f23ba0a71e4cd72f2f63b7e724efcdf92072b17043d8f",
+    "index": 46,
+    "timestamp": "2026-04-04T00:00:46.000Z",
+    "prevHash": "b1efe4532c7d483ca667ecc17bedc753a71b9da50632a2e92acae4405e601a5b",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-emission-tracking-0001",
@@ -1337,16 +1370,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:45.000Z"
+          "timestamp": "2026-04-04T00:00:46.000Z"
         }
       ]
     },
-    "hash": "75a8fb0de1aae60843f484ac1adaabb192f292e4f5bfc80705d6e502cbaaf825"
+    "hash": "7278f9d1df8ba5ae3b588b6b8203b5f293049d8e15b1a8c36903e2d3e1175074"
   },
   {
-    "index": 46,
-    "timestamp": "2026-04-04T00:00:46.000Z",
-    "prevHash": "75a8fb0de1aae60843f484ac1adaabb192f292e4f5bfc80705d6e502cbaaf825",
+    "index": 47,
+    "timestamp": "2026-04-04T00:00:47.000Z",
+    "prevHash": "7278f9d1df8ba5ae3b588b6b8203b5f293049d8e15b1a8c36903e2d3e1175074",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-field-service-dispatch-0001",
@@ -1367,16 +1400,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:46.000Z"
+          "timestamp": "2026-04-04T00:00:47.000Z"
         }
       ]
     },
-    "hash": "ab97d514785057501469a67383fd5a6ab692776de8fc982a5b3c46034cae1afa"
+    "hash": "b8bb0fb02f7edc47cea6e9038f3de441d75722d61fa107de90965669fdb38a0e"
   },
   {
-    "index": 47,
-    "timestamp": "2026-04-04T00:00:47.000Z",
-    "prevHash": "ab97d514785057501469a67383fd5a6ab692776de8fc982a5b3c46034cae1afa",
+    "index": 48,
+    "timestamp": "2026-04-04T00:00:48.000Z",
+    "prevHash": "b8bb0fb02f7edc47cea6e9038f3de441d75722d61fa107de90965669fdb38a0e",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-permit-license-management-0001",
@@ -1397,16 +1430,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:47.000Z"
+          "timestamp": "2026-04-04T00:00:48.000Z"
         }
       ]
     },
-    "hash": "ceefa3bf1e0b9ec36ddc22f909bd31e52df2c4c680b6125a8b0107dad4955c14"
+    "hash": "e40dcd9a2cc4286604469eb162bf22f1c9eba0c6b1f089b3ddca9e7c424c3f78"
   },
   {
-    "index": 48,
-    "timestamp": "2026-04-04T00:00:48.000Z",
-    "prevHash": "ceefa3bf1e0b9ec36ddc22f909bd31e52df2c4c680b6125a8b0107dad4955c14",
+    "index": 49,
+    "timestamp": "2026-04-04T00:00:49.000Z",
+    "prevHash": "e40dcd9a2cc4286604469eb162bf22f1c9eba0c6b1f089b3ddca9e7c424c3f78",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-energy-regulatory-reporting-0001",
@@ -1427,16 +1460,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:48.000Z"
+          "timestamp": "2026-04-04T00:00:49.000Z"
         }
       ]
     },
-    "hash": "3e9bbebd8ff690153713d51b5295fff100fa288f2b1df6d1ec53100539b701a9"
+    "hash": "d4dc204eb9f7c225d225b40f4b05c84b46d6f5912c6282a21f745c7532515231"
   },
   {
-    "index": 49,
-    "timestamp": "2026-04-04T00:00:49.000Z",
-    "prevHash": "3e9bbebd8ff690153713d51b5295fff100fa288f2b1df6d1ec53100539b701a9",
+    "index": 50,
+    "timestamp": "2026-04-04T00:00:50.000Z",
+    "prevHash": "d4dc204eb9f7c225d225b40f4b05c84b46d6f5912c6282a21f745c7532515231",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-acquisition-support-0001",
@@ -1457,16 +1490,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:49.000Z"
+          "timestamp": "2026-04-04T00:00:50.000Z"
         }
       ]
     },
-    "hash": "94e22b1805ff1110ed7bec17afb5f00369edf6c449d9c1149c211383cdba1a9b"
+    "hash": "8e12b88319a882005413d32116c3ab79b749bce5f4c266d6513285bc97813e61"
   },
   {
-    "index": 50,
-    "timestamp": "2026-04-04T00:00:50.000Z",
-    "prevHash": "94e22b1805ff1110ed7bec17afb5f00369edf6c449d9c1149c211383cdba1a9b",
+    "index": 51,
+    "timestamp": "2026-04-04T00:00:51.000Z",
+    "prevHash": "8e12b88319a882005413d32116c3ab79b749bce5f4c266d6513285bc97813e61",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-federal-grants-oversight-0001",
@@ -1487,16 +1520,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:50.000Z"
+          "timestamp": "2026-04-04T00:00:51.000Z"
         }
       ]
     },
-    "hash": "a9b3501f47bceda36358bee3f618c4d6627194cae44b06c88b059df0ed9d8b48"
+    "hash": "80f555e041b8a3504d13fa20208b374c9f65fbadfd1b335aadf3315fe0420e2b"
   },
   {
-    "index": 51,
-    "timestamp": "2026-04-04T00:00:51.000Z",
-    "prevHash": "a9b3501f47bceda36358bee3f618c4d6627194cae44b06c88b059df0ed9d8b48",
+    "index": 52,
+    "timestamp": "2026-04-04T00:00:52.000Z",
+    "prevHash": "80f555e041b8a3504d13fa20208b374c9f65fbadfd1b335aadf3315fe0420e2b",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-mission-reporting-assistant-0001",
@@ -1517,16 +1550,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:51.000Z"
+          "timestamp": "2026-04-04T00:00:52.000Z"
         }
       ]
     },
-    "hash": "6e1720d788cc6a2d73ec94a4a48fc1588073cabbc41411e17291b83d5e10d8cc"
+    "hash": "4bba74d5b9b89ff88b7c7d1603b4bc2289c4808113119ea5c910dd9d13a36339"
   },
   {
-    "index": 52,
-    "timestamp": "2026-04-04T00:00:52.000Z",
-    "prevHash": "6e1720d788cc6a2d73ec94a4a48fc1588073cabbc41411e17291b83d5e10d8cc",
+    "index": 53,
+    "timestamp": "2026-04-04T00:00:53.000Z",
+    "prevHash": "4bba74d5b9b89ff88b7c7d1603b4bc2289c4808113119ea5c910dd9d13a36339",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-regulatory-compliance-fed-0001",
@@ -1547,16 +1580,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:52.000Z"
+          "timestamp": "2026-04-04T00:00:53.000Z"
         }
       ]
     },
-    "hash": "a86880f4378b6265c7f1c46083c9d792b340e85665b2ca4610e1be51f319c631"
+    "hash": "526dfb2a0373462d56eb760a9b1ea1f3b125e5157915a64bffe478ff0cc8f37a"
   },
   {
-    "index": 53,
-    "timestamp": "2026-04-04T00:00:53.000Z",
-    "prevHash": "a86880f4378b6265c7f1c46083c9d792b340e85665b2ca4610e1be51f319c631",
+    "index": 54,
+    "timestamp": "2026-04-04T00:00:54.000Z",
+    "prevHash": "526dfb2a0373462d56eb760a9b1ea1f3b125e5157915a64bffe478ff0cc8f37a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-workforce-clearance-onboarding-0001",
@@ -1577,16 +1610,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:53.000Z"
+          "timestamp": "2026-04-04T00:00:54.000Z"
         }
       ]
     },
-    "hash": "e65726388540db57ae871dfa4244b735036bfd03fcad3feef85e1b95bd58e248"
+    "hash": "474c3e8172b47d42b451bb2163057dd1ee8607ccafd1c352300a2173bd7efcc1"
   },
   {
-    "index": 54,
-    "timestamp": "2026-04-04T00:00:54.000Z",
-    "prevHash": "e65726388540db57ae871dfa4244b735036bfd03fcad3feef85e1b95bd58e248",
+    "index": 55,
+    "timestamp": "2026-04-04T00:00:55.000Z",
+    "prevHash": "474c3e8172b47d42b451bb2163057dd1ee8607ccafd1c352300a2173bd7efcc1",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-claims-processing-0001",
@@ -1607,16 +1640,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:54.000Z"
+          "timestamp": "2026-04-04T00:00:55.000Z"
         }
       ]
     },
-    "hash": "be661340c3d7079014a045661da9583624d21176d09842442989e7171c3ce859"
+    "hash": "3a608cc42bfbae5a6f650ed3bc78232b78dbb1176054648ec35fba5d7d384148"
   },
   {
-    "index": 55,
-    "timestamp": "2026-04-04T00:00:55.000Z",
-    "prevHash": "be661340c3d7079014a045661da9583624d21176d09842442989e7171c3ce859",
+    "index": 56,
+    "timestamp": "2026-04-04T00:00:56.000Z",
+    "prevHash": "3a608cc42bfbae5a6f650ed3bc78232b78dbb1176054648ec35fba5d7d384148",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-fs-customer-onboarding-0001",
@@ -1637,16 +1670,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:55.000Z"
+          "timestamp": "2026-04-04T00:00:56.000Z"
         }
       ]
     },
-    "hash": "292d0034dee6a97939394b1160d8156bcd3b39ddd16ed115d4497e3a0784dab2"
+    "hash": "e6b55185ee74db67c98917a85c1e3fb0a527e6f46ee684d7b1a6037835c11ff3"
   },
   {
-    "index": 56,
-    "timestamp": "2026-04-04T00:00:56.000Z",
-    "prevHash": "292d0034dee6a97939394b1160d8156bcd3b39ddd16ed115d4497e3a0784dab2",
+    "index": 57,
+    "timestamp": "2026-04-04T00:00:57.000Z",
+    "prevHash": "e6b55185ee74db67c98917a85c1e3fb0a527e6f46ee684d7b1a6037835c11ff3",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-customer-sentiment-churn-0001",
@@ -1667,16 +1700,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:56.000Z"
+          "timestamp": "2026-04-04T00:00:57.000Z"
         }
       ]
     },
-    "hash": "9fb974a1a5b45edee202f245fcb7a4b8cf1af1b2fcba9f902367fc09def8de51"
+    "hash": "0b596dd2b0dd3452e362fc9abdf15081245c1ac21607c89ec5da4e25ed287c80"
   },
   {
-    "index": 57,
-    "timestamp": "2026-04-04T00:00:57.000Z",
-    "prevHash": "9fb974a1a5b45edee202f245fcb7a4b8cf1af1b2fcba9f902367fc09def8de51",
+    "index": 58,
+    "timestamp": "2026-04-04T00:00:58.000Z",
+    "prevHash": "0b596dd2b0dd3452e362fc9abdf15081245c1ac21607c89ec5da4e25ed287c80",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-financial-advisor-copilot-0001",
@@ -1697,16 +1730,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:57.000Z"
+          "timestamp": "2026-04-04T00:00:58.000Z"
         }
       ]
     },
-    "hash": "fda56a77f52a09cdd23d308bd8398df82dfa6a53334a2e2e2ef81259a0f9ee97"
+    "hash": "7d897a324d738b83a25e7c025b392686325e799ee1e33c614f9d9e5365979b70"
   },
   {
-    "index": 58,
-    "timestamp": "2026-04-04T00:00:58.000Z",
-    "prevHash": "fda56a77f52a09cdd23d308bd8398df82dfa6a53334a2e2e2ef81259a0f9ee97",
+    "index": 59,
+    "timestamp": "2026-04-04T00:00:59.000Z",
+    "prevHash": "7d897a324d738b83a25e7c025b392686325e799ee1e33c614f9d9e5365979b70",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-fraud-detection-alert-0001",
@@ -1727,16 +1760,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:58.000Z"
+          "timestamp": "2026-04-04T00:00:59.000Z"
         }
       ]
     },
-    "hash": "182291b445e47e3fc162c710b454c0e5c4fae65d404b9fd1ea467a5c207d8d13"
+    "hash": "06ce19110453993748d6dc5aaa5101e774da6e082a2884dcb72152f35e680642"
   },
   {
-    "index": 59,
-    "timestamp": "2026-04-04T00:00:59.000Z",
-    "prevHash": "182291b445e47e3fc162c710b454c0e5c4fae65d404b9fd1ea467a5c207d8d13",
+    "index": 60,
+    "timestamp": "2026-04-04T00:01:00.000Z",
+    "prevHash": "06ce19110453993748d6dc5aaa5101e774da6e082a2884dcb72152f35e680642",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-loan-origination-assistant-0001",
@@ -1757,16 +1790,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:00:59.000Z"
+          "timestamp": "2026-04-04T00:01:00.000Z"
         }
       ]
     },
-    "hash": "7dc7039c2fa3b10e63a2621963e58cc61a03184ab84fa07bf673937c55af7e2a"
+    "hash": "be28b75a1b3b8a6053f30ae11ca62148bca402e821ab35df7b41a1ddc62751d1"
   },
   {
-    "index": 60,
-    "timestamp": "2026-04-04T00:01:00.000Z",
-    "prevHash": "7dc7039c2fa3b10e63a2621963e58cc61a03184ab84fa07bf673937c55af7e2a",
+    "index": 61,
+    "timestamp": "2026-04-04T00:01:01.000Z",
+    "prevHash": "be28b75a1b3b8a6053f30ae11ca62148bca402e821ab35df7b41a1ddc62751d1",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-portfolio-rebalancing-0001",
@@ -1787,16 +1820,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:00.000Z"
+          "timestamp": "2026-04-04T00:01:01.000Z"
         }
       ]
     },
-    "hash": "ee167e527f6144ba0c4d328ece5ef05229490fcb33a712c50b4c61a153a1516e"
+    "hash": "5b0686efb3a2c05b042fa974fc3d7b01150416e5700d4906af207a8a6a06851d"
   },
   {
-    "index": 61,
-    "timestamp": "2026-04-04T00:01:01.000Z",
-    "prevHash": "ee167e527f6144ba0c4d328ece5ef05229490fcb33a712c50b4c61a153a1516e",
+    "index": 62,
+    "timestamp": "2026-04-04T00:01:02.000Z",
+    "prevHash": "5b0686efb3a2c05b042fa974fc3d7b01150416e5700d4906af207a8a6a06851d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-fs-regulatory-compliance-0001",
@@ -1817,16 +1850,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:01.000Z"
+          "timestamp": "2026-04-04T00:01:02.000Z"
         }
       ]
     },
-    "hash": "666e04148effa8708eade32a1776729fa81e92d800bfb852ceba6f1e5ca5a561"
+    "hash": "825846bdc5729bdbd8bdaea892d56bf08ccf03da54f2dc0065b794d83b296f52"
   },
   {
-    "index": 62,
-    "timestamp": "2026-04-04T00:01:02.000Z",
-    "prevHash": "666e04148effa8708eade32a1776729fa81e92d800bfb852ceba6f1e5ca5a561",
+    "index": 63,
+    "timestamp": "2026-04-04T00:01:03.000Z",
+    "prevHash": "825846bdc5729bdbd8bdaea892d56bf08ccf03da54f2dc0065b794d83b296f52",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-underwriting-support-0001",
@@ -1847,16 +1880,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:02.000Z"
+          "timestamp": "2026-04-04T00:01:03.000Z"
         }
       ]
     },
-    "hash": "6b714c5e217c4b608e1c3eb1fc0d3fc98fa0b3d418567e240b440ff5d946b4e2"
+    "hash": "16d747ccf20511087b0fe7a23d7042fb8be1939ef3fd2460d77c107630611733"
   },
   {
-    "index": 63,
-    "timestamp": "2026-04-04T00:01:03.000Z",
-    "prevHash": "6b714c5e217c4b608e1c3eb1fc0d3fc98fa0b3d418567e240b440ff5d946b4e2",
+    "index": 64,
+    "timestamp": "2026-04-04T00:01:04.000Z",
+    "prevHash": "16d747ccf20511087b0fe7a23d7042fb8be1939ef3fd2460d77c107630611733",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-wealth-insights-generator-0001",
@@ -1877,16 +1910,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:03.000Z"
+          "timestamp": "2026-04-04T00:01:04.000Z"
         }
       ]
     },
-    "hash": "3ba3b2de1036fd6e7661b6e9b7224e536384863e5aca36bfa6ab6eef3cc52282"
+    "hash": "662394d34d0f36428384028007c018342cd20506c8c4bd722540f116368f0d90"
   },
   {
-    "index": 64,
-    "timestamp": "2026-04-04T00:01:04.000Z",
-    "prevHash": "3ba3b2de1036fd6e7661b6e9b7224e536384863e5aca36bfa6ab6eef3cc52282",
+    "index": 65,
+    "timestamp": "2026-04-04T00:01:05.000Z",
+    "prevHash": "662394d34d0f36428384028007c018342cd20506c8c4bd722540f116368f0d90",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-ai-customer-assistant-0001",
@@ -1907,16 +1940,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:04.000Z"
+          "timestamp": "2026-04-04T00:01:05.000Z"
         }
       ]
     },
-    "hash": "b244dbdb343ebc4bdb913fcc0bf482970c24fc1783a9f6fcad5d7498fa68d571"
+    "hash": "1b54f38363c06c7954fe9836a04aa802a2d98e5e97e76890160169d1707a3ab2"
   },
   {
-    "index": 65,
-    "timestamp": "2026-04-04T00:01:05.000Z",
-    "prevHash": "b244dbdb343ebc4bdb913fcc0bf482970c24fc1783a9f6fcad5d7498fa68d571",
+    "index": 66,
+    "timestamp": "2026-04-04T00:01:06.000Z",
+    "prevHash": "1b54f38363c06c7954fe9836a04aa802a2d98e5e97e76890160169d1707a3ab2",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-general-ask-hr-0001",
@@ -1937,16 +1970,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:05.000Z"
+          "timestamp": "2026-04-04T00:01:06.000Z"
         }
       ]
     },
-    "hash": "0ac60313de4faabed11980e2218a6da15033da3fb5d6c59f115dde955290743a"
+    "hash": "3293a02068121cf8976676f0c3f32456fe779d2ed47feb83a2e8ada0804b5371"
   },
   {
-    "index": 66,
-    "timestamp": "2026-04-04T00:01:06.000Z",
-    "prevHash": "0ac60313de4faabed11980e2218a6da15033da3fb5d6c59f115dde955290743a",
+    "index": 67,
+    "timestamp": "2026-04-04T00:01:07.000Z",
+    "prevHash": "3293a02068121cf8976676f0c3f32456fe779d2ed47feb83a2e8ada0804b5371",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-bulk-crm-data-generator-0001",
@@ -1967,16 +2000,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:06.000Z"
+          "timestamp": "2026-04-04T00:01:07.000Z"
         }
       ]
     },
-    "hash": "8a9cf8377244b2143088c3c4c3d72ad73c096c7bf1ac23c042a2ba480f1e2730"
+    "hash": "406067462439b4af60dfadc08fa5ca2542d2127424fa365b383ad11a145250c2"
   },
   {
-    "index": 67,
-    "timestamp": "2026-04-04T00:01:07.000Z",
-    "prevHash": "8a9cf8377244b2143088c3c4c3d72ad73c096c7bf1ac23c042a2ba480f1e2730",
+    "index": 68,
+    "timestamp": "2026-04-04T00:01:08.000Z",
+    "prevHash": "406067462439b4af60dfadc08fa5ca2542d2127424fa365b383ad11a145250c2",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-dynamics-365-connector-0001",
@@ -1997,16 +2030,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:07.000Z"
+          "timestamp": "2026-04-04T00:01:08.000Z"
         }
       ]
     },
-    "hash": "f46f6650428252a9c26572df80993e7f72a595e2b69b6deb42cd972c96a5d6a4"
+    "hash": "2ebec4ebe5be8f9646201ddafe38d46468f3ea29143880490e45908542b032b0"
   },
   {
-    "index": 68,
-    "timestamp": "2026-04-04T00:01:08.000Z",
-    "prevHash": "f46f6650428252a9c26572df80993e7f72a595e2b69b6deb42cd972c96a5d6a4",
+    "index": 69,
+    "timestamp": "2026-04-04T00:01:09.000Z",
+    "prevHash": "2ebec4ebe5be8f9646201ddafe38d46468f3ea29143880490e45908542b032b0",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-one-click-crm-intake-0001",
@@ -2027,16 +2060,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:08.000Z"
+          "timestamp": "2026-04-04T00:01:09.000Z"
         }
       ]
     },
-    "hash": "1d24b3638b3a9830281e68ea14fb04a7899875ef42e3700e40b41391f6fa4b17"
+    "hash": "99e146fcd761298a47373c2ffdff1bd88f6f410004894ca4fe1351f72839790f"
   },
   {
-    "index": 69,
-    "timestamp": "2026-04-04T00:01:09.000Z",
-    "prevHash": "1d24b3638b3a9830281e68ea14fb04a7899875ef42e3700e40b41391f6fa4b17",
+    "index": 70,
+    "timestamp": "2026-04-04T00:01:10.000Z",
+    "prevHash": "99e146fcd761298a47373c2ffdff1bd88f6f410004894ca4fe1351f72839790f",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-cross-selling-0001",
@@ -2057,16 +2090,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:09.000Z"
+          "timestamp": "2026-04-04T00:01:10.000Z"
         }
       ]
     },
-    "hash": "5c254ad5c371f6369ebbc7ebe6af8db281fa67df701565f9e8ec171134ae587f"
+    "hash": "46146d10709c153a7cdbe32c7b7142bbf754c821eb378d55af2618cf5a21a752"
   },
   {
-    "index": 70,
-    "timestamp": "2026-04-04T00:01:10.000Z",
-    "prevHash": "5c254ad5c371f6369ebbc7ebe6af8db281fa67df701565f9e8ec171134ae587f",
+    "index": 71,
+    "timestamp": "2026-04-04T00:01:11.000Z",
+    "prevHash": "46146d10709c153a7cdbe32c7b7142bbf754c821eb378d55af2618cf5a21a752",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-customer-360-0001",
@@ -2087,16 +2120,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:10.000Z"
+          "timestamp": "2026-04-04T00:01:11.000Z"
         }
       ]
     },
-    "hash": "2ed1e86634edb49bf1c44cc7c68fd0174f390b0fbe0d1207cf6094477acf3661"
+    "hash": "bf4c8da9fd2227046150df4d2bc924cba80d39769c10340c90d4522ea4e4810f"
   },
   {
-    "index": 71,
-    "timestamp": "2026-04-04T00:01:11.000Z",
-    "prevHash": "2ed1e86634edb49bf1c44cc7c68fd0174f390b0fbe0d1207cf6094477acf3661",
+    "index": 72,
+    "timestamp": "2026-04-04T00:01:12.000Z",
+    "prevHash": "bf4c8da9fd2227046150df4d2bc924cba80d39769c10340c90d4522ea4e4810f",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-email-drafting-0001",
@@ -2117,16 +2150,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:11.000Z"
+          "timestamp": "2026-04-04T00:01:12.000Z"
         }
       ]
     },
-    "hash": "76b519840535b487ac98640d05af8b25f54cfb4a4e383772ed86b1554a016608"
+    "hash": "1005b3e222abf4b810a1db6b74c0cd174d726f825917f743a1e819b099f584cf"
   },
   {
-    "index": 72,
-    "timestamp": "2026-04-04T00:01:12.000Z",
-    "prevHash": "76b519840535b487ac98640d05af8b25f54cfb4a4e383772ed86b1554a016608",
+    "index": 73,
+    "timestamp": "2026-04-04T00:01:13.000Z",
+    "prevHash": "1005b3e222abf4b810a1db6b74c0cd174d726f825917f743a1e819b099f584cf",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-find-accurate-models-0001",
@@ -2147,16 +2180,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:12.000Z"
+          "timestamp": "2026-04-04T00:01:13.000Z"
         }
       ]
     },
-    "hash": "cd8ab7cd82f3171a2490622685a9607b6dfdb2e6771d7ff11b834953d4c503c1"
+    "hash": "e682868a620f703798c41b51b615019ae29cfce66bedfd481a3df178a19cec5c"
   },
   {
-    "index": 73,
-    "timestamp": "2026-04-04T00:01:13.000Z",
-    "prevHash": "cd8ab7cd82f3171a2490622685a9607b6dfdb2e6771d7ff11b834953d4c503c1",
+    "index": 74,
+    "timestamp": "2026-04-04T00:01:14.000Z",
+    "prevHash": "e682868a620f703798c41b51b615019ae29cfce66bedfd481a3df178a19cec5c",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-identify-discounts-0001",
@@ -2177,16 +2210,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:13.000Z"
+          "timestamp": "2026-04-04T00:01:14.000Z"
         }
       ]
     },
-    "hash": "6539b3e32f4e6ddf2fb53513a3f668897d9bf9662239e03c01a5c4c05786d756"
+    "hash": "c4bb95eafecbea6206e252135a8dcacc1b3bffa83a6b59133bb8188f4a085e8e"
   },
   {
-    "index": 74,
-    "timestamp": "2026-04-04T00:01:14.000Z",
-    "prevHash": "6539b3e32f4e6ddf2fb53513a3f668897d9bf9662239e03c01a5c4c05786d756",
+    "index": 75,
+    "timestamp": "2026-04-04T00:01:15.000Z",
+    "prevHash": "c4bb95eafecbea6206e252135a8dcacc1b3bffa83a6b59133bb8188f4a085e8e",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-it-ticket-management-0001",
@@ -2207,16 +2240,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:14.000Z"
+          "timestamp": "2026-04-04T00:01:15.000Z"
         }
       ]
     },
-    "hash": "00e31c5d13bc0927908e62d0526a886fa09d83fa96ad9b21b9cdf8c5ba1edf34"
+    "hash": "397fcdcd1035262d617f4c2a1ffeca77e045b23bf0f49398fd7c2e7d2edebbda"
   },
   {
-    "index": 75,
-    "timestamp": "2026-04-04T00:01:15.000Z",
-    "prevHash": "00e31c5d13bc0927908e62d0526a886fa09d83fa96ad9b21b9cdf8c5ba1edf34",
+    "index": 76,
+    "timestamp": "2026-04-04T00:01:16.000Z",
+    "prevHash": "397fcdcd1035262d617f4c2a1ffeca77e045b23bf0f49398fd7c2e7d2edebbda",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-procurement-agent-0001",
@@ -2237,16 +2270,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:15.000Z"
+          "timestamp": "2026-04-04T00:01:16.000Z"
         }
       ]
     },
-    "hash": "ca55d61f1616e7dc02b8b9990de8c4360d2ed33b774315dd7fc898d5fc320d1f"
+    "hash": "00851cb16c55aac6c365fe8f5f2d2d85658fc361e130bfee02d9449a0ae0057a"
   },
   {
-    "index": 76,
-    "timestamp": "2026-04-04T00:01:16.000Z",
-    "prevHash": "ca55d61f1616e7dc02b8b9990de8c4360d2ed33b774315dd7fc898d5fc320d1f",
+    "index": 77,
+    "timestamp": "2026-04-04T00:01:17.000Z",
+    "prevHash": "00851cb16c55aac6c365fe8f5f2d2d85658fc361e130bfee02d9449a0ae0057a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-procurement-support-0001",
@@ -2267,16 +2300,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:16.000Z"
+          "timestamp": "2026-04-04T00:01:17.000Z"
         }
       ]
     },
-    "hash": "f24fcf5a4645d6dc2c3178c001710e45f527c30e63c4702a9902d793293ca288"
+    "hash": "bb45c7b2242fe85e9859890c9ee0e3f3f70f7928cfa2a70774f73c2bab1022a5"
   },
   {
-    "index": 77,
-    "timestamp": "2026-04-04T00:01:17.000Z",
-    "prevHash": "f24fcf5a4645d6dc2c3178c001710e45f527c30e63c4702a9902d793293ca288",
+    "index": 78,
+    "timestamp": "2026-04-04T00:01:18.000Z",
+    "prevHash": "bb45c7b2242fe85e9859890c9ee0e3f3f70f7928cfa2a70774f73c2bab1022a5",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-product-reference-0001",
@@ -2297,16 +2330,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:17.000Z"
+          "timestamp": "2026-04-04T00:01:18.000Z"
         }
       ]
     },
-    "hash": "77b06eb74af3bb06de22350a29d3b2b2f97e085c6d48d9d02de53757c9dd2549"
+    "hash": "134f0b3a06107e3040c0e5c808dcf8b48ee4bc39eefc854e8578e8c4589bd3a1"
   },
   {
-    "index": 78,
-    "timestamp": "2026-04-04T00:01:18.000Z",
-    "prevHash": "77b06eb74af3bb06de22350a29d3b2b2f97e085c6d48d9d02de53757c9dd2549",
+    "index": 79,
+    "timestamp": "2026-04-04T00:01:19.000Z",
+    "prevHash": "134f0b3a06107e3040c0e5c808dcf8b48ee4bc39eefc854e8578e8c4589bd3a1",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-sales-coach-0001",
@@ -2327,16 +2360,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:18.000Z"
+          "timestamp": "2026-04-04T00:01:19.000Z"
         }
       ]
     },
-    "hash": "6b37b6211e9c62f34b5192f660603a2d52c07e74d9b911c6a82e2ee385f6a297"
+    "hash": "9627466f527c81d3c2cffecbb30de6405487074790338871b8523ad9d29bda3a"
   },
   {
-    "index": 79,
-    "timestamp": "2026-04-04T00:01:19.000Z",
-    "prevHash": "6b37b6211e9c62f34b5192f660603a2d52c07e74d9b911c6a82e2ee385f6a297",
+    "index": 80,
+    "timestamp": "2026-04-04T00:01:20.000Z",
+    "prevHash": "9627466f527c81d3c2cffecbb30de6405487074790338871b8523ad9d29bda3a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-sales-simulation-0001",
@@ -2357,16 +2390,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:19.000Z"
+          "timestamp": "2026-04-04T00:01:20.000Z"
         }
       ]
     },
-    "hash": "a8cd38b4509a1290a8cc1486421132b4a183ae26e07fb924f6e8202c015821cf"
+    "hash": "f796c3c28ae617781d7e666a672bfb3d527ddce15ed8fc67042d34796718e5ca"
   },
   {
-    "index": 80,
-    "timestamp": "2026-04-04T00:01:20.000Z",
-    "prevHash": "a8cd38b4509a1290a8cc1486421132b4a183ae26e07fb924f6e8202c015821cf",
+    "index": 81,
+    "timestamp": "2026-04-04T00:01:21.000Z",
+    "prevHash": "f796c3c28ae617781d7e666a672bfb3d527ddce15ed8fc67042d34796718e5ca",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-speech-to-crm-0001",
@@ -2387,16 +2420,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:20.000Z"
+          "timestamp": "2026-04-04T00:01:21.000Z"
         }
       ]
     },
-    "hash": "a5021dea0b0cd26ab17472545374ea3daa7cd18f21eaf54065bca7391f6dfd18"
+    "hash": "57867341402ca9c5e174f9947f796801e50b1059a88ec7e9dcda82e440c2f05d"
   },
   {
-    "index": 81,
-    "timestamp": "2026-04-04T00:01:21.000Z",
-    "prevHash": "a5021dea0b0cd26ab17472545374ea3daa7cd18f21eaf54065bca7391f6dfd18",
+    "index": 82,
+    "timestamp": "2026-04-04T00:01:22.000Z",
+    "prevHash": "57867341402ca9c5e174f9947f796801e50b1059a88ec7e9dcda82e440c2f05d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-triage-bot-0001",
@@ -2417,16 +2450,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:21.000Z"
+          "timestamp": "2026-04-04T00:01:22.000Z"
         }
       ]
     },
-    "hash": "dd4d33e04103ef30e6edfa969163fbed71edf907069614efecae124733fc1325"
+    "hash": "75f6f9967cc9335b0bca671d48c86202fb5aa3cd899f26d1afff65d95a05c023"
   },
   {
-    "index": 82,
-    "timestamp": "2026-04-04T00:01:22.000Z",
-    "prevHash": "dd4d33e04103ef30e6edfa969163fbed71edf907069614efecae124733fc1325",
+    "index": 83,
+    "timestamp": "2026-04-04T00:01:23.000Z",
+    "prevHash": "75f6f9967cc9335b0bca671d48c86202fb5aa3cd899f26d1afff65d95a05c023",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-voice-to-crm-d365-0001",
@@ -2447,16 +2480,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:22.000Z"
+          "timestamp": "2026-04-04T00:01:23.000Z"
         }
       ]
     },
-    "hash": "a6f35f1e78026f2e17749c57dfd2687b60a6731bc5e565ef5fb37b7818656b5a"
+    "hash": "a64b39b9f5d1d2cf1f179c55a35f870bcfd18e44eb9c8dce6869193c5c1d9b61"
   },
   {
-    "index": 83,
-    "timestamp": "2026-04-04T00:01:23.000Z",
-    "prevHash": "a6f35f1e78026f2e17749c57dfd2687b60a6731bc5e565ef5fb37b7818656b5a",
+    "index": 84,
+    "timestamp": "2026-04-04T00:01:24.000Z",
+    "prevHash": "a64b39b9f5d1d2cf1f179c55a35f870bcfd18e44eb9c8dce6869193c5c1d9b61",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-voice-to-crm-email-0001",
@@ -2477,16 +2510,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:23.000Z"
+          "timestamp": "2026-04-04T00:01:24.000Z"
         }
       ]
     },
-    "hash": "da39fad8b0bc0db2688bf5f42ed99911999fad4cb5ced538f7a74d01ea30686d"
+    "hash": "dbeced51c1e1d6e25a659d58d977417c8dadf910dab31f800a408b72568953ca"
   },
   {
-    "index": 84,
-    "timestamp": "2026-04-04T00:01:24.000Z",
-    "prevHash": "da39fad8b0bc0db2688bf5f42ed99911999fad4cb5ced538f7a74d01ea30686d",
+    "index": 85,
+    "timestamp": "2026-04-04T00:01:25.000Z",
+    "prevHash": "dbeced51c1e1d6e25a659d58d977417c8dadf910dab31f800a408b72568953ca",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-sharepoint-document-extractor-0001",
@@ -2507,16 +2540,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:24.000Z"
+          "timestamp": "2026-04-04T00:01:25.000Z"
         }
       ]
     },
-    "hash": "bb9f5e8eeca6eadf770d705ba49af962a46cbc0b8151593818db14be87277756"
+    "hash": "138cbd1d3f16e0e162c33d2e53b0de1bd9bcf2768309c7a52f2f4c17285c7330"
   },
   {
-    "index": 85,
-    "timestamp": "2026-04-04T00:01:25.000Z",
-    "prevHash": "bb9f5e8eeca6eadf770d705ba49af962a46cbc0b8151593818db14be87277756",
+    "index": 86,
+    "timestamp": "2026-04-04T00:01:26.000Z",
+    "prevHash": "138cbd1d3f16e0e162c33d2e53b0de1bd9bcf2768309c7a52f2f4c17285c7330",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-voice-to-crm-servicenow-0001",
@@ -2537,16 +2570,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:25.000Z"
+          "timestamp": "2026-04-04T00:01:26.000Z"
         }
       ]
     },
-    "hash": "82adb2ce7d6080e1aa478619964196a77699f4852704c65f3cc1c4fe619aa843"
+    "hash": "35fe8e2628497116e742cacebb531d7fffb9add72a45be060b24a2e3827948fa"
   },
   {
-    "index": 86,
-    "timestamp": "2026-04-04T00:01:26.000Z",
-    "prevHash": "82adb2ce7d6080e1aa478619964196a77699f4852704c65f3cc1c4fe619aa843",
+    "index": 87,
+    "timestamp": "2026-04-04T00:01:27.000Z",
+    "prevHash": "35fe8e2628497116e742cacebb531d7fffb9add72a45be060b24a2e3827948fa",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-care-gap-closure-0001",
@@ -2567,16 +2600,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:26.000Z"
+          "timestamp": "2026-04-04T00:01:27.000Z"
         }
       ]
     },
-    "hash": "e1eb8eea9f48fb3344d311b74b54ce172b3f9cea69f52fd76a51fd2d782a6f33"
+    "hash": "b76a3c451cee9a86e66fe7ffecd3d0cf7f8cb14eca8aac2b8111644264338a8a"
   },
   {
-    "index": 87,
-    "timestamp": "2026-04-04T00:01:27.000Z",
-    "prevHash": "e1eb8eea9f48fb3344d311b74b54ce172b3f9cea69f52fd76a51fd2d782a6f33",
+    "index": 88,
+    "timestamp": "2026-04-04T00:01:28.000Z",
+    "prevHash": "b76a3c451cee9a86e66fe7ffecd3d0cf7f8cb14eca8aac2b8111644264338a8a",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-clinical-notes-summarizer-0001",
@@ -2597,16 +2630,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:27.000Z"
+          "timestamp": "2026-04-04T00:01:28.000Z"
         }
       ]
     },
-    "hash": "ff1c1a930f0894e7b27240c55fe18321eca5ac8deec6993c3e8b0f85e2f8ecac"
+    "hash": "3c5b3941fa9d065876f70f3a0975875ab3c0dc42bb01393971dcb97d8e8f6069"
   },
   {
-    "index": 88,
-    "timestamp": "2026-04-04T00:01:28.000Z",
-    "prevHash": "ff1c1a930f0894e7b27240c55fe18321eca5ac8deec6993c3e8b0f85e2f8ecac",
+    "index": 89,
+    "timestamp": "2026-04-04T00:01:29.000Z",
+    "prevHash": "3c5b3941fa9d065876f70f3a0975875ab3c0dc42bb01393971dcb97d8e8f6069",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-patient-intake-0001",
@@ -2627,16 +2660,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:28.000Z"
+          "timestamp": "2026-04-04T00:01:29.000Z"
         }
       ]
     },
-    "hash": "4e8d0c7c5dbe15f5e54113a409fa30cf213a0cad32581e6c1ab5b37198ddf16a"
+    "hash": "b9b6b5ca8999481904e8998adff9e4ea1f071abe4ce7fbeca538332bcf067260"
   },
   {
-    "index": 89,
-    "timestamp": "2026-04-04T00:01:29.000Z",
-    "prevHash": "4e8d0c7c5dbe15f5e54113a409fa30cf213a0cad32581e6c1ab5b37198ddf16a",
+    "index": 90,
+    "timestamp": "2026-04-04T00:01:30.000Z",
+    "prevHash": "b9b6b5ca8999481904e8998adff9e4ea1f071abe4ce7fbeca538332bcf067260",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-prior-authorization-0001",
@@ -2657,16 +2690,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:29.000Z"
+          "timestamp": "2026-04-04T00:01:30.000Z"
         }
       ]
     },
-    "hash": "e457b5f9c9cffb1737cc54347a34ce32a2ca9c22f2871647470c780947d192c4"
+    "hash": "b7dcc5deca836c4cd2df6432ec22c595f53ef6b9277ce2a86fc05d0febcfa1d2"
   },
   {
-    "index": 90,
-    "timestamp": "2026-04-04T00:01:30.000Z",
-    "prevHash": "e457b5f9c9cffb1737cc54347a34ce32a2ca9c22f2871647470c780947d192c4",
+    "index": 91,
+    "timestamp": "2026-04-04T00:01:31.000Z",
+    "prevHash": "b7dcc5deca836c4cd2df6432ec22c595f53ef6b9277ce2a86fc05d0febcfa1d2",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-staff-credentialing-0001",
@@ -2687,16 +2720,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:30.000Z"
+          "timestamp": "2026-04-04T00:01:31.000Z"
         }
       ]
     },
-    "hash": "f84a8084bc826d72e9ff9ed0560fdfb3fab744d9a93e9e941adf03efa4c5c7db"
+    "hash": "153b07eb7cace1ebd2a599c003e848dcf2f178fe635d82d39f257a83aaf5fa41"
   },
   {
-    "index": 91,
-    "timestamp": "2026-04-04T00:01:31.000Z",
-    "prevHash": "f84a8084bc826d72e9ff9ed0560fdfb3fab744d9a93e9e941adf03efa4c5c7db",
+    "index": 92,
+    "timestamp": "2026-04-04T00:01:32.000Z",
+    "prevHash": "153b07eb7cace1ebd2a599c003e848dcf2f178fe635d82d39f257a83aaf5fa41",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-ask-hr-0001",
@@ -2717,16 +2750,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:31.000Z"
+          "timestamp": "2026-04-04T00:01:32.000Z"
         }
       ]
     },
-    "hash": "ad255508f57af2d1bb68002bae6d2a24564a09e2ba368eddf9ee8df35b003d3a"
+    "hash": "6fdd2307794415afe9fd1931036173ac322bcddc5f7c74f77e4449774d7f1c16"
   },
   {
-    "index": 92,
-    "timestamp": "2026-04-04T00:01:32.000Z",
-    "prevHash": "ad255508f57af2d1bb68002bae6d2a24564a09e2ba368eddf9ee8df35b003d3a",
+    "index": 93,
+    "timestamp": "2026-04-04T00:01:33.000Z",
+    "prevHash": "6fdd2307794415afe9fd1931036173ac322bcddc5f7c74f77e4449774d7f1c16",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-it-helpdesk-0001",
@@ -2747,16 +2780,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:32.000Z"
+          "timestamp": "2026-04-04T00:01:33.000Z"
         }
       ]
     },
-    "hash": "1009a2bc2615a321837a10e56056b552e672a6f6b29477996775c4cb14fbc875"
+    "hash": "9a7473ef18781e1d4786f5b19a2ed2f481ee4dccf7d7f1745a8f1ef1aa41c535"
   },
   {
-    "index": 93,
-    "timestamp": "2026-04-04T00:01:33.000Z",
-    "prevHash": "1009a2bc2615a321837a10e56056b552e672a6f6b29477996775c4cb14fbc875",
+    "index": 94,
+    "timestamp": "2026-04-04T00:01:34.000Z",
+    "prevHash": "9a7473ef18781e1d4786f5b19a2ed2f481ee4dccf7d7f1745a8f1ef1aa41c535",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-inventory-rebalancing-0001",
@@ -2777,16 +2810,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:33.000Z"
+          "timestamp": "2026-04-04T00:01:34.000Z"
         }
       ]
     },
-    "hash": "4e93a34beb97f7cdae033bfcb3775aa00af239ea27ea3f6f929ae8f32f164b1e"
+    "hash": "3eb2cc53de4a48a271b31bda9b34b5922b868dbc344d4a7b5b61d9f89c97b972"
   },
   {
-    "index": 94,
-    "timestamp": "2026-04-04T00:01:34.000Z",
-    "prevHash": "4e93a34beb97f7cdae033bfcb3775aa00af239ea27ea3f6f929ae8f32f164b1e",
+    "index": 95,
+    "timestamp": "2026-04-04T00:01:35.000Z",
+    "prevHash": "3eb2cc53de4a48a271b31bda9b34b5922b868dbc344d4a7b5b61d9f89c97b972",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-maintenance-scheduling-0001",
@@ -2807,16 +2840,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:34.000Z"
+          "timestamp": "2026-04-04T00:01:35.000Z"
         }
       ]
     },
-    "hash": "ae0e039883bc4abef88fe88978ab7d2a6f767cb1febcd0a4bbdfb66b6eeba94e"
+    "hash": "e3dc177ef7fc5606b42186e61fa0d1cc3056b80c3dc95d41f6affebca60abde3"
   },
   {
-    "index": 95,
-    "timestamp": "2026-04-04T00:01:35.000Z",
-    "prevHash": "ae0e039883bc4abef88fe88978ab7d2a6f767cb1febcd0a4bbdfb66b6eeba94e",
+    "index": 96,
+    "timestamp": "2026-04-04T00:01:36.000Z",
+    "prevHash": "e3dc177ef7fc5606b42186e61fa0d1cc3056b80c3dc95d41f6affebca60abde3",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-order-status-communication-0001",
@@ -2837,16 +2870,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:35.000Z"
+          "timestamp": "2026-04-04T00:01:36.000Z"
         }
       ]
     },
-    "hash": "f9b602329def0ba5b782b0e4ac88e9369c32c54fb0baf5083264ec60439ffc5c"
+    "hash": "7019a3b971d04d88f7b2e94adbca4ae47eb78fd0124d6db9fcef6b4fd7a9ab60"
   },
   {
-    "index": 96,
-    "timestamp": "2026-04-04T00:01:36.000Z",
-    "prevHash": "f9b602329def0ba5b782b0e4ac88e9369c32c54fb0baf5083264ec60439ffc5c",
+    "index": 97,
+    "timestamp": "2026-04-04T00:01:37.000Z",
+    "prevHash": "7019a3b971d04d88f7b2e94adbca4ae47eb78fd0124d6db9fcef6b4fd7a9ab60",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-production-line-optimization-0001",
@@ -2867,16 +2900,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:36.000Z"
+          "timestamp": "2026-04-04T00:01:37.000Z"
         }
       ]
     },
-    "hash": "21cc33f167e75d6488e4c3fbf83f46985b439817616b13225a2aa1830ebd1bdb"
+    "hash": "2ff5527e2e68fda16f933213d1c4e0cd3140248ad7dcb3d7bfae055da52d09a8"
   },
   {
-    "index": 97,
-    "timestamp": "2026-04-04T00:01:37.000Z",
-    "prevHash": "21cc33f167e75d6488e4c3fbf83f46985b439817616b13225a2aa1830ebd1bdb",
+    "index": 98,
+    "timestamp": "2026-04-04T00:01:38.000Z",
+    "prevHash": "2ff5527e2e68fda16f933213d1c4e0cd3140248ad7dcb3d7bfae055da52d09a8",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-supplier-risk-monitoring-0001",
@@ -2897,16 +2930,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:37.000Z"
+          "timestamp": "2026-04-04T00:01:38.000Z"
         }
       ]
     },
-    "hash": "1086775add97161dc27c0e02b54aadcb5407d831395200d647e2b574aed426bc"
+    "hash": "744ba5113e5003df7daeec4f466084ff8cdc161ffe17efe14cbde35335a545be"
   },
   {
-    "index": 98,
-    "timestamp": "2026-04-04T00:01:38.000Z",
-    "prevHash": "1086775add97161dc27c0e02b54aadcb5407d831395200d647e2b574aed426bc",
+    "index": 99,
+    "timestamp": "2026-04-04T00:01:39.000Z",
+    "prevHash": "744ba5113e5003df7daeec4f466084ff8cdc161ffe17efe14cbde35335a545be",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-client-health-score-0001",
@@ -2927,16 +2960,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:38.000Z"
+          "timestamp": "2026-04-04T00:01:39.000Z"
         }
       ]
     },
-    "hash": "831f104e75b4b73f7884c13e1d232163c025cef8c5b49c98541c4e0ac51d6a71"
+    "hash": "986abc98c77198d444acdd9100993c5b9107a17a929de3524e69ccda22e10e8b"
   },
   {
-    "index": 99,
-    "timestamp": "2026-04-04T00:01:39.000Z",
-    "prevHash": "831f104e75b4b73f7884c13e1d232163c025cef8c5b49c98541c4e0ac51d6a71",
+    "index": 100,
+    "timestamp": "2026-04-04T00:01:40.000Z",
+    "prevHash": "986abc98c77198d444acdd9100993c5b9107a17a929de3524e69ccda22e10e8b",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-contract-risk-review-0001",
@@ -2957,16 +2990,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:39.000Z"
+          "timestamp": "2026-04-04T00:01:40.000Z"
         }
       ]
     },
-    "hash": "354e20e952bb6dc79b7dfdd95e827e6c1aabdcbe6de6a7b261f8c1ea3084fed4"
+    "hash": "8a0c32951c1566490d8b194da4838b1389865deff18afe7516a3748f89a665a4"
   },
   {
-    "index": 100,
-    "timestamp": "2026-04-04T00:01:40.000Z",
-    "prevHash": "354e20e952bb6dc79b7dfdd95e827e6c1aabdcbe6de6a7b261f8c1ea3084fed4",
+    "index": 101,
+    "timestamp": "2026-04-04T00:01:41.000Z",
+    "prevHash": "8a0c32951c1566490d8b194da4838b1389865deff18afe7516a3748f89a665a4",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-proposal-copilot-0001",
@@ -2987,16 +3020,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:40.000Z"
+          "timestamp": "2026-04-04T00:01:41.000Z"
         }
       ]
     },
-    "hash": "a5a8fafeb6ae77d68e9b8aa75a9c61f95ddb42c26cc21988532ecbadbba78aa4"
+    "hash": "26f3719891201854d204d16826ec9d53c757e30a240b6609026c9d7a7afea925"
   },
   {
-    "index": 101,
-    "timestamp": "2026-04-04T00:01:41.000Z",
-    "prevHash": "a5a8fafeb6ae77d68e9b8aa75a9c61f95ddb42c26cc21988532ecbadbba78aa4",
+    "index": 102,
+    "timestamp": "2026-04-04T00:01:42.000Z",
+    "prevHash": "26f3719891201854d204d16826ec9d53c757e30a240b6609026c9d7a7afea925",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-resource-utilization-0001",
@@ -3017,16 +3050,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:41.000Z"
+          "timestamp": "2026-04-04T00:01:42.000Z"
         }
       ]
     },
-    "hash": "645a6f9300fcf888d13e0afd76e3c7c3f5eebe944684e1e11fb8d0307e7f63e9"
+    "hash": "28377dc94e12da78ebc24dcac8228f5a6b1d0c92079fd11fba37ddf87db21213"
   },
   {
-    "index": 102,
-    "timestamp": "2026-04-04T00:01:42.000Z",
-    "prevHash": "645a6f9300fcf888d13e0afd76e3c7c3f5eebe944684e1e11fb8d0307e7f63e9",
+    "index": 103,
+    "timestamp": "2026-04-04T00:01:43.000Z",
+    "prevHash": "28377dc94e12da78ebc24dcac8228f5a6b1d0c92079fd11fba37ddf87db21213",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-time-entry-billing-0001",
@@ -3047,16 +3080,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:42.000Z"
+          "timestamp": "2026-04-04T00:01:43.000Z"
         }
       ]
     },
-    "hash": "24f3da2a28c8dbab80ff69f2c900b582b90b6275730a8dbfeaef7c0deec2388c"
+    "hash": "8ca835e52ffbe70f8850746b7be66ee9587c7fcafda9fb1e74ba8b8afab52354"
   },
   {
-    "index": 103,
-    "timestamp": "2026-04-04T00:01:43.000Z",
-    "prevHash": "24f3da2a28c8dbab80ff69f2c900b582b90b6275730a8dbfeaef7c0deec2388c",
+    "index": 104,
+    "timestamp": "2026-04-04T00:01:44.000Z",
+    "prevHash": "8ca835e52ffbe70f8850746b7be66ee9587c7fcafda9fb1e74ba8b8afab52354",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-inventory-visibility-0001",
@@ -3077,16 +3110,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:43.000Z"
+          "timestamp": "2026-04-04T00:01:44.000Z"
         }
       ]
     },
-    "hash": "8ea81daea5736d10a3c551764e1be5cc85d7c8a617f6cc3cf91e2a5e06b4da6b"
+    "hash": "907c239b0851b45b1924c47317e46220a0e2e68f05e75158f16eaffdd2187345"
   },
   {
-    "index": 104,
-    "timestamp": "2026-04-04T00:01:44.000Z",
-    "prevHash": "8ea81daea5736d10a3c551764e1be5cc85d7c8a617f6cc3cf91e2a5e06b4da6b",
+    "index": 105,
+    "timestamp": "2026-04-04T00:01:45.000Z",
+    "prevHash": "907c239b0851b45b1924c47317e46220a0e2e68f05e75158f16eaffdd2187345",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-personalized-marketing-0001",
@@ -3107,16 +3140,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:44.000Z"
+          "timestamp": "2026-04-04T00:01:45.000Z"
         }
       ]
     },
-    "hash": "eb58eed31484d4565f735ec5506ba730341452280da2e12e9a22b9e5448414ee"
+    "hash": "d497482c15b1f7bacf4d65e48ddb902514c1dadccc2222482e29506e451e4230"
   },
   {
-    "index": 105,
-    "timestamp": "2026-04-04T00:01:45.000Z",
-    "prevHash": "eb58eed31484d4565f735ec5506ba730341452280da2e12e9a22b9e5448414ee",
+    "index": 106,
+    "timestamp": "2026-04-04T00:01:46.000Z",
+    "prevHash": "d497482c15b1f7bacf4d65e48ddb902514c1dadccc2222482e29506e451e4230",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-returns-complaints-resolution-0001",
@@ -3137,16 +3170,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:45.000Z"
+          "timestamp": "2026-04-04T00:01:46.000Z"
         }
       ]
     },
-    "hash": "ed7d689dd3593a8db34cd073cb0527e96023fd68e8ad4fab36d57db0e7939d59"
+    "hash": "36a2792d7348ae0efd7b99686ab78f15872a67ce29e85da6801619a38205094c"
   },
   {
-    "index": 106,
-    "timestamp": "2026-04-04T00:01:46.000Z",
-    "prevHash": "ed7d689dd3593a8db34cd073cb0527e96023fd68e8ad4fab36d57db0e7939d59",
+    "index": 107,
+    "timestamp": "2026-04-04T00:01:47.000Z",
+    "prevHash": "36a2792d7348ae0efd7b99686ab78f15872a67ce29e85da6801619a38205094c",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-store-associate-copilot-0001",
@@ -3167,16 +3200,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:46.000Z"
+          "timestamp": "2026-04-04T00:01:47.000Z"
         }
       ]
     },
-    "hash": "9ec092e89d227f57058b9f69cd99957886098292978cf2b58345edc54c3acae7"
+    "hash": "0cad1203b57a8c992625318451495237e9788d552c255265b25461870b83e74c"
   },
   {
-    "index": 107,
-    "timestamp": "2026-04-04T00:01:47.000Z",
-    "prevHash": "9ec092e89d227f57058b9f69cd99957886098292978cf2b58345edc54c3acae7",
+    "index": 108,
+    "timestamp": "2026-04-04T00:01:48.000Z",
+    "prevHash": "0cad1203b57a8c992625318451495237e9788d552c255265b25461870b83e74c",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-supply-chain-disruption-alert-0001",
@@ -3197,16 +3230,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:47.000Z"
+          "timestamp": "2026-04-04T00:01:48.000Z"
         }
       ]
     },
-    "hash": "f278e9f42b639de7987e2eb136251ae332c8ecbf7df7b0c83ef7f6f3748cd22e"
+    "hash": "6a6248594e7d23e7ebd8f6cd08db09f4c230dafd90f1cc8221324e5d389f593b"
   },
   {
-    "index": 108,
-    "timestamp": "2026-04-04T00:01:48.000Z",
-    "prevHash": "f278e9f42b639de7987e2eb136251ae332c8ecbf7df7b0c83ef7f6f3748cd22e",
+    "index": 109,
+    "timestamp": "2026-04-04T00:01:49.000Z",
+    "prevHash": "6a6248594e7d23e7ebd8f6cd08db09f4c230dafd90f1cc8221324e5d389f593b",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-building-permit-processing-0001",
@@ -3227,16 +3260,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:48.000Z"
+          "timestamp": "2026-04-04T00:01:49.000Z"
         }
       ]
     },
-    "hash": "b95cdab2a22c979be40aed42100cfd0d478341ad2f3c466d3b0339febdfbf431"
+    "hash": "f9924b2d18ba407b4cc8e623063500685d2ff75cd351a52b360989ada8b0d846"
   },
   {
-    "index": 109,
-    "timestamp": "2026-04-04T00:01:49.000Z",
-    "prevHash": "b95cdab2a22c979be40aed42100cfd0d478341ad2f3c466d3b0339febdfbf431",
+    "index": 110,
+    "timestamp": "2026-04-04T00:01:50.000Z",
+    "prevHash": "f9924b2d18ba407b4cc8e623063500685d2ff75cd351a52b360989ada8b0d846",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-citizen-service-request-0001",
@@ -3257,16 +3290,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:49.000Z"
+          "timestamp": "2026-04-04T00:01:50.000Z"
         }
       ]
     },
-    "hash": "32918eeca22ba779d8e294b1c9de17f074fae6f56ab169f4d1dcdea3e6024518"
+    "hash": "8675c173b2614faabaddd8f781a5939539f98a85243c4010a86c0a43c2144cf9"
   },
   {
-    "index": 110,
-    "timestamp": "2026-04-04T00:01:50.000Z",
-    "prevHash": "32918eeca22ba779d8e294b1c9de17f074fae6f56ab169f4d1dcdea3e6024518",
+    "index": 111,
+    "timestamp": "2026-04-04T00:01:51.000Z",
+    "prevHash": "8675c173b2614faabaddd8f781a5939539f98a85243c4010a86c0a43c2144cf9",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-foia-request-assistant-0001",
@@ -3287,16 +3320,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:50.000Z"
+          "timestamp": "2026-04-04T00:01:51.000Z"
         }
       ]
     },
-    "hash": "0dbf4d0a213b83ac018c2acbc280a08740e5d37c2e2c993f02cf50040b67c8f9"
+    "hash": "2bbf96428733c52333b0678654192c09db5644c47b3d985dd2a7791082ad0330"
   },
   {
-    "index": 111,
-    "timestamp": "2026-04-04T00:01:51.000Z",
-    "prevHash": "0dbf4d0a213b83ac018c2acbc280a08740e5d37c2e2c993f02cf50040b67c8f9",
+    "index": 112,
+    "timestamp": "2026-04-04T00:01:52.000Z",
+    "prevHash": "2bbf96428733c52333b0678654192c09db5644c47b3d985dd2a7791082ad0330",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-slg-grants-management-0001",
@@ -3317,16 +3350,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:51.000Z"
+          "timestamp": "2026-04-04T00:01:52.000Z"
         }
       ]
     },
-    "hash": "1451a5ddf0a447fdfe7d91d74e87ea829fee46fc5e8c1452cc857ea69240a7a8"
+    "hash": "0ed8356949e62901a6b6945b277f2485a9b99ed9d6965cfa5c05ed2e832826c8"
   },
   {
-    "index": 112,
-    "timestamp": "2026-04-04T00:01:52.000Z",
-    "prevHash": "1451a5ddf0a447fdfe7d91d74e87ea829fee46fc5e8c1452cc857ea69240a7a8",
+    "index": 113,
+    "timestamp": "2026-04-04T00:01:53.000Z",
+    "prevHash": "0ed8356949e62901a6b6945b277f2485a9b99ed9d6965cfa5c05ed2e832826c8",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-utility-billing-assistance-0001",
@@ -3347,16 +3380,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:52.000Z"
+          "timestamp": "2026-04-04T00:01:53.000Z"
         }
       ]
     },
-    "hash": "953af852af4f70f60e389912e476bd1b07f903cafe758de96eaeb6de159d6213"
+    "hash": "e87c34c80da1e60ca4909addabe2e9b3880d4d9461e9892afb36f0825ae07fac"
   },
   {
-    "index": 113,
-    "timestamp": "2026-04-04T00:01:53.000Z",
-    "prevHash": "953af852af4f70f60e389912e476bd1b07f903cafe758de96eaeb6de159d6213",
+    "index": 114,
+    "timestamp": "2026-04-04T00:01:54.000Z",
+    "prevHash": "e87c34c80da1e60ca4909addabe2e9b3880d4d9461e9892afb36f0825ae07fac",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-software-competitive-intel-0001",
@@ -3377,16 +3410,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:53.000Z"
+          "timestamp": "2026-04-04T00:01:54.000Z"
         }
       ]
     },
-    "hash": "2673096601fe40849194380b15868bb53bf87dfd4ff63c04790108b7ac8edfde"
+    "hash": "4bd1519df5e1daa02167314806774edc040a9fe0d5ed83258812365c06cb4f55"
   },
   {
-    "index": 114,
-    "timestamp": "2026-04-04T00:01:54.000Z",
-    "prevHash": "2673096601fe40849194380b15868bb53bf87dfd4ff63c04790108b7ac8edfde",
+    "index": 115,
+    "timestamp": "2026-04-04T00:01:55.000Z",
+    "prevHash": "4bd1519df5e1daa02167314806774edc040a9fe0d5ed83258812365c06cb4f55",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-software-customer-onboarding-0001",
@@ -3407,16 +3440,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:54.000Z"
+          "timestamp": "2026-04-04T00:01:55.000Z"
         }
       ]
     },
-    "hash": "df86a3aa5905fdb46b631d505851dce1a40d3cbbd97bc89042af6c79948ccde8"
+    "hash": "57ab1283f93fede506f393ac64d0ed6bbb3d9366f22d18c3600e0671d2be4336"
   },
   {
-    "index": 115,
-    "timestamp": "2026-04-04T00:01:55.000Z",
-    "prevHash": "df86a3aa5905fdb46b631d505851dce1a40d3cbbd97bc89042af6c79948ccde8",
+    "index": 116,
+    "timestamp": "2026-04-04T00:01:56.000Z",
+    "prevHash": "57ab1283f93fede506f393ac64d0ed6bbb3d9366f22d18c3600e0671d2be4336",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-license-renewal-expansion-0001",
@@ -3437,16 +3470,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:55.000Z"
+          "timestamp": "2026-04-04T00:01:56.000Z"
         }
       ]
     },
-    "hash": "5a10d96b5950e94c32f6baf741a938eaaf9ad99f8fbcad172ef170a8eb345d06"
+    "hash": "657bd3d1d9604cf51f4e446ebb80f7d51eff952814cb2940dabb94ce88ce4ab6"
   },
   {
-    "index": 116,
-    "timestamp": "2026-04-04T00:01:56.000Z",
-    "prevHash": "5a10d96b5950e94c32f6baf741a938eaaf9ad99f8fbcad172ef170a8eb345d06",
+    "index": 117,
+    "timestamp": "2026-04-04T00:01:57.000Z",
+    "prevHash": "657bd3d1d9604cf51f4e446ebb80f7d51eff952814cb2940dabb94ce88ce4ab6",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-product-feedback-synthesizer-0001",
@@ -3467,16 +3500,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:56.000Z"
+          "timestamp": "2026-04-04T00:01:57.000Z"
         }
       ]
     },
-    "hash": "4e7fe36ac4d26f0a17e1398a512ca88db9d6dde61b24a4e4374fca393caf190e"
+    "hash": "de4f79a43d5288701b16f56c9517c16ed2d8da3e8cd44bf63bbde474a022fc6d"
   },
   {
-    "index": 117,
-    "timestamp": "2026-04-04T00:01:57.000Z",
-    "prevHash": "4e7fe36ac4d26f0a17e1398a512ca88db9d6dde61b24a4e4374fca393caf190e",
+    "index": 118,
+    "timestamp": "2026-04-04T00:01:58.000Z",
+    "prevHash": "de4f79a43d5288701b16f56c9517c16ed2d8da3e8cd44bf63bbde474a022fc6d",
     "type": "forge",
     "data": {
       "mintId": "CORE--aibast-agents-library-support-ticket-resolution-0001",
@@ -3497,16 +3530,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:57.000Z"
+          "timestamp": "2026-04-04T00:01:58.000Z"
         }
       ]
     },
-    "hash": "821ef3e1389aa386cf31ed99e26ce7cb81f29b107fa411f60c2c9db74aae1498"
+    "hash": "764cd519934b3788647d68947b193a02daabbba07ab5e660584a3346d9e11035"
   },
   {
-    "index": 118,
-    "timestamp": "2026-04-04T00:01:58.000Z",
-    "prevHash": "821ef3e1389aa386cf31ed99e26ce7cb81f29b107fa411f60c2c9db74aae1498",
+    "index": 119,
+    "timestamp": "2026-04-04T00:01:59.000Z",
+    "prevHash": "764cd519934b3788647d68947b193a02daabbba07ab5e660584a3346d9e11035",
     "type": "forge",
     "data": {
       "mintId": "CORE--borg-borg-agent-0001",
@@ -3527,16 +3560,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:58.000Z"
+          "timestamp": "2026-04-04T00:01:59.000Z"
         }
       ]
     },
-    "hash": "ed545a84366b99d99c18942cf4cf3e97bbb8700f42ff1f935ad8cee4d1b25286"
+    "hash": "bce043965672b00192312664e79cc61e3e0bbde2882244d79303a478f0ca0479"
   },
   {
-    "index": 119,
-    "timestamp": "2026-04-04T00:01:59.000Z",
-    "prevHash": "ed545a84366b99d99c18942cf4cf3e97bbb8700f42ff1f935ad8cee4d1b25286",
+    "index": 120,
+    "timestamp": "2026-04-04T00:02:00.000Z",
+    "prevHash": "bce043965672b00192312664e79cc61e3e0bbde2882244d79303a478f0ca0479",
     "type": "forge",
     "data": {
       "mintId": "CORE--borg-cardsmith-agent-0001",
@@ -3557,16 +3590,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:01:59.000Z"
+          "timestamp": "2026-04-04T00:02:00.000Z"
         }
       ]
     },
-    "hash": "f6f9b10155be9af287aa5bb824fe1b97c95e7923b8eb0dafd8918fc458a3be1c"
+    "hash": "0aac45e94268d395511ce12295da4730636fb616a41e256ec3f54bbb2c7fad23"
   },
   {
-    "index": 120,
-    "timestamp": "2026-04-04T00:02:00.000Z",
-    "prevHash": "f6f9b10155be9af287aa5bb824fe1b97c95e7923b8eb0dafd8918fc458a3be1c",
+    "index": 121,
+    "timestamp": "2026-04-04T00:02:01.000Z",
+    "prevHash": "0aac45e94268d395511ce12295da4730636fb616a41e256ec3f54bbb2c7fad23",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-agent-generator-0001",
@@ -3587,16 +3620,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:00.000Z"
+          "timestamp": "2026-04-04T00:02:01.000Z"
         }
       ]
     },
-    "hash": "5f66f11c9999e4e5286a878cb60ac79761c4127f5f01d952f8ab07bafc8cf952"
+    "hash": "b4b138500ae08cd40ba9eaca25f756fac9931c682c570eab88442c59dcb1be90"
   },
   {
-    "index": 121,
-    "timestamp": "2026-04-04T00:02:01.000Z",
-    "prevHash": "5f66f11c9999e4e5286a878cb60ac79761c4127f5f01d952f8ab07bafc8cf952",
+    "index": 122,
+    "timestamp": "2026-04-04T00:02:02.000Z",
+    "prevHash": "b4b138500ae08cd40ba9eaca25f756fac9931c682c570eab88442c59dcb1be90",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-agent-transpiler-0001",
@@ -3617,16 +3650,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:01.000Z"
+          "timestamp": "2026-04-04T00:02:02.000Z"
         }
       ]
     },
-    "hash": "8a59e0c184cd3d0018ce740f5551711a2860cb147986dc55c4643a92d4ad1c9e"
+    "hash": "dc69bb54fe0c832d569377bb1dafe4f6f1820ab8b4cd55ded5885b9b7c2b6d62"
   },
   {
-    "index": 122,
-    "timestamp": "2026-04-04T00:02:02.000Z",
-    "prevHash": "8a59e0c184cd3d0018ce740f5551711a2860cb147986dc55c4643a92d4ad1c9e",
+    "index": 123,
+    "timestamp": "2026-04-04T00:02:03.000Z",
+    "prevHash": "dc69bb54fe0c832d569377bb1dafe4f6f1820ab8b4cd55ded5885b9b7c2b6d62",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-architecture-diagram-0001",
@@ -3647,16 +3680,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:02.000Z"
+          "timestamp": "2026-04-04T00:02:03.000Z"
         }
       ]
     },
-    "hash": "f5573e3f58f48181ace951210cf5ee9e9e238ab66606f0eef30b8f9b780daa31"
+    "hash": "48230c80420f18989b1cbab32cf533f373f4cb0b62dd92e6a38350843df44b1b"
   },
   {
-    "index": 123,
-    "timestamp": "2026-04-04T00:02:03.000Z",
-    "prevHash": "f5573e3f58f48181ace951210cf5ee9e9e238ab66606f0eef30b8f9b780daa31",
+    "index": 124,
+    "timestamp": "2026-04-04T00:02:04.000Z",
+    "prevHash": "48230c80420f18989b1cbab32cf533f373f4cb0b62dd92e6a38350843df44b1b",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-copilot-studio-transpiler-0001",
@@ -3677,16 +3710,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:03.000Z"
+          "timestamp": "2026-04-04T00:02:04.000Z"
         }
       ]
     },
-    "hash": "433c12581c11f6c55d95deeae1a3ba4c1aa04fdf11de1190faefc5ab0cf9b7a0"
+    "hash": "2355fc8a6625224412d931cb5eb6fe6543e648ee7800113ec4c6ca2235085c8d"
   },
   {
-    "index": 124,
-    "timestamp": "2026-04-04T00:02:04.000Z",
-    "prevHash": "433c12581c11f6c55d95deeae1a3ba4c1aa04fdf11de1190faefc5ab0cf9b7a0",
+    "index": 125,
+    "timestamp": "2026-04-04T00:02:05.000Z",
+    "prevHash": "2355fc8a6625224412d931cb5eb6fe6543e648ee7800113ec4c6ca2235085c8d",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-demo-script-generator-0001",
@@ -3707,16 +3740,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:04.000Z"
+          "timestamp": "2026-04-04T00:02:05.000Z"
         }
       ]
     },
-    "hash": "5c8deed191f1434222bba1c4393240a90d3fc3db49b4fabc0b65072e8124311c"
+    "hash": "d777072366eee6fb9492728cb9106a42ce9be67ce8750f3ab1b415837a352a57"
   },
   {
-    "index": 125,
-    "timestamp": "2026-04-04T00:02:05.000Z",
-    "prevHash": "5c8deed191f1434222bba1c4393240a90d3fc3db49b4fabc0b65072e8124311c",
+    "index": 126,
+    "timestamp": "2026-04-04T00:02:06.000Z",
+    "prevHash": "d777072366eee6fb9492728cb9106a42ce9be67ce8750f3ab1b415837a352a57",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-dynamics-crud-0001",
@@ -3737,16 +3770,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:05.000Z"
+          "timestamp": "2026-04-04T00:02:06.000Z"
         }
       ]
     },
-    "hash": "f07d12091f4f4d8c35ac64f91a1061d5a31c8b2d8b329622d2a24e6ba57c5d7a"
+    "hash": "f31216933ffada20d3f3fdcd05818b2893e2420087d8f18123e597e334c11a15"
   },
   {
-    "index": 126,
-    "timestamp": "2026-04-04T00:02:06.000Z",
-    "prevHash": "f07d12091f4f4d8c35ac64f91a1061d5a31c8b2d8b329622d2a24e6ba57c5d7a",
+    "index": 127,
+    "timestamp": "2026-04-04T00:02:07.000Z",
+    "prevHash": "f31216933ffada20d3f3fdcd05818b2893e2420087d8f18123e597e334c11a15",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-email-drafting-0001",
@@ -3767,16 +3800,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:06.000Z"
+          "timestamp": "2026-04-04T00:02:07.000Z"
         }
       ]
     },
-    "hash": "c70ec36532cda9f104f9dfcc53695c3029953334df86f86f0d00f1b241036cff"
+    "hash": "13e6d25770e993807fab6cf501d5662a2449fdf59460eabfd517b455d88ab61f"
   },
   {
-    "index": 127,
-    "timestamp": "2026-04-04T00:02:07.000Z",
-    "prevHash": "c70ec36532cda9f104f9dfcc53695c3029953334df86f86f0d00f1b241036cff",
+    "index": 128,
+    "timestamp": "2026-04-04T00:02:08.000Z",
+    "prevHash": "13e6d25770e993807fab6cf501d5662a2449fdf59460eabfd517b455d88ab61f",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-powerpoint-generator-0001",
@@ -3797,16 +3830,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:07.000Z"
+          "timestamp": "2026-04-04T00:02:08.000Z"
         }
       ]
     },
-    "hash": "03886d717640aed16ea9cfafbd3911d87d6ee15b970116461e6b745cbc3cd785"
+    "hash": "ffbf8d45ec8acdc315d80a3891317aee9053a149364257135fd9ae7c3811affa"
   },
   {
-    "index": 128,
-    "timestamp": "2026-04-04T00:02:08.000Z",
-    "prevHash": "03886d717640aed16ea9cfafbd3911d87d6ee15b970116461e6b745cbc3cd785",
+    "index": 129,
+    "timestamp": "2026-04-04T00:02:09.000Z",
+    "prevHash": "ffbf8d45ec8acdc315d80a3891317aee9053a149364257135fd9ae7c3811affa",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-project-tracker-0001",
@@ -3827,16 +3860,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:08.000Z"
+          "timestamp": "2026-04-04T00:02:09.000Z"
         }
       ]
     },
-    "hash": "cc1cda8b247b7cd2cb8d870295ea07f7b6e6d2d54210f8e6c0643c306ebb374c"
+    "hash": "5cb0a0d05625a986e4ee166cb7748bdd26fa6fd1b5b3bee874a577fb27305d85"
   },
   {
-    "index": 129,
-    "timestamp": "2026-04-04T00:02:09.000Z",
-    "prevHash": "cc1cda8b247b7cd2cb8d870295ea07f7b6e6d2d54210f8e6c0643c306ebb374c",
+    "index": 130,
+    "timestamp": "2026-04-04T00:02:10.000Z",
+    "prevHash": "5cb0a0d05625a986e4ee166cb7748bdd26fa6fd1b5b3bee874a577fb27305d85",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-rapp-pipeline-0001",
@@ -3857,16 +3890,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:09.000Z"
+          "timestamp": "2026-04-04T00:02:10.000Z"
         }
       ]
     },
-    "hash": "d4d290e20a39809d741923c3cbabde6738c95a247b68b5cc1fe7233c5cdb07fa"
+    "hash": "d1f79e495131a9f11af3cfc6e6fda339fb7268085e051b586514aec45c1fbb2e"
   },
   {
-    "index": 130,
-    "timestamp": "2026-04-04T00:02:10.000Z",
-    "prevHash": "d4d290e20a39809d741923c3cbabde6738c95a247b68b5cc1fe7233c5cdb07fa",
+    "index": 131,
+    "timestamp": "2026-04-04T00:02:11.000Z",
+    "prevHash": "d1f79e495131a9f11af3cfc6e6fda339fb7268085e051b586514aec45c1fbb2e",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-sales-assistant-0001",
@@ -3887,16 +3920,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:10.000Z"
+          "timestamp": "2026-04-04T00:02:11.000Z"
         }
       ]
     },
-    "hash": "d590ffb0a4d443442f066106327a8c0fe4159fab0838d30ea6073b69e5e02580"
+    "hash": "d7becf7b440c818e8394e228e4bbb5aac09c468d322ec97224823aa35ba553b2"
   },
   {
-    "index": 131,
-    "timestamp": "2026-04-04T00:02:11.000Z",
-    "prevHash": "d590ffb0a4d443442f066106327a8c0fe4159fab0838d30ea6073b69e5e02580",
+    "index": 132,
+    "timestamp": "2026-04-04T00:02:12.000Z",
+    "prevHash": "d7becf7b440c818e8394e228e4bbb5aac09c468d322ec97224823aa35ba553b2",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-scripted-demo-0001",
@@ -3917,16 +3950,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:11.000Z"
+          "timestamp": "2026-04-04T00:02:12.000Z"
         }
       ]
     },
-    "hash": "ac6bd67d8dbc30a1babeddb9f4d65be5b8416af983f056ca8773f10c71be353c"
+    "hash": "b6bee1afafc75b91a332c7c83adcc36481a453ecc1bb2b38f238b5f661f275ee"
   },
   {
-    "index": 132,
-    "timestamp": "2026-04-04T00:02:12.000Z",
-    "prevHash": "ac6bd67d8dbc30a1babeddb9f4d65be5b8416af983f056ca8773f10c71be353c",
+    "index": 133,
+    "timestamp": "2026-04-04T00:02:13.000Z",
+    "prevHash": "b6bee1afafc75b91a332c7c83adcc36481a453ecc1bb2b38f238b5f661f275ee",
     "type": "forge",
     "data": {
       "mintId": "CORE--discreetRappers-sharepoint-contract-analysis-0001",
@@ -3947,16 +3980,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:12.000Z"
+          "timestamp": "2026-04-04T00:02:13.000Z"
         }
       ]
     },
-    "hash": "513b838c5da1b8b3136acafa8fee1a6219a1d4aedad5f6fb308408618384f5bd"
+    "hash": "ca794750c272f03c814896bf4bf45df81698eeee96d323bb60967b80a6b6f7b6"
   },
   {
-    "index": 133,
-    "timestamp": "2026-04-04T00:02:13.000Z",
-    "prevHash": "513b838c5da1b8b3136acafa8fee1a6219a1d4aedad5f6fb308408618384f5bd",
+    "index": 134,
+    "timestamp": "2026-04-04T00:02:14.000Z",
+    "prevHash": "ca794750c272f03c814896bf4bf45df81698eeee96d323bb60967b80a6b6f7b6",
     "type": "forge",
     "data": {
       "mintId": "CORE--kody-agent-workbench-0001",
@@ -3977,16 +4010,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:13.000Z"
+          "timestamp": "2026-04-04T00:02:14.000Z"
         }
       ]
     },
-    "hash": "f35f38b17d84c37910ed0ab890ebeac402810edfb46d5d7e35364665d84091a1"
+    "hash": "86f82f62b87f177b2d690725e5c8439274104c7dfd34fa2d6af9d5c14d681bdb"
   },
   {
-    "index": 134,
-    "timestamp": "2026-04-04T00:02:14.000Z",
-    "prevHash": "f35f38b17d84c37910ed0ab890ebeac402810edfb46d5d7e35364665d84091a1",
+    "index": 135,
+    "timestamp": "2026-04-04T00:02:15.000Z",
+    "prevHash": "86f82f62b87f177b2d690725e5c8439274104c7dfd34fa2d6af9d5c14d681bdb",
     "type": "forge",
     "data": {
       "mintId": "CORE--kody-context-memory-0001",
@@ -4007,16 +4040,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:14.000Z"
+          "timestamp": "2026-04-04T00:02:15.000Z"
         }
       ]
     },
-    "hash": "7acadafa0f7dfee18a1593466b7afbb32d3d620b60a092e02e563c4767aef9f0"
+    "hash": "f0366dd68b55b56835ba6b4cd0f9e895c9d6a80e509cb740d222c85c909346b9"
   },
   {
-    "index": 135,
-    "timestamp": "2026-04-04T00:02:15.000Z",
-    "prevHash": "7acadafa0f7dfee18a1593466b7afbb32d3d620b60a092e02e563c4767aef9f0",
+    "index": 136,
+    "timestamp": "2026-04-04T00:02:16.000Z",
+    "prevHash": "f0366dd68b55b56835ba6b4cd0f9e895c9d6a80e509cb740d222c85c909346b9",
     "type": "forge",
     "data": {
       "mintId": "CORE--kody-github-agent-library-0001",
@@ -4037,16 +4070,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:15.000Z"
+          "timestamp": "2026-04-04T00:02:16.000Z"
         }
       ]
     },
-    "hash": "feed22982b7f3a7057bfbf4c0f42c56d8dbb624a8144b879a81a30ce98fbbe42"
+    "hash": "af569ad6484b7173411023e71e9d4583a9eaba1ccb254cddf1d04deca8e6790f"
   },
   {
-    "index": 136,
-    "timestamp": "2026-04-04T00:02:16.000Z",
-    "prevHash": "feed22982b7f3a7057bfbf4c0f42c56d8dbb624a8144b879a81a30ce98fbbe42",
+    "index": 137,
+    "timestamp": "2026-04-04T00:02:17.000Z",
+    "prevHash": "af569ad6484b7173411023e71e9d4583a9eaba1ccb254cddf1d04deca8e6790f",
     "type": "forge",
     "data": {
       "mintId": "CORE--kody-manage-memory-0001",
@@ -4067,16 +4100,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:16.000Z"
+          "timestamp": "2026-04-04T00:02:17.000Z"
         }
       ]
     },
-    "hash": "045991740fb2d8c02f478762f149623748b624c5fdab157ab597fe422f65a21e"
+    "hash": "2e23fc191c94d74fbe6322d4b9c94023b418dddd09c9df39d51c774a778be4d4"
   },
   {
-    "index": 137,
-    "timestamp": "2026-04-04T00:02:17.000Z",
-    "prevHash": "045991740fb2d8c02f478762f149623748b624c5fdab157ab597fe422f65a21e",
+    "index": 138,
+    "timestamp": "2026-04-04T00:02:18.000Z",
+    "prevHash": "2e23fc191c94d74fbe6322d4b9c94023b418dddd09c9df39d51c774a778be4d4",
     "type": "forge",
     "data": {
       "mintId": "CORE--kody-rar-remote-agent-0001",
@@ -4097,16 +4130,16 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:17.000Z"
+          "timestamp": "2026-04-04T00:02:18.000Z"
         }
       ]
     },
-    "hash": "8c3386d028ee7a7ce3cca767cfdaefe45761ac1f2e65d6dcbcee4b6372103f3d"
+    "hash": "38845c04d227652c1bba10b6f724db02fb1db77b348484b55eb48afb858d7890"
   },
   {
-    "index": 138,
-    "timestamp": "2026-04-04T00:02:18.000Z",
-    "prevHash": "8c3386d028ee7a7ce3cca767cfdaefe45761ac1f2e65d6dcbcee4b6372103f3d",
+    "index": 139,
+    "timestamp": "2026-04-04T00:02:19.000Z",
+    "prevHash": "38845c04d227652c1bba10b6f724db02fb1db77b348484b55eb48afb858d7890",
     "type": "forge",
     "data": {
       "mintId": "CORE--rapp-basic-agent-0001",
@@ -4127,10 +4160,10 @@
           "action": "forge",
           "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
           "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-          "timestamp": "2026-04-04T00:02:18.000Z"
+          "timestamp": "2026-04-04T00:02:19.000Z"
         }
       ]
     },
-    "hash": "4caceec517fd10e840da2ffad1ede57fe8adcc7638b9c4997519ccc71b59b9eb"
+    "hash": "a656502d1f97c1592ab39ed2324d8764ef425cbc2de22e33744b28a8df6ab653"
   }
 ]

@@ -1,7 +1,7 @@
 {
-  "index": 119,
-  "timestamp": "2026-04-04T00:01:59.000Z",
-  "prevHash": "ed545a84366b99d99c18942cf4cf3e97bbb8700f42ff1f935ad8cee4d1b25286",
+  "index": 120,
+  "timestamp": "2026-04-04T00:02:00.000Z",
+  "prevHash": "bce043965672b00192312664e79cc61e3e0bbde2882244d79303a478f0ca0479",
   "type": "forge",
   "data": {
     "mintId": "CORE--borg-cardsmith-agent-0001",
@@ -22,9 +22,9 @@
         "action": "forge",
         "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
         "to": "ba4e91c3ba4b737a0b04edac19e017caeb0e0701",
-        "timestamp": "2026-04-04T00:01:59.000Z"
+        "timestamp": "2026-04-04T00:02:00.000Z"
       }
     ]
   },
-  "hash": "f6f9b10155be9af287aa5bb824fe1b97c95e7923b8eb0dafd8918fc458a3be1c"
+  "hash": "0aac45e94268d395511ce12295da4730636fb616a41e256ec3f54bbb2c7fad23"
 }

@@ -1,7 +1,7 @@
 {
-  "index": 1,
-  "timestamp": "2026-04-04T00:00:01.000Z",
-  "prevHash": "7542ad06e9ed6f1b71f845d171ec2bba953e42c717a4b2ccc540f157e39c9c5b",
+  "index": 2,
+  "timestamp": "2026-04-04T00:00:02.000Z",
+  "prevHash": "6b5cb443f3698aa283cd326be42965da2341d818ebff131dbef0c535e94e1a67",
   "type": "forge",
   "data": {
     "mintId": "HOLO-borg-0001",
@@ -20,9 +20,9 @@
         "action": "forge",
         "by": "b6e5691fbb4a25406e5ccacdaa77534a0d07e7ed",
         "to": "41eacba49218b45e9e3c8cccfdaccc107b40e87d",
-        "timestamp": "2026-04-04T00:00:01.000Z"
+        "timestamp": "2026-04-04T00:00:02.000Z"
       }
     ]
   },
-  "hash": "d88681a1363b7e71cf794370383ed095e8ed083347b9077b5559159fb13166e8"
+  "hash": "4a570749dad0f8e34ff1b3fa673b0f3b6ac1e648af2364609691682003799597"
 }
