@@ -16,7 +16,15 @@
       "voters": {
         "kody-w": "up"
       }
+    },
+    "@your-username/my_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "rappter1": "up"
+      }
     }
   },
-  "updated_at": "2026-04-04T22:00:01.663877+00:00"
+  "updated_at": "2026-04-04T22:17:28.261402+00:00"
 }
