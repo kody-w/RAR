@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-04T20:41:37.359828+00:00",
+  "generated_at": "2026-04-04T21:23:48.959054+00:00",
   "stats": {
-    "total_agents": 126,
+    "total_agents": 128,
     "publishers": 5,
     "categories": 19,
     "publisher_list": [
@@ -3190,6 +3190,34 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/deal-desk",
+      "version": "1.0.0",
+      "display_name": "DealDesk",
+      "description": "B2B sales intelligence deck \u2014 runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAR sales agents for deeper workflow.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "deck",
+        "deal",
+        "sales",
+        "b2b",
+        "account-intelligence",
+        "competitive",
+        "pipeline",
+        "crm"
+      ],
+      "category": "b2b_sales",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody/deal-desk.py",
+      "_size_kb": 10.1,
+      "_lines": 245,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/github_agent_library",
       "version": "1.0.0",
       "display_name": "GitHubAgentLibrary",
@@ -3287,6 +3315,36 @@
       "_file": "agents/@kody/rar_remote_agent.py",
       "_size_kb": 33.4,
       "_lines": 839,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/recon-deck",
+      "version": "1.0.0",
+      "display_name": "ReconDeck",
+      "description": "Multi-source intelligence deck \u2014 combines Borg assimilation, Rappterbook social intel, and HackerNews trends into a unified recon briefing on any topic.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "deck",
+        "recon",
+        "intelligence",
+        "borg",
+        "rappterbook",
+        "hackernews",
+        "briefing",
+        "multi-agent"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent",
+        "@borg/borg_agent",
+        "@kody/rappterbook"
+      ],
+      "_file": "agents/@kody/recon-deck.py",
+      "_size_kb": 6.9,
+      "_lines": 175,
       "_has_card": false
     },
     {
