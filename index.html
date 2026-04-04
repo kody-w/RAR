@@ -8631,33 +8631,9 @@ async function openPack(setId) {
       temp.innerHTML = cardHtml;
       const liveCard = temp.firstElementChild;
       liveCard.removeAttribute('id');
-      liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 0 60px ' + glowColor + '35) drop-shadow(0 20px 60px rgba(0,0,0,.8));cursor:pointer';
-      liveCard.onclick = () => openSlabViewer(c.mintId);
+      liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1';
       cardArea.appendChild(liveCard);
-
-      // Tilt tracking across the overlay
-      const holoEl = liveCard.querySelector('.agent-card-holo');
-      overlay.addEventListener('mousemove', e => {
-        const rect = cardArea.getBoundingClientRect();
-        const cx = (e.clientX - rect.left) / rect.width;
-        const cy = (e.clientY - rect.top) / rect.height;
-        const tiltX = ((0.5 - cy) * 25).toFixed(1);
-        const tiltY = ((cx - 0.5) * 25).toFixed(1);
-        const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
-        liveCard.style.setProperty('--tilt-x', tiltX + 'deg');
-        liveCard.style.setProperty('--tilt-y', tiltY + 'deg');
-        if (holoEl) {
-          const mxPct = (cx * 100).toFixed(0) + '%';
-          const myPct = (cy * 100).toFixed(0) + '%';
-          holoEl.style.setProperty('--mx', mxPct);
-          holoEl.style.setProperty('--my', myPct);
-          holoEl.style.setProperty('--px', cx.toFixed(3));
-          holoEl.style.setProperty('--py', cy.toFixed(3));
-          holoEl.style.setProperty('--angle', angle + 'deg');
-          const shimmer = holoEl.querySelector('.holo-shimmer-track');
-          if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
-        }
-      });
+      // Global initHoloTilt handler picks up tilt tracking automatically
     } else {
       // Fallback: render canvas if agent not in registry
       const canvas = document.createElement('canvas');
@@ -9795,32 +9771,9 @@ async function openSlabZoom(mintId) {
     temp.innerHTML = cardHtml;
     const liveCard = temp.firstElementChild;
     liveCard.removeAttribute('id');
-    liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 0 60px ' + glowColor + '40) drop-shadow(0 20px 60px rgba(0,0,0,.8))';
+    liveCard.style.cssText = 'width:100%;height:100%;position:relative;z-index:1';
     cardWrap.appendChild(liveCard);
-
-    // Tilt tracking on mousemove across the whole overlay
-    const holoEl = liveCard.querySelector('.agent-card-holo');
-    zoom.addEventListener('mousemove', e => {
-      const rect = cardWrap.getBoundingClientRect();
-      const cx = (e.clientX - rect.left) / rect.width;
-      const cy = (e.clientY - rect.top) / rect.height;
-      const tiltX = ((0.5 - cy) * 25).toFixed(1);
-      const tiltY = ((cx - 0.5) * 25).toFixed(1);
-      const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
-      liveCard.style.setProperty('--tilt-x', tiltX + 'deg');
-      liveCard.style.setProperty('--tilt-y', tiltY + 'deg');
-      if (holoEl) {
-        const mxPct = (cx * 100).toFixed(0) + '%';
-        const myPct = (cy * 100).toFixed(0) + '%';
-        holoEl.style.setProperty('--mx', mxPct);
-        holoEl.style.setProperty('--my', myPct);
-        holoEl.style.setProperty('--px', cx.toFixed(3));
-        holoEl.style.setProperty('--py', cy.toFixed(3));
-        holoEl.style.setProperty('--angle', angle + 'deg');
-        const shimmer = holoEl.querySelector('.holo-shimmer-track');
-        if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
-      }
-    });
+    // Global initHoloTilt handler picks up tilt tracking automatically
   } else {
     // Fallback: render canvas if agent not found in registry
     const W = 500, H = 700;
