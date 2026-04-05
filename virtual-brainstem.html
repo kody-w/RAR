@@ -2341,7 +2341,8 @@ async function selectAgent(name) {
 function showInfoBar(entry, result) {
   const bar = document.getElementById('infoBar');
   bar.style.display = 'flex';
-  document.getElementById('welcome').style.display = 'none';
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
   document.getElementById('agentTitle').textContent = entry.display_name || entry.name;
   document.getElementById('agentMeta').textContent = `${entry.category || ''} | v${entry.version || '?'} | ${entry.quality_tier || 'community'}`;
 
@@ -2368,7 +2369,11 @@ function runOp() {
 
 function clearTerminal() {
   const term = document.getElementById('terminal');
-  term.innerHTML = '';
+  // Remove all children except the welcome div
+  const children = [...term.childNodes];
+  for (const child of children) {
+    if (child.id !== 'welcome') term.removeChild(child);
+  }
 }
 
 function appendOutput(text, type) {
@@ -2524,7 +2529,8 @@ async function handleDrop(event) {
 
 function runTests() {
   clearTerminal();
-  document.getElementById('welcome').style.display = 'none';
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
   document.getElementById('infoBar').style.display = 'none';
   appendOutput('=== Virtual Brainstem Test Suite ===', 'system');
   appendOutput('', 'system');
