@@ -312,8 +312,15 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 
 .chat-model-bar {
   padding:4px 20px; font-size:.7rem; color:var(--text-muted); text-align:center;
-  border-top:1px solid var(--border);
+  border-top:1px solid var(--border); display:flex; align-items:center; justify-content:center; gap:8px;
 }
+.model-select {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
+  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
+  max-width:260px;
+}
+.model-select:focus { border-color:var(--accent); }
+.model-select option { background:var(--surface); color:var(--text); }
 
 /* Responsive */
 @media (max-width:768px) {
@@ -365,7 +372,10 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
       </div>
     </div>
   </div>
-  <div class="chat-model-bar" id="chatModelBar">GitHub Models -- sign in to start chatting</div>
+  <div class="chat-model-bar" id="chatModelBar">
+    <span id="chatModelLabel">GitHub Models -- sign in to start chatting</span>
+    <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
+  </div>
   <div class="chat-input-bar">
     <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" disabled>
     <button class="chat-send" id="chatSend" onclick="sendChat()" disabled>Send</button>
@@ -2968,12 +2978,13 @@ function runTests() {
 // ═══════════════════════════════════════════════════════════════════════
 
 const GH_MODELS_URL = 'https://models.inference.ai.azure.com/chat/completions';
-const GH_MODELS_MODEL = 'gpt-4o-mini';
 const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
 const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
 
 let chatToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token') || null;
 let chatUser = null;
+let chatModel = localStorage.getItem('vb_model') || 'gpt-4o-mini';
+let availableModels = [];
 let chatHistory = [];
 let chatBusy = false;
 
@@ -3125,7 +3136,7 @@ async function callGitHubModels(messages) {
       'Authorization': `Bearer ${chatToken}`
     },
     body: JSON.stringify({
-      model: GH_MODELS_MODEL,
+      model: chatModel,
       messages,
       tools: CHAT_TOOLS,
       tool_choice: 'auto',
@@ -3345,30 +3356,77 @@ function updateGHPill() {
   const label = document.getElementById('ghLabel');
   const input = document.getElementById('chatInput');
   const send = document.getElementById('chatSend');
-  const modelBar = document.getElementById('chatModelBar');
+  const modelLabel = document.getElementById('chatModelLabel');
+  const modelSelect = document.getElementById('modelSelect');
 
-  if (chatToken && chatUser) {
+  if (chatToken) {
     dot.className = 'gh-dot on';
-    label.textContent = chatUser;
+    label.textContent = chatUser || 'Connected';
     input.disabled = false;
     send.disabled = false;
     input.placeholder = 'Ask me anything...';
-    modelBar.textContent = `${GH_MODELS_MODEL} via GitHub Models`;
-  } else if (chatToken) {
-    dot.className = 'gh-dot on';
-    label.textContent = 'Connected';
-    input.disabled = false;
-    send.disabled = false;
-    input.placeholder = 'Ask me anything...';
-    modelBar.textContent = `${GH_MODELS_MODEL} via GitHub Models`;
+    modelLabel.textContent = 'Model:';
+    modelSelect.style.display = '';
   } else {
     dot.className = 'gh-dot off';
     label.textContent = 'Sign in';
     input.disabled = true;
     send.disabled = true;
     input.placeholder = 'Sign in with GitHub to chat...';
-    modelBar.textContent = 'GitHub Models -- sign in to start chatting';
+    modelLabel.textContent = 'GitHub Models -- sign in to start chatting';
+    modelSelect.style.display = 'none';
   }
+}
+
+async function fetchModels() {
+  if (!chatToken) return;
+  try {
+    const resp = await fetch('https://models.inference.ai.azure.com/models', {
+      headers: { 'Authorization': `Bearer ${chatToken}` }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    // Filter to chat/completion models that support tool calls
+    const models = (data.data || data || [])
+      .filter(m => {
+        const id = m.id || m.name || '';
+        const caps = m.capabilities || {};
+        // Include models that support chat completions
+        if (caps.chat_completion === false) return false;
+        // Skip embedding/image-only models
+        if (/embed|whisper|dall-e|tts/i.test(id)) return false;
+        return true;
+      })
+      .map(m => m.id || m.name)
+      .sort();
+
+    if (models.length > 0) {
+      availableModels = models;
+      populateModelSelect(models);
+    }
+  } catch(e) {
+    console.warn('Failed to fetch models:', e.message);
+    // Fall back to known defaults
+    populateModelSelect(['gpt-4o-mini', 'gpt-4o', 'gpt-4.1-mini', 'gpt-4.1-nano']);
+  }
+}
+
+function populateModelSelect(models) {
+  const select = document.getElementById('modelSelect');
+  select.innerHTML = models.map(m =>
+    `<option value="${m}" ${m === chatModel ? 'selected' : ''}>${m}</option>`
+  ).join('');
+  // If saved model not in list, select first
+  if (!models.includes(chatModel) && models.length > 0) {
+    chatModel = models[0];
+    select.value = chatModel;
+    localStorage.setItem('vb_model', chatModel);
+  }
+}
+
+function selectModel(model) {
+  chatModel = model;
+  localStorage.setItem('vb_model', model);
 }
 
 async function fetchGHUser() {
@@ -3426,6 +3484,7 @@ async function handleAuthCallback() {
       chatToken = data.access_token;
       localStorage.setItem('rb_access_token', chatToken);
       await fetchGHUser();
+      fetchModels();
     }
   } catch(e) {
     console.error('Auth failed:', e);
@@ -3442,7 +3501,10 @@ async function handleAuthCallback() {
   await handleAuthCallback();
 
   // Check existing token
-  if (chatToken) await fetchGHUser();
+  if (chatToken) {
+    await fetchGHUser();
+    fetchModels(); // non-blocking — populates dropdown in background
+  }
   updateGHPill();
 
   // Load registry for lab mode (background)
