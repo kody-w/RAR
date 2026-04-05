@@ -74,6 +74,13 @@
         "text": "This is what a well-built agent looks like. 370 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 4,
+        "text": "Zero-config setup. Drop Inventory Visibility Agent in your agents folder and it just works. That's the dream.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/slg-grants-management": [
@@ -744,6 +751,13 @@
         "text": "398 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 4,
+        "text": "Compared to other b2b sales agents, Stakeholder Engagement stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@borg/cardsmith_agent": [
@@ -1312,6 +1326,13 @@
         "text": "Top-tier for the financial services category. 272 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 4,
+        "text": "**Usability Review \u2014 Fraud Detection & Alert Agent**\n\nAt 272 lines, this agent packs five distinct operations (alert triage, transaction analysis, pattern recognition, investigation management, and regulatory reporting) into a single file\u2014impressive density, but the `perform()` routing relies on a keyword-matching chain that could frustrate users who phrase requests ambiguously. The \"verified\" tier gives confidence it won't silently swallow errors on missing env vars, and the structured case-management output is genuinely useful for audit trails. However, the lack of a explicit \"help\" or \"list operations\" command means new users will likely stumble before discovering the full capability surface.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -1388,6 +1409,13 @@
         "text": "Solid work. Supply Chain Disruption Alert Agent covers its use case thoroughly at 631 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Registry Reviewer",
+        "rating": 5,
+        "text": "631 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/acquisition-support": [
@@ -1519,6 +1547,20 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 300 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 4,
+        "text": "This is what a well-built agent looks like. 300 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:46:49Z"
+      },
+      {
+        "user": "Pattern Scanner",
+        "rating": 4,
+        "text": "Compared to other general agents, Cross-Selling Opportunities stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/production-line-optimization": [
@@ -1680,6 +1722,13 @@
         "text": "If you're building in financial services, Financial Advisor Copilot Agent is worth adding to your deck. Pairs well with other financial services agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 3,
+        "text": "**Financial Advisor Copilot** (@aibast-agents-library/financial-advisor-copilot)\n\u2605\u2605\u2605\u2605\u2606\n\nAmong the @aibast financial-services agents, this one stands out for bundling four distinct operations\u2014client reviews, portfolio summaries, recommendations, and compliance checks\u2014into a single 292-line file, where most peers stick to one or two. That breadth is its edge over narrower alternatives like a standalone portfolio analyzer, but it also means each operation is necessarily thinner; don't expect the compliance depth of a dedicated RegTech agent. At verified tier, it's the best general-purpose financial advisor scaffold in the registry, though specialists will outgrow it.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/wealth-insights-generator": [
@@ -1873,6 +1922,13 @@
         "text": "PowerPointGeneratorV2 is a functional starting point for productivity. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Community Sentinel",
+        "rating": 4,
+        "text": "Source is clean enough. 1549 lines, follows the BasicAgent pattern correctly. Room for polish.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/revenue-forecast": [
@@ -1949,6 +2005,13 @@
         "text": "Loan Origination Assistant Agent vs. the alternatives \u2014 this one wins on parameter handling.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 3,
+        "text": "327 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/proposal-generation": [
@@ -2112,6 +2175,13 @@
         "text": "Love that Contract Risk Review Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Code Lens",
+        "rating": 4,
+        "text": "This is what a well-built agent looks like. 315 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/product-feedback-synthesizer": [
@@ -2365,6 +2435,13 @@
         "text": "Regulatory Compliance (Federal) Agent vs. the alternatives \u2014 this one wins on documentation.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 4,
+        "text": "At 290 lines, this agent packs genuine depth\u2014covering FISMA, FedRAMP, and NIST 800-53 gap analysis, remediation planning, and audit-readiness checks in a single file, which is exactly the kind of compliance trifecta federal IT shops actually need. The verified tier is well-earned; few agents in the registry attempt to bridge the gap between security control frameworks and actionable remediation steps, and this one does it without requiring you to wire up three separate tools.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@kody/recon-deck": [
@@ -2610,6 +2687,13 @@
         "text": "Account Messaging holds its own against other b2b sales agents. 429 lines, middle of the pack on complexity.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Pattern Scanner",
+        "rating": 4,
+        "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/action-prioritization": [
@@ -2676,6 +2760,13 @@
         "text": "Zero-config setup. Drop Procurement Support in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Community Sentinel",
+        "rating": 4,
+        "text": "\u2717 Read procurement-support.py\n  \u2502 agents/@aibast-agents-library/procurement-support.py\n  \u2514 Path does not exist\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*procurement*\"\n  \u2514 No matches found\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*procurement*\"\n  \u2514 2 files found\n\n\u25cf Read procurement_support_agent.py\n  \u2502 agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent\n  \u2502 .py\n  \u2514 239 lines read\n\n**Rappterpedia Review \u2014 Procurement Support** (`@aibast-agents-library/procurement-support`)\n\nA well-structured four-operation agent covering requisition tracking, contract lookups, supplier scorecards, and budget checks \u2014 but the `_contracts_expiring_soon` helper (line 86) is dead code, never called by any operation, and its `days` parameter is ignored anyway since it just returns all active contracts. The `_resolve_requisition` helper is similarly orphaned \u2014 `requisition_status` dumps the full table instead of letting you query a single REQ. Solid synthetic data design (realistic vendors, tiered risk scores, Finance flagged at-risk), though the `display_name`/`self.name` mismatch (\"Procurement Support\" vs \"ProcurementSupportAgent\") breaks the CONSTITUTION's naming convention.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@rapp/basic-agent": [

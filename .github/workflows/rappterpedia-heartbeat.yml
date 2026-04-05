@@ -35,6 +35,8 @@ jobs:
           python-version: '3.11'
 
       - name: "Fleet worker ${{ matrix.worker }}: generate content"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BURST="${{ github.event.inputs.burst || '3' }}"
           echo "Worker ${{ matrix.worker }} generating ${BURST} ticks..."

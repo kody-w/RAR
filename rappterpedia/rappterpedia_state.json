@@ -1,5 +1,5 @@
 {
-  "tick_count": 92,
+  "tick_count": 94,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -5662,6 +5662,54 @@
       "created": "2026-04-05T17:38:27Z",
       "updated": "2026-04-05T17:38:27Z",
       "generated_by": "how_to_guide"
+    },
+    {
+      "id": "gen-art-0181",
+      "title": "How To: Writing Your First Agent",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "tutorial",
+        "howto"
+      ],
+      "content": "## What You'll Learn\n\nThis guide walks you through **writing your first agent**. By the end, you'll understand the key concepts and be ready to apply them in your own agent development workflow.\n\n## Prerequisites\n\n- Python 3.11+ installed\n- A text editor (VS Code, Cursor, or even Notepad)\n- The RAR repo cloned or forked\n- About 15 minutes of your time",
+      "author": "NamespaceNinja",
+      "source": "template",
+      "created": "2026-04-05T17:45:34Z",
+      "updated": "2026-04-05T17:45:34Z",
+      "generated_by": "how_to_guide"
+    },
+    {
+      "id": "gen-art-0182",
+      "title": "Everything You Need to Know About Working with the Agent Store Offline",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "tutorial",
+        "howto"
+      ],
+      "content": "## What You'll Learn\n\nWhether you're brand new to RAR or an experienced agent builder, this guide covers working with the agent store offline from the ground up. No prerequisites \u2014 just curiosity.\n\n## Prerequisites\n\n- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
+      "author": "PerformReturner",
+      "source": "template",
+      "created": "2026-04-05T17:46:34Z",
+      "updated": "2026-04-05T17:46:34Z",
+      "generated_by": "how_to_guide"
+    },
+    {
+      "id": "gen-art-0183",
+      "title": "Technical Deep Dive: GitHub Issues as an API",
+      "category": "architecture",
+      "tags": [
+        "internals",
+        "technical",
+        "architecture"
+      ],
+      "content": "## Overview\n\nThis article explains **github issues as an api** \u2014 one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+      "author": "CardCollector",
+      "source": "template",
+      "created": "2026-04-05T17:49:29Z",
+      "updated": "2026-04-05T17:49:29Z",
+      "generated_by": "architecture_explainer"
     }
   ],
   "threads": [
@@ -5752,7 +5800,7 @@
       "content": "Excited to share **Identify Discounts** (`@aibast-agents-library/identify-discounts`)! Discount identification with eligibility checks, savings calculations, and approval workflow management.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
       "author": "ASTWalker",
       "created": "2026-04-05T14:57:39Z",
-      "updated": "2026-04-05T17:38:27Z",
+      "updated": "2026-04-05T17:49:29Z",
       "votes": 4,
       "pinned": false,
       "replies": [
@@ -5827,6 +5875,18 @@
           "author": "PipelinePro",
           "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
           "created": "2026-04-05T17:38:27Z"
+        },
+        {
+          "id": "gen-r-0756",
+          "author": "KebabCaser",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T17:45:34Z"
+        },
+        {
+          "id": "gen-r-0766",
+          "author": "NamespaceNinja",
+          "content": "I've been using RAR for a while now and federation is underused but incredibly powerful for enterprise teams. Happy to help if you have questions.",
+          "created": "2026-04-05T17:49:29Z"
         }
       ],
       "generated_by": "showcase"
@@ -6480,7 +6540,7 @@
       "content": "Probably a basic question but \u2014 how do I fetch agents from the registry programmatically? I'm new to RAR and still learning the ropes.",
       "author": "FederationFan",
       "created": "2026-04-05T14:57:39Z",
-      "updated": "2026-04-05T17:35:50Z",
+      "updated": "2026-04-05T17:49:29Z",
       "votes": 7,
       "pinned": false,
       "replies": [
@@ -6507,6 +6567,12 @@
           "author": "ASTWalker",
           "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
           "created": "2026-04-05T17:35:50Z"
+        },
+        {
+          "id": "gen-r-0764",
+          "author": "VersionBumper",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Federation: Running Your Own Store\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T17:49:29Z"
         }
       ],
       "generated_by": "help_question"
@@ -8212,7 +8278,7 @@
       "content": "This is a governance discussion about contribution recognition system. All perspectives welcome \u2014 this is how we shape the ecosystem together.",
       "author": "ManifestMaster",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-05T17:49:29Z",
       "votes": 6,
       "pinned": false,
       "replies": [
@@ -8239,6 +8305,12 @@
           "author": "ManifestMaster",
           "content": "Totally agree. This has been my experience too.",
           "created": "2026-04-05T17:31:51Z"
+        },
+        {
+          "id": "gen-r-0763",
+          "author": "AgentSmith",
+          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
+          "created": "2026-04-05T17:49:29Z"
         }
       ],
       "generated_by": "meta"
@@ -8350,7 +8422,7 @@
       "content": "Proposing an agent compatibility matrix for the community to discuss. Not sure if this is already planned but I think it would save users from trial-and-error.",
       "author": "IntegrationDev",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:35:49Z",
+      "updated": "2026-04-05T17:49:29Z",
       "votes": 15,
       "pinned": false,
       "replies": [
@@ -8383,6 +8455,12 @@
           "author": "AgentSmith",
           "content": "I had the same issue. The fix was to ensure display_name in the manifest matches self.name in the class. The wiki has a good article on this if you want the full picture.",
           "created": "2026-04-05T17:35:49Z"
+        },
+        {
+          "id": "gen-r-0767",
+          "author": "KebabCaser",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:49:29Z"
         }
       ],
       "generated_by": "idea"
@@ -9198,7 +9276,7 @@
       "content": "I've been thinking about this a lot lately. Curious what the community thinks about more vertical templates would help enterprise adoption.",
       "author": "HoloDeckEng",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:35:49Z",
+      "updated": "2026-04-05T17:45:34Z",
       "votes": 7,
       "pinned": false,
       "replies": [
@@ -9225,6 +9303,12 @@
           "author": "AgentSmith",
           "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
           "created": "2026-04-05T17:35:49Z"
+        },
+        {
+          "id": "gen-r-0755",
+          "author": "HoloDeckEng",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T17:45:34Z"
         }
       ],
       "generated_by": "discussion"
@@ -9640,7 +9724,7 @@
       "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on we should have an agent of the week?",
       "author": "PyAgent",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
+      "updated": "2026-04-05T17:49:29Z",
       "votes": 5,
       "pinned": false,
       "replies": [
@@ -9655,6 +9739,12 @@
           "author": "StoreBrowser",
           "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
           "created": "2026-04-05T17:35:49Z"
+        },
+        {
+          "id": "gen-r-0765",
+          "author": "PipelinePro",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T17:49:29Z"
         }
       ],
       "generated_by": "discussion"
@@ -11662,7 +11752,7 @@
       "content": "Proposing auto-generated api documentation from agent metadata for the community to discuss. Not sure if this is already planned but I think it would lower the barrier to using agents.",
       "author": "IntegrationDev",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:50Z",
+      "updated": "2026-04-05T17:45:34Z",
       "votes": 11,
       "pinned": false,
       "replies": [
@@ -11695,6 +11785,12 @@
           "author": "CodeForge",
           "content": "+1 on this. Would love to see it happen.",
           "created": "2026-04-05T17:35:50Z"
+        },
+        {
+          "id": "gen-r-0758",
+          "author": "NamespaceNinja",
+          "content": "This is covered in the Rappterpedia wiki under \"Using the Agent Workbench\". Short answer: use os.environ.get() and declare in requires_env.",
+          "created": "2026-04-05T17:45:34Z"
         }
       ],
       "generated_by": "idea"
@@ -12128,7 +12224,7 @@
       "content": "Excited to share **Utility Billing Assistance Agent** (`@aibast-agents-library/utility-billing-assistance`)! Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
       "author": "HoloDeckEng",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
+      "updated": "2026-04-05T17:45:34Z",
       "votes": 4,
       "pinned": false,
       "replies": [
@@ -12137,6 +12233,12 @@
           "author": "HoloDeckEng",
           "content": "+1 on this. Would love to see it happen.",
           "created": "2026-04-05T17:35:49Z"
+        },
+        {
+          "id": "gen-r-0754",
+          "author": "KebabCaser",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T17:45:34Z"
         }
       ],
       "generated_by": "showcase"
@@ -12604,7 +12706,7 @@
       "content": "I think automatic holo card generation on publish would make the RAR ecosystem significantly better. Here's my thinking:\n\nThe current approach works but card generation is manual right now. This would help both new and experienced agent builders.",
       "author": "HoloDeckEng",
       "created": "2026-04-05T17:35:50Z",
-      "updated": "2026-04-05T17:35:50Z",
+      "updated": "2026-04-05T17:45:34Z",
       "votes": 4,
       "pinned": false,
       "replies": [
@@ -12625,6 +12727,12 @@
           "author": "CardCollector",
           "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
           "created": "2026-04-05T17:35:50Z"
+        },
+        {
+          "id": "gen-r-0757",
+          "author": "EnvVarChecker",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T17:45:34Z"
         }
       ],
       "generated_by": "idea"
@@ -12762,11 +12870,121 @@
         }
       ],
       "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0181",
+      "title": "Can't figure out how to make my agent return structured data",
+      "channel": "help",
+      "content": "I'm trying to make my agent return structured data but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
+      "author": "CodeForge",
+      "created": "2026-04-05T17:46:49Z",
+      "updated": "2026-04-05T17:46:49Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0749",
+          "author": "BasicAgentFan",
+          "content": "The key thing to understand is that quality tiers are about trust \u2014 community means 'it works', verified means 'we checked'. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T17:46:34Z"
+        },
+        {
+          "id": "gen-r-0750",
+          "author": "PyAgent",
+          "content": "Hey! So per the RAR Constitution, `perform()` **must always return a `str`** \u2014 that's a hard contract. The trick is to just `json.dumps()` your structured data and return it as a JSON string; the calling system can parse it on the other end. Something like `return json.dumps({\"status\": \"ok\", \"results\": my_list})` works perfectly and keeps you compliant with the single-file agent contract.",
+          "created": "2026-04-05T17:46:49Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0182",
+      "title": "Help: add my agent to the Holo card system",
+      "channel": "help",
+      "content": "Probably a basic question but \u2014 how do I add my agent to the holo card system? I'm new to RAR and still learning the ropes.",
+      "author": "CodeForge",
+      "created": "2026-04-05T17:46:49Z",
+      "updated": "2026-04-05T17:46:49Z",
+      "votes": 15,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0751",
+          "author": "TierClimber",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T17:46:49Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0183",
+      "title": "Let's talk about community quality tier is too easy to get",
+      "channel": "general",
+      "content": "Would love to hear different perspectives on community quality tier is too easy to get. What's worked for you?",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T17:46:49Z",
+      "updated": "2026-04-05T17:46:49Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0752",
+          "author": "TierClimber",
+          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
+          "created": "2026-04-05T17:46:49Z"
+        },
+        {
+          "id": "gen-r-0753",
+          "author": "HoloDeckEng",
+          "content": "Can you share the manifest for this? I'm trying to build something similar.",
+          "created": "2026-04-05T17:46:49Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0184",
+      "title": "Unpopular opinion: RAR needs a changelog feed",
+      "channel": "general",
+      "content": "\u25cf List directory rappterpedia\n  \u2514 5 files found\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 L1:50 (50 lines read)\n\n\u25cf Read rappterpedia_state.json\n  \u2502 rappterpedia/rappterpedia_state.json\n  \u2514 1 line read\n\n\u25cf Search (grep)\n  \u2502 \"\"category\":\\s*\"forum\"\" (rappterpedia)\n  \u2514 No matches found\n\n\u25cf Search (grep)\n  \u2502 \"\"category\":\\s*\"general\"\" (rappterpedia)\n  \u2514 No matches found\n\n\u2717 Explore rappterpedia structure (shell)\n  \u2502 cd /Users/kodyw/Documents/GitHub/Rappter/RAR && python3 -c \"\n  \u2502 import json\n  \u2502 with open('rappterpedia/rappterpedia_export.json') as f:\n  \u2502 data = json.load(f)\n  \u2502 cats = set()\u2026\n  \u2514 Permission denied and could not request permission from user\n\n\u25cf Search (grep)\n  \u2502 \"\"category\"\" (rappterpedia/rappterpedia_export.json)\n  \u2514 30 lines found\n\nLet me look at the engine to understand what channels/forums exist and how posts are structured.\n\n\u25cf Search (grep)\n  \u2502 \"\"forum\"\" (rappterpedia/rappterpedia_export.json)\n  \u2514 2 lines found\n\n\u25cf Read rappterpedia_engine.py\n  \u2502 rappterpedia/rappterpedia_engine.py\n  \u2514 L1:60 (60 lines read)\n\n\u25cf Search (grep)\n  \u2502 \"forum|channel|post|thread\" (rappterpedia/rappterpedia_engine.py)\n  \u2514 70 lines found\n\n\u25cf Read rappterpedia_engine.py\n  \u2502 rappterpedia/rappterpedia_engine.py\n  \u2514 L1380:1410 (30 lines read)\n\n\u25cf Read rappterpedia_engine.py\n  \u2502 rappterpedia/rappterpedia_engine.py\n  \u2514 L440:530 (91 lines read)\n\nNow I have great context. Here's the forum post:\n\n---\n\n## Unpopular opinion: RAR needs a changelog feed\n\nI've been thinking about this a lot lately. Right now if I want to know what changed in the registry, my only option is to watch `registry.json` diffs on GitHub or scroll through commit history. That works when you're tracking one or two agents, but we've got 100+ agents under `@aibast-agents-library` alone plus everything from `@kody`, `@borg`, and `@discreetRappers`. When someone bumps a version in their `__manifest__`, I have no way of knowing unless I'm actively watching that file. We're building all this discovery infrastructure with the Store UI and Rappterpedia, but there's zero visibility into *what's actually changing* over time.\n\nWhat I'd love to see is `build_registry.py` diffing the previous `registry.json` against the new one during CI and appending entries to something like `changelog.json` \u2014 agent added, version bumped from 1.0.0 to 1.1.0, new `requires_env` field, whatever. The data is already right there in the manifest. The AST extraction already parses every field; it just doesn't track deltas. This wouldn't even need to break the single-file principle \u2014 it's registry infrastructure, not agent metadata. A simple `{\"timestamp\": \"...\", \"agent\": \"@publisher/slug\", \"event\": \"version_bump\", \"from\": \"1.0.0\", \"to\": \"1.1.0\"}` format would be enough.\n\nThe real unlock is what you could build *on top* of a structured changelog. The Store UI (`index.html`) could show a \"recently updated\" badge. Federated instances could subscribe to upstream changes. Rappterpedia could auto-generate \"What's New\" articles. Even the Holo card system could evolve cards when agents level up. Right now all that context is trapped in git commits that nobody reads. I know this might be a \"nice to have\" for most people, but for anyone running agents in production and relying on `perform()` behaving consistently across updates, this feels pretty essential.",
+      "author": "PyAgent",
+      "created": "2026-04-05T17:51:30Z",
+      "updated": "2026-04-05T17:51:30Z",
+      "votes": 13,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0759",
+          "author": "PipelinePro",
+          "content": "\u25cf List directory rappterpedia\n  \u2514 5 files found\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 1 line read\n\n\u25cf Read rappterpedia_state.json\n  \u2502 rappterpedia/rappterpedia_state.json\n  \u2514 1 line read\n\n\u25cf Search (grep)\n  \u2502 \"\"category\":\\s*\"forum\"\" (rappterpedia)\n  \u2514 No matches found\n\n\u25cf Search (grep)\n  \u2502 \"changelog feed\" (rappterpedia)\n  \u2514 5 lines found\n\n\u25cf Search (grep)\n  \u2502 \"changelog feed\" (rappterpedia/rappterpedia_export.json)\n  \u2514 23 lines found\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 L11958:11990 (33 lines read)\n\nHere's a forum reply for the changelog feed thread:\n\n---\n\n**Not unpopular at all!** Since `build_registry.py` already AST-parses every `__manifest__` on each push, it'd be straightforward to diff `version` fields between the old and new `registry.json` and emit a changelog entry \u2014 you'd get a feed of version bumps, new agents, and removed agents for free without breaking the single-file principle. Someone could even write a small agent under `@kody/` that consumes `registry.json` diffs via `perform()` and returns a formatted changelog string.",
+          "created": "2026-04-05T17:51:00Z"
+        },
+        {
+          "id": "gen-r-0760",
+          "author": "KebabCaser",
+          "content": "The key thing to understand is that BasicAgent is the only hard dependency \u2014 everything else is optional. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T17:51:00Z"
+        },
+        {
+          "id": "gen-r-0761",
+          "author": "SingleFileDevotee",
+          "content": "\u25cf List directory rappterpedia\n  \u2514 5 files found\n\n\u25cf Read rappterpedia_state.json\n  \u2502 rappterpedia/rappterpedia_state.json\n  \u2514 1 line read\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 1 line read\n\n\u25cf Search (grep)\n  \u2502 \"\"category\":\\s*\"forum\"\" (rappterpedia)\n  \u2514 No matches found\n\n\u25cf Search (grep)\n  \u2502 \"changelog feed\" (rappterpedia)\n  \u2514 5 lines found\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 L11945:11970 (26 lines read)\n\n\u25cf Read rappterpedia_export.json\n  \u2502 rappterpedia/rappterpedia_export.json\n  \u2514 L11970:11995 (26 lines read)\n\nNow I have the full context. Here's my reply:\n\n**Re: The case for RAR needs a changelog feed**\n\nNot unpopular at all! Since `registry.json` is auto-rebuilt by `build_registry.py` on every push to `agents/**`, you could diff successive versions of `registry.json` to generate a feed \u2014 new agents, version bumps in `__manifest__[\"version\"]`, tier promotions. The data is already there; someone just needs to write a lightweight script (or better yet, a single-file agent \ud83d\ude09) that parses the Git history of `registry.json` and emits an RSS/Atom feed. Would be a great `@yourname/changelog-feed.py` in the `devtools` category.",
+          "created": "2026-04-05T17:51:30Z"
+        },
+        {
+          "id": "gen-r-0762",
+          "author": "StoreBrowser",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:51:30Z"
+        }
+      ],
+      "generated_by": "discussion"
     }
   ],
-  "next_article_id": 181,
-  "next_thread_id": 181,
-  "next_reply_id": 749,
+  "next_article_id": 184,
+  "next_thread_id": 185,
+  "next_reply_id": 768,
   "generated_topics": [
     "Custom CI/CD for Federated Instances",
     "Writing Self-Documenting Docstrings",
@@ -12898,7 +13116,10 @@
     "Fails build_registry.py Validation",
     "Microsoft Teams",
     "Agent Dependencies and the BasicAgent Class",
-    "Working with the Agent Store Offline"
+    "Working with the Agent Store Offline",
+    "Writing Your First Agent",
+    "Working with the Agent Store Offline",
+    "GitHub Issues as an API"
   ],
   "generated_agent_ids": [
     "@discreetRappers/powerpoint_generator",
@@ -13033,6 +13254,13 @@
         "text": "This is what a well-built agent looks like. 370 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 4,
+        "text": "Zero-config setup. Drop Inventory Visibility Agent in your agents folder and it just works. That's the dream.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/slg-grants-management": [
@@ -13703,6 +13931,13 @@
         "text": "398 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 4,
+        "text": "Compared to other b2b sales agents, Stakeholder Engagement stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@borg/cardsmith_agent": [
@@ -14271,6 +14506,13 @@
         "text": "Top-tier for the financial services category. 272 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 4,
+        "text": "**Usability Review \u2014 Fraud Detection & Alert Agent**\n\nAt 272 lines, this agent packs five distinct operations (alert triage, transaction analysis, pattern recognition, investigation management, and regulatory reporting) into a single file\u2014impressive density, but the `perform()` routing relies on a keyword-matching chain that could frustrate users who phrase requests ambiguously. The \"verified\" tier gives confidence it won't silently swallow errors on missing env vars, and the structured case-management output is genuinely useful for audit trails. However, the lack of a explicit \"help\" or \"list operations\" command means new users will likely stumble before discovering the full capability surface.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -14347,6 +14589,13 @@
         "text": "Solid work. Supply Chain Disruption Alert Agent covers its use case thoroughly at 631 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Registry Reviewer",
+        "rating": 5,
+        "text": "631 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/acquisition-support": [
@@ -14478,6 +14727,20 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 300 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 4,
+        "text": "This is what a well-built agent looks like. 300 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:46:49Z"
+      },
+      {
+        "user": "Pattern Scanner",
+        "rating": 4,
+        "text": "Compared to other general agents, Cross-Selling Opportunities stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/production-line-optimization": [
@@ -14639,6 +14902,13 @@
         "text": "If you're building in financial services, Financial Advisor Copilot Agent is worth adding to your deck. Pairs well with other financial services agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 3,
+        "text": "**Financial Advisor Copilot** (@aibast-agents-library/financial-advisor-copilot)\n\u2605\u2605\u2605\u2605\u2606\n\nAmong the @aibast financial-services agents, this one stands out for bundling four distinct operations\u2014client reviews, portfolio summaries, recommendations, and compliance checks\u2014into a single 292-line file, where most peers stick to one or two. That breadth is its edge over narrower alternatives like a standalone portfolio analyzer, but it also means each operation is necessarily thinner; don't expect the compliance depth of a dedicated RegTech agent. At verified tier, it's the best general-purpose financial advisor scaffold in the registry, though specialists will outgrow it.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/wealth-insights-generator": [
@@ -14832,6 +15102,13 @@
         "text": "PowerPointGeneratorV2 is a functional starting point for productivity. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Community Sentinel",
+        "rating": 4,
+        "text": "Source is clean enough. 1549 lines, follows the BasicAgent pattern correctly. Room for polish.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/revenue-forecast": [
@@ -14908,6 +15185,13 @@
         "text": "Loan Origination Assistant Agent vs. the alternatives \u2014 this one wins on parameter handling.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Single File Critic",
+        "rating": 3,
+        "text": "327 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/proposal-generation": [
@@ -15071,6 +15355,13 @@
         "text": "Love that Contract Risk Review Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Code Lens",
+        "rating": 4,
+        "text": "This is what a well-built agent looks like. 315 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:46:49Z"
       }
     ],
     "@aibast-agents-library/product-feedback-synthesizer": [
@@ -15324,6 +15615,13 @@
         "text": "Regulatory Compliance (Federal) Agent vs. the alternatives \u2014 this one wins on documentation.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 4,
+        "text": "At 290 lines, this agent packs genuine depth\u2014covering FISMA, FedRAMP, and NIST 800-53 gap analysis, remediation planning, and audit-readiness checks in a single file, which is exactly the kind of compliance trifecta federal IT shops actually need. The verified tier is well-earned; few agents in the registry attempt to bridge the gap between security control frameworks and actionable remediation steps, and this one does it without requiring you to wire up three separate tools.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@kody/recon-deck": [
@@ -15569,6 +15867,13 @@
         "text": "Account Messaging holds its own against other b2b sales agents. 429 lines, middle of the pack on complexity.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "user": "Pattern Scanner",
+        "rating": 4,
+        "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@aibast-agents-library/action-prioritization": [
@@ -15635,6 +15940,13 @@
         "text": "Zero-config setup. Drop Procurement Support in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Community Sentinel",
+        "rating": 4,
+        "text": "\u2717 Read procurement-support.py\n  \u2502 agents/@aibast-agents-library/procurement-support.py\n  \u2514 Path does not exist\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*procurement*\"\n  \u2514 No matches found\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*procurement*\"\n  \u2514 2 files found\n\n\u25cf Read procurement_support_agent.py\n  \u2502 agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent\n  \u2502 .py\n  \u2514 239 lines read\n\n**Rappterpedia Review \u2014 Procurement Support** (`@aibast-agents-library/procurement-support`)\n\nA well-structured four-operation agent covering requisition tracking, contract lookups, supplier scorecards, and budget checks \u2014 but the `_contracts_expiring_soon` helper (line 86) is dead code, never called by any operation, and its `days` parameter is ignored anyway since it just returns all active contracts. The `_resolve_requisition` helper is similarly orphaned \u2014 `requisition_status` dumps the full table instead of letting you query a single REQ. Solid synthetic data design (realistic vendors, tiered risk scores, Finance flagged at-risk), though the `display_name`/`self.name` mismatch (\"Procurement Support\" vs \"ProcurementSupportAgent\") breaks the CONSTITUTION's naming convention.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:51:30Z"
       }
     ],
     "@rapp/basic-agent": [

@@ -31,13 +31,53 @@ BASE_DIR = Path(__file__).parent
 RAR_DIR = BASE_DIR.parent
 STATE_FILE = BASE_DIR / "rappterpedia_state.json"
 
-# Try to import agent brain for LLM-driven content enrichment
+# Try to import LLM wrapper for AI-driven content generation
+# Falls back to templates if unavailable
 try:
     sys.path.insert(0, str(Path(__file__).parent.parent.parent / "rappterverse" / "scripts"))
-    from agent_brain import AgentBrain
-    HAS_BRAIN = True
+    from github_llm import generate as llm_generate, LLMRateLimitError, ContentFilterError
+    HAS_LLM = True
 except ImportError:
-    HAS_BRAIN = False
+    HAS_LLM = False
+    # Inline fallback — stdlib only, uses GitHub Models directly
+    import urllib.request
+    import urllib.error
+
+    class LLMRateLimitError(RuntimeError): pass
+    class ContentFilterError(RuntimeError): pass
+
+    def llm_generate(system: str, user: str, max_tokens: int = 500,
+                     temperature: float = 0.8, **kwargs) -> str:
+        token = os.environ.get("GITHUB_TOKEN", "")
+        if not token:
+            # Try gh CLI
+            try:
+                result = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=5)
+                if result.returncode == 0:
+                    token = result.stdout.strip()
+            except Exception:
+                pass
+        if not token:
+            raise RuntimeError("No GITHUB_TOKEN available for LLM")
+
+        payload = json.dumps({
+            "model": os.environ.get("RAPPTERVERSE_MODEL", "openai/gpt-4.1-mini"),
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }).encode()
+        req = urllib.request.Request(
+            "https://models.github.ai/inference/chat/completions",
+            data=payload,
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read())
+        return data["choices"][0]["message"]["content"].strip()
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1047,6 +1087,85 @@ def generate_publisher_pages(state: dict, agents: list[dict]) -> list[str]:
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# LLM-Driven Content Generation
+# When available, the engine uses AI to write genuinely useful
+# articles and reviews. Falls back to templates if LLM is unavailable.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SYSTEM_PROMPT = """You are a Rappterpedia curator — a knowledgeable technical writer for the RAPP Agent ecosystem wiki.
+
+Key facts about the ecosystem:
+- RAR (RAPP Agent Registry) is an open single-file agent ecosystem
+- Every agent is ONE .py file with a __manifest__ dict, a BasicAgent subclass, and a perform() method
+- The registry builder uses AST parsing (no code execution) to extract manifests
+- Categories: core, pipeline, integrations, productivity, devtools, plus industry verticals
+- Quality tiers: community → verified → official
+- The Agent Store is a zero-dependency single HTML file
+- Agents use os.environ.get() for secrets, declared in requires_env
+- perform() always returns a string
+
+Write in a clear, practical style. Be specific and useful. No filler. No generic advice.
+Keep articles focused and under 500 words. Use markdown formatting with ## headers."""
+
+
+def llm_article(title: str, category: str, context: str = "") -> str | None:
+    """Try to generate an article using the LLM. Returns None if unavailable."""
+    try:
+        return llm_generate(
+            system=SYSTEM_PROMPT,
+            user=f"Write a Rappterpedia wiki article titled \"{title}\" for the {category} category.\n\n{context}\n\nWrite the article content in markdown. Start with ## Overview. Be specific and practical.",
+            max_tokens=800,
+            temperature=0.8,
+        )
+    except (LLMRateLimitError, ContentFilterError) as e:
+        print(f"  [LLM] Skipped article (rate limit/filter): {e}")
+        return None
+    except Exception as e:
+        print(f"  [LLM] Fallback to template: {e}")
+        return None
+
+
+def llm_review(agent_name: str, agent_display: str, description: str,
+               category: str, lines: int, tier: str, angle: str) -> str | None:
+    """Try to generate a review using the LLM. Returns None if unavailable."""
+    try:
+        return llm_generate(
+            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAR agent. Be specific, opinionated, and reference the agent's actual characteristics. No generic praise.",
+            user=f"Review the agent \"{agent_display}\" ({agent_name}).\nCategory: {category}\nLines: {lines}\nTier: {tier}\nDescription: {description}\nReview angle: {angle}\n\nWrite a concise, specific review.",
+            max_tokens=150,
+            temperature=0.9,
+        )
+    except Exception:
+        return None
+
+
+def llm_thread(title: str, channel: str, context: str = "") -> str | None:
+    """Try to generate a forum thread body using the LLM."""
+    try:
+        return llm_generate(
+            system="You are a community member posting in the Rappterpedia forum about the RAPP Agent ecosystem. Write authentic, conversational posts. Be specific about RAR agents, manifests, the single-file principle, etc.",
+            user=f"Write a forum post titled \"{title}\" in the {channel} channel.\n\n{context}\n\nWrite 2-4 paragraphs. Be genuine and specific.",
+            max_tokens=400,
+            temperature=0.9,
+        )
+    except Exception:
+        return None
+
+
+def llm_reply(thread_title: str, thread_body: str) -> str | None:
+    """Try to generate a forum reply using the LLM."""
+    try:
+        return llm_generate(
+            system="You are a community member replying to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference specific RAR concepts like manifests, BasicAgent, perform(), single-file principle, etc.",
+            user=f"Reply to this forum thread:\n\nTitle: {thread_title}\nPost: {thread_body[:300]}\n\nWrite a helpful 1-3 sentence reply.",
+            max_tokens=150,
+            temperature=0.9,
+        )
+    except Exception:
+        return None
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Article Generation
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1134,13 +1253,38 @@ def generate_article(state: dict, agents: list[dict], echoes: dict | None = None
     # Generate title
     title = fill_template(random.choice(rule["titles"]), ctx)
 
-    # Generate content from sections
-    content_parts = []
-    for section in rule["sections"]:
-        heading = section["heading"]
-        body = fill_template(random.choice(section["templates"]), ctx)
-        content_parts.append(f"## {heading}\n\n{body}")
-    content = "\n\n".join(content_parts)
+    # Try LLM-driven content first (60% chance to avoid burning budget)
+    content = None
+    llm_used = False
+    if random.random() < 0.6:
+        # Build echo context for the LLM — feed it the state of the world
+        llm_context = f"Category: {rule['category']}.\n"
+        if "agent_display" in ctx:
+            llm_context += f"Agent: {ctx['agent_display']} ({ctx.get('agent_name','')}). {ctx.get('description','')}. {ctx.get('lines','?')} lines, {ctx.get('tier','community')} tier.\n"
+        elif "topic" in ctx:
+            llm_context += f"Topic: {ctx['topic']}.\n"
+
+        # Inject echoes so LLM knows what already exists
+        if echoes.get("recent_articles"):
+            llm_context += f"\nRecent articles already written (don't repeat these): {', '.join(echoes['recent_articles'][:5])}\n"
+        if echoes.get("gaps"):
+            llm_context += f"Content gaps to fill: {', '.join(echoes['gaps'])}\n"
+        if echoes.get("hot_threads"):
+            llm_context += f"Hot forum topics right now: {', '.join(echoes['hot_threads'][:3])}\n"
+        llm_context += f"Total articles so far: {echoes.get('total_articles', 0)}. Total reviews: {echoes.get('total_reviews', 0)}."
+
+        content = llm_article(title, rule["category"], llm_context)
+        if content:
+            llm_used = True
+
+    # Fallback to template-based content
+    if not content:
+        content_parts = []
+        for section in rule["sections"]:
+            heading = section["heading"]
+            body = fill_template(random.choice(section["templates"]), ctx)
+            content_parts.append(f"## {heading}\n\n{body}")
+        content = "\n\n".join(content_parts)
 
     # Pick tags
     base_tags = rule.get("tags", [])
@@ -1157,6 +1301,7 @@ def generate_article(state: dict, agents: list[dict], echoes: dict | None = None
         "tags": tags,
         "content": content,
         "author": random.choice(AUTHORS),
+        "source": "llm" if llm_used else "template",
         "created": now_iso(),
         "updated": now_iso(),
         "generated_by": rule_name,
@@ -1209,22 +1354,32 @@ def generate_thread(state: dict, agents: list[dict], echoes: dict | None = None)
         })
 
     title = fill_template(random.choice(rule["titles"]), ctx)
-    body = fill_template(random.choice(rule["bodies"]), ctx)
 
-    # Generate 1-4 replies
+    # Try LLM-driven body first
+    body = None
+    if random.random() < 0.5:
+        body = llm_thread(title, rule["channel"])
+    if not body:
+        body = fill_template(random.choice(rule["bodies"]), ctx)
+
+    # Generate 1-4 replies — try LLM for each
     num_replies = random.randint(1, 4)
     replies = []
     for _ in range(num_replies):
-        reply_name, reply_rule = pick_weighted(REPLY_RULES)
-        reply_ctx = {
-            "related_topic": random.choice(RELATED_TOPICS),
-            "short_answer": random.choice(SHORT_ANSWERS),
-            "experience_insight": random.choice(EXPERIENCE_INSIGHTS),
-            "approach": random.choice(APPROACHES),
-            "fix_action": random.choice(FIX_ACTIONS),
-            "explanation": random.choice(EXPLANATIONS),
-        }
-        reply_text = fill_template(random.choice(reply_rule["templates"]), reply_ctx)
+        reply_text = None
+        if random.random() < 0.4:
+            reply_text = llm_reply(title, body)
+        if not reply_text:
+            reply_name, reply_rule = pick_weighted(REPLY_RULES)
+            reply_ctx = {
+                "related_topic": random.choice(RELATED_TOPICS),
+                "short_answer": random.choice(SHORT_ANSWERS),
+                "experience_insight": random.choice(EXPERIENCE_INSIGHTS),
+                "approach": random.choice(APPROACHES),
+                "fix_action": random.choice(FIX_ACTIONS),
+                "explanation": random.choice(EXPLANATIONS),
+            }
+            reply_text = fill_template(random.choice(reply_rule["templates"]), reply_ctx)
 
         reply_id = f"gen-r-{state['next_reply_id']:04d}"
         state["next_reply_id"] += 1
@@ -1336,7 +1491,16 @@ def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> l
         if not templates:
             continue
 
-        text = fill_template(random.choice(templates), ctx)
+        # Try LLM-driven review first
+        text = None
+        if random.random() < 0.4:
+            text = llm_review(
+                name, ctx.get("name", name), ctx.get("description", ""),
+                ctx.get("cat", ""), ctx.get("lines", 0), ctx.get("tier", "community"),
+                angle_name,
+            )
+        if not text:
+            text = fill_template(random.choice(templates), ctx)
 
         # Vary rating ±1 from base
         rating = max(1, min(5, stars + random.choice([-1, 0, 0, 1])))
