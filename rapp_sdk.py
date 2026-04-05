@@ -620,6 +620,71 @@ def card_value(name: str) -> dict:
     }
 
 
+def resolve_card(name: str) -> dict:
+    """
+    Resolve a full card from just an agent name — no file needed.
+
+    This is the micro-bandwidth primitive. The agent name IS the seed.
+    Send '@kody/deal-desk' over any channel (tweet, SMS, QR, URL fragment)
+    and the full card self-assembles on the other end. Same algorithm,
+    same seed, same card — everywhere, every time.
+    """
+    registry = fetch_registry()
+    agent = None
+    for a in registry.get("agents", []):
+        if a.get("name") == name:
+            agent = a
+            break
+
+    if agent is None:
+        return {"error": f"Agent '{name}' not found in registry"}
+
+    tier = agent.get("quality_tier", "community")
+    rarity = TIER_TO_RARITY.get(tier, "core")
+
+    tags = agent.get("tags", [])
+    deps = agent.get("dependencies", [])
+    env_vars = agent.get("requires_env", [])
+
+    version_str = agent.get("version", "1.0.0")
+    try:
+        major = int(version_str.split(".")[0])
+    except (ValueError, IndexError):
+        major = 1
+
+    power = len(tags) + len(deps)
+    toughness = major * 2 + len(env_vars)
+
+    rng = mulberry32(seed_hash(name))
+    flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
+    flavor = _FLAVOR_FRAGMENTS[flavor_idx]
+
+    category = agent.get("category", "general")
+    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
+    type_line = f"{type_prefix} Agent — {rarity.title()}"
+
+    floor_pts = RARITY_FLOOR.get(rarity, 10)
+
+    return {
+        "name": name,
+        "display_name": agent.get("display_name", name),
+        "version": agent.get("version", "1.0.0"),
+        "tier": tier,
+        "rarity": rarity,
+        "rarity_label": RARITY_LABELS.get(rarity, rarity),
+        "power": power,
+        "toughness": toughness,
+        "category": category,
+        "type_line": type_line,
+        "flavor": flavor,
+        "tags": tags,
+        "description": agent.get("description", ""),
+        "author": agent.get("author", ""),
+        "floor_pts": floor_pts,
+        "seed": seed_hash(name),
+    }
+
+
 def binder_status() -> dict:
     """Check local registry.json and count agents by tier, computing total binder value."""
     local = Path(__file__).parent / "registry.json"
@@ -780,6 +845,10 @@ def main():
     p_card_value.add_argument("name", help="Agent name: @publisher/my-agent")
     p_card_value.add_argument("--json", action="store_true", help="Output JSON")
 
+    p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full card from just a name — micro-bandwidth self-assembly")
+    p_card_resolve.add_argument("name", help="Agent name: @publisher/my-agent (the seed)")
+    p_card_resolve.add_argument("--json", action="store_true", help="Output JSON")
+
     # binder
     p_binder = sub.add_parser("binder", help="Binder operations")
     binder_sub = p_binder.add_subparsers(dest="binder_command", metavar="<subcommand>")
@@ -931,6 +1000,25 @@ def main():
                 print(f"  Tier:    {result['tier']}")
                 print(f"  Rarity:  {result['rarity_label']}  ({result['rarity']})")
                 print(f"  Floor:   {result['floor_pts']} pts  /  {result['floor_btc']} BTC")
+
+        elif args.card_command == "resolve":
+            result = resolve_card(args.name)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                if "error" in result:
+                    print(f"  Error: {result['error']}")
+                    sys.exit(1)
+                print(f"  {result['display_name']}")
+                print(f"  {result['type_line']}")
+                print(f"  {result['rarity_label']}  ({result['rarity']})")
+                print(f"  P/T: {result['power']}/{result['toughness']}")
+                print(f"  \"{result['flavor']}\"")
+                print(f"  Seed: {result['seed']}")
+                print(f"  Floor: {result['floor_pts']} pts")
+                print()
+                print(f"  Resolved from name alone — no file needed.")
+                print(f"  Send \"{result['name']}\" over any channel. Card self-assembles.")
         else:
             p_card.print_help()
 
