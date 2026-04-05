@@ -3411,6 +3411,20 @@ function updateGHPill() {
   }
 }
 
+function extractModelName(raw) {
+  // Handle azureml://registries/azure-openai/models/gpt-4o/versions/2 -> gpt-4o
+  if (raw.includes('azureml://')) {
+    const match = raw.match(/\/models\/([^/]+)/);
+    if (match) return match[1];
+  }
+  // Handle other URI formats
+  if (raw.includes('/')) {
+    const parts = raw.split('/');
+    return parts[parts.length - 1] || parts[parts.length - 2] || raw;
+  }
+  return raw;
+}
+
 async function fetchModels() {
   if (!chatToken) return;
   try {
@@ -3419,19 +3433,25 @@ async function fetchModels() {
     });
     if (!resp.ok) return;
     const data = await resp.json();
-    // Filter to chat/completion models that support tool calls
-    const models = (data.data || data || [])
-      .filter(m => {
-        const id = m.id || m.name || '';
-        const caps = m.capabilities || {};
-        // Include models that support chat completions
-        if (caps.chat_completion === false) return false;
-        // Skip embedding/image-only models
-        if (/embed|whisper|dall-e|tts/i.test(id)) return false;
-        return true;
-      })
-      .map(m => m.id || m.name)
-      .sort();
+    const list = data.data || data || [];
+
+    // Extract clean model names, filter to chat models
+    const seen = new Set();
+    const models = [];
+    for (const m of list) {
+      const rawId = m.id || m.name || '';
+      const caps = m.capabilities || {};
+      // Skip non-chat models
+      if (caps.chat_completion === false) continue;
+      if (/embed|whisper|dall-e|tts|audio/i.test(rawId)) continue;
+
+      const clean = extractModelName(rawId);
+      if (!seen.has(clean)) {
+        seen.add(clean);
+        models.push(clean);
+      }
+    }
+    models.sort();
 
     if (models.length > 0) {
       availableModels = models;
@@ -3439,7 +3459,6 @@ async function fetchModels() {
     }
   } catch(e) {
     console.warn('Failed to fetch models:', e.message);
-    // Fall back to known defaults
     populateModelSelect(['gpt-4o-mini', 'gpt-4o', 'gpt-4.1-mini', 'gpt-4.1-nano']);
   }
 }
