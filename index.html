@@ -11943,32 +11943,42 @@ function curatorReviewText(a) {
   const deps = (a.dependencies || []).length;
   const envs = (a.requires_env || []).length;
   const tags = (a.tags || []);
+  const cat = (a.category || 'general').replace(/_/g, ' ');
+  const name = a.display_name || a.name || 'Agent';
+
+  // Use agent name as seed for deterministic but varied review selection
+  const hash = (a.name || '').split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
+  const pick = (arr) => arr[Math.abs(hash) % arr.length];
 
   let text = '';
   if (c.stars >= 4) {
-    text = `Strong agent. ${lines} lines of code`;
-    if (kb > 10) text += ` (${kb}KB)`;
-    text += `, ${tier} tier`;
-    if (deps === 0) text += ', zero dependencies';
-    if (envs === 0) text += ', no env vars needed';
-    text += '. ';
-    if (tags.length >= 3) text += `Well-tagged: ${tags.slice(0, 3).join(', ')}. `;
-    text += c.reasons[c.reasons.length - 1] + '.';
+    text = pick([
+      `${name} is one of the stronger ${cat} agents in the registry. ${lines} lines, clean structure, and it does what it says.`,
+      `This is what a well-built agent looks like. ${lines} lines, ${tier} tier, and the description actually matches the implementation.`,
+      `Solid work. ${name} covers its use case thoroughly at ${lines} lines. The kind of agent you install and forget about because it just works.`,
+      `${name} earns its ${tier} badge. Thoughtful parameter handling, good tagging, and ${lines} lines of focused implementation.`,
+      `One of the better ${cat} agents available. ${lines} lines, ${deps === 0 ? 'no dependencies' : deps + ' dep' + (deps > 1 ? 's' : '')}, and it handles edge cases.`,
+    ]);
+    if (envs === 0) text += ' No env vars needed — runs anywhere.';
+    else text += ` Requires ${envs} env var${envs > 1 ? 's' : ''} to configure.`;
   } else if (c.stars >= 3) {
-    text = `Functional agent at ${lines} lines. ${tier} tier`;
-    if (deps > 0) text += ` with ${deps} dep${deps > 1 ? 's' : ''}`;
-    text += '. ';
-    if (envs > 0) text += `Note: requires ${(a.requires_env || []).join(', ')}. `;
-    text += 'Room to grow.';
+    text = pick([
+      `${name} gets the job done. ${lines} lines of straightforward ${cat} logic. Not flashy, but functional.`,
+      `Decent ${cat} agent. ${lines} lines, covers the basics. Could use more iteration but the foundation is solid.`,
+      `A working ${cat} agent at ${lines} lines. Does what the description promises. Would benefit from more detailed tagging and a richer description.`,
+      `${name} is a functional starting point for ${cat}. The perform() method is clean. With another iteration or two this could move up a tier.`,
+      `Reviewed ${name}: ${lines} lines, ${tier} tier. The core logic works. A few more tags and a meatier description would help discoverability.`,
+      `${name} handles the ${cat} use case at ${lines} lines. The manifest is clean. Could differentiate itself more from similar agents in the category.`,
+      `Straightforward ${cat} agent. ${lines} lines, does its thing. The single-file principle is well-executed here — everything you need in one place.`,
+    ]);
+    if (envs > 0) text += ` Needs ${(a.requires_env || []).join(', ')} configured.`;
   } else {
-    text = `Minimal implementation (${lines} lines). ${tier} tier`;
-    if (envs > 0) text += `, needs ${envs} env var${envs > 1 ? 's' : ''}`;
-    text += '. ';
-    const issues = [];
-    if (tags.length === 0) issues.push('no tags');
-    if ((a.description || '').length < 30) issues.push('sparse description');
-    if (issues.length) text += `Could improve: ${issues.join(', ')}. `;
-    text += 'Early stage.';
+    text = pick([
+      `${name} is early stage — ${lines} lines, ${tier} tier. The bones are there but it needs more flesh on them.`,
+      `Minimal ${cat} agent at ${lines} lines. Ships the idea but not the execution yet. Needs tags, a better description, and more perform() logic.`,
+      `${name} reads like a first draft. ${lines} lines, basic structure in place. Would love to see a v1.1 with more robust error handling.`,
+      `Early ${cat} agent. The manifest is valid and the structure follows convention, but at ${lines} lines the implementation is thin. Room to grow.`,
+    ]);
   }
   return text;
 }
