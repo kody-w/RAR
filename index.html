@@ -756,9 +756,7 @@
     -webkit-backface-visibility: hidden; backface-visibility: hidden;
     overflow: hidden; border: 3px solid #c9a84c;
     background: linear-gradient(160deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
-    display: grid; padding: 0;
-    /* Fixed zones — rigid like a real trading card: header, art, type, text, footer */
-    grid-template-rows: 12% 32% 5% 1fr 7%;
+    display: flex; flex-direction: column; padding: 0;
     box-shadow: 0 4px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,215,0,.08);
   }
   .agent-card-holo::before {
@@ -903,7 +901,7 @@
   .holo-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     padding: 8px 12px 2px; position: relative; z-index: 5;
-    min-height: 0; overflow: hidden;
+    flex-shrink: 0;
   }
   .holo-name {
     font-size: .85rem; font-weight: 700; color: #f0e6d0;
@@ -932,6 +930,7 @@
     overflow: hidden; display: flex; align-items: center; justify-content: center;
     background: radial-gradient(ellipse at 50% 40%, rgba(40,35,20,.9) 0%, #0d0a06 70%);
     position: relative; z-index: 5;
+    flex: 1 1 0; min-height: 0;
   }
   /* Inner glow vignette — makes art area feel alive */
   .holo-art::before {
@@ -966,14 +965,14 @@
     border-top: 1px solid #4d4332; border-bottom: 1px solid #4d4332;
     background: rgba(50,40,25,.6);
     position: relative; z-index: 5;
+    flex-shrink: 0;
   }
   .holo-text {
     padding: 5px 10px; overflow: hidden;
     font-size: .68rem; color: #d8c8a8; line-height: 1.4;
     background: rgba(30,25,15,.4); margin: 0;
     position: relative; z-index: 5;
-    min-height: 0;
-    display: flex; flex-direction: column;
+    flex-shrink: 0;
   }
   .holo-ability { margin-bottom: 3px; }
   .holo-ability .kw { font-weight: 700; color: #ffd700; }
@@ -1003,6 +1002,7 @@
     padding: 4px 12px 5px; font-size: .65rem;
     position: relative; z-index: 5;
     white-space: nowrap; overflow: hidden;
+    flex-shrink: 0; margin-top: auto;
   }
   .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
   .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 10px rgba(255,140,0,.6), 0 0 20px rgba(255,140,0,.3); }
