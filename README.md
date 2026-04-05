@@ -99,6 +99,17 @@ RAR/
 
 ---
 
+## Rappterpedia
+
+**[Open Rappterpedia](https://kody-w.github.io/RAR/rappterpedia/)** — The community wiki and forum for the RAPP Agent ecosystem. 333 articles, agent pages for every agent in the registry, and a growing forum.
+
+Powered by the **Rappter Engine** — a rules-as-data content engine that generates wiki articles, forum threads, and curator reviews autonomously. The **Dream Catcher** pattern enables parallel fleet production with zero collision: streams produce isolated deltas, merge additively at frame boundaries using `(frame, utc, author, title)` as composite PK.
+
+- **[Ecosystem Tree](https://kody-w.github.io/RAR/tree.html)** — Live visualization from root to bloom
+- **[Virtual Brainstem](https://kody-w.github.io/RAR/virtual-brainstem.html)** — Run any agent from chat
+
+---
+
 ## Federation
 
 RAR is a **GitHub template repository**. Clone it to run your own agent store. Your instance can:

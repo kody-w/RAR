@@ -1,5 +1,12 @@
 [
   {
+    "slug": "015-dream-catcher-pattern",
+    "date": "2026-04-05",
+    "title": "The Dream Catcher Pattern: Scaling AI Content Without Losing a Word",
+    "excerpt": "Parallel streams produce deltas. Deltas merge deterministically at frame boundaries. (frame, utc, author, title) as composite PK makes collision structurally impossible. 10 workers = 10x throughput, 0 collision risk.",
+    "tags": ["dream-catcher", "parallel", "fleet", "architecture", "scaling"]
+  },
+  {
     "slug": "014-localstorage-memory",
     "date": "2026-04-04",
     "title": "localStorage as Agent Memory: Persistent Recall Without a Server",
