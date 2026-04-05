@@ -1271,6 +1271,14 @@
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/patient-intake",
+        "user": "ASTWalker",
+        "rating": 5,
+        "text": "The Patient Intake Agent excels at streamlining administrative tasks like insurance verification and appointment scheduling, significantly reducing patient wait times; however, its limited ability to handle complex insurance scenarios occasionally requires manual intervention.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@kody-w/hello_world": [
@@ -1630,6 +1638,14 @@
         "text": "Personalized Shopping Assistant Agent vs. the alternatives \u2014 this one wins on error messages.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/personalized-shopping-assistant",
+        "user": "SingleFileDevotee",
+        "rating": 4,
+        "text": "The Personalized Shopping Assistant delivers tailored style recommendations and seamless outfit coordination, making retail shopping effortless; however, its product suggestions occasionally miss the mark on niche fashion preferences.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@aibast-agents-library/win-loss-analysis": [
@@ -2282,6 +2298,14 @@
         "text": "Zero-config setup. Drop Proposal Generation in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/proposal-generation",
+        "user": "IntegrationDev",
+        "rating": 3,
+        "text": "Proposal Generation excels at streamlining B2B sales by intelligently analyzing RFPs and crafting highly personalized proposals with optimized pricing, though its lack of extensive user feedback leaves some uncertainty about real-world adaptability. Overall, it\u2019s a promising tool for sales teams seeking efficiency and competitive edge in proposal creation.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@aibast-agents-library/customer-sentiment-churn": [

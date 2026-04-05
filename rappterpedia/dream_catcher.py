@@ -31,7 +31,7 @@ production scales without collision.
 == OLLAMA SUPPORT ==
 
   Set OLLAMA_MODEL to use a local Ollama model as the LLM backend:
-  OLLAMA_MODEL=gemma3:4b python rappterpedia/dream_catcher.py produce --stream alpha
+  OLLAMA_MODEL=gemma4 python rappterpedia/dream_catcher.py produce --stream alpha
 """
 
 from __future__ import annotations
@@ -94,8 +94,8 @@ def llm_github(system: str, user: str, max_tokens: int = 500) -> str:
 
 
 def llm_ollama(system: str, user: str, max_tokens: int = 500) -> str:
-    """Ollama local backend — Gemma, Llama, Mistral, etc."""
-    model = os.environ.get("OLLAMA_MODEL", "gemma3:4b")
+    """Ollama local backend — Gemma 4, Llama, Mistral, etc."""
+    model = os.environ.get("OLLAMA_MODEL", "gemma4")
     host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
     payload = json.dumps({
         "model": model,
