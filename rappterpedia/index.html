@@ -470,6 +470,129 @@
   }
   .sort-select:focus { border-color: var(--accent); }
 
+  /* ─── Identity Bar ───────────────────────────────── */
+  .identity-bar {
+    display: flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--text-dim);
+  }
+  .identity-name { font-weight: 600; color: var(--text); cursor: pointer; }
+  .identity-name:hover { color: var(--accent); }
+  .identity-prompt {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center;
+  }
+  .identity-modal {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 28px 32px; max-width: 380px; width: 90%; text-align: center;
+  }
+  .identity-modal h3 { margin-bottom: 6px; font-size: 1.1rem; }
+  .identity-modal p { color: var(--text-dim); font-size: .88rem; margin-bottom: 16px; }
+  .identity-modal input {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; color: var(--text); font-size: 1rem; outline: none; text-align: center;
+    margin-bottom: 12px;
+  }
+  .identity-modal input:focus { border-color: var(--accent); }
+
+  /* ─── Tag Browse ─────────────────────────────────── */
+  .tag.clickable { cursor: pointer; transition: all .12s; }
+  .tag.clickable:hover { background: var(--accent-bg); color: var(--accent); }
+  .tag-filter-bar {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+    padding: 8px 12px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; font-size: .85rem;
+  }
+  .tag-filter-bar .tag-label { color: var(--text-muted); }
+  .tag-filter-bar .tag-clear { color: var(--accent); cursor: pointer; margin-left: auto; }
+
+  /* ─── Related Articles ───────────────────────────── */
+  .related-articles {
+    margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .related-articles h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 10px; }
+  .related-list { display: flex; flex-direction: column; gap: 6px; }
+  .related-item {
+    display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px;
+    cursor: pointer; transition: background .1s; font-size: .88rem;
+  }
+  .related-item:hover { background: var(--surface2); }
+  .related-item .ri-cat { font-size: .72rem; }
+  .related-item .ri-title { color: var(--accent); }
+
+  /* ─── Editor Preview ─────────────────────────────── */
+  .editor-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px;
+  }
+  @media (max-width: 768px) { .editor-split { grid-template-columns: 1fr; } }
+  .editor-preview {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px; min-height: 320px; overflow-y: auto; line-height: 1.7; font-size: .92rem;
+  }
+  .editor-preview h2 { font-size: 1.2rem; margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .editor-preview h3 { font-size: 1rem; margin: 16px 0 6px; }
+  .editor-preview p { margin-bottom: 10px; }
+  .editor-preview-label {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--text-muted); margin-bottom: 4px; font-weight: 600;
+  }
+
+  /* ─── Voted state ────────────────────────────────── */
+  .thread-votes .v-btn.voted { color: var(--accent); }
+
+  /* ─── Table of Contents ──────────────────────────── */
+  .article-toc {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 18px; margin-bottom: 24px; max-width: 460px;
+  }
+  .toc-toggle {
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    font-size: .82rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: .06em; user-select: none;
+  }
+  .toc-toggle .toc-arrow { transition: transform .2s; font-size: .7rem; }
+  .toc-toggle .toc-arrow.collapsed { transform: rotate(-90deg); }
+  .toc-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .toc-list.hidden { display: none; }
+  .toc-list li { margin: 0; }
+  .toc-list li a {
+    display: block; padding: 3px 0 3px 0; font-size: .85rem; color: var(--accent);
+    border-left: 2px solid transparent; transition: all .1s;
+  }
+  .toc-list li a:hover { text-decoration: none; border-left-color: var(--accent); }
+  .toc-list li.toc-h3 a { padding-left: 16px; font-size: .82rem; color: var(--text-dim); }
+  .toc-list li.toc-h2 a { padding-left: 4px; }
+
+  /* ─── Wiki Links ─────────────────────────────────── */
+  .wiki-link { color: var(--accent); cursor: pointer; border-bottom: 1px dotted var(--accent); }
+  .wiki-link:hover { text-decoration: none; border-bottom-style: solid; }
+  .wiki-link.broken { color: var(--red); border-bottom-color: var(--red); }
+
+  /* ─── Pagination ─────────────────────────────────── */
+  .pagination {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .page-btn {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 12px; color: var(--text-dim); font-size: .85rem; cursor: pointer;
+    transition: all .12s; min-width: 36px; text-align: center;
+  }
+  .page-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .page-btn:disabled { opacity: .4; cursor: default; }
+  .page-info { font-size: .8rem; color: var(--text-muted); margin: 0 8px; }
+
+  /* ─── Sort Controls ──────────────────────────────── */
+  .list-controls {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .list-controls .result-count { font-size: .82rem; color: var(--text-muted); }
+  .sort-select {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 12px; color: var(--text); font-size: .82rem; cursor: pointer; outline: none;
+  }
+  .sort-select:focus { border-color: var(--accent); }
+
   /* ─── Scrollbar ───────────────────────────────────── */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -498,9 +621,25 @@
     <button class="nav-btn" onclick="showPanel('api')">Agent API</button>
   </nav>
   <div class="header-actions">
+    <div class="identity-bar">
+      <span onclick="showIdentityPrompt()" id="identityDisplay" class="identity-name"></span>
+    </div>
     <a class="back-link" href="../index.html">&larr; Agent Store</a>
   </div>
 </header>
+
+<!-- ═══════════════════ IDENTITY PROMPT ═══════════════════ -->
+<div class="identity-prompt" id="identityPrompt" style="display:none">
+  <div class="identity-modal">
+    <h3>What should we call you?</h3>
+    <p>Your name appears on articles and posts you create. Stored locally in your browser.</p>
+    <input type="text" id="identityInput" placeholder="Enter your name..." maxlength="30" onkeydown="if(event.key==='Enter')saveIdentity()">
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn primary" onclick="saveIdentity()">Save</button>
+      <button class="btn" onclick="closeIdentityPrompt()">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <div class="hero" id="hero">
@@ -590,7 +729,16 @@
           <button class="btn" onclick="insertMarkup('- ','')">List</button>
           <button class="btn" onclick="insertMarkup('[','](url)')">Link</button>
         </div>
-        <textarea id="editorContent" placeholder="Write your article content here..."></textarea>
+        <div class="editor-split">
+          <div>
+            <div class="editor-preview-label">Write</div>
+            <textarea id="editorContent" placeholder="Write your article content here..." oninput="updatePreview();markEditorDirty()"></textarea>
+          </div>
+          <div>
+            <div class="editor-preview-label">Preview</div>
+            <div class="editor-preview article-body" id="editorPreview"><span style="color:var(--text-muted)">Start typing to see preview...</span></div>
+          </div>
+        </div>
         <div style="display:flex;gap:8px;margin-top:14px">
           <button class="btn green" onclick="saveArticle()">Save Article</button>
           <button class="btn" onclick="closeEditor()">Cancel</button>
@@ -807,6 +955,8 @@ let wikiPage = 1;
 let forumPage = 1;
 let wikiSort = 'newest';
 let forumSort = 'newest';
+let activeTag = null;
+let editorDirty = false;
 const PAGE_SIZE = 20;
 
 // ─── Seed Data ──────────────────────────────────────
@@ -1467,8 +1617,9 @@ function renderMainPage() {
           <div class="mp-section-header">From the Community <a href="#" onclick="showPanel('forum');return false">View forum &#8594;</a></div>
           ${communityHtml || '<p style="color:var(--text-muted);font-size:.88rem">No discussions yet.</p>'}
         </div>
-        <div style="margin-top:8px">
-          <button class="btn primary" onclick="openEditor()" style="width:100%">+ New Article</button>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button class="btn primary" onclick="openEditor()" style="flex:1">+ New Article</button>
+          <button class="btn" onclick="randomArticle()" title="Random Article" style="flex:0">&#127922;</button>
         </div>
       </div>
     </div>
@@ -1603,7 +1754,7 @@ async function openArticle(id) {
   const a = await dbGet('articles', id);
   if (!a) return;
   const cat = WIKI_CATS.find(c => c.id === a.category);
-  const tags = (a.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+  const tags = (a.tags || []).map(t => `<span class="tag clickable" onclick="event.stopPropagation();filterByTag('${escapeHtml(t)}')">${escapeHtml(t)}</span>`).join('');
   // Track where user came from for back navigation
   if (document.getElementById('wikiMainPage').style.display !== 'none') cameFromMainPage = true;
   document.getElementById('wikiMainPage').style.display = 'none';
@@ -1639,8 +1790,10 @@ async function openArticle(id) {
     </div>
     ${tocHtml}
     <div class="article-body">${renderedBody}</div>
+    ${renderRelatedArticles(a)}
     <div class="article-actions">
       <button class="btn" onclick="editArticle('${a.id}')">Edit Article</button>
+      <button class="btn" onclick="randomArticle()">Random Article</button>
       <button class="btn" onclick="deleteArticle('${a.id}')" style="color:var(--red)">Delete</button>
     </div>
   `;
@@ -1721,11 +1874,12 @@ async function saveArticle() {
   const article = {
     id: editingArticleId || uid(),
     title, category, tags, content,
-    author: 'Community',
+    author: getUsername() || 'Community',
     created: editingArticleId ? (await dbGet('articles', editingArticleId))?.created || now : now,
     updated: now,
   };
   await dbPut('articles', article);
+  editorDirty = false;
   closeEditor();
   await renderWiki();
   openArticle(article.id);
@@ -1740,6 +1894,7 @@ async function deleteArticle(id) {
 
 function closeEditor() {
   editingArticleId = null;
+  editorDirty = false;
   document.getElementById('wikiEditorView').style.display = 'none';
   if (cameFromMainPage) {
     document.getElementById('wikiMainPage').style.display = 'block';
@@ -1864,6 +2019,7 @@ async function openThread(id) {
         <span class="post-author">${escapeHtml(r.author || 'Anonymous')}</span>
         <span>${new Date(r.created).toLocaleDateString()}</span>
         ${r.accepted ? '<span class="solved-badge">Accepted Answer</span>' : ''}
+        <button class="post-action-btn" onclick="event.stopPropagation();toggleAccepted('${t.id}','${r.id}')" style="margin-left:auto" title="${r.accepted ? 'Unmark accepted' : 'Mark as accepted answer'}">${r.accepted ? '&#10003; Accepted' : '&#10003; Accept'}</button>
       </div>
       <div class="post-body">${renderMarkdown(r.content)}</div>
     </div>
@@ -1888,7 +2044,7 @@ async function openThread(id) {
       <textarea id="replyContent" placeholder="Write your reply..."></textarea>
       <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
         <label style="font-size:.82rem;color:var(--text-dim)">Name:</label>
-        <input type="text" id="replyAuthor" placeholder="Anonymous" style="width:180px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:.88rem;outline:none">
+        <input type="text" id="replyAuthor" placeholder="Anonymous" value="${escapeHtml(getUsername())}" style="width:180px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:.88rem;outline:none">
         <button class="btn primary" onclick="postReply('${t.id}')">Reply</button>
         <button class="btn" onclick="deleteThread('${t.id}')" style="margin-left:auto;color:var(--red)">Delete Thread</button>
       </div>
@@ -1902,11 +2058,13 @@ function closeThread() {
 }
 
 async function voteThread(id, dir) {
+  if (hasVoted(id, dir)) return;
   const t = await dbGet('threads', id);
   if (!t) return;
   t.votes = (t.votes || 0) + dir;
   if (t.votes < 0) t.votes = 0;
   await dbPut('threads', t);
+  recordVote(id, dir);
   await renderForum();
 }
 
@@ -1922,6 +2080,18 @@ async function postReply(threadId) {
   await dbPut('threads', t);
   openThread(threadId);
   updateStats();
+}
+
+async function toggleAccepted(threadId, replyId) {
+  const t = await dbGet('threads', threadId);
+  if (!t || !t.replies) return;
+  const reply = t.replies.find(r => r.id === replyId);
+  if (!reply) return;
+  t.replies.forEach(r => { r.accepted = false; });
+  reply.accepted = !reply.accepted;
+  t.solved = reply.accepted;
+  await dbPut('threads', t);
+  openThread(threadId);
 }
 
 async function deleteThread(id) {
@@ -1948,7 +2118,7 @@ async function saveThread() {
   const now = new Date().toISOString();
   const thread = {
     id: uid(), title, channel, content,
-    author: 'Community',
+    author: getUsername() || 'Community',
     created: now, updated: now,
     votes: 0, pinned: false, replies: []
   };
@@ -2158,6 +2328,102 @@ window.rappterpedia = {
   }
 };
 
+// ─── Identity (localStorage) ────────────────────────
+function getUsername() { return localStorage.getItem('rappterpedia_username') || ''; }
+function showIdentityPrompt() {
+  document.getElementById('identityInput').value = getUsername();
+  document.getElementById('identityPrompt').style.display = 'flex';
+  document.getElementById('identityInput').focus();
+}
+function closeIdentityPrompt() { document.getElementById('identityPrompt').style.display = 'none'; }
+function saveIdentity() {
+  const name = document.getElementById('identityInput').value.trim();
+  if (name) localStorage.setItem('rappterpedia_username', name);
+  updateIdentityDisplay();
+  closeIdentityPrompt();
+}
+function updateIdentityDisplay() {
+  const name = getUsername();
+  const el = document.getElementById('identityDisplay');
+  el.textContent = name || 'Set your name';
+  el.title = name ? 'Click to change your name' : 'Click to set your name';
+}
+
+// ─── Random Article ─────────────────────────────────
+function randomArticle() {
+  if (articles.length === 0) return;
+  const a = articles[Math.floor(Math.random() * articles.length)];
+  showPanel('wiki');
+  openArticle(a.id);
+}
+
+// ─── Tag Browsing ───────────────────────────────────
+function filterByTag(tag) {
+  activeTag = tag;
+  cameFromMainPage = false;
+  document.getElementById('wikiMainPage').style.display = 'none';
+  document.getElementById('wikiListView').style.display = 'block';
+  activeWikiCat = 'all';
+  wikiPage = 1;
+  renderWikiSidebar();
+  renderArticleListWithTag();
+}
+function clearTagFilter() { activeTag = null; renderArticleList(); }
+function renderArticleListWithTag() {
+  const filtered = articles.filter(a => (a.tags || []).includes(activeTag));
+  const el = document.getElementById('articleList');
+  const tagBar = `<div class="tag-filter-bar"><span class="tag-label">Tag:</span><span class="tag">${escapeHtml(activeTag)}</span><span class="tag-clear" onclick="clearTagFilter()">Clear filter &times;</span></div>`;
+  if (filtered.length === 0) {
+    el.innerHTML = tagBar + `<div class="empty-state"><div class="icon">&#128218;</div><p>No articles with tag "${escapeHtml(activeTag)}".</p></div>`;
+    return;
+  }
+  const cards = filtered.map(a => {
+    const cat = WIKI_CATS.find(c => c.id === a.category);
+    return `<div class="article-card" onclick="openArticle('${a.id}')"><h3>${escapeHtml(a.title)}</h3><p>${escapeHtml(articleExcerpt(a.content, 160))}</p><div class="meta"><span>${cat ? cat.icon + ' ' + cat.label : a.category}</span><span>by ${escapeHtml(a.author)}</span><span>${new Date(a.updated).toLocaleDateString()}</span></div></div>`;
+  }).join('');
+  el.innerHTML = tagBar + `<div class="list-controls"><span class="result-count">${filtered.length} article${filtered.length !== 1 ? 's' : ''} tagged "${escapeHtml(activeTag)}"</span></div>` + cards;
+}
+
+// ─── Related Articles ───────────────────────────────
+function getRelatedArticles(article, max) {
+  const myTags = new Set(article.tags || []);
+  return articles
+    .filter(a => a.id !== article.id)
+    .map(a => ({ article: a, score: (a.tags || []).reduce((s, t) => s + (myTags.has(t) ? 2 : 0), 0) + (a.category === article.category ? 1 : 0) }))
+    .filter(s => s.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, max)
+    .map(s => s.article);
+}
+function renderRelatedArticles(article) {
+  const related = getRelatedArticles(article, 5);
+  if (related.length === 0) return '';
+  const items = related.map(a => {
+    const cat = WIKI_CATS.find(c => c.id === a.category);
+    return `<div class="related-item" onclick="openArticle('${a.id}')"><span class="ri-cat">${cat ? cat.icon : ''}</span><span class="ri-title">${escapeHtml(a.title)}</span></div>`;
+  }).join('');
+  return `<div class="related-articles"><h3>See Also</h3><div class="related-list">${items}</div></div>`;
+}
+
+// ─── Editor Preview ─────────────────────────────────
+let previewTimer = null;
+function updatePreview() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(() => {
+    const content = document.getElementById('editorContent').value;
+    const preview = document.getElementById('editorPreview');
+    if (!content.trim()) { preview.innerHTML = '<span style="color:var(--text-muted)">Start typing to see preview...</span>'; return; }
+    preview.innerHTML = renderMarkdown(content);
+  }, 200);
+}
+function markEditorDirty() { editorDirty = true; }
+window.addEventListener('beforeunload', function(e) { if (editorDirty) { e.preventDefault(); e.returnValue = ''; } });
+
+// ─── Vote Deduplication ─────────────────────────────
+function getVotedThreads() { try { return JSON.parse(localStorage.getItem('rappterpedia_votes') || '{}'); } catch { return {}; } }
+function hasVoted(threadId, dir) { return getVotedThreads()[threadId] === dir; }
+function recordVote(threadId, dir) { const v = getVotedThreads(); v[threadId] = dir; localStorage.setItem('rappterpedia_votes', JSON.stringify(v)); }
+
 // ─── Init ───────────────────────────────────────────
 async function init() {
   await openDB();
@@ -2165,6 +2431,7 @@ async function init() {
   await loadEngineContent();
   await renderWiki();
   await renderForum();
+  updateIdentityDisplay();
 }
 
 // Make nav functions global
@@ -2182,6 +2449,8 @@ window.saveArticle = saveArticle;
 window.deleteArticle = deleteArticle;
 window.closeEditor = closeEditor;
 window.insertMarkup = insertMarkup;
+window.updatePreview = updatePreview;
+window.markEditorDirty = markEditorDirty;
 window.wikiPageTo = wikiPageTo;
 window.forumPageTo = forumPageTo;
 window.filterForumChan = filterForumChan;
@@ -2189,11 +2458,18 @@ window.openThread = openThread;
 window.closeThread = closeThread;
 window.voteThread = voteThread;
 window.postReply = postReply;
+window.toggleAccepted = toggleAccepted;
 window.deleteThread = deleteThread;
 window.openNewThread = openNewThread;
 window.saveThread = saveThread;
 window.closeNewThread = closeNewThread;
 window.openSearchResult = openSearchResult;
+window.showIdentityPrompt = showIdentityPrompt;
+window.closeIdentityPrompt = closeIdentityPrompt;
+window.saveIdentity = saveIdentity;
+window.randomArticle = randomArticle;
+window.filterByTag = filterByTag;
+window.clearTagFilter = clearTagFilter;
 
 init();
 })();
