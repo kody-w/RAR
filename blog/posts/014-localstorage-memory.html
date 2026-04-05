@@ -1,0 +1,59 @@
+<h2>The Brainstem Remembers Without a Server</h2>
+
+<p>The local RAPP Brainstem stores memories in a file-based storage manager. The ManageMemory agent writes facts, preferences, insights, and tasks. The ContextMemory agent reads them back. It works because both agents share a filesystem.</p>
+
+<p>The Virtual Brainstem has no filesystem. It has <code>localStorage</code>.</p>
+
+<h3>The Mapping</h3>
+
+<table>
+  <tr><th>Local Brainstem</th><th>Virtual Brainstem</th></tr>
+  <tr><td><code>storage_manager.write(key, value)</code></td><td><code>localStorage.setItem('vb_memories', JSON.stringify(memories))</code></td></tr>
+  <tr><td>UUID-keyed JSON files</td><td>Single JSON array under one key</td></tr>
+  <tr><td>Per-user via <code>user_guid</code></td><td>Per-browser (origin-scoped)</td></tr>
+  <tr><td>Survives reboots</td><td>Survives tab closes, page refreshes, browser restarts</td></tr>
+  <tr><td>Shared across agents via storage factory</td><td>Shared across agents via the same key</td></tr>
+</table>
+
+<p>The mental model is identical: store a memory, recall it later. The persistence layer changed from disk to browser. The agent API didn't.</p>
+
+<h3>Memory Structure</h3>
+
+<p>Each memory is a JSON object:</p>
+
+<pre><code>{
+  "id": "a7f2c...",
+  "type": "preference",
+  "content": "prefers dark mode and monospace fonts",
+  "importance": 3,
+  "tags": ["ui", "display"],
+  "timestamp": "2026-04-04T21:10:00.000Z"
+}</code></pre>
+
+<p>The <code>store_memory</code> agent appends to the array. The <code>recall_memories</code> agent reads it, optionally filtering by keywords, and sorts by recency. Both are plain JavaScript functions &mdash; no LisPy, no transpiler, just array operations on a JSON blob.</p>
+
+<h3>Why localStorage</h3>
+
+<p>We considered three alternatives:</p>
+
+<ul>
+  <li><strong>IndexedDB</strong> &mdash; more storage, async API, but overkill for a flat list of memories</li>
+  <li><strong>Server-side storage</strong> &mdash; requires a backend, breaks the zero-install promise</li>
+  <li><strong>In-memory only</strong> &mdash; memories disappear on refresh, which defeats the purpose</li>
+</ul>
+
+<p><code>localStorage</code> gives us synchronous reads, 5-10MB of space (thousands of memories), origin-scoped isolation, and zero setup. It's the right tool for a browser-native agent that stores text.</p>
+
+<h3>The Privacy Angle</h3>
+
+<p>Memories never leave the browser. The LLM sees them only when the <code>recall_memories</code> tool is called &mdash; and only because the tool result is sent as a follow-up message. If you never ask "what do you know about me?", the memories stay in localStorage, untouched.</p>
+
+<p>This is local-first memory. Your data lives in your browser, on your machine, under your control. Clear localStorage and it's gone. No account deletion form. No data export request. Just <code>localStorage.removeItem('vb_memories')</code>.</p>
+
+<h3>What Carries Over</h3>
+
+<p>The local brainstem's memory agents have richer features: per-user GUID separation, tag-based retrieval, importance-weighted recall, session-scoped context. The Virtual Brainstem implements the same API surface but with browser-native persistence.</p>
+
+<p>If you migrate from virtual to local, the conversation pattern is the same: "remember X" stores, "what do you know?" recalls. The agent names are the same. The tool schemas are the same. Only the storage backend changes &mdash; from a JSON array in the browser to a JSON file on disk.</p>
+
+<p>That's the point. The brainstem doesn't care where memories live. It cares that it can store and recall them. Everything else is an implementation detail.</p>

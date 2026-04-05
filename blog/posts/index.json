@@ -1,5 +1,40 @@
 [
   {
+    "slug": "014-localstorage-memory",
+    "date": "2026-04-04",
+    "title": "localStorage as Agent Memory: Persistent Recall Without a Server",
+    "excerpt": "The brainstem's memory agents need persistence. The local version uses the filesystem. The virtual version uses localStorage. The agent API is identical. Your memories never leave your browser.",
+    "tags": ["memory", "localStorage", "agents", "privacy"]
+  },
+  {
+    "slug": "013-function-calling-dispatch",
+    "date": "2026-04-04",
+    "title": "Function Calling as Agent Routing: The Agent Becomes a Tool",
+    "excerpt": "LLM function calling replaces the brainstem dispatch loop. Each agent is a tool definition. The LLM picks the function. The browser executes it. Same separation of concerns, different runtime.",
+    "tags": ["dispatch", "function-calling", "architecture", "LLM"]
+  },
+  {
+    "slug": "012-github-models-layer",
+    "date": "2026-04-04",
+    "title": "GitHub Models as the AI Layer: Virtualizing the Brainstem",
+    "excerpt": "The local brainstem runs Ollama. The virtual brainstem runs GitHub Models. Same OAuth token that lets you vote on agents now lets you chat with them. Same dispatch pattern, different GPU.",
+    "tags": ["github-models", "LLM", "virtualization", "auth"]
+  },
+  {
+    "slug": "011-unrapp-transpiler",
+    "date": "2026-04-04",
+    "title": "UnRAPP: A Python-to-JavaScript Transpiler for the Agent Subset",
+    "excerpt": "128 agents share a narrow Python surface area: data dicts, f-strings, list comprehensions, .get(). UnRAPP transpiles that subset to JavaScript in ~4ms. No WASM, no bundler, just string manipulation.",
+    "tags": ["transpiler", "python", "javascript", "compiler"]
+  },
+  {
+    "slug": "010-virtual-brainstem",
+    "date": "2026-04-04",
+    "title": "The Virtual Brainstem: Running Any Agent in a Browser Tab",
+    "excerpt": "128 agents in the registry, zero way to run them without Python. The Virtual Brainstem is a single HTML file containing a LisPy VM, a Python transpiler, and a chat interface. Open a URL, pick an agent, it runs.",
+    "tags": ["virtual-brainstem", "browser", "runtime", "LisPy"]
+  },
+  {
     "slug": "009-prior-art",
     "date": "2026-04-04",
     "title": "Prior Art: The Complete Innovation Timeline With Cryptographic Proof",

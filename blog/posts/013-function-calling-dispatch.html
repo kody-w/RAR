@@ -1,0 +1,80 @@
+<h2>The Agent Becomes a Function</h2>
+
+<p>In the local brainstem, dispatch works like this: the LLM reads the user's message, decides which agent to invoke, and the brainstem calls <code>agent.perform(**kwargs)</code>. The LLM is the router. The agent is the executor. Clean separation.</p>
+
+<p>In the Virtual Brainstem, we needed the same pattern but without a Python runtime. The answer turned out to be something the LLM already knows how to do: function calling.</p>
+
+<h3>Agents as Tool Definitions</h3>
+
+<p>Each built-in agent is registered as an OpenAI-compatible tool definition:</p>
+
+<pre><code>{
+  type: "function",
+  function: {
+    name: "store_memory",
+    description: "Store a fact, preference, insight, or task
+                  to persistent local memory.",
+    parameters: {
+      type: "object",
+      properties: {
+        memory_type: {
+          type: "string",
+          enum: ["fact", "preference", "insight", "task"]
+        },
+        content: {
+          type: "string",
+          description: "The memory content to store"
+        },
+        importance: {
+          type: "integer", minimum: 1, maximum: 5
+        }
+      },
+      required: ["memory_type", "content"]
+    }
+  }
+}</code></pre>
+
+<p>This is the same information that lives in the agent's <code>__manifest__</code> metadata dict. The manifest describes what the agent does and what parameters it takes. The tool definition describes what the function does and what arguments it accepts. They're the same contract in different formats.</p>
+
+<h3>The Dispatch Loop</h3>
+
+<p>When the user sends a message, the Virtual Brainstem runs a multi-turn loop:</p>
+
+<ol>
+  <li>Send the message + tool definitions to GitHub Models</li>
+  <li>If the response contains <code>tool_calls</code>: execute each one locally</li>
+  <li>Append the tool results to the conversation history</li>
+  <li>Send the updated history back to the LLM for a follow-up response</li>
+  <li>Repeat until the LLM responds with plain text (no more tool calls)</li>
+</ol>
+
+<p>This is functionally identical to the brainstem's dispatch loop. The LLM decides. The agent executes. The result feeds back. The only difference: in the local brainstem, dispatch is Python calling Python. In the virtual brainstem, dispatch is an HTTP round-trip calling a JavaScript function.</p>
+
+<h3>Visible Agent Activity</h3>
+
+<p>The local brainstem logs every agent call. The Virtual Brainstem does the same &mdash; when an agent runs, a persistent activity pill appears in the chat:</p>
+
+<pre><code>&#10003; store memory -- stored fact: "prefers dark mode" (3 total)</code></pre>
+
+<p>This isn't cosmetic. It's the same transparency the local brainstem provides: the user sees <em>which</em> agent ran, <em>what</em> it did, and <em>what changed</em>. If the LLM called three agents in one turn, three pills appear. No hidden magic.</p>
+
+<h3>Why This Matters Beyond RAR</h3>
+
+<p>Function calling reframes what an "agent" is. In most frameworks, an agent is an autonomous LLM loop that decides its own actions. In RAR, an agent is a <strong>deterministic function with a schema</strong>. The LLM's only job is to pick which function to call and what to pass it. The function does the work.</p>
+
+<p>This is a deliberate design choice. Agents that are functions are:</p>
+
+<ul>
+  <li><strong>Testable</strong> &mdash; call the function directly with known inputs</li>
+  <li><strong>Predictable</strong> &mdash; same input, same output, every time</li>
+  <li><strong>Auditable</strong> &mdash; the activity pill shows exactly what happened</li>
+  <li><strong>Portable</strong> &mdash; the function runs anywhere JavaScript runs</li>
+</ul>
+
+<p>The LLM adds understanding. The agent adds capability. Neither needs to do the other's job.</p>
+
+<h3>The Manifest-to-Tool Pipeline</h3>
+
+<p>Today the three built-in agents have hand-written tool definitions. The path forward is obvious: generate tool definitions from <code>__manifest__</code> metadata automatically. The manifest already has the name, description, and parameter schema. The tool definition is a projection of that schema into the OpenAI format.</p>
+
+<p>When that pipeline exists, any agent in the registry becomes a tool the LLM can call. The registry is the tool catalog. The brainstem is the router. The browser is the runtime. Full circle.</p>

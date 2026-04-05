@@ -1,0 +1,54 @@
+<h2>The Problem: 128 Agents Nobody Can Run</h2>
+
+<p>RAR had 128 agents in the registry. Every one of them was a single <code>.py</code> file. You could browse them, read them, fork them. But to <em>run</em> one, you needed Python installed, the brainstem runtime configured, and a terminal. That's three barriers between a user and an agent.</p>
+
+<p>The single-file principle gave us portability. But portability without execution is just a museum.</p>
+
+<h3>What If the Browser Was the Runtime?</h3>
+
+<p>The Virtual Brainstem is a single HTML file &mdash; <code>virtual-brainstem.html</code> &mdash; that contains a complete agent execution environment. No server. No install. No Python. Open a URL, pick an agent from the sidebar, and it runs.</p>
+
+<p>The architecture has five layers, all in one file:</p>
+
+<table>
+  <tr><th>Layer</th><th>What It Does</th><th>LOC</th></tr>
+  <tr><td><strong>lispy.js</strong></td><td>Complete Lisp interpreter &mdash; tokenizer, parser, evaluator, 90+ built-ins</td><td>~600</td></tr>
+  <tr><td><strong>unrapp.js</strong></td><td>Python-to-JavaScript transpiler for the agent subset</td><td>~800</td></tr>
+  <tr><td><strong>brainstem.js</strong></td><td>Registry fetch, agent fetch, transpile, compile, dispatch</td><td>~200</td></tr>
+  <tr><td><strong>ui.js</strong></td><td>Sidebar, terminal, REPL, drag-and-drop</td><td>~300</td></tr>
+  <tr><td><strong>chat.js</strong></td><td>Conversational AI with GitHub Models + built-in agents</td><td>~400</td></tr>
+</table>
+
+<h3>Two Modes, One File</h3>
+
+<p>The Virtual Brainstem ships with two modes:</p>
+
+<p><strong>Chat mode</strong> is the default. Sign in with GitHub, type naturally, and the AI routes your message to the right agent. "What's trending on Hacker News?" calls the HackerNews agent. "Remember I prefer dark mode" calls ManageMemory. The brainstem pattern &mdash; LLM reasoning over a deck of agents &mdash; works identically to the local-first version, except the LLM is GitHub Models and the agents are JavaScript functions running in your browser tab.</p>
+
+<p><strong>Lab mode</strong> is the agent workbench. It loads the full registry, lets you click any agent, transpiles its Python source to JavaScript on the fly, and executes it in a LisPy VM. You can interact via a REPL, drop local <code>.py</code> files, and run the built-in test suite.</p>
+
+<h3>The Pipeline</h3>
+
+<p>When you select an agent from the registry, this happens in under 100ms:</p>
+
+<ol>
+  <li><strong>Fetch</strong> &mdash; one GET to <code>raw.githubusercontent.com</code> downloads the agent's <code>.py</code> file</li>
+  <li><strong>Transpile</strong> &mdash; the Python source is converted to JavaScript functions via a 5-stage pipeline</li>
+  <li><strong>Compile</strong> &mdash; each function is wrapped in a closure with Python builtins (<code>len</code>, <code>sorted</code>, <code>round</code>, <code>.get()</code>) shimmed as a <code>PY</code> namespace</li>
+  <li><strong>Inject</strong> &mdash; compiled functions and data objects are loaded into a fresh LisPy environment</li>
+  <li><strong>Dispatch</strong> &mdash; a LisPy <code>perform</code> function routes operations to the right method</li>
+</ol>
+
+<p>The result: any agent with synthetic data runs natively in the browser. No CORS proxy. No WASM. No bundler. Just JavaScript doing what JavaScript does.</p>
+
+<h3>Why a Lisp?</h3>
+
+<p>The LisPy VM exists because agent dispatch is an S-expression problem. <code>(perform (make-dict "operation" "emissions_dashboard"))</code> is exactly how the brainstem thinks about agent invocation. The VM also gives us a REPL &mdash; after an agent loads, you can query its data directly: <code>(dict-keys FACILITIES)</code> returns the facility IDs. It's a debugger and a runtime in one.</p>
+
+<p>The JavaScript transpiler handles the heavy lifting (data processing, string formatting, iteration). The LisPy VM handles the orchestration (dispatch, environment binding, REPL). Each does what it's good at.</p>
+
+<h3>What This Changes</h3>
+
+<p>Before the Virtual Brainstem, running an agent required a local Python environment. Now it requires a browser. That's the difference between "developers who set up the repo" and "anyone with a URL."</p>
+
+<p>The single-file principle said every agent is one <code>.py</code> file. The Virtual Brainstem says every agent is one HTTP GET away from running.</p>

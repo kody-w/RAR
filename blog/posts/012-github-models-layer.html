@@ -1,0 +1,50 @@
+<h2>The Last Missing Piece</h2>
+
+<p>The RAPP Brainstem has always had three components: an <strong>agent deck</strong> (the agents you've loaded), a <strong>dispatch loop</strong> (routing user intent to the right agent), and an <strong>LLM layer</strong> (understanding what the user wants). The local-first version runs Ollama on <code>localhost:11434</code>. It works. But it requires a local GPU, a model download, and a terminal.</p>
+
+<p>The Virtual Brainstem solved agents (transpile to JS) and dispatch (LisPy VM). But without an LLM, it's a REPL, not a brainstem. You have to know which operation to call and type it as an S-expression. That's a developer tool, not a product.</p>
+
+<p>GitHub Models closes the gap. It's an OpenAI-compatible inference API authenticated with your GitHub token. The same OAuth flow that lets you vote on agents now lets you chat with them.</p>
+
+<h3>The Architecture</h3>
+
+<pre><code>User types: "what's trending on hacker news?"
+       |
+       v
+  GitHub Models API (gpt-4o-mini)
+  with function definitions for each agent
+       |
+       v
+  tool_call: hacker_news({limit: 10})
+       |
+       v
+  Browser executes: agentHackerNews({limit: 10})
+  -> fetch HN Firebase API -> return stories
+       |
+       v
+  GitHub Models API (follow-up with tool result)
+       |
+       v
+  "Here are today's top stories on Hacker News: ..."</code></pre>
+
+<p>The LLM never touches the agent data directly. It decides <em>which</em> agent to call and <em>what arguments</em> to pass. The agent runs locally. The LLM formats the result for the user. This is the same separation of concerns as the local brainstem &mdash; the LLM reasons, the agents execute.</p>
+
+<h3>Shared Authentication</h3>
+
+<p>The RAR ecosystem already has GitHub OAuth for voting and reviews. The token is stored as <code>rb_access_token</code> in localStorage, shared with the RAPPterBook. The Virtual Brainstem reads the same token. Sign in once, use it everywhere.</p>
+
+<p>The OAuth flow redirects to GitHub, exchanges the code via a Cloudflare Worker, and stores the token. The same token authenticates both the GitHub API (for user info) and the GitHub Models API (for inference). No second login. No API key management.</p>
+
+<h3>Model Selection</h3>
+
+<p>GitHub Models exposes different models depending on your account tier. The Virtual Brainstem fetches the available models on sign-in and populates a dropdown. Your selection persists to localStorage.</p>
+
+<p>The models endpoint returns Azure ML registry URIs like <code>azureml://registries/azure-openai/models/gpt-4o/versions/2</code>. The UI extracts the clean model name (<code>gpt-4o</code>) and deduplicates. If the endpoint is unavailable, it falls back to known defaults.</p>
+
+<h3>What This Pattern Enables</h3>
+
+<p>The local brainstem requires: Python, Ollama, a GPU, a model download, and a running server. The virtual brainstem requires: a browser and a GitHub account.</p>
+
+<p>The agent behavior is identical. The chat experience is identical. The dispatch pattern is identical. The only difference is where the LLM runs. That's the virtualization &mdash; the same brainstem architecture, fully hosted in your browser tab and someone else's GPU.</p>
+
+<p>When you outgrow the free tier, switch back to local. The agents don't change. The conversation pattern doesn't change. The brainstem is the brainstem, whether it runs on your machine or in the cloud. That's what "local-first" actually means: local is the default, but not the requirement.</p>

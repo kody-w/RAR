@@ -1,0 +1,68 @@
+<h2>The Narrow Subset That's Actually Wide</h2>
+
+<p>RAR agents are Python. The browser runs JavaScript. The conventional answer is "run Python in WASM" (Pyodide, ~15MB download, 3-second cold start). Our answer: don't run Python at all. Transpile the narrow subset that agents actually use.</p>
+
+<p>We analyzed 128 agents and found they share a surprisingly small surface area:</p>
+
+<ul>
+  <li>Module-level data dicts (<code>UPPER_CASE = {...}</code>)</li>
+  <li>A <code>perform()</code> dispatcher</li>
+  <li>Methods that format data into strings</li>
+  <li>f-strings, list comprehensions, <code>.get()</code>, <code>sorted()</code>, <code>.join()</code></li>
+</ul>
+
+<p>No imports that matter. No file I/O. No network calls (the synthetic data is inline). No classes with inheritance. The agents are pure functions over static data. That's transpilable.</p>
+
+<h3>The Five Stages</h3>
+
+<p>UnRAPP is a 5-stage Python-to-JavaScript transpiler. Each stage handles one concern:</p>
+
+<p><strong>Stage 1: Preprocess.</strong> Strip everything the browser doesn't need: imports, <code>sys.path</code>, class wrappers, <code>__init__</code>, <code>super().__init__</code>, <code>if __name__</code>. The <code>__manifest__</code> dict is parsed separately. What's left is data and methods.</p>
+
+<p><strong>Stage 2: Extract Data.</strong> Find <code>UPPER_CASE = {</code> or <code>UPPER_CASE = [</code> assignments at module level. A bracket-counting parser extracts the full literal (handling nested dicts, trailing commas, Python booleans). Convert to JavaScript objects.</p>
+
+<p><strong>Stage 3: Extract Dispatch.</strong> Find the <code>perform</code> method. Parse the dispatch pattern &mdash; either a <code>{"op": self._method}</code> dict or an <code>if op == "x" / elif</code> chain. Output the list of operations.</p>
+
+<p><strong>Stage 4: Transpile Functions.</strong> The core. For each method, convert line-by-line:</p>
+
+<table>
+  <tr><th>Python</th><th>JavaScript</th></tr>
+  <tr><td><code>x = kwargs.get("k", d)</code></td><td><code>var x = PY.get(kwargs, "k", d)</code></td></tr>
+  <tr><td><code>f"text {expr:,}"</code></td><td><code>"text " + expr.toLocaleString()</code></td></tr>
+  <tr><td><code>for k, v in d.items():</code></td><td><code>for (const [k, v] of Object.entries(d)) {</code></td></tr>
+  <tr><td><code>[x for x in items if x > 0]</code></td><td><code>items.filter(x => x > 0).map(x => x)</code></td></tr>
+  <tr><td><code>sorted(x, key=fn, reverse=True)</code></td><td><code>PY.sorted(x, {key: fn, reverse: true})</code></td></tr>
+  <tr><td><code>lines.append(x)</code></td><td><code>lines.push(x)</code></td></tr>
+  <tr><td><code>"\n".join(list)</code></td><td><code>list.join("\n")</code></td></tr>
+</table>
+
+<p><strong>Stage 5: Assemble.</strong> Combine data defines, helper functions, and a <code>perform</code> dispatcher into one JavaScript program. Each function gets a <code>PY</code> namespace with shimmed Python builtins.</p>
+
+<h3>The Hard Parts</h3>
+
+<p>The transpiler's complexity lives in expression parsing. Python's syntax has ambiguities that require depth-aware parsing:</p>
+
+<p><strong>Nested bracket access.</strong> <code>TIER_STRUCTURE[m["tier"]]</code> &mdash; a regex can't tell where the outer brackets end. We wrote <code>splitBracketAccess()</code> with full bracket-depth tracking.</p>
+
+<p><strong>Ternary inside arithmetic.</strong> <code>rating + (10 if in_zone else 0)</code> &mdash; the <code>if</code>/<code>else</code> keywords appear inside a sub-expression. <code>splitTernary()</code> only matches at bracket depth zero.</p>
+
+<p><strong>Chained <code>.get()</code>.</strong> <code>data.get("key", {}).get("sub", 0)</code> &mdash; each <code>.get()</code> becomes <code>PY.get()</code>, but the object of the second call includes the first. A 3-pass rewriter handles arbitrary nesting.</p>
+
+<p><strong>The <code>in</code> operator vs. dict access.</strong> <code>c in t["certifications"]</code> &mdash; the dict-chain handler tried to match before the <code>in</code> operator. Order of operations in the parser matters: check <code>in</code>/<code>not in</code> before dict chain access.</p>
+
+<h3>What It Doesn't Handle</h3>
+
+<p>UnRAPP is deliberately narrow. It won't transpile:</p>
+
+<ul>
+  <li>Agents that import external libraries</li>
+  <li>Agents that make network calls (use the chat mode's built-in agents for that)</li>
+  <li>Complex class hierarchies or metaclasses</li>
+  <li>Generator expressions used as iterators (only as arguments to <code>sum()</code>, <code>any()</code>, <code>all()</code>)</li>
+</ul>
+
+<p>This is a feature. The transpiler's boundary defines what "runs in the browser" means. If an agent doesn't fit, it needs the real brainstem. The registry's <code>requires_env</code> field tells you which is which.</p>
+
+<h3>The Result</h3>
+
+<p>128 agents, ~4ms average transpile time, zero external dependencies. The transpiler is 800 lines of JavaScript doing what would normally require a Python AST library, a code generator, and a bundler. Instead, it's string manipulation in a <code>&lt;script&gt;</code> tag. The single-file principle applies to the tools, not just the agents.</p>
