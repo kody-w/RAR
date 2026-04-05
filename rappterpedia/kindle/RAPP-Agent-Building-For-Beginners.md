@@ -12,7 +12,7 @@
 
 ## Copyright
 
-Copyright 2025 Kody Wildfeuer. All rights reserved.
+Copyright 2026 Kody Wildfeuer. All rights reserved.
 
 Published independently via Kindle Direct Publishing.
 

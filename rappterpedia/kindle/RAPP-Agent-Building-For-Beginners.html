@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>RAPP Agent Building for Absolute Beginners</title>
+<meta name="author" content="Kody Wildfeuer"/>
+<meta name="description" content="The No-Code-Required Guide to Building AI Agents That Actually Work"/>
+<style>
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1.5em 0 0.5em;
+    text-align: center;
+    page-break-after: avoid;
+  }
+  h2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 1.5em 0 0.5em;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 1.2em 0 0.4em;
+  }
+  p {
+    margin: 0.5em 0;
+    text-indent: 0;
+  }
+  em {
+    font-style: italic;
+  }
+  strong {
+    font-weight: bold;
+  }
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    background: #f4f4f4;
+    padding: 1px 4px;
+  }
+  pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85em;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin: 1em 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    page-break-inside: avoid;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+  }
+  blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border-left: 3px solid #ccc;
+    font-style: italic;
+    color: #555;
+  }
+  ul {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+  }
+  li {
+    margin: 0.3em 0;
+  }
+  li.todo {
+    list-style-type: square;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f0f0f0;
+    font-weight: bold;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 2em 0;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+  .title-page {
+    text-align: center;
+    padding-top: 30%;
+  }
+  .title-page h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+  }
+  .title-page .subtitle {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 2em;
+  }
+  .title-page .author {
+    font-size: 1.1em;
+    margin-top: 2em;
+  }
+  .title-page .tagline {
+    font-style: italic;
+    color: #777;
+    margin-top: 1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <h1>RAPP Agent Building<br/>for Absolute Beginners</h1>
+  <div class="subtitle">The No-Code-Required Guide to Building<br/>AI Agents That Actually Work</div>
+  <div class="author">By Kody Wildfeuer</div>
+  <div class="tagline">No tech skills required. The AI does the grunt work.</div>
+</div>
+
+<h1>RAPP Agent Building for Absolute Beginners</h1>
+<h2>The No-Code-Required Guide to Building AI Agents That Actually Work</h2>
+<h3>By Kody Wildfeuer</h3>
+<p>---</p>
+<p><em>No tech skills required. The AI does the grunt work.</em></p>
+<p>---</p>
+<h2>Copyright</h2>
+<p>Copyright 2026 Kody Wildfeuer. All rights reserved.</p>
+<p>Published independently via Kindle Direct Publishing.</p>
+<p>The RAPP Agent ecosystem is open source under the MIT License. This book is an independent guide to using the platform.</p>
+<p>---</p>
+<h2>Dedication</h2>
+<p>To everyone who was told "you need to learn to code first."</p>
+<p>You don't. Not anymore. This book proves it.</p>
+<p>---</p>
+<h2>Table of Contents</h2>
+<ul><li>Foreword: Why This Book Exists</li>
+<li>Part I: The 10-Minute Foundation</li>
+</ul>  - Chapter 1: What Are AI Agents (And Why Should You Care)?
+  - Chapter 2: The RAPP Ecosystem in Plain English
+  - Chapter 3: Your First 10 Minutes — Opening the Agent Store
+<ul><li>Part II: Using Agents Without Writing Code</li>
+</ul>  - Chapter 4: Browsing and Installing Agents
+  - Chapter 5: The Agent Card System — Collecting Your Toolkit
+  - Chapter 6: Building Decks — Your Personal Agent Portfolio
+  - Chapter 7: Using Agents from Chat
+<ul><li>Part III: Building Your First Agent (The AI Helps)</li>
+</ul>  - Chapter 8: The Agent Workbench — Your Browser-Based Workshop
+  - Chapter 9: What's Inside a Single-File Agent
+  - Chapter 10: Your First Agent — Step by Step
+  - Chapter 11: Testing Without the Terminal
+  - Chapter 12: Publishing to the Store
+<ul><li>Part IV: Going Deeper (Still No CS Degree Required)</li>
+</ul>  - Chapter 13: Making Agents That Connect to Things
+  - Chapter 14: The Holo Card System — Making Your Agent Collectible
+  - Chapter 15: Running Your Own Agent Store
+  - Chapter 16: The Community — Forum, Wiki, and Getting Help
+<ul><li>Part V: Real-World Playbooks</li>
+</ul>  - Chapter 17: The Sales Team Playbook
+  - Chapter 18: The Small Business Playbook
+  - Chapter 19: The Creative Professional Playbook
+  - Chapter 20: The Enterprise Team Playbook
+<ul><li>Appendix A: Glossary</li>
+<li>Appendix B: Quick Reference Card</li>
+<li>Appendix C: Troubleshooting — When Things Don't Work</li>
+</ul>
+---
+<div class="page-break"></div>
+<h2>Foreword: Why This Book Exists</h2>
+<p>There's a lie in the tech industry that goes something like this: <em>"To build AI tools, you need to be a software engineer."</em></p>
+<p>It's not true. Not anymore.</p>
+<p>The RAPP Agent ecosystem was built on a radical idea: every AI agent should be one file. One file you can read. One file you can copy. One file that an AI assistant can write for you while you describe what you want in plain English.</p>
+<p>This book is for people who have never written a line of code but want to harness AI agents for their work. Maybe you're in sales and want an agent that researches prospects. Maybe you run a small business and want an agent that drafts customer emails. Maybe you're just curious about what all the AI agent hype is about.</p>
+<p>Here's the deal: <strong>you don't need to understand the code.</strong> You need to understand the concepts. The AI tools built into the RAPP ecosystem — the Agent Workbench, the Virtual Brainstem, the chat interface — handle the technical work. You provide the intent. The machines provide the implementation.</p>
+<p>This book will take you from "what's an agent?" to "I just published one to the store" in a weekend. No terminal required. No Python installation headaches. Just a web browser and an idea.</p>
+<p>Let's get started.</p>
+<p>---</p>
+<div class="page-break"></div>
+<div class="page-break"></div>
+<h1>Part I: The 10-Minute Foundation</h1>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 1: What Are AI Agents (And Why Should You Care)?</h2>
+<h3>The Simplest Explanation</h3>
+<p>An AI agent is a small program that does one thing well, on your behalf.</p>
+<p>That's it. Not a sentient robot. Not a replacement for human judgment. Just a focused little helper that takes an input, does some work, and gives you a result.</p>
+<p>Think of agents like apps on your phone:</p>
+<ul><li>Your weather app takes your location and gives you a forecast</li>
+<li>Your calculator app takes numbers and gives you answers</li>
+<li>Your maps app takes a destination and gives you directions</li>
+</ul>
+AI agents work the same way, but they can handle messier, more human tasks:
+<ul><li>A sales agent takes a company name and gives you a research brief</li>
+<li>An email agent takes bullet points and gives you a polished draft</li>
+<li>A CRM agent takes a contact name and gives you their full history</li>
+</ul>
+<h3>Why Agents Instead of Just Using ChatGPT?</h3>
+<p>You might be thinking, "I can already ask ChatGPT to do these things." And you're right — you can. But there's a difference between asking a general-purpose AI to figure something out from scratch every time, and having a specialized agent that already knows:</p>
+<ul><li>What format you want the output in</li>
+<li>What data sources to check</li>
+<li>What your preferences are</li>
+<li>How to connect to your specific tools</li>
+</ul>
+It's the difference between calling a general contractor every time your sink leaks versus having a plumber on speed dial. Both can fix the sink. One is faster.
+<h3>Why Should Non-Technical People Care?</h3>
+<p>Because the barrier just dropped to zero.</p>
+<p>In the RAPP ecosystem, agents are single files. One file. You can look at it in your browser, see what it does, and install it by dragging it into a folder. You can build new agents using a browser-based workshop where the AI writes the code for you.</p>
+<p>You don't need to understand Python syntax. You need to understand what you want the agent to do. The rest is handled.</p>
+<p>This book shows you how.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 2: The RAPP Ecosystem in Plain English</h2>
+<h3>The Big Picture</h3>
+<p>The RAPP ecosystem has three parts:</p>
+<p>1. <strong>The Agent Store</strong> — A website where you browse, collect, and install agents. Think of it like an app store, but every app is one file.</p>
+<p>2. <strong>The Agents Themselves</strong> — Over 125 ready-to-use agents covering sales, customer service, healthcare, manufacturing, finance, and more. Plus a growing collection of community-built agents.</p>
+<p>3. <strong>The Tools to Build Your Own</strong> — A browser-based workbench where you can create, test, and publish agents without installing anything on your computer.</p>
+<h3>How It's Different</h3>
+<p>Most AI platforms require you to:
+<ul><li>Set up a development environment</li>
+<li>Install packages and dependencies</li>
+<li>Learn a programming framework</li>
+<li>Deploy to a server</li>
+<li>Pay for hosting</li>
+</ul>
+RAPP requires you to:
+<ul><li>Open a web page</li>
+</ul>
+That's not an exaggeration. The entire Agent Store — all 125+ agents, the search, the card system, the workbench — is a single HTML file that works in any browser, including offline. No server. No account. No installation.</p>
+<h3>The Single-File Principle</h3>
+<p>This is the core idea that makes everything work. Every agent in RAPP is one <code>.py</code> file. Inside that one file:</p>
+<ul><li>The documentation (what the agent does)</li>
+<li>The metadata (name, version, category, author)</li>
+<li>The code (how it works)</li>
+</ul>
+Why does this matter to you? Because one file is easy to understand. One file is easy to share. One file is easy for an AI to read, modify, or create from scratch. When you use the Workbench to build an agent, the AI produces one file. When you install an agent, you download one file. When you want to know what an agent does, you read one file.
+<p>Simple beats complex. Always.</p>
+<h3>The Publisher System</h3>
+<p>Agents are organized by who made them:</p>
+<ul><li><strong>@rapp</strong> — The official base. The foundation everything else builds on.</li>
+<li><strong>@kody</strong> — Core tools: the registry client, memory agents, the workbench.</li>
+<li><strong>@discreetRappers</strong> — Integrations with business tools like Dynamics 365, SharePoint, PowerPoint.</li>
+<li><strong>@aibast-agents-library</strong> — 104 industry-specific templates. This is the gold mine for non-technical users.</li>
+<li><strong>@borg</strong> — The card system and code analysis tools.</li>
+<li><strong>@yourname</strong> — Your namespace. Once you publish, it's yours forever.</li>
+</ul>
+<h3>Quality Tiers</h3>
+<p>Not all agents are created equal. The store has a trust system:</p>
+<ul><li><strong>Community</strong> — Anyone can publish. It passed basic automated checks.</li>
+<li><strong>Verified</strong> — A human reviewed it. It's tested. It follows the rules.</li>
+<li><strong>Official</strong> — The core team maintains it. Guaranteed to work.</li>
+<li><strong>Frontier</strong> — Experimental. Pushing the edge. May change rapidly.</li>
+</ul>
+When you're starting out, stick with Verified and Official agents. They're the most reliable.
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 3: Your First 10 Minutes — Opening the Agent Store</h2>
+<h3>Step 1: Open the Store</h3>
+<p>Go to the Agent Store in your browser. That's it. The page loads with every agent ready to browse.</p>
+<p>If you're working offline or want a local copy, you can download the <code>index.html</code> file and open it directly — it works from your hard drive.</p>
+<h3>Step 2: Browse</h3>
+<p>The store opens to the Browse view. You'll see agent cards arranged in a grid. Each card shows:</p>
+<ul><li>The agent's name and a one-line description</li>
+<li>Who published it (the @namespace)</li>
+<li>Its quality tier (look for the Verified or Official badges)</li>
+<li>Its category (Sales, Healthcare, DevTools, etc.)</li>
+</ul>
+<h3>Step 3: Search</h3>
+<p>Use the search bar at the top. Try searching for something relevant to your work:</p>
+<ul><li>"email" — agents that help with email</li>
+<li>"sales" — agents for sales teams</li>
+<li>"CRM" — agents that connect to customer databases</li>
+<li>"report" — agents that generate reports</li>
+</ul>
+<h3>Step 4: Click an Agent</h3>
+<p>Click any agent card to see its details:</p>
+<ul><li><strong>Full description</strong> — What it does, in detail</li>
+<li><strong>Source code</strong> — The actual Python file (don't worry, you don't need to read it)</li>
+<li><strong>Required environment variables</strong> — What API keys or settings it needs</li>
+<li><strong>Reviews and votes</strong> — What the community thinks</li>
+<li><strong>Download button</strong> — Get the <code>.py</code> file</li>
+</ul>
+<h3>Step 5: Switch to Holo View</h3>
+<p>At the top of the store, you can switch between "Business" and "Holo" card styles. Holo cards turn every agent into a collectible trading card with generative art, stats, and abilities — inspired by Magic: The Gathering.</p>
+<p>This isn't just decoration. The card system makes agent discovery fun and helps you remember what agents do.</p>
+<h3>What You've Done</h3>
+<p>In about 10 minutes, you've:</p>
+<p>1. Opened the agent store
+2. Browsed 125+ agents
+3. Searched for agents relevant to your work
+4. Explored an agent's details
+5. Seen the card collection system</p>
+<p>No installation. No account creation. No technical setup. Welcome to RAPP.</p>
+<p>---</p>
+<div class="page-break"></div>
+<div class="page-break"></div>
+<h1>Part II: Using Agents Without Writing Code</h1>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 4: Browsing and Installing Agents</h2>
+<h3>Finding the Right Agent</h3>
+<p>The store has 19 categories. Here are the most useful for non-technical users:</p>
+<table>
+<tr><th>Category</th><th>What You'll Find</th></tr>
+<tr><td>Sales & CRM</td><td>Lead research, pipeline management, proposal writing</td></tr>
+<tr><td>Customer Service</td><td>Ticket handling, FAQ generation, satisfaction surveys</td></tr>
+<tr><td>Healthcare</td><td>Patient intake, appointment scheduling, compliance</td></tr>
+<tr><td>Finance</td><td>Invoice processing, budget analysis, reporting</td></tr>
+<tr><td>Manufacturing</td><td>Quality control, supply chain, production planning</td></tr>
+<tr><td>Marketing</td><td>Content creation, campaign analysis, SEO</td></tr>
+</table>
+Start with the <strong>@aibast-agents-library</strong> namespace. It has 104 industry-specific templates designed to be immediately useful.
+<h3>Installing an Agent</h3>
+<p>There are three ways to install an agent:</p>
+<p><strong>Method 1: Download and Drop</strong>
+1. Click the agent in the store
+2. Click "Download .py"
+3. Save the file to your <code>agents/</code> folder</p>
+<p><strong>Method 2: Drag and Drop</strong>
+1. If you already have a <code>.py</code> agent file, drag it into the browser window
+2. The store saves it to your local collection (IndexedDB)
+3. It appears alongside cloud agents</p>
+<p><strong>Method 3: Ask the AI</strong>
+If you're using CommunityRAPP with chat:
+<ul><li>Say: <em>"Install the dynamics-crud agent"</em></li>
+<li>The RAR Remote Agent handles the rest</li>
+</ul>
+<h3>Understanding What You've Installed</h3></p>
+<p>Every agent file is self-documented. If you open the <code>.py</code> file in any text editor (even Notepad), the first few lines tell you everything:</p>
+<ul><li>A description at the top (the "docstring")</li>
+<li>A block called <code>__manifest__</code> with the name, version, category, and description</li>
+<li>The actual code below</li>
+</ul>
+You don't need to understand the code. But knowing where to find the description and name is useful.
+<h3>Local-First Privacy</h3>
+<p>When you drag agents into the browser or download them, they're stored on YOUR device. Nothing gets uploaded to any server. Nothing gets shared unless you explicitly submit it. The store works completely offline and air-gapped.</p>
+<p>This matters for enterprise users who can't put proprietary tools on external servers.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 5: The Agent Card System — Collecting Your Toolkit</h2>
+<h3>Why Cards?</h3>
+<p>Every agent is a collectible card. This isn't a gimmick — it's a design decision.</p>
+<p>When you're managing dozens of agents across different projects, visual cards are easier to browse than a list of filenames. The card system gives each agent a memorable visual identity.</p>
+<h3>Business Cards</h3>
+<p>The default "Business" skin shows:
+<ul><li>Agent name and publisher</li>
+<li>One-line description</li>
+<li>Category and quality tier</li>
+<li>Key stats (file size, line count)</li>
+</ul>
+Clean, professional, informational. Like a business card you'd hand someone.</p>
+<h3>Holo Cards</h3>
+<p>Switch to "Holo" skin for the full trading card experience:
+<ul><li>Procedurally generated artwork (unique to each agent)</li>
+<li>Mana pips and colors (inspired by Magic: The Gathering)</li>
+<li>Creature type and abilities</li>
+<li>Power/toughness stats</li>
+<li>Flavor text</li>
+</ul>
+The Holo cards are generated by the CardSmith agent — one of the most creative pieces of the ecosystem. Each agent gets a deterministic card based on its name, so the art is always consistent.</p>
+<h3>Why This Matters for Non-Technical Users</h3>
+<p>Cards make agents approachable. Instead of staring at a list of filenames, you're browsing a visual collection. You remember "the blue card with the shield" more easily than "dynamics-crud.py."</p>
+<p>The card system also makes demos and presentations more engaging. When you're showing a client what agents you've deployed for them, a deck of Holo cards tells a better story than a directory listing.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 6: Building Decks — Your Personal Agent Portfolio</h2>
+<h3>What Are Decks?</h3>
+<p>Decks are named collections of agents. Think of them as playlists for your agent toolkit.</p>
+<p>Examples:
+<ul><li><strong>"Client Demo"</strong> — The agents you show prospects</li>
+<li><strong>"Sales Stack"</strong> — Your daily driver agents for sales work</li>
+<li><strong>"My Builds"</strong> — Agents you've created</li>
+<li><strong>"Healthcare Suite"</strong> — Agents deployed for a healthcare client</li>
+</ul>
+<h3>Creating a Deck</h3></p>
+<p>1. In the Agent Store, click any agent card
+2. Click "Add to Deck"
+3. Name your deck (or add to an existing one)
+4. Repeat for other agents</p>
+<h3>Sharing Decks</h3>
+<p>Decks can be shared via URL. Send the link to a colleague and they'll see the same agent collection in their browser.</p>
+<h3>Present Mode</h3>
+<p>This is where decks really shine. Click "Present" on any deck and it becomes a full-screen slideshow:</p>
+<ul><li>Arrow keys to navigate between agents</li>
+<li>Toggle between Business and Holo card views</li>
+<li>Each slide shows the agent's full details</li>
+</ul>
+Use this for:
+<ul><li>Client presentations ("Here's your deployed AI toolkit")</li>
+<li>Team onboarding ("These are the agents we use")</li>
+<li>Agent showcases ("Look what the community built this month")</li>
+</ul>
+---
+<div class="page-break"></div>
+<h2>Chapter 7: Using Agents from Chat</h2>
+<h3>The RAR Remote Agent</h3>
+<p>If you're using the CommunityRAPP chat interface, you have a built-in agent manager. The <code>@kody/rar_remote_agent</code> can:</p>
+<ul><li>Search the registry for agents by name, category, or keyword</li>
+<li>Install agents directly from chat</li>
+<li>Tell you what agents are available for your use case</li>
+</ul>
+<h3>Natural Language Commands</h3>
+<p>Just talk to it:</p>
+<blockquote><em>"What agents are available for CRM?"</em></blockquote>
+<blockquote><em>"Install the email drafting agent"</em></blockquote>
+<blockquote><em>"Show me all verified agents in the sales category"</em></blockquote>
+<blockquote><em>"What does the dynamics-crud agent do?"</em></blockquote>
+<h3>The Virtual Brainstem</h3>
+<p>The Virtual Brainstem is a more advanced chat interface that can:</p>
+<ul><li>Load any agent from the registry</li>
+<li>Execute agent operations directly</li>
+<li>Switch between agents in a conversation</li>
+<li>Show agent source code and operations</li>
+</ul>
+You select an agent, pick an operation, and provide the input. The Brainstem handles execution and shows you the result.
+<p>No terminal. No code. Just conversation.</p>
+<p>---</p>
+<div class="page-break"></div>
+<div class="page-break"></div>
+<h1>Part III: Building Your First Agent (The AI Helps)</h1>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 8: The Agent Workbench — Your Browser-Based Workshop</h2>
+<h3>What Is the Workbench?</h3>
+<p>The Agent Workbench is a code editor built into the Agent Store. But here's the key: <strong>you don't need to write code from scratch.</strong> The Workbench provides:</p>
+<p>1. <strong>Templates</strong> — Pre-filled agent structures you can modify
+2. <strong>Validation</strong> — Real-time checks that tell you if something's wrong
+3. <strong>Card Preview</strong> — See your agent as a Business or Holo card
+4. <strong>Download</strong> — Export your agent as a <code>.py</code> file
+5. <strong>Submit</strong> — Publish directly to the store</p>
+<h3>Opening the Workbench</h3>
+<p>In the Agent Store, click the "Workbench" tab in the navigation bar. You'll see a code editor with a template already loaded.</p>
+<h3>The Template</h3>
+<p>The template gives you a working agent with all the required pieces filled in:</p>
+<ul><li>The description at the top</li>
+<li>The <code>__manifest__</code> metadata block</li>
+<li>The class definition</li>
+<li>The <code>perform()</code> method</li>
+</ul>
+All you need to change is:
+<ul><li>The name and description</li>
+<li>What the agent actually does (the <code>perform()</code> method body)</li>
+<li>The parameters it accepts</li>
+</ul>
+<h3>Using AI to Write the Code</h3>
+<p>Here's where the "no tech skills required" promise delivers. You can:</p>
+<p>1. Open the Workbench
+2. Describe what you want the agent to do in plain English
+3. Use an AI assistant (Claude, ChatGPT, Copilot) to generate the code
+4. Paste it into the Workbench
+5. Click Validate
+6. Fix any issues the AI or validator flags
+7. Download or Submit</p>
+<p>The AI writes the Python. The Workbench validates it. You provide the idea.</p>
+<h3>What to Tell the AI</h3>
+<p>When asking an AI to write a RAPP agent for you, include these details:</p>
+<blockquote>"Write me a RAPP agent that [what it does]. It should accept [these inputs] and return [this output]. The manifest name should be @myname/agent-name. Use the standard RAPP agent template with __manifest__, BasicAgent inheritance, and a perform(<strong>kwargs) method that returns a string."</blockquote>
+<p>The more specific you are about inputs and outputs, the better the result.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 9: What's Inside a Single-File Agent</h2>
+<p>You don't need to understand every line of code. But knowing the structure helps you customize agents and fix issues. Here's what's inside every agent file, in plain English.</p>
+<h3>Part 1: The Description (Lines 1-5)</h3>
+<pre><code>"""
+My Agent — Does something useful.
+<p>A longer explanation of what this agent does.
+"""</code></pre></p>
+<p>This is the documentation. It's what shows up in the store and what other people read to understand your agent. Write it for humans, not machines.</p>
+<h3>Part 2: The Manifest (Lines 7-20)</h3>
+<pre><code>__manifest__ = {
+    "name": "@yourname/my-agent",
+    "description": "One sentence about what it does.",
+    "category": "productivity",
+    ...
+}</code></pre>
+<p>This is the metadata — the agent's ID card. The store reads this to know the agent's name, category, version, and what it needs to run. Here's what each field means:</p>
+<table>
+<tr><th>Field</th><th>What It Is</th><th>Example</th></tr>
+<tr><td><code>name</code></td><td>Unique identifier</td><td><code>@yourname/email-drafter</code></td></tr>
+<tr><td><code>display_name</code></td><td>Human-readable name</td><td><code>EmailDrafter</code></td></tr>
+<tr><td><code>description</code></td><td>One-sentence summary</td><td><code>Drafts professional emails from bullet points.</code></td></tr>
+<tr><td><code>category</code></td><td>Where it shows up in the store</td><td><code>productivity</code></td></tr>
+<tr><td><code>version</code></td><td>Current version</td><td><code>1.0.0</code></td></tr>
+<tr><td><code>tags</code></td><td>Search keywords</td><td><code>["email", "drafting", "productivity"]</code></td></tr>
+<tr><td><code>requires_env</code></td><td>API keys it needs</td><td><code>["OPENAI_API_KEY"]</code></td></tr>
+</table>
+<h3>Part 3: The Class (Lines 22-35)</h3>
+<pre><code>class MyAgent(BasicAgent):
+    def __init__(self):
+        self.name = "MyAgent"
+        ...</code></pre>
+<p>This creates the agent. Don't worry about the syntax — just know that every agent "inherits from" BasicAgent, which means it gets standard capabilities for free.</p>
+<h3>Part 4: The Perform Method (Lines 37-45)</h3>
+<pre><code>def perform(self, </strong>kwargs):
+    input_data = kwargs.get('input', '')
+    # Do something with input_data
+    return "The result"</code></pre>
+<p>This is the heart of the agent. When someone runs your agent, this is the code that executes. It takes inputs (<code>kwargs</code>), does work, and returns a text result.</p>
+<p><strong>The only hard rule</strong>: <code>perform()</code> must return a string. Always. Even if something goes wrong, return an error message as a string — never crash.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 10: Your First Agent — Step by Step</h2>
+<p>Let's build a real agent together. We'll create an agent that takes meeting notes (bullet points) and turns them into a formatted summary.</p>
+<h3>Step 1: Open the Workbench</h3>
+<p>Go to the Agent Store and click "Workbench."</p>
+<h3>Step 2: Modify the Template</h3>
+<p>Change these fields in the manifest:</p>
+<ul><li><code>name</code>: <code>@yourname/meeting-summary</code></li>
+<li><code>display_name</code>: <code>MeetingSummary</code></li>
+<li><code>description</code>: <code>Converts meeting bullet points into a formatted summary with action items.</code></li>
+<li><code>category</code>: <code>productivity</code></li>
+<li><code>tags</code>: <code>["meetings", "summary", "productivity", "notes"]</code></li>
+<li><code>requires_env</code>: <code>[]</code> (this agent doesn't need any API keys)</li>
+</ul>
+<h3>Step 3: Write the Perform Method</h3>
+<p>Here's what the <code>perform()</code> method should do:</p>
+<pre><code>def perform(self, **kwargs):
+    notes = kwargs.get('input', '')
+    if not notes:
+        return "Please provide meeting notes as the 'input' parameter."
+<p>lines = [line.strip() for line in notes.strip().split('\n') if line.strip()]</p>
+<p>actions = []
+    decisions = []
+    discussion = []</p>
+<p>for line in lines:
+        clean = line.lstrip('- ').lstrip('* ')
+        lower = clean.lower()
+        if any(kw in lower for kw in ['action', 'todo', 'follow up', 'assign', 'will ']):
+            actions.append(clean)
+        elif any(kw in lower for kw in ['decided', 'agreed', 'approved', 'confirmed']):
+            decisions.append(clean)
+        else:
+            discussion.append(clean)</p>
+<p>parts = ["# Meeting Summary\n"]
+    if decisions:
+        parts.append("## Decisions Made")
+        for d in decisions:
+            parts.append(f"- {d}")
+    if actions:
+        parts.append("\n## Action Items")
+        for a in actions:
+            parts.append(f"- [ ] {a}")
+    if discussion:
+        parts.append("\n## Discussion Points")
+        for d in discussion:
+            parts.append(f"- {d}")</p>
+<p>return '\n'.join(parts)</code></pre></p>
+<p>Don't panic if this looks like gibberish. You can ask an AI assistant to write this for you. Tell it:</p>
+<blockquote>"Write me a RAPP perform method that takes meeting notes as bullet points and sorts them into Decisions, Action Items, and Discussion Points. Return a formatted summary."</blockquote>
+<h3>Step 4: Validate</h3>
+<p>Click the "Validate" button in the Workbench. It checks:</p>
+<ul><li>Is the manifest complete?</li>
+<li>Does the name follow the right format?</li>
+<li>Does the class inherit from BasicAgent?</li>
+<li>Does perform() exist?</li>
+</ul>
+Fix any errors it flags.
+<h3>Step 5: Preview</h3>
+<p>Click "Card Preview" to see your agent as a Business or Holo card. This is what it'll look like in the store.</p>
+<h3>Step 6: Download or Submit</h3>
+<ul><li><strong>Download</strong>: Saves the <code>.py</code> file to your computer. Use this to test locally.</li>
+<li><strong>Submit</strong>: Publishes to the RAR registry via GitHub. Your agent goes live in the store.</li>
+</ul>
+<h3>What You Just Did</h3>
+<p>You created a working AI agent. It categorizes meeting notes into decisions, action items, and discussion points. It follows the RAPP single-file standard. It can be installed by anyone in the community.</p>
+<p>And you didn't need to install Python, set up a development environment, or open a terminal.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 11: Testing Without the Terminal</h2>
+<h3>Using the Workbench Validator</h3>
+<p>The Workbench's "Validate" button runs the same checks that the official registry builder uses:</p>
+<p>1. <strong>Manifest check</strong> — All required fields present and correctly formatted
+2. <strong>Name format</strong> — Follows the <code>@publisher/slug</code> convention
+3. <strong>Class check</strong> — Inherits from BasicAgent
+4. <strong>Method check</strong> — Has a <code>perform()</code> method
+5. <strong>Schema version</strong> — Uses <code>rapp-agent/1.0</code></p>
+<p>If validation passes, your agent will pass the automated CI checks when submitted.</p>
+<h3>Manual Testing in the Workbench</h3>
+<p>You can test your agent right in the browser:</p>
+<p>1. In the Workbench, look for the "Test" or "Run" option
+2. Enter sample input
+3. See the output</p>
+<p>For our MeetingSummary agent, try:</p>
+<pre><code>- Discussed Q3 marketing budget
+<ul><li>Decided to increase digital spend by 15%</li>
+<li>Action: Sarah will prepare revised budget by Friday</li>
+<li>Talked about new product launch timeline</li>
+<li>Agreed to push launch to March</li>
+<li>Todo: Mike to update project plan</code></pre></li>
+</ul>
+The agent should sort these into Decisions, Action Items, and Discussion Points.
+<h3>Using the Virtual Brainstem</h3>
+<p>For more thorough testing:</p>
+<p>1. Open the Virtual Brainstem
+2. Select your agent from the model selector
+3. Choose the <code>perform</code> operation
+4. Enter your test input
+5. See the result in the chat window</p>
+<p>This is the same environment where end users will interact with your agent, so it's the closest thing to a production test.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 12: Publishing to the Store</h2>
+<h3>The Submission Flow</h3>
+<p>You have two paths:</p>
+<p><strong>Path 1: Submit from the Workbench</strong>
+1. Click "Submit" in the Workbench
+2. The store creates a GitHub Issue with your agent code
+3. Automation processes the issue
+4. Your agent appears in the registry</p>
+<p><strong>Path 2: Pull Request (for more control)</strong>
+1. Fork the RAR repository on GitHub
+2. Add your file to <code>agents/@yourname/</code>
+3. Open a pull request
+4. The CI system validates your agent
+5. Maintainers review and merge</p>
+<p>For beginners, Path 1 is easier. For teams, Path 2 gives more control.</p>
+<h3>What Happens After Submission</h3>
+<p>1. Your agent starts at the <strong>Community</strong> quality tier
+2. The automation validates your manifest
+3. Your agent appears in the store with a Community badge
+4. The community can vote and review it
+5. Maintainers may promote it to <strong>Verified</strong> after review</p>
+<h3>Your Namespace</h3>
+<p>When you publish as <code>@yourname</code>, that namespace is yours forever. Nobody else can publish under your namespace. It's tied to your GitHub username.</p>
+<h3>Updating Your Agent</h3>
+<p>To update an existing agent:</p>
+<p>1. Bump the <code>version</code> in the manifest (e.g., <code>1.0.0</code> to <code>1.1.0</code>)
+2. Make your changes
+3. Submit again (same process)</p>
+<p>Use semantic versioning:
+<ul><li><strong>1.0.x</strong> — Bug fixes and small tweaks</li>
+<li><strong>1.x.0</strong> — New features (backward compatible)</li>
+<li><strong>x.0.0</strong> — Breaking changes (rare for single agents)</li>
+</ul>
+---</p>
+<div class="page-break"></div>
+<div class="page-break"></div>
+<h1>Part IV: Going Deeper (Still No CS Degree Required)</h1>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 13: Making Agents That Connect to Things</h2>
+<h3>The Environment Variable Pattern</h3>
+<p>Many useful agents need to connect to external services — your CRM, email system, project management tool, etc. These connections require API keys or credentials.</p>
+<p>In RAPP, credentials are handled through <strong>environment variables</strong>. This means:</p>
+<p>1. Your API key lives on YOUR machine (not in the code)
+2. The agent asks for the key by name when it runs
+3. If the key isn't there, the agent returns a helpful error message</p>
+<h3>Setting Environment Variables</h3>
+<p><strong>On Mac/Linux:</strong>
+Open Terminal and type:
+<pre><code>export MY_API_KEY="your-key-here"</code></pre></p>
+<p><strong>On Windows:</strong>
+Open Command Prompt and type:
+<pre><code>set MY_API_KEY=your-key-here</code></pre></p>
+<p><strong>Permanently (so it survives restarts):</strong>
+Add the line to your shell profile (<code>.bashrc</code>, <code>.zshrc</code>, or Windows Environment Variables in System Settings).</p>
+<h3>How Agents Use Environment Variables</h3>
+<p>In the agent code, it looks like this:
+<pre><code>api_key = os.environ.get("MY_API_KEY", "")
+if not api_key:
+    return "Error: Please set the MY_API_KEY environment variable."</code></pre></p>
+<p>The key thing: agents NEVER hardcode credentials. And they always tell you what's missing.</p>
+<h3>Example: Building a Simple API Agent</h3>
+<p>Want an agent that connects to a service? Tell the AI:</p>
+<blockquote>"Write me a RAPP agent that calls the [Service Name] REST API. It should accept a query parameter and return the API response. The API key should come from the [SERVICE]_API_KEY environment variable. If the key is missing, return an error message."</blockquote>
+<p>The AI will generate the code. You paste it in the Workbench. Validate. Done.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 14: The Holo Card System — Making Your Agent Collectible</h2>
+<h3>How Cards Are Generated</h3>
+<p>Every agent gets a card automatically. The CardSmith agent uses your agent's name to generate a deterministic card with:</p>
+<ul><li>Unique artwork (procedurally generated from the agent name)</li>
+<li>Mana cost and colors (based on category and complexity)</li>
+<li>Creature type (based on what the agent does)</li>
+<li>Abilities (derived from the agent's operations)</li>
+<li>Flavor text (from the agent description)</li>
+<li>Power/toughness stats (based on code metrics)</li>
+</ul>
+<h3>Influencing Your Card</h3>
+<p>You can't directly design your card, but you can influence it:</p>
+<ul><li><strong>Name</strong> affects the artwork pattern</li>
+<li><strong>Category</strong> affects the card colors</li>
+<li><strong>Description</strong> becomes flavor text</li>
+<li><strong>Tags</strong> influence creature type</li>
+<li><strong>Code complexity</strong> affects power/toughness</li>
+</ul>
+Choose a memorable name and a vivid description, and your card will stand out in the collection.
+<h3>Why Cards Matter for Business</h3>
+<p>Cards aren't just fun. They're a communication tool:</p>
+<ul><li><strong>Client demos</strong>: Show agents as collectible cards instead of boring file lists</li>
+<li><strong>Team dashboards</strong>: Display deployed agents as a card deck</li>
+<li><strong>Onboarding</strong>: New team members browse agent cards to learn what's available</li>
+<li><strong>Presentations</strong>: Present mode turns any deck into a slideshow</li>
+</ul>
+---
+<div class="page-break"></div>
+<h2>Chapter 15: Running Your Own Agent Store</h2>
+<h3>What Is Federation?</h3>
+<p>RAR is a template repository. You can create your own copy and run it independently. This is called <strong>federation</strong>.</p>
+<p>Your private store can:</p>
+<ul><li>Host agents only your team can see</li>
+<li>Pull public agents from the main store</li>
+<li>Run completely air-gapped (no internet required)</li>
+<li>Submit agents back to the main store if you choose</li>
+</ul>
+<h3>Why Federation Matters</h3>
+<p><strong>For enterprises</strong>: Keep proprietary agents internal while still using community agents.</p>
+<p><strong>For teams</strong>: Curate a specific set of agents for your use case.</p>
+<p><strong>For educators</strong>: Create a private store for a class or workshop.</p>
+<h3>Setting It Up</h3>
+<p>1. Go to the RAR GitHub repository
+2. Click "Use this template" to create your own copy
+3. The setup automation runs automatically
+4. Edit <code>rar.config.json</code> with your settings
+5. Add your agents to <code>agents/@yournamespace/</code></p>
+<p>Your store will run at <code>https://yourusername.github.io/your-repo/</code> — free hosting courtesy of GitHub Pages.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 16: The Community — Forum, Wiki, and Getting Help</h2>
+<h3>Rappterpedia</h3>
+<p>Rappterpedia is the community knowledge base for the RAPP ecosystem. It has two parts:</p>
+<p><strong>Wiki</strong> — Articles covering everything from beginner guides to deep architecture dives. Categories include Getting Started, Agents, Architecture, Integrations, Best Practices, Troubleshooting, Federation, and Community.</p>
+<p><strong>Forum</strong> — Discussion threads organized into channels: General Discussion, Help & Support, Agent Showcase, Ideas & Requests, Bug Reports, and Meta & Governance.</p>
+<h3>Getting Help</h3>
+<p>If you're stuck:</p>
+<p>1. <strong>Search the wiki first</strong> — Most common questions are already answered
+2. <strong>Search the forum</strong> — Someone probably had the same issue
+3. <strong>Post in Help & Support</strong> — The community is friendly and responsive
+4. <strong>Check the Agent Store Workbench validator</strong> — It catches most manifest issues</p>
+<h3>Contributing Back</h3>
+<p>You don't need to write code to contribute:</p>
+<ul><li><strong>Vote</strong> on agents you use and like</li>
+<li><strong>Review</strong> agents you've tried</li>
+<li><strong>Write wiki articles</strong> about your experience</li>
+<li><strong>Answer questions</strong> in the forum</li>
+<li><strong>Share your decks</strong> — curated agent collections help others discover useful tools</li>
+</ul>
+The community runs on participation. Every vote, review, and forum post makes the ecosystem better for everyone.
+<p>---</p>
+<div class="page-break"></div>
+<div class="page-break"></div>
+<h1>Part V: Real-World Playbooks</h1>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 17: The Sales Team Playbook</h2>
+<h3>Your Agent Stack</h3>
+<table>
+<tr><th>Agent</th><th>What It Does</th><th>Category</th></tr>
+<tr><td>Deal Desk</td><td>B2B sales process management</td><td>Sales</td></tr>
+<tr><td>Recon Deck</td><td>Prospect research and briefing</td><td>Sales</td></tr>
+<tr><td>Proposal Copilot</td><td>Generates competitive proposals</td><td>Sales</td></tr>
+<tr><td>Sales Assistant</td><td>Meeting prep and follow-up</td><td>Sales</td></tr>
+<tr><td>Email Drafting</td><td>Professional email composition</td><td>Productivity</td></tr>
+<tr><td>Demo Script Generator</td><td>Creates demo scripts and flows</td><td>Productivity</td></tr>
+</table>
+<h3>Workflow: New Prospect</h3>
+<p>1. <strong>Recon Deck</strong>: "Research Acme Corp for a discovery call"
+   - Returns: Company overview, key contacts, recent news, competitive landscape</p>
+<p>2. <strong>Demo Script Generator</strong>: "Create a demo flow for a manufacturing company interested in quality control"
+   - Returns: Step-by-step demo script with talking points</p>
+<p>3. <strong>Proposal Copilot</strong>: "Generate a proposal for Acme Corp's quality control needs"
+   - Returns: Full proposal with pricing models and win themes</p>
+<p>4. <strong>Email Drafting</strong>: "Draft a follow-up email after a demo with Acme Corp"
+   - Returns: Professional follow-up with next steps</p>
+<h3>Building a Sales Deck</h3>
+<p>Create a deck called "Sales Stack" with all your go-to agents. Use Present mode when onboarding new sales reps — each card explains what the agent does and when to use it.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 18: The Small Business Playbook</h2>
+<h3>Your Agent Stack</h3>
+<table>
+<tr><th>Agent</th><th>What It Does</th></tr>
+<tr><td>Customer Loyalty & Rewards</td><td>Points tracking, program management</td></tr>
+<tr><td>Email Drafting</td><td>Professional communications</td></tr>
+<tr><td>General Ask HR</td><td>HR questions and policy lookup</td></tr>
+<tr><td>Invoice Processing</td><td>Invoice data extraction and validation</td></tr>
+<tr><td>MeetingSummary (your custom build!)</td><td>Meeting notes to action items</td></tr>
+</table>
+<h3>Getting Started</h3>
+<p>1. Open the Agent Store
+2. Search for agents in your industry vertical (the @aibast-agents-library has 104 templates)
+3. Install 3-5 agents that match your daily work
+4. Create a deck called "Daily Drivers"
+5. Use them through the chat interface or Virtual Brainstem</p>
+<h3>The 80/20 Rule</h3>
+<p>You don't need 50 agents. Start with 3-5 that handle your most repetitive tasks. Master those. Then expand.</p>
+<p>The meeting summary agent from Chapter 10? That alone saves 15 minutes per meeting. Three meetings a day, five days a week — that's almost 4 hours saved per week from one agent.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 19: The Creative Professional Playbook</h2>
+<h3>Your Agent Stack</h3>
+<table>
+<tr><th>Agent</th><th>What It Does</th></tr>
+<tr><td>Architecture Diagram</td><td>Generates visual system diagrams</td></tr>
+<tr><td>PowerPoint Generator</td><td>Creates presentation slides</td></tr>
+<tr><td>Content Creation agents</td><td>Blog posts, social media, copywriting</td></tr>
+<tr><td>Rappterbook</td><td>Document generation and management</td></tr>
+</table>
+<h3>Creative Workflow</h3>
+<p>1. <strong>Brainstorm</strong> with the chat interface — describe your project
+2. <strong>Draft</strong> using content agents — get a first pass quickly
+3. <strong>Visualize</strong> with the diagram and presentation agents
+4. <strong>Refine</strong> by feeding the output back with specific feedback</p>
+<p>The key insight for creative work: agents give you a starting point, not a finished product. They eliminate the blank page problem. You edit and refine from a draft instead of creating from nothing.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Chapter 20: The Enterprise Team Playbook</h2>
+<h3>Federation First</h3>
+<p>For enterprise teams, start with federation:</p>
+<p>1. Create a private RAR instance for your organization
+2. Pull public agents you've vetted
+3. Build proprietary agents under your company namespace
+4. Set up CI/CD for automated testing and deployment</p>
+<h3>Governance</h3>
+<p>Use the quality tier system for internal governance:</p>
+<ul><li><strong>Community tier</strong> — Any team member can publish (dev/test)</li>
+<li><strong>Verified tier</strong> — IT reviews and approves (staging)</li>
+<li><strong>Official tier</strong> — Production-ready, maintained by platform team</li>
+</ul>
+<h3>Compliance</h3>
+<ul><li>Agents never hardcode credentials (uses environment variables)</li>
+<li>The store works offline and air-gapped</li>
+<li>Local-first storage (IndexedDB) — nothing leaves the device</li>
+<li>Full audit trail through GitHub Issues and PR history</li>
+<li>Federation keeps proprietary agents internal</li>
+</ul>
+<h3>Scale</h3>
+<p>Start with one team. Build 5-10 agents. Prove the value. Then expand to other teams through federation. Each team gets their own namespace but can share agents through the internal store.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h1>Appendix A: Glossary</h1>
+<p><strong>Agent</strong> — A single-file Python program that takes inputs and returns a text result.</p>
+<p><strong>BasicAgent</strong> — The base class every agent inherits from. Provides standard capabilities.</p>
+<p><strong>Card</strong> — Visual representation of an agent. Business (professional) or Holo (trading card) styles.</p>
+<p><strong>Deck</strong> — A named collection of agent cards. Used for organization and presentations.</p>
+<p><strong>Federation</strong> — Running your own copy of the agent store, optionally connected to the main store.</p>
+<p><strong>Manifest</strong> — The <code>__manifest__</code> metadata dictionary in every agent file. Contains name, version, description, etc.</p>
+<p><strong>Namespace</strong> — Your publisher identity (<code>@yourname</code>). Tied to your GitHub username.</p>
+<p><strong>Perform</strong> — The <code>perform(<strong>kwargs)</code> method. The heart of every agent — takes inputs, returns a string.</p>
+<p></strong>Quality Tier<strong> — Trust level: Community, Verified, Official, or Frontier.</p>
+<p></strong>RAR<strong> — RAPP Agent Registry. The open agent store and ecosystem.</p>
+<p></strong>RAPP<strong> — The broader AI agent platform that agents are built for.</p>
+<p></strong>Registry<strong> — The <code>registry.json</code> index of all agents. Auto-generated by the build system.</p>
+<p></strong>Single-File Principle<strong> — Every agent is one <code>.py</code> file. Documentation, metadata, and code in one place.</p>
+<p></strong>Workbench** — Browser-based agent development environment built into the store.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h1>Appendix B: Quick Reference Card</h1>
+<h3>Creating an Agent</h3>
+<p>1. Open Agent Store > Workbench
+2. Modify the template manifest
+3. Write or AI-generate the perform() method
+4. Validate
+5. Download or Submit</p>
+<h3>Required Manifest Fields</h3>
+<pre><code>schema, name, version, display_name,
+description, author, tags, category</code></pre>
+<h3>Agent Name Format</h3>
+<pre><code>@yourname/agent-slug
+(lowercase kebab-case for the slug)</code></pre>
+<h3>Categories</h3>
+<pre><code>core | pipeline | integrations | productivity | devtools</code></pre>
+<h3>Quality Tiers</h3>
+<pre><code>Frontier > Community > Verified > Official</code></pre>
+<h3>The Golden Rules</h3>
+<p>1. One file. Always.
+2. perform() returns a string. Always.
+3. No secrets in code. Use environment variables.
+4. Handle errors gracefully. Return a message, don't crash.
+5. No network calls in __init__(). Keep startup fast.</p>
+<p>---</p>
+<div class="page-break"></div>
+<h1>Appendix C: Troubleshooting — When Things Don't Work</h1>
+<h3>"Validation says my manifest is missing"</h3>
+<p>Your <code>__manifest__</code> dict must be at the top level of the file, not inside a class or function. It should be right after the docstring.</p>
+<h3>"My agent name is rejected"</h3>
+<p>Format must be <code>@publisher/slug</code> where:
+<ul><li>publisher = your GitHub username (lowercase)</li>
+<li>slug = lowercase letters, numbers, and hyphens only</li>
+</ul>
+<h3>"perform() returns None"</h3></p>
+<p>Your perform method must explicitly <code>return</code> a string. If you forget the return statement, Python returns None by default.</p>
+<h3>"display_name mismatch"</h3>
+<p>The <code>display_name</code> in your manifest must exactly match <code>self.name</code> in your class. Copy-paste to be safe.</p>
+<h3>"Agent works in Workbench but not after download"</h3>
+<p>Make sure you're running Python 3.11+. Check with <code>python --version</code> in your terminal. Older versions may not support some syntax.</p>
+<h3>"Environment variable not found"</h3>
+<p>Set it before running the agent:
+<ul><li>Mac/Linux: <code>export VAR_NAME="value"</code></li>
+<li>Windows: <code>set VAR_NAME=value</code></li>
+</ul>
+<h3>"I'm completely stuck"</h3></p>
+<p>1. Search Rappterpedia wiki
+2. Post in the Help & Support forum
+3. Look at a working agent in the same category for reference
+4. Ask an AI assistant: "Why doesn't this RAPP agent work?" and paste your code</p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>Afterword</h2>
+<p>You made it.</p>
+<p>You've gone from "what's an agent?" to understanding how to browse, install, build, test, and publish AI agents — without writing code from scratch, without a computer science background, without any of the traditional barriers.</p>
+<p>The RAPP ecosystem is designed to be exactly this accessible. One file. One idea. One AI assistant to help with the implementation.</p>
+<p>The agents you build don't need to be perfect. They don't need to be clever. They just need to be useful — to you, to your team, to your customers. Start with one small agent that saves you 15 minutes a day. Then build another. Then share them.</p>
+<p>The best tools aren't built by the most technical people. They're built by the people who understand the problem best.</p>
+<p>That's you.</p>
+<p>Now go build something.</p>
+<p>---</p>
+<p><em>Single file. Single principle. Single source of truth.</em></p>
+<p>---</p>
+<div class="page-break"></div>
+<h2>About the Author</h2>
+<p>Kody Wildfeuer is the creator of the RAPP Agent ecosystem and the RAR (RAPP Agent Registry). He builds tools that make AI accessible to everyone, not just engineers. When he's not shipping agents, he's probably thinking about how to make the next thing simpler.</p>
+<p>Find the Agent Store at: https://kody-w.github.io/RAR/</p>
+<p>Find Rappterpedia at: https://kody-w.github.io/RAR/rappterpedia/</p>
+
+</body>
+</html>
