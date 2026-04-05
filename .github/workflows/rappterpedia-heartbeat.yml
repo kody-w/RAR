@@ -2,14 +2,14 @@ name: Rappterpedia Heartbeat
 
 on:
   schedule:
-    # Every 6 hours — generates wiki articles, forum threads, and replies
-    - cron: '0 */6 * * *'
+    # Every 2 hours — fleet generates content across all categories
+    - cron: '0 */2 * * *'
   workflow_dispatch:
     inputs:
       burst:
-        description: 'Number of ticks to run (1 = ~2 articles + ~2 threads)'
+        description: 'Number of ticks per fleet worker (1 = ~2 articles + ~2 threads each)'
         required: false
-        default: '1'
+        default: '3'
       dry_run:
         description: 'Dry run (no commits)'
         required: false
@@ -20,8 +20,13 @@ permissions:
   contents: write
 
 jobs:
-  heartbeat:
+  # ── Fleet: parallel workers, each generating content ──
+  fleet:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        worker: [alpha, bravo, charlie, delta, echo]
+      max-parallel: 5
     steps:
       - uses: actions/checkout@v4
 
@@ -29,23 +34,136 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run Rappterpedia engine
+      - name: "Fleet worker ${{ matrix.worker }}: generate content"
         run: |
-          ARGS=""
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            ARGS="$ARGS --dry-run"
-          fi
-          BURST="${{ github.event.inputs.burst || '1' }}"
-          if [ "$BURST" != "1" ]; then
-            ARGS="$ARGS --burst $BURST"
-          fi
-          python rappterpedia/rappterpedia_engine.py --no-push $ARGS
+          BURST="${{ github.event.inputs.burst || '3' }}"
+          echo "Worker ${{ matrix.worker }} generating ${BURST} ticks..."
+          python rappterpedia/rappterpedia_engine.py --no-push --burst "$BURST"
 
-      - name: Commit generated content
-        if: github.event.inputs.dry_run != 'true'
+      - name: Upload state artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: state-${{ matrix.worker }}
+          path: |
+            rappterpedia/rappterpedia_state.json
+            rappterpedia/rappterpedia_export.json
+
+  # ── Merge: combine all fleet output and commit ──
+  merge:
+    needs: fleet
+    runs-on: ubuntu-latest
+    if: github.event.inputs.dry_run != 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Download all fleet artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: fleet-output
+
+      - name: Merge fleet content
         run: |
-          git config user.name "Rappterpedia Bot"
-          git config user.email "rappterpedia-bot@users.noreply.github.com"
+          python3 - <<'PYEOF'
+          import json, os, glob
+
+          # Load existing state
+          state_path = "rappterpedia/rappterpedia_state.json"
+          export_path = "rappterpedia/rappterpedia_export.json"
+
+          if os.path.exists(state_path):
+              with open(state_path) as f:
+                  merged = json.load(f)
+          else:
+              merged = {"tick_count": 0, "articles": [], "threads": [],
+                        "next_article_id": 1, "next_thread_id": 1,
+                        "next_reply_id": 1, "generated_topics": [],
+                        "generated_agent_ids": []}
+
+          existing_article_ids = {a["id"] for a in merged.get("articles", [])}
+          existing_thread_ids = {t["id"] for t in merged.get("threads", [])}
+
+          new_articles = 0
+          new_threads = 0
+
+          # Merge each worker's output
+          for worker_dir in sorted(glob.glob("fleet-output/state-*")):
+              worker_state = os.path.join(worker_dir, "rappterpedia_state.json")
+              if not os.path.exists(worker_state):
+                  continue
+              with open(worker_state) as f:
+                  ws = json.load(f)
+
+              for a in ws.get("articles", []):
+                  if a["id"] not in existing_article_ids:
+                      merged.setdefault("articles", []).append(a)
+                      existing_article_ids.add(a["id"])
+                      new_articles += 1
+
+              for t in ws.get("threads", []):
+                  if t["id"] not in existing_thread_ids:
+                      merged.setdefault("threads", []).append(t)
+                      existing_thread_ids.add(t["id"])
+                      new_threads += 1
+
+              merged["tick_count"] = max(
+                  merged.get("tick_count", 0),
+                  ws.get("tick_count", 0)
+              )
+
+              for topic in ws.get("generated_topics", []):
+                  if topic not in merged.get("generated_topics", []):
+                      merged.setdefault("generated_topics", []).append(topic)
+              for aid in ws.get("generated_agent_ids", []):
+                  if aid not in merged.get("generated_agent_ids", []):
+                      merged.setdefault("generated_agent_ids", []).append(aid)
+
+          # Update next IDs
+          if merged["articles"]:
+              max_art = max(
+                  (int(a["id"].split("-")[-1]) for a in merged["articles"]
+                   if a["id"].startswith("gen-art-")), default=0
+              )
+              merged["next_article_id"] = max(merged.get("next_article_id", 1), max_art + 1)
+          if merged["threads"]:
+              max_thr = max(
+                  (int(t["id"].split("-")[-1]) for t in merged["threads"]
+                   if t["id"].startswith("gen-thr-")), default=0
+              )
+              merged["next_thread_id"] = max(merged.get("next_thread_id", 1), max_thr + 1)
+
+          # Save merged state
+          with open(state_path, "w") as f:
+              json.dump(merged, f, indent=2)
+
+          # Build export
+          from datetime import datetime, timezone
+          export = {
+              "version": "1.0",
+              "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "tick_count": merged["tick_count"],
+              "articles": merged["articles"],
+              "threads": merged["threads"],
+              "stats": {
+                  "total_articles": len(merged["articles"]),
+                  "total_threads": len(merged["threads"]),
+                  "total_replies": sum(len(t.get("replies", [])) for t in merged["threads"]),
+              },
+          }
+          with open(export_path, "w") as f:
+              json.dump(export, f, indent=2)
+
+          print(f"Fleet merge complete: +{new_articles} articles, +{new_threads} threads")
+          print(f"Total: {len(merged['articles'])} articles, {len(merged['threads'])} threads")
+          PYEOF
+
+      - name: Commit merged fleet content
+        run: |
+          git config user.name "Rappterpedia Fleet"
+          git config user.email "rappterpedia-fleet@users.noreply.github.com"
           git add rappterpedia/
-          git diff --cached --quiet || git commit -m "Rappterpedia heartbeat: auto-generated content [skip ci]"
+          git diff --cached --quiet || git commit -m "Rappterpedia fleet: auto-generated content [skip ci]"
           git push
