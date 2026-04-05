@@ -853,6 +853,7 @@ def get_agent_context(agent: dict) -> dict:
 
     return {
         "name": agent.get("display_name", name),
+        "class_name": agent.get("display_name", name).replace(" ", "").replace("-", ""),
         "agent_name": name,
         "agent_display": agent.get("display_name", name),
         "description": agent.get("description", "An agent in the RAR registry."),
@@ -873,6 +874,176 @@ def get_agent_context(agent: dict) -> dict:
         "tag_list": ", ".join(tags) if tags else "none",
         "tags": tags,
     }
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Agent Page Generation — every agent gets a wiki page
+# The backbone of an agent-first Wikipedia.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AGENT_PAGE_SECTIONS = [
+    ("Overview", [
+        "**{name}** (`{agent_name}`) is a {cat} agent published by `{publisher}`. {description}\n\nIt ships as a single `.py` file following the [Single-File Principle](/wiki/single-file-anatomy), weighing in at {size_kb} KB ({lines} lines).",
+    ]),
+    ("Installation", [
+        "### From the Agent Store\n\nBrowse to [{name}](../index.html) in the store and download the `.py` file.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\n> *\"Install {agent_name}\"*",
+    ]),
+    ("Manifest", [
+        "```\nName:         {agent_name}\nVersion:      {version}\nCategory:     {cat}\nQuality Tier: {tier}\nAuthor:       {publisher}\nTags:         {tag_list}\nDependencies: {deps}\n```",
+    ]),
+    ("Configuration", [
+        "This agent {env_section}.\n\nDependencies: {deps}.",
+    ]),
+    ("Usage", [
+        "Call `perform(**kwargs)` with your parameters. The agent processes the input and returns a string result.\n\n```python\nagent = {class_name}()\nresult = agent.perform(input=\"your input here\")\nprint(result)\n```",
+    ]),
+    ("See Also", [
+        "- [Agent Store](../index.html) — Browse all agents\n- [{cat} agents](/wiki/category-{category}) — Other agents in this category\n- [Single-File Agent Anatomy](/wiki/single-file-anatomy) — How agents are structured\n- [{publisher} namespace](/wiki/publisher-{publisher_slug}) — Other agents by this publisher",
+    ]),
+]
+
+
+def generate_agent_pages(state: dict, agents: list[dict]) -> list[str]:
+    """Generate a wiki page for every agent that doesn't have one yet."""
+    results = []
+    existing_ids = {a["id"] for a in state.get("articles", [])}
+
+    for agent in agents:
+        name = agent.get("name", "")
+        page_id = f"agent-page-{name.replace('@','').replace('/','-')}"
+
+        if page_id in existing_ids:
+            continue
+
+        ctx = get_agent_context(agent)
+
+        content_parts = []
+        for heading, templates in AGENT_PAGE_SECTIONS:
+            body = fill_template(templates[0], ctx)
+            content_parts.append(f"## {heading}\n\n{body}")
+        content = "\n\n".join(content_parts)
+
+        article = {
+            "id": page_id,
+            "title": ctx["name"],
+            "category": "agents",
+            "tags": agent.get("tags", [])[:5] + ["agent-page", "auto-generated"],
+            "content": content,
+            "author": "Rappterpedia",
+            "created": now_iso(),
+            "updated": now_iso(),
+            "type": "agent_page",
+        }
+        state["articles"].append(article)
+        existing_ids.add(page_id)
+        results.append(f"📄 Agent page: {ctx['name']} ({name})")
+
+    return results
+
+
+def generate_category_pages(state: dict, agents: list[dict]) -> list[str]:
+    """Generate index pages for each agent category."""
+    results = []
+    existing_ids = {a["id"] for a in state.get("articles", [])}
+
+    # Group agents by category
+    categories = {}
+    for agent in agents:
+        cat = agent.get("category", "general")
+        categories.setdefault(cat, []).append(agent)
+
+    for cat, cat_agents in categories.items():
+        page_id = f"category-page-{cat}"
+        if page_id in existing_ids:
+            continue
+
+        cat_display = cat.replace("_", " ").title()
+        agent_list = "\n".join(
+            f"- **[{a.get('display_name', a.get('name','?'))}](/wiki/agent-page-{a.get('name','').replace('@','').replace('/','-')})** — {a.get('description', 'No description.')}"
+            for a in sorted(cat_agents, key=lambda x: x.get("display_name", ""))
+        )
+
+        content = (
+            f"## {cat_display}\n\n"
+            f"There are **{len(cat_agents)} agents** in the {cat_display} category.\n\n"
+            f"## Agents\n\n{agent_list}\n\n"
+            f"## About This Category\n\n"
+            f"The {cat_display} category contains agents that "
+        )
+        if cat in ("core", "devtools"):
+            content += "provide fundamental capabilities and development tools for the RAR ecosystem."
+        elif cat in ("pipeline",):
+            content += "build, generate, or deploy other agents."
+        elif cat in ("integrations",):
+            content += "connect to external systems and APIs."
+        elif cat in ("productivity",):
+            content += "create content or automate tasks."
+        else:
+            content += f"serve the {cat_display} industry vertical."
+
+        article = {
+            "id": page_id,
+            "title": f"Category: {cat_display}",
+            "category": "agents",
+            "tags": [cat, "category-index", "auto-generated"],
+            "content": content,
+            "author": "Rappterpedia",
+            "created": now_iso(),
+            "updated": now_iso(),
+            "type": "category_page",
+        }
+        state["articles"].append(article)
+        existing_ids.add(page_id)
+        results.append(f"📂 Category page: {cat_display} ({len(cat_agents)} agents)")
+
+    return results
+
+
+def generate_publisher_pages(state: dict, agents: list[dict]) -> list[str]:
+    """Generate index pages for each publisher namespace."""
+    results = []
+    existing_ids = {a["id"] for a in state.get("articles", [])}
+
+    publishers = {}
+    for agent in agents:
+        name = agent.get("name", "")
+        pub = name.split("/")[0].lstrip("@") if "/" in name else "unknown"
+        publishers.setdefault(pub, []).append(agent)
+
+    for pub, pub_agents in publishers.items():
+        page_id = f"publisher-page-{pub}"
+        if page_id in existing_ids:
+            continue
+
+        cats = set(a.get("category", "?") for a in pub_agents)
+        agent_list = "\n".join(
+            f"- **[{a.get('display_name', a.get('name','?'))}](/wiki/agent-page-{a.get('name','').replace('@','').replace('/','-')})** ({a.get('category','?')}) — {a.get('description','')[:80]}"
+            for a in sorted(pub_agents, key=lambda x: x.get("display_name", ""))
+        )
+
+        content = (
+            f"## @{pub}\n\n"
+            f"The **@{pub}** namespace contains **{len(pub_agents)} agents** "
+            f"across {len(cats)} categor{'y' if len(cats)==1 else 'ies'}: {', '.join(sorted(cats))}.\n\n"
+            f"## Agent Listing\n\n{agent_list}"
+        )
+
+        article = {
+            "id": page_id,
+            "title": f"Publisher: @{pub}",
+            "category": "community",
+            "tags": [pub, "publisher-index", "auto-generated", "namespace"],
+            "content": content,
+            "author": "Rappterpedia",
+            "created": now_iso(),
+            "updated": now_iso(),
+            "type": "publisher_page",
+        }
+        state["articles"].append(article)
+        existing_ids.add(page_id)
+        results.append(f"👤 Publisher page: @{pub} ({len(pub_agents)} agents)")
+
+    return results
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1255,6 +1426,11 @@ def rappterpedia_tick(num_articles: int = 2, num_threads: int = 2, dry_run: bool
 
     state["tick_count"] += 1
     ts = now_iso()
+
+    # ── Phase 0: Ensure every agent/category/publisher has a page ──
+    results.extend(generate_agent_pages(state, agents))
+    results.extend(generate_category_pages(state, agents))
+    results.extend(generate_publisher_pages(state, agents))
 
     # ── Build echoes from previous frames ──────────────
     echoes = build_echoes(state)
