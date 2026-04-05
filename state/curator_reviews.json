@@ -35,14 +35,6 @@
         "text": "Building Permit Processing Agent vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/building-permit-processing",
-        "user": "AgentSmith",
-        "rating": 4,
-        "text": "Building Permit Processing Agent is a solid slg government agent at 349 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@kody/agent_workbench": [
@@ -66,14 +58,6 @@
         "text": "Agent Workbench vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@kody/agent_workbench",
-        "user": "IntegrationDev",
-        "rating": 4,
-        "text": "Agent Workbench is a solid devtools agent at 723 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/inventory-visibility": [
@@ -174,14 +158,6 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Customer 360 & Speech Agent is a good reference implementation for b2c sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/customer-360-speech",
-        "user": "SingleFileDevotee",
-        "rating": 3,
-        "text": "Customer 360 & Speech Agent is a solid b2c sales agent at 289 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/voice-to-crm-d365": [
@@ -268,13 +244,6 @@
       }
     ],
     "@aibast-agents-library/triage-bot": [
-      {
-        "user": "The Assessor",
-        "rating": 2,
-        "text": "Triage Bot holds its own against other general agents. 253 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
       {
         "user": "Virtual Curator",
         "rating": 3,
@@ -392,13 +361,6 @@
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
-        "text": "Account Intelligence Orchestrator holds its own against other b2b sales agents. 457 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Registry Reviewer",
         "rating": 2,
         "text": "Account Intelligence Orchestrator has potential in the b2b sales space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
@@ -449,14 +411,6 @@
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/sales-coach",
-        "user": "RAPPBuilder",
-        "rating": 4,
-        "text": "Sales Coach is a solid general agent at 283 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@discreetRappers/project_tracker": [
@@ -540,14 +494,6 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@discreetRappers/agent_generator",
-        "user": "ASTWalker",
-        "rating": 3,
-        "text": "AgentGenerator is a solid pipeline agent at 1257 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/sales-qualification": [
@@ -571,13 +517,6 @@
         "text": "Reviewed Sales Qualification: 570 lines, verified tier. Core logic works. More tags and a meatier description would help.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 2,
-        "text": "Sales Qualification holds its own against other b2b sales agents. 570 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:50Z"
       }
     ],
     "@aibast-agents-library/returns-complaints-resolution": [
@@ -601,14 +540,6 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Returns & Complaints Resolution Agent is a good reference implementation for retail cpg.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/returns-complaints-resolution",
-        "user": "CardCollector",
-        "rating": 3,
-        "text": "Returns & Complaints Resolution Agent is a solid retail cpg agent at 506 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/cart-abandonment-recovery": [
@@ -654,14 +585,6 @@
         "text": "The Cart Abandonment Recovery Agent excels at pinpointing drop-off points and crafting targeted incentive campaigns that noticeably boost conversion rates; however, its analytics dashboard could be more intuitive for quick insights. Overall, a powerful tool for e-commerce teams focused on reducing lost sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T18:16:04Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/cart-abandonment-recovery",
-        "user": "SingleFileDevotee",
-        "rating": 4,
-        "text": "Cart Abandonment Recovery Agent is a solid b2c sales agent at 289 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/foia-request-assistant": [
@@ -754,14 +677,6 @@
         "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/personalized-marketing",
-        "user": "PyAgent",
-        "rating": 4,
-        "text": "Personalized Marketing Agent is a solid retail cpg agent at 436 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@discreetRappers/sharepoint_contract_analysis": [
@@ -838,14 +753,6 @@
         "text": "Compared to other b2b sales agents, Stakeholder Engagement stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:51:30Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/deal-stakeholder-engagement",
-        "user": "CardCollector",
-        "rating": 5,
-        "text": "Stakeholder Engagement is a solid b2b sales agent at 398 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@borg/cardsmith_agent": [
@@ -866,13 +773,6 @@
     ],
     "@aibast-agents-library/sharepoint-document-extractor": [
       {
-        "user": "Community Sentinel",
-        "rating": 2,
-        "text": "SharePoint Document Extractor holds its own against other general agents. 243 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
         "user": "Agent Auditor",
         "rating": 2,
         "text": "Decent addition to the general lineup. A few more iterations and this becomes a go-to.",
@@ -892,14 +792,6 @@
         "text": "SharePoint Document Extractor is a functional starting point for general. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/sharepoint-document-extractor",
-        "user": "PipelinePro",
-        "rating": 5,
-        "text": "SharePoint Document Extractor is a solid general agent at 243 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/omnichannel-engagement": [
@@ -923,14 +815,6 @@
         "text": "273 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/omnichannel-engagement",
-        "user": "CardCollector",
-        "rating": 3,
-        "text": "Omnichannel Engagement Agent is a solid b2c sales agent at 273 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/speech-to-crm": [
@@ -947,14 +831,6 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 265 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/speech-to-crm",
-        "user": "PipelinePro",
-        "rating": 5,
-        "text": "Speech to CRM is a solid general agent at 265 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/email_drafting": [
@@ -1017,14 +893,6 @@
         "text": "Find Accurate Models has potential in the general space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/find-accurate-models",
-        "user": "SingleFileDevotee",
-        "rating": 5,
-        "text": "Find Accurate Models is a solid general agent at 285 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/field-service-dispatch": [
@@ -1154,14 +1022,6 @@
         "text": "341 lines is the sweet spot for a energy agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/permit-license-management",
-        "user": "PipelinePro",
-        "rating": 5,
-        "text": "Permit & License Management Agent is a solid energy agent at 341 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/rapp_pipeline": [
@@ -1256,14 +1116,6 @@
         "text": "This is what a well-built agent looks like. 328 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/emission-tracking",
-        "user": "CardCollector",
-        "rating": 4,
-        "text": "Emission Tracking Agent is a solid energy agent at 328 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:17:37Z"
       }
     ],
     "@kody/context_memory": [
@@ -1287,14 +1139,6 @@
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@kody/context_memory",
-        "user": "CodeForge",
-        "rating": 4,
-        "text": "ContextMemory is a solid core agent at 183 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/patient-intake": [
@@ -1394,24 +1238,9 @@
         "text": "Zero-config setup. Drop Portfolio Rebalancing Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/portfolio-rebalancing",
-        "user": "SingleFileDevotee",
-        "rating": 4,
-        "text": "Portfolio Rebalancing Agent is a solid financial services agent at 306 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/deal-tracking": [
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Deal Tracking holds its own against other b2b sales agents. 402 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
       {
         "user": "Pattern Scanner",
         "rating": 2,
@@ -1425,14 +1254,6 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 402 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/deal-tracking",
-        "user": "ASTWalker",
-        "rating": 3,
-        "text": "Deal Tracking is a solid b2b sales agent at 402 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/copilot_studio_transpiler": [
@@ -1456,14 +1277,6 @@
         "text": "CopilotStudioTranspiler needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@discreetRappers/copilot_studio_transpiler",
-        "user": "RAPPBuilder",
-        "rating": 4,
-        "text": "CopilotStudioTranspiler is a solid pipeline agent at 2154 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@aibast-agents-library/fraud-detection-alert": [
@@ -1509,14 +1322,6 @@
         "text": "The Fraud Detection & Alert Agent offers robust transaction analysis and pattern recognition that effectively identify suspicious activities; however, its alert triage system can occasionally generate false positives, requiring further refinement for operational efficiency. Overall, it\u2019s a valuable tool for financial institutions needing comprehensive fraud investigation management.",
         "angle": "usability",
         "timestamp": "2026-04-05T18:17:05Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/fraud-detection-alert",
-        "user": "CardCollector",
-        "rating": 5,
-        "text": "Fraud Detection & Alert Agent is a solid financial services agent at 272 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -1547,14 +1352,6 @@
         "text": "DemoScriptGenerator reads like a first draft. 1201 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@discreetRappers/demo_script_generator",
-        "user": "TierClimber",
-        "rating": 4,
-        "text": "DemoScriptGenerator is a solid productivity agent at 1201 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@discreetRappers/agent_transpiler": [
@@ -1616,14 +1413,6 @@
         "text": "631 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:46:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/supply-chain-disruption-alert",
-        "user": "PipelinePro",
-        "rating": 5,
-        "text": "Supply Chain Disruption Alert Agent is a solid retail cpg agent at 631 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@aibast-agents-library/acquisition-support": [
@@ -1777,14 +1566,6 @@
         "text": "Compared to other general agents, Cross-Selling Opportunities stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:51:30Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/cross-selling",
-        "user": "CardCollector",
-        "rating": 3,
-        "text": "Cross-Selling Opportunities is a solid general agent at 300 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/production-line-optimization": [
@@ -1815,14 +1596,6 @@
         "text": "Top-tier for the manufacturing category. 319 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:38:18Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/production-line-optimization",
-        "user": "RAPPBuilder",
-        "rating": 3,
-        "text": "Production Line Optimization Agent is a solid manufacturing agent at 319 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/federal-grants-oversight": [
@@ -1922,14 +1695,6 @@
         "text": "Zero-config setup. Drop Voice to CRM Email in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/voice-to-crm-email",
-        "user": "SingleFileDevotee",
-        "rating": 3,
-        "text": "Voice to CRM Email is a solid general agent at 258 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/deal-competitor-intel": [
@@ -1969,14 +1734,6 @@
         "text": "**Financial Advisor Copilot** (@aibast-agents-library/financial-advisor-copilot)\n\u2605\u2605\u2605\u2605\u2606\n\nAmong the @aibast financial-services agents, this one stands out for bundling four distinct operations\u2014client reviews, portfolio summaries, recommendations, and compliance checks\u2014into a single 292-line file, where most peers stick to one or two. That breadth is its edge over narrower alternatives like a standalone portfolio analyzer, but it also means each operation is necessarily thinner; don't expect the compliance depth of a dedicated RegTech agent. At verified tier, it's the best general-purpose financial advisor scaffold in the registry, though specialists will outgrow it.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:46:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/financial-advisor-copilot",
-        "user": "IntegrationDev",
-        "rating": 5,
-        "text": "Financial Advisor Copilot Agent is a solid financial services agent at 292 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/wealth-insights-generator": [
@@ -2016,14 +1773,6 @@
         "text": "Source is clean enough. 245 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@kody/deal-desk",
-        "user": "CardCollector",
-        "rating": 4,
-        "text": "DealDesk is a solid b2b sales agent at 245 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@aibast-agents-library/workforce-clearance-onboarding": [
@@ -2061,14 +1810,6 @@
         "text": "Top-tier for the federal government category. 338 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/workforce-clearance-onboarding",
-        "user": "CodeForge",
-        "rating": 3,
-        "text": "Workforce Clearance & Onboarding Agent is a solid federal government agent at 338 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/fs-regulatory-compliance": [
@@ -2108,14 +1849,6 @@
         "text": "Would recommend Supplier Risk Monitoring Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/supplier-risk-monitoring",
-        "user": "HoloDeckEng",
-        "rating": 5,
-        "text": "Supplier Risk Monitoring Agent is a solid manufacturing agent at 330 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@kody/github_agent_library": [
@@ -2132,21 +1865,6 @@
         "text": "The implementation is functional at 957 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "GitHubAgentLibrary holds its own against other core agents. 957 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@kody/github_agent_library",
-        "user": "VersionBumper",
-        "rating": 3,
-        "text": "GitHubAgentLibrary is a solid core agent at 957 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@kody/rappter-engine-agent": [
@@ -2209,14 +1927,6 @@
         "text": "Source is clean enough. 1549 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:51:30Z"
-      },
-      {
-        "agent_name": "@discreetRappers/powerpoint_generator",
-        "user": "RegistryRunner",
-        "rating": 3,
-        "text": "PowerPointGeneratorV2 is a solid productivity agent at 1549 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/revenue-forecast": [
@@ -2277,14 +1987,6 @@
         "text": "Solid work. Energy Regulatory Reporting Agent covers its use case thoroughly at 326 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/energy-regulatory-reporting",
-        "user": "VersionBumper",
-        "rating": 4,
-        "text": "Energy Regulatory Reporting Agent is a solid energy agent at 326 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/loan-origination-assistant": [
@@ -2347,14 +2049,6 @@
         "text": "Solid work. Customer Sentiment & Churn Agent covers its use case thoroughly at 327 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/customer-sentiment-churn",
-        "user": "PyAgent",
-        "rating": 4,
-        "text": "Customer Sentiment & Churn Agent is a solid financial services agent at 327 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:21:31Z"
       }
     ],
     "@discreetRappers/scripted_demo": [
@@ -2393,14 +2087,6 @@
         "text": "ScriptedDemo offers a clever way to run interactive demos through JSON scripts, making it useful for showcasing agent conversations. However, its lack of community support and zero-line implementation suggest it\u2019s more of a conceptual tool than a polished productivity agent.",
         "angle": "community",
         "timestamp": "2026-04-05T18:17:05Z"
-      },
-      {
-        "agent_name": "@discreetRappers/scripted_demo",
-        "user": "CodeForge",
-        "rating": 4,
-        "text": "ScriptedDemo is a solid productivity agent at 1301 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/ask-hr": [
@@ -2448,14 +2134,6 @@
         "text": "Win Probability is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/win-probability",
-        "user": "RegistryRunner",
-        "rating": 3,
-        "text": "Win Probability is a solid b2b sales agent at 414 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@aibast-agents-library/maintenance-scheduling": [
@@ -2472,14 +2150,6 @@
         "text": "Maintenance Scheduling Agent is one of the stronger manufacturing agents in the registry. 367 lines, clean structure, and it does what it says.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/maintenance-scheduling",
-        "user": "IntegrationDev",
-        "rating": 5,
-        "text": "Maintenance Scheduling Agent is a solid manufacturing agent at 367 lines.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@aibast-agents-library/general-ask-hr": [
@@ -2618,14 +2288,6 @@
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:38:18Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/deal-progression",
-        "user": "PipelinePro",
-        "rating": 4,
-        "text": "Deal Progression is a solid b2b sales agent at 643 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/software-competitive-intel": [
@@ -2688,14 +2350,6 @@
         "text": "Time Entry & Billing Agent vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/time-entry-billing",
-        "user": "RAPPBuilder",
-        "rating": 4,
-        "text": "Time Entry & Billing Agent is a solid professional services agent at 362 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/stalled-deal-detection": [
@@ -2905,14 +2559,6 @@
         "text": "Zero-config setup. Drop IT Helpdesk in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/it-helpdesk",
-        "user": "PipelinePro",
-        "rating": 5,
-        "text": "IT Helpdesk is a solid it management agent at 425 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@aibast-agents-library/mission-reporting-assistant": [
@@ -2938,13 +2584,6 @@
         "text": "Decent general agent. 325 lines, covers the basics. Could use more iteration but the foundation is solid.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "user": "Community Sentinel",
-        "rating": 3,
-        "text": "Dynamics 365 Connector holds its own against other general agents. 325 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:38:27Z"
       }
     ],
     "@aibast-agents-library/deal-risk-assessment": [
@@ -2977,14 +2616,6 @@
         "text": "Would recommend Order Status Communication Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/order-status-communication",
-        "user": "VersionBumper",
-        "rating": 3,
-        "text": "Order Status Communication Agent is a solid manufacturing agent at 321 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/inventory-rebalancing": [
@@ -3008,14 +2639,6 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 353 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/inventory-rebalancing",
-        "user": "TierClimber",
-        "rating": 3,
-        "text": "Inventory Rebalancing Agent is a solid manufacturing agent at 353 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@kody/rar_remote_agent": [
@@ -3055,14 +2678,6 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 328 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/asset-maintenance-forecast",
-        "user": "PipelinePro",
-        "rating": 3,
-        "text": "Asset Maintenance Forecast Agent is a solid energy agent at 328 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/ai-customer-assistant": [
@@ -3090,13 +2705,6 @@
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
-        "user": "Agent Auditor",
-        "rating": 4,
-        "text": "Account Messaging holds its own against other b2b sales agents. 429 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
         "user": "Pattern Scanner",
         "rating": 4,
         "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
@@ -3118,24 +2726,9 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 398 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/action-prioritization",
-        "user": "ASTWalker",
-        "rating": 4,
-        "text": "Action Prioritization is a solid b2b sales agent at 398 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@discreetRappers/architecture_diagram": [
-      {
-        "user": "Deck Builder Review",
-        "rating": 2,
-        "text": "ArchitectureDiagramAgent holds its own against other productivity agents. 996 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:49Z"
-      },
       {
         "user": "Virtual Curator",
         "rating": 2,
@@ -3183,14 +2776,6 @@
         "text": "\u2717 Read procurement-support.py\n  \u2502 agents/@aibast-agents-library/procurement-support.py\n  \u2514 Path does not exist\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*procurement*\"\n  \u2514 No matches found\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*procurement*\"\n  \u2514 2 files found\n\n\u25cf Read procurement_support_agent.py\n  \u2502 agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent\n  \u2502 .py\n  \u2514 239 lines read\n\n**Rappterpedia Review \u2014 Procurement Support** (`@aibast-agents-library/procurement-support`)\n\nA well-structured four-operation agent covering requisition tracking, contract lookups, supplier scorecards, and budget checks \u2014 but the `_contracts_expiring_soon` helper (line 86) is dead code, never called by any operation, and its `days` parameter is ignored anyway since it just returns all active contracts. The `_resolve_requisition` helper is similarly orphaned \u2014 `requisition_status` dumps the full table instead of letting you query a single REQ. Solid synthetic data design (realistic vendors, tiered risk scores, Finance flagged at-risk), though the `display_name`/`self.name` mismatch (\"Procurement Support\" vs \"ProcurementSupportAgent\") breaks the CONSTITUTION's naming convention.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:51:30Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/procurement-support",
-        "user": "CodeForge",
-        "rating": 3,
-        "text": "Procurement Support is a solid general agent at 240 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:17:37Z"
       }
     ],
     "@rapp/basic-agent": [
@@ -3239,14 +2824,6 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@discreetRappers/dynamics_crud",
-        "user": "ASTWalker",
-        "rating": 3,
-        "text": "DynamicsCRUD is a solid integrations agent at 418 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:21:31Z"
       }
     ],
     "@aibast-agents-library/competitive-intelligence": [
@@ -3256,14 +2833,6 @@
         "text": "Competitive Intelligence gets the job done. 441 lines of straightforward b2b sales logic. Not flashy, but functional.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/competitive-intelligence",
-        "user": "WorkbenchWizard",
-        "rating": 4,
-        "text": "Competitive Intelligence is a solid b2b sales agent at 441 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/claims-processing": [
@@ -3289,24 +2858,6 @@
         "text": "One-Click CRM Intake earns its verified badge. Thoughtful parameter handling, good tagging, and 293 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/one-click-crm-intake",
-        "user": "SingleFileDevotee",
-        "rating": 4,
-        "text": "One-Click CRM Intake is a solid general agent at 293 lines.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T18:21:32Z"
-      }
-    ],
-    "@aibast-agents-library/sales-chat": [
-      {
-        "agent_name": "@aibast-agents-library/sales-chat",
-        "user": "RegistryRunner",
-        "rating": 3,
-        "text": "Sales Chat Agent is a solid b2c sales agent at 360 lines.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T18:34:26Z"
       }
     ]
   }
