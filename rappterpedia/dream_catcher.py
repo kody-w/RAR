@@ -238,7 +238,8 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
                 user=f"Write a wiki article: \"{title}\"\n\nAgent: {ctx['name']} ({ctx['agent_name']})\nDescription: {ctx['description']}\nCategory: {ctx['category']}, {ctx['lines']} lines, {ctx['tier']} tier\nTags: {ctx['tags']}\n\n{echo_context}\n\nWrite practical, specific content with ## headers.",
             )
             if not content:
-                content = f"## Overview\n\n**{ctx['name']}** (`{ctx['agent_name']}`) is a {ctx['category']} agent. {ctx['description']}\n\n## Usage\n\nThis agent ships as a single `.py` file at {ctx['lines']} lines. Install it from the Agent Store or fetch directly."
+                print(f"  [SKIP] No LLM response for article: {title}")
+                continue  # LLM-only — no template fallback
 
             author = random.choice(AUTHORS)
             pk = composite_pk(frame, ts, author, title)
@@ -246,6 +247,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
                 "pk": pk, "title": title, "category": "agents",
                 "tags": agent.get("tags", [])[:4] + ["deep-dive"],
                 "content": content, "author": author,
+                "source": "llm",
                 "created": ts, "updated": ts,
             })
             recent_titles.add(title)
@@ -261,32 +263,33 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
         topic = random.choice(topics)
         thread_title = f"Discussion: {topic}"
         body = llm_generate(
-            system="You are a community member in the Rappterpedia forum. Write an authentic post about the RAPP agent ecosystem. Be specific.",
+            system="You are a community member in the Rappterpedia forum. Write an authentic, detailed post about the RAPP agent ecosystem. Be specific about agents, manifests, perform(), BasicAgent, the single-file principle. Write 3-5 paragraphs.",
             user=f"Write a forum post titled \"{thread_title}\".\n\n{echo_context}",
-            max_tokens=300,
+            max_tokens=400,
         )
         if not body:
-            body = f"Been thinking about {topic} lately. What are your experiences? I'd love to hear how others in the community approach this."
+            print(f"  [SKIP] No LLM response for thread: {thread_title}")
+            continue  # LLM-only — no template fallback
 
         author = random.choice(AUTHORS)
         pk = composite_pk(frame, ts, author, thread_title)
 
-        # Generate 1-3 replies
+        # Generate 1-3 replies (LLM-only, skip if no response)
         replies = []
         for _ in range(random.randint(1, 3)):
             reply_author = random.choice(AUTHORS)
             reply_text = llm_generate(
-                system="Reply to a Rappterpedia forum thread. Be helpful and specific about RAR agents.",
-                user=f"Thread: {thread_title}\nPost: {body[:200]}\n\nWrite a 1-2 sentence reply.",
-                max_tokens=100,
+                system="Reply to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference RAR concepts like manifests, perform(), BasicAgent, quality tiers, the registry.",
+                user=f"Thread: {thread_title}\nPost: {body[:300]}\n\nWrite a thoughtful 2-3 sentence reply.",
+                max_tokens=150,
             )
-            if not reply_text:
-                reply_text = f"Good points. I've been thinking about this too. The single-file principle really changes how you approach {topic}."
-            replies.append({"author": reply_author, "content": reply_text, "created": ts})
+            if reply_text:
+                replies.append({"author": reply_author, "content": reply_text, "source": "llm", "created": ts})
 
         delta["threads_created"].append({
             "pk": pk, "title": thread_title, "channel": "general",
-            "content": body, "author": author, "created": ts, "updated": ts,
+            "content": body, "author": author, "source": "llm",
+            "created": ts, "updated": ts,
             "votes": random.randint(1, 8), "replies": replies,
         })
 
@@ -294,18 +297,20 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
         if agents:
             agent = random.choice(agents)
             review_text = llm_generate(
-                system="Write a 1-2 sentence review of a RAR agent. Be specific and opinionated.",
-                user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\n\nWrite a concise review.",
-                max_tokens=100,
+                system="Write a 2-3 sentence review of a RAR agent. Be specific, opinionated, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. No generic praise.",
+                user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('_lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\nTags: {', '.join(agent.get('tags',[]))}\nEnv vars: {', '.join(agent.get('requires_env',[])) or 'none'}\n\nWrite a specific, opinionated review.",
+                max_tokens=150,
             )
             if not review_text:
-                review_text = f"{agent.get('display_name','')} is a solid {agent.get('category','').replace('_',' ')} agent at {agent.get('_lines',0)} lines."
+                print(f"  [SKIP] No LLM response for review: {agent.get('name','')}")
+                continue  # LLM-only
 
             delta["reviews_created"].append({
                 "agent_name": agent.get("name", ""),
                 "user": random.choice(AUTHORS),
                 "rating": random.randint(3, 5),
                 "text": review_text,
+                "source": "llm",
                 "angle": random.choice(["primary", "usability", "code_quality", "community"]),
                 "timestamp": ts,
             })
