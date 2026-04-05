@@ -1,0 +1,264 @@
+;; ═══════════════════════════════════════════════════════════════
+;; RAPP Foundation SDK — Pure LisPy Edition
+;; Build agents, mint cards, track Binders.
+;; Runs in browser (RappterVM), CLI (lisp.py), or offline.
+;; Same SDK. Every runtime. One file.
+;; ═══════════════════════════════════════════════════════════════
+
+;; ── Constants ──
+
+(define SDK_VERSION "1.0.0")
+
+(define REQUIRED_FIELDS
+  (list "schema" "name" "version" "display_name"
+        "description" "author" "tags" "category"))
+
+(define VALID_TIERS
+  (list "experimental" "community" "verified" "official"))
+
+(define TIER_TO_RARITY
+  (make-dict
+    "official" "mythic"
+    "verified" "rare"
+    "community" "core"
+    "experimental" "starter"))
+
+(define RARITY_LABELS
+  (make-dict
+    "mythic" "Legendary"
+    "rare" "Elite"
+    "core" "Core"
+    "starter" "Starter"))
+
+(define RARITY_FLOOR
+  (make-dict
+    "mythic" 200
+    "rare" 100
+    "core" 40
+    "starter" 10))
+
+(define REPO "kody-w/RAR")
+(define RAW_BASE (concat "https://raw.githubusercontent.com/" REPO "/main"))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Deterministic Card Generation
+;; The core invention. Same seed = same card. Everywhere. Forever.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Seed hash: deterministic integer from a string
+;; h = ((h << 5) - h + charCode) & 0xFFFFFFFF
+(define (seed-hash s)
+  (reduce
+    (lambda (_acc c)
+      (% (+ (- (* _acc 32) _acc) (char-code c)) 4294967296))
+    (string->list s)
+    0))
+
+;; Mulberry32 PRNG — returns a closure that produces floats [0, 1)
+(define (mulberry32 seed)
+  (let (s seed)
+    (lambda ()
+      (set! s (% (+ s 1831565813) 4294967296))
+      (let (t s)
+        (set! t (% (* (bit-xor t (bit-rshift t 15)) (bit-or 1 t)) 4294967296))
+        (set! t (% (+ t (* (bit-xor t (bit-rshift t 7)) (bit-or 61 t))) 4294967296))
+        (/ (bit-xor t (bit-rshift t 14)) 4294967296)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Card Operations
+;; ═══════════════════════════════════════════════════════════════
+
+(define FLAVOR_PHRASES
+  (list
+    "A single-file agent. A single promise: perform."
+    "Built for the ecosystem. Ready for the edge."
+    "The registry remembers what the developer forgets."
+    "One file. One truth. One card."
+    "In the dependency tree, every leaf was once a seed."
+    "Not all intelligence is artificial. Some is engineered."
+    "The card is the agent. The agent is the card."
+    "First minted, forever valued."
+    "From seed to shade, the tree grows."
+    "Your digital twin lives on."))
+
+(define TYPE_PREFIXES
+  (make-dict
+    "core" "Core"
+    "pipeline" "Pipeline"
+    "integrations" "Integration"
+    "productivity" "Productivity"
+    "devtools" "DevTool"
+    "b2b_sales" "B2B Sales"
+    "b2c_sales" "B2C Sales"
+    "healthcare" "Healthcare"
+    "financial_services" "FinServ"
+    "manufacturing" "Manufacturing"
+    "general" "General"))
+
+;; Resolve a complete card from just a name — the micro-bandwidth primitive
+(define (resolve-card name registry)
+  (let (agent (find-agent name registry))
+    (if (null? agent)
+      (make-dict "error" (concat "Agent '" name "' not found"))
+      (let (tier      (get agent "quality_tier" "community")
+            rarity    (get TIER_TO_RARITY tier "core")
+            tags      (get agent "tags" (list))
+            deps      (get agent "dependencies" (list))
+            env-vars  (get agent "requires_env" (list))
+            version   (get agent "version" "1.0.0")
+            category  (get agent "category" "general")
+            rng       (mulberry32 (seed-hash name))
+            flavor-idx (floor (* (rng) (length FLAVOR_PHRASES))))
+        (make-dict
+          "name"         name
+          "display_name" (get agent "display_name" name)
+          "version"      version
+          "tier"         tier
+          "rarity"       rarity
+          "rarity_label" (get RARITY_LABELS rarity rarity)
+          "power"        (+ (length tags) (length deps))
+          "toughness"    (+ (* 2 (number (car (split version ".")))) (length env-vars))
+          "category"     category
+          "type_line"    (concat (get TYPE_PREFIXES category "Agent") " Agent — " rarity)
+          "flavor"       (nth FLAVOR_PHRASES flavor-idx)
+          "floor_pts"    (get RARITY_FLOOR rarity 10)
+          "seed"         (seed-hash name)
+          "description"  (get agent "description" ""))))))
+
+;; Card value lookup
+(define (card-value name registry)
+  (let (agent (find-agent name registry))
+    (if (null? agent)
+      (make-dict "error" (concat "Agent '" name "' not found"))
+      (let (tier   (get agent "quality_tier" "community")
+            rarity (get TIER_TO_RARITY tier "core")
+            floor  (get RARITY_FLOOR rarity 10))
+        (make-dict
+          "name"         name
+          "display_name" (get agent "display_name" name)
+          "tier"         tier
+          "rarity"       rarity
+          "rarity_label" (get RARITY_LABELS rarity rarity)
+          "floor_pts"    floor)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Registry Operations
+;; ═══════════════════════════════════════════════════════════════
+
+;; Find an agent by name in the registry
+(define (find-agent name registry)
+  (let (agents (get registry "agents" (list)))
+    (let (matches (filter (lambda (a) (= (get a "name" "") name)) agents))
+      (if (empty? matches) nil (car matches)))))
+
+;; Search agents by query string
+(define (search-agents query registry)
+  (let (q (lowercase query)
+        agents (get registry "agents" (list)))
+    (filter
+      (lambda (a)
+        (or (contains? (lowercase (get a "name" "")) q)
+            (contains? (lowercase (get a "display_name" "")) q)
+            (contains? (lowercase (get a "description" "")) q)
+            (contains? (lowercase (get a "category" "")) q)))
+      agents)))
+
+;; Binder status — count agents by tier
+(define (binder-status registry)
+  (let (agents (get registry "agents" (list))
+        total  (length agents)
+        by-tier (make-dict))
+    (for-each
+      (lambda (a)
+        (let (tier (get a "quality_tier" "community")
+              count (get by-tier tier 0))
+          (set! by-tier (dict-set by-tier tier (+ count 1)))))
+      agents)
+    (make-dict
+      "total_agents" total
+      "by_tier" by-tier
+      "total_pts" (reduce
+        (lambda (_acc a)
+          (+ _acc (get RARITY_FLOOR
+                    (get TIER_TO_RARITY (get a "quality_tier" "community") "core")
+                    10)))
+        agents 0))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Display
+;; ═══════════════════════════════════════════════════════════════
+
+;; Pretty-print a resolved card
+(define (display-card card)
+  (if (has-key? card "error")
+    (log (concat "Error: " (get card "error")))
+    (begin
+      (log (get card "display_name"))
+      (log (concat "  " (get card "type_line")))
+      (log (concat "  " (get card "rarity_label") "  (" (get card "rarity") ")"))
+      (log (concat "  P/T: " (string (get card "power")) "/" (string (get card "toughness"))))
+      (log (concat "  \"" (get card "flavor") "\""))
+      (log (concat "  Seed: " (string (get card "seed"))))
+      (log (concat "  Floor: " (string (get card "floor_pts")) " pts"))
+      (log "")
+      (log "  Resolved from name alone.")
+      (log "  Send the name over any channel. Card self-assembles."))))
+
+;; Pretty-print search results
+(define (display-search results)
+  (if (empty? results)
+    (log "  No results found.")
+    (for-each
+      (lambda (a)
+        (log (concat "  " (get a "name") " — " (get a "display_name")
+                     " [" (get a "quality_tier" "community") "]")))
+      results)))
+
+;; Pretty-print binder status
+(define (display-binder-status status)
+  (log (concat "  Total agents: " (string (get status "total_agents"))))
+  (log "  By tier:")
+  (let (tiers (get status "by_tier"))
+    (for-each
+      (lambda (tier)
+        (let (count (get tiers tier)
+              rarity (get TIER_TO_RARITY tier "core")
+              label (get RARITY_LABELS rarity rarity))
+          (log (concat "    " tier ": " (string count) " agents (" label ")"))))
+      (keys tiers)))
+  (log (concat "  Total value: " (string (get status "total_pts")) " pts")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Main — Interactive SDK
+;; ═══════════════════════════════════════════════════════════════
+
+;; Agent identity (required by .lispy contract)
+(define _agent_name "rapp-sdk")
+(define _agent_desc "RAPP Foundation SDK — Build agents, mint cards, track Binders. Pure LisPy.")
+
+;; When run as a standalone program:
+(begin
+  (log "═══════════════════════════════════════")
+  (log " RAPP Foundation SDK v1.0.0 — LisPy")
+  (log " Build agents. Mint cards. Track Binders.")
+  (log "═══════════════════════════════════════")
+  (log "")
+  (log " Functions available:")
+  (log "   (resolve-card \"@name/agent\" registry)")
+  (log "   (card-value \"@name/agent\" registry)")
+  (log "   (search-agents \"query\" registry)")
+  (log "   (binder-status registry)")
+  (log "   (seed-hash \"any string\")")
+  (log "   (display-card card)")
+  (log "")
+  (log " Load registry: (define reg (json-parse (read-file \"registry.json\")))")
+  (log " Then: (display-card (resolve-card \"@rapp/basic-agent\" reg))")
+  (log "")
+  (log " The card IS the seed. The seed IS the name.")
+  (log " Your digital twin lives on.")
+  (log "═══════════════════════════════════════"))
