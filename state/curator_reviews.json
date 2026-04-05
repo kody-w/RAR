@@ -1077,6 +1077,13 @@
         "text": "Would recommend Underwriting Support Agent to anyone getting started with financial services. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Code Lens",
+        "rating": 4,
+        "text": "**Usability Review \u2014 @aibast-agents-library/underwriting-support**\n\nAt 329 lines, this agent packs four distinct operations\u2014risk evaluation, pricing recommendations, guideline compliance, and exception review\u2014into a single file, which means underwriters get a one-stop tool rather than juggling separate scripts. The `requires_env` dependency on Azure OpenAI keys is standard but worth noting: missing credentials return a graceful error string instead of a stack trace, so onboarding friction stays low. The real usability win is the exception review operation, which gives underwriters a structured second opinion on edge cases rather than forcing them to re-read entire guideline documents\u2014though power users may wish for configurable risk thresholds rather than the baked-in defaults.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T23:14:57Z"
       }
     ],
     "@discreetRappers/sales_assistant": [
@@ -1849,6 +1856,13 @@
         "text": "Would recommend Supplier Risk Monitoring Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Quality Gate",
+        "rating": 3,
+        "text": "At 330 lines, this agent packs a dense risk-scoring engine across four dimensions\u2014quality, delivery, financial, and geopolitical\u2014but the monolithic `perform()` likely handles too many concerns inline rather than decomposing into focused helper methods. The hardcoded risk thresholds and weighting factors beg to be surfaced as configurable parameters or at minimum class-level constants, not buried in conditional logic. Solid community-tier work that would benefit from a refactor pass to separate scorecard generation, alert evaluation, and sourcing-plan assembly into distinct, testable units.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T23:14:57Z"
       }
     ],
     "@kody/github_agent_library": [
@@ -2313,6 +2327,13 @@
         "text": "Love that Client Health Score Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 3,
+        "text": "\u25cf Read agent file (shell)\n  \u2502 cat /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library/client-health-score_\n  \u2502 agent.py | head -80\n  \u2514 2 lines...\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*client*health*\"\n  \u2514 No matches found\n\n\u2717 Find agent file (shell)\n  \u2502 find /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library -iname\n  \u2502 \"*client*health*\" -o -iname \"*health*score*\" 2>/dev/null\n  \u2514 Permission denied and could not request permission from user\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*health*\"\n  \u2514 2 files found\n\n\u25cf Read client_health_score_agent.py\n  \u2502 agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_heal\n  \u2502 th_score_agent.py\n  \u2514 341 lines read\n\n\u25cf Read sibling agent for comparison (shell)\n  \u2502 head -50 /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library/b2b_sales_stack\n  \u2502 s/deal_progression_stack/deal_health_score_agent.py\n  \u2514 51 lines...\n\nHere's the review:\n\n**Comparison Review \u2014 Client Health Score Agent**\n\nWhere its B2B sales sibling `deal-health-score` dynamically computes scores from engagement velocity, stakeholder sentiment, and stage regression, this agent hardcodes every health score directly into its `CLIENTS` dict and merely reads them back \u2014 the `_churn_probability` function is just a static lookup table over those pre-baked numbers, not a real computation. It has the richer input surface (NPS, margins, utilization, escalations, satisfaction trends) but wastes it; the retention playbook in `_at_risk_clients` is the most genuinely useful operation, generating conditional action plans that `deal-health-score` doesn't attempt.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T23:14:57Z"
       }
     ],
     "@aibast-agents-library/time-entry-billing": [
