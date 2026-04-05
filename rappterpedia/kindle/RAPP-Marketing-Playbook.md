@@ -47,20 +47,19 @@ This is where the book + platform combo kills:
 
 ### The Offer Stack
 
-| Component | Value | What They Get |
-|-----------|-------|---------------|
-| The Kindle Book | $9.99 | 20-chapter guide, zero to published agent |
-| Access to Agent Store | FREE | 131 ready-to-use agents |
-| Rappterpedia Wiki | FREE | 400+ articles, community forum |
-| Agent Workbench | FREE | Browser-based agent builder with AI assist |
-| Holo Card Collection | FREE | Every agent as a collectible trading card |
-| Agent Templates (104) | FREE | Industry-specific templates across 14 verticals |
-| Federation (own store) | FREE | Fork and run your own private agent store |
+| Component | What They Get |
+|-----------|---------------|
+| The Book | 20-chapter guide, zero to published agent |
+| Agent Store | 131 ready-to-use agents |
+| Rappterpedia Wiki | 400+ articles, community forum |
+| Agent Workbench | Browser-based agent builder with AI assist |
+| Holo Card Collection | Every agent as a collectible trading card |
+| Agent Templates (104) | Industry-specific templates across 14 verticals |
+| Federation (own store) | Fork and run your own private agent store |
 
-**Total perceived value: $5,000+ of AI consulting**
-**Actual price: $9.99 (the book) + $0 (everything else)**
+**Everything is free. The entire stack. No paywalls. No tiers. No "premium."**
 
-This is the Hormozi play: stack so much free value that the book becomes a no-brainer, and the book becomes the gateway to the ecosystem.
+This is the play: give away so much value that adoption is frictionless. The ecosystem grows when people use it. Monetization comes later when the ecosystem is load-bearing — not before.
 
 ---
 
@@ -156,19 +155,17 @@ Script:
 Hormozi's concept: give people increasing levels of value at increasing price points.
 
 ```
-FREE          → Agent Store (browse, install, collect)
-FREE          → Rappterpedia (learn everything)
-FREE          → Agent Workbench (build in browser)
-$9.99         → Kindle Book (structured guide, hand-holding)
-$49           → Video Course: "Build Your AI Toolkit in a Weekend" (future)
-$499          → Enterprise Workshop: "Deploy AI Agents for Your Team" (future)
-$2,500/mo     → Managed AI Agent Service: "We build and maintain your agents" (future)
-$25,000       → Custom Agent Development: "Bespoke agents for your workflow" (future)
+FREE → Agent Store (browse, install, collect)
+FREE → Rappterpedia (learn everything)
+FREE → Agent Workbench (build in browser)
+FREE → The Book (structured guide, hand-holding)
+FREE → Federation (run your own store)
+FREE → Virtual Brainstem (chat interface)
 ```
 
-**Current focus: FREE tier + $9.99 book**
+**Current focus: 100% free. Drive adoption. Build the ecosystem.**
 
-The free tier is insanely generous (131 agents, 400+ wiki articles, browser workbench, federation). This is the Hormozi play: give away so much value that people feel compelled to tell others. The book is the monetization entry point.
+Everything is free because the ecosystem grows when people use it. Every new agent published, every new builder onboarded, every federated instance — that's what makes the whole thing valuable. Monetization comes when the ecosystem is load-bearing, not before.
 
 ---
 
