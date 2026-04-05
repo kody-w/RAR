@@ -783,6 +783,73 @@ A binder is just an instance that lives on your machine. The distinction is conc
 
 ## Article XVII — Amendments
 
+## Article XX — The SuperSeed Chain
+
+The RAPP ecosystem is rooted in a single dependency: `@rapp/basic-agent`. This agent is the **SuperSeed** — the root node of the entire dependency tree. Every agent inherits from it. Every card derives from it.
+
+### The SuperSeed Coin
+
+The SuperSeed Coin is the genesis mint of `@rapp/basic-agent`. It is the most load-bearing asset in the ecosystem. Its properties:
+
+- **Mint ID:** `GENESIS-RAPP-BASIC-AGENT-0001`
+- **Rarity:** Legendary (Mythic) — permanently. Cannot be demoted.
+- **Value multiplier:** 10x standard Legendary floor
+- **Owner:** The Verification Authority Binder
+
+The SuperSeed Coin is minted once. It cannot be re-minted, duplicated, or forged.
+
+### Federation Authentication
+
+Federated RAR instances that wish to join the ecosystem under the RAPP Constitution must authenticate through the SuperSeed Chain:
+
+1. **Registration** — The instance submits a federation request containing its `rar.config.json`, its Binder address, and its publisher namespace.
+2. **Authentication** — The Verification Authority validates the request and signs a federation credential using the SuperSeed Chain's provenance protocol.
+3. **Attestation** — Upon approval, the federated instance receives a signed attestation that is embedded in its `rar.config.json`. This attestation links the instance to the SuperSeed Chain.
+4. **Verification** — Any party can verify a federated instance's authenticity by checking its attestation against the SuperSeed Chain.
+
+### Federation Rights
+
+Authenticated federated instances may:
+
+- Use the RAPP brand and reference the Constitution
+- Submit agents upstream to the main registry
+- Sync agents from the main registry
+- Mint cards under their own publisher namespace
+- Participate in the Binder tracking system
+
+Authenticated instances must:
+
+- Abide by all Articles of this Constitution
+- Maintain the single-file agent principle
+- Respect tier designations from the Verification Authority
+- Include their federation attestation in `rar.config.json`
+
+### The Verification Authority
+
+The Verification Authority is the entity that controls the SuperSeed Coin's Binder. This entity:
+
+- Authenticates new federated instances
+- Promotes agents to `verified` and `official` tiers
+- Signs verification attestations that travel with cards permanently
+- Maintains the `@rapp/basic-agent` root agent
+- Curates card releases and artist collaborations
+
+The Verification Authority operates under the governance of its holding entity. Its editorial rights are held in perpetuity and are non-transferable except by explicit key succession protocol (see Article on Binder key succession).
+
+### Free Shade Principle
+
+The SuperSeed grows the RappterTree. The tree gives free shade:
+
+- **USE** of any agent is free and unrestricted
+- **BUILD** on the RAPP Foundation is free and open
+- **VIEW** the store, cards, and wiki is free
+- **OWN** a card requires a Binder. Only one Binder per card.
+- **VERIFY** an agent requires the Verification Authority
+
+The shade is free. The roots are sovereign.
+
+---
+
 This constitution can be amended by:
 
 1. Opening a PR that modifies `CONSTITUTION.md`
@@ -793,4 +860,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, and the simplicity audit. The single file is the law. The card is the agent. The agent is the file. The deck is the binder.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, and the Free Shade Principle. The single file is the law. The card is the agent. The agent is the file. The deck is the binder. The seed is the tree.*
