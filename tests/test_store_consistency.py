@@ -211,7 +211,7 @@ def test_sdk_executable():
 # ═══════════════════════════════════════════════════════
 
 def test_registry_agent_count():
-    assert len(registry["agents"]) == 131
+    assert len(registry["agents"]) >= 131  # 131 founding + new agents
 
 def test_registry_has_basic_agent():
     names = [a["name"] for a in registry["agents"]]
