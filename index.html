@@ -531,7 +531,7 @@
   .cards-toolbar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
   .cards-toolbar .pill { font-size: .78rem; padding: 5px 12px; }
   .cards-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 20px;
     perspective: 1200px;
   }
   .agent-card-wrap {
@@ -975,12 +975,13 @@
     background: rgba(30,25,15,.4); margin: 0;
     position: relative; z-index: 5;
     min-height: 0;
+    display: flex; flex-direction: column; justify-content: space-between;
   }
   .holo-ability { margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .holo-ability .kw { font-weight: 700; color: #ffd700; }
   .holo-flavor {
     font-style: italic; font-size: .65rem; color: #9a8e7a;
-    border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 4px;
+    border-top: 1px solid #3d3322; padding-top: 4px; margin-top: auto;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .agent-haiku {
@@ -1059,8 +1060,9 @@
   }
   .showntell-overlay.open { opacity: 1; }
   .showntell-card {
-    /* Fixed size — override the grid's width:100% */
-    width: var(--st-w) !important; aspect-ratio: 5/7;
+    /* Fixed size — override the grid's width:100%, clamped to viewport */
+    width: var(--st-w) !important; max-width: calc(100vw - 48px); aspect-ratio: 5/7;
+    max-height: calc(100vh - 120px);
     transform-style: preserve-3d;
     --tilt-x: 0deg; --tilt-y: 0deg;
     transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
@@ -6917,7 +6919,7 @@ function agentToCard(a) {
       <div class="holo-art">${holoArt || genCreativeArt(a)}</div>
       <div class="holo-type">${esc(holoTypeLine)}</div>
       <div class="holo-text">
-        ${abilities.slice(0, 2).map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}
+        <div class="holo-abilities">${abilities.slice(0, 2).map(ab => `<div class="holo-ability"><span class="kw">${esc(ab.kw)}:</span> ${esc(ab.text)}</div>`).join('')}</div>
         <div class="holo-flavor">${esc(flavor)}</div>
       </div>
       <div class="holo-footer">
@@ -6935,7 +6937,7 @@ function agentToCard(a) {
       ${qrImgHtml}
       <div class="ac-back-name">${esc(a.display_name)}</div>
       <div class="ac-back-actions">
-        <button onclick="event.stopPropagation();var zo=this.closest('.slab-zoom-overlay')||this.closest('.pack-open-overlay');if(zo){zo.remove();document.body.style.overflow=''}openAgent('${esc(a.name)}')">View</button>
+        <button onclick="event.stopPropagation();var zo=this.closest('.slab-zoom-overlay')||this.closest('.pack-open-overlay');if(zo){zo.remove();document.body.style.overflow=''}showAndTell('${esc(a.name)}')">View</button>
         <button onclick="event.stopPropagation();toggleDeckCard('${esc(a.name)}');var b=this;b.textContent=b.textContent==='+ Deck'?'Remove':'+ Deck'">${inDeck ? 'Remove' : '+ Deck'}</button>
       </div>
     </div>`;
@@ -6987,9 +6989,8 @@ function agentToCard(a) {
       ${qrFace}
     </div>
     <div class="card-actions-bar">
-      <button onclick="openAgent('${esc(a.name)}')">View</button>
+      <button onclick="showAndTell('${esc(a.name)}')">View</button>
       <button class="btn-deck${inDeck ? ' in-deck' : ''}" onclick="toggleDeckCard('${esc(a.name)}')">${inDeck ? 'Remove' : '+ Deck'}</button>
-      <button onclick="showAndTell('${esc(a.name)}')">Showcase</button>
     </div>
   </div>`;
 }
@@ -7000,9 +7001,9 @@ function showAndTell(name) {
   const src = document.getElementById(cardId);
   if (!src) return;
 
-  // Calculate width so card fills ~70% of viewport height (aspect 5:7)
+  // Calculate width so card fills ~70% of viewport height (aspect 5:7), clamped to viewport width
   const targetH = window.innerHeight * 0.7;
-  const targetW = targetH * (5 / 7);
+  const targetW = Math.min(targetH * (5 / 7), window.innerWidth - 48);
 
   const overlay = document.createElement('div');
   overlay.className = 'showntell-overlay';
@@ -7016,13 +7017,14 @@ function showAndTell(name) {
   clone.removeAttribute('onclick');
   clone.removeAttribute('ondblclick');
 
-  overlay.innerHTML = `<div class="showntell-label">SHOW &amp; TELL &mdash; double-click card or press Esc to close</div>`;
+  overlay.innerHTML = `<div class="showntell-label">double-click card or press Esc to close &mdash; arrow keys to browse</div>`;
   overlay.appendChild(clone);
 
   const toolbar = document.createElement('div');
   toolbar.className = 'showntell-toolbar';
   toolbar.innerHTML = `
     <button onclick="event.stopPropagation();showAndTellNav(-1)">&#9664; Prev</button>
+    <button onclick="event.stopPropagation();closeShowAndTell();openAgent('${name.replace(/'/g,"\\'")}')">Details</button>
     <button onclick="event.stopPropagation();closeShowAndTell()">Close</button>
     <button onclick="event.stopPropagation();showAndTellNav(1)">Next &#9654;</button>`;
   overlay.appendChild(toolbar);
