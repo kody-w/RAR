@@ -415,6 +415,61 @@
   }
   .back-to-main:hover { border-color: var(--border-hover); color: var(--text); text-decoration: none; }
 
+  /* ─── Table of Contents ──────────────────────────── */
+  .article-toc {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 18px; margin-bottom: 24px; max-width: 460px;
+  }
+  .toc-toggle {
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    font-size: .82rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: .06em; user-select: none;
+  }
+  .toc-toggle .toc-arrow { transition: transform .2s; font-size: .7rem; }
+  .toc-toggle .toc-arrow.collapsed { transform: rotate(-90deg); }
+  .toc-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .toc-list.hidden { display: none; }
+  .toc-list li { margin: 0; }
+  .toc-list li a {
+    display: block; padding: 3px 0 3px 0; font-size: .85rem; color: var(--accent);
+    border-left: 2px solid transparent; transition: all .1s;
+  }
+  .toc-list li a:hover { text-decoration: none; border-left-color: var(--accent); }
+  .toc-list li.toc-h3 a { padding-left: 16px; font-size: .82rem; color: var(--text-dim); }
+  .toc-list li.toc-h2 a { padding-left: 4px; }
+
+  /* ─── Wiki Links ─────────────────────────────────── */
+  .wiki-link { color: var(--accent); cursor: pointer; border-bottom: 1px dotted var(--accent); }
+  .wiki-link:hover { text-decoration: none; border-bottom-style: solid; }
+  .wiki-link.broken { color: var(--red); border-bottom-color: var(--red); }
+
+  /* ─── Pagination ─────────────────────────────────── */
+  .pagination {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .page-btn {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 12px; color: var(--text-dim); font-size: .85rem; cursor: pointer;
+    transition: all .12s; min-width: 36px; text-align: center;
+  }
+  .page-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .page-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .page-btn:disabled { opacity: .4; cursor: default; }
+  .page-info { font-size: .8rem; color: var(--text-muted); margin: 0 8px; }
+
+  /* ─── Sort Controls ──────────────────────────────── */
+  .list-controls {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .list-controls .result-count { font-size: .82rem; color: var(--text-muted); }
+  .sort-select {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 12px; color: var(--text); font-size: .82rem; cursor: pointer; outline: none;
+  }
+  .sort-select:focus { border-color: var(--accent); }
+
   /* ─── Scrollbar ───────────────────────────────────── */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -748,6 +803,11 @@ let activeWikiCat = 'all';
 let activeForumChan = 'all';
 let editingArticleId = null;
 let cameFromMainPage = true;
+let wikiPage = 1;
+let forumPage = 1;
+let wikiSort = 'newest';
+let forumSort = 'newest';
+const PAGE_SIZE = 20;
 
 // ─── Seed Data ──────────────────────────────────────
 const SEED_ARTICLES = [
@@ -1264,9 +1324,21 @@ function renderMarkdown(text) {
   );
   // Inline code
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-  // Headers
-  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  // Wiki links: [[Article Name]] or [[Article Name|display text]]
+  html = html.replace(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g, (_, target, display) => {
+    const label = display || target;
+    const slug = target.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return `<a class="wiki-link" data-wiki-target="${escapeHtml(target.trim())}" onclick="navigateWikiLink('${slug}','${escapeHtml(target.trim())}');return false" href="#">${label.trim()}</a>`;
+  });
+  // Headers (with anchor IDs for TOC)
+  html = html.replace(/^### (.+)$/gm, (_, t) => {
+    const id = 'h-' + t.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return `<h3 id="${id}">${t}</h3>`;
+  });
+  html = html.replace(/^## (.+)$/gm, (_, t) => {
+    const id = 'h-' + t.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return `<h2 id="${id}">${t}</h2>`;
+  });
   // Bold
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   // Italic
@@ -1440,18 +1512,54 @@ function renderWikiSidebar() {
   }).join('');
 }
 
+function articleExcerpt(content, maxLen) {
+  // Strip markdown artifacts, grab first real paragraph
+  let text = content.replace(/^#{1,3}\s+.+$/gm, '').replace(/```[\s\S]*?```/g, '').replace(/\|[^\n]+\|/g, '');
+  text = text.replace(/[#*`_\[\]|>]/g, '').replace(/\n+/g, ' ').trim();
+  if (text.length <= maxLen) return text;
+  const cut = text.lastIndexOf(' ', maxLen);
+  return text.substring(0, cut > 0 ? cut : maxLen) + '...';
+}
+
+function sortArticles(list, sort) {
+  const copy = [...list];
+  switch (sort) {
+    case 'oldest': copy.sort((a, b) => new Date(a.updated) - new Date(b.updated)); break;
+    case 'alpha': copy.sort((a, b) => a.title.localeCompare(b.title)); break;
+    case 'alpha-desc': copy.sort((a, b) => b.title.localeCompare(a.title)); break;
+    default: copy.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+  }
+  return copy;
+}
+
 function renderArticleList() {
-  const filtered = activeWikiCat === 'all' ? articles : articles.filter(a => a.category === activeWikiCat);
+  let filtered = activeWikiCat === 'all' ? articles : articles.filter(a => a.category === activeWikiCat);
   const el = document.getElementById('articleList');
   if (filtered.length === 0) {
     el.innerHTML = `<div class="empty-state"><div class="icon">&#128218;</div><p>No articles yet in this category. Be the first to write one!</p></div>`;
     return;
   }
-  el.innerHTML = filtered.map(a => {
+  filtered = sortArticles(filtered, wikiSort);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  if (wikiPage > totalPages) wikiPage = totalPages;
+  const start = (wikiPage - 1) * PAGE_SIZE;
+  const page = filtered.slice(start, start + PAGE_SIZE);
+
+  const controls = `<div class="list-controls">
+    <span class="result-count">${filtered.length} article${filtered.length !== 1 ? 's' : ''}</span>
+    <select class="sort-select" onchange="wikiSort=this.value;wikiPage=1;renderArticleList()">
+      <option value="newest" ${wikiSort==='newest'?'selected':''}>Newest first</option>
+      <option value="oldest" ${wikiSort==='oldest'?'selected':''}>Oldest first</option>
+      <option value="alpha" ${wikiSort==='alpha'?'selected':''}>A → Z</option>
+      <option value="alpha-desc" ${wikiSort==='alpha-desc'?'selected':''}>Z → A</option>
+    </select>
+  </div>`;
+
+  const cards = page.map(a => {
     const cat = WIKI_CATS.find(c => c.id === a.category);
     return `<div class="article-card" onclick="openArticle('${a.id}')">
       <h3>${escapeHtml(a.title)}</h3>
-      <p>${escapeHtml(a.content.substring(0, 150).replace(/[#*`]/g, ''))}...</p>
+      <p>${escapeHtml(articleExcerpt(a.content, 160))}</p>
       <div class="meta">
         <span>${cat ? cat.icon + ' ' + cat.label : a.category}</span>
         <span>by ${escapeHtml(a.author)}</span>
@@ -1459,10 +1567,34 @@ function renderArticleList() {
       </div>
     </div>`;
   }).join('');
+
+  const pag = totalPages > 1 ? renderPagination(wikiPage, totalPages, 'wikiPageTo') : '';
+  el.innerHTML = controls + cards + pag;
 }
+
+function renderPagination(current, total, fn) {
+  let btns = '';
+  btns += `<button class="page-btn" onclick="${fn}(${current-1})" ${current<=1?'disabled':''}>&#8592;</button>`;
+  const range = [];
+  range.push(1);
+  for (let i = Math.max(2, current - 2); i <= Math.min(total - 1, current + 2); i++) range.push(i);
+  if (total > 1) range.push(total);
+  const unique = [...new Set(range)];
+  let prev = 0;
+  for (const p of unique) {
+    if (prev && p - prev > 1) btns += `<span class="page-info">...</span>`;
+    btns += `<button class="page-btn ${p===current?'active':''}" onclick="${fn}(${p})">${p}</button>`;
+    prev = p;
+  }
+  btns += `<button class="page-btn" onclick="${fn}(${current+1})" ${current>=total?'disabled':''}>&#8594;</button>`;
+  return `<div class="pagination">${btns}</div>`;
+}
+
+function wikiPageTo(p) { wikiPage = p; renderArticleList(); window.scrollTo(0, 200); }
 
 function filterWikiCat(id) {
   activeWikiCat = id;
+  wikiPage = 1;
   renderWikiSidebar();
   renderArticleList();
 }
@@ -1477,15 +1609,36 @@ async function openArticle(id) {
   document.getElementById('wikiMainPage').style.display = 'none';
   document.getElementById('wikiListView').style.display = 'none';
   document.getElementById('wikiArticleView').style.display = 'block';
+  const renderedBody = renderMarkdown(a.content);
+  // Generate TOC from headings
+  const tocEntries = [];
+  renderedBody.replace(/<(h[23]) id="([^"]+)">([^<]+)<\/\1>/g, (_, tag, id, text) => {
+    tocEntries.push({ tag, id, text });
+  });
+  const tocHtml = tocEntries.length >= 3 ? `
+    <div class="article-toc">
+      <div class="toc-toggle" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('.toc-arrow').classList.toggle('collapsed')">
+        Contents <span class="toc-arrow">&#9660;</span>
+      </div>
+      <ol class="toc-list">${tocEntries.map(e =>
+        `<li class="toc-${e.tag}"><a href="#${e.id}">${e.text}</a></li>`
+      ).join('')}</ol>
+    </div>
+  ` : '';
+  // Reading time
+  const wordCount = a.content.split(/\s+/).length;
+  const readTime = Math.max(1, Math.ceil(wordCount / 200));
   document.getElementById('articleViewContent').innerHTML = `
     <div class="breadcrumb"><a href="#" onclick="closeArticle();return false">Wiki</a> / <a href="#" onclick="closeArticle();filterWikiCat('${a.category}');return false">${cat ? cat.label : a.category}</a> / ${escapeHtml(a.title)}</div>
     <h1>${escapeHtml(a.title)}</h1>
     <div class="article-meta">
       <span>by ${escapeHtml(a.author)}</span>
       <span>Updated ${new Date(a.updated).toLocaleDateString()}</span>
+      <span>${readTime} min read</span>
       <span>${tags}</span>
     </div>
-    <div class="article-body">${renderMarkdown(a.content)}</div>
+    ${tocHtml}
+    <div class="article-body">${renderedBody}</div>
     <div class="article-actions">
       <button class="btn" onclick="editArticle('${a.id}')">Edit Article</button>
       <button class="btn" onclick="deleteArticle('${a.id}')" style="color:var(--red)">Delete</button>
@@ -1499,6 +1652,32 @@ function closeArticle() {
     document.getElementById('wikiMainPage').style.display = 'block';
   } else {
     document.getElementById('wikiListView').style.display = 'block';
+  }
+}
+
+// ─── Wiki Links ─────────────────────────────────────
+async function navigateWikiLink(slug, title) {
+  // Find article by slug match on id, or title match
+  const all = await dbGetAll('articles');
+  const match = all.find(a => a.id === slug) ||
+    all.find(a => a.title.toLowerCase() === title.toLowerCase()) ||
+    all.find(a => a.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === slug);
+  if (match) {
+    openArticle(match.id);
+  } else {
+    // Broken link — offer to create article
+    if (confirm(`Article "${title}" doesn't exist yet. Create it?`)) {
+      editingArticleId = null;
+      document.getElementById('editorTitle').value = title;
+      document.getElementById('editorCategory').value = 'agents';
+      document.getElementById('editorTags').value = '';
+      document.getElementById('editorContent').value = `## Overview\n\nWrite about ${title} here.`;
+      document.getElementById('editorBreadcrumb').textContent = 'New Article';
+      document.getElementById('wikiMainPage').style.display = 'none';
+      document.getElementById('wikiListView').style.display = 'none';
+      document.getElementById('wikiArticleView').style.display = 'none';
+      document.getElementById('wikiEditorView').style.display = 'block';
+    }
   }
 }
 
@@ -1602,14 +1781,45 @@ function renderForumSidebar() {
   }).join('');
 }
 
+function sortThreads(list, sort) {
+  // Pinned always first, then sort
+  const pinned = list.filter(t => t.pinned);
+  const rest = list.filter(t => !t.pinned);
+  switch (sort) {
+    case 'votes': rest.sort((a, b) => (b.votes||0) - (a.votes||0)); break;
+    case 'replies': rest.sort((a, b) => (b.replies||[]).length - (a.replies||[]).length); break;
+    case 'unanswered': rest.sort((a, b) => (a.replies||[]).length - (b.replies||[]).length); break;
+    case 'oldest': rest.sort((a, b) => new Date(a.updated) - new Date(b.updated)); break;
+    default: rest.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+  }
+  return [...pinned, ...rest];
+}
+
 function renderThreadList() {
-  const filtered = activeForumChan === 'all' ? threads : threads.filter(t => t.channel === activeForumChan);
+  let filtered = activeForumChan === 'all' ? threads : threads.filter(t => t.channel === activeForumChan);
   const el = document.getElementById('threadList');
   if (filtered.length === 0) {
     el.innerHTML = `<div class="empty-state"><div class="icon">&#128172;</div><p>No threads yet. Start a discussion!</p></div>`;
     return;
   }
-  el.innerHTML = filtered.map(t => {
+  filtered = sortThreads(filtered, forumSort);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  if (forumPage > totalPages) forumPage = totalPages;
+  const start = (forumPage - 1) * PAGE_SIZE;
+  const page = filtered.slice(start, start + PAGE_SIZE);
+
+  const controls = `<div class="list-controls">
+    <span class="result-count">${filtered.length} thread${filtered.length !== 1 ? 's' : ''}</span>
+    <select class="sort-select" onchange="forumSort=this.value;forumPage=1;renderThreadList()">
+      <option value="newest" ${forumSort==='newest'?'selected':''}>Newest first</option>
+      <option value="oldest" ${forumSort==='oldest'?'selected':''}>Oldest first</option>
+      <option value="votes" ${forumSort==='votes'?'selected':''}>Most votes</option>
+      <option value="replies" ${forumSort==='replies'?'selected':''}>Most replies</option>
+      <option value="unanswered" ${forumSort==='unanswered'?'selected':''}>Unanswered</option>
+    </select>
+  </div>`;
+
+  const cards = page.map(t => {
     const replyCount = (t.replies || []).length;
     const chan = FORUM_CHANNELS.find(c => c.id === t.channel);
     return `<div class="thread-card" onclick="openThread('${t.id}')">
@@ -1630,10 +1840,16 @@ function renderThreadList() {
       </div>
     </div>`;
   }).join('');
+
+  const pag = totalPages > 1 ? renderPagination(forumPage, totalPages, 'forumPageTo') : '';
+  el.innerHTML = controls + cards + pag;
 }
+
+function forumPageTo(p) { forumPage = p; renderThreadList(); window.scrollTo(0, 200); }
 
 function filterForumChan(id) {
   activeForumChan = id;
+  forumPage = 1;
   renderForumSidebar();
   renderThreadList();
 }
@@ -1956,6 +2172,7 @@ window.showPanel = showPanel;
 window.goHome = goHome;
 window.browseCategory = browseCategory;
 window.backToMainPage = backToMainPage;
+window.navigateWikiLink = navigateWikiLink;
 window.filterWikiCat = filterWikiCat;
 window.openArticle = openArticle;
 window.closeArticle = closeArticle;
@@ -1965,6 +2182,8 @@ window.saveArticle = saveArticle;
 window.deleteArticle = deleteArticle;
 window.closeEditor = closeEditor;
 window.insertMarkup = insertMarkup;
+window.wikiPageTo = wikiPageTo;
+window.forumPageTo = forumPageTo;
 window.filterForumChan = filterForumChan;
 window.openThread = openThread;
 window.closeThread = closeThread;
