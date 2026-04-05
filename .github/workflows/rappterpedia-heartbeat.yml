@@ -1,0 +1,51 @@
+name: Rappterpedia Heartbeat
+
+on:
+  schedule:
+    # Every 6 hours — generates wiki articles, forum threads, and replies
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      burst:
+        description: 'Number of ticks to run (1 = ~2 articles + ~2 threads)'
+        required: false
+        default: '1'
+      dry_run:
+        description: 'Dry run (no commits)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Rappterpedia engine
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          BURST="${{ github.event.inputs.burst || '1' }}"
+          if [ "$BURST" != "1" ]; then
+            ARGS="$ARGS --burst $BURST"
+          fi
+          python rappterpedia/rappterpedia_engine.py --no-push $ARGS
+
+      - name: Commit generated content
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "Rappterpedia Bot"
+          git config user.email "rappterpedia-bot@users.noreply.github.com"
+          git add rappterpedia/
+          git diff --cached --quiet || git commit -m "Rappterpedia heartbeat: auto-generated content [skip ci]"
+          git push

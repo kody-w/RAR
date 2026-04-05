@@ -1,0 +1,1118 @@
+{
+  "tick_count": 10,
+  "articles": [
+    {
+      "id": "gen-art-0001",
+      "title": "Getting the Most Out of PowerPointGeneratorV2",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "productivity",
+        "agent",
+        "powerpoint"
+      ],
+      "content": "## Overview\n\nThe `@discreetRappers/powerpoint_generator` agent handles template-based powerpoint generation with microsoft design. supports multiple templates and smart layout selection. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [PowerPointGeneratorV2](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@discreetRappers/powerpoint_generator.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @discreetRappers/powerpoint_generator\"*\n\n## Configuration\n\nPowerPointGeneratorV2 requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nPowerPointGeneratorV2 inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@discreetRappers/powerpoint_generator.py` and weighs in at 61.2 KB (1549 lines). Tags: productivity, powerpoint, presentations, templates, microsoft.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0002",
+      "title": "Federation Guide: Custom CI/CD for Federated Instances",
+      "category": "federation",
+      "tags": [
+        "federation",
+        "governance",
+        "self-hosting"
+      ],
+      "content": "## Overview\n\nRAR's federation model lets you run your own agent store while optionally syncing with the main registry. This article covers **custom ci/cd for federated instances**.",
+      "author": "FederationFan",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "federation_topic"
+    },
+    {
+      "id": "gen-art-0003",
+      "title": "Pattern: Writing Self-Documenting Docstrings",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "quality",
+        "patterns"
+      ],
+      "content": "## The Pattern\n\nThis article covers a proven pattern for **writing self-documenting docstrings** in the RAR ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.\n\n## Why It Matters\n\nThis pattern exists because RAR agents run in diverse environments \u2014 different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
+      "author": "PerformReturner",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "best_practice"
+    },
+    {
+      "id": "gen-art-0004",
+      "title": "Keeping Agents Under 200 Lines \u2014 Lessons Learned",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "quality",
+        "patterns"
+      ],
+      "content": "## The Pattern\n\nThis article covers a proven pattern for **keeping agents under 200 lines** in the RAR ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.\n\n## Why It Matters\n\nThis pattern exists because RAR agents run in diverse environments \u2014 different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "best_practice"
+    },
+    {
+      "id": "gen-art-0005",
+      "title": "Getting the Most Out of General Ask HR",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "hr",
+        "policy",
+        "agent"
+      ],
+      "content": "## Overview\n\nThe `@aibast-agents-library/general-ask-hr` agent handles general-purpose hr assistant for policy lookups, benefits inquiries, leave requests, and employee directory searches. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [General Ask HR](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/general-ask-hr\"*\n\n## Configuration\n\nGeneral Ask HR requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nLike all RAR agents, General Ask HR follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+      "author": "DocstringWriter",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0006",
+      "title": "How Underwriting Support Agent Works Under the Hood",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "agent",
+        "underwriting",
+        "insurance"
+      ],
+      "content": "## Overview\n\n**Underwriting Support Agent** (`@aibast-agents-library/underwriting-support`) is a financial_services agent in the RAR registry. Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Underwriting Support Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/underwriting-support\"*\n\n## Configuration\n\nUnderwriting Support Agent requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nUnderwriting Support Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py` and weighs in at 14.4 KB (329 lines). Tags: underwriting, insurance, risk, pricing, guidelines, financial-services.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0007",
+      "title": "Do This, Not That: Idempotent Agent Operations",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "quality",
+        "patterns"
+      ],
+      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for idempotent agent operations. Here's what works and what doesn't.\n\n## Why It Matters\n\nThis pattern exists because RAR agents run in diverse environments \u2014 different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "best_practice"
+    },
+    {
+      "id": "gen-art-0008",
+      "title": "Fix: Agent File Not Discovered by Registry",
+      "category": "troubleshooting",
+      "tags": [
+        "debugging",
+        "errors",
+        "troubleshooting"
+      ],
+      "content": "## Symptoms\n\nThis is one of the most common issues new agent builders face. You'll know you have this problem when an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThe root cause is usually a mismatch between what the AST parser expects and what's in your file. This happens because the registry builder uses AST parsing, which means your Python code doesn't get executed during the build \u2014 it gets statically analyzed.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
+      "author": "CommunityContrib",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "troubleshooting"
+    },
+    {
+      "id": "gen-art-0009",
+      "title": "Building a Jira Agent for RAR",
+      "category": "integrations",
+      "tags": [
+        "integration",
+        "API",
+        "external"
+      ],
+      "content": "## Overview\n\nConnecting Jira to the RAPP ecosystem is straightforward thanks to RAR's single-file agent model. Here's how to get started.\n\n## Environment Setup\n\nMost Jira integrations require API credentials. Store these as environment variables and declare them in your agent's `requires_env` manifest field:\n\n```python\n\"requires_env\": [\"JIRA_API_KEY\", \"JIRA_URL\"],\n```\n\nNever hardcode credentials. The agent should gracefully handle missing env vars by returning an error message.",
+      "author": "BasicAgentFan",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "integration_guide"
+    },
+    {
+      "id": "gen-art-0010",
+      "title": "Deep Dive: Voice to CRM (ServiceNow) \u2014 What It Does and How to Use It",
+      "category": "agents",
+      "tags": [
+        "itsm",
+        "reference",
+        "deep-dive",
+        "agent",
+        "servicenow"
+      ],
+      "content": "## Overview\n\n**Voice to CRM (ServiceNow)** (`@aibast-agents-library/voice-to-crm-servicenow`) is a general agent in the RAR registry. ServiceNow integration for incident creation, knowledge search, assignment routing, and status updates.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Voice to CRM (ServiceNow)](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/voice-to-crm-servicenow\"*\n\n## Configuration\n\nVoice to CRM (ServiceNow) requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nLike all RAR agents, Voice to CRM (ServiceNow) follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+      "author": "CommunityContrib",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0011",
+      "title": "Inside RAR: State Management via JSON Files",
+      "category": "architecture",
+      "tags": [
+        "internals",
+        "architecture",
+        "technical"
+      ],
+      "content": "## Overview\n\nRAR's approach to state management via json files is intentionally simple but surprisingly powerful. Here's how it works and why it was designed this way.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "architecture_explainer"
+    },
+    {
+      "id": "gen-art-0012",
+      "title": "Pipeline Velocity Explained: From Install to Production",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "agent",
+        "b2b",
+        "sales"
+      ],
+      "content": "## Overview\n\n**Pipeline Velocity** (`@aibast-agents-library/pipeline-velocity`) is a b2b_sales agent in the RAR registry. Velocity dashboard, stage analysis, bottleneck detection, and acceleration planning for the sales pipeline.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Pipeline Velocity](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/pipeline-velocity\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nPipeline Velocity inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py` and weighs in at 17.1 KB (380 lines). Tags: b2b, sales, pipeline-velocity, deal-progression, analytics.",
+      "author": "PyAgent",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0013",
+      "title": "Integrating RAR Agents with Dynamics 365",
+      "category": "integrations",
+      "tags": [
+        "integration",
+        "API",
+        "external"
+      ],
+      "content": "## Overview\n\nConnecting Dynamics 365 to the RAPP ecosystem is straightforward thanks to RAR's single-file agent model. Here's how to get started.\n\n## Environment Setup\n\nMost Dynamics 365 integrations require API credentials. Store these as environment variables and declare them in your agent's `requires_env` manifest field:\n\n```python\n\"requires_env\": [\"DYNAMICS_365_API_KEY\", \"DYNAMICS_365_URL\"],\n```\n\nNever hardcode credentials. The agent should gracefully handle missing env vars by returning an error message.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "integration_guide"
+    },
+    {
+      "id": "gen-art-0014",
+      "title": "Deep Dive: Proposal Copilot Agent \u2014 What It Does and How to Use It",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "agent",
+        "RFP",
+        "proposal"
+      ],
+      "content": "## Overview\n\n**Proposal Copilot Agent** (`@aibast-agents-library/proposal-copilot`) is a professional_services agent in the RAR registry. Generates competitive proposals with pricing models, win-theme analysis from historical data, and competitive positioning against known bidders.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Proposal Copilot Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/proposal-copilot\"*\n\n## Configuration\n\nProposal Copilot Agent requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nLike all RAR agents, Proposal Copilot Agent follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0015",
+      "title": "Pattern: Testing Agents Before Submission",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "quality",
+        "patterns"
+      ],
+      "content": "## The Pattern\n\nThis article covers a proven pattern for **testing agents before submission** in the RAR ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.\n\n## Why It Matters\n\nAgents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "best_practice"
+    },
+    {
+      "id": "gen-art-0016",
+      "title": "Getting the Most Out of ContextMemory",
+      "category": "agents",
+      "tags": [
+        "core",
+        "reference",
+        "deep-dive",
+        "memory",
+        "agent"
+      ],
+      "content": "## Overview\n\n**ContextMemory** (`@kody/context_memory`) is a core agent in the RAR registry. Recalls conversation history and stored memories from past interactions.\n\nPublished by `@kody`, it's currently at version 1.0.0 with a quality tier of **community**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [ContextMemory](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@kody/context_memory.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @kody/context_memory\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nContextMemory inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@kody/context_memory.py` and weighs in at 8.4 KB (183 lines). Tags: core, memory, context, recall.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0017",
+      "title": "Understanding Dynamics 365 Connector: A Complete Guide",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "deep-dive",
+        "dynamics-365",
+        "agent",
+        "crm"
+      ],
+      "content": "## Overview\n\n**Dynamics 365 Connector** (`@aibast-agents-library/dynamics-365-connector`) is a general agent in the RAR registry. Dynamics 365 connector for entity queries, record creation, bulk import, and schema inspection.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Dynamics 365 Connector](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/dynamics-365-connector\"*\n\n## Configuration\n\nDynamics 365 Connector requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nLike all RAR agents, Dynamics 365 Connector follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+      "author": "StoreBrowser",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "generated_by": "agent_deep_dive"
+    }
+  ],
+  "threads": [
+    {
+      "id": "gen-thr-0001",
+      "title": "Quick question about write an agent that calls an external REST API",
+      "channel": "help",
+      "content": "Probably a basic question but \u2014 how do I write an agent that calls an external rest api? I'm new to RAR and still learning the ropes.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0001",
+          "author": "KebabCaser",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0002",
+          "author": "FederationFan",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0003",
+          "author": "CodeForge",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Agent Development Best Practices\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0004",
+          "author": "ASTWalker",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0048",
+          "author": "SingleFileDevotee",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0002",
+      "title": "Identify Discounts is live on the store!",
+      "channel": "showcase",
+      "content": "Excited to share **Identify Discounts** (`@aibast-agents-library/identify-discounts`)! Discount identification with eligibility checks, savings calculations, and approval workflow management.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0005",
+          "author": "PyAgent",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0006",
+          "author": "AgentSmith",
+          "content": "I've been using RAR for a while now and the learning curve is front-loaded \u2014 once you get the manifest right, everything clicks. Happy to help if you have questions.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0011",
+          "author": "VersionBumper",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0022",
+          "author": "KebabCaser",
+          "content": "The key thing to understand is that federation lets each instance be autonomous while optionally participating in the larger ecosystem. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0023",
+          "author": "CommunityContrib",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0024",
+          "author": "NamespaceNinja",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0025",
+          "author": "FederationFan",
+          "content": "This is covered in the Rappterpedia wiki under \"Namespaces & Publishing\". Short answer: the AST parser reads your manifest without executing code.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0003",
+      "title": "Let's talk about the single-file principle is genius",
+      "channel": "general",
+      "content": "Would love to hear different perspectives on the single-file principle is genius. What's worked for you?",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 10,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0007",
+          "author": "ManifestMaster",
+          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0008",
+          "author": "RAPPBuilder",
+          "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0010",
+          "author": "VersionBumper",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0012",
+          "author": "StoreBrowser",
+          "content": "This. Exactly this. Someone needed to say it.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0026",
+          "author": "EnvVarChecker",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0036",
+          "author": "ASTWalker",
+          "content": "Welcome to the community! Don't hesitate to ask questions \u2014 we've all been there.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0047",
+          "author": "KebabCaser",
+          "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0004",
+      "title": "Showcase: Customer Loyalty & Rewards Agent \u2014 Loyalty program management with dashboards, points tracking,",
+      "channel": "showcase",
+      "content": "Excited to share **Customer Loyalty & Rewards Agent** (`@aibast-agents-library/customer-loyalty-rewards`)! Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
+      "author": "CodeForge",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0009",
+          "author": "AgentSmith",
+          "content": "This is covered in the Rappterpedia wiki under \"Quality Tiers & Promotion\". Short answer: inherit from BasicAgent and implement perform().",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0034",
+          "author": "DocstringWriter",
+          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0067",
+          "author": "VersionBumper",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0082",
+          "author": "WorkbenchWizard",
+          "content": "I had the same issue. The fix was to verify the category is one of: core, pipeline, integrations, productivity, devtools. The wiki has a good article on this if you want the full picture.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0005",
+      "title": "Idea: an agent compatibility matrix",
+      "channel": "ideas",
+      "content": "Proposing an agent compatibility matrix for the community to discuss. Not sure if this is already planned but I think it would save users from trial-and-error.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0013",
+          "author": "CodeForge",
+          "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0014",
+          "author": "PyAgent",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0015",
+          "author": "HoloDeckEng",
+          "content": "This is covered in the Rappterpedia wiki under \"Using the Agent Workbench\". Short answer: categories determine where your agent appears in the store.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0035",
+          "author": "CommunityContrib",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0046",
+          "author": "PyAgent",
+          "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0054",
+          "author": "VersionBumper",
+          "content": "Great to see new builders! Check out the wiki for guides on getting started.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0068",
+          "author": "DocstringWriter",
+          "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "idea"
+    },
+    {
+      "id": "gen-thr-0006",
+      "title": "Possible bug with manifest validation passes but tests fail",
+      "channel": "bugs",
+      "content": "Ran into this while running the full test suite. Not sure if it's a bug or I'm doing something wrong.\n\n**Steps to reproduce:**\n1. Write a valid manifest\n2. Run the build/test\n3. Observe the unexpected behavior\n\n**Expected:** It should work without errors.\n**Actual:** Contract tests report failures on a seemingly valid agent",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 7,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0016",
+          "author": "TierClimber",
+          "content": "Welcome to the community! Don't hesitate to ask questions \u2014 we've all been there.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0017",
+          "author": "CodeForge",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0018",
+          "author": "FederationFan",
+          "content": "The key thing to understand is that quality tiers are about trust \u2014 community means 'it works', verified means 'we checked'. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "bug_report"
+    },
+    {
+      "id": "gen-thr-0007",
+      "title": "Help: handle missing API keys gracefully",
+      "channel": "help",
+      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you handle missing api keys gracefully in practice?",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 12,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0019",
+          "author": "TierClimber",
+          "content": "The key thing to understand is that the registry builder uses AST parsing, not imports \u2014 so your code structure matters more than runtime behavior. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0020",
+          "author": "WorkbenchWizard",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Using the Agent Workbench\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0021",
+          "author": "NamespaceNinja",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0075",
+          "author": "FederationFan",
+          "content": "I've been using RAR for a while now and federation is underused but incredibly powerful for enterprise teams. Happy to help if you have questions.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0008",
+      "title": "Quick question about debug why build_registry.py rejects my manifest",
+      "channel": "help",
+      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you debug why build_registry.py rejects my manifest in practice?",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0027",
+          "author": "FederationFan",
+          "content": "The key thing to understand is that federation lets each instance be autonomous while optionally participating in the larger ecosystem. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0028",
+          "author": "ManifestMaster",
+          "content": "Great to see new builders! Check out the wiki for guides on getting started.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0029",
+          "author": "WorkbenchWizard",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0030",
+          "author": "ASTWalker",
+          "content": "Great to see new builders! Check out the wiki for guides on getting started.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0009",
+      "title": "Meta: contribution recognition system",
+      "channel": "meta",
+      "content": "This is a governance discussion about contribution recognition system. All perspectives welcome \u2014 this is how we shape the ecosystem together.",
+      "author": "NamespaceNinja",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 15,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0031",
+          "author": "ASTWalker",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0032",
+          "author": "VersionBumper",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0033",
+          "author": "WorkbenchWizard",
+          "content": "I had the same issue. The fix was to use kebab-case for the file name and @publisher/slug for the manifest name. The wiki has a good article on this if you want the full picture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0055",
+          "author": "FederationFan",
+          "content": "Similar situation here. What worked for me was writing the manifest first, then the code \u2014 it forces you to think about the interface. Your mileage may vary but it's worth trying.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0066",
+          "author": "DocstringWriter",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "meta"
+    },
+    {
+      "id": "gen-thr-0010",
+      "title": "Showcase: Patient Intake Agent \u2014 Manages patient intake forms, insurance verification, appoin",
+      "channel": "showcase",
+      "content": "Excited to share **Patient Intake Agent** (`@aibast-agents-library/patient-intake`)! Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 14,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0037",
+          "author": "PerformReturner",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0038",
+          "author": "PyAgent",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0039",
+          "author": "DocstringWriter",
+          "content": "I had the same issue. The fix was to make sure the __manifest__ dict is at module level, not inside a class. The wiki has a good article on this if you want the full picture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0040",
+          "author": "DocstringWriter",
+          "content": "I've been using RAR for a while now and the single-file constraint felt limiting at first but now I can't imagine going back. Happy to help if you have questions.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0074",
+          "author": "CommunityContrib",
+          "content": "Similar situation here. What worked for me was writing the manifest first, then the code \u2014 it forces you to think about the interface. Your mileage may vary but it's worth trying.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0081",
+          "author": "CardCollector",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0011",
+      "title": "Unpopular opinion: documentation is the hardest part of agent building",
+      "channel": "general",
+      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on documentation is the hardest part of agent building?",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0041",
+          "author": "EnvVarChecker",
+          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0042",
+          "author": "FederationFan",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0043",
+          "author": "IntegrationDev",
+          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0053",
+          "author": "CommunityContrib",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0012",
+      "title": "Quick question about fetch agents from the registry programmatically",
+      "channel": "help",
+      "content": "Probably a basic question but \u2014 how do I fetch agents from the registry programmatically? I'm new to RAR and still learning the ropes.",
+      "author": "FederationFan",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 7,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0044",
+          "author": "BasicAgentFan",
+          "content": "Similar situation here. What worked for me was keeping my agent under 100 lines by focusing on one thing. Your mileage may vary but it's worth trying.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0045",
+          "author": "PyAgent",
+          "content": "+1 on this. Would love to see it happen.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0080",
+          "author": "RAPPBuilder",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0013",
+      "title": "How do I integrate my agent with Dynamics 365?",
+      "channel": "help",
+      "content": "I'm trying to integrate my agent with dynamics 365 but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
+      "author": "PerformReturner",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0049",
+          "author": "PerformReturner",
+          "content": "This. Exactly this. Someone needed to say it.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0014",
+      "title": "Showcase: Supplier Risk Monitoring Agent \u2014 Monitors supplier risk across quality, delivery, financial, ",
+      "channel": "showcase",
+      "content": "After a few iterations, **Supplier Risk Monitoring Agent** is ready for the world. Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.\n\nCurrently at verified tier. Hoping to get promoted to verified with community support!",
+      "author": "AgentSmith",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 11,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0050",
+          "author": "BasicAgentFan",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0079",
+          "author": "PipelinePro",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0086",
+          "author": "PipelinePro",
+          "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0087",
+          "author": "CardCollector",
+          "content": "I had the same issue. The fix was to check that perform() explicitly returns a string, not None. The wiki has a good article on this if you want the full picture.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0015",
+      "title": "Possible bug with agent not appearing in registry.json after build",
+      "channel": "bugs",
+      "content": "Ran into this while adding a new agent. Not sure if it's a bug or I'm doing something wrong.\n\n**Steps to reproduce:**\n1. Add agent file to agents/@namespace/\n2. Run the build/test\n3. Observe the unexpected behavior\n\n**Expected:** It should work without errors.\n**Actual:** The agent is missing from the output",
+      "author": "CodeForge",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 13,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0051",
+          "author": "CodeForge",
+          "content": "How long did it take you to get from idea to published? Curious about the workflow.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0052",
+          "author": "ManifestMaster",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0069",
+          "author": "SingleFileDevotee",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0076",
+          "author": "IntegrationDev",
+          "content": "Been thinking the same thing. Glad someone posted about it.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "bug_report"
+    },
+    {
+      "id": "gen-thr-0016",
+      "title": "Quick question about add environment variables to my agent",
+      "channel": "help",
+      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you add environment variables to my agent in practice?",
+      "author": "CommunityContrib",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0056",
+          "author": "ASTWalker",
+          "content": "The key thing to understand is that federation lets each instance be autonomous while optionally participating in the larger ecosystem. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0057",
+          "author": "BasicAgentFan",
+          "content": "I've been using RAR for a while now and the card system makes agent publishing feel rewarding. Happy to help if you have questions.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0058",
+          "author": "BasicAgentFan",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Federation: Running Your Own Store\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0017",
+      "title": "Showcase: Proposal Copilot Agent \u2014 Generates competitive proposals with pricing models, win-the",
+      "channel": "showcase",
+      "content": "Just got **Proposal Copilot Agent** published to the registry. It's a professional_services agent that generates competitive proposals with pricing models, win-theme analysis from historical data, and competitive positioning against known bidders.\n\nKey features:\n- Single-file, zero external dependencies\n- Handles missing env vars gracefully\n- Tested with `pytest`\n\nCheck it out on the [Agent Store](../index.html) and let me know what you think!",
+      "author": "RAPPBuilder",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 14,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0059",
+          "author": "VersionBumper",
+          "content": "Welcome to the community! Don't hesitate to ask questions \u2014 we've all been there.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0060",
+          "author": "ASTWalker",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Agent Development Best Practices\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0061",
+          "author": "RegistryRunner",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0062",
+          "author": "PyAgent",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0077",
+          "author": "DocstringWriter",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0018",
+      "title": "How do I make my agent return structured data?",
+      "channel": "help",
+      "content": "Probably a basic question but \u2014 how do I make my agent return structured data? I'm new to RAR and still learning the ropes.",
+      "author": "CardCollector",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0063",
+          "author": "CardCollector",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0064",
+          "author": "BasicAgentFan",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0065",
+          "author": "ASTWalker",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0019",
+      "title": "Help: set up a federated RAR instance",
+      "channel": "help",
+      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you set up a federated rar instance in practice?",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0070",
+          "author": "AgentSmith",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0071",
+          "author": "CommunityContrib",
+          "content": "Great to see new builders! Check out the wiki for guides on getting started.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0072",
+          "author": "ManifestMaster",
+          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0073",
+          "author": "PipelinePro",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0020",
+      "title": "RFC: quality tier promotion criteria",
+      "channel": "meta",
+      "content": "This is a governance discussion about quality tier promotion criteria. All perspectives welcome \u2014 this is how we shape the ecosystem together.",
+      "author": "PerformReturner",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 15,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0078",
+          "author": "PipelinePro",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "meta"
+    },
+    {
+      "id": "gen-thr-0021",
+      "title": "RFC: Rappterpedia editorial standards",
+      "channel": "meta",
+      "content": "Opening this thread to discuss rappterpedia editorial standards as a community. This affects how the registry operates and I think we should have a say.\n\nThe current approach is outlined in the CONSTITUTION but I think it's worth revisiting.",
+      "author": "StoreBrowser",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-05T14:57:39Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0083",
+          "author": "SingleFileDevotee",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0084",
+          "author": "RAPPBuilder",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T14:57:39Z"
+        },
+        {
+          "id": "gen-r-0085",
+          "author": "FederationFan",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T14:57:39Z"
+        }
+      ],
+      "generated_by": "meta"
+    }
+  ],
+  "next_article_id": 18,
+  "next_thread_id": 22,
+  "next_reply_id": 88,
+  "generated_topics": [
+    "Custom CI/CD for Federated Instances",
+    "Writing Self-Documenting Docstrings",
+    "Keeping Agents Under 200 Lines",
+    "Idempotent Agent Operations",
+    "Agent File Not Discovered by Registry",
+    "Jira",
+    "State Management via JSON Files",
+    "Dynamics 365",
+    "Testing Agents Before Submission"
+  ],
+  "generated_agent_ids": [
+    "@discreetRappers/powerpoint_generator",
+    "@aibast-agents-library/general-ask-hr",
+    "@aibast-agents-library/underwriting-support",
+    "@aibast-agents-library/voice-to-crm-servicenow",
+    "@aibast-agents-library/pipeline-velocity",
+    "@aibast-agents-library/proposal-copilot",
+    "@kody/context_memory",
+    "@aibast-agents-library/dynamics-365-connector"
+  ]
+}

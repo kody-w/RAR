@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-04T22:44:26.881060+00:00",
+  "generated_at": "2026-04-05T15:16:56.674525+00:00",
   "stats": {
-    "total_agents": 129,
+    "total_agents": 131,
     "publishers": 6,
     "categories": 19,
     "publisher_list": [
@@ -3267,6 +3267,32 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/rappter-engine-agent",
+      "version": "1.0.0",
+      "display_name": "RappterEngine",
+      "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "engine",
+        "framework",
+        "content",
+        "automation",
+        "rules-as-data",
+        "heartbeat"
+      ],
+      "category": "devtools",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody/rappter_engine_agent.py",
+      "_size_kb": 17.5,
+      "_lines": 479,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/rappterbook",
       "version": "1.0.0",
       "display_name": "Rappterbook",
@@ -3290,6 +3316,32 @@
       "_size_kb": 6.3,
       "_lines": 160,
       "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/rappterpedia-agent",
+      "version": "1.0.0",
+      "display_name": "RappterpediaAgent",
+      "description": "Community wiki & forum content engine. Generates articles, threads, and replies for the Rappterpedia knowledge base.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "wiki",
+        "forum",
+        "content",
+        "community",
+        "rappterpedia",
+        "engine"
+      ],
+      "category": "productivity",
+      "quality_tier": "verified",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@kody/rappterpedia_agent.py",
+      "_size_kb": 24.2,
+      "_lines": 540,
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
