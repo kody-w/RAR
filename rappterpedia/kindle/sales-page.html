@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Agent Building for Absolute Beginners — The Book</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #fff; color: #1a1a1a; line-height: 1.8;
+  }
+  .section {
+    max-width: 720px; margin: 0 auto; padding: 60px 24px;
+  }
+  .section.dark {
+    background: #0d1117; color: #e6edf3; max-width: 100%;
+  }
+  .section.dark .inner { max-width: 720px; margin: 0 auto; }
+  .section.gold {
+    background: linear-gradient(135deg, #1a1510, #2a2418); color: #f0e6d0; max-width: 100%;
+  }
+  .section.gold .inner { max-width: 720px; margin: 0 auto; }
+  .section.blue {
+    background: #0a1628; color: #c8d8e8; max-width: 100%;
+  }
+  .section.blue .inner { max-width: 720px; margin: 0 auto; }
+  h1 {
+    font-size: 2.8em; font-weight: 800; line-height: 1.15; margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: 2em; font-weight: 700; line-height: 1.2; margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  h3 { font-size: 1.3em; font-weight: 700; margin: 24px 0 8px; }
+  p { margin-bottom: 18px; font-size: 1.1em; }
+  .subtitle { font-size: 1.4em; color: #555; line-height: 1.5; margin-bottom: 24px; }
+  .dark .subtitle { color: #8b949e; }
+  .highlight { color: #d4a017; font-weight: 700; }
+  .gold .highlight { color: #ffd700; }
+  .red { color: #c0392b; }
+  .green { color: #27ae60; }
+  .big { font-size: 1.4em; line-height: 1.5; }
+  .huge { font-size: 2em; font-weight: 800; text-align: center; margin: 32px 0; }
+  .center { text-align: center; }
+  .spacer { height: 40px; }
+
+  /* CTA Button */
+  .cta {
+    display: inline-block; background: #d4a017; color: #fff; font-size: 1.3em;
+    font-weight: 800; padding: 18px 48px; border-radius: 8px; text-decoration: none;
+    margin: 24px 0; transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 20px rgba(212,160,23,.3);
+    letter-spacing: 0.02em;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(212,160,23,.5); }
+  .cta.big-cta { font-size: 1.5em; padding: 22px 56px; }
+  .cta-sub { font-size: 0.85em; color: #888; margin-top: 8px; }
+  .dark .cta-sub { color: #656d76; }
+
+  /* Proof */
+  .proof-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0;
+  }
+  @media (max-width: 600px) { .proof-grid { grid-template-columns: 1fr; } }
+  .proof-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px; padding: 20px;
+  }
+  .proof-num { font-size: 2.5em; font-weight: 800; color: #d4a017; }
+  .proof-label { font-size: 0.95em; color: #999; }
+
+  /* Stack */
+  .stack-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+    font-size: 1.05em;
+  }
+  .stack-item:last-child { border-bottom: none; }
+  .stack-value { color: #d4a017; font-weight: 700; font-size: 1.1em; }
+  .stack-free { color: #27ae60; font-weight: 700; }
+
+  /* Testimonial style */
+  .quote {
+    font-size: 1.2em; font-style: italic; border-left: 4px solid #d4a017;
+    padding: 16px 24px; margin: 24px 0; background: rgba(212,160,23,.05);
+    border-radius: 0 8px 8px 0;
+  }
+  .dark .quote { background: rgba(212,160,23,.08); }
+  .quote-attr { font-style: normal; font-size: 0.85em; color: #888; margin-top: 8px; }
+
+  /* Strikethrough price */
+  .price-old { text-decoration: line-through; color: #999; font-size: 1.2em; }
+  .price-new { font-size: 3em; font-weight: 800; color: #d4a017; }
+
+  /* Guarantee */
+  .guarantee {
+    background: rgba(39,174,96,.08); border: 2px solid rgba(39,174,96,.3);
+    border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;
+  }
+  .guarantee h3 { color: #27ae60; }
+
+  /* Urgency */
+  .urgency {
+    background: rgba(192,57,43,.08); border: 2px solid rgba(192,57,43,.2);
+    border-radius: 12px; padding: 20px; margin: 24px 0;
+    font-size: 1.05em; text-align: center;
+  }
+
+  /* FAQ */
+  details { margin: 12px 0; }
+  summary {
+    font-weight: 700; font-size: 1.05em; cursor: pointer; padding: 12px 0;
+    border-bottom: 1px solid #ddd; list-style: none;
+  }
+  summary::before { content: '+ '; color: #d4a017; font-weight: 800; }
+  details[open] summary::before { content: '- '; }
+  details p { padding: 12px 0; color: #555; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="section dark">
+<div class="inner center">
+  <p style="color:#d4a017;font-size:.9em;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px">For Non-Technical Professionals Who Want AI Working For Them</p>
+  <h1 style="color:#fff">Build Your Own AI Agents<br>Without Writing a Single Line of Code</h1>
+  <p class="subtitle">The step-by-step system that turns anyone — sales reps, small business owners, marketers — into an AI agent builder. In an afternoon. No engineering degree required.</p>
+  <a href="https://www.amazon.com/dp/XXXXXXXXXX" class="cta big-cta">Get the Book — $9.99</a>
+  <p class="cta-sub">Available on Kindle. Read it today.</p>
+</div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<div class="section">
+  <h2>You've been told you need to "learn to code" to use AI.</h2>
+  <p class="big">That's a lie.</p>
+  <p>Not a white lie. Not a simplification. A <strong>lie</strong> that keeps millions of smart, capable professionals on the sidelines of the biggest technology shift since the internet.</p>
+  <p>You've seen the AI tools. You've used ChatGPT. You've watched your technical colleagues build automations. And you've thought:</p>
+  <div class="quote">"I wish I could build something like that for my work. But I don't know Python. I don't know APIs. I don't know where to start."</div>
+  <p>Here's what nobody tells you: <span class="highlight">the AI can write the code for you.</span></p>
+  <p>You describe what you want. The AI builds it. You deploy it. It works.</p>
+  <p>That's not a future promise. That's what the RAPP ecosystem does <em>today</em>.</p>
+</div>
+
+<!-- ═══ AGITATION ═══ -->
+<div class="section dark">
+<div class="inner">
+  <h2 style="color:#fff">The Real Cost of Not Having AI Agents</h2>
+  <p>Every day without AI agents in your workflow, you're:</p>
+  <p><span class="red">&#10007;</span> Spending 15 minutes per meeting reformatting notes into action items</p>
+  <p><span class="red">&#10007;</span> Copying data between your CRM, email, and spreadsheets by hand</p>
+  <p><span class="red">&#10007;</span> Writing the same types of emails over and over</p>
+  <p><span class="red">&#10007;</span> Researching prospects manually instead of getting instant briefings</p>
+  <p><span class="red">&#10007;</span> Watching your competitors automate while you're stuck in manual mode</p>
+  <div class="spacer"></div>
+  <p class="big" style="color:#fff"><strong>That's 5-10 hours per week.</strong> Every week. Forever.</p>
+  <p>At $50/hour, that's <span class="highlight">$13,000-$26,000 per year</span> of your time — gone to tasks an AI agent handles in seconds.</p>
+</div>
+</div>
+
+<!-- ═══ SOLUTION ═══ -->
+<div class="section">
+  <h2>Introducing: The Single-File Agent Revolution</h2>
+  <p>In the RAPP ecosystem, every AI agent is <strong>one file</strong>.</p>
+  <p>One file to download. One file to read. One file to deploy. One file for an AI to write for you.</p>
+  <p>There are <span class="highlight">131 agents</span> in the store right now. Ready to install. Ready to use. Covering:</p>
+  <p><span class="green">&#10003;</span> <strong>Sales & CRM</strong> — prospect research, pipeline management, proposal writing<br>
+  <span class="green">&#10003;</span> <strong>Customer Service</strong> — ticket routing, FAQ generation, sentiment analysis<br>
+  <span class="green">&#10003;</span> <strong>Healthcare</strong> — patient intake, appointment scheduling, compliance<br>
+  <span class="green">&#10003;</span> <strong>Finance</strong> — invoice processing, fraud detection, reporting<br>
+  <span class="green">&#10003;</span> <strong>Manufacturing</strong> — quality control, supply chain, maintenance<br>
+  <span class="green">&#10003;</span> <strong>And 14 more industry verticals</strong></p>
+  <p>You don't install a development environment. You don't run terminal commands. You open a web page and browse.</p>
+</div>
+
+<!-- ═══ PROOF ═══ -->
+<div class="section dark">
+<div class="inner">
+  <h2 style="color:#fff" class="center">The Numbers Don't Lie</h2>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-num">131</div>
+      <div class="proof-label">Ready-to-use agents in the store</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-num">19</div>
+      <div class="proof-label">Industry categories covered</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-num">400+</div>
+      <div class="proof-label">Wiki articles in Rappterpedia</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-num">0</div>
+      <div class="proof-label">Lines of code you need to write</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ WHAT YOU GET ═══ -->
+<div class="section gold">
+<div class="inner">
+  <h2 style="color:#ffd700" class="center">What You Get</h2>
+  <p class="center subtitle" style="color:#c8a870">The book is just the beginning. Here's the full stack.</p>
+
+  <div class="stack-item">
+    <span><strong>The Kindle Book</strong> — 20 chapters, 5 parts, zero to published agent</span>
+    <span class="stack-value">$29 value</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Agent Store Access</strong> — 131 agents, browse and install instantly</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>104 Industry Templates</strong> — Pre-built agents for 14 verticals</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Agent Workbench</strong> — Build agents in your browser, AI assists</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Rappterpedia Wiki</strong> — 400+ articles, community forum</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Holo Card Collection</strong> — Every agent as a collectible trading card</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Federation</strong> — Fork and run your own private agent store</span>
+    <span class="stack-free">FREE</span>
+  </div>
+  <div class="stack-item">
+    <span><strong>Virtual Brainstem</strong> — Chat interface to run any agent</span>
+    <span class="stack-free">FREE</span>
+  </div>
+
+  <div class="spacer"></div>
+  <p class="center"><span class="price-old">Total value: $5,000+</span></p>
+  <p class="center"><span class="price-new">$9.99</span></p>
+  <p class="center" style="color:#c8a870">Everything except the book is free. Forever. No upsell. No bait-and-switch.</p>
+  <div class="center">
+    <a href="https://www.amazon.com/dp/XXXXXXXXXX" class="cta big-cta">Get the Book — $9.99</a>
+  </div>
+</div>
+</div>
+
+<!-- ═══ WHO THIS IS FOR ═══ -->
+<div class="section">
+  <h2>This Book Is For You If...</h2>
+  <p><span class="green">&#10003;</span> You use AI tools (ChatGPT, Copilot) but can't build your own automations</p>
+  <p><span class="green">&#10003;</span> You're in sales, marketing, operations, or management — not engineering</p>
+  <p><span class="green">&#10003;</span> You've wanted to automate repetitive tasks but didn't know where to start</p>
+  <p><span class="green">&#10003;</span> You want to understand AI agents without getting a CS degree</p>
+  <p><span class="green">&#10003;</span> You want a weekend project that actually saves you time on Monday</p>
+
+  <div class="spacer"></div>
+
+  <h2>This Book Is NOT For You If...</h2>
+  <p><span class="red">&#10007;</span> You're an experienced developer who already builds with LangChain, CrewAI, etc.</p>
+  <p><span class="red">&#10007;</span> You want a theoretical overview of AI — this is a hands-on playbook</p>
+  <p><span class="red">&#10007;</span> You're not willing to spend an afternoon trying something new</p>
+</div>
+
+<!-- ═══ INSIDE THE BOOK ═══ -->
+<div class="section dark">
+<div class="inner">
+  <h2 style="color:#fff">Inside the Book</h2>
+
+  <h3 style="color:#d4a017">Part I: The 10-Minute Foundation</h3>
+  <p>What agents are, how the ecosystem works, and your first 10 minutes in the Agent Store. You'll be browsing 131 agents before you finish your coffee.</p>
+
+  <h3 style="color:#d4a017">Part II: Using Agents Without Writing Code</h3>
+  <p>How to browse, install, collect, and run agents. The card system, deck building, and using agents from chat. Zero code required.</p>
+
+  <h3 style="color:#d4a017">Part III: Building Your First Agent</h3>
+  <p>The Agent Workbench. Templates. AI-assisted coding. Step-by-step: you'll build a meeting summary agent that categorizes notes into decisions, action items, and discussion points. Then publish it to the store.</p>
+
+  <h3 style="color:#d4a017">Part IV: Going Deeper</h3>
+  <p>Connecting agents to external services. The Holo card system. Running your own agent store. The community wiki and forum.</p>
+
+  <h3 style="color:#d4a017">Part V: Real-World Playbooks</h3>
+  <p>Four complete playbooks: Sales Team, Small Business, Creative Professional, and Enterprise. Each with agent stacks, workflows, and implementation guides.</p>
+</div>
+</div>
+
+<!-- ═══ GUARANTEE ═══ -->
+<div class="section">
+  <div class="guarantee">
+    <h3>The "Try It First" Guarantee</h3>
+    <p>The Agent Store is free. Rappterpedia is free. The Workbench is free. <strong>Try the entire ecosystem before you spend a dime.</strong> The book is just the structured guide. If you can use the tools without it, don't buy it. We'd rather you succeed for free than pay for something you don't need.</p>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="section">
+  <h2 class="center">Frequently Asked Questions</h2>
+  <div class="spacer"></div>
+
+  <details>
+    <summary>Do I really not need to know how to code?</summary>
+    <p>Really. The Agent Workbench provides templates. AI assistants (Claude, ChatGPT) can write the code for you. You provide the idea and the description. The machines handle the implementation. The book walks you through every step.</p>
+  </details>
+
+  <details>
+    <summary>What's the difference between this and ChatGPT?</summary>
+    <p>ChatGPT is a general-purpose AI you talk to. RAPP agents are specialized tools that do specific things. Think of it like the difference between asking a friend for directions vs. using Google Maps. Both work, but one is built for the job.</p>
+  </details>
+
+  <details>
+    <summary>Is this another AI hype product?</summary>
+    <p>The Agent Store has 131 working agents. The code is open source. The wiki has 400+ articles. The ecosystem runs on GitHub — the same platform developers trust with their code. There's no hype, just tools that work.</p>
+  </details>
+
+  <details>
+    <summary>Why is everything free except the book?</summary>
+    <p>Because the ecosystem grows when more people use it. Every new agent published, every new user who builds something — that makes the whole thing more valuable for everyone. The book is $9.99 because writing 20 chapters takes time, and Amazon needs to get paid. Everything else is MIT open source.</p>
+  </details>
+
+  <details>
+    <summary>Can I use this at my company?</summary>
+    <p>Yes. RAR supports federation — fork the repo and run your own private agent store. Your agents stay internal. You can still pull public agents from the main store. Chapter 15 covers this in detail.</p>
+  </details>
+
+  <details>
+    <summary>How long does it take to build an agent?</summary>
+    <p>Your first agent takes about 15 minutes with the Workbench. The meeting summary agent in Chapter 10 takes about 10 minutes. Once you've built one, subsequent agents take 5-10 minutes each.</p>
+  </details>
+</div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div class="section blue">
+<div class="inner center">
+  <h2 style="color:#fff">Ready to Build Your AI Toolkit?</h2>
+  <p class="subtitle" style="color:#8899aa">131 agents. 400+ wiki articles. Zero code. One book that ties it all together.</p>
+  <a href="https://www.amazon.com/dp/XXXXXXXXXX" class="cta big-cta">Get the Book — $9.99</a>
+  <p class="cta-sub">Kindle format. Start reading in 60 seconds.</p>
+  <div class="spacer"></div>
+  <p style="color:#556677;font-size:.9em">Or try the ecosystem first: <a href="https://kody-w.github.io/RAR/" style="color:#58a6ff">Open the Agent Store</a> (free, no signup)</p>
+</div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="section" style="padding:24px;text-align:center;color:#999;font-size:.85em">
+  <p><em>Single file. Single principle. Single source of truth.</em></p>
+  <p>RAPP Agent Registry is open source under the MIT License.</p>
+  <p><a href="https://kody-w.github.io/RAR/" style="color:#888">Agent Store</a> &middot; <a href="https://kody-w.github.io/RAR/rappterpedia/" style="color:#888">Rappterpedia</a> &middot; <a href="https://github.com/kody-w/RAR" style="color:#888">GitHub</a></p>
+</div>
+
+</body>
+</html>
