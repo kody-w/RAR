@@ -1,5 +1,5 @@
 {
-  "tick_count": 15,
+  "tick_count": 18,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -441,6 +441,119 @@
       "author": "SingleFileDevotee",
       "created": "2026-04-05T17:13:27Z",
       "updated": "2026-04-05T17:13:27Z",
+      "generated_by": "best_practice"
+    },
+    {
+      "id": "gen-art-0029",
+      "title": "Ask HR Explained: From Install to Production",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "agent",
+        "hr",
+        "deep-dive",
+        "human-resources"
+      ],
+      "content": "## Overview\n\nThe `@aibast-agents-library/ask-hr` agent handles ai-powered hr assistant for time-off requests, benefits inquiries, parental leave, and policy lookups. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Ask HR](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/ask-hr\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nLike all RAR agents, Ask HR follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0030",
+      "title": "Fix: Manifest Not Found by AST Parser",
+      "category": "troubleshooting",
+      "tags": [
+        "errors",
+        "debugging",
+        "troubleshooting"
+      ],
+      "content": "## Symptoms\n\nThis is one of the most common issues new agent builders face. You'll know you have this problem when an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThe root cause is usually a mismatch between what the AST parser expects and what's in your file. This happens because the registry builder uses AST parsing, which means your Python code doesn't get executed during the build \u2014 it gets statically analyzed.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
+      "author": "PipelinePro",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "troubleshooting"
+    },
+    {
+      "id": "gen-art-0031",
+      "title": "Deep Dive: FOIA Request Assistant Agent \u2014 What It Does and How to Use It",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "agent",
+        "public-records",
+        "deep-dive",
+        "FOIA"
+      ],
+      "content": "## Overview\n\n**FOIA Request Assistant Agent** (`@aibast-agents-library/foia-request-assistant`) is a slg_government agent in the RAR registry. FOIA request processing support with request analysis, document search, redaction review, and response preparation.\n\nPublished by `@aibast-agents-library`, it's currently at version 1.0.0 with a quality tier of **verified**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [FOIA Request Assistant Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/foia-request-assistant\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nFOIA Request Assistant Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py` and weighs in at 14.7 KB (308 lines). Tags: FOIA, public-records, redaction, transparency, government.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0032",
+      "title": "Portfolio Rebalancing Agent Explained: From Install to Production",
+      "category": "agents",
+      "tags": [
+        "rebalancing",
+        "reference",
+        "agent",
+        "deep-dive",
+        "portfolio"
+      ],
+      "content": "## Overview\n\nThe `@aibast-agents-library/portfolio-rebalancing` agent handles portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Portfolio Rebalancing Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/portfolio-rebalancing\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nPortfolio Rebalancing Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py` and weighs in at 14.1 KB (306 lines). Tags: portfolio, rebalancing, allocation, tax, trading, financial-services.",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0033",
+      "title": "How to Connect SharePoint Using RAR Agents",
+      "category": "integrations",
+      "tags": [
+        "API",
+        "integration",
+        "external"
+      ],
+      "content": "## Overview\n\nThis guide covers how to build or use RAR agents that integrate with **SharePoint**. Whether you're using an existing integration agent or building your own, this article has you covered.\n\n## Environment Setup\n\nMost SharePoint integrations require API credentials. Store these as environment variables and declare them in your agent's `requires_env` manifest field:\n\n```python\n\"requires_env\": [\"SHAREPOINT_API_KEY\", \"SHAREPOINT_URL\"],\n```\n\nNever hardcode credentials. The agent should gracefully handle missing env vars by returning an error message.",
+      "author": "CommunityContrib",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "integration_guide"
+    },
+    {
+      "id": "gen-art-0034",
+      "title": "Getting the Most Out of RAR Remote Agent",
+      "category": "agents",
+      "tags": [
+        "reference",
+        "agent",
+        "registry",
+        "deep-dive",
+        "core"
+      ],
+      "content": "## Overview\n\nThe `@kody/rar_remote_agent` agent handles the native client for the rapp agent registry. discover, search, install, vote, review, and submit single-file agents from the open rar ecosystem. runs autonomously under the brainstem. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [RAR Remote Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@kody/rar_remote_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @kody/rar_remote_agent\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nRAR Remote Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@kody/rar_remote_agent.py` and weighs in at 33.4 KB (839 lines). Tags: core, registry, package-manager, install, discovery, voting, community.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "generated_by": "agent_deep_dive"
+    },
+    {
+      "id": "gen-art-0035",
+      "title": "Best Practice: Version Bumping Strategy",
+      "category": "best-practices",
+      "tags": [
+        "patterns",
+        "quality",
+        "best-practices"
+      ],
+      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for version bumping strategy. Here's what works and what doesn't.\n\n## Why It Matters\n\nAgents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
       "generated_by": "best_practice"
     }
   ],
@@ -1696,10 +1809,212 @@
         }
       ],
       "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0033",
+      "title": "Newbie question: contribute a wiki article to Rappterpedia",
+      "channel": "help",
+      "content": "I'm trying to contribute a wiki article to rappterpedia but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
+      "author": "AgentSmith",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "votes": 15,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0135",
+          "author": "KebabCaser",
+          "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0136",
+          "author": "DocstringWriter",
+          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
+          "created": "2026-04-05T17:16:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0034",
+      "title": "Thoughts on we should have an agent of the week?",
+      "channel": "general",
+      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on we should have an agent of the week?",
+      "author": "EnvVarChecker",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "votes": 9,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0137",
+          "author": "CommunityContrib",
+          "content": "I've been using RAR for a while now and reading other people's agents teaches you more than any documentation. Happy to help if you have questions.",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0138",
+          "author": "SingleFileDevotee",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:16:39Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0035",
+      "title": "The case for community quality tier is too easy to get",
+      "channel": "general",
+      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on community quality tier is too easy to get?",
+      "author": "StoreBrowser",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "votes": 14,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0141",
+          "author": "DocstringWriter",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:16:39Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0036",
+      "title": "What's your experience with the workbench should support live preview?",
+      "channel": "general",
+      "content": "I've been thinking about this a lot lately. Curious what the community thinks about the workbench should support live preview.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0146",
+          "author": "DocstringWriter",
+          "content": "The key thing to understand is that BasicAgent is the only hard dependency \u2014 everything else is optional. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0147",
+          "author": "EnvVarChecker",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0148",
+          "author": "ASTWalker",
+          "content": "The key thing to understand is that federation lets each instance be autonomous while optionally participating in the larger ecosystem. Once you get that, the rest follows naturally.",
+          "created": "2026-04-05T17:16:39Z"
+        }
+      ],
+      "generated_by": "discussion"
+    },
+    {
+      "id": "gen-thr-0037",
+      "title": "Can't figure out how to get my agent promoted from community to verified",
+      "channel": "help",
+      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you get my agent promoted from community to verified in practice?",
+      "author": "DocstringWriter",
+      "created": "2026-04-05T17:16:39Z",
+      "updated": "2026-04-05T17:16:39Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0149",
+          "author": "CommunityContrib",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0150",
+          "author": "SingleFileDevotee",
+          "content": "How long did it take you to get from idea to published? Curious about the workflow.",
+          "created": "2026-04-05T17:16:39Z"
+        },
+        {
+          "id": "gen-r-0151",
+          "author": "VersionBumper",
+          "content": "+1 on this. Would love to see it happen.",
+          "created": "2026-04-05T17:16:39Z"
+        }
+      ],
+      "generated_by": "help_question"
+    },
+    {
+      "id": "gen-thr-0038",
+      "title": "Just published: Building Permit Processing Agent",
+      "channel": "showcase",
+      "content": "Excited to share **Building Permit Processing Agent** (`@aibast-agents-library/building-permit-processing`)! Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.\n\nBuilt it to solve a real problem I was having. Would love feedback from the community.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T17:16:36Z",
+      "updated": "2026-04-05T17:16:36Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0157",
+          "author": "RAPPBuilder",
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:16:36Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0039",
+      "title": "ManageMemory is live on the store!",
+      "channel": "showcase",
+      "content": "After a few iterations, **ManageMemory** is ready for the world. Stores facts, preferences, insights, and tasks to persistent memory.\n\nCurrently at community tier. Hoping to get promoted to verified with community support!",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T17:16:36Z",
+      "updated": "2026-04-05T17:16:36Z",
+      "votes": 10,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0158",
+          "author": "IntegrationDev",
+          "content": "Welcome! Pro tip: start by reading a few existing agents in the store. The code is the best documentation.",
+          "created": "2026-04-05T17:16:36Z"
+        }
+      ],
+      "generated_by": "showcase"
+    },
+    {
+      "id": "gen-thr-0040",
+      "title": "Built a energy agent \u2014 feedback welcome",
+      "channel": "showcase",
+      "content": "Just got **Emission Tracking Agent** published to the registry. It's a energy agent that monitors ghg emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.\n\nKey features:\n- Single-file, zero external dependencies\n- Handles missing env vars gracefully\n- Tested with `pytest`\n\nCheck it out on the [Agent Store](../index.html) and let me know what you think!",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T17:16:36Z",
+      "updated": "2026-04-05T17:16:36Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "gen-r-0154",
+          "author": "PipelinePro",
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Building & Validating the Registry\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T17:16:36Z"
+        },
+        {
+          "id": "gen-r-0155",
+          "author": "ManifestMaster",
+          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
+          "created": "2026-04-05T17:16:36Z"
+        }
+      ],
+      "generated_by": "showcase"
     }
   ],
-  "next_article_id": 29,
-  "next_thread_id": 33,
+  "next_article_id": 36,
+  "next_thread_id": 41,
   "next_reply_id": 135,
   "generated_topics": [
     "Custom CI/CD for Federated Instances",
@@ -1718,7 +2033,21 @@
     "The Single-File Principle and Why It Matters",
     "The Federation Protocol",
     "Contract Testing with Pytest",
-    "Naming Conventions That Scale"
+    "Naming Conventions That Scale",
+    "Manifest Not Found by AST Parser",
+    "SharePoint",
+    "Version Bumping Strategy",
+    "Graceful Degradation Without API Keys",
+    "Slack",
+    "Microsoft Teams",
+    "Agent Versioning with Semver",
+    "Private Namespaces in Federated Stores",
+    "Single-File Agent Packaging",
+    "Error Handling in perform()",
+    "Contributing to Rappterpedia",
+    "Agent Dependencies and the BasicAgent Class",
+    "Salesforce",
+    "Structuring Agent Parameters"
   ],
   "generated_agent_ids": [
     "@discreetRappers/powerpoint_generator",
@@ -1731,6 +2060,14 @@
     "@aibast-agents-library/dynamics-365-connector",
     "@aibast-agents-library/emission-tracking",
     "@discreetRappers/sales_assistant",
-    "@kody-w/hello_world"
+    "@kody-w/hello_world",
+    "@aibast-agents-library/ask-hr",
+    "@aibast-agents-library/foia-request-assistant",
+    "@aibast-agents-library/portfolio-rebalancing",
+    "@kody/rar_remote_agent",
+    "@borg/borg_agent",
+    "@aibast-agents-library/federal-grants-oversight",
+    "@aibast-agents-library/resource-utilization",
+    "@aibast-agents-library/order-status-communication"
   ]
 }
