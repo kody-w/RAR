@@ -1,0 +1,2809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual RAPP Brainstem</title>
+<meta name="description" content="Browser-native agent runtime — run any RAR agent in a LisPy VM, no server required.">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --surface3: #30363d;
+  --border: #30363d;
+  --border-hover: #484f58;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-muted: #656d76;
+  --accent: #58a6ff;
+  --accent-bg: rgba(88,166,255,.1);
+  --green: #3fb950;
+  --green-bg: rgba(63,185,80,.12);
+  --orange: #d29922;
+  --orange-bg: rgba(210,153,34,.12);
+  --purple: #bc8cff;
+  --purple-bg: rgba(188,140,255,.12);
+  --red: #f85149;
+  --red-bg: rgba(248,81,73,.12);
+  --yellow: #e3b341;
+  --gold: #ffd700;
+  --shadow: 0 3px 12px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.5);
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); min-height:100vh;
+  display: flex; flex-direction: column;
+}
+a { color: var(--accent); text-decoration:none; }
+code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menlo,monospace; }
+
+/* Header */
+.bs-header {
+  background: var(--surface); border-bottom:1px solid var(--border);
+  padding:12px 24px; display:flex; align-items:center; justify-content:space-between;
+  flex-shrink:0;
+}
+.bs-logo { display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:700; }
+.bs-logo-mark {
+  background: linear-gradient(135deg, var(--green), var(--accent));
+  color:#fff; width:30px; height:30px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.75rem; font-weight:800;
+}
+.bs-status {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 12px; border-radius:12px; font-size:.8rem; font-weight:600;
+}
+.bs-status.idle { background:var(--surface2); color:var(--text-dim); }
+.bs-status.loading { background:var(--orange-bg); color:var(--orange); }
+.bs-status.running { background:var(--green-bg); color:var(--green); }
+.bs-status.error { background:var(--red-bg); color:var(--red); }
+.bs-status-dot {
+  width:8px; height:8px; border-radius:50%; background:currentColor;
+}
+.bs-status.running .bs-status-dot { animation: pulse 1.2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.bs-header-right { display:flex; align-items:center; gap:10px; }
+.bs-btn {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:6px 14px; border-radius:7px; cursor:pointer; font-size:.82rem; transition:all .15s;
+}
+.bs-btn:hover { border-color:var(--border-hover); background:var(--surface3); }
+.bs-btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+.bs-btn.primary:hover { opacity:.85; }
+.bs-btn.green { background:var(--green); border-color:var(--green); color:#fff; }
+.bs-btn.green:hover { opacity:.85; }
+
+/* Layout */
+.bs-main { display:flex; flex:1; overflow:hidden; }
+.bs-sidebar {
+  width:260px; min-width:260px; background:var(--surface);
+  border-right:1px solid var(--border); display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.bs-sidebar-header { padding:12px; border-bottom:1px solid var(--border); }
+.bs-sidebar-search {
+  width:100%; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:8px 10px; color:var(--text); font-size:.85rem; outline:none;
+}
+.bs-sidebar-search:focus { border-color:var(--accent); }
+.bs-sidebar-cats {
+  display:flex; gap:4px; flex-wrap:wrap; margin-top:8px;
+}
+.bs-cat-pill {
+  background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+  padding:2px 8px; font-size:.7rem; color:var(--text-dim); cursor:pointer; transition:all .15s;
+}
+.bs-cat-pill:hover, .bs-cat-pill.active { background:var(--accent-bg); color:var(--accent); border-color:var(--accent); }
+.bs-agent-list { flex:1; overflow-y:auto; padding:8px; }
+.bs-agent-item {
+  padding:10px; border-radius:8px; cursor:pointer; margin-bottom:4px;
+  border:1px solid transparent; transition:all .15s;
+}
+.bs-agent-item:hover { background:var(--surface2); border-color:var(--border); }
+.bs-agent-item.active { background:var(--accent-bg); border-color:var(--accent); }
+.bs-agent-name { font-size:.85rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bs-agent-cat { font-size:.7rem; color:var(--text-muted); }
+.bs-agent-desc { font-size:.75rem; color:var(--text-dim); margin-top:2px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.bs-drop-zone {
+  margin:8px; padding:20px 12px; border:2px dashed var(--border);
+  border-radius:8px; text-align:center; font-size:.8rem; color:var(--text-muted);
+  transition:all .15s; cursor:pointer;
+}
+.bs-drop-zone.dragover { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+
+/* Content area */
+.bs-content { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.bs-info-bar {
+  padding:12px 20px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap; flex-shrink:0;
+}
+.bs-info-bar .agent-title { font-size:1rem; font-weight:700; }
+.bs-info-bar .agent-meta { font-size:.8rem; color:var(--text-dim); }
+.bs-op-select {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:6px 10px; border-radius:6px; font-size:.85rem; cursor:pointer;
+}
+.bs-op-select:focus { border-color:var(--accent); outline:none; }
+.bs-info-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
+
+/* Terminal */
+.bs-terminal {
+  flex:1; overflow-y:auto; padding:16px 20px; font-family:'SF Mono','Fira Code',Consolas,monospace;
+  font-size:.85rem; line-height:1.6; background:var(--bg);
+}
+.bs-terminal .line { color:var(--green); }
+.bs-terminal .line.error { color:var(--red); }
+.bs-terminal .line.system { color:var(--text-muted); font-style:italic; }
+.bs-terminal .line.result { color:var(--text); }
+.bs-terminal table { border-collapse:collapse; margin:4px 0; width:auto; }
+.bs-terminal th, .bs-terminal td {
+  border:1px solid var(--border); padding:3px 10px; text-align:left; font-size:.8rem;
+}
+.bs-terminal th { background:var(--surface2); color:var(--accent); font-weight:600; }
+.bs-terminal td { color:var(--text); }
+.bs-terminal h1 { font-size:1.1rem; color:var(--accent); margin:8px 0 4px; font-weight:700; }
+.bs-terminal h2 { font-size:.95rem; color:var(--purple); margin:6px 0 4px; font-weight:600; }
+.bs-terminal h3 { font-size:.88rem; color:var(--text); margin:4px 0 2px; font-weight:600; }
+.bs-terminal strong { color:var(--text); font-weight:700; }
+.bs-terminal .list-item { color:var(--text); padding-left:16px; }
+
+/* REPL */
+.bs-repl {
+  display:flex; padding:8px 16px; border-top:1px solid var(--border);
+  background:var(--surface); flex-shrink:0;
+}
+.bs-repl-prompt {
+  color:var(--green); font-family:'SF Mono',monospace; font-size:.85rem;
+  padding:8px 8px 8px 0; user-select:none;
+}
+.bs-repl-input {
+  flex:1; background:transparent; border:none; color:var(--text);
+  font-family:'SF Mono',monospace; font-size:.85rem; outline:none; padding:8px 0;
+}
+.bs-repl-input::placeholder { color:var(--text-muted); }
+
+/* Footer */
+.bs-footer {
+  padding:6px 20px; border-top:1px solid var(--border); background:var(--surface);
+  display:flex; gap:16px; font-size:.75rem; color:var(--text-muted); flex-shrink:0;
+}
+.bs-footer span { display:flex; align-items:center; gap:4px; }
+.bs-footer .val { color:var(--text-dim); font-weight:600; }
+
+/* Welcome */
+.bs-welcome {
+  flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px;
+}
+.bs-welcome h2 { font-size:1.4rem; margin-bottom:12px; }
+.bs-welcome p { color:var(--text-dim); max-width:500px; margin:0 auto 20px; line-height:1.6; }
+.bs-welcome .keys { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+.bs-welcome .key {
+  background:var(--surface2); border:1px solid var(--border); border-radius:6px;
+  padding:4px 12px; font-size:.8rem; color:var(--text-dim);
+}
+
+/* Responsive */
+@media (max-width:768px) {
+  .bs-sidebar { display:none; }
+  .bs-header { padding:10px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="bs-header">
+  <div class="bs-logo">
+    <div class="bs-logo-mark">VM</div>
+    <span>Virtual Brainstem</span>
+  </div>
+  <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
+  <div class="bs-header-right">
+    <button class="bs-btn" onclick="runTests()">Run Tests</button>
+    <a href="index.html" class="bs-btn">Back to RAR</a>
+  </div>
+</div>
+
+<!-- Main layout -->
+<div class="bs-main">
+  <!-- Sidebar -->
+  <div class="bs-sidebar">
+    <div class="bs-sidebar-header">
+      <input class="bs-sidebar-search" id="agentSearch" type="text" placeholder="Search agents..." oninput="filterAgents()">
+      <div class="bs-sidebar-cats" id="catPills"></div>
+    </div>
+    <div class="bs-agent-list" id="agentList"></div>
+    <div class="bs-drop-zone" id="dropZone"
+      ondragover="event.preventDefault();this.classList.add('dragover')"
+      ondragleave="this.classList.remove('dragover')"
+      ondrop="handleDrop(event)">
+      Drop agent.py here
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="bs-content">
+    <div class="bs-info-bar" id="infoBar" style="display:none">
+      <span class="agent-title" id="agentTitle"></span>
+      <span class="agent-meta" id="agentMeta"></span>
+      <select class="bs-op-select" id="opSelect" onchange="selectOp()"></select>
+      <div class="bs-info-right">
+        <button class="bs-btn green" onclick="runOp()">Run</button>
+      </div>
+    </div>
+    <div class="bs-terminal" id="terminal">
+      <div class="bs-welcome" id="welcome">
+        <div>
+          <h2>Virtual RAPP Brainstem</h2>
+          <p>A LisPy VM running in your browser. Select an agent from the sidebar or drop an agent.py file to begin. Every agent runs locally -- no server, no install.</p>
+          <div class="keys">
+            <span class="key">128 agents</span>
+            <span class="key">LisPy VM</span>
+            <span class="key">Python transpiler</span>
+            <span class="key">Zero dependencies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-repl" id="replBar">
+      <span class="bs-repl-prompt">λ&gt;</span>
+      <input class="bs-repl-input" id="replInput" type="text" placeholder="Type S-expression..." onkeydown="if(event.key==='Enter')evalRepl()">
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="bs-footer">
+  <span>Transpile: <span class="val" id="fTranspile">--</span></span>
+  <span>Eval: <span class="val" id="fEval">--</span></span>
+  <span>Operations: <span class="val" id="fOps">0</span></span>
+  <span>Errors: <span class="val" id="fErrors">0</span></span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 1: lispy.js — Complete Lisp Interpreter in JavaScript
+// ═══════════════════════════════════════════════════════════════════════
+
+// Output callback — UI hooks into this
+let brainstemOutput = (text) => {};
+
+// --- Types ---
+class LispSymbol extends String {
+  constructor(s) { super(s); }
+  get isSymbol() { return true; }
+}
+
+const _symbolCache = {};
+function Sym(name) {
+  if (!_symbolCache[name]) _symbolCache[name] = new LispSymbol(name);
+  return _symbolCache[name];
+}
+
+const NIL = Object.freeze({
+  toString() { return '()'; },
+  isNil: true,
+  length: 0,
+  [Symbol.iterator]() { return { next() { return { done: true }; } }; }
+});
+
+class LispPair {
+  constructor(car, cdr) { this.car = car; this.cdr = cdr; }
+  toString() { return '(' + pairRepr(this) + ')'; }
+  get length() {
+    let n = 0, cur = this;
+    while (cur instanceof LispPair) { n++; cur = cur.cdr; }
+    return n;
+  }
+  [Symbol.iterator]() {
+    let cur = this;
+    return {
+      next() {
+        if (cur instanceof LispPair) {
+          const val = cur.car; cur = cur.cdr; return { value: val, done: false };
+        }
+        if (cur !== NIL && cur !== undefined && cur !== null) {
+          const val = cur; cur = NIL; return { value: val, done: false };
+        }
+        return { done: true };
+      }
+    };
+  }
+}
+
+class LispLambda {
+  constructor(params, body, env, name = 'lambda') {
+    this.params = params; this.body = body; this.env = env; this.name = name;
+  }
+  toString() { return `#<procedure ${this.name}>`; }
+}
+
+class LispMacro {
+  constructor(params, body, env, name = 'macro') {
+    this.params = params; this.body = body; this.env = env; this.name = name;
+  }
+  toString() { return `#<macro ${this.name}>`; }
+}
+
+class LispEnv {
+  constructor(params, args, parent) {
+    this.bindings = new Map();
+    this.parent = parent || null;
+    if (params && args) {
+      if (typeof params === 'string' || params instanceof LispSymbol) {
+        // variadic
+        this.bindings.set(String(params), Array.from(args));
+      } else if (Array.isArray(params)) {
+        for (let i = 0; i < params.length; i++) {
+          this.bindings.set(String(params[i]), args[i]);
+        }
+      }
+    }
+  }
+  get(name) {
+    const s = String(name);
+    if (this.bindings.has(s)) return this.bindings.get(s);
+    if (this.parent) return this.parent.get(s);
+    throw new LispError(`unbound variable: ${s}`);
+  }
+  set(name, val) {
+    const s = String(name);
+    if (this.bindings.has(s)) { this.bindings.set(s, val); return val; }
+    if (this.parent) return this.parent.set(s, val);
+    throw new LispError(`unbound variable: ${s}`);
+  }
+  define(name, val) { this.bindings.set(String(name), val); return val; }
+}
+
+class LispError extends Error {
+  constructor(msg) { super(msg); this.name = 'LispError'; }
+}
+
+// --- Helpers ---
+function isNil(x) { return x === NIL || x === null || x === undefined; }
+function isTruthy(x) { return x !== false && !isNil(x); }
+
+function pairRepr(p) {
+  const parts = [];
+  let cur = p;
+  while (cur instanceof LispPair) { parts.push(valueRepr(cur.car)); cur = cur.cdr; }
+  if (!isNil(cur)) { parts.push('.'); parts.push(valueRepr(cur)); }
+  return parts.join(' ');
+}
+
+function valueRepr(val) {
+  if (val === true) return '#t';
+  if (val === false) return '#f';
+  if (isNil(val)) return '()';
+  if (val instanceof LispSymbol) return String(val);
+  if (typeof val === 'string') return '"' + val.replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n') + '"';
+  if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
+  if (val instanceof LispPair) return val.toString();
+  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
+  if (typeof val === 'object' && val !== null && !(val instanceof LispEnv)) {
+    const items = Object.entries(val).map(([k,v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
+    return `(dict ${items})`;
+  }
+  return String(val);
+}
+
+function displayValue(val) {
+  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
+  return valueRepr(val);
+}
+
+// --- Tokenizer ---
+function lispTokenize(source) {
+  const tokens = [];
+  let i = 0;
+  while (i < source.length) {
+    const c = source[i];
+    if (c === ' ' || c === '\t' || c === '\n' || c === '\r') { i++; continue; }
+    if (c === ';') { while (i < source.length && source[i] !== '\n') i++; continue; }
+    if ('()[]\'`,'.includes(c)) { tokens.push(c); i++; continue; }
+    if (c === '"') {
+      let j = i + 1;
+      while (j < source.length) {
+        if (source[j] === '\\' && j + 1 < source.length) { j += 2; continue; }
+        if (source[j] === '"') break;
+        j++;
+      }
+      tokens.push(source.slice(i, j + 1));
+      i = j + 1;
+      continue;
+    }
+    let j = i;
+    while (j < source.length && !' \t\n\r()[]";,'.includes(source[j])) j++;
+    tokens.push(source.slice(i, j));
+    i = j;
+  }
+  return tokens;
+}
+
+// --- Parser ---
+function lispParse(source) {
+  const tokens = lispTokenize(source);
+  const exprs = [];
+  let pos = 0;
+
+  function readExpr() {
+    if (pos >= tokens.length) throw new LispError('unexpected end of input');
+    const tok = tokens[pos];
+    if (tok === "'") { pos++; return [Sym('quote'), readExpr()]; }
+    if (tok === '`') { pos++; return [Sym('quasiquote'), readExpr()]; }
+    if (tok === ',') { pos++; return [Sym('unquote'), readExpr()]; }
+    if (tok === '(' || tok === '[') {
+      pos++;
+      const close = tok === '(' ? ')' : ']';
+      const lst = [];
+      while (pos < tokens.length && tokens[pos] !== close) lst.push(readExpr());
+      if (pos >= tokens.length) throw new LispError(`missing closing '${close}'`);
+      pos++;
+      return lst;
+    }
+    if (tok === ')' || tok === ']') throw new LispError(`unexpected '${tok}'`);
+    pos++;
+    return parseAtom(tok);
+  }
+
+  while (pos < tokens.length) exprs.push(readExpr());
+  return exprs;
+}
+
+function parseAtom(tok) {
+  if (tok === '#t') return true;
+  if (tok === '#f') return false;
+  if (tok === 'nil') return NIL;
+  const n = Number(tok);
+  if (!isNaN(n) && tok !== '') return n;
+  if (tok.startsWith('"') && tok.endsWith('"')) {
+    let s = tok.slice(1, -1);
+    s = s.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    return s;
+  }
+  return Sym(tok);
+}
+
+// --- Evaluator ---
+function lispEval(expr, env) {
+  // Self-evaluating
+  if (typeof expr === 'number' || typeof expr === 'boolean') return expr;
+  if (isNil(expr)) return NIL;
+  if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+  if (expr instanceof LispPair) return expr;
+  if (typeof expr === 'object' && !Array.isArray(expr) && expr !== null && !(expr instanceof LispSymbol)) return expr;
+
+  // Symbol
+  if (expr instanceof LispSymbol) return env.get(expr);
+
+  // Not a list
+  if (!Array.isArray(expr)) return expr;
+
+  // Empty list
+  if (expr.length === 0) return NIL;
+
+  const head = expr[0];
+
+  // Special forms
+  if (head instanceof LispSymbol) {
+    const h = String(head);
+
+    if (h === 'quote') return expr[1];
+
+    if (h === 'if') {
+      const test = lispEval(expr[1], env);
+      if (isTruthy(test)) return lispEval(expr[2], env);
+      return expr.length > 3 ? lispEval(expr[3], env) : NIL;
+    }
+
+    if (h === 'cond') {
+      for (let i = 1; i < expr.length; i++) {
+        const clause = expr[i];
+        if (clause[0] instanceof LispSymbol && String(clause[0]) === 'else') return evalBody(clause.slice(1), env);
+        if (isTruthy(lispEval(clause[0], env))) return evalBody(clause.slice(1), env);
+      }
+      return NIL;
+    }
+
+    if (h === 'define') {
+      const target = expr[1];
+      if (Array.isArray(target)) {
+        const name = String(target[0]);
+        const params = target.slice(1).map(String);
+        const fn = new LispLambda(params, expr.slice(2), env, name);
+        env.define(name, fn);
+        return fn;
+      }
+      const val = lispEval(expr[2], env);
+      env.define(String(target), val);
+      return val;
+    }
+
+    if (h === 'set!') {
+      const val = lispEval(expr[2], env);
+      env.set(String(expr[1]), val);
+      return val;
+    }
+
+    if (h === 'lambda') {
+      const params = expr[1];
+      if (params instanceof LispSymbol || typeof params === 'string') {
+        return new LispLambda(String(params), expr.slice(2), env);
+      }
+      return new LispLambda(params.map(String), expr.slice(2), env);
+    }
+
+    if (h === 'let') {
+      const bindings = expr[1];
+      const newEnv = new LispEnv(null, null, env);
+      for (const b of bindings) newEnv.define(String(b[0]), lispEval(b[1], env));
+      return evalBody(expr.slice(2), newEnv);
+    }
+
+    if (h === 'let*') {
+      const bindings = expr[1];
+      const newEnv = new LispEnv(null, null, env);
+      for (const b of bindings) newEnv.define(String(b[0]), lispEval(b[1], newEnv));
+      return evalBody(expr.slice(2), newEnv);
+    }
+
+    if (h === 'begin') return evalBody(expr.slice(1), env);
+
+    if (h === 'and') {
+      let result = true;
+      for (let i = 1; i < expr.length; i++) {
+        result = lispEval(expr[i], env);
+        if (!isTruthy(result)) return result;
+      }
+      return result;
+    }
+
+    if (h === 'or') {
+      for (let i = 1; i < expr.length; i++) {
+        const result = lispEval(expr[i], env);
+        if (isTruthy(result)) return result;
+      }
+      return false;
+    }
+
+    if (h === 'define-macro') {
+      const target = expr[1];
+      if (Array.isArray(target)) {
+        const name = String(target[0]);
+        const params = target.slice(1).map(String);
+        const mac = new LispMacro(params, expr.slice(2), env, name);
+        env.define(name, mac);
+        return mac;
+      }
+      throw new LispError('invalid define-macro syntax');
+    }
+
+    if (h === 'do') return NIL;
+  }
+
+  // Function application
+  const fn = lispEval(head, env);
+
+  // Macro expansion
+  if (fn instanceof LispMacro) {
+    const macArgs = expr.slice(1);
+    const macEnv = new LispEnv(fn.params, macArgs, fn.env);
+    const expanded = evalBody(fn.body, macEnv);
+    return lispEval(expanded, env);
+  }
+
+  // Eval arguments
+  const args = expr.slice(1).map(a => lispEval(a, env));
+
+  if (typeof fn === 'function') {
+    try { return fn(...args); }
+    catch(e) { throw new LispError(`call error: ${e.message}`); }
+  }
+
+  if (fn instanceof LispLambda) {
+    const callEnv = new LispEnv(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+function evalBody(body, env) {
+  let result = NIL;
+  for (const expr of body) result = lispEval(expr, env);
+  return result;
+}
+
+// --- Call helper ---
+function callFn(fn, args) {
+  if (typeof fn === 'function') return fn(...args);
+  if (fn instanceof LispLambda) {
+    const callEnv = new LispEnv(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+// --- Global Environment ---
+function createGlobalEnv() {
+  const env = new LispEnv();
+
+  // Arithmetic
+  env.define('+', (...args) => args.reduce((a,b) => a+b, 0));
+  env.define('-', (a, ...rest) => rest.length ? a - rest.reduce((x,y)=>x+y,0) : -a);
+  env.define('*', (...args) => args.reduce((a,b) => a*b, 1));
+  env.define('/', (a,b) => { if(b===0) throw new LispError('division by zero'); return a/b; });
+  env.define('%', (a,b) => a % b);
+  env.define('abs', Math.abs);
+  env.define('round', (n, d) => {
+    if (d === undefined || d === 0) return Math.round(n);
+    const f = Math.pow(10, d);
+    return Math.round(n * f) / f;
+  });
+  env.define('floor', Math.floor);
+  env.define('ceil', Math.ceil);
+  env.define('min', (...a) => Math.min(...a));
+  env.define('max', (...a) => Math.max(...a));
+  env.define('expt', Math.pow);
+  env.define('sqrt', Math.sqrt);
+  env.define('modulo', (a,b) => a%b);
+
+  // Comparison
+  env.define('=', (a,b) => a === b || (typeof a === 'number' && typeof b === 'number' && a == b));
+  env.define('equal?', (a,b) => JSON.stringify(a) === JSON.stringify(b));
+  env.define('<', (a,b) => a < b);
+  env.define('>', (a,b) => a > b);
+  env.define('<=', (a,b) => a <= b);
+  env.define('>=', (a,b) => a >= b);
+  env.define('!=', (a,b) => a !== b);
+
+  // Logic
+  env.define('not', x => !isTruthy(x));
+
+  // Predicates
+  env.define('null?', x => isNil(x) || (Array.isArray(x) && x.length === 0));
+  env.define('pair?', x => (x instanceof LispPair) || (Array.isArray(x) && !(x instanceof LispSymbol)));
+  env.define('list?', x => Array.isArray(x));
+  env.define('number?', x => typeof x === 'number');
+  env.define('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.define('symbol?', x => x instanceof LispSymbol);
+  env.define('boolean?', x => typeof x === 'boolean');
+  env.define('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.define('dict?', x => typeof x === 'object' && x !== null && !Array.isArray(x) && !(x instanceof LispPair) && !isNil(x) && !(x instanceof LispEnv));
+  env.define('zero?', x => x === 0);
+  env.define('integer?', x => typeof x === 'number' && Number.isInteger(x));
+
+  // Lists
+  env.define('cons', (a,b) => new LispPair(a,b));
+  env.define('car', x => {
+    if (x instanceof LispPair) return x.car;
+    if (Array.isArray(x) && x.length > 0) return x[0];
+    throw new LispError('car: not a pair');
+  });
+  env.define('cdr', x => {
+    if (x instanceof LispPair) return x.cdr;
+    if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL;
+    throw new LispError('cdr: not a pair');
+  });
+  env.define('list', (...args) => [...args]);
+  env.define('length', x => {
+    if (isNil(x)) return 0;
+    if (typeof x === 'string') return x.length;
+    if (Array.isArray(x)) return x.length;
+    if (typeof x === 'object') return Object.keys(x).length;
+    return 0;
+  });
+  env.define('append', (...lists) => {
+    const result = [];
+    for (const lst of lists) {
+      if (Array.isArray(lst)) result.push(...lst);
+      else if (!isNil(lst)) result.push(lst);
+    }
+    return result;
+  });
+  env.define('reverse', x => Array.isArray(x) ? [...x].reverse() : x);
+  env.define('nth', (lst, n) => Array.isArray(lst) ? lst[n] : NIL);
+  env.define('range', (...args) => {
+    let start=0, end=0, step=1;
+    if (args.length===1) end=args[0];
+    else if (args.length===2) { start=args[0]; end=args[1]; }
+    else { start=args[0]; end=args[1]; step=args[2]; }
+    const r = [];
+    if (step > 0) for (let i=start; i<end; i+=step) r.push(i);
+    else for (let i=start; i>end; i+=step) r.push(i);
+    return r;
+  });
+  env.define('flatten', function flatten(lst) {
+    if (!Array.isArray(lst)) return [lst];
+    const r = [];
+    for (const item of lst) {
+      if (Array.isArray(item)) r.push(...flatten(item));
+      else r.push(item);
+    }
+    return r;
+  });
+  env.define('sort', (lst, keyFn, reverse) => {
+    if (!Array.isArray(lst)) return lst;
+    const sorted = [...lst];
+    if (keyFn) {
+      sorted.sort((a,b) => {
+        const ka = callFn(keyFn, [a]);
+        const kb = callFn(keyFn, [b]);
+        if (ka < kb) return -1;
+        if (ka > kb) return 1;
+        return 0;
+      });
+    } else {
+      sorted.sort((a,b) => {
+        if (typeof a === 'number' && typeof b === 'number') return a - b;
+        return String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0;
+      });
+    }
+    if (reverse === true) sorted.reverse();
+    return sorted;
+  });
+  env.define('first', x => Array.isArray(x) && x.length > 0 ? x[0] : NIL);
+  env.define('last', x => Array.isArray(x) && x.length > 0 ? x[x.length-1] : NIL);
+  env.define('empty?', x => isNil(x) || (Array.isArray(x) && x.length===0) || (typeof x==='string' && x.length===0));
+  env.define('take', (lst,n) => Array.isArray(lst) ? lst.slice(0,n) : NIL);
+  env.define('drop', (lst,n) => Array.isArray(lst) ? lst.slice(n) : NIL);
+
+  // Higher-order
+  env.define('map', (fn, ...lists) => {
+    if (lists.length === 1) {
+      const lst = lists[0];
+      if (!Array.isArray(lst)) return NIL;
+      return lst.map(x => callFn(fn, [x]));
+    }
+    const minLen = Math.min(...lists.map(l => Array.isArray(l) ? l.length : 0));
+    const result = [];
+    for (let i = 0; i < minLen; i++) result.push(callFn(fn, lists.map(l => l[i])));
+    return result;
+  });
+  env.define('filter', (fn, lst) => {
+    if (!Array.isArray(lst)) return NIL;
+    return lst.filter(x => isTruthy(callFn(fn, [x])));
+  });
+  env.define('reduce', (fn, init, lst) => {
+    // Support both (reduce fn init lst) and (reduce fn lst)
+    if (lst === undefined) { lst = init; init = undefined; }
+    if (!Array.isArray(lst)) throw new LispError('reduce requires a list');
+    if (init !== undefined) return lst.reduce((acc, x) => callFn(fn, [acc, x]), init);
+    return lst.reduce((acc, x) => callFn(fn, [acc, x]));
+  });
+  env.define('for-each', (fn, lst) => {
+    if (Array.isArray(lst)) lst.forEach(x => callFn(fn, [x]));
+    return NIL;
+  });
+  env.define('apply', (fn, args) => callFn(fn, Array.isArray(args) ? args : [args]));
+
+  // Strings
+  env.define('string-append', (...args) => args.map(a => {
+    if (typeof a === 'number') return String(a);
+    if (isNil(a)) return '';
+    return String(a);
+  }).join(''));
+  env.define('string-length', s => String(s).length);
+  env.define('substring', (s, start, end) => end !== undefined ? String(s).slice(start, end) : String(s).slice(start));
+  env.define('string-split', (s, delim) => String(s).split(delim !== undefined ? delim : ' '));
+  env.define('string-join', (lst, sep) => {
+    if (!Array.isArray(lst)) return '';
+    return lst.map(x => {
+      if (typeof x === 'number') return String(x);
+      if (isNil(x)) return '';
+      return String(x);
+    }).join(sep !== undefined ? sep : ' ');
+  });
+  env.define('string-upcase', s => String(s).toUpperCase());
+  env.define('string-downcase', s => String(s).toLowerCase());
+  env.define('string-titlecase', s => String(s).replace(/\b\w/g, c => c.toUpperCase()));
+  env.define('string-replace', (s, old, nw) => String(s).split(old).join(nw));
+  env.define('string-contains?', (s, sub) => String(s).includes(sub));
+  env.define('string-ref', (s, i) => String(s)[i]);
+  env.define('string-trim', s => String(s).trim());
+  env.define('string-starts-with?', (s, pre) => String(s).startsWith(pre));
+  env.define('string-ends-with?', (s, suf) => String(s).endsWith(suf));
+
+  // Conversion
+  env.define('number->string', n => String(n));
+  env.define('string->number', s => { const n = Number(s); return isNaN(n) ? 0 : n; });
+  env.define('->string', x => typeof x === 'string' ? x : String(x));
+  env.define('->number', x => typeof x === 'number' ? x : Number(x));
+
+  // Number formatting
+  env.define('number-format', (n, fmt) => {
+    if (fmt === ',' || fmt === ':,') return Number(n).toLocaleString('en-US');
+    if (fmt === ',.0f' || fmt === ':,.0f') return Math.round(Number(n)).toLocaleString('en-US');
+    const m = String(fmt).match(/[,:]?\.(\d+)f/);
+    if (m) {
+      const digits = parseInt(m[1]);
+      const hasSep = fmt.includes(',');
+      if (hasSep) return Number(n).toLocaleString('en-US', {minimumFractionDigits:digits, maximumFractionDigits:digits});
+      return Number(n).toFixed(digits);
+    }
+    return String(n);
+  });
+
+  // Dicts
+  env.define('make-dict', (...pairs) => {
+    const d = {};
+    for (let i = 0; i < pairs.length; i += 2) d[String(pairs[i])] = pairs[i+1];
+    return d;
+  });
+  env.define('dict-get', (d, k, dflt) => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) {
+      const v = d[String(k)];
+      if (v !== undefined) return v;
+      return dflt !== undefined ? dflt : NIL;
+    }
+    if (Array.isArray(d) && typeof k === 'number') {
+      return k >= 0 && k < d.length ? d[k] : (dflt !== undefined ? dflt : NIL);
+    }
+    return dflt !== undefined ? dflt : NIL;
+  });
+  env.define('dict-set', (d, k, v) => {
+    if (typeof d !== 'object' || d === null || Array.isArray(d)) return d;
+    return {...d, [String(k)]: v};
+  });
+  env.define('dict-keys', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) return Object.keys(d);
+    return [];
+  });
+  env.define('dict-values', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) return Object.values(d);
+    return [];
+  });
+  env.define('dict-items', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d))
+      return Object.entries(d).map(([k,v]) => [k, v]);
+    return [];
+  });
+  env.define('dict-has?', (d, k) => typeof d === 'object' && d !== null && String(k) in d);
+  env.define('dict-merge', (...dicts) => Object.assign({}, ...dicts.filter(d => typeof d === 'object' && d !== null)));
+  env.define('dict-remove', (d, k) => {
+    if (typeof d !== 'object' || d === null) return d;
+    const r = {...d}; delete r[String(k)]; return r;
+  });
+
+  // I/O — all route through brainstemOutput
+  env.define('display', (...args) => { brainstemOutput(args.map(displayValue).join('')); return NIL; });
+  env.define('log', (...args) => { brainstemOutput(args.map(displayValue).join(' ')); return NIL; });
+  env.define('newline', () => { brainstemOutput('\n'); return NIL; });
+  env.define('format', (...args) => {
+    if (args.length === 0) return '';
+    let s = String(args[0]);
+    for (let i = 1; i < args.length; i++) s = s.replace('~a', displayValue(args[i]));
+    return s;
+  });
+  env.define('error', msg => { throw new LispError(String(msg)); });
+  env.define('print', x => { brainstemOutput(valueRepr(x)); return NIL; });
+  env.define('println', x => { brainstemOutput(displayValue(x) + '\n'); return NIL; });
+
+  // JSON
+  env.define('json->sexp', s => JSON.parse(s));
+  env.define('sexp->json', v => JSON.stringify(v, null, 2));
+
+  // Integer division
+  env.define('//', (a,b) => { if(b===0) throw new LispError('division by zero'); return Math.trunc(a/b); });
+
+  // Constants
+  env.define('#t', true);
+  env.define('#f', false);
+  env.define('nil', NIL);
+  env.define('pi', Math.PI);
+  env.define('e', Math.E);
+
+  // Misc
+  env.define('int', x => typeof x === 'number' ? Math.trunc(x) : parseInt(x) || 0);
+  env.define('float', x => typeof x === 'number' ? x : parseFloat(x) || 0);
+
+  return env;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 2: unrapp.js — Python-to-JS Transpiler (Hybrid Approach)
+//
+// Strategy: Python agent code is converted to JavaScript functions.
+// Data dicts become JS objects. Helper functions and class methods become
+// JS functions. Everything is injected into the LisPy environment as
+// callable builtins. The REPL can interact with all data and functions.
+// ═══════════════════════════════════════════════════════════════════════
+
+function unrappTranspile(pythonSource) {
+  const errors = [];
+  const t0 = performance.now();
+  let manifest = null;
+  let operations = [];
+  let dataObjects = {};
+  let jsFunctions = {}; // name -> JS function body string
+
+  try {
+    // Stage 1: Extract manifest
+    manifest = extractManifest(pythonSource);
+
+    // Stage 2: Extract module-level data dicts as JS objects
+    dataObjects = extractDataDicts(pythonSource);
+
+    // Stage 3: Find operations from dispatch/perform method
+    operations = extractOperations(pythonSource);
+
+    // Stage 4: Convert all Python functions to JavaScript
+    jsFunctions = convertFunctionsToJS(pythonSource, dataObjects);
+
+  } catch(e) {
+    errors.push(e.message);
+  }
+
+  // Build LisPy perform dispatcher
+  let lispy = '';
+  if (operations.length > 0) {
+    const lines = ['(define (perform kwargs)',
+      '  (let* ((op (dict-get kwargs "operation" "' + operations[0] + '")))'];
+    lines.push('    (cond');
+    for (const op of operations) {
+      lines.push(`      ((equal? op "${op}") (op-${op} kwargs))`);
+    }
+    lines.push('      (else (string-append "Unknown operation: " op))');
+    lines.push('    )))');
+    lispy = lines.join('\n');
+  }
+
+  const elapsed = performance.now() - t0;
+  return { lispy, manifest, operations, dataObjects, jsFunctions, errors, elapsed };
+}
+
+function extractManifest(src) {
+  const match = src.match(/__manifest__\s*=\s*\{/);
+  if (!match) return null;
+  let block = extractBracketBlock(src, match.index + match[0].length - 1, '{', '}');
+  block = pythonDictToJson(block);
+  // Handle parenthesized string concatenation: ("str1" "str2") -> "str1str2"
+  block = block.replace(/\(\s*"((?:[^"\\]|\\.)*)"\s*\)/g, '"$1"');
+  block = block.replace(/"((?:[^"\\]|\\.)*)"\s*\n\s*"((?:[^"\\]|\\.)*)"/g, '"$1$2"');
+  try { return JSON.parse(block); } catch(e) {
+    const m = {};
+    const nameMatch = src.match(/"name"\s*:\s*"([^"]+)"/);
+    if (nameMatch) m.name = nameMatch[1];
+    const descMatch = src.match(/"description"\s*:\s*"([^"]+)"/);
+    if (descMatch) m.description = descMatch[1];
+    const dispMatch = src.match(/"display_name"\s*:\s*"([^"]+)"/);
+    if (dispMatch) m.display_name = dispMatch[1];
+    return Object.keys(m).length > 0 ? m : null;
+  }
+}
+
+function extractOperations(src) {
+  const ops = [];
+  // Pattern 1: dispatch dict
+  const dispatchMatch = src.match(/dispatch\s*=\s*\{([^}]+)\}/);
+  if (dispatchMatch) {
+    for (const m of dispatchMatch[1].matchAll(/"(\w+)"\s*:/g)) ops.push(m[1]);
+  }
+  // Pattern 2: if/elif chain
+  if (ops.length === 0) {
+    for (const m of src.matchAll(/(?:if|elif)\s+op\s*==\s*"(\w+)"/g)) ops.push(m[1]);
+  }
+  // Pattern 3: enum
+  if (ops.length === 0) {
+    const enumMatch = src.match(/"enum"\s*:\s*\[([\s\S]*?)\]/);
+    if (enumMatch) for (const m of enumMatch[1].matchAll(/"(\w+)"/g)) ops.push(m[1]);
+  }
+  return ops;
+}
+
+// --- Bracket block extractor ---
+function extractBracketBlock(src, start, open, close) {
+  let depth = 0, i = start;
+  while (i < src.length) {
+    if (src[i] === open) depth++;
+    else if (src[i] === close) { depth--; if (depth === 0) break; }
+    else if (src[i] === '"' || src[i] === "'") {
+      const q = src[i]; i++;
+      while (i < src.length && src[i] !== q) { if (src[i] === '\\') i++; i++; }
+    }
+    else if (open === '{' && src[i] === '[') depth++;
+    else if (open === '{' && src[i] === ']') depth--;
+    else if (open === '[' && src[i] === '{') depth++;
+    else if (open === '[' && src[i] === '}') depth--;
+    i++;
+  }
+  return src.slice(start, i + 1);
+}
+
+// --- Python dict/list to JSON ---
+function pythonDictToJson(block) {
+  let result = '';
+  let inStr = false, strChar = '';
+  for (let i = 0; i < block.length; i++) {
+    const c = block[i];
+    if (inStr) {
+      if (c === '\\') { result += c + (block[i+1]||''); i++; continue; }
+      if (c === strChar) { result += '"'; inStr = false; continue; }
+      if (c === '"') { result += '\\"'; continue; }
+      result += c;
+    } else {
+      if (c === "'" || c === '"') { inStr = true; strChar = c; result += '"'; continue; }
+      result += c;
+    }
+  }
+  result = result.replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null');
+  result = result.replace(/,(\s*[}\]])/g, '$1');
+  result = result.replace(/\(([^()]*)\)/g, '[$1]');
+  return result;
+}
+
+// --- Extract data dicts as JS objects ---
+function extractDataDicts(src) {
+  const dataObjects = {};
+  // Dicts: UPPER_CASE = { ... }
+  for (const match of src.matchAll(/^([A-Z][A-Z_0-9]+)\s*=\s*\{/gm)) {
+    if (match[1] === '__manifest__') continue;
+    const block = extractBracketBlock(src, match.index + match[0].length - 1, '{', '}');
+    try {
+      dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
+    } catch(e) {}
+  }
+  // Arrays: UPPER_CASE = [ ... ]
+  for (const match of src.matchAll(/^([A-Z][A-Z_0-9]+)\s*=\s*\[/gm)) {
+    const block = extractBracketBlock(src, match.index + match[0].length - 1, '[', ']');
+    try {
+      dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
+    } catch(e) {}
+  }
+  return dataObjects;
+}
+
+// --- Convert Python functions to JavaScript ---
+function convertFunctionsToJS(src, dataObjects) {
+  const fns = {};
+  const lines = src.split('\n');
+
+  // Pass 1: Extract module-level helper functions (no indent or leading spaces < 4)
+  let i = 0;
+  let inClass = false;
+  let classIndent = -1;
+
+  // First, find class boundary
+  let classStart = -1, classEnd = lines.length;
+  for (let k = 0; k < lines.length; k++) {
+    if (lines[k].match(/^class\s+\w+/)) {
+      classStart = k;
+      classIndent = getIndent(lines[k]);
+      break;
+    }
+  }
+
+  // Extract module-level functions (before or outside class)
+  i = 0;
+  while (i < lines.length) {
+    const defMatch = lines[i].match(/^def\s+(\w+)\s*\(([^)]*)\)\s*(?:->.*)?:\s*$/);
+    if (defMatch) {
+      const name = defMatch[1];
+      const rawParams = defMatch[2];
+      const params = rawParams.split(',').map(p => p.trim()).filter(p => p && p !== 'self' && !p.startsWith('*'));
+      i++;
+      const bodyIndent = 4;
+      const bodyStart = i;
+      while (i < lines.length) {
+        if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+        if (lines[i].match(/\S/) && getIndent(lines[i]) < bodyIndent) break;
+        i++;
+      }
+      const bodyLines = lines.slice(bodyStart, i);
+      const jsBody = convertPythonBodyToJS(bodyLines, bodyIndent, dataObjects);
+      fns[name] = { params, body: jsBody, isHelper: true };
+      continue;
+    }
+    if (lines[i].match(/^class\s+\w+/)) break; // stop at class
+    i++;
+  }
+
+  // Pass 2: Extract class methods (inside class)
+  if (classStart >= 0) {
+    const methodIndent = classIndent + 4;
+    i = classStart + 1;
+    while (i < lines.length) {
+      const mRe = new RegExp(`^\\s{${methodIndent}}def\\s+(\\w+)\\s*\\(([^)]*)\\)\\s*(?:->.*)?:\\s*$`);
+      const defMatch = lines[i].match(mRe);
+      if (defMatch) {
+        const name = defMatch[1];
+        const rawParams = defMatch[2];
+
+        if (['__init__', 'perform'].includes(name)) { i++; continue; }
+
+        // Filter self, convert **kwargs to kwargs
+        const params = rawParams.split(',').map(p => p.trim().replace(/^\*\*/, '')).filter(p => p && p !== 'self');
+        i++;
+        const bodyIndent = methodIndent + 4;
+        const bodyStart = i;
+        while (i < lines.length) {
+          if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+          if (lines[i].match(/\S/) && getIndent(lines[i]) < bodyIndent) break;
+          i++;
+        }
+        const bodyLines = lines.slice(bodyStart, i);
+        const jsBody = convertPythonBodyToJS(bodyLines, bodyIndent, dataObjects);
+        const opName = name.startsWith('_') ? name.slice(1) : name;
+        fns['method_' + opName] = { params: params.length > 0 ? params : ['kwargs'], body: jsBody, isMethod: true };
+        continue;
+      }
+      i++;
+    }
+  }
+
+  return fns;
+}
+
+function getIndent(line) {
+  const m = line.match(/^(\s*)/);
+  return m ? m[1].length : 0;
+}
+
+function joinLogicalLines(bodyLines) {
+  // Join lines that are inside brackets (Python's implicit line continuation)
+  const logical = [];
+  let current = '';
+  let depth = 0;
+
+  for (const raw of bodyLines) {
+    if (raw.trim() === '' || raw.trim().startsWith('#')) {
+      if (depth === 0) { logical.push(raw); continue; }
+      continue;
+    }
+    if (depth === 0) {
+      if (current) logical.push(mergeImplicitStringConcat(current));
+      current = raw;
+    } else {
+      current += ' ' + raw.trim();
+    }
+    // Count brackets (skip inside strings)
+    let inStr = false, sc = '';
+    for (let k = 0; k < raw.length; k++) {
+      const c = raw[k];
+      if (inStr) { if (c === '\\') { k++; continue; } if (c === sc) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+      if (c === '(' || c === '[' || c === '{') depth++;
+      else if (c === ')' || c === ']' || c === '}') depth--;
+    }
+  }
+  if (current) logical.push(mergeImplicitStringConcat(current));
+  return logical;
+}
+
+function mergeImplicitStringConcat(line) {
+  // Python implicit string concatenation: "abc" "def" -> "abcdef", f"abc" f"def" -> f"abcdef"
+  // Handle: f"..." f"..." and "..." "..." patterns
+  line = line.replace(/"\s+f"/g, '');  // f"part1" f"part2" -> f"part1part2"
+  line = line.replace(/"\s+"/g, '');   // "part1" "part2" -> "part1part2"
+  return line;
+}
+
+function convertPythonBodyToJS(bodyLines, baseIndent, dataObjects) {
+  // First, join multi-line expressions
+  bodyLines = joinLogicalLines(bodyLines);
+
+  const jsLines = [];
+  const dataNames = Object.keys(dataObjects || {});
+
+  for (let i = 0; i < bodyLines.length; i++) {
+    const raw = bodyLines[i];
+    if (raw.trim() === '' || raw.trim().startsWith('#')) continue;
+    const indent = getIndent(raw);
+    const line = raw.trim();
+    const relIndent = Math.max(0, indent - baseIndent);
+    const pad = '  '.repeat(relIndent / 4 + 1);
+
+    // for k, v in DICT.items():
+    const forItemsMatch = line.match(/^for\s+(\w+),\s*(\w+)\s+in\s+(\w+)\.items\(\)\s*:$/);
+    if (forItemsMatch) {
+      const [, k, v, dict] = forItemsMatch;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const [${k}, ${v}] of Object.entries(${dictRef})) {`);
+      // Collect body
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      const innerJS = convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects);
+      jsLines.push(innerJS);
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in DICT.values():
+    const forValuesMatch = line.match(/^for\s+(\w+)\s+in\s+(\w+)\.values\(\)\s*:$/);
+    if (forValuesMatch) {
+      const [, v, dict] = forValuesMatch;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const ${v} of Object.values(${dictRef})) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in sorted(DICT.keys()):
+    const forSortedKeys = line.match(/^for\s+(\w+)\s+in\s+sorted\((\w+)\.keys\(\)\)\s*:$/);
+    if (forSortedKeys) {
+      const [, v, dict] = forSortedKeys;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const ${v} of Object.keys(${dictRef}).sort()) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for k, v in list (tuple unpacking from non-.items() source)
+    const forTupleMatch = line.match(/^for\s+(\w+),\s*(\w+)\s+in\s+(.+)\s*:$/);
+    if (forTupleMatch) {
+      const [, k, v, iter] = forTupleMatch;
+      jsLines.push(`${pad}for (const [${k}, ${v}] of ${pyExprToJS(iter, dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in list/sorted(list):
+    const forMatch = line.match(/^for\s+(\w+)\s+in\s+(.+)\s*:$/);
+    if (forMatch) {
+      const [, v, iter] = forMatch;
+      jsLines.push(`${pad}for (const ${v} of ${pyExprToJS(iter, dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // if/elif/else
+    const ifMatch = line.match(/^if\s+(.+)\s*:$/);
+    if (ifMatch) {
+      jsLines.push(`${pad}if (${pyCondToJS(ifMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    const elifMatch = line.match(/^elif\s+(.+)\s*:$/);
+    if (elifMatch) {
+      // Remove last closing brace and add else if
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} else if (${pyCondToJS(elifMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    if (line === 'else:') {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} else {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // return
+    if (line.startsWith('return ')) {
+      jsLines.push(`${pad}return ${pyExprToJS(line.slice(7), dataNames)};`);
+      continue;
+    }
+
+    // list.append(x)
+    const appendMatch = line.match(/^(\w+)\.append\((.+)\)$/);
+    if (appendMatch) {
+      jsLines.push(`${pad}${appendMatch[1]}.push(${pyExprToJS(appendMatch[2], dataNames)});`);
+      continue;
+    }
+
+    // list.sort(key=...)
+    const sortMatch = line.match(/^(\w+)\.sort\(key=lambda\s+(\w+):\s*(.+?)(?:,\s*reverse=(\w+))?\)$/);
+    if (sortMatch) {
+      const rev = sortMatch[4] === 'True' ? '.reverse()' : '';
+      jsLines.push(`${pad}${sortMatch[1]}.sort((a,b) => { const ka = ${pyExprToJS(sortMatch[3].replace(new RegExp(sortMatch[2],'g'), 'a'), dataNames)}; const kb = ${pyExprToJS(sortMatch[3].replace(new RegExp(sortMatch[2],'g'), 'b'), dataNames)}; return ka < kb ? -1 : ka > kb ? 1 : 0; })${rev};`);
+      continue;
+    }
+
+    // Dict key augmented assignment: d["key"] += x or d[var] += x
+    const dictAugAssign = line.match(/^(\w+)\[(.+?)\]\s*(\+=|-=|\*=|\/=)\s*(.+)$/);
+    if (dictAugAssign) {
+      const obj = dataNames.includes(dictAugAssign[1]) ? `DATA.${dictAugAssign[1]}` : dictAugAssign[1];
+      const key = pyExprToJS(dictAugAssign[2], dataNames);
+      jsLines.push(`${pad}${obj}[${key}] ${dictAugAssign[3]} ${pyExprToJS(dictAugAssign[4], dataNames)};`);
+      continue;
+    }
+
+    // Dict key assignment: d["key"] = expr or d[var] = expr
+    const dictAssign = line.match(/^(\w+)\[(.+?)\]\s*=\s*(.+)$/);
+    if (dictAssign) {
+      const obj = dataNames.includes(dictAssign[1]) ? `DATA.${dictAssign[1]}` : dictAssign[1];
+      const key = pyExprToJS(dictAssign[2], dataNames);
+      jsLines.push(`${pad}${obj}[${key}] = ${pyExprToJS(dictAssign[3], dataNames)};`);
+      continue;
+    }
+
+    // total_cost += x
+    const augAssign = line.match(/^(\w+)\s*(\+=|-=|\*=|\/=)\s*(.+)$/);
+    if (augAssign) {
+      jsLines.push(`${pad}${augAssign[1]} ${augAssign[2]} ${pyExprToJS(augAssign[3], dataNames)};`);
+      continue;
+    }
+
+    // Assignment: x = expr
+    const assignMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
+    if (assignMatch) {
+      const varName = assignMatch[1];
+      const val = pyExprToJS(assignMatch[2], dataNames);
+      jsLines.push(`${pad}let ${varName} = ${val};`);
+      continue;
+    }
+
+    // Pass-through (function calls etc)
+    jsLines.push(`${pad}${pyExprToJS(line, dataNames)};`);
+  }
+
+  return jsLines.join('\n');
+}
+
+function collectBlock(lines, start, minIndent) {
+  let i = start;
+  while (i < lines.length) {
+    if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+    if (getIndent(lines[i]) < minIndent) break;
+    i++;
+  }
+  return i;
+}
+
+// Convert a Python expression to JavaScript
+let _pyExprDepth = 0;
+function pyExprToJS(expr, dataNames) {
+  if (!expr) return 'null';
+  expr = expr.trim();
+  if (++_pyExprDepth > 80) { _pyExprDepth--; return expr; }
+  try {
+  return _pyExprToJSInner(expr, dataNames);
+  } finally { _pyExprDepth--; }
+}
+function _pyExprToJSInner(expr, dataNames) {
+
+  // Remove trailing comment
+  const ci = expr.indexOf(' #');
+  if (ci > 0) {
+    let inStr = false, sc = '';
+    for (let k = 0; k < ci; k++) {
+      if (!inStr && (expr[k]==='"'||expr[k]==="'")) { inStr=true; sc=expr[k]; }
+      else if (inStr && expr[k]===sc) inStr=false;
+    }
+    if (!inStr) expr = expr.slice(0, ci).trim();
+  }
+
+  if (expr === 'None') return 'null';
+  if (expr === 'True') return 'true';
+  if (expr === 'False') return 'false';
+
+  // f-string -> template literal
+  if (expr.startsWith('f"') || expr.startsWith("f'")) {
+    return pyFStringToJS(expr, dataNames);
+  }
+
+  // String
+  if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+    return '"' + expr.slice(1, -1).replace(/"/g, '\\"') + '"';
+  }
+
+  // Number
+  if (/^-?\d+(\.\d+)?$/.test(expr)) return expr;
+
+  // Tuple literal (a, b) -> [a, b], or parenthesized expression (expr) -> expr
+  // Only if the opening ( matches the closing ) (they form a pair)
+  if (expr.startsWith('(') && expr.endsWith(')') && !expr.match(/^\w+\(/) && isMatchingParens(expr)) {
+    const inner = expr.slice(1, -1).trim();
+    const parts = splitComma(inner);
+    if (parts.length >= 2) {
+      return `[${parts.map(p => pyExprToJS(p.trim(), dataNames)).join(', ')}]`;
+    }
+    // Single-element parens: strip and recurse, preserving grouping
+    if (parts.length === 1) {
+      return `(${pyExprToJS(inner, dataNames)})`;
+    }
+  }
+
+  // List literal: [x for y in z] or [a, b, c]
+  if (expr.startsWith('[') && expr.endsWith(']')) {
+    const inner = expr.slice(1, -1).trim();
+    if (!inner) return '[]';
+    // List comprehension
+    const compMatch = inner.match(/^(.+)\s+for\s+(\w+)\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (compMatch) {
+      let src = pyExprToJS(compMatch[3], dataNames);
+      if (compMatch[4]) src = `${src}.filter(${compMatch[2]} => ${pyCondToJS(compMatch[4], dataNames)})`;
+      return `${src}.map(${compMatch[2]} => ${pyExprToJS(compMatch[1], dataNames)})`;
+    }
+    const items = splitComma(inner).map(x => pyExprToJS(x.trim(), dataNames));
+    return `[${items.join(', ')}]`;
+  }
+
+  // Dict literal: {k: v, ...} or dict comprehension {k: v for x in y}
+  if (expr.startsWith('{') && expr.endsWith('}')) {
+    const inner = expr.slice(1, -1).trim();
+    if (!inner) return '{}';
+    // Dict comprehension: {keyExpr: valExpr for var in iter}
+    const dictCompMatch = inner.match(/^(.+?)\s*:\s*(.+?)\s+for\s+(\w+),?\s*(\w+)?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (dictCompMatch) {
+      const [, kExpr, vExpr, v1, v2, iterExpr, filterExpr] = dictCompMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      // Check if iterating over .items()
+      if (v2) {
+        // for k, v in dict.items() pattern
+        let base = `Object.fromEntries(Object.entries(${src}).map(([${v1}, ${v2}]) => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        if (filterExpr) base = `Object.fromEntries(Object.entries(${src}).filter(([${v1}, ${v2}]) => ${pyCondToJS(filterExpr, dataNames)}).map(([${v1}, ${v2}]) => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        return base + ')';
+      } else {
+        let base = `Object.fromEntries(${src}.map(${v1} => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        if (filterExpr) base = `Object.fromEntries(${src}.filter(${v1} => ${pyCondToJS(filterExpr, dataNames)}).map(${v1} => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        return base + ')';
+      }
+    }
+    const pairs = splitComma(inner).map(p => {
+      const [k, v] = splitFirst(p, ':');
+      return `${pyExprToJS(k.trim(), dataNames)}: ${pyExprToJS(v.trim(), dataNames)}`;
+    });
+    return `{${pairs.join(', ')}}`;
+  }
+
+  // Ternary: a if cond else b — only match if/else at bracket depth 0
+  {
+    const ternParts = splitTernary(expr);
+    if (ternParts) {
+      return `(${pyCondToJS(ternParts.cond, dataNames)} ? ${pyExprToJS(ternParts.value, dataNames)} : ${pyExprToJS(ternParts.alt, dataNames)})`;
+    }
+  }
+
+  // sum(gen_expr)
+  const sumMatch = expr.match(/^sum\((.+)\)$/);
+  if (sumMatch) {
+    const inner = sumMatch[1].trim();
+    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (genMatch) {
+      let src = pyExprToJS(genMatch[3], dataNames);
+      if (genMatch[4]) src = `${src}.filter(${genMatch[2]} => ${pyCondToJS(genMatch[4], dataNames)})`;
+      return `${src}.map(${genMatch[2]} => ${pyExprToJS(genMatch[1], dataNames)}).reduce((a,b) => a+b, 0)`;
+    }
+    return `${pyExprToJS(inner, dataNames)}.reduce((a,b) => a+b, 0)`;
+  }
+
+  // sorted(x, key=lambda y: expr, reverse=True/False)
+  const sortedMatch = expr.match(/^sorted\((.+?),\s*key=lambda\s+(\w+):\s*(.+?)(?:,\s*reverse=(\w+))?\)$/);
+  if (sortedMatch) {
+    const arr = pyExprToJS(sortedMatch[1], dataNames);
+    const v = sortedMatch[2];
+    const keyExpr = pyExprToJS(sortedMatch[3], dataNames);
+    const rev = sortedMatch[4] === 'True';
+    const cmp = rev
+      ? `(a,b) => { const ka=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'a')}; const kb=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'b')}; return kb<ka?-1:kb>ka?1:0; }`
+      : `(a,b) => { const ka=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'a')}; const kb=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'b')}; return ka<kb?-1:ka>kb?1:0; }`;
+    return `[...${arr}].sort(${cmp})`;
+  }
+
+  // sorted(x)
+  const sortedSimple = expr.match(/^sorted\((.+)\)$/);
+  if (sortedSimple) return `[...${pyExprToJS(sortedSimple[1], dataNames)}].sort()`;
+
+  // len(x)
+  const lenMatch = expr.match(/^len\((.+)\)$/);
+  if (lenMatch) return `${pyExprToJS(lenMatch[1], dataNames)}.length`;
+
+  // round(x, n)
+  const roundMatch = expr.match(/^round\((.+?),\s*(.+)\)$/);
+  if (roundMatch) return `Math.round(${pyExprToJS(roundMatch[1], dataNames)} * Math.pow(10, ${roundMatch[2]})) / Math.pow(10, ${roundMatch[2]})`;
+  const roundMatch2 = expr.match(/^round\((.+)\)$/);
+  if (roundMatch2) return `Math.round(${pyExprToJS(roundMatch2[1], dataNames)})`;
+
+  // max(a, b) / min(a, b)
+  const maxMinMatch = expr.match(/^(max|min)\((.+)\)$/);
+  if (maxMinMatch) {
+    const args = splitComma(maxMinMatch[2]).map(a => pyExprToJS(a.trim(), dataNames));
+    return `Math.${maxMinMatch[1]}(${args.join(', ')})`;
+  }
+
+  // int(x)
+  const intMatch = expr.match(/^int\((.+)\)$/);
+  if (intMatch) return `Math.trunc(${pyExprToJS(intMatch[1], dataNames)})`;
+
+  // str(x)
+  const strMatch = expr.match(/^str\((.+)\)$/);
+  if (strMatch) return `String(${pyExprToJS(strMatch[1], dataNames)})`;
+
+  // all(cond for x in list)
+  const allMatch = expr.match(/^all\((.+)\s+for\s+(\w+)\s+in\s+(.+)\)$/);
+  if (allMatch) return `${pyExprToJS(allMatch[3], dataNames)}.every(${allMatch[2]} => ${pyCondToJS(allMatch[1], dataNames)})`;
+
+  // any(cond for x in list)
+  const anyMatch = expr.match(/^any\((.+)\s+for\s+(\w+)\s+in\s+(.+)\)$/);
+  if (anyMatch) return `${pyExprToJS(anyMatch[3], dataNames)}.some(${anyMatch[2]} => ${pyCondToJS(anyMatch[1], dataNames)})`;
+
+  // Method chains — handle from left to right
+  // x.items()
+  if (expr.endsWith('.items()')) {
+    const obj = expr.slice(0, -8);
+    return `Object.entries(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.values()')) {
+    const obj = expr.slice(0, -9);
+    return `Object.values(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.keys()')) {
+    const obj = expr.slice(0, -7);
+    return `Object.keys(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.title()')) {
+    const s = expr.slice(0, -8);
+    return `${pyExprToJS(s, dataNames)}.replace(/\\b\\w/g, c => c.toUpperCase())`;
+  }
+  if (expr.endsWith('.upper()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.toUpperCase()`;
+  }
+  if (expr.endsWith('.lower()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.toLowerCase()`;
+  }
+  if (expr.endsWith('.strip()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.trim()`;
+  }
+
+  // x.replace("a", "b")
+  const replaceMatch = expr.match(/^(.+)\.replace\(([^,]+),\s*([^)]+)\)$/);
+  if (replaceMatch) return `${pyExprToJS(replaceMatch[1], dataNames)}.split(${pyExprToJS(replaceMatch[2], dataNames)}).join(${pyExprToJS(replaceMatch[3], dataNames)})`;
+
+  // "sep".join(list)
+  const joinMatch = expr.match(/^(["'][^"']*["'])\.join\((.+)\)$/);
+  if (joinMatch) return `${pyExprToJS(joinMatch[2], dataNames)}.join(${pyExprToJS(joinMatch[1], dataNames)})`;
+
+  // var.join(list)
+  const varJoinMatch = expr.match(/^(\w+)\.join\((.+)\)$/);
+  if (varJoinMatch && !dataNames.includes(varJoinMatch[1])) {
+    return `${pyExprToJS(varJoinMatch[2], dataNames)}.join(${varJoinMatch[1]})`;
+  }
+
+  // x.get("key", default) — dict access with default
+  // Use bracket-aware parsing to handle nested .get() calls properly
+  {
+    const getPos = findMethodCall(expr, 'get');
+    if (getPos) {
+      const obj = pyExprToJS(getPos.receiver, dataNames);
+      const args = splitComma(getPos.args);
+      const key = pyExprToJS(args[0].trim(), dataNames);
+      const dflt = args.length > 1 ? pyExprToJS(args.slice(1).join(',').trim(), dataNames) : 'undefined';
+      // If there's a suffix (chained .get()), handle it
+      let result = `(${obj}[${key}] !== undefined ? ${obj}[${key}] : ${dflt})`;
+      if (getPos.suffix) {
+        result = pyExprToJS(result + getPos.suffix, dataNames);
+      }
+      return result;
+    }
+  }
+
+  // Binary operators — must check BEFORE dict chain to avoid
+  // 'c in t["x"]' being parsed as dict access on 'c in t'
+
+  // Handle 'not' prefix
+  if (expr.startsWith('not ')) return `!(${pyCondToJS(expr.slice(4), dataNames)})`;
+
+  // 'x not in y' membership
+  const notInMatch = expr.match(/^(.+?)\s+not\s+in\s+(.+)$/);
+  if (notInMatch) {
+    const item = pyExprToJS(notInMatch[1], dataNames);
+    const collection = pyExprToJS(notInMatch[2], dataNames);
+    return `!(Array.isArray(${collection}) ? ${collection}.includes(${item}) : String(${collection}).includes(String(${item})))`;
+  }
+
+  // 'x in y' membership
+  const inMatch = expr.match(/^(.+?)\s+in\s+(.+)$/);
+  if (inMatch && !inMatch[1].includes(' for ') && !inMatch[1].includes(' if ')) {
+    const item = pyExprToJS(inMatch[1], dataNames);
+    const collection = pyExprToJS(inMatch[2], dataNames);
+    return `(Array.isArray(${collection}) ? ${collection}.includes(${item}) : String(${collection}).includes(String(${item})))`;
+  }
+
+  // Comparison operators (==, !=, <, >, <=, >=, is, is not) — route through pyCondToJS
+  // Only match at bracket depth 0 to avoid matching inside generated subexpressions
+  {
+    const cmpOps = [' is not ', ' is ', ' !== ', ' != ', ' === ', ' == ', ' <= ', ' >= ', ' < ', ' > '];
+    let cmpInStr = false, cmpSc = '', cmpDepth = 0;
+    let foundCmp = false;
+    for (let ci = 0; ci < expr.length && !foundCmp; ci++) {
+      const c = expr[ci];
+      if (cmpInStr) { if (c === '\\') { ci++; continue; } if (c === cmpSc) cmpInStr = false; continue; }
+      if (c === '"' || c === "'") { cmpInStr = true; cmpSc = c; continue; }
+      if ('([{'.includes(c)) { cmpDepth++; continue; }
+      if (')]}'.includes(c)) { cmpDepth--; continue; }
+      if (cmpDepth === 0) {
+        for (const op of cmpOps) {
+          if (expr.slice(ci, ci + op.length) === op) {
+            foundCmp = true; break;
+          }
+        }
+      }
+    }
+    if (foundCmp) return pyCondToJS(expr, dataNames);
+  }
+
+  // Binary arithmetic: split on +, -, *, / at depth 0
+  {
+    const binOp = splitBinaryOp(expr);
+    if (binOp) {
+      const l = pyExprToJS(binOp.left, dataNames);
+      const r = pyExprToJS(binOp.right, dataNames);
+      const op = binOp.op === '//' ? 'Math.floor(' + l + ' / ' + r + ')' : null;
+      if (op) return op;
+      return `${l} ${binOp.op} ${r}`;
+    }
+  }
+
+  // Python slice: expr[:n] -> expr.slice(0, n), expr[n:] -> expr.slice(n)
+  const sliceMatch = expr.match(/^(.+)\[(\d*):(\d*)\]$/);
+  if (sliceMatch) {
+    const obj = pyExprToJS(sliceMatch[1], dataNames);
+    const start = sliceMatch[2] || '0';
+    const end = sliceMatch[3];
+    return end ? `${obj}.slice(${start}, ${end})` : `${obj}.slice(${start})`;
+  }
+
+  // dict[key] access — bracket-aware chained parsing
+  {
+    const bracketAccess = splitBracketAccess(expr);
+    if (bracketAccess) {
+      const obj = pyExprToJS(bracketAccess.obj, dataNames);
+      const key = pyExprToJS(bracketAccess.key, dataNames);
+      const suffix = bracketAccess.suffix;
+      let result = `${obj}[${key}]`;
+      if (suffix) result = pyExprToJS(result + suffix, dataNames);
+      return result;
+    }
+  }
+
+  // Simple variable — check if it's a data reference
+  if (/^\w+$/.test(expr)) {
+    if (dataNames.includes(expr)) return `DATA.${expr}`;
+    return expr;
+  }
+
+  // Attribute access: x.y (not a method call)
+  if (/^\w+\.\w+$/.test(expr) && !expr.endsWith(')')) {
+    const [obj, attr] = expr.split('.');
+    if (dataNames.includes(obj)) return `DATA.${obj}.${attr}`;
+    return expr;
+  }
+
+  // Function call: name(args)
+  const callMatch = expr.match(/^(\w+)\((.*)?\)$/);
+  if (callMatch) {
+    const fn = callMatch[1];
+    const argsStr = callMatch[2] || '';
+    if (fn === 'print') return `/* print */ void 0`;
+    const args = argsStr ? splitComma(argsStr).map(a => pyExprToJS(a.trim(), dataNames)).join(', ') : '';
+    // Python builtins -> PY.name()
+    const pyBuiltins = ['len','int','float','str','list','sorted','sum','max','min','abs','round','range','all','any','dict','enumerate','zip','isinstance','type','bool','tuple','set'];
+    if (pyBuiltins.includes(fn)) return `PY.${fn}(${args})`;
+    // Known helper -> HELPERS.name()
+    return `HELPERS.${fn}(${args})`;
+  }
+
+  // Fallback — return as-is
+  return expr;
+}
+
+function pyCondToJS(cond, dataNames) {
+  cond = cond.trim();
+  // and/or
+  const andParts = cond.split(/\s+and\s+/);
+  if (andParts.length > 1) return andParts.map(p => pyCondToJS(p, dataNames)).join(' && ');
+  const orParts = cond.split(/\s+or\s+/);
+  if (orParts.length > 1) return orParts.map(p => pyCondToJS(p, dataNames)).join(' || ');
+  // not
+  if (cond.startsWith('not ')) return `!(${pyCondToJS(cond.slice(4), dataNames)})`;
+  // Comparisons — check longer operators first to avoid partial matches (e.g. !== vs !=)
+  const cmpMatch = cond.match(/^(.+?)\s*(!==|===|is not|is|==|!=|<=|>=|<|>)\s*(.+)$/);
+  if (cmpMatch) {
+    const l = pyExprToJS(cmpMatch[1], dataNames);
+    const r = pyExprToJS(cmpMatch[3], dataNames);
+    const op = cmpMatch[2] === '==' ? '===' : cmpMatch[2] === '!=' ? '!==' : cmpMatch[2] === 'is not' ? '!==' : cmpMatch[2] === 'is' ? '===' : cmpMatch[2];
+    return `${l} ${op} ${r}`;
+  }
+  // in
+  const inMatch = cond.match(/^(.+?)\s+in\s+(.+)$/);
+  if (inMatch && !inMatch[1].includes(' for ')) {
+    return pyExprToJS(`${inMatch[1]} in ${inMatch[2]}`, dataNames);
+  }
+  return pyExprToJS(cond, dataNames);
+}
+
+function pyFStringToJS(fstr, dataNames) {
+  const inner = fstr.slice(2, -1);
+  let result = '`';
+  let i = 0;
+  while (i < inner.length) {
+    if (inner[i] === '{') {
+      i++;
+      let depth = 1, expr = '';
+      while (i < inner.length && depth > 0) {
+        if (inner[i] === '{') depth++;
+        else if (inner[i] === '}') { depth--; if (depth === 0) break; }
+        expr += inner[i]; i++;
+      }
+      i++; // skip }
+      // Format spec
+      const colonIdx = expr.lastIndexOf(':');
+      if (colonIdx > 0) {
+        const varPart = expr.slice(0, colonIdx);
+        const fmt = expr.slice(colonIdx + 1);
+        if (fmt === ',') {
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toLocaleString('en-US')` + '}';
+        } else if (fmt.match(/^,\.\d+f$/)) {
+          const d = fmt.match(/\.(\d+)f/)[1];
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toLocaleString('en-US',{minimumFractionDigits:${d},maximumFractionDigits:${d}})` + '}';
+        } else if (fmt.match(/^\.\d+f$/)) {
+          const d = fmt.match(/\.(\d+)f/)[1];
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toFixed(${d})` + '}';
+        } else if (fmt === ',.0f') {
+          result += '${' + `Math.round(Number(${pyExprToJS(varPart, dataNames)})).toLocaleString('en-US')` + '}';
+        } else if (fmt.match(/^\.0f$/)) {
+          result += '${' + `Math.round(${pyExprToJS(varPart, dataNames)})` + '}';
+        } else {
+          result += '${' + pyExprToJS(expr, dataNames) + '}';
+        }
+      } else {
+        result += '${' + pyExprToJS(expr, dataNames) + '}';
+      }
+    } else {
+      if (inner[i] === '`') result += '\\`';
+      else if (inner[i] === '$' && inner[i+1] === '{') result += '\\$';
+      else result += inner[i];
+      i++;
+    }
+  }
+  result += '`';
+  return result;
+}
+
+function splitComma(s) {
+  const result = [];
+  let depth = 0, current = '', inStr = false, strChar = '';
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inStr) {
+      if (c === '\\') { current += c + (s[i+1]||''); i++; continue; }
+      if (c === strChar) inStr = false;
+      current += c;
+    } else {
+      if (c === '"' || c === "'") { inStr = true; strChar = c; current += c; }
+      else if ('([{'.includes(c)) { depth++; current += c; }
+      else if (')]}'.includes(c)) { depth--; current += c; }
+      else if (c === ',' && depth === 0) { result.push(current); current = ''; }
+      else current += c;
+    }
+  }
+  if (current.trim()) result.push(current);
+  return result;
+}
+
+function splitFirst(s, delim) {
+  const idx = s.indexOf(delim);
+  if (idx < 0) return [s, ''];
+  return [s.slice(0, idx), s.slice(idx + 1)];
+}
+
+// Find a .method(args) call in an expression, handling nested brackets
+// Returns { receiver, args, suffix } or null
+function findMethodCall(expr, method) {
+  const needle = '.' + method + '(';
+  // Search right-to-left to find the outermost .get() first for chaining
+  // But we want to find ALL .get() positions and pick the right one
+  // Strategy: find the FIRST .get( at depth 0
+  let inStr = false, sc = '', depth = 0;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(' || c === '[' || c === '{') { depth++; continue; }
+    if (c === ')' || c === ']' || c === '}') { depth--; continue; }
+    if (depth === 0 && expr.slice(i, i + needle.length) === needle) {
+      const receiver = expr.slice(0, i);
+      const argsStart = i + needle.length;
+      // Find matching closing paren
+      let d = 1, j = argsStart, inS2 = false, sc2 = '';
+      while (j < expr.length && d > 0) {
+        const ch = expr[j];
+        if (inS2) { if (ch === '\\') { j++; } else if (ch === sc2) inS2 = false; }
+        else {
+          if (ch === '"' || ch === "'") { inS2 = true; sc2 = ch; }
+          else if (ch === '(' || ch === '[' || ch === '{') d++;
+          else if (ch === ')' || ch === ']' || ch === '}') d--;
+        }
+        j++;
+      }
+      const args = expr.slice(argsStart, j - 1);
+      const suffix = expr.slice(j);
+      return { receiver, args, suffix: suffix || null };
+    }
+  }
+  return null;
+}
+
+// Split expr into obj[key] access — finds the LAST [...] access at bracket depth 0
+// Returns { obj, key, suffix } or null
+function splitBracketAccess(expr) {
+  let inStr = false, sc = '', depth = 0;
+  let lastBracketStart = -1, lastBracketEnd = -1;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(' || c === '{') { depth++; continue; }
+    if (c === ')' || c === '}') { depth--; continue; }
+    if (c === '[' && depth === 0) {
+      // Find matching ] using full bracket tracking
+      let d = 1, j = i + 1, iS = false, sC = '';
+      while (j < expr.length && d > 0) {
+        const ch = expr[j];
+        if (iS) { if (ch === '\\') j++; else if (ch === sC) iS = false; }
+        else {
+          if (ch === '"' || ch === "'") { iS = true; sC = ch; }
+          else if (ch === '[' || ch === '(' || ch === '{') d++;
+          else if (ch === ']' || ch === ')' || ch === '}') d--;
+        }
+        j++;
+      }
+      if (d === 0) {
+        lastBracketStart = i;
+        lastBracketEnd = j;
+        // Skip past this bracket in the outer loop
+        i = j - 1;
+      }
+    }
+  }
+  if (lastBracketStart > 0 && lastBracketEnd > 0) {
+    const obj = expr.slice(0, lastBracketStart);
+    const key = expr.slice(lastBracketStart + 1, lastBracketEnd - 1);
+    const suffix = expr.slice(lastBracketEnd) || null;
+    // Don't match slice patterns (key contains bare ':')
+    if (/^\d*:\d*$/.test(key.trim())) return null;
+    // Don't match if obj contains operators/spaces (part of a larger expression)
+    // Only match if obj looks like an identifier chain: word, word.word, word[...], etc.
+    if (/\s/.test(obj.trim())) return null;
+    return { obj, key, suffix };
+  }
+  return null;
+}
+
+// Check if the first ( and last ) in an expression are a matching pair
+function isMatchingParens(expr) {
+  if (expr[0] !== '(') return false;
+  let depth = 1, inStr = false, sc = '';
+  for (let i = 1; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(') depth++;
+    else if (c === ')') { depth--; if (depth === 0) return i === expr.length - 1; }
+  }
+  return false;
+}
+
+// Split a Python ternary expression: value if cond else alt
+// Only matches if 'if' and 'else' keywords are at bracket depth 0
+function splitTernary(expr) {
+  let inStr = false, sc = '', depth = 0;
+  let ifPos = -1, elsePos = -1;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if ('([{'.includes(c)) { depth++; continue; }
+    if (')]}'.includes(c)) { depth--; continue; }
+    if (depth === 0) {
+      // Check for ' if ' at this position
+      if (ifPos < 0 && expr.slice(i, i + 4) === ' if ' && i > 0) {
+        ifPos = i;
+      }
+      // Check for ' else ' — use the LAST one at depth 0 after ifPos
+      if (ifPos >= 0 && expr.slice(i, i + 6) === ' else ') {
+        elsePos = i;
+      }
+    }
+  }
+  if (ifPos >= 0 && elsePos > ifPos) {
+    return {
+      value: expr.slice(0, ifPos).trim(),
+      cond: expr.slice(ifPos + 4, elsePos).trim(),
+      alt: expr.slice(elsePos + 6).trim(),
+    };
+  }
+  return null;
+}
+
+// Split an expression on a binary arithmetic operator at depth 0
+// Splits on lowest-precedence op found, scanning left-to-right
+// Returns { left, op, right } or null
+function splitBinaryOp(expr) {
+  // Try operator groups from lowest to highest precedence
+  for (const ops of [[' + ', ' - '], [' * ', ' / ', ' // ', ' ** ', ' % ']]) {
+    let inStr = false, sc = '', depth = 0;
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+      if ('([{'.includes(c)) { depth++; continue; }
+      if (')]}'.includes(c)) { depth--; continue; }
+      if (depth === 0) {
+        for (const op of ops) {
+          if (expr.slice(i, i + op.length) === op) {
+            const left = expr.slice(0, i).trim();
+            const right = expr.slice(i + op.length).trim();
+            if (left && right) return { left, op: op.trim(), right };
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 3: brainstem.js — Runtime
+// ═══════════════════════════════════════════════════════════════════════
+
+const REGISTRY_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
+const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main/';
+
+const vm = {
+  registry: null,
+  env: null,
+  loadedAgent: null,
+  outputBuffer: [],
+  stats: { transpileMs: 0, evalMs: 0, ops: 0, errors: 0 },
+};
+
+async function loadRegistry() {
+  setStatus('loading', 'Loading registry...');
+  try {
+    const resp = await fetch(REGISTRY_URL);
+    const data = await resp.json();
+    vm.registry = data.agents || [];
+    // Filter to agents that can run in browser (verified/community, no requires_env)
+    vm.registry = vm.registry.filter(a =>
+      (!a.requires_env || a.requires_env.length === 0) &&
+      a._file
+    );
+    setStatus('idle', 'Idle');
+    return vm.registry;
+  } catch(e) {
+    setStatus('error', 'Registry failed');
+    vm.stats.errors++;
+    throw e;
+  }
+}
+
+async function fetchAgent(entry) {
+  const url = RAW_BASE + entry._file;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
+  return resp.text();
+}
+
+function transpileAndLoad(pythonSource) {
+  setStatus('loading', 'Transpiling...');
+  const result = unrappTranspile(pythonSource);
+  vm.stats.transpileMs = result.elapsed;
+
+  if (result.errors.length > 0 && !result.jsFunctions) {
+    setStatus('error', 'Transpile errors');
+    vm.stats.errors += result.errors.length;
+    return result;
+  }
+
+  // Create fresh environment
+  vm.env = createGlobalEnv();
+
+  // Inject data objects into env (accessible from LisPy REPL)
+  const DATA = result.dataObjects || {};
+  for (const [name, obj] of Object.entries(DATA)) {
+    vm.env.define(name, obj);
+  }
+
+  // Python builtins for the JS compilation context
+  const PY = {
+    len: x => { if (x == null) return 0; if (typeof x === 'object') return Array.isArray(x) ? x.length : Object.keys(x).length; return String(x).length; },
+    int: x => Math.trunc(Number(x)) || 0,
+    float: x => Number(x) || 0,
+    str: x => String(x),
+    list: x => { if (x == null) return []; if (Array.isArray(x)) return [...x]; if (typeof x === 'object') return Object.keys(x); return [x]; },
+    sorted: (x, opts) => {
+      const arr = Array.isArray(x) ? [...x] : Object.keys(x);
+      if (opts && opts.key) {
+        arr.sort((a,b) => { const ka = opts.key(a), kb = opts.key(b); return ka < kb ? -1 : ka > kb ? 1 : 0; });
+      } else {
+        arr.sort((a,b) => a < b ? -1 : a > b ? 1 : 0);
+      }
+      if (opts && opts.reverse) arr.reverse();
+      return arr;
+    },
+    sum: x => { if (Array.isArray(x)) return x.reduce((a,b) => a+b, 0); return 0; },
+    max: (...args) => { if (args.length === 1 && Array.isArray(args[0])) return Math.max(...args[0]); return Math.max(...args); },
+    min: (...args) => { if (args.length === 1 && Array.isArray(args[0])) return Math.min(...args[0]); return Math.min(...args); },
+    abs: Math.abs,
+    round: (n, d) => { if (d === undefined) return Math.round(n); const f = Math.pow(10, d); return Math.round(n * f) / f; },
+    range: (...args) => { let s=0,e=0,step=1; if(args.length===1)e=args[0]; else if(args.length>=2){s=args[0];e=args[1];} if(args.length>=3)step=args[2]; const r=[]; if(step>0)for(let i=s;i<e;i+=step)r.push(i); else for(let i=s;i>e;i+=step)r.push(i); return r; },
+    all: x => Array.isArray(x) ? x.every(Boolean) : Boolean(x),
+    any: x => Array.isArray(x) ? x.some(Boolean) : Boolean(x),
+    dict: x => { if (x == null) return {}; return Object.fromEntries(x); },
+    enumerate: x => Array.isArray(x) ? x.map((v,i) => [i,v]) : [],
+    zip: (...arrs) => { const len = Math.min(...arrs.map(a=>a.length)); return Array.from({length:len}, (_,i) => arrs.map(a=>a[i])); },
+    isinstance: () => true,
+    // Safe dict .get() equivalent
+    get: (obj, key, dflt) => { if (obj == null) return dflt !== undefined ? dflt : null; const v = obj[key]; return v !== undefined ? v : (dflt !== undefined ? dflt : null); },
+  };
+
+  // Compile and inject JS functions
+  const HELPERS = {};
+  const jsFns = result.jsFunctions || {};
+
+  function compileAgentFn(fnDef) {
+    const paramList = fnDef.params.join(', ');
+    let body = fnDef.body;
+    // Fix var scoping
+    body = body.replace(/^\s*let\s+/gm, 'var ');
+    // Fix Python .get() calls on dicts -> PY.get()
+    // Use bracket-aware replacement to handle nested .get() calls
+    for (let pass = 0; pass < 3; pass++) {
+      let newBody = '';
+      let idx = 0;
+      while (idx < body.length) {
+        const rest = body.slice(idx);
+        const gm = rest.match(/^([a-zA-Z_]\w*(?:\[[^\]]*\])*)\.get\(/);
+        if (gm) {
+          const obj = gm[1];
+          if (['Math','Number','String','Array','Object','JSON','Map','Set','PY'].includes(obj)) {
+            newBody += body[idx]; idx++; continue;
+          }
+          const argsStart = idx + gm[0].length;
+          // Find matching closing paren with bracket awareness
+          let d = 1, j = argsStart, inS = false, sCh = '';
+          while (j < body.length && d > 0) {
+            const c = body[j];
+            if (inS) { if (c === '\\') j++; else if (c === sCh) inS = false; }
+            else { if (c==='"'||c==="'") { inS=true; sCh=c; } else if ('([{'.includes(c)) d++; else if (')]}'.includes(c)) d--; }
+            j++;
+          }
+          const args = body.slice(argsStart, j - 1);
+          newBody += `PY.get(${obj}, ${args})`;
+          idx = j;
+        } else {
+          newBody += body[idx]; idx++;
+        }
+      }
+      body = newBody;
+    }
+    // Fix .values() / .keys() / .items() on plain objects
+    body = body.replace(/(\w+)\.values\(\)/g, 'Object.values($1)');
+    body = body.replace(/(\w+)\.keys\(\)/g, 'Object.keys($1)');
+    body = body.replace(/(\w+)\.items\(\)/g, 'Object.entries($1)');
+    // Fix Python builtins — only when NOT preceded by '.' (to avoid Math.round -> Math.PY.round)
+    const pyBuiltinReplacements = ['len','int','sorted','list','sum','round','abs','all','any','range','str','float'];
+    for (const b of pyBuiltinReplacements) {
+      body = body.replace(new RegExp('(?<!\\.)\\b' + b + '\\(', 'g'), 'PY.' + b + '(');
+    }
+
+    const fnCode = `(function(${paramList}) {\n${body}\n})`;
+    return (new Function('DATA', 'HELPERS', 'PY', `return ${fnCode}`))(DATA, HELPERS, PY);
+  }
+
+  // First pass: compile module-level helpers
+  for (const [name, fnDef] of Object.entries(jsFns)) {
+    if (!fnDef.isHelper) continue;
+    try {
+      const compiled = compileAgentFn(fnDef);
+      HELPERS[name] = compiled;
+      vm.env.define(name.replace(/_/g, '-'), (...args) => compiled(...args));
+    } catch(e) {
+      result.errors.push(`Compile helper ${name}: ${e.message}`);
+    }
+  }
+
+  // Second pass: compile class methods (operation formatters)
+  for (const [name, fnDef] of Object.entries(jsFns)) {
+    if (!fnDef.isMethod) continue;
+    try {
+      const compiled = compileAgentFn(fnDef);
+      const opName = name.replace(/^method_/, '');
+      HELPERS['method_' + opName] = compiled;
+      vm.env.define(`op-${opName}`, (kwargs) => {
+        try { return compiled(kwargs || {}); }
+        catch(e) { return `Error in ${opName}: ${e.message}`; }
+      });
+    } catch(e) {
+      result.errors.push(`Compile method ${name}: ${e.message}`);
+    }
+  }
+
+  // Hook output
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  // Eval LisPy dispatcher
+  const t0 = performance.now();
+  try {
+    if (result.lispy) {
+      const exprs = lispParse(result.lispy);
+      for (const expr of exprs) lispEval(expr, vm.env);
+    }
+    vm.stats.evalMs = performance.now() - t0;
+  } catch(e) {
+    result.errors.push('Eval error: ' + e.message);
+    vm.stats.errors++;
+    vm.stats.evalMs = performance.now() - t0;
+  }
+
+  vm.loadedAgent = {
+    manifest: result.manifest,
+    operations: result.operations,
+    lispySource: result.lispy,
+  };
+
+  setStatus('idle', 'Ready');
+  return result;
+}
+
+function runOperation(opName) {
+  if (!vm.env) return 'No agent loaded';
+  setStatus('running', 'Running...');
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  const t0 = performance.now();
+  try {
+    const kwargs = { operation: opName };
+    const kwargsExpr = `(make-dict "operation" "${opName}")`;
+    const callExpr = `(perform ${kwargsExpr})`;
+    const exprs = lispParse(callExpr);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, vm.env);
+    vm.stats.evalMs = performance.now() - t0;
+    vm.stats.ops++;
+    setStatus('idle', 'Ready');
+
+    // Combine output buffer + return value
+    const output = vm.outputBuffer.join('');
+    const returnVal = displayValue(result);
+    return output || returnVal || '(no output)';
+  } catch(e) {
+    vm.stats.evalMs = performance.now() - t0;
+    vm.stats.errors++;
+    setStatus('error', 'Error');
+    return 'Error: ' + e.message;
+  }
+}
+
+function evalRepl() {
+  const input = document.getElementById('replInput');
+  const code = input.value.trim();
+  if (!code) return;
+  input.value = '';
+
+  appendOutput(`\u03bb> ${code}`, 'system');
+
+  if (!vm.env) vm.env = createGlobalEnv();
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  try {
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, vm.env);
+
+    if (vm.outputBuffer.length > 0) {
+      appendOutput(vm.outputBuffer.join(''), 'line');
+    }
+    if (result !== NIL && result !== undefined && result !== null) {
+      appendOutput(`=> ${valueRepr(result)}`, 'result');
+    }
+  } catch(e) {
+    appendOutput(`Error: ${e.message}`, 'error');
+    vm.stats.errors++;
+  }
+  updateFooter();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 4: UI
+// ═══════════════════════════════════════════════════════════════════════
+
+let activeCategory = null;
+
+function setStatus(type, text) {
+  const el = document.getElementById('vmStatus');
+  el.className = 'bs-status ' + type;
+  el.innerHTML = `<div class="bs-status-dot"></div><span>${text}</span>`;
+}
+
+function updateFooter() {
+  document.getElementById('fTranspile').textContent = vm.stats.transpileMs.toFixed(1) + 'ms';
+  document.getElementById('fEval').textContent = vm.stats.evalMs.toFixed(1) + 'ms';
+  document.getElementById('fOps').textContent = vm.stats.ops;
+  document.getElementById('fErrors').textContent = vm.stats.errors;
+}
+
+function populateAgentList(agents) {
+  const list = document.getElementById('agentList');
+  const cats = new Set();
+  agents.forEach(a => { if (a.category) cats.add(a.category); });
+
+  // Populate category pills
+  const catContainer = document.getElementById('catPills');
+  catContainer.innerHTML = '<span class="bs-cat-pill active" onclick="filterCategory(null)">All</span>' +
+    [...cats].sort().map(c => `<span class="bs-cat-pill" onclick="filterCategory('${c}')">${c}</span>`).join('');
+
+  renderAgentList(agents);
+}
+
+function renderAgentList(agents) {
+  const list = document.getElementById('agentList');
+  const search = (document.getElementById('agentSearch').value || '').toLowerCase();
+  const filtered = agents.filter(a => {
+    if (activeCategory && a.category !== activeCategory) return false;
+    if (search) {
+      const hay = `${a.name} ${a.display_name} ${a.description} ${(a.tags||[]).join(' ')} ${a.category}`.toLowerCase();
+      return hay.includes(search);
+    }
+    return true;
+  });
+
+  list.innerHTML = filtered.map((a, i) => `
+    <div class="bs-agent-item" data-idx="${i}" onclick="selectAgent('${a.name.replace(/'/g,"\\'")}')">
+      <div class="bs-agent-name">${a.display_name || a.name}</div>
+      <div class="bs-agent-cat">${a.category || ''} &middot; v${a.version || '?'}</div>
+      <div class="bs-agent-desc">${a.description || ''}</div>
+    </div>
+  `).join('');
+}
+
+function filterAgents() {
+  if (vm.registry) renderAgentList(vm.registry);
+}
+
+function filterCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.bs-cat-pill').forEach(el => {
+    el.classList.toggle('active', (cat === null && el.textContent === 'All') || el.textContent === cat);
+  });
+  filterAgents();
+}
+
+async function selectAgent(name) {
+  const entry = vm.registry.find(a => a.name === name);
+  if (!entry) return;
+
+  // Highlight in sidebar
+  document.querySelectorAll('.bs-agent-item').forEach(el => el.classList.remove('active'));
+  const items = document.querySelectorAll('.bs-agent-item');
+  items.forEach(el => {
+    if (el.querySelector('.bs-agent-name').textContent === (entry.display_name || entry.name)) {
+      el.classList.add('active');
+    }
+  });
+
+  setStatus('loading', 'Fetching agent...');
+  clearTerminal();
+  appendOutput(`Loading ${entry.display_name || entry.name}...`, 'system');
+
+  try {
+    const source = await fetchAgent(entry);
+    const result = transpileAndLoad(source);
+
+    // Update info bar
+    showInfoBar(entry, result);
+
+    if (result.errors.length > 0) {
+      appendOutput('Transpile errors:', 'error');
+      result.errors.forEach(e => appendOutput('  ' + e, 'error'));
+    } else {
+      appendOutput(`Loaded ${result.operations.length} operations. Running first...`, 'system');
+      // Auto-run first operation
+      if (result.operations.length > 0) {
+        const output = runOperation(result.operations[0]);
+        renderMarkdown(output);
+      }
+    }
+    updateFooter();
+  } catch(e) {
+    appendOutput(`Failed: ${e.message}`, 'error');
+    vm.stats.errors++;
+    setStatus('error', 'Error');
+    updateFooter();
+  }
+}
+
+function showInfoBar(entry, result) {
+  const bar = document.getElementById('infoBar');
+  bar.style.display = 'flex';
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('agentTitle').textContent = entry.display_name || entry.name;
+  document.getElementById('agentMeta').textContent = `${entry.category || ''} | v${entry.version || '?'} | ${entry.quality_tier || 'community'}`;
+
+  const select = document.getElementById('opSelect');
+  const ops = result.operations || [];
+  select.innerHTML = ops.map(op => `<option value="${op}">${op.replace(/_/g, ' ')}</option>`).join('');
+}
+
+function selectOp() {
+  // Preview the selected operation
+}
+
+function runOp() {
+  const select = document.getElementById('opSelect');
+  const op = select.value;
+  if (!op) return;
+
+  clearTerminal();
+  appendOutput(`Running: ${op}`, 'system');
+  const output = runOperation(op);
+  renderMarkdown(output);
+  updateFooter();
+}
+
+function clearTerminal() {
+  const term = document.getElementById('terminal');
+  term.innerHTML = '';
+}
+
+function appendOutput(text, type) {
+  const term = document.getElementById('terminal');
+  const div = document.createElement('div');
+  div.className = 'line ' + (type || '');
+  div.textContent = text;
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+
+function renderMarkdown(text) {
+  const term = document.getElementById('terminal');
+
+  // Split by lines and render
+  const lines = text.split('\n');
+  let inTable = false;
+  let tableRows = [];
+
+  function flushTable() {
+    if (tableRows.length === 0) return;
+    const table = document.createElement('table');
+    tableRows.forEach((row, rowIdx) => {
+      // Skip separator rows
+      if (row.match(/^\|[\s\-:|]+\|$/)) return;
+      const tr = document.createElement('tr');
+      const cells = row.split('|').slice(1, -1);
+      cells.forEach(cell => {
+        const el = document.createElement(rowIdx === 0 ? 'th' : 'td');
+        el.innerHTML = renderInlineMarkdown(cell.trim());
+        tr.appendChild(el);
+      });
+      table.appendChild(tr);
+    });
+    term.appendChild(table);
+    tableRows = [];
+    inTable = false;
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Table row
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      if (!inTable) inTable = true;
+      tableRows.push(trimmed);
+      continue;
+    }
+    if (inTable) flushTable();
+
+    // Headers
+    if (trimmed.startsWith('### ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h3>${renderInlineMarkdown(trimmed.slice(4))}</h3>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+    if (trimmed.startsWith('## ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h2>${renderInlineMarkdown(trimmed.slice(3))}</h2>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+    if (trimmed.startsWith('# ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h1>${renderInlineMarkdown(trimmed.slice(2))}</h1>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+
+    // List items
+    if (trimmed.startsWith('- ')) {
+      const div = document.createElement('div');
+      div.className = 'list-item';
+      div.innerHTML = '&#8226; ' + renderInlineMarkdown(trimmed.slice(2));
+      term.appendChild(div);
+      continue;
+    }
+
+    // Empty line
+    if (!trimmed) {
+      const br = document.createElement('div');
+      br.style.height = '4px';
+      term.appendChild(br);
+      continue;
+    }
+
+    // Regular text
+    const div = document.createElement('div');
+    div.className = 'line result';
+    div.innerHTML = renderInlineMarkdown(trimmed);
+    term.appendChild(div);
+  }
+
+  if (inTable) flushTable();
+  term.scrollTop = term.scrollHeight;
+}
+
+function renderInlineMarkdown(text) {
+  // Bold
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Code
+  text = text.replace(/`(.+?)`/g, '<code style="background:var(--surface2);padding:1px 4px;border-radius:3px;">$1</code>');
+  return text;
+}
+
+async function handleDrop(event) {
+  event.preventDefault();
+  document.getElementById('dropZone').classList.remove('dragover');
+
+  const files = event.dataTransfer.files;
+  if (files.length === 0) return;
+
+  const file = files[0];
+  if (!file.name.endsWith('.py')) {
+    appendOutput('Please drop a .py agent file', 'error');
+    return;
+  }
+
+  const text = await file.text();
+  clearTerminal();
+  appendOutput(`Loading dropped file: ${file.name}`, 'system');
+
+  const result = transpileAndLoad(text);
+
+  // Show info bar
+  const fakeEntry = {
+    display_name: result.manifest?.display_name || file.name,
+    name: result.manifest?.name || file.name,
+    category: result.manifest?.category || 'local',
+    version: result.manifest?.version || '?',
+    quality_tier: 'local',
+  };
+  showInfoBar(fakeEntry, result);
+
+  if (result.errors.length > 0) {
+    appendOutput('Transpile errors:', 'error');
+    result.errors.forEach(e => appendOutput('  ' + e, 'error'));
+  } else {
+    appendOutput(`Loaded ${result.operations.length} operations. Running first...`, 'system');
+    if (result.operations.length > 0) {
+      const output = runOperation(result.operations[0]);
+      renderMarkdown(output);
+    }
+  }
+  updateFooter();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 5: Tests
+// ═══════════════════════════════════════════════════════════════════════
+
+function runTests() {
+  clearTerminal();
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('infoBar').style.display = 'none';
+  appendOutput('=== Virtual Brainstem Test Suite ===', 'system');
+  appendOutput('', 'system');
+
+  let passed = 0;
+  let failed = 0;
+
+  function test(name, fn) {
+    try {
+      fn();
+      appendOutput(`  PASS: ${name}`, 'line');
+      passed++;
+    } catch(e) {
+      appendOutput(`  FAIL: ${name} — ${e.message}`, 'error');
+      failed++;
+    }
+  }
+
+  function assert(cond, msg) {
+    if (!cond) throw new Error(msg || 'assertion failed');
+  }
+
+  function assertEq(a, b, msg) {
+    if (a !== b) throw new Error(msg || `expected ${JSON.stringify(b)}, got ${JSON.stringify(a)}`);
+  }
+
+  // Helper to eval lispy
+  function ev(code) {
+    const env = createGlobalEnv();
+    brainstemOutput = () => {};
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, env);
+    return result;
+  }
+
+  // Helper to eval in shared env
+  function evIn(env, code) {
+    brainstemOutput = () => {};
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, env);
+    return result;
+  }
+
+  appendOutput('--- LisPy Interpreter Tests ---', 'system');
+
+  // Test 1
+  test('1. Basic arithmetic: (+ 1 2 3) = 6', () => {
+    assertEq(ev('(+ 1 2 3)'), 6);
+  });
+
+  // Test 2
+  test('2. Round with precision: (round (* (/ 482000 500000) 100) 1) = 96.4', () => {
+    assertEq(ev('(round (* (/ 482000 500000) 100) 1)'), 96.4);
+  });
+
+  // Test 3
+  test('3. String join: (string-join (list "a" "b" "c") "\\n")', () => {
+    assertEq(ev('(string-join (list "a" "b" "c") "\\n")'), 'a\nb\nc');
+  });
+
+  // Test 4
+  test('4. Dict create + access', () => {
+    assertEq(ev('(dict-get (make-dict "name" "X") "name")'), 'X');
+  });
+
+  // Test 5
+  test('5. Nested dict: 3 levels deep', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define d (make-dict "a" (make-dict "b" (make-dict "c" 482000))))');
+    assertEq(evIn(env, '(dict-get (dict-get (dict-get d "a") "b") "c")'), 482000);
+  });
+
+  // Test 6
+  test('6. Lambda closure: ((make-adder 10) 5) = 15', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define (make-adder n) (lambda (x) (+ n x)))');
+    assertEq(evIn(env, '((make-adder 10) 5)'), 15);
+  });
+
+  // Test 7
+  test('7. Map: (map (lambda (x) (* x x)) (list 1 2 3))', () => {
+    const result = ev('(map (lambda (x) (* x x)) (list 1 2 3))');
+    assert(Array.isArray(result) && result[0]===1 && result[1]===4 && result[2]===9);
+  });
+
+  // Test 8
+  test('8. Reduce: (reduce + 0 (list 10 20 30)) = 60', () => {
+    assertEq(ev('(reduce + 0 (list 10 20 30))'), 60);
+  });
+
+  // Test 9
+  test('9. Sort with key fn', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define items (list (make-dict "v" 3) (make-dict "v" 1) (make-dict "v" 2)))');
+    const result = evIn(env, '(sort items (lambda (x) (dict-get x "v")))');
+    assert(Array.isArray(result));
+    assertEq(result[0].v, 1);
+    assertEq(result[1].v, 2);
+    assertEq(result[2].v, 3);
+  });
+
+  // Test 10
+  test('10. Cond: multi-branch dispatch', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define (classify x) (cond ((< x 0) "negative") ((= x 0) "zero") (else "positive")))');
+    assertEq(evIn(env, '(classify -5)'), 'negative');
+    assertEq(evIn(env, '(classify 0)'), 'zero');
+    assertEq(evIn(env, '(classify 7)'), 'positive');
+  });
+
+  appendOutput('', 'system');
+  appendOutput('--- Transpiler Tests ---', 'system');
+
+  // Test 11
+  test('11. pyExprToJS: .get() with default', () => {
+    const r = pyExprToJS('kwargs.get("op", "default")', []);
+    assert(r.includes('kwargs') && r.includes('"op"') && r.includes('"default"'), r);
+  });
+
+  // Test 12
+  test('12. pyFStringToJS: f-string with :, format', () => {
+    const r = pyFStringToJS('f"{val:,}"', []);
+    assert(r.includes('toLocaleString'), r);
+  });
+
+  // Test 13
+  test('13. pyExprToJS: .items() -> Object.entries', () => {
+    const r = pyExprToJS('D.items()', []);
+    assert(r.includes('Object.entries'), r);
+  });
+
+  // Test 14
+  test('14. pyExprToJS: list comprehension with filter', () => {
+    const r = pyExprToJS('[x for x in items if x > 0]', []);
+    assert(r.includes('filter') && r.includes('map'), r);
+  });
+
+  // Test 15
+  test('15. pyExprToJS: sorted with key and reverse', () => {
+    const r = pyExprToJS('sorted(x, key=lambda e: e["v"], reverse=True)', []);
+    assert(r.includes('sort') && r.includes('reverse'), r);
+  });
+
+  // Test 16
+  test('16. pyExprToJS: ternary', () => {
+    const r = pyExprToJS('"YES" if compliant else "NO"', []);
+    assert(r.includes('?') && r.includes('YES') && r.includes('NO'), r);
+  });
+
+  // Test 17
+  test('17. pyExprToJS: sum(d["total"] for d in list)', () => {
+    const r = pyExprToJS('sum(d["total"] for d in dashboard)', []);
+    assert(r.includes('reduce') && r.includes('map'), r);
+  });
+
+  // Test 18
+  test('18. pyExprToJS: .replace() and .title()', () => {
+    const r1 = pyExprToJS('x.replace("a", "b")', []);
+    assert(r1.includes('split') && r1.includes('join'), r1);
+    const r2 = pyExprToJS('x.title()', []);
+    assert(r2.includes('toUpperCase'), r2);
+  });
+
+  appendOutput('', 'system');
+  appendOutput('--- Agent Execution Tests (require network) ---', 'system');
+
+  // Tests 19-22 require network — run as async
+  const agentTests = [
+    {
+      num: 19,
+      name: 'emission_tracking: emissions_dashboard',
+      file: 'agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py',
+      op: 'emissions_dashboard',
+      checks: ['Emissions Dashboard', 'Riverside'],
+    },
+    {
+      num: 20,
+      name: 'field_service_dispatch: dispatch_dashboard',
+      file: 'agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py',
+      op: 'dispatch_dashboard',
+      checks: ['CRITICAL', 'Dispatch'],
+    },
+    {
+      num: 21,
+      name: 'inventory_visibility: stock_alerts',
+      file: 'agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py',
+      op: 'stock_alerts',
+      checks: ['Stock Alerts'],
+    },
+    {
+      num: 22,
+      name: 'customer_loyalty_rewards: loyalty_dashboard',
+      file: 'agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py',
+      op: 'loyalty_dashboard',
+      checks: ['Loyalty', 'Platinum'],
+    },
+  ];
+
+  // Run agent tests
+  (async () => {
+    for (const at of agentTests) {
+      try {
+        const resp = await fetch(RAW_BASE + at.file);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const source = await resp.text();
+        const result = transpileAndLoad(source);
+        const compileErrors = (result.errors || []).filter(e => !e.startsWith('Compile'));
+        if (compileErrors.length > 0) throw new Error(compileErrors.join('; '));
+
+        // Run operation
+        const output = runOperation(at.op);
+
+        let ok = true;
+        for (const check of at.checks) {
+          if (!output.toLowerCase().includes(check.toLowerCase())) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok) {
+          appendOutput(`  PASS: ${at.num}. ${at.name}`, 'line');
+          passed++;
+        } else {
+          appendOutput(`  FAIL: ${at.num}. ${at.name} — output missing expected strings`, 'error');
+          failed++;
+        }
+      } catch(e) {
+        appendOutput(`  FAIL: ${at.num}. ${at.name} — ${e.message}`, 'error');
+        failed++;
+      }
+    }
+
+    // UI tests 23-25
+    appendOutput('', 'system');
+    appendOutput('--- UI Tests ---', 'system');
+
+    // Test 23
+    test('23. Agent list populated after registry load', () => {
+      assert(vm.registry && vm.registry.length > 0, `registry has ${vm.registry ? vm.registry.length : 0} agents`);
+      const items = document.querySelectorAll('.bs-agent-item');
+      assert(items.length > 0, 'no agent items rendered');
+    });
+
+    // Test 24
+    test('24. Drop zone exists and is interactive', () => {
+      const dz = document.getElementById('dropZone');
+      assert(dz, 'drop zone not found');
+      assert(dz.textContent.includes('Drop'), 'drop zone text missing');
+    });
+
+    // Test 25
+    test('25. REPL evaluates in agent env', () => {
+      const env = createGlobalEnv();
+      evIn(env, '(define FACILITIES (make-dict "FAC-001" "test"))');
+      const keys = evIn(env, '(dict-keys FACILITIES)');
+      assert(Array.isArray(keys) && keys[0] === 'FAC-001', 'REPL env test failed');
+    });
+
+    appendOutput('', 'system');
+    appendOutput(`=== Results: ${passed} passed, ${failed} failed, ${passed + failed} total ===`, passed + failed === passed ? 'line' : 'error');
+  })();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 6: Init
+// ═══════════════════════════════════════════════════════════════════════
+
+(async function init() {
+  try {
+    const agents = await loadRegistry();
+    populateAgentList(agents);
+  } catch(e) {
+    appendOutput('Failed to load registry: ' + e.message, 'error');
+  }
+})();
+
+</script>
+</body>
+</html>

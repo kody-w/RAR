@@ -3585,9 +3585,10 @@ function checkAuth() {
 }
 
 async function loginWithGitHub() {
-  // Primary: GitHub OAuth redirect flow (works in all browsers)
-  const redirectUri = window.location.origin + window.location.pathname;
-  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=public_repo`;
+  // OAuth redirect flow — omit redirect_uri so GitHub uses the callback URL
+  // configured in the OAuth App settings (the GitHub Pages URL).
+  // This avoids file:// and localhost mismatches.
+  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo`;
   window.location.href = url;
 }
 
@@ -3595,8 +3596,9 @@ async function handleAuthCallback() {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
   if (!code) return;
-  // Clean URL immediately
-  window.history.replaceState({}, '', window.location.origin + window.location.pathname + (window.location.hash || ''));
+  // Clean URL immediately (use href without search params)
+  const cleanUrl = window.location.href.split('?')[0] + (window.location.hash || '');
+  window.history.replaceState({}, '', cleanUrl);
   try {
     const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
       method: 'POST',
