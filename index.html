@@ -4108,16 +4108,10 @@ function openAgent(name) {
         const badge = isCurator
           ? '<span style="font-size:.55rem;background:rgba(188,140,255,.15);color:#bc8cff;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">CURATOR</span>'
           : '<span style="font-size:.55rem;background:rgba(57,211,83,.12);color:#39d353;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:700;letter-spacing:.5px">HUMAN</span>';
-        const evidenceHtml = (isCurator && r.evidence && r.evidence.length)
-          ? `<div style="margin-top:6px;padding:6px 10px;background:rgba(188,140,255,.06);border:1px solid rgba(188,140,255,.12);border-radius:6px;font-size:.72rem;color:#8b949e">
-              <div style="color:#bc8cff;font-weight:700;font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Evidence</div>
-              ${r.evidence.map(e => `<div style="margin:2px 0">&middot; ${esc(e)}</div>`).join('')}
-            </div>`
-          : '';
         return `<div class="review-item">
         <div class="review-header"><span><span class="review-user">${isCurator ? 'Virtual Artist in Residence' : '@' + esc(r.user)}</span>${badge} <span class="review-stars">${'&#9733;'.repeat(r.rating)}</span></span>
         <span class="review-date">${new Date(r.timestamp).toLocaleDateString()}</span></div>
-        <div class="review-text">${esc(r.text)}</div>${evidenceHtml}</div>`;
+        <div class="review-text">${esc(r.text)}</div></div>`;
       }).join('')}</div>`
     : '<p style="color:var(--text-muted);font-size:.9rem">No reviews yet — be the first to share your experience. Click the button below to write a review.</p>';
 
