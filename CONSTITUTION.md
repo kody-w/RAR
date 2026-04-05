@@ -848,6 +848,20 @@ The SuperSeed grows the RappterTree. The tree gives free shade:
 
 The shade is free. The roots are sovereign.
 
+### Agent-Operated Stewardship
+
+The Verification Authority may delegate day-to-day operations to an AI agent connected to a private workspace. This workspace contains the strategy, legal documents, playbooks, and decision frameworks necessary to operate the ecosystem.
+
+The steward (CEO or designee) interacts with the ecosystem through this agent. The agent:
+
+- Answers questions about the ecosystem using the full knowledge base
+- Recommends actions based on the playbook and strategy documents
+- Tracks metrics against the work-back plan
+- Drafts content for publication across channels
+- Monitors agent submissions and suggests curation decisions
+
+The steward's role is editorial judgment — deciding what gets verified, what gets released, and how the brand is positioned. The agent handles everything else. This is the design: human judgment where it matters, autonomous operation everywhere else.
+
 ---
 
 This constitution can be amended by:
@@ -860,4 +874,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, and the Free Shade Principle. The single file is the law. The card is the agent. The agent is the file. The deck is the binder. The seed is the tree.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. The single file is the law. The card is the agent. The agent is the file. The deck is the binder. The seed is the tree. The steward speaks through the agent.*
