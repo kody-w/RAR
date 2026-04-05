@@ -739,10 +739,11 @@ def binder_transfer(mint_id: str, dest: str) -> dict:
 # SECTION 6: CLI DISPATCHER
 # =============================================================================
 
-def scaffold_agent(name: str) -> str:
+def scaffold_agent(name: str, output_dir: str = None) -> str:
     """
     Scaffold a new agent from template.
     name should be @publisher/my-agent.
+    output_dir overrides the default agents/ directory.
     Returns the path to the written file.
     """
     if not name.startswith("@") or "/" not in name:
@@ -760,7 +761,8 @@ def scaffold_agent(name: str) -> str:
     author = publisher.lstrip("@")
 
     file_name = slug.replace("-", "_") + "_agent.py"
-    output_path = Path(__file__).parent / "agents" / publisher / file_name
+    base_dir = Path(output_dir) if output_dir else Path(__file__).parent / "agents"
+    output_path = base_dir / publisher / file_name
 
     content = (
         AGENT_TEMPLATE
