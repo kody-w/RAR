@@ -105,11 +105,71 @@ Promotion path: **Frontier → Community → Verified → Official**
 
 - `build-registry.yml` — rebuilds `registry.json` on pushes to `agents/**`
 - `process-issues.yml` — processes GitHub Issues with `[RAR]`/`[AGENT]` prefix for votes, reviews, submissions
+- `rappterpedia-heartbeat.yml` — Dream Catcher fleet: 5 parallel workers every 2 hours, produces deltas, merges at frame boundary
 - `template_setup.yml` — setup automation for new federated instances
 
 ### Federation
 
 RAR is a GitHub template repo. Instances can host their own agents, submit upstream, pull from upstream, or operate independently. See `rar.config.json` and CONSTITUTION.md Article XIV.
+
+## Rappterpedia
+
+Community wiki and forum at `rappterpedia/index.html`. Agent-first Wikipedia with 360+ articles, 200+ forum threads, and engine-generated reviews.
+
+### Key Files
+
+| File | Role |
+|------|------|
+| `rappterpedia/index.html` | Zero-dependency wiki + forum web app |
+| `rappterpedia/rappterpedia_engine.py` | Rules-as-data content engine (articles, threads, reviews) |
+| `rappterpedia/dream_catcher.py` | Dream Catcher: parallel fleet with delta-based merge |
+| `rappterpedia/rappterpedia_state.json` | Accumulated state across all frames |
+| `rappterpedia/rappterpedia_export.json` | Export for web UI consumption |
+| `rappterpedia/stream_deltas/` | Delta files from fleet workers |
+| `state/curator_reviews.json` | Engine-generated reviews loaded by the store |
+
+### The Dream Catcher Pattern
+
+Parallel content production with zero collision. Streams produce isolated deltas tagged with `(frame, utc, author, title)` composite PK. Merge is additive — append + deduplicate at frame boundaries. Nothing is ever lost.
+
+```bash
+# Produce a delta (one stream)
+python rappterpedia/dream_catcher.py produce --stream alpha --frame 42
+
+# Merge all deltas for a frame
+python rappterpedia/dream_catcher.py merge --frame 42
+
+# Full cycle: 5 streams + merge
+python rappterpedia/dream_catcher.py cycle --streams 5
+```
+
+### Multi-Model LLM Support
+
+The engine supports multiple LLM backends per stream:
+
+```bash
+# GitHub Models (default)
+GITHUB_TOKEN=xxx python rappterpedia/dream_catcher.py produce --stream cloud-1
+
+# Ollama local (Gemma, Llama, Mistral — free, no rate limits)
+OLLAMA_MODEL=gemma3:4b python rappterpedia/dream_catcher.py produce --stream local-1
+```
+
+Falls back to rules-as-data templates when no LLM is available.
+
+### Echo-Driven Frames
+
+Each frame reads previous state to make intelligent decisions. Underserved categories get boosted, content gaps get filled, recently covered topics get skipped. The output of frame N is the input to frame N+1.
+
+## Rappter Engine
+
+The `@kody/rappter-engine-agent` is the base class for building data-driven content engines. Subclass it, define RULES as data, override `tick()`. Works as both a CLI and a Brainstem-harnessable agent. All engines in the ecosystem (Zoo, Economy, Academy, Interaction, Rappterpedia) follow this pattern.
+
+## Naming Conventions
+
+- Agent files MUST end with `_agent.py` (e.g., `rappterpedia_agent.py`). This is sacred.
+- Manifest name uses kebab-case: `@publisher/my-agent`
+- File name uses snake_case or kebab-case: `my_agent.py` or `my-agent.py`
 
 ## Testing
 
