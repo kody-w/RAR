@@ -879,9 +879,20 @@ def get_agent_context(agent: dict) -> dict:
 # Article Generation
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-def generate_article(state: dict, agents: list[dict]) -> dict | None:
-    """Generate a single wiki article from rules."""
-    rule_name, rule = pick_weighted(ARTICLE_RULES)
+def generate_article(state: dict, agents: list[dict], echoes: dict | None = None) -> dict | None:
+    """Generate a single wiki article from rules, informed by echoes from previous frames."""
+    echoes = echoes or {}
+
+    # Echo-driven rule selection: prefer rules that fill gaps
+    weighted_rules = dict(ARTICLE_RULES)
+    underserved = echoes.get("underserved_categories", [])
+    if underserved:
+        # Boost weight of rules whose category is underserved
+        for rname, rule in weighted_rules.items():
+            if rule.get("category") in underserved:
+                weighted_rules[rname] = dict(rule, weight=rule["weight"] * 3)
+
+    rule_name, rule = pick_weighted(weighted_rules)
 
     # Build context based on rule type
     ctx = {"tick": state["tick_count"]}
@@ -985,9 +996,18 @@ def generate_article(state: dict, agents: list[dict]) -> dict | None:
 # Thread Generation
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-def generate_thread(state: dict, agents: list[dict]) -> dict | None:
-    """Generate a single forum thread from rules."""
-    rule_name, rule = pick_weighted(THREAD_RULES)
+def generate_thread(state: dict, agents: list[dict], echoes: dict | None = None) -> dict | None:
+    """Generate a single forum thread from rules, informed by echoes."""
+    echoes = echoes or {}
+
+    # Echo-driven: boost showcase if no showcases exist, boost help if few threads
+    weighted_rules = dict(THREAD_RULES)
+    gaps = echoes.get("gaps", [])
+    if "no agent showcases in the forum yet" in gaps:
+        if "showcase" in weighted_rules:
+            weighted_rules["showcase"] = dict(weighted_rules["showcase"], weight=weighted_rules["showcase"]["weight"] * 3)
+
+    rule_name, rule = pick_weighted(weighted_rules)
 
     ctx = {"tick": state["tick_count"]}
 
@@ -1170,6 +1190,63 @@ def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> l
 # Tick & Commit
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+def build_echoes(state: dict) -> dict:
+    """
+    Build echo context from previous frames.
+    Echoes are the memory of what happened before — they inform what
+    should happen next. This is the Rappterbook pattern: each frame
+    reads the last frame's output to drive intelligent decisions.
+    """
+    echoes = {
+        "tick": state.get("tick_count", 0),
+        "total_articles": len(state.get("articles", [])),
+        "total_threads": len(state.get("threads", [])),
+        "total_reviews": sum(len(v) for v in state.get("reviews", {}).values()),
+        "reviewed_agents": set(state.get("reviews", {}).keys()),
+        "covered_topics": set(state.get("generated_topics", [])),
+        "covered_agents": set(state.get("generated_agent_ids", [])),
+        "recent_articles": [],
+        "recent_threads": [],
+        "underserved_categories": [],
+        "hot_threads": [],
+        "gaps": [],
+    }
+
+    # Find recent content (last 5 of each)
+    articles = state.get("articles", [])
+    threads = state.get("threads", [])
+    if articles:
+        echoes["recent_articles"] = [a["title"] for a in articles[-5:]]
+    if threads:
+        echoes["recent_threads"] = [t["title"] for t in threads[-5:]]
+
+    # Find underserved wiki categories
+    cat_counts = {}
+    for a in articles:
+        cat_counts[a.get("category", "?")] = cat_counts.get(a.get("category", "?"), 0) + 1
+    all_cats = ["getting-started", "agents", "architecture", "integrations",
+                "best-practices", "troubleshooting", "federation", "community"]
+    for cat in all_cats:
+        if cat_counts.get(cat, 0) < 3:
+            echoes["underserved_categories"].append(cat)
+
+    # Find hot threads (most replies)
+    sorted_threads = sorted(threads, key=lambda t: len(t.get("replies", [])), reverse=True)
+    echoes["hot_threads"] = [t["title"] for t in sorted_threads[:3]]
+
+    # Identify content gaps
+    if echoes["total_articles"] < 10:
+        echoes["gaps"].append("needs more wiki foundation articles")
+    if echoes["total_reviews"] < 50:
+        echoes["gaps"].append("needs more agent reviews for credibility")
+    if not any(a.get("category") == "troubleshooting" for a in articles):
+        echoes["gaps"].append("no troubleshooting articles yet")
+    if not any(t.get("channel") == "showcase" for t in threads):
+        echoes["gaps"].append("no agent showcases in the forum yet")
+
+    return echoes
+
+
 def rappterpedia_tick(num_articles: int = 2, num_threads: int = 2, dry_run: bool = False) -> list[str]:
     """Run a single content generation tick."""
     state = init_state()
@@ -1179,16 +1256,20 @@ def rappterpedia_tick(num_articles: int = 2, num_threads: int = 2, dry_run: bool
     state["tick_count"] += 1
     ts = now_iso()
 
+    # ── Build echoes from previous frames ──────────────
+    echoes = build_echoes(state)
+
     # ── Phase 1: Generate wiki articles ─────────────────
+    # Prefer underserved categories based on echoes
     for _ in range(num_articles):
-        article = generate_article(state, agents)
+        article = generate_article(state, agents, echoes=echoes)
         if article:
             state["articles"].append(article)
             results.append(f"📝 Wiki: \"{article['title']}\" [{article['category']}] by {article['author']}")
 
     # ── Phase 2: Generate forum threads ─────────────────
     for _ in range(num_threads):
-        thread = generate_thread(state, agents)
+        thread = generate_thread(state, agents, echoes=echoes)
         if thread:
             reply_count = len(thread.get("replies", []))
             state["threads"].append(thread)

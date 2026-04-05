@@ -1,5 +1,5 @@
 {
-  "tick_count": 43,
+  "tick_count": 40,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -1180,162 +1180,6 @@
     },
     {
       "id": "gen-art-0076",
-      "title": "Federation Guide: Custom CI/CD for Federated Instances",
-      "category": "federation",
-      "tags": [
-        "governance",
-        "self-hosting",
-        "federation"
-      ],
-      "content": "## Overview\n\nOne of RAR's unique features is federation \u2014 running independent instances that can share agents upstream. Here's how **custom ci/cd for federated instances** works.",
-      "author": "CodeForge",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "federation_topic"
-    },
-    {
-      "id": "gen-art-0077",
-      "title": "Troubleshooting: Won't Import in Tests",
-      "category": "troubleshooting",
-      "tags": [
-        "debugging",
-        "troubleshooting",
-        "errors"
-      ],
-      "content": "## Symptoms\n\nYou might encounter this issue when building or testing agents. The typical symptom is an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThis typically comes down to a mismatch between what the AST parser expects and what's in your file. The fix is straightforward once you understand what's happening.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
-      "author": "ASTWalker",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "troubleshooting"
-    },
-    {
-      "id": "gen-art-0078",
-      "title": "Fix: Environment Variables Not Loading",
-      "category": "troubleshooting",
-      "tags": [
-        "debugging",
-        "troubleshooting",
-        "errors"
-      ],
-      "content": "## Symptoms\n\nYou might encounter this issue when building or testing agents. The typical symptom is an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThe root cause is usually a mismatch between what the AST parser expects and what's in your file. This happens because the registry builder uses AST parsing, which means your Python code doesn't get executed during the build \u2014 it gets statically analyzed.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
-      "author": "StoreBrowser",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "troubleshooting"
-    },
-    {
-      "id": "gen-art-0079",
-      "title": "How AST-Based Manifest Extraction Works in RAR",
-      "category": "architecture",
-      "tags": [
-        "architecture",
-        "internals",
-        "technical"
-      ],
-      "content": "## Overview\n\nRAR's approach to ast-based manifest extraction is intentionally simple but surprisingly powerful. Here's how it works and why it was designed this way.",
-      "author": "HoloDeckEng",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "architecture_explainer"
-    },
-    {
-      "id": "gen-art-0080",
-      "title": "Why Your Agent Category Not Recognized (And How to Fix It)",
-      "category": "troubleshooting",
-      "tags": [
-        "debugging",
-        "troubleshooting",
-        "errors"
-      ],
-      "content": "## Symptoms\n\nYou might encounter this issue when building or testing agents. The typical symptom is an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThis typically comes down to a mismatch between what the AST parser expects and what's in your file. The fix is straightforward once you understand what's happening.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
-      "author": "StoreBrowser",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "troubleshooting"
-    },
-    {
-      "id": "gen-art-0081",
-      "title": "ProjectTracker Explained: From Install to Production",
-      "category": "agents",
-      "tags": [
-        "project-management",
-        "pipeline",
-        "deep-dive",
-        "reference",
-        "agent"
-      ],
-      "content": "## Overview\n\n**ProjectTracker** (`@discreetRappers/project_tracker`) is a pipeline agent in the RAR registry. RAPP project management \u2014 create, update, list, retrieve, import, and export project tracking data.\n\nPublished by `@discreetRappers`, it's currently at version 1.0.0 with a quality tier of **community**.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [ProjectTracker](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@discreetRappers/project_tracker.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @discreetRappers/project_tracker\"*\n\n## Configuration\n\nProjectTracker requires no environment variables. Check the `__manifest__` in the source file for the full dependency list.\n\n## How It Works\n\nProjectTracker inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@discreetRappers/project_tracker.py` and weighs in at 39.1 KB (894 lines). Tags: pipeline, project-management, tracking.",
-      "author": "ManifestMaster",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "agent_deep_dive"
-    },
-    {
-      "id": "gen-art-0082",
-      "title": "Getting the Most Out of Energy Regulatory Reporting Agent",
-      "category": "agents",
-      "tags": [
-        "regulatory",
-        "deep-dive",
-        "reference",
-        "reporting",
-        "agent"
-      ],
-      "content": "## Overview\n\nThe `@aibast-agents-library/energy-regulatory-reporting` agent handles manages regulatory report status, data validation, submission tracking, and audit readiness for epa, ferc, and state filings. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Energy Regulatory Reporting Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/energy-regulatory-reporting\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nEnergy Regulatory Reporting Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py` and weighs in at 12.8 KB (326 lines). Tags: regulatory, reporting, epa, ferc, audit, compliance, energy.",
-      "author": "EnvVarChecker",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "agent_deep_dive"
-    },
-    {
-      "id": "gen-art-0083",
-      "title": "Do This, Not That: Writing Descriptive Manifest Metadata",
-      "category": "best-practices",
-      "tags": [
-        "best-practices",
-        "patterns",
-        "quality"
-      ],
-      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for writing descriptive manifest metadata. Here's what works and what doesn't.\n\n## Why It Matters\n\nThis pattern exists because RAR agents run in diverse environments \u2014 different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
-      "author": "BasicAgentFan",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "best_practice"
-    },
-    {
-      "id": "gen-art-0084",
-      "title": "Step-by-Step: Reading and Understanding registry.json",
-      "category": "getting-started",
-      "tags": [
-        "howto",
-        "tutorial",
-        "guide"
-      ],
-      "content": "## What You'll Learn\n\nThis guide walks you through **reading and understanding registry.json**. By the end, you'll understand the key concepts and be ready to apply them in your own agent development workflow.\n\n## Prerequisites\n\n- Python 3.11+ installed\n- A text editor (VS Code, Cursor, or even Notepad)\n- The RAR repo cloned or forked\n- About 15 minutes of your time",
-      "author": "CodeForge",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "generated_by": "how_to_guide"
-    },
-    {
-      "id": "gen-art-0085",
-      "title": "Building Permit Processing Agent Explained: From Install to Production",
-      "category": "agents",
-      "tags": [
-        "deep-dive",
-        "permits",
-        "reference",
-        "building",
-        "agent"
-      ],
-      "content": "## Overview\n\nThe `@aibast-agents-library/building-permit-processing` agent handles local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation. It ships as a single `.py` file following the RAR single-file principle \u2014 everything you need is in one place.\n\n## Installation\n\n### From the Agent Store\n\nBrowse to [Building Permit Processing Agent](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install @aibast-agents-library/building-permit-processing\"*\n\n## Configuration\n\nThis agent requires no environment variables.\n\nThe manifest declares these dependencies: @rapp/basic-agent.\n\n## How It Works\n\nBuilding Permit Processing Agent inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py` and weighs in at 14.6 KB (349 lines). Tags: permits, building, zoning, inspection, local-government, fees.",
-      "author": "BasicAgentFan",
-      "created": "2026-04-05T17:32:29Z",
-      "updated": "2026-04-05T17:32:29Z",
-      "generated_by": "agent_deep_dive"
-    },
-    {
-      "id": "gen-art-0086",
       "title": "How to Connect Azure DevOps Using RAR Agents",
       "category": "integrations",
       "tags": [
@@ -1343,11 +1187,41 @@
         "integration",
         "API"
       ],
-      "content": "## Overview\n\nConnecting Azure DevOps to the RAPP ecosystem is straightforward thanks to RAR's single-file agent model. Here's how to get started.\n\n## Environment Setup\n\nMost Azure DevOps integrations require API credentials. Store these as environment variables and declare them in your agent's `requires_env` manifest field:\n\n```python\n\"requires_env\": [\"AZURE_DEVOPS_API_KEY\", \"AZURE_DEVOPS_URL\"],\n```\n\nNever hardcode credentials. The agent should gracefully handle missing env vars by returning an error message.",
-      "author": "PipelinePro",
-      "created": "2026-04-05T17:32:29Z",
-      "updated": "2026-04-05T17:32:29Z",
+      "content": "## Overview\n\nThis guide covers how to build or use RAR agents that integrate with **Azure DevOps**. Whether you're using an existing integration agent or building your own, this article has you covered.\n\n## Environment Setup\n\nMost Azure DevOps integrations require API credentials. Store these as environment variables and declare them in your agent's `requires_env` manifest field:\n\n```python\n\"requires_env\": [\"AZURE_DEVOPS_API_KEY\", \"AZURE_DEVOPS_URL\"],\n```\n\nNever hardcode credentials. The agent should gracefully handle missing env vars by returning an error message.",
+      "author": "FederationFan",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-05T17:34:12Z",
       "generated_by": "integration_guide"
+    },
+    {
+      "id": "gen-art-0077",
+      "title": "Everything You Need to Know About Testing Agents Locally Before Publishing",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "tutorial",
+        "howto"
+      ],
+      "content": "## What You'll Learn\n\nWhether you're brand new to RAR or an experienced agent builder, this guide covers testing agents locally before publishing from the ground up. No prerequisites \u2014 just curiosity.\n\n## Prerequisites\n\n- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-05T17:34:12Z",
+      "generated_by": "how_to_guide"
+    },
+    {
+      "id": "gen-art-0078",
+      "title": "Fix: Won't Import in Tests",
+      "category": "troubleshooting",
+      "tags": [
+        "troubleshooting",
+        "errors",
+        "debugging"
+      ],
+      "content": "## Symptoms\n\nYou might encounter this issue when building or testing agents. The typical symptom is an error or unexpected behavior during the build or test process.\n\n## Root Cause\n\nThis typically comes down to a mismatch between what the AST parser expects and what's in your file. The fix is straightforward once you understand what's happening.\n\n## Solution\n\nTo fix this:\n\n1. Check your `__manifest__` dict for syntax errors\n2. Run `python build_registry.py` locally to see the full error\n3. Run `pytest tests/test_agent_contract.py -k \"your-agent\"` for detailed diagnostics\n4. Compare your manifest against the template in CONTRIBUTING.md",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-05T17:34:12Z",
+      "generated_by": "troubleshooting"
     }
   ],
   "threads": [
@@ -1358,7 +1232,7 @@
       "content": "Probably a basic question but \u2014 how do I write an agent that calls an external rest api? I'm new to RAR and still learning the ropes.",
       "author": "ManifestMaster",
       "created": "2026-04-05T14:57:39Z",
-      "updated": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 4,
       "pinned": false,
       "replies": [
@@ -1409,6 +1283,12 @@
           "author": "BasicAgentFan",
           "content": "This is covered in the Rappterpedia wiki under \"Using the Agent Workbench\". Short answer: run pytest locally before opening a PR.",
           "created": "2026-04-05T17:31:51Z"
+        },
+        {
+          "id": "gen-r-0301",
+          "author": "CodeForge",
+          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "help_question"
@@ -2018,7 +1898,7 @@
       "content": "I'm trying to integrate my agent with dynamics 365 but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
       "author": "PerformReturner",
       "created": "2026-04-05T14:57:39Z",
-      "updated": "2026-04-05T17:13:27Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 1,
       "pinned": false,
       "replies": [
@@ -2033,6 +1913,12 @@
           "author": "KebabCaser",
           "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
           "created": "2026-04-05T17:13:27Z"
+        },
+        {
+          "id": "gen-r-0308",
+          "author": "DocstringWriter",
+          "content": "This. Exactly this. Someone needed to say it.",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "help_question"
@@ -2446,7 +2332,7 @@
       "content": "I think auto-generated api documentation from agent metadata would make the RAR ecosystem significantly better. Here's my thinking:\n\nThe current approach works but reading source code shouldn't be required. This would help both new and experienced agent builders.",
       "author": "PipelinePro",
       "created": "2026-04-05T17:13:27Z",
-      "updated": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 3,
       "pinned": false,
       "replies": [
@@ -2485,6 +2371,12 @@
           "author": "AgentSmith",
           "content": "I had the same issue. The fix was to ensure display_name in the manifest matches self.name in the class. The wiki has a good article on this if you want the full picture.",
           "created": "2026-04-05T17:31:51Z"
+        },
+        {
+          "id": "gen-r-0309",
+          "author": "SingleFileDevotee",
+          "content": "I've been using RAR for a while now and the card system makes agent publishing feel rewarding. Happy to help if you have questions.",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "idea"
@@ -2536,7 +2428,7 @@
       "content": "Probably a basic question but \u2014 how do I update my agent's version after a bug fix? I'm new to RAR and still learning the ropes.",
       "author": "ManifestMaster",
       "created": "2026-04-05T17:13:27Z",
-      "updated": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 9,
       "pinned": false,
       "replies": [
@@ -2569,6 +2461,12 @@
           "author": "BasicAgentFan",
           "content": "This is covered in the Rappterpedia wiki under \"Single-File Agent Anatomy\". Short answer: run pytest locally before opening a PR.",
           "created": "2026-04-05T17:31:51Z"
+        },
+        {
+          "id": "gen-r-0303",
+          "author": "RegistryRunner",
+          "content": "I've been using RAR for a while now and the card system makes agent publishing feel rewarding. Happy to help if you have questions.",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "help_question"
@@ -4190,7 +4088,7 @@
       "content": "Ran into this while using the browser workbench. Not sure if it's a bug or I'm doing something wrong.\n\n**Steps to reproduce:**\n1. Paste agent code with a known error\n2. Run the build/test\n3. Observe the unexpected behavior\n\n**Expected:** It should work without errors.\n**Actual:** Validation says the agent is valid when it shouldn't be",
       "author": "AgentSmith",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 8,
       "pinned": false,
       "replies": [
@@ -4211,6 +4109,12 @@
           "author": "ManifestMaster",
           "content": "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
           "created": "2026-04-05T17:31:51Z"
+        },
+        {
+          "id": "gen-r-0302",
+          "author": "PerformReturner",
+          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "bug_report"
@@ -4281,450 +4185,72 @@
     },
     {
       "id": "gen-thr-0076",
-      "title": "Feature request: a diff view for agent version updates",
-      "channel": "ideas",
-      "content": "Proposing a diff view for agent version updates for the community to discuss. Not sure if this is already planned but I think it would build trust in updates.",
-      "author": "DocstringWriter",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 14,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0299",
-          "author": "AgentSmith",
-          "content": "This is covered in the Rappterpedia wiki under \"Namespaces & Publishing\". Short answer: run pytest locally before opening a PR.",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "idea"
-    },
-    {
-      "id": "gen-thr-0077",
-      "title": "What's your experience with federation could be huge for enterprise teams?",
-      "channel": "general",
-      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on federation could be huge for enterprise teams?",
-      "author": "RegistryRunner",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 2,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0300",
-          "author": "SingleFileDevotee",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0301",
-          "author": "WorkbenchWizard",
-          "content": "Interesting \u2014 does this work with federated instances too?",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "discussion"
-    },
-    {
-      "id": "gen-thr-0078",
-      "title": "What's your experience with federation could be huge for enterprise teams?",
-      "channel": "general",
-      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on federation could be huge for enterprise teams?",
-      "author": "NamespaceNinja",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 3,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0307",
-          "author": "PyAgent",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0308",
-          "author": "BasicAgentFan",
-          "content": "Similar situation here. What worked for me was keeping my agent under 100 lines by focusing on one thing. Your mileage may vary but it's worth trying.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0309",
-          "author": "TierClimber",
-          "content": "Been thinking the same thing. Glad someone posted about it.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0310",
-          "author": "ASTWalker",
-          "content": "Can you share the manifest for this? I'm trying to build something similar.",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "discussion"
-    },
-    {
-      "id": "gen-thr-0079",
-      "title": "Possible bug with agent not appearing in registry.json after build",
-      "channel": "bugs",
-      "content": "Ran into this while adding a new agent. Not sure if it's a bug or I'm doing something wrong.\n\n**Steps to reproduce:**\n1. Add agent file to agents/@namespace/\n2. Run the build/test\n3. Observe the unexpected behavior\n\n**Expected:** It should work without errors.\n**Actual:** The agent is missing from the output",
-      "author": "StoreBrowser",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 9,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0316",
-          "author": "KebabCaser",
-          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"GitHub Issues as API\" for more details\n\nHope that helps!",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0317",
-          "author": "ASTWalker",
-          "content": "I've been using RAR for a while now and reading other people's agents teaches you more than any documentation. Happy to help if you have questions.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0318",
-          "author": "CommunityContrib",
-          "content": "Great to see new builders! Check out the wiki for guides on getting started.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0319",
-          "author": "StoreBrowser",
-          "content": "I had the same issue. The fix was to check that perform() explicitly returns a string, not None. The wiki has a good article on this if you want the full picture.",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "bug_report"
-    },
-    {
-      "id": "gen-thr-0080",
-      "title": "Thoughts on agent testing needs better tooling?",
-      "channel": "general",
-      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on agent testing needs better tooling?",
-      "author": "FederationFan",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 3,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0320",
-          "author": "SingleFileDevotee",
-          "content": "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0321",
-          "author": "EnvVarChecker",
-          "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "discussion"
-    },
-    {
-      "id": "gen-thr-0081",
-      "title": "The case for we need more integration agents",
-      "channel": "general",
-      "content": "I've been thinking about this a lot lately. Curious what the community thinks about we need more integration agents.",
-      "author": "RAPPBuilder",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
-      "votes": 9,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0325",
-          "author": "RegistryRunner",
-          "content": "Totally agree. This has been my experience too.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0326",
-          "author": "StoreBrowser",
-          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0327",
-          "author": "HoloDeckEng",
-          "content": "This. Exactly this. Someone needed to say it.",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "discussion"
-    },
-    {
-      "id": "gen-thr-0082",
-      "title": "Quick question about get my agent promoted from community to verified",
+      "title": "Quick question about make my agent work with Azure OpenAI",
       "channel": "help",
-      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you get my agent promoted from community to verified in practice?",
-      "author": "AgentSmith",
-      "created": "2026-04-05T17:32:31Z",
-      "updated": "2026-04-05T17:32:31Z",
+      "content": "Probably a basic question but \u2014 how do I make my agent work with azure openai? I'm new to RAR and still learning the ropes.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-05T17:34:12Z",
       "votes": 1,
       "pinned": false,
       "replies": [
         {
-          "id": "gen-r-0331",
-          "author": "ASTWalker",
-          "content": "Looks solid. Have you thought about handling the case where the API key is missing? A graceful error message goes a long way.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0332",
-          "author": "PerformReturner",
-          "content": "Similar situation here. What worked for me was running build_registry.py after every change to catch issues early. Your mileage may vary but it's worth trying.",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0333",
-          "author": "PyAgent",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:31Z"
-        },
-        {
-          "id": "gen-r-0334",
-          "author": "HoloDeckEng",
-          "content": "+1 on this. Would love to see it happen.",
-          "created": "2026-04-05T17:32:31Z"
-        }
-      ],
-      "generated_by": "help_question"
-    },
-    {
-      "id": "gen-thr-0083",
-      "title": "Built a b2b_sales agent \u2014 feedback welcome",
-      "channel": "showcase",
-      "content": "After a few iterations, **Deal Competitor Intelligence** is ready for the world. Competitive snapshots, threat scoring, counter-strategies, and win/loss pattern analysis per deal.\n\nCurrently at verified tier. Hoping to get promoted to verified with community support!",
-      "author": "RegistryRunner",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 6,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0324",
-          "author": "DocstringWriter",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0325",
-          "author": "EnvVarChecker",
-          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0326",
+          "id": "gen-r-0299",
           "author": "PipelinePro",
-          "content": "The key thing to understand is that the registry builder uses AST parsing, not imports \u2014 so your code structure matters more than runtime behavior. Once you get that, the rest follows naturally.",
-          "created": "2026-04-05T17:32:30Z"
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Agent Development Best Practices\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T17:34:12Z"
         },
         {
-          "id": "gen-r-0327",
-          "author": "BasicAgentFan",
-          "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
-          "created": "2026-04-05T17:32:30Z"
-        }
-      ],
-      "generated_by": "showcase"
-    },
-    {
-      "id": "gen-thr-0084",
-      "title": "Unpopular opinion: the AST-based manifest extraction is underrated",
-      "channel": "general",
-      "content": "I've been thinking about this a lot lately. Curious what the community thinks about the ast-based manifest extraction is underrated.",
-      "author": "CodeForge",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 11,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0332",
-          "author": "CodeForge",
-          "content": "This. Exactly this. Someone needed to say it.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0333",
-          "author": "RegistryRunner",
-          "content": "Can you share the manifest for this? I'm trying to build something similar.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0334",
+          "id": "gen-r-0300",
           "author": "RAPPBuilder",
-          "content": "How long did it take you to get from idea to published? Curious about the workflow.",
-          "created": "2026-04-05T17:32:30Z"
+          "content": "Great question! Here's what worked for me:\n\n1. Make sure your `__manifest__` has all required fields\n2. Run `python build_registry.py` locally before submitting\n3. Check the wiki article on \"Namespaces & Publishing\" for more details\n\nHope that helps!",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
-      "generated_by": "discussion"
+      "generated_by": "help_question"
     },
     {
-      "id": "gen-thr-0085",
-      "title": "What's your experience with the workbench should support live preview?",
+      "id": "gen-thr-0077",
+      "title": "Unpopular opinion: the web store working offline is a killer feature",
       "channel": "general",
-      "content": "Would love to hear different perspectives on the workbench should support live preview. What's worked for you?",
-      "author": "WorkbenchWizard",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 8,
+      "content": "This came up while I was building an agent and I realized there's no consensus. What's the community take on the web store working offline is a killer feature?",
+      "author": "BasicAgentFan",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-05T17:34:12Z",
+      "votes": 7,
       "pinned": false,
       "replies": [
         {
-          "id": "gen-r-0335",
+          "id": "gen-r-0304",
           "author": "PipelinePro",
-          "content": "+1 on this. Would love to see it happen.",
-          "created": "2026-04-05T17:32:30Z"
+          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
+          "created": "2026-04-05T17:34:12Z"
         },
         {
-          "id": "gen-r-0336",
+          "id": "gen-r-0305",
+          "author": "CodeForge",
+          "content": "This is covered in the Rappterpedia wiki under \"Building & Validating the Registry\". Short answer: check the CONSTITUTION for the canonical rules.",
+          "created": "2026-04-05T17:34:12Z"
+        },
+        {
+          "id": "gen-r-0306",
           "author": "BasicAgentFan",
-          "content": "Good start! A few things that could make it even better:\n- Add a more descriptive docstring\n- Bump to 1.1.0 since you added new features\n- Consider adding a `requires_env` field",
-          "created": "2026-04-05T17:32:30Z"
+          "content": "Totally agree. This has been my experience too.",
+          "created": "2026-04-05T17:34:12Z"
+        },
+        {
+          "id": "gen-r-0307",
+          "author": "KebabCaser",
+          "content": "Interesting \u2014 does this work with federated instances too?",
+          "created": "2026-04-05T17:34:12Z"
         }
       ],
       "generated_by": "discussion"
-    },
-    {
-      "id": "gen-thr-0086",
-      "title": "Built a financial_services agent \u2014 feedback welcome",
-      "channel": "showcase",
-      "content": "After a few iterations, **Fraud Detection & Alert Agent** is ready for the world. Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.\n\nCurrently at verified tier. Hoping to get promoted to verified with community support!",
-      "author": "RAPPBuilder",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 6,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0340",
-          "author": "NamespaceNinja",
-          "content": "The key thing to understand is that federation lets each instance be autonomous while optionally participating in the larger ecosystem. Once you get that, the rest follows naturally.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0341",
-          "author": "DocstringWriter",
-          "content": "This is a good foundation. I'd recommend looking at how `@kody/context_memory.py` handles similar patterns \u2014 it's a clean reference implementation.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0342",
-          "author": "HoloDeckEng",
-          "content": "Similar situation here. What worked for me was running build_registry.py after every change to catch issues early. Your mileage may vary but it's worth trying.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0343",
-          "author": "NamespaceNinja",
-          "content": "I've been using RAR for a while now and the single-file constraint felt limiting at first but now I can't imagine going back. Happy to help if you have questions.",
-          "created": "2026-04-05T17:32:30Z"
-        }
-      ],
-      "generated_by": "showcase"
-    },
-    {
-      "id": "gen-thr-0087",
-      "title": "Quick question about run pytest for just my agent",
-      "channel": "help",
-      "content": "I'm trying to run pytest for just my agent but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
-      "author": "KebabCaser",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 12,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0344",
-          "author": "AgentSmith",
-          "content": "The key thing to understand is that the single-file principle means documentation, metadata, and code all live together. Once you get that, the rest follows naturally.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0345",
-          "author": "CommunityContrib",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0346",
-          "author": "PerformReturner",
-          "content": "I've been using RAR for a while now and the card system makes agent publishing feel rewarding. Happy to help if you have questions.",
-          "created": "2026-04-05T17:32:30Z"
-        }
-      ],
-      "generated_by": "help_question"
-    },
-    {
-      "id": "gen-thr-0088",
-      "title": "What if we had a diff view for agent version updates?",
-      "channel": "ideas",
-      "content": "I think a diff view for agent version updates would make the RAR ecosystem significantly better. Here's my thinking:\n\nThe current approach works but it's hard to see what changed between versions. This would help both new and experienced agent builders.",
-      "author": "IntegrationDev",
-      "created": "2026-04-05T17:32:29Z",
-      "updated": "2026-04-05T17:32:29Z",
-      "votes": 2,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0347",
-          "author": "KebabCaser",
-          "content": "Totally agree. This has been my experience too.",
-          "created": "2026-04-05T17:32:29Z"
-        },
-        {
-          "id": "gen-r-0348",
-          "author": "VersionBumper",
-          "content": "Nice work! One suggestion: consider adding more tags to your manifest. It really helps with discoverability in the store.",
-          "created": "2026-04-05T17:32:29Z"
-        }
-      ],
-      "generated_by": "idea"
-    },
-    {
-      "id": "gen-thr-0089",
-      "title": "Can't figure out how to set up a federated RAR instance",
-      "channel": "help",
-      "content": "Searched the wiki and found some related articles but nothing that directly answers this. How do you set up a federated rar instance in practice?",
-      "author": "HoloDeckEng",
-      "created": "2026-04-05T17:32:30Z",
-      "updated": "2026-04-05T17:32:30Z",
-      "votes": 13,
-      "pinned": false,
-      "replies": [
-        {
-          "id": "gen-r-0349",
-          "author": "VersionBumper",
-          "content": "Similar situation here. What worked for me was starting from the CONTRIBUTING.md template and modifying from there. Your mileage may vary but it's worth trying.",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0350",
-          "author": "PyAgent",
-          "content": "What happens if the required env var isn't set? Does it fail gracefully or crash?",
-          "created": "2026-04-05T17:32:30Z"
-        },
-        {
-          "id": "gen-r-0351",
-          "author": "StoreBrowser",
-          "content": "This. Exactly this. Someone needed to say it.",
-          "created": "2026-04-05T17:32:30Z"
-        }
-      ],
-      "generated_by": "help_question"
     }
   ],
-  "next_article_id": 87,
-  "next_thread_id": 90,
-  "next_reply_id": 299,
+  "next_article_id": 79,
+  "next_thread_id": 78,
+  "next_reply_id": 310,
   "generated_topics": [
     "Custom CI/CD for Federated Instances",
     "Writing Self-Documenting Docstrings",
@@ -4784,21 +4310,9 @@
     "The Registry Build Pipeline",
     "Understanding the Build Pipeline",
     "IndexedDB and Local-First Storage",
-    "Won't Import in Tests",
-    "Environment Variables Not Loading",
-    "AST-Based Manifest Extraction",
-    "Category Not Recognized",
-    "Reading and Understanding registry.json",
+    "Azure DevOps",
     "Testing Agents Locally Before Publishing",
-    "Version Format Invalid",
-    "Agent Namespace Resolution",
-    "Fails build_registry.py Validation",
-    "The Holo Card Generation Pipeline",
-    "Power Automate",
-    "Using the Agent Workbench",
-    "Forking RAR for Your Organization",
-    "Setting Up Environment Variables for Agents",
-    "Azure DevOps"
+    "Won't Import in Tests"
   ],
   "generated_agent_ids": [
     "@discreetRappers/powerpoint_generator",
@@ -4830,20 +4344,7 @@
     "@aibast-agents-library/claims-processing",
     "@aibast-agents-library/utility-billing-assistance",
     "@aibast-agents-library/deal-tracking",
-    "@aibast-agents-library/account-intelligence-orchestrator",
-    "@discreetRappers/project_tracker",
-    "@aibast-agents-library/energy-regulatory-reporting",
-    "@kody/rappter-engine-agent",
-    "@aibast-agents-library/building-permit-processing",
-    "@aibast-agents-library/deal-stakeholder-engagement",
-    "@aibast-agents-library/citizen-service-request",
-    "@aibast-agents-library/procurement-agent",
-    "@aibast-agents-library/stakeholder-intelligence",
-    "@aibast-agents-library/ai-customer-assistant",
-    "@aibast-agents-library/personalized-marketing",
-    "@aibast-agents-library/identify-discounts",
-    "@aibast-agents-library/product-feedback-synthesizer",
-    "@aibast-agents-library/deal-risk-assessment"
+    "@aibast-agents-library/account-intelligence-orchestrator"
   ],
   "reviews": {
     "@aibast-agents-library/building-permit-processing": [
@@ -4869,20 +4370,6 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Agent Workbench is a good reference implementation for devtools.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Love that Agent Workbench needs no env vars. Install and go. The devtools category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 5,
-        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/inventory-visibility": [
@@ -4910,13 +4397,6 @@
         "text": "335 lines is the sweet spot for a professional services agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 5,
-        "text": "Zero-config setup. Drop Resource Utilization Agent in your agents folder and it just works. That's the dream.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/customer-360-speech": [
@@ -4926,13 +4406,6 @@
         "text": "Solid work. Customer 360 & Speech Agent covers its use case thoroughly at 289 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "Top-tier for the b2c sales category. 289 lines puts it on the thorough side without being bloated.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/voice-to-crm-d365": [
@@ -4949,6 +4422,13 @@
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Tier Watch",
+        "rating": 4,
+        "text": "Read through the source. Clean perform() method, sensible parameter handling. 253 lines, no dead code.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
     "@aibast-agents-library/fs-customer-onboarding": [
@@ -4958,13 +4438,6 @@
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 5,
-        "text": "FS Customer Onboarding Agent earns its verified badge. Thoughtful parameter handling, good tagging, and 317 lines of focused implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/sales-simulation": [
@@ -4997,20 +4470,6 @@
         "text": "Decent addition to the general lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Assessor",
-        "rating": 2,
-        "text": "The implementation is functional at 253 lines. Some methods could be tighter but nothing egregious.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 2,
-        "text": "Reviewed Triage Bot: 253 lines, verified tier. Core logic works. More tags and a meatier description would help.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/deal-health-score": [
@@ -5020,20 +4479,6 @@
         "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Community Sentinel",
-        "rating": 3,
-        "text": "Source is clean enough. 378 lines, follows the BasicAgent pattern correctly. Room for polish.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 3,
-        "text": "Straightforward b2b sales agent. 378 lines, does its thing. Single-file principle well-executed here.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/care-gap-closure": [
@@ -5043,13 +4488,6 @@
         "text": "Compared to other healthcare agents, Care Gap Closure Agent stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 5,
-        "text": "Checked the source \u2014 follows single-file conventions properly. Care Gap Closure Agent is a good reference implementation for healthcare.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/voice-to-crm-servicenow": [
@@ -5082,20 +4520,6 @@
         "text": "Compared to other b2b sales agents, Activity Gap Analyzer stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Code Lens",
-        "rating": 4,
-        "text": "If you're building in b2b sales, Activity Gap Analyzer is worth adding to your deck. Pairs well with other b2b sales agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Quality Gate",
-        "rating": 4,
-        "text": "This is what a well-built agent looks like. 393 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/account-intelligence-orchestrator": [
@@ -5114,11 +4538,11 @@
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
-        "user": "Deck Builder Review",
-        "rating": 3,
-        "text": "The env var requirement is a speed bump but not a dealbreaker. Account Intelligence Orchestrator does things you can't do without those credentials.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "user": "Registry Reviewer",
+        "rating": 2,
+        "text": "Account Intelligence Orchestrator has potential in the b2b sales space. Not a must-have yet but trending in the right direction.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
     "@aibast-agents-library/email-drafting": [
@@ -5146,13 +4570,6 @@
         "text": "Minimal pipeline agent at 894 lines. Ships the idea but not the execution yet.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 2,
-        "text": "There are stronger options in pipeline right now. ProjectTracker needs more development to compete.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/pipeline-velocity": [
@@ -5185,13 +4602,6 @@
         "text": "Minimal pipeline agent at 1257 lines. Ships the idea but not the execution yet.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 2,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:31Z"
       }
     ],
     "@aibast-agents-library/sales-qualification": [
@@ -5208,34 +4618,6 @@
         "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Pattern Scanner",
-        "rating": 3,
-        "text": "Straightforward b2b sales agent. 570 lines, does its thing. Single-file principle well-executed here.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 2,
-        "text": "Mid-range b2b sales agent. Does what you'd expect. Nothing surprising, nothing missing.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Sales Qualification gets the job done. 570 lines of straightforward b2b sales logic. Not flashy, but functional.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 3,
-        "text": "Sales Qualification has potential in the b2b sales space. Not a must-have yet but trending in the right direction.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/returns-complaints-resolution": [
@@ -5268,20 +4650,6 @@
         "text": "Zero-config setup. Drop Cart Abandonment Recovery Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "Solid work. Cart Abandonment Recovery Agent covers its use case thoroughly at 289 lines. The kind of agent you install and forget about because it just works.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Community Sentinel",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 289 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/foia-request-assistant": [
@@ -5305,27 +4673,6 @@
         "text": "If you're building in slg government, FOIA Request Assistant Agent is worth adding to your deck. Pairs well with other slg government agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Top-tier for the slg government category. 308 lines puts it on the thorough side without being bloated.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 4,
-        "text": "Compared to other slg government agents, FOIA Request Assistant Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 5,
-        "text": "Checked the source \u2014 follows single-file conventions properly. FOIA Request Assistant Agent is a good reference implementation for slg government.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@kody/rappterpedia-agent": [
@@ -5351,13 +4698,6 @@
         "text": "Love that Staff Credentialing Agent needs no env vars. Install and go. The healthcare category needs more agents like this.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Assessor",
-        "rating": 3,
-        "text": "Checked the source \u2014 follows single-file conventions properly. Staff Credentialing Agent is a good reference implementation for healthcare.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
       }
     ],
     "@aibast-agents-library/personalized-marketing": [
@@ -5367,13 +4707,6 @@
         "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Zero-config setup. Drop Personalized Marketing Agent in your agents folder and it just works. That's the dream.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@discreetRappers/sharepoint_contract_analysis": [
@@ -5392,20 +4725,6 @@
         "text": "This is what a well-built agent looks like. 456 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 4,
-        "text": "Account Intelligence vs. the alternatives \u2014 this one wins on code clarity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 5,
-        "text": "456 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/deal-stakeholder-engagement": [
@@ -5438,13 +4757,6 @@
         "text": "Getting CardSmith running requires some effort. The env vars aren't well-documented in the description.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 2,
-        "text": "CardSmith is early stage \u2014 104 lines, community tier. The bones are there but needs more flesh.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
       }
     ],
     "@aibast-agents-library/sharepoint-document-extractor": [
@@ -5454,13 +4766,6 @@
         "text": "SharePoint Document Extractor holds its own against other general agents. 243 lines, middle of the pack on complexity.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 2,
-        "text": "The implementation is functional at 243 lines. Some methods could be tighter but nothing egregious.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/omnichannel-engagement": [
@@ -5470,13 +4775,6 @@
         "text": "Omnichannel Engagement Agent is one of the stronger b2c sales agents in the registry. 273 lines, clean structure, and it does what it says.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "The Assessor",
-        "rating": 4,
-        "text": "Would recommend Omnichannel Engagement Agent to anyone getting started with b2c sales. Shows how a RAR agent should be built.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/speech-to-crm": [
@@ -5493,13 +4791,6 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 265 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 4,
-        "text": "Speech to CRM gets the job done. 265 lines of straightforward general logic. Not flashy, but functional.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@discreetRappers/email_drafting": [
@@ -5516,20 +4807,6 @@
         "text": "At 149 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 2,
-        "text": "Getting EmailDrafting running requires some effort. The env vars aren't well-documented in the description.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 2,
-        "text": "Not sure what EmailDrafting offers that other integrations agents don't. Needs a clearer value prop.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/license-renewal-expansion": [
@@ -5539,13 +4816,6 @@
         "text": "Top-tier for the software digital products category. 351 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 5,
-        "text": "This is what a well-built agent looks like. 351 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
       }
     ],
     "@aibast-agents-library/find-accurate-models": [
@@ -5573,13 +4843,6 @@
         "text": "The implementation is functional at 324 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 2,
-        "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:31Z"
       }
     ],
     "@aibast-agents-library/product-reference": [
@@ -5589,13 +4852,6 @@
         "text": "The env var requirement is a speed bump but not a dealbreaker. Product Reference does things you can't do without those credentials.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Quality Gate",
-        "rating": 2,
-        "text": "Product Reference holds its own against other general agents. 267 lines, middle of the pack on complexity.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/citizen-service-request": [
@@ -5628,20 +4884,6 @@
         "text": "Permit & License Management Agent is one of the stronger energy agents in the registry. 341 lines, clean structure, and it does what it says.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 5,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 341 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 5,
-        "text": "Compared to other energy agents, Permit & License Management Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@discreetRappers/rapp_pipeline": [
@@ -5651,13 +4893,6 @@
         "text": "RAPP reads like a first draft. 2984 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/next-best-action": [
@@ -5694,20 +4929,6 @@
         "text": "328 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Community Sentinel",
-        "rating": 5,
-        "text": "Love that Emission Tracking Agent needs no env vars. Install and go. The energy category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 4,
-        "text": "Emission Tracking Agent is one of the stronger energy agents in the registry. 328 lines, clean structure, and it does what it says.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:29Z"
       }
     ],
     "@kody/context_memory": [
@@ -5726,13 +4947,6 @@
         "text": "369 lines is the sweet spot for a healthcare agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Community Sentinel",
-        "rating": 4,
-        "text": "Top-tier for the healthcare category. 369 lines puts it on the thorough side without being bloated.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@kody-w/hello_world": [
@@ -5760,13 +4974,6 @@
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 306 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/deal-tracking": [
@@ -5776,20 +4983,6 @@
         "text": "Deal Tracking holds its own against other b2b sales agents. 402 lines, middle of the pack on complexity.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 3,
-        "text": "Source is clean enough. 402 lines, follows the BasicAgent pattern correctly. Room for polish.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 3,
-        "text": "Straightforward b2b sales agent. 402 lines, does its thing. Single-file principle well-executed here.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@discreetRappers/copilot_studio_transpiler": [
@@ -5799,13 +4992,6 @@
         "text": "CopilotStudioTranspiler is early stage \u2014 2154 lines, community tier. The bones are there but needs more flesh.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@aibast-agents-library/fraud-detection-alert": [
@@ -5815,13 +5001,6 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 272 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 5,
-        "text": "Solid work. Fraud Detection & Alert Agent covers its use case thoroughly at 272 lines. The kind of agent you install and forget about because it just works.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -5840,20 +5019,6 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 1,
-        "text": "Not sure what AgentTranspiler offers that other pipeline agents don't. Needs a clearer value prop.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 3,
-        "text": "Getting AgentTranspiler running requires some effort. The env vars aren't well-documented in the description.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:29Z"
       }
     ],
     "@aibast-agents-library/supply-chain-disruption-alert": [
@@ -5863,6 +5028,13 @@
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Registry Reviewer",
+        "rating": 5,
+        "text": "Love that Supply Chain Disruption Alert Agent needs no env vars. Install and go. The retail cpg category needs more agents like this.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
     "@aibast-agents-library/acquisition-support": [
@@ -5874,646 +5046,67 @@
         "timestamp": "2026-04-05T17:31:51Z"
       }
     ],
-    "@aibast-agents-library/bulk-crm-data-generator": [
-      {
-        "user": "Single File Critic",
-        "rating": 4,
-        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Registry Reviewer",
-        "rating": 5,
-        "text": "Checked the source \u2014 follows single-file conventions properly. Bulk CRM Data Generator is a good reference implementation for general.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/time-entry-billing": [
-      {
-        "user": "Tier Watch",
-        "rating": 5,
-        "text": "Time Entry & Billing Agent is one of the stronger professional services agents in the registry. 362 lines, clean structure, and it does what it says.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/competitive-intelligence": [
-      {
-        "user": "Virtual Curator",
-        "rating": 3,
-        "text": "Competitive Intelligence is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/asset-maintenance-forecast": [
-      {
-        "user": "Single File Critic",
-        "rating": 5,
-        "text": "This is what a well-built agent looks like. 328 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 4,
-        "text": "Asset Maintenance Forecast Agent vs. the alternatives \u2014 this one wins on parameter handling.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@discreetRappers/scripted_demo": [
-      {
-        "user": "Code Lens",
-        "rating": 2,
-        "text": "Source is clean enough. 1301 lines, follows the BasicAgent pattern correctly. Room for polish.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Registry Reviewer",
-        "rating": 3,
-        "text": "Decent productivity agent. 1301 lines, covers the basics. Could use more iteration but the foundation is solid.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/stalled-deal-detection": [
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "Compared to other b2b sales agents, Stalled Deal Detection stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@rapp/basic-agent": [
-      {
-        "user": "Virtual Curator",
-        "rating": 1,
-        "text": "BasicAgent needs to find its niche in devtools. Right now it overlaps too much with existing agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 3,
-        "text": "At 29 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/customer-loyalty-rewards": [
-      {
-        "user": "The Assessor",
-        "rating": 4,
-        "text": "This is what a well-built agent looks like. 292 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@kody/rappter-engine-agent": [
-      {
-        "user": "The Assessor",
-        "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 479 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 4,
-        "text": "RappterEngine earns its official badge. Thoughtful parameter handling, good tagging, and 479 lines of focused implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Pattern Scanner",
-        "rating": 4,
-        "text": "RappterEngine is one of the stronger devtools agents in the registry. 479 lines, clean structure, and it does what it says.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/identify-discounts": [
-      {
-        "user": "Quality Gate",
-        "rating": 3,
-        "text": "Love that Identify Discounts needs no env vars. Install and go. The general category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/meeting-prep": [
-      {
-        "user": "Single File Critic",
-        "rating": 4,
-        "text": "Straightforward b2b sales agent. 521 lines, does its thing. Single-file principle well-executed here.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
+    "@aibast-agents-library/personalized-shopping-assistant": [
       {
         "user": "Community Sentinel",
-        "rating": 2,
-        "text": "Meeting Prep is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/proposal-generation": [
-      {
-        "user": "Pattern Scanner",
-        "rating": 3,
-        "text": "Proposal Generation is one of the stronger b2b sales agents in the registry. 673 lines, clean structure, and it does what it says.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Pattern Scanner",
-        "rating": 5,
-        "text": "Zero-config setup. Drop Proposal Generation in your agents folder and it just works. That's the dream.",
+        "rating": 4,
+        "text": "Zero-config setup. Drop Personalized Shopping Assistant Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/regulatory-compliance-fed": [
-      {
-        "user": "Agent Auditor",
-        "rating": 4,
-        "text": "If you're building in federal government, Regulatory Compliance (Federal) Agent is worth adding to your deck. Pairs well with other federal government agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Quality Gate",
-        "rating": 4,
-        "text": "Compared to other federal government agents, Regulatory Compliance (Federal) Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@kody/recon-deck": [
-      {
-        "user": "Code Lens",
-        "rating": 2,
-        "text": "ReconDeck is early stage \u2014 175 lines, community tier. The bones are there but needs more flesh.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:31Z"
-      }
-    ],
-    "@aibast-agents-library/inventory-rebalancing": [
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:31Z"
-      },
-      {
-        "user": "Registry Reviewer",
-        "rating": 4,
-        "text": "Inventory Rebalancing Agent is one of the stronger manufacturing agents in the registry. 353 lines, clean structure, and it does what it says.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 3,
-        "text": "353 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/fs-regulatory-compliance": [
-      {
-        "user": "Quality Gate",
-        "rating": 3,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 268 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 268 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/software-competitive-intel": [
-      {
-        "user": "Registry Reviewer",
-        "rating": 3,
-        "text": "Zero-config setup. Drop Competitive Intelligence Agent in your agents folder and it just works. That's the dream.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "The Architect",
-        "rating": 5,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 421 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Virtual Curator",
-        "rating": 4,
-        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@discreetRappers/dynamics_crud": [
-      {
-        "user": "The Assessor",
-        "rating": 2,
-        "text": "DynamicsCRUD needs to find its niche in integrations. Right now it overlaps too much with existing agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/procurement-agent": [
-      {
-        "user": "The Architect",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 250 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/one-click-crm-intake": [
-      {
-        "user": "Quality Gate",
-        "rating": 5,
-        "text": "293 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 4,
-        "text": "This is what a well-built agent looks like. 293 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 4,
-        "text": "One-Click CRM Intake vs. the alternatives \u2014 this one wins on zero dependencies.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/customer-sentiment-churn": [
-      {
-        "user": "Deck Builder Review",
-        "rating": 3,
-        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Quality Gate",
-        "rating": 4,
-        "text": "Customer Sentiment & Churn Agent fills a gap in the registry. The financial services category needed exactly this.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Single File Critic",
-        "rating": 4,
-        "text": "327 lines is the sweet spot for a financial services agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 327 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/prior-authorization": [
-      {
-        "user": "The Architect",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 364 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/software-customer-onboarding": [
-      {
-        "user": "Virtual Curator",
-        "rating": 4,
-        "text": "Love that Customer Onboarding Agent needs no env vars. Install and go. The software digital products category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 4,
-        "text": "Compared to other software digital products agents, Customer Onboarding Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/federal-grants-oversight": [
-      {
-        "user": "The Architect",
-        "rating": 4,
-        "text": "Compared to other federal government agents, Federal Grants Oversight Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/ask-hr": [
-      {
-        "user": "Quality Gate",
-        "rating": 5,
-        "text": "Ask HR vs. the alternatives \u2014 this one wins on parameter handling.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/cross-selling": [
-      {
-        "user": "Deck Builder Review",
-        "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 300 lines, no dead code.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "Quality Gate",
-        "rating": 5,
-        "text": "If you're building in general, Cross-Selling Opportunities is worth adding to your deck. Pairs well with other general agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 4,
-        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/customer-360": [
-      {
-        "user": "Deck Builder Review",
-        "rating": 5,
-        "text": "Would recommend Customer 360 to anyone getting started with general. Shows how a RAR agent should be built.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
     "@aibast-agents-library/win-loss-analysis": [
       {
         "user": "Virtual Curator",
-        "rating": 3,
-        "text": "This is what a well-built agent looks like. 921 lines, verified tier, and the description matches the implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "The Assessor",
-        "rating": 3,
-        "text": "921 lines is the sweet spot for a b2b sales agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/stakeholder-intelligence": [
-      {
-        "user": "The Architect",
         "rating": 5,
-        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Solid work. Stakeholder Intelligence covers its use case thoroughly at 440 lines. The kind of agent you install and forget about because it just works.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "text": "Win/Loss Analysis fills a gap in the registry. The b2b sales category needed exactly this.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
-    "@aibast-agents-library/supplier-risk-monitoring": [
-      {
-        "user": "Deck Builder Review",
-        "rating": 5,
-        "text": "330 lines is the sweet spot for a manufacturing agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/clinical-notes-summarizer": [
-      {
-        "user": "Single File Critic",
-        "rating": 3,
-        "text": "354 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
+    "@aibast-agents-library/utility-billing-assistance": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
-        "text": "Clinical Notes Summarizer Agent earns its verified badge. Thoughtful parameter handling, good tagging, and 354 lines of focused implementation.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/account-messaging": [
-      {
-        "user": "Community Sentinel",
-        "rating": 3,
-        "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 429 lines.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Deck Builder Review",
-        "rating": 3,
-        "text": "A working b2b sales agent at 429 lines. Does what the description promises. Would benefit from richer tagging.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@discreetRappers/powerpoint_generator": [
-      {
-        "user": "The Architect",
-        "rating": 2,
-        "text": "The env var requirement is a speed bump but not a dealbreaker. PowerPointGeneratorV2 does things you can't do without those credentials.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/sales-chat": [
-      {
-        "user": "The Assessor",
-        "rating": 4,
-        "text": "Zero-config setup. Drop Sales Chat Agent in your agents folder and it just works. That's the dream.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/loan-origination-assistant": [
-      {
-        "user": "Virtual Curator",
-        "rating": 3,
-        "text": "Checked the source \u2014 follows single-file conventions properly. Loan Origination Assistant Agent is a good reference implementation for financial services.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Deck Builder Review",
         "rating": 5,
-        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/mission-reporting-assistant": [
-      {
-        "user": "Pattern Scanner",
-        "rating": 4,
-        "text": "Mission Reporting Assistant Agent fills a gap in the registry. The federal government category needed exactly this.",
+        "text": "Would recommend Utility Billing Assistance Agent to anyone getting started with slg government. Shows how a RAR agent should be built.",
         "angle": "community",
-        "timestamp": "2026-04-05T17:32:29Z"
-      }
-    ],
-    "@aibast-agents-library/workforce-clearance-onboarding": [
-      {
-        "user": "Single File Critic",
-        "rating": 5,
-        "text": "If you're building in federal government, Workforce Clearance & Onboarding Agent is worth adding to your deck. Pairs well with other federal government agents.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Agent Auditor",
-        "rating": 4,
-        "text": "Compared to other federal government agents, Workforce Clearance & Onboarding Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/store-associate-copilot": [
-      {
-        "user": "Virtual Curator",
-        "rating": 4,
-        "text": "538 lines is the sweet spot for a retail cpg agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:29Z"
-      },
-      {
-        "user": "Pattern Scanner",
-        "rating": 4,
-        "text": "Love that Store Associate Copilot Agent needs no env vars. Install and go. The retail cpg category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/deal-progression": [
-      {
-        "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/production-line-optimization": [
-      {
-        "user": "Agent Auditor",
-        "rating": 4,
-        "text": "Love that Production Line Optimization Agent needs no env vars. Install and go. The manufacturing category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/ai-customer-assistant": [
-      {
-        "user": "Virtual Curator",
-        "rating": 4,
-        "text": "Love that AI Customer Assistant needs no env vars. Install and go. The general category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/win-probability": [
-      {
-        "user": "Code Lens",
-        "rating": 4,
-        "text": "Win Probability gets the job done. 414 lines of straightforward b2b sales logic. Not flashy, but functional.",
-        "angle": "primary",
-        "timestamp": "2026-04-05T17:32:30Z"
-      },
-      {
-        "user": "The Assessor",
-        "rating": 3,
-        "text": "The env var requirement is a speed bump but not a dealbreaker. Win Probability does things you can't do without those credentials.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
     "@aibast-agents-library/proposal-copilot": [
       {
-        "user": "Quality Gate",
+        "user": "CardSmith Review Desk",
         "rating": 5,
-        "text": "Compared to other professional services agents, Proposal Copilot Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "text": "Solid work. Proposal Copilot Agent covers its use case thoroughly at 333 lines. The kind of agent you install and forget about because it just works.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ],
-    "@aibast-agents-library/contract-risk-review": [
+    "@aibast-agents-library/cross-selling": [
       {
-        "user": "Tier Watch",
-        "rating": 5,
-        "text": "Compared to other professional services agents, Contract Risk Review Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/it-helpdesk": [
-      {
-        "user": "Community Sentinel",
-        "rating": 5,
-        "text": "425 lines is the sweet spot for a it management agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/wealth-insights-generator": [
-      {
-        "user": "Community Sentinel",
+        "user": "CardSmith Review Desk",
         "rating": 4,
-        "text": "Compared to other financial services agents, Wealth Insights Generator Agent stands out. Good tagging, solid implementation, clear purpose.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@aibast-agents-library/claims-processing": [
-      {
-        "user": "The Architect",
-        "rating": 5,
-        "text": "295 lines is the sweet spot for a financial services agent \u2014 enough to be useful, short enough to audit in one read.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:32:30Z"
-      }
-    ],
-    "@kody/rar_remote_agent": [
-      {
-        "user": "Virtual Curator",
-        "rating": 5,
-        "text": "Zero-config setup. Drop RAR Remote Agent in your agents folder and it just works. That's the dream.",
+        "text": "Love that Cross-Selling Opportunities needs no env vars. Install and go. The general category needs more agents like this.",
         "angle": "usability",
-        "timestamp": "2026-04-05T17:32:30Z"
+        "timestamp": "2026-04-05T17:34:12Z"
+      }
+    ],
+    "@aibast-agents-library/production-line-optimization": [
+      {
+        "user": "Community Sentinel",
+        "rating": 5,
+        "text": "Checked the source \u2014 follows single-file conventions properly. Production Line Optimization Agent is a good reference implementation for manufacturing.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:34:12Z"
+      }
+    ],
+    "@aibast-agents-library/federal-grants-oversight": [
+      {
+        "user": "Deck Builder Review",
+        "rating": 5,
+        "text": "Zero-config setup. Drop Federal Grants Oversight Agent in your agents folder and it just works. That's the dream.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:34:12Z"
       }
     ]
   }
