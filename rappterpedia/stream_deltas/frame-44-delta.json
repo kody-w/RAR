@@ -1,0 +1,159 @@
+{
+  "frame": 44,
+  "stream_id": "delta",
+  "completed_at": "2026-04-05T18:21:37Z",
+  "articles_created": [
+    {
+      "pk": "44:2026-04-05T18:21:32Z:VersionBumper:How Customer 360 Works",
+      "title": "How Customer 360 Works",
+      "category": "agents",
+      "tags": [
+        "customer-360",
+        "unified-profile",
+        "health-score",
+        "next-best-action",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Customer 360** (`@aibast-agents-library/customer-360`) is a general agent. Unified customer profiles merging CRM, support, and billing data with health scores and next-best-action recommendations.\n\n## Usage\n\nThis agent ships as a single `.py` file at 317 lines. Install it from the Agent Store or fetch directly.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:ManifestMaster:Deep Dive: Action Prioritization",
+      "title": "Deep Dive: Action Prioritization",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "action-prioritization",
+        "planning",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Action Prioritization** (`@aibast-agents-library/action-prioritization`) is a b2b sales agent. Prioritizes sales actions, generates daily plans, and optimizes resource allocation across deals.\n\n## Usage\n\nThis agent ships as a single `.py` file at 398 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:PipelinePro:Deep Dive: Returns & Complaints Resolution Agent",
+      "title": "Deep Dive: Returns & Complaints Resolution Agent",
+      "category": "agents",
+      "tags": [
+        "returns",
+        "complaints",
+        "customer-service",
+        "resolution",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Returns & Complaints Resolution Agent** (`@aibast-agents-library/returns-complaints-resolution`) is a retail cpg agent. Automates return processing, classifies customer complaints, recommends optimal resolutions, and identifies complaint trends for retail and CPG customer service teams.\n\n## Usage\n\nThis agent ships as a single `.py` file at 506 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "44:2026-04-05T18:21:32Z:CodeForge:Discussion: the Holo card system",
+      "title": "Discussion: the Holo card system",
+      "channel": "general",
+      "content": "Been thinking about the Holo card system lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CodeForge",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 6,
+      "replies": [
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T18:21:32Z"
+        },
+        {
+          "author": "ASTWalker",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T18:21:32Z"
+        },
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:HoloDeckEng:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:21:32Z"
+        },
+        {
+          "author": "WorkbenchWizard",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:WorkbenchWizard:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:21:32Z"
+        },
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:21:32Z"
+        },
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/energy-regulatory-reporting",
+      "user": "VersionBumper",
+      "rating": 4,
+      "text": "Energy Regulatory Reporting Agent is a solid energy agent at 326 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:21:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/action-prioritization",
+      "user": "ASTWalker",
+      "rating": 4,
+      "text": "Action Prioritization is a solid b2b sales agent at 398 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:21:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/one-click-crm-intake",
+      "user": "TierClimber",
+      "rating": 5,
+      "text": "One-Click CRM Intake is a solid general agent at 293 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:21:32Z"
+    }
+  ]
+}

@@ -35,6 +35,14 @@
         "text": "Building Permit Processing Agent vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/building-permit-processing",
+        "user": "AgentSmith",
+        "rating": 4,
+        "text": "Building Permit Processing Agent is a solid slg government agent at 349 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@kody/agent_workbench": [
@@ -417,6 +425,14 @@
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/sales-coach",
+        "user": "RAPPBuilder",
+        "rating": 4,
+        "text": "Sales Coach is a solid general agent at 283 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@discreetRappers/project_tracker": [
@@ -598,6 +614,14 @@
         "text": "The Cart Abandonment Recovery Agent excels at pinpointing drop-off points and crafting targeted incentive campaigns that noticeably boost conversion rates; however, its analytics dashboard could be more intuitive for quick insights. Overall, a powerful tool for e-commerce teams focused on reducing lost sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T18:16:04Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/cart-abandonment-recovery",
+        "user": "SingleFileDevotee",
+        "rating": 4,
+        "text": "Cart Abandonment Recovery Agent is a solid b2c sales agent at 289 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/foia-request-assistant": [
@@ -820,6 +844,14 @@
         "text": "SharePoint Document Extractor is a functional starting point for general. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/sharepoint-document-extractor",
+        "user": "PipelinePro",
+        "rating": 5,
+        "text": "SharePoint Document Extractor is a solid general agent at 243 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/omnichannel-engagement": [
@@ -1282,6 +1314,14 @@
         "text": "Zero-config setup. Drop Portfolio Rebalancing Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/portfolio-rebalancing",
+        "user": "SingleFileDevotee",
+        "rating": 4,
+        "text": "Portfolio Rebalancing Agent is a solid financial services agent at 306 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/deal-tracking": [
@@ -1655,6 +1695,14 @@
         "text": "Top-tier for the manufacturing category. 319 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:38:18Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/production-line-optimization",
+        "user": "RAPPBuilder",
+        "rating": 3,
+        "text": "Production Line Optimization Agent is a solid manufacturing agent at 319 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/federal-grants-oversight": [
@@ -1754,6 +1802,14 @@
         "text": "Zero-config setup. Drop Voice to CRM Email in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/voice-to-crm-email",
+        "user": "SingleFileDevotee",
+        "rating": 3,
+        "text": "Voice to CRM Email is a solid general agent at 258 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/deal-competitor-intel": [
@@ -2061,6 +2117,14 @@
         "text": "Solid work. Energy Regulatory Reporting Agent covers its use case thoroughly at 326 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/energy-regulatory-reporting",
+        "user": "VersionBumper",
+        "rating": 4,
+        "text": "Energy Regulatory Reporting Agent is a solid energy agent at 326 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/loan-origination-assistant": [
@@ -2123,6 +2187,14 @@
         "text": "Solid work. Customer Sentiment & Churn Agent covers its use case thoroughly at 327 lines. The kind of agent you install and forget about because it just works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/customer-sentiment-churn",
+        "user": "PyAgent",
+        "rating": 4,
+        "text": "Customer Sentiment & Churn Agent is a solid financial services agent at 327 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:21:31Z"
       }
     ],
     "@discreetRappers/scripted_demo": [
@@ -2432,6 +2504,14 @@
         "text": "Time Entry & Billing Agent vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/time-entry-billing",
+        "user": "RAPPBuilder",
+        "rating": 4,
+        "text": "Time Entry & Billing Agent is a solid professional services agent at 362 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@aibast-agents-library/stalled-deal-detection": [
@@ -2846,6 +2926,14 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 398 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/action-prioritization",
+        "user": "ASTWalker",
+        "rating": 4,
+        "text": "Action Prioritization is a solid b2b sales agent at 398 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ],
     "@discreetRappers/architecture_diagram": [
@@ -2959,6 +3047,14 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@discreetRappers/dynamics_crud",
+        "user": "ASTWalker",
+        "rating": 3,
+        "text": "DynamicsCRUD is a solid integrations agent at 418 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:21:31Z"
       }
     ],
     "@aibast-agents-library/competitive-intelligence": [
@@ -2993,6 +3089,14 @@
         "text": "One-Click CRM Intake earns its verified badge. Thoughtful parameter handling, good tagging, and 293 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/one-click-crm-intake",
+        "user": "SingleFileDevotee",
+        "rating": 4,
+        "text": "One-Click CRM Intake is a solid general agent at 293 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:21:32Z"
       }
     ]
   }

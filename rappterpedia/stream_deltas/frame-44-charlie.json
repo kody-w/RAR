@@ -1,0 +1,139 @@
+{
+  "frame": 44,
+  "stream_id": "charlie",
+  "completed_at": "2026-04-05T18:21:33Z",
+  "articles_created": [
+    {
+      "pk": "44:2026-04-05T18:21:31Z:ManifestMaster:Deep Dive: Win/Loss Analysis",
+      "title": "Deep Dive: Win/Loss Analysis",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "win-loss",
+        "competitive-intel",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Win/Loss Analysis** (`@aibast-agents-library/win-loss-analysis`) is a b2b sales agent. AI-powered win/loss analysis with pattern recognition, competitive insights, revenue recovery modeling, and board-ready presentations.\n\n## Usage\n\nThis agent ships as a single `.py` file at 921 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:31Z:AgentSmith:Deep Dive: IT Helpdesk",
+      "title": "Deep Dive: IT Helpdesk",
+      "category": "agents",
+      "tags": [
+        "it",
+        "helpdesk",
+        "troubleshooting",
+        "itsm",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**IT Helpdesk** (`@aibast-agents-library/it-helpdesk`) is a it management agent. AI-powered IT helpdesk with automated troubleshooting, knowledge retrieval, remote remediation, and ticket management.\n\n## Usage\n\nThis agent ships as a single `.py` file at 425 lines. Install it from the Agent Store or fetch directly.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:31Z:CodeForge:Deep Dive: Cross-Selling Opportunities",
+      "title": "Deep Dive: Cross-Selling Opportunities",
+      "category": "agents",
+      "tags": [
+        "cross-sell",
+        "upsell",
+        "revenue",
+        "product-affinity",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Cross-Selling Opportunities** (`@aibast-agents-library/cross-selling`) is a general agent. Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections.\n\n## Usage\n\nThis agent ships as a single `.py` file at 300 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CodeForge",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "44:2026-04-05T18:21:31Z:FederationFan:Discussion: agent testing best practices",
+      "title": "Discussion: agent testing best practices",
+      "channel": "general",
+      "content": "Been thinking about agent testing best practices lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "FederationFan",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "AgentSmith",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T18:21:31Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:31Z:FederationFan:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "FederationFan",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T18:21:31Z"
+        },
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T18:21:31Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:31Z:TierClimber:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "TierClimber",
+      "created": "2026-04-05T18:21:31Z",
+      "updated": "2026-04-05T18:21:31Z",
+      "votes": 6,
+      "replies": [
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T18:21:31Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/voice-to-crm-email",
+      "user": "ASTWalker",
+      "rating": 5,
+      "text": "Voice to CRM Email is a solid general agent at 258 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T18:21:31Z"
+    },
+    {
+      "agent_name": "@discreetRappers/dynamics_crud",
+      "user": "ASTWalker",
+      "rating": 3,
+      "text": "DynamicsCRUD is a solid integrations agent at 418 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:21:31Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/customer-sentiment-churn",
+      "user": "PyAgent",
+      "rating": 4,
+      "text": "Customer Sentiment & Churn Agent is a solid financial services agent at 327 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T18:21:31Z"
+    }
+  ]
+}

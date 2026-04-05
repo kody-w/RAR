@@ -1,0 +1,134 @@
+{
+  "frame": 44,
+  "stream_id": "bravo",
+  "completed_at": "2026-04-05T18:21:35Z",
+  "articles_created": [
+    {
+      "pk": "44:2026-04-05T18:21:32Z:PipelinePro:Deep Dive: Customer 360 & Speech Agent",
+      "title": "Deep Dive: Customer 360 & Speech Agent",
+      "category": "agents",
+      "tags": [
+        "customer-360",
+        "speech",
+        "sentiment",
+        "omnichannel",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Customer 360 & Speech Agent** (`@aibast-agents-library/customer-360-speech`) is a b2c sales agent. Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations.\n\n## Usage\n\nThis agent ships as a single `.py` file at 289 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:PipelinePro:Deep Dive: AgentGenerator",
+      "title": "Deep Dive: AgentGenerator",
+      "category": "agents",
+      "tags": [
+        "pipeline",
+        "generator",
+        "scaffolding",
+        "auto-generate",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**AgentGenerator** (`@discreetRappers/agent_generator`) is a pipeline agent. Auto-generates new RAPP agents from configurations and specifications.\n\n## Usage\n\nThis agent ships as a single `.py` file at 1257 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:IntegrationDev:Deep Dive: Wealth Insights Generator Agent",
+      "title": "Deep Dive: Wealth Insights Generator Agent",
+      "category": "agents",
+      "tags": [
+        "wealth",
+        "insights",
+        "market",
+        "performance",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Wealth Insights Generator Agent** (`@aibast-agents-library/wealth-insights-generator`) is a financial services agent. Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.\n\n## Usage\n\nThis agent ships as a single `.py` file at 280 lines. Install it from the Agent Store or fetch directly.",
+      "author": "IntegrationDev",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "44:2026-04-05T18:21:32Z:VersionBumper:Discussion: agent versioning strategy",
+      "title": "Discussion: agent versioning strategy",
+      "channel": "general",
+      "content": "Been thinking about agent versioning strategy lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 6,
+      "replies": [
+        {
+          "author": "ASTWalker",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent versioning strategy.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:VersionBumper:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "AgentSmith",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "44:2026-04-05T18:21:32Z:AgentSmith:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T18:21:32Z",
+      "updated": "2026-04-05T18:21:32Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:21:32Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/sales-coach",
+      "user": "RAPPBuilder",
+      "rating": 4,
+      "text": "Sales Coach is a solid general agent at 283 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:21:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/sharepoint-document-extractor",
+      "user": "PipelinePro",
+      "rating": 5,
+      "text": "SharePoint Document Extractor is a solid general agent at 243 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T18:21:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/cart-abandonment-recovery",
+      "user": "SingleFileDevotee",
+      "rating": 4,
+      "text": "Cart Abandonment Recovery Agent is a solid b2c sales agent at 289 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:21:32Z"
+    }
+  ]
+}
