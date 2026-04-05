@@ -1951,7 +1951,7 @@
 
   @media (max-width: 768px) {
     header { padding: 10px 16px; flex-wrap: wrap; gap: 10px; }
-    nav { width: 100%; justify-content: center; overflow-x: auto; }
+    nav { width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .nav-btn { padding: 6px 10px; font-size: .8rem; white-space: nowrap; }
     .container { padding: 16px; }
     .hero { padding: 32px 16px 24px; }
@@ -1960,6 +1960,39 @@
     .toolbar { flex-direction: column; }
     .filter-pills { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
     .cart-sidebar { width: 100%; right: -100%; }
+    /* Collector Mode — mobile */
+    .showntell-card { width: min(85vw, var(--st-w)) !important; }
+    .showntell-label { font-size: .5rem; letter-spacing: 1.5px; padding: 0 16px; text-align: center; white-space: normal; }
+    .showntell-toolbar { bottom: 16px; padding: 5px 6px; gap: 4px; width: calc(100% - 32px); justify-content: center; }
+    .showntell-toolbar button { padding: 10px 12px; font-size: .75rem; flex: 1; text-align: center; min-height: 44px; }
+    .showntell-toolbar .st-sep { display: none; }
+    .showntell-btc { top: 48px; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+    .showntell-btc .stb-btc { font-size: 1rem; }
+    .showntell-chain { top: 74px; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+    .showntell-chain .stc-transfer { min-height: 44px; padding: 8px 14px; }
+    .showntell-info { bottom: 68px; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
+    .showntell-info .si-val { font-size: .7rem; }
+    /* Wallet — mobile */
+    .wallet-login-card { padding: 24px 16px; }
+    .wallet-summary { grid-template-columns: repeat(2, 1fr); }
+    .wallet-cards-grid { grid-template-columns: 1fr; }
+    /* Cards grid — mobile */
+    .cards-grid { gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .nav-btn { padding: 5px 8px; font-size: .72rem; }
+    .showntell-card { width: 90vw !important; max-height: calc(100vh - 180px); }
+    .showntell-toolbar { flex-wrap: wrap; }
+    .showntell-toolbar button { flex: 0 0 auto; padding: 10px 10px; font-size: .7rem; }
+    .showntell-btc .stb-btc { font-size: .9rem; }
+    .showntell-btc .stb-badge { font-size: .48rem; }
+    .showntell-info { gap: 8px; }
+    .showntell-info .si-chip { gap: 1px; }
+    .showntell-info .si-val { font-size: .65rem; }
+    .showntell-info .si-lbl { font-size: .45rem; }
+    .wallet-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .wallet-summary .ws-val { font-size: 1.1rem; }
+    .hero h1 { font-size: 1.3rem; }
   }
 
   /* ─── Slab Viewer ────────────────────────────────── */
@@ -7351,18 +7384,19 @@ async function showAndTell(name) {
   // Tilt + spotlight + dynamic shadow handler
   const holoEl = clone.querySelector('.agent-card-holo');
   overlay.addEventListener('mousemove', e => {
-    const cx = e.clientX / window.innerWidth;
-    const cy = e.clientY / window.innerHeight;
+    tiltHandler(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+  });
+  // ── Touch support — mobile card interaction ──
+  // Tilt by dragging on the card, swipe left/right to browse, tap to flip
+  let _touchStartX = 0, _touchStartY = 0, _touchMoved = false;
+  const tiltHandler = (cx, cy) => {
     const tiltX = ((0.5 - cy) * 20).toFixed(1);
     const tiltY = ((cx - 0.5) * 20).toFixed(1);
     const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
-    // Card tilt
     clone.style.setProperty('--tilt-x', tiltX + 'deg');
     clone.style.setProperty('--tilt-y', tiltY + 'deg');
-    // Spotlight follows cursor
     overlay.style.setProperty('--spot-x', (cx * 100).toFixed(0) + '%');
     overlay.style.setProperty('--spot-y', (cy * 100).toFixed(0) + '%');
-    // Dynamic shadow — opposite to tilt direction
     clone.style.setProperty('--shadow-x', (-(cx - 0.5) * 30).toFixed(0) + 'px');
     clone.style.setProperty('--shadow-y', (12 + (cy - 0.5) * 20).toFixed(0) + 'px');
     if (holoEl) {
@@ -7376,7 +7410,47 @@ async function showAndTell(name) {
       const shimmer = holoEl.querySelector('.holo-shimmer-track');
       if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
     }
+  };
+
+  overlay.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    _touchStartX = t.clientX;
+    _touchStartY = t.clientY;
+    _touchMoved = false;
+  }, { passive: true });
+
+  overlay.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    const cx = t.clientX / window.innerWidth;
+    const cy = t.clientY / window.innerHeight;
+    tiltHandler(cx, cy);
+    if (Math.abs(t.clientX - _touchStartX) > 10 || Math.abs(t.clientY - _touchStartY) > 10) _touchMoved = true;
+  }, { passive: true });
+
+  overlay.addEventListener('touchend', e => {
+    if (_touchMoved) {
+      const dx = e.changedTouches[0].clientX - _touchStartX;
+      // Swipe left/right to navigate cards
+      if (Math.abs(dx) > 60) {
+        showAndTellNav(dx < 0 ? 1 : -1);
+        return;
+      }
+    }
+    // Reset tilt on release
+    clone.style.setProperty('--tilt-x', '0deg');
+    clone.style.setProperty('--tilt-y', '0deg');
+    clone.style.setProperty('--shadow-x', '0px');
+    clone.style.setProperty('--shadow-y', '12px');
+  }, { passive: true });
+
+  // Tap card to flip (mobile — single tap, not double)
+  clone.addEventListener('touchend', e => {
+    if (!_touchMoved) {
+      e.preventDefault();
+      clone.classList.toggle('flipped');
+    }
   });
+
   overlay.addEventListener('click', e => { if (e.target === overlay) closeShowAndTell(); });
   clone.addEventListener('dblclick', e => { e.stopPropagation(); closeShowAndTell(); });
   overlay._keyHandler = e => {
@@ -7707,6 +7781,38 @@ function renderCards() {
     }
   });
   document.addEventListener('mouseleave', () => { if (activeCard) resetTilt(activeCard); activeCard = null; }, true);
+
+  // Touch support — tilt cards on mobile by touching and dragging
+  document.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    const wrap = document.elementFromPoint(t.clientX, t.clientY)?.closest('.agent-card-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('flipped')) return;
+    activeCard = wrap;
+    const rect = wrap.getBoundingClientRect();
+    const x = (t.clientX - rect.left) / rect.width;
+    const y = (t.clientY - rect.top) / rect.height;
+    const tiltX = ((0.5 - y) * 20).toFixed(1);
+    const tiltY = ((x - 0.5) * 20).toFixed(1);
+    const angle = (Math.atan2(y - 0.5, x - 0.5) * 180 / Math.PI).toFixed(0);
+    wrap.style.setProperty('--tilt-x', tiltX + 'deg');
+    wrap.style.setProperty('--tilt-y', tiltY + 'deg');
+    wrap.style.transition = 'transform .08s ease-out';
+    const holo = wrap.querySelector('.agent-card-holo');
+    if (holo) {
+      const mxPct = (x * 100).toFixed(0) + '%';
+      const myPct = (y * 100).toFixed(0) + '%';
+      holo.style.setProperty('--mx', mxPct);
+      holo.style.setProperty('--my', myPct);
+      holo.style.setProperty('--px', x.toFixed(3));
+      holo.style.setProperty('--py', y.toFixed(3));
+      holo.style.setProperty('--angle', angle + 'deg');
+      const shimmer = holo.querySelector('.holo-shimmer-track');
+      if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
+    }
+  }, { passive: true });
+  document.addEventListener('touchend', () => { if (activeCard) resetTilt(activeCard); activeCard = null; }, { passive: true });
+
   function resetTilt(wrap) {
     wrap.style.setProperty('--tilt-x', '0deg');
     wrap.style.setProperty('--tilt-y', '0deg');
