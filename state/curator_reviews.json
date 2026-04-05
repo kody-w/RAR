@@ -1,0 +1,682 @@
+{
+  "agents": {
+    "@aibast-agents-library/building-permit-processing": [
+      {
+        "user": "Agent Auditor",
+        "rating": 3,
+        "text": "349 lines is the sweet spot for a slg government agent \u2014 enough to be useful, short enough to audit in one read.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Agent Auditor",
+        "rating": 4,
+        "text": "Solid work. Building Permit Processing Agent covers its use case thoroughly at 349 lines. The kind of agent you install and forget about because it just works.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@kody/agent_workbench": [
+      {
+        "user": "Quality Gate",
+        "rating": 3,
+        "text": "Checked the source \u2014 follows single-file conventions properly. Agent Workbench is a good reference implementation for devtools.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/inventory-visibility": [
+      {
+        "user": "Code Lens",
+        "rating": 4,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/slg-grants-management": [
+      {
+        "user": "Community Sentinel",
+        "rating": 3,
+        "text": "Read through the source. Clean perform() method, sensible parameter handling. 307 lines, no dead code.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/resource-utilization": [
+      {
+        "user": "The Assessor",
+        "rating": 4,
+        "text": "335 lines is the sweet spot for a professional services agent \u2014 enough to be useful, short enough to audit in one read.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/customer-360-speech": [
+      {
+        "user": "Agent Auditor",
+        "rating": 4,
+        "text": "Solid work. Customer 360 & Speech Agent covers its use case thoroughly at 289 lines. The kind of agent you install and forget about because it just works.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/voice-to-crm-d365": [
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 3,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Tier Watch",
+        "rating": 5,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/fs-customer-onboarding": [
+      {
+        "user": "Virtual Curator",
+        "rating": 4,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/sales-simulation": [
+      {
+        "user": "Quality Gate",
+        "rating": 3,
+        "text": "Source is clean enough. 306 lines, follows the BasicAgent pattern correctly. Room for polish.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Agent Auditor",
+        "rating": 2,
+        "text": "The env var requirement is a speed bump but not a dealbreaker. Sales Simulation does things you can't do without those credentials.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/triage-bot": [
+      {
+        "user": "The Assessor",
+        "rating": 2,
+        "text": "Triage Bot holds its own against other general agents. 253 lines, middle of the pack on complexity.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 3,
+        "text": "Decent addition to the general lineup. A few more iterations and this becomes a go-to.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/deal-health-score": [
+      {
+        "user": "The Assessor",
+        "rating": 3,
+        "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/care-gap-closure": [
+      {
+        "user": "Agent Auditor",
+        "rating": 4,
+        "text": "Compared to other healthcare agents, Care Gap Closure Agent stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/voice-to-crm-servicenow": [
+      {
+        "user": "The Architect",
+        "rating": 4,
+        "text": "Checked the source \u2014 follows single-file conventions properly. Voice to CRM (ServiceNow) is a good reference implementation for general.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Quality Gate",
+        "rating": 4,
+        "text": "Love that Voice to CRM (ServiceNow) needs no env vars. Install and go. The general category needs more agents like this.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/activity-gap": [
+      {
+        "user": "The Assessor",
+        "rating": 5,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "The Assessor",
+        "rating": 3,
+        "text": "Compared to other b2b sales agents, Activity Gap Analyzer stands out. Good tagging, solid implementation, clear purpose.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/account-intelligence-orchestrator": [
+      {
+        "user": "Tier Watch",
+        "rating": 3,
+        "text": "Reviewed Account Intelligence Orchestrator: 457 lines, verified tier. Core logic works. More tags and a meatier description would help.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Registry Reviewer",
+        "rating": 3,
+        "text": "Account Intelligence Orchestrator holds its own against other b2b sales agents. 457 lines, middle of the pack on complexity.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/email-drafting": [
+      {
+        "user": "Deck Builder Review",
+        "rating": 4,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/sales-coach": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 4,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/project_tracker": [
+      {
+        "user": "The Assessor",
+        "rating": 1,
+        "text": "Minimal pipeline agent at 894 lines. Ships the idea but not the execution yet.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/pipeline-velocity": [
+      {
+        "user": "Virtual Curator",
+        "rating": 3,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Quality Gate",
+        "rating": 3,
+        "text": "Solid work. Pipeline Velocity covers its use case thoroughly at 380 lines. The kind of agent you install and forget about because it just works.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/agent_generator": [
+      {
+        "user": "Agent Auditor",
+        "rating": 2,
+        "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Agent Auditor",
+        "rating": 1,
+        "text": "Minimal pipeline agent at 1257 lines. Ships the idea but not the execution yet.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/sales-qualification": [
+      {
+        "user": "Community Sentinel",
+        "rating": 3,
+        "text": "The implementation is functional at 570 lines. Some methods could be tighter but nothing egregious.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 3,
+        "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/returns-complaints-resolution": [
+      {
+        "user": "Deck Builder Review",
+        "rating": 3,
+        "text": "Zero-config setup. Drop Returns & Complaints Resolution Agent in your agents folder and it just works. That's the dream.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Quality Gate",
+        "rating": 5,
+        "text": "Solid work. Returns & Complaints Resolution Agent covers its use case thoroughly at 506 lines. The kind of agent you install and forget about because it just works.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/cart-abandonment-recovery": [
+      {
+        "user": "The Architect",
+        "rating": 3,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Code Lens",
+        "rating": 3,
+        "text": "Zero-config setup. Drop Cart Abandonment Recovery Agent in your agents folder and it just works. That's the dream.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/foia-request-assistant": [
+      {
+        "user": "Code Lens",
+        "rating": 3,
+        "text": "This is what a well-built agent looks like. 308 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "The Assessor",
+        "rating": 4,
+        "text": "Love that FOIA Request Assistant Agent needs no env vars. Install and go. The slg government category needs more agents like this.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Tier Watch",
+        "rating": 4,
+        "text": "If you're building in slg government, FOIA Request Assistant Agent is worth adding to your deck. Pairs well with other slg government agents.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@kody/rappterpedia-agent": [
+      {
+        "user": "Tier Watch",
+        "rating": 3,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "The Architect",
+        "rating": 5,
+        "text": "540 lines is the sweet spot for a productivity agent \u2014 enough to be useful, short enough to audit in one read.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/staff-credentialing": [
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 4,
+        "text": "Love that Staff Credentialing Agent needs no env vars. Install and go. The healthcare category needs more agents like this.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/personalized-marketing": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 5,
+        "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/sharepoint_contract_analysis": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 2,
+        "text": "ContractAnalysis is early stage \u2014 2468 lines, community tier. The bones are there but needs more flesh.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/account-intelligence": [
+      {
+        "user": "Agent Auditor",
+        "rating": 3,
+        "text": "This is what a well-built agent looks like. 456 lines, verified tier, and the description matches the implementation.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/deal-stakeholder-engagement": [
+      {
+        "user": "The Architect",
+        "rating": 4,
+        "text": "Stakeholder Engagement is one of the stronger b2b sales agents in the registry. 398 lines, clean structure, and it does what it says.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Deck Builder Review",
+        "rating": 5,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 5,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@borg/cardsmith_agent": [
+      {
+        "user": "Quality Gate",
+        "rating": 1,
+        "text": "Getting CardSmith running requires some effort. The env vars aren't well-documented in the description.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/sharepoint-document-extractor": [
+      {
+        "user": "Community Sentinel",
+        "rating": 2,
+        "text": "SharePoint Document Extractor holds its own against other general agents. 243 lines, middle of the pack on complexity.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/omnichannel-engagement": [
+      {
+        "user": "Agent Auditor",
+        "rating": 3,
+        "text": "Omnichannel Engagement Agent is one of the stronger b2c sales agents in the registry. 273 lines, clean structure, and it does what it says.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/speech-to-crm": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 2,
+        "text": "Mid-range general agent. Does what you'd expect. Nothing surprising, nothing missing.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 4,
+        "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 265 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/email_drafting": [
+      {
+        "user": "The Assessor",
+        "rating": 1,
+        "text": "Minimal integrations agent at 149 lines. Ships the idea but not the execution yet.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Virtual Curator",
+        "rating": 3,
+        "text": "At 149 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/license-renewal-expansion": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 4,
+        "text": "Top-tier for the software digital products category. 351 lines puts it on the thorough side without being bloated.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/find-accurate-models": [
+      {
+        "user": "Pattern Scanner",
+        "rating": 4,
+        "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 285 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/field-service-dispatch": [
+      {
+        "user": "Code Lens",
+        "rating": 3,
+        "text": "If you're building in energy, Field Service Dispatch Agent is worth adding to your deck. Pairs well with other energy agents.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/support-ticket-resolution": [
+      {
+        "user": "Code Lens",
+        "rating": 3,
+        "text": "The implementation is functional at 324 lines. Some methods could be tighter but nothing egregious.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/product-reference": [
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 4,
+        "text": "The env var requirement is a speed bump but not a dealbreaker. Product Reference does things you can't do without those credentials.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/citizen-service-request": [
+      {
+        "user": "Quality Gate",
+        "rating": 3,
+        "text": "If you're building in slg government, Citizen Service Request Agent is worth adding to your deck. Pairs well with other slg government agents.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "Code Lens",
+        "rating": 5,
+        "text": "327 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/permit-license-management": [
+      {
+        "user": "The Assessor",
+        "rating": 5,
+        "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "user": "The Assessor",
+        "rating": 5,
+        "text": "Permit & License Management Agent is one of the stronger energy agents in the registry. 341 lines, clean structure, and it does what it says.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/rapp_pipeline": [
+      {
+        "user": "Code Lens",
+        "rating": 2,
+        "text": "RAPP reads like a first draft. 2984 lines, basic structure in place. Would love to see a v1.1.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/next-best-action": [
+      {
+        "user": "Tier Watch",
+        "rating": 2,
+        "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 430 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/underwriting-support": [
+      {
+        "user": "Code Lens",
+        "rating": 3,
+        "text": "Would recommend Underwriting Support Agent to anyone getting started with financial services. Shows how a RAR agent should be built.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/sales_assistant": [
+      {
+        "user": "Deck Builder Review",
+        "rating": 2,
+        "text": "Straightforward integrations agent. 631 lines, does its thing. Single-file principle well-executed here.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/emission-tracking": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 3,
+        "text": "328 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@kody/context_memory": [
+      {
+        "user": "Quality Gate",
+        "rating": 2,
+        "text": "At 183 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/patient-intake": [
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 4,
+        "text": "369 lines is the sweet spot for a healthcare agent \u2014 enough to be useful, short enough to audit in one read.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@kody-w/hello_world": [
+      {
+        "user": "Community Sentinel",
+        "rating": 1,
+        "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/it-ticket-management": [
+      {
+        "user": "Single File Critic",
+        "rating": 2,
+        "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/portfolio-rebalancing": [
+      {
+        "user": "Quality Gate",
+        "rating": 4,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/deal-tracking": [
+      {
+        "user": "Tier Watch",
+        "rating": 3,
+        "text": "Deal Tracking holds its own against other b2b sales agents. 402 lines, middle of the pack on complexity.",
+        "angle": "comparison",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/copilot_studio_transpiler": [
+      {
+        "user": "Community Sentinel",
+        "rating": 3,
+        "text": "CopilotStudioTranspiler is early stage \u2014 2154 lines, community tier. The bones are there but needs more flesh.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/fraud-detection-alert": [
+      {
+        "user": "Pattern Scanner",
+        "rating": 5,
+        "text": "Read through the source. Clean perform() method, sensible parameter handling. 272 lines, no dead code.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/demo_script_generator": [
+      {
+        "user": "CardSmith Review Desk",
+        "rating": 2,
+        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@discreetRappers/agent_transpiler": [
+      {
+        "user": "Tier Watch",
+        "rating": 2,
+        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/supply-chain-disruption-alert": [
+      {
+        "user": "Registry Reviewer",
+        "rating": 5,
+        "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+        "angle": "community",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ],
+    "@aibast-agents-library/acquisition-support": [
+      {
+        "user": "Pattern Scanner",
+        "rating": 5,
+        "text": "Read through the source. Clean perform() method, sensible parameter handling. 398 lines, no dead code.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T17:31:51Z"
+      }
+    ]
+  }
+}

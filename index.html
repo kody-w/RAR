@@ -14596,28 +14596,44 @@ function generateSyntheticData() {
       score: c.votes - (c.stars <= 2 ? 1 : 0),
       voters: { curator: 'up' }
     };
-
-    // Multiple varied reviews per agent — count varies by agent
-    const nameHash = (a.name || '').split('').reduce((h, ch) => ((h << 5) - h + ch.charCodeAt(0)) | 0, 0);
-    const reviewCount = 2 + (Math.abs(nameHash) % 4); // 2-5 reviews per agent
-    const reviewers = [];
-    for (let ri = 0; ri < reviewCount; ri++) {
-      const seed = Math.abs(nameHash * (ri + 1) * 31);
-      // Vary rating slightly: ±1 from base, clamped to 1-5
-      const ratingOffset = (seed % 3) - 1;
-      const rating = Math.max(1, Math.min(5, c.stars + ratingOffset));
-      // Vary timestamp: spread across last 30 days
-      const daysAgo = seed % 30;
-      const ts = new Date(Date.now() - daysAgo * 86400000).toISOString();
-      reviewers.push({
-        user: 'curator',
-        rating,
-        text: curatorReviewTextVariant(a, ri, seed),
-        timestamp: ts,
-      });
-    }
-    _syntheticReviews.agents[a.name] = reviewers;
   }
+
+  // Load engine-generated reviews from state/curator_reviews.json
+  fetch('state/curator_reviews.json').then(r => r.ok ? r.json() : null).then(data => {
+    if (data && data.agents) {
+      // Merge engine reviews into synthetic reviews
+      for (const [name, revs] of Object.entries(data.agents)) {
+        _syntheticReviews.agents[name] = revs;
+      }
+    }
+    // Fallback: generate client-side reviews for agents without engine reviews
+    for (const a of allAgents) {
+      if (_syntheticReviews.agents[a.name] && _syntheticReviews.agents[a.name].length > 0) continue;
+      const c = curatorScore(a);
+      _syntheticReviews.agents[a.name] = [{
+        user: 'curator',
+        rating: c.stars,
+        text: curatorReviewText(a),
+        timestamp: new Date().toISOString(),
+      }];
+    }
+    // Re-render if curator mode is active
+    if (window._syntheticActive) {
+      reviews = _syntheticReviews;
+    }
+  }).catch(() => {
+    // No engine reviews — fall back to client-side generation for all
+    for (const a of allAgents) {
+      if (_syntheticReviews.agents[a.name] && _syntheticReviews.agents[a.name].length > 0) continue;
+      const c = curatorScore(a);
+      _syntheticReviews.agents[a.name] = [{
+        user: 'curator',
+        rating: c.stars,
+        text: curatorReviewText(a),
+        timestamp: new Date().toISOString(),
+      }];
+    }
+  });
 }
 
 function ensureSyntheticData() {

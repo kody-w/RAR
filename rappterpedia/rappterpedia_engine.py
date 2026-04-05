@@ -588,6 +588,134 @@ REPLY_RULES: dict[str, dict] = {
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CURATOR REVIEW RULES — data-driven review generation
+# Reviews accumulate in state across ticks, like a real community.
+# Each tick, reviewers discover agents and write reviews from
+# different angles. Reviews reference real agent metadata.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REVIEW_ANGLES: dict[str, dict] = {
+    "primary": {
+        "weight": 5,
+        "templates": {
+            "high": [
+                "{name} is one of the stronger {cat} agents in the registry. {lines} lines, clean structure, and it does what it says.",
+                "This is what a well-built agent looks like. {lines} lines, {tier} tier, and the description matches the implementation.",
+                "Solid work. {name} covers its use case thoroughly at {lines} lines. The kind of agent you install and forget about because it just works.",
+                "{name} earns its {tier} badge. Thoughtful parameter handling, good tagging, and {lines} lines of focused implementation.",
+            ],
+            "mid": [
+                "{name} gets the job done. {lines} lines of straightforward {cat} logic. Not flashy, but functional.",
+                "Decent {cat} agent. {lines} lines, covers the basics. Could use more iteration but the foundation is solid.",
+                "A working {cat} agent at {lines} lines. Does what the description promises. Would benefit from richer tagging.",
+                "{name} is a functional starting point for {cat}. The perform() method is clean. Another iteration or two and this moves up.",
+                "Reviewed {name}: {lines} lines, {tier} tier. Core logic works. More tags and a meatier description would help.",
+                "Straightforward {cat} agent. {lines} lines, does its thing. Single-file principle well-executed here.",
+            ],
+            "low": [
+                "{name} is early stage — {lines} lines, {tier} tier. The bones are there but needs more flesh.",
+                "Minimal {cat} agent at {lines} lines. Ships the idea but not the execution yet.",
+                "{name} reads like a first draft. {lines} lines, basic structure in place. Would love to see a v1.1.",
+            ],
+        },
+    },
+    "usability": {
+        "weight": 4,
+        "templates": {
+            "high": [
+                "Zero-config setup. Drop {name} in your agents folder and it just works. That's the dream.",
+                "Love that {name} needs no env vars. Install and go. The {cat} category needs more agents like this.",
+                "The barrier to entry is zero — no API keys, no config. Just download and perform(). More agents should be this easy.",
+            ],
+            "mid": [
+                "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
+                "The env var requirement is a speed bump but not a dealbreaker. {name} does things you can't do without those credentials.",
+                "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
+            ],
+            "low": [
+                "Getting {name} running requires some effort. The env vars aren't well-documented in the description.",
+                "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
+            ],
+        },
+    },
+    "code_quality": {
+        "weight": 4,
+        "templates": {
+            "high": [
+                "{lines} lines is the sweet spot for a {cat} agent — enough to be useful, short enough to audit in one read.",
+                "Read through the source. Clean perform() method, sensible parameter handling. {lines} lines, no dead code.",
+                "Checked the source — follows single-file conventions properly. {name} is a good reference implementation for {cat}.",
+                "{lines} lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
+            ],
+            "mid": [
+                "The implementation is functional at {lines} lines. Some methods could be tighter but nothing egregious.",
+                "Code reads fine. Standard patterns, standard structure. Does what it needs to do at {lines} lines.",
+                "Source is clean enough. {lines} lines, follows the BasicAgent pattern correctly. Room for polish.",
+            ],
+            "low": [
+                "At {lines} lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+                "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+            ],
+        },
+    },
+    "community": {
+        "weight": 3,
+        "templates": {
+            "high": [
+                "If you're building in {cat}, {name} is worth adding to your deck. Pairs well with other {cat} agents.",
+                "{name} fills a gap in the registry. The {cat} category needed exactly this.",
+                "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
+                "Would recommend {name} to anyone getting started with {cat}. Shows how a RAR agent should be built.",
+            ],
+            "mid": [
+                "{name} has potential in the {cat} space. Not a must-have yet but trending in the right direction.",
+                "Decent addition to the {cat} lineup. A few more iterations and this becomes a go-to.",
+                "The {cat} category is getting crowded but {name} differentiates on {diff}.",
+            ],
+            "low": [
+                "{name} needs to find its niche in {cat}. Right now it overlaps too much with existing agents.",
+                "Not sure what {name} offers that other {cat} agents don't. Needs a clearer value prop.",
+            ],
+        },
+    },
+    "comparison": {
+        "weight": 2,
+        "templates": {
+            "high": [
+                "Compared to other {cat} agents, {name} stands out. Good tagging, solid implementation, clear purpose.",
+                "Top-tier for the {cat} category. {lines} lines puts it on the thorough side without being bloated.",
+                "{name} vs. the alternatives — this one wins on {advantage}.",
+            ],
+            "mid": [
+                "{name} holds its own against other {cat} agents. {lines} lines, middle of the pack on complexity.",
+                "Mid-range {cat} agent. Does what you'd expect. Nothing surprising, nothing missing.",
+            ],
+            "low": [
+                "There are stronger options in {cat} right now. {name} needs more development to compete.",
+            ],
+        },
+    },
+}
+
+REVIEWER_NAMES = [
+    "Virtual Curator", "The Architect", "Agent Auditor", "Registry Reviewer",
+    "CardSmith Review Desk", "Community Sentinel", "Quality Gate",
+    "The Assessor", "Pattern Scanner", "Code Lens",
+    "Deck Builder Review", "Single File Critic", "Tier Watch",
+]
+
+DIFFERENTIATORS = [
+    "simplicity", "completeness", "zero-config setup", "clean error handling",
+    "focused scope", "rich tagging", "documentation quality", "parameter design",
+]
+
+ADVANTAGES = [
+    "ease of setup", "code clarity", "zero dependencies", "documentation",
+    "parameter handling", "error messages", "single-file purity", "tagging",
+]
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # CONTEXT POOLS — reusable fragments for template filling
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -724,6 +852,7 @@ def get_agent_context(agent: dict) -> dict:
     tags = agent.get("tags", [])
 
     return {
+        "name": agent.get("display_name", name),
         "agent_name": name,
         "agent_display": agent.get("display_name", name),
         "description": agent.get("description", "An agent in the RAR registry."),
@@ -732,7 +861,9 @@ def get_agent_context(agent: dict) -> dict:
         "publisher": f"@{publisher}",
         "publisher_slug": publisher,
         "category": agent.get("category", "community"),
+        "cat": agent.get("category", "community").replace("_", " "),
         "quality_tier": agent.get("quality_tier", "community"),
+        "tier": agent.get("quality_tier", "community"),
         "version": agent.get("version", "1.0.0"),
         "agent_path": agent.get("_file", f"@{publisher}/{name.split('/')[-1]}.py"),
         "size_kb": agent.get("_size_kb", "?"),
@@ -933,6 +1064,109 @@ def generate_thread(state: dict, agents: list[dict]) -> dict | None:
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Review Generation
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def score_agent(agent: dict) -> tuple[int, str]:
+    """Score an agent 1-5 stars based on real metadata. Returns (stars, tier_label)."""
+    score = 0
+    lines = agent.get("_lines", 0)
+    if lines > 200: score += 2
+    elif lines > 50: score += 1
+
+    ver = agent.get("version", "1.0.0")
+    if int(ver.split(".")[0]) >= 2: score += 1
+
+    tier = agent.get("quality_tier", "community")
+    if tier == "official": score += 3
+    elif tier == "verified": score += 2
+    elif tier == "community": score += 1
+
+    if len(agent.get("tags", [])) >= 4: score += 1
+    if len(agent.get("description", "")) > 100: score += 1
+    if len(agent.get("dependencies", [])) == 0: score += 1
+    if len(agent.get("requires_env", [])) == 0: score += 1
+
+    stars = max(1, min(5, round(score * 5 / 10)))
+    level = "high" if stars >= 4 else "mid" if stars >= 3 else "low"
+    return stars, level
+
+
+def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> list[str]:
+    """Generate curator reviews for agents. Accumulates in state across ticks."""
+    if not agents:
+        return []
+
+    results = []
+    reviews = state.setdefault("reviews", {})  # {agent_name: [review, ...]}
+    ts = now_iso()
+
+    # Pick agents to review this tick — prefer under-reviewed agents
+    review_counts = {name: len(revs) for name, revs in reviews.items()}
+    candidates = []
+    for agent in agents:
+        name = agent.get("name", "")
+        count = review_counts.get(name, 0)
+        if count < 6:  # Cap at 6 reviews per agent
+            candidates.append((agent, count))
+
+    if not candidates:
+        return results
+
+    # Weight toward under-reviewed agents
+    candidates.sort(key=lambda x: x[1])
+    to_review = []
+    for _ in range(min(num_reviews, len(candidates))):
+        # Weighted selection — fewer reviews = higher chance
+        weights = [max(1, 6 - c[1]) for c in candidates]
+        chosen = random.choices(candidates, weights=weights, k=1)[0]
+        to_review.append(chosen[0])
+        candidates.remove(chosen)
+        if not candidates:
+            break
+
+    for agent in to_review:
+        name = agent.get("name", "")
+        stars, level = score_agent(agent)
+        ctx = get_agent_context(agent)
+        ctx.update({
+            "diff": random.choice(DIFFERENTIATORS),
+            "advantage": random.choice(ADVANTAGES),
+        })
+
+        # Pick a review angle we haven't used for this agent yet
+        existing_angles = [r.get("angle", "") for r in reviews.get(name, [])]
+        available_angles = {k: v for k, v in REVIEW_ANGLES.items() if k not in existing_angles}
+        if not available_angles:
+            available_angles = REVIEW_ANGLES
+
+        angle_name, angle = pick_weighted(available_angles)
+        templates = angle["templates"].get(level, angle["templates"].get("mid", []))
+        if not templates:
+            continue
+
+        text = fill_template(random.choice(templates), ctx)
+
+        # Vary rating ±1 from base
+        rating = max(1, min(5, stars + random.choice([-1, 0, 0, 1])))
+
+        reviewer = random.choice(REVIEWER_NAMES)
+
+        review = {
+            "user": reviewer,
+            "rating": rating,
+            "text": text,
+            "angle": angle_name,
+            "timestamp": ts,
+        }
+
+        reviews.setdefault(name, []).append(review)
+        results.append(f"⭐ Review: {reviewer} gave {name} {rating}★ [{angle_name}]")
+
+    return results
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Tick & Commit
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -988,9 +1222,18 @@ def rappterpedia_tick(num_articles: int = 2, num_threads: int = 2, dry_run: bool
             thread["updated"] = ts
             results.append(f"  ↳ Reply on \"{thread['title'][:40]}...\" by {thread['replies'][-1]['author']}")
 
+    # ── Phase 4: Generate curator reviews ────────────────
+    review_results = generate_reviews(state, agents, num_reviews=random.randint(3, 8))
+    results.extend(review_results)
+
     # ── Save state ──────────────────────────────────────
     if not dry_run:
         save_json(STATE_FILE, state)
+
+    # ── Export reviews for store consumption ────────────
+    if not dry_run:
+        reviews_export = {"agents": state.get("reviews", {})}
+        save_json(RAR_DIR / "state" / "curator_reviews.json", reviews_export)
 
     # ── Export for web consumption ──────────────────────
     if not dry_run:

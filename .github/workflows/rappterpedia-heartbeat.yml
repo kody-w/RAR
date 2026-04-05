@@ -121,6 +121,14 @@ jobs:
                   if aid not in merged.get("generated_agent_ids", []):
                       merged.setdefault("generated_agent_ids", []).append(aid)
 
+              # Merge reviews
+              for agent_name, revs in ws.get("reviews", {}).items():
+                  existing_revs = merged.setdefault("reviews", {}).setdefault(agent_name, [])
+                  existing_texts = {r.get("text", "") for r in existing_revs}
+                  for r in revs:
+                      if r.get("text", "") not in existing_texts:
+                          existing_revs.append(r)
+
           # Update next IDs
           if merged["articles"]:
               max_art = max(
@@ -156,14 +164,21 @@ jobs:
           with open(export_path, "w") as f:
               json.dump(export, f, indent=2)
 
+          # Export curator reviews for store consumption
+          curator_path = "state/curator_reviews.json"
+          os.makedirs(os.path.dirname(curator_path), exist_ok=True)
+          with open(curator_path, "w") as f:
+              json.dump({"agents": merged.get("reviews", {})}, f, indent=2)
+
+          total_reviews = sum(len(v) for v in merged.get("reviews", {}).values())
           print(f"Fleet merge complete: +{new_articles} articles, +{new_threads} threads")
-          print(f"Total: {len(merged['articles'])} articles, {len(merged['threads'])} threads")
+          print(f"Total: {len(merged['articles'])} articles, {len(merged['threads'])} threads, {total_reviews} reviews")
           PYEOF
 
       - name: Commit merged fleet content
         run: |
           git config user.name "Rappterpedia Fleet"
           git config user.email "rappterpedia-fleet@users.noreply.github.com"
-          git add rappterpedia/
+          git add rappterpedia/ state/
           git diff --cached --quiet || git commit -m "Rappterpedia fleet: auto-generated content [skip ci]"
           git push
