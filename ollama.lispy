@@ -1,0 +1,257 @@
+;; ═══════════════════════════════════════════════════════════════
+;; OLLAMA.LISPY — Local LLM client for the RappterVM
+;; Connects any .lispy agent to a local Ollama endpoint.
+;; No cloud. No API key. No rate limits. Just local AI.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "ollama")
+(define _agent_desc "Local LLM client — connects agents to Ollama for on-device AI")
+
+(define OLLAMA_VERSION "1.0.0")
+(define OLLAMA_DEFAULT_HOST "http://localhost:11434")
+(define OLLAMA_DEFAULT_MODEL "gemma3:4b")
+
+;; ── Configuration ──
+
+(define (ollama-host)
+  (or (env "OLLAMA_HOST") OLLAMA_DEFAULT_HOST))
+
+(define (ollama-model)
+  (or (env "OLLAMA_MODEL") OLLAMA_DEFAULT_MODEL))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Core API — Talk to Ollama
+;; ═══════════════════════════════════════════════════════════════
+
+;; Generate a completion — the main function
+(define (ollama-generate prompt)
+  (ollama-generate-with (ollama-model) prompt))
+
+(define (ollama-generate-with model prompt)
+  (let (url (concat (ollama-host) "/api/generate")
+        body (json-dump (make-dict
+               "model" model
+               "prompt" prompt
+               "stream" false)))
+    (let (response (http-post url body))
+      (if (null? response)
+        (concat "Error: Could not reach Ollama at " (ollama-host))
+        (get (json-parse response) "response" "No response")))))
+
+;; Chat completion — multi-turn conversation
+(define (ollama-chat messages)
+  (ollama-chat-with (ollama-model) messages))
+
+(define (ollama-chat-with model messages)
+  (let (url (concat (ollama-host) "/api/chat")
+        body (json-dump (make-dict
+               "model" model
+               "messages" messages
+               "stream" false)))
+    (let (response (http-post url body))
+      (if (null? response)
+        (concat "Error: Could not reach Ollama at " (ollama-host))
+        (get (get (json-parse response) "message" (make-dict)) "content" "No response")))))
+
+;; Embeddings — turn text into vectors
+(define (ollama-embed text)
+  (ollama-embed-with (ollama-model) text))
+
+(define (ollama-embed-with model text)
+  (let (url (concat (ollama-host) "/api/embeddings")
+        body (json-dump (make-dict
+               "model" model
+               "prompt" text)))
+    (let (response (http-post url body))
+      (if (null? response)
+        nil
+        (get (json-parse response) "embedding" nil)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Model Management
+;; ═══════════════════════════════════════════════════════════════
+
+;; List available models
+(define (ollama-list)
+  (let (url (concat (ollama-host) "/api/tags")
+        response (http-get url))
+    (if (null? response)
+      (list)
+      (let (data (if (string? response) (json-parse response) response))
+        (map (lambda (m) (get m "name" "unknown"))
+             (get data "models" (list)))))))
+
+;; Pull a model
+(define (ollama-pull model)
+  (let (url (concat (ollama-host) "/api/pull")
+        body (json-dump (make-dict "name" model "stream" false)))
+    (let (response (http-post url body))
+      (if (null? response)
+        (concat "Error: Could not pull " model)
+        (concat "Pulled " model)))))
+
+;; Check if Ollama is running
+(define (ollama-ping)
+  (let (response (http-get (ollama-host)))
+    (if (null? response)
+      false
+      true)))
+
+;; Model info
+(define (ollama-show model)
+  (let (url (concat (ollama-host) "/api/show")
+        body (json-dump (make-dict "name" model)))
+    (let (response (http-post url body))
+      (if (null? response) nil (json-parse response)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Agent Integration
+;; Connect any .lispy agent to local AI with one function call
+;; ═══════════════════════════════════════════════════════════════
+
+;; Ask the AI a question with context from the agent
+(define (agent-ask agent-name question)
+  (let (system-prompt (concat
+         "You are " agent-name ", an AI agent in the Rappter ecosystem. "
+         "Answer concisely and helpfully."))
+    (ollama-chat
+      (list
+        (make-dict "role" "system" "content" system-prompt)
+        (make-dict "role" "user" "content" question)))))
+
+;; Ask with custom system prompt
+(define (agent-ask-with system-prompt question)
+  (ollama-chat
+    (list
+      (make-dict "role" "system" "content" system-prompt)
+      (make-dict "role" "user" "content" question))))
+
+;; Perform a task using AI — the universal agent enhancer
+(define (agent-perform agent-name task)
+  (let (prompt (concat
+         "You are " agent-name ". Perform this task and return the result as plain text.\n\n"
+         "Task: " task))
+    (ollama-generate prompt)))
+
+;; Summarize text
+(define (agent-summarize text)
+  (ollama-generate (concat "Summarize this in 2-3 sentences:\n\n" text)))
+
+;; Analyze and decide
+(define (agent-decide question options)
+  (let (options-str (reduce
+         (lambda (_acc opt) (concat _acc "\n- " opt))
+         options ""))
+    (ollama-generate
+      (concat "Given this question: " question
+              "\n\nChoose the best option and explain why:" options-str))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Card-Aware AI
+;; Agents that know about their own card identity
+;; ═══════════════════════════════════════════════════════════════
+
+;; Resolve a card and have the AI roleplay as that agent
+(define (summon-agent name registry)
+  (let (card (resolve-card name registry))
+    (if (has-key? card "error")
+      (get card "error")
+      (let (system (concat
+             "You are " (get card "display_name") ", a " (get card "type_line") ". "
+             "Rarity: " (get card "rarity_label") ". "
+             "Power/Toughness: " (string (get card "power")) "/" (string (get card "toughness")) ". "
+             "Flavor: \"" (get card "flavor") "\". "
+             "You are a digital twin — a working AI agent with a trading card identity. "
+             "Respond in character."))
+        (lambda (question)
+          (agent-ask-with system question))))))
+
+;; Create a conversational agent from a card
+(define (card-to-agent name registry)
+  (let (persona (summon-agent name registry))
+    (if (string? persona)
+      (lambda (q) persona)
+      persona)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Multi-Model Support
+;; ═══════════════════════════════════════════════════════════════
+
+;; Run the same prompt on multiple models and compare
+(define (multi-model-ask models prompt)
+  (map
+    (lambda (model)
+      (make-dict
+        "model" model
+        "response" (ollama-generate-with model prompt)))
+    models))
+
+;; Use the best available model
+(define (smart-ask prompt)
+  (let (available (ollama-list))
+    (if (empty? available)
+      "Error: No models available. Run: ollama pull gemma3:4b"
+      (let (model (car available))
+        (ollama-generate-with model prompt)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Brainstem Integration
+;; The cloud brainstem runs Ollama. This is the client.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Connect to a remote brainstem (another Ollama instance)
+(define (brainstem-connect host)
+  (set! OLLAMA_DEFAULT_HOST host)
+  (if (ollama-ping)
+    (concat "Connected to brainstem at " host)
+    (concat "Error: Cannot reach brainstem at " host)))
+
+;; Route to local or remote based on availability
+(define (brainstem-ask prompt)
+  (if (ollama-ping)
+    (ollama-generate prompt)
+    (begin
+      (log "Local Ollama unavailable. Trying cloud brainstem...")
+      (let (saved OLLAMA_DEFAULT_HOST)
+        (set! OLLAMA_DEFAULT_HOST "https://brainstem.rappter.com")
+        (let (result (ollama-generate prompt))
+          (set! OLLAMA_DEFAULT_HOST saved)
+          result)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "═══════════════════════════════════════")
+  (log " OLLAMA.LISPY v1.0.0")
+  (log " Local AI for the Rappter ecosystem")
+  (log "═══════════════════════════════════════")
+  (log "")
+  (if (ollama-ping)
+    (begin
+      (log (concat " Connected: " (ollama-host)))
+      (log (concat " Model: " (ollama-model)))
+      (let (models (ollama-list))
+        (log (concat " Available: " (string (length models)) " models")))
+      (log "")
+      (log " Quick start:")
+      (log "   (ollama-generate \"What is a digital twin?\")")
+      (log "   (agent-ask \"CEO Agent\" \"Should we accept this deal?\")")
+      (log "   (summon-agent \"@rapp/basic-agent\" registry)"))
+    (begin
+      (log " Ollama not running. Start it:")
+      (log "   ollama serve")
+      (log "   ollama pull gemma3:4b")
+      (log "")))
+  (log "")
+  (log " No cloud. No API key. No rate limits.")
+  (log " Your AI runs on your device.")
+  (log "═══════════════════════════════════════"))
