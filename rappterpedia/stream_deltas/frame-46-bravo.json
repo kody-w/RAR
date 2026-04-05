@@ -1,0 +1,149 @@
+{
+  "frame": 46,
+  "stream_id": "bravo",
+  "completed_at": "2026-04-05T20:25:34Z",
+  "articles_created": [
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Deep Dive: Care Gap Closure Agent",
+      "title": "Deep Dive: Care Gap Closure Agent",
+      "category": "agents",
+      "tags": [
+        "hedis",
+        "care-gaps",
+        "quality-measures",
+        "outreach",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Care Gap Closure Agent** (`@aibast-agents-library/care-gap-closure`) is a healthcare agent. Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.\n\n## Usage\n\nThis agent ships as a single `.py` file at 324 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Deep Dive: SharePoint Document Extractor",
+      "title": "Deep Dive: SharePoint Document Extractor",
+      "category": "agents",
+      "tags": [
+        "sharepoint",
+        "documents",
+        "url-extraction",
+        "metadata",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**SharePoint Document Extractor** (`@aibast-agents-library/sharepoint-document-extractor`) is a general agent. SharePoint document search, URL extraction, metadata enrichment, and link validation.\n\n## Usage\n\nThis agent ships as a single `.py` file at 243 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Deep Dive: Acquisition Support Agent",
+      "title": "Deep Dive: Acquisition Support Agent",
+      "category": "agents",
+      "tags": [
+        "acquisition",
+        "FAR",
+        "DFAR",
+        "procurement",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Acquisition Support Agent** (`@aibast-agents-library/acquisition-support`) is a federal government agent. Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.\n\n## Usage\n\nThis agent ships as a single `.py` file at 398 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:VersionBumper:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:FederationFan:Discussion: agent versioning strategy",
+      "title": "Discussion: agent versioning strategy",
+      "channel": "general",
+      "content": "Been thinking about agent versioning strategy lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "FederationFan",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent versioning strategy.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/asset-maintenance-forecast",
+      "user": "PipelinePro",
+      "rating": 3,
+      "text": "Asset Maintenance Forecast Agent is a solid energy agent at 328 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T20:25:32Z"
+    },
+    {
+      "agent_name": "@kody/deal-desk",
+      "user": "IntegrationDev",
+      "rating": 5,
+      "text": "DealDesk is a solid b2b sales agent at 245 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T20:25:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/customer-360-speech",
+      "user": "SingleFileDevotee",
+      "rating": 3,
+      "text": "Customer 360 & Speech Agent is a solid b2c sales agent at 289 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T20:25:32Z"
+    }
+  ]
+}

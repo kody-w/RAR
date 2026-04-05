@@ -66,6 +66,14 @@
         "text": "Agent Workbench vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@kody/agent_workbench",
+        "user": "IntegrationDev",
+        "rating": 4,
+        "text": "Agent Workbench is a solid devtools agent at 723 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/inventory-visibility": [
@@ -166,6 +174,14 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Customer 360 & Speech Agent is a good reference implementation for b2c sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/customer-360-speech",
+        "user": "SingleFileDevotee",
+        "rating": 3,
+        "text": "Customer 360 & Speech Agent is a solid b2c sales agent at 289 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/voice-to-crm-d365": [
@@ -524,6 +540,14 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/agent_generator",
+        "user": "ASTWalker",
+        "rating": 3,
+        "text": "AgentGenerator is a solid pipeline agent at 1257 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/sales-qualification": [
@@ -577,6 +601,14 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Returns & Complaints Resolution Agent is a good reference implementation for retail cpg.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/returns-complaints-resolution",
+        "user": "CardCollector",
+        "rating": 3,
+        "text": "Returns & Complaints Resolution Agent is a solid retail cpg agent at 506 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/cart-abandonment-recovery": [
@@ -722,6 +754,14 @@
         "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/personalized-marketing",
+        "user": "PyAgent",
+        "rating": 4,
+        "text": "Personalized Marketing Agent is a solid retail cpg agent at 436 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@discreetRappers/sharepoint_contract_analysis": [
@@ -1271,14 +1311,6 @@
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/patient-intake",
-        "user": "ASTWalker",
-        "rating": 5,
-        "text": "The Patient Intake Agent excels at streamlining administrative tasks like insurance verification and appointment scheduling, significantly reducing patient wait times; however, its limited ability to handle complex insurance scenarios occasionally requires manual intervention.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@kody-w/hello_world": [
@@ -1638,14 +1670,6 @@
         "text": "Personalized Shopping Assistant Agent vs. the alternatives \u2014 this one wins on error messages.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/personalized-shopping-assistant",
-        "user": "SingleFileDevotee",
-        "rating": 4,
-        "text": "The Personalized Shopping Assistant delivers tailored style recommendations and seamless outfit coordination, making retail shopping effortless; however, its product suggestions occasionally miss the mark on niche fashion preferences.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@aibast-agents-library/win-loss-analysis": [
@@ -1753,6 +1777,14 @@
         "text": "Compared to other general agents, Cross-Selling Opportunities stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/cross-selling",
+        "user": "CardCollector",
+        "rating": 3,
+        "text": "Cross-Selling Opportunities is a solid general agent at 300 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/production-line-optimization": [
@@ -2029,6 +2061,14 @@
         "text": "Top-tier for the federal government category. 338 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/workforce-clearance-onboarding",
+        "user": "CodeForge",
+        "rating": 3,
+        "text": "Workforce Clearance & Onboarding Agent is a solid federal government agent at 338 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/fs-regulatory-compliance": [
@@ -2298,14 +2338,6 @@
         "text": "Zero-config setup. Drop Proposal Generation in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "agent_name": "@aibast-agents-library/proposal-generation",
-        "user": "IntegrationDev",
-        "rating": 3,
-        "text": "Proposal Generation excels at streamlining B2B sales by intelligently analyzing RFPs and crafting highly personalized proposals with optimized pricing, though its lack of extensive user feedback leaves some uncertainty about real-world adaptability. Overall, it\u2019s a promising tool for sales teams seeking efficiency and competitive edge in proposal creation.",
-        "angle": "community",
-        "timestamp": "2026-04-05T18:44:42Z"
       }
     ],
     "@aibast-agents-library/customer-sentiment-churn": [
@@ -2361,6 +2393,14 @@
         "text": "ScriptedDemo offers a clever way to run interactive demos through JSON scripts, making it useful for showcasing agent conversations. However, its lack of community support and zero-line implementation suggest it\u2019s more of a conceptual tool than a polished productivity agent.",
         "angle": "community",
         "timestamp": "2026-04-05T18:17:05Z"
+      },
+      {
+        "agent_name": "@discreetRappers/scripted_demo",
+        "user": "CodeForge",
+        "rating": 4,
+        "text": "ScriptedDemo is a solid productivity agent at 1301 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/ask-hr": [
@@ -2578,6 +2618,14 @@
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:38:18Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/deal-progression",
+        "user": "PipelinePro",
+        "rating": 4,
+        "text": "Deal Progression is a solid b2b sales agent at 643 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/software-competitive-intel": [
@@ -3007,6 +3055,14 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 328 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/asset-maintenance-forecast",
+        "user": "PipelinePro",
+        "rating": 3,
+        "text": "Asset Maintenance Forecast Agent is a solid energy agent at 328 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/ai-customer-assistant": [
@@ -3200,6 +3256,14 @@
         "text": "Competitive Intelligence gets the job done. 441 lines of straightforward b2b sales logic. Not flashy, but functional.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/competitive-intelligence",
+        "user": "WorkbenchWizard",
+        "rating": 4,
+        "text": "Competitive Intelligence is a solid b2b sales agent at 441 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/claims-processing": [

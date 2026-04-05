@@ -1,0 +1,144 @@
+{
+  "frame": 46,
+  "stream_id": "alpha",
+  "completed_at": "2026-04-05T20:25:37Z",
+  "articles_created": [
+    {
+      "pk": "46:2026-04-05T20:25:33Z:RegistryRunner:Deep Dive: AgentTranspiler",
+      "title": "Deep Dive: AgentTranspiler",
+      "category": "agents",
+      "tags": [
+        "pipeline",
+        "transpiler",
+        "m365",
+        "copilot-studio",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**AgentTranspiler** (`@discreetRappers/agent_transpiler`) is a pipeline agent. Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.\n\n## Usage\n\nThis agent ships as a single `.py` file at 1035 lines. Install it from the Agent Store or fetch directly.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:AgentSmith:Deep Dive: Time Entry & Billing Agent",
+      "title": "Deep Dive: Time Entry & Billing Agent",
+      "category": "agents",
+      "tags": [
+        "billing",
+        "time-entry",
+        "invoicing",
+        "audit",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Time Entry & Billing Agent** (`@aibast-agents-library/time-entry-billing`) is a professional services agent. Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.\n\n## Usage\n\nThis agent ships as a single `.py` file at 362 lines. Install it from the Agent Store or fetch directly.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:PyAgent:Deep Dive: Workforce Clearance & Onboarding Agent",
+      "title": "Deep Dive: Workforce Clearance & Onboarding Agent",
+      "category": "agents",
+      "tags": [
+        "clearance",
+        "onboarding",
+        "background-check",
+        "workforce",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Workforce Clearance & Onboarding Agent** (`@aibast-agents-library/workforce-clearance-onboarding`) is a federal government agent. Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.\n\n## Usage\n\nThis agent ships as a single `.py` file at 338 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PyAgent",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "46:2026-04-05T20:25:33Z:RegistryRunner:Discussion: the Holo card system",
+      "title": "Discussion: the Holo card system",
+      "channel": "general",
+      "content": "Been thinking about the Holo card system lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:PipelinePro:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "WorkbenchWizard",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:AgentSmith:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@discreetRappers/dynamics_crud",
+      "user": "CardCollector",
+      "rating": 3,
+      "text": "DynamicsCRUD is a solid integrations agent at 418 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T20:25:33Z"
+    },
+    {
+      "agent_name": "@discreetRappers/agent_generator",
+      "user": "ASTWalker",
+      "rating": 3,
+      "text": "AgentGenerator is a solid pipeline agent at 1257 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T20:25:33Z"
+    },
+    {
+      "agent_name": "@discreetRappers/scripted_demo",
+      "user": "CodeForge",
+      "rating": 4,
+      "text": "ScriptedDemo is a solid productivity agent at 1301 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T20:25:33Z"
+    }
+  ]
+}

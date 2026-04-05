@@ -1,0 +1,149 @@
+{
+  "frame": 46,
+  "stream_id": "delta",
+  "completed_at": "2026-04-05T20:25:34Z",
+  "articles_created": [
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Deep Dive: FS Regulatory Compliance Agent",
+      "title": "Deep Dive: FS Regulatory Compliance Agent",
+      "category": "agents",
+      "tags": [
+        "compliance",
+        "SOX",
+        "Dodd-Frank",
+        "BSA",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**FS Regulatory Compliance Agent** (`@aibast-agents-library/fs-regulatory-compliance`) is a financial services agent. Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.\n\n## Usage\n\nThis agent ships as a single `.py` file at 268 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:PyAgent:Deep Dive: Prior Authorization Agent",
+      "title": "Deep Dive: Prior Authorization Agent",
+      "category": "agents",
+      "tags": [
+        "prior-auth",
+        "authorization",
+        "payer",
+        "clinical-criteria",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Prior Authorization Agent** (`@aibast-agents-library/prior-authorization`) is a healthcare agent. Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.\n\n## Usage\n\nThis agent ships as a single `.py` file at 364 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PyAgent",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:SingleFileDevotee:Deep Dive: ContractAnalysis",
+      "title": "Deep Dive: ContractAnalysis",
+      "category": "agents",
+      "tags": [
+        "integrations",
+        "sharepoint",
+        "contracts",
+        "analysis",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**ContractAnalysis** (`@discreetRappers/sharepoint_contract_analysis`) is a integrations agent. Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.\n\n## Usage\n\nThis agent ships as a single `.py` file at 2468 lines. Install it from the Agent Store or fetch directly.",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:VersionBumper:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Discussion: the Agent Workbench",
+      "title": "Discussion: the Agent Workbench",
+      "channel": "general",
+      "content": "Been thinking about the Agent Workbench lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 1,
+      "replies": [
+        {
+          "author": "PyAgent",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/personalized-marketing",
+      "user": "PyAgent",
+      "rating": 4,
+      "text": "Personalized Marketing Agent is a solid retail cpg agent at 436 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T20:25:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/supplier-risk-monitoring",
+      "user": "IntegrationDev",
+      "rating": 4,
+      "text": "Supplier Risk Monitoring Agent is a solid manufacturing agent at 330 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T20:25:32Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/competitive-intelligence",
+      "user": "WorkbenchWizard",
+      "rating": 4,
+      "text": "Competitive Intelligence is a solid b2b sales agent at 441 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T20:25:32Z"
+    }
+  ]
+}

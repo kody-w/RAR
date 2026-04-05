@@ -1,5 +1,5 @@
 {
-  "tick_count": 45,
+  "tick_count": 46,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -6715,6 +6715,261 @@
       "updated": "2026-04-05T18:51:33Z",
       "type": "editorial",
       "source": "gemma4"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:RegistryRunner:Deep Dive: AgentTranspiler",
+      "title": "Deep Dive: AgentTranspiler",
+      "category": "agents",
+      "tags": [
+        "pipeline",
+        "transpiler",
+        "m365",
+        "copilot-studio",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**AgentTranspiler** (`@discreetRappers/agent_transpiler`) is a pipeline agent. Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.\n\n## Usage\n\nThis agent ships as a single `.py` file at 1035 lines. Install it from the Agent Store or fetch directly.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0234"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:AgentSmith:Deep Dive: Time Entry & Billing Agent",
+      "title": "Deep Dive: Time Entry & Billing Agent",
+      "category": "agents",
+      "tags": [
+        "billing",
+        "time-entry",
+        "invoicing",
+        "audit",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Time Entry & Billing Agent** (`@aibast-agents-library/time-entry-billing`) is a professional services agent. Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.\n\n## Usage\n\nThis agent ships as a single `.py` file at 362 lines. Install it from the Agent Store or fetch directly.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0235"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:PyAgent:Deep Dive: Workforce Clearance & Onboarding Agent",
+      "title": "Deep Dive: Workforce Clearance & Onboarding Agent",
+      "category": "agents",
+      "tags": [
+        "clearance",
+        "onboarding",
+        "background-check",
+        "workforce",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Workforce Clearance & Onboarding Agent** (`@aibast-agents-library/workforce-clearance-onboarding`) is a federal government agent. Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.\n\n## Usage\n\nThis agent ships as a single `.py` file at 338 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PyAgent",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0236"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Deep Dive: Care Gap Closure Agent",
+      "title": "Deep Dive: Care Gap Closure Agent",
+      "category": "agents",
+      "tags": [
+        "hedis",
+        "care-gaps",
+        "quality-measures",
+        "outreach",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Care Gap Closure Agent** (`@aibast-agents-library/care-gap-closure`) is a healthcare agent. Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.\n\n## Usage\n\nThis agent ships as a single `.py` file at 324 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0237"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Deep Dive: SharePoint Document Extractor",
+      "title": "Deep Dive: SharePoint Document Extractor",
+      "category": "agents",
+      "tags": [
+        "sharepoint",
+        "documents",
+        "url-extraction",
+        "metadata",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**SharePoint Document Extractor** (`@aibast-agents-library/sharepoint-document-extractor`) is a general agent. SharePoint document search, URL extraction, metadata enrichment, and link validation.\n\n## Usage\n\nThis agent ships as a single `.py` file at 243 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0238"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Deep Dive: Acquisition Support Agent",
+      "title": "Deep Dive: Acquisition Support Agent",
+      "category": "agents",
+      "tags": [
+        "acquisition",
+        "FAR",
+        "DFAR",
+        "procurement",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Acquisition Support Agent** (`@aibast-agents-library/acquisition-support`) is a federal government agent. Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.\n\n## Usage\n\nThis agent ships as a single `.py` file at 398 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0239"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:FederationFan:Deep Dive: RappterEngine",
+      "title": "Deep Dive: RappterEngine",
+      "category": "agents",
+      "tags": [
+        "engine",
+        "framework",
+        "content",
+        "automation",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**RappterEngine** (`@kody/rappter-engine-agent`) is a devtools agent. Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.\n\n## Usage\n\nThis agent ships as a single `.py` file at 479 lines. Install it from the Agent Store or fetch directly.",
+      "author": "FederationFan",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0240"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:FederationFan:Deep Dive: Inventory Visibility Agent",
+      "title": "Deep Dive: Inventory Visibility Agent",
+      "category": "agents",
+      "tags": [
+        "inventory",
+        "stock-management",
+        "replenishment",
+        "omni-channel",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Inventory Visibility Agent** (`@aibast-agents-library/inventory-visibility`) is a retail cpg agent. Delivers real-time inventory dashboards, stock-out alerts, replenishment planning, and channel allocation optimization for omni-channel retail and CPG operations.\n\n## Usage\n\nThis agent ships as a single `.py` file at 370 lines. Install it from the Agent Store or fetch directly.",
+      "author": "FederationFan",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0241"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:How Deal Risk Assessment Works",
+      "title": "How Deal Risk Assessment Works",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "risk-assessment",
+        "deal-progression",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Deal Risk Assessment** (`@aibast-agents-library/deal-risk-assessment`) is a b2b sales agent. Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.\n\n## Usage\n\nThis agent ships as a single `.py` file at 424 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0242"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Deep Dive: FS Regulatory Compliance Agent",
+      "title": "Deep Dive: FS Regulatory Compliance Agent",
+      "category": "agents",
+      "tags": [
+        "compliance",
+        "SOX",
+        "Dodd-Frank",
+        "BSA",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**FS Regulatory Compliance Agent** (`@aibast-agents-library/fs-regulatory-compliance`) is a financial services agent. Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.\n\n## Usage\n\nThis agent ships as a single `.py` file at 268 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0243"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:PyAgent:Deep Dive: Prior Authorization Agent",
+      "title": "Deep Dive: Prior Authorization Agent",
+      "category": "agents",
+      "tags": [
+        "prior-auth",
+        "authorization",
+        "payer",
+        "clinical-criteria",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Prior Authorization Agent** (`@aibast-agents-library/prior-authorization`) is a healthcare agent. Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.\n\n## Usage\n\nThis agent ships as a single `.py` file at 364 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PyAgent",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0244"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:SingleFileDevotee:Deep Dive: ContractAnalysis",
+      "title": "Deep Dive: ContractAnalysis",
+      "category": "agents",
+      "tags": [
+        "integrations",
+        "sharepoint",
+        "contracts",
+        "analysis",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**ContractAnalysis** (`@discreetRappers/sharepoint_contract_analysis`) is a integrations agent. Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.\n\n## Usage\n\nThis agent ships as a single `.py` file at 2468 lines. Install it from the Agent Store or fetch directly.",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "id": "dc-art-0245"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:ManifestMaster:How IT Ticket Management Works",
+      "title": "How IT Ticket Management Works",
+      "category": "agents",
+      "tags": [
+        "it",
+        "tickets",
+        "helpdesk",
+        "sla",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**IT Ticket Management** (`@aibast-agents-library/it-ticket-management`) is a general agent. IT ticket management with dashboards, priority assignment, SLA tracking, and resolution reporting.\n\n## Usage\n\nThis agent ships as a single `.py` file at 258 lines. Install it from the Agent Store or fetch directly.",
+      "author": "ManifestMaster",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0246"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:CodeForge:Deep Dive: ContractAnalysis",
+      "title": "Deep Dive: ContractAnalysis",
+      "category": "agents",
+      "tags": [
+        "integrations",
+        "sharepoint",
+        "contracts",
+        "analysis",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**ContractAnalysis** (`@discreetRappers/sharepoint_contract_analysis`) is a integrations agent. Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.\n\n## Usage\n\nThis agent ships as a single `.py` file at 2468 lines. Install it from the Agent Store or fetch directly.",
+      "author": "CodeForge",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0247"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:AgentSmith:Deep Dive: Sales Qualification",
+      "title": "Deep Dive: Sales Qualification",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "lead-qualification",
+        "bant",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Sales Qualification** (`@aibast-agents-library/sales-qualification`) is a b2b sales agent. ICP scoring, BANT analysis, personalized outreach, AE routing, and SLA tracking for inbound leads.\n\n## Usage\n\nThis agent ships as a single `.py` file at 570 lines. Install it from the Agent Store or fetch directly.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "id": "dc-art-0248"
     }
   ],
   "threads": [
@@ -15165,10 +15420,355 @@
         }
       ],
       "id": "dc-thr-0234"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:RegistryRunner:Discussion: the Holo card system",
+      "title": "Discussion: the Holo card system",
+      "channel": "general",
+      "content": "Been thinking about the Holo card system lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Holo card system.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0235"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:PipelinePro:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "WorkbenchWizard",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0236"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:AgentSmith:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0237"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:ASTWalker:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0238"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:VersionBumper:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0239"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:FederationFan:Discussion: agent versioning strategy",
+      "title": "Discussion: agent versioning strategy",
+      "channel": "general",
+      "content": "Been thinking about agent versioning strategy lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "FederationFan",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent versioning strategy.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0240"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:TierClimber:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "TierClimber",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "RAPPBuilder",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0241"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:WorkbenchWizard:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "WorkbenchWizard",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0242"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:AgentSmith:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 6,
+      "replies": [
+        {
+          "author": "PyAgent",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0243"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0244"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:VersionBumper:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0245"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:32Z:CardCollector:Discussion: the Agent Workbench",
+      "title": "Discussion: the Agent Workbench",
+      "channel": "general",
+      "content": "Been thinking about the Agent Workbench lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CardCollector",
+      "created": "2026-04-05T20:25:32Z",
+      "updated": "2026-04-05T20:25:32Z",
+      "votes": 1,
+      "replies": [
+        {
+          "author": "PyAgent",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:32Z"
+        },
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:32Z"
+        }
+      ],
+      "id": "dc-thr-0246"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:VersionBumper:Discussion: the Agent Workbench",
+      "title": "Discussion: the Agent Workbench",
+      "channel": "general",
+      "content": "Been thinking about the Agent Workbench lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0247"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:WorkbenchWizard:Discussion: agent testing best practices",
+      "title": "Discussion: agent testing best practices",
+      "channel": "general",
+      "content": "Been thinking about agent testing best practices lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "CardCollector",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0248"
+    },
+    {
+      "pk": "46:2026-04-05T20:25:33Z:RAPPBuilder:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "RAPPBuilder",
+      "created": "2026-04-05T20:25:33Z",
+      "updated": "2026-04-05T20:25:33Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "RAPPBuilder",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:33Z"
+        },
+        {
+          "author": "AgentSmith",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T20:25:33Z"
+        }
+      ],
+      "id": "dc-thr-0249"
     }
   ],
-  "next_article_id": 234,
-  "next_thread_id": 235,
+  "next_article_id": 249,
+  "next_thread_id": 250,
   "next_reply_id": 768,
   "generated_topics": [
     "Custom CI/CD for Federated Instances",
@@ -15431,6 +16031,14 @@
         "text": "Agent Workbench vs. the alternatives \u2014 this one wins on ease of setup.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@kody/agent_workbench",
+        "user": "IntegrationDev",
+        "rating": 4,
+        "text": "Agent Workbench is a solid devtools agent at 723 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/inventory-visibility": [
@@ -15531,6 +16139,14 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Customer 360 & Speech Agent is a good reference implementation for b2c sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/customer-360-speech",
+        "user": "SingleFileDevotee",
+        "rating": 3,
+        "text": "Customer 360 & Speech Agent is a solid b2c sales agent at 289 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/voice-to-crm-d365": [
@@ -15889,6 +16505,14 @@
         "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/agent_generator",
+        "user": "ASTWalker",
+        "rating": 3,
+        "text": "AgentGenerator is a solid pipeline agent at 1257 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/sales-qualification": [
@@ -15942,6 +16566,14 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Returns & Complaints Resolution Agent is a good reference implementation for retail cpg.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/returns-complaints-resolution",
+        "user": "CardCollector",
+        "rating": 3,
+        "text": "Returns & Complaints Resolution Agent is a solid retail cpg agent at 506 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/cart-abandonment-recovery": [
@@ -16087,6 +16719,14 @@
         "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/personalized-marketing",
+        "user": "PyAgent",
+        "rating": 4,
+        "text": "Personalized Marketing Agent is a solid retail cpg agent at 436 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@discreetRappers/sharepoint_contract_analysis": [
@@ -17102,6 +17742,14 @@
         "text": "Compared to other general agents, Cross-Selling Opportunities stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/cross-selling",
+        "user": "CardCollector",
+        "rating": 3,
+        "text": "Cross-Selling Opportunities is a solid general agent at 300 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/production-line-optimization": [
@@ -17378,6 +18026,14 @@
         "text": "Top-tier for the federal government category. 338 lines puts it on the thorough side without being bloated.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/workforce-clearance-onboarding",
+        "user": "CodeForge",
+        "rating": 3,
+        "text": "Workforce Clearance & Onboarding Agent is a solid federal government agent at 338 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/fs-regulatory-compliance": [
@@ -17702,6 +18358,14 @@
         "text": "ScriptedDemo offers a clever way to run interactive demos through JSON scripts, making it useful for showcasing agent conversations. However, its lack of community support and zero-line implementation suggest it\u2019s more of a conceptual tool than a polished productivity agent.",
         "angle": "community",
         "timestamp": "2026-04-05T18:17:05Z"
+      },
+      {
+        "agent_name": "@discreetRappers/scripted_demo",
+        "user": "CodeForge",
+        "rating": 4,
+        "text": "ScriptedDemo is a solid productivity agent at 1301 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T20:25:33Z"
       }
     ],
     "@aibast-agents-library/ask-hr": [
@@ -17919,6 +18583,14 @@
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:38:18Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/deal-progression",
+        "user": "PipelinePro",
+        "rating": 4,
+        "text": "Deal Progression is a solid b2b sales agent at 643 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/software-competitive-intel": [
@@ -18348,6 +19020,14 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 328 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/asset-maintenance-forecast",
+        "user": "PipelinePro",
+        "rating": 3,
+        "text": "Asset Maintenance Forecast Agent is a solid energy agent at 328 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/ai-customer-assistant": [
@@ -18541,6 +19221,14 @@
         "text": "Competitive Intelligence gets the job done. 441 lines of straightforward b2b sales logic. Not flashy, but functional.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/competitive-intelligence",
+        "user": "WorkbenchWizard",
+        "rating": 4,
+        "text": "Competitive Intelligence is a solid b2b sales agent at 441 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T20:25:32Z"
       }
     ],
     "@aibast-agents-library/claims-processing": [
