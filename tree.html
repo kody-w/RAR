@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Ecosystem Tree — Root to Bloom</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bark: #4a3728;
+    --bark-light: #6b5240;
+    --leaf: #2d5a27;
+    --leaf-light: #3fb950;
+    --bloom: #d4a017;
+    --bloom-pink: #e87da0;
+    --bloom-purple: #bc8cff;
+    --sky: #0d1117;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --verified: #ffd700;
+    --official: #ff6b35;
+    --community: #58a6ff;
+    --frontier: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── Header ──────────────────────────────── */
+  .header {
+    text-align: center; padding: 32px 20px 16px;
+    background: linear-gradient(180deg, #0f1922 0%, var(--bg) 100%);
+  }
+  .header h1 {
+    font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--leaf-light), var(--bloom));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .header p { color: var(--text-dim); font-size: .9rem; margin-top: 4px; }
+  .stats-bar {
+    display: flex; gap: 16px; justify-content: center; margin-top: 16px; flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px; padding: 8px 18px; text-align: center;
+  }
+  .stat .num { font-size: 1.4rem; font-weight: 800; color: var(--bloom); }
+  .stat .lbl { font-size: .7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .5px; }
+
+  /* ─── Tree Canvas ─────────────────────────── */
+  .tree-container {
+    position: relative; width: 100%; max-width: 1200px; margin: 0 auto;
+    padding: 0 20px 60px; min-height: 80vh;
+  }
+  canvas#treeCanvas {
+    width: 100%; height: 600px; display: block;
+    border-radius: 12px; margin-bottom: 24px;
+  }
+
+  /* ─── Layer Panels ────────────────────────── */
+  .layer {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px; padding: 20px; margin-bottom: 16px;
+  }
+  .layer-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    cursor: pointer; user-select: none;
+  }
+  .layer-icon { font-size: 1.3rem; }
+  .layer-title { font-size: 1rem; font-weight: 700; }
+  .layer-count {
+    font-size: .75rem; background: rgba(255,255,255,.08); padding: 2px 10px;
+    border-radius: 10px; color: var(--text-dim); margin-left: auto;
+  }
+  .layer-body { display: none; }
+  .layer.open .layer-body { display: block; }
+  .layer.open .layer-header .arrow { transform: rotate(90deg); }
+  .arrow { color: var(--text-dim); transition: transform .2s; font-size: .8rem; }
+
+  /* ─── Nodes ───────────────────────────────── */
+  .node-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px;
+  }
+  .node {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px; padding: 10px 14px; font-size: .82rem;
+    display: flex; align-items: center; gap: 8px; transition: border-color .15s;
+  }
+  .node:hover { border-color: rgba(255,255,255,.2); }
+  .node .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .node .name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .node .meta { font-size: .7rem; color: var(--text-dim); margin-left: auto; white-space: nowrap; }
+  .tier-official .dot { background: var(--official); box-shadow: 0 0 6px var(--official); }
+  .tier-verified .dot { background: var(--verified); box-shadow: 0 0 6px var(--verified); }
+  .tier-community .dot { background: var(--community); }
+  .tier-experimental .dot { background: var(--frontier); }
+
+  /* ─── Health Bar ──────────────────────────── */
+  .health-bar {
+    display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin: 8px 0;
+    background: rgba(255,255,255,.05);
+  }
+  .health-segment { height: 100%; transition: width .3s; }
+
+  /* ─── Legend ───────────────────────────────── */
+  .legend {
+    display: flex; gap: 16px; justify-content: center; margin: 16px 0; flex-wrap: wrap;
+    font-size: .78rem; color: var(--text-dim);
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ─── Back link ───────────────────────────── */
+  .back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); font-size: .85rem; padding: 8px 14px; margin: 16px 20px; text-decoration: none; }
+  .back:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">&larr; Agent Store</a>
+
+<div class="header">
+  <h1>The Ecosystem Tree</h1>
+  <p>Root to bloom — every verified dependency, every load-bearing node</p>
+  <div class="stats-bar" id="statsBar"></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--official)"></div> Official</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--verified)"></div> Verified</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--community)"></div> Community</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--frontier)"></div> Frontier</div>
+</div>
+
+<div class="tree-container">
+  <canvas id="treeCanvas" height="600"></canvas>
+  <div id="layers"></div>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+const RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+
+async function fetchJSON(path) {
+  try {
+    const r = await fetch(`${RAW}/${path}`);
+    if (!r.ok) return null;
+    return await r.json();
+  } catch { return null; }
+}
+
+async function init() {
+  const [registry, wikiExport, reviewsData] = await Promise.all([
+    fetchJSON('registry.json'),
+    fetchJSON('rappterpedia/rappterpedia_export.json'),
+    fetchJSON('state/curator_reviews.json'),
+  ]);
+
+  if (!registry) { document.getElementById('layers').innerHTML = '<p style="text-align:center;color:#666;padding:40px">Loading ecosystem data...</p>'; return; }
+
+  const agents = registry.agents || [];
+  const wiki = wikiExport || { articles: [], threads: [], stats: {} };
+  const reviews = reviewsData || { agents: {} };
+
+  // ── Stats ──
+  const totalAgents = agents.length;
+  const publishers = [...new Set(agents.map(a => a.name.split('/')[0]))];
+  const categories = [...new Set(agents.map(a => a.category))];
+  const totalArticles = (wiki.articles || []).length;
+  const totalThreads = (wiki.threads || []).length;
+  const totalReviews = Object.values(reviews.agents || {}).reduce((s, r) => s + r.length, 0);
+  const tiers = { official: 0, verified: 0, community: 0, experimental: 0 };
+  agents.forEach(a => { tiers[a.quality_tier || 'community']++; });
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><div class="num">${totalAgents}</div><div class="lbl">Agents</div></div>
+    <div class="stat"><div class="num">${publishers.length}</div><div class="lbl">Publishers</div></div>
+    <div class="stat"><div class="num">${categories.length}</div><div class="lbl">Categories</div></div>
+    <div class="stat"><div class="num">${totalArticles}</div><div class="lbl">Wiki Articles</div></div>
+    <div class="stat"><div class="num">${totalThreads}</div><div class="lbl">Forum Threads</div></div>
+    <div class="stat"><div class="num">${totalReviews}</div><div class="lbl">Reviews</div></div>
+  `;
+
+  // ── Draw Tree on Canvas ──
+  drawTree(agents, tiers, totalArticles, totalThreads, totalReviews);
+
+  // ── Build Layer Panels ──
+  const layersEl = document.getElementById('layers');
+
+  // Layer 0: Root
+  const root = agents.find(a => a.name === '@rapp/basic-agent');
+  layersEl.innerHTML = buildLayer('root', 'Root', '🌱', root ? [root] : [], 'The foundation. Every agent inherits from this.', true);
+
+  // Layer 1: Trunk — publishers
+  const pubData = {};
+  agents.forEach(a => {
+    const pub = a.name.split('/')[0];
+    pubData[pub] = pubData[pub] || [];
+    pubData[pub].push(a);
+  });
+  const pubNodes = publishers.map(p => ({
+    name: p, display_name: p, quality_tier: 'verified',
+    _meta: `${pubData[p].length} agents`,
+  }));
+  layersEl.innerHTML += buildLayer('trunk', 'Trunk — Publishers', '🪵', pubNodes, `${publishers.length} publisher namespaces owning the agent supply.`, true);
+
+  // Layer 2: Branches — categories
+  const catData = {};
+  agents.forEach(a => {
+    catData[a.category] = catData[a.category] || [];
+    catData[a.category].push(a);
+  });
+  const catNodes = categories.sort().map(c => ({
+    name: c, display_name: c.replace(/_/g, ' '),
+    quality_tier: catData[c].some(a => a.quality_tier === 'official') ? 'official' : 'verified',
+    _meta: `${catData[c].length}`,
+  }));
+  layersEl.innerHTML += buildLayer('branches', 'Branches — Categories', '🌿', catNodes, `${categories.length} categories spanning industry verticals.`);
+
+  // Layer 3: Leaves — all agents
+  const sortedAgents = [...agents].sort((a, b) => {
+    const tierOrder = { official: 0, verified: 1, community: 2, experimental: 3 };
+    return (tierOrder[a.quality_tier || 'community'] || 2) - (tierOrder[b.quality_tier || 'community'] || 2);
+  });
+  layersEl.innerHTML += buildLayer('leaves', 'Leaves — Agents', '🍃', sortedAgents.map(a => ({
+    ...a, display_name: a.display_name || a.name, _meta: `${a._lines || '?'}L`,
+  })), `${totalAgents} single-file agents. Each one is a leaf on the tree.`);
+
+  // Layer 4: Bloom — content
+  const bloomNodes = [
+    { name: 'wiki', display_name: 'Wiki Articles', quality_tier: 'verified', _meta: totalArticles },
+    { name: 'forum', display_name: 'Forum Threads', quality_tier: 'community', _meta: totalThreads },
+    { name: 'reviews', display_name: 'Curator Reviews', quality_tier: 'verified', _meta: totalReviews },
+    { name: 'cards', display_name: 'Holo Cards', quality_tier: 'official', _meta: totalAgents },
+    { name: 'book', display_name: 'Kindle Book', quality_tier: 'official', _meta: '20 chapters' },
+    { name: 'engine', display_name: 'Rappter Engine', quality_tier: 'official', _meta: 'ticking' },
+    { name: 'fleet', display_name: 'Dream Catcher Fleet', quality_tier: 'official', _meta: '5 workers' },
+    { name: 'brainstem', display_name: 'Virtual Brainstem', quality_tier: 'official', _meta: 'live' },
+  ];
+  layersEl.innerHTML += buildLayer('bloom', 'Bloom — Content & Infrastructure', '🌸', bloomNodes, 'The living ecosystem. Content, tools, and automation that make the tree breathe.', true);
+
+  // Layer 5: Canopy — federation & health
+  const healthPct = Math.min(100, Math.round(
+    (tiers.official * 4 + tiers.verified * 3 + tiers.community * 1) / (totalAgents * 4) * 100
+  ));
+  const coveragePct = Math.min(100, Math.round(totalArticles / totalAgents * 100));
+  const reviewPct = Math.min(100, Math.round(Object.keys(reviews.agents || {}).length / totalAgents * 100));
+
+  layersEl.innerHTML += `
+    <div class="layer open">
+      <div class="layer-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="arrow">&#9654;</span>
+        <span class="layer-icon">🌳</span>
+        <span class="layer-title">Canopy — Ecosystem Health</span>
+      </div>
+      <div class="layer-body">
+        <p style="color:var(--text-dim);font-size:.85rem;margin-bottom:16px">How close we are to full maple in bloom.</p>
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+            <span>Quality Coverage</span><span style="color:var(--bloom)">${healthPct}%</span>
+          </div>
+          <div class="health-bar">
+            <div class="health-segment" style="width:${tiers.official/totalAgents*100}%;background:var(--official)"></div>
+            <div class="health-segment" style="width:${tiers.verified/totalAgents*100}%;background:var(--verified)"></div>
+            <div class="health-segment" style="width:${tiers.community/totalAgents*100}%;background:var(--community)"></div>
+            <div class="health-segment" style="width:${tiers.experimental/totalAgents*100}%;background:var(--frontier)"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+            <span>Wiki Coverage (articles per agent)</span><span style="color:var(--leaf-light)">${coveragePct}%</span>
+          </div>
+          <div class="health-bar">
+            <div class="health-segment" style="width:${coveragePct}%;background:var(--leaf-light)"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+            <span>Review Coverage (agents reviewed)</span><span style="color:var(--bloom-purple)">${reviewPct}%</span>
+          </div>
+          <div class="health-bar">
+            <div class="health-segment" style="width:${reviewPct}%;background:var(--bloom-purple)"></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.15);border-radius:8px;font-size:.85rem;color:var(--leaf-light);text-align:center">
+          ${healthPct >= 80 && coveragePct >= 80 && reviewPct >= 80
+            ? '🍁 Full maple in bloom. The ecosystem is load-bearing.'
+            : healthPct >= 50
+            ? '🌿 Growing strong. Branches extending. Not yet full bloom.'
+            : '🌱 Early growth. Root is solid. Building upward.'}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Wire up layer toggles
+  document.querySelectorAll('.layer-header').forEach(h => {
+    h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+  });
+}
+
+function buildLayer(id, title, icon, nodes, desc, open = false) {
+  const nodeHtml = nodes.map(n => {
+    const tier = n.quality_tier || 'community';
+    return `<div class="node tier-${tier}">
+      <div class="dot"></div>
+      <span class="name">${esc(n.display_name || n.name)}</span>
+      <span class="meta">${n._meta || tier}</span>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="layer ${open ? 'open' : ''}" id="layer-${id}">
+      <div class="layer-header">
+        <span class="arrow">&#9654;</span>
+        <span class="layer-icon">${icon}</span>
+        <span class="layer-title">${title}</span>
+        <span class="layer-count">${nodes.length}</span>
+      </div>
+      <div class="layer-body">
+        <p style="color:var(--text-dim);font-size:.85rem;margin-bottom:12px">${desc}</p>
+        <div class="node-grid">${nodeHtml}</div>
+      </div>
+    </div>
+  `;
+}
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Tree Visualization ──
+function drawTree(agents, tiers, articles, threads, reviews) {
+  const canvas = document.getElementById('treeCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = 1200;
+  canvas.style.height = '600px';
+  ctx.scale(1, 1);
+
+  const cx = W / 2;
+
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, '#0a1628');
+  sky.addColorStop(0.4, '#0d1117');
+  sky.addColorStop(1, '#0a0e14');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  for (let i = 0; i < 80; i++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H * 0.4;
+    const r = Math.random() * 1.5;
+    ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.5 + 0.1})`;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // Ground
+  ctx.fillStyle = '#1a1510';
+  ctx.fillRect(0, H - 80, W, 80);
+  ctx.fillStyle = '#2a2418';
+  ctx.beginPath();
+  ctx.ellipse(cx, H - 80, W * 0.4, 20, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Roots
+  ctx.strokeStyle = '#4a3728';
+  ctx.lineWidth = 3;
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI - Math.PI / 2;
+    const len = 40 + Math.random() * 30;
+    ctx.beginPath();
+    ctx.moveTo(cx, H - 80);
+    const endX = cx + Math.cos(angle + Math.PI/2) * len * 2;
+    const endY = H - 80 + Math.sin(angle + Math.PI/2) * len * 0.5 + 20;
+    ctx.quadraticCurveTo(cx + Math.cos(angle + Math.PI/2) * len, H - 60, endX, endY);
+    ctx.stroke();
+  }
+
+  // Root label
+  ctx.fillStyle = '#3fb950';
+  ctx.font = 'bold 20px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('@rapp/basic-agent', cx, H - 40);
+  ctx.font = '14px -apple-system, sans-serif';
+  ctx.fillStyle = '#8b949e';
+  ctx.fillText('The Root', cx, H - 22);
+
+  // Trunk
+  const trunkBottom = H - 80;
+  const trunkTop = H * 0.55;
+  ctx.fillStyle = '#4a3728';
+  ctx.beginPath();
+  ctx.moveTo(cx - 20, trunkBottom);
+  ctx.lineTo(cx - 14, trunkTop);
+  ctx.lineTo(cx + 14, trunkTop);
+  ctx.lineTo(cx + 20, trunkBottom);
+  ctx.fill();
+
+  // Bark texture
+  ctx.strokeStyle = '#3a2a1c';
+  ctx.lineWidth = 1;
+  for (let y = trunkBottom; y > trunkTop; y -= 15) {
+    ctx.beginPath();
+    ctx.moveTo(cx - 16 + (trunkBottom - y) * 0.01, y);
+    ctx.lineTo(cx + 16 - (trunkBottom - y) * 0.01, y);
+    ctx.stroke();
+  }
+
+  // Main branches
+  const branches = [
+    { angle: -0.7, len: 160, label: '@kody' },
+    { angle: -0.3, len: 140, label: '@discreetRappers' },
+    { angle: 0.3, len: 150, label: '@aibast' },
+    { angle: 0.7, len: 130, label: '@borg' },
+    { angle: 0, len: 120, label: '@kody-w' },
+  ];
+
+  const branchEnds = [];
+  branches.forEach(b => {
+    const startY = trunkTop + 30;
+    const endX = cx + Math.sin(b.angle) * b.len;
+    const endY = startY - Math.cos(b.angle) * b.len;
+    const midX = cx + Math.sin(b.angle) * b.len * 0.5;
+    const midY = startY - Math.cos(b.angle) * b.len * 0.6;
+
+    ctx.strokeStyle = '#6b5240';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(cx, startY);
+    ctx.quadraticCurveTo(midX, midY, endX, endY);
+    ctx.stroke();
+
+    branchEnds.push({ x: endX, y: endY, label: b.label });
+
+    // Publisher label
+    ctx.fillStyle = '#c8a870';
+    ctx.font = 'bold 16px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(b.label, endX, endY - 10);
+  });
+
+  // Leaves (agent dots) — clustered around branch ends
+  const tierColors = {
+    official: '#ff6b35',
+    verified: '#ffd700',
+    community: '#58a6ff',
+    experimental: '#bc8cff',
+  };
+
+  agents.forEach((a, i) => {
+    const pub = a.name.split('/')[0];
+    const branch = branchEnds.find(b => b.label === pub) || branchEnds[i % branchEnds.length];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 30 + Math.random() * 80;
+    const x = branch.x + Math.cos(angle) * dist;
+    const y = branch.y + Math.sin(angle) * dist * 0.6 - 20;
+    const tier = a.quality_tier || 'community';
+    const color = tierColors[tier] || tierColors.community;
+    const r = tier === 'official' ? 4 : tier === 'verified' ? 3 : 2;
+
+    // Leaf glow
+    ctx.fillStyle = color + '30';
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, Math.PI * 2); ctx.fill();
+    // Leaf dot
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  });
+
+  // Canopy glow
+  const canopy = ctx.createRadialGradient(cx, trunkTop - 60, 20, cx, trunkTop - 60, 250);
+  canopy.addColorStop(0, 'rgba(63,185,80,0.08)');
+  canopy.addColorStop(0.5, 'rgba(63,185,80,0.03)');
+  canopy.addColorStop(1, 'transparent');
+  ctx.fillStyle = canopy;
+  ctx.fillRect(0, 0, W, H);
+
+  // Bloom particles (content)
+  const bloomCount = Math.min(60, Math.round(articles / 10));
+  for (let i = 0; i < bloomCount; i++) {
+    const x = cx + (Math.random() - 0.5) * 500;
+    const y = trunkTop - 80 + (Math.random() - 0.5) * 200;
+    const colors = ['#e87da0', '#d4a017', '#bc8cff', '#58a6ff', '#3fb950'];
+    ctx.fillStyle = colors[i % colors.length] + '60';
+    ctx.beginPath();
+    // Flower shape
+    for (let p = 0; p < 5; p++) {
+      const a = (p / 5) * Math.PI * 2;
+      const px = x + Math.cos(a) * 4;
+      const py = y + Math.sin(a) * 4;
+      ctx.moveTo(px, py);
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+    }
+    ctx.fill();
+  }
+
+  // Title on canvas
+  ctx.fillStyle = '#e6edf3';
+  ctx.font = 'bold 28px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Root to Bloom', cx, 40);
+  ctx.font = '16px -apple-system, sans-serif';
+  ctx.fillStyle = '#8b949e';
+  ctx.fillText(`${agents.length} agents · ${Object.keys(tierColors).map(t => `${tiers[t]} ${t}`).join(' · ')}`, cx, 65);
+}
+
+init();
+})();
+</script>
+</body>
+</html>
