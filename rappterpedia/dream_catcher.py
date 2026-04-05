@@ -112,14 +112,47 @@ def llm_ollama(system: str, user: str, max_tokens: int = 500) -> str:
     return data["message"]["content"].strip()
 
 
+def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
+    """GitHub Copilot CLI — UNLIMITED tokens. Always try first."""
+    combined = f"{system}\n\n{user}"
+    try:
+        result = subprocess.run(
+            ["gh", "copilot", "--", "-p", combined],
+            capture_output=True, text=True, timeout=90,
+        )
+    except FileNotFoundError:
+        raise RuntimeError("gh CLI not found")
+    except subprocess.TimeoutExpired:
+        raise RuntimeError("Copilot CLI timed out")
+
+    if result.returncode != 0:
+        raise RuntimeError(f"Copilot CLI error: {result.stderr.strip()}")
+
+    raw = result.stdout.strip()
+    if not raw:
+        raise RuntimeError("Copilot CLI returned empty output")
+
+    # Strip trailing usage stats
+    lines = raw.split("\n")
+    content_lines = []
+    for line in lines:
+        if line.strip().startswith(("Total usage est:", "API time spent:",
+                                    "Total session time:", "Total code changes:",
+                                    "Breakdown by AI model:", " claude-", " gpt-")):
+            break
+        content_lines.append(line)
+    return "\n".join(content_lines).strip()
+
+
 def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
-    """Try all available LLM backends. Returns None if all fail."""
-    # Backend selection based on environment
-    ollama_model = os.environ.get("OLLAMA_MODEL", "")
-    backends = []
-    if ollama_model:
+    """Try all LLM backends. Copilot CLI FIRST — unlimited tokens, infinite, free.
+    Fallback: Copilot CLI → GitHub Models → Ollama."""
+    backends = [
+        ("copilot", llm_copilot),    # FIRST — unlimited, infinite, free
+        ("github", llm_github),       # Second — rate-limited
+    ]
+    if os.environ.get("OLLAMA_MODEL", ""):
         backends.append(("ollama", llm_ollama))
-    backends.append(("github", llm_github))
 
     for name, fn in backends:
         try:
