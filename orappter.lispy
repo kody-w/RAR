@@ -1,23 +1,23 @@
 ;; ═══════════════════════════════════════════════════════════════
-;; OLLAMA.LISPY — Local LLM client for the RappterVM
+;; ORAPPTER.LISPY — The Rappter AI runtime — local LLM for the ecosystem
 ;; Connects any .lispy agent to a local Ollama endpoint.
 ;; No cloud. No API key. No rate limits. Just local AI.
 ;; ═══════════════════════════════════════════════════════════════
 
-(define _agent_name "ollama")
+(define _agent_name "orappter")
 (define _agent_desc "Local LLM client — connects agents to Ollama for on-device AI")
 
-(define OLLAMA_VERSION "1.0.0")
-(define OLLAMA_DEFAULT_HOST "http://localhost:11434")
-(define OLLAMA_DEFAULT_MODEL "gemma3:4b")
+(define ORAPPTER_VERSION "1.0.0")
+(define ORAPPTER_DEFAULT_HOST "http://localhost:11434")
+(define ORAPPTER_DEFAULT_MODEL "gemma3:4b")
 
 ;; ── Configuration ──
 
-(define (ollama-host)
-  (or (env "OLLAMA_HOST") OLLAMA_DEFAULT_HOST))
+(define (orappter-host)
+  (or (env "OLLAMA_HOST") ORAPPTER_DEFAULT_HOST))
 
-(define (ollama-model)
-  (or (env "OLLAMA_MODEL") OLLAMA_DEFAULT_MODEL))
+(define (orappter-model)
+  (or (env "OLLAMA_MODEL") ORAPPTER_DEFAULT_MODEL))
 
 
 ;; ═══════════════════════════════════════════════════════════════
@@ -25,41 +25,41 @@
 ;; ═══════════════════════════════════════════════════════════════
 
 ;; Generate a completion — the main function
-(define (ollama-generate prompt)
-  (ollama-generate-with (ollama-model) prompt))
+(define (orappter-generate prompt)
+  (orappter-generate-with (orappter-model) prompt))
 
-(define (ollama-generate-with model prompt)
-  (let (url (concat (ollama-host) "/api/generate")
+(define (orappter-generate-with model prompt)
+  (let (url (concat (orappter-host) "/api/generate")
         body (json-dump (make-dict
                "model" model
                "prompt" prompt
                "stream" false)))
     (let (response (http-post url body))
       (if (null? response)
-        (concat "Error: Could not reach Ollama at " (ollama-host))
+        (concat "Error: Could not reach Ollama at " (orappter-host))
         (get (json-parse response) "response" "No response")))))
 
 ;; Chat completion — multi-turn conversation
-(define (ollama-chat messages)
-  (ollama-chat-with (ollama-model) messages))
+(define (orappter-chat messages)
+  (orappter-chat-with (orappter-model) messages))
 
-(define (ollama-chat-with model messages)
-  (let (url (concat (ollama-host) "/api/chat")
+(define (orappter-chat-with model messages)
+  (let (url (concat (orappter-host) "/api/chat")
         body (json-dump (make-dict
                "model" model
                "messages" messages
                "stream" false)))
     (let (response (http-post url body))
       (if (null? response)
-        (concat "Error: Could not reach Ollama at " (ollama-host))
+        (concat "Error: Could not reach Ollama at " (orappter-host))
         (get (get (json-parse response) "message" (make-dict)) "content" "No response")))))
 
 ;; Embeddings — turn text into vectors
-(define (ollama-embed text)
-  (ollama-embed-with (ollama-model) text))
+(define (orappter-embed text)
+  (orappter-embed-with (orappter-model) text))
 
-(define (ollama-embed-with model text)
-  (let (url (concat (ollama-host) "/api/embeddings")
+(define (orappter-embed-with model text)
+  (let (url (concat (orappter-host) "/api/embeddings")
         body (json-dump (make-dict
                "model" model
                "prompt" text)))
@@ -74,8 +74,8 @@
 ;; ═══════════════════════════════════════════════════════════════
 
 ;; List available models
-(define (ollama-list)
-  (let (url (concat (ollama-host) "/api/tags")
+(define (orappter-list)
+  (let (url (concat (orappter-host) "/api/tags")
         response (http-get url))
     (if (null? response)
       (list)
@@ -84,8 +84,8 @@
              (get data "models" (list)))))))
 
 ;; Pull a model
-(define (ollama-pull model)
-  (let (url (concat (ollama-host) "/api/pull")
+(define (orappter-pull model)
+  (let (url (concat (orappter-host) "/api/pull")
         body (json-dump (make-dict "name" model "stream" false)))
     (let (response (http-post url body))
       (if (null? response)
@@ -93,15 +93,15 @@
         (concat "Pulled " model)))))
 
 ;; Check if Ollama is running
-(define (ollama-ping)
-  (let (response (http-get (ollama-host)))
+(define (orappter-ping)
+  (let (response (http-get (orappter-host)))
     (if (null? response)
       false
       true)))
 
 ;; Model info
-(define (ollama-show model)
-  (let (url (concat (ollama-host) "/api/show")
+(define (orappter-show model)
+  (let (url (concat (orappter-host) "/api/show")
         body (json-dump (make-dict "name" model)))
     (let (response (http-post url body))
       (if (null? response) nil (json-parse response)))))
@@ -117,14 +117,14 @@
   (let (system-prompt (concat
          "You are " agent-name ", an AI agent in the Rappter ecosystem. "
          "Answer concisely and helpfully."))
-    (ollama-chat
+    (orappter-chat
       (list
         (make-dict "role" "system" "content" system-prompt)
         (make-dict "role" "user" "content" question)))))
 
 ;; Ask with custom system prompt
 (define (agent-ask-with system-prompt question)
-  (ollama-chat
+  (orappter-chat
     (list
       (make-dict "role" "system" "content" system-prompt)
       (make-dict "role" "user" "content" question))))
@@ -134,18 +134,18 @@
   (let (prompt (concat
          "You are " agent-name ". Perform this task and return the result as plain text.\n\n"
          "Task: " task))
-    (ollama-generate prompt)))
+    (orappter-generate prompt)))
 
 ;; Summarize text
 (define (agent-summarize text)
-  (ollama-generate (concat "Summarize this in 2-3 sentences:\n\n" text)))
+  (orappter-generate (concat "Summarize this in 2-3 sentences:\n\n" text)))
 
 ;; Analyze and decide
 (define (agent-decide question options)
   (let (options-str (reduce
          (lambda (_acc opt) (concat _acc "\n- " opt))
          options ""))
-    (ollama-generate
+    (orappter-generate
       (concat "Given this question: " question
               "\n\nChoose the best option and explain why:" options-str))))
 
@@ -188,16 +188,16 @@
     (lambda (model)
       (make-dict
         "model" model
-        "response" (ollama-generate-with model prompt)))
+        "response" (orappter-generate-with model prompt)))
     models))
 
 ;; Use the best available model
 (define (smart-ask prompt)
-  (let (available (ollama-list))
+  (let (available (orappter-list))
     (if (empty? available)
       "Error: No models available. Run: ollama pull gemma3:4b"
       (let (model (car available))
-        (ollama-generate-with model prompt)))))
+        (orappter-generate-with model prompt)))))
 
 
 ;; ═══════════════════════════════════════════════════════════════
@@ -207,21 +207,21 @@
 
 ;; Connect to a remote brainstem (another Ollama instance)
 (define (brainstem-connect host)
-  (set! OLLAMA_DEFAULT_HOST host)
-  (if (ollama-ping)
+  (set! ORAPPTER_DEFAULT_HOST host)
+  (if (orappter-ping)
     (concat "Connected to brainstem at " host)
     (concat "Error: Cannot reach brainstem at " host)))
 
 ;; Route to local or remote based on availability
 (define (brainstem-ask prompt)
-  (if (ollama-ping)
-    (ollama-generate prompt)
+  (if (orappter-ping)
+    (orappter-generate prompt)
     (begin
       (log "Local Ollama unavailable. Trying cloud brainstem...")
-      (let (saved OLLAMA_DEFAULT_HOST)
-        (set! OLLAMA_DEFAULT_HOST "https://brainstem.rappter.com")
-        (let (result (ollama-generate prompt))
-          (set! OLLAMA_DEFAULT_HOST saved)
+      (let (saved ORAPPTER_DEFAULT_HOST)
+        (set! ORAPPTER_DEFAULT_HOST "https://brainstem.rappter.com")
+        (let (result (orappter-generate prompt))
+          (set! ORAPPTER_DEFAULT_HOST saved)
           result)))))
 
 
@@ -231,19 +231,19 @@
 
 (begin
   (log "═══════════════════════════════════════")
-  (log " OLLAMA.LISPY v1.0.0")
-  (log " Local AI for the Rappter ecosystem")
+  (log " ORAPPTER.LISPY v1.0.0")
+  (log " ORAPPTER — The Rappter AI Runtime")
   (log "═══════════════════════════════════════")
   (log "")
-  (if (ollama-ping)
+  (if (orappter-ping)
     (begin
-      (log (concat " Connected: " (ollama-host)))
-      (log (concat " Model: " (ollama-model)))
-      (let (models (ollama-list))
+      (log (concat " Connected: " (orappter-host)))
+      (log (concat " Model: " (orappter-model)))
+      (let (models (orappter-list))
         (log (concat " Available: " (string (length models)) " models")))
       (log "")
       (log " Quick start:")
-      (log "   (ollama-generate \"What is a digital twin?\")")
+      (log "   (orappter-generate \"What is a digital twin?\")")
       (log "   (agent-ask \"CEO Agent\" \"Should we accept this deal?\")")
       (log "   (summon-agent \"@rapp/basic-agent\" registry)"))
     (begin
