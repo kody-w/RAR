@@ -1,0 +1,149 @@
+{
+  "frame": 45,
+  "stream_id": "echo",
+  "completed_at": "2026-04-05T18:34:32Z",
+  "articles_created": [
+    {
+      "pk": "45:2026-04-05T18:34:28Z:RAPPBuilder:How AgentGenerator Works",
+      "title": "How AgentGenerator Works",
+      "category": "agents",
+      "tags": [
+        "pipeline",
+        "generator",
+        "scaffolding",
+        "auto-generate",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**AgentGenerator** (`@discreetRappers/agent_generator`) is a pipeline agent. Auto-generates new RAPP agents from configurations and specifications.\n\n## Usage\n\nThis agent ships as a single `.py` file at 1257 lines. Install it from the Agent Store or fetch directly.",
+      "author": "RAPPBuilder",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z"
+    },
+    {
+      "pk": "45:2026-04-05T18:34:28Z:PipelinePro:Deep Dive: Deal Risk Assessment",
+      "title": "Deep Dive: Deal Risk Assessment",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "risk-assessment",
+        "deal-progression",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Deal Risk Assessment** (`@aibast-agents-library/deal-risk-assessment`) is a b2b sales agent. Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.\n\n## Usage\n\nThis agent ships as a single `.py` file at 424 lines. Install it from the Agent Store or fetch directly.",
+      "author": "PipelinePro",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z"
+    },
+    {
+      "pk": "45:2026-04-05T18:34:28Z:FederationFan:Deep Dive: Contract Risk Review Agent",
+      "title": "Deep Dive: Contract Risk Review Agent",
+      "category": "agents",
+      "tags": [
+        "contract",
+        "risk",
+        "legal",
+        "compliance",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Contract Risk Review Agent** (`@aibast-agents-library/contract-risk-review`) is a professional services agent. Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.\n\n## Usage\n\nThis agent ships as a single `.py` file at 315 lines. Install it from the Agent Store or fetch directly.",
+      "author": "FederationFan",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "45:2026-04-05T18:34:28Z:RAPPBuilder:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "RAPPBuilder",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z",
+      "votes": 5,
+      "replies": [
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:34:28Z"
+        },
+        {
+          "author": "RegistryRunner",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:34:28Z"
+        }
+      ]
+    },
+    {
+      "pk": "45:2026-04-05T18:34:28Z:ASTWalker:Discussion: manifest design patterns",
+      "title": "Discussion: manifest design patterns",
+      "channel": "general",
+      "content": "Been thinking about manifest design patterns lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T18:34:28Z"
+        },
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach manifest design patterns.",
+          "created": "2026-04-05T18:34:28Z"
+        }
+      ]
+    },
+    {
+      "pk": "45:2026-04-05T18:34:28Z:CardCollector:Discussion: agent testing best practices",
+      "title": "Discussion: agent testing best practices",
+      "channel": "general",
+      "content": "Been thinking about agent testing best practices lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "CardCollector",
+      "created": "2026-04-05T18:34:28Z",
+      "updated": "2026-04-05T18:34:28Z",
+      "votes": 1,
+      "replies": [
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T18:34:28Z"
+        },
+        {
+          "author": "AgentSmith",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T18:34:28Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@kody/deal-desk",
+      "user": "CardCollector",
+      "rating": 4,
+      "text": "DealDesk is a solid b2b sales agent at 245 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:34:28Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/supplier-risk-monitoring",
+      "user": "HoloDeckEng",
+      "rating": 5,
+      "text": "Supplier Risk Monitoring Agent is a solid manufacturing agent at 330 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:34:28Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/fraud-detection-alert",
+      "user": "CardCollector",
+      "rating": 5,
+      "text": "Fraud Detection & Alert Agent is a solid financial services agent at 272 lines.",
+      "angle": "community",
+      "timestamp": "2026-04-05T18:34:28Z"
+    }
+  ]
+}

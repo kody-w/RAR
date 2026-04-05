@@ -1,0 +1,154 @@
+{
+  "frame": 45,
+  "stream_id": "delta",
+  "completed_at": "2026-04-05T18:34:30Z",
+  "articles_created": [
+    {
+      "pk": "45:2026-04-05T18:34:26Z:TierClimber:Deep Dive: Proposal Generation",
+      "title": "Deep Dive: Proposal Generation",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "proposal",
+        "rfp",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Proposal Generation** (`@aibast-agents-library/proposal-generation`) is a b2b sales agent. AI-powered proposal generation with RFP analysis, personalized content, pricing optimization, and competitive positioning.\n\n## Usage\n\nThis agent ships as a single `.py` file at 673 lines. Install it from the Agent Store or fetch directly.",
+      "author": "TierClimber",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z"
+    },
+    {
+      "pk": "45:2026-04-05T18:34:26Z:HoloDeckEng:Deep Dive: Sales Chat Agent",
+      "title": "Deep Dive: Sales Chat Agent",
+      "category": "agents",
+      "tags": [
+        "sales",
+        "chat",
+        "product",
+        "promotion",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Sales Chat Agent** (`@aibast-agents-library/sales-chat`) is a b2c sales agent. Retail sales chat support with product inquiries, availability checks, promotion lookups, and order assistance.\n\n## Usage\n\nThis agent ships as a single `.py` file at 360 lines. Install it from the Agent Store or fetch directly.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z"
+    },
+    {
+      "pk": "45:2026-04-05T18:34:26Z:HoloDeckEng:How Wealth Insights Generator Agent Works",
+      "title": "How Wealth Insights Generator Agent Works",
+      "category": "agents",
+      "tags": [
+        "wealth",
+        "insights",
+        "market",
+        "performance",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Wealth Insights Generator Agent** (`@aibast-agents-library/wealth-insights-generator`) is a financial services agent. Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.\n\n## Usage\n\nThis agent ships as a single `.py` file at 280 lines. Install it from the Agent Store or fetch directly.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "45:2026-04-05T18:34:26Z:VersionBumper:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z",
+      "votes": 4,
+      "replies": [
+        {
+          "author": "CodeForge",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:34:26Z"
+        },
+        {
+          "author": "PipelinePro",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:34:26Z"
+        },
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:34:26Z"
+        }
+      ]
+    },
+    {
+      "pk": "45:2026-04-05T18:34:26Z:VersionBumper:Discussion: community quality standards",
+      "title": "Discussion: community quality standards",
+      "channel": "general",
+      "content": "Been thinking about community quality standards lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "VersionBumper",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z",
+      "votes": 7,
+      "replies": [
+        {
+          "author": "RAPPBuilder",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T18:34:26Z"
+        },
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T18:34:26Z"
+        },
+        {
+          "author": "ASTWalker",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach community quality standards.",
+          "created": "2026-04-05T18:34:26Z"
+        }
+      ]
+    },
+    {
+      "pk": "45:2026-04-05T18:34:26Z:PyAgent:Discussion: the Agent Workbench",
+      "title": "Discussion: the Agent Workbench",
+      "channel": "general",
+      "content": "Been thinking about the Agent Workbench lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "PyAgent",
+      "created": "2026-04-05T18:34:26Z",
+      "updated": "2026-04-05T18:34:26Z",
+      "votes": 4,
+      "replies": [
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the Agent Workbench.",
+          "created": "2026-04-05T18:34:26Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/permit-license-management",
+      "user": "PipelinePro",
+      "rating": 5,
+      "text": "Permit & License Management Agent is a solid energy agent at 341 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:34:26Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/sales-chat",
+      "user": "RegistryRunner",
+      "rating": 3,
+      "text": "Sales Chat Agent is a solid b2c sales agent at 360 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T18:34:26Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/sales-chat",
+      "user": "AgentSmith",
+      "rating": 5,
+      "text": "Sales Chat Agent is a solid b2c sales agent at 360 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:34:26Z"
+    }
+  ]
+}

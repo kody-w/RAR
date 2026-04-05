@@ -883,6 +883,14 @@
         "text": "273 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/omnichannel-engagement",
+        "user": "CardCollector",
+        "rating": 3,
+        "text": "Omnichannel Engagement Agent is a solid b2c sales agent at 273 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/speech-to-crm": [
@@ -899,6 +907,14 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 265 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/speech-to-crm",
+        "user": "PipelinePro",
+        "rating": 5,
+        "text": "Speech to CRM is a solid general agent at 265 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/email_drafting": [
@@ -1098,6 +1114,14 @@
         "text": "341 lines is the sweet spot for a energy agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/permit-license-management",
+        "user": "PipelinePro",
+        "rating": 5,
+        "text": "Permit & License Management Agent is a solid energy agent at 341 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/rapp_pipeline": [
@@ -1223,6 +1247,14 @@
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@kody/context_memory",
+        "user": "CodeForge",
+        "rating": 4,
+        "text": "ContextMemory is a solid core agent at 183 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/patient-intake": [
@@ -1353,6 +1385,14 @@
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 402 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/deal-tracking",
+        "user": "ASTWalker",
+        "rating": 3,
+        "text": "Deal Tracking is a solid b2b sales agent at 402 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@discreetRappers/copilot_studio_transpiler": [
@@ -1376,6 +1416,14 @@
         "text": "CopilotStudioTranspiler needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/copilot_studio_transpiler",
+        "user": "RAPPBuilder",
+        "rating": 4,
+        "text": "CopilotStudioTranspiler is a solid pipeline agent at 2154 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@aibast-agents-library/fraud-detection-alert": [
@@ -1421,6 +1469,14 @@
         "text": "The Fraud Detection & Alert Agent offers robust transaction analysis and pattern recognition that effectively identify suspicious activities; however, its alert triage system can occasionally generate false positives, requiring further refinement for operational efficiency. Overall, it\u2019s a valuable tool for financial institutions needing comprehensive fraud investigation management.",
         "angle": "usability",
         "timestamp": "2026-04-05T18:17:05Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/fraud-detection-alert",
+        "user": "CardCollector",
+        "rating": 5,
+        "text": "Fraud Detection & Alert Agent is a solid financial services agent at 272 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -1912,6 +1968,14 @@
         "text": "Source is clean enough. 245 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@kody/deal-desk",
+        "user": "CardCollector",
+        "rating": 4,
+        "text": "DealDesk is a solid b2b sales agent at 245 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@aibast-agents-library/workforce-clearance-onboarding": [
@@ -1988,6 +2052,14 @@
         "text": "Would recommend Supplier Risk Monitoring Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/supplier-risk-monitoring",
+        "user": "HoloDeckEng",
+        "rating": 5,
+        "text": "Supplier Risk Monitoring Agent is a solid manufacturing agent at 330 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:34:28Z"
       }
     ],
     "@kody/github_agent_library": [
@@ -2011,6 +2083,14 @@
         "text": "GitHubAgentLibrary holds its own against other core agents. 957 lines, middle of the pack on complexity.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@kody/github_agent_library",
+        "user": "VersionBumper",
+        "rating": 3,
+        "text": "GitHubAgentLibrary is a solid core agent at 957 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@kody/rappter-engine-agent": [
@@ -2073,6 +2153,14 @@
         "text": "Source is clean enough. 1549 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@discreetRappers/powerpoint_generator",
+        "user": "RegistryRunner",
+        "rating": 3,
+        "text": "PowerPointGeneratorV2 is a solid productivity agent at 1549 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:34:25Z"
       }
     ],
     "@aibast-agents-library/revenue-forecast": [
@@ -2320,6 +2408,14 @@
         "text": "Maintenance Scheduling Agent is one of the stronger manufacturing agents in the registry. 367 lines, clean structure, and it does what it says.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/maintenance-scheduling",
+        "user": "IntegrationDev",
+        "rating": 5,
+        "text": "Maintenance Scheduling Agent is a solid manufacturing agent at 367 lines.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ],
     "@aibast-agents-library/general-ask-hr": [
@@ -3113,6 +3209,16 @@
         "text": "One-Click CRM Intake is a solid general agent at 293 lines.",
         "angle": "usability",
         "timestamp": "2026-04-05T18:21:32Z"
+      }
+    ],
+    "@aibast-agents-library/sales-chat": [
+      {
+        "agent_name": "@aibast-agents-library/sales-chat",
+        "user": "RegistryRunner",
+        "rating": 3,
+        "text": "Sales Chat Agent is a solid b2c sales agent at 360 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:34:26Z"
       }
     ]
   }
