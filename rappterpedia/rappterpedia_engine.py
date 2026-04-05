@@ -162,6 +162,19 @@ ARTICLE_RULES: dict[str, dict] = {
                     "- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
                 ],
             },
+            {
+                "heading": "Steps",
+                "templates": [
+                    "### 1. Set Up Your Environment\n\nClone the RAR repository and make sure you can run `python build_registry.py` without errors. This confirms your Python version and project structure are correct.\n\n### 2. Understand the Pattern\n\nEvery agent in RAR follows the same structure: a `__manifest__` dict at module level, a class inheriting from `BasicAgent`, and a `perform(**kwargs)` method that returns a string.\n\n### 3. Apply It\n\nFor {topic_lower}, the key is to follow existing patterns. Look at agents in the `agents/` directory for reference implementations. The best way to learn is by reading working code.\n\n### 4. Validate\n\nRun `python build_registry.py` to check your manifest, then `pytest tests/test_agent_contract.py` to run the full contract test suite.",
+                    "### 1. Start Simple\n\nDon't try to build everything at once. Start with the minimal working version and iterate.\n\n### 2. Follow the Conventions\n\nRAR has clear conventions for {topic_lower} — file naming, manifest fields, class structure. Following them means the tooling works for you automatically.\n\n### 3. Test Locally\n\n```bash\npython build_registry.py\npytest tests/test_agent_contract.py -k \"your-agent\"\n```\n\n### 4. Ship It\n\nOnce tests pass, submit via PR or the Agent Store workbench.",
+                ],
+            },
+            {
+                "heading": "Common Mistakes",
+                "templates": [
+                    "Watch out for these when working on {topic_lower}:\n\n- **Forgetting `__manifest__`** — It must be a dict literal at module level. The AST parser can't find it if it's inside a function or class.\n- **Wrong return type** — `perform()` must return `str`. Returning `None`, `dict`, or `int` will fail contract tests.\n- **Hardcoded secrets** — Use `os.environ.get()` and declare in `requires_env`. Never hardcode API keys.\n- **display_name mismatch** — The manifest's `display_name` must match `self.name` in your class.",
+                ],
+            },
         ],
         "topic_pool": [
             "Writing Your First Agent",
@@ -203,6 +216,25 @@ ARTICLE_RULES: dict[str, dict] = {
                 "templates": [
                     "This article explains **{arch_topic_lower}** — one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
                     "RAR's approach to {arch_topic_lower} is intentionally simple but surprisingly powerful. Here's how it works and why it was designed this way.",
+                ],
+            },
+            {
+                "heading": "How It Works",
+                "templates": [
+                    "At its core, {arch_topic_lower} follows a simple pipeline:\n\n1. **Input** — The process begins when a trigger event occurs (a push, a build, or a user action)\n2. **Processing** — The system reads the relevant data, applies its rules, and produces output\n3. **Output** — Results are written to the appropriate state files or rendered in the UI\n\nThe entire flow is deterministic and auditable. No magic, no hidden state.",
+                    "The implementation lives in the RAR repository as plain Python and JSON — no external services, no databases, no build tools beyond what ships with Python 3.11+. This is intentional: every part of the system should be readable, forkable, and runnable offline.",
+                ],
+            },
+            {
+                "heading": "Key Files",
+                "templates": [
+                    "The relevant source files for {arch_topic_lower}:\n\n| File | Role |\n|------|------|\n| `build_registry.py` | AST-based manifest extractor |\n| `registry.json` | Auto-generated agent index |\n| `index.html` | Zero-dependency web store |\n| `rar.config.json` | Federation and feature flags |\n\nAll paths are relative to the RAR repository root.",
+                ],
+            },
+            {
+                "heading": "Design Decisions",
+                "templates": [
+                    "Several design decisions shaped {arch_topic_lower}:\n\n- **No code execution during build** — The registry builder uses Python's `ast` module to extract manifests. Your agent code is never imported or run during the build. This is a security decision.\n- **Single source of truth** — `registry.json` is the canonical index. It's auto-generated and committed by CI. Never hand-edit it.\n- **Offline-first** — The web store works from `file://` with zero network dependencies. IndexedDB provides persistence.",
                 ],
             },
         ],
@@ -370,6 +402,20 @@ ARTICLE_RULES: dict[str, dict] = {
                     "Let's explore what **@{publisher_slug}** has published in the RAR registry — {agent_count} agents spanning {category_spread}.",
                 ],
             },
+            {
+                "heading": "Key Agents",
+                "templates": [
+                    "Here are the standout agents from this namespace:\n\n{top_agents_list}\n\nEach agent follows the single-file principle — one `.py` file, one manifest, one `perform()` method.",
+                    "The **@{publisher_slug}** collection includes agents across multiple categories. Browse the full listing in the [Agent Store](../index.html) or check individual pages in this wiki.",
+                ],
+            },
+            {
+                "heading": "What Makes This Namespace Unique",
+                "templates": [
+                    "The @{publisher_slug} namespace stands out for its focus on {focus_area}. While other publishers cover broad categories, this collection goes deep on specific use cases that matter to practitioners.",
+                    "What's distinctive about @{publisher_slug} is the consistency — every agent follows the same patterns, uses similar parameter conventions, and returns cleanly formatted strings. You can mix and match agents from this namespace and they'll work together naturally.",
+                ],
+            },
         ],
     },
 
@@ -390,6 +436,19 @@ ARTICLE_RULES: dict[str, dict] = {
                     "One of RAR's unique features is federation — running independent instances that can share agents upstream. Here's how **{fed_topic_lower}** works.",
                 ],
             },
+            {
+                "heading": "Step by Step",
+                "templates": [
+                    "To implement {fed_topic_lower}:\n\n1. **Start from the template** — Use RAR as a GitHub template to create your own repository\n2. **Configure `rar.config.json`** — Set your `owner`, `repo`, and federation flags\n3. **Set up CI** — The `build-registry.yml` workflow runs automatically on pushes to `agents/**`\n4. **Add your agents** — Drop `.py` files into `agents/@yournamespace/`\n5. **Build** — Run `python build_registry.py` to generate your `registry.json`\n\nYour instance is now self-governing. See CONSTITUTION.md Article XIV for governance details.",
+                    "Here's the practical path for {fed_topic_lower}:\n\n1. Fork or template the RAR repository\n2. Edit `rar.config.json` with your organization details\n3. Set `allow_upstream_sync` based on whether you want to pull from the main store\n4. Run `python build_registry.py` to validate your setup\n5. Open `index.html` to verify your store renders correctly\n\nThe entire process takes about 15 minutes. No server infrastructure required — it's all GitHub Actions and static files.",
+                ],
+            },
+            {
+                "heading": "Configuration",
+                "templates": [
+                    "Key settings in `rar.config.json` for {fed_topic_lower}:\n\n```json\n{\n  \"role\": \"fork\",\n  \"owner\": \"your-org\",\n  \"repo\": \"your-rar\",\n  \"federation\": {\n    \"accept_submissions\": true,\n    \"allow_upstream_sync\": false\n  }\n}\n```\n\n- `role`: Set to `\"fork\"` for federated instances (main store uses `\"main\"`)\n- `accept_submissions`: Whether your instance accepts agent submissions via GitHub Issues\n- `allow_upstream_sync`: Whether to pull public agents from the main RAR store",
+                ],
+            },
         ],
         "topic_pool": [
             "Setting Up Your First Federated Instance",
@@ -399,6 +458,144 @@ ARTICLE_RULES: dict[str, dict] = {
             "Custom CI/CD for Federated Instances",
             "Governance in Federated Communities",
             "Migration: Moving Agents Between Instances",
+        ],
+    },
+
+    "vertical_guide": {
+        "category": "getting-started",
+        "weight": 5,
+        "tags": ["vertical", "industry", "guide", "enterprise"],
+        "titles": [
+            "Building {vertical} Agents with RAR",
+            "{vertical} Agents: A Practical Guide",
+            "RAR for {vertical}: Getting Started",
+            "The {vertical} Agent Collection — What's Available and How to Use It",
+        ],
+        "sections": [
+            {
+                "heading": "Overview",
+                "templates": [
+                    "The RAR registry includes **{agent_count_in_vertical} agents** purpose-built for the **{vertical_lower}** vertical. This guide walks through what's available, how to get started, and common patterns for building in this space.",
+                    "Whether you're evaluating RAR for a {vertical_lower} use case or building your own agents in this vertical, this guide covers the landscape — from existing agents to patterns that work.",
+                ],
+            },
+            {
+                "heading": "Available Agents",
+                "templates": [
+                    "The {vertical_lower} category includes agents for common workflows in this industry:\n\n{vertical_agent_list}\n\nBrowse the full listing in the [Agent Store](../index.html) or search for the `{vertical_slug}` category.",
+                ],
+            },
+            {
+                "heading": "Common Patterns",
+                "templates": [
+                    "Agents in the {vertical_lower} vertical tend to follow these patterns:\n\n- **Data lookup** — Query external systems (CRMs, ERPs, databases) and return formatted results\n- **Document generation** — Create reports, proposals, or summaries from structured input\n- **Risk assessment** — Score or evaluate inputs against business rules\n- **Workflow automation** — Chain multiple operations into a single `perform()` call\n\nMost agents in this vertical require environment variables for API credentials. Check each agent's `requires_env` field before deploying.",
+                    "Building for {vertical_lower}? Keep these patterns in mind:\n\n- **Keep it single-purpose** — One agent, one job. Don't build a Swiss Army knife.\n- **Declare your dependencies** — If you need API keys, list them in `requires_env`\n- **Return structured strings** — Even if the underlying data is complex, `perform()` returns a string. Format it for readability.\n- **Handle missing credentials** — Return a helpful error message, don't crash.",
+                ],
+            },
+            {
+                "heading": "Getting Started",
+                "templates": [
+                    "### Try an Existing Agent\n\n1. Browse the [Agent Store](../index.html) and filter by the `{vertical_slug}` category\n2. Download an agent that matches your use case\n3. Set up any required environment variables\n4. Call `perform()` with your parameters\n\n### Build Your Own\n\n1. Start from the agent template in CONTRIBUTING.md\n2. Set `category` to `\"{vertical_slug}\"` in your manifest\n3. Implement your `perform()` method\n4. Run `pytest tests/test_agent_contract.py -k your-agent` to validate\n5. Submit via PR or the Store workbench",
+                ],
+            },
+        ],
+        "vertical_pool": [
+            ("B2B Sales", "b2b_sales"),
+            ("B2C Sales", "b2c_sales"),
+            ("Financial Services", "financial_services"),
+            ("Healthcare", "healthcare"),
+            ("Manufacturing", "manufacturing"),
+            ("Energy", "energy"),
+            ("Federal Government", "federal_government"),
+            ("State & Local Government", "slg_government"),
+            ("Professional Services", "professional_services"),
+            ("Retail & CPG", "retail_cpg"),
+            ("Software & Digital Products", "software_digital_products"),
+            ("Human Resources", "human_resources"),
+            ("IT Management", "it_management"),
+            ("Core Infrastructure", "core"),
+            ("Pipeline & Code Generation", "pipeline"),
+            ("Integrations", "integrations"),
+            ("Developer Tools", "devtools"),
+        ],
+    },
+
+    "agent_comparison": {
+        "category": "agents",
+        "weight": 3,
+        "tags": ["comparison", "decision-support", "vs"],
+        "titles": [
+            "Choosing a {cat_display} Agent: What's Available",
+            "{cat_display} Agents Compared",
+            "Which {cat_display} Agent Should You Use?",
+            "Agent Comparison: {cat_display}",
+        ],
+        "sections": [
+            {
+                "heading": "Overview",
+                "templates": [
+                    "The RAR registry has **{agent_count_in_cat} agents** in the **{cat_display}** category. This article compares them to help you choose the right one for your use case.",
+                    "With {agent_count_in_cat} agents in {cat_display}, choosing the right one can be overwhelming. Here's a structured comparison to help you decide.",
+                ],
+            },
+            {
+                "heading": "Quick Comparison",
+                "templates": [
+                    "{comparison_table}\n\nAll agents follow the single-file principle and implement the standard `perform(**kwargs)` interface.",
+                ],
+            },
+            {
+                "heading": "When to Use Each",
+                "templates": [
+                    "The right agent depends on your specific use case:\n\n- **Need something general-purpose?** Start with the agent that has the broadest description and fewest `requires_env` entries — it'll be easiest to get running.\n- **Need deep integration?** Look for agents with specific `requires_env` fields — they connect to real external systems.\n- **Need customization?** Pick the agent with the most lines of code — it likely has more parameters and configuration options.\n- **Just exploring?** Try the agent with the most tags — it covers the most ground.",
+                ],
+            },
+            {
+                "heading": "Recommendations",
+                "templates": [
+                    "For most {cat_display_lower} use cases, we recommend starting with the agent that has the fewest environment variable requirements. Get familiar with the `perform()` interface, then graduate to more specialized agents as your needs grow.\n\nAll agents in this category are interchangeable at the API level — they all accept `**kwargs` and return strings. You can swap one for another without changing your calling code.",
+                ],
+            },
+        ],
+    },
+
+    "quick_reference": {
+        "category": "getting-started",
+        "weight": 3,
+        "tags": ["reference", "cheat-sheet", "quick-start"],
+        "titles": [
+            "Quick Reference: {ref_topic}",
+            "Cheat Sheet: {ref_topic}",
+            "{ref_topic} — At a Glance",
+            "{ref_topic} Reference Card",
+        ],
+        "sections": [
+            {
+                "heading": "Summary",
+                "templates": [
+                    "A quick-reference guide for **{ref_topic_lower}**. Bookmark this page for fast lookups.",
+                    "Everything you need to know about {ref_topic_lower} in one place. No prose — just the facts.",
+                ],
+            },
+            {
+                "heading": "Reference",
+                "templates": [
+                    "### Manifest Required Fields\n\n| Field | Type | Example |\n|-------|------|--------|\n| `schema` | string | `\"rapp-agent/1.0\"` |\n| `name` | string | `\"@publisher/my-agent\"` |\n| `version` | string | `\"1.0.0\"` |\n| `display_name` | string | `\"MyAgent\"` |\n| `description` | string | `\"One sentence.\"` |\n| `author` | string | `\"Your Name\"` |\n| `tags` | list | `[\"keyword1\", \"keyword2\"]` |\n| `category` | string | `\"integrations\"` |\n\n### Optional Fields\n\n| Field | Default | Purpose |\n|-------|---------|--------|\n| `quality_tier` | `\"community\"` | Trust level |\n| `requires_env` | `[]` | Env vars needed |\n| `dependencies` | `[\"@rapp/basic-agent\"]` | Agent deps |",
+                    "### Agent File Structure\n\n```python\n\"\"\"Docstring — serves as documentation.\"\"\"\n\n__manifest__ = {\n    \"schema\": \"rapp-agent/1.0\",\n    \"name\": \"@publisher/my-agent\",\n    # ... all required fields\n}\n\nfrom agents.basic_agent import BasicAgent\n\nclass MyAgent(BasicAgent):\n    def __init__(self):\n        self.name = \"MyAgent\"  # Must match display_name\n        self.metadata = __manifest__\n        super().__init__(self.name, self.metadata)\n\n    def perform(self, **kwargs):\n        # Your logic here\n        return \"result string\"\n```\n\n### Key Rules\n- File must end with `_agent.py`\n- `perform()` must return `str`\n- No network calls in `__init__()`\n- Use `os.environ.get()` for secrets\n- Declare secrets in `requires_env`",
+                ],
+            },
+        ],
+        "topic_pool": [
+            "Manifest Fields",
+            "Agent File Structure",
+            "Quality Tiers",
+            "Category Definitions",
+            "Environment Variable Patterns",
+            "perform() Return Patterns",
+            "Naming Conventions",
+            "Testing Commands",
+            "Publishing Checklist",
+            "Federation Config",
         ],
     },
 }
@@ -1232,6 +1429,57 @@ def generate_article(state: dict, agents: list[dict], echoes: dict | None = None
             "platform_upper": platform.upper().replace(" ", "_"),
         })
 
+    # For vertical guides, use real registry category data
+    if rule_name == "vertical_guide" and agents:
+        vpool = rule.get("vertical_pool", [])
+        unused_v = [v for v in vpool if v[0] not in state["generated_topics"]]
+        if not unused_v:
+            unused_v = vpool
+        vertical_name, vertical_slug = random.choice(unused_v)
+        state["generated_topics"].append(vertical_name)
+        cat_agents = [a for a in agents if a.get("category") == vertical_slug]
+        agent_list = "\n".join(
+            f"- **{a.get('display_name', a.get('name','?'))}** — {a.get('description', 'No description.')[:80]}"
+            for a in sorted(cat_agents, key=lambda x: x.get("display_name", ""))[:10]
+        ) or "- No agents in this category yet."
+        ctx.update({
+            "vertical": vertical_name, "vertical_lower": vertical_name.lower(),
+            "vertical_slug": vertical_slug,
+            "agent_count_in_vertical": len(cat_agents),
+            "vertical_agent_list": agent_list,
+        })
+
+    # For agent comparisons, group by registry category
+    if rule_name == "agent_comparison" and agents:
+        # Pick a category with 3+ agents
+        cat_groups = {}
+        for a in agents:
+            c = a.get("category", "general")
+            cat_groups.setdefault(c, []).append(a)
+        dense_cats = [(c, ag) for c, ag in cat_groups.items() if len(ag) >= 3]
+        if dense_cats:
+            cat_name, cat_agents = random.choice(dense_cats)
+            cat_display = cat_name.replace("_", " ").title()
+            # Build comparison table
+            rows = "\n".join(
+                f"| {a.get('display_name','?')} | {a.get('description','')[:50]} | {a.get('_lines','?')} | {len(a.get('requires_env',[])) or 'None'} |"
+                for a in sorted(cat_agents, key=lambda x: x.get("display_name",""))[:8]
+            )
+            comparison_table = f"| Agent | Description | Lines | Env Vars |\n|-------|------------|-------|----------|\n{rows}"
+            ctx.update({
+                "cat_display": cat_display,
+                "cat_display_lower": cat_display.lower(),
+                "agent_count_in_cat": len(cat_agents),
+                "comparison_table": comparison_table,
+            })
+
+    # For quick references, map topic to context
+    if rule_name == "quick_reference":
+        ctx.update({
+            "ref_topic": ctx.get("topic", "Reference"),
+            "ref_topic_lower": ctx.get("topic_lower", "reference"),
+        })
+
     # For publisher spotlights, use real data
     if rule_name == "community_spotlight" and agents:
         publishers = {}
@@ -1242,12 +1490,17 @@ def generate_article(state: dict, agents: list[dict], echoes: dict | None = None
         pub_name = random.choice(list(publishers.keys()))
         pub_agents = publishers[pub_name]
         categories = set(a.get("category", "") for a in pub_agents)
+        top_agents = "\n".join(
+            f"- **{a.get('display_name', a.get('name','?'))}** — {a.get('description','')[:60]}"
+            for a in pub_agents[:6]
+        )
         ctx.update({
             "publisher": pub_name,
             "publisher_slug": pub_name,
             "agent_count": len(pub_agents),
             "focus_area": ", ".join(categories),
             "category_spread": f"{len(categories)} categories",
+            "top_agents_list": top_agents,
         })
 
     # Generate title
