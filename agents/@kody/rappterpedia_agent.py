@@ -28,7 +28,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["wiki", "forum", "content", "community", "rappterpedia", "engine"],
     "category": "productivity",
-    "quality_tier": "verified",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

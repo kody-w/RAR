@@ -12,7 +12,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["core", "package-manager", "install", "discovery"],
     "category": "core",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

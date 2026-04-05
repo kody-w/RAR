@@ -27,7 +27,7 @@ __manifest__ = {
     "author": "AIBAST",
     "tags": ["hr", "policy", "benefits", "leave", "directory", "general"],
     "category": "general",
-    "quality_tier": "verified",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

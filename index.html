@@ -673,6 +673,69 @@
   .card-actions-bar .btn-deck.in-deck { border-color: rgba(200,60,60,.4); color: #e6a9a9; }
   .card-actions-bar .btn-deck.in-deck:hover { border-color: #d44; color: #ffb8b8; }
 
+  /* ── Wallet Viewer ── */
+  .wallet-login-card {
+    max-width: 420px; margin: 0 auto; padding: 32px;
+    background: linear-gradient(180deg, rgba(247,147,26,.04), rgba(247,147,26,.01));
+    border: 1px solid rgba(247,147,26,.15); border-radius: 16px; text-align: center;
+  }
+  .wallet-login-card .wl-icon {
+    width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px;
+    background: rgba(247,147,26,.1); border: 2px solid rgba(247,147,26,.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; color: #f7931a;
+  }
+  .wallet-login-card h3 { font-size: 1.1rem; margin: 0 0 8px; color: var(--text); }
+  .wallet-login-card p { font-size: .82rem; color: var(--text-dim); margin: 0 0 20px; line-height: 1.5; }
+  .wallet-login-card .wl-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border-radius: 10px; font-size: .9rem; font-weight: 700;
+    cursor: pointer; border: none; transition: all .2s; letter-spacing: .5px;
+  }
+  .wallet-login-card .wl-btn-gh {
+    background: #24292e; color: #fff;
+  }
+  .wallet-login-card .wl-btn-gh:hover { background: #2d3339; }
+  .wallet-login-card .wl-btn-gh svg { width: 20px; height: 20px; fill: #fff; }
+  .wallet-repo-input {
+    width: 100%; padding: 10px 14px; border-radius: 8px; font-size: .85rem;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font-family: monospace; box-sizing: border-box; outline: none; margin-bottom: 12px;
+  }
+  .wallet-repo-input:focus { border-color: #f7931a; }
+  .wallet-summary {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .wallet-summary .ws-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; text-align: center;
+  }
+  .wallet-summary .ws-val { font-size: 1.3rem; font-weight: 900; }
+  .wallet-summary .ws-lbl { font-size: .6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+  .wallet-cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .wallet-card-row {
+    display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    transition: border-color .2s; cursor: default;
+  }
+  .wallet-card-row:hover { border-color: rgba(247,147,26,.3); }
+  .wallet-card-row .wcr-rarity {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .wallet-card-row .wcr-rarity.mythic { background: #ff6d00; box-shadow: 0 0 6px rgba(255,109,0,.5); }
+  .wallet-card-row .wcr-rarity.rare { background: #ffd700; box-shadow: 0 0 6px rgba(255,215,0,.4); }
+  .wallet-card-row .wcr-rarity.uncommon { background: #c0c0c0; }
+  .wallet-card-row .wcr-rarity.common { background: #667788; }
+  .wallet-card-row .wcr-info { flex: 1; min-width: 0; }
+  .wallet-card-row .wcr-name { font-size: .82rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wallet-card-row .wcr-agent { font-size: .65rem; color: var(--text-muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wallet-card-row .wcr-btc { font-size: .82rem; font-weight: 800; color: #f7931a; white-space: nowrap; }
+  .wallet-card-row .wcr-cat { font-size: .6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+
   /* Card mode toggle */
   .card-mode-toggle {
     display: flex; background: var(--surface); border: 1px solid var(--border);
@@ -1048,44 +1111,145 @@
     50% { box-shadow: 0 0 18px currentColor, 0 0 30px currentColor; transform: scale(1.15); }
   }
 
-  /* ── Show & Tell: fullscreen card spotlight ── */
+  /* ── Collector Mode: fullscreen card spotlight ── */
   .showntell-overlay {
     position: fixed; inset: 0; z-index: 9999;
-    background: rgba(0,0,0,.92);
+    --spot-x: 50%; --spot-y: 50%;
+    background:
+      radial-gradient(ellipse 700px 500px at var(--spot-x) var(--spot-y), rgba(60,48,24,.25) 0%, transparent 100%),
+      radial-gradient(ellipse at center, rgba(15,12,6,.96) 0%, rgba(0,0,0,.99) 100%);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; opacity: 0; transition: opacity .3s ease;
-    backdrop-filter: blur(8px);
+    cursor: pointer; opacity: 0; transition: opacity .4s ease;
+    backdrop-filter: blur(12px);
   }
   .showntell-overlay.open { opacity: 1; }
+  /* Vignette */
+  .showntell-overlay::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
+  }
   .showntell-card {
-    /* Fixed size — override the grid's width:100%, clamped to viewport */
     width: var(--st-w) !important; max-width: calc(100vw - 48px); aspect-ratio: 5/7;
     max-height: calc(100vh - 120px);
     transform-style: preserve-3d;
-    --tilt-x: 0deg; --tilt-y: 0deg;
+    --tilt-x: 0deg; --tilt-y: 0deg; --shadow-x: 0px; --shadow-y: 12px;
     transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-    transition: transform .1s ease-out;
-    cursor: grab;
-    filter: drop-shadow(0 0 40px rgba(201,168,76,.2));
-    flex-shrink: 0;
+    transition: transform .4s ease-out, filter .3s ease;
+    cursor: pointer;
+    filter: drop-shadow(var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,.7))
+            drop-shadow(0 0 30px rgba(201,168,76,.12));
+    flex-shrink: 0; position: relative; z-index: 1;
+    animation: collectorCardIn .8s cubic-bezier(.16,1,.3,1) both;
+  }
+  @keyframes collectorCardIn {
+    from { opacity: 0; transform: perspective(1000px) rotateX(4deg) rotateY(0deg) scale(.85) translateZ(-60px); }
+    to { opacity: 1; transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(1) translateZ(0); }
   }
   .showntell-card:active { cursor: grabbing; }
-  /* Remove flip on spotlight clone */
-  .showntell-card.flipped { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); }
+  /* Flip */
+  .showntell-card.flipped { transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(calc(180deg + var(--tilt-y))); }
+  /* Toolbar */
   .showntell-toolbar {
-    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-    z-index: 10000; display: flex; gap: 12px; align-items: center;
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 10000; display: flex; gap: 8px; align-items: center;
+    background: rgba(15,12,6,.85); border: 1px solid rgba(90,74,42,.4);
+    border-radius: 12px; padding: 6px 8px; backdrop-filter: blur(10px);
   }
   .showntell-toolbar button {
-    padding: 8px 18px; border-radius: 8px; border: 1px solid #5a4a2a;
-    background: rgba(30,25,15,.9); color: #e8dcc8; font-size: .85rem;
-    cursor: pointer; font-weight: 600; transition: border-color .2s;
+    padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(90,74,42,.3);
+    background: transparent; color: #c8b89a; font-size: .8rem;
+    cursor: pointer; font-weight: 600; transition: all .2s; letter-spacing: .3px;
   }
-  .showntell-toolbar button:hover { border-color: #c9a84c; }
+  .showntell-toolbar button:hover { border-color: #c9a84c; color: #e8dcc8; background: rgba(201,168,76,.08); }
+  .showntell-toolbar .st-sep { width: 1px; height: 20px; background: rgba(90,74,42,.3); flex-shrink: 0; }
+  /* Collector info strip */
+  .showntell-info {
+    position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%);
+    z-index: 10000; display: flex; gap: 20px; align-items: center;
+    animation: showcaseFadeIn .5s ease-out .3s both; opacity: 0;
+  }
+  .showntell-info .si-chip {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .showntell-info .si-val { color: #c8b89a; font-size: .8rem; font-weight: 700; letter-spacing: .5px; }
+  .showntell-info .si-lbl { color: #4a4030; font-size: .55rem; text-transform: uppercase; letter-spacing: 1.5px; }
+  .showntell-info .si-val.si-mythic { color: #ff8c00; }
+  .showntell-info .si-val.si-rare { color: #ffd700; }
+  .showntell-info .si-val.si-uncommon { color: #c0c0c0; }
+  /* Binder value badge */
+  .showntell-btc {
+    position: fixed; top: 56px; left: 50%; transform: translateX(-50%);
+    z-index: 10000; display: flex; align-items: center; gap: 16px;
+    animation: showcaseFadeIn .6s ease-out .6s both; opacity: 0;
+  }
+  .showntell-btc .stb-price {
+    display: flex; align-items: baseline; gap: 6px;
+  }
+  .showntell-btc .stb-btc {
+    font-size: 1.2rem; font-weight: 800; color: #c8b89a;
+    letter-spacing: .5px; font-variant-numeric: tabular-nums;
+  }
+  .showntell-btc .stb-usd {
+    font-size: .75rem; color: #6a5d4a; font-weight: 600;
+  }
+  .showntell-btc .stb-badge {
+    font-size: .55rem; letter-spacing: 2px; text-transform: uppercase;
+    color: #4a4030; border: 1px solid rgba(139,115,50,.25);
+    border-radius: 4px; padding: 3px 8px; font-weight: 700;
+  }
+  .showntell-btc .stb-own {
+    font-size: .55rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #3fb950; font-weight: 700;
+  }
+  /* Chain ownership strip */
+  .showntell-chain {
+    position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+    z-index: 10000; display: flex; align-items: center; gap: 10px;
+    font-size: .65rem; animation: showcaseFadeIn .5s ease-out .8s both; opacity: 0;
+  }
+  .showntell-chain .stc-status {
+    display: flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 4px;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .showntell-chain .stc-status.forged {
+    color: #39d353; border: 1px solid rgba(57,211,83,.25); background: rgba(57,211,83,.06);
+  }
+  .showntell-chain .stc-status.unforged {
+    color: #f0883e; border: 1px solid rgba(240,136,62,.25); background: rgba(240,136,62,.06);
+  }
+  .showntell-chain .stc-owner {
+    color: #58a6ff; font-family: monospace; font-size: .65rem;
+  }
+  .showntell-chain .stc-you {
+    color: #39d353; font-size: .55rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .showntell-chain .stc-transfer {
+    padding: 3px 10px; border-radius: 4px; border: 1px solid rgba(247,147,26,.25);
+    background: rgba(247,147,26,.06); color: #f7931a; font-size: .6rem;
+    cursor: pointer; font-weight: 700; letter-spacing: .5px; transition: all .2s;
+  }
+  .showntell-chain .stc-transfer:hover { border-color: #f7931a; background: rgba(247,147,26,.12); }
+  /* Top label */
   .showntell-label {
     position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    z-index: 10000; color: #8a7e6a; font-size: .75rem; letter-spacing: 2px;
-    text-transform: uppercase;
+    z-index: 10000; color: #4a4030; font-size: .65rem; letter-spacing: 3px;
+    text-transform: uppercase; white-space: nowrap;
+    animation: showcaseFadeIn .5s ease-out .5s both; opacity: 0;
+  }
+  /* Ambient dust */
+  .showntell-dust {
+    position: fixed; inset: 0; z-index: 9998; pointer-events: none; overflow: hidden;
+  }
+  .showntell-dust i {
+    position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: rgba(201,168,76,.25); animation: dustDrift linear infinite;
+  }
+  @keyframes dustDrift {
+    0% { transform: translate(0, 0) scale(1); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: .6; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; }
   }
 
   /* Holo border shimmer + lift glow on hover */
@@ -2298,6 +2462,7 @@
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
+    <button class="nav-btn" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button>
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <a class="nav-btn" href="rappterpedia/" style="text-decoration:none">Wiki</a>
@@ -2948,6 +3113,17 @@ class MyAgent(BasicAgent):
     </div>
     <div id="market-ticker" style="margin-bottom:20px"></div>
     <div id="market-grid"></div>
+  </div>
+
+  <!-- ═══════════ Wallet ═══════════ -->
+  <div class="panel" id="panel-wallet">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="color:#f7931a;font-size:.78rem;text-transform:uppercase;letter-spacing:3px;font-weight:700">Private &bull; Authenticated</div>
+      <h2 style="font-size:1.4rem;font-weight:800;margin:4px 0">CARD WALLET</h2>
+      <p style="color:var(--text-dim);font-size:.85rem;max-width:520px;margin:8px auto 0">View cards owned by any wallet. Authenticate with GitHub to access private wallets.</p>
+    </div>
+    <div id="wallet-auth-area"></div>
+    <div id="wallet-content" style="display:none"></div>
   </div>
 
 </div>
@@ -3653,6 +3829,7 @@ function switchTab(tab) {
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
   if (tab === 'market') renderMarketExchange();
+  if (tab === 'wallet') renderWalletTab();
   if (tab === 'submit' && ghUser?.login) {
     const ta = document.getElementById('agent-code');
     if (!ta.value || ta.value.includes('@your-username/')) {
@@ -6988,11 +7165,15 @@ function agentToCard(a) {
   </div>`;
 }
 
-// ── Show & Tell: fullscreen card spotlight (clones the real card, just scales up) ──
-function showAndTell(name) {
+// ── Collector Mode: fullscreen card spotlight ──
+async function showAndTell(name) {
   const cardId = 'card-' + name.replace(/[^a-z0-9]/gi, '_');
   const src = document.getElementById(cardId);
   if (!src) return;
+
+  const a = allAgents.find(x => x.name === name);
+  const tier = a?.quality_tier || 'community';
+  const rarity = TIER_TO_RARITY[tier] || 'uncommon';
 
   // Calculate width so card fills ~70% of viewport height (aspect 5:7), clamped to viewport width
   const targetH = window.innerHeight * 0.7;
@@ -7001,24 +7182,163 @@ function showAndTell(name) {
   const overlay = document.createElement('div');
   overlay.className = 'showntell-overlay';
 
+  // Ambient dust particles
+  const dust = document.createElement('div');
+  dust.className = 'showntell-dust';
+  for (let i = 0; i < 20; i++) {
+    const mote = document.createElement('i');
+    const x = Math.random() * 100;
+    const dur = 8 + Math.random() * 14;
+    const dx = (Math.random() - .5) * 80;
+    const dy = -(60 + Math.random() * 40);
+    const size = 1 + Math.random() * 2;
+    mote.style.cssText = `left:${x}%;bottom:-5%;width:${size}px;height:${size}px;--dx:${dx}px;--dy:${dy}vh;animation-duration:${dur}s;animation-delay:${Math.random() * dur}s`;
+    dust.appendChild(mote);
+  }
+  overlay.appendChild(dust);
+
   // Clone the actual card — identical layout, just larger
   const clone = src.cloneNode(true);
   clone.removeAttribute('id');
   clone.classList.remove('flipped');
   clone.classList.add('showntell-card');
   clone.style.setProperty('--st-w', Math.round(targetW) + 'px');
-  clone.removeAttribute('onclick');
+  clone.setAttribute('onclick', 'this.classList.toggle("flipped")');
   clone.removeAttribute('ondblclick');
 
-  overlay.innerHTML = `<div class="showntell-label">double-click card or press Esc to close &mdash; arrow keys to browse</div>`;
+  overlay.innerHTML += `<div class="showntell-label">click card to flip &middot; F to flip &middot; Esc to close &middot; arrow keys to browse</div>`;
   overlay.appendChild(clone);
+
+  // ── Binder Value ──
+  // Anyone can USE an agent. Only one Binder can CLAIM ownership.
+  // Value is denominated in BTC. The Binder tracks who owns the card.
+  const rarityFloor = { mythic: 200, rare: 100, uncommon: 40, common: 10 };
+  const floorPts = rarityFloor[rarity] || 40;
+  const floorBv = formatBtcValue(floorPts);
+
+  // Check if user owns any copies
+  let ownedCard = null;
+  let ownedBv = null;
+  let ownedCount = 0;
+  try {
+    const allMinted = await getAllMinted();
+    const owned = allMinted.filter(c => c.agentName === name);
+    ownedCount = owned.length;
+    if (owned.length) {
+      owned.sort((x, y) => (y.grade || 0) - (x.grade || 0));
+      ownedCard = owned[0];
+      ownedCard.grade = gradeCard(ownedCard);
+      const ownedVal = calculateValue(ownedCard);
+      ownedBv = formatBtcValue(ownedVal);
+    }
+  } catch(e) {}
+
+  // Authority note — only surfaces when the ecosystem is load-bearing.
+  // Until then, keep it in the provenance data, not the UI.
+  const authorityNote = '';
+
+  const btcEl = document.createElement('div');
+  btcEl.className = 'showntell-btc';
+  if (ownedCard) {
+    const gl = gradeLabel(ownedCard.grade);
+    btcEl.innerHTML = `
+      <span class="stb-own">&#10003; CLAIMED${ownedCount > 1 ? ` (${ownedCount})` : ''}</span>
+      <div class="stb-price">
+        <span class="stb-btc">&#8383;${ownedBv.btc}</span>
+        <span class="stb-usd">${ownedBv.usd}</span>
+      </div>
+      <span class="stb-badge">${gl.label} &middot; #${ownedCard.mintNum}${ownedCard.isFirstEdition ? ' &middot; 1ST ED' : ''}${authorityNote}</span>`;
+  } else {
+    btcEl.innerHTML = `
+      <div class="stb-price">
+        <span class="stb-btc">&#8383;${floorBv.btc}</span>
+        <span class="stb-usd">${floorBv.usd}</span>
+      </div>
+      <span class="stb-badge">Binder Value${authorityNote}</span>`;
+  }
+  overlay.appendChild(btcEl);
+
+  // ── Binder Tracking ──
+  // Anyone can use the agent. Only the Binder that owns the card can update it on-chain.
+  // When a card transfers, the new Binder becomes the controller.
+  const chainEl = document.createElement('div');
+  chainEl.className = 'showntell-chain';
+  chainEl.id = 'showntell-chain';
+  const myBinder = getBinderAddress();
+
+  if (ownedCard) {
+    // Check on-chain status for the owned card
+    // Check if card was already transferred to someone else
+    const cardOwnerFp = ownedCard._thirdspace?.fingerprint;
+    const cardOwnerName = ownedCard._thirdspace?.ownerName;
+    const isStillMine = !cardOwnerFp || cardOwnerFp === myBinder;
+
+    getForgeStatus(ownedCard).then(status => {
+      if (!document.getElementById('showntell-chain')) return; // overlay closed
+      const chainOwner = status.verified ? status.owner : cardOwnerFp;
+      const isMyCard = myBinder && (isStillMine || chainOwner === myBinder);
+      if (status.verified) {
+        const ownerLabel = cardOwnerName || status.ownerAlias || formatBinderAddress(status.owner);
+        chainEl.innerHTML = `
+          <span class="stc-status forged">&#9670; On-Chain</span>
+          <span style="color:#4a4030">Owner:</span>
+          <span class="stc-owner">${esc(ownerLabel)}</span>
+          ${isMyCard ? '<span class="stc-you">&#10003; You</span>' : ''}
+          ${isMyCard ? `<button class="stc-transfer" onclick="event.stopPropagation();collectorTransfer('${esc(ownedCard.mintId)}')">Gift / Transfer</button>` : ''}`;
+      } else if (!isStillMine) {
+        // Card was transferred locally but not yet on-chain
+        const ownerLabel = cardOwnerName || formatBinderAddress(cardOwnerFp);
+        chainEl.innerHTML = `
+          <span class="stc-status unforged">&#9671; Transferred</span>
+          <span style="color:#4a4030">Owner:</span>
+          <span class="stc-owner">${esc(ownerLabel)}</span>
+          <span style="color:#6a5d4a;font-size:.55rem">(pending chain)</span>`;
+      } else {
+        chainEl.innerHTML = `
+          <span class="stc-status unforged">&#9671; Unforged</span>
+          <span style="color:#4a4030">Binder:</span>
+          <span class="stc-owner">${myBinder ? formatBinderAddress(myBinder) : 'No Binder'}</span>
+          ${myBinder ? '<span class="stc-you">&#10003; You</span>' : ''}
+          ${myBinder ? `<button class="stc-transfer" onclick="event.stopPropagation();collectorTransfer('${esc(ownedCard.mintId)}')">Gift / Transfer</button>` : ''}`;
+      }
+    });
+    // Show placeholder while chain lookup is async
+    chainEl.innerHTML = `<span style="color:#4a4030;font-size:.6rem;letter-spacing:1px">Checking chain...</span>`;
+  } else {
+    // Not owned — show generic chain info
+    chainEl.innerHTML = `
+      <span class="stc-status unforged">&#9671; Not Owned</span>
+      <span style="color:#4a4030;font-size:.6rem">Mint a copy to claim ownership on-chain</span>`;
+  }
+  overlay.appendChild(chainEl);
+
+  // Collector info strip
+  if (a) {
+    const publisher = a.name.split('/')[0] || '';
+    const cat = (a.category || '').replace(/_/g, ' ');
+    const power = Math.max(1, (a.tags || []).length + (a.dependencies || []).length);
+    const toughness = Math.max(1, parseInt(a.version || '1') * 2 + (a.requires_env || []).length);
+    const infoEl = document.createElement('div');
+    infoEl.className = 'showntell-info';
+    infoEl.innerHTML = `
+      <div class="si-chip"><span class="si-val">${esc(publisher)}</span><span class="si-lbl">Publisher</span></div>
+      <div class="si-chip"><span class="si-val si-${rarity}">${(RARITY_LABELS[rarity] || rarity).toUpperCase()}</span><span class="si-lbl">Tier</span></div>
+      <div class="si-chip"><span class="si-val">${cat || 'general'}</span><span class="si-lbl">Category</span></div>
+      <div class="si-chip"><span class="si-val">v${a.version || '?'}</span><span class="si-lbl">Version</span></div>
+      <div class="si-chip"><span class="si-val">${power}/${toughness}</span><span class="si-lbl">P/T</span></div>`;
+    overlay.appendChild(infoEl);
+  }
 
   const toolbar = document.createElement('div');
   toolbar.className = 'showntell-toolbar';
   toolbar.innerHTML = `
     <button onclick="event.stopPropagation();showAndTellNav(-1)">&#9664; Prev</button>
+    <span class="st-sep"></span>
+    <button onclick="event.stopPropagation();document.querySelector('.showntell-card')?.classList.toggle('flipped')">Flip</button>
     <button onclick="event.stopPropagation();closeShowAndTell();openAgent('${name.replace(/'/g,"\\'")}')">Details</button>
+    <span class="st-sep"></span>
     <button onclick="event.stopPropagation();closeShowAndTell()">Close</button>
+    <span class="st-sep"></span>
     <button onclick="event.stopPropagation();showAndTellNav(1)">Next &#9654;</button>`;
   overlay.appendChild(toolbar);
 
@@ -7027,17 +7347,23 @@ function showAndTell(name) {
   overlay._agentName = name;
   requestAnimationFrame(() => overlay.classList.add('open'));
 
-  // Tilt handler for the fullscreen card
+  // Tilt + spotlight + dynamic shadow handler
   const holoEl = clone.querySelector('.agent-card-holo');
   overlay.addEventListener('mousemove', e => {
-    // Use full overlay area for tilt input
     const cx = e.clientX / window.innerWidth;
     const cy = e.clientY / window.innerHeight;
     const tiltX = ((0.5 - cy) * 20).toFixed(1);
     const tiltY = ((cx - 0.5) * 20).toFixed(1);
     const angle = (Math.atan2(cy - 0.5, cx - 0.5) * 180 / Math.PI).toFixed(0);
+    // Card tilt
     clone.style.setProperty('--tilt-x', tiltX + 'deg');
     clone.style.setProperty('--tilt-y', tiltY + 'deg');
+    // Spotlight follows cursor
+    overlay.style.setProperty('--spot-x', (cx * 100).toFixed(0) + '%');
+    overlay.style.setProperty('--spot-y', (cy * 100).toFixed(0) + '%');
+    // Dynamic shadow — opposite to tilt direction
+    clone.style.setProperty('--shadow-x', (-(cx - 0.5) * 30).toFixed(0) + 'px');
+    clone.style.setProperty('--shadow-y', (12 + (cy - 0.5) * 20).toFixed(0) + 'px');
     if (holoEl) {
       const mxPct = (cx * 100).toFixed(0) + '%';
       const myPct = (cy * 100).toFixed(0) + '%';
@@ -7052,7 +7378,12 @@ function showAndTell(name) {
   });
   overlay.addEventListener('click', e => { if (e.target === overlay) closeShowAndTell(); });
   clone.addEventListener('dblclick', e => { e.stopPropagation(); closeShowAndTell(); });
-  overlay._keyHandler = e => { if (e.key === 'Escape') closeShowAndTell(); else if (e.key === 'ArrowLeft') showAndTellNav(-1); else if (e.key === 'ArrowRight') showAndTellNav(1); };
+  overlay._keyHandler = e => {
+    if (e.key === 'Escape') closeShowAndTell();
+    else if (e.key === 'ArrowLeft') showAndTellNav(-1);
+    else if (e.key === 'ArrowRight') showAndTellNav(1);
+    else if (e.key === 'f' || e.key === 'F') document.querySelector('.showntell-card')?.classList.toggle('flipped');
+  };
   document.addEventListener('keydown', overlay._keyHandler);
 }
 
@@ -7078,6 +7409,192 @@ function showAndTellNav(dir) {
     closeShowAndTell();
     setTimeout(() => showAndTell(next.name), 320);
   }
+}
+
+// ── Collector Mode Transfer ──
+// Transfer card ownership to a new wallet. The new owner's wallet
+// becomes the one that can update this card on-chain.
+// Bitcoin is the settlement layer — BTC price is the card's real-world value.
+// Supports: Binder addresses, BTC wallet addresses, or any external wallet identifier.
+async function collectorTransfer(mintId) {
+  const myBinder = getBinderAddress();
+  if (!myBinder) { showToast('Connect your Binder first', 'error'); return; }
+
+  // Look up the card for display info
+  const allMinted = await getAllMinted();
+  const card = allMinted.find(c => c.mintId === mintId);
+  if (!card) { showToast('Card not found', 'error'); return; }
+
+  const val = calculateValue(card);
+  const bv = formatBtcValue(val);
+
+  // Build the transfer modal
+  const modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;z-index:10100;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)';
+  modal.onclick = e => { if (e.target === modal) modal.remove(); };
+
+  modal.innerHTML = `
+    <div style="background:linear-gradient(180deg,#1a1510,#0f0c08);border:1px solid rgba(247,147,26,.2);border-radius:16px;padding:32px;max-width:480px;width:92%;color:#e8dcc8;box-shadow:0 0 60px rgba(247,147,26,.08)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h3 style="margin:0;font-size:1.1rem;color:#f7931a;letter-spacing:1px">Transfer Card</h3>
+        <button onclick="this.closest('div[style*=fixed]').remove()" style="background:none;border:none;color:#4a4030;cursor:pointer;font-size:1.2rem">&times;</button>
+      </div>
+
+      <div style="background:rgba(247,147,26,.04);border:1px solid rgba(247,147,26,.12);border-radius:10px;padding:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:.95rem;font-weight:800;color:#e8dcc8">${esc(card.displayName)}</div>
+          <div style="font-size:.65rem;color:#6a5d4a;margin-top:2px">Mint #${card.mintNum}${card.isFirstEdition ? ' &middot; 1ST EDITION' : ''} &middot; ${card.transfers || 0} prior transfers</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:1.1rem;font-weight:900;color:#f7931a">&#8383;${bv.btc}</div>
+          <div style="font-size:.7rem;color:#6a5d4a">${bv.usd}</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <button id="xfer-type-donate" onclick="document.getElementById('xfer-type-donate').classList.add('_act');document.getElementById('xfer-type-sale').classList.remove('_act');document.getElementById('xfer-type').value='donate'" class="_act" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(57,211,83,.3);background:rgba(57,211,83,.08);color:#3fb950;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s">Gift / Donate</button>
+          <button id="xfer-type-sale" onclick="document.getElementById('xfer-type-sale').classList.add('_act');document.getElementById('xfer-type-donate').classList.remove('_act');document.getElementById('xfer-type').value='sale'" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(247,147,26,.3);background:transparent;color:#f7931a;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s">Sale</button>
+        </div>
+        <input type="hidden" id="xfer-type" value="donate">
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:.65rem;color:#6a5d4a;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:6px">Recipient Name</label>
+        <input id="xfer-name" type="text" placeholder='e.g. "CEO", "Howard", "Treasury"' style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(90,74,42,.4);background:rgba(15,12,6,.8);color:#e8dcc8;font-size:.85rem;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#f7931a'" onblur="this.style.borderColor='rgba(90,74,42,.4)'">
+      </div>
+
+      <div style="margin-bottom:20px">
+        <label style="font-size:.65rem;color:#6a5d4a;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:6px">Binder Address</label>
+        <input id="xfer-addr" type="text" placeholder="Destination Binder address" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(90,74,42,.4);background:rgba(15,12,6,.8);color:#58a6ff;font-size:.8rem;font-family:monospace;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#c9a84c'" onblur="this.style.borderColor='rgba(90,74,42,.4)'">
+        <div style="font-size:.58rem;color:#4a4030;margin-top:4px">The new Binder controls this card on-chain. Anyone can use the agent — only the Binder owns it.</div>
+      </div>
+
+      <div style="font-size:.65rem;color:#6a5d4a;margin-bottom:14px;padding:10px;border-radius:8px;border:1px solid rgba(90,74,42,.15);background:rgba(90,74,42,.04)">
+        <div style="margin-bottom:4px"><strong style="color:#c8b89a">From:</strong> <span style="font-family:monospace;color:#58a6ff">${formatBinderAddress(myBinder)}</span> <span style="color:#3fb950;font-size:.55rem;font-weight:700">(YOU)</span></div>
+        <div><strong style="color:#c8b89a">Provenance:</strong> Signed transfer recorded permanently in the Binder chain</div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button onclick="this.closest('div[style*=fixed]').remove()" style="padding:10px 20px;border-radius:8px;border:1px solid rgba(90,74,42,.3);background:transparent;color:#c8b89a;font-size:.85rem;cursor:pointer;font-weight:600">Cancel</button>
+        <button id="xfer-confirm" onclick="executeCollectorTransfer('${esc(mintId)}')" style="padding:10px 24px;border-radius:8px;border:1px solid #f7931a;background:linear-gradient(135deg,rgba(247,147,26,.15),rgba(247,147,26,.08));color:#f7931a;font-size:.85rem;cursor:pointer;font-weight:800;letter-spacing:.5px;transition:all .2s">Sign &amp; Transfer</button>
+      </div>
+    </div>
+  `;
+
+  // Style the active transfer type button
+  const style = document.createElement('style');
+  style.textContent = '._act{border-color:currentColor!important;background:rgba(57,211,83,.12)!important}#xfer-type-sale._act{background:rgba(247,147,26,.12)!important}';
+  modal.appendChild(style);
+
+  document.body.appendChild(modal);
+  document.getElementById('xfer-name')?.focus();
+}
+
+// Execute the transfer after the modal form is filled
+async function executeCollectorTransfer(mintId) {
+  const nameEl = document.getElementById('xfer-name');
+  const addrEl = document.getElementById('xfer-addr');
+  const typeEl = document.getElementById('xfer-type');
+  if (!addrEl?.value?.trim() || addrEl.value.trim().length < 8) {
+    showToast('Enter a valid wallet address', 'error'); return;
+  }
+
+  const destAddr = addrEl.value.trim();
+  const recipientName = nameEl?.value?.trim() || null;
+  const transferType = typeEl?.value || 'donate';
+  const myBinder = getBinderAddress();
+
+  if (destAddr === myBinder) { showToast('That\'s your own wallet', 'error'); return; }
+
+  // Close the modal
+  addrEl.closest('div[style*=fixed]')?.remove();
+
+  // Sign the transfer
+  if (!_thirdSpaceIdentity) await initThirdSpaceIdentity();
+  const transferPayload = JSON.stringify({
+    action: 'transfer',
+    type: transferType,
+    mintId,
+    from: myBinder,
+    to: destAddr,
+    recipientName: recipientName,
+    timestamp: new Date().toISOString()
+  });
+  const sigBuffer = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' },
+    _thirdSpaceIdentity.keyPair.privateKey,
+    new TextEncoder().encode(transferPayload)
+  );
+  const signature = [...new Uint8Array(sigBuffer)]
+    .map(b => b.toString(16).padStart(2, '0')).join('');
+
+  // Update the local card record
+  const allMinted = await getAllMinted();
+  const card = allMinted.find(c => c.mintId === mintId);
+  if (!card) { showToast('Card not found', 'error'); return; }
+
+  // Record transfer in provenance — permanent, immutable history
+  if (!card.provenance) card.provenance = [];
+  const provenanceEntry = {
+    action: transferType === 'donate' ? 'gift' : 'sale',
+    from: myBinder,
+    to: destAddr,
+    recipientName: recipientName,
+    timestamp: new Date().toISOString(),
+    signature: signature.slice(0, 32) + '...',
+    brainstemFingerprint: myBinder,
+  };
+  // Verified-tier cards carry the verification authority attestation
+  const agentData = allAgents.find(x => x.name === card.agentName);
+  if (agentData?.quality_tier === 'verified' && typeof _VERIFIED_AUTHORITY !== 'undefined') {
+    provenanceEntry.verificationAuthority = _VERIFIED_AUTHORITY.entity;
+    provenanceEntry.authorityBinding = _VERIFIED_AUTHORITY.binding;
+  }
+  card.provenance.push(provenanceEntry);
+  card.transfers = (card.transfers || 0) + 1;
+  card.lastTransfer = new Date().toISOString();
+
+  // Update the card's Third Space ownership to the new wallet
+  // This wallet now controls all future updates for this card on-chain
+  card._thirdspace = {
+    ...(card._thirdspace || {}),
+    verified: true,
+    fingerprint: destAddr,
+    ownerName: recipientName,
+    previousOwner: myBinder,
+    transferredAt: new Date().toISOString(),
+    transferType,
+  };
+
+  // Re-grade after transfer (transfers add wear, like real cards)
+  card.grade = gradeCard(card);
+
+  await saveMinted(card);
+
+  // Store transfer receipt for chain sync
+  const transferLog = JSON.parse(localStorage.getItem('rar_transfer_log') || '[]');
+  transferLog.push({
+    mintId,
+    type: transferType,
+    from: myBinder,
+    to: destAddr,
+    recipientName,
+    signature,
+    publicKey: _thirdSpaceIdentity.publicKeyJwk,
+    timestamp: new Date().toISOString(),
+    cardValue: calculateValue(card),
+  });
+  localStorage.setItem('rar_transfer_log', JSON.stringify(transferLog));
+
+  const action = transferType === 'donate' ? 'Gifted' : 'Transferred';
+  const toLabel = recipientName ? `${recipientName} (${formatBinderAddress(destAddr)})` : formatBinderAddress(destAddr);
+  showToast(`${action} to ${toLabel}`, 'success');
+
+  // Refresh the collector mode view
+  closeShowAndTell();
+  const agentName = card.agentName;
+  setTimeout(() => showAndTell(agentName), 400);
 }
 
 function setCardFilter(f, el) {
@@ -7372,13 +7889,16 @@ async function mintCard(agentName, setId) {
     // Provenance
     transfers: 0,
     lastTransfer: null,
-    provenance: [{
+    provenance: [Object.assign({
       action: 'mint',
       timestamp: new Date(now).toISOString(),
       brainstemFingerprint: _thirdSpaceIdentity?.fingerprint || null,
       credentialHash: credential ? await sha256(JSON.stringify(credential)) : null,
-    }],
-    // Snapshot at mint time — BTC rate frozen at forge
+    }, a.quality_tier === 'verified' && typeof _VERIFIED_AUTHORITY !== 'undefined' ? {
+      verificationAuthority: _VERIFIED_AUTHORITY.entity,
+      authorityBinding: _VERIFIED_AUTHORITY.binding,
+    } : {})],
+    // Snapshot at mint time
     votesAtMint: (votes.agents?.[a.name]?.score) || 0,
     tierAtMint: a.quality_tier || 'community',
     isFirstEdition: mintNum === 1,
@@ -7594,10 +8114,11 @@ function calculateValue(card) {
   return Math.round(value); // uncapped — raw points, converted to BTC at display
 }
 
-// ── BTC Market Value Oracle ──
-// Card value is denominated in BTC. 1000 points = 1 BTC.
-// The USD display is always the live market rate — if you transfer
-// a card, the buyer pays the current BTC-to-USD rate for ownership.
+// ── Binder Value Oracle ──
+// Card value is denominated in BTC (1000 points = 1 BTC).
+// Anyone can USE an agent. Only one Binder (wallet) can CLAIM ownership.
+// The Binder that owns the card controls it on-chain — transfers, updates, provenance.
+// USD display reflects live market rate for the underlying BTC denomination.
 let _btcPrice = 0;
 let _btcPriceLastFetch = 0;
 
@@ -9988,6 +10509,215 @@ async function openSlabZoom(mintId) {
       setTimeout(() => particle.remove(), 1000);
     }
   }, 400);
+}
+
+// ═══════════════════════════════════════════════════════
+// Wallet Viewer — GitHub-authenticated private wallet access
+// ═══════════════════════════════════════════════════════
+let _walletCache = null;
+let _walletRepo = localStorage.getItem('rar_wallet_repo') || '';
+
+function renderWalletTab() {
+  const authArea = document.getElementById('wallet-auth-area');
+  const content = document.getElementById('wallet-content');
+  if (!authArea) return;
+
+  if (!ghToken || !ghUser) {
+    // Not logged in — show GitHub login
+    content.style.display = 'none';
+    authArea.innerHTML = `
+      <div class="wallet-login-card">
+        <div class="wl-icon">&#8383;</div>
+        <h3>Connect to View Wallet</h3>
+        <p>Sign in with GitHub to access private card wallets. Only users with repo access can view wallet contents.</p>
+        <button class="wl-btn wl-btn-gh" onclick="walletLogin()">
+          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          Sign in with GitHub
+        </button>
+      </div>`;
+    return;
+  }
+
+  // Logged in — show wallet lookup
+  authArea.innerHTML = `
+    <div style="max-width:520px;margin:0 auto 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:4px">
+        <img src="${ghUser.avatar_url}" style="width:28px;height:28px;border-radius:50%">
+        <span style="font-weight:700;color:var(--text)">@${ghUser.login}</span>
+        <span style="font-size:.7rem;color:var(--text-muted);background:rgba(57,211,83,.1);color:#3fb950;padding:2px 8px;border-radius:4px;font-weight:600">Authenticated</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <input class="wallet-repo-input" id="wallet-repo-input" type="text"
+          placeholder="owner/repo (e.g. kody-w/wildhaven-ceo)"
+          value="${esc(_walletRepo)}"
+          onkeydown="if(event.key==='Enter')loadWallet()">
+        <button onclick="loadWallet()" style="padding:10px 20px;border-radius:8px;border:1px solid #f7931a;background:rgba(247,147,26,.1);color:#f7931a;font-weight:700;cursor:pointer;font-size:.85rem;white-space:nowrap">Open Wallet</button>
+      </div>
+      <div style="font-size:.65rem;color:var(--text-muted);text-align:center">Enter any repo with a <code>wallet/</code> directory. Private repos require your GitHub account to have access.</div>
+    </div>`;
+
+  // If we have a cached wallet, show it
+  if (_walletCache) renderWalletContents(_walletCache);
+}
+
+function walletLogin() {
+  // Re-auth with repo scope for private access
+  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=repo`;
+  // Store that we came from wallet tab so we can return after auth
+  localStorage.setItem('rar_tab', 'wallet');
+  window.location.href = url;
+}
+
+async function loadWallet() {
+  const input = document.getElementById('wallet-repo-input');
+  const repo = input?.value?.trim();
+  if (!repo || !repo.includes('/')) {
+    showToast('Enter a repo like owner/repo', 'error'); return;
+  }
+
+  _walletRepo = repo;
+  localStorage.setItem('rar_wallet_repo', repo);
+
+  const content = document.getElementById('wallet-content');
+  content.style.display = 'block';
+  content.innerHTML = `
+    <div style="text-align:center;padding:40px;color:var(--text-muted)">
+      <div style="font-size:1.2rem;margin-bottom:8px">Loading wallet...</div>
+      <div style="font-size:.75rem">Authenticating with GitHub as @${ghUser?.login || '?'}</div>
+    </div>`;
+
+  try {
+    // Fetch wallet index from private repo via GitHub API
+    const headers = { 'Accept': 'application/vnd.github.v3.raw' };
+    if (ghToken) headers['Authorization'] = `token ${ghToken}`;
+
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/wallet/index.json`, { headers });
+
+    if (res.status === 404) {
+      content.innerHTML = `
+        <div style="text-align:center;padding:40px">
+          <div style="font-size:1.1rem;color:var(--text);margin-bottom:8px">No wallet found</div>
+          <div style="font-size:.82rem;color:var(--text-dim)">This repo doesn't have a <code>wallet/</code> directory.</div>
+        </div>`;
+      return;
+    }
+    if (res.status === 401 || res.status === 403) {
+      content.innerHTML = `
+        <div style="text-align:center;padding:40px">
+          <div style="font-size:1.1rem;color:#f85149;margin-bottom:8px">Access Denied</div>
+          <div style="font-size:.82rem;color:var(--text-dim);margin-bottom:16px">Your GitHub account doesn't have access to this private repo, or your token needs the <code>repo</code> scope.</div>
+          <button class="wl-btn wl-btn-gh" onclick="walletLogin()" style="font-size:.82rem;padding:10px 20px">
+            <svg viewBox="0 0 16 16" style="width:16px;height:16px;fill:#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Re-authenticate with private repo access
+          </button>
+        </div>`;
+      return;
+    }
+    if (!res.ok) {
+      content.innerHTML = `<div style="text-align:center;padding:40px;color:#f85149">Error ${res.status}: ${res.statusText}</div>`;
+      return;
+    }
+
+    const wallet = await res.json();
+    _walletCache = wallet;
+    renderWalletContents(wallet);
+
+  } catch (err) {
+    content.innerHTML = `<div style="text-align:center;padding:40px;color:#f85149">Failed to load wallet: ${err.message}</div>`;
+  }
+}
+
+function renderWalletContents(wallet) {
+  const content = document.getElementById('wallet-content');
+  if (!content) return;
+  content.style.display = 'block';
+
+  const owner = wallet.owner || {};
+  const shortAddr = owner.walletAddress
+    ? '0x' + owner.walletAddress.slice(0, 6) + '...' + owner.walletAddress.slice(-4)
+    : 'Unknown';
+  const cards = wallet.cards || [];
+  const breakdown = wallet.breakdown || {};
+  const btcPrice = _btcPrice || 67000;
+  const totalUsd = (wallet.totalBtcValue || 0) * btcPrice;
+  const totalUsdStr = totalUsd >= 1000000 ? `$${(totalUsd / 1000000).toFixed(2)}M` : totalUsd >= 1000 ? `$${(totalUsd / 1000).toFixed(1)}k` : `$${Math.round(totalUsd)}`;
+
+  // Group cards by category
+  const byCat = {};
+  cards.forEach(c => {
+    const cat = (c.category || 'general').replace(/_/g, ' ');
+    if (!byCat[cat]) byCat[cat] = [];
+    byCat[cat].push(c);
+  });
+  const catKeys = Object.keys(byCat).sort();
+
+  content.innerHTML = `
+    <div style="max-width:900px;margin:0 auto">
+      <!-- Wallet header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--text)">${esc(owner.name || 'Wallet')}</div>
+          <div style="font-size:.7rem;color:var(--text-muted);font-family:monospace">${esc(shortAddr)} &middot; ${esc(owner.repo || _walletRepo)}</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font-size:1.6rem;font-weight:900;color:#f7931a">&#8383;${(wallet.totalBtcValue || 0).toFixed(4)}</span>
+          <span style="font-size:.85rem;color:var(--text-muted)">${totalUsdStr}</span>
+        </div>
+      </div>
+
+      <!-- Summary cards -->
+      <div class="wallet-summary">
+        <div class="ws-card">
+          <div class="ws-val" style="color:var(--text)">${wallet.totalCards || 0}</div>
+          <div class="ws-lbl">Total Cards</div>
+        </div>
+        ${Object.entries(breakdown).map(([r, d]) => `
+          <div class="ws-card" style="border-color:${r === 'mythic' ? 'rgba(255,109,0,.3)' : r === 'rare' ? 'rgba(255,215,0,.2)' : 'var(--border)'}">
+            <div class="ws-val" style="color:${r === 'mythic' ? '#ff6d00' : r === 'rare' ? '#ffd700' : r === 'uncommon' ? '#c0c0c0' : 'var(--text-muted)'}">${d.count}</div>
+            <div class="ws-lbl">${r.charAt(0).toUpperCase() + r.slice(1)} &middot; &#8383;${d.totalBtc}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Provenance info -->
+      <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:20px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div>
+          <span style="color:var(--text-dim);font-weight:600">Source:</span> ${esc(wallet.source?.name || '?')}
+          <span style="font-family:monospace;color:var(--accent)">${wallet.source?.repo || ''}</span>
+        </div>
+        <div>
+          <span style="color:var(--text-dim);font-weight:600">Transferred:</span> ${wallet.created ? new Date(wallet.created).toLocaleDateString() : '?'}
+        </div>
+        <div>
+          <span style="color:#3fb950;font-weight:700">&#10003; Signed &amp; Verified</span>
+        </div>
+      </div>
+
+      <!-- Card list by category -->
+      ${catKeys.map(cat => {
+        const catCards = byCat[cat];
+        const catBtc = catCards.reduce((s, c) => s + (c.floorBtc || 0), 0);
+        return `
+          <div style="margin-bottom:20px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+              <h3 style="font-size:.85rem;font-weight:700;color:var(--text-dim);text-transform:capitalize;margin:0">${esc(cat)} <span style="color:var(--text-muted);font-weight:400;font-size:.7rem">(${catCards.length})</span></h3>
+              <span style="font-size:.7rem;color:#f7931a;font-weight:600">&#8383;${catBtc.toFixed(3)}</span>
+            </div>
+            <div class="wallet-cards-grid">
+              ${catCards.map(c => `
+                <div class="wallet-card-row" onclick="if(allAgents.find(a=>a.name==='${esc(c.agentName)}'))showAndTell('${esc(c.agentName)}')">
+                  <div class="wcr-rarity ${c.rarity || 'uncommon'}"></div>
+                  <div class="wcr-info">
+                    <div class="wcr-name">${esc(c.displayName)}</div>
+                    <div class="wcr-agent">${esc(c.agentName)}</div>
+                  </div>
+                  <div class="wcr-btc">&#8383;${(c.floorBtc || 0).toFixed(3)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -12911,6 +13641,24 @@ let _chainState = null;
 let _cardChainIndex = null;
 const _RSC = JSON.parse(localStorage.getItem('_rsc') || '[]'); // succession chain
 let _binderLinked = false;  // whether this Binder has claimed genesis allocation
+
+// ── Verified Tier Authority ──
+// Agents promoted to "verified" quality_tier are verified by the
+// Wildhaven Homes LLC verification authority. This verification is
+// permanent and irrevocable — once an agent card reaches verified
+// tier, it carries the Wildhaven Homes LLC attestation for all
+// future owners and transfers in perpetuity. The default Binder
+// for verified-tier provenance is the Wildhaven Homes LLC entity.
+// This establishes chain-of-trust for public dispersal of agent
+// cards: verified = attested by Wildhaven Homes LLC, forever.
+const _VERIFIED_AUTHORITY = {
+  entity: 'Wildhaven of America',
+  role: 'Verification Authority',
+  scope: 'verified',
+  binding: 'permanent',
+  defaultOwner: true,
+  attestation: 'All agents reaching verified tier are attested by Wildhaven of America. This attestation is permanent, irrevocable, and travels with the card through all future transfers. Wildhaven of America retains verification authority and default ownership rights for public dispersal of verified agent cards.',
+};
 
 // ── Binder Address ──
 // Your Binder Address = your Third Space fingerprint (SHA-256 of your public key)

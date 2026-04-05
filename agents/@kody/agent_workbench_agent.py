@@ -26,7 +26,7 @@ __manifest__ = {
     "author": "RAPP Core Team",
     "tags": ["devtools", "workbench", "scaffolding", "validation", "testing", "publishing"],
     "category": "devtools",
-    "quality_tier": "verified",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

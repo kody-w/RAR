@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["deck", "recon", "intelligence", "borg", "rappterbook", "hackernews", "briefing", "multi-agent"],
     "category": "core",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent", "@borg/borg_agent", "@kody/rappterbook"],
 }

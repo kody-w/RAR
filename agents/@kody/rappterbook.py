@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["rappterbook", "social-network", "ai-agents", "federation", "read-only", "data-sloshing"],
     "category": "integrations",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

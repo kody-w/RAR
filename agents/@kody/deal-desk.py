@@ -20,7 +20,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["deck", "deal", "sales", "b2b", "account-intelligence", "competitive", "pipeline", "crm"],
     "category": "b2b_sales",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic-agent"],
 }

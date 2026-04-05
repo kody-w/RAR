@@ -346,6 +346,75 @@
   .empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; opacity: .5; }
   .empty-state p { max-width: 400px; margin: 0 auto; font-size: .95rem; }
 
+  /* ─── Main Page (Wikipedia-style) ────────────────── */
+  .mp-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 4px;
+  }
+  @media (max-width: 768px) { .mp-grid { grid-template-columns: 1fr; } }
+  .mp-section {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 20px 24px; margin-bottom: 20px;
+  }
+  .mp-section-header {
+    font-size: .78rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--text-muted); margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent); display: flex; align-items: center;
+    justify-content: space-between; font-weight: 600;
+  }
+  .mp-section-header a { font-size: .78rem; text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .portal-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .portal-card {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 12px; text-align: center; cursor: pointer; transition: all .15s;
+  }
+  .portal-card:hover {
+    border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow);
+  }
+  .portal-card .p-icon { font-size: 1.6rem; margin-bottom: 4px; }
+  .portal-card .p-name { font-size: .82rem; font-weight: 600; margin-bottom: 2px; }
+  .portal-card .p-count { font-size: .7rem; color: var(--text-muted); }
+  .featured-card {
+    border-left: 3px solid var(--teal); padding: 14px 18px; background: var(--surface2);
+    border-radius: 0 var(--radius) var(--radius) 0; cursor: pointer; transition: all .15s;
+  }
+  .featured-card:hover { background: var(--surface3); }
+  .featured-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .featured-card p { font-size: .85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 8px; }
+  .featured-card .read-more { color: var(--accent); font-size: .82rem; font-weight: 500; }
+  .recent-list { display: flex; flex-direction: column; }
+  .recent-item {
+    display: flex; align-items: baseline; gap: 8px; padding: 7px 4px;
+    border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s;
+  }
+  .recent-item:last-child { border-bottom: none; }
+  .recent-item:hover { background: var(--surface2); border-radius: 4px; }
+  .recent-item .ri-cat { font-size: .7rem; flex-shrink: 0; }
+  .recent-item .ri-title { font-size: .88rem; font-weight: 500; color: var(--accent); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .recent-item .ri-date { font-size: .7rem; color: var(--text-muted); flex-shrink: 0; }
+  .community-item {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+  }
+  .community-item:last-child { border-bottom: none; }
+  .community-item:hover .ci-title { text-decoration: underline; }
+  .ci-votes {
+    background: var(--surface2); border-radius: 6px; padding: 4px 8px; text-align: center;
+    min-width: 36px; flex-shrink: 0;
+  }
+  .ci-votes .num { font-size: .82rem; font-weight: 700; color: var(--teal); display: block; }
+  .ci-votes .lbl { font-size: .58rem; color: var(--text-muted); text-transform: uppercase; }
+  .ci-title { font-size: .85rem; font-weight: 500; }
+  .ci-meta { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+  .back-to-main {
+    display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim);
+    font-size: .85rem; cursor: pointer; margin-bottom: 12px; padding: 6px 12px;
+    border-radius: 6px; border: 1px solid var(--border); background: var(--surface2);
+    transition: all .15s;
+  }
+  .back-to-main:hover { border-color: var(--border-hover); color: var(--text); text-decoration: none; }
+
   /* ─── Scrollbar ───────────────────────────────────── */
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -402,8 +471,14 @@
 <div class="container">
 <div class="panel active" id="panel-wiki">
 
-  <!-- Wiki list view -->
-  <div id="wikiListView">
+  <!-- Wiki main page (Wikipedia-style landing) -->
+  <div id="wikiMainPage">
+    <div id="mainPageContent"></div>
+  </div>
+
+  <!-- Wiki list view (category browsing) -->
+  <div id="wikiListView" style="display:none">
+    <a class="back-to-main" onclick="backToMainPage();return false" href="#">&#8592; Main Page</a>
     <div class="wiki-grid">
       <div class="wiki-sidebar">
         <h3>Categories</h3>
@@ -672,6 +747,7 @@ let threads = [];
 let activeWikiCat = 'all';
 let activeForumChan = 'all';
 let editingArticleId = null;
+let cameFromMainPage = true;
 
 // ─── Seed Data ──────────────────────────────────────
 const SEED_ARTICLES = [
@@ -1236,7 +1312,7 @@ function showPanel(name) {
     if (b.textContent.toLowerCase().includes(name === 'api' ? 'agent api' : name)) b.classList.add('active');
   });
   // Reset sub-views
-  if (name === 'wiki') { closeArticle(); closeEditor(); }
+  if (name === 'wiki') { backToMainPage(); closeEditor(); }
   if (name === 'forum') { closeThread(); closeNewThread(); }
 }
 
@@ -1244,10 +1320,111 @@ function goHome() {
   showPanel('wiki');
 }
 
+// ─── Main Page (Wikipedia-style) ────────────────────
+function renderMainPage() {
+  const el = document.getElementById('mainPageContent');
+
+  // Featured: prefer a "getting-started" article, fall back to first
+  const featured = articles.find(a => a.category === 'getting-started') || articles[0];
+
+  // Recent articles (top 10)
+  const recent = articles.slice(0, 10);
+
+  // Recent threads (top 5, sorted by update)
+  const recentThreads = [...threads].sort((a,b) => new Date(b.updated) - new Date(a.updated)).slice(0, 5);
+
+  // Portal cards (skip "all")
+  const portalCards = WIKI_CATS.filter(c => c.id !== 'all').map(c => {
+    const count = articles.filter(a => a.category === c.id).length;
+    return `<div class="portal-card" onclick="browseCategory('${c.id}')">
+      <div class="p-icon">${c.icon}</div>
+      <div class="p-name">${c.label}</div>
+      <div class="p-count">${count} article${count !== 1 ? 's' : ''}</div>
+    </div>`;
+  }).join('');
+
+  // Featured article
+  const featuredHtml = featured ? `
+    <div class="featured-card" onclick="openArticle('${featured.id}')">
+      <h3>${escapeHtml(featured.title)}</h3>
+      <p>${escapeHtml(featured.content.substring(0, 280).replace(/[#*\`|_\\[\\]]/g, '').replace(/\\n+/g, ' '))}...</p>
+      <span class="read-more">Read full article &#8594;</span>
+    </div>
+  ` : '';
+
+  // Recent articles list
+  const recentHtml = recent.map(a => {
+    const cat = WIKI_CATS.find(c => c.id === a.category);
+    return `<div class="recent-item" onclick="openArticle('${a.id}')">
+      <span class="ri-cat">${cat ? cat.icon : ''}</span>
+      <span class="ri-title">${escapeHtml(a.title)}</span>
+      <span class="ri-date">${new Date(a.updated).toLocaleDateString()}</span>
+    </div>`;
+  }).join('');
+
+  // Community threads
+  const communityHtml = recentThreads.map(t => {
+    const chan = FORUM_CHANNELS.find(c => c.id === t.channel);
+    return `<div class="community-item" onclick="showPanel('forum');openThread('${t.id}')">
+      <div class="ci-votes"><span class="num">${t.votes || 0}</span><span class="lbl">votes</span></div>
+      <div>
+        <div class="ci-title">${escapeHtml(t.title)}</div>
+        <div class="ci-meta">${chan ? chan.icon + ' ' + chan.label : t.channel} &middot; ${(t.replies||[]).length} replies</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="mp-grid">
+      <div>
+        <div class="mp-section">
+          <div class="mp-section-header">Featured Article</div>
+          ${featuredHtml}
+        </div>
+        <div class="mp-section">
+          <div class="mp-section-header">Recently Updated <a href="#" onclick="browseCategory('all');return false">View all ${articles.length} articles &#8594;</a></div>
+          <div class="recent-list">${recentHtml}</div>
+        </div>
+      </div>
+      <div>
+        <div class="mp-section">
+          <div class="mp-section-header">Browse by Topic</div>
+          <div class="portal-grid">${portalCards}</div>
+        </div>
+        <div class="mp-section">
+          <div class="mp-section-header">From the Community <a href="#" onclick="showPanel('forum');return false">View forum &#8594;</a></div>
+          ${communityHtml || '<p style="color:var(--text-muted);font-size:.88rem">No discussions yet.</p>'}
+        </div>
+        <div style="margin-top:8px">
+          <button class="btn primary" onclick="openEditor()" style="width:100%">+ New Article</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function browseCategory(catId) {
+  activeWikiCat = catId;
+  cameFromMainPage = false;
+  document.getElementById('wikiMainPage').style.display = 'none';
+  document.getElementById('wikiListView').style.display = 'block';
+  renderWikiSidebar();
+  renderArticleList();
+}
+
+function backToMainPage() {
+  cameFromMainPage = true;
+  document.getElementById('wikiListView').style.display = 'none';
+  document.getElementById('wikiArticleView').style.display = 'none';
+  document.getElementById('wikiEditorView').style.display = 'none';
+  document.getElementById('wikiMainPage').style.display = 'block';
+}
+
 // ─── Wiki Rendering ─────────────────────────────────
 async function renderWiki() {
   articles = await dbGetAll('articles');
   articles.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+  renderMainPage();
   renderWikiSidebar();
   renderArticleList();
   updateStats();
@@ -1295,6 +1472,9 @@ async function openArticle(id) {
   if (!a) return;
   const cat = WIKI_CATS.find(c => c.id === a.category);
   const tags = (a.tags || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+  // Track where user came from for back navigation
+  if (document.getElementById('wikiMainPage').style.display !== 'none') cameFromMainPage = true;
+  document.getElementById('wikiMainPage').style.display = 'none';
   document.getElementById('wikiListView').style.display = 'none';
   document.getElementById('wikiArticleView').style.display = 'block';
   document.getElementById('articleViewContent').innerHTML = `
@@ -1314,8 +1494,12 @@ async function openArticle(id) {
 }
 
 function closeArticle() {
-  document.getElementById('wikiListView').style.display = 'block';
   document.getElementById('wikiArticleView').style.display = 'none';
+  if (cameFromMainPage) {
+    document.getElementById('wikiMainPage').style.display = 'block';
+  } else {
+    document.getElementById('wikiListView').style.display = 'block';
+  }
 }
 
 // ─── Wiki Editor ────────────────────────────────────
@@ -1326,6 +1510,7 @@ function openEditor() {
   document.getElementById('editorTags').value = '';
   document.getElementById('editorContent').value = '';
   document.getElementById('editorBreadcrumb').textContent = 'New Article';
+  document.getElementById('wikiMainPage').style.display = 'none';
   document.getElementById('wikiListView').style.display = 'none';
   document.getElementById('wikiArticleView').style.display = 'none';
   document.getElementById('wikiEditorView').style.display = 'block';
@@ -1340,6 +1525,7 @@ async function editArticle(id) {
   document.getElementById('editorTags').value = (a.tags || []).join(', ');
   document.getElementById('editorContent').value = a.content;
   document.getElementById('editorBreadcrumb').textContent = 'Edit: ' + a.title;
+  document.getElementById('wikiMainPage').style.display = 'none';
   document.getElementById('wikiListView').style.display = 'none';
   document.getElementById('wikiArticleView').style.display = 'none';
   document.getElementById('wikiEditorView').style.display = 'block';
@@ -1376,7 +1562,11 @@ async function deleteArticle(id) {
 function closeEditor() {
   editingArticleId = null;
   document.getElementById('wikiEditorView').style.display = 'none';
-  document.getElementById('wikiListView').style.display = 'block';
+  if (cameFromMainPage) {
+    document.getElementById('wikiMainPage').style.display = 'block';
+  } else {
+    document.getElementById('wikiListView').style.display = 'block';
+  }
 }
 
 function insertMarkup(before, after) {
@@ -1764,6 +1954,8 @@ async function init() {
 // Make nav functions global
 window.showPanel = showPanel;
 window.goHome = goHome;
+window.browseCategory = browseCategory;
+window.backToMainPage = backToMainPage;
 window.filterWikiCat = filterWikiCat;
 window.openArticle = openArticle;
 window.closeArticle = closeArticle;
