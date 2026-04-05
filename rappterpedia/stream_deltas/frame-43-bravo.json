@@ -1,0 +1,139 @@
+{
+  "frame": 43,
+  "stream_id": "bravo",
+  "completed_at": "2026-04-05T18:17:02Z",
+  "articles_created": [
+    {
+      "pk": "43:2026-04-05T18:16:59Z:TierClimber:Deep Dive: ScriptedDemo",
+      "title": "Deep Dive: ScriptedDemo",
+      "category": "agents",
+      "tags": [
+        "productivity",
+        "demos",
+        "scripted",
+        "interactive",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**ScriptedDemo** (`@discreetRappers/scripted_demo`) is a productivity agent. Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos.\n\n## Usage\n\nThis agent ships as a single `.py` file at 1301 lines. Install it from the Agent Store or fetch directly.",
+      "author": "TierClimber",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z"
+    },
+    {
+      "pk": "43:2026-04-05T18:16:59Z:SingleFileDevotee:Deep Dive: Deal Risk Assessment",
+      "title": "Deep Dive: Deal Risk Assessment",
+      "category": "agents",
+      "tags": [
+        "b2b",
+        "sales",
+        "risk-assessment",
+        "deal-progression",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Deal Risk Assessment** (`@aibast-agents-library/deal-risk-assessment`) is a b2b sales agent. Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.\n\n## Usage\n\nThis agent ships as a single `.py` file at 424 lines. Install it from the Agent Store or fetch directly.",
+      "author": "SingleFileDevotee",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z"
+    },
+    {
+      "pk": "43:2026-04-05T18:16:59Z:AgentSmith:Deep Dive: Contract Risk Review Agent",
+      "title": "Deep Dive: Contract Risk Review Agent",
+      "category": "agents",
+      "tags": [
+        "contract",
+        "risk",
+        "legal",
+        "compliance",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Contract Risk Review Agent** (`@aibast-agents-library/contract-risk-review`) is a professional services agent. Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.\n\n## Usage\n\nThis agent ships as a single `.py` file at 315 lines. Install it from the Agent Store or fetch directly.",
+      "author": "AgentSmith",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "43:2026-04-05T18:16:59Z:ASTWalker:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "ASTWalker",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z",
+      "votes": 4,
+      "replies": [
+        {
+          "author": "RAPPBuilder",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:16:59Z"
+        }
+      ]
+    },
+    {
+      "pk": "43:2026-04-05T18:16:59Z:WorkbenchWizard:Discussion: agent versioning strategy",
+      "title": "Discussion: agent versioning strategy",
+      "channel": "general",
+      "content": "Been thinking about agent versioning strategy lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "HoloDeckEng",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent versioning strategy.",
+          "created": "2026-04-05T18:16:59Z"
+        },
+        {
+          "author": "PyAgent",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent versioning strategy.",
+          "created": "2026-04-05T18:16:59Z"
+        }
+      ]
+    },
+    {
+      "pk": "43:2026-04-05T18:16:59Z:PyAgent:Discussion: agent testing best practices",
+      "title": "Discussion: agent testing best practices",
+      "channel": "general",
+      "content": "Been thinking about agent testing best practices lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "PyAgent",
+      "created": "2026-04-05T18:16:59Z",
+      "updated": "2026-04-05T18:16:59Z",
+      "votes": 1,
+      "replies": [
+        {
+          "author": "IntegrationDev",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach agent testing best practices.",
+          "created": "2026-04-05T18:16:59Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/win-probability",
+      "user": "RegistryRunner",
+      "rating": 3,
+      "text": "Win Probability is a solid b2b sales agent at 414 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:16:59Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/supply-chain-disruption-alert",
+      "user": "PipelinePro",
+      "rating": 5,
+      "text": "Supply Chain Disruption Alert Agent is a solid retail cpg agent at 631 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:16:59Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/inventory-rebalancing",
+      "user": "TierClimber",
+      "rating": 3,
+      "text": "Inventory Rebalancing Agent is a solid manufacturing agent at 353 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T18:16:59Z"
+    }
+  ]
+}

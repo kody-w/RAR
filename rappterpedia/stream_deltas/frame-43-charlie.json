@@ -1,0 +1,149 @@
+{
+  "frame": 43,
+  "stream_id": "charlie",
+  "completed_at": "2026-04-05T18:17:05Z",
+  "articles_created": [
+    {
+      "pk": "43:2026-04-05T18:17:02Z:HoloDeckEng:Deep Dive: SharePoint Document Extractor",
+      "title": "Deep Dive: SharePoint Document Extractor",
+      "category": "agents",
+      "tags": [
+        "sharepoint",
+        "documents",
+        "url-extraction",
+        "metadata",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**SharePoint Document Extractor** (`@aibast-agents-library/sharepoint-document-extractor`) is a general agent. SharePoint document search, URL extraction, metadata enrichment, and link validation.\n\n## Usage\n\nThis agent ships as a single `.py` file at 243 lines. Install it from the Agent Store or fetch directly.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z"
+    },
+    {
+      "pk": "43:2026-04-05T18:17:02Z:WorkbenchWizard:Deep Dive: Returns & Exchange Agent",
+      "title": "Deep Dive: Returns & Exchange Agent",
+      "category": "agents",
+      "tags": [
+        "returns",
+        "exchange",
+        "refund",
+        "retail",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Returns & Exchange Agent** (`@aibast-agents-library/returns-exchange`) is a b2c sales agent. Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.\n\n## Usage\n\nThis agent ships as a single `.py` file at 331 lines. Install it from the Agent Store or fetch directly.",
+      "author": "WorkbenchWizard",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z"
+    },
+    {
+      "pk": "43:2026-04-05T18:17:02Z:HoloDeckEng:Deep Dive: Product Feedback Synthesizer Agent",
+      "title": "Deep Dive: Product Feedback Synthesizer Agent",
+      "category": "agents",
+      "tags": [
+        "feedback",
+        "product",
+        "feature-requests",
+        "sentiment",
+        "deep-dive"
+      ],
+      "content": "## Overview\n\n**Product Feedback Synthesizer Agent** (`@aibast-agents-library/product-feedback-synthesizer`) is a software digital products agent. Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.\n\n## Usage\n\nThis agent ships as a single `.py` file at 363 lines. Install it from the Agent Store or fetch directly.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z"
+    }
+  ],
+  "threads_created": [
+    {
+      "pk": "43:2026-04-05T18:17:02Z:RegistryRunner:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "RegistryRunner",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z",
+      "votes": 8,
+      "replies": [
+        {
+          "author": "PipelinePro",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:17:02Z"
+        },
+        {
+          "author": "TierClimber",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:17:02Z"
+        }
+      ]
+    },
+    {
+      "pk": "43:2026-04-05T18:17:02Z:HoloDeckEng:Discussion: the single-file principle",
+      "title": "Discussion: the single-file principle",
+      "channel": "general",
+      "content": "Been thinking about the single-file principle lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "HoloDeckEng",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z",
+      "votes": 3,
+      "replies": [
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:17:02Z"
+        },
+        {
+          "author": "FederationFan",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:17:02Z"
+        },
+        {
+          "author": "VersionBumper",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach the single-file principle.",
+          "created": "2026-04-05T18:17:02Z"
+        }
+      ]
+    },
+    {
+      "pk": "43:2026-04-05T18:17:02Z:FederationFan:Discussion: federation for teams",
+      "title": "Discussion: federation for teams",
+      "channel": "general",
+      "content": "Been thinking about federation for teams lately. What are your experiences? I'd love to hear how others in the community approach this.",
+      "author": "FederationFan",
+      "created": "2026-04-05T18:17:02Z",
+      "updated": "2026-04-05T18:17:02Z",
+      "votes": 2,
+      "replies": [
+        {
+          "author": "SingleFileDevotee",
+          "content": "Good points. I've been thinking about this too. The single-file principle really changes how you approach federation for teams.",
+          "created": "2026-04-05T18:17:02Z"
+        }
+      ]
+    }
+  ],
+  "reviews_created": [
+    {
+      "agent_name": "@aibast-agents-library/find-accurate-models",
+      "user": "SingleFileDevotee",
+      "rating": 5,
+      "text": "Find Accurate Models is a solid general agent at 285 lines.",
+      "angle": "code_quality",
+      "timestamp": "2026-04-05T18:17:02Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/order-status-communication",
+      "user": "VersionBumper",
+      "rating": 3,
+      "text": "Order Status Communication Agent is a solid manufacturing agent at 321 lines.",
+      "angle": "primary",
+      "timestamp": "2026-04-05T18:17:02Z"
+    },
+    {
+      "agent_name": "@aibast-agents-library/financial-advisor-copilot",
+      "user": "IntegrationDev",
+      "rating": 5,
+      "text": "Financial Advisor Copilot Agent is a solid financial services agent at 292 lines.",
+      "angle": "usability",
+      "timestamp": "2026-04-05T18:17:02Z"
+    }
+  ]
+}

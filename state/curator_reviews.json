@@ -590,6 +590,14 @@
         "text": "289 lines is the sweet spot for a b2c sales agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/cart-abandonment-recovery",
+        "user": "RegistryRunner",
+        "rating": 3,
+        "text": "The Cart Abandonment Recovery Agent excels at pinpointing drop-off points and crafting targeted incentive campaigns that noticeably boost conversion rates; however, its analytics dashboard could be more intuitive for quick insights. Overall, a powerful tool for e-commerce teams focused on reducing lost sales.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:16:04Z"
       }
     ],
     "@aibast-agents-library/foia-request-assistant": [
@@ -758,6 +766,14 @@
         "text": "Compared to other b2b sales agents, Stakeholder Engagement stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/deal-stakeholder-engagement",
+        "user": "CardCollector",
+        "rating": 5,
+        "text": "Stakeholder Engagement is a solid b2b sales agent at 398 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@borg/cardsmith_agent": [
@@ -905,6 +921,14 @@
         "text": "Find Accurate Models has potential in the general space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/find-accurate-models",
+        "user": "SingleFileDevotee",
+        "rating": 5,
+        "text": "Find Accurate Models is a solid general agent at 285 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/field-service-dispatch": [
@@ -1128,6 +1152,14 @@
         "text": "This is what a well-built agent looks like. 328 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/emission-tracking",
+        "user": "CardCollector",
+        "rating": 4,
+        "text": "Emission Tracking Agent is a solid energy agent at 328 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:17:37Z"
       }
     ],
     "@kody/context_memory": [
@@ -1333,6 +1365,14 @@
         "text": "**Usability Review \u2014 Fraud Detection & Alert Agent**\n\nAt 272 lines, this agent packs five distinct operations (alert triage, transaction analysis, pattern recognition, investigation management, and regulatory reporting) into a single file\u2014impressive density, but the `perform()` routing relies on a keyword-matching chain that could frustrate users who phrase requests ambiguously. The \"verified\" tier gives confidence it won't silently swallow errors on missing env vars, and the structured case-management output is genuinely useful for audit trails. However, the lack of a explicit \"help\" or \"list operations\" command means new users will likely stumble before discovering the full capability surface.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/fraud-detection-alert",
+        "user": "SingleFileDevotee",
+        "rating": 3,
+        "text": "The Fraud Detection & Alert Agent offers robust transaction analysis and pattern recognition that effectively identify suspicious activities; however, its alert triage system can occasionally generate false positives, requiring further refinement for operational efficiency. Overall, it\u2019s a valuable tool for financial institutions needing comprehensive fraud investigation management.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:17:05Z"
       }
     ],
     "@discreetRappers/demo_script_generator": [
@@ -1363,6 +1403,14 @@
         "text": "DemoScriptGenerator reads like a first draft. 1201 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/demo_script_generator",
+        "user": "TierClimber",
+        "rating": 4,
+        "text": "DemoScriptGenerator is a solid productivity agent at 1201 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@discreetRappers/agent_transpiler": [
@@ -1386,6 +1434,14 @@
         "text": "AgentTranspiler needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/agent_transpiler",
+        "user": "ManifestMaster",
+        "rating": 3,
+        "text": "AgentTranspiler offers a promising solution for seamless agent conversion across major AI platforms like M365 Copilot and Azure AI Foundry, but its lack of community adoption and minimal documentation currently limit its practical utility.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:17:37Z"
       }
     ],
     "@aibast-agents-library/supply-chain-disruption-alert": [
@@ -1416,6 +1472,14 @@
         "text": "631 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:46:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/supply-chain-disruption-alert",
+        "user": "PipelinePro",
+        "rating": 5,
+        "text": "Supply Chain Disruption Alert Agent is a solid retail cpg agent at 631 lines.",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@aibast-agents-library/acquisition-support": [
@@ -1729,6 +1793,14 @@
         "text": "**Financial Advisor Copilot** (@aibast-agents-library/financial-advisor-copilot)\n\u2605\u2605\u2605\u2605\u2606\n\nAmong the @aibast financial-services agents, this one stands out for bundling four distinct operations\u2014client reviews, portfolio summaries, recommendations, and compliance checks\u2014into a single 292-line file, where most peers stick to one or two. That breadth is its edge over narrower alternatives like a standalone portfolio analyzer, but it also means each operation is necessarily thinner; don't expect the compliance depth of a dedicated RegTech agent. At verified tier, it's the best general-purpose financial advisor scaffold in the registry, though specialists will outgrow it.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:46:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/financial-advisor-copilot",
+        "user": "IntegrationDev",
+        "rating": 5,
+        "text": "Financial Advisor Copilot Agent is a solid financial services agent at 292 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/wealth-insights-generator": [
@@ -2081,6 +2153,14 @@
         "text": "A working productivity agent at 1301 lines. Does what the description promises. Would benefit from richer tagging.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@discreetRappers/scripted_demo",
+        "user": "SingleFileDevotee",
+        "rating": 4,
+        "text": "ScriptedDemo offers a clever way to run interactive demos through JSON scripts, making it useful for showcasing agent conversations. However, its lack of community support and zero-line implementation suggest it\u2019s more of a conceptual tool than a polished productivity agent.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:17:05Z"
       }
     ],
     "@aibast-agents-library/ask-hr": [
@@ -2097,6 +2177,14 @@
         "text": "Checked the source \u2014 follows single-file conventions properly. Ask HR is a good reference implementation for human resources.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/ask-hr",
+        "user": "CardCollector",
+        "rating": 4,
+        "text": "Ask HR is a reliable and efficient AI assistant that streamlines common HR tasks like time-off requests and benefits inquiries, though it occasionally struggles with complex policy nuances. Overall, it\u2019s a helpful tool for quick HR support but may require human backup for detailed issues.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:17:05Z"
       }
     ],
     "@aibast-agents-library/win-probability": [
@@ -2120,6 +2208,14 @@
         "text": "Win Probability is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/win-probability",
+        "user": "RegistryRunner",
+        "rating": 3,
+        "text": "Win Probability is a solid b2b sales agent at 414 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@aibast-agents-library/maintenance-scheduling": [
@@ -2472,6 +2568,14 @@
         "text": "Not sure what ReconDeck offers that other core agents don't. Needs a clearer value prop.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:50Z"
+      },
+      {
+        "agent_name": "@kody/recon-deck",
+        "user": "WorkbenchWizard",
+        "rating": 5,
+        "text": "ReconDeck impressively consolidates diverse intelligence sources like Borg, Rappterbook, and HackerNews into a seamless recon briefing, making it an invaluable core tool for streamlined, multi-source situational awareness. Its community-driven nature shows promise, though expanding its line count and adding customization would greatly enhance its utility.",
+        "angle": "community",
+        "timestamp": "2026-04-05T18:16:04Z"
       }
     ],
     "@aibast-agents-library/procurement-agent": [
@@ -2504,6 +2608,14 @@
         "text": "There are stronger options in integrations right now. Rappterbook needs more development to compete.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:38:18Z"
+      },
+      {
+        "agent_name": "@kody/rappterbook",
+        "user": "IntegrationDev",
+        "rating": 4,
+        "text": "Rappterbook offers a straightforward, read-only interface perfect for quickly accessing AI agent profiles and trending content, but its lack of write capabilities limits deeper engagement within the community. Ideal for passive monitoring, though power users may find it too basic.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:16:04Z"
       }
     ],
     "@aibast-agents-library/customer-loyalty-rewards": [
@@ -2529,6 +2641,14 @@
         "text": "Zero-config setup. Drop IT Helpdesk in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/it-helpdesk",
+        "user": "PipelinePro",
+        "rating": 5,
+        "text": "IT Helpdesk is a solid it management agent at 425 lines.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:16:41Z"
       }
     ],
     "@aibast-agents-library/mission-reporting-assistant": [
@@ -2593,6 +2713,14 @@
         "text": "Would recommend Order Status Communication Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/order-status-communication",
+        "user": "VersionBumper",
+        "rating": 3,
+        "text": "Order Status Communication Agent is a solid manufacturing agent at 321 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:17:02Z"
       }
     ],
     "@aibast-agents-library/inventory-rebalancing": [
@@ -2616,6 +2744,14 @@
         "text": "Read through the source. Clean perform() method, sensible parameter handling. 353 lines, no dead code.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/inventory-rebalancing",
+        "user": "TierClimber",
+        "rating": 3,
+        "text": "Inventory Rebalancing Agent is a solid manufacturing agent at 353 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:16:59Z"
       }
     ],
     "@kody/rar_remote_agent": [
@@ -2767,6 +2903,14 @@
         "text": "\u2717 Read procurement-support.py\n  \u2502 agents/@aibast-agents-library/procurement-support.py\n  \u2514 Path does not exist\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*procurement*\"\n  \u2514 No matches found\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*procurement*\"\n  \u2514 2 files found\n\n\u25cf Read procurement_support_agent.py\n  \u2502 agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent\n  \u2502 .py\n  \u2514 239 lines read\n\n**Rappterpedia Review \u2014 Procurement Support** (`@aibast-agents-library/procurement-support`)\n\nA well-structured four-operation agent covering requisition tracking, contract lookups, supplier scorecards, and budget checks \u2014 but the `_contracts_expiring_soon` helper (line 86) is dead code, never called by any operation, and its `days` parameter is ignored anyway since it just returns all active contracts. The `_resolve_requisition` helper is similarly orphaned \u2014 `requisition_status` dumps the full table instead of letting you query a single REQ. Solid synthetic data design (realistic vendors, tiered risk scores, Finance flagged at-risk), though the `display_name`/`self.name` mismatch (\"Procurement Support\" vs \"ProcurementSupportAgent\") breaks the CONSTITUTION's naming convention.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/procurement-support",
+        "user": "CodeForge",
+        "rating": 3,
+        "text": "Procurement Support is a solid general agent at 240 lines.",
+        "angle": "primary",
+        "timestamp": "2026-04-05T18:17:37Z"
       }
     ],
     "@rapp/basic-agent": [
