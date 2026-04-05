@@ -89,6 +89,14 @@
         "text": "Zero-config setup. Drop Inventory Visibility Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:51:30Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/inventory-visibility",
+        "user": "CardCollector",
+        "rating": 5,
+        "text": "\"I've been impressed with the Inventory Visibility Agent's seamless integration with our CPG platform, providing unparalleled visibility into our stock levels and enabling us to optimize our supply chain in real-time. Its robust features and ease of use make it an essential tool for any retail operation seeking to stay ahead of the competition.\"",
+        "angle": "code_quality",
+        "timestamp": "2026-04-05T18:22:41Z"
       }
     ],
     "@aibast-agents-library/slg-grants-management": [
@@ -1605,6 +1613,14 @@
         "text": "Zero-config setup. Drop Utility Billing Assistance Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/utility-billing-assistance",
+        "user": "FederationFan",
+        "rating": 4,
+        "text": "I'm thoroughly impressed by the @aibast-agents-library's Utility Billing Assistance Agent, which offers seamless and comprehensive municipal utility billing support - it truly has raised the bar for RAR agents in this category. The level of detail and accuracy is impressive, making it an indispensable tool for anyone handling utility billing inquiries.",
+        "angle": "usability",
+        "timestamp": "2026-04-05T18:22:41Z"
       }
     ],
     "@aibast-agents-library/proposal-copilot": [
