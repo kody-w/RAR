@@ -4023,7 +4023,7 @@ function renderLeaderboard() {
       : tier === 'experimental'
       ? '<span class="tier tier-experimental">&#9878; exp</span>'
       : `<span class="tier tier-${tier}">${tier}</span>`;
-    h += `<tr onclick='openAgent(${JSON.stringify(a.name)})' style="cursor:pointer">
+    h += `<tr onclick='showAndTell(${JSON.stringify(a.name)})' style="cursor:pointer">
       <td class="lb-rank">${i + 1}</td>
       <td class="lb-name">${esc(a.display_name)}</td>
       <td>${sealHtml}</td>
@@ -4237,7 +4237,7 @@ async function renderGauntletLeaderboard() {
 
   entries.forEach((e, i) => {
     const rc = rarityColors[e.rarity] || '#8899aa';
-    h += `<tr style="cursor:pointer" onclick="openAgent('${esc(e.agentName)}')" title="View ${esc(e.title)}">
+    h += `<tr style="cursor:pointer" onclick="showAndTell('${esc(e.agentName)}')" title="View ${esc(e.title)}">
       <td class="lb-rank">${i + 1}</td>
       <td class="lb-name">${esc(e.title)}</td>
       <td style="text-align:center;color:#e3b341;font-size:.75rem">${e.setId}</td>
@@ -10509,7 +10509,7 @@ async function renderMarketExchange() {
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(agentUrl)}`;
 
     return `
-      <div class="market-row" style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;transition:background .15s;cursor:pointer" onclick="openAgent('${esc(d.agentName)}')" title="View ${esc(d.title || d.agentSlug)}" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
+      <div class="market-row" style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;transition:background .15s;cursor:pointer" onclick="var n='${esc(d.agentName)}';if(typeof showAndTell==='function'){showAndTell(n)}else{openAgent(n)}" title="View ${esc(d.title || d.agentSlug)}" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
         <div style="font-size:.65rem;color:#484f58;font-family:monospace">#${block.index}</div>
         <div style="display:flex;align-items:center;gap:8px">
           <img src="${qrUrl}" alt="" width="28" height="28" style="border-radius:4px;opacity:.7" loading="lazy">
