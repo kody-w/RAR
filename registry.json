@@ -1,10 +1,10 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-05T20:44:03.869310+00:00",
+  "generated_at": "2026-04-05T20:48:32.378997+00:00",
   "stats": {
     "total_agents": 132,
-    "publishers": 6,
+    "publishers": 7,
     "categories": 19,
     "publisher_list": [
       "@aibast-agents-library",
@@ -12,7 +12,8 @@
       "@discreetRappers",
       "@kody",
       "@kody-w",
-      "@rapp"
+      "@rapp",
+      "@wildhaven"
     ],
     "category_list": [
       "b2b_sales",
@@ -3167,33 +3168,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/ceo-agent",
-      "version": "1.0.0",
-      "display_name": "CEO Agent",
-      "description": "Molly Wildfeuer's digital twin \u2014 the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
-      "author": "Wildhaven of America",
-      "tags": [
-        "ceo",
-        "digital-twin",
-        "wildhaven",
-        "rappter",
-        "strategy",
-        "leadership",
-        "stewardship"
-      ],
-      "category": "core",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic-agent"
-      ],
-      "_file": "agents/@kody/ceo_agent.py",
-      "_size_kb": 13.5,
-      "_lines": 325,
-      "_has_card": false
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@kody/context_memory",
       "version": "1.0.0",
       "display_name": "ContextMemory",
@@ -3470,6 +3444,33 @@
       "_size_kb": 1.3,
       "_lines": 29,
       "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@wildhaven/ceo-agent",
+      "version": "1.0.0",
+      "display_name": "CEO Agent",
+      "description": "Molly Wildfeuer's digital twin \u2014 the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
+      "author": "Wildhaven of America",
+      "tags": [
+        "ceo",
+        "digital-twin",
+        "wildhaven",
+        "rappter",
+        "strategy",
+        "leadership",
+        "stewardship"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic-agent"
+      ],
+      "_file": "agents/@wildhaven/ceo_agent.py",
+      "_size_kb": 13.5,
+      "_lines": 325,
+      "_has_card": false
     }
   ],
   "instance": {

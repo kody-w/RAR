@@ -18,7 +18,7 @@ It protects the Three Rules: Free Shade, Your Stamp, Sovereign Roots.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/ceo-agent",
+    "name": "@wildhaven/ceo-agent",
     "version": "1.0.0",
     "display_name": "CEO Agent",
     "description": "Molly Wildfeuer's digital twin — the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
