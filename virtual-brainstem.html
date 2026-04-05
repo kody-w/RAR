@@ -3193,6 +3193,38 @@ function addChatActivity(text) {
   return div;
 }
 
+function finishChatActivity(el, agentName, args, result) {
+  if (!el) return;
+  const pill = el.querySelector('.chat-activity-pill');
+  if (!pill) return;
+
+  // Build a concise summary of what happened
+  const name = agentName.replace(/_/g, ' ');
+  let detail = '';
+  if (agentName === 'store_memory') {
+    detail = `stored ${args.memory_type || 'fact'}: "${(args.content || '').slice(0, 60)}"`;
+    if (result && result.total_memories) detail += ` (${result.total_memories} total)`;
+  } else if (agentName === 'recall_memories') {
+    const count = result && result.memories ? result.memories.length : 0;
+    detail = `recalled ${count} memor${count === 1 ? 'y' : 'ies'}`;
+    if (result && result.total_stored) detail += ` of ${result.total_stored} stored`;
+  } else if (agentName === 'hacker_news') {
+    const count = result ? (Array.isArray(result) ? result.length : 0) : 0;
+    detail = `fetched ${count} top stor${count === 1 ? 'y' : 'ies'}`;
+  } else {
+    detail = JSON.stringify(result).slice(0, 80);
+  }
+
+  // Replace the spinning dot with a check, keep it visible
+  pill.innerHTML = `<span style="color:var(--green)">&#10003;</span> <strong>${name}</strong> &mdash; ${detail}`;
+  pill.style.borderStyle = 'solid';
+  pill.style.borderColor = 'var(--green)';
+  pill.style.color = 'var(--text-dim)';
+
+  const container = document.getElementById('chatMessages');
+  container.scrollTop = container.scrollHeight;
+}
+
 function removeChatActivity(el) {
   if (el && el.parentNode) el.parentNode.removeChild(el);
 }
@@ -3285,7 +3317,8 @@ async function sendChat() {
           result = { error: e.message };
         }
 
-        removeChatActivity(activityEl);
+        // Replace spinner with persistent agent result summary
+        finishChatActivity(activityEl, fnName, fnArgs, result);
 
         chatHistory.push({
           role: 'tool',
