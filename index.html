@@ -11929,6 +11929,73 @@ function curatorScore(a) {
   return { stars, votes: voteWeight, reasons, score };
 }
 
+function curatorReviewTextVariant(a, index, seed) {
+  const c = curatorScore(a);
+  const lines = a._lines || 0;
+  const tier = a.quality_tier || 'community';
+  const deps = (a.dependencies || []).length;
+  const envs = (a.requires_env || []).length;
+  const tags = (a.tags || []);
+  const cat = (a.category || 'general').replace(/_/g, ' ');
+  const name = a.display_name || a.name || 'Agent';
+  const pick = (arr) => arr[seed % arr.length];
+
+  // Different reviewer angles based on index
+  if (index === 0) return curatorReviewText(a); // Primary review
+
+  const angles = [
+    // Usability angle
+    () => {
+      if (envs === 0) return pick([
+        `Zero-config setup. Drop ${name} in your agents folder and it just works. That's the dream.`,
+        `Love that ${name} needs no env vars. Install and go. The ${cat} category needs more agents like this.`,
+        `The barrier to entry here is zero — no API keys, no config. Just download and perform(). More agents should be this easy.`,
+      ]);
+      return pick([
+        `${name} requires ${envs} env var${envs > 1 ? 's' : ''} (${(a.requires_env||[]).join(', ')}). Worth the setup if you're already in that ecosystem.`,
+        `You'll need to configure ${(a.requires_env||[]).join(', ')} before this does anything useful. Once set up though, it delivers.`,
+        `The env var requirement is a speed bump but not a dealbreaker. ${name} does things you can't do without those credentials.`,
+      ]);
+    },
+    // Code quality angle
+    () => pick([
+      `${lines} lines is the sweet spot for a ${cat} agent — enough to be useful, short enough to audit in one read.`,
+      `Read through the source. Clean perform() method, sensible parameter handling. ${lines} lines, no dead code.`,
+      `The implementation is ${lines > 300 ? 'thorough' : 'focused'}. ${lines} lines that actually do something. No padding.`,
+      `Checked the source — follows single-file conventions properly. ${name} is a good reference implementation for the ${cat} category.`,
+      `${lines} lines. Every line earns its place. The perform() method is ${lines > 200 ? 'well-structured' : 'concise'} and returns clean strings.`,
+    ]),
+    // Community angle
+    () => pick([
+      `If you're building in the ${cat} space, ${name} is worth adding to your deck. Pairs well with other ${cat} agents.`,
+      `${name} fills a gap in the registry. The ${cat} category needed exactly this.`,
+      `This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.`,
+      `Would recommend ${name} to anyone getting started with ${cat}. It shows how a RAR agent should be built.`,
+      `${tier} tier feels right for where this is. ${c.stars >= 4 ? 'Could see this going official.' : 'A few iterations away from verified.'}`,
+    ]),
+    // Technical angle
+    () => {
+      if (deps === 0) return pick([
+        `Zero dependencies beyond BasicAgent. Fully self-contained. That's how single-file agents should work.`,
+        `No dependency chain to worry about. ${name} stands on its own. Portable, auditable, deployable anywhere.`,
+      ]);
+      return pick([
+        `Depends on ${(a.dependencies||[]).join(', ')}. Standard dependency chain — nothing surprising.`,
+        `${deps} dep${deps > 1 ? 's' : ''}, all within the RAR ecosystem. No external package risk.`,
+      ]);
+    },
+    // Comparison angle
+    () => pick([
+      `Compared to other ${cat} agents in the registry, ${name} ${c.stars >= 4 ? 'stands out' : 'holds its own'}. ${tags.length >= 3 ? 'Good tagging helps it get found.' : 'Could use more tags for discoverability.'}`,
+      `${name} is ${c.stars >= 4 ? 'top-tier' : c.stars >= 3 ? 'mid-pack' : 'early-stage'} for the ${cat} category. ${lines} lines puts it ${lines > 300 ? 'on the larger side' : lines > 100 ? 'right in the middle' : 'on the lean side'}.`,
+      `If you need a ${cat} agent, ${name} vs. the alternatives comes down to ${envs === 0 ? 'ease of setup — and this one wins on that front' : 'whether you have the required credentials'}.`,
+    ]),
+  ];
+
+  const angle = angles[(index - 1) % angles.length];
+  return angle();
+}
+
 function curatorReviewText(a) {
   const c = curatorScore(a);
   const lines = a._lines || 0;
@@ -14530,14 +14597,26 @@ function generateSyntheticData() {
       voters: { curator: 'up' }
     };
 
-    // One evidence-based review per agent from the curator
-    _syntheticReviews.agents[a.name] = [{
-      user: 'curator',
-      rating: c.stars,
-      text: curatorReviewText(a),
-      timestamp: new Date().toISOString(),
-      evidence: c.reasons,
-    }];
+    // Multiple varied reviews per agent — count varies by agent
+    const nameHash = (a.name || '').split('').reduce((h, ch) => ((h << 5) - h + ch.charCodeAt(0)) | 0, 0);
+    const reviewCount = 2 + (Math.abs(nameHash) % 4); // 2-5 reviews per agent
+    const reviewers = [];
+    for (let ri = 0; ri < reviewCount; ri++) {
+      const seed = Math.abs(nameHash * (ri + 1) * 31);
+      // Vary rating slightly: ±1 from base, clamped to 1-5
+      const ratingOffset = (seed % 3) - 1;
+      const rating = Math.max(1, Math.min(5, c.stars + ratingOffset));
+      // Vary timestamp: spread across last 30 days
+      const daysAgo = seed % 30;
+      const ts = new Date(Date.now() - daysAgo * 86400000).toISOString();
+      reviewers.push({
+        user: 'curator',
+        rating,
+        text: curatorReviewTextVariant(a, ri, seed),
+        timestamp: ts,
+      });
+    }
+    _syntheticReviews.agents[a.name] = reviewers;
   }
 }
 
