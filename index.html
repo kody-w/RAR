@@ -596,8 +596,8 @@
   .ac-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
   .ac-rarity.mythic { color: #ff6d00; }
   .ac-rarity.rare { color: #ffd700; }
-  .ac-rarity.uncommon { color: #c0c0c0; }
-  .ac-rarity.common { color: #78909c; }
+  .ac-rarity.uncommon, .ac-rarity.core { color: #c0c0c0; }
+  .ac-rarity.common, .ac-rarity.starter { color: #78909c; }
   .ac-stats { font-weight: 800; font-size: .85rem; }
 
   /* Back of card — universal design like Pokemon/MTG card backs */
@@ -728,8 +728,8 @@
   }
   .wallet-card-row .wcr-rarity.mythic { background: #ff6d00; box-shadow: 0 0 6px rgba(255,109,0,.5); }
   .wallet-card-row .wcr-rarity.rare { background: #ffd700; box-shadow: 0 0 6px rgba(255,215,0,.4); }
-  .wallet-card-row .wcr-rarity.uncommon { background: #c0c0c0; }
-  .wallet-card-row .wcr-rarity.common { background: #667788; }
+  .wallet-card-row .wcr-rarity.uncommon, .wallet-card-row .wcr-rarity.core { background: #c0c0c0; }
+  .wallet-card-row .wcr-rarity.common, .wallet-card-row .wcr-rarity.starter { background: #667788; }
   .wallet-card-row .wcr-info { flex: 1; min-width: 0; }
   .wallet-card-row .wcr-name { font-size: .82rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .wallet-card-row .wcr-agent { font-size: .65rem; color: var(--text-muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -796,8 +796,8 @@
   .biz-tier { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 2px 8px; border-radius: 3px; }
   .biz-tier.mythic { background: rgba(255,109,0,.15); color: #ff6d00; }
   .biz-tier.rare { background: rgba(255,215,0,.15); color: #ffd700; }
-  .biz-tier.uncommon { background: rgba(192,192,192,.1); color: #c0c0c0; }
-  .biz-tier.common { background: rgba(188,140,255,.1); color: #bc8cff; }
+  .biz-tier.uncommon, .biz-tier.core { background: rgba(192,192,192,.1); color: #c0c0c0; }
+  .biz-tier.common, .biz-tier.starter { background: rgba(188,140,255,.1); color: #bc8cff; }
   .biz-version { font-size: .6rem; color: var(--text-muted); font-family: monospace; }
   .biz-stripe { height: 4px; border-radius: 2px; margin-bottom: 12px; }
 
@@ -1070,8 +1070,8 @@
   .holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
   .holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 10px rgba(255,140,0,.6), 0 0 20px rgba(255,140,0,.3); }
   .holo-rarity.rare { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,.5), 0 0 16px rgba(255,215,0,.2); }
-  .holo-rarity.uncommon { color: #c0c0c0; text-shadow: 0 0 4px rgba(192,192,192,.3); }
-  .holo-rarity.common { color: #8899aa; }
+  .holo-rarity.uncommon, .holo-rarity.core { color: #c0c0c0; text-shadow: 0 0 4px rgba(192,192,192,.3); }
+  .holo-rarity.common, .holo-rarity.starter { color: #8899aa; }
   .holo-stats {
     font-weight: 800; font-size: 1.1rem; color: #f0e6d0;
     text-shadow: 0 1px 3px rgba(0,0,0,.6);
@@ -1098,11 +1098,11 @@
     box-shadow: 0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.3);
     animation: rarityPulse 2.5s ease-in-out infinite;
   }
-  .holo-rarity-gem.uncommon {
+  .holo-rarity-gem.uncommon, .holo-rarity-gem.core {
     background: radial-gradient(circle, #e0e0e0, #a0a0a0);
     box-shadow: 0 0 6px rgba(192,192,192,.5);
   }
-  .holo-rarity-gem.common {
+  .holo-rarity-gem.common, .holo-rarity-gem.starter {
     background: radial-gradient(circle, #8899aa, #667788);
     box-shadow: 0 0 4px rgba(100,120,140,.3);
   }
@@ -1175,7 +1175,8 @@
   .showntell-info .si-lbl { color: #4a4030; font-size: .55rem; text-transform: uppercase; letter-spacing: 1.5px; }
   .showntell-info .si-val.si-mythic { color: #ff8c00; }
   .showntell-info .si-val.si-rare { color: #ffd700; }
-  .showntell-info .si-val.si-uncommon { color: #c0c0c0; }
+  .showntell-info .si-val.si-uncommon, .showntell-info .si-val.si-core { color: #c0c0c0; }
+  .showntell-info .si-val.si-starter { color: #8899aa; }
   /* Binder value badge */
   .showntell-btc {
     position: fixed; top: 56px; left: 50%; transform: translateX(-50%);
@@ -2336,8 +2337,8 @@
   }
   .pack-summary-pill.mythic { background: rgba(255,109,0,.2); color: #ff6d00; border: 1px solid rgba(255,109,0,.4); }
   .pack-summary-pill.rare { background: rgba(255,215,0,.15); color: var(--gold); border: 1px solid rgba(255,215,0,.3); }
-  .pack-summary-pill.uncommon { background: rgba(192,192,192,.1); color: #c0c0c0; border: 1px solid rgba(192,192,192,.2); }
-  .pack-summary-pill.common { background: rgba(188,140,255,.1); color: var(--purple); border: 1px solid rgba(188,140,255,.2); }
+  .pack-summary-pill.uncommon, .pack-summary-pill.core { background: rgba(192,192,192,.1); color: #c0c0c0; border: 1px solid rgba(192,192,192,.2); }
+  .pack-summary-pill.common, .pack-summary-pill.starter { background: rgba(188,140,255,.1); color: var(--purple); border: 1px solid rgba(188,140,255,.2); }
   .pull-odds {
     display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
     margin-top: 8px; font-size: .72rem; color: var(--text-muted);
@@ -2401,8 +2402,8 @@
   }
   .pull-entry-rarity.mythic { background: #ff6d00; box-shadow: 0 0 6px rgba(255,109,0,.5); }
   .pull-entry-rarity.rare { background: var(--gold); box-shadow: 0 0 6px rgba(255,215,0,.4); }
-  .pull-entry-rarity.uncommon { background: #c0c0c0; }
-  .pull-entry-rarity.common { background: var(--purple); }
+  .pull-entry-rarity.uncommon, .pull-entry-rarity.core { background: #c0c0c0; }
+  .pull-entry-rarity.common, .pull-entry-rarity.starter { background: var(--purple); }
   .pull-entry-name { flex: 1; font-weight: 500; }
   .pull-entry-time { color: var(--text-muted); font-size: .68rem; }
   .pull-entry-set { background: var(--surface2); padding: 1px 6px; border-radius: 4px; font-size: .65rem; color: var(--text-muted); }
@@ -4161,7 +4162,7 @@ async function renderGauntletLeaderboard() {
   const now = Date.now();
 
   // Build leaderboard: each card gets base 1000 GP, modified by rarity + age
-  const rarityGP = { genesis: 1000, mythic: 800, rare: 500, uncommon: 200, common: 100 };
+  const rarityGP = { genesis: 1000, mythic: 800, rare: 500, uncommon: 200, core: 200, common: 100, starter: 100 };
   const entries = forgeBlocks.map(block => {
     const d = block.data;
     const baseGP = rarityGP[d.rarity] || 100;
@@ -4199,7 +4200,7 @@ async function renderGauntletLeaderboard() {
       <th>#</th><th>Card</th><th>Set</th><th>Rarity</th><th style="color:#d2a8ff">GP</th><th>Age</th><th>Binder</th><th>Edition</th><th>Block</th>
     </tr></thead><tbody>`;
 
-  const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+  const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', core: '#c0c0c0', uncommon: '#c0c0c0', starter: '#8899aa', common: '#8899aa' };
 
   entries.forEach((e, i) => {
     const rc = rarityColors[e.rarity] || '#8899aa';
@@ -5800,8 +5801,8 @@ function pickCompanion() {
 // Refresh the forge bond every 60 seconds so the countdown stays accurate
 setInterval(() => { if (getCompanion()) renderCompanion(); }, 60000);
 
-const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'uncommon', experimental: 'common' };
-const RARITY_LABELS = { mythic: 'Official', rare: 'Verified', uncommon: 'Community', common: 'Frontier' };
+const TIER_TO_RARITY = { official: 'mythic', verified: 'rare', community: 'core', experimental: 'starter' };
+const RARITY_LABELS = { mythic: 'Legendary', rare: 'Elite', core: 'Core', starter: 'Starter' };
 
 // Color mapping by category
 const CAT_COLORS = {
@@ -10393,7 +10394,7 @@ async function renderMarketExchange() {
   // Build exchange table
   const rows = forgeBlocks.map(block => {
     const d = block.data;
-    const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', uncommon: '#c0c0c0', common: '#8899aa' };
+    const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', core: '#c0c0c0', uncommon: '#c0c0c0', starter: '#8899aa', common: '#8899aa' };
     const rc = rarityColors[d.rarity] || '#8899aa';
     const ownerInfo = chainState.binders?.[d.owner];
     const ownerLabel = ownerInfo?.alias || `${d.owner.slice(0,8)}...`;
