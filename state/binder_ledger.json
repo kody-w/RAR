@@ -1,0 +1,6 @@
+{
+  "schema": "rar-binder-ledger/1.0",
+  "description": "Public ledger of registered binders. GitHub username = identity. Binder repos can be public or private.",
+  "binders": {},
+  "updated_at": ""
+}

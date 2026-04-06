@@ -32,6 +32,7 @@ AGENTS_DIR = REPO_ROOT / "agents"
 STAGING_DIR = REPO_ROOT / "staging"
 VOTES_FILE = STATE_DIR / "votes.json"
 REVIEWS_FILE = STATE_DIR / "reviews.json"
+LEDGER_FILE = STATE_DIR / "binder_ledger.json"
 
 REQUIRED_MANIFEST_FIELDS = [
     "schema", "name", "version", "display_name",
@@ -250,9 +251,20 @@ def handle_review(payload: dict, user: str) -> dict:
 def handle_submit_agent(payload: dict, user: str) -> dict:
     """Process an agent submission. Validates manifest and writes to staging/.
 
-    Agents land in staging/ for review — NOT in agents/.
+    Requires a registered binder. Agents land in staging/ for review — NOT in agents/.
     Admin approval (via label or workflow) promotes staging → agents and triggers card forge.
     """
+    # Ledger check: binder must be registered
+    if not is_binder_registered(user):
+        return {
+            "error": (
+                f"No registered binder for '{user}'. "
+                "Register first by opening an Issue with: "
+                '{"action": "register_binder", "payload": {"namespace": "@' + user + '"}}  '
+                "Your binder can be public or private."
+            )
+        }
+
     code = payload.get("code", "")
     if not code or not code.strip():
         return {"error": "Agent code is required"}
@@ -322,6 +334,58 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     }
 
 
+def handle_register_binder(payload: dict, user: str) -> dict:
+    """Register a binder on the public ledger.
+
+    Any GitHub user can register. Their binder can be public or private —
+    we only store that they exist and their namespace. The GitHub username
+    IS the identity (proven by the token that created the Issue).
+    """
+    repo_url = payload.get("repo", "")
+    namespace = payload.get("namespace", f"@{user}")
+
+    # Validate namespace format
+    if not namespace.startswith("@"):
+        namespace = f"@{namespace}"
+
+    ledger = load_json(LEDGER_FILE)
+    if "binders" not in ledger:
+        ledger["binders"] = {}
+
+    # Check if already registered
+    if user in ledger["binders"]:
+        existing = ledger["binders"][user]
+        return {
+            "ok": True,
+            "status": "already_registered",
+            "user": user,
+            "namespace": existing.get("namespace", namespace),
+            "registered_at": existing.get("registered_at", ""),
+        }
+
+    # Register
+    ledger["binders"][user] = {
+        "namespace": namespace,
+        "repo": repo_url,
+        "registered_at": now_iso(),
+    }
+    ledger["updated_at"] = now_iso()
+    save_json(LEDGER_FILE, ledger)
+
+    return {
+        "ok": True,
+        "status": "registered",
+        "user": user,
+        "namespace": namespace,
+    }
+
+
+def is_binder_registered(user: str) -> bool:
+    """Check if a user has a registered binder on the ledger."""
+    ledger = load_json(LEDGER_FILE)
+    return user in ledger.get("binders", {})
+
+
 # ──────────────────────────────────────────────────────────────────────
 # Dispatcher
 # ──────────────────────────────────────────────────────────────────────
@@ -330,6 +394,7 @@ HANDLERS = {
     "vote": handle_vote,
     "review": handle_review,
     "submit_agent": handle_submit_agent,
+    "register_binder": handle_register_binder,
 }
 
 

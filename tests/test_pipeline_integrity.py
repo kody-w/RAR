@@ -115,6 +115,7 @@ def isolated_pipeline(tmp_path, monkeypatch):
 
     (state / "votes.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
     (state / "reviews.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
+    (state / "binder_ledger.json").write_text(json.dumps({"binders": {"testuser": {"namespace": "@testuser", "registered_at": "2026-04-06T00:00:00Z"}}, "updated_at": ""}))
 
     monkeypatch.setattr(pi, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(pi, "STATE_DIR", state)
@@ -122,6 +123,7 @@ def isolated_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(pi, "STAGING_DIR", staging)
     monkeypatch.setattr(pi, "VOTES_FILE", state / "votes.json")
     monkeypatch.setattr(pi, "REVIEWS_FILE", state / "reviews.json")
+    monkeypatch.setattr(pi, "LEDGER_FILE", state / "binder_ledger.json")
 
     return tmp_path
 
@@ -171,10 +173,19 @@ class TestStagingPipeline:
 
     @pytest.mark.pipeline
     def test_submission_rejects_wrong_namespace(self, isolated_pipeline):
-        """User 'alice' can't submit under @bob/ namespace."""
+        """User 'alice' can't submit under @testuser/ namespace."""
+        # Register alice's binder first, then try to submit under @testuser
+        pi.handle_register_binder({"namespace": "@alice"}, "alice")
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "alice")
         assert "error" in result
         assert "Publisher" in result["error"] or "publisher" in result["error"]
+
+    @pytest.mark.pipeline
+    def test_submission_rejects_unregistered_binder(self, isolated_pipeline):
+        """Unregistered users cannot submit."""
+        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "nobody")
+        assert "error" in result
+        assert "register" in result["error"].lower() or "binder" in result["error"].lower()
 
     @pytest.mark.pipeline
     def test_submission_rejects_kebab_slug(self, isolated_pipeline):

@@ -36,12 +36,14 @@ def isolated_state(tmp_path, monkeypatch):
     # Write empty state files
     (state_dir / "votes.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
     (state_dir / "reviews.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
+    (state_dir / "binder_ledger.json").write_text(json.dumps({"binders": {}, "updated_at": ""}))
 
     monkeypatch.setattr(pi, "STATE_DIR", state_dir)
     monkeypatch.setattr(pi, "AGENTS_DIR", agents_dir)
     monkeypatch.setattr(pi, "STAGING_DIR", staging_dir)
     monkeypatch.setattr(pi, "VOTES_FILE", state_dir / "votes.json")
     monkeypatch.setattr(pi, "REVIEWS_FILE", state_dir / "reviews.json")
+    monkeypatch.setattr(pi, "LEDGER_FILE", state_dir / "binder_ledger.json")
     monkeypatch.setattr(pi, "REPO_ROOT", tmp_path)
 
     return tmp_path
@@ -250,7 +252,55 @@ class MyAgent:
 '''
 
 
+# ──────────────────────────────────────────────────────────────────────
+# Binder registration
+# ──────────────────────────────────────────────────────────────────────
+
+class TestRegisterBinder:
+    def test_register_new_binder(self):
+        result = pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+        assert result["ok"] is True
+        assert result["status"] == "registered"
+        assert result["namespace"] == "@testuser"
+
+    def test_register_already_registered(self):
+        pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+        result = pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+        assert result["ok"] is True
+        assert result["status"] == "already_registered"
+
+    def test_register_with_repo(self):
+        result = pi.handle_register_binder(
+            {"namespace": "@alice", "repo": "https://github.com/alice/my-binder"},
+            "alice"
+        )
+        assert result["ok"] is True
+        # Verify persisted
+        assert pi.is_binder_registered("alice")
+
+    def test_register_auto_namespace(self):
+        result = pi.handle_register_binder({}, "bob")
+        assert result["namespace"] == "@bob"
+
+    def test_submit_requires_registration(self):
+        """Unregistered users cannot submit agents."""
+        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "unregistered_user")
+        assert "error" in result
+        assert "register" in result["error"].lower() or "binder" in result["error"].lower()
+
+    def test_registered_user_can_submit(self):
+        pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
+        assert result.get("ok") is True
+
+
 class TestSubmitAgent:
+    """All submit tests register the binder first."""
+
+    @pytest.fixture(autouse=True)
+    def _register_binder(self):
+        pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+
     def test_valid_submission(self):
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
         assert result["ok"] is True
@@ -392,6 +442,10 @@ class TestTierValidation:
 
 
 class TestTierSubmissionEnforcement:
+    @pytest.fixture(autouse=True)
+    def _register_binder(self):
+        pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+
     def test_experimental_submission_allowed(self):
         code = VALID_AGENT_CODE.replace('"community"', '"experimental"')
         result = pi.handle_submit_agent({"code": code}, "testuser")
@@ -419,6 +473,10 @@ class TestTierSubmissionEnforcement:
 # ──────────────────────────────────────────────────────────────────────
 
 class TestEndToEnd:
+    @pytest.fixture(autouse=True)
+    def _register_binder(self):
+        pi.handle_register_binder({"namespace": "@testuser"}, "testuser")
+
     def test_vote_via_process(self):
         result = pi.process({
             "action": "vote",
