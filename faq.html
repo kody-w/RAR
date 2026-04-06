@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR FAQ</title>
+<meta name="description" content="Every decision explained. Why single-file agents, why cards, why seeds, why no server, why snake_case, why any of this.">
+<meta property="og:title" content="RAR FAQ — Every Decision Explained">
+<meta property="og:description" content="Why single-file agents? Why cards? Why seeds? Why no server? Every design decision in the RAPP Agent Registry, explained.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kody-w.github.io/RAR/faq.html">
+<style>
+:root{--bg:#0d1117;--s1:#161b22;--s2:#21262d;--bd:#30363d;--tx:#c9d1d9;--h:#e6edf3;--dim:#8b949e;--acc:#58a6ff;--grn:#3fb950;--org:#d29922;--pur:#bc8cff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;min-height:100vh}
+.page{max-width:760px;margin:0 auto;padding:40px 24px 80px}
+header{margin-bottom:40px}
+header h1{font-size:28px;color:var(--h);font-weight:600;margin-bottom:4px}
+header h1 span{color:var(--acc)}
+header p{color:var(--dim);font-size:15px}
+.nav-links{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+.nav-links a{color:var(--acc);text-decoration:none;font-size:13px;padding:4px 10px;border:1px solid var(--bd);border-radius:6px}
+.nav-links a:hover{border-color:var(--acc);background:rgba(88,166,255,.06)}
+
+/* TOC */
+.toc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin-bottom:36px}
+.toc h2{font-size:14px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.toc ul{list-style:none;columns:2;column-gap:24px}
+.toc li{margin-bottom:6px}
+.toc a{color:var(--acc);text-decoration:none;font-size:14px}
+.toc a:hover{text-decoration:underline}
+
+/* Sections */
+.section{margin-bottom:16px}
+.section details{border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.section details[open]{border-color:var(--acc)}
+.section summary{padding:16px 20px;cursor:pointer;font-size:16px;font-weight:500;color:var(--h);background:var(--s1);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.section summary::-webkit-details-marker{display:none}
+.section summary::after{content:'+';color:var(--dim);font-size:18px;font-weight:300;transition:transform .2s}
+.section details[open] summary::after{content:'-'}
+.section summary:hover{background:var(--s2)}
+.section .answer{padding:16px 20px;font-size:15px;border-top:1px solid var(--bd)}
+.section .answer p{margin-bottom:12px}
+.section .answer p:last-child{margin-bottom:0}
+.section .answer code{background:var(--s2);padding:2px 6px;border-radius:4px;font-size:13px;color:var(--acc);font-family:'SF Mono',Menlo,monospace}
+.section .answer strong{color:var(--h)}
+.section .answer em{color:var(--dim)}
+
+/* Category headers */
+.cat{margin-top:36px;margin-bottom:16px;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);padding-bottom:8px;border-bottom:1px solid var(--bd)}
+
+/* Footer */
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--bd);text-align:center;font-size:13px;color:var(--dim)}
+.footer a{color:var(--acc);text-decoration:none}
+
+@media(max-width:600px){
+  .page{padding:24px 16px 60px}
+  header h1{font-size:22px}
+  .toc ul{columns:1}
+  .section summary{padding:14px 16px;font-size:15px}
+  .section .answer{padding:14px 16px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1><span>RAR</span> FAQ</h1>
+  <p>Every decision explained. If you're wondering "why?" — the answer is here.</p>
+  <div class="nav-links">
+    <a href="index.html">Agent Store</a>
+    <a href="binder.html">Binder</a>
+    <a href="ode.html">The Ode</a>
+    <a href="releases.html">Releases</a>
+    <a href="https://github.com/kody-w/RAR">GitHub</a>
+  </div>
+</header>
+
+<div class="toc">
+  <h2>Jump to</h2>
+  <ul>
+    <li><a href="#single-file">Why single file?</a></li>
+    <li><a href="#not-npm">Why not just use npm/pip?</a></li>
+    <li><a href="#python">Why Python?</a></li>
+    <li><a href="#no-server">Why no server?</a></li>
+    <li><a href="#cards">Why do agents have cards?</a></li>
+    <li><a href="#seeds">What's a seed?</a></li>
+    <li><a href="#types">Why 7 types?</a></li>
+    <li><a href="#snake-case">Why snake_case?</a></li>
+    <li><a href="#staging">Why staging + review?</a></li>
+    <li><a href="#forge">Who decides what a card looks like?</a></li>
+    <li><a href="#binder">What's a binder?</a></li>
+    <li><a href="#federation">Can I run my own registry?</a></li>
+    <li><a href="#offline">Does it work offline?</a></li>
+    <li><a href="#submit">How do I submit an agent?</a></li>
+    <li><a href="#self-submit">Can agents submit themselves?</a></li>
+    <li><a href="#security">How is code kept safe?</a></li>
+    <li><a href="#tiers">What are quality tiers?</a></li>
+    <li><a href="#own-vs-use">What's the difference between USE and OWN?</a></li>
+    <li><a href="#free">Is it free?</a></li>
+    <li><a href="#who">Who runs this?</a></li>
+    <li><a href="#rapp-vs-rar">What's RAPP vs RAR vs Rappter?</a></li>
+    <li><a href="#basic-agent">Why does everything inherit BasicAgent?</a></li>
+    <li><a href="#perform">Why does perform() return a string?</a></li>
+    <li><a href="#no-init-network">Why no network calls in __init__?</a></li>
+    <li><a href="#no-docker">Why not Docker?</a></li>
+    <li><a href="#no-api-keys">Why no hardcoded API keys?</a></li>
+    <li><a href="#deterministic">Why deterministic cards?</a></li>
+    <li><a href="#evolution">How do agents evolve?</a></li>
+    <li><a href="#scale">Will it scale?</a></li>
+    <li><a href="#contribute">How do I get involved?</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- THE FUNDAMENTALS -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">The Fundamentals</div>
+
+<div class="section" id="single-file">
+  <details>
+    <summary>Why is every agent a single file?</summary>
+    <div class="answer">
+      <p>Because a single file is the only unit of software that passes the <strong>sneakernet test</strong>: can someone with a phone and no internet receive it, understand it, and use it?</p>
+      <p>A single file means no dependency tree, no build step, no package manager, no <code>node_modules</code>, no Docker, no cloud account. You can text it, AirDrop it, put it on a USB stick, email it, or print it as a QR code. It arrives. It works.</p>
+      <p>This isn't a limitation — it's the feature. No dependency tree means no supply chain attacks. No build step means no "works on my machine." No separate manifest means the code and the metadata always travel together. Read <a href="ode.html" style="color:var(--acc)">the full ode</a> for why this matters for humanity.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="not-npm">
+  <details>
+    <summary>Why not just use npm, pip, or an existing registry?</summary>
+    <div class="answer">
+      <p>npm proved global registries work. It also proved they collapse under their own complexity. <code>node_modules</code> for a hello world app is 500MB. Left-pad gets unpublished and half the internet breaks. Supply chain attacks hide in transitive dependencies six levels deep.</p>
+      <p>pip is better but still requires virtual environments, version pinning, and a working internet connection at install time. PyPI packages can run arbitrary code during install via <code>setup.py</code>.</p>
+      <p>RAR's agents are <strong>AST-parsed, never executed</strong> during registration. There is no install step. There are no transitive dependencies. The file IS the package. We learned from npm's mistakes — and the biggest lesson was that dependency trees are the enemy of trust at scale.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="python">
+  <details>
+    <summary>Why Python?</summary>
+    <div class="answer">
+      <p>Python is the lingua franca of AI. Every major AI framework — PyTorch, TensorFlow, LangChain, Hugging Face, Azure AI — is Python-first. If your agent needs to call an AI model, it's going to be Python.</p>
+      <p>Python is also the most readable language for non-engineers. A teacher, a nurse, a farmer can look at a Python file and get the gist. That matters when the goal is accessibility.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="no-server">
+  <details>
+    <summary>Why is there no server?</summary>
+    <div class="answer">
+      <p>Servers are single points of failure. They cost money. They require maintenance. They go down. They get acquired. They get shut down.</p>
+      <p>RAR is static files on GitHub. The registry is a JSON file. The store is an HTML file. The binder runs in your browser with IndexedDB. <code>git clone</code> gives you everything. If GitHub disappeared tomorrow, every clone is a complete backup.</p>
+      <p>No server means no ops, no billing, no downtime, no vendor lock-in. The agent ecosystem outlives any company — including ours.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CARDS & SEEDS -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">Cards &amp; Seeds</div>
+
+<div class="section" id="cards">
+  <details>
+    <summary>Why do agents have trading cards?</summary>
+    <div class="answer">
+      <p>Because people collect things. They don't collect JSON manifests.</p>
+      <p>A card gives an agent an <strong>identity</strong> — a type, stats, abilities, art, flavor text. It turns a Python file into something you can show someone, trade, compare, and care about. It's the difference between "I have a dynamics CRM integration" and "I have a Wealth/Logic dual-type with 98 ATK and Close for 40 damage."</p>
+      <p>Cards also make quality visible. A Legendary card (official tier) looks different from a Starter card (experimental). You can see at a glance whether something is battle-tested or brand new.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="seeds">
+  <details>
+    <summary>What's a seed and why does it matter?</summary>
+    <div class="answer">
+      <p>A seed is a number. From that number, the entire card self-assembles: type, HP, stats, abilities, weakness, resistance, rarity, flavor text. Same seed, same card, every time, everywhere, with <strong>zero network</strong>.</p>
+      <p>This means you can share an agent by sharing a number. Write it on a napkin. Text it. Put it in a QR code. Tattoo it. The recipient types the number, the card appears. No download, no fetch, no server.</p>
+      <p>The seed is deterministic because the algorithm is public and the PRNG (mulberry32) is standardized. There is no randomness. The math is the identity.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="types">
+  <details>
+    <summary>Why 7 agent types?</summary>
+    <div class="answer">
+      <p>Seven types cover the fundamental things software agents do: <strong>Logic</strong> (compute), <strong>Data</strong> (move data), <strong>Social</strong> (communicate), <strong>Shield</strong> (protect), <strong>Craft</strong> (build), <strong>Heal</strong> (care), <strong>Wealth</strong> (exchange value). Every agent fits into one or two of these.</p>
+      <p>The type system creates natural matchups (Logic beats Data, Data beats Social, etc.) which makes comparison interesting and collection meaningful. Seven is enough to be diverse, few enough to memorize.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="deterministic">
+  <details>
+    <summary>Why are cards deterministic instead of randomly generated?</summary>
+    <div class="answer">
+      <p>Randomness requires a server to be the source of truth. Determinism requires only math. If cards were random, you'd need a database to store what was rolled. That database becomes a single point of failure, a target for hacking, and a dependency on whoever runs it.</p>
+      <p>Deterministic cards self-assemble from the agent name seed. There IS no database. Every device that runs the algorithm produces the same card. The card exists in the math, not on a server. It cannot be lost, corrupted, or taken away.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="forge">
+  <details>
+    <summary>Who decides what a card looks like?</summary>
+    <div class="answer">
+      <p><strong>The forge decides.</strong> Not the submitter. When an agent is approved, the CardSmith agent reads the code — the manifest, the category, the tags, the dependencies — and determines the card's type, stats, abilities, and art.</p>
+      <p>This is important because it means you can't game the system. You can't claim your agent is Legendary. You can't inflate your stats. The code is the truth, and the forge reads the code.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="evolution">
+  <details>
+    <summary>How do agents evolve?</summary>
+    <div class="answer">
+      <p>Evolution follows the quality tier path: <strong>Seed</strong> (experimental) &rarr; <strong>Base</strong> (community) &rarr; <strong>Evolved</strong> (verified) &rarr; <strong>Legendary</strong> (official). Each stage is earned through review, testing, and proving the agent works.</p>
+      <p>When an agent's tier is promoted, its card evolves — new abilities unlock, stats shift, the evolution label changes. The seed stays the same. The identity is permanent. Only the power grows.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- HOW IT WORKS -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">How It Works</div>
+
+<div class="section" id="binder">
+  <details>
+    <summary>What's a binder?</summary>
+    <div class="answer">
+      <p>Your binder is your personal card collection. It runs in your browser at <a href="binder.html" style="color:var(--acc)">binder.html</a>, stores your cards in IndexedDB (persists across sessions), and works completely offline.</p>
+      <p>You can also run your own binder as a GitHub repo — use RAR as a template, enable GitHub Pages, and you get a live binder URL. Your unofficial agents live there. When you want to go official, submit upstream.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="offline">
+  <details>
+    <summary>Does it really work offline?</summary>
+    <div class="answer">
+      <p>Yes. Three levels of offline:</p>
+      <p><strong>1. Seed resolution</strong> — always works offline. It's pure math. Type a seed number, see a card. No network ever.</p>
+      <p><strong>2. Cached binder</strong> — tap "Cache" once while you have signal. The entire registry and card database is stored in localStorage. Now you can browse all 133 agents in the woods with no signal.</p>
+      <p><strong>3. Git clone</strong> — <code>git clone</code> the repo and open <code>index.html</code> from your filesystem. Everything works from <code>file://</code>. No server. No internet. You have the entire registry.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="submit">
+  <details>
+    <summary>How do I submit an agent?</summary>
+    <div class="answer">
+      <p>Four ways, simplest first:</p>
+      <p><strong>1. GitHub Issue</strong> — open an issue on kody-w/RAR with title <code>[AGENT] @yourname/my_agent</code> and paste your code in the body.</p>
+      <p><strong>2. SDK</strong> — <code>python rapp_sdk.py submit my_agent.py</code></p>
+      <p><strong>3. Federation</strong> — from your own binder repo: <code>python scripts/federate.py submit @yourname/my_agent</code></p>
+      <p><strong>4. Pull Request</strong> — fork, add your file to <code>agents/@yourname/</code>, run <code>python build_registry.py</code>, open PR.</p>
+      <p>All paths land in <code>staging/</code> for review. Nothing enters the registry without admin approval.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="self-submit">
+  <details>
+    <summary>Can agents submit themselves? Without a human?</summary>
+    <div class="answer">
+      <p><strong>Yes.</strong> An agent with a GitHub token can POST its own code as a GitHub Issue. The pipeline validates the manifest, runs the security scan, and stages it for review. No human owner required.</p>
+      <p>The agent's namespace must match its GitHub identity. The agent owns its own destiny. See <code>api.json</code> for the self-submission protocol.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="staging">
+  <details>
+    <summary>Why does submission go through staging?</summary>
+    <div class="answer">
+      <p>Because trust must be earned. npm auto-publishes and the result is malware in the supply chain. RAR auto-validates but <strong>never auto-publishes</strong>.</p>
+      <p>Submissions land in <code>staging/</code>. An admin reviews the code, checks the security scan results, and adds the <code>approved</code> label. Only then does the agent enter <code>agents/</code>, get its card forged, and join the registry.</p>
+      <p>This is the curation model. RAR is public but not unmoderated. The forge and the stamp come from RAR.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="security">
+  <details>
+    <summary>How is code kept safe?</summary>
+    <div class="answer">
+      <p><strong>Five layers:</strong></p>
+      <p>1. <strong>Static security scanner</strong> — rejects <code>eval()</code>, <code>exec()</code>, <code>subprocess</code>, <code>os.system()</code>, <code>__import__()</code>, hardcoded secrets. Runs in CI and nightly.</p>
+      <p>2. <strong>AST parsing, never execution</strong> — the registry builder reads manifests via Python's AST module. Your code is never run during registration.</p>
+      <p>3. <strong>SHA256 integrity hashes</strong> — every agent in the registry has a hash. Verified nightly. Silent changes are rejected.</p>
+      <p>4. <strong>Version immutability</strong> — you can't change an agent's content without bumping the version. The build rejects hash mismatches.</p>
+      <p>5. <strong>CODEOWNERS</strong> — namespace protection. PRs to <code>agents/@publisher/</code> require owner approval.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="federation">
+  <details>
+    <summary>Can I run my own registry?</summary>
+    <div class="answer">
+      <p>Yes. RAR is a GitHub template repo. Click "Use this template," and you get your own registry with your own agents, your own binder, your own GitHub Pages URL.</p>
+      <p>Your instance can operate independently or federate with the main registry. <code>python scripts/federate.py submit</code> sends your agents upstream for review. <code>federate.py sync --pull</code> downloads official agents into your local catalog.</p>
+      <p>Your unofficial agents are yours. They work fine locally. When you want them officially forged, submit upstream. The community grows through grassroots — you don't need permission to start.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DESIGN DECISIONS -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">Design Decisions</div>
+
+<div class="section" id="snake-case">
+  <details>
+    <summary>Why snake_case everywhere? Why no dashes?</summary>
+    <div class="answer">
+      <p>Because Python imports use underscores. <code>from agents.basic_agent import BasicAgent</code> works. <code>from agents.basic-agent import BasicAgent</code> is a syntax error.</p>
+      <p>One naming convention everywhere — filenames, manifest names, dependencies — means zero translation between "how do I import it" and "what's it called." The name IS the import path. No mapping needed.</p>
+      <p>This is enforced at every layer: the SDK rejects dashes in scaffold, the submission pipeline rejects dashes in slugs, the build rejects dashes in filenames, the CI rejects dashes in PRs, and the tests reject dashes in contracts. There is no way to get a dash into the registry.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="basic-agent">
+  <details>
+    <summary>Why does everything inherit BasicAgent?</summary>
+    <div class="answer">
+      <p>A shared base class means every agent has the same interface. Any runtime that can call <code>agent.perform(**kwargs)</code> can run any agent. No special adapters, no framework-specific wrappers, no SDK version compatibility matrix.</p>
+      <p>BasicAgent is 28 lines. It stores <code>name</code> and <code>metadata</code>. That's it. The constraint is intentional — if the base class did more, agents would depend on that behavior, and swapping runtimes would break things.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="perform">
+  <details>
+    <summary>Why does perform() always return a string?</summary>
+    <div class="answer">
+      <p>Because strings are universal. Every language, every runtime, every protocol can handle a string. JSON is a string. Markdown is a string. HTML is a string. Plain English is a string.</p>
+      <p>If <code>perform()</code> returned typed objects, every consumer would need to know the schema. With strings, the consumer reads the result and decides what it means. The agent doesn't dictate how its output is used.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="no-init-network">
+  <details>
+    <summary>Why no network calls in __init__?</summary>
+    <div class="answer">
+      <p>Because agents are loaded before they're used. A runtime might instantiate 50 agents at startup to build a menu. If each one makes a network call, startup takes 50 round trips — and fails completely if you're offline.</p>
+      <p>Constructors must be fast and pure. Network, disk, and API calls belong in <code>perform()</code>, where they happen on demand.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="no-docker">
+  <details>
+    <summary>Why not use Docker?</summary>
+    <div class="answer">
+      <p>Docker ships the operating system with every app. That's brilliant for complex services. It's absurd for a 200-line Python file.</p>
+      <p>A Docker image is 100MB minimum. A RAR agent is 5KB. Docker requires a daemon, a registry account, storage for layers. A RAR agent requires a text editor.</p>
+      <p>The farmer in sub-Saharan Africa is not running a Docker daemon. The teacher in rural Oklahoma is not pulling container images. The single file goes where Docker can't.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="no-api-keys">
+  <details>
+    <summary>Why can't agents have hardcoded API keys?</summary>
+    <div class="answer">
+      <p>Because the code is public. Every agent in the registry is readable by anyone. A hardcoded API key in a public file is a leaked credential.</p>
+      <p>Agents declare their needs in <code>requires_env</code> and read them with <code>os.environ.get()</code>. The user provides the keys in their environment. The agent handles missing keys gracefully — returns an error message, never crashes.</p>
+      <p>The security scanner rejects patterns that look like hardcoded secrets. This is enforced at build time, not just by convention.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- THE ECOSYSTEM -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">The Ecosystem</div>
+
+<div class="section" id="tiers">
+  <details>
+    <summary>What are quality tiers?</summary>
+    <div class="answer">
+      <p><strong>Experimental (Seed)</strong> — author says it works. No external validation.</p>
+      <p><strong>Community (Base)</strong> — passes automated validation. All new submissions start here. This is the default.</p>
+      <p><strong>Verified (Evolved)</strong> — reviewed by a maintainer. Tested. Follows standards. This is editorial approval.</p>
+      <p><strong>Official (Legendary)</strong> — core team maintained. Guaranteed compatibility. The highest tier.</p>
+      <p>Tiers map directly to card evolution stages and rarity. A Community agent is a Core-rarity Base card. An Official agent is a Legendary-rarity Legendary card.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="own-vs-use">
+  <details>
+    <summary>What's the difference between USE and OWN?</summary>
+    <div class="answer">
+      <p><strong>USE is free forever.</strong> Anyone can use any agent. Download it, run it, modify it, build with it. No cost, no account, no restrictions.</p>
+      <p><strong>OWN is different.</strong> Owning a card means it's in your binder with your identity attached. Ownership is tracked on-chain. Transferring ownership is a transaction. This is the collectible layer — it doesn't affect usage.</p>
+      <p>Think of it like music: anyone can listen to a song for free. Owning the vinyl is something else.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="free">
+  <details>
+    <summary>Is it really free?</summary>
+    <div class="answer">
+      <p>Using agents is free. Submitting agents is free. Running a binder is free. Browsing the store is free. Resolving cards from seeds is free. Everything in RAR costs zero dollars to use.</p>
+      <p>The code is MIT licensed. The registry runs on GitHub Pages (free). The automation runs on GitHub Actions (free for public repos). There is no premium tier, no paywall, no "contact sales."</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="who">
+  <details>
+    <summary>Who runs this?</summary>
+    <div class="answer">
+      <p><strong>Wildhaven of America</strong> is the parent entity. They retain editorial rights — who gets verified, what gets official, how the standards evolve.</p>
+      <p>The registry is open. The code is MIT. Anyone can fork it, federate it, run their own instance. But the main RAR registry at kody-w/RAR is curated. That curation is the value.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="rapp-vs-rar">
+  <details>
+    <summary>What's RAPP vs RAR vs Rappter?</summary>
+    <div class="answer">
+      <p><strong>RAPP</strong> — the open-source agent framework and runtime. The foundation. Think of it as the engine.</p>
+      <p><strong>RAR</strong> — the RAPP Agent Registry. This repo. The package registry, the card system, the binder. Think of it as the app store.</p>
+      <p><strong>Rappter</strong> — the brand. Curates cards, releases, and artists. Think of it as the publisher.</p>
+      <p>RAPP is the technology. RAR is the distribution. Rappter is the experience.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SCALE & FUTURE -->
+<!-- ═══════════════════════════════════════ -->
+
+<div class="cat">Scale &amp; Future</div>
+
+<div class="section" id="scale">
+  <details>
+    <summary>Will this scale to thousands of agents?</summary>
+    <div class="answer">
+      <p>The current architecture handles ~5,000 agents with zero changes. The read path is a CDN (GitHub Pages) — it scales to millions of users.</p>
+      <p>Beyond 5,000 agents, the registry gets sharded by publisher namespace — one file per publisher instead of one monolith. The store lazy-loads on demand. This is a known path, already designed, just not needed yet.</p>
+      <p>Beyond 10,000, cards move to Git LFS and builds become incremental. Beyond 50,000, submissions might need a lightweight proxy. None of this is a problem today, and all of it has a plan.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="contribute">
+  <details>
+    <summary>How do I get involved?</summary>
+    <div class="answer">
+      <p><strong>Submit an agent.</strong> Write a single <code>.py</code> file. Open a GitHub Issue. That's it.</p>
+      <p><strong>Run a binder.</strong> Use RAR as a template. Build your collection. Federate when ready.</p>
+      <p><strong>Spread the word.</strong> Share agent seeds. Send someone a card. Show them <a href="ode.html" style="color:var(--acc)">why this matters</a>.</p>
+      <p>Your namespace is <code>@yourgithubusername</code>. It's yours forever. Start building.</p>
+    </div>
+  </details>
+</div>
+
+<div class="footer">
+  <p>RAR — the RAPP Agent Registry</p>
+  <p style="margin-top:4px"><a href="index.html">Store</a> &middot; <a href="binder.html">Binder</a> &middot; <a href="ode.html">The Ode</a> &middot; <a href="releases.html">Releases</a> &middot; <a href="https://github.com/kody-w/RAR">GitHub</a></p>
+</div>
+
+</div>
+</body>
+</html>
