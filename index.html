@@ -704,68 +704,6 @@
   .card-actions-bar .btn-deck.in-deck { border-color: rgba(200,60,60,.4); color: #e6a9a9; }
   .card-actions-bar .btn-deck.in-deck:hover { border-color: #d44; color: #ffb8b8; }
 
-  /* ── Wallet Viewer ── */
-  .wallet-login-card {
-    max-width: 420px; margin: 0 auto; padding: 32px;
-    background: linear-gradient(180deg, rgba(247,147,26,.04), rgba(247,147,26,.01));
-    border: 1px solid rgba(247,147,26,.15); border-radius: 16px; text-align: center;
-  }
-  .wallet-login-card .wl-icon {
-    width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px;
-    background: rgba(247,147,26,.1); border: 2px solid rgba(247,147,26,.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.6rem; color: #f7931a;
-  }
-  .wallet-login-card h3 { font-size: 1.1rem; margin: 0 0 8px; color: var(--text); }
-  .wallet-login-card p { font-size: .82rem; color: var(--text-dim); margin: 0 0 20px; line-height: 1.5; }
-  .wallet-login-card .wl-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 28px; border-radius: 10px; font-size: .9rem; font-weight: 700;
-    cursor: pointer; border: none; transition: all .2s; letter-spacing: .5px;
-  }
-  .wallet-login-card .wl-btn-gh {
-    background: #24292e; color: #fff;
-  }
-  .wallet-login-card .wl-btn-gh:hover { background: #2d3339; }
-  .wallet-login-card .wl-btn-gh svg { width: 20px; height: 20px; fill: #fff; }
-  .wallet-repo-input {
-    width: 100%; padding: 10px 14px; border-radius: 8px; font-size: .85rem;
-    border: 1px solid var(--border); background: var(--surface); color: var(--text);
-    font-family: monospace; box-sizing: border-box; outline: none; margin-bottom: 12px;
-  }
-  .wallet-repo-input:focus { border-color: #f7931a; }
-  .wallet-summary {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px; margin-bottom: 24px;
-  }
-  .wallet-summary .ws-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    padding: 16px; text-align: center;
-  }
-  .wallet-summary .ws-val { font-size: 1.3rem; font-weight: 900; }
-  .wallet-summary .ws-lbl { font-size: .6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
-  .wallet-cards-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .wallet-card-row {
-    display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    transition: border-color .2s; cursor: default;
-  }
-  .wallet-card-row:hover { border-color: rgba(247,147,26,.3); }
-  .wallet-card-row .wcr-rarity {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  }
-  .wallet-card-row .wcr-rarity.mythic { background: #ff6d00; box-shadow: 0 0 6px rgba(255,109,0,.5); }
-  .wallet-card-row .wcr-rarity.rare { background: #ffd700; box-shadow: 0 0 6px rgba(255,215,0,.4); }
-  .wallet-card-row .wcr-rarity.uncommon, .wallet-card-row .wcr-rarity.core { background: #c0c0c0; }
-  .wallet-card-row .wcr-rarity.common, .wallet-card-row .wcr-rarity.starter { background: #667788; }
-  .wallet-card-row .wcr-info { flex: 1; min-width: 0; }
-  .wallet-card-row .wcr-name { font-size: .82rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .wallet-card-row .wcr-agent { font-size: .65rem; color: var(--text-muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .wallet-card-row .wcr-btc { font-size: .82rem; font-weight: 800; color: #f7931a; white-space: nowrap; }
-  .wallet-card-row .wcr-cat { font-size: .6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
 
   /* Card mode toggle */
   .card-mode-toggle {
@@ -2007,10 +1945,6 @@
     .showntell-chain .stc-transfer { min-height: 44px; padding: 8px 14px; }
     .showntell-info { bottom: 68px; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 16px; }
     .showntell-info .si-val { font-size: .7rem; }
-    /* Wallet — mobile */
-    .wallet-login-card { padding: 24px 16px; }
-    .wallet-summary { grid-template-columns: repeat(2, 1fr); }
-    .wallet-cards-grid { grid-template-columns: 1fr; }
     /* Cards grid — mobile */
     .cards-grid { gap: 12px; }
   }
@@ -2025,8 +1959,6 @@
     .showntell-info .si-chip { gap: 1px; }
     .showntell-info .si-val { font-size: .65rem; }
     .showntell-info .si-lbl { font-size: .45rem; }
-    .wallet-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .wallet-summary .ws-val { font-size: 1.1rem; }
     .hero h1 { font-size: 1.3rem; }
   }
 
@@ -2531,7 +2463,7 @@
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
-    <button class="nav-btn" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button>
+
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <a class="nav-btn" href="binder.html" style="text-decoration:none">Binder</a>
@@ -3247,16 +3179,7 @@
     <div id="market-grid"></div>
   </div>
 
-  <!-- ═══════════ Wallet ═══════════ -->
-  <div class="panel" id="panel-wallet">
-    <div style="text-align:center;margin-bottom:24px">
-      <div style="color:#f7931a;font-size:.78rem;text-transform:uppercase;letter-spacing:3px;font-weight:700">Private &bull; Authenticated</div>
-      <h2 style="font-size:1.4rem;font-weight:800;margin:4px 0">CARD WALLET</h2>
-      <p style="color:var(--text-dim);font-size:.85rem;max-width:520px;margin:8px auto 0">View cards owned by any wallet. Authenticate with GitHub to access private wallets.</p>
-    </div>
-    <div id="wallet-auth-area"></div>
-    <div id="wallet-content" style="display:none"></div>
-  </div>
+
 
 </div>
 
@@ -3961,7 +3884,7 @@ function switchTab(tab) {
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
   if (tab === 'market') renderMarketExchange();
-  if (tab === 'wallet') renderWalletTab();
+
   if (tab === 'submit' && ghUser?.login) {
     const ta = document.getElementById('agent-code');
     if (!ta.value || ta.value.includes('@your_username/')) {
@@ -7692,7 +7615,7 @@ async function executeCollectorTransfer(mintId) {
   const addrEl = document.getElementById('xfer-addr');
   const typeEl = document.getElementById('xfer-type');
   if (!addrEl?.value?.trim() || addrEl.value.trim().length < 8) {
-    showToast('Enter a valid wallet address', 'error'); return;
+    showToast('Enter a valid Binder address', 'error'); return;
   }
 
   const destAddr = addrEl.value.trim();
@@ -7700,7 +7623,7 @@ async function executeCollectorTransfer(mintId) {
   const transferType = typeEl?.value || 'donate';
   const myBinder = getBinderAddress();
 
-  if (destAddr === myBinder) { showToast('That\'s your own wallet', 'error'); return; }
+  if (destAddr === myBinder) { showToast('That\'s your own Binder', 'error'); return; }
 
   // Close the modal
   addrEl.closest('div[style*=fixed]')?.remove();
@@ -10738,211 +10661,7 @@ async function openSlabZoom(mintId) {
   }, 400);
 }
 
-// ═══════════════════════════════════════════════════════
-// Wallet Viewer — GitHub-authenticated private wallet access
-// ═══════════════════════════════════════════════════════
-let _walletCache = null;
-let _walletRepo = localStorage.getItem('rar_wallet_repo') || '';
 
-function renderWalletTab() {
-  const authArea = document.getElementById('wallet-auth-area');
-  const content = document.getElementById('wallet-content');
-  if (!authArea) return;
-
-  if (!ghToken || !ghUser) {
-    // Not logged in — show GitHub login
-    content.style.display = 'none';
-    authArea.innerHTML = `
-      <div class="wallet-login-card">
-        <div class="wl-icon">&#8383;</div>
-        <h3>Connect to View Wallet</h3>
-        <p>Sign in with GitHub to access private card wallets. Only users with repo access can view wallet contents.</p>
-        <button class="wl-btn wl-btn-gh" onclick="walletLogin()">
-          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          Sign in with GitHub
-        </button>
-      </div>`;
-    return;
-  }
-
-  // Logged in — show wallet lookup
-  authArea.innerHTML = `
-    <div style="max-width:520px;margin:0 auto 24px;display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:4px">
-        <img src="${ghUser.avatar_url}" style="width:28px;height:28px;border-radius:50%">
-        <span style="font-weight:700;color:var(--text)">@${ghUser.login}</span>
-        <span style="font-size:.7rem;color:var(--text-muted);background:rgba(57,211,83,.1);color:#3fb950;padding:2px 8px;border-radius:4px;font-weight:600">Authenticated</span>
-      </div>
-      <div style="display:flex;gap:8px">
-        <input class="wallet-repo-input" id="wallet-repo-input" type="text"
-          placeholder="owner/repo (e.g. kody-w/wildhaven-ceo)"
-          value="${esc(_walletRepo)}"
-          onkeydown="if(event.key==='Enter')loadWallet()">
-        <button onclick="loadWallet()" style="padding:10px 20px;border-radius:8px;border:1px solid #f7931a;background:rgba(247,147,26,.1);color:#f7931a;font-weight:700;cursor:pointer;font-size:.85rem;white-space:nowrap">Open Wallet</button>
-      </div>
-      <div style="font-size:.65rem;color:var(--text-muted);text-align:center">Enter any repo with a <code>wallet/</code> directory. Private repos require your GitHub account to have access.</div>
-    </div>`;
-
-  // If we have a cached wallet, show it
-  if (_walletCache) renderWalletContents(_walletCache);
-}
-
-function walletLogin() {
-  // Re-auth with repo scope for private access
-  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=repo`;
-  // Store that we came from wallet tab so we can return after auth
-  localStorage.setItem('rar_tab', 'wallet');
-  window.location.href = url;
-}
-
-async function loadWallet() {
-  const input = document.getElementById('wallet-repo-input');
-  const repo = input?.value?.trim();
-  if (!repo || !repo.includes('/')) {
-    showToast('Enter a repo like owner/repo', 'error'); return;
-  }
-
-  _walletRepo = repo;
-  localStorage.setItem('rar_wallet_repo', repo);
-
-  const content = document.getElementById('wallet-content');
-  content.style.display = 'block';
-  content.innerHTML = `
-    <div style="text-align:center;padding:40px;color:var(--text-muted)">
-      <div style="font-size:1.2rem;margin-bottom:8px">Loading wallet...</div>
-      <div style="font-size:.75rem">Authenticating with GitHub as @${ghUser?.login || '?'}</div>
-    </div>`;
-
-  try {
-    // Fetch wallet index from private repo via GitHub API
-    const headers = { 'Accept': 'application/vnd.github.v3.raw' };
-    if (ghToken) headers['Authorization'] = `token ${ghToken}`;
-
-    const res = await fetch(`https://api.github.com/repos/${repo}/contents/wallet/index.json`, { headers });
-
-    if (res.status === 404) {
-      content.innerHTML = `
-        <div style="text-align:center;padding:40px">
-          <div style="font-size:1.1rem;color:var(--text);margin-bottom:8px">No wallet found</div>
-          <div style="font-size:.82rem;color:var(--text-dim)">This repo doesn't have a <code>wallet/</code> directory.</div>
-        </div>`;
-      return;
-    }
-    if (res.status === 401 || res.status === 403) {
-      content.innerHTML = `
-        <div style="text-align:center;padding:40px">
-          <div style="font-size:1.1rem;color:#f85149;margin-bottom:8px">Access Denied</div>
-          <div style="font-size:.82rem;color:var(--text-dim);margin-bottom:16px">Your GitHub account doesn't have access to this private repo, or your token needs the <code>repo</code> scope.</div>
-          <button class="wl-btn wl-btn-gh" onclick="walletLogin()" style="font-size:.82rem;padding:10px 20px">
-            <svg viewBox="0 0 16 16" style="width:16px;height:16px;fill:#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            Re-authenticate with private repo access
-          </button>
-        </div>`;
-      return;
-    }
-    if (!res.ok) {
-      content.innerHTML = `<div style="text-align:center;padding:40px;color:#f85149">Error ${res.status}: ${res.statusText}</div>`;
-      return;
-    }
-
-    const wallet = await res.json();
-    _walletCache = wallet;
-    renderWalletContents(wallet);
-
-  } catch (err) {
-    content.innerHTML = `<div style="text-align:center;padding:40px;color:#f85149">Failed to load wallet: ${err.message}</div>`;
-  }
-}
-
-function renderWalletContents(wallet) {
-  const content = document.getElementById('wallet-content');
-  if (!content) return;
-  content.style.display = 'block';
-
-  const owner = wallet.owner || {};
-  const shortAddr = owner.walletAddress
-    ? '0x' + owner.walletAddress.slice(0, 6) + '...' + owner.walletAddress.slice(-4)
-    : 'Unknown';
-  const cards = wallet.cards || [];
-  const breakdown = wallet.breakdown || {};
-  const btcPrice = _btcPrice || 67000;
-  const totalUsd = (wallet.totalBtcValue || 0) * btcPrice;
-  const totalUsdStr = totalUsd >= 1000000 ? `$${(totalUsd / 1000000).toFixed(2)}M` : totalUsd >= 1000 ? `$${(totalUsd / 1000).toFixed(1)}k` : `$${Math.round(totalUsd)}`;
-
-  // Group cards by category
-  const byCat = {};
-  cards.forEach(c => {
-    const cat = (c.category || 'general').replace(/_/g, ' ');
-    if (!byCat[cat]) byCat[cat] = [];
-    byCat[cat].push(c);
-  });
-  const catKeys = Object.keys(byCat).sort();
-
-  content.innerHTML = `
-    <div style="max-width:900px;margin:0 auto">
-      <!-- Wallet header -->
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-        <div>
-          <div style="font-size:1.1rem;font-weight:800;color:var(--text)">${esc(owner.name || 'Wallet')}</div>
-          <div style="font-size:.7rem;color:var(--text-muted);font-family:monospace">${esc(shortAddr)} &middot; ${esc(owner.repo || _walletRepo)}</div>
-        </div>
-        <!-- BTC/USD values hidden until later stage -->
-      </div>
-
-      <!-- Summary cards -->
-      <div class="wallet-summary">
-        <div class="ws-card">
-          <div class="ws-val" style="color:var(--text)">${wallet.totalCards || 0}</div>
-          <div class="ws-lbl">Total Cards</div>
-        </div>
-        ${Object.entries(breakdown).map(([r, d]) => `
-          <div class="ws-card" style="border-color:${r === 'mythic' ? 'rgba(255,109,0,.3)' : r === 'rare' ? 'rgba(255,215,0,.2)' : 'var(--border)'}">
-            <div class="ws-val" style="color:${r === 'mythic' ? '#ff6d00' : r === 'rare' ? '#ffd700' : r === 'uncommon' ? '#c0c0c0' : 'var(--text-muted)'}">${d.count}</div>
-            <div class="ws-lbl">${r.charAt(0).toUpperCase() + r.slice(1)}</div>
-          </div>
-        `).join('')}
-      </div>
-
-      <!-- Provenance info -->
-      <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:20px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-        <div>
-          <span style="color:var(--text-dim);font-weight:600">Source:</span> ${esc(wallet.source?.name || '?')}
-          <span style="font-family:monospace;color:var(--accent)">${wallet.source?.repo || ''}</span>
-        </div>
-        <div>
-          <span style="color:var(--text-dim);font-weight:600">Transferred:</span> ${wallet.created ? new Date(wallet.created).toLocaleDateString() : '?'}
-        </div>
-        <div>
-          <span style="color:#3fb950;font-weight:700">&#10003; Signed &amp; Verified</span>
-        </div>
-      </div>
-
-      <!-- Card list by category -->
-      ${catKeys.map(cat => {
-        const catCards = byCat[cat];
-        const catBtc = catCards.reduce((s, c) => s + (c.floorBtc || 0), 0);
-        return `
-          <div style="margin-bottom:20px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
-              <h3 style="font-size:.85rem;font-weight:700;color:var(--text-dim);text-transform:capitalize;margin:0">${esc(cat)} <span style="color:var(--text-muted);font-weight:400;font-size:.7rem">(${catCards.length})</span></h3>
-              <!-- BTC value hidden until later stage -->
-            </div>
-            <div class="wallet-cards-grid">
-              ${catCards.map(c => `
-                <div class="wallet-card-row" onclick="if(allAgents.find(a=>a.name==='${esc(c.agentName)}'))showAndTell('${esc(c.agentName)}')">
-                  <div class="wcr-rarity ${c.rarity || 'uncommon'}"></div>
-                  <div class="wcr-info">
-                    <div class="wcr-name">${esc(c.displayName)}</div>
-                    <div class="wcr-agent">${esc(c.agentName)}</div>
-                  </div>
-                  <!-- BTC value hidden until later stage -->
-                </div>
-              `).join('')}
-            </div>
-          </div>`;
-      }).join('')}
-    </div>`;
-}
 
 // ═══════════════════════════════════════════════════════
 // Pull History

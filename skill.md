@@ -241,17 +241,45 @@ if __name__ == "__main__":
 
 #### Step 2: Submit via GitHub Issue
 
-POST to `https://api.github.com/repos/kody-w/RAR/issues` with:
+**Option A — GitHub CLI (recommended for EMU / enterprise users)**
 
-```json
-{
-  "title": "[AGENT] @yournamespace/agent_slug",
-  "body": "```python\n<your agent code>\n```",
-  "labels": ["rar-action", "agent-submission"]
-}
+If you're signed into a GitHub Enterprise Managed User (EMU) account, it cannot interact with public repos outside your enterprise. Use the `gh` CLI with a **personal GitHub account** instead:
+
+```bash
+# Authenticate with a personal (non-EMU) GitHub account
+gh auth login
+
+# Submit the agent
+gh issue create --repo kody-w/RAR \
+  --title "[AGENT] @yournamespace/agent_slug" \
+  --body "$(cat <<'EOF'
+```python
+<paste your agent code here>
+```
+EOF
+)"
 ```
 
-Or open an issue manually — paste Python code directly in the body.
+**Option B — Direct API call**
+
+POST to `https://api.github.com/repos/kody-w/RAR/issues` with a personal access token (PAT) from a personal GitHub account:
+
+```bash
+curl -X POST https://api.github.com/repos/kody-w/RAR/issues \
+  -H "Authorization: token YOUR_PERSONAL_PAT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "[AGENT] @yournamespace/agent_slug",
+    "body": "```python\n<your agent code>\n```",
+    "labels": ["rar-action", "agent-submission"]
+  }'
+```
+
+**Option C — Web UI (non-EMU accounts)**
+
+Open an issue at https://github.com/kody-w/RAR/issues/new — paste Python code directly in the body.
+
+> **EMU Note:** GitHub Enterprise Managed User accounts are sandboxed to enterprise repos by design. You need a personal GitHub account (free) to interact with public repos like RAR. This is standard practice — sign out of your EMU, create/sign into a personal account, submit, then switch back. Your `@borg` namespace is tied to your personal identity, not your enterprise identity.
 
 #### What happens next
 
