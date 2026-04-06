@@ -15,7 +15,7 @@ import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SDK_PATH = REPO_ROOT / "rapp_sdk.py"
-BASIC_AGENT = REPO_ROOT / "agents" / "@rapp" / "basic-agent.py"
+BASIC_AGENT = REPO_ROOT / "agents" / "@rapp" / "basic_agent.py"
 REGISTRY_JSON = REPO_ROOT / "registry.json"
 
 # Insert repo root so we can import rapp_sdk
@@ -65,7 +65,7 @@ def test_agent_template_has_placeholders():
 def test_extract_manifest_basic_agent():
     manifest = rapp_sdk.extract_manifest(str(BASIC_AGENT))
     assert manifest is not None
-    assert manifest["name"] == "@rapp/basic-agent"
+    assert manifest["name"] == "@rapp/basic_agent"
     assert manifest["schema"] == "rapp-agent/1.0"
 
 def test_extract_manifest_nonexistent_file():
@@ -129,7 +129,7 @@ def test_seed_hash_deterministic():
 
 def test_seed_hash_different_inputs():
     h1 = rapp_sdk.seed_hash("@kody/deal-desk")
-    h2 = rapp_sdk.seed_hash("@rapp/basic-agent")
+    h2 = rapp_sdk.seed_hash("@rapp/basic_agent")
     assert h1 != h2
 
 def test_mulberry32_deterministic():
@@ -145,7 +145,7 @@ def test_mulberry32_range():
 
 def test_mint_card_basic_agent():
     card = rapp_sdk.mint_card(str(BASIC_AGENT))
-    assert card["name"] == "@rapp/basic-agent"
+    assert card["name"] == "@rapp/basic_agent"
     assert card["rarity"] == "mythic"
     assert card["rarity_label"] == "Legendary"
     assert card["floor_pts"] == 200
@@ -160,11 +160,11 @@ def test_mint_card_deterministic():
     assert card1 == card2, "Same agent must produce identical card"
 
 def test_resolve_card_basic_agent():
-    card = rapp_sdk.resolve_card("@rapp/basic-agent")
-    assert card["name"] == "@rapp/basic-agent"
+    card = rapp_sdk.resolve_card("@rapp/basic_agent")
+    assert card["name"] == "@rapp/basic_agent"
     assert card["rarity"] == "mythic"
     assert "seed" in card
-    assert card["seed"] == rapp_sdk.seed_hash("@rapp/basic-agent")
+    assert card["seed"] == rapp_sdk.seed_hash("@rapp/basic_agent")
 
 def test_resolve_card_not_found():
     result = rapp_sdk.resolve_card("@nonexistent/agent")
@@ -173,7 +173,7 @@ def test_resolve_card_not_found():
 def test_resolve_matches_mint():
     """Resolve from name must produce same attributes as mint from file."""
     minted = rapp_sdk.mint_card(str(BASIC_AGENT))
-    resolved = rapp_sdk.resolve_card("@rapp/basic-agent")
+    resolved = rapp_sdk.resolve_card("@rapp/basic_agent")
     assert minted["power"] == resolved["power"]
     assert minted["toughness"] == resolved["toughness"]
     assert minted["rarity"] == resolved["rarity"]
@@ -186,7 +186,7 @@ def test_resolve_matches_mint():
 # ═══════════════════════════════════════════════════════
 
 def test_card_value_basic_agent():
-    val = rapp_sdk.card_value("@rapp/basic-agent")
+    val = rapp_sdk.card_value("@rapp/basic_agent")
     assert "error" not in val
     assert val["tier"] == "official"
     assert val["rarity"] == "mythic"
@@ -233,9 +233,9 @@ def test_search_agents():
     assert any("memory" in r.get("name", "").lower() or "memory" in r.get("description", "").lower() for r in results)
 
 def test_get_agent_info():
-    info = rapp_sdk.get_agent_info("@rapp/basic-agent")
+    info = rapp_sdk.get_agent_info("@rapp/basic_agent")
     assert info is not None
-    assert info["name"] == "@rapp/basic-agent"
+    assert info["name"] == "@rapp/basic_agent"
 
 def test_get_agent_info_not_found():
     info = rapp_sdk.get_agent_info("@nonexistent/nope")
@@ -249,19 +249,27 @@ def test_get_agent_info_not_found():
 def test_scaffold_creates_valid_agent():
     """Scaffold an agent, extract its manifest, validate it — full round-trip."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        result = rapp_sdk.scaffold_agent("@test/round-trip", output_dir=tmpdir)
+        result = rapp_sdk.scaffold_agent("@test/round_trip", output_dir=tmpdir)
         assert result is not None
         agent_path = Path(result)
         assert agent_path.exists()
+        assert "-" not in agent_path.name, "Scaffolded filename must be snake_case"
 
         # Extract and validate manifest
         manifest = rapp_sdk.extract_manifest(str(agent_path))
         assert manifest is not None
-        assert manifest["name"] == "@test/round-trip"
+        assert manifest["name"] == "@test/round_trip"
         assert manifest["display_name"] == "Round Trip"
 
         errors = rapp_sdk.validate_manifest(str(agent_path), manifest)
         assert errors == [], f"Scaffold produced invalid agent: {errors}"
+
+
+def test_scaffold_rejects_kebab():
+    """Scaffold must reject kebab-case slugs."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        with pytest.raises(ValueError, match="snake_case"):
+            rapp_sdk.scaffold_agent("@test/bad-name", output_dir=tmpdir)
 
 
 # ═══════════════════════════════════════════════════════
@@ -309,7 +317,7 @@ def test_cli_search():
 
 def test_cli_card_resolve():
     result = subprocess.run(
-        [sys.executable, str(SDK_PATH), "card", "resolve", "@rapp/basic-agent"],
+        [sys.executable, str(SDK_PATH), "card", "resolve", "@rapp/basic_agent"],
         capture_output=True, text=True, timeout=10,
     )
     assert result.returncode == 0
@@ -317,17 +325,17 @@ def test_cli_card_resolve():
 
 def test_cli_card_resolve_json():
     result = subprocess.run(
-        [sys.executable, str(SDK_PATH), "card", "resolve", "@rapp/basic-agent", "--json"],
+        [sys.executable, str(SDK_PATH), "card", "resolve", "@rapp/basic_agent", "--json"],
         capture_output=True, text=True, timeout=10,
     )
     assert result.returncode == 0
     data = json.loads(result.stdout)
-    assert data["name"] == "@rapp/basic-agent"
-    assert data["seed"] == rapp_sdk.seed_hash("@rapp/basic-agent")
+    assert data["name"] == "@rapp/basic_agent"
+    assert data["seed"] == rapp_sdk.seed_hash("@rapp/basic_agent")
 
 def test_cli_card_value():
     result = subprocess.run(
-        [sys.executable, str(SDK_PATH), "card", "value", "@rapp/basic-agent"],
+        [sys.executable, str(SDK_PATH), "card", "value", "@rapp/basic_agent"],
         capture_output=True, text=True, timeout=10,
     )
     assert result.returncode == 0

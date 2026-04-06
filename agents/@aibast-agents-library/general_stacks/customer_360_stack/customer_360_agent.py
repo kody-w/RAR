@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/customer-360",
+    "name": "@aibast-agents-library/customer_360",
     "version": "1.0.0",
     "display_name": "Customer 360",
     "description": "Unified customer profiles merging CRM, support, and billing data with health scores and next-best-action recommendations.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

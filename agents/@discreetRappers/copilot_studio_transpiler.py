@@ -32,7 +32,7 @@ __manifest__ = {
     "category": "pipeline",
     "quality_tier": "community",
     "requires_env": ["AZURE_TENANT_ID", "COPILOT_STUDIO_CLIENT_ID", "DATAVERSE_ENVIRONMENT_URL"],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

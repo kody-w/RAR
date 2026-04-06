@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/financial-advisor-copilot",
+    "name": "@aibast-agents-library/financial_advisor_copilot",
     "version": "1.0.0",
     "display_name": "Financial Advisor Copilot Agent",
     "description": "Financial advisor support with client reviews, portfolio summaries, recommendation engine, and compliance checks.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

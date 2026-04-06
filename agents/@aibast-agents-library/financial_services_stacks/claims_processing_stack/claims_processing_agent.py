@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/claims-processing",
+    "name": "@aibast-agents-library/claims_processing",
     "version": "1.0.0",
     "display_name": "Claims Processing Agent",
     "description": "Insurance claims processing with intake, adjudication review, fraud detection, and settlement recommendations.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/foia-request-assistant",
+    "name": "@aibast-agents-library/foia_request_assistant",
     "version": "1.0.0",
     "display_name": "FOIA Request Assistant Agent",
     "description": "FOIA request processing support with request analysis, document search, redaction review, and response preparation.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "slg_government",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

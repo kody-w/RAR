@@ -11,7 +11,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "unverified",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 from agents.basic_agent import BasicAgent

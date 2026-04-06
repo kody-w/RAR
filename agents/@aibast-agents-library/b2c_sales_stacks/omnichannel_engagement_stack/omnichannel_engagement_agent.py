@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/omnichannel-engagement",
+    "name": "@aibast-agents-library/omnichannel_engagement",
     "version": "1.0.0",
     "display_name": "Omnichannel Engagement Agent",
     "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2c_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

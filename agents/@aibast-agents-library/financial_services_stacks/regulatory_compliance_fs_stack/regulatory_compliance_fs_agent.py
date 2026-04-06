@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/fs-regulatory-compliance",
+    "name": "@aibast-agents-library/fs_regulatory_compliance",
     "version": "1.0.0",
     "display_name": "FS Regulatory Compliance Agent",
     "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

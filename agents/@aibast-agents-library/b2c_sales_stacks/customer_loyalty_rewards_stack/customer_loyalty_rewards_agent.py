@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/customer-loyalty-rewards",
+    "name": "@aibast-agents-library/customer_loyalty_rewards",
     "version": "1.0.0",
     "display_name": "Customer Loyalty & Rewards Agent",
     "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2c_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

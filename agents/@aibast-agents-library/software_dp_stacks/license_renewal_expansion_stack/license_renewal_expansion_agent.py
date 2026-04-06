@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/license-renewal-expansion",
+    "name": "@aibast-agents-library/license_renewal_expansion",
     "version": "1.0.0",
     "display_name": "License Renewal & Expansion Agent",
     "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "software_digital_products",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

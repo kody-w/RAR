@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/identify-discounts",
+    "name": "@aibast-agents-library/identify_discounts",
     "version": "1.0.0",
     "display_name": "Identify Discounts",
     "description": "Discount identification with eligibility checks, savings calculations, and approval workflow management.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

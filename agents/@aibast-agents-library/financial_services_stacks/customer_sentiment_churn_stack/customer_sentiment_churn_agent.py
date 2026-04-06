@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/customer-sentiment-churn",
+    "name": "@aibast-agents-library/customer_sentiment_churn",
     "version": "1.0.0",
     "display_name": "Customer Sentiment & Churn Agent",
     "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

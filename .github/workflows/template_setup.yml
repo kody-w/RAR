@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
   configure-instance:
@@ -19,7 +20,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Configure as RAR instance
+      - name: Configure as RAR instance + binder
         run: python scripts/setup_instance.py
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -27,10 +28,30 @@ jobs:
       - name: Rebuild registry with instance metadata
         run: python build_registry.py
 
+      - name: Enable GitHub Pages
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.repos.createPagesSite({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                source: { branch: 'main', path: '/' }
+              });
+              console.log('GitHub Pages enabled — Binder live at:');
+              console.log(`https://${context.repo.owner}.github.io/${context.repo.repo}/`);
+            } catch (e) {
+              if (e.status === 409) {
+                console.log('GitHub Pages already enabled.');
+              } else {
+                console.log(`Note: Could not auto-enable Pages (${e.status}). Enable manually in repo Settings > Pages.`);
+              }
+            }
+
       - name: Commit configuration
         run: |
           git config user.name "RAR Setup Bot"
           git config user.email "rar-bot@users.noreply.github.com"
-          git add rar.config.json registry.json
-          git diff --cached --quiet || git commit -m "Configure as RAR instance [skip ci]"
+          git add rar.config.json registry.json binder/ staging/ agents/
+          git diff --cached --quiet || git commit -m "Configure as RAR binder instance [skip ci]"
           git push

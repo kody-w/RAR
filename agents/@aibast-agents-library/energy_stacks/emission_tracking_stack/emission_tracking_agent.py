@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/emission-tracking",
+    "name": "@aibast-agents-library/emission_tracking",
     "version": "1.0.0",
     "display_name": "Emission Tracking Agent",
     "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "energy",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

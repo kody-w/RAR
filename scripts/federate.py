@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Federation CLI — Manages the relationship between a RAR instance and upstream.
+Federation CLI — Manages the relationship between a RAR binder and upstream.
 
 Usage:
   python scripts/federate.py status              Show federation config
+  python scripts/federate.py binder              Show binder: your agents, synced, pending
   python scripts/federate.py diff                Show local agents not in upstream
-  python scripts/federate.py submit              Submit delta agents to upstream
+  python scripts/federate.py submit              Submit delta agents to upstream (goes to staging)
   python scripts/federate.py submit @me/agent    Submit a specific agent
   python scripts/federate.py sync                Check for upstream updates
   python scripts/federate.py sync --pull         Download new upstream agents locally
@@ -290,8 +291,67 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
 
     print(f"\nDone: {success}/{len(to_submit)} submitted successfully.")
     if success:
-        print(f"The RAR pipeline at {upstream} will process these shortly.")
+        print(f"\nSubmissions land in staging/ at {upstream} for review.")
+        print(f"An admin will review and approve. Once approved:")
+        print(f"  - Agent moves to agents/ in the main registry")
+        print(f"  - Card is forged (details decided by the forge, not the submitter)")
+        print(f"  - Agent is stamped into the next seasonal release")
+        print(f"\nTrack your submissions: https://github.com/{upstream}/labels/pending-review")
     return 0 if success == len(to_submit) else 1
+
+
+def cmd_binder(config: dict) -> int:
+    """Show binder status — what's local, what's official, what's pending."""
+    binder_file = REPO_ROOT / "binder" / "binder_state.json"
+    owner = config.get("owner", "?")
+    namespace = config.get("namespace", f"@{owner}")
+    upstream = config.get("upstream")
+
+    print(f"\nBinder: {namespace}")
+    print(f"{'=' * 50}")
+
+    # Count local agents
+    local_agents = {}
+    if REGISTRY_FILE.exists():
+        reg = json.loads(REGISTRY_FILE.read_text())
+        local_agents = {a["name"]: a for a in reg.get("agents", [])}
+
+    my_agents = {n: a for n, a in local_agents.items() if n.startswith(namespace + "/")}
+    synced = {n: a for n, a in local_agents.items() if not n.startswith(namespace + "/")}
+
+    print(f"\n  Your agents ({namespace}/):  {len(my_agents)}")
+    for name, a in sorted(my_agents.items()):
+        tier = a.get("quality_tier", "community")
+        card = "card" if a.get("_has_card") else "    "
+        print(f"    [{tier:>11}] [{card}] {name} v{a['version']}")
+
+    print(f"\n  Synced from upstream:      {len(synced)}")
+
+    # Check staging
+    staging = REPO_ROOT / "staging"
+    staged = list(staging.rglob("*.py")) if staging.exists() else []
+    staged = [f for f in staged if f.name != ".gitkeep"]
+    if staged:
+        print(f"\n  Pending upstream review:   {len(staged)}")
+        for f in staged:
+            print(f"    {f.relative_to(REPO_ROOT)}")
+
+    # Binder state
+    if binder_file.exists():
+        state = json.loads(binder_file.read_text())
+        owned = state.get("owned_cards", [])
+        decks = state.get("decks", [])
+        if owned:
+            print(f"\n  Owned cards:               {len(owned)}")
+        if decks:
+            print(f"  Decks:                     {len(decks)}")
+
+    pages_url = config.get("binder", {}).get("pages_url", "")
+    if pages_url:
+        print(f"\n  Binder URL: {pages_url}")
+
+    print()
+    return 0
 
 
 def cmd_sync(config: dict, pull: bool = False) -> int:
@@ -386,7 +446,7 @@ def main() -> int:
     )
     parser.add_argument(
         "command",
-        choices=["status", "diff", "submit", "sync"],
+        choices=["status", "binder", "diff", "submit", "sync"],
         help="Federation command",
     )
     parser.add_argument(
@@ -410,6 +470,7 @@ def main() -> int:
 
     commands = {
         "status": lambda: cmd_status(config),
+        "binder": lambda: cmd_binder(config),
         "diff": lambda: cmd_diff(config),
         "submit": lambda: cmd_submit(config, args.agent),
         "sync": lambda: cmd_sync(config, args.pull),

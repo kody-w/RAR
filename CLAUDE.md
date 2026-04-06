@@ -31,7 +31,7 @@ Every agent is **one `.py` file** — no separate manifest, no README, no subdir
 
 1. A docstring (serves as documentation)
 2. A `__manifest__` dict (serves as package metadata, extracted via AST — no code execution)
-3. A class inheriting `BasicAgent` from `@rapp/basic-agent`
+3. A class inheriting `BasicAgent` from `@rapp/basic_agent`
 4. A `perform(**kwargs)` method that returns a `str`
 
 Path convention: `agents/@publisher/agent-slug.py` (lowercase kebab-case)
@@ -45,7 +45,7 @@ Optional: `quality_tier` (default `community`), `requires_env` (env var names), 
 ```python
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@yourname/my-agent",
+    "name": "@yourname/my_agent",
     "version": "1.0.0",
     "display_name": "MyAgent",
     "description": "One sentence.",
@@ -54,7 +54,7 @@ __manifest__ = {
     "category": "integrations",  # core | pipeline | integrations | productivity | devtools
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 ```
 
@@ -168,8 +168,8 @@ The `@kody/rappter-engine-agent` is the base class for building data-driven cont
 ## Naming Conventions
 
 - Agent files MUST end with `_agent.py` (e.g., `rappterpedia_agent.py`). This is sacred.
-- Manifest name uses kebab-case: `@publisher/my-agent`
-- File name uses snake_case or kebab-case: `my_agent.py` or `my-agent.py`
+- Manifest name uses snake_case: `@publisher/my_agent` (dashes are forbidden everywhere)
+- File name uses snake_case ONLY: `my_agent.py` (dashes in filenames are rejected by CI)
 
 ## Testing
 

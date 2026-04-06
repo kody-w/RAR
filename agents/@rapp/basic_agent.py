@@ -8,7 +8,7 @@ Every agent in the RAPP ecosystem inherits from this.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@rapp/basic-agent",
+    "name": "@rapp/basic_agent",
     "version": "1.0.0",
     "display_name": "BasicAgent",
     "description": "Base class that every RAPP agent inherits from. Required dependency.",

@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/citizen-service-request",
+    "name": "@aibast-agents-library/citizen_service_request",
     "version": "1.0.0",
     "display_name": "Citizen Service Request Agent",
     "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "slg_government",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

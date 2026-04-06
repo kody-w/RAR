@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/production-line-optimization",
+    "name": "@aibast-agents-library/production_line_optimization",
     "version": "1.0.0",
     "display_name": "Production Line Optimization Agent",
     "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling.",
@@ -24,7 +24,7 @@ __manifest__ = {
     "category": "manufacturing",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

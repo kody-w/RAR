@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/returns-exchange",
+    "name": "@aibast-agents-library/returns_exchange",
     "version": "1.0.0",
     "display_name": "Returns & Exchange Agent",
     "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2c_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

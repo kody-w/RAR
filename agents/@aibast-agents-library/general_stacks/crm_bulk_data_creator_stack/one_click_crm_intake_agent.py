@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/one-click-crm-intake",
+    "name": "@aibast-agents-library/one_click_crm_intake",
     "version": "1.0.0",
     "display_name": "One-Click CRM Intake",
     "description": "Streamlined CRM data intake with form generation, validation, duplicate detection, and import preview.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

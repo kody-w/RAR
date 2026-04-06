@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "devtools",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 from agents.basic_agent import BasicAgent
@@ -75,7 +75,7 @@ TEMPLATES = {
             "category": "general",
             "quality_tier": "experimental",
             "requires_env": [],
-            "dependencies": ["@rapp/basic-agent"],
+            "dependencies": ["@rapp/basic_agent"],
         }}
 
         from agents.basic_agent import BasicAgent
@@ -123,7 +123,7 @@ TEMPLATES = {
             "category": "integrations",
             "quality_tier": "experimental",
             "requires_env": ["{env_var}"],
-            "dependencies": ["@rapp/basic-agent"],
+            "dependencies": ["@rapp/basic_agent"],
         }}
 
         import os

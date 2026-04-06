@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/revenue-forecast",
+    "name": "@aibast-agents-library/revenue_forecast",
     "version": "1.0.0",
     "display_name": "Revenue Forecast",
     "description": "Quarterly forecasting, scenario analysis, commit vs best-case modeling, and forecast accuracy tracking.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -1,0 +1,14 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "contract: agent contract tests (parametrized over all agents)",
+    "pipeline: submission pipeline tests (staging, approval, forge)",
+    "federation: federation and binder tests",
+    "security: security scanner tests",
+    "integrity: build integrity tests (hashes, immutability, registry)",
+    "smoke: fast smoke tests for CI gates",
+    "nightly: slower tests run on nightly schedule",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

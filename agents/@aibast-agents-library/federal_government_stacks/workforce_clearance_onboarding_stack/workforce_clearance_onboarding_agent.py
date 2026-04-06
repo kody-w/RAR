@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/workforce-clearance-onboarding",
+    "name": "@aibast-agents-library/workforce_clearance_onboarding",
     "version": "1.0.0",
     "display_name": "Workforce Clearance & Onboarding Agent",
     "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "federal_government",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/sales-qualification",
+    "name": "@aibast-agents-library/sales_qualification",
     "version": "1.0.0",
     "display_name": "Sales Qualification",
     "description": "ICP scoring, BANT analysis, personalized outreach, AE routing, and SLA tracking for inbound leads.",
@@ -31,7 +31,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

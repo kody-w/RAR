@@ -215,7 +215,7 @@ def test_registry_agent_count():
 
 def test_registry_has_basic_agent():
     names = [a["name"] for a in registry["agents"]]
-    assert "@rapp/basic-agent" in names
+    assert "@rapp/basic_agent" in names
 
 def test_registry_no_common_tier():
     """No founding card should be common/experimental tier."""

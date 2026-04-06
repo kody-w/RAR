@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/fraud-detection-alert",
+    "name": "@aibast-agents-library/fraud_detection_alert",
     "version": "1.0.0",
     "display_name": "Fraud Detection & Alert Agent",
     "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

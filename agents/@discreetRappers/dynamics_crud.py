@@ -19,7 +19,7 @@ __manifest__ = {
     "category": "integrations",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

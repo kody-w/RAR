@@ -1,0 +1,65 @@
+name: Test Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Smoke tests
+        run: pytest -m smoke -v --tb=short
+
+  # ─── PIPELINE (staging, security, integrity) ────────────────────
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Pipeline integrity tests
+        run: pytest tests/test_pipeline_integrity.py -v --tb=short
+
+  # ─── CONTRACT (all agents — parametrized) ───────────────────────
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest
+      - name: Agent contract tests
+        run: pytest tests/test_agent_contract.py -v --tb=short
+
+  # ─── FULL (all tests) ──────────────────────────────────────────
+  full:
+    runs-on: ubuntu-latest
+    needs: [smoke, pipeline, contract]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+      - name: Full test suite
+        run: pytest -v --tb=short

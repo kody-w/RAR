@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/contract-risk-review",
+    "name": "@aibast-agents-library/contract_risk_review",
     "version": "1.0.0",
     "display_name": "Contract Risk Review Agent",
     "description": "Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "professional_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

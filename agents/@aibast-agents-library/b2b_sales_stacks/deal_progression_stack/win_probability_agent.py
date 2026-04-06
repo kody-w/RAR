@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/win-probability",
+    "name": "@aibast-agents-library/win_probability",
     "version": "1.0.0",
     "display_name": "Win Probability",
     "description": "Calculates win probabilities, analyzes contributing factors, tracks trends, and compares deals.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

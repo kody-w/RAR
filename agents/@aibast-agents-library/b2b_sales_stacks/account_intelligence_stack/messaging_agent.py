@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/account-messaging",
+    "name": "@aibast-agents-library/account_messaging",
     "version": "1.0.0",
     "display_name": "Account Messaging",
     "description": "Generates personalized outreach, follow-ups, and campaign sequences for enterprise accounts.",
@@ -31,7 +31,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

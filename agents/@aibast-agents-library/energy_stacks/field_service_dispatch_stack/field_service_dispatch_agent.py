@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/field-service-dispatch",
+    "name": "@aibast-agents-library/field_service_dispatch",
     "version": "1.0.0",
     "display_name": "Field Service Dispatch Agent",
     "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "energy",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

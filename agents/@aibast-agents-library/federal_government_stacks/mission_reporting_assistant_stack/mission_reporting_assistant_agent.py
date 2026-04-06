@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/mission-reporting-assistant",
+    "name": "@aibast-agents-library/mission_reporting_assistant",
     "version": "1.0.0",
     "display_name": "Mission Reporting Assistant Agent",
     "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "federal_government",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Release Notes</title>
+<meta name="description" content="Release history for the RAPP Agent Registry — what shipped, when, and why.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d29922;
+    --purple: #bc8cff;
+    --red: #f85149;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 820px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Header */
+  header { margin-bottom: 48px; }
+  header h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--text-dim); font-size: 15px; }
+  .nav-links { margin-top: 12px; display: flex; gap: 16px; }
+  .nav-links a {
+    color: var(--accent); text-decoration: none; font-size: 14px;
+    padding: 4px 12px; border: 1px solid var(--border); border-radius: 6px;
+  }
+  .nav-links a:hover { border-color: var(--accent); background: rgba(88,166,255,.08); }
+
+  /* Release card */
+  .release {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .release-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .release-title { font-size: 20px; font-weight: 600; }
+  .release-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .tag-seasonal { background: rgba(63,185,80,.15); color: var(--green); border: 1px solid rgba(63,185,80,.3); }
+  .tag-infrastructure { background: rgba(188,140,255,.12); color: var(--purple); border: 1px solid rgba(188,140,255,.3); }
+  .tag-hotfix { background: rgba(210,153,34,.12); color: var(--orange); border: 1px solid rgba(210,153,34,.3); }
+  .release-date { color: var(--text-dim); font-size: 13px; }
+  .release-body { padding: 24px; }
+  .release-body h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: var(--text); }
+  .release-body h3:first-child { margin-top: 0; }
+  .release-body ul { padding-left: 20px; }
+  .release-body li { margin-bottom: 6px; font-size: 14px; color: var(--text-dim); }
+  .release-body li strong { color: var(--text); font-weight: 500; }
+  .release-body code {
+    background: var(--surface2); padding: 2px 6px; border-radius: 4px;
+    font-size: 13px; color: var(--accent);
+  }
+  .release-body p { font-size: 14px; color: var(--text-dim); margin-bottom: 8px; }
+
+  /* Stats bar */
+  .stats {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .stat { font-size: 13px; color: var(--text-dim); }
+  .stat strong { color: var(--text); }
+
+  /* Separator */
+  .timeline-dot {
+    width: 12px; height: 12px;
+    background: var(--border);
+    border-radius: 50%;
+    margin: 0 auto 32px;
+  }
+
+  /* Future releases */
+  .upcoming {
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .upcoming strong { color: var(--text); }
+
+  /* Footer */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    text-align: center;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* Dynamic release loading */
+  #dynamic-releases { margin-bottom: 32px; }
+
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px; }
+    .release-header { flex-direction: column; }
+    .stats { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1><span>RAR</span> Release Notes</h1>
+  <p>What shipped, when, and why. Every release is tested, scanned, and integrity-verified.</p>
+  <div class="nav-links">
+    <a href="index.html">Agent Store</a>
+    <a href="rappterpedia/index.html">Rappterpedia</a>
+    <a href="https://github.com/kody-w/RAR">GitHub</a>
+  </div>
+</header>
+
+<!-- Dynamic releases loaded from registry.json -->
+<div id="dynamic-releases"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- GENESIS RELEASE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="release">
+  <div class="release-header">
+    <div>
+      <div class="release-title">Genesis</div>
+      <div class="release-date">April 5, 2026</div>
+    </div>
+    <span class="release-tag tag-seasonal">Seasonal</span>
+  </div>
+  <div class="release-body">
+    <p>The founding release. 131 agents from 7 publishers across 19 categories. The first cards ever minted in the RAPP ecosystem.</p>
+
+    <h3>What's in it</h3>
+    <ul>
+      <li><strong>131 founding agents</strong> &mdash; the genesis set. These are the first dotcoms. Never removed, never renamed.</li>
+      <li><strong>7 publishers</strong> &mdash; @rapp, @kody, @borg, @discreetRappers, @aibast-agents-library, @kody-w, @wildhaven</li>
+      <li><strong>19 categories</strong> &mdash; core, pipeline, integrations, productivity, devtools, plus 14 industry verticals</li>
+      <li><strong>Single-file principle</strong> &mdash; every agent is one <code>.py</code> file with embedded manifest, class, and perform()</li>
+      <li><strong>Agent Store</strong> &mdash; zero-dependency single HTML file, works offline from <code>file://</code></li>
+      <li><strong>Rappterpedia</strong> &mdash; community wiki with 360+ articles, 200+ forum threads</li>
+      <li><strong>RAPP SDK</strong> &mdash; <code>rapp_sdk.py</code> for scaffold, validate, test, search, install, card ops</li>
+      <li><strong>Holo Cards</strong> &mdash; deterministic card generation from just the agent name seed</li>
+    </ul>
+
+    <h3>Publishers</h3>
+    <ul>
+      <li><strong>@rapp</strong> &mdash; BasicAgent base class (the root of everything)</li>
+      <li><strong>@kody</strong> &mdash; Core infrastructure: registry client, memory, workbench, engine, Rappterpedia</li>
+      <li><strong>@borg</strong> &mdash; Borg assimilator + CardSmith (Howard Hoy)</li>
+      <li><strong>@discreetRappers</strong> &mdash; Pipeline, integrations, sales, productivity agents</li>
+      <li><strong>@aibast-agents-library</strong> &mdash; 104 industry vertical templates across 14 verticals</li>
+      <li><strong>@wildhaven</strong> &mdash; CEO agent</li>
+    </ul>
+  </div>
+  <div class="stats">
+    <span class="stat"><strong>131</strong> agents</span>
+    <span class="stat"><strong>7</strong> publishers</span>
+    <span class="stat"><strong>19</strong> categories</span>
+    <span class="stat"><strong>1</strong> base class</span>
+  </div>
+</div>
+
+<div class="timeline-dot"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- INFRASTRUCTURE RELEASE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="release">
+  <div class="release-header">
+    <div>
+      <div class="release-title">Standards &amp; Infrastructure</div>
+      <div class="release-date">April 6, 2026</div>
+    </div>
+    <span class="release-tag tag-infrastructure">Infrastructure</span>
+  </div>
+  <div class="release-body">
+    <p>Production hardening. RAR is now ready for public submissions. Every layer has gates, every agent has a hash, every submission goes through review.</p>
+
+    <h3>Submission Pipeline</h3>
+    <ul>
+      <li><strong>Staging gate</strong> &mdash; submissions land in <code>staging/</code>, not <code>agents/</code>. Nothing enters the registry without admin review.</li>
+      <li><strong>Approval workflow</strong> &mdash; admin adds <code>approved</code> label, agent moves to <code>agents/</code>, CardSmith forges the card, registry rebuilds.</li>
+      <li><strong>Submitters don't control card details</strong> &mdash; the forge reads the agent code and decides everything.</li>
+    </ul>
+
+    <h3>Security</h3>
+    <ul>
+      <li><strong>Static security scanner</strong> &mdash; rejects <code>eval()</code>, <code>exec()</code>, <code>subprocess</code>, <code>os.system()</code>, <code>__import__()</code>, hardcoded secrets</li>
+      <li><strong>First-party allowlist</strong> &mdash; core agents that legitimately need elevated capabilities are explicitly listed</li>
+      <li><strong>SHA256 integrity hashes</strong> &mdash; every agent in <code>registry.json</code> has a <code>_sha256</code> field. Verified nightly.</li>
+      <li><strong>Version immutability</strong> &mdash; can't change agent content without bumping the version number</li>
+      <li><strong>CODEOWNERS</strong> &mdash; namespace protection. PRs to <code>agents/@publisher/</code> require owner approval.</li>
+    </ul>
+
+    <h3>Filename Standards</h3>
+    <ul>
+      <li><strong>Snake_case enforced everywhere</strong> &mdash; no dashes in agent filenames. Rejected by CI, build, tests, SDK scaffold, and submission pipeline.</li>
+      <li>Renamed all existing kebab-case files: <code>basic_agent.py</code>, <code>deal_desk.py</code>, <code>recon_deck.py</code></li>
+      <li>Removed duplicate <code>prompt-to-video.py</code></li>
+    </ul>
+
+    <h3>Testing</h3>
+    <ul>
+      <li><strong>1,110 tests</strong> passing across 6 test suites</li>
+      <li><strong>CI on every PR</strong> &mdash; smoke, pipeline, contract, and full test jobs</li>
+      <li><strong>Nightly health check</strong> &mdash; full suite + SHA256 audit + security scan. Opens a GitHub Issue on failure.</li>
+      <li><strong>Release gate</strong> &mdash; all tests must pass, staging must be clean, security scan must pass before any release ships.</li>
+    </ul>
+
+    <h3>Federation &amp; Binder</h3>
+    <ul>
+      <li><strong>Binder setup</strong> &mdash; <code>setup_instance.py</code> creates <code>binder/</code>, <code>staging/</code>, namespace dir, GitHub Pages config</li>
+      <li><strong>Federation CLI</strong> &mdash; <code>federate.py binder/diff/submit/sync</code> for managing upstream relationship</li>
+      <li><strong>GitHub Pages</strong> &mdash; auto-enabled on template instances. Your binder gets a live URL.</li>
+      <li><strong>Submit upstream</strong> &mdash; agents go to staging on the main repo for review before entering the registry</li>
+    </ul>
+
+    <h3>SDK Onboarding</h3>
+    <ul>
+      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; initialize a RAR binder in one command</li>
+      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAR from CLI</li>
+      <li><strong>Snake_case enforced in scaffold</strong> &mdash; <code>rapp_sdk.py new</code> rejects kebab-case slugs</li>
+      <li><strong>Full quickstart in <code>skill.md</code></strong> &mdash; AI agents can onboard autonomously</li>
+    </ul>
+
+    <h3>Release Pipeline</h3>
+    <ul>
+      <li><strong>Seasonal releases</strong> &mdash; manual dispatch, full test gate, integrity seal, GitHub Release + tag</li>
+      <li><strong>Hotfix releases</strong> &mdash; patch version for urgent fixes</li>
+      <li><strong>Canary releases</strong> &mdash; pre-release flag for testing</li>
+      <li><strong>Dry run mode</strong> &mdash; validate without shipping</li>
+    </ul>
+
+    <h3>Dream Catcher</h3>
+    <ul>
+      <li><strong>PK fixed</strong> &mdash; composite key is now <code>frame:utc</code> (virtual time + real time with microsecond precision). No more author+title in the key.</li>
+    </ul>
+  </div>
+  <div class="stats">
+    <span class="stat"><strong>133</strong> agents</span>
+    <span class="stat"><strong>1,110</strong> tests</span>
+    <span class="stat"><strong>6</strong> CI workflows</span>
+    <span class="stat"><strong>8</strong> security patterns blocked</span>
+  </div>
+</div>
+
+<div class="timeline-dot"></div>
+
+<!-- Upcoming -->
+<div class="upcoming">
+  <strong>Next release</strong> will be stamped when ready.<br>
+  Submissions open &mdash; <a href="https://github.com/kody-w/RAR/issues/new" style="color: var(--accent);">submit an agent</a> to be part of the next drop.
+</div>
+
+<footer>
+  <p>RAPP Agent Registry &mdash; <a href="https://github.com/kody-w/RAR">kody-w/RAR</a></p>
+  <p style="margin-top: 4px;">Releases are integrity-sealed. Every agent is SHA256-verified.</p>
+</footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- Dynamic release loader — reads from registry.json -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<script>
+(async function() {
+  try {
+    const resp = await fetch('registry.json');
+    if (!resp.ok) return;
+    const reg = await resp.json();
+    const releases = reg.releases || [];
+    if (!releases.length) return;
+
+    const container = document.getElementById('dynamic-releases');
+    const typeClass = { seasonal: 'tag-seasonal', hotfix: 'tag-hotfix', canary: 'tag-infrastructure' };
+
+    // Show releases newest first (these come from the release workflow)
+    for (const rel of releases.slice().reverse()) {
+      const date = new Date(rel.timestamp).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      const tag = typeClass[rel.release_type] || 'tag-seasonal';
+      const label = rel.release_type.charAt(0).toUpperCase() + rel.release_type.slice(1);
+
+      container.innerHTML += `
+        <div class="release">
+          <div class="release-header">
+            <div>
+              <div class="release-title">${rel.release_name}</div>
+              <div class="release-date">${date}</div>
+            </div>
+            <span class="release-tag ${tag}">${label}</span>
+          </div>
+          <div class="release-body">
+            <p>Integrity-sealed release.</p>
+          </div>
+          <div class="stats">
+            <span class="stat"><strong>${rel.agent_count}</strong> agents</span>
+            <span class="stat"><strong>${rel.publishers}</strong> publishers</span>
+            <span class="stat">Seal: <code>${rel.integrity_seal}</code></span>
+          </div>
+        </div>
+        <div class="timeline-dot"></div>
+      `;
+    }
+  } catch(e) { /* registry not available — static content still works */ }
+})();
+</script>
+</body>
+</html>

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/inventory-rebalancing",
+    "name": "@aibast-agents-library/inventory_rebalancing",
     "version": "1.0.0",
     "display_name": "Inventory Rebalancing Agent",
     "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
@@ -24,7 +24,7 @@ __manifest__ = {
     "category": "manufacturing",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -14,7 +14,7 @@ __manifest__ = {
     "category": "productivity",
     "quality_tier": "community",
     "requires_env": ["AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_DEPLOYMENT_NAME", "AZURE_OPENAI_ENDPOINT"],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

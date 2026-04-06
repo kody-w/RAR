@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/deal-risk-assessment",
+    "name": "@aibast-agents-library/deal_risk_assessment",
     "version": "1.0.0",
     "display_name": "Deal Risk Assessment",
     "description": "Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

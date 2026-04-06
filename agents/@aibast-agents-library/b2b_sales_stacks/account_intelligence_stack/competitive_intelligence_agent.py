@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/competitive-intelligence",
+    "name": "@aibast-agents-library/competitive_intelligence",
     "version": "1.0.0",
     "display_name": "Competitive Intelligence",
     "description": "Analyzes competitive landscapes, win/loss patterns, and generates battlecards for enterprise deals.",
@@ -32,7 +32,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

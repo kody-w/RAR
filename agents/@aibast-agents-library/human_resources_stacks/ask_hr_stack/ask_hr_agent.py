@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/ask-hr",
+    "name": "@aibast-agents-library/ask_hr",
     "version": "1.0.0",
     "display_name": "Ask HR",
     "description": "AI-powered HR assistant for time-off requests, benefits inquiries, parental leave, and policy lookups.",
@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "human_resources",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/triage-bot",
+    "name": "@aibast-agents-library/triage_bot",
     "version": "1.0.0",
     "display_name": "Triage Bot",
     "description": "Inquiry classification, routing, priority assessment, and handoff summary generation.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

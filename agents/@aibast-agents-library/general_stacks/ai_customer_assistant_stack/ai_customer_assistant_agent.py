@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/ai-customer-assistant",
+    "name": "@aibast-agents-library/ai_customer_assistant",
     "version": "1.0.0",
     "display_name": "AI Customer Assistant",
     "description": "AI-powered customer service assistant for inquiries, knowledge search, escalation routing, and satisfaction surveys.",
@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

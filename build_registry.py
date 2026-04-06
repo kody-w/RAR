@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """
 Registry Builder — Auto-generates registry.json from __manifest__ dicts in agent files.
 
@@ -16,8 +17,10 @@ Supports two file formats:
 """
 
 import ast
+import hashlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -107,6 +110,63 @@ def extract_card(py_path: Path) -> dict:
     return None
 
 
+# First-party agents that legitimately need elevated capabilities.
+# Community submissions are NEVER added here — they must find safe alternatives.
+SECURITY_ALLOWLIST = {
+    "agents/@kody/agent_workbench_agent.py",       # workbench needs exec for agent orchestration
+    "agents/@kody/rappter_engine_agent.py",         # engine needs subprocess for CLI mode
+    "agents/@kody/rar_remote_agent.py",             # remote agent needs subprocess for git/install
+    "agents/@borg/prompt_to_video.py",              # video rendering needs subprocess for ffmpeg
+    "agents/@discreetRappers/scripted_demo.py",     # demo runner needs exec for script execution
+}
+
+# Patterns that should never appear in agent code (supply chain defense)
+DANGEROUS_PATTERNS = [
+    (r'\beval\s*\(', "eval() is forbidden — use safe alternatives"),
+    (r'\bexec\s*\(', "exec() is forbidden — use safe alternatives"),
+    (r'\b__import__\s*\(', "__import__() is forbidden — use standard imports"),
+    (r'\bcompile\s*\(.*["\']exec["\']', "compile() with exec mode is forbidden"),
+    (r'\bos\.system\s*\(', "os.system() is forbidden — declare in requires_env"),
+    (r'\bsubprocess\.\w+\s*\(', "subprocess is forbidden in agents"),
+    (r'\bopen\s*\(.*(\/etc|\/proc|\.env|\.ssh|passwd)', "suspicious file access pattern"),
+    (r'(api[_-]?key|secret|password|token)\s*=\s*["\'][^"\']{8,}', "possible hardcoded secret"),
+]
+
+
+def compute_sha256(file_path: Path) -> str:
+    """Compute SHA256 hash of file contents."""
+    return hashlib.sha256(file_path.read_bytes()).hexdigest()
+
+
+def scan_security(py_path: Path) -> list:
+    """Static security scan — returns list of warnings."""
+    warnings = []
+    source = py_path.read_text()
+    for pattern, message in DANGEROUS_PATTERNS:
+        if re.search(pattern, source):
+            warnings.append(f"{py_path}: {message}")
+    return warnings
+
+
+def check_version_immutability(name: str, version: str, sha256: str, file_path: str) -> str | None:
+    """If a previous registry exists, verify version wasn't silently changed."""
+    if not REGISTRY_FILE.exists():
+        return None
+    try:
+        prev = json.loads(REGISTRY_FILE.read_text())
+        for agent in prev.get("agents", []):
+            if (agent.get("name") == name
+                    and agent.get("version") == version
+                    and agent.get("_file") == file_path):
+                prev_hash = agent.get("_sha256")
+                if prev_hash and prev_hash != sha256:
+                    return (f"Version {version} already published with different content "
+                            f"(hash mismatch). Bump the version number.")
+    except (json.JSONDecodeError, KeyError):
+        pass
+    return None
+
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -122,6 +182,12 @@ def build_registry():
     ))
 
     for py_path in all_files:
+        # Enforce snake_case filenames — no dashes allowed
+        stem = py_path.stem.replace('.py', '')  # handle .py.card
+        if '-' in stem:
+            errors.append(f"{py_path}: filename contains dashes — rename to snake_case (e.g., {stem.replace('-', '_')}.py)")
+            continue
+
         manifest = extract_manifest(py_path)
         if manifest is None:
             continue
@@ -146,9 +212,27 @@ def build_registry():
         publishers.add(publisher)
         categories.add(manifest.get("category", "uncategorized"))
         
+        # Security scan (skip first-party allowlisted agents)
+        if str(py_path) not in SECURITY_ALLOWLIST:
+            sec_warnings = scan_security(py_path)
+            if sec_warnings:
+                for w in sec_warnings:
+                    errors.append(w)
+                continue
+
+        # Integrity hash
+        sha256 = compute_sha256(py_path)
+
+        # Version immutability — reject silent content changes
+        immut_err = check_version_immutability(name, manifest["version"], sha256, str(py_path))
+        if immut_err:
+            errors.append(f"{py_path}: {immut_err}")
+            continue
+
         # Add file metadata
         content = py_path.read_text()
         manifest["_file"] = str(py_path)
+        manifest["_sha256"] = sha256
         manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = is_card or _has_holo_card(name)

@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/speech-to-crm",
+    "name": "@aibast-agents-library/speech_to_crm",
     "version": "1.0.0",
     "display_name": "Speech to CRM",
     "description": "Transcribes sales calls, extracts entities, maps to CRM fields, and previews record updates.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/cross-selling",
+    "name": "@aibast-agents-library/cross_selling",
     "version": "1.0.0",
     "display_name": "Cross-Selling Opportunities",
     "description": "Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

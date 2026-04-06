@@ -45,7 +45,7 @@ Operations:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/rappter-engine-agent",
+    "name": "@kody/rappter_engine_agent",
     "version": "1.0.0",
     "display_name": "RappterEngine",
     "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",
@@ -54,7 +54,7 @@ __manifest__ = {
     "category": "devtools",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

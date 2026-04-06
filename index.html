@@ -1190,7 +1190,11 @@
     font-size: 1.2rem; font-weight: 800; color: #c8b89a;
     letter-spacing: .5px; font-variant-numeric: tabular-nums;
   }
+  .showntell-btc .stb-price {
+    display: none; /* keep data, hide all value from UI until later stage */
+  }
   .showntell-btc .stb-usd {
+    display: none;
     font-size: .75rem; color: #6a5d4a; font-weight: 600;
   }
   .showntell-btc .stb-badge {
@@ -7288,7 +7292,7 @@ async function showAndTell(name) {
         <span class="stb-btc">&#8383;${floorBv.btc}</span>
         <span class="stb-usd">${floorBv.usd}</span>
       </div>
-      <span class="stb-badge">Binder Value${authorityNote}</span>`;
+      <span class="stb-badge">Unclaimed${authorityNote}</span>`;
   }
   overlay.appendChild(btcEl);
 
@@ -7520,10 +7524,7 @@ async function collectorTransfer(mintId) {
           <div style="font-size:.95rem;font-weight:800;color:#e8dcc8">${esc(card.displayName)}</div>
           <div style="font-size:.65rem;color:#6a5d4a;margin-top:2px">Mint #${card.mintNum}${card.isFirstEdition ? ' &middot; 1ST EDITION' : ''} &middot; ${card.transfers || 0} prior transfers</div>
         </div>
-        <div style="text-align:right">
-          <div style="font-size:1.1rem;font-weight:900;color:#f7931a">&#8383;${bv.btc}</div>
-          <div style="font-size:.7rem;color:#6a5d4a">${bv.usd}</div>
-        </div>
+        <!-- BTC/USD values hidden until later stage -->
       </div>
 
       <div style="margin-bottom:14px">
@@ -10766,10 +10767,7 @@ function renderWalletContents(wallet) {
           <div style="font-size:1.1rem;font-weight:800;color:var(--text)">${esc(owner.name || 'Wallet')}</div>
           <div style="font-size:.7rem;color:var(--text-muted);font-family:monospace">${esc(shortAddr)} &middot; ${esc(owner.repo || _walletRepo)}</div>
         </div>
-        <div style="display:flex;align-items:baseline;gap:8px">
-          <span style="font-size:1.6rem;font-weight:900;color:#f7931a">&#8383;${(wallet.totalBtcValue || 0).toFixed(4)}</span>
-          <span style="font-size:.85rem;color:var(--text-muted)">${totalUsdStr}</span>
-        </div>
+        <!-- BTC/USD values hidden until later stage -->
       </div>
 
       <!-- Summary cards -->
@@ -10781,7 +10779,7 @@ function renderWalletContents(wallet) {
         ${Object.entries(breakdown).map(([r, d]) => `
           <div class="ws-card" style="border-color:${r === 'mythic' ? 'rgba(255,109,0,.3)' : r === 'rare' ? 'rgba(255,215,0,.2)' : 'var(--border)'}">
             <div class="ws-val" style="color:${r === 'mythic' ? '#ff6d00' : r === 'rare' ? '#ffd700' : r === 'uncommon' ? '#c0c0c0' : 'var(--text-muted)'}">${d.count}</div>
-            <div class="ws-lbl">${r.charAt(0).toUpperCase() + r.slice(1)} &middot; &#8383;${d.totalBtc}</div>
+            <div class="ws-lbl">${r.charAt(0).toUpperCase() + r.slice(1)}</div>
           </div>
         `).join('')}
       </div>
@@ -10808,7 +10806,7 @@ function renderWalletContents(wallet) {
           <div style="margin-bottom:20px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
               <h3 style="font-size:.85rem;font-weight:700;color:var(--text-dim);text-transform:capitalize;margin:0">${esc(cat)} <span style="color:var(--text-muted);font-weight:400;font-size:.7rem">(${catCards.length})</span></h3>
-              <span style="font-size:.7rem;color:#f7931a;font-weight:600">&#8383;${catBtc.toFixed(3)}</span>
+              <!-- BTC value hidden until later stage -->
             </div>
             <div class="wallet-cards-grid">
               ${catCards.map(c => `
@@ -10818,7 +10816,7 @@ function renderWalletContents(wallet) {
                     <div class="wcr-name">${esc(c.displayName)}</div>
                     <div class="wcr-agent">${esc(c.agentName)}</div>
                   </div>
-                  <div class="wcr-btc">&#8383;${(c.floorBtc || 0).toFixed(3)}</div>
+                  <!-- BTC value hidden until later stage -->
                 </div>
               `).join('')}
             </div>

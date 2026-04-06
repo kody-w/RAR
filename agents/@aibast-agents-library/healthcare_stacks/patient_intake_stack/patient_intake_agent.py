@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/patient-intake",
+    "name": "@aibast-agents-library/patient_intake",
     "version": "1.0.0",
     "display_name": "Patient Intake Agent",
     "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "healthcare",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

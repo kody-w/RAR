@@ -21,7 +21,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/deal-tracking",
+    "name": "@aibast-agents-library/deal_tracking",
     "version": "1.0.0",
     "display_name": "Deal Tracking",
     "description": "Tracks pipeline, deal movement, stage velocity, and forecast accuracy for enterprise sales.",
@@ -30,7 +30,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/voice-to-crm-email",
+    "name": "@aibast-agents-library/voice_to_crm_email",
     "version": "1.0.0",
     "display_name": "Voice to CRM Email",
     "description": "Meeting recap generation, action item extraction, follow-up email drafting, and distribution list management.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

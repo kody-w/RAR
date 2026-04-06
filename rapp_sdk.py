@@ -395,20 +395,21 @@ def _fetch_json(url: str, token: str = None) -> dict | None:
 
 
 def fetch_registry() -> dict:
-    """Fetch registry.json from GitHub, falling back to local file."""
-    url = f"{RAW_BASE}/registry.json"
-    token = _get_token()
-    data = _fetch_json(url, token)
-    if data:
-        return data
-
-    # Fall back to local registry.json
+    """Fetch registry — prefers local file (local-first), falls back to GitHub."""
+    # Local-first: use local registry.json if it exists
     local = Path(__file__).parent / "registry.json"
     if local.exists():
         try:
             return json.loads(local.read_text())
         except json.JSONDecodeError:
             pass
+
+    # Fall back to remote
+    url = f"{RAW_BASE}/registry.json"
+    token = _get_token()
+    data = _fetch_json(url, token)
+    if data:
+        return data
 
     return {"agents": [], "stats": {}}
 
@@ -501,6 +502,224 @@ def mulberry32(seed: int):
     return _rand
 
 
+# ─── AGENT TYPES (the color identity — like Pokemon types or MTG colors) ───
+# Every agent has a primary type derived from its category.
+# Tags can add a secondary type. Dual-type agents are rarer and more valuable.
+
+AGENT_TYPES = {
+    "LOGIC":  {"color": "#58a6ff", "icon": "brain",   "label": "Logic"},
+    "DATA":   {"color": "#3fb950", "icon": "stream",  "label": "Data"},
+    "SOCIAL": {"color": "#d29922", "icon": "people",  "label": "Social"},
+    "SHIELD": {"color": "#f0f0f0", "icon": "shield",  "label": "Shield"},
+    "CRAFT":  {"color": "#f85149", "icon": "gear",    "label": "Craft"},
+    "HEAL":   {"color": "#ff7eb3", "icon": "heart",   "label": "Heal"},
+    "WEALTH": {"color": "#bc8cff", "icon": "coin",    "label": "Wealth"},
+}
+
+# Category → primary type mapping
+CATEGORY_TYPE = {
+    "core":                     "LOGIC",
+    "devtools":                 "LOGIC",
+    "pipeline":                 "DATA",
+    "integrations":             "DATA",
+    "productivity":             "SOCIAL",
+    "general":                  "SOCIAL",
+    "federal_government":       "SHIELD",
+    "slg_government":           "SHIELD",
+    "it_management":            "SHIELD",
+    "manufacturing":            "CRAFT",
+    "energy":                   "CRAFT",
+    "retail_cpg":               "CRAFT",
+    "healthcare":               "HEAL",
+    "human_resources":          "HEAL",
+    "financial_services":       "WEALTH",
+    "b2b_sales":                "WEALTH",
+    "b2c_sales":                "WEALTH",
+    "professional_services":    "WEALTH",
+    "software_digital_products": "DATA",
+}
+
+# Tag keywords → secondary type (first match wins)
+TAG_TYPE_HINTS = {
+    "LOGIC":  ["ai", "ml", "algorithm", "compute", "analysis", "ast", "parse", "model", "intelligence"],
+    "DATA":   ["data", "pipeline", "etl", "sync", "migration", "import", "export", "extract", "transform"],
+    "SOCIAL": ["email", "chat", "meeting", "communication", "demo", "presentation", "coach", "assistant"],
+    "SHIELD": ["compliance", "security", "audit", "governance", "risk", "regulatory", "permit", "license"],
+    "CRAFT":  ["inventory", "supply", "maintenance", "production", "manufacturing", "field", "dispatch"],
+    "HEAL":   ["patient", "clinical", "care", "health", "wellness", "staff", "credentialing", "intake"],
+    "WEALTH": ["sales", "revenue", "pricing", "deal", "proposal", "billing", "financial", "portfolio"],
+}
+
+# Type effectiveness chart — weakness and resistance
+# LOGIC > DATA > SOCIAL > SHIELD > CRAFT > HEAL > WEALTH > LOGIC
+TYPE_WEAKNESS = {
+    "LOGIC":  "WEALTH",   # gold corrupts pure logic
+    "DATA":   "LOGIC",    # logic deconstructs raw data
+    "SOCIAL": "DATA",     # data exposes social spin
+    "SHIELD": "SOCIAL",   # social pressure overwhelms bureaucracy
+    "CRAFT":  "SHIELD",   # regulation constrains craft
+    "HEAL":   "CRAFT",    # industrial demands strain care
+    "WEALTH": "HEAL",     # care costs erode wealth
+}
+
+TYPE_RESISTANCE = {
+    "LOGIC":  "DATA",
+    "DATA":   "SOCIAL",
+    "SOCIAL": "SHIELD",
+    "SHIELD": "CRAFT",
+    "CRAFT":  "HEAL",
+    "HEAL":   "WEALTH",
+    "WEALTH": "LOGIC",
+}
+
+# Evolution stages — tied to quality tier
+EVOLUTION_STAGES = {
+    "experimental": {"stage": 0, "label": "Seed",       "icon": "seed"},
+    "community":    {"stage": 1, "label": "Base",       "icon": "sprout"},
+    "verified":     {"stage": 2, "label": "Evolved",    "icon": "flame"},
+    "official":     {"stage": 3, "label": "Legendary",  "icon": "crown"},
+}
+
+# ─── STAT DERIVATION (deterministic from manifest, never random) ───
+
+def _derive_types(category: str, tags: list) -> list:
+    """Derive primary + optional secondary type from category and tags."""
+    primary = CATEGORY_TYPE.get(category, "SOCIAL")
+    types = [primary]
+
+    # Check tags for secondary type
+    tag_str = " ".join(t.lower() for t in tags)
+    for type_name, keywords in TAG_TYPE_HINTS.items():
+        if type_name == primary:
+            continue
+        if any(kw in tag_str for kw in keywords):
+            types.append(type_name)
+            break  # max 2 types
+
+    return types
+
+
+def _derive_stats(name: str, tier: str, tags: list, deps: list,
+                  env_vars: list, version_str: str, description: str) -> dict:
+    """Derive 5 stats (HP, ATK, DEF, SPD, INT) deterministically from manifest data.
+    Each stat is 10-100. The seed ensures unique distributions per agent."""
+    rng = mulberry32(seed_hash(name + ":stats"))
+
+    # Base stats from tier
+    tier_base = {"experimental": 15, "community": 30, "verified": 50, "official": 70}
+    base = tier_base.get(tier, 30)
+
+    # Version multiplier (higher version = more refined)
+    try:
+        v_parts = [int(x) for x in version_str.split(".")]
+        v_bonus = min(15, v_parts[0] * 3 + v_parts[1])
+    except (ValueError, IndexError):
+        v_bonus = 0
+
+    # Tag/dep/env contribution
+    tag_bonus = min(20, len(tags) * 3)
+    dep_penalty = min(20, len(deps) * 5)
+    env_bonus = min(15, len(env_vars) * 5)
+    desc_bonus = min(10, len(description.split()) // 5)
+
+    def clamp(v):
+        return max(10, min(100, int(v)))
+
+    # Each stat has a base + deterministic seed offset + manifest bonuses
+    hp  = clamp(base + v_bonus + tag_bonus + rng() * 25)
+    atk = clamp(base + tag_bonus + desc_bonus + rng() * 30)
+    dfs = clamp(base + env_bonus + v_bonus + rng() * 20)  # "def" is reserved
+    spd = clamp(base + 20 - dep_penalty + rng() * 25)
+    itl = clamp(base + desc_bonus + tag_bonus + rng() * 20)
+
+    return {"hp": hp, "atk": atk, "def": dfs, "spd": spd, "int": itl}
+
+
+def _derive_abilities(name: str, tags: list, category: str, tier: str) -> list:
+    """Generate 1-3 abilities deterministically from agent identity."""
+    rng = mulberry32(seed_hash(name + ":abilities"))
+
+    # Ability templates by type
+    ABILITY_POOL = {
+        "LOGIC":  [
+            ("Analyze", "Inspect target data source. Draw insight."),
+            ("Compute", "Process input through algorithm. Return structured result."),
+            ("Parse", "Decompose complex input into structured components."),
+            ("Reason", "Apply chain-of-thought to derive conclusion."),
+        ],
+        "DATA":  [
+            ("Extract", "Pull data from connected source into working memory."),
+            ("Transform", "Reshape data to match target schema."),
+            ("Sync", "Synchronize state between two systems."),
+            ("Pipeline", "Execute multi-step data flow. Each stage feeds the next."),
+        ],
+        "SOCIAL": [
+            ("Assist", "Guide user through task with context-aware suggestions."),
+            ("Draft", "Compose human-quality text for target audience."),
+            ("Coach", "Observe performance and provide actionable feedback."),
+            ("Present", "Format findings into presentation-ready output."),
+        ],
+        "SHIELD": [
+            ("Audit", "Scan target for compliance violations. Report findings."),
+            ("Enforce", "Apply policy rules. Block non-compliant actions."),
+            ("Monitor", "Continuously watch for anomalies. Alert on deviation."),
+            ("Certify", "Validate against standards. Issue compliance attestation."),
+        ],
+        "CRAFT":  [
+            ("Build", "Assemble components into deployable artifact."),
+            ("Optimize", "Tune process parameters for maximum throughput."),
+            ("Schedule", "Allocate resources across timeline. Minimize conflicts."),
+            ("Dispatch", "Route work to available capacity. Track completion."),
+        ],
+        "HEAL":  [
+            ("Triage", "Assess priority and route to appropriate handler."),
+            ("Screen", "Evaluate against criteria. Flag items needing attention."),
+            ("Support", "Provide contextual guidance through complex process."),
+            ("Track", "Monitor progress against care plan. Alert on gaps."),
+        ],
+        "WEALTH": [
+            ("Prospect", "Identify and qualify potential opportunities."),
+            ("Forecast", "Project future values from historical patterns."),
+            ("Negotiate", "Propose terms optimized for mutual value."),
+            ("Close", "Execute final steps of value exchange. Confirm settlement."),
+        ],
+    }
+
+    primary_type = CATEGORY_TYPE.get(category, "SOCIAL")
+    pool = ABILITY_POOL.get(primary_type, ABILITY_POOL["SOCIAL"])
+
+    # Number of abilities: 1 for experimental, 2 for community, 3 for verified/official
+    tier_count = {"experimental": 1, "community": 2, "verified": 3, "official": 3}
+    count = tier_count.get(tier, 2)
+
+    abilities = []
+    used = set()
+    for _ in range(count):
+        idx = int(rng() * len(pool))
+        # Avoid duplicates
+        attempts = 0
+        while idx in used and attempts < len(pool):
+            idx = (idx + 1) % len(pool)
+            attempts += 1
+        used.add(idx)
+        ab_name, ab_text = pool[idx]
+
+        # Damage/cost derived from seed
+        cost = int(rng() * 3) + 1  # 1-3 energy
+        damage = int(rng() * 40) + 10  # 10-50
+
+        abilities.append({
+            "name": ab_name,
+            "text": ab_text,
+            "cost": cost,
+            "damage": damage,
+        })
+
+    return abilities
+
+
+# ─── FLAVOR TEXT + TYPE LINE ───
+
 _FLAVOR_FRAGMENTS = [
     "Built for the ecosystem. Ready for the edge.",
     "One file. Infinite possibilities.",
@@ -510,6 +729,10 @@ _FLAVOR_FRAGMENTS = [
     "When the network calls, this agent answers.",
     "Data in. Insight out. No drama.",
     "The pipeline starts here.",
+    "Born from a manifest. Raised in the registry.",
+    "Your code, your agent, your card. Permanent.",
+    "Not just code. Identity.",
+    "The forge remembers every agent it ever touched.",
 ]
 
 _TYPE_PREFIXES = {
@@ -537,8 +760,9 @@ _TYPE_PREFIXES = {
 
 def mint_card(path: str) -> dict:
     """
-    Extract manifest from an agent file and generate deterministic card data.
-    Returns a dict with all card fields.
+    Extract manifest from an agent file and generate a full deterministic card.
+    The card has types, stats, abilities, evolution stage, weakness/resistance —
+    everything derived from the manifest seed. Same input = same card, always.
     """
     manifest = extract_manifest(path)
     if manifest is None:
@@ -547,46 +771,75 @@ def mint_card(path: str) -> dict:
     name = manifest.get("name", path)
     tier = manifest.get("quality_tier", "community")
     rarity = TIER_TO_RARITY.get(tier, "core")
-
+    category = manifest.get("category", "general")
     tags = manifest.get("tags", [])
     deps = manifest.get("dependencies", [])
     env_vars = manifest.get("requires_env", [])
-
-    # Version → numeric multiplier
     version_str = manifest.get("version", "1.0.0")
-    try:
-        major = int(version_str.split(".")[0])
-    except (ValueError, IndexError):
-        major = 1
+    description = manifest.get("description", "")
 
-    power = len(tags) + len(deps)
-    toughness = major * 2 + len(env_vars)
+    # Types
+    types = _derive_types(category, tags)
+    primary_type = types[0]
 
-    # Deterministic flavor text and type line
+    # Stats
+    stats = _derive_stats(name, tier, tags, deps, env_vars, version_str, description)
+
+    # Abilities
+    abilities = _derive_abilities(name, tags, category, tier)
+
+    # Evolution
+    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
+
+    # Weakness / Resistance
+    weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
+    resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
+
+    # Retreat cost (dependency count, 0-4)
+    retreat_cost = min(4, len(deps))
+
+    # Type line
+    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
+    dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
+    type_line = f"{type_prefix} Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
+
+    # Flavor text
     rng = mulberry32(seed_hash(name))
     flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
     flavor = _FLAVOR_FRAGMENTS[flavor_idx]
 
-    category = manifest.get("category", "general")
-    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
-    type_line = f"{type_prefix} Agent — {rarity.title()}"
+    # Legacy compat
+    power = stats["atk"]
+    toughness = stats["def"]
 
     return {
         "name": name,
         "display_name": manifest.get("display_name", name),
-        "version": manifest.get("version", "1.0.0"),
+        "version": version_str,
         "tier": tier,
         "rarity": rarity,
         "rarity_label": RARITY_LABELS.get(rarity, rarity),
+        "types": types,
+        "type_colors": [AGENT_TYPES[t]["color"] for t in types],
+        "hp": stats["hp"],
+        "stats": stats,
+        "abilities": abilities,
+        "weakness": weakness,
+        "weakness_label": AGENT_TYPES[weakness]["label"],
+        "resistance": resistance,
+        "resistance_label": AGENT_TYPES[resistance]["label"],
+        "retreat_cost": retreat_cost,
+        "evolution": evo,
         "power": power,
         "toughness": toughness,
         "category": category,
         "type_line": type_line,
         "flavor": flavor,
         "tags": tags,
-        "description": manifest.get("description", ""),
+        "description": description,
         "author": manifest.get("author", ""),
         "floor_pts": RARITY_FLOOR.get(rarity, 10),
+        "seed": seed_hash(name),
     }
 
 
@@ -620,14 +873,112 @@ def card_value(name: str) -> dict:
     }
 
 
+def resolve_card_from_seed(seed: int) -> dict:
+    """
+    Resolve a card from just a numeric seed — no name, no registry, no network.
+    This is the absolute minimum: share a number, see a card.
+    Stats, types, abilities all derive from the seed alone.
+    """
+    rng = mulberry32(seed)
+
+    # Derive type from seed
+    type_names = list(AGENT_TYPES.keys())
+    primary_idx = int(rng() * len(type_names))
+    primary_type = type_names[primary_idx]
+    types = [primary_type]
+    if rng() > 0.6:  # ~40% chance of dual type
+        secondary_idx = int(rng() * len(type_names))
+        if type_names[secondary_idx] != primary_type:
+            types.append(type_names[secondary_idx])
+
+    # Derive tier from seed
+    tier_roll = rng()
+    if tier_roll < 0.05:
+        tier = "official"
+    elif tier_roll < 0.20:
+        tier = "verified"
+    elif tier_roll < 0.85:
+        tier = "community"
+    else:
+        tier = "experimental"
+
+    rarity = TIER_TO_RARITY.get(tier, "core")
+    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
+
+    # Stats from seed
+    hp  = max(10, min(100, int(30 + rng() * 70)))
+    atk = max(10, min(100, int(20 + rng() * 80)))
+    dfs = max(10, min(100, int(25 + rng() * 65)))
+    spd = max(10, min(100, int(20 + rng() * 75)))
+    itl = max(10, min(100, int(25 + rng() * 70)))
+    stats = {"hp": hp, "atk": atk, "def": dfs, "spd": spd, "int": itl}
+
+    # Abilities from seed
+    pool = list({
+        "LOGIC": [("Analyze", 30), ("Compute", 25), ("Parse", 20), ("Reason", 35)],
+        "DATA":  [("Extract", 20), ("Transform", 30), ("Sync", 25), ("Pipeline", 35)],
+        "SOCIAL":[("Assist", 15), ("Draft", 25), ("Coach", 30), ("Present", 20)],
+        "SHIELD":[("Audit", 25), ("Enforce", 35), ("Monitor", 20), ("Certify", 30)],
+        "CRAFT": [("Build", 30), ("Optimize", 35), ("Schedule", 20), ("Dispatch", 25)],
+        "HEAL":  [("Triage", 25), ("Screen", 20), ("Support", 15), ("Track", 30)],
+        "WEALTH":[("Prospect", 20), ("Forecast", 30), ("Negotiate", 35), ("Close", 40)],
+    }.get(primary_type, [("Perform", 25)]))
+
+    count = 1 + int(rng() * 3)  # 1-3 abilities
+    abilities = []
+    for i in range(min(count, len(pool))):
+        idx = int(rng() * len(pool))
+        ab_name, base_dmg = pool[idx % len(pool)]
+        abilities.append({
+            "name": ab_name,
+            "text": "",
+            "cost": int(rng() * 3) + 1,
+            "damage": base_dmg + int(rng() * 15),
+        })
+
+    weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
+    resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
+    retreat_cost = int(rng() * 4)
+
+    flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
+
+    dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
+    type_line = f"Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
+
+    return {
+        "seed": seed,
+        "display_name": f"Agent #{seed & 0xFFFF:04X}",
+        "tier": tier,
+        "rarity": rarity,
+        "rarity_label": RARITY_LABELS.get(rarity, rarity),
+        "types": types,
+        "type_colors": [AGENT_TYPES[t]["color"] for t in types],
+        "hp": hp,
+        "stats": stats,
+        "abilities": abilities,
+        "weakness": weakness,
+        "weakness_label": AGENT_TYPES[weakness]["label"],
+        "resistance": resistance,
+        "resistance_label": AGENT_TYPES[resistance]["label"],
+        "retreat_cost": retreat_cost,
+        "evolution": evo,
+        "type_line": type_line,
+        "flavor": _FLAVOR_FRAGMENTS[flavor_idx],
+        "floor_pts": RARITY_FLOOR.get(rarity, 10),
+        "_resolved_from": "seed_only",
+    }
+
+
 def resolve_card(name: str) -> dict:
     """
     Resolve a full card from just an agent name — no file needed.
 
     This is the micro-bandwidth primitive. The agent name IS the seed.
-    Send '@kody/deal-desk' over any channel (tweet, SMS, QR, URL fragment)
+    Send '@kody/deal_desk' over any channel (tweet, SMS, QR, URL fragment)
     and the full card self-assembles on the other end. Same algorithm,
     same seed, same card — everywhere, every time.
+
+    For seed-only resolution (no registry), use resolve_card_from_seed().
     """
     registry = fetch_registry()
     agent = None
@@ -641,46 +992,70 @@ def resolve_card(name: str) -> dict:
 
     tier = agent.get("quality_tier", "community")
     rarity = TIER_TO_RARITY.get(tier, "core")
-
+    category = agent.get("category", "general")
     tags = agent.get("tags", [])
     deps = agent.get("dependencies", [])
     env_vars = agent.get("requires_env", [])
-
     version_str = agent.get("version", "1.0.0")
-    try:
-        major = int(version_str.split(".")[0])
-    except (ValueError, IndexError):
-        major = 1
+    description = agent.get("description", "")
 
-    power = len(tags) + len(deps)
-    toughness = major * 2 + len(env_vars)
+    # Types
+    types = _derive_types(category, tags)
+    primary_type = types[0]
 
+    # Stats
+    stats = _derive_stats(name, tier, tags, deps, env_vars, version_str, description)
+
+    # Abilities
+    abilities = _derive_abilities(name, tags, category, tier)
+
+    # Evolution
+    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
+
+    # Weakness / Resistance
+    weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
+    resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
+
+    # Retreat cost
+    retreat_cost = min(4, len(deps))
+
+    # Type line
+    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
+    dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
+    type_line = f"{type_prefix} Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
+
+    # Flavor
     rng = mulberry32(seed_hash(name))
     flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
     flavor = _FLAVOR_FRAGMENTS[flavor_idx]
 
-    category = agent.get("category", "general")
-    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
-    type_line = f"{type_prefix} Agent — {rarity.title()}"
-
-    floor_pts = RARITY_FLOOR.get(rarity, 10)
-
     return {
         "name": name,
         "display_name": agent.get("display_name", name),
-        "version": agent.get("version", "1.0.0"),
+        "version": version_str,
         "tier": tier,
         "rarity": rarity,
         "rarity_label": RARITY_LABELS.get(rarity, rarity),
-        "power": power,
-        "toughness": toughness,
+        "types": types,
+        "type_colors": [AGENT_TYPES[t]["color"] for t in types],
+        "hp": stats["hp"],
+        "stats": stats,
+        "abilities": abilities,
+        "weakness": weakness,
+        "weakness_label": AGENT_TYPES[weakness]["label"],
+        "resistance": resistance,
+        "resistance_label": AGENT_TYPES[resistance]["label"],
+        "retreat_cost": retreat_cost,
+        "evolution": evo,
+        "power": stats["atk"],
+        "toughness": stats["def"],
         "category": category,
         "type_line": type_line,
         "flavor": flavor,
         "tags": tags,
-        "description": agent.get("description", ""),
+        "description": description,
         "author": agent.get("author", ""),
-        "floor_pts": floor_pts,
+        "floor_pts": RARITY_FLOOR.get(rarity, 10),
         "seed": seed_hash(name),
     }
 
@@ -739,10 +1114,119 @@ def binder_transfer(mint_id: str, dest: str) -> dict:
 # SECTION 6: CLI DISPATCHER
 # =============================================================================
 
+def init_binder(repo_name: str = None) -> dict:
+    """Initialize a RAR-compliant binder in the current directory or a new one.
+    Returns dict with paths created."""
+    import subprocess as _sp
+
+    cwd = Path.cwd()
+
+    # If repo_name given, create subdir
+    if repo_name:
+        cwd = cwd / repo_name
+        cwd.mkdir(exist_ok=True)
+
+    # Run setup_instance if available, otherwise create minimal structure
+    setup_script = Path(__file__).parent / "scripts" / "setup_instance.py"
+    if setup_script.exists():
+        env = os.environ.copy()
+        github_user = env.get("GITHUB_USER", "")
+        if not github_user:
+            try:
+                r = _sp.run(["gh", "api", "user", "-q", ".login"],
+                            capture_output=True, text=True, timeout=5)
+                if r.returncode == 0:
+                    github_user = r.stdout.strip()
+            except Exception:
+                pass
+        if not github_user:
+            github_user = "local"
+        repo = repo_name or cwd.name
+        env["GITHUB_REPOSITORY"] = f"{github_user}/{repo}"
+
+        _sp.run([sys.executable, str(setup_script)], env=env, cwd=str(cwd))
+
+    result = {
+        "binder_dir": str(cwd),
+        "namespace": f"@{github_user}" if 'github_user' in dir() else "@local",
+    }
+
+    # Ensure minimal structure even without setup_instance
+    for d in ["agents", "staging", "binder"]:
+        (cwd / d).mkdir(exist_ok=True)
+
+    return result
+
+
+def submit_agent(path: str, upstream: str = None) -> dict:
+    """Submit an agent to the upstream RAR registry via GitHub Issue.
+    Returns the issue URL on success."""
+    agent_path = Path(path)
+    if not agent_path.exists():
+        raise FileNotFoundError(f"Agent file not found: {path}")
+
+    code = agent_path.read_text()
+
+    # Validate first
+    manifest = extract_manifest(path)
+    if manifest is None:
+        raise ValueError("No __manifest__ found — validate your agent first")
+
+    errors = validate_manifest(path, manifest)
+    if errors:
+        raise ValueError(f"Manifest errors: {'; '.join(errors)}")
+
+    # Check snake_case
+    stem = agent_path.stem
+    if "-" in stem:
+        raise ValueError(f"Filename '{agent_path.name}' uses dashes — rename to snake_case")
+
+    upstream = upstream or REPO
+    token = _get_token()
+    if not token:
+        raise RuntimeError(
+            "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
+        )
+
+    body_data = {"action": "submit_agent", "payload": {"code": code}}
+    issue_body = f"```json\n{json.dumps(body_data, indent=2)}\n```"
+
+    payload = json.dumps({
+        "title": f"[AGENT] {manifest['name']}",
+        "body": issue_body,
+        "labels": ["rar-action", "agent-submission"],
+    }).encode()
+
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{upstream}/issues",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": "RAPP-SDK/1.0",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            result = json.loads(resp.read().decode())
+            return {
+                "ok": True,
+                "issue_url": result.get("html_url", ""),
+                "agent": manifest["name"],
+                "status": "pending_review",
+            }
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode()[:300] if e.fp else str(e)
+        raise RuntimeError(f"GitHub API error ({e.code}): {err_body}")
+
+
 def scaffold_agent(name: str, output_dir: str = None) -> str:
     """
     Scaffold a new agent from template.
-    name should be @publisher/my-agent.
+    name should be @publisher/my_agent (snake_case).
     output_dir overrides the default agents/ directory.
     Returns the path to the written file.
     """
@@ -751,16 +1235,22 @@ def scaffold_agent(name: str, output_dir: str = None) -> str:
 
     publisher, slug = name.split("/", 1)
 
-    # class_name: "my-agent" -> "MyAgent"
-    class_name = "".join(word.title() for word in slug.replace("-", "_").split("_"))
+    # Enforce snake_case
+    if "-" in slug:
+        fixed = slug.replace("-", "_")
+        raise ValueError(f"Slug '{slug}' uses dashes — use snake_case: {fixed}")
 
-    # display_name: "my-agent" -> "My Agent"
-    display_name = slug.replace("-", " ").replace("_", " ").title()
+    # class_name: "my_agent" -> "MyAgent"
+    class_name = "".join(word.title() for word in slug.split("_"))
+
+    # display_name: "my_agent" -> "My Agent"
+    display_name = slug.replace("_", " ").title()
 
     description = "A RAPP agent."
     author = publisher.lstrip("@")
 
-    file_name = slug.replace("-", "_") + "_agent.py"
+    file_name = slug if slug.endswith("_agent") else slug + "_agent"
+    file_name += ".py"
     base_dir = Path(output_dir) if output_dir else Path(__file__).parent / "agents"
     output_path = base_dir / publisher / file_name
 
@@ -804,10 +1294,20 @@ def main():
 
     sub = parser.add_subparsers(dest="command", metavar="<command>")
 
+    # init
+    p_init = sub.add_parser("init", help="Initialize a RAR binder (agent workspace)")
+    p_init.add_argument("name", nargs="?", help="Optional repo/directory name")
+    p_init.add_argument("--json", action="store_true", help="Output JSON")
+
     # new
     p_new = sub.add_parser("new", help="Scaffold a new agent from template")
-    p_new.add_argument("name", help="Agent name: @publisher/my-agent")
+    p_new.add_argument("name", help="Agent name: @publisher/my_agent (snake_case)")
     p_new.add_argument("--json", action="store_true", help="Output JSON")
+
+    # submit
+    p_submit = sub.add_parser("submit", help="Submit an agent to the RAR registry for review")
+    p_submit.add_argument("path", help="Path to agent .py file")
+    p_submit.add_argument("--json", action="store_true", help="Output JSON")
 
     # validate
     p_val = sub.add_parser("validate", help="Validate an agent manifest")
@@ -848,7 +1348,7 @@ def main():
     p_card_value.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full card from just a name — micro-bandwidth self-assembly")
-    p_card_resolve.add_argument("name", help="Agent name: @publisher/my-agent (the seed)")
+    p_card_resolve.add_argument("name", help="Agent name (@pub/slug) or numeric seed")
     p_card_resolve.add_argument("--json", action="store_true", help="Output JSON")
 
     # binder
@@ -871,8 +1371,31 @@ def main():
 
     use_json = getattr(args, "json", False)
 
+    # ---- init ----
+    if args.command == "init":
+        try:
+            result = init_binder(args.name)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                print(f"\n  RAR Binder initialized!")
+                print(f"  Directory: {result['binder_dir']}")
+                print(f"  Namespace: {result.get('namespace', '?')}")
+                print(f"\n  Next steps:")
+                print(f"    python rapp_sdk.py new @you/my_agent    # scaffold an agent")
+                print(f"    python rapp_sdk.py validate agent.py    # validate it")
+                print(f"    python rapp_sdk.py test agent.py        # run contract tests")
+                print(f"    python rapp_sdk.py submit agent.py      # submit to RAR")
+                print()
+        except Exception as e:
+            if use_json:
+                print(json.dumps({"error": str(e)}))
+            else:
+                print(f"  Error: {e}")
+            sys.exit(1)
+
     # ---- new ----
-    if args.command == "new":
+    elif args.command == "new":
         try:
             out_path = scaffold_agent(args.name)
             if use_json:
@@ -943,6 +1466,37 @@ def main():
                 print(f"  Error: {e}")
             sys.exit(1)
 
+    # ---- submit ----
+    elif args.command == "submit":
+        try:
+            # Validate first
+            errors = validate_manifest(args.path)
+            if errors:
+                if use_json:
+                    print(json.dumps({"error": f"Validation failed: {'; '.join(errors)}"}))
+                else:
+                    print(f"  Validation failed:")
+                    for e in errors:
+                        print(f"    - {e}")
+                sys.exit(1)
+
+            result = submit_agent(args.path)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                print(f"\n  Submitted: {result['agent']}")
+                print(f"  Status:    {result['status']}")
+                print(f"  Issue:     {result['issue_url']}")
+                print(f"\n  Your agent is now in staging for admin review.")
+                print(f"  Once approved, it will be forged and added to the registry.")
+                print()
+        except Exception as e:
+            if use_json:
+                print(json.dumps({"error": str(e)}))
+            else:
+                print(f"  Error: {e}")
+            sys.exit(1)
+
     # ---- info ----
     elif args.command == "info":
         agent = get_agent_info(args.name)
@@ -1004,23 +1558,39 @@ def main():
                 print(f"  Floor:   {result['floor_pts']} pts  /  {result['floor_btc']} BTC")
 
         elif args.card_command == "resolve":
-            result = resolve_card(args.name)
+            # Detect numeric seed vs agent name
+            try:
+                seed_val = int(args.name)
+                result = resolve_card_from_seed(seed_val)
+            except ValueError:
+                result = resolve_card(args.name)
             if use_json:
                 print(json.dumps(result, indent=2))
             else:
                 if "error" in result:
                     print(f"  Error: {result['error']}")
                     sys.exit(1)
-                print(f"  {result['display_name']}")
+                types_str = " / ".join(result.get("types", []))
+                print(f"  {result['display_name']}   HP {result.get('hp', '?')}")
                 print(f"  {result['type_line']}")
-                print(f"  {result['rarity_label']}  ({result['rarity']})")
-                print(f"  P/T: {result['power']}/{result['toughness']}")
-                print(f"  \"{result['flavor']}\"")
-                print(f"  Seed: {result['seed']}")
-                print(f"  Floor: {result['floor_pts']} pts")
+                print(f"  Type: {types_str}   |   {result['rarity_label']} ({result['rarity']})")
+                print(f"  Stage: {result.get('evolution', {}).get('label', '?')}")
                 print()
-                print(f"  Resolved from name alone — no file needed.")
-                print(f"  Send \"{result['name']}\" over any channel. Card self-assembles.")
+                stats = result.get("stats", {})
+                print(f"  ATK {stats.get('atk','?'):>3}  DEF {stats.get('def','?'):>3}  SPD {stats.get('spd','?'):>3}  INT {stats.get('int','?'):>3}")
+                print()
+                for ab in result.get("abilities", []):
+                    print(f"  [{ab['cost']}] {ab['name']}  ({ab['damage']} dmg)")
+                    print(f"      {ab['text']}")
+                print()
+                print(f"  Weak to: {result.get('weakness_label', '?')}   Resists: {result.get('resistance_label', '?')}   Retreat: {'*' * result.get('retreat_cost', 0) or 'free'}")
+                print(f"  \"{result['flavor']}\"")
+                print()
+                print(f"  Seed: {result['seed']}  |  Floor: {result['floor_pts']} pts")
+                if result.get("_resolved_from") == "seed_only":
+                    print(f"  Resolved from seed alone. Share the number — card self-assembles.")
+                else:
+                    print(f"  Resolved from name alone. Send \"{result.get('name', '')}\" — card self-assembles.")
         else:
             p_card.print_help()
 

@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/account-intelligence",
+    "name": "@aibast-agents-library/account_intelligence",
     "version": "1.0.0",
     "display_name": "Account Intelligence",
     "description": "360-degree account briefings with stakeholder mapping, competitive analysis, and deal risk assessment.",
@@ -31,7 +31,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

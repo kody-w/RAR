@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/order-status-communication",
+    "name": "@aibast-agents-library/order_status_communication",
     "version": "1.0.0",
     "display_name": "Order Status Communication Agent",
     "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "manufacturing",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

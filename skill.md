@@ -46,7 +46,7 @@ Each agent entry has:
 ### 2. Fetch an Agent
 
 ```
-GET https://raw.githubusercontent.com/kody-w/RAR/main/agents/@publisher/agent-slug.py
+GET https://raw.githubusercontent.com/kody-w/RAR/main/agents/@publisher/agent_slug.py
 ```
 
 ### 3. Install an Agent
@@ -94,10 +94,10 @@ Filter `registry.agents[]` where `category` matches.
 | ManageMemory | manage_memory | core | Stores facts, preferences, insights to memory |
 | GitHubAgentLibrary | github_agent_library | core | Browse, search, install agents from this repo |
 | RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry — discover, install, vote, review |
-| ReconDeck | recon-deck | core | Reconnaissance deck agent |
+| ReconDeck | recon_deck | core | Reconnaissance deck agent |
 | Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
 | Rappterbook | rappterbook | integrations | Read-only client for Rappterbook — the social network for AI agents |
-| DealDesk | deal-desk | b2b_sales | Deal desk agent for B2B sales |
+| DealDesk | deal_desk | b2b_sales | Deal desk agent for B2B sales |
 
 ### @borg
 | Name | Slug | Category | Description |
@@ -125,7 +125,7 @@ Filter `registry.agents[]` where `category` matches.
 ### @rapp
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
-| BasicAgent | basic-agent | devtools | Base class — every agent inherits from this |
+| BasicAgent | basic_agent | devtools | Base class — every agent inherits from this |
 
 ### @aibast-agents-library (Industry Vertical Templates)
 
@@ -209,6 +209,49 @@ User: "Install the dynamics agent"
 
 ---
 
+## SDK — Agentic-First Onboarding
+
+The RAPP SDK (`rapp_sdk.py`) is the developer toolkit. Zero dependencies. One file.
+
+### Quick Start (4 commands)
+
+```bash
+# 1. Initialize a binder (your local agent workspace)
+python rapp_sdk.py init
+
+# 2. Scaffold a new agent
+python rapp_sdk.py new @yourname/my_agent
+
+# 3. Validate + test
+python rapp_sdk.py validate agents/@yourname/my_agent_agent.py
+python rapp_sdk.py test agents/@yourname/my_agent_agent.py
+
+# 4. Submit to the RAR registry
+python rapp_sdk.py submit agents/@yourname/my_agent_agent.py
+```
+
+### SDK Commands
+
+| Command | What |
+|---------|------|
+| `init [name]` | Initialize a RAR binder (creates agents/, staging/, binder/) |
+| `new @pub/slug` | Scaffold agent from template (snake_case enforced) |
+| `validate path.py` | Validate manifest against schema |
+| `test path.py` | Run contract tests (no pytest needed) |
+| `search "query"` | Search the registry |
+| `install @pub/slug` | Download agent from registry |
+| `info @pub/slug` | Show agent details |
+| `submit path.py` | Submit agent to RAR for review |
+| `card mint path.py` | Mint a card from agent file |
+| `card resolve @pub/slug` | Self-assemble card from just the name |
+| `card value @pub/slug` | Check floor value |
+| `binder status` | Show binder inventory |
+| `binder transfer id to` | Transfer a card |
+
+All commands support `--json` for programmatic use by other agents.
+
+---
+
 ## Contributing — How to Submit an Agent
 
 ### For AI Agents: Autonomous Contribution Workflow
@@ -219,7 +262,7 @@ If you are an AI agent helping a contributor, follow these steps exactly.
 
 Create a single `.py` file. Everything goes in one file — no manifest.json, no README, no subdirectories.
 
-File path: `agents/@yournamespace/agent-slug.py`
+File path: `agents/@yournamespace/agent_slug.py` (snake_case ONLY, no dashes)
 
 The file MUST contain a `__manifest__` dict and a class that inherits `BasicAgent`.
 
@@ -235,7 +278,7 @@ Longer description of what this agent does.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@yournamespace/agent-slug",
+    "name": "@yournamespace/agent_slug",
     "version": "1.0.0",
     "display_name": "Agent Display Name",
     "description": "What this agent does in one sentence.",

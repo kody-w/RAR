@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/pipeline-velocity",
+    "name": "@aibast-agents-library/pipeline_velocity",
     "version": "1.0.0",
     "display_name": "Pipeline Velocity",
     "description": "Velocity dashboard, stage analysis, bottleneck detection, and acceleration planning for the sales pipeline.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

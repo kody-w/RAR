@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/prior-authorization",
+    "name": "@aibast-agents-library/prior_authorization",
     "version": "1.0.0",
     "display_name": "Prior Authorization Agent",
     "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "healthcare",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

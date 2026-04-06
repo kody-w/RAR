@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/proposal-generation",
+    "name": "@aibast-agents-library/proposal_generation",
     "version": "1.0.0",
     "display_name": "Proposal Generation",
     "description": "AI-powered proposal generation with RFP analysis, personalized content, pricing optimization, and competitive positioning.",
@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/clinical-notes-summarizer",
+    "name": "@aibast-agents-library/clinical_notes_summarizer",
     "version": "1.0.0",
     "display_name": "Clinical Notes Summarizer Agent",
     "description": "Summarizes patient encounters, performs medication reviews, generates problem lists, and produces referral summaries.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "healthcare",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

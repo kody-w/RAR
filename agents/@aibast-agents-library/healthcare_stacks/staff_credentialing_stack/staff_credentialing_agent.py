@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/staff-credentialing",
+    "name": "@aibast-agents-library/staff_credentialing",
     "version": "1.0.0",
     "display_name": "Staff Credentialing Agent",
     "description": "Manages staff credential tracking, expiration alerts, verification audits, and onboarding checklists for healthcare organizations.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "healthcare",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

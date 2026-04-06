@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/acquisition-support",
+    "name": "@aibast-agents-library/acquisition_support",
     "version": "1.0.0",
     "display_name": "Acquisition Support Agent",
     "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "federal_government",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

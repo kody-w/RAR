@@ -1,0 +1,100 @@
+name: Nightly Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 6 AM UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install test deps
+        run: pip install pytest pyyaml
+
+      - name: Full test suite
+        id: tests
+        run: |
+          pytest -v --tb=short 2>&1 | tee /tmp/test_output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+      - name: Rebuild registry (integrity check)
+        id: build
+        run: |
+          python build_registry.py 2>&1 | tee -a /tmp/test_output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+
+      - name: SHA256 integrity audit
+        run: |
+          python -c "
+          import hashlib, json, sys
+          from pathlib import Path
+          reg = json.loads(Path('registry.json').read_text())
+          bad = []
+          for a in reg['agents']:
+              f = Path(a['_file'])
+              if not f.exists(): continue
+              actual = hashlib.sha256(f.read_bytes()).hexdigest()
+              if a.get('_sha256') != actual:
+                  bad.append(f'{a[\"name\"]}: expected {a[\"_sha256\"][:16]}... got {actual[:16]}...')
+          if bad:
+              print('❌ Integrity failures:')
+              for b in bad: print(f'  {b}')
+              sys.exit(1)
+          print(f'✓ All {len(reg[\"agents\"])} agent hashes verified')
+          "
+
+      - name: Security scan
+        run: |
+          python -c "
+          import re, json, sys
+          from pathlib import Path
+          PATTERNS = [
+              (r'\beval\s*\(', 'eval()'),
+              (r'\bexec\s*\(', 'exec()'),
+              (r'\b__import__\s*\(', '__import__()'),
+              (r'\bos\.system\s*\(', 'os.system()'),
+          ]
+          # Load allowlist from build_registry
+          sys.path.insert(0, '.')
+          from build_registry import SECURITY_ALLOWLIST
+          fails = []
+          for f in Path('agents').rglob('*.py'):
+              if str(f) in SECURITY_ALLOWLIST:
+                  continue
+              src = f.read_text()
+              for pat, label in PATTERNS:
+                  if re.search(pat, src):
+                      fails.append(f'{f}: {label}')
+          if fails:
+              print('❌ Security scan:')
+              for f in fails: print(f'  {f}')
+              sys.exit(1)
+          print('✓ Security scan passed')
+          "
+
+      - name: Open issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let output = '';
+            try { output = fs.readFileSync('/tmp/test_output.txt', 'utf8'); } catch(e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 Nightly health check failed — ${new Date().toISOString().split('T')[0]}`,
+              body: `The nightly health check detected failures.\n\n\`\`\`\n${output.slice(-2000)}\n\`\`\`\n\nTriggered by: ${context.workflow}`,
+              labels: ['nightly-failure', 'automated']
+            });

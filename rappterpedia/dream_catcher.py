@@ -183,9 +183,11 @@ def load_registry():
     reg = load_json(RAR_DIR / "registry.json")
     return reg.get("agents", [])
 
-def composite_pk(frame, utc, author, title):
-    """The globally unique key — collision-free by construction."""
-    return f"{frame}:{utc}:{author}:{title[:80]}"
+def composite_pk(frame):
+    """The globally unique key: frame (virtual time) + UTC (real time).
+    Each call generates a fresh UTC timestamp for natural uniqueness."""
+    utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    return f"{frame}:{utc}"
 
 
 SYSTEM_PROMPT = """You are a Rappterpedia curator for the RAPP Agent ecosystem wiki.
@@ -275,7 +277,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
                 continue  # LLM-only — no template fallback
 
             author = random.choice(AUTHORS)
-            pk = composite_pk(frame, ts, author, title)
+            pk = composite_pk(frame)
             delta["articles_created"].append({
                 "pk": pk, "title": title, "category": "agents",
                 "tags": agent.get("tags", [])[:4] + ["deep-dive"],
@@ -305,7 +307,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
             continue  # LLM-only — no template fallback
 
         author = random.choice(AUTHORS)
-        pk = composite_pk(frame, ts, author, thread_title)
+        pk = composite_pk(frame)
 
         # Generate 1-3 replies (LLM-only, skip if no response)
         replies = []

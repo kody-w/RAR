@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/voice-to-crm-servicenow",
+    "name": "@aibast-agents-library/voice_to_crm_servicenow",
     "version": "1.0.0",
     "display_name": "Voice to CRM (ServiceNow)",
     "description": "ServiceNow integration for incident creation, knowledge search, assignment routing, and status updates.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

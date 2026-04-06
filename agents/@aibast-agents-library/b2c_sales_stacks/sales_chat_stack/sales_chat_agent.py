@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/sales-chat",
+    "name": "@aibast-agents-library/sales_chat",
     "version": "1.0.0",
     "display_name": "Sales Chat Agent",
     "description": "Retail sales chat support with product inquiries, availability checks, promotion lookups, and order assistance.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2c_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

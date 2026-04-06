@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/find-accurate-models",
+    "name": "@aibast-agents-library/find_accurate_models",
     "version": "1.0.0",
     "display_name": "Find Accurate Models",
     "description": "AI/ML model search and comparison by accuracy benchmarks, deployment readiness, and cost analysis.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

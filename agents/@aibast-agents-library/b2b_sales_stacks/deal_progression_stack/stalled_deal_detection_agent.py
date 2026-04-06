@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/stalled-deal-detection",
+    "name": "@aibast-agents-library/stalled_deal_detection",
     "version": "1.0.0",
     "display_name": "Stalled Deal Detection",
     "description": "Detects stalled deals, classifies root causes, generates intervention plans, and provides stall prevention.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

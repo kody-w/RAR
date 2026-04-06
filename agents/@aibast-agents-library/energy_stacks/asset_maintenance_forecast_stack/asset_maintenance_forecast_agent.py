@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/asset-maintenance-forecast",
+    "name": "@aibast-agents-library/asset_maintenance_forecast",
     "version": "1.0.0",
     "display_name": "Asset Maintenance Forecast Agent",
     "description": "Predictive maintenance forecasting, asset health monitoring, budget projections, and work order planning for energy infrastructure.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "energy",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

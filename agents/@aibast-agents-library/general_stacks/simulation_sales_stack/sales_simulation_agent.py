@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/sales-simulation",
+    "name": "@aibast-agents-library/sales_simulation",
     "version": "1.0.0",
     "display_name": "Sales Simulation",
     "description": "Sales scenario simulation with buyer personas, objection practice, and performance scoring.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

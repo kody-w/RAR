@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/bulk-crm-data-generator",
+    "name": "@aibast-agents-library/bulk_crm_data_generator",
     "version": "1.0.0",
     "display_name": "Bulk CRM Data Generator",
     "description": "Generates synthetic CRM contacts, accounts, and opportunities for testing, demos, and data migration.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/proposal-copilot",
+    "name": "@aibast-agents-library/proposal_copilot",
     "version": "1.0.0",
     "display_name": "Proposal Copilot Agent",
     "description": "Generates competitive proposals with pricing models, win-theme analysis from historical data, and competitive positioning against known bidders.",
@@ -24,7 +24,7 @@ __manifest__ = {
     "category": "professional_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

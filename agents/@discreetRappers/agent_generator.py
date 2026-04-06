@@ -33,7 +33,7 @@ __manifest__ = {
     "category": "pipeline",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

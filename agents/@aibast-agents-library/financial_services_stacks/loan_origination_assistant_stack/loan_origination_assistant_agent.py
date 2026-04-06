@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/loan-origination-assistant",
+    "name": "@aibast-agents-library/loan_origination_assistant",
     "version": "1.0.0",
     "display_name": "Loan Origination Assistant Agent",
     "description": "Loan origination support with application review, credit analysis, document verification, and decision recommendations.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

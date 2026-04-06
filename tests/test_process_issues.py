@@ -30,6 +30,8 @@ def isolated_state(tmp_path, monkeypatch):
     state_dir.mkdir()
     agents_dir = tmp_path / "agents"
     agents_dir.mkdir()
+    staging_dir = tmp_path / "staging"
+    staging_dir.mkdir()
 
     # Write empty state files
     (state_dir / "votes.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
@@ -37,6 +39,7 @@ def isolated_state(tmp_path, monkeypatch):
 
     monkeypatch.setattr(pi, "STATE_DIR", state_dir)
     monkeypatch.setattr(pi, "AGENTS_DIR", agents_dir)
+    monkeypatch.setattr(pi, "STAGING_DIR", staging_dir)
     monkeypatch.setattr(pi, "VOTES_FILE", state_dir / "votes.json")
     monkeypatch.setattr(pi, "REVIEWS_FILE", state_dir / "reviews.json")
     monkeypatch.setattr(pi, "REPO_ROOT", tmp_path)
@@ -228,7 +231,7 @@ VALID_AGENT_CODE = '''"""Test agent."""
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@testuser/my-agent",
+    "name": "@testuser/my_agent",
     "version": "1.0.0",
     "display_name": "My Agent",
     "description": "A test agent",
@@ -251,11 +254,14 @@ class TestSubmitAgent:
     def test_valid_submission(self):
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
         assert result["ok"] is True
-        assert result["agent"] == "@testuser/my-agent"
-        # Verify file was written
-        agent_file = pi.AGENTS_DIR / "@testuser" / "my-agent.py"
-        assert agent_file.exists()
-        assert "__manifest__" in agent_file.read_text()
+        assert result["agent"] == "@testuser/my_agent"
+        assert result["status"] == "pending_review"
+        # Verify file was written to staging, NOT agents
+        staging_file = pi.STAGING_DIR / "@testuser" / "my_agent.py"
+        assert staging_file.exists()
+        assert "__manifest__" in staging_file.read_text()
+        agent_file = pi.AGENTS_DIR / "@testuser" / "my_agent.py"
+        assert not agent_file.exists(), "Should be in staging, not agents"
 
     def test_empty_code(self):
         result = pi.handle_submit_agent({"code": ""}, "testuser")
@@ -272,21 +278,27 @@ class TestSubmitAgent:
 
     def test_wrong_publisher(self):
         """Users can only submit under their own namespace."""
-        code = VALID_AGENT_CODE.replace("@testuser/", "@someone-else/")
+        code = VALID_AGENT_CODE.replace("@testuser/", "@someone_else/")
         result = pi.handle_submit_agent({"code": code}, "testuser")
         assert "error" in result
         assert "publisher" in result["error"].lower() or "Publisher" in result["error"]
 
     def test_version_must_increment(self):
-        # Submit v1
-        pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
-        # Try to submit same version again
+        # Put existing agent in agents/ (simulates already-published agent)
+        ns = pi.AGENTS_DIR / "@testuser"
+        ns.mkdir(parents=True, exist_ok=True)
+        (ns / "my_agent.py").write_text(VALID_AGENT_CODE)
+        # Try to submit same version
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
         assert "error" in result
         assert "version" in result["error"].lower() or "Version" in result["error"]
 
     def test_version_increment_succeeds(self):
-        pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
+        # Put existing v1 in agents/
+        ns = pi.AGENTS_DIR / "@testuser"
+        ns.mkdir(parents=True, exist_ok=True)
+        (ns / "my_agent.py").write_text(VALID_AGENT_CODE)
+        # Submit v2
         v2_code = VALID_AGENT_CODE.replace('"1.0.0"', '"1.1.0"')
         result = pi.handle_submit_agent({"code": v2_code}, "testuser")
         assert result["ok"] is True

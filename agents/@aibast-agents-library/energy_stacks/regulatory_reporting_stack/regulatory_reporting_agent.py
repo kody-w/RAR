@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/energy-regulatory-reporting",
+    "name": "@aibast-agents-library/energy_regulatory_reporting",
     "version": "1.0.0",
     "display_name": "Energy Regulatory Reporting Agent",
     "description": "Manages regulatory report status, data validation, submission tracking, and audit readiness for EPA, FERC, and state filings.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "energy",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

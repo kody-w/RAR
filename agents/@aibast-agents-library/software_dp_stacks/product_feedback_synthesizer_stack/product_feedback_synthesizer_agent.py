@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/product-feedback-synthesizer",
+    "name": "@aibast-agents-library/product_feedback_synthesizer",
     "version": "1.0.0",
     "display_name": "Product Feedback Synthesizer Agent",
     "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "software_digital_products",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

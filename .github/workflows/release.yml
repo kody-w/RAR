@@ -1,0 +1,223 @@
+name: Seasonal Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'Release name (e.g., "Genesis", "Spring 2026")'
+        required: true
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'seasonal'
+        type: choice
+        options:
+          - seasonal
+          - hotfix
+          - canary
+      dry_run:
+        description: 'Dry run (validate only, no tag/release)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  # ─── GATE: full test suite must pass ────────────────────────────
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest pyyaml
+
+      - name: Full test suite
+        run: pytest -v --tb=short
+
+      - name: Build registry
+        run: python build_registry.py
+
+      - name: Security scan
+        run: |
+          python -c "
+          import re, sys
+          from pathlib import Path
+          sys.path.insert(0, '.')
+          from build_registry import SECURITY_ALLOWLIST, DANGEROUS_PATTERNS
+          fails = []
+          for f in Path('agents').rglob('*.py'):
+              if str(f) in SECURITY_ALLOWLIST: continue
+              src = f.read_text()
+              for pat, msg in DANGEROUS_PATTERNS:
+                  if re.search(pat, src):
+                      fails.append(f'{f}: {msg}')
+          if fails:
+              for f in fails: print(f)
+              sys.exit(1)
+          print('Security scan passed')
+          "
+
+      - name: Integrity audit
+        run: |
+          python -c "
+          import hashlib, json, sys
+          from pathlib import Path
+          reg = json.loads(Path('registry.json').read_text())
+          for a in reg['agents']:
+              f = Path(a['_file'])
+              if not f.exists(): continue
+              actual = hashlib.sha256(f.read_bytes()).hexdigest()
+              assert a.get('_sha256') == actual, f'{a[\"name\"]} hash mismatch'
+          print(f'All {len(reg[\"agents\"])} agents verified')
+          "
+
+      - name: No staging leftovers
+        run: |
+          STAGED=$(find staging -name '*.py' 2>/dev/null | head -5)
+          if [ -n "$STAGED" ]; then
+            echo "❌ Agents still in staging/ — approve or reject before release:"
+            echo "$STAGED"
+            exit 1
+          fi
+          echo "✓ Staging is clean"
+
+  # ─── RELEASE: tag, generate notes, publish ──────────────────────
+  release:
+    runs-on: ubuntu-latest
+    needs: validate
+    if: ${{ !inputs.dry_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate release metadata
+        id: meta
+        run: |
+          python -c "
+          import json, hashlib
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          reg = json.loads(Path('registry.json').read_text())
+          agents = reg['agents']
+          now = datetime.now(timezone.utc)
+
+          # Compute registry-wide hash (integrity seal)
+          hashes = sorted(a.get('_sha256', '') for a in agents)
+          seal = hashlib.sha256('|'.join(hashes).encode()).hexdigest()[:16]
+
+          meta = {
+              'release_name': '${{ inputs.release_name }}',
+              'release_type': '${{ inputs.release_type }}',
+              'timestamp': now.isoformat(),
+              'agent_count': len(agents),
+              'publishers': reg['stats']['publishers'],
+              'integrity_seal': seal,
+          }
+          Path('/tmp/release_meta.json').write_text(json.dumps(meta, indent=2))
+          print(f'Release: ${{ inputs.release_name }}')
+          print(f'Agents: {len(agents)}')
+          print(f'Seal: {seal}')
+          "
+
+      - name: Stamp release into registry
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+
+          meta = json.loads(Path('/tmp/release_meta.json').read_text())
+          reg = json.loads(Path('registry.json').read_text())
+
+          # Add release stamp
+          if 'releases' not in reg:
+              reg['releases'] = []
+          reg['releases'].append(meta)
+          reg['latest_release'] = meta
+
+          Path('registry.json').write_text(json.dumps(reg, indent=2))
+          print(f'Stamped release: {meta[\"release_name\"]}')
+          "
+
+      - name: Compute version tag
+        id: tag
+        run: |
+          # Count existing releases to auto-increment
+          EXISTING=$(git tag -l 'v*' | wc -l | tr -d ' ')
+          NEXT=$((EXISTING + 1))
+          TYPE="${{ inputs.release_type }}"
+          if [ "$TYPE" = "canary" ]; then
+            TAG="v${NEXT}.0.0-canary.$(date +%Y%m%d)"
+          elif [ "$TYPE" = "hotfix" ]; then
+            TAG="v${NEXT}.0.1"
+          else
+            TAG="v${NEXT}.0.0"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "Tag: $TAG"
+
+      - name: Commit release stamp
+        run: |
+          git config user.name "RAPP Registry Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add registry.json
+          git diff --cached --quiet || git commit -m "Release ${{ inputs.release_name }} (${{ steps.tag.outputs.tag }}) [skip ci]"
+          git push
+
+      - name: Create GitHub release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const meta = JSON.parse(fs.readFileSync('/tmp/release_meta.json', 'utf8'));
+            const tag = '${{ steps.tag.outputs.tag }}';
+
+            // Create tag
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tag}`,
+              sha: context.sha
+            });
+
+            // Create release
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: `${{ inputs.release_name }} (${tag})`,
+              body: [
+                `## ${{ inputs.release_name }}`,
+                ``,
+                `| Metric | Value |`,
+                `|--------|-------|`,
+                `| Agents | ${meta.agent_count} |`,
+                `| Publishers | ${meta.publishers} |`,
+                `| Type | ${meta.release_type} |`,
+                `| Integrity Seal | \`${meta.integrity_seal}\` |`,
+                `| Timestamp | ${meta.timestamp} |`,
+                ``,
+                `### What's in this release`,
+                `Every agent in this release has passed:`,
+                `- Contract tests (manifest, class structure, perform())`,
+                `- Security scan (no eval/exec/subprocess/hardcoded secrets)`,
+                `- SHA256 integrity verification`,
+                `- Version immutability check`,
+                `- Staging is clean (all submissions reviewed)`,
+                ``,
+                `---`,
+                `*Released by the RAPP Agent Registry*`,
+              ].join('\n'),
+              prerelease: meta.release_type === 'canary',
+            });
+
+            console.log(`Release created: ${tag}`);

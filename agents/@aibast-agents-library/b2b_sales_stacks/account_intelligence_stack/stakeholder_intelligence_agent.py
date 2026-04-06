@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/stakeholder-intelligence",
+    "name": "@aibast-agents-library/stakeholder_intelligence",
     "version": "1.0.0",
     "display_name": "Stakeholder Intelligence",
     "description": "Maps org charts, analyzes buying committees, and scores relationship strength for enterprise accounts.",
@@ -32,7 +32,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

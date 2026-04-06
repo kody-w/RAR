@@ -15,6 +15,15 @@ REQUIRED_MANIFEST_FIELDS = [
 ]
 
 
+def test_filename_is_snake_case(agent_info):
+    mod, cls, path = agent_info
+    stem = path.stem.replace('.py', '')  # handle .py.card
+    assert '-' not in stem, (
+        f"{path.name}: filename uses dashes — must be snake_case "
+        f"(rename to {stem.replace('-', '_')}.py)"
+    )
+
+
 def test_has_manifest(agent_info):
     mod, cls, path = agent_info
     assert hasattr(mod, "__manifest__"), f"{path.name}: missing __manifest__"

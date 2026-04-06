@@ -1,0 +1,107 @@
+name: Approve Agent Submission
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: state-writer
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    # Only fires when admin adds 'approved' label to a pending submission
+    if: >
+      github.event.label.name == 'approved' &&
+      contains(github.event.issue.labels.*.name, 'agent-submission')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Promote staging → agents
+        id: promote
+        run: |
+          python -c "
+          import ast, json, shutil, sys, hashlib
+          from pathlib import Path
+
+          staging = Path('staging')
+          agents = Path('agents')
+          promoted = []
+
+          for py in staging.rglob('*.py'):
+              if py.name == '.gitkeep':
+                  continue
+              # Destination mirrors staging structure
+              rel = py.relative_to(staging)
+              dest = agents / rel
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              shutil.move(str(py), str(dest))
+              promoted.append(str(rel))
+              print(f'Promoted: {rel}')
+
+          # Clean empty staging dirs
+          for d in sorted(staging.rglob('*'), reverse=True):
+              if d.is_dir() and not any(d.iterdir()):
+                  d.rmdir()
+
+          if not promoted:
+              print('Nothing to promote')
+              sys.exit(0)
+
+          # Write list for downstream steps
+          Path('/tmp/promoted.txt').write_text('\n'.join(promoted))
+          print(f'Total promoted: {len(promoted)}')
+          "
+
+      - name: Forge cards for approved agents
+        run: |
+          if [ -f /tmp/promoted.txt ]; then
+            python scripts/generate_holo_cards.py
+          fi
+
+      - name: Build registry
+        run: python build_registry.py
+
+      - name: Commit approved agents
+        run: |
+          git config user.name "RAPP Registry Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add agents/ staging/ registry.json cards/ || true
+          if ! git diff --cached --quiet; then
+            PROMOTED=$(cat /tmp/promoted.txt 2>/dev/null || echo "agents")
+            git pull --rebase origin main || true
+            git commit -m "Approved agent submission from #${{ github.event.issue.number }} [skip ci]"
+            for i in 1 2 3 4 5; do
+              git push && break
+              echo "Push attempt $i failed, rebasing..."
+              git pull --rebase origin main
+            done
+          fi
+
+      - name: Close issue as approved
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.issue.number;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: '✅ **Approved and forged.** Agent promoted to the registry. Card details determined by the forge based on the agent code.\n\nWelcome to RAR.'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              state: 'closed',
+              labels: ['approved', 'forged']
+            });

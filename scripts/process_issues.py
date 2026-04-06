@@ -29,6 +29,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = REPO_ROOT / "state"
 AGENTS_DIR = REPO_ROOT / "agents"
+STAGING_DIR = REPO_ROOT / "staging"
 VOTES_FILE = STATE_DIR / "votes.json"
 REVIEWS_FILE = STATE_DIR / "reviews.json"
 
@@ -247,7 +248,11 @@ def handle_review(payload: dict, user: str) -> dict:
 
 
 def handle_submit_agent(payload: dict, user: str) -> dict:
-    """Process an agent submission. Validates manifest and writes file."""
+    """Process an agent submission. Validates manifest and writes to staging/.
+
+    Agents land in staging/ for review — NOT in agents/.
+    Admin approval (via label or workflow) promotes staging → agents and triggers card forge.
+    """
     code = payload.get("code", "")
     if not code or not code.strip():
         return {"error": "Agent code is required"}
@@ -272,6 +277,13 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     publisher = parts[0]
     slug = parts[1]
 
+    # Enforce snake_case filename
+    if '-' in slug:
+        return {
+            "error": f"Agent slug '{slug}' contains dashes — must be snake_case "
+                     f"(e.g., '{slug.replace('-', '_')}')"
+        }
+
     # Namespace check: publisher must match GitHub username,
     # UNLESS the issue title explicitly declares the agent name (e.g. [AGENT] @borg/sherlock).
     # This allows maintainers to grant namespace access by accepting the issue.
@@ -284,14 +296,11 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
                      f"issue title: [AGENT] {name}"
         }
 
-    # Build file path
-    agent_dir = AGENTS_DIR / publisher
-    agent_file = agent_dir / f"{slug}.py"
-
+    # Check if already in agents/ — version must be greater
+    agent_file = AGENTS_DIR / publisher / f"{slug}.py"
     if agent_file.exists():
         existing_manifest = extract_manifest_from_code(agent_file.read_text())
         if existing_manifest:
-            # Version must be greater
             new_v = manifest.get("version", "0.0.0")
             old_v = existing_manifest.get("version", "0.0.0")
             if new_v <= old_v:
@@ -299,10 +308,18 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
                     "error": f"Version {new_v} must be greater than existing {old_v}"
                 }
 
-    agent_dir.mkdir(parents=True, exist_ok=True)
-    agent_file.write_text(code)
+    # Write to staging/ — NOT agents/. Approval promotes it later.
+    staging_dir = STAGING_DIR / publisher
+    staging_file = staging_dir / f"{slug}.py"
+    staging_dir.mkdir(parents=True, exist_ok=True)
+    staging_file.write_text(code)
 
-    return {"ok": True, "agent": name, "file": str(agent_file.relative_to(REPO_ROOT))}
+    return {
+        "ok": True,
+        "agent": name,
+        "file": str(staging_file.relative_to(REPO_ROOT)),
+        "status": "pending_review",
+    }
 
 
 # ──────────────────────────────────────────────────────────────────────

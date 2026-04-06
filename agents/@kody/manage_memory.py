@@ -15,7 +15,7 @@ __manifest__ = {
     "category": "core",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

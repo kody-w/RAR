@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/sharepoint-document-extractor",
+    "name": "@aibast-agents-library/sharepoint_document_extractor",
     "version": "1.0.0",
     "display_name": "SharePoint Document Extractor",
     "description": "SharePoint document search, URL extraction, metadata enrichment, and link validation.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

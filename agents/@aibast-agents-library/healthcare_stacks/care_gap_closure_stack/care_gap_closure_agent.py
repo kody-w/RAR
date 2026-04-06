@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/care-gap-closure",
+    "name": "@aibast-agents-library/care_gap_closure",
     "version": "1.0.0",
     "display_name": "Care Gap Closure Agent",
     "description": "Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "healthcare",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

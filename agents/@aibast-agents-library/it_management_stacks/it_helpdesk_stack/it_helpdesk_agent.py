@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/it-helpdesk",
+    "name": "@aibast-agents-library/it_helpdesk",
     "version": "1.0.0",
     "display_name": "IT Helpdesk",
     "description": "AI-powered IT helpdesk with automated troubleshooting, knowledge retrieval, remote remediation, and ticket management.",
@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "it_management",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

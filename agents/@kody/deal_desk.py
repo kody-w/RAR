@@ -13,7 +13,7 @@ One prompt. Full deal intelligence. No CRM required.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/deal-desk",
+    "name": "@kody/deal_desk",
     "version": "1.0.0",
     "display_name": "DealDesk",
     "description": "B2B sales intelligence deck — runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAR sales agents for deeper workflow.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

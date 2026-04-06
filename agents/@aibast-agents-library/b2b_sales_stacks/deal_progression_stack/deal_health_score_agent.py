@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/deal-health-score",
+    "name": "@aibast-agents-library/deal_health_score",
     "version": "1.0.0",
     "display_name": "Deal Health Score",
     "description": "Calculates deal health scores, trend analysis, benchmark comparison, and health alerts.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

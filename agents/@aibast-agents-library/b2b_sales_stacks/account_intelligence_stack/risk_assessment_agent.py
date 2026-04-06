@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/account-risk-assessment",
+    "name": "@aibast-agents-library/account_risk_assessment",
     "version": "1.0.0",
     "display_name": "Account Risk Assessment",
     "description": "Assesses deal risk, churn probability, and financial health with mitigation recommendations.",
@@ -32,7 +32,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

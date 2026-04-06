@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/deal-progression",
+    "name": "@aibast-agents-library/deal_progression",
     "version": "1.0.0",
     "display_name": "Deal Progression",
     "description": "Pipeline health analysis, stalled-deal detection, action plan generation, and pipeline acceleration.",
@@ -31,7 +31,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

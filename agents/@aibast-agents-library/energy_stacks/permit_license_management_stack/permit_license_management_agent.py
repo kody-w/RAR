@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/permit-license-management",
+    "name": "@aibast-agents-library/permit_license_management",
     "version": "1.0.0",
     "display_name": "Permit & License Management Agent",
     "description": "Tracks permits and licenses across energy facilities, manages renewal calendars, identifies compliance gaps, and monitors applications.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "energy",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

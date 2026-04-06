@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/resource-utilization",
+    "name": "@aibast-agents-library/resource_utilization",
     "version": "1.0.0",
     "display_name": "Resource Utilization Agent",
     "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "professional_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

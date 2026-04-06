@@ -20,7 +20,7 @@ from basic_agent import BasicAgent
 # ===================================================================
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/activity-gap",
+    "name": "@aibast-agents-library/activity_gap",
     "version": "1.0.0",
     "display_name": "Activity Gap Analyzer",
     "description": "Identifies missing sales activities per stage, evaluates completion, generates roadmaps, and analyzes gap impact.",
@@ -29,7 +29,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

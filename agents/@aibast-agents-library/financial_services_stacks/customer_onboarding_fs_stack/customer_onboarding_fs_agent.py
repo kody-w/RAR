@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/fs-customer-onboarding",
+    "name": "@aibast-agents-library/fs_customer_onboarding",
     "version": "1.0.0",
     "display_name": "FS Customer Onboarding Agent",
     "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

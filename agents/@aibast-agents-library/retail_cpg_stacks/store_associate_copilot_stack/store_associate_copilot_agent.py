@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/store-associate-copilot",
+    "name": "@aibast-agents-library/store_associate_copilot",
     "version": "1.0.0",
     "display_name": "Store Associate Copilot Agent",
     "description": (
@@ -35,7 +35,7 @@ __manifest__ = {
     "category": "retail_cpg",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

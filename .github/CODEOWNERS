@@ -1,0 +1,26 @@
+# Namespace ownership — PRs touching these paths require approval from owners.
+# This is the anti-squatting / supply-chain gate for RAR.
+
+# Core infrastructure — admin only
+build_registry.py              @kody-w
+CONSTITUTION.md                @kody-w
+rar.config.json                @kody-w
+skill.md                       @kody-w
+CLAUDE.md                      @kody-w
+.github/                       @kody-w
+scripts/                       @kody-w
+tests/                         @kody-w
+
+# Official base class
+agents/@rapp/                  @kody-w
+
+# Publisher namespaces — each publisher owns their directory
+agents/@kody/                  @kody-w
+agents/@kody-w/                @kody-w
+agents/@wildhaven/             @kody-w
+agents/@borg/                  @kody-w
+agents/@discreetRappers/       @kody-w
+agents/@aibast-agents-library/ @kody-w
+
+# Registry output — auto-generated, admin only
+registry.json                  @kody-w

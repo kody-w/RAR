@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/cart-abandonment-recovery",
+    "name": "@aibast-agents-library/cart_abandonment_recovery",
     "version": "1.0.0",
     "display_name": "Cart Abandonment Recovery Agent",
     "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "b2c_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

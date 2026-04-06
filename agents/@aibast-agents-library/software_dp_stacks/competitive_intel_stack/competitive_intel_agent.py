@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/software-competitive-intel",
+    "name": "@aibast-agents-library/software_competitive_intel",
     "version": "1.0.0",
     "display_name": "Competitive Intelligence Agent",
     "description": "AI-powered competitive intelligence for SaaS market landscape analysis, feature comparisons, pricing analysis, and threat assessments.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "software_digital_products",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

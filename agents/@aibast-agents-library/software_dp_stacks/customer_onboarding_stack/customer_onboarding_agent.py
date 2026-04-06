@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/software-customer-onboarding",
+    "name": "@aibast-agents-library/software_customer_onboarding",
     "version": "1.0.0",
     "display_name": "Customer Onboarding Agent",
     "description": "Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.",
@@ -23,7 +23,7 @@ __manifest__ = {
     "category": "software_digital_products",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

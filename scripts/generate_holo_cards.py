@@ -443,6 +443,52 @@ def gen_holo_art(name, category, rng):
     return ''.join(svg)
 
 
+def _add_type_system(card, agent):
+    """Add the new type system fields to any card (Howard or procedural).
+    NEVER removes existing fields — only adds new ones alongside them."""
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+    from rapp_sdk import (
+        _derive_types, _derive_stats, _derive_abilities,
+        AGENT_TYPES, TYPE_WEAKNESS, TYPE_RESISTANCE, EVOLUTION_STAGES,
+        TIER_TO_RARITY, RARITY_LABELS, RARITY_FLOOR,
+    )
+
+    agent_name = agent.get("name", card.get("agent_name", ""))
+    tier = agent.get("quality_tier", "community")
+    category = agent.get("category", "general")
+    tags = agent.get("tags", [])
+    deps = agent.get("dependencies", [])
+    env_vars = agent.get("requires_env", [])
+    version_str = agent.get("version", "1.0.0")
+    description = agent.get("description", "")
+
+    types = _derive_types(category, tags)
+    primary_type = types[0]
+    stats = _derive_stats(agent_name, tier, tags, deps, env_vars, version_str, description)
+    abilities = _derive_abilities(agent_name, tags, category, tier)
+    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
+
+    card["agent_types"] = types
+    card["type_colors"] = [AGENT_TYPES[t]["color"] for t in types]
+    card["hp"] = stats["hp"]
+    card["stats"] = stats
+    card["typed_abilities"] = abilities
+    card["weakness"] = TYPE_WEAKNESS.get(primary_type, "LOGIC")
+    card["weakness_label"] = AGENT_TYPES[card["weakness"]]["label"]
+    card["resistance"] = TYPE_RESISTANCE.get(primary_type, "DATA")
+    card["resistance_label"] = AGENT_TYPES[card["resistance"]]["label"]
+    card["retreat_cost"] = min(4, len(deps))
+    card["evolution"] = evo
+    card["tier"] = tier
+    card["rarity_tier"] = TIER_TO_RARITY.get(tier, "core")
+    card["rarity_label"] = RARITY_LABELS.get(card["rarity_tier"], "Core")
+    card["floor_pts"] = RARITY_FLOOR.get(card["rarity_tier"], 10)
+    card["seed"] = seed_hash(agent_name)
+
+    return card
+
+
 def generate_card(agent, rng):
     """Generate a full HOLO card for an agent using Howard's schema."""
     name = agent["display_name"]
@@ -594,12 +640,16 @@ def main():
             svg = svg.replace('id="bg"', f'id="bg-{uid}"').replace('url(#bg)', f'url(#bg-{uid})')
             svg = svg.replace('id="glow"', f'id="gl-{uid}"').replace('url(#glow)', f'url(#gl-{uid})')
             card["avatar_svg"] = svg
+            # Add type system fields alongside Howard's originals
+            _add_type_system(card, agent)
             cards[agent["name"]] = card
             howard_count += 1
         else:
             # Generate a new card using Howard's schema
             rng = mulberry32(seed_hash(agent["name"] + "_holo"))
             card = generate_card(agent, rng)
+            # Add type system fields alongside procedural card fields
+            _add_type_system(card, agent)
             cards[agent["name"]] = card
             generated_count += 1
 

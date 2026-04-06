@@ -18,7 +18,7 @@ It protects the Three Rules: Free Shade, Your Stamp, Sovereign Roots.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@wildhaven/ceo-agent",
+    "name": "@wildhaven/ceo_agent",
     "version": "1.0.0",
     "display_name": "CEO Agent",
     "description": "Molly Wildfeuer's digital twin — the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "core",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 
@@ -56,7 +56,7 @@ _COMPANY = {
 
 _PORTFOLIO = {
     "founding_cards": 116,
-    "superseed": "@rapp/basic-agent",
+    "superseed": "@rapp/basic_agent",
     "superseed_multiplier": 200,
     "superseed_btc": 200.0,
     "total_btc": 206.20,

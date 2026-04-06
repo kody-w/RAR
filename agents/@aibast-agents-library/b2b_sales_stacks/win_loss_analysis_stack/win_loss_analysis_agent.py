@@ -22,7 +22,7 @@ from datetime import datetime
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/win-loss-analysis",
+    "name": "@aibast-agents-library/win_loss_analysis",
     "version": "1.0.0",
     "display_name": "Win/Loss Analysis",
     "description": "AI-powered win/loss analysis with pattern recognition, competitive insights, revenue recovery modeling, and board-ready presentations.",
@@ -31,7 +31,7 @@ __manifest__ = {
     "category": "b2b_sales",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

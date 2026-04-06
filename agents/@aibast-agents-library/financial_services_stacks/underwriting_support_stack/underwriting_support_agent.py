@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/underwriting-support",
+    "name": "@aibast-agents-library/underwriting_support",
     "version": "1.0.0",
     "display_name": "Underwriting Support Agent",
     "description": "Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------

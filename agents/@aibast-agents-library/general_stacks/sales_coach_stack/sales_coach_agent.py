@@ -18,7 +18,7 @@ from basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/sales-coach",
+    "name": "@aibast-agents-library/sales_coach",
     "version": "1.0.0",
     "display_name": "Sales Coach",
     "description": "AI-powered sales coaching with call reviews, skill assessments, coaching plans, and performance dashboards.",
@@ -27,7 +27,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

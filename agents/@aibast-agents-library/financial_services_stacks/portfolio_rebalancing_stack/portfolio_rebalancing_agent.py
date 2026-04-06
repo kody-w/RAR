@@ -13,7 +13,7 @@ from basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/portfolio-rebalancing",
+    "name": "@aibast-agents-library/portfolio_rebalancing",
     "version": "1.0.0",
     "display_name": "Portfolio Rebalancing Agent",
     "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
@@ -22,7 +22,7 @@ __manifest__ = {
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 # ---------------------------------------------------------------------------
