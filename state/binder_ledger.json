@@ -1,6 +1,12 @@
 {
   "schema": "rar-binder-ledger/1.0",
   "description": "Public ledger of registered binders. GitHub username = identity. Binder repos can be public or private.",
-  "binders": {},
-  "updated_at": ""
+  "binders": {
+    "rappter1": {
+      "namespace": "@borg",
+      "repo": "",
+      "registered_at": "2026-04-06T20:58:15.967351+00:00"
+    }
+  },
+  "updated_at": "2026-04-06T20:58:15.967364+00:00"
 }
