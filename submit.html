@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit Agent — RAPP</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --border-hover: #484f58;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-muted: #656d76;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.15rem; font-weight: 700; text-decoration: none; color: var(--text);
+}
+.logo:hover { text-decoration: none; }
+.logo-mark {
+  background: linear-gradient(135deg, var(--accent), #bc8cff);
+  color: #fff; width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 800;
+}
+.header-right { display: flex; align-items: center; gap: 12px; }
+#user-area { font-size: .85rem; }
+.user-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: 4px 12px 4px 4px; border-radius: 20px;
+}
+.user-pill img { width: 26px; height: 26px; border-radius: 50%; }
+.user-pill .logout { color: var(--text-muted); cursor: pointer; margin-left: 4px; font-size: .75rem; }
+.user-pill .logout:hover { color: var(--red); }
+
+.container { max-width: 640px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+.subtitle { color: var(--text-dim); font-size: .95rem; margin-bottom: 32px; }
+
+.step-label {
+  font-size: .85rem; font-weight: 600; color: var(--text-dim); margin-bottom: 8px;
+}
+.step { margin-bottom: 28px; }
+
+.drop-zone {
+  border: 2px dashed var(--border); border-radius: 12px; padding: 48px 24px;
+  text-align: center; cursor: pointer; transition: border-color .2s;
+}
+.drop-zone:hover { border-color: var(--border-hover); }
+.drop-zone.over { border-color: var(--accent); background: rgba(88,166,255,.04); }
+.drop-zone .icon { font-size: 2.5rem; margin-bottom: 8px; opacity: .4; }
+.drop-zone .label { font-size: 1rem; color: var(--text-dim); font-weight: 500; }
+.drop-zone .hint { font-size: .78rem; color: var(--text-muted); margin-top: 6px; }
+
+.file-info {
+  display: none; margin-top: 12px; padding: 12px 16px;
+  background: var(--surface2); border-radius: 8px;
+  font-size: .85rem; color: var(--accent);
+}
+.file-info .name { font-weight: 600; }
+.file-info .change {
+  background: none; border: none; color: var(--text-muted);
+  cursor: pointer; font-size: .8rem; float: right;
+}
+.file-info .change:hover { color: var(--text); }
+
+.preview {
+  display: none; margin-top: 12px; padding: 14px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  font-size: .82rem;
+}
+.preview .field { margin-bottom: 6px; }
+.preview .field .k { color: var(--text-muted); min-width: 90px; display: inline-block; }
+.preview .ok { color: var(--green); }
+.preview .err { color: var(--red); }
+
+.submit-btn {
+  width: 100%; padding: 14px; border: none; border-radius: 10px;
+  background: var(--accent); color: #fff; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: opacity .15s;
+}
+.submit-btn:hover { opacity: .85; }
+.submit-btn:disabled { opacity: .4; cursor: default; }
+
+.result { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; font-size: .9rem; }
+.result.success { background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.3); color: var(--green); }
+.result.error { background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.3); color: var(--red); }
+
+.note {
+  color: var(--text-muted); font-size: .78rem; margin-top: 12px; text-align: center;
+  line-height: 1.6;
+}
+
+.gh-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #24292e; color: #fff; padding: 12px 28px; border-radius: 10px;
+  font-size: .9rem; font-weight: 700; border: none; cursor: pointer;
+  transition: background .15s;
+}
+.gh-btn:hover { background: #2d3339; }
+.gh-btn svg { width: 20px; height: 20px; fill: #fff; }
+
+.auth-prompt { text-align: center; padding: 20px 0; }
+.auth-prompt p { color: var(--text-dim); font-size: .88rem; margin-bottom: 16px; }
+
+@media (max-width: 640px) {
+  header { padding: 12px 16px; }
+  .container { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <div class="logo-mark">R</div>
+    <span>RAPP</span>
+  </a>
+  <div class="header-right">
+    <div id="user-area"></div>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Submit Your Agent</h1>
+  <p class="subtitle">Build an agent with any LLM, drop the <code>.py</code> file here. We handle the rest.</p>
+
+  <div id="auth-gate">
+    <div class="auth-prompt">
+      <p>Sign in with GitHub to submit agents to the registry.</p>
+      <button class="gh-btn" onclick="login()">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Sign in with GitHub
+      </button>
+    </div>
+  </div>
+
+  <div id="submit-form" style="display:none">
+    <div class="step">
+      <div class="step-label">1. Drop your agent file</div>
+      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+        <div class="icon">+</div>
+        <div class="label">Drop your <code>_agent.py</code> here</div>
+        <div class="hint">or click to browse</div>
+        <input type="file" id="file-input" accept=".py" style="display:none">
+      </div>
+      <div class="file-info" id="file-info">
+        <span class="name" id="file-name"></span>
+        <button class="change" onclick="clearFile()">change</button>
+      </div>
+      <div class="preview" id="preview"></div>
+    </div>
+
+    <div class="step">
+      <div class="step-label">2. Submit</div>
+      <button class="submit-btn" id="submit-btn" onclick="submit()" disabled>Submit Agent</button>
+      <div class="note">
+        Your agent goes to staging for review. Once approved, it joins the registry.
+      </div>
+    </div>
+
+    <div class="result" id="result"></div>
+  </div>
+</div>
+
+<script>
+const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
+const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
+let OWNER = 'kody-w', REPO_NAME = 'RAR', REPO = 'kody-w/RAR';
+let ghToken = localStorage.getItem('rb_access_token');
+let ghUser = null;
+let agentCode = '';
+
+async function loadConfig() {
+  try {
+    const r = await fetch('rar.config.json?t=' + Date.now());
+    if (r.ok) {
+      const cfg = await r.json();
+      if (cfg.owner) OWNER = cfg.owner;
+      if (cfg.repo) REPO_NAME = cfg.repo;
+      REPO = `${OWNER}/${REPO_NAME}`;
+    }
+  } catch {}
+}
+
+async function handleAuthCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+  window.history.replaceState({}, '', window.location.href.split('?')[0]);
+  try {
+    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await resp.json();
+    if (data.access_token) {
+      ghToken = data.access_token;
+      localStorage.setItem('rb_access_token', ghToken);
+    }
+  } catch {}
+}
+
+async function checkAuth() {
+  if (!ghToken) return;
+  try {
+    const r = await fetch('https://api.github.com/user', { headers: { Authorization: `Bearer ${ghToken}` } });
+    if (r.ok) {
+      ghUser = await r.json();
+      document.getElementById('auth-gate').style.display = 'none';
+      document.getElementById('submit-form').style.display = 'block';
+      document.getElementById('user-area').innerHTML = `
+        <div class="user-pill">
+          <img src="${ghUser.avatar_url}" alt="">
+          <span>@${ghUser.login}</span>
+          <span class="logout" onclick="logout()">sign out</span>
+        </div>`;
+    } else {
+      ghToken = null;
+      localStorage.removeItem('rb_access_token');
+    }
+  } catch {}
+}
+
+function login() {
+  const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo`;
+  window.location.href = url;
+}
+
+function logout() {
+  ghToken = null; ghUser = null;
+  localStorage.removeItem('rb_access_token');
+  document.getElementById('auth-gate').style.display = 'block';
+  document.getElementById('submit-form').style.display = 'none';
+  document.getElementById('user-area').innerHTML = '';
+}
+
+// File handling
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+
+fileInput.addEventListener('change', e => { if (e.target.files[0]) loadFile(e.target.files[0]); });
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+function loadFile(file) {
+  if (!file.name.endsWith('.py')) {
+    showResult('Only .py files accepted.', true); return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    agentCode = reader.result;
+    document.getElementById('file-name').textContent = file.name;
+    document.getElementById('file-info').style.display = 'block';
+    dropZone.style.display = 'none';
+    parsePreview();
+  };
+  reader.readAsText(file);
+}
+
+function clearFile() {
+  agentCode = '';
+  document.getElementById('file-info').style.display = 'none';
+  document.getElementById('preview').style.display = 'none';
+  document.getElementById('submit-btn').disabled = true;
+  dropZone.style.display = 'block';
+  fileInput.value = '';
+  hideResult();
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function parsePreview() {
+  const preview = document.getElementById('preview');
+  const nameMatch = agentCode.match(/"name"\s*:\s*"([^"]+)"/);
+  const dispMatch = agentCode.match(/"display_name"\s*:\s*"([^"]+)"/);
+  const descMatch = agentCode.match(/"description"\s*:\s*"([^"]+)"/);
+  const verMatch = agentCode.match(/"version"\s*:\s*"([^"]+)"/);
+  const catMatch = agentCode.match(/"category"\s*:\s*"([^"]+)"/);
+  const hasManifest = agentCode.includes('__manifest__');
+  const hasBasicAgent = /class\s+\w+\s*\(\s*BasicAgent\s*\)/.test(agentCode);
+  const hasPerform = /def\s+perform\s*\(/.test(agentCode);
+
+  let h = '';
+  if (nameMatch) h += `<div class="field"><span class="k">Name:</span> ${esc(nameMatch[1])}</div>`;
+  if (dispMatch) h += `<div class="field"><span class="k">Display:</span> ${esc(dispMatch[1])}</div>`;
+  if (descMatch) h += `<div class="field"><span class="k">Description:</span> ${esc(descMatch[1])}</div>`;
+  if (verMatch) h += `<div class="field"><span class="k">Version:</span> ${esc(verMatch[1])}</div>`;
+  if (catMatch) h += `<div class="field"><span class="k">Category:</span> ${esc(catMatch[1].replace(/_/g, ' '))}</div>`;
+  h += `<div class="field">${hasManifest ? '<span class="ok">&#10003; __manifest__</span>' : '<span class="err">&#10007; Missing __manifest__</span>'}</div>`;
+  h += `<div class="field">${hasBasicAgent ? '<span class="ok">&#10003; BasicAgent</span>' : '<span class="err">&#10007; Missing BasicAgent</span>'}</div>`;
+  h += `<div class="field">${hasPerform ? '<span class="ok">&#10003; perform()</span>' : '<span class="err">&#10007; Missing perform()</span>'}</div>`;
+
+  preview.innerHTML = h;
+  preview.style.display = 'block';
+
+  const valid = hasManifest && hasBasicAgent && hasPerform && nameMatch;
+  document.getElementById('submit-btn').disabled = !valid;
+
+  // Auto-fill namespace
+  if (ghUser && agentCode.includes('@your_username/')) {
+    agentCode = agentCode.replaceAll('@your_username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
+    parsePreview();
+  }
+}
+
+async function submit() {
+  if (!ghUser || !agentCode.trim()) return;
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Submitting...';
+  hideResult();
+
+  const nameMatch = agentCode.match(/"name"\s*:\s*"([^"]+)"/);
+  const agentName = nameMatch?.[1] || 'agent';
+  const body = JSON.stringify({ action: 'submit_agent', payload: { code: agentCode } }, null, 2);
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: `[AGENT] ${agentName}`,
+        body: '```json\n' + body + '\n```'
+      })
+    });
+    if (res.ok) {
+      const issue = await res.json();
+      showResult(`Submitted! <a href="${issue.html_url}" target="_blank">Issue #${issue.number}</a> created. Your agent is in staging for review.`, false);
+      clearFile();
+    } else {
+      const err = await res.json().catch(() => ({}));
+      showResult('Submission failed: ' + (err.message || res.status), true);
+    }
+  } catch (e) {
+    showResult('Network error: ' + e.message, true);
+  }
+  btn.disabled = false; btn.textContent = 'Submit Agent';
+}
+
+function showResult(msg, isError) {
+  const el = document.getElementById('result');
+  el.className = 'result ' + (isError ? 'error' : 'success');
+  el.innerHTML = msg;
+  el.style.display = 'block';
+}
+
+function hideResult() {
+  document.getElementById('result').style.display = 'none';
+}
+
+async function init() {
+  await loadConfig();
+  await handleAuthCallback();
+  await checkAuth();
+}
+
+init();
+</script>
+</body>
+</html>
