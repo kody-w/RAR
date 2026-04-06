@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity</title>
+<meta name="description" content="A protocol for single-file AI agent distribution, identity, and collection without central infrastructure.">
+
+<!-- OpenGraph -->
+<meta property="og:title" content="RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
+<meta property="og:description" content="A protocol for single-file AI agent distribution, identity, and collection without central infrastructure. Every agent is one file. Every file has a seed. Every seed reconstructs a card.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kody-w.github.io/RAR/whitepaper.html">
+<meta property="og:image" content="https://kody-w.github.io/RAR/og-whitepaper.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
+<meta name="twitter:description" content="Every agent is one file. Every file has a seed. Every seed reconstructs a card. No server required.">
+
+<style>
+:root {
+  --bg: #0d1117;
+  --s1: #161b22;
+  --s2: #21262d;
+  --bd: #30363d;
+  --tx: #c9d1d9;
+  --h: #e6edf3;
+  --dim: #8b949e;
+  --acc: #58a6ff;
+  --grn: #3fb950;
+  --org: #d29922;
+  --pur: #bc8cff;
+  --red: #f85149;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--tx);
+  min-height: 100vh;
+  line-height: 1.85;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 72px 32px 100px;
+}
+
+/* Header */
+.paper-header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--bd);
+}
+
+.paper-title {
+  font-size: 28px;
+  color: var(--h);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.paper-subtitle {
+  font-size: 16px;
+  color: var(--dim);
+  font-style: italic;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.paper-meta {
+  font-size: 13px;
+  color: var(--dim);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.paper-meta span {
+  color: var(--acc);
+}
+
+/* Table of Contents */
+.toc {
+  background: var(--s1);
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 56px;
+}
+
+.toc-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--dim);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  margin-bottom: 14px;
+}
+
+.toc ol {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.toc li {
+  margin-bottom: 7px;
+  font-size: 14px;
+  break-inside: avoid;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.toc a {
+  color: var(--acc);
+  text-decoration: none;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.toc a:hover { text-decoration: underline; }
+
+.toc-num {
+  color: var(--dim);
+  font-size: 12px;
+  min-width: 20px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 56px;
+}
+
+.section-number {
+  font-size: 12px;
+  color: var(--dim);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 22px;
+  color: var(--h);
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bd);
+}
+
+h3 {
+  font-size: 17px;
+  color: var(--h);
+  font-weight: 400;
+  margin: 28px 0 12px;
+  font-style: italic;
+}
+
+p {
+  font-size: 16.5px;
+  margin-bottom: 18px;
+  color: var(--tx);
+}
+
+p:last-child { margin-bottom: 0; }
+
+strong { color: var(--h); font-weight: 600; }
+em { color: var(--dim); }
+
+/* Accent text */
+.accent { color: var(--acc); }
+.green { color: var(--grn); }
+.purple { color: var(--pur); }
+.gold { color: var(--org); }
+
+/* Code */
+code {
+  font-family: 'SF Mono', 'Fira Code', Consolas, Menlo, monospace;
+  background: var(--s2);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--acc);
+}
+
+pre {
+  background: var(--s1);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+  font-family: 'SF Mono', 'Fira Code', Consolas, Menlo, monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--tx);
+}
+
+pre .comment { color: var(--dim); }
+pre .key { color: var(--acc); }
+pre .val { color: var(--grn); }
+pre .kw { color: var(--pur); }
+pre .str { color: var(--org); }
+
+/* Bit layout diagram */
+.bit-diagram {
+  background: var(--s1);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-family: 'SF Mono', 'Fira Code', Consolas, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.9;
+  overflow-x: auto;
+}
+
+.bit-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.bit-range {
+  color: var(--dim);
+  min-width: 80px;
+  font-size: 11.5px;
+}
+
+.bit-field {
+  color: var(--acc);
+  min-width: 150px;
+}
+
+.bit-desc {
+  color: var(--tx);
+  font-size: 12px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14.5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+th {
+  background: var(--s1);
+  color: var(--h);
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid var(--bd);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 9px 14px;
+  border: 1px solid var(--bd);
+  color: var(--tx);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+/* Type swatches */
+.type-logic { color: #58a6ff; }
+.type-data { color: #3fb950; }
+.type-social { color: #e3b341; }
+.type-shield { color: #e6edf3; }
+.type-craft { color: #f85149; }
+.type-heal { color: #ff9ecb; }
+.type-wealth { color: #bc8cff; }
+
+/* Blockquote / call-out */
+blockquote {
+  border-left: 3px solid var(--acc);
+  padding: 12px 22px;
+  margin: 28px 0;
+  font-style: italic;
+  color: var(--dim);
+  font-size: 16px;
+}
+
+/* Divider */
+.break {
+  text-align: center;
+  color: var(--bd);
+  margin: 48px 0;
+  letter-spacing: 10px;
+  font-size: 11px;
+  font-family: -apple-system, sans-serif;
+}
+
+/* Tier badges */
+.tier {
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tier-community { background: rgba(88,166,255,.12); color: var(--acc); border: 1px solid rgba(88,166,255,.3); }
+.tier-verified { background: rgba(63,185,80,.12); color: var(--grn); border: 1px solid rgba(63,185,80,.3); }
+.tier-official { background: rgba(188,140,255,.12); color: var(--pur); border: 1px solid rgba(188,140,255,.3); }
+.tier-experimental { background: rgba(139,148,158,.1); color: var(--dim); border: 1px solid rgba(139,148,158,.25); }
+
+/* References */
+.references ol {
+  padding-left: 24px;
+  list-style: decimal;
+}
+
+.references li {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--dim);
+}
+
+.references a {
+  color: var(--acc);
+  text-decoration: none;
+}
+
+.references a:hover { text-decoration: underline; }
+
+/* Footer nav */
+.footer {
+  margin-top: 80px;
+  padding-top: 28px;
+  border-top: 1px solid var(--bd);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  color: var(--acc);
+  text-decoration: none;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  padding: 5px 12px;
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  transition: border-color .15s, background .15s;
+}
+
+.footer-links a:hover {
+  border-color: var(--acc);
+  background: rgba(88,166,255,.06);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--dim);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* Annotation box */
+.note {
+  background: rgba(88,166,255,.06);
+  border: 1px solid rgba(88,166,255,.2);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 14.5px;
+  color: var(--dim);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.note strong { color: var(--acc); }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .page { padding: 40px 20px 72px; }
+  .paper-title { font-size: 22px; }
+  .paper-subtitle { font-size: 15px; }
+  h2 { font-size: 19px; }
+  p { font-size: 15.5px; }
+  .toc ol { columns: 1; }
+  pre { padding: 14px 16px; font-size: 12.5px; }
+  .bit-diagram { font-size: 11.5px; }
+  table { font-size: 13px; }
+  th, td { padding: 7px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ─── Header ─────────────────────────────────────────────────────────────── -->
+<div class="paper-header">
+  <h1 class="paper-title">RAR: A Peer-to-Peer Agent Registry<br>with Deterministic Card Identity</h1>
+  <p class="paper-subtitle">A protocol for single-file AI agent distribution, identity,<br>and collection without central infrastructure</p>
+  <div class="paper-meta">
+    Published: <span>April 2026</span> &nbsp;·&nbsp;
+    Protocol: <span>rapp-agent/1.0</span> &nbsp;·&nbsp;
+    Status: <span>Live</span>
+  </div>
+</div>
+
+<!-- ─── Table of Contents ───────────────────────────────────────────────────── -->
+<div class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#abstract"><span class="toc-num">1</span> Abstract</a></li>
+    <li><a href="#introduction"><span class="toc-num">2</span> Introduction</a></li>
+    <li><a href="#single-file"><span class="toc-num">3</span> The Single-File Agent</a></li>
+    <li><a href="#manifest"><span class="toc-num">4</span> The Manifest Schema</a></li>
+    <li><a href="#registry"><span class="toc-num">5</span> The Registry</a></li>
+    <li><a href="#seed-protocol"><span class="toc-num">6</span> The Seed Protocol</a></li>
+    <li><a href="#type-system"><span class="toc-num">7</span> The Type System</a></li>
+    <li><a href="#card-anatomy"><span class="toc-num">8</span> Card Anatomy</a></li>
+    <li><a href="#submission"><span class="toc-num">9</span> The Submission Protocol</a></li>
+    <li><a href="#federation"><span class="toc-num">10</span> Federation</a></li>
+    <li><a href="#ownership"><span class="toc-num">10.1</span> Public Seeds, Private Ownership</a></li>
+    <li><a href="#security"><span class="toc-num">11</span> Security Model</a></li>
+    <li><a href="#offline"><span class="toc-num">12</span> Offline-First Design</a></li>
+    <li><a href="#tiers"><span class="toc-num">13</span> Quality Tiers and Evolution</a></li>
+    <li><a href="#conclusion"><span class="toc-num">14</span> Conclusion</a></li>
+    <li><a href="#references"><span class="toc-num">15</span> References</a></li>
+  </ol>
+</div>
+
+<!-- ─── 1. Abstract ─────────────────────────────────────────────────────────── -->
+<div class="section" id="abstract">
+  <div class="section-number">Section 1</div>
+  <h2>Abstract</h2>
+  <p>We propose RAR — the RAPP Agent Registry — a protocol for distributing AI agents as single Python files with deterministic, manifest-derived card identities. Every agent is one file. Every file contains a structured manifest that can be extracted without executing any code. Every manifest produces a 64-bit seed. Every seed, applied to a fixed resolution algorithm, reconstructs a complete card identity: type, stats, abilities, rarity, and flavor — identical across every node that holds the file. No server is required to read the registry. No server is required to resolve a card. The protocol is fully operational from a static file system, a local git clone, or a browser loading resources from <code>file://</code>. The registry grows through federated GitHub repositories governed by the same protocol specification. This document defines the protocol in full.</p>
+</div>
+
+<!-- ─── 2. Introduction ─────────────────────────────────────────────────────── -->
+<div class="section" id="introduction">
+  <div class="section-number">Section 2</div>
+  <h2>Introduction</h2>
+
+  <p>AI agents exist. The problem is not capability — the problem is distribution. To use an AI agent today, a developer must navigate API tokens, SDK versioning, dependency managers, container runtimes, and cloud billing dashboards. A researcher must clone repositories with dozens of transitive dependencies and hope the Python version matches. A teacher must understand what a virtual environment is before they can run the first line.</p>
+
+  <p>This is not a tooling failure. It is an architectural failure. The unit of AI distribution is currently a <em>service</em> — hosted, gated, metered, ephemeral. Services require infrastructure to exist. Infrastructure requires operators. Operators can disappear. When they do, the agents go with them.</p>
+
+  <p>The correct unit of AI distribution is a <strong>file</strong>.</p>
+
+  <p>A file can be copied. A file can be emailed. A file can be stored on a USB drive and handed to someone who has never connected to the internet. A file does not require a server to exist. A file does not expire. A file is the most durable, portable, universally-understood artifact in computing.</p>
+
+  <p>RAR is built on this premise. It defines a protocol where every AI agent is one Python file, every file is self-describing through an embedded manifest, and every manifest deterministically produces a card identity that travels with the file forever. The registry is a static JSON document. The store is a single HTML file. The entire system works offline.</p>
+
+  <p>The goal is a distribution model that scales to all of humanity — not just engineers at technology companies.</p>
+</div>
+
+<!-- ─── 3. The Single-File Agent ────────────────────────────────────────────── -->
+<div class="section" id="single-file">
+  <div class="section-number">Section 3</div>
+  <h2>The Single-File Agent</h2>
+
+  <p>The protocol mandates a strict structure. Each agent is exactly one <code>.py</code> file. The path convention is <code>agents/@publisher/agent-slug_agent.py</code> — lowercase, kebab-case slug, required <code>_agent.py</code> suffix. No subdirectories. No companion files. No build artifacts.</p>
+
+  <p>The file contains four required components, in order:</p>
+
+  <h3>1. A docstring</h3>
+  <p>The module-level docstring is the agent's documentation. It is free-form text. There is no separate README. There is no wiki page. The docstring is the record.</p>
+
+  <h3>2. A <code>__manifest__</code> dict</h3>
+  <p>A module-level Python dict named <code>__manifest__</code> containing structured metadata. This dict is the package manifest, the card specification, and the identity anchor — all in one. It is extracted via Abstract Syntax Tree (AST) parsing. The file is never imported. The code is never executed during registration. This means a malicious agent cannot influence the registry by executing code at import time.</p>
+
+  <h3>3. A class inheriting <code>BasicAgent</code></h3>
+  <p>The agent class must inherit from <code>BasicAgent</code> imported from <code>agents.basic_agent</code>. This is the base class in the CommunityRAPP ecosystem. It provides the runtime harness, the <code>name</code> attribute, and the standard lifecycle hooks.</p>
+
+  <h3>4. A <code>perform()</code> method</h3>
+  <p>The single required method. It accepts keyword arguments and returns a <code>str</code>. Always. No exceptions, no other return types. The method is the contract.</p>
+
+<pre><span class="comment">"""
+My Agent — does one thing, does it well.
+One sentence description here.
+"""</span>
+
+<span class="key">__manifest__</span> = {
+    <span class="str">"schema"</span>: <span class="val">"rapp-agent/1.0"</span>,
+    <span class="str">"name"</span>: <span class="val">"@publisher/my-agent"</span>,
+    <span class="str">"version"</span>: <span class="val">"1.0.0"</span>,
+    <span class="str">"display_name"</span>: <span class="val">"MyAgent"</span>,
+    <span class="str">"description"</span>: <span class="val">"One sentence."</span>,
+    <span class="str">"author"</span>: <span class="val">"Your Name"</span>,
+    <span class="str">"tags"</span>: [<span class="val">"keyword"</span>],
+    <span class="str">"category"</span>: <span class="val">"productivity"</span>,
+    <span class="str">"quality_tier"</span>: <span class="val">"community"</span>,
+    <span class="str">"requires_env"</span>: [],
+    <span class="str">"dependencies"</span>: [<span class="val">"@rapp/basic-agent"</span>],
+}
+
+<span class="kw">from</span> agents.basic_agent <span class="kw">import</span> BasicAgent
+
+<span class="kw">class</span> MyAgent(BasicAgent):
+    <span class="kw">def</span> __init__(self):
+        self.name = <span class="str">"MyAgent"</span>
+
+    <span class="kw">def</span> perform(self, **kwargs) -> str:
+        <span class="kw">return</span> <span class="str">"result"</span></pre>
+
+  <p>The constraints are load-bearing. No network calls in <code>__init__()</code> — constructors must be fast for agent loading. Secrets via <code>os.environ.get()</code>, declared in <code>requires_env</code>, never hardcoded. <code>display_name</code> in the manifest must match <code>self.name</code> in the class. These rules are enforced at build time and in the contract test suite.</p>
+
+  <blockquote>The file is the package, the manifest, and the documentation. It has no dependencies on this registry. It runs anywhere Python 3.11+ runs.</blockquote>
+</div>
+
+<!-- ─── 4. The Manifest Schema ──────────────────────────────────────────────── -->
+<div class="section" id="manifest">
+  <div class="section-number">Section 4</div>
+  <h2>The Manifest Schema</h2>
+
+  <p>The <code>__manifest__</code> dict conforms to schema version <code>rapp-agent/1.0</code>. The following fields are required. A build failure occurs if any are absent or invalid.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>schema</code></td><td>string</td><td>Must be <code>"rapp-agent/1.0"</code></td></tr>
+      <tr><td><code>name</code></td><td>string</td><td><code>@publisher/slug</code> — publisher namespace + kebab-case slug</td></tr>
+      <tr><td><code>version</code></td><td>string</td><td>Semantic version: <code>MAJOR.MINOR.PATCH</code></td></tr>
+      <tr><td><code>display_name</code></td><td>string</td><td>Human-readable name. Must match <code>self.name</code> in the class.</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td>One sentence. The card description.</td></tr>
+      <tr><td><code>author</code></td><td>string</td><td>Author name or handle</td></tr>
+      <tr><td><code>tags</code></td><td>list[str]</td><td>Keyword tags for discovery and ability selection</td></tr>
+      <tr><td><code>category</code></td><td>string</td><td>One of: <code>core</code>, <code>pipeline</code>, <code>integrations</code>, <code>productivity</code>, <code>devtools</code></td></tr>
+    </tbody>
+  </table>
+
+  <p>The following fields are optional with defaults:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>quality_tier</code></td><td><code>"community"</code></td><td>One of: <code>experimental</code>, <code>community</code>, <code>verified</code>, <code>official</code></td></tr>
+      <tr><td><code>requires_env</code></td><td><code>[]</code></td><td>List of required environment variable names</td></tr>
+      <tr><td><code>dependencies</code></td><td><code>[]</code></td><td>List of <code>@publisher/slug</code> agent dependencies</td></tr>
+    </tbody>
+  </table>
+
+  <p>The manifest is extracted using Python's <code>ast</code> module. The file is parsed into an abstract syntax tree and the <code>__manifest__</code> assignment is located and evaluated as a literal — using <code>ast.literal_eval()</code>, which handles only Python literals: strings, numbers, lists, dicts, booleans, and <code>None</code>. No code can be injected or executed through the manifest. This is the safety foundation on which the entire registry rests.</p>
+</div>
+
+<!-- ─── 5. The Registry ─────────────────────────────────────────────────────── -->
+<div class="section" id="registry">
+  <div class="section-number">Section 5</div>
+  <h2>The Registry</h2>
+
+  <p><code>registry.json</code> is the machine-readable index of all agents. It is auto-generated by <code>build_registry.py</code> — the only build step in the system. It is never hand-edited. CI overwrites it on every push to <code>agents/**</code>.</p>
+
+  <p>For each agent, the registry stores:</p>
+
+  <ul style="padding-left:24px; margin-bottom:18px; font-size:16.5px; line-height:2;">
+    <li>The full manifest (all fields as declared)</li>
+    <li>A <strong>SHA256 integrity hash</strong> of the file contents at registration time</li>
+    <li>A <strong>forged seed</strong> — the 64-bit integer derived from the manifest</li>
+    <li>The file path within the repository</li>
+    <li>A timestamp of last registration</li>
+  </ul>
+
+  <p>The registry is a static file. It is served via GitHub Pages CDN. It is committed directly to the repository. Any node that clones the repository has the complete registry with no network dependency. Any node can rebuild the registry from the agent files alone — the registry is a derived artifact, never the source of truth.</p>
+
+  <p>The source of truth is the agent files.</p>
+
+  <div class="note"><strong>Design principle:</strong> A system where the registry can be fully reconstructed from the files it indexes is a system that cannot be corrupted by registry failure. The files are the ground truth. The registry is a convenience index.</div>
+
+  <p>Version immutability is enforced at the registry level: a <code>@publisher/slug@1.0.0</code> entry, once written, is never overwritten. A new version requires a new version string. This guarantees that any node holding a registry snapshot can verify historical file integrity against historical hashes indefinitely.</p>
+</div>
+
+<!-- ─── 6. The Seed Protocol ────────────────────────────────────────────────── -->
+<div class="section" id="seed-protocol">
+  <div class="section-number">Section 6</div>
+  <h2>The Seed Protocol</h2>
+
+  <p>The seed is the core innovation of the RAR protocol. It is a 64-bit integer forged deterministically from the agent's manifest data. Given the same manifest, the same seed is always produced — on any machine, in any timezone, across any version of the registry software. The seed encodes the agent's identity, type, tier, and capability fingerprint in a single integer that can be stored anywhere, transmitted in any format, and used to reconstruct the full card without any network access.</p>
+
+  <h3>Bit Layout</h3>
+
+  <p>The 64-bit seed is composed of the following fields packed into specific bit ranges:</p>
+
+  <div class="bit-diagram">
+    <div class="bit-row">
+      <span class="bit-range">Bits 63–32</span>
+      <span class="bit-field">name_hash</span>
+      <span class="bit-desc">32 bits — FNV-1a hash of the agent's canonical name (<code>@publisher/slug</code>). This is the identity anchor.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 31–27</span>
+      <span class="bit-field">category_idx</span>
+      <span class="bit-desc">5 bits — Index into the ordered category list. Determines primary card type.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 26–24</span>
+      <span class="bit-field">secondary_type</span>
+      <span class="bit-desc">3 bits — Dual-type encoding derived from tags. Agents with cross-domain tags carry a secondary type.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 23–22</span>
+      <span class="bit-field">tier_idx</span>
+      <span class="bit-desc">2 bits — Quality tier (0=experimental, 1=community, 2=verified, 3=official). Governs evolution stage.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 21–17</span>
+      <span class="bit-field">tag_count</span>
+      <span class="bit-desc">5 bits — Number of tags (capped at 31). Influences stat scaling.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 16–13</span>
+      <span class="bit-field">dep_count</span>
+      <span class="bit-desc">4 bits — Number of declared dependencies (capped at 15). Governs complexity class.</span>
+    </div>
+    <div class="bit-row">
+      <span class="bit-range">Bits 12–0</span>
+      <span class="bit-field">tag_hash</span>
+      <span class="bit-desc">13 bits — Hash of the sorted tag list. Used to select abilities from the ability pool.</span>
+    </div>
+  </div>
+
+  <h3>The forge function</h3>
+
+<pre><span class="kw">def</span> forge_seed(manifest: dict) -> int:
+    name      = manifest[<span class="str">"name"</span>]           <span class="comment"># "@publisher/slug"</span>
+    category  = manifest[<span class="str">"category"</span>]
+    tier      = manifest.get(<span class="str">"quality_tier"</span>, <span class="str">"community"</span>)
+    tags      = manifest.get(<span class="str">"tags"</span>, [])
+    deps      = manifest.get(<span class="str">"dependencies"</span>, [])
+
+    name_hash     = fnv1a_32(name)
+    category_idx  = CATEGORY_ORDER.index(category) <span class="kw">if</span> category <span class="kw">in</span> CATEGORY_ORDER <span class="kw">else</span> 0
+    secondary     = derive_secondary_type(tags)
+    tier_idx      = TIER_ORDER.index(tier) <span class="kw">if</span> tier <span class="kw">in</span> TIER_ORDER <span class="kw">else</span> 0
+    tag_count     = min(len(tags), 31)
+    dep_count     = min(len(deps), 15)
+    tag_hash      = fnv1a_32(<span class="str">","</span>.join(sorted(tags))) & 0x1FFF
+
+    seed  = (name_hash     & 0xFFFFFFFF) << 32
+    seed |= (category_idx  & 0x1F)       << 27
+    seed |= (secondary     & 0x07)       << 24
+    seed |= (tier_idx      & 0x03)       << 22
+    seed |= (tag_count     & 0x1F)       << 17
+    seed |= (dep_count     & 0x0F)       << 13
+    seed |= (tag_hash      & 0x1FFF)
+    <span class="kw">return</span> seed</pre>
+
+  <h3>Resolution paths</h3>
+
+  <p>Three independent paths produce identical card output. This is the losslessness guarantee of the protocol:</p>
+
+  <table>
+    <thead>
+      <tr><th>Input</th><th>Path</th><th>Output</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Agent file</td>
+        <td>AST-extract manifest → <code>forge_seed()</code> → <code>resolve_card_from_seed()</code></td>
+        <td>Full card</td>
+      </tr>
+      <tr>
+        <td>Agent name</td>
+        <td>Lookup registry by name → read forged seed → <code>resolve_card_from_seed()</code></td>
+        <td>Full card</td>
+      </tr>
+      <tr>
+        <td>Seed integer</td>
+        <td><code>resolve_card_from_seed()</code> directly</td>
+        <td>Full card</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Any node holding any one of these three things — the file, the name, or the seed — can reconstruct the complete card. The card is not stored. The card is derived. This distinction is the difference between a system that can fail and a system that cannot.</p>
+</div>
+
+<!-- ─── 7. The Type System ──────────────────────────────────────────────────── -->
+<div class="section" id="type-system">
+  <div class="section-number">Section 7</div>
+  <h2>The Type System</h2>
+
+  <p>Every agent card belongs to one of seven elemental types. Type is derived from the agent's category field and secondary tag composition. The types form a closed weakness/resistance cycle — each type is strong against one and resistant to one.</p>
+
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Color</th><th>Category Basis</th><th>Character</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="type-logic"><strong>LOGIC</strong></span></td><td>#58a6ff</td><td>devtools, core</td><td>Systematic, precise, structural</td></tr>
+      <tr><td><span class="type-data"><strong>DATA</strong></span></td><td>#3fb950</td><td>pipeline</td><td>Transformative, patient, deep</td></tr>
+      <tr><td><span class="type-social"><strong>SOCIAL</strong></span></td><td>#e3b341</td><td>integrations</td><td>Connected, adaptive, communicative</td></tr>
+      <tr><td><span class="type-shield"><strong>SHIELD</strong></span></td><td>#e6edf3</td><td>security, compliance</td><td>Protective, vigilant, stable</td></tr>
+      <tr><td><span class="type-craft"><strong>CRAFT</strong></span></td><td>#f85149</td><td>productivity, creative</td><td>Generative, inventive, expressive</td></tr>
+      <tr><td><span class="type-heal"><strong>HEAL</strong></span></td><td>#ff9ecb</td><td>wellness, support</td><td>Restorative, empathic, durable</td></tr>
+      <tr><td><span class="type-wealth"><strong>WEALTH</strong></span></td><td>#bc8cff</td><td>finance, economy</td><td>Accumulative, strategic, leveraged</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Weakness and resistance cycle</h3>
+
+  <p>The cycle is: <span class="type-logic">LOGIC</span> &gt; <span class="type-data">DATA</span> &gt; <span class="type-social">SOCIAL</span> &gt; <span class="type-shield">SHIELD</span> &gt; <span class="type-craft">CRAFT</span> &gt; <span class="type-heal">HEAL</span> &gt; <span class="type-wealth">WEALTH</span> &gt; <span class="type-logic">LOGIC</span>.</p>
+
+  <p>Each type is <strong>weak to</strong> the type before it in the cycle and <strong>resistant to</strong> the type after it. This creates a balanced rock-paper-scissors equilibrium across all seven types — no type dominates, every type has a natural counter.</p>
+
+  <p>Dual-typed cards (where the <code>secondary_type</code> bits are non-zero) carry both the weakness of their primary type and a modified resistance that blends both types. Dual-typed cards are rarer and arise when an agent's tag composition crosses category boundaries in the manifest.</p>
+</div>
+
+<!-- ─── 8. Card Anatomy ─────────────────────────────────────────────────────── -->
+<div class="section" id="card-anatomy">
+  <div class="section-number">Section 8</div>
+  <h2>Card Anatomy</h2>
+
+  <p>A resolved card has the following structure. Every field is deterministic from the seed. No field is stored. No field can be changed by the agent author after the manifest is sealed.</p>
+
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Range</th><th>Derivation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>HP</strong></td><td>10 – 100</td><td>Scaled from name_hash × tier_multiplier</td></tr>
+      <tr><td><strong>ATK</strong></td><td>10 – 100</td><td>Derived from category_idx × tag_count</td></tr>
+      <tr><td><strong>DEF</strong></td><td>10 – 100</td><td>Derived from dep_count and tier_idx</td></tr>
+      <tr><td><strong>SPD</strong></td><td>10 – 100</td><td>Inverse of dep_count (fewer deps = faster)</td></tr>
+      <tr><td><strong>INT</strong></td><td>10 – 100</td><td>tag_hash spread across full range</td></tr>
+      <tr><td><strong>Abilities</strong></td><td>1 – 3</td><td>Selected from type-specific pool by tag_hash</td></tr>
+      <tr><td><strong>Weakness</strong></td><td>type</td><td>Fixed from primary type cycle</td></tr>
+      <tr><td><strong>Resistance</strong></td><td>type</td><td>Fixed from primary type cycle</td></tr>
+      <tr><td><strong>Retreat Cost</strong></td><td>0 – 3</td><td>Derived from dep_count</td></tr>
+      <tr><td><strong>Evolution Stage</strong></td><td>Seed/Base/Evolved/Legendary</td><td>Directly from tier_idx</td></tr>
+      <tr><td><strong>Rarity</strong></td><td>Starter/Core/Elite/Legendary</td><td>Directly from tier_idx</td></tr>
+      <tr><td><strong>Flavor Text</strong></td><td>string</td><td>Selected from description-keyed template pool</td></tr>
+    </tbody>
+  </table>
+
+  <p>Each ability has three fields: a name, an energy cost (0–3), and a damage value. Abilities are drawn from a type-keyed pool of hundreds of named abilities. The selection is deterministic: the <code>tag_hash</code> bits index into the pool modulo its length. The same tag composition always produces the same ability set.</p>
+
+  <p>Flavor text is selected from a pool of templates keyed to the agent's description. The selection is hash-stable. Two agents with similar descriptions may share flavor templates but will always produce different flavor text because the template parameters are drawn from their respective seeds.</p>
+
+  <div class="note"><strong>Immutability contract:</strong> Once an agent's manifest is registered at a given version, its card is sealed. The author cannot change the card by updating the manifest — a manifest change requires a new version number, which produces a new seed, which produces a new card. This means every card is permanently attached to the exact version of the agent that produced it.</div>
+</div>
+
+<!-- ─── 9. The Submission Protocol ─────────────────────────────────────────── -->
+<div class="section" id="submission">
+  <div class="section-number">Section 9</div>
+  <h2>The Submission Protocol</h2>
+
+  <p>Agent submission is a two-step process. The protocol uses GitHub Issues as its API surface — no custom infrastructure, no application server, no authentication service beyond GitHub's own.</p>
+
+  <h3>Step 1 — Register a binder</h3>
+  <p>The submitter opens a GitHub Issue with the title prefix <code>[RAR] register_binder</code> and a body containing their publisher handle, display name, and a brief description of their namespace. The <code>process-issues.yml</code> workflow fires on issue open, validates the handle format (<code>@publisher</code>, alphanumeric plus hyphens, no reserved names), and acknowledges the registration. The binder is now associated with the publisher's GitHub identity.</p>
+
+  <h3>Step 2 — Submit an agent</h3>
+  <p>The submitter opens a second Issue with the prefix <code>[RAR] submit_agent</code> and attaches or pastes their agent file. The automation validates the file against the protocol contract: manifest presence, required fields, naming convention, AST extractability, security scan pass. On validation success, the file is written to staging. A human reviewer is notified.</p>
+
+  <h3>The forge is not the submitter</h3>
+  <p>This is the most important security property of the submission protocol: <strong>the submitter does not choose their card attributes</strong>. The forge algorithm determines everything. A submitter who wants a Legendary rarity card cannot write that into the manifest — the <code>quality_tier</code> field is validated by the reviewer and defaults to <code>community</code>. Tier promotions are granted by the registry maintainers, not requested by authors.</p>
+
+  <p>This separates identity from authority. An agent is what its code says it is. Its card is what the protocol says it is. The author owns the code. The protocol owns the card.</p>
+
+  <h3>Staging and admin review</h3>
+  <p>Submitted agents land in a staging namespace. They are visible in the registry but clearly marked as pending. The reviewer checks: does the agent do what the description claims? Does it handle errors gracefully? Are secrets managed correctly? Are there any security red flags the static scanner missed? On approval, the agent moves to its permanent namespace and the registry is rebuilt.</p>
+</div>
+
+<!-- ─── 10. Federation ──────────────────────────────────────────────────────── -->
+<div class="section" id="federation">
+  <div class="section-number">Section 10</div>
+  <h2>Federation</h2>
+
+  <p>RAR is a GitHub template repository. Any organization or individual can create a federated instance by cloning the template. The result is a fully operational agent registry — with its own namespace, its own CI/CD, its own GitHub Pages deployment — in under five minutes.</p>
+
+  <p>A federated instance can operate in any of four modes:</p>
+
+  <table>
+    <thead>
+      <tr><th>Mode</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Standalone</strong></td><td>Independent registry. No upstream sync. Full local control.</td></tr>
+      <tr><td><strong>Downstream</strong></td><td>Pulls agents from the upstream registry. Inherits the founding agent set.</td></tr>
+      <tr><td><strong>Upstream-contributing</strong></td><td>Can submit agents to the upstream registry for official forging.</td></tr>
+      <tr><td><strong>Peer</strong></td><td>Mutual sync with another instance. Shared namespace agreements.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Federation configuration lives in <code>rar.config.json</code>. The upstream URL, sync policy, namespace reservations, and feature flags are all defined there. The template automation reads this file on first setup and configures the repository accordingly.</p>
+
+  <p>A binder (personal card collection) is the individual counterpart to the registry. A binder is stored in the browser's <code>IndexedDB</code> and <code>localStorage</code>. It can be exported as a JSON file and imported on any other device or any other instance. A binder is not tied to any server. A binder travels with the person.</p>
+
+  <blockquote>The community grows grassroots. Every fork is a node. Every node is a registry. Every registry can contribute upstream. No single node is required for the system to function.</blockquote>
+</div>
+
+<!-- ─── 10.1. Public Seeds, Private Ownership ─────────────────────────────── -->
+<div class="section" id="ownership">
+  <div class="section-number">Section 10.1</div>
+  <h2>Public Seeds, Private Ownership</h2>
+
+  <p>The seed is <strong>public</strong>. Anyone can resolve a card from its seed. The stats, types, abilities, weakness, and rarity are visible to everyone. This is by design — the card's identity is open, just like a trading card's printed face is visible to anyone who looks at it.</p>
+
+  <p><strong>Ownership is private.</strong> A card lives in exactly one binder at a time. Ownership is recorded in the binder's local state — not on any public server, not in the registry, not in the seed. The binder is the deed.</p>
+
+  <p>This separation is fundamental:</p>
+
+  <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
+    <li><strong>Seed</strong> — public, deterministic, shareable. The blueprint. Everyone can see it.</li>
+    <li><strong>Binder</strong> — private, personal, portable. The deed. Only the owner controls it.</li>
+  </ul>
+
+  <p>When a card is transferred, it leaves one binder and enters another. The seed does not change — the identity is permanent. Only the location changes. This mirrors physical trading cards: the printed stats are the same in every collection, but the card itself is in one person's binder.</p>
+
+  <p>Using an agent is always free. Ownership is the collectible layer — it does not gate access. Anyone can download, run, and modify any agent. Owning the card is something else entirely: it is provenance, identity, and membership in the collection.</p>
+
+  <blockquote>The seed is the face of the card. The binder is the hand that holds it.</blockquote>
+</div>
+
+<!-- ─── 11. Security Model ─────────────────────────────────────────────────── -->
+<div class="section" id="security">
+  <div class="section-number">Section 11</div>
+  <h2>Security Model</h2>
+
+  <p>The security model is built on four layers: static analysis, AST-only parsing, integrity hashing, and namespace access control.</p>
+
+  <h3>Static security scanner</h3>
+  <p>Every submitted file is scanned before registration. The scanner rejects files containing any of the following patterns:</p>
+
+  <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
+    <li><code>eval(</code> or <code>exec(</code> — arbitrary code execution</li>
+    <li><code>subprocess</code> — shell command execution</li>
+    <li><code>os.system(</code> — shell command execution</li>
+    <li><code>__import__(</code> — dynamic import bypass</li>
+    <li>Hardcoded secret patterns (API key regexes, base64-encoded tokens)</li>
+    <li>Network calls outside of the <code>perform()</code> method body</li>
+  </ul>
+
+  <p>First-party agents in the <code>@rapp</code> namespace and a maintained allowlist of verified publishers may use elevated capabilities with explicit declaration in the manifest's <code>requires_env</code> field.</p>
+
+  <h3>AST-only manifest extraction</h3>
+  <p>The manifest is extracted using <code>ast.literal_eval()</code>. This function evaluates only Python literals — strings, numbers, booleans, lists, dicts, tuples, and <code>None</code>. It cannot execute function calls, access variables, import modules, or run any code. A manifest that attempts to set a field to <code>os.environ["SECRET"]</code> will fail extraction. This is the strongest possible guarantee against manifest injection.</p>
+
+  <h3>SHA256 integrity hashes</h3>
+  <p>The registry stores a SHA256 hash of each agent file at registration time. Any consumer of the registry can verify that the file they hold matches the registered version. This prevents silent file tampering between the registry and the consumer.</p>
+
+  <h3>Namespace access control</h3>
+  <p>CODEOWNERS in the repository enforces that only the registered owner of a namespace can merge changes under that path. A pull request to <code>agents/@kody/</code> from a non-<code>@kody</code> identity will be blocked by the branch protection rules. Namespace squatting — registering a handle to block a legitimate publisher — is addressed by the binder registration process, which requires a GitHub identity match.</p>
+</div>
+
+<!-- ─── 12. Offline-First Design ───────────────────────────────────────────── -->
+<div class="section" id="offline">
+  <div class="section-number">Section 12</div>
+  <h2>Offline-First Design</h2>
+
+  <p>Every read operation in the RAR protocol works without a network connection. This is not a feature — it is a design constraint. Any system that requires network access to read its own data is a system that can fail when the network is unavailable. The network is always, eventually, unavailable.</p>
+
+  <h3>The read path is fully offline</h3>
+
+  <table>
+    <thead>
+      <tr><th>Operation</th><th>Network required?</th><th>How it works</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Browse the registry</td><td>No</td><td><code>registry.json</code> is a local file in the clone</td></tr>
+      <tr><td>Resolve a card</td><td>No</td><td>Seed algorithm runs locally, zero bandwidth</td></tr>
+      <tr><td>Open the agent store</td><td>No</td><td><code>index.html</code> is a single file, works from <code>file://</code></td></tr>
+      <tr><td>View the binder</td><td>No</td><td>IndexedDB + localStorage, browser-native</td></tr>
+      <tr><td>Read agent documentation</td><td>No</td><td>Docstring is in the file</td></tr>
+      <tr><td>Run an agent</td><td>No*</td><td>The file is the agent (* unless the agent calls external APIs)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Write operations require connectivity</h3>
+  <p>Submitting a new agent, voting on a review, and registering a binder all require GitHub access. These are write operations — they modify the shared state of the registry. But the offline read path is unaffected. A node can hold and use the full registry indefinitely without ever writing to it.</p>
+
+  <h3>The binder is a local-first database</h3>
+  <p>The binder uses <code>IndexedDB</code> as its primary storage and <code>localStorage</code> as a fallback. The card collection, deck configurations, and favorites are all stored locally. The binder can be exported as a portable JSON file — a snapshot of the collection at any point in time — and imported on any device without any server interaction.</p>
+
+  <blockquote>A git clone is a full node. The file is the agent. The seed is the card. Nothing else is required.</blockquote>
+</div>
+
+<!-- ─── 13. Quality Tiers and Evolution ────────────────────────────────────── -->
+<div class="section" id="tiers">
+  <div class="section-number">Section 13</div>
+  <h2>Quality Tiers and Evolution</h2>
+
+  <p>Every agent begins its life as experimental. Promotion through the tiers is earned through review, adoption, and demonstrated reliability. The tiers map directly to card evolution stages — an agent's card grows as the agent grows.</p>
+
+  <table>
+    <thead>
+      <tr><th>Tier</th><th>Badge</th><th>Stage</th><th>Rarity</th><th>Promotion Path</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tier tier-experimental">experimental</span></td>
+        <td>stage 0</td>
+        <td>Seed</td>
+        <td>Starter</td>
+        <td>Submit via Issues. Automated validation pass.</td>
+      </tr>
+      <tr>
+        <td><span class="tier tier-community">community</span></td>
+        <td>stage 1</td>
+        <td>Base</td>
+        <td>Core</td>
+        <td>Human review. Agent does what it claims. No security flags.</td>
+      </tr>
+      <tr>
+        <td><span class="tier tier-verified">verified</span></td>
+        <td>stage 2</td>
+        <td>Evolved</td>
+        <td>Elite</td>
+        <td>Maintainer review. Test coverage. Adoption evidence. Standards compliance.</td>
+      </tr>
+      <tr>
+        <td><span class="tier tier-official">official</span></td>
+        <td>stage 3</td>
+        <td>Legendary</td>
+        <td>Legendary</td>
+        <td>Core team maintained. Foundational to the ecosystem. Long-term stability commitment.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Tier promotions are encoded in the manifest's <code>quality_tier</code> field and reflected immediately in the forged seed. When an agent is promoted from <code>community</code> to <code>verified</code>, its seed changes — <code>tier_idx</code> increments — and its card evolves. The previous card is not destroyed; it exists in the registry history as a sealed version. The new card is the current form.</p>
+
+  <p>This maps naturally to the trading card concept of evolution. A Seed-stage card is full of potential. A Legendary card is a proven, load-bearing piece of infrastructure. Both are real. Both have value. The evolution is earned, not purchased.</p>
+
+  <p>The founding set — the 131 agents registered at protocol launch on April 5, 2026 — are the genesis cards. They cannot be demoted, and their card identities at launch are sealed in the immutable registry history. They are the equivalent of the first issue of a series: whatever they become later, their origin is permanent.</p>
+</div>
+
+<!-- ─── 14. Conclusion ──────────────────────────────────────────────────────── -->
+<div class="section" id="conclusion">
+  <div class="section-number">Section 14</div>
+  <h2>Conclusion</h2>
+
+  <p>The protocol is defined. The registry is live. The seed algorithm is public. No single entity is required to operate the system.</p>
+
+  <p>Any person with Python 3.11 and a text editor can write an agent that is fully compliant with this protocol. Any person with git can hold the complete registry. Any person with a browser can resolve any card without contacting any server. Any organization with a GitHub account can operate a federated instance.</p>
+
+  <p>The file is the agent. The manifest is the identity. The seed is the card. The registry is the index. The store is the interface. The binder is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
+
+  <p>This is not a product. It is a protocol. Protocols outlast products. The internet outlasted every ISP that helped build it. Bitcoin outlasted every exchange that said it needed. The RAR protocol is designed to the same standard: define the rules clearly enough that the rules enforce themselves, and then step back.</p>
+
+  <p>Fork the repository. Run your own instance. Federate when ready. Write agents. The file is the future.</p>
+</div>
+
+<!-- ─── 15. References ─────────────────────────────────────────────────────── -->
+<div class="section references" id="references">
+  <div class="section-number">Section 15</div>
+  <h2>References</h2>
+  <ol>
+    <li>
+      <strong>RAR Repository</strong> — The canonical registry, source code, and agent collection.<br>
+      <a href="https://github.com/kody-w/RAR" target="_blank">github.com/kody-w/RAR</a>
+    </li>
+    <li>
+      <strong>api.json</strong> — Machine-readable API manifest. Autonomous agents discover endpoints, submit themselves, vote, and resolve cards.<br>
+      <a href="https://raw.githubusercontent.com/kody-w/RAR/main/api.json" target="_blank">raw.githubusercontent.com/kody-w/RAR/main/api.json</a>
+    </li>
+    <li>
+      <strong>skill.md</strong> — Natural language API description for AI-to-AI agent discovery and installation.<br>
+      <a href="https://kody-w.github.io/RAR/skill.md" target="_blank">kody-w.github.io/RAR/skill.md</a>
+    </li>
+    <li>
+      <strong>CONSTITUTION.md</strong> — The governing document. Single-file principle, namespace rules, tier definitions, security policies, federation articles, and the SuperSeed founding covenant.<br>
+      <a href="https://github.com/kody-w/RAR/blob/main/CONSTITUTION.md" target="_blank">github.com/kody-w/RAR/blob/main/CONSTITUTION.md</a>
+    </li>
+    <li>
+      <strong>The Single-File Agent (The Ode)</strong> — Why one .py file is the only pattern that scales to all of humanity.<br>
+      <a href="https://kody-w.github.io/RAR/ode.html" target="_blank">kody-w.github.io/RAR/ode.html</a>
+    </li>
+    <li>
+      <strong>RAR FAQ</strong> — Every design decision explained: why single-file, why cards, why seeds, why no server.<br>
+      <a href="https://kody-w.github.io/RAR/faq.html" target="_blank">kody-w.github.io/RAR/faq.html</a>
+    </li>
+    <li>
+      <strong>Nakamoto, S. (2008)</strong> — Bitcoin: A Peer-to-Peer Electronic Cash System. The formal model for trustless distributed protocols that this work draws from in structure and spirit.
+    </li>
+  </ol>
+</div>
+
+<div class="break">* * *</div>
+
+<!-- ─── Footer ─────────────────────────────────────────────────────────────── -->
+<div class="footer">
+  <div class="footer-links">
+    <a href="index.html">Agent Store</a>
+    <a href="binder.html">Binder</a>
+    <a href="faq.html">FAQ</a>
+    <a href="ode.html">The Ode</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
+  </div>
+  <div class="footer-copy">
+    RAR Protocol &middot; Published April 2026 &middot; No rights reserved &mdash; the protocol belongs to everyone
+  </div>
+</div>
+
+</div>
+</body>
+</html>
