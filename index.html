@@ -5348,20 +5348,30 @@ function previewManifest() {
   const pv = document.getElementById('manifest-preview');
   const btn = document.getElementById('submit-btn');
   if (!code.trim()) { pv.style.display = 'none'; btn.disabled = true; return; }
+  // Basic Python syntax check — must have class and def
+  if (!code.includes('class ') || !code.includes('def perform')) {
+    pv.style.display = 'block';
+    pv.innerHTML = '<h4>Validation</h4><div class="err">Missing class definition or perform() method. Is this a valid agent?</div>';
+    btn.disabled = true; return;
+  }
   const m = code.match(/__manifest__\s*=\s*\{[\s\S]*?\n\}/);
-  if (!m) { pv.style.display = 'block'; pv.innerHTML = '<h4>Manifest Preview</h4><div class="err">No __manifest__ found.</div>'; btn.disabled = true; return; }
+  if (!m) { pv.style.display = 'block'; pv.innerHTML = '<h4>Validation</h4><div class="err">No __manifest__ found.</div>'; btn.disabled = true; return; }
   try {
     const t = m[0].replace('__manifest__ =', '').trim();
     const g = k => { const x = t.match(new RegExp(`"${k}"\\s*:\\s*"([^"]*)"`)); return x?.[1]; };
     const name = g('name'), ver = g('version'), disp = g('display_name'), desc = g('description'), auth = g('author'), cat = g('category'), tier = g('quality_tier');
     const errs = [];
     if (!name?.startsWith('@') || !name?.includes('/')) errs.push('name must be @publisher/slug');
+    if (name?.includes('-')) errs.push('name contains dashes — use snake_case');
+    const slug = name?.split('/')?.[1] || '';
+    if (slug && !slug.endsWith('_agent')) errs.push('slug must end with _agent (e.g., my_cool_agent)');
     if (!ver || ver.split('.').length !== 3) errs.push('version must be semver');
     if (!disp) errs.push('display_name required');
     if (!desc) errs.push('description required');
     if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
     if (tier && !['unverified', 'community', 'experimental'].includes(tier)) errs.push('quality_tier must be "unverified", "community", or "experimental"');
     if (code.includes('@your_username/')) errs.push('Sign in so your namespace is auto-filled');
+    if (code.includes('@rapp/basic-agent')) errs.push('Use @rapp/basic_agent (not basic-agent)');
     pv.style.display = 'block';
     pv.innerHTML = `<h4>Manifest Preview</h4>
       ${[['name',name],['version',ver],['display',disp],['description',desc],['author',auth],['category',cat],['tier',tier]].filter(x=>x[1]).map(x=>`<div class="fld"><span class="k">${x[0]}</span><span class="v">${esc(x[1])}</span></div>`).join('')}
