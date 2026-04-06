@@ -5,6 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAPP Agent Repository</title>
 <meta name="description" content="Discover, collect, and share single-file AI agents. Like an app store, but every app is one Python file.">
+<!-- OpenGraph -->
+<meta property="og:title" content="RAPP Agent Store">
+<meta property="og:description" content="Discover, collect, and share single-file AI agents. 133+ agents across 19 categories. Every agent is one Python file.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kody-w.github.io/RAR/">
+<!-- Schema.org JSON-LD for NLweb + AI discoverability -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "RAPP Agent Store",
+  "url": "https://kody-w.github.io/RAR/",
+  "description": "Open registry of single-file AI agents. Every agent is one .py file with embedded manifest, card identity, and deterministic seed. Browse, collect, submit, and resolve agent cards.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Organization", "name": "Wildhaven of America", "url": "https://github.com/kody-w/RAR"},
+  "sourceOrganization": {"@type": "Organization", "name": "RAPP", "url": "https://github.com/kody-w/CommunityRAPP"},
+  "hasPart": [
+    {"@type": "DataCatalog", "name": "Agent Registry", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/registry.json", "description": "Machine-readable index of all agents with manifests, SHA256 hashes, and metadata."},
+    {"@type": "WebAPI", "name": "RAR API", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api.json", "description": "Agent-first API manifest. Autonomous agents discover endpoints, submit themselves, vote, review, and resolve cards."},
+    {"@type": "WebPage", "name": "Binder", "url": "https://kody-w.github.io/RAR/binder.html", "description": "Personal agent card binder. Works offline. Import/export collections."},
+    {"@type": "WebPage", "name": "Rappterpedia", "url": "https://kody-w.github.io/RAR/rappterpedia/index.html", "description": "Community wiki and forum for the RAPP agent ecosystem."}
+  ],
+  "potentialAction": [
+    {"@type": "SearchAction", "target": "https://kody-w.github.io/RAR/?search={query}", "query-input": "required name=query"},
+    {"@type": "ViewAction", "name": "Browse Agents", "target": "https://kody-w.github.io/RAR/"},
+    {"@type": "ViewAction", "name": "Open Binder", "target": "https://kody-w.github.io/RAR/binder.html"}
+  ]
+}
+</script>
 <script>
 // Ready guard — removed before body renders
 </script>

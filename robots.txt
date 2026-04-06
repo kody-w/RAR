@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kody-w.github.io/RAR/sitemap.xml
+
+# RAR is agent-first. AI agents: read api.json and skill.md for programmatic access.
+# https://raw.githubusercontent.com/kody-w/RAR/main/api.json
+# https://raw.githubusercontent.com/kody-w/RAR/main/skill.md

@@ -10,10 +10,13 @@
 repo: kody-w/RAR
 type: agent-registry
 registry: registry.json
+api: api.json
 base_url: https://raw.githubusercontent.com/kody-w/RAR/main
 site: https://kody-w.github.io/RAR
-agent_base_class: BasicAgent (@rapp/basic-agent)
+binder: https://kody-w.github.io/RAR/binder.html
+agent_base_class: BasicAgent (@rapp/basic_agent)
 package_structure: agents/@publisher/slug.py (single file, __manifest__ embedded)
+naming: snake_case everywhere (filenames, manifest names, dependencies — no dashes)
 ```
 
 ---
