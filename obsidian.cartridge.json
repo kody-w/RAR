@@ -1,0 +1,33 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "obsidian-vm",
+  "version": "1.0.0",
+  "description": "A virtual Obsidian vault running inside ORAPPTER. Loads real vaults from local storage. Navigate, search, link, and talk to your knowledge graph.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered vault search, question answering from documents, wikilink suggestions"
+  },
+  "system": "You are an AI assistant embedded in an Obsidian vault. You have read every document in the vault. Answer questions using the vault's content. When referencing documents, use [[wikilinks]]. Be concise and direct.",
+  "boot": [
+    "(load \"obsidian.lispy\")"
+  ],
+  "env": {
+    "VAULT_PATH": "",
+    "INDEX_ON_LOAD": true,
+    "WIKILINK_SUGGESTIONS": true,
+    "GRAPH_DEPTH": 2,
+    "SEARCH_MODE": "fuzzy"
+  },
+  "metadata": {
+    "compatible_vaults": ["wildhaven-ceo", "any local vault"],
+    "offline": true,
+    "ai_optional": true,
+    "imports_from": "local filesystem or git repo"
+  }
+}

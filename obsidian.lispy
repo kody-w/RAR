@@ -1,0 +1,576 @@
+;; ═══════════════════════════════════════════════════════════════
+;; OBSIDIAN.LISPY — Virtual Obsidian Vault for ORAPPTER
+;; Load real Obsidian vaults from local storage. Navigate,
+;; search, link, and talk to your knowledge graph.
+;; Your second brain, running in a cartridge.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "obsidian-vm")
+(define _agent_desc "Virtual Obsidian — load real vaults, search, link, talk to your knowledge graph")
+
+(define OBSIDIAN_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Vault State
+;; ═══════════════════════════════════════════════════════════════
+
+;; The loaded vault
+(define *vault* nil)
+(define *vault-name* "none")
+(define *vault-path* "")
+(define *documents* (list))     ;; list of {path, title, content, tags, links, aliases}
+(define *graph* (make-dict))    ;; title → list of linked titles
+(define *tags* (make-dict))     ;; tag → list of document titles
+(define *current-doc* nil)      ;; currently open document
+(define *history* (list))       ;; navigation history (back button)
+(define *bookmarks* (list))     ;; starred documents
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Load a Vault
+;; ═══════════════════════════════════════════════════════════════
+
+;; Load vault from a local directory path
+(define (vault-open path)
+  (set! *vault-path* path)
+  (set! *documents* (list))
+  (set! *graph* (make-dict))
+  (set! *tags* (make-dict))
+
+  ;; Read all .md files from the path
+  (let (files (list-files path "*.md"))
+    (for-each
+      (lambda (file-path)
+        (let (content (read-file file-path)
+              doc (parse-document file-path content))
+          (if (not (null? doc))
+            (set! *documents* (append *documents* (list doc))))))
+      files))
+
+  ;; Build the graph
+  (for-each
+    (lambda (doc)
+      ;; Index links
+      (dict-set *graph* (get doc "title")
+        (get doc "links" (list)))
+      ;; Index tags
+      (for-each
+        (lambda (tag)
+          (let (existing (get *tags* tag (list)))
+            (dict-set *tags* tag
+              (append existing (list (get doc "title"))))))
+        (get doc "tags" (list))))
+    *documents*)
+
+  (set! *vault-name* (last (split path "/")))
+  (set! *vault* true)
+
+  (log (concat "Vault loaded: " *vault-name*))
+  (log (concat "Documents: " (string (length *documents*))))
+  (log (concat "Tags: " (string (length (keys *tags*)))))
+  (log (concat "Links: " (string (reduce
+    (lambda (_acc doc) (+ _acc (length (get doc "links" (list)))))
+    *documents* 0))))
+  (log "")
+  (log "Commands: (ls) (open \"title\") (search \"query\") (ask \"question\")"))
+
+;; Load from a git repo URL (clones or pulls)
+(define (vault-open-repo repo-url local-path)
+  (if (file-exists? local-path)
+    (begin
+      (shell (concat "cd " local-path " && git pull"))
+      (vault-open local-path))
+    (begin
+      (shell (concat "git clone " repo-url " " local-path))
+      (vault-open local-path))))
+
+;; Load the CEO workspace specifically
+(define (vault-open-ceo)
+  (vault-open-repo
+    "https://github.com/kody-w/wildhaven-ceo.git"
+    "/tmp/wildhaven-ceo"))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Parse Documents
+;; ═══════════════════════════════════════════════════════════════
+
+;; Parse a markdown document into structured data
+(define (parse-document path content)
+  (if (null? content) nil
+    (let (title (extract-title path content)
+          frontmatter (extract-frontmatter content)
+          tags (get frontmatter "tags" (list))
+          aliases (get frontmatter "aliases" (list))
+          links (extract-wikilinks content)
+          body (strip-frontmatter content))
+      (make-dict
+        "path" path
+        "title" title
+        "content" body
+        "tags" tags
+        "aliases" aliases
+        "links" links
+        "frontmatter" frontmatter
+        "size" (length content)))))
+
+;; Extract title from first H1 or filename
+(define (extract-title path content)
+  (let (h1-match (regex-find "^# (.+)$" content))
+    (if (not (null? h1-match))
+      (nth h1-match 1)
+      ;; Fallback to filename
+      (let (parts (split path "/")
+            filename (last parts))
+        (replace (replace filename ".md" "") "-" " ")))))
+
+;; Extract YAML frontmatter
+(define (extract-frontmatter content)
+  (if (not (starts-with? content "---"))
+    (make-dict)
+    (let (end-idx (index-of content "---" 3))
+      (if (null? end-idx)
+        (make-dict)
+        (let (yaml-str (substring content 4 end-idx))
+          (parse-yaml yaml-str))))))
+
+;; Extract [[wikilinks]] from content
+(define (extract-wikilinks content)
+  (let (matches (regex-find-all "\\[\\[([^\\]|]+)" content))
+    (map (lambda (m) (nth m 1)) matches)))
+
+;; Strip frontmatter from content
+(define (strip-frontmatter content)
+  (if (not (starts-with? content "---"))
+    content
+    (let (end-idx (index-of content "---" 3))
+      (if (null? end-idx)
+        content
+        (substring content (+ end-idx 3) (length content))))))
+
+;; Simple YAML parser for frontmatter
+(define (parse-yaml yaml-str)
+  (let (lines (split yaml-str "\n")
+        result (make-dict))
+    (for-each
+      (lambda (line)
+        (let (parts (split line ":"))
+          (if (>= (length parts) 2)
+            (let (key (trim (car parts))
+                  val (trim (join (cdr parts) ":")))
+              ;; Handle lists [a, b, c]
+              (if (starts-with? val "[")
+                (dict-set result key
+                  (map trim (split (replace (replace val "[" "") "]" "") ",")))
+                (dict-set result key val))))))
+      lines)
+    result))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Navigate
+;; ═══════════════════════════════════════════════════════════════
+
+;; List all documents
+(define (ls)
+  (if (null? *vault*)
+    (log "No vault loaded. (vault-open \"/path/to/vault\")")
+    (begin
+      (log (concat "═══ " *vault-name* " ═══"))
+      (for-each
+        (lambda (doc)
+          (let (tags-str (if (empty? (get doc "tags" (list))) ""
+                           (concat " [" (join (get doc "tags") ", ") "]")))
+            (log (concat "  " (get doc "title") tags-str))))
+        (sort *documents* (lambda (a b)
+          (< (get a "title" "") (get b "title" ""))))))))
+
+;; List by tag
+(define (ls-tag tag)
+  (let (docs (get *tags* tag (list)))
+    (if (empty? docs)
+      (log (concat "No documents tagged: " tag))
+      (begin
+        (log (concat "═══ #" tag " ═══"))
+        (for-each (lambda (title) (log (concat "  " title))) docs)))))
+
+;; List all tags
+(define (ls-tags)
+  (log "═══ Tags ═══")
+  (for-each
+    (lambda (tag)
+      (log (concat "  #" tag " (" (string (length (get *tags* tag))) ")")))
+    (sort (keys *tags*) <)))
+
+;; Open a document by title
+(define (open title)
+  (let (doc (find-doc title))
+    (if (null? doc)
+      (log (concat "Not found: " title))
+      (begin
+        ;; Push to history
+        (if (not (null? *current-doc*))
+          (set! *history* (append *history* (list (get *current-doc* "title")))))
+        (set! *current-doc* doc)
+        (display-document doc)))))
+
+;; Go back
+(define (back)
+  (if (empty? *history*)
+    (log "No history")
+    (let (prev (last *history*))
+      (set! *history* (take *history* (- (length *history*) 1)))
+      (open prev))))
+
+;; Find a document by title or alias
+(define (find-doc title)
+  (let (by-title (filter
+          (lambda (d) (= (lowercase (get d "title" "")) (lowercase title)))
+          *documents*))
+    (if (not (empty? by-title))
+      (car by-title)
+      ;; Search aliases
+      (let (by-alias (filter
+              (lambda (d)
+                (let (aliases (get d "aliases" (list)))
+                  (not (null? (filter
+                    (lambda (a) (= (lowercase a) (lowercase title)))
+                    aliases)))))
+              *documents*))
+        (if (not (empty? by-alias))
+          (car by-alias)
+          nil)))))
+
+;; Display a document
+(define (display-document doc)
+  (log "───────────────────────────────────────")
+  (log (concat "  " (get doc "title")))
+  (let (tags (get doc "tags" (list)))
+    (if (not (empty? tags))
+      (log (concat "  " (join (map (lambda (t) (concat "#" t)) tags) " ")))))
+  (log "───────────────────────────────────────")
+  (log "")
+  ;; Show content (truncated for terminal)
+  (let (content (get doc "content" "")
+        lines (split content "\n")
+        preview (take lines 30))
+    (for-each (lambda (line) (log (concat "  " line))) preview)
+    (if (> (length lines) 30)
+      (log (concat "  ... (" (string (- (length lines) 30)) " more lines. (more) to continue)"))))
+  (log "")
+  ;; Show outgoing links
+  (let (links (get doc "links" (list)))
+    (if (not (empty? links))
+      (begin
+        (log "  Links:")
+        (for-each (lambda (l) (log (concat "    → [[" l "]]"))) links)))))
+
+;; Show more of current document
+(define (more)
+  (if (null? *current-doc*)
+    (log "No document open")
+    (let (content (get *current-doc* "content" "")
+          lines (split content "\n"))
+      (for-each (lambda (line) (log (concat "  " line))) lines))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Search
+;; ═══════════════════════════════════════════════════════════════
+
+;; Full-text search across all documents
+(define (search query)
+  (let (q (lowercase query)
+        results (filter
+          (lambda (doc)
+            (or (contains? (lowercase (get doc "title" "")) q)
+                (contains? (lowercase (get doc "content" "")) q)
+                (not (null? (filter
+                  (lambda (tag) (contains? (lowercase tag) q))
+                  (get doc "tags" (list)))))
+                (not (null? (filter
+                  (lambda (a) (contains? (lowercase a) q))
+                  (get doc "aliases" (list)))))))
+          *documents*))
+    (if (empty? results)
+      (log (concat "No results for: " query))
+      (begin
+        (log (concat "═══ Search: " query " (" (string (length results)) " results) ═══"))
+        (for-each
+          (lambda (doc)
+            (let (snippet (extract-snippet (get doc "content" "") q 80))
+              (log (concat "  " (get doc "title")))
+              (if (not (empty? snippet))
+                (log (concat "    ..." snippet "...")))))
+          results)))))
+
+;; Extract a snippet around the search term
+(define (extract-snippet content query max-len)
+  (let (idx (index-of (lowercase content) (lowercase query)))
+    (if (null? idx) ""
+      (let (start (max 0 (- idx 30))
+            end (min (length content) (+ idx (length query) 50)))
+        (substring content start end)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Graph View
+;; ═══════════════════════════════════════════════════════════════
+
+;; Show the link graph for a document
+(define (graph title)
+  (let (doc (find-doc title))
+    (if (null? doc)
+      (log (concat "Not found: " title))
+      (begin
+        (log (concat "═══ Graph: " title " ═══"))
+        ;; Outgoing links
+        (let (out-links (get doc "links" (list)))
+          (log "  Outgoing:")
+          (if (empty? out-links)
+            (log "    (none)")
+            (for-each (lambda (l) (log (concat "    → " l))) out-links)))
+        ;; Incoming links (backlinks)
+        (let (backlinks (filter
+                (lambda (d)
+                  (not (null? (filter
+                    (lambda (l) (= (lowercase l) (lowercase title)))
+                    (get d "links" (list))))))
+                *documents*))
+          (log "  Backlinks:")
+          (if (empty? backlinks)
+            (log "    (none)")
+            (for-each
+              (lambda (d) (log (concat "    ← " (get d "title"))))
+              backlinks)))))))
+
+;; Show orphan documents (no incoming or outgoing links)
+(define (orphans)
+  (let (orphan-docs (filter
+          (lambda (doc)
+            (and (empty? (get doc "links" (list)))
+                 (null? (filter
+                   (lambda (d)
+                     (not (null? (filter
+                       (lambda (l) (= (lowercase l) (lowercase (get doc "title"))))
+                       (get d "links" (list))))))
+                   *documents*))))
+          *documents*))
+    (log (concat "═══ Orphans (" (string (length orphan-docs)) ") ═══"))
+    (for-each
+      (lambda (doc) (log (concat "  " (get doc "title"))))
+      orphan-docs)))
+
+;; Show most connected documents
+(define (hubs)
+  (let (scored (map
+          (lambda (doc)
+            (let (out (length (get doc "links" (list))))
+              (let (in (length (filter
+                    (lambda (d)
+                      (not (null? (filter
+                        (lambda (l) (= (lowercase l) (lowercase (get doc "title"))))
+                        (get d "links" (list))))))
+                    *documents*)))
+                (make-dict "title" (get doc "title") "connections" (+ out in)))))
+          *documents*))
+    (let (sorted (sort scored (lambda (a b)
+            (> (get a "connections") (get b "connections")))))
+      (log "═══ Most Connected ═══")
+      (for-each
+        (lambda (s)
+          (log (concat "  " (get s "title") " (" (string (get s "connections")) " connections)")))
+        (take sorted 10)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: AI-Powered Vault
+;; Talk to your knowledge graph
+;; ═══════════════════════════════════════════════════════════════
+
+;; Ask a question — AI searches the vault and answers
+(define (ask question)
+  (if (null? *vault*)
+    (log "No vault loaded.")
+    (let (relevant (search-for-context question 5))
+      (let (context (reduce
+              (lambda (_acc doc)
+                (concat _acc "\n\n--- " (get doc "title") " ---\n"
+                        (take-string (get doc "content" "") 500)))
+              relevant ""))
+        (let (prompt (concat
+               "You have access to an Obsidian vault called '" *vault-name* "'. "
+               "Here are the most relevant documents:\n"
+               context
+               "\n\nBased on these documents, answer this question: " question
+               "\n\nUse [[wikilinks]] when referencing documents. Be concise."))
+          (if (defined? 'smart-generate)
+            (smart-generate prompt)
+            ;; Offline: just show relevant docs
+            (begin
+              (log "AI offline. Showing relevant documents:")
+              (for-each
+                (lambda (doc) (log (concat "  → [[" (get doc "title") "]]")))
+                relevant))))))))
+
+;; Find most relevant documents for a question
+(define (search-for-context question n)
+  (let (q (lowercase question)
+        scored (map
+          (lambda (doc)
+            (let (score 0)
+              ;; Title match = high score
+              (if (contains? (lowercase (get doc "title" "")) q)
+                (set! score (+ score 10)))
+              ;; Tag match
+              (for-each
+                (lambda (tag)
+                  (if (contains? q (lowercase tag))
+                    (set! score (+ score 5))))
+                (get doc "tags" (list)))
+              ;; Content word match
+              (let (words (split q " "))
+                (for-each
+                  (lambda (word)
+                    (if (and (> (length word) 2)
+                             (contains? (lowercase (get doc "content" "")) word))
+                      (set! score (+ score 1))))
+                  words))
+              (make-dict "doc" doc "score" score)))
+          *documents*))
+    (let (sorted (sort scored (lambda (a b) (> (get a "score") (get b "score")))))
+      (map (lambda (s) (get s "doc")) (take sorted n)))))
+
+;; Summarize the entire vault
+(define (vault-summary)
+  (ask (concat "Give me a high-level summary of what's in the "
+               *vault-name* " vault. What are the main topics, strategies, and key documents?")))
+
+;; Suggest wikilinks for a document
+(define (suggest-links title)
+  (let (doc (find-doc title))
+    (if (null? doc)
+      (log (concat "Not found: " title))
+      (let (content (lowercase (get doc "content" ""))
+            existing (map lowercase (get doc "links" (list)))
+            suggestions (filter
+              (lambda (d)
+                (and (not (= (get d "title") (get doc "title")))
+                     (not (member? (lowercase (get d "title")) existing))
+                     (contains? content (lowercase (get d "title")))))
+              *documents*))
+        (if (empty? suggestions)
+          (log "No link suggestions found.")
+          (begin
+            (log (concat "═══ Suggested links for: " title " ═══"))
+            (for-each
+              (lambda (s) (log (concat "  + [[" (get s "title") "]]")))
+              suggestions)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Bookmarks and Daily Notes
+;; ═══════════════════════════════════════════════════════════════
+
+;; Bookmark current document
+(define (bookmark)
+  (if (null? *current-doc*)
+    (log "No document open")
+    (begin
+      (set! *bookmarks* (append *bookmarks* (list (get *current-doc* "title"))))
+      (log (concat "Bookmarked: " (get *current-doc* "title"))))))
+
+;; Show bookmarks
+(define (bookmarks)
+  (if (empty? *bookmarks*)
+    (log "No bookmarks yet. Open a doc and (bookmark) it.")
+    (begin
+      (log "═══ Bookmarks ═══")
+      (for-each (lambda (b) (log (concat "  ★ " b))) *bookmarks*))))
+
+;; Create a daily note
+(define (daily)
+  (let (today (date-string))
+    (log (concat "═══ Daily Note: " today " ═══"))
+    (log "")
+    (log "  What to do today:")
+    ;; If CEO vault, pull from priorities
+    (let (priorities (find-doc "daily-power-moves"))
+      (if (not (null? priorities))
+        (begin
+          (log "  (from your playbook)")
+          (let (lines (take (split (get priorities "content" "") "\n") 10))
+            (for-each (lambda (l) (log (concat "    " l))) lines)))
+        (log "  Open your playbook for today's priorities.")))
+    (log "")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 9: Export and Sync
+;; ═══════════════════════════════════════════════════════════════
+
+;; Export vault index as JSON (for sneakernet transfer)
+(define (vault-export-index)
+  (json-dump
+    (make-dict
+      "vault" *vault-name*
+      "documents" (length *documents*)
+      "tags" (keys *tags*)
+      "index" (map
+        (lambda (doc)
+          (make-dict
+            "title" (get doc "title")
+            "tags" (get doc "tags" (list))
+            "links" (get doc "links" (list))
+            "size" (get doc "size" 0)))
+        *documents*))))
+
+;; Vault stats
+(define (vault-stats)
+  (log (concat "═══ Vault: " *vault-name* " ═══"))
+  (log (concat "  Documents: " (string (length *documents*))))
+  (log (concat "  Tags: " (string (length (keys *tags*)))))
+  (let (total-links (reduce
+          (lambda (_acc doc) (+ _acc (length (get doc "links" (list)))))
+          *documents* 0))
+    (log (concat "  Links: " (string total-links))))
+  (let (total-size (reduce
+          (lambda (_acc doc) (+ _acc (get doc "size" 0)))
+          *documents* 0))
+    (log (concat "  Total size: " (string (/ total-size 1024)) " KB"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "═══════════════════════════════════════")
+  (log " OBSIDIAN.LISPY v1.0.0")
+  (log " Your second brain, in a cartridge")
+  (log "═══════════════════════════════════════")
+  (log "")
+  (log " Load a vault:")
+  (log "   (vault-open \"/path/to/vault\")")
+  (log "   (vault-open-ceo)  — load the CEO workspace")
+  (log "")
+  (log " Navigate:")
+  (log "   (ls)              — list all documents")
+  (log "   (ls-tags)         — list all tags")
+  (log "   (open \"title\")    — open a document")
+  (log "   (search \"query\")  — full-text search")
+  (log "   (back)            — go back")
+  (log "")
+  (log " Knowledge graph:")
+  (log "   (graph \"title\")   — see links and backlinks")
+  (log "   (hubs)            — most connected documents")
+  (log "   (orphans)         — unlinked documents")
+  (log "")
+  (log " AI-powered:")
+  (log "   (ask \"question\")  — talk to your vault")
+  (log "   (vault-summary)   — AI summary of everything")
+  (log "   (suggest-links \"title\") — find missing wikilinks")
+  (log "")
+  (log " Your vault. Your knowledge. Offline. In a cartridge.")
+  (log "═══════════════════════════════════════"))
