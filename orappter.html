@@ -554,7 +554,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
   <!-- Top bar -->
   <div id="topbar">
     <button id="btn-hamburger" onclick="toggleSidebar()">&#9776;</button>
-    <div id="vault-name">&#128274; wildhaven-ceo</div>
+    <div id="vault-name">&#128274; orappter-demo</div>
     <div id="doc-title-display">Select a document</div>
     <div id="search-wrap">
       <input id="search-input" type="text" placeholder="&#x1F50D; Search vault..." autocomplete="off" spellcheck="false">
@@ -783,24 +783,24 @@ function valueRepr(val) {
   if (val === true) return '#t';
   if (val === false) return '#f';
   if (isNil(val)) return '()';
-  if (val instanceof LispSymbol) return String(val);
+  if (val instanoperatorf LispSymbol) return String(val);
   if (typeof val === 'string') {
     return '"' + val.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
   }
   if (typeof val === 'number') return String(val);
   if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
-  if (val && typeof val === 'object' && !(val instanceof LispLambda) && !(val instanceof LispMacro) && !(val instanceof Env)) {
+  if (val && typeof val === 'object' && !(val instanoperatorf LispLambda) && !(val instanoperatorf LispMacro) && !(val instanoperatorf Env)) {
     if (val._type === 'nil') return '()';
     const items = Object.entries(val).map(([k, v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
     return `(dict ${items})`;
   }
-  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
+  if (val instanoperatorf LispLambda || val instanoperatorf LispMacro) return val.toString();
   if (typeof val === 'function') return '#<builtin>';
   return String(val);
 }
 
 function displayValue(val) {
-  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
+  if (typeof val === 'string' && !(val instanoperatorf LispSymbol)) return val;
   return valueRepr(val);
 }
 
@@ -816,10 +816,10 @@ function evaluate(expr, env) {
     if (expr === true || expr === false) return expr;
     if (typeof expr === 'number') return expr;
     if (isNil(expr)) return NIL;
-    if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+    if (typeof expr === 'string' && !(expr instanoperatorf LispSymbol)) return expr;
 
     // Symbol lookup
-    if (expr instanceof LispSymbol) return env.get(String(expr));
+    if (expr instanoperatorf LispSymbol) return env.get(String(expr));
 
     // Not a list
     if (!Array.isArray(expr)) return expr;
@@ -830,7 +830,7 @@ function evaluate(expr, env) {
     const head = expr[0];
 
     // Special forms
-    if (head instanceof LispSymbol || typeof head === 'string') {
+    if (head instanoperatorf LispSymbol || typeof head === 'string') {
       const h = String(head);
 
       if (h === 'quote') {
@@ -896,7 +896,7 @@ function evaluate(expr, env) {
       if (h === 'lambda') {
         if (expr.length < 3) throw new LispError('lambda requires params and body');
         const params = expr[1];
-        if (params instanceof LispSymbol || typeof params === 'string') {
+        if (params instanoperatorf LispSymbol || typeof params === 'string') {
           return new LispLambda(String(params), expr.slice(2), env);
         }
         if (Array.isArray(params)) {
@@ -980,7 +980,7 @@ function evaluate(expr, env) {
     const fn = evaluate(head, env);
 
     // Macro expansion
-    if (fn instanceof LispMacro) {
+    if (fn instanoperatorf LispMacro) {
       const macArgs = expr.slice(1); // unevaluated
       const macEnv = new Env(fn.params, macArgs, fn.env);
       const expanded = evalBody(fn.body, macEnv);
@@ -996,7 +996,7 @@ function evaluate(expr, env) {
     }
 
     // Lambda
-    if (fn instanceof LispLambda) {
+    if (fn instanoperatorf LispLambda) {
       const callEnv = new Env(fn.params, args, fn.env);
       // Eval body with TCO on last
       for (let i = 0; i < fn.body.length - 1; i++) evaluate(fn.body[i], callEnv);
@@ -1017,7 +1017,7 @@ function evalBody(body, env) {
 
 function callFn(fn, args) {
   if (typeof fn === 'function') return fn(...args);
-  if (fn instanceof LispLambda) {
+  if (fn instanoperatorf LispLambda) {
     const callEnv = new Env(fn.params, args, fn.env);
     return evalBody(fn.body, callEnv);
   }
@@ -1068,11 +1068,11 @@ function makeGlobalEnv() {
   env.set('pair?', x => Array.isArray(x) && x.length > 0);
   env.set('list?', x => Array.isArray(x));
   env.set('number?', x => typeof x === 'number' && !isNaN(x));
-  env.set('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
-  env.set('symbol?', x => x instanceof LispSymbol);
+  env.set('string?', x => typeof x === 'string' && !(x instanoperatorf LispSymbol));
+  env.set('symbol?', x => x instanoperatorf LispSymbol);
   env.set('boolean?', x => typeof x === 'boolean');
-  env.set('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
-  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanceof LispLambda) && !(x instanceof LispMacro) && x !== NIL);
+  env.set('procedure?', x => typeof x === 'function' || x instanoperatorf LispLambda);
+  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanoperatorf LispLambda) && !(x instanoperatorf LispMacro) && x !== NIL);
   env.set('integer?', x => Number.isInteger(x));
   env.set('empty?', x => isNil(x) || (typeof x === 'string' && x.length === 0) || (Array.isArray(x) && x.length === 0) || (x && typeof x === 'object' && Object.keys(x).length === 0));
 
@@ -1288,21 +1288,21 @@ const EMBEDDED_DOCS = {
     folder: '',
     content: `---
 title: HOME
-tags: [home, workspace, ceo]
+tags: [home, workspace, operator]
 aliases: [home, start, index]
 ---
 
-# Wildhaven CEO Workspace
+# ORAPPTER Demo Vault
 
 > *The operating system for a bootstrap empire.*
 
-Welcome to the **Wildhaven CEO Workspace** — your personal command center for building, shipping, and scaling in public.
+Welcome to the **ORAPPTER Demo Vault** — your personal command center for building, shipping, and scaling in public.
 
 ## Quick Navigation
 
-- [[MOLLY]] — Your AI Chief of Staff
-- [[guides/ceo-quick-start]] — Get up to speed in 10 minutes
-- [[strategy/ceo-perpetual-playbook]] — Long-term strategy framework
+- [[ASSISTANT]] — Your AI AI Assistant
+- [[guides/operator-quick-start]] — Get up to speed in 10 minutes
+- [[strategy/operator-perpetual-playbook]] — Long-term strategy framework
 - [[strategy/superseed-coin]] — Superseed tokenomics & roadmap
 
 ## Today's Dashboard
@@ -1341,23 +1341,23 @@ Sun  — Reflect + journal
 
 ## Tags
 
-#home #workspace #ceo #bootstrap #strategy
+#home #workspace #operator #bootstrap #strategy
 `
   },
 
-  'MOLLY': {
+  'ASSISTANT': {
     folder: '',
     content: `---
-title: MOLLY
-tags: [ai, chief-of-staff, agent, personality]
-aliases: [molly, ai-assistant, chief-of-staff]
+title: ASSISTANT
+tags: [ai, ai-assistant, agent, personality]
+aliases: [agent, ai-assistant, ai-assistant]
 ---
 
-# MOLLY — Chief of Staff
+# ASSISTANT — AI Assistant
 
 > *"I keep the machine running so you can keep building."*
 
-MOLLY is your AI Chief of Staff. She operates across the entire [[Wildhaven CEO Workspace]] with deep context about your goals, projects, and rhythm.
+ASSISTANT is your AI AI Assistant. She operates across the entire [[ORAPPTER Demo Vault]] with deep context about your goals, projects, and rhythm.
 
 ## Core Responsibilities
 
@@ -1378,7 +1378,7 @@ MOLLY is your AI Chief of Staff. She operates across the entire [[Wildhaven CEO 
 
 ## Communication Style
 
-MOLLY communicates in structured bursts:
+ASSISTANT communicates in structured bursts:
 - **Subject line** — one sentence stating the ask
 - **Context** — 2-3 sentences max
 - **Options** — numbered list, never more than 3
@@ -1387,38 +1387,38 @@ MOLLY communicates in structured bursts:
 ## Integration Points
 
 - Reads [[HOME]] dashboard every morning
-- Tracks [[strategy/ceo-perpetual-playbook]] for strategic context
+- Tracks [[strategy/operator-perpetual-playbook]] for strategic context
 - Monitors [[strategy/superseed-coin]] for token-related decisions
-- References [[guides/ceo-quick-start]] when onboarding new contributors
+- References [[guides/operator-quick-start]] when onboarding new contributors
 
 ## Current Status
 
 \`\`\`lisp
-(define molly-status
+(define agent-status
   (make-dict
     "mode" "active"
     "last-brief" "2026-04-05"
     "pending-tasks" 3
     "decisions-waiting" 1))
 
-(display (get molly-status "mode"))
+(display (get agent-status "mode"))
 \`\`\`
 
 ## Tags
 
-#ai #agent #chief-of-staff #assistant #molly
+#ai #agent #ai-assistant #assistant #agent
 `
   },
 
-  'guides/ceo-quick-start': {
+  'guides/operator-quick-start': {
     folder: 'guides',
     content: `---
-title: CEO Quick Start
+title: Operator Quick Start
 tags: [guide, onboarding, setup, productivity]
 aliases: [quick-start, getting-started, onboarding]
 ---
 
-# CEO Quick Start
+# Operator Quick Start
 
 > Get from 0 to operating in 10 minutes.
 
@@ -1430,12 +1430,12 @@ Key question: *What is the single most important thing I can ship this week?*
 
 ## Step 2 — Meet Your Team (3 min)
 
-- **[[MOLLY]]** — Chief of Staff. She has context on everything.
+- **[[ASSISTANT]]** — AI Assistant. She has context on everything.
 - Review the active projects list on [[HOME]]
 
 ## Step 3 — Understand the Strategy (3 min)
 
-Read [[strategy/ceo-perpetual-playbook]] section headers only. Don't read the details yet — just absorb the structure.
+Read [[strategy/operator-perpetual-playbook]] section headers only. Don't read the details yet — just absorb the structure.
 
 The three pillars:
 1. **Build in public** — everything ships, nothing is secret until it's ready
@@ -1449,7 +1449,7 @@ The three pillars:
 ## Your First Week Checklist
 
 - [ ] Read all documents in this vault
-- [ ] Set up your daily brief with MOLLY
+- [ ] Set up your daily brief with ASSISTANT
 - [ ] Post one public update about what you're building
 - [ ] Ship one tiny thing (even a tweet counts)
 - [ ] Book 3 coffee chats with builders
@@ -1459,8 +1459,8 @@ The three pillars:
 | Tool | Purpose | Link |
 |------|---------|------|
 | ORAPPTER | This vault | You're in it |
-| CommunityRAPP | Agent registry | github.com/kody-w/CommunityRAPP |
-| RAR | Agent store | github.com/kody-w/RAR |
+| CommunityRAPP | Agent registry | github.com/builder-w/CommunityRAPP |
+| RAR | Agent store | github.com/builder-w/RAR |
 | Obsidian | Local vault sync | obsidian.md |
 
 ## The LisPy REPL
@@ -1476,19 +1476,19 @@ Type any [[LisPy]] expression in the top bar to compute things:
 
 ## Tags
 
-#guide #onboarding #setup #quick-start #ceo
+#guide #onboarding #setup #quick-start #operator
 `
   },
 
-  'strategy/ceo-perpetual-playbook': {
+  'strategy/operator-perpetual-playbook': {
     folder: 'strategy',
     content: `---
-title: CEO Perpetual Playbook
-tags: [strategy, playbook, framework, ceo, long-term]
+title: Operator Perpetual Playbook
+tags: [strategy, playbook, framework, operator, long-term]
 aliases: [playbook, perpetual-playbook, strategy-framework]
 ---
 
-# CEO Perpetual Playbook
+# Operator Perpetual Playbook
 
 > *The document that eats itself and regenerates.*
 
@@ -1500,7 +1500,7 @@ This is the operating system beneath the [[HOME]] dashboard. It is a living fram
 Sense → Orient → Decide → Act → Learn → (repeat)
 \`\`\`
 
-Also known as the OODA loop. The CEO's job is to make this loop faster than the competition's.
+Also known as the OODA loop. The Operator's job is to make this loop faster than the competition's.
 
 ## Pillar 1 — Build in Public
 
@@ -1559,13 +1559,13 @@ This document is perpetual because it governs how it updates itself:
 ## Connected Docs
 
 - See [[HOME]] for the weekly rhythm
-- See [[MOLLY]] for execution support
+- See [[ASSISTANT]] for execution support
 - See [[strategy/superseed-coin]] for token strategy
-- See [[guides/ceo-quick-start]] for onboarding
+- See [[guides/operator-quick-start]] for onboarding
 
 ## Tags
 
-#strategy #playbook #framework #ceo #long-term #ooda
+#strategy #playbook #framework #operator #long-term #ooda
 `
   },
 
@@ -1583,7 +1583,7 @@ aliases: [superseed, coin, token, $SEED]
 
 ## Overview
 
-Superseed is the utility token powering the Wildhaven ecosystem. It aligns incentives between builders, users, and the protocol.
+Superseed is the utility token powering the ORAPPTER ecosystem. It aligns incentives between builders, users, and the protocol.
 
 **Token Symbol:** $SEED
 **Network:** Ethereum L2 (tentative)
@@ -1656,9 +1656,9 @@ Builders submit agents
 
 ## Related Docs
 
-- [[HOME]] — Wildhaven overview
-- [[strategy/ceo-perpetual-playbook]] — Strategic framework
-- [[MOLLY]] — Chief of Staff who tracks this
+- [[HOME]] — ORAPPTER overview
+- [[strategy/operator-perpetual-playbook]] — Strategic framework
+- [[ASSISTANT]] — AI Assistant who tracks this
 
 ## Tags
 
@@ -1813,7 +1813,7 @@ Each stream produces content independently:
 ## Connected
 
 - [[HOME]] — Main workspace
-- [[strategy/ceo-perpetual-playbook]] — Strategic context
+- [[strategy/operator-perpetual-playbook]] — Strategic context
 - [[LisPy]] — The VM powering ORAPPTER
 
 ## Tags
@@ -1859,11 +1859,11 @@ aliases: [cookbook, lispy-examples, lisp-examples]
 \`\`\`lisp
 (define person
   (make-dict
-    "name" "Kody"
-    "role" "CEO"
+    "name" "Builder"
+    "role" "Operator"
     "projects" (list "ORAPPTER" "RAR" "CommunityRAPP")))
 
-(get person "name")           ; => "Kody"
+(get person "name")           ; => "Builder"
 (get person "projects")       ; => ("ORAPPTER" "RAR" "CommunityRAPP")
 (length (get person "projects")) ; => 3
 
@@ -2724,7 +2724,7 @@ async function init() {
 async function fetchRemoteVault() {
   // Attempt to fetch from GitHub API — silently fails if offline
   try {
-    const res = await fetch('https://api.github.com/repos/kody-w/wildhaven-ceo/contents/', {
+    const res = await fetch('https://api.github.com/repos/builder-w/orappter-demo/contents/', {
       headers: { 'Accept': 'application/vnd.github.v3+json' },
       signal: AbortSignal.timeout(5000)
     });
