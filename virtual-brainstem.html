@@ -3633,40 +3633,55 @@ function handleAgentDrop(event) {
 }
 
 function hotLoadAgent(filename, source) {
-  // Parse __manifest__ from source using regex (safe, no eval)
+  // Extract docstring (used for description fallback)
+  const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
+  const docstring = (docMatch && (docMatch[1] || docMatch[2]) || '').trim();
+
+  // Try to parse __manifest__ from source using regex (safe, no eval)
   const manifestMatch = source.match(/__manifest__\s*=\s*(\{[\s\S]*?\n\})/);
-  if (!manifestMatch) {
-    showToast(`${filename}: no __manifest__ found`, true);
-    return;
+  let manifest = null;
+
+  if (manifestMatch) {
+    let jsonStr = manifestMatch[1]
+      .replace(/#[^\n]*/g, '')            // strip comments
+      .replace(/'/g, '"')                  // single to double quotes
+      .replace(/True/g, 'true')
+      .replace(/False/g, 'false')
+      .replace(/None/g, 'null')
+      .replace(/,\s*([\]}])/g, '$1');      // trailing commas
+    try {
+      manifest = JSON.parse(jsonStr);
+    } catch(e) {
+      // Manifest exists but can't parse — still accept the agent
+      manifest = null;
+    }
   }
 
-  // Parse the manifest dict (Python dict to JSON)
-  let jsonStr = manifestMatch[1]
-    .replace(/#[^\n]*/g, '')            // strip comments
-    .replace(/'/g, '"')                  // single to double quotes
-    .replace(/True/g, 'true')
-    .replace(/False/g, 'false')
-    .replace(/None/g, 'null')
-    .replace(/,\s*([\]}])/g, '$1');      // trailing commas
+  // If no manifest or missing required fields, synthesize one from the file
+  if (!manifest || !manifest.name || !manifest.display_name) {
+    const stem = filename.replace(/\.py$/, '');
+    // Try to find a class name in the source
+    const classMatch = source.match(/class\s+(\w+)/);
+    const className = classMatch ? classMatch[1] : stem.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).replace(/\s/g, '');
+    const displayName = manifest?.display_name || className;
+    const slug = manifest?.name || `@local/${stem}`;
 
-  let manifest;
-  try {
-    manifest = JSON.parse(jsonStr);
-  } catch(e) {
-    showToast(`${filename}: failed to parse manifest`, true);
-    return;
-  }
-
-  if (!manifest.name || !manifest.display_name) {
-    showToast(`${filename}: manifest missing name/display_name`, true);
-    return;
+    manifest = {
+      schema: 'rapp-agent/1.0',
+      name: slug,
+      display_name: displayName,
+      description: manifest?.description || docstring.split('\n')[0] || `Loaded from ${filename}`,
+      author: manifest?.author || 'Local',
+      tags: manifest?.tags || [],
+      category: manifest?.category || 'general',
+      version: manifest?.version || '0.0.0',
+      requires_env: manifest?.requires_env || [],
+      ...(manifest || {})  // keep anything else the partial manifest had
+    };
   }
 
   const slug = manifest.name;
-
-  // Extract docstring
-  const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
-  const doc = (docMatch && (docMatch[1] || docMatch[2])) || manifest.description || '';
+  const doc = docstring || manifest.description || '';
 
   // Store the hot-loaded agent
   hotLoadedAgents[slug] = { manifest, source, doc: doc.trim() };
@@ -3698,10 +3713,15 @@ function hotLoadAgent(filename, source) {
   populateAgentDropdown();
   updateEnabledPills();
 
+  const hadManifest = !!manifestMatch;
   showToast(`${manifest.display_name} hot-loaded and enabled`);
 
   // Add a system message to chat
-  addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
+  if (hadManifest) {
+    addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
+  } else {
+    addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code> (no manifest — inferred from source). I can now route requests to this agent.`);
+  }
 }
 
 function showToast(msg, isError) {
