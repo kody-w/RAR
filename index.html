@@ -5349,8 +5349,8 @@ function previewManifest() {
   const pv = document.getElementById('manifest-preview');
   const btn = document.getElementById('submit-btn');
   if (!code.trim()) { pv.style.display = 'none'; btn.disabled = true; return; }
-  // Basic Python syntax check — must have class and def
-  if (!code.includes('class ') || !code.includes('def perform')) {
+  // Basic Python structure check — must have class and perform method
+  if (!/class\s+\w+/.test(code) || !/def\s+perform\s*\(/.test(code)) {
     pv.style.display = 'block';
     pv.innerHTML = '<h4>Validation</h4><div class="err">Missing class definition or perform() method. Is this a valid agent?</div>';
     btn.disabled = true; return;
