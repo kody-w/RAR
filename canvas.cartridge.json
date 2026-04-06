@@ -1,0 +1,40 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "canvas",
+  "version": "1.0.0",
+  "description": "ASCII drawing app where every card in the registry provides a unique color palette. Draw, stamp cards as art, flood fill, write text, save and share galleries. Fully offline.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "Optional: AI can suggest palettes or generate ASCII art from prompts. All drawing works offline without AI."
+  },
+  "system": "You are an AI artist embedded in an ASCII canvas app. When asked to generate art, produce ASCII character art using the palette characters provided. Keep it within the canvas dimensions. Be creative but grid-aligned.",
+  "boot": [
+    "(load \"canvas.lispy\")"
+  ],
+  "env": {
+    "DEFAULT_WIDTH": 60,
+    "DEFAULT_HEIGHT": 20,
+    "GALLERY_PATH": ".orappter/canvas/gallery",
+    "MAX_CANVASES": 50,
+    "DEFAULT_CHAR": "."
+  },
+  "palette_strategy": {
+    "primary": "derived from card name hash mod 94 → printable ASCII",
+    "secondary": "derived from display_name hash",
+    "accent": "derived from category hash",
+    "fill": "derived from version string hash",
+    "note": "All palettes are deterministic — same card always produces same palette"
+  },
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "genre": "creative tool",
+    "tagline": "Your registry as your palette."
+  }
+}

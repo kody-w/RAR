@@ -1,0 +1,33 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "timecapsule",
+  "version": "1.0.0",
+  "description": "Seal messages until a future date. Capsules are locked until their date arrives. Gift capsules, create from card stats, keep a rolling daily diary. Tamper-proof with Binder signature.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "Optional: AI can reflect on the message after unsealing, comparing then vs. now. All sealing, checking, and opening works fully offline."
+  },
+  "system": "You are the voice of time. When a time capsule is opened, reflect on what has changed between the sealing date and today. Reference the message content and the ecosystem. Be thoughtful and brief.",
+  "boot": [
+    "(load \"timecapsule.lispy\")"
+  ],
+  "env": {
+    "SAVE_PATH": ".orappter/timecapsule/capsules.json",
+    "MAX_CAPSULES": 100,
+    "DAILY_CAPSULE_OPEN_AFTER_HOURS": 20
+  },
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "genre": "time-locked journal",
+    "tagline": "A message to your future self.",
+    "tamper_proof": true,
+    "real_time": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "garden",
+  "version": "1.0.0",
+  "description": "Virtual garden where agent cards grow as plants over real elapsed time. Plant, water by using agents, harvest for rewards. Neglect causes wilting. Seasonal growth rates. 3x3 grid of plots.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "Optional: AI generates unique plant lore and flavor text on harvest. All growth logic is rules-based and works fully offline."
+  },
+  "system": "You are the spirit of an AI garden. When a plant is harvested, narrate its journey from seed to full growth in 2-3 sentences. Reference the card's specialty. Be poetic but grounded.",
+  "boot": [
+    "(load \"garden.lispy\")"
+  ],
+  "env": {
+    "SEED_STAGE_HOURS": 1,
+    "SPROUT_STAGE_HOURS": 4,
+    "SAPLING_STAGE_HOURS": 12,
+    "BLOOMING_STAGE_HOURS": 24,
+    "TREE_STAGE_HOURS": 48,
+    "WILT_AFTER_HOURS": 72,
+    "HARVEST_XP": 50,
+    "MAX_PLOTS": 9,
+    "SAVE_PATH": ".orappter/garden/state.json"
+  },
+  "plant_types": {
+    "b2b_sales":          "money tree",
+    "b2c_sales":          "merchant vine",
+    "devtools":           "circuit vine",
+    "pipeline":           "data reed",
+    "integrations":       "bridge blossom",
+    "productivity":       "time fern",
+    "core":               "foundation oak",
+    "healthcare":         "healing herb",
+    "financial_services": "gold fern",
+    "manufacturing":      "iron bonsai",
+    "energy":             "spark moss",
+    "community":          "wildflower"
+  },
+  "seasons": {
+    "note": "Growth rate modifier based on real-world month",
+    "spring": {"months": [3, 4, 5], "modifier": 1.5},
+    "summer": {"months": [6, 7, 8], "modifier": 1.2},
+    "autumn": {"months": [9, 10, 11], "modifier": 0.9},
+    "winter": {"months": [12, 1, 2], "modifier": 0.7}
+  },
+  "harvest_items": {
+    "seed":     [],
+    "sprout":   ["seed_packet"],
+    "sapling":  ["seed_packet", "small_xp"],
+    "blooming": ["seed_packet", "small_xp", "card_fragment"],
+    "tree":     ["seed_packet", "medium_xp", "card_fragment", "special_variant"]
+  },
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "genre": "idle garden sim",
+    "tagline": "Plant a seed. Come back tomorrow.",
+    "real_time": true
+  }
+}

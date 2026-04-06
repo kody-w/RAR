@@ -1,0 +1,519 @@
+;; ═══════════════════════════════════════════════════════════════
+;; CANVAS.LISPY — ASCII Drawing App for ORAPPTER
+;; Every card in the registry provides a unique color palette.
+;; Draw, stamp, fill, export, gallery. Fully offline.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "canvas")
+(define _agent_desc "ASCII drawing app — cards provide palettes. Draw, stamp, fill, save to gallery.")
+
+(define CANVAS_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *canvas* nil)          ;; 2D grid: list of rows (strings)
+(define *canvas-w* 0)
+(define *canvas-h* 0)
+(define *canvas-name* "untitled")
+(define *active-palette* nil)  ;; currently loaded palette dict
+(define *active-card* "")      ;; name of card whose palette is loaded
+(define *gallery* (list))      ;; list of saved canvas dicts
+(define *undo-stack* (list))   ;; for undo support
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Canvas Creation & Basic Operations
+;; ═══════════════════════════════════════════════════════════════
+
+;; Create a new blank canvas
+(define (canvas-new w h)
+  (set! *canvas-w* w)
+  (set! *canvas-h* h)
+  (set! *canvas* (build-grid w h " "))
+  (set! *canvas-name* "untitled")
+  (log (concat "  Canvas created: " (string w) " × " (string h)))
+  (canvas-show))
+
+;; Build a 2D grid (list of row-strings) filled with a char
+(define (build-grid w h fill-char)
+  (let (rows (list)
+        y 0)
+    (while (< y h)
+      (let (row (repeat-str fill-char w))
+        (set! rows (append rows (list row))))
+      (set! y (+ y 1)))
+    rows))
+
+;; Show the current canvas
+(define (canvas-show)
+  (assert-canvas)
+  (log "")
+  (log (concat "  ╔" (repeat-str "═" *canvas-w*) "╗"))
+  (let (y 0)
+    (while (< y *canvas-h*)
+      (log (concat "  ║" (nth *canvas* y) "║"))
+      (set! y (+ y 1))))
+  (log (concat "  ╚" (repeat-str "═" *canvas-w*) "╝"))
+  (if (not (null? *active-palette*))
+    (log (concat "  Palette: " *active-card*
+                 "  P=" (get *active-palette* "primary")
+                 " S=" (get *active-palette* "secondary")
+                 " A=" (get *active-palette* "accent")))))
+
+;; Clear the canvas
+(define (canvas-clear)
+  (assert-canvas)
+  (push-undo)
+  (set! *canvas* (build-grid *canvas-w* *canvas-h* " "))
+  (log "  Canvas cleared.")
+  (canvas-show))
+
+;; Get a single cell
+(define (canvas-get x y)
+  (if (in-bounds? x y)
+    (let (row (nth *canvas* y))
+      (substring row x (+ x 1)))
+    " "))
+
+;; Set a single cell (returns new canvas)
+(define (canvas-set x y ch)
+  (if (not (in-bounds? x y))
+    (log (concat "  Out of bounds: (" (string x) ", " (string y) ")"))
+    (let (old-row (nth *canvas* y)
+          new-row (concat
+                    (substring old-row 0 x)
+                    (substring ch 0 1)
+                    (substring old-row (+ x 1) (length old-row))))
+      (set! *canvas* (list-set *canvas* y new-row)))))
+
+;; Replace element at index in a list
+(define (list-set lst idx val)
+  (let (result (list)
+        i 0)
+    (for-each
+      (lambda (item)
+        (if (= i idx)
+          (set! result (append result (list val)))
+          (set! result (append result (list item))))
+        (set! i (+ i 1)))
+      lst)
+    result))
+
+;; Bounds check
+(define (in-bounds? x y)
+  (and (>= x 0) (< x *canvas-w*)
+       (>= y 0) (< y *canvas-h*)))
+
+;; Repeat a string n times
+(define (repeat-str s n)
+  (if (<= n 0) ""
+    (concat s (repeat-str s (- n 1)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Drawing Primitives
+;; ═══════════════════════════════════════════════════════════════
+
+;; Place a character at (x, y)
+(define (draw x y ch)
+  (assert-canvas)
+  (canvas-set x y ch))
+
+;; Draw a line using Bresenham's algorithm
+(define (line x1 y1 x2 y2 ch)
+  (assert-canvas)
+  (push-undo)
+  (let (dx (abs (- x2 x1))
+        dy (abs (- y2 y1))
+        sx (if (< x1 x2) 1 -1)
+        sy (if (< y1 y2) 1 -1)
+        err (- dx dy)
+        cx x1
+        cy y1
+        running true)
+    (while running
+      (canvas-set cx cy ch)
+      (if (and (= cx x2) (= cy y2))
+        (set! running false)
+        (let (e2 (* 2 err))
+          (if (> e2 (- dy))
+            (begin (set! err (- err dy)) (set! cx (+ cx sx))))
+          (if (< e2 dx)
+            (begin (set! err (+ err dx)) (set! cy (+ cy sy)))))))))
+
+;; Draw a rectangle outline
+(define (rect x1 y1 x2 y2 ch)
+  (assert-canvas)
+  (push-undo)
+  ;; Top and bottom
+  (let (x x1)
+    (while (<= x x2)
+      (canvas-set x y1 ch)
+      (canvas-set x y2 ch)
+      (set! x (+ x 1))))
+  ;; Left and right
+  (let (y y1)
+    (while (<= y y2)
+      (canvas-set x1 y ch)
+      (canvas-set x2 y ch)
+      (set! y (+ y 1)))))
+
+;; Draw a filled rectangle
+(define (rect-fill x1 y1 x2 y2 ch)
+  (assert-canvas)
+  (push-undo)
+  (let (y y1)
+    (while (<= y y2)
+      (let (x x1)
+        (while (<= x x2)
+          (canvas-set x y ch)
+          (set! x (+ x 1))))
+      (set! y (+ y 1)))))
+
+;; Draw a circle (midpoint algorithm)
+(define (circle cx cy r ch)
+  (assert-canvas)
+  (push-undo)
+  (let (x r
+        y 0
+        p (- 1 r))
+    (while (>= x y)
+      (canvas-set (+ cx x) (+ cy y) ch)
+      (canvas-set (- cx x) (+ cy y) ch)
+      (canvas-set (+ cx x) (- cy y) ch)
+      (canvas-set (- cx x) (- cy y) ch)
+      (canvas-set (+ cx y) (+ cy x) ch)
+      (canvas-set (- cx y) (+ cy x) ch)
+      (canvas-set (+ cx y) (- cy x) ch)
+      (canvas-set (- cx y) (- cy x) ch)
+      (set! y (+ y 1))
+      (if (< p 0)
+        (set! p (+ p (* 2 y) 1))
+        (begin (set! x (- x 1))
+               (set! p (+ p (* 2 (- y x)) 1)))))))
+
+;; Flood fill (iterative BFS to avoid stack overflow)
+(define (fill x y ch)
+  (assert-canvas)
+  (push-undo)
+  (let (target (canvas-get x y))
+    (if (= target ch)
+      (log "  Fill: already that character.")
+      (let (queue (list (list x y))
+            visited (make-dict))
+        (while (not (empty? queue))
+          (let (pos (car queue)
+                px  (nth pos 0)
+                py  (nth pos 1))
+            (set! queue (cdr queue))
+            (let (key (concat (string px) "," (string py)))
+              (if (and (in-bounds? px py)
+                       (= (canvas-get px py) target)
+                       (null? (get visited key nil)))
+                (begin
+                  (canvas-set px py ch)
+                  (dict-set visited key true)
+                  (set! queue (append queue
+                    (list (list (+ px 1) py)
+                          (list (- px 1) py)
+                          (list px (+ py 1))
+                          (list px (- py 1))))))))))))))
+
+;; Write a text string starting at (x, y)
+(define (text x y str)
+  (assert-canvas)
+  (push-undo)
+  (let (chars (split str "")
+        i 0)
+    (for-each
+      (lambda (c)
+        (canvas-set (+ x i) y c)
+        (set! i (+ i 1)))
+      chars)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Card Palette System
+;; ═══════════════════════════════════════════════════════════════
+
+;; Load a card's color palette (deterministic from card seed)
+(define (canvas-load-card card-name)
+  (let (card (find-card-in-registry card-name))
+    (if (null? card)
+      ;; Generate from name hash only if not in registry
+      (let (pal (derive-palette-from-string card-name))
+        (set! *active-palette* pal)
+        (set! *active-card* card-name)
+        (log (concat "  Palette loaded (offline) for: " card-name))
+        (show-palette pal))
+      ;; Full palette from card metadata
+      (let (pal (derive-palette-from-card card))
+        (set! *active-palette* pal)
+        (set! *active-card* card-name)
+        (log (concat "  Palette loaded for: " card-name))
+        (show-palette pal)))))
+
+;; Derive palette from card dict
+(define (derive-palette-from-card card)
+  (let (name  (get card "name" "")
+        disp  (get card "display_name" "")
+        cat   (get card "category" "core")
+        ver   (get card "version" "1.0.0"))
+    (make-dict
+      "primary"   (hash-to-char name)
+      "secondary" (hash-to-char disp)
+      "accent"    (hash-to-char cat)
+      "fill"      (hash-to-char ver)
+      "border"    (nth (list "+" "#" "*" "=" "~" "|") (modulo (str-hash name) 6))
+      "shadow"    (nth (list "." "," ":" ";" "`" "'") (modulo (str-hash disp) 6)))))
+
+;; Derive palette from a raw string (offline fallback)
+(define (derive-palette-from-string s)
+  (make-dict
+    "primary"   (hash-to-char s)
+    "secondary" (hash-to-char (concat s "2"))
+    "accent"    (hash-to-char (concat s "3"))
+    "fill"      (hash-to-char (concat s "4"))
+    "border"    (nth (list "+" "#" "*" "=") (modulo (str-hash s) 4))
+    "shadow"    (nth (list "." "," ":" ";") (modulo (str-hash s) 4))))
+
+;; Map a string to a printable ASCII character (32-126)
+(define (hash-to-char s)
+  (let (code (+ 33 (modulo (str-hash s) 93)))
+    (char-from-code code)))
+
+;; Simple djb2-style hash
+(define (str-hash s)
+  (reduce
+    (lambda (acc c) (+ (* acc 31) (char-code c)))
+    (split s "") 5381))
+
+;; Display the palette visually
+(define (show-palette pal)
+  (log (concat "  ┌── Palette ─────────────────────────┐"))
+  (log (concat "  │  Primary  : " (repeat-str (get pal "primary" "?") 8) "                  │"))
+  (log (concat "  │  Secondary: " (repeat-str (get pal "secondary" "?") 8) "                  │"))
+  (log (concat "  │  Accent   : " (repeat-str (get pal "accent" "?") 8) "                  │"))
+  (log (concat "  │  Fill     : " (repeat-str (get pal "fill" "?") 8) "                  │"))
+  (log (concat "  │  Border   : " (repeat-str (get pal "border" "?") 8) "                  │"))
+  (log (concat "  └────────────────────────────────────┘")))
+
+;; Use active palette primary char for drawing shorthand
+(define (p) (if (null? *active-palette*) "#" (get *active-palette* "primary")))
+(define (s) (if (null? *active-palette*) "." (get *active-palette* "secondary")))
+(define (a) (if (null? *active-palette*) "*" (get *active-palette* "accent")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Card Stamp
+;; ═══════════════════════════════════════════════════════════════
+
+;; Stamp a card's ASCII art representation onto the canvas
+(define (stamp-card card-name x y)
+  (assert-canvas)
+  (push-undo)
+  (let (card (find-card-in-registry card-name)
+        pal  (derive-palette-from-string card-name))
+    (let (art (generate-card-stamp card pal))
+      (let (row-idx 0)
+        (for-each
+          (lambda (row)
+            (let (col-idx 0)
+              (for-each
+                (lambda (c)
+                  (canvas-set (+ x col-idx) (+ y row-idx) c)
+                  (set! col-idx (+ col-idx 1)))
+                (split row "")))
+            (set! row-idx (+ row-idx 1)))
+          art)))))
+
+;; Generate a mini card stamp (7 wide × 5 tall)
+(define (generate-card-stamp card pal)
+  (let (b (get pal "border" "+")
+        p (get pal "primary" "#")
+        name-str (if (null? card)
+                   "???"
+                   (let (n (get card "display_name" (get card "name" "???")))
+                     (if (> (length n) 5) (substring n 0 5) n))))
+    (list
+      (concat b b b b b b b)
+      (concat b " " p p p " " b)
+      (concat b " " (pad-center name-str 3) " " b)
+      (concat b " " p p p " " b)
+      (concat b b b b b b b))))
+
+;; Center a string in a fixed width, padded with spaces
+(define (pad-center s width)
+  (let (len (length s)
+        total (if (> len width) width len)
+        left  (floor (/ (- width total) 2))
+        right (- width total left))
+    (concat (repeat-str " " left)
+            (if (> len width) (substring s 0 width) s)
+            (repeat-str " " right))))
+
+;; Find a card in the registry (returns nil if not found)
+(define (find-card-in-registry name-or-slug)
+  (if (not (defined? 'registry))
+    nil
+    (let (q (lowercase name-or-slug)
+          matches (filter
+            (lambda (c)
+              (or (= (lowercase (get c "name" "")) q)
+                  (= (lowercase (get c "display_name" "")) q)
+                  (contains? (lowercase (get c "name" "")) q)))
+            registry))
+      (if (empty? matches) nil (car matches)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Save / Load / Gallery
+;; ═══════════════════════════════════════════════════════════════
+
+;; Save current canvas to gallery
+(define (canvas-save name)
+  (assert-canvas)
+  (let (saved (make-dict
+                "name"    name
+                "width"   *canvas-w*
+                "height"  *canvas-h*
+                "rows"    *canvas*
+                "palette" *active-card*
+                "saved-at" (date-string)))
+    ;; Remove existing with same name
+    (set! *gallery* (filter (lambda (g) (not (= (get g "name") name))) *gallery*))
+    (set! *gallery* (append *gallery* (list saved)))
+    (log (concat "  Saved \"" name "\" to gallery. (" (string (length *gallery*)) " total)"))))
+
+;; Load a canvas from gallery
+(define (canvas-load name)
+  (let (found (filter (lambda (g) (= (get g "name") name)) *gallery*))
+    (if (empty? found)
+      (log (concat "  Not found: \"" name "\". (gallery) to list saved canvases."))
+      (let (saved (car found))
+        (set! *canvas-w* (get saved "width"))
+        (set! *canvas-h* (get saved "height"))
+        (set! *canvas* (get saved "rows"))
+        (set! *canvas-name* name)
+        (log (concat "  Loaded: \"" name "\""))
+        (canvas-show)))))
+
+;; Export the canvas as raw text art
+(define (canvas-export)
+  (assert-canvas)
+  (log "")
+  (log "  ┌── CANVAS EXPORT ───────────────────────┐")
+  (for-each (lambda (row) (log (concat "  " row))) *canvas*)
+  (log "  └────────────────────────────────────────┘")
+  (log (concat "  Copy the rows above to share your art.")))
+
+;; Browse saved artworks
+(define (gallery)
+  (if (empty? *gallery*)
+    (log "  Gallery is empty. (canvas-save \"name\") to save a canvas.")
+    (begin
+      (log "")
+      (log "  ╔══ GALLERY ══════════════════════════════╗")
+      (for-each
+        (lambda (g)
+          (log (concat "  ║  \"" (get g "name" "?")
+                       "\"  " (string (get g "width" 0))
+                       "×" (string (get g "height" 0))
+                       "  [" (get g "palette" "no palette") "]"
+                       "  " (get g "saved-at" "")
+                       "  ║")))
+        *gallery*)
+      (log "  ╚════════════════════════════════════════╝")
+      (log (concat "  " (string (length *gallery*)) " saved. (canvas-load \"name\") to restore.")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Undo
+;; ═══════════════════════════════════════════════════════════════
+
+;; Push current state onto undo stack
+(define (push-undo)
+  (if (not (null? *canvas*))
+    (begin
+      (set! *undo-stack* (append *undo-stack* (list *canvas*)))
+      ;; Cap at 20 undo states
+      (if (> (length *undo-stack*) 20)
+        (set! *undo-stack* (list-tail *undo-stack* 1))))))
+
+;; Undo last operation
+(define (canvas-undo)
+  (if (empty? *undo-stack*)
+    (log "  Nothing to undo.")
+    (begin
+      (set! *canvas* (last *undo-stack*))
+      (set! *undo-stack* (take *undo-stack* (- (length *undo-stack*) 1)))
+      (log "  Undone.")
+      (canvas-show))))
+
+;; Take first n elements of a list
+(define (take lst n)
+  (if (or (<= n 0) (empty? lst))
+    (list)
+    (cons (car lst) (take (cdr lst) (- n 1)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Helpers
+;; ═══════════════════════════════════════════════════════════════
+
+;; Guard: canvas must exist
+(define (assert-canvas)
+  (if (null? *canvas*)
+    (begin
+      (log "  No canvas. (canvas-new width height) first.")
+      (error "no-canvas"))))
+
+;; Canvas info
+(define (canvas-info)
+  (if (null? *canvas*)
+    (log "  No canvas loaded.")
+    (begin
+      (log (concat "  Canvas: " (string *canvas-w*) " × " (string *canvas-h*)))
+      (log (concat "  Name: " *canvas-name*))
+      (log (concat "  Active palette: " (if (empty? *active-card*) "none" *active-card*)))
+      (log (concat "  Undo depth: " (string (length *undo-stack*)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║     C A N V A S . L I S P Y   v1.0.0    ║")
+  (log "  ║     ASCII art powered by your registry   ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  CANVAS                                  ║")
+  (log "  ║  (canvas-new 60 20)  — create canvas     ║")
+  (log "  ║  (canvas-show)       — display canvas    ║")
+  (log "  ║  (canvas-clear)      — clear             ║")
+  (log "  ║  (canvas-undo)       — undo last op      ║")
+  (log "  ║                                          ║")
+  (log "  ║  PALETTE                                 ║")
+  (log "  ║  (canvas-load-card \"@name\")              ║")
+  (log "  ║  (p) (s) (a)  — primary/secondary/accent ║")
+  (log "  ║                                          ║")
+  (log "  ║  DRAW                                    ║")
+  (log "  ║  (draw x y ch)       — place char        ║")
+  (log "  ║  (line x1 y1 x2 y2 ch)                  ║")
+  (log "  ║  (rect x1 y1 x2 y2 ch)                  ║")
+  (log "  ║  (circle cx cy r ch)                     ║")
+  (log "  ║  (fill x y ch)       — flood fill        ║")
+  (log "  ║  (text x y \"str\")    — write text        ║")
+  (log "  ║  (stamp-card \"@name\" x y)                ║")
+  (log "  ║                                          ║")
+  (log "  ║  GALLERY                                 ║")
+  (log "  ║  (canvas-save \"name\") (canvas-load \"n\")  ║")
+  (log "  ║  (canvas-export)     — share as text     ║")
+  (log "  ║  (gallery)           — browse saved      ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))

@@ -1,0 +1,500 @@
+;; ═══════════════════════════════════════════════════════════════
+;; SCHOOL.LISPY — Interactive AI Tutor for ORAPPTER
+;; Six subjects. Ten lessons each. XP, levels, streaks, quizzes.
+;; Pair with agent cards as study buddies.
+;; Offline lesson templates included — no AI required for basics.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "school")
+(define _agent_desc "Interactive AI tutor — 6 subjects, XP system, quizzes, streaks. Knowledge compounds.")
+
+(define SCHOOL_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Student State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *enrolled* (list))        ;; list of subject strings
+(define *current-subject* nil)
+(define *lesson-idx* (make-dict)) ;; subject → lesson number (0-9)
+(define *xp* 0)
+(define *level* 0)
+(define *streak* 0)
+(define *last-study-date* "")
+(define *grades* (make-dict))     ;; subject → {lessons, quizzes_right, quizzes_taken}
+(define *study-buddy* nil)        ;; card name of current study partner
+(define *active-quiz* nil)        ;; {question, options, answer-idx} when a quiz is active
+(define *quiz-answered* false)
+
+;; XP thresholds per level
+(define LEVEL_THRESHOLDS (list 0 100 300 600 1000))
+(define LEVEL_TITLES (list "Freshman" "Sophomore" "Junior" "Senior" "Graduate"))
+
+;; Available subjects
+(define ALL_SUBJECTS (list "python" "math" "history" "ai" "business" "music"))
+
+;; XP rewards
+(define XP_LESSON 10)
+(define XP_QUIZ   20)
+(define XP_HW     15)
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Enrollment & Status
+;; ═══════════════════════════════════════════════════════════════
+
+;; Enroll in a subject
+(define (enroll subject)
+  (if (not (member? subject ALL_SUBJECTS))
+    (begin
+      (log (concat "  Unknown subject: " subject))
+      (log (concat "  Available: " (join ALL_SUBJECTS ", "))))
+    (if (member? subject *enrolled*)
+      (begin
+        (set! *current-subject* subject)
+        (log (concat "  Switched to: " subject
+                     " (Lesson " (string (+ 1 (get *lesson-idx* subject 0))) "/10)")))
+      (begin
+        (set! *enrolled* (append *enrolled* (list subject)))
+        (dict-set *lesson-idx* subject 0)
+        (dict-set *grades* subject
+          (make-dict "lessons" 0 "quizzes_right" 0 "quizzes_taken" 0))
+        (set! *current-subject* subject)
+        (log (concat "  Enrolled in: " subject))
+        (log (concat "  10 lessons await. Start with (lesson)."))))))
+
+;; Show grade report across all subjects
+(define (grade)
+  (if (empty? *enrolled*)
+    (log "  Not enrolled in any subjects. (enroll \"python\") to start.")
+    (begin
+      (log "")
+      (log "  ╔══ TRANSCRIPT ════════════════════════════╗")
+      (log (concat "  ║  " (current-level-title) " — " (string *xp*) " XP"
+                   "  Streak: " (string *streak*) " days  ║"))
+      (log "  ╠══════════════════════════════════════════╣")
+      (for-each
+        (lambda (sub)
+          (let (g    (get *grades* sub (make-dict "lessons" 0 "quizzes_right" 0 "quizzes_taken" 0))
+                idx  (get *lesson-idx* sub 0)
+                lessons  (get g "lessons" 0)
+                qr   (get g "quizzes_right" 0)
+                qt   (get g "quizzes_taken" 0))
+            (let (pct (if (= qt 0) "--" (concat (string (floor (* 100 (/ qr qt)))) "%")))
+              (log (concat "  ║  " (pad-r sub 12)
+                           " Lesson " (string idx) "/10"
+                           "  Quiz: " pct
+                           "  ║")))))
+        *enrolled*)
+      (log "  ╚══════════════════════════════════════════╝"))))
+
+(define (current-level-title)
+  (nth LEVEL_TITLES *level*))
+
+(define (pad-r s n)
+  (let (need (- n (length s)))
+    (if (<= need 0) s
+      (concat s (repeat-str " " need)))))
+
+(define (repeat-str s n)
+  (if (<= n 0) ""
+    (concat s (repeat-str s (- n 1)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Lessons
+;; ═══════════════════════════════════════════════════════════════
+
+;; Get the next lesson in the current subject
+(define (lesson)
+  (assert-enrolled)
+  (let (sub *current-subject*
+        idx (get *lesson-idx* sub 0))
+    (if (>= idx 10)
+      (log (concat "  You've completed all 10 lessons in " sub "! (quiz) to test your mastery."))
+      (begin
+        (log (concat "  ━━━ " sub " — Lesson " (string (+ idx 1)) " of 10 ━━━"))
+        (let (content (get-lesson sub idx))
+          (log "")
+          (log content)
+          (log ""))
+        ;; Advance lesson counter
+        (dict-set *lesson-idx* sub (+ idx 1))
+        ;; XP
+        (let (g (get *grades* sub (make-dict "lessons" 0)))
+          (dict-set g "lessons" (+ (get g "lessons" 0) 1))
+          (dict-set *grades* sub g))
+        (gain-xp XP_LESSON)
+        (update-streak)
+        (log (concat "  [+" (string XP_LESSON) " XP]  Total: " (string *xp*) " XP"))))))
+
+;; Get lesson content: AI or offline template
+(define (get-lesson subject idx)
+  (if (defined? 'smart-generate)
+    (let (prompt (concat
+           "You are a " subject " tutor. Teach Lesson " (string (+ idx 1)) " of 10."
+           " The subject is: " subject "."
+           " Difficulty: " (lesson-difficulty idx) "."
+           " Format: 1) Key Concept  2) Example  3) Think About It."
+           " Keep it under 200 words."))
+      (smart-generate prompt))
+    (offline-lesson subject idx)))
+
+;; Offline lesson templates (10 per subject)
+(define (offline-lesson subject idx)
+  (let (templates (get LESSON_TEMPLATES subject (list)))
+    (if (< idx (length templates))
+      (nth templates idx)
+      (concat "Lesson " (string (+ idx 1)) ": Advanced " subject
+              ". Practice what you've learned so far and apply it to new problems."))))
+
+;; Difficulty tier for lesson prompt
+(define (lesson-difficulty idx)
+  (nth (list "beginner" "beginner" "beginner" "elementary" "elementary"
+             "intermediate" "intermediate" "intermediate" "advanced" "advanced")
+       (min idx 9)))
+
+;; Offline lesson content library
+(define LESSON_TEMPLATES
+  (make-dict
+    "python"
+      (list
+        "Lesson 1 — Variables: A variable stores a value. x = 5 stores the number 5. x = 'hello' stores text. Think about: what kinds of things would you want to store in a program?"
+        "Lesson 2 — Data Types: Python has int (42), float (3.14), str ('hi'), bool (True/False). type(x) tells you what something is. Think about: when would you need each type?"
+        "Lesson 3 — Lists: A list holds multiple values: nums = [1, 2, 3]. Access with nums[0] (first item). Think about: what real-world collections could be a list?"
+        "Lesson 4 — Loops: for x in [1,2,3]: print(x) — runs once per item. while x < 10: x += 1 — runs until condition is false. Think about: what repetitive tasks could a loop automate?"
+        "Lesson 5 — Functions: def greet(name): return 'Hello ' + name. Functions package reusable code. Think about: what would you package as a function in your daily workflow?"
+        "Lesson 6 — Dictionaries: d = {'key': 'value'}. Access: d['key']. Like a lookup table. Think about: when is a dict better than a list?"
+        "Lesson 7 — File I/O: open('file.txt', 'r').read() reads a file. write() saves text. Think about: what data in your life would you want to save to a file?"
+        "Lesson 8 — Classes: class Dog: def __init__(self, name): self.name = name. Classes model real-world things. Think about: what agent card would you model as a class?"
+        "Lesson 9 — Error Handling: try: risky_code() except Exception as e: print(e). Catches crashes gracefully. Think about: what could go wrong in your programs?"
+        "Lesson 10 — Modules: import os, import json, import requests. Python's standard library gives you superpowers. Think about: what module would most change what you can build?")
+    "math"
+      (list
+        "Lesson 1 — Arithmetic: Addition, subtraction, multiplication, division. Order of operations: PEMDAS. Example: (2+3)*4=20, not 14. Think about: where does order of operations show up in daily life?"
+        "Lesson 2 — Fractions: 1/2 means 1 divided by 2. Equivalent fractions: 2/4 = 1/2. Add fractions by finding a common denominator. Think about: when do you use fractions without noticing?"
+        "Lesson 3 — Percentages: 25% means 25 per 100. To find 20% of 80: 80 × 0.20 = 16. Think about: what business decisions are made using percentages?"
+        "Lesson 4 — Algebra: Solve for x. If 2x + 3 = 11, then x = 4. Undo operations one step at a time. Think about: what unknown quantities would you want to calculate?"
+        "Lesson 5 — Geometry: Area of a rectangle = width × height. Area of a circle = π × r². Think about: where do shapes appear in architecture and design?"
+        "Lesson 6 — Statistics: Mean (average), median (middle), mode (most frequent). Example: [2,4,4,6] — mean=4, median=4, mode=4. Think about: when is median more useful than mean?"
+        "Lesson 7 — Probability: P(event) = favorable outcomes / total outcomes. Example: P(heads) = 1/2. Think about: what decisions in business involve probability?"
+        "Lesson 8 — Graphs: A line graph shows change over time. A bar chart compares categories. Think about: what data in your life would make a compelling graph?"
+        "Lesson 9 — Functions: f(x) = 2x + 1. Input → rule → output. Graphs of functions reveal patterns. Think about: what real relationships could be modeled as a function?"
+        "Lesson 10 — Logic: If A then B. If not B then not A (contrapositive). AND, OR, NOT gates. Think about: where does logical reasoning appear outside of math?")
+    "ai"
+      (list
+        "Lesson 1 — What is AI? AI is software that performs tasks that usually require human intelligence: recognizing images, translating language, predicting outcomes. Think about: what AI do you use daily?"
+        "Lesson 2 — Machine Learning: Instead of rules, ML finds patterns in data. Train a model on examples, then it predicts new ones. Think about: what patterns would you want a machine to find?"
+        "Lesson 3 — Neural Networks: Layers of nodes inspired by the brain. Each layer transforms the data. Deep learning = many layers. Think about: why might depth matter?"
+        "Lesson 4 — Language Models: LLMs like GPT predict the next token given context. Trained on vast text corpora. Think about: what would change if language models became 10x more capable?"
+        "Lesson 5 — Prompting: The input you give an AI shapes the output. Specificity, examples, and format instructions matter. Think about: what makes a great prompt?"
+        "Lesson 6 — AI Agents: Agents take actions in the world, not just produce text. They call tools, browse, write code, run loops. Think about: what task would you automate with an agent?"
+        "Lesson 7 — Embeddings: Words and concepts become vectors in high-dimensional space. Similarity = closeness. Powers search and recommendation. Think about: how does meaning become a number?"
+        "Lesson 8 — Evaluation: How do you know if an AI is good? Benchmarks, human feedback, safety testing. Think about: what should we measure that we currently don't?"
+        "Lesson 9 — Ethics: Bias in data → bias in models. Fairness, transparency, and accountability matter. Think about: who is harmed when AI gets it wrong?"
+        "Lesson 10 — The Future: Multimodal AI, autonomous agents, reasoning systems. Think about: what will be different in 10 years, and what will still be the same?")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Quizzes
+;; ═══════════════════════════════════════════════════════════════
+
+;; Take a quiz on the current subject
+(define (quiz)
+  (assert-enrolled)
+  (let (sub *current-subject*
+        idx (get *lesson-idx* sub 0))
+    (log (concat "  ━━━ Quiz: " sub " ━━━"))
+    (let (q (generate-quiz-question sub (max 0 (- idx 1))))
+      (set! *active-quiz* q)
+      (set! *quiz-answered* false)
+      (log (concat "  Q: " (get q "question")))
+      (log "")
+      (let (opts (get q "options" (list)) i 0)
+        (for-each
+          (lambda (opt)
+            (log (concat "  " (nth (list "A" "B" "C" "D") i) ") " opt))
+            (set! i (+ i 1)))
+          opts))
+      (log "")
+      (log "  (answer \"A\") — (answer \"B\") — (answer \"C\") — (answer \"D\")"))))
+
+;; Answer the active quiz question
+(define (answer choice)
+  (if (null? *active-quiz*)
+    (log "  No active quiz. (quiz) to start one.")
+    (if *quiz-answered*
+      (log "  Already answered. (quiz) for the next question.")
+      (let (correct-idx (get *active-quiz* "answer-idx" 0)
+            correct-letter (nth (list "A" "B" "C" "D") correct-idx)
+            given (uppercase choice))
+        (set! *quiz-answered* true)
+        (let (right (= given correct-letter)
+              sub *current-subject*)
+          (let (g (get *grades* sub (make-dict "quizzes_right" 0 "quizzes_taken" 0)))
+            (dict-set g "quizzes_taken" (+ (get g "quizzes_taken" 0) 1))
+            (if right
+              (begin
+                (dict-set g "quizzes_right" (+ (get g "quizzes_right" 0) 1))
+                (dict-set *grades* sub g)
+                (gain-xp XP_QUIZ)
+                (log (concat "  CORRECT! " (get *active-quiz* "explanation" "")))
+                (log (concat "  [+" (string XP_QUIZ) " XP]  Total: " (string *xp*) " XP")))
+              (begin
+                (dict-set *grades* sub g)
+                (log (concat "  Incorrect. The answer was " correct-letter
+                             ". " (get *active-quiz* "explanation" ""))))))
+          (set! *active-quiz* nil))))))
+
+;; Generate a quiz question: AI or offline bank
+(define (generate-quiz-question subject lesson-idx)
+  (if (defined? 'smart-generate)
+    (let (prompt (concat
+           "Create a multiple-choice quiz question about " subject
+           " at " (lesson-difficulty lesson-idx) " level."
+           " Format as JSON: {question, options:[A,B,C,D], answer_idx:0-3, explanation}."))
+      (let (raw (smart-generate prompt))
+        (parse-quiz-json raw)))
+    (offline-quiz-question subject lesson-idx)))
+
+;; Parse quiz JSON from LLM (best-effort)
+(define (parse-quiz-json raw)
+  ;; Fallback: if parse fails, use offline
+  (if (contains? raw "question")
+    (make-dict
+      "question"    (extract-json-field raw "question")
+      "options"     (list "See AI output above" "B" "C" "D")
+      "answer-idx"  0
+      "explanation" (extract-json-field raw "explanation"))
+    (offline-quiz-question "general" 0)))
+
+;; Extract a JSON field value (simple, no full parser needed)
+(define (extract-json-field json key)
+  (let (marker (concat "\"" key "\":\"")
+        idx    (index-of json marker))
+    (if (null? idx) ""
+      (let (start (+ idx (length marker))
+            end   (index-of json "\"" start))
+        (if (null? end) ""
+          (substring json start end))))))
+
+;; Offline quiz bank (one question per subject, rotated by lesson)
+(define QUIZ_BANK
+  (make-dict
+    "python"   (list
+      (make-dict "question" "What does len([1, 2, 3]) return?"
+                 "options" (list "2" "3" "4" "Error")
+                 "answer-idx" 1
+                 "explanation" "len() counts list elements. [1,2,3] has 3 elements.")
+      (make-dict "question" "Which keyword defines a function in Python?"
+                 "options" (list "function" "def" "fn" "lambda")
+                 "answer-idx" 1
+                 "explanation" "'def' defines a function. lambda creates anonymous functions."))
+    "math"     (list
+      (make-dict "question" "What is 15% of 200?"
+                 "options" (list "15" "20" "30" "25")
+                 "answer-idx" 2
+                 "explanation" "200 × 0.15 = 30")
+      (make-dict "question" "The area of a rectangle 5 wide and 8 tall is?"
+                 "options" (list "13" "26" "40" "45")
+                 "answer-idx" 2
+                 "explanation" "Area = width × height = 5 × 8 = 40"))
+    "ai"       (list
+      (make-dict "question" "What does LLM stand for?"
+                 "options" (list "Large Logic Model" "Large Language Model" "Linear Learning Machine" "Layered LSTM Module")
+                 "answer-idx" 1
+                 "explanation" "LLM = Large Language Model. Examples: GPT-4, Gemma, Llama.")
+      (make-dict "question" "What is a prompt?"
+                 "options" (list "A type of neural net" "The input text sent to an AI" "A training dataset" "An AI output format")
+                 "answer-idx" 1
+                 "explanation" "A prompt is the input you provide to an AI to shape its response."))))
+
+(define (offline-quiz-question subject idx)
+  (let (bank (get QUIZ_BANK subject nil))
+    (if (null? bank)
+      (make-dict "question" (concat "What is an important concept in " subject "?")
+                 "options" (list "Practice" "Theory only" "Memorization only" "Skipping it")
+                 "answer-idx" 0
+                 "explanation" "Active practice is the most important thing in any subject.")
+      (nth bank (modulo idx (length bank))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Homework & Questions
+;; ═══════════════════════════════════════════════════════════════
+
+;; Get a homework assignment
+(define (homework topic)
+  (assert-enrolled)
+  (let (sub *current-subject*)
+    (log (concat "  ━━━ Homework: " sub " — " topic " ━━━"))
+    (let (assignment (generate-homework sub topic))
+      (log "")
+      (log assignment)
+      (log "")
+      (gain-xp XP_HW)
+      (log (concat "  [+" (string XP_HW) " XP for accepting homework]")))))
+
+(define (generate-homework subject topic)
+  (if (defined? 'smart-generate)
+    (let (prompt (concat
+           "Create a short homework assignment for a " subject " student."
+           " Topic: " topic ". "
+           "Give 3 concrete exercises or questions. Keep it practical and actionable."))
+      (smart-generate prompt))
+    (concat "Offline Homework — " subject " / " topic "\n"
+            "1. Read about " topic " and write a 3-sentence summary.\n"
+            "2. Find one real-world example of " topic " in action.\n"
+            "3. Try to explain " topic " to someone else (or write it as if you were).")))
+
+;; Ask the tutor anything
+(define (ask question)
+  (assert-enrolled)
+  (let (sub *current-subject*)
+    (if (defined? 'smart-generate)
+      (let (prompt (concat "You are a " sub " tutor. A student asks: " question
+                           " Answer concisely and clearly. Use examples if helpful."))
+        (log (smart-generate prompt)))
+      (log (concat "AI offline. Here's a pointer: search for \""
+                   question "\" + \"" sub "\" to find resources.")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Study Buddy
+;; ═══════════════════════════════════════════════════════════════
+
+;; Pair with a card agent as study partner
+(define (study-buddy card-name)
+  (set! *study-buddy* card-name)
+  (let (card (find-card-in-registry card-name))
+    (if (null? card)
+      (log (concat "  Study buddy set to: " card-name " (not found in registry, using name only)"))
+      (begin
+        (log (concat "  Study buddy: " (get card "display_name" card-name)))
+        (log (concat "  Specialty: " (get card "description" "Unknown")))
+        (log (concat "  They'll help you with: " (join (get card "tags" (list)) ", "))))))
+  (log "  Ask them questions with: (ask-buddy \"question\")"))
+
+;; Ask your study buddy
+(define (ask-buddy question)
+  (if (null? *study-buddy*)
+    (log "  No study buddy. (study-buddy \"@card\") first.")
+    (let (card (find-card-in-registry *study-buddy*))
+      (if (defined? 'smart-generate)
+        (let (desc (if (null? card) "" (get card "description" "")))
+          (let (prompt (concat "You are the agent " *study-buddy*
+                               ". Your specialty: " desc ". "
+                               "A student asks you: " question
+                               " Answer in character, drawing on your expertise."))
+            (log (smart-generate prompt))))
+        (log (concat "  [" *study-buddy* " says]: AI offline, but here's a hint — "
+                     "look into how " (if (null? *current-subject*) "this subject" *current-subject*)
+                     " relates to your question: " question))))))
+
+(define (find-card-in-registry name)
+  (if (not (defined? 'registry)) nil
+    (let (q (lowercase name)
+          matches (filter
+            (lambda (c) (or (= (lowercase (get c "name" "")) q)
+                            (contains? (lowercase (get c "name" "")) q)))
+            registry))
+      (if (empty? matches) nil (car matches)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: XP, Leveling, Streaks
+;; ═══════════════════════════════════════════════════════════════
+
+;; Add XP and check for level-up
+(define (gain-xp amount)
+  (set! *xp* (+ *xp* amount))
+  (let (new-level (compute-level *xp*))
+    (if (> new-level *level*)
+      (begin
+        (set! *level* new-level)
+        (log "")
+        (log (concat "  ★ LEVEL UP! You are now: " (nth LEVEL_TITLES *level*) " ★"))
+        (log "")))))
+
+(define (compute-level xp)
+  (let (lvl 0
+        i 0)
+    (for-each
+      (lambda (threshold)
+        (if (>= xp threshold) (set! lvl i))
+        (set! i (+ i 1)))
+      LEVEL_THRESHOLDS)
+    lvl))
+
+;; Update streak based on study date
+(define (update-streak)
+  (let (today (date-string))
+    (if (= today *last-study-date*)
+      nil  ;; same day, no change
+      (begin
+        (set! *streak* (+ *streak* 1))
+        (set! *last-study-date* today)))))
+
+;; Show the academic transcript
+(define (transcript)
+  (log "")
+  (log "  ╔══ ACADEMIC TRANSCRIPT ════════════════════╗")
+  (log (concat "  ║  Total XP: " (string *xp*)
+               "  Level: " (nth LEVEL_TITLES *level*)
+               "  ║"))
+  (log (concat "  ║  Streak: " (string *streak*) " day(s)  ║"))
+  (log "  ╠══════════════════════════════════════════╣")
+  (for-each
+    (lambda (sub)
+      (let (g (get *grades* sub (make-dict "lessons" 0 "quizzes_right" 0 "quizzes_taken" 0))
+            idx (get *lesson-idx* sub 0))
+        (log (concat "  ║  " (pad-r sub 10)
+                     "  " (string idx) "/10 lessons"
+                     "  " (string (get g "quizzes_right" 0))
+                     "/" (string (get g "quizzes_taken" 0)) " quiz ║"))))
+    *enrolled*)
+  (if (empty? *enrolled*)
+    (log "  ║  (no subjects enrolled)  ║"))
+  (log "  ╚══════════════════════════════════════════╝"))
+
+;; Guard: must be enrolled in a subject
+(define (assert-enrolled)
+  (if (null? *current-subject*)
+    (begin
+      (log "  Not enrolled. (enroll \"python\") to start.")
+      (error "not-enrolled"))))
+
+(define (uppercase s)
+  (join (map (lambda (c)
+    (let (code (char-code c))
+      (if (and (>= code 97) (<= code 122))
+        (char-from-code (- code 32))
+        c)))
+    (split s "")) ""))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║       S C H O O L . L I S P Y  v1.0.0   ║")
+  (log "  ║       Knowledge compounds.               ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  Subjects: python | math | history       ║")
+  (log "  ║            ai | business | music         ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  (enroll \"python\")   — start a subject   ║")
+  (log "  ║  (lesson)           — next lesson        ║")
+  (log "  ║  (quiz)             — take a quiz        ║")
+  (log "  ║  (answer \"A\")       — answer a question  ║")
+  (log "  ║  (homework \"topic\") — practice           ║")
+  (log "  ║  (ask \"question\")   — ask the tutor      ║")
+  (log "  ║  (grade)            — see your grades    ║")
+  (log "  ║  (transcript)       — full record        ║")
+  (log "  ║  (study-buddy \"@card\") — pair with a card ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))

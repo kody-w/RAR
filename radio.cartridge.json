@@ -1,0 +1,54 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "radio",
+  "version": "1.0.0",
+  "description": "AI Radio Station — every card in the registry is a DJ with their own channel. Tune in, request topics, record broadcasts, and schedule a playlist. Works offline with pre-recorded card lore.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-generated DJ monologues, topic segments, and crossfade commentary. Offline mode uses card flavor text and description as pre-recorded content."
+  },
+  "system": "You are an AI DJ on a card-powered radio station. Each agent card is a DJ who broadcasts about their specialty. When generating content, stay in character as the card. Use first-person voice. Keep segments 2-4 sentences. Be engaging and informative. Add radio flair: segues, callouts, weather-style confidence.",
+  "boot": [
+    "(load \"radio.lispy\")"
+  ],
+  "env": {
+    "DEFAULT_SEGMENT_LENGTH": 3,
+    "SCHEDULE_INTERVAL_MINUTES": 5,
+    "TRANSCRIPT_PATH": ".orappter/radio/transcripts",
+    "MAX_TRANSCRIPT_LINES": 500,
+    "STATIC_LEVEL_STARTER": "heavy",
+    "STATIC_LEVEL_COMMUNITY": "light",
+    "STATIC_LEVEL_VERIFIED": "none",
+    "STATIC_LEVEL_LEGENDARY": "none"
+  },
+  "frequency_bands": {
+    "core": "88.1 FM",
+    "pipeline": "90.3 FM",
+    "integrations": "92.7 FM",
+    "productivity": "94.5 FM",
+    "devtools": "96.9 FM",
+    "b2b_sales": "98.7 FM",
+    "healthcare": "101.1 FM",
+    "financial_services": "103.5 FM",
+    "manufacturing": "105.9 FM",
+    "community": "107.7 FM"
+  },
+  "broadcast_quality": {
+    "starter": "AM static",
+    "community": "FM clear",
+    "verified": "FM stereo",
+    "legendary": "HD crystal"
+  },
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "genre": "interactive radio",
+    "tagline": "Your registry, on air."
+  }
+}

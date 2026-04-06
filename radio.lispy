@@ -1,0 +1,518 @@
+;; ═══════════════════════════════════════════════════════════════
+;; RADIO.LISPY — AI Radio Station for ORAPPTER
+;; Every card in the registry is a DJ with their own channel.
+;; Tune in, request topics, record broadcasts, schedule a playlist.
+;; Works offline with card descriptions as pre-recorded segments.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "radio")
+(define _agent_desc "AI Radio Station — every agent card is a DJ. Tune in, request topics, record, and schedule.")
+
+(define RADIO_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *radio-on* false)
+(define *channels* (list))         ;; list of channel dicts built from registry
+(define *current-channel* nil)     ;; currently tuned channel dict
+(define *channel-idx* 0)           ;; index into *channels*
+(define *transcript* (list))       ;; running broadcast log
+(define *recording* false)         ;; are we recording?
+(define *recording-buf* (list))    ;; lines captured while recording
+(define *schedule-active* false)
+(define *schedule-interval* 5)     ;; minutes between auto-rotation
+(define *schedule-timer* 0)        ;; elapsed minutes since last rotation
+(define *request-queue* (list))    ;; pending topic requests
+
+;; Category → FM band mapping
+(define FREQUENCY_MAP
+  (make-dict
+    "core"               "88.1 FM"
+    "pipeline"           "90.3 FM"
+    "integrations"       "92.7 FM"
+    "productivity"       "94.5 FM"
+    "devtools"           "96.9 FM"
+    "b2b_sales"          "98.7 FM"
+    "healthcare"         "101.1 FM"
+    "financial_services" "103.5 FM"
+    "manufacturing"      "105.9 FM"
+    "community"          "107.7 FM"))
+
+;; Tier → broadcast quality descriptor
+(define QUALITY_MAP
+  (make-dict
+    "starter"   "~~ AM STATIC ~~"
+    "community" "FM Clear"
+    "verified"  "FM Stereo HD"
+    "legendary" "CRYSTAL HD"))
+
+;; Tier → static decoration for output lines
+(define STATIC_MAP
+  (make-dict
+    "starter"   "~..~"
+    "community" ""
+    "verified"  ""
+    "legendary" ""))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Channel Building from Registry
+;; Build one channel per card in the registry.
+;; ═══════════════════════════════════════════════════════════════
+
+(define (build-channels-from-registry reg)
+  (set! *channels* (list))
+  (for-each
+    (lambda (card)
+      (let (ch (card-to-channel card))
+        (set! *channels* (append *channels* (list ch)))))
+    (if (null? reg) (list) reg))
+  (log (concat "Radio: " (string (length *channels*)) " channels loaded.")))
+
+;; Convert a registry card to a channel dict
+(define (card-to-channel card)
+  (let (name     (get card "name" "unknown")
+        disp     (get card "display_name" name)
+        desc     (get card "description" "No description.")
+        cat      (get card "category" "community")
+        tier     (get card "quality_tier" "community")
+        tags     (get card "tags" (list))
+        freq     (get FREQUENCY_MAP cat "107.7 FM"))
+    (make-dict
+      "name"     name
+      "dj-name"  (concat "DJ " disp)
+      "freq"     freq
+      "category" cat
+      "tier"     tier
+      "tags"     tags
+      "bio"      desc
+      "quality"  (get QUALITY_MAP tier "FM Clear")
+      "static"   (get STATIC_MAP tier ""))))
+
+;; Look up a channel by card name (fuzzy: contains match)
+(define (find-channel name-or-slug)
+  (let (q (lowercase name-or-slug)
+        matches (filter
+          (lambda (ch)
+            (or (contains? (lowercase (get ch "name" "")) q)
+                (contains? (lowercase (get ch "dj-name" "")) q)))
+          *channels*))
+    (if (empty? matches)
+      nil
+      (car matches))))
+
+;; Get index of a channel in the list
+(define (channel-index ch)
+  (let (result -1
+        idx 0)
+    (for-each
+      (lambda (c)
+        (if (= (get c "name") (get ch "name"))
+          (set! result idx))
+        (set! idx (+ idx 1)))
+      *channels*)
+    result))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Power & Tuning
+;; ═══════════════════════════════════════════════════════════════
+
+;; Power on the radio
+(define (radio-on)
+  (set! *radio-on* true)
+  ;; Auto-build channels from registry if available
+  (if (defined? 'registry)
+    (build-channels-from-registry registry)
+    (build-channels-from-registry (list)))
+  (draw-radio-ui)
+  (if (not (empty? *channels*))
+    (begin
+      (set! *channel-idx* 0)
+      (set! *current-channel* (nth *channels* 0))
+      (broadcast-current-segment))
+    (log " No channels loaded. Add cards to registry.")))
+
+;; Power off
+(define (radio-off)
+  (set! *radio-on* false)
+  (set! *recording* false)
+  (log "")
+  (log "  [RADIO OFF] Signal lost. Static fades.")
+  (log ""))
+
+;; Tune to a specific card channel by name or slug
+(define (tune name-or-slug)
+  (assert-radio-on)
+  (let (ch (find-channel name-or-slug))
+    (if (null? ch)
+      (log (concat "  Channel not found: " name-or-slug ". Try (radio-list) to see all channels."))
+      (begin
+        (set! *current-channel* ch)
+        (set! *channel-idx* (channel-index ch))
+        (log "")
+        (log (concat "  Tuning to " (get ch "freq") " — " (get ch "dj-name")))
+        (draw-frequency-bar (get ch "freq"))
+        (broadcast-current-segment)))))
+
+;; Next channel
+(define (radio-next)
+  (assert-radio-on)
+  (if (empty? *channels*)
+    (log "  No channels available.")
+    (begin
+      (set! *channel-idx* (modulo (+ *channel-idx* 1) (length *channels*)))
+      (set! *current-channel* (nth *channels* *channel-idx*))
+      (log (concat "  >> Next: " (get *current-channel* "freq") " — " (get *current-channel* "dj-name")))
+      (broadcast-current-segment))))
+
+;; Previous channel
+(define (radio-prev)
+  (assert-radio-on)
+  (if (empty? *channels*)
+    (log "  No channels available.")
+    (begin
+      (set! *channel-idx* (modulo (- *channel-idx* 1) (length *channels*)))
+      (set! *current-channel* (nth *channels* *channel-idx*))
+      (log (concat "  << Prev: " (get *current-channel* "freq") " — " (get *current-channel* "dj-name")))
+      (broadcast-current-segment))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Broadcast Engine
+;; ═══════════════════════════════════════════════════════════════
+
+;; Broadcast a segment from the current channel
+(define (broadcast-current-segment)
+  (if (null? *current-channel*)
+    (log "  No channel tuned. (radio-on) first.")
+    (let (ch *current-channel*)
+      (draw-now-playing ch)
+      (let (segment (generate-segment ch nil))
+        (broadcast-line segment ch)))))
+
+;; Generate a spoken segment (AI or offline)
+(define (generate-segment ch topic)
+  (let (dj    (get ch "dj-name" "DJ Unknown")
+        bio   (get ch "bio" "")
+        cat   (get ch "category" "community")
+        tags  (join (get ch "tags" (list)) ", "))
+    (if (defined? 'smart-generate)
+      (let (prompt (if (null? topic)
+              (concat "You are " dj " on the AI Radio. "
+                      "Your specialty: " bio " "
+                      "Tags: " tags ". "
+                      "Give a 2-3 sentence on-air segment in your voice. "
+                      "Include a radio sign-off like 'Stay tuned.' or 'Back after the break.'")
+              (concat "You are " dj " on the AI Radio. "
+                      "Your specialty: " bio ". "
+                      "A listener requested you speak about: " topic ". "
+                      "Give a 2-3 sentence segment on that topic in your voice.")))
+        (smart-generate prompt))
+      ;; Offline mode: assemble from card bio + tags
+      (offline-segment dj bio cat topic))))
+
+;; Offline fallback: use card metadata to build a segment
+(define (offline-segment dj bio cat topic)
+  (let (intro  (nth (list
+                  "You're listening to "
+                  "Welcome back. This is "
+                  "Greetings, I'm "
+                  "Broadcasting live — ") (modulo (hash dj) 4))
+        signoff (nth (list
+                  "Stay tuned."
+                  "Back after the break."
+                  "That's all from me. Keep performing."
+                  "More coming up.") (modulo (hash bio) 4)))
+    (if (null? topic)
+      (concat intro dj ". " bio " " signoff)
+      (concat "This is " dj " with a special segment on: " topic ". "
+              "In the world of " cat ", " (lowercase bio) " " signoff))))
+
+;; Emit a broadcast line (with static decoration if needed)
+(define (broadcast-line text ch)
+  (let (static (get ch "static" "")
+        line   (if (empty? static) text (concat static " " text " " static)))
+    (log (concat "  " line))
+    (add-to-transcript (concat "[" (get ch "dj-name") "] " text))
+    (if *recording*
+      (set! *recording-buf* (append *recording-buf* (list line))))))
+
+;; Add a line to the running transcript
+(define (add-to-transcript line)
+  (set! *transcript* (append *transcript* (list line)))
+  ;; Cap at 500 lines
+  (if (> (length *transcript*) 500)
+    (set! *transcript* (last-n *transcript* 500))))
+
+;; Utility: last N elements of a list
+(define (last-n lst n)
+  (if (>= n (length lst))
+    lst
+    (list-tail lst (- (length lst) n))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Listener Interaction
+;; ═══════════════════════════════════════════════════════════════
+
+;; Request the current DJ to speak about a topic
+(define (radio-request topic)
+  (assert-radio-on)
+  (if (null? *current-channel*)
+    (log "  No channel tuned.")
+    (begin
+      (log (concat "  >> Listener request: \"" topic "\""))
+      (let (segment (generate-segment *current-channel* topic))
+        (broadcast-line segment *current-channel*)))))
+
+;; Queue a request (processes on next (radio-next))
+(define (radio-queue topic)
+  (set! *request-queue* (append *request-queue* (list topic)))
+  (log (concat "  Queued request: \"" topic "\" — plays on next rotation.")))
+
+;; Crossfade between two channels
+(define (radio-mix card1 card2)
+  (assert-radio-on)
+  (let (ch1 (find-channel card1)
+        ch2 (find-channel card2))
+    (if (or (null? ch1) (null? ch2))
+      (log "  One or both channels not found. (radio-list) to browse.")
+      (begin
+        (log "")
+        (log "  ══════════════ CROSSFADE ══════════════")
+        (log (concat "  " (get ch1 "dj-name") " × " (get ch2 "dj-name")))
+        (log (concat "  " (get ch1 "freq") " ◄──── ~~~~~ ────► " (get ch2 "freq")))
+        (log "")
+        ;; Segment from each, interleaved
+        (let (s1 (generate-segment ch1 nil)
+              s2 (generate-segment ch2 nil))
+          (broadcast-line s1 ch1)
+          (log "  ·  ·  ·  [crossfade] ·  ·  ·")
+          (broadcast-line s2 ch2))
+        (log "  ═══════════════════════════════════════")
+        ;; Land on ch2
+        (set! *current-channel* ch2)
+        (set! *channel-idx* (channel-index ch2))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Recording & Transcripts
+;; ═══════════════════════════════════════════════════════════════
+
+;; Start/stop recording
+(define (radio-record)
+  (if *recording*
+    ;; Stop recording — dump buffer
+    (begin
+      (set! *recording* false)
+      (let (n (length *recording-buf*))
+        (log (concat "  [REC STOP] Recorded " (string n) " lines."))
+        (log "  Saved to transcript. (radio-show-transcript) to read.")
+        (set! *recording-buf* (list))))
+    ;; Start recording
+    (begin
+      (set! *recording* true)
+      (set! *recording-buf* (list))
+      (log "  [REC] Recording started. (radio-record) again to stop."))))
+
+;; Show the full rolling transcript
+(define (radio-show-transcript)
+  (if (empty? *transcript*)
+    (log "  No broadcast history yet. (radio-on) and tune in.")
+    (begin
+      (log "═══════════════════════════════════════")
+      (log " BROADCAST TRANSCRIPT")
+      (log "═══════════════════════════════════════")
+      (for-each (lambda (line) (log (concat "  " line))) *transcript*)
+      (log "═══════════════════════════════════════"))))
+
+;; Clear transcript
+(define (radio-clear-transcript)
+  (set! *transcript* (list))
+  (log "  Transcript cleared."))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Scheduling
+;; ═══════════════════════════════════════════════════════════════
+
+;; Start auto-rotation schedule
+(define (radio-schedule)
+  (assert-radio-on)
+  (set! *schedule-active* true)
+  (set! *schedule-timer* 0)
+  (log (concat "  Schedule ON — rotating every " (string *schedule-interval*) " minutes."))
+  (log "  (radio-schedule-stop) to end. (radio-tick minutes) to advance time."))
+
+;; Stop schedule
+(define (radio-schedule-stop)
+  (set! *schedule-active* false)
+  (log "  Schedule OFF."))
+
+;; Set interval (minutes)
+(define (radio-schedule-interval n)
+  (set! *schedule-interval* n)
+  (log (concat "  Schedule interval set to " (string n) " minutes.")))
+
+;; Advance simulated time (triggers rotations)
+(define (radio-tick minutes)
+  (if (not *schedule-active*)
+    (log "  Schedule not active. (radio-schedule) first.")
+    (begin
+      (set! *schedule-timer* (+ *schedule-timer* minutes))
+      (let (rotations (floor (/ *schedule-timer* *schedule-interval*)))
+        (set! *schedule-timer* (modulo *schedule-timer* *schedule-interval*))
+        (if (> rotations 0)
+          (begin
+            (log (concat "  [SCHEDULE] " (string rotations) " rotation(s) triggered."))
+            (let (i 0)
+              (while (< i rotations)
+                ;; Process any queued request before rotating
+                (if (not (empty? *request-queue*))
+                  (begin
+                    (radio-request (car *request-queue*))
+                    (set! *request-queue* (cdr *request-queue*))))
+                (radio-next)
+                (set! i (+ i 1)))))
+          (log (concat "  [tick] " (string minutes) "m elapsed. Next rotation in "
+                       (string (- *schedule-interval* *schedule-timer*)) "m.")))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Listing & Discovery
+;; ═══════════════════════════════════════════════════════════════
+
+;; List all available channels
+(define (radio-list)
+  (if (empty? *channels*)
+    (log "  No channels. (radio-on) loads channels from registry.")
+    (begin
+      (log "")
+      (log "  ═══════════════════════════════════")
+      (log "   CHANNEL DIRECTORY")
+      (log "  ═══════════════════════════════════")
+      (for-each
+        (lambda (ch)
+          (let (marker (if (and (not (null? *current-channel*))
+                               (= (get ch "name") (get *current-channel* "name")))
+                        "►" " "))
+            (log (concat "  " marker " " (get ch "freq")
+                         "  " (get ch "dj-name")
+                         "  [" (get ch "tier") "]"))))
+        *channels*)
+      (log "  ═══════════════════════════════════")
+      (log (concat "  " (string (length *channels*)) " channels on air")))))
+
+;; List channels by category
+(define (radio-list-cat cat)
+  (let (chs (filter (lambda (ch) (= (get ch "category") cat)) *channels*))
+    (if (empty? chs)
+      (log (concat "  No channels in category: " cat))
+      (begin
+        (log (concat "  ═══ " cat " ═══"))
+        (for-each
+          (lambda (ch)
+            (log (concat "    " (get ch "freq") "  " (get ch "dj-name"))))
+          chs)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 9: Display Helpers
+;; ═══════════════════════════════════════════════════════════════
+
+;; Full ASCII radio UI
+(define (draw-radio-ui)
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║         R A P P T E R   R A D I O        ║")
+  (log "  ║   Your registry, on air.                 ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  [88.1]──[90.3]──[92.7]──[96.9]──[107.7]║")
+  (log "  ║  core  pipeline integ  devtools community ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  Commands:                               ║")
+  (log "  ║  (tune \"@name\")  (radio-next)            ║")
+  (log "  ║  (radio-list)   (radio-request \"topic\")  ║")
+  (log "  ║  (radio-mix a b) (radio-record)          ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))
+
+;; Draw frequency bar for a given freq string
+(define (draw-frequency-bar freq)
+  (let (bar (make-freq-bar freq))
+    (log (concat "  ┌──────────────────────────────────┐"))
+    (log (concat "  │ FREQ: " freq (pad-right "" (- 27 (length freq))) "│"))
+    (log (concat "  │ " bar " │"))
+    (log (concat "  └──────────────────────────────────┘"))))
+
+;; Build a ASCII frequency bar
+(define (make-freq-bar freq)
+  (let (n (modulo (hash freq) 28))
+    (concat (repeat-char "-" n) "▲" (repeat-char "-" (- 28 n)))))
+
+;; Draw "now playing" info box
+(define (draw-now-playing ch)
+  (let (dj      (get ch "dj-name" "DJ Unknown")
+        freq    (get ch "freq" "???")
+        quality (get ch "quality" "FM Clear")
+        tier    (get ch "tier" "community"))
+    (log "")
+    (log "  ┌─── NOW PLAYING ──────────────────────┐")
+    (log (concat "  │  " dj (pad-right "" (- 37 (length dj))) "│"))
+    (log (concat "  │  " freq "  [" quality "]" (pad-right "" (- 28 (length freq) (length quality))) "│"))
+    (log "  └──────────────────────────────────────┘")))
+
+;; Pad a string to a given width with spaces on the right
+(define (pad-right s width)
+  (let (need (- width (length s)))
+    (if (<= need 0) s
+      (concat s (repeat-char " " need)))))
+
+;; Repeat a character n times
+(define (repeat-char c n)
+  (if (<= n 0) ""
+    (concat c (repeat-char c (- n 1)))))
+
+;; Simple deterministic hash from a string
+(define (hash s)
+  (reduce
+    (lambda (acc c) (+ (* acc 31) (char-code c)))
+    (split s "")
+    17))
+
+;; Guard: radio must be on
+(define (assert-radio-on)
+  (if (not *radio-on*)
+    (begin
+      (log "  Radio is off. (radio-on) first.")
+      (error "radio-off"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║         R A P P T E R   R A D I O        ║")
+  (log "  ║           v1.0.0  — ON AIR               ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  Every card is a DJ. Tune in.            ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  (radio-on)           — power on         ║")
+  (log "  ║  (radio-list)         — channel guide    ║")
+  (log "  ║  (tune \"@kody/...\")   — tune to a card   ║")
+  (log "  ║  (radio-next)         — next channel     ║")
+  (log "  ║  (radio-prev)         — prev channel     ║")
+  (log "  ║  (radio-mix a b)      — crossfade        ║")
+  (log "  ║  (radio-request \"x\")  — request a topic  ║")
+  (log "  ║  (radio-record)       — start/stop REC   ║")
+  (log "  ║  (radio-schedule)     — auto-rotate      ║")
+  (log "  ║  (radio-show-transcript) — read history  ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))

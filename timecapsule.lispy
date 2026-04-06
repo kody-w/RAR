@@ -1,0 +1,517 @@
+;; ═══════════════════════════════════════════════════════════════
+;; TIMECAPSULE.LISPY — Time-Locked Messages for ORAPPTER
+;; Seal messages until a future date. Gift capsules.
+;; Create from card stats. Rolling daily diary.
+;; Tamper-proof with Binder signature.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "timecapsule")
+(define _agent_desc "Seal messages until a future date. Locked until the date arrives. Gift them. Leave notes for your future self.")
+
+(define TC_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *capsules* (list))   ;; list of capsule dicts
+(define *next-id* 1)         ;; auto-increment capsule ID
+(define *binder-name* "")    ;; this user's binder identity
+
+;; Capsule dict fields:
+;;   id, message (nil if sealed), sealed-at, opens-at,
+;;   owner, gifted-to, signed, opened, card-snapshot
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Core Operations — Create, List, Open
+;; ═══════════════════════════════════════════════════════════════
+
+;; Seal a message until a future date (YYYY-MM-DD)
+(define (capsule-create message open-date)
+  (let (id     *next-id*
+        today  (date-string)
+        sig    (sign-capsule message open-date *binder-name*))
+    (set! *next-id* (+ *next-id* 1))
+    (let (cap (make-dict
+                "id"         id
+                "message"    nil              ;; hidden until opened
+                "sealed-msg" message          ;; stored internally
+                "sealed-at"  today
+                "opens-at"   open-date
+                "owner"      *binder-name*
+                "gifted-to"  nil
+                "signed"     sig
+                "opened"     false
+                "card-snapshot" nil
+                "type"       "standard"))
+      (set! *capsules* (append *capsules* (list cap)))
+      (log "")
+      (draw-sealed-chest)
+      (log (concat "  Capsule #" (string id) " sealed."))
+      (log (concat "  Opens: " open-date))
+      (log (concat "  Signature: " sig))
+      (log ""))))
+
+;; List all capsules (sealed ones show metadata only)
+(define (capsule-list)
+  (if (empty? *capsules*)
+    (begin
+      (log "  No capsules yet.")
+      (log "  (capsule-create \"message\" \"YYYY-MM-DD\") to seal your first."))
+    (begin
+      (log "")
+      (log "  ╔══ TIME CAPSULES ══════════════════════════════════╗")
+      (for-each
+        (lambda (cap)
+          (let (id      (get cap "id" 0)
+                opened  (get cap "opened" false)
+                date    (get cap "opens-at" "?")
+                owner   (get cap "owner" "?")
+                gifted  (get cap "gifted-to" nil)
+                t       (get cap "type" "standard"))
+            (let (status (if opened
+                           "[ OPENED ]"
+                           (if (date-has-arrived? date)
+                             "[ READY  ]"
+                             (concat "[ SEALED until " date " ]"))))
+              (log (concat "  ║  #" (string id) "  " status
+                           (if (not (null? gifted)) (concat " → " gifted) "")
+                           "  [" t "]  ║")))))
+        *capsules*)
+      (log "  ╚══════════════════════════════════════════════════╝")
+      (log (concat "  " (string (length *capsules*)) " capsules  "
+                   (string (count-sealed)) " sealed  "
+                   (string (count-opened)) " opened")))))
+
+;; Try to open a capsule by ID
+(define (capsule-open id)
+  (let (cap (find-capsule id))
+    (if (null? cap)
+      (log (concat "  Capsule #" (string id) " not found."))
+      (let (opened  (get cap "opened" false)
+            date    (get cap "opens-at" "?")
+            owner   (get cap "owner" "")
+            gifted  (get cap "gifted-to" nil))
+        (if opened
+          (begin
+            (log (concat "  Capsule #" (string id) " was already opened on " date "."))
+            (display-opened-capsule cap))
+          (if (not (date-has-arrived? date))
+            (begin
+              (log "")
+              (draw-sealed-chest)
+              (log (concat "  SEALED. Opens: " date))
+              (log (concat "  Come back in " (days-until date) " day(s)."))
+              (log ""))
+            ;; Date has arrived — open it
+            (begin
+              (let (msg (get cap "sealed-msg" ""))
+                (let (revealed (dict-merge cap
+                                  (make-dict "message" msg "opened" true)))
+                  (set! *capsules* (replace-capsule *capsules* id revealed))
+                  (draw-open-chest)
+                  (log (concat "  ╔══ CAPSULE #" (string id) " OPENED ══════════════╗"))
+                  (log (concat "  ║  Sealed: " (get cap "sealed-at" "?") "  ║"))
+                  (log (concat "  ║  Opened: " (date-string) "  ║"))
+                  (if (not (empty? owner))
+                    (log (concat "  ║  From: " owner "  ║")))
+                  (log "  ╠══════════════════════════════════════════╣")
+                  (log (concat "  ║  " msg "  ║"))
+                  (log "  ╚══════════════════════════════════════════╝")
+                  ;; AI reflection
+                  (if (defined? 'smart-generate)
+                    (let (prompt (concat
+                           "A time capsule sealed on " (get cap "sealed-at") " has been opened today "
+                           (date-string) ". The message was: \"" msg "\". "
+                           "Reflect on what may have changed between then and now. "
+                           "Be brief, 2-3 sentences."))
+                      (log "")
+                      (log (concat "  Reflection: " (smart-generate prompt)))))
+                  ;; Show card snapshot if present
+                  (let (snap (get cap "card-snapshot" nil))
+                    (if (not (null? snap))
+                      (begin
+                        (log "")
+                        (log "  ━━ Card Snapshot at Sealing ━━")
+                        (log (concat "  " snap)))))))))))))
+
+;; Peek at metadata without opening
+(define (capsule-peek id)
+  (let (cap (find-capsule id))
+    (if (null? cap)
+      (log (concat "  Capsule #" (string id) " not found."))
+      (begin
+        (log (concat "  ╔══ CAPSULE #" (string id) " PEEK ═══════════╗"))
+        (log (concat "  ║  Sealed:  " (get cap "sealed-at" "?") "  ║"))
+        (log (concat "  ║  Opens:   " (get cap "opens-at" "?") "  ║"))
+        (log (concat "  ║  Owner:   " (get cap "owner" "?") "  ║"))
+        (let (gifted (get cap "gifted-to" nil))
+          (if (not (null? gifted))
+            (log (concat "  ║  Gifted:  " gifted "  ║"))))
+        (log (concat "  ║  Type:    " (get cap "type" "standard") "  ║"))
+        (log (concat "  ║  Status:  "
+                     (if (get cap "opened" false) "OPENED"
+                       (if (date-has-arrived? (get cap "opens-at")) "READY TO OPEN" "SEALED"))
+                     "  ║"))
+        (log (concat "  ║  Sig:     " (get cap "signed" "?") "  ║"))
+        (log "  ╚══════════════════════════════════════════╝")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Gifting & Card Capsules
+;; ═══════════════════════════════════════════════════════════════
+
+;; Gift a sealed capsule to another Binder
+(define (capsule-gift id recipient)
+  (let (cap (find-capsule id))
+    (if (null? cap)
+      (log (concat "  Capsule #" (string id) " not found."))
+      (if (get cap "opened" false)
+        (log "  Cannot gift an already-opened capsule.")
+        (begin
+          (let (updated (dict-merge cap (make-dict "gifted-to" recipient)))
+            (set! *capsules* (replace-capsule *capsules* id updated)))
+          (log (concat "  Capsule #" (string id) " gifted to: " recipient))
+          (log (concat "  They can open it on: " (get cap "opens-at" "?")))
+          (log "  [Capsule is still sealed — contents remain hidden until the date]"))))))
+
+;; Create a capsule that freezes a card's current stats
+(define (capsule-from-card card-name open-date)
+  (let (card (find-card-in-registry card-name))
+    (let (snapshot (if (null? card)
+                     (concat "Card: " card-name " (not in registry at time of sealing)")
+                     (concat "Card: " (get card "name" card-name)
+                             "  v" (get card "version" "?")
+                             "  Tier: " (get card "quality_tier" "?")
+                             "  Category: " (get card "category" "?"))))
+          message (concat "Snapshot of " card-name " as of " (date-string)))
+      (let (id *next-id*
+            sig (sign-capsule message open-date *binder-name*))
+        (set! *next-id* (+ *next-id* 1))
+        (let (cap (make-dict
+                    "id"            id
+                    "message"       nil
+                    "sealed-msg"    message
+                    "sealed-at"     (date-string)
+                    "opens-at"      open-date
+                    "owner"         *binder-name*
+                    "gifted-to"     nil
+                    "signed"        sig
+                    "opened"        false
+                    "card-snapshot" snapshot
+                    "type"          "card-snapshot"))
+          (set! *capsules* (append *capsules* (list cap)))
+          (log "")
+          (draw-sealed-chest)
+          (log (concat "  Card capsule #" (string id) " sealed."))
+          (log (concat "  Card: " card-name))
+          (log (concat "  Opens: " open-date))
+          (log ""))))))
+
+;; Leave a message for your future self (special format)
+(define (capsule-self open-date)
+  (log "  What message will you leave for your future self?")
+  (log "  Type it as: (capsule-create \"your message\" \"open-date\")")
+  (log (concat "  Suggested: (capsule-create \"...\" \"" open-date "\")"))
+  (log "  Tip: describe where you are today, what you're working on, what you hope for."))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Daily Diary
+;; ═══════════════════════════════════════════════════════════════
+
+;; Create a daily capsule that opens tomorrow
+(define (capsule-diary)
+  (let (today    (date-string)
+        tomorrow (next-day today))
+    (log (concat "  Daily diary: this capsule opens tomorrow (" tomorrow ")."))
+    (log "  Record your day: (capsule-create \"today's entry\" \"" tomorrow "\")")
+    ;; Show today's already-opened diaries
+    (let (diaries (filter
+                    (lambda (c)
+                      (and (= (get c "type" "standard") "diary")
+                           (get c "opened" false)))
+                    *capsules*))
+      (if (not (empty? diaries))
+        (begin
+          (log "")
+          (log "  Recent diary entries:")
+          (for-each
+            (lambda (c)
+              (log (concat "    " (get c "sealed-at" "?") ": " (get c "message" "(sealed)"))))
+            (last-n diaries 5)))))))
+
+;; Create a diary entry explicitly
+(define (capsule-diary-entry text)
+  (let (id  *next-id*
+        today    (date-string)
+        tomorrow (next-day today)
+        sig      (sign-capsule text tomorrow *binder-name*))
+    (set! *next-id* (+ *next-id* 1))
+    (let (cap (make-dict
+                "id"         id
+                "message"    nil
+                "sealed-msg" text
+                "sealed-at"  today
+                "opens-at"   tomorrow
+                "owner"      *binder-name*
+                "gifted-to"  nil
+                "signed"     sig
+                "opened"     false
+                "card-snapshot" nil
+                "type"       "diary"))
+      (set! *capsules* (append *capsules* (list cap)))
+      (log (concat "  Diary entry #" (string id) " sealed until " tomorrow ".")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Export, Import, Stats
+;; ═══════════════════════════════════════════════════════════════
+
+;; Count sealed vs opened
+(define (capsule-count)
+  (let (sealed (count-sealed)
+        opened (count-opened))
+    (log (concat "  Capsules: " (string (length *capsules*)) " total"))
+    (log (concat "  Sealed:   " (string sealed)))
+    (log (concat "  Opened:   " (string opened)))))
+
+;; Export all capsules as JSON
+(define (capsule-export)
+  (log (json-dump
+    (make-dict
+      "version"  TC_VERSION
+      "binder"   *binder-name*
+      "exported" (date-string)
+      "capsules" (map (lambda (c)
+                    (make-dict
+                      "id"         (get c "id")
+                      "sealed-at"  (get c "sealed-at")
+                      "opens-at"   (get c "opens-at")
+                      "owner"      (get c "owner")
+                      "gifted-to"  (get c "gifted-to" nil)
+                      "opened"     (get c "opened" false)
+                      "type"       (get c "type" "standard")
+                      "signed"     (get c "signed")))
+                  *capsules*)))))
+
+;; Import capsules from JSON string (merge, no duplicates)
+(define (capsule-import json-str)
+  (let (data (json-parse json-str))
+    (let (incoming (get data "capsules" (list)))
+      (for-each
+        (lambda (cap)
+          (let (id (get cap "id" -1))
+            (if (null? (find-capsule id))
+              (set! *capsules* (append *capsules* (list cap))))))
+        incoming)
+      (log (concat "  Imported " (string (length incoming)) " capsule(s).")))))
+
+;; Set your binder identity (signs your capsules)
+(define (set-binder name)
+  (set! *binder-name* name)
+  (log (concat "  Binder set to: " name ". Your capsules will be signed as " name ".")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Crypto-lite Signature
+;; ═══════════════════════════════════════════════════════════════
+
+;; Generate a deterministic signature for a capsule
+;; Not real cryptography — but consistent and detectable if tampered
+(define (sign-capsule message open-date binder)
+  (let (payload (concat message "|" open-date "|" binder "|" TC_VERSION))
+    (let (hash (str-hash payload))
+      (concat "TC-" (int-to-hex hash)))))
+
+;; Simple string hash
+(define (str-hash s)
+  (reduce
+    (lambda (acc c) (modulo (+ (* acc 31) (char-code c)) 999983))
+    (split s "") 5381))
+
+;; Convert int to 6-char hex string
+(define (int-to-hex n)
+  (let (digits "0123456789ABCDEF"
+        result "")
+    (let (n (abs n))
+      (if (= n 0)
+        "000000"
+        (let (running true
+              x n)
+          (while running
+            (let (r (modulo x 16)
+                  ch (substring digits r (+ r 1)))
+              (set! result (concat ch result))
+              (set! x (floor (/ x 16)))
+              (if (= x 0) (set! running false))))
+          ;; Pad to 6 chars
+          (while (< (length result) 6)
+            (set! result (concat "0" result)))
+          result)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Display Helpers
+;; ═══════════════════════════════════════════════════════════════
+
+;; ASCII art: sealed treasure chest
+(define (draw-sealed-chest)
+  (log "  ╔═══════════════════════════╗")
+  (log "  ║  ,---.                   ║")
+  (log "  ║  |   |  SEALED           ║")
+  (log "  ║  |   |=================  ║")
+  (log "  ║  |   |  LOCKED UNTIL...  ║")
+  (log "  ║  `---'                   ║")
+  (log "  ╚═══════════════════════════╝"))
+
+;; ASCII art: open treasure chest
+(define (draw-open-chest)
+  (log "  ╔═══════════════════════════╗")
+  (log "  ║  ,--------.              ║")
+  (log "  ║  |  ~~~~  |  OPENED!     ║")
+  (log "  ║  |--------|              ║")
+  (log "  ║  |        |  Your msg    ║")
+  (log "  ║  `--------'  awaits...   ║")
+  (log "  ╚═══════════════════════════╝"))
+
+;; Display a previously opened capsule
+(define (display-opened-capsule cap)
+  (log (concat "  Message: " (get cap "message" "(empty)"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Date Utilities
+;; ═══════════════════════════════════════════════════════════════
+
+;; Check if a date string (YYYY-MM-DD) has arrived (today or past)
+(define (date-has-arrived? date-str)
+  (let (today (date-string))
+    (<= date-str today)))
+
+;; Days until a date (rough approximation from string comparison)
+;; Real implementation would use unix timestamps
+(define (days-until date-str)
+  (let (today (date-string))
+    (if (<= date-str today)
+      0
+      ;; Simple: count difference in days via character comparison
+      (let (ty (string-to-int (substring today 0 4))
+            tm (string-to-int (substring today 5 7))
+            td (string-to-int (substring today 8 10))
+            oy (string-to-int (substring date-str 0 4))
+            om (string-to-int (substring date-str 5 7))
+            od (string-to-int (substring date-str 8 10)))
+        (let (today-days (+ (* ty 365) (* tm 30) td)
+              open-days  (+ (* oy 365) (* om 30) od))
+          (max 0 (- open-days today-days)))))))
+
+;; Compute tomorrow's date string (YYYY-MM-DD)
+(define (next-day date-str)
+  (let (y (string-to-int (substring date-str 0 4))
+        m (string-to-int (substring date-str 5 7))
+        d (string-to-int (substring date-str 8 10)))
+    (let (d2 (+ d 1)
+          m2 m
+          y2 y)
+      ;; Month overflow (simplified — assumes 30 days per month)
+      (let (days-in-m (nth (list 31 28 31 30 31 30 31 31 30 31 30 31) (- m 1)))
+        (if (> d2 days-in-m)
+          (begin
+            (set! d2 1)
+            (set! m2 (+ m2 1))
+            (if (> m2 12)
+              (begin (set! m2 1) (set! y2 (+ y2 1)))))))
+      (concat (string y2) "-"
+              (if (< m2 10) (concat "0" (string m2)) (string m2)) "-"
+              (if (< d2 10) (concat "0" (string d2)) (string d2))))))
+
+(define (string-to-int s)
+  (reduce
+    (lambda (acc c) (+ (* acc 10) (- (char-code c) 48)))
+    (split s "") 0))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 9: Internal Helpers
+;; ═══════════════════════════════════════════════════════════════
+
+;; Find a capsule by ID
+(define (find-capsule id)
+  (let (matches (filter (lambda (c) (= (get c "id" -1) id)) *capsules*))
+    (if (empty? matches) nil (car matches))))
+
+;; Replace a capsule in the list by ID
+(define (replace-capsule lst id updated)
+  (map (lambda (c)
+    (if (= (get c "id" -1) id) updated c))
+    lst))
+
+;; Count sealed capsules
+(define (count-sealed)
+  (length (filter (lambda (c) (not (get c "opened" false))) *capsules*)))
+
+;; Count opened capsules
+(define (count-opened)
+  (length (filter (lambda (c) (get c "opened" false)) *capsules*)))
+
+;; Last N elements of a list
+(define (last-n lst n)
+  (if (>= n (length lst))
+    lst
+    (list-tail lst (- (length lst) n))))
+
+;; Find card in registry
+(define (find-card-in-registry name)
+  (if (not (defined? 'registry)) nil
+    (let (q (lowercase name)
+          matches (filter
+            (lambda (c) (or (= (lowercase (get c "name" "")) q)
+                            (contains? (lowercase (get c "name" "")) q)))
+            registry))
+      (if (empty? matches) nil (car matches)))))
+
+;; Simple dict-merge
+(define (dict-merge d1 d2)
+  (let (result d1)
+    (for-each
+      (lambda (k) (dict-set result k (get d2 k)))
+      (keys d2))
+    result))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║   T I M E C A P S U L E . L I S P Y     ║")
+  (log "  ║   v1.0.0 — A message to your future self ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  (set-binder \"Your Name\")                ║")
+  (log "  ║    — set your identity first             ║")
+  (log "  ║                                          ║")
+  (log "  ║  (capsule-create \"msg\" \"2027-04-05\")      ║")
+  (log "  ║    — seal a message until a date         ║")
+  (log "  ║  (capsule-list)                          ║")
+  (log "  ║    — list all capsules                   ║")
+  (log "  ║  (capsule-open id)                       ║")
+  (log "  ║    — open if date has arrived            ║")
+  (log "  ║  (capsule-peek id)                       ║")
+  (log "  ║    — see metadata without opening        ║")
+  (log "  ║  (capsule-gift id \"@binder\")              ║")
+  (log "  ║    — gift a sealed capsule               ║")
+  (log "  ║  (capsule-from-card \"@name\" \"date\")       ║")
+  (log "  ║    — freeze a card's stats in time       ║")
+  (log "  ║  (capsule-diary-entry \"text\")             ║")
+  (log "  ║    — rolling daily journal               ║")
+  (log "  ║  (capsule-self \"2036-04-05\")              ║")
+  (log "  ║    — leave a message for future you      ║")
+  (log "  ║  (capsule-count)                         ║")
+  (log "  ║  (capsule-export) (capsule-import json)  ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))

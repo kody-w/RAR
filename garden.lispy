@@ -1,0 +1,472 @@
+;; ═══════════════════════════════════════════════════════════════
+;; GARDEN.LISPY — Virtual Garden for ORAPPTER
+;; Plant agent seeds. They grow over real elapsed time.
+;; Water by using the agent. Harvest for XP and items.
+;; Neglect causes wilting. 3x3 grid. Seasonal growth rates.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "garden")
+(define _agent_desc "Virtual garden — plant agent cards, grow them over real time, harvest for rewards.")
+
+(define GARDEN_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Garden State
+;; ═══════════════════════════════════════════════════════════════
+
+;; 9 plots (3×3 grid), each nil or a plant dict
+(define *plots* (list nil nil nil nil nil nil nil nil nil))
+
+;; Garden-level stats
+(define *garden-xp* 0)
+(define *total-planted* 0)
+(define *total-harvested* 0)
+(define *total-composted* 0)
+(define *inventory* (make-dict))  ;; item → count
+
+;; Growth stage thresholds in hours
+(define STAGE_HOURS (list 1 4 12 24 48))   ;; seed→sprout→sapling→blooming→tree
+(define STAGE_NAMES (list "seed" "sprout" "sapling" "blooming" "tree"))
+(define WILT_HOURS  72   ;; hours without watering before wilt
+
+;; Category → plant type
+(define PLANT_TYPES
+  (make-dict
+    "b2b_sales"          "money tree"
+    "b2c_sales"          "merchant vine"
+    "devtools"           "circuit vine"
+    "pipeline"           "data reed"
+    "integrations"       "bridge blossom"
+    "productivity"       "time fern"
+    "core"               "foundation oak"
+    "healthcare"         "healing herb"
+    "financial_services" "gold fern"
+    "manufacturing"      "iron bonsai"
+    "energy"             "spark moss"
+    "community"          "wildflower"))
+
+;; ASCII art per stage (7 wide × 5 tall)
+(define STAGE_ART
+  (make-dict
+    "seed"     (list "       " "       " "  (.)  " "  /|\\  " "~~~~~~~")
+    "sprout"   (list "       " "   |   " "  (Y)  " "   |   " "~~~~~~~")
+    "sapling"  (list "  \\|/  " "  -+-  " "  /|\\  " "   |   " "~~~~~~~")
+    "blooming" (list " \\\\|// " "  \\|/  " "--(+)--" "   |   " "~~~~~~~")
+    "tree"     (list "\\\\\\|///" " \\\\|// " " (((+)))" "   |   " "~~~~~~~")
+    "wilted"   (list "       " "  x.x  " "  /|\\  " "   |   " "~~~~~~~")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Planting
+;; ═══════════════════════════════════════════════════════════════
+
+;; Plant a seed in the next empty plot
+(define (plant card-name)
+  (let (slot (find-empty-slot))
+    (if (null? slot)
+      (log "  Garden is full (9 plots). (harvest name) or (compost name) to make room.")
+      (let (card (find-card-in-registry card-name)
+            now  (unix-time))
+        (let (cat      (if (null? card) "community" (get card "category" "community"))
+              disp     (if (null? card) card-name (get card "display_name" card-name))
+              pl-type  (get PLANT_TYPES (if (null? card) "community" (get card "category" "community")) "wildflower"))
+          (let (plant (make-dict
+                        "card"       card-name
+                        "display"    disp
+                        "type"       pl-type
+                        "stage"      "seed"
+                        "planted-at" now
+                        "watered-at" now
+                        "stage-age-h" 0
+                        "wilted"     false
+                        "slot"       slot))
+            (set! *plots* (list-set *plots* slot plant))
+            (set! *total-planted* (+ *total-planted* 1))
+            (log (concat "  Planted: " disp " (" pl-type ") in plot " (string (+ slot 1))))
+            (log (concat "  Come back in " (string (nth STAGE_HOURS 0)) "h to see it sprout."))))))))
+
+;; Find the first empty slot (0-8), nil if all full
+(define (find-empty-slot)
+  (let (result nil
+        i 0)
+    (for-each
+      (lambda (p)
+        (if (and (null? result) (null? p))
+          (set! result i))
+        (set! i (+ i 1)))
+      *plots*)
+    result))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Watering & Growth
+;; ═══════════════════════════════════════════════════════════════
+
+;; Water a plant by card name (using the agent = watering it)
+(define (water card-name)
+  (let (slot (find-plant-slot card-name))
+    (if (null? slot)
+      (log (concat "  Not planted: " card-name ". (plant \"" card-name "\") first."))
+      (let (p    (nth *plots* slot)
+            now  (unix-time))
+        (if (get p "wilted" false)
+          (begin
+            ;; Revival: watering a wilted plant revives it to sprout stage
+            (let (revived (dict-merge p (make-dict "wilted" false "watered-at" now "stage" "sprout")))
+              (set! *plots* (list-set *plots* slot revived))
+              (log (concat "  " (get p "display") " revived! It's a sprout again."))))
+          (begin
+            (let (updated (dict-merge p (make-dict "watered-at" now)))
+              (set! *plots* (list-set *plots* slot updated))
+              (log (concat "  " (get p "display") " watered. "
+                           "Stage: " (get p "stage") "."))
+              ;; Compute growth after watering
+              (tick-plant slot)))))))
+
+;; Advance a plant's growth stage based on elapsed time
+(define (tick-plant slot)
+  (let (p    (nth *plots* slot)
+        now  (unix-time))
+    (if (null? p) nil
+      (let (planted-h   (/ (- now (get p "planted-at" now)) 3600)
+            watered-age (/ (- now (get p "watered-at" now)) 3600)
+            season-mod  (season-modifier (current-month)))
+        ;; Check for wilt
+        (if (and (not (get p "wilted" false))
+                 (> watered-age WILT_HOURS))
+          ;; Wilt the plant
+          (let (wilted (dict-merge p (make-dict "wilted" true)))
+            (set! *plots* (list-set *plots* slot wilted))
+            (log (concat "  " (get p "display") " has wilted! (water \"" (get p "card") "\") to revive.")))
+          ;; Compute stage from age × season modifier
+          (let (effective-h (* planted-h season-mod)
+                new-stage (compute-stage effective-h))
+            (if (not (= new-stage (get p "stage" "seed")))
+              (begin
+                (let (advanced (dict-merge p (make-dict "stage" new-stage)))
+                  (set! *plots* (list-set *plots* slot advanced))
+                  (log (concat "  ★ " (get p "display") " grew to: " new-stage "! ★")))))))))))
+
+;; Compute which stage a plant is in given hours grown
+(define (compute-stage hours)
+  (let (stage "seed"
+        i 0)
+    (for-each
+      (lambda (threshold)
+        (if (>= hours threshold)
+          (set! stage (nth STAGE_NAMES i)))
+        (set! i (+ i 1)))
+      STAGE_HOURS)
+    stage))
+
+;; Season modifier for the current month
+(define (season-modifier month)
+  (cond
+    ((or (= month 3) (= month 4) (= month 5)) 1.5)  ;; spring
+    ((or (= month 6) (= month 7) (= month 8)) 1.2)  ;; summer
+    ((or (= month 9) (= month 10) (= month 11)) 0.9) ;; autumn
+    (else 0.7)))                                       ;; winter
+
+;; Get current month from system (1-12)
+(define (current-month)
+  (let (s (date-string))
+    ;; date-string returns YYYY-MM-DD, extract month
+    (if (>= (length s) 7)
+      (string-to-int (substring s 5 7))
+      4)))  ;; default April
+
+(define (string-to-int s)
+  (reduce
+    (lambda (acc c)
+      (+ (* acc 10) (- (char-code c) 48)))
+    (split s "") 0))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Harvest & Compost
+;; ═══════════════════════════════════════════════════════════════
+
+;; Harvest a fully grown plant
+(define (harvest card-name)
+  (let (slot (find-plant-slot card-name))
+    (if (null? slot)
+      (log (concat "  Not planted: " card-name))
+      (let (p (nth *plots* slot))
+        (let (stage (get p "stage" "seed"))
+          (if (= stage "seed")
+            (log "  Too early to harvest. Let it grow.")
+            (begin
+              ;; Clear the plot
+              (set! *plots* (list-set *plots* slot nil))
+              (set! *total-harvested* (+ *total-harvested* 1))
+              ;; Reward based on stage
+              (let (xp (get HARVEST_XP_MAP stage 5))
+                (set! *garden-xp* (+ *garden-xp* xp))
+                ;; Add items
+                (give-harvest-items stage)
+                ;; Display
+                (log "")
+                (log "  ╔══ HARVEST ═══════════════════════════════╗")
+                (log (concat "  ║  " (get p "display") " — " stage " (" (get p "type") ")  ║"))
+                (log (concat "  ║  [+" (string xp) " Garden XP]  Total: "
+                             (string *garden-xp*) " XP  ║"))
+                (log (concat "  ║  Items: " (harvest-items-str stage) "  ║"))
+                (log "  ╚══════════════════════════════════════════╝")
+                ;; AI harvest narrative
+                (if (defined? 'smart-generate)
+                  (let (prompt (concat "A " (get p "type") " planted from "
+                                       (get p "card") " has reached " stage " stage. "
+                                       "Narrate its growth in 2 sentences, referencing "
+                                       "what this agent card does."))
+                    (log (concat "  \"" (smart-generate prompt) "\""))))))))))))
+
+;; XP per harvest stage
+(define HARVEST_XP_MAP
+  (make-dict "sprout" 10 "sapling" 20 "blooming" 35 "tree" 50))
+
+;; Items string for display
+(define (harvest-items-str stage)
+  (let (items (get HARVEST_ITEMS stage (list)))
+    (if (empty? items) "none" (join items ", "))))
+
+(define HARVEST_ITEMS
+  (make-dict
+    "sprout"   (list "seed_packet")
+    "sapling"  (list "seed_packet" "small_xp")
+    "blooming" (list "seed_packet" "small_xp" "card_fragment")
+    "tree"     (list "seed_packet" "medium_xp" "card_fragment" "special_variant")))
+
+;; Give items to inventory
+(define (give-harvest-items stage)
+  (let (items (get HARVEST_ITEMS stage (list)))
+    (for-each
+      (lambda (item)
+        (let (count (get *inventory* item 0))
+          (dict-set *inventory* item (+ count 1))))
+      items)))
+
+;; Compost (remove) a plant — no rewards
+(define (compost card-name)
+  (let (slot (find-plant-slot card-name))
+    (if (null? slot)
+      (log (concat "  Not found: " card-name))
+      (let (p (nth *plots* slot))
+        (set! *plots* (list-set *plots* slot nil))
+        (set! *total-composted* (+ *total-composted* 1))
+        (log (concat "  Composted: " (get p "display") ". The plot is free."))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Garden View
+;; ═══════════════════════════════════════════════════════════════
+
+;; Display the full garden as a 3×3 ASCII grid
+(define (garden-view)
+  ;; Tick all plants first (update growth based on elapsed time)
+  (let (i 0)
+    (while (< i 9)
+      (if (not (null? (nth *plots* i)))
+        (tick-plant i))
+      (set! i (+ i 1))))
+  ;; Header
+  (log "")
+  (log (concat "  ╔══ GARDEN ════════════════════════════════╗"))
+  (log (concat "  ║  Season: " (current-season) "  XP: " (string *garden-xp*)
+               "  Plots: " (string (count-occupied)) "/9  ║"))
+  (log "  ╠═══════════════════════════════════════════╣")
+  ;; Draw 3 rows × 3 cols
+  (let (row 0)
+    (while (< row 3)
+      (draw-garden-row row)
+      (set! row (+ row 1))))
+  (log "  ╚══════════════════════════════════════════╝")
+  (log "")
+  (log "  Commands: (plant \"@card\") (water \"name\") (harvest \"name\") (compost \"name\")"))
+
+;; Draw one row of 3 plots (5 lines of art each, side by side)
+(define (draw-garden-row row)
+  (let (p1 (nth *plots* (* row 3))
+        p2 (nth *plots* (+ (* row 3) 1))
+        p3 (nth *plots* (+ (* row 3) 2)))
+    (let (art1 (plot-art p1)
+          art2 (plot-art p2)
+          art3 (plot-art p3))
+      ;; Print 5 art lines across 3 plots
+      (let (line 0)
+        (while (< line 5)
+          (log (concat "  ║ "
+                       (nth art1 line) " │ "
+                       (nth art2 line) " │ "
+                       (nth art3 line) " ║"))
+          (set! line (+ line 1))))
+      ;; Plot labels
+      (log (concat "  ║ " (plot-label p1 (* row 3))
+                   " │ " (plot-label p2 (+ (* row 3) 1))
+                   " │ " (plot-label p3 (+ (* row 3) 2)) " ║"))
+      (log "  ╠═════════════╪═════════════╪═════════════╣"))))
+
+;; Get ASCII art lines for a plot (7 wide × 5 tall)
+(define (plot-art plant)
+  (if (null? plant)
+    (list "       " "       " "  [ ]  " "       " "~~~~~~~")
+    (let (stage (if (get plant "wilted" false) "wilted" (get plant "stage" "seed")))
+      (get STAGE_ART stage (get STAGE_ART "seed")))))
+
+;; Label line for a plot (max 11 chars wide)
+(define (plot-label plant slot)
+  (if (null? plant)
+    (concat "[" (string (+ slot 1)) "] empty ")
+    (let (name (get plant "display" "?")
+          stage (if (get plant "wilted" false) "!WILT" (get plant "stage" "?")))
+      (let (label (concat (string (+ slot 1)) ":" (if (> (length name) 6) (substring name 0 6) name) " " stage))
+        (if (> (length label) 11) (substring label 0 11) (pad-r label 11))))))
+
+(define (pad-r s n)
+  (let (need (- n (length s)))
+    (if (<= need 0) s
+      (concat s (repeat-str " " need)))))
+
+(define (repeat-str s n)
+  (if (<= n 0) ""
+    (concat s (repeat-str s (- n 1)))))
+
+;; Count occupied plots
+(define (count-occupied)
+  (length (filter (lambda (p) (not (null? p))) *plots*)))
+
+;; Current season name
+(define (current-season)
+  (let (m (current-month))
+    (cond
+      ((or (= m 3) (= m 4) (= m 5)) "Spring")
+      ((or (= m 6) (= m 7) (= m 8)) "Summer")
+      ((or (= m 9) (= m 10) (= m 11)) "Autumn")
+      (else "Winter"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Stats, Export, Import
+;; ═══════════════════════════════════════════════════════════════
+
+;; Garden stats
+(define (garden-stats)
+  (log "  ╔══ GARDEN STATS ══════════════════════════╗")
+  (log (concat "  ║  Plots occupied: " (string (count-occupied)) "/9  ║"))
+  (log (concat "  ║  Total planted:  " (string *total-planted*) "  ║"))
+  (log (concat "  ║  Total harvested:" (string *total-harvested*) "  ║"))
+  (log (concat "  ║  Total composted:" (string *total-composted*) "  ║"))
+  (log (concat "  ║  Garden XP:      " (string *garden-xp*) "  ║"))
+  (log (concat "  ║  Season:         " (current-season) "  ║"))
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  Inventory:                              ║")
+  (for-each
+    (lambda (item)
+      (log (concat "  ║    " item ": " (string (get *inventory* item 0)) "  ║")))
+    (keys *inventory*))
+  (if (empty? (keys *inventory*))
+    (log "  ║    (nothing harvested yet)               ║"))
+  (log "  ╚══════════════════════════════════════════╝"))
+
+;; Export garden as JSON string
+(define (garden-export)
+  (log (json-dump
+    (make-dict
+      "xp"        *garden-xp*
+      "planted"   *total-planted*
+      "harvested" *total-harvested*
+      "inventory" *inventory*
+      "plots"     (map (lambda (p)
+                    (if (null? p) nil
+                      (make-dict
+                        "card"       (get p "card")
+                        "stage"      (get p "stage")
+                        "wilted"     (get p "wilted" false)
+                        "planted-at" (get p "planted-at" 0)
+                        "watered-at" (get p "watered-at" 0))))
+                    *plots*)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Helpers
+;; ═══════════════════════════════════════════════════════════════
+
+;; Find the slot index of a planted card by name
+(define (find-plant-slot card-name)
+  (let (q (lowercase card-name)
+        result nil
+        i 0)
+    (for-each
+      (lambda (p)
+        (if (and (not (null? p))
+                 (or (contains? (lowercase (get p "card" "")) q)
+                     (contains? (lowercase (get p "display" "")) q)))
+          (set! result i))
+        (set! i (+ i 1)))
+      *plots*)
+    result))
+
+;; Get unix time (seconds since epoch)
+(define (unix-time) (current-time-seconds))
+
+;; Find card in registry
+(define (find-card-in-registry name)
+  (if (not (defined? 'registry)) nil
+    (let (q (lowercase name)
+          matches (filter
+            (lambda (c) (or (= (lowercase (get c "name" "")) q)
+                            (contains? (lowercase (get c "name" "")) q)))
+            registry))
+      (if (empty? matches) nil (car matches)))))
+
+;; list-set: replace element at index in a list
+(define (list-set lst idx val)
+  (let (result (list) i 0)
+    (for-each
+      (lambda (item)
+        (if (= i idx)
+          (set! result (append result (list val)))
+          (set! result (append result (list item))))
+        (set! i (+ i 1)))
+      lst)
+    result))
+
+;; Simple dict merge (second overrides first for same keys)
+(define (dict-merge d1 d2)
+  (let (result d1)
+    (for-each
+      (lambda (k) (dict-set result k (get d2 k)))
+      (keys d2))
+    result))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════════╗")
+  (log "  ║      G A R D E N . L I S P Y  v1.0.0    ║")
+  (log "  ║      Plant a seed. Come back tomorrow.   ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  (plant \"@kody/deal-desk\")               ║")
+  (log "  ║    — plant an agent card as a seed       ║")
+  (log "  ║  (water \"deal-desk\")                     ║")
+  (log "  ║    — water it (= using the agent)        ║")
+  (log "  ║  (garden-view)                           ║")
+  (log "  ║    — show the 3×3 garden grid            ║")
+  (log "  ║  (harvest \"deal-desk\")                   ║")
+  (log "  ║    — harvest for XP and items            ║")
+  (log "  ║  (compost \"deal-desk\")                   ║")
+  (log "  ║    — remove a dead plant                 ║")
+  (log "  ║  (garden-stats)                          ║")
+  (log "  ║    — plants alive, dead, harvested       ║")
+  (log "  ║  (garden-export)                         ║")
+  (log "  ║    — share your garden as JSON           ║")
+  (log "  ╠══════════════════════════════════════════╣")
+  (log "  ║  Stages: seed→sprout→sapling→bloom→tree  ║")
+  (log "  ║  Neglect wilts plants after 72 hours.    ║")
+  (log "  ║  Spring grows fastest. Winter is slow.   ║")
+  (log "  ╚══════════════════════════════════════════╝")
+  (log ""))

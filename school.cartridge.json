@@ -1,0 +1,48 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "school",
+  "version": "1.0.0",
+  "description": "Interactive AI tutor with XP, leveling, quizzes, and streaks. Six subjects. Ten lessons each. Pair with agent cards as study buddies. Offline lesson templates included.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI generates lessons, homework assignments, and answers questions about enrolled subjects. Offline uses pre-built lesson templates."
+  },
+  "system": "You are an expert tutor. When giving lessons, be clear and structured. Start with a key concept, give an example, then offer a question to think about. When grading, be encouraging. Keep lessons to 150-200 words. For quizzes, produce exactly 4 multiple-choice options labeled A-D.",
+  "boot": [
+    "(load \"school.lispy\")"
+  ],
+  "env": {
+    "XP_PER_LESSON": 10,
+    "XP_PER_QUIZ_CORRECT": 20,
+    "XP_PER_HOMEWORK": 15,
+    "STREAK_BONUS_MULTIPLIER": 1.5,
+    "SAVE_PATH": ".orappter/school/progress.json"
+  },
+  "subjects": {
+    "python": {"lessons": 10, "color": "green", "emoji_text": "[PY]"},
+    "math":   {"lessons": 10, "color": "blue",  "emoji_text": "[MA]"},
+    "history":{"lessons": 10, "color": "brown", "emoji_text": "[HI]"},
+    "ai":     {"lessons": 10, "color": "cyan",  "emoji_text": "[AI]"},
+    "business":{"lessons":10, "color": "gold",  "emoji_text": "[BZ]"},
+    "music":  {"lessons": 10, "color": "purple","emoji_text": "[MU]"}
+  },
+  "levels": [
+    {"title": "Freshman",  "min_xp": 0},
+    {"title": "Sophomore", "min_xp": 100},
+    {"title": "Junior",    "min_xp": 300},
+    {"title": "Senior",    "min_xp": 600},
+    {"title": "Graduate",  "min_xp": 1000}
+  ],
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "genre": "education",
+    "tagline": "Knowledge compounds."
+  }
+}
