@@ -32,10 +32,24 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Fetch issue for manual dispatch
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number != ''
+        run: |
+          gh api repos/${{ github.repository }}/issues/${{ github.event.inputs.issue_number }} > /tmp/manual_issue.json
+          # Wrap in the event format process_issues expects
+          python3 -c "
+          import json
+          issue = json.load(open('/tmp/manual_issue.json'))
+          event = {'issue': issue}
+          json.dump(event, open('/tmp/dispatch_event.json', 'w'))
+          "
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Process issue
         id: process
         env:
-          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_EVENT_PATH: ${{ github.event_name == 'workflow_dispatch' && '/tmp/dispatch_event.json' || github.event_path }}
         run: |
           python scripts/process_issues.py --event-path "$GITHUB_EVENT_PATH" 2>&1 | tee /tmp/result.txt
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
