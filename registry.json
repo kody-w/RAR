@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-06T18:06:30.557470+00:00",
+  "generated_at": "2026-04-06T18:26:41.325168+00:00",
   "stats": {
     "total_agents": 133,
     "publishers": 7,
@@ -3502,7 +3502,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/rar_remote_agent",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "RAR Remote Agent",
       "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAR ecosystem. Runs autonomously under the brainstem.",
       "author": "RAPP Core Team",
@@ -3522,9 +3522,9 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody/rar_remote_agent.py",
-      "_sha256": "2913a19ade79c4a9cfad2674fbeae2dca83ea05d024c8883e42c3178a54d90fe",
-      "_size_kb": 33.4,
-      "_lines": 839,
+      "_sha256": "bf5aa3875af723834fe8387e206587e754595a9015ecfc421cc403fe00ef2690",
+      "_size_kb": 33.5,
+      "_lines": 840,
       "_has_card": true
     },
     {

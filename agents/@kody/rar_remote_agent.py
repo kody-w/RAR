@@ -16,7 +16,7 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/rar_remote_agent",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "RAR Remote Agent",
     "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAR ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
@@ -60,12 +60,13 @@ class RARRemoteAgent(BasicAgent):
       - Write operations (vote/review/submit) create Issues autonomously
     """
 
-    # Defaults — overridden by rar.config.json if present
+    # Defaults — overridden by api.json or rar.config.json if present
     REPO_OWNER = "kody-w"
     REPO_NAME = "RAR"
     REPO = f"{REPO_OWNER}/{REPO_NAME}"
     RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
     API_BASE = f"https://api.github.com/repos/{REPO}"
+    API_MANIFEST_URL = f"{RAW_BASE}/api.json"
 
     TIER_ORDER = {"official": 0, "verified": 1, "community": 2, "experimental": 3}
     CACHE_TTL_SECONDS = 300  # 5 minutes
