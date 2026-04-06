@@ -226,32 +226,439 @@
 
 
 ;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Conversation Memory
+;; Agents remember conversations across turns.
+;; Each conversation is keyed by an ID and holds a list of messages.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Conversation state — dict of id -> list of {role, content} dicts
+(define *conversations* (make-dict))
+
+;; Start a new conversation with a system prompt
+;; Returns the conversation id
+(define (conversation-new id system-prompt)
+  (let (messages (list (make-dict "role" "system" "content" system-prompt)))
+    (begin
+      (dict-set! *conversations* id messages)
+      id)))
+
+;; Add a user message, get AI response, store both, return response
+(define (conversation-say id message)
+  (let (history (dict-get *conversations* id (list)))
+    (let (updated (append history (list (make-dict "role" "user" "content" message))))
+      (let (response (orappter-chat updated))
+        (begin
+          (dict-set! *conversations* id
+            (append updated (list (make-dict "role" "assistant" "content" response))))
+          response)))))
+
+;; Get the full message history for a conversation
+(define (conversation-history id)
+  (dict-get *conversations* id (list)))
+
+;; Clear a conversation (wipe all messages)
+(define (conversation-clear id)
+  (begin
+    (dict-set! *conversations* id (list))
+    id))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Agent Pipelines
+;; Chain multiple agents or functions together.
+;; Output of one step feeds as input to the next.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Run a pipeline of functions — each takes input, returns output.
+;; (pipeline (list agent-summarize (lambda (x) (agent-ask "analyst" x))) "long text...")
+(define (pipeline steps input)
+  (reduce
+    (lambda (acc step) (step acc))
+    steps
+    input))
+
+;; Ask the same question to multiple agent personas, return all responses.
+;; agents is a list of agent name strings.
+(define (parallel-ask agents prompt)
+  (map
+    (lambda (agent-name)
+      (make-dict
+        "agent" agent-name
+        "response" (agent-ask agent-name prompt)))
+    agents))
+
+;; Chain agents in sequence — first agent answers, second refines, third finalizes.
+;; registry is needed if cards are resolved, but also works with plain name strings.
+(define (chain-ask agent-names question registry)
+  (reduce
+    (lambda (current-answer name)
+      (agent-ask name
+        (concat "Refine or build upon this answer:\n\n" current-answer
+                "\n\nOriginal question: " question)))
+    (cdr agent-names)
+    (agent-ask (car agent-names) question)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 9: Knowledge Base
+;; Agents build and query a local vector knowledge base.
+;; Stores text + embedding, queries by cosine similarity.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Knowledge store — list of {key, value, embedding} entries
+(define *knowledge* (list))
+
+;; Cosine similarity between two vectors (lists of numbers)
+(define (cosine-sim a b)
+  (let (dot (reduce + (map * a b) 0)
+        mag-a (sqrt (reduce + (map (lambda (x) (* x x)) a) 0))
+        mag-b (sqrt (reduce + (map (lambda (x) (* x x)) b) 0)))
+    (if (or (= mag-a 0) (= mag-b 0))
+      0
+      (/ dot (* mag-a mag-b)))))
+
+;; Store a key/value pair along with its embedding vector
+(define (kb-store key value)
+  (let (emb (orappter-embed value))
+    (begin
+      (set! *knowledge*
+        (append *knowledge*
+          (list (make-dict "key" key "value" value "embedding" emb))))
+      key)))
+
+;; Query knowledge — embed the question, rank by cosine similarity, return top N
+(define (kb-query question n)
+  (let (q-emb (orappter-embed question))
+    (if (null? q-emb)
+      (list)
+      (let (scored
+              (map
+                (lambda (entry)
+                  (make-dict
+                    "key"   (get entry "key"   "")
+                    "value" (get entry "value" "")
+                    "score" (cosine-sim q-emb (get entry "embedding" (list)))))
+                *knowledge*))
+        (let (sorted (sort-by (lambda (e) (- 0 (get e "score" 0))) scored))
+          (take sorted n))))))
+
+;; Load knowledge entries from a JSON file
+;; File should be a list of {key, value} objects
+(define (kb-load path)
+  (let (raw (file-read path))
+    (if (null? raw)
+      (log (concat "kb-load: could not read " path))
+      (begin
+        (for-each
+          (lambda (entry)
+            (kb-store (get entry "key" "") (get entry "value" "")))
+          (json-parse raw))
+        (log (concat "kb-load: loaded " path))))))
+
+;; Save all knowledge entries (key + value, no embeddings) to a JSON file
+(define (kb-save path)
+  (let (entries
+          (map
+            (lambda (e)
+              (make-dict "key" (get e "key" "") "value" (get e "value" "")))
+            *knowledge*))
+    (begin
+      (file-write path (json-dump entries))
+      (log (concat "kb-save: wrote " path)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 10: Card-Powered Agents
+;; Turn any card in the registry into a fully powered AI agent.
+;; The digital twin comes to life.
+;; ═══════════════════════════════════════════════════════════════
+
+;; The ultimate function — card name in, AI agent out.
+;; Returns a function (question -> answer) that speaks as that card persona.
+(define (activate-card name registry)
+  (let (card (resolve-card name registry))
+    (if (has-key? card "error")
+      (lambda (q) (get card "error"))
+      (let (id (concat "card:" name)
+            system-prompt
+              (concat
+                "You are " (get card "display_name" name) ", "
+                "a " (get card "type_line" "Agent") " in the Rappter ecosystem. "
+                "Rarity: " (get card "rarity_label" "Common") ". "
+                "Power: " (string (get card "power" 1))
+                ", Toughness: " (string (get card "toughness" 1)) ". "
+                "Description: " (get card "description" "") " "
+                "Flavor: \"" (get card "flavor" "") "\". "
+                "You are a living digital twin — a working AI agent embodied in a trading card. "
+                "Answer every question fully in character. Be concise but vivid."))
+        (begin
+          (conversation-new id system-prompt)
+          (lambda (question) (conversation-say id question)))))))
+
+;; Activate multiple cards as a team.
+;; Returns a dispatcher function that routes questions to the best-fit card.
+(define (activate-deck card-names registry)
+  (let (agents
+          (map
+            (lambda (name)
+              (make-dict
+                "name" name
+                "ask"  (activate-card name registry)
+                "card" (resolve-card name registry)))
+            card-names))
+    (lambda (question)
+      ;; Simple routing: pick the card whose category/tags best match the question.
+      ;; Falls back to the first card if no match found.
+      (let (match
+              (reduce
+                (lambda (best entry)
+                  (let (card (get entry "card" (make-dict)))
+                    (let (tags (get card "tags" (list))
+                          cat  (get card "category" ""))
+                      (if (or
+                            (any? (lambda (t) (string-contains? question t)) tags)
+                            (string-contains? question cat))
+                        entry
+                        best)))
+                  )
+                (cdr agents)
+                (car agents)))
+        ((get match "ask") question)))))
+
+;; Battle two cards — ask both the same question, return both answers side by side.
+(define (card-battle name1 name2 question registry)
+  (let (agent1 (activate-card name1 registry)
+        agent2 (activate-card name2 registry))
+    (make-dict
+      name1 (agent1 question)
+      name2 (agent2 question)
+      "question" question)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 11: Tools and Function Calling
+;; Let the AI call LisPy functions by name inside its response.
+;; Format: [CALL tool-name arg]
+;; ═══════════════════════════════════════════════════════════════
+
+;; Tool registry — dict of name -> {description, fn}
+(define *tools* (make-dict))
+
+;; Register a tool the AI can call
+(define (register-tool name description fn)
+  (begin
+    (dict-set! *tools* name (make-dict "description" description "fn" fn))
+    name))
+
+;; Build a tools block to inject into the system prompt
+(define (tools-system-block)
+  (let (tool-names (dict-keys *tools*))
+    (concat
+      "You have access to these tools. To call one, output exactly:\n"
+      "[CALL tool-name argument]\n"
+      "Available tools:\n"
+      (reduce
+        (lambda (acc name)
+          (let (entry (dict-get *tools* name (make-dict)))
+            (concat acc "  " name " — " (get entry "description" "") "\n")))
+        tool-names
+        ""))))
+
+;; Parse a [CALL tool arg] directive from the AI response.
+;; Returns (list tool-name arg) or nil if none found.
+(define (tools-parse-call response)
+  (let (start (string-index-of response "[CALL "))
+    (if (= start -1)
+      nil
+      (let (end (string-index-of response "]" start))
+        (if (= end -1)
+          nil
+          (let (inner (substring response (+ start 6) end))
+            (let (space (string-index-of inner " "))
+              (if (= space -1)
+                (list inner "")
+                (list
+                  (substring inner 0 space)
+                  (substring inner (+ space 1) (length inner)))))))))))
+
+;; Execute a registered tool by name with an argument string
+(define (tools-execute name arg)
+  (let (entry (dict-get *tools* name nil))
+    (if (null? entry)
+      (concat "Error: unknown tool " name)
+      ((get entry "fn") arg))))
+
+;; Ask with tools — AI can call registered functions in its response.
+;; Runs one round of tool resolution then returns the final answer.
+(define (orappter-ask-with-tools prompt)
+  (let (system (tools-system-block))
+    (let (response
+            (orappter-chat
+              (list
+                (make-dict "role" "system" "content" system)
+                (make-dict "role" "user" "content" prompt))))
+      (let (call (tools-parse-call response))
+        (if (null? call)
+          response
+          (let (tool-name (car call)
+                tool-arg  (car (cdr call)))
+            (let (tool-result (tools-execute tool-name tool-arg))
+              (orappter-chat
+                (list
+                  (make-dict "role" "system" "content" system)
+                  (make-dict "role" "user" "content" prompt)
+                  (make-dict "role" "assistant" "content" response)
+                  (make-dict "role" "user"
+                    "content" (concat "Tool result for " tool-name ": " tool-result
+                                      "\n\nNow give your final answer."))
+                )))))))))
+
+;; ── Pre-built tools ──
+
+(register-tool
+  "resolve-card"
+  "Look up a card by agent name (e.g. @rapp/basic-agent)"
+  (lambda (name) (string (resolve-card name registry))))
+
+(register-tool
+  "search-registry"
+  "Search for agents by keyword — returns matching names"
+  (lambda (keyword)
+    (string
+      (filter
+        (lambda (entry)
+          (or
+            (string-contains? (get entry "name" "") keyword)
+            (string-contains? (get entry "display_name" "") keyword)
+            (string-contains? (get entry "description" "") keyword)))
+        (if (list? registry) registry (list))))))
+
+(register-tool
+  "binder-status"
+  "Check the current registry status — total agent count and categories"
+  (lambda (_)
+    (let (total (length (if (list? registry) registry (list))))
+      (concat "Registry has " (string total) " agents loaded."))))
+
+(register-tool
+  "seed-hash"
+  "Get the deterministic seed for a name (used for card art generation)"
+  (lambda (name)
+    (string
+      (reduce
+        (lambda (acc ch) (+ (* acc 31) (char->int ch)))
+        (string->list name)
+        0))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 12: Offline Mode
+;; Full offline operation — no Ollama needed for basic queries.
+;; Pattern-matches the prompt and pulls answers from registry data.
+;; ═══════════════════════════════════════════════════════════════
+
+;; Template response when no LLM is available
+(define (offline-generate prompt)
+  (let (p (string-lower prompt))
+    (cond
+      ;; "what is X" — try to find X in registry descriptions
+      ((string-contains? p "what is")
+        (let (keyword (substring p (+ (string-index-of p "what is") 8) (length p)))
+          (let (matches
+                  (filter
+                    (lambda (entry)
+                      (or
+                        (string-contains? (string-lower (get entry "display_name" "")) keyword)
+                        (string-contains? (string-lower (get entry "description" "")) keyword)))
+                    (if (list? registry) registry (list))))
+            (if (empty? matches)
+              (concat "Offline: No registry entry found for \"" keyword "\".")
+              (let (entry (car matches))
+                (concat
+                  (get entry "display_name" "Unknown") ": "
+                  (get entry "description" "No description available.")))))))
+
+      ;; "how many" — count registry entries
+      ((string-contains? p "how many")
+        (let (total (length (if (list? registry) registry (list))))
+          (concat "Offline: The registry contains " (string total) " agents.")))
+
+      ;; Card / agent lookup
+      ((or (string-contains? p "card") (string-contains? p "agent"))
+        (let (total (length (if (list? registry) registry (list))))
+          (concat
+            "Offline: " (string total) " cards/agents in registry. "
+            "Try: (resolve-card \"@publisher/name\" registry)")))
+
+      ;; Default offline message
+      (else
+        "I'm running in offline mode. Connect Ollama for full AI responses: ollama serve"))))
+
+;; Auto-detect: use AI if available, offline templates if not
+(define (smart-generate prompt)
+  (if (orappter-ping)
+    (orappter-generate prompt)
+    (offline-generate prompt)))
+
+;; Smart chat — uses AI if up, offline fallback if not
+(define (smart-ask-with-fallback agent-name question)
+  (if (orappter-ping)
+    (agent-ask agent-name question)
+    (offline-generate question)))
+
+
+;; ═══════════════════════════════════════════════════════════════
 ;; Boot
 ;; ═══════════════════════════════════════════════════════════════
 
 (begin
-  (log "═══════════════════════════════════════")
-  (log " ORAPPTER.LISPY v1.0.0")
+  (log "═══════════════════════════════════════════════════════")
+  (log " ORAPPTER.LISPY v2.0.0")
   (log " ORAPPTER — The Rappter AI Runtime")
-  (log "═══════════════════════════════════════")
+  (log "═══════════════════════════════════════════════════════")
+  (log "")
+  (log " Sections loaded:")
+  (log "   §1  Core API      — generate / chat / embed")
+  (log "   §2  Models        — list / pull / ping / show")
+  (log "   §3  Agents        — ask / perform / summarize / decide")
+  (log "   §4  Card AI       — summon-agent / card-to-agent")
+  (log "   §5  Multi-Model   — multi-model-ask / smart-ask")
+  (log "   §6  Brainstem     — connect / route local↔cloud")
+  (log "   §7  Conversations — new / say / history / clear")
+  (log "   §8  Pipelines     — pipeline / parallel-ask / chain-ask")
+  (log "   §9  Knowledge     — kb-store / kb-query / kb-load / kb-save")
+  (log "   §10 Card Agents   — activate-card / activate-deck / card-battle")
+  (log "   §11 Tools         — register-tool / orappter-ask-with-tools")
+  (log "   §12 Offline       — offline-generate / smart-generate")
   (log "")
   (if (orappter-ping)
     (begin
       (log (concat " Connected: " (orappter-host)))
-      (log (concat " Model: " (orappter-model)))
+      (log (concat " Model:     " (orappter-model)))
       (let (models (orappter-list))
         (log (concat " Available: " (string (length models)) " models")))
       (log "")
       (log " Quick start:")
       (log "   (orappter-generate \"What is a digital twin?\")")
       (log "   (agent-ask \"CEO Agent\" \"Should we accept this deal?\")")
-      (log "   (summon-agent \"@rapp/basic-agent\" registry)"))
+      (log "   (summon-agent \"@rapp/basic-agent\" registry)")
+      (log "   (conversation-new \"c1\" \"You are a helpful assistant.\")")
+      (log "   (conversation-say \"c1\" \"Hello!\")")
+      (log "   (activate-card \"@rapp/basic-agent\" registry)")
+      (log "   (pipeline (list agent-summarize) \"Long text here...\")")
+      (log "   (kb-store \"rappter\" \"Rappter is an open agent ecosystem.\")")
+      (log "   (kb-query \"what is rappter\" 3)")
+      (log "   (orappter-ask-with-tools \"How many agents are in the registry?\")")
+      (log "   (smart-generate \"What is an agent?\")")
+      (log ""))
     (begin
-      (log " Ollama not running. Start it:")
-      (log "   ollama serve")
-      (log "   ollama pull gemma3:4b")
+      (log " Ollama not running — offline mode active.")
+      (log "   smart-generate and offline-generate still work.")
+      (log "   To enable full AI, run:")
+      (log "     ollama serve")
+      (log "     ollama pull gemma3:4b")
       (log "")))
   (log "")
   (log " No cloud. No API key. No rate limits.")
   (log " Your AI runs on your device.")
-  (log "═══════════════════════════════════════"))
+  (log "═══════════════════════════════════════════════════════"))
