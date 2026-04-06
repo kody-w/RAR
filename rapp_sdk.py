@@ -1100,18 +1100,21 @@ def binder_transfer(mint_id: str, dest: str) -> dict:
 # SECTION 6: RAPP EGG — Sneakernet Brainstem Transfer
 # =============================================================================
 #
-# A rapp.egg is the entire Brainstem compressed to seeds.
-# Each agent is a 64-bit seed. 20 agents = 160 bytes. Fits in a QR code.
-# The recipient's client resolves each seed → downloads the .py files → done.
+# A rapp.egg is the entire Brainstem compressed for sneakernet transfer.
 #
-# Egg schema:
-#   schema: "rapp-egg/1.0"
-#   seeds: [int, ...]          — forged seeds for each agent
-#   deck: str                  — active deck name (optional)
-#   config: dict               — personality, preferences (optional)
+# Three tiers of payload:
 #
-# Bandwidth: ping-level. The egg is the recipe, not the meal.
-# The data self-assembles on the other end.
+#   seeds:    [int, ...]     — Agent cards. Self-assemble from math. ZERO bandwidth.
+#   payloads: [{...}, ...]   — Small custom content (< 4KB). Inline base64. LOW bandwidth.
+#   refs:     [{...}, ...]   — Large content (cartridges). SHA256 hash = identity.
+#                               Fetch by hash when online. Skip if already cached.
+#                               Content-addressable = free dedup.
+#
+# The egg is the recipe, not the meal. Seeds self-assemble. Payloads travel inline.
+# Refs are fetched on demand — the hash guarantees you get the right content
+# from ANY source (binder repo, IPFS, USB stick, peer).
+#
+# 20 agents + 3 small configs + 2 cartridge refs = ~2KB. Fits in a QR code.
 
 import base64
 

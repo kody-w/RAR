@@ -443,8 +443,10 @@ blockquote {
     <li><a href="#security"><span class="toc-num">11</span> Security Model</a></li>
     <li><a href="#offline"><span class="toc-num">12</span> Offline-First Design</a></li>
     <li><a href="#tiers"><span class="toc-num">13</span> Quality Tiers and Evolution</a></li>
-    <li><a href="#conclusion"><span class="toc-num">14</span> Conclusion</a></li>
-    <li><a href="#references"><span class="toc-num">15</span> References</a></li>
+    <li><a href="#egg"><span class="toc-num">14</span> The Rapp Egg</a></li>
+    <li><a href="#seed-from-data"><span class="toc-num">15</span> The Seed-From-Data Principle</a></li>
+    <li><a href="#conclusion"><span class="toc-num">16</span> Conclusion</a></li>
+    <li><a href="#references"><span class="toc-num">17</span> References</a></li>
   </ol>
 </div>
 
@@ -956,16 +958,77 @@ One sentence description here.
   <p>The founding set — the 131 agents registered at protocol launch on April 5, 2026 — are the genesis cards. They cannot be demoted, and their card identities at launch are sealed in the immutable registry history. They are the equivalent of the first issue of a series: whatever they become later, their origin is permanent.</p>
 </div>
 
-<!-- ─── 14. Conclusion ──────────────────────────────────────────────────────── -->
-<div class="section" id="conclusion">
+<!-- ─── 14. The Rapp Egg — Sneakernet Transfer Protocol ─────────────────── -->
+<div class="section" id="egg">
   <div class="section-number">Section 14</div>
+  <h2>The Rapp Egg</h2>
+
+  <p>A rapp egg is an entire Brainstem environment compressed to seeds. Each agent is a 64-bit integer. An array of 20 agent seeds is 160 bytes — 217 characters in base64. This fits in a single QR code.</p>
+
+  <p>The egg is the recipe, not the meal. The recipient's client reads the seeds, resolves each one, downloads the agent files if needed, and reconstructs the complete environment. The data self-assembles on the other end.</p>
+
+  <table>
+    <thead><tr><th>Agents</th><th>Raw bytes</th><th>Compact string</th><th>Medium</th></tr></thead>
+    <tbody>
+      <tr><td>5</td><td>40 B</td><td>54 chars</td><td>SMS, NFC tap</td></tr>
+      <tr><td>20</td><td>160 B</td><td>217 chars</td><td>QR code, tweet</td></tr>
+      <tr><td>50</td><td>400 B</td><td>537 chars</td><td>QR code</td></tr>
+      <tr><td>100</td><td>800 B</td><td>1,070 chars</td><td>QR code, email</td></tr>
+    </tbody>
+  </table>
+
+  <p>The egg format supports three tiers of payload, each at a different bandwidth level:</p>
+
+  <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
+    <li><strong>Seeds</strong> — agent cards. Self-assemble from math. Zero bandwidth beyond the number itself.</li>
+    <li><strong>Payloads</strong> — small structured content (configurations, preferences). Inline in the egg.</li>
+    <li><strong>Refs</strong> — larger content referenced by content hash. Fetched when online, cached locally. If you already have it, skip the download.</li>
+  </ul>
+
+  <p>This is sneakernet at its purest. Two people in a room with no internet can trade entire AI environments by exchanging a short string. The string carries the seeds. The seeds carry the cards. The cards carry the agents. The agents carry the intelligence.</p>
+</div>
+
+<!-- ─── 15. The Seed-From-Data Principle ──────────────────────────────────── -->
+<div class="section" id="seed-from-data">
+  <div class="section-number">Section 15</div>
+  <h2>The Seed-From-Data Principle</h2>
+
+  <p>The seed protocol is not limited to agent cards. It is a general principle:</p>
+
+  <blockquote>Any structured content with a defined schema can be packed into a seed and reconstructed from that seed, anywhere, offline, with zero data transfer.</blockquote>
+
+  <p>The requirements are:</p>
+  <ol style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
+    <li><strong>A defined schema</strong> — fixed fields with enumerable values and known ranges.</li>
+    <li><strong>A forge function</strong> — reads the data, packs the fields into bits.</li>
+    <li><strong>A resolve function</strong> — reads the bits, reconstructs the data.</li>
+    <li><strong>A shared protocol</strong> — both sides run the same algorithm.</li>
+  </ol>
+
+  <p>Minecraft does not store every block in a world. It stores a seed that the terrain generator uses to place every block. The world is "custom" but it is derived from the seed because the <em>protocol</em> (terrain generation rules) is shared by every client. The seed is the compressed data. The protocol is the decompressor.</p>
+
+  <p>The RAR card seed protocol demonstrates this for agent identity. The same principle extends to:</p>
+
+  <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
+    <li><strong>Cartridges</strong> — application configurations (scenes, settings, layout). Define the cartridge schema, and an entire app state compresses to a seed.</li>
+    <li><strong>Decks</strong> — agent collections with ordering and configuration. A deck of 20 agents is 20 seeds.</li>
+    <li><strong>Environments</strong> — complete Brainstem configurations including agents, personality, memory structure. An egg is an array of seeds.</li>
+    <li><strong>Worlds</strong> — multi-agent simulations with topology and rules. Every participant shares the protocol; only the seed needs to travel.</li>
+  </ul>
+
+  <p>The key constraint: <strong>define the data structure first.</strong> The schema is the protocol. Without the protocol, the seed is just a number. With the protocol, the seed is an entire world. This is why the card schema was locked before launch — once seeds are in the wild, the protocol that resolves them must be permanent.</p>
+</div>
+
+<!-- ─── 16. Conclusion ──────────────────────────────────────────────────────── -->
+<div class="section" id="conclusion">
+  <div class="section-number">Section 16</div>
   <h2>Conclusion</h2>
 
   <p>The protocol is defined. The registry is live. The seed algorithm is public. No single entity is required to operate the system.</p>
 
-  <p>Any person with Python 3.11 and a text editor can write an agent that is fully compliant with this protocol. Any person with git can hold the complete registry. Any person with a browser can resolve any card without contacting any server. Any organization with a GitHub account can operate a federated instance.</p>
+  <p>Any person with Python 3.11 and a text editor can write an agent that is fully compliant with this protocol. Any person with git can hold the complete registry. Any person with a browser can resolve any card without contacting any server. Any organization with a GitHub account can operate a federated instance. Two people with a QR code can trade entire AI environments without an internet connection.</p>
 
-  <p>The file is the agent. The manifest is the identity. The seed is the card. The registry is the index. The store is the interface. The binder is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
+  <p>The file is the agent. The manifest is the identity. The seed is the card. The egg is the environment. The registry is the index. The store is the interface. The binder is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
 
   <p>This is not a product. It is a protocol. Protocols outlast products. The internet outlasted every ISP that helped build it. Bitcoin outlasted every exchange that said it needed. The RAR protocol is designed to the same standard: define the rules clearly enough that the rules enforce themselves, and then step back.</p>
 

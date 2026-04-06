@@ -125,6 +125,9 @@ python rapp_sdk.py submit agents/@yourname/my_agent_agent.py # submit
 | `card value @pub/slug` | Check floor value |
 | `binder status` | Show binder inventory |
 | `binder transfer id to` | Transfer a card |
+| `egg forge @pub/a @pub/b` | Forge an egg from agent names (sneakernet transfer) |
+| `egg compact @pub/a @pub/b` | Compress egg to shareable string (QR/SMS/NFC) |
+| `egg hatch <compact>` | Hatch egg — install agents from compact string |
 
 All commands support `--json` for programmatic use by other agents.
 
@@ -367,7 +370,8 @@ agent_schema: rapp-agent/1.0
 card_types: 7 (LOGIC, DATA, SOCIAL, SHIELD, CRAFT, HEAL, WEALTH)
 agents: 133
 publishers: 7
-test_count: 1110
+test_count: 1117
+egg_protocol: rapp-egg/1.0
 ```
 
 For current counts, fetch `registry.json` — the `stats` object has `total_agents`, `publishers`, and `categories`.

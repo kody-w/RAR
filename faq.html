@@ -453,6 +453,28 @@ header p{color:var(--dim);font-size:15px}
 <!-- SCALE & FUTURE -->
 <!-- ═══════════════════════════════════════ -->
 
+<div class="section" id="egg">
+  <details>
+    <summary>What's a rapp egg?</summary>
+    <div class="answer">
+      <p>An egg is an entire Brainstem environment compressed to seeds. Each agent is a 64-bit integer. 20 agents = 217 characters. Fits in a QR code.</p>
+      <p><code>python rapp_sdk.py egg forge @kody/deal_desk @borg/borg_agent</code> → compact string. Text it to someone. They run <code>egg hatch</code>. Their client resolves every seed, downloads the agents, reconstructs the environment. Done.</p>
+      <p>This is sneakernet AI trading. Two people in a room with no internet exchange entire AI environments by scanning a QR code. The egg carries seeds. Seeds carry cards. Cards carry agents. Agents carry intelligence.</p>
+    </div>
+  </details>
+</div>
+
+<div class="section" id="seed-from-data">
+  <details>
+    <summary>Can seeds work for things other than agent cards?</summary>
+    <div class="answer">
+      <p><strong>Yes — anything with a defined schema.</strong> The seed protocol is a general principle: define the data structure, pack the fields into bits, reconstruct from bits. The protocol is the decompressor. The seed is the compressed data.</p>
+      <p>Minecraft doesn't store every block — it stores a seed that the terrain generator uses to place every block. Same pattern. Cards work today. Cartridges, decks, environments, and worlds follow the same principle once their schemas are defined.</p>
+      <p>The constraint: <strong>define the schema first.</strong> Fixed fields with enumerable values. Once the protocol exists, any client can reconstruct from a seed. No data transfer. Just the number.</p>
+    </div>
+  </details>
+</div>
+
 <div class="cat">Scale &amp; Future</div>
 
 <div class="section" id="scale">
