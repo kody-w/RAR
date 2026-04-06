@@ -98,14 +98,28 @@ Implementation: `rapp_sdk.py` (Python) or `binder.html` (JavaScript). Same algor
 
 The RAPP SDK (`rapp_sdk.py`) is the developer toolkit. Zero dependencies. One file.
 
-### Quick Start (4 commands)
+### Quick Start (5 steps)
 
 ```bash
-python rapp_sdk.py init                              # create binder
-python rapp_sdk.py new @yourname/my_agent            # scaffold
-python rapp_sdk.py test agents/@yourname/my_agent_agent.py  # validate
-python rapp_sdk.py submit agents/@yourname/my_agent_agent.py # submit
+# 1. Initialize a binder (your local agent workspace)
+python rapp_sdk.py init
+
+# 2. Register your binder on the public ledger (one time only)
+#    Open a GitHub Issue on kody-w/RAR:
+#    Title: [RAR] register_binder
+#    Body:  {"action": "register_binder", "payload": {"namespace": "@yourname"}}
+
+# 3. Scaffold a new agent
+python rapp_sdk.py new @yourname/my_agent
+
+# 4. Validate + test
+python rapp_sdk.py test agents/@yourname/my_agent_agent.py
+
+# 5. Submit to the RAR registry
+python rapp_sdk.py submit agents/@yourname/my_agent_agent.py
 ```
+
+**Registration is required before submission.** Your binder can be public or private. You only register once.
 
 ### SDK Commands
 
@@ -241,12 +255,17 @@ Or open an issue manually — paste Python code directly in the body.
 
 #### What happens next
 
-1. Pipeline validates manifest, enforces snake_case, runs security scan
-2. Agent lands in `staging/` (NOT `agents/` — review required)
-3. Issue labeled `pending-review` and stays open
-4. Admin reviews and adds `approved` label
-5. Agent moves to `agents/`, card is forged, registry rebuilt
-6. Issue closed — agent is part of the next seasonal release
+1. Pipeline checks binder is registered on the ledger
+2. Validates manifest, enforces snake_case, runs security scan
+3. Agent lands in `staging/` (NOT `agents/` — review required)
+4. Issue labeled `pending-review` and stays open
+5. Admin reviews and adds `approved` label
+6. Agent moves to `agents/`, seed is forged from manifest data, card self-assembles
+7. Issue closed — agent is part of the next seasonal release
+
+#### Updating an existing agent
+
+Submit a new Issue with the updated code. The version in `__manifest__` must be higher than the existing version (e.g., `1.0.0` → `1.1.0`). Same staging → review → approval flow. The new version gets a new forged seed — the old seed still resolves to the old card forever.
 
 ### Rules
 

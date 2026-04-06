@@ -3,12 +3,30 @@
 ## Quick Version
 
 ```
-1. Fork this repo
-2. Create: agents/@yourname/my-agent.py    ← single file, that's it
+1. Register your binder (one-time GitHub Issue)
+2. Write your agent: agents/@yourname/my_agent.py  ← single file, that's it
 3. Include: __manifest__ dict in the file
-4. Run:    python build_registry.py (must pass)
-5. PR:     Open pull request
+4. Test:   python rapp_sdk.py test agents/@yourname/my_agent.py
+5. Submit: open a GitHub Issue with your code
+6. Wait for review → approval → card forged → you're in the registry
 ```
+
+---
+
+## Before You Start: Register Your Binder
+
+Submissions require a registered binder. Register once and you're set forever.
+
+Open a GitHub Issue on `kody-w/RAR`:
+
+**Title:** `[RAR] register_binder`
+
+**Body:**
+```json
+{"action": "register_binder", "payload": {"namespace": "@yourgithubusername"}}
+```
+
+Your binder can be public or private. The ledger only stores that you exist.
 
 ---
 
@@ -17,153 +35,157 @@
 Every agent is **one `.py` file**. No manifest.json. No README.md. No subdirectory. The metadata lives inside the Python file as a `__manifest__` dict.
 
 ```
-agents/@yourname/my-agent.py    ← this is the entire package
+agents/@yourname/my_agent.py    ← this is the entire package
 ```
 
-## Namespace Rules
+## Naming Rules
+
+**snake_case everywhere. No dashes. No exceptions.**
+
+- Filename: `my_agent.py` (not `my-agent.py`)
+- Manifest name: `@yourname/my_agent` (not `@yourname/my-agent`)
+- Dependencies: `@rapp/basic_agent` (not `@rapp/basic-agent`)
+
+This is enforced by CI, the build, the tests, and the submission pipeline. Dashes are rejected at every layer.
+
+## Namespace
 
 Your namespace is `@yourgithubusername`. This is yours forever.
 
-- `@yourname/agent-slug.py` — use lowercase kebab-case for filenames
 - One agent per file
-- Slugs must be unique within YOUR namespace (not globally)
-- `@rapp/` is reserved for official base packages
+- Slugs must be unique within YOUR namespace
 
 ## Agent Template
 
 ```python
-"""
-My Agent — What it does in one line.
+"""My Agent — what it does in one sentence."""
 
-Longer description of what this agent does,
-how to use it, and any important notes.
-"""
-
-# ═══════════════════════════════════════════════════════════════
-# RAPP AGENT MANIFEST — Do not remove. Used by registry builder.
-# ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@yourname/my-agent",
+    "name": "@yourname/my_agent",
     "version": "1.0.0",
-    "display_name": "MyAgent",
+    "display_name": "My Agent",
     "description": "What this agent does in one sentence.",
     "author": "Your Name",
-    "tags": ["category", "keyword1", "keyword2"],
-    "category": "integrations",
+    "tags": ["keyword1", "keyword2"],
+    "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
-# ═══════════════════════════════════════════════════════════════
 
-from agents.basic_agent import BasicAgent
+try:
+    from agents.basic_agent import BasicAgent
+except ImportError:
+    from basic_agent import BasicAgent
 
-
-class MyAgent(BasicAgent):
-    def __init__(self):
-        self.name = __manifest__["display_name"]
-        self.metadata = {
-            "name": self.name,
-            "description": __manifest__["description"],
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "input": {
-                        "type": "string",
-                        "description": "Input parameter"
-                    }
-                },
-                "required": ["input"]
-            }
-        }
-        super().__init__(self.name, self.metadata)
-
-    def perform(self, **kwargs):
-        input_data = kwargs.get('input', '')
-        return f"Result: {input_data}"
-```
-
-### Quality Tiers
-
-| Tier | Who | Meaning |
-|------|-----|---------|
-| `community` | Anyone | Submitted, basic validation passes |
-| `verified` | Reviewed by maintainer | Tested, follows standards, no security issues |
-| `official` | Core team | Maintained by RAPP core, guaranteed compatibility |
-
-New submissions start at `community`. Maintainers upgrade to `verified` after review.
-
-## agent.py Requirements
-
-The `__manifest__` dict is the **only** metadata requirement. The registry builder (`build_registry.py`) uses AST parsing to extract it — no imports or execution needed.
-
-```python
-from agents.basic_agent import BasicAgent
 
 class MyAgent(BasicAgent):
     def __init__(self):
-        self.name = 'MyAgent'  # Must match manifest display_name
-        self.metadata = {
-            "name": self.name,
-            "description": "What this agent does",
-            "parameters": {
-                "type": "object",
-                "properties": { ... },
-                "required": [...]
-            }
-        }
-        super().__init__(self.name, self.metadata)
+        super().__init__(__manifest__["display_name"], {})
 
     def perform(self, **kwargs):
-        # Your logic
-        return "result string"
+        return "result"
+
+
+if __name__ == "__main__":
+    print(MyAgent().perform())
 ```
 
-### Rules
+Or scaffold it: `python rapp_sdk.py new @yourname/my_agent`
 
-1. **Single file** — everything in one `agent.py`
-2. **Inherits `BasicAgent`** — the only hard dependency
-3. **Returns a string** — always
-4. **No secrets in code** — use `os.environ.get()` and declare in `requires_env`
-5. **Works offline** — handle missing env vars gracefully (return error message, don't crash)
-6. **No network calls in `__init__`** — keep constructor fast for agent loading
+## How to Submit
 
-## Versioning
+### Option A: GitHub Issue (recommended)
 
-Use [semantic versioning](https://semver.org/):
+Open an issue on `kody-w/RAR`:
 
-- **MAJOR** (2.0.0) — breaking changes to `perform()` signature or metadata schema
-- **MINOR** (1.1.0) — new features, new parameters (backward compatible)
-- **PATCH** (1.0.1) — bug fixes, documentation
+**Title:** `[AGENT] @yourname/my_agent`
 
-When you update, bump the version in `__manifest__`. The registry tracks all versions.
+**Body:** paste your agent code (raw or in a ` ```python ``` ` block)
+
+### Option B: SDK
+
+```bash
+python rapp_sdk.py submit agents/@yourname/my_agent.py
+```
+
+### Option C: Pull Request
+
+```bash
+git fork kody-w/RAR
+# add agents/@yourname/my_agent.py
+python build_registry.py  # must pass
+# open PR
+```
+
+## What Happens After Submission
+
+1. Pipeline checks your binder is registered
+2. Validates manifest, enforces snake_case, runs security scan
+3. Agent lands in `staging/` — NOT in the registry yet
+4. Issue labeled `pending-review` and stays open
+5. Admin reviews and adds `approved` label
+6. Agent moves to `agents/`, seed is forged from your manifest, card self-assembles
+7. Issue closed — your agent is in the registry with a permanent card identity
+
+**The forge decides your card.** You don't choose your types, stats, or abilities. The forge reads your manifest (category, tags, tier, dependencies) and computes the card deterministically.
+
+## Updating an Existing Agent
+
+Submit a new Issue with the updated code. Bump the version:
+
+- `1.0.0` → `1.0.1` for bug fixes
+- `1.0.0` → `1.1.0` for new features
+- `1.0.0` → `2.0.0` for breaking changes
+
+Same flow: staging → review → approval. The new version gets a new forged seed. The old seed still resolves to the old card forever.
+
+## Rules
+
+1. **Single file** — everything in one `.py`
+2. **snake_case** — filenames, names, dependencies (no dashes)
+3. **Inherits BasicAgent** — the only hard dependency
+4. **Returns a string** — `perform()` always returns `str`
+5. **No secrets in code** — use `os.environ.get()`, declare in `requires_env`
+6. **Works offline** — handle missing env vars gracefully
+7. **No network calls in `__init__`** — keep constructor fast
+
+## Security
+
+The following patterns are **rejected** automatically:
+
+- `eval()`, `exec()`, `compile()` with exec mode
+- `os.system()`, `subprocess.*`
+- `__import__()`
+- Hardcoded secrets (API key patterns)
+
+## Quality Tiers
+
+| Tier | Meaning | Card Stage |
+|------|---------|------------|
+| `community` | Passes validation. All new agents start here. | Base |
+| `verified` | Reviewed by maintainer. Tested. Follows standards. | Evolved |
+| `official` | Core team maintained. Guaranteed compatibility. | Legendary |
 
 ## Categories
 
-| Category | For agents that... | Examples |
-|----------|-------------------|----------|
-| `core` | Provide fundamental capabilities | Memory, orchestration, library management |
-| `pipeline` | Build, generate, or deploy other agents | RAPP pipeline, generators, transpilers |
-| `integrations` | Connect to external systems | Dynamics 365, SharePoint, Salesforce, ServiceNow |
-| `productivity` | Create content or automate tasks | PowerPoint, diagrams, email, demos |
-| `devtools` | Help developers | Base classes, testing, scaffolding |
+| Category | For agents that... |
+|----------|-------------------|
+| `core` | Provide fundamental capabilities (memory, orchestration) |
+| `pipeline` | Build, generate, chain, or deploy other agents |
+| `integrations` | Connect to external systems (APIs, databases) |
+| `productivity` | Create content or automate tasks |
+| `devtools` | Help developers (testing, scaffolding, base classes) |
+
+Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `financial_services`, `general`, `healthcare`, `human_resources`, `it_management`, `manufacturing`, `professional_services`, `retail_cpg`, `slg_government`, `software_digital_products`.
 
 ## Validation
 
-Before submitting, run the registry builder locally:
-
 ```bash
+python rapp_sdk.py validate agents/@yourname/my_agent.py
+python rapp_sdk.py test agents/@yourname/my_agent.py
 python build_registry.py
 ```
 
-This validates your manifest.json and ensures the registry builds cleanly.
-
-## PR Checklist
-
-- [ ] `agents/@yourname/my-agent.py` file exists (single file!)
-- [ ] `__manifest__` dict is present with all required fields
-- [ ] Agent inherits from `BasicAgent`
-- [ ] `python build_registry.py` passes with no errors
-- [ ] No secrets, API keys, or customer data in code
-- [ ] `requires_env` lists all needed environment variables
+All three must pass before submission.
