@@ -1,0 +1,347 @@
+;; ═══════════════════════════════════════════════════════════════
+;; ROMLOADER.LISPY — Play your owned ROMs on RAPPTERBOY
+;; Emulator cartridge for the ORAPPTER runtime.
+;; You must own the original cartridge for any ROM you load.
+;; ═══════════════════════════════════════════════════════════════
+;;
+;; The ROM loader wraps browser-based emulation cores:
+;;   - JS-based emulators run in the RappterVM browser context
+;;   - ROMs load from local storage (IndexedDB or filesystem)
+;;   - Save states persist locally
+;;   - RAPPTERBOY provides the shell (screen, buttons, saves)
+;;   - The emulator core is the cartridge inside the cartridge
+;;
+;; Architecture:
+;;   ORAPPTER VM
+;;     └── rappterboy.cartridge.json (the console)
+;;          └── romloader.cartridge.json (the emulator)
+;;               └── your-game.rom (the game)
+;;                    └── your-save.sav (your progress)
+;;
+
+(define _agent_name "romloader")
+(define _agent_desc "Load and play owned ROM files on RAPPTERBOY")
+
+(define ROMLOADER_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: ROM State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *rom-loaded* false)
+(define *rom-name* "none")
+(define *rom-system* "unknown")
+(define *rom-path* "")
+(define *emulator-core* nil)
+(define *save-path* ".rappterboy/saves")
+(define *rom-library* (list))
+(define *play-history* (list))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Emulator Cores
+;; Each system gets a JS emulator core that runs in the browser
+;; ═══════════════════════════════════════════════════════════════
+
+;; Supported emulator cores (browser JS libraries)
+(define EMULATOR_CORES
+  (make-dict
+    "gb"   (make-dict "name" "GameBoy"      "core" "gameboy-online"   "ext" ".gb")
+    "gbc"  (make-dict "name" "GameBoy Color" "core" "gameboy-online"  "ext" ".gbc")
+    "gba"  (make-dict "name" "GBA"          "core" "gba-js"          "ext" ".gba")
+    "nes"  (make-dict "name" "NES"          "core" "jsnes"           "ext" ".nes")
+    "snes" (make-dict "name" "SNES"         "core" "snes9x-next"     "ext" ".snes")
+    "sfc"  (make-dict "name" "SNES"         "core" "snes9x-next"     "ext" ".sfc")
+    "n64"  (make-dict "name" "N64"          "core" "mupen64plus"     "ext" ".n64")
+    "gen"  (make-dict "name" "Genesis"      "core" "genesis-plus-gx" "ext" ".gen")
+    "sms"  (make-dict "name" "Master System" "core" "smsplus"        "ext" ".sms")))
+
+;; Detect system from file extension
+(define (detect-system path)
+  (let (ext (lowercase (file-extension path)))
+    (let (core-info (get EMULATOR_CORES (replace ext "." "") nil))
+      (if (null? core-info)
+        (make-dict "name" "Unknown" "core" nil "ext" ext)
+        core-info))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Load and Play
+;; ═══════════════════════════════════════════════════════════════
+
+;; Load a ROM from local storage
+(define (rom-load path)
+  (log "═══════════════════════════════════════")
+  (log " ROMLOADER")
+  (log "═══════════════════════════════════════")
+  (log "")
+
+  ;; Legal notice
+  (log " LEGAL: You must own the original cartridge")
+  (log " for any ROM you load. Personal backup only.")
+  (log "")
+
+  ;; Detect system
+  (let (system (detect-system path))
+    (if (null? (get system "core"))
+      (log (concat "Unsupported format: " (file-extension path)))
+      (begin
+        (set! *rom-path* path)
+        (set! *rom-name* (file-basename path))
+        (set! *rom-system* (get system "name"))
+        (set! *emulator-core* (get system "core"))
+        (set! *rom-loaded* true)
+
+        (log (concat " ROM: " *rom-name*))
+        (log (concat " System: " *rom-system*))
+        (log (concat " Core: " *emulator-core*))
+        (log "")
+
+        ;; Check for existing save
+        (let (save-file (concat *save-path* "/" *rom-name* ".sav"))
+          (if (file-exists? save-file)
+            (log (concat " Save found: " save-file))
+            (log " No save file. Starting fresh.")))
+
+        (log "")
+        (log " (play)     — start the game")
+        (log " (rom-save) — save state")
+        (log " (rom-load-save) — load last save")
+        (log " (rom-info) — ROM details")
+
+        ;; Add to play history
+        (set! *play-history*
+          (append *play-history*
+            (list (make-dict
+              "rom" *rom-name*
+              "system" *rom-system*
+              "loaded" (timestamp)))))))))
+
+;; Start playing
+(define (play)
+  (if (not *rom-loaded*)
+    (log "No ROM loaded. (rom-load \"/path/to/game.gb\")")
+    (begin
+      (log (concat "Starting " *rom-name* " on " *rom-system* "..."))
+      (log "")
+      ;; In browser context: launch the emulator core with the ROM
+      (if (defined? 'os.exec)
+        ;; Browser: use the OS SDK to launch the emulator
+        (begin
+          (os.exec (concat "(emulator-start \"" *emulator-core* "\" \"" *rom-path* "\")"))
+          (log "Game running. Use RAPPTERBOY controls."))
+        ;; CLI: open in browser
+        (begin
+          (log "Opening emulator in browser...")
+          (shell (concat "open \"http://localhost:8080/rappterboy?rom=" *rom-path* "\"")))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Save States
+;; ═══════════════════════════════════════════════════════════════
+
+;; Save current state
+(define (rom-save)
+  (if (not *rom-loaded*)
+    (log "No ROM loaded.")
+    (let (save-file (concat *save-path* "/" *rom-name* ".sav"))
+      ;; Create save directory
+      (shell (concat "mkdir -p " *save-path*))
+      ;; In browser: export emulator state to IndexedDB
+      (if (defined? 'os.exec)
+        (os.exec (concat "(emulator-save \"" save-file "\")"))
+        (log (concat "Save exported to: " save-file)))
+      (log (concat "Game saved: " save-file)))))
+
+;; Load last save
+(define (rom-load-save)
+  (if (not *rom-loaded*)
+    (log "No ROM loaded.")
+    (let (save-file (concat *save-path* "/" *rom-name* ".sav"))
+      (if (not (file-exists? save-file))
+        (log "No save file found.")
+        (begin
+          (if (defined? 'os.exec)
+            (os.exec (concat "(emulator-load \"" save-file "\")"))
+            (log (concat "Save loaded from: " save-file)))
+          (log "Save state restored."))))))
+
+;; List all save files
+(define (rom-saves)
+  (let (saves (list-files *save-path* "*.sav"))
+    (if (empty? saves)
+      (log "No save files.")
+      (begin
+        (log "═══ Save Files ═══")
+        (for-each
+          (lambda (s) (log (concat "  " (file-basename s))))
+          saves)))))
+
+;; Export save as JSON (for sneakernet transfer)
+(define (rom-export-save)
+  (if (not *rom-loaded*)
+    (log "No ROM loaded.")
+    (let (save-file (concat *save-path* "/" *rom-name* ".sav"))
+      (if (not (file-exists? save-file))
+        (log "No save to export.")
+        (let (save-data (read-file-binary save-file))
+          (json-dump
+            (make-dict
+              "format" "rappterboy-save/1.0"
+              "rom" *rom-name*
+              "system" *rom-system*
+              "save" (base64-encode save-data)
+              "exported" (timestamp))))))))
+
+;; Import save from JSON
+(define (rom-import-save json-str)
+  (let (data (json-parse json-str))
+    (if (not (= (get data "format") "rappterboy-save/1.0"))
+      (log "Invalid save format.")
+      (let (save-file (concat *save-path* "/" (get data "rom") ".sav"))
+        (shell (concat "mkdir -p " *save-path*))
+        (write-file-binary save-file (base64-decode (get data "save")))
+        (log (concat "Save imported: " (get data "rom")))
+        (log (concat "System: " (get data "system")))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: ROM Library
+;; Manage your collection of owned ROMs
+;; ═══════════════════════════════════════════════════════════════
+
+;; Scan a directory for ROMs
+(define (rom-scan path)
+  (let (extensions (list ".gb" ".gbc" ".gba" ".nes" ".snes" ".sfc" ".n64" ".gen" ".sms"))
+    (set! *rom-library* (list))
+    (for-each
+      (lambda (ext)
+        (let (files (list-files path (concat "*" ext)))
+          (for-each
+            (lambda (f)
+              (let (system (detect-system f))
+                (set! *rom-library*
+                  (append *rom-library*
+                    (list (make-dict
+                      "path" f
+                      "name" (file-basename f)
+                      "system" (get system "name")
+                      "size" (file-size f)))))))
+            files)))
+      extensions)
+    (log (concat "Found " (string (length *rom-library*)) " ROMs"))
+    (rom-list)))
+
+;; List your ROM library
+(define (rom-list)
+  (if (empty? *rom-library*)
+    (log "No ROMs found. (rom-scan \"/path/to/roms\")")
+    (begin
+      (log "═══ ROM Library ═══")
+      (for-each
+        (lambda (rom)
+          (log (concat "  [" (get rom "system") "] "
+                       (get rom "name")
+                       " (" (string (/ (get rom "size" 0) 1024)) " KB)")))
+        *rom-library*))))
+
+;; Quick load from library by name
+(define (rom-play name)
+  (let (match (filter
+          (lambda (r) (contains? (lowercase (get r "name")) (lowercase name)))
+          *rom-library*))
+    (if (empty? match)
+      (log (concat "ROM not found: " name))
+      (rom-load (get (car match) "path")))))
+
+;; Play history
+(define (rom-history)
+  (if (empty? *play-history*)
+    (log "No play history.")
+    (begin
+      (log "═══ Play History ═══")
+      (for-each
+        (lambda (h)
+          (log (concat "  " (get h "rom") " [" (get h "system") "] "
+                       (get h "loaded"))))
+        (reverse *play-history*)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: ROM + Card Integration
+;; Your ROMs become cards in the Rappter ecosystem
+;; ═══════════════════════════════════════════════════════════════
+
+;; Resolve a ROM as a Rappter card (deterministic from filename)
+(define (rom-card rom-name)
+  (let (seed (seed-hash rom-name)
+        rng (mulberry32 seed)
+        power (+ 1 (floor (* (rng) 10)))
+        toughness (+ 1 (floor (* (rng) 10)))
+        flavors (list
+          "A classic from the golden age."
+          "Insert cartridge. Press START."
+          "Batteries not included. Nostalgia is."
+          "The pixels remember what you forgot."
+          "8-bit heart. 64-bit soul."
+          "Before cloud saves, there was the memory card."
+          "Play it on the bus. Play it in the woods."
+          "Battery is the timer. Always was."))
+    (make-dict
+      "name" rom-name
+      "display_name" (replace (replace rom-name ".gb" "") ".nes" "")
+      "type_line" "Retro Cartridge — Classic"
+      "rarity_label" "Vintage"
+      "power" power
+      "toughness" toughness
+      "flavor" (nth flavors (floor (* (rng) (length flavors))))
+      "seed" seed)))
+
+;; Display ROM as a card
+(define (rom-show-card name)
+  (let (card (rom-card name))
+    (log "┌─────────────────────────────────┐")
+    (log (concat "│ " (get card "display_name")
+                 (make-string (- 28 (length (get card "display_name"))) " ") "│"))
+    (log "│─────────────────────────────────│")
+    (log "│                                 │")
+    (log "│     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓       │")
+    (log "│     ▓  INSERT CARTRIDGE  ▓       │")
+    (log "│     ▓    PRESS START     ▓       │")
+    (log "│     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓       │")
+    (log "│                                 │")
+    (log "│─────────────────────────────────│")
+    (log (concat "│ " (get card "type_line")
+                 (make-string (- 28 (length (get card "type_line"))) " ") "│"))
+    (log (concat "│ \"" (get card "flavor") "\""))
+    (log (concat "│ " (get card "rarity_label")
+                 "                    "
+                 (string (get card "power")) "/" (string (get card "toughness")) " │"))
+    (log "└─────────────────────────────────┘")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔═══════════════════════════════╗")
+  (log "  ║       R O M L O A D E R       ║")
+  (log "  ║                               ║")
+  (log "  ║  Play your owned ROMs on the  ║")
+  (log "  ║  RAPPTERBOY console.          ║")
+  (log "  ║                               ║")
+  (log "  ║  You must own the original    ║")
+  (log "  ║  cartridge. Personal backup.  ║")
+  (log "  ╚═══════════════════════════════╝")
+  (log "")
+  (log "  (rom-scan \"/path/to/roms\")  — find your ROMs")
+  (log "  (rom-load \"game.gb\")        — load a ROM")
+  (log "  (play)                      — start playing")
+  (log "  (rom-save)                  — save state")
+  (log "  (rom-show-card \"game.gb\")   — see ROM as a card")
+  (log "")
+  (log "  Cartridges all the way down.")
+  (log "  Insert cartridge. Press START."))

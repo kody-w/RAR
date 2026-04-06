@@ -1,0 +1,45 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "romloader",
+  "version": "1.0.0",
+  "description": "Load and play owned ROM files on the RAPPTERBOY. Supports GB, GBC, GBA, NES, SNES. You must own the original cartridge.",
+  "type": "emulator",
+  "console": "rappterboy",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "none",
+    "fallback": "offline",
+    "usage": "No AI needed. Pure emulation."
+  },
+  "system": "ROM emulator for RAPPTERBOY. Loads legally owned ROM files from local storage.",
+  "boot": [
+    "(load \"romloader.lispy\")"
+  ],
+  "supported_formats": [
+    {"ext": ".gb", "system": "Game Boy", "bits": 8},
+    {"ext": ".gbc", "system": "Game Boy Color", "bits": 8},
+    {"ext": ".gba", "system": "Game Boy Advance", "bits": 32},
+    {"ext": ".nes", "system": "Nintendo Entertainment System", "bits": 8},
+    {"ext": ".snes", "system": "Super Nintendo", "bits": 16},
+    {"ext": ".sfc", "system": "Super Nintendo", "bits": 16},
+    {"ext": ".n64", "system": "Nintendo 64", "bits": 64},
+    {"ext": ".gen", "system": "Sega Genesis", "bits": 16},
+    {"ext": ".sms", "system": "Sega Master System", "bits": 8}
+  ],
+  "legal": {
+    "notice": "You must own the original physical cartridge for any ROM you load. ORAPPTER does not provide, distribute, or condone piracy of ROM files. The romloader enables personal backup playback of legally owned games only.",
+    "user_responsibility": true
+  },
+  "env": {
+    "ROM_PATH": "",
+    "SAVE_PATH": ".rappterboy/saves",
+    "SPEED": 1.0,
+    "AUDIO": true,
+    "SCALE": 2
+  },
+  "metadata": {
+    "offline": true,
+    "ai_optional": false,
+    "battery_saves": true
+  }
+}
