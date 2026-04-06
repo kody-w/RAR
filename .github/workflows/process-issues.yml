@@ -65,12 +65,17 @@ jobs:
           git config user.email "rapp-bot@users.noreply.github.com"
           git add state/ registry.json staging/ || true
           if ! git diff --cached --quiet; then
-            git pull --rebase origin main || true
             git commit -m "Process issue #${{ github.event.issue.number }} [skip ci]"
             for i in 1 2 3 4 5; do
               git push && break
               echo "Push attempt $i failed, rebasing..."
-              git pull --rebase origin main
+              git pull --rebase origin main || git rebase --abort
+              if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+                git rebase --abort
+                git pull origin main --no-rebase
+                git add state/ registry.json staging/ || true
+                git diff --cached --quiet || git commit -m "Process issue #${{ github.event.issue.number }} (retry) [skip ci]"
+              fi
             done
           fi
 
