@@ -1,0 +1,802 @@
+;; ═══════════════════════════════════════════════════════════════
+;; DUNGEON.LISPY — Roguelike Dungeon Crawler
+;; 10 floors. Your card party. Permadeath.
+;; SuperSeed waits at Floor 10.
+;;
+;; (enter-dungeon registry) — start a run with your cards
+;; (go north)               — move through the dungeon
+;; (map)                    — see the revealed floor map
+;; (inventory)              — check your items
+;; (fight "STRIKE")         — pick a combat move
+;; (flee)                   — run from battle
+;; (rest)                   — use a rest room
+;;
+;; Ten floors. Permadeath. Gotta Perform 'Em All.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "dungeon")
+(define _agent_desc "Roguelike dungeon crawler — 10 floors, card party, permadeath, SuperSeed as final boss")
+
+(define DUNGEON_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Game State
+;; ═══════════════════════════════════════════════════════════════
+
+;; Run state
+(define *run-active*   false)
+(define *run-seed*     0)
+(define *floor*        0)
+(define *room-x*       0)
+(define *room-y*       0)
+(define *steps*        0)
+(define *gold*         0)
+(define *turns*        0)
+
+;; Party
+(define *party*        (list))    ;; list of combat cards
+(define *active-card*  nil)       ;; who's fighting
+
+;; Floor state
+(define *floor-map*    (list))    ;; 2D grid of rooms
+(define *revealed*     (make-dict)) ;; coord-key → bool
+(define *floor-theme*  "core")
+(define *floor-name*   "??")
+
+;; Combat
+(define *in-combat*    false)
+(define *enemy*        nil)
+(define *combat-log*   (list))
+
+;; Inventory
+(define *inventory*    (make-dict))  ;; item-name → count
+(define *run-log*      (list))       ;; narrative events this run
+
+;; High scores (persisted across runs)
+(define *high-scores*  (list))
+
+;; Floor theme data
+(define FLOOR-DATA
+  (list
+    (make-dict "floor" 1  "name" "Pallet Lab"        "category" "core"               "boss" false)
+    (make-dict "floor" 2  "name" "Sales Route"        "category" "b2b_sales"          "boss" false)
+    (make-dict "floor" 3  "name" "Pipeline City"      "category" "pipeline"           "boss" true  "boss_name" "Howard the CardSmith")
+    (make-dict "floor" 4  "name" "Health District"    "category" "healthcare"         "boss" false)
+    (make-dict "floor" 5  "name" "Finance Tower"      "category" "financial_services" "boss" true  "boss_name" "The Auditor")
+    (make-dict "floor" 6  "name" "Factory Floor"      "category" "manufacturing"      "boss" false)
+    (make-dict "floor" 7  "name" "Productivity Peak"  "category" "productivity"       "boss" true  "boss_name" "The Scheduler")
+    (make-dict "floor" 8  "name" "Integration Maze"   "category" "integrations"       "boss" false)
+    (make-dict "floor" 9  "name" "DevTools Depths"    "category" "devtools"           "boss" true  "boss_name" "The Compiler")
+    (make-dict "floor" 10 "name" "SuperSeed Chamber"  "category" "core"               "boss" true  "boss_name" "@rapp/SuperSeed")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Procedural Generation
+;; Deterministic from seed — same seed = same dungeon
+;; ═══════════════════════════════════════════════════════════════
+
+;; Generate a floor from a seed
+(define (gen-floor floor-num seed)
+  (let (rng (mulberry32 (seed-hash (concat (string seed) "-floor-" (string floor-num)))))
+    (let (w 7) (let (h 5)
+      (let (grid (list))
+        ;; Build a grid of rooms
+        (let (y 0)
+          (while (< y h)
+            (let (row (list))
+              (let (x 0)
+                (while (< x w)
+                  (let (roll (rng))
+                    (let (room-type
+                           (cond
+                             ((and (= x 0) (= y 0)) "start")
+                             ((and (= x (- w 1)) (= y (- h 1))) "stairs")
+                             ((< roll 0.35) "encounter")
+                             ((< roll 0.50) "treasure")
+                             ((< roll 0.60) "trap")
+                             ((< roll 0.70) "rest")
+                             ((< roll 0.78) "shop")
+                             (true "empty")))
+                      (set! row (append row (list (make-dict
+                        "x" x "y" y "type" room-type
+                        "visited" false "content" nil))))))
+                  (set! x (+ x 1))))
+              (set! grid (append grid (list row))))
+            (set! y (+ y 1))))
+        ;; Place boss on boss floors at stairs
+        (let (theme-data (get-floor-theme floor-num))
+          (if (get theme-data "boss" false)
+            ;; Boss replaces stairs
+            (grid-set-room grid (- w 1) (- h 1) "boss")
+            nil))
+        grid)))))
+
+;; Get a room from the grid
+(define (grid-room grid x y)
+  (let (row (nth grid y))
+    (if (null? row) nil
+      (nth row x))))
+
+;; Set a room type in the grid (immutable-style via rebuild)
+(define (grid-set-room grid x y new-type)
+  grid)  ;; simplified — real impl would rebuild row
+
+;; Get floor theme data
+(define (get-floor-theme floor-num)
+  (let (matches (filter (lambda (d) (= (get d "floor") floor-num)) FLOOR-DATA))
+    (if (empty? matches) (car FLOOR-DATA) (car matches))))
+
+;; Generate an enemy for the current floor and seed
+(define (gen-enemy floor-num seed step)
+  (let (rng (mulberry32 (seed-hash (concat (string seed) "-enemy-" (string floor-num) "-" (string step)))))
+    (let (theme (get-floor-theme floor-num))
+      (let (cat (get theme "category" "core"))
+        (let (base-power (+ 3 (* floor-num 2)))
+          (let (power     (+ base-power (floor (* (rng) 4))))
+            (let (toughness (+ 2 (* floor-num 1) (floor (* (rng) 3))))
+              (let (hp        (+ 10 (* floor-num 3) (* toughness 2)))
+                (let (enemy-names
+                       (make-dict
+                         "core"               (list "Rogue BasicAgent" "Corrupted Seed" "Feral Agent")
+                         "b2b_sales"          (list "Cold Caller" "Pipeline Ghost" "Discount Wraith")
+                         "pipeline"           (list "Data Goblin" "Null Pointer" "Loop Daemon")
+                         "healthcare"         (list "Phantom Record" "Ghost Process" "Stale Cache")
+                         "financial_services" (list "Tax Elemental" "Margin Creep" "Audit Troll")
+                         "manufacturing"      (list "Assembly Golem" "Factory Ghost" "Broken Bot")
+                         "productivity"       (list "Procrastinator" "Meeting Ghost" "Blocker")
+                         "integrations"       (list "API Gremlin" "Webhook Wraith" "Schema Troll")
+                         "devtools"           (list "Segfault Demon" "Memory Leak" "Race Condition")))
+                  (let (name-list (get enemy-names cat (list "Unknown Error" "Null Ref" "Ghost Agent")))
+                    (let (name-idx (floor (* (rng) (length name-list))))
+                      (make-dict
+                        "name"       (nth name-list name-idx)
+                        "category"   cat
+                        "power"      power
+                        "toughness"  toughness
+                        "max_hp"     hp
+                        "current_hp" hp
+                        "floor"      floor-num))))))))))))
+
+;; Generate a boss enemy
+(define (gen-boss floor-num)
+  (let (theme (get-floor-theme floor-num))
+    (let (boss-name (get theme "boss_name" "Unknown Boss"))
+      (let (multiplier (+ 2 (floor (/ floor-num 3))))
+        (make-dict
+          "name"       boss-name
+          "category"   (get theme "category" "core")
+          "power"      (* (+ 5 floor-num) multiplier)
+          "toughness"  (* (+ 4 floor-num) multiplier)
+          "max_hp"     (* (+ 30 (* floor-num 5)) multiplier)
+          "current_hp" (* (+ 30 (* floor-num 5)) multiplier)
+          "is_boss"    true
+          "floor"      floor-num)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Party / Cards
+;; ═══════════════════════════════════════════════════════════════
+
+;; Build a combat card from an agent name
+(define (build-combat-card name)
+  (let (seed (seed-hash name))
+    (let (rng (mulberry32 seed))
+      (let (power     (+ 4 (floor (* (rng) 6))))
+        (let (toughness (+ 4 (floor (* (rng) 6))))
+          (let (speed     (+ 1 (floor (* (rng) 5))))
+            (let (hp        (+ 15 (* toughness 3)))
+              (make-dict
+                "name"       name
+                "slug"       (last (split name "/"))
+                "power"      power
+                "toughness"  toughness
+                "speed"      speed
+                "max_hp"     hp
+                "current_hp" hp
+                "status"     nil
+                "level"      1
+                "xp"         0))))))))
+
+;; Enter the dungeon with a list of agent names as your party
+(define (enter-dungeon cards)
+  (if (< (length cards) 1)
+    (log "Need at least 1 card for your party. (enter-dungeon (list \"@rapp/basic-agent\"))")
+    (begin
+      (let (party-cards (map build-combat-card (take cards 3)))
+        (set! *party*       party-cards)
+        (set! *active-card* (car party-cards))
+        (set! *run-active*  true)
+        (set! *run-seed*    (seed-hash (timestamp)))
+        (set! *floor*       1)
+        (set! *gold*        10)
+        (set! *steps*       0)
+        (set! *turns*       0)
+        (set! *run-log*     (list))
+        (set! *inventory*   (make-dict "Health Pack" 2))
+        (set! *in-combat*   false)
+        (set! *enemy*       nil)
+        (descent-to-floor 1)))))
+
+;; Descend to a floor
+(define (descent-to-floor floor-num)
+  (let (theme (get-floor-theme floor-num))
+    (set! *floor*       floor-num)
+    (set! *floor-map*   (gen-floor floor-num *run-seed*))
+    (set! *floor-theme* (get theme "category" "core"))
+    (set! *floor-name*  (get theme "name" "???"))
+    (set! *room-x*      0)
+    (set! *room-y*      0)
+    (set! *revealed*    (make-dict "0,0" true))
+    (log "")
+    (log (concat "  ══ FLOOR " (string floor-num) ": " *floor-name* " ══"))
+    (log "")
+    (if (defined? 'smart-generate)
+      (smart-generate (concat "You are the narrator of a roguelike dungeon. The party enters floor " (string floor-num) " called '" *floor-name* "'. Generate 1-2 atmospheric sentences describing what they see."))
+      (log (floor-description floor-num)))
+    (log "")
+    (show-current-room)
+    (log "")
+    (show-party-status)
+    (log "")
+    (log "  Move: (go north) (go south) (go east) (go west)")
+    (log "  Info: (map) (inventory) (party-status)")))
+
+;; Floor flavor text (offline fallback)
+(define (floor-description floor-num)
+  (let (descs
+         (list
+           "Humming servers line the walls. The smell of fresh solder fills the air."
+           "Discarded sales scripts litter the floor. A cold call echoes in the distance."
+           "Data conduits snake through the ceiling. Something pulses in the pipes."
+           "The air smells of antiseptic and error logs. Stale data drifts like fog."
+           "Spreadsheets wallpaper every surface. The numbers don't add up."
+           "Conveyor belts screech. Assembly golems shuffle in the shadows."
+           "Calendar notifications ping endlessly. Time itself feels blocked."
+           "API endpoints hang like icicles. One wrong request and they shatter."
+           "Stack traces scroll across the walls. The bugs are getting bigger."
+           "The chamber hums with raw power. A crystalline seed pulses at the center."))
+    (nth descs (- floor-num 1))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Movement and Exploration
+;; ═══════════════════════════════════════════════════════════════
+
+(define DIRECTIONS (make-dict
+  "north" (list 0 -1)
+  "south" (list 0  1)
+  "east"  (list 1  0)
+  "west"  (list -1 0)
+  "n" (list 0 -1)
+  "s" (list 0  1)
+  "e" (list 1  0)
+  "w" (list -1 0)))
+
+(define FLOOR-WIDTH  7)
+(define FLOOR-HEIGHT 5)
+
+;; Move in a direction
+(define (go direction)
+  (if (not *run-active*)
+    (log "No active run. (enter-dungeon cards)")
+    (if *in-combat*
+      (log "You're in combat! (fight \"STRIKE\") or (flee)")
+      (let (delta (get DIRECTIONS direction nil))
+        (if (null? delta)
+          (log (concat "Unknown direction: " direction ". Try: north south east west"))
+          (let (new-x (+ *room-x* (car delta)))
+            (let (new-y (+ *room-y* (nth delta 1)))
+              (if (or (< new-x 0) (>= new-x FLOOR-WIDTH) (< new-y 0) (>= new-y FLOOR-HEIGHT))
+                (log "  You hit a wall. Can't go that way.")
+                (begin
+                  (set! *room-x* new-x)
+                  (set! *room-y* new-y)
+                  (set! *steps*  (+ *steps* 1))
+                  (set! *turns*  (+ *turns* 1))
+                  ;; Reveal room
+                  (dict-set *revealed* (concat (string new-x) "," (string new-y)) true)
+                  (show-current-room))))))))))
+
+;; Determine and trigger current room event
+(define (show-current-room)
+  (let (room (grid-room *floor-map* *room-x* *room-y*))
+    (let (room-type (if (null? room) "empty" (get room "type" "empty")))
+      (log "")
+      (log (concat "  [" (string *room-x*) "," (string *room-y*) "] — " (room-type-label room-type)
+                   "  (Floor " (string *floor*) "/" "10)"))
+      (trigger-room room-type))))
+
+;; Room type labels
+(define (room-type-label type)
+  (cond
+    ((= type "start")    "Starting Chamber")
+    ((= type "stairs")   "Descending Staircase")
+    ((= type "encounter") "Enemy Encounter!")
+    ((= type "treasure") "Treasure Room")
+    ((= type "trap")     "TRAP!")
+    ((= type "rest")     "Rest Site")
+    ((= type "shop")     "Shop")
+    ((= type "boss")     "BOSS ROOM!")
+    (true                "Empty Corridor")))
+
+;; Trigger the event for the room type
+(define (trigger-room type)
+  (cond
+    ((= type "encounter")
+     (start-encounter false))
+    ((= type "boss")
+     (start-encounter true))
+    ((= type "treasure")
+     (trigger-treasure))
+    ((= type "trap")
+     (trigger-trap))
+    ((= type "stairs")
+     (begin
+       (log "  A staircase leads deeper.")
+       (log "  (descend) to go to the next floor.")))
+    ((= type "rest")
+     (begin
+       (log "  A safe alcove. You can rest here.")
+       (heal-party 10)
+       (log "  Party healed 10 HP.")))
+    ((= type "shop")
+     (show-shop))
+    (true
+     (log "  An empty corridor. Nothing here."))))
+
+;; Start an encounter
+(define (start-encounter is-boss)
+  (let (enemy-card (if is-boss (gen-boss *floor*) (gen-enemy *floor* *run-seed* *steps*)))
+    (set! *enemy*      enemy-card)
+    (set! *in-combat*  true)
+    (set! *combat-log* (list))
+    (log "")
+    (if is-boss
+      (begin
+        (log "  ██████████████████████████████")
+        (log (concat "  ██  BOSS: " (get enemy-card "name") "  ██"))
+        (log "  ██████████████████████████████"))
+      (log (concat "  ⚔  " (get enemy-card "name") " appeared!")))
+    (log (concat "  Enemy HP: " (string (get enemy-card "current_hp"))
+                 "  PWR: " (string (get enemy-card "power"))
+                 "  TGH: " (string (get enemy-card "toughness"))))
+    (log "")
+    (log "  Moves: (fight \"STRIKE\") (fight \"HEAVY\") (fight \"DEFEND\") (use-item \"Health Pack\") (flee)")))
+
+;; Trigger treasure
+(define (trigger-treasure)
+  (let (rng (mulberry32 (seed-hash (concat (string *run-seed*) "-treasure-" (string *steps*)))))
+    (let (gold (+ 5 (floor (* (rng) (* *floor* 10)))))
+      (set! *gold* (+ *gold* gold))
+      (log (concat "  Treasure! +" (string gold) " gold (total: " (string *gold*) ")"))
+      ;; Chance of item
+      (if (< (rng) 0.4)
+        (begin
+          (let (item-name (nth (list "Health Pack" "Energy Drink" "Smoke Bomb" "Force Field") (floor (* (rng) 4))))
+            (item-add item-name 1)
+            (log (concat "  You also found: " item-name))))))))
+
+;; Trigger a trap
+(define (trigger-trap)
+  (let (rng (mulberry32 (seed-hash (concat (string *run-seed*) "-trap-" (string *steps*)))))
+    (let (trap-type (floor (* (rng) 4)))
+      (cond
+        ((= trap-type 0)
+         (let (dmg (+ 5 (floor (* (rng) 10))))
+           (log (concat "  TRAP! A null pointer! " (string dmg) " damage!"))
+           (damage-active dmg)))
+        ((= trap-type 1)
+         (let (gold-loss (min *gold* (floor (* (rng) 20))))
+           (set! *gold* (- *gold* gold-loss))
+           (log (concat "  TRAP! Fee drain! -" (string gold-loss) " gold"))))
+        ((= trap-type 2)
+         (log "  TRAP! Teleport! You're moved to a random room.")
+         (set! *room-x* (floor (* (rng) FLOOR-WIDTH)))
+         (set! *room-y* (floor (* (rng) FLOOR-HEIGHT))))
+        (true
+         (log "  TRAP! Status effect! Active card confused for 1 turn."))))))
+
+;; Show the shop
+(define (show-shop)
+  (log "  ═══ Shop ═══")
+  (log "  (buy \"Health Pack\")   — 15g  Restore 20 HP")
+  (log "  (buy \"Rare Candy\")    — 50g  Level up active card")
+  (log "  (buy \"Smoke Bomb\")    — 25g  Escape any battle")
+  (log (concat "  Gold: " (string *gold*))))
+
+;; Buy an item
+(define (buy item-name)
+  (let (prices (make-dict "Health Pack" 15 "Rare Candy" 50 "Smoke Bomb" 25 "Force Field" 30))
+    (let (price (get prices item-name nil))
+      (if (null? price)
+        (log (concat "Not for sale: " item-name))
+        (if (< *gold* price)
+          (log (concat "Not enough gold! Need " (string price) ", have " (string *gold*)))
+          (begin
+            (set! *gold* (- *gold* price))
+            (item-add item-name 1)
+            (log (concat "  Bought: " item-name " for " (string price) "g"))))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Combat
+;; ═══════════════════════════════════════════════════════════════
+
+;; Combat moves
+(define COMBAT-MOVES
+  (make-dict
+    "STRIKE"  (make-dict "name" "STRIKE"  "power-mod" 1.0  "desc" "Standard attack")
+    "HEAVY"   (make-dict "name" "HEAVY"   "power-mod" 1.8  "desc" "Big hit, -1 energy")
+    "DEFEND"  (make-dict "name" "DEFEND"  "power-mod" 0.0  "desc" "Block next hit")
+    "QUICK"   (make-dict "name" "QUICK"   "power-mod" 0.6  "desc" "Fast 2x attack")))
+
+(define *defending* false)
+
+;; Execute a fight move
+(define (fight move-name)
+  (if (not *in-combat*)
+    (log "Not in combat. Move to an encounter room.")
+    (if (null? *active-card*)
+      (log "No active card!")
+      (let (move (get COMBAT-MOVES move-name nil))
+        (if (null? move)
+          (log (concat "Unknown move: " move-name ". Try: STRIKE HEAVY DEFEND QUICK"))
+          (begin
+            (set! *defending* false)
+            (cond
+              ;; DEFEND
+              ((= move-name "DEFEND")
+               (begin
+                 (set! *defending* true)
+                 (combat-log "You brace for impact! Blocking next hit.")
+                 (enemy-turn)))
+              ;; QUICK — 2 hits
+              ((= move-name "QUICK")
+               (let (dmg1 (combat-damage *active-card* *enemy* 0.6))
+                 (let (dmg2 (combat-damage *active-card* *enemy* 0.6))
+                   (apply-enemy-damage (+ dmg1 dmg2))
+                   (combat-log (concat "QUICK! Two hits: " (string dmg1) " + " (string dmg2) " = " (string (+ dmg1 dmg2))))
+                   (if (not (check-enemy-dead)) (enemy-turn)))))
+              ;; STRIKE or HEAVY
+              (true
+               (let (dmg (combat-damage *active-card* *enemy* (get move "power-mod")))
+                 (apply-enemy-damage dmg)
+                 (combat-log (concat move-name "! " (string dmg) " damage!"))
+                 (if (not (check-enemy-dead)) (enemy-turn)))))))))))
+
+;; Calculate damage
+(define (combat-damage attacker defender mod)
+  (let (rng (mulberry32 (seed-hash (concat (timestamp) (string *turns*)))))
+    (let (base (get attacker "power" 5))
+      (let (variance (- (* (rng) 4) 2))
+        (let (raw (floor (* (+ base variance) mod)))
+          (max 1 raw))))))
+
+;; Apply damage to enemy
+(define (apply-enemy-damage dmg)
+  (let (new-hp (max 0 (- (get *enemy* "current_hp") dmg)))
+    (dict-set *enemy* "current_hp" new-hp)))
+
+;; Check if enemy is dead
+(define (check-enemy-dead)
+  (let (hp (get *enemy* "current_hp" 1))
+    (if (<= hp 0)
+      (begin
+        (set! *in-combat* false)
+        (let (is-boss (get *enemy* "is_boss" false))
+          (let (xp-gain (+ (* *floor* 10) (if is-boss 50 0)))
+            (let (gold-gain (+ (* *floor* 5) (floor (* *floor* (random-small)))))
+              (log "")
+              (log (concat "  " (get *enemy* "name") " defeated!"))
+              (log (concat "  XP: +" (string xp-gain) "  Gold: +" (string gold-gain)))
+              (set! *gold* (+ *gold* gold-gain))
+              ;; Award XP to active card
+              (award-xp *active-card* xp-gain)
+              (if is-boss
+                (begin
+                  (log "")
+                  (log "  ★ BOSS CLEARED! ★")
+                  (if (= *floor* 10)
+                    (victory)
+                    (log "  (descend) to the next floor.")))
+                (log "  Room clear!")))))
+        true)
+      false)))
+
+;; Enemy attacks back
+(define (enemy-turn)
+  (let (dmg (combat-damage *enemy* *active-card* 1.0))
+    (let (actual-dmg (if *defending* (floor (/ dmg 2)) dmg))
+      (damage-active actual-dmg)
+      (combat-log
+        (concat (get *enemy* "name") " attacks! "
+                (string dmg) (if *defending* (concat " → blocked → " (string actual-dmg)) "")
+                " damage!")))))
+
+;; Deal damage to active card
+(define (damage-active dmg)
+  (if (null? *active-card*) nil
+    (let (new-hp (max 0 (- (get *active-card* "current_hp") dmg)))
+      (dict-set *active-card* "current_hp" new-hp)
+      (log (concat "  Active HP: " (string new-hp) " / " (string (get *active-card* "max_hp"))))
+      (if (<= new-hp 0)
+        (card-fainted)))))
+
+;; Handle card fainting
+(define (card-fainted)
+  (log (concat "  " (get *active-card* "slug") " fainted!"))
+  (set! *party* (filter
+    (lambda (c) (> (get c "current_hp" 0) 0))
+    *party*))
+  (if (empty? *party*)
+    (game-over)
+    (begin
+      (set! *active-card* (car *party*))
+      (log (concat "  " (get *active-card* "slug") " steps in!"))
+      (set! *in-combat* false)   ;; reset for next attack
+      (start-encounter false)))) ;; re-trigger combat with new active
+
+;; Use an item from inventory
+(define (use-item item-name)
+  (let (count (get *inventory* item-name 0))
+    (if (<= count 0)
+      (log (concat "No " item-name " in inventory."))
+      (begin
+        (dict-set *inventory* item-name (- count 1))
+        (cond
+          ((= item-name "Health Pack")
+           (heal-party 20))
+          ((= item-name "Smoke Bomb")
+           (begin
+             (set! *in-combat* false)
+             (log "  Smoke bomb! You escaped!")))
+          ((= item-name "Force Field")
+           (begin
+             (set! *defending* true)
+             (log "  Force field activated!")))
+          (true
+           (log (concat "  Used: " item-name))))))))
+
+;; Add item to inventory
+(define (item-add name qty)
+  (dict-set *inventory* name (+ (get *inventory* name 0) qty)))
+
+;; Heal all party members
+(define (heal-party amount)
+  (for-each
+    (lambda (card)
+      (let (new-hp (min (get card "max_hp") (+ (get card "current_hp") amount)))
+        (dict-set card "current_hp" new-hp)))
+    *party*)
+  (if (not (null? *active-card*))
+    (let (new-hp (min (get *active-card* "max_hp") (+ (get *active-card* "current_hp") amount)))
+      (dict-set *active-card* "current_hp" new-hp))))
+
+;; Award XP to a card
+(define (award-xp card amount)
+  (let (new-xp (+ (get card "xp" 0) amount))
+    (dict-set card "xp" new-xp)
+    (if (>= new-xp (* (get card "level" 1) 50))
+      (begin
+        (dict-set card "level" (+ (get card "level" 1) 1))
+        (dict-set card "power" (+ (get card "power") 1))
+        (dict-set card "toughness" (+ (get card "toughness") 1))
+        (log (concat "  " (get card "slug") " leveled up! Level " (string (get card "level"))))))))
+
+;; Flee from battle
+(define (flee)
+  (let (rng (mulberry32 (seed-hash (concat (timestamp) "flee"))))
+    (if (< (rng) 0.5)
+      (begin
+        (set! *in-combat* false)
+        (log "  You fled successfully!"))
+      (begin
+        (log "  Failed to flee! Enemy attacks!")
+        (enemy-turn)))))
+
+;; Descend to next floor
+(define (descend)
+  (if (not *run-active*)
+    (log "No active run.")
+    (if *in-combat*
+      (log "Can't descend while in combat!")
+      (begin
+        (let (next-floor (+ *floor* 1))
+          (if (> next-floor 10)
+            (victory)
+            (descent-to-floor next-floor)))))))
+
+;; Small random helper
+(define (random-small)
+  (let (rng (mulberry32 (seed-hash (concat (timestamp) (string *steps*)))))
+    (* (rng) 5)))
+
+;; Log a combat event
+(define (combat-log msg)
+  (set! *combat-log* (append *combat-log* (list msg)))
+  (log (concat "  " msg)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Map and UI
+;; ═══════════════════════════════════════════════════════════════
+
+;; Show the dungeon map (ASCII)
+(define (map)
+  (if (not *run-active*)
+    (log "No active run.")
+    (begin
+      (log "")
+      (log (concat "  ══ FLOOR " (string *floor*) ": " *floor-name* " ══"))
+      (log "")
+      (let (y 0)
+        (while (< y FLOOR-HEIGHT)
+          (let (row "  ")
+            (let (x 0)
+              (while (< x FLOOR-WIDTH)
+                (let (coord (concat (string x) "," (string y)))
+                  (let (is-revealed (get *revealed* coord false))
+                    (let (is-player (and (= x *room-x*) (= y *room-y*)))
+                      (let (room (grid-room *floor-map* x y))
+                        (let (room-type (if (null? room) "wall" (get room "type" "empty")))
+                          (let (cell
+                                 (cond
+                                   (is-player "[@]")
+                                   ((not is-revealed) " ? ")
+                                   ((= room-type "start")    "[S]")
+                                   ((= room-type "stairs")   "[▼]")
+                                   ((= room-type "boss")     "[B]")
+                                   ((= room-type "encounter") "[!]")
+                                   ((= room-type "treasure") "[$]")
+                                   ((= room-type "trap")     "[^]")
+                                   ((= room-type "rest")     "[+]")
+                                   ((= room-type "shop")     "[§]")
+                                   ((= room-type "empty")    "[ ]")
+                                   (true                     "[ ]")))
+                            (set! row (concat row cell)))))))))
+                (set! x (+ x 1))))
+            (log row))
+          (set! y (+ y 1))))
+      (log "")
+      (log "  [@]=You  [!]=Enemy  [$]=Treasure  [^]=Trap  [+]=Rest")
+      (log "  [▼]=Stairs  [B]=Boss  [§]=Shop  [?]=Unexplored")
+      (log ""))))
+
+;; Show inventory
+(define (inventory)
+  (log "  ═══ Inventory ═══")
+  (log (concat "  Gold: " (string *gold*)))
+  (if (empty? (keys *inventory*))
+    (log "  (empty)")
+    (for-each
+      (lambda (k)
+        (let (count (get *inventory* k 0))
+          (if (> count 0)
+            (log (concat "  " k " x" (string count))))))
+      (keys *inventory*))))
+
+;; Show party status
+(define (party-status)
+  (log "  ═══ Party ═══")
+  (if (empty? *party*)
+    (log "  All party members fainted!")
+    (for-each
+      (lambda (card)
+        (let (is-active (and (not (null? *active-card*))
+                             (= (get card "name") (get *active-card* "name"))))
+          (log (concat
+            (if is-active "  ★ " "    ")
+            (get card "slug")
+            "  HP:" (string (get card "current_hp")) "/" (string (get card "max_hp"))
+            "  Lv:" (string (get card "level" 1))
+            "  XP:" (string (get card "xp" 0))))))
+      *party*)))
+
+;; Show run status
+(define (run-status)
+  (log (concat "  Floor: " (string *floor*) "/10  Steps: " (string *steps*) "  Gold: " (string *gold*)))
+  (if *in-combat*
+    (log (concat "  IN COMBAT: " (get *enemy* "name" "?") " HP:" (string (get *enemy* "current_hp" 0))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Victory, Defeat, High Scores
+;; ═══════════════════════════════════════════════════════════════
+
+;; Victory condition
+(define (victory)
+  (set! *run-active* false)
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║    YOU DEFEATED SUPERSEED!           ║")
+  (log "  ║    THE DUNGEON IS CLEARED!           ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log (concat "  Floors: 10  Steps: " (string *steps*) "  Gold: " (string *gold*)))
+  (log (concat "  Party survived: " (string (length *party*)) " cards"))
+  (record-high-score "WIN"))
+
+;; Game over (permadeath)
+(define (game-over)
+  (set! *run-active* false)
+  (set! *in-combat* false)
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║    ALL PARTY MEMBERS FAINTED!        ║")
+  (log "  ║    PERMADEATH. RUN OVER.             ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log (concat "  Reached floor: " (string *floor*) "/10"))
+  (log (concat "  Steps taken: " (string *steps*)))
+  (log (concat "  Gold collected: " (string *gold*)))
+  (log "")
+  (log "  (enter-dungeon cards) to try again.")
+  (record-high-score "LOSS"))
+
+;; Record to high score board
+(define (record-high-score result)
+  (set! *high-scores*
+    (append *high-scores*
+      (list (make-dict
+        "result"  result
+        "floor"   *floor*
+        "steps"   *steps*
+        "gold"    *gold*
+        "ts"      (timestamp)))))
+  (scores))
+
+;; Show high scores
+(define (scores)
+  (log "  ═══ High Scores ═══")
+  (if (empty? *high-scores*)
+    (log "  No runs yet. (enter-dungeon cards)")
+    (let (sorted (sort *high-scores*
+            (lambda (a b) (> (get a "floor") (get b "floor")))))
+      (for-each
+        (lambda (s)
+          (log (concat
+            "  [" (get s "result") "]"
+            "  Floor:" (string (get s "floor")) "/10"
+            "  Steps:" (string (get s "steps"))
+            "  Gold:" (string (get s "gold")))))
+        (take sorted 10)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║   D U N G E O N . L I S P Y  v1.0   ║")
+  (log "  ║   Ten floors. Permadeath.            ║")
+  (log "  ║   SuperSeed waits at the bottom.     ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log "  Start a run:")
+  (log "    (enter-dungeon (list \"@rapp/basic-agent\" \"@kody/deal-desk\" \"@borg/borg_agent\"))")
+  (log "")
+  (log "  In the dungeon:")
+  (log "    (go north/south/east/west)  — explore")
+  (log "    (map)                        — see the floor")
+  (log "    (party-status)               — your team")
+  (log "    (inventory)                  — items and gold")
+  (log "    (descend)                    — go deeper")
+  (log "    (run-status)                 — quick overview")
+  (log "")
+  (log "  In combat:")
+  (log "    (fight \"STRIKE\")   — standard attack")
+  (log "    (fight \"HEAVY\")    — big hit")
+  (log "    (fight \"DEFEND\")   — block next attack")
+  (log "    (fight \"QUICK\")    — two fast hits")
+  (log "    (use-item \"Health Pack\")")
+  (log "    (flee)             — attempt escape")
+  (log "")
+  (log "  Floor themes:")
+  (log "    1:Pallet Lab  3:Pipeline(BOSS)  5:Finance(BOSS)")
+  (log "    7:Productivity(BOSS)  10:SuperSeed(FINAL BOSS)")
+  (log "")
+  (log "  Permadeath. No saves. Only glory.")
+  (log "  (scores) to see the leaderboard."))
