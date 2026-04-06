@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-06T21:05:13.465393+00:00",
+  "generated_at": "2026-04-06T21:08:17.768663+00:00",
   "stats": {
-    "total_agents": 133,
+    "total_agents": 134,
     "publishers": 7,
     "categories": 19,
     "publisher_list": [
@@ -3014,8 +3014,36 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@borg/prompt_to_video_agent",
+      "name": "@borg/markdown_to_slides_agent",
       "version": "1.0.0",
+      "display_name": "MarkdownToSlides",
+      "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+      "author": "RAPP Contributor",
+      "tags": [
+        "markdown",
+        "slides",
+        "presentation",
+        "converter",
+        "deck",
+        "pipeline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@borg/markdown_to_slides_agent.py",
+      "_sha256": "10880773998ddb99f01d833572498de944cc0cf04a000982cfefd72497b15c63",
+      "_seed": 15925461970729052544,
+      "_size_kb": 7.9,
+      "_lines": 236,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@borg/prompt_to_video_agent",
+      "version": "1.1.0",
       "display_name": "PromptToVideo",
       "description": "Renders videos from structured scene descriptions using Remotion \u2014 title, content, quote, and list scenes with style presets.",
       "author": "RAPP Contributor",
@@ -3032,11 +3060,12 @@
       "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
-        "@rapp/basic_agent"
+        "@rapp/basic_agent",
+        "@borg/markdown_to_slides"
       ],
       "_file": "agents/@borg/prompt_to_video_agent.py",
-      "_sha256": "122d7e1815ee127a550400c0e5f2117f3365af1f2c3058c3bb19c1a3472d7004",
-      "_seed": 8086863952292494270,
+      "_sha256": "d8f2b41fce1cbf69850f37d597d8623e204a25fc40623c8001816926002d6d56",
+      "_seed": 8086863952292502462,
       "_size_kb": 26.2,
       "_lines": 792,
       "_has_card": true
