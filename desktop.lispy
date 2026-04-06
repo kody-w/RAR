@@ -1,0 +1,541 @@
+;; ═══════════════════════════════════════════════════════════════
+;; DESKTOP.LISPY — The ORAPPTER Window Manager
+;; Launch multiple cartridges in tiled windows.
+;; This is the OS layer. Every cartridge becomes an app.
+;; ═══════════════════════════════════════════════════════════════
+;;
+;;  ┌─ ORAPPTER Desktop ──────────────────────────────────┐
+;;  │ [>_ terminal] [◆ obsidian] [▓ tetris] [♥ pet] [⚙] │
+;;  ├────────────────────┬────────────────────────────────┤
+;;  │ >_ Terminal        │ ◆ Obsidian                    │
+;;  │                    │                                │
+;;  │ binder@orappter:~$ │ # HOME                        │
+;;  │ ls                 │                                │
+;;  │  @rapp/            │ Welcome to your vault.         │
+;;  │  @kody/            │ - [[Quick Start]]              │
+;;  │  @wildhaven/       │ - [[Strategy]]                 │
+;;  │                    │                                │
+;;  ├────────────────────┼────────────────────────────────┤
+;;  │ ♪ Synth            │ ⚔ Rappterdaemon               │
+;;  │                    │                                │
+;;  │ ♪ Playing:         │ Wild Daemon appeared!          │
+;;  │ @rapp/basic-agent  │ Glitch Lv.5 [core]            │
+;;  │ Note: C4           │ HP: ####....  30/50            │
+;;  │ Wave: ~~~~         │ > FIGHT  CATCH  RUN            │
+;;  │                    │                                │
+;;  ├─────────────────────────────────────────────────────┤
+;;  │ ▲ 3:42 PM  | ♥ Pet: Happy | ❋ Garden: 2 growing   │
+;;  └─────────────────────────────────────────────────────┘
+
+(define _agent_name "desktop")
+(define _agent_desc "ORAPPTER Desktop — window manager, taskbar, app launcher. The OS.")
+
+(define DESKTOP_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Window State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *windows* (list))
+(define *active-window* nil)
+(define *window-counter* 0)
+(define *max-windows* 9)
+(define *layout* "tiled")  ;; tiled, stacked, fullscreen
+(define *taskbar-visible* #t)
+(define *notifications* (list))
+(define *desktop-running* #f)
+(define *wallpaper* "superseed")
+(define *clipboard* nil)
+
+;; Window structure: {id, name, icon, cartridge, state, x, y, w, h, minimized, focused}
+(define (make-window name icon cartridge)
+  (set! *window-counter* (+ *window-counter* 1))
+  (make-dict
+    "id" *window-counter*
+    "name" name
+    "icon" icon
+    "cartridge" cartridge
+    "state" "running"
+    "minimized" false
+    "focused" false
+    "output" (list)
+    "input-history" (list)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: App Registry
+;; ═══════════════════════════════════════════════════════════════
+
+(define APPS
+  (list
+    (make-dict "name" "terminal"      "icon" ">_" "cart" "terminal.lispy"      "desc" "Unix shell")
+    (make-dict "name" "obsidian"      "icon" "+"  "cart" "obsidian.lispy"      "desc" "Knowledge vault")
+    (make-dict "name" "tetris"        "icon" "#"  "cart" "tetris.lispy"        "desc" "The classic")
+    (make-dict "name" "rappterdaemon" "icon" "!"  "cart" "rappterdaemon.lispy" "desc" "RPG")
+    (make-dict "name" "synth"         "icon" "~"  "cart" "synth.lispy"         "desc" "Sound engine")
+    (make-dict "name" "radio"         "icon" "o"  "cart" "radio.lispy"         "desc" "AI radio")
+    (make-dict "name" "canvas"        "icon" "*"  "cart" "canvas.lispy"        "desc" "Drawing app")
+    (make-dict "name" "school"        "icon" "^"  "cart" "school.lispy"        "desc" "AI tutor")
+    (make-dict "name" "arena"         "icon" "@"  "cart" "arena.lispy"         "desc" "PvP battles")
+    (make-dict "name" "tamagotchi"    "icon" "<3" "cart" "tamagotchi.lispy"    "desc" "Virtual pet")
+    (make-dict "name" "garden"        "icon" "%"  "cart" "garden.lispy"        "desc" "Plant seeds")
+    (make-dict "name" "dungeon"       "icon" "v"  "cart" "dungeon.lispy"       "desc" "Roguelike")
+    (make-dict "name" "timecapsule"   "icon" "&"  "cart" "timecapsule.lispy"   "desc" "Future messages")
+    (make-dict "name" "romloader"     "icon" "="  "cart" "romloader.lispy"     "desc" "Play ROMs")
+    (make-dict "name" "cards"         "icon" "$"  "cart" "rapp_sdk.lispy"      "desc" "Card manager")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Window Management
+;; ═══════════════════════════════════════════════════════════════
+
+;; Open an app by name
+(define (open-app name)
+  (if (>= (length (filter (lambda (w) (not (get w "minimized"))) *windows*)) *max-windows*)
+    (begin (notify "Max windows reached. Close one first.") nil)
+    (let ((app (find-app name)))
+      (if (null? app)
+        (begin (display (string-append "  App not found: " name)) (newline))
+        (let ((win (make-window (get app "name") (get app "icon") (get app "cart"))))
+          (set! *windows* (append *windows* (list win)))
+          (focus-window (get win "id"))
+          (notify (string-append "Opened: " (get app "name")))
+          (display (string-append "  [" (get app "icon") "] " (get app "name") " — " (get app "desc")))
+          (newline)
+          win)))))
+
+;; Find app in registry
+(define (find-app name)
+  (let ((matches (filter (lambda (a) (equal? (get a "name") name)) APPS)))
+    (if (empty? matches) nil (car matches))))
+
+;; Close a window
+(define (close-window id)
+  (set! *windows* (filter (lambda (w) (not (= (get w "id") id))) *windows*))
+  (if (and *active-window* (= (get *active-window* "id") id))
+    (set! *active-window* (if (empty? *windows*) nil (car *windows*))))
+  (notify (string-append "Window " (->string id) " closed")))
+
+;; Close active window
+(define (close)
+  (if (null? *active-window*)
+    (display "  No active window")
+    (close-window (get *active-window* "id"))))
+
+;; Focus a window by ID
+(define (focus-window id)
+  (set! *windows*
+    (map (lambda (w)
+      (dict-set w "focused" (= (get w "id") id)))
+      *windows*))
+  (let ((win (car (filter (lambda (w) (= (get w "id") id)) *windows*))))
+    (if (not (null? win))
+      (set! *active-window* win))))
+
+;; Focus by name
+(define (focus name)
+  (let ((matches (filter (lambda (w)
+          (string-contains? (string-downcase (get w "name" "")) (string-downcase name)))
+          *windows*)))
+    (if (empty? matches)
+      (begin (display (string-append "  No window: " name)) (newline))
+      (focus-window (get (car matches) "id")))))
+
+;; Minimize window
+(define (minimize)
+  (if (not (null? *active-window*))
+    (begin
+      (set! *active-window* (dict-set *active-window* "minimized" #t))
+      (notify (string-append "Minimized: " (get *active-window* "name"))))))
+
+;; Minimize all
+(define (minimize-all)
+  (set! *windows*
+    (map (lambda (w) (dict-set w "minimized" #t)) *windows*))
+  (set! *active-window* nil)
+  (display "  All windows minimized. Desktop visible.")
+  (newline))
+
+;; Restore a minimized window
+(define (restore name)
+  (set! *windows*
+    (map (lambda (w)
+      (if (string-contains? (string-downcase (get w "name" "")) (string-downcase name))
+        (dict-set w "minimized" #f)
+        w))
+      *windows*))
+  (focus name))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Layout Engine
+;; ═══════════════════════════════════════════════════════════════
+
+;; Switch layout mode
+(define (layout mode)
+  (if (not (or (equal? mode "tiled") (equal? mode "stacked") (equal? mode "fullscreen")))
+    (display "  Layouts: tiled, stacked, fullscreen")
+    (begin
+      (set! *layout* mode)
+      (notify (string-append "Layout: " mode))
+      (render-desktop))))
+
+;; Render the desktop
+(define (render-desktop)
+  (let ((visible (filter (lambda (w) (not (get w "minimized"))) *windows*)))
+    (display "") (newline)
+
+    ;; Taskbar
+    (if *taskbar-visible*
+      (begin
+        (display "  ┌─ ORAPPTER Desktop ")
+        (display (string-append "(" *layout* ")"))
+        (display (string-append " ─────────────────────────┐"))
+        (newline)
+        (display "  │ ")
+        (for-each
+          (lambda (w)
+            (let ((marker (if (get w "focused") "*" " ")))
+              (display (string-append "[" (get w "icon") marker (get w "name") "] "))))
+          visible)
+        (display "│")
+        (newline)
+        (display "  ├──────────────────────────────────────────────────┤")
+        (newline)))
+
+    ;; Windows
+    (cond
+      ;; Tiled: show all side by side
+      ((equal? *layout* "tiled")
+        (if (empty? visible)
+          (begin
+            (display "  │                                                  │") (newline)
+            (display "  │           No windows open.                       │") (newline)
+            (display "  │           (apps) to see available apps.          │") (newline)
+            (display "  │           (open \"terminal\") to start.            │") (newline)
+            (display "  │                                                  │") (newline))
+          (for-each
+            (lambda (w)
+              (let ((marker (if (get w "focused") ">>>" "   ")))
+                (display (string-append "  │ " marker " [" (get w "icon") "] "
+                  (get w "name") " (id:" (->string (get w "id")) ")"))
+                (newline)))
+            visible)))
+
+      ;; Fullscreen: show only active
+      ((equal? *layout* "fullscreen")
+        (if (null? *active-window*)
+          (begin (display "  │  No active window.") (newline))
+          (begin
+            (display (string-append "  │  [" (get *active-window* "icon") "] "
+              (get *active-window* "name") " — FULLSCREEN"))
+            (newline))))
+
+      ;; Stacked
+      (true
+        (for-each
+          (lambda (w)
+            (display (string-append "  │  "
+              (if (get w "focused") "▶ " "  ")
+              (get w "name")))
+            (newline))
+          visible)))
+
+    ;; Status bar
+    (display "  ├──────────────────────────────────────────────────┤")
+    (newline)
+    (display (string-append "  │ Windows: " (->string (length visible))
+              " | Layout: " *layout*
+              " | Apps: " (->string (length APPS))
+              " │"))
+    (newline)
+    (display "  └──────────────────────────────────────────────────┘")
+    (newline)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Notifications
+;; ═══════════════════════════════════════════════════════════════
+
+(define (notify msg)
+  (set! *notifications* (append *notifications* (list msg)))
+  ;; Keep last 20
+  (if (> (length *notifications*) 20)
+    (set! *notifications* (drop *notifications* (- (length *notifications*) 20)))))
+
+(define (notifications)
+  (display "  ═══ Notifications ═══") (newline)
+  (if (empty? *notifications*)
+    (begin (display "  No notifications.") (newline))
+    (for-each
+      (lambda (n) (display (string-append "  • " n)) (newline))
+      (reverse (take *notifications* 10)))))
+
+(define (clear-notifications)
+  (set! *notifications* (list))
+  (display "  Notifications cleared.") (newline))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: App Launcher
+;; ═══════════════════════════════════════════════════════════════
+
+;; List all available apps
+(define (apps)
+  (display "  ═══ ORAPPTER Apps ═══") (newline)
+  (for-each
+    (lambda (app)
+      (let ((running (not (null? (filter
+              (lambda (w) (equal? (get w "name") (get app "name")))
+              *windows*)))))
+        (display (string-append
+          "  [" (get app "icon") "] "
+          (get app "name")
+          (if running " (running)" "")
+          " — " (get app "desc")))
+        (newline)))
+    APPS)
+  (newline)
+  (display "  (open \"name\") to launch an app") (newline))
+
+;; Quick launcher — open by number
+(define (launch n)
+  (if (or (< n 1) (> n (length APPS)))
+    (begin (display "  Invalid app number.") (newline))
+    (open-app (get (nth APPS (- n 1)) "name"))))
+
+;; Open multiple apps at once
+(define (workspace . app-names)
+  (for-each
+    (lambda (name) (open-app name))
+    app-names)
+  (render-desktop))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Window Tiling Shortcuts
+;; ═══════════════════════════════════════════════════════════════
+
+;; Tile two apps side by side
+(define (split app1 app2)
+  (open-app app1)
+  (open-app app2)
+  (layout "tiled")
+  (render-desktop))
+
+;; Fullscreen the active window
+(define (full)
+  (layout "fullscreen")
+  (render-desktop))
+
+;; Tile all open windows
+(define (tile)
+  (layout "tiled")
+  (render-desktop))
+
+;; Cycle focus to next window
+(define (next)
+  (if (empty? *windows*)
+    (display "  No windows open.")
+    (let ((visible (filter (lambda (w) (not (get w "minimized"))) *windows*)))
+      (if (null? *active-window*)
+        (focus-window (get (car visible) "id"))
+        (let ((idx (length (filter
+                (lambda (w) (< (get w "id") (get *active-window* "id")))
+                visible))))
+          (let ((next-idx (modulo (+ idx 1) (length visible))))
+            (focus-window (get (nth visible next-idx) "id")))))))
+  (render-desktop))
+
+;; Close all windows
+(define (close-all)
+  (set! *windows* (list))
+  (set! *active-window* nil)
+  (display "  All windows closed.") (newline)
+  (render-desktop))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Clipboard
+;; ═══════════════════════════════════════════════════════════════
+
+(define (copy text)
+  (set! *clipboard* text)
+  (display (string-append "  Copied: " (if (> (string-length text) 40)
+    (string-append (substring text 0 40) "...") text)))
+  (newline))
+
+(define (paste)
+  (if (null? *clipboard*)
+    (begin (display "  Clipboard empty.") (newline))
+    (begin (display (string-append "  " *clipboard*)) (newline)))
+  *clipboard*)
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 9: Wallpaper & Themes
+;; ═══════════════════════════════════════════════════════════════
+
+(define WALLPAPERS
+  (make-dict
+    "superseed" (list
+      "         .  *  .    *    .  *"
+      "    *  .    ___    .  *"
+      "      .   /   \\   .    *"
+      "   *     | S E |     ."
+      "    .    | E D |  *"
+      "  *   .  \\___/    .   *"
+      "    .   *  |  .    *"
+      "      .    |    ."
+      "   *    . /|\\ .    *"
+      "     .  / | \\ .  *"
+      "       /  |  \\"
+      "  ____/   |   \\____"
+      "          |"
+      " The SuperSeed grows the tree."
+      " The tree gives free shade."
+      " The shade is free."
+      " The roots are sovereign.")
+    "matrix" (list
+      " 01001 10110 01101 00101 11010"
+      " 10110 01011 10010 11001 01101"
+      " 01101 10101 01110 00110 10011"
+      " 11010 01100 10101 11010 01110"
+      " ORAPPTER v1.0.0"
+      " The Offline-First AI Runtime")
+    "minimal" (list
+      ""
+      ""
+      "              ORAPPTER"
+      ""
+      "")))
+
+(define (wallpaper name)
+  (if (has-key? WALLPAPERS name)
+    (begin
+      (set! *wallpaper* name)
+      (for-each
+        (lambda (line) (display (string-append "  " line)) (newline))
+        (get WALLPAPERS name)))
+    (begin
+      (display "  Available: superseed, matrix, minimal") (newline))))
+
+;; Show desktop (minimize all + show wallpaper)
+(define (show-desktop)
+  (minimize-all)
+  (newline)
+  (wallpaper *wallpaper*))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 10: System Info
+;; ═══════════════════════════════════════════════════════════════
+
+(define (sysinfo)
+  (display "  ═══ ORAPPTER System Info ═══") (newline)
+  (display (string-append "  OS:         ORAPPTER Desktop v" DESKTOP_VERSION)) (newline)
+  (display (string-append "  Runtime:    LisPy VM")) (newline)
+  (display (string-append "  Layout:     " *layout*)) (newline)
+  (display (string-append "  Windows:    " (->string (length *windows*)))) (newline)
+  (display (string-append "  Apps:       " (->string (length APPS)))) (newline)
+  (display (string-append "  Wallpaper:  " *wallpaper*)) (newline)
+  (display (string-append "  Clipboard:  " (if (null? *clipboard*) "empty" "has content"))) (newline)
+  (display (string-append "  Notifs:     " (->string (length *notifications*)))) (newline)
+  (display (string-append "  Offline:    yes")) (newline)
+  (display (string-append "  AI:         optional")) (newline)
+  (display (string-append "  Battery:    is the timer")) (newline))
+
+;; Task manager — show all running windows with details
+(define (taskmanager)
+  (display "  ═══ Task Manager ═══") (newline)
+  (if (empty? *windows*)
+    (begin (display "  No running tasks.") (newline))
+    (for-each
+      (lambda (w)
+        (display (string-append
+          "  PID:" (->string (get w "id"))
+          " [" (get w "icon") "] "
+          (get w "name")
+          " state:" (get w "state" "running")
+          (if (get w "minimized") " (minimized)" "")
+          (if (get w "focused") " (focused)" "")))
+        (newline))
+      *windows*))
+  (newline)
+  (display (string-append "  Total: " (->string (length *windows*)) " / " (->string *max-windows*)))
+  (newline))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 11: Presets — One-Command Workspaces
+;; ═══════════════════════════════════════════════════════════════
+
+;; Developer workspace
+(define (ws-dev)
+  (close-all)
+  (workspace "terminal" "obsidian" "cards")
+  (notify "Developer workspace loaded"))
+
+;; Gamer workspace
+(define (ws-game)
+  (close-all)
+  (workspace "rappterdaemon" "tetris")
+  (notify "Gamer workspace loaded"))
+
+;; Creative workspace
+(define (ws-create)
+  (close-all)
+  (workspace "canvas" "synth" "radio")
+  (notify "Creative workspace loaded"))
+
+;; Operator workspace
+(define (ws-operator)
+  (close-all)
+  (workspace "obsidian" "terminal" "cards" "garden")
+  (notify "Operator workspace loaded"))
+
+;; Everything
+(define (ws-everything)
+  (close-all)
+  (for-each (lambda (app) (open-app (get app "name"))) (take APPS 9))
+  (notify "Everything workspace loaded — 9 apps"))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (set! *desktop-running* #t)
+  (display "") (newline)
+  (display "  ╔══════════════════════════════════════════════╗") (newline)
+  (display "  ║                                              ║") (newline)
+  (display "  ║      O R A P P T E R   D E S K T O P        ║") (newline)
+  (display "  ║                                              ║") (newline)
+  (display "  ║      The OS for the Agentic Era              ║") (newline)
+  (display "  ║                                              ║") (newline)
+  (display "  ╚══════════════════════════════════════════════╝") (newline)
+  (newline)
+  (wallpaper "superseed")
+  (newline)
+  (display "  Commands:") (newline)
+  (display "    (apps)              — list all apps") (newline)
+  (display "    (open \"terminal\")   — launch an app") (newline)
+  (display "    (close)             — close active window") (newline)
+  (display "    (next)              — cycle between windows") (newline)
+  (display "    (focus \"name\")      — focus a window") (newline)
+  (display "    (tile) (full)       — change layout") (newline)
+  (display "    (show-desktop)      — minimize all, show wallpaper") (newline)
+  (display "    (taskmanager)       — see running tasks") (newline)
+  (display "    (sysinfo)           — system information") (newline)
+  (newline)
+  (display "  Workspaces:") (newline)
+  (display "    (ws-dev)            — terminal + obsidian + cards") (newline)
+  (display "    (ws-game)           — rappterdaemon + tetris") (newline)
+  (display "    (ws-create)         — canvas + synth + radio") (newline)
+  (display "    (ws-operator)       — obsidian + terminal + cards + garden") (newline)
+  (display "    (ws-everything)     — all 9 slots filled") (newline)
+  (newline)
+  (display "  15 apps. 1 OS. 0 internet. Battery is the timer.") (newline)
+  (display "  ══════════════════════════════════════════════════") (newline))

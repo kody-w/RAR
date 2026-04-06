@@ -1,0 +1,49 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "desktop",
+  "version": "1.0.0",
+  "description": "Window manager for ORAPPTER. Launch multiple cartridges in tiled windows. The OS layer.",
+  "type": "os",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI assistant in the taskbar. Optional."
+  },
+  "system": "You are the ORAPPTER Desktop — a window manager that launches cartridges as tiled windows.",
+  "boot": ["(load \"desktop.lispy\")"],
+  "env": {
+    "MAX_WINDOWS": 9,
+    "LAYOUT": "tiled",
+    "TASKBAR": true,
+    "WALLPAPER": "superseed",
+    "CLOCK": true,
+    "NOTIFICATIONS": true
+  },
+  "installed_apps": [
+    {"name": "terminal", "icon": ">_", "cartridge": "terminal.lispy"},
+    {"name": "obsidian", "icon": "◆", "cartridge": "obsidian.lispy"},
+    {"name": "tetris", "icon": "▓", "cartridge": "tetris.lispy"},
+    {"name": "rappterdaemon", "icon": "⚔", "cartridge": "rappterdaemon.lispy"},
+    {"name": "synth", "icon": "♪", "cartridge": "synth.lispy"},
+    {"name": "radio", "icon": "◉", "cartridge": "radio.lispy"},
+    {"name": "canvas", "icon": "✎", "cartridge": "canvas.lispy"},
+    {"name": "school", "icon": "▲", "cartridge": "school.lispy"},
+    {"name": "arena", "icon": "⊕", "cartridge": "arena.lispy"},
+    {"name": "tamagotchi", "icon": "♥", "cartridge": "tamagotchi.lispy"},
+    {"name": "garden", "icon": "❋", "cartridge": "garden.lispy"},
+    {"name": "dungeon", "icon": "▼", "cartridge": "dungeon.lispy"},
+    {"name": "timecapsule", "icon": "◈", "cartridge": "timecapsule.lispy"},
+    {"name": "romloader", "icon": "■", "cartridge": "romloader.lispy"},
+    {"name": "cards", "icon": "♠", "cartridge": "rapp_sdk.lispy"},
+    {"name": "settings", "icon": "⚙", "cartridge": null}
+  ],
+  "metadata": {
+    "offline": true,
+    "ai_optional": true,
+    "this_is_the_os": true
+  }
+}
