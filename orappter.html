@@ -783,24 +783,24 @@ function valueRepr(val) {
   if (val === true) return '#t';
   if (val === false) return '#f';
   if (isNil(val)) return '()';
-  if (val instanoperatorf LispSymbol) return String(val);
+  if (val instanceof LispSymbol) return String(val);
   if (typeof val === 'string') {
     return '"' + val.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
   }
   if (typeof val === 'number') return String(val);
   if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
-  if (val && typeof val === 'object' && !(val instanoperatorf LispLambda) && !(val instanoperatorf LispMacro) && !(val instanoperatorf Env)) {
+  if (val && typeof val === 'object' && !(val instanceof LispLambda) && !(val instanceof LispMacro) && !(val instanceof Env)) {
     if (val._type === 'nil') return '()';
     const items = Object.entries(val).map(([k, v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
     return `(dict ${items})`;
   }
-  if (val instanoperatorf LispLambda || val instanoperatorf LispMacro) return val.toString();
+  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
   if (typeof val === 'function') return '#<builtin>';
   return String(val);
 }
 
 function displayValue(val) {
-  if (typeof val === 'string' && !(val instanoperatorf LispSymbol)) return val;
+  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
   return valueRepr(val);
 }
 
@@ -816,10 +816,10 @@ function evaluate(expr, env) {
     if (expr === true || expr === false) return expr;
     if (typeof expr === 'number') return expr;
     if (isNil(expr)) return NIL;
-    if (typeof expr === 'string' && !(expr instanoperatorf LispSymbol)) return expr;
+    if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
 
     // Symbol lookup
-    if (expr instanoperatorf LispSymbol) return env.get(String(expr));
+    if (expr instanceof LispSymbol) return env.get(String(expr));
 
     // Not a list
     if (!Array.isArray(expr)) return expr;
@@ -830,7 +830,7 @@ function evaluate(expr, env) {
     const head = expr[0];
 
     // Special forms
-    if (head instanoperatorf LispSymbol || typeof head === 'string') {
+    if (head instanceof LispSymbol || typeof head === 'string') {
       const h = String(head);
 
       if (h === 'quote') {
@@ -896,7 +896,7 @@ function evaluate(expr, env) {
       if (h === 'lambda') {
         if (expr.length < 3) throw new LispError('lambda requires params and body');
         const params = expr[1];
-        if (params instanoperatorf LispSymbol || typeof params === 'string') {
+        if (params instanceof LispSymbol || typeof params === 'string') {
           return new LispLambda(String(params), expr.slice(2), env);
         }
         if (Array.isArray(params)) {
@@ -980,7 +980,7 @@ function evaluate(expr, env) {
     const fn = evaluate(head, env);
 
     // Macro expansion
-    if (fn instanoperatorf LispMacro) {
+    if (fn instanceof LispMacro) {
       const macArgs = expr.slice(1); // unevaluated
       const macEnv = new Env(fn.params, macArgs, fn.env);
       const expanded = evalBody(fn.body, macEnv);
@@ -996,7 +996,7 @@ function evaluate(expr, env) {
     }
 
     // Lambda
-    if (fn instanoperatorf LispLambda) {
+    if (fn instanceof LispLambda) {
       const callEnv = new Env(fn.params, args, fn.env);
       // Eval body with TCO on last
       for (let i = 0; i < fn.body.length - 1; i++) evaluate(fn.body[i], callEnv);
@@ -1017,7 +1017,7 @@ function evalBody(body, env) {
 
 function callFn(fn, args) {
   if (typeof fn === 'function') return fn(...args);
-  if (fn instanoperatorf LispLambda) {
+  if (fn instanceof LispLambda) {
     const callEnv = new Env(fn.params, args, fn.env);
     return evalBody(fn.body, callEnv);
   }
@@ -1068,11 +1068,11 @@ function makeGlobalEnv() {
   env.set('pair?', x => Array.isArray(x) && x.length > 0);
   env.set('list?', x => Array.isArray(x));
   env.set('number?', x => typeof x === 'number' && !isNaN(x));
-  env.set('string?', x => typeof x === 'string' && !(x instanoperatorf LispSymbol));
-  env.set('symbol?', x => x instanoperatorf LispSymbol);
+  env.set('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.set('symbol?', x => x instanceof LispSymbol);
   env.set('boolean?', x => typeof x === 'boolean');
-  env.set('procedure?', x => typeof x === 'function' || x instanoperatorf LispLambda);
-  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanoperatorf LispLambda) && !(x instanoperatorf LispMacro) && x !== NIL);
+  env.set('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanceof LispLambda) && !(x instanceof LispMacro) && x !== NIL);
   env.set('integer?', x => Number.isInteger(x));
   env.set('empty?', x => isNil(x) || (typeof x === 'string' && x.length === 0) || (Array.isArray(x) && x.length === 0) || (x && typeof x === 'object' && Object.keys(x).length === 0));
 
