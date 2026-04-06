@@ -1,0 +1,631 @@
+;; ═══════════════════════════════════════════════════════════════
+;; TERMINAL.LISPY — Unix-like shell for the ORAPPTER registry
+;; The filesystem IS your cards, registry, and vault.
+;; Navigate namespaces, search agents, cat cards, grep the registry.
+;;
+;; binder@orappter:@rapp$ ls
+;; binder@orappter:@rapp$ cd @kody
+;; binder@orappter:@kody$ cat deal-desk
+;; binder@orappter:@kody$ grep "sales"
+;;
+;; The registry is the filesystem. Every agent is a file.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "terminal")
+(define _agent_desc "Unix-like terminal — the registry is the filesystem. ls, cd, cat, grep, tree and more.")
+
+(define TERMINAL_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Shell State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *cwd* "@rapp")                   ;; current namespace / directory
+(define *binder* "anon")                 ;; logged-in binder handle
+(define *history* (list))                ;; command history
+(define *vfs* (make-dict))               ;; virtual filesystem: path → content
+(define *env* (make-dict                 ;; environment variables
+  "HOME" "@rapp"
+  "SHELL" "lispy"
+  "TERM" "orappter-256color"
+  "EDITOR" "orappter"
+  "PATH" "/@rapp:/@kody:/@borg"))
+(define *aliases* (make-dict             ;; command aliases
+  "ll" "ls -l"
+  "la" "ls -a"
+  "cls" "clear"
+  "?" "help"))
+(define *registry-cache* nil)            ;; cached registry.json
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Registry as Filesystem
+;; Agents live at /@publisher/agent-slug
+;; ═══════════════════════════════════════════════════════════════
+
+;; Load the registry (from local registry.json or embedded)
+(define (registry-load)
+  (if (not (null? *registry-cache*))
+    *registry-cache*
+    (let (raw (if (file-exists? "registry.json")
+                (read-file "registry.json")
+                "[]"))
+      (let (parsed (json-parse raw))
+        (set! *registry-cache* parsed)
+        parsed))))
+
+;; Get all unique namespaces from the registry
+(define (registry-namespaces)
+  (let (agents (registry-load))
+    (let (names (map (lambda (a) (get a "name" "")) agents))
+      (let (publishers (map
+              (lambda (n)
+                (let (parts (split n "/"))
+                  (if (>= (length parts) 1)
+                    (car parts)
+                    n)))
+              names))
+        (deduplicate publishers)))))
+
+;; Get all agents in a namespace
+(define (registry-in-ns ns)
+  (let (agents (registry-load))
+    (filter
+      (lambda (a)
+        (let (name (get a "name" ""))
+          (starts-with? name (concat ns "/"))))
+      agents)))
+
+;; Get a specific agent by full name
+(define (registry-find-agent fullname)
+  (let (agents (registry-load))
+    (let (matches (filter
+            (lambda (a)
+              (= (get a "name" "") fullname))
+            agents))
+      (if (empty? matches) nil (car matches)))))
+
+;; Resolve a path to a registry entry
+;; "@kody/deal-desk" → agent
+;; "@kody" → namespace listing
+;; "/" or "" → root listing
+(define (path-resolve path)
+  (let (cleaned (if (starts-with? path "/") (substring path 1 (length path)) path))
+    (cond
+      ((or (= cleaned "") (= cleaned "/"))
+       (make-dict "type" "root"))
+      ((contains? cleaned "/")
+       (let (agent (registry-find-agent (concat "@" (replace cleaned "@" ""))))
+         (if (null? agent)
+           (let (agent2 (registry-find-agent cleaned))
+             (if (null? agent2)
+               nil
+               (make-dict "type" "agent" "data" agent2)))
+           (make-dict "type" "agent" "data" agent))))
+      ((starts-with? cleaned "@")
+       (make-dict "type" "namespace" "ns" cleaned))
+      (true
+       (make-dict "type" "namespace" "ns" (concat "@" cleaned))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Core Commands
+;; ls, cd, cat, pwd, whoami, clear
+;; ═══════════════════════════════════════════════════════════════
+
+;; pwd — print working directory / namespace
+(define (pwd)
+  (log (concat "/" *cwd*)))
+
+;; whoami — print binder identity
+(define (whoami)
+  (log (concat *binder* "@orappter"))
+  (log (concat "Home: /" (get *env* "HOME" "@rapp")))
+  (log (concat "Shell: " (get *env* "SHELL" "lispy"))))
+
+;; clear — clear the screen
+(define (clear)
+  (log "\u001b[2J\u001b[H"))
+
+;; ls — list agents in current or given namespace
+(define (ls . args)
+  (let (target-ns (if (empty? args) *cwd* (car args)))
+    (cond
+      ;; Root: list all namespaces
+      ((or (= target-ns "/") (= target-ns ""))
+       (begin
+         (log "total namespaces:")
+         (for-each
+           (lambda (ns)
+             (log (concat "  drwxr-xr-x  " ns)))
+           (sort (registry-namespaces) <))))
+      ;; Specific namespace
+      (true
+       (let (ns (if (starts-with? target-ns "@") target-ns (concat "@" target-ns)))
+         (let (agents (registry-in-ns ns))
+           (if (empty? agents)
+             (log (concat "ls: " ns ": No such namespace"))
+             (begin
+               (log (concat "total " (string (length agents))))
+               (for-each
+                 (lambda (a)
+                   (let (name (get a "name" ""))
+                     (let (slug (last (split name "/")))
+                       (let (tier (get a "quality_tier" "community"))
+                         (let (ver (get a "version" "?"))
+                           (log (concat
+                             "  -rw-r--r--  "
+                             (if (= tier "official") "\u001b[33m" "")
+                             (if (= tier "verified") "\u001b[36m" "")
+                             slug ".py"
+                             (if (or (= tier "official") (= tier "verified")) "\u001b[0m" "")
+                             "  [" ver "]")))))))
+                 (sort agents (lambda (a b) (< (get a "name" "") (get b "name" ""))))))))))))
+
+;; ls -l — long listing
+(define (ls-l . args)
+  (let (target-ns (if (empty? args) *cwd* (car args)))
+    (let (ns (if (starts-with? target-ns "@") target-ns (concat "@" target-ns)))
+      (let (agents (registry-in-ns ns))
+        (if (empty? agents)
+          (log (concat "ls: " ns ": No such namespace"))
+          (begin
+            (log (concat "Namespace: " ns))
+            (log (concat "Agents: " (string (length agents))))
+            (log "")
+            (log "NAME                              VERSION   TIER        CATEGORY")
+            (log "────────────────────────────────  ────────  ──────────  ──────────────")
+            (for-each
+              (lambda (a)
+                (let (name (get a "name" ""))
+                  (let (slug (last (split name "/")))
+                    (let (ver    (get a "version" "?"))
+                      (let (tier   (get a "quality_tier" "community"))
+                        (let (cat    (get a "category" "?"))
+                          (log (concat
+                            "  " slug
+                            (make-string (max 1 (- 32 (length slug))) " ")
+                            ver
+                            (make-string (max 1 (- 8 (length ver))) " ")
+                            tier
+                            (make-string (max 1 (- 10 (length tier))) " ")
+                            cat))))))))
+              agents)))))))
+
+;; cd — change namespace
+(define (cd . args)
+  (if (empty? args)
+    (begin
+      (set! *cwd* (get *env* "HOME" "@rapp"))
+      (log (concat "~  /" *cwd*)))
+    (let (target (car args))
+      (cond
+        ;; Go home
+        ((or (= target "~") (= target ""))
+         (begin
+           (set! *cwd* (get *env* "HOME" "@rapp"))
+           (log (concat "~  /" *cwd*))))
+        ;; Go to root
+        ((= target "/")
+         (begin
+           (set! *cwd* "")
+           (log "/")))
+        ;; Go up
+        ((= target "..")
+         (begin
+           (set! *cwd* (get *env* "HOME" "@rapp"))
+           (log (concat "  /" *cwd*))))
+        ;; Valid namespace
+        ((starts-with? target "@")
+         (let (ns-agents (registry-in-ns target))
+           (if (empty? ns-agents)
+             (log (concat "cd: " target ": No such namespace"))
+             (begin
+               (set! *cwd* target)
+               (log (concat "  /" *cwd* " (" (string (length ns-agents)) " agents)"))))))
+        ;; Without @ prefix
+        (true
+         (cd (concat "@" target)))))))
+
+;; cat — display an agent card
+(define (cat agent-ref)
+  (let (fullname
+         (cond
+           ;; Already fully qualified
+           ((contains? agent-ref "/") agent-ref)
+           ;; Just a slug — look in cwd
+           (true (concat *cwd* "/" agent-ref))))
+    (let (agent (registry-find-agent fullname))
+      (if (null? agent)
+        (log (concat "cat: " agent-ref ": No such agent"))
+        (display-agent-card agent)))))
+
+;; Display agent as a formatted card
+(define (display-agent-card agent)
+  (let (name    (get agent "name" ""))
+    (let (display (get agent "display_name" name))
+      (let (ver     (get agent "version" "?"))
+        (let (desc    (get agent "description" ""))
+          (let (author  (get agent "author" ""))
+            (let (tier    (get agent "quality_tier" "community"))
+              (let (cat     (get agent "category" ""))
+                (let (tags    (get agent "tags" (list)))
+                  (let (req-env (get agent "requires_env" (list)))
+                    (let (deps   (get agent "dependencies" (list)))
+                      (log "")
+                      (log "┌────────────────────────────────────────────┐")
+                      (log (concat "│  " display
+                                   (make-string (max 1 (- 40 (length display))) " ") "│"))
+                      (log (concat "│  " name
+                                   (make-string (max 1 (- 40 (length name))) " ") "│"))
+                      (log "├────────────────────────────────────────────┤")
+                      (log (concat "│  " desc
+                                   (make-string (max 1 (- 40 (length desc))) " ") "│"))
+                      (log "├────────────────────────────────────────────┤")
+                      (log (concat "│  Version:  " ver
+                                   (make-string (max 1 (- 31 (length ver))) " ") "│"))
+                      (log (concat "│  Author:   " author
+                                   (make-string (max 1 (- 31 (length author))) " ") "│"))
+                      (log (concat "│  Tier:     " tier
+                                   (make-string (max 1 (- 31 (length tier))) " ") "│"))
+                      (log (concat "│  Category: " cat
+                                   (make-string (max 1 (- 31 (length cat))) " ") "│"))
+                      (log "├────────────────────────────────────────────┤")
+                      (log (concat "│  Tags: " (join tags ", ")
+                                   (make-string (max 1 (- 35 (length (join tags ", ")))) " ") "│"))
+                      (if (not (empty? req-env))
+                        (log (concat "│  Env:  " (join req-env ", ")
+                                     (make-string (max 1 (- 35 (length (join req-env ", ")))) " ") "│")))
+                      (if (not (empty? deps))
+                        (log (concat "│  Deps: " (join deps ", ")
+                                     (make-string (max 1 (- 35 (length (join deps ", ")))) " ") "│")))
+                      (log "└────────────────────────────────────────────┘")
+                      (log ""))))))))))))
+
+;; grep — search registry for a pattern
+(define (grep pattern . args)
+  (let (agents (registry-load))
+    (let (q (lowercase pattern))
+      (let (results (filter
+              (lambda (a)
+                (or (contains? (lowercase (get a "name" "")) q)
+                    (contains? (lowercase (get a "display_name" "")) q)
+                    (contains? (lowercase (get a "description" "")) q)
+                    (not (null? (filter
+                      (lambda (tag) (contains? (lowercase tag) q))
+                      (get a "tags" (list)))))
+                    (contains? (lowercase (get a "category" "")) q)
+                    (contains? (lowercase (get a "author" "")) q)))
+              agents))
+        (if (empty? results)
+          (log (concat "grep: no matches for '" pattern "'"))
+          (begin
+            (log (concat "grep: " (string (length results)) " match(es) for '" pattern "'"))
+            (log "")
+            (for-each
+              (lambda (a)
+                (log (concat "  \u001b[32m" (get a "name" "") "\u001b[0m"
+                             "  — " (get a "description" ""))))
+              results)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Tree, History, Man, Echo
+;; ═══════════════════════════════════════════════════════════════
+
+;; tree — show dependency tree from SuperSeed or given agent
+(define (tree . args)
+  (let (root-name (if (empty? args) "@rapp/basic-agent" (car args)))
+    (log (concat "dependency tree from: " root-name))
+    (log "")
+    (tree-recurse root-name 0 (make-dict))))
+
+(define (tree-recurse name depth visited)
+  (if (get visited name false)
+    (log (concat (make-string (* depth 2) " ") "└── " name " [circular]"))
+    (begin
+      (dict-set visited name true)
+      (log (concat (make-string (* depth 2) " ") (if (= depth 0) "" "└── ") name))
+      (let (agent (registry-find-agent name))
+        (if (not (null? agent))
+          (let (deps (get agent "dependencies" (list)))
+            (for-each
+              (lambda (dep)
+                (tree-recurse dep (+ depth 1) visited))
+              deps)))))))
+
+;; history — show command history
+(define (history . args)
+  (if (empty? *history*)
+    (log "  (no commands in history)")
+    (begin
+      (let (n (if (empty? args) (length *history*) (parse-int (car args))))
+        (let (slice (take-last *history* n))
+          (let (start-idx (- (length *history*) (length slice)))
+            (for-each-indexed
+              (lambda (cmd i)
+                (log (concat "  " (string (+ start-idx i 1)) "  " cmd)))
+              slice)))))))
+
+;; Record a command in history
+(define (history-push cmd)
+  (set! *history* (append *history* (list cmd)))
+  (if (> (length *history*) 100)
+    (set! *history* (take-last *history* 100))))
+
+;; man — show manual page for a command
+(define (man cmd)
+  (let (pages (make-dict
+    "ls"      "ls [namespace]\n  List agents in current or given namespace.\n  Colors: yellow=official, cyan=verified\n  Example: (ls \"@kody\")"
+    "cd"      "cd [namespace]\n  Change current namespace.\n  Example: (cd \"@kody\")\n  Example: (cd \"..\") — go home\n  Example: (cd \"/\") — go to root"
+    "cat"     "cat <agent-slug|full-name>\n  Display an agent's full card.\n  Example: (cat \"deal-desk\")\n  Example: (cat \"@kody/deal-desk\")"
+    "grep"    "grep <pattern>\n  Search the registry for a pattern.\n  Searches: name, display_name, description, tags, category, author\n  Example: (grep \"sales\")"
+    "pwd"     "pwd\n  Print current namespace (working directory).\n  Example: (pwd) → /@kody"
+    "whoami"  "whoami\n  Print your Binder identity and environment.\n  Example: (whoami)"
+    "tree"    "tree [agent-name]\n  Show dependency tree from SuperSeed or given agent.\n  Example: (tree)\n  Example: (tree \"@kody/deal-desk\")"
+    "history" "history [n]\n  Show command history.\n  Example: (history)\n  Example: (history 10) — last 10 commands"
+    "echo"    "echo <text> [> file]\n  Print text or write to virtual file.\n  Example: (echo \"hello\")\n  Example: (echo \"data\" \">\" \"notes.txt\")"
+    "env"     "env\n  Print all environment variables."
+    "alias"   "alias [name] [command]\n  Show or create command aliases."
+    "find"    "find <pattern>\n  Find agents matching a pattern.\n  Example: (find \"*sales*\")"
+    "wc"      "wc [namespace]\n  Word/line count — number of agents, deps, tags.\n  Example: (wc \"@kody\")"
+    "stat"    "stat <agent>\n  Detailed stats for an agent.\n  Example: (stat \"@rapp/basic-agent\")"
+    "diff"    "diff <agent1> <agent2>\n  Compare two agents side by side.\n  Example: (diff \"@rapp/basic-agent\" \"@kody/deal-desk\")"
+    "which"   "which <slug>\n  Find full path to an agent by slug.\n  Example: (which \"basic-agent\")"
+    "export"  "export <var> <value>\n  Set an environment variable.\n  Example: (export \"BINDER\" \"molly\")"
+    "source"  "source <file>\n  Run a .lispy file.\n  Example: (source \"my-script.lispy\")"
+    "clear"   "clear\n  Clear the terminal screen."
+    "help"    "help\n  Show all available commands."))
+    (let (page (get pages cmd nil))
+      (if (null? page)
+        (if (defined? 'smart-generate)
+          (smart-generate (concat "Write a terse man page for the terminal command '" cmd "' in the ORAPPTER registry terminal. The filesystem is the RAR agent registry. Keep it under 10 lines."))
+          (log (concat "man: no manual entry for '" cmd "'")))
+        (begin
+          (log (concat "MAN(" cmd ")"))
+          (log "")
+          (for-each (lambda (line) (log (concat "  " line))) (split page "\n"))
+          (log ""))))))
+
+;; echo — print text or write to virtual file
+(define (echo text . rest)
+  (if (and (>= (length rest) 2) (= (car rest) ">"))
+    (let (filename (nth rest 1))
+      (dict-set *vfs* filename text)
+      (log (concat "  wrote " (string (length text)) " chars → " filename)))
+    (log text)))
+
+;; env — print environment variables
+(define (env)
+  (log "Environment:")
+  (for-each
+    (lambda (k)
+      (log (concat "  " k "=" (get *env* k ""))))
+    (keys *env*)))
+
+;; export — set env var
+(define (export var-name value)
+  (dict-set *env* var-name value)
+  (log (concat "  export " var-name "=" value)))
+
+;; alias — show or set aliases
+(define (alias . args)
+  (if (empty? args)
+    (begin
+      (log "Aliases:")
+      (for-each
+        (lambda (k)
+          (log (concat "  " k "='" (get *aliases* k) "'")))
+        (keys *aliases*)))
+    (if (= (length args) 2)
+      (begin
+        (dict-set *aliases* (car args) (nth args 1))
+        (log (concat "  alias " (car args) "='" (nth args 1) "'")))
+      (log "Usage: (alias name command)"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Advanced Commands
+;; find, wc, stat, diff, which
+;; ═══════════════════════════════════════════════════════════════
+
+;; find — find agents matching a glob-style pattern
+(define (find pattern)
+  (let (agents (registry-load))
+    (let (q (lowercase (replace (replace pattern "*" "") "?" "")))
+      (let (results (filter
+              (lambda (a)
+                (contains? (lowercase (get a "name" "")) q))
+              agents))
+        (if (empty? results)
+          (log (concat "find: no matches for '" pattern "'"))
+          (for-each
+            (lambda (a)
+              (log (concat "  /" (get a "name" ""))))
+            results))))))
+
+;; wc — count agents, deps, tags in a namespace
+(define (wc . args)
+  (let (ns (if (empty? args) *cwd* (car args)))
+    (let (agents (registry-in-ns ns))
+      (let (total-tags (reduce
+              (lambda (_acc a) (+ _acc (length (get a "tags" (list)))))
+              agents 0))
+        (let (total-deps (reduce
+                (lambda (_acc a) (+ _acc (length (get a "dependencies" (list)))))
+                agents 0))
+          (log (concat "  " (string (length agents)) "  agents    " ns))
+          (log (concat "  " (string total-tags) "  total tags"))
+          (log (concat "  " (string total-deps) "  total deps")))))))
+
+;; stat — detailed stats for an agent
+(define (stat agent-ref)
+  (let (fullname (if (contains? agent-ref "/") agent-ref (concat *cwd* "/" agent-ref)))
+    (let (agent (registry-find-agent fullname))
+      (if (null? agent)
+        (log (concat "stat: " agent-ref ": No such agent"))
+        (begin
+          (log (concat "  File: /" fullname))
+          (log (concat "  Type: agent"))
+          (log (concat "  Name: " (get agent "display_name" "")))
+          (log (concat "  Version: " (get agent "version" "")))
+          (log (concat "  Author: " (get agent "author" "")))
+          (log (concat "  Tier: " (get agent "quality_tier" "community")))
+          (log (concat "  Category: " (get agent "category" "")))
+          (log (concat "  Tags: " (join (get agent "tags" (list)) ", ")))
+          (log (concat "  Deps: " (string (length (get agent "dependencies" (list))))))
+          (log (concat "  Env vars: " (string (length (get agent "requires_env" (list)))))))))))
+
+;; diff — compare two agents
+(define (diff agent1 agent2)
+  (let (a1 (registry-find-agent agent1))
+    (let (a2 (registry-find-agent agent2))
+      (if (or (null? a1) (null? a2))
+        (log "diff: one or both agents not found")
+        (begin
+          (log (concat "diff " agent1 " " agent2))
+          (log "")
+          (log (concat "  NAME:     " (get a1 "name") "  ↔  " (get a2 "name")))
+          (log (concat "  VERSION:  " (get a1 "version") "  ↔  " (get a2 "version")))
+          (log (concat "  AUTHOR:   " (get a1 "author") "  ↔  " (get a2 "author")))
+          (log (concat "  TIER:     " (get a1 "quality_tier") "  ↔  " (get a2 "quality_tier")))
+          (log (concat "  CATEGORY: " (get a1 "category") "  ↔  " (get a2 "category")))
+          (log "")
+          ;; Tag diff
+          (let (tags1 (get a1 "tags" (list)))
+            (let (tags2 (get a2 "tags" (list)))
+              (let (only1 (filter (lambda (t) (not (member? t tags2))) tags1))
+                (let (only2 (filter (lambda (t) (not (member? t tags1))) tags2))
+                  (if (not (empty? only1))
+                    (log (concat "< tags: " (join only1 ", "))))
+                  (if (not (empty? only2))
+                    (log (concat "> tags: " (join only2 ", ")))))))))))))
+
+;; which — find full path to agent by slug
+(define (which slug)
+  (let (agents (registry-load))
+    (let (matches (filter
+            (lambda (a)
+              (let (name (get a "name" ""))
+                (let (parts (split name "/"))
+                  (= (last parts) slug))))
+            agents))
+      (if (empty? matches)
+        (log (concat "which: " slug ": not found"))
+        (for-each
+          (lambda (a) (log (concat "  /" (get a "name"))))
+          matches)))))
+
+;; source — run a .lispy file
+(define (source path)
+  (if (not (file-exists? path))
+    (log (concat "source: " path ": No such file"))
+    (begin
+      (log (concat "  sourcing " path "..."))
+      (eval (read-file path))
+      (log "  done."))))
+
+;; help — show all commands
+(define (help)
+  (log "")
+  (log "  TERMINAL.LISPY — Registry Shell")
+  (log "  ────────────────────────────────────────")
+  (log "  Navigation:")
+  (log "    (pwd)              — print namespace")
+  (log "    (cd \"@kody\")       — change namespace")
+  (log "    (ls)               — list agents here")
+  (log "    (ls \"@borg\")       — list another namespace")
+  (log "    (ls-l)             — long listing with details")
+  (log "")
+  (log "  Inspection:")
+  (log "    (cat \"deal-desk\")  — show agent card")
+  (log "    (stat \"@rapp/basic-agent\") — file stats")
+  (log "    (diff \"@rapp/basic-agent\" \"@kody/deal-desk\")")
+  (log "    (tree)             — dependency tree")
+  (log "    (tree \"@kody/deal-desk\")")
+  (log "    (which \"basic-agent\") — find by slug")
+  (log "")
+  (log "  Search:")
+  (log "    (grep \"sales\")     — search registry")
+  (log "    (find \"*pipeline*\") — glob search")
+  (log "")
+  (log "  Environment:")
+  (log "    (whoami)           — identity")
+  (log "    (env)              — environment vars")
+  (log "    (export \"VAR\" \"val\")")
+  (log "    (alias \"ll\" \"ls -l\")")
+  (log "    (history)          — command history")
+  (log "    (history 10)       — last 10 commands")
+  (log "")
+  (log "  Files:")
+  (log "    (echo \"text\" \">\" \"file.txt\")  — write vfs")
+  (log "    (source \"script.lispy\")        — run file")
+  (log "")
+  (log "  Meta:")
+  (log "    (man \"cat\")        — manual page")
+  (log "    (wc)               — count agents/tags/deps")
+  (log "    (wc \"@aibast-agents-library\")")
+  (log "    (clear)            — clear screen")
+  (log "    (help)             — this screen")
+  (log ""))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Prompt Rendering
+;; binder@orappter:namespace$
+;; ═══════════════════════════════════════════════════════════════
+
+;; Render the shell prompt
+(define (prompt)
+  (concat *binder* "@orappter:" *cwd* "$ "))
+
+;; Set binder handle
+(define (login handle)
+  (set! *binder* handle)
+  (log (concat "  Logged in as: " *binder*))
+  (log (concat "  " (prompt))))
+
+;; Tab-complete agent names in current namespace
+(define (tab prefix)
+  (let (agents (registry-in-ns *cwd*))
+    (let (names (map
+            (lambda (a)
+              (last (split (get a "name" "") "/")))
+            agents))
+      (let (matches (filter
+              (lambda (n) (starts-with? n (lowercase prefix)))
+              names))
+        (if (empty? matches)
+          (log (concat "  (no completion for '" prefix "')"))
+          (begin
+            (log (concat "  completions for '" prefix "':"))
+            (for-each (lambda (m) (log (concat "    " m))) matches)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔═══════════════════════════════════════════╗")
+  (log "  ║   T E R M I N A L . L I S P Y   v1.0.0   ║")
+  (log "  ║   The Registry is the Filesystem          ║")
+  (log "  ╚═══════════════════════════════════════════╝")
+  (log "")
+  (log "  binder@orappter:@rapp$ _")
+  (log "")
+  (log "  Quick start:")
+  (log "    (pwd)              — where am I?")
+  (log "    (ls)               — list agents here")
+  (log "    (cd \"@kody\")       — go to a namespace")
+  (log "    (cat \"basic-agent\") — read an agent")
+  (log "    (grep \"sales\")     — search everything")
+  (log "    (tree)             — full dependency tree")
+  (log "    (whoami)           — your Binder identity")
+  (log "    (help)             — all commands")
+  (log "    (man \"cat\")        — man pages")
+  (log "")
+  (log "  Every agent is a file. Every namespace is a directory.")
+  (log "  The registry is your filesystem. Welcome home."))

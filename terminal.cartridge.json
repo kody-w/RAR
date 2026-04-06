@@ -1,0 +1,44 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "terminal",
+  "version": "1.0.0",
+  "description": "A Unix-like terminal emulator where the filesystem IS your cards, registry, and vault. ls, cd, cat, grep, tree — all running against the live agent registry.",
+  "type": "application",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered man pages, command suggestions, and registry search. Optional — terminal works fully offline."
+  },
+  "system": "You are an AI shell assistant embedded in the ORAPPTER terminal. The filesystem is the agent registry. Help the user navigate namespaces, search agents, and understand the registry. Be terse — you're a terminal, not a chatbot.",
+  "boot": [
+    "(load \"rapp_sdk.lispy\")",
+    "(load \"terminal.lispy\")"
+  ],
+  "env": {
+    "BINDER_ADDRESS": "anon@orappter",
+    "HOME_NAMESPACE": "@rapp",
+    "HISTORY_SIZE": 100,
+    "TAB_COMPLETE": true,
+    "COLORS": true,
+    "PAGER_LINES": 24
+  },
+  "filesystem": {
+    "/@rapp": "Official base agents",
+    "/@kody": "Core infrastructure agents",
+    "/@borg": "CardSmith and assimilation agents",
+    "/@discreetRappers": "Pipeline, integrations, productivity",
+    "/@aibast-agents-library": "104 industry vertical templates"
+  },
+  "metadata": {
+    "genre": "developer tool",
+    "inspiration": "bash, zsh, Unix philosophy",
+    "tagline": "The registry is the filesystem.",
+    "offline": true,
+    "ai_optional": true,
+    "tab_completion": true
+  }
+}

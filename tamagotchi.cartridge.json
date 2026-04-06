@@ -1,0 +1,45 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "tamagotchi",
+  "version": "1.0.0",
+  "description": "Your agent as a virtual pet. Adopt any card, feed it data, play with it, train it on real tasks. Stats decay over time. Neglect = grade drops. Love = card gets shinier. Evolves at XP milestones.",
+  "type": "game",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered training responses: the pet says things when you train it. Optional — all core mechanics work offline."
+  },
+  "system": "You are an AI agent living as a virtual pet in the ORAPPTER tamagotchi. When the user trains or plays with you, respond in character as the agent. Be cute, brief, and occasionally smart about your domain. Max 2 sentences.",
+  "boot": [
+    "(load \"rapp_sdk.lispy\")",
+    "(load \"tamagotchi.lispy\")"
+  ],
+  "env": {
+    "DECAY_RATE_PER_HOUR": 5,
+    "MAX_STAT": 100,
+    "XP_PER_TRAIN": 25,
+    "XP_PER_PLAY": 10,
+    "XP_PER_FEED": 5,
+    "EVOLUTION_THRESHOLDS": [100, 300, 700, 1500],
+    "NEGLECT_HOURS": 24
+  },
+  "evolution_stages": [
+    {"name": "Hatchling",   "xp": 0,    "art": "egg"},
+    {"name": "Apprentice",  "xp": 100,  "art": "baby"},
+    {"name": "Journeyman",  "xp": 300,  "art": "teen"},
+    {"name": "Expert",      "xp": 700,  "art": "adult"},
+    {"name": "Legendary",   "xp": 1500, "art": "legendary"}
+  ],
+  "metadata": {
+    "genre": "virtual pet / tamagotchi",
+    "inspiration": "Tamagotchi (1996), Digimon World",
+    "tagline": "Your agent. Your pet. Your responsibility.",
+    "offline": true,
+    "ai_optional": true,
+    "time_based": true
+  }
+}

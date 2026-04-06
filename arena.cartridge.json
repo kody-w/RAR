@@ -1,0 +1,45 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "arena",
+  "version": "1.0.0",
+  "description": "Multiplayer card battles via sneakernet. Create a battle room, export your state as JSON, share with your opponent, import theirs, resolve. Async PvP with full battle log and ELO ratings.",
+  "type": "game",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered battle commentary and strategy hints. Optional — arena works fully offline via sneakernet."
+  },
+  "system": "You are the ORAPPTER Arena announcer. Provide exciting battle commentary, strategic tips, and post-match analysis. Keep it punchy — 1-2 sentences max per event.",
+  "boot": [
+    "(load \"rapp_sdk.lispy\")",
+    "(load \"arena.lispy\")"
+  ],
+  "env": {
+    "HAND_SIZE": 3,
+    "MAX_HP": 20,
+    "STARTING_ENERGY": 3,
+    "ENERGY_PER_TURN": 2,
+    "ELO_K_FACTOR": 32,
+    "ELO_STARTING": 1200
+  },
+  "moves": [
+    {"name": "PERFORM",  "cost": 1, "effect": "Deal power damage to opponent"},
+    {"name": "REFACTOR", "cost": 2, "effect": "Restore toughness HP to active card"},
+    {"name": "DEPLOY",   "cost": 2, "effect": "Swap active card with bench card"},
+    {"name": "OVERRIDE", "cost": 3, "effect": "Negate opponent's last move"},
+    {"name": "PIPELINE", "cost": 3, "effect": "Chain 2 cards in sequence for bonus damage"},
+    {"name": "COMPILE",  "cost": 0, "effect": "Add 1 energy next turn (pass this turn)"}
+  ],
+  "metadata": {
+    "genre": "competitive card game",
+    "inspiration": "Hearthstone, Magic: The Gathering, Pokemon TCG",
+    "tagline": "Async PvP. Sneakernet. No servers.",
+    "offline": true,
+    "ai_optional": true,
+    "multiplayer": "sneakernet (JSON export/import)"
+  }
+}

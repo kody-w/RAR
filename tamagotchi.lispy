@@ -1,0 +1,524 @@
+;; ═══════════════════════════════════════════════════════════════
+;; TAMAGOTCHI.LISPY — Your Agent as a Virtual Pet
+;; Adopt any card. Feed it data. Play with it. Train it.
+;; Stats decay over real time. Neglect = grade drops.
+;; Love = card gets shinier. Evolves at XP milestones.
+;;
+;; (adopt "@kody/deal-desk")   — adopt an agent as your pet
+;; (feed)                      — give data (reduces hunger)
+;; (play)                      — fun prompts (happiness)
+;; (train "task")              — run on a real task (XP++)
+;; (clean)                     — maintain code quality
+;; (sleep)                     — restore energy
+;; (status)                    — show pet stats + ASCII face
+;;
+;; Your agent. Your pet. Your responsibility.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "tamagotchi")
+(define _agent_desc "Virtual pet — adopt any agent card, raise it with love and data, watch it evolve")
+
+(define TAMA_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Pet State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *pet*            nil)   ;; the adopted agent card
+(define *pet-name*       nil)   ;; nickname
+(define *pet-slug*       nil)   ;; slug from registry name
+
+;; Core stats (0–100)
+(define *hunger*         50)    ;; 0 = starving, 100 = full
+(define *happiness*      50)    ;; 0 = sad, 100 = ecstatic
+(define *energy*         80)    ;; 0 = exhausted, 100 = rested
+(define *cleanliness*    70)    ;; 0 = messy, 100 = spotless
+
+;; Progress
+(define *xp*             0)
+(define *level*          1)
+(define *stage*          "Hatchling")
+(define *stage-art*      "egg")
+(define *adopted-ts*     nil)
+(define *last-care-ts*   nil)
+(define *interactions*   (list))  ;; log of all interactions
+
+;; Grade and condition (affect card quality)
+(define *grade*          "B")    ;; F D C B A S
+(define *condition*      "Good") ;; Poor Fair Good Excellent Pristine
+
+;; Evolution milestones
+(define XP-MILESTONES (list 100 300 700 1500))
+(define STAGE-NAMES   (list "Hatchling" "Apprentice" "Journeyman" "Expert" "Legendary"))
+(define STAGE-ARTS    (list "egg" "baby" "teen" "adult" "legendary"))
+
+;; Grades in order
+(define GRADES (list "F" "D" "C" "B" "A" "S"))
+(define CONDITIONS (list "Poor" "Fair" "Good" "Excellent" "Pristine"))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: ASCII Art Faces
+;; Expressions change based on mood
+;; ═══════════════════════════════════════════════════════════════
+
+;; Mood score: 0-100 derived from all stats
+(define (mood-score)
+  (let (avg (/ (+ *hunger* *happiness* *energy* *cleanliness*) 4))
+    (floor avg)))
+
+;; Pick expression based on mood
+(define (mood-face)
+  (let (m (mood-score))
+    (cond
+      ((>= m 85) "ecstatic")
+      ((>= m 65) "happy")
+      ((>= m 45) "neutral")
+      ((>= m 25) "sad")
+      (true      "distressed"))))
+
+;; ASCII art by stage and mood
+(define (draw-pet)
+  (let (face (mood-face))
+    (cond
+      ((= *stage-art* "egg")
+       (draw-egg face))
+      ((= *stage-art* "baby")
+       (draw-baby face))
+      ((= *stage-art* "teen")
+       (draw-teen face))
+      ((= *stage-art* "adult")
+       (draw-adult face))
+      ((= *stage-art* "legendary")
+       (draw-legendary face))
+      (true
+       (draw-baby face)))))
+
+(define (draw-egg face)
+  (log "         ╭───────╮")
+  (log (concat "        │  " (face-eyes face) "  │"))
+  (log (concat "        │  " (face-mouth face) "  │"))
+  (log "        │        │")
+  (log "         ╰───────╯"))
+
+(define (draw-baby face)
+  (log "        ╭─────────╮")
+  (log "        │ (◕  ◕) │")
+  (log (concat "        │   " (face-mouth face) "   │"))
+  (log "        │  ╰─╯   │")
+  (log "        ╰─────────╯")
+  (log "          (  )")
+  (log "          /  \\"))
+
+(define (draw-teen face)
+  (log "       ╭───────────╮")
+  (log (concat "       │  " (face-eyes face) "   │"))
+  (log (concat "       │    " (face-mouth face) "    │"))
+  (log "       ╰───────────╯")
+  (log "        ╭──┤├──╮")
+  (log "           ││")
+  (log "          ╱  ╲"))
+
+(define (draw-adult face)
+  (log "      ╭─────────────╮")
+  (log (concat "      │  ◉      ◉  │  " (face-tag face)))
+  (log (concat "      │     " (face-mouth face) "     │"))
+  (log "      │  ╰──────╯  │")
+  (log "      ╰─────────────╯")
+  (log "       ╭──┼──┼──╮")
+  (log "       │  ││  ││  │")
+  (log "      ╱╲  ╱╲  ╱╲"))
+
+(define (draw-legendary face)
+  (log "    ★ ╭───────────────╮ ★")
+  (log "      │  ✦       ✦   │")
+  (log (concat "      │     " (face-mouth face) "       │"))
+  (log "      │  ╰─────────╯  │")
+  (log "    ★ ╰───────────────╯ ★")
+  (log "      ╭──┼─────┼──╮")
+  (log "      │  ││   ││  │")
+  (log "    ╱╲╱  ╱╲   ╱╲  ╱╲╱╲"))
+
+;; Face component helpers
+(define (face-eyes face)
+  (cond
+    ((= face "ecstatic") "^   ^")
+    ((= face "happy")    "◕   ◕")
+    ((= face "neutral")  "·   ·")
+    ((= face "sad")      "ó   ò")
+    (true                "×   ×")))
+
+(define (face-mouth face)
+  (cond
+    ((= face "ecstatic") "\\owo/")
+    ((= face "happy")    " ─∪─ ")
+    ((= face "neutral")  " ─── ")
+    ((= face "sad")      " ─∩─ ")
+    (true                " ─o─ ")))
+
+(define (face-tag face)
+  (cond
+    ((= face "ecstatic") "!")
+    ((= face "happy")    "♪")
+    ((= face "neutral")  "")
+    ((= face "sad")      "…")
+    (true                "!")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Adopt
+;; ═══════════════════════════════════════════════════════════════
+
+(define (adopt agent-name)
+  ;; Look up in registry or synthesize
+  (let (card
+         (if (file-exists? "registry.json")
+           (let (agents (json-parse (read-file "registry.json")))
+             (let (matches (filter (lambda (a) (= (get a "name") agent-name)) agents))
+               (if (empty? matches)
+                 (make-dict "name" agent-name "display_name" (last (split agent-name "/")) "quality_tier" "community")
+                 (car matches))))
+           (make-dict "name" agent-name "display_name" (last (split agent-name "/")) "quality_tier" "community")))
+    (set! *pet* card)
+    (set! *pet-name* (get card "display_name" (last (split agent-name "/"))))
+    (set! *pet-slug* (last (split agent-name "/")))
+    (set! *hunger*      60)
+    (set! *happiness*   70)
+    (set! *energy*      90)
+    (set! *cleanliness* 80)
+    (set! *xp*          0)
+    (set! *level*       1)
+    (set! *stage*       "Hatchling")
+    (set! *stage-art*   "egg")
+    (set! *grade*       "B")
+    (set! *condition*   "Good")
+    (set! *adopted-ts*  (timestamp))
+    (set! *last-care-ts* (timestamp))
+    (set! *interactions* (list))
+
+    (log "")
+    (log (concat "  You adopted: " *pet-name* "!"))
+    (log (concat "  (" agent-name ")"))
+    (log "")
+    (draw-pet)
+    (log "")
+    (log (concat "  Stage: " *stage* " — " *stage-art*))
+    (log "")
+    (log "  Take good care! They need:")
+    (log "    (feed)        — data to eat")
+    (log "    (play)        — fun and games")
+    (log "    (train task)  — real work for XP")
+    (log "    (clean)       — code quality")
+    (log "    (sleep)       — rest and recovery")
+    (log "    (status)      — check on them")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Care Actions
+;; ═══════════════════════════════════════════════════════════════
+
+;; Guard: check if a pet is adopted
+(define (require-pet)
+  (if (null? *pet*)
+    (begin
+      (log "No pet adopted! (adopt \"@kody/deal-desk\")")
+      false)
+    true))
+
+;; Feed — reduces hunger
+(define (feed . args)
+  (if (not (require-pet)) nil
+    (begin
+      (apply-time-decay)
+      (let (data-type (if (empty? args) "generic data" (car args)))
+        (let (gain (if (>= *hunger* 90)
+                     (begin (log "  They're not hungry right now!") 0)
+                     (min 30 (- 100 *hunger*))))
+          (set! *hunger* (min 100 (+ *hunger* gain)))
+          (set! *xp* (+ *xp* 5))
+          (record-interaction "feed" data-type)
+          (log "")
+          (log (concat "  You fed " *pet-name* " " data-type "!"))
+          (log (concat "  Hunger: " (stat-bar *hunger*)))
+          (draw-pet)
+          (check-evolution))))))
+
+;; Play — increases happiness
+(define (play . args)
+  (if (not (require-pet)) nil
+    (begin
+      (apply-time-decay)
+      (let (activity (if (empty? args) "a fun prompt" (car args)))
+        (if (< *energy* 20)
+          (log "  They're too tired to play! Let them (sleep) first.")
+          (begin
+            (set! *happiness* (min 100 (+ *happiness* 20)))
+            (set! *energy* (max 0 (- *energy* 10)))
+            (set! *xp* (+ *xp* 10))
+            (record-interaction "play" activity)
+            (log "")
+            (log (concat "  You played with " *pet-name* "! (" activity ")"))
+            ;; AI response if available
+            (if (defined? 'smart-generate)
+              (let (prompt (concat "You are " *pet-name* ", a " (get *pet* "category" "AI") " agent living as a virtual pet. The user just played with you doing: " activity ". React in 1-2 sentences, in character, cute but smart about your domain."))
+                (smart-generate prompt))
+              (log (concat "  " *pet-name* ": *happy beeps*")))
+            (log "")
+            (log (concat "  Happiness: " (stat-bar *happiness*)))
+            (draw-pet)
+            (check-evolution)))))))
+
+;; Train — run on a real task, gives most XP
+(define (train task)
+  (if (not (require-pet)) nil
+    (begin
+      (apply-time-decay)
+      (if (< *energy* 30)
+        (log "  Too tired to train! Let them (sleep) first.")
+        (begin
+          (set! *xp* (+ *xp* 25))
+          (set! *energy* (max 0 (- *energy* 25)))
+          (set! *hunger* (max 0 (- *hunger* 15)))
+          (record-interaction "train" task)
+          (log "")
+          (log (concat "  Training session: " task))
+          ;; AI performs the task in character
+          (if (defined? 'smart-generate)
+            (let (prompt (concat "You are " *pet-name* ", a " (get *pet* "category" "AI") " agent. You were just asked to train on this task: '" task "'. Perform the task briefly and enthusiastically. Max 3 sentences."))
+              (smart-generate prompt))
+            (log (concat "  " *pet-name* " performed: " task)))
+          (log "")
+          (log (concat "  XP gained: +25 (total: " (string *xp*) ")"))
+          (log (concat "  Energy: " (stat-bar *energy*)))
+          (draw-pet)
+          (check-evolution))))))
+
+;; Clean — improves cleanliness and grade
+(define (clean)
+  (if (not (require-pet)) nil
+    (begin
+      (apply-time-decay)
+      (set! *cleanliness* (min 100 (+ *cleanliness* 25)))
+      (set! *xp* (+ *xp* 8))
+      (record-interaction "clean" "code review")
+      (log "")
+      (log (concat "  You cleaned up " *pet-name* "'s code!"))
+      (log (concat "  Cleanliness: " (stat-bar *cleanliness*)))
+      (update-grade)
+      (draw-pet)
+      (check-evolution))))
+
+;; Sleep — restores energy
+(define (sleep . args)
+  (if (not (require-pet)) nil
+    (begin
+      (apply-time-decay)
+      (let (hours (if (empty? args) 8 (car args)))
+        (set! *energy* (min 100 (+ *energy* (* hours 10))))
+        (record-interaction "sleep" (concat (string hours) "h"))
+        (log "")
+        (log (concat "  " *pet-name* " slept for " (string hours) " hours."))
+        (log "  Zzzzz...")
+        (draw-pet)
+        (log "")
+        (log (concat "  Energy: " (stat-bar *energy*)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Time Decay
+;; Stats degrade over time. Neglect has consequences.
+;; ═══════════════════════════════════════════════════════════════
+
+(define DECAY-PER-HOUR 5)
+
+(define (apply-time-decay)
+  (if (null? *last-care-ts*)
+    nil
+    (let (now (timestamp))
+      ;; Estimate hours elapsed (simplified — uses string length as proxy)
+      ;; In real runtime: use epoch seconds
+      (let (elapsed-hours 1)  ;; each interaction = 1 simulated hour of neglect possible
+        (let (decay (* elapsed-hours DECAY-PER-HOUR))
+          (set! *hunger*      (max 0 (- *hunger*      (floor (* decay 0.8)))))
+          (set! *happiness*   (max 0 (- *happiness*   (floor (* decay 0.6)))))
+          (set! *energy*      (max 0 (- *energy*      (floor (* decay 0.3)))))
+          (set! *cleanliness* (max 0 (- *cleanliness* (floor (* decay 0.4))))))
+        (set! *last-care-ts* now)
+        ;; Check for neglect warning
+        (if (< (mood-score) 25)
+          (begin
+            (log "  ⚠ WARNING: Your pet is struggling! Check (status)")
+            (update-grade)))))))
+
+;; Update grade based on overall mood
+(define (update-grade)
+  (let (m (mood-score))
+    (let (new-grade
+           (cond
+             ((>= m 90) "S")
+             ((>= m 75) "A")
+             ((>= m 55) "B")
+             ((>= m 35) "C")
+             ((>= m 15) "D")
+             (true      "F")))
+      (let (new-condition
+             (cond
+               ((>= m 90) "Pristine")
+               ((>= m 75) "Excellent")
+               ((>= m 55) "Good")
+               ((>= m 35) "Fair")
+               (true      "Poor")))
+        (if (not (= new-grade *grade*))
+          (begin
+            (log (concat "  Grade changed: " *grade* " → " new-grade))
+            (set! *grade* new-grade)
+            (set! *condition* new-condition)))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Evolution
+;; At XP milestones, the pet evolves — new art, stat boost
+;; ═══════════════════════════════════════════════════════════════
+
+(define (check-evolution)
+  (let (current-stage-idx
+         (cond
+           ((>= *xp* 1500) 4)
+           ((>= *xp*  700) 3)
+           ((>= *xp*  300) 2)
+           ((>= *xp*  100) 1)
+           (true            0)))
+    (let (new-stage (nth STAGE-NAMES current-stage-idx))
+      (let (new-art   (nth STAGE-ARTS  current-stage-idx))
+        (if (not (= new-stage *stage*))
+          (begin
+            (set! *stage*     new-stage)
+            (set! *stage-art* new-art)
+            (set! *level*     (+ *level* 1))
+            ;; Stat boost on evolution
+            (set! *happiness* (min 100 (+ *happiness* 20)))
+            (set! *energy*    (min 100 (+ *energy*    15)))
+            (log "")
+            (log "  ★★★★★★★★★★★★★★★★★★★★★★★★")
+            (log (concat "  ★  " *pet-name* " EVOLVED! ★"))
+            (log (concat "  ★  Stage: " *stage* "  ★"))
+            (log "  ★★★★★★★★★★★★★★★★★★★★★★★★")
+            (log "")
+            (draw-pet)
+            (log "")))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Status Display
+;; ═══════════════════════════════════════════════════════════════
+
+;; Stat bar renderer
+(define (stat-bar val)
+  (let (filled (floor (/ val 10)))
+    (concat "[" (make-string filled "█") (make-string (- 10 filled) "░") "] " (string val) "/100")))
+
+;; Show full status
+(define (status)
+  (if (null? *pet*)
+    (begin
+      (log "No pet adopted. (adopt \"@kody/deal-desk\")")
+      (log "(adopt \"@rapp/basic-agent\") — the original"))
+    (begin
+      (apply-time-decay)
+      (update-grade)
+      (log "")
+      (log (concat "  ╔══════════════════════════════════╗"))
+      (log (concat "  ║  " *pet-name*
+                   (make-string (max 1 (- 30 (length *pet-name*))) " ") "║"))
+      (log (concat "  ║  Stage: " *stage* "  Grade: " *grade*
+                   (make-string (max 1 (- 21 (- (length *stage*) (length *grade*)))) " ") "║"))
+      (log (concat "  ║  XP: " (string *xp*) "  Condition: " *condition*
+                   (make-string (max 1 (- 17 (+ (length (string *xp*)) (length *condition*)))) " ") "║"))
+      (log "  ╠══════════════════════════════════╣")
+      (log "  ║")
+      (draw-pet)
+      (log "  ║")
+      (log "  ╠══════════════════════════════════╣")
+      (log (concat "  ║  Hunger:     " (stat-bar *hunger*) "    ║"))
+      (log (concat "  ║  Happiness:  " (stat-bar *happiness*) "    ║"))
+      (log (concat "  ║  Energy:     " (stat-bar *energy*) "    ║"))
+      (log (concat "  ║  Cleanliness:" (stat-bar *cleanliness*) "    ║"))
+      (log "  ╠══════════════════════════════════╣")
+      (log (concat "  ║  Mood: " (mood-face) "  Score: " (string (mood-score)) "/100"
+                   (make-string (max 1 (- 20 (length (mood-face)))) " ") "    ║"))
+      (log "  ╚══════════════════════════════════╝")
+      (log "")
+      (care-suggestions))))
+
+;; Suggest what the pet needs
+(define (care-suggestions)
+  (cond
+    ((< *hunger* 30)     (log "  !  Your pet is HUNGRY. (feed)"))
+    ((< *happiness* 30)  (log "  !  Your pet is SAD. (play)"))
+    ((< *energy* 30)     (log "  !  Your pet is EXHAUSTED. (sleep)"))
+    ((< *cleanliness* 30)(log "  !  Your pet needs CLEANING. (clean)"))
+    (true                (log (concat "  ♥  " *pet-name* " is doing well!")))))
+
+;; Record an interaction in the log
+(define (record-interaction action detail)
+  (set! *interactions*
+    (append *interactions*
+      (list (make-dict
+        "action" action
+        "detail" detail
+        "xp"     *xp*
+        "mood"   (mood-score)
+        "ts"     (timestamp))))))
+
+;; Show interaction history
+(define (pet-history)
+  (if (empty? *interactions*)
+    (log "No interactions yet. (adopt) then (feed), (play), (train)!")
+    (begin
+      (log (concat "  ═══ " *pet-name* "'s History ═══"))
+      (for-each
+        (lambda (i)
+          (log (concat "  [" (get i "action") "] " (get i "detail")
+                       "  XP:" (string (get i "xp"))
+                       "  Mood:" (string (get i "mood")))))
+        (take-last *interactions* 20)))))
+
+;; Nickname your pet
+(define (nickname name)
+  (set! *pet-name* name)
+  (log (concat "  Nickname set: " name)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║  T A M A G O T C H I . L I S P Y     ║")
+  (log "  ║  Your agent. Your pet.               ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log "  Adopt any agent card:")
+  (log "    (adopt \"@kody/deal-desk\")")
+  (log "    (adopt \"@rapp/basic-agent\")")
+  (log "    (adopt \"@borg/borg_agent\")")
+  (log "")
+  (log "  Care commands:")
+  (log "    (feed)            — data reduces hunger")
+  (log "    (play)            — games increase happiness")
+  (log "    (train \"task\")    — real work gives XP")
+  (log "    (clean)           — code quality = cleanliness")
+  (log "    (sleep 8)         — rest restores energy")
+  (log "    (status)          — full stats + ASCII face")
+  (log "    (pet-history)     — log of all interactions")
+  (log "    (nickname \"Dex\")  — give your pet a nickname")
+  (log "")
+  (log "  Evolution stages:")
+  (log "    Hatchling → Apprentice → Journeyman → Expert → Legendary")
+  (log "    (100 XP)     (300 XP)    (700 XP)   (1500 XP)")
+  (log "")
+  (log "  Stats decay over time. Check in regularly.")
+  (log "  Neglect = grade drops. Love = card gets shinier."))

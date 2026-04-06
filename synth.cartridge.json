@@ -1,0 +1,60 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "synth",
+  "version": "1.0.0",
+  "description": "A synthesizer where each card generates unique audio parameters from its seed hash. Power = volume, toughness = bass, rarity = reverb, category = waveform. Your deck is a chord.",
+  "type": "instrument",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "none",
+    "fallback": "offline",
+    "usage": "No AI needed. Pure deterministic sound from card seeds. Every card = unique tone. Works fully offline."
+  },
+  "system": "Synthesizer cartridge. Derives audio parameters from card seed hashes. Plays tones via the Web Audio API in the browser context.",
+  "boot": [
+    "(load \"rapp_sdk.lispy\")",
+    "(load \"synth.lispy\")"
+  ],
+  "env": {
+    "MASTER_VOLUME": 0.8,
+    "DEFAULT_BPM": 120,
+    "REVERB_MIX": 0.3,
+    "SUSTAIN_MS": 800,
+    "WAVEFORMS": ["sine", "square", "sawtooth", "triangle"],
+    "TUNING": 440
+  },
+  "audio": {
+    "api": "Web Audio API",
+    "fallback": "ascii-visualization",
+    "sample_rate": 44100,
+    "channels": 2
+  },
+  "waveform_map": {
+    "core":         "sine",
+    "devtools":     "square",
+    "pipeline":     "sawtooth",
+    "integrations": "sawtooth",
+    "productivity": "triangle",
+    "healthcare":   "triangle",
+    "financial_services": "sine",
+    "b2b_sales":    "sine",
+    "b2c_sales":    "sine",
+    "manufacturing": "square",
+    "energy":       "square"
+  },
+  "rarity_reverb": {
+    "Legendary": 0.9,
+    "Elite":     0.5,
+    "Core":      0.2,
+    "Starter":   0.0
+  },
+  "metadata": {
+    "genre": "music instrument",
+    "inspiration": "Korg MS-20, Novation Circuit, chiptune synthesis",
+    "tagline": "Every card has a voice. Play your deck.",
+    "offline": true,
+    "ai_optional": false,
+    "battery_is_the_timer": true
+  }
+}

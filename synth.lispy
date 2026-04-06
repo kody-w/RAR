@@ -1,0 +1,472 @@
+;; ═══════════════════════════════════════════════════════════════
+;; SYNTH.LISPY — The ORAPPTER Synthesizer
+;; Every card has a unique voice derived from its seed hash.
+;; Power → volume. Toughness → bass. Rarity → reverb.
+;; Category → waveform. Seed → frequency/note.
+;;
+;; (synth-play "@rapp/basic-agent")
+;; (synth-chord deck)
+;; (synth-sequence cards)
+;; (synth-loop cards 120)
+;; (synth-mix "@kody/deal-desk" "@rapp/basic-agent")
+;;
+;; Your deck is a chord. Your run is a melody.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "synth")
+(define _agent_desc "Card synthesizer — derive unique audio from seed hashes, play decks as chords, runs as melodies")
+
+(define SYNTH_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Synth State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *master-volume*  0.8)
+(define *bpm*            120)
+(define *sustain-ms*     800)
+(define *current-patch*  nil)         ;; active synth patch
+(define *sequence*       (list))      ;; queued sequence
+(define *loop-active*    false)
+(define *patches*        (make-dict)) ;; name → patch
+(define *history*        (list))      ;; list of played patches
+(define *exports*        (make-dict)) ;; named exports
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Note and Scale Math
+;; ═══════════════════════════════════════════════════════════════
+
+;; MIDI note → frequency (A4 = 440 Hz)
+(define (midi-to-freq note)
+  (* 440.0 (expt 2.0 (/ (- note 69) 12.0))))
+
+;; Clamp a value between min and max
+(define (clamp val lo hi)
+  (max lo (min hi val)))
+
+;; Map seed hash to a MIDI note in a musical scale
+;; Uses pentatonic scale so everything sounds good
+(define PENTATONIC-OFFSETS (list 0 2 4 7 9))
+
+(define (seed-to-note seed octave)
+  (let (scale-pos (% (floor (/ seed 17)) 5))
+    (let (octave-offset (* octave 12))
+      (let (base-note (+ 60 octave-offset))
+        (+ base-note (nth PENTATONIC-OFFSETS scale-pos))))))
+
+;; Note name from MIDI
+(define NOTE-NAMES (list "C" "C#" "D" "D#" "E" "F" "F#" "G" "G#" "A" "A#" "B"))
+(define (note-name midi)
+  (let (oct (floor (/ midi 12)))
+    (let (chroma (% midi 12))
+      (concat (nth NOTE-NAMES chroma) (string oct)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Card → Patch Derivation
+;; The core algorithm: same card = same sound, everywhere
+;; ═══════════════════════════════════════════════════════════════
+
+;; Waveform by category
+(define WAVEFORM-MAP
+  (make-dict
+    "core"               "sine"
+    "devtools"           "square"
+    "pipeline"           "sawtooth"
+    "integrations"       "sawtooth"
+    "productivity"       "triangle"
+    "healthcare"         "triangle"
+    "financial_services" "sine"
+    "b2b_sales"          "sine"
+    "b2c_sales"          "sine"
+    "manufacturing"      "square"
+    "energy"             "square"))
+
+;; Reverb amount by rarity label
+(define REVERB-MAP
+  (make-dict
+    "Legendary" 0.9
+    "Elite"     0.5
+    "Core"      0.2
+    "Starter"   0.0))
+
+;; Rarity label from tier
+(define TIER-TO-LABEL
+  (make-dict
+    "official"    "Legendary"
+    "verified"    "Elite"
+    "community"   "Core"
+    "experimental" "Starter"))
+
+;; Derive a synth patch from a card
+(define (card-to-patch card)
+  (let (name (get card "name" "unknown"))
+    (let (seed (seed-hash name))
+      (let (rng (mulberry32 seed))
+        (let (power     (get card "power" (+ 1 (floor (* (rng) 10)))))
+          (let (toughness (get card "toughness" (+ 1 (floor (* (rng) 10)))))
+            (let (tier      (get card "quality_tier" "community"))
+              (let (category  (get card "category" "core"))
+                (let (rarity-label (get TIER-TO-LABEL tier "Core"))
+                  (let (waveform  (get WAVEFORM-MAP category "sine"))
+                    (let (reverb    (get REVERB-MAP rarity-label 0.2))
+                      (let (midi-note (seed-to-note seed (+ 3 (floor (* (rng) 3)))))
+                        (let (freq      (midi-to-freq midi-note))
+                          (let (volume    (clamp (* (/ power 10.0) *master-volume*) 0.05 1.0))
+                            (let (bass-cut  (clamp (- 1.0 (/ toughness 10.0)) 0.1 0.9))
+                              (let (attack-ms (+ 10 (floor (* (rng) 200))))
+                                (let (decay-ms  (+ 50 (floor (* (rng) 400))))
+                                  (let (detune    (- (* (rng) 20) 10))
+                                    (make-dict
+                                      "name"       name
+                                      "seed"       seed
+                                      "waveform"   waveform
+                                      "frequency"  freq
+                                      "note"       (note-name midi-note)
+                                      "volume"     volume
+                                      "bass"       (- 1.0 bass-cut)
+                                      "reverb"     reverb
+                                      "attack_ms"  attack-ms
+                                      "decay_ms"   decay-ms
+                                      "detune"     detune
+                                      "sustain_ms" *sustain-ms*
+                                      "rarity"     rarity-label
+                                      "category"   category
+                                      "power"      power
+                                      "toughness"  toughness))))))))))))))))))))
+
+;; Derive patch from just an agent name (looks up in registry)
+(define (name-to-patch agent-name)
+  (if (file-exists? "registry.json")
+    (let (agents (json-parse (read-file "registry.json")))
+      (let (matches (filter (lambda (a) (= (get a "name") agent-name)) agents))
+        (if (empty? matches)
+          ;; Synthesize from name only
+          (card-to-patch (make-dict "name" agent-name))
+          (card-to-patch (car matches)))))
+    (card-to-patch (make-dict "name" agent-name))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Waveform Visualization
+;; ASCII art waveforms because we're in a terminal
+;; ═══════════════════════════════════════════════════════════════
+
+;; Draw a waveform in ASCII
+(define (draw-waveform waveform width)
+  (let (w (max 20 (min width 60)))
+    (cond
+      ((= waveform "sine")
+       (sine-wave-ascii w))
+      ((= waveform "square")
+       (square-wave-ascii w))
+      ((= waveform "sawtooth")
+       (saw-wave-ascii w))
+      ((= waveform "triangle")
+       (tri-wave-ascii w))
+      (true
+       (sine-wave-ascii w)))))
+
+(define (sine-wave-ascii w)
+  (let (rows (list
+    "       ╭──╮             ╭──╮        "
+    "      ╯    ╰           ╯    ╰       "
+    "─────╯      ╰─────────╯      ╰─────"))
+    (for-each (lambda (r) (log (concat "  " r))) rows)))
+
+(define (square-wave-ascii w)
+  (let (rows (list
+    "  ╔════╗         ╔════╗         ╔══"
+    "  ║    ║         ║    ║         ║  "
+    "──╯    ╚═════════╯    ╚═════════╯  "))
+    (for-each (lambda (r) (log (concat "  " r))) rows)))
+
+(define (saw-wave-ascii w)
+  (let (rows (list
+    "     ╱    ╱    ╱    ╱    ╱    ╱    "
+    "    ╱    ╱    ╱    ╱    ╱    ╱     "
+    "───╱────╱────╱────╱────╱────╱──────"))
+    (for-each (lambda (r) (log (concat "  " r))) rows)))
+
+(define (tri-wave-ascii w)
+  (let (rows (list
+    "    ╱╲      ╱╲      ╱╲      ╱╲     "
+    "   ╱  ╲    ╱  ╲    ╱  ╲    ╱  ╲    "
+    "──╱    ╲──╱    ╲──╱    ╲──╱    ╲───"))
+    (for-each (lambda (r) (log (concat "  " r))) rows)))
+
+;; Volume bar
+(define (draw-volume vol label)
+  (let (bars (floor (* vol 20)))
+    (log (concat "  " label ": [" (make-string bars "█") (make-string (- 20 bars) "░") "] " (string (floor (* vol 100))) "%"))))
+
+;; Reverb hall visualization
+(define (draw-reverb amount rarity)
+  (let (hall-name
+         (cond
+           ((>= amount 0.9) "Cathedral   ")
+           ((>= amount 0.5) "Hall        ")
+           ((>= amount 0.2) "Room        ")
+           (true            "Dry         ")))
+    (log (concat "  Reverb:  [" hall-name "] " rarity))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Play Commands
+;; The musical interface
+;; ═══════════════════════════════════════════════════════════════
+
+;; synth-play — play a single card's tone
+(define (synth-play agent-name)
+  (let (patch (name-to-patch agent-name))
+    (set! *current-patch* patch)
+    (set! *history* (append *history* (list patch)))
+    (display-patch patch)
+    ;; Fire audio if in browser context
+    (audio-play-patch patch)))
+
+;; Display a patch beautifully
+(define (display-patch patch)
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log (concat "  ║  " (get patch "name")
+               (make-string (max 1 (- 34 (length (get patch "name")))) " ") "║"))
+  (log "  ╠══════════════════════════════════════╣")
+  (log (concat "  ║  Note: " (get patch "note")
+               "  (" (string (floor (get patch "frequency"))) " Hz)"
+               (make-string (max 1 (- 22 (length (get patch "note")))) " ") "║"))
+  (log (concat "  ║  Wave: " (get patch "waveform")
+               (make-string (max 1 (- 28 (length (get patch "waveform")))) " ") "║"))
+  (log (concat "  ║  " (get patch "rarity") " — " (get patch "category")
+               (make-string (max 1 (- 33 (+ (length (get patch "rarity")) (length (get patch "category"))))) " ") "║"))
+  (log "  ╠══════════════════════════════════════╣")
+  (draw-waveform (get patch "waveform") 40)
+  (log "  ╠══════════════════════════════════════╣")
+  (draw-volume (get patch "volume") "Volume ")
+  (draw-volume (get patch "bass") "Bass   ")
+  (draw-reverb (get patch "reverb") (get patch "rarity"))
+  (log (concat "  Attack:   " (string (get patch "attack_ms")) "ms   Decay: " (string (get patch "decay_ms")) "ms"))
+  (log "  ╚══════════════════════════════════════╝")
+  (log ""))
+
+;; Trigger audio in browser context via Web Audio API
+(define (audio-play-patch patch)
+  (if (defined? 'os.exec)
+    (os.exec
+      (concat "(audio-tone "
+              (string (get patch "frequency")) " "
+              "\"" (get patch "waveform") "\" "
+              (string (get patch "volume")) " "
+              (string (get patch "sustain_ms")) " "
+              (string (get patch "reverb")) " "
+              (string (get patch "detune")) ")"))
+    (log (concat "  [TONE] " (get patch "note") " " (get patch "waveform") " " (string (floor (get patch "frequency"))) "Hz"))))
+
+;; synth-chord — play all cards in a deck simultaneously
+(define (synth-chord deck)
+  (log "")
+  (log (concat "  ♩ CHORD — " (string (length deck)) " voices"))
+  (log "")
+  (let (patches (map name-to-patch deck))
+    ;; Show all patches
+    (for-each
+      (lambda (patch)
+        (log (concat "    " (get patch "note")
+                     " (" (get patch "waveform") ")"
+                     " — " (get patch "name"))))
+      patches)
+    (log "")
+    ;; Draw combined waveform
+    (log "  Chord waveform:")
+    (for-each
+      (lambda (patch)
+        (draw-waveform (get patch "waveform") 30)
+        (log "  +"))
+      patches)
+    (log "")
+    ;; Fire audio
+    (for-each audio-play-patch patches)
+    ;; Record
+    (set! *history* (append *history* patches))))
+
+;; synth-sequence — play cards in order as a melody
+(define (synth-sequence cards)
+  (log "")
+  (log (concat "  ♫ SEQUENCE — " (string (length cards)) " notes"))
+  (log "")
+  (let (patches (map name-to-patch cards))
+    (for-each-indexed
+      (lambda (patch i)
+        (log (concat "    " (string (+ i 1)) ".  " (get patch "note")
+                     "  " (get patch "waveform")
+                     "  [" (get patch "rarity") "]"
+                     "  — " (get patch "name"))))
+      patches)
+    (log "")
+    (log "  Playing sequence...")
+    (for-each audio-play-patch patches)
+    (set! *history* (append *history* patches))))
+
+;; synth-loop — loop a sequence at a given BPM
+(define (synth-loop cards bpm)
+  (set! *bpm* bpm)
+  (set! *loop-active* true)
+  (let (ms-per-beat (floor (* 60000 (/ 1 bpm))))
+    (log (concat "  ↺ LOOP at " (string bpm) " BPM (" (string ms-per-beat) "ms/beat)"))
+    (log "  (synth-stop) to stop")
+    (log "")
+    (synth-sequence cards)))
+
+;; synth-stop — stop looping
+(define (synth-stop)
+  (set! *loop-active* false)
+  (log "  Loop stopped."))
+
+;; synth-mix — blend parameters of two cards
+(define (synth-mix agent1 agent2)
+  (let (p1 (name-to-patch agent1))
+    (let (p2 (name-to-patch agent2))
+      (let (blend (make-dict
+             "name"       (concat agent1 " × " agent2)
+             "waveform"   (get p1 "waveform")           ;; dominant waveform from card 1
+             "frequency"  (/ (+ (get p1 "frequency") (get p2 "frequency")) 2.0)
+             "note"       (concat (get p1 "note") "/" (get p2 "note"))
+             "volume"     (/ (+ (get p1 "volume") (get p2 "volume")) 2.0)
+             "bass"       (max (get p1 "bass") (get p2 "bass"))
+             "reverb"     (max (get p1 "reverb") (get p2 "reverb"))
+             "attack_ms"  (min (get p1 "attack_ms") (get p2 "attack_ms"))
+             "decay_ms"   (max (get p1 "decay_ms") (get p2 "decay_ms"))
+             "detune"     (/ (+ (get p1 "detune") (get p2 "detune")) 2.0)
+             "sustain_ms" *sustain-ms*
+             "rarity"     (get p1 "rarity")
+             "category"   (get p1 "category")
+             "power"      (+ (get p1 "power") (get p2 "power"))
+             "toughness"  (max (get p1 "toughness") (get p2 "toughness"))))
+        (log "")
+        (log "  ✕ MIX RESULT")
+        (display-patch blend)
+        (audio-play-patch blend)
+        blend))))
+
+;; synth-export — export patch as shareable JSON
+(define (synth-export name . args)
+  (let (patch (if (empty? args) *current-patch* (name-to-patch (car args))))
+    (if (null? patch)
+      (log "No patch to export. Play something first.")
+      (let (export-data
+             (make-dict
+               "format"   "orappter-synth/1.0"
+               "name"     name
+               "patch"    patch
+               "bpm"      *bpm*
+               "exported" (timestamp)))
+        (dict-set *exports* name export-data)
+        (let (json-str (json-dump export-data))
+          (log (concat "  Exported: " name ".synth.json"))
+          (log "")
+          (log json-str)
+          json-str)))))
+
+;; synth-import — import a saved patch
+(define (synth-import json-str)
+  (let (data (json-parse json-str))
+    (if (not (= (get data "format") "orappter-synth/1.0"))
+      (log "Invalid synth format.")
+      (begin
+        (let (patch (get data "patch"))
+          (set! *current-patch* patch)
+          (log (concat "  Imported: " (get data "name")))
+          (display-patch patch)
+          (audio-play-patch patch))))))
+
+;; synth-random — random patch from registry
+(define (synth-random)
+  (if (not (file-exists? "registry.json"))
+    (log "No registry found. (synth-play \"@rapp/basic-agent\") to start.")
+    (let (agents (json-parse (read-file "registry.json")))
+      (if (empty? agents)
+        (log "Registry is empty.")
+        (let (rng (mulberry32 (seed-hash (timestamp))))
+          (let (idx (floor (* (rng) (length agents))))
+            (let (agent (nth agents idx))
+              (synth-play (get agent "name")))))))))
+
+;; synth-scale — play the pentatonic scale using 5 cards
+(define (synth-scale cards)
+  (log (concat "  ♩♫ SCALE — " (string (length cards)) " cards"))
+  (if (< (length cards) 5)
+    (log "Need at least 5 cards for a scale.")
+    (begin
+      (let (deck (take cards 5))
+        (log "  Playing pentatonic scale...")
+        (synth-sequence deck)))))
+
+;; synth-arp — arpeggiate a chord (play notes separately, cycling)
+(define (synth-arp deck times)
+  (log (concat "  ♩ ARPEGGIO — " (string times) "x"))
+  (let (patches (map name-to-patch deck))
+    (let (total (length patches))
+      (let (counter 0)
+        (while (< counter (* times total))
+          (let (patch (nth patches (% counter total)))
+            (log (concat "    " (string (+ counter 1)) ". " (get patch "note")))
+            (audio-play-patch patch)
+            (set! counter (+ counter 1))))))))
+
+;; synth-history — show what has been played
+(define (synth-history)
+  (if (empty? *history*)
+    (log "Nothing played yet.")
+    (begin
+      (log (concat "═══ Synth History (" (string (length *history*)) " events) ═══"))
+      (for-each
+        (lambda (patch)
+          (log (concat "  " (get patch "note") "  " (get patch "waveform")
+                       "  " (get patch "name"))))
+        (take-last *history* 20)))))
+
+;; Show all saved exports
+(define (synth-exports)
+  (if (empty? (keys *exports*))
+    (log "No exports yet. (synth-export \"my-patch\")")
+    (begin
+      (log "═══ Synth Exports ═══")
+      (for-each
+        (lambda (k)
+          (log (concat "  " k ".synth.json")))
+        (keys *exports*)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║     S Y N T H . L I S P Y   v1.0    ║")
+  (log "  ║     Every card has a voice.          ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log "  Card → Patch mapping:")
+  (log "    power      → volume")
+  (log "    toughness  → bass")
+  (log "    rarity     → reverb  (Legendary = cathedral)")
+  (log "    category   → waveform (sales=sine, devtools=square)")
+  (log "    seed hash  → note/frequency")
+  (log "")
+  (log "  Commands:")
+  (log "    (synth-play \"@rapp/basic-agent\")    — play a card")
+  (log "    (synth-chord deck)                   — all cards at once")
+  (log "    (synth-sequence cards)               — melody")
+  (log "    (synth-loop cards 120)               — loop at BPM")
+  (log "    (synth-mix \"@rapp/basic-agent\" \"@kody/deal-desk\")")
+  (log "    (synth-arp deck 4)                   — arpeggio")
+  (log "    (synth-random)                       — surprise me")
+  (log "    (synth-export \"my-patch\")            — save as JSON")
+  (log "    (synth-history)                      — what played")
+  (log "    (synth-stop)                         — stop loop")
+  (log "")
+  (log "  Your deck is a chord. Your run is a melody."))

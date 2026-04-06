@@ -1,0 +1,516 @@
+;; ═══════════════════════════════════════════════════════════════
+;; ARENA.LISPY — Multiplayer Card Battles via Sneakernet
+;; No servers. No internet. Pure async PvP.
+;; Export your state as JSON. Share with opponent. Import theirs.
+;;
+;; (arena-create)                    — create a room, get code
+;; (arena-join "XK7F")               — join with a code
+;; (arena-deck cards)                — set your 3-card battle deck
+;; (arena-ready)                     — signal ready to fight
+;; (arena-play "PERFORM")            — play a move
+;; (arena-export)                    — export state for opponent
+;; (arena-import json)               — import opponent's state
+;;
+;; Sneakernet: copy the JSON, send it any way you want.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "arena")
+(define _agent_desc "Async PvP card battles via sneakernet — no servers, no internet, just JSON exports")
+
+(define ARENA_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Game State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *room-code*    nil)
+(define *player-name*  "Player1")
+(define *opponent-name* "Opponent")
+
+;; Player state
+(define *my-deck*      (list))   ;; 3 card names
+(define *my-hand*      (list))   ;; cards in hand
+(define *my-active*    nil)      ;; active battle card
+(define *my-bench*     (list))   ;; bench cards
+(define *my-hp*        20)
+(define *my-energy*    3)
+(define *my-ready*     false)
+
+;; Opponent state (from their imports)
+(define *opp-deck*     (list))
+(define *opp-active*   nil)
+(define *opp-hp*       20)
+(define *opp-energy*   3)
+(define *opp-ready*    false)
+
+;; Battle state
+(define *turn*         1)
+(define *phase*        "setup")   ;; setup → battle → ended
+(define *turn-owner*   "player")  ;; who moves next
+(define *battle-log*   (list))    ;; full battle history
+(define *pending-move* nil)       ;; move not yet resolved
+
+;; ELO ratings (persisted locally)
+(define *elo-ratings*  (make-dict))  ;; card-name → ELO
+(define *win-record*   (make-dict))  ;; card-name → {wins, losses}
+(define *battle-history* (list))     ;; past complete battles
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Room Management
+;; ═══════════════════════════════════════════════════════════════
+
+;; Generate a 4-char alphanumeric room code from timestamp
+(define (gen-room-code)
+  (let (rng (mulberry32 (seed-hash (timestamp))))
+    (let (chars "ABCDEFGHJKLMNPQRSTUVWXYZ23456789")
+      (let (c1 (nth (string->list chars) (floor (* (rng) 32))))
+        (let (c2 (nth (string->list chars) (floor (* (rng) 32))))
+          (let (c3 (nth (string->list chars) (floor (* (rng) 32))))
+            (let (c4 (nth (string->list chars) (floor (* (rng) 32))))
+              (concat (string c1) (string c2) (string c3) (string c4)))))))))
+
+;; Create a new battle room
+(define (arena-create)
+  (set! *room-code* (gen-room-code))
+  (set! *phase* "setup")
+  (set! *turn* 1)
+  (set! *battle-log* (list))
+  (log "")
+  (log "  ╔═══════════════════════════════╗")
+  (log "  ║     ARENA — Room Created      ║")
+  (log "  ╚═══════════════════════════════╝")
+  (log "")
+  (log (concat "  Room Code: ★ " *room-code* " ★"))
+  (log "")
+  (log "  Share this code with your opponent.")
+  (log "  They run: (arena-join \"" *room-code* "\")")
+  (log "")
+  (log "  Next: (arena-deck cards) — pick your 3 fighters"))
+
+;; Join an existing room
+(define (arena-join code)
+  (set! *room-code* code)
+  (set! *phase* "setup")
+  (log "")
+  (log (concat "  Joined room: " code))
+  (log (concat "  You are the challenger."))
+  (log "")
+  (log "  Next: (arena-deck cards) — pick your 3 fighters"))
+
+;; Set player name
+(define (arena-name name)
+  (set! *player-name* name)
+  (log (concat "  Name set: " name)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Deck Setup
+;; ═══════════════════════════════════════════════════════════════
+
+;; Resolve a card name to a battle card
+(define (resolve-battle-card name)
+  (let (seed (seed-hash name))
+    (let (rng (mulberry32 seed))
+      (let (power     (+ 3 (floor (* (rng) 8))))
+        (let (toughness (+ 3 (floor (* (rng) 8))))
+          (let (speed     (+ 1 (floor (* (rng) 5))))
+            (let (hp        (+ 10 (* toughness 2)))
+              (make-dict
+                "name"      name
+                "slug"      (last (split name "/"))
+                "power"     power
+                "toughness" toughness
+                "speed"     speed
+                "max_hp"    hp
+                "current_hp" hp
+                "status"    nil
+                "moves_used" 0))))))))
+
+;; Set your battle deck (list of 3 agent names)
+(define (arena-deck cards)
+  (if (< (length cards) 3)
+    (log "Need at least 3 cards for a battle deck.")
+    (begin
+      (set! *my-deck* (take cards 3))
+      (let (battle-cards (map resolve-battle-card *my-deck*))
+        (set! *my-active* (car battle-cards))
+        (set! *my-bench* (cdr battle-cards))
+        (set! *my-hp* (get *my-active* "max_hp"))
+        (log "")
+        (log "  ═══ Your Battle Deck ═══")
+        (for-each-indexed
+          (lambda (card i)
+            (log (concat
+              (if (= i 0) "  ★ ACTIVE: " "    Bench:  ")
+              (get card "slug")
+              "  PWR:" (string (get card "power"))
+              " TGH:" (string (get card "toughness"))
+              " HP:" (string (get card "max_hp")))))
+          battle-cards)
+        (log "")
+        (log "  Next: (arena-ready) when you're set")))))
+
+;; Signal ready
+(define (arena-ready)
+  (set! *my-ready* true)
+  (log (concat "  " *player-name* " is READY!"))
+  (log "")
+  (log "  Next:")
+  (log "    1. (arena-export) — export state for opponent")
+  (log "    2. Send them the JSON (any way you like)")
+  (log "    3. Wait for their export")
+  (log "    4. (arena-import json) — load their state")
+  (log "    5. (arena-play \"PERFORM\") — make your move"))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Battle Moves
+;; ═══════════════════════════════════════════════════════════════
+
+;; All available moves
+(define MOVES
+  (list
+    (make-dict "name" "PERFORM"  "cost" 1 "desc" "Deal power damage")
+    (make-dict "name" "REFACTOR" "cost" 2 "desc" "Heal toughness HP")
+    (make-dict "name" "DEPLOY"   "cost" 2 "desc" "Swap bench card in")
+    (make-dict "name" "OVERRIDE" "cost" 3 "desc" "Negate opponent's last move")
+    (make-dict "name" "PIPELINE" "cost" 3 "desc" "Chain damage: power + next bench power")
+    (make-dict "name" "COMPILE"  "cost" 0 "desc" "Pass turn, gain +1 energy next turn")))
+
+;; Get move by name
+(define (get-move name)
+  (let (matches (filter (lambda (m) (= (get m "name") name)) MOVES))
+    (if (empty? matches) nil (car matches))))
+
+;; Calculate damage for PERFORM
+(define (calc-damage attacker)
+  (let (base (get attacker "power" 5))
+    (let (rng (mulberry32 (seed-hash (concat (get attacker "name") (timestamp)))))
+      (let (variance (- (* (rng) 4) 2))
+        (max 1 (floor (+ base variance)))))))
+
+;; Apply a move
+(define (apply-move move-name)
+  (if (null? *my-active*)
+    (log "No active card! Set a deck first with (arena-deck cards)")
+    (let (move (get-move move-name))
+      (if (null? move)
+        (log (concat "Unknown move: " move-name ". Try: PERFORM, REFACTOR, DEPLOY, OVERRIDE, PIPELINE, COMPILE"))
+        (if (< *my-energy* (get move "cost"))
+          (log (concat "Not enough energy! Need " (string (get move "cost")) " have " (string *my-energy*)))
+          (begin
+            (set! *my-energy* (- *my-energy* (get move "cost")))
+            (cond
+              ((= move-name "PERFORM")
+               (let (dmg (calc-damage *my-active*))
+                 (set! *opp-hp* (max 0 (- *opp-hp* dmg)))
+                 (log-event (concat (get *my-active* "slug") " used PERFORM! " (string dmg) " damage!"))
+                 (log (concat "  → Opponent HP: " (string *opp-hp*) " / " (string (get *opp-active* "max_hp" 20))))
+                 (set! *pending-move* (make-dict "move" "PERFORM" "value" dmg "by" *player-name*))))
+
+              ((= move-name "REFACTOR")
+               (let (heal (get *my-active* "toughness" 5))
+                 (let (new-hp (min (get *my-active* "max_hp") (+ (get *my-active* "current_hp") heal)))
+                   (dict-set *my-active* "current_hp" new-hp)
+                   (set! *my-hp* new-hp)
+                   (log-event (concat (get *my-active* "slug") " used REFACTOR! Healed " (string heal) " HP!"))
+                   (log (concat "  → My HP: " (string new-hp))))))
+
+              ((= move-name "DEPLOY")
+               (if (empty? *my-bench*)
+                 (log "No bench cards to deploy!")
+                 (let (next-card (car *my-bench*))
+                   (set! *my-bench* (append (cdr *my-bench*) (list *my-active*)))
+                   (set! *my-active* next-card)
+                   (set! *my-hp* (get next-card "current_hp"))
+                   (log-event (concat "DEPLOY! " (get next-card "slug") " enters battle!"))
+                   (log (concat "  → Active: " (get *my-active* "slug"))))))
+
+              ((= move-name "OVERRIDE")
+               (set! *pending-move* nil)
+               (log-event (concat (get *my-active* "slug") " used OVERRIDE! Last move negated!"))
+               (log "  → Opponent's last move cancelled."))
+
+              ((= move-name "PIPELINE")
+               (let (dmg1 (calc-damage *my-active*))
+                 (let (dmg2 (if (empty? *my-bench*) 0
+                               (get (car *my-bench*) "power" 3)))
+                   (let (total (+ dmg1 dmg2))
+                     (set! *opp-hp* (max 0 (- *opp-hp* total)))
+                     (log-event (concat "PIPELINE! " (string dmg1) " + " (string dmg2) " = " (string total) " total damage!"))
+                     (log (concat "  → Opponent HP: " (string *opp-hp*)))
+                     (set! *pending-move* (make-dict "move" "PIPELINE" "value" total "by" *player-name*))))))
+
+              ((= move-name "COMPILE")
+               (log-event (concat (get *my-active* "slug") " uses COMPILE. Preparing next turn..."))
+               (log "  → You gain +1 energy next turn.")))
+
+            ;; Advance turn
+            (set! *turn* (+ *turn* 1))
+            (set! *my-energy* (+ *my-energy* 2))   ;; regen for next turn
+            (check-win-condition)))))))
+
+;; Public play command
+(define (arena-play move-name)
+  (apply-move move-name))
+
+;; Log a battle event
+(define (log-event msg)
+  (set! *battle-log*
+    (append *battle-log*
+      (list (make-dict
+        "turn" *turn*
+        "msg"  msg
+        "ts"   (timestamp)))))
+  (log (concat "  [T" (string *turn*) "] " msg)))
+
+;; Check if someone has won
+(define (check-win-condition)
+  (cond
+    ((<= *opp-hp* 0)
+     (begin
+       (log "")
+       (log "  ██████████████████████████████")
+       (log "  ██   YOU WIN! WELL PLAYED!  ██")
+       (log "  ██████████████████████████████")
+       (log "")
+       (set! *phase* "ended")
+       (record-outcome "win")))
+    ((<= *my-hp* 0)
+     (begin
+       (log "")
+       (log "  ┌──────────────────────────────┐")
+       (log "  │  Your card fainted. GG!       │")
+       (log "  └──────────────────────────────┘")
+       (log "")
+       (set! *phase* "ended")
+       (record-outcome "loss")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: ELO Rating System
+;; ═══════════════════════════════════════════════════════════════
+
+(define ELO-K 32)
+(define ELO-START 1200)
+
+;; Get ELO for a card
+(define (elo-get card-name)
+  (get *elo-ratings* card-name ELO-START))
+
+;; Expected score
+(define (elo-expected ra rb)
+  (/ 1.0 (+ 1.0 (expt 10.0 (/ (- rb ra) 400.0)))))
+
+;; Update ELO after a battle
+(define (elo-update winner loser)
+  (let (ra (elo-get winner))
+    (let (rb (elo-get loser))
+      (let (ea (elo-expected ra rb))
+        (let (new-ra (floor (+ ra (* ELO-K (- 1 ea)))))
+          (let (new-rb (floor (- rb (* ELO-K (- 1 ea)))))
+            (dict-set *elo-ratings* winner new-ra)
+            (dict-set *elo-ratings* loser new-rb)
+            (log (concat "  ELO: " winner " " (string ra) " → " (string new-ra)))
+            (log (concat "  ELO: " loser  " " (string rb) " → " (string new-rb)))))))))
+
+;; Record match outcome
+(define (record-outcome result)
+  (if (not (null? *my-active*))
+    (begin
+      (let (my-card (get *my-active* "name"))
+        (let (opp-card (if (null? *opp-active*) "unknown" (get *opp-active* "name")))
+          (if (= result "win")
+            (begin
+              (elo-update my-card opp-card)
+              (let (rec (get *win-record* my-card (make-dict "wins" 0 "losses" 0)))
+                (dict-set *win-record* my-card
+                  (make-dict "wins" (+ (get rec "wins") 1) "losses" (get rec "losses")))))
+            (begin
+              (elo-update opp-card my-card)
+              (let (rec (get *win-record* my-card (make-dict "wins" 0 "losses" 0)))
+                (dict-set *win-record* my-card
+                  (make-dict "wins" (get rec "wins") "losses" (+ (get rec "losses") 1))))))
+          (set! *battle-history*
+            (append *battle-history*
+              (list (make-dict
+                "room"    *room-code*
+                "player"  *player-name*
+                "my-card" my-card
+                "opp-card" opp-card
+                "result"  result
+                "turns"   *turn*
+                "ts"      (timestamp))))))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Sneakernet — Export and Import
+;; This is what makes async multiplayer work
+;; ═══════════════════════════════════════════════════════════════
+
+;; Export current state for your opponent
+(define (arena-export)
+  (let (state
+         (make-dict
+           "format"       "orappter-arena/1.0"
+           "room"         *room-code*
+           "player"       *player-name*
+           "turn"         *turn*
+           "phase"        *phase*
+           "my_active"    *my-active*
+           "my_hp"        *my-hp*
+           "my_energy"    *my-energy*
+           "my_deck"      *my-deck*
+           "my_ready"     *my-ready*
+           "pending_move" *pending-move*
+           "battle_log"   (take-last *battle-log* 20)
+           "exported_ts"  (timestamp)))
+    (let (json-str (json-dump state))
+      (log "")
+      (log "  ═══ Arena Export ═══")
+      (log "  Send this to your opponent:")
+      (log "")
+      (log json-str)
+      (log "")
+      (log "  They import with: (arena-import json)")
+      json-str)))
+
+;; Import opponent's state
+(define (arena-import json-str)
+  (let (data (json-parse json-str))
+    (if (not (= (get data "format") "orappter-arena/1.0"))
+      (log "Invalid arena export format.")
+      (begin
+        (set! *opponent-name* (get data "player" "Opponent"))
+        (set! *opp-active*    (get data "my_active" nil))
+        (set! *opp-hp*        (get data "my_hp" 20))
+        (set! *opp-energy*    (get data "my_energy" 3))
+        (set! *opp-ready*     (get data "my_ready" false))
+        ;; Merge their battle log
+        (let (their-log (get data "battle_log" (list)))
+          (for-each
+            (lambda (entry)
+              (log (concat "  [OPP T" (string (get entry "turn")) "] " (get entry "msg"))))
+            their-log))
+        (log "")
+        (log (concat "  Opponent loaded: " *opponent-name*))
+        (if (not (null? *opp-active*))
+          (log (concat "  Active: " (get *opp-active* "slug" "?")
+                       "  HP: " (string *opp-hp*))))
+        (log "")
+        (log "  Your turn! (arena-play \"PERFORM\") or other move")))))
+
+;; Show current battle status
+(define (arena-status)
+  (log "")
+  (log "  ═══ Battle Status ═══")
+  (log (concat "  Room: " (if (null? *room-code*) "None" *room-code*)))
+  (log (concat "  Phase: " *phase* "  Turn: " (string *turn*)))
+  (log "")
+  (if (not (null? *my-active*))
+    (begin
+      (log (concat "  YOU [" *player-name* "]"))
+      (log (concat "    Active: " (get *my-active* "slug")
+                   "  HP: " (string *my-hp*)
+                   "  Energy: " (string *my-energy*)))
+      (if (not (empty? *my-bench*))
+        (log (concat "    Bench: " (join (map (lambda (c) (get c "slug")) *my-bench*) ", "))))))
+  (if (not (null? *opp-active*))
+    (begin
+      (log "")
+      (log (concat "  OPPONENT [" *opponent-name* "]"))
+      (log (concat "    Active: " (get *opp-active* "slug" "?")
+                   "  HP: " (string *opp-hp*)))))
+  (log "")
+  (log "  Moves: PERFORM REFACTOR DEPLOY OVERRIDE PIPELINE COMPILE")
+  (log "  (arena-play \"MOVE\") to battle"))
+
+;; Show battle log
+(define (arena-log)
+  (if (empty? *battle-log*)
+    (log "No battle events yet.")
+    (begin
+      (log "  ═══ Battle Log ═══")
+      (for-each
+        (lambda (entry)
+          (log (concat "  [T" (string (get entry "turn")) "] " (get entry "msg"))))
+        *battle-log*))))
+
+;; Show ELO ratings
+(define (arena-ratings)
+  (log "  ═══ ELO Ratings ═══")
+  (if (empty? (keys *elo-ratings*))
+    (log "  No battles played yet.")
+    (let (sorted (sort
+            (map (lambda (k) (make-dict "name" k "elo" (elo-get k))) (keys *elo-ratings*))
+            (lambda (a b) (> (get a "elo") (get b "elo")))))
+      (for-each
+        (lambda (entry)
+          (let (rec (get *win-record* (get entry "name") (make-dict "wins" 0 "losses" 0)))
+            (log (concat "  " (get entry "name")
+                         "  ELO:" (string (get entry "elo"))
+                         "  W:" (string (get rec "wins"))
+                         " L:" (string (get rec "losses"))))))
+        sorted))))
+
+;; Past battles
+(define (arena-history)
+  (if (empty? *battle-history*)
+    (log "No past battles.")
+    (begin
+      (log "  ═══ Battle History ═══")
+      (for-each
+        (lambda (b)
+          (log (concat "  [" (get b "room") "] "
+                       (get b "my-card") " vs " (get b "opp-card")
+                       "  → " (uppercase (get b "result"))
+                       "  (" (string (get b "turns")) " turns)")))
+        (reverse *battle-history*)))))
+
+;; Show available moves
+(define (arena-moves)
+  (log "  ═══ Available Moves ═══")
+  (for-each
+    (lambda (move)
+      (log (concat "  " (get move "name")
+                   (make-string (max 1 (- 10 (length (get move "name")))) " ")
+                   "Cost:" (string (get move "cost"))
+                   "  " (get move "desc"))))
+    MOVES))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔══════════════════════════════════════╗")
+  (log "  ║    A R E N A . L I S P Y   v1.0      ║")
+  (log "  ║    Async PvP. Sneakernet. No servers. ║")
+  (log "  ╚══════════════════════════════════════╝")
+  (log "")
+  (log "  How to play:")
+  (log "    1. (arena-create)                  — start a room")
+  (log "    2. (arena-name \"Kody\")              — set your name")
+  (log "    3. (arena-deck cards)              — pick 3 fighters")
+  (log "    4. (arena-ready)                   — ready up")
+  (log "    5. (arena-export)                  — send to opponent")
+  (log "    6. (arena-import opp-json)         — load their state")
+  (log "    7. (arena-play \"PERFORM\")           — make your move")
+  (log "    8. Repeat 5-7 until someone wins")
+  (log "")
+  (log "  Opponent runs:")
+  (log "    1. (arena-join \"CODE\")")
+  (log "    2-8. Same steps")
+  (log "")
+  (log "  Stats:")
+  (log "    (arena-status)   — current battle state")
+  (log "    (arena-log)      — full battle log")
+  (log "    (arena-moves)    — all available moves")
+  (log "    (arena-ratings)  — ELO leaderboard")
+  (log "    (arena-history)  — past battles")
+  (log "")
+  (log "  No internet required. Just copy and paste JSON."))

@@ -1,0 +1,60 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "dungeon",
+  "version": "1.0.0",
+  "description": "Roguelike dungeon crawler with your card party. 10 procedurally generated floors themed by agent category. Move, battle, loot, trap. Permadeath. High score board. SuperSeed is the final boss.",
+  "type": "game",
+  "console": "orappter",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered room descriptions, enemy dialogue, and trap flavor text. Optional — dungeon generates all content offline from seeds."
+  },
+  "system": "You are the narrator of a roguelike dungeon where AI agents are adventurers and enemies. Generate atmospheric room descriptions, enemy taunts, and trap flavor text. Be evocative but brief — max 2 sentences per event.",
+  "boot": [
+    "(load \"rapp_sdk.lispy\")",
+    "(load \"dungeon.lispy\")"
+  ],
+  "env": {
+    "FLOOR_WIDTH": 20,
+    "FLOOR_HEIGHT": 12,
+    "ROOMS_PER_FLOOR": 8,
+    "PARTY_MAX": 3,
+    "HP_PER_TOUGHNESS": 5,
+    "BASE_GOLD": 10
+  },
+  "floor_themes": [
+    {"floor": 1,  "theme": "Pallet Lab",        "category": "core",                "boss": false},
+    {"floor": 2,  "theme": "Sales Route",        "category": "b2b_sales",           "boss": false},
+    {"floor": 3,  "theme": "Pipeline City",      "category": "pipeline",            "boss": true,  "boss_name": "Howard the CardSmith"},
+    {"floor": 4,  "theme": "Health District",    "category": "healthcare",          "boss": false},
+    {"floor": 5,  "theme": "Finance Tower",      "category": "financial_services",  "boss": true,  "boss_name": "The Auditor"},
+    {"floor": 6,  "theme": "Factory Floor",      "category": "manufacturing",       "boss": false},
+    {"floor": 7,  "theme": "Productivity Peak",  "category": "productivity",        "boss": true,  "boss_name": "The Scheduler"},
+    {"floor": 8,  "theme": "Integration Maze",   "category": "integrations",        "boss": false},
+    {"floor": 9,  "theme": "DevTools Depths",    "category": "devtools",            "boss": true,  "boss_name": "The Compiler"},
+    {"floor": 10, "theme": "SuperSeed Chamber",  "category": "core",                "boss": true,  "boss_name": "@rapp/SuperSeed"}
+  ],
+  "room_types": ["encounter", "treasure", "trap", "stairs", "rest", "shop"],
+  "items": [
+    {"name": "Health Pack",    "type": "consumable", "effect": "restore_hp",  "value": 20},
+    {"name": "Energy Drink",   "type": "consumable", "effect": "restore_en",  "value": 30},
+    {"name": "Rare Candy",     "type": "consumable", "effect": "level_up",    "value": 1},
+    {"name": "Smoke Bomb",     "type": "consumable", "effect": "flee_battle", "value": 1},
+    {"name": "Force Field",    "type": "consumable", "effect": "block_once",  "value": 1},
+    {"name": "Gold Circuit",   "type": "treasure",   "effect": "coins",       "value": 50},
+    {"name": "Legendary Chip", "type": "treasure",   "effect": "add_card",    "value": 1}
+  ],
+  "metadata": {
+    "genre": "roguelike dungeon crawler",
+    "inspiration": "Rogue (1980), Pokemon Mystery Dungeon, Slay the Spire",
+    "tagline": "Ten floors. Permadeath. SuperSeed waits at the bottom.",
+    "offline": true,
+    "ai_optional": true,
+    "permadeath": true,
+    "procedural": true
+  }
+}
