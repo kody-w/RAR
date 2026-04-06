@@ -1784,6 +1784,12 @@ function bootApp(win, app) {
     case 'tetris': bootTetris(win); break;
     case 'cards': bootCards(win); break;
     case 'settings': bootSettings(win); break;
+    case 'rappterdaemon': bootRappterdaemon(win); break;
+    case 'synth': bootSynth(win); break;
+    case 'radio': bootRadio(win); break;
+    case 'canvas': bootCanvas(win); break;
+    case 'tamagotchi': bootTamagotchi(win); break;
+    case 'garden': bootGarden(win); break;
     default: bootStub(win, app); break;
   }
 
@@ -1822,6 +1828,12 @@ function handleInput(win, src) {
     case 'tetris': handleTetrisInput(win, src); break;
     case 'cards': handleCardsInput(win, src); break;
     case 'settings': handleSettingsInput(win, src); break;
+    case 'rappterdaemon': handleRappterdaemonInput(win, src); break;
+    case 'synth': handleSynthInput(win, src); break;
+    case 'radio': handleRadioInput(win, src); break;
+    case 'canvas': handleCanvasInput(win, src); break;
+    case 'tamagotchi': handleTamagotchiInput(win, src); break;
+    case 'garden': handleGardenInput(win, src); break;
     default: handleLispInput(win, src); break;
   }
 }
@@ -2697,6 +2709,986 @@ function handleSettingsInput(win, src) {
   } else {
     handleLispInput(win, src);
   }
+}
+
+/* ============================================================
+   RAPPTERDAEMON APP  — Turn-based RPG
+   ============================================================ */
+const DAEMON_PREFIXES = ['Glitch','Flux','Nova','Byte','Null','Void','Arc','Hex','Ping','Echo','Sync','Kron','Nyx','Zap','Core'];
+const DAEMON_SUFFIXES = ['mon','dex','tron','byte','net','forge','spark','glyph','bit','node','flux','wave','code','run','bot'];
+const DAEMON_TYPES = ['core','pipeline','integrations','productivity','devtools'];
+const DAEMON_MOVES = {
+  core:         ['Root Strike','Dependency Chain','Package Bomb','Fork Blast'],
+  pipeline:     ['Data Flow','Async Rush','Buffer Drain','Stream Slash'],
+  integrations: ['API Spike','Webhook Flare','OAuth Surge','REST Barrage'],
+  productivity: ['Focus Burst','Todo Sweep','Sprint Dash','Deep Work'],
+  devtools:     ['Debug Ray','Stack Trace','Lint Lash','Deploy Drop'],
+};
+
+function makeDaemon(name, level, type) {
+  const t = type || DAEMON_TYPES[Math.floor(Math.random() * DAEMON_TYPES.length)];
+  const rng = mulberry32(seedHash(name + level));
+  const base = 20 + level * 3;
+  return {
+    name,
+    level: level || 1,
+    type: t,
+    hp: base + Math.floor(rng() * 10),
+    maxHp: base + Math.floor(rng() * 10),
+    atk: 5 + Math.floor(rng() * 5) + Math.floor(level / 3),
+    def: 3 + Math.floor(rng() * 3) + Math.floor(level / 4),
+    xp: 0,
+    xpNeeded: level * 20,
+    moves: DAEMON_MOVES[t],
+    caught: false,
+  };
+}
+
+function makeWildDaemon(locationLevel) {
+  const lvl = locationLevel + Math.floor(Math.random() * 4) - 1;
+  const safeLvl = Math.max(1, lvl);
+  const n = DAEMON_PREFIXES[Math.floor(Math.random() * DAEMON_PREFIXES.length)] +
+            DAEMON_SUFFIXES[Math.floor(Math.random() * DAEMON_SUFFIXES.length)];
+  return makeDaemon(n, safeLvl);
+}
+
+const STARTER_DAEMONS = [
+  makeDaemon('Coremon', 5, 'core'),
+  makeDaemon('Pipelix', 5, 'pipeline'),
+  makeDaemon('Devtron', 5, 'devtools'),
+];
+
+function daemonHpBar(d) {
+  const pct = Math.max(0, d.hp / d.maxHp);
+  const filled = Math.round(pct * 16);
+  const bar = '='.repeat(filled) + '-'.repeat(16 - filled);
+  const col = pct > 0.5 ? 'success' : pct > 0.2 ? 'warn' : 'err';
+  return { bar: `[${bar}] ${d.hp}/${d.maxHp}`, col };
+}
+
+function bootRappterdaemon(win) {
+  win.rdState = {
+    phase: 'title',  // title | pick-starter | explore | battle | catch
+    party: [],
+    active: null,
+    wild: null,
+    locationLevel: 3,
+    items: { potion: 3 },
+    xpEarned: 0,
+  };
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║        RAPPTERDAEMON  v1.0.0         ║', 'sys');
+  printToWindow(win.id, '║   Gotta Perform \'Em All!              ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands: start | new-game', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleRappterdaemonInput(win, src) {
+  const st = win.rdState;
+  if (!st) return;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  // Title phase
+  if (st.phase === 'title') {
+    if (cmd === 'start' || cmd === 'new-game') {
+      st.phase = 'pick-starter';
+      printToWindow(win.id, 'Choose your starter daemon:', 'sys');
+      STARTER_DAEMONS.forEach((d, i) => {
+        printToWindow(win.id, `  ${i+1}) ${d.name.padEnd(12)} [${d.type}]  HP:${d.maxHp}  ATK:${d.atk}  DEF:${d.def}`, 'info');
+      });
+      printToWindow(win.id, 'Type "pick 1", "pick 2", or "pick 3"', 'info');
+    } else {
+      printToWindow(win.id, 'Type "start" to begin', 'warn');
+    }
+    return;
+  }
+
+  // Pick-starter phase
+  if (st.phase === 'pick-starter') {
+    if (cmd === 'pick' && parts[1]) {
+      const idx = parseInt(parts[1]) - 1;
+      if (idx >= 0 && idx < STARTER_DAEMONS.length) {
+        const starter = JSON.parse(JSON.stringify(STARTER_DAEMONS[idx]));
+        st.party.push(starter);
+        st.active = starter;
+        st.phase = 'explore';
+        printToWindow(win.id, `You chose ${starter.name}! (${starter.type} type)`, 'success');
+        printToWindow(win.id, '');
+        printToWindow(win.id, 'Commands: explore | party | heal | help', 'info');
+      } else {
+        printToWindow(win.id, 'Pick 1, 2, or 3', 'warn');
+      }
+    }
+    return;
+  }
+
+  // Explore phase
+  if (st.phase === 'explore') {
+    if (cmd === 'help') {
+      printToWindow(win.id, 'explore | party | heal | status', 'info');
+      return;
+    }
+    if (cmd === 'party') {
+      if (!st.party.length) { printToWindow(win.id, 'Party is empty', 'warn'); return; }
+      st.party.forEach((d, i) => {
+        const hb = daemonHpBar(d);
+        printToWindow(win.id, `  ${i+1}) ${d.name} Lv.${d.level} [${d.type}]`);
+        printToWindow(win.id, `     HP: ${hb.bar}`, hb.col);
+        printToWindow(win.id, `     ATK:${d.atk}  DEF:${d.def}  XP:${d.xp}/${d.xpNeeded}`);
+      });
+      return;
+    }
+    if (cmd === 'heal') {
+      if (st.items.potion > 0) {
+        st.items.potion--;
+        st.party.forEach(d => { d.hp = d.maxHp; });
+        printToWindow(win.id, `Party healed! (${st.items.potion} potions left)`, 'success');
+      } else {
+        printToWindow(win.id, 'No potions left! Keep exploring to find items.', 'warn');
+      }
+      return;
+    }
+    if (cmd === 'explore') {
+      const roll = Math.random();
+      if (roll < 0.5) {
+        // Battle!
+        st.wild = makeWildDaemon(st.locationLevel);
+        st.phase = 'battle';
+        printToWindow(win.id, `A wild ${st.wild.name} appeared! (Lv.${st.wild.level} ${st.wild.type})`, 'warn');
+        const wb = daemonHpBar(st.wild);
+        printToWindow(win.id, `  Wild HP: ${wb.bar}`, wb.col);
+        const ab = daemonHpBar(st.active);
+        printToWindow(win.id, `  Your ${st.active.name} HP: ${ab.bar}`, ab.col);
+        printToWindow(win.id, '');
+        printToWindow(win.id, 'Battle! Commands: fight 1-4 | catch | run', 'info');
+        st.active.moves.forEach((m, i) => printToWindow(win.id, `  ${i+1}) ${m}`, 'info'));
+      } else if (roll < 0.7) {
+        // Item
+        st.items.potion = (st.items.potion || 0) + 1;
+        printToWindow(win.id, 'You found a Potion!', 'success');
+        st.locationLevel = Math.min(st.locationLevel + 1, 50);
+      } else {
+        printToWindow(win.id, 'Nothing happened... the path is quiet.', 'info');
+        st.locationLevel = Math.min(st.locationLevel + 1, 50);
+      }
+      return;
+    }
+    printToWindow(win.id, 'Unknown command. Type "help"', 'warn');
+    return;
+  }
+
+  // Battle phase
+  if (st.phase === 'battle') {
+    if (cmd === 'run') {
+      const fled = Math.random() > 0.4;
+      if (fled) {
+        printToWindow(win.id, 'Got away safely!', 'success');
+        st.phase = 'explore';
+        st.wild = null;
+      } else {
+        printToWindow(win.id, "Can't escape!", 'err');
+        // enemy attacks
+        const dmg = Math.max(1, st.wild.atk - st.active.def + Math.floor(Math.random() * 4));
+        st.active.hp = Math.max(0, st.active.hp - dmg);
+        printToWindow(win.id, `${st.wild.name} used ${st.wild.moves[0]}! -${dmg} HP`, 'err');
+        if (st.active.hp === 0) { rdHandleFaint(win); }
+      }
+      return;
+    }
+    if (cmd === 'catch') {
+      const catchRate = 0.3 + (1 - st.wild.hp / st.wild.maxHp) * 0.5;
+      if (Math.random() < catchRate) {
+        st.wild.caught = true;
+        if (st.party.length < 6) {
+          st.party.push(st.wild);
+          printToWindow(win.id, `Caught ${st.wild.name}! Added to party.`, 'success');
+        } else {
+          printToWindow(win.id, `Caught ${st.wild.name}! Party full — released.`, 'success');
+        }
+        st.phase = 'explore'; st.wild = null;
+      } else {
+        printToWindow(win.id, `${st.wild.name} broke free!`, 'warn');
+        // enemy attacks
+        const dmg = Math.max(1, st.wild.atk - st.active.def + Math.floor(Math.random() * 3));
+        st.active.hp = Math.max(0, st.active.hp - dmg);
+        printToWindow(win.id, `${st.wild.name} used ${st.wild.moves[1] || st.wild.moves[0]}! -${dmg} HP`, 'err');
+        if (st.active.hp === 0) { rdHandleFaint(win); }
+      }
+      return;
+    }
+    if (cmd === 'fight' && parts[1]) {
+      const moveIdx = Math.min(Math.max(parseInt(parts[1]) - 1, 0), 3);
+      const moveName = st.active.moves[moveIdx] || st.active.moves[0];
+      const playerDmg = Math.max(1, st.active.atk - Math.floor(st.wild.def / 2) + Math.floor(Math.random() * 5));
+      st.wild.hp = Math.max(0, st.wild.hp - playerDmg);
+      printToWindow(win.id, `${st.active.name} used ${moveName}! -${playerDmg} HP`, 'success');
+      const wb = daemonHpBar(st.wild);
+      printToWindow(win.id, `  Wild HP: ${wb.bar}`, wb.col);
+
+      if (st.wild.hp === 0) {
+        const xp = 10 + st.wild.level * 5;
+        st.active.xp += xp;
+        printToWindow(win.id, `${st.wild.name} fainted! +${xp} XP`, 'success');
+        // Level up check
+        if (st.active.xp >= st.active.xpNeeded) {
+          st.active.level++;
+          st.active.xp -= st.active.xpNeeded;
+          st.active.xpNeeded = st.active.level * 20;
+          st.active.maxHp += 3; st.active.hp = st.active.maxHp;
+          st.active.atk += 1; st.active.def += 1;
+          printToWindow(win.id, `${st.active.name} grew to Lv.${st.active.level}!`, 'sys');
+        }
+        st.phase = 'explore'; st.wild = null;
+        return;
+      }
+
+      // Enemy turn
+      const eMoveIdx = Math.floor(Math.random() * st.wild.moves.length);
+      const eMoveName = st.wild.moves[eMoveIdx];
+      const enemyDmg = Math.max(1, st.wild.atk - Math.floor(st.active.def / 2) + Math.floor(Math.random() * 4));
+      st.active.hp = Math.max(0, st.active.hp - enemyDmg);
+      printToWindow(win.id, `${st.wild.name} used ${eMoveName}! -${enemyDmg} HP`, 'err');
+      const ab = daemonHpBar(st.active);
+      printToWindow(win.id, `  Your HP: ${ab.bar}`, ab.col);
+      if (st.active.hp === 0) { rdHandleFaint(win); }
+      else {
+        printToWindow(win.id, 'fight 1-4 | catch | run', 'info');
+      }
+      return;
+    }
+    printToWindow(win.id, 'fight 1-4 | catch | run', 'warn');
+    return;
+  }
+}
+
+function rdHandleFaint(win) {
+  const st = win.rdState;
+  printToWindow(win.id, `${st.active.name} fainted!`, 'err');
+  // Find next healthy daemon
+  const next = st.party.find(d => d.hp > 0 && d !== st.active);
+  if (next) {
+    st.active = next;
+    printToWindow(win.id, `Go! ${next.name}!`, 'warn');
+    st.phase = 'battle';
+  } else {
+    printToWindow(win.id, 'All daemons fainted! Blacked out...', 'err');
+    st.party.forEach(d => { d.hp = Math.floor(d.maxHp * 0.3); });
+    st.active = st.party[0];
+    st.phase = 'explore';
+    st.wild = null;
+    printToWindow(win.id, 'Party partially healed. Explore to continue.', 'info');
+  }
+}
+
+/* ============================================================
+   SYNTH APP  — Web Audio synthesizer
+   ============================================================ */
+const SYNTH_WAVEFORMS = { core: 'sine', pipeline: 'sawtooth', integrations: 'square', productivity: 'triangle', devtools: 'square' };
+
+function bootSynth(win) {
+  win.synthState = {
+    audioCtx: null,
+    nodes: [],
+    bpm: 120,
+    playing: false,
+    lastCard: null,
+  };
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║        ORAPPTER SYNTH  v1.0.0        ║', 'sys');
+  printToWindow(win.id, '║   Agent Cards → Sound Synthesis      ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  play @rapp/basic-agent   — play a card tone', 'info');
+  printToWindow(win.id, '  chord c1 c2 c3           — play 3 cards together', 'info');
+  printToWindow(win.id, '  sequence c1 c2 c3        — play cards in sequence', 'info');
+  printToWindow(win.id, '  bpm 120                  — set tempo', 'info');
+  printToWindow(win.id, '  stop                     — stop all sound', 'info');
+  printToWindow(win.id, '');
+}
+
+function synthGetOrCreateCtx(win) {
+  if (!win.synthState.audioCtx) {
+    try { win.synthState.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch(e) { return null; }
+  }
+  if (win.synthState.audioCtx.state === 'suspended') win.synthState.audioCtx.resume();
+  return win.synthState.audioCtx;
+}
+
+function synthCardToParams(cardName) {
+  const hash = seedHash(cardName);
+  const rng = mulberry32(hash);
+  const freq = 200 + Math.floor(rng() * 600);
+  const gain = 0.15 + rng() * 0.25;
+  const parts = cardName.split('/');
+  const slug = parts[1] || parts[0];
+  const agent = REGISTRY.agents.find(a => a.name === cardName || a.slug === slug);
+  const cat = agent ? (agent.category || 'core') : DAEMON_TYPES[Math.floor(rng() * DAEMON_TYPES.length)];
+  const waveform = SYNTH_WAVEFORMS[cat] || 'sine';
+  return { freq, gain, waveform, cat };
+}
+
+function synthPlayTone(ctx, freq, waveform, gain, duration, startTime) {
+  const osc = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  osc.type = waveform;
+  osc.frequency.setValueAtTime(freq, startTime);
+  gainNode.gain.setValueAtTime(0, startTime);
+  gainNode.gain.linearRampToValueAtTime(gain, startTime + 0.02);
+  gainNode.gain.linearRampToValueAtTime(0, startTime + duration - 0.05);
+  osc.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  osc.start(startTime);
+  osc.stop(startTime + duration);
+  return osc;
+}
+
+function synthAsciiWave(waveform, freq) {
+  const waves = {
+    sine:     '∿∿∿∿∿∿∿∿∿∿∿∿',
+    sawtooth: '/|/|/|/|/|/|',
+    square:   '⊓_⊓_⊓_⊓_⊓_',
+    triangle: '/\\/\\/\\/\\/\\',
+  };
+  return `[${waves[waveform] || '~~~~~~~'}] ${freq}Hz`;
+}
+
+function handleSynthInput(win, src) {
+  const st = win.synthState;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (cmd === 'stop') {
+    if (st.audioCtx) { st.audioCtx.close(); st.audioCtx = null; }
+    st.nodes = [];
+    printToWindow(win.id, 'All sound stopped.', 'info');
+    return;
+  }
+
+  if (cmd === 'bpm' && parts[1]) {
+    const b = parseInt(parts[1]);
+    if (b > 0 && b < 500) { st.bpm = b; printToWindow(win.id, `BPM set to ${b}`, 'success'); }
+    else printToWindow(win.id, 'BPM must be 1-499', 'warn');
+    return;
+  }
+
+  if (cmd === 'play' && parts[1]) {
+    const ctx = synthGetOrCreateCtx(win);
+    if (!ctx) { printToWindow(win.id, 'Web Audio not available in this browser', 'err'); return; }
+    const p = synthCardToParams(parts[1]);
+    synthPlayTone(ctx, p.freq, p.waveform, p.gain, 1.5, ctx.currentTime);
+    printToWindow(win.id, `Playing: ${parts[1]}`, 'success');
+    printToWindow(win.id, `  Wave: ${synthAsciiWave(p.waveform, p.freq)}`, 'result');
+    printToWindow(win.id, `  Type: ${p.waveform}  Gain: ${p.gain.toFixed(2)}  Cat: ${p.cat}`, 'info');
+    return;
+  }
+
+  if (cmd === 'chord' && parts.length >= 2) {
+    const ctx = synthGetOrCreateCtx(win);
+    if (!ctx) { printToWindow(win.id, 'Web Audio not available', 'err'); return; }
+    const cards = parts.slice(1);
+    cards.forEach(c => {
+      const p = synthCardToParams(c);
+      synthPlayTone(ctx, p.freq, p.waveform, p.gain * 0.7, 2, ctx.currentTime);
+    });
+    printToWindow(win.id, `Chord: ${cards.join(' + ')}`, 'success');
+    cards.forEach(c => {
+      const p = synthCardToParams(c);
+      printToWindow(win.id, `  ${c}: ${synthAsciiWave(p.waveform, p.freq)}`, 'result');
+    });
+    return;
+  }
+
+  if (cmd === 'sequence' && parts.length >= 2) {
+    const ctx = synthGetOrCreateCtx(win);
+    if (!ctx) { printToWindow(win.id, 'Web Audio not available', 'err'); return; }
+    const cards = parts.slice(1);
+    const beatDur = 60 / st.bpm;
+    printToWindow(win.id, `Sequence @ ${st.bpm}BPM:`, 'success');
+    cards.forEach((c, i) => {
+      const p = synthCardToParams(c);
+      synthPlayTone(ctx, p.freq, p.waveform, p.gain, beatDur * 0.9, ctx.currentTime + i * beatDur);
+      printToWindow(win.id, `  [${i+1}] ${c} ${synthAsciiWave(p.waveform, p.freq)}`, 'result');
+    });
+    return;
+  }
+
+  printToWindow(win.id, 'Commands: play <card> | chord c1 c2 c3 | sequence c1 c2 | bpm N | stop', 'info');
+}
+
+/* ============================================================
+   RADIO APP  — AI Radio Station
+   ============================================================ */
+const RADIO_CHANNELS = [
+  { freq: '88.1', name: 'Core FM',        cat: 'core',         desc: 'The root of all signal. Pure agent infrastructure.' },
+  { freq: '91.5', name: 'Pipeline Radio', cat: 'pipeline',     desc: 'Data flowing end to end. Never skips a beat.' },
+  { freq: '94.7', name: 'Sales Wave',     cat: 'b2b_sales',    desc: 'Conversions happen here. Pitch-perfect broadcast.' },
+  { freq: '97.9', name: 'DevTools FM',    cat: 'devtools',     desc: 'Debug beats. Code drops. Stack traces remixed.' },
+  { freq: '101.3',name: 'Productivity+', cat: 'productivity',  desc: 'Deep work. Focus frequencies. No interruptions.' },
+  { freq: '104.5',name: 'IntegrationZ',  cat: 'integrations',  desc: 'Every API talking to every other API.' },
+  { freq: '107.1',name: 'Health Hz',     cat: 'healthcare',    desc: 'Wellness frequencies. Healing data streams.' },
+];
+
+const RADIO_DJ_LINES = [
+  'You are locked in on {freq} — {name}.',
+  'This next segment brought to you by {name}.',
+  'Riding the {cat} frequencies tonight.',
+  'No static. Pure signal. This is {name}.',
+  'Coming up next — agents so clean they parse themselves.',
+  'The feed is live. The registry never sleeps.',
+  'Offline-first, always-on. This is your {cat} channel.',
+];
+
+function radioGenBroadcast(channel, agent) {
+  const dj = RADIO_DJ_LINES[Math.floor(Math.random() * RADIO_DJ_LINES.length)]
+    .replace('{freq}', channel.freq)
+    .replace('{name}', channel.name)
+    .replace('{cat}', channel.cat);
+  const agentLine = agent
+    ? `Now featuring: ${agent.display_name || agent.name} — "${(agent.description || '').slice(0, 60)}"`
+    : `Broadcasting live from the ${channel.cat} district.`;
+  const tags = agent && agent.tags ? `  Tags: ${agent.tags.slice(0, 4).join(', ')}` : '';
+  return [dj, agentLine, tags].filter(Boolean).join('\n');
+}
+
+function radioAsciiDisplay(ch) {
+  const bar = '|'.repeat(12);
+  return [
+    '  ┌──────────────────────────────────────┐',
+    `  │  ${('FM ' + ch.freq).padEnd(8)}  ${ch.name.padEnd(20)}  │`,
+    `  │  ${bar}  [ON AIR]              │`,
+    `  │  ${ch.desc.slice(0, 38).padEnd(38)}  │`,
+    '  └──────────────────────────────────────┘',
+  ].join('\n');
+}
+
+function bootRadio(win) {
+  win.radioState = {
+    channelIdx: 0,
+    tuned: RADIO_CHANNELS[0],
+    recordings: [],
+  };
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║         ORAPPTER RADIO  v1.0.0       ║', 'sys');
+  printToWindow(win.id, '║   AI-generated radio. Always on.     ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, radioAsciiDisplay(RADIO_CHANNELS[0]));
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands: list | next | prev | tune @card | record | broadcast', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleRadioInput(win, src) {
+  const st = win.radioState;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (cmd === 'list') {
+    printToWindow(win.id, 'Available channels:', 'info');
+    RADIO_CHANNELS.forEach((ch, i) => {
+      const mark = (i === st.channelIdx) ? '>> ' : '   ';
+      printToWindow(win.id, `${mark}${ch.freq.padEnd(6)} ${ch.name.padEnd(18)} [${ch.cat}]`, i === st.channelIdx ? 'success' : 'result');
+    });
+    return;
+  }
+
+  if (cmd === 'next') {
+    st.channelIdx = (st.channelIdx + 1) % RADIO_CHANNELS.length;
+    st.tuned = RADIO_CHANNELS[st.channelIdx];
+    printToWindow(win.id, radioAsciiDisplay(st.tuned));
+    const broadcast = radioGenBroadcast(st.tuned, null);
+    printToWindow(win.id, broadcast, 'info');
+    return;
+  }
+
+  if (cmd === 'prev') {
+    st.channelIdx = (st.channelIdx - 1 + RADIO_CHANNELS.length) % RADIO_CHANNELS.length;
+    st.tuned = RADIO_CHANNELS[st.channelIdx];
+    printToWindow(win.id, radioAsciiDisplay(st.tuned));
+    const broadcast = radioGenBroadcast(st.tuned, null);
+    printToWindow(win.id, broadcast, 'info');
+    return;
+  }
+
+  if (cmd === 'tune' && parts[1]) {
+    const cardName = parts[1];
+    const agent = REGISTRY.agents.find(a => a.name === cardName);
+    const cat = agent ? (agent.category || 'core') : 'core';
+    const matchCh = RADIO_CHANNELS.find(ch => ch.cat === cat) || RADIO_CHANNELS[0];
+    const idx = RADIO_CHANNELS.indexOf(matchCh);
+    st.channelIdx = idx;
+    st.tuned = matchCh;
+    st.lastAgent = agent || null;
+    printToWindow(win.id, radioAsciiDisplay(matchCh));
+    printToWindow(win.id, radioGenBroadcast(matchCh, agent), 'info');
+    if (agent) {
+      printToWindow(win.id, `  Version: v${agent.version || '1.0.0'}  Tier: ${agent.quality_tier || 'community'}`, 'result');
+    }
+    return;
+  }
+
+  if (cmd === 'broadcast') {
+    const broadcast = radioGenBroadcast(st.tuned, st.lastAgent || null);
+    printToWindow(win.id, broadcast, 'success');
+    return;
+  }
+
+  if (cmd === 'record') {
+    const broadcast = radioGenBroadcast(st.tuned, st.lastAgent || null);
+    st.recordings.push({ ch: st.tuned.name, text: broadcast, time: new Date().toLocaleTimeString() });
+    printToWindow(win.id, `Recorded! (${st.recordings.length} total)`, 'success');
+    printToWindow(win.id, broadcast, 'result');
+    return;
+  }
+
+  if (cmd === 'recordings') {
+    if (!st.recordings.length) { printToWindow(win.id, 'No recordings yet. Use "record".', 'warn'); return; }
+    st.recordings.forEach((r, i) => {
+      printToWindow(win.id, `[${i+1}] ${r.time} — ${r.ch}`, 'info');
+      printToWindow(win.id, r.text, 'result');
+    });
+    return;
+  }
+
+  printToWindow(win.id, 'Commands: list | next | prev | tune @card | broadcast | record | recordings', 'info');
+}
+
+/* ============================================================
+   CANVAS APP  — ASCII drawing
+   ============================================================ */
+function bootCanvas(win) {
+  win.canvasState = {
+    w: 40, h: 20,
+    grid: null,
+  };
+  win.canvasState.grid = makeCanvasGrid(40, 20);
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║         ORAPPTER CANVAS v1.0.0       ║', 'sys');
+  printToWindow(win.id, '║   ASCII drawing. No pixels needed.   ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands: new W H | dot X Y char | line X1 Y1 X2 Y2 char', 'info');
+  printToWindow(win.id, '          rect X1 Y1 X2 Y2 char | circle CX CY R char', 'info');
+  printToWindow(win.id, '          text X Y words... | fill X Y char | show | clear', 'info');
+  printToWindow(win.id, '          stamp @card X Y', 'info');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Canvas: 40x20 (type "show" to render)', 'success');
+}
+
+function makeCanvasGrid(w, h) {
+  return Array.from({ length: h }, () => Array(w).fill(' '));
+}
+
+function renderCanvas(win) {
+  const cs = win.canvasState;
+  const border = '+' + '-'.repeat(cs.w) + '+';
+  printToWindow(win.id, border, 'sys');
+  for (let y = 0; y < cs.h; y++) {
+    printToWindow(win.id, '|' + cs.grid[y].join('') + '|', 'result');
+  }
+  printToWindow(win.id, border, 'sys');
+}
+
+function canvasSet(cs, x, y, ch) {
+  x = Math.round(x); y = Math.round(y);
+  if (x >= 0 && x < cs.w && y >= 0 && y < cs.h) cs.grid[y][x] = ch[0] || ' ';
+}
+
+function canvasBresenham(cs, x0, y0, x1, y1, ch) {
+  x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1);
+  const dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0);
+  const sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+  let err = dx - dy;
+  let cx = x0, cy = y0;
+  for (let i = 0; i < 1000; i++) {
+    canvasSet(cs, cx, cy, ch);
+    if (cx === x1 && cy === y1) break;
+    const e2 = 2 * err;
+    if (e2 > -dy) { err -= dy; cx += sx; }
+    if (e2 < dx) { err += dx; cy += sy; }
+  }
+}
+
+function canvasFloodFill(cs, x, y, ch) {
+  x = Math.round(x); y = Math.round(y);
+  if (x < 0 || x >= cs.w || y < 0 || y >= cs.h) return;
+  const target = cs.grid[y][x];
+  if (target === ch[0]) return;
+  const stack = [[x, y]];
+  let iters = 0;
+  while (stack.length && iters < 2000) {
+    iters++;
+    const [cx, cy] = stack.pop();
+    if (cx < 0 || cx >= cs.w || cy < 0 || cy >= cs.h) continue;
+    if (cs.grid[cy][cx] !== target) continue;
+    cs.grid[cy][cx] = ch[0];
+    stack.push([cx+1,cy],[cx-1,cy],[cx,cy+1],[cx,cy-1]);
+  }
+}
+
+function handleCanvasInput(win, src) {
+  const cs = win.canvasState;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (cmd === 'new') {
+    const w = Math.min(parseInt(parts[1]) || 40, 80);
+    const h = Math.min(parseInt(parts[2]) || 20, 40);
+    cs.w = w; cs.h = h;
+    cs.grid = makeCanvasGrid(w, h);
+    printToWindow(win.id, `New canvas: ${w}x${h}`, 'success');
+    return;
+  }
+
+  if (cmd === 'show') { renderCanvas(win); return; }
+
+  if (cmd === 'clear') {
+    cs.grid = makeCanvasGrid(cs.w, cs.h);
+    printToWindow(win.id, 'Canvas cleared.', 'success');
+    return;
+  }
+
+  if (cmd === 'dot' && parts.length >= 4) {
+    const ch = parts[3];
+    canvasSet(cs, parseInt(parts[1]), parseInt(parts[2]), ch);
+    printToWindow(win.id, `Dot at (${parts[1]},${parts[2]}) with "${ch}"`, 'success');
+    return;
+  }
+
+  if (cmd === 'line' && parts.length >= 6) {
+    const ch = parts[5];
+    canvasBresenham(cs, parseInt(parts[1]), parseInt(parts[2]), parseInt(parts[3]), parseInt(parts[4]), ch);
+    printToWindow(win.id, `Line drawn with "${ch}"`, 'success');
+    return;
+  }
+
+  if (cmd === 'rect' && parts.length >= 6) {
+    const x1 = parseInt(parts[1]), y1 = parseInt(parts[2]);
+    const x2 = parseInt(parts[3]), y2 = parseInt(parts[4]);
+    const ch = parts[5];
+    for (let x = x1; x <= x2; x++) { canvasSet(cs, x, y1, ch); canvasSet(cs, x, y2, ch); }
+    for (let y = y1; y <= y2; y++) { canvasSet(cs, x1, y, ch); canvasSet(cs, x2, y, ch); }
+    printToWindow(win.id, `Rect (${x1},${y1})-(${x2},${y2}) with "${ch}"`, 'success');
+    return;
+  }
+
+  if (cmd === 'circle' && parts.length >= 5) {
+    const cx = parseInt(parts[1]), cy = parseInt(parts[2]);
+    const r = parseInt(parts[3]), ch = parts[4];
+    for (let angle = 0; angle < 360; angle++) {
+      const rad = angle * Math.PI / 180;
+      canvasSet(cs, Math.round(cx + r * Math.cos(rad)), Math.round(cy + r * 0.5 * Math.sin(rad)), ch);
+    }
+    printToWindow(win.id, `Circle at (${cx},${cy}) r=${r} with "${ch}"`, 'success');
+    return;
+  }
+
+  if (cmd === 'text' && parts.length >= 4) {
+    const x = parseInt(parts[1]), y = parseInt(parts[2]);
+    const text = parts.slice(3).join(' ');
+    for (let i = 0; i < text.length; i++) canvasSet(cs, x + i, y, text[i]);
+    printToWindow(win.id, `Text "${text}" at (${x},${y})`, 'success');
+    return;
+  }
+
+  if (cmd === 'fill' && parts.length >= 4) {
+    const ch = parts[3];
+    canvasFloodFill(cs, parseInt(parts[1]), parseInt(parts[2]), ch);
+    printToWindow(win.id, `Flood fill at (${parts[1]},${parts[2]}) with "${ch}"`, 'success');
+    return;
+  }
+
+  if (cmd === 'stamp' && parts[1]) {
+    const cardName = parts[1];
+    const x = parseInt(parts[2]) || 1;
+    const y = parseInt(parts[3]) || 1;
+    const agent = REGISTRY.agents.find(a => a.name === cardName);
+    const label = agent ? (agent.display_name || agent.name) : cardName;
+    const short = label.slice(0, cs.w - x - 4);
+    const tier = agent ? (agent.quality_tier || 'cmty')[0].toUpperCase() : '?';
+    canvasBresenham(cs, x, y, x + short.length + 3, y, '-');
+    canvasBresenham(cs, x, y + 3, x + short.length + 3, y + 3, '-');
+    for (let ly = y; ly <= y + 3; ly++) { canvasSet(cs, x, ly, '|'); canvasSet(cs, x + short.length + 3, ly, '|'); }
+    for (let i = 0; i < short.length; i++) canvasSet(cs, x + 1 + i, y + 1, short[i]);
+    canvasSet(cs, x + 1, y + 2, tier);
+    printToWindow(win.id, `Stamped "${short}" at (${x},${y})`, 'success');
+    return;
+  }
+
+  printToWindow(win.id, 'new W H | dot X Y ch | line x1 y1 x2 y2 ch | rect x1 y1 x2 y2 ch | circle cx cy r ch | text X Y words | fill X Y ch | stamp @card X Y | show | clear', 'info');
+}
+
+/* ============================================================
+   TAMAGOTCHI APP  — Virtual agent pet
+   ============================================================ */
+const TAMA_FACES = {
+  happy:   '  \\(^▽^)/',
+  neutral: '   (=_=) ',
+  sad:     '   (;_;) ',
+  hungry:  '   (*`o´)',
+  tired:   '   (-_-) zZ',
+  dead:    '   (x_x) ',
+};
+
+function tamaGetFace(st) {
+  if (!st.alive) return TAMA_FACES.dead;
+  if (st.hunger > 70) return TAMA_FACES.hungry;
+  if (st.energy < 20) return TAMA_FACES.tired;
+  if (st.happiness > 60 && st.hunger < 40) return TAMA_FACES.happy;
+  if (st.happiness < 30 || st.hunger > 50) return TAMA_FACES.sad;
+  return TAMA_FACES.neutral;
+}
+
+function tamaAgeLabel(xp) {
+  if (xp < 100) return 'Baby';
+  if (xp < 300) return 'Teen';
+  return 'Adult';
+}
+
+function tamaTick(st) {
+  // Each interaction decays stats slightly
+  st.hunger = Math.min(100, st.hunger + 5);
+  st.happiness = Math.max(0, st.happiness - 3);
+  st.energy = Math.max(0, st.energy - 2);
+  if (st.hunger >= 100 || st.energy === 0) { st.alive = false; }
+}
+
+function bootTamagotchi(win) {
+  win.tamaState = {
+    adopted: false,
+    name: '',
+    agent: null,
+    hunger: 30,
+    happiness: 50,
+    energy: 80,
+    xp: 0,
+    alive: true,
+    interactions: 0,
+  };
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║       ORAPPTER TAMAGOTCHI v1.0.0     ║', 'sys');
+  printToWindow(win.id, '║   Virtual agent pet. Keep it alive.  ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Adopt an agent as your virtual pet:', 'info');
+  printToWindow(win.id, '  adopt @rapp/basic-agent', 'info');
+  printToWindow(win.id, '  adopt @kody/deal-desk', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleTamagotchiInput(win, src) {
+  const st = win.tamaState;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (cmd === 'adopt' && parts[1]) {
+    const cardName = parts[1];
+    const agent = REGISTRY.agents.find(a => a.name === cardName);
+    const name = agent ? (agent.display_name || agent.name) : cardName;
+    st.adopted = true;
+    st.name = name.slice(0, 16);
+    st.agent = agent || null;
+    st.hunger = 30; st.happiness = 60; st.energy = 80; st.xp = 0; st.alive = true;
+    printToWindow(win.id, `You adopted ${st.name}!`, 'success');
+    printToWindow(win.id, tamaGetFace(st), 'sys');
+    printToWindow(win.id, '');
+    printToWindow(win.id, 'Commands: status | feed | play | train | sleep', 'info');
+    return;
+  }
+
+  if (!st.adopted) {
+    printToWindow(win.id, 'Adopt a pet first: adopt @card/name', 'warn');
+    return;
+  }
+
+  if (!st.alive) {
+    printToWindow(win.id, 'Your pet is gone... adopt a new one.', 'err');
+    printToWindow(win.id, tamaGetFace(st), 'sys');
+    if (cmd === 'adopt' && parts[1]) { /* handled above */ }
+    return;
+  }
+
+  tamaTick(st);
+  st.interactions++;
+
+  if (cmd === 'status') {
+    printToWindow(win.id, `${st.name} — ${tamaAgeLabel(st.xp)} (${st.xp} XP)`, 'sys');
+    printToWindow(win.id, tamaGetFace(st), 'success');
+    printToWindow(win.id, `  Hunger:    ${'#'.repeat(Math.floor(st.hunger/10))}${'.'.repeat(10-Math.floor(st.hunger/10))} ${st.hunger}%`, st.hunger > 70 ? 'err' : 'info');
+    printToWindow(win.id, `  Happiness: ${'#'.repeat(Math.floor(st.happiness/10))}${'.'.repeat(10-Math.floor(st.happiness/10))} ${st.happiness}%`, st.happiness < 30 ? 'warn' : 'info');
+    printToWindow(win.id, `  Energy:    ${'#'.repeat(Math.floor(st.energy/10))}${'.'.repeat(10-Math.floor(st.energy/10))} ${st.energy}%`, st.energy < 20 ? 'warn' : 'info');
+    return;
+  }
+
+  if (cmd === 'feed') {
+    st.hunger = Math.max(0, st.hunger - 25);
+    printToWindow(win.id, `${st.name} ate! Hunger: ${st.hunger}%`, 'success');
+    printToWindow(win.id, tamaGetFace(st), 'sys');
+    return;
+  }
+
+  if (cmd === 'play') {
+    st.happiness = Math.min(100, st.happiness + 20);
+    st.energy = Math.max(0, st.energy - 10);
+    st.xp += 10;
+    printToWindow(win.id, `Played with ${st.name}! Happiness: ${st.happiness}% (+10 XP)`, 'success');
+    printToWindow(win.id, tamaGetFace(st), 'sys');
+    return;
+  }
+
+  if (cmd === 'train') {
+    st.energy = Math.max(0, st.energy - 15);
+    st.xp += 25;
+    st.hunger = Math.min(100, st.hunger + 8);
+    printToWindow(win.id, `Trained ${st.name}! +25 XP  Energy: ${st.energy}%`, 'success');
+    printToWindow(win.id, `  Age: ${tamaAgeLabel(st.xp)} (${st.xp} XP)`, 'result');
+    printToWindow(win.id, tamaGetFace(st), 'sys');
+    return;
+  }
+
+  if (cmd === 'sleep') {
+    st.energy = Math.min(100, st.energy + 40);
+    st.happiness = Math.max(0, st.happiness - 5);
+    printToWindow(win.id, `${st.name} is resting... Energy: ${st.energy}%`, 'info');
+    printToWindow(win.id, '   (-_-) zZ zZ zZ', 'sys');
+    return;
+  }
+
+  printToWindow(win.id, 'adopt @card | status | feed | play | train | sleep', 'info');
+}
+
+/* ============================================================
+   GARDEN APP  — Plant agent seeds
+   ============================================================ */
+const GARDEN_STAGES = ['.', 'i', 'Y', '*', 'T'];
+const GARDEN_STAGE_NAMES = ['Seed', 'Sprout', 'Growing', 'Blooming', 'Tree'];
+const GARDEN_CAT_CHARS = {
+  devtools: '#', pipeline: '~', integrations: '@',
+  productivity: '+', core: 'O', b2b_sales: '$', healthcare: '+',
+};
+
+function makeGardenPlot() {
+  return { agent: null, name: '', stage: 0, watered: 0, harvested: false, cat: 'core' };
+}
+
+function gardenRender(win) {
+  const plots = win.gardenState.plots;
+  printToWindow(win.id, '  ┌─────────┬─────────┬─────────┐', 'sys');
+  for (let row = 0; row < 3; row++) {
+    let plantRow = '  │';
+    let labelRow = '  │';
+    for (let col = 0; col < 3; col++) {
+      const idx = row * 3 + col;
+      const p = plots[idx];
+      const ch = p.agent ? GARDEN_STAGES[p.stage] : ' ';
+      const catCh = p.agent ? (GARDEN_CAT_CHARS[p.cat] || '.') : ' ';
+      plantRow += ` ${catCh}${ch}${catCh}     `.slice(0, 9) + '│';
+      const n = p.agent ? p.name.slice(0, 7).padEnd(7) : `[${idx+1}]    `.slice(0, 7);
+      labelRow += ` ${n}  │`;
+    }
+    printToWindow(win.id, plantRow, 'success');
+    printToWindow(win.id, labelRow, 'info');
+    if (row < 2) printToWindow(win.id, '  ├─────────┼─────────┼─────────┤', 'sys');
+  }
+  printToWindow(win.id, '  └─────────┴─────────┴─────────┘', 'sys');
+}
+
+function bootGarden(win) {
+  win.gardenState = {
+    plots: Array.from({ length: 9 }, makeGardenPlot),
+    harvests: [],
+  };
+  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║         ORAPPTER GARDEN v1.0.0       ║', 'sys');
+  printToWindow(win.id, '║   Plant agent seeds. Watch them grow.║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  gardenRender(win);
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands: plant @card N | water N | view | harvest N', 'info');
+  printToWindow(win.id, '  N = plot number 1-9', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleGardenInput(win, src) {
+  const gs = win.gardenState;
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (cmd === 'view') {
+    gardenRender(win);
+    const stages = gs.plots.filter(p => p.agent).map((p, i) => {
+      const idx = gs.plots.indexOf(p) + 1;
+      return `  [${idx}] ${p.name.slice(0, 12).padEnd(12)} ${GARDEN_STAGE_NAMES[p.stage]} (watered:${p.watered})`;
+    });
+    if (stages.length) stages.forEach(s => printToWindow(win.id, s, 'info'));
+    else printToWindow(win.id, '  Garden is empty. Try: plant @rapp/basic-agent 1', 'info');
+    return;
+  }
+
+  if (cmd === 'plant' && parts[1] && parts[2]) {
+    const cardName = parts[1];
+    const plotIdx = parseInt(parts[2]) - 1;
+    if (plotIdx < 0 || plotIdx >= 9) { printToWindow(win.id, 'Plot must be 1-9', 'warn'); return; }
+    const plot = gs.plots[plotIdx];
+    if (plot.agent && !plot.harvested) { printToWindow(win.id, `Plot ${plotIdx+1} is occupied. Harvest first.`, 'warn'); return; }
+    const agent = REGISTRY.agents.find(a => a.name === cardName);
+    const cat = agent ? (agent.category || 'core') : 'core';
+    const name = agent ? (agent.display_name || agent.name) : cardName;
+    plot.agent = cardName;
+    plot.name = name.slice(0, 8);
+    plot.stage = 0;
+    plot.watered = 0;
+    plot.harvested = false;
+    plot.cat = cat;
+    printToWindow(win.id, `Planted ${name} in plot ${plotIdx+1}!`, 'success');
+    printToWindow(win.id, `  Stage: ${GARDEN_STAGE_NAMES[0]} (${GARDEN_STAGES[0]})  Cat: ${cat}`, 'info');
+    return;
+  }
+
+  if (cmd === 'water' && parts[1]) {
+    const plotIdx = parseInt(parts[1]) - 1;
+    if (plotIdx < 0 || plotIdx >= 9) { printToWindow(win.id, 'Plot must be 1-9', 'warn'); return; }
+    const plot = gs.plots[plotIdx];
+    if (!plot.agent) { printToWindow(win.id, `Plot ${plotIdx+1} is empty. Plant something first.`, 'warn'); return; }
+    if (plot.harvested) { printToWindow(win.id, `Plot ${plotIdx+1} has been harvested.`, 'warn'); return; }
+    plot.watered++;
+    const growThresh = 2;
+    if (plot.watered % growThresh === 0 && plot.stage < GARDEN_STAGES.length - 1) {
+      plot.stage++;
+      printToWindow(win.id, `Plot ${plotIdx+1} grew! ${plot.name}: ${GARDEN_STAGE_NAMES[plot.stage - 1]} → ${GARDEN_STAGE_NAMES[plot.stage]} ${GARDEN_STAGES[plot.stage]}`, 'success');
+    } else {
+      printToWindow(win.id, `Watered plot ${plotIdx+1}. (${plot.watered} total, needs ${growThresh - (plot.watered % growThresh)} more to grow)`, 'info');
+    }
+    return;
+  }
+
+  if (cmd === 'harvest' && parts[1]) {
+    const plotIdx = parseInt(parts[1]) - 1;
+    if (plotIdx < 0 || plotIdx >= 9) { printToWindow(win.id, 'Plot must be 1-9', 'warn'); return; }
+    const plot = gs.plots[plotIdx];
+    if (!plot.agent) { printToWindow(win.id, `Plot ${plotIdx+1} is empty.`, 'warn'); return; }
+    if (plot.harvested) { printToWindow(win.id, `Plot ${plotIdx+1} already harvested.`, 'warn'); return; }
+    if (plot.stage < 4) { printToWindow(win.id, `${plot.name} isn't ready yet! (${GARDEN_STAGE_NAMES[plot.stage]})`, 'warn'); return; }
+    gs.harvests.push({ name: plot.name, stage: plot.stage, cat: plot.cat });
+    printToWindow(win.id, `Harvested ${plot.name}! (${GARDEN_STAGE_NAMES[plot.stage]}) — plot cleared.`, 'success');
+    printToWindow(win.id, `  Total harvests: ${gs.harvests.length}`, 'result');
+    plot.agent = null; plot.name = ''; plot.stage = 0; plot.watered = 0; plot.harvested = false;
+    return;
+  }
+
+  printToWindow(win.id, 'plant @card N | water N | view | harvest N', 'info');
 }
 
 /* ============================================================
