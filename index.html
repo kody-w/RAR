@@ -5787,10 +5787,15 @@ function forgeAsciiArt(agentName) {
 }
 
 function forgeStats(agentName) {
+  // Forged cards: use real stats + forging hash shift
+  const holo = _holoCards?.[agentName];
+  const cardStats = holo?.stats;
   const h = forgeHash(agentName, getOwnerSeed(), getTimeSeed());
   return ASCII_STAT_NAMES.map((label, i) => {
-    const seed = Math.abs((h * (i + 11) * 37) % 100);
-    const pct = 15 + (seed % 80);
+    const base = cardStats ? (cardStats[ASCII_STAT_KEYS[i]] || 50) : 50;
+    // Forging shifts stats slightly based on time/owner bond
+    const shift = ((h * (i + 11) * 37) % 15) - 7; // -7 to +7
+    const pct = Math.max(10, Math.min(100, base + shift));
     return { label, pct, color: ASCII_STAT_COLORS[i] };
   });
 }
@@ -6870,15 +6875,25 @@ const KEYWORD_GLYPHS = [
 ];
 
 // ── ASCII Terminal Card Helpers ──
-const ASCII_STAT_NAMES = ['POWER', 'SPEED', 'LOGIC', 'CHAOS', 'GUARD'];
-const ASCII_STAT_COLORS = ['#58a6ff', '#39d353', '#d2a8ff', '#f97583', '#e3b341'];
+const ASCII_STAT_NAMES = ['HP', 'ATK', 'DEF', 'SPD', 'INT'];
+const ASCII_STAT_KEYS =  ['hp', 'atk', 'def', 'spd', 'int'];
+const ASCII_STAT_COLORS = ['#f85149', '#58a6ff', '#e3b341', '#39d353', '#d2a8ff'];
 
 function asciiAgentStats(a) {
-  // Deterministic stats from agent name hash
-  const h = Array.from(a.name).reduce((acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0);
+  // Use REAL stats from holo_cards.json if available
+  const holo = _holoCards?.[a.name];
+  const cardStats = holo?.stats;
+  if (cardStats) {
+    return ASCII_STAT_NAMES.map((label, i) => {
+      const val = cardStats[ASCII_STAT_KEYS[i]] || 50;
+      return { label, pct: val, color: ASCII_STAT_COLORS[i] };
+    });
+  }
+  // Fallback: derive from mulberry32 (same algorithm as rapp_sdk.py)
+  let s = Math.abs(Array.from(a.name).reduce((acc, c) => ((acc << 5) - acc + c.charCodeAt(0)) | 0, 0));
+  function rng() { s=(s+0x6D2B79F5)>>>0; let z=s; z=Math.imul(z^(z>>>15),z|1); z=Math.imul(z+(Math.imul(z^(z>>>7),z|61)>>>0)^z,1); return((z^(z>>>14))>>>0)/4294967296; }
   return ASCII_STAT_NAMES.map((label, i) => {
-    const seed = Math.abs((h * (i + 7) * 31) % 100);
-    const pct = 20 + (seed % 75); // 20-94%
+    const pct = Math.max(10, Math.min(100, Math.floor(30 + rng() * 60)));
     return { label, pct, color: ASCII_STAT_COLORS[i] };
   });
 }

@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-06T20:38:26.085552+00:00",
+  "generated_at": "2026-04-06T20:41:36.075309+00:00",
   "stats": {
     "total_agents": 133,
     "publishers": 7,
@@ -90,7 +90,7 @@
       "_seed": 10723751930960163868,
       "_size_kb": 20.8,
       "_lines": 457,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1499,7 +1499,7 @@
       "_seed": 5020671239044998157,
       "_size_kb": 15.9,
       "_lines": 264,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3039,7 +3039,7 @@
       "_seed": 8086863952292494270,
       "_size_kb": 26.2,
       "_lines": 792,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3065,7 +3065,7 @@
       "_seed": 9916893050914225492,
       "_size_kb": 47.9,
       "_lines": 1257,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3094,7 +3094,7 @@
       "_seed": 13928955966432878815,
       "_size_kb": 39.1,
       "_lines": 1035,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3121,7 +3121,7 @@
       "_seed": 16191435701781930066,
       "_size_kb": 38.3,
       "_lines": 996,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3152,7 +3152,7 @@
       "_seed": 14025379966502974255,
       "_size_kb": 88.5,
       "_lines": 2154,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3183,7 +3183,7 @@
       "_seed": 17174429428190159959,
       "_size_kb": 58.4,
       "_lines": 1201,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3210,7 +3210,7 @@
       "_seed": 9628502902113448084,
       "_size_kb": 21.1,
       "_lines": 418,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3236,7 +3236,7 @@
       "_seed": 53027766882806255,
       "_size_kb": 6.0,
       "_lines": 149,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3263,7 +3263,7 @@
       "_seed": 4049171833047104537,
       "_size_kb": 61.2,
       "_lines": 1549,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3288,7 +3288,7 @@
       "_seed": 18264010640337544386,
       "_size_kb": 39.1,
       "_lines": 894,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3319,7 +3319,7 @@
       "_seed": 3348533564379118675,
       "_size_kb": 121.0,
       "_lines": 2984,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3345,7 +3345,7 @@
       "_seed": 2446964785980911795,
       "_size_kb": 26.7,
       "_lines": 631,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3372,7 +3372,7 @@
       "_seed": 11288900214771561238,
       "_size_kb": 54.2,
       "_lines": 1301,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3405,7 +3405,7 @@
       "_seed": 16553900515881791106,
       "_size_kb": 119.9,
       "_lines": 2468,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3459,7 +3459,7 @@
       "_seed": 15351106387627749856,
       "_size_kb": 8.4,
       "_lines": 183,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3489,7 +3489,7 @@
       "_seed": 16587187046621128947,
       "_size_kb": 10.1,
       "_lines": 245,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3515,7 +3515,7 @@
       "_seed": 1346218951730281648,
       "_size_kb": 43.7,
       "_lines": 957,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3541,7 +3541,7 @@
       "_seed": 14159894519432621052,
       "_size_kb": 10.8,
       "_lines": 255,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3597,7 +3597,7 @@
       "_seed": 10353196835552377498,
       "_size_kb": 6.3,
       "_lines": 160,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3686,7 +3686,7 @@
       "_seed": 8659210237067160174,
       "_size_kb": 6.9,
       "_lines": 175,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3711,7 +3711,7 @@
       "_seed": 18289705222458979460,
       "_size_kb": 1.2,
       "_lines": 39,
-      "_has_card": false
+      "_has_card": true
     },
     {
       "schema": "rapp-agent/1.0",
