@@ -16,7 +16,7 @@
       "method": "GET",
       "description": "Download a single agent file. The file IS the package.",
       "auth": "none",
-      "example": "{base_url}/agents/@kody/deal_desk.py"
+      "example": "{base_url}/agents/@kody/deal_desk_agent.py"
     },
     "cards": {
       "url": "{base_url}/cards/holo_cards.json",

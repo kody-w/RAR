@@ -53,7 +53,7 @@ Each agent entry has:
 - `requires_env` — environment variables needed (empty = no extra config)
 - `dependencies` — other agents this depends on
 - `quality_tier` — `community`, `verified`, or `official`
-- `_file` — file path in repo (e.g., `agents/@discreetRappers/dynamics_crud.py`)
+- `_file` — file path in repo (e.g., `agents/@discreetRappers/dynamics_crud_agent.py`)
 - `_sha256` — SHA256 hash of the file (integrity verification)
 
 ### 2. Fetch an Agent
@@ -110,13 +110,13 @@ python rapp_sdk.py init
 #    Body:  {"action": "register_binder", "payload": {"namespace": "@yourname"}}
 
 # 3. Scaffold a new agent
-python rapp_sdk.py new @yourname/my_agent
+python rapp_sdk.py new @yourname/my_cool_agent
 
 # 4. Validate + test
-python rapp_sdk.py test agents/@yourname/my_agent_agent.py
+python rapp_sdk.py test agents/@yourname/my_cool_agent.py
 
 # 5. Submit to the RAR registry
-python rapp_sdk.py submit agents/@yourname/my_agent_agent.py
+python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
 
 **Registration is required before submission.** Your binder can be public or private. You only register once.
@@ -326,14 +326,14 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 ### @kody
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
-| ContextMemory | context_memory | core | Recalls conversation history and stored memories |
-| ManageMemory | manage_memory | core | Stores facts, preferences, insights to memory |
-| GitHubAgentLibrary | github_agent_library | core | Browse, search, install agents from this repo |
+| ContextMemory | context_memory_agent | core | Recalls conversation history and stored memories |
+| ManageMemory | manage_memory_agent | core | Stores facts, preferences, insights to memory |
+| GitHubAgentLibrary | github_agent_library_agent | core | Browse, search, install agents from this repo |
 | RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry |
-| ReconDeck | recon_deck | core | Reconnaissance deck agent |
+| ReconDeck | recon_deck_agent | core | Reconnaissance deck agent |
 | Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
-| Rappterbook | rappterbook | integrations | Client for Rappterbook social network |
-| DealDesk | deal_desk | b2b_sales | Deal desk agent for B2B sales |
+| Rappterbook | rappterbook_agent | integrations | Client for Rappterbook social network |
+| DealDesk | deal_desk_agent | b2b_sales | Deal desk agent for B2B sales |
 | Rappter Engine | rappter_engine_agent | devtools | Base class for data-driven content engines |
 | Rappterpedia | rappterpedia_agent | core | Community wiki engine |
 
@@ -342,18 +342,18 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 |------|------|----------|-------------|
 | Borg | borg_agent | core | Assimilates repos and URLs into structured knowledge |
 | CardSmith | cardsmith_agent | productivity | Card design and generation |
-| PromptToVideo | prompt_to_video | productivity | Structured scenes to MP4 video rendering |
+| PromptToVideo | prompt_to_video_agent | productivity | Structured scenes to MP4 video rendering |
 
 ### @discreetRappers
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
-| RAPP | rapp_pipeline | pipeline | Full RAPP pipeline — transcript to agent |
-| AgentGenerator | agent_generator | pipeline | Auto-generates agents from configs |
-| AgentTranspiler | agent_transpiler | pipeline | Converts agents between platforms |
-| DynamicsCRUD | dynamics_crud | integrations | Dynamics 365 CRUD operations |
-| SalesAssistant | sales_assistant | integrations | Natural language sales CRM |
-| EmailDrafting | email_drafting | integrations | Email drafting via Power Automate |
-| PowerPointGenerator | powerpoint_generator | productivity | Template-based PowerPoint generation |
+| RAPP | rapp_pipeline_agent | pipeline | Full RAPP pipeline — transcript to agent |
+| AgentGenerator | agent_generator_agent | pipeline | Auto-generates agents from configs |
+| AgentTranspiler | agent_transpiler_agent | pipeline | Converts agents between platforms |
+| DynamicsCRUD | dynamics_crud_agent | integrations | Dynamics 365 CRUD operations |
+| SalesAssistant | sales_assistant_agent | integrations | Natural language sales CRM |
+| EmailDrafting | email_drafting_agent | integrations | Email drafting via Power Automate |
+| PowerPointGenerator | powerpoint_generator_agent | productivity | Template-based PowerPoint generation |
 
 ### @rapp
 | Name | Slug | Category | Description |

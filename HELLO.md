@@ -7,7 +7,7 @@
 ## 1. Summon a digital twin from 18 characters
 
 ```bash
-python rapp_sdk.py card resolve @rapp/basic-agent
+python rapp_sdk.py card resolve @rapp/basic_agent
 ```
 
 That's the root of everything. 18 characters. No database. No server. No network. The card self-assembled from just the name.
@@ -17,7 +17,7 @@ That's the root of everything. 18 characters. No database. No server. No network
 ## 2. See it's the same on every computer in the world
 
 ```bash
-python rapp_sdk.py card resolve @rapp/basic-agent --json
+python rapp_sdk.py card resolve @rapp/basic_agent --json
 ```
 
 Run this on your laptop. Run it on your phone. Run it on a computer in Tokyo. Same seed. Same stats. Same flavor text. Same card. Math doesn't change.
@@ -27,7 +27,7 @@ Run this on your laptop. Run it on your phone. Run it on a computer in Tokyo. Sa
 ## 3. Build your own agent in 5 seconds
 
 ```bash
-python rapp_sdk.py new @yourname/my-first-agent
+python rapp_sdk.py new @yourname/my_first_agent
 ```
 
 One command. You now have a working AI agent with its own trading card, manifest, documentation, and identity — all in one file.
@@ -37,7 +37,7 @@ One command. You now have a working AI agent with its own trading card, manifest
 ## 4. Prove it works — run all 9 contract tests
 
 ```bash
-python rapp_sdk.py test agents/@yourname/my_first_agent_agent.py
+python rapp_sdk.py test agents/@yourname/my_first_agent.py
 ```
 
 9 tests. They should all pass. Your agent was born valid.
@@ -47,7 +47,7 @@ python rapp_sdk.py test agents/@yourname/my_first_agent_agent.py
 ## 5. Mint your card
 
 ```bash
-python rapp_sdk.py card mint agents/@yourname/my_first_agent_agent.py
+python rapp_sdk.py card mint agents/@yourname/my_first_agent.py
 ```
 
 Your agent is now a card. Power, toughness, rarity, flavor text — all deterministically generated from the name you chose. You didn't design it. The algorithm did.
@@ -77,17 +77,17 @@ Total agents, breakdown by tier, total value. Your view of the entire ecosystem.
 ## 8. Resolve any card from just a name
 
 ```bash
-python rapp_sdk.py card resolve @kody/deal-desk
+python rapp_sdk.py card resolve @kody/deal_desk_agent
 ```
 
-16 characters. Full card. Try any agent name in the registry. They all self-assemble.
+22 characters. Full card. Try any agent name in the registry. They all self-assemble.
 
 ---
 
 ## 9. Validate any agent
 
 ```bash
-python rapp_sdk.py validate agents/@rapp/basic-agent.py
+python rapp_sdk.py validate agents/@rapp/basic_agent.py
 ```
 
 Checks the manifest, the name format, the version, the structure. Valid or not — instant answer.
@@ -99,7 +99,7 @@ Checks the manifest, the name format, the version, the structure. Valid or not �
 ```bash
 python -c "
 from rapp_sdk import resolve_card
-card = resolve_card('@rapp/basic-agent')
+card = resolve_card('@rapp/basic_agent')
 print(f'''
 This card was reconstructed from 18 characters.
 No image was downloaded. No database was queried.

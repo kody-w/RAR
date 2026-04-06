@@ -18,20 +18,20 @@ Every agent is **one `.py` file** — no separate manifest, no README, no subdir
 ### Agent structure
 
 ```
-agents/@publisher/agent-slug.py    ← entire package
+agents/@publisher/agent_slug_agent.py    ← entire package
 ```
 
 Each agent file contains:
 1. A docstring (serves as README)
 2. A `__manifest__` dict (serves as package metadata)
-3. A class inheriting `BasicAgent` from `@rapp/basic-agent`
+3. A class inheriting `BasicAgent` from `@rapp/basic_agent`
 4. A `perform(**kwargs)` method that returns a `str`
 
 ### Namespaces
 
 - `@yourname/` — GitHub username, owned forever
 - `@rapp/` — reserved for official base packages
-- Slugs are lowercase kebab-case: `my-agent.py`
+- Slugs are lowercase snake_case: `my_agent.py` (files MUST end with `_agent.py`)
 
 ### Categories
 
@@ -79,7 +79,7 @@ Optional: `quality_tier` (default `community`), `requires_env` (list of env var 
 ```python
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@yourname/my-agent",
+    "name": "@yourname/my_cool_agent",
     "version": "1.0.0",
     "display_name": "MyAgent",
     "description": "One sentence.",
@@ -88,7 +88,7 @@ __manifest__ = {
     "category": "integrations",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 ```
 

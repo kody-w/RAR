@@ -34,7 +34,7 @@ Every agent is **one `.py` file** — no separate manifest, no README, no subdir
 3. A class inheriting `BasicAgent` from `@rapp/basic_agent`
 4. A `perform(**kwargs)` method that returns a `str`
 
-Path convention: `agents/@publisher/agent-slug.py` (lowercase kebab-case)
+Path convention: `agents/@publisher/agent_slug_agent.py` (lowercase snake_case)
 
 ## Agent `__manifest__` Schema
 

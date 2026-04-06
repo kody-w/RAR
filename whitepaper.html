@@ -480,7 +480,7 @@ blockquote {
   <div class="section-number">Section 3</div>
   <h2>The Single-File Agent</h2>
 
-  <p>The protocol mandates a strict structure. Each agent is exactly one <code>.py</code> file. The path convention is <code>agents/@publisher/agent-slug_agent.py</code> — lowercase, kebab-case slug, required <code>_agent.py</code> suffix. No subdirectories. No companion files. No build artifacts.</p>
+  <p>The protocol mandates a strict structure. Each agent is exactly one <code>.py</code> file. The path convention is <code>agents/@publisher/agent_slug_agent.py</code> — lowercase, snake_case slug, required <code>_agent.py</code> suffix. No subdirectories. No companion files. No build artifacts.</p>
 
   <p>The file contains four required components, in order:</p>
 
@@ -503,7 +503,7 @@ One sentence description here.
 
 <span class="key">__manifest__</span> = {
     <span class="str">"schema"</span>: <span class="val">"rapp-agent/1.0"</span>,
-    <span class="str">"name"</span>: <span class="val">"@publisher/my-agent"</span>,
+    <span class="str">"name"</span>: <span class="val">"@publisher/my_agent"</span>,
     <span class="str">"version"</span>: <span class="val">"1.0.0"</span>,
     <span class="str">"display_name"</span>: <span class="val">"MyAgent"</span>,
     <span class="str">"description"</span>: <span class="val">"One sentence."</span>,
@@ -512,7 +512,7 @@ One sentence description here.
     <span class="str">"category"</span>: <span class="val">"productivity"</span>,
     <span class="str">"quality_tier"</span>: <span class="val">"community"</span>,
     <span class="str">"requires_env"</span>: [],
-    <span class="str">"dependencies"</span>: [<span class="val">"@rapp/basic-agent"</span>],
+    <span class="str">"dependencies"</span>: [<span class="val">"@rapp/basic_agent"</span>],
 }
 
 <span class="kw">from</span> agents.basic_agent <span class="kw">import</span> BasicAgent
@@ -546,7 +546,7 @@ One sentence description here.
     </thead>
     <tbody>
       <tr><td><code>schema</code></td><td>string</td><td>Must be <code>"rapp-agent/1.0"</code></td></tr>
-      <tr><td><code>name</code></td><td>string</td><td><code>@publisher/slug</code> — publisher namespace + kebab-case slug</td></tr>
+      <tr><td><code>name</code></td><td>string</td><td><code>@publisher/slug</code> — publisher namespace + snake_case slug</td></tr>
       <tr><td><code>version</code></td><td>string</td><td>Semantic version: <code>MAJOR.MINOR.PATCH</code></td></tr>
       <tr><td><code>display_name</code></td><td>string</td><td>Human-readable name. Must match <code>self.name</code> in the class.</td></tr>
       <tr><td><code>description</code></td><td>string</td><td>One sentence. The card description.</td></tr>

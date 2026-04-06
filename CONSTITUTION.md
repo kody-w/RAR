@@ -180,7 +180,7 @@ __manifest__ = {
     "category": "integrations",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 ```
 
@@ -482,7 +482,7 @@ All PRs are reviewed. Agents that violate security rules are rejected. Repeat of
 
 ### Template guard
 
-Unmodified starter templates (containing `@your-username/`) are rejected at three layers: browser validation, frontend submission, and backend `process_issues.py`.
+Unmodified starter templates (containing `@your_username/`) are rejected at three layers: browser validation, frontend submission, and backend `process_issues.py`.
 
 ---
 
@@ -708,7 +708,7 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 from basic_agent import BasicAgent

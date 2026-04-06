@@ -3958,8 +3958,8 @@ function switchTab(tab) {
   if (tab === 'wallet') renderWalletTab();
   if (tab === 'submit' && ghUser?.login) {
     const ta = document.getElementById('agent-code');
-    if (!ta.value || ta.value.includes('@your-username/')) {
-      ta.value = (ta.value || ta.placeholder).replaceAll('@your-username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
+    if (!ta.value || ta.value.includes('@your_username/')) {
+      ta.value = (ta.value || ta.placeholder).replaceAll('@your_username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
       previewManifest();
     }
   }
@@ -4790,7 +4790,7 @@ const STARTER_TEMPLATES = {
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/my_agent",
+    "name": "@your_username/my_agent",
     "version": "1.0.0",
     "display_name": "My Agent",
     "description": "A useful agent",
@@ -4829,7 +4829,7 @@ class MyAgent(BasicAgent):
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/hello_world",
+    "name": "@your_username/hello_world",
     "version": "1.0.0",
     "display_name": "Hello World",
     "description": "A friendly greeting agent that says hello.",
@@ -4868,7 +4868,7 @@ class HelloWorldAgent(BasicAgent):
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/api_caller",
+    "name": "@your_username/api_caller",
     "version": "1.0.0",
     "display_name": "API Caller",
     "description": "Calls an external API and returns the result.",
@@ -4921,7 +4921,7 @@ class APICallerAgent(BasicAgent):
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/data_processor",
+    "name": "@your_username/data_processor",
     "version": "1.0.0",
     "display_name": "Data Processor",
     "description": "Transforms and analyzes input data.",
@@ -4974,14 +4974,14 @@ class DataProcessorAgent(BasicAgent):
 };
 
 // Fingerprints of unmodified templates (check name field hasn't changed)
-const TEMPLATE_MARKER = '@your-username/';
+const TEMPLATE_MARKER = '@your_username/';
 
 function loadTemplate(key) {
   let code = STARTER_TEMPLATES[key];
   if (!code) return;
   // Auto-fill the logged-in user's namespace and name
   if (ghUser?.login) {
-    code = code.replaceAll('@your-username/', `@${ghUser.login}/`);
+    code = code.replaceAll('@your_username/', `@${ghUser.login}/`);
     code = code.replaceAll('"Your Name"', `"${ghUser.login}"`);
   }
   const ta = document.getElementById('agent-code');
@@ -5356,7 +5356,7 @@ function previewManifest() {
     if (!desc) errs.push('description required');
     if (ghUser && name && !name.startsWith(`@${ghUser.login}/`)) errs.push(`name must start with @${ghUser.login}/`);
     if (tier && !['unverified', 'community', 'experimental'].includes(tier)) errs.push('quality_tier must be "unverified", "community", or "experimental"');
-    if (code.includes('@your-username/')) errs.push('Sign in so your namespace is auto-filled');
+    if (code.includes('@your_username/')) errs.push('Sign in so your namespace is auto-filled');
     pv.style.display = 'block';
     pv.innerHTML = `<h4>Manifest Preview</h4>
       ${[['name',name],['version',ver],['display',disp],['description',desc],['author',auth],['category',cat],['tier',tier]].filter(x=>x[1]).map(x=>`<div class="fld"><span class="k">${x[0]}</span><span class="v">${esc(x[1])}</span></div>`).join('')}
@@ -5370,8 +5370,8 @@ async function submitAgent() {
   let code = document.getElementById('agent-code').value;
   if (!code.trim()) return;
   // Auto-fill namespace if still placeholder
-  if (code.includes('@your-username/')) {
-    code = code.replaceAll('@your-username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
+  if (code.includes('@your_username/')) {
+    code = code.replaceAll('@your_username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
     document.getElementById('agent-code').value = code;
   }
   const btn = document.getElementById('submit-btn');

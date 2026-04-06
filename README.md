@@ -15,10 +15,10 @@
 curl -O https://raw.githubusercontent.com/kody-w/RAR/main/rapp_sdk.py
 
 # Write your agent
-python rapp_sdk.py new @yourname/my_agent
+python rapp_sdk.py new @yourname/my_cool_agent
 
 # Submit (auto-registers your binder if needed)
-python rapp_sdk.py submit agents/@yourname/my_agent_agent.py
+python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
 
 That's it. The SDK validates, registers your binder, and creates the submission. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry.
