@@ -1357,6 +1357,48 @@ def init_binder(repo_name: str = None) -> dict:
     return result
 
 
+def _auto_register_binder(token: str, namespace: str, upstream: str) -> None:
+    """Auto-register binder on the ledger if not already registered.
+    Creates a GitHub Issue with register_binder action. Silent if already registered."""
+    # Check ledger first
+    try:
+        ledger_url = f"https://raw.githubusercontent.com/{upstream}/main/state/binder_ledger.json"
+        ledger = _fetch_json(ledger_url, token)
+        if ledger:
+            # Get GitHub username from token
+            user_data = _fetch_json("https://api.github.com/user", token)
+            username = user_data.get("login", "") if user_data else ""
+            if username and username in ledger.get("binders", {}):
+                return  # already registered
+    except Exception:
+        pass  # can't check — try to register anyway
+
+    # Register
+    body_data = {"action": "register_binder", "payload": {"namespace": namespace}}
+    issue_body = f"```json\n{json.dumps(body_data, indent=2)}\n```"
+    payload = json.dumps({
+        "title": "[RAR] register_binder",
+        "body": issue_body,
+    }).encode()
+
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{upstream}/issues",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": "RAPP-SDK/1.0",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15):
+            pass  # registration issued — pipeline will process it
+    except Exception:
+        pass  # non-fatal — submit will fail with a clear error if not registered
+
+
 def submit_agent(path: str, upstream: str = None) -> dict:
     """Submit an agent to the upstream RAR registry via GitHub Issue.
     Returns the issue URL on success."""
@@ -1386,6 +1428,10 @@ def submit_agent(path: str, upstream: str = None) -> dict:
         raise RuntimeError(
             "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
         )
+
+    # Auto-register binder if not yet registered
+    publisher = manifest["name"].split("/")[0]
+    _auto_register_binder(token, publisher, upstream)
 
     body_data = {"action": "submit_agent", "payload": {"code": code}}
     issue_body = f"```json\n{json.dumps(body_data, indent=2)}\n```"
