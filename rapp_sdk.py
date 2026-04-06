@@ -793,6 +793,7 @@ def mint_card(path: str) -> dict:
     card["tags"] = tags
     card["power"] = card["stats"]["atk"]
     card["toughness"] = card["stats"]["def"]
+    card["name_seed"] = seed_hash(name) & 0xFFFFFFFF
     card["_resolved_from"] = "manifest"
 
     return card
@@ -878,15 +879,34 @@ def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> i
 
 def resolve_card_from_seed(seed: int) -> dict:
     """
-    Reconstruct a full card from just a seed number. No registry. No network.
+    Reconstruct a card from a seed number.
 
-    The seed IS the card's DNA — forged from the agent's manifest data.
-    It encodes the agent's identity, category, tier, tag hints, and
-    dependency count. From these bits, the entire card self-assembles:
-    types, HP, stats, abilities, weakness, resistance, evolution.
+    Two modes:
+      - 32-bit name seed (< 2^32): the card's PERMANENT identity.
+        Resolves to the CURRENT version via registry lookup.
+        This is the number you memorize and share.
 
-    Share a number. See the card. Offline. Always.
+      - 64-bit full seed (>= 2^32): a SPECIFIC version's DNA.
+        Resolves to the exact card from that version, offline.
+        This is the versioned snapshot.
+
+    Share the short seed. It always points to the latest card.
     """
+    # 32-bit name seed → lookup current version in registry
+    if seed < (1 << 32):
+        try:
+            registry = fetch_registry()
+            for agent in registry.get("agents", []):
+                name_hash = seed_hash(agent["name"]) & 0xFFFFFFFF
+                if name_hash == seed:
+                    return resolve_card(agent["name"])
+        except Exception:
+            pass
+        # Not found in registry — fall through to generate a preview
+        # Pack as if it were the top 32 bits with default lower bits
+        seed = seed << 32  # name_hash only, defaults for everything else
+
+    # 64-bit full seed → unpack exact version
     # Unpack the seed DNA
     name_hash = (seed >> 32) & 0xFFFFFFFF
     cat_idx = (seed >> 27) & 0x1F
@@ -997,6 +1017,8 @@ def resolve_card_from_seed(seed: int) -> dict:
         "type_line": type_line,
         "flavor": _FLAVOR_FRAGMENTS[flavor_idx],
         "floor_pts": RARITY_FLOOR.get(rarity, 10),
+        "seed": seed,
+        "name_seed": name_hash,
         "_resolved_from": "seed",
     }
 
@@ -1041,6 +1063,7 @@ def resolve_card(name: str) -> dict:
     card["tags"] = tags
     card["power"] = card["stats"]["atk"]
     card["toughness"] = card["stats"]["def"]
+    card["name_seed"] = seed_hash(name) & 0xFFFFFFFF
     card["_resolved_from"] = "registry"
 
     return card
