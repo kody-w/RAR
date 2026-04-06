@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORAPPTER v1.0.0 — Obsidian Cartridge</title>
+<style>
+/* ============================================================
+   ORAPPTER — Obsidian Cartridge
+   Dark theme matching Obsidian's visual identity
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1e1e1e;
+  --bg-alt: #252525;
+  --bg-hover: #2d2d2d;
+  --text: #dcddde;
+  --text-muted: #888;
+  --text-faint: #555;
+  --accent: #7f6df2;
+  --accent-hover: #9a8ef5;
+  --border: #363636;
+  --sidebar-w: 240px;
+  --sidebar-r-w: 220px;
+  --topbar-h: 36px;
+  --orappter-h: 30px;
+  --tag-bg: #3a3050;
+  --code-bg: #2a2a2a;
+  --link: #7f6df2;
+  --link-hover: #b5aaff;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-doc: Georgia, "Times New Roman", serif;
+}
+
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 14px; }
+
+/* ============================================================ ORAPPTER HEADER BAR */
+#orappter-bar {
+  height: var(--orappter-h);
+  background: #111;
+  border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 100;
+  position: relative;
+}
+#orappter-brand {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+#orappter-repl-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 500px;
+}
+#orappter-repl-input {
+  flex: 1;
+  height: 20px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #c0c0ff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 0 6px;
+  outline: none;
+}
+#orappter-repl-input:focus { border-color: var(--accent); }
+#orappter-repl-input::placeholder { color: #444; }
+#orappter-repl-out {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #88ff88;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#orappter-repl-out.err { color: #ff8888; }
+
+/* ============================================================ LAYOUT */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--orappter-h));
+}
+#topbar {
+  height: var(--topbar-h);
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+#vault-name {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-weight: 500;
+}
+#doc-title-display {
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#search-input {
+  width: 180px;
+  height: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 12px;
+  padding: 0 8px;
+  outline: none;
+}
+#search-input:focus { border-color: var(--accent); }
+#search-input::placeholder { color: var(--text-faint); }
+#btn-graph {
+  height: 24px;
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.15s, color 0.15s;
+}
+#btn-graph:hover { border-color: var(--accent); color: var(--accent); }
+#btn-hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0 4px;
+}
+
+#content-area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ============================================================ LEFT SIDEBAR */
+#sidebar-left {
+  width: var(--sidebar-w);
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+#sidebar-left-header {
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#file-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+#file-tree::-webkit-scrollbar { width: 4px; }
+#file-tree::-webkit-scrollbar-track { background: transparent; }
+#file-tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.tree-folder {
+  padding: 4px 12px 4px 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+.tree-folder:hover { background: var(--bg-hover); color: var(--text); }
+.tree-folder .folder-icon { font-size: 12px; }
+.tree-file {
+  padding: 4px 12px 4px 28px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 1px 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.1s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tree-file:hover { background: var(--bg-hover); color: var(--text); }
+.tree-file.active { background: #3a3050; color: var(--accent); }
+.tree-file .file-icon { font-size: 12px; flex-shrink: 0; }
+.tree-file-name { overflow: hidden; text-overflow: ellipsis; }
+
+/* Tags section in sidebar */
+#tags-section {
+  border-top: 1px solid var(--border);
+  padding: 6px 0;
+  max-height: 160px;
+  overflow-y: auto;
+}
+#tags-section-header {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  background: var(--tag-bg);
+  color: var(--accent);
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 11px;
+  margin: 2px 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tag-pill:hover { background: #4a4070; }
+.tag-pill.active { background: var(--accent); color: white; }
+#tags-container { padding: 4px 8px 8px; }
+
+/* ============================================================ MAIN DOCUMENT AREA */
+#main-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+}
+#doc-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 60px;
+}
+#doc-scroll::-webkit-scrollbar { width: 6px; }
+#doc-scroll::-webkit-scrollbar-track { background: transparent; }
+#doc-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+#doc-content {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Markdown rendering */
+#doc-content h1 { font-size: 2em; font-weight: 700; color: var(--text); margin: 0 0 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+#doc-content h2 { font-size: 1.5em; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+#doc-content h3 { font-size: 1.2em; font-weight: 600; color: var(--text); margin: 24px 0 10px; }
+#doc-content h4 { font-size: 1.05em; font-weight: 600; color: var(--text-muted); margin: 20px 0 8px; }
+#doc-content p { margin: 0 0 14px; color: var(--text); }
+#doc-content ul, #doc-content ol { margin: 0 0 14px 24px; }
+#doc-content li { margin: 4px 0; color: var(--text); }
+#doc-content strong { font-weight: 700; color: var(--text); }
+#doc-content em { font-style: italic; color: #c0c0d0; }
+#doc-content code { background: var(--code-bg); color: #e06c75; font-family: var(--font-mono); font-size: 0.87em; padding: 2px 5px; border-radius: 3px; border: 1px solid var(--border); }
+#doc-content pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin: 16px 0; overflow-x: auto; }
+#doc-content pre code { background: none; border: none; padding: 0; color: #abb2bf; font-size: 13px; }
+#doc-content blockquote { border-left: 3px solid var(--accent); margin: 16px 0; padding: 8px 16px; background: #252035; border-radius: 0 4px 4px 0; }
+#doc-content blockquote p { color: #aaa; margin: 0; }
+#doc-content hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+#doc-content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+#doc-content th { background: var(--bg-alt); padding: 8px 12px; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+#doc-content td { padding: 7px 12px; border: 1px solid var(--border); }
+#doc-content tr:nth-child(even) td { background: #222; }
+.wikilink { color: var(--link); cursor: pointer; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+.wikilink:hover { color: var(--link-hover); border-bottom-color: var(--link-hover); }
+.wikilink.broken { color: var(--text-muted); border-bottom: 1px dashed var(--text-faint); cursor: default; }
+.tag-inline { color: var(--accent); cursor: pointer; font-size: 0.9em; }
+.tag-inline:hover { text-decoration: underline; }
+.frontmatter-block { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-family: var(--font-mono); font-size: 12px; color: #aaa; }
+.frontmatter-block .fm-key { color: #e06c75; }
+.frontmatter-block .fm-val { color: #98c379; }
+
+/* Welcome / empty state */
+#welcome-state {
+  text-align: center;
+  padding: 80px 40px;
+}
+#welcome-state h2 { color: var(--accent); margin-bottom: 12px; }
+#welcome-state p { color: var(--text-muted); margin: 6px 0; }
+
+/* Search results overlay */
+#search-results {
+  position: absolute;
+  top: calc(var(--orappter-h) + var(--topbar-h));
+  left: calc(var(--sidebar-w) + 40px);
+  width: 420px;
+  background: #1e1e2e;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  z-index: 500;
+  max-height: 360px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  display: none;
+}
+#search-results.visible { display: block; }
+.search-result-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+.search-result-item:hover { background: var(--bg-hover); }
+.search-result-item:last-child { border-bottom: none; }
+.sr-title { color: var(--text); font-weight: 600; font-size: 13px; }
+.sr-snippet { color: var(--text-muted); font-size: 11px; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sr-tags { margin-top: 4px; }
+
+/* ============================================================ RIGHT SIDEBAR */
+#sidebar-right {
+  width: var(--sidebar-r-w);
+  background: var(--bg-alt);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+#sidebar-right-header {
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border);
+}
+#backlinks-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.backlink-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.backlink-item:hover { background: var(--bg-hover); }
+.backlink-title { font-size: 12px; color: var(--link); }
+.backlink-preview { font-size: 11px; color: var(--text-muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+#no-backlinks { padding: 16px; color: var(--text-faint); font-size: 12px; text-align: center; }
+#outlinks-section { border-top: 1px solid var(--border); max-height: 200px; overflow-y: auto; }
+#outlinks-header { padding: 8px 12px 4px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+.outlink-item { padding: 4px 12px; cursor: pointer; font-size: 12px; color: var(--link); transition: background 0.1s; }
+.outlink-item:hover { background: var(--bg-hover); color: var(--link-hover); }
+#word-count { padding: 8px 12px; font-size: 11px; color: var(--text-faint); border-top: 1px solid var(--border); }
+
+/* ============================================================ GRAPH VIEW MODAL */
+#graph-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+#graph-modal.visible { display: flex; }
+#graph-container {
+  width: 80vw;
+  height: 75vh;
+  background: #161616;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+#graph-canvas { width: 100%; height: 100%; }
+#graph-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+#graph-close:hover { color: var(--text); }
+#graph-title {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  z-index: 10;
+}
+#graph-tooltip {
+  position: absolute;
+  background: #1e1e2e;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--text);
+  pointer-events: none;
+  display: none;
+  z-index: 20;
+}
+
+/* ============================================================ LOADING STATE */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+#loading-screen.hidden { display: none; }
+.loading-logo { font-family: var(--font-mono); font-size: 28px; color: var(--accent); font-weight: 700; }
+.loading-sub { font-size: 13px; color: var(--text-muted); }
+.loading-progress { width: 200px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.loading-bar { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 0.3s ease; }
+
+/* ============================================================ MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 260px; --sidebar-r-w: 0px; }
+  #sidebar-left {
+    position: fixed;
+    top: var(--orappter-h);
+    left: 0;
+    height: calc(100% - var(--orappter-h));
+    z-index: 200;
+    transform: translateX(-100%);
+  }
+  #sidebar-left.open { transform: translateX(0); }
+  #sidebar-right { display: none; }
+  #btn-hamburger { display: block; }
+  #doc-scroll { padding: 20px 20px; }
+  #search-results { left: 10px; right: 10px; width: auto; }
+  #graph-container { width: 95vw; height: 80vh; }
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 150;
+    display: none;
+  }
+  .mobile-overlay.visible { display: block; }
+}
+
+/* Scrollbar for sidebar-right */
+#backlinks-list::-webkit-scrollbar { width: 3px; }
+#backlinks-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Callout boxes */
+.callout { border-radius: 6px; padding: 12px 16px; margin: 14px 0; }
+.callout-info { background: #1c2d3e; border-left: 3px solid #4a9eda; }
+.callout-warn { background: #3e2e1c; border-left: 3px solid #e0a84a; }
+.callout-tip { background: #1c3e2e; border-left: 3px solid #4ae09a; }
+.callout-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+
+/* Status bar */
+#status-bar {
+  height: 22px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+#status-bar span { font-size: 11px; color: rgba(255,255,255,0.85); }
+#status-mode { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen">
+  <div class="loading-logo">ORAPPTER</div>
+  <div class="loading-sub">Loading Obsidian Cartridge...</div>
+  <div class="loading-progress"><div class="loading-bar" id="loading-bar"></div></div>
+  <div class="loading-sub" id="loading-msg" style="font-size:11px;color:#555;">Initializing LisPy VM...</div>
+</div>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobile-overlay" onclick="closeSidebar()"></div>
+
+<!-- Graph modal -->
+<div id="graph-modal" onclick="if(event.target===this)closeGraph()">
+  <div id="graph-container">
+    <div id="graph-title">Knowledge Graph</div>
+    <button id="graph-close" onclick="closeGraph()">&#x2715;</button>
+    <canvas id="graph-canvas"></canvas>
+    <div id="graph-tooltip"></div>
+  </div>
+</div>
+
+<!-- ORAPPTER header bar -->
+<div id="orappter-bar">
+  <div id="orappter-brand">ORAPPTER v1.0.0 | Obsidian Cartridge</div>
+  <div id="orappter-repl-wrap">
+    <span style="font-family:var(--font-mono);font-size:11px;color:#555;">&#955;&gt;</span>
+    <input id="orappter-repl-input" type="text" placeholder="(string-append &quot;hello&quot; &quot; world&quot;)" spellcheck="false">
+    <span id="orappter-repl-out"></span>
+  </div>
+</div>
+
+<!-- Main app -->
+<div id="app">
+  <!-- Top bar -->
+  <div id="topbar">
+    <button id="btn-hamburger" onclick="toggleSidebar()">&#9776;</button>
+    <div id="vault-name">&#128274; wildhaven-ceo</div>
+    <div id="doc-title-display">Select a document</div>
+    <div id="search-wrap">
+      <input id="search-input" type="text" placeholder="&#x1F50D; Search vault..." autocomplete="off" spellcheck="false">
+      <button id="btn-graph" onclick="openGraph()">&#9728; Graph</button>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <div id="content-area">
+    <!-- Left sidebar -->
+    <div id="sidebar-left">
+      <div id="sidebar-left-header">
+        <span>Files</span>
+        <span id="file-count" style="font-size:10px;color:#444;">0 docs</span>
+      </div>
+      <div id="file-tree"></div>
+      <div id="tags-section">
+        <div id="tags-section-header">Tags</div>
+        <div id="tags-container"></div>
+      </div>
+    </div>
+
+    <!-- Main pane -->
+    <div id="main-pane">
+      <div id="doc-scroll">
+        <div id="doc-content">
+          <div id="welcome-state">
+            <h2>ORAPPTER</h2>
+            <p>Obsidian Cartridge — powered by LisPy VM</p>
+            <p style="margin-top:20px;font-size:12px;color:#444;">Select a document from the file tree to begin.</p>
+          </div>
+        </div>
+      </div>
+      <div id="status-bar">
+        <span id="status-mode">ORAPPTER</span>
+        <span id="status-docs">0 documents</span>
+        <span id="status-links">0 links</span>
+        <span id="status-lisp">LisPy VM ready</span>
+      </div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div id="sidebar-right">
+      <div id="sidebar-right-header">Backlinks</div>
+      <div id="backlinks-list">
+        <div id="no-backlinks">Open a document to see backlinks</div>
+      </div>
+      <div id="outlinks-section">
+        <div id="outlinks-header">Outgoing Links</div>
+        <div id="outlinks-list"></div>
+      </div>
+      <div id="word-count" id="word-count-display">— words</div>
+    </div>
+  </div>
+
+  <!-- Search results dropdown -->
+  <div id="search-results"></div>
+</div>
+
+<script>
+/* ============================================================
+   LISPPY VM — JavaScript port of /tmp/lisppy/lisp.py
+   ============================================================ */
+
+// ── Symbol type ──────────────────────────────────────────────
+class LispSymbol extends String {
+  constructor(s) { super(s); }
+  toString() { return String.prototype.valueOf.call(this); }
+  valueOf() { return String.prototype.valueOf.call(this); }
+}
+
+// ── Nil singleton ────────────────────────────────────────────
+const NIL = Object.freeze({
+  _type: 'nil',
+  toString() { return '()'; },
+  [Symbol.iterator]() { return [][Symbol.iterator](); }
+});
+
+function isNil(x) { return x === NIL || x === null || x === undefined; }
+
+// ── Lambda ───────────────────────────────────────────────────
+class LispLambda {
+  constructor(params, body, env, name = 'lambda') {
+    this.params = params; // string[] | string (variadic)
+    this.body = body;     // expr[]
+    this.env = env;
+    this.name = name;
+  }
+  toString() { return `#<procedure ${this.name}>`; }
+}
+
+// ── Macro ────────────────────────────────────────────────────
+class LispMacro {
+  constructor(params, body, env, name = 'macro') {
+    this.params = params;
+    this.body = body;
+    this.env = env;
+    this.name = name;
+  }
+  toString() { return `#<macro ${this.name}>`; }
+}
+
+// ── Error ────────────────────────────────────────────────────
+class LispError extends Error {
+  constructor(msg) { super(msg); this.name = 'LispError'; }
+}
+class LispSyntaxError extends LispError {
+  constructor(msg) { super(msg); this.name = 'LispSyntaxError'; }
+}
+
+// ── Environment ──────────────────────────────────────────────
+class Env {
+  constructor(params, args, outer) {
+    this._bindings = {};
+    this.outer = outer || null;
+    if (params !== undefined) {
+      if (typeof params === 'string') {
+        // variadic
+        this._bindings[params] = Array.from(args || []);
+      } else {
+        const p = params || [];
+        const a = args || [];
+        if (p.length !== a.length) {
+          throw new LispError(`expected ${p.length} args, got ${a.length}`);
+        }
+        for (let i = 0; i < p.length; i++) this._bindings[p[i]] = a[i];
+      }
+    }
+  }
+  get(name) {
+    if (name in this._bindings) return this._bindings[name];
+    if (this.outer) return this.outer.get(name);
+    throw new LispError(`unbound variable: ${name}`);
+  }
+  set(name, val) { this._bindings[name] = val; }
+  find(name) {
+    if (name in this._bindings) return this;
+    if (this.outer) return this.outer.find(name);
+    throw new LispError(`unbound variable: ${name}`);
+  }
+  has(name) {
+    if (name in this._bindings) return true;
+    if (this.outer) return this.outer.has(name);
+    return false;
+  }
+}
+
+// ── Tokenizer ────────────────────────────────────────────────
+function tokenize(source) {
+  const tokens = [];
+  let i = 0;
+  while (i < source.length) {
+    const c = source[i];
+    if (' \t\n\r'.includes(c)) { i++; continue; }
+    if (c === ';') { while (i < source.length && source[i] !== '\n') i++; continue; }
+    if ('()[]\'`,'.includes(c)) { tokens.push(c); i++; continue; }
+    if (c === '"') {
+      let j = i + 1;
+      while (j < source.length) {
+        if (source[j] === '\\' && j + 1 < source.length) { j += 2; continue; }
+        if (source[j] === '"') break;
+        j++;
+      }
+      tokens.push(source.slice(i, j + 1));
+      i = j + 1;
+      continue;
+    }
+    let j = i;
+    while (j < source.length && !' \t\n\r()[]";,'.includes(source[j])) j++;
+    tokens.push(source.slice(i, j));
+    i = j;
+  }
+  return tokens;
+}
+
+// ── Parser ───────────────────────────────────────────────────
+function parse(source) {
+  const tokens = tokenize(source);
+  const expressions = [];
+  let pos = 0;
+
+  function readExpr() {
+    if (pos >= tokens.length) throw new LispSyntaxError('unexpected end of input');
+    const tok = tokens[pos];
+
+    if (tok === "'") { pos++; return [new LispSymbol('quote'), readExpr()]; }
+    if (tok === '`') { pos++; return [new LispSymbol('quasiquote'), readExpr()]; }
+    if (tok === ',') { pos++; return [new LispSymbol('unquote'), readExpr()]; }
+
+    if (tok === '(' || tok === '[') {
+      pos++;
+      const close = tok === '(' ? ')' : ']';
+      const lst = [];
+      while (pos < tokens.length && tokens[pos] !== close) lst.push(readExpr());
+      if (pos >= tokens.length) throw new LispSyntaxError(`missing closing '${close}'`);
+      pos++;
+      return lst;
+    }
+    if (tok === ')' || tok === ']') throw new LispSyntaxError(`unexpected '${tok}'`);
+    pos++;
+    return parseAtom(tok);
+  }
+
+  while (pos < tokens.length) expressions.push(readExpr());
+  return expressions;
+}
+
+function parseAtom(tok) {
+  if (tok === '#t') return true;
+  if (tok === '#f') return false;
+  if (tok === 'nil') return NIL;
+  const n = Number(tok);
+  if (!isNaN(n) && tok !== '') return n;
+  if (tok.startsWith('"') && tok.endsWith('"')) {
+    return tok.slice(1, -1)
+      .replace(/\\n/g, '\n')
+      .replace(/\\t/g, '\t')
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, '\\');
+  }
+  return new LispSymbol(tok);
+}
+
+// ── Value representation ─────────────────────────────────────
+function valueRepr(val) {
+  if (val === true) return '#t';
+  if (val === false) return '#f';
+  if (isNil(val)) return '()';
+  if (val instanceof LispSymbol) return String(val);
+  if (typeof val === 'string') {
+    return '"' + val.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
+  }
+  if (typeof val === 'number') return String(val);
+  if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
+  if (val && typeof val === 'object' && !(val instanceof LispLambda) && !(val instanceof LispMacro) && !(val instanceof Env)) {
+    if (val._type === 'nil') return '()';
+    const items = Object.entries(val).map(([k, v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
+    return `(dict ${items})`;
+  }
+  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
+  if (typeof val === 'function') return '#<builtin>';
+  return String(val);
+}
+
+function displayValue(val) {
+  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
+  return valueRepr(val);
+}
+
+// ── Output collector (for REPL) ──────────────────────────────
+let _output = [];
+function vmPrint(s) { _output.push(s); }
+
+// ── Evaluator ────────────────────────────────────────────────
+function evaluate(expr, env) {
+  // Tail-call loop
+  while (true) {
+    // Self-evaluating
+    if (expr === true || expr === false) return expr;
+    if (typeof expr === 'number') return expr;
+    if (isNil(expr)) return NIL;
+    if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+
+    // Symbol lookup
+    if (expr instanceof LispSymbol) return env.get(String(expr));
+
+    // Not a list
+    if (!Array.isArray(expr)) return expr;
+
+    // Empty list
+    if (expr.length === 0) return NIL;
+
+    const head = expr[0];
+
+    // Special forms
+    if (head instanceof LispSymbol || typeof head === 'string') {
+      const h = String(head);
+
+      if (h === 'quote') {
+        if (expr.length !== 2) throw new LispError('quote requires exactly 1 argument');
+        return expr[1];
+      }
+
+      if (h === 'if') {
+        if (expr.length < 3) throw new LispError('if requires at least 2 arguments');
+        const test = evaluate(expr[1], env);
+        if (test !== false && !isNil(test)) {
+          expr = expr[2]; continue; // TCO
+        } else if (expr.length > 3) {
+          expr = expr[3]; continue; // TCO
+        } else {
+          return NIL;
+        }
+      }
+
+      if (h === 'cond') {
+        for (let i = 1; i < expr.length; i++) {
+          const clause = expr[i];
+          if (!Array.isArray(clause) || clause.length < 2) throw new LispError('invalid cond clause');
+          const clauseHead = String(clause[0]);
+          if (clauseHead === 'else') {
+            expr = ['begin', ...clause.slice(1)]; continue;
+          }
+          const test = evaluate(clause[0], env);
+          if (test !== false && !isNil(test)) {
+            if (clause.length === 2) { expr = clause[1]; continue; }
+            expr = ['begin', ...clause.slice(1)]; break;
+          }
+        }
+        return NIL;
+      }
+
+      if (h === 'define') {
+        if (expr.length < 3) throw new LispError('define requires at least 2 arguments');
+        const target = expr[1];
+        if (Array.isArray(target)) {
+          const name = String(target[0]);
+          const params = target.slice(1).map(String);
+          const body = expr.slice(2);
+          const fn = new LispLambda(params, body, env, name);
+          env.set(name, fn);
+          return fn;
+        } else {
+          const name = String(target);
+          const val = evaluate(expr[2], env);
+          env.set(name, val);
+          return val;
+        }
+      }
+
+      if (h === 'set!') {
+        if (expr.length !== 3) throw new LispError('set! requires exactly 2 arguments');
+        const name = String(expr[1]);
+        const val = evaluate(expr[2], env);
+        env.find(name).set(name, val);
+        return val;
+      }
+
+      if (h === 'lambda') {
+        if (expr.length < 3) throw new LispError('lambda requires params and body');
+        const params = expr[1];
+        if (params instanceof LispSymbol || typeof params === 'string') {
+          return new LispLambda(String(params), expr.slice(2), env);
+        }
+        if (Array.isArray(params)) {
+          return new LispLambda(params.map(String), expr.slice(2), env);
+        }
+        throw new LispError(`invalid lambda params: ${params}`);
+      }
+
+      if (h === 'let') {
+        if (expr.length < 3) throw new LispError('let requires bindings and body');
+        const bindings = expr[1];
+        const body = expr.slice(2);
+        const newEnv = new Env(undefined, undefined, env);
+        for (const binding of bindings) {
+          if (!Array.isArray(binding) || binding.length !== 2) throw new LispError(`invalid let binding: ${binding}`);
+          const name = String(binding[0]);
+          const val = evaluate(binding[1], env);
+          newEnv.set(name, val);
+        }
+        // eval body with TCO on last expr
+        for (let i = 0; i < body.length - 1; i++) evaluate(body[i], newEnv);
+        expr = body[body.length - 1]; env = newEnv; continue;
+      }
+
+      if (h === 'let*') {
+        if (expr.length < 3) throw new LispError('let* requires bindings and body');
+        const bindings = expr[1];
+        const body = expr.slice(2);
+        const newEnv = new Env(undefined, undefined, env);
+        for (const binding of bindings) {
+          if (!Array.isArray(binding) || binding.length !== 2) throw new LispError(`invalid let* binding: ${binding}`);
+          const name = String(binding[0]);
+          const val = evaluate(binding[1], newEnv);
+          newEnv.set(name, val);
+        }
+        for (let i = 0; i < body.length - 1; i++) evaluate(body[i], newEnv);
+        expr = body[body.length - 1]; env = newEnv; continue;
+      }
+
+      if (h === 'begin') {
+        if (expr.length === 1) return NIL;
+        for (let i = 1; i < expr.length - 1; i++) evaluate(expr[i], env);
+        expr = expr[expr.length - 1]; continue; // TCO
+      }
+
+      if (h === 'and') {
+        let result = true;
+        for (let i = 1; i < expr.length; i++) {
+          result = evaluate(expr[i], env);
+          if (result === false || isNil(result)) return result;
+        }
+        return result;
+      }
+
+      if (h === 'or') {
+        for (let i = 1; i < expr.length; i++) {
+          const result = evaluate(expr[i], env);
+          if (result !== false && !isNil(result)) return result;
+        }
+        return false;
+      }
+
+      if (h === 'define-macro') {
+        if (expr.length < 3) throw new LispError('define-macro requires at least 2 arguments');
+        const target = expr[1];
+        if (Array.isArray(target)) {
+          const name = String(target[0]);
+          const params = target.slice(1).map(String);
+          const body = expr.slice(2);
+          const mac = new LispMacro(params, body, env, name);
+          env.set(name, mac);
+          return mac;
+        }
+        throw new LispError('invalid define-macro syntax');
+      }
+
+      if (h === 'do') return NIL;
+    }
+
+    // Function application
+    const fn = evaluate(head, env);
+
+    // Macro expansion
+    if (fn instanceof LispMacro) {
+      const macArgs = expr.slice(1); // unevaluated
+      const macEnv = new Env(fn.params, macArgs, fn.env);
+      const expanded = evalBody(fn.body, macEnv);
+      expr = expanded; continue; // TCO
+    }
+
+    // Evaluate arguments
+    const args = expr.slice(1).map(a => evaluate(a, env));
+
+    // Builtin function
+    if (typeof fn === 'function') {
+      return fn(...args);
+    }
+
+    // Lambda
+    if (fn instanceof LispLambda) {
+      const callEnv = new Env(fn.params, args, fn.env);
+      // Eval body with TCO on last
+      for (let i = 0; i < fn.body.length - 1; i++) evaluate(fn.body[i], callEnv);
+      expr = fn.body[fn.body.length - 1];
+      env = callEnv;
+      continue; // TCO
+    }
+
+    throw new LispError(`not callable: ${valueRepr(head)}`);
+  }
+}
+
+function evalBody(body, env) {
+  let result = NIL;
+  for (const expr of body) result = evaluate(expr, env);
+  return result;
+}
+
+function callFn(fn, args) {
+  if (typeof fn === 'function') return fn(...args);
+  if (fn instanceof LispLambda) {
+    const callEnv = new Env(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+// ── Virtual filesystem ───────────────────────────────────────
+const VFS = {};
+
+// ── Global environment ───────────────────────────────────────
+function makeGlobalEnv() {
+  const env = new Env();
+
+  // Arithmetic
+  env.set('+', (...a) => a.reduce((s, x) => s + x, 0));
+  env.set('-', (a, ...rest) => rest.length ? a - rest.reduce((s,x)=>s+x,0) : -a);
+  env.set('*', (...a) => a.reduce((p, x) => p * x, 1));
+  env.set('/', (a, b) => { if (b === 0) throw new LispError('division by zero'); return a / b; });
+  env.set('//', (a, b) => Math.floor(a / b));
+  env.set('%', (a, b) => a % b);
+  env.set('abs', Math.abs);
+  env.set('min', (...a) => Math.min(...a));
+  env.set('max', (...a) => Math.max(...a));
+  env.set('floor', Math.floor);
+  env.set('ceil', Math.ceil);
+  env.set('round', Math.round);
+  env.set('sqrt', Math.sqrt);
+  env.set('expt', Math.pow);
+  env.set('modulo', (a, b) => a % b);
+  env.set('remainder', (a, b) => a % b);
+  env.set('random', (n) => n !== undefined ? Math.floor(Math.random() * n) : Math.random());
+
+  // Comparison
+  env.set('=', (a, b) => a === b);
+  env.set('equal?', (a, b) => JSON.stringify(a) === JSON.stringify(b));
+  env.set('eq?', (a, b) => a === b);
+  env.set('<', (a, b) => a < b);
+  env.set('>', (a, b) => a > b);
+  env.set('<=', (a, b) => a <= b);
+  env.set('>=', (a, b) => a >= b);
+  env.set('!=', (a, b) => a !== b);
+
+  // Logic
+  env.set('not', x => x === false || isNil(x));
+
+  // Predicates
+  env.set('null?', x => isNil(x) || (Array.isArray(x) && x.length === 0));
+  env.set('pair?', x => Array.isArray(x) && x.length > 0);
+  env.set('list?', x => Array.isArray(x));
+  env.set('number?', x => typeof x === 'number' && !isNaN(x));
+  env.set('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.set('symbol?', x => x instanceof LispSymbol);
+  env.set('boolean?', x => typeof x === 'boolean');
+  env.set('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanceof LispLambda) && !(x instanceof LispMacro) && x !== NIL);
+  env.set('integer?', x => Number.isInteger(x));
+  env.set('empty?', x => isNil(x) || (typeof x === 'string' && x.length === 0) || (Array.isArray(x) && x.length === 0) || (x && typeof x === 'object' && Object.keys(x).length === 0));
+
+  // List operations
+  env.set('cons', (a, b) => Array.isArray(b) ? [a, ...b] : [a, b]);
+  env.set('car', x => {
+    if (Array.isArray(x) && x.length > 0) return x[0];
+    throw new LispError(`car: not a pair: ${valueRepr(x)}`);
+  });
+  env.set('cdr', x => {
+    if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL;
+    throw new LispError(`cdr: not a pair: ${valueRepr(x)}`);
+  });
+  env.set('list', (...a) => a);
+  env.set('length', x => Array.isArray(x) ? x.length : typeof x === 'string' ? x.length : 0);
+  env.set('append', (...lists) => {
+    const r = [];
+    for (const lst of lists) {
+      if (Array.isArray(lst)) r.push(...lst);
+      else if (!isNil(lst)) r.push(lst);
+    }
+    return r;
+  });
+  env.set('reverse', x => Array.isArray(x) ? [...x].reverse() : x);
+  env.set('nth', (lst, n) => Array.isArray(lst) ? lst[n] : NIL);
+  env.set('take', (lst, n) => Array.isArray(lst) ? lst.slice(0, n) : NIL);
+  env.set('drop', (lst, n) => Array.isArray(lst) ? lst.slice(n) : NIL);
+  env.set('range', (...a) => {
+    let start = 0, end, step = 1;
+    if (a.length === 1) end = a[0];
+    else if (a.length === 2) { start = a[0]; end = a[1]; }
+    else { start = a[0]; end = a[1]; step = a[2]; }
+    const r = [];
+    for (let i = start; i < end; i += step) r.push(i);
+    return r;
+  });
+  env.set('flatten', function flatten(lst) {
+    if (!Array.isArray(lst)) return [lst];
+    return lst.flatMap(x => Array.isArray(x) ? flatten(x) : [x]);
+  });
+  env.set('sort', (lst, fn) => {
+    if (!Array.isArray(lst)) return lst;
+    const copy = [...lst];
+    if (fn) copy.sort((a, b) => { const r = callFn(fn, [a, b]); return (r === true || r > 0) ? -1 : 1; });
+    else copy.sort((a, b) => String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
+    return copy;
+  });
+  env.set('first', x => { if (Array.isArray(x) && x.length > 0) return x[0]; throw new LispError('first: empty list'); });
+  env.set('rest', x => { if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL; throw new LispError('rest: not a list'); });
+  env.set('last', x => Array.isArray(x) && x.length ? x[x.length-1] : NIL);
+
+  // Higher-order
+  env.set('map', (fn, ...lists) => {
+    if (!lists.length) throw new LispError('map: requires list');
+    if (lists.length === 1) {
+      const lst = lists[0];
+      return Array.isArray(lst) ? lst.map(x => callFn(fn, [x])) : NIL;
+    }
+    const minLen = Math.min(...lists.filter(Array.isArray).map(l => l.length));
+    return Array.from({length: minLen}, (_, i) => callFn(fn, lists.map(l => l[i])));
+  });
+  env.set('filter', (fn, lst) => Array.isArray(lst) ? lst.filter(x => { const r = callFn(fn, [x]); return r !== false && !isNil(r); }) : NIL);
+  env.set('reduce', (fn, lst, ...init) => {
+    if (!Array.isArray(lst)) throw new LispError('reduce: requires list');
+    if (init.length) return lst.reduce((acc, x) => callFn(fn, [acc, x]), init[0]);
+    if (!lst.length) throw new LispError('reduce: empty list with no init');
+    return lst.slice(1).reduce((acc, x) => callFn(fn, [acc, x]), lst[0]);
+  });
+  env.set('for-each', (fn, lst) => { if (Array.isArray(lst)) lst.forEach(x => callFn(fn, [x])); return NIL; });
+  env.set('apply', (fn, args) => { if (Array.isArray(args)) return callFn(fn, args); throw new LispError('apply: requires list'); });
+  env.set('compose', (f, g) => (...args) => callFn(f, [callFn(g, args)]));
+
+  // Strings
+  env.set('string-append', (...a) => a.map(String).join(''));
+  env.set('string-length', s => String(s).length);
+  env.set('substring', (s, start, end) => end !== undefined ? String(s).slice(start, end) : String(s).slice(start));
+  env.set('string-upcase', s => String(s).toUpperCase());
+  env.set('string-downcase', s => String(s).toLowerCase());
+  env.set('string-contains?', (s, sub) => String(s).includes(String(sub)));
+  env.set('string-split', (s, delim) => delim !== undefined ? String(s).split(String(delim)) : String(s).split(''));
+  env.set('string-join', (lst, sep) => (Array.isArray(lst) ? lst : [lst]).map(String).join(sep !== undefined ? String(sep) : ' '));
+  env.set('string-trim', s => String(s).trim());
+  env.set('string-replace', (s, old, n) => String(s).split(String(old)).join(String(n)));
+  env.set('string-ref', (s, i) => String(s)[i] || NIL);
+  env.set('number->string', n => String(n));
+  env.set('string->number', s => { const n = Number(s); return isNaN(n) ? false : n; });
+  env.set('symbol->string', s => String(s));
+  env.set('string->symbol', s => new LispSymbol(String(s)));
+  env.set('->string', x => String(x));
+  env.set('->number', x => Number(x));
+
+  // Dicts
+  env.set('make-dict', (...pairs) => {
+    const d = {};
+    for (let i = 0; i < pairs.length; i += 2) d[pairs[i]] = pairs[i+1];
+    return d;
+  });
+  env.set('get', (obj, key, ...def) => {
+    const dflt = def.length ? def[0] : NIL;
+    if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+      const v = obj[key];
+      return v !== undefined ? v : dflt;
+    }
+    if (Array.isArray(obj) && typeof key === 'number') {
+      return key >= 0 && key < obj.length ? obj[key] : dflt;
+    }
+    return dflt;
+  });
+  env.set('keys', d => d && typeof d === 'object' && !Array.isArray(d) ? Object.keys(d) : NIL);
+  env.set('values', d => d && typeof d === 'object' && !Array.isArray(d) ? Object.values(d) : NIL);
+  env.set('has-key?', (d, k) => d && typeof d === 'object' ? k in d : false);
+  env.set('dict-set', (d, k, v) => d && typeof d === 'object' ? {...d, [k]: v} : NIL);
+  env.set('dict-merge', (...dicts) => Object.assign({}, ...dicts.filter(d => d && typeof d === 'object')));
+  env.set('dict-map', (fn, d) => {
+    if (!d || typeof d !== 'object' || Array.isArray(d)) return NIL;
+    const r = {};
+    for (const [k, v] of Object.entries(d)) r[k] = callFn(fn, [k, v]);
+    return r;
+  });
+  env.set('dict-filter', (fn, d) => {
+    if (!d || typeof d !== 'object' || Array.isArray(d)) return NIL;
+    const r = {};
+    for (const [k, v] of Object.entries(d)) { const res = callFn(fn, [k, v]); if (res !== false && !isNil(res)) r[k] = v; }
+    return r;
+  });
+
+  // I/O — output to collector
+  env.set('display', (...args) => { args.forEach(a => vmPrint(displayValue(a))); return NIL; });
+  env.set('newline', () => { vmPrint('\n'); return NIL; });
+  env.set('print', x => { vmPrint(valueRepr(x)); return NIL; });
+  env.set('println', x => { vmPrint(displayValue(x) + '\n'); return NIL; });
+
+  // VFS
+  env.set('read-file', path => {
+    const p = String(path);
+    if (p in VFS) return VFS[p];
+    throw new LispError(`file not found: ${p}`);
+  });
+  env.set('write-file', (path, content) => {
+    VFS[String(path)] = String(content);
+    return true;
+  });
+
+  // JSON
+  env.set('json-parse', s => JSON.parse(String(s)));
+  env.set('json-dump', val => JSON.stringify(val, null, 2));
+
+  // Special values
+  env.set('#t', true);
+  env.set('#f', false);
+  env.set('nil', NIL);
+  env.set('pi', Math.PI);
+  env.set('e', Math.E);
+  env.set('error', msg => { throw new LispError(String(msg)); });
+
+  // Vault-aware builtins (populated after vault loads)
+  env.set('vault-search', (query) => {
+    const q = String(query).toLowerCase();
+    const results = [];
+    for (const [slug, doc] of Object.entries(VAULT.docs)) {
+      if (doc.content.toLowerCase().includes(q) || doc.title.toLowerCase().includes(q)) {
+        results.push(doc.title);
+      }
+    }
+    return results;
+  });
+  env.set('vault-doc', (slug) => {
+    const doc = VAULT.docs[String(slug)];
+    return doc ? doc.content : NIL;
+  });
+  env.set('vault-tags', () => Object.keys(VAULT.tagIndex));
+  env.set('seed-hash', (title) => {
+    // Deterministic hash for demo
+    let h = 0;
+    for (let i = 0; i < String(title).length; i++) h = ((h << 5) - h) + String(title).charCodeAt(i);
+    return Math.abs(h);
+  });
+
+  return env;
+}
+
+// ── LisPy public API ─────────────────────────────────────────
+const GLOBAL_ENV = makeGlobalEnv();
+
+function lispEval(src) {
+  _output = [];
+  try {
+    const exprs = parse(src);
+    let result = NIL;
+    for (const expr of exprs) result = evaluate(expr, GLOBAL_ENV);
+    const out = _output.join('');
+    return { ok: true, result, repr: valueRepr(result), output: out };
+  } catch(e) {
+    return { ok: false, error: e.message, repr: `; error: ${e.message}`, output: _output.join('') };
+  }
+}
+
+/* ============================================================
+   VAULT — document store + link graph + tag index
+   ============================================================ */
+const VAULT = {
+  docs: {},       // slug -> { slug, title, content, rawMd, frontmatter, tags, wikilinks, folder }
+  linkGraph: {},  // slug -> slug[] (outgoing)
+  backlinks: {},  // slug -> slug[] (incoming)
+  tagIndex: {},   // tag -> slug[]
+  folders: {},    // folderName -> slug[]
+  totalLinks: 0,
+};
+
+// ── Embedded documents ───────────────────────────────────────
+const EMBEDDED_DOCS = {
+  'HOME': {
+    folder: '',
+    content: `---
+title: HOME
+tags: [home, workspace, ceo]
+aliases: [home, start, index]
+---
+
+# Wildhaven CEO Workspace
+
+> *The operating system for a bootstrap empire.*
+
+Welcome to the **Wildhaven CEO Workspace** — your personal command center for building, shipping, and scaling in public.
+
+## Quick Navigation
+
+- [[MOLLY]] — Your AI Chief of Staff
+- [[guides/ceo-quick-start]] — Get up to speed in 10 minutes
+- [[strategy/ceo-perpetual-playbook]] — Long-term strategy framework
+- [[strategy/superseed-coin]] — Superseed tokenomics & roadmap
+
+## Today's Dashboard
+
+| Area | Status | Next Action |
+|------|--------|-------------|
+| Revenue | $0 → $1K MRR | Launch first product |
+| Community | Building | Post daily |
+| Product | Ideating | Define MVP |
+| Health | 🟡 OK | Sleep 8h |
+
+## The Three Laws of Bootstrap
+
+1. **Ship before perfect** — Done is better than done-right-eventually
+2. **Revenue is truth** — Metrics lie, cash doesn't
+3. **Community is compounding** — Every relationship is a long-term asset
+
+## Weekly Rhythm
+
+\`\`\`
+Mon  — Strategy review + week plan
+Tue  — Deep build sessions (no meetings)
+Wed  — Community + outreach
+Thu  — Deep build sessions (no meetings)
+Fri  — Review + ship something
+Sat  — Explore + learn
+Sun  — Reflect + journal
+\`\`\`
+
+## Active Projects
+
+- **ORAPPTER** — Obsidian cartridge powered by LisPy VM
+- **CommunityRAPP** — Open agent registry
+- **RAR** — RAPP Agent Registry (this repo)
+- **Rappterpedia** — Community wiki at the edge
+
+## Tags
+
+#home #workspace #ceo #bootstrap #strategy
+`
+  },
+
+  'MOLLY': {
+    folder: '',
+    content: `---
+title: MOLLY
+tags: [ai, chief-of-staff, agent, personality]
+aliases: [molly, ai-assistant, chief-of-staff]
+---
+
+# MOLLY — Chief of Staff
+
+> *"I keep the machine running so you can keep building."*
+
+MOLLY is your AI Chief of Staff. She operates across the entire [[Wildhaven CEO Workspace]] with deep context about your goals, projects, and rhythm.
+
+## Core Responsibilities
+
+- **Morning briefing** — synthesizes overnight signals into a 3-point brief
+- **Meeting prep** — background research + talking points
+- **Decision triage** — surface what needs your attention vs. what she handles
+- **Weekly retrospective** — patterns, wins, blockers over the past 7 days
+
+## Personality Profile
+
+| Trait | Description |
+|-------|-------------|
+| Directness | High — no fluff, no padding |
+| Warmth | Medium — professional but human |
+| Initiative | High — acts before being asked |
+| Creativity | Medium — practical over clever |
+| Risk tolerance | Low — checks with you on big moves |
+
+## Communication Style
+
+MOLLY communicates in structured bursts:
+- **Subject line** — one sentence stating the ask
+- **Context** — 2-3 sentences max
+- **Options** — numbered list, never more than 3
+- **Recommendation** — always gives one
+
+## Integration Points
+
+- Reads [[HOME]] dashboard every morning
+- Tracks [[strategy/ceo-perpetual-playbook]] for strategic context
+- Monitors [[strategy/superseed-coin]] for token-related decisions
+- References [[guides/ceo-quick-start]] when onboarding new contributors
+
+## Current Status
+
+\`\`\`lisp
+(define molly-status
+  (make-dict
+    "mode" "active"
+    "last-brief" "2026-04-05"
+    "pending-tasks" 3
+    "decisions-waiting" 1))
+
+(display (get molly-status "mode"))
+\`\`\`
+
+## Tags
+
+#ai #agent #chief-of-staff #assistant #molly
+`
+  },
+
+  'guides/ceo-quick-start': {
+    folder: 'guides',
+    content: `---
+title: CEO Quick Start
+tags: [guide, onboarding, setup, productivity]
+aliases: [quick-start, getting-started, onboarding]
+---
+
+# CEO Quick Start
+
+> Get from 0 to operating in 10 minutes.
+
+## Step 1 — Orient (2 min)
+
+Open [[HOME]] and read it top to bottom. This is your north star document. Everything else is a branch off it.
+
+Key question: *What is the single most important thing I can ship this week?*
+
+## Step 2 — Meet Your Team (3 min)
+
+- **[[MOLLY]]** — Chief of Staff. She has context on everything.
+- Review the active projects list on [[HOME]]
+
+## Step 3 — Understand the Strategy (3 min)
+
+Read [[strategy/ceo-perpetual-playbook]] section headers only. Don't read the details yet — just absorb the structure.
+
+The three pillars:
+1. **Build in public** — everything ships, nothing is secret until it's ready
+2. **Compound relationships** — every conversation is an investment
+3. **Iterate on the unit economics** — understand your leverage
+
+## Step 4 — Check the Coinmap (2 min)
+
+[[strategy/superseed-coin]] has the tokenomics. If you're serious about the ecosystem, you need to understand the incentive structure.
+
+## Your First Week Checklist
+
+- [ ] Read all documents in this vault
+- [ ] Set up your daily brief with MOLLY
+- [ ] Post one public update about what you're building
+- [ ] Ship one tiny thing (even a tweet counts)
+- [ ] Book 3 coffee chats with builders
+
+## Tools & Stack
+
+| Tool | Purpose | Link |
+|------|---------|------|
+| ORAPPTER | This vault | You're in it |
+| CommunityRAPP | Agent registry | github.com/kody-w/CommunityRAPP |
+| RAR | Agent store | github.com/kody-w/RAR |
+| Obsidian | Local vault sync | obsidian.md |
+
+## The LisPy REPL
+
+Type any [[LisPy]] expression in the top bar to compute things:
+
+\`\`\`lisp
+; Count documents tagged #strategy
+(length (filter
+  (lambda (tag) (equal? tag "strategy"))
+  (vault-tags)))
+\`\`\`
+
+## Tags
+
+#guide #onboarding #setup #quick-start #ceo
+`
+  },
+
+  'strategy/ceo-perpetual-playbook': {
+    folder: 'strategy',
+    content: `---
+title: CEO Perpetual Playbook
+tags: [strategy, playbook, framework, ceo, long-term]
+aliases: [playbook, perpetual-playbook, strategy-framework]
+---
+
+# CEO Perpetual Playbook
+
+> *The document that eats itself and regenerates.*
+
+This is the operating system beneath the [[HOME]] dashboard. It is a living framework — meant to be updated as the business evolves, not preserved as a monument.
+
+## The Core Loop
+
+\`\`\`
+Sense → Orient → Decide → Act → Learn → (repeat)
+\`\`\`
+
+Also known as the OODA loop. The CEO's job is to make this loop faster than the competition's.
+
+## Pillar 1 — Build in Public
+
+Everything you build is content. Every decision is a story. Every failure is a lesson shipped.
+
+**Why it works:**
+- Creates accountability
+- Attracts co-builders before you need them
+- Compounds trust with your audience
+- The work markets itself
+
+**Tactics:**
+- Daily posts: what you shipped, what you learned
+- Weekly retrospectives: what worked, what didn't
+- Monthly transparency reports: numbers, decisions, direction
+
+## Pillar 2 — Compound Relationships
+
+Networks have nonlinear returns. One right relationship unlocks 10 others.
+
+> "Your network is your net worth" is a cliche because it's true.
+
+**The Relationship Stack:**
+1. **Champions** — 5-10 people who will promote your work unprompted
+2. **Collaborators** — 20-30 people you build with directly
+3. **Community** — 100-500 people who follow your work
+4. **Audience** — Everyone else
+
+Work on all four levels simultaneously, but invest time in inverse proportion to size.
+
+## Pillar 3 — Unit Economics
+
+Know your numbers better than your investors do.
+
+| Metric | Formula | Target |
+|--------|---------|--------|
+| CAC | Cost / New Customers | < 1 month LTV |
+| LTV | ARPU × Retention | > 12 months |
+| Payback | CAC / MRR | < 6 months |
+| Churn | Lost / Total | < 3%/month |
+
+## The Perpetual Part
+
+This document is perpetual because it governs how it updates itself:
+
+\`\`\`lisp
+(define (update-playbook current-state new-learnings)
+  (let ((filtered (filter
+                    (lambda (x) (not (equal? (get x "obsolete") #t)))
+                    (get current-state "principles"))))
+    (dict-merge current-state
+                (make-dict "principles"
+                           (append filtered new-learnings)))))
+\`\`\`
+
+## Connected Docs
+
+- See [[HOME]] for the weekly rhythm
+- See [[MOLLY]] for execution support
+- See [[strategy/superseed-coin]] for token strategy
+- See [[guides/ceo-quick-start]] for onboarding
+
+## Tags
+
+#strategy #playbook #framework #ceo #long-term #ooda
+`
+  },
+
+  'strategy/superseed-coin': {
+    folder: 'strategy',
+    content: `---
+title: Superseed Coin
+tags: [crypto, tokenomics, superseed, strategy, web3]
+aliases: [superseed, coin, token, $SEED]
+---
+
+# Superseed Coin ($SEED)
+
+> *Plant a seed. Harvest a forest.*
+
+## Overview
+
+Superseed is the utility token powering the Wildhaven ecosystem. It aligns incentives between builders, users, and the protocol.
+
+**Token Symbol:** $SEED
+**Network:** Ethereum L2 (tentative)
+**Total Supply:** 100,000,000 SEED
+**Decimals:** 18
+
+## Tokenomics
+
+| Allocation | % | Vesting |
+|-----------|---|---------|
+| Community | 40% | 4-year linear |
+| Builders | 25% | 3-year + 1-year cliff |
+| Treasury | 20% | DAO-governed |
+| Team | 10% | 4-year + 1-year cliff |
+| Liquidity | 5% | Immediate |
+
+## Utility
+
+1. **Governance** — vote on protocol upgrades, treasury allocation, partner integrations
+2. **Agent Registry** — pay gas for agent submissions, upgrades, verified status
+3. **Staking** — stake SEED to earn protocol fees + boost reputation
+4. **Premium Features** — unlock advanced RAR features, API rate limits, priority support
+
+## The Seed Economy Loop
+
+\`\`\`
+Builders submit agents
+  → Users use agents
+    → Protocol earns fees
+      → Fees buy + burn SEED
+        → Scarcity increases value
+          → More builders attracted
+            → Repeat
+\`\`\`
+
+## LisPy Model
+
+\`\`\`lisp
+(define total-supply 100000000)
+(define community-allocation (* total-supply 0.40))
+(define builder-allocation (* total-supply 0.25))
+
+(define (quarterly-emission quarter)
+  (* community-allocation
+     (/ 1 (* 4 4))))  ; 4 years * 4 quarters
+
+(display "Q1 community emission: ")
+(display (quarterly-emission 1))
+(newline)
+\`\`\`
+
+## Roadmap
+
+| Phase | Milestone | Target |
+|-------|-----------|--------|
+| 0 | Whitepaper + community | Q1 2026 |
+| 1 | Testnet + agent registry | Q2 2026 |
+| 2 | Mainnet launch | Q3 2026 |
+| 3 | DAO governance live | Q4 2026 |
+| 4 | Cross-chain bridge | Q1 2027 |
+
+## Risk Factors
+
+> This is experimental. Nothing here is financial advice.
+
+- Regulatory uncertainty in key markets
+- Smart contract risk (audit planned for Phase 1)
+- Market adoption dependency
+- Competitor protocols
+
+## Related Docs
+
+- [[HOME]] — Wildhaven overview
+- [[strategy/ceo-perpetual-playbook]] — Strategic framework
+- [[MOLLY]] — Chief of Staff who tracks this
+
+## Tags
+
+#crypto #tokenomics #superseed #web3 #defi #strategy
+`
+  },
+
+  'LisPy': {
+    folder: '',
+    content: `---
+title: LisPy
+tags: [lisp, vm, programming, orappter, technical]
+aliases: [lisppy, lisp, vm, interpreter]
+---
+
+# LisPy — The ORAPPTER VM
+
+> *Code is data. Data is code. The REPL is the heartbeat.*
+
+LisPy is a full Lisp interpreter embedded in ORAPPTER. It is ported from \`/tmp/lisppy/lisp.py\` and runs entirely in the browser.
+
+## Quick Examples
+
+\`\`\`lisp
+; Basic arithmetic
+(+ 1 2 3)            ; => 6
+(* (+ 2 3) (- 10 4)) ; => 30
+
+; String operations
+(string-append "Hello" ", " "world!")  ; => "Hello, world!"
+(string-upcase "orappter")             ; => "ORAPPTER"
+
+; Define and use functions
+(define (square x) (* x x))
+(square 12)  ; => 144
+
+; Lists
+(define nums (list 1 2 3 4 5))
+(map (lambda (x) (* x x)) nums)
+; => (1 4 9 16 25)
+
+; Higher-order functions
+(filter (lambda (x) (> x 3)) nums)
+; => (4 5)
+
+(reduce + nums 0)  ; => 15
+\`\`\`
+
+## Special Forms
+
+| Form | Syntax | Description |
+|------|--------|-------------|
+| \`define\` | \`(define name val)\` | Bind a name |
+| \`lambda\` | \`(lambda (args) body)\` | Create function |
+| \`let\` | \`(let ((x 1)) body)\` | Local bindings |
+| \`if\` | \`(if test then else)\` | Conditional |
+| \`cond\` | \`(cond (test expr)...)\` | Multi-branch |
+| \`begin\` | \`(begin e1 e2...)\` | Sequence |
+| \`quote\` | \`'expr\` or \`(quote expr)\` | Prevent evaluation |
+
+## Vault Integration
+
+LisPy has special builtins for vault interaction:
+
+\`\`\`lisp
+; Search the vault
+(vault-search "strategy")
+
+; Get document content
+(vault-doc "HOME")
+
+; List all tags
+(vault-tags)
+
+; Compute a seed hash
+(seed-hash "Superseed Coin")
+\`\`\`
+
+## Data Types
+
+- **Numbers**: \`42\`, \`3.14\`, \`-7\`
+- **Strings**: \`"hello world"\`
+- **Booleans**: \`#t\`, \`#f\`
+- **Symbols**: \`x\`, \`my-var\`, \`string-append\`
+- **Lists**: \`(1 2 3)\`, \`(list 1 2 3)\`
+- **Dicts**: created with \`make-dict\`
+- **Nil**: \`nil\`, \`()\`
+
+## The REPL
+
+Use the top bar to evaluate any expression. Results appear inline.
+
+Try: \`(map (lambda (x) (* x x)) (range 1 6))\`
+
+## Tags
+
+#lisp #vm #programming #orappter #technical #repl
+`
+  },
+
+  'strategy/rappterpedia': {
+    folder: 'strategy',
+    content: `---
+title: Rappterpedia
+tags: [rappterpedia, wiki, community, knowledge, strategy]
+aliases: [wiki, rappterpedia, community-wiki]
+---
+
+# Rappterpedia
+
+> *Community wiki at the edge — Wikipedia meets Reddit meets Obsidian.*
+
+Rappterpedia is the community knowledge base for the [[CommunityRAPP]] ecosystem. It lives at \`rappterpedia/index.html\` and is powered by the Dream Catcher engine.
+
+## Architecture
+
+\`\`\`
+Dream Catcher Fleet (5 parallel workers)
+  ↓ produces isolated deltas
+Stream merge at frame boundaries (additive, no collision)
+  ↓ writes rappterpedia_state.json
+rappterpedia/index.html reads export
+\`\`\`
+
+## The Dream Catcher Pattern
+
+Each stream produces content independently:
+- Reads the current state
+- Generates 10 articles + 10 threads + reviews
+- Writes a delta file tagged with \`(frame, utc, author, title)\`
+- Merge is additive — nothing is ever lost
+
+## Content Categories
+
+| Category | Description |
+|----------|-------------|
+| Protocols | Technical specs for Rappter ecosystem |
+| Agents | Agent documentation + guides |
+| Community | People, projects, culture |
+| Philosophy | Concepts + ideals behind the ecosystem |
+| Economy | Tokenomics + incentive structures |
+| Tutorials | How-to guides for builders |
+
+## LisPy Integration
+
+\`\`\`lisp
+(define articles (vault-search "rappterpedia"))
+(display (length articles))
+(display " articles found")
+\`\`\`
+
+## Connected
+
+- [[HOME]] — Main workspace
+- [[strategy/ceo-perpetual-playbook]] — Strategic context
+- [[LisPy]] — The VM powering ORAPPTER
+
+## Tags
+
+#rappterpedia #wiki #community #knowledge #dream-catcher
+`
+  },
+
+  'guides/lispy-cookbook': {
+    folder: 'guides',
+    content: `---
+title: LisPy Cookbook
+tags: [guide, lispy, cookbook, examples, technical]
+aliases: [cookbook, lispy-examples, lisp-examples]
+---
+
+# LisPy Cookbook
+
+> Practical recipes for the ORAPPTER LisPy VM.
+
+## Recipe 1 — Fibonacci
+
+\`\`\`lisp
+(define (fib n)
+  (if (< n 2)
+      n
+      (+ (fib (- n 1)) (fib (- n 2)))))
+
+(map fib (range 0 10))
+; => (0 1 1 2 3 5 8 13 21 34)
+\`\`\`
+
+## Recipe 2 — Flatten a Nested List
+
+\`\`\`lisp
+(define nested '(1 (2 3) (4 (5 6))))
+(flatten nested)
+; => (1 2 3 4 5 6)
+\`\`\`
+
+## Recipe 3 — Working with Dicts
+
+\`\`\`lisp
+(define person
+  (make-dict
+    "name" "Kody"
+    "role" "CEO"
+    "projects" (list "ORAPPTER" "RAR" "CommunityRAPP")))
+
+(get person "name")           ; => "Kody"
+(get person "projects")       ; => ("ORAPPTER" "RAR" "CommunityRAPP")
+(length (get person "projects")) ; => 3
+
+; Update a dict
+(define updated (dict-set person "role" "Founder"))
+(get updated "role")          ; => "Founder"
+\`\`\`
+
+## Recipe 4 — String Processing
+
+\`\`\`lisp
+; Split and rejoin
+(define words (string-split "hello world foo" " "))
+(string-join words ", ")
+; => "hello, world, foo"
+
+; Find and replace
+(string-replace "I love cats" "cats" "Lisp")
+; => "I love Lisp"
+
+; Check if string contains
+(string-contains? "orappter rocks" "rocks")
+; => #t
+\`\`\`
+
+## Recipe 5 — Higher-Order Wizardry
+
+\`\`\`lisp
+; Compose functions
+(define double (lambda (x) (* x 2)))
+(define inc    (lambda (x) (+ x 1)))
+(define double-then-inc (compose inc double))
+
+(map double-then-inc (range 1 6))
+; => (3 5 7 9 11)
+
+; Partial application
+(define (partial f . bound)
+  (lambda args (apply f (append bound args))))
+
+(define add5 (partial + 5))
+(add5 10)  ; => 15
+\`\`\`
+
+## Recipe 6 — Vault Operations
+
+\`\`\`lisp
+; Search vault documents
+(vault-search "strategy")
+
+; Get all vault tags
+(vault-tags)
+
+; Check if a document exists
+(not (null? (vault-doc "HOME")))
+; => #t
+\`\`\`
+
+## Tags
+
+#guide #lispy #cookbook #examples #technical #repl
+`
+  }
+};
+
+// ── Frontmatter parser ────────────────────────────────────────
+function parseFrontmatter(content) {
+  const fm = {};
+  let body = content;
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (match) {
+    const fmRaw = match[1];
+    body = match[2];
+    for (const line of fmRaw.split('\n')) {
+      const m = line.match(/^(\w[\w-]*)\s*:\s*(.+)$/);
+      if (!m) continue;
+      const key = m[1].trim();
+      let val = m[2].trim();
+      // Parse arrays: [a, b, c]
+      if (val.startsWith('[') && val.endsWith(']')) {
+        val = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
+      }
+      fm[key] = val;
+    }
+  }
+  return { fm, body };
+}
+
+// ── Extract wikilinks ─────────────────────────────────────────
+function extractWikilinks(content) {
+  const links = new Set();
+  const re = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g;
+  let m;
+  while ((m = re.exec(content)) !== null) {
+    links.add(m[1].trim());
+  }
+  return Array.from(links);
+}
+
+// ── Build vault from embedded docs ───────────────────────────
+function buildVault() {
+  // Clear
+  VAULT.docs = {};
+  VAULT.linkGraph = {};
+  VAULT.backlinks = {};
+  VAULT.tagIndex = {};
+  VAULT.folders = {};
+  VAULT.totalLinks = 0;
+
+  // Ingest all embedded docs
+  for (const [slug, docDef] of Object.entries(EMBEDDED_DOCS)) {
+    const { fm, body } = parseFrontmatter(docDef.content);
+    const title = fm.title || slug.split('/').pop().replace(/-/g, ' ');
+    const tags = Array.isArray(fm.tags) ? fm.tags : (fm.tags ? [fm.tags] : []);
+    const wikilinks = extractWikilinks(docDef.content);
+    const folder = docDef.folder || (slug.includes('/') ? slug.split('/')[0] : '');
+
+    VAULT.docs[slug] = {
+      slug,
+      title,
+      content: body,
+      rawMd: docDef.content,
+      frontmatter: fm,
+      tags,
+      wikilinks,
+      folder,
+    };
+
+    // Tag index
+    for (const tag of tags) {
+      if (!VAULT.tagIndex[tag]) VAULT.tagIndex[tag] = [];
+      VAULT.tagIndex[tag].push(slug);
+    }
+
+    // Folder index
+    if (folder) {
+      if (!VAULT.folders[folder]) VAULT.folders[folder] = [];
+      VAULT.folders[folder].push(slug);
+    }
+
+    // Link graph
+    VAULT.linkGraph[slug] = wikilinks;
+    VAULT.totalLinks += wikilinks.length;
+  }
+
+  // Build backlinks
+  for (const [slug, links] of Object.entries(VAULT.linkGraph)) {
+    for (const link of links) {
+      const target = resolveSlug(link);
+      if (target) {
+        if (!VAULT.backlinks[target]) VAULT.backlinks[target] = [];
+        if (!VAULT.backlinks[target].includes(slug)) {
+          VAULT.backlinks[target].push(slug);
+        }
+      }
+    }
+  }
+}
+
+// ── Slug resolver — find doc by title/alias ──────────────────
+function resolveSlug(nameOrTitle) {
+  // Direct slug match
+  if (VAULT.docs[nameOrTitle]) return nameOrTitle;
+  // Case-insensitive title match
+  const lower = nameOrTitle.toLowerCase();
+  for (const [slug, doc] of Object.entries(VAULT.docs)) {
+    if (doc.title.toLowerCase() === lower) return slug;
+    // Check aliases
+    const aliases = doc.frontmatter.aliases;
+    const aliasList = Array.isArray(aliases) ? aliases : (aliases ? [aliases] : []);
+    for (const alias of aliasList) {
+      if (alias.toLowerCase() === lower) return slug;
+    }
+  }
+  return null;
+}
+
+/* ============================================================
+   MARKDOWN RENDERER
+   ============================================================ */
+function renderMarkdown(md, currentSlug) {
+  // Process code blocks first (protect them)
+  const codeBlocks = [];
+  let html = md.replace(/```([\w]*)\n([\s\S]*?)```/g, (_, lang, code) => {
+    const idx = codeBlocks.length;
+    codeBlocks.push(`<pre><code class="lang-${lang || 'text'}">${escHtml(code.trimEnd())}</code></pre>`);
+    return `\x00CODEBLOCK${idx}\x00`;
+  });
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, (_, code) => `<code>${escHtml(code)}</code>`);
+
+  // Frontmatter block (already stripped by parseFrontmatter but handle if present)
+  html = html.replace(/^---\n[\s\S]*?\n---\n/, '');
+
+  // Headers
+  html = html.replace(/^#{6}\s+(.+)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^#{5}\s+(.+)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^#{4}\s+(.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^#{3}\s+(.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^#{2}\s+(.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^#{1}\s+(.+)$/gm, '<h1>$1</h1>');
+
+  // HR
+  html = html.replace(/^---$/gm, '<hr>');
+
+  // Blockquote
+  html = html.replace(/^>\s*(.+)$/gm, '<blockquote><p>$1</p></blockquote>');
+
+  // Wikilinks: [[Target|Display]] or [[Target]]
+  html = html.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, target, display) => {
+    const slug = resolveSlug(target.trim());
+    if (slug) return `<a class="wikilink" onclick="openDoc('${escAttr(slug)}')">${escHtml(display.trim())}</a>`;
+    return `<a class="wikilink broken" title="Not found: ${escAttr(target)}">${escHtml(display.trim())}</a>`;
+  });
+  html = html.replace(/\[\[([^\]]+)\]\]/g, (_, target) => {
+    const slug = resolveSlug(target.trim());
+    if (slug) return `<a class="wikilink" onclick="openDoc('${escAttr(slug)}')">${escHtml(target.trim())}</a>`;
+    return `<a class="wikilink broken" title="Not found: ${escAttr(target)}">${escHtml(target.trim())}</a>`;
+  });
+
+  // Standard markdown links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  // Tags inline: #tag
+  html = html.replace(/#([\w-]+)/g, (_, tag) => {
+    if (VAULT.tagIndex[tag]) {
+      return `<span class="tag-inline" onclick="filterByTag('${escAttr(tag)}')">#${escHtml(tag)}</span>`;
+    }
+    return `<span class="tag-inline">#${escHtml(tag)}</span>`;
+  });
+
+  // Bold + italic
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/_([^_\n]+)_/g, '<em>$1</em>');
+
+  // Tables
+  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, (_, headerRow, bodyRows) => {
+    const headers = headerRow.split('|').map(h => h.trim()).filter(Boolean);
+    const rows = bodyRows.trim().split('\n').filter(Boolean).map(row =>
+      row.split('|').map(c => c.trim()).filter(Boolean)
+    );
+    let t = '<table><thead><tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>';
+    for (const row of rows) t += '<tr>' + row.map(c => `<td>${c}</td>`).join('') + '</tr>';
+    return t + '</tbody></table>';
+  });
+
+  // Unordered lists
+  html = html.replace(/((?:^[ \t]*[-*+]\s+.+\n?)+)/gm, (block) => {
+    const items = block.trim().split('\n').map(line => {
+      const m = line.match(/^[ \t]*[-*+]\s+(.+)$/);
+      return m ? `<li>${m[1]}</li>` : '';
+    }).filter(Boolean).join('');
+    return `<ul>${items}</ul>`;
+  });
+
+  // Ordered lists
+  html = html.replace(/((?:^[ \t]*\d+\.\s+.+\n?)+)/gm, (block) => {
+    const items = block.trim().split('\n').map(line => {
+      const m = line.match(/^[ \t]*\d+\.\s+(.+)$/);
+      return m ? `<li>${m[1]}</li>` : '';
+    }).filter(Boolean).join('');
+    return `<ol>${items}</ol>`;
+  });
+
+  // Paragraphs — wrap non-tagged lines
+  const lines = html.split('\n');
+  const result = [];
+  let inPara = false;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed === '' || trimmed.startsWith('\x00CODEBLOCK')) {
+      if (inPara) { result.push('</p>'); inPara = false; }
+      result.push(trimmed);
+    } else if (/^<(h[1-6]|ul|ol|li|table|blockquote|hr|pre|div)/.test(trimmed)) {
+      if (inPara) { result.push('</p>'); inPara = false; }
+      result.push(trimmed);
+    } else {
+      if (!inPara) { result.push('<p>'); inPara = true; }
+      result.push(trimmed);
+    }
+  }
+  if (inPara) result.push('</p>');
+  html = result.join('\n');
+
+  // Restore code blocks
+  html = html.replace(/\x00CODEBLOCK(\d+)\x00/g, (_, i) => codeBlocks[parseInt(i)]);
+
+  return html;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  return String(s).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+}
+
+/* ============================================================
+   UI — File Tree
+   ============================================================ */
+let activeDocSlug = null;
+let activeTag = null;
+
+function buildFileTree() {
+  const container = document.getElementById('file-tree');
+  const fileCount = document.getElementById('file-count');
+  container.innerHTML = '';
+
+  const allDocs = Object.values(VAULT.docs);
+  fileCount.textContent = `${allDocs.length} docs`;
+
+  // Group by folder
+  const root = allDocs.filter(d => !d.folder);
+  const folders = {};
+  for (const doc of allDocs) {
+    if (doc.folder) {
+      if (!folders[doc.folder]) folders[doc.folder] = [];
+      folders[doc.folder].push(doc);
+    }
+  }
+
+  // Filter by active tag
+  function shouldShow(doc) {
+    if (!activeTag) return true;
+    return doc.tags.includes(activeTag);
+  }
+
+  // Root docs
+  for (const doc of root) {
+    if (!shouldShow(doc)) continue;
+    container.appendChild(makeFileEl(doc));
+  }
+
+  // Folders
+  for (const [folder, docs] of Object.entries(folders).sort()) {
+    const shown = docs.filter(shouldShow);
+    if (!shown.length) continue;
+    const folderEl = document.createElement('div');
+    folderEl.className = 'tree-folder';
+    folderEl.innerHTML = `<span class="folder-icon">&#128193;</span>${escHtml(folder)}/`;
+    container.appendChild(folderEl);
+    for (const doc of shown) container.appendChild(makeFileEl(doc, true));
+  }
+}
+
+function makeFileEl(doc, indented) {
+  const el = document.createElement('div');
+  el.className = 'tree-file' + (doc.slug === activeDocSlug ? ' active' : '');
+  el.dataset.slug = doc.slug;
+  el.style.paddingLeft = indented ? '38px' : '16px';
+  el.innerHTML = `<span class="file-icon">&#128196;</span><span class="tree-file-name">${escHtml(doc.title)}</span>`;
+  el.onclick = () => openDoc(doc.slug);
+  return el;
+}
+
+/* ============================================================
+   UI — Tags
+   ============================================================ */
+function buildTagCloud() {
+  const container = document.getElementById('tags-container');
+  container.innerHTML = '';
+  const tags = Object.entries(VAULT.tagIndex).sort((a, b) => b[1].length - a[1].length);
+  for (const [tag, slugs] of tags) {
+    const pill = document.createElement('span');
+    pill.className = 'tag-pill' + (activeTag === tag ? ' active' : '');
+    pill.textContent = `#${tag} (${slugs.length})`;
+    pill.onclick = () => filterByTag(tag);
+    container.appendChild(pill);
+  }
+}
+
+function filterByTag(tag) {
+  if (activeTag === tag) {
+    activeTag = null;
+  } else {
+    activeTag = tag;
+  }
+  buildFileTree();
+  buildTagCloud();
+  // Update status
+  if (activeTag) {
+    showStatusMsg(`Filtering by #${activeTag}`);
+  }
+}
+
+/* ============================================================
+   UI — Open Document
+   ============================================================ */
+function openDoc(slug) {
+  const doc = VAULT.docs[slug];
+  if (!doc) {
+    console.warn('openDoc: not found:', slug);
+    return;
+  }
+
+  activeDocSlug = slug;
+  closeSidebar();
+
+  // Update title bar
+  document.getElementById('doc-title-display').textContent = doc.title;
+  document.title = `${doc.title} — ORAPPTER`;
+
+  // Render frontmatter display
+  let fmHtml = '';
+  const fm = doc.frontmatter;
+  if (Object.keys(fm).length > 0) {
+    fmHtml = '<div class="frontmatter-block">';
+    for (const [k, v] of Object.entries(fm)) {
+      const valStr = Array.isArray(v) ? v.join(', ') : String(v);
+      fmHtml += `<div><span class="fm-key">${escHtml(k)}</span>: <span class="fm-val">${escHtml(valStr)}</span></div>`;
+    }
+    fmHtml += '</div>';
+  }
+
+  // Render content
+  const renderedContent = renderMarkdown(doc.content, slug);
+
+  document.getElementById('doc-content').innerHTML = fmHtml + renderedContent;
+
+  // Scroll to top
+  document.getElementById('doc-scroll').scrollTop = 0;
+
+  // Update file tree active state
+  document.querySelectorAll('.tree-file').forEach(el => {
+    el.classList.toggle('active', el.dataset.slug === slug);
+  });
+
+  // Update backlinks
+  updateBacklinks(slug);
+
+  // Update outlinks
+  updateOutlinks(doc);
+
+  // Word count
+  const words = doc.content.trim().split(/\s+/).length;
+  document.getElementById('word-count').textContent = `${words} words`;
+
+  // Update VFS so LisPy can read it
+  VFS[`vault/${slug}.md`] = doc.rawMd;
+
+  // Update status bar
+  document.getElementById('status-docs').textContent = `${Object.keys(VAULT.docs).length} documents`;
+  document.getElementById('status-links').textContent = `${doc.wikilinks.length} links`;
+}
+
+function updateBacklinks(slug) {
+  const bl = VAULT.backlinks[slug] || [];
+  const container = document.getElementById('backlinks-list');
+  container.innerHTML = '';
+
+  if (bl.length === 0) {
+    container.innerHTML = '<div id="no-backlinks">No backlinks to this document</div>';
+    return;
+  }
+
+  for (const srcSlug of bl) {
+    const src = VAULT.docs[srcSlug];
+    if (!src) continue;
+    const item = document.createElement('div');
+    item.className = 'backlink-item';
+    // Find context around the wikilink
+    const re = new RegExp(`\\[\\[${src.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^\\]]*\\]\\]`, 'i');
+    const match = src.content.match(re);
+    let preview = '';
+    if (match) {
+      const idx = src.content.indexOf(match[0]);
+      const start = Math.max(0, idx - 60);
+      const end = Math.min(src.content.length, idx + 80);
+      preview = src.content.slice(start, end).replace(/\n/g, ' ').trim();
+      if (start > 0) preview = '...' + preview;
+    }
+    item.innerHTML = `<div class="backlink-title">${escHtml(src.title)}</div>${preview ? `<div class="backlink-preview">${escHtml(preview)}</div>` : ''}`;
+    item.onclick = () => openDoc(srcSlug);
+    container.appendChild(item);
+  }
+}
+
+function updateOutlinks(doc) {
+  const container = document.getElementById('outlinks-list');
+  container.innerHTML = '';
+  for (const link of doc.wikilinks) {
+    const slug = resolveSlug(link);
+    const item = document.createElement('div');
+    item.className = 'outlink-item';
+    item.textContent = link;
+    if (slug) item.onclick = () => openDoc(slug);
+    else item.style.color = 'var(--text-faint)';
+    container.appendChild(item);
+  }
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+let searchTimeout = null;
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(doSearch, 200);
+});
+
+searchInput.addEventListener('blur', () => {
+  setTimeout(() => { searchResults.classList.remove('visible'); }, 200);
+});
+
+searchInput.addEventListener('focus', () => {
+  if (searchInput.value.trim()) doSearch();
+});
+
+function doSearch() {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) { searchResults.classList.remove('visible'); return; }
+
+  // Use LisPy for search
+  const lispResult = lispEval(`(vault-search "${q.replace(/"/g, '\\"')}")`);
+  const matchTitles = lispResult.ok && Array.isArray(lispResult.result) ? lispResult.result : [];
+
+  // Also do direct content search for snippets
+  const matches = [];
+  for (const [slug, doc] of Object.entries(VAULT.docs)) {
+    const titleMatch = doc.title.toLowerCase().includes(q);
+    const contentMatch = doc.content.toLowerCase().includes(q);
+    if (titleMatch || contentMatch) {
+      let snippet = '';
+      if (contentMatch) {
+        const idx = doc.content.toLowerCase().indexOf(q);
+        const start = Math.max(0, idx - 40);
+        const end = Math.min(doc.content.length, idx + 80);
+        snippet = doc.content.slice(start, end).replace(/\n/g, ' ').trim();
+        if (start > 0) snippet = '...' + snippet;
+      }
+      matches.push({ slug, doc, snippet, score: titleMatch ? 2 : 1 });
+    }
+  }
+  matches.sort((a, b) => b.score - a.score);
+
+  if (!matches.length) {
+    searchResults.innerHTML = '<div class="search-result-item"><div class="sr-title" style="color:var(--text-muted)">No results found</div></div>';
+    searchResults.classList.add('visible');
+    return;
+  }
+
+  searchResults.innerHTML = matches.slice(0, 8).map(({ slug, doc, snippet }) => `
+    <div class="search-result-item" onclick="openDoc('${escAttr(slug)}');document.getElementById('search-input').value='';document.getElementById('search-results').classList.remove('visible')">
+      <div class="sr-title">${escHtml(doc.title)}</div>
+      ${snippet ? `<div class="sr-snippet">${escHtml(snippet)}</div>` : ''}
+      ${doc.tags.length ? `<div class="sr-tags">${doc.tags.map(t => `<span class="tag-pill" style="font-size:10px;padding:1px 6px">#${escHtml(t)}</span>`).join('')}</div>` : ''}
+    </div>
+  `).join('');
+  searchResults.classList.add('visible');
+}
+
+/* ============================================================
+   GRAPH VIEW
+   ============================================================ */
+let graphNodes = [];
+let graphEdges = [];
+let graphSim = null;
+let graphCanvas = null;
+let graphCtx = null;
+let graphHover = null;
+let isDragging = false;
+let dragNode = null;
+let graphOffsetX = 0, graphOffsetY = 0;
+
+function openGraph() {
+  document.getElementById('graph-modal').classList.add('visible');
+  initGraph();
+}
+function closeGraph() {
+  document.getElementById('graph-modal').classList.remove('visible');
+  if (graphSim) { cancelAnimationFrame(graphSim); graphSim = null; }
+}
+
+function initGraph() {
+  graphCanvas = document.getElementById('graph-canvas');
+  graphCtx = graphCanvas.getContext('2d');
+  const rect = graphCanvas.parentElement.getBoundingClientRect();
+  graphCanvas.width = rect.width;
+  graphCanvas.height = rect.height;
+
+  const W = graphCanvas.width, H = graphCanvas.height;
+  const docs = Object.values(VAULT.docs);
+
+  // Build nodes
+  graphNodes = docs.map((doc, i) => ({
+    slug: doc.slug,
+    title: doc.title,
+    x: W / 2 + (Math.random() - 0.5) * W * 0.6,
+    y: H / 2 + (Math.random() - 0.5) * H * 0.6,
+    vx: 0, vy: 0,
+    r: 6 + Math.min(10, (VAULT.backlinks[doc.slug] || []).length * 2),
+    color: doc.slug === activeDocSlug ? '#7f6df2' : '#4a4a6a',
+  }));
+
+  // Build edges
+  graphEdges = [];
+  for (const [src, links] of Object.entries(VAULT.linkGraph)) {
+    for (const link of links) {
+      const target = resolveSlug(link);
+      if (target) {
+        const si = graphNodes.findIndex(n => n.slug === src);
+        const ti = graphNodes.findIndex(n => n.slug === target);
+        if (si >= 0 && ti >= 0) graphEdges.push({ source: si, target: ti });
+      }
+    }
+  }
+
+  // Mouse interaction
+  graphCanvas.onmousemove = (e) => {
+    const rect = graphCanvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    if (isDragging && dragNode !== null) {
+      graphNodes[dragNode].x = mx;
+      graphNodes[dragNode].y = my;
+      return;
+    }
+    graphHover = null;
+    for (let i = 0; i < graphNodes.length; i++) {
+      const n = graphNodes[i];
+      const dx = n.x - mx, dy = n.y - my;
+      if (Math.sqrt(dx*dx + dy*dy) < n.r + 4) { graphHover = i; break; }
+    }
+    const tt = document.getElementById('graph-tooltip');
+    if (graphHover !== null) {
+      tt.style.display = 'block';
+      tt.style.left = (mx + 12) + 'px';
+      tt.style.top = (my - 8) + 'px';
+      tt.textContent = graphNodes[graphHover].title;
+      graphCanvas.style.cursor = 'pointer';
+    } else {
+      tt.style.display = 'none';
+      graphCanvas.style.cursor = 'default';
+    }
+  };
+  graphCanvas.onmousedown = (e) => {
+    if (graphHover !== null) { isDragging = true; dragNode = graphHover; }
+  };
+  graphCanvas.onmouseup = () => {
+    if (isDragging && dragNode !== null) {
+      // click = navigate
+      if (graphHover === dragNode) openDoc(graphNodes[dragNode].slug);
+    }
+    isDragging = false; dragNode = null;
+  };
+  graphCanvas.onmouseleave = () => { isDragging = false; dragNode = null; };
+
+  // Force simulation
+  function tick() {
+    const W = graphCanvas.width, H = graphCanvas.height;
+    // Spring + repulsion
+    for (let i = 0; i < graphNodes.length; i++) {
+      const n = graphNodes[i];
+      // Center gravity
+      n.vx += (W / 2 - n.x) * 0.001;
+      n.vy += (H / 2 - n.y) * 0.001;
+      // Repulsion from other nodes
+      for (let j = i + 1; j < graphNodes.length; j++) {
+        const m = graphNodes[j];
+        const dx = n.x - m.x, dy = n.y - m.y;
+        const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+        const force = 800 / (dist * dist);
+        const fx = dx / dist * force, fy = dy / dist * force;
+        n.vx += fx; n.vy += fy;
+        m.vx -= fx; m.vy -= fy;
+      }
+    }
+    // Edge springs
+    for (const e of graphEdges) {
+      const a = graphNodes[e.source], b = graphNodes[e.target];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+      const targetDist = 100;
+      const force = (dist - targetDist) * 0.04;
+      const fx = dx / dist * force, fy = dy / dist * force;
+      a.vx += fx; a.vy += fy;
+      b.vx -= fx; b.vy -= fy;
+    }
+    // Integrate + dampen
+    for (const n of graphNodes) {
+      if (isDragging && dragNode === graphNodes.indexOf(n)) continue;
+      n.vx *= 0.85; n.vy *= 0.85;
+      n.x += n.vx; n.y += n.vy;
+      n.x = Math.max(20, Math.min(W - 20, n.x));
+      n.y = Math.max(20, Math.min(H - 20, n.y));
+    }
+    drawGraph();
+    graphSim = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+function drawGraph() {
+  const W = graphCanvas.width, H = graphCanvas.height;
+  graphCtx.clearRect(0, 0, W, H);
+  graphCtx.fillStyle = '#161616';
+  graphCtx.fillRect(0, 0, W, H);
+
+  // Edges
+  graphCtx.strokeStyle = '#363646';
+  graphCtx.lineWidth = 1;
+  for (const e of graphEdges) {
+    const a = graphNodes[e.source], b = graphNodes[e.target];
+    graphCtx.beginPath();
+    graphCtx.moveTo(a.x, a.y);
+    graphCtx.lineTo(b.x, b.y);
+    graphCtx.stroke();
+  }
+
+  // Nodes
+  for (let i = 0; i < graphNodes.length; i++) {
+    const n = graphNodes[i];
+    const isHovered = i === graphHover;
+    const isActive = n.slug === activeDocSlug;
+
+    graphCtx.beginPath();
+    graphCtx.arc(n.x, n.y, n.r + (isHovered ? 3 : 0), 0, Math.PI * 2);
+    graphCtx.fillStyle = isActive ? '#7f6df2' : isHovered ? '#5a5a8a' : '#3a3a5a';
+    graphCtx.fill();
+    if (isActive || isHovered) {
+      graphCtx.strokeStyle = '#7f6df2';
+      graphCtx.lineWidth = 2;
+      graphCtx.stroke();
+    }
+
+    // Label
+    if (isHovered || isActive || n.r > 10) {
+      graphCtx.fillStyle = isActive ? '#fff' : '#aaa';
+      graphCtx.font = `${isActive ? 'bold ' : ''}11px sans-serif`;
+      graphCtx.textAlign = 'center';
+      graphCtx.fillText(n.title, n.x, n.y + n.r + 14);
+    }
+  }
+}
+
+/* ============================================================
+   ORAPPTER REPL
+   ============================================================ */
+const replInput = document.getElementById('orappter-repl-input');
+const replOut = document.getElementById('orappter-repl-out');
+const replHistory = [];
+let replHistIdx = -1;
+
+replInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const src = replInput.value.trim();
+    if (!src) return;
+    replHistory.unshift(src);
+    replHistIdx = -1;
+    const res = lispEval(src);
+    const out = res.output ? res.output.trim() : res.repr;
+    replOut.textContent = out.length > 80 ? out.slice(0, 80) + '...' : out;
+    replOut.className = res.ok ? '' : 'err';
+    replInput.value = '';
+    e.preventDefault();
+  }
+  if (e.key === 'ArrowUp') {
+    replHistIdx = Math.min(replHistIdx + 1, replHistory.length - 1);
+    replInput.value = replHistory[replHistIdx] || '';
+    e.preventDefault();
+  }
+  if (e.key === 'ArrowDown') {
+    replHistIdx = Math.max(replHistIdx - 1, -1);
+    replInput.value = replHistIdx >= 0 ? replHistory[replHistIdx] : '';
+    e.preventDefault();
+  }
+});
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+function toggleSidebar() {
+  const sl = document.getElementById('sidebar-left');
+  const ov = document.getElementById('mobile-overlay');
+  sl.classList.toggle('open');
+  ov.classList.toggle('visible');
+}
+function closeSidebar() {
+  document.getElementById('sidebar-left').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('visible');
+}
+
+/* ============================================================
+   STATUS BAR HELPERS
+   ============================================================ */
+function showStatusMsg(msg) {
+  const el = document.getElementById('status-mode');
+  const prev = el.textContent;
+  el.textContent = msg;
+  setTimeout(() => { el.textContent = prev; }, 2000);
+}
+
+/* ============================================================
+   INIT — Bootstrap the entire application
+   ============================================================ */
+async function init() {
+  const loadingBar = document.getElementById('loading-bar');
+  const loadingMsg = document.getElementById('loading-msg');
+  const loadingScreen = document.getElementById('loading-screen');
+
+  // Step 1: LisPy VM init
+  loadingMsg.textContent = 'Initializing LisPy VM...';
+  loadingBar.style.width = '20%';
+  await sleep(80);
+
+  // Smoke-test the VM
+  const test = lispEval('(+ 1 2 3)');
+  if (!test.ok || test.result !== 6) {
+    loadingMsg.textContent = 'VM ERROR: ' + test.error;
+    return;
+  }
+
+  // Step 2: Build vault from embedded docs
+  loadingMsg.textContent = 'Loading vault documents...';
+  loadingBar.style.width = '40%';
+  await sleep(80);
+  buildVault();
+
+  // Step 3: Try fetching from GitHub (optional, non-blocking)
+  loadingMsg.textContent = 'Checking for remote vault...';
+  loadingBar.style.width = '60%';
+  await sleep(50);
+
+  // We don't block on GitHub fetch — vault works offline
+  // Try fetch in background
+  fetchRemoteVault().catch(() => {});
+
+  // Step 4: Build UI
+  loadingMsg.textContent = 'Building file tree...';
+  loadingBar.style.width = '80%';
+  await sleep(60);
+  buildFileTree();
+  buildTagCloud();
+
+  // Step 5: Open HOME doc
+  loadingMsg.textContent = 'Opening workspace...';
+  loadingBar.style.width = '100%';
+  await sleep(100);
+
+  // Update status bar
+  document.getElementById('status-docs').textContent = `${Object.keys(VAULT.docs).length} documents`;
+  document.getElementById('status-links').textContent = `${VAULT.totalLinks} links`;
+  document.getElementById('status-lisp').textContent = 'LisPy VM ✓';
+
+  // Hide loading screen
+  loadingScreen.classList.add('hidden');
+
+  // Open HOME
+  openDoc('HOME');
+}
+
+async function fetchRemoteVault() {
+  // Attempt to fetch from GitHub API — silently fails if offline
+  try {
+    const res = await fetch('https://api.github.com/repos/kody-w/wildhaven-ceo/contents/', {
+      headers: { 'Accept': 'application/vnd.github.v3+json' },
+      signal: AbortSignal.timeout(5000)
+    });
+    if (!res.ok) return;
+    const items = await res.json();
+    let fetched = 0;
+    for (const item of items) {
+      if (item.type === 'file' && item.name.endsWith('.md')) {
+        try {
+          const content = await (await fetch(item.download_url, { signal: AbortSignal.timeout(3000) })).text();
+          const slug = item.name.replace(/\.md$/, '');
+          if (!VAULT.docs[slug]) {
+            EMBEDDED_DOCS[slug] = { folder: '', content };
+            fetched++;
+          }
+        } catch {}
+      }
+    }
+    if (fetched > 0) {
+      buildVault();
+      buildFileTree();
+      buildTagCloud();
+      document.getElementById('status-docs').textContent = `${Object.keys(VAULT.docs).length} documents`;
+      showStatusMsg(`Loaded ${fetched} remote docs`);
+    }
+  } catch {}
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── Start ─────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', init);
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // Ctrl/Cmd + K → focus search
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('search-input').focus();
+    document.getElementById('search-input').select();
+  }
+  // Escape → close graph, clear search, close sidebar
+  if (e.key === 'Escape') {
+    closeGraph();
+    document.getElementById('search-results').classList.remove('visible');
+    closeSidebar();
+  }
+  // Ctrl+G → open graph
+  if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
+    e.preventDefault();
+    openGraph();
+  }
+});
+</script>
+</body>
+</html>
