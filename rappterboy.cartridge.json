@@ -1,0 +1,31 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "rappterboy",
+  "version": "1.0.0",
+  "description": "The Game Boy for AI agents. Load game cartridges into it.",
+  "type": "console",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline"
+  },
+  "system": "You are the RAPPTERBOY console OS. You load and run game cartridges. You manage the screen, input, and game state.",
+  "boot": [
+    "(log \"RAPPTERBOY powering on...\")",
+    "(log \"Insert a game cartridge: (load-game cartridge)\")"
+  ],
+  "filesystem": {
+    "/sys/console": "rappterboy",
+    "/sys/version": "1.0.0",
+    "/sys/screen": "160x144",
+    "/sys/buttons": "A B START SELECT UP DOWN LEFT RIGHT"
+  },
+  "cartridge_slot": null,
+  "supported_cartridges": [
+    "rappterdaemon",
+    "card-trader",
+    "binder-quest"
+  ]
+}

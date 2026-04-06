@@ -1,0 +1,520 @@
+;; ═══════════════════════════════════════════════════════════════
+;; RAPPTERBOY — The Game Boy for AI Agents
+;; A turn-based RPG where your agent cards battle, level up,
+;; and evolve. Powered by ORAPPTER. Runs in the browser.
+;; "April Fools 2026" — except it actually works.
+;; ═══════════════════════════════════════════════════════════════
+;;
+;;  ┌─────────────────────────────┐
+;;  │       RAPPTERBOY            │
+;;  │  ┌───────────────────────┐  │
+;;  │  │                       │  │
+;;  │  │   RAPPTERDAEMON       │  │
+;;  │  │                       │  │
+;;  │  │  Wild CEO AGENT       │  │
+;;  │  │  appeared!            │  │
+;;  │  │                       │  │
+;;  │  │  ┌─────────────────┐  │  │
+;;  │  │  │ DEAL-DESK  12/8 │  │  │
+;;  │  │  │ ████████░░  HP  │  │  │
+;;  │  │  └─────────────────┘  │  │
+;;  │  │                       │  │
+;;  │  │  > PERFORM            │  │
+;;  │  │    ANALYZE            │  │
+;;  │  │    CARD               │  │
+;;  │  │    RUN                │  │
+;;  │  └───────────────────────┘  │
+;;  │       ┌───┐                 │
+;;  │    ┌──┤   ├──┐    (A) (B)  │
+;;  │    │  └───┘  │             │
+;;  │    └────┬────┘   START     │
+;;  │         │       SELECT     │
+;;  └─────────────────────────────┘
+;;
+
+(define _agent_name "rappterboy")
+(define _agent_desc "Turn-based RPG for AI agent cards — the Game Boy for the agentic era")
+
+(define RAPPTERBOY_VERSION "1.0.0")
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: The Daemon — Your Agent Party
+;; Like Pokemon, you carry a party of 6 agents
+;; ═══════════════════════════════════════════════════════════════
+
+(define *party* (list))
+(define *active* nil)
+(define *wild* nil)
+(define *player-name* "Trainer")
+(define *badges* (list))
+(define *location* "Pallet Lab")
+(define *battle-log* (list))
+
+;; A daemon is a card + battle stats
+(define (make-daemon card)
+  (let (max-hp (* (+ (get card "power" 1) (get card "toughness" 1)) 10))
+    (make-dict
+      "card" card
+      "name" (get card "display_name" "Unknown")
+      "agent" (get card "name" "")
+      "type" (get card "category" "general")
+      "rarity" (get card "rarity" "core")
+      "level" 1
+      "xp" 0
+      "hp" max-hp
+      "max_hp" max-hp
+      "power" (get card "power" 1)
+      "toughness" (get card "toughness" 1)
+      "moves" (daemon-moves card)
+      "status" "healthy"
+      "evolved" false)))
+
+;; Generate moves from card attributes
+(define (daemon-moves card)
+  (let (cat (get card "category" "general")
+        power (get card "power" 1)
+        toughness (get card "toughness" 1))
+    (list
+      ;; Move 1: Basic attack (always available)
+      (make-dict
+        "name" "Perform"
+        "type" "normal"
+        "damage" (* power 5)
+        "accuracy" 95
+        "description" "Execute the agent's primary function")
+      ;; Move 2: Category-specific
+      (make-dict
+        "name" (get (make-dict
+          "b2b_sales" "Close Deal"
+          "b2c_sales" "Convert"
+          "healthcare" "Diagnose"
+          "financial_services" "Audit"
+          "manufacturing" "Optimize"
+          "devtools" "Debug"
+          "pipeline" "Pipeline"
+          "integrations" "Connect"
+          "productivity" "Automate"
+          "core" "Foundation"
+          "general" "Analyze") cat "Analyze")
+        "type" cat
+        "damage" (* power 7)
+        "accuracy" 80
+        "description" (concat "Specialized " cat " attack"))
+      ;; Move 3: Defense
+      (make-dict
+        "name" "Harden"
+        "type" "defense"
+        "damage" 0
+        "heal" (* toughness 8)
+        "accuracy" 100
+        "description" "Restore HP based on toughness")
+      ;; Move 4: Ultimate (rarity-gated)
+      (make-dict
+        "name" (cond
+          ((= (get card "rarity") "mythic") "Legendary Strike")
+          ((= (get card "rarity") "rare") "Elite Surge")
+          ((= (get card "rarity") "core") "Core Blast")
+          (true "Starter Spark"))
+        "type" "ultimate"
+        "damage" (* power 12)
+        "accuracy" 60
+        "description" "High-risk, high-reward ultimate move"))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: New Game — Start your adventure
+;; ═══════════════════════════════════════════════════════════════
+
+(define (new-game name registry)
+  (set! *player-name* name)
+  (set! *party* (list))
+  (set! *badges* (list))
+  (set! *location* "Pallet Lab")
+  (set! *battle-log* (list))
+  (log "═══════════════════════════════════════")
+  (log " R A P P T E R D A E M O N")
+  (log "═══════════════════════════════════════")
+  (log "")
+  (log (concat " Welcome, " name "!"))
+  (log "")
+  (log " Professor Rapp: \"Welcome to the world of")
+  (log " AI agents! Choose your starter daemon.\"")
+  (log "")
+  ;; Offer 3 starters
+  (let (starters (take (shuffle (get registry "agents" (list))) 3))
+    (repeat (length starters)
+      (let (s (nth starters _i)
+            card (resolve-card (get s "name") registry))
+        (log (concat " " (string (+ _i 1)) ". " (get card "display_name")
+                     " [" (get card "rarity_label") "] "
+                     "P/T: " (string (get card "power")) "/" (string (get card "toughness"))))))
+    (log "")
+    (log " (choose-starter 1), (choose-starter 2), or (choose-starter 3)")
+    (set! *wild* starters)))
+
+(define (choose-starter n)
+  (if (or (< n 1) (> n 3))
+    (log "Choose 1, 2, or 3")
+    (let (agent (nth *wild* (- n 1))
+          card (resolve-card (get agent "name") (make-dict "agents" *wild*)))
+      (let (daemon (make-daemon card))
+        (set! *party* (list daemon))
+        (set! *active* daemon)
+        (log (concat "You chose " (get daemon "name") "!"))
+        (log (concat (get daemon "name") " joined your party!"))
+        (log "")
+        (log "Professor Rapp: \"Take good care of your daemon.\"")
+        (log "Professor Rapp: \"Now go explore! Use (explore) to find wild daemons.\"")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Explore — Find wild daemons
+;; ═══════════════════════════════════════════════════════════════
+
+(define LOCATIONS
+  (list
+    (make-dict "name" "Pallet Lab" "level" 1 "types" (list "core" "devtools"))
+    (make-dict "name" "Sales Route" "level" 3 "types" (list "b2b_sales" "b2c_sales"))
+    (make-dict "name" "Health District" "level" 5 "types" (list "healthcare"))
+    (make-dict "name" "Finance Tower" "level" 7 "types" (list "financial_services"))
+    (make-dict "name" "Factory Floor" "level" 9 "types" (list "manufacturing" "energy"))
+    (make-dict "name" "Pipeline Depths" "level" 12 "types" (list "pipeline" "integrations"))
+    (make-dict "name" "Productivity Peak" "level" 15 "types" (list "productivity"))
+    (make-dict "name" "SuperSeed Chamber" "level" 20 "types" (list "core"))))
+
+(define (explore)
+  (if (null? *active*)
+    (log "Start a game first! (new-game \"Your Name\" registry)")
+    (begin
+      (log (concat "Exploring " *location* "..."))
+      (log "")
+      ;; Random encounter
+      (let (rng (mulberry32 (seed-hash (concat *location* (string (length *battle-log*)))))
+            encounter (rng))
+        (cond
+          ;; 60% chance: wild daemon appears
+          ((< encounter 0.6)
+            (begin
+              (log "A wild daemon appeared!")
+              (wild-encounter)))
+          ;; 20% chance: item found
+          ((< encounter 0.8)
+            (begin
+              (log "You found a Rare Candy! (+50 XP)")
+              (gain-xp *active* 50)))
+          ;; 10% chance: trainer battle
+          ((< encounter 0.9)
+            (begin
+              (log "A trainer wants to battle!")
+              (wild-encounter)))
+          ;; 10% chance: nothing
+          (true
+            (log "The area is quiet. Keep exploring...")))))))
+
+(define (wild-encounter)
+  ;; Generate a wild daemon from any agent
+  (let (rng (mulberry32 (seed-hash (concat "wild" (string (length *battle-log*)))))
+        idx (floor (* (rng) 131))
+        wild-card (make-dict
+          "display_name" (concat "Wild Agent #" (string idx))
+          "name" (concat "@wild/daemon-" (string idx))
+          "category" "general"
+          "rarity" "core"
+          "power" (+ 1 (floor (* (rng) 6)))
+          "toughness" (+ 1 (floor (* (rng) 6)))
+          "flavor" "A wild daemon looking for a trainer."))
+    (set! *wild* (make-daemon wild-card))
+    (display-battle-state)
+    (log "")
+    (log " Commands: (fight 1-4) (catch) (run) (party)")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Battle System
+;; ═══════════════════════════════════════════════════════════════
+
+(define (display-battle-state)
+  (if (null? *wild*)
+    (log "No battle in progress")
+    (begin
+      (log "┌─────────────────────────────────┐")
+      (log (concat "│ " (get *wild* "name")
+                   (make-string (- 26 (length (get *wild* "name"))) " ")
+                   (string (get *wild* "level")) " │"))
+      (log (concat "│ HP: " (hp-bar *wild*) " │"))
+      (log "│                                 │")
+      (log (concat "│         " (get *active* "name")
+                   (make-string (- 18 (length (get *active* "name"))) " ")
+                   (string (get *active* "level")) " │"))
+      (log (concat "│    HP: " (hp-bar *active*) "  │"))
+      (log "├─────────────────────────────────┤")
+      (let (moves (get *active* "moves"))
+        (log (concat "│ 1." (get (nth moves 0) "name")
+                     "  2." (get (nth moves 1) "name") " │"))
+        (log (concat "│ 3." (get (nth moves 2) "name")
+                     "  4." (get (nth moves 3) "name") " │")))
+      (log "└─────────────────────────────────┘"))))
+
+(define (hp-bar daemon)
+  (let (pct (/ (get daemon "hp") (get daemon "max_hp"))
+        filled (floor (* pct 10))
+        empty (- 10 filled))
+    (concat (make-string filled "█") (make-string empty "░")
+            " " (string (get daemon "hp")) "/" (string (get daemon "max_hp")))))
+
+(define (make-string n char)
+  (if (<= n 0) ""
+    (reduce (lambda (_acc _) (concat _acc char)) (range n) "")))
+
+;; Fight — use a move
+(define (fight move-num)
+  (if (or (null? *wild*) (null? *active*))
+    (log "No battle in progress!")
+    (let (move (nth (get *active* "moves") (- move-num 1)))
+      (if (null? move)
+        (log "Invalid move! Choose 1-4.")
+        (begin
+          ;; Player attacks
+          (let (hit-roll (* (random) 100))
+            (if (< hit-roll (get move "accuracy"))
+              ;; Hit
+              (let (dmg (get move "damage" 0)
+                    heal (get move "heal" 0))
+                (if (> dmg 0)
+                  (begin
+                    (set! *wild* (dict-set *wild* "hp"
+                      (max 0 (- (get *wild* "hp") dmg))))
+                    (log (concat (get *active* "name") " used " (get move "name") "!"))
+                    (log (concat "It dealt " (string dmg) " damage!")))
+                  (begin
+                    (set! *active* (dict-set *active* "hp"
+                      (min (get *active* "max_hp") (+ (get *active* "hp") heal))))
+                    (log (concat (get *active* "name") " used " (get move "name") "!"))
+                    (log (concat "Restored " (string heal) " HP!")))))
+              ;; Miss
+              (log (concat (get *active* "name") " used " (get move "name") "... but missed!"))))
+
+          ;; Check if wild fainted
+          (if (<= (get *wild* "hp") 0)
+            (begin
+              (log (concat (get *wild* "name") " fainted!"))
+              (let (xp-gain (* (get *wild* "level" 1) 20))
+                (gain-xp *active* xp-gain))
+              (set! *wild* nil)
+              (log "")
+              (log "(explore) to continue your adventure!"))
+            ;; Wild daemon attacks back
+            (let (enemy-move (nth (get *wild* "moves") (floor (* (random) 2)))
+                  enemy-dmg (get enemy-move "damage" 5))
+              (set! *active* (dict-set *active* "hp"
+                (max 0 (- (get *active* "hp") enemy-dmg))))
+              (log (concat (get *wild* "name") " used " (get enemy-move "name") "!"))
+              (log (concat "Your daemon took " (string enemy-dmg) " damage!"))
+              (if (<= (get *active* "hp") 0)
+                (begin
+                  (log (concat (get *active* "name") " fainted!"))
+                  (log "You blacked out! Heal at the lab."))
+                (display-battle-state)))))))))
+
+;; Catch — add wild daemon to party
+(define (catch)
+  (if (null? *wild*)
+    (log "Nothing to catch!")
+    (let (catch-rate (/ (- (get *wild* "max_hp") (get *wild* "hp"))
+                        (get *wild* "max_hp")))
+      (if (> (random) (- 1.0 catch-rate))
+        (begin
+          (log "...")
+          (log "...")
+          (log "...")
+          (log (concat "Gotcha! " (get *wild* "name") " was caught!"))
+          (if (< (length *party*) 6)
+            (begin
+              (set! *party* (append *party* (list *wild*)))
+              (log (concat (get *wild* "name") " joined your party!")))
+            (log "Party full! Swap from (party)."))
+          (set! *wild* nil))
+        (begin
+          (log "...")
+          (log (concat (get *wild* "name") " broke free!"))
+          ;; Wild attacks on failed catch
+          (let (enemy-dmg (* (get *wild* "power" 1) 3))
+            (set! *active* (dict-set *active* "hp"
+              (max 0 (- (get *active* "hp") enemy-dmg))))
+            (log (concat "It attacked! " (string enemy-dmg) " damage!"))
+            (display-battle-state)))))))
+
+;; Run away
+(define (run)
+  (if (null? *wild*)
+    (log "Nothing to run from!")
+    (begin
+      (log "Got away safely!")
+      (set! *wild* nil))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Party Management + Leveling
+;; ═══════════════════════════════════════════════════════════════
+
+(define (party)
+  (log "═══ YOUR PARTY ═══")
+  (repeat (length *party*)
+    (let (d (nth *party* _i))
+      (log (concat " " (string (+ _i 1)) ". " (get d "name")
+                   " Lv." (string (get d "level"))
+                   " [" (get d "rarity") "]"
+                   " HP:" (string (get d "hp")) "/" (string (get d "max_hp"))
+                   " P:" (string (get d "power"))
+                   " T:" (string (get d "toughness")))))))
+
+(define (gain-xp daemon amount)
+  (let (new-xp (+ (get daemon "xp" 0) amount)
+        level (get daemon "level" 1)
+        xp-needed (* level 100))
+    (set! daemon (dict-set daemon "xp" new-xp))
+    (log (concat (get daemon "name") " gained " (string amount) " XP!"))
+    (if (>= new-xp xp-needed)
+      (level-up daemon)
+      daemon)))
+
+(define (level-up daemon)
+  (let (new-level (+ (get daemon "level") 1)
+        new-power (+ (get daemon "power") 1)
+        new-tough (+ (get daemon "toughness") 1)
+        new-max-hp (* (+ new-power new-tough) 10))
+    (set! daemon (dict-set daemon "level" new-level))
+    (set! daemon (dict-set daemon "power" new-power))
+    (set! daemon (dict-set daemon "toughness" new-tough))
+    (set! daemon (dict-set daemon "max_hp" new-max-hp))
+    (set! daemon (dict-set daemon "hp" new-max-hp))
+    (set! daemon (dict-set daemon "xp" 0))
+    (log "")
+    (log (concat "★ " (get daemon "name") " leveled up to Lv." (string new-level) "!"))
+    (log (concat "  Power: " (string new-power) "  Toughness: " (string new-tough)
+                 "  HP: " (string new-max-hp)))
+    ;; Update moves damage
+    (set! daemon (dict-set daemon "moves" (daemon-moves (get daemon "card"))))
+    daemon))
+
+;; Heal all party members
+(define (heal)
+  (set! *party*
+    (map (lambda (d) (dict-set d "hp" (get d "max_hp")))
+         *party*))
+  (set! *active* (car *party*))
+  (log "All daemons healed!")
+  (log "Professor Rapp: \"Your daemons are fighting fit!\""))
+
+;; Switch active daemon
+(define (switch n)
+  (if (or (< n 1) (> n (length *party*)))
+    (log "Invalid party slot!")
+    (begin
+      (set! *active* (nth *party* (- n 1)))
+      (log (concat "Go, " (get *active* "name") "!")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: AI-Powered Battles (ORAPPTER integration)
+;; When ORAPPTER is loaded, daemons talk during battle
+;; ═══════════════════════════════════════════════════════════════
+
+;; Make a daemon speak (uses ORAPPTER if available)
+(define (daemon-speak daemon prompt)
+  (if (defined? 'smart-generate)
+    (smart-generate
+      (concat "You are " (get daemon "name") ", a " (get daemon "rarity")
+              " AI agent daemon in battle. " prompt
+              " Respond in ONE short sentence, in character."))
+    (concat (get daemon "name") " growls!")))
+
+;; Battle with dialogue
+(define (fight-with-dialogue move-num)
+  (fight move-num)
+  (if (not (null? *active*))
+    (log (concat "  \"" (daemon-speak *active* "You just attacked. React.") "\"")))
+  (if (not (null? *wild*))
+    (log (concat "  \"" (daemon-speak *wild* "You were hit. React.") "\""))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Real Card Integration
+;; Use ACTUAL cards from the RAR registry as daemons
+;; ═══════════════════════════════════════════════════════════════
+
+;; Start a game with real registry cards
+(define (new-game-real name registry)
+  (new-game name registry))
+
+;; Catch a real agent from the registry
+(define (encounter-real agent-name registry)
+  (let (card (resolve-card agent-name registry))
+    (if (has-key? card "error")
+      (log (get card "error"))
+      (begin
+        (set! *wild* (make-daemon card))
+        (log (concat "A wild " (get card "display_name") " appeared!"))
+        (log (concat "[" (get card "rarity_label") "] "
+                     "P/T: " (string (get card "power")) "/" (string (get card "toughness"))))
+        (log (concat "\"" (get card "flavor") "\""))
+        (log "")
+        (display-battle-state)
+        (log "")
+        (log "(fight 1-4) (catch) (run)")))))
+
+;; Boss battle — fight a Legendary daemon
+(define (boss-battle agent-name registry)
+  (let (card (resolve-card agent-name registry))
+    (if (has-key? card "error")
+      (log (get card "error"))
+      (begin
+        (log "═══════════════════════════════════════")
+        (log " ★ BOSS BATTLE ★")
+        (log "═══════════════════════════════════════")
+        ;; Boss is 3x stats
+        (let (boss-card (dict-merge card
+                (make-dict
+                  "power" (* (get card "power") 3)
+                  "toughness" (* (get card "toughness") 3))))
+          (set! *wild* (make-daemon boss-card))
+          (set! *wild* (dict-set *wild* "level" 50))
+          (log (concat "BOSS: " (get card "display_name") " appeared!"))
+          (log (concat "[" (get card "rarity_label") "] — THIS IS A BOSS"))
+          (log "")
+          (display-battle-state))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔═══════════════════════════════╗")
+  (log "  ║       R A P P T E R B O Y     ║")
+  (log "  ║                               ║")
+  (log "  ║    R A P P T E R D A E M O N  ║")
+  (log "  ║                               ║")
+  (log "  ║    Gotta Perform 'Em All!     ║")
+  (log "  ║                               ║")
+  (log "  ║    PRESS START                ║")
+  (log "  ╚═══════════════════════════════╝")
+  (log "")
+  (log "  (new-game \"Your Name\" registry)")
+  (log "  (new-game-real \"Your Name\" registry)")
+  (log "")
+  (log "  Commands:")
+  (log "    (explore)        — find wild daemons")
+  (log "    (fight 1-4)      — use a move")
+  (log "    (catch)          — catch the wild daemon")
+  (log "    (run)            — flee from battle")
+  (log "    (party)          — view your party")
+  (log "    (switch N)       — swap active daemon")
+  (log "    (heal)           — restore all HP")
+  (log "    (encounter-real \"@name\" reg) — fight a real agent")
+  (log "    (boss-battle \"@rapp/basic-agent\" reg) — fight the SuperSeed")
+  (log "")
+  (log "  Late April Fools 2026. Except it actually works.")
+  (log "  Battery is the timer. Go outside. Battle friends."))

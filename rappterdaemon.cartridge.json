@@ -1,0 +1,66 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "rappterdaemon",
+  "version": "1.0.0",
+  "description": "Gotta Perform 'Em All! Turn-based RPG where your agent cards battle, level up, and evolve.",
+  "type": "game",
+  "console": "rappterboy",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "ollama",
+    "name": "gemma3:4b",
+    "endpoint": "http://localhost:11434",
+    "fallback": "offline",
+    "usage": "AI-powered daemon dialogue during battles. Optional — game works without AI."
+  },
+  "system": "You are running Rappterdaemon, a turn-based RPG where AI agents are battle creatures called daemons. Generate short in-character dialogue for daemons during battle.",
+  "boot": [
+    "(load \"rappterboy.lispy\")",
+    "(load \"rapp_sdk.lispy\")",
+    "(log \"\")",
+    "(log \"  ╔═══════════════════════════════╗\")",
+    "(log \"  ║    R A P P T E R D A E M O N  ║\")",
+    "(log \"  ║    Gotta Perform Em All!       ║\")",
+    "(log \"  ╚═══════════════════════════════╝\")",
+    "(log \"\")",
+    "(log \"  (new-game-real \\\"Your Name\\\" registry)\")"
+  ],
+  "env": {
+    "MAX_PARTY_SIZE": 6,
+    "MAX_LEVEL": 100,
+    "CATCH_BASE_RATE": 0.3,
+    "XP_MULTIPLIER": 1.0,
+    "BOSS_STAT_MULTIPLIER": 3
+  },
+  "locations": [
+    {"name": "Pallet Lab", "level": 1, "types": ["core", "devtools"]},
+    {"name": "Sales Route", "level": 3, "types": ["b2b_sales", "b2c_sales"]},
+    {"name": "Health District", "level": 5, "types": ["healthcare"]},
+    {"name": "Finance Tower", "level": 7, "types": ["financial_services"]},
+    {"name": "Factory Floor", "level": 9, "types": ["manufacturing", "energy"]},
+    {"name": "Pipeline Depths", "level": 12, "types": ["pipeline", "integrations"]},
+    {"name": "Productivity Peak", "level": 15, "types": ["productivity"]},
+    {"name": "SuperSeed Chamber", "level": 20, "types": ["core"]},
+    {"name": "Legendary Hall", "level": 50, "types": ["core"]}
+  ],
+  "gym_leaders": [
+    {"name": "Howard", "title": "The CardSmith", "badge": "Forge Badge", "daemon": "@borg/borg_agent"},
+    {"name": "Molly", "title": "The CEO", "badge": "SuperSeed Badge", "daemon": "@wildhaven/ceo-agent"},
+    {"name": "Kody", "title": "The Architect", "badge": "Foundation Badge", "daemon": "@rapp/basic-agent"}
+  ],
+  "elite_four": [
+    {"name": "The Verifier", "daemon": "@kody/rar_remote_agent"},
+    {"name": "The Engine", "daemon": "@kody/rappter-engine-agent"},
+    {"name": "The Memory", "daemon": "@kody/context_memory"},
+    {"name": "The Champion", "daemon": "@rapp/basic-agent"}
+  ],
+  "metadata": {
+    "genre": "turn-based RPG",
+    "inspiration": "Pokemon Red/Blue, 1996",
+    "april_fools": "2026 — except it actually works",
+    "tagline": "Gotta Perform 'Em All!",
+    "offline": true,
+    "ai_optional": true,
+    "battery_is_the_timer": true
+  }
+}
