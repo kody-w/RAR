@@ -76,7 +76,8 @@ __manifest__ = {
 |------|------|
 | `build_registry.py` | AST-based manifest extractor → writes `registry.json`. The only build step. |
 | `registry.json` | **Auto-generated. Never hand-edit.** CI overwrites on push. |
-| `index.html` | Zero-dependency web store (browse, workbench, cards, decks, present mode). Single file. |
+| `index.html` | Simple agent browser — casual, no-frills view of all agents. Default landing page. |
+| `store.html` | Advanced web store (browse, workbench, cards, decks, market, present mode). Single file. |
 | `skill.md` | Machine-readable API for AI agents to discover/install agents programmatically. |
 | `CONSTITUTION.md` | Governing document — single-file principle, namespaces, tiers, security, categories. |
 | `rar.config.json` | Federation and feature flags. |
