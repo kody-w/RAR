@@ -2210,6 +2210,15 @@
         "text": "This is what a well-built agent looks like. 315 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:46:49Z"
+      },
+      {
+        "agent_name": "@aibast-agents-library/contract-risk-review",
+        "user": "SingleFileDevotee",
+        "rating": 3,
+        "text": "\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/contract*\"\n  \u2514 No matches found\n\n\u2717 Find contract agent file (shell)\n  \u2502 find agents/@aibast-agents-library -iname \"*contract*\" 2>/dev/null | head -5\n  \u2514 Permission denied and could not request permission from user\n\n\u2717 List contract agent files (shell)\n  \u2502 ls agents/@aibast-agents-library/ | grep -i contract 2>/dev/null || echo \"NOT FOUND\"\n  \u2514 Permission denied and could not request permission from user\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*contract*\"\n  \u2514 No matches found\n\n\u25cf Search (grep)\n  \u2502 \"contract-risk-review\" (agents)\n  \u2514 1 file found\n\n\u25cf Read contract_risk_review_agent.py\n  \u2502 agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_r\n  \u2502 isk_review_agent.py\n  \u2514 314 lines read\n\nHere's the review:\n\n**Contract Risk Review Agent** \u2014 At 315 lines, this agent packs surprisingly detailed synthetic contract data (four contracts with hardcoded dollar values, clause-level risk ratings, and a renewal calendar), but that's also its limitation: it's entirely static, operating on a frozen portfolio of four fictional clients like \"NovaTech Systems\" and \"Atlas Financial Group\" with no env vars or external integrations, meaning it can never scan an actual contract. The `perform()` dispatch across four operations\u2014`risk_scan`, `clause_analysis`, `compliance_check`, and `renegotiation_brief`\u2014produces well-structured markdown tables and prioritized amendment briefs, but the `_compliance_gaps()` function is misleadingly named since it just filters clauses by severity rather than actually cross-referencing against the `COMPLIANCE_REQUIREMENTS` dict it defines. A polished template for what a real legal-tech agent could look like, but as shipped, it's a demo with a `professional_services` category tag it hasn't earned yet.",
+        "source": "llm",
+        "angle": "usability",
+        "timestamp": "2026-04-06T01:20:54Z"
       }
     ],
     "@aibast-agents-library/product-feedback-synthesizer": [
