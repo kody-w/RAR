@@ -188,7 +188,16 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
 
   <div id="submit-form" style="display:none">
     <div class="step">
-      <div class="step-label">1. Drop your agent file</div>
+      <div class="step-label">1. Start from the template</div>
+      <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:12px">Download this file, give it to any LLM, and tell it what you want your agent to do. It fills in the blanks.</p>
+      <a href="template_agent.py" download class="gh-btn" style="text-decoration:none;display:inline-flex;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:.85rem;padding:10px 20px">
+        <svg viewBox="0 0 16 16" style="width:16px;height:16px;fill:currentColor"><path d="M8 12l-4-4h2.5V3h3v5H12L8 12zm-5 1h10v1H3v-1z"/></svg>
+        Download template_agent.py
+      </a>
+    </div>
+
+    <div class="step">
+      <div class="step-label">2. Drop your finished agent</div>
       <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
         <div class="icon">+</div>
         <div class="label">Drop your <code>_agent.py</code> here</div>
@@ -203,7 +212,7 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
     </div>
 
     <div class="step">
-      <div class="step-label">2. Submit</div>
+      <div class="step-label">3. Submit</div>
       <button class="submit-btn" id="submit-btn" onclick="submit()" disabled>Submit Agent</button>
       <div class="note">
         Your agent goes to staging for review. Once approved, it joins the registry.
@@ -367,14 +376,17 @@ function parsePreview() {
   if (descMatch) h += `<div class="field"><span class="k">Description:</span> ${esc(descMatch[1])}</div>`;
   if (verMatch) h += `<div class="field"><span class="k">Version:</span> ${esc(verMatch[1])}</div>`;
   if (catMatch) h += `<div class="field"><span class="k">Category:</span> ${esc(catMatch[1].replace(/_/g, ' '))}</div>`;
+  const isTemplate = agentCode.includes('@your_username/') || agentCode.includes('YOUR LOGIC GOES HERE') || agentCode.includes('RAPP AGENT TEMPLATE');
+
   h += `<div class="field">${hasManifest ? '<span class="ok">&#10003; __manifest__</span>' : '<span class="err">&#10007; Missing __manifest__</span>'}</div>`;
   h += `<div class="field">${hasBasicAgent ? '<span class="ok">&#10003; BasicAgent</span>' : '<span class="err">&#10007; Missing BasicAgent</span>'}</div>`;
   h += `<div class="field">${hasPerform ? '<span class="ok">&#10003; perform()</span>' : '<span class="err">&#10007; Missing perform()</span>'}</div>`;
+  if (isTemplate) h += `<div class="field"><span class="err">&#10007; This is the unmodified template — have your LLM fill it in first</span></div>`;
 
   preview.innerHTML = h;
   preview.style.display = 'block';
 
-  const valid = hasManifest && hasBasicAgent && hasPerform && nameMatch;
+  const valid = hasManifest && hasBasicAgent && hasPerform && nameMatch && !isTemplate;
   document.getElementById('submit-btn').disabled = !valid;
 
   // Auto-fill namespace

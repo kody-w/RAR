@@ -300,6 +300,10 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     if not code or not code.strip():
         return {"error": "Agent code is required"}
 
+    # Reject unmodified template submissions
+    if "@your_username/" in code or "YOUR LOGIC GOES HERE" in code or "RAPP AGENT TEMPLATE" in code:
+        return {"error": "This is the unmodified template. Fill it in with your LLM first, then resubmit."}
+
     manifest = extract_manifest_from_code(code)
     if manifest is None:
         return {"error": "No valid __manifest__ dict found in agent code"}
