@@ -23,6 +23,7 @@ import json
 import os
 import re
 import sys
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -68,19 +69,49 @@ def now_iso() -> str:
 # Parsing
 # ──────────────────────────────────────────────────────────────────────
 
+def _fetch_attachment(url: str) -> str | None:
+    """Fetch a file attachment from a GitHub Issue URL."""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "RAR-Pipeline/1.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return resp.read().decode()
+    except Exception:
+        return None
+
+
 def extract_json_from_body(body: str) -> dict:
     """Extract action from issue body.
 
     Supports:
-      1. ```json fenced block with action JSON
-      2. Raw JSON object with action
-      3. ```python fenced block with agent code (auto-wraps as submit_agent)
-      4. Raw Python with __manifest__ (auto-wraps as submit_agent)
+      1. Dragged-and-dropped .py file attachment (auto-fetches, auto-wraps)
+      2. ```json fenced block with action JSON
+      3. Raw JSON object with action
+      4. ```python fenced block with agent code (auto-wraps as submit_agent)
+      5. Raw Python with __manifest__ (auto-wraps as submit_agent)
     """
     if not body or not body.strip():
         raise ValueError("Issue body is empty")
 
-    # Try fenced JSON block first
+    # Try file attachment first — user dragged a .py file into the issue
+    # GitHub renders as: [filename.py](https://github.com/user-attachments/assets/UUID)
+    # or sometimes:      https://github.com/user-attachments/assets/UUID
+    attach_match = re.search(
+        r'\[([^\]]*\.py)\]\((https://github\.com/user-attachments/assets/[^\)]+)\)',
+        body
+    )
+    if not attach_match:
+        # Try bare URL pattern
+        attach_match = re.search(
+            r'(https://github\.com/user-attachments/assets/[a-f0-9\-]+)',
+            body
+        )
+    if attach_match:
+        url = attach_match.group(2) if attach_match.lastindex and attach_match.lastindex >= 2 else attach_match.group(1)
+        code = _fetch_attachment(url)
+        if code and "__manifest__" in code:
+            return {"action": "submit_agent", "payload": {"code": code}}
+
+    # Try fenced JSON block
     match = re.search(r"```json\s*\n(.*?)\n\s*```", body, re.DOTALL)
     if match:
         return json.loads(match.group(1))
