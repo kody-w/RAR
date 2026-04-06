@@ -285,16 +285,9 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     Requires a registered binder. Agents land in staging/ for review — NOT in agents/.
     Admin approval (via label or workflow) promotes staging → agents and triggers card forge.
     """
-    # Ledger check: binder must be registered
+    # Auto-register binder if not already registered
     if not is_binder_registered(user):
-        return {
-            "error": (
-                f"No registered binder for '{user}'. "
-                "Register first by opening an Issue with: "
-                '{"action": "register_binder", "payload": {"namespace": "@' + user + '"}}  '
-                "Your binder can be public or private."
-            )
-        }
+        handle_register_binder({"namespace": f"@{user}"}, user)
 
     code = payload.get("code", "")
     if not code or not code.strip():
@@ -314,10 +307,13 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
 
     tier = manifest.get("quality_tier", "unverified")
     if tier not in SUBMITTABLE_TIERS:
-        return {
-            "error": f"quality_tier '{tier}' cannot be used for submissions. "
-                     f"Allowed: {', '.join(sorted(SUBMITTABLE_TIERS))}"
-        }
+        # Auto-downgrade to community — submitters don't control tier
+        tier = "community"
+        code = re.sub(
+            r'("quality_tier"\s*:\s*")[^"]+(")',
+            r'\g<1>community\2',
+            code
+        )
 
     name = manifest["name"]
     parts = name.split("/")

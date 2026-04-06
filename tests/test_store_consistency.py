@@ -10,12 +10,12 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-INDEX_HTML = REPO_ROOT / "index.html"
+STORE_HTML = REPO_ROOT / "store.html"
 REGISTRY_JSON = REPO_ROOT / "registry.json"
 CONSTITUTION = REPO_ROOT / "CONSTITUTION.md"
 SDK_PATH = REPO_ROOT / "rapp_sdk.py"
 
-html = INDEX_HTML.read_text()
+html = STORE_HTML.read_text()
 registry = json.loads(REGISTRY_JSON.read_text())
 
 
@@ -96,23 +96,6 @@ def test_collector_mode_chain_ownership():
     """Collector mode must show chain ownership status."""
     assert "showntell-chain" in html
 
-
-# ═══════════════════════════════════════════════════════
-# Wallet Tab
-# ═══════════════════════════════════════════════════════
-
-def test_wallet_tab_exists():
-    assert 'panel-wallet' in html
-    assert "switchTab('wallet')" in html or 'data-tab="wallet"' in html
-
-def test_wallet_auth():
-    """Wallet must require GitHub authentication."""
-    assert "walletLogin" in html
-    assert "wallet-auth-area" in html
-
-def test_wallet_viewer():
-    assert "loadWallet" in html
-    assert "renderWalletContents" in html
 
 
 # ═══════════════════════════════════════════════════════

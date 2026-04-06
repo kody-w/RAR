@@ -181,11 +181,11 @@ class TestStagingPipeline:
         assert "Publisher" in result["error"] or "publisher" in result["error"]
 
     @pytest.mark.pipeline
-    def test_submission_rejects_unregistered_binder(self, isolated_pipeline):
-        """Unregistered users cannot submit."""
-        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "nobody")
-        assert "error" in result
-        assert "register" in result["error"].lower() or "binder" in result["error"].lower()
+    def test_submission_auto_registers_binder(self, isolated_pipeline):
+        """Unregistered users get auto-registered on first submission."""
+        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
+        assert "ok" in result
+        assert pi.is_binder_registered("testuser")
 
     @pytest.mark.pipeline
     def test_submission_rejects_kebab_slug(self, isolated_pipeline):
@@ -208,12 +208,14 @@ class TestStagingPipeline:
         assert "greater" in result["error"].lower() or "version" in result["error"].lower()
 
     @pytest.mark.pipeline
-    def test_submission_rejects_official_tier(self, isolated_pipeline):
-        """Community submissions can't claim official tier."""
+    def test_submission_downgrades_official_tier(self, isolated_pipeline):
+        """Community submissions claiming official tier get downgraded to community."""
         code = VALID_AGENT_CODE.replace('"community"', '"official"')
         result = pi.handle_submit_agent({"code": code}, "testuser")
-        assert "error" in result
-        assert "tier" in result["error"].lower()
+        assert "ok" in result
+        # Verify the staged file was downgraded
+        staged = (pi.STAGING_DIR / "@testuser" / "test_agent.py").read_text()
+        assert '"community"' in staged
 
 
 # ──────────────────────────────────────────────────────────────────────

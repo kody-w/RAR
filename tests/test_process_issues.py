@@ -451,18 +451,19 @@ class TestTierSubmissionEnforcement:
         result = pi.handle_submit_agent({"code": code}, "testuser")
         assert result.get("ok") is True
 
-    def test_verified_submission_blocked(self):
+    def test_verified_submission_downgraded(self):
         code = VALID_AGENT_CODE.replace('"community"', '"verified"')
         result = pi.handle_submit_agent({"code": code}, "testuser")
-        assert "error" in result
-        assert "cannot be used for submissions" in result["error"]
+        assert result.get("ok") is True
+        staged = (pi.STAGING_DIR / "@testuser" / "my_agent.py").read_text()
+        assert '"community"' in staged
 
-    def test_official_submission_blocked(self):
+    def test_official_submission_downgraded(self):
         code = VALID_AGENT_CODE.replace('"community"', '"official"')
         result = pi.handle_submit_agent({"code": code}, "testuser")
-        assert "error" in result
+        assert result.get("ok") is True
 
-    def test_invalid_tier_submission_blocked(self):
+    def test_invalid_tier_submission_rejected(self):
         code = VALID_AGENT_CODE.replace('"community"', '"platinum"')
         result = pi.handle_submit_agent({"code": code}, "testuser")
         assert "error" in result
