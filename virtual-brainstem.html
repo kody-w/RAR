@@ -79,126 +79,6 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 .bs-btn.green { background:var(--green); border-color:var(--green); color:#fff; }
 .bs-btn.green:hover { opacity:.85; }
 
-/* Layout */
-.bs-main { display:flex; flex:1; overflow:hidden; }
-.bs-sidebar {
-  width:260px; min-width:260px; background:var(--surface);
-  border-right:1px solid var(--border); display:flex; flex-direction:column;
-  overflow:hidden;
-}
-.bs-sidebar-header { padding:12px; border-bottom:1px solid var(--border); }
-.bs-sidebar-search {
-  width:100%; background:var(--surface2); border:1px solid var(--border);
-  border-radius:6px; padding:8px 10px; color:var(--text); font-size:.85rem; outline:none;
-}
-.bs-sidebar-search:focus { border-color:var(--accent); }
-.bs-sidebar-cats {
-  display:flex; gap:4px; flex-wrap:wrap; margin-top:8px;
-}
-.bs-cat-pill {
-  background:var(--surface2); border:1px solid var(--border); border-radius:10px;
-  padding:2px 8px; font-size:.7rem; color:var(--text-dim); cursor:pointer; transition:all .15s;
-}
-.bs-cat-pill:hover, .bs-cat-pill.active { background:var(--accent-bg); color:var(--accent); border-color:var(--accent); }
-.bs-agent-list { flex:1; overflow-y:auto; padding:8px; }
-.bs-agent-item {
-  padding:10px; border-radius:8px; cursor:pointer; margin-bottom:4px;
-  border:1px solid transparent; transition:all .15s;
-}
-.bs-agent-item:hover { background:var(--surface2); border-color:var(--border); }
-.bs-agent-item.active { background:var(--accent-bg); border-color:var(--accent); }
-.bs-agent-name { font-size:.85rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.bs-agent-cat { font-size:.7rem; color:var(--text-muted); }
-.bs-agent-desc { font-size:.75rem; color:var(--text-dim); margin-top:2px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.bs-drop-zone {
-  margin:8px; padding:20px 12px; border:2px dashed var(--border);
-  border-radius:8px; text-align:center; font-size:.8rem; color:var(--text-muted);
-  transition:all .15s; cursor:pointer;
-}
-.bs-drop-zone.dragover { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
-
-/* Content area */
-.bs-content { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-.bs-info-bar {
-  padding:12px 20px; border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap; flex-shrink:0;
-}
-.bs-info-bar .agent-title { font-size:1rem; font-weight:700; }
-.bs-info-bar .agent-meta { font-size:.8rem; color:var(--text-dim); }
-.bs-op-select {
-  background:var(--surface2); border:1px solid var(--border); color:var(--text);
-  padding:6px 10px; border-radius:6px; font-size:.85rem; cursor:pointer;
-}
-.bs-op-select:focus { border-color:var(--accent); outline:none; }
-.bs-info-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
-
-/* Terminal */
-.bs-terminal {
-  flex:1; overflow-y:auto; padding:16px 20px; font-family:'SF Mono','Fira Code',Consolas,monospace;
-  font-size:.85rem; line-height:1.6; background:var(--bg);
-}
-.bs-terminal .line { color:var(--green); }
-.bs-terminal .line.error { color:var(--red); }
-.bs-terminal .line.system { color:var(--text-muted); font-style:italic; }
-.bs-terminal .line.result { color:var(--text); }
-.bs-terminal table { border-collapse:collapse; margin:4px 0; width:auto; }
-.bs-terminal th, .bs-terminal td {
-  border:1px solid var(--border); padding:3px 10px; text-align:left; font-size:.8rem;
-}
-.bs-terminal th { background:var(--surface2); color:var(--accent); font-weight:600; }
-.bs-terminal td { color:var(--text); }
-.bs-terminal h1 { font-size:1.1rem; color:var(--accent); margin:8px 0 4px; font-weight:700; }
-.bs-terminal h2 { font-size:.95rem; color:var(--purple); margin:6px 0 4px; font-weight:600; }
-.bs-terminal h3 { font-size:.88rem; color:var(--text); margin:4px 0 2px; font-weight:600; }
-.bs-terminal strong { color:var(--text); font-weight:700; }
-.bs-terminal .list-item { color:var(--text); padding-left:16px; }
-
-/* REPL */
-.bs-repl {
-  display:flex; padding:8px 16px; border-top:1px solid var(--border);
-  background:var(--surface); flex-shrink:0;
-}
-.bs-repl-prompt {
-  color:var(--green); font-family:'SF Mono',monospace; font-size:.85rem;
-  padding:8px 8px 8px 0; user-select:none;
-}
-.bs-repl-input {
-  flex:1; background:transparent; border:none; color:var(--text);
-  font-family:'SF Mono',monospace; font-size:.85rem; outline:none; padding:8px 0;
-}
-.bs-repl-input::placeholder { color:var(--text-muted); }
-
-/* Footer */
-.bs-footer {
-  padding:6px 20px; border-top:1px solid var(--border); background:var(--surface);
-  display:flex; gap:16px; font-size:.75rem; color:var(--text-muted); flex-shrink:0;
-}
-.bs-footer span { display:flex; align-items:center; gap:4px; }
-.bs-footer .val { color:var(--text-dim); font-weight:600; }
-
-/* Welcome */
-.bs-welcome {
-  flex:1; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px;
-}
-.bs-welcome h2 { font-size:1.4rem; margin-bottom:12px; }
-.bs-welcome p { color:var(--text-dim); max-width:500px; margin:0 auto 20px; line-height:1.6; }
-.bs-welcome .keys { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-.bs-welcome .key {
-  background:var(--surface2); border:1px solid var(--border); border-radius:6px;
-  padding:4px 12px; font-size:.8rem; color:var(--text-dim);
-}
-
-/* Mode toggle */
-.mode-toggle {
-  display:flex; gap:2px; background:var(--surface2); border-radius:7px; padding:2px;
-}
-.mode-btn {
-  padding:5px 14px; border:none; background:transparent; color:var(--text-muted);
-  border-radius:5px; cursor:pointer; font-size:.8rem; font-weight:600; transition:all .15s;
-}
-.mode-btn.active { background:var(--accent); color:#fff; }
-.mode-btn:hover:not(.active) { color:var(--text); }
-
 /* GitHub auth */
 .gh-pill {
   display:flex; align-items:center; gap:6px; padding:5px 12px;
@@ -216,7 +96,7 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 .gh-pill .gh-dot.off { background:var(--red); }
 
 /* Chat */
-.chat-wrap { display:flex; flex-direction:column; flex:1; overflow:hidden; }
+.chat-wrap { display:flex; flex-direction:column; flex:1; overflow:hidden; position:relative; }
 .chat-messages {
   flex:1; overflow-y:auto; padding:20px; max-width:820px; width:100%; margin:0 auto;
 }
@@ -322,9 +202,87 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 .model-select:focus { border-color:var(--accent); }
 .model-select option { background:var(--surface); color:var(--text); }
 
+/* Agent dropdown */
+.agent-dropdown-wrap {
+  position:relative; display:inline-block;
+}
+.agent-dropdown-btn {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
+  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
+  transition:all .15s;
+}
+.agent-dropdown-btn:hover { border-color:var(--border-hover); color:var(--text); }
+.agent-dropdown-btn .agent-count {
+  background:var(--green); color:#fff; padding:0 5px; border-radius:8px;
+  font-size:.65rem; margin-left:4px; font-weight:700;
+}
+.agent-dropdown-panel {
+  display:none; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+  margin-bottom:6px; background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; width:320px; max-height:400px; overflow:hidden;
+  box-shadow:var(--shadow-lg); z-index:100;
+}
+.agent-dropdown-panel.open { display:block; }
+.agent-dropdown-search {
+  width:100%; background:var(--bg); border:none; border-bottom:1px solid var(--border);
+  padding:10px 12px; color:var(--text); font-size:.82rem; outline:none;
+}
+.agent-dropdown-list {
+  max-height:320px; overflow-y:auto; padding:4px;
+}
+.agent-dropdown-item {
+  display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:6px;
+  cursor:pointer; transition:background .1s; font-size:.8rem;
+}
+.agent-dropdown-item:hover { background:var(--surface2); }
+.agent-dropdown-item .agent-check {
+  width:16px; height:16px; border:1.5px solid var(--border); border-radius:4px;
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  transition:all .15s; font-size:.65rem; color:transparent;
+}
+.agent-dropdown-item.enabled .agent-check {
+  background:var(--green); border-color:var(--green); color:#fff;
+}
+.agent-dropdown-item-info { flex:1; min-width:0; }
+.agent-dropdown-item-name { font-weight:600; color:var(--text); }
+.agent-dropdown-item-desc {
+  font-size:.72rem; color:var(--text-muted); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.agent-enabled-pills {
+  display:flex; gap:4px; flex-wrap:wrap; padding:0 4px;
+}
+.agent-enabled-pill {
+  padding:1px 8px; background:var(--green-bg); border:1px solid rgba(63,185,80,.3);
+  border-radius:10px; font-size:.65rem; color:var(--green); font-weight:600;
+  cursor:pointer; transition:all .15s;
+}
+.agent-enabled-pill:hover { border-color:var(--red); color:var(--red); background:var(--red-bg); }
+
+/* Drop zone overlay */
+.chat-drop-overlay {
+  display:none; position:absolute; inset:0; z-index:90;
+  background:rgba(13,17,23,.85); backdrop-filter:blur(4px);
+  flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  border:3px dashed var(--accent); border-radius:12px; margin:8px;
+  pointer-events:none;
+}
+.chat-drop-overlay.active { display:flex; }
+.chat-drop-overlay .drop-icon { font-size:2.5rem; opacity:.7; }
+.chat-drop-overlay .drop-text { font-size:1rem; color:var(--accent); font-weight:600; }
+.chat-drop-overlay .drop-hint { font-size:.8rem; color:var(--text-muted); }
+
+/* Toast notification */
+.vb-toast {
+  position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+  background:var(--green); color:#fff; padding:10px 20px; border-radius:8px;
+  font-size:.85rem; font-weight:600; z-index:200; box-shadow:var(--shadow-lg);
+  animation: toastIn .3s ease-out;
+}
+@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
 /* Responsive */
 @media (max-width:768px) {
-  .bs-sidebar { display:none; }
   .bs-header { padding:10px 16px; }
   .chat-bubble { max-width:88%; }
   .chat-input-bar { padding:10px 12px; }
@@ -339,28 +297,31 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
     <div class="bs-logo-mark">VM</div>
     <span>Virtual Brainstem</span>
   </div>
-  <div class="mode-toggle">
-    <button class="mode-btn active" id="modeBtnChat" onclick="switchMode('chat')">Chat</button>
-    <button class="mode-btn" id="modeBtnLab" onclick="switchMode('lab')">Lab</button>
-  </div>
   <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
   <div class="bs-header-right">
     <div class="gh-pill" id="ghPill" onclick="handleGHAuth()">
       <div class="gh-dot off" id="ghDot"></div>
       <span id="ghLabel">Sign in</span>
     </div>
-    <button class="bs-btn" onclick="runTests()" style="display:none" id="btnRunTests">Run Tests</button>
     <a href="index.html" class="bs-btn">Back to RAR</a>
   </div>
 </div>
 
 <!-- Chat Mode (default) -->
-<div id="chatMode" class="chat-wrap">
+<div id="chatMode" class="chat-wrap"
+  ondragover="event.preventDefault();document.getElementById('dropOverlay').classList.add('active')"
+  ondragleave="if(!event.relatedTarget||!this.contains(event.relatedTarget))document.getElementById('dropOverlay').classList.remove('active')"
+  ondrop="handleAgentDrop(event)">
+  <div class="chat-drop-overlay" id="dropOverlay">
+    <div class="drop-icon">&#128230;</div>
+    <div class="drop-text">Drop agent.py to hot-load</div>
+    <div class="drop-hint">The agent will be parsed, enabled, and ready to use instantly</div>
+  </div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-welcome-box" id="chatWelcome">
       <h2>Virtual RAPP Brainstem</h2>
       <p>A fully virtualized brainstem running in your browser. Chat naturally -- I'll route to the right agent automatically.</p>
-      <div class="chat-agent-pills">
+      <div class="chat-agent-pills" id="welcomeAgentPills">
         <span class="chat-agent-pill">ManageMemory</span>
         <span class="chat-agent-pill">ContextMemory</span>
         <span class="chat-agent-pill">HackerNews</span>
@@ -373,6 +334,17 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
     </div>
   </div>
   <div class="chat-model-bar" id="chatModelBar">
+    <div class="agent-enabled-pills" id="enabledAgentPills"></div>
+    <div class="agent-dropdown-wrap">
+      <button class="agent-dropdown-btn" onclick="toggleAgentDropdown(event)">
+        Agents <span class="agent-count" id="agentCount">3</span>
+      </button>
+      <div class="agent-dropdown-panel" id="agentDropdownPanel">
+        <input class="agent-dropdown-search" type="text" placeholder="Search agents..." oninput="filterAgentDropdown(this.value)">
+        <div class="agent-dropdown-list" id="agentDropdownList"></div>
+      </div>
+    </div>
+    <span style="color:var(--border)">|</span>
     <span id="chatModelLabel">GitHub Models -- sign in to start chatting</span>
     <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
   </div>
@@ -382,65 +354,6 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
   </div>
 </div>
 
-<!-- Lab Mode (hidden by default) -->
-<div id="labMode" style="display:none">
-<div class="bs-main">
-  <!-- Sidebar -->
-  <div class="bs-sidebar">
-    <div class="bs-sidebar-header">
-      <input class="bs-sidebar-search" id="agentSearch" type="text" placeholder="Search agents..." oninput="filterAgents()">
-      <div class="bs-sidebar-cats" id="catPills"></div>
-    </div>
-    <div class="bs-agent-list" id="agentList"></div>
-    <div class="bs-drop-zone" id="dropZone"
-      ondragover="event.preventDefault();this.classList.add('dragover')"
-      ondragleave="this.classList.remove('dragover')"
-      ondrop="handleDrop(event)">
-      Drop agent.py here
-    </div>
-  </div>
-
-  <!-- Content -->
-  <div class="bs-content">
-    <div class="bs-info-bar" id="infoBar" style="display:none">
-      <span class="agent-title" id="agentTitle"></span>
-      <span class="agent-meta" id="agentMeta"></span>
-      <select class="bs-op-select" id="opSelect" onchange="selectOp()"></select>
-      <div class="bs-info-right">
-        <button class="bs-btn green" onclick="runOp()">Run</button>
-      </div>
-    </div>
-    <div class="bs-terminal" id="terminal">
-      <div class="bs-welcome" id="welcome">
-        <div>
-          <h2>Virtual RAPP Brainstem</h2>
-          <p>A LisPy VM running in your browser. Select an agent from the sidebar or drop an agent.py file to begin. Every agent runs locally -- no server, no install.</p>
-          <div class="keys">
-            <span class="key">128 agents</span>
-            <span class="key">LisPy VM</span>
-            <span class="key">Python transpiler</span>
-            <span class="key">Zero dependencies</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bs-repl" id="replBar">
-      <span class="bs-repl-prompt">λ&gt;</span>
-      <input class="bs-repl-input" id="replInput" type="text" placeholder="Type S-expression..." onkeydown="if(event.key==='Enter')evalRepl()">
-    </div>
-  </div>
-</div>
-
-<!-- /Lab Mode -->
-</div>
-
-<!-- Footer -->
-<div class="bs-footer" id="labFooter" style="display:none">
-  <span>Transpile: <span class="val" id="fTranspile">--</span></span>
-  <span>Eval: <span class="val" id="fEval">--</span></span>
-  <span>Operations: <span class="val" id="fOps">0</span></span>
-  <span>Errors: <span class="val" id="fErrors">0</span></span>
-</div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════
@@ -2988,21 +2901,43 @@ let availableModels = [];
 let chatHistory = [];
 let chatBusy = false;
 
-const SYSTEM_PROMPT = `You are the Virtual RAPP Brainstem — a browser-native AI assistant running inside a LisPy VM. You have three agents loaded:
+let availableAgents = [];  // All agents — registry + hot-loaded
+let enabledAgents = new Set(JSON.parse(localStorage.getItem('vb_enabled_agents') || '[]'));
+const BUILTIN_AGENTS = ['store_memory', 'recall_memories', 'hacker_news'];
+
+function buildSystemPrompt() {
+  let prompt = `You are the Virtual RAPP Brainstem — a browser-native AI assistant running inside a LisPy VM. You have these agents loaded:
 
 1. **store_memory** — Stores facts, preferences, insights, and tasks to the user's persistent local memory. Use this when the user tells you something about themselves, asks you to remember something, or shares a preference.
 
 2. **recall_memories** — Recalls stored memories from past interactions. Use this when the user asks what you know about them, what you remember, or when context from past conversations would help.
 
-3. **hacker_news** — Fetches the latest top posts from Hacker News in real-time. Use this when the user asks about tech news, what's trending, or anything Hacker News related.
+3. **hacker_news** — Fetches the latest top posts from Hacker News in real-time. Use this when the user asks about tech news, what's trending, or anything Hacker News related.`;
 
-Guidelines:
+  // Add enabled registry agents
+  let i = 4;
+  for (const slug of enabledAgents) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent) {
+      prompt += `\n\n${i}. **${agent.display_name}** — ${agent.description}. Category: ${agent.category}. To use this agent, call the run_agent tool with slug "${agent.name}".`;
+      i++;
+    }
+  }
+
+  prompt += `\n\nGuidelines:
 - Be concise and conversational. No filler.
 - When you store a memory, confirm what you stored.
 - When recalling memories, present them naturally, not as raw data.
 - When showing HN posts, format them as a readable list with titles, scores, and links.
 - You can call multiple tools in one turn if needed.
 - If the user hasn't signed in yet or there's an auth issue, you won't reach this point — the UI handles that.`;
+
+  if (enabledAgents.size > 0) {
+    prompt += `\n- When the user asks about something an enabled agent covers, use the run_agent tool to invoke it. Tell the user which agent you're routing to.`;
+  }
+
+  return prompt;
+}
 
 const CHAT_TOOLS = [
   {
@@ -3052,6 +2987,28 @@ const CHAT_TOOLS = [
     }
   }
 ];
+
+function buildChatTools() {
+  const tools = [...CHAT_TOOLS];
+  if (enabledAgents.size > 0) {
+    tools.push({
+      type: 'function',
+      function: {
+        name: 'run_agent',
+        description: 'Run an enabled RAR agent. The agent will process the request and return a result.',
+        parameters: {
+          type: 'object',
+          properties: {
+            agent_slug: { type: 'string', description: 'The agent slug (e.g. @kody/context_memory_agent)' },
+            request: { type: 'string', description: 'What you want the agent to do' }
+          },
+          required: ['agent_slug', 'request']
+        }
+      }
+    });
+  }
+  return tools;
+}
 
 // ── Built-in Agents (localStorage + live API) ──
 
@@ -3121,7 +3078,43 @@ async function executeToolCall(name, args) {
     case 'store_memory': return agentStoreMemory(args);
     case 'recall_memories': return agentRecallMemories(args);
     case 'hacker_news': return await agentHackerNews(args);
+    case 'run_agent': return await executeRegistryAgent(args);
     default: return { error: 'Unknown agent: ' + name };
+  }
+}
+
+async function executeRegistryAgent(args) {
+  const slug = args.agent_slug;
+  const agent = availableAgents.find(a => a.name === slug);
+  if (!agent) return { error: `Agent not found: ${slug}` };
+  if (!enabledAgents.has(slug)) return { error: `Agent not enabled: ${slug}` };
+
+  try {
+    let source, doc;
+
+    // Check hot-loaded agents first (already have source in memory)
+    if (hotLoadedAgents[slug]) {
+      source = hotLoadedAgents[slug].source;
+      doc = hotLoadedAgents[slug].doc || agent.description;
+    } else {
+      // Fetch from registry
+      source = await fetchAgent(agent);
+      const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
+      doc = (docMatch && (docMatch[1] || docMatch[2])) || agent.description;
+    }
+
+    return {
+      agent: agent.display_name,
+      slug: agent.name,
+      description: agent.description,
+      documentation: doc.trim().slice(0, 500),
+      category: agent.category,
+      version: agent.version,
+      request: args.request,
+      result: `[${agent.display_name}] This agent (${agent.description}) has been consulted. In a full Brainstem environment, it would execute its perform() method. The agent documentation says: ${doc.trim().slice(0, 300)}`
+    };
+  } catch(e) {
+    return { error: `Failed to load agent: ${e.message}` };
   }
 }
 
@@ -3138,7 +3131,7 @@ async function callGitHubModels(messages) {
     body: JSON.stringify({
       model: chatModel,
       messages,
-      tools: CHAT_TOOLS,
+      tools: buildChatTools(),
       tool_choice: 'auto',
       temperature: 0.7,
       max_tokens: 2048
@@ -3211,6 +3204,9 @@ function finishChatActivity(el, agentName, args, result) {
   } else if (agentName === 'hacker_news') {
     const count = result ? (Array.isArray(result) ? result.length : 0) : 0;
     detail = `fetched ${count} top stor${count === 1 ? 'y' : 'ies'}`;
+  } else if (agentName === 'run_agent') {
+    const name = result && result.agent ? result.agent : args.agent_slug;
+    detail = `routed to ${name}`;
   } else {
     detail = JSON.stringify(result).slice(0, 80);
   }
@@ -3288,7 +3284,7 @@ async function sendChat() {
 
   try {
     // Build messages with system prompt
-    const messages = [{ role: 'system', content: SYSTEM_PROMPT }, ...chatHistory];
+    const messages = [{ role: 'system', content: buildSystemPrompt() }, ...chatHistory];
     let response = await callGitHubModels(messages);
     let msg = response.choices[0].message;
 
@@ -3328,7 +3324,7 @@ async function sendChat() {
       }
 
       showTypingIndicator();
-      const followUp = [{ role: 'system', content: SYSTEM_PROMPT }, ...chatHistory];
+      const followUp = [{ role: 'system', content: buildSystemPrompt() }, ...chatHistory];
       response = await callGitHubModels(followUp);
       msg = response.choices[0].message;
     }
@@ -3353,33 +3349,6 @@ function useSuggestion(el) {
   if (!chatToken) { handleGHAuth(); return; }
   document.getElementById('chatInput').value = el.textContent;
   sendChat();
-}
-
-// ── Mode Switching ──
-
-function switchMode(mode) {
-  const chatMode = document.getElementById('chatMode');
-  const labMode = document.getElementById('labMode');
-  const labFooter = document.getElementById('labFooter');
-  const btnTests = document.getElementById('btnRunTests');
-  const btnChat = document.getElementById('modeBtnChat');
-  const btnLab = document.getElementById('modeBtnLab');
-
-  if (mode === 'chat') {
-    chatMode.style.display = 'flex';
-    labMode.style.display = 'none';
-    labFooter.style.display = 'none';
-    btnTests.style.display = 'none';
-    btnChat.classList.add('active');
-    btnLab.classList.remove('active');
-  } else {
-    chatMode.style.display = 'none';
-    labMode.style.display = 'block';
-    labFooter.style.display = 'flex';
-    btnTests.style.display = '';
-    btnChat.classList.remove('active');
-    btnLab.classList.add('active');
-  }
 }
 
 // ── GitHub Auth ──
@@ -3544,6 +3513,216 @@ async function handleAuthCallback() {
 }
 
 
+// ── Agent Dropdown ──
+
+async function loadRegistryForChat() {
+  try {
+    const resp = await fetch(REGISTRY_URL);
+    const data = await resp.json();
+    availableAgents = (data.agents || []).filter(a => a._file);
+    populateAgentDropdown();
+    updateEnabledPills();
+  } catch(e) {
+    console.warn('Registry load for agent dropdown failed:', e.message);
+  }
+}
+
+function populateAgentDropdown(filter) {
+  const list = document.getElementById('agentDropdownList');
+  const q = (filter || '').toLowerCase();
+  let agents = availableAgents;
+  if (q) {
+    agents = agents.filter(a => {
+      const hay = [a.display_name, a.description, a.category, ...(a.tags || []), a.name].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  agents.sort((a, b) => {
+    const aOn = enabledAgents.has(a.name) ? 0 : 1;
+    const bOn = enabledAgents.has(b.name) ? 0 : 1;
+    if (aOn !== bOn) return aOn - bOn;
+    return a.display_name.localeCompare(b.display_name);
+  });
+
+  list.innerHTML = agents.map(a => {
+    const on = enabledAgents.has(a.name);
+    return `<div class="agent-dropdown-item ${on ? 'enabled' : ''}" onclick="toggleAgent('${a.name.replace(/'/g, "\\'")}')">
+      <div class="agent-check">${on ? '&#10003;' : ''}</div>
+      <div class="agent-dropdown-item-info">
+        <div class="agent-dropdown-item-name">${a.display_name}</div>
+        <div class="agent-dropdown-item-desc">${a.description}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleAgent(slug) {
+  if (enabledAgents.has(slug)) {
+    enabledAgents.delete(slug);
+  } else {
+    enabledAgents.add(slug);
+  }
+  localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+  populateAgentDropdown(document.querySelector('.agent-dropdown-search')?.value);
+  updateEnabledPills();
+}
+
+function updateEnabledPills() {
+  // Update count badge
+  const total = BUILTIN_AGENTS.length + enabledAgents.size;
+  document.getElementById('agentCount').textContent = total;
+
+  // Update bottom-bar pills
+  const pillsEl = document.getElementById('enabledAgentPills');
+  let html = '';
+  for (const slug of enabledAgents) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent) {
+      html += `<span class="agent-enabled-pill" onclick="toggleAgent('${slug.replace(/'/g, "\\'")}')" title="Click to disable">${agent.display_name}</span>`;
+    }
+  }
+  pillsEl.innerHTML = html;
+
+  // Update welcome pills
+  const welcomePills = document.getElementById('welcomeAgentPills');
+  if (welcomePills) {
+    let whtml = '<span class="chat-agent-pill">ManageMemory</span><span class="chat-agent-pill">ContextMemory</span><span class="chat-agent-pill">HackerNews</span>';
+    for (const slug of enabledAgents) {
+      const agent = availableAgents.find(a => a.name === slug);
+      if (agent) {
+        whtml += `<span class="chat-agent-pill">${agent.display_name}</span>`;
+      }
+    }
+    welcomePills.innerHTML = whtml;
+  }
+}
+
+function toggleAgentDropdown(e) {
+  e.stopPropagation();
+  const panel = document.getElementById('agentDropdownPanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    panel.querySelector('.agent-dropdown-search').focus();
+    populateAgentDropdown();
+  }
+}
+
+function filterAgentDropdown(q) {
+  populateAgentDropdown(q);
+}
+
+// ── Hot-Load Agent via Drag & Drop ──
+
+let hotLoadedAgents = {};  // slug -> { manifest, source }
+
+function handleAgentDrop(event) {
+  event.preventDefault();
+  document.getElementById('dropOverlay').classList.remove('active');
+
+  const files = event.dataTransfer.files;
+  for (const file of files) {
+    if (!file.name.endsWith('.py')) {
+      showToast(`Skipped ${file.name} — only .py files`, true);
+      continue;
+    }
+    const reader = new FileReader();
+    reader.onload = () => hotLoadAgent(file.name, reader.result);
+    reader.readAsText(file);
+  }
+}
+
+function hotLoadAgent(filename, source) {
+  // Parse __manifest__ from source using regex (safe, no eval)
+  const manifestMatch = source.match(/__manifest__\s*=\s*(\{[\s\S]*?\n\})/);
+  if (!manifestMatch) {
+    showToast(`${filename}: no __manifest__ found`, true);
+    return;
+  }
+
+  // Parse the manifest dict (Python dict to JSON)
+  let jsonStr = manifestMatch[1]
+    .replace(/#[^\n]*/g, '')            // strip comments
+    .replace(/'/g, '"')                  // single to double quotes
+    .replace(/True/g, 'true')
+    .replace(/False/g, 'false')
+    .replace(/None/g, 'null')
+    .replace(/,\s*([\]}])/g, '$1');      // trailing commas
+
+  let manifest;
+  try {
+    manifest = JSON.parse(jsonStr);
+  } catch(e) {
+    showToast(`${filename}: failed to parse manifest`, true);
+    return;
+  }
+
+  if (!manifest.name || !manifest.display_name) {
+    showToast(`${filename}: manifest missing name/display_name`, true);
+    return;
+  }
+
+  const slug = manifest.name;
+
+  // Extract docstring
+  const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
+  const doc = (docMatch && (docMatch[1] || docMatch[2])) || manifest.description || '';
+
+  // Store the hot-loaded agent
+  hotLoadedAgents[slug] = { manifest, source, doc: doc.trim() };
+
+  // Add to availableAgents if not already there
+  const existing = availableAgents.findIndex(a => a.name === slug);
+  const entry = {
+    name: slug,
+    display_name: manifest.display_name,
+    description: manifest.description || '',
+    category: manifest.category || 'general',
+    version: manifest.version || '1.0.0',
+    author: manifest.author || 'Local',
+    tags: manifest.tags || [],
+    quality_tier: 'local',
+    requires_env: manifest.requires_env || [],
+    _file: filename,
+    _hot_loaded: true
+  };
+  if (existing >= 0) {
+    availableAgents[existing] = entry;
+  } else {
+    availableAgents.unshift(entry);
+  }
+
+  // Auto-enable
+  enabledAgents.add(slug);
+  localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+  populateAgentDropdown();
+  updateEnabledPills();
+
+  showToast(`${manifest.display_name} hot-loaded and enabled`);
+
+  // Add a system message to chat
+  addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
+}
+
+function showToast(msg, isError) {
+  const existing = document.querySelector('.vb-toast');
+  if (existing) existing.remove();
+
+  const el = document.createElement('div');
+  el.className = 'vb-toast';
+  if (isError) { el.style.background = 'var(--red)'; }
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', e => {
+  const panel = document.getElementById('agentDropdownPanel');
+  if (panel && panel.classList.contains('open') && !e.target.closest('.agent-dropdown-wrap')) {
+    panel.classList.remove('open');
+  }
+});
+
 // ═══════════════════════════════════════════════════════════════════════
 // SECTION 7: Init
 // ═══════════════════════════════════════════════════════════════════════
@@ -3559,14 +3738,8 @@ async function handleAuthCallback() {
   }
   updateGHPill();
 
-  // Load registry for lab mode (background)
-  try {
-    const agents = await loadRegistry();
-    populateAgentList(agents);
-  } catch(e) {
-    // Lab mode registry load failed — not critical for chat mode
-    console.warn('Registry load failed:', e.message);
-  }
+  // Load registry for agent dropdown
+  loadRegistryForChat();
 })();
 
 </script>
