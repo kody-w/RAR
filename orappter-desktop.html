@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORAPPTER Desktop v1.0.0</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --bg-alt: #161b22;
+  --bg-hover: #1c2128;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-faint: #484f58;
+  --accent: #3fb950;
+  --accent-blue: #58a6ff;
+  --accent-purple: #a371f7;
+  --border: #30363d;
+  --taskbar-h: 36px;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  --win-min-w: 320px;
+  --win-min-h: 200px;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  user-select: none;
+}
+
+/* ============================================================ TASKBAR */
+#taskbar {
+  height: var(--taskbar-h);
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  flex-shrink: 0;
+  z-index: 1000;
+  position: relative;
+}
+
+#taskbar-brand {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+#taskbar-brand:hover { border-color: var(--accent); }
+
+#taskbar-apps {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.taskbar-tab {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 10px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.1s, color 0.1s;
+  font-family: var(--font-mono);
+}
+.taskbar-tab:hover { background: #252c36; color: var(--text); }
+.taskbar-tab.active { background: #1f2d3a; color: var(--accent-blue); border-color: var(--accent-blue); }
+.taskbar-tab.minimized { opacity: 0.5; }
+.taskbar-tab .tab-icon { font-size: 12px; }
+.taskbar-tab .tab-close {
+  margin-left: 4px;
+  opacity: 0;
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1;
+}
+.taskbar-tab:hover .tab-close { opacity: 1; }
+.taskbar-tab .tab-close:hover { color: #f85149; }
+
+#taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#taskbar-repl-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+#taskbar-repl-prompt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+#taskbar-repl-input {
+  width: 200px;
+  height: 22px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 0 6px;
+  outline: none;
+}
+#taskbar-repl-input:focus { border-color: var(--accent-blue); }
+#taskbar-repl-input::placeholder { color: var(--text-faint); }
+#taskbar-repl-out {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#taskbar-repl-out.err { color: #f85149; }
+
+#taskbar-clock {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 60px;
+  text-align: right;
+}
+
+#taskbar-notif-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 5px;
+  position: relative;
+  transition: color 0.15s;
+}
+#taskbar-notif-btn:hover { color: var(--text); border-color: var(--border); }
+#notif-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: #f85149;
+  border-radius: 50%;
+  display: none;
+}
+#notif-badge.visible { display: block; }
+
+#taskbar-launcher-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 7px;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: var(--font-mono);
+}
+#taskbar-launcher-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ============================================================ DESKTOP AREA */
+#desktop {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--taskbar-h));
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* SuperSeed watermark */
+#desktop-watermark {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--accent);
+  white-space: pre;
+}
+#desktop-tagline {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+  opacity: 0.4;
+}
+
+/* ============================================================ APP LAUNCHER */
+#launcher {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: opacity 0.2s;
+}
+#launcher.hidden { display: none; }
+
+#launcher-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 420px;
+}
+
+.app-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  background: transparent;
+}
+.app-icon-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+.app-icon-btn:active { transform: translateY(0); }
+
+.app-icon-glyph {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.app-icon-btn:hover .app-icon-glyph {
+  background: var(--bg-hover);
+  color: var(--text);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.app-icon-name {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+}
+.app-icon-btn:hover .app-icon-name { color: var(--text); }
+
+/* Icon accent colors */
+.app-icon-btn[data-app="terminal"] .app-icon-glyph { color: var(--accent); }
+.app-icon-btn[data-app="cards"] .app-icon-glyph { color: var(--accent-blue); }
+.app-icon-btn[data-app="obsidian"] .app-icon-glyph { color: var(--accent-purple); }
+.app-icon-btn[data-app="tetris"] .app-icon-glyph { color: #ffa657; }
+.app-icon-btn[data-app="settings"] .app-icon-glyph { color: var(--text-muted); }
+
+/* ============================================================ WINDOWS */
+.window {
+  position: absolute;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: var(--win-min-w);
+  min-height: var(--win-min-h);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  z-index: 10;
+  transition: box-shadow 0.1s;
+}
+.window.focused {
+  border-color: #3a4a5e;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(88,166,255,0.1);
+  z-index: 20;
+}
+.window.maximized {
+  top: 4px !important;
+  left: 4px !important;
+  width: calc(100% - 8px) !important;
+  height: calc(100% - 8px) !important;
+  border-radius: 6px;
+}
+
+/* Title bar */
+.win-titlebar {
+  height: 32px;
+  background: var(--bg-hover);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 8px;
+  cursor: grab;
+  flex-shrink: 0;
+  user-select: none;
+}
+.win-titlebar:active { cursor: grabbing; }
+
+.win-controls {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.win-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 0;
+  flex-shrink: 0;
+  transition: filter 0.1s;
+}
+.win-btn:hover { filter: brightness(1.3); }
+.win-btn.close { background: #f85149; }
+.win-btn.minimize { background: #d29922; }
+.win-btn.maximize { background: var(--accent); }
+
+.win-icon {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.win-title {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Window body */
+.win-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* Terminal-style output */
+.win-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px;
+  background: var(--bg);
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.win-output::-webkit-scrollbar { width: 4px; }
+.win-output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.out-line { display: block; }
+.out-line.cmd { color: var(--accent-blue); }
+.out-line.err { color: #f85149; }
+.out-line.info { color: var(--text-muted); }
+.out-line.success { color: var(--accent); }
+.out-line.warn { color: #ffa657; }
+.out-line.sys { color: var(--accent-purple); }
+.out-line.result { color: #79c0ff; }
+
+/* Input line */
+.win-input-row {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+  padding: 0 8px;
+  flex-shrink: 0;
+  height: 30px;
+}
+.win-prompt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-blue);
+  margin-right: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.win-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  caret-color: var(--accent-blue);
+}
+.win-input::placeholder { color: var(--text-faint); }
+
+/* Resize handles */
+.win-resize-e { position: absolute; right: 0; top: 0; width: 6px; height: 100%; cursor: ew-resize; }
+.win-resize-s { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; cursor: ns-resize; }
+.win-resize-se { position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+
+/* Tetris canvas override */
+.win-tetris-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  overflow: hidden;
+  padding: 8px;
+  gap: 6px;
+}
+#tetris-canvas-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+canvas.tetris-board {
+  display: block;
+  image-rendering: pixelated;
+}
+#tetris-side-panel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 90px;
+}
+#tetris-side-panel .panel-section {
+  margin-bottom: 12px;
+}
+#tetris-side-panel .panel-label {
+  color: var(--text-faint);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+#tetris-side-panel .panel-value {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 700;
+}
+#tetris-next-canvas {
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+.tetris-controls-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* Notification panel */
+#notif-panel {
+  position: absolute;
+  top: calc(var(--taskbar-h) + 4px);
+  right: 8px;
+  width: 300px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  z-index: 2000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  display: none;
+  max-height: 400px;
+  overflow-y: auto;
+}
+#notif-panel.visible { display: block; }
+#notif-panel-header {
+  padding: 10px 14px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.notif-item {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-faint);
+  font-size: 11px;
+  cursor: pointer;
+}
+.notif-clear-btn:hover { color: var(--text); }
+
+/* Boot animation */
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+#boot-screen.hidden { display: none; }
+.boot-logo {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+.boot-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.boot-progress { width: 260px; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; margin-top: 8px; }
+.boot-bar { height: 100%; background: var(--accent); border-radius: 1px; width: 0; transition: width 0.25s ease; }
+.boot-msg { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+
+/* ============================================================ OBSIDIAN APP */
+.obsidian-layout {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+.obsidian-sidebar {
+  width: 160px;
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 6px 0;
+}
+.obsidian-file {
+  padding: 5px 12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.1s, color 0.1s;
+}
+.obsidian-file:hover { background: var(--bg-hover); color: var(--text); }
+.obsidian-file.active { color: var(--accent-purple); background: #1f1a2e; }
+.obsidian-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  background: var(--bg);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.obsidian-main::-webkit-scrollbar { width: 4px; }
+.obsidian-main::-webkit-scrollbar-thumb { background: var(--border); }
+.obsidian-main h1 { font-size: 16px; color: var(--text); margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.obsidian-main h2 { font-size: 13px; color: var(--text); margin: 12px 0 6px; }
+.obsidian-main p { margin-bottom: 8px; color: var(--text-muted); }
+.obsidian-main code { background: var(--bg-hover); color: #e06c75; font-family: var(--font-mono); font-size: 11px; padding: 1px 4px; border-radius: 3px; }
+.obsidian-main ul { margin: 0 0 8px 16px; }
+.obsidian-main li { color: var(--text-muted); margin: 2px 0; }
+.obsidian-sidebar-header { padding: 4px 12px 4px; font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 4px; }
+
+/* ============================================================ MOBILE */
+@media (max-width: 768px) {
+  #launcher-grid { grid-template-columns: repeat(3, 1fr); max-width: 320px; }
+  #taskbar-repl-wrap { display: none; }
+  #taskbar-repl-out { display: none; }
+
+  .window {
+    position: fixed !important;
+    top: var(--taskbar-h) !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--taskbar-h)) !important;
+    border-radius: 0;
+    min-width: unset;
+  }
+  .win-resize-e, .win-resize-s, .win-resize-se { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Boot screen -->
+<div id="boot-screen">
+  <div class="boot-logo">ORAPPTER</div>
+  <div class="boot-sub">Desktop v1.0.0</div>
+  <div class="boot-progress"><div class="boot-bar" id="boot-bar"></div></div>
+  <div class="boot-msg" id="boot-msg">Initializing LisPy VM...</div>
+</div>
+
+<!-- Notification panel -->
+<div id="notif-panel">
+  <div id="notif-panel-header">
+    <span>Notifications</span>
+    <button class="notif-clear-btn" onclick="clearNotifications()">Clear</button>
+  </div>
+  <div id="notif-list"></div>
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <div id="taskbar-brand" onclick="toggleLauncher()" title="App Launcher">ORAPPTER</div>
+  <button id="taskbar-launcher-btn" onclick="toggleLauncher()" title="All Apps">&#9783; Apps</button>
+  <div id="taskbar-apps"></div>
+  <div id="taskbar-right">
+    <div id="taskbar-repl-wrap">
+      <span id="taskbar-repl-prompt">&#955;&gt;</span>
+      <input id="taskbar-repl-input" type="text" placeholder="(+ 1 2 3)" spellcheck="false" autocomplete="off">
+      <span id="taskbar-repl-out"></span>
+    </div>
+    <div id="taskbar-clock">00:00</div>
+    <button id="taskbar-notif-btn" onclick="toggleNotifPanel()" title="Notifications">
+      &#9734;<div id="notif-badge"></div>
+    </button>
+  </div>
+</div>
+
+<!-- Desktop area -->
+<div id="desktop">
+  <!-- Watermark -->
+  <div id="desktop-watermark">         .  *  .    *    .  *
+    *  .    ___    .  *
+      .   /   \   .    *
+   *     | S E |     .
+    .    | E D |  *
+  *   .  \___/    .   *
+    .   *  |  .    *
+      .    |    .
+   *    . /|\ .    *
+     .  / | \ .  *
+       /  |  \
+  ____/   |   \____
+          |</div>
+  <div id="desktop-tagline">The shade is free. The roots are sovereign.</div>
+
+  <!-- App launcher -->
+  <div id="launcher">
+    <div id="launcher-title">Applications</div>
+    <div id="launcher-grid"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   LISPPY VM — Ported from orappter.html
+   ============================================================ */
+
+class LispSymbol extends String {
+  constructor(s) { super(s); }
+  toString() { return String.prototype.valueOf.call(this); }
+  valueOf() { return String.prototype.valueOf.call(this); }
+}
+
+const NIL = Object.freeze({
+  _type: 'nil',
+  toString() { return '()'; },
+  [Symbol.iterator]() { return [][Symbol.iterator](); }
+});
+
+function isNil(x) { return x === NIL || x === null || x === undefined; }
+
+class LispLambda {
+  constructor(params, body, env, name = 'lambda') {
+    this.params = params;
+    this.body = body;
+    this.env = env;
+    this.name = name;
+  }
+  toString() { return `#<procedure ${this.name}>`; }
+}
+
+class LispMacro {
+  constructor(params, body, env, name = 'macro') {
+    this.params = params;
+    this.body = body;
+    this.env = env;
+    this.name = name;
+  }
+  toString() { return `#<macro ${this.name}>`; }
+}
+
+class LispError extends Error {
+  constructor(msg) { super(msg); this.name = 'LispError'; }
+}
+class LispSyntaxError extends LispError {
+  constructor(msg) { super(msg); this.name = 'LispSyntaxError'; }
+}
+
+class Env {
+  constructor(params, args, outer) {
+    this._bindings = {};
+    this.outer = outer || null;
+    if (params !== undefined) {
+      if (typeof params === 'string') {
+        this._bindings[params] = Array.from(args || []);
+      } else {
+        const p = params || [];
+        const a = args || [];
+        if (p.length !== a.length) throw new LispError(`expected ${p.length} args, got ${a.length}`);
+        for (let i = 0; i < p.length; i++) this._bindings[p[i]] = a[i];
+      }
+    }
+  }
+  get(name) {
+    if (name in this._bindings) return this._bindings[name];
+    if (this.outer) return this.outer.get(name);
+    throw new LispError(`unbound variable: ${name}`);
+  }
+  set(name, val) { this._bindings[name] = val; }
+  find(name) {
+    if (name in this._bindings) return this;
+    if (this.outer) return this.outer.find(name);
+    throw new LispError(`unbound variable: ${name}`);
+  }
+  has(name) {
+    if (name in this._bindings) return true;
+    if (this.outer) return this.outer.has(name);
+    return false;
+  }
+}
+
+function tokenize(source) {
+  const tokens = [];
+  let i = 0;
+  while (i < source.length) {
+    const c = source[i];
+    if (' \t\n\r'.includes(c)) { i++; continue; }
+    if (c === ';') { while (i < source.length && source[i] !== '\n') i++; continue; }
+    if ('()[]\'`,'.includes(c)) { tokens.push(c); i++; continue; }
+    if (c === '"') {
+      let j = i + 1;
+      while (j < source.length) {
+        if (source[j] === '\\' && j + 1 < source.length) { j += 2; continue; }
+        if (source[j] === '"') break;
+        j++;
+      }
+      tokens.push(source.slice(i, j + 1));
+      i = j + 1;
+      continue;
+    }
+    let j = i;
+    while (j < source.length && !' \t\n\r()[]";,'.includes(source[j])) j++;
+    tokens.push(source.slice(i, j));
+    i = j;
+  }
+  return tokens;
+}
+
+function parse(source) {
+  const tokens = tokenize(source);
+  const expressions = [];
+  let pos = 0;
+
+  function readExpr() {
+    if (pos >= tokens.length) throw new LispSyntaxError('unexpected end of input');
+    const tok = tokens[pos];
+    if (tok === "'") { pos++; return [new LispSymbol('quote'), readExpr()]; }
+    if (tok === '`') { pos++; return [new LispSymbol('quasiquote'), readExpr()]; }
+    if (tok === ',') { pos++; return [new LispSymbol('unquote'), readExpr()]; }
+    if (tok === '(' || tok === '[') {
+      pos++;
+      const close = tok === '(' ? ')' : ']';
+      const lst = [];
+      while (pos < tokens.length && tokens[pos] !== close) lst.push(readExpr());
+      if (pos >= tokens.length) throw new LispSyntaxError(`missing closing '${close}'`);
+      pos++;
+      return lst;
+    }
+    if (tok === ')' || tok === ']') throw new LispSyntaxError(`unexpected '${tok}'`);
+    pos++;
+    return parseAtom(tok);
+  }
+
+  while (pos < tokens.length) expressions.push(readExpr());
+  return expressions;
+}
+
+function parseAtom(tok) {
+  if (tok === '#t') return true;
+  if (tok === '#f') return false;
+  if (tok === 'nil') return NIL;
+  const n = Number(tok);
+  if (!isNaN(n) && tok !== '') return n;
+  if (tok.startsWith('"') && tok.endsWith('"')) {
+    return tok.slice(1, -1)
+      .replace(/\\n/g, '\n')
+      .replace(/\\t/g, '\t')
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, '\\');
+  }
+  return new LispSymbol(tok);
+}
+
+function valueRepr(val) {
+  if (val === true) return '#t';
+  if (val === false) return '#f';
+  if (isNil(val)) return '()';
+  if (val instanceof LispSymbol) return String(val);
+  if (typeof val === 'string') return '"' + val.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
+  if (typeof val === 'number') return String(val);
+  if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
+  if (val && typeof val === 'object' && !(val instanceof LispLambda) && !(val instanceof LispMacro) && !(val instanceof Env)) {
+    if (val._type === 'nil') return '()';
+    const items = Object.entries(val).map(([k, v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
+    return `(dict ${items})`;
+  }
+  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
+  if (typeof val === 'function') return '#<builtin>';
+  return String(val);
+}
+
+function displayValue(val) {
+  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
+  return valueRepr(val);
+}
+
+let _output = [];
+function vmPrint(s) { _output.push(s); }
+
+function evaluate(expr, env) {
+  while (true) {
+    if (expr === true || expr === false) return expr;
+    if (typeof expr === 'number') return expr;
+    if (isNil(expr)) return NIL;
+    if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+    if (expr instanceof LispSymbol) return env.get(String(expr));
+    if (!Array.isArray(expr)) return expr;
+    if (expr.length === 0) return NIL;
+
+    const head = expr[0];
+
+    if (head instanceof LispSymbol || typeof head === 'string') {
+      const h = String(head);
+
+      if (h === 'quote') {
+        if (expr.length !== 2) throw new LispError('quote requires exactly 1 argument');
+        return expr[1];
+      }
+      if (h === 'if') {
+        if (expr.length < 3) throw new LispError('if requires at least 2 arguments');
+        const test = evaluate(expr[1], env);
+        if (test !== false && !isNil(test)) { expr = expr[2]; continue; }
+        else if (expr.length > 3) { expr = expr[3]; continue; }
+        else return NIL;
+      }
+      if (h === 'cond') {
+        for (let i = 1; i < expr.length; i++) {
+          const clause = expr[i];
+          if (!Array.isArray(clause) || clause.length < 2) throw new LispError('invalid cond clause');
+          const clauseHead = String(clause[0]);
+          if (clauseHead === 'else' || clauseHead === 'true') { expr = ['begin', ...clause.slice(1)]; break; }
+          const test = evaluate(clause[0], env);
+          if (test !== false && !isNil(test)) {
+            if (clause.length === 2) { expr = clause[1]; break; }
+            expr = ['begin', ...clause.slice(1)]; break;
+          }
+        }
+        if (h === 'cond') return NIL;
+        continue;
+      }
+      if (h === 'define') {
+        if (expr.length < 3) throw new LispError('define requires at least 2 arguments');
+        const target = expr[1];
+        if (Array.isArray(target)) {
+          const name = String(target[0]);
+          const params = target.slice(1).map(String);
+          const body = expr.slice(2);
+          const fn = new LispLambda(params, body, env, name);
+          env.set(name, fn);
+          return fn;
+        } else {
+          const name = String(target);
+          const val = evaluate(expr[2], env);
+          env.set(name, val);
+          return val;
+        }
+      }
+      if (h === 'set!') {
+        if (expr.length !== 3) throw new LispError('set! requires exactly 2 arguments');
+        const name = String(expr[1]);
+        const val = evaluate(expr[2], env);
+        env.find(name).set(name, val);
+        return val;
+      }
+      if (h === 'lambda') {
+        if (expr.length < 3) throw new LispError('lambda requires params and body');
+        const params = expr[1];
+        if (params instanceof LispSymbol || typeof params === 'string') return new LispLambda(String(params), expr.slice(2), env);
+        if (Array.isArray(params)) return new LispLambda(params.map(String), expr.slice(2), env);
+        throw new LispError(`invalid lambda params: ${params}`);
+      }
+      if (h === 'let') {
+        if (expr.length < 3) throw new LispError('let requires bindings and body');
+        const bindings = expr[1];
+        const body = expr.slice(2);
+        const newEnv = new Env(undefined, undefined, env);
+        for (const binding of bindings) {
+          if (!Array.isArray(binding) || binding.length !== 2) throw new LispError(`invalid let binding: ${binding}`);
+          newEnv.set(String(binding[0]), evaluate(binding[1], env));
+        }
+        for (let i = 0; i < body.length - 1; i++) evaluate(body[i], newEnv);
+        expr = body[body.length - 1]; env = newEnv; continue;
+      }
+      if (h === 'let*') {
+        if (expr.length < 3) throw new LispError('let* requires bindings and body');
+        const bindings = expr[1];
+        const body = expr.slice(2);
+        const newEnv = new Env(undefined, undefined, env);
+        for (const binding of bindings) {
+          if (!Array.isArray(binding) || binding.length !== 2) throw new LispError(`invalid let* binding`);
+          newEnv.set(String(binding[0]), evaluate(binding[1], newEnv));
+        }
+        for (let i = 0; i < body.length - 1; i++) evaluate(body[i], newEnv);
+        expr = body[body.length - 1]; env = newEnv; continue;
+      }
+      if (h === 'begin') {
+        if (expr.length === 1) return NIL;
+        for (let i = 1; i < expr.length - 1; i++) evaluate(expr[i], env);
+        expr = expr[expr.length - 1]; continue;
+      }
+      if (h === 'and') {
+        let result = true;
+        for (let i = 1; i < expr.length; i++) {
+          result = evaluate(expr[i], env);
+          if (result === false || isNil(result)) return result;
+        }
+        return result;
+      }
+      if (h === 'or') {
+        for (let i = 1; i < expr.length; i++) {
+          const result = evaluate(expr[i], env);
+          if (result !== false && !isNil(result)) return result;
+        }
+        return false;
+      }
+      if (h === 'define-macro') {
+        if (expr.length < 3) throw new LispError('define-macro requires at least 2 arguments');
+        const target = expr[1];
+        if (Array.isArray(target)) {
+          const name = String(target[0]);
+          const params = target.slice(1).map(String);
+          const body = expr.slice(2);
+          const mac = new LispMacro(params, body, env, name);
+          env.set(name, mac);
+          return mac;
+        }
+        throw new LispError('invalid define-macro syntax');
+      }
+      if (h === 'do') return NIL;
+    }
+
+    const fn = evaluate(head, env);
+
+    if (fn instanceof LispMacro) {
+      const macArgs = expr.slice(1);
+      const macEnv = new Env(fn.params, macArgs, fn.env);
+      const expanded = evalBody(fn.body, macEnv);
+      expr = expanded; continue;
+    }
+
+    const args = expr.slice(1).map(a => evaluate(a, env));
+
+    if (typeof fn === 'function') return fn(...args);
+
+    if (fn instanceof LispLambda) {
+      const callEnv = new Env(fn.params, args, fn.env);
+      for (let i = 0; i < fn.body.length - 1; i++) evaluate(fn.body[i], callEnv);
+      expr = fn.body[fn.body.length - 1];
+      env = callEnv;
+      continue;
+    }
+
+    throw new LispError(`not callable: ${valueRepr(head)}`);
+  }
+}
+
+function evalBody(body, env) {
+  let result = NIL;
+  for (const expr of body) result = evaluate(expr, env);
+  return result;
+}
+
+function callFn(fn, args) {
+  if (typeof fn === 'function') return fn(...args);
+  if (fn instanceof LispLambda) {
+    const callEnv = new Env(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+/* ============================================================
+   GLOBAL ENVIRONMENT
+   ============================================================ */
+// Registry store
+let REGISTRY = { agents: [], loaded: false };
+
+function seedHash(title) {
+  let h = 0;
+  for (let i = 0; i < String(title).length; i++) h = ((h << 5) - h) + String(title).charCodeAt(i);
+  return Math.abs(h);
+}
+
+function mulberry32(seed) {
+  let s = seed >>> 0;
+  return function() {
+    s |= 0; s = s + 0x6D2B79F5 | 0;
+    let t = Math.imul(s ^ s >>> 15, 1 | s);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function makeGlobalEnv() {
+  const env = new Env();
+
+  // Arithmetic
+  env.set('+', (...a) => a.reduce((s, x) => s + x, 0));
+  env.set('-', (a, ...rest) => rest.length ? a - rest.reduce((s,x)=>s+x,0) : -a);
+  env.set('*', (...a) => a.reduce((p, x) => p * x, 1));
+  env.set('/', (a, b) => { if (b === 0) throw new LispError('division by zero'); return a / b; });
+  env.set('//', (a, b) => Math.floor(a / b));
+  env.set('%', (a, b) => a % b);
+  env.set('abs', Math.abs);
+  env.set('min', (...a) => Math.min(...a));
+  env.set('max', (...a) => Math.max(...a));
+  env.set('floor', Math.floor);
+  env.set('ceil', Math.ceil);
+  env.set('round', Math.round);
+  env.set('sqrt', Math.sqrt);
+  env.set('expt', Math.pow);
+  env.set('modulo', (a, b) => a % b);
+  env.set('remainder', (a, b) => a % b);
+  env.set('random', (n) => n !== undefined ? Math.floor(Math.random() * n) : Math.random());
+
+  // Comparison
+  env.set('=', (a, b) => a === b);
+  env.set('equal?', (a, b) => JSON.stringify(a) === JSON.stringify(b));
+  env.set('eq?', (a, b) => a === b);
+  env.set('<', (a, b) => a < b);
+  env.set('>', (a, b) => a > b);
+  env.set('<=', (a, b) => a <= b);
+  env.set('>=', (a, b) => a >= b);
+  env.set('!=', (a, b) => a !== b);
+
+  // Logic
+  env.set('not', x => x === false || isNil(x));
+
+  // Predicates
+  env.set('null?', x => isNil(x) || (Array.isArray(x) && x.length === 0));
+  env.set('pair?', x => Array.isArray(x) && x.length > 0);
+  env.set('list?', x => Array.isArray(x));
+  env.set('number?', x => typeof x === 'number' && !isNaN(x));
+  env.set('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.set('symbol?', x => x instanceof LispSymbol);
+  env.set('boolean?', x => typeof x === 'boolean');
+  env.set('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanceof LispLambda) && !(x instanceof LispMacro) && x !== NIL);
+  env.set('integer?', x => Number.isInteger(x));
+  env.set('empty?', x => isNil(x) || (typeof x === 'string' && x.length === 0) || (Array.isArray(x) && x.length === 0));
+
+  // List operations
+  env.set('cons', (a, b) => Array.isArray(b) ? [a, ...b] : [a, b]);
+  env.set('car', x => { if (Array.isArray(x) && x.length > 0) return x[0]; throw new LispError(`car: not a pair`); });
+  env.set('cdr', x => { if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL; throw new LispError(`cdr: not a pair`); });
+  env.set('list', (...a) => a);
+  env.set('length', x => Array.isArray(x) ? x.length : typeof x === 'string' ? x.length : 0);
+  env.set('append', (...lists) => { const r = []; for (const lst of lists) { if (Array.isArray(lst)) r.push(...lst); else if (!isNil(lst)) r.push(lst); } return r; });
+  env.set('reverse', x => Array.isArray(x) ? [...x].reverse() : x);
+  env.set('nth', (lst, n) => Array.isArray(lst) ? lst[n] : NIL);
+  env.set('take', (lst, n) => Array.isArray(lst) ? lst.slice(0, n) : NIL);
+  env.set('drop', (lst, n) => Array.isArray(lst) ? lst.slice(n) : NIL);
+  env.set('range', (...a) => {
+    let start = 0, end, step = 1;
+    if (a.length === 1) end = a[0];
+    else if (a.length === 2) { start = a[0]; end = a[1]; }
+    else { start = a[0]; end = a[1]; step = a[2]; }
+    const r = [];
+    for (let i = start; i < end; i += step) r.push(i);
+    return r;
+  });
+  env.set('flatten', function flatten(lst) { if (!Array.isArray(lst)) return [lst]; return lst.flatMap(x => Array.isArray(x) ? flatten(x) : [x]); });
+  env.set('sort', (lst, fn) => {
+    if (!Array.isArray(lst)) return lst;
+    const copy = [...lst];
+    if (fn) copy.sort((a, b) => { const r = callFn(fn, [a, b]); return (r === true || r > 0) ? -1 : 1; });
+    else copy.sort((a, b) => String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
+    return copy;
+  });
+  env.set('first', x => { if (Array.isArray(x) && x.length > 0) return x[0]; throw new LispError('first: empty list'); });
+  env.set('rest', x => { if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL; throw new LispError('rest: not a list'); });
+  env.set('last', x => Array.isArray(x) && x.length ? x[x.length-1] : NIL);
+
+  // Higher-order
+  env.set('map', (fn, ...lists) => {
+    if (!lists.length) throw new LispError('map: requires list');
+    if (lists.length === 1) { const lst = lists[0]; return Array.isArray(lst) ? lst.map(x => callFn(fn, [x])) : NIL; }
+    const minLen = Math.min(...lists.filter(Array.isArray).map(l => l.length));
+    return Array.from({length: minLen}, (_, i) => callFn(fn, lists.map(l => l[i])));
+  });
+  env.set('filter', (fn, lst) => Array.isArray(lst) ? lst.filter(x => { const r = callFn(fn, [x]); return r !== false && !isNil(r); }) : NIL);
+  env.set('reduce', (fn, lst, ...init) => {
+    if (!Array.isArray(lst)) throw new LispError('reduce: requires list');
+    if (init.length) return lst.reduce((acc, x) => callFn(fn, [acc, x]), init[0]);
+    if (!lst.length) throw new LispError('reduce: empty list with no init');
+    return lst.slice(1).reduce((acc, x) => callFn(fn, [acc, x]), lst[0]);
+  });
+  env.set('for-each', (fn, lst) => { if (Array.isArray(lst)) lst.forEach(x => callFn(fn, [x])); return NIL; });
+  env.set('apply', (fn, args) => { if (Array.isArray(args)) return callFn(fn, args); throw new LispError('apply: requires list'); });
+  env.set('compose', (f, g) => (...args) => callFn(f, [callFn(g, args)]));
+
+  // Strings
+  env.set('string-append', (...a) => a.map(String).join(''));
+  env.set('string-length', s => String(s).length);
+  env.set('substring', (s, start, end) => end !== undefined ? String(s).slice(start, end) : String(s).slice(start));
+  env.set('string-upcase', s => String(s).toUpperCase());
+  env.set('string-downcase', s => String(s).toLowerCase());
+  env.set('string-contains?', (s, sub) => String(s).includes(String(sub)));
+  env.set('string-split', (s, delim) => delim !== undefined ? String(s).split(String(delim)) : String(s).split(''));
+  env.set('string-join', (lst, sep) => (Array.isArray(lst) ? lst : [lst]).map(String).join(sep !== undefined ? String(sep) : ' '));
+  env.set('string-trim', s => String(s).trim());
+  env.set('string-replace', (s, old, n) => String(s).split(String(old)).join(String(n)));
+  env.set('string-ref', (s, i) => String(s)[i] || NIL);
+  env.set('number->string', n => String(n));
+  env.set('string->number', s => { const n = Number(s); return isNaN(n) ? false : n; });
+  env.set('symbol->string', s => String(s));
+  env.set('string->symbol', s => new LispSymbol(String(s)));
+  env.set('->string', x => String(x));
+  env.set('->number', x => Number(x));
+
+  // Dicts
+  env.set('make-dict', (...pairs) => { const d = {}; for (let i = 0; i < pairs.length; i += 2) d[pairs[i]] = pairs[i+1]; return d; });
+  env.set('get', (obj, key, ...def) => {
+    const dflt = def.length ? def[0] : NIL;
+    if (obj && typeof obj === 'object' && !Array.isArray(obj)) { const v = obj[key]; return v !== undefined ? v : dflt; }
+    if (Array.isArray(obj) && typeof key === 'number') { return key >= 0 && key < obj.length ? obj[key] : dflt; }
+    return dflt;
+  });
+  env.set('keys', d => d && typeof d === 'object' && !Array.isArray(d) ? Object.keys(d) : NIL);
+  env.set('values', d => d && typeof d === 'object' && !Array.isArray(d) ? Object.values(d) : NIL);
+  env.set('has-key?', (d, k) => d && typeof d === 'object' ? k in d : false);
+  env.set('dict-set', (d, k, v) => d && typeof d === 'object' ? {...d, [k]: v} : NIL);
+  env.set('dict-merge', (...dicts) => Object.assign({}, ...dicts.filter(d => d && typeof d === 'object')));
+  env.set('dict-map', (fn, d) => { if (!d || typeof d !== 'object' || Array.isArray(d)) return NIL; const r = {}; for (const [k, v] of Object.entries(d)) r[k] = callFn(fn, [k, v]); return r; });
+  env.set('dict-filter', (fn, d) => { if (!d || typeof d !== 'object' || Array.isArray(d)) return NIL; const r = {}; for (const [k, v] of Object.entries(d)) { const res = callFn(fn, [k, v]); if (res !== false && !isNil(res)) r[k] = v; } return r; });
+
+  // I/O
+  env.set('display', (...args) => { args.forEach(a => vmPrint(displayValue(a))); return NIL; });
+  env.set('newline', () => { vmPrint('\n'); return NIL; });
+  env.set('print', x => { vmPrint(valueRepr(x)); return NIL; });
+  env.set('println', x => { vmPrint(displayValue(x) + '\n'); return NIL; });
+
+  // JSON
+  env.set('json-parse', s => JSON.parse(String(s)));
+  env.set('json-dump', val => JSON.stringify(val, null, 2));
+
+  // Special values
+  env.set('#t', true);
+  env.set('#f', false);
+  env.set('nil', NIL);
+  env.set('true', true);
+  env.set('false', false);
+  env.set('pi', Math.PI);
+  env.set('e', Math.E);
+  env.set('error', msg => { throw new LispError(String(msg)); });
+
+  // Seed hash (deterministic card system)
+  env.set('seed-hash', (title) => seedHash(title));
+  env.set('mulberry32', (seed) => {
+    const rng = mulberry32(typeof seed === 'number' ? seed : 0);
+    return rng;
+  });
+
+  // Registry / agent functions
+  env.set('resolve-card', (name) => {
+    const n = String(name);
+    const agent = REGISTRY.agents.find(a => a.name === n || a.slug === n);
+    if (!agent) {
+      const hash = seedHash(n);
+      const rng = mulberry32(hash);
+      const tiers = ['community', 'verified', 'official'];
+      const cats = ['core', 'pipeline', 'integrations', 'productivity', 'devtools'];
+      return [
+        '┌─────────────────────────────────┐',
+        `│ CARD: ${n.padEnd(26)} │`,
+        `│ Tier: ${tiers[Math.floor(rng() * 3)].padEnd(26)} │`,
+        `│ Cat:  ${cats[Math.floor(rng() * 5)].padEnd(26)} │`,
+        `│ Hash: ${String(hash).slice(0, 8).padEnd(26)} │`,
+        '│ [Seed-generated — not in binder]│',
+        '└─────────────────────────────────┘'
+      ].join('\n');
+    }
+    return [
+      '┌─────────────────────────────────┐',
+      `│ ${(agent.display_name || agent.name).slice(0,32).padEnd(32)} │`,
+      `│ ${(agent.name || '').slice(0,32).padEnd(32)} │`,
+      `│ v${(agent.version || '1.0.0').padEnd(31)} │`,
+      `│ tier: ${(agent.quality_tier || 'community').padEnd(26)} │`,
+      `│ cat:  ${(agent.category || 'unknown').padEnd(26)} │`,
+      `│ ${(agent.description || '').slice(0,32).padEnd(32)} │`,
+      '└─────────────────────────────────┘'
+    ].join('\n');
+  });
+
+  env.set('search-agents', (query) => {
+    const q = String(query).toLowerCase();
+    const matches = REGISTRY.agents.filter(a =>
+      (a.name || '').toLowerCase().includes(q) ||
+      (a.description || '').toLowerCase().includes(q) ||
+      (a.tags || []).some(t => t.toLowerCase().includes(q)) ||
+      (a.category || '').toLowerCase().includes(q)
+    );
+    if (!matches.length) return `No agents matching "${query}"`;
+    return matches.slice(0, 8).map(a => `  ${a.name}  [${a.quality_tier || 'community'}] — ${(a.description || '').slice(0, 50)}`).join('\n');
+  });
+
+  env.set('search', (query) => {
+    const q = String(query).toLowerCase();
+    const matches = REGISTRY.agents.filter(a =>
+      (a.name || '').toLowerCase().includes(q) ||
+      (a.description || '').toLowerCase().includes(q) ||
+      (a.tags || []).some(t => t.toLowerCase().includes(q))
+    );
+    if (!matches.length) return `No results for "${query}"`;
+    return matches.slice(0, 6).map((a, i) => `  ${i+1}. ${a.name} — ${(a.description || '').slice(0,45)}`).join('\n');
+  });
+
+  env.set('binder-status', () => {
+    const total = REGISTRY.agents.length;
+    const tiers = {};
+    const cats = {};
+    for (const a of REGISTRY.agents) {
+      const t = a.quality_tier || 'community';
+      const c = a.category || 'unknown';
+      tiers[t] = (tiers[t] || 0) + 1;
+      cats[c] = (cats[c] || 0) + 1;
+    }
+    const tierStr = Object.entries(tiers).map(([k,v]) => `${k}:${v}`).join(' ');
+    const catStr = Object.entries(cats).map(([k,v]) => `${k}:${v}`).join(' ');
+    const loaded = REGISTRY.loaded ? 'live' : 'offline';
+    return `Binder: ${total} agents [${loaded}]\nTiers: ${tierStr}\nCats:  ${catStr}`;
+  });
+
+  env.set('agents', () => {
+    if (!REGISTRY.agents.length) return 'Registry not loaded. Try (binder-status)';
+    return REGISTRY.agents.slice(0, 10).map(a => `  ${a.name}`).join('\n') +
+      (REGISTRY.agents.length > 10 ? `\n  ... and ${REGISTRY.agents.length - 10} more` : '');
+  });
+
+  // Desktop OS builtins
+  env.set('open-app', (name) => { openApp(String(name)); return `Opening: ${name}`; });
+  env.set('close-app', (name) => { closeAppByName(String(name)); return `Closed: ${name}`; });
+  env.set('wallpaper', (name) => { setWallpaper(String(name)); return `Wallpaper: ${name}`; });
+  env.set('theme', (name) => { setTheme(String(name)); return `Theme: ${name}`; });
+  env.set('sysinfo', () => getSysInfo());
+  env.set('notify', (msg) => { addNotification(String(msg)); return NIL; });
+
+  return env;
+}
+
+const GLOBAL_ENV = makeGlobalEnv();
+
+function lispEval(src, env) {
+  _output = [];
+  const evalEnv = env || GLOBAL_ENV;
+  try {
+    const exprs = parse(src);
+    let result = NIL;
+    for (const expr of exprs) result = evaluate(expr, evalEnv);
+    const out = _output.join('');
+    return { ok: true, result, repr: valueRepr(result), output: out };
+  } catch(e) {
+    return { ok: false, error: e.message, repr: `; error: ${e.message}`, output: _output.join('') };
+  }
+}
+
+/* ============================================================
+   APP REGISTRY
+   ============================================================ */
+const APPS = [
+  { id: 'terminal',      icon: '>_', name: 'Terminal',      emoji: '&#62;&#95;', color: '#3fb950', desc: 'Unix shell with registry filesystem', full: true },
+  { id: 'obsidian',      icon: '+',  name: 'Obsidian',      emoji: '&#9670;',  color: '#a371f7', desc: 'Knowledge vault & notes', full: true },
+  { id: 'tetris',        icon: '#',  name: 'Tetris',        emoji: '&#9724;',  color: '#ffa657', desc: 'The classic game', full: true },
+  { id: 'cards',         icon: '$',  name: 'Cards SDK',     emoji: '&#9830;',  color: '#58a6ff', desc: 'Agent card manager', full: true },
+  { id: 'settings',      icon: '@',  name: 'Settings',      emoji: '&#9881;',  color: '#8b949e', desc: 'Desktop settings', full: true },
+  { id: 'rappterdaemon', icon: '!',  name: 'RappterDaemon', emoji: '&#9760;',  color: '#f85149', desc: 'RPG daemon battles', full: false },
+  { id: 'synth',         icon: '~',  name: 'Synth',         emoji: '&#9834;',  color: '#79c0ff', desc: 'Sound engine', full: false },
+  { id: 'radio',         icon: 'o',  name: 'Radio',         emoji: '&#128251;',color: '#ffa657', desc: 'AI radio streams', full: false },
+  { id: 'canvas',        icon: '*',  name: 'Canvas',        emoji: '&#9998;',  color: '#a371f7', desc: 'Drawing app', full: false },
+  { id: 'school',        icon: '^',  name: 'School',        emoji: '&#127979;',color: '#3fb950', desc: 'AI tutor', full: false },
+  { id: 'arena',         icon: '[]', name: 'Arena',         emoji: '&#9876;',  color: '#f85149', desc: 'PvP battles', full: false },
+  { id: 'tamagotchi',    icon: '<3', name: 'Tamagotchi',    emoji: '&#128150;',color: '#ff7b72', desc: 'Virtual pet', full: false },
+  { id: 'garden',        icon: '%',  name: 'Garden',        emoji: '&#127807;',color: '#3fb950', desc: 'Plant & grow', full: false },
+  { id: 'dungeon',       icon: 'v',  name: 'Dungeon',       emoji: '&#9876;',  color: '#8b949e', desc: 'Roguelike crawler', full: false },
+  { id: 'timecapsule',   icon: '&',  name: 'TimeCapsule',   emoji: '&#8987;',  color: '#58a6ff', desc: 'Messages to the future', full: false },
+  { id: 'romloader',     icon: '=',  name: 'RomLoader',     emoji: '&#127918;',color: '#ffa657', desc: 'Play ROMs', full: false },
+];
+
+/* ============================================================
+   WINDOW MANAGER
+   ============================================================ */
+let windowCounter = 0;
+const windows = new Map(); // id -> { id, appId, el, env, history, histIdx, ... }
+let focusedWindowId = null;
+let notifications = [];
+
+function addNotification(msg) {
+  notifications.unshift({ msg, time: new Date().toLocaleTimeString() });
+  if (notifications.length > 30) notifications.pop();
+  document.getElementById('notif-badge').classList.add('visible');
+  renderNotifPanel();
+}
+
+function renderNotifPanel() {
+  const list = document.getElementById('notif-list');
+  if (!notifications.length) {
+    list.innerHTML = '<div class="notif-item">No notifications</div>';
+    return;
+  }
+  list.innerHTML = notifications.map(n =>
+    `<div class="notif-item"><span style="color:var(--text-faint);font-size:10px">${n.time}</span> ${escHtml(n.msg)}</div>`
+  ).join('');
+}
+
+function clearNotifications() {
+  notifications = [];
+  document.getElementById('notif-badge').classList.remove('visible');
+  renderNotifPanel();
+}
+
+function toggleNotifPanel() {
+  const panel = document.getElementById('notif-panel');
+  panel.classList.toggle('visible');
+  document.getElementById('notif-badge').classList.remove('visible');
+}
+
+function toggleLauncher() {
+  const launcher = document.getElementById('launcher');
+  launcher.classList.toggle('hidden');
+}
+
+function showLauncher() {
+  document.getElementById('launcher').classList.remove('hidden');
+}
+
+function hideLauncher() {
+  document.getElementById('launcher').classList.add('hidden');
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function getDefaultSize(appId) {
+  const sizes = {
+    tetris: { w: 380, h: 480 },
+    obsidian: { w: 620, h: 440 },
+    settings: { w: 480, h: 380 },
+    cards: { w: 520, h: 400 },
+    terminal: { w: 560, h: 380 },
+  };
+  return sizes[appId] || { w: 520, h: 380 };
+}
+
+function getDefaultPos(idx) {
+  const desktop = document.getElementById('desktop');
+  const dw = desktop.clientWidth;
+  const dh = desktop.clientHeight;
+  const { w, h } = getDefaultSize('default');
+  const cols = Math.floor(dw / (w + 40));
+  const col = idx % Math.max(cols, 1);
+  const row = Math.floor(idx / Math.max(cols, 1));
+  return {
+    x: 40 + col * (Math.min(w, dw / 2) + 20),
+    y: 20 + row * 40
+  };
+}
+
+function openApp(appId) {
+  const app = APPS.find(a => a.id === appId);
+  if (!app) { addNotification(`App not found: ${appId}`); return; }
+
+  const id = ++windowCounter;
+  const { w, h } = getDefaultSize(appId);
+  const pos = getDefaultPos(windows.size);
+
+  const env = new Env(undefined, undefined, GLOBAL_ENV);
+  const win = {
+    id, appId, env,
+    history: [],
+    histIdx: -1,
+    minimized: false,
+    maximized: false,
+    x: pos.x, y: pos.y, w, h,
+    tetrisState: null,
+    tetrisLoop: null,
+  };
+
+  const el = buildWindowEl(win, app);
+  win.el = el;
+  windows.set(id, win);
+  document.getElementById('desktop').appendChild(el);
+
+  hideLauncher();
+  focusWindow(id);
+  updateTaskbar();
+  addNotification(`Opened: ${app.name}`);
+
+  // Boot the app
+  requestAnimationFrame(() => bootApp(win, app));
+}
+
+function buildWindowEl(win, app) {
+  const el = document.createElement('div');
+  el.className = 'window';
+  el.id = `win-${win.id}`;
+  el.style.left = win.x + 'px';
+  el.style.top = win.y + 'px';
+  el.style.width = win.w + 'px';
+  el.style.height = win.h + 'px';
+
+  const isTetris = win.appId === 'tetris';
+
+  el.innerHTML = `
+    <div class="win-titlebar" id="tb-${win.id}">
+      <div class="win-controls">
+        <button class="win-btn close" onclick="closeWindow(${win.id})" title="Close"></button>
+        <button class="win-btn minimize" onclick="minimizeWindow(${win.id})" title="Minimize"></button>
+        <button class="win-btn maximize" onclick="maximizeWindow(${win.id})" title="Maximize"></button>
+      </div>
+      <span class="win-icon">${escHtml(app.icon)}</span>
+      <span class="win-title">${escHtml(app.name)}</span>
+    </div>
+    <div class="win-body" id="wb-${win.id}">
+      ${isTetris ? buildTetrisBody(win) : buildTerminalBody(win, app)}
+    </div>
+    <div class="win-resize-e" id="re-${win.id}"></div>
+    <div class="win-resize-s" id="rs-${win.id}"></div>
+    <div class="win-resize-se" id="rse-${win.id}"></div>
+  `;
+
+  // Drag
+  setupDrag(el, el.querySelector(`#tb-${win.id}`), win);
+  // Resize
+  setupResize(el, el.querySelector(`#re-${win.id}`), win, 'e');
+  setupResize(el, el.querySelector(`#rs-${win.id}`), win, 's');
+  setupResize(el, el.querySelector(`#rse-${win.id}`), win, 'se');
+  // Double-click title bar to maximize
+  el.querySelector(`#tb-${win.id}`).addEventListener('dblclick', () => maximizeWindow(win.id));
+  // Focus on click
+  el.addEventListener('mousedown', () => focusWindow(win.id), true);
+
+  return el;
+}
+
+function buildTerminalBody(win, app) {
+  const appId = win.appId;
+  // Obsidian gets a special layout
+  if (appId === 'obsidian') {
+    return `
+      <div class="obsidian-layout">
+        <div class="obsidian-sidebar" id="obs-sidebar-${win.id}"></div>
+        <div class="obsidian-main" id="obs-main-${win.id}">
+          <p style="color:var(--text-faint)">Loading vault...</p>
+        </div>
+      </div>
+    `;
+  }
+  const prompt = appId === 'terminal' ? 'binder@orappter:~$' : `(${app.icon})`;
+  return `
+    <div class="win-output" id="out-${win.id}"></div>
+    <div class="win-input-row">
+      <span class="win-prompt">${escHtml(prompt)}</span>
+      <input class="win-input" id="inp-${win.id}" type="text" spellcheck="false" autocomplete="off" placeholder="type a command...">
+    </div>
+  `;
+}
+
+function buildTetrisBody(win) {
+  return `
+    <div class="win-tetris-area" id="tetris-area-${win.id}">
+      <div id="tetris-canvas-container">
+        <canvas class="tetris-board" id="tboard-${win.id}" width="180" height="360"></canvas>
+        <div id="tetris-side-panel">
+          <div class="panel-section">
+            <div class="panel-label">Score</div>
+            <div class="panel-value" id="t-score-${win.id}">0</div>
+          </div>
+          <div class="panel-section">
+            <div class="panel-label">Level</div>
+            <div class="panel-value" id="t-level-${win.id}">1</div>
+          </div>
+          <div class="panel-section">
+            <div class="panel-label">Lines</div>
+            <div class="panel-value" id="t-lines-${win.id}">0</div>
+          </div>
+          <div class="panel-section">
+            <div class="panel-label">Next</div>
+            <canvas id="tnext-${win.id}" width="60" height="60" style="border:1px solid var(--border);background:var(--bg-alt)"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="tetris-controls-hint" id="t-status-${win.id}">Press Enter or type (start) to begin</div>
+    </div>
+    <div class="win-input-row">
+      <span class="win-prompt" style="color:#ffa657">(tetris)</span>
+      <input class="win-input" id="inp-${win.id}" type="text" spellcheck="false" autocomplete="off" placeholder="(start) l r t s d">
+    </div>
+  `;
+}
+
+function printToWindow(winId, text, cls) {
+  const out = document.getElementById(`out-${winId}`);
+  if (!out) return;
+  const lines = String(text).split('\n');
+  for (const line of lines) {
+    const span = document.createElement('span');
+    span.className = 'out-line' + (cls ? ' ' + cls : '');
+    span.textContent = line;
+    out.appendChild(span);
+    out.appendChild(document.createElement('br'));
+  }
+  out.scrollTop = out.scrollHeight;
+}
+
+function clearOutput(winId) {
+  const out = document.getElementById(`out-${winId}`);
+  if (out) out.innerHTML = '';
+}
+
+/* ============================================================
+   WINDOW DRAG & RESIZE
+   ============================================================ */
+function setupDrag(el, handle, win) {
+  let ox = 0, oy = 0, dragging = false;
+
+  handle.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('win-btn')) return;
+    if (win.maximized) return;
+    dragging = true;
+    ox = e.clientX - el.offsetLeft;
+    oy = e.clientY - el.offsetTop;
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const desktop = document.getElementById('desktop');
+    const dw = desktop.clientWidth;
+    const dh = desktop.clientHeight;
+    let nx = e.clientX - ox;
+    let ny = e.clientY - oy;
+    nx = Math.max(-el.offsetWidth + 60, Math.min(dw - 60, nx));
+    ny = Math.max(0, Math.min(dh - 32, ny));
+    el.style.left = nx + 'px';
+    el.style.top = ny + 'px';
+    win.x = nx; win.y = ny;
+  });
+
+  document.addEventListener('mouseup', () => { dragging = false; });
+
+  // Touch support
+  handle.addEventListener('touchstart', (e) => {
+    if (win.maximized) return;
+    const t = e.touches[0];
+    dragging = true;
+    ox = t.clientX - el.offsetLeft;
+    oy = t.clientY - el.offsetTop;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    const t = e.touches[0];
+    el.style.left = (t.clientX - ox) + 'px';
+    el.style.top = (t.clientY - oy) + 'px';
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => { dragging = false; });
+}
+
+function setupResize(el, handle, win, dir) {
+  if (!handle) return;
+  let startX, startY, startW, startH;
+
+  handle.addEventListener('mousedown', (e) => {
+    if (win.maximized) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    startW = el.offsetWidth;
+    startH = el.offsetHeight;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const onMove = (e) => {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (dir === 'e' || dir === 'se') el.style.width = Math.max(320, startW + dx) + 'px';
+      if (dir === 's' || dir === 'se') el.style.height = Math.max(200, startH + dy) + 'px';
+    };
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+}
+
+function focusWindow(id) {
+  focusedWindowId = id;
+  for (const [wid, win] of windows) {
+    if (win.el) win.el.classList.toggle('focused', wid === id);
+  }
+  updateTaskbar();
+  // Focus the input
+  const inp = document.getElementById(`inp-${id}`);
+  if (inp) setTimeout(() => inp.focus(), 50);
+}
+
+function closeWindow(id) {
+  const win = windows.get(id);
+  if (!win) return;
+  // Stop tetris loop
+  if (win.tetrisLoop) { clearInterval(win.tetrisLoop); win.tetrisLoop = null; }
+  win.el && win.el.remove();
+  windows.delete(id);
+  if (focusedWindowId === id) {
+    focusedWindowId = null;
+    const remaining = Array.from(windows.keys());
+    if (remaining.length) focusWindow(remaining[remaining.length - 1]);
+    else showLauncher();
+  }
+  updateTaskbar();
+  const app = APPS.find(a => a.id === win.appId);
+  addNotification(`Closed: ${app ? app.name : 'window'}`);
+}
+
+function closeAppByName(name) {
+  for (const [id, win] of windows) {
+    if (win.appId === name || APPS.find(a => a.id === win.appId)?.name.toLowerCase() === name.toLowerCase()) {
+      closeWindow(id);
+      return;
+    }
+  }
+}
+
+function minimizeWindow(id) {
+  const win = windows.get(id);
+  if (!win) return;
+  win.minimized = !win.minimized;
+  win.el.style.display = win.minimized ? 'none' : 'flex';
+  if (win.minimized && focusedWindowId === id) {
+    focusedWindowId = null;
+    const visible = Array.from(windows.entries()).filter(([,w]) => !w.minimized);
+    if (visible.length) focusWindow(visible[visible.length-1][0]);
+    else showLauncher();
+  }
+  updateTaskbar();
+}
+
+function maximizeWindow(id) {
+  const win = windows.get(id);
+  if (!win) return;
+  win.maximized = !win.maximized;
+  if (win.maximized) {
+    win._prevStyle = { left: win.el.style.left, top: win.el.style.top, width: win.el.style.width, height: win.el.style.height };
+    win.el.classList.add('maximized');
+  } else {
+    win.el.classList.remove('maximized');
+    if (win._prevStyle) {
+      win.el.style.left = win._prevStyle.left;
+      win.el.style.top = win._prevStyle.top;
+      win.el.style.width = win._prevStyle.width;
+      win.el.style.height = win._prevStyle.height;
+    }
+  }
+}
+
+function updateTaskbar() {
+  const tabs = document.getElementById('taskbar-apps');
+  tabs.innerHTML = '';
+  for (const [id, win] of windows) {
+    const app = APPS.find(a => a.id === win.appId);
+    const tab = document.createElement('div');
+    tab.className = 'taskbar-tab' +
+      (id === focusedWindowId ? ' active' : '') +
+      (win.minimized ? ' minimized' : '');
+    tab.title = app ? app.name : win.appId;
+    tab.innerHTML = `<span class="tab-icon">${escHtml(app ? app.icon : '?')}</span><span>${escHtml(app ? app.name : win.appId)}</span><span class="tab-close" onclick="closeWindow(${id});event.stopPropagation()">&#x2715;</span>`;
+    tab.onclick = () => {
+      if (win.minimized) { minimizeWindow(id); } // restore
+      focusWindow(id);
+    };
+    tabs.appendChild(tab);
+  }
+}
+
+/* ============================================================
+   APP BOOT SEQUENCES
+   ============================================================ */
+function bootApp(win, app) {
+  switch (win.appId) {
+    case 'terminal': bootTerminal(win); break;
+    case 'obsidian': bootObsidian(win); break;
+    case 'tetris': bootTetris(win); break;
+    case 'cards': bootCards(win); break;
+    case 'settings': bootSettings(win); break;
+    default: bootStub(win, app); break;
+  }
+
+  // Wire up input (all apps except obsidian share the same input handler)
+  const inp = document.getElementById(`inp-${win.id}`);
+  if (inp) {
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const src = inp.value.trim();
+        if (!src) return;
+        win.history.unshift(src);
+        win.histIdx = -1;
+        handleInput(win, src);
+        inp.value = '';
+        e.preventDefault();
+      }
+      if (e.key === 'ArrowUp') {
+        win.histIdx = Math.min(win.histIdx + 1, win.history.length - 1);
+        inp.value = win.history[win.histIdx] || '';
+        e.preventDefault();
+      }
+      if (e.key === 'ArrowDown') {
+        win.histIdx = Math.max(win.histIdx - 1, -1);
+        inp.value = win.histIdx >= 0 ? win.history[win.histIdx] : '';
+        e.preventDefault();
+      }
+    });
+    inp.focus();
+  }
+}
+
+function handleInput(win, src) {
+  switch (win.appId) {
+    case 'terminal': handleTerminalInput(win, src); break;
+    case 'obsidian': handleObsidianInput(win, src); break;
+    case 'tetris': handleTetrisInput(win, src); break;
+    case 'cards': handleCardsInput(win, src); break;
+    case 'settings': handleSettingsInput(win, src); break;
+    default: handleLispInput(win, src); break;
+  }
+}
+
+/* ============================================================
+   TERMINAL APP
+   ============================================================ */
+const TERMINAL_FS = {
+  '/': ['@rapp/', '@kody/', '@discreetRappers/', '@borg/', 'README.md', 'registry.json'],
+  '@rapp/': ['basic-agent.py'],
+  '@kody/': ['registry-client.py', 'memory-agent.py'],
+  '@discreetRappers/': ['pipeline-agent.py', 'sales-agent.py'],
+  '@borg/': ['assimilator.py'],
+};
+
+let terminalCwd = '/';
+
+function bootTerminal(win) {
+  printToWindow(win.id, 'ORAPPTER Terminal v1.0.0', 'sys');
+  printToWindow(win.id, 'Registry filesystem loaded. Type "help" for commands.', 'info');
+  printToWindow(win.id, '');
+}
+
+const TERMINAL_HELP = `Commands:
+  ls           — list files
+  cd <dir>     — change directory
+  cat <file>   — show file contents
+  pwd          — print working directory
+  whoami       — show user info
+  grep <q>     — search registry
+  agents       — list loaded agents
+  clear        — clear terminal
+  help         — this message
+
+LisPy: any (expr) is evaluated directly`;
+
+function handleTerminalInput(win, src) {
+  printToWindow(win.id, `${terminalCwd}$ ${src}`, 'cmd');
+
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  const arg = parts.slice(1).join(' ');
+
+  if (src.startsWith('(')) {
+    // LisPy expression
+    const res = lispEval(src, win.env);
+    if (res.output) printToWindow(win.id, res.output.trim(), res.ok ? 'success' : 'err');
+    if (!res.output || res.repr !== '()') {
+      printToWindow(win.id, res.repr, res.ok ? 'result' : 'err');
+    }
+    return;
+  }
+
+  switch (cmd) {
+    case 'help':
+      printToWindow(win.id, TERMINAL_HELP, 'info');
+      break;
+    case 'pwd':
+      printToWindow(win.id, terminalCwd);
+      break;
+    case 'whoami':
+      printToWindow(win.id, 'binder  uid=0(root)  groups=orappter,agents,sovereign', 'success');
+      break;
+    case 'clear':
+      clearOutput(win.id);
+      break;
+    case 'ls': {
+      const path = arg || terminalCwd;
+      const key = path.endsWith('/') ? path : path + '/';
+      const items = TERMINAL_FS[key] || TERMINAL_FS[terminalCwd] || [];
+      if (!items.length && REGISTRY.agents.length) {
+        // Dynamic from registry
+        const agents = REGISTRY.agents.slice(0, 20).map(a => '  ' + a.name);
+        printToWindow(win.id, agents.join('\n') || '  (empty)');
+      } else {
+        printToWindow(win.id, items.map(i => '  ' + i).join('\n') || '  (empty)');
+      }
+      break;
+    }
+    case 'cd':
+      if (!arg || arg === '/') { terminalCwd = '/'; printToWindow(win.id, '/'); }
+      else { terminalCwd = arg.endsWith('/') ? arg : arg + '/'; printToWindow(win.id, terminalCwd); }
+      break;
+    case 'cat': {
+      if (!arg) { printToWindow(win.id, 'Usage: cat <file>', 'warn'); break; }
+      // Look up in registry
+      const agentName = arg.startsWith('@') ? arg : (terminalCwd !== '/' ? terminalCwd.replace(/\/$/, '') + '/' + arg : arg);
+      const agent = REGISTRY.agents.find(a => a.name === agentName || a.name === arg);
+      if (agent) {
+        printToWindow(win.id, formatAgentCard(agent), 'info');
+      } else if (arg === 'README.md') {
+        printToWindow(win.id, 'RAR — RAPP Agent Registry\nOpen agent registry for CommunityRAPP ecosystem.\n15+ agents. 1 OS. 0 internet required.', 'info');
+      } else {
+        printToWindow(win.id, `cat: ${arg}: No such file (try resolve-card)`, 'err');
+      }
+      break;
+    }
+    case 'grep':
+    case 'search':
+    case 'agents': {
+      const q = arg || '';
+      if (!q && cmd === 'agents') {
+        printToWindow(win.id, REGISTRY.agents.slice(0, 15).map(a => `  ${a.name.padEnd(35)} ${(a.description || '').slice(0,40)}`).join('\n') || '  Registry not loaded', 'info');
+      } else {
+        const matches = REGISTRY.agents.filter(a =>
+          !q ||
+          (a.name || '').toLowerCase().includes(q.toLowerCase()) ||
+          (a.description || '').toLowerCase().includes(q.toLowerCase())
+        );
+        printToWindow(win.id, matches.slice(0, 12).map(a => `  ${a.name} — ${(a.description || '').slice(0,50)}`).join('\n') || '  No matches', 'info');
+      }
+      break;
+    }
+    default:
+      if (src.trim()) printToWindow(win.id, `${cmd}: command not found (try "help" or use LisPy)`, 'err');
+  }
+}
+
+function formatAgentCard(a) {
+  return [
+    '╔══════════════════════════════════════╗',
+    `║ ${(a.display_name || a.name || '').slice(0,38).padEnd(38)} ║`,
+    `║ name: ${(a.name || '').slice(0,35).padEnd(35)} ║`,
+    `║ ver:  ${(a.version || '1.0.0').padEnd(35)} ║`,
+    `║ tier: ${(a.quality_tier || 'community').padEnd(35)} ║`,
+    `║ cat:  ${(a.category || 'unknown').padEnd(35)} ║`,
+    `║ desc: ${(a.description || '').slice(0,35).padEnd(35)} ║`,
+    `║ tags: ${(a.tags || []).join(', ').slice(0,35).padEnd(35)} ║`,
+    '╚══════════════════════════════════════╝',
+  ].join('\n');
+}
+
+/* ============================================================
+   OBSIDIAN APP
+   ============================================================ */
+const OBSIDIAN_DOCS = {
+  'HOME': {
+    title: 'HOME',
+    content: `# HOME — ORAPPTER Vault
+
+> The operating system for a bootstrap empire.
+
+## Quick Navigation
+
+- [[ASSISTANT]] — AI Assistant
+- [[Quick Start]] — Get up to speed
+- [[Strategy]] — Long-term framework
+- [[LisPy]] — VM documentation
+
+## Today's Dashboard
+
+| Area | Status |
+|------|--------|
+| Registry | ${() => REGISTRY.agents.length + ' agents loaded'} |
+| Runtime | LisPy VM active |
+| Mode | Offline-first |
+
+## The Three Laws of Bootstrap
+
+1. **Ship before perfect** — Done beats done-right-eventually
+2. **Revenue is truth** — Metrics lie, cash doesn't
+3. **Community is compounding** — Relationships are long-term assets
+
+## Tags
+
+#home #workspace #operator #bootstrap`
+  },
+  'ASSISTANT': {
+    title: 'ASSISTANT',
+    content: `# ASSISTANT — AI Companion
+
+> "I keep the machine running so you can keep building."
+
+## Core Responsibilities
+
+- Morning briefings
+- Decision triage
+- Strategic context
+- Weekly retrospective
+
+## Integration
+
+Reads [[HOME]] every morning. Tracks [[Strategy]] for context.
+
+## Status
+
+\`\`\`lisp
+(define agent-status
+  (make-dict "mode" "active" "pending" 3))
+(get agent-status "mode")
+\`\`\`
+
+#ai #agent #companion`
+  },
+  'Quick Start': {
+    title: 'Quick Start',
+    content: `# Operator Quick Start
+
+> 0 to operating in 10 minutes.
+
+## Step 1 — Orient (2 min)
+
+Open [[HOME]] and read it top to bottom.
+
+## Step 2 — Run the REPL
+
+Type LisPy expressions in the taskbar:
+
+\`\`\`lisp
+(+ 1 2 3)        ; => 6
+(binder-status)  ; registry stats
+\`\`\`
+
+## Step 3 — Explore the Registry
+
+\`\`\`lisp
+(search "sales")
+(agents)
+\`\`\`
+
+## Your First Week Checklist
+
+- [ ] Read all docs in this vault
+- [ ] Run (binder-status)
+- [ ] Explore the agent registry
+- [ ] Ship something
+
+#guide #onboarding #quickstart`
+  },
+  'Strategy': {
+    title: 'Strategy',
+    content: `# Operator Perpetual Playbook
+
+> The document that eats itself and regenerates.
+
+## The Core Loop
+
+\`\`\`
+Sense → Orient → Decide → Act → Learn → repeat
+\`\`\`
+
+## Pillar 1 — Build in Public
+
+Everything you build is content. Every failure is a lesson shipped.
+
+## Pillar 2 — Compound Relationships
+
+Networks have nonlinear returns. One right relationship unlocks 10 others.
+
+## Pillar 3 — Unit Economics
+
+Know your numbers better than your investors do.
+
+## Connected Docs
+
+- See [[HOME]] for weekly rhythm
+- See [[ASSISTANT]] for execution
+- See [[LisPy]] for the VM
+
+#strategy #playbook #framework`
+  },
+  'LisPy': {
+    title: 'LisPy VM',
+    content: `# LisPy — The ORAPPTER VM
+
+> Code is data. Data is code. The REPL is the heartbeat.
+
+## Quick Examples
+
+\`\`\`lisp
+(+ 1 2 3)
+(define (square x) (* x x))
+(square 12)
+(map (lambda (x) (* x x)) (range 1 6))
+\`\`\`
+
+## Desktop Functions
+
+\`\`\`lisp
+(resolve-card "@rapp/basic-agent")
+(search "pipeline")
+(binder-status)
+(open-app "terminal")
+(sysinfo)
+\`\`\`
+
+## Special Forms
+
+| Form | Description |
+|------|-------------|
+| define | bind names |
+| lambda | create function |
+| let | local bindings |
+| if/cond | conditionals |
+| begin | sequence |
+
+#lispy #vm #programming #repl`
+  },
+};
+
+function bootObsidian(win) {
+  renderObsidianSidebar(win);
+  renderObsidianDoc(win, 'HOME');
+}
+
+function renderObsidianSidebar(win) {
+  const sidebar = document.getElementById(`obs-sidebar-${win.id}`);
+  if (!sidebar) return;
+  sidebar.innerHTML = '<div class="obsidian-sidebar-header">Files</div>' +
+    Object.entries(OBSIDIAN_DOCS).map(([slug, doc]) =>
+      `<div class="obsidian-file" onclick="obsidianOpen(${win.id}, '${escHtml(slug)}')">${escHtml(doc.title)}</div>`
+    ).join('');
+}
+
+function obsidianOpen(winId, slug) {
+  const win = windows.get(winId);
+  if (win) renderObsidianDoc(win, slug);
+}
+
+function renderObsidianDoc(win, slug) {
+  const doc = OBSIDIAN_DOCS[slug];
+  if (!doc) return;
+  win.currentDoc = slug;
+
+  // Update sidebar active state
+  const sidebar = document.getElementById(`obs-sidebar-${win.id}`);
+  if (sidebar) {
+    sidebar.querySelectorAll('.obsidian-file').forEach(el => {
+      el.classList.toggle('active', el.textContent === doc.title);
+    });
+  }
+
+  const main = document.getElementById(`obs-main-${win.id}`);
+  if (!main) return;
+
+  // Simple markdown render
+  let html = doc.content
+    .replace(/^###\s+(.+)$/gm, '<h2>$1</h2>')
+    .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+    .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/```[\w]*\n?([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+    .replace(/\[\[([^\]]+)\]\]/g, (_, t) => `<a style="color:var(--accent-purple);cursor:pointer" onclick="obsidianOpen(${win.id},'${t.trim()}')">${t.trim()}</a>`)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/^- \[ \] (.+)$/gm, '<li style="list-style:none">&#9744; $1</li>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/^(\d+)\. (.+)$/gm, '<li>$1. $2</li>')
+    .replace(/^> (.+)$/gm, '<blockquote style="border-left:3px solid var(--accent-purple);padding:4px 12px;margin:8px 0;color:var(--text-muted)">$1</blockquote>')
+    .replace(/^\|(.+)\|\s*$/gm, (row) => {
+      const cells = row.split('|').filter(c => c.trim()).map(c => `<td style="padding:3px 8px;border:1px solid var(--border)">${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    })
+    .replace(/((<tr>.*<\/tr>\n?)+)/g, '<table style="border-collapse:collapse;margin:8px 0;width:100%">$1</table>')
+    .replace(/#([\w-]+)/g, '<span style="color:var(--accent-purple);font-size:11px">#$1</span>');
+
+  // Wrap paragraphs
+  const finalLines = html.split('\n');
+  let result = [];
+  for (const line of finalLines) {
+    const t = line.trim();
+    if (!t) { result.push(''); continue; }
+    if (/^<(h[1-6]|ul|ol|li|table|tr|blockquote|pre|hr)/.test(t)) { result.push(t); }
+    else result.push(`<p>${t}</p>`);
+  }
+
+  main.innerHTML = result.join('\n');
+  main.scrollTop = 0;
+}
+
+function handleObsidianInput(win, src) {
+  // Obsidian uses its own sidebar, but also has a command input (at bottom)
+  const main = document.getElementById(`obs-main-${win.id}`);
+  if (!main) return;
+
+  if (src.startsWith('(')) {
+    const res = lispEval(src, win.env);
+    const out = res.output ? res.output.trim() : res.repr;
+    main.innerHTML = `<pre style="color:var(--accent);font-family:var(--font-mono);font-size:11px;white-space:pre-wrap">${escHtml(out)}</pre>` + main.innerHTML;
+    return;
+  }
+
+  const [cmd, ...args] = src.trim().split(/\s+/);
+  switch (cmd.toLowerCase()) {
+    case 'ls':
+    case 'list':
+      main.innerHTML = `<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)"><strong>Documents:</strong><br>${Object.values(OBSIDIAN_DOCS).map(d => `  ${d.title}`).join('<br>')}</div>` + main.innerHTML;
+      break;
+    case 'open':
+      if (args.length) renderObsidianDoc(win, args.join(' '));
+      break;
+    case 'search': {
+      const q = args.join(' ').toLowerCase();
+      const matches = Object.entries(OBSIDIAN_DOCS).filter(([_, d]) =>
+        d.title.toLowerCase().includes(q) || d.content.toLowerCase().includes(q)
+      );
+      main.innerHTML = `<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)"><strong>Search: "${args.join(' ')}"</strong><br>${matches.map(([s,d]) => `  ${d.title}`).join('<br>') || '  No results'}</div>` + main.innerHTML;
+      break;
+    }
+    default:
+      if (src.trim()) main.innerHTML = `<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint)">Commands: ls, open "title", search "query", or LisPy</div>` + main.innerHTML;
+  }
+}
+
+/* ============================================================
+   TETRIS APP
+   ============================================================ */
+const TETROMINOS = {
+  I: { shape: [[1,1,1,1]], color: '#58a6ff' },
+  O: { shape: [[1,1],[1,1]], color: '#ffa657' },
+  T: { shape: [[0,1,0],[1,1,1]], color: '#a371f7' },
+  S: { shape: [[0,1,1],[1,1,0]], color: '#3fb950' },
+  Z: { shape: [[1,1,0],[0,1,1]], color: '#f85149' },
+  J: { shape: [[1,0,0],[1,1,1]], color: '#1f6feb' },
+  L: { shape: [[0,0,1],[1,1,1]], color: '#ff7b72' },
+};
+const TETROMINO_KEYS = Object.keys(TETROMINOS);
+
+function makeTetrisState(winId) {
+  const COLS = 10, ROWS = 20, CELL = 18;
+  return {
+    winId,
+    cols: COLS, rows: ROWS, cellSize: CELL,
+    board: Array.from({length: ROWS}, () => Array(COLS).fill(null)),
+    current: null,
+    next: randomTetromino(),
+    score: 0, level: 1, lines: 0,
+    gameOver: false,
+    running: false,
+    dropInterval: 800,
+    lastDrop: 0,
+  };
+}
+
+function randomTetromino() {
+  const key = TETROMINO_KEYS[Math.floor(Math.random() * TETROMINO_KEYS.length)];
+  const t = TETROMINOS[key];
+  return {
+    key,
+    shape: t.shape.map(r => [...r]),
+    color: t.color,
+    x: 3,
+    y: 0,
+  };
+}
+
+function bootTetris(win) {
+  win.tetrisState = makeTetrisState(win.id);
+  const canvas = document.getElementById(`tboard-${win.id}`);
+  if (canvas) {
+    const W = win.tetrisState.cols * win.tetrisState.cellSize;
+    const H = win.tetrisState.rows * win.tetrisState.cellSize;
+    canvas.width = W;
+    canvas.height = H;
+    drawTetrisBoard(win.tetrisState);
+  }
+  // Keyboard controls for tetris
+  const inp = document.getElementById(`inp-${win.id}`);
+  if (inp) {
+    inp.addEventListener('keydown', (e) => {
+      const st = win.tetrisState;
+      if (!st || !st.running) return;
+      switch (e.key) {
+        case 'ArrowLeft': case 'a': case 'A': tetrisMove(st, -1, 0); e.preventDefault(); break;
+        case 'ArrowRight': case 'd': case 'D': tetrisMove(st, 1, 0); e.preventDefault(); break;
+        case 'ArrowDown': case 's': case 'S': tetrisDrop(st); e.preventDefault(); break;
+        case 'ArrowUp': case 'w': case 'W': tetrisRotate(st); e.preventDefault(); break;
+        case ' ': tetrisHardDrop(st); e.preventDefault(); break;
+      }
+    }, true);
+  }
+}
+
+function handleTetrisInput(win, src) {
+  const st = win.tetrisState;
+  if (!st) return;
+
+  const cmd = src.trim().toLowerCase().replace(/[()]/g, '');
+
+  if (cmd === 'start' || cmd === 'restart') {
+    if (win.tetrisLoop) clearInterval(win.tetrisLoop);
+    win.tetrisState = makeTetrisState(win.id);
+    const nst = win.tetrisState;
+    nst.running = true;
+    nst.current = spawnTetromino(nst);
+    const statusEl = document.getElementById(`t-status-${win.id}`);
+    if (statusEl) statusEl.textContent = 'Playing — arrow keys or l/r/t/s/d/space';
+    win.tetrisLoop = setInterval(() => tetrisTick(nst), nst.dropInterval);
+    drawTetrisBoard(nst);
+    return;
+  }
+
+  if (!st.running) { return; }
+
+  switch (cmd) {
+    case 'l': case 'left':   tetrisMove(st, -1, 0); break;
+    case 'r': case 'right':  tetrisMove(st, 1, 0); break;
+    case 't': case 'turn':   tetrisRotate(st); break;
+    case 's': case 'soft':   tetrisDrop(st); break;
+    case 'd': case 'drop':   tetrisHardDrop(st); break;
+    default:
+      if (src.startsWith('(')) {
+        const res = lispEval(src, win.env);
+        const statusEl = document.getElementById(`t-status-${win.id}`);
+        if (statusEl) statusEl.textContent = res.output ? res.output.trim() : res.repr;
+      }
+  }
+}
+
+function spawnTetromino(st) {
+  const t = st.next;
+  t.x = Math.floor((st.cols - t.shape[0].length) / 2);
+  t.y = 0;
+  st.next = randomTetromino();
+  if (tetrisCollides(st, t, 0, 0)) { st.gameOver = true; st.running = false; }
+  drawTetrisNext(st);
+  return t;
+}
+
+function tetrisCollides(st, t, dx, dy, shape) {
+  const s = shape || t.shape;
+  for (let r = 0; r < s.length; r++) {
+    for (let c = 0; c < s[r].length; c++) {
+      if (!s[r][c]) continue;
+      const nx = t.x + c + dx;
+      const ny = t.y + r + dy;
+      if (nx < 0 || nx >= st.cols || ny >= st.rows) return true;
+      if (ny >= 0 && st.board[ny][nx]) return true;
+    }
+  }
+  return false;
+}
+
+function tetrisMove(st, dx, dy) {
+  if (!st.current || st.gameOver) return;
+  if (!tetrisCollides(st, st.current, dx, dy)) {
+    st.current.x += dx;
+    st.current.y += dy;
+    drawTetrisBoard(st);
+  }
+}
+
+function tetrisDrop(st) {
+  if (!st.current || st.gameOver) return;
+  if (!tetrisCollides(st, st.current, 0, 1)) {
+    st.current.y += 1;
+  } else {
+    lockTetromino(st);
+  }
+  drawTetrisBoard(st);
+}
+
+function tetrisHardDrop(st) {
+  if (!st.current || st.gameOver) return;
+  while (!tetrisCollides(st, st.current, 0, 1)) st.current.y++;
+  lockTetromino(st);
+  drawTetrisBoard(st);
+}
+
+function tetrisRotate(st) {
+  if (!st.current || st.gameOver) return;
+  const shape = st.current.shape;
+  const rotated = shape[0].map((_, i) => shape.map(row => row[i]).reverse());
+  if (!tetrisCollides(st, st.current, 0, 0, rotated)) {
+    st.current.shape = rotated;
+    drawTetrisBoard(st);
+  }
+}
+
+function lockTetromino(st) {
+  const t = st.current;
+  for (let r = 0; r < t.shape.length; r++) {
+    for (let c = 0; c < t.shape[r].length; c++) {
+      if (!t.shape[r][c]) continue;
+      const ny = t.y + r;
+      if (ny >= 0) st.board[ny][t.x + c] = t.color;
+    }
+  }
+  clearLines(st);
+  st.current = spawnTetromino(st);
+  if (st.gameOver) {
+    const statusEl = document.getElementById(`t-status-${st.winId}`);
+    if (statusEl) statusEl.textContent = `Game Over! Score: ${st.score} — type (start) to restart`;
+    const winObj = windows.get(st.winId);
+    if (winObj && winObj.tetrisLoop) { clearInterval(winObj.tetrisLoop); winObj.tetrisLoop = null; }
+  }
+}
+
+function clearLines(st) {
+  let cleared = 0;
+  for (let r = st.rows - 1; r >= 0; r--) {
+    if (st.board[r].every(c => c !== null)) {
+      st.board.splice(r, 1);
+      st.board.unshift(Array(st.cols).fill(null));
+      cleared++;
+      r++;
+    }
+  }
+  if (cleared) {
+    const points = [0, 100, 300, 500, 800][cleared] || 800;
+    st.score += points * st.level;
+    st.lines += cleared;
+    st.level = Math.floor(st.lines / 10) + 1;
+    const newInterval = Math.max(100, 800 - (st.level - 1) * 70);
+    const win = windows.get(st.winId);
+    if (win && win.tetrisLoop && newInterval !== st.dropInterval) {
+      clearInterval(win.tetrisLoop);
+      st.dropInterval = newInterval;
+      win.tetrisLoop = setInterval(() => tetrisTick(st), st.dropInterval);
+    }
+    document.getElementById(`t-score-${st.winId}`).textContent = st.score;
+    document.getElementById(`t-level-${st.winId}`).textContent = st.level;
+    document.getElementById(`t-lines-${st.winId}`).textContent = st.lines;
+  }
+}
+
+function tetrisTick(st) {
+  if (!st.running || st.gameOver) return;
+  tetrisDrop(st);
+}
+
+function drawTetrisBoard(st) {
+  const canvas = document.getElementById(`tboard-${st.winId}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const C = st.cellSize;
+
+  ctx.fillStyle = '#0d1117';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Grid lines
+  ctx.strokeStyle = '#1c2128';
+  ctx.lineWidth = 0.5;
+  for (let r = 0; r < st.rows; r++) {
+    ctx.beginPath(); ctx.moveTo(0, r * C); ctx.lineTo(canvas.width, r * C); ctx.stroke();
+  }
+  for (let c = 0; c < st.cols; c++) {
+    ctx.beginPath(); ctx.moveTo(c * C, 0); ctx.lineTo(c * C, canvas.height); ctx.stroke();
+  }
+
+  // Board cells
+  for (let r = 0; r < st.rows; r++) {
+    for (let c = 0; c < st.cols; c++) {
+      const color = st.board[r][c];
+      if (color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(c * C + 1, r * C + 1, C - 2, C - 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(c * C + 1, r * C + 1, C - 2, 4);
+      }
+    }
+  }
+
+  // Ghost piece
+  if (st.current && !st.gameOver) {
+    let ghostY = st.current.y;
+    while (!tetrisCollides(st, st.current, 0, ghostY - st.current.y + 1)) ghostY++;
+    const s = st.current.shape;
+    for (let r = 0; r < s.length; r++) {
+      for (let c = 0; c < s[r].length; c++) {
+        if (!s[r][c]) continue;
+        const gr = ghostY + r, gc = st.current.x + c;
+        if (gr >= 0 && gr < st.rows) {
+          ctx.fillStyle = 'rgba(255,255,255,0.08)';
+          ctx.fillRect(gc * C + 1, gr * C + 1, C - 2, C - 2);
+        }
+      }
+    }
+
+    // Current piece
+    for (let r = 0; r < s.length; r++) {
+      for (let c = 0; c < s[r].length; c++) {
+        if (!s[r][c]) continue;
+        const pr = st.current.y + r, pc = st.current.x + c;
+        if (pr >= 0) {
+          ctx.fillStyle = st.current.color;
+          ctx.fillRect(pc * C + 1, pr * C + 1, C - 2, C - 2);
+          ctx.fillStyle = 'rgba(255,255,255,0.25)';
+          ctx.fillRect(pc * C + 1, pr * C + 1, C - 2, 4);
+        }
+      }
+    }
+  }
+
+  if (st.gameOver) {
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#f85149';
+    ctx.font = 'bold 22px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '13px monospace';
+    ctx.fillText(`Score: ${st.score}`, canvas.width / 2, canvas.height / 2 + 15);
+    ctx.fillText(`(start) to replay`, canvas.width / 2, canvas.height / 2 + 35);
+  }
+}
+
+function drawTetrisNext(st) {
+  const canvas = document.getElementById(`tnext-${st.winId}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#161b22';
+  ctx.fillRect(0, 0, 60, 60);
+
+  const t = st.next;
+  const C = 12;
+  const offsetX = Math.floor((60 - t.shape[0].length * C) / 2);
+  const offsetY = Math.floor((60 - t.shape.length * C) / 2);
+
+  for (let r = 0; r < t.shape.length; r++) {
+    for (let c = 0; c < t.shape[r].length; c++) {
+      if (!t.shape[r][c]) continue;
+      ctx.fillStyle = t.color;
+      ctx.fillRect(offsetX + c * C + 1, offsetY + r * C + 1, C - 2, C - 2);
+    }
+  }
+}
+
+/* ============================================================
+   CARDS SDK APP
+   ============================================================ */
+function bootCards(win) {
+  printToWindow(win.id, '╔══════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║   RAPP Cards SDK v1.0.0      ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Functions available:', 'info');
+  printToWindow(win.id, '  (resolve-card "@rapp/basic-agent")', 'info');
+  printToWindow(win.id, '  (search "sales")    — search by keyword', 'info');
+  printToWindow(win.id, '  (binder-status)     — binder stats', 'info');
+  printToWindow(win.id, '  (agents)            — list agents', 'info');
+  printToWindow(win.id, '');
+  if (REGISTRY.agents.length) {
+    printToWindow(win.id, `Registry loaded: ${REGISTRY.agents.length} agents`, 'success');
+  } else {
+    printToWindow(win.id, 'Registry: offline (demo mode)', 'warn');
+  }
+  printToWindow(win.id, '');
+}
+
+function handleCardsInput(win, src) {
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (src.startsWith('(')) {
+    const res = lispEval(src, win.env);
+    if (res.output) printToWindow(win.id, res.output.trim(), res.ok ? 'success' : 'err');
+    if (!isNil(res.result) && res.repr !== '()') {
+      if (typeof res.result === 'string') printToWindow(win.id, res.result, 'result');
+      else printToWindow(win.id, res.repr, 'result');
+    }
+    if (!res.ok) printToWindow(win.id, res.repr, 'err');
+    return;
+  }
+  // Also accept shell-style: "search sales"
+  const [cmd, ...args] = src.trim().split(/\s+/);
+  switch (cmd.toLowerCase()) {
+    case 'search':
+      handleLispInput(win, `(search "${args.join(' ')}")`); break;
+    case 'resolve':
+    case 'card':
+      handleLispInput(win, `(resolve-card "${args.join(' ')}")`); break;
+    case 'status':
+      handleLispInput(win, '(binder-status)'); break;
+    case 'ls':
+    case 'list':
+      handleLispInput(win, '(agents)'); break;
+    case 'clear':
+      clearOutput(win.id); break;
+    case 'help':
+      printToWindow(win.id, 'Commands: (resolve-card "@x/y") (search "q") (binder-status) (agents)', 'info');
+      break;
+    default:
+      if (src.trim()) printToWindow(win.id, `Unknown: ${src} (wrap in parens for LisPy)`, 'warn');
+  }
+}
+
+/* ============================================================
+   SETTINGS APP
+   ============================================================ */
+function bootSettings(win) {
+  printToWindow(win.id, '⚙  ORAPPTER Desktop Settings', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  (wallpaper "matrix")      — matrix wallpaper', 'info');
+  printToWindow(win.id, '  (wallpaper "superseed")   — SuperSeed watermark', 'info');
+  printToWindow(win.id, '  (wallpaper "none")        — plain desktop', 'info');
+  printToWindow(win.id, '  (theme "dark")            — dark theme (default)', 'info');
+  printToWindow(win.id, '  (theme "green")           — green terminal theme', 'info');
+  printToWindow(win.id, '  (sysinfo)                 — system information', 'info');
+  printToWindow(win.id, '  (open-app "terminal")     — open any app', 'info');
+  printToWindow(win.id, '');
+  printToWindow(win.id, getSysInfo(), 'success');
+  printToWindow(win.id, '');
+}
+
+function getSysInfo() {
+  const now = new Date();
+  return [
+    '  OS:         ORAPPTER Desktop v1.0.0',
+    '  Runtime:    LisPy VM (JavaScript)',
+    `  Time:       ${now.toLocaleTimeString()}`,
+    `  Date:       ${now.toLocaleDateString()}`,
+    `  Windows:    ${windows.size} open`,
+    `  Apps:       ${APPS.length} available`,
+    `  Registry:   ${REGISTRY.agents.length} agents ${REGISTRY.loaded ? '(live)' : '(offline)'}`,
+    '  Offline:    yes (works from file://)',
+    '  Platform:   Web Browser',
+  ].join('\n');
+}
+
+function setWallpaper(name) {
+  const watermark = document.getElementById('desktop-watermark');
+  const tagline = document.getElementById('desktop-tagline');
+  if (name === 'none' || name === 'minimal') {
+    watermark.style.display = 'none';
+    tagline.style.display = 'none';
+  } else if (name === 'matrix') {
+    watermark.style.display = 'block';
+    watermark.style.color = '#3fb950';
+    watermark.textContent = ' 01001 10110 01101 00101 11010\n 10110 01011 10010 11001 01101\n 01101 10101 01110 00110 10011\n 11010 01100 10101 11010 01110\n ORAPPTER v1.0.0\n The Offline-First AI Runtime';
+    tagline.style.display = 'block';
+  } else {
+    watermark.style.display = 'block';
+    watermark.textContent = `         .  *  .    *    .  *
+    *  .    ___    .  *
+      .   /   \\   .    *
+   *     | S E |     .
+    .    | E D |  *
+  *   .  \\___/    .   *
+    .   *  |  .    *
+      .    |    .
+   *    . /|\\ .    *
+     .  / | \\ .  *
+       /  |  \\
+  ____/   |   \\____
+          |`;
+    tagline.style.display = 'block';
+  }
+  addNotification(`Wallpaper: ${name}`);
+}
+
+function setTheme(name) {
+  const root = document.documentElement;
+  if (name === 'green') {
+    root.style.setProperty('--accent', '#39d353');
+    root.style.setProperty('--accent-blue', '#39d353');
+    root.style.setProperty('--bg', '#001100');
+    root.style.setProperty('--bg-alt', '#001a00');
+    root.style.setProperty('--bg-hover', '#002200');
+  } else {
+    root.style.setProperty('--accent', '#3fb950');
+    root.style.setProperty('--accent-blue', '#58a6ff');
+    root.style.setProperty('--bg', '#0d1117');
+    root.style.setProperty('--bg-alt', '#161b22');
+    root.style.setProperty('--bg-hover', '#1c2128');
+  }
+  addNotification(`Theme: ${name}`);
+}
+
+function handleSettingsInput(win, src) {
+  printToWindow(win.id, `> ${src}`, 'cmd');
+
+  if (src.startsWith('(')) {
+    const res = lispEval(src, win.env);
+    if (res.output) printToWindow(win.id, res.output.trim(), res.ok ? 'success' : 'err');
+    if (res.ok && res.repr !== '()') {
+      if (typeof res.result === 'string') printToWindow(win.id, res.result);
+      else printToWindow(win.id, res.repr, 'result');
+    }
+    if (!res.ok) printToWindow(win.id, res.repr, 'err');
+  } else {
+    handleLispInput(win, src);
+  }
+}
+
+/* ============================================================
+   STUB APP
+   ============================================================ */
+function bootStub(win, app) {
+  printToWindow(win.id, `  ┌──────────────────────────────────┐`, 'sys');
+  printToWindow(win.id, `  │  ${app.name.padEnd(33)} │`, 'sys');
+  printToWindow(win.id, `  │  ${app.desc.padEnd(33)} │`, 'sys');
+  printToWindow(win.id, `  └──────────────────────────────────┘`, 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, '  Full app loads from cartridge file.', 'info');
+  printToWindow(win.id, '  This is a preview shell.', 'info');
+  printToWindow(win.id, '');
+  printToWindow(win.id, '  LisPy REPL is active:', 'info');
+  printToWindow(win.id, '  (+ 1 2 3) => 6', 'info');
+  printToWindow(win.id, '  (binder-status)', 'info');
+  printToWindow(win.id, '  (agents)', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleLispInput(win, src) {
+  printToWindow(win.id, `> ${src}`, 'cmd');
+  const res = lispEval(src, win.env);
+  if (res.output) {
+    const lines = res.output.trim().split('\n');
+    for (const line of lines) printToWindow(win.id, line, res.ok ? 'success' : 'err');
+  }
+  if (!isNil(res.result) && res.repr !== '()') {
+    if (typeof res.result === 'string') printToWindow(win.id, res.result, 'result');
+    else printToWindow(win.id, res.repr, 'result');
+  }
+  if (!res.ok) printToWindow(win.id, res.repr, 'err');
+}
+
+/* ============================================================
+   TASKBAR REPL
+   ============================================================ */
+const replInput = document.getElementById('taskbar-repl-input');
+const replOut = document.getElementById('taskbar-repl-out');
+const replHistory = [];
+let replHistIdx = -1;
+
+replInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const src = replInput.value.trim();
+    if (!src) return;
+    replHistory.unshift(src);
+    replHistIdx = -1;
+    const res = lispEval(src);
+    const out = res.output ? res.output.trim() : res.repr;
+    replOut.textContent = out.length > 60 ? out.slice(0, 60) + '...' : out;
+    replOut.className = res.ok ? '' : 'err';
+    replInput.value = '';
+    e.preventDefault();
+  }
+  if (e.key === 'ArrowUp') {
+    replHistIdx = Math.min(replHistIdx + 1, replHistory.length - 1);
+    replInput.value = replHistory[replHistIdx] || '';
+    e.preventDefault();
+  }
+  if (e.key === 'ArrowDown') {
+    replHistIdx = Math.max(replHistIdx - 1, -1);
+    replInput.value = replHistIdx >= 0 ? replHistory[replHistIdx] : '';
+    e.preventDefault();
+  }
+});
+
+/* ============================================================
+   CLOCK
+   ============================================================ */
+function updateClock() {
+  const el = document.getElementById('taskbar-clock');
+  if (el) el.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* ============================================================
+   APP LAUNCHER BUILD
+   ============================================================ */
+function buildLauncher() {
+  const grid = document.getElementById('launcher-grid');
+  grid.innerHTML = '';
+  for (const app of APPS) {
+    const btn = document.createElement('div');
+    btn.className = 'app-icon-btn';
+    btn.dataset.app = app.id;
+    btn.title = app.desc;
+    btn.innerHTML = `
+      <div class="app-icon-glyph" style="color:${app.color}">${escHtml(app.icon)}</div>
+      <div class="app-icon-name">${escHtml(app.name)}</div>
+    `;
+    btn.onclick = () => openApp(app.id);
+    grid.appendChild(btn);
+  }
+}
+
+/* ============================================================
+   REGISTRY FETCH
+   ============================================================ */
+async function fetchRegistry() {
+  const urls = [
+    'registry.json',
+    'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json',
+    'https://raw.githubusercontent.com/kody-w/CommunityRAPP/main/RAR/registry.json',
+  ];
+
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const agents = Array.isArray(data) ? data : (data.agents || Object.values(data));
+      if (agents.length) {
+        REGISTRY.agents = agents;
+        REGISTRY.loaded = true;
+        return true;
+      }
+    } catch {}
+  }
+  return false;
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+  const bar = document.getElementById('boot-bar');
+  const msg = document.getElementById('boot-msg');
+  const screen = document.getElementById('boot-screen');
+
+  const step = async (pct, text, ms = 60) => {
+    msg.textContent = text;
+    bar.style.width = pct + '%';
+    await new Promise(r => setTimeout(r, ms));
+  };
+
+  await step(10, 'Initializing LisPy VM...');
+
+  // Smoke-test VM
+  const test = lispEval('(+ 1 2 3)');
+  if (!test.ok || test.result !== 6) {
+    msg.textContent = 'VM ERROR: ' + test.error;
+    return;
+  }
+
+  await step(30, 'Building app launcher...', 40);
+  buildLauncher();
+
+  await step(50, 'Fetching agent registry...', 40);
+  // Non-blocking registry fetch
+  const registryPromise = fetchRegistry().then(ok => {
+    if (ok) addNotification(`Registry loaded: ${REGISTRY.agents.length} agents`);
+    else addNotification('Registry offline — demo mode active');
+  }).catch(() => addNotification('Registry offline'));
+
+  await step(75, 'Booting desktop environment...', 60);
+
+  await step(100, 'Desktop ready.', 80);
+  screen.classList.add('hidden');
+
+  // Show launcher
+  showLauncher();
+
+  // Close notif panel on outside click
+  document.addEventListener('click', (e) => {
+    const panel = document.getElementById('notif-panel');
+    const btn = document.getElementById('taskbar-notif-btn');
+    if (panel.classList.contains('visible') && !panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      panel.classList.remove('visible');
+    }
+  });
+
+  // Desktop click to close launcher only if there are open windows
+  document.getElementById('desktop').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('desktop') ||
+        e.target === document.getElementById('desktop-watermark') ||
+        e.target === document.getElementById('desktop-tagline')) {
+      if (windows.size > 0) {
+        document.getElementById('launcher').classList.add('hidden');
+      }
+    }
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      replInput.focus();
+    }
+    if (e.key === 'Escape') {
+      document.getElementById('notif-panel').classList.remove('visible');
+    }
+    // Ctrl+L = launcher toggle
+    if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+      e.preventDefault();
+      toggleLauncher();
+    }
+  });
+
+  await registryPromise.catch(() => {});
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
