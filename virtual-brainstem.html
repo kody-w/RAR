@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virtual RAPP Brainstem</title>
+<title>RAPP Brainstem</title>
 <meta name="description" content="Browser-native agent runtime — run any RAR agent in a LisPy VM, no server required.">
 <style>
 :root {
@@ -281,6 +281,25 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 }
 @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
 
+/* Agent download button in dropdown */
+.agent-dl-btn {
+  flex-shrink:0; width:24px; height:24px; border:none; background:none;
+  color:var(--text-muted); cursor:pointer; border-radius:4px; font-size:.75rem;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
+}
+.agent-dl-btn:hover { background:var(--accent); color:#fff; }
+
+/* Chat toolbar (export/import/clear) */
+.chat-toolbar {
+  display:flex; gap:4px; align-items:center; margin-left:auto;
+}
+.chat-toolbar-btn {
+  padding:2px 8px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; color:var(--text-muted); font-size:.65rem; cursor:pointer;
+  transition:all .15s; white-space:nowrap;
+}
+.chat-toolbar-btn:hover { border-color:var(--accent); color:var(--accent); }
+
 /* Responsive */
 @media (max-width:768px) {
   .bs-header { padding:10px 16px; }
@@ -294,8 +313,8 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
 <!-- Header -->
 <div class="bs-header">
   <div class="bs-logo">
-    <div class="bs-logo-mark">VM</div>
-    <span>Virtual Brainstem</span>
+    <div class="bs-logo-mark">RB</div>
+    <span>RAPP Brainstem</span>
   </div>
   <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
   <div class="bs-header-right">
@@ -319,8 +338,8 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
   </div>
   <div class="chat-messages" id="chatMessages">
     <div class="chat-welcome-box" id="chatWelcome">
-      <h2>Virtual RAPP Brainstem</h2>
-      <p>A fully virtualized brainstem running in your browser. Chat naturally -- I'll route to the right agent automatically.</p>
+      <h2>RAPP Brainstem</h2>
+      <p>A brainstem running in your browser. Chat naturally -- I'll route to the right agent automatically.</p>
       <div class="chat-agent-pills" id="welcomeAgentPills">
         <span class="chat-agent-pill">ManageMemory</span>
         <span class="chat-agent-pill">ContextMemory</span>
@@ -347,6 +366,11 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
     <span style="color:var(--border)">|</span>
     <span id="chatModelLabel">GitHub Models -- sign in to start chatting</span>
     <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
+    <div class="chat-toolbar">
+      <button class="chat-toolbar-btn" onclick="exportChat()" title="Export chat transcript">Export</button>
+      <button class="chat-toolbar-btn" onclick="importChat()" title="Import chat transcript">Import</button>
+      <input type="file" id="importChatFile" accept=".json" style="display:none" onchange="handleChatImport(event)">
+    </div>
   </div>
   <div class="chat-input-bar">
     <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" disabled>
@@ -2059,6 +2083,31 @@ function splitBinaryOp(expr) {
 const REGISTRY_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main/';
 
+// ── Virtual Filesystem (VFS) — localStorage-backed, mirrors local agents/ dir ──
+const VFS = {
+  _prefix: 'vfs:',
+  read(path)   { return localStorage.getItem(VFS._prefix + path); },
+  write(path, content) { localStorage.setItem(VFS._prefix + path, content); },
+  exists(path) { return localStorage.getItem(VFS._prefix + path) !== null; },
+  remove(path) { localStorage.removeItem(VFS._prefix + path); },
+  list(dir) {
+    dir = dir || 'agents/';
+    if (!dir.endsWith('/')) dir += '/';
+    const results = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith(VFS._prefix + dir)) {
+        results.push(key.slice(VFS._prefix.length));
+      }
+    }
+    return results;
+  },
+  // List all agents in the virtual FS
+  listAgents() {
+    return VFS.list('agents/').filter(f => f.endsWith('.py'));
+  }
+};
+
 const vm = {
   registry: null,
   env: null,
@@ -2621,7 +2670,7 @@ function runTests() {
   const welcome = document.getElementById('welcome');
   if (welcome) welcome.style.display = 'none';
   document.getElementById('infoBar').style.display = 'none';
-  appendOutput('=== Virtual Brainstem Test Suite ===', 'system');
+  appendOutput('=== RAPP Brainstem Test Suite ===', 'system');
   appendOutput('', 'system');
 
   let passed = 0;
@@ -2906,7 +2955,7 @@ let enabledAgents = new Set(JSON.parse(localStorage.getItem('vb_enabled_agents')
 const BUILTIN_AGENTS = ['store_memory', 'recall_memories', 'hacker_news'];
 
 function buildSystemPrompt() {
-  let prompt = `You are the Virtual RAPP Brainstem — a browser-native AI assistant running inside a LisPy VM. You have these agents loaded:
+  let prompt = `You are the RAPP Brainstem — a browser-native AI assistant running inside a LisPy VM. You have these agents loaded:
 
 1. **store_memory** — Stores facts, preferences, insights, and tasks to the user's persistent local memory. Use this when the user tells you something about themselves, asks you to remember something, or shares a preference.
 
@@ -3089,6 +3138,12 @@ async function executeRegistryAgent(args) {
   if (!agent) return { error: `Agent not found: ${slug}` };
   if (!enabledAgents.has(slug)) return { error: `Agent not enabled: ${slug}` };
 
+  // Detect LearnNewAgent — route to create_agent handler
+  const isLearnNew = /learn.?new/i.test(slug) || /learn.?new/i.test(agent.display_name);
+  if (isLearnNew) {
+    return await executeCreateAgent({ description: args.request });
+  }
+
   try {
     let source, doc;
 
@@ -3103,6 +3158,31 @@ async function executeRegistryAgent(args) {
       doc = (docMatch && (docMatch[1] || docMatch[2])) || agent.description;
     }
 
+    // Actually transpile and run the agent in the LisPy VM
+    try {
+      const transpiled = unrappTranspile(source);
+      if (transpiled.operations && transpiled.operations.length > 0) {
+        // Create a temp env and run
+        const savedEnv = vm.env;
+        const savedAgent = vm.loadedAgent;
+        transpileAndLoad(source);
+        const firstOp = transpiled.operations[0];
+        const output = runOperation(firstOp);
+        const result = {
+          agent: agent.display_name,
+          slug: agent.name,
+          executed: true,
+          operation: firstOp,
+          output: output
+        };
+        // Restore previous VM state
+        if (savedEnv) { vm.env = savedEnv; vm.loadedAgent = savedAgent; }
+        return result;
+      }
+    } catch(e) {
+      // Transpilation not possible — fall through to documentation mode
+    }
+
     return {
       agent: agent.display_name,
       slug: agent.name,
@@ -3111,10 +3191,102 @@ async function executeRegistryAgent(args) {
       category: agent.category,
       version: agent.version,
       request: args.request,
-      result: `[${agent.display_name}] This agent (${agent.description}) has been consulted. In a full Brainstem environment, it would execute its perform() method. The agent documentation says: ${doc.trim().slice(0, 300)}`
+      source_available: true,
+      result: `[${agent.display_name}] Agent loaded. ${doc.trim().slice(0, 300)}`
     };
   } catch(e) {
     return { error: `Failed to load agent: ${e.message}` };
+  }
+}
+
+// ── Create Agent — generates .py source via LLM, stores in VFS, hot-loads ──
+
+async function executeCreateAgent(args) {
+  const description = args.description || args.request || '';
+  if (!description) return { error: 'Please describe what the agent should do.' };
+
+  // Ask the LLM to generate agent Python source
+  const genPrompt = `Generate a complete single-file Python agent for the RAPP framework.
+
+Description: ${description}
+
+Rules:
+- The file must contain a class inheriting from BasicAgent
+- Must have a perform(**kwargs) method that returns a string (JSON)
+- Must have self.name and self.metadata in __init__
+- Import: from agents.basic_agent import BasicAgent
+- Keep it simple and functional
+- Return ONLY the Python code, no markdown fences, no explanation
+
+Template to follow:
+"""
+<docstring describing the agent>
+"""
+import json
+from agents.basic_agent import BasicAgent
+
+class <ClassName>Agent(BasicAgent):
+    def __init__(self):
+        self.name = '<ClassName>'
+        self.metadata = {
+            "name": self.name,
+            "description": "<one line>",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "The user request."}
+                },
+                "required": []
+            }
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs):
+        query = kwargs.get('query', '')
+        # Agent logic here
+        return json.dumps({"status": "success", "result": "..."})`;
+
+  try {
+    const genMessages = [
+      { role: 'system', content: 'You are a Python code generator. Output ONLY valid Python code. No markdown. No explanation.' },
+      { role: 'user', content: genPrompt }
+    ];
+
+    const resp = await fetch(GH_MODELS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${chatToken}` },
+      body: JSON.stringify({ model: chatModel, messages: genMessages, temperature: 0.4, max_tokens: 2048 })
+    });
+
+    if (!resp.ok) throw new Error(`LLM error: ${resp.status}`);
+    const data = await resp.json();
+    let source = data.choices[0].message.content;
+
+    // Strip markdown fences if the LLM wrapped it anyway
+    source = source.replace(/^```python\s*/m, '').replace(/^```\s*$/m, '').trim();
+
+    // Extract class name for filename
+    const classMatch = source.match(/class\s+(\w+)/);
+    const className = classMatch ? classMatch[1] : 'CustomAgent';
+    const stem = className.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    const filename = stem.endsWith('_agent') ? `${stem}.py` : `${stem}_agent.py`;
+
+    // Store in VFS
+    VFS.write(`agents/${filename}`, source);
+
+    // Hot-load into the brainstem (reuses the drag-and-drop path)
+    hotLoadAgent(filename, source);
+
+    return {
+      status: 'success',
+      message: `Created and loaded ${className}`,
+      agent_name: className,
+      file: filename,
+      stored_in_vfs: true,
+      hot_loaded: true
+    };
+  } catch(e) {
+    return { error: `Failed to create agent: ${e.message}` };
   }
 }
 
@@ -3553,6 +3725,7 @@ function populateAgentDropdown(filter) {
         <div class="agent-dropdown-item-name">${a.display_name}</div>
         <div class="agent-dropdown-item-desc">${a.description}</div>
       </div>
+      <button class="agent-dl-btn" onclick="event.stopPropagation();downloadAgent('${a.name.replace(/'/g, "\\'")}')" title="Download .py">&#8615;</button>
     </div>`;
   }).join('');
 }
@@ -3683,8 +3856,9 @@ function hotLoadAgent(filename, source) {
   const slug = manifest.name;
   const doc = docstring || manifest.description || '';
 
-  // Store the hot-loaded agent
+  // Store the hot-loaded agent in memory and VFS
   hotLoadedAgents[slug] = { manifest, source, doc: doc.trim() };
+  VFS.write(`agents/${filename}`, source);
 
   // Add to availableAgents if not already there
   const existing = availableAgents.findIndex(a => a.name === slug);
@@ -3744,6 +3918,141 @@ document.addEventListener('click', e => {
   }
 });
 
+// ── Agent Download ──
+
+async function downloadAgent(slug) {
+  let source = null;
+  let filename = null;
+
+  // Check VFS / hot-loaded first
+  if (hotLoadedAgents[slug]) {
+    source = hotLoadedAgents[slug].source;
+    filename = slug.replace(/^@\w+\//, '') + '.py';
+  }
+
+  // Try VFS
+  if (!source) {
+    const vfsFiles = VFS.listAgents();
+    for (const f of vfsFiles) {
+      const content = VFS.read(f);
+      if (content && content.includes(slug)) {
+        source = content;
+        filename = f.replace('agents/', '');
+        break;
+      }
+    }
+  }
+
+  // Fetch from registry
+  if (!source) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent && agent._file) {
+      try {
+        source = await fetchAgent(agent);
+        filename = agent._file.split('/').pop();
+      } catch(e) {
+        showToast(`Failed to download: ${e.message}`, true);
+        return;
+      }
+    }
+  }
+
+  if (!source) {
+    showToast('Agent source not available', true);
+    return;
+  }
+
+  // Trigger browser download
+  const blob = new Blob([source], { type: 'text/x-python' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`Downloaded ${filename}`);
+}
+
+// ── Chat Export / Import ──
+
+function exportChat() {
+  if (chatHistory.length === 0) {
+    showToast('No chat to export', true);
+    return;
+  }
+  const payload = {
+    version: 1,
+    exported: new Date().toISOString(),
+    user: chatUser || 'anonymous',
+    model: chatModel,
+    messages: chatHistory
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `brainstem-chat-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Chat exported');
+}
+
+function importChat() {
+  document.getElementById('importChatFile').click();
+}
+
+function handleChatImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      const messages = data.messages || data;
+      if (!Array.isArray(messages)) throw new Error('Invalid format');
+
+      // Clear current chat UI
+      const container = document.getElementById('chatMessages');
+      const welcome = document.getElementById('chatWelcome');
+      if (welcome) welcome.style.display = 'none';
+      container.querySelectorAll('.chat-msg').forEach(el => el.remove());
+
+      // Restore history and render
+      chatHistory = messages;
+      for (const msg of messages) {
+        if (msg.role === 'user') {
+          addChatMsg('user', msg.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+        } else if (msg.role === 'assistant' && msg.content) {
+          addChatMsg('assistant', renderChatMarkdown(msg.content));
+        }
+      }
+      showToast(`Imported ${messages.length} messages`);
+    } catch(e) {
+      showToast(`Import failed: ${e.message}`, true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ── VFS Agent Restore — reload agents persisted across sessions ──
+
+function restoreVFSAgents() {
+  const agentFiles = VFS.listAgents();
+  for (const path of agentFiles) {
+    const source = VFS.read(path);
+    if (!source) continue;
+    const filename = path.replace('agents/', '');
+    // Silently hot-load without chat messages
+    hotLoadAgent(filename, source);
+  }
+  // Remove the system messages that hotLoadAgent added during restore
+  const container = document.getElementById('chatMessages');
+  if (container) {
+    container.querySelectorAll('.chat-msg.assistant').forEach(el => el.remove());
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // SECTION 7: Init
 // ═══════════════════════════════════════════════════════════════════════
@@ -3758,6 +4067,9 @@ document.addEventListener('click', e => {
     fetchModels(); // non-blocking — populates dropdown in background
   }
   updateGHPill();
+
+  // Restore agents from VFS (persisted across sessions)
+  restoreVFSAgents();
 
   // Load registry for agent dropdown
   loadRegistryForChat();
