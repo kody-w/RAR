@@ -66,6 +66,12 @@ header {
   cursor: pointer; transition: all .15s; text-decoration: none;
 }
 .adv-link:hover { border-color: var(--border-hover); color: var(--text); text-decoration: none; }
+.get-started {
+  background: linear-gradient(135deg, var(--accent), #bc8cff); color: #fff;
+  padding: 6px 16px; border-radius: 6px; font-size: .78rem; font-weight: 700;
+  cursor: pointer; transition: opacity .15s; text-decoration: none; border: none;
+}
+.get-started:hover { opacity: .85; text-decoration: none; }
 
 .container { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
 
@@ -228,6 +234,7 @@ header {
     <span>RAPP Agent Repository</span>
   </div>
   <div class="header-right">
+    <a class="get-started" href="virtual-brainstem.html">Get Started</a>
     <a class="adv-link" href="submit.html">Submit</a>
     <a class="adv-link" href="store.html">Advanced</a>
   </div>
