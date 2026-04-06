@@ -1251,6 +1251,670 @@ canvas.tetris-board {
   }
   .win-resize-e, .win-resize-s, .win-resize-se { display: none; }
 }
+
+/* ============================================================ TAMAGOTCHI GUI */
+.tama-gui {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a1a0a;
+  overflow: hidden;
+  user-select: none;
+}
+.tama-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px 4px;
+  background: #0d2a0d;
+  border-bottom: 1px solid #1a4a1a;
+}
+.tama-name-level {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.tama-mood-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+  transition: color 0.5s;
+}
+.tama-adopt-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 14px;
+  padding: 20px;
+}
+.tama-adopt-title {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.tama-adopt-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+.tama-adopt-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  width: 200px;
+  outline: none;
+}
+.tama-adopt-input:focus { border-color: var(--accent); }
+.tama-pet-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 8px;
+  position: relative;
+  transition: background 0.6s;
+}
+.tama-face-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* CSS pet face */
+.tama-face {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #f5c842;
+  position: relative;
+  border: 4px solid #c89e20;
+  transition: background 0.5s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tama-face.mood-happy { background: #f5c842; border-color: #c89e20; }
+.tama-face.mood-sad   { background: #b0b8d0; border-color: #8090b0; }
+.tama-face.mood-hungry { background: #e09050; border-color: #b06020; }
+.tama-face.mood-tired { background: #a0c0d0; border-color: #6090a0; }
+.tama-face.mood-dead  { background: #888; border-color: #555; filter: grayscale(1); }
+@keyframes tama-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+.tama-face.pulse { animation: tama-pulse 0.8s ease-in-out infinite; }
+
+/* Eyes (CSS circles) */
+.tama-eyes {
+  display: flex;
+  gap: 18px;
+  position: absolute;
+  top: 28px;
+}
+.tama-eye {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #222;
+  position: relative;
+}
+/* Cheeks */
+.tama-cheeks {
+  position: absolute;
+  display: flex;
+  gap: 52px;
+  top: 52px;
+}
+.tama-cheek {
+  width: 12px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,100,100,0.4);
+}
+/* Mouth / expression */
+.tama-mouth {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tama-bars {
+  width: 100%;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tama-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+.tama-bar-label {
+  width: 70px;
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+.tama-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-hover);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.tama-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+.tama-bar-fill.hunger  { background: #f85149; }
+.tama-bar-fill.happy   { background: var(--accent); }
+.tama-bar-fill.energy  { background: var(--accent-blue); }
+.tama-bar-fill.xp      { background: var(--accent-purple); }
+.tama-bar-val {
+  width: 28px;
+  color: var(--text-faint);
+  font-size: 9px;
+}
+
+.tama-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 10px 14px 12px;
+}
+.tama-btn {
+  padding: 8px 4px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, transform 0.1s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tama-btn:hover  { background: var(--bg-hover); border-color: var(--text-faint); }
+.tama-btn:active { transform: scale(0.95); }
+.tama-btn.feed   { border-left: 3px solid #f0c040; }
+.tama-btn.play   { border-left: 3px solid var(--accent); }
+.tama-btn.train  { border-left: 3px solid var(--accent-purple); }
+.tama-btn.sleep  { border-left: 3px solid var(--accent-blue); }
+.tama-btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ============================================================ GARDEN GUI */
+.garden-gui {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0a1a08;
+  overflow: hidden;
+  user-select: none;
+}
+.garden-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #0d2a0a;
+  border-bottom: 1px solid #1a4a14;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.garden-stats-bar {
+  display: flex;
+  gap: 14px;
+}
+.garden-stat { color: var(--accent); font-weight: 700; }
+.garden-plant-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.garden-plant-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 8px;
+  outline: none;
+  min-width: 0;
+}
+.garden-plant-input:focus { border-color: var(--accent); }
+.garden-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.garden-btn:hover { background: var(--bg-hover); border-color: var(--text-faint); }
+.garden-btn:active { transform: scale(0.95); }
+.garden-btn.plant-btn  { border-left: 3px solid var(--accent); }
+.garden-btn.water-btn  { border-left: 3px solid var(--accent-blue); }
+.garden-btn.harvest-btn { border-left: 3px solid #f0c040; }
+.garden-btn:disabled { opacity: 0.3; cursor: default; }
+
+.garden-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 10px 12px;
+  flex: 1;
+  min-height: 0;
+}
+.garden-plot {
+  border: 2px solid #2a4a24;
+  border-radius: 8px;
+  background: #1a2e14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  min-height: 70px;
+  padding: 6px 4px 4px;
+}
+.garden-plot:hover { border-color: #4a7a40; background: #1e3418; }
+.garden-plot.selected { border-color: var(--accent); background: #143020; }
+.garden-plot.empty { background: #1a1208; border-color: #2a2214; }
+.garden-plot-num {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-faint);
+}
+.garden-plant-icon {
+  font-size: 26px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  transition: font-size 0.3s;
+}
+.garden-plot-name {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.garden-plot-progress {
+  width: 90%;
+  height: 3px;
+  background: var(--bg-hover);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.garden-plot-prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.garden-log {
+  height: 40px;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================ CANVAS GUI */
+.canvas-gui {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+  user-select: none;
+}
+.canvas-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.canvas-tool-btn {
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.canvas-tool-btn:hover { background: var(--bg-hover); color: var(--text); }
+.canvas-tool-btn.active {
+  background: #1a3050;
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+.canvas-tool-btn:active { transform: scale(0.95); }
+.canvas-sep {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+.canvas-color-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.1s, transform 0.1s;
+  flex-shrink: 0;
+}
+.canvas-color-swatch:hover { transform: scale(1.2); }
+.canvas-color-swatch.active-color { border-color: white; }
+.canvas-color-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.canvas-size-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.canvas-size-range {
+  width: 60px;
+  accent-color: var(--accent-blue);
+}
+.canvas-draw-area {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #fff;
+  cursor: crosshair;
+  min-height: 0;
+}
+.canvas-draw-area canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.canvas-statusbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 8px;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+/* ============================================================ SYNTH GUI */
+.synth-gui {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #080814;
+  overflow: hidden;
+  user-select: none;
+}
+.synth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #0d0d22;
+  border-bottom: 1px solid #1a1a40;
+  font-family: var(--font-mono);
+}
+.synth-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-purple);
+  letter-spacing: 2px;
+}
+.synth-freq-display {
+  font-size: 18px;
+  color: #a0f0a0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.synth-bpm-area {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.synth-bpm-area input[type=range] { width: 60px; accent-color: var(--accent-purple); }
+
+.synth-scope-area {
+  padding: 6px 12px 4px;
+  flex-shrink: 0;
+  background: #060610;
+}
+.synth-scope {
+  display: block;
+  width: 100%;
+  height: 60px;
+  border-radius: 4px;
+  border: 1px solid #1a1a40;
+  background: #060610;
+}
+
+.synth-waveform-row {
+  display: flex;
+  gap: 5px;
+  padding: 6px 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #1a1a40;
+}
+.synth-wave-btn {
+  flex: 1;
+  padding: 5px 4px;
+  border-radius: 4px;
+  border: 1px solid #1a1a40;
+  background: #0d0d22;
+  color: #6060a0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.synth-wave-btn:hover { background: #14143a; color: var(--accent-purple); }
+.synth-wave-btn.active {
+  background: #1a1060;
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+}
+
+.synth-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.synth-volume-row input[type=range] { flex: 1; accent-color: #a371f7; }
+
+.synth-card-slots {
+  display: flex;
+  gap: 6px;
+  padding: 5px 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #1a1a40;
+}
+.synth-card-slot {
+  flex: 1;
+  border: 1px dashed #2a2a60;
+  border-radius: 5px;
+  background: #0a0a1c;
+  padding: 5px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.synth-slot-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: #404080;
+  text-transform: uppercase;
+}
+.synth-slot-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #1a1a40;
+  color: var(--accent-purple);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  outline: none;
+  width: 100%;
+}
+.synth-slot-input::placeholder { color: #303060; }
+
+.synth-piano {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 6px 8px;
+  gap: 2px;
+  flex: 1;
+  min-height: 0;
+  background: #06060f;
+  position: relative;
+}
+.piano-key {
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+  border: 1px solid #222;
+  transition: background 0.1s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  flex-shrink: 0;
+}
+.piano-key.white {
+  background: #e8e8e8;
+  height: 80px;
+  width: 28px;
+  border: 1px solid #aaa;
+  z-index: 1;
+}
+.piano-key.black {
+  background: #111;
+  height: 52px;
+  width: 18px;
+  margin: 0 -10px;
+  z-index: 2;
+  border-color: #000;
+}
+.piano-key.white:hover { background: #d0f0d0; }
+.piano-key.black:hover { background: #2a2a4a; }
+.piano-key.active { transform: scaleY(0.95); }
+.piano-key.white.active { background: #a0e8a0; }
+.piano-key.black.active { background: #303060; }
+.piano-key-label {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: #aaa;
+  white-space: nowrap;
+}
+.piano-key.black .piano-key-label { color: #666; bottom: 3px; }
+
+.synth-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 8px;
+  flex-shrink: 0;
+  border-top: 1px solid #1a1a40;
+  flex-wrap: wrap;
+}
+.synth-ctrl-btn {
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid #2a2a60;
+  background: #0d0d22;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.5px;
+  -webkit-tap-highlight-color: transparent;
+}
+.synth-ctrl-btn:hover { background: #14143a; border-color: var(--accent-purple); color: var(--accent-purple); }
+.synth-ctrl-btn:active { transform: scale(0.95); }
+.synth-ctrl-btn.stop-btn { border-color: #4a1a1a; color: #f85149; }
+.synth-ctrl-btn.stop-btn:hover { background: #2a0d0d; }
+.synth-ctrl-btn.chord-btn { border-left: 3px solid #f0c040; }
 </style>
 </head>
 <body>
@@ -2099,11 +2763,19 @@ function buildWindowEl(win, app) {
   const isTetris = win.appId === 'tetris';
   const isRD = win.appId === 'rappterdaemon';
   const isDungeon = win.appId === 'dungeon';
+  const isTama = win.appId === 'tamagotchi';
+  const isGarden = win.appId === 'garden';
+  const isCanvas = win.appId === 'canvas';
+  const isSynth = win.appId === 'synth';
 
   let bodyContent;
   if (isTetris) bodyContent = buildTetrisBody(win);
   else if (isRD) bodyContent = buildRDBody(win);
   else if (isDungeon) bodyContent = buildDungeonBody(win);
+  else if (isTama) bodyContent = buildTamagotchiBody(win);
+  else if (isGarden) bodyContent = buildGardenBody(win);
+  else if (isCanvas) bodyContent = buildCanvasBody(win);
+  else if (isSynth) bodyContent = buildSynthBody(win);
   else bodyContent = buildTerminalBody(win, app);
 
   el.innerHTML = `
@@ -2223,6 +2895,193 @@ function buildDungeonBody(win) {
   </div>`;
 }
 
+function buildTamagotchiBody(win) {
+  return `<div class="tama-gui" id="tama-gui-${win.id}">
+    <div class="tama-adopt-screen" id="tama-adopt-${win.id}">
+      <div class="tama-adopt-title">TAMAGOTCHI</div>
+      <div class="tama-adopt-sub">Adopt an agent card as your virtual pet</div>
+      <input class="tama-adopt-input" id="tama-adopt-inp-${win.id}" type="text" placeholder="@rapp/basic-agent" spellcheck="false" autocomplete="off">
+      <button class="gui-big-btn primary" onclick="tamaGuiAdopt(${win.id})">ADOPT PET</button>
+    </div>
+    <div class="tama-header" id="tama-header-${win.id}" style="display:none">
+      <div class="tama-name-level" id="tama-name-${win.id}">—</div>
+      <div class="tama-mood-text" id="tama-mood-${win.id}"></div>
+    </div>
+    <div class="tama-pet-area" id="tama-pet-area-${win.id}" style="display:none">
+      <div class="tama-face-wrap">
+        <div class="tama-face mood-happy" id="tama-face-${win.id}">
+          <div class="tama-eyes" id="tama-eyes-${win.id}">
+            <div class="tama-eye" id="tama-eye-l-${win.id}"></div>
+            <div class="tama-eye" id="tama-eye-r-${win.id}"></div>
+          </div>
+          <div class="tama-cheeks">
+            <div class="tama-cheek"></div>
+            <div class="tama-cheek"></div>
+          </div>
+          <div class="tama-mouth" id="tama-mouth-${win.id}">😊</div>
+        </div>
+      </div>
+      <div class="tama-bars" id="tama-bars-${win.id}">
+        <div class="tama-bar-row">
+          <div class="tama-bar-label">HUNGER</div>
+          <div class="tama-bar-track"><div class="tama-bar-fill hunger" id="tama-bar-hunger-${win.id}" style="width:30%"></div></div>
+          <div class="tama-bar-val" id="tama-val-hunger-${win.id}">30</div>
+        </div>
+        <div class="tama-bar-row">
+          <div class="tama-bar-label">HAPPY</div>
+          <div class="tama-bar-track"><div class="tama-bar-fill happy" id="tama-bar-happy-${win.id}" style="width:60%"></div></div>
+          <div class="tama-bar-val" id="tama-val-happy-${win.id}">60</div>
+        </div>
+        <div class="tama-bar-row">
+          <div class="tama-bar-label">ENERGY</div>
+          <div class="tama-bar-track"><div class="tama-bar-fill energy" id="tama-bar-energy-${win.id}" style="width:80%"></div></div>
+          <div class="tama-bar-val" id="tama-val-energy-${win.id}">80</div>
+        </div>
+        <div class="tama-bar-row">
+          <div class="tama-bar-label">XP</div>
+          <div class="tama-bar-track"><div class="tama-bar-fill xp" id="tama-bar-xp-${win.id}" style="width:0%"></div></div>
+          <div class="tama-bar-val" id="tama-val-xp-${win.id}">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="tama-btns" id="tama-btns-${win.id}" style="display:none">
+      <button class="tama-btn feed"  onclick="tamaGuiAction(${win.id},'feed')">🍖 FEED</button>
+      <button class="tama-btn play"  onclick="tamaGuiAction(${win.id},'play')">🎮 PLAY</button>
+      <button class="tama-btn train" onclick="tamaGuiAction(${win.id},'train')">💪 TRAIN</button>
+      <button class="tama-btn sleep" onclick="tamaGuiAction(${win.id},'sleep')">💤 SLEEP</button>
+    </div>
+  </div>`;
+}
+
+function buildGardenBody(win) {
+  const plots = Array.from({length: 9}, (_,i) => `
+    <div class="garden-plot empty" id="garden-plot-${win.id}-${i}" onclick="gardenGuiSelect(${win.id},${i})">
+      <div class="garden-plot-num">${i+1}</div>
+      <div class="garden-plant-icon" id="garden-icon-${win.id}-${i}">🟫</div>
+      <div class="garden-plot-name" id="garden-pname-${win.id}-${i}">empty</div>
+      <div class="garden-plot-progress"><div class="garden-plot-prog-fill" id="garden-prog-${win.id}-${i}" style="width:0%"></div></div>
+    </div>`).join('');
+  return `<div class="garden-gui" id="garden-gui-${win.id}">
+    <div class="garden-header">
+      <span>GARDEN</span>
+      <div class="garden-stats-bar">
+        <span>Planted: <span class="garden-stat" id="garden-count-planted-${win.id}">0</span></span>
+        <span>Growing: <span class="garden-stat" id="garden-count-growing-${win.id}">0</span></span>
+        <span>Harvested: <span class="garden-stat" id="garden-count-harvested-${win.id}">0</span></span>
+      </div>
+    </div>
+    <div class="garden-plant-row">
+      <input class="garden-plant-input" id="garden-inp-${win.id}" type="text" placeholder="@rapp/basic-agent" spellcheck="false" autocomplete="off">
+      <button class="garden-btn plant-btn" onclick="gardenGuiPlant(${win.id})">PLANT</button>
+      <button class="garden-btn water-btn" onclick="gardenGuiWater(${win.id})">WATER</button>
+      <button class="garden-btn harvest-btn" onclick="gardenGuiHarvest(${win.id})">HARVEST</button>
+    </div>
+    <div class="garden-grid" id="garden-grid-${win.id}">${plots}</div>
+    <div class="garden-log" id="garden-log-${win.id}">Click a plot to select, then use the action buttons above.</div>
+  </div>`;
+}
+
+function buildCanvasBody(win) {
+  const colors = ['#f85149','#ffa657','#f0c040','#3fb950','#58a6ff','#a371f7','#e6edf3','#000000'];
+  const swatches = colors.map(c => `<div class="canvas-color-swatch" style="background:${c}" onclick="canvasGuiSetColor(${win.id},'${c}')" data-color="${c}"></div>`).join('');
+  return `<div class="canvas-gui" id="canvas-gui-${win.id}">
+    <div class="canvas-toolbar">
+      <button class="canvas-tool-btn active" id="ctool-pen-${win.id}"   onclick="canvasGuiTool(${win.id},'pen')">PEN</button>
+      <button class="canvas-tool-btn"        id="ctool-line-${win.id}"  onclick="canvasGuiTool(${win.id},'line')">LINE</button>
+      <button class="canvas-tool-btn"        id="ctool-rect-${win.id}"  onclick="canvasGuiTool(${win.id},'rect')">RECT</button>
+      <button class="canvas-tool-btn"        id="ctool-circle-${win.id}" onclick="canvasGuiTool(${win.id},'circle')">CIRCLE</button>
+      <button class="canvas-tool-btn"        id="ctool-fill-${win.id}"  onclick="canvasGuiTool(${win.id},'fill')">FILL</button>
+      <button class="canvas-tool-btn"        id="ctool-eraser-${win.id}" onclick="canvasGuiTool(${win.id},'eraser')">ERASER</button>
+      <div class="canvas-sep"></div>
+      ${swatches}
+      <input class="canvas-color-custom" type="color" value="#58a6ff" id="canvas-custom-color-${win.id}" oninput="canvasGuiSetColor(${win.id},this.value)" title="Custom color">
+      <div class="canvas-sep"></div>
+      <span class="canvas-size-label">Size:</span>
+      <input class="canvas-size-range" type="range" min="1" max="30" value="4" id="canvas-size-${win.id}" oninput="canvasGuiSetSize(${win.id},this.value)">
+      <div class="canvas-sep"></div>
+      <button class="canvas-tool-btn" onclick="canvasGuiUndo(${win.id})">UNDO</button>
+      <button class="canvas-tool-btn" onclick="canvasGuiClear(${win.id})">CLEAR</button>
+      <button class="canvas-tool-btn" onclick="canvasGuiExport(${win.id})">EXPORT</button>
+    </div>
+    <div class="canvas-draw-area" id="canvas-area-${win.id}">
+      <canvas id="canvas-el-${win.id}"></canvas>
+    </div>
+    <div class="canvas-statusbar">
+      <span id="canvas-coords-${win.id}">x:0 y:0</span>
+      <span id="canvas-status-${win.id}">tool: pen | size: 4 | color: #58a6ff</span>
+    </div>
+  </div>`;
+}
+
+function buildSynthBody(win) {
+  // Piano keys: C D E F G A B C + sharps
+  const keys = [
+    {note:'C4', label:'A', black:false}, {note:'C#4', label:'', black:true},
+    {note:'D4', label:'S', black:false}, {note:'D#4', label:'', black:true},
+    {note:'E4', label:'D', black:false},
+    {note:'F4', label:'F', black:false}, {note:'F#4', label:'', black:true},
+    {note:'G4', label:'G', black:false}, {note:'G#4', label:'', black:true},
+    {note:'A4', label:'H', black:false}, {note:'A#4', label:'', black:true},
+    {note:'B4', label:'J', black:false},
+    {note:'C5', label:'K', black:false},
+  ];
+  const pianoHTML = keys.map((k,i) => {
+    const cls = k.black ? 'piano-key black' : 'piano-key white';
+    return `<div class="${cls}" id="synth-key-${win.id}-${i}" data-note="${k.note}"
+      onmousedown="synthGuiPlayNote(${win.id},'${k.note}',${i})"
+      onmouseup="synthGuiStopNote(${win.id},${i})"
+      onmouseleave="synthGuiStopNote(${win.id},${i})"
+      ontouchstart="synthGuiPlayNote(${win.id},'${k.note}',${i});event.preventDefault()"
+      ontouchend="synthGuiStopNote(${win.id},${i})">
+      <span class="piano-key-label">${k.label}</span></div>`;
+  }).join('');
+  return `<div class="synth-gui" id="synth-gui-${win.id}">
+    <div class="synth-header">
+      <span class="synth-title">SYNTH</span>
+      <span class="synth-freq-display" id="synth-freq-${win.id}">--- Hz</span>
+      <div class="synth-bpm-area">
+        <span>BPM:</span>
+        <input type="range" min="40" max="240" value="120" id="synth-bpm-${win.id}" oninput="synthGuiBpmChange(${win.id},this.value)">
+        <span id="synth-bpm-val-${win.id}">120</span>
+      </div>
+    </div>
+    <div class="synth-scope-area">
+      <canvas class="synth-scope" id="synth-scope-${win.id}"></canvas>
+    </div>
+    <div class="synth-waveform-row">
+      <button class="synth-wave-btn active" id="synth-wave-sine-${win.id}"     onclick="synthGuiWave(${win.id},'sine')">∿ SINE</button>
+      <button class="synth-wave-btn"        id="synth-wave-square-${win.id}"   onclick="synthGuiWave(${win.id},'square')">⊓ SQUARE</button>
+      <button class="synth-wave-btn"        id="synth-wave-triangle-${win.id}" onclick="synthGuiWave(${win.id},'triangle')">/\ TRIANGLE</button>
+      <button class="synth-wave-btn"        id="synth-wave-sawtooth-${win.id}" onclick="synthGuiWave(${win.id},'sawtooth')">/| SAWTOOTH</button>
+    </div>
+    <div class="synth-volume-row">
+      <span>VOL</span>
+      <input type="range" min="0" max="100" value="60" id="synth-vol-${win.id}" oninput="synthGuiVolChange(${win.id},this.value)">
+      <span id="synth-vol-val-${win.id}">60%</span>
+    </div>
+    <div class="synth-card-slots">
+      <div class="synth-card-slot">
+        <div class="synth-slot-label">Card 1</div>
+        <input class="synth-slot-input" type="text" placeholder="@rapp/..." id="synth-slot1-${win.id}" spellcheck="false">
+      </div>
+      <div class="synth-card-slot">
+        <div class="synth-slot-label">Card 2</div>
+        <input class="synth-slot-input" type="text" placeholder="@kody/..." id="synth-slot2-${win.id}" spellcheck="false">
+      </div>
+      <div class="synth-card-slot">
+        <div class="synth-slot-label">Card 3</div>
+        <input class="synth-slot-input" type="text" placeholder="@borg/..." id="synth-slot3-${win.id}" spellcheck="false">
+      </div>
+    </div>
+    <div class="synth-piano" id="synth-piano-${win.id}">${pianoHTML}</div>
+    <div class="synth-controls-row">
+      <button class="synth-ctrl-btn chord-btn" onclick="synthGuiPlayChord(${win.id})">PLAY CHORD</button>
+      <button class="synth-ctrl-btn"           onclick="synthGuiPlaySequence(${win.id})">SEQUENCE</button>
+      <button class="synth-ctrl-btn stop-btn"  onclick="synthGuiStop(${win.id})">STOP</button>
+    </div>
+  </div>`;
+}
+
 function printToWindow(winId, text, cls) {
   const out = document.getElementById(`out-${winId}`);
   if (!out) return;
@@ -2329,7 +3188,7 @@ function focusWindow(id) {
   // For GUI apps focus the window el itself; for terminal apps focus the input
   const win = windows.get(id);
   if (!win) return;
-  const guiApps = ['tetris', 'rappterdaemon', 'dungeon'];
+  const guiApps = ['tetris', 'rappterdaemon', 'dungeon', 'tamagotchi', 'garden', 'canvas', 'synth'];
   if (guiApps.includes(win.appId)) {
     const el = document.getElementById(`win-${id}`);
     if (el) setTimeout(() => el.focus(), 50);
@@ -2344,6 +3203,16 @@ function closeWindow(id) {
   if (!win) return;
   // Stop tetris loop
   if (win.tetrisLoop) { clearInterval(win.tetrisLoop); win.tetrisLoop = null; }
+  // Clean up synth audio context and keyboard listeners
+  if (win.synthGuiState) {
+    const st = win.synthGuiState;
+    if (st.scopeAnim) { cancelAnimationFrame(st.scopeAnim); st.scopeAnim = null; }
+    if (st.audioCtx) { try { st.audioCtx.close(); } catch(e) {} st.audioCtx = null; }
+  }
+  if (win._synthKeyDown) document.removeEventListener('keydown', win._synthKeyDown);
+  if (win._synthKeyUp)   document.removeEventListener('keyup',   win._synthKeyUp);
+  // Clean up canvas ResizeObserver
+  if (win.canvasGuiState && win.canvasGuiState._ro) { win.canvasGuiState._ro.disconnect(); }
   win.el && win.el.remove();
   windows.delete(id);
   if (focusedWindowId === id) {
@@ -2442,7 +3311,7 @@ function bootApp(win, app) {
   }
 
   // Wire up input (terminal-style apps only — GUI apps handle their own input)
-  const guiOnlyApps = ['rappterdaemon', 'dungeon'];
+  const guiOnlyApps = ['rappterdaemon', 'dungeon', 'tamagotchi', 'garden', 'canvas', 'synth'];
   if (guiOnlyApps.includes(win.appId)) return; // fully GUI-driven, no text input
 
   const inp = document.getElementById(`inp-${win.id}`);
@@ -3825,26 +4694,229 @@ function handleRappterdaemonInput(win, src) {
    ============================================================ */
 const SYNTH_WAVEFORMS = { core: 'sine', pipeline: 'sawtooth', integrations: 'square', productivity: 'triangle', devtools: 'square' };
 
+// NOTE FREQUENCIES (Hz)
+const NOTE_FREQS = {
+  'C4':261.63, 'C#4':277.18, 'D4':293.66, 'D#4':311.13, 'E4':329.63,
+  'F4':349.23, 'F#4':369.99, 'G4':392.00, 'G#4':415.30, 'A4':440.00,
+  'A#4':466.16, 'B4':493.88, 'C5':523.25,
+};
+const SYNTH_KEYMAP = { a:'C4', w:'C#4', s:'D4', e:'D#4', d:'E4', f:'F4', t:'F#4', g:'G4', y:'G#4', h:'A4', u:'A#4', j:'B4', k:'C5' };
+
 function bootSynth(win) {
-  win.synthState = {
+  win.synthGuiState = {
     audioCtx: null,
-    nodes: [],
+    analyser: null,
+    gainNode: null,
+    waveform: 'sine',
+    volume: 0.6,
     bpm: 120,
-    playing: false,
-    lastCard: null,
+    activeNodes: {},  // keyIdx -> {osc, gain}
+    scopeAnim: null,
   };
-  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
-  printToWindow(win.id, '║        ORAPPTER SYNTH  v1.0.0        ║', 'sys');
-  printToWindow(win.id, '║   Agent Cards → Sound Synthesis      ║', 'sys');
-  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Commands:', 'info');
-  printToWindow(win.id, '  play @rapp/basic-agent   — play a card tone', 'info');
-  printToWindow(win.id, '  chord c1 c2 c3           — play 3 cards together', 'info');
-  printToWindow(win.id, '  sequence c1 c2 c3        — play cards in sequence', 'info');
-  printToWindow(win.id, '  bpm 120                  — set tempo', 'info');
-  printToWindow(win.id, '  stop                     — stop all sound', 'info');
-  printToWindow(win.id, '');
+  // Boot keyboard listener
+  requestAnimationFrame(() => synthGuiInit(win.id));
+}
+
+function synthGuiGetCtx(wid) {
+  const win = windows.get(wid);
+  if (!win) return null;
+  const st = win.synthGuiState;
+  if (!st.audioCtx) {
+    try {
+      st.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      st.gainNode = st.audioCtx.createGain();
+      st.gainNode.gain.setValueAtTime(st.volume, st.audioCtx.currentTime);
+      st.analyser = st.audioCtx.createAnalyser();
+      st.analyser.fftSize = 256;
+      st.gainNode.connect(st.analyser);
+      st.analyser.connect(st.audioCtx.destination);
+    } catch(e) { return null; }
+  }
+  if (st.audioCtx.state === 'suspended') st.audioCtx.resume();
+  return st.audioCtx;
+}
+
+function synthGuiInit(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  // Start scope animation
+  synthGuiStartScope(wid);
+  // Keyboard listener
+  win._synthKeyDown = (e) => {
+    const note = SYNTH_KEYMAP[e.key.toLowerCase()];
+    if (!note) return;
+    const keys = document.querySelectorAll(`#synth-piano-${wid} .piano-key`);
+    keys.forEach((k, i) => { if (k.dataset.note === note) synthGuiPlayNote(wid, note, i); });
+  };
+  win._synthKeyUp = (e) => {
+    const note = SYNTH_KEYMAP[e.key.toLowerCase()];
+    if (!note) return;
+    const keys = document.querySelectorAll(`#synth-piano-${wid} .piano-key`);
+    keys.forEach((k, i) => { if (k.dataset.note === note) synthGuiStopNote(wid, i); });
+  };
+  document.addEventListener('keydown', win._synthKeyDown);
+  document.addEventListener('keyup', win._synthKeyUp);
+}
+
+function synthGuiStartScope(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.synthGuiState;
+  const canvas = document.getElementById(`synth-scope-${wid}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const draw = () => {
+    st.scopeAnim = requestAnimationFrame(draw);
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#060610';
+    ctx.fillRect(0, 0, w, h);
+    if (st.analyser) {
+      const buf = new Uint8Array(st.analyser.frequencyBinCount);
+      st.analyser.getByteTimeDomainData(buf);
+      ctx.strokeStyle = '#a371f7';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const sliceW = w / buf.length;
+      let ix = 0;
+      for (let i = 0; i < buf.length; i++) {
+        const v = buf[i] / 128.0;
+        const y = v * h / 2;
+        i === 0 ? ctx.moveTo(ix, y) : ctx.lineTo(ix, y);
+        ix += sliceW;
+      }
+      ctx.stroke();
+    } else {
+      // Draw flat line when idle
+      ctx.strokeStyle = '#2a2a60';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, h/2);
+      ctx.lineTo(w, h/2);
+      ctx.stroke();
+    }
+  };
+  draw();
+}
+
+function synthGuiPlayNote(wid, note, keyIdx) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.synthGuiState;
+  if (st.activeNodes[keyIdx]) return; // already playing
+  const ctx = synthGuiGetCtx(wid);
+  if (!ctx) return;
+  const freq = NOTE_FREQS[note] || 440;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = st.waveform;
+  osc.frequency.setValueAtTime(freq, ctx.currentTime);
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.02);
+  osc.connect(gain);
+  gain.connect(st.gainNode);
+  osc.start();
+  st.activeNodes[keyIdx] = {osc, gain};
+  // Visual
+  const keyEl = document.getElementById(`synth-key-${wid}-${keyIdx}`);
+  if (keyEl) keyEl.classList.add('active');
+  // Display freq
+  const freqEl = document.getElementById(`synth-freq-${wid}`);
+  if (freqEl) freqEl.textContent = `${note}  ${freq.toFixed(1)} Hz`;
+}
+
+function synthGuiStopNote(wid, keyIdx) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.synthGuiState;
+  const node = st.activeNodes[keyIdx];
+  if (node) {
+    try {
+      node.gain.gain.linearRampToValueAtTime(0, node.gain.context.currentTime + 0.08);
+      node.osc.stop(node.gain.context.currentTime + 0.1);
+    } catch(e) {}
+    delete st.activeNodes[keyIdx];
+  }
+  const keyEl = document.getElementById(`synth-key-${wid}-${keyIdx}`);
+  if (keyEl) keyEl.classList.remove('active');
+}
+
+function synthGuiWave(wid, waveform) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.synthGuiState.waveform = waveform;
+  ['sine','square','triangle','sawtooth'].forEach(w => {
+    const btn = document.getElementById(`synth-wave-${w}-${wid}`);
+    if (btn) btn.classList.toggle('active', w === waveform);
+  });
+}
+
+function synthGuiVolChange(wid, val) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.synthGuiState;
+  st.volume = val / 100;
+  if (st.gainNode) st.gainNode.gain.setValueAtTime(st.volume, st.audioCtx.currentTime);
+  const el = document.getElementById(`synth-vol-val-${wid}`);
+  if (el) el.textContent = val + '%';
+}
+
+function synthGuiBpmChange(wid, val) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.synthGuiState.bpm = parseInt(val);
+  const el = document.getElementById(`synth-bpm-val-${wid}`);
+  if (el) el.textContent = val;
+}
+
+function synthGuiPlayChord(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const ctx = synthGuiGetCtx(wid);
+  if (!ctx) return;
+  const st = win.synthGuiState;
+  const slots = [
+    (document.getElementById(`synth-slot1-${wid}`) || {}).value || '',
+    (document.getElementById(`synth-slot2-${wid}`) || {}).value || '',
+    (document.getElementById(`synth-slot3-${wid}`) || {}).value || '',
+  ].filter(Boolean);
+  if (!slots.length) { addNotification('Synth: Enter card names in the slots first'); return; }
+  slots.forEach(card => {
+    const p = synthCardToParams(card);
+    synthPlayTone(ctx, p.freq, p.waveform, p.gain * 0.6, 2.0, ctx.currentTime);
+  });
+  addNotification(`Chord: ${slots.join(' + ')}`);
+}
+
+function synthGuiPlaySequence(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const ctx = synthGuiGetCtx(wid);
+  if (!ctx) return;
+  const st = win.synthGuiState;
+  const slots = [
+    (document.getElementById(`synth-slot1-${wid}`) || {}).value || '',
+    (document.getElementById(`synth-slot2-${wid}`) || {}).value || '',
+    (document.getElementById(`synth-slot3-${wid}`) || {}).value || '',
+  ].filter(Boolean);
+  if (!slots.length) { addNotification('Synth: Enter card names in the slots first'); return; }
+  const beatDur = 60 / st.bpm;
+  slots.forEach((card, i) => {
+    const p = synthCardToParams(card);
+    synthPlayTone(ctx, p.freq, p.waveform, p.gain, beatDur * 0.9, ctx.currentTime + i * beatDur);
+  });
+  addNotification(`Sequence @ ${st.bpm}BPM: ${slots.join(' → ')}`);
+}
+
+function synthGuiStop(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.synthGuiState;
+  // Stop all active notes
+  Object.keys(st.activeNodes).forEach(k => synthGuiStopNote(wid, parseInt(k)));
+  if (st.audioCtx) { st.audioCtx.close(); st.audioCtx = null; st.gainNode = null; st.analyser = null; }
+  addNotification('Synth stopped');
 }
 
 function synthGetOrCreateCtx(win) {
@@ -4101,22 +5173,238 @@ function handleRadioInput(win, src) {
    CANVAS APP  — ASCII drawing
    ============================================================ */
 function bootCanvas(win) {
-  win.canvasState = {
-    w: 40, h: 20,
-    grid: null,
+  win.canvasGuiState = {
+    tool: 'pen',
+    color: '#58a6ff',
+    size: 4,
+    drawing: false,
+    startX: 0, startY: 0,
+    lastX: 0, lastY: 0,
+    undoStack: [],
+    snapshot: null, // for preview on line/rect/circle
   };
-  win.canvasState.grid = makeCanvasGrid(40, 20);
-  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
-  printToWindow(win.id, '║         ORAPPTER CANVAS v1.0.0       ║', 'sys');
-  printToWindow(win.id, '║   ASCII drawing. No pixels needed.   ║', 'sys');
-  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Commands: new W H | dot X Y char | line X1 Y1 X2 Y2 char', 'info');
-  printToWindow(win.id, '          rect X1 Y1 X2 Y2 char | circle CX CY R char', 'info');
-  printToWindow(win.id, '          text X Y words... | fill X Y char | show | clear', 'info');
-  printToWindow(win.id, '          stamp @card X Y', 'info');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Canvas: 40x20 (type "show" to render)', 'success');
+  // Canvas setup is deferred until the DOM is ready (called in bootApp flow, el already attached)
+  requestAnimationFrame(() => canvasGuiInit(win.id));
+}
+
+function canvasGuiInit(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const area = document.getElementById(`canvas-area-${wid}`);
+  const canvasEl = document.getElementById(`canvas-el-${wid}`);
+  if (!area || !canvasEl) return;
+
+  // Size canvas to area
+  const resize = () => {
+    const w = area.clientWidth, h = area.clientHeight;
+    if (w < 4 || h < 4) return;
+    // Save pixel data
+    let saved = null;
+    if (canvasEl.width > 0 && canvasEl.height > 0) {
+      const ctx = canvasEl.getContext('2d');
+      try { saved = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height); } catch(e) {}
+    }
+    canvasEl.width = w;
+    canvasEl.height = h;
+    // Fill white
+    const ctx = canvasEl.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+    if (saved) ctx.putImageData(saved, 0, 0);
+  };
+
+  resize();
+  const ro = new ResizeObserver(resize);
+  ro.observe(area);
+  win.canvasGuiState._ro = ro;
+
+  const cs = win.canvasGuiState;
+  const getCtx = () => canvasEl.getContext('2d');
+  const getPos = (e) => {
+    const r = canvasEl.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: Math.round((t.clientX - r.left) * (canvasEl.width / r.width)),
+             y: Math.round((t.clientY - r.top)  * (canvasEl.height / r.height)) };
+  };
+  const updateCoords = (x, y) => {
+    const el = document.getElementById(`canvas-coords-${wid}`);
+    if (el) el.textContent = `x:${x} y:${y}`;
+  };
+  const saveUndo = () => {
+    const ctx = getCtx();
+    const img = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height);
+    cs.undoStack.push(img);
+    if (cs.undoStack.length > 12) cs.undoStack.shift();
+  };
+
+  const startDraw = (e) => {
+    e.preventDefault();
+    cs.drawing = true;
+    const {x, y} = getPos(e);
+    cs.startX = x; cs.startY = y; cs.lastX = x; cs.lastY = y;
+    updateCoords(x, y);
+    saveUndo();
+    if (cs.tool === 'pen' || cs.tool === 'eraser') {
+      const ctx = getCtx();
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    } else if (cs.tool === 'fill') {
+      canvasGuiFloodFill(canvasEl, x, y, cs.color);
+      cs.drawing = false;
+    }
+    // snapshot for preview
+    cs.snapshot = getCtx().getImageData(0, 0, canvasEl.width, canvasEl.height);
+  };
+
+  const moveDraw = (e) => {
+    const {x, y} = getPos(e);
+    updateCoords(x, y);
+    if (!cs.drawing) return;
+    e.preventDefault();
+    const ctx = getCtx();
+    if (cs.tool === 'pen' || cs.tool === 'eraser') {
+      ctx.lineWidth = cs.size;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = cs.tool === 'eraser' ? '#ffffff' : cs.color;
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    } else if (['line','rect','circle'].includes(cs.tool)) {
+      // restore snapshot, draw preview
+      if (cs.snapshot) ctx.putImageData(cs.snapshot, 0, 0);
+      ctx.strokeStyle = cs.color;
+      ctx.lineWidth = cs.size;
+      ctx.beginPath();
+      if (cs.tool === 'line') {
+        ctx.moveTo(cs.startX, cs.startY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      } else if (cs.tool === 'rect') {
+        ctx.strokeRect(cs.startX, cs.startY, x - cs.startX, y - cs.startY);
+      } else if (cs.tool === 'circle') {
+        const rx = Math.abs(x - cs.startX), ry = Math.abs(y - cs.startY);
+        const cx = cs.startX, cy = cs.startY;
+        ctx.ellipse(cx, cy, rx, ry, 0, 0, 2 * Math.PI);
+        ctx.stroke();
+      }
+    }
+    cs.lastX = x; cs.lastY = y;
+  };
+
+  const endDraw = () => { cs.drawing = false; cs.snapshot = null; };
+
+  canvasEl.addEventListener('mousedown', startDraw);
+  canvasEl.addEventListener('mousemove', moveDraw);
+  canvasEl.addEventListener('mouseup', endDraw);
+  canvasEl.addEventListener('mouseleave', endDraw);
+  canvasEl.addEventListener('touchstart', startDraw, {passive:false});
+  canvasEl.addEventListener('touchmove', moveDraw, {passive:false});
+  canvasEl.addEventListener('touchend', endDraw);
+
+  // Activate first swatch
+  canvasGuiSetColor(wid, '#58a6ff');
+}
+
+function canvasGuiTool(wid, tool) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.canvasGuiState.tool = tool;
+  // Toggle active class on buttons
+  ['pen','line','rect','circle','fill','eraser'].forEach(t => {
+    const btn = document.getElementById(`ctool-${t}-${wid}`);
+    if (btn) btn.classList.toggle('active', t === tool);
+  });
+  canvasGuiUpdateStatus(wid);
+}
+
+function canvasGuiSetColor(wid, color) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.canvasGuiState.color = color;
+  // Update swatches active state
+  document.querySelectorAll(`#canvas-gui-${wid} .canvas-color-swatch`).forEach(sw => {
+    sw.classList.toggle('active-color', sw.dataset.color === color);
+  });
+  // Update custom picker value
+  const custom = document.getElementById(`canvas-custom-color-${wid}`);
+  if (custom && /^#[0-9a-fA-F]{6}$/.test(color)) custom.value = color;
+  canvasGuiUpdateStatus(wid);
+}
+
+function canvasGuiSetSize(wid, size) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.canvasGuiState.size = parseInt(size);
+  canvasGuiUpdateStatus(wid);
+}
+
+function canvasGuiUpdateStatus(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const cs = win.canvasGuiState;
+  const el = document.getElementById(`canvas-status-${wid}`);
+  if (el) el.textContent = `tool: ${cs.tool} | size: ${cs.size} | color: ${cs.color}`;
+}
+
+function canvasGuiUndo(wid) {
+  const win = windows.get(wid);
+  if (!win || !win.canvasGuiState.undoStack.length) return;
+  const img = win.canvasGuiState.undoStack.pop();
+  const canvasEl = document.getElementById(`canvas-el-${wid}`);
+  if (canvasEl) canvasEl.getContext('2d').putImageData(img, 0, 0);
+}
+
+function canvasGuiClear(wid) {
+  const canvasEl = document.getElementById(`canvas-el-${wid}`);
+  if (!canvasEl) return;
+  const win = windows.get(wid);
+  if (win) {
+    const ctx = canvasEl.getContext('2d');
+    const img = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height);
+    win.canvasGuiState.undoStack.push(img);
+    if (win.canvasGuiState.undoStack.length > 12) win.canvasGuiState.undoStack.shift();
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
+  }
+}
+
+function canvasGuiExport(wid) {
+  const canvasEl = document.getElementById(`canvas-el-${wid}`);
+  if (!canvasEl) return;
+  const url = canvasEl.toDataURL('image/png');
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `orappter-canvas-${Date.now()}.png`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  addNotification('Canvas exported as PNG');
+}
+
+function canvasGuiFloodFill(canvas, x, y, fillColor) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const img = ctx.getImageData(0, 0, w, h);
+  const data = img.data;
+  const idx = (px, py) => (py * w + px) * 4;
+  const tx = idx(x, y);
+  const tr = data[tx], tg = data[tx+1], tb = data[tx+2], ta = data[tx+3];
+  // Parse fill color
+  const fc = document.createElement('canvas').getContext('2d');
+  fc.fillStyle = fillColor; fc.fillRect(0, 0, 1, 1);
+  const [fr, fg, fb, fa] = fc.getImageData(0, 0, 1, 1).data;
+  if (tr === fr && tg === fg && tb === fb) return;
+  const stack = [[x, y]];
+  let iters = 0;
+  while (stack.length && iters < 50000) {
+    iters++;
+    const [cx, cy] = stack.pop();
+    if (cx < 0 || cx >= w || cy < 0 || cy >= h) continue;
+    const ci = idx(cx, cy);
+    if (data[ci] !== tr || data[ci+1] !== tg || data[ci+2] !== tb || data[ci+3] !== ta) continue;
+    data[ci] = fr; data[ci+1] = fg; data[ci+2] = fb; data[ci+3] = fa;
+    stack.push([cx+1,cy],[cx-1,cy],[cx,cy+1],[cx,cy-1]);
+  }
+  ctx.putImageData(img, 0, 0);
 }
 
 function makeCanvasGrid(w, h) {
@@ -4310,15 +5598,126 @@ function bootTamagotchi(win) {
     alive: true,
     interactions: 0,
   };
-  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
-  printToWindow(win.id, '║       ORAPPTER TAMAGOTCHI v1.0.0     ║', 'sys');
-  printToWindow(win.id, '║   Virtual agent pet. Keep it alive.  ║', 'sys');
-  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Adopt an agent as your virtual pet:', 'info');
-  printToWindow(win.id, '  adopt @rapp/basic-agent', 'info');
-  printToWindow(win.id, '  adopt @kody/deal-desk', 'info');
-  printToWindow(win.id, '');
+  // GUI is already rendered in buildTamagotchiBody — nothing more to do here
+}
+
+function tamaGuiAdopt(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.tamaState;
+  const inp = document.getElementById(`tama-adopt-inp-${wid}`);
+  const cardName = (inp ? inp.value.trim() : '') || '@rapp/basic-agent';
+  const agent = REGISTRY.agents.find(a => a.name === cardName);
+  const name = agent ? (agent.display_name || agent.name) : cardName;
+  st.adopted = true;
+  st.name = name.slice(0, 16);
+  st.agent = agent || null;
+  st.hunger = 30; st.happiness = 60; st.energy = 80; st.xp = 0; st.alive = true;
+  // Hide adopt screen, show pet
+  const adoptEl = document.getElementById(`tama-adopt-${wid}`);
+  if (adoptEl) adoptEl.style.display = 'none';
+  const headerEl = document.getElementById(`tama-header-${wid}`);
+  if (headerEl) headerEl.style.display = '';
+  const petArea = document.getElementById(`tama-pet-area-${wid}`);
+  if (petArea) petArea.style.display = '';
+  const btnsEl = document.getElementById(`tama-btns-${wid}`);
+  if (btnsEl) btnsEl.style.display = '';
+  tamaGuiRender(wid);
+  addNotification(`Adopted: ${st.name}`);
+}
+
+const TAMA_MOODS = {
+  happy:   { cls: 'mood-happy',  mouth: '😊', pulse: true,  text: "Let's play!",     bg: '#0a1f0a' },
+  neutral: { cls: 'mood-happy',  mouth: '😐', pulse: false, text: 'All good.',        bg: '#0a1214' },
+  sad:     { cls: 'mood-sad',    mouth: '😢', pulse: false, text: "I feel lonely...", bg: '#0a0a1f' },
+  hungry:  { cls: 'mood-hungry', mouth: '😋', pulse: false, text: "I'm hungry!",      bg: '#1f0a0a' },
+  tired:   { cls: 'mood-tired',  mouth: '😴', pulse: false, text: 'Zzz...',           bg: '#080a14' },
+  dead:    { cls: 'mood-dead',   mouth: '💀', pulse: false, text: 'Gone...',          bg: '#101010' },
+};
+
+function tamaGetMoodKey(st) {
+  if (!st.alive) return 'dead';
+  if (st.hunger > 70) return 'hungry';
+  if (st.energy < 20) return 'tired';
+  if (st.happiness > 60 && st.hunger < 40) return 'happy';
+  if (st.happiness < 30 || st.hunger > 50) return 'sad';
+  return 'neutral';
+}
+
+function tamaGuiRender(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.tamaState;
+  const moodKey = tamaGetMoodKey(st);
+  const mood = TAMA_MOODS[moodKey];
+  const xpMax = st.xp < 100 ? 100 : st.xp < 300 ? 300 : 500;
+  const level = st.xp < 100 ? 1 : st.xp < 300 ? 2 : 3;
+  const ageName = st.xp < 100 ? 'Baby' : st.xp < 300 ? 'Teen' : 'Adult';
+
+  // Header
+  const nameEl = document.getElementById(`tama-name-${wid}`);
+  if (nameEl) nameEl.textContent = `${st.name}  Lv.${level} ${ageName} (${st.xp} XP)`;
+  const moodEl = document.getElementById(`tama-mood-${wid}`);
+  if (moodEl) { moodEl.textContent = mood.text; moodEl.style.color = moodKey === 'dead' ? '#888' : ''; }
+
+  // Face
+  const face = document.getElementById(`tama-face-${wid}`);
+  if (face) {
+    face.className = 'tama-face ' + mood.cls;
+    if (mood.pulse) face.classList.add('pulse');
+  }
+  const mouth = document.getElementById(`tama-mouth-${wid}`);
+  if (mouth) mouth.textContent = mood.mouth;
+
+  // Cheeks only when happy
+  const gui = document.getElementById(`tama-gui-${wid}`);
+  if (gui) gui.style.background = mood.bg;
+
+  // Bars
+  const setBar = (name, val, max) => {
+    const fill = document.getElementById(`tama-bar-${name}-${wid}`);
+    const valEl = document.getElementById(`tama-val-${name}-${wid}`);
+    if (fill) fill.style.width = Math.min(100, Math.round(val / max * 100)) + '%';
+    if (valEl) valEl.textContent = Math.round(val);
+  };
+  setBar('hunger', st.hunger, 100);
+  setBar('happy', st.happiness, 100);
+  setBar('energy', st.energy, 100);
+  setBar('xp', st.xp % xpMax, xpMax);
+
+  // Buttons disabled when dead
+  document.querySelectorAll(`#tama-btns-${wid} .tama-btn`).forEach(b => {
+    b.disabled = !st.alive;
+  });
+}
+
+function tamaGuiAction(wid, action) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const st = win.tamaState;
+  if (!st.alive) return;
+  // Decay on each action
+  st.hunger = Math.min(100, st.hunger + 5);
+  st.happiness = Math.max(0, st.happiness - 2);
+  st.energy = Math.max(0, st.energy - 1);
+  st.interactions++;
+  if (action === 'feed') {
+    st.hunger = Math.max(0, st.hunger - 30);
+    st.happiness = Math.min(100, st.happiness + 5);
+  } else if (action === 'play') {
+    st.happiness = Math.min(100, st.happiness + 20);
+    st.energy = Math.max(0, st.energy - 10);
+    st.xp += 10;
+  } else if (action === 'train') {
+    st.energy = Math.max(0, st.energy - 15);
+    st.xp += 25;
+    st.hunger = Math.min(100, st.hunger + 8);
+  } else if (action === 'sleep') {
+    st.energy = Math.min(100, st.energy + 40);
+    st.happiness = Math.max(0, st.happiness - 5);
+  }
+  if (st.hunger >= 100 || st.energy === 0) st.alive = false;
+  tamaGuiRender(wid);
 }
 
 function handleTamagotchiInput(win, src) {
@@ -4439,21 +5838,135 @@ function gardenRender(win) {
   printToWindow(win.id, '  └─────────┴─────────┴─────────┘', 'sys');
 }
 
+const GARDEN_STAGE_ICONS = ['🌱', '🌿', '🌾', '🌸', '🌳'];
+
 function bootGarden(win) {
   win.gardenState = {
     plots: Array.from({ length: 9 }, makeGardenPlot),
     harvests: [],
+    selected: null,
   };
-  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
-  printToWindow(win.id, '║         ORAPPTER GARDEN v1.0.0       ║', 'sys');
-  printToWindow(win.id, '║   Plant agent seeds. Watch them grow.║', 'sys');
-  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
-  printToWindow(win.id, '');
-  gardenRender(win);
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Commands: plant @card N | water N | view | harvest N', 'info');
-  printToWindow(win.id, '  N = plot number 1-9', 'info');
-  printToWindow(win.id, '');
+  // GUI is rendered in buildGardenBody — update stats
+  gardenGuiUpdateStats(win.id);
+}
+
+function gardenGuiSelect(wid, idx) {
+  const win = windows.get(wid);
+  if (!win) return;
+  win.gardenState.selected = idx;
+  for (let i = 0; i < 9; i++) {
+    const el = document.getElementById(`garden-plot-${wid}-${i}`);
+    if (el) el.classList.toggle('selected', i === idx);
+  }
+  const p = win.gardenState.plots[idx];
+  const inp = document.getElementById(`garden-inp-${wid}`);
+  if (inp && p.agent) inp.value = p.agent;
+  gardenGuiLog(wid, p.agent
+    ? `Plot ${idx+1}: ${p.name} — ${GARDEN_STAGE_NAMES[p.stage]} (watered: ${p.watered})`
+    : `Plot ${idx+1}: empty. Enter agent name and click PLANT.`);
+}
+
+function gardenGuiLog(wid, msg) {
+  const el = document.getElementById(`garden-log-${wid}`);
+  if (el) el.textContent = msg;
+}
+
+function gardenGuiUpdateStats(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const gs = win.gardenState;
+  const planted = gs.plots.filter(p => p.agent).length;
+  const growing = gs.plots.filter(p => p.agent && p.stage < 4).length;
+  const el = (id) => document.getElementById(id);
+  if (el(`garden-count-planted-${wid}`)) el(`garden-count-planted-${wid}`).textContent = planted;
+  if (el(`garden-count-growing-${wid}`)) el(`garden-count-growing-${wid}`).textContent = growing;
+  if (el(`garden-count-harvested-${wid}`)) el(`garden-count-harvested-${wid}`).textContent = gs.harvests.length;
+}
+
+function gardenGuiRenderPlot(wid, idx) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const p = win.gardenState.plots[idx];
+  const plotEl = document.getElementById(`garden-plot-${wid}-${idx}`);
+  const iconEl = document.getElementById(`garden-icon-${wid}-${idx}`);
+  const nameEl = document.getElementById(`garden-pname-${wid}-${idx}`);
+  const progEl = document.getElementById(`garden-prog-${wid}-${idx}`);
+  if (!plotEl) return;
+  if (p.agent) {
+    plotEl.classList.remove('empty');
+    if (iconEl) iconEl.textContent = GARDEN_STAGE_ICONS[p.stage] || '🌱';
+    if (nameEl) nameEl.textContent = p.name;
+    const growThresh = 2;
+    const pct = Math.min(100, ((p.watered % growThresh) / growThresh) * 100);
+    if (progEl) progEl.style.width = (p.stage >= 4 ? 100 : pct) + '%';
+  } else {
+    plotEl.classList.add('empty');
+    if (iconEl) iconEl.textContent = '🟫';
+    if (nameEl) nameEl.textContent = 'empty';
+    if (progEl) progEl.style.width = '0%';
+  }
+}
+
+function gardenGuiPlant(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const gs = win.gardenState;
+  const inp = document.getElementById(`garden-inp-${wid}`);
+  const cardName = inp ? inp.value.trim() : '';
+  const idx = gs.selected;
+  if (idx === null) { gardenGuiLog(wid, 'Select a plot first (click on it).'); return; }
+  if (!cardName) { gardenGuiLog(wid, 'Enter an agent name first.'); return; }
+  const plot = gs.plots[idx];
+  if (plot.agent) { gardenGuiLog(wid, `Plot ${idx+1} is occupied! Harvest first.`); return; }
+  const agent = REGISTRY.agents.find(a => a.name === cardName);
+  const cat = agent ? (agent.category || 'core') : 'core';
+  const name = agent ? (agent.display_name || agent.name) : cardName;
+  plot.agent = cardName;
+  plot.name = name.slice(0, 10);
+  plot.stage = 0; plot.watered = 0; plot.harvested = false; plot.cat = cat;
+  gardenGuiRenderPlot(wid, idx);
+  gardenGuiUpdateStats(wid);
+  gardenGuiLog(wid, `Planted ${plot.name} in plot ${idx+1}!`);
+}
+
+function gardenGuiWater(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const gs = win.gardenState;
+  const idx = gs.selected;
+  if (idx === null) { gardenGuiLog(wid, 'Select a plot first.'); return; }
+  const plot = gs.plots[idx];
+  if (!plot.agent) { gardenGuiLog(wid, `Plot ${idx+1} is empty.`); return; }
+  if (plot.stage >= 4) { gardenGuiLog(wid, `${plot.name} is fully grown! Time to harvest.`); return; }
+  plot.watered++;
+  const growThresh = 2;
+  if (plot.watered % growThresh === 0 && plot.stage < GARDEN_STAGES.length - 1) {
+    plot.stage++;
+    gardenGuiLog(wid, `Plot ${idx+1} grew! ${plot.name}: ${GARDEN_STAGE_NAMES[plot.stage - 1]} → ${GARDEN_STAGE_NAMES[plot.stage]}`);
+  } else {
+    gardenGuiLog(wid, `Watered plot ${idx+1}. (${growThresh - (plot.watered % growThresh)} more to grow)`);
+  }
+  gardenGuiRenderPlot(wid, idx);
+  gardenGuiUpdateStats(wid);
+}
+
+function gardenGuiHarvest(wid) {
+  const win = windows.get(wid);
+  if (!win) return;
+  const gs = win.gardenState;
+  const idx = gs.selected;
+  if (idx === null) { gardenGuiLog(wid, 'Select a plot first.'); return; }
+  const plot = gs.plots[idx];
+  if (!plot.agent) { gardenGuiLog(wid, `Plot ${idx+1} is empty.`); return; }
+  if (plot.stage < 4) { gardenGuiLog(wid, `${plot.name} isn't ready yet! (${GARDEN_STAGE_NAMES[plot.stage]})`); return; }
+  gs.harvests.push({ name: plot.name, cat: plot.cat });
+  gardenGuiLog(wid, `Harvested ${plot.name}! Total: ${gs.harvests.length}`);
+  plot.agent = null; plot.name = ''; plot.stage = 0; plot.watered = 0; plot.harvested = false;
+  gardenGuiRenderPlot(wid, idx);
+  gardenGuiUpdateStats(wid);
+  gs.selected = null;
+  const plotEl = document.getElementById(`garden-plot-${wid}-${idx}`);
+  if (plotEl) plotEl.classList.remove('selected');
 }
 
 function handleGardenInput(win, src) {
