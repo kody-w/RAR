@@ -502,6 +502,48 @@ def mulberry32(seed: int):
     return _rand
 
 
+# ─── SEED MNEMONIC (7 words = 64-bit seed, full fidelity, memorizable) ───
+# 1024 words → 10 bits per word → 7 words = 70 bits (covers 64-bit seed)
+# Say 7 words. The card appears. An incantation that summons an agent.
+# DRAFT: word list will be curated for incantation feel before first public mnemonic.
+# Once locked, the list is PERMANENT — changing it breaks all existing mnemonics.
+
+MNEMONIC_WORDS = """ACORN ADAPT AGATE AGILE AHEAD AISLE ALARM ALBUM ALDER ALERT ALIGN ALIVE ALLOY ALONE ALPHA AMBER AMPLE ANCHOR ANGEL ANGLE ANVIL APPLE APPLY APRON ARENA ARGUE ARISE ARMOR ARRAY ARROW ASCOT ASIDE ASSET ATLAS ATTIC AUDIT AVID AWAKE AXIOM AZURE BADGE BAKER BALM BAND BANNER BANJO BARGE BARK BARN BASIC BASIN BATCH BEACH BEACON BEAM BEAR BENCH BERRY BIRCH BLADE BLANK BLAST BLAZE BLEND BLESS BLISS BLOCK BLOOM BLUFF BLUNT BOARD BOLD BOLT BOND BONE BONUS BOOTH BORE BOUND BRACE BRAND BRASS BRAVE BREAD BREAK BREED BREEZE BRICK BRIDGE BRIEF BRING BROAD BRONZE BROOK BROOD BRUSH BUILD BULK BURN BURST CABIN CACHE CAIRN CALM CAMP CANAL CANDY CAPE CARBON CARGO CAROL CARVE CATCH CAUSE CEDAR CHAIN CHALK CHAMP CHAOS CHARM CHART CHASE CHECK CHEST CHIEF CHIME CHORD CLAIM CLAMP CLASP CLAY CLEAN CLEAR CLIFF CLIMB CLING CLIP CLOAK CLOCK CLONE CLOSE CLOTH CLOUD CLUMP COACH COAL COAST COBALT COIL COIN COLD COLOR COMET COMPASS CONE COPPER CORAL CORD CORE CORK CORN COUCH COVE CRAFT CRANE CRASH CRATER CRAWL CREEK CREST CREW CRISP CROSS CROWD CROWN CRUSH CRYSTAL CUBIC CUPID CURB CURVE CYCLE DAGGER DAILY DALE DANCE DARE DARK DART DASH DATA DAWN DEAL DECAY DECK DECOY DEEP DELAY DELTA DENSE DEPOT DEPTH DIAL DIARY DIGIT DINE DIRECT DISC DIVE DOCK DODGE DOME DONOR DOOR DOSE DOUBLE DOVE DRAFT DRAIN DRAPE DRAW DREAM DRESS DRIFT DRILL DRINK DRIVE DROP DRUM DUAL DUNE DUSK DUST DUTY DWELL EAGER EAGLE EARLY EARN EARTH EASE EAST ECHO EDGE EIGHT ELDER ELECT ELITE ELK ELM EMBED EMBER EMIT EMPTY ENEMY ENTER EQUAL EQUIP ERA ERROR EVENT EVERY EXACT EXILE EXIST EXTRA FABLE FACET FAINT FAIR FAITH FAME FANCY FANG FARM FAST FAULT FEAST FEAT FENCE FERN FERRY FETCH FEVER FIBER FIELD FIFTH FIFTY FINAL FIND FIRE FIRM FIRST FLAME FLANK FLARE FLASH FLAT FLAW FLEET FLESH FLINT FLIP FLOAT FLOCK FLORA FLOUR FLOW FLUID FLUSH FLUX FOAM FOG FOLD FOLK FONT FORCE FORD FORGE FORK FORM FORT FORUM FOSSIL FOUND FOX FRAME FRANK FRESH FRONT FROST FRUIT FUEL FULL FURY FUSE GAIT GALE GAME GARNET GASP GATE GAUGE GAZE GEAR GHOST GIANT GIFT GIVEN GLAD GLADE GLASS GLEAM GLEN GLIDE GLOBE GLOSS GLOW GLYPH GOLD GONE GORGE GOWN GRAB GRACE GRADE GRAIN GRAND GRANT GRAPH GRASP GRASS GREEN GREET GRID GRILL GRIM GRIP GRIT GROUP GROVE GROW GUARD GUESS GUEST GUIDE GUILD GUILT GULF GUST HABIT HALF HALT HAND HAPPY HARBOR HARDY HARE HARM HARP HARSH HASTE HATCH HAUL HAVEN HAWK HAZE HEART HEAT HEAVY HEDGE HEEL HELD HELM HELP HERB HERD HERO HERON HILL HINGE HINT HIVE HOLD HOLLOW HONEY HOOD HOOK HOPE HORN HOTEL HOUND HOVER HUGE HULL HUMAN HUMOR HUNT HURRY ICE ICICLE IDEAL IMAGE IMPLY INCH INDEX INNER INK INLET INPUT ION IRIS IRON ISLAND ISSUE IVY IVORY JADE JAR JASPER JAW JET JEWEL JOINT JOKER JUDGE JUICE JUMP JUNGLE KARMA KAYAK KEEN KELP KEY KICK KING KIOSK KNACK KNEEL KNIFE KNIT KNOB KNOT KNOWN LABEL LABOR LACE LAKE LAMP LANCE LAND LARGE LARK LASER LATCH LATER LAUGH LAVA LAYER LEAD LEAF LEARN LEAST LEDGE LEGAL LEMON LEND LENS LEVEL LEVER LIGHT LILY LIME LIMIT LINEN LINK LION LIVE LOCAL LOCK LODGE LOFT LOGIC LONE LONG LOOM LOOP LOTUS LOUD LOYAL LUCID LUCKY LUNAR LUNCH LURE LURK LYNX LYRIC MACE MAGIC MAJOR MAKER MALT MANGO MANOR MAPLE MARCH MARGIN MARK MARSH MASK MASON MAST MATCH MATRIX MAVEN MAYOR MEDAL MEDIA MEMO MENU MERCY MERGE MERIT MESA MESH METAL MICA MIGHT MILD MILL MIMIC MIND MINOR MINT MIST MIXER MOAT MODEL MOIST MONEY MONK MONTH MOON MOOR MORAL MOSS MOTH MOTOR MOUND MOUNT MOUSE MURAL MUSE MUSIC MYTH NAIVE NAVAL NERVE NEST NIGHT NIMBLE NODE NOBLE NOON NORTH NOTED NOVEL NURSE OAK OASIS OCEAN OLIVE ONYX OPAL ORBIT ORE OSPREY OTTER OUTER OVAL OWL OXIDE PALM PANEL PAPER PASS PATH PAUSE PEAK PEARL PEDAL PENNY PERCH PHASE PIANO PIER PILOT PINE PITCH PIVOT PLACE PLAIN PLANK PLANT PLATE PLEAD PLUME PLUSH POEM POINT POLAR POND POOL PORCH PORT POST POUND POWER PRESS PRIDE PRIME PRINT PRIOR PRIZE PROBE PROOF PROSE PROUD PROVE PROXY PRUNE PULSE PUMP PUPIL PURSE PUSH QUAIL QUALM QUARTZ QUEEN QUEST QUICK QUIET QUOTA RADAR RADIO RAFT RAIN RAISE RALLY RANCH RANGE RAPID RAVEN REACH READY REALM REBEL REEF REIGN RELAY REMIX RENEW REPLY RESET RIDER RIDGE RIGID RING RISE RIVAL RIVER ROAD ROAST ROBIN ROBOT ROCK ROMAN ROOF ROOT ROPE ROSE ROUGE ROUND ROUTE ROVER ROYAL RUBY RULER RURAL RUSH RUST SACRED SAGE SAIL SAINT SALON SALT SALSA SAND SATIN SAVOR SCALE SCAR SCENE SCOPE SCOUT SCRAP SEAL SEED SEIZE SENSE SERVE SEVEN SHADE SHAFT SHAPE SHARE SHARP SHAWL SHED SHELF SHELL SHIFT SHINE SHOCK SHORE SHORT SHOUT SHRUB SIGHT SIGMA SILK SIXTH SKILL SKULL SLASH SLATE SLEEP SLICE SLIDE SLOPE SMART SMITH SMOKE SNARE SOLAR SOLID SOLVE SONIC SOUTH SPACE SPARE SPAWN SPEAK SPEED SPELL SPEND SPIKE SPINE SPLIT SPOKE SPRAY SQUAD STACK STAFF STAGE STAG STAIR STALL STAMP STAND STARK STATE STEAM STEEL STEEP STEER STEM STEP STERN STICK STILL STOCK STOMP STONE STORM STOVE STRAP STRAW STRAY STRIP STUNT STYLE SUGAR SUITE SUPER SURGE SWAMP SWARM SWEEP SWEET SWIFT SWING SWIRL SWORD TABLE TASTE TEACH TEMPO THICK THINK THIRD THORN THRONE THUMB TIDAL TIGER TIGHT TIMBER TITAN TOAST TOKEN TONIC TOPIC TORCH TOTAL TOUCH TOUGH TOWEL TOWER TRACK TRADE TRAIL TRAIN TRAIT TREND TRIAL TRICK TRULY TRUNK TRUST TRUTH TUNER TWIST ULTRA UMBRA UNDER UNION UNITE UNTIL UPPER URBAN USAGE USUAL UTTER VALID VALUE VALVE VAPOR VAULT VERGE VIDEO VIGOR VINYL VIRAL VIOLA VIPER VISIT VISTA VIVID VOCAL VOICE VOTER WAFER WAGON WAIST WAKEN WALTZ WARDEN WATCH WATER WEAVE WEDGE WHEAT WHEEL WHERE WHILE WHITE WHOLE WHOSE WIDEN WORLD WORTH WOUND WREATH WRIST YACHT YEARN YIELD YOUTH ZEBRA ZINC ZONE ZOOM ABBEY ABORT ABOVE ABUSE ABYSS ACHED ACRID ACTED ACUTE ADDED ADMIT ADOBE ADOPT ADORN ADULT AFTER AGAIN AGENT AGING AGONY AGREE AIMED ALGAE ALIBI ALIEN ALLEY ALLOT ALLOW ALTER AMONG AMUSE ANGRY ANIME ANNEX ANTIC APING AQUA ARBOR ARDOR ASKED ASPEN ATOLL AVOID BEGAN BEGIN BEING BELOW BESET BILGE BISON BLOWN BLURT BOGGY BORED BORNE BOSSY BOXER BRAID BRAWN BRISK BUNCH BUYER BYLAW CABAL CADET CAMEO CARAT CARRY CASTE CHEER CHESS CHINA CHORE CINCH CIVIC CLEFT COMMA COUNT""".split()
+
+# 10 bits per word, 7 words = 70 bits (covers 64-bit seed)
+# The word list is the protocol. Once locked, it's PERMANENT.
+# Future: locale-specific word lists map same indices to different languages.
+_MNEM_BITS = 10
+_MNEM_COUNT = 1 << _MNEM_BITS
+assert len(MNEMONIC_WORDS) == _MNEM_COUNT, f"Need exactly {_MNEM_COUNT} words, have {len(MNEMONIC_WORDS)}"
+_WORD_TO_IDX = {w: i for i, w in enumerate(MNEMONIC_WORDS)}
+
+
+def seed_to_words(seed: int) -> str:
+    """Encode a 64-bit seed as 7 memorable words. Full fidelity. Offline forever.
+    This is the hero use case: memorize 7 words, reconstruct the exact card anywhere."""
+    words = []
+    remaining = seed
+    for _ in range(7):
+        idx = remaining & (_MNEM_COUNT - 1)
+        words.append(MNEMONIC_WORDS[idx])
+        remaining >>= _MNEM_BITS
+    return " ".join(words)
+
+
+def words_to_seed(mnemonic: str) -> int:
+    """Decode 7 words back to a 64-bit seed. Lossless round-trip."""
+    words = [w.strip().upper() for w in mnemonic.replace("-", " ").split()]
+    if len(words) != 7:
+        raise ValueError(f"Mnemonic must be 7 words, got {len(words)}")
+    seed = 0
+    for i, word in enumerate(words):
+        if word not in _WORD_TO_IDX:
+            raise ValueError(f"Unknown word: {word}")
+        seed |= _WORD_TO_IDX[word] << (_MNEM_BITS * i)
+    return seed
+
+
 # ─── AGENT TYPES (the color identity — like Pokemon types or MTG colors) ───
 # Every agent has a primary type derived from its category.
 # Tags can add a secondary type. Dual-type agents are rarer and more valuable.
@@ -1505,8 +1547,12 @@ def main():
     p_card_value.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full card from just a name — micro-bandwidth self-assembly")
-    p_card_resolve.add_argument("name", help="Agent name (@pub/slug) or numeric seed")
+    p_card_resolve.add_argument("name", nargs="+", help="Agent name, numeric seed, or 7-word mnemonic")
     p_card_resolve.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_card_words = card_sub.add_parser("words", help="Get the 7-word mnemonic for an agent's seed")
+    p_card_words.add_argument("name", help="Agent name (@pub/slug) or path to .py file")
+    p_card_words.add_argument("--json", action="store_true", help="Output JSON")
 
     # binder
     p_binder = sub.add_parser("binder", help="Binder operations")
@@ -1730,13 +1776,47 @@ def main():
                 print(f"  Rarity:  {result['rarity_label']}  ({result['rarity']})")
                 print(f"  Floor:   {result['floor_pts']} pts  /  {result['floor_btc']} BTC")
 
-        elif args.card_command == "resolve":
-            # Detect numeric seed vs agent name
+        elif args.card_command == "words":
             try:
-                seed_val = int(args.name)
+                if args.name.endswith(".py"):
+                    card = mint_card(args.name)
+                else:
+                    card = resolve_card(args.name)
+                seed = card.get("seed", 0)
+                mnemonic = seed_to_words(seed)
+                if use_json:
+                    print(json.dumps({"name": card.get("name", args.name), "seed": seed, "words": mnemonic}))
+                else:
+                    print(f"\n  {card.get('display_name', card.get('name', '?'))}")
+                    print(f"  Seed: {seed}")
+                    print(f"\n  {mnemonic}")
+                    print(f"\n  Memorize these 7 words. They ARE the card.")
+                    print(f"  Resolve anywhere: python rapp_sdk.py card resolve {mnemonic}")
+                    print()
+            except Exception as e:
+                if use_json:
+                    print(json.dumps({"error": str(e)}))
+                else:
+                    print(f"  Error: {e}")
+                sys.exit(1)
+
+        elif args.card_command == "resolve":
+            # Detect: 7 words, numeric seed, or agent name
+            input_str = " ".join(args.name)
+            parts = input_str.strip().split()
+
+            if len(parts) >= 7 and parts[0].upper() in _WORD_TO_IDX:
+                # Mnemonic words
+                seed_val = words_to_seed(" ".join(parts[:7]))
                 result = resolve_card_from_seed(seed_val)
-            except ValueError:
-                result = resolve_card(args.name)
+            elif len(parts) == 1:
+                try:
+                    seed_val = int(parts[0])
+                    result = resolve_card_from_seed(seed_val)
+                except ValueError:
+                    result = resolve_card(parts[0])
+            else:
+                result = resolve_card(input_str)
             if use_json:
                 print(json.dumps(result, indent=2))
             else:

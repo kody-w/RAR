@@ -232,10 +232,14 @@ header h1 span{color:var(--acc)}
 <div class="tab" id="tab-resolve">
   <div class="seed-box">
     <div>
-      <input type="text" id="seedInput" placeholder="Enter seed number">
+      <input type="text" id="seedInput" placeholder="Seed number or 7-word incantation" style="width:100%;max-width:400px">
       <button onclick="resolveSeed()">Resolve</button>
     </div>
-    <p>Paste any seed number to see its card. No network needed.</p>
+    <div style="margin-top:10px">
+      <button id="voiceBtn" onclick="startVoice()" style="background:var(--s2);color:var(--acc);border:1px solid var(--acc);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;min-height:48px">Speak Incantation</button>
+    </div>
+    <p style="margin-top:8px">Enter a seed number, type 7 words, or speak your incantation aloud.</p>
+    <p id="voiceStatus" style="color:var(--acc);font-size:13px;margin-top:4px;display:none"></p>
   </div>
   <div class="grid" id="seedGrid"></div>
 </div>
@@ -492,15 +496,124 @@ function renderBrowse(){
 // SEED RESOLVER
 // ═══════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════
+// MNEMONIC WORD LIST (same as rapp_sdk.py — the protocol)
+// ═══════════════════════════════════════════════════════
+const MNEM_WORDS="ACORN ADAPT AGATE AGILE AHEAD AISLE ALARM ALBUM ALDER ALERT ALIGN ALIVE ALLOY ALONE ALPHA AMBER AMPLE ANCHOR ANGEL ANGLE ANVIL APPLE APPLY APRON ARENA ARGUE ARISE ARMOR ARRAY ARROW ASCOT ASIDE ASSET ATLAS ATTIC AUDIT AVID AWAKE AXIOM AZURE BADGE BAKER BALM BAND BANNER BANJO BARGE BARK BARN BASIC BASIN BATCH BEACH BEACON BEAM BEAR BENCH BERRY BIRCH BLADE BLANK BLAST BLAZE BLEND BLESS BLISS BLOCK BLOOM BLUFF BLUNT BOARD BOLD BOLT BOND BONE BONUS BOOTH BORE BOUND BRACE BRAND BRASS BRAVE BREAD BREAK BREED BREEZE BRICK BRIDGE BRIEF BRING BROAD BRONZE BROOK BROOD BRUSH BUILD BULK BURN BURST CABIN CACHE CAIRN CALM CAMP CANAL CANDY CAPE CARBON CARGO CAROL CARVE CATCH CAUSE CEDAR CHAIN CHALK CHAMP CHAOS CHARM CHART CHASE CHECK CHEST CHIEF CHIME CHORD CLAIM CLAMP CLASP CLAY CLEAN CLEAR CLIFF CLIMB CLING CLIP CLOAK CLOCK CLONE CLOSE CLOTH CLOUD CLUMP COACH COAL COAST COBALT COIL COIN COLD COLOR COMET COMPASS CONE COPPER CORAL CORD CORE CORK CORN COUCH COVE CRAFT CRANE CRASH CRATER CRAWL CREEK CREST CREW CRISP CROSS CROWD CROWN CRUSH CRYSTAL CUBIC CUPID CURB CURVE CYCLE DAGGER DAILY DALE DANCE DARE DARK DART DASH DATA DAWN DEAL DECAY DECK DECOY DEEP DELAY DELTA DENSE DEPOT DEPTH DIAL DIARY DIGIT DINE DIRECT DISC DIVE DOCK DODGE DOME DONOR DOOR DOSE DOUBLE DOVE DRAFT DRAIN DRAPE DRAW DREAM DRESS DRIFT DRILL DRINK DRIVE DROP DRUM DUAL DUNE DUSK DUST DUTY DWELL EAGER EAGLE EARLY EARN EARTH EASE EAST ECHO EDGE EIGHT ELDER ELECT ELITE ELK ELM EMBED EMBER EMIT EMPTY ENEMY ENTER EQUAL EQUIP ERA ERROR EVENT EVERY EXACT EXILE EXIST EXTRA FABLE FACET FAINT FAIR FAITH FAME FANCY FANG FARM FAST FAULT FEAST FEAT FENCE FERN FERRY FETCH FEVER FIBER FIELD FIFTH FIFTY FINAL FIND FIRE FIRM FIRST FLAME FLANK FLARE FLASH FLAT FLAW FLEET FLESH FLINT FLIP FLOAT FLOCK FLORA FLOUR FLOW FLUID FLUSH FLUX FOAM FOG FOLD FOLK FONT FORCE FORD FORGE FORK FORM FORT FORUM FOSSIL FOUND FOX FRAME FRANK FRESH FRONT FROST FRUIT FUEL FULL FURY FUSE GAIT GALE GAME GARNET GASP GATE GAUGE GAZE GEAR GHOST GIANT GIFT GIVEN GLAD GLADE GLASS GLEAM GLEN GLIDE GLOBE GLOSS GLOW GLYPH GOLD GONE GORGE GOWN GRAB GRACE GRADE GRAIN GRAND GRANT GRAPH GRASP GRASS GREEN GREET GRID GRILL GRIM GRIP GRIT GROUP GROVE GROW GUARD GUESS GUEST GUIDE GUILD GUILT GULF GUST HABIT HALF HALT HAND HAPPY HARBOR HARDY HARE HARM HARP HARSH HASTE HATCH HAUL HAVEN HAWK HAZE HEART HEAT HEAVY HEDGE HEEL HELD HELM HELP HERB HERD HERO HERON HILL HINGE HINT HIVE HOLD HOLLOW HONEY HOOD HOOK HOPE HORN HOTEL HOUND HOVER HUGE HULL HUMAN HUMOR HUNT HURRY ICE ICICLE IDEAL IMAGE IMPLY INCH INDEX INNER INK INLET INPUT ION IRIS IRON ISLAND ISSUE IVY IVORY JADE JAR JASPER JAW JET JEWEL JOINT JOKER JUDGE JUICE JUMP JUNGLE KARMA KAYAK KEEN KELP KEY KICK KING KIOSK KNACK KNEEL KNIFE KNIT KNOB KNOT KNOWN LABEL LABOR LACE LAKE LAMP LANCE LAND LARGE LARK LASER LATCH LATER LAUGH LAVA LAYER LEAD LEAF LEARN LEAST LEDGE LEGAL LEMON LEND LENS LEVEL LEVER LIGHT LILY LIME LIMIT LINEN LINK LION LIVE LOCAL LOCK LODGE LOFT LOGIC LONE LONG LOOM LOOP LOTUS LOUD LOYAL LUCID LUCKY LUNAR LUNCH LURE LURK LYNX LYRIC MACE MAGIC MAJOR MAKER MALT MANGO MANOR MAPLE MARCH MARGIN MARK MARSH MASK MASON MAST MATCH MATRIX MAVEN MAYOR MEDAL MEDIA MEMO MENU MERCY MERGE MERIT MESA MESH METAL MICA MIGHT MILD MILL MIMIC MIND MINOR MINT MIST MIXER MOAT MODEL MOIST MONEY MONK MONTH MOON MOOR MORAL MOSS MOTH MOTOR MOUND MOUNT MOUSE MURAL MUSE MUSIC MYTH NAIVE NAVAL NERVE NEST NIGHT NIMBLE NODE NOBLE NOON NORTH NOTED NOVEL NURSE OAK OASIS OCEAN OLIVE ONYX OPAL ORBIT ORE OSPREY OTTER OUTER OVAL OWL OXIDE PALM PANEL PAPER PASS PATH PAUSE PEAK PEARL PEDAL PENNY PERCH PHASE PIANO PIER PILOT PINE PITCH PIVOT PLACE PLAIN PLANK PLANT PLATE PLEAD PLUME PLUSH POEM POINT POLAR POND POOL PORCH PORT POST POUND POWER PRESS PRIDE PRIME PRINT PRIOR PRIZE PROBE PROOF PROSE PROUD PROVE PROXY PRUNE PULSE PUMP PUPIL PURSE PUSH QUAIL QUALM QUARTZ QUEEN QUEST QUICK QUIET QUOTA RADAR RADIO RAFT RAIN RAISE RALLY RANCH RANGE RAPID RAVEN REACH READY REALM REBEL REEF REIGN RELAY REMIX RENEW REPLY RESET RIDER RIDGE RIGID RING RISE RIVAL RIVER ROAD ROAST ROBIN ROBOT ROCK ROMAN ROOF ROOT ROPE ROSE ROUGE ROUND ROUTE ROVER ROYAL RUBY RULER RURAL RUSH RUST SACRED SAGE SAIL SAINT SALON SALT SALSA SAND SATIN SAVOR SCALE SCAR SCENE SCOPE SCOUT SCRAP SEAL SEED SEIZE SENSE SERVE SEVEN SHADE SHAFT SHAPE SHARE SHARP SHAWL SHED SHELF SHELL SHIFT SHINE SHOCK SHORE SHORT SHOUT SHRUB SIGHT SIGMA SILK SIXTH SKILL SKULL SLASH SLATE SLEEP SLICE SLIDE SLOPE SMART SMITH SMOKE SNARE SOLAR SOLID SOLVE SONIC SOUTH SPACE SPARE SPAWN SPEAK SPEED SPELL SPEND SPIKE SPINE SPLIT SPOKE SPRAY SQUAD STACK STAFF STAGE STAG STAIR STALL STAMP STAND STARK STATE STEAM STEEL STEEP STEER STEM STEP STERN STICK STILL STOCK STOMP STONE STORM STOVE STRAP STRAW STRAY STRIP STUNT STYLE SUGAR SUITE SUPER SURGE SWAMP SWARM SWEEP SWEET SWIFT SWING SWIRL SWORD TABLE TASTE TEACH TEMPO THICK THINK THIRD THORN THRONE THUMB TIDAL TIGER TIGHT TIMBER TITAN TOAST TOKEN TONIC TOPIC TORCH TOTAL TOUCH TOUGH TOWEL TOWER TRACK TRADE TRAIL TRAIN TRAIT TREND TRIAL TRICK TRULY TRUNK TRUST TRUTH TUNER TWIST ULTRA UMBRA UNDER UNION UNITE UNTIL UPPER URBAN USAGE USUAL UTTER VALID VALUE VALVE VAPOR VAULT VERGE VIDEO VIGOR VINYL VIRAL VIOLA VIPER VISIT VISTA VIVID VOCAL VOICE VOTER WAFER WAGON WAIST WAKEN WALTZ WARDEN WATCH WATER WEAVE WEDGE WHEAT WHEEL WHERE WHILE WHITE WHOLE WHOSE WIDEN WORLD WORTH WOUND WREATH WRIST YACHT YEARN YIELD YOUTH ZEBRA ZINC ZONE ZOOM ABBEY ABORT ABOVE ABUSE ABYSS ACHED ACRID ACTED ACUTE ADDED ADMIT ADOBE ADOPT ADORN ADULT AFTER AGAIN AGENT AGING AGONY AGREE AIMED ALGAE ALIBI ALIEN ALLEY ALLOT ALLOW ALTER AMONG AMUSE ANGRY ANIME ANNEX ANTIC APING AQUA ARBOR ARDOR ASKED ASPEN ATOLL AVOID BEGAN BEGIN BEING BELOW BESET BILGE BISON BLOWN BLURT BOGGY BORED BORNE BOSSY BOXER BRAID BRAWN BRISK BUNCH BUYER BYLAW CABAL CADET CAMEO CARAT CARRY CASTE CHEER CHESS CHINA CHORE CINCH CIVIC CLEFT COMMA COUNT".split(' ')
+const MNEM_IDX=Object.fromEntries(MNEM_WORDS.map((w,i)=>[w,i]))
+
+function wordsToSeed(words){
+  let seed=BigInt(0)
+  for(let i=0;i<7&&i<words.length;i++){
+    const idx=MNEM_IDX[words[i].toUpperCase()]
+    if(idx===undefined)return null
+    seed|=BigInt(idx)<<BigInt(i*10)
+  }
+  return Number(seed)
+}
+
+function seedToWords(seed){
+  const words=[]
+  let remaining=BigInt(seed)
+  for(let i=0;i<7;i++){
+    words.push(MNEM_WORDS[Number(remaining&BigInt(1023))])
+    remaining>>=BigInt(10)
+  }
+  return words
+}
+
 function resolveSeed(){
   const input=document.getElementById('seedInput').value.trim()
+
+  // Try as 7-word mnemonic
+  const words=input.toUpperCase().split(/[\s,\-]+/).filter(w=>w)
+  if(words.length>=7&&MNEM_IDX[words[0]]!==undefined){
+    const seed=wordsToSeed(words)
+    if(seed!==null){
+      const card=resolveFromSeed(seed)
+      card._binder_key=`seed:${seed}`
+      card._incantation=words.slice(0,7).join(' ')
+      document.getElementById('seedGrid').innerHTML=renderCard(card)
+      showDetail(card)
+      return
+    }
+  }
+
+  // Try as number
   const seed=parseInt(input)
-  if(isNaN(seed)){alert('Enter a number');return}
+  if(isNaN(seed)){alert('Enter a seed number or 7-word incantation');return}
   const card=resolveFromSeed(seed)
   card._binder_key=`seed:${seed}`
+  card._incantation=seedToWords(seed).join(' ')
   document.getElementById('seedGrid').innerHTML=renderCard(card)
-  window._lastSeedCard=card
   showDetail(card)
+}
+
+// ═══════════════════════════════════════════════════════
+// VOICE INCANTATION (Web Speech API)
+// ═══════════════════════════════════════════════════════
+
+let _voiceWords=[]
+function startVoice(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition
+  if(!SR){alert('Speech recognition not supported in this browser');return}
+
+  const recognition=new SR()
+  recognition.continuous=false
+  recognition.interimResults=true
+  recognition.lang='en-US'
+  _voiceWords=[]
+
+  const status=document.getElementById('voiceStatus')
+  const btn=document.getElementById('voiceBtn')
+  status.style.display='block'
+  status.textContent='Listening... speak your 7 words'
+  btn.textContent='Listening...'
+  btn.style.background='var(--acc)'
+  btn.style.color='#fff'
+
+  recognition.onresult=function(e){
+    let transcript=''
+    for(let i=0;i<e.results.length;i++){
+      transcript+=e.results[i][0].transcript
+    }
+    const words=transcript.toUpperCase().split(/[\s,]+/).filter(w=>w)
+    // Match against known mnemonic words
+    const matched=words.filter(w=>MNEM_IDX[w]!==undefined)
+    status.textContent=`Heard: ${matched.join(' ')}${matched.length<7?' ('+matched.length+'/7)':' — resolving!'}`
+    document.getElementById('seedInput').value=matched.join(' ')
+
+    if(matched.length>=7){
+      recognition.stop()
+      const seed=wordsToSeed(matched)
+      if(seed!==null){
+        const card=resolveFromSeed(seed)
+        card._binder_key=`seed:${seed}`
+        card._incantation=matched.slice(0,7).join(' ')
+        document.getElementById('seedGrid').innerHTML=renderCard(card)
+        status.textContent=`Incantation complete: ${matched.slice(0,7).join(' ')}`
+        btn.textContent='Speak Incantation'
+        btn.style.background='var(--s2)'
+        btn.style.color='var(--acc)'
+        showDetail(card)
+      }
+    }
+  }
+
+  recognition.onerror=function(e){
+    status.textContent=`Error: ${e.error}`
+    btn.textContent='Speak Incantation'
+    btn.style.background='var(--s2)'
+    btn.style.color='var(--acc)'
+  }
+
+  recognition.onend=function(){
+    btn.textContent='Speak Incantation'
+    btn.style.background='var(--s2)'
+    btn.style.color='var(--acc)'
+  }
+
+  recognition.start()
 }
 
 // ═══════════════════════════════════════════════════════
