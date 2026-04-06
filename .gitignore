@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 .venv/
+.pytest_cache/
 
 # IDE
 .vscode/
@@ -21,3 +22,4 @@ agents/@billwhalen/customer-*/
 
 # CEO private workspace
 .wildhaven/
+rappter-fleet/

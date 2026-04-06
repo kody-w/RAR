@@ -1790,6 +1790,11 @@ function bootApp(win, app) {
     case 'canvas': bootCanvas(win); break;
     case 'tamagotchi': bootTamagotchi(win); break;
     case 'garden': bootGarden(win); break;
+    case 'arena':       bootArena(win); break;
+    case 'dungeon':     bootDungeon(win); break;
+    case 'school':      bootSchool(win); break;
+    case 'timecapsule': bootTimeCapsule(win); break;
+    case 'romloader':   bootRomLoader(win); break;
     default: bootStub(win, app); break;
   }
 
@@ -1833,7 +1838,12 @@ function handleInput(win, src) {
     case 'radio': handleRadioInput(win, src); break;
     case 'canvas': handleCanvasInput(win, src); break;
     case 'tamagotchi': handleTamagotchiInput(win, src); break;
-    case 'garden': handleGardenInput(win, src); break;
+    case 'garden':      handleGardenInput(win, src); break;
+    case 'arena':       handleArenaInput(win, src); break;
+    case 'dungeon':     handleDungeonInput(win, src); break;
+    case 'school':      handleSchoolInput(win, src); break;
+    case 'timecapsule': handleTimeCapsuleInput(win, src); break;
+    case 'romloader':   handleRomLoaderInput(win, src); break;
     default: handleLispInput(win, src); break;
   }
 }
