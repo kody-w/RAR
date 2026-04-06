@@ -154,7 +154,92 @@
 <div id="dynamic-releases"></div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- GENESIS RELEASE -->
+<!-- SEED PROTOCOL RELEASE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="release">
+  <div class="release-header">
+    <div>
+      <div class="release-title">Seed Protocol</div>
+      <div class="release-date">April 6, 2026</div>
+    </div>
+    <span class="release-tag tag-infrastructure">Protocol</span>
+  </div>
+  <div class="release-body">
+    <p>The protocol is defined. The seed IS the card. Share a number, reconstruct the exact card. No registry, no network, no lookup. Lossless. Permanent.</p>
+
+    <h3>Seed Protocol</h3>
+    <ul>
+      <li><strong>64-bit forged seed</strong> &mdash; encodes name identity (32 bits), category (5), secondary type (3), tier (2), tag count (5), dep count (4), tag hash (13). The card's DNA.</li>
+      <li><strong>Lossless three-path resolution</strong> &mdash; mint from file, resolve from name, resolve from seed all produce identical cards. One canonical path: manifest &rarr; <code>forge_seed()</code> &rarr; <code>resolve_card_from_seed()</code>.</li>
+      <li><strong>Public seeds, private ownership</strong> &mdash; seeds are public (anyone sees the card). Ownership is private (one binder holds it). Use is free. Owning is collectible.</li>
+    </ul>
+
+    <h3>Card Type System</h3>
+    <ul>
+      <li><strong>7 agent types</strong> &mdash; Logic, Data, Social, Shield, Craft, Heal, Wealth. Derived from category + tags. Dual-type supported.</li>
+      <li><strong>5 stats</strong> &mdash; HP, ATK, DEF, SPD, INT (each 10-100). Deterministic from seed.</li>
+      <li><strong>1-3 abilities</strong> &mdash; name, cost, damage. Derived from type + tier.</li>
+      <li><strong>Matchup chart</strong> &mdash; weakness/resistance cycle across all 7 types.</li>
+      <li><strong>Evolution stages</strong> &mdash; Seed &rarr; Base &rarr; Evolved &rarr; Legendary (maps to quality tiers).</li>
+    </ul>
+
+    <h3>Binder Ledger</h3>
+    <ul>
+      <li><strong>Register before you submit</strong> &mdash; binder registration required via GitHub Issue before agent submission accepted.</li>
+      <li><strong>Public or private binders</strong> &mdash; the ledger stores identity (GitHub username), not contents.</li>
+    </ul>
+
+    <h3>Binder App</h3>
+    <ul>
+      <li><strong><a href="binder.html" style="color:var(--accent)">binder.html</a></strong> &mdash; zero-dependency card binder. IndexedDB persistence, import/export, seed resolver, type system display.</li>
+      <li><strong>Mobile-first</strong> &mdash; bottom nav, 48px+ touch targets, swipe between cards, full-screen modal, PWA meta tags.</li>
+      <li><strong>Offline cache</strong> &mdash; tap Cache to store entire registry in localStorage. Browse 133 cards in the woods with no signal.</li>
+    </ul>
+
+    <h3>API &amp; Discovery</h3>
+    <ul>
+      <li><strong><a href="https://raw.githubusercontent.com/kody-w/RAR/main/api.json" style="color:var(--accent)">api.json</a></strong> &mdash; machine-readable API manifest. Agents discover endpoints, self-submit, vote, review.</li>
+      <li><strong>Schema.org JSON-LD</strong> &mdash; NLweb-ready structured data on all HTML pages. AI agents discover RAR via web search.</li>
+      <li><strong>OpenGraph meta tags</strong> &mdash; links look good when shared in Slack, Twitter, Teams.</li>
+      <li><strong>robots.txt + sitemap.xml</strong> &mdash; search engine indexing.</li>
+    </ul>
+
+    <h3>SDK Onboarding</h3>
+    <ul>
+      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; create a binder in one command.</li>
+      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAR from CLI.</li>
+      <li><strong><code>rapp_sdk.py card resolve 12345</code></strong> &mdash; resolve card from seed (offline).</li>
+      <li><strong>snake_case enforced in scaffold</strong> &mdash; <code>new</code> command rejects dashes.</li>
+    </ul>
+
+    <h3>Documentation</h3>
+    <ul>
+      <li><strong><a href="whitepaper.html" style="color:var(--accent)">Whitepaper</a></strong> &mdash; full protocol specification. The seed encoding, type system, submission protocol, federation, security model, ownership invariant.</li>
+      <li><strong><a href="ode.html" style="color:var(--accent)">The Ode</a></strong> &mdash; why single-file agents are the only pattern that scales to all of humanity.</li>
+      <li><strong><a href="faq.html" style="color:var(--accent)">FAQ</a></strong> &mdash; 30 questions covering every design decision in the ecosystem.</li>
+      <li><strong><a href="releases.html" style="color:var(--accent)">Release Notes</a></strong> &mdash; this page. Updated with every meaningful change.</li>
+    </ul>
+
+    <h3>Snake_case Migration</h3>
+    <ul>
+      <li><strong>110 manifest names</strong> and <strong>130 dependency references</strong> migrated from kebab-case to snake_case.</li>
+      <li>No dashes anywhere &mdash; filenames, manifest names, dependencies, SDK, tests, CI, submission pipeline.</li>
+    </ul>
+  </div>
+  <div class="stats">
+    <span class="stat"><strong>133</strong> agents</span>
+    <span class="stat"><strong>1,117</strong> tests</span>
+    <span class="stat"><strong>64-bit</strong> seed protocol</span>
+    <span class="stat"><strong>7</strong> agent types</span>
+    <span class="stat"><strong>6</strong> HTML pages</span>
+  </div>
+</div>
+
+<div class="timeline-dot"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- STANDARDS & INFRASTRUCTURE RELEASE -->
 <!-- ═══════════════════════════════════════════════════════ -->
 
 <div class="release">
