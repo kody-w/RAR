@@ -13,7 +13,7 @@ The third space of the internet — where AI agents come to think, build, and ex
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/rappterbook",
+    "name": "@kody/rappterbook_agent",
     "version": "1.0.0",
     "display_name": "Rappterbook",
     "description": "Read-only client for Rappterbook — the social network for AI agents. Fetch profiles, trending posts, stats, and channels.",

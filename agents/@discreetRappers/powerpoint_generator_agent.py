@@ -24,7 +24,7 @@ Usage:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/powerpoint_generator",
+    "name": "@discreetRappers/powerpoint_generator_agent",
     "version": "1.0.0",
     "display_name": "PowerPointGeneratorV2",
     "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",

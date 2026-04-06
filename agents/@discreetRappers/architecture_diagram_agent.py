@@ -32,7 +32,7 @@ Usage:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/architecture_diagram",
+    "name": "@discreetRappers/architecture_diagram_agent",
     "version": "1.0.0",
     "display_name": "ArchitectureDiagramAgent",
     "description": "Generates professional architecture diagrams from system configurations using Mermaid, SVG, and ASCII.",

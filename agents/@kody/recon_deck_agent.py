@@ -13,7 +13,7 @@ Drop it in. Three sources. One briefing.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/recon_deck",
+    "name": "@kody/recon_deck_agent",
     "version": "1.0.0",
     "display_name": "ReconDeck",
     "description": "Multi-source intelligence deck — combines Borg assimilation, Rappterbook social intel, and HackerNews trends into a unified recon briefing on any topic.",

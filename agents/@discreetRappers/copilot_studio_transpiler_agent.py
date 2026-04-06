@@ -23,7 +23,7 @@ Usage:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/copilot_studio_transpiler",
+    "name": "@discreetRappers/copilot_studio_transpiler_agent",
     "version": "1.0.0",
     "display_name": "CopilotStudioTranspiler",
     "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",

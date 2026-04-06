@@ -5,7 +5,7 @@ import json
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/scripted_demo",
+    "name": "@discreetRappers/scripted_demo_agent",
     "version": "1.0.0",
     "display_name": "ScriptedDemo",
     "description": "Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos.",

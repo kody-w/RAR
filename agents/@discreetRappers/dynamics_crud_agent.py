@@ -10,7 +10,7 @@ with built-in disambiguation when multiple records match a query.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/dynamics_crud",
+    "name": "@discreetRappers/dynamics_crud_agent",
     "version": "1.0.0",
     "display_name": "DynamicsCRUD",
     "description": "Dynamics 365 CRUD operations — accounts, contacts, opportunities, leads, tasks, activities.",

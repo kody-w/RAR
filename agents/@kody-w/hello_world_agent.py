@@ -2,7 +2,7 @@
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody-w/hello_world",
+    "name": "@kody-w/hello_world_agent",
     "version": "1.0.0",
     "display_name": "Hello World",
     "description": "A friendly greeting agent that says hello.",

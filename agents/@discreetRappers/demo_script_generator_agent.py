@@ -5,7 +5,7 @@ import json
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/demo_script_generator",
+    "name": "@discreetRappers/demo_script_generator_agent",
     "version": "1.0.0",
     "display_name": "DemoScriptGenerator",
     "description": "Generates v2.0.0 demo script JSON files for ScriptedDemoAgent. Creates 60-second demos with personas.",

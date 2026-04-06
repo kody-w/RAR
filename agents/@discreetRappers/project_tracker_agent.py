@@ -15,7 +15,7 @@ It supports both the 14-step RAPP Pipeline workflow and comprehensive AIdeate pr
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/project_tracker",
+    "name": "@discreetRappers/project_tracker_agent",
     "version": "1.0.0",
     "display_name": "ProjectTracker",
     "description": "RAPP project management — create, update, list, retrieve, import, and export project tracking data.",

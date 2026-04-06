@@ -29,7 +29,7 @@ Use this agent for ANY RAPP Pipeline task - it handles all 14 steps.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/rapp_pipeline",
+    "name": "@discreetRappers/rapp_pipeline_agent",
     "version": "1.0.0",
     "display_name": "RAPP",
     "description": "Full RAPP pipeline — transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",

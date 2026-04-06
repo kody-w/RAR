@@ -5,7 +5,7 @@ from agents.basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/github_agent_library",
+    "name": "@kody/github_agent_library_agent",
     "version": "1.0.0",
     "display_name": "GitHubAgentLibrary",
     "description": "Browse, search, and install agents from the RAPP Agent Repo via chat. The autonomous package manager.",

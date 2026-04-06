@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@aibast-agents-library/account_intelligence_orchestrator",
+    "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
     "version": "1.0.0",
     "display_name": "Account Intelligence Orchestrator",
     "description": "Coordinates multi-agent pipelines for 360-degree account intelligence briefings.",

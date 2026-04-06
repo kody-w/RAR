@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/manage_memory",
+    "name": "@kody/manage_memory_agent",
     "version": "1.0.0",
     "display_name": "ManageMemory",
     "description": "Stores facts, preferences, insights, and tasks to persistent memory.",

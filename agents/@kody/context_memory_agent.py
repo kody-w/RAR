@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/context_memory",
+    "name": "@kody/context_memory_agent",
     "version": "1.0.0",
     "display_name": "ContextMemory",
     "description": "Recalls conversation history and stored memories from past interactions.",

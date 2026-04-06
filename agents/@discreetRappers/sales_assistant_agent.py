@@ -15,7 +15,7 @@ The "waiter" in the waiter-cook model.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/sales_assistant",
+    "name": "@discreetRappers/sales_assistant_agent",
     "version": "1.0.0",
     "display_name": "SalesAssistant",
     "description": "Natural language CRM assistant — handles requests about accounts, opportunities, contacts, and pipeline.",

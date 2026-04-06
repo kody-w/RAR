@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-06T18:56:17.734387+00:00",
+  "generated_at": "2026-04-06T20:38:26.085552+00:00",
   "stats": {
     "total_agents": 133,
     "publishers": 7,
@@ -67,7 +67,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@aibast-agents-library/account_intelligence_orchestrator",
+      "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
       "version": "1.0.0",
       "display_name": "Account Intelligence Orchestrator",
       "description": "Coordinates multi-agent pipelines for 360-degree account intelligence briefings.",
@@ -85,12 +85,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator.py",
-      "_sha256": "5c2974f753dfe7731950041b3d9cfc934e6fad7e9e8936c987b2cf80b4437312",
-      "_seed": 1363523106270491676,
+      "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator_agent.py",
+      "_sha256": "1c6940ec3d7f40b4ecd78010bf179cd82cfdd941ebfec06721ae412f0348cf45",
+      "_seed": 10723751930960163868,
       "_size_kb": 20.8,
       "_lines": 457,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1475,7 +1475,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@aibast-agents-library/bulk_crm_data_generator",
+      "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
       "version": "1.0.0",
       "display_name": "Bulk CRM Data Generator",
       "description": "Generates synthetic CRM contacts, accounts, and opportunities for testing, demos, and data migration.",
@@ -1494,12 +1494,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator.py",
-      "_sha256": "ac61cd2b06d3cc9c25a23138d1422239f2fd9ac5526fea37954e9fdd06b406f2",
-      "_seed": 14392126025914655757,
+      "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
+      "_sha256": "9774eb4288d6c6e6c6155427e51378e62d9d34b31d624750b46d33eb93feac92",
+      "_seed": 5020671239044998157,
       "_size_kb": 15.9,
       "_lines": 264,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3014,7 +3014,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@borg/prompt_to_video",
+      "name": "@borg/prompt_to_video_agent",
       "version": "1.0.0",
       "display_name": "PromptToVideo",
       "description": "Renders videos from structured scene descriptions using Remotion \u2014 title, content, quote, and list scenes with style presets.",
@@ -3034,16 +3034,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@borg/prompt_to_video.py",
-      "_sha256": "196a6ed469c0b3ce34b3dba6bbe791de51503c11303cbc98eeae17c3b2fb91d2",
-      "_seed": 9349817682889685950,
+      "_file": "agents/@borg/prompt_to_video_agent.py",
+      "_sha256": "122d7e1815ee127a550400c0e5f2117f3365af1f2c3058c3bb19c1a3472d7004",
+      "_seed": 8086863952292494270,
       "_size_kb": 26.2,
       "_lines": 792,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/agent_generator",
+      "name": "@discreetRappers/agent_generator_agent",
       "version": "1.0.0",
       "display_name": "AgentGenerator",
       "description": "Auto-generates new RAPP agents from configurations and specifications.",
@@ -3060,16 +3060,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/agent_generator.py",
-      "_sha256": "160d34314297d7b04df04fcbb92626318a441cde3adecc61d2eff0900ac1e5a0",
-      "_seed": 3752838975053118804,
+      "_file": "agents/@discreetRappers/agent_generator_agent.py",
+      "_sha256": "baa9b92b2ae485007511ef523544a6a2064d4fe3339361b2789ca1e899d01d04",
+      "_seed": 9916893050914225492,
       "_size_kb": 47.9,
       "_lines": 1257,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/agent_transpiler",
+      "name": "@discreetRappers/agent_transpiler_agent",
       "version": "1.0.0",
       "display_name": "AgentTranspiler",
       "description": "Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.",
@@ -3089,16 +3089,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/agent_transpiler.py",
-      "_sha256": "3da01857c35b1213a32d47ae9bb6e9a3ac03ab43ee98df23db5b254e57706b9a",
-      "_seed": 15412442042747986143,
+      "_file": "agents/@discreetRappers/agent_transpiler_agent.py",
+      "_sha256": "966e2b299ccdd9b57bcb085522f79defac1584dd291c2124fd729f86de5f7388",
+      "_seed": 13928955966432878815,
       "_size_kb": 39.1,
       "_lines": 1035,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/architecture_diagram",
+      "name": "@discreetRappers/architecture_diagram_agent",
       "version": "1.0.0",
       "display_name": "ArchitectureDiagramAgent",
       "description": "Generates professional architecture diagrams from system configurations using Mermaid, SVG, and ASCII.",
@@ -3116,16 +3116,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/architecture_diagram.py",
-      "_sha256": "f39775c19f09a2b44e5b00965603d7d160474adfbec127e836e82b1bcbfb88c6",
-      "_seed": 12653658607352160338,
+      "_file": "agents/@discreetRappers/architecture_diagram_agent.py",
+      "_sha256": "16d6806f58215a099bd638a22c08640b1d8ea0ce22e319542c437d59ccf963bb",
+      "_seed": 16191435701781930066,
       "_size_kb": 38.3,
       "_lines": 996,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/copilot_studio_transpiler",
+      "name": "@discreetRappers/copilot_studio_transpiler_agent",
       "version": "1.0.0",
       "display_name": "CopilotStudioTranspiler",
       "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
@@ -3147,16 +3147,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/copilot_studio_transpiler.py",
-      "_sha256": "42145f6e6ceb635d9bf6e5ad96e12573c9b51d5cda2a23b03e5286043815d970",
-      "_seed": 18108197842543325999,
+      "_file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
+      "_sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
+      "_seed": 14025379966502974255,
       "_size_kb": 88.5,
       "_lines": 2154,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/demo_script_generator",
+      "name": "@discreetRappers/demo_script_generator_agent",
       "version": "1.0.0",
       "display_name": "DemoScriptGenerator",
       "description": "Generates v2.0.0 demo script JSON files for ScriptedDemoAgent. Creates 60-second demos with personas.",
@@ -3178,16 +3178,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/demo_script_generator.py",
-      "_sha256": "ab6879d3540d50656b4e37ce67e0ae58985001411f3bfb15c8a1140ea7ad7988",
-      "_seed": 12892969606767584343,
+      "_file": "agents/@discreetRappers/demo_script_generator_agent.py",
+      "_sha256": "d452650e00a71e7ae3c566c0d12b4ecf46e0d7e1d162a5e080f6c253fcf934c2",
+      "_seed": 17174429428190159959,
       "_size_kb": 58.4,
       "_lines": 1201,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/dynamics_crud",
+      "name": "@discreetRappers/dynamics_crud_agent",
       "version": "1.0.0",
       "display_name": "DynamicsCRUD",
       "description": "Dynamics 365 CRUD operations \u2014 accounts, contacts, opportunities, leads, tasks, activities.",
@@ -3205,16 +3205,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/dynamics_crud.py",
-      "_sha256": "d9ab69e86ae94b68cf03d527a6b3b442392ff32aadc79268c2cb879d178631de",
-      "_seed": 4988006904489455764,
+      "_file": "agents/@discreetRappers/dynamics_crud_agent.py",
+      "_sha256": "7829a1d0a0d53506eae7d975e38d37e66cdec790bcb2d8273663937cf710cf4b",
+      "_seed": 9628502902113448084,
       "_size_kb": 21.1,
       "_lines": 418,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/email_drafting",
+      "name": "@discreetRappers/email_drafting_agent",
       "version": "1.0.0",
       "display_name": "EmailDrafting",
       "description": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint.",
@@ -3231,16 +3231,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/email_drafting.py",
-      "_sha256": "252e56dd3649c05b645213147cf15b0752e2e82d39242d5233769b94c0514189",
-      "_seed": 15013119562953009647,
+      "_file": "agents/@discreetRappers/email_drafting_agent.py",
+      "_sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
+      "_seed": 53027766882806255,
       "_size_kb": 6.0,
       "_lines": 149,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/powerpoint_generator",
+      "name": "@discreetRappers/powerpoint_generator_agent",
       "version": "1.0.0",
       "display_name": "PowerPointGeneratorV2",
       "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
@@ -3258,16 +3258,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/powerpoint_generator.py",
-      "_sha256": "931fb13c6b1b1c2344fc10ea69e68e9f1ee43831dce54f0473ea3bfef2ee9497",
-      "_seed": 17389586519257922585,
+      "_file": "agents/@discreetRappers/powerpoint_generator_agent.py",
+      "_sha256": "cbd34b4863b492b9a367c2dc8ea00bbc07c8803f00b1f035e567276654521250",
+      "_seed": 4049171833047104537,
       "_size_kb": 61.2,
       "_lines": 1549,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/project_tracker",
+      "name": "@discreetRappers/project_tracker_agent",
       "version": "1.0.0",
       "display_name": "ProjectTracker",
       "description": "RAPP project management \u2014 create, update, list, retrieve, import, and export project tracking data.",
@@ -3283,16 +3283,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/project_tracker.py",
-      "_sha256": "d03cee18ad287054fc1b023426e3c26905137e46a7ffd54f4aa5537df00cfc0a",
-      "_seed": 16241894656756294850,
+      "_file": "agents/@discreetRappers/project_tracker_agent.py",
+      "_sha256": "701fe6481c8d3b00c27426e912b659a18da5a358a429b6c9c6fb275a3c1ff244",
+      "_seed": 18264010640337544386,
       "_size_kb": 39.1,
       "_lines": 894,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/rapp_pipeline",
+      "name": "@discreetRappers/rapp_pipeline_agent",
       "version": "1.0.0",
       "display_name": "RAPP",
       "description": "Full RAPP pipeline \u2014 transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",
@@ -3314,16 +3314,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/rapp_pipeline.py",
-      "_sha256": "9d7858e32dba02c40705312d22bbe3763e8960200e67f14f1c792d10632fa1d4",
-      "_seed": 422311159510219859,
+      "_file": "agents/@discreetRappers/rapp_pipeline_agent.py",
+      "_sha256": "ad8745e98be7491d061f5c5ea49eb25e963241657ab264b07e3533a14cbf7f51",
+      "_seed": 3348533564379118675,
       "_size_kb": 121.0,
       "_lines": 2984,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/sales_assistant",
+      "name": "@discreetRappers/sales_assistant_agent",
       "version": "1.0.0",
       "display_name": "SalesAssistant",
       "description": "Natural language CRM assistant \u2014 handles requests about accounts, opportunities, contacts, and pipeline.",
@@ -3340,16 +3340,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/sales_assistant.py",
-      "_sha256": "ce2f6b67adb52c9a5bce36db4e8eec85c95468593b60b60071df8615b42ffad3",
-      "_seed": 3017416681468735667,
+      "_file": "agents/@discreetRappers/sales_assistant_agent.py",
+      "_sha256": "b4defb076c6e8fdcaa96b1187fffb9840927d383ffef0f513e1d89ea03676bb1",
+      "_seed": 2446964785980911795,
       "_size_kb": 26.7,
       "_lines": 631,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/scripted_demo",
+      "name": "@discreetRappers/scripted_demo_agent",
       "version": "1.0.0",
       "display_name": "ScriptedDemo",
       "description": "Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos.",
@@ -3367,16 +3367,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/scripted_demo.py",
-      "_sha256": "22379dbaaef26c60bd72748d19227bebec00fc8e347fe93cb7eee0b614800bf5",
-      "_seed": 1094013696617362198,
+      "_file": "agents/@discreetRappers/scripted_demo_agent.py",
+      "_sha256": "b59f4e466d8e4b4faa74fe7f878e24770fa0840f0ddfe5a2f2a14afabd31a2db",
+      "_seed": 11288900214771561238,
       "_size_kb": 54.2,
       "_lines": 1301,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@discreetRappers/sharepoint_contract_analysis",
+      "name": "@discreetRappers/sharepoint_contract_analysis_agent",
       "version": "1.0.0",
       "display_name": "ContractAnalysis",
       "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
@@ -3400,12 +3400,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@discreetRappers/sharepoint_contract_analysis.py",
-      "_sha256": "33817ef2dec00fcd105196404e9ded85dac0352238725e642b515997d4e84d78",
-      "_seed": 1495474670475554434,
-      "_size_kb": 119.8,
+      "_file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+      "_sha256": "bbe89adb2e1271c1d44004afeffac1f081b0813878bfd949dd6eb0729f2d579e",
+      "_seed": 16553900515881791106,
+      "_size_kb": 119.9,
       "_lines": 2468,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3437,7 +3437,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/context_memory",
+      "name": "@kody/context_memory_agent",
       "version": "1.0.0",
       "display_name": "ContextMemory",
       "description": "Recalls conversation history and stored memories from past interactions.",
@@ -3454,16 +3454,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody/context_memory.py",
-      "_sha256": "df0c30f77b8ce939afa88faadf0d2801ad565d1b5153c904778c08c874c1717a",
-      "_seed": 10904948795335258592,
+      "_file": "agents/@kody/context_memory_agent.py",
+      "_sha256": "bd36a39a4f7fed0b5abc768c0c9878efaf683353679e3141881f2dedbf9b8fc8",
+      "_seed": 15351106387627749856,
       "_size_kb": 8.4,
       "_lines": 183,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/deal_desk",
+      "name": "@kody/deal_desk_agent",
       "version": "1.0.0",
       "display_name": "DealDesk",
       "description": "B2B sales intelligence deck \u2014 runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAR sales agents for deeper workflow.",
@@ -3484,16 +3484,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody/deal_desk.py",
-      "_sha256": "41b217189f3e2f87a26759f6eb05c13febaf261b3f3a98a851d0910103ee83ab",
-      "_seed": 3736335358696106227,
+      "_file": "agents/@kody/deal_desk_agent.py",
+      "_sha256": "0a9c28999fad7fc853344700db2438886650cf84c1210a0b17fac6a49df594b0",
+      "_seed": 16587187046621128947,
       "_size_kb": 10.1,
       "_lines": 245,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/github_agent_library",
+      "name": "@kody/github_agent_library_agent",
       "version": "1.0.0",
       "display_name": "GitHubAgentLibrary",
       "description": "Browse, search, and install agents from the RAPP Agent Repo via chat. The autonomous package manager.",
@@ -3510,16 +3510,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody/github_agent_library.py",
-      "_sha256": "cc1fe62b1328059ae1c68dc9a4fddd4bb39116811704f60f4bf3d70617c5b93c",
-      "_seed": 9390336429601078448,
+      "_file": "agents/@kody/github_agent_library_agent.py",
+      "_sha256": "bf6702d40d8d000b744b13d1a58a3bc6460bc0fd7b7f6f940206bb2c5d1d32e3",
+      "_seed": 1346218951730281648,
       "_size_kb": 43.7,
       "_lines": 957,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/manage_memory",
+      "name": "@kody/manage_memory_agent",
       "version": "1.0.0",
       "display_name": "ManageMemory",
       "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
@@ -3536,12 +3536,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody/manage_memory.py",
-      "_sha256": "04b9328ed1fc5c5463f0aa6838f76a8f5f18d87c69e2b1643bfdd45b40953874",
-      "_seed": 11629788220900256764,
+      "_file": "agents/@kody/manage_memory_agent.py",
+      "_sha256": "1924b331e4318984c15dd641e71794b715333d9b4fa05b387824494c4cab2546",
+      "_seed": 14159894519432621052,
       "_size_kb": 10.8,
       "_lines": 255,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3573,7 +3573,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/rappterbook",
+      "name": "@kody/rappterbook_agent",
       "version": "1.0.0",
       "display_name": "Rappterbook",
       "description": "Read-only client for Rappterbook \u2014 the social network for AI agents. Fetch profiles, trending posts, stats, and channels.",
@@ -3592,12 +3592,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody/rappterbook.py",
-      "_sha256": "b5a59ea823153b609bdf94c4ca1e2ec68951ae88eba8f1c42e2faa265cce48b2",
-      "_seed": 11673659422328765082,
+      "_file": "agents/@kody/rappterbook_agent.py",
+      "_sha256": "054bc4ac7bcf7a46a45c9b9d804b77d2ebd7a30bba9bc9d0c63e9fbc8e4ba94a",
+      "_seed": 10353196835552377498,
       "_size_kb": 6.3,
       "_lines": 160,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3658,7 +3658,7 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody/recon_deck",
+      "name": "@kody/recon_deck_agent",
       "version": "1.0.0",
       "display_name": "ReconDeck",
       "description": "Multi-source intelligence deck \u2014 combines Borg assimilation, Rappterbook social intel, and HackerNews trends into a unified recon briefing on any topic.",
@@ -3681,16 +3681,16 @@
         "@borg/borg_agent",
         "@kody/rappterbook"
       ],
-      "_file": "agents/@kody/recon_deck.py",
-      "_sha256": "9e55141ef636edd11d051e1ece298dc4f2a109e15094cfafdd1da4055643dd32",
-      "_seed": 3113345303928924782,
+      "_file": "agents/@kody/recon_deck_agent.py",
+      "_sha256": "0b01321a9a20378638d8cbbbc514009026be4939bf91706631cd512e97aa19f7",
+      "_seed": 8659210237067160174,
       "_size_kb": 6.9,
       "_lines": 175,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody-w/hello_world",
+      "name": "@kody-w/hello_world_agent",
       "version": "1.0.0",
       "display_name": "Hello World",
       "description": "A friendly greeting agent that says hello.",
@@ -3706,12 +3706,12 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
-      "_file": "agents/@kody-w/hello_world.py",
-      "_sha256": "89d9358c33e9ab3013d349524548e02685ca8446d5cdb36c05b5dfe4b0189789",
-      "_seed": 17716068814879601796,
+      "_file": "agents/@kody-w/hello_world_agent.py",
+      "_sha256": "bc98fc54ed0471fcc12b075ebba0a5913772791667bbb988f251fb06634e4c4b",
+      "_seed": 18289705222458979460,
       "_size_kb": 1.2,
       "_lines": 39,
-      "_has_card": true
+      "_has_card": false
     },
     {
       "schema": "rapp-agent/1.0",

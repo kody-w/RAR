@@ -320,6 +320,17 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
     publisher = parts[0]
     slug = parts[1]
 
+    # Auto-append _agent suffix if missing
+    if not slug.endswith("_agent"):
+        slug = slug + "_agent"
+        name = f"{publisher}/{slug}"
+        # Update manifest in the code so the file is correct
+        code = re.sub(
+            r'("name":\s*"@[^/]+/)[^"]+(")',
+            rf'\g<1>{slug}\2',
+            code
+        )
+
     # Enforce snake_case filename
     if '-' in slug:
         return {

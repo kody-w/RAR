@@ -5,7 +5,7 @@ from agents.basic_agent import BasicAgent
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/email_drafting",
+    "name": "@discreetRappers/email_drafting_agent",
     "version": "1.0.0",
     "display_name": "EmailDrafting",
     "description": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint.",

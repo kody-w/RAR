@@ -116,8 +116,8 @@ SECURITY_ALLOWLIST = {
     "agents/@kody/agent_workbench_agent.py",       # workbench needs exec for agent orchestration
     "agents/@kody/rappter_engine_agent.py",         # engine needs subprocess for CLI mode
     "agents/@kody/rar_remote_agent.py",             # remote agent needs subprocess for git/install
-    "agents/@borg/prompt_to_video.py",              # video rendering needs subprocess for ffmpeg
-    "agents/@discreetRappers/scripted_demo.py",     # demo runner needs exec for script execution
+    "agents/@borg/prompt_to_video_agent.py",        # video rendering needs subprocess for ffmpeg
+    "agents/@discreetRappers/scripted_demo_agent.py", # demo runner needs exec for script execution
 }
 
 # Patterns that should never appear in agent code (supply chain defense)
@@ -205,6 +205,12 @@ def build_registry():
         stem = py_path.stem.replace('.py', '')  # handle .py.card
         if '-' in stem:
             errors.append(f"{py_path}: filename contains dashes — rename to snake_case (e.g., {stem.replace('-', '_')}.py)")
+            continue
+
+        # Skip utility/template files
+        is_utility = py_path.name in ("update_agents.py", "d365_base_agent.py", "__init__.py")
+        is_template = "templates" in py_path.parts
+        if is_utility or is_template:
             continue
 
         manifest = extract_manifest(py_path)

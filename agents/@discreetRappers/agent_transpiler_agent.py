@@ -22,7 +22,7 @@ Usage:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/agent_transpiler",
+    "name": "@discreetRappers/agent_transpiler_agent",
     "version": "1.0.0",
     "display_name": "AgentTranspiler",
     "description": "Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.",

@@ -13,7 +13,7 @@ Storage path: contracts/ folder in Azure File Storage
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@discreetRappers/sharepoint_contract_analysis",
+    "name": "@discreetRappers/sharepoint_contract_analysis_agent",
     "version": "1.0.0",
     "display_name": "ContractAnalysis",
     "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
