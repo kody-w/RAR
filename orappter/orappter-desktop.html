@@ -3702,6 +3702,759 @@ function handleGardenInput(win, src) {
 }
 
 /* ============================================================
+   ARENA APP — Multiplayer card battles
+   ============================================================ */
+function bootArena(win) {
+  win.arena = {
+    room: null,
+    deck: [],
+    record: { wins: 0, losses: 0 },
+    elo: 1000,
+    battleLog: [],
+  };
+  printToWindow(win.id, '╔══════════════════════════════════╗', 'sys');
+  printToWindow(win.id, '║  ARENA  — Card Battle System     ║', 'sys');
+  printToWindow(win.id, '╚══════════════════════════════════╝', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  create               — create a battle room', 'info');
+  printToWindow(win.id, '  deck <c1> <c2> <c3>  — set your 3-card deck', 'info');
+  printToWindow(win.id, '  fight                — battle an AI opponent', 'info');
+  printToWindow(win.id, '  status               — show battle record & ELO', 'info');
+  printToWindow(win.id, '  clear                — clear output', 'info');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Tip: use agent names or any card name for your deck.', 'info');
+  printToWindow(win.id, '');
+}
+
+function arenaCardStats(name) {
+  const h = seedHash(name);
+  const rng = mulberry32(h);
+  const power = 1 + Math.floor(rng() * 7);
+  const toughness = 1 + Math.floor(rng() * 7);
+  const spec = ['Haste', 'Shield', 'Leech', 'Pierce', 'Regen'][Math.floor(rng() * 5)];
+  return { name, power, toughness, spec };
+}
+
+function arenaResolveCard(name) {
+  const agent = REGISTRY.agents.find(a => a.name === name || a.slug === name || (a.display_name || '').toLowerCase() === name.toLowerCase());
+  const label = agent ? (agent.display_name || agent.name) : name;
+  return arenaCardStats(label);
+}
+
+function arenaGenAIName() {
+  const prefixes = ['Shadow', 'Iron', 'Neon', 'Storm', 'Void', 'Nexus', 'Cyber'];
+  const suffixes = ['Walker', 'Caster', 'Core', 'Bot', 'Blade', 'Drone', 'Pulse'];
+  const rng = mulberry32(Date.now() & 0xFFFFFFFF);
+  return prefixes[Math.floor(rng() * prefixes.length)] + suffixes[Math.floor(rng() * suffixes.length)];
+}
+
+function arenaGenAIDeck() {
+  const pool = ['@rapp/basic-agent', '@kody/memory-agent', '@borg/assimilator', '@discreetRappers/pipeline-agent', '@kody/registry-client', 'CipherCore', 'DataWraith', 'NullVector'];
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3).map(n => arenaCardStats(n));
+}
+
+function arenaSimBattle(deck, aiDeck) {
+  const log = [];
+  let playerHP = deck.reduce((s, c) => s + c.toughness, 0);
+  let aiHP = aiDeck.reduce((s, c) => s + c.toughness, 0);
+  log.push(`  Your HP: ${playerHP}  |  AI HP: ${aiHP}`);
+  log.push('  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+  for (let round = 1; round <= 3 && playerHP > 0 && aiHP > 0; round++) {
+    const pc = deck[(round - 1) % deck.length];
+    const ac = aiDeck[(round - 1) % aiDeck.length];
+    const pAtk = pc.power + Math.floor(Math.random() * 3);
+    const aAtk = ac.power + Math.floor(Math.random() * 3);
+    let pBonus = 0, aBonus = 0;
+    if (pc.spec === 'Haste') pBonus += 2;
+    if (pc.spec === 'Pierce') pBonus += 1;
+    if (ac.spec === 'Haste') aBonus += 2;
+    if (ac.spec === 'Pierce') aBonus += 1;
+    let dmgToAI = Math.max(0, pAtk + pBonus - Math.floor(ac.toughness / 2));
+    let dmgToPlayer = Math.max(0, aAtk + aBonus - Math.floor(pc.toughness / 2));
+    if (ac.spec === 'Shield') dmgToAI = Math.floor(dmgToAI / 2);
+    if (pc.spec === 'Shield') dmgToPlayer = Math.floor(dmgToPlayer / 2);
+    if (pc.spec === 'Leech') playerHP = Math.min(playerHP + 2, 30);
+    if (ac.spec === 'Leech') aiHP = Math.min(aiHP + 2, 30);
+    aiHP -= dmgToAI;
+    playerHP -= dmgToPlayer;
+    if (pc.spec === 'Regen') playerHP += 1;
+    log.push(`  Round ${round}: [${pc.name.slice(0,12)}] ${pc.spec} vs [${ac.name.slice(0,12)}] ${ac.spec}`);
+    log.push(`    You deal ${dmgToAI} dmg  |  AI deals ${dmgToPlayer} dmg`);
+  }
+  log.push('  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+  log.push(`  Final: Your HP ${Math.max(0, playerHP)}  |  AI HP ${Math.max(0, aiHP)}`);
+  return { playerWon: playerHP > aiHP, log };
+}
+
+function arenaELOUpdate(elo, won) {
+  const K = 32;
+  const expected = 1 / (1 + Math.pow(10, (1000 - elo) / 400));
+  return Math.round(elo + K * ((won ? 1 : 0) - expected));
+}
+
+function handleArenaInput(win, src) {
+  printToWindow(win.id, `[] ${src}`, 'cmd');
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  const a = win.arena;
+  switch (cmd) {
+    case 'create': {
+      const code = Math.random().toString(36).slice(2, 6).toUpperCase();
+      a.room = code;
+      printToWindow(win.id, `Room created: ${code}`, 'success');
+      printToWindow(win.id, 'Share this code with your opponent (or fight AI).', 'info');
+      printToWindow(win.id, 'Set your deck: deck <card1> <card2> <card3>', 'info');
+      break;
+    }
+    case 'deck': {
+      const names = parts.slice(1);
+      if (names.length !== 3) { printToWindow(win.id, 'Usage: deck <card1> <card2> <card3>', 'err'); break; }
+      a.deck = names.map(n => arenaResolveCard(n));
+      printToWindow(win.id, 'Deck set:', 'success');
+      for (const c of a.deck) printToWindow(win.id, `  [${c.name.slice(0,18).padEnd(18)}] P:${c.power} T:${c.toughness} [${c.spec}]`, 'result');
+      break;
+    }
+    case 'fight': {
+      if (!a.deck.length) { printToWindow(win.id, 'Set your deck first: deck <c1> <c2> <c3>', 'warn'); break; }
+      const aiName = arenaGenAIName();
+      const aiDeck = arenaGenAIDeck();
+      printToWindow(win.id, `Opponent: ${aiName}`, 'sys');
+      printToWindow(win.id, 'AI Deck:', 'info');
+      for (const c of aiDeck) printToWindow(win.id, `  [${c.name.slice(0,18).padEnd(18)}] P:${c.power} T:${c.toughness} [${c.spec}]`, 'info');
+      printToWindow(win.id, '');
+      const { playerWon, log } = arenaSimBattle(a.deck, aiDeck);
+      for (const line of log) printToWindow(win.id, line, '');
+      printToWindow(win.id, '');
+      if (playerWon) {
+        a.record.wins++; a.elo = arenaELOUpdate(a.elo, true);
+        printToWindow(win.id, '  VICTORY! Well played.', 'success');
+      } else {
+        a.record.losses++; a.elo = arenaELOUpdate(a.elo, false);
+        printToWindow(win.id, '  DEFEAT. Better luck next time.', 'err');
+      }
+      printToWindow(win.id, `  ELO: ${a.elo}`, 'result');
+      break;
+    }
+    case 'status': {
+      const total = a.record.wins + a.record.losses;
+      const wr = total ? Math.round((a.record.wins / total) * 100) : 0;
+      printToWindow(win.id, '  Battle Record', 'sys');
+      printToWindow(win.id, `  Wins:   ${a.record.wins}`, 'success');
+      printToWindow(win.id, `  Losses: ${a.record.losses}`, 'err');
+      printToWindow(win.id, `  Win %:  ${wr}%`, 'info');
+      printToWindow(win.id, `  ELO:    ${a.elo}`, 'result');
+      if (a.room) printToWindow(win.id, `  Room:   ${a.room}`, 'info');
+      break;
+    }
+    case 'clear': clearOutput(win.id); break;
+    case 'help': printToWindow(win.id, '  create  deck c1 c2 c3  fight  status', 'info'); break;
+    default: if (src.trim()) printToWindow(win.id, `Unknown: ${src}. Type "help".`, 'warn');
+  }
+}
+
+/* ============================================================
+   DUNGEON APP — Roguelike crawler
+   ============================================================ */
+const DUNGEON_ROOM_TYPES = ['.', '.', '.', '!', '$', 'X', '>'];
+const DUNGEON_W = 5;
+const DUNGEON_H = 5;
+
+function dungeonGenFloor(floor) {
+  const rng = mulberry32(seedHash('floor-' + floor));
+  const grid = [];
+  for (let y = 0; y < DUNGEON_H; y++) {
+    const row = [];
+    for (let x = 0; x < DUNGEON_W; x++) {
+      if (x === 0 && y === 0) { row.push('S'); continue; }
+      if (x === 4 && y === 4) { row.push('>'); continue; }
+      row.push(DUNGEON_ROOM_TYPES[Math.floor(rng() * DUNGEON_ROOM_TYPES.length)]);
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
+function dungeonGenEnemy(floor) {
+  const names = ['Goblin', 'Slime', 'Skeleton', 'Dark Elf', 'Wraith', 'Golem', 'Dragon'];
+  const rng = mulberry32(seedHash('enemy-' + floor + '-' + (Date.now() & 0xFFFFF)));
+  const idx = Math.min(Math.floor(rng() * (floor + 2)), names.length - 1);
+  return { name: names[idx], hp: 3 + floor * 2 + Math.floor(rng() * 3), atk: 1 + floor + Math.floor(rng() * 2) };
+}
+
+function dungeonRenderMap(win) {
+  const { grid, px, py, visited } = win.dungeon;
+  const lines = [`  Floor ${win.dungeon.floor} / 5`, '  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510'];
+  for (let y = 0; y < DUNGEON_H; y++) {
+    let row = '  \u2502';
+    for (let x = 0; x < DUNGEON_W; x++) {
+      const key = x + ',' + y;
+      row += (x === px && y === py) ? '@' : visited.has(key) ? grid[y][x] : '?';
+      row += ' ';
+    }
+    lines.push(row.trimEnd() + '\u2502');
+  }
+  lines.push('  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518');
+  lines.push('  @ you  . empty  ! fight  $ loot  X trap  > stairs  ? fog');
+  return lines;
+}
+
+function bootDungeon(win) {
+  win.dungeon = null;
+  printToWindow(win.id, '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'sys');
+  printToWindow(win.id, '\u2551  DUNGEON  \u2014 Roguelike Crawler    \u2551', 'sys');
+  printToWindow(win.id, '\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  enter              — start a dungeon run', 'info');
+  printToWindow(win.id, '  go n/s/e/w         — move (also: north/south/east/west)', 'info');
+  printToWindow(win.id, '  n s e w            — shorthand movement', 'info');
+  printToWindow(win.id, '  map                — show floor map', 'info');
+  printToWindow(win.id, '  inv / inventory    — show items', 'info');
+  printToWindow(win.id, '  stats              — show hero stats', 'info');
+  printToWindow(win.id, '  clear              — clear output', 'info');
+  printToWindow(win.id, '');
+}
+
+function dungeonEnterRoom(win) {
+  if (!win.dungeon) return;
+  const { grid, px, py, floor } = win.dungeon;
+  const room = grid[py][px];
+  win.dungeon.visited.add(px + ',' + py);
+  if (room === 'S' || room === '.') {
+    printToWindow(win.id, '  Empty room. Nothing here.', 'info');
+  } else if (room === '>') {
+    if (floor >= 5) {
+      printToWindow(win.id, '  You reached the depths! Run complete.', 'success');
+      printToWindow(win.id, '  SCORE: ' + win.dungeon.score + ' | Items: ' + win.dungeon.inventory.length, 'result');
+      printToWindow(win.id, '  Type "enter" for a new run.', 'success');
+      win.dungeon = null;
+    } else {
+      win.dungeon.floor++;
+      win.dungeon.grid = dungeonGenFloor(win.dungeon.floor);
+      win.dungeon.px = 0; win.dungeon.py = 0;
+      win.dungeon.visited = new Set(['0,0']);
+      printToWindow(win.id, '  Descending to floor ' + win.dungeon.floor + '...', 'sys');
+    }
+  } else if (room === '$') {
+    const items = ['Health Potion', 'Power Crystal', 'Iron Shield', 'Speed Rune', 'Magic Scroll'];
+    const item = items[Math.floor(Math.random() * items.length)];
+    win.dungeon.inventory.push(item);
+    win.dungeon.score += 50;
+    grid[py][px] = '.';
+    printToWindow(win.id, '  Found: ' + item + '!', 'success');
+    if (item === 'Health Potion') win.dungeon.hp = Math.min(win.dungeon.maxHp, win.dungeon.hp + 5);
+    if (item === 'Power Crystal') win.dungeon.atk++;
+    if (item === 'Iron Shield') win.dungeon.def++;
+  } else if (room === 'X') {
+    const dmg = 1 + Math.floor(Math.random() * 3);
+    win.dungeon.hp -= dmg;
+    grid[py][px] = '.';
+    printToWindow(win.id, '  Trap! You take ' + dmg + ' damage.', 'err');
+    printToWindow(win.id, '  HP: ' + win.dungeon.hp + ' / ' + win.dungeon.maxHp, win.dungeon.hp <= 0 ? 'err' : 'warn');
+    if (win.dungeon.hp <= 0) dungeonDeath(win);
+  } else if (room === '!') {
+    const enemy = dungeonGenEnemy(floor);
+    grid[py][px] = '.';
+    printToWindow(win.id, '  Encounter: ' + enemy.name + '! (HP:' + enemy.hp + ' ATK:' + enemy.atk + ')', 'warn');
+    let ehp = enemy.hp, php = win.dungeon.hp, log = [], turns = 0;
+    while (ehp > 0 && php > 0 && turns < 20) {
+      const pdmg = Math.max(1, win.dungeon.atk + Math.floor(Math.random() * 3) - win.dungeon.def);
+      const edmg = Math.max(0, enemy.atk - win.dungeon.def + Math.floor(Math.random() * 2));
+      ehp -= pdmg;
+      if (ehp <= 0) { log.push('  You strike for ' + pdmg + '! ' + enemy.name + ' defeated!'); break; }
+      php -= edmg;
+      log.push('  You:' + pdmg + 'dmg  ' + enemy.name + ':' + edmg + 'dmg  (enemy HP:' + Math.max(0, ehp) + ')');
+      turns++;
+    }
+    for (const l of log.slice(-3)) printToWindow(win.id, l, '');
+    win.dungeon.hp = php;
+    if (php <= 0) { dungeonDeath(win); } else {
+      const xp = 10 + floor * 5;
+      win.dungeon.score += xp;
+      printToWindow(win.id, '  Victory! +' + xp + ' XP  HP: ' + Math.max(0, win.dungeon.hp) + '/' + win.dungeon.maxHp, 'success');
+    }
+  }
+}
+
+function dungeonDeath(win) {
+  printToWindow(win.id, '');
+  printToWindow(win.id, '  ####  YOU DIED  ####', 'err');
+  printToWindow(win.id, '  Score: ' + win.dungeon.score, 'result');
+  printToWindow(win.id, '  Floor reached: ' + win.dungeon.floor, 'info');
+  printToWindow(win.id, '  Type "enter" for a new run.', 'info');
+  win.dungeon = null;
+}
+
+function handleDungeonInput(win, src) {
+  printToWindow(win.id, 'v ' + src, 'cmd');
+  const parts = src.trim().split(/\s+/);
+  const raw = parts[0].toLowerCase();
+  const dirAliases = { n: 'north', s: 'south', e: 'east', w: 'west' };
+  let cmd = raw, dir = null;
+  if (raw === 'go') {
+    dir = dirAliases[parts[1]] || parts[1] || '';
+  } else if (['n','s','e','w','north','south','east','west'].includes(raw)) {
+    cmd = 'go'; dir = dirAliases[raw] || raw;
+  }
+  switch (cmd) {
+    case 'enter': {
+      win.dungeon = { floor: 1, grid: dungeonGenFloor(1), px: 0, py: 0, visited: new Set(['0,0']), hp: 15, maxHp: 15, atk: 3, def: 1, inventory: [], score: 0 };
+      printToWindow(win.id, '  You descend into the dungeon...', 'sys');
+      printToWindow(win.id, '  HP: 15/15  ATK: 3  DEF: 1', 'info');
+      for (const l of dungeonRenderMap(win)) printToWindow(win.id, l, 'result');
+      dungeonEnterRoom(win);
+      break;
+    }
+    case 'go': {
+      if (!win.dungeon) { printToWindow(win.id, '  Type "enter" to start a run.', 'warn'); break; }
+      let nx = win.dungeon.px, ny = win.dungeon.py;
+      if (dir === 'north') ny--;
+      else if (dir === 'south') ny++;
+      else if (dir === 'east') nx++;
+      else if (dir === 'west') nx--;
+      else { printToWindow(win.id, '  Unknown direction. Use n/s/e/w.', 'err'); break; }
+      if (nx < 0 || nx >= DUNGEON_W || ny < 0 || ny >= DUNGEON_H) { printToWindow(win.id, '  A wall blocks your path.', 'warn'); break; }
+      win.dungeon.px = nx; win.dungeon.py = ny;
+      if (win.dungeon) dungeonEnterRoom(win);
+      break;
+    }
+    case 'map':
+      if (!win.dungeon) { printToWindow(win.id, '  No active run. Type "enter".', 'warn'); break; }
+      for (const l of dungeonRenderMap(win)) printToWindow(win.id, l, 'result');
+      break;
+    case 'inv':
+    case 'inventory':
+      if (!win.dungeon) { printToWindow(win.id, '  No active run.', 'warn'); break; }
+      if (!win.dungeon.inventory.length) { printToWindow(win.id, '  Inventory empty.', 'info'); break; }
+      printToWindow(win.id, '  Inventory:', 'info');
+      win.dungeon.inventory.forEach((item, i) => printToWindow(win.id, '    ' + (i+1) + '. ' + item, 'result'));
+      break;
+    case 'stats':
+      if (!win.dungeon) { printToWindow(win.id, '  No active run.', 'warn'); break; }
+      printToWindow(win.id, '  HP:    ' + win.dungeon.hp + '/' + win.dungeon.maxHp, 'info');
+      printToWindow(win.id, '  ATK:   ' + win.dungeon.atk, 'info');
+      printToWindow(win.id, '  DEF:   ' + win.dungeon.def, 'info');
+      printToWindow(win.id, '  Floor: ' + win.dungeon.floor + '/5', 'info');
+      printToWindow(win.id, '  Score: ' + win.dungeon.score, 'result');
+      break;
+    case 'clear': clearOutput(win.id); break;
+    case 'help': printToWindow(win.id, '  enter  go n/s/e/w  map  inv  stats', 'info'); break;
+    default: if (src.trim()) printToWindow(win.id, 'Unknown: ' + src + '. Type "help".', 'warn');
+  }
+}
+
+/* ============================================================
+   SCHOOL APP — Interactive tutor
+   ============================================================ */
+const SCHOOL_LESSONS = {
+  python: [
+    {
+      title: 'Variables & Types',
+      content: 'Python is dynamically typed. Variables hold references.\n  x = 42          # integer\n  name = "Alice"  # string\n  pi = 3.14       # float\n  active = True   # boolean\n\nType conversion: int("42") str(99) float("3.14")\nCheck type: type(x)  isinstance(x, int)',
+      quiz: { q: 'What does type("hello") return?', opts: ["<class 'str'>", "<class 'int'>", 'string', 'TEXT'], ans: 0 },
+    },
+    {
+      title: 'Lists & Loops',
+      content: 'Lists are mutable, ordered sequences:\n  nums = [1, 2, 3, 4, 5]\n  nums.append(6)      # add item\n  nums[0]             # first item: 1\n  nums[-1]            # last item: 6\n  len(nums)           # length: 6\n\nLoops:\n  for n in nums:\n      print(n)\n\n  for i in range(10):\n      print(i)  # 0..9',
+      quiz: { q: 'What does nums[-1] return for [1,2,3,4,5]?', opts: ['1', '5', 'Error', '-1'], ans: 1 },
+    },
+    {
+      title: 'Functions & Scope',
+      content: 'Functions are defined with def:\n  def greet(name):\n      return f"Hello, {name}!"\n\n  print(greet("Alice"))  # Hello, Alice!\n\nDefault arguments:\n  def power(base, exp=2):\n      return base ** exp\n\n  power(3)     # 9\n  power(3, 3)  # 27\n\nScope: variables inside functions are local.',
+      quiz: { q: 'What does power(4) return if def power(base, exp=2)?', opts: ['4', '8', '16', '2'], ans: 2 },
+    },
+  ],
+  math: [
+    {
+      title: 'Algebra: Solving Equations',
+      content: 'An equation states two expressions are equal.\n\nSolve for x:  2x + 5 = 13\n  Step 1: subtract 5  ->  2x = 8\n  Step 2: divide by 2  ->  x = 4\n\nCheck: 2(4) + 5 = 13 (correct)\nRule: whatever you do to one side, do to the other.',
+      quiz: { q: 'Solve: 3x - 6 = 9. What is x?', opts: ['3', '5', '1', '15'], ans: 1 },
+    },
+    {
+      title: 'Geometry: Area & Perimeter',
+      content: 'Rectangle:\n  Area = length x width\n  Perimeter = 2(length + width)\n\nCircle:\n  Area = pi * r^2\n  Circumference = 2*pi*r\n\nTriangle:\n  Area = (base * height) / 2\n\nExample: rectangle 6x4\n  Area = 24   Perimeter = 20',
+      quiz: { q: 'Area of a circle with radius 3? (pi ~= 3.14)', opts: ['9.42', '18.84', '28.27', '6.28'], ans: 2 },
+    },
+    {
+      title: 'Statistics: Mean, Median, Mode',
+      content: 'Data set: [4, 7, 2, 9, 4, 6, 4]\n\nMean (average):\n  Sum / count = 36/7 ~= 5.14\n\nMedian (middle value):\n  Sort: [2, 4, 4, 4, 6, 7, 9]  ->  middle = 4\n\nMode (most frequent):\n  4 appears 3 times  ->  mode = 4\n\nRange = max - min = 9 - 2 = 7',
+      quiz: { q: 'What is the median of [1, 3, 3, 6, 7, 8, 9]?', opts: ['3', '6', '5.3', '7'], ans: 1 },
+    },
+  ],
+  ai: [
+    {
+      title: 'What is AI?',
+      content: 'Artificial Intelligence simulates human intelligence.\n\nKey subfields:\n  Machine Learning (ML) - learns from data\n  Natural Language Processing (NLP) - text/speech\n  Computer Vision - image understanding\n  Robotics - physical autonomous systems\n\nNarrow AI: specific tasks (chess, translation)\nGeneral AI: hypothetical human-level (does not exist yet)',
+      quiz: { q: 'What type of AI currently exists?', opts: ['General AI', 'Narrow AI', 'Super AI', 'Quantum AI'], ans: 1 },
+    },
+    {
+      title: 'Neural Networks',
+      content: 'Neural networks are loosely inspired by the brain.\n\nStructure:\n  Input layer -> Hidden layers -> Output layer\n\nEach node has:\n  Weights (learned parameters)\n  Activation function (e.g. ReLU, sigmoid)\n\nTraining:\n  1. Forward pass: compute prediction\n  2. Compute loss (error)\n  3. Backprop: adjust weights via gradient descent\n\nDeep learning = many hidden layers.',
+      quiz: { q: 'What adjusts weights during training?', opts: ['Bubble Sort', 'Gradient Descent', 'Binary Search', 'PageRank'], ans: 1 },
+    },
+    {
+      title: 'Large Language Models',
+      content: 'LLMs are trained on massive text to predict next tokens.\n\nArchitecture: Transformer (attention mechanism)\n\nKey concepts:\n  Token: ~4 chars on average\n  Context window: max tokens the model sees\n  Temperature: randomness (0=deterministic)\n  Prompt: input text guiding the model\n\nTraining phases:\n  1. Pre-training on internet text\n  2. Fine-tuning on curated data\n  3. RLHF: Reinforcement Learning from Human Feedback',
+      quiz: { q: 'What architecture do most modern LLMs use?', opts: ['CNN', 'RNN', 'Transformer', 'Decision Tree'], ans: 2 },
+    },
+  ],
+  history: [
+    {
+      title: 'Ancient Civilizations',
+      content: 'The earliest civilizations arose ~5000 years ago.\n\nMesopotamia (modern Iraq):\n  Sumerians invented writing (cuneiform, ~3200 BC)\n  Hammurabi Code: first written law (~1754 BC)\n\nAncient Egypt:\n  Pyramids of Giza (~2560 BC)\n  Hieroglyphic writing system\n\nAncient China:\n  Shang Dynasty (1600-1046 BC)\n  Oracle bone script - early Chinese writing',
+      quiz: { q: 'Who invented cuneiform writing?', opts: ['Egyptians', 'Sumerians', 'Romans', 'Greeks'], ans: 1 },
+    },
+    {
+      title: 'The Renaissance',
+      content: 'The Renaissance (14th-17th century) revived art, science,\nand philosophy in Europe.\n\nKey figures:\n  Leonardo da Vinci - polymath, artist, inventor\n  Michelangelo - Sistine Chapel ceiling (1508-1512)\n  Copernicus - heliocentric solar system (1543)\n  Gutenberg - printing press (~1440)\n\nHumanism: focus on human potential and reason.\nThe printing press spread ideas rapidly.',
+      quiz: { q: 'Who painted the Sistine Chapel ceiling?', opts: ['Leonardo da Vinci', 'Raphael', 'Michelangelo', 'Botticelli'], ans: 2 },
+    },
+    {
+      title: 'The Industrial Revolution',
+      content: 'The Industrial Revolution (1760-1840) began in Britain.\nTransformed production from hand to machine labor.\n\nKey inventions:\n  Steam engine (Watt, 1769) - powered factories\n  Spinning jenny (Hargreaves, 1764) - textiles\n  Steam locomotive (Stephenson, 1825) - railroads\n\nSocial impact:\n  Urbanization - people moved to cities\n  Rise of the middle class and labor movements',
+      quiz: { q: 'Where did the Industrial Revolution begin?', opts: ['France', 'Germany', 'USA', 'Britain'], ans: 3 },
+    },
+  ],
+};
+
+const SCHOOL_LEVELS = [
+  { name: 'Freshman', xp: 0 }, { name: 'Sophomore', xp: 200 },
+  { name: 'Junior', xp: 500 }, { name: 'Senior', xp: 1000 },
+];
+
+function schoolLevel(xp) {
+  let level = SCHOOL_LEVELS[0];
+  for (const l of SCHOOL_LEVELS) { if (xp >= l.xp) level = l; }
+  return level;
+}
+
+const SCHOOL_TEMPLATE_ANSWERS = {
+  python: 'Python is high-level, dynamically typed. Topics: variables, lists, functions, classes, modules. See docs.python.org',
+  math: 'Math covers arithmetic, algebra, geometry, statistics, calculus. Ask about a specific concept.',
+  ai: 'AI: machine learning, neural networks, NLP, computer vision. Current frontier: LLMs (large language models).',
+  history: 'History spans ancient civilizations to today. Ask about a specific period or event.',
+};
+
+function bootSchool(win) {
+  win.school = { subject: null, lessonIdx: 0, pendingQuiz: null, grades: {}, xp: 0 };
+  printToWindow(win.id, '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'sys');
+  printToWindow(win.id, '\u2551  SCHOOL  \u2014 Interactive Tutor     \u2551', 'sys');
+  printToWindow(win.id, '\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  enroll <subject>   — start (python/math/ai/history)', 'info');
+  printToWindow(win.id, '  lesson             — get next lesson', 'info');
+  printToWindow(win.id, '  quiz               — take a quiz', 'info');
+  printToWindow(win.id, '  answer <1-4>       — answer the quiz', 'info');
+  printToWindow(win.id, '  grade              — show grades', 'info');
+  printToWindow(win.id, '  ask <question>     — template answer', 'info');
+  printToWindow(win.id, '  clear              — clear output', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleSchoolInput(win, src) {
+  printToWindow(win.id, '^ ' + src, 'cmd');
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  const rest = parts.slice(1).join(' ');
+  const s = win.school;
+  switch (cmd) {
+    case 'enroll': {
+      const subject = rest.toLowerCase();
+      if (!SCHOOL_LESSONS[subject]) {
+        printToWindow(win.id, '  Unknown subject: ' + subject, 'err');
+        printToWindow(win.id, '  Available: python, math, ai, history', 'info');
+        break;
+      }
+      s.subject = subject; s.lessonIdx = 0; s.pendingQuiz = null;
+      if (!s.grades[subject]) s.grades[subject] = { correct: 0, total: 0 };
+      printToWindow(win.id, '  Enrolled in: ' + subject.toUpperCase(), 'success');
+      printToWindow(win.id, '  ' + SCHOOL_LESSONS[subject].length + ' lessons. Type "lesson" to begin.', 'info');
+      break;
+    }
+    case 'lesson': {
+      if (!s.subject) { printToWindow(win.id, '  Enroll first: enroll <subject>', 'warn'); break; }
+      const lessons = SCHOOL_LESSONS[s.subject];
+      if (s.lessonIdx >= lessons.length) { printToWindow(win.id, '  All lessons complete! Type "quiz".', 'success'); break; }
+      const lesson = lessons[s.lessonIdx];
+      printToWindow(win.id, '  Lesson ' + (s.lessonIdx + 1) + '/' + lessons.length + ': ' + lesson.title, 'sys');
+      printToWindow(win.id, '  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', 'info');
+      for (const line of lesson.content.split('\n')) printToWindow(win.id, '  ' + line, '');
+      printToWindow(win.id, '');
+      s.xp += 20; s.lessonIdx++;
+      printToWindow(win.id, '  +20 XP  Total: ' + s.xp + ' XP  [' + schoolLevel(s.xp).name + ']', 'result');
+      break;
+    }
+    case 'quiz': {
+      if (!s.subject) { printToWindow(win.id, '  Enroll first.', 'warn'); break; }
+      const lessons = SCHOOL_LESSONS[s.subject];
+      const qIdx = Math.min(Math.max(0, s.lessonIdx - 1), lessons.length - 1);
+      const quiz = lessons[qIdx].quiz;
+      s.pendingQuiz = { quiz, subject: s.subject };
+      printToWindow(win.id, '  QUIZ: ' + quiz.q, 'sys');
+      quiz.opts.forEach((opt, i) => printToWindow(win.id, '    ' + (i+1) + '. ' + opt, 'info'));
+      printToWindow(win.id, '  Type: answer 1-4', 'info');
+      break;
+    }
+    case 'answer': {
+      if (!s.pendingQuiz) { printToWindow(win.id, '  No active quiz. Type "quiz".', 'warn'); break; }
+      const choice = parseInt(rest, 10) - 1;
+      const { quiz, subject } = s.pendingQuiz;
+      if (isNaN(choice) || choice < 0 || choice > 3) { printToWindow(win.id, '  Enter 1-4.', 'err'); break; }
+      if (!s.grades[subject]) s.grades[subject] = { correct: 0, total: 0 };
+      s.grades[subject].total++;
+      if (choice === quiz.ans) {
+        s.grades[subject].correct++; s.xp += 50;
+        printToWindow(win.id, '  Correct! +50 XP  Total: ' + s.xp + ' XP  [' + schoolLevel(s.xp).name + ']', 'success');
+      } else {
+        printToWindow(win.id, '  Incorrect. Correct: ' + quiz.opts[quiz.ans], 'err');
+      }
+      s.pendingQuiz = null;
+      break;
+    }
+    case 'grade': {
+      printToWindow(win.id, '  Grades:', 'sys');
+      let any = false;
+      for (const [subj, g] of Object.entries(s.grades)) {
+        any = true;
+        const pct = g.total ? Math.round((g.correct / g.total) * 100) : 0;
+        printToWindow(win.id, '    ' + subj.padEnd(10) + ' ' + g.correct + '/' + g.total + ' (' + pct + '%)', 'result');
+      }
+      if (!any) printToWindow(win.id, '  No quizzes taken yet.', 'info');
+      printToWindow(win.id, '  Total XP: ' + s.xp + '  [' + schoolLevel(s.xp).name + ']', 'result');
+      break;
+    }
+    case 'ask': {
+      const answer = s.subject && SCHOOL_TEMPLATE_ANSWERS[s.subject]
+        ? SCHOOL_TEMPLATE_ANSWERS[s.subject]
+        : 'Enroll in a subject first: python, math, ai, or history.';
+      printToWindow(win.id, '  Q: ' + (rest || '(empty)'), 'info');
+      printToWindow(win.id, '  A: ' + answer, '');
+      break;
+    }
+    case 'clear': clearOutput(win.id); break;
+    case 'help': printToWindow(win.id, '  enroll <subject>  lesson  quiz  answer 1-4  grade  ask <q>', 'info'); break;
+    default: if (src.trim()) printToWindow(win.id, 'Unknown: ' + src + '. Type "help".', 'warn');
+  }
+}
+
+/* ============================================================
+   TIMECAPSULE APP — Seal messages for the future
+   ============================================================ */
+function bootTimeCapsule(win) {
+  win.capsules = [];
+  printToWindow(win.id, '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'sys');
+  printToWindow(win.id, '\u2551  TIME CAPSULE \u2014 Future Messages  \u2551', 'sys');
+  printToWindow(win.id, '\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  create "msg" YYYY-MM-DD  — seal until date', 'info');
+  printToWindow(win.id, '  list                     — show all capsules', 'info');
+  printToWindow(win.id, '  open <n>                 — try to open capsule n', 'info');
+  printToWindow(win.id, '  diary "message"          — opens tomorrow', 'info');
+  printToWindow(win.id, '  count                    — sealed vs opened', 'info');
+  printToWindow(win.id, '  clear                    — clear output', 'info');
+  printToWindow(win.id, '');
+  printToWindow(win.id, '  Today: ' + new Date().toISOString().slice(0, 10), 'info');
+  printToWindow(win.id, '');
+}
+
+function handleTimeCapsuleInput(win, src) {
+  printToWindow(win.id, '& ' + src, 'cmd');
+  const trimmed = src.trim();
+  const parts = trimmed.split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  switch (cmd) {
+    case 'create': {
+      const m = trimmed.slice(6).trim().match(/"([^"]+)"\s+([\d]{4}-[\d]{2}-[\d]{2})/);
+      if (!m) { printToWindow(win.id, '  Usage: create "your message" YYYY-MM-DD', 'err'); break; }
+      const openDate = new Date(m[2] + 'T00:00:00');
+      if (isNaN(openDate.getTime())) { printToWindow(win.id, '  Invalid date.', 'err'); break; }
+      const capsule = { id: win.capsules.length + 1, msg: m[1], openDate: m[2], createdAt: new Date().toISOString().slice(0,10), opened: false };
+      win.capsules.push(capsule);
+      printToWindow(win.id, '  +-------+', 'sys');
+      printToWindow(win.id, '  | SEALED|', 'sys');
+      printToWindow(win.id, '  |[_____]|', 'sys');
+      printToWindow(win.id, '  +-------+', 'sys');
+      printToWindow(win.id, '  Capsule #' + capsule.id + ' sealed until ' + capsule.openDate, 'success');
+      break;
+    }
+    case 'diary': {
+      const msgMatch = trimmed.slice(5).trim().match(/"([^"]+)"|(.+)/);
+      const msg = msgMatch ? (msgMatch[1] || msgMatch[2] || '').trim() : '';
+      if (!msg) { printToWindow(win.id, '  Usage: diary "your message"', 'err'); break; }
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const openDate = tomorrow.toISOString().slice(0, 10);
+      const capsule = { id: win.capsules.length + 1, msg, openDate, createdAt: new Date().toISOString().slice(0,10), opened: false };
+      win.capsules.push(capsule);
+      printToWindow(win.id, '  +-------+', 'sys');
+      printToWindow(win.id, '  | DIARY |', 'sys');
+      printToWindow(win.id, '  |[_____]|', 'sys');
+      printToWindow(win.id, '  +-------+', 'sys');
+      printToWindow(win.id, '  Diary #' + capsule.id + ' sealed. Opens: ' + openDate, 'success');
+      break;
+    }
+    case 'list': {
+      if (!win.capsules.length) { printToWindow(win.id, '  No capsules yet.', 'info'); break; }
+      printToWindow(win.id, '  Capsules:', 'sys');
+      for (const c of win.capsules) {
+        if (c.opened) printToWindow(win.id, '  #' + c.id + ' [OPENED]  "' + c.msg.slice(0,30) + '"', 'success');
+        else printToWindow(win.id, '  #' + c.id + ' [SEALED until ' + c.openDate + ']', 'warn');
+      }
+      break;
+    }
+    case 'open': {
+      const idx = parseInt(parts[1], 10);
+      if (isNaN(idx)) { printToWindow(win.id, '  Usage: open <n>', 'err'); break; }
+      const capsule = win.capsules.find(c => c.id === idx);
+      if (!capsule) { printToWindow(win.id, '  Capsule #' + idx + ' not found.', 'err'); break; }
+      if (capsule.opened) { printToWindow(win.id, '  Already opened: "' + capsule.msg + '"', 'info'); break; }
+      const today = new Date().toISOString().slice(0, 10);
+      if (today < capsule.openDate) {
+        printToWindow(win.id, '  Too early! Sealed until ' + capsule.openDate + '.', 'err');
+        printToWindow(win.id, '  +-------+', 'sys');
+        printToWindow(win.id, '  | SEALED|', 'sys');
+        printToWindow(win.id, '  |[_____]|', 'sys');
+        printToWindow(win.id, '  +-------+', 'sys');
+        break;
+      }
+      capsule.opened = true;
+      printToWindow(win.id, '  +-------+', 'success');
+      printToWindow(win.id, '  |OPENED!|', 'success');
+      printToWindow(win.id, '  | \\o/   |', 'success');
+      printToWindow(win.id, '  +-------+', 'success');
+      printToWindow(win.id, '  * * * CAPSULE OPENED * * *', 'success');
+      printToWindow(win.id, '');
+      printToWindow(win.id, '  "' + capsule.msg + '"', 'result');
+      printToWindow(win.id, '');
+      printToWindow(win.id, '  Created: ' + capsule.createdAt + '  Opened: ' + today, 'info');
+      break;
+    }
+    case 'count': {
+      const sealed = win.capsules.filter(c => !c.opened).length;
+      const opened = win.capsules.filter(c => c.opened).length;
+      printToWindow(win.id, '  Sealed: ' + sealed, 'warn');
+      printToWindow(win.id, '  Opened: ' + opened, 'success');
+      printToWindow(win.id, '  Total:  ' + win.capsules.length, 'info');
+      break;
+    }
+    case 'clear': clearOutput(win.id); break;
+    case 'help': printToWindow(win.id, '  create "msg" YYYY-MM-DD  |  list  |  open <n>  |  diary "msg"  |  count', 'info'); break;
+    default: if (src.trim()) printToWindow(win.id, 'Unknown: ' + src + '. Type "help".', 'warn');
+  }
+}
+
+/* ============================================================
+   ROMLOADER APP — ROM library manager (no emulation)
+   ============================================================ */
+const ROMLOADER_LIBRARY = [
+  { id: 1, title: 'Pokemon Red',           platform: 'Game Boy', year: 1996, genre: 'RPG',        publisher: 'Nintendo' },
+  { id: 2, title: 'Tetris',                platform: 'Game Boy', year: 1989, genre: 'Puzzle',     publisher: 'Nintendo' },
+  { id: 3, title: 'The Legend of Zelda',   platform: 'NES',      year: 1986, genre: 'Adventure',  publisher: 'Nintendo' },
+  { id: 4, title: 'Super Mario Bros',      platform: 'NES',      year: 1985, genre: 'Platformer', publisher: 'Nintendo' },
+  { id: 5, title: 'Metroid',               platform: 'NES',      year: 1986, genre: 'Action',     publisher: 'Nintendo' },
+];
+
+function romLoaderCard(rom) {
+  const h = seedHash(rom.title);
+  const rng = mulberry32(h);
+  const power = 1 + Math.floor(rng() * 9);
+  const toughness = 1 + Math.floor(rng() * 9);
+  const rarity = ['common', 'uncommon', 'rare', 'mythic'][Math.floor(rng() * 4)];
+  const rating = (3 + rng() * 2).toFixed(1);
+  return { power, toughness, rarity, rating };
+}
+
+function bootRomLoader(win) {
+  win.romloader = { history: [] };
+  printToWindow(win.id, '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'sys');
+  printToWindow(win.id, '\u2551  ROMLOADER  \u2014 ROM Library         \u2551', 'sys');
+  printToWindow(win.id, '\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'sys');
+  printToWindow(win.id, '');
+  printToWindow(win.id, '  LEGAL NOTICE:', 'warn');
+  printToWindow(win.id, '  Demo ROM manager — no actual ROM files are included.', 'warn');
+  printToWindow(win.id, '  Emulation requires real emulator cores.', 'warn');
+  printToWindow(win.id, '  Only use ROMs you legally own.', 'warn');
+  printToWindow(win.id, '');
+  printToWindow(win.id, 'Commands:', 'info');
+  printToWindow(win.id, '  scan              — show demo library', 'info');
+  printToWindow(win.id, '  info <n>          — show ROM details', 'info');
+  printToWindow(win.id, '  card <title>      — show as Rappter card', 'info');
+  printToWindow(win.id, '  history           — show view history', 'info');
+  printToWindow(win.id, '  clear             — clear output', 'info');
+  printToWindow(win.id, '');
+}
+
+function handleRomLoaderInput(win, src) {
+  printToWindow(win.id, '= ' + src, 'cmd');
+  const parts = src.trim().split(/\s+/);
+  const cmd = parts[0].toLowerCase();
+  const rest = parts.slice(1).join(' ');
+  switch (cmd) {
+    case 'scan': {
+      printToWindow(win.id, '  ROM Library:', 'sys');
+      printToWindow(win.id, '  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', 'info');
+      for (const rom of ROMLOADER_LIBRARY) {
+        printToWindow(win.id, '  ' + String(rom.id).padStart(2) + '. ' + rom.title.padEnd(22) + ' [' + rom.platform.padEnd(8) + '] ' + rom.year + '  ' + rom.genre, 'result');
+      }
+      printToWindow(win.id, '  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', 'info');
+      printToWindow(win.id, '  ' + ROMLOADER_LIBRARY.length + ' ROMs in demo library. Use "info <n>" for details.', 'info');
+      break;
+    }
+    case 'info': {
+      const n = parseInt(rest, 10);
+      const rom = ROMLOADER_LIBRARY.find(r => r.id === n);
+      if (!rom) { printToWindow(win.id, '  ROM #' + n + ' not found. Try "scan".', 'err'); break; }
+      const c = romLoaderCard(rom);
+      printToWindow(win.id, '  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510', 'sys');
+      printToWindow(win.id, '  \u2502  ' + rom.title.padEnd(32) + '\u2502', 'sys');
+      printToWindow(win.id, '  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524', 'sys');
+      printToWindow(win.id, '  \u2502  Platform:  ' + rom.platform.padEnd(21) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502  Year:      ' + String(rom.year).padEnd(21) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502  Genre:     ' + rom.genre.padEnd(21) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502  Publisher: ' + rom.publisher.padEnd(21) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502  P/T: ' + c.power + '/' + c.toughness + '  Rarity: ' + c.rarity.padEnd(18) + '\u2502', 'result');
+      printToWindow(win.id, '  \u2502  Rating: ' + '\u2605'.repeat(Math.round(c.rating)) + ' (' + c.rating + ')'.padEnd(21) + '\u2502', 'result');
+      printToWindow(win.id, '  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518', 'sys');
+      win.romloader.history.push({ title: rom.title, at: new Date().toLocaleTimeString() });
+      break;
+    }
+    case 'card': {
+      const query = rest.toLowerCase();
+      const rom = ROMLOADER_LIBRARY.find(r => r.title.toLowerCase().includes(query) || String(r.id) === query)
+        || { id: 0, title: rest || 'Unknown ROM', platform: 'Unknown', year: 0, genre: 'Unknown', publisher: 'Unknown' };
+      const c = romLoaderCard(rom);
+      printToWindow(win.id, '  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510', 'sys');
+      printToWindow(win.id, '  \u2502 ' + rom.title.slice(0,32).padEnd(32) + '\u2502', 'result');
+      printToWindow(win.id, '  \u2502 ' + rom.platform.padEnd(16) + String(rom.year).padEnd(16) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502                                 \u2502', '');
+      printToWindow(win.id, '  \u2502  POWER / TOUGHNESS             \u2502', 'warn');
+      printToWindow(win.id, '  \u2502       ' + String(c.power).padStart(2) + '  /  ' + String(c.toughness).padEnd(2) + '                 \u2502', 'result');
+      printToWindow(win.id, '  \u2502                                 \u2502', '');
+      printToWindow(win.id, '  \u2502 Genre:  ' + rom.genre.padEnd(24) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502 Rarity: ' + c.rarity.padEnd(24) + '\u2502', 'info');
+      printToWindow(win.id, '  \u2502 Rating: ' + '\u2605'.repeat(Math.round(c.rating)) + ' (' + c.rating + ')          \u2502', 'result');
+      printToWindow(win.id, '  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518', 'sys');
+      break;
+    }
+    case 'history': {
+      if (!win.romloader.history.length) { printToWindow(win.id, '  No history yet. Use "info <n>" to view a ROM.', 'info'); break; }
+      printToWindow(win.id, '  View History:', 'sys');
+      for (const h of win.romloader.history.slice().reverse()) {
+        printToWindow(win.id, '    ' + h.at + '  ' + h.title, 'result');
+      }
+      break;
+    }
+    case 'clear': clearOutput(win.id); break;
+    case 'help': printToWindow(win.id, '  scan  info <n>  card <title>  history', 'info'); break;
+    default: if (src.trim()) printToWindow(win.id, 'Unknown: ' + src + '. Type "help".', 'warn');
+  }
+}
+
+/* ============================================================
    STUB APP
    ============================================================ */
 function bootStub(win, app) {
