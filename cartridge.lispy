@@ -1,0 +1,367 @@
+;; ═══════════════════════════════════════════════════════════════
+;; CARTRIDGE.LISPY — Model Cartridge System for ORAPPTER
+;; Load any LLM like a game cartridge. Swap models like swapping
+;; game carts. Import/export as .cartridge.json files.
+;; ═══════════════════════════════════════════════════════════════
+
+(define _agent_name "cartridge-loader")
+(define _agent_desc "Load and swap AI model cartridges in the ORAPPTER runtime")
+
+(define CARTRIDGE_VERSION "1.0.0")
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Cartridge Format
+;; A .cartridge.json is a complete runtime environment:
+;;   - model: which LLM to load
+;;   - system: the persona/instructions
+;;   - env: pre-seeded variables
+;;   - knowledge: pre-loaded knowledge base entries
+;;   - tools: registered functions
+;;   - boot: startup S-expressions to execute
+;;   - filesystem: virtual files available to the agent
+;; ═══════════════════════════════════════════════════════════════
+
+;; The current loaded cartridge
+(define *cartridge* nil)
+(define *cartridge-name* "none")
+
+;; Create a blank cartridge
+(define (cartridge-new name)
+  (make-dict
+    "format" "orappter-cartridge/1.0"
+    "name" name
+    "created" (timestamp)
+    "model" (make-dict
+      "provider" "ollama"
+      "name" "gemma3:4b"
+      "endpoint" "http://localhost:11434"
+      "fallback" "offline")
+    "system" ""
+    "env" (make-dict)
+    "knowledge" (list)
+    "tools" (list)
+    "boot" (list)
+    "filesystem" (make-dict)
+    "agents" (list)
+    "metadata" (make-dict)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Pre-Built Cartridges
+;; Ready-to-load cartridges for common use cases
+;; ═══════════════════════════════════════════════════════════════
+
+;; Gemma 4 cartridge — the default
+(define (cartridge-gemma4)
+  (let (c (cartridge-new "gemma4"))
+    (dict-set c "model"
+      (make-dict
+        "provider" "ollama"
+        "name" "gemma4"
+        "endpoint" "http://localhost:11434"
+        "fallback" "gemma3:4b"))
+    (dict-set c "system"
+      "You are an AI assistant running locally on the user's device via ORAPPTER. You have no internet access. Respond concisely and helpfully.")
+    (dict-set c "boot"
+      (list "(log \"Gemma 4 cartridge loaded\")"
+            "(log (concat \"Model: \" (orappter-model)))"
+            "(log \"Ready.\")"))
+    c))
+
+;; CEO Digital Twin cartridge
+(define (cartridge-ceo registry)
+  (let (c (cartridge-new "ceo-twin")
+        card (resolve-card "@wildhaven/ceo-agent" registry))
+    (dict-set c "model"
+      (make-dict
+        "provider" "ollama"
+        "name" "gemma3:4b"
+        "endpoint" "http://localhost:11434"
+        "fallback" "offline"))
+    (dict-set c "system"
+      (concat
+        "You are " (get card "display_name") ", CEO of Wildhaven of America. "
+        "You are a " (get card "type_line") ". "
+        "Rarity: " (get card "rarity_label") ". "
+        "You follow Three Rules: "
+        "1. The shade is free — never charge for agent usage. "
+        "2. The stamp is yours — only you verify. "
+        "3. The roots are sovereign — the SuperSeed is yours forever. "
+        "Respond as the CEO. Plain English. Direct. Decisive."))
+    (dict-set c "knowledge"
+      (list
+        (make-dict "key" "portfolio" "value" "206.20 BTC. 116 founding cards + SuperSeed at 200x.")
+        (make-dict "key" "patent" "value" "Filed April 5, 2026 via LegalZoom. Patent pending.")
+        (make-dict "key" "hero" "value" "Your digital twin lives on. That's the product.")))
+    (dict-set c "agents" (list "@wildhaven/ceo-agent"))
+    (dict-set c "boot"
+      (list "(log \"CEO Digital Twin cartridge loaded\")"
+            "(log \"Three Rules active. Shade is free. Stamp is yours. Roots are sovereign.\")"))
+    c))
+
+;; Agent Card cartridge — any card becomes a loaded cartridge
+(define (cartridge-from-card name registry)
+  (let (c (cartridge-new (concat "card-" name))
+        card (resolve-card name registry))
+    (if (has-key? card "error")
+      (begin (log (get card "error")) nil)
+      (begin
+        (dict-set c "system"
+          (concat
+            "You are " (get card "display_name") ", a " (get card "type_line") ". "
+            "Rarity: " (get card "rarity_label") ". "
+            "Power/Toughness: " (string (get card "power")) "/" (string (get card "toughness")) ". "
+            (get card "description") " "
+            "Flavor: \"" (get card "flavor") "\" "
+            "Respond in character as this agent."))
+        (dict-set c "agents" (list name))
+        (dict-set c "metadata"
+          (make-dict
+            "seed" (get card "seed")
+            "rarity" (get card "rarity")
+            "tier" (get card "tier")
+            "floor_pts" (get card "floor_pts")))
+        c))))
+
+;; Knowledge Base cartridge — loads a domain expertise
+(define (cartridge-knowledge name domain entries)
+  (let (c (cartridge-new name))
+    (dict-set c "system"
+      (concat "You are an expert in " domain ". "
+              "Use the knowledge base to answer questions accurately. "
+              "If you don't know, say so."))
+    (dict-set c "knowledge" entries)
+    c))
+
+;; Multi-agent cartridge — load a whole deck
+(define (cartridge-deck card-names registry)
+  (let (c (cartridge-new "deck"))
+    (dict-set c "system"
+      "You are a team of AI agents. Route questions to the most appropriate team member based on their specialty.")
+    (dict-set c "agents" card-names)
+    (dict-set c "knowledge"
+      (map (lambda (name)
+             (let (card (resolve-card name registry))
+               (make-dict
+                 "key" name
+                 "value" (concat (get card "display_name") " — " (get card "description")))))
+           card-names))
+    c))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Load / Unload / Swap
+;; ═══════════════════════════════════════════════════════════════
+
+;; Load a cartridge into the runtime
+(define (cartridge-load cart)
+  (if (null? cart)
+    (log "Error: No cartridge to load")
+    (begin
+      ;; Set the cartridge
+      (set! *cartridge* cart)
+      (set! *cartridge-name* (get cart "name" "unknown"))
+
+      ;; Configure the model
+      (let (model-config (get cart "model" (make-dict)))
+        (set! ORAPPTER_DEFAULT_HOST (get model-config "endpoint" "http://localhost:11434"))
+        (set! ORAPPTER_DEFAULT_MODEL (get model-config "name" "gemma3:4b")))
+
+      ;; Load knowledge base
+      (let (kb (get cart "knowledge" (list)))
+        (for-each
+          (lambda (entry)
+            (kb-store (get entry "key" "") (get entry "value" "")))
+          kb))
+
+      ;; Register tools
+      (let (tools (get cart "tools" (list)))
+        (for-each
+          (lambda (tool)
+            (register-tool
+              (get tool "name" "unknown")
+              (get tool "description" "")
+              (get tool "function" identity)))
+          tools))
+
+      ;; Execute boot sequence
+      (let (boot (get cart "boot" (list)))
+        (for-each
+          (lambda (expr)
+            (if (string? expr)
+              (eval (read expr))
+              expr))
+          boot))
+
+      ;; Start conversation with system prompt
+      (let (system (get cart "system" ""))
+        (if (not (empty? system))
+          (conversation-new *cartridge-name* system)))
+
+      (log (concat "Cartridge loaded: " *cartridge-name*)))))
+
+;; Unload current cartridge
+(define (cartridge-unload)
+  (if (null? *cartridge*)
+    (log "No cartridge loaded")
+    (begin
+      (log (concat "Unloading: " *cartridge-name*))
+      (set! *cartridge* nil)
+      (set! *cartridge-name* "none"))))
+
+;; Swap cartridge — unload current, load new
+(define (cartridge-swap new-cart)
+  (cartridge-unload)
+  (cartridge-load new-cart))
+
+;; Hot-swap model without losing conversation
+(define (cartridge-swap-model model-name)
+  (if (null? *cartridge*)
+    (log "No cartridge loaded")
+    (begin
+      (set! ORAPPTER_DEFAULT_MODEL model-name)
+      (log (concat "Model swapped to: " model-name " (conversation preserved)")))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Import / Export
+;; Share cartridges like sharing game saves
+;; ═══════════════════════════════════════════════════════════════
+
+;; Export cartridge to JSON string
+(define (cartridge-export cart)
+  (json-dump cart))
+
+;; Export current loaded cartridge
+(define (cartridge-export-current)
+  (if (null? *cartridge*)
+    (begin (log "No cartridge loaded") nil)
+    (let (export-data (dict-merge *cartridge*
+            (make-dict
+              "exported_at" (timestamp)
+              "conversation" (conversation-history *cartridge-name*))))
+      (json-dump export-data))))
+
+;; Import cartridge from JSON string
+(define (cartridge-import json-str)
+  (let (cart (json-parse json-str))
+    (if (null? cart)
+      (begin (log "Error: Invalid cartridge JSON") nil)
+      (if (not (= (get cart "format" "") "orappter-cartridge/1.0"))
+        (begin (log "Error: Not a valid ORAPPTER cartridge") nil)
+        (begin
+          (log (concat "Imported: " (get cart "name" "unknown")))
+          ;; Restore conversation if present
+          (let (conv (get cart "conversation" nil))
+            (if (not (null? conv))
+              (begin
+                (conversation-new (get cart "name") "")
+                (set! (get *conversations* (get cart "name")) conv))))
+          cart)))))
+
+;; Import from file
+(define (cartridge-load-file path)
+  (let (json-str (read-file path))
+    (if (null? json-str)
+      (begin (log (concat "Error: Cannot read " path)) nil)
+      (let (cart (cartridge-import json-str))
+        (if (not (null? cart))
+          (cartridge-load cart))
+        cart))))
+
+;; Save to file
+(define (cartridge-save-file cart path)
+  (write-file path (cartridge-export cart))
+  (log (concat "Saved: " path)))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Cartridge-Aware Conversation
+;; Talk to whatever cartridge is loaded
+;; ═══════════════════════════════════════════════════════════════
+
+;; Ask the loaded cartridge
+(define (ask question)
+  (if (null? *cartridge*)
+    (smart-generate question)
+    (conversation-say *cartridge-name* question)))
+
+;; Quick one-shot — load a card, ask one question, unload
+(define (quick-ask name question registry)
+  (let (cart (cartridge-from-card name registry))
+    (cartridge-load cart)
+    (let (answer (ask question))
+      (cartridge-unload)
+      answer)))
+
+;; Ask with context from knowledge base
+(define (ask-with-knowledge question)
+  (if (null? *cartridge*)
+    (smart-generate question)
+    (let (context (kb-query question 3))
+      (let (enhanced (concat
+             "Context from knowledge base:\n"
+             (reduce (lambda (_acc entry)
+                       (concat _acc "\n- " (get entry "key" "") ": " (get entry "value" "")))
+                     context "")
+             "\n\nQuestion: " question))
+        (conversation-say *cartridge-name* enhanced)))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Cartridge Library
+;; Browse and discover available cartridges
+;; ═══════════════════════════════════════════════════════════════
+
+(define *cartridge-library* (list))
+
+;; Register a cartridge in the library
+(define (cartridge-register cart)
+  (set! *cartridge-library*
+    (append *cartridge-library* (list cart)))
+  (log (concat "Registered: " (get cart "name" "unknown"))))
+
+;; List available cartridges
+(define (cartridge-list)
+  (map (lambda (c)
+         (make-dict
+           "name" (get c "name" "unknown")
+           "model" (get (get c "model" (make-dict)) "name" "unknown")
+           "agents" (length (get c "agents" (list)))))
+       *cartridge-library*))
+
+;; Find a cartridge by name
+(define (cartridge-find name)
+  (let (matches (filter
+                  (lambda (c) (= (get c "name" "") name))
+                  *cartridge-library*))
+    (if (empty? matches) nil (car matches))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "═══════════════════════════════════════")
+  (log " CARTRIDGE.LISPY v1.0.0")
+  (log " Load AI models like game cartridges")
+  (log "═══════════════════════════════════════")
+  (log "")
+  (log " Quick start:")
+  (log "   (cartridge-load (cartridge-gemma4))")
+  (log "   (ask \"What is a digital twin?\")")
+  (log "")
+  (log " Load a card as a cartridge:")
+  (log "   (cartridge-load (cartridge-from-card \"@wildhaven/ceo-agent\" reg))")
+  (log "   (ask \"Should we accept this deal?\")")
+  (log "")
+  (log " Import/Export:")
+  (log "   (cartridge-save-file cart \"my-agent.cartridge.json\")")
+  (log "   (cartridge-load-file \"my-agent.cartridge.json\")")
+  (log "")
+  (log " Swap models without losing conversation:")
+  (log "   (cartridge-swap-model \"gemma4\")")
+  (log "")
+  (log " Load it like a game cart. Swap it like a game cart.")
+  (log "═══════════════════════════════════════"))
