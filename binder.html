@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Binder</title>
+<meta name="description" content="Your personal agent card binder. Collect, browse, resolve, and export. Works offline.">
+<style>
+:root {
+  --bg:#0d1117;--s1:#161b22;--s2:#21262d;--s3:#30363d;--bd:#30363d;
+  --tx:#e6edf3;--dim:#8b949e;--mut:#656d76;--acc:#58a6ff;--grn:#3fb950;
+  --org:#d29922;--pur:#bc8cff;--red:#f85149;--pnk:#ff7eb3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+a{color:var(--acc);text-decoration:none}
+
+/* Layout */
+.app{max-width:1200px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bd);margin-bottom:20px;flex-wrap:wrap;gap:12px}
+header h1{font-size:22px;font-weight:600}
+header h1 span{color:var(--acc)}
+.status{font-size:12px;padding:4px 10px;border-radius:12px;border:1px solid var(--bd)}
+.status.online{color:var(--grn);border-color:rgba(63,185,80,.3)}
+.status.offline{color:var(--org);border-color:rgba(210,153,34,.3)}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav button{background:var(--s2);color:var(--tx);border:1px solid var(--bd);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.nav button:hover{border-color:var(--acc);background:rgba(88,166,255,.08)}
+.nav button.active{background:var(--acc);color:#fff;border-color:var(--acc)}
+
+/* Tabs */
+.tab{display:none}.tab.active{display:block}
+
+/* Search */
+.search-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-row input,.search-row select{background:var(--s1);color:var(--tx);border:1px solid var(--bd);padding:8px 12px;border-radius:6px;font-size:14px}
+.search-row input{flex:1;min-width:200px}
+.search-row select{min-width:120px}
+
+/* Card grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+
+/* Card */
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s}
+.card:hover{border-color:var(--acc);transform:translateY(-2px)}
+.card-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start}
+.card-name{font-size:15px;font-weight:600}
+.card-hp{font-size:13px;font-weight:700;color:var(--red);background:rgba(248,81,73,.1);padding:2px 8px;border-radius:8px}
+.card-types{padding:0 16px 8px;display:flex;gap:6px}
+.type-badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.card-stats{display:flex;gap:0;padding:0 16px 10px}
+.card-stats .stat{flex:1;text-align:center;font-size:11px;color:var(--dim)}
+.card-stats .stat strong{display:block;font-size:14px;color:var(--tx)}
+.card-abilities{padding:0 16px 12px}
+.ability{font-size:12px;color:var(--dim);margin-bottom:4px}
+.ability .ab-name{color:var(--acc);font-weight:500}
+.ability .ab-dmg{color:var(--org)}
+.card-footer{padding:10px 16px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mut)}
+.card-rarity{font-weight:600}
+.rarity-mythic{color:var(--pur)}.rarity-rare{color:var(--acc)}.rarity-core{color:var(--grn)}.rarity-starter{color:var(--dim)}
+.card-seed{font-family:monospace;font-size:11px}
+
+/* Detail modal */
+.modal-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--bd);border-radius:16px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:24px}
+.modal-close{float:right;background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer;padding:4px 8px}
+.modal-close:hover{color:var(--tx)}
+.modal h2{font-size:20px;margin-bottom:4px}
+.modal .type-line{color:var(--dim);font-size:14px;margin-bottom:12px}
+.modal .stat-bar{display:flex;gap:12px;margin:12px 0;flex-wrap:wrap}
+.modal .stat-bar .sb{text-align:center;flex:1;min-width:50px}
+.modal .stat-bar .sb-val{font-size:22px;font-weight:700}
+.modal .stat-bar .sb-label{font-size:11px;color:var(--dim)}
+.modal .matchups{display:flex;gap:16px;margin:12px 0;font-size:13px}
+.modal .matchups .weak{color:var(--red)}.modal .matchups .resist{color:var(--grn)}
+.modal .ab-list{margin:12px 0}
+.modal .ab-item{background:var(--s2);padding:8px 12px;border-radius:8px;margin-bottom:8px}
+.modal .ab-item .ab-head{display:flex;justify-content:space-between;font-size:14px;font-weight:500}
+.modal .ab-item .ab-text{font-size:12px;color:var(--dim);margin-top:4px}
+.modal .flavor{font-style:italic;color:var(--mut);font-size:13px;margin:12px 0;padding:8px;border-left:2px solid var(--bd)}
+.modal .meta{font-size:12px;color:var(--mut);margin-top:12px}
+.modal .meta div{margin-bottom:4px}
+.modal .actions{display:flex;gap:8px;margin-top:16px}
+.modal .actions button{flex:1;padding:8px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--tx);cursor:pointer;font-size:13px}
+.modal .actions button:hover{border-color:var(--acc)}
+.modal .actions button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+
+/* Seed resolver */
+.seed-box{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:24px;text-align:center;margin-bottom:20px}
+.seed-box input{background:var(--s2);color:var(--tx);border:1px solid var(--bd);padding:10px 16px;border-radius:8px;font-size:18px;font-family:monospace;text-align:center;width:260px}
+.seed-box button{margin-left:8px;padding:10px 20px;background:var(--acc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px}
+.seed-box p{color:var(--dim);font-size:13px;margin-top:8px}
+
+/* Import/Export */
+.io-section{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.io-section button{padding:8px 16px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--tx);cursor:pointer;font-size:13px}
+.io-section button:hover{border-color:var(--acc)}
+.io-section .count{color:var(--dim);font-size:13px;padding:8px 0;display:flex;align-items:center}
+
+/* Empty state */
+.empty{text-align:center;padding:60px 20px;color:var(--dim)}
+.empty h3{color:var(--tx);margin-bottom:8px}
+
+/* Footer links */
+.footer-links{display:flex;gap:16px;margin-top:24px;padding-top:16px;border-top:1px solid var(--bd);font-size:13px;color:var(--mut);flex-wrap:wrap}
+
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  .card-stats .stat{font-size:10px}
+  .modal{margin:8px;padding:16px}
+  .seed-box input{width:100%;margin-bottom:8px}
+  .seed-box button{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div>
+    <h1><span>RAR</span> Binder</h1>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <span class="status" id="netStatus">checking...</span>
+  </div>
+</header>
+
+<div class="nav" id="nav">
+  <button data-tab="collection" class="active">My Collection</button>
+  <button data-tab="browse">Browse Registry</button>
+  <button data-tab="resolve">Seed Resolver</button>
+  <button data-tab="manage">Import / Export</button>
+</div>
+
+<!-- ═══ COLLECTION TAB ═══ -->
+<div class="tab active" id="tab-collection">
+  <div class="search-row">
+    <input type="text" id="collSearch" placeholder="Search your collection...">
+    <select id="collTypeFilter"><option value="">All Types</option></select>
+  </div>
+  <div class="grid" id="collGrid"></div>
+  <div class="empty" id="collEmpty" style="display:none">
+    <h3>Your binder is empty</h3>
+    <p>Browse the registry and add cards to your collection.</p>
+  </div>
+</div>
+
+<!-- ═══ BROWSE TAB ═══ -->
+<div class="tab" id="tab-browse">
+  <div class="search-row">
+    <input type="text" id="browseSearch" placeholder="Search all agents...">
+    <select id="browseTypeFilter"><option value="">All Types</option></select>
+    <select id="browseRarityFilter">
+      <option value="">All Rarities</option>
+      <option value="mythic">Legendary</option>
+      <option value="rare">Elite</option>
+      <option value="core">Core</option>
+      <option value="starter">Starter</option>
+    </select>
+  </div>
+  <div class="grid" id="browseGrid"></div>
+</div>
+
+<!-- ═══ SEED RESOLVER TAB ═══ -->
+<div class="tab" id="tab-resolve">
+  <div class="seed-box">
+    <div>
+      <input type="text" id="seedInput" placeholder="Enter seed number">
+      <button onclick="resolveSeed()">Resolve</button>
+    </div>
+    <p>Paste any seed number to see its card. No network needed.</p>
+  </div>
+  <div class="grid" id="seedGrid"></div>
+</div>
+
+<!-- ═══ MANAGE TAB ═══ -->
+<div class="tab" id="tab-manage">
+  <div class="io-section">
+    <button onclick="exportBinder()">Export Binder</button>
+    <button onclick="document.getElementById('importFile').click()">Import Binder</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importBinder(event)">
+    <button onclick="clearBinder()">Clear Collection</button>
+    <span class="count" id="binderCount"></span>
+  </div>
+  <div style="background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:20px;font-size:14px;color:var(--dim)">
+    <p><strong style="color:var(--tx)">How it works</strong></p>
+    <p style="margin-top:8px">Your binder is stored in your browser (IndexedDB). It persists across sessions and works offline.</p>
+    <p style="margin-top:8px"><strong>Export</strong> downloads a <code>binder.json</code> file you can back up, share, or import into another browser.</p>
+    <p style="margin-top:8px"><strong>Import</strong> merges cards from a <code>binder.json</code> file into your collection without duplicates.</p>
+    <p style="margin-top:8px">To sync globally, push your exported <code>binder.json</code> to your RAR-compliant repo and enable GitHub Pages.</p>
+  </div>
+</div>
+
+<!-- ═══ DETAIL MODAL ═══ -->
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<div class="footer-links">
+  <a href="index.html">Agent Store</a>
+  <a href="releases.html">Release Notes</a>
+  <a href="rappterpedia/index.html">Rappterpedia</a>
+  <a href="https://github.com/kody-w/RAR">GitHub</a>
+</div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DETERMINISTIC CARD ENGINE (same as rapp_sdk.py)
+// ═══════════════════════════════════════════════════════
+
+function seedHash(s){let h=0;for(const c of s)h=((h<<5)-h+c.charCodeAt(0))>>>0;return h}
+function mulberry32(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let z=s;z=Math.imul(z^(z>>>15),z|1);z=Math.imul(z+(Math.imul(z^(z>>>7),z|61)>>>0)^z,1);return((z^(z>>>14))>>>0)/4294967296}}
+
+const TYPES={LOGIC:{color:'#58a6ff',label:'Logic'},DATA:{color:'#3fb950',label:'Data'},SOCIAL:{color:'#d29922',label:'Social'},SHIELD:{color:'#f0f0f0',label:'Shield'},CRAFT:{color:'#f85149',label:'Craft'},HEAL:{color:'#ff7eb3',label:'Heal'},WEALTH:{color:'#bc8cff',label:'Wealth'}}
+const TYPE_NAMES=Object.keys(TYPES)
+const TIER_RARITY={official:'mythic',verified:'rare',community:'core',experimental:'starter'}
+const RARITY_LABEL={mythic:'Legendary',rare:'Elite',core:'Core',starter:'Starter'}
+const RARITY_CLASS={mythic:'rarity-mythic',rare:'rarity-rare',core:'rarity-core',starter:'rarity-starter'}
+const WEAKNESS={LOGIC:'WEALTH',DATA:'LOGIC',SOCIAL:'DATA',SHIELD:'SOCIAL',CRAFT:'SHIELD',HEAL:'CRAFT',WEALTH:'HEAL'}
+const RESIST={LOGIC:'DATA',DATA:'SOCIAL',SOCIAL:'SHIELD',SHIELD:'CRAFT',CRAFT:'HEAL',HEAL:'WEALTH',WEALTH:'LOGIC'}
+const EVO={experimental:{stage:0,label:'Seed'},community:{stage:1,label:'Base'},verified:{stage:2,label:'Evolved'},official:{stage:3,label:'Legendary'}}
+const FLAVORS=["Built for the ecosystem. Ready for the edge.","One file. Infinite possibilities.","Runs anywhere the RAPP runtime breathes.","Forged in the registry. Trusted in production.","A single-file agent. A single promise: perform.","When the network calls, this agent answers.","Data in. Insight out. No drama.","The pipeline starts here.","Born from a manifest. Raised in the registry.","Your code, your agent, your card. Permanent.","Not just code. Identity.","The forge remembers every agent it ever touched."]
+const AB_POOL={LOGIC:[['Analyze',30],['Compute',25],['Parse',20],['Reason',35]],DATA:[['Extract',20],['Transform',30],['Sync',25],['Pipeline',35]],SOCIAL:[['Assist',15],['Draft',25],['Coach',30],['Present',20]],SHIELD:[['Audit',25],['Enforce',35],['Monitor',20],['Certify',30]],CRAFT:[['Build',30],['Optimize',35],['Schedule',20],['Dispatch',25]],HEAL:[['Triage',25],['Screen',20],['Support',15],['Track',30]],WEALTH:[['Prospect',20],['Forecast',30],['Negotiate',35],['Close',40]]}
+
+function resolveFromSeed(seed){
+  const rng=mulberry32(seed)
+  const pIdx=Math.floor(rng()*TYPE_NAMES.length)
+  const primary=TYPE_NAMES[pIdx]
+  const types=[primary]
+  if(rng()>0.6){const sIdx=Math.floor(rng()*TYPE_NAMES.length);if(TYPE_NAMES[sIdx]!==primary)types.push(TYPE_NAMES[sIdx])}
+  const tRoll=rng()
+  const tier=tRoll<0.05?'official':tRoll<0.20?'verified':tRoll<0.85?'community':'experimental'
+  const rarity=TIER_RARITY[tier]||'core'
+  const clamp=v=>Math.max(10,Math.min(100,Math.floor(v)))
+  const hp=clamp(30+rng()*70),atk=clamp(20+rng()*80),def=clamp(25+rng()*65),spd=clamp(20+rng()*75),int_=clamp(25+rng()*70)
+  const pool=AB_POOL[primary]||AB_POOL.SOCIAL
+  const count=1+Math.floor(rng()*3)
+  const abilities=[]
+  for(let i=0;i<Math.min(count,pool.length);i++){const idx=Math.floor(rng()*pool.length);abilities.push({name:pool[idx%pool.length][0],cost:Math.floor(rng()*3)+1,damage:pool[idx%pool.length][1]+Math.floor(rng()*15)})}
+  return{seed,display_name:`Agent #${(seed&0xFFFF).toString(16).toUpperCase().padStart(4,'0')}`,tier,rarity,rarity_label:RARITY_LABEL[rarity],types,hp,stats:{hp,atk,def,spd,int:int_},abilities,weakness:WEAKNESS[primary],resistance:RESIST[primary],evolution:EVO[tier]||EVO.community,flavor:FLAVORS[Math.floor(rng()*FLAVORS.length)],floor_pts:{mythic:200,rare:100,core:40,starter:10}[rarity]||10,_seed_only:true}
+}
+
+// ═══════════════════════════════════════════════════════
+// BINDER STATE (IndexedDB)
+// ═══════════════════════════════════════════════════════
+
+let DB
+const DB_NAME='rar_binder',DB_VER=1,STORE='cards'
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,DB_VER);r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE,{keyPath:'_binder_key'})};r.onsuccess=e=>{DB=e.target.result;res(DB)};r.onerror=e=>rej(e)})}
+function dbPut(card){return new Promise((res,rej)=>{const tx=DB.transaction(STORE,'readwrite');tx.objectStore(STORE).put(card);tx.oncomplete=()=>res();tx.onerror=e=>rej(e)})}
+function dbDelete(key){return new Promise((res,rej)=>{const tx=DB.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(key);tx.oncomplete=()=>res();tx.onerror=e=>rej(e)})}
+function dbGetAll(){return new Promise((res,rej)=>{const tx=DB.transaction(STORE,'readonly');const r=tx.objectStore(STORE).getAll();r.onsuccess=()=>res(r.result);r.onerror=e=>rej(e)})}
+function dbClear(){return new Promise((res,rej)=>{const tx=DB.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=()=>res();tx.onerror=e=>rej(e)})}
+
+// ═══════════════════════════════════════════════════════
+// REGISTRY + CARDS DATA
+// ═══════════════════════════════════════════════════════
+
+let REGISTRY=[],HOLO_CARDS={}
+
+async function loadRegistry(){
+  try{
+    const[regR,cardR]=await Promise.all([fetch('registry.json'),fetch('cards/holo_cards.json')])
+    if(regR.ok){const d=await regR.json();REGISTRY=d.agents||[]}
+    if(cardR.ok)HOLO_CARDS=await cardR.json()
+    document.getElementById('netStatus').textContent='online'
+    document.getElementById('netStatus').className='status online'
+  }catch(e){
+    document.getElementById('netStatus').textContent='offline'
+    document.getElementById('netStatus').className='status offline'
+  }
+}
+
+function enrichAgent(agent){
+  const name=agent.name||''
+  const holo=HOLO_CARDS[name]||{}
+  return{...agent,...holo,_binder_key:name||`seed:${agent.seed}`}
+}
+
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
+
+function typeBadge(t){
+  const info=TYPES[t]||{color:'#888',label:t}
+  return`<span class="type-badge" style="background:${info.color}22;color:${info.color};border:1px solid ${info.color}44">${info.label}</span>`
+}
+
+function renderCard(card,showAdd=false){
+  const types=card.agent_types||card.types||[]
+  const stats=card.stats||{}
+  const abilities=card.typed_abilities||card.abilities||[]
+  const rarity=card.rarity_tier||card.rarity||'core'
+  const rarityLabel=card.rarity_label||RARITY_LABEL[rarity]||rarity
+  const hp=card.hp||stats.hp||'?'
+  const seed=card.seed||''
+  const name=card.display_name||card.name||`Agent #${seed}`
+
+  return`<div class="card" onclick='showDetail(${JSON.stringify(card).replace(/'/g,"&#39;")})'>
+    <div class="card-top">
+      <span class="card-name">${esc(name)}</span>
+      <span class="card-hp">HP ${hp}</span>
+    </div>
+    <div class="card-types">${types.map(typeBadge).join('')}</div>
+    <div class="card-stats">
+      <div class="stat"><strong>${stats.atk||'?'}</strong>ATK</div>
+      <div class="stat"><strong>${stats.def||'?'}</strong>DEF</div>
+      <div class="stat"><strong>${stats.spd||'?'}</strong>SPD</div>
+      <div class="stat"><strong>${stats.int||'?'}</strong>INT</div>
+    </div>
+    <div class="card-abilities">${abilities.slice(0,2).map(a=>`<div class="ability"><span class="ab-name">${esc(a.name)}</span> <span class="ab-dmg">${a.damage||''}${a.damage?' dmg':''}</span></div>`).join('')}</div>
+    <div class="card-footer">
+      <span class="card-rarity ${RARITY_CLASS[rarity]||''}">${esc(rarityLabel)}</span>
+      <span class="card-seed">${seed?'#'+seed.toString(16).toUpperCase():''}</span>
+    </div>
+  </div>`
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function showDetail(card){
+  const types=card.agent_types||card.types||[]
+  const stats=card.stats||{}
+  const abilities=card.typed_abilities||card.abilities||[]
+  const rarity=card.rarity_tier||card.rarity||'core'
+  const rarityLabel=card.rarity_label||RARITY_LABEL[rarity]||rarity
+  const evo=card.evolution||{}
+  const name=card.display_name||card.name||'Unknown'
+  const weak=card.weakness_label||TYPES[card.weakness]?.label||'?'
+  const resist=card.resistance_label||TYPES[card.resistance]?.label||'?'
+  const key=card._binder_key||card.name||`seed:${card.seed}`
+
+  document.getElementById('modalContent').innerHTML=`
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>${esc(name)} <span style="font-size:14px;color:var(--red)">HP ${card.hp||stats.hp||'?'}</span></h2>
+    <div class="type-line">${esc(card.type_line||types.map(t=>TYPES[t]?.label||t).join(' / ')+' Agent')} &mdash; ${esc(evo.label||'Base')}</div>
+    <div style="display:flex;gap:6px;margin:8px 0">${types.map(typeBadge).join('')}</div>
+    <div class="stat-bar">
+      <div class="sb"><div class="sb-val">${stats.atk||'?'}</div><div class="sb-label">ATK</div></div>
+      <div class="sb"><div class="sb-val">${stats.def||'?'}</div><div class="sb-label">DEF</div></div>
+      <div class="sb"><div class="sb-val">${stats.spd||'?'}</div><div class="sb-label">SPD</div></div>
+      <div class="sb"><div class="sb-val">${stats.int||'?'}</div><div class="sb-label">INT</div></div>
+    </div>
+    <div class="matchups">
+      <span class="weak">Weak: ${esc(weak)}</span>
+      <span class="resist">Resists: ${esc(resist)}</span>
+      <span style="color:var(--dim)">Retreat: ${'*'.repeat(card.retreat_cost||0)||'free'}</span>
+    </div>
+    <div class="ab-list">${abilities.map(a=>`
+      <div class="ab-item">
+        <div class="ab-head"><span>${esc(a.name)}</span><span style="color:var(--org)">${a.cost?'['+a.cost+'] ':''}${a.damage||''} ${a.damage?'dmg':''}</span></div>
+        ${a.text?'<div class="ab-text">'+esc(a.text)+'</div>':''}
+      </div>`).join('')}</div>
+    ${card.flavor?`<div class="flavor">"${esc(card.flavor)}"</div>`:''}
+    <div class="meta">
+      ${card.description?`<div>${esc(card.description)}</div>`:''}
+      ${card.author?`<div>Author: ${esc(card.author)}</div>`:''}
+      ${card.version?`<div>Version: ${esc(card.version)}</div>`:''}
+      ${card.seed?`<div>Seed: <code>${card.seed}</code></div>`:''}
+      <div>Floor: ${card.floor_pts||'?'} pts</div>
+    </div>
+    <div class="actions">
+      <button class="primary" onclick="addToCollection(${JSON.stringify(key).replace(/"/g,'&quot;')})">Add to Binder</button>
+      <button onclick="removeFromCollection(${JSON.stringify(key).replace(/"/g,'&quot;')})">Remove</button>
+      <button onclick="closeModal()">Close</button>
+    </div>`
+  document.getElementById('modal').classList.add('open')
+  window._modalCard=card
+}
+
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+
+// ═══════════════════════════════════════════════════════
+// COLLECTION
+// ═══════════════════════════════════════════════════════
+
+async function addToCollection(key){
+  const card=window._modalCard
+  if(!card)return
+  card._binder_key=key
+  card._added_at=new Date().toISOString()
+  await dbPut(card)
+  closeModal()
+  renderCollection()
+}
+
+async function removeFromCollection(key){
+  await dbDelete(key)
+  closeModal()
+  renderCollection()
+}
+
+async function renderCollection(){
+  const cards=await dbGetAll()
+  const q=(document.getElementById('collSearch').value||'').toLowerCase()
+  const tf=document.getElementById('collTypeFilter').value
+  let filtered=cards
+  if(q)filtered=filtered.filter(c=>(c.display_name||c.name||'').toLowerCase().includes(q)||(c.description||'').toLowerCase().includes(q))
+  if(tf)filtered=filtered.filter(c=>(c.agent_types||c.types||[]).includes(tf))
+  const grid=document.getElementById('collGrid')
+  const empty=document.getElementById('collEmpty')
+  if(filtered.length===0){grid.innerHTML='';empty.style.display='block'}
+  else{empty.style.display='none';grid.innerHTML=filtered.map(c=>renderCard(c)).join('')}
+  document.getElementById('binderCount').textContent=`${cards.length} card${cards.length!==1?'s':''} in binder`
+}
+
+// ═══════════════════════════════════════════════════════
+// BROWSE
+// ═══════════════════════════════════════════════════════
+
+function renderBrowse(){
+  const q=(document.getElementById('browseSearch').value||'').toLowerCase()
+  const tf=document.getElementById('browseTypeFilter').value
+  const rf=document.getElementById('browseRarityFilter').value
+  let agents=REGISTRY.map(enrichAgent)
+  if(q)agents=agents.filter(a=>(a.display_name||a.name||'').toLowerCase().includes(q)||(a.description||'').toLowerCase().includes(q)||(a.tags||[]).join(' ').toLowerCase().includes(q))
+  if(tf)agents=agents.filter(a=>(a.agent_types||a.types||[]).includes(tf))
+  if(rf)agents=agents.filter(a=>(a.rarity_tier||a.rarity)===rf)
+  document.getElementById('browseGrid').innerHTML=agents.length?agents.map(a=>renderCard(a)).join(''):'<div class="empty"><h3>No matches</h3></div>'
+}
+
+// ═══════════════════════════════════════════════════════
+// SEED RESOLVER
+// ═══════════════════════════════════════════════════════
+
+function resolveSeed(){
+  const input=document.getElementById('seedInput').value.trim()
+  const seed=parseInt(input)
+  if(isNaN(seed)){alert('Enter a number');return}
+  const card=resolveFromSeed(seed)
+  card._binder_key=`seed:${seed}`
+  document.getElementById('seedGrid').innerHTML=renderCard(card)
+  window._lastSeedCard=card
+  showDetail(card)
+}
+
+// ═══════════════════════════════════════════════════════
+// IMPORT / EXPORT
+// ═══════════════════════════════════════════════════════
+
+async function exportBinder(){
+  const cards=await dbGetAll()
+  const blob=new Blob([JSON.stringify({schema:'rar-binder/1.0',exported_at:new Date().toISOString(),cards},null,2)],{type:'application/json'})
+  const a=document.createElement('a')
+  a.href=URL.createObjectURL(blob)
+  a.download='binder.json'
+  a.click()
+}
+
+async function importBinder(e){
+  const file=e.target.files[0]
+  if(!file)return
+  try{
+    const text=await file.text()
+    const data=JSON.parse(text)
+    const cards=data.cards||[]
+    let added=0
+    for(const card of cards){
+      if(card._binder_key){await dbPut(card);added++}
+    }
+    alert(`Imported ${added} cards`)
+    renderCollection()
+  }catch(err){alert('Invalid binder file: '+err.message)}
+  e.target.value=''
+}
+
+async function clearBinder(){
+  if(!confirm('Clear your entire collection? This cannot be undone.'))return
+  await dbClear()
+  renderCollection()
+}
+
+// ═══════════════════════════════════════════════════════
+// TABS + INIT
+// ═══════════════════════════════════════════════════════
+
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'))
+  document.getElementById('tab-'+name).classList.add('active')
+  document.querySelector(`.nav button[data-tab="${name}"]`).classList.add('active')
+  if(name==='collection')renderCollection()
+  if(name==='browse')renderBrowse()
+  if(name==='manage')renderCollection()
+}
+
+document.getElementById('nav').addEventListener('click',e=>{if(e.target.dataset.tab)switchTab(e.target.dataset.tab)})
+document.getElementById('collSearch').addEventListener('input',renderCollection)
+document.getElementById('collTypeFilter').addEventListener('change',renderCollection)
+document.getElementById('browseSearch').addEventListener('input',renderBrowse)
+document.getElementById('browseTypeFilter').addEventListener('change',renderBrowse)
+document.getElementById('browseRarityFilter').addEventListener('change',renderBrowse)
+document.getElementById('seedInput').addEventListener('keydown',e=>{if(e.key==='Enter')resolveSeed()})
+
+// Populate type filters
+const typeOpts=TYPE_NAMES.map(t=>`<option value="${t}">${TYPES[t].label}</option>`).join('')
+document.getElementById('collTypeFilter').innerHTML='<option value="">All Types</option>'+typeOpts
+document.getElementById('browseTypeFilter').innerHTML='<option value="">All Types</option>'+typeOpts
+
+;(async()=>{
+  await openDB()
+  await loadRegistry()
+  renderCollection()
+  renderBrowse()
+})()
+</script>
+</body>
+</html>
