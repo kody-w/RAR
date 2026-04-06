@@ -80,9 +80,17 @@ filename = agent['_file'].split('/')[-1]
 storage.write_file('agents', filename, content)
 ```
 
-### 5. Search
+### 5. Search (one-liner for local LLMs)
 
-Match against `name`, `display_name`, `description`, `tags`, `category`, and `author`.
+Fetch the registry and search it locally — no API key, no auth, works offline after first fetch:
+
+```bash
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/registry.json | python3 -c "
+import json,sys; q=sys.argv[1].lower(); [print(f\"{a['display_name']} — {a['description']}\n  {a['name']} | {a['category']} | by {a['author']}\n\") for a in json.load(sys.stdin)['agents'] if q in json.dumps(a).lower()]
+" "YOUR SEARCH TERM"
+```
+
+Replace `YOUR SEARCH TERM` with what you need (e.g. `"sales"`, `"memory"`, `"healthcare"`). Match against `name`, `display_name`, `description`, `tags`, `category`, and `author`.
 
 ### 6. Resolve a Card from Seed (offline, zero bandwidth)
 
