@@ -1,7 +1,8 @@
 """
-Test that build_registry.py runs successfully.
+Test that build_registry.py runs successfully and produces valid output.
 """
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -20,3 +21,18 @@ def test_registry_build_exits_zero():
         f"stdout: {result.stdout[:500]}\n"
         f"stderr: {result.stderr[:500]}"
     )
+
+
+def test_no_seed_collisions():
+    """Every agent in the registry must have a unique seed."""
+    reg = json.loads((REPO_ROOT / "registry.json").read_text())
+    seen = {}
+    for a in reg.get("agents", []):
+        seed = a.get("_seed")
+        if seed is None:
+            continue
+        assert seed not in seen, (
+            f"Seed collision: {a['name']} and {seen[seed]} "
+            f"both have seed {seed}"
+        )
+        seen[seed] = a["name"]

@@ -276,7 +276,21 @@ def build_registry():
                 manifest["_card"] = card_data
 
         agents.append(manifest)
-    
+
+    # Seed collision check — every agent must have a unique seed
+    seen_seeds = {}
+    for a in agents:
+        seed = a.get("_seed")
+        if seed is None:
+            continue
+        if seed in seen_seeds:
+            errors.append(
+                f"Seed collision: {a['name']} and {seen_seeds[seed]} "
+                f"both resolve to seed {seed}"
+            )
+        else:
+            seen_seeds[seed] = a["name"]
+
     registry = {
         "schema": "rapp-registry/1.0",
         "version": "1.0.0",
