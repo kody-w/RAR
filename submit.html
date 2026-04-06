@@ -123,6 +123,29 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
 .auth-prompt { text-align: center; padding: 20px 0; }
 .auth-prompt p { color: var(--text-dim); font-size: .88rem; margin-bottom: 16px; }
 
+.submissions { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 28px; }
+.submissions h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+.sub-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center;
+  justify-content: space-between; gap: 12px; transition: border-color .15s;
+}
+.sub-card:hover { border-color: var(--border-hover); }
+.sub-card .sub-info { min-width: 0; flex: 1; }
+.sub-card .sub-name { font-size: .9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sub-card .sub-name a { color: var(--text); }
+.sub-card .sub-name a:hover { color: var(--accent); }
+.sub-card .sub-meta { font-size: .75rem; color: var(--text-muted); margin-top: 2px; }
+.sub-status {
+  font-size: .72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px;
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .5px;
+}
+.sub-status.pending { background: rgba(210,153,34,.12); color: #d29922; }
+.sub-status.approved { background: rgba(63,185,80,.12); color: var(--green); }
+.sub-status.closed { background: rgba(248,81,73,.1); color: var(--red); }
+.sub-status.open { background: rgba(88,166,255,.1); color: var(--accent); }
+.sub-empty { color: var(--text-muted); font-size: .88rem; }
+
 @media (max-width: 640px) {
   header { padding: 12px 16px; }
   .container { padding: 24px 16px; }
@@ -180,6 +203,11 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
     </div>
 
     <div class="result" id="result"></div>
+
+    <div class="submissions" id="submissions" style="display:none">
+      <h2>Your Submissions</h2>
+      <div id="submissions-list"></div>
+    </div>
   </div>
 </div>
 
@@ -353,6 +381,7 @@ async function submit() {
       const issue = await res.json();
       showResult(`Submitted! <a href="${issue.html_url}" target="_blank">Issue #${issue.number}</a> created. Your agent is in staging for review.`, false);
       clearFile();
+      loadSubmissions();
     } else {
       const err = await res.json().catch(() => ({}));
       showResult('Submission failed: ' + (err.message || res.status), true);
@@ -374,10 +403,48 @@ function hideResult() {
   document.getElementById('result').style.display = 'none';
 }
 
+async function loadSubmissions() {
+  if (!ghUser || !ghToken) return;
+  const el = document.getElementById('submissions');
+  const list = document.getElementById('submissions-list');
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/issues?creator=${ghUser.login}&state=all&per_page=20&sort=created&direction=desc`,
+      { headers: { Authorization: `Bearer ${ghToken}` } }
+    );
+    if (!res.ok) return;
+    const issues = (await res.json()).filter(i => i.title.startsWith('[AGENT]'));
+    if (!issues.length) {
+      el.style.display = 'block';
+      list.innerHTML = '<div class="sub-empty">No submissions yet. Drop an agent above to get started.</div>';
+      return;
+    }
+    el.style.display = 'block';
+    list.innerHTML = issues.map(i => {
+      const labels = (i.labels || []).map(l => l.name);
+      let status, statusClass;
+      if (labels.includes('approved')) { status = 'Approved'; statusClass = 'approved'; }
+      else if (labels.includes('pending-review')) { status = 'In Review'; statusClass = 'pending'; }
+      else if (i.state === 'closed') { status = 'Closed'; statusClass = 'closed'; }
+      else { status = 'Submitted'; statusClass = 'open'; }
+      const name = i.title.replace('[AGENT] ', '');
+      const date = new Date(i.created_at).toLocaleDateString();
+      return `<div class="sub-card">
+        <div class="sub-info">
+          <div class="sub-name"><a href="${i.html_url}" target="_blank">${esc(name)}</a></div>
+          <div class="sub-meta">#${i.number} &middot; ${date}</div>
+        </div>
+        <span class="sub-status ${statusClass}">${status}</span>
+      </div>`;
+    }).join('');
+  } catch {}
+}
+
 async function init() {
   await loadConfig();
   await handleAuthCallback();
   await checkAuth();
+  await loadSubmissions();
 }
 
 init();
