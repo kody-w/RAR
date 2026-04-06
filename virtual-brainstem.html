@@ -3480,7 +3480,8 @@ function handleGHAuth() {
     }
   } else {
     // OAuth redirect
-    const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo`;
+    const redirect = window.location.origin + window.location.pathname;
+    const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo&redirect_uri=${encodeURIComponent(redirect)}`;
     window.location.href = url;
   }
 }
