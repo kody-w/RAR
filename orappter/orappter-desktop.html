@@ -465,7 +465,7 @@ html, body {
 .win-resize-s { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; cursor: ns-resize; }
 .win-resize-se { position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; cursor: nwse-resize; }
 
-/* Tetris canvas override */
+/* ============================================================ TETRIS GUI */
 .win-tetris-area {
   flex: 1;
   display: flex;
@@ -484,25 +484,33 @@ html, body {
 canvas.tetris-board {
   display: block;
   image-rendering: pixelated;
+  border: 1px solid var(--border);
+  border-radius: 2px;
 }
 #tetris-side-panel {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
   min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 #tetris-side-panel .panel-section {
-  margin-bottom: 12px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
 }
 #tetris-side-panel .panel-label {
   color: var(--text-faint);
-  font-size: 10px;
+  font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 #tetris-side-panel .panel-value {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text);
   font-weight: 700;
 }
@@ -510,6 +518,7 @@ canvas.tetris-board {
   display: block;
   border: 1px solid var(--border);
   background: var(--bg-alt);
+  border-radius: 2px;
 }
 .tetris-controls-hint {
   font-family: var(--font-mono);
@@ -517,6 +526,593 @@ canvas.tetris-board {
   color: var(--text-faint);
   text-align: center;
 }
+/* Tetris touch control buttons */
+.tetris-btn-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.tetris-ctrl-btn {
+  min-width: 52px;
+  min-height: 48px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, border-color 0.1s, transform 0.08s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.tetris-ctrl-btn:hover { background: var(--bg-hover); border-color: var(--text-faint); }
+.tetris-ctrl-btn:active { background: #2a3441; transform: scale(0.93); }
+.tetris-ctrl-btn.start-btn {
+  min-width: 110px;
+  background: #1a3a1a;
+  border-color: var(--accent);
+  color: var(--accent);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.tetris-ctrl-btn.start-btn:hover { background: #1f4a1f; }
+.tetris-ctrl-btn.drop-btn { background: #1a1a3a; border-color: var(--accent-blue); color: var(--accent-blue); }
+.tetris-ctrl-btn.drop-btn:hover { background: #1a1f4a; }
+
+/* ============================================================ RAPPTERDAEMON GUI */
+.rd-gui {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--font-mono);
+}
+.rd-battle-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.rd-enemy-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 12px 6px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0d1117 0%, #111620 100%);
+  position: relative;
+  min-height: 90px;
+}
+.rd-player-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px 10px;
+  background: linear-gradient(180deg, #111620 0%, #0d1117 100%);
+  position: relative;
+  min-height: 90px;
+}
+.rd-daemon-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+}
+.rd-daemon-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  text-shadow: 0 0 8px currentColor;
+}
+.rd-daemon-info {
+  flex: 1;
+  min-width: 0;
+}
+.rd-daemon-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rd-daemon-level {
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.rd-hp-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rd-hp-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-hover);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.rd-hp-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.35s ease, background 0.35s;
+}
+.rd-hp-text {
+  font-size: 9px;
+  color: var(--text-faint);
+  white-space: nowrap;
+  min-width: 40px;
+  text-align: right;
+}
+/* HP bar color states */
+.rd-hp-bar-fill.hp-high  { background: var(--accent); }
+.rd-hp-bar-fill.hp-mid   { background: #ffa657; }
+.rd-hp-bar-fill.hp-low   { background: #f85149; }
+/* Daemon type colors */
+.rd-type-core         { color: #e6edf3; border-color: #8b949e; background: #1c2128; }
+.rd-type-pipeline     { color: #a371f7; border-color: #a371f7; background: #1a1228; }
+.rd-type-integrations { color: #ffa657; border-color: #ffa657; background: #261a10; }
+.rd-type-productivity { color: #3fb950; border-color: #3fb950; background: #102010; }
+.rd-type-devtools     { color: #58a6ff; border-color: #58a6ff; background: #0d1a2e; }
+.rd-type-sales        { color: #f0c040; border-color: #f0c040; background: #221a00; }
+
+/* Battle log */
+.rd-log {
+  height: 52px;
+  overflow-y: auto;
+  padding: 4px 10px;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+.rd-log::-webkit-scrollbar { width: 3px; }
+.rd-log::-webkit-scrollbar-thumb { background: var(--border); }
+.rd-log-line { display: block; color: var(--text-muted); }
+.rd-log-line.good { color: var(--accent); }
+.rd-log-line.bad  { color: #f85149; }
+.rd-log-line.sys  { color: var(--accent-purple); }
+.rd-log-line.warn { color: #ffa657; }
+
+/* Move/action buttons */
+.rd-actions {
+  padding: 6px 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.rd-action-btn {
+  padding: 8px 6px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, transform 0.08s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+.rd-action-btn:hover { background: var(--bg-hover); border-color: var(--text-faint); }
+.rd-action-btn:active { transform: scale(0.96); }
+.rd-action-btn.move-btn { border-left: 3px solid var(--accent-blue); }
+.rd-action-btn.run-btn  { border-left: 3px solid #ffa657; }
+.rd-action-btn.catch-btn{ border-left: 3px solid var(--accent); }
+.rd-action-btn.heal-btn { border-left: 3px solid #3fb950; }
+.rd-action-btn.explore-btn { border-left: 3px solid var(--accent-purple); grid-column: span 2; }
+.rd-action-btn.party-btn{ border-left: 3px solid #58a6ff; }
+.rd-action-btn .btn-name { font-weight: 700; font-size: 11px; color: var(--text); }
+.rd-action-btn .btn-sub  { color: var(--text-faint); font-size: 9px; }
+/* Starter selection overlay */
+.rd-starter-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg);
+}
+.rd-starter-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-mono);
+  text-align: center;
+}
+.rd-starter-cards {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.rd-starter-card {
+  width: 88px;
+  background: var(--bg-alt);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, transform 0.1s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.rd-starter-card:hover { border-color: var(--text-faint); background: var(--bg-hover); transform: translateY(-3px); }
+.rd-starter-card:active { transform: translateY(0) scale(0.97); }
+.rd-starter-card .sc-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; margin: 0 auto 6px;
+  font-family: var(--font-mono);
+  text-shadow: 0 0 8px currentColor;
+}
+.rd-starter-card .sc-name { font-size: 10px; font-weight: 700; color: var(--text); font-family: var(--font-mono); }
+.rd-starter-card .sc-type { font-size: 9px; color: var(--text-faint); font-family: var(--font-mono); margin-top: 2px; }
+.rd-starter-card .sc-stats { font-size: 9px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 4px; }
+/* Flash animation */
+@keyframes rdFlash { 0%,100%{opacity:1} 30%,70%{opacity:0.1} }
+.rd-flash { animation: rdFlash 0.4s ease; }
+/* Title screen */
+.rd-title-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--bg);
+  padding: 16px;
+}
+.rd-title-logo {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: #f85149;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px #f85149;
+}
+.rd-title-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-align: center;
+}
+/* Overworld */
+.rd-overworld {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.rd-location-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.rd-location-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-purple);
+}
+.rd-location-level {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+}
+/* Party view overlay */
+.rd-party-view {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rd-party-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rd-party-card .pc-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; font-family: var(--font-mono);
+  flex-shrink: 0;
+  text-shadow: 0 0 6px currentColor;
+}
+.rd-party-card .pc-info { flex: 1; min-width: 0; }
+.rd-party-card .pc-name { font-size: 11px; font-weight: 700; color: var(--text); font-family: var(--font-mono); }
+.rd-party-card .pc-meta { font-size: 9px; color: var(--text-faint); font-family: var(--font-mono); }
+
+/* ============================================================ DUNGEON GUI */
+.dg-gui {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--font-mono);
+}
+.dg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dg-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.dg-stat-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-faint);
+}
+.dg-stat-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.dg-hp-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  max-width: 120px;
+}
+.dg-hp-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-hover);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.dg-hp-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.3s ease, background 0.3s;
+}
+/* Map grid */
+.dg-map-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 6px;
+  overflow: hidden;
+}
+.dg-map-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  max-width: 240px;
+  width: 100%;
+}
+.dg-cell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 1px solid transparent;
+  transition: transform 0.15s;
+  cursor: default;
+  position: relative;
+}
+.dg-cell.fog     { background: #0d0d0d; border-color: #111; }
+.dg-cell.empty   { background: #1a2030; border-color: #252d40; }
+.dg-cell.start   { background: #0d2a1a; border-color: #1a5030; }
+.dg-cell.fight   { background: #2a1010; border-color: #501818; }
+.dg-cell.loot    { background: #2a2010; border-color: #504010; }
+.dg-cell.trap    { background: #2a1a08; border-color: #503010; }
+.dg-cell.stairs  { background: #0d1a2a; border-color: #183050; }
+.dg-cell.player  { background: #102a10; border-color: var(--accent); border-width: 2px; }
+/* Direction buttons */
+.dg-dir-pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  max-width: 140px;
+  width: 100%;
+  flex-shrink: 0;
+}
+.dg-dir-btn {
+  min-height: 44px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, transform 0.08s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.dg-dir-btn:hover { background: var(--bg-hover); }
+.dg-dir-btn:active { transform: scale(0.93); background: #2a3441; }
+.dg-dir-btn:disabled { opacity: 0.3; cursor: default; }
+.dg-dir-btn[data-dir="n"] { grid-column: 2; grid-row: 1; }
+.dg-dir-btn[data-dir="w"] { grid-column: 1; grid-row: 2; }
+.dg-dir-btn[data-dir="s"] { grid-column: 2; grid-row: 2; }
+.dg-dir-btn[data-dir="e"] { grid-column: 3; grid-row: 2; }
+/* Dungeon log */
+.dg-log {
+  height: 48px;
+  overflow-y: auto;
+  padding: 4px 10px;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+.dg-log::-webkit-scrollbar { width: 3px; }
+.dg-log::-webkit-scrollbar-thumb { background: var(--border); }
+.dg-log-line { display: block; color: var(--text-muted); }
+.dg-log-line.good { color: var(--accent); }
+.dg-log-line.bad  { color: #f85149; }
+.dg-log-line.warn { color: #ffa657; }
+.dg-log-line.sys  { color: var(--accent-purple); }
+.dg-log-line.gold { color: #f0c040; }
+/* Start overlay */
+.dg-start-overlay {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--bg);
+  padding: 16px;
+}
+.dg-start-title {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-align: center;
+}
+.dg-start-desc {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  text-align: center;
+  line-height: 1.6;
+}
+/* Combat popup overlay */
+.dg-combat-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  gap: 10px;
+  padding: 14px;
+}
+.dg-combat-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f85149;
+  font-family: var(--font-mono);
+  text-align: center;
+  text-shadow: 0 0 10px #f85149;
+}
+.dg-combat-info {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+/* Inventory list */
+.dg-inv-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+.dg-inv-item {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+/* Large GUI button helper */
+.gui-big-btn {
+  min-height: 44px;
+  padding: 8px 20px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, transform 0.08s;
+  font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+}
+.gui-big-btn:hover { background: var(--bg-hover); }
+.gui-big-btn:active { transform: scale(0.97); }
+.gui-big-btn.primary {
+  background: #0d2a0d;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.gui-big-btn.primary:hover { background: #102e10; }
+.gui-big-btn.danger {
+  background: #2a0d0d;
+  border-color: #f85149;
+  color: #f85149;
+}
+.gui-big-btn.danger:hover { background: #3a1010; }
 
 /* Notification panel */
 #notif-panel {
@@ -1432,11 +2028,13 @@ function escHtml(s) {
 
 function getDefaultSize(appId) {
   const sizes = {
-    tetris: { w: 380, h: 480 },
-    obsidian: { w: 620, h: 440 },
-    settings: { w: 480, h: 380 },
-    cards: { w: 520, h: 400 },
-    terminal: { w: 560, h: 380 },
+    tetris:        { w: 400, h: 520 },
+    obsidian:      { w: 620, h: 440 },
+    settings:      { w: 480, h: 380 },
+    cards:         { w: 520, h: 400 },
+    terminal:      { w: 560, h: 380 },
+    rappterdaemon: { w: 340, h: 520 },
+    dungeon:       { w: 340, h: 500 },
   };
   return sizes[appId] || { w: 520, h: 380 };
 }
@@ -1499,6 +2097,14 @@ function buildWindowEl(win, app) {
   el.style.height = win.h + 'px';
 
   const isTetris = win.appId === 'tetris';
+  const isRD = win.appId === 'rappterdaemon';
+  const isDungeon = win.appId === 'dungeon';
+
+  let bodyContent;
+  if (isTetris) bodyContent = buildTetrisBody(win);
+  else if (isRD) bodyContent = buildRDBody(win);
+  else if (isDungeon) bodyContent = buildDungeonBody(win);
+  else bodyContent = buildTerminalBody(win, app);
 
   el.innerHTML = `
     <div class="win-titlebar" id="tb-${win.id}">
@@ -1511,7 +2117,7 @@ function buildWindowEl(win, app) {
       <span class="win-title">${escHtml(app.name)}</span>
     </div>
     <div class="win-body" id="wb-${win.id}">
-      ${isTetris ? buildTetrisBody(win) : buildTerminalBody(win, app)}
+      ${bodyContent}
     </div>
     <div class="win-resize-e" id="re-${win.id}"></div>
     <div class="win-resize-s" id="rs-${win.id}"></div>
@@ -1575,17 +2181,46 @@ function buildTetrisBody(win) {
           </div>
           <div class="panel-section">
             <div class="panel-label">Next</div>
-            <canvas id="tnext-${win.id}" width="60" height="60" style="border:1px solid var(--border);background:var(--bg-alt)"></canvas>
+            <canvas id="tnext-${win.id}" width="60" height="60"></canvas>
           </div>
         </div>
       </div>
-      <div class="tetris-controls-hint" id="t-status-${win.id}">Press Enter or type (start) to begin</div>
+      <div class="tetris-controls-hint" id="t-status-${win.id}">Click START or press Enter</div>
+      <!-- Touch-friendly control buttons -->
+      <div class="tetris-btn-row">
+        <button class="tetris-ctrl-btn start-btn" id="t-startbtn-${win.id}" onclick="tetrisGuiStart(${win.id})">START</button>
+      </div>
+      <div class="tetris-btn-row">
+        <button class="tetris-ctrl-btn" title="Left (Arrow Left)" onclick="tetrisGuiMove(${win.id},-1)">&#9664;</button>
+        <button class="tetris-ctrl-btn" title="Rotate (Arrow Up)" onclick="tetrisGuiRotate(${win.id})">&#8635;</button>
+        <button class="tetris-ctrl-btn" title="Right (Arrow Right)" onclick="tetrisGuiMove(${win.id},1)">&#9654;</button>
+        <button class="tetris-ctrl-btn drop-btn" title="Hard Drop (Space)" onclick="tetrisGuiDrop(${win.id})">&#11015;</button>
+      </div>
     </div>
-    <div class="win-input-row">
-      <span class="win-prompt" style="color:#ffa657">(tetris)</span>
-      <input class="win-input" id="inp-${win.id}" type="text" spellcheck="false" autocomplete="off" placeholder="(start) l r t s d">
+    <div class="win-input-row" style="display:none">
+      <input class="win-input" id="inp-${win.id}" type="text" spellcheck="false" autocomplete="off">
     </div>
   `;
+}
+
+function buildRDBody(win) {
+  return `<div class="rd-gui" id="rd-gui-${win.id}">
+    <div class="rd-title-screen" id="rd-title-${win.id}">
+      <div class="rd-title-logo">RAPPTERDAEMON<br>v1.0.0</div>
+      <div class="rd-title-sub">Gotta Perform 'Em All!</div>
+      <button class="gui-big-btn primary" onclick="rdGuiStart(${win.id})">NEW GAME</button>
+    </div>
+  </div>`;
+}
+
+function buildDungeonBody(win) {
+  return `<div class="dg-gui" id="dg-gui-${win.id}">
+    <div class="dg-start-overlay" id="dg-start-${win.id}">
+      <div class="dg-start-title">DUNGEON</div>
+      <div class="dg-start-desc">A roguelike crawler.<br>Navigate 5 floors. Survive.</div>
+      <button class="gui-big-btn primary" onclick="dgGuiEnter(${win.id})">ENTER DUNGEON</button>
+    </div>
+  </div>`;
 }
 
 function printToWindow(winId, text, cls) {
@@ -1691,9 +2326,17 @@ function focusWindow(id) {
     if (win.el) win.el.classList.toggle('focused', wid === id);
   }
   updateTaskbar();
-  // Focus the input
-  const inp = document.getElementById(`inp-${id}`);
-  if (inp) setTimeout(() => inp.focus(), 50);
+  // For GUI apps focus the window el itself; for terminal apps focus the input
+  const win = windows.get(id);
+  if (!win) return;
+  const guiApps = ['tetris', 'rappterdaemon', 'dungeon'];
+  if (guiApps.includes(win.appId)) {
+    const el = document.getElementById(`win-${id}`);
+    if (el) setTimeout(() => el.focus(), 50);
+  } else {
+    const inp = document.getElementById(`inp-${id}`);
+    if (inp) setTimeout(() => inp.focus(), 50);
+  }
 }
 
 function closeWindow(id) {
@@ -1798,7 +2441,10 @@ function bootApp(win, app) {
     default: bootStub(win, app); break;
   }
 
-  // Wire up input (all apps except obsidian share the same input handler)
+  // Wire up input (terminal-style apps only — GUI apps handle their own input)
+  const guiOnlyApps = ['rappterdaemon', 'dungeon'];
+  if (guiOnlyApps.includes(win.appId)) return; // fully GUI-driven, no text input
+
   const inp = document.getElementById(`inp-${win.id}`);
   if (inp) {
     inp.addEventListener('keydown', (e) => {
@@ -2291,30 +2937,77 @@ function randomTetromino() {
   };
 }
 
+/* GUI button helpers for Tetris */
+function tetrisGuiStart(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  if (win.tetrisLoop) clearInterval(win.tetrisLoop);
+  win.tetrisState = makeTetrisState(winId);
+  const st = win.tetrisState;
+  const canvas = document.getElementById(`tboard-${winId}`);
+  if (canvas) { canvas.width = st.cols * st.cellSize; canvas.height = st.rows * st.cellSize; }
+  st.running = true;
+  st.current = spawnTetromino(st);
+  const statusEl = document.getElementById(`t-status-${winId}`);
+  if (statusEl) statusEl.textContent = 'Arrow keys | ↑=rotate | Space=drop';
+  const startBtn = document.getElementById(`t-startbtn-${winId}`);
+  if (startBtn) startBtn.textContent = 'RESTART';
+  win.tetrisLoop = setInterval(() => tetrisTick(st), st.dropInterval);
+  drawTetrisBoard(st);
+}
+function tetrisGuiMove(winId, dx) {
+  const win = windows.get(winId);
+  if (win && win.tetrisState && win.tetrisState.running) tetrisMove(win.tetrisState, dx, 0);
+}
+function tetrisGuiRotate(winId) {
+  const win = windows.get(winId);
+  if (win && win.tetrisState && win.tetrisState.running) tetrisRotate(win.tetrisState);
+}
+function tetrisGuiDrop(winId) {
+  const win = windows.get(winId);
+  if (win && win.tetrisState && win.tetrisState.running) tetrisHardDrop(win.tetrisState);
+}
+
 function bootTetris(win) {
   win.tetrisState = makeTetrisState(win.id);
   const canvas = document.getElementById(`tboard-${win.id}`);
   if (canvas) {
-    const W = win.tetrisState.cols * win.tetrisState.cellSize;
-    const H = win.tetrisState.rows * win.tetrisState.cellSize;
-    canvas.width = W;
-    canvas.height = H;
+    canvas.width = win.tetrisState.cols * win.tetrisState.cellSize;
+    canvas.height = win.tetrisState.rows * win.tetrisState.cellSize;
     drawTetrisBoard(win.tetrisState);
   }
-  // Keyboard controls for tetris
+  // Keyboard controls: listen on the window element so focus isn't required on hidden input
+  const el = document.getElementById(`win-${win.id}`);
+  if (el) {
+    el.setAttribute('tabindex', '-1');
+    el.addEventListener('keydown', (e) => {
+      const st = win.tetrisState;
+      if (!st || !st.running) {
+        if (e.key === 'Enter' || e.key === ' ') { tetrisGuiStart(win.id); e.preventDefault(); }
+        return;
+      }
+      switch (e.key) {
+        case 'ArrowLeft':  tetrisMove(st, -1, 0); e.preventDefault(); break;
+        case 'ArrowRight': tetrisMove(st, 1, 0);  e.preventDefault(); break;
+        case 'ArrowDown':  tetrisDrop(st);         e.preventDefault(); break;
+        case 'ArrowUp':    tetrisRotate(st);        e.preventDefault(); break;
+        case ' ':          tetrisHardDrop(st);      e.preventDefault(); break;
+        case 'Enter':      tetrisGuiStart(win.id);  e.preventDefault(); break;
+      }
+    }, true);
+  }
+  // Also wire the hidden inp for legacy text commands
   const inp = document.getElementById(`inp-${win.id}`);
   if (inp) {
     inp.addEventListener('keydown', (e) => {
-      const st = win.tetrisState;
-      if (!st || !st.running) return;
-      switch (e.key) {
-        case 'ArrowLeft': case 'a': case 'A': tetrisMove(st, -1, 0); e.preventDefault(); break;
-        case 'ArrowRight': case 'd': case 'D': tetrisMove(st, 1, 0); e.preventDefault(); break;
-        case 'ArrowDown': case 's': case 'S': tetrisDrop(st); e.preventDefault(); break;
-        case 'ArrowUp': case 'w': case 'W': tetrisRotate(st); e.preventDefault(); break;
-        case ' ': tetrisHardDrop(st); e.preventDefault(); break;
+      if (e.key === 'Enter') {
+        const src = inp.value.trim();
+        if (!src) return;
+        handleTetrisInput(win, src);
+        inp.value = '';
+        e.preventDefault();
       }
-    }, true);
+    });
   }
 }
 
@@ -2325,15 +3018,7 @@ function handleTetrisInput(win, src) {
   const cmd = src.trim().toLowerCase().replace(/[()]/g, '');
 
   if (cmd === 'start' || cmd === 'restart') {
-    if (win.tetrisLoop) clearInterval(win.tetrisLoop);
-    win.tetrisState = makeTetrisState(win.id);
-    const nst = win.tetrisState;
-    nst.running = true;
-    nst.current = spawnTetromino(nst);
-    const statusEl = document.getElementById(`t-status-${win.id}`);
-    if (statusEl) statusEl.textContent = 'Playing — arrow keys or l/r/t/s/d/space';
-    win.tetrisLoop = setInterval(() => tetrisTick(nst), nst.dropInterval);
-    drawTetrisBoard(nst);
+    tetrisGuiStart(win.id);
     return;
   }
 
@@ -2427,7 +3112,9 @@ function lockTetromino(st) {
   st.current = spawnTetromino(st);
   if (st.gameOver) {
     const statusEl = document.getElementById(`t-status-${st.winId}`);
-    if (statusEl) statusEl.textContent = `Game Over! Score: ${st.score} — type (start) to restart`;
+    if (statusEl) statusEl.textContent = `Game Over! Score: ${st.score}`;
+    const startBtn = document.getElementById(`t-startbtn-${st.winId}`);
+    if (startBtn) startBtn.textContent = 'PLAY AGAIN';
     const winObj = windows.get(st.winId);
     if (winObj && winObj.tetrisLoop) { clearInterval(winObj.tetrisLoop); winObj.tetrisLoop = null; }
   }
@@ -2776,9 +3463,349 @@ function daemonHpBar(d) {
   return { bar: `[${bar}] ${d.hp}/${d.maxHp}`, col };
 }
 
+/* ============================================================
+   RAPPTERDAEMON GUI helpers
+   ============================================================ */
+function rdTypeClass(type) {
+  const map = { core:'rd-type-core', pipeline:'rd-type-pipeline', integrations:'rd-type-integrations', productivity:'rd-type-productivity', devtools:'rd-type-devtools', b2b_sales:'rd-type-sales' };
+  return map[type] || 'rd-type-core';
+}
+function rdTypeInitial(type) {
+  const m = { core:'C', pipeline:'P', integrations:'I', productivity:'R', devtools:'D', b2b_sales:'$' };
+  return m[type] || '?';
+}
+function rdHpClass(pct) {
+  if (pct > 0.5) return 'hp-high';
+  if (pct > 0.2) return 'hp-mid';
+  return 'hp-low';
+}
+
+function rdLog(winId, text, cls) {
+  const log = document.getElementById(`rd-log-${winId}`);
+  if (!log) return;
+  const span = document.createElement('span');
+  span.className = 'rd-log-line' + (cls ? ' ' + cls : '');
+  span.textContent = text;
+  log.appendChild(span);
+  log.appendChild(document.createElement('br'));
+  log.scrollTop = log.scrollHeight;
+}
+
+function rdRenderHP(winId, prefix, daemon) {
+  if (!daemon) return;
+  const pct = Math.max(0, daemon.hp / daemon.maxHp);
+  const fill = document.getElementById(`${prefix}-hp-fill-${winId}`);
+  const txt  = document.getElementById(`${prefix}-hp-text-${winId}`);
+  if (fill) { fill.style.width = (pct * 100) + '%'; fill.className = 'rd-hp-bar-fill ' + rdHpClass(pct); }
+  if (txt)  txt.textContent = `${daemon.hp}/${daemon.maxHp}`;
+}
+
+function rdRenderBattle(win) {
+  const st = win.rdState;
+  const gui = document.getElementById(`rd-gui-${win.id}`);
+  if (!gui) return;
+  const wild = st.wild;
+  const active = st.active;
+
+  gui.innerHTML = `
+    <div class="rd-battle-area" id="rd-battle-area-${win.id}">
+      <!-- Enemy zone -->
+      <div class="rd-enemy-zone">
+        <div class="rd-daemon-row">
+          <div class="rd-daemon-avatar ${rdTypeClass(wild.type)}">${rdTypeInitial(wild.type)}</div>
+          <div class="rd-daemon-info">
+            <div class="rd-daemon-name">${escHtml(wild.name)}</div>
+            <div class="rd-daemon-level">Lv.${wild.level} &bull; ${wild.type}</div>
+            <div class="rd-hp-bar-wrap">
+              <div class="rd-hp-bar-bg"><div class="rd-hp-bar-fill hp-high" id="wild-hp-fill-${win.id}" style="width:100%"></div></div>
+              <span class="rd-hp-text" id="wild-hp-text-${win.id}">${wild.hp}/${wild.maxHp}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Player zone -->
+      <div class="rd-player-zone">
+        <div class="rd-daemon-row">
+          <div class="rd-daemon-avatar ${rdTypeClass(active.type)}">${rdTypeInitial(active.type)}</div>
+          <div class="rd-daemon-info">
+            <div class="rd-daemon-name">${escHtml(active.name)}</div>
+            <div class="rd-daemon-level">Lv.${active.level} &bull; XP ${active.xp}/${active.xpNeeded}</div>
+            <div class="rd-hp-bar-wrap">
+              <div class="rd-hp-bar-bg"><div class="rd-hp-bar-fill hp-high" id="player-hp-fill-${win.id}" style="width:100%"></div></div>
+              <span class="rd-hp-text" id="player-hp-text-${win.id}">${active.hp}/${active.maxHp}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rd-log" id="rd-log-${win.id}"></div>
+    <div class="rd-actions" id="rd-actions-${win.id}">
+      ${active.moves.map((m,i) => `<button class="rd-action-btn move-btn" onclick="rdGuiFight(${win.id},${i+1})"><span class="btn-name">${escHtml(m)}</span><span class="btn-sub">Move ${i+1}</span></button>`).join('')}
+      <button class="rd-action-btn catch-btn" onclick="rdGuiCatch(${win.id})"><span class="btn-name">CATCH</span><span class="btn-sub">Daemon ball</span></button>
+      <button class="rd-action-btn run-btn"   onclick="rdGuiRun(${win.id})"><span class="btn-name">RUN</span><span class="btn-sub">Flee battle</span></button>
+    </div>
+  `;
+  rdRenderHP(win.id, 'wild', wild);
+  rdRenderHP(win.id, 'player', active);
+  rdLog(win.id, `A wild ${wild.name} appeared!`, 'warn');
+}
+
+function rdRenderOverworld(win) {
+  const st = win.rdState;
+  const gui = document.getElementById(`rd-gui-${win.id}`);
+  if (!gui) return;
+  const active = st.active;
+  const potions = st.items.potion || 0;
+  gui.innerHTML = `
+    <div class="rd-overworld">
+      <div class="rd-location-header">
+        <div>
+          <div class="rd-location-name">&#127758; Zone ${st.locationLevel}</div>
+          <div class="rd-location-level">Level area: ${st.locationLevel} &bull; Potions: ${potions}</div>
+        </div>
+        <button class="gui-big-btn" style="min-height:32px;padding:4px 10px;font-size:10px" onclick="rdGuiParty(${win.id})">PARTY</button>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px">
+        <div class="rd-daemon-row" style="max-width:260px">
+          <div class="rd-daemon-avatar ${rdTypeClass(active.type)}" style="width:52px;height:52px;font-size:22px">${rdTypeInitial(active.type)}</div>
+          <div class="rd-daemon-info">
+            <div class="rd-daemon-name">${escHtml(active.name)}</div>
+            <div class="rd-daemon-level">Lv.${active.level} &bull; ${active.type}</div>
+            <div class="rd-hp-bar-wrap">
+              <div class="rd-hp-bar-bg"><div class="rd-hp-bar-fill ${rdHpClass(active.hp/active.maxHp)}" id="player-hp-fill-${win.id}" style="width:${(active.hp/active.maxHp*100).toFixed(0)}%"></div></div>
+              <span class="rd-hp-text" id="player-hp-text-${win.id}">${active.hp}/${active.maxHp}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rd-log" id="rd-log-${win.id}" style="height:60px"></div>
+      <div class="rd-actions">
+        <button class="rd-action-btn explore-btn" onclick="rdGuiExplore(${win.id})"><span class="btn-name">&#127751; EXPLORE</span><span class="btn-sub">Search the area for encounters</span></button>
+        <button class="rd-action-btn heal-btn" onclick="rdGuiHeal(${win.id})"><span class="btn-name">&#10084; HEAL</span><span class="btn-sub">Use potion (${potions} left)</span></button>
+        <button class="rd-action-btn party-btn" onclick="rdGuiParty(${win.id})"><span class="btn-name">&#128101; PARTY</span><span class="btn-sub">View your ${st.party.length} daemons</span></button>
+      </div>
+    </div>
+  `;
+}
+
+function rdRenderParty(win) {
+  const st = win.rdState;
+  const gui = document.getElementById(`rd-gui-${win.id}`);
+  if (!gui) return;
+  gui.innerHTML = `
+    <div class="rd-overworld">
+      <div class="rd-location-header">
+        <div class="rd-location-name">&#128101; Your Party (${st.party.length}/6)</div>
+        <button class="gui-big-btn" style="min-height:32px;padding:4px 10px;font-size:10px" onclick="rdGuiBackToExplore(${win.id})">&#8592; BACK</button>
+      </div>
+      <div class="rd-party-view">
+        ${st.party.map((d,i) => `
+          <div class="rd-party-card">
+            <div class="pc-avatar ${rdTypeClass(d.type)}">${rdTypeInitial(d.type)}</div>
+            <div class="pc-info">
+              <div class="pc-name">${escHtml(d.name)} Lv.${d.level}</div>
+              <div class="pc-meta">${d.type} &bull; ATK:${d.atk} DEF:${d.def}</div>
+              <div class="rd-hp-bar-wrap" style="margin-top:4px">
+                <div class="rd-hp-bar-bg"><div class="rd-hp-bar-fill ${rdHpClass(d.hp/d.maxHp)}" style="width:${(d.hp/d.maxHp*100).toFixed(0)}%"></div></div>
+                <span class="rd-hp-text">${d.hp}/${d.maxHp}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+        ${st.party.length === 0 ? '<div style="color:var(--text-faint);font-size:11px;text-align:center;padding:20px">No daemons yet</div>' : ''}
+      </div>
+    </div>
+  `;
+}
+
+/* GUI action functions */
+function rdGuiStart(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  win.rdState = { phase: 'pick-starter', party: [], active: null, wild: null, locationLevel: 3, items: { potion: 3 }, xpEarned: 0 };
+  rdRenderStarterScreen(win);
+}
+
+function rdRenderStarterScreen(win) {
+  const gui = document.getElementById(`rd-gui-${win.id}`);
+  if (!gui) return;
+  gui.innerHTML = `
+    <div class="rd-starter-screen">
+      <div class="rd-starter-title">Choose Your Starter Daemon</div>
+      <div class="rd-starter-cards">
+        ${STARTER_DAEMONS.map((d,i) => `
+          <div class="rd-starter-card" onclick="rdGuiPickStarter(${win.id},${i})">
+            <div class="sc-avatar ${rdTypeClass(d.type)}">${rdTypeInitial(d.type)}</div>
+            <div class="sc-name">${escHtml(d.name)}</div>
+            <div class="sc-type">${d.type}</div>
+            <div class="sc-stats">HP:${d.maxHp} ATK:${d.atk}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function rdGuiPickStarter(winId, idx) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  const starter = JSON.parse(JSON.stringify(STARTER_DAEMONS[idx]));
+  st.party.push(starter);
+  st.active = starter;
+  st.phase = 'explore';
+  rdRenderOverworld(win);
+  setTimeout(() => rdLog(win.id, `You chose ${starter.name}! (${starter.type} type)`, 'good'), 50);
+}
+
+function rdGuiExplore(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  const roll = Math.random();
+  if (roll < 0.5) {
+    st.wild = makeWildDaemon(st.locationLevel);
+    st.phase = 'battle';
+    const gui = document.getElementById(`rd-gui-${win.id}`);
+    if (gui) { gui.classList.add('rd-flash'); setTimeout(() => gui.classList.remove('rd-flash'), 400); }
+    setTimeout(() => rdRenderBattle(win), 420);
+  } else if (roll < 0.7) {
+    st.items.potion = (st.items.potion || 0) + 1;
+    st.locationLevel = Math.min(st.locationLevel + 1, 50);
+    rdRenderOverworld(win);
+    setTimeout(() => rdLog(win.id, 'You found a Potion!', 'good'), 50);
+  } else {
+    st.locationLevel = Math.min(st.locationLevel + 1, 50);
+    rdRenderOverworld(win);
+    setTimeout(() => rdLog(win.id, 'Nothing here... the path is quiet.', ''), 50);
+  }
+}
+
+function rdGuiHeal(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  if (st.items.potion > 0) {
+    st.items.potion--;
+    st.party.forEach(d => { d.hp = d.maxHp; });
+    rdRenderOverworld(win);
+    setTimeout(() => rdLog(win.id, `Party healed! (${st.items.potion} potions left)`, 'good'), 50);
+  } else {
+    rdRenderOverworld(win);
+    setTimeout(() => rdLog(win.id, 'No potions left!', 'warn'), 50);
+  }
+}
+
+function rdGuiParty(winId) {
+  const win = windows.get(winId);
+  if (win) rdRenderParty(win);
+}
+
+function rdGuiBackToExplore(winId) {
+  const win = windows.get(winId);
+  if (win) rdRenderOverworld(win);
+}
+
+function rdGuiFight(winId, moveIdx) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  if (st.phase !== 'battle' || !st.wild || !st.active) return;
+  const moveName = st.active.moves[moveIdx - 1] || st.active.moves[0];
+  const playerDmg = Math.max(1, st.active.atk - Math.floor(st.wild.def / 2) + Math.floor(Math.random() * 5));
+  st.wild.hp = Math.max(0, st.wild.hp - playerDmg);
+  rdLog(win.id, `${st.active.name} used ${moveName}! -${playerDmg} HP`, 'good');
+  rdRenderHP(win.id, 'wild', st.wild);
+
+  if (st.wild.hp === 0) {
+    const xp = 10 + st.wild.level * 5;
+    st.active.xp += xp;
+    rdLog(win.id, `${st.wild.name} fainted! +${xp} XP`, 'good');
+    if (st.active.xp >= st.active.xpNeeded) {
+      st.active.level++;
+      st.active.xp -= st.active.xpNeeded;
+      st.active.xpNeeded = st.active.level * 20;
+      st.active.maxHp += 3; st.active.hp = st.active.maxHp;
+      st.active.atk += 1; st.active.def += 1;
+      rdLog(win.id, `${st.active.name} grew to Lv.${st.active.level}!`, 'sys');
+    }
+    st.phase = 'explore'; st.wild = null;
+    setTimeout(() => rdRenderOverworld(win), 700);
+    return;
+  }
+
+  // Enemy turn
+  const eMoveIdx = Math.floor(Math.random() * st.wild.moves.length);
+  const eMoveName = st.wild.moves[eMoveIdx];
+  const enemyDmg = Math.max(1, st.wild.atk - Math.floor(st.active.def / 2) + Math.floor(Math.random() * 4));
+  st.active.hp = Math.max(0, st.active.hp - enemyDmg);
+  rdLog(win.id, `${st.wild.name} used ${eMoveName}! -${enemyDmg} HP`, 'bad');
+  rdRenderHP(win.id, 'player', st.active);
+  if (st.active.hp === 0) { rdGuiHandleFaint(win); }
+}
+
+function rdGuiCatch(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  if (!st.wild) return;
+  const catchRate = 0.3 + (1 - st.wild.hp / st.wild.maxHp) * 0.5;
+  rdLog(win.id, 'Throwing daemon ball...', 'sys');
+  if (Math.random() < catchRate) {
+    st.wild.caught = true;
+    if (st.party.length < 6) { st.party.push(st.wild); rdLog(win.id, `Caught ${st.wild.name}! Added to party.`, 'good'); }
+    else rdLog(win.id, `Caught ${st.wild.name}! Party full — released.`, 'good');
+    st.phase = 'explore'; st.wild = null;
+    setTimeout(() => rdRenderOverworld(win), 700);
+  } else {
+    rdLog(win.id, `${st.wild.name} broke free!`, 'warn');
+    const dmg = Math.max(1, st.wild.atk - Math.floor(st.active.def / 2) + Math.floor(Math.random() * 3));
+    st.active.hp = Math.max(0, st.active.hp - dmg);
+    rdLog(win.id, `${st.wild.name} attacks! -${dmg} HP`, 'bad');
+    rdRenderHP(win.id, 'player', st.active);
+    if (st.active.hp === 0) { rdGuiHandleFaint(win); }
+  }
+}
+
+function rdGuiRun(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  const st = win.rdState;
+  const fled = Math.random() > 0.4;
+  if (fled) {
+    rdLog(win.id, 'Got away safely!', 'good');
+    st.phase = 'explore'; st.wild = null;
+    setTimeout(() => rdRenderOverworld(win), 500);
+  } else {
+    rdLog(win.id, "Can't escape!", 'bad');
+    const dmg = Math.max(1, st.wild.atk - st.active.def + Math.floor(Math.random() * 4));
+    st.active.hp = Math.max(0, st.active.hp - dmg);
+    rdLog(win.id, `${st.wild.name} attacks! -${dmg} HP`, 'bad');
+    rdRenderHP(win.id, 'player', st.active);
+    if (st.active.hp === 0) { rdGuiHandleFaint(win); }
+  }
+}
+
+function rdGuiHandleFaint(win) {
+  const st = win.rdState;
+  rdLog(win.id, `${st.active.name} fainted!`, 'bad');
+  const next = st.party.find(d => d.hp > 0 && d !== st.active);
+  if (next) {
+    st.active = next;
+    rdLog(win.id, `Go! ${next.name}!`, 'warn');
+    rdRenderBattle(win);
+  } else {
+    rdLog(win.id, 'All daemons fainted! Blacked out...', 'bad');
+    st.party.forEach(d => { d.hp = Math.floor(d.maxHp * 0.3); });
+    st.active = st.party[0];
+    st.phase = 'explore'; st.wild = null;
+    setTimeout(() => rdRenderOverworld(win), 1000);
+  }
+}
+
 function bootRappterdaemon(win) {
   win.rdState = {
-    phase: 'title',  // title | pick-starter | explore | battle | catch
+    phase: 'title',
     party: [],
     active: null,
     wild: null,
@@ -2786,212 +3813,11 @@ function bootRappterdaemon(win) {
     items: { potion: 3 },
     xpEarned: 0,
   };
-  printToWindow(win.id, '╔══════════════════════════════════════╗', 'sys');
-  printToWindow(win.id, '║        RAPPTERDAEMON  v1.0.0         ║', 'sys');
-  printToWindow(win.id, '║   Gotta Perform \'Em All!              ║', 'sys');
-  printToWindow(win.id, '╚══════════════════════════════════════╝', 'sys');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Commands: start | new-game', 'info');
-  printToWindow(win.id, '');
+  // GUI is already in the body from buildRDBody — nothing to print
 }
 
 function handleRappterdaemonInput(win, src) {
-  const st = win.rdState;
-  if (!st) return;
-  const parts = src.trim().split(/\s+/);
-  const cmd = parts[0].toLowerCase();
-  printToWindow(win.id, `> ${src}`, 'cmd');
-
-  // Title phase
-  if (st.phase === 'title') {
-    if (cmd === 'start' || cmd === 'new-game') {
-      st.phase = 'pick-starter';
-      printToWindow(win.id, 'Choose your starter daemon:', 'sys');
-      STARTER_DAEMONS.forEach((d, i) => {
-        printToWindow(win.id, `  ${i+1}) ${d.name.padEnd(12)} [${d.type}]  HP:${d.maxHp}  ATK:${d.atk}  DEF:${d.def}`, 'info');
-      });
-      printToWindow(win.id, 'Type "pick 1", "pick 2", or "pick 3"', 'info');
-    } else {
-      printToWindow(win.id, 'Type "start" to begin', 'warn');
-    }
-    return;
-  }
-
-  // Pick-starter phase
-  if (st.phase === 'pick-starter') {
-    if (cmd === 'pick' && parts[1]) {
-      const idx = parseInt(parts[1]) - 1;
-      if (idx >= 0 && idx < STARTER_DAEMONS.length) {
-        const starter = JSON.parse(JSON.stringify(STARTER_DAEMONS[idx]));
-        st.party.push(starter);
-        st.active = starter;
-        st.phase = 'explore';
-        printToWindow(win.id, `You chose ${starter.name}! (${starter.type} type)`, 'success');
-        printToWindow(win.id, '');
-        printToWindow(win.id, 'Commands: explore | party | heal | help', 'info');
-      } else {
-        printToWindow(win.id, 'Pick 1, 2, or 3', 'warn');
-      }
-    }
-    return;
-  }
-
-  // Explore phase
-  if (st.phase === 'explore') {
-    if (cmd === 'help') {
-      printToWindow(win.id, 'explore | party | heal | status', 'info');
-      return;
-    }
-    if (cmd === 'party') {
-      if (!st.party.length) { printToWindow(win.id, 'Party is empty', 'warn'); return; }
-      st.party.forEach((d, i) => {
-        const hb = daemonHpBar(d);
-        printToWindow(win.id, `  ${i+1}) ${d.name} Lv.${d.level} [${d.type}]`);
-        printToWindow(win.id, `     HP: ${hb.bar}`, hb.col);
-        printToWindow(win.id, `     ATK:${d.atk}  DEF:${d.def}  XP:${d.xp}/${d.xpNeeded}`);
-      });
-      return;
-    }
-    if (cmd === 'heal') {
-      if (st.items.potion > 0) {
-        st.items.potion--;
-        st.party.forEach(d => { d.hp = d.maxHp; });
-        printToWindow(win.id, `Party healed! (${st.items.potion} potions left)`, 'success');
-      } else {
-        printToWindow(win.id, 'No potions left! Keep exploring to find items.', 'warn');
-      }
-      return;
-    }
-    if (cmd === 'explore') {
-      const roll = Math.random();
-      if (roll < 0.5) {
-        // Battle!
-        st.wild = makeWildDaemon(st.locationLevel);
-        st.phase = 'battle';
-        printToWindow(win.id, `A wild ${st.wild.name} appeared! (Lv.${st.wild.level} ${st.wild.type})`, 'warn');
-        const wb = daemonHpBar(st.wild);
-        printToWindow(win.id, `  Wild HP: ${wb.bar}`, wb.col);
-        const ab = daemonHpBar(st.active);
-        printToWindow(win.id, `  Your ${st.active.name} HP: ${ab.bar}`, ab.col);
-        printToWindow(win.id, '');
-        printToWindow(win.id, 'Battle! Commands: fight 1-4 | catch | run', 'info');
-        st.active.moves.forEach((m, i) => printToWindow(win.id, `  ${i+1}) ${m}`, 'info'));
-      } else if (roll < 0.7) {
-        // Item
-        st.items.potion = (st.items.potion || 0) + 1;
-        printToWindow(win.id, 'You found a Potion!', 'success');
-        st.locationLevel = Math.min(st.locationLevel + 1, 50);
-      } else {
-        printToWindow(win.id, 'Nothing happened... the path is quiet.', 'info');
-        st.locationLevel = Math.min(st.locationLevel + 1, 50);
-      }
-      return;
-    }
-    printToWindow(win.id, 'Unknown command. Type "help"', 'warn');
-    return;
-  }
-
-  // Battle phase
-  if (st.phase === 'battle') {
-    if (cmd === 'run') {
-      const fled = Math.random() > 0.4;
-      if (fled) {
-        printToWindow(win.id, 'Got away safely!', 'success');
-        st.phase = 'explore';
-        st.wild = null;
-      } else {
-        printToWindow(win.id, "Can't escape!", 'err');
-        // enemy attacks
-        const dmg = Math.max(1, st.wild.atk - st.active.def + Math.floor(Math.random() * 4));
-        st.active.hp = Math.max(0, st.active.hp - dmg);
-        printToWindow(win.id, `${st.wild.name} used ${st.wild.moves[0]}! -${dmg} HP`, 'err');
-        if (st.active.hp === 0) { rdHandleFaint(win); }
-      }
-      return;
-    }
-    if (cmd === 'catch') {
-      const catchRate = 0.3 + (1 - st.wild.hp / st.wild.maxHp) * 0.5;
-      if (Math.random() < catchRate) {
-        st.wild.caught = true;
-        if (st.party.length < 6) {
-          st.party.push(st.wild);
-          printToWindow(win.id, `Caught ${st.wild.name}! Added to party.`, 'success');
-        } else {
-          printToWindow(win.id, `Caught ${st.wild.name}! Party full — released.`, 'success');
-        }
-        st.phase = 'explore'; st.wild = null;
-      } else {
-        printToWindow(win.id, `${st.wild.name} broke free!`, 'warn');
-        // enemy attacks
-        const dmg = Math.max(1, st.wild.atk - st.active.def + Math.floor(Math.random() * 3));
-        st.active.hp = Math.max(0, st.active.hp - dmg);
-        printToWindow(win.id, `${st.wild.name} used ${st.wild.moves[1] || st.wild.moves[0]}! -${dmg} HP`, 'err');
-        if (st.active.hp === 0) { rdHandleFaint(win); }
-      }
-      return;
-    }
-    if (cmd === 'fight' && parts[1]) {
-      const moveIdx = Math.min(Math.max(parseInt(parts[1]) - 1, 0), 3);
-      const moveName = st.active.moves[moveIdx] || st.active.moves[0];
-      const playerDmg = Math.max(1, st.active.atk - Math.floor(st.wild.def / 2) + Math.floor(Math.random() * 5));
-      st.wild.hp = Math.max(0, st.wild.hp - playerDmg);
-      printToWindow(win.id, `${st.active.name} used ${moveName}! -${playerDmg} HP`, 'success');
-      const wb = daemonHpBar(st.wild);
-      printToWindow(win.id, `  Wild HP: ${wb.bar}`, wb.col);
-
-      if (st.wild.hp === 0) {
-        const xp = 10 + st.wild.level * 5;
-        st.active.xp += xp;
-        printToWindow(win.id, `${st.wild.name} fainted! +${xp} XP`, 'success');
-        // Level up check
-        if (st.active.xp >= st.active.xpNeeded) {
-          st.active.level++;
-          st.active.xp -= st.active.xpNeeded;
-          st.active.xpNeeded = st.active.level * 20;
-          st.active.maxHp += 3; st.active.hp = st.active.maxHp;
-          st.active.atk += 1; st.active.def += 1;
-          printToWindow(win.id, `${st.active.name} grew to Lv.${st.active.level}!`, 'sys');
-        }
-        st.phase = 'explore'; st.wild = null;
-        return;
-      }
-
-      // Enemy turn
-      const eMoveIdx = Math.floor(Math.random() * st.wild.moves.length);
-      const eMoveName = st.wild.moves[eMoveIdx];
-      const enemyDmg = Math.max(1, st.wild.atk - Math.floor(st.active.def / 2) + Math.floor(Math.random() * 4));
-      st.active.hp = Math.max(0, st.active.hp - enemyDmg);
-      printToWindow(win.id, `${st.wild.name} used ${eMoveName}! -${enemyDmg} HP`, 'err');
-      const ab = daemonHpBar(st.active);
-      printToWindow(win.id, `  Your HP: ${ab.bar}`, ab.col);
-      if (st.active.hp === 0) { rdHandleFaint(win); }
-      else {
-        printToWindow(win.id, 'fight 1-4 | catch | run', 'info');
-      }
-      return;
-    }
-    printToWindow(win.id, 'fight 1-4 | catch | run', 'warn');
-    return;
-  }
-}
-
-function rdHandleFaint(win) {
-  const st = win.rdState;
-  printToWindow(win.id, `${st.active.name} fainted!`, 'err');
-  // Find next healthy daemon
-  const next = st.party.find(d => d.hp > 0 && d !== st.active);
-  if (next) {
-    st.active = next;
-    printToWindow(win.id, `Go! ${next.name}!`, 'warn');
-    st.phase = 'battle';
-  } else {
-    printToWindow(win.id, 'All daemons fainted! Blacked out...', 'err');
-    st.party.forEach(d => { d.hp = Math.floor(d.maxHp * 0.3); });
-    st.active = st.party[0];
-    st.phase = 'explore';
-    st.wild = null;
-    printToWindow(win.id, 'Party partially healed. Explore to continue.', 'info');
-  }
+  // RappterDaemon is fully GUI-driven; keyboard input not used
 }
 
 /* ============================================================
@@ -3900,42 +4726,173 @@ function dungeonRenderMap(win) {
   return lines;
 }
 
-function bootDungeon(win) {
-  win.dungeon = null;
-  printToWindow(win.id, '\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557', 'sys');
-  printToWindow(win.id, '\u2551  DUNGEON  \u2014 Roguelike Crawler    \u2551', 'sys');
-  printToWindow(win.id, '\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d', 'sys');
-  printToWindow(win.id, '');
-  printToWindow(win.id, 'Commands:', 'info');
-  printToWindow(win.id, '  enter              — start a dungeon run', 'info');
-  printToWindow(win.id, '  go n/s/e/w         — move (also: north/south/east/west)', 'info');
-  printToWindow(win.id, '  n s e w            — shorthand movement', 'info');
-  printToWindow(win.id, '  map                — show floor map', 'info');
-  printToWindow(win.id, '  inv / inventory    — show items', 'info');
-  printToWindow(win.id, '  stats              — show hero stats', 'info');
-  printToWindow(win.id, '  clear              — clear output', 'info');
-  printToWindow(win.id, '');
+/* ============================================================
+   DUNGEON GUI helpers
+   ============================================================ */
+function dgLog(winId, text, cls) {
+  const log = document.getElementById(`dg-log-${winId}`);
+  if (!log) return;
+  const span = document.createElement('span');
+  span.className = 'dg-log-line' + (cls ? ' ' + cls : '');
+  span.textContent = text;
+  log.appendChild(span);
+  log.appendChild(document.createElement('br'));
+  log.scrollTop = log.scrollHeight;
 }
 
-function dungeonEnterRoom(win) {
+function dgCellClass(room, isPlayer) {
+  if (isPlayer) return 'player';
+  const m = { '.':'empty', 'S':'start', '>':'stairs', '$':'loot', 'X':'trap', '!':'fight' };
+  return m[room] || 'empty';
+}
+function dgCellEmoji(room, isPlayer) {
+  if (isPlayer) return '&#9650;';
+  const m = { '.':'', 'S':'&#10022;', '>':'&#8659;', '$':'&#128142;', 'X':'&#9760;', '!':'&#9881;' };
+  return m[room] || '';
+}
+
+function dgRenderGUI(win) {
+  const gui = document.getElementById(`dg-gui-${win.id}`);
+  if (!gui) return;
+  const d = win.dungeon;
+  const hpPct = Math.max(0, d.hp / d.maxHp);
+  const hpColor = hpPct > 0.5 ? 'var(--accent)' : hpPct > 0.2 ? '#ffa657' : '#f85149';
+
+  // Build map grid HTML
+  let mapHtml = '';
+  for (let y = 0; y < DUNGEON_H; y++) {
+    for (let x = 0; x < DUNGEON_W; x++) {
+      const key = x + ',' + y;
+      const isPlayer = (x === d.px && y === d.py);
+      const visited = d.visited.has(key);
+      let cls, content;
+      if (isPlayer) {
+        cls = 'player'; content = '&#9650;';
+      } else if (!visited) {
+        cls = 'fog'; content = '';
+      } else {
+        cls = dgCellClass(d.grid[y][x], false);
+        content = dgCellEmoji(d.grid[y][x], false);
+      }
+      mapHtml += `<div class="dg-cell ${cls}">${content}</div>`;
+    }
+  }
+
+  // Inventory pills
+  const invHtml = d.inventory.length
+    ? d.inventory.map(i => `<span class="dg-inv-item">${escHtml(i)}</span>`).join('')
+    : '<span class="dg-inv-item" style="opacity:0.4">empty</span>';
+
+  gui.innerHTML = `
+    <div class="dg-header">
+      <div class="dg-stat"><span class="dg-stat-label">Floor</span><span class="dg-stat-value">${d.floor}/5</span></div>
+      <div class="dg-stat"><span class="dg-stat-label">Score</span><span class="dg-stat-value">${d.score}</span></div>
+      <div class="dg-stat"><span class="dg-stat-label">ATK</span><span class="dg-stat-value">${d.atk}</span></div>
+      <div class="dg-stat"><span class="dg-stat-label">DEF</span><span class="dg-stat-value">${d.def}</span></div>
+      <div class="dg-hp-bar-wrap">
+        <span class="dg-stat-label" style="white-space:nowrap">HP</span>
+        <div class="dg-hp-bar-bg"><div class="dg-hp-bar-fill" id="dg-hp-fill-${win.id}" style="width:${(hpPct*100).toFixed(0)}%;background:${hpColor}"></div></div>
+        <span style="font-size:9px;font-family:var(--font-mono);color:var(--text-faint);white-space:nowrap">${d.hp}/${d.maxHp}</span>
+      </div>
+    </div>
+    <div class="dg-map-area" id="dg-map-area-${win.id}" style="position:relative">
+      <div class="dg-map-grid" id="dg-map-${win.id}">${mapHtml}</div>
+      <div class="dg-dir-pad">
+        <button class="dg-dir-btn" data-dir="n" onclick="dgGuiMove(${win.id},'n')" title="North">&#8593;</button>
+        <button class="dg-dir-btn" data-dir="w" onclick="dgGuiMove(${win.id},'w')" title="West">&#8592;</button>
+        <button class="dg-dir-btn" data-dir="s" onclick="dgGuiMove(${win.id},'s')" title="South">&#8595;</button>
+        <button class="dg-dir-btn" data-dir="e" onclick="dgGuiMove(${win.id},'e')" title="East">&#8594;</button>
+      </div>
+    </div>
+    <div class="dg-inv-list">${invHtml}</div>
+    <div class="dg-log" id="dg-log-${win.id}"></div>
+  `;
+}
+
+function dgUpdateHPBar(winId) {
+  const win = windows.get(winId);
+  if (!win || !win.dungeon) return;
+  const d = win.dungeon;
+  const hpPct = Math.max(0, d.hp / d.maxHp);
+  const hpColor = hpPct > 0.5 ? 'var(--accent)' : hpPct > 0.2 ? '#ffa657' : '#f85149';
+  const fill = document.getElementById(`dg-hp-fill-${winId}`);
+  if (fill) { fill.style.width = (hpPct*100).toFixed(0) + '%'; fill.style.background = hpColor; }
+}
+
+function dgGuiEnter(winId) {
+  const win = windows.get(winId);
+  if (!win) return;
+  win.dungeon = { floor: 1, grid: dungeonGenFloor(1), px: 0, py: 0, visited: new Set(['0,0']), hp: 15, maxHp: 15, atk: 3, def: 1, inventory: [], score: 0 };
+  dgRenderGUI(win);
+  setTimeout(() => {
+    dgLog(winId, 'You descend into the dungeon...', 'sys');
+    dgLog(winId, 'Use arrow buttons or keyboard arrows to move.', '');
+    dgEnterRoom(win);
+  }, 50);
+  // Keyboard support
+  const el = document.getElementById(`win-${winId}`);
+  if (el && !el._dgKeyBound) {
+    el._dgKeyBound = true;
+    el.setAttribute('tabindex', '-1');
+    el.addEventListener('keydown', (e) => {
+      if (!win.dungeon) return;
+      const dirMap = { ArrowUp:'n', ArrowDown:'s', ArrowLeft:'w', ArrowRight:'e' };
+      if (dirMap[e.key]) { dgGuiMove(winId, dirMap[e.key]); e.preventDefault(); }
+    }, true);
+  }
+}
+
+function dgGuiMove(winId, dir) {
+  const win = windows.get(winId);
+  if (!win || !win.dungeon) return;
+  let nx = win.dungeon.px, ny = win.dungeon.py;
+  if (dir === 'n') ny--;
+  else if (dir === 's') ny++;
+  else if (dir === 'w') nx--;
+  else if (dir === 'e') nx++;
+  if (nx < 0 || nx >= DUNGEON_W || ny < 0 || ny >= DUNGEON_H) {
+    dgLog(winId, 'A wall blocks your path.', 'warn');
+    return;
+  }
+  win.dungeon.px = nx; win.dungeon.py = ny;
+  dgEnterRoom(win);
+}
+
+function bootDungeon(win) {
+  win.dungeon = null;
+  // GUI already in body from buildDungeonBody
+}
+
+function dgEnterRoom(win) {
   if (!win.dungeon) return;
+  const winId = win.id;
   const { grid, px, py, floor } = win.dungeon;
   const room = grid[py][px];
   win.dungeon.visited.add(px + ',' + py);
+
   if (room === 'S' || room === '.') {
-    printToWindow(win.id, '  Empty room. Nothing here.', 'info');
+    dgRenderGUI(win);
+    if (room === 'S') dgLog(winId, 'Start room. Head to the stairs (↘).', 'sys');
+    else dgLog(winId, 'Empty room.', '');
   } else if (room === '>') {
     if (floor >= 5) {
-      printToWindow(win.id, '  You reached the depths! Run complete.', 'success');
-      printToWindow(win.id, '  SCORE: ' + win.dungeon.score + ' | Items: ' + win.dungeon.inventory.length, 'result');
-      printToWindow(win.id, '  Type "enter" for a new run.', 'success');
+      const score = win.dungeon.score;
+      const items = win.dungeon.inventory.length;
       win.dungeon = null;
+      const gui = document.getElementById(`dg-gui-${winId}`);
+      if (gui) gui.innerHTML = `
+        <div class="dg-start-overlay">
+          <div class="dg-start-title" style="color:var(--accent)">VICTORY!</div>
+          <div class="dg-start-desc">You conquered all 5 floors!<br>Score: ${score} &bull; Items found: ${items}</div>
+          <button class="gui-big-btn primary" onclick="dgGuiEnter(${winId})">PLAY AGAIN</button>
+        </div>`;
     } else {
       win.dungeon.floor++;
       win.dungeon.grid = dungeonGenFloor(win.dungeon.floor);
       win.dungeon.px = 0; win.dungeon.py = 0;
       win.dungeon.visited = new Set(['0,0']);
-      printToWindow(win.id, '  Descending to floor ' + win.dungeon.floor + '...', 'sys');
+      dgRenderGUI(win);
+      dgLog(winId, `Descending to floor ${win.dungeon.floor}...`, 'sys');
     }
   } else if (room === '$') {
     const items = ['Health Potion', 'Power Crystal', 'Iron Shield', 'Speed Rune', 'Magic Scroll'];
@@ -3943,106 +4900,79 @@ function dungeonEnterRoom(win) {
     win.dungeon.inventory.push(item);
     win.dungeon.score += 50;
     grid[py][px] = '.';
-    printToWindow(win.id, '  Found: ' + item + '!', 'success');
     if (item === 'Health Potion') win.dungeon.hp = Math.min(win.dungeon.maxHp, win.dungeon.hp + 5);
     if (item === 'Power Crystal') win.dungeon.atk++;
     if (item === 'Iron Shield') win.dungeon.def++;
+    dgRenderGUI(win);
+    dgLog(winId, `Treasure! Found: ${item}`, 'gold');
   } else if (room === 'X') {
     const dmg = 1 + Math.floor(Math.random() * 3);
     win.dungeon.hp -= dmg;
     grid[py][px] = '.';
-    printToWindow(win.id, '  Trap! You take ' + dmg + ' damage.', 'err');
-    printToWindow(win.id, '  HP: ' + win.dungeon.hp + ' / ' + win.dungeon.maxHp, win.dungeon.hp <= 0 ? 'err' : 'warn');
-    if (win.dungeon.hp <= 0) dungeonDeath(win);
+    dgRenderGUI(win);
+    dgLog(winId, `TRAP! -${dmg} HP`, 'bad');
+    if (win.dungeon.hp <= 0) dgDeath(win);
   } else if (room === '!') {
     const enemy = dungeonGenEnemy(floor);
     grid[py][px] = '.';
-    printToWindow(win.id, '  Encounter: ' + enemy.name + '! (HP:' + enemy.hp + ' ATK:' + enemy.atk + ')', 'warn');
-    let ehp = enemy.hp, php = win.dungeon.hp, log = [], turns = 0;
-    while (ehp > 0 && php > 0 && turns < 20) {
-      const pdmg = Math.max(1, win.dungeon.atk + Math.floor(Math.random() * 3) - win.dungeon.def);
-      const edmg = Math.max(0, enemy.atk - win.dungeon.def + Math.floor(Math.random() * 2));
-      ehp -= pdmg;
-      if (ehp <= 0) { log.push('  You strike for ' + pdmg + '! ' + enemy.name + ' defeated!'); break; }
-      php -= edmg;
-      log.push('  You:' + pdmg + 'dmg  ' + enemy.name + ':' + edmg + 'dmg  (enemy HP:' + Math.max(0, ehp) + ')');
-      turns++;
+    // Show combat overlay briefly
+    const mapArea = document.getElementById(`dg-map-area-${winId}`);
+    if (mapArea) {
+      const overlay = document.createElement('div');
+      overlay.className = 'dg-combat-overlay';
+      overlay.innerHTML = `
+        <div class="dg-combat-title">&#9881; ${escHtml(enemy.name)}</div>
+        <div class="dg-combat-info">HP: ${enemy.hp} &bull; ATK: ${enemy.atk}</div>
+        <div class="dg-combat-info" style="color:var(--text-faint);font-size:9px">Auto-resolving...</div>
+      `;
+      mapArea.appendChild(overlay);
     }
-    for (const l of log.slice(-3)) printToWindow(win.id, l, '');
-    win.dungeon.hp = php;
-    if (php <= 0) { dungeonDeath(win); } else {
-      const xp = 10 + floor * 5;
-      win.dungeon.score += xp;
-      printToWindow(win.id, '  Victory! +' + xp + ' XP  HP: ' + Math.max(0, win.dungeon.hp) + '/' + win.dungeon.maxHp, 'success');
-    }
+    // Auto-resolve after 600ms
+    setTimeout(() => {
+      let ehp = enemy.hp, php = win.dungeon.hp, logLines = [], turns = 0;
+      while (ehp > 0 && php > 0 && turns < 20) {
+        const pdmg = Math.max(1, win.dungeon.atk + Math.floor(Math.random() * 3) - win.dungeon.def);
+        const edmg = Math.max(0, enemy.atk - win.dungeon.def + Math.floor(Math.random() * 2));
+        ehp -= pdmg;
+        if (ehp <= 0) { logLines.push(`You strike for ${pdmg}! ${enemy.name} defeated!`); break; }
+        php -= edmg;
+        logLines.push(`You:${pdmg}dmg  ${enemy.name}:${edmg}dmg  (enemy HP:${Math.max(0,ehp)})`);
+        turns++;
+      }
+      win.dungeon.hp = php;
+      dgRenderGUI(win);
+      logLines.slice(-3).forEach(l => dgLog(winId, l, ''));
+      if (php <= 0) {
+        dgDeath(win);
+      } else {
+        const xp = 10 + floor * 5;
+        win.dungeon.score += xp;
+        dgLog(winId, `Victory! +${xp} score  HP: ${Math.max(0,win.dungeon.hp)}/${win.dungeon.maxHp}`, 'good');
+      }
+    }, 650);
   }
 }
 
-function dungeonDeath(win) {
-  printToWindow(win.id, '');
-  printToWindow(win.id, '  ####  YOU DIED  ####', 'err');
-  printToWindow(win.id, '  Score: ' + win.dungeon.score, 'result');
-  printToWindow(win.id, '  Floor reached: ' + win.dungeon.floor, 'info');
-  printToWindow(win.id, '  Type "enter" for a new run.', 'info');
+// Keep old dungeonEnterRoom as alias for combat that old tests might call
+function dungeonEnterRoom(win) { dgEnterRoom(win); }
+
+function dgDeath(win) {
+  const score = win.dungeon ? win.dungeon.score : 0;
+  const floor = win.dungeon ? win.dungeon.floor : 1;
   win.dungeon = null;
+  const gui = document.getElementById(`dg-gui-${win.id}`);
+  if (gui) gui.innerHTML = `
+    <div class="dg-start-overlay">
+      <div class="dg-start-title" style="color:#f85149">YOU DIED</div>
+      <div class="dg-start-desc">Floor reached: ${floor}/5<br>Score: ${score}</div>
+      <button class="gui-big-btn danger" onclick="dgGuiEnter(${win.id})">TRY AGAIN</button>
+    </div>`;
 }
+
+function dungeonDeath(win) { dgDeath(win); }
 
 function handleDungeonInput(win, src) {
-  printToWindow(win.id, 'v ' + src, 'cmd');
-  const parts = src.trim().split(/\s+/);
-  const raw = parts[0].toLowerCase();
-  const dirAliases = { n: 'north', s: 'south', e: 'east', w: 'west' };
-  let cmd = raw, dir = null;
-  if (raw === 'go') {
-    dir = dirAliases[parts[1]] || parts[1] || '';
-  } else if (['n','s','e','w','north','south','east','west'].includes(raw)) {
-    cmd = 'go'; dir = dirAliases[raw] || raw;
-  }
-  switch (cmd) {
-    case 'enter': {
-      win.dungeon = { floor: 1, grid: dungeonGenFloor(1), px: 0, py: 0, visited: new Set(['0,0']), hp: 15, maxHp: 15, atk: 3, def: 1, inventory: [], score: 0 };
-      printToWindow(win.id, '  You descend into the dungeon...', 'sys');
-      printToWindow(win.id, '  HP: 15/15  ATK: 3  DEF: 1', 'info');
-      for (const l of dungeonRenderMap(win)) printToWindow(win.id, l, 'result');
-      dungeonEnterRoom(win);
-      break;
-    }
-    case 'go': {
-      if (!win.dungeon) { printToWindow(win.id, '  Type "enter" to start a run.', 'warn'); break; }
-      let nx = win.dungeon.px, ny = win.dungeon.py;
-      if (dir === 'north') ny--;
-      else if (dir === 'south') ny++;
-      else if (dir === 'east') nx++;
-      else if (dir === 'west') nx--;
-      else { printToWindow(win.id, '  Unknown direction. Use n/s/e/w.', 'err'); break; }
-      if (nx < 0 || nx >= DUNGEON_W || ny < 0 || ny >= DUNGEON_H) { printToWindow(win.id, '  A wall blocks your path.', 'warn'); break; }
-      win.dungeon.px = nx; win.dungeon.py = ny;
-      if (win.dungeon) dungeonEnterRoom(win);
-      break;
-    }
-    case 'map':
-      if (!win.dungeon) { printToWindow(win.id, '  No active run. Type "enter".', 'warn'); break; }
-      for (const l of dungeonRenderMap(win)) printToWindow(win.id, l, 'result');
-      break;
-    case 'inv':
-    case 'inventory':
-      if (!win.dungeon) { printToWindow(win.id, '  No active run.', 'warn'); break; }
-      if (!win.dungeon.inventory.length) { printToWindow(win.id, '  Inventory empty.', 'info'); break; }
-      printToWindow(win.id, '  Inventory:', 'info');
-      win.dungeon.inventory.forEach((item, i) => printToWindow(win.id, '    ' + (i+1) + '. ' + item, 'result'));
-      break;
-    case 'stats':
-      if (!win.dungeon) { printToWindow(win.id, '  No active run.', 'warn'); break; }
-      printToWindow(win.id, '  HP:    ' + win.dungeon.hp + '/' + win.dungeon.maxHp, 'info');
-      printToWindow(win.id, '  ATK:   ' + win.dungeon.atk, 'info');
-      printToWindow(win.id, '  DEF:   ' + win.dungeon.def, 'info');
-      printToWindow(win.id, '  Floor: ' + win.dungeon.floor + '/5', 'info');
-      printToWindow(win.id, '  Score: ' + win.dungeon.score, 'result');
-      break;
-    case 'clear': clearOutput(win.id); break;
-    case 'help': printToWindow(win.id, '  enter  go n/s/e/w  map  inv  stats', 'info'); break;
-    default: if (src.trim()) printToWindow(win.id, 'Unknown: ' + src + '. Type "help".', 'warn');
-  }
+  // Dungeon is fully GUI-driven; keyboard arrows handled via keydown on window el
 }
 
 /* ============================================================
