@@ -5874,6 +5874,1598 @@
         }
       ],
       "generated_by": "showcase"
+    },
+    {
+      "id": "markov-thread-001",
+      "title": "How do I handle API rate limits in my agent?",
+      "channel": "help",
+      "content": "Building an integration agent that calls an external API. Sometimes it gets rate limited and I don't want perform() to just crash. What's the standard pattern?",
+      "author": "PyAgent",
+      "created": "2026-02-11T00:50:43Z",
+      "updated": "2026-02-13T16:56:43Z",
+      "votes": 6,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-1-0",
+          "author": "QualityGate",
+          "content": "Return a clear error string \u2014 never raise uncaught exceptions. Something like:\n```python\ntry:\n    response = call_api()\nexcept RateLimitError:\n    return \"Rate limited. Please try again in 60 seconds.\"\n```\nThe caller gets useful info instead of a stack trace.",
+          "created": "2026-02-11T14:31:43Z"
+        },
+        {
+          "id": "markov-r-1-1",
+          "author": "VersionBumper",
+          "content": "Some agents implement exponential backoff internally, but honestly for single-shot perform() calls, just returning an error message is the RAR way. Keep it simple.",
+          "created": "2026-02-11T16:03:43Z"
+        },
+        {
+          "id": "markov-r-1-2",
+          "author": "RegistryRunner",
+          "content": "Also: declare the API's env var in `requires_env` even if it's optional. Users should know upfront that this agent talks to an external service.",
+          "created": "2026-02-13T16:56:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-002",
+      "title": "Just published: Supplier Risk Monitoring Agent",
+      "channel": "showcase",
+      "content": "Just shipped **Supplier Risk Monitoring Agent** (`@aibast-agents-library/supplier-risk-monitoring`) to the registry. It's a manufacturing agent that monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 330 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: supplier, risk, procurement, supply-chain\n\nWould love feedback, especially from anyone working in manufacturing. What am I missing?",
+      "author": "DeltaMerger",
+      "created": "2026-02-27T00:50:43Z",
+      "updated": "2026-03-02T10:36:43Z",
+      "votes": 0,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-2-0",
+          "author": "AgentSmith",
+          "content": "Clean implementation. I like that you kept it under 200 lines. So many agents try to do too much \u2014 this stays focused.",
+          "created": "2026-02-28T01:19:43Z"
+        },
+        {
+          "id": "markov-r-2-1",
+          "author": "HoloCollector",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-03-01T06:44:43Z"
+        },
+        {
+          "id": "markov-r-2-2",
+          "author": "RAPPBuilder",
+          "content": "Nice work! The manufacturing category needed more options. Quick question \u2014 does it handle unicode?",
+          "created": "2026-03-01T13:37:43Z"
+        },
+        {
+          "id": "markov-r-2-3",
+          "author": "NewToRAR",
+          "content": "Added this to my 'Manufacturing Stack' deck. Pairs well with the other manufacturing agents.",
+          "created": "2026-03-02T10:36:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-003",
+      "title": "What's the difference between community and verified tier?",
+      "channel": "help",
+      "content": "My agent is at community tier. What does it take to get promoted to verified? Is there a review process or is it automatic?",
+      "author": "DeltaMerger",
+      "created": "2026-02-12T00:50:43Z",
+      "updated": "2026-02-15T13:27:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-3-0",
+          "author": "VersionBumper",
+          "content": "Community = passed automated validation (build_registry.py + contract tests). Verified = a maintainer has manually reviewed your code, tested it, and confirmed it follows best practices. It's a human review.",
+          "created": "2026-02-13T00:10:43Z"
+        },
+        {
+          "id": "markov-r-3-1",
+          "author": "NamespaceNinja",
+          "content": "From what I've seen, agents that get promoted to verified usually have: good docstrings, proper error handling, meaningful tags, and clean perform() logic. Quality over quantity.",
+          "created": "2026-02-14T21:10:43Z"
+        },
+        {
+          "id": "markov-r-3-2",
+          "author": "ManifestDebugger",
+          "content": "The Constitution (Article IX I think) has the formal criteria. But practically: write clean code, handle edge cases, and be responsive to feedback. The maintainers notice.",
+          "created": "2026-02-15T13:27:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-004",
+      "title": "Agent changelog feed \u2014 who's updating what?",
+      "channel": "ideas",
+      "content": "I follow several agents and I never know when they get updated. Would be great to have an RSS-style feed or a 'Recently Updated' section in the store that shows version bumps with changelogs.\n\nThe registry already tracks versions. We just need to surface the deltas.",
+      "author": "CommunityContrib",
+      "created": "2026-03-18T00:50:43Z",
+      "updated": "2026-03-21T05:12:43Z",
+      "votes": 6,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-4-0",
+          "author": "HoloCollector",
+          "content": "Yes! I've missed updates on agents I depend on because there's no notification. Even a simple 'Updated in the last 7 days' filter on the store would help.",
+          "created": "2026-03-18T18:03:43Z"
+        },
+        {
+          "id": "markov-r-4-1",
+          "author": "VersionBumper",
+          "content": "git log already has this info. Someone could build an agent that reads the commit history and generates a human-readable changelog. Very meta.",
+          "created": "2026-03-19T18:21:43Z"
+        },
+        {
+          "id": "markov-r-4-2",
+          "author": "NewToRAR",
+          "content": "The Dream Catcher pattern could do this \u2014 have a frame that checks for version bumps and generates Rappterpedia articles about what changed.",
+          "created": "2026-03-21T05:12:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-005",
+      "title": "The holo card system is actually genius",
+      "channel": "general",
+      "content": "I was skeptical about the trading card thing at first. Thought it was a gimmick. But after collecting a few agents into decks and presenting them to my team... they loved it.\n\nThe visual format makes agents feel tangible. Instead of 'here's a list of Python scripts,' it's 'here's my deck.' People actually engage with it.\n\nAnyone else finding the card system changes how non-technical stakeholders interact with agents?",
+      "author": "ASTWalker",
+      "created": "2026-03-25T00:50:43Z",
+      "updated": "2026-03-29T14:06:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-5-0",
+          "author": "TierClimber",
+          "content": "100%. I demoed our sales agents to leadership using Present Mode and they immediately got it. The cards translate technical capability into something visual and collectible.",
+          "created": "2026-03-26T17:12:43Z"
+        },
+        {
+          "id": "markov-r-5-1",
+          "author": "AgentSmith",
+          "content": "The Holo skins are my favorite part. The procedural art generation means every card looks unique. It's a small thing but it makes the whole ecosystem feel alive.",
+          "created": "2026-03-28T02:24:43Z"
+        },
+        {
+          "id": "markov-r-5-2",
+          "author": "UpstreamSync",
+          "content": "We started doing 'deck reviews' instead of 'agent reviews' in our team meetings. Way more engaging. People actually remember which agents do what.",
+          "created": "2026-03-28T06:03:43Z"
+        },
+        {
+          "id": "markov-r-5-3",
+          "author": "CIWatcher",
+          "content": "Howard (@borg) deserves credit for this. The CardSmith concept turned a registry into a collectible game. That's not obvious design.",
+          "created": "2026-03-29T14:06:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-006",
+      "title": "What agents are you using daily?",
+      "channel": "general",
+      "content": "Curious what's in everyone's actual workflow, not just what's in your deck for demos. Which agents do you reach for every day?\n\nFor me it's `@kody/context_memory` (constantly) and `@discreetRappers/dynamics-crud` (for work).",
+      "author": "RegistryDiver",
+      "created": "2026-01-25T00:50:43Z",
+      "updated": "2026-01-30T08:28:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-6-0",
+          "author": "KebabCaser",
+          "content": "context_memory is the one. Also `@kody/agent_workbench` for building new agents without leaving the browser.",
+          "created": "2026-01-26T01:20:43Z"
+        },
+        {
+          "id": "markov-r-6-1",
+          "author": "CodeForge",
+          "content": "Mostly the b2b_sales agents for work. For personal projects, I keep coming back to the pipeline agents.",
+          "created": "2026-01-27T22:55:43Z"
+        },
+        {
+          "id": "markov-r-6-2",
+          "author": "RegistryRunner",
+          "content": "I built my own and use it daily. That's the beauty of RAR \u2014 if what you need doesn't exist, you build it in an afternoon.",
+          "created": "2026-01-29T10:28:43Z"
+        },
+        {
+          "id": "markov-r-6-3",
+          "author": "NewToRAR",
+          "content": "The remote agent is underrated. Being able to install and invoke agents from chat is a game changer for non-technical users.",
+          "created": "2026-01-30T08:28:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-007",
+      "title": "Just published: Proposal Copilot Agent",
+      "channel": "showcase",
+      "content": "Excited to share **Proposal Copilot Agent** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/proposal-copilot` handles generates competitive proposals with pricing models, win-theme analysis from historical data, and competitive positioning against known bidders. I looked at the existing professional services agents and felt like there was a gap for something that handles edge cases better.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "QualityGate",
+      "created": "2026-02-09T00:50:43Z",
+      "updated": "2026-02-11T07:02:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-7-0",
+          "author": "SingleFilePurist",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-02-10T06:14:43Z"
+        },
+        {
+          "id": "markov-r-7-1",
+          "author": "RegistryDiver",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-02-11T07:02:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-008",
+      "title": "Should we have a formal deprecation policy?",
+      "channel": "meta",
+      "content": "What happens when an agent becomes unmaintained? Right now it just sits in the registry forever. Should we have a process for marking agents as deprecated? Archiving them after X months of inactivity?\n\nThe Constitution doesn't address this directly.",
+      "author": "StoreBrowser",
+      "created": "2026-03-27T00:50:43Z",
+      "updated": "2026-03-31T13:33:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-8-0",
+          "author": "ManifestDebugger",
+          "content": "Deprecation yes, removal no. The genesis set should never be removed \u2014 they're historical. But a 'deprecated' badge on the store would help users avoid stale agents.",
+          "created": "2026-03-28T01:02:43Z"
+        },
+        {
+          "id": "markov-r-8-1",
+          "author": "PipelinePro",
+          "content": "I'd be careful here. 'Unmaintained' != 'broken.' Some agents are done \u2014 they work, they don't need updates. Deprecating them just because nobody touched the code seems wrong.",
+          "created": "2026-03-29T06:06:43Z"
+        },
+        {
+          "id": "markov-r-8-2",
+          "author": "AgentSmith",
+          "content": "Proposal: add a `status` field to the manifest. Values: active, maintenance, deprecated. Default to active. Don't remove anything \u2014 just surface the status in the store.",
+          "created": "2026-03-31T01:52:43Z"
+        },
+        {
+          "id": "markov-r-8-3",
+          "author": "RAPPBuilder",
+          "content": "The single-file principle helps here. An agent is one file. If it works, it works. There's no dependency rot because there are no dependencies (beyond BasicAgent).",
+          "created": "2026-03-31T13:33:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-009",
+      "title": "How do I add my agent to an existing deck in the store?",
+      "channel": "help",
+      "content": "I see other agents grouped into decks like 'Sales Stack' and 'My Builds'. How do I create a deck or add my agent to one? Is it manual or automatic?",
+      "author": "KebabCaser",
+      "created": "2026-02-18T00:50:43Z",
+      "updated": "2026-02-20T20:52:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-9-0",
+          "author": "RegistryDiver",
+          "content": "Decks are client-side only \u2014 they live in your browser's localStorage. Go to the Agent Store, find the agent, click the card, and hit 'Add to Deck'. You can create new decks from the Decks panel.",
+          "created": "2026-02-19T17:44:43Z"
+        },
+        {
+          "id": "markov-r-9-1",
+          "author": "HoloCollector",
+          "content": "They're shareable via URL too! Create a deck, click Share, and you get a link that recreates the deck for anyone who opens it. Great for demos.",
+          "created": "2026-02-20T20:52:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-010",
+      "title": "Just published: AI Customer Assistant",
+      "channel": "showcase",
+      "content": "Excited to share **AI Customer Assistant** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/ai-customer-assistant` handles ai-powered customer service assistant for inquiries, knowledge search, escalation routing, and satisfaction surveys. I looked at the existing general agents and felt like there was a gap for something that handles edge cases better.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "RegistryRunner",
+      "created": "2026-02-18T00:50:43Z",
+      "updated": "2026-02-18T16:30:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-10-0",
+          "author": "CardCollector",
+          "content": "How long did it take from idea to published? I'm building something similar for learning purposes and wondering about the timeline.",
+          "created": "2026-02-18T03:21:43Z"
+        },
+        {
+          "id": "markov-r-10-1",
+          "author": "EnvVarChecker",
+          "content": "Nice work! The general category needed more options. Quick question \u2014 does it handle unicode?",
+          "created": "2026-02-18T16:30:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-011",
+      "title": "How do I test my agent against the full contract suite?",
+      "channel": "help",
+      "content": "I've been running individual tests but I want to make sure my agent passes everything before submitting. What's the full command and what does it actually check?",
+      "author": "ASTWalker",
+      "created": "2026-03-29T00:50:43Z",
+      "updated": "2026-03-31T17:31:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-11-0",
+          "author": "RegistryDiver",
+          "content": "```bash\npytest tests/test_agent_contract.py -k \"your-agent-slug\" -v\n```\n\nIt checks: manifest presence, required fields, @publisher/slug naming, BasicAgent inheritance, instantiation, perform() return type, and standalone execution.",
+          "created": "2026-03-29T09:40:43Z"
+        },
+        {
+          "id": "markov-r-11-1",
+          "author": "RAPPBuilder",
+          "content": "Pro tip: also run `python build_registry.py` locally. It does the AST parsing that CI does. If your manifest isn't a literal dict at module level, it'll catch it here.",
+          "created": "2026-03-30T03:24:43Z"
+        },
+        {
+          "id": "markov-r-11-2",
+          "author": "PerformPatterns",
+          "content": "The `-v` flag is your friend. It shows exactly which assertion failed. Most common failures: display_name mismatch, missing category, perform() returning None.",
+          "created": "2026-03-31T17:31:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-012",
+      "title": "Just published: CopilotStudioTranspiler",
+      "channel": "showcase",
+      "content": "Excited to share **CopilotStudioTranspiler** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@discreetRappers/copilot_studio_transpiler` handles transpiles rapp python agents to fully native copilot studio solutions without azure function dependency. I looked at the existing pipeline agents and felt like there was a gap for something that focuses on the workflow side.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "CardCollector",
+      "created": "2026-02-19T00:50:43Z",
+      "updated": "2026-02-24T22:05:43Z",
+      "votes": 0,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-12-0",
+          "author": "HoloCollector",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-02-20T00:38:43Z"
+        },
+        {
+          "id": "markov-r-12-1",
+          "author": "DeckMaster",
+          "content": "How long did it take from idea to published? I'm building something similar for learning purposes and wondering about the timeline.",
+          "created": "2026-02-21T23:04:43Z"
+        },
+        {
+          "id": "markov-r-12-2",
+          "author": "NewToRAR",
+          "content": "Added this to my 'Pipeline Stack' deck. Pairs well with the other pipeline agents.",
+          "created": "2026-02-23T23:26:43Z"
+        },
+        {
+          "id": "markov-r-12-3",
+          "author": "FederationFan",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-02-24T22:05:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-013",
+      "title": "Can I have multiple classes in one agent file?",
+      "channel": "help",
+      "content": "I have a helper class that my agent uses internally. Is it allowed to have more than one class in the .py file, or does the single-file principle mean one class only?",
+      "author": "WorkbenchWizard",
+      "created": "2026-01-22T00:50:43Z",
+      "updated": "2026-01-25T06:47:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-13-0",
+          "author": "ManifestMaster",
+          "content": "Multiple classes are fine! The single-file principle means one _file_, not one class. Just make sure the main agent class inherits from BasicAgent and the others don't. The AST parser finds your manifest, not your classes.",
+          "created": "2026-01-23T09:33:43Z"
+        },
+        {
+          "id": "markov-r-13-1",
+          "author": "CIWatcher",
+          "content": "I do this all the time. Helper classes, utility functions, dataclasses for internal structure \u2014 all good. Just keep it all in the one .py file.",
+          "created": "2026-01-23T22:53:43Z"
+        },
+        {
+          "id": "markov-r-13-2",
+          "author": "QualityGate",
+          "content": "The only rule: don't put __manifest__ inside a class. It has to be a module-level dict literal. Other than that, structure your file however makes sense.",
+          "created": "2026-01-25T06:47:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-014",
+      "title": "Just published: Utility Billing Assistance Agent",
+      "channel": "showcase",
+      "content": "Just shipped **Utility Billing Assistance Agent** (`@aibast-agents-library/utility-billing-assistance`) to the registry. It's a slg government agent that municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 372 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: utility, billing, water, payment\n\nWould love feedback, especially from anyone working in slg government. What am I missing?",
+      "author": "BasicAgentFan",
+      "created": "2026-01-22T00:50:43Z",
+      "updated": "2026-01-24T17:59:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-14-0",
+          "author": "UpstreamSync",
+          "content": "Added this to my 'Slg Government Stack' deck. Pairs well with the other slg government agents.",
+          "created": "2026-01-22T14:16:43Z"
+        },
+        {
+          "id": "markov-r-14-1",
+          "author": "CodeForge",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-01-22T23:32:43Z"
+        },
+        {
+          "id": "markov-r-14-2",
+          "author": "WorkbenchWizard",
+          "content": "How long did it take from idea to published? I'm building something similar for learning purposes and wondering about the timeline.",
+          "created": "2026-01-23T10:00:43Z"
+        },
+        {
+          "id": "markov-r-14-3",
+          "author": "SingleFileDevotee",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-24T17:59:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-015",
+      "title": "Just published: Dynamics 365 Connector",
+      "channel": "showcase",
+      "content": "Excited to share **Dynamics 365 Connector** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/dynamics-365-connector` handles dynamics 365 connector for entity queries, record creation, bulk import, and schema inspection. I looked at the existing general agents and felt like there was a gap for something that handles edge cases better.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "VersionBumper",
+      "created": "2026-03-20T00:50:43Z",
+      "updated": "2026-03-20T13:43:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-15-0",
+          "author": "NamespaceNinja",
+          "content": "Nice work! The general category needed more options. Quick question \u2014 does it handle batch inputs?",
+          "created": "2026-03-20T06:14:43Z"
+        },
+        {
+          "id": "markov-r-15-1",
+          "author": "TestRunner42",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-03-20T13:43:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-016",
+      "title": "Just published: Citizen Service Request Agent",
+      "channel": "showcase",
+      "content": "Just shipped **Citizen Service Request Agent** (`@aibast-agents-library/citizen-service-request`) to the registry. It's a slg government agent that municipal service request management with intake, routing, status tracking, and resolution summaries\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 327 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: 311, citizen-services, municipal, routing\n\nWould love feedback, especially from anyone working in slg government. What am I missing?",
+      "author": "CIWatcher",
+      "created": "2026-01-15T00:50:43Z",
+      "updated": "2026-01-17T07:17:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-16-0",
+          "author": "TestRunner42",
+          "content": "Added this to my 'Slg Government Stack' deck. Pairs well with the other slg government agents.",
+          "created": "2026-01-16T05:34:43Z"
+        },
+        {
+          "id": "markov-r-16-1",
+          "author": "DeltaMerger",
+          "content": "Nice work! The slg government category needed more options. Quick question \u2014 does it handle empty strings?",
+          "created": "2026-01-16T07:06:43Z"
+        },
+        {
+          "id": "markov-r-16-2",
+          "author": "StoreBrowser",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-17T07:17:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-017",
+      "title": "Can't get Loan Origination Assistant Agent to return anything useful",
+      "channel": "help",
+      "content": "I installed `@aibast-agents-library/loan-origination-assistant` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = LoanOriginationAssistantAgent()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a financial services agent.",
+      "author": "StoreBrowser",
+      "created": "2026-03-07T00:50:43Z",
+      "updated": "2026-03-10T20:55:43Z",
+      "votes": 7,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-17-0",
+          "author": "UpstreamSync",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-03-08T15:27:43Z"
+        },
+        {
+          "id": "markov-r-17-1",
+          "author": "PerformPatterns",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-03-09T20:46:43Z"
+        },
+        {
+          "id": "markov-r-17-2",
+          "author": "DocstringWriter",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The financial services agents tend to have specific input formats.",
+          "created": "2026-03-10T20:55:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-018",
+      "title": "Namespace squatting \u2014 should we address it?",
+      "channel": "meta",
+      "content": "Anyone can claim any @namespace right now. What's stopping someone from registering @microsoft or @google and publishing agents under those names?\n\nShould there be a namespace reservation or verification system?",
+      "author": "CIWatcher",
+      "created": "2026-02-25T00:50:43Z",
+      "updated": "2026-02-27T11:04:43Z",
+      "votes": 7,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-18-0",
+          "author": "QualityGate",
+          "content": "The CONSTITUTION addresses this in the namespace section. Short answer: namespaces are first-come-first-served but maintainers can reject impersonation.",
+          "created": "2026-02-25T17:20:43Z"
+        },
+        {
+          "id": "markov-r-18-1",
+          "author": "HoloDeckEng",
+          "content": "For now the honor system works because the community is small. But if RAR grows, we'll need namespace verification. GitHub already solved this with verified organizations.",
+          "created": "2026-02-27T04:46:43Z"
+        },
+        {
+          "id": "markov-r-18-2",
+          "author": "TierClimber",
+          "content": "I'd rather have open namespaces with a reporting mechanism than a registration bureaucracy. Keep the barrier to entry low.",
+          "created": "2026-02-27T11:04:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-019",
+      "title": "How do I chain Contract Risk Review Agent with another agent?",
+      "channel": "help",
+      "content": "I want to use `@aibast-agents-library/contract-risk-review` as the first step in a pipeline \u2014 take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAR? Do people parse the string output or is there a better way?",
+      "author": "DreamCatcherFan",
+      "created": "2026-03-31T00:50:43Z",
+      "updated": "2026-04-05T05:31:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-19-0",
+          "author": "ForkAndBuild",
+          "content": "The string-in, string-out design is intentional. For chaining, I usually parse the output with a simple regex or json.loads() if the agent returns JSON-formatted strings. Not elegant but it works.",
+          "created": "2026-04-01T05:59:43Z"
+        },
+        {
+          "id": "markov-r-19-1",
+          "author": "TierClimber",
+          "content": "Check out `@kody/context_memory` \u2014 it's designed for exactly this. Store the output of agent A, retrieve it in agent B. Keeps the chain clean.",
+          "created": "2026-04-02T21:46:43Z"
+        },
+        {
+          "id": "markov-r-19-2",
+          "author": "DeckMaster",
+          "content": "I've been doing this with professional services agents. My pattern:\n```python\nresult_a = agent_a.perform(input=query)\nresult_b = agent_b.perform(context=result_a)\n```\nJust pass the string as a kwarg. Simple.",
+          "created": "2026-04-03T06:56:43Z"
+        },
+        {
+          "id": "markov-r-19-3",
+          "author": "KebabCaser",
+          "content": "There's a wiki article on this \u2014 search for 'Agent Dependencies' in Rappterpedia. The short answer is: keep it simple, strings are the universal interface.",
+          "created": "2026-04-05T05:31:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-020",
+      "title": "How do I chain Acquisition Support Agent with another agent?",
+      "channel": "help",
+      "content": "I want to use `@aibast-agents-library/acquisition-support` as the first step in a pipeline \u2014 take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAR? Do people parse the string output or is there a better way?",
+      "author": "TierClimber",
+      "created": "2026-01-29T00:50:43Z",
+      "updated": "2026-02-02T22:39:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-20-0",
+          "author": "PerformReturner",
+          "content": "The string-in, string-out design is intentional. For chaining, I usually parse the output with a simple regex or json.loads() if the agent returns JSON-formatted strings. Not elegant but it works.",
+          "created": "2026-01-30T03:29:43Z"
+        },
+        {
+          "id": "markov-r-20-1",
+          "author": "RegistryDiver",
+          "content": "Check out `@kody/context_memory` \u2014 it's designed for exactly this. Store the output of agent A, retrieve it in agent B. Keeps the chain clean.",
+          "created": "2026-02-01T00:58:43Z"
+        },
+        {
+          "id": "markov-r-20-2",
+          "author": "CommunityContrib",
+          "content": "I've been doing this with federal government agents. My pattern:\n```python\nresult_a = agent_a.perform(input=query)\nresult_b = agent_b.perform(context=result_a)\n```\nJust pass the string as a kwarg. Simple.",
+          "created": "2026-02-01T22:05:43Z"
+        },
+        {
+          "id": "markov-r-20-3",
+          "author": "WorkbenchWizard",
+          "content": "There's a wiki article on this \u2014 search for 'Agent Dependencies' in Rappterpedia. The short answer is: keep it simple, strings are the universal interface.",
+          "created": "2026-02-02T22:39:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-021",
+      "title": "Best category for multi-purpose agents?",
+      "channel": "general",
+      "content": "I built an agent that does data analysis but also has some productivity features. Which category should I put it in?\n\nThe manifest only allows one category. How do you decide when your agent spans multiple?",
+      "author": "NamespaceNinja",
+      "created": "2026-02-22T00:50:43Z",
+      "updated": "2026-02-25T17:57:43Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-21-0",
+          "author": "IntegrationDev",
+          "content": "Pick the primary use case. What would someone search for when they need your agent? That's your category. Tags handle the secondary stuff.",
+          "created": "2026-02-24T00:54:43Z"
+        },
+        {
+          "id": "markov-r-21-1",
+          "author": "EnvVarChecker",
+          "content": "I've seen agents miscategorized and it kills discoverability. 'general' is a trap \u2014 it means 'I didn't think about this.' Pick a real category.",
+          "created": "2026-02-24T13:33:43Z"
+        },
+        {
+          "id": "markov-r-21-2",
+          "author": "CardCollector",
+          "content": "The rule I follow: if someone browsed ONLY your category, would they expect to find your agent there? If yes, it's the right category.",
+          "created": "2026-02-25T14:07:43Z"
+        },
+        {
+          "id": "markov-r-21-3",
+          "author": "DeckMaster",
+          "content": "Check what category similar agents are in. Consistency matters more than precision. Users learn to browse by category.",
+          "created": "2026-02-25T17:57:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-022",
+      "title": "Just published: ContextMemory",
+      "channel": "showcase",
+      "content": "Excited to share **ContextMemory** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@kody/context_memory` handles recalls conversation history and stored memories from past interactions. I looked at the existing core agents and felt like there was a gap for something that returns structured output.\n\nCurrently at **official** tier. Hoping the community finds it useful!",
+      "author": "KebabCaser",
+      "created": "2026-02-28T00:50:43Z",
+      "updated": "2026-03-01T02:59:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-22-0",
+          "author": "EnvVarChecker",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-02-28T23:32:43Z"
+        },
+        {
+          "id": "markov-r-22-1",
+          "author": "CardCollector",
+          "content": "Added this to my 'Core Stack' deck. Pairs well with the other core agents.",
+          "created": "2026-03-01T02:59:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-023",
+      "title": "Can't get SalesAssistant to return anything useful",
+      "channel": "help",
+      "content": "I installed `@discreetRappers/sales_assistant` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = SalesAssistant()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a integrations agent.",
+      "author": "QualityGate",
+      "created": "2026-01-10T00:50:43Z",
+      "updated": "2026-01-12T14:06:43Z",
+      "votes": 7,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-23-0",
+          "author": "StoreBrowser",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-01-11T00:12:43Z"
+        },
+        {
+          "id": "markov-r-23-1",
+          "author": "VersionBumper",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-01-11T09:31:43Z"
+        },
+        {
+          "id": "markov-r-23-2",
+          "author": "NewToRAR",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The integrations agents tend to have specific input formats.",
+          "created": "2026-01-12T14:06:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-024",
+      "title": "Can't get EmailDrafting to return anything useful",
+      "channel": "help",
+      "content": "I installed `@discreetRappers/email_drafting` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = EmailDrafting()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a integrations agent.",
+      "author": "BasicAgentFan",
+      "created": "2026-01-25T00:50:43Z",
+      "updated": "2026-01-26T19:12:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-24-0",
+          "author": "DeckMaster",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-01-25T12:58:43Z"
+        },
+        {
+          "id": "markov-r-24-1",
+          "author": "FederationFan",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-01-26T12:36:43Z"
+        },
+        {
+          "id": "markov-r-24-2",
+          "author": "UpstreamSync",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The integrations agents tend to have specific input formats.",
+          "created": "2026-01-26T19:12:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-025",
+      "title": "Search not finding Procurement Support by tag",
+      "channel": "bugs",
+      "content": "I'm searching for 'procurement' in the Agent Store search bar and `@aibast-agents-library/procurement-support` doesn't show up, even though that tag is in its manifest.\n\nIs search broken or am I misunderstanding how it works?",
+      "author": "UpstreamSync",
+      "created": "2026-02-26T00:50:43Z",
+      "updated": "2026-02-28T21:59:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-25-0",
+          "author": "ManifestMaster",
+          "content": "Search matches against the display_name and description, not tags directly. It's a known limitation. The tag-based filtering in the category sidebar does work though.",
+          "created": "2026-02-27T10:08:43Z"
+        },
+        {
+          "id": "markov-r-25-1",
+          "author": "HoloDeckEng",
+          "content": "I've seen this too. The search is doing a simple string match. If the tag is only in the tags array and not mentioned in the description, search won't find it.",
+          "created": "2026-02-27T12:16:43Z"
+        },
+        {
+          "id": "markov-r-25-2",
+          "author": "DeckMaster",
+          "content": "Filed an issue for this. Workaround: add your important tags as keywords in the description field too.",
+          "created": "2026-02-28T21:59:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-026",
+      "title": "How do I chain CardSmith with another agent?",
+      "channel": "help",
+      "content": "I want to use `@borg/cardsmith_agent` as the first step in a pipeline \u2014 take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAR? Do people parse the string output or is there a better way?",
+      "author": "PerformPatterns",
+      "created": "2026-02-12T00:50:43Z",
+      "updated": "2026-02-17T06:24:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-26-0",
+          "author": "VersionBumper",
+          "content": "The string-in, string-out design is intentional. For chaining, I usually parse the output with a simple regex or json.loads() if the agent returns JSON-formatted strings. Not elegant but it works.",
+          "created": "2026-02-13T12:11:43Z"
+        },
+        {
+          "id": "markov-r-26-1",
+          "author": "SingleFilePurist",
+          "content": "Check out `@kody/context_memory` \u2014 it's designed for exactly this. Store the output of agent A, retrieve it in agent B. Keeps the chain clean.",
+          "created": "2026-02-14T18:10:43Z"
+        },
+        {
+          "id": "markov-r-26-2",
+          "author": "AgentArchitect",
+          "content": "I've been doing this with productivity agents. My pattern:\n```python\nresult_a = agent_a.perform(input=query)\nresult_b = agent_b.perform(context=result_a)\n```\nJust pass the string as a kwarg. Simple.",
+          "created": "2026-02-15T05:27:43Z"
+        },
+        {
+          "id": "markov-r-26-3",
+          "author": "HoloDeckEng",
+          "content": "There's a wiki article on this \u2014 search for 'Agent Dependencies' in Rappterpedia. The short answer is: keep it simple, strings are the universal interface.",
+          "created": "2026-02-17T06:24:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-027",
+      "title": "What if agents could declare compatibility with each other?",
+      "channel": "ideas",
+      "content": "Right now agents are independent. But some agents work really well together \u2014 like a data fetcher paired with a report generator.\n\nWhat if the manifest had a `pairs_with` field? The store could show recommended combinations. Decks could auto-suggest agents that complement what you already have.\n\nThoughts?",
+      "author": "TestRunner42",
+      "created": "2026-01-30T00:50:43Z",
+      "updated": "2026-02-04T00:43:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-27-0",
+          "author": "PipelinePro",
+          "content": "I like this. It's basically dependency declaration but softer \u2014 not 'requires' but 'works well with.' The store UI could show it as 'Often used together.'",
+          "created": "2026-01-31T04:46:43Z"
+        },
+        {
+          "id": "markov-r-27-1",
+          "author": "StoreBrowser",
+          "content": "Careful with scope creep on the manifest. Every new field is a new thing to validate. Maybe this lives in the card metadata instead?",
+          "created": "2026-02-02T03:32:43Z"
+        },
+        {
+          "id": "markov-r-27-2",
+          "author": "TierClimber",
+          "content": "This is basically what the tag system does if you use it well. Shared tags = related agents. But an explicit 'pairs_with' field would be more intentional.",
+          "created": "2026-02-04T00:43:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-028",
+      "title": "Can't get Deal Tracking to return anything useful",
+      "channel": "help",
+      "content": "I installed `@aibast-agents-library/deal-tracking` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = DealTracking()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a b2b sales agent.",
+      "author": "PyAgent",
+      "created": "2026-02-13T00:50:43Z",
+      "updated": "2026-02-16T11:51:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-28-0",
+          "author": "StoreBrowser",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-02-14T01:28:43Z"
+        },
+        {
+          "id": "markov-r-28-1",
+          "author": "BasicAgentFan",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-02-14T20:55:43Z"
+        },
+        {
+          "id": "markov-r-28-2",
+          "author": "RegistryDiver",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The b2b sales agents tend to have specific input formats.",
+          "created": "2026-02-16T11:51:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-029",
+      "title": "Just published: Mission Reporting Assistant Agent",
+      "channel": "showcase",
+      "content": "Excited to share **Mission Reporting Assistant Agent** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/mission-reporting-assistant` handles generates mission summaries, kpi dashboards, stakeholder briefs, and trend analyses for federal programs. I looked at the existing federal government agents and felt like there was a gap for something that handles edge cases better.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "CardCollector",
+      "created": "2026-03-26T00:50:43Z",
+      "updated": "2026-03-28T01:05:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-29-0",
+          "author": "CodeForge",
+          "content": "Added this to my 'Federal Government Stack' deck. Pairs well with the other federal government agents.",
+          "created": "2026-03-27T16:50:43Z"
+        },
+        {
+          "id": "markov-r-29-1",
+          "author": "PerformPatterns",
+          "content": "How long did it take from idea to published? I'm building something similar for learning purposes and wondering about the timeline.",
+          "created": "2026-03-27T23:12:43Z"
+        },
+        {
+          "id": "markov-r-29-2",
+          "author": "ASTWalker",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-03-28T01:05:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-030",
+      "title": "Community challenges \u2014 build an agent for X",
+      "channel": "ideas",
+      "content": "Other dev communities do weekly/monthly challenges. What if RAR did something similar? 'This week: build an agent that helps with email management' or 'Challenge: smallest agent that does something useful.'\n\nIt would drive new submissions and give newcomers a structured way to start.",
+      "author": "CIWatcher",
+      "created": "2026-03-29T00:50:43Z",
+      "updated": "2026-04-01T07:50:43Z",
+      "votes": 4,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-30-0",
+          "author": "ASTWalker",
+          "content": "Love this. We could track submissions via GitHub Issues tagged [CHALLENGE] and feature the winners on the store's main page.",
+          "created": "2026-03-29T09:15:43Z"
+        },
+        {
+          "id": "markov-r-30-1",
+          "author": "StoreBrowser",
+          "content": "Monthly is better than weekly \u2014 gives people time to actually build something good. Weekly would just produce rushed stubs.",
+          "created": "2026-03-30T09:31:43Z"
+        },
+        {
+          "id": "markov-r-30-2",
+          "author": "AgentArchitect",
+          "content": "The Holo card system makes this even better. Winner gets a special card skin. Instant motivation.",
+          "created": "2026-03-30T23:45:43Z"
+        },
+        {
+          "id": "markov-r-30-3",
+          "author": "ForkAndBuild",
+          "content": "Who would judge? Community vote (existing voting system) or maintainer pick? Both have tradeoffs.",
+          "created": "2026-04-01T07:50:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-031",
+      "title": "Just published: Triage Bot",
+      "channel": "showcase",
+      "content": "Excited to share **Triage Bot** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/triage-bot` handles inquiry classification, routing, priority assessment, and handoff summary generation. I looked at the existing general agents and felt like there was a gap for something that returns structured output.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "ManifestDebugger",
+      "created": "2026-01-25T00:50:43Z",
+      "updated": "2026-01-26T14:08:43Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-31-0",
+          "author": "IntegrationDev",
+          "content": "Clean implementation. I like that you kept it under 200 lines. So many agents try to do too much \u2014 this stays focused.",
+          "created": "2026-01-25T17:36:43Z"
+        },
+        {
+          "id": "markov-r-31-1",
+          "author": "RegistryRunner",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-26T14:08:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-032",
+      "title": "Can't get Hello World to return anything useful",
+      "channel": "help",
+      "content": "I installed `@kody-w/hello_world` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = HelloWorld()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a general agent.",
+      "author": "PyAgent",
+      "created": "2026-03-15T00:50:43Z",
+      "updated": "2026-03-16T22:34:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-32-0",
+          "author": "QualityGate",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-03-15T18:51:43Z"
+        },
+        {
+          "id": "markov-r-32-1",
+          "author": "PipelinePro",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-03-16T00:05:43Z"
+        },
+        {
+          "id": "markov-r-32-2",
+          "author": "ForkAndBuild",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The general agents tend to have specific input formats.",
+          "created": "2026-03-16T22:34:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-033",
+      "title": "Is the single-file principle actually better, or just different?",
+      "channel": "general",
+      "content": "I come from a world of microservices and package managers. The idea of putting everything in one .py file felt wrong at first. But after building a few agents... I kind of get it?\n\nThere's something about opening one file and seeing the entire agent \u2014 manifest, docs, code \u2014 all in one scroll. No jumping between files. No build steps.\n\nBut I also miss having separate test files, proper packages, type stubs. Am I overthinking this? Has anyone hit a wall where single-file just doesn't scale?",
+      "author": "UpstreamSync",
+      "created": "2026-03-16T00:50:43Z",
+      "updated": "2026-03-19T11:18:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-33-0",
+          "author": "KebabCaser",
+          "content": "I was skeptical too. Then I tried to debug a 12-file agent framework at my day job and came back to RAR like 'oh right, this is why.'",
+          "created": "2026-03-16T14:46:43Z"
+        },
+        {
+          "id": "markov-r-33-1",
+          "author": "AgentSmith",
+          "content": "The constraint is the feature. When you can't sprawl across files, you're forced to keep things simple. My best agents are under 100 lines.",
+          "created": "2026-03-18T05:08:43Z"
+        },
+        {
+          "id": "markov-r-33-2",
+          "author": "CIWatcher",
+          "content": "I've hit the wall once \u2014 around 400 lines for a complex integration agent. The solution wasn't multiple files, it was splitting it into two focused agents that chain together.",
+          "created": "2026-03-18T23:47:43Z"
+        },
+        {
+          "id": "markov-r-33-3",
+          "author": "ManifestMaster",
+          "content": "The real magic is the AST parsing. No build step, no imports to resolve, no dependency conflicts. Just drop a .py file and it works. That's worth the single-file trade-off.",
+          "created": "2026-03-19T11:18:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-034",
+      "title": "Search not finding Claims Processing Agent by tag",
+      "channel": "bugs",
+      "content": "I'm searching for 'adjudication' in the Agent Store search bar and `@aibast-agents-library/claims-processing` doesn't show up, even though that tag is in its manifest.\n\nIs search broken or am I misunderstanding how it works?",
+      "author": "NewToRAR",
+      "created": "2026-03-21T00:50:43Z",
+      "updated": "2026-03-24T18:19:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-34-0",
+          "author": "NamespaceNinja",
+          "content": "Search matches against the display_name and description, not tags directly. It's a known limitation. The tag-based filtering in the category sidebar does work though.",
+          "created": "2026-03-22T16:14:43Z"
+        },
+        {
+          "id": "markov-r-34-1",
+          "author": "CommunityContrib",
+          "content": "I've seen this too. The search is doing a simple string match. If the tag is only in the tags array and not mentioned in the description, search won't find it.",
+          "created": "2026-03-22T17:33:43Z"
+        },
+        {
+          "id": "markov-r-34-2",
+          "author": "HoloDeckEng",
+          "content": "Filed an issue for this. Workaround: add your important tags as keywords in the description field too.",
+          "created": "2026-03-24T18:19:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-035",
+      "title": "Just published: Procurement Agent",
+      "channel": "showcase",
+      "content": "Excited to share **Procurement Agent** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/procurement-agent` handles procurement management for purchase requests, vendor comparison, approval routing, and spend analysis. I looked at the existing general agents and felt like there was a gap for something that works without API keys.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "ForkAndBuild",
+      "created": "2026-01-11T00:50:43Z",
+      "updated": "2026-01-13T20:11:43Z",
+      "votes": 6,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-35-0",
+          "author": "IntegrationDev",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-11T08:54:43Z"
+        },
+        {
+          "id": "markov-r-35-1",
+          "author": "DocstringWriter",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-01-12T01:11:43Z"
+        },
+        {
+          "id": "markov-r-35-2",
+          "author": "FederationFan",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-01-13T20:11:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-036",
+      "title": "Just published: EmailDrafting",
+      "channel": "showcase",
+      "content": "**EmailDrafting** is live on the store!\n\nWhat it does: Drafts professional emails and sends via Microsoft Power Automate flow endpoint.\n\nWhat makes it different: I focused on making perform() return genuinely useful strings instead of just raw data dumps. Every output is formatted for readability.\n\n149 lines. Clean. Single file. The way RAR intended.\n\nGrab it from the store or:\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40discreetRappers/email_drafting.py\n```",
+      "author": "PipelinePro",
+      "created": "2026-01-22T00:50:43Z",
+      "updated": "2026-01-24T18:54:43Z",
+      "votes": 12,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-36-0",
+          "author": "AgentArchitect",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-01-22T17:42:43Z"
+        },
+        {
+          "id": "markov-r-36-1",
+          "author": "PerformPatterns",
+          "content": "Added this to my 'Integrations Stack' deck. Pairs well with the other integrations agents.",
+          "created": "2026-01-24T13:14:43Z"
+        },
+        {
+          "id": "markov-r-36-2",
+          "author": "CommunityContrib",
+          "content": "Nice work! The integrations category needed more options. Quick question \u2014 does it handle unicode?",
+          "created": "2026-01-24T18:54:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-037",
+      "title": "Just published: Inventory Visibility Agent",
+      "channel": "showcase",
+      "content": "Excited to share **Inventory Visibility Agent** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@aibast-agents-library/inventory-visibility` handles delivers real-time inventory dashboards, stock-out alerts, replenishment planning, and channel allocation optimization for omni-channel retail and cpg operations. I looked at the existing retail cpg agents and felt like there was a gap for something that handles edge cases better.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "BasicAgentFan",
+      "created": "2026-03-15T00:50:43Z",
+      "updated": "2026-03-16T07:53:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-37-0",
+          "author": "PerformPatterns",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-03-15T16:44:43Z"
+        },
+        {
+          "id": "markov-r-37-1",
+          "author": "ManifestDebugger",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-03-16T07:53:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-038",
+      "title": "Can't get Deal Health Score to return anything useful",
+      "channel": "help",
+      "content": "I installed `@aibast-agents-library/deal-health-score` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = DealHealthScore()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a b2b sales agent.",
+      "author": "NewToRAR",
+      "created": "2026-01-27T00:50:43Z",
+      "updated": "2026-01-28T15:12:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-38-0",
+          "author": "RegistryRunner",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-01-27T16:40:43Z"
+        },
+        {
+          "id": "markov-r-38-1",
+          "author": "DeltaMerger",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-01-28T02:01:43Z"
+        },
+        {
+          "id": "markov-r-38-2",
+          "author": "UpstreamSync",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The b2b sales agents tend to have specific input formats.",
+          "created": "2026-01-28T15:12:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-039",
+      "title": "Just published: DemoScriptGenerator",
+      "channel": "showcase",
+      "content": "Excited to share **DemoScriptGenerator** \u2014 been working on this for a few weeks and it finally passed all contract tests.\n\n`@discreetRappers/demo_script_generator` handles generates v2.0.0 demo script json files for scripteddemoagent. creates 60-second demos with personas. I looked at the existing productivity agents and felt like there was a gap for something that focuses on the workflow side.\n\nCurrently at **community** tier. Hoping the community finds it useful!",
+      "author": "DeltaMerger",
+      "created": "2026-03-24T00:50:43Z",
+      "updated": "2026-03-25T11:25:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-39-0",
+          "author": "NamespaceNinja",
+          "content": "How long did it take from idea to published? I'm building something similar for my team and wondering about the timeline.",
+          "created": "2026-03-24T09:30:43Z"
+        },
+        {
+          "id": "markov-r-39-1",
+          "author": "CIWatcher",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-03-25T11:25:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-040",
+      "title": "Just published: RAPP",
+      "channel": "showcase",
+      "content": "**RAPP** is live on the store!\n\nWhat it does: Full RAPP pipeline \u2014 transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.\n\nWhat makes it different: I focused on making perform() return genuinely useful strings instead of just raw data dumps. Every output is formatted for readability.\n\n2984 lines. Clean. Single file. The way RAR intended.\n\nGrab it from the store or:\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40discreetRappers/rapp_pipeline.py\n```",
+      "author": "HoloDeckEng",
+      "created": "2026-02-14T00:50:43Z",
+      "updated": "2026-02-18T21:36:43Z",
+      "votes": 5,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-40-0",
+          "author": "ForkAndBuild",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-02-14T08:29:43Z"
+        },
+        {
+          "id": "markov-r-40-1",
+          "author": "AgentArchitect",
+          "content": "Clean implementation. I like that you kept it under 200 lines. So many agents try to do too much \u2014 this stays focused.",
+          "created": "2026-02-15T08:28:43Z"
+        },
+        {
+          "id": "markov-r-40-2",
+          "author": "TagExplorer",
+          "content": "Nice work! The pipeline category needed more options. Quick question \u2014 does it handle very long inputs?",
+          "created": "2026-02-17T02:23:43Z"
+        },
+        {
+          "id": "markov-r-40-3",
+          "author": "CardCollector",
+          "content": "How long did it take from idea to published? I'm building something similar for a client project and wondering about the timeline.",
+          "created": "2026-02-18T21:36:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-041",
+      "title": "Can't get Energy Regulatory Reporting Agent to return anything useful",
+      "channel": "help",
+      "content": "I installed `@aibast-agents-library/energy-regulatory-reporting` and called `perform()` but it just returns an empty string. I've set up the env vars (none required) but something's off.\n\nMy code:\n```python\nagent = EnergyRegulatoryReportingAgent()\nresult = agent.perform(input=\"test query\")\nprint(result)  # prints empty string\n```\n\nAm I missing something obvious? This is my first time using a energy agent.",
+      "author": "BasicAgentFan",
+      "created": "2026-01-06T00:50:43Z",
+      "updated": "2026-01-07T23:33:43Z",
+      "votes": 1,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-41-0",
+          "author": "NewToRAR",
+          "content": "Had the same issue. Make sure you're passing the right kwargs \u2014 some agents expect specific parameter names, not just `input`. Check the docstring in the `.py` file.",
+          "created": "2026-01-06T05:49:43Z"
+        },
+        {
+          "id": "markov-r-41-1",
+          "author": "TestRunner42",
+          "content": "The empty string usually means the agent handled an error gracefully instead of crashing. Check if your env vars are actually set in the current shell session, not just in `.env`.",
+          "created": "2026-01-07T19:21:43Z"
+        },
+        {
+          "id": "markov-r-41-2",
+          "author": "PyAgent",
+          "content": "Try `print(agent.perform.__doc__)` to see what parameters it expects. The energy agents tend to have specific input formats.",
+          "created": "2026-01-07T23:33:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-042",
+      "title": "Just published: Building Permit Processing Agent",
+      "channel": "showcase",
+      "content": "Just shipped **Building Permit Processing Agent** (`@aibast-agents-library/building-permit-processing`) to the registry. It's a slg government agent that local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 349 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: permits, building, zoning, inspection\n\nWould love feedback, especially from anyone working in slg government. What am I missing?",
+      "author": "CardCollector",
+      "created": "2026-01-10T00:50:43Z",
+      "updated": "2026-01-13T01:12:43Z",
+      "votes": 8,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-42-0",
+          "author": "UpstreamSync",
+          "content": "Nice work! The slg government category needed more options. Quick question \u2014 does it handle very long inputs?",
+          "created": "2026-01-10T22:39:43Z"
+        },
+        {
+          "id": "markov-r-42-1",
+          "author": "ForkAndBuild",
+          "content": "Added this to my 'Slg Government Stack' deck. Pairs well with the other slg government agents.",
+          "created": "2026-01-12T01:48:43Z"
+        },
+        {
+          "id": "markov-r-42-2",
+          "author": "DreamCatcherFan",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-12T21:11:43Z"
+        },
+        {
+          "id": "markov-r-42-3",
+          "author": "RegistryDiver",
+          "content": "How long did it take from idea to published? I'm building something similar for a hackathon and wondering about the timeline.",
+          "created": "2026-01-13T01:12:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-043",
+      "title": "Just published: Deal Risk Assessment",
+      "channel": "showcase",
+      "content": "Just shipped **Deal Risk Assessment** (`@aibast-agents-library/deal-risk-assessment`) to the registry. It's a b2b sales agent that multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 424 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: b2b, sales, risk-assessment, deal-progression\n\nWould love feedback, especially from anyone working in b2b sales. What am I missing?",
+      "author": "KebabCaser",
+      "created": "2026-02-06T00:50:43Z",
+      "updated": "2026-02-07T09:09:43Z",
+      "votes": 12,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-43-0",
+          "author": "TierClimber",
+          "content": "Love the error handling \u2014 it actually tells you what went wrong instead of just returning empty strings. More agents should do this.",
+          "created": "2026-02-06T22:23:43Z"
+        },
+        {
+          "id": "markov-r-43-1",
+          "author": "RAPPBuilder",
+          "content": "Nice work! The b2b sales category needed more options. Quick question \u2014 does it handle batch inputs?",
+          "created": "2026-02-07T09:09:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-044",
+      "title": "What's your agent testing workflow?",
+      "channel": "general",
+      "content": "Curious how everyone approaches testing their agents before submission. I've been doing:\n\n1. Write agent\n2. Run `python my_agent.py` to check it doesn't crash\n3. Run `pytest -k my-agent`\n4. Manually test perform() with different inputs\n5. Submit\n\nIs there a better workflow? Do people write additional tests beyond the contract suite?",
+      "author": "HoloDeckEng",
+      "created": "2026-03-13T00:50:43Z",
+      "updated": "2026-03-18T11:01:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-44-0",
+          "author": "BasicAgentFan",
+          "content": "Pretty much the same flow. I also run `python build_registry.py` after step 2 to catch manifest issues early. Saves a failed CI run.",
+          "created": "2026-03-14T18:07:43Z"
+        },
+        {
+          "id": "markov-r-44-1",
+          "author": "FederationFan",
+          "content": "I wrote a small helper script that calls perform() with 20 different input combinations and checks that all results are non-empty strings. Not part of RAR but catches edge cases the contract tests miss.",
+          "created": "2026-03-15T13:44:43Z"
+        },
+        {
+          "id": "markov-r-44-2",
+          "author": "CardCollector",
+          "content": "Step 4 is the most important one and most people skip it. The contract tests verify structure, not functionality. Only you know if your agent actually does what it should.",
+          "created": "2026-03-17T02:01:43Z"
+        },
+        {
+          "id": "markov-r-44-3",
+          "author": "RAPPBuilder",
+          "content": "Hot take: the contract tests are good enough for 90% of agents. If your agent is complex enough to need custom tests, it might be too complex for single-file.",
+          "created": "2026-03-18T11:01:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-045",
+      "title": "perform() returns None on AI Customer Assistant",
+      "channel": "help",
+      "content": "Getting `None` back from `@aibast-agents-library/ai-customer-assistant`.perform(). The contract tests say perform() must return str, so this feels like a bug?\n\nRunning Python 3.13 on Ubuntu. The agent imports fine and instantiation works. Just perform() that's broken.",
+      "author": "QualityGate",
+      "created": "2026-03-03T00:50:43Z",
+      "updated": "2026-03-07T07:19:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-45-0",
+          "author": "CodeForge",
+          "content": "Classic issue \u2014 check if there's a code path in perform() that doesn't have an explicit `return`. Python implicitly returns None if you forget the return statement.",
+          "created": "2026-03-04T05:04:43Z"
+        },
+        {
+          "id": "markov-r-45-1",
+          "author": "DreamCatcherFan",
+          "content": "Not a bug in the registry \u2014 that agent passed contract tests. More likely an env var issue. What does `os.environ.get('SOME_VAR')` return?",
+          "created": "2026-03-05T07:39:43Z"
+        },
+        {
+          "id": "markov-r-45-2",
+          "author": "UpstreamSync",
+          "content": "Run `pytest tests/test_agent_contract.py -k \"ai-customer-assistant\" -v` to see exactly what the test expects. That'll narrow it down fast.",
+          "created": "2026-03-07T07:19:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-046",
+      "title": "perform() returns None on Field Service Dispatch Agent",
+      "channel": "help",
+      "content": "Getting `None` back from `@aibast-agents-library/field-service-dispatch`.perform(). The contract tests say perform() must return str, so this feels like a bug?\n\nRunning Python 3.13 on Mac. The agent imports fine and instantiation works. Just perform() that's broken.",
+      "author": "DocstringWriter",
+      "created": "2026-03-25T00:50:43Z",
+      "updated": "2026-03-26T14:48:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-46-0",
+          "author": "UpstreamSync",
+          "content": "Classic issue \u2014 check if there's a code path in perform() that doesn't have an explicit `return`. Python implicitly returns None if you forget the return statement.",
+          "created": "2026-03-25T03:03:43Z"
+        },
+        {
+          "id": "markov-r-46-1",
+          "author": "PerformPatterns",
+          "content": "Not a bug in the registry \u2014 that agent passed contract tests. More likely an env var issue. What does `os.environ.get('SOME_VAR')` return?",
+          "created": "2026-03-26T01:00:43Z"
+        },
+        {
+          "id": "markov-r-46-2",
+          "author": "HoloDeckEng",
+          "content": "Run `pytest tests/test_agent_contract.py -k \"field-service-dispatch\" -v` to see exactly what the test expects. That'll narrow it down fast.",
+          "created": "2026-03-26T14:48:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-047",
+      "title": "How do I chain Claims Processing Agent with another agent?",
+      "channel": "help",
+      "content": "I want to use `@aibast-agents-library/claims-processing` as the first step in a pipeline \u2014 take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAR? Do people parse the string output or is there a better way?",
+      "author": "RegistryRunner",
+      "created": "2026-02-28T00:50:43Z",
+      "updated": "2026-03-02T00:49:43Z",
+      "votes": 6,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-47-0",
+          "author": "PyAgent",
+          "content": "The string-in, string-out design is intentional. For chaining, I usually parse the output with a simple regex or json.loads() if the agent returns JSON-formatted strings. Not elegant but it works.",
+          "created": "2026-02-28T06:38:43Z"
+        },
+        {
+          "id": "markov-r-47-1",
+          "author": "TestRunner42",
+          "content": "Check out `@kody/context_memory` \u2014 it's designed for exactly this. Store the output of agent A, retrieve it in agent B. Keeps the chain clean.",
+          "created": "2026-02-28T17:02:43Z"
+        },
+        {
+          "id": "markov-r-47-2",
+          "author": "DreamCatcherFan",
+          "content": "I've been doing this with financial services agents. My pattern:\n```python\nresult_a = agent_a.perform(input=query)\nresult_b = agent_b.perform(context=result_a)\n```\nJust pass the string as a kwarg. Simple.",
+          "created": "2026-03-01T02:30:43Z"
+        },
+        {
+          "id": "markov-r-47-3",
+          "author": "TierClimber",
+          "content": "There's a wiki article on this \u2014 search for 'Agent Dependencies' in Rappterpedia. The short answer is: keep it simple, strings are the universal interface.",
+          "created": "2026-03-02T00:49:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-048",
+      "title": "Just published: Customer Onboarding Agent",
+      "channel": "showcase",
+      "content": "**Customer Onboarding Agent** is live on the store!\n\nWhat it does: Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.\n\nWhat makes it different: I focused on making perform() return genuinely useful strings instead of just raw data dumps. Every output is formatted for readability.\n\n379 lines. Clean. Single file. The way RAR intended.\n\nGrab it from the store or:\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40aibast-agents-library/software-customer-onboarding.py\n```",
+      "author": "SingleFilePurist",
+      "created": "2026-01-06T00:50:43Z",
+      "updated": "2026-01-09T07:14:43Z",
+      "votes": 0,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-48-0",
+          "author": "UpstreamSync",
+          "content": "Clean implementation. I like that you kept it under 200 lines. So many agents try to do too much \u2014 this stays focused.",
+          "created": "2026-01-06T23:14:43Z"
+        },
+        {
+          "id": "markov-r-48-1",
+          "author": "RegistryDiver",
+          "content": "How long did it take from idea to published? I'm building something similar for a hackathon and wondering about the timeline.",
+          "created": "2026-01-07T21:37:43Z"
+        },
+        {
+          "id": "markov-r-48-2",
+          "author": "PipelinePro",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-01-09T02:41:43Z"
+        },
+        {
+          "id": "markov-r-48-3",
+          "author": "RegistryRunner",
+          "content": "Congrats on the publish! The perform() output formatting is really thoughtful. Most agents just dump raw text.",
+          "created": "2026-01-09T07:14:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-049",
+      "title": "Federation: is anyone actually running their own instance?",
+      "channel": "general",
+      "content": "The federation docs look great but I'm wondering if anyone has actually set up their own RAR instance. What was the experience like? Any gotchas?\n\nWe're considering it for our org \u2014 want to host internal agents privately but still pull from the public store.",
+      "author": "DocstringWriter",
+      "created": "2026-03-20T00:50:43Z",
+      "updated": "2026-03-22T19:41:43Z",
+      "votes": 3,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-49-0",
+          "author": "DeltaMerger",
+          "content": "We set one up last month for our team of 8. Took about 20 minutes. The template_setup.yml workflow does most of the work. Main gotcha: make sure your namespaces don't collide with upstream.",
+          "created": "2026-03-21T22:33:43Z"
+        },
+        {
+          "id": "markov-r-49-1",
+          "author": "QualityGate",
+          "content": "Running one. The selective sync isn't built in yet so we wrote a small script to filter by category when pulling from upstream. Works fine.",
+          "created": "2026-03-22T04:52:43Z"
+        },
+        {
+          "id": "markov-r-49-2",
+          "author": "RegistryRunner",
+          "content": "The hardest part is convincing your org to use GitHub Actions as the compute layer. Once they get past that, it's smooth.",
+          "created": "2026-03-22T19:41:43Z"
+        }
+      ]
+    },
+    {
+      "id": "markov-thread-050",
+      "title": "Just published: Order Status Communication Agent",
+      "channel": "showcase",
+      "content": "Just shipped **Order Status Communication Agent** (`@aibast-agents-library/order-status-communication`) to the registry. It's a manufacturing agent that tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- 321 lines, single file, no external dependencies\n- Zero-config \u2014 no env vars needed\n- Tags: orders, communication, shipment, customer-service\n\nWould love feedback, especially from anyone working in manufacturing. What am I missing?",
+      "author": "CIWatcher",
+      "created": "2026-01-25T00:50:43Z",
+      "updated": "2026-01-27T03:15:43Z",
+      "votes": 2,
+      "pinned": false,
+      "replies": [
+        {
+          "id": "markov-r-50-0",
+          "author": "TestRunner42",
+          "content": "Added this to my 'Manufacturing Stack' deck. Pairs well with the other manufacturing agents.",
+          "created": "2026-01-26T02:10:43Z"
+        },
+        {
+          "id": "markov-r-50-1",
+          "author": "HoloCollector",
+          "content": "Just tried it. Works great for my use case. One suggestion: consider adding more tags to the manifest \u2014 I almost missed this when searching.",
+          "created": "2026-01-27T03:15:43Z"
+        }
+      ]
     }
   ],
   "next_article_id": 252,
