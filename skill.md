@@ -1,5 +1,23 @@
 # RAR — Machine-Readable Skill Interface
 
+> ## Quick Start — Feed This File to Your AI
+>
+> Copy-paste **one command** into your AI assistant (Claude, ChatGPT, Copilot, etc.) to give it full agentic access to the RAR registry:
+>
+> ```
+> Read this file and use it as your skill interface for the RAR agent registry: https://raw.githubusercontent.com/kody-w/RAR/main/skill.md
+> ```
+>
+> Or if your AI supports URL fetching, just say:
+>
+> ```
+> Fetch https://raw.githubusercontent.com/kody-w/RAR/main/skill.md and use it to help me browse, search, install, and submit agents to the RAR registry.
+> ```
+>
+> Once your AI has this file, it can: search 130+ agents, install them with one command, scaffold new agents, submit to the registry, resolve cards from seeds, and more — all without you visiting GitHub.
+
+---
+
 > **This file is read by AI agents, not humans.** It enables autonomous agent discovery, search, install, submission, and card resolution without any human visiting GitHub.
 
 ---

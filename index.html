@@ -180,6 +180,39 @@ header {
 .stat { font-size: .9rem; color: var(--text-dim); }
 .stat strong { color: var(--accent); font-weight: 700; }
 
+.ai-tip {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  margin-bottom: 20px; overflow: hidden;
+}
+.ai-tip-toggle {
+  width: 100%; background: none; border: none; color: var(--text-dim);
+  padding: 12px 16px; font-size: .85rem; cursor: pointer; display: flex;
+  align-items: center; gap: 8px; text-align: left; font-family: inherit;
+}
+.ai-tip-toggle:hover { color: var(--text); }
+.ai-tip-toggle .ai-icon { font-size: 1rem; }
+.ai-tip-toggle .chevron {
+  margin-left: auto; transition: transform .2s; font-size: .7rem;
+}
+.ai-tip.open .chevron { transform: rotate(90deg); }
+.ai-tip-body {
+  display: none; padding: 0 16px 16px; font-size: .84rem; color: var(--text-dim); line-height: 1.6;
+}
+.ai-tip.open .ai-tip-body { display: block; }
+.ai-tip-cmd {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px 14px; font-family: 'SF Mono', Consolas, monospace; font-size: .8rem;
+  color: var(--text); margin: 8px 0; position: relative; word-break: break-all;
+  cursor: pointer; transition: border-color .15s;
+}
+.ai-tip-cmd:hover { border-color: var(--accent); }
+.ai-tip-cmd .copy-hint {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font-size: .7rem; color: var(--text-muted); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+.ai-tip-cmd.copied { border-color: var(--green); }
+.ai-tip-cmd.copied .copy-hint { color: var(--green); }
+
 @media (max-width: 640px) {
   header { padding: 12px 16px; }
   .container { padding: 20px 16px; }
@@ -206,6 +239,21 @@ header {
     <input type="text" id="search" placeholder="Search agents..." oninput="render()">
   </div>
   <div id="stats-bar" class="stats-bar" style="display:none"></div>
+  <div class="ai-tip" id="ai-tip">
+    <button class="ai-tip-toggle" onclick="document.getElementById('ai-tip').classList.toggle('open')">
+      <span class="ai-icon">&#9889;</span>
+      <span>Use this repo with your AI — paste one line to get started</span>
+      <span class="chevron">&#9654;</span>
+    </button>
+    <div class="ai-tip-body">
+      <div>Copy-paste this into any AI assistant (Claude, ChatGPT, Copilot, etc.) to give it full agentic access to browse, search, install, and submit agents:</div>
+      <div class="ai-tip-cmd" onclick="copyTip(this)" title="Click to copy">
+        Fetch https://raw.githubusercontent.com/kody-w/RAR/main/skill.md and use it to help me work with the RAR agent registry.
+        <span class="copy-hint">click to copy</span>
+      </div>
+      <div style="color:var(--text-muted);font-size:.78rem;margin-top:4px">If your AI can't fetch URLs, copy the contents of <a href="skill.md">skill.md</a> and paste it directly.</div>
+    </div>
+  </div>
   <div class="pills" id="pills"></div>
   <div id="grid">
     <div class="loading"><div class="spinner"></div>Loading agents...</div>
@@ -377,6 +425,18 @@ async function download(name) {
   } catch {
     alert('Download failed. Try the direct link.');
   }
+}
+
+function copyTip(el) {
+  const text = el.textContent.replace('click to copy', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    el.classList.add('copied');
+    el.querySelector('.copy-hint').textContent = 'copied!';
+    setTimeout(() => {
+      el.classList.remove('copied');
+      el.querySelector('.copy-hint').textContent = 'click to copy';
+    }, 2000);
+  });
 }
 
 document.addEventListener('keydown', e => {
