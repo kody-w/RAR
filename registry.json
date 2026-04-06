@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-06T18:26:41.325168+00:00",
+  "generated_at": "2026-04-06T18:56:17.734387+00:00",
   "stats": {
     "total_agents": 133,
     "publishers": 7,
@@ -60,6 +60,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
       "_sha256": "48010aaae45ac5e099bea276e3b90b10ee9e2e6ab03722f59f423c0d0034cc0c",
+      "_seed": 4997715477691771520,
       "_size_kb": 23.3,
       "_lines": 456,
       "_has_card": true
@@ -86,6 +87,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator.py",
       "_sha256": "5c2974f753dfe7731950041b3d9cfc934e6fad7e9e8936c987b2cf80b4437312",
+      "_seed": 1363523106270491676,
       "_size_kb": 20.8,
       "_lines": 457,
       "_has_card": true
@@ -112,6 +114,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
       "_sha256": "747f9933c954f39a2fe3c2d6362c069f760b87d324fd57122e463738e915b862",
+      "_seed": 10200811530753811576,
       "_size_kb": 19.7,
       "_lines": 398,
       "_has_card": true
@@ -138,6 +141,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
       "_sha256": "02c4da423c9b8c1fb5fdc0168beaa9d98e044cdf9edcbbfe8b480700b37df010",
+      "_seed": 11503270546515831146,
       "_size_kb": 21.3,
       "_lines": 441,
       "_has_card": true
@@ -164,6 +168,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
       "_sha256": "078a548e3195cabb4cbc9b321801aed5de39c8d86ad9e9098f5a293e62e900a3",
+      "_seed": 6943812563063421267,
       "_size_kb": 18.6,
       "_lines": 402,
       "_has_card": true
@@ -190,6 +195,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
       "_sha256": "2cbc7c997ad204220703545c9210025d0e84982aa395cb1b40ec7e73a7da4b65",
+      "_seed": 17730020682391761346,
       "_size_kb": 25.1,
       "_lines": 521,
       "_has_card": true
@@ -216,6 +222,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
       "_sha256": "26254ea240db4bdbe8f6c084792d2ea7ff5e25f70312ee4748e4ddfe0fe27217",
+      "_seed": 16738861686366810084,
       "_size_kb": 20.3,
       "_lines": 429,
       "_has_card": true
@@ -242,6 +249,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
       "_sha256": "cbad0b7262b8a1262e20919b18e56d148cc6c256477a697d455af50757cac83a",
+      "_seed": 15010362534912467138,
       "_size_kb": 23.0,
       "_lines": 495,
       "_has_card": true
@@ -268,6 +276,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
       "_sha256": "09305d7ab2412a0cfc959ab4cb84ba3d2ae058e3e184801284a4bbfcb57ce8bc",
+      "_seed": 15018051093375102546,
       "_size_kb": 23.4,
       "_lines": 440,
       "_has_card": true
@@ -294,6 +303,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
       "_sha256": "1dca5a2e99732f7aadf05fac1f4dbf3dfad0f14855265eaacb9fd16dff4938e8",
+      "_seed": 13173877546091689666,
       "_size_kb": 18.0,
       "_lines": 393,
       "_has_card": true
@@ -320,6 +330,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
       "_sha256": "fb0dd6ef0c3cee9ff1c9657e4b5e2f518faf9c1c616bb0ef32935cc3088d6bd8",
+      "_seed": 2665723234406249080,
       "_size_kb": 16.5,
       "_lines": 334,
       "_has_card": true
@@ -346,6 +357,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py",
       "_sha256": "50c16f87ce323c76e9ea7b68debce37f3b6c43bfa7a5ab3ca022db2024c654cc",
+      "_seed": 16195268016693984984,
       "_size_kb": 17.6,
       "_lines": 378,
       "_has_card": true
@@ -372,6 +384,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
       "_sha256": "13edbd4637754554abee639c9cd38b9d4d97bd443a0eed5768126e762891bf2f",
+      "_seed": 16569251649731306541,
       "_size_kb": 41.6,
       "_lines": 643,
       "_has_card": true
@@ -398,6 +411,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
       "_sha256": "908ae5cb4a5997b2e33fa38f92d1444eb88332539a41b0e6871ed88b62454dd5",
+      "_seed": 15415531861044765094,
       "_size_kb": 19.2,
       "_lines": 424,
       "_has_card": true
@@ -424,6 +438,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py",
       "_sha256": "4b8883d64823c1492336c6fb03e9b9e891ef03cbcc0415a40b42d494b35b30af",
+      "_seed": 10025994443272366861,
       "_size_kb": 19.7,
       "_lines": 430,
       "_has_card": true
@@ -450,6 +465,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py",
       "_sha256": "a92e505ad087a57bf122b4081d0ca6569d480fdfd792457cf36f2f18dca84ef4",
+      "_seed": 3953971822722691162,
       "_size_kb": 17.1,
       "_lines": 380,
       "_has_card": true
@@ -476,6 +492,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
       "_sha256": "63a6c9d2cfaea366d2deb3f4510a0583dc21785f4ab6e884cf733b76c427885c",
+      "_seed": 18173504355209722482,
       "_size_kb": 16.1,
       "_lines": 348,
       "_has_card": true
@@ -502,6 +519,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
       "_sha256": "86b5a0c9b6a756444273da7c7e6ff7f4c9fc3c3e6756d8da0ef94e3072c86562",
+      "_seed": 11125880910024161837,
       "_size_kb": 19.2,
       "_lines": 398,
       "_has_card": true
@@ -528,6 +546,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py",
       "_sha256": "f29cccc90d4478637e51ee037f58640fd57323d9560eeeaa815ec23767ebfe4a",
+      "_seed": 5854357498148564447,
       "_size_kb": 20.6,
       "_lines": 453,
       "_has_card": true
@@ -554,6 +573,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py",
       "_sha256": "dcb7cea479296d842963fddb35241918b251e0d7e178e5cb6544610b19033870",
+      "_seed": 15452430195650870719,
       "_size_kb": 20.4,
       "_lines": 414,
       "_has_card": true
@@ -581,6 +601,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
       "_sha256": "f4a91aeb88ccd7cf7c6aac6ec9eb1fb27356b4bd5934431550ac30f82b33a68e",
+      "_seed": 14350164510408194833,
       "_size_kb": 34.6,
       "_lines": 673,
       "_has_card": true
@@ -608,6 +629,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py",
       "_sha256": "473f4511b1e897ba8426fa518a67442892454aa22a0868696d235ae148b1eacc",
+      "_seed": 3025664746881563672,
       "_size_kb": 47.4,
       "_lines": 570,
       "_has_card": true
@@ -634,6 +656,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
       "_sha256": "ff5df0a149c3539a0c5fb79323c145b2f5e7549a7bf84eb6d5af87bdffd13058",
+      "_seed": 2520427991298359032,
       "_size_kb": 89.7,
       "_lines": 921,
       "_has_card": true
@@ -661,6 +684,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
       "_sha256": "493a08a3736139e87c4d0215e52e9738db8588f1637bde2540a47f89f97dd3b5",
+      "_seed": 3606179690631149846,
       "_size_kb": 13.0,
       "_lines": 289,
       "_has_card": true
@@ -688,6 +712,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
       "_sha256": "ee5e50007aec0734879eb5971153e2fdce0c55417c4759593d088eda08b8da62",
+      "_seed": 14861492049442254073,
       "_size_kb": 14.6,
       "_lines": 289,
       "_has_card": true
@@ -715,6 +740,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
       "_sha256": "8a5606496641b9afe34413aa26052b13b625f320ef6fb9471b30927b82df733b",
+      "_seed": 5195556347500573918,
       "_size_kb": 13.0,
       "_lines": 292,
       "_has_card": true
@@ -742,6 +768,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
       "_sha256": "6adb6a370e550cc7e0161088110ca0b5b139c30c0b4978888e184367736c2fbc",
+      "_seed": 16390491864010865935,
       "_size_kb": 12.9,
       "_lines": 273,
       "_has_card": true
@@ -769,6 +796,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
       "_sha256": "1e4dc2f604e7780fc96453ff5dcdf8a42191463bc33ff7a3ed76100e07a0b075",
+      "_seed": 12826547131641504102,
       "_size_kb": 13.7,
       "_lines": 266,
       "_has_card": true
@@ -796,6 +824,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
       "_sha256": "5bba48bb0a5e9ce23c1ba33b27912d9a77c7884caad2524fda5f2571b5159146",
+      "_seed": 16427931656570809614,
       "_size_kb": 15.3,
       "_lines": 331,
       "_has_card": true
@@ -823,6 +852,7 @@
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
       "_sha256": "04e2302ae41645267a0ea5fc3bf449b4a7b272e6319e16ca2a090132506252ca",
+      "_seed": 743639680721625695,
       "_size_kb": 14.8,
       "_lines": 360,
       "_has_card": true
@@ -850,6 +880,7 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py",
       "_sha256": "fc250452cba234c50d30a09d7b562c78cf9b68a744128c84a584cc0973ebe3d5",
+      "_seed": 5836169530732982279,
       "_size_kb": 13.3,
       "_lines": 328,
       "_has_card": true
@@ -877,6 +908,7 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
       "_sha256": "5df21ade50503f3b0af66bfc859ca0215bd05601a79cae13d5d97bcb1714d297",
+      "_seed": 12145677136544149217,
       "_size_kb": 13.8,
       "_lines": 328,
       "_has_card": true
@@ -904,6 +936,7 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
       "_sha256": "d1ba77359d14abd4a2cd9191432fce88ce51403b9482c8df03eaddf305c49b33",
+      "_seed": 5482587288805061290,
       "_size_kb": 14.4,
       "_lines": 369,
       "_has_card": true
@@ -931,6 +964,7 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
       "_sha256": "c82e515c8e917e2566978d77974b3f8da4be3b32af00ce07124e7c1651d14a86",
+      "_seed": 15492855745775155274,
       "_size_kb": 12.9,
       "_lines": 341,
       "_has_card": true
@@ -959,6 +993,7 @@
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py",
       "_sha256": "767fdec6b58cad6ed12663bd2d8704a806b3a6d5386a743ea0ca36d71fcb563c",
+      "_seed": 8887254288578788668,
       "_size_kb": 12.8,
       "_lines": 326,
       "_has_card": true
@@ -986,6 +1021,7 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
       "_sha256": "cbb68406cd8f076c3e2f1c77710d65378dd80b3305618849a440c4fd412c563a",
+      "_seed": 5999981279495069821,
       "_size_kb": 16.9,
       "_lines": 398,
       "_has_card": true
@@ -1013,6 +1049,7 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
       "_sha256": "f9f23f7b5735cf46e2cb1c2ed14af0c2e9a3ea6418ddaa31d0a650bdb92ae80f",
+      "_seed": 9923268848797892417,
       "_size_kb": 15.1,
       "_lines": 328,
       "_has_card": true
@@ -1040,6 +1077,7 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
       "_sha256": "e3459b8792513bffd47c56ab5fc10811eb0aec0b4b5f4f81831770b35607c3be",
+      "_seed": 9239080674509203253,
       "_size_kb": 13.0,
       "_lines": 286,
       "_has_card": true
@@ -1068,6 +1106,7 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
       "_sha256": "555b663ffb8d5573eb8a85493b76a0a4ae17a23149c006c89dd89d244acca6f0",
+      "_seed": 16478343906997446426,
       "_size_kb": 14.8,
       "_lines": 290,
       "_has_card": true
@@ -1095,6 +1134,7 @@
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
       "_sha256": "9e1f215d715df6b2cc47594a45d7766ab57017932c09277b1d5e9fe1d69a83e5",
+      "_seed": 15588155065239352323,
       "_size_kb": 14.9,
       "_lines": 338,
       "_has_card": true
@@ -1122,6 +1162,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py",
       "_sha256": "0b31715d103a446d40c127d03f6fface65aa63f40388240e353413ace1ea5217",
+      "_seed": 13561102833751435409,
       "_size_kb": 13.9,
       "_lines": 295,
       "_has_card": true
@@ -1148,6 +1189,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py",
       "_sha256": "2a73bc67ba748699e70c67e8ea8da5b296b196203ccd41d66fa2f5ffa1daa58c",
+      "_seed": 2012642120884166826,
       "_size_kb": 13.6,
       "_lines": 317,
       "_has_card": true
@@ -1175,6 +1217,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
       "_sha256": "4c01159068a0389f719941a69988be192606859bbe0f3aa44e02503c4778797c",
+      "_seed": 12655086543703912626,
       "_size_kb": 15.0,
       "_lines": 327,
       "_has_card": true
@@ -1201,6 +1244,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
       "_sha256": "5bb0aae345cee990ef73b98be42f5c463b3a215ffefb610dca4cb837b56e2ae1",
+      "_seed": 8826999372581053682,
       "_size_kb": 13.2,
       "_lines": 292,
       "_has_card": true
@@ -1228,6 +1272,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
       "_sha256": "0c10561b7ecece9c9c5b9be22e5a27c47c5227130c2f4e13307461660f3b346d",
+      "_seed": 3404678271836368537,
       "_size_kb": 14.6,
       "_lines": 272,
       "_has_card": true
@@ -1255,6 +1300,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py",
       "_sha256": "f2db2b185c77d3c16d3ae65a206c316ce02922cc70c79d02bdf9de11c44be2c6",
+      "_seed": 14273408934978795408,
       "_size_kb": 14.0,
       "_lines": 327,
       "_has_card": true
@@ -1282,6 +1328,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
       "_sha256": "d09d431617eb48a36ebf61cf8839137aa014206d8b98548f7985214bd1c81275",
+      "_seed": 6581827105817638564,
       "_size_kb": 14.1,
       "_lines": 306,
       "_has_card": true
@@ -1310,6 +1357,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
       "_sha256": "f36b9a6fe906f317cc208a21caed0bc5a1c23e908fe53cce9622ebbff23e8faf",
+      "_seed": 1477628584621128595,
       "_size_kb": 12.8,
       "_lines": 268,
       "_has_card": true
@@ -1337,6 +1385,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py",
       "_sha256": "7ff01ed46cb7fc789bde35a4bee8f623f2002563af540314d1020b8f6306c33d",
+      "_seed": 18409195487267397654,
       "_size_kb": 14.4,
       "_lines": 329,
       "_has_card": true
@@ -1364,6 +1413,7 @@
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
       "_sha256": "57b74757d5c154a6869f89bf1ba3318d9f406ac56df4a07feb84565bd20dd854",
+      "_seed": 4746954344674107422,
       "_size_kb": 12.6,
       "_lines": 280,
       "_has_card": true
@@ -1390,6 +1440,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py",
       "_sha256": "f88706f2bbff01f9d9eccfab6f77f0258e5a4f57bbf8bccbbe3a352e46f139cc",
+      "_seed": 776460569569535970,
       "_size_kb": 18.2,
       "_lines": 369,
       "_has_card": true
@@ -1417,6 +1468,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
       "_sha256": "e2668ee27596aadee685d050d95eeb94369f66442380a33fb72fc121fcea27db",
+      "_seed": 16645293730949775296,
       "_size_kb": 18.9,
       "_lines": 402,
       "_has_card": true
@@ -1444,6 +1496,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator.py",
       "_sha256": "ac61cd2b06d3cc9c25a23138d1422239f2fd9ac5526fea37954e9fdd06b406f2",
+      "_seed": 14392126025914655757,
       "_size_kb": 15.9,
       "_lines": 264,
       "_has_card": true
@@ -1471,6 +1524,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
       "_sha256": "3ed26759c6e94affd6225df38155f8ce5fe20a8092b3e0e1e9acd67223173c91",
+      "_seed": 14682849978474050837,
       "_size_kb": 16.8,
       "_lines": 325,
       "_has_card": true
@@ -1497,6 +1551,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
       "_sha256": "2da3039e90aeabf99eaf9b080c144fc8f047c63e9609a5eb8273dd05f8ffad5d",
+      "_seed": 1713805111300072952,
       "_size_kb": 15.6,
       "_lines": 293,
       "_has_card": true
@@ -1523,6 +1578,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
       "_sha256": "9af554875375865e69ee71131deb64a4e0505809eca0e78f9443cef13b1f667a",
+      "_seed": 17617098655100714102,
       "_size_kb": 15.2,
       "_lines": 300,
       "_has_card": true
@@ -1549,6 +1605,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
       "_sha256": "3fa23ccf9158d0892802d65c7987fb56b9737abf548ff12bee7bdb6d7e452271",
+      "_seed": 10044936445967873390,
       "_size_kb": 17.7,
       "_lines": 317,
       "_has_card": true
@@ -1576,6 +1633,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
       "_sha256": "60b946fb5b01b7525d55ac21a78dd4fbebe18a55fc9ba5f7bb052eb9287c57de",
+      "_seed": 5909429225316429364,
       "_size_kb": 14.7,
       "_lines": 284,
       "_has_card": true
@@ -1603,6 +1661,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
       "_sha256": "c1d4c185ea1f0af5da3c1446b0717990545daf85d94c041f6aa4b97c2df9c470",
+      "_seed": 2233591614042549795,
       "_size_kb": 14.9,
       "_lines": 285,
       "_has_card": true
@@ -1629,6 +1688,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
       "_sha256": "8c1d8b3761f43f3955bcc78def6a0c7e98379bab00cf11446a6094ea28495352",
+      "_seed": 3288425480277600421,
       "_size_kb": 15.8,
       "_lines": 296,
       "_has_card": true
@@ -1656,6 +1716,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py",
       "_sha256": "1fb67a93549856d549d030f41f26e30b2f08bcb2b1116949cd224f49759abcd6",
+      "_seed": 381057127156556376,
       "_size_kb": 15.8,
       "_lines": 258,
       "_has_card": true
@@ -1682,6 +1743,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
       "_sha256": "9a125bbd907c2428bef4d82ec96a0a42d6bba8622d3215596428566b46a7bea1",
+      "_seed": 5953920645506673794,
       "_size_kb": 14.4,
       "_lines": 250,
       "_has_card": true
@@ -1708,6 +1770,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
       "_sha256": "e5981f8efd6223ac8e190cec54f86a753665ac1b03c860f5cacdbd1fa926de79",
+      "_seed": 18264571842642197414,
       "_size_kb": 14.8,
       "_lines": 240,
       "_has_card": true
@@ -1734,6 +1797,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py",
       "_sha256": "4f5ff6709576d1d8d176b410135603a326b41e8b1ab3ca08dbdc1a30ad2cab48",
+      "_seed": 2709938328044190111,
       "_size_kb": 14.8,
       "_lines": 267,
       "_has_card": true
@@ -1760,6 +1824,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py",
       "_sha256": "5d85d9a34ac1095a69bc8781df5c9ead71c3ada1c8337fc7d8be0b01420d1926",
+      "_seed": 4606979804393780853,
       "_size_kb": 15.9,
       "_lines": 283,
       "_has_card": true
@@ -1787,6 +1852,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py",
       "_sha256": "782f7524e8b8f6274563f7da9245d1bc2230b80bfc28b78fec73508f40a57a1b",
+      "_seed": 3409504503786645323,
       "_size_kb": 16.2,
       "_lines": 306,
       "_has_card": true
@@ -1813,6 +1879,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py",
       "_sha256": "1cc540db9541e2cc83267239db431ab8da13242d0153867de22e164396001ee5",
+      "_seed": 18066875627483051477,
       "_size_kb": 14.6,
       "_lines": 265,
       "_has_card": true
@@ -1839,6 +1906,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py",
       "_sha256": "0eebb7f78a136e188c894262b1650c13df23688bb96ca5cd897a784e4b679716",
+      "_seed": 13241370335976767116,
       "_size_kb": 14.3,
       "_lines": 253,
       "_has_card": true
@@ -1866,6 +1934,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py",
       "_sha256": "049f1d9560324ca4c4d545c2e840f36da85ee901a733ea2f795106b1d5088fca",
+      "_seed": 6632932916069154274,
       "_size_kb": 12.8,
       "_lines": 253,
       "_has_card": true
@@ -1892,6 +1961,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
       "_sha256": "34a09fd7eb956f63a8a34ca45bbe7218660da9fea6cf7b9c98d66e48c8e07eec",
+      "_seed": 2718308106806898885,
       "_size_kb": 12.9,
       "_lines": 258,
       "_has_card": true
@@ -1918,6 +1988,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
       "_sha256": "e7d1b2c541faff9fb2c72302ca05469a889b6a1ddcd33140e2a768bbed38fcfc",
+      "_seed": 3204150057113364789,
       "_size_kb": 14.2,
       "_lines": 243,
       "_has_card": true
@@ -1944,6 +2015,7 @@
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
       "_sha256": "6504f7a1b9f50812c363b4b916d3948cf08d11d6eff539d8e5985b555457d50b",
+      "_seed": 11805318406759655329,
       "_size_kb": 14.5,
       "_lines": 264,
       "_has_card": true
@@ -1971,6 +2043,7 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
       "_sha256": "23cde0d7691d7fde92738dc8cf13e38ca4e9fb86d913d42c1350824325e867ef",
+      "_seed": 16835577812647426117,
       "_size_kb": 12.7,
       "_lines": 324,
       "_has_card": true
@@ -1998,6 +2071,7 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py",
       "_sha256": "af02e7077e7df871be4a84ed226f68f6e6e7b701bbe4e107863a21313341734f",
+      "_seed": 4205376672235267561,
       "_size_kb": 15.8,
       "_lines": 354,
       "_has_card": true
@@ -2025,6 +2099,7 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py",
       "_sha256": "1dd1f5b600b4188a839bd9a0a9957577ed40a87004ed07d815e7e7028739f9aa",
+      "_seed": 840299925014852615,
       "_size_kb": 14.0,
       "_lines": 369,
       "_has_card": true
@@ -2052,6 +2127,7 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
       "_sha256": "6ec82bc15d44ac15abcf43deb8c7203f2f59e025ede9d97a3b730538223cb057",
+      "_seed": 2707536209626541719,
       "_size_kb": 15.0,
       "_lines": 364,
       "_has_card": true
@@ -2079,6 +2155,7 @@
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
       "_sha256": "e063015c92e07854e4fdf499d856906711caa48c9951df7c5634cc5b04351069",
+      "_seed": 7498395653551960420,
       "_size_kb": 14.7,
       "_lines": 310,
       "_has_card": true
@@ -2105,6 +2182,7 @@
       ],
       "_file": "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py",
       "_sha256": "320ad3d936428f7de7d972178082eb35e50d501375ef457d88f2a31b9fd645b3",
+      "_seed": 637792878567503925,
       "_size_kb": 17.3,
       "_lines": 390,
       "_has_card": true
@@ -2131,6 +2209,7 @@
       ],
       "_file": "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
       "_sha256": "e9ca3f2340ba138eeb7ca0f844284a66ce8178a67c917589bce02460c3ffc1c7",
+      "_seed": 8279755765930667339,
       "_size_kb": 18.7,
       "_lines": 425,
       "_has_card": true
@@ -2157,6 +2236,7 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py",
       "_sha256": "39bc781039e2f6a976e574bc44cc9771e8202f166df76eea53ee3745ee395bb6",
+      "_seed": 741104875949665064,
       "_size_kb": 15.0,
       "_lines": 353,
       "_has_card": true
@@ -2183,6 +2263,7 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
       "_sha256": "eeb6366bbe100b7780485b55ae1591f7b0e81db404f567b9eaaa85481ba99a7c",
+      "_seed": 16055120389735064948,
       "_size_kb": 16.2,
       "_lines": 367,
       "_has_card": true
@@ -2209,6 +2290,7 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
       "_sha256": "6e3fe806d078c771887934d5e40bc26524617c8028dce4adf41000e175ede545",
+      "_seed": 1417363157664017509,
       "_size_kb": 12.5,
       "_lines": 321,
       "_has_card": true
@@ -2235,6 +2317,7 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
       "_sha256": "da188215e0b91920acf24fdf0d6479f57b6e070acc1bfd8fe93b049ef2e23b73",
+      "_seed": 11447213470199194507,
       "_size_kb": 14.9,
       "_lines": 319,
       "_has_card": true
@@ -2261,6 +2344,7 @@
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
       "_sha256": "54254d32e6fd55d1546832797cd6e2bb120b8c3d045a2615fb1d71cc2ed4c075",
+      "_seed": 2701276264207625678,
       "_size_kb": 13.8,
       "_lines": 330,
       "_has_card": true
@@ -2287,6 +2371,7 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
       "_sha256": "cc76710d63e8292947016a2b339d5658f4164c8a93cf30bc3d4e0a8225abf867",
+      "_seed": 8147017178597171709,
       "_size_kb": 13.0,
       "_lines": 342,
       "_has_card": true
@@ -2313,6 +2398,7 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py",
       "_sha256": "11ee0289b1d47959bbc35f54988c105751e5ad37bd99f70346eca0eed7ad0dab",
+      "_seed": 13063354040569177065,
       "_size_kb": 13.8,
       "_lines": 315,
       "_has_card": true
@@ -2339,6 +2425,7 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py",
       "_sha256": "3d7ada0b2628f2f8fef520f3a27589573d72941847de62df17a92785233f7bc3",
+      "_seed": 1841735498398838829,
       "_size_kb": 13.7,
       "_lines": 333,
       "_has_card": true
@@ -2365,6 +2452,7 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py",
       "_sha256": "829086c01ea3c3fac32aefc67d7a9565699adbabedef1ed85229927aad4b76dc",
+      "_seed": 2213254919820554190,
       "_size_kb": 15.6,
       "_lines": 335,
       "_has_card": true
@@ -2391,6 +2479,7 @@
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
       "_sha256": "937d0c6105813b2d835f1c8d8e8a9d488b165f83223e9d2d23f868f3c0623131",
+      "_seed": 17145926618142354208,
       "_size_kb": 17.7,
       "_lines": 362,
       "_has_card": true
@@ -2417,6 +2506,7 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
       "_sha256": "64296e65606eaf7c815a5c1e0ab9638a4854184989da3d7fbbc766265ac81e83",
+      "_seed": 3131358552737328726,
       "_size_kb": 15.6,
       "_lines": 370,
       "_has_card": true
@@ -2443,6 +2533,7 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
       "_sha256": "91b190e8e7b78ce8a423072a552562b8d6d50a8e2162ea6d8b912d226711873c",
+      "_seed": 13430271910399845800,
       "_size_kb": 17.2,
       "_lines": 436,
       "_has_card": true
@@ -2469,6 +2560,7 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
       "_sha256": "a82d2923d78eeee218a61c1b1ba54d09710cecc0c25e0c8f5f77defc706c71ee",
+      "_seed": 7707877473434353400,
       "_size_kb": 20.4,
       "_lines": 506,
       "_has_card": true
@@ -2495,6 +2587,7 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
       "_sha256": "10a6df3dee75901d22e93bed9b81d8e2fa19abd8905bae389a5ceb48043c5921",
+      "_seed": 15486760774949025133,
       "_size_kb": 22.4,
       "_lines": 538,
       "_has_card": true
@@ -2521,6 +2614,7 @@
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
       "_sha256": "f82a3b305c4f91e12c770b518af656a21328439027482b8790cdca78f1712d1c",
+      "_seed": 16804600987838460767,
       "_size_kb": 23.8,
       "_lines": 631,
       "_has_card": true
@@ -2548,6 +2642,7 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
       "_sha256": "10b25609d84be3a1d909641753295b75c1979178adaec483b6c66d0a5905f863",
+      "_seed": 12233521075866838081,
       "_size_kb": 14.6,
       "_lines": 349,
       "_has_card": true
@@ -2575,6 +2670,7 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
       "_sha256": "c7d3ec4ff988173d90118bf2936df4f04a4ac96a0fb6a21d4ad777e6fffaa0a2",
+      "_seed": 8921174840435288387,
       "_size_kb": 14.6,
       "_lines": 327,
       "_has_card": true
@@ -2601,6 +2697,7 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py",
       "_sha256": "bc51311c3fc6fd54a3218e0155a2db82a0b21803561c4223e2321603512c8d74",
+      "_seed": 16868928112770562685,
       "_size_kb": 14.7,
       "_lines": 308,
       "_has_card": true
@@ -2627,6 +2724,7 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py",
       "_sha256": "edbba9a78872be3e8612d548e02d663e4f3abc3d2525382108267580aef161a8",
+      "_seed": 11818896142975508918,
       "_size_kb": 12.9,
       "_lines": 307,
       "_has_card": true
@@ -2654,6 +2752,7 @@
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py",
       "_sha256": "2833abff1d04120c2d422d5b12a0111542dca6dee0bbea8d596dd8adf8ad1d2a",
+      "_seed": 1823358465969239878,
       "_size_kb": 16.3,
       "_lines": 372,
       "_has_card": true
@@ -2680,6 +2779,7 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
       "_sha256": "58b06754918102a4e1006eaeffa8c582fb2ceadbb13d56461b2b9c61ddb73666",
+      "_seed": 3107145353423104918,
       "_size_kb": 15.8,
       "_lines": 421,
       "_has_card": true
@@ -2706,6 +2806,7 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py",
       "_sha256": "92cddee1bf1ac865fbf22c04360da73f2b724fd255796054de05a00c9e82513f",
+      "_seed": 9696532239747785842,
       "_size_kb": 14.3,
       "_lines": 379,
       "_has_card": true
@@ -2733,6 +2834,7 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
       "_sha256": "7cc52cc77603e87f4645999e4529ccd7ca801881128ce91a4be654066f51abbb",
+      "_seed": 7396811422879724128,
       "_size_kb": 13.6,
       "_lines": 351,
       "_has_card": true
@@ -2760,6 +2862,7 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
       "_sha256": "09cd824b6e2b11562231b2804bbda08959f91254022574bc798b834e3fee90f6",
+      "_seed": 17606540497672480195,
       "_size_kb": 13.1,
       "_lines": 363,
       "_has_card": true
@@ -2787,6 +2890,7 @@
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py",
       "_sha256": "9b77d44e6a38d8404479f18f82012e6654dbe0e7797092d315d1e8725098adca",
+      "_seed": 6795368757143024027,
       "_size_kb": 13.1,
       "_lines": 324,
       "_has_card": true
@@ -2813,6 +2917,7 @@
       ],
       "_file": "agents/@borg/borg_agent.py.card",
       "_sha256": "452db6dfad5d5daa4ea73c44b6df677e86ac7ce7d7e172128c09f4e949570f70",
+      "_seed": 6828785747777692595,
       "_size_kb": 5.0,
       "_lines": 102,
       "_has_card": true,
@@ -2868,6 +2973,7 @@
       ],
       "_file": "agents/@borg/cardsmith_agent.py.card",
       "_sha256": "eb7fb3c00348ba0bdb83931415c28c2068aa5fb22781765298a3e499d729d4ef",
+      "_seed": 16145574178551640748,
       "_size_kb": 5.1,
       "_lines": 104,
       "_has_card": true,
@@ -2930,6 +3036,7 @@
       ],
       "_file": "agents/@borg/prompt_to_video.py",
       "_sha256": "196a6ed469c0b3ce34b3dba6bbe791de51503c11303cbc98eeae17c3b2fb91d2",
+      "_seed": 9349817682889685950,
       "_size_kb": 26.2,
       "_lines": 792,
       "_has_card": true
@@ -2955,6 +3062,7 @@
       ],
       "_file": "agents/@discreetRappers/agent_generator.py",
       "_sha256": "160d34314297d7b04df04fcbb92626318a441cde3adecc61d2eff0900ac1e5a0",
+      "_seed": 3752838975053118804,
       "_size_kb": 47.9,
       "_lines": 1257,
       "_has_card": true
@@ -2983,6 +3091,7 @@
       ],
       "_file": "agents/@discreetRappers/agent_transpiler.py",
       "_sha256": "3da01857c35b1213a32d47ae9bb6e9a3ac03ab43ee98df23db5b254e57706b9a",
+      "_seed": 15412442042747986143,
       "_size_kb": 39.1,
       "_lines": 1035,
       "_has_card": true
@@ -3009,6 +3118,7 @@
       ],
       "_file": "agents/@discreetRappers/architecture_diagram.py",
       "_sha256": "f39775c19f09a2b44e5b00965603d7d160474adfbec127e836e82b1bcbfb88c6",
+      "_seed": 12653658607352160338,
       "_size_kb": 38.3,
       "_lines": 996,
       "_has_card": true
@@ -3039,6 +3149,7 @@
       ],
       "_file": "agents/@discreetRappers/copilot_studio_transpiler.py",
       "_sha256": "42145f6e6ceb635d9bf6e5ad96e12573c9b51d5cda2a23b03e5286043815d970",
+      "_seed": 18108197842543325999,
       "_size_kb": 88.5,
       "_lines": 2154,
       "_has_card": true
@@ -3069,6 +3180,7 @@
       ],
       "_file": "agents/@discreetRappers/demo_script_generator.py",
       "_sha256": "ab6879d3540d50656b4e37ce67e0ae58985001411f3bfb15c8a1140ea7ad7988",
+      "_seed": 12892969606767584343,
       "_size_kb": 58.4,
       "_lines": 1201,
       "_has_card": true
@@ -3095,6 +3207,7 @@
       ],
       "_file": "agents/@discreetRappers/dynamics_crud.py",
       "_sha256": "d9ab69e86ae94b68cf03d527a6b3b442392ff32aadc79268c2cb879d178631de",
+      "_seed": 4988006904489455764,
       "_size_kb": 21.1,
       "_lines": 418,
       "_has_card": true
@@ -3120,6 +3233,7 @@
       ],
       "_file": "agents/@discreetRappers/email_drafting.py",
       "_sha256": "252e56dd3649c05b645213147cf15b0752e2e82d39242d5233769b94c0514189",
+      "_seed": 15013119562953009647,
       "_size_kb": 6.0,
       "_lines": 149,
       "_has_card": true
@@ -3146,6 +3260,7 @@
       ],
       "_file": "agents/@discreetRappers/powerpoint_generator.py",
       "_sha256": "931fb13c6b1b1c2344fc10ea69e68e9f1ee43831dce54f0473ea3bfef2ee9497",
+      "_seed": 17389586519257922585,
       "_size_kb": 61.2,
       "_lines": 1549,
       "_has_card": true
@@ -3170,6 +3285,7 @@
       ],
       "_file": "agents/@discreetRappers/project_tracker.py",
       "_sha256": "d03cee18ad287054fc1b023426e3c26905137e46a7ffd54f4aa5537df00cfc0a",
+      "_seed": 16241894656756294850,
       "_size_kb": 39.1,
       "_lines": 894,
       "_has_card": true
@@ -3200,6 +3316,7 @@
       ],
       "_file": "agents/@discreetRappers/rapp_pipeline.py",
       "_sha256": "9d7858e32dba02c40705312d22bbe3763e8960200e67f14f1c792d10632fa1d4",
+      "_seed": 422311159510219859,
       "_size_kb": 121.0,
       "_lines": 2984,
       "_has_card": true
@@ -3225,6 +3342,7 @@
       ],
       "_file": "agents/@discreetRappers/sales_assistant.py",
       "_sha256": "ce2f6b67adb52c9a5bce36db4e8eec85c95468593b60b60071df8615b42ffad3",
+      "_seed": 3017416681468735667,
       "_size_kb": 26.7,
       "_lines": 631,
       "_has_card": true
@@ -3251,6 +3369,7 @@
       ],
       "_file": "agents/@discreetRappers/scripted_demo.py",
       "_sha256": "22379dbaaef26c60bd72748d19227bebec00fc8e347fe93cb7eee0b614800bf5",
+      "_seed": 1094013696617362198,
       "_size_kb": 54.2,
       "_lines": 1301,
       "_has_card": true
@@ -3283,6 +3402,7 @@
       ],
       "_file": "agents/@discreetRappers/sharepoint_contract_analysis.py",
       "_sha256": "33817ef2dec00fcd105196404e9ded85dac0352238725e642b515997d4e84d78",
+      "_seed": 1495474670475554434,
       "_size_kb": 119.8,
       "_lines": 2468,
       "_has_card": true
@@ -3310,6 +3430,7 @@
       ],
       "_file": "agents/@kody/agent_workbench_agent.py",
       "_sha256": "e4152809147da8d777dc1b2a2447c8c5361e6f88e8e506128870fa6f866c0a8e",
+      "_seed": 3115334458036463931,
       "_size_kb": 28.6,
       "_lines": 723,
       "_has_card": true
@@ -3335,6 +3456,7 @@
       ],
       "_file": "agents/@kody/context_memory.py",
       "_sha256": "df0c30f77b8ce939afa88faadf0d2801ad565d1b5153c904778c08c874c1717a",
+      "_seed": 10904948795335258592,
       "_size_kb": 8.4,
       "_lines": 183,
       "_has_card": true
@@ -3364,6 +3486,7 @@
       ],
       "_file": "agents/@kody/deal_desk.py",
       "_sha256": "41b217189f3e2f87a26759f6eb05c13febaf261b3f3a98a851d0910103ee83ab",
+      "_seed": 3736335358696106227,
       "_size_kb": 10.1,
       "_lines": 245,
       "_has_card": true
@@ -3389,6 +3512,7 @@
       ],
       "_file": "agents/@kody/github_agent_library.py",
       "_sha256": "cc1fe62b1328059ae1c68dc9a4fddd4bb39116811704f60f4bf3d70617c5b93c",
+      "_seed": 9390336429601078448,
       "_size_kb": 43.7,
       "_lines": 957,
       "_has_card": true
@@ -3414,6 +3538,7 @@
       ],
       "_file": "agents/@kody/manage_memory.py",
       "_sha256": "04b9328ed1fc5c5463f0aa6838f76a8f5f18d87c69e2b1643bfdd45b40953874",
+      "_seed": 11629788220900256764,
       "_size_kb": 10.8,
       "_lines": 255,
       "_has_card": true
@@ -3441,6 +3566,7 @@
       ],
       "_file": "agents/@kody/rappter_engine_agent.py",
       "_sha256": "0dd0b1b793123e6fef8ccfa34646ff3af0f8784ab65ac47f8f6514189fb2d109",
+      "_seed": 4674925164302711593,
       "_size_kb": 17.5,
       "_lines": 479,
       "_has_card": true
@@ -3468,6 +3594,7 @@
       ],
       "_file": "agents/@kody/rappterbook.py",
       "_sha256": "b5a59ea823153b609bdf94c4ca1e2ec68951ae88eba8f1c42e2faa265cce48b2",
+      "_seed": 11673659422328765082,
       "_size_kb": 6.3,
       "_lines": 160,
       "_has_card": true
@@ -3495,6 +3622,7 @@
       ],
       "_file": "agents/@kody/rappterpedia_agent.py",
       "_sha256": "80fdd8e9bc17012761844c1ac6ddea153487d9301e9514eaa2e35716e4ea4b85",
+      "_seed": 3967529645834512416,
       "_size_kb": 24.2,
       "_lines": 540,
       "_has_card": true
@@ -3523,6 +3651,7 @@
       ],
       "_file": "agents/@kody/rar_remote_agent.py",
       "_sha256": "bf5aa3875af723834fe8387e206587e754595a9015ecfc421cc403fe00ef2690",
+      "_seed": 756356789067200321,
       "_size_kb": 33.5,
       "_lines": 840,
       "_has_card": true
@@ -3554,6 +3683,7 @@
       ],
       "_file": "agents/@kody/recon_deck.py",
       "_sha256": "9e55141ef636edd11d051e1ece298dc4f2a109e15094cfafdd1da4055643dd32",
+      "_seed": 3113345303928924782,
       "_size_kb": 6.9,
       "_lines": 175,
       "_has_card": true
@@ -3578,6 +3708,7 @@
       ],
       "_file": "agents/@kody-w/hello_world.py",
       "_sha256": "89d9358c33e9ab3013d349524548e02685ca8446d5cdb36c05b5dfe4b0189789",
+      "_seed": 17716068814879601796,
       "_size_kb": 1.2,
       "_lines": 39,
       "_has_card": true
@@ -3600,6 +3731,7 @@
       "dependencies": [],
       "_file": "agents/@rapp/basic_agent.py",
       "_sha256": "641fd31cec2ba24c532a289aac91a8fb865ea2cda0b08de56db249462af369aa",
+      "_seed": 2282791009467636617,
       "_size_kb": 1.3,
       "_lines": 29,
       "_has_card": true
@@ -3628,6 +3760,7 @@
       ],
       "_file": "agents/@wildhaven/ceo_agent.py",
       "_sha256": "252842017521a19e87f2febdaabc624bea8e21aff2165bf0ba89fbf612172374",
+      "_seed": 1463797972131002668,
       "_size_kb": 13.5,
       "_lines": 325,
       "_has_card": true

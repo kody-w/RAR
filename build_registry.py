@@ -138,6 +138,25 @@ def compute_sha256(file_path: Path) -> str:
     return hashlib.sha256(file_path.read_bytes()).hexdigest()
 
 
+def _seed_hash(s: str) -> int:
+    h = 0
+    for c in s:
+        h = ((h << 5) - h + ord(c)) & 0xFFFFFFFF
+    return h
+
+
+def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) -> int:
+    """Forge a seed FROM agent data. Same algorithm as rapp_sdk.forge_seed.
+    The seed IS the card's DNA — encodes identity, types, tier, tag/dep hints.
+    Anyone with this number reconstructs the exact card. No registry needed.
+    This protocol is permanent."""
+    # Import type derivation from SDK to stay in sync
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).parent))
+    from rapp_sdk import forge_seed as _forge
+    return _forge(name, category, tier, tags, deps)
+
+
 def scan_security(py_path: Path) -> list:
     """Static security scan — returns list of warnings."""
     warnings = []
@@ -233,6 +252,13 @@ def build_registry():
         content = py_path.read_text()
         manifest["_file"] = str(py_path)
         manifest["_sha256"] = sha256
+        manifest["_seed"] = compute_seed(
+            name,
+            manifest.get("category", "general"),
+            manifest.get("quality_tier", "community"),
+            manifest.get("tags", []),
+            manifest.get("dependencies", []),
+        )
         manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = is_card or _has_holo_card(name)

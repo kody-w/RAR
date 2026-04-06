@@ -484,7 +484,15 @@ def _add_type_system(card, agent):
     card["rarity_tier"] = TIER_TO_RARITY.get(tier, "core")
     card["rarity_label"] = RARITY_LABELS.get(card["rarity_tier"], "Core")
     card["floor_pts"] = RARITY_FLOOR.get(card["rarity_tier"], 10)
-    card["seed"] = seed_hash(agent_name)
+    # Forge the seed FROM the data — the seed IS the card's DNA
+    from rapp_sdk import forge_seed as _forge_seed
+    card["seed"] = _forge_seed(
+        agent_name,
+        agent.get("category", "general"),
+        agent.get("quality_tier", "community"),
+        agent.get("tags", []),
+        agent.get("dependencies", []),
+    )
 
     return card
 

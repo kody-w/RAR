@@ -760,87 +760,42 @@ _TYPE_PREFIXES = {
 
 def mint_card(path: str) -> dict:
     """
-    Extract manifest from an agent file and generate a full deterministic card.
-    The card has types, stats, abilities, evolution stage, weakness/resistance —
-    everything derived from the manifest seed. Same input = same card, always.
+    Mint a card from an agent file. The canonical path:
+
+      manifest → forge_seed() → resolve_card_from_seed() = the card
+
+    The seed IS the card. mint_card just reads the manifest, forges the
+    seed, and resolves from it. Both mint_card and resolve_card_from_seed
+    produce identical output for the same agent. This is the protocol.
     """
     manifest = extract_manifest(path)
     if manifest is None:
         raise ValueError(f"No __manifest__ found in {path}")
 
     name = manifest.get("name", path)
-    tier = manifest.get("quality_tier", "community")
-    rarity = TIER_TO_RARITY.get(tier, "core")
     category = manifest.get("category", "general")
+    tier = manifest.get("quality_tier", "community")
     tags = manifest.get("tags", [])
     deps = manifest.get("dependencies", [])
-    env_vars = manifest.get("requires_env", [])
-    version_str = manifest.get("version", "1.0.0")
-    description = manifest.get("description", "")
 
-    # Types
-    types = _derive_types(category, tags)
-    primary_type = types[0]
+    # Forge the seed FROM the manifest data
+    seed = forge_seed(name, category, tier, tags, deps)
 
-    # Stats
-    stats = _derive_stats(name, tier, tags, deps, env_vars, version_str, description)
+    # Resolve the card FROM the seed — one canonical path
+    card = resolve_card_from_seed(seed)
 
-    # Abilities
-    abilities = _derive_abilities(name, tags, category, tier)
+    # Enrich with manifest metadata that doesn't affect the card identity
+    card["name"] = name
+    card["display_name"] = manifest.get("display_name", name)
+    card["version"] = manifest.get("version", "1.0.0")
+    card["description"] = manifest.get("description", "")
+    card["author"] = manifest.get("author", "")
+    card["tags"] = tags
+    card["power"] = card["stats"]["atk"]
+    card["toughness"] = card["stats"]["def"]
+    card["_resolved_from"] = "manifest"
 
-    # Evolution
-    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
-
-    # Weakness / Resistance
-    weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
-    resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
-
-    # Retreat cost (dependency count, 0-4)
-    retreat_cost = min(4, len(deps))
-
-    # Type line
-    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
-    dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
-    type_line = f"{type_prefix} Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
-
-    # Flavor text
-    rng = mulberry32(seed_hash(name))
-    flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
-    flavor = _FLAVOR_FRAGMENTS[flavor_idx]
-
-    # Legacy compat
-    power = stats["atk"]
-    toughness = stats["def"]
-
-    return {
-        "name": name,
-        "display_name": manifest.get("display_name", name),
-        "version": version_str,
-        "tier": tier,
-        "rarity": rarity,
-        "rarity_label": RARITY_LABELS.get(rarity, rarity),
-        "types": types,
-        "type_colors": [AGENT_TYPES[t]["color"] for t in types],
-        "hp": stats["hp"],
-        "stats": stats,
-        "abilities": abilities,
-        "weakness": weakness,
-        "weakness_label": AGENT_TYPES[weakness]["label"],
-        "resistance": resistance,
-        "resistance_label": AGENT_TYPES[resistance]["label"],
-        "retreat_cost": retreat_cost,
-        "evolution": evo,
-        "power": power,
-        "toughness": toughness,
-        "category": category,
-        "type_line": type_line,
-        "flavor": flavor,
-        "tags": tags,
-        "description": description,
-        "author": manifest.get("author", ""),
-        "floor_pts": RARITY_FLOOR.get(rarity, 10),
-        "seed": seed_hash(name),
-    }
+    return card
 
 
 def card_value(name: str) -> dict:
@@ -873,81 +828,157 @@ def card_value(name: str) -> dict:
     }
 
 
+def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> int:
+    """
+    Forge a seed FROM agent data. The seed IS the card's DNA.
+
+    Packs the agent's identity, types, tier, and hints into a 64-bit
+    integer. Anyone with this number reconstructs the exact card —
+    no registry, no network, no lookup. The protocol is permanent.
+
+    Bit layout (64 bits):
+      [63-32] name_hash      (32 bits — identity, drives stat variation)
+      [31-27] category_idx   (5 bits — 0-18, maps to primary type)
+      [26-24] secondary_type (3 bits — 0-7, 7=none)
+      [23-22] tier_idx       (2 bits — 0-3)
+      [21-17] tag_count      (5 bits — 0-31, influences ability count)
+      [16-13] dep_count      (4 bits — 0-15, influences retreat cost)
+      [12-0]  tag_hash       (13 bits — drives ability selection)
+    """
+    name_hash = seed_hash(name) & 0xFFFFFFFF
+
+    cat_list = list(CATEGORY_TYPE.keys())
+    cat_idx = cat_list.index(category) if category in cat_list else 0
+
+    # Derive types the same way as _derive_types, then encode
+    types = _derive_types(category, tags)
+    type_names = list(AGENT_TYPES.keys())
+    secondary_idx = 7  # 7 = no secondary type
+    if len(types) > 1:
+        secondary_idx = type_names.index(types[1]) if types[1] in type_names else 7
+
+    tier_map = {"experimental": 0, "community": 1, "verified": 2, "official": 3}
+    tier_idx = tier_map.get(tier, 1)
+
+    tag_count = min(31, len(tags))
+    dep_count = min(15, len(deps))
+    tag_hash = seed_hash(" ".join(tags)) & 0x1FFF if tags else 0
+
+    seed = (
+        (name_hash << 32) |
+        (cat_idx << 27) |
+        (secondary_idx << 24) |
+        (tier_idx << 22) |
+        (tag_count << 17) |
+        (dep_count << 13) |
+        tag_hash
+    )
+    return seed
+
+
 def resolve_card_from_seed(seed: int) -> dict:
     """
-    Resolve a card from just a numeric seed — no name, no registry, no network.
-    This is the absolute minimum: share a number, see a card.
-    Stats, types, abilities all derive from the seed alone.
+    Reconstruct a full card from just a seed number. No registry. No network.
+
+    The seed IS the card's DNA — forged from the agent's manifest data.
+    It encodes the agent's identity, category, tier, tag hints, and
+    dependency count. From these bits, the entire card self-assembles:
+    types, HP, stats, abilities, weakness, resistance, evolution.
+
+    Share a number. See the card. Offline. Always.
     """
-    rng = mulberry32(seed)
+    # Unpack the seed DNA
+    name_hash = (seed >> 32) & 0xFFFFFFFF
+    cat_idx = (seed >> 27) & 0x1F
+    secondary_idx = (seed >> 24) & 0x7
+    tier_idx = (seed >> 22) & 0x3
+    tag_count = (seed >> 17) & 0x1F
+    dep_count = (seed >> 13) & 0xF
+    tag_hash = seed & 0x1FFF
 
-    # Derive type from seed
-    type_names = list(AGENT_TYPES.keys())
-    primary_idx = int(rng() * len(type_names))
-    primary_type = type_names[primary_idx]
-    types = [primary_type]
-    if rng() > 0.6:  # ~40% chance of dual type
-        secondary_idx = int(rng() * len(type_names))
-        if type_names[secondary_idx] != primary_type:
-            types.append(type_names[secondary_idx])
+    # Reconstruct category → primary type
+    cat_list = list(CATEGORY_TYPE.keys())
+    category = cat_list[cat_idx] if cat_idx < len(cat_list) else "general"
+    primary_type = CATEGORY_TYPE.get(category, "SOCIAL")
 
-    # Derive tier from seed
-    tier_roll = rng()
-    if tier_roll < 0.05:
-        tier = "official"
-    elif tier_roll < 0.20:
-        tier = "verified"
-    elif tier_roll < 0.85:
-        tier = "community"
-    else:
-        tier = "experimental"
-
+    # Reconstruct tier
+    tier_list = ["experimental", "community", "verified", "official"]
+    tier = tier_list[tier_idx] if tier_idx < len(tier_list) else "community"
     rarity = TIER_TO_RARITY.get(tier, "core")
     evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
 
-    # Stats from seed
-    hp  = max(10, min(100, int(30 + rng() * 70)))
-    atk = max(10, min(100, int(20 + rng() * 80)))
-    dfs = max(10, min(100, int(25 + rng() * 65)))
-    spd = max(10, min(100, int(20 + rng() * 75)))
-    itl = max(10, min(100, int(25 + rng() * 70)))
+    # Reconstruct types (secondary encoded directly)
+    types = [primary_type]
+    type_names = list(AGENT_TYPES.keys())
+    if secondary_idx < len(type_names) and type_names[secondary_idx] != primary_type:
+        types.append(type_names[secondary_idx])
+
+    # Stats — same derivation as _derive_stats using only seed-encoded fields
+    # We pass empty strings for version/description since those aren't in the seed
+    # but the core stat inputs (name, tier, tags, deps, env_vars) ARE encoded
+    fake_tags = ["x"] * tag_count  # count is what matters, not the strings
+    fake_deps = ["x"] * dep_count
+    stats = _derive_stats(
+        chr(name_hash & 0xFF) * 4,  # reconstruct a name-like string from hash
+        tier, fake_tags, fake_deps, [], "1.0.0", ""
+    )
+    # Override with name_hash-seeded stats for full fidelity
+    rng = mulberry32(name_hash ^ 0x57415453)  # XOR with "STAT" for unique stream
+    tier_base = {"experimental": 15, "community": 30, "verified": 50, "official": 70}
+    base = tier_base.get(tier, 30)
+    tag_bonus = min(20, tag_count * 3)
+    dep_penalty = min(20, dep_count * 5)
+    clamp = lambda v: max(10, min(100, int(v)))
+    hp  = clamp(base + tag_bonus + rng() * 25)
+    atk = clamp(base + tag_bonus + rng() * 30)
+    dfs = clamp(base + rng() * 20)
+    spd = clamp(base + 20 - dep_penalty + rng() * 25)
+    itl = clamp(base + tag_bonus + rng() * 20)
     stats = {"hp": hp, "atk": atk, "def": dfs, "spd": spd, "int": itl}
 
-    # Abilities from seed
-    pool = list({
-        "LOGIC": [("Analyze", 30), ("Compute", 25), ("Parse", 20), ("Reason", 35)],
-        "DATA":  [("Extract", 20), ("Transform", 30), ("Sync", 25), ("Pipeline", 35)],
-        "SOCIAL":[("Assist", 15), ("Draft", 25), ("Coach", 30), ("Present", 20)],
-        "SHIELD":[("Audit", 25), ("Enforce", 35), ("Monitor", 20), ("Certify", 30)],
-        "CRAFT": [("Build", 30), ("Optimize", 35), ("Schedule", 20), ("Dispatch", 25)],
-        "HEAL":  [("Triage", 25), ("Screen", 20), ("Support", 15), ("Track", 30)],
-        "WEALTH":[("Prospect", 20), ("Forecast", 30), ("Negotiate", 35), ("Close", 40)],
-    }.get(primary_type, [("Perform", 25)]))
+    # Abilities from type + tag_hash
+    pool = {
+        "LOGIC":  [("Analyze", 30), ("Compute", 25), ("Parse", 20), ("Reason", 35)],
+        "DATA":   [("Extract", 20), ("Transform", 30), ("Sync", 25), ("Pipeline", 35)],
+        "SOCIAL": [("Assist", 15), ("Draft", 25), ("Coach", 30), ("Present", 20)],
+        "SHIELD": [("Audit", 25), ("Enforce", 35), ("Monitor", 20), ("Certify", 30)],
+        "CRAFT":  [("Build", 30), ("Optimize", 35), ("Schedule", 20), ("Dispatch", 25)],
+        "HEAL":   [("Triage", 25), ("Screen", 20), ("Support", 15), ("Track", 30)],
+        "WEALTH": [("Prospect", 20), ("Forecast", 30), ("Negotiate", 35), ("Close", 40)],
+    }.get(primary_type, [("Perform", 25)])
 
-    count = 1 + int(rng() * 3)  # 1-3 abilities
+    tier_count = {"experimental": 1, "community": 2, "verified": 3, "official": 3}
+    count = tier_count.get(tier, 2)
+    ab_rng = mulberry32(tag_hash | (name_hash & 0xFF00))
     abilities = []
-    for i in range(min(count, len(pool))):
-        idx = int(rng() * len(pool))
-        ab_name, base_dmg = pool[idx % len(pool)]
+    used = set()
+    for _ in range(min(count, len(pool))):
+        idx = int(ab_rng() * len(pool))
+        while idx in used and len(used) < len(pool):
+            idx = (idx + 1) % len(pool)
+        used.add(idx)
+        ab_name, base_dmg = pool[idx]
         abilities.append({
             "name": ab_name,
             "text": "",
-            "cost": int(rng() * 3) + 1,
-            "damage": base_dmg + int(rng() * 15),
+            "cost": int(ab_rng() * 3) + 1,
+            "damage": base_dmg + int(ab_rng() * 15),
         })
 
     weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
     resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
-    retreat_cost = int(rng() * 4)
+    retreat_cost = min(4, dep_count)
 
-    flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
+    flavor_rng = mulberry32(name_hash ^ tag_hash)
+    flavor_idx = int(flavor_rng() * len(_FLAVOR_FRAGMENTS))
 
     dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
-    type_line = f"Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
+    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
+    type_line = f"{type_prefix} Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
 
     return {
         "seed": seed,
-        "display_name": f"Agent #{seed & 0xFFFF:04X}",
+        "display_name": f"Agent #{name_hash & 0xFFFF:04X}",
         "tier": tier,
         "rarity": rarity,
         "rarity_label": RARITY_LABELS.get(rarity, rarity),
@@ -962,23 +993,24 @@ def resolve_card_from_seed(seed: int) -> dict:
         "resistance_label": AGENT_TYPES[resistance]["label"],
         "retreat_cost": retreat_cost,
         "evolution": evo,
+        "category": category,
         "type_line": type_line,
         "flavor": _FLAVOR_FRAGMENTS[flavor_idx],
         "floor_pts": RARITY_FLOOR.get(rarity, 10),
-        "_resolved_from": "seed_only",
+        "_resolved_from": "seed",
     }
 
 
 def resolve_card(name: str) -> dict:
     """
-    Resolve a full card from just an agent name — no file needed.
+    Resolve a card from an agent name via the registry.
 
-    This is the micro-bandwidth primitive. The agent name IS the seed.
-    Send '@kody/deal_desk' over any channel (tweet, SMS, QR, URL fragment)
-    and the full card self-assembles on the other end. Same algorithm,
-    same seed, same card — everywhere, every time.
+    Looks up the agent, forges the seed from its manifest, then resolves
+    the card from the seed. Same canonical path as mint_card:
 
-    For seed-only resolution (no registry), use resolve_card_from_seed().
+      registry lookup → forge_seed() → resolve_card_from_seed() = the card
+
+    Enriches with metadata (display_name, description, author, version).
     """
     registry = fetch_registry()
     agent = None
@@ -990,74 +1022,28 @@ def resolve_card(name: str) -> dict:
     if agent is None:
         return {"error": f"Agent '{name}' not found in registry"}
 
-    tier = agent.get("quality_tier", "community")
-    rarity = TIER_TO_RARITY.get(tier, "core")
+    # Forge seed from manifest data
     category = agent.get("category", "general")
+    tier = agent.get("quality_tier", "community")
     tags = agent.get("tags", [])
     deps = agent.get("dependencies", [])
-    env_vars = agent.get("requires_env", [])
-    version_str = agent.get("version", "1.0.0")
-    description = agent.get("description", "")
+    seed = forge_seed(name, category, tier, tags, deps)
 
-    # Types
-    types = _derive_types(category, tags)
-    primary_type = types[0]
+    # Resolve from seed — one canonical path
+    card = resolve_card_from_seed(seed)
 
-    # Stats
-    stats = _derive_stats(name, tier, tags, deps, env_vars, version_str, description)
+    # Enrich with registry metadata
+    card["name"] = name
+    card["display_name"] = agent.get("display_name", name)
+    card["version"] = agent.get("version", "1.0.0")
+    card["description"] = agent.get("description", "")
+    card["author"] = agent.get("author", "")
+    card["tags"] = tags
+    card["power"] = card["stats"]["atk"]
+    card["toughness"] = card["stats"]["def"]
+    card["_resolved_from"] = "registry"
 
-    # Abilities
-    abilities = _derive_abilities(name, tags, category, tier)
-
-    # Evolution
-    evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
-
-    # Weakness / Resistance
-    weakness = TYPE_WEAKNESS.get(primary_type, "LOGIC")
-    resistance = TYPE_RESISTANCE.get(primary_type, "DATA")
-
-    # Retreat cost
-    retreat_cost = min(4, len(deps))
-
-    # Type line
-    type_prefix = _TYPE_PREFIXES.get(category, "Agent")
-    dual = f" / {AGENT_TYPES[types[1]]['label']}" if len(types) > 1 else ""
-    type_line = f"{type_prefix} Agent — {AGENT_TYPES[primary_type]['label']}{dual}"
-
-    # Flavor
-    rng = mulberry32(seed_hash(name))
-    flavor_idx = int(rng() * len(_FLAVOR_FRAGMENTS))
-    flavor = _FLAVOR_FRAGMENTS[flavor_idx]
-
-    return {
-        "name": name,
-        "display_name": agent.get("display_name", name),
-        "version": version_str,
-        "tier": tier,
-        "rarity": rarity,
-        "rarity_label": RARITY_LABELS.get(rarity, rarity),
-        "types": types,
-        "type_colors": [AGENT_TYPES[t]["color"] for t in types],
-        "hp": stats["hp"],
-        "stats": stats,
-        "abilities": abilities,
-        "weakness": weakness,
-        "weakness_label": AGENT_TYPES[weakness]["label"],
-        "resistance": resistance,
-        "resistance_label": AGENT_TYPES[resistance]["label"],
-        "retreat_cost": retreat_cost,
-        "evolution": evo,
-        "power": stats["atk"],
-        "toughness": stats["def"],
-        "category": category,
-        "type_line": type_line,
-        "flavor": flavor,
-        "tags": tags,
-        "description": description,
-        "author": agent.get("author", ""),
-        "floor_pts": RARITY_FLOOR.get(rarity, 10),
-        "seed": seed_hash(name),
-    }
+    return card
 
 
 def binder_status() -> dict:
