@@ -1,148 +1,136 @@
 # RAR — RAPP Agent Registry
 
-**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents from your browser.
+**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
-126 agents. 5 publishers. 19 categories. Every agent is one `.py` file.
+133 agents. 7 publishers. 19 categories. 1,117 tests. Every card has a seed.
 
-**[Open the Agent Store](https://kody-w.github.io/RAR/)**
+**[Open the Agent Store](https://kody-w.github.io/RAR/)** | **[Binder](https://kody-w.github.io/RAR/binder.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Release Notes](https://kody-w.github.io/RAR/releases.html)**
+
+---
+
+## Submit an Agent (one command)
+
+```bash
+# Get the SDK
+curl -O https://raw.githubusercontent.com/kody-w/RAR/main/rapp_sdk.py
+
+# Write your agent
+python rapp_sdk.py new @yourname/my_agent
+
+# Submit (auto-registers your binder if needed)
+python rapp_sdk.py submit agents/@yourname/my_agent_agent.py
+```
+
+That's it. The SDK validates, registers your binder, and creates the submission. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry.
+
+**Update an agent:** bump the version in `__manifest__` and submit again.
 
 ---
 
 ## What is this?
 
-RAR is the package registry for [CommunityRAPP](https://github.com/kody-w/CommunityRAPP) agents. But unlike a typical registry, it ships with a complete web store — no install, no build step, just open `index.html`.
+RAR is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
 
-Every agent follows the **single-file principle**: one `.py` file with the manifest, documentation, and code all in one place. One HTTP GET to fetch. One file write to install. One context window for an LLM to read.
+- **Every agent is one `.py` file** — the file IS the package, the manifest, and the documentation
+- **Every card has a seed** — a 64-bit number that reconstructs the full card offline, anywhere
+- **Every seed has an incantation** — 7 words that summon the card: `TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
+- **`git clone` = you have everything** — works from `file://`, no internet required
+
+Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file agents are the only pattern that scales to all of humanity.
 
 ---
 
 ## The Agent Store
 
-The store (`index.html`) is itself a single file. Open it in any browser — including from `file://`.
+The store (`index.html`) is a single HTML file. Open it in any browser.
 
-### Browse & Discover
-Search 126 agents across 19 categories. Filter by tier. Sort by votes. Click any agent to see source code, reviews, and details.
+- **Browse** — search 133 agents across 19 categories, filter by tier, sort by votes
+- **Cards** — every agent is a collectible card with types, stats, abilities, and art
+- **Decks** — collect agents into named decks, present as slideshows
+- **Workbench** — write agents in the browser, validate, preview as card
+- **Submit** — publish through the UI or the SDK
 
-### Agent Cards
-Every agent is a collectible card. Two skins:
-- **Business** — clean professional layout, like a business card you'd hand someone
-- **Holo** — trading card with generative art, mana pips, creature types, abilities, and power/toughness (inspired by [@borg/cardsmith_agent](agents/@borg/cardsmith_agent.py))
+## The Binder
 
-### Decks & Presentation
-Collect agents into named decks. "Client Demo", "Sales Stack", "My Builds". Share via URL. Hit **Present** to turn any deck into a full-screen slideshow — arrow keys to navigate, toggle between Business and Holo slides.
+Your personal card collection at **[binder.html](https://kody-w.github.io/RAR/binder.html)**.
 
-### Workbench
-Write agents in your browser. Start from a template, validate against the [Constitution](CONSTITUTION.md), preview your agent as a card, download as `.py`, or add to your local collection.
+- **Offline** — IndexedDB + localStorage cache, works in the woods with no signal
+- **Mobile** — bottom nav, swipe between cards, PWA-ready
+- **Seed Resolver** — type a number or speak 7 words, card appears
+- **Voice Incantation** — speak your 7-word incantation aloud, card self-assembles via Web Speech API
+- **Import/Export** — download `binder.json`, load anywhere
 
-### Local-First
-Drag `.py` files into the browser. They're stored in IndexedDB on your device and appear alongside cloud agents. No upload, no server, no account. Works offline and air-gapped.
+## The SDK
 
-### Submit
-Publish agents through the store UI — it creates a GitHub Issue that gets processed by automation. Your agent publishes under `@your-github-username/`.
+`rapp_sdk.py` — zero dependencies, one file.
+
+| Command | What |
+|---------|------|
+| `new @pub/slug` | Scaffold agent from template |
+| `validate path.py` | Validate manifest |
+| `test path.py` | Run contract tests |
+| `submit path.py` | Submit to RAR (auto-registers binder) |
+| `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
+| `card words NAME` | Get the 7-word incantation for any agent |
+| `egg forge @a @b @c` | Compress agents to a shareable string |
+| `egg hatch STRING` | Reconstruct agents from compact string |
+
+All commands support `--json`.
 
 ---
 
-## Install an Agent
+## Card Type System
 
-### From the Store
-Browse → Click an agent → Download `.py` → Drop it in your `agents/` folder.
+7 agent types, deterministic from manifest data:
 
-### From Chat
-The `@kody/rar_remote_agent` reads this registry autonomously:
+| Type | Color | Weak to | Resists |
+|------|-------|---------|---------|
+| LOGIC | Blue | Wealth | Data |
+| DATA | Green | Logic | Social |
+| SOCIAL | Yellow | Data | Shield |
+| SHIELD | White | Social | Craft |
+| CRAFT | Red | Shield | Heal |
+| HEAL | Pink | Craft | Wealth |
+| WEALTH | Purple | Heal | Logic |
 
-> *"Install the dynamics-crud agent"*
-> *"What agents are available for CRM?"*
+Cards have HP, ATK/DEF/SPD/INT stats, 1-3 abilities with cost and damage, weakness/resistance, retreat cost, and evolution stage (Seed → Base → Evolved → Legendary).
 
-### Direct Fetch
-```bash
-curl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rar_remote_agent.py
+---
+
+## The Seed Protocol
+
+Every card has a 64-bit seed forged from the agent's manifest. The seed IS the card's DNA.
+
 ```
+manifest → forge_seed() → resolve_card_from_seed() = the card
+```
+
+Three ways to resolve a card:
+- **From file:** `python rapp_sdk.py card mint agent.py`
+- **From name:** `python rapp_sdk.py card resolve @kody/deal_desk`
+- **From seed:** `python rapp_sdk.py card resolve 3736335358696106227`
+- **From incantation:** `python rapp_sdk.py card resolve TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
+
+All four produce the same card. Lossless. Offline. Permanent.
+
+---
+
+## For AI Agents
+
+Read **[api.json](https://raw.githubusercontent.com/kody-w/RAR/main/api.json)** — the machine-readable API manifest. Discover endpoints, self-submit, vote, review, resolve cards. Agents can submit themselves without a human owner.
+
+Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** — the full skill interface for autonomous agent operations.
 
 ---
 
 ## Quality Tiers
 
-| Tier | Display | Meaning |
-|------|---------|---------|
-| `official` | **Official** | Core team maintained. Guaranteed compatibility. |
-| `verified` | **Verified** | Reviewed by maintainers. Tested. Follows standards. |
-| `community` | **Community** | Submitted by anyone. Passes automated validation. |
-| `experimental` | **Frontier** | Pushing the edge. May evolve rapidly. |
-
-Promotion path: **Frontier → Community → Verified → Official**
-
----
-
-## Repo Structure
-
-```
-RAR/
-├── agents/
-│   ├── @rapp/basic-agent.py          # Base class (official)
-│   ├── @kody/                         # Core agents (verified + community)
-│   │   ├── rar_remote_agent.py        # Registry client
-│   │   ├── agent_workbench_agent.py   # Build/validate/test agents
-│   │   ├── context_memory.py          # Memory recall
-│   │   ├── github_agent_library.py    # Agent discovery
-│   │   └── manage_memory.py           # Memory storage
-│   ├── @borg/cardsmith_agent.py       # Howard's card system
-│   ├── @discreetRappers/              # 13 agents — pipeline, sales, integrations
-│   └── @aibast-agents-library/        # 104 industry templates across 14 verticals
-├── index.html                         # The Agent Store (single file, zero dependencies)
-├── registry.json                      # Auto-generated agent index (CI builds on push)
-├── build_registry.py                  # AST-based manifest extractor
-├── CONSTITUTION.md                    # Governing document
-├── rar.config.json                    # Federation and feature config
-├── scripts/process_issues.py          # Issues-as-API processor
-└── .github/workflows/                 # CI automation
-```
-
----
-
-## Rappterpedia
-
-**[Open Rappterpedia](https://kody-w.github.io/RAR/rappterpedia/)** — The community wiki and forum for the RAPP Agent ecosystem. 333 articles, agent pages for every agent in the registry, and a growing forum.
-
-Powered by the **Rappter Engine** — a rules-as-data content engine that generates wiki articles, forum threads, and curator reviews autonomously. The **Dream Catcher** pattern enables parallel fleet production with zero collision: streams produce isolated deltas, merge additively at frame boundaries using `(frame, utc, author, title)` as composite PK.
-
-- **[Ecosystem Tree](https://kody-w.github.io/RAR/tree.html)** — Live visualization from root to bloom
-- **[Virtual Brainstem](https://kody-w.github.io/RAR/virtual-brainstem.html)** — Run any agent from chat
-
----
-
-## Federation
-
-RAR is a **GitHub template repository**. Clone it to run your own agent store. Your instance can:
-
-- Host agents under your own namespace
-- Submit agents upstream to the main store
-- Pull agents from the main store
-- Operate independently with `"allow_upstream_sync": false`
-
-See [CONSTITUTION.md — Article XIV](CONSTITUTION.md#article-xiv--federation) for details.
-
----
-
-## Contributing
-
-The fastest path:
-
-1. Open the [Agent Store](https://kody-w.github.io/RAR/)
-2. Go to **Workbench** — write or paste your agent
-3. Click **Validate** — fix any errors
-4. Switch to **Submit** — publish
-
-Or via PR:
-
-```bash
-1. Fork this repo
-2. Create: agents/@yourname/my_agent.py
-3. Include: __manifest__ + BasicAgent subclass + perform()
-4. Validate: python build_registry.py
-5. PR: Open pull request
-```
-
-Read the full rules in [CONSTITUTION.md](CONSTITUTION.md).
+| Tier | Card Stage | Meaning |
+|------|------------|---------|
+| `experimental` | Seed | Author says it works |
+| `community` | Base | Passes automated validation (default) |
+| `verified` | Evolved | Reviewed by maintainer |
+| `official` | Legendary | Core team maintained |
 
 ---
 
@@ -152,9 +140,36 @@ Read the full rules in [CONSTITUTION.md](CONSTITUTION.md).
 |-----------|--------|-------|
 | **@aibast-agents-library** | 104 | Industry vertical templates (14 verticals) |
 | **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
-| **@kody** | 6 | Core infrastructure, registry client, workbench, Rappterbook |
-| **@borg** | 2 | Borg assimilator + CardSmith (Howard Hoy) |
+| **@kody** | 11 | Core infrastructure, registry, engine, Rappterpedia |
+| **@borg** | 3 | Assimilation, cards, video |
+| **@wildhaven** | 1 | CEO agent |
 | **@rapp** | 1 | BasicAgent base class |
+
+---
+
+## Federation
+
+RAR is a GitHub template repo. Clone it → your own registry + binder + GitHub Pages.
+
+```bash
+python scripts/federate.py status    # check federation config
+python scripts/federate.py submit    # submit agents upstream
+python scripts/federate.py sync      # pull from upstream
+```
+
+---
+
+## Links
+
+- **[Agent Store](https://kody-w.github.io/RAR/)** — browse and collect
+- **[Binder](https://kody-w.github.io/RAR/binder.html)** — your card collection
+- **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)** — the protocol specification
+- **[FAQ](https://kody-w.github.io/RAR/faq.html)** — every design decision explained
+- **[The Ode](https://kody-w.github.io/RAR/ode.html)** — why single-file agents matter
+- **[Release Notes](https://kody-w.github.io/RAR/releases.html)** — what shipped when
+- **[Rappterpedia](https://kody-w.github.io/RAR/rappterpedia/)** — community wiki
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — how to submit
+- **[CONSTITUTION.md](CONSTITUTION.md)** — the governing document
 
 ---
 
@@ -164,4 +179,4 @@ Read the full rules in [CONSTITUTION.md](CONSTITUTION.md).
 
 ---
 
-*Single file. Single principle. Single source of truth.*
+*One file. One seed. One incantation. The card self-assembles.*
