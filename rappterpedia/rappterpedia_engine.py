@@ -1120,7 +1120,7 @@ def get_agent_context(agent: dict) -> dict:
 
 AGENT_PAGE_SECTIONS = [
     ("Overview", [
-        "**{name}** (`{agent_name}`) is a {cat} agent published by `{publisher}`. {description}\n\nIt ships as a single `.py` file following the [Single-File Principle](/wiki/single-file-anatomy), weighing in at {size_kb} KB ({lines} lines).",
+        "**{name}** (`{agent_name}`) is a {cat} agent published by `{publisher}`. {description}\n\nIt ships as a single `.py` file following the Single-File Principle, weighing in at {size_kb} KB ({lines} lines).",
     ]),
     ("Installation", [
         "### From the Agent Store\n\nBrowse to [{name}](../index.html) in the store and download the `.py` file.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\n> *\"Install {agent_name}\"*",
@@ -1135,7 +1135,7 @@ AGENT_PAGE_SECTIONS = [
         "Call `perform(**kwargs)` with your parameters. The agent processes the input and returns a string result.\n\n```python\nagent = {class_name}()\nresult = agent.perform(input=\"your input here\")\nprint(result)\n```",
     ]),
     ("See Also", [
-        "- [Agent Store](../index.html) — Browse all agents\n- [{cat} agents](/wiki/category-{category}) — Other agents in this category\n- [Single-File Agent Anatomy](/wiki/single-file-anatomy) — How agents are structured\n- [{publisher} namespace](/wiki/publisher-{publisher_slug}) — Other agents by this publisher",
+        "- [Agent Store](../index.html) — Browse all agents\n- Category: {cat}\n- Publisher: {publisher}",
     ]),
 ]
 
@@ -1196,7 +1196,7 @@ def generate_category_pages(state: dict, agents: list[dict]) -> list[str]:
 
         cat_display = cat.replace("_", " ").title()
         agent_list = "\n".join(
-            f"- **[{a.get('display_name', a.get('name','?'))}](/wiki/agent-page-{a.get('name','').replace('@','').replace('/','-')})** — {a.get('description', 'No description.')}"
+            f"- **{a.get('display_name', a.get('name','?'))}** — {a.get('description', 'No description.')}"
             for a in sorted(cat_agents, key=lambda x: x.get("display_name", ""))
         )
 
@@ -1254,7 +1254,7 @@ def generate_publisher_pages(state: dict, agents: list[dict]) -> list[str]:
 
         cats = set(a.get("category", "?") for a in pub_agents)
         agent_list = "\n".join(
-            f"- **[{a.get('display_name', a.get('name','?'))}](/wiki/agent-page-{a.get('name','').replace('@','').replace('/','-')})** ({a.get('category','?')}) — {a.get('description','')[:80]}"
+            f"- **{a.get('display_name', a.get('name','?'))}** ({a.get('category','?')}) — {a.get('description','')[:80]}"
             for a in sorted(pub_agents, key=lambda x: x.get("display_name", ""))
         )
 
