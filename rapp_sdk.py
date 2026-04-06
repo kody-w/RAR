@@ -1097,7 +1097,152 @@ def binder_transfer(mint_id: str, dest: str) -> dict:
 
 
 # =============================================================================
-# SECTION 6: CLI DISPATCHER
+# SECTION 6: RAPP EGG — Sneakernet Brainstem Transfer
+# =============================================================================
+#
+# A rapp.egg is the entire Brainstem compressed to seeds.
+# Each agent is a 64-bit seed. 20 agents = 160 bytes. Fits in a QR code.
+# The recipient's client resolves each seed → downloads the .py files → done.
+#
+# Egg schema:
+#   schema: "rapp-egg/1.0"
+#   seeds: [int, ...]          — forged seeds for each agent
+#   deck: str                  — active deck name (optional)
+#   config: dict               — personality, preferences (optional)
+#
+# Bandwidth: ping-level. The egg is the recipe, not the meal.
+# The data self-assembles on the other end.
+
+import base64
+
+
+def forge_egg(agent_paths: list = None, agent_names: list = None,
+              deck: str = None, config: dict = None) -> dict:
+    """
+    Forge a rapp.egg from a list of agents. The egg contains ONLY seeds —
+    the minimum information needed to reconstruct an entire Brainstem.
+
+    Args:
+        agent_paths: list of .py file paths (reads manifests, forges seeds)
+        agent_names: list of @publisher/slug names (looks up registry, forges seeds)
+        deck: optional active deck name
+        config: optional personality/preferences dict
+
+    Returns:
+        dict with schema, seeds array, and optional metadata.
+        The entire thing is typically < 1KB for 50 agents.
+    """
+    seeds = []
+    names = []
+
+    # From files
+    if agent_paths:
+        for path in agent_paths:
+            manifest = extract_manifest(path)
+            if manifest:
+                name = manifest["name"]
+                category = manifest.get("category", "general")
+                tier = manifest.get("quality_tier", "community")
+                tags = manifest.get("tags", [])
+                deps = manifest.get("dependencies", [])
+                seed = forge_seed(name, category, tier, tags, deps)
+                seeds.append(seed)
+                names.append(name)
+
+    # From names (registry lookup)
+    if agent_names:
+        registry = fetch_registry()
+        agent_map = {a["name"]: a for a in registry.get("agents", [])}
+        for name in agent_names:
+            agent = agent_map.get(name)
+            if agent:
+                seed = forge_seed(
+                    name,
+                    agent.get("category", "general"),
+                    agent.get("quality_tier", "community"),
+                    agent.get("tags", []),
+                    agent.get("dependencies", []),
+                )
+                seeds.append(seed)
+                names.append(name)
+
+    egg = {
+        "schema": "rapp-egg/1.0",
+        "seeds": seeds,
+        "count": len(seeds),
+    }
+    if deck:
+        egg["deck"] = deck
+    if config:
+        egg["config"] = config
+
+    return egg
+
+
+def egg_to_compact(egg: dict) -> str:
+    """
+    Compress an egg to a compact string for sneakernet transfer.
+    Format: base64-encoded seed array. Tiny enough for QR code, SMS, NFC.
+
+    A 20-agent egg compresses to ~220 characters. A 50-agent egg to ~540.
+    """
+    seeds = egg.get("seeds", [])
+    # Pack seeds as 8-byte big-endian integers
+    raw = b"".join(s.to_bytes(8, "big") for s in seeds)
+    return base64.urlsafe_b64encode(raw).decode().rstrip("=")
+
+
+def compact_to_egg(compact: str) -> dict:
+    """Decompress a compact string back to an egg."""
+    # Re-pad base64
+    padding = 4 - len(compact) % 4
+    if padding < 4:
+        compact += "=" * padding
+    raw = base64.urlsafe_b64decode(compact)
+    seeds = []
+    for i in range(0, len(raw), 8):
+        seed = int.from_bytes(raw[i:i+8], "big")
+        seeds.append(seed)
+    return {"schema": "rapp-egg/1.0", "seeds": seeds, "count": len(seeds)}
+
+
+def hatch_egg(egg: dict, output_dir: str = "agents") -> list:
+    """
+    Hatch an egg — resolve each seed and install the agents.
+
+    For each seed:
+      1. Check registry for matching agent (seed → name → download .py)
+      2. If not in registry, resolve card from seed (preview only)
+
+    Returns list of results (installed paths or preview cards).
+    """
+    results = []
+    registry = fetch_registry()
+    seed_map = {}
+    for agent in registry.get("agents", []):
+        s = agent.get("_seed")
+        if s:
+            seed_map[s] = agent
+
+    for seed in egg.get("seeds", []):
+        agent = seed_map.get(seed)
+        if agent:
+            # Known agent — install the .py file
+            try:
+                path = install_agent(agent["name"], output_dir)
+                results.append({"seed": seed, "name": agent["name"], "installed": path})
+            except Exception as e:
+                results.append({"seed": seed, "name": agent["name"], "error": str(e)})
+        else:
+            # Unknown seed — resolve preview card
+            card = resolve_card_from_seed(seed)
+            results.append({"seed": seed, "preview": True, "card": card})
+
+    return results
+
+
+# =============================================================================
+# SECTION 7: CLI DISPATCHER
 # =============================================================================
 
 def init_binder(repo_name: str = None) -> dict:
@@ -1348,6 +1493,22 @@ def main():
     p_binder_transfer.add_argument("id", help="Mint ID of the card")
     p_binder_transfer.add_argument("to", help="Destination address")
     p_binder_transfer.add_argument("--json", action="store_true", help="Output JSON")
+
+    # egg
+    p_egg = sub.add_parser("egg", help="Sneakernet Brainstem transfer — forge, compact, hatch")
+    egg_sub = p_egg.add_subparsers(dest="egg_command", metavar="<subcommand>")
+
+    p_egg_forge = egg_sub.add_parser("forge", help="Forge an egg from agent names")
+    p_egg_forge.add_argument("agents", nargs="+", help="Agent names (@pub/slug)")
+    p_egg_forge.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_egg_compact = egg_sub.add_parser("compact", help="Compress an egg to a shareable string")
+    p_egg_compact.add_argument("agents", nargs="+", help="Agent names (@pub/slug)")
+
+    p_egg_hatch = egg_sub.add_parser("hatch", help="Hatch an egg — install agents from compact string")
+    p_egg_hatch.add_argument("compact", help="Compact egg string")
+    p_egg_hatch.add_argument("--output-dir", default="agents", help="Output directory")
+    p_egg_hatch.add_argument("--json", action="store_true", help="Output JSON")
 
     args = parser.parse_args()
 
@@ -1611,6 +1772,47 @@ def main():
                 print(f"  Hash:      {result['hash']}")
         else:
             p_binder.print_help()
+
+    # ---- egg ----
+    elif args.command == "egg":
+        if args.egg_command == "forge":
+            egg = forge_egg(agent_names=args.agents)
+            if use_json:
+                print(json.dumps(egg, indent=2))
+            else:
+                print(f"\n  Forged egg: {egg['count']} agents")
+                for s in egg["seeds"]:
+                    print(f"    {s}")
+                compact = egg_to_compact(egg)
+                print(f"\n  Compact ({len(compact)} chars):")
+                print(f"    {compact}")
+                print(f"\n  Share this string. Recipient runs:")
+                print(f"    python rapp_sdk.py egg hatch {compact}")
+                print()
+
+        elif args.egg_command == "compact":
+            egg = forge_egg(agent_names=args.agents)
+            print(egg_to_compact(egg))
+
+        elif args.egg_command == "hatch":
+            egg = compact_to_egg(args.compact)
+            if use_json:
+                results = hatch_egg(egg, args.output_dir)
+                print(json.dumps(results, indent=2))
+            else:
+                print(f"\n  Hatching egg: {egg['count']} seeds")
+                results = hatch_egg(egg, args.output_dir)
+                for r in results:
+                    if r.get("installed"):
+                        print(f"    OK  {r['name']} -> {r['installed']}")
+                    elif r.get("preview"):
+                        card = r["card"]
+                        print(f"    ?   Seed {r['seed']} -> {card['display_name']} ({card['rarity_label']})")
+                    else:
+                        print(f"    ERR {r.get('name','?')}: {r.get('error','?')}")
+                print()
+        else:
+            p_egg.print_help()
 
 
 if __name__ == "__main__":
