@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAR Binder</title>
 <meta name="description" content="Your personal agent card binder. Collect, browse, resolve, and export. Works offline.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RAR Binder">
+<meta name="theme-color" content="#0d1117">
+<link rel="manifest" href="data:application/json,{%22name%22:%22RAR%20Binder%22,%22short_name%22:%22Binder%22,%22start_url%22:%22binder.html%22,%22display%22:%22standalone%22,%22background_color%22:%22%230d1117%22,%22theme_color%22:%22%230d1117%22}">
 <style>
 :root {
   --bg:#0d1117;--s1:#161b22;--s2:#21262d;--s3:#30363d;--bd:#30363d;
@@ -105,12 +110,65 @@ header h1 span{color:var(--acc)}
 /* Footer links */
 .footer-links{display:flex;gap:16px;margin-top:24px;padding-top:16px;border-top:1px solid var(--bd);font-size:13px;color:var(--mut);flex-wrap:wrap}
 
+/* ═══ MOBILE: phone-first for outdoor use ═══ */
 @media(max-width:600px){
-  .grid{grid-template-columns:1fr}
-  .card-stats .stat{font-size:10px}
-  .modal{margin:8px;padding:16px}
-  .seed-box input{width:100%;margin-bottom:8px}
-  .seed-box button{margin-left:0;width:100%}
+  .app{padding:12px 12px 80px}
+  header h1{font-size:18px}
+
+  /* Bottom nav — thumb-reachable, always visible */
+  .nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--s1);border-top:1px solid var(--bd);
+    display:flex;gap:0;padding:0;justify-content:stretch}
+  .nav button{flex:1;border:none;border-radius:0;padding:14px 4px;font-size:12px;
+    min-height:52px;background:var(--s1);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .nav button.active{background:var(--s2);border-top:2px solid var(--acc)}
+
+  /* Cards: full width, bigger touch targets */
+  .grid{grid-template-columns:1fr;gap:12px}
+  .card{min-height:48px;-webkit-tap-highlight-color:transparent}
+  .card-top{padding:12px 14px}
+  .card-name{font-size:16px}
+  .card-hp{font-size:14px;padding:4px 10px}
+  .card-stats .stat{font-size:11px}
+  .card-stats .stat strong{font-size:16px}
+  .card-abilities{padding:0 14px 10px}
+  .card-footer{padding:10px 14px}
+
+  /* Modal: full screen on mobile */
+  .modal-bg{padding:0;align-items:flex-end}
+  .modal{max-width:100%;max-height:95vh;border-radius:16px 16px 0 0;padding:20px 16px 90px}
+  .modal h2{font-size:18px}
+  .modal .stat-bar .sb-val{font-size:24px}
+  .modal .actions{position:fixed;bottom:0;left:0;right:0;padding:12px 16px;background:var(--s1);
+    border-top:1px solid var(--bd);z-index:101;gap:8px}
+  .modal .actions button{padding:14px;font-size:15px;min-height:48px}
+
+  /* Search: bigger inputs */
+  .search-row{flex-direction:column;gap:8px}
+  .search-row input,.search-row select{width:100%;padding:12px;font-size:16px;min-height:48px}
+
+  /* Seed resolver: phone-friendly */
+  .seed-box{padding:20px 16px}
+  .seed-box input{width:100%;font-size:20px;padding:14px;margin-bottom:10px}
+  .seed-box button{margin-left:0;width:100%;padding:14px;font-size:16px;min-height:48px}
+
+  /* Import/Export */
+  .io-section{flex-direction:column}
+  .io-section button{padding:14px;font-size:15px;min-height:48px}
+
+  .empty{padding:40px 16px}
+  .footer-links{display:none}
+}
+
+/* Mid-size tablets */
+@media(min-width:601px) and (max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Touch: no hover effects, prevent zoom on double-tap */
+@media(hover:none){
+  .card:hover{transform:none;border-color:var(--bd)}
+  .nav button:hover{background:var(--s2);border-color:var(--bd)}
+  input,select,button{font-size:16px!important} /* prevents iOS zoom */
 }
 </style>
 </head>
@@ -122,6 +180,7 @@ header h1 span{color:var(--acc)}
     <h1><span>RAR</span> Binder</h1>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
+    <button onclick="cacheForOffline()" style="background:var(--s2);color:var(--dim);border:1px solid var(--bd);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px" title="Cache registry for offline use">Cache</button>
     <span class="status" id="netStatus">checking...</span>
   </div>
 </header>
@@ -499,6 +558,73 @@ document.getElementById('seedInput').addEventListener('keydown',e=>{if(e.key==='
 const typeOpts=TYPE_NAMES.map(t=>`<option value="${t}">${TYPES[t].label}</option>`).join('')
 document.getElementById('collTypeFilter').innerHTML='<option value="">All Types</option>'+typeOpts
 document.getElementById('browseTypeFilter').innerHTML='<option value="">All Types</option>'+typeOpts
+
+// ═══════════════════════════════════════════════════════
+// OFFLINE CACHE (localStorage for registry + cards)
+// ═══════════════════════════════════════════════════════
+
+async function cacheForOffline(){
+  try{
+    const[regR,cardR]=await Promise.all([fetch('registry.json'),fetch('cards/holo_cards.json')])
+    if(regR.ok)localStorage.setItem('rar_registry_cache',await regR.text())
+    if(cardR.ok)localStorage.setItem('rar_cards_cache',await cardR.text())
+    localStorage.setItem('rar_cache_at',new Date().toISOString())
+    alert('Cached for offline! You can now browse cards without network.')
+  }catch(e){alert('Cache failed: '+e.message)}
+}
+
+// Override loadRegistry to try cache when offline
+const _origLoadRegistry=loadRegistry
+loadRegistry=async function(){
+  await _origLoadRegistry()
+  if(REGISTRY.length===0){
+    // Try offline cache
+    try{
+      const rc=localStorage.getItem('rar_registry_cache')
+      const cc=localStorage.getItem('rar_cards_cache')
+      if(rc){const d=JSON.parse(rc);REGISTRY=d.agents||[]}
+      if(cc)HOLO_CARDS=JSON.parse(cc)
+      if(REGISTRY.length>0){
+        document.getElementById('netStatus').textContent='offline (cached)'
+        document.getElementById('netStatus').className='status offline'
+      }
+    }catch(e){}
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SWIPE (navigate cards in modal on mobile)
+// ═══════════════════════════════════════════════════════
+
+let _touchStartX=0,_currentCards=[],_currentCardIdx=-1
+document.getElementById('modal').addEventListener('touchstart',e=>{_touchStartX=e.touches[0].clientX},{passive:true})
+document.getElementById('modal').addEventListener('touchend',e=>{
+  if(!_currentCards.length)return
+  const dx=e.changedTouches[0].clientX-_touchStartX
+  if(Math.abs(dx)<60)return // too short
+  if(dx>0&&_currentCardIdx>0){_currentCardIdx--;showDetail(_currentCards[_currentCardIdx])}
+  else if(dx<0&&_currentCardIdx<_currentCards.length-1){_currentCardIdx++;showDetail(_currentCards[_currentCardIdx])}
+},{passive:true})
+
+// Track which card list the modal was opened from
+const _origShowDetail=showDetail
+showDetail=function(card){
+  // Find card in current visible list for swipe
+  const activeTab=document.querySelector('.tab.active')
+  const grid=activeTab?activeTab.querySelector('.grid'):null
+  if(grid){
+    const gridCards=grid.querySelectorAll('.card')
+    _currentCards=[]
+    gridCards.forEach(el=>{
+      try{const c=JSON.parse(el.getAttribute('onclick').replace("showDetail(","").replace(/\)$/,""));_currentCards.push(c)}catch(e){}
+    })
+  }
+  // Find current index
+  const key=card._binder_key||card.name||card.seed
+  _currentCardIdx=_currentCards.findIndex(c=>(c._binder_key||c.name||c.seed)===key)
+  if(_currentCardIdx<0)_currentCardIdx=0
+  _origShowDetail(card)
+}
 
 ;(async()=>{
   await openDB()
