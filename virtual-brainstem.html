@@ -217,7 +217,7 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
   font-size:.65rem; margin-left:4px; font-weight:700;
 }
 .agent-dropdown-panel {
-  display:none; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+  display:none; position:absolute; bottom:100%; left:0;
   margin-bottom:6px; background:var(--surface); border:1px solid var(--border);
   border-radius:10px; width:320px; max-height:400px; overflow:hidden;
   box-shadow:var(--shadow-lg); z-index:100;
@@ -3888,13 +3888,14 @@ function hotLoadAgent(filename, source) {
   updateEnabledPills();
 
   const hadManifest = !!manifestMatch;
-  showToast(`${manifest.display_name} hot-loaded and enabled`);
 
-  // Add a system message to chat
-  if (hadManifest) {
-    addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
-  } else {
-    addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code> (no manifest — inferred from source). I can now route requests to this agent.`);
+  if (!_silentRestore) {
+    showToast(`${manifest.display_name} hot-loaded and enabled`);
+    if (hadManifest) {
+      addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
+    } else {
+      addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code> (no manifest — inferred from source). I can now route requests to this agent.`);
+    }
   }
 }
 
@@ -4037,20 +4038,19 @@ function handleChatImport(event) {
 
 // ── VFS Agent Restore — reload agents persisted across sessions ──
 
+let _silentRestore = false;
+
 function restoreVFSAgents() {
   const agentFiles = VFS.listAgents();
+  if (agentFiles.length === 0) return;
+  _silentRestore = true;
   for (const path of agentFiles) {
     const source = VFS.read(path);
     if (!source) continue;
     const filename = path.replace('agents/', '');
-    // Silently hot-load without chat messages
     hotLoadAgent(filename, source);
   }
-  // Remove the system messages that hotLoadAgent added during restore
-  const container = document.getElementById('chatMessages');
-  if (container) {
-    container.querySelectorAll('.chat-msg.assistant').forEach(el => el.remove());
-  }
+  _silentRestore = false;
 }
 
 // ═══════════════════════════════════════════════════════════════════════
