@@ -2836,11 +2836,25 @@
   <!-- Submit -->
   <div class="panel" id="panel-submit">
     <div class="submit-container">
-      <h2>Share Your Agent</h2>
-      <p>Paste your agent code below. Every agent needs a <code>__manifest__</code> — the templates have one ready to go. Your agent gets its own home under <code>@your-github-username/</code>.</p>
+      <h2>Submit Your Agent</h2>
+      <p>Drop your <code>agent.py</code> file below — or paste the code. Every agent needs a <code>__manifest__</code> and must end with <code>_agent.py</code>. Your agent gets its own home under <code>@your-github-username/</code>.</p>
+
+      <!-- Drag and drop zone -->
+      <div id="drop-zone" style="border:2px dashed var(--border);border-radius:12px;padding:40px 24px;text-align:center;margin:16px 0;cursor:pointer;transition:border-color .2s,background .2s" onclick="document.getElementById('file-pick').click()">
+        <div style="font-size:2rem;margin-bottom:8px;opacity:.5">+</div>
+        <div style="font-size:.95rem;color:var(--text-dim)">Drop your <code>_agent.py</code> file here</div>
+        <div style="font-size:.78rem;color:var(--text-muted);margin-top:4px">or click to browse</div>
+        <input type="file" id="file-pick" accept=".py" style="display:none" onchange="handleFilePick(event)">
+      </div>
+      <div id="drop-file-name" style="display:none;padding:8px 12px;background:var(--surface2);border-radius:8px;margin-bottom:12px;font-size:.85rem;color:var(--accent)"></div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin:12px 0">
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+        <span style="color:var(--text-muted);font-size:.75rem">or paste code / pick a template</span>
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+      </div>
 
       <div class="template-picker">
-        <label>Start from a template</label>
         <div class="template-grid">
           <div class="template-card" onclick="loadTemplate('blank')">
             <div class="tc-name">Blank Agent</div>
@@ -2859,7 +2873,6 @@
             <div class="tc-desc">Agent that transforms input data</div>
           </div>
         </div>
-        <div class="template-hint">Pick a template to get started, then customize it. Unchanged templates will be rejected.</div>
       </div>
 
       <div class="form-group">
@@ -2868,36 +2881,80 @@
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@your-username/my_agent",
+    "name": "@your_username/my_agent",
     "version": "1.0.0",
     "display_name": "My Agent",
     "description": "A useful agent",
     "author": "Your Name",
     "tags": ["utility"],
     "category": "general",
-    "quality_tier": "unverified",
+    "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 from agents.basic_agent import BasicAgent
 
 class MyAgent(BasicAgent):
     def __init__(self):
-        self.name = "My Agent"
-        self.metadata = {}
-        super().__init__(self.name, self.metadata)
+        super().__init__("My Agent", {})
 
     def perform(self, **kwargs) -> str:
         return "result"' oninput="previewManifest()"></textarea>
       </div>
       <div class="manifest-preview" id="manifest-preview" style="display:none"></div>
-      <button class="submit-btn" id="submit-btn" onclick="submitAgent()" disabled>Submit Agent via GitHub Issue</button>
+      <button class="submit-btn" id="submit-btn" onclick="submitAgent()" disabled>Submit Agent</button>
       <p style="color:var(--text-muted);font-size:.8rem;margin-top:10px">
-        Submitting creates a GitHub Issue. A background action validates, tests, and publishes your agent. All submissions start at <span class="tier tier-community">COMMUNITY</span> or <span class="tier tier-experimental">FRONTIER</span> tier.
+        Submitting creates a GitHub Issue. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry. All submissions start at <span class="tier tier-community">COMMUNITY</span> tier.
       </p>
     </div>
   </div>
+
+  <script>
+  // Drag-and-drop file handling
+  (function(){
+    const zone = document.getElementById('drop-zone');
+    const textarea = document.getElementById('agent-code');
+    const nameEl = document.getElementById('drop-file-name');
+
+    ['dragenter','dragover'].forEach(e => zone.addEventListener(e, ev => {
+      ev.preventDefault(); ev.stopPropagation();
+      zone.style.borderColor = 'var(--accent)';
+      zone.style.background = 'rgba(88,166,255,.06)';
+    }));
+    ['dragleave','drop'].forEach(e => zone.addEventListener(e, ev => {
+      ev.preventDefault(); ev.stopPropagation();
+      zone.style.borderColor = 'var(--border)';
+      zone.style.background = '';
+    }));
+
+    zone.addEventListener('drop', ev => {
+      const file = ev.dataTransfer.files[0];
+      if (file) loadFile(file);
+    });
+
+    window.handleFilePick = function(ev) {
+      const file = ev.target.files[0];
+      if (file) loadFile(file);
+    };
+
+    function loadFile(file) {
+      if (!file.name.endsWith('.py')) {
+        alert('Please drop a .py file');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        textarea.value = e.target.result;
+        nameEl.textContent = file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
+        nameEl.style.display = 'block';
+        zone.style.display = 'none';
+        previewManifest();
+      };
+      reader.readAsText(file);
+    }
+  })();
+  </script>
 
   <!-- Packs -->
   <div class="panel" id="panel-packs">
