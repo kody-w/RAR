@@ -118,7 +118,7 @@ def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
     try:
         result = subprocess.run(
             ["gh", "copilot", "--", "-p", combined],
-            capture_output=True, text=True, timeout=90,
+            capture_output=True, text=True, timeout=300,
         )
     except FileNotFoundError:
         raise RuntimeError("gh CLI not found")
