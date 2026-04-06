@@ -1,0 +1,30 @@
+{
+  "format": "orappter-cartridge/1.0",
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "Tetris. On ORAPPTER. Because every console needs Tetris.",
+  "type": "game",
+  "console": "rappterboy",
+  "created": "2026-04-05",
+  "model": {
+    "provider": "none",
+    "fallback": "offline",
+    "usage": "No AI needed. Pure blocks."
+  },
+  "system": "Tetris. The game that shipped with the Game Boy. Now it ships with ORAPPTER.",
+  "boot": ["(load \"tetris.lispy\")"],
+  "env": {
+    "WIDTH": 10,
+    "HEIGHT": 20,
+    "START_SPEED": 800,
+    "SPEED_INCREASE": 50,
+    "LINES_PER_LEVEL": 10
+  },
+  "metadata": {
+    "genre": "puzzle",
+    "inspiration": "Tetris, 1984, Alexey Pajitnov",
+    "offline": true,
+    "ai_required": false,
+    "easter_egg": "Score over 10000 and the blocks turn into agent cards"
+  }
+}

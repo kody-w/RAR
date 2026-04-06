@@ -1,0 +1,445 @@
+;; ═══════════════════════════════════════════════════════════════
+;; TETRIS.LISPY — Because every console needs Tetris.
+;; Pure LisPy. No AI. Just blocks. Runs on ORAPPTER.
+;; ═══════════════════════════════════════════════════════════════
+;;
+;;  ┌──────────────────┐
+;;  │                  │
+;;  │    ██            │
+;;  │    ████          │
+;;  │                  │
+;;  │                  │
+;;  │                  │
+;;  │                  │
+;;  │                  │
+;;  │        ██        │
+;;  │      ████████    │
+;;  │  ████████████████│
+;;  └──────────────────┘
+;;   Score: 1200  Lv: 3
+;;
+;; Controls: (left) (right) (rotate) (drop) (down)
+;; Or:       (l)    (r)     (t)      (d)    (s)
+
+(define _agent_name "tetris")
+(define _agent_desc "Tetris. Pure blocks. No AI. The game that ships with every console.")
+
+(define TETRIS_VERSION "1.0.0")
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 1: Game State
+;; ═══════════════════════════════════════════════════════════════
+
+(define *board* nil)
+(define *width* 10)
+(define *height* 20)
+(define *current-piece* nil)
+(define *piece-x* 0)
+(define *piece-y* 0)
+(define *piece-rotation* 0)
+(define *next-piece* nil)
+(define *score* 0)
+(define *lines* 0)
+(define *level* 1)
+(define *game-over* false)
+(define *playing* false)
+(define *high-scores* (list))
+(define *combo* 0)
+(define *pieces-placed* 0)
+(define *card-mode* false)  ;; easter egg: blocks become cards at 10000
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 2: Pieces (Tetrominoes)
+;; Each piece is a list of 4 rotations, each rotation is a list
+;; of (row, col) offsets from the piece origin
+;; ═══════════════════════════════════════════════════════════════
+
+(define PIECES
+  (list
+    ;; I piece
+    (make-dict "name" "I" "char" "█" "card" "@rapp/basic-agent"
+      "rotations" (list
+        (list (list 0 0) (list 0 1) (list 0 2) (list 0 3))
+        (list (list 0 0) (list 1 0) (list 2 0) (list 3 0))
+        (list (list 0 0) (list 0 1) (list 0 2) (list 0 3))
+        (list (list 0 0) (list 1 0) (list 2 0) (list 3 0))))
+    ;; O piece
+    (make-dict "name" "O" "char" "▓" "card" "@kody/deal-desk"
+      "rotations" (list
+        (list (list 0 0) (list 0 1) (list 1 0) (list 1 1))
+        (list (list 0 0) (list 0 1) (list 1 0) (list 1 1))
+        (list (list 0 0) (list 0 1) (list 1 0) (list 1 1))
+        (list (list 0 0) (list 0 1) (list 1 0) (list 1 1))))
+    ;; T piece
+    (make-dict "name" "T" "char" "▒" "card" "@kody/rappter-engine-agent"
+      "rotations" (list
+        (list (list 0 0) (list 0 1) (list 0 2) (list 1 1))
+        (list (list 0 0) (list 1 0) (list 2 0) (list 1 1))
+        (list (list 1 0) (list 1 1) (list 1 2) (list 0 1))
+        (list (list 0 0) (list 1 0) (list 2 0) (list 1 -1))))
+    ;; S piece
+    (make-dict "name" "S" "char" "░" "card" "@kody/context_memory"
+      "rotations" (list
+        (list (list 0 1) (list 0 2) (list 1 0) (list 1 1))
+        (list (list 0 0) (list 1 0) (list 1 1) (list 2 1))
+        (list (list 0 1) (list 0 2) (list 1 0) (list 1 1))
+        (list (list 0 0) (list 1 0) (list 1 1) (list 2 1))))
+    ;; Z piece
+    (make-dict "name" "Z" "char" "▐" "card" "@kody/rar_remote_agent"
+      "rotations" (list
+        (list (list 0 0) (list 0 1) (list 1 1) (list 1 2))
+        (list (list 0 1) (list 1 0) (list 1 1) (list 2 0))
+        (list (list 0 0) (list 0 1) (list 1 1) (list 1 2))
+        (list (list 0 1) (list 1 0) (list 1 1) (list 2 0))))
+    ;; L piece
+    (make-dict "name" "L" "char" "▌" "card" "@kody/rappterbook"
+      "rotations" (list
+        (list (list 0 0) (list 1 0) (list 2 0) (list 2 1))
+        (list (list 0 0) (list 0 1) (list 0 2) (list 1 0))
+        (list (list 0 0) (list 0 1) (list 1 1) (list 2 1))
+        (list (list 0 2) (list 1 0) (list 1 1) (list 1 2))))
+    ;; J piece
+    (make-dict "name" "J" "char" "▊" "card" "@wildhaven/ceo-agent"
+      "rotations" (list
+        (list (list 0 1) (list 1 1) (list 2 0) (list 2 1))
+        (list (list 0 0) (list 1 0) (list 1 1) (list 1 2))
+        (list (list 0 0) (list 0 1) (list 1 0) (list 2 0))
+        (list (list 0 0) (list 0 1) (list 0 2) (list 1 2))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 3: Board Operations
+;; ═══════════════════════════════════════════════════════════════
+
+;; Create empty board
+(define (make-board)
+  (let (board (list))
+    (repeat *height*
+      (let (row (list))
+        (repeat *width*
+          (set! row (append row (list " "))))
+        (set! board (append board (list row)))))
+    board))
+
+;; Get cell value
+(define (board-get board row col)
+  (if (or (< row 0) (>= row *height*) (< col 0) (>= col *width*))
+    "#"  ;; wall
+    (nth (nth board row) col)))
+
+;; Set cell value
+(define (board-set board row col val)
+  (let (r (nth board row))
+    (set! r (list-set r col val))
+    (list-set board row r)))
+
+(define (list-set lst idx val)
+  (map (lambda (item)
+    (if (= (index-of lst item) idx) val item))
+    lst))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 4: Piece Operations
+;; ═══════════════════════════════════════════════════════════════
+
+;; Get current piece cells in world coordinates
+(define (piece-cells)
+  (let (rotations (get *current-piece* "rotations")
+        shape (nth rotations *piece-rotation*))
+    (map (lambda (cell)
+      (list (+ *piece-y* (car cell)) (+ *piece-x* (nth cell 1))))
+      shape)))
+
+;; Check if piece fits at position
+(define (piece-fits? px py rot)
+  (let (rotations (get *current-piece* "rotations")
+        shape (nth rotations rot)
+        fits true)
+    (for-each
+      (lambda (cell)
+        (let (r (+ py (car cell))
+              c (+ px (nth cell 1)))
+          (if (or (< c 0) (>= c *width*) (>= r *height*))
+            (set! fits false)
+            (if (and (>= r 0) (not (= (board-get *board* r c) " ")))
+              (set! fits false)))))
+      shape)
+    fits))
+
+;; Spawn new piece
+(define (spawn-piece)
+  (if (null? *next-piece*)
+    (begin
+      (set! *current-piece* (nth PIECES (floor (* (random) (length PIECES)))))
+      (set! *next-piece* (nth PIECES (floor (* (random) (length PIECES))))))
+    (begin
+      (set! *current-piece* *next-piece*)
+      (set! *next-piece* (nth PIECES (floor (* (random) (length PIECES)))))))
+  (set! *piece-x* (floor (/ *width* 2)))
+  (set! *piece-y* 0)
+  (set! *piece-rotation* 0)
+  ;; Check game over
+  (if (not (piece-fits? *piece-x* *piece-y* *piece-rotation*))
+    (begin
+      (set! *game-over* true)
+      (set! *playing* false)
+      (log "")
+      (log "  ╔═══════════════════╗")
+      (log "  ║    GAME OVER      ║")
+      (log (concat "  ║  Score: " (string *score*)
+                   (make-string (- 10 (length (string *score*))) " ") "║"))
+      (log (concat "  ║  Lines: " (string *lines*)
+                   (make-string (- 10 (length (string *lines*))) " ") "║"))
+      (log (concat "  ║  Level: " (string *level*)
+                   (make-string (- 10 (length (string *level*))) " ") "║"))
+      (log "  ╚═══════════════════╝")
+      (log "")
+      (log "  (start) to play again"))))
+
+(define (make-string n c)
+  (if (<= n 0) "" (reduce (lambda (_acc _) (concat _acc c)) (range n) "")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 5: Movement
+;; ═══════════════════════════════════════════════════════════════
+
+;; Move left
+(define (left)
+  (if (not *playing*) (log "Not playing! (start)")
+    (if (piece-fits? (- *piece-x* 1) *piece-y* *piece-rotation*)
+      (begin (set! *piece-x* (- *piece-x* 1)) (render)))))
+(define (l) (left))
+
+;; Move right
+(define (right)
+  (if (not *playing*) (log "Not playing! (start)")
+    (if (piece-fits? (+ *piece-x* 1) *piece-y* *piece-rotation*)
+      (begin (set! *piece-x* (+ *piece-x* 1)) (render)))))
+(define (r) (right))
+
+;; Rotate
+(define (rotate)
+  (if (not *playing*) (log "Not playing! (start)")
+    (let (new-rot (% (+ *piece-rotation* 1) 4))
+      (if (piece-fits? *piece-x* *piece-y* new-rot)
+        (begin (set! *piece-rotation* new-rot) (render))
+        ;; Wall kick: try shifting left or right
+        (if (piece-fits? (- *piece-x* 1) *piece-y* new-rot)
+          (begin (set! *piece-x* (- *piece-x* 1))
+                 (set! *piece-rotation* new-rot) (render))
+          (if (piece-fits? (+ *piece-x* 1) *piece-y* new-rot)
+            (begin (set! *piece-x* (+ *piece-x* 1))
+                   (set! *piece-rotation* new-rot) (render))))))))
+(define (t) (rotate))
+
+;; Soft drop (one row)
+(define (down)
+  (if (not *playing*) (log "Not playing! (start)")
+    (if (piece-fits? *piece-x* (+ *piece-y* 1) *piece-rotation*)
+      (begin (set! *piece-y* (+ *piece-y* 1)) (set! *score* (+ *score* 1)) (render))
+      (lock-piece))))
+(define (s) (down))
+
+;; Hard drop (all the way down)
+(define (drop)
+  (if (not *playing*) (log "Not playing! (start)")
+    (begin
+      (let (rows 0)
+        (define (drop-loop)
+          (if (piece-fits? *piece-x* (+ *piece-y* 1) *piece-rotation*)
+            (begin
+              (set! *piece-y* (+ *piece-y* 1))
+              (set! rows (+ rows 1))
+              (drop-loop))))
+        (drop-loop)
+        (set! *score* (+ *score* (* rows 2))))
+      (lock-piece))))
+(define (d) (drop))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 6: Lock + Line Clear
+;; ═══════════════════════════════════════════════════════════════
+
+;; Lock piece onto board
+(define (lock-piece)
+  (let (char (if *card-mode*
+               (string (floor (* (random) 10)))
+               (get *current-piece* "char" "#")))
+    (for-each
+      (lambda (cell)
+        (let (r (car cell) c (nth cell 1))
+          (if (and (>= r 0) (< r *height*) (>= c 0) (< c *width*))
+            (set! *board* (board-set *board* r c char)))))
+      (piece-cells)))
+  (set! *pieces-placed* (+ *pieces-placed* 1))
+  ;; Check for easter egg
+  (if (and (not *card-mode*) (>= *score* 10000))
+    (begin
+      (set! *card-mode* true)
+      (log "")
+      (log "  ★ EASTER EGG: Card Mode activated!")
+      (log "  ★ Blocks are now agent cards!")))
+  ;; Clear lines
+  (clear-lines)
+  ;; Spawn next
+  (spawn-piece)
+  (if *playing* (render)))
+
+;; Clear completed lines
+(define (clear-lines)
+  (let (cleared 0)
+    (let (new-board (filter
+            (lambda (row)
+              (let (full (not (member? " " row)))
+                (if full (set! cleared (+ cleared 1)))
+                (not full)))
+            *board*))
+      ;; Add empty rows at top
+      (repeat cleared
+        (let (empty-row (list))
+          (repeat *width* (set! empty-row (append empty-row (list " "))))
+          (set! new-board (cons empty-row new-board))))
+      (set! *board* new-board))
+    ;; Score
+    (if (> cleared 0)
+      (begin
+        (set! *combo* (+ *combo* 1))
+        (let (line-score (cond
+                ((= cleared 1) (* 100 *level*))
+                ((= cleared 2) (* 300 *level*))
+                ((= cleared 3) (* 500 *level*))
+                ((= cleared 4) (* 800 *level*))  ;; TETRIS!
+                (true 0)))
+          (set! *score* (+ *score* (* line-score (max 1 *combo*))))
+          (set! *lines* (+ *lines* cleared))
+          (if (= cleared 4)
+            (log "  ★ T E T R I S ! ★"))
+          ;; Level up
+          (set! *level* (+ 1 (floor (/ *lines* 10)))))))
+      (set! *combo* 0))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 7: Rendering
+;; ═══════════════════════════════════════════════════════════════
+
+(define (render)
+  ;; Build display board (board + current piece overlay)
+  (let (display (map (lambda (row) (map identity row)) *board*))
+    ;; Overlay current piece
+    (let (char (get *current-piece* "char" "#"))
+      (for-each
+        (lambda (cell)
+          (let (r (car cell) c (nth cell 1))
+            (if (and (>= r 0) (< r *height*) (>= c 0) (< c *width*))
+              (set! display (board-set display r c char)))))
+        (piece-cells)))
+
+    ;; Draw
+    (log "")
+    (log (concat "  ┌" (make-string (* *width* 2) "─") "┐  Next:"))
+    (repeat *height*
+      (let (row-str (reduce
+              (lambda (_acc cell) (concat _acc cell " "))
+              (nth display _i) ""))
+        (let (side-info
+              (cond
+                ((= _i 1) (concat "  " (get *next-piece* "name" "?")))
+                ((= _i 3) (concat "  Score: " (string *score*)))
+                ((= _i 4) (concat "  Lines: " (string *lines*)))
+                ((= _i 5) (concat "  Level: " (string *level*)))
+                ((= _i 7) (concat "  Combo: " (if (> *combo* 0) (concat "x" (string *combo*)) "-")))
+                ((= _i 9) (if *card-mode* "  CARD MODE!" ""))
+                (true "")))
+          (log (concat "  │" row-str "│" side-info)))))
+    (log (concat "  └" (make-string (* *width* 2) "─") "┘"))
+    (log "")
+    (log "  (l)eft (r)ight (t)urn (s)oft (d)rop")))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; SECTION 8: Game Control
+;; ═══════════════════════════════════════════════════════════════
+
+(define (start)
+  (set! *board* (make-board))
+  (set! *score* 0)
+  (set! *lines* 0)
+  (set! *level* 1)
+  (set! *combo* 0)
+  (set! *pieces-placed* 0)
+  (set! *game-over* false)
+  (set! *playing* true)
+  (set! *card-mode* false)
+  (set! *current-piece* nil)
+  (set! *next-piece* nil)
+  (spawn-piece)
+  (render))
+
+(define (pause)
+  (if *playing*
+    (begin (set! *playing* false) (log "  PAUSED. (resume) to continue."))
+    (log "Not playing!")))
+
+(define (resume)
+  (if (and (not *playing*) (not *game-over*))
+    (begin (set! *playing* true) (render))
+    (log "Nothing to resume.")))
+
+;; Step — advance one tick (for manual play without real-time)
+(define (tick)
+  (if *playing* (down)))
+
+;; Show high scores
+(define (scores)
+  (if (empty? *high-scores*)
+    (log "  No high scores yet. Play a game!")
+    (begin
+      (log "  ═══ HIGH SCORES ═══")
+      (repeat (min 10 (length *high-scores*))
+        (let (hs (nth *high-scores* _i))
+          (log (concat "  " (string (+ _i 1)) ". "
+                       (string (get hs "score")) " pts"
+                       " Lv." (string (get hs "level"))
+                       " " (string (get hs "lines")) " lines")))))))
+
+
+;; ═══════════════════════════════════════════════════════════════
+;; Boot
+;; ═══════════════════════════════════════════════════════════════
+
+(begin
+  (log "")
+  (log "  ╔═══════════════════════════════╗")
+  (log "  ║                               ║")
+  (log "  ║     ████ ████ ████ ███  █  ██ ║")
+  (log "  ║       █  █      █  █  █ █ █   ║")
+  (log "  ║       █  ███    █  ███  █  █  ║")
+  (log "  ║       █  █      █  █ █  █   █ ║")
+  (log "  ║       █  ████   █  █  █ █ ██  ║")
+  (log "  ║                               ║")
+  (log "  ║     On ORAPPTER.              ║")
+  (log "  ║     Because every console     ║")
+  (log "  ║     needs Tetris.             ║")
+  (log "  ║                               ║")
+  (log "  ║     Easter egg: score 10000   ║")
+  (log "  ║     and the blocks become     ║")
+  (log "  ║     agent cards.              ║")
+  (log "  ║                               ║")
+  (log "  ╚═══════════════════════════════╝")
+  (log "")
+  (log "  (start) — new game")
+  (log "  (scores) — high scores")
+  (log "")
+  (log "  Controls:")
+  (log "    (l)eft  (r)ight  (t)urn  (s)oft drop  (d)rop")
+  (log "    (tick) — advance one step")
+  (log "    (pause) / (resume)")
+  (log "")
+  (log "  Each block is mapped to a real agent card.")
+  (log "  I=BasicAgent O=DealDesk T=Engine S=Memory")
+  (log "  Z=Remote L=Rappterbook J=CEO Agent"))
