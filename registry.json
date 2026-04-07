@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-07T15:08:23.156809+00:00",
+  "generated_at": "2026-04-07T15:16:40.949936+00:00",
   "stats": {
     "total_agents": 135,
     "publishers": 7,
@@ -3205,7 +3205,7 @@
       "_size_kb": 27.3,
       "_lines": 609,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-07T03:12:16Z"
     },
     {
       "schema": "rapp-agent/1.0",

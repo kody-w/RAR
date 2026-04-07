@@ -161,6 +161,58 @@
   .activity-text strong { font-weight: 600; }
   .activity-time { color: var(--text-muted); font-size: .78rem; white-space: nowrap; }
 
+  /* Action buttons */
+  .action-bar {
+    display: flex; gap: 6px; margin-top: 10px;
+  }
+  .action-btn {
+    flex: 1; padding: 6px 10px; border-radius: 6px; border: 1px solid;
+    font-size: .75rem; font-weight: 600; cursor: pointer; transition: all .15s;
+    text-align: center;
+  }
+  .action-btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-approve { background: var(--green-bg); color: var(--green); border-color: rgba(63,185,80,.3); }
+  .btn-approve:hover:not(:disabled) { background: rgba(63,185,80,.25); }
+  .btn-reject { background: var(--red-bg); color: var(--red); border-color: rgba(248,81,73,.3); }
+  .btn-reject:hover:not(:disabled) { background: rgba(248,81,73,.25); }
+  .btn-retry { background: var(--accent-bg); color: var(--accent); border-color: rgba(88,166,255,.3); }
+  .btn-retry:hover:not(:disabled) { background: rgba(88,166,255,.25); }
+  .btn-view { background: var(--surface2); color: var(--text-dim); border-color: var(--border); }
+  .btn-view:hover:not(:disabled) { color: var(--text); border-color: var(--border-hover); }
+
+  /* Auth */
+  .auth-bar {
+    display: flex; align-items: center; gap: 10px; padding: 10px 32px;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    font-size: .85rem;
+  }
+  .auth-bar .gh-login {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: .82rem;
+    transition: all .15s;
+  }
+  .auth-bar .gh-login:hover { border-color: var(--border-hover); background: var(--surface3); }
+  .auth-bar .gh-login svg { width: 16px; height: 16px; fill: currentColor; }
+  .user-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 3px 10px 3px 3px; border-radius: 16px; font-size: .82rem;
+  }
+  .user-pill img { width: 22px; height: 22px; border-radius: 50%; }
+  .user-pill .logout { color: var(--text-muted); cursor: pointer; margin-left: 4px; font-size: .72rem; }
+  .user-pill .logout:hover { color: var(--red); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; padding: 12px 20px;
+    border-radius: 8px; font-size: .85rem; font-weight: 500; z-index: 100;
+    animation: slideIn .3s ease-out; max-width: 360px;
+  }
+  .toast-success { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,.3); }
+  .toast-error { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,81,73,.3); }
+  @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
   .loading { text-align: center; padding: 60px 20px; color: var(--text-dim); }
   .spinner {
     width: 28px; height: 28px; border: 3px solid var(--surface3);
@@ -192,6 +244,14 @@
     <button class="refresh-btn" onclick="loadPipeline()" id="refresh-btn">↻ Refresh</button>
   </div>
 </header>
+
+<div class="auth-bar" id="auth-bar">
+  <span style="color:var(--text-muted)">Sign in to approve, reject, or retry submissions →</span>
+  <button class="gh-login" id="login-btn" onclick="loginWithGitHub()">
+    <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    Sign in with GitHub
+  </button>
+</div>
 
 <div class="stats-bar" id="stats-bar">
   <div class="stat-card stat-pending"><div class="stat-num" id="stat-pending">–</div><div class="stat-label">Pending Review</div></div>
@@ -240,8 +300,21 @@
 const OWNER = 'kody-w';
 const REPO = 'RAR';
 const API = `https://api.github.com/repos/${OWNER}/${REPO}`;
+const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
+const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
+
+let ghToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token');
+let ghUser = null;
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div');
+  t.className = `toast toast-${type}`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
 
 function timeAgo(iso) {
   const d = new Date(iso), now = new Date();
@@ -279,13 +352,35 @@ function labelHtml(name) {
   return `<span class="issue-label label-${cls}">${esc(name)}</span>`;
 }
 
-function issueCard(issue) {
+function issueCard(issue, stage) {
   const agentName = extractAgentName(issue.title);
   const labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
+  const num = issue.number;
+  const disabled = !ghToken ? 'disabled title="Sign in to take action"' : '';
+
+  let actions = '';
+  if (stage === 'pending') {
+    actions = `<div class="action-bar">
+      <button class="action-btn btn-approve" ${disabled} onclick="event.stopPropagation();approveIssue(${num})">✓ Approve</button>
+      <button class="action-btn btn-reject" ${disabled} onclick="event.stopPropagation();rejectIssue(${num})">✕ Reject</button>
+      <button class="action-btn btn-view" onclick="event.stopPropagation();window.open('${issue.html_url}','_blank')">View</button>
+    </div>`;
+  } else if (stage === 'review') {
+    actions = `<div class="action-bar">
+      <button class="action-btn btn-approve" ${disabled} onclick="event.stopPropagation();processIssue(${num})">▶ Process</button>
+      <button class="action-btn btn-view" onclick="event.stopPropagation();window.open('${issue.html_url}','_blank')">View</button>
+    </div>`;
+  } else if (stage === 'failed') {
+    actions = `<div class="action-bar">
+      <button class="action-btn btn-retry" ${disabled} onclick="event.stopPropagation();retryIssue(${num})">↻ Retry</button>
+      <button class="action-btn btn-view" onclick="event.stopPropagation();window.open('${issue.html_url}','_blank')">View</button>
+    </div>`;
+  }
+
   return `
     <div class="issue-card" onclick="window.open('${issue.html_url}','_blank')">
       <div class="issue-top">
-        <span class="issue-num">#${issue.number}</span>
+        <span class="issue-num">#${num}</span>
         <span style="font-size:.72rem;color:var(--text-muted)">${timeAgo(issue.created_at)}</span>
       </div>
       ${agentName ? `<div class="issue-agent">${esc(agentName)}</div>` : `<div class="issue-title">${esc(issue.title.replace(/^\[AGENT\]\s*/, '').replace(/^\[RAR\]\s*/, ''))}</div>`}
@@ -296,6 +391,7 @@ function issueCard(issue) {
         </span>
         ${labels.map(l => labelHtml(l)).join(' ')}
       </div>
+      ${actions}
     </div>`;
 }
 
@@ -307,49 +403,193 @@ function activityIcon(issue) {
   return '📥';
 }
 
+function authHeaders() {
+  return ghToken ? { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' } : {};
+}
+
+// ─── Actions ────────────────────────────────────────
+
+async function approveIssue(num) {
+  if (!ghToken) return showToast('Sign in first', 'error');
+  try {
+    // Add approved label
+    await fetch(`${API}/issues/${num}/labels`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ labels: ['approved'] })
+    });
+    // Comment
+    await fetch(`${API}/issues/${num}/comments`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ body: `✅ Approved by @${ghUser.login} via RAR Admin` })
+    });
+    showToast(`#${num} approved!`, 'success');
+    loadPipeline();
+  } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
+}
+
+async function rejectIssue(num) {
+  if (!ghToken) return showToast('Sign in first', 'error');
+  if (!confirm(`Reject and close issue #${num}?`)) return;
+  try {
+    await fetch(`${API}/issues/${num}/comments`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ body: `❌ Rejected by @${ghUser.login} via RAR Admin` })
+    });
+    await fetch(`${API}/issues/${num}`, {
+      method: 'PATCH', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ state: 'closed', labels: ['rejected'] })
+    });
+    showToast(`#${num} rejected`, 'success');
+    loadPipeline();
+  } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
+}
+
+async function processIssue(num) {
+  if (!ghToken) return showToast('Sign in first', 'error');
+  try {
+    // Trigger the process-issues workflow with this issue number
+    await fetch(`${API}/actions/workflows/process-issues.yml/dispatches`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main', inputs: { issue_number: String(num) } })
+    });
+    showToast(`#${num} processing triggered — check back in a minute`, 'success');
+    setTimeout(loadPipeline, 30000);
+  } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
+}
+
+async function retryIssue(num) {
+  if (!ghToken) return showToast('Sign in first', 'error');
+  try {
+    // Reopen the issue
+    await fetch(`${API}/issues/${num}`, {
+      method: 'PATCH', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ state: 'open' })
+    });
+    // Remove failed label, add pending-review
+    try {
+      await fetch(`${API}/issues/${num}/labels/failed`, {
+        method: 'DELETE', headers: authHeaders()
+      });
+    } catch {}
+    await fetch(`${API}/issues/${num}/labels`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ labels: ['pending-review'] })
+    });
+    await fetch(`${API}/issues/${num}/comments`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ body: `↻ Retried by @${ghUser.login} via RAR Admin — reopened for review` })
+    });
+    showToast(`#${num} reopened for review`, 'success');
+    loadPipeline();
+  } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
+}
+
+// ─── Auth ───────────────────────────────────────────
+
+function loginWithGitHub() {
+  const redirect = window.location.origin + window.location.pathname;
+  window.location.href = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo&redirect_uri=${encodeURIComponent(redirect)}`;
+}
+
+async function handleAuthCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+  window.history.replaceState({}, '', window.location.href.split('?')[0]);
+  try {
+    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await resp.json();
+    if (data.access_token) {
+      ghToken = data.access_token;
+      localStorage.setItem('rb_access_token', ghToken);
+      checkAuth();
+      showToast('Signed in!', 'success');
+    }
+  } catch (e) { showToast('Sign-in failed', 'error'); }
+}
+
+function checkAuth() {
+  if (!ghToken) return;
+  fetch('https://api.github.com/user', { headers: { Authorization: `Bearer ${ghToken}` } })
+    .then(r => r.ok ? r.json() : null)
+    .then(u => {
+      if (u) { ghUser = u; renderAuthBar(); }
+      else { ghToken = null; localStorage.removeItem('rb_access_token'); localStorage.removeItem('gh_token'); }
+    }).catch(() => {});
+}
+
+function logout() {
+  ghToken = null; ghUser = null;
+  localStorage.removeItem('rb_access_token');
+  localStorage.removeItem('gh_token');
+  renderAuthBar();
+  loadPipeline();
+  showToast('Signed out', 'success');
+}
+
+function renderAuthBar() {
+  const bar = document.getElementById('auth-bar');
+  if (ghUser) {
+    bar.innerHTML = `
+      <span style="color:var(--green)">● Signed in</span>
+      <div class="user-pill">
+        <img src="${ghUser.avatar_url}&s=44" alt="">
+        <span>@${ghUser.login}</span>
+        <span class="logout" onclick="logout()">sign out</span>
+      </div>
+      <span style="color:var(--text-muted);font-size:.78rem;margin-left:8px">You can approve, reject, process, and retry submissions</span>`;
+  } else {
+    bar.innerHTML = `
+      <span style="color:var(--text-muted)">Sign in to approve, reject, or retry submissions →</span>
+      <button class="gh-login" onclick="loginWithGitHub()">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Sign in with GitHub</button>`;
+  }
+}
+
+// ─── Pipeline ───────────────────────────────────────
+
 async function loadPipeline() {
   const btn = document.getElementById('refresh-btn');
   btn.disabled = true;
   btn.textContent = '↻ Loading…';
 
   try {
-    // Fetch all agent-related issues (open + closed, recent first)
+    const headers = ghToken ? { Authorization: `Bearer ${ghToken}` } : {};
     const [openRes, closedRes] = await Promise.all([
-      fetch(`${API}/issues?state=open&per_page=100&sort=created&direction=desc`),
-      fetch(`${API}/issues?state=closed&per_page=100&sort=created&direction=desc`)
+      fetch(`${API}/issues?state=open&per_page=100&sort=created&direction=desc`, { headers }),
+      fetch(`${API}/issues?state=closed&per_page=100&sort=created&direction=desc`, { headers })
     ]);
     const openIssues = await openRes.json();
     const closedIssues = await closedRes.json();
     const all = [...openIssues, ...closedIssues]
-      .filter(i => !i.pull_request) // exclude PRs
+      .filter(i => !i.pull_request)
       .filter(i => i.title.startsWith('[AGENT]'))
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-    // Classify into stages
     const buckets = { pending: [], review: [], merged: [], failed: [] };
     for (const issue of all) {
-      const stage = classifyIssue(issue);
-      buckets[stage].push(issue);
+      buckets[classifyIssue(issue)].push(issue);
     }
 
-    // Update stats
     document.getElementById('stat-pending').textContent = buckets.pending.length;
     document.getElementById('stat-approved').textContent = buckets.review.length;
     document.getElementById('stat-merged').textContent = buckets.merged.length;
     document.getElementById('stat-failed').textContent = buckets.failed.length;
     document.getElementById('stat-total').textContent = all.length;
 
-    // Render columns
     for (const [stage, issues] of Object.entries(buckets)) {
       const col = document.getElementById(`col-${stage}`);
       const cnt = document.getElementById(`cnt-${stage}`);
       cnt.textContent = issues.length;
       col.innerHTML = issues.length
-        ? issues.map(issueCard).join('')
+        ? issues.map(i => issueCard(i, stage)).join('')
         : '<div class="col-empty">No submissions</div>';
     }
 
-    // Render activity log (last 20 across all stages)
     const recent = all.slice(0, 20);
     document.getElementById('activity-log').innerHTML = recent.length
       ? recent.map(i => `
@@ -364,7 +604,6 @@ async function loadPipeline() {
         </div>`).join('')
       : '<div class="col-empty" style="padding:20px">No activity yet</div>';
 
-    // Show pipeline, hide loading
     document.getElementById('pipeline-loading').style.display = 'none';
     document.getElementById('pipeline').style.display = 'grid';
     document.getElementById('last-updated').textContent = `Updated ${new Date().toLocaleTimeString()}`;
@@ -378,9 +617,12 @@ async function loadPipeline() {
   }
 }
 
-// Load on page ready
-loadPipeline();
-// Auto-refresh every 5 minutes
+// ─── Init ───────────────────────────────────────────
+(async () => {
+  await handleAuthCallback();
+  checkAuth();
+  loadPipeline();
+})();
 setInterval(loadPipeline, 5 * 60 * 1000);
 </script>
 </body>

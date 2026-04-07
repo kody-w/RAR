@@ -435,6 +435,58 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 
 ---
 
+## Admin — Submission Pipeline
+
+Dashboard: `https://kody-w.github.io/RAR/admin.html`
+
+### Pipeline Stages
+
+| Stage | Label | State | Meaning |
+|-------|-------|-------|---------|
+| Pending Review | `pending-review` | open | Submitted, awaiting admin review |
+| Approved | `approved` | open | Admin approved, ready for processing |
+| Processing | `forged` | open | CI is building, scanning, and forging the card |
+| Merged | `processed` | closed | Agent is live in registry |
+| Failed | `failed` | closed | CI processing failed |
+| Rejected | `rejected` | closed | Admin rejected the submission |
+
+### Admin Actions (require GitHub auth with `public_repo` scope)
+
+**Approve** — Adds `approved` label, comments on issue:
+```
+POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["approved"]}
+```
+
+**Process** — Triggers CI workflow to build, scan, and merge:
+```
+POST /repos/kody-w/RAR/actions/workflows/process-issues.yml/dispatches
+→ {"ref": "main", "inputs": {"issue_number": "{number}"}}
+```
+
+**Reject** — Comments, closes issue with `rejected` label:
+```
+PATCH /repos/kody-w/RAR/issues/{number}  → {"state": "closed", "labels": ["rejected"]}
+```
+
+**Retry** — Reopens failed issue, removes `failed` label, adds `pending-review`:
+```
+PATCH /repos/kody-w/RAR/issues/{number}  → {"state": "open"}
+DELETE /repos/kody-w/RAR/issues/{number}/labels/failed
+POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["pending-review"]}
+```
+
+### Typical Morning Review
+
+1. Open `admin.html`, sign in with GitHub
+2. Check **Pending Review** column for new submissions
+3. Click **View** to inspect agent code on the issue
+4. Click **Approve** (adds label, moves to Approved column) or **Reject** (closes issue)
+5. On approved agents, click **Process** to trigger CI
+6. Check **Failed** column — click **Retry** to reopen any recoverable failures
+7. **Merged** column shows successfully processed agents
+
+---
+
 ## Version
 
 ```
