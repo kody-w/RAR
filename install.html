@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR Brainstem Installer</title>
-<meta name="description" content="RAR Brainstem — local-first AI agent server. Cloud or local AI. Your choice.">
+<title>RAPP Brainstem Installer</title>
+<meta name="description" content="RAPP Brainstem — local-first AI agent server. Cloud or local AI. Your choice.">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -213,7 +213,7 @@
 
 <div class="hero">
   <div class="logo">R</div>
-  <h1>RAR Brainstem</h1>
+  <h1>RAPP Brainstem</h1>
   <p>A local-first AI agent server for the RAPP Agent Registry.<br>Cloud AI or fully on-device with Ollama. Your choice.</p>
   <div class="tagline">Start simple. Layer up when you're ready.</div>
 </div>
@@ -289,7 +289,7 @@
         </div>
         <div class="step">
           <h3>4. Connect the Agent Store</h3>
-          <p>Open the <a href="index.html">RAR Agent Store</a>, go to Stream > Ollama, and connect to <code>localhost:11434</code>. Flick agents to the Brainstem — they reason locally.</p>
+          <p>Open the <a href="index.html">RAPP Agent Store</a>, go to Stream > Ollama, and connect to <code>localhost:11434</code>. Flick agents to the Brainstem — they reason locally.</p>
         </div>
       </div>
 
@@ -435,7 +435,7 @@
 
 <div class="links">
   <a href="index.html">Agent Store</a>
-  <a href="https://github.com/kody-w/RAR">RAR Repo</a>
+  <a href="https://github.com/kody-w/RAR">RAPP Repo</a>
   <a href="https://github.com/kody-w/CommunityRAPP">CommunityRAPP</a>
   <a href="https://ollama.com">Ollama</a>
 </div>
@@ -446,7 +446,7 @@
 
   const RAR_RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
 
-  // Install commands — all point to RAR repo raw
+  // Install commands — all point to RAPP repo raw
   const installs = {
     cloud: {
       'macOS/Linux': {
@@ -456,7 +456,7 @@
           hint: 'Works on macOS & Linux. Auto-installs Python 3.11 if missing. Requires GitHub account.'
         },
         'manual': {
-          comment: '# Clone from RAR, install deps, done.',
+          comment: '# Clone from RAPP, install deps, done.',
           cmd: `git clone https://github.com/kody-w/RAR.git ~/.brainstem/src && cd ~/.brainstem/src && pip3 install -r requirements.txt && python3 brainstem.py`,
           hint: 'Requires Python 3.11+ and Git already installed.'
         }
@@ -468,7 +468,7 @@
           hint: 'Run in PowerShell. Auto-installs Python, Git & GitHub CLI via winget.'
         },
         'manual': {
-          comment: '# Clone from RAR, install deps, done.',
+          comment: '# Clone from RAPP, install deps, done.',
           cmd: `git clone https://github.com/kody-w/RAR.git %USERPROFILE%\\.brainstem\\src && cd %USERPROFILE%\\.brainstem\\src && pip install -r requirements.txt && python brainstem.py`,
           hint: 'Requires Python 3.11+ and Git already installed.'
         }

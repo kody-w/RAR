@@ -101,7 +101,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
-              body: '✅ **Approved and forged.** Agent promoted to the registry. Card details determined by the forge based on the agent code.\n\nWelcome to RAR.'
+              body: '✅ **Approved and forged.** Agent promoted to the registry. Card details determined by the forge based on the agent code.\n\nWelcome to RAPP.'
             });
             await github.rest.issues.update({
               owner: context.repo.owner,

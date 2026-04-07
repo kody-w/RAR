@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR Release Notes</title>
+<title>RAPP Release Notes</title>
 <meta name="description" content="Release history for the RAPP Agent Registry — what shipped, when, and why.">
-<meta property="og:title" content="RAR Release Notes">
+<meta property="og:title" content="RAPP Release Notes">
 <meta property="og:description" content="Release history for the RAPP Agent Registry. Every release is tested, scanned, and integrity-verified.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kody-w.github.io/RAR/releases.html">
@@ -141,7 +141,7 @@
 <div class="container">
 
 <header>
-  <h1><span>RAR</span> Release Notes</h1>
+  <h1><span>RAPP</span> Release Notes</h1>
   <p>What shipped, when, and why. Every release is tested, scanned, and integrity-verified.</p>
   <div class="nav-links">
     <a href="index.html">Agent Store</a>
@@ -200,7 +200,7 @@
     <h3>API &amp; Discovery</h3>
     <ul>
       <li><strong><a href="https://raw.githubusercontent.com/kody-w/RAR/main/api.json" style="color:var(--accent)">api.json</a></strong> &mdash; machine-readable API manifest. Agents discover endpoints, self-submit, vote, review.</li>
-      <li><strong>Schema.org JSON-LD</strong> &mdash; NLweb-ready structured data on all HTML pages. AI agents discover RAR via web search.</li>
+      <li><strong>Schema.org JSON-LD</strong> &mdash; NLweb-ready structured data on all HTML pages. AI agents discover RAPP via web search.</li>
       <li><strong>OpenGraph meta tags</strong> &mdash; links look good when shared in Slack, Twitter, Teams.</li>
       <li><strong>robots.txt + sitemap.xml</strong> &mdash; search engine indexing.</li>
     </ul>
@@ -208,7 +208,7 @@
     <h3>SDK Onboarding</h3>
     <ul>
       <li><strong><code>rapp_sdk.py init</code></strong> &mdash; create a binder in one command.</li>
-      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAR from CLI.</li>
+      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAPP from CLI.</li>
       <li><strong><code>rapp_sdk.py card resolve 12345</code></strong> &mdash; resolve card from seed (offline).</li>
       <li><strong>snake_case enforced in scaffold</strong> &mdash; <code>new</code> command rejects dashes.</li>
     </ul>
@@ -306,7 +306,7 @@
     <span class="release-tag tag-infrastructure">Infrastructure</span>
   </div>
   <div class="release-body">
-    <p>Production hardening. RAR is now ready for public submissions. Every layer has gates, every agent has a hash, every submission goes through review.</p>
+    <p>Production hardening. RAPP is now ready for public submissions. Every layer has gates, every agent has a hash, every submission goes through review.</p>
 
     <h3>Submission Pipeline</h3>
     <ul>
@@ -349,8 +349,8 @@
 
     <h3>SDK Onboarding</h3>
     <ul>
-      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; initialize a RAR binder in one command</li>
-      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAR from CLI</li>
+      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; initialize a RAPP binder in one command</li>
+      <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAPP from CLI</li>
       <li><strong>Snake_case enforced in scaffold</strong> &mdash; <code>rapp_sdk.py new</code> rejects kebab-case slugs</li>
       <li><strong>Full quickstart in <code>skill.md</code></strong> &mdash; AI agents can onboard autonomously</li>
     </ul>

@@ -1314,7 +1314,7 @@ def hatch_egg(egg: dict, output_dir: str = "agents") -> list:
 # =============================================================================
 
 def init_binder(repo_name: str = None) -> dict:
-    """Initialize a RAR-compliant binder in the current directory or a new one.
+    """Initialize a RAPP-compliant binder in the current directory or a new one.
     Returns dict with paths created."""
     import subprocess as _sp
 
@@ -1400,7 +1400,7 @@ def _auto_register_binder(token: str, namespace: str, upstream: str) -> None:
 
 
 def submit_agent(path: str, upstream: str = None) -> dict:
-    """Submit an agent to the upstream RAR registry via GitHub Issue.
+    """Submit an agent to the upstream RAPP registry via GitHub Issue.
     Returns the issue URL on success."""
     agent_path = Path(path)
     if not agent_path.exists():
@@ -1540,7 +1540,7 @@ def main():
     sub = parser.add_subparsers(dest="command", metavar="<command>")
 
     # init
-    p_init = sub.add_parser("init", help="Initialize a RAR binder (agent workspace)")
+    p_init = sub.add_parser("init", help="Initialize a RAPP binder (agent workspace)")
     p_init.add_argument("name", nargs="?", help="Optional repo/directory name")
     p_init.add_argument("--json", action="store_true", help="Output JSON")
 
@@ -1550,7 +1550,7 @@ def main():
     p_new.add_argument("--json", action="store_true", help="Output JSON")
 
     # submit
-    p_submit = sub.add_parser("submit", help="Submit an agent to the RAR registry for review")
+    p_submit = sub.add_parser("submit", help="Submit an agent to the RAPP registry for review")
     p_submit.add_argument("path", help="Path to agent .py file")
     p_submit.add_argument("--json", action="store_true", help="Output JSON")
 
@@ -1643,14 +1643,14 @@ def main():
             if use_json:
                 print(json.dumps(result, indent=2))
             else:
-                print(f"\n  RAR Binder initialized!")
+                print(f"\n  RAPP Binder initialized!")
                 print(f"  Directory: {result['binder_dir']}")
                 print(f"  Namespace: {result.get('namespace', '?')}")
                 print(f"\n  Next steps:")
                 print(f"    python rapp_sdk.py new @you/my_agent    # scaffold an agent")
                 print(f"    python rapp_sdk.py validate agent.py    # validate it")
                 print(f"    python rapp_sdk.py test agent.py        # run contract tests")
-                print(f"    python rapp_sdk.py submit agent.py      # submit to RAR")
+                print(f"    python rapp_sdk.py submit agent.py      # submit to RAPP")
                 print()
         except Exception as e:
             if use_json:

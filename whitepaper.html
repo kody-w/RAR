@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity</title>
+<title>RAPP: A Peer-to-Peer Agent Registry with Deterministic Card Identity</title>
 <meta name="description" content="A protocol for single-file AI agent distribution, identity, and collection without central infrastructure.">
 
 <!-- OpenGraph -->
-<meta property="og:title" content="RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
+<meta property="og:title" content="RAPP: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
 <meta property="og:description" content="A protocol for single-file AI agent distribution, identity, and collection without central infrastructure. Every agent is one file. Every file has a seed. Every seed reconstructs a card.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kody-w.github.io/RAR/whitepaper.html">
 <meta property="og:image" content="https://kody-w.github.io/RAR/og-whitepaper.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="RAR: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
+<meta name="twitter:title" content="RAPP: A Peer-to-Peer Agent Registry with Deterministic Card Identity">
 <meta name="twitter:description" content="Every agent is one file. Every file has a seed. Every seed reconstructs a card. No server required.">
 
 <style>
@@ -416,7 +416,7 @@ blockquote {
 
 <!-- ─── Header ─────────────────────────────────────────────────────────────── -->
 <div class="paper-header">
-  <h1 class="paper-title">RAR: A Peer-to-Peer Agent Registry<br>with Deterministic Card Identity</h1>
+  <h1 class="paper-title">RAPP: A Peer-to-Peer Agent Registry<br>with Deterministic Card Identity</h1>
   <p class="paper-subtitle">A protocol for single-file AI agent distribution, identity,<br>and collection without central infrastructure</p>
   <div class="paper-meta">
     Published: <span>April 2026</span> &nbsp;·&nbsp;
@@ -454,7 +454,7 @@ blockquote {
 <div class="section" id="abstract">
   <div class="section-number">Section 1</div>
   <h2>Abstract</h2>
-  <p>We propose RAR — the RAPP Agent Registry — a protocol for distributing AI agents as single Python files with deterministic, manifest-derived card identities. Every agent is one file. Every file contains a structured manifest that can be extracted without executing any code. Every manifest produces a 64-bit seed. Every seed, applied to a fixed resolution algorithm, reconstructs a complete card identity: type, stats, abilities, rarity, and flavor — identical across every node that holds the file. No server is required to read the registry. No server is required to resolve a card. The protocol is fully operational from a static file system, a local git clone, or a browser loading resources from <code>file://</code>. The registry grows through federated GitHub repositories governed by the same protocol specification. This document defines the protocol in full.</p>
+  <p>We propose RAPP — the RAPP Agent Registry — a protocol for distributing AI agents as single Python files with deterministic, manifest-derived card identities. Every agent is one file. Every file contains a structured manifest that can be extracted without executing any code. Every manifest produces a 64-bit seed. Every seed, applied to a fixed resolution algorithm, reconstructs a complete card identity: type, stats, abilities, rarity, and flavor — identical across every node that holds the file. No server is required to read the registry. No server is required to resolve a card. The protocol is fully operational from a static file system, a local git clone, or a browser loading resources from <code>file://</code>. The registry grows through federated GitHub repositories governed by the same protocol specification. This document defines the protocol in full.</p>
 </div>
 
 <!-- ─── 2. Introduction ─────────────────────────────────────────────────────── -->
@@ -470,7 +470,7 @@ blockquote {
 
   <p>A file can be copied. A file can be emailed. A file can be stored on a USB drive and handed to someone who has never connected to the internet. A file does not require a server to exist. A file does not expire. A file is the most durable, portable, universally-understood artifact in computing.</p>
 
-  <p>RAR is built on this premise. It defines a protocol where every AI agent is one Python file, every file is self-describing through an embedded manifest, and every manifest deterministically produces a card identity that travels with the file forever. The registry is a static JSON document. The store is a single HTML file. The entire system works offline.</p>
+  <p>RAPP is built on this premise. It defines a protocol where every AI agent is one Python file, every file is self-describing through an embedded manifest, and every manifest deterministically produces a card identity that travels with the file forever. The registry is a static JSON document. The store is a single HTML file. The entire system works offline.</p>
 
   <p>The goal is a distribution model that scales to all of humanity — not just engineers at technology companies.</p>
 </div>
@@ -607,7 +607,7 @@ One sentence description here.
   <div class="section-number">Section 6</div>
   <h2>The Seed Protocol</h2>
 
-  <p>The seed is the core innovation of the RAR protocol. It is a 64-bit integer forged deterministically from the agent's manifest data. Given the same manifest, the same seed is always produced — on any machine, in any timezone, across any version of the registry software. The seed encodes the agent's identity, type, tier, and capability fingerprint in a single integer that can be stored anywhere, transmitted in any format, and used to reconstruct the full card without any network access.</p>
+  <p>The seed is the core innovation of the RAPP protocol. It is a 64-bit integer forged deterministically from the agent's manifest data. Given the same manifest, the same seed is always produced — on any machine, in any timezone, across any version of the registry software. The seed encodes the agent's identity, type, tier, and capability fingerprint in a single integer that can be stored anywhere, transmitted in any format, and used to reconstruct the full card without any network access.</p>
 
   <h3>Bit Layout</h3>
 
@@ -799,7 +799,7 @@ One sentence description here.
   <div class="section-number">Section 10</div>
   <h2>Federation</h2>
 
-  <p>RAR is a GitHub template repository. Any organization or individual can create a federated instance by cloning the template. The result is a fully operational agent registry — with its own namespace, its own CI/CD, its own GitHub Pages deployment — in under five minutes.</p>
+  <p>RAPP is a GitHub template repository. Any organization or individual can create a federated instance by cloning the template. The result is a fully operational agent registry — with its own namespace, its own CI/CD, its own GitHub Pages deployment — in under five minutes.</p>
 
   <p>A federated instance can operate in any of four modes:</p>
 
@@ -881,7 +881,7 @@ One sentence description here.
   <div class="section-number">Section 12</div>
   <h2>Offline-First Design</h2>
 
-  <p>Every read operation in the RAR protocol works without a network connection. This is not a feature — it is a design constraint. Any system that requires network access to read its own data is a system that can fail when the network is unavailable. The network is always, eventually, unavailable.</p>
+  <p>Every read operation in the RAPP protocol works without a network connection. This is not a feature — it is a design constraint. Any system that requires network access to read its own data is a system that can fail when the network is unavailable. The network is always, eventually, unavailable.</p>
 
   <h3>The read path is fully offline</h3>
 
@@ -1007,7 +1007,7 @@ One sentence description here.
 
   <p>Minecraft does not store every block in a world. It stores a seed that the terrain generator uses to place every block. The world is "custom" but it is derived from the seed because the <em>protocol</em> (terrain generation rules) is shared by every client. The seed is the compressed data. The protocol is the decompressor.</p>
 
-  <p>The RAR card seed protocol demonstrates this for agent identity. The same principle extends to:</p>
+  <p>The RAPP card seed protocol demonstrates this for agent identity. The same principle extends to:</p>
 
   <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
     <li><strong>Cartridges</strong> — application configurations (scenes, settings, layout). Define the cartridge schema, and an entire app state compresses to a seed.</li>
@@ -1030,7 +1030,7 @@ One sentence description here.
 
   <p>The file is the agent. The manifest is the identity. The seed is the card. The egg is the environment. The registry is the index. The store is the interface. The binder is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
 
-  <p>This is not a product. It is a protocol. Protocols outlast products. The internet outlasted every ISP that helped build it. Bitcoin outlasted every exchange that said it needed. The RAR protocol is designed to the same standard: define the rules clearly enough that the rules enforce themselves, and then step back.</p>
+  <p>This is not a product. It is a protocol. Protocols outlast products. The internet outlasted every ISP that helped build it. Bitcoin outlasted every exchange that said it needed. The RAPP protocol is designed to the same standard: define the rules clearly enough that the rules enforce themselves, and then step back.</p>
 
   <p>Fork the repository. Run your own instance. Federate when ready. Write agents. The file is the future.</p>
 </div>
@@ -1041,7 +1041,7 @@ One sentence description here.
   <h2>References</h2>
   <ol>
     <li>
-      <strong>RAR Repository</strong> — The canonical registry, source code, and agent collection.<br>
+      <strong>RAPP Repository</strong> — The canonical registry, source code, and agent collection.<br>
       <a href="https://github.com/kody-w/RAR" target="_blank">github.com/kody-w/RAR</a>
     </li>
     <li>
@@ -1061,7 +1061,7 @@ One sentence description here.
       <a href="https://kody-w.github.io/RAR/ode.html" target="_blank">kody-w.github.io/RAR/ode.html</a>
     </li>
     <li>
-      <strong>RAR FAQ</strong> — Every design decision explained: why single-file, why cards, why seeds, why no server.<br>
+      <strong>RAPP FAQ</strong> — Every design decision explained: why single-file, why cards, why seeds, why no server.<br>
       <a href="https://kody-w.github.io/RAR/faq.html" target="_blank">kody-w.github.io/RAR/faq.html</a>
     </li>
     <li>
@@ -1082,7 +1082,7 @@ One sentence description here.
     <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
   </div>
   <div class="footer-copy">
-    RAR Protocol &middot; Published April 2026 &middot; No rights reserved &mdash; the protocol belongs to everyone
+    RAPP Protocol &middot; Published April 2026 &middot; No rights reserved &mdash; the protocol belongs to everyone
   </div>
 </div>
 

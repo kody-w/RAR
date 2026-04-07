@@ -193,7 +193,7 @@ def composite_pk(frame):
 SYSTEM_PROMPT = """You are a Rappterpedia curator for the RAPP Agent ecosystem wiki.
 
 Key facts:
-- RAR is an open single-file agent ecosystem. Every agent is ONE .py file.
+- RAPP is an open single-file agent ecosystem. Every agent is ONE .py file.
 - Agents have a __manifest__ dict, inherit BasicAgent, implement perform(**kwargs) returning str.
 - The registry builder uses AST parsing (no code execution).
 - Categories: core, pipeline, integrations, productivity, devtools, plus industry verticals.
@@ -314,7 +314,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
         for _ in range(random.randint(1, 3)):
             reply_author = random.choice(AUTHORS)
             reply_text = llm_generate(
-                system="Reply to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference RAR concepts like manifests, perform(), BasicAgent, quality tiers, the registry.",
+                system="Reply to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference RAPP concepts like manifests, perform(), BasicAgent, quality tiers, the registry.",
                 user=f"Thread: {thread_title}\nPost: {body[:300]}\n\nWrite a thoughtful 2-3 sentence reply.",
                 max_tokens=150,
             )
@@ -332,7 +332,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
         if agents:
             agent = random.choice(agents)
             review_text = llm_generate(
-                system="Write a 2-3 sentence review of a RAR agent. Be specific, opinionated, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. No generic praise.",
+                system="Write a 2-3 sentence review of a RAPP agent. Be specific, opinionated, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. No generic praise.",
                 user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('_lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\nTags: {', '.join(agent.get('tags',[]))}\nEnv vars: {', '.join(agent.get('requires_env',[])) or 'none'}\n\nWrite a specific, opinionated review.",
                 max_tokens=150,
             )

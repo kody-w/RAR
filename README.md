@@ -4,7 +4,7 @@
 
 133 agents. 7 publishers. 19 categories. 1,117 tests. Every card has a seed.
 
-**[Open the Agent Store](https://kody-w.github.io/RAR/)** | **[Binder](https://kody-w.github.io/RAR/binder.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Release Notes](https://kody-w.github.io/RAR/releases.html)**
+**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[Binder](https://kody-w.github.io/RAR/binder.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
 ---
 
@@ -29,7 +29,7 @@ That's it. The SDK validates, registers your binder, and creates the submission.
 
 ## What is this?
 
-RAR is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
+RAPP is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
 
 - **Every agent is one `.py` file** — the file IS the package, the manifest, and the documentation
 - **Every card has a seed** — a 64-bit number that reconstructs the full card offline, anywhere
@@ -69,7 +69,7 @@ Your personal card collection at **[binder.html](https://kody-w.github.io/RAR/bi
 | `new @pub/slug` | Scaffold agent from template |
 | `validate path.py` | Validate manifest |
 | `test path.py` | Run contract tests |
-| `submit path.py` | Submit to RAR (auto-registers binder) |
+| `submit path.py` | Submit to RAPP (auto-registers binder) |
 | `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
@@ -149,7 +149,7 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 
 ## Federation
 
-RAR is a GitHub template repo. Clone it → your own registry + binder + GitHub Pages.
+RAPP is a GitHub template repo. Clone it → your own registry + binder + GitHub Pages.
 
 ```bash
 python scripts/federate.py status    # check federation config

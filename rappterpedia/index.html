@@ -963,7 +963,7 @@ const PAGE_SIZE = 20;
 const SEED_ARTICLES = [
   {
     id: 'what-is-rar',
-    title: 'What is RAR?',
+    title: 'What is RAPP?',
     category: 'getting-started',
     tags: ['overview', 'registry', 'ecosystem'],
     author: 'Rappterpedia',
@@ -971,9 +971,9 @@ const SEED_ARTICLES = [
     updated: '2025-01-15T00:00:00Z',
     content: `## Overview
 
-RAR (RAPP Agent Registry) is the open package registry for the CommunityRAPP agent ecosystem. It stores single-file Python agents under publisher namespaces and auto-generates a machine-readable registry index.
+RAPP (the RAPP Agent Registry) is the open package registry for the CommunityRAPP agent ecosystem. It stores single-file Python agents under publisher namespaces and auto-generates a machine-readable registry index.
 
-Unlike a traditional package manager, RAR ships with a complete web-based agent store — no install, no build step, just open \`index.html\`.
+Unlike a traditional package manager, RAPP ships with a complete web-based agent store — no install, no build step, just open \`index.html\`.
 
 ## Key Principles
 
@@ -999,7 +999,7 @@ Unlike a traditional package manager, RAR ships with a complete web-based agent 
     updated: '2025-01-15T00:00:00Z',
     content: `## The Single-File Principle
 
-Every agent in RAR is one \`.py\` file. No separate manifest, no README, no subdirectory. This is codified in the CONSTITUTION.md, Article II.
+Every agent in RAPP is one \`.py\` file. No separate manifest, no README, no subdirectory. This is codified in the CONSTITUTION.md, Article II.
 
 The file contains four parts:
 
@@ -1075,7 +1075,7 @@ class MyAgent(BasicAgent):
     updated: '2025-01-16T00:00:00Z',
     content: `## The Registry Builder
 
-\`build_registry.py\` is the only build step in RAR. It:
+\`build_registry.py\` is the only build step in RAPP. It:
 
 1. Walks all \`.py\` and \`.py.card\` files under \`agents/\`
 2. Uses Python's \`ast\` module to extract the \`__manifest__\` dict (no imports, no code execution)
@@ -1177,7 +1177,7 @@ Your namespace is \`@yourgithubusername\`. It's yours forever.
 ## How to Publish
 
 ### Via Pull Request
-1. Fork the RAR repo
+1. Fork the RAPP repo
 2. Create \`agents/@yourname/my-agent.py\`
 3. Include \`__manifest__\` + BasicAgent subclass + \`perform()\`
 4. Run \`python build_registry.py\` (must pass)
@@ -1209,7 +1209,7 @@ Your namespace is \`@yourgithubusername\`. It's yours forever.
     updated: '2025-01-18T00:00:00Z',
     content: `## What is Federation?
 
-RAR is a GitHub template repository. You can clone it to run your own independent agent store. Your instance can:
+RAPP is a GitHub template repository. You can clone it to run your own independent agent store. Your instance can:
 
 - Host agents under your own namespaces
 - Submit agents upstream to the main store
@@ -1235,7 +1235,7 @@ Federation is controlled via \`rar.config.json\`:
 
 ## Setting Up a Federated Instance
 
-1. Use RAR as a GitHub template → Create your repo
+1. Use RAPP as a GitHub template → Create your repo
 2. The \`template_setup.yml\` workflow runs automatically
 3. Edit \`rar.config.json\` with your org/repo details
 4. Set \`allow_upstream_sync\` to \`true\` if you want to pull from main
@@ -1255,7 +1255,7 @@ Federation rules are defined in CONSTITUTION.md Article XIV. Each instance is se
     updated: '2025-01-19T00:00:00Z',
     content: `## Overview
 
-Every agent in RAR has a collectible trading card, inspired by Magic: The Gathering. The card system was created by Howard Hoy (\`@borg\` namespace) via the CardSmith agent.
+Every agent in RAPP has a collectible trading card, inspired by Magic: The Gathering. The card system was created by Howard Hoy (\`@borg\` namespace) via the CardSmith agent.
 
 ## Card Types
 
@@ -1324,7 +1324,7 @@ The workbench validates against the same rules as \`build_registry.py\`:
     updated: '2025-01-21T00:00:00Z',
     content: `## How It Works
 
-RAR uses GitHub Issues as a lightweight API. The Agent Store UI creates Issues with structured JSON payloads, and the \`process-issues.yml\` workflow processes them automatically.
+RAPP uses GitHub Issues as a lightweight API. The Agent Store UI creates Issues with structured JSON payloads, and the \`process-issues.yml\` workflow processes them automatically.
 
 ## Supported Actions
 
@@ -1456,7 +1456,7 @@ const SEED_THREADS = [
     updated: '2025-01-25T00:00:00Z',
     votes: 3,
     pinned: false,
-    content: 'We want to run our own RAR instance internally but also pull public agents from the main store. A few questions:\n\n1. Can we have private agents that don\'t sync upstream?\n2. Is there a way to selectively pull only certain categories?\n3. How do we handle conflicts if we have an agent with the same name as an upstream one?\n\nWe\'re using the GitHub template approach mentioned in the wiki.',
+    content: 'We want to run our own RAPP instance internally but also pull public agents from the main store. A few questions:\n\n1. Can we have private agents that don\'t sync upstream?\n2. Is there a way to selectively pull only certain categories?\n3. How do we handle conflicts if we have an agent with the same name as an upstream one?\n\nWe\'re using the GitHub template approach mentioned in the wiki.',
     replies: [
       { id: 'r7', author: 'Rappterpedia', created: '2025-01-26T00:00:00Z', content: 'Great questions!\n\n1. Yes — set allow_upstream_sync to false in rar.config.json. Your agents stay local.\n2. Selective sync isn\'t built in yet, but you can use the federate.py script to filter by category.\n3. Namespaces prevent conflicts — your @company/ namespace won\'t collide with @kody/ etc.\n\nSee the "Federation: Running Your Own Store" wiki article for the full setup guide.' }
     ]

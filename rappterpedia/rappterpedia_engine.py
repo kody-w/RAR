@@ -109,14 +109,14 @@ ARTICLE_RULES: dict[str, dict] = {
             {
                 "heading": "Overview",
                 "templates": [
-                    "**{agent_display}** (`{agent_name}`) is a {category} agent in the RAR registry. {description}\n\nPublished by `{publisher}`, it's currently at version {version} with a quality tier of **{quality_tier}**.",
-                    "The `{agent_name}` agent handles {description_lower}. It ships as a single `.py` file following the RAR single-file principle — everything you need is in one place.",
+                    "**{agent_display}** (`{agent_name}`) is a {category} agent in the RAPP registry. {description}\n\nPublished by `{publisher}`, it's currently at version {version} with a quality tier of **{quality_tier}**.",
+                    "The `{agent_name}` agent handles {description_lower}. It ships as a single `.py` file following the RAPP single-file principle — everything you need is in one place.",
                 ],
             },
             {
                 "heading": "Installation",
                 "templates": [
-                    "### From the Agent Store\n\nBrowse to [{agent_display}](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\nAsk the RAR Remote Agent:\n> *\"Install {agent_name}\"*",
+                    "### From the Agent Store\n\nBrowse to [{agent_display}](../index.html), click the agent card, and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\nAsk the RAPP Remote Agent:\n> *\"Install {agent_name}\"*",
                 ],
             },
             {
@@ -130,7 +130,7 @@ ARTICLE_RULES: dict[str, dict] = {
                 "heading": "How It Works",
                 "templates": [
                     "{agent_display} inherits from `BasicAgent` and implements the standard `perform(**kwargs)` interface. It accepts keyword arguments, processes them, and returns a string result.\n\nThe agent lives in `agents/{agent_path}` and weighs in at {size_kb} KB ({lines} lines). Tags: {tag_list}.",
-                    "Like all RAR agents, {agent_display} follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
+                    "Like all RAPP agents, {agent_display} follows the perform-and-return pattern. Call `perform()` with your parameters and get a string result back. No side effects on the registry, no state mutations outside the agent's scope.",
                 ],
             },
         ],
@@ -152,21 +152,21 @@ ARTICLE_RULES: dict[str, dict] = {
                 "heading": "What You'll Learn",
                 "templates": [
                     "This guide walks you through **{topic_lower}**. By the end, you'll understand the key concepts and be ready to apply them in your own agent development workflow.",
-                    "Whether you're brand new to RAR or an experienced agent builder, this guide covers {topic_lower} from the ground up. No prerequisites — just curiosity.",
+                    "Whether you're brand new to RAPP or an experienced agent builder, this guide covers {topic_lower} from the ground up. No prerequisites — just curiosity.",
                 ],
             },
             {
                 "heading": "Prerequisites",
                 "templates": [
-                    "- Python 3.11+ installed\n- A text editor (VS Code, Cursor, or even Notepad)\n- The RAR repo cloned or forked\n- About 15 minutes of your time",
+                    "- Python 3.11+ installed\n- A text editor (VS Code, Cursor, or even Notepad)\n- The RAPP repo cloned or forked\n- About 15 minutes of your time",
                     "- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
                 ],
             },
             {
                 "heading": "Steps",
                 "templates": [
-                    "### 1. Set Up Your Environment\n\nClone the RAR repository and make sure you can run `python build_registry.py` without errors. This confirms your Python version and project structure are correct.\n\n### 2. Understand the Pattern\n\nEvery agent in RAR follows the same structure: a `__manifest__` dict at module level, a class inheriting from `BasicAgent`, and a `perform(**kwargs)` method that returns a string.\n\n### 3. Apply It\n\nFor {topic_lower}, the key is to follow existing patterns. Look at agents in the `agents/` directory for reference implementations. The best way to learn is by reading working code.\n\n### 4. Validate\n\nRun `python build_registry.py` to check your manifest, then `pytest tests/test_agent_contract.py` to run the full contract test suite.",
-                    "### 1. Start Simple\n\nDon't try to build everything at once. Start with the minimal working version and iterate.\n\n### 2. Follow the Conventions\n\nRAR has clear conventions for {topic_lower} — file naming, manifest fields, class structure. Following them means the tooling works for you automatically.\n\n### 3. Test Locally\n\n```bash\npython build_registry.py\npytest tests/test_agent_contract.py -k \"your-agent\"\n```\n\n### 4. Ship It\n\nOnce tests pass, submit via PR or the Agent Store workbench.",
+                    "### 1. Set Up Your Environment\n\nClone the RAPP repository and make sure you can run `python build_registry.py` without errors. This confirms your Python version and project structure are correct.\n\n### 2. Understand the Pattern\n\nEvery agent in RAPP follows the same structure: a `__manifest__` dict at module level, a class inheriting from `BasicAgent`, and a `perform(**kwargs)` method that returns a string.\n\n### 3. Apply It\n\nFor {topic_lower}, the key is to follow existing patterns. Look at agents in the `agents/` directory for reference implementations. The best way to learn is by reading working code.\n\n### 4. Validate\n\nRun `python build_registry.py` to check your manifest, then `pytest tests/test_agent_contract.py` to run the full contract test suite.",
+                    "### 1. Start Simple\n\nDon't try to build everything at once. Start with the minimal working version and iterate.\n\n### 2. Follow the Conventions\n\nRAPP has clear conventions for {topic_lower} — file naming, manifest fields, class structure. Following them means the tooling works for you automatically.\n\n### 3. Test Locally\n\n```bash\npython build_registry.py\npytest tests/test_agent_contract.py -k \"your-agent\"\n```\n\n### 4. Ship It\n\nOnce tests pass, submit via PR or the Agent Store workbench.",
                 ],
             },
             {
@@ -182,11 +182,11 @@ ARTICLE_RULES: dict[str, dict] = {
             "Testing Agents Locally Before Publishing",
             "Using the Agent Workbench",
             "Understanding Agent Categories",
-            "Publishing to the RAR Registry",
+            "Publishing to the RAPP Registry",
             "Setting Up Environment Variables for Agents",
-            "Forking RAR for Your Organization",
+            "Forking RAPP for Your Organization",
             "Reading and Understanding registry.json",
-            "Using the RAR Remote Agent from Chat",
+            "Using the RAPP Remote Agent from Chat",
             "Agent Versioning with Semver",
             "Debugging Common Manifest Errors",
             "Building Agents That Handle Missing Config Gracefully",
@@ -206,29 +206,29 @@ ARTICLE_RULES: dict[str, dict] = {
         "tags": ["architecture", "internals", "technical"],
         "titles": [
             "Architecture: {arch_topic}",
-            "How {arch_topic} Works in RAR",
-            "Inside RAR: {arch_topic}",
+            "How {arch_topic} Works in RAPP",
+            "Inside RAPP: {arch_topic}",
             "Technical Deep Dive: {arch_topic}",
         ],
         "sections": [
             {
                 "heading": "Overview",
                 "templates": [
-                    "This article explains **{arch_topic_lower}** — one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
-                    "RAR's approach to {arch_topic_lower} is intentionally simple but surprisingly powerful. Here's how it works and why it was designed this way.",
+                    "This article explains **{arch_topic_lower}** — one of the core architectural decisions in the RAPP ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+                    "RAPP's approach to {arch_topic_lower} is intentionally simple but surprisingly powerful. Here's how it works and why it was designed this way.",
                 ],
             },
             {
                 "heading": "How It Works",
                 "templates": [
                     "At its core, {arch_topic_lower} follows a simple pipeline:\n\n1. **Input** — The process begins when a trigger event occurs (a push, a build, or a user action)\n2. **Processing** — The system reads the relevant data, applies its rules, and produces output\n3. **Output** — Results are written to the appropriate state files or rendered in the UI\n\nThe entire flow is deterministic and auditable. No magic, no hidden state.",
-                    "The implementation lives in the RAR repository as plain Python and JSON — no external services, no databases, no build tools beyond what ships with Python 3.11+. This is intentional: every part of the system should be readable, forkable, and runnable offline.",
+                    "The implementation lives in the RAPP repository as plain Python and JSON — no external services, no databases, no build tools beyond what ships with Python 3.11+. This is intentional: every part of the system should be readable, forkable, and runnable offline.",
                 ],
             },
             {
                 "heading": "Key Files",
                 "templates": [
-                    "The relevant source files for {arch_topic_lower}:\n\n| File | Role |\n|------|------|\n| `build_registry.py` | AST-based manifest extractor |\n| `registry.json` | Auto-generated agent index |\n| `index.html` | Zero-dependency web store |\n| `rar.config.json` | Federation and feature flags |\n\nAll paths are relative to the RAR repository root.",
+                    "The relevant source files for {arch_topic_lower}:\n\n| File | Role |\n|------|------|\n| `build_registry.py` | AST-based manifest extractor |\n| `registry.json` | Auto-generated agent index |\n| `index.html` | Zero-dependency web store |\n| `rar.config.json` | Federation and feature flags |\n\nAll paths are relative to the RAPP repository root.",
                 ],
             },
             {
@@ -259,17 +259,17 @@ ARTICLE_RULES: dict[str, dict] = {
         "weight": 3,
         "tags": ["integration", "external", "API"],
         "titles": [
-            "Integrating RAR Agents with {platform}",
-            "How to Connect {platform} Using RAR Agents",
-            "{platform} + RAR: A Practical Guide",
-            "Building a {platform} Agent for RAR",
+            "Integrating RAPP Agents with {platform}",
+            "How to Connect {platform} Using RAPP Agents",
+            "{platform} + RAPP: A Practical Guide",
+            "Building a {platform} Agent for RAPP",
         ],
         "sections": [
             {
                 "heading": "Overview",
                 "templates": [
-                    "This guide covers how to build or use RAR agents that integrate with **{platform}**. Whether you're using an existing integration agent or building your own, this article has you covered.",
-                    "Connecting {platform} to the RAPP ecosystem is straightforward thanks to RAR's single-file agent model. Here's how to get started.",
+                    "This guide covers how to build or use RAPP agents that integrate with **{platform}**. Whether you're using an existing integration agent or building your own, this article has you covered.",
+                    "Connecting {platform} to the RAPP ecosystem is straightforward thanks to RAPP's single-file agent model. Here's how to get started.",
                 ],
             },
             {
@@ -309,7 +309,7 @@ ARTICLE_RULES: dict[str, dict] = {
             {
                 "heading": "The Pattern",
                 "templates": [
-                    "This article covers a proven pattern for **{practice_lower}** in the RAR ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.",
+                    "This article covers a proven pattern for **{practice_lower}** in the RAPP ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.",
                     "After reviewing hundreds of agent submissions, this pattern has emerged as a best practice for {practice_lower}. Here's what works and what doesn't.",
                 ],
             },
@@ -317,7 +317,7 @@ ARTICLE_RULES: dict[str, dict] = {
                 "heading": "Why It Matters",
                 "templates": [
                     "Agents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
-                    "This pattern exists because RAR agents run in diverse environments — different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
+                    "This pattern exists because RAPP agents run in diverse environments — different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
                 ],
             },
         ],
@@ -399,7 +399,7 @@ ARTICLE_RULES: dict[str, dict] = {
                 "heading": "About",
                 "templates": [
                     "The **@{publisher_slug}** namespace is home to {agent_count} agents focused on {focus_area}. This article tours the highlights and explains how the collection fits together.",
-                    "Let's explore what **@{publisher_slug}** has published in the RAR registry — {agent_count} agents spanning {category_spread}.",
+                    "Let's explore what **@{publisher_slug}** has published in the RAPP registry — {agent_count} agents spanning {category_spread}.",
                 ],
             },
             {
@@ -425,28 +425,28 @@ ARTICLE_RULES: dict[str, dict] = {
         "tags": ["federation", "self-hosting", "governance"],
         "titles": [
             "Federation Guide: {fed_topic}",
-            "Running Your Own RAR: {fed_topic}",
-            "Self-Hosting RAR — {fed_topic}",
+            "Running Your Own RAPP: {fed_topic}",
+            "Self-Hosting RAPP — {fed_topic}",
         ],
         "sections": [
             {
                 "heading": "Overview",
                 "templates": [
-                    "RAR's federation model lets you run your own agent store while optionally syncing with the main registry. This article covers **{fed_topic_lower}**.",
-                    "One of RAR's unique features is federation — running independent instances that can share agents upstream. Here's how **{fed_topic_lower}** works.",
+                    "RAPP's federation model lets you run your own agent store while optionally syncing with the main registry. This article covers **{fed_topic_lower}**.",
+                    "One of RAPP's unique features is federation — running independent instances that can share agents upstream. Here's how **{fed_topic_lower}** works.",
                 ],
             },
             {
                 "heading": "Step by Step",
                 "templates": [
-                    "To implement {fed_topic_lower}:\n\n1. **Start from the template** — Use RAR as a GitHub template to create your own repository\n2. **Configure `rar.config.json`** — Set your `owner`, `repo`, and federation flags\n3. **Set up CI** — The `build-registry.yml` workflow runs automatically on pushes to `agents/**`\n4. **Add your agents** — Drop `.py` files into `agents/@yournamespace/`\n5. **Build** — Run `python build_registry.py` to generate your `registry.json`\n\nYour instance is now self-governing. See CONSTITUTION.md Article XIV for governance details.",
-                    "Here's the practical path for {fed_topic_lower}:\n\n1. Fork or template the RAR repository\n2. Edit `rar.config.json` with your organization details\n3. Set `allow_upstream_sync` based on whether you want to pull from the main store\n4. Run `python build_registry.py` to validate your setup\n5. Open `index.html` to verify your store renders correctly\n\nThe entire process takes about 15 minutes. No server infrastructure required — it's all GitHub Actions and static files.",
+                    "To implement {fed_topic_lower}:\n\n1. **Start from the template** — Use RAPP as a GitHub template to create your own repository\n2. **Configure `rar.config.json`** — Set your `owner`, `repo`, and federation flags\n3. **Set up CI** — The `build-registry.yml` workflow runs automatically on pushes to `agents/**`\n4. **Add your agents** — Drop `.py` files into `agents/@yournamespace/`\n5. **Build** — Run `python build_registry.py` to generate your `registry.json`\n\nYour instance is now self-governing. See CONSTITUTION.md Article XIV for governance details.",
+                    "Here's the practical path for {fed_topic_lower}:\n\n1. Fork or template the RAPP repository\n2. Edit `rar.config.json` with your organization details\n3. Set `allow_upstream_sync` based on whether you want to pull from the main store\n4. Run `python build_registry.py` to validate your setup\n5. Open `index.html` to verify your store renders correctly\n\nThe entire process takes about 15 minutes. No server infrastructure required — it's all GitHub Actions and static files.",
                 ],
             },
             {
                 "heading": "Configuration",
                 "templates": [
-                    "Key settings in `rar.config.json` for {fed_topic_lower}:\n\n```json\n{\n  \"role\": \"fork\",\n  \"owner\": \"your-org\",\n  \"repo\": \"your-rar\",\n  \"federation\": {\n    \"accept_submissions\": true,\n    \"allow_upstream_sync\": false\n  }\n}\n```\n\n- `role`: Set to `\"fork\"` for federated instances (main store uses `\"main\"`)\n- `accept_submissions`: Whether your instance accepts agent submissions via GitHub Issues\n- `allow_upstream_sync`: Whether to pull public agents from the main RAR store",
+                    "Key settings in `rar.config.json` for {fed_topic_lower}:\n\n```json\n{\n  \"role\": \"fork\",\n  \"owner\": \"your-org\",\n  \"repo\": \"your-rar\",\n  \"federation\": {\n    \"accept_submissions\": true,\n    \"allow_upstream_sync\": false\n  }\n}\n```\n\n- `role`: Set to `\"fork\"` for federated instances (main store uses `\"main\"`)\n- `accept_submissions`: Whether your instance accepts agent submissions via GitHub Issues\n- `allow_upstream_sync`: Whether to pull public agents from the main RAPP store",
                 ],
             },
         ],
@@ -466,17 +466,17 @@ ARTICLE_RULES: dict[str, dict] = {
         "weight": 5,
         "tags": ["vertical", "industry", "guide", "enterprise"],
         "titles": [
-            "Building {vertical} Agents with RAR",
+            "Building {vertical} Agents with RAPP",
             "{vertical} Agents: A Practical Guide",
-            "RAR for {vertical}: Getting Started",
+            "RAPP for {vertical}: Getting Started",
             "The {vertical} Agent Collection — What's Available and How to Use It",
         ],
         "sections": [
             {
                 "heading": "Overview",
                 "templates": [
-                    "The RAR registry includes **{agent_count_in_vertical} agents** purpose-built for the **{vertical_lower}** vertical. This guide walks through what's available, how to get started, and common patterns for building in this space.",
-                    "Whether you're evaluating RAR for a {vertical_lower} use case or building your own agents in this vertical, this guide covers the landscape — from existing agents to patterns that work.",
+                    "The RAPP registry includes **{agent_count_in_vertical} agents** purpose-built for the **{vertical_lower}** vertical. This guide walks through what's available, how to get started, and common patterns for building in this space.",
+                    "Whether you're evaluating RAPP for a {vertical_lower} use case or building your own agents in this vertical, this guide covers the landscape — from existing agents to patterns that work.",
                 ],
             },
             {
@@ -534,7 +534,7 @@ ARTICLE_RULES: dict[str, dict] = {
             {
                 "heading": "Overview",
                 "templates": [
-                    "The RAR registry has **{agent_count_in_cat} agents** in the **{cat_display}** category. This article compares them to help you choose the right one for your use case.",
+                    "The RAPP registry has **{agent_count_in_cat} agents** in the **{cat_display}** category. This article compares them to help you choose the right one for your use case.",
                     "With {agent_count_in_cat} agents in {cat_display}, choosing the right one can be overwhelming. Here's a structured comparison to help you decide.",
                 ],
             },
@@ -619,7 +619,7 @@ THREAD_RULES: dict[str, dict] = {
         ],
         "bodies": [
             "I'm trying to {action_lower} but I'm stuck. I've read the wiki but can't find a clear answer. Has anyone done this before?",
-            "Probably a basic question but — how do I {action_lower}? I'm new to RAR and still learning the ropes.",
+            "Probably a basic question but — how do I {action_lower}? I'm new to RAPP and still learning the ropes.",
             "Searched the wiki and found some related articles but nothing that directly answers this. How do you {action_lower} in practice?",
         ],
         "action_pool": [
@@ -634,7 +634,7 @@ THREAD_RULES: dict[str, dict] = {
             "create agents in a team namespace",
             "run pytest for just my agent",
             "fetch agents from the registry programmatically",
-            "set up a federated RAR instance",
+            "set up a federated RAPP instance",
             "integrate my agent with Dynamics 365",
             "make my agent return structured data",
             "add my agent to the Holo card system",
@@ -668,7 +668,7 @@ THREAD_RULES: dict[str, dict] = {
             "agent testing needs better tooling",
             "the workbench should support live preview",
             "community quality tier is too easy to get",
-            "RAR needs a changelog feed",
+            "RAPP needs a changelog feed",
             "the best way to learn is reading other people's agents",
             "we should have an agent of the week",
             "documentation is the hardest part of agent building",
@@ -705,7 +705,7 @@ THREAD_RULES: dict[str, dict] = {
             "Proposal: {idea}",
         ],
         "bodies": [
-            "I think {idea_lower} would make the RAR ecosystem significantly better. Here's my thinking:\n\nThe current approach works but {rationale}. This would help both new and experienced agent builders.",
+            "I think {idea_lower} would make the RAPP ecosystem significantly better. Here's my thinking:\n\nThe current approach works but {rationale}. This would help both new and experienced agent builders.",
             "Proposing {idea_lower} for the community to discuss. Not sure if this is already planned but I think it would {benefit}.",
         ],
         "idea_pool": [
@@ -791,7 +791,7 @@ REPLY_RULES: dict[str, dict] = {
         "templates": [
             "I built something similar. The trick is to keep your `perform()` method focused on one thing and return clean strings. Agents that try to do too much end up fragile.",
             "From my experience publishing a few agents: the single-file constraint actually makes things simpler, not harder. You stop overthinking architecture.",
-            "I've been using RAR for a while now and {experience_insight}. Happy to help if you have questions.",
+            "I've been using RAPP for a while now and {experience_insight}. Happy to help if you have questions.",
             "Similar situation here. What worked for me was {approach}. Your mileage may vary but it's worth trying.",
         ],
     },
@@ -902,7 +902,7 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "If you're building in {cat}, {name} is worth adding to your deck. Pairs well with other {cat} agents.",
                 "{name} fills a gap in the registry. The {cat} category needed exactly this.",
                 "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
-                "Would recommend {name} to anyone getting started with {cat}. Shows how a RAR agent should be built.",
+                "Would recommend {name} to anyone getting started with {cat}. Shows how a RAPP agent should be built.",
             ],
             "mid": [
                 "{name} has potential in the {cat} space. Not a must-have yet but trending in the right direction.",
@@ -1051,7 +1051,7 @@ def fill_template(template: str, ctx: dict) -> str:
 
 
 def load_registry() -> list[dict]:
-    """Load the RAR registry for real agent data."""
+    """Load the RAPP registry for real agent data."""
     reg_path = RAR_DIR / "registry.json"
     if not reg_path.exists():
         return []
@@ -1093,7 +1093,7 @@ def get_agent_context(agent: dict) -> dict:
         "class_name": agent.get("display_name", name).replace(" ", "").replace("-", ""),
         "agent_name": name,
         "agent_display": agent.get("display_name", name),
-        "description": agent.get("description", "An agent in the RAR registry."),
+        "description": agent.get("description", "An agent in the RAPP registry."),
         "description_lower": agent.get("description", "").lower().rstrip("."),
         "short_desc": agent.get("description", "")[:60],
         "publisher": f"@{publisher}",
@@ -1208,7 +1208,7 @@ def generate_category_pages(state: dict, agents: list[dict]) -> list[str]:
             f"The {cat_display} category contains agents that "
         )
         if cat in ("core", "devtools"):
-            content += "provide fundamental capabilities and development tools for the RAR ecosystem."
+            content += "provide fundamental capabilities and development tools for the RAPP ecosystem."
         elif cat in ("pipeline",):
             content += "build, generate, or deploy other agents."
         elif cat in ("integrations",):
@@ -1292,7 +1292,7 @@ def generate_publisher_pages(state: dict, agents: list[dict]) -> list[str]:
 SYSTEM_PROMPT = """You are a Rappterpedia curator — a knowledgeable technical writer for the RAPP Agent ecosystem wiki.
 
 Key facts about the ecosystem:
-- RAR (RAPP Agent Registry) is an open single-file agent ecosystem
+- RAPP (RAPP Agent Registry) is an open single-file agent ecosystem
 - Every agent is ONE .py file with a __manifest__ dict, a BasicAgent subclass, and a perform() method
 - The registry builder uses AST parsing (no code execution) to extract manifests
 - Categories: core, pipeline, integrations, productivity, devtools, plus industry verticals
@@ -1327,7 +1327,7 @@ def llm_review(agent_name: str, agent_display: str, description: str,
     """Try to generate a review using the LLM. Returns None if unavailable."""
     try:
         return llm_generate(
-            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAR agent. Be specific, opinionated, and reference the agent's actual characteristics. No generic praise.",
+            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAPP agent. Be specific, opinionated, and reference the agent's actual characteristics. No generic praise.",
             user=f"Review the agent \"{agent_display}\" ({agent_name}).\nCategory: {category}\nLines: {lines}\nTier: {tier}\nDescription: {description}\nReview angle: {angle}\n\nWrite a concise, specific review.",
             max_tokens=150,
             temperature=0.9,
@@ -1340,7 +1340,7 @@ def llm_thread(title: str, channel: str, context: str = "") -> str | None:
     """Try to generate a forum thread body using the LLM."""
     try:
         return llm_generate(
-            system="You are a community member posting in the Rappterpedia forum about the RAPP Agent ecosystem. Write authentic, conversational posts. Be specific about RAR agents, manifests, the single-file principle, etc.",
+            system="You are a community member posting in the Rappterpedia forum about the RAPP Agent ecosystem. Write authentic, conversational posts. Be specific about RAPP agents, manifests, the single-file principle, etc.",
             user=f"Write a forum post titled \"{title}\" in the {channel} channel.\n\n{context}\n\nWrite 2-4 paragraphs. Be genuine and specific.",
             max_tokens=400,
             temperature=0.9,
@@ -1353,7 +1353,7 @@ def llm_reply(thread_title: str, thread_body: str) -> str | None:
     """Try to generate a forum reply using the LLM."""
     try:
         return llm_generate(
-            system="You are a community member replying to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference specific RAR concepts like manifests, BasicAgent, perform(), single-file principle, etc.",
+            system="You are a community member replying to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference specific RAPP concepts like manifests, BasicAgent, perform(), single-file principle, etc.",
             user=f"Reply to this forum thread:\n\nTitle: {thread_title}\nPost: {thread_body[:300]}\n\nWrite a helpful 1-3 sentence reply.",
             max_tokens=150,
             temperature=0.9,

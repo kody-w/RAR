@@ -128,12 +128,12 @@ Prior experimentation: <code>localFirstTools</code> repository (timestamped expe
   <li><strong>No-Emoji Visual System.</strong> 87 emoji usages replaced with hand-crafted SVG glyphs. <code>UI_GLYPHS</code> library (20 glyphs) + <code>svgIcon()</code> renderer. Unified visual identity across cards, UI, pack art, and badges.</li>
   <li><strong>The .py.card Format (v2).</strong> Agent code + <code>__manifest__</code> + <code>__card__</code> in one file. Compatible with CardSmith <code>_CARD_DATABASE</code> format. Shedding (strip card shell to bare .py) and re-shelling (add it back from registry). Registry builder updated to scan and prefer <code>.py.card</code> files.</li>
   <li><strong>The .py.card.DeckName Extension.</strong> File extension chain encodes full packaging hierarchy. Deck membership stored in the filename. Import/export decks by copying files. Runtime hotloading: switch active agent deck like switching AI models. No restart.</li>
-  <li><strong>The RAR Constitution.</strong> 17 Articles governing the single-file principle, namespace ownership, manifest schema, quality tiers, categories, versioning, the registry, the agent store, the complete agent card, security, contributing, governance, compatibility, federation, local-first binders, and amendments.</li>
+  <li><strong>The RAPP Constitution.</strong> 17 Articles governing the single-file principle, namespace ownership, manifest schema, quality tiers, categories, versioning, the registry, the agent store, the complete agent card, security, contributing, governance, compatibility, federation, local-first binders, and amendments.</li>
 </ul>
 
 <h2>The Inventions</h2>
 
-<p>These are the discrete innovations in the RAR ecosystem. Each one is documented in the codebase, the Constitution, and the git history.</p>
+<p>These are the discrete innovations in the RAPP ecosystem. Each one is documented in the codebase, the Constitution, and the git history.</p>
 
 <h3>1. Single-File Agent Packaging</h3>
 <p>An AI agent is one <code>.py</code> file. The manifest (<code>__manifest__</code>) is embedded in the file via a Python dict, extracted by AST parsing with zero code execution. The docstring is the documentation. The class is the agent. One HTTP GET to fetch. One file write to install. One context window to read.</p>
@@ -172,11 +172,11 @@ Prior experimentation: <code>localFirstTools</code> repository (timestamped expe
 <p><strong>Defined:</strong> April 4, 2026.</p>
 
 <h3>10. Federation Protocol</h3>
-<p>RAR instances cloned from the template operate as independent agent stores. Federation allows submitting agents upstream, syncing agent catalogs, and maintaining independent tier hierarchies. Issues-as-API pattern: submissions are GitHub Issues with JSON payloads, processed by CI.</p>
+<p>RAPP instances cloned from the template operate as independent agent stores. Federation allows submitting agents upstream, syncing agent catalogs, and maintaining independent tier hierarchies. Issues-as-API pattern: submissions are GitHub Issues with JSON payloads, processed by CI.</p>
 <p><strong>First committed:</strong> April 3, 2026 (Constitution).</p>
 
 <h3>11. Local-First Agent Binder</h3>
-<p>Any user can clone RAR and run their own local agent store. <code>build_registry.py</code> + <code>generate_holo_cards.py</code> + <code>open index.html</code>. That's it. Full browse, cards, decks, workbench, companion system. No server. No account. Optionally syncs with the main store.</p>
+<p>Any user can clone RAPP and run their own local agent store. <code>build_registry.py</code> + <code>generate_holo_cards.py</code> + <code>open index.html</code>. That's it. Full browse, cards, decks, workbench, companion system. No server. No account. Optionally syncs with the main store.</p>
 <p><strong>Defined:</strong> April 4, 2026 (Constitution Article XVI).</p>
 
 <h3>12. Unified SVG Glyph Art System</h3>
@@ -190,7 +190,7 @@ Prior experimentation: <code>localFirstTools</code> repository (timestamped expe
 <ol>
   <li><strong>localFirstTools</strong> &mdash; Timestamped experiments in local-first architecture, offline-capable web applications, and browser-based tooling. Predates this repository. Establishes the design principles: no server, no account, no upload.</li>
   <li><strong>CommunityRAPP (Brainstem)</strong> &mdash; The RAPP runtime that agents target. Established the <code>BasicAgent</code> base class, the <code>perform()</code> entry point, and the single-file agent concept.</li>
-  <li><strong>RAR (this repository)</strong> &mdash; The agent registry, store, card system, and ecosystem. Everything documented in this timeline.</li>
+  <li><strong>RAPP (this repository)</strong> &mdash; The agent registry, store, card system, and ecosystem. Everything documented in this timeline.</li>
 </ol>
 
 <p>Each step is timestamped in a public git repository. Commits are cryptographic. The chain is unbroken.</p>
@@ -222,4 +222,4 @@ Prior experimentation: <code>localFirstTools</code> repository (timestamped expe
 
 <hr>
 
-<p><em>This post is part of the RAR Engineering Blog &mdash; field notes from building a frontier digital ecosystem from the ground up. All claims are verifiable via the public git history at <a href="https://github.com/kody-w/RAR">github.com/kody-w/RAR</a>. Private implementation details, patent-specific claims, and business strategy are documented separately in private repositories and are not covered here.</em></p>
+<p><em>This post is part of the RAPP Engineering Blog &mdash; field notes from building a frontier digital ecosystem from the ground up. All claims are verifiable via the public git history at <a href="https://github.com/kody-w/RAR">github.com/kody-w/RAR</a>. Private implementation details, patent-specific claims, and business strategy are documented separately in private repositories and are not covered here.</em></p>

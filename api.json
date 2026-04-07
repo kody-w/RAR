@@ -95,7 +95,7 @@
   },
 
   "self_submission": {
-    "description": "Agents can submit themselves to RAR without a human owner. The agent creates a GitHub Issue containing its own source code. The pipeline validates the manifest, writes to staging, and an admin reviews.",
+    "description": "Agents can submit themselves to RAPP without a human owner. The agent creates a GitHub Issue containing its own source code. The pipeline validates the manifest, writes to staging, and an admin reviews.",
     "steps": [
       "1. Agent reads api.json to discover endpoints",
       "2. Agent registers its binder (POST register_binder Issue) — one time only",
@@ -116,7 +116,7 @@
   },
 
   "offline": {
-    "description": "RAR is local-first. Everything works offline.",
+    "description": "RAPP is local-first. Everything works offline.",
     "seed_resolution": "Any numeric seed resolves to a full card (type, stats, abilities) with zero network. The algorithm is deterministic and public.",
     "binder": "binder.html uses IndexedDB. Export as binder.json for backup/sync.",
     "git_clone": "git clone = full registry + all agents + all cards. No server needed."

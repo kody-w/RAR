@@ -1,10 +1,10 @@
 """
 RAR Remote Agent — The native client for the RAPP Agent Registry.
 
-Discover, search, install, vote, review, and submit agents from RAR.
+Discover, search, install, vote, review, and submit agents from RAPP.
 Reads the live registry and community state (votes/reviews) directly
 from GitHub. Write operations (vote, review, submit) create GitHub
-Issues that are processed by the RAR automation pipeline.
+Issues that are processed by the RAPP automation pipeline.
 
 Fully compatible with the RAPP brainstem runtime:
   - Uses the brainstem's implicit GITHUB_TOKEN (set during auth)
@@ -18,7 +18,7 @@ __manifest__ = {
     "name": "@kody/rar_remote_agent",
     "version": "1.2.0",
     "display_name": "RAR Remote Agent",
-    "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAR ecosystem. Runs autonomously under the brainstem.",
+    "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
     "tags": ["core", "registry", "package-manager", "install", "discovery", "voting", "community"],
     "category": "core",
@@ -49,7 +49,7 @@ except ImportError:
 
 class RARRemoteAgent(BasicAgent):
     """
-    RAR Remote Agent — browse, install, vote, review, and submit agents
+    RAPP Remote Agent — browse, install, vote, review, and submit agents
     from the RAPP Agent Registry.
 
     Brainstem integration:
@@ -78,10 +78,10 @@ class RARRemoteAgent(BasicAgent):
             "description": (
                 "The native client for the RAPP Agent Registry. "
                 "Discover, search, install, vote on, review, and submit "
-                "single-file agent.py files from the open RAR ecosystem. "
+                "single-file agent.py files from the open RAPP ecosystem. "
                 "All actions are authenticated via the brainstem's GitHub session. "
                 "Read actions work immediately; write actions (vote, review, submit) "
-                "create GitHub Issues processed by the RAR pipeline."
+                "create GitHub Issues processed by the RAPP pipeline."
             ),
             "parameters": {
                 "type": "object",
@@ -439,7 +439,7 @@ class RARRemoteAgent(BasicAgent):
         """Browse all agents with optional category/tier filters."""
         agents = self._agents()
         if not agents:
-            return "Error: Unable to fetch the RAR registry."
+            return "Error: Unable to fetch the RAPP registry."
 
         category = params.get("category")
         tier = params.get("tier")
@@ -490,7 +490,7 @@ class RARRemoteAgent(BasicAgent):
 
         agents = self._agents()
         if not agents:
-            return "Error: Unable to fetch the RAR registry."
+            return "Error: Unable to fetch the RAPP registry."
 
         results = []
         for a in agents:
@@ -558,7 +558,7 @@ class RARRemoteAgent(BasicAgent):
         out += f"Category:    {agent.get('category', 'Unknown')}\n"
         out += f"Quality:     {tier.upper()}"
         if tier == "verified":
-            out += " [RAR VERIFIED SEAL]"
+            out += " [RAPP VERIFIED SEAL]"
         elif tier == "experimental":
             out += " [EXPERIMENTAL - USE AT YOUR OWN RISK]"
         out += "\n"
@@ -591,14 +591,14 @@ class RARRemoteAgent(BasicAgent):
         """Show top agents by votes."""
         agents = self._agents()
         if not agents:
-            return "Error: Unable to fetch the RAR registry."
+            return "Error: Unable to fetch the RAPP registry."
 
         ranked = sorted(agents, key=lambda a: (
             -self._get_score(a["name"]),
             -self._get_rating(a["name"]),
         ))
 
-        out = "RAR Agent Leaderboard\n"
+        out = "RAPP Agent Leaderboard\n"
         out += "=" * 55 + "\n"
         out += f"{'#':>3}  {'Agent':<30} {'Tier':<10} {'Votes':>5}  {'Rating':>6}\n"
         out += "-" * 55 + "\n"
@@ -710,7 +710,7 @@ class RARRemoteAgent(BasicAgent):
         return (
             f"Vote ({direction}) recorded for {name}.\n"
             f"Issue: {result}\n"
-            f"The RAR pipeline will process this shortly."
+            f"The RAPP pipeline will process this shortly."
         )
 
     def _write_review(self, params):
@@ -755,7 +755,7 @@ class RARRemoteAgent(BasicAgent):
         return (
             f"Agent submitted for review.\n"
             f"Issue: {result}\n\n"
-            f"The RAR pipeline will:\n"
+            f"The RAPP pipeline will:\n"
             f"1. Validate the __manifest__\n"
             f"2. Run contract tests\n"
             f"3. Publish to the registry if valid\n\n"
@@ -763,7 +763,7 @@ class RARRemoteAgent(BasicAgent):
         )
 
     def _submit_upstream(self, params):
-        """Submit an agent to the upstream RAR registry (federation)."""
+        """Submit an agent to the upstream RAPP registry (federation)."""
         if not self._upstream:
             return "Error: No upstream configured. This is the main registry."
 
@@ -815,7 +815,7 @@ class RARRemoteAgent(BasicAgent):
                 return (
                     f"Submitted to upstream ({self._upstream}).\n"
                     f"Issue: {url}\n\n"
-                    f"The upstream RAR pipeline will validate and publish."
+                    f"The upstream RAPP pipeline will validate and publish."
                 )
         except urllib.error.HTTPError as e:
             body = e.read().decode()[:200] if e.fp else str(e)
@@ -825,7 +825,7 @@ class RARRemoteAgent(BasicAgent):
 
     def _federation_status(self, params):
         """Show federation configuration."""
-        out = f"RAR Federation Status\n{'=' * 40}\n\n"
+        out = f"RAPP Federation Status\n{'=' * 40}\n\n"
         out += f"Repo:     {self.REPO}\n"
         out += f"Instance: {self._is_instance}\n"
         if self._upstream:

@@ -1,4 +1,4 @@
-// RAR v1 Ship — Final Test Suite
+// RAPP v1 Ship — Final Test Suite
 // Run in browser console at localhost:8080
 // Tests: Feature 1 (Sharing), Feature 2 (Starter Pack), Feature 3 (Holo Effects),
 //        Feature 4 (Hologram Viewer), Regression
@@ -13,7 +13,7 @@
     else { fail++; console.error(`  FAIL: ${name} — ${detail || ''}`); }
   }
 
-  console.log('\n=== RAR v1 FINAL TEST SUITE ===\n');
+  console.log('\n=== RAPP v1 FINAL TEST SUITE ===\n');
 
   // ── Feature 1: Core Sharing ──
   console.log('--- Feature 1: Core Sharing ---');

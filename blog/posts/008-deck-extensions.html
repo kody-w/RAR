@@ -1,6 +1,6 @@
 <h2>The Extension Chain Is the Manifest</h2>
 
-<p>Most packaging systems need a separate manifest to describe their contents. npm has <code>package.json</code>. Docker has <code>Dockerfile</code>. Kubernetes has YAML files. RAR has... the file extension.</p>
+<p>Most packaging systems need a separate manifest to describe their contents. npm has <code>package.json</code>. Docker has <code>Dockerfile</code>. Kubernetes has YAML files. RAPP has... the file extension.</p>
 
 <pre><code>agent.py                         → bare agent
 agent.py.card                    → agent + card shell
@@ -12,7 +12,7 @@ agent.py.card.Genesis            → agent + card shell + deck membership</code>
 
 <p>Traditional packaging creates a separation between content and metadata. The content lives in one file, the metadata in another. This creates synchronization problems: what happens when the manifest says one thing and the file says another?</p>
 
-<p>RAR's answer: there is no separation. The file IS the manifest. The extension IS the deck membership. Everything travels together.</p>
+<p>RAPP's answer: there is no separation. The file IS the manifest. The extension IS the deck membership. Everything travels together.</p>
 
 <table>
   <tr><th>Layer</th><th>What It Adds</th><th>Reversible?</th></tr>
@@ -23,7 +23,7 @@ agent.py.card.Genesis            → agent + card shell + deck membership</code>
 
 <h3>Deck Import/Export</h3>
 
-<p>To share a deck: collect all files ending in <code>.py.card.DeckName</code> for that deck name. To import: drop them into any RAR binder. The deck name, card data, and agent code all travel together in a single file per agent. No zip files. No manifests. No configuration.</p>
+<p>To share a deck: collect all files ending in <code>.py.card.DeckName</code> for that deck name. To import: drop them into any RAPP binder. The deck name, card data, and agent code all travel together in a single file per agent. No zip files. No manifests. No configuration.</p>
 
 <pre><code># Export: find all Genesis deck cards
 ls agents/@borg/*.py.card.Genesis

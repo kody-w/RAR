@@ -283,7 +283,7 @@ There are three ways to install an agent:
 **Method 3: Ask the AI**
 If you're using CommunityRAPP with chat:
 - Say: *"Install the dynamics-crud agent"*
-- The RAR Remote Agent handles the rest
+- The RAPP Remote Agent handles the rest
 
 ### Understanding What You've Installed
 
@@ -380,7 +380,7 @@ Use this for:
 
 ## Chapter 7: Using Agents from Chat
 
-### The RAR Remote Agent
+### The RAPP Remote Agent
 
 If you're using the CommunityRAPP chat interface, you have a built-in agent manager. The `@kody/rar_remote_agent` can:
 
@@ -619,7 +619,7 @@ Click "Card Preview" to see your agent as a Business or Holo card. This is what 
 ### Step 6: Download or Submit
 
 - **Download**: Saves the `.py` file to your computer. Use this to test locally.
-- **Submit**: Publishes to the RAR registry via GitHub. Your agent goes live in the store.
+- **Submit**: Publishes to the RAPP registry via GitHub. Your agent goes live in the store.
 
 ### What You Just Did
 
@@ -691,7 +691,7 @@ You have two paths:
 4. Your agent appears in the registry
 
 **Path 2: Pull Request (for more control)**
-1. Fork the RAR repository on GitHub
+1. Fork the RAPP repository on GitHub
 2. Add your file to `agents/@yourname/`
 3. Open a pull request
 4. The CI system validates your agent
@@ -820,7 +820,7 @@ Cards aren't just fun. They're a communication tool:
 
 ### What Is Federation?
 
-RAR is a template repository. You can create your own copy and run it independently. This is called **federation**.
+RAPP is a template repository. You can create your own copy and run it independently. This is called **federation**.
 
 Your private store can:
 
@@ -839,7 +839,7 @@ Your private store can:
 
 ### Setting It Up
 
-1. Go to the RAR GitHub repository
+1. Go to the RAPP GitHub repository
 2. Click "Use this template" to create your own copy
 3. The setup automation runs automatically
 4. Edit `rar.config.json` with your settings
@@ -975,7 +975,7 @@ The key insight for creative work: agents give you a starting point, not a finis
 
 For enterprise teams, start with federation:
 
-1. Create a private RAR instance for your organization
+1. Create a private RAPP instance for your organization
 2. Pull public agents you've vetted
 3. Build proprietary agents under your company namespace
 4. Set up CI/CD for automated testing and deployment
@@ -1022,7 +1022,7 @@ Start with one team. Build 5-10 agents. Prove the value. Then expand to other te
 
 **Quality Tier** — Trust level: Community, Verified, Official, or Frontier.
 
-**RAR** — RAPP Agent Registry. The open agent store and ecosystem.
+**RAPP** — RAPP Agent Registry. The open agent store and ecosystem.
 
 **RAPP** — The broader AI agent platform that agents are built for.
 
@@ -1143,7 +1143,7 @@ Now go build something.
 
 ## About the Author
 
-Kody Wildfeuer is the creator of the RAPP Agent ecosystem and the RAR (RAPP Agent Registry). He builds tools that make AI accessible to everyone, not just engineers. When he's not shipping agents, he's probably thinking about how to make the next thing simpler.
+Kody Wildfeuer is the creator of the RAPP Agent ecosystem and the RAPP Agent Registry. He builds tools that make AI accessible to everyone, not just engineers. When he's not shipping agents, he's probably thinking about how to make the next thing simpler.
 
 Find the Agent Store at: https://kody-w.github.io/RAR/
 

@@ -105,7 +105,7 @@ A `.py.card.DeckName` file is a `.py.card` that belongs to a named deck. The dec
 
 Nothing is lost that can't be re-added. The agent code is always intact at every level.
 
-**Deck import/export:** To share a deck, collect all `.py.card.DeckName` files with the same deck name. To import a deck, drop the files into any RAR binder. The deck name, card data, and agent code all travel together. No separate deck manifest needed — the file extension IS the manifest.
+**Deck import/export:** To share a deck, collect all `.py.card.DeckName` files with the same deck name. To import a deck, drop the files into any RAPP binder. The deck name, card data, and agent code all travel together. No separate deck manifest needed — the file extension IS the manifest.
 
 ### Deck Hotloading (Runtime)
 
@@ -396,7 +396,7 @@ All three faces are generated from the same manifest and identity hash. No face 
 |-------|---------------|-------------|
 | **Draft** | Your machine, your binder | The `.py` file exists. You can preview the card locally. It has no public identity yet. |
 | **Registered** | `registry.json` (local or upstream) | The agent passed `build_registry.py` validation. It appears in a store. All three card faces render. The card has an identity hash but hasn't been deployed publicly. |
-| **Hatched** | The global public network (main RAR registry) | The card has been accepted into the main store, either via PR, Issue submission, or federated upstream push. It is now discoverable by anyone. It can be collected into any deck, traded via URL, downloaded as `.py` or `.card.txt`. **This is the start of the card's public life.** |
+| **Hatched** | The global public network (main RAPP registry) | The card has been accepted into the main store, either via PR, Issue submission, or federated upstream push. It is now discoverable by anyone. It can be collected into any deck, traded via URL, downloaded as `.py` or `.card.txt`. **This is the start of the card's public life.** |
 | **Forging** | Any deck where it is the companion | The card has been chosen as a companion. Its ASCII face is fused with the owner's identity and the current time epoch. The forged card shifts every 15 minutes. You don't control the output — it is emergent. |
 
 ### Hatching Requirements
@@ -414,7 +414,7 @@ A card is **hatched** — deployed to the global network and starting its public
 | 7 | **All three card faces render** from the manifest data | The store's `agentToCard()` function; Icon, Full Art, and ASCII all generated from `__manifest__` + identity hash |
 | 8 | **Deterministic identity** — same name always produces the same card | Guaranteed by the hash-based procedural generation |
 | 9 | **Present in `registry.json`** on the main store | CI build via `build_registry.py` on push to `main` |
-| 10 | **Publicly accessible** via the main RAR store URL or raw GitHub fetch | GitHub Pages deployment |
+| 10 | **Publicly accessible** via the main RAPP store URL or raw GitHub fetch | GitHub Pages deployment |
 
 If any requirement is missing, the card is still a draft or local registration — not hatched.
 
@@ -582,7 +582,7 @@ Agents that require a specific CommunityRAPP version should declare it in their 
 
 ## Article XV — Federation
 
-RAR can be used as a **GitHub template repository**. Instances cloned from the template operate as independent agent stores that can optionally federate back to the main registry.
+The RAPP registry can be used as a **GitHub template repository**. Instances cloned from the template operate as independent agent stores that can optionally federate back to the main registry.
 
 ### Roles
 
@@ -595,7 +595,7 @@ Roles are defined in `rar.config.json` under the `role` field.
 
 ### How federation works
 
-1. **Clone the template** — A user creates a new repo from RAR. `rar.config.json` is auto-configured with `"role": "instance"` and `"upstream"` pointing to the main repo.
+1. **Clone the template** — A user creates a new repo from the RAPP registry template. `rar.config.json` is auto-configured with `"role": "instance"` and `"upstream"` pointing to the main repo.
 2. **Add agents locally** — The instance owner adds agents under their own namespace. These appear in the instance's own store.
 3. **Submit upstream** — The instance can submit new or updated agents to the main store. Submissions use the same Issues-as-API pattern: a GitHub Issue is created on the upstream repo with `action: "submit_agent"` containing the agent code.
 4. **Sync from upstream** — Instances can pull agents from the main store to expand their local catalog.
@@ -630,16 +630,16 @@ Federation behavior is controlled by `rar.config.json`:
 
 ## Article XVI — Local-First Agent Binder
 
-Any user can run their own local copy of RAR as a personal **agent binder** — a self-contained store that works offline, manages their own cards, decks, and companions, and optionally syncs with the main registry.
+Any user can run their own local copy of RAPP as a personal **agent binder** — a self-contained store that works offline, manages their own cards, decks, and companions, and optionally syncs with the main registry.
 
 ### What is an Agent Binder?
 
-An agent binder is a local RAR instance that serves as your personal card collection and agent workbench. It runs entirely on your machine with no server. You own your cards, your decks, your companions, and your agents.
+An agent binder is a local RAPP instance that serves as your personal card collection and agent workbench. It runs entirely on your machine with no server. You own your cards, your decks, your companions, and your agents.
 
 ### Setup
 
 ```bash
-# 1. Fork or clone RAR
+# 1. Fork or clone RAPP
 git clone https://github.com/kody-w/RAR.git my-binder
 cd my-binder
 
@@ -725,7 +725,7 @@ python scripts/generate_holo_cards.py
 
 ### Syncing with the main store
 
-Your binder can pull agents from the main RAR store and push your agents upstream:
+Your binder can pull agents from the main RAPP store and push your agents upstream:
 
 ```bash
 # See what's different between your binder and the main store
@@ -800,7 +800,7 @@ The SuperSeed Coin is minted once. It cannot be re-minted, duplicated, or forged
 
 ### Federation Authentication
 
-Federated RAR instances that wish to join the ecosystem under the RAPP Constitution must authenticate through the SuperSeed Chain:
+Federated RAPP instances that wish to join the ecosystem under the RAPP Constitution must authenticate through the SuperSeed Chain:
 
 1. **Registration** — The instance submits a federation request containing its `rar.config.json`, its Binder address, and its publisher namespace.
 2. **Authentication** — The Verification Authority validates the request and signs a federation credential using the SuperSeed Chain's provenance protocol.

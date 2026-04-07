@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAPP Brainstem</title>
-<meta name="description" content="Browser-native agent runtime — run any RAR agent in a LisPy VM, no server required.">
+<meta name="description" content="Browser-native agent runtime — run any RAPP agent in a LisPy VM, no server required.">
 <style>
 :root {
   --bg: #0d1117;
@@ -322,7 +322,7 @@ code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menl
       <div class="gh-dot off" id="ghDot"></div>
       <span id="ghLabel">Sign in</span>
     </div>
-    <a href="index.html" class="bs-btn">Back to RAR</a>
+    <a href="index.html" class="bs-btn">Back to RAPP</a>
   </div>
 </div>
 
@@ -1149,22 +1149,24 @@ function pythonDictToJson(block) {
   result = result.replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null');
   result = result.replace(/,(\s*[}\]])/g, '$1');
   result = result.replace(/\(([^()]*)\)/g, '[$1]');
+  // Strip Python numeric underscores: 2_800_000 -> 2800000
+  result = result.replace(/\b(\d[\d_]*\d)\b/g, m => m.replace(/_/g, ''));
   return result;
 }
 
 // --- Extract data dicts as JS objects ---
 function extractDataDicts(src) {
   const dataObjects = {};
-  // Dicts: UPPER_CASE = { ... }
-  for (const match of src.matchAll(/^([A-Z][A-Z_0-9]+)\s*=\s*\{/gm)) {
+  // Dicts: UPPER_CASE or _UPPER_CASE = { ... }
+  for (const match of src.matchAll(/^(_?[A-Z][A-Z_0-9]+)\s*=\s*\{/gm)) {
     if (match[1] === '__manifest__') continue;
     const block = extractBracketBlock(src, match.index + match[0].length - 1, '{', '}');
     try {
       dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
     } catch(e) {}
   }
-  // Arrays: UPPER_CASE = [ ... ]
-  for (const match of src.matchAll(/^([A-Z][A-Z_0-9]+)\s*=\s*\[/gm)) {
+  // Arrays: UPPER_CASE or _UPPER_CASE = [ ... ]
+  for (const match of src.matchAll(/^(_?[A-Z][A-Z_0-9]+)\s*=\s*\[/gm)) {
     const block = extractBracketBlock(src, match.index + match[0].length - 1, '[', ']');
     try {
       dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
@@ -1308,6 +1310,15 @@ function convertPythonBodyToJS(bodyLines, baseIndent, dataObjects) {
   for (let i = 0; i < bodyLines.length; i++) {
     const raw = bodyLines[i];
     if (raw.trim() === '' || raw.trim().startsWith('#')) continue;
+    // Skip docstrings (triple-quoted strings as statements)
+    if (raw.trim().startsWith('"""') || raw.trim().startsWith("'''")) {
+      const q = raw.trim().slice(0, 3);
+      if (raw.trim().endsWith(q) && raw.trim().length > 6) continue; // single-line docstring
+      // Multi-line: skip until closing triple-quote
+      i++;
+      while (i < bodyLines.length && !bodyLines[i].includes(q)) i++;
+      continue;
+    }
     const indent = getIndent(raw);
     const line = raw.trim();
     const relIndent = Math.max(0, indent - baseIndent);
@@ -1409,11 +1420,75 @@ function convertPythonBodyToJS(bodyLines, baseIndent, dataObjects) {
       continue;
     }
 
+    // try/except → try/catch
+    if (line === 'try:') {
+      jsLines.push(`${pad}try {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    const exceptMatch = line.match(/^except(?:\s+[\w.,() ]+?)?(?:\s+as\s+(\w+))?\s*:$/);
+    if (exceptMatch) {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      const errVar = exceptMatch[1] || 'e';
+      jsLines.push(`${pad}} catch(${errVar}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    if (line === 'finally:') {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} finally {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // while loop
+    const whileMatch = line.match(/^while\s+(.+)\s*:$/);
+    if (whileMatch) {
+      jsLines.push(`${pad}while (${pyCondToJS(whileMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // with statement → just execute the body (skip resource management)
+    if (line.startsWith('with ')) {
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(`${pad}/* with */ {`);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // pass, continue, break, import
+    if (line === 'pass') continue;
+    if (line === 'continue') { jsLines.push(`${pad}continue;`); continue; }
+    if (line === 'break') { jsLines.push(`${pad}break;`); continue; }
+    if (line.startsWith('import ') || line.startsWith('from ')) continue;
+
+    // raise → throw
+    if (line.startsWith('raise ')) {
+      jsLines.push(`${pad}throw new Error(${pyExprToJS(line.slice(6), dataNames)});`);
+      continue;
+    }
+
     // return
     if (line.startsWith('return ')) {
       jsLines.push(`${pad}return ${pyExprToJS(line.slice(7), dataNames)};`);
       continue;
     }
+    if (line === 'return') { jsLines.push(`${pad}return;`); continue; }
 
     // list.append(x)
     const appendMatch = line.match(/^(\w+)\.append\((.+)\)$/);
@@ -1508,6 +1583,15 @@ function _pyExprToJSInner(expr, dataNames) {
   if (expr === 'True') return 'true';
   if (expr === 'False') return 'false';
 
+  // Python `or` / `and` at depth 0 → JS `||` / `&&`
+  {
+    const boolParts = splitBoolOp(expr);
+    if (boolParts) {
+      const jsOp = boolParts.op === 'or' ? '||' : '&&';
+      return boolParts.parts.map(p => pyExprToJS(p.trim(), dataNames)).join(` ${jsOp} `);
+    }
+  }
+
   // f-string -> template literal
   if (expr.startsWith('f"') || expr.startsWith("f'")) {
     return pyFStringToJS(expr, dataNames);
@@ -1555,8 +1639,9 @@ function _pyExprToJSInner(expr, dataNames) {
     const inner = expr.slice(1, -1).trim();
     if (!inner) return '{}';
     // Dict comprehension: {keyExpr: valExpr for var in iter}
+    // Guard: only match if no commas at depth 0 before the `for` (otherwise it's a plain dict with a gen-expr value)
     const dictCompMatch = inner.match(/^(.+?)\s*:\s*(.+?)\s+for\s+(\w+),?\s*(\w+)?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
-    if (dictCompMatch) {
+    if (dictCompMatch && splitComma(dictCompMatch[1] + ':' + dictCompMatch[2]).length === 1) {
       const [, kExpr, vExpr, v1, v2, iterExpr, filterExpr] = dictCompMatch;
       let src = pyExprToJS(iterExpr, dataNames);
       // Check if iterating over .items()
@@ -1572,6 +1657,9 @@ function _pyExprToJSInner(expr, dataNames) {
       }
     }
     const pairs = splitComma(inner).map(p => {
+      p = p.trim();
+      // Dict unpacking: **expr → ...expr (JS spread)
+      if (p.startsWith('**')) return `...${pyExprToJS(p.slice(2).trim(), dataNames)}`;
       const [k, v] = splitFirst(p, ':');
       return `${pyExprToJS(k.trim(), dataNames)}: ${pyExprToJS(v.trim(), dataNames)}`;
     });
@@ -1590,11 +1678,14 @@ function _pyExprToJSInner(expr, dataNames) {
   const sumMatch = expr.match(/^sum\((.+)\)$/);
   if (sumMatch) {
     const inner = sumMatch[1].trim();
-    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)(?:,\s*(\w+))?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
     if (genMatch) {
-      let src = pyExprToJS(genMatch[3], dataNames);
-      if (genMatch[4]) src = `${src}.filter(${genMatch[2]} => ${pyCondToJS(genMatch[4], dataNames)})`;
-      return `${src}.map(${genMatch[2]} => ${pyExprToJS(genMatch[1], dataNames)}).reduce((a,b) => a+b, 0)`;
+      const [, mapExpr, v1, v2, iterExpr, filterExpr] = genMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      if (v2) src = `Object.entries(${src})`;
+      const param = v2 ? `([${v1},${v2}])` : v1;
+      if (filterExpr) src = `${src}.filter(${param} => ${pyCondToJS(filterExpr, dataNames)})`;
+      return `${src}.map(${param} => ${pyExprToJS(mapExpr, dataNames)}).reduce((a,b) => a+b, 0)`;
     }
     return `${pyExprToJS(inner, dataNames)}.reduce((a,b) => a+b, 0)`;
   }
@@ -1626,10 +1717,21 @@ function _pyExprToJSInner(expr, dataNames) {
   const roundMatch2 = expr.match(/^round\((.+)\)$/);
   if (roundMatch2) return `Math.round(${pyExprToJS(roundMatch2[1], dataNames)})`;
 
-  // max(a, b) / min(a, b)
+  // max(a, b) / min(a, b) / max(expr for x in y)
   const maxMinMatch = expr.match(/^(max|min)\((.+)\)$/);
   if (maxMinMatch) {
-    const args = splitComma(maxMinMatch[2]).map(a => pyExprToJS(a.trim(), dataNames));
+    const inner = maxMinMatch[2].trim();
+    // Generator expression: max(expr for x in y [if cond])
+    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)(?:,\s*(\w+))?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (genMatch) {
+      const [, mapExpr, v1, v2, iterExpr, filterExpr] = genMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      if (v2) src = `Object.entries(${src})`;
+      if (filterExpr) src = `${src}.filter(${v2 ? `([${v1},${v2}])` : v1} => ${pyCondToJS(filterExpr, dataNames)})`;
+      const param = v2 ? `([${v1},${v2}])` : v1;
+      return `Math.${maxMinMatch[1]}(...${src}.map(${param} => ${pyExprToJS(mapExpr, dataNames)}))`;
+    }
+    const args = splitComma(inner).map(a => pyExprToJS(a.trim(), dataNames));
     return `Math.${maxMinMatch[1]}(${args.join(', ')})`;
   }
 
@@ -1675,6 +1777,32 @@ function _pyExprToJSInner(expr, dataNames) {
   }
   if (expr.endsWith('.strip()')) {
     return `${pyExprToJS(expr.slice(0, -8), dataNames)}.trim()`;
+  }
+
+  if (expr.endsWith('.lstrip()')) return `${pyExprToJS(expr.slice(0, -9), dataNames)}.trimStart()`;
+  if (expr.endsWith('.rstrip()')) return `${pyExprToJS(expr.slice(0, -9), dataNames)}.trimEnd()`;
+
+  // x.lstrip("#") → trimStart equivalent with char
+  const lstripMatch = expr.match(/^(.+)\.lstrip\((.+)\)$/);
+  if (lstripMatch) return `${pyExprToJS(lstripMatch[1], dataNames)}.replace(new RegExp('^[' + ${pyExprToJS(lstripMatch[2], dataNames)} + ']+'), '')`;
+
+  // x.startswith("a") / x.endswith("a")
+  const swMatch = expr.match(/^(.+)\.(startswith|endswith)\((.+)\)$/);
+  if (swMatch) {
+    const method = swMatch[2] === 'startswith' ? 'startsWith' : 'endsWith';
+    return `${pyExprToJS(swMatch[1], dataNames)}.${method}(${pyExprToJS(swMatch[3], dataNames)})`;
+  }
+
+  // x.index(val) → indexOf
+  const indexMatch = expr.match(/^(.+)\.index\((.+)\)$/);
+  if (indexMatch) return `${pyExprToJS(indexMatch[1], dataNames)}.indexOf(${pyExprToJS(indexMatch[2], dataNames)})`;
+
+  // x.split("a") / x.split()
+  const splitMatch = expr.match(/^(.+)\.split\(([^)]*)\)$/);
+  if (splitMatch) {
+    const obj = pyExprToJS(splitMatch[1], dataNames);
+    const arg = splitMatch[2].trim();
+    return arg ? `${obj}.split(${pyExprToJS(arg, dataNames)})` : `${obj}.split(/\\s+/)`;
   }
 
   // x.replace("a", "b")
@@ -1734,6 +1862,7 @@ function _pyExprToJSInner(expr, dataNames) {
   // Comparison operators (==, !=, <, >, <=, >=, is, is not) — route through pyCondToJS
   // Only match at bracket depth 0 to avoid matching inside generated subexpressions
   {
+    // Note: ' is not ' and ' is ' require word-char boundary check to avoid matching inside words
     const cmpOps = [' is not ', ' is ', ' !== ', ' != ', ' === ', ' == ', ' <= ', ' >= ', ' < ', ' > '];
     let cmpInStr = false, cmpSc = '', cmpDepth = 0;
     let foundCmp = false;
@@ -1760,19 +1889,46 @@ function _pyExprToJSInner(expr, dataNames) {
     if (binOp) {
       const l = pyExprToJS(binOp.left, dataNames);
       const r = pyExprToJS(binOp.right, dataNames);
-      const op = binOp.op === '//' ? 'Math.floor(' + l + ' / ' + r + ')' : null;
-      if (op) return op;
+      if (binOp.op === '//') return 'Math.floor(' + l + ' / ' + r + ')';
+      if (binOp.op === '**') return `Math.pow(${l}, ${r})`;
       return `${l} ${binOp.op} ${r}`;
     }
   }
 
-  // Python slice: expr[:n] -> expr.slice(0, n), expr[n:] -> expr.slice(n)
-  const sliceMatch = expr.match(/^(.+)\[(\d*):(\d*)\]$/);
-  if (sliceMatch) {
-    const obj = pyExprToJS(sliceMatch[1], dataNames);
-    const start = sliceMatch[2] || '0';
-    const end = sliceMatch[3];
-    return end ? `${obj}.slice(${start}, ${end})` : `${obj}.slice(${start})`;
+  // Python slice: expr[start:end] -> expr.slice(start, end) — supports expressions, not just numbers
+  {
+    // Find the last [...] and check if it contains a colon at depth 0 (it's a slice)
+    const lastBracket = expr.lastIndexOf(']');
+    if (lastBracket === expr.length - 1) {
+      // Find matching [
+      let depth = 0, bi = lastBracket;
+      while (bi >= 0) {
+        if (expr[bi] === ']') depth++;
+        else if (expr[bi] === '[') { depth--; if (depth === 0) break; }
+        bi--;
+      }
+      if (bi > 0) {
+        const inside = expr.slice(bi + 1, lastBracket);
+        // Check for colon at depth 0 inside the brackets (slice indicator)
+        let hasSlice = false, d = 0, colonPos = -1, inS = false, sC = '';
+        for (let k = 0; k < inside.length; k++) {
+          const c = inside[k];
+          if (inS) { if (c === '\\') k++; else if (c === sC) inS = false; continue; }
+          if (c === '"' || c === "'") { inS = true; sC = c; continue; }
+          if ('([{'.includes(c)) d++;
+          else if (')]}'.includes(c)) d--;
+          else if (c === ':' && d === 0) { hasSlice = true; colonPos = k; break; }
+        }
+        if (hasSlice) {
+          const obj = pyExprToJS(expr.slice(0, bi), dataNames);
+          const startExpr = inside.slice(0, colonPos).trim();
+          const endExpr = inside.slice(colonPos + 1).trim();
+          const jsStart = startExpr ? pyExprToJS(startExpr, dataNames) : '0';
+          const jsEnd = endExpr ? pyExprToJS(endExpr, dataNames) : '';
+          return jsEnd ? `${obj}.slice(${jsStart}, ${jsEnd})` : `${obj}.slice(${jsStart})`;
+        }
+      }
+    }
   }
 
   // dict[key] access — bracket-aware chained parsing
@@ -1829,7 +1985,8 @@ function pyCondToJS(cond, dataNames) {
   // not
   if (cond.startsWith('not ')) return `!(${pyCondToJS(cond.slice(4), dataNames)})`;
   // Comparisons — check longer operators first to avoid partial matches (e.g. !== vs !=)
-  const cmpMatch = cond.match(/^(.+?)\s*(!==|===|is not|is|==|!=|<=|>=|<|>)\s*(.+)$/);
+  // Use \b word boundaries for `is`/`is not` to avoid matching inside words like "history"
+  const cmpMatch = cond.match(/^(.+?)\s*(!==|===|\bis not\b|\bis\b|==|!=|<=|>=|<|>)\s*(.+)$/);
   if (cmpMatch) {
     const l = pyExprToJS(cmpMatch[1], dataNames);
     const r = pyExprToJS(cmpMatch[3], dataNames);
@@ -1858,8 +2015,18 @@ function pyFStringToJS(fstr, dataNames) {
         expr += inner[i]; i++;
       }
       i++; // skip }
-      // Format spec
-      const colonIdx = expr.lastIndexOf(':');
+      // Format spec — find last colon at bracket depth 0 (skip colons in dicts/slices)
+      let colonIdx = -1;
+      { let d=0, inS=false, sC='';
+        for (let k=0; k<expr.length; k++) {
+          const c = expr[k];
+          if (inS) { if (c==='\\') k++; else if (c===sC) inS=false; continue; }
+          if (c==='"'||c==="'") { inS=true; sC=c; continue; }
+          if ('([{'.includes(c)) d++;
+          else if (')]}'.includes(c)) d--;
+          else if (c===':' && d===0) colonIdx = k;
+        }
+      }
       if (colonIdx > 0) {
         const varPart = expr.slice(0, colonIdx);
         const fmt = expr.slice(colonIdx + 1);
@@ -1875,8 +2042,16 @@ function pyFStringToJS(fstr, dataNames) {
           result += '${' + `Math.round(Number(${pyExprToJS(varPart, dataNames)})).toLocaleString('en-US')` + '}';
         } else if (fmt.match(/^\.0f$/)) {
           result += '${' + `Math.round(${pyExprToJS(varPart, dataNames)})` + '}';
+        } else if (fmt.match(/^\.\d*%$/)) {
+          // Percentage format: :.0% or :.1% etc
+          const d = (fmt.match(/\.(\d+)%/) || [,'0'])[1];
+          result += '${' + `(${pyExprToJS(varPart, dataNames)} * 100).toFixed(${d})` + '}%';
+        } else if (fmt.match(/^>\d+|^<\d+|^\d+/)) {
+          // Width/alignment specs — just output the value
+          result += '${' + pyExprToJS(varPart, dataNames) + '}';
         } else {
-          result += '${' + pyExprToJS(expr, dataNames) + '}';
+          // Unknown format spec — try to transpile just the var part
+          result += '${' + pyExprToJS(varPart, dataNames) + '}';
         }
       } else {
         result += '${' + pyExprToJS(expr, dataNames) + '}';
@@ -1890,6 +2065,36 @@ function pyFStringToJS(fstr, dataNames) {
   }
   result += '`';
   return result;
+}
+
+// Split on `or` / `and` at bracket depth 0 (outside strings)
+function splitBoolOp(expr) {
+  // Try `or` first, then `and` (or has lower precedence)
+  for (const op of ['or', 'and']) {
+    const re = new RegExp(`\\s+${op}\\s+`, 'g');
+    let depth = 0, inStr = false, strChar = '', m;
+    const positions = [];
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (inStr) { if (c === '\\') i++; else if (c === strChar) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; strChar = c; continue; }
+      if ('([{'.includes(c)) { depth++; continue; }
+      if (')]}'.includes(c)) { depth--; continue; }
+      if (depth === 0) {
+        re.lastIndex = i;
+        m = re.exec(expr);
+        if (m && m.index === i) positions.push({ start: i, end: i + m[0].length });
+      }
+    }
+    if (positions.length > 0) {
+      const parts = [];
+      let prev = 0;
+      for (const p of positions) { parts.push(expr.slice(prev, p.start)); prev = p.end; }
+      parts.push(expr.slice(prev));
+      return { op, parts };
+    }
+  }
+  return null;
 }
 
 function splitComma(s) {
@@ -2200,6 +2405,12 @@ function transpileAndLoad(pythonSource) {
   const HELPERS = {};
   const jsFns = result.jsFunctions || {};
 
+  // Synthetic self for class method references
+  const self = {
+    name: (result.manifest || {}).display_name || (result.manifest || {}).name || 'Agent',
+    metadata: result.manifest || {},
+  };
+
   function compileAgentFn(fnDef) {
     const paramList = fnDef.params.join(', ');
     let body = fnDef.body;
@@ -2247,7 +2458,7 @@ function transpileAndLoad(pythonSource) {
     }
 
     const fnCode = `(function(${paramList}) {\n${body}\n})`;
-    return (new Function('DATA', 'HELPERS', 'PY', `return ${fnCode}`))(DATA, HELPERS, PY);
+    return (new Function('DATA', 'HELPERS', 'PY', 'self', `return ${fnCode}`))(DATA, HELPERS, PY, self);
   }
 
   // First pass: compile module-level helpers
@@ -3044,7 +3255,7 @@ function buildChatTools() {
       type: 'function',
       function: {
         name: 'run_agent',
-        description: 'Run an enabled RAR agent. The agent will process the request and return a result.',
+        description: 'Run an enabled RAPP agent. The agent will process the request and return a result.',
         parameters: {
           type: 'object',
           properties: {

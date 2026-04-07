@@ -2,7 +2,7 @@
 Deal Desk — B2B sales intelligence deck agent.
 
 Runs a deal analysis pipeline: account briefing, competitive landscape, deal health
-check, and proposal recommendations. Pulls live data from the RAR registry to show
+check, and proposal recommendations. Pulls live data from the RAPP registry to show
 which specialized sales agents are available for deeper dives.
 
 One prompt. Full deal intelligence. No CRM required.
@@ -16,7 +16,7 @@ __manifest__ = {
     "name": "@kody/deal_desk_agent",
     "version": "1.0.0",
     "display_name": "DealDesk",
-    "description": "B2B sales intelligence deck — runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAR sales agents for deeper workflow.",
+    "description": "B2B sales intelligence deck — runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAPP sales agents for deeper workflow.",
     "author": "Kody Wildfeuer",
     "tags": ["deck", "deal", "sales", "b2b", "account-intelligence", "competitive", "pipeline", "crm"],
     "category": "b2b_sales",
@@ -74,8 +74,8 @@ class DealDeskAgent(BasicAgent):
                             "  analyze <company>   — full deal intelligence briefing for a company\n"
                             "  score <company>     — deal health score with risk factors\n"
                             "  compete <company>   — competitive landscape analysis\n"
-                            "  stack               — show all available B2B sales agents in RAR\n"
-                            "  recommend <company> — suggest which RAR agents to install for this deal"
+                            "  stack               — show all available B2B sales agents in RAPP\n"
+                            "  recommend <company> — suggest which RAPP agents to install for this deal"
                         )
                     }
                 },
@@ -106,8 +106,8 @@ class DealDeskAgent(BasicAgent):
                 "  analyze <company>   — full deal intelligence briefing\n"
                 "  score <company>     — deal health score\n"
                 "  compete <company>   — competitive landscape\n"
-                "  stack               — available B2B sales agents in RAR\n"
-                "  recommend <company> — suggest RAR agents for this deal"
+                "  stack               — available B2B sales agents in RAPP\n"
+                "  recommend <company> — suggest RAPP agents for this deal"
             )
 
     def _analyze(self, company) -> str:
@@ -132,7 +132,7 @@ class DealDeskAgent(BasicAgent):
         sections.append(self._score(company))
 
         # Recommended agents
-        sections.append("## Recommended RAR Agents")
+        sections.append("## Recommended RAPP Agents")
         sections.append(self._recommend(company))
 
         return "\n\n".join(sections)
@@ -193,7 +193,7 @@ class DealDeskAgent(BasicAgent):
         agents = reg.get("agents", [])
 
         sales_agents = [a for a in agents if a.get("category") in ("b2b_sales", "b2c_sales", "general")]
-        lines = [f"## B2B Sales Agent Stack ({len(sales_agents)} agents available in RAR)\n"]
+        lines = [f"## B2B Sales Agent Stack ({len(sales_agents)} agents available in RAPP)\n"]
 
         by_cat = {}
         for a in sales_agents:
@@ -240,6 +240,6 @@ class DealDeskAgent(BasicAgent):
             lines.append(f"    {reason}")
 
         lines.append(
-            f"\n*Install with: \"Use RAR to install <agent-name>\"*"
+            f"\n*Install with: \"Use RAPP to install <agent-name>\"*"
         )
         return "\n".join(lines)

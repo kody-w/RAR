@@ -1,14 +1,14 @@
 <h2>87 Emojis Found. 87 Emojis Killed.</h2>
 
-<p>A thorough audit of the RAR codebase found 87 emoji usages: 21 Unicode emoji characters and 66 HTML entity emojis. They were everywhere &mdash; category icons, pack art, section headers, modal buttons, slab badges, quiz results, the cart, the search bar.</p>
+<p>A thorough audit of the RAPP codebase found 87 emoji usages: 21 Unicode emoji characters and 66 HTML entity emojis. They were everywhere &mdash; category icons, pack art, section headers, modal buttons, slab badges, quiz results, the cart, the search bar.</p>
 
 <p>They all had to go.</p>
 
-<h3>Why Emojis Are Wrong for RAR</h3>
+<h3>Why Emojis Are Wrong for RAPP</h3>
 
 <p>Emojis look different on every platform. An emoji that looks polished on macOS looks completely different on Windows, Android, and Linux. They're rendered by the OS, not by us. We have zero control over their visual identity.</p>
 
-<p>RAR already had a hand-crafted SVG glyph system &mdash; <code>SEMANTIC_GLYPHS</code> &mdash; used by the card art generator. These glyphs are consistent, scalable, and part of the same visual language as the trading cards. Using emojis alongside them was a visual contradiction.</p>
+<p>RAPP already had a hand-crafted SVG glyph system &mdash; <code>SEMANTIC_GLYPHS</code> &mdash; used by the card art generator. These glyphs are consistent, scalable, and part of the same visual language as the trading cards. Using emojis alongside them was a visual contradiction.</p>
 
 <h3>The Solution: Two Glyph Libraries</h3>
 

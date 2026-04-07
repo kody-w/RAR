@@ -75,7 +75,7 @@ Four ways to get leads:
 
 ### 1. Content (The Flywheel — ALREADY RUNNING)
 
-This is where RAR is already ahead. The Rappter Engine is a content MACHINE:
+This is where RAPP is already ahead. The Rappter Engine is a content MACHINE:
 
 **Rappterpedia** (auto-generating every 2 hours):
 - 400+ wiki articles → SEO for "how to build AI agents"
@@ -196,8 +196,8 @@ Simple, specific ask. Not "share with everyone." Just one person.
 
 ### Federation as Distribution
 
-Every federated RAR instance is a distribution node:
-- Enterprise team forks RAR → runs their own store
+Every federated RAPP instance is a distribution node:
+- Enterprise team forks RAPP → runs their own store
 - Their store links back to the main store
 - Their agents can be submitted upstream
 - Each instance is marketing for the ecosystem

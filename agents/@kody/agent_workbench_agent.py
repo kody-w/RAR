@@ -10,7 +10,7 @@ Workflow:
   2. validate  — Check manifest, syntax, required fields, naming conventions
   3. dry_run   — Execute perform() in a sandboxed context and show the result
   4. diff      — Compare local agent against the published registry version
-  5. publish   — Submit the agent to RAR via Issues-as-API
+  5. publish   — Submit the agent to RAPP via Issues-as-API
 
 The workbench enforces the RAPP Constitution: single file, no secrets,
 no network in __init__, readable code, declared env vars. It catches
@@ -186,7 +186,7 @@ class AgentWorkbenchAgent(BasicAgent):
       validate  — Deep validation of an agent file against the Constitution
       dry_run   — Execute perform() in isolation and report the result
       diff      — Compare local vs. published version
-      publish   — Submit to RAR via Issues-as-API
+      publish   — Submit to RAPP via Issues-as-API
     """
 
     def __init__(self):
@@ -208,7 +208,7 @@ class AgentWorkbenchAgent(BasicAgent):
                             "validate: check agent file against Constitution, "
                             "dry_run: execute perform() in sandbox, "
                             "diff: compare local vs published, "
-                            "publish: submit to RAR"
+                            "publish: submit to RAPP"
                         )
                     },
                     "agent_path": {
@@ -549,7 +549,7 @@ class AgentWorkbenchAgent(BasicAgent):
         if not name.startswith("@"):
             return f"Invalid name: {name}"
 
-        # Fetch published version from RAR
+        # Fetch published version from RAPP registry
         parts = name.split("/")
         publisher = parts[0]
         slug = parts[1] if len(parts) > 1 else ""
@@ -664,7 +664,7 @@ class AgentWorkbenchAgent(BasicAgent):
         return (
             f"Submitted: {name} v{manifest.get('version', '?')}\n"
             f"Issue: {issue_url}\n\n"
-            f"The RAR automation pipeline will validate and merge your agent. "
+            f"The RAPP automation pipeline will validate and merge your agent. "
             f"Watch the issue for status updates."
         )
 

@@ -31,7 +31,7 @@
 
 <h3>Shared Authentication</h3>
 
-<p>The RAR ecosystem already has GitHub OAuth for voting and reviews. The token is stored as <code>rb_access_token</code> in localStorage, shared with the RAPPterBook. The Virtual Brainstem reads the same token. Sign in once, use it everywhere.</p>
+<p>The RAPP ecosystem already has GitHub OAuth for voting and reviews. The token is stored as <code>rb_access_token</code> in localStorage, shared with the RAPPterBook. The Virtual Brainstem reads the same token. Sign in once, use it everywhere.</p>
 
 <p>The OAuth flow redirects to GitHub, exchanges the code via a Cloudflare Worker, and stores the token. The same token authenticates both the GitHub API (for user info) and the GitHub Models API (for inference). No second login. No API key management.</p>
 

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAR FAQ</title>
+<title>RAPP FAQ</title>
 <meta name="description" content="Every decision explained. Why single-file agents, why cards, why seeds, why no server, why snake_case, why any of this.">
-<meta property="og:title" content="RAR FAQ — Every Decision Explained">
+<meta property="og:title" content="RAPP FAQ — Every Decision Explained">
 <meta property="og:description" content="Why single-file agents? Why cards? Why seeds? Why no server? Every design decision in the RAPP Agent Registry, explained.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kody-w.github.io/RAR/faq.html">
@@ -66,7 +66,7 @@ header p{color:var(--dim);font-size:15px}
 <div class="page">
 
 <header>
-  <h1><span>RAR</span> FAQ</h1>
+  <h1><span>RAPP</span> FAQ</h1>
   <p>Every decision explained. If you're wondering "why?" — the answer is here.</p>
   <div class="nav-links">
     <a href="index.html">Agent Store</a>
@@ -136,7 +136,7 @@ header p{color:var(--dim);font-size:15px}
     <div class="answer">
       <p>npm proved global registries work. It also proved they collapse under their own complexity. <code>node_modules</code> for a hello world app is 500MB. Left-pad gets unpublished and half the internet breaks. Supply chain attacks hide in transitive dependencies six levels deep.</p>
       <p>pip is better but still requires virtual environments, version pinning, and a working internet connection at install time. PyPI packages can run arbitrary code during install via <code>setup.py</code>.</p>
-      <p>RAR's agents are <strong>AST-parsed, never executed</strong> during registration. There is no install step. There are no transitive dependencies. The file IS the package. We learned from npm's mistakes — and the biggest lesson was that dependency trees are the enemy of trust at scale.</p>
+      <p>RAPP's agents are <strong>AST-parsed, never executed</strong> during registration. There is no install step. There are no transitive dependencies. The file IS the package. We learned from npm's mistakes — and the biggest lesson was that dependency trees are the enemy of trust at scale.</p>
     </div>
   </details>
 </div>
@@ -156,7 +156,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>Why is there no server?</summary>
     <div class="answer">
       <p>Servers are single points of failure. They cost money. They require maintenance. They go down. They get acquired. They get shut down.</p>
-      <p>RAR is static files on GitHub. The registry is a JSON file. The store is an HTML file. The binder runs in your browser with IndexedDB. <code>git clone</code> gives you everything. If GitHub disappeared tomorrow, every clone is a complete backup.</p>
+      <p>RAPP is static files on GitHub. The registry is a JSON file. The store is an HTML file. The binder runs in your browser with IndexedDB. <code>git clone</code> gives you everything. If GitHub disappeared tomorrow, every clone is a complete backup.</p>
       <p>No server means no ops, no billing, no downtime, no vendor lock-in. The agent ecosystem outlives any company — including ours.</p>
     </div>
   </details>
@@ -241,7 +241,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>What's a binder?</summary>
     <div class="answer">
       <p>Your binder is your personal card collection. It runs in your browser at <a href="binder.html" style="color:var(--acc)">binder.html</a>, stores your cards in IndexedDB (persists across sessions), and works completely offline.</p>
-      <p>You can also run your own binder as a GitHub repo — use RAR as a template, enable GitHub Pages, and you get a live binder URL. Your unofficial agents live there. When you want to go official, submit upstream.</p>
+      <p>You can also run your own binder as a GitHub repo — use RAPP as a template, enable GitHub Pages, and you get a live binder URL. Your unofficial agents live there. When you want to go official, submit upstream.</p>
     </div>
   </details>
 </div>
@@ -286,9 +286,9 @@ header p{color:var(--dim);font-size:15px}
   <details>
     <summary>Why does submission go through staging?</summary>
     <div class="answer">
-      <p>Because trust must be earned. npm auto-publishes and the result is malware in the supply chain. RAR auto-validates but <strong>never auto-publishes</strong>.</p>
+      <p>Because trust must be earned. npm auto-publishes and the result is malware in the supply chain. RAPP auto-validates but <strong>never auto-publishes</strong>.</p>
       <p>Submissions land in <code>staging/</code>. An admin reviews the code, checks the security scan results, and adds the <code>approved</code> label. Only then does the agent enter <code>agents/</code>, get its card forged, and join the registry.</p>
-      <p>This is the curation model. RAR is public but not unmoderated. The forge and the stamp come from RAR.</p>
+      <p>This is the curation model. RAPP is public but not unmoderated. The forge and the stamp come from RAPP.</p>
     </div>
   </details>
 </div>
@@ -311,7 +311,7 @@ header p{color:var(--dim);font-size:15px}
   <details>
     <summary>Can I run my own registry?</summary>
     <div class="answer">
-      <p>Yes. RAR is a GitHub template repo. Click "Use this template," and you get your own registry with your own agents, your own binder, your own GitHub Pages URL.</p>
+      <p>Yes. RAPP is a GitHub template repo. Click "Use this template," and you get your own registry with your own agents, your own binder, your own GitHub Pages URL.</p>
       <p>Your instance can operate independently or federate with the main registry. <code>python scripts/federate.py submit</code> sends your agents upstream for review. <code>federate.py sync --pull</code> downloads official agents into your local catalog.</p>
       <p>Your unofficial agents are yours. They work fine locally. When you want them officially forged, submit upstream. The community grows through grassroots — you don't need permission to start.</p>
     </div>
@@ -370,7 +370,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>Why not use Docker?</summary>
     <div class="answer">
       <p>Docker ships the operating system with every app. That's brilliant for complex services. It's absurd for a 200-line Python file.</p>
-      <p>A Docker image is 100MB minimum. A RAR agent is 5KB. Docker requires a daemon, a registry account, storage for layers. A RAR agent requires a text editor.</p>
+      <p>A Docker image is 100MB minimum. A RAPP agent is 5KB. Docker requires a daemon, a registry account, storage for layers. A RAPP agent requires a text editor.</p>
       <p>The farmer in sub-Saharan Africa is not running a Docker daemon. The teacher in rural Oklahoma is not pulling container images. The single file goes where Docker can't.</p>
     </div>
   </details>
@@ -421,7 +421,7 @@ header p{color:var(--dim);font-size:15px}
   <details>
     <summary>Is it really free?</summary>
     <div class="answer">
-      <p>Using agents is free. Submitting agents is free. Running a binder is free. Browsing the store is free. Resolving cards from seeds is free. Everything in RAR costs zero dollars to use.</p>
+      <p>Using agents is free. Submitting agents is free. Running a binder is free. Browsing the store is free. Resolving cards from seeds is free. Everything in RAPP costs zero dollars to use.</p>
       <p>The code is MIT licensed. The registry runs on GitHub Pages (free). The automation runs on GitHub Actions (free for public repos). There is no premium tier, no paywall, no "contact sales."</p>
     </div>
   </details>
@@ -432,7 +432,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>Who runs this?</summary>
     <div class="answer">
       <p><strong>Wildhaven of America</strong> is the parent entity. They retain editorial rights — who gets verified, what gets official, how the standards evolve.</p>
-      <p>The registry is open. The code is MIT. Anyone can fork it, federate it, run their own instance. But the main RAR registry at kody-w/RAR is curated. That curation is the value.</p>
+      <p>The registry is open. The code is MIT. Anyone can fork it, federate it, run their own instance. But the main RAPP registry at kody-w/RAR is curated. That curation is the value.</p>
     </div>
   </details>
 </div>
@@ -493,7 +493,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>How do I get involved?</summary>
     <div class="answer">
       <p><strong>Submit an agent.</strong> Write a single <code>.py</code> file. Open a GitHub Issue. That's it.</p>
-      <p><strong>Run a binder.</strong> Use RAR as a template. Build your collection. Federate when ready.</p>
+      <p><strong>Run a binder.</strong> Use RAPP as a template. Build your collection. Federate when ready.</p>
       <p><strong>Spread the word.</strong> Share agent seeds. Send someone a card. Show them <a href="ode.html" style="color:var(--acc)">why this matters</a>.</p>
       <p>Your namespace is <code>@yourgithubusername</code>. It's yours forever. Start building.</p>
     </div>
@@ -501,7 +501,7 @@ header p{color:var(--dim);font-size:15px}
 </div>
 
 <div class="footer">
-  <p>RAR — the RAPP Agent Registry</p>
+  <p>RAPP — the RAPP Agent Registry</p>
   <p style="margin-top:4px"><a href="index.html">Store</a> &middot; <a href="binder.html">Binder</a> &middot; <a href="ode.html">The Ode</a> &middot; <a href="releases.html">Releases</a> &middot; <a href="https://github.com/kody-w/RAR">GitHub</a></p>
 </div>
 

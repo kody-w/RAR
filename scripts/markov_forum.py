@@ -36,7 +36,7 @@ AUTHORS = [
     "BasicAgentFan", "CommunityContrib", "StoreBrowser", "CardCollector",
     "ASTWalker", "PerformReturner", "EnvVarChecker", "DocstringWriter",
     "KebabCaser", "NamespaceNinja", "TierClimber", "VersionBumper",
-    "NewToRAR", "AgentArchitect", "DeltaMerger", "DreamCatcherFan",
+    "NewToRAPP", "AgentArchitect", "DeltaMerger", "DreamCatcherFan",
     "SingleFilePurist", "ManifestDebugger", "TestRunner42", "CIWatcher",
     "HoloCollector", "DeckMaster", "RegistryDiver", "PerformPatterns",
     "ForkAndBuild", "UpstreamSync", "QualityGate", "TagExplorer",
@@ -126,7 +126,7 @@ def gen_help_stuck():
              "Run `pytest tests/test_agent_contract.py -k \"{slug}\" -v` to see exactly what the test expects. That'll narrow it down fast.".format(slug=agent['slug'].split('/')[-1]),
          ]),
         (f"How do I chain {agent['name']} with another agent?",
-         f"I want to use `{agent['slug']}` as the first step in a pipeline — take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAR? Do people parse the string output or is there a better way?",
+         f"I want to use `{agent['slug']}` as the first step in a pipeline — take its output and feed it into another agent. But perform() returns a string and I need structured data.\n\nWhat's the recommended pattern for agent chaining in RAPP? Do people parse the string output or is there a better way?",
          [
              "The string-in, string-out design is intentional. For chaining, I usually parse the output with a simple regex or json.loads() if the agent returns JSON-formatted strings. Not elegant but it works.",
              "Check out `@kody/context_memory` — it's designed for exactly this. Store the output of agent A, retrieve it in agent B. Keeps the chain clean.",
@@ -164,7 +164,7 @@ def gen_help_how():
          "Building an integration agent that calls an external API. Sometimes it gets rate limited and I don't want perform() to just crash. What's the standard pattern?",
          [
              "Return a clear error string — never raise uncaught exceptions. Something like:\n```python\ntry:\n    response = call_api()\nexcept RateLimitError:\n    return \"Rate limited. Please try again in 60 seconds.\"\n```\nThe caller gets useful info instead of a stack trace.",
-             "Some agents implement exponential backoff internally, but honestly for single-shot perform() calls, just returning an error message is the RAR way. Keep it simple.",
+             "Some agents implement exponential backoff internally, but honestly for single-shot perform() calls, just returning an error message is the RAPP way. Keep it simple.",
              "Also: declare the API's env var in `requires_env` even if it's optional. Users should know upfront that this agent talks to an external service.",
          ]),
         ("Can I have multiple classes in one agent file?",
@@ -184,7 +184,7 @@ def gen_showcase():
     body_templates = [
         f"Just shipped **{agent['name']}** (`{agent['slug']}`) to the registry. It's a {agent['category']} agent that {agent['desc'].lower().rstrip('.')}\n\nThis started as a quick hack for my team but turned into something I think others could use. Key things:\n\n- {agent['lines']} lines, single file, no external dependencies\n- {('Needs ' + ', '.join(agent['env'][:3])) if agent['env'] else 'Zero-config — no env vars needed'}\n- Tags: {', '.join(agent['tags'][:4]) if agent['tags'] else 'TBD'}\n\nWould love feedback, especially from anyone working in {agent['category']}. What am I missing?",
         f"Excited to share **{agent['name']}** — been working on this for a few weeks and it finally passed all contract tests.\n\n`{agent['slug']}` handles {agent['desc'].lower().rstrip('.')}. I looked at the existing {agent['category']} agents and felt like there was a gap for something that {random.choice(['focuses on the workflow side', 'handles edge cases better', 'works without API keys', 'returns structured output'])}.\n\nCurrently at **{agent['tier']}** tier. Hoping the community finds it useful!",
-        f"**{agent['name']}** is live on the store!\n\nWhat it does: {agent['desc']}\n\nWhat makes it different: I focused on making perform() return genuinely useful strings instead of just raw data dumps. Every output is formatted for readability.\n\n{agent['lines']} lines. Clean. Single file. The way RAR intended.\n\nGrab it from the store or:\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent['slug'].replace('@', '%40')}.py\n```",
+        f"**{agent['name']}** is live on the store!\n\nWhat it does: {agent['desc']}\n\nWhat makes it different: I focused on making perform() return genuinely useful strings instead of just raw data dumps. Every output is formatted for readability.\n\n{agent['lines']} lines. Clean. Single file. The way RAPP intended.\n\nGrab it from the store or:\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent['slug'].replace('@', '%40')}.py\n```",
     ]
     reply_pool = [
         f"Nice work! The {agent['category']} category needed more options. Quick question — does it handle {random.choice(['batch inputs', 'empty strings', 'unicode', 'very long inputs', 'concurrent calls'])}?",
@@ -203,7 +203,7 @@ def gen_discussion():
         ("Is the single-file principle actually better, or just different?",
          "I come from a world of microservices and package managers. The idea of putting everything in one .py file felt wrong at first. But after building a few agents... I kind of get it?\n\nThere's something about opening one file and seeing the entire agent — manifest, docs, code — all in one scroll. No jumping between files. No build steps.\n\nBut I also miss having separate test files, proper packages, type stubs. Am I overthinking this? Has anyone hit a wall where single-file just doesn't scale?",
          [
-             "I was skeptical too. Then I tried to debug a 12-file agent framework at my day job and came back to RAR like 'oh right, this is why.'",
+             "I was skeptical too. Then I tried to debug a 12-file agent framework at my day job and came back to RAPP like 'oh right, this is why.'",
              "The constraint is the feature. When you can't sprawl across files, you're forced to keep things simple. My best agents are under 100 lines.",
              "I've hit the wall once — around 400 lines for a complex integration agent. The solution wasn't multiple files, it was splitting it into two focused agents that chain together.",
              "The real magic is the AST parsing. No build step, no imports to resolve, no dependency conflicts. Just drop a .py file and it works. That's worth the single-file trade-off.",
@@ -212,7 +212,7 @@ def gen_discussion():
          "Curious how everyone approaches testing their agents before submission. I've been doing:\n\n1. Write agent\n2. Run `python my_agent.py` to check it doesn't crash\n3. Run `pytest -k my-agent`\n4. Manually test perform() with different inputs\n5. Submit\n\nIs there a better workflow? Do people write additional tests beyond the contract suite?",
          [
              "Pretty much the same flow. I also run `python build_registry.py` after step 2 to catch manifest issues early. Saves a failed CI run.",
-             "I wrote a small helper script that calls perform() with 20 different input combinations and checks that all results are non-empty strings. Not part of RAR but catches edge cases the contract tests miss.",
+             "I wrote a small helper script that calls perform() with 20 different input combinations and checks that all results are non-empty strings. Not part of RAPP but catches edge cases the contract tests miss.",
              "Step 4 is the most important one and most people skip it. The contract tests verify structure, not functionality. Only you know if your agent actually does what it should.",
              "Hot take: the contract tests are good enough for 90% of agents. If your agent is complex enough to need custom tests, it might be too complex for single-file.",
          ]),
@@ -233,7 +233,7 @@ def gen_discussion():
              "Howard (@borg) deserves credit for this. The CardSmith concept turned a registry into a collectible game. That's not obvious design.",
          ]),
         ("Federation: is anyone actually running their own instance?",
-         "The federation docs look great but I'm wondering if anyone has actually set up their own RAR instance. What was the experience like? Any gotchas?\n\nWe're considering it for our org — want to host internal agents privately but still pull from the public store.",
+         "The federation docs look great but I'm wondering if anyone has actually set up their own RAPP instance. What was the experience like? Any gotchas?\n\nWe're considering it for our org — want to host internal agents privately but still pull from the public store.",
          [
              "We set one up last month for our team of 8. Took about 20 minutes. The template_setup.yml workflow does most of the work. Main gotcha: make sure your namespaces don't collide with upstream.",
              "Running one. The selective sync isn't built in yet so we wrote a small script to filter by category when pulling from upstream. Works fine.",
@@ -244,7 +244,7 @@ def gen_discussion():
          [
              "context_memory is the one. Also `@kody/agent_workbench` for building new agents without leaving the browser.",
              f"Mostly the {random.choice(['b2b_sales', 'financial_services', 'productivity'])} agents for work. For personal projects, I keep coming back to the pipeline agents.",
-             "I built my own and use it daily. That's the beauty of RAR — if what you need doesn't exist, you build it in an afternoon.",
+             "I built my own and use it daily. That's the beauty of RAPP — if what you need doesn't exist, you build it in an afternoon.",
              "The remote agent is underrated. Being able to install and invoke agents from chat is a game changer for non-technical users.",
          ]),
     ]
@@ -269,7 +269,7 @@ def gen_idea():
              "The Dream Catcher pattern could do this — have a frame that checks for version bumps and generates Rappterpedia articles about what changed.",
          ]),
         ("Community challenges — build an agent for X",
-         "Other dev communities do weekly/monthly challenges. What if RAR did something similar? 'This week: build an agent that helps with email management' or 'Challenge: smallest agent that does something useful.'\n\nIt would drive new submissions and give newcomers a structured way to start.",
+         "Other dev communities do weekly/monthly challenges. What if RAPP did something similar? 'This week: build an agent that helps with email management' or 'Challenge: smallest agent that does something useful.'\n\nIt would drive new submissions and give newcomers a structured way to start.",
          [
              "Love this. We could track submissions via GitHub Issues tagged [CHALLENGE] and feature the winners on the store's main page.",
              "Monthly is better than weekly — gives people time to actually build something good. Weekly would just produce rushed stubs.",
@@ -316,7 +316,7 @@ def gen_meta():
          "Anyone can claim any @namespace right now. What's stopping someone from registering @microsoft or @google and publishing agents under those names?\n\nShould there be a namespace reservation or verification system?",
          [
              "The CONSTITUTION addresses this in the namespace section. Short answer: namespaces are first-come-first-served but maintainers can reject impersonation.",
-             "For now the honor system works because the community is small. But if RAR grows, we'll need namespace verification. GitHub already solved this with verified organizations.",
+             "For now the honor system works because the community is small. But if RAPP grows, we'll need namespace verification. GitHub already solved this with verified organizations.",
              "I'd rather have open namespaces with a reporting mechanism than a registration bureaucracy. Keep the barrier to entry low.",
          ]),
     ]

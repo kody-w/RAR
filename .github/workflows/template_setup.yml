@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Configure as RAR instance + binder
+      - name: Configure as RAPP instance + binder
         run: python scripts/setup_instance.py
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -50,8 +50,8 @@ jobs:
 
       - name: Commit configuration
         run: |
-          git config user.name "RAR Setup Bot"
+          git config user.name "RAPP Setup Bot"
           git config user.email "rar-bot@users.noreply.github.com"
           git add rar.config.json registry.json binder/ staging/ agents/
-          git diff --cached --quiet || git commit -m "Configure as RAR binder instance [skip ci]"
+          git diff --cached --quiet || git commit -m "Configure as RAPP binder instance [skip ci]"
           git push

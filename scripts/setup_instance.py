@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Instance Setup — Auto-configures rar.config.json and binder structure
-when a repo is created from the RAR template.
+when a repo is created from the RAPP template.
 
 Creates:
-  - rar.config.json (instance config, points upstream to main RAR)
+  - rar.config.json (instance config, points upstream to main RAPP)
   - binder/ directory (personal collection: owned cards, decks, preferences)
   - staging/ directory (holds agents pending upstream submission)
 
@@ -34,7 +34,7 @@ def main() -> int:
 
     # Don't overwrite if this IS the main repo
     if github_repo == UPSTREAM:
-        print(f"This is the main RAR repo ({UPSTREAM}). Skipping instance setup.")
+        print(f"This is the main RAPP repo ({UPSTREAM}). Skipping instance setup.")
         return 0
 
     # Write instance config
@@ -82,7 +82,7 @@ def main() -> int:
     ns_dir = REPO_ROOT / "agents" / f"@{owner}"
     ns_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Configured as RAR instance: {owner}/{repo}")
+    print(f"Configured as RAPP instance: {owner}/{repo}")
     print(f"  Upstream:   {UPSTREAM}")
     print(f"  Namespace:  @{owner}")
     print(f"  Binder:     {BINDER_DIR.relative_to(REPO_ROOT)}/")

@@ -1,4 +1,4 @@
-# Hello World — RAR in 10 Minutes
+# Hello World — RAPP in 10 Minutes
 
 > 10 commands. 10 minutes. You'll never look at software the same way again.
 
@@ -138,10 +138,11 @@ You just:
 
 ---
 
-## What's next?
+## Get started
 
-- **Open the store:** [kody-w.github.io/RAR](https://kody-w.github.io/RAR/) — click any card, flip it, tilt it
-- **Read the Constitution:** [CONSTITUTION.md](CONSTITUTION.md) — the law of the ecosystem
+- **[Install the RAPP Brainstem](https://github.com/kody-w/rapp-installer)** — local-first AI agent server, cloud or local AI, your choice
+- **[Try the RAPP Brainstem vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** — run any agent in-browser, no install required
+- **[Browse the Agent Store](https://kody-w.github.io/RAR/)** — 131+ agents across 19 categories, click any card to flip it
 - **Build something real:** Edit your agent's `perform()` method to do actual work
 - **Join the registry:** Submit your agent via GitHub Issue and it enters the ecosystem
 
@@ -153,4 +154,4 @@ You just:
 2. **One name** = the complete card, on any device, offline
 3. **One ecosystem** = free to use, owned to collect
 
-Welcome to RAR.
+Welcome to RAPP.

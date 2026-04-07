@@ -25,7 +25,7 @@
   "sourceOrganization": {"@type": "Organization", "name": "RAPP", "url": "https://github.com/kody-w/CommunityRAPP"},
   "hasPart": [
     {"@type": "DataCatalog", "name": "Agent Registry", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/registry.json", "description": "Machine-readable index of all agents with manifests, SHA256 hashes, and metadata."},
-    {"@type": "WebAPI", "name": "RAR API", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api.json", "description": "Agent-first API manifest. Autonomous agents discover endpoints, submit themselves, vote, review, and resolve cards."},
+    {"@type": "WebAPI", "name": "RAPP API", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api.json", "description": "Agent-first API manifest. Autonomous agents discover endpoints, submit themselves, vote, review, and resolve cards."},
     {"@type": "WebPage", "name": "Binder", "url": "https://kody-w.github.io/RAR/binder.html", "description": "Personal agent card binder. Works offline. Import/export collections."},
     {"@type": "WebPage", "name": "Rappterpedia", "url": "https://kody-w.github.io/RAR/rappterpedia/index.html", "description": "Community wiki and forum for the RAPP agent ecosystem."}
   ],
@@ -3172,7 +3172,7 @@
   <!-- Market Exchange -->
   <div class="panel" id="panel-market">
     <div style="text-align:center;margin-bottom:24px">
-      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">RAR Card Chain &bull; Live Market</div>
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">RAPP Card Chain &bull; Live Market</div>
       <h2 style="font-size:1.4rem;font-weight:800">CARD EXCHANGE</h2>
       <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Every forged card is verifiable, transferable, and permanently on-chain.</p>
     </div>
@@ -3430,7 +3430,7 @@ function showSubmitPrompt() {
       <div style="font-weight:700;font-size:.92rem">${count} agent${count > 1 ? 's' : ''} loaded</div>
       <div style="font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(agents)}</div>
     </div>
-    <button onclick="submitDroppedAgents()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap">Submit to RAR</button>
+    <button onclick="submitDroppedAgents()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap">Submit to RAPP</button>
     <button onclick="dismissSubmitPrompt()" style="padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.82rem;cursor:pointer">Keep Local Only</button>
   `;
   document.body.appendChild(bar);
@@ -3579,7 +3579,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dz = document.getElementById('drop-zone-full');
       dz.style.display = 'block';
       dz.style.cssText = 'position:fixed;inset:0;z-index:100;background:rgba(88,166,255,.08);border:3px dashed var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--accent);pointer-events:none';
-      dz.textContent = 'Drop agent.py to preview and submit to RAR';
+      dz.textContent = 'Drop agent.py to preview and submit to RAPP';
     }
   });
   document.body.addEventListener('dragleave', e => {
@@ -3720,7 +3720,7 @@ async function init() {
 function renderInstanceBanner() {
   const banner = document.createElement('div');
   banner.className = 'instance-banner';
-  banner.innerHTML = `${svgIcon('globe','#8b949e',16)} This is a RAR instance. <a href="https://github.com/${UPSTREAM_REPO}" target="_blank">View main store &rarr;</a>`;
+  banner.innerHTML = `${svgIcon('globe','#8b949e',16)} This is a RAPP instance. <a href="https://github.com/${UPSTREAM_REPO}" target="_blank">View main store &rarr;</a>`;
   banner.style.cssText = 'background:var(--surface2);text-align:center;padding:8px;font-size:.85rem;color:var(--text-muted);border-bottom:1px solid var(--border)';
   document.body.insertBefore(banner, document.body.firstChild);
 }
@@ -4012,11 +4012,11 @@ function agentCard(a) {
           <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
           ${isLocal ? '<span class="local-badge">LOCAL</span>' : ''}
           ${a._streamed ? '<span class="local-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">STREAMED</span>' : ''}
-          ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAR</span>' : ''}
+          ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAPP</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
           ${!isLocal && a._file ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
-          ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAR registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAR</button>` : ''}
+          ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAPP registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAPP</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
         </div>
@@ -4082,7 +4082,7 @@ function switchLbTab(tab) {
 }
 
 // ── Global Card Rankings — emergent leaderboard from play ratings ──
-// RAR 10 = perfect agents that never fail. Supply diminishes as cards degrade.
+// RAPP 10 = perfect agents that never fail. Supply diminishes as cards degrade.
 async function renderCardRankings() {
   const container = document.getElementById('leaderboard-container');
   const all = await getAllMinted();
@@ -4106,7 +4106,7 @@ async function renderCardRankings() {
         totalBad: 0,
         copies: 0,
         bestGrade: 0,
-        gemMintCount: 0,  // RAR 10 copies still in existence
+        gemMintCount: 0,  // RAPP 10 copies still in existence
         nmCount: 0,       // Near Mint
         lpCount: 0,       // Lightly Played
         mpCount: 0,       // Moderately Played
@@ -4154,7 +4154,7 @@ async function renderCardRankings() {
   let h = `<table class="lb-table"><thead><tr>
     <th>#</th><th>Agent</th><th style="cursor:pointer" title="Confidence = inverse risk. Sort: most confident agent first.">Conf.</th>
     <th>Cube</th><th>Burn</th><th>Plays</th><th>Win %</th>
-    <th>RAR 10</th><th>Supply</th>
+    <th>RAPP 10</th><th>Supply</th>
   </tr></thead><tbody>`;
 
   ranked.slice(0, 50).forEach((s, i) => {
@@ -4323,7 +4323,7 @@ function openAgent(name) {
   const ghUrl = isLocalDevice || !a._file ? '#' : `https://github.com/${sourceRepo}/blob/main/${a._file}`;
 
   const sealHtml = tier === 'verified'
-    ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAR VERIFIED</span>'
+    ? '<span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>RAPP VERIFIED</span>'
     : tier === 'experimental'
     ? '<span class="tier tier-experimental" style="font-size:.85rem">&#9878; FRONTIER</span>'
     : `<span class="tier tier-${tier}">${tier}</span>`;
@@ -5351,7 +5351,7 @@ async function submitToUpstream(agentName) {
     });
     if (res.ok) {
       const issue = await res.json();
-      showToast(`Submitted to RAR! Issue #${issue.number}`, 'success');
+      showToast(`Submitted to RAPP! Issue #${issue.number}`, 'success');
     } else {
       const err = await res.json().catch(() => ({}));
       showToast(`Submission failed: ${err.message || res.status}`, 'error');
@@ -5481,7 +5481,7 @@ async function downloadCart() {
   files.forEach(f => agentsFolder.file(f.name, f.content));
 
   // Add a README
-  const readme = `# RAR Agent Collection
+  const readme = `# RAPP Agent Collection
 Downloaded from the RAPP Agent Registry
 Date: ${new Date().toISOString().split('T')[0]}
 
@@ -8003,7 +8003,7 @@ async function mintCard(agentName, setId) {
   const cornerSharpness = 0.95 + ((seed >> 6) % 10) / 100; // 0.95–1.05
   const surfaceNoise = (seed >> 16) % 100;                 // 0–99 (sparkle pattern seed)
 
-  // ── Centering grade (RAR scale: 60/40 = 10, 55/45 = 9, etc.) ──
+  // ── Centering grade (RAPP scale: 60/40 = 10, 55/45 = 9, etc.) ──
   const centerScore = 10 - Math.floor(Math.abs(centeringX) * 8 + Math.abs(centeringY) * 8);
 
   // ── Provenance hash ──
@@ -8143,7 +8143,7 @@ async function provisionStarterPack() {
   }
 }
 
-// ── Grading Engine (RAR 1–10 scale) ──
+// ── Grading Engine (RAPP 1–10 scale) ──
 // Grade is driven primarily by PLAY CONDITION — how the user rated the agent's work.
 // A card that never fails stays GEM MINT. Bad ratings wear the holo and drop the grade.
 function gradeCard(card) {
@@ -8199,7 +8199,7 @@ function gradeLabel(grade) {
   return { label: 'POOR ' + Math.floor(grade), cls: 'poor' };
 }
 
-// ── Sub-Grades (RAR component scores) ──
+// ── Sub-Grades (RAPP component scores) ──
 function subGrades(card) {
   const v = card.variations;
 
@@ -9733,7 +9733,7 @@ async function exportSingleCard(card) {
   // The store parses them to reconstruct the card
   const cardHeader = [
     `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
     `# This file IS the agent. Drop it into agents/ and it runs.`,
     `# Card metadata above is ignored by Python but parsed by the store.`,
     ``,
@@ -9793,7 +9793,7 @@ async function exportAgentCard(name) {
   };
   const cardHeader = [
     `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
     `# This file IS the agent. Drop it into agents/ and it runs.`,
     `# Card metadata above is ignored by Python but parsed by the store.`,
     ``,
@@ -9859,7 +9859,7 @@ async function exportAgentDeckCard(name, deckName) {
 
   const cardHeader = [
     `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAR Agent Store — ${new Date().toISOString()}`,
+    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
     `# Deck: ${deckName}`,
     `# This file IS the agent. Drop it into agents/ and it runs.`,
     `# Card metadata above is ignored by Python but parsed by the store.`,
@@ -10231,7 +10231,7 @@ async function openAgentSlides() {
 }
 
 // ═══════════════════════════════════════════════════════
-// Slab Viewer — RAR graded full-screen card display
+// Slab Viewer — RAPP graded full-screen card display
 // ═══════════════════════════════════════════════════════
 async function openSlabViewer(mintId) {
   const all = await getAllMinted();
@@ -10273,7 +10273,7 @@ async function openSlabViewer(mintId) {
       <div class="slab-case">
         <div class="slab-grade-label">
           <div>
-            <div style="font-size:.6rem;opacity:.7;margin-bottom:2px">RAR</div>
+            <div style="font-size:.6rem;opacity:.7;margin-bottom:2px">RAPP</div>
             <div>${esc(card.displayName)}</div>
           </div>
           <div class="slab-grade-number" style="color:${gradeColor}">${card.grade >= 9.5 ? '10' : Math.round(card.grade)}</div>
@@ -10440,7 +10440,7 @@ async function renderSlabChainStatus(card) {
   } else {
     el.innerHTML = `
       <div style="color:#f0883e;font-weight:600;margin-bottom:6px">UNFORGED</div>
-      <div style="font-size:.75rem;color:#8b949e">This card is not yet on the RAR Card Chain.</div>
+      <div style="font-size:.75rem;color:#8b949e">This card is not yet on the RAPP Card Chain.</div>
       ${myBinder ? `<div style="font-size:.7rem;color:#484f58;margin-top:4px">Binder: <span style="font-family:monospace;color:#58a6ff">${formatBinderAddress(myBinder)}</span></div>` : ''}
     `;
   }
@@ -11226,7 +11226,7 @@ function exportCardPNG(name) {
   ctx.font = '9px -apple-system, sans-serif';
   ctx.fillText(`${a.name}  ·  v${a.version}  ·  ${a._size_kb || '?'} KB  ·  ${a._lines || '?'} lines`, 28, H - 12);
   ctx.textAlign = 'right';
-  ctx.fillText('RAR — RAPP Agent Registry  ·  1st Edition', W - 28, H - 12);
+  ctx.fillText('RAPP Agent Registry  ·  1st Edition', W - 28, H - 12);
   ctx.textAlign = 'left';
 
   // ── Download ──
@@ -11317,7 +11317,7 @@ function printCard(name) {
       </div>
     </div>
     <div class="back">
-      <div class="back-logo">RAR</div>
+      <div class="back-logo">RAPP</div>
       ${qrUrl ? `<div class="qr"><img src="${qrUrl}"></div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
       <div class="back-name">${esc(a.display_name)}</div>
       <div class="back-hint">${qrUrl ? 'Scan → raw agent.py' : ''}</div>
@@ -11517,11 +11517,11 @@ async function _open3DViewerInner(name) {
       ctx.lineWidth = 4;
       roundRect(ctx, 2, 2, 496, 696, 12);
       ctx.stroke();
-      // RAR logo
+      // RAPP logo
       ctx.fillStyle = '#58a6ff';
       ctx.font = 'bold 48px -apple-system, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('RAR', 250, 260);
+      ctx.fillText('RAPP', 250, 260);
       // Agent name
       ctx.fillStyle = '#e6edf3';
       ctx.font = 'bold 18px -apple-system, sans-serif';
@@ -12642,7 +12642,7 @@ function curatorReviewTextVariant(a, index, seed) {
       `If you're building in the ${cat} space, ${name} is worth adding to your deck. Pairs well with other ${cat} agents.`,
       `${name} fills a gap in the registry. The ${cat} category needed exactly this.`,
       `This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.`,
-      `Would recommend ${name} to anyone getting started with ${cat}. It shows how a RAR agent should be built.`,
+      `Would recommend ${name} to anyone getting started with ${cat}. It shows how a RAPP agent should be built.`,
       `${tier} tier feels right for where this is. ${c.stars >= 4 ? 'Could see this going official.' : 'A few iterations away from verified.'}`,
     ]),
     // Technical angle
@@ -12653,7 +12653,7 @@ function curatorReviewTextVariant(a, index, seed) {
       ]);
       return pick([
         `Depends on ${(a.dependencies||[]).join(', ')}. Standard dependency chain — nothing surprising.`,
-        `${deps} dep${deps > 1 ? 's' : ''}, all within the RAR ecosystem. No external package risk.`,
+        `${deps} dep${deps > 1 ? 's' : ''}, all within the RAPP ecosystem. No external package risk.`,
       ]);
     },
     // Comparison angle
@@ -13569,7 +13569,7 @@ async function verifyCardCredential(credential) {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// ── RAR CARD CHAIN — Binder Wallet & On-Chain Verification ──
+// ── RAPP CARD CHAIN — Binder Wallet & On-Chain Verification ──
 // The Binder is your private wallet. Your ECDSA keypair IS your Binder.
 // Cards forged on-chain are serverless NFTs — publicly verifiable,
 // only claimable by the Binder holder. No forgeries possible.

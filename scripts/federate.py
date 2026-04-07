@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Federation CLI — Manages the relationship between a RAR binder and upstream.
+Federation CLI — Manages the relationship between a RAPP binder and upstream.
 
 Usage:
   python scripts/federate.py status              Show federation config
@@ -91,7 +91,7 @@ def cmd_status(config: dict) -> int:
     repo = config.get("repo", "?")
     upstream = config.get("upstream")
 
-    print(f"\nRAR Federation Status")
+    print(f"\nRAPP Federation Status")
     print(f"{'=' * 50}")
     print(f"  Role:     {role.upper()}")
     print(f"  Repo:     {owner}/{repo}")
@@ -442,7 +442,7 @@ def cmd_sync(config: dict, pull: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="RAR Federation — manage instance/upstream relationship"
+        description="RAPP Federation — manage instance/upstream relationship"
     )
     parser.add_argument(
         "command",

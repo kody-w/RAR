@@ -1,17 +1,17 @@
-# RAR — Machine-Readable Skill Interface
+# RAPP — Machine-Readable Skill Interface
 
 > ## Quick Start — Feed This File to Your AI
 >
-> Copy-paste **one command** into your AI assistant (Claude, ChatGPT, Copilot, etc.) to give it full agentic access to the RAR registry:
+> Copy-paste **one command** into your AI assistant (Claude, ChatGPT, Copilot, etc.) to give it full agentic access to the RAPP registry:
 >
 > ```
-> Read this file and use it as your skill interface for the RAR agent registry: https://raw.githubusercontent.com/kody-w/RAR/main/skill.md
+> Read this file and use it as your skill interface for the RAPP agent registry: https://raw.githubusercontent.com/kody-w/RAR/main/skill.md
 > ```
 >
 > Or if your AI supports URL fetching, just say:
 >
 > ```
-> Fetch https://raw.githubusercontent.com/kody-w/RAR/main/skill.md and use it to help me browse, search, install, and submit agents to the RAR registry.
+> Fetch https://raw.githubusercontent.com/kody-w/RAR/main/skill.md and use it to help me browse, search, install, and submit agents to the RAPP registry.
 > ```
 >
 > Once your AI has this file, it can: search 130+ agents, install them with one command, scaffold new agents, submit to the registry, resolve cards from seeds, and more — all without you visiting GitHub.
@@ -141,7 +141,7 @@ python rapp_sdk.py new @yourname/my_cool_agent
 # 4. Validate + test
 python rapp_sdk.py test agents/@yourname/my_cool_agent.py
 
-# 5. Submit to the RAR registry
+# 5. Submit to the RAPP registry
 python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
 
@@ -151,14 +151,14 @@ python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 
 | Command | What |
 |---------|------|
-| `init [name]` | Initialize a RAR binder (creates agents/, staging/, binder/) |
+| `init [name]` | Initialize a RAPP binder (creates agents/, staging/, binder/) |
 | `new @pub/slug` | Scaffold agent from template (snake_case enforced) |
 | `validate path.py` | Validate manifest against schema |
 | `test path.py` | Run contract tests (no pytest needed) |
 | `search "query"` | Search the registry |
 | `install @pub/slug` | Download agent from registry |
 | `info @pub/slug` | Show agent details |
-| `submit path.py` | Submit agent to RAR for review |
+| `submit path.py` | Submit agent to RAPP for review |
 | `card mint path.py` | Mint a card from agent file |
 | `card resolve @pub/slug` | Self-assemble card from name (needs registry) |
 | `card resolve 12345` | Self-assemble card from seed (offline) |
@@ -305,7 +305,7 @@ curl -X POST https://api.github.com/repos/kody-w/RAR/issues \
 
 Open an issue at https://github.com/kody-w/RAR/issues/new — paste Python code directly in the body.
 
-> **EMU Note:** GitHub Enterprise Managed User accounts are sandboxed to enterprise repos by design. You need a personal GitHub account (free) to interact with public repos like RAR. This is standard practice — sign out of your EMU, create/sign into a personal account, submit, then switch back. Your `@borg` namespace is tied to your personal identity, not your enterprise identity.
+> **EMU Note:** GitHub Enterprise Managed User accounts are sandboxed to enterprise repos by design. You need a personal GitHub account (free) to interact with public repos like RAPP. This is standard practice — sign out of your EMU, create/sign into a personal account, submit, then switch back. Your `@borg` namespace is tied to your personal identity, not your enterprise identity.
 
 #### What happens next
 
@@ -345,7 +345,7 @@ The following patterns are **rejected** by the security scanner:
 | Namespace | Owner | Focus |
 |-----------|-------|-------|
 | `@rapp` | Reserved | Official base class |
-| `@kody` | Kody Wildfeuer | Core agents (memory, RAR client, workbench, engine) |
+| `@kody` | Kody Wildfeuer | Core agents (memory, RAPP client, workbench, engine) |
 | `@borg` | Howard Hoy | Assimilation, cards, intelligence |
 | `@discreetRappers` | Reserved | Enterprise (Dynamics, SharePoint, pipelines) |
 | `@wildhaven` | Wildhaven of America | CEO agent |
@@ -383,7 +383,7 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 | ContextMemory | context_memory_agent | core | Recalls conversation history and stored memories |
 | ManageMemory | manage_memory_agent | core | Stores facts, preferences, insights to memory |
 | GitHubAgentLibrary | github_agent_library_agent | core | Browse, search, install agents from this repo |
-| RAR Remote Agent | rar_remote_agent | core | Native client for the RAR registry |
+| RAPP Remote Agent | rar_remote_agent | core | Native client for the RAPP registry |
 | ReconDeck | recon_deck_agent | core | Reconnaissance deck agent |
 | Agent Workbench | agent_workbench | devtools | Agent development and testing workbench |
 | Rappterbook | rappterbook_agent | integrations | Client for Rappterbook social network |

@@ -1,5 +1,5 @@
 """
-Rappterpedia Agent — Community wiki & forum content engine for the RAR ecosystem.
+Rappterpedia Agent — Community wiki & forum content engine for the RAPP ecosystem.
 
 Generates wiki articles, forum threads, and replies using rules-as-data templates.
 Can be harnessed by the Virtual Brainstem or any CommunityRAPP runtime to pump
@@ -66,10 +66,10 @@ ARTICLE_RULES = {
         ],
         "sections": [
             ("Overview", [
-                "**{agent_display}** (`{agent_name}`) is a {category} agent in the RAR registry. {description}\n\nPublished by `{publisher}`, it's at version {version} with **{quality_tier}** quality tier.",
+                "**{agent_display}** (`{agent_name}`) is a {category} agent in the RAPP registry. {description}\n\nPublished by `{publisher}`, it's at version {version} with **{quality_tier}** quality tier.",
             ]),
             ("Installation", [
-                "### From the Agent Store\n\nBrowse to the agent card and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\nAsk the RAR Remote Agent: *\"Install {agent_name}\"*",
+                "### From the Agent Store\n\nBrowse to the agent card and download the `.py` file. Drop it into your `agents/` folder.\n\n### Direct Fetch\n\n```bash\ncurl -O https://raw.githubusercontent.com/kody-w/RAR/main/agents/{agent_path}\n```\n\n### From Chat\n\nAsk the RAPP Remote Agent: *\"Install {agent_name}\"*",
             ]),
             ("How It Works", [
                 "{agent_display} inherits from `BasicAgent` and implements `perform(**kwargs)`. Call it with your parameters and get a string result back. Tags: {tag_list}.",
@@ -90,16 +90,16 @@ ARTICLE_RULES = {
                 "This guide walks you through **{topic_lower}**. By the end you'll understand the key concepts and be ready to apply them.",
             ]),
             ("Prerequisites", [
-                "- Python 3.11+\n- A text editor\n- The RAR repo cloned or forked\n- About 15 minutes",
+                "- Python 3.11+\n- A text editor\n- The RAPP repo cloned or forked\n- About 15 minutes",
             ]),
         ],
         "topics": [
             "Writing Your First Agent", "The __manifest__ Dict — Every Field Explained",
             "Testing Agents Locally Before Publishing", "Using the Agent Workbench",
-            "Publishing to the RAR Registry", "Agent Versioning with Semver",
+            "Publishing to the RAPP Registry", "Agent Versioning with Semver",
             "Debugging Common Manifest Errors", "The Single-File Principle and Why It Matters",
             "Working with the Agent Store Offline", "Setting Up Environment Variables for Agents",
-            "Forking RAR for Your Organization", "Creating Integration Agents for External APIs",
+            "Forking RAPP for Your Organization", "Creating Integration Agents for External APIs",
         ],
     },
     "best_practice": {
@@ -113,7 +113,7 @@ ARTICLE_RULES = {
         ],
         "sections": [
             ("The Pattern", [
-                "This article covers a proven pattern for **{topic_lower}** in the RAR ecosystem.",
+                "This article covers a proven pattern for **{topic_lower}** in the RAPP ecosystem.",
             ]),
             ("Why It Matters", [
                 "Agents that follow this pattern get higher community ratings, faster tier promotion, and fewer issues in production.",
@@ -154,12 +154,12 @@ ARTICLE_RULES = {
         "tags": ["architecture", "internals", "technical"],
         "titles": [
             "Architecture: {topic}",
-            "How {topic} Works in RAR",
-            "Inside RAR: {topic}",
+            "How {topic} Works in RAPP",
+            "Inside RAPP: {topic}",
         ],
         "sections": [
             ("Overview", [
-                "This article explains **{topic_lower}** — a core architectural decision in RAR. Understanding this helps you build better agents.",
+                "This article explains **{topic_lower}** — a core architectural decision in RAPP. Understanding this helps you build better agents.",
             ]),
         ],
         "topics": [
@@ -211,7 +211,7 @@ THREAD_RULES = {
     "idea": {
         "channel": "ideas", "weight": 3,
         "titles": ["Idea: {idea}", "Feature request: {idea}", "What if we had {idea}?"],
-        "bodies": ["I think {idea_lower} would make RAR significantly better."],
+        "bodies": ["I think {idea_lower} would make RAPP significantly better."],
         "ideas": [
             "an agent dependency graph visualizer", "automatic Holo card generation on publish",
             "agent analytics with download counts", "a diff view for version updates",
@@ -302,7 +302,7 @@ def _agent_context(agent):
     return {
         "agent_name": name,
         "agent_display": agent.get("display_name", name),
-        "description": agent.get("description", "An agent in the RAR registry."),
+        "description": agent.get("description", "An agent in the RAPP registry."),
         "description_lower": agent.get("description", "").lower().rstrip("."),
         "publisher": f"@{pub}", "publisher_slug": pub,
         "category": agent.get("category", "community"),

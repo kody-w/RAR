@@ -207,10 +207,10 @@ class MarkdownToSlidesAgent(BasicAgent):
 
 
 if __name__ == "__main__":
-    sample = """# RAR Agent Registry
+    sample = """# RAPP Agent Registry
 The open ecosystem for AI agents
 
-## What is RAR?
+## What is RAPP?
 A single-file agent registry where every agent is one .py file with an embedded manifest.
 
 - Agents return strings
@@ -226,7 +226,7 @@ from agents.basic_agent import BasicAgent
 
 class MyAgent(BasicAgent):
     def perform(self, **kwargs):
-        return "Hello from RAR"
+        return "Hello from RAPP"
 ```
 
 <!-- This is a speaker note for the presenter -->

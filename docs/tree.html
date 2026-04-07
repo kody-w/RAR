@@ -186,7 +186,7 @@ function drawTree(canvas, groups) {
   ctx.fillStyle = '#e3b341';
   ctx.font = '700 11px monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('RAR', cx, rootY + 16);
+  ctx.fillText('RAPP', cx, rootY + 16);
 
   // ── Draw branches ──
   const branchSpan = W * 0.85;
@@ -410,7 +410,7 @@ function renderChain(chain) {
     &middot; ${chain.chainLength || '?'} blocks
     &middot; Head: <span class="hash">${chain.chainHead?.slice(0, 16)}...</span>
     &middot; Protocol: ${chain.protocol || 'rar-chain/1.0'}
-    &middot; <a href="https://kody-w.github.io/RAR/" target="_blank">Open RAR</a>
+    &middot; <a href="https://kody-w.github.io/RAR/" target="_blank">Open RAPP</a>
   `;
 }
 

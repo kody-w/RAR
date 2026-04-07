@@ -2,7 +2,7 @@
 Pipeline Integrity Tests — validates the full submission→staging→approval→forge pipeline,
 security scanning, SHA256 integrity, version immutability, and federation setup.
 
-These tests ensure RAR can be globally relied upon as the npm for RAPP.
+These tests ensure RAPP can be globally relied upon as the npm for RAPP.
 """
 
 import ast
