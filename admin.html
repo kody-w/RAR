@@ -388,7 +388,7 @@ function issueCard(issue, stage) {
     </div>`;
   } else if (stage === 'review') {
     actions = `<div class="action-bar">
-      <button class="action-btn btn-approve" ${disabled} onclick="event.stopPropagation();processIssue(${num})">▶ Process</button>
+      <span style="color:var(--green);font-size:.78rem;font-weight:500">⏳ CI processing…</span>
       <button class="action-btn btn-view" onclick="event.stopPropagation();window.open('${issue.html_url}','_blank')">View</button>
     </div>`;
   } else if (stage === 'failed') {
@@ -443,8 +443,13 @@ async function approveIssue(num) {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ body: `✅ Approved by @${ghUser.login} via RAR Admin` })
     });
-    showToast(`#${num} approved!`, 'success');
-    loadPipeline();
+    // Trigger processing workflow (single dispatch — CI handles the rest)
+    await fetch(`${API}/actions/workflows/process-issues.yml/dispatches`, {
+      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main', inputs: { issue_number: String(num) } })
+    });
+    showToast(`#${num} approved & processing triggered`, 'success');
+    setTimeout(loadPipeline, 15000);
   } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
 }
 
