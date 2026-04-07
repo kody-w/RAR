@@ -157,8 +157,10 @@ def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
     for name, fn in backends:
         try:
             result = fn(system, user, max_tokens)
-            if result:
+            if result and "copilot [command]" not in result and "gh copilot" not in result:
                 return result
+            elif result:
+                print(f"  [{name.upper()}] Rejected: got CLI help text instead of content")
         except Exception as e:
             print(f"  [{name.upper()}] Failed: {e}")
     return None
@@ -213,6 +215,96 @@ AUTHORS = [
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Delta Production — each stream produces a delta file
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MIN_CONTENT_WORDS = 60
+
+def produce_refill_delta(stream_id: str, frame: int, batch_size: int = 5) -> dict:
+    """
+    Find bare articles (< MIN_CONTENT_WORDS) and produce LLM-enriched replacements.
+    Deltas carry _refill_id to tell merge to REPLACE existing content.
+    """
+    ts = now_iso()
+    agents = load_registry()
+    agent_lookup = {a.get("name", ""): a for a in agents}
+
+    prev_state = load_json(STATE_FILE)
+    all_articles = prev_state.get("articles", [])
+
+    bare = [a for a in all_articles if len(a.get("content", "").split()) < MIN_CONTENT_WORDS]
+    random.shuffle(bare)
+    targets = bare[:batch_size]
+
+    if not targets:
+        print(f"  No bare articles found (all ≥ {MIN_CONTENT_WORDS} words)")
+        return {"frame": frame, "stream_id": stream_id, "completed_at": ts,
+                "articles_created": [], "threads_created": [], "reviews_created": []}
+
+    print(f"  Found {len(bare)} bare articles, refilling {len(targets)} this frame")
+
+    delta = {
+        "frame": frame, "stream_id": stream_id, "completed_at": "",
+        "articles_created": [], "threads_created": [], "reviews_created": [],
+    }
+
+    for article in targets:
+        title = article.get("title", "")
+        category = article.get("category", "")
+        tags = article.get("tags", [])
+        old_content = article.get("content", "")
+        article_id = article.get("id", "")
+        generated_by = article.get("generated_by", "")
+
+        # Build context based on category
+        context_hint = ""
+        if category == "agents":
+            # Try to find the agent in registry
+            for tag in tags:
+                for name, a in agent_lookup.items():
+                    if tag in name or tag in a.get("display_name", "").lower():
+                        context_hint = (f"Agent: {a.get('display_name','')} ({a.get('name','')})\n"
+                                       f"Description: {a.get('description','')}\n"
+                                       f"Category: {a.get('category','')}, {a.get('_lines',0)} lines\n"
+                                       f"Tags: {', '.join(a.get('tags',[]))}")
+                        break
+                if context_hint:
+                    break
+
+        prompt = (f"Expand this Rappterpedia article into a complete, substantive wiki entry.\n\n"
+                  f"Title: {title}\nCategory: {category}\nTags: {', '.join(tags)}\n\n"
+                  f"Existing stub content:\n{old_content}\n\n"
+                  f"{context_hint}\n\n"
+                  f"Write a complete article with 150-300 words. Use ## headers. "
+                  f"Be specific and practical — reference actual RAPP concepts like manifests, "
+                  f"perform(), BasicAgent, the single-file principle, quality tiers, categories. "
+                  f"Don't repeat the stub verbatim — expand it into something genuinely useful.")
+
+        content = llm_generate(system=SYSTEM_PROMPT, user=prompt, max_tokens=600)
+        if not content:
+            print(f"  [SKIP] No LLM response for refill: {title}")
+            continue
+
+        if len(content.split()) < MIN_CONTENT_WORDS:
+            print(f"  [SKIP] LLM response too short for: {title} ({len(content.split())}w)")
+            continue
+
+        pk = composite_pk(frame)
+        delta["articles_created"].append({
+            "pk": pk,
+            "_refill_id": article_id,
+            "title": title,
+            "category": category,
+            "tags": tags,
+            "content": content,
+            "author": article.get("author", random.choice(AUTHORS)),
+            "source": "llm-refill",
+            "created": article.get("created", ts),
+            "updated": ts,
+        })
+        print(f"  [REFILL] {title} ({len(old_content.split())}w → {len(content.split())}w)")
+
+    delta["completed_at"] = now_iso()
+    return delta
+
 
 def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
     """
@@ -388,13 +480,24 @@ def merge_deltas(frame: int) -> dict:
         stream = delta.get("stream_id", "?")
 
         for article in delta.get("articles_created", []):
-            pk = article.get("pk", "")
-            if pk and pk not in existing_article_pks:
-                article["id"] = f"dc-art-{state['next_article_id']:04d}"
-                state["next_article_id"] += 1
-                state["articles"].append(article)
-                existing_article_pks.add(pk)
-                new_articles += 1
+            refill_id = article.get("_refill_id")
+            if refill_id:
+                # Refill: replace content of existing article by ID
+                for existing in state.get("articles", []):
+                    if existing.get("id") == refill_id:
+                        existing["content"] = article["content"]
+                        existing["updated"] = article.get("updated", now_iso())
+                        existing["source"] = article.get("source", "llm-refill")
+                        new_articles += 1
+                        break
+            else:
+                pk = article.get("pk", "")
+                if pk and pk not in existing_article_pks:
+                    article["id"] = f"dc-art-{state['next_article_id']:04d}"
+                    state["next_article_id"] += 1
+                    state["articles"].append(article)
+                    existing_article_pks.add(pk)
+                    new_articles += 1
 
         for thread in delta.get("threads_created", []):
             pk = thread.get("pk", "")
@@ -469,6 +572,11 @@ def main():
     p_cycle.add_argument("--frame", type=int, default=0, help="Frame number (0=auto)")
     p_cycle.add_argument("--ticks", type=int, default=3, help="Ticks per stream")
 
+    p_refill = sub.add_parser("refill", help="Refill bare articles with LLM content")
+    p_refill.add_argument("--stream", default="refill", help="Stream ID")
+    p_refill.add_argument("--frame", type=int, default=0, help="Frame number (0=auto)")
+    p_refill.add_argument("--batch", type=int, default=5, help="Articles per batch")
+
     args = parser.parse_args()
 
     if args.command == "produce":
@@ -506,6 +614,19 @@ def main():
             print(f"    {a} articles, {t} threads, {r} reviews")
 
         print(f"\n{'=' * 50}")
+        print(f"  Merging...")
+        merge_deltas(frame)
+
+    elif args.command == "refill":
+        frame = args.frame or get_current_frame()
+        print(f"Dream Catcher: refill bare articles, frame {frame}, batch {args.batch}")
+        delta = produce_refill_delta(args.stream, frame, args.batch)
+        DELTAS_DIR.mkdir(parents=True, exist_ok=True)
+        delta_path = DELTAS_DIR / f"frame-{frame}-{args.stream}.json"
+        save_json(delta_path, delta)
+        a = len(delta["articles_created"])
+        print(f"  Refill delta saved: {a} articles enriched")
+        print(f"  Path: {delta_path}")
         print(f"  Merging...")
         merge_deltas(frame)
 

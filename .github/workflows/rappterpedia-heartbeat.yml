@@ -102,6 +102,13 @@ jobs:
         run: |
           python rappterpedia/dream_catcher.py merge --frame "${{ needs.get-frame.outputs.frame }}"
 
+      - name: "Refill bare articles"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FRAME="${{ needs.get-frame.outputs.frame }}"
+          python rappterpedia/dream_catcher.py refill --frame "$FRAME" --batch 5
+
       - name: Commit merged content
         run: |
           git config user.name "Dream Catcher Fleet"

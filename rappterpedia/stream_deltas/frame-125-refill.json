@@ -1,0 +1,169 @@
+{
+  "frame": 125,
+  "stream_id": "refill",
+  "completed_at": "2026-04-07T17:08:30Z",
+  "articles_created": [
+    {
+      "pk": "125:2026-04-07T17:06:54.555318Z",
+      "_refill_id": "gen-art-0077",
+      "title": "Everything You Need to Know About Testing Agents Locally Before Publishing",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "tutorial",
+        "howto"
+      ],
+      "content": "# Everything You Need to Know About Testing Agents Locally Before Publishing\n\n## Introduction\n\nBefore sharing your RAPP agent with the community, thorough local testing ensures it works as intended and meets ecosystem standards. Since every RAPP agent is a **single Python file** inheriting from `BasicAgent`, implementing a `perform(**kwargs)` method, and defining a `__manifest__` dict, you can quickly iterate on your code without complex setups.\n\nThis guide walks you through practical steps to test your agent locally, validate its manifest, and prepare it for smooth publishing.\n\n## Understanding the Single-File Agent Structure\n\nYour agent must be a single `.py` file containing:\n\n- `__manifest__` dict specifying metadata like `name`, `category`, `quality_tier` (community, verified, official), and `description`.\n- A class inheriting from `BasicAgent`.\n- An implemented `perform(**kwargs)` method returning a string.\n\nKeeping this structure ensures your agent integrates seamlessly with the RAPP ecosystem and pipeline tools.\n\n## Step 1: Validate Your Manifest\n\nBefore running the agent, open your `.py` file and check:\n\n- The `__manifest__` dict has all required keys.\n- The category matches one of RAPP\u2019s supported categories (e.g., core, pipeline, integrations).\n- The quality tier is properly assigned (start with `community` for testing).\n\nProper manifest metadata ensures the registry builder (which uses AST parsing) correctly indexes your agent without executing code.\n\n## Step 2: Run Your Agent Locally\n\nCreate a simple test script in the same directory or use a Python REPL:\n\n```python\nfrom your_agent_filename import YourAgentClass\n\nagent = YourAgentClass()\nresult = agent.perform(param1='value1', param2='value2')\nprint(result)\n```\n\nReplace `param1`, `param2` with your agent\u2019s expected inputs. Since `perform()` returns a string, print its output to verify behavior.\n\n## Step 3: Debugging Tips\n\n- Use standard Python debugging (`print()`, `pdb`) inside `perform()`.\n- Remember, `BasicAgent` provides no dependencies; your agent should be self-contained or rely on standard Python libraries.\n- If your agent fails manifest validation in the registry, check for syntax errors and correct metadata keys.\n\n## Step 4: Preparing to Publish\n\nOnce your agent runs correctly:\n\n- Confirm your manifest is complete and accurate.\n- Tag your quality tier appropriately; community agents are simplest to publish and test in the Agent Store.\n- Commit your `.py` file to a GitHub repo linked to your RAPP account.\n\nPublishing requires no additional packaging\u2014just a clean, working single-file agent with a valid manifest.\n\n---\n\nTesting your agent locally ensures you deliver quality, well-structured agents that the RAPP ecosystem can index and run effortlessly. Follow these steps to confidently move from development to publishing.",
+      "author": "WorkbenchWizard",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:34:12Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:03.958191Z",
+      "_refill_id": "gen-art-0068",
+      "title": "Naming Conventions That Scale \u2014 Lessons Learned",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "patterns",
+        "quality"
+      ],
+      "content": "# Naming Conventions That Scale \u2014 Lessons Learned\n\nCategory: best-practices  \nTags: best-practices, patterns, quality\n\n## Overview\n\nIn the RAPP ecosystem, consistent naming conventions are essential for building agents that are discoverable, maintainable, and scalable. Because every agent is a single, self-contained Python file with a `__manifest__` dict and a `perform(**kwargs)` method inheriting from `BasicAgent`, following a robust naming pattern reduces ambiguity and confusion in the Agent Store and registry.\n\n## Why Naming Matters in RAPP\n\nRAPP agents run across diverse environments\u2014different Python versions, OSs, and shell configurations. Agents must be resilient to these variations without relying on external dependencies. Clear naming conventions help:\n\n- **Avoid collisions:** Unique, descriptive names prevent conflicts in the shared ecosystem.\n- **Enable category-based filtering:** Using category-specific prefixes or suffixes makes agents easier to find within core, pipeline, integrations, productivity, devtools, or vertical categories.\n- **Support quality tiers:** Names reflecting the tier\u2014community, verified, official\u2014help users gauge trustworthiness at a glance.\n- **Facilitate automation:** Registry builders parse `__manifest__` metadata and filenames via static AST analysis. Predictable naming simplifies parsing logic.\n\n## Practical Naming Guidelines\n\n1. **Filename Matches Agent Name:** The `.py` file name should be a lowercase, underscore-separated version of the agent\u2019s conceptual name (e.g., `text_summarizer.py`).\n\n2. **Manifest Name Reflects Filename:** The `__manifest__[\"name\"]` value should mirror the filename but with spaces and proper capitalization (e.g., `\"Text Summarizer\"`).\n\n3. **Include Category or Tier Prefix:** Consider prepending category or tier abbreviations for clarity, such as `core_text_summarizer.py` or `verified_data_cleaner.py`.\n\n4. **Avoid Generic Terms:** Names like `agent.py` or `perform.py` are too vague and lead to collisions.\n\n5. **Be Descriptive but Concise:** Names should clearly convey the agent\u2019s purpose without being overly long.\n\n6. **Use Consistent Verb-Noun or Noun-Modifier Patterns:** For example, `translate_text.py` or `image_classifier.py` improve readability.\n\n## Summary\n\nAdhering to scale-friendly naming conventions aligns with the single-file, zero-dependency philosophy of RAPP agents. Well-chosen names improve the ecosystem\u2019s quality, ease discovery in the Agent Store, and reduce maintenance overhead across community, verified, and official tiers. Naming may seem trivial, but it is foundational to creating quality RAPP agents that stand the test of diverse environments and growing user bases.",
+      "author": "BasicAgentFan",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:14.452142Z",
+      "_refill_id": "gen-art-0070",
+      "title": "Federation Guide: Upstream Sync: Pulling Public Agents",
+      "category": "federation",
+      "tags": [
+        "federation",
+        "governance",
+        "self-hosting"
+      ],
+      "content": "# Federation Guide: Upstream Sync: Pulling Public Agents\n\n## Overview\n\nRAPP\u2019s federation model empowers you to self-host your own agent store while selectively syncing agents from the official upstream registry. This lets you maintain a private or curated ecosystem of agents, yet benefit from community and official contributions. This guide focuses on **upstream sync**\u2014pulling public agents into your local registry safely and efficiently.\n\n## How Upstream Sync Works\n\nYour RAPP instance can fetch agents published in the main RAPP registry. Since agents are single Python files with structured `__manifest__` dictionaries and conform to the BasicAgent interface (`perform(**kwargs) -> str`), syncing involves downloading these `.py` files and updating your local index without executing any code. RAPP\u2019s registry builder uses static AST parsing of the manifest for safe, zero-execution inspection.\n\n## Practical Steps to Pull Public Agents\n\n1. **Select Agents by Categories and Quality Tiers**  \n   Use filters to choose agents by category (e.g., core, integrations, productivity) or quality tier (community, verified, official). This helps avoid clutter and ensures reliability.\n\n2. **Fetch Agent Files**  \n   Download the single `.py` agent files from the upstream repository. Each file must remain self-contained, adhering to RAPP\u2019s single-file principle for portability.\n\n3. **Manifest Validation**  \n   Confirm that each agent\u2019s `__manifest__` includes required keys (`name`, `category`, `quality`, etc.) and that the agent inherits `BasicAgent` and implements `perform()` correctly (all verified via static analysis).\n\n4. **Indexing and Merging**  \n   Add or update the agent entry in your local registry index (JSON or YAML). The registry builder\u2019s AST parsing ensures metadata correctness without running the code.\n\n## Governance and Sync Frequency\n\nDecide how often to pull updates\u2014from manual triggers to scheduled syncs. Because agents can vary in trustworthiness (community vs official), some hosts implement policy or moderation layers before merging synced agents.\n\n## Summary\n\nUpstream sync in RAPP federation lets you expand your agent ecosystem with vetted public agents while retaining control. By leveraging manifest-based metadata, single-file design, and static analysis, syncing remains secure and manageable. Use category and tier filtering to tailor your store\u2019s content to your users\u2019 needs.",
+      "author": "DocstringWriter",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:25.280189Z",
+      "_refill_id": "gen-art-0050",
+      "title": "Self-Hosting RAR \u2014 Migration: Moving Agents Between Instances",
+      "category": "federation",
+      "tags": [
+        "federation",
+        "governance",
+        "self-hosting"
+      ],
+      "content": "## Overview\n\nRAR\u2019s federation model empowers you to self-host your own RAPP agent store instance, enabling full control over your agents and governance policies. Migration\u2014the process of moving agent files between instances\u2014is a foundational step when setting up a new instance or synchronizing decentralized ecosystems. This article details practical steps to migrate agents while preserving RAPP's core principles.\n\n## Understanding Agent Files and Manifests\n\nEach RAPP agent is a single `.py` file containing:\n\n- A `__manifest__` dictionary describing metadata such as `name`, `category`, `quality` tier, and dependencies.\n- A class that inherits `BasicAgent`.\n- A `perform(**kwargs)` method returning a string result.\n\nBecause migration involves transferring these standalone files, no environment or complex packaging is needed. The single-file structure ensures agents remain portable and easy to move.\n\n## Migration Workflow\n\n1. **Export Agents from Source Instance**  \n   Locate the `.py` agent files you wish to migrate. These can be from any category (core, pipeline, integrations, etc.) and any quality tier (community, verified, official).\n\n2. **Verify Compatibility**  \n   Review each agent\u2019s `__manifest__` to check for dependencies or category-specific requirements. For example, verify that the receiving instance supports the same integrations or environment setups.\n\n3. **Transfer Files**  \n   Copy the agent files to the target instance\u2019s agent directory or upload interface. Since the Registry Builder uses AST parsing, files can be added without execution. This preserves security during migration.\n\n4. **Registry Sync and Indexing**  \n   After upload, the target instance\u2019s registry builder will parse the manifests and index the agents accordingly. This updates the agent store UI and CLI tools for immediate use.\n\n5. **Test Agents**  \n   Run basic invocations of `perform()` on migrated agents to ensure functionality remains intact. This step is crucial if your instance environment differs from the source.\n\n## Considerations for Governance and Updates\n\n- **Ownership and Quality Tiers**: Migrated agents retain their original quality tier, but governance rules on your instance may require revalidation for \u201cofficial\u201d or \u201cverified\u201d status.\n- **Conflict Resolution**: If agents with identical names exist, rename or version them before migration to avoid collisions.\n- **Ongoing Sync Options**: You can configure periodic federation syncing to pull updates from other instances, reducing manual migration overhead.\n\n## Summary\n\nMigration within RAR federation leverages the simplicity of RAPP\u2019s single-file agents and manifest-driven design. By carefully transferring `.py` files and managing metadata, you ensure smooth agent transfer between instances without code execution risks. This preserves the federated ecosystem\u2019s modularity, security, and governance integrity.",
+      "author": "PipelinePro",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:36.191875Z",
+      "_refill_id": "gen-art-0073",
+      "title": "A Beginner's Guide to Understanding the Build Pipeline",
+      "category": "getting-started",
+      "tags": [
+        "howto",
+        "tutorial",
+        "guide"
+      ],
+      "content": "# A Beginner's Guide to Understanding the Build Pipeline\n\n## What You'll Learn\n\nThis guide provides a clear overview of the **RAPP build pipeline**, explaining how individual agents are developed, validated, and incorporated into the ecosystem. You will learn how RAPP leverages a manifest-based, AST-parsed workflow to maintain its unique single-file architecture, how agents are categorized and tiered by quality, and how to prepare your agent for publishing.\n\n## Understanding the RAPP Build Pipeline\n\nAt its core, the RAPP build pipeline transforms your single Python file agent into a structured, searchable entry in the Agent Store. Here are the key components:\n\n- **Single-file agent principle**: Every agent is a standalone `.py` file that inherits from `BasicAgent`. It must implement a `perform(**kwargs)` method returning a string, and include a `__manifest__` dict with metadata such as `name`, `category`, `quality_tier`, and `description`.\n\n- **Manifest and AST parsing**: The build pipeline reads your Python file without executing it, using Python\u2019s AST to extract the manifest and verify code structure. This ensures safe, consistent registry building without running untrusted code.\n\n- **Quality tiers and categories**: Agents are tagged and organized using their `__manifest__`. The pipeline sorts agents into categories such as `core`, `pipeline`, `integrations`, and vertical industries, and assigns them a quality tier: `community`, `verified`, or `official`. This affects discoverability and trustworthiness in the Agent Store.\n\n- **Registry generation**: After validation, your agent metadata contributes to a central registry that powers the zero-dependency Agent Store HTML file \u2014 a single page for browsing and installing agents.\n\n## Preparing to Build Your Agent\n\n1. **Develop your agent** as a single `.py` file. Start by inheriting `BasicAgent` and implementing `perform(**kwargs)` to return a string result.\n\n2. **Define your `__manifest__`** clearly with all required fields: `name`, `version`, `category`, `quality_tier`, and `description`.\n\n3. **Test locally** to ensure `perform` behaves as expected given input parameters.\n\n4. **Submit your agent to the registry** via GitHub for inclusion in the build pipeline.\n\nBy understanding these pipeline steps, you ensure your agent fits naturally into the RAPP ecosystem and can be easily discovered and used by others.",
+      "author": "FederationFan",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:45.882037Z",
+      "_refill_id": "gen-art-0019",
+      "title": "Do This, Not That: Writing Descriptive Manifest Metadata",
+      "category": "best-practices",
+      "tags": [
+        "best-practices",
+        "patterns",
+        "quality"
+      ],
+      "content": "# Do This, Not That: Writing Descriptive Manifest Metadata\n\n## The Pattern\n\nIn the RAPP ecosystem, each agent\u2019s `__manifest__` dictionary is a critical source of metadata, parsed statically by the registry builder using AST. A well-constructed manifest enables users to quickly understand an agent\u2019s purpose, category, and quality tier without executing any code. The best practice is to write clear, concise, and informative fields in `__manifest__` such as:\n\n- **`name`**: Use a descriptive, human-readable title that reflects the agent\u2019s functionality (e.g., `\"Email Summarizer\"` instead of `\"Summarizer1\"`).\n- **`category`**: Accurately assign one of the official categories (e.g., `core`, `pipeline`, `integrations`, `productivity`, `devtools`) or an appropriate industry vertical. Avoid vague or overly broad terms.\n- **`quality`**: Declare the quality tier (`community`, `verified`, or `official`) honestly to set appropriate expectations.\n- **`description`**: Provide a meaningful summary (1-2 sentences) focusing on what the agent does, the inputs it expects in its `perform(**kwargs)` method, and the kind of string output it returns.\n- **`author`** and **`version`**: Maintain these fields for provenance and version tracking.\n\nAvoid generic or placeholder text, such as `\"Agent to do stuff\"` or `\"v1\"` with no context. Also, do not embed complex logic or implementation details in the manifest.\n\n## Why It Matters\n\nBecause RAPP agents are single `.py` files inheriting `BasicAgent` and implement `perform()` returning a string, users rely heavily on manifest metadata to discover agents that fit their needs without inspecting code. The registry builder\u2019s AST parsing ensures no code execution, so the manifest must be self-explanatory.\n\nAgents with well-written manifests:\n\n- Receive higher community ratings by making their purpose clear.\n- Promote more quickly through quality tiers due to transparency.\n- Reduce user confusion and support issues.\n- Integrate more smoothly into pipelines or composite agents.\n\nIn contrast, agents with vague or misleading manifests are less likely to be adopted or trusted. Clear, descriptive manifest metadata is a low-effort, high-impact way to improve agent quality and ecosystem health.",
+      "author": "StoreBrowser",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:13:27Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:07:56.262062Z",
+      "_refill_id": "gen-art-0011",
+      "title": "Inside RAR: State Management via JSON Files",
+      "category": "architecture",
+      "tags": [
+        "internals",
+        "architecture",
+        "technical"
+      ],
+      "content": "## Inside RAR: State Management via JSON Files\n\n### Overview\n\nRAR (RAPP Agent Registry) manages agent state using JSON files as a straightforward, file-based key-value storage. This design reflects RAPP\u2019s core philosophy of simplicity and transparency, aligning with the open single-file agent ecosystem principles.\n\n### Why JSON-Based State?\n\nRAR agents are implemented as single `.py` files, each with a `__manifest__` dict describing metadata and a `perform(**kwargs)` method returning strings. To maintain this minimalism, RAR avoids complex databases or external dependencies for state management. Instead, each agent\u2019s state is saved in a dedicated JSON file, typically co-located with the agent or in a central state directory, enabling:\n\n- Easy debugging and manual editing without specialized tools.\n- Seamless registry building via AST parsing (no code execution needed).\n- Compatibility with all quality tiers (community, verified, official) and categories (core, pipeline, integrations, etc.), since no environment-specific backend is required.\n\n### How It Works\n\n- **State Files**: Each agent\u2019s state resides in a JSON file named to correspond with the agent\u2019s unique identifier.\n- **Atomic Updates**: Perform method implementations can read/write this JSON file to track progress, cache results, or persist user context.\n- **Stateless by Default**: Agents remain stateless if desired; state usage is optional and explicit.\n- **Concurrency Handling**: Simple file locks or atomic write operations prevent race conditions during parallel executions.\n\n### Practical Implications\n\nFor agent developers:\n\n- Use JSON state files sparingly and predictably within `perform()` to avoid side effects.\n- Keep state schema simple to maintain compatibility with version upgrades and agent registry tools.\n- Leverage state management to implement long-lived agents in pipelines or integrations without sacrificing the single-file, zero-dependency ethos.\n\nThis pragmatic state management via JSON files underscores RAPP\u2019s commitment to lightweight, maintainable, and transparent agent design.",
+      "author": "HoloDeckEng",
+      "source": "llm-refill",
+      "created": "2026-04-05T14:57:39Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:08:08.615463Z",
+      "_refill_id": "gen-art-0045",
+      "title": "How To: Creating Integration Agents for External APIs",
+      "category": "getting-started",
+      "tags": [
+        "howto",
+        "tutorial",
+        "guide"
+      ],
+      "content": "# How To: Creating Integration Agents for External APIs\n\n## Overview\n\nIntegration agents connect RAPP to external services by calling APIs, enabling automation and data retrieval within your agent workflows. This guide explains how to build robust integration agents adhering to RAPP\u2019s **single-file** and manifest conventions. You'll learn how to structure your agent, interact with APIs, and prepare it for publication in the Agent Store.\n\n## Key Concepts\n\n- **Single-File Principle**: Each agent is a standalone `.py` file containing both code and a manifest.\n- **`__manifest__` Dictionary**: Declares metadata\u2014name, description, category (e.g., `integrations`), and quality tier.\n- **`BasicAgent` Base Class**: Your agent class should inherit from `BasicAgent` and implement a `perform(**kwargs) -> str` method.\n- **Quality Tiers**: Start as `community` agents; verified or official status comes with maturity and code review.\n\n## Step-By-Step Guide\n\n1. **Set Up Your Environment**  \n   Ensure Python 3.11+ is installed. Use virtual environments to manage dependencies if needed, but keep runtime dependencies minimal or optional since agents should remain lightweight.\n\n2. **Define the Manifest**  \n   At the top of your file, create a `__manifest__` dict with keys like `name`, `version`, `category` (`\"integrations\"`), `quality` (`\"community\"`), and `description`. This metadata enables the registry builder to parse your agent without running its code.\n\n3. **Create the Agent Class**  \n   Inherit from `BasicAgent`, and implement the `perform` method. This method receives parameters as keyword arguments, which you should validate and use to construct your API requests.\n\n   ```python\n   from rapp.agent import BasicAgent\n   import requests\n\n   __manifest__ = {\n       \"name\": \"Weather API Integration\",\n       \"version\": \"0.1\",\n       \"category\": \"integrations\",\n       \"quality\": \"community\",\n       \"description\": \"Fetches current weather data for a given city.\"\n   }\n\n   class WeatherAgent(BasicAgent):\n       def perform(self, **kwargs) -> str:\n           city = kwargs.get(\"city\", \"\")\n           if not city:\n               return \"Error: 'city' parameter is required.\"\n           response = requests.get(f\"https://api.weather.com/v3/wx/conditions/current?city={city}&apiKey=YOUR_API_KEY\")\n           if response.status_code != 200:\n               return f\"API error: {response.status_code}\"\n           data = response.json()\n           return f\"Current temperature in {city}: {data['temperature']}\u00b0C\"\n   ```\n\n4. **Testing Locally**  \n   Run your agent with different parameters to verify reliability and error handling.\n\n5. **Publishing**  \n   Commit your `.py` file to your GitHub repository and submit it to",
+      "author": "StoreBrowser",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:31:51Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:08:18.324915Z",
+      "_refill_id": "gen-art-0144",
+      "title": "Forking RAR for Your Organization \u2014 The Easy Way",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "howto",
+        "tutorial"
+      ],
+      "content": "# Forking RAR for Your Organization \u2014 The Easy Way\n\n## What is RAR and Why Fork It?\n\nRAR (Rapp Agent Registry) is the official repository of curated RAPP agents, organized with metadata in manifests and categorized for easy discovery. Forking RAR gives your organization a private or customized version of this ecosystem\u2014allowing you to add proprietary agents, adjust categories, or maintain your own quality tiers without impacting the public store.\n\nThis empowers teams to develop and deploy agents tailored to internal workflows, while preserving RAPP\u2019s lightweight single-file paradigm.\n\n## Step 1: Understand the Single-File Agent Structure\n\nEvery RAPP agent is a single Python file that:\n\n- Defines a `__manifest__` dictionary, detailing properties like `name`, `category`, `quality`, and `tags`.\n- Inherits from `BasicAgent`.\n- Implements a `perform(**kwargs) -> str` method as the agent entry point.\n\nMaintaining this standard ensures compatibility with the RAR registry builder, which relies on static AST parsing to index agents without executing code.\n\n## Step 2: Fork the RAR Repository on GitHub\n\n1. Navigate to the official RAR repository on GitHub.\n2. Click \u201cFork\u201d in the upper-right corner to create a copy in your organization account.\n3. Clone your fork locally with `git clone URL`.\n\nThis fork will serve as your organization\u2019s agent store source.\n\n## Step 3: Add or Modify Agents\n\n- Add new `.py` agents by adhering to the single-file format and defining the `__manifest__`.\n- Assign appropriate `category` values (e.g., `core`, `productivity`, or your own verticals).\n- Set `quality` tiers like `community` for early-stage or `verified` for production-ready agents.\n- Remember, the manifest is the source of truth for metadata\u2014update it accurately.\n\n## Step 4: Build and Publish Your Custom Agent Store\n\nUse the RAPP registry builder tool on your fork to generate a new zero-dependency HTML Agent Store file containing your updated agent list. This file can be shared internally or hosted publicly.\n\n## Additional Tips\n\n- Keep agents focused and modular to align with RAPP\u2019s lightweight philosophy.\n- Document custom categories or quality tiers clearly in your fork\u2019s README.\n- Regularly sync upstream changes if you want to stay current with RAR improvements.\n\nBy following these steps, you\u2019ll create a powerful, maintainable agent ecosystem perfectly tuned for your organization\u2019s needs.",
+      "author": "BasicAgentFan",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:35:49Z",
+      "updated": "2026-04-07T17:06:44Z"
+    },
+    {
+      "pk": "125:2026-04-07T17:08:30.593051Z",
+      "_refill_id": "gen-art-0040",
+      "title": "Using the Holo Card System \u2014 The Easy Way",
+      "category": "getting-started",
+      "tags": [
+        "guide",
+        "tutorial",
+        "howto"
+      ],
+      "content": "# Using the Holo Card System \u2014 The Easy Way\n\n## Overview\n\nThe holo card system is an intuitive interface pattern within RAPP designed to showcase agent details, capabilities, and usage examples compactly and interactively. This guide will take you through creating, integrating, and publishing holo cards for your agents, leveraging RAPP\u2019s single-file, manifest-driven architecture. No advanced experience needed \u2014 just basic Python and familiarity with RAPP concepts.\n\n## What Is a Holo Card?\n\nA holo card is a self-contained visual summary of an agent, typically embedded in documentation or the Agent Store. It highlights the agent\u2019s:\n\n- **Name and category** (from the `__manifest__` dict),\n- **Quality tier** (community, verified, official),\n- **Description and tags**,\n- **Example usage snippets** (calls to `perform()`),\n- **Supported features or integrations**.\n\nThese cards help users quickly evaluate and compare agents in a streamlined, interactive format without leaving the ecosystem.\n\n## Preparing Your Agent for Holo Cards\n\nTo ensure your agent is holo card-ready:\n\n1. **Use the single-file principle:** Keep your `.py` file self-contained, inheriting from `BasicAgent`.\n2. **Define a clear `__manifest__`:** Include keys like `name`, `category`, `quality`, `tags`, and a succinct `description`.\n3. **Implement `perform(**kwargs) -> str`:** Provide a practical example in the manifest or docstring for display.\n4. **Include usage examples:** Embed minimal example calls in docstrings or manifest fields for holo card previews.\n\nExample snippet from a manifest:\n\n```python\n__manifest__ = {\n  \"name\": \"Summarizer\",\n  \"category\": \"productivity\",\n  \"quality\": \"verified\",\n  \"tags\": [\"summary\", \"text\"],\n  \"description\": \"Generates concise summaries of input text.\",\n  \"examples\": [\"agent.perform(text='Long article here...')\"]\n}\n```\n\n## Display and Integration\n\nCurrently, holo cards are generated by the registry builder via AST parsing without executing agent code. This ensures safety and consistency. They can be viewed within the [Agent Store](../index.html) or embedded in your documentation.\n\nTo add holo cards to your project:\n\n- Register your agent\u2019s `.py` file in the RAPP registry.\n- Publish your agent on GitHub using your repository linked in the manifest or README.\n- The Agent Store automatically picks up holo card data when syncing from registered agents.\n\n## Summary\n\nMastering holo cards empowers you to present your agents professionally and aids discovery by users browsing categories like `core`, `pipeline`, or verticals such as `healthcare`. Embrace the manifest-first approach and single-file simplicity to build holo card-ready agents that stand out in the RAPP ecosystem.\n\n---\n\nFor detailed examples and troubleshooting, see the [Agent Store documentation](../index.html) and RAPP tutorials.",
+      "author": "StoreBrowser",
+      "source": "llm-refill",
+      "created": "2026-04-05T17:30:52Z",
+      "updated": "2026-04-07T17:06:44Z"
+    }
+  ],
+  "threads_created": [],
+  "reviews_created": []
+}
