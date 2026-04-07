@@ -21,6 +21,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -186,6 +187,19 @@ def check_version_immutability(name: str, version: str, sha256: str, file_path: 
     return None
 
 
+def _git_first_committed(path: Path):
+    """Return the ISO date a file was first committed, or None if unavailable."""
+    try:
+        result = subprocess.run(
+            ["git", "log", "--diff-filter=A", "--format=%cI", "--follow", "--", str(path)],
+            capture_output=True, text=True, timeout=10
+        )
+        dates = result.stdout.strip().splitlines()
+        return dates[-1] if dates else None
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None
+
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -268,6 +282,7 @@ def build_registry():
         manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = is_card or _has_holo_card(name)
+        manifest["_added_at"] = _git_first_committed(py_path)
 
         # Extract __card__ shell from .py.card files
         if is_card:

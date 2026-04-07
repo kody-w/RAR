@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-07T03:27:21.966366+00:00",
+  "generated_at": "2026-04-07T15:08:23.156809+00:00",
   "stats": {
-    "total_agents": 134,
+    "total_agents": 135,
     "publishers": 7,
     "categories": 19,
     "publisher_list": [
@@ -63,7 +63,8 @@
       "_seed": 4997715477691771520,
       "_size_kb": 23.3,
       "_lines": 456,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -90,7 +91,8 @@
       "_seed": 10723751930960163868,
       "_size_kb": 20.8,
       "_lines": 457,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -117,7 +119,8 @@
       "_seed": 10200811530753811576,
       "_size_kb": 19.7,
       "_lines": 398,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -144,7 +147,8 @@
       "_seed": 11503270546515831146,
       "_size_kb": 21.3,
       "_lines": 441,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -171,7 +175,8 @@
       "_seed": 6943812563063421267,
       "_size_kb": 18.6,
       "_lines": 402,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -198,7 +203,8 @@
       "_seed": 17730020682391761346,
       "_size_kb": 25.1,
       "_lines": 521,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -225,7 +231,8 @@
       "_seed": 16738861686366810084,
       "_size_kb": 20.3,
       "_lines": 429,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -252,7 +259,8 @@
       "_seed": 15010362534912467138,
       "_size_kb": 23.0,
       "_lines": 495,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -279,7 +287,8 @@
       "_seed": 15018051093375102546,
       "_size_kb": 23.4,
       "_lines": 440,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -306,7 +315,8 @@
       "_seed": 13173877546091689666,
       "_size_kb": 18.0,
       "_lines": 393,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -333,7 +343,8 @@
       "_seed": 2665723234406249080,
       "_size_kb": 16.5,
       "_lines": 334,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -360,7 +371,8 @@
       "_seed": 16195268016693984984,
       "_size_kb": 17.6,
       "_lines": 378,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -387,7 +399,8 @@
       "_seed": 16569251649731306541,
       "_size_kb": 41.6,
       "_lines": 643,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -414,7 +427,8 @@
       "_seed": 15415531861044765094,
       "_size_kb": 19.2,
       "_lines": 424,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -441,7 +455,8 @@
       "_seed": 10025994443272366861,
       "_size_kb": 19.7,
       "_lines": 430,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -468,7 +483,8 @@
       "_seed": 3953971822722691162,
       "_size_kb": 17.1,
       "_lines": 380,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -495,7 +511,8 @@
       "_seed": 18173504355209722482,
       "_size_kb": 16.1,
       "_lines": 348,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -522,7 +539,8 @@
       "_seed": 11125880910024161837,
       "_size_kb": 19.2,
       "_lines": 398,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -549,7 +567,8 @@
       "_seed": 5854357498148564447,
       "_size_kb": 20.6,
       "_lines": 453,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -576,7 +595,8 @@
       "_seed": 15452430195650870719,
       "_size_kb": 20.4,
       "_lines": 414,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -604,7 +624,8 @@
       "_seed": 14350164510408194833,
       "_size_kb": 34.6,
       "_lines": 673,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -632,7 +653,8 @@
       "_seed": 3025664746881563672,
       "_size_kb": 47.4,
       "_lines": 570,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -659,7 +681,8 @@
       "_seed": 2520427991298359032,
       "_size_kb": 89.7,
       "_lines": 921,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -687,7 +710,8 @@
       "_seed": 3606179690631149846,
       "_size_kb": 13.0,
       "_lines": 289,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -715,7 +739,8 @@
       "_seed": 14861492049442254073,
       "_size_kb": 14.6,
       "_lines": 289,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -743,7 +768,8 @@
       "_seed": 5195556347500573918,
       "_size_kb": 13.0,
       "_lines": 292,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -771,7 +797,8 @@
       "_seed": 16390491864010865935,
       "_size_kb": 12.9,
       "_lines": 273,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -799,7 +826,8 @@
       "_seed": 12826547131641504102,
       "_size_kb": 13.7,
       "_lines": 266,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -827,7 +855,8 @@
       "_seed": 16427931656570809614,
       "_size_kb": 15.3,
       "_lines": 331,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -855,7 +884,8 @@
       "_seed": 743639680721625695,
       "_size_kb": 14.8,
       "_lines": 360,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -883,7 +913,8 @@
       "_seed": 5836169530732982279,
       "_size_kb": 13.3,
       "_lines": 328,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -911,7 +942,8 @@
       "_seed": 12145677136544149217,
       "_size_kb": 13.8,
       "_lines": 328,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -939,7 +971,8 @@
       "_seed": 5482587288805061290,
       "_size_kb": 14.4,
       "_lines": 369,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -967,7 +1000,8 @@
       "_seed": 15492855745775155274,
       "_size_kb": 12.9,
       "_lines": 341,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -996,7 +1030,8 @@
       "_seed": 8887254288578788668,
       "_size_kb": 12.8,
       "_lines": 326,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1024,7 +1059,8 @@
       "_seed": 5999981279495069821,
       "_size_kb": 16.9,
       "_lines": 398,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1052,7 +1088,8 @@
       "_seed": 9923268848797892417,
       "_size_kb": 15.1,
       "_lines": 328,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1080,7 +1117,8 @@
       "_seed": 9239080674509203253,
       "_size_kb": 13.0,
       "_lines": 286,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1109,7 +1147,8 @@
       "_seed": 16478343906997446426,
       "_size_kb": 14.8,
       "_lines": 290,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1137,7 +1176,8 @@
       "_seed": 15588155065239352323,
       "_size_kb": 14.9,
       "_lines": 338,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1165,7 +1205,8 @@
       "_seed": 13561102833751435409,
       "_size_kb": 13.9,
       "_lines": 295,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1192,7 +1233,8 @@
       "_seed": 2012642120884166826,
       "_size_kb": 13.6,
       "_lines": 317,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1220,7 +1262,8 @@
       "_seed": 12655086543703912626,
       "_size_kb": 15.0,
       "_lines": 327,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1247,7 +1290,8 @@
       "_seed": 8826999372581053682,
       "_size_kb": 13.2,
       "_lines": 292,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1275,7 +1319,8 @@
       "_seed": 3404678271836368537,
       "_size_kb": 14.6,
       "_lines": 272,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1303,7 +1348,8 @@
       "_seed": 14273408934978795408,
       "_size_kb": 14.0,
       "_lines": 327,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1331,7 +1377,8 @@
       "_seed": 6581827105817638564,
       "_size_kb": 14.1,
       "_lines": 306,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1360,7 +1407,8 @@
       "_seed": 1477628584621128595,
       "_size_kb": 12.8,
       "_lines": 268,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1388,7 +1436,8 @@
       "_seed": 18409195487267397654,
       "_size_kb": 14.4,
       "_lines": 329,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1416,7 +1465,8 @@
       "_seed": 4746954344674107422,
       "_size_kb": 12.6,
       "_lines": 280,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1443,7 +1493,8 @@
       "_seed": 776460569569535970,
       "_size_kb": 18.2,
       "_lines": 369,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1471,7 +1522,8 @@
       "_seed": 16645293730949775296,
       "_size_kb": 18.9,
       "_lines": 402,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1499,7 +1551,8 @@
       "_seed": 5020671239044998157,
       "_size_kb": 15.9,
       "_lines": 264,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1527,7 +1580,8 @@
       "_seed": 14682849978474050837,
       "_size_kb": 16.8,
       "_lines": 325,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1554,7 +1608,8 @@
       "_seed": 1713805111300072952,
       "_size_kb": 15.6,
       "_lines": 293,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1581,7 +1636,8 @@
       "_seed": 17617098655100714102,
       "_size_kb": 15.2,
       "_lines": 300,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1608,7 +1664,8 @@
       "_seed": 10044936445967873390,
       "_size_kb": 17.7,
       "_lines": 317,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1636,7 +1693,8 @@
       "_seed": 5909429225316429364,
       "_size_kb": 14.7,
       "_lines": 284,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1664,7 +1722,8 @@
       "_seed": 2233591614042549795,
       "_size_kb": 14.9,
       "_lines": 285,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1691,7 +1750,8 @@
       "_seed": 3288425480277600421,
       "_size_kb": 15.8,
       "_lines": 296,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1719,7 +1779,8 @@
       "_seed": 381057127156556376,
       "_size_kb": 15.8,
       "_lines": 258,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1746,7 +1807,8 @@
       "_seed": 5953920645506673794,
       "_size_kb": 14.4,
       "_lines": 250,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1773,7 +1835,8 @@
       "_seed": 18264571842642197414,
       "_size_kb": 14.8,
       "_lines": 240,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1800,7 +1863,8 @@
       "_seed": 2709938328044190111,
       "_size_kb": 14.8,
       "_lines": 267,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1827,7 +1891,8 @@
       "_seed": 4606979804393780853,
       "_size_kb": 15.9,
       "_lines": 283,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1855,7 +1920,8 @@
       "_seed": 3409504503786645323,
       "_size_kb": 16.2,
       "_lines": 306,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1882,7 +1948,8 @@
       "_seed": 18066875627483051477,
       "_size_kb": 14.6,
       "_lines": 265,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1909,7 +1976,8 @@
       "_seed": 13241370335976767116,
       "_size_kb": 14.3,
       "_lines": 253,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1937,7 +2005,8 @@
       "_seed": 6632932916069154274,
       "_size_kb": 12.8,
       "_lines": 253,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1964,7 +2033,8 @@
       "_seed": 2718308106806898885,
       "_size_kb": 12.9,
       "_lines": 258,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1991,7 +2061,8 @@
       "_seed": 3204150057113364789,
       "_size_kb": 14.2,
       "_lines": 243,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2018,7 +2089,8 @@
       "_seed": 11805318406759655329,
       "_size_kb": 14.5,
       "_lines": 264,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2046,7 +2118,8 @@
       "_seed": 16835577812647426117,
       "_size_kb": 12.7,
       "_lines": 324,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2074,7 +2147,8 @@
       "_seed": 4205376672235267561,
       "_size_kb": 15.8,
       "_lines": 354,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2102,7 +2176,8 @@
       "_seed": 840299925014852615,
       "_size_kb": 14.0,
       "_lines": 369,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2130,7 +2205,8 @@
       "_seed": 2707536209626541719,
       "_size_kb": 15.0,
       "_lines": 364,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2158,7 +2234,8 @@
       "_seed": 7498395653551960420,
       "_size_kb": 14.7,
       "_lines": 310,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2185,7 +2262,8 @@
       "_seed": 637792878567503925,
       "_size_kb": 17.3,
       "_lines": 390,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2212,7 +2290,8 @@
       "_seed": 8279755765930667339,
       "_size_kb": 18.7,
       "_lines": 425,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2239,7 +2318,8 @@
       "_seed": 741104875949665064,
       "_size_kb": 15.0,
       "_lines": 353,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2266,7 +2346,8 @@
       "_seed": 16055120389735064948,
       "_size_kb": 16.2,
       "_lines": 367,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2293,7 +2374,8 @@
       "_seed": 1417363157664017509,
       "_size_kb": 12.5,
       "_lines": 321,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2320,7 +2402,8 @@
       "_seed": 11447213470199194507,
       "_size_kb": 14.9,
       "_lines": 319,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2347,7 +2430,8 @@
       "_seed": 2701276264207625678,
       "_size_kb": 13.8,
       "_lines": 330,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2374,7 +2458,8 @@
       "_seed": 8147017178597171709,
       "_size_kb": 13.0,
       "_lines": 342,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2401,7 +2486,8 @@
       "_seed": 13063354040569177065,
       "_size_kb": 13.8,
       "_lines": 315,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2428,7 +2514,8 @@
       "_seed": 1841735498398838829,
       "_size_kb": 13.7,
       "_lines": 333,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2455,7 +2542,8 @@
       "_seed": 2213254919820554190,
       "_size_kb": 15.6,
       "_lines": 335,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2482,7 +2570,8 @@
       "_seed": 17145926618142354208,
       "_size_kb": 17.7,
       "_lines": 362,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2509,7 +2598,8 @@
       "_seed": 3131358552737328726,
       "_size_kb": 15.6,
       "_lines": 370,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2536,7 +2626,8 @@
       "_seed": 13430271910399845800,
       "_size_kb": 17.2,
       "_lines": 436,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2563,7 +2654,8 @@
       "_seed": 7707877473434353400,
       "_size_kb": 20.4,
       "_lines": 506,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2590,7 +2682,8 @@
       "_seed": 15486760774949025133,
       "_size_kb": 22.4,
       "_lines": 538,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2617,7 +2710,8 @@
       "_seed": 16804600987838460767,
       "_size_kb": 23.8,
       "_lines": 631,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2645,7 +2739,8 @@
       "_seed": 12233521075866838081,
       "_size_kb": 14.6,
       "_lines": 349,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2673,7 +2768,8 @@
       "_seed": 8921174840435288387,
       "_size_kb": 14.6,
       "_lines": 327,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2700,7 +2796,8 @@
       "_seed": 16868928112770562685,
       "_size_kb": 14.7,
       "_lines": 308,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2727,7 +2824,8 @@
       "_seed": 11818896142975508918,
       "_size_kb": 12.9,
       "_lines": 307,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2755,7 +2853,8 @@
       "_seed": 1823358465969239878,
       "_size_kb": 16.3,
       "_lines": 372,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2782,7 +2881,8 @@
       "_seed": 3107145353423104918,
       "_size_kb": 15.8,
       "_lines": 421,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2809,7 +2909,8 @@
       "_seed": 9696532239747785842,
       "_size_kb": 14.3,
       "_lines": 379,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2837,7 +2938,8 @@
       "_seed": 7396811422879724128,
       "_size_kb": 13.6,
       "_lines": 351,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2865,7 +2967,8 @@
       "_seed": 17606540497672480195,
       "_size_kb": 13.1,
       "_lines": 363,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2893,7 +2996,8 @@
       "_seed": 6795368757143024027,
       "_size_kb": 13.1,
       "_lines": 324,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2921,6 +3025,7 @@
       "_size_kb": 5.0,
       "_lines": 102,
       "_has_card": true,
+      "_added_at": "2026-04-04T11:22:10-04:00",
       "_card": {
         "name": "Borg",
         "title": "The Assimilator",
@@ -2977,6 +3082,7 @@
       "_size_kb": 5.1,
       "_lines": 104,
       "_has_card": true,
+      "_added_at": "2026-04-04T11:22:10-04:00",
       "_card": {
         "name": "CardSmith",
         "title": "The Forgemaster",
@@ -3038,7 +3144,8 @@
       "_seed": 15925461970729052544,
       "_size_kb": 7.9,
       "_lines": 236,
-      "_has_card": false
+      "_has_card": false,
+      "_added_at": "2026-04-06T20:58:31Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3068,7 +3175,37 @@
       "_seed": 8086863952292502462,
       "_size_kb": 26.2,
       "_lines": 792,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-06T17:05:10Z"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@borg/training_quest",
+      "version": "1.0.0",
+      "display_name": "TrainingQuest",
+      "description": "Generates a personalized interactive training quest HTML page based on the brainstem's loaded agents \u2014 auto-discovers capabilities and builds a gamified onboarding experience with progress tracking, copy-to-clipboard prompts, and celebrations.",
+      "author": "Howard Hoy",
+      "tags": [
+        "training",
+        "onboarding",
+        "quest",
+        "html",
+        "interactive",
+        "gamification"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@borg/training_quest.py",
+      "_sha256": "6a562115494eb20ca5a67cef8df3d583932670154a21acde54e41b6ec35cfb74",
+      "_seed": 17442911304079385089,
+      "_size_kb": 27.3,
+      "_lines": 609,
+      "_has_card": false,
+      "_added_at": null
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3094,7 +3231,8 @@
       "_seed": 9916893050914225492,
       "_size_kb": 47.9,
       "_lines": 1257,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3123,7 +3261,8 @@
       "_seed": 13928955966432878815,
       "_size_kb": 39.1,
       "_lines": 1035,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3150,7 +3289,8 @@
       "_seed": 16191435701781930066,
       "_size_kb": 38.3,
       "_lines": 996,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3181,7 +3321,8 @@
       "_seed": 14025379966502974255,
       "_size_kb": 88.5,
       "_lines": 2154,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3212,7 +3353,8 @@
       "_seed": 17174429428190159959,
       "_size_kb": 58.4,
       "_lines": 1201,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3239,7 +3381,8 @@
       "_seed": 9628502902113448084,
       "_size_kb": 21.1,
       "_lines": 418,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3265,7 +3408,8 @@
       "_seed": 53027766882806255,
       "_size_kb": 6.0,
       "_lines": 149,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3292,7 +3436,8 @@
       "_seed": 4049171833047104537,
       "_size_kb": 61.2,
       "_lines": 1549,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3317,7 +3462,8 @@
       "_seed": 18264010640337544386,
       "_size_kb": 39.1,
       "_lines": 894,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3348,7 +3494,8 @@
       "_seed": 3348533564379118675,
       "_size_kb": 121.0,
       "_lines": 2984,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3374,7 +3521,8 @@
       "_seed": 2446964785980911795,
       "_size_kb": 26.7,
       "_lines": 631,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3401,7 +3549,8 @@
       "_seed": 11288900214771561238,
       "_size_kb": 54.2,
       "_lines": 1301,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3434,7 +3583,8 @@
       "_seed": 16553900515881791106,
       "_size_kb": 119.9,
       "_lines": 2468,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3462,7 +3612,8 @@
       "_seed": 3115334458036463931,
       "_size_kb": 28.6,
       "_lines": 723,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:51:24-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3488,7 +3639,8 @@
       "_seed": 15351106387627749856,
       "_size_kb": 8.4,
       "_lines": 183,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3518,7 +3670,8 @@
       "_seed": 16587187046621128947,
       "_size_kb": 10.1,
       "_lines": 245,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-04T21:15:40Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3544,7 +3697,8 @@
       "_seed": 1346218951730281648,
       "_size_kb": 43.7,
       "_lines": 957,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3570,7 +3724,8 @@
       "_seed": 14159894519432621052,
       "_size_kb": 10.8,
       "_lines": 255,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3598,7 +3753,8 @@
       "_seed": 4674925164302711593,
       "_size_kb": 17.5,
       "_lines": 479,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-05T11:18:10-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3626,7 +3782,8 @@
       "_seed": 10353196835552377498,
       "_size_kb": 6.3,
       "_lines": 160,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-04T20:40:49Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3654,7 +3811,8 @@
       "_seed": 3967529645834512416,
       "_size_kb": 24.2,
       "_lines": 540,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-05T11:18:10-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3683,7 +3841,8 @@
       "_seed": 756356789067200321,
       "_size_kb": 33.5,
       "_lines": 840,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3715,7 +3874,8 @@
       "_seed": 8659210237067160174,
       "_size_kb": 6.9,
       "_lines": 175,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-04T21:14:50Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3740,7 +3900,8 @@
       "_seed": 18289705222458979460,
       "_size_kb": 1.2,
       "_lines": 39,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-04T22:27:48Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3763,7 +3924,8 @@
       "_seed": 2282791009467636617,
       "_size_kb": 1.3,
       "_lines": 29,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-03T16:15:52-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3792,7 +3954,8 @@
       "_seed": 1463797972131002668,
       "_size_kb": 13.5,
       "_lines": 325,
-      "_has_card": true
+      "_has_card": true,
+      "_added_at": "2026-04-05T16:43:55-04:00"
     }
   ],
   "instance": {
