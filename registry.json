@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.0",
   "version": "1.0.0",
-  "generated_at": "2026-04-07T03:12:15.911200+00:00",
+  "generated_at": "2026-04-07T03:27:21.966366+00:00",
   "stats": {
-    "total_agents": 129,
+    "total_agents": 134,
     "publishers": 7,
     "categories": 19,
     "publisher_list": [
@@ -3014,6 +3014,34 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@borg/markdown_to_slides_agent",
+      "version": "1.0.0",
+      "display_name": "MarkdownToSlides",
+      "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+      "author": "RAPP Contributor",
+      "tags": [
+        "markdown",
+        "slides",
+        "presentation",
+        "converter",
+        "deck",
+        "pipeline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@borg/markdown_to_slides_agent.py",
+      "_sha256": "90d50bb124fbbd81f83cb59b03d5c9123ab0c453d392fe5fe482378551020c88",
+      "_seed": 15925461970729052544,
+      "_size_kb": 7.9,
+      "_lines": 236,
+      "_has_card": false
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@borg/prompt_to_video_agent",
       "version": "1.1.0",
       "display_name": "PromptToVideo",
@@ -3410,6 +3438,34 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/agent_workbench",
+      "version": "1.0.0",
+      "display_name": "Agent Workbench",
+      "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
+      "author": "RAPP Core Team",
+      "tags": [
+        "devtools",
+        "workbench",
+        "scaffolding",
+        "validation",
+        "testing",
+        "publishing"
+      ],
+      "category": "devtools",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/agent_workbench_agent.py",
+      "_sha256": "9f28b047e7bc030263daba50154c44f2fc7c8bf8f43799fe7b3a9e14f14e63a7",
+      "_seed": 3115334458036463931,
+      "_size_kb": 28.6,
+      "_lines": 723,
+      "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/context_memory_agent",
       "version": "1.0.0",
       "display_name": "ContextMemory",
@@ -3432,6 +3488,36 @@
       "_seed": 15351106387627749856,
       "_size_kb": 8.4,
       "_lines": 183,
+      "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/deal_desk_agent",
+      "version": "1.0.0",
+      "display_name": "DealDesk",
+      "description": "B2B sales intelligence deck \u2014 runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAPP sales agents for deeper workflow.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "deck",
+        "deal",
+        "sales",
+        "b2b",
+        "account-intelligence",
+        "competitive",
+        "pipeline",
+        "crm"
+      ],
+      "category": "b2b_sales",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/deal_desk_agent.py",
+      "_sha256": "f872ff1f6dec28ea766520e83f2370ab3b43e9f51f00275bffa966968995702d",
+      "_seed": 16587187046621128947,
+      "_size_kb": 10.1,
+      "_lines": 245,
       "_has_card": true
     },
     {
@@ -3540,6 +3626,63 @@
       "_seed": 10353196835552377498,
       "_size_kb": 6.3,
       "_lines": 160,
+      "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/rappterpedia_agent",
+      "version": "1.0.0",
+      "display_name": "RappterpediaAgent",
+      "description": "Community wiki & forum content engine. Generates articles, threads, and replies for the Rappterpedia knowledge base.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "wiki",
+        "forum",
+        "content",
+        "community",
+        "rappterpedia",
+        "engine"
+      ],
+      "category": "productivity",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/rappterpedia_agent.py",
+      "_sha256": "c93dad36aaf4c906308eeab571ee1fb39eab26fe829857d789218fc7a841cfdc",
+      "_seed": 3967529645834512416,
+      "_size_kb": 24.2,
+      "_lines": 540,
+      "_has_card": true
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/rar_remote_agent",
+      "version": "1.2.0",
+      "display_name": "RAR Remote Agent",
+      "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
+      "author": "RAPP Core Team",
+      "tags": [
+        "core",
+        "registry",
+        "package-manager",
+        "install",
+        "discovery",
+        "voting",
+        "community"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/rar_remote_agent.py",
+      "_sha256": "b81c3e34a2109d0c3975cc9234d21ff9eeb9565d4145bd2cab25c997bb91fd5e",
+      "_seed": 756356789067200321,
+      "_size_kb": 33.5,
+      "_lines": 840,
       "_has_card": true
     },
     {

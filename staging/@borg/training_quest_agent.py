@@ -685,4 +685,4 @@ render();window.addEventListener('resize',()=>render());
     def perform(self, action="generate", title="", **kwargs):
         if action == "preview":
             return self._action_preview(title=title)
-        return self._action_generate(title=title)
+        return self._action_generate(title=title)
