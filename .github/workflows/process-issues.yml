@@ -60,12 +60,14 @@ jobs:
 
       - name: Commit state changes
         if: always()
+        env:
+          ISSUE_NUM: ${{ github.event.issue.number || github.event.inputs.issue_number || '0' }}
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add state/ registry.json staging/ || true
           if ! git diff --cached --quiet; then
-            git commit -m "Process issue #${{ github.event.issue.number }} [skip ci]"
+            git commit -m "Process issue #${ISSUE_NUM} [skip ci]"
             for i in 1 2 3 4 5; do
               git push && break
               echo "Push attempt $i failed, rebasing..."
@@ -74,7 +76,7 @@ jobs:
                 git rebase --abort
                 git pull origin main --no-rebase
                 git add state/ registry.json staging/ || true
-                git diff --cached --quiet || git commit -m "Process issue #${{ github.event.issue.number }} (retry) [skip ci]"
+                git diff --cached --quiet || git commit -m "Process issue #${ISSUE_NUM} (retry) [skip ci]"
               fi
             done
           fi
