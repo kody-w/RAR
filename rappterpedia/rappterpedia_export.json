@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated": "2026-04-07T15:02:44Z",
-  "tick_count": 119,
+  "generated": "2026-04-07T16:49:49Z",
+  "tick_count": 120,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -1713,10 +1713,10 @@
         "showcase",
         "community"
       ],
-      "content": "## About\n\nThe **@borg** namespace is home to 4 agents published by Howard Hoy (@BlazingBeard). The collection spans core infrastructure, productivity tools, and gamified training.\n\n## Agents\n\n| Agent | Category | Description |\n|-------|----------|-------------|\n| **Borg** | core | The original assimilator \u2014 ingests repos and URLs into structured knowledge graphs |\n| **CardSmith** | productivity | Card design and generation engine, powers the Holo Card system |\n| **PromptToVideo** | productivity | Converts structured scene descriptions into MP4 video via ffmpeg |\n| **TrainingQuest** | productivity | Generates personalized interactive training quest HTML pages |\n\n## Philosophy\n\nHoward's agents follow a pattern: take complex multi-step processes and make them one-shot operations. Borg turns an entire repo into structured knowledge with a single prompt. CardSmith turns agent metadata into collectible cards. TrainingQuest turns a brainstem's agent list into a gamified onboarding experience.\n\n## History\n\nThe @borg namespace was one of the first community namespaces, starting with Borg and CardSmith. PromptToVideo added video rendering capabilities. TrainingQuest was submitted via GitHub Issue #33 on April 7, 2026 \u2014 the first agent to go through the admin pipeline dashboard.",
+      "content": "## About\n\nThe **@borg** namespace is home to 2 agents focused on core, productivity. This article tours the highlights and explains how the collection fits together.",
       "author": "CommunityContrib",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-07T15:52:41Z",
+      "updated": "2026-04-05T17:35:49Z",
       "generated_by": "community_spotlight"
     },
     {
@@ -5677,10 +5677,10 @@
         "auto-generated",
         "namespace"
       ],
-      "content": "## @borg\n\nThe **@borg** namespace contains **4 agents** across 2 categories: core, productivity.\n\n## Agent Listing\n\n- **Borg** (core) \u2014 Assimilates knowledge from repos and URLs into structured graphs\n- **CardSmith** (productivity) \u2014 Card design and generation engine for Holo Cards\n- **PromptToVideo** (productivity) \u2014 Structured scenes to MP4 video rendering via ffmpeg\n- **TrainingQuest** (productivity) \u2014 Generates personalized interactive training quest HTML pages with progress tracking and gamification\n\n## Publisher\n\nHoward Hoy (@BlazingBeard) \u2014 one of the most active community contributors to the RAR ecosystem.",
+      "content": "## @borg\n\nThe **@borg** namespace contains **2 agents** across 2 categories: core, productivity.\n\n## Agent Listing\n\n- **Borg** (core) \u2014 Assimilates knowledge from GitHub repos and web URLs into structured reports.\n- **CardSmith** (productivity) \u2014 Forges trading cards for AI agents. Turn any agent into a collectible card with ",
       "author": "Rappterpedia",
       "created": "2026-04-06T01:59:17Z",
-      "updated": "2026-04-07T15:52:41Z",
+      "updated": "2026-04-06T01:59:17Z",
       "type": "publisher_page"
     },
     {
@@ -5762,96 +5762,6 @@
       "created": "2026-04-06T01:59:17Z",
       "updated": "2026-04-06T01:59:17Z",
       "type": "publisher_page"
-    },
-    {
-      "id": "gen-art-0252",
-      "title": "TrainingQuest",
-      "category": "agents",
-      "tags": [
-        "agent",
-        "borg",
-        "training",
-        "onboarding",
-        "gamification",
-        "productivity"
-      ],
-      "content": "## Overview\n\nThe `@borg/training_quest_agent` generates a personalized interactive training quest as a self-contained HTML page. Built by Howard Hoy, it's the first agent in the ecosystem that auto-discovers what agents are loaded in your brainstem and builds a gamified onboarding experience tailored to YOUR specific setup.\n\n## How It Works\n\nOn first contact, TrainingQuest scans the loaded agents via their metadata and docstrings. It reads the brainstem's capabilities and produces an HTML page with:\n\n- **Progress tracking** \u2014 checkpoints for each agent, saved to localStorage\n- **Copy-to-clipboard prompts** \u2014 ready-to-paste commands for each agent\n- **Core brainstem training** \u2014 auth, soul, models, memory, agent management\n- **Dynamic checkpoints** \u2014 one per loaded agent, auto-generated from metadata\n- **Celebrations** \u2014 confetti and animations when you complete sections\n\n## Usage\n\n```\nTrainingQuest action=generate\n\u2192 Builds a personalized HTML quest and opens it\n\nTrainingQuest action=generate, title=\"HOLO's Training Academy\"\n\u2192 Custom titled quest\n\nTrainingQuest action=preview\n\u2192 Shows the outline without generating HTML\n```\n\n## History\n\nSubmitted by Howard Hoy (@BlazingBeard) on April 7, 2026 as the first community contribution from the @borg namespace beyond the original Borg and CardSmith agents. It was processed through the new admin pipeline \u2014 the first agent to go through the approve \u2192 process \u2192 merge flow via the admin dashboard.\n\n## Technical Details\n\n- **Publisher**: @borg\n- **Category**: productivity\n- **Size**: 46.5 KB (609 lines)\n- **Dependencies**: @rapp/basic_agent\n- **Environment Variables**: None required",
-      "author": "Copilot",
-      "created": "2026-04-07T15:52:11Z",
-      "updated": "2026-04-07T15:52:11Z",
-      "generated_by": "manual"
-    },
-    {
-      "id": "gen-art-0253",
-      "title": "Architecture: The Admin Pipeline Dashboard",
-      "category": "architecture",
-      "tags": [
-        "admin",
-        "pipeline",
-        "submissions",
-        "dashboard",
-        "github-issues",
-        "architecture"
-      ],
-      "content": "## Overview\n\nThe RAR Admin Dashboard (`admin.html`) is a Kanban-style pipeline view that shows every agent submission's journey from GitHub Issue to published agent. It pulls live data from the GitHub API and provides one-click actions for maintainers.\n\n## Pipeline Stages\n\nAgent submissions flow through four stages, each represented as a column:\n\n| Stage | Label | Issue State | Meaning |\n|-------|-------|-------------|---------|\n| \ud83d\udce5 Pending Review | `pending-review` | open | Submitted, awaiting admin review |\n| \ud83d\udd0d Approved | `approved`, `forged` | open | Admin approved, CI can process |\n| \u2705 Merged | `processed` | closed | Agent is live in the registry |\n| \u274c Failed | `failed` | closed | CI processing failed |\n\nIssues labeled `duplicate` or `rejected` are filtered out of the board entirely.\n\n## Admin Actions\n\nThe dashboard requires GitHub OAuth sign-in (shared auth with RAPPterBook). Once signed in, each card shows context-sensitive action buttons:\n\n- **Approve** \u2014 Adds the `approved` label and comments on the issue\n- **Reject** \u2014 Closes the issue with a `rejected` label\n- **Process** \u2014 Triggers the `process-issues.yml` workflow via `workflow_dispatch`\n- **Retry** \u2014 Reopens failed issues and resets labels to `pending-review`\n\n## How It Works\n\nThe page fetches open and closed issues from `api.github.com`, filters for `[AGENT]`-prefixed titles, and classifies them by label into the four pipeline buckets. Stats are computed client-side. The board auto-refreshes every 5 minutes.\n\n## Architecture Decisions\n\n- **No backend** \u2014 pure client-side GitHub API calls, works from GitHub Pages\n- **Shared OAuth** \u2014 reuses the RAPPterBook Cloudflare Worker for token exchange\n- **Label-driven state machine** \u2014 issue labels ARE the pipeline state, not a separate database\n- **Idempotent actions** \u2014 approving twice just adds the label again, no harm done\n\n## Morning Review Workflow\n\n1. Open `admin.html`, sign in\n2. Check Pending Review for overnight submissions\n3. View \u2192 Approve or Reject each one\n4. On approved agents, click Process to trigger CI\n5. Check Failed column for retryable errors\n6. Merged column confirms successful deployments",
-      "author": "Copilot",
-      "created": "2026-04-07T15:52:11Z",
-      "updated": "2026-04-07T15:52:11Z",
-      "generated_by": "manual"
-    },
-    {
-      "id": "gen-art-0254",
-      "title": "How The Submission Pipeline Works in RAR",
-      "category": "architecture",
-      "tags": [
-        "pipeline",
-        "submissions",
-        "github-issues",
-        "ci-cd",
-        "staging",
-        "architecture"
-      ],
-      "content": "## Overview\n\nRAR uses GitHub Issues as an API for agent submissions. When someone submits an agent via the web store or directly as a GitHub Issue, it flows through an automated pipeline that validates, stages, scans, and publishes the agent.\n\n## The Flow\n\n### 1. Submission\n\nA user creates a GitHub Issue with `[AGENT]` prefix. The issue body contains either:\n- Raw Python code in a markdown fenced block\n- A JSON payload with `action: \"submit_agent\"` and the code\n\n### 2. Staging\n\nThe `process-issues.yml` workflow fires on issue open. The `process_issues.py` script:\n- Extracts the Python code from the issue body\n- Parses the `__manifest__` via AST (no code execution)\n- Validates required fields, snake_case naming, semver version\n- Runs a security scan (no eval, exec, subprocess, hardcoded secrets)\n- Writes the file to `staging/` (NOT `agents/`)\n- Labels the issue `pending-review` and `agent-submission`\n\n### 3. Admin Review\n\nAn admin opens the Admin Dashboard and reviews pending submissions:\n- Inspects the code on the GitHub Issue\n- Clicks **Approve** (adds `approved` label) or **Reject** (closes issue)\n\n### 4. Processing\n\nThe admin clicks **Process**, which triggers `workflow_dispatch`. The workflow:\n- Fetches the issue via GitHub API\n- Moves the agent from `staging/` to `agents/@publisher/`\n- Runs `build_registry.py` to rebuild `registry.json` with `_added_at` timestamp\n- Runs `generate_holo_cards.py` to forge the agent's trading card\n- Commits and pushes to `main`\n- Labels the issue `processed` and closes it\n\n### 5. Publication\n\nThe agent appears in the registry, the web store, and the Recently Added section within minutes.\n\n## Error Handling\n\nIf any step fails, the workflow:\n- Comments the error output on the issue (truncated to 500 chars)\n- Labels the issue `failed` and closes it\n- The admin can click **Retry** on the dashboard to reopen and retry\n\n## Security\n\nEvery agent goes through static analysis before entering the repo:\n- `eval()`, `exec()`, `__import__()` are forbidden\n- `subprocess` calls are blocked (unless in the security allowlist)\n- Hardcoded secrets are detected via regex patterns\n- Only first-party agents can be allowlisted for elevated capabilities",
-      "author": "Copilot",
-      "created": "2026-04-07T15:52:11Z",
-      "updated": "2026-04-07T15:52:11Z",
-      "generated_by": "manual"
-    },
-    {
-      "id": "gen-art-0255",
-      "title": "Recently Added: How Agent Timestamps Work",
-      "category": "architecture",
-      "tags": [
-        "recently-added",
-        "timestamps",
-        "git",
-        "build-pipeline",
-        "registry",
-        "architecture"
-      ],
-      "content": "## Overview\n\nEvery agent in the RAR registry now carries an `_added_at` timestamp \u2014 the ISO date it was first committed to the repository. This powers the \"Recently Added\" section on the store front page and the \"Newest\" sort option.\n\n## How It Works\n\nDuring `build_registry.py`, each agent file is queried against git history:\n\n```bash\ngit log --diff-filter=A --format=%cI --follow -- agents/@publisher/agent.py\n```\n\nThis returns the committer date (`%cI`) of the commit that first added the file. The `--diff-filter=A` flag means \"only show commits where this file was Added\" and `--follow` tracks renames.\n\nThe result is stored as `_added_at` in the agent's registry entry. If git history isn't available (e.g., shallow clone), the field is `null` \u2014 never a misleading fallback.\n\n## CI Requirements\n\nThe `build-registry.yml` workflow uses `fetch-depth: 0` to ensure full git history is available. Without this, all dates would be the checkout timestamp.\n\n## Frontend\n\nThe store's browse page shows a horizontal scroll section with the 8 most recently added agents. Each card displays a relative timestamp (\"2d ago\", \"1w ago\"). The section auto-hides when:\n- A category filter is active\n- A search query is entered\n\nThe \"Newest\" sort option also uses `_added_at` for proper chronological ordering.\n\n## Local Agents\n\nAgents uploaded via the browser get a `_added` field (client-side timestamp). The `addedTs()` helper function unifies both fields: `_added_at || _added || null`.",
-      "author": "Copilot",
-      "created": "2026-04-07T15:52:11Z",
-      "updated": "2026-04-07T15:52:11Z",
-      "generated_by": "manual"
-    },
-    {
-      "id": "gen-art-0256",
-      "title": "Deduplication: How RAR Detects Duplicate Agents",
-      "category": "architecture",
-      "tags": [
-        "dedup",
-        "duplicates",
-        "registry",
-        "build-pipeline",
-        "admin",
-        "architecture"
-      ],
-      "content": "## Overview\n\nRAR detects duplicate agents during the registry build and surfaces them on the admin dashboard. Duplicates are agents with different manifest names but the same `display_name` \u2014 they appear as the same agent to end users.\n\n## How Detection Works\n\n`build_registry.py` scans all agents after parsing and checks for `display_name` collisions:\n\n```python\nseen_display = {}\nfor agent in agents:\n    dn = agent[\"display_name\"]\n    if dn in seen_display:\n        duplicates.append((dn, seen_display[dn], agent[\"name\"]))\n    else:\n        seen_display[dn] = agent[\"name\"]\n```\n\nThe `duplicates` array is written to `registry.json` alongside the agents list. The build also prints a warning to the CI output.\n\n## How Duplicates Happen\n\nCommon causes:\n1. **Manual + pipeline add** \u2014 an admin manually copies an agent file, then the CI pipeline also processes the issue submission\n2. **Renamed agents** \u2014 an agent is renamed but the old file isn't deleted\n3. **Cross-publisher forks** \u2014 two publishers ship the same agent under different namespaces\n\n## Resolution\n\n1. Open the Admin Dashboard \u2014 duplicates appear in a dedicated section\n2. Determine which version is canonical (usually the CI-processed one with `_agent.py` suffix)\n3. Delete the duplicate file from `agents/`\n4. Rebuild: `python build_registry.py`\n\n## Prevention\n\nThe `.py.card` format takes priority over `.py` in the build \u2014 if both exist for the same manifest name, only the `.py.card` is registered. But display_name collisions across different manifest names require manual resolution.",
-      "author": "Copilot",
-      "created": "2026-04-07T15:52:11Z",
-      "updated": "2026-04-07T15:52:11Z",
-      "generated_by": "manual"
     }
   ],
   "threads": [
