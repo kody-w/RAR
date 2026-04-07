@@ -306,6 +306,16 @@ def build_registry():
         else:
             seen_seeds[seed] = a["name"]
 
+    # Detect duplicate display_names (different manifest names, same user-facing name)
+    seen_display = {}
+    duplicates = []
+    for a in agents:
+        dn = a.get("display_name", "")
+        if dn in seen_display:
+            duplicates.append((dn, seen_display[dn], a["name"]))
+        else:
+            seen_display[dn] = a["name"]
+
     registry = {
         "schema": "rapp-registry/1.0",
         "version": "1.0.0",
@@ -317,6 +327,7 @@ def build_registry():
             "publisher_list": sorted(publishers),
             "category_list": sorted(categories)
         },
+        "duplicates": [{"display_name": dn, "agents": [a1, a2]} for dn, a1, a2 in duplicates],
         "agents": agents
     }
 
@@ -340,6 +351,11 @@ def build_registry():
     print(f"✓ Registry built: {len(agents)} agents from {len(publishers)} publishers")
     print(f"  Categories: {', '.join(sorted(categories))}")
     print(f"  Publishers: {', '.join(sorted(publishers))}")
+
+    if duplicates:
+        print(f"\n⚠ {len(duplicates)} duplicate display names:")
+        for dn, a1, a2 in duplicates:
+            print(f"  - \"{dn}\": {a1} vs {a2}")
     
     if errors:
         print(f"\n⚠ {len(errors)} validation errors:")

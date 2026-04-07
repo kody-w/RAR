@@ -485,6 +485,23 @@ POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["pending-review"]
 6. Check **Failed** column — click **Retry** to reopen any recoverable failures
 7. **Merged** column shows successfully processed agents
 
+### Deduplication
+
+The registry detects duplicate agents by `display_name`. The `duplicates` array in `registry.json` lists any collisions:
+
+```json
+"duplicates": [
+  {"display_name": "TrainingQuest", "agents": ["@borg/training_quest", "@borg/training_quest_agent"]}
+]
+```
+
+The admin dashboard shows duplicates in a dedicated section. To resolve:
+1. Determine which agent is canonical (usually the one processed by CI pipeline)
+2. Remove the duplicate file from `agents/`
+3. Rebuild: `python build_registry.py`
+
+Issues labeled `duplicate` or `rejected` are hidden from the pipeline board.
+
 ---
 
 ## Version

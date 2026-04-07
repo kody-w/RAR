@@ -142,6 +142,20 @@
   .label-processed { background: var(--green-bg); color: var(--green); border-color: rgba(63,185,80,.3); }
   .label-failed { background: var(--red-bg); color: var(--red); border-color: rgba(248,81,73,.3); }
 
+  /* Duplicates section */
+  .dupes-section { margin-top: 32px; }
+  .dupes-section h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+  .dupe-card {
+    background: var(--surface); border: 1px solid rgba(210,153,34,.3); border-radius: var(--radius);
+    padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .dupe-card .dupe-name { font-weight: 600; font-size: .95rem; }
+  .dupe-card .dupe-agents { font-family: 'SF Mono', Consolas, monospace; font-size: .78rem; color: var(--text-dim); }
+  .dupe-badge {
+    background: var(--orange-bg); color: var(--orange); border: 1px solid rgba(210,153,34,.3);
+    padding: 2px 8px; border-radius: 10px; font-size: .72rem; font-weight: 600;
+  }
+
   /* Recent activity log */
   .activity-section { margin-top: 32px; }
   .activity-section h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
@@ -290,6 +304,11 @@
     </div>
   </div>
 
+  <div class="dupes-section" id="dupes-section" style="display:none">
+    <h3>⚠️ Duplicate Agents</h3>
+    <div id="dupes-list"></div>
+  </div>
+
   <div class="activity-section">
     <h3>📋 Recent Activity</h3>
     <div class="activity-log" id="activity-log"></div>
@@ -337,9 +356,11 @@ function extractAgentName(title) {
 
 function classifyIssue(issue) {
   const labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
+  if (labels.includes('duplicate') || labels.includes('rejected')) return 'closed';
   if (labels.includes('failed')) return 'failed';
   if (labels.includes('processed')) return 'merged';
   if (labels.includes('approved') || labels.includes('forged')) return 'review';
+  if (issue.state === 'closed') return 'closed';
   return 'pending';
 }
 
@@ -572,7 +593,9 @@ async function loadPipeline() {
 
     const buckets = { pending: [], review: [], merged: [], failed: [] };
     for (const issue of all) {
-      buckets[classifyIssue(issue)].push(issue);
+      const stage = classifyIssue(issue);
+      if (stage === 'closed') continue;
+      buckets[stage].push(issue);
     }
 
     document.getElementById('stat-pending').textContent = buckets.pending.length;
@@ -607,6 +630,9 @@ async function loadPipeline() {
     document.getElementById('pipeline-loading').style.display = 'none';
     document.getElementById('pipeline').style.display = 'grid';
     document.getElementById('last-updated').textContent = `Updated ${new Date().toLocaleTimeString()}`;
+
+    // Load duplicates from registry.json
+    loadDuplicates();
   } catch (err) {
     document.getElementById('pipeline-loading').innerHTML =
       `<div style="color:var(--red)">Failed to load: ${esc(err.message)}</div>
@@ -614,6 +640,51 @@ async function loadPipeline() {
   } finally {
     btn.disabled = false;
     btn.textContent = '↻ Refresh';
+  }
+}
+
+// ─── Duplicates ─────────────────────────────────────
+
+async function loadDuplicates() {
+  const section = document.getElementById('dupes-section');
+  const list = document.getElementById('dupes-list');
+  try {
+    const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main`;
+    const resp = await fetch(`${RAW}/registry.json`);
+    const reg = await resp.json();
+
+    // Check registry-level duplicates from build
+    const buildDupes = reg.duplicates || [];
+
+    // Also scan for display_name collisions client-side (catches cross-source dupes)
+    const agents = reg.agents || [];
+    const byDisplay = {};
+    for (const a of agents) {
+      const dn = a.display_name;
+      if (!byDisplay[dn]) byDisplay[dn] = [];
+      byDisplay[dn].push(a.name);
+    }
+    const clientDupes = Object.entries(byDisplay)
+      .filter(([, names]) => names.length > 1)
+      .map(([dn, names]) => ({ display_name: dn, agents: names }));
+
+    // Merge (prefer client-side as it's more current)
+    const allDupes = clientDupes.length ? clientDupes : buildDupes;
+
+    if (!allDupes.length) {
+      section.style.display = 'none';
+      return;
+    }
+    section.style.display = 'block';
+    list.innerHTML = allDupes.map(d => `
+      <div class="dupe-card">
+        <div>
+          <div class="dupe-name">"${esc(d.display_name)}" <span class="dupe-badge">${d.agents.length} copies</span></div>
+          <div class="dupe-agents">${d.agents.map(n => esc(n)).join(' &nbsp;·&nbsp; ')}</div>
+        </div>
+      </div>`).join('');
+  } catch (e) {
+    section.style.display = 'none';
   }
 }
 
