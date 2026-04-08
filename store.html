@@ -7773,7 +7773,11 @@ function renderCards() {
     document.getElementById('cards-grid').innerHTML = '<div class="empty-state"><h3>Nothing here yet</h3><p style="color:var(--text-dim);margin-top:8px">Try a different filter, or go back to <strong>All</strong> to see everything.</p></div>';
     return;
   }
+  // Force HOLO (creative) rendering for the cards grid
+  const _prevMode = cardMode;
+  cardMode = 'creative';
   document.getElementById('cards-grid').innerHTML = filtered.map(agentToCard).join('');
+  cardMode = _prevMode;
   // Mark companion card with badge
   const comp = getCompanion();
   if (comp) {
@@ -10372,10 +10376,13 @@ async function openSlabViewer(mintId) {
 
   document.body.appendChild(overlay);
 
-  // Insert live interactive card instead of flat canvas
+  // Insert live interactive card — always use HOLO face in slab viewer
   const slabWindow = document.getElementById(`slab-card-window-${mintId}`);
   if (slabWindow && _slabAgent) {
+    const savedMode = cardMode;
+    cardMode = 'creative';
     const cardHtml = agentToCard(_slabAgent);
+    cardMode = savedMode;
     const temp = document.createElement('div');
     temp.innerHTML = cardHtml;
     const liveCard = temp.firstElementChild;
@@ -10648,8 +10655,10 @@ async function openSlabZoom(mintId) {
   // Insert the real interactive HTML card instead of a flat canvas
   const cardWrap = zoom.querySelector('.showcase-card-wrap');
   if (a) {
-    // Build the real card HTML using agentToCard
+    const savedMode = cardMode;
+    cardMode = 'creative';
     const cardHtml = agentToCard(a);
+    cardMode = savedMode;
     const temp = document.createElement('div');
     temp.innerHTML = cardHtml;
     const liveCard = temp.firstElementChild;
