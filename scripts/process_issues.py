@@ -84,10 +84,11 @@ def extract_json_from_body(body: str) -> dict:
 
     Supports:
       1. Dragged-and-dropped .py file attachment (auto-fetches, auto-wraps)
-      2. ```json fenced block with action JSON
-      3. Raw JSON object with action
-      4. ```python fenced block with agent code (auto-wraps as submit_agent)
-      5. Raw Python with __manifest__ (auto-wraps as submit_agent)
+      2. GitHub Gist link containing agent code (auto-fetches raw content)
+      3. ```json fenced block with action JSON
+      4. Raw JSON object with action
+      5. ```python fenced block with agent code (auto-wraps as submit_agent)
+      6. Raw Python with __manifest__ (auto-wraps as submit_agent)
     """
     if not body or not body.strip():
         raise ValueError("Issue body is empty")
@@ -108,6 +109,19 @@ def extract_json_from_body(body: str) -> dict:
     if attach_match:
         url = attach_match.group(2) if attach_match.lastindex and attach_match.lastindex >= 2 else attach_match.group(1)
         code = _fetch_attachment(url)
+        if code and "__manifest__" in code:
+            return {"action": "submit_agent", "payload": {"code": code}}
+
+    # Try GitHub Gist link — user linked a gist containing the agent code
+    # Supports: https://gist.github.com/USER/HASH
+    gist_match = re.search(
+        r'https://gist\.github\.com/([\w-]+)/([a-f0-9]+)',
+        body
+    )
+    if gist_match:
+        gist_user, gist_id = gist_match.group(1), gist_match.group(2)
+        raw_url = f"https://gist.githubusercontent.com/{gist_user}/{gist_id}/raw"
+        code = _fetch_attachment(raw_url)
         if code and "__manifest__" in code:
             return {"action": "submit_agent", "payload": {"code": code}}
 
