@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encantation Hero — RAPP Summoner</title>
+<style>
+/* ── Reset & Base ── */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:#0a0a1a;
+  color:#e0e0e0;
+}
+
+/* ── Type Colors ── */
+:root{
+  --wealth:#bc8cff; --logic:#58a6ff; --social:#d29922;
+  --shield:#f0f0f0; --data:#3fb950; --craft:#f85149; --heal:#ff7eb3;
+  --gold:#ffd700; --mythic:#ff6ec7; --rare:#58a6ff; --uncommon:#3fb950; --common:#999;
+}
+
+/* ── Title Screen ── */
+#title-screen{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100vh;gap:20px;
+  background:radial-gradient(ellipse at 50% 30%,#1a1040 0%,#0a0a1a 70%);
+}
+#title-screen h1{
+  font-size:3.5rem;font-weight:900;letter-spacing:-2px;
+  background:linear-gradient(135deg,var(--wealth),var(--logic),var(--heal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 60px rgba(88,166,255,0.3);
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.3)}}
+#title-screen p{color:#888;font-size:1.1rem;max-width:500px;text-align:center;line-height:1.6}
+.mode-btn{
+  padding:14px 36px;border:2px solid var(--logic);background:transparent;
+  color:var(--logic);font-size:1.1rem;border-radius:8px;cursor:pointer;
+  transition:all .2s;min-width:260px;
+}
+.mode-btn:hover{background:var(--logic);color:#0a0a1a;transform:scale(1.05)}
+.mode-btn.mythic-btn{border-color:var(--mythic);color:var(--mythic)}
+.mode-btn.mythic-btn:hover{background:var(--mythic);color:#0a0a1a}
+
+/* ── Game Screen ── */
+#game-screen{display:none;height:100vh;flex-direction:column}
+#game-screen.active{display:flex}
+#title-screen.hidden{display:none}
+
+/* Top HUD */
+#hud{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 24px;background:#111;border-bottom:1px solid #222;
+  flex-shrink:0;
+}
+#hud .stat{display:flex;flex-direction:column;align-items:center}
+#hud .stat-label{font-size:.7rem;text-transform:uppercase;color:#666;letter-spacing:1px}
+#hud .stat-value{font-size:1.4rem;font-weight:700}
+#combo-display{color:var(--gold)}
+#score-display{color:var(--logic)}
+#streak-display{color:var(--data)}
+#timer-display{color:var(--craft)}
+
+/* Mana Bar */
+#mana-bar{
+  height:4px;background:#111;flex-shrink:0;
+}
+#mana-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--logic),var(--wealth));transition:width .3s}
+
+/* ── Spell Lane ── */
+#spell-lane{
+  flex:1;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 100%,#0f0f2a 0%,#0a0a1a 70%);
+}
+
+/* Casting circle at bottom */
+#cast-zone{
+  position:absolute;bottom:60px;left:50%;transform:translateX(-50%);
+  width:600px;height:3px;
+  background:linear-gradient(90deg,transparent,var(--logic),transparent);
+  opacity:0.6;
+}
+#cast-zone::before{
+  content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  width:80px;height:40px;border:2px solid var(--logic);border-radius:50%;
+  opacity:0.3;
+}
+
+/* Falling spell words */
+.spell-word{
+  position:absolute;
+  padding:8px 20px;
+  border-radius:6px;
+  font-size:1.2rem;font-weight:600;
+  text-align:center;
+  transition:opacity .15s;
+  white-space:nowrap;
+  text-shadow:0 0 10px currentColor;
+  pointer-events:none;
+}
+.spell-word .typed{color:#555;text-decoration:none}
+.spell-word .remaining{opacity:1}
+.spell-word.matched{
+  animation:summon .5s ease-out forwards;
+}
+@keyframes summon{
+  0%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.8);opacity:0.8}
+  100%{transform:scale(2.5) translateY(-40px);opacity:0}
+}
+.spell-word.missed{
+  animation:fizzle .4s ease-out forwards;
+}
+@keyframes fizzle{
+  0%{opacity:1}
+  100%{opacity:0;transform:translateY(30px);filter:blur(4px)}
+}
+
+/* ── Input Area ── */
+#input-area{
+  padding:16px 24px;background:#0d0d1f;border-top:1px solid #222;
+  display:flex;align-items:center;gap:16px;flex-shrink:0;
+}
+#spell-input{
+  flex:1;padding:12px 20px;font-size:1.3rem;
+  background:#111;border:2px solid #333;border-radius:8px;
+  color:#fff;outline:none;font-family:inherit;
+  transition:border-color .2s;
+}
+#spell-input:focus{border-color:var(--logic)}
+#spell-input.correct{border-color:var(--data);box-shadow:0 0 15px rgba(63,185,80,0.3)}
+#spell-input.wrong{border-color:var(--craft);box-shadow:0 0 15px rgba(248,81,73,0.3)}
+
+/* ── Summoned Card Popup ── */
+#summon-popup{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  z-index:100;pointer-events:none;opacity:0;
+  transition:all .4s cubic-bezier(0.34,1.56,0.64,1);
+}
+#summon-popup.show{
+  transform:translate(-50%,-50%) scale(1);opacity:1;
+}
+.summoned-card{
+  width:280px;padding:16px;border-radius:12px;
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  border:2px solid var(--logic);
+  box-shadow:0 0 40px rgba(88,166,255,0.3),0 20px 60px rgba(0,0,0,0.5);
+  text-align:center;
+}
+.summoned-card .card-rarity{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;
+}
+.summoned-card .card-name{font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.summoned-card .card-title{font-size:.85rem;color:#888;font-style:italic;margin-bottom:10px}
+.summoned-card .card-art{
+  width:100%;height:140px;border-radius:6px;overflow:hidden;
+  margin-bottom:10px;display:flex;align-items:center;justify-content:center;
+  background:#0a0a1a;
+}
+.summoned-card .card-art svg{width:100%;height:100%}
+.summoned-card .card-type{font-size:.75rem;color:#999;margin-bottom:8px}
+.summoned-card .card-stats{
+  display:flex;justify-content:space-around;gap:6px;margin-bottom:10px;
+}
+.summoned-card .card-stats .stat{
+  display:flex;flex-direction:column;align-items:center;
+  font-size:.65rem;color:#888;
+}
+.summoned-card .card-stats .stat span{
+  font-size:1rem;font-weight:700;color:#fff;
+}
+.summoned-card .card-flavor{
+  font-size:.75rem;color:#666;font-style:italic;
+  border-top:1px solid #333;padding-top:8px;line-height:1.4;
+}
+.summoned-card .card-mana{
+  font-size:.8rem;color:var(--wealth);margin-bottom:6px;letter-spacing:1px;
+}
+
+/* ── Particle burst ── */
+.particle{
+  position:fixed;pointer-events:none;border-radius:50%;
+  animation:particle-fly .8s ease-out forwards;
+}
+@keyframes particle-fly{
+  0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}
+}
+
+/* ── Results Screen ── */
+#results-screen{
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  height:100vh;gap:20px;
+  background:radial-gradient(ellipse at 50% 30%,#1a1040 0%,#0a0a1a 70%);
+}
+#results-screen.active{display:flex}
+#results-screen h2{
+  font-size:2.5rem;font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--mythic));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.results-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  max-width:500px;width:100%;
+}
+.results-grid .r-stat{
+  background:#111;border-radius:8px;padding:16px;text-align:center;
+  border:1px solid #222;
+}
+.results-grid .r-stat .r-label{font-size:.7rem;text-transform:uppercase;color:#666;letter-spacing:1px}
+.results-grid .r-stat .r-value{font-size:1.8rem;font-weight:800;margin-top:4px}
+#summoned-gallery{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  max-width:600px;margin-top:10px;
+}
+#summoned-gallery .mini-card{
+  padding:4px 10px;border-radius:4px;font-size:.75rem;font-weight:600;
+  border:1px solid #333;background:#111;
+}
+.rank-badge{
+  font-size:1rem;padding:8px 24px;border-radius:20px;font-weight:700;
+  border:2px solid;
+}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  #title-screen h1{font-size:2rem}
+  .summoned-card{width:220px}
+  #spell-input{font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ TITLE SCREEN ══════════ -->
+<div id="title-screen">
+  <h1>⚡ Encantation Hero</h1>
+  <p>Type the falling incantations to summon RAPP agent cards.<br>
+  The faster and more accurately you type, the higher your score.<br>
+  Chain summons for combo multipliers!</p>
+  <button class="mode-btn" onclick="startGame('normal')">🎮 Normal Mode — 60s</button>
+  <button class="mode-btn" onclick="startGame('blitz')">⚡ Blitz Mode — 30s</button>
+  <button class="mode-btn mythic-btn" onclick="startGame('mythic')">🔮 Mythic Trial — Mythics Only</button>
+  <p style="color:#555;font-size:.8rem;margin-top:10px">Press <kbd style="background:#222;padding:2px 6px;border-radius:3px">Enter</kbd> to lock in each incantation</p>
+</div>
+
+<!-- ══════════ GAME SCREEN ══════════ -->
+<div id="game-screen">
+  <div id="hud">
+    <div class="stat"><span class="stat-label">Score</span><span class="stat-value" id="score-display">0</span></div>
+    <div class="stat"><span class="stat-label">Combo</span><span class="stat-value" id="combo-display">×1</span></div>
+    <div class="stat"><span class="stat-label">Streak</span><span class="stat-value" id="streak-display">0</span></div>
+    <div class="stat"><span class="stat-label">Time</span><span class="stat-value" id="timer-display">60</span></div>
+    <div class="stat"><span class="stat-label">Summoned</span><span class="stat-value" id="summon-count">0</span></div>
+  </div>
+  <div id="mana-bar"><div id="mana-fill"></div></div>
+  <div id="spell-lane">
+    <div id="cast-zone"></div>
+  </div>
+  <div id="input-area">
+    <input type="text" id="spell-input" placeholder="Type the incantation..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<!-- ══════════ SUMMON POPUP ══════════ -->
+<div id="summon-popup"><div class="summoned-card" id="summon-card-inner"></div></div>
+
+<!-- ══════════ RESULTS SCREEN ══════════ -->
+<div id="results-screen">
+  <h2 id="results-title">Session Complete</h2>
+  <div class="rank-badge" id="rank-badge"></div>
+  <div class="results-grid">
+    <div class="r-stat"><span class="r-label">Score</span><div class="r-value" id="r-score">0</div></div>
+    <div class="r-stat"><span class="r-label">Summoned</span><div class="r-value" id="r-summoned">0</div></div>
+    <div class="r-stat"><span class="r-label">Missed</span><div class="r-value" id="r-missed">0</div></div>
+    <div class="r-stat"><span class="r-label">Best Combo</span><div class="r-value" id="r-combo">0</div></div>
+    <div class="r-stat"><span class="r-label">Accuracy</span><div class="r-value" id="r-accuracy">0%</div></div>
+    <div class="r-stat"><span class="r-label">Best Streak</span><div class="r-value" id="r-streak">0</div></div>
+  </div>
+  <div id="summoned-gallery"></div>
+  <button class="mode-btn" onclick="backToTitle()" style="margin-top:20px">🏠 Back to Menu</button>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════
+   Encantation Hero — RAPP Agent Summoner
+   A standalone typing game for the RAPP card system.
+   Loads holo_cards.json from cards/ directory.
+   ════════════════════════════════════════════════ */
+
+// ── Type system ──
+const TYPE_COLORS = {
+  WEALTH:'#bc8cff', LOGIC:'#58a6ff', SOCIAL:'#d29922',
+  SHIELD:'#f0f0f0', DATA:'#3fb950', CRAFT:'#f85149', HEAL:'#ff7eb3'
+};
+const RARITY_COLORS = {mythic:'#ff6ec7',rare:'#58a6ff',uncommon:'#3fb950',common:'#999'};
+
+// ── State ──
+let allCards = [];
+let gameCards = [];
+let activeSpells = [];
+let score = 0, combo = 1, streak = 0, bestCombo = 1, bestStreak = 0;
+let summoned = [], missed = 0, totalSpawned = 0;
+let timeLeft = 60;
+let gameMode = 'normal';
+let gameLoop = null, timerLoop = null, spawnLoop = null;
+let gameActive = false;
+let laneWidth = 600, laneHeight = 400;
+
+// ── Incantation generator ──
+// Each card gets incantations derived from its properties
+function generateIncantations(card) {
+  const incs = [];
+
+  // Card name (always included)
+  incs.push({ text: card.name, points: 100, type: 'name' });
+
+  // Ability keywords
+  for (const ab of (card.abilities || [])) {
+    if (ab.keyword && ab.keyword !== 'Synergy' && ab.keyword !== 'Requires') {
+      incs.push({ text: ab.keyword, points: 80, type: 'ability' });
+    }
+  }
+
+  // Typed ability names
+  for (const ta of (card.typed_abilities || [])) {
+    if (ta.name) {
+      incs.push({ text: ta.name, points: 70, type: 'typed_ability' });
+    }
+  }
+
+  // Mana cost as spoken incantation: {2}{U}{B} → "2 U B"
+  if (card.mana_cost) {
+    const mana = card.mana_cost.replace(/[{}]/g, ' ').trim().replace(/\s+/g, ' ');
+    incs.push({ text: mana, points: 60, type: 'mana' });
+  }
+
+  // Agent types as incantation
+  for (const t of (card.agent_types || [])) {
+    incs.push({ text: t, points: 50, type: 'agent_type' });
+  }
+
+  // Title
+  if (card.title) {
+    incs.push({ text: card.title, points: 90, type: 'title' });
+  }
+
+  return incs;
+}
+
+// ── Load cards ──
+async function loadCards() {
+  try {
+    const resp = await fetch('cards/holo_cards.json');
+    const data = await resp.json();
+    allCards = Object.values(data);
+    console.log(`Loaded ${allCards.length} cards`);
+  } catch (e) {
+    console.warn('Could not load holo_cards.json, using fallback cards');
+    allCards = generateFallbackCards();
+  }
+}
+
+function generateFallbackCards() {
+  // Minimal fallback if JSON can't load
+  const names = ['Borg','Anvil','CardSmith','Agent Workbench','DealDesk',
+                 'RappterEngine','Memory Agent','Pipeline Runner','Registry Client','Basic Agent'];
+  return names.map((name, i) => ({
+    name, title: 'The Agent', mana_cost: `{${i%4+1}}{${'WUBRGN'[i%6]}}`,
+    colors: ['WUBRGN'[i%6]], rarity: i < 2 ? 'mythic' : i < 5 ? 'rare' : 'uncommon',
+    agent_types: [Object.keys(TYPE_COLORS)[i % 7]],
+    type_colors: [Object.values(TYPE_COLORS)[i % 7]],
+    abilities: [{ keyword: ['Analyze','Deploy','Transform','Monitor','Execute'][i%5], text: 'Does things.' }],
+    typed_abilities: [{ name: ['Parse','Coach','Guard','Scan','Build'][i%5], text: 'Action.', cost: 1, damage: 20 }],
+    stats: { hp: 50+i*5, atk: 40+i*3, def: 30+i*4, spd: 60-i*2, int: 50+i },
+    avatar_svg: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#111"/><text x="100" y="110" text-anchor="middle" fill="${Object.values(TYPE_COLORS)[i%7]}" font-size="60">${name[0]}</text></svg>`,
+    flavor_text: '"Every agent has a purpose."',
+    type_line: 'Creature — Agent', set_code: 'HOLO',
+    evolution: { stage: 1, label: 'Base', icon: 'sprout' }
+  }));
+}
+
+// ── Spell spawning ──
+function pickSpell() {
+  const card = gameCards[Math.floor(Math.random() * gameCards.length)];
+  const incs = generateIncantations(card);
+  const inc = incs[Math.floor(Math.random() * incs.length)];
+  return { card, incantation: inc.text, points: inc.points, type: inc.type };
+}
+
+function spawnSpell() {
+  if (!gameActive) return;
+  const spell = pickSpell();
+  const lane = document.getElementById('spell-lane');
+  const rect = lane.getBoundingClientRect();
+  laneWidth = rect.width;
+  laneHeight = rect.height;
+
+  const el = document.createElement('div');
+  el.className = 'spell-word';
+
+  // Color by type
+  const typeColor = spell.card.type_colors?.[0] || TYPE_COLORS[spell.card.agent_types?.[0]] || '#58a6ff';
+  const rarityColor = RARITY_COLORS[spell.card.rarity] || '#999';
+  el.style.color = typeColor;
+  el.style.borderLeft = `3px solid ${rarityColor}`;
+  el.style.background = `linear-gradient(90deg, ${typeColor}15, transparent)`;
+
+  // Position — random x, start above viewport
+  const maxX = Math.max(100, laneWidth - 250);
+  const x = 40 + Math.random() * (maxX - 40);
+  el.style.left = x + 'px';
+  el.style.top = '-50px';
+
+  el.innerHTML = `<span class="remaining">${escapeHtml(spell.incantation)}</span>`;
+  lane.appendChild(el);
+
+  // Fall speed varies by difficulty
+  const baseSpeed = gameMode === 'blitz' ? 1.2 : gameMode === 'mythic' ? 0.7 : 0.8;
+  const speed = baseSpeed + Math.random() * 0.4;
+
+  activeSpells.push({
+    el, card: spell.card, text: spell.incantation,
+    points: spell.points, type: spell.type,
+    x, y: -50, speed, matched: false
+  });
+  totalSpawned++;
+}
+
+// ── Game loop ──
+function tick() {
+  if (!gameActive) return;
+  const lane = document.getElementById('spell-lane');
+  const laneH = lane.getBoundingClientRect().height;
+  const castY = laneH - 80; // cast zone position
+
+  for (let i = activeSpells.length - 1; i >= 0; i--) {
+    const s = activeSpells[i];
+    if (s.matched) continue;
+    s.y += s.speed;
+    s.el.style.top = s.y + 'px';
+
+    // Glow when near cast zone
+    if (s.y > castY - 60 && s.y < castY + 20) {
+      s.el.style.filter = 'brightness(1.5)';
+    }
+
+    // Missed — fell past cast zone
+    if (s.y > laneH + 20) {
+      s.el.classList.add('missed');
+      s.matched = true;
+      missed++;
+      combo = 1;
+      streak = 0;
+      updateHUD();
+      setTimeout(() => s.el.remove(), 400);
+      activeSpells.splice(i, 1);
+    }
+  }
+
+  // Update live typing highlights
+  const input = document.getElementById('spell-input').value.toLowerCase();
+  if (input.length > 0) {
+    for (const s of activeSpells) {
+      if (s.matched) continue;
+      const text = s.text.toLowerCase();
+      if (text.startsWith(input)) {
+        const typed = s.text.substring(0, input.length);
+        const remaining = s.text.substring(input.length);
+        s.el.innerHTML = `<span class="typed">${escapeHtml(typed)}</span><span class="remaining">${escapeHtml(remaining)}</span>`;
+      } else {
+        s.el.innerHTML = `<span class="remaining">${escapeHtml(s.text)}</span>`;
+      }
+    }
+  }
+
+  gameLoop = requestAnimationFrame(tick);
+}
+
+// ── Input handling ──
+function handleInput(e) {
+  if (e.key !== 'Enter') {
+    // Live feedback
+    const input = document.getElementById('spell-input');
+    const val = input.value.toLowerCase();
+    let anyMatch = false;
+    for (const s of activeSpells) {
+      if (!s.matched && s.text.toLowerCase().startsWith(val) && val.length > 0) {
+        anyMatch = true; break;
+      }
+    }
+    input.className = val.length === 0 ? '' : anyMatch ? 'correct' : 'wrong';
+    return;
+  }
+
+  const input = document.getElementById('spell-input');
+  const val = input.value.trim().toLowerCase();
+  if (!val) return;
+
+  // Find best matching spell (closest to cast zone first)
+  let bestMatch = null;
+  let bestY = -Infinity;
+  for (const s of activeSpells) {
+    if (s.matched) continue;
+    if (s.text.toLowerCase() === val && s.y > bestY) {
+      bestMatch = s;
+      bestY = s.y;
+    }
+  }
+
+  if (bestMatch) {
+    // ✓ Successful summon!
+    bestMatch.matched = true;
+    bestMatch.el.classList.add('matched');
+
+    // Score — bonus for timing (near cast zone = more points)
+    const lane = document.getElementById('spell-lane');
+    const laneH = lane.getBoundingClientRect().height;
+    const castY = laneH - 80;
+    const proximity = Math.max(0, 1 - Math.abs(bestMatch.y - castY) / laneH);
+    const timingBonus = Math.floor(proximity * 50);
+    const points = (bestMatch.points + timingBonus) * combo;
+
+    score += points;
+    streak++;
+    if (streak > bestStreak) bestStreak = streak;
+    if (streak % 5 === 0) combo = Math.min(combo + 1, 8);
+    if (combo > bestCombo) bestCombo = combo;
+
+    summoned.push(bestMatch.card);
+    showSummonPopup(bestMatch.card, points);
+    spawnParticles(bestMatch.el);
+
+    setTimeout(() => bestMatch.el.remove(), 500);
+    activeSpells = activeSpells.filter(s => s !== bestMatch);
+  } else {
+    // ✗ Wrong incantation
+    combo = 1;
+    streak = 0;
+    const input = document.getElementById('spell-input');
+    input.classList.add('wrong');
+    setTimeout(() => input.classList.remove('wrong'), 300);
+  }
+
+  input.value = '';
+  input.className = '';
+  updateHUD();
+}
+
+// ── Summon popup ──
+function showSummonPopup(card, points) {
+  const popup = document.getElementById('summon-popup');
+  const inner = document.getElementById('summon-card-inner');
+  const rarityColor = RARITY_COLORS[card.rarity] || '#999';
+  const typeColor = card.type_colors?.[0] || '#58a6ff';
+
+  inner.style.borderColor = rarityColor;
+  inner.style.boxShadow = `0 0 40px ${rarityColor}40, 0 20px 60px rgba(0,0,0,0.5)`;
+
+  const stats = card.stats || {};
+  inner.innerHTML = `
+    <div class="card-rarity" style="color:${rarityColor}">${card.rarity || 'common'} ${card.rarity === 'mythic' ? '★' : ''}</div>
+    <div class="card-name" style="color:${typeColor}">${escapeHtml(card.name)}</div>
+    <div class="card-title">${escapeHtml(card.title || '')}</div>
+    <div class="card-art">${card.avatar_svg || ''}</div>
+    <div class="card-mana">${escapeHtml(card.mana_cost || '')}</div>
+    <div class="card-type">${escapeHtml(card.type_line || '')}</div>
+    <div class="card-stats">
+      <div class="stat">HP<span>${stats.hp || '?'}</span></div>
+      <div class="stat">ATK<span>${stats.atk || '?'}</span></div>
+      <div class="stat">DEF<span>${stats.def || '?'}</span></div>
+      <div class="stat">SPD<span>${stats.spd || '?'}</span></div>
+      <div class="stat">INT<span>${stats.int || '?'}</span></div>
+    </div>
+    <div style="color:var(--gold);font-weight:700;font-size:1.2rem">+${points} pts</div>
+  `;
+
+  popup.classList.add('show');
+  setTimeout(() => popup.classList.remove('show'), 1500);
+}
+
+// ── Particles ──
+function spawnParticles(el) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const colors = ['#58a6ff','#bc8cff','#3fb950','#ffd700','#ff6ec7','#f85149'];
+
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const angle = (Math.PI * 2 * i) / 12;
+    const dist = 60 + Math.random() * 80;
+    const dx = Math.cos(angle) * dist;
+    const dy = Math.sin(angle) * dist;
+    p.style.cssText = `
+      left:${cx}px;top:${cy}px;
+      width:${4 + Math.random()*6}px;height:${4 + Math.random()*6}px;
+      background:${colors[i % colors.length]};
+      --dx:${dx}px;--dy:${dy}px;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 800);
+  }
+}
+
+// ── HUD ──
+function updateHUD() {
+  document.getElementById('score-display').textContent = score.toLocaleString();
+  document.getElementById('combo-display').textContent = `×${combo}`;
+  document.getElementById('combo-display').style.color = combo >= 5 ? 'var(--mythic)' : combo >= 3 ? 'var(--gold)' : 'var(--logic)';
+  document.getElementById('streak-display').textContent = streak;
+  document.getElementById('summon-count').textContent = summoned.length;
+  document.getElementById('mana-fill').style.width = `${(timeLeft / (gameMode === 'blitz' ? 30 : 60)) * 100}%`;
+}
+
+// ── Game flow ──
+async function startGame(mode) {
+  gameMode = mode;
+  await loadCards();
+
+  // Filter cards by mode
+  if (mode === 'mythic') {
+    gameCards = allCards.filter(c => c.rarity === 'mythic');
+    if (gameCards.length < 3) gameCards = allCards.filter(c => c.rarity === 'mythic' || c.rarity === 'rare');
+    timeLeft = 60;
+  } else if (mode === 'blitz') {
+    gameCards = allCards;
+    timeLeft = 30;
+  } else {
+    gameCards = allCards;
+    timeLeft = 60;
+  }
+
+  // Reset state
+  score = 0; combo = 1; streak = 0; bestCombo = 1; bestStreak = 0;
+  summoned = []; missed = 0; totalSpawned = 0;
+  activeSpells = [];
+
+  // Clear lane
+  const lane = document.getElementById('spell-lane');
+  lane.querySelectorAll('.spell-word').forEach(e => e.remove());
+
+  // Switch screens
+  document.getElementById('title-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('active');
+  document.getElementById('game-screen').classList.add('active');
+
+  updateHUD();
+  document.getElementById('timer-display').textContent = timeLeft;
+
+  const input = document.getElementById('spell-input');
+  input.value = '';
+  input.className = '';
+  input.focus();
+
+  gameActive = true;
+
+  // Start loops
+  gameLoop = requestAnimationFrame(tick);
+
+  const spawnRate = mode === 'blitz' ? 1200 : mode === 'mythic' ? 2500 : 1800;
+  spawnSpell(); // immediate first spell
+  spawnLoop = setInterval(spawnSpell, spawnRate);
+
+  timerLoop = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer-display').textContent = timeLeft;
+    updateHUD();
+    if (timeLeft <= 0) endGame();
+  }, 1000);
+}
+
+function endGame() {
+  gameActive = false;
+  cancelAnimationFrame(gameLoop);
+  clearInterval(timerLoop);
+  clearInterval(spawnLoop);
+
+  // Clean up remaining spells
+  activeSpells.forEach(s => s.el.remove());
+  activeSpells = [];
+
+  document.getElementById('game-screen').classList.remove('active');
+
+  // Calculate results
+  const accuracy = totalSpawned > 0 ? Math.round((summoned.length / totalSpawned) * 100) : 0;
+
+  // Rank
+  let rank, rankColor;
+  if (score >= 5000) { rank = '🏆 Archmage'; rankColor = 'var(--mythic)'; }
+  else if (score >= 3000) { rank = '⭐ Summoner'; rankColor = 'var(--gold)'; }
+  else if (score >= 1500) { rank = '🔮 Enchanter'; rankColor = 'var(--wealth)'; }
+  else if (score >= 500) { rank = '📖 Apprentice'; rankColor = 'var(--logic)'; }
+  else { rank = '🌱 Initiate'; rankColor = 'var(--data)'; }
+
+  document.getElementById('r-score').textContent = score.toLocaleString();
+  document.getElementById('r-score').style.color = rankColor;
+  document.getElementById('r-summoned').textContent = summoned.length;
+  document.getElementById('r-summoned').style.color = 'var(--data)';
+  document.getElementById('r-missed').textContent = missed;
+  document.getElementById('r-missed').style.color = missed > 0 ? 'var(--craft)' : 'var(--data)';
+  document.getElementById('r-combo').textContent = `×${bestCombo}`;
+  document.getElementById('r-combo').style.color = 'var(--gold)';
+  document.getElementById('r-accuracy').textContent = accuracy + '%';
+  document.getElementById('r-accuracy').style.color = accuracy >= 80 ? 'var(--data)' : accuracy >= 50 ? 'var(--social)' : 'var(--craft)';
+  document.getElementById('r-streak').textContent = bestStreak;
+  document.getElementById('r-streak').style.color = 'var(--wealth)';
+
+  const badge = document.getElementById('rank-badge');
+  badge.textContent = rank;
+  badge.style.borderColor = rankColor;
+  badge.style.color = rankColor;
+
+  // Summoned gallery — deduplicated
+  const gallery = document.getElementById('summoned-gallery');
+  gallery.innerHTML = '';
+  const seen = new Set();
+  for (const card of summoned) {
+    if (seen.has(card.name)) continue;
+    seen.add(card.name);
+    const mini = document.createElement('div');
+    mini.className = 'mini-card';
+    const rc = RARITY_COLORS[card.rarity] || '#999';
+    mini.style.borderColor = rc;
+    mini.style.color = card.type_colors?.[0] || '#58a6ff';
+    mini.textContent = card.name;
+    gallery.appendChild(mini);
+  }
+
+  document.getElementById('results-screen').classList.add('active');
+}
+
+function backToTitle() {
+  document.getElementById('results-screen').classList.remove('active');
+  document.getElementById('game-screen').classList.remove('active');
+  document.getElementById('title-screen').classList.remove('hidden');
+}
+
+// ── Utility ──
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s || '';
+  return d.innerHTML;
+}
+
+// ── Boot ──
+document.addEventListener('keydown', handleInput);
+document.getElementById('spell-input').addEventListener('keydown', (e) => {
+  e.stopPropagation();
+  handleInput(e);
+});
+document.getElementById('spell-input').addEventListener('input', () => {
+  const input = document.getElementById('spell-input');
+  const val = input.value.toLowerCase();
+  let anyMatch = false;
+  for (const s of activeSpells) {
+    if (!s.matched && s.text.toLowerCase().startsWith(val) && val.length > 0) {
+      anyMatch = true; break;
+    }
+  }
+  input.className = val.length === 0 ? '' : anyMatch ? 'correct' : 'wrong';
+});
+
+// Preload cards on page load
+loadCards();
+</script>
+</body>
+</html>
