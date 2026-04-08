@@ -30,7 +30,15 @@
       "voters": {
         "kody-w": "up"
       }
+    },
+    "@borg/borg_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
     }
   },
-  "updated_at": "2026-04-04T22:37:58.975320+00:00"
+  "updated_at": "2026-04-08T18:35:19.530060+00:00"
 }
