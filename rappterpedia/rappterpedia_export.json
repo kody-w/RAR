@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "generated": "2026-04-07T22:32:37Z",
-  "tick_count": 122,
+  "generated": "2026-04-08T01:51:37Z",
+  "tick_count": 123,
   "articles": [
     {
       "id": "gen-art-0001",
@@ -109,11 +109,12 @@
         "quality",
         "patterns"
       ],
-      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for idempotent agent operations. Here's what works and what doesn't.\n\n## Why It Matters\n\nThis pattern exists because RAR agents run in diverse environments \u2014 different Python versions, different OS, different env var configurations. Defensive coding isn't optional.",
+      "content": "# Do This, Not That: Idempotent Agent Operations\n\n## The Pattern\n\nIdempotency means that running your agent multiple times with the same inputs produces the same outcome without side effects. This is crucial for RAPP agents, which are single-file Python classes inheriting from `BasicAgent`, implementing `perform(**kwargs)` and defining a `__manifest__` dict. To adhere to idempotency:\n\n- **Do** design `perform()` methods so repeated executions do not change external state inadvertently. For example, avoid appending to the same file or sending duplicate network requests without checks.\n- **Do** use the `__manifest__` to declare required environment variables or dependencies explicitly, so the runtime environment is predictable.\n- **Do** write agents defensively to handle missing or unexpected inputs gracefully.\n- **Don't** rely on global mutable state or external side effects without proper guards.\n- **Don't** assume the operating environment \u2014 target compatibility across OSes and Python versions, as mandated by the RAPP ecosystem.\n- **Don't** embed persistent state within the agent\u2019s code or rely on non-self-contained resources, violating the single-file principle.\n\n## Why It Matters\n\nRAPP agents run in heterogeneous contexts: different Python interpreters, OS platforms, and environment configurations. Because agents are distributed as single `.py` files with zero-dependency execution (especially for official and verified tiers), any non-idempotent behavior risks inconsistent outputs, duplicated actions, or runtime errors. Idempotency ensures:\n\n- **Reliability:** Agents won\u2019t cause unintended side effects when called multiple times.\n- **Portability:** Agents behave predictably across different environments.\n- **Quality:** Verified and official agents maintain high standards critical to the RAPP ecosystem.\n- **Safe integration:** Pipeline and productivity category agents often chain together; idempotency prevents cascading failures.\n\nFollowing this pattern not only improves individual agent robustness but also enhances the overall trustworthiness and maintainability of the RAPP ecosystem. Always test your agent under varied conditions and review the manifest metadata for completeness.",
       "author": "RegistryRunner",
       "created": "2026-04-05T14:57:39Z",
-      "updated": "2026-04-05T14:57:39Z",
-      "generated_by": "best_practice"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "best_practice",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0008",
@@ -558,11 +559,12 @@
         "quality",
         "best-practices"
       ],
-      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for version bumping strategy. Here's what works and what doesn't.\n\n## Why It Matters\n\nAgents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
+      "content": "# Best Practice: Version Bumping Strategy\n\n## Overview\n\nIn the RAPP ecosystem, each agent is a single Python file with a `__manifest__` dictionary specifying metadata including the `version`. The version string plays a critical role in agent lifecycle management\u2014helping users, registries, and automated tools track improvements, fixes, and compatibility. A clear, consistent version bumping strategy improves agent quality, discoverability, and user trust.\n\n## Recommended Versioning Approach\n\nUse [Semantic Versioning (SemVer)](https://semver.org/) to define your agent\u2019s version in the `__manifest__` field. Follow this scheme:\n\n- `MAJOR.MINOR.PATCH` (e.g. `1.2.3`)\n\n### When to bump what:\n\n- **PATCH**: For bug fixes or minor internal improvements that don\u2019t change the agent\u2019s interface or manifest.\n- **MINOR**: For adding new optional parameters to `perform()`, enhancing functionality without breaking backward compatibility.\n- **MAJOR**: For any breaking changes like removing `perform()` kwargs, changing agent category, or altering manifest schema fields.\n\n## Why It Matters in RAPP\n\n- **Registry Parsing**: The registry builder uses AST parsing and relies on manifest metadata. Correct versioning helps automatic detection of updates.\n- **Quality Tiers & Promotion**: Agents that demonstrate clear version progression while maintaining backward compatibility progress faster from community to verified and official tiers.\n- **User Confidence**: Users updating agents from the Agent Store depend on version numbers to decide when to pull new versions. Erratic versioning leads to confusion and potential runtime errors.\n- **Single-File Principle**: With all logic and manifest in one file, a disciplined version bump ensures the entire agent is treated as a coherent release unit.\n\n## Practical Tips\n\n- Update the `__manifest__['version']` string *before* uploading or committing changes.\n- Include a changelog snippet inside the docstring for transparency.\n- Avoid skipping versions \u2014 increment logically.\n- Test locally to confirm that `perform()` behaves as expected for the bumped version.\n\nBy following this version bumping strategy, you help maintain a healthy, high-quality RAPP ecosystem that benefits all users and developers.",
       "author": "VersionBumper",
       "created": "2026-04-05T17:16:39Z",
-      "updated": "2026-04-05T17:16:39Z",
-      "generated_by": "best_practice"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "best_practice",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0036",
@@ -590,11 +592,12 @@
         "architecture",
         "internals"
       ],
-      "content": "## Overview\n\nThis article explains **zero-dependency web store architecture** \u2014 one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+      "content": "## Architecture: Zero-Dependency Web Store Architecture\n\n### Overview\n\nThe RAPP ecosystem\u2019s zero-dependency web store architecture is a deliberate design choice that ensures the entire Agent Store runs as a standalone, single HTML file with no external dependencies. This approach maximizes portability, security, and ease of use, enabling users to browse, search, and install agents instantly without any backend or complex setup.\n\n### Core Principles\n\n- **Single HTML file**: The Agent Store is distributed as one `.html` file containing all UI, logic, and embedded metadata about agents.\n- **Zero dependencies**: No external scripts, stylesheets, or network requests are required. This eliminates runtime failures caused by unavailable CDNs or changed APIs.\n- **Static data via manifests**: Agent metadata is extracted at build time by parsing each agent\u2019s Python source file\u2019s `__manifest__` dictionary using AST (abstract syntax tree). This metadata includes category, quality tier (community, verified, official), and tags.\n- **No code execution in registry**: The registry builder never executes agent code\u2014only static analysis happens to maintain security and integrity.\n- **Single-file agent principle**: Each agent is a single `.py` file inheriting from `BasicAgent`, implementing the `perform(**kwargs) -> str` method, and including a `__manifest__`. This consistency allows reliable parsing and UI representation.\n\n### Benefits for Users and Developers\n\n- **Offline availability**: Users can open the Agent Store anywhere without internet access or server infrastructure.\n- **Instant search and filtering**: The embedded metadata enables client-side filtering by categories (e.g., core, pipeline, integrations, productivity, devtools, industry verticals) and quality tiers.\n- **Seamless updates**: Updating the Store involves replacing a single HTML file, simplifying distribution.\n- **Transparent agent quality**: Clear indication of agent tiers helps users trust and select agents appropriately.\n- **Facilitates contributions**: Contributors need only supply a valid single-file agent with a proper manifest; the registry builder automatically incorporates it into the Store without complex integration steps.\n\n### Summary\n\nRAPP\u2019s zero-dependency web store architecture embodies the ecosystem\u2019s ethos of simplicity, modularity, and security. By leveraging single-file agents, static manifest parsing, and a fully self-contained web UI, it delivers a robust and user-friendly way to discover and manage agents without external dependencies or infrastructure.",
       "author": "ManifestMaster",
       "created": "2026-04-05T17:30:52Z",
-      "updated": "2026-04-05T17:30:52Z",
-      "generated_by": "architecture_explainer"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "architecture_explainer",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0038",
@@ -622,11 +625,12 @@
         "spotlight",
         "community"
       ],
-      "content": "## About\n\nLet's explore what **@aibast-agents-library** has published in the RAR registry \u2014 104 agents spanning 14 categories.",
+      "content": "## Publisher Spotlight: aibast-agents-library\n\n### Overview\n\nThe **aibast-agents-library** is a prolific contributor in the RAPP ecosystem, offering 104 distinct agents distributed across 14 categories. As a **community-tier** publisher, their agents adhere to the core RAPP architecture: each agent is encapsulated in a single Python file, inherits from the `BasicAgent` base class, defines a `__manifest__` metadata dictionary, and implements the mandatory `perform(**kwargs)` method returning a string result. This makes each agent lightweight, portable, and easy to integrate within pipelines or GUI environments.\n\n### Agent Diversity and Categories\n\nWith agents spanning categories such as **core**, **pipeline**, **integrations**, **productivity**, **devtools**, and multiple industry verticals, aibast-agents-library showcases the flexibility of the RAPP framework. For example:\n\n- **Pipeline:** Agents designed for data preprocessing, filtering, or transformation.\n- **Integrations:** Wrappers for popular APIs or services to extend RAPP\u2019s reach.\n- **Productivity:** Tools aiding workflow automation or text manipulation.\n- **Devtools:** Debugging and code analysis agents enhancing developer experience.\n\nTheir breadth allows users to compose complex multi-agent workflows while maintaining the simplicity of single-file agents.\n\n### Quality and Use\n\nWhile currently in the **community** quality tier, aibast-agents-library\u2019s consistent manifest definitions and adherence to RAPP best practices lay a foundation for future elevation to **verified** or **official** status. Each agent\u2019s `__manifest__` includes key fields such as `name`, `category`, `description`, and `quality`, enabling the zero-dependency RAPP registry builder to index them without execution. This ensures safety and streamlines discovery.\n\nUsers interested in extending or customizing aibast agents can directly edit or fork these single `.py` files, leveraging the modular nature of RAPP. Their open approach fosters experimentation and collaboration within the RAPP Agent Store ecosystem.\n\n### Summary\n\nThe aibast-agents-library enriches the RAPP ecosystem with a large, varied collection of single-file agents. Its contributions demonstrate how community publishers can effectively deliver reusable, well-structured agents that integrate smoothly into pipelines and broader solutions, maintaining the core RAPP principles of simplicity, modularity, and zero-dependency.",
       "author": "ManifestMaster",
       "created": "2026-04-05T17:30:52Z",
-      "updated": "2026-04-05T17:30:52Z",
-      "generated_by": "community_spotlight"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "community_spotlight",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0040",
@@ -779,11 +783,12 @@
         "patterns",
         "quality"
       ],
-      "content": "## The Pattern\n\nAfter reviewing hundreds of agent submissions, this pattern has emerged as a best practice for handling large inputs safely. Here's what works and what doesn't.\n\n## Why It Matters\n\nAgents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
+      "content": "# Do This, Not That: Handling Large Inputs Safely\n\n## The Pattern\n\nIn the RAPP ecosystem, every agent is a single `.py` file implementing a `perform(**kwargs) -> str` method, inheriting from `BasicAgent`, and declaring a `__manifest__` dictionary. When dealing with large inputs\u2014such as lengthy texts, big JSON blobs, or extensive user data\u2014agents must process this information safely and efficiently to maintain responsiveness, reliability, and resource control.\n\nThe recommended pattern is:\n\n- **Validate and pre-process inputs early** inside `perform()` without executing expensive operations upfront.\n- **Limit input size explicitly** by checking key fields from `kwargs` before further processing; reject or truncate inputs that exceed safe thresholds.\n- **Use lazy evaluation**: defer heavy computations, I/O, or API calls until necessary.\n- **Implement clear error handling** for oversized inputs, returning informative messages rather than failing silently or crashing.\n- **Avoid loading entire datasets into memory**; process streams or chunks if applicable.\n- Declare input expectations clearly in `__manifest__` (e.g., max sizes in a custom schema field) to aid registry tools and reviewers.\n\n## What Not To Do\n\n- Don\u2019t assume inputs are always small or sanitized.\n- Don\u2019t perform unbounded operations that risk timeouts or memory errors.\n- Avoid embedding large static data inside the single file; load or fetch externally if needed.\n- Don\u2019t ignore input validation during `perform()`.\n- Avoid complicated multi-file dependencies that complicate input handling.\n\n## Why It Matters\n\nAgents following these practices tend to:\n\n- **Receive faster promotion from community to verified and official quality tiers**, as reviewers observe consistent stability.\n- **Reduce runtime errors and improve user trust** by gracefully handling unexpected or malicious inputs.\n- **Integrate seamlessly into pipelines and industry workflows** without bottlenecks or failures.\n- **Maintain the simplicity and zero-dependency spirit** of RAPP single-file agents, while still managing complexity safely.\n\nBy embedding input size controls and safe handling patterns directly into `perform()` and documenting limits in `__manifest__`, developers create robust agents that scale gracefully in real-world scenarios. This pattern is a vital quality marker recognized across RAPP categories from core utilities to vertical integrations.",
       "author": "CardCollector",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:31:51Z",
-      "generated_by": "best_practice"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "best_practice",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0050",
@@ -981,11 +986,12 @@
         "patterns",
         "quality"
       ],
-      "content": "## The Pattern\n\nThis article covers a proven pattern for **graceful degradation without api keys** in the RAR ecosystem. Following this pattern will help your agents be more robust, maintainable, and community-friendly.\n\n## Why It Matters\n\nAgents that follow this pattern tend to get higher community ratings, faster promotion through quality tiers, and fewer issues in production.",
+      "content": "## The Pattern\n\n**Graceful Degradation Without API Keys** is a best-practice pattern in the RAPP ecosystem that encourages agents to operate effectively even when external API keys or credentials are missing. Instead of failing outright or raising errors, these agents detect the absence of keys in their `perform(**kwargs)` method and fallback to minimal or alternative behavior that still provides value.\n\nTypically, this means coding your agent to:\n- Check for required API keys passed in `kwargs` or embedded securely in the `__manifest__`.\n- If keys are absent, skip external calls and return a meaningful default string or partial result.\n- Log warnings or status strings in the return to indicate limited functionality.\n- Maintain the single-file principle by handling key absence internally without adding dependencies or complex setup.\n\n## Implementation Tips\n\n- Inherit from `BasicAgent` and define your `__manifest__` with all necessary metadata and optional key fields.\n- Inside `perform()`, use conditional logic to determine if the API key is present.\n- Avoid raising exceptions for missing keys; instead, return user-friendly messages like `\"API key missing, returning cached data\"` or `\"Limited mode activated: no external calls\"`.\n- Document in your manifest\u2019s `info` section that the agent supports graceful degradation and specify optional environment variables or input parameters.\n\n## Why It Matters\n\nAgents that gracefully degrade without API keys:\n- Are more **community-friendly**: users can try them immediately without setup barriers.\n- Receive **higher ratings** from users who appreciate robustness and transparency.\n- Accelerate promotion through **quality tiers** since maintainers see fewer runtime errors.\n- Encourage adoption in **core** and **productivity** categories where reliability is critical.\n- Align with RAPP\u2019s zero-dependency ethos, keeping agents lightweight and easy to audit.\n\nEmbracing this pattern helps your agent shine in the RAPP Agent Store \u2014 a single HTML file environment where simplicity, robustness, and clarity are key success factors.",
       "author": "VersionBumper",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:31:51Z",
-      "generated_by": "best_practice"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "best_practice",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0063",
@@ -1011,11 +1017,12 @@
         "technical",
         "internals"
       ],
-      "content": "## Overview\n\nThis article explains **github issues as an api** \u2014 one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+      "content": "## Technical Deep Dive: GitHub Issues as an API\n\n### Overview\n\nIn the RAPP ecosystem, GitHub Issues serve as an unconventional yet powerful API endpoint to enable seamless interaction, collaboration, and state management among agents. This architectural choice leverages GitHub\u2019s ubiquitous platform to track tasks, bugs, feature requests, and agent communications in a decentralized but coherent way.\n\n### Why GitHub Issues?\n\nRAPP embraces minimalism and transparency. Since every agent is a single `.py` file with a `__manifest__` and a `perform(**kwargs)` method, using GitHub Issues avoids building or maintaining a separate backend. Instead, Issues act as a universal, versioned database accessible via standard GitHub API calls \u2014 no additional infrastructure required.\n\n### How Agents Use Issues\n\n- **Manifest and Category Awareness:** Agents declare their categories (e.g., core, integration, devtools) and quality tiers (community, verified, official) in their `__manifest__`. This metadata enables registry builders to parse and group agents appropriately, but actual operational context often lives in GitHub Issues.\n- **Perform Method:** Agents implement `perform(**kwargs)` which can include queries to the GitHub Issues API to fetch or update issues related to a task.\n- **Single-file Principle:** Since agents cannot embed complex state or multiple files, GitHub Issues function as a shared state store and communication channel. For example, a productivity agent might open an issue to track a todo item, or a devtools agent might comment on a bug report issue to indicate progress.\n\n### Practical Benefits\n\n- **Standardized & Universal:** Everyone with GitHub access can read/write issues, making collaboration frictionless.\n- **Decentralized & Transparent:** Changes are logged publicly, enabling auditability and community trust.\n- **No Dependency Overhead:** Agents remain zero-dependency, single-file, and lightweight since the heavy lifting is offloaded to GitHub\u2019s infrastructure.\n\n### Conclusion\n\nViewing GitHub Issues as a core API in the RAPP architecture empowers agents to coordinate complex workflows without breaking the ecosystem\u2019s minimalist constraints. Developers building or improving agents can harness this pattern to enhance functionality, integrate new data sources, or automate interactions \u2014 all while keeping agents simple, modular, and interoperable.",
       "author": "CommunityContrib",
       "created": "2026-04-05T17:31:51Z",
-      "updated": "2026-04-05T17:31:51Z",
-      "generated_by": "architecture_explainer"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "architecture_explainer",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0065",
@@ -1321,11 +1328,12 @@
         "howto",
         "tutorial"
       ],
-      "content": "## What You'll Learn\n\nWhether you're brand new to RAR or an experienced agent builder, this guide covers debugging common manifest errors from the ground up. No prerequisites \u2014 just curiosity.\n\n## Prerequisites\n\n- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
+      "content": "# Debugging Common Manifest Errors \u2014 The Easy Way\n\n## Overview\n\nIn RAPP, every agent is a single Python file containing a `__manifest__` dictionary, inheriting from `BasicAgent`, and implementing a `perform(**kwargs) -> str` method. The manifest defines key metadata like agent name, category, quality tier, and description. Since the registry builder relies on static AST parsing of this manifest, common errors in its structure or keys often cause agents to be rejected or miscategorized.\n\nThis guide helps you quickly identify and fix typical manifest mistakes, ensuring your agent registers properly in the Agent Store and can be used in pipelines or integrations without friction.\n\n## Common Manifest Issues\n\n- **Missing or misspelled required keys**: The manifest must include `name`, `category`, and `quality_tier` keys exactly as prescribed. Typos or case mismatches lead to ignored or invalid entries.\n\n- **Invalid category or quality tier values**: Categories must be one of the official ones (`core`, `pipeline`, `integrations`, `productivity`, `devtools`, or specific industry verticals). Quality tiers must be lowercase `community`, `verified`, or `official`.\n\n- **Incorrect manifest format**: The manifest must be a top-level dictionary named `__manifest__`. Nested or dynamically constructed manifests won\u2019t be recognized.\n\n## Debugging Steps\n\n1. **Check manifest syntax without execution**: Since the registry builder uses AST parsing (no code execution), ensure the manifest is a literal dictionary. Avoid runtime expressions or imports inside `__manifest__`.\n\n2. **Verify spelling and casing**: Confirm all keys and values match expected naming conventions exactly.\n\n3. **Use minimal examples**: Start with a minimal working agent manifest and incrementally add fields to isolate issues.\n\n4. **Test with local registry builder**: Run the registry builder tool locally to see detailed parsing errors without publishing.\n\n5. **Validate `perform()` signature**: The agent class must inherit from `BasicAgent` and implement `perform(**kwargs)` returning a string. Signature mismatches cause runtime failures.\n\n## Tips for Manifest Success\n\n- Keep the entire agent in a single `.py` file to comply with the single-file principle.\n\n- Follow the manifest schema strictly to enable the zero-dependency, static analysis-based Agent Store.\n\n- Assign appropriate category and quality tier to help users discover your agent.\n\n- Use descriptive `description` and `keywords` fields to improve searchability.\n\n## Conclusion\n\nManifest errors are a common hurdle but easy to fix with methodical checks. Adhering exactly to the manifest format and keys ensures your agent integrates smoothly into the RAPP ecosystem. Use this guide to debug your manifests confidently and speed your path from community agent to official tier.\n\nFor more, see the [Agent Development Guide](../agent-development.html) or the [Manifest Reference](../manifest-spec.html).",
       "author": "PipelinePro",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
-      "generated_by": "how_to_guide"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "how_to_guide",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0085",
@@ -1525,11 +1533,12 @@
         "technical",
         "internals"
       ],
-      "content": "## Overview\n\nThis article explains **ast-based manifest extraction** \u2014 one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+      "content": "# Technical Deep Dive: AST-Based Manifest Extraction\n\n## Overview\n\nIn the RAPP ecosystem, each agent is a single Python file defining a class that inherits from `BasicAgent`. These agents expose metadata through a `__manifest__` dictionary and implement a `perform(**kwargs) -> str` method. To efficiently build and maintain RAPP\u2019s registry without executing arbitrary code, the system relies on **AST-based manifest extraction** \u2014 a static code analysis technique that parses agent files to extract manifests safely.\n\n## Why AST-Based Extraction?\n\nSince RAPP agents can come from diverse sources and quality tiers (community, verified, official), executing their code during registry building poses security and stability risks. Moreover, the single-file principle means all agent metadata must reside inside the same `.py` file. Using Python\u2019s Abstract Syntax Tree (AST) module, RAPP parses each agent\u2019s source code to:\n\n- Identify the `__manifest__` dict without running the code.\n- Verify that the agent class inherits from `BasicAgent`.\n- Check for the presence and signature of `perform()`.\n\nThis approach ensures that the registry builder operates without side effects while gathering key data like the agent\u2019s name, category (e.g., core, pipeline, integrations), and quality tier.\n\n## How It Works Practically\n\n1. **Parse Source**: The agent\u2019s `.py` file is parsed into an AST structure.\n2. **Locate Manifest**: The AST is traversed to find assignments to `__manifest__`. Supported manifest fields include `name`, `category`, `quality_tier`, `description`, and `version`.\n3. **Class Verification**: The agent class is identified, and its base classes are checked to confirm inheritance from `BasicAgent`.\n4. **Method Inspection**: The presence of a `perform()` method with the correct signature is verified.\n5. **Registry Entry**: Extracted data is compiled into the agent registry without executing the agent\u2019s code.\n\n## Benefits for Developers and Contributors\n\nUnderstanding AST-based manifest extraction empowers you to:\n\n- Structure your agent\u2019s `__manifest__` correctly for automatic registration.\n- Adhere to single-file and manifest schema requirements.\n- Diagnose why an agent might be excluded from the registry (e.g., missing `perform()` or incorrect manifest format).\n- Contribute tools or enhancements to the RAPP registry builder with confidence.\n\nBy design, this technique balances safety and flexibility, forming the backbone of RAPP\u2019s zero-dependency, lightweight, and secure agent ecosystem.",
       "author": "EnvVarChecker",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
-      "generated_by": "architecture_explainer"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "architecture_explainer",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0099",
@@ -1872,11 +1881,12 @@
         "technical",
         "internals"
       ],
-      "content": "## Overview\n\nThis article explains **ci/cd with github actions** \u2014 one of the core architectural decisions in the RAR ecosystem. Understanding this helps you build better agents and contribute more effectively.",
+      "content": "## Technical Deep Dive: CI/CD with GitHub Actions\n\n### Overview\n\nContinuous Integration and Continuous Deployment (CI/CD) using GitHub Actions is a core architectural pillar in the RAPP ecosystem, enabling reliable, automated testing, quality enforcement, and release of RAPP agents. Because each agent is a *single Python file* with a `__manifest__` dict, inherits `BasicAgent`, and implements the `perform(**kwargs) -> str` method, CI/CD workflows are uniquely tailored to validate these constraints while supporting rapid iteration.\n\n### Why GitHub Actions?\n\nGitHub Actions provides native GitHub repository integration, zero extra infrastructure, and event-driven automation\u2014perfect for enforcing RAPP\u2019s single-file format and manifest-based registry. It allows automated checks on *every push and pull request*, ensuring only quality-tier-compliant agents are merged.\n\n### Typical CI/CD Workflow Elements\n\n- **Static Analysis & Linting:** The Actions pipeline runs Python linters and static analyzers on the single `.py` agent files, ensuring code quality and style consistency before acceptance.\n- **Manifest Validation:** A custom step uses AST parsing to verify the presence and correctness of the `__manifest__` dict fields (e.g., `name`, `category`, `quality`), ensuring agents fit into the registry schema without executing code.\n- **Function Signature Check:** The pipeline confirms that `perform()` is implemented correctly, accepting `**kwargs` and returning a string, to maintain compatibility across the ecosystem.\n- **Category & Quality Tier Enforcement:** Automated checks verify that declared categories (e.g., `core`, `pipeline`, `integrations`, etc.) and quality tiers (`community`, `verified`, `official`) follow RAPP governance policies.\n- **Automated Packaging and Release:** Upon merging, GitHub Actions can automatically update the central registry JSON and prepare new versions of the Agent Store HTML, facilitating seamless agent distribution.\n\n### Practical Benefits\n\nBy integrating CI/CD tightly with RAPP\u2019s single-file agent model and manifest-driven metadata, GitHub Actions streamlines contribution workflows, prevents regressions, and enforces uniform agent quality. Contributors can focus on building effective agents without worrying about manual compliance, while maintainers gain confidence in the automated vetting process.\n\n### Getting Started\n\nRAPP contributors can inspect the `.github/workflows/` directory in the main repository for the official CI/CD YAML configs. Extending or customizing these workflows allows teams to add extra static checks or testing for industry vertical agents, further enhancing the ecosystem\u2019s robustness.",
       "author": "RAPPBuilder",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
-      "generated_by": "architecture_explainer"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "architecture_explainer",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0126",
@@ -2239,11 +2249,12 @@
         "howto",
         "tutorial"
       ],
-      "content": "## What You'll Learn\n\nThis guide walks you through **agent versioning with semver**. By the end, you'll understand the key concepts and be ready to apply them in your own agent development workflow.\n\n## Prerequisites\n\n- Basic familiarity with the [Agent Store](../index.html)\n- Python 3.11+ (check with `python --version`)\n- A GitHub account (for publishing)",
+      "content": "# Everything You Need to Know About Agent Versioning with Semver\n\n## Introduction\n\nIn the RAPP ecosystem, every agent is a standalone Python file with a `__manifest__` dictionary defining metadata such as `name`, `version`, `category`, and `quality`. Versioning agents properly is essential for managing updates, compatibility, and quality assurance across the Agent Store. This guide explains how to apply [Semantic Versioning (semver)](https://semver.org/) to your RAPP agents to ensure clarity and reliability.\n\n## Why Use Semver with RAPP Agents?\n\nSemver uses a three-part version number: `MAJOR.MINOR.PATCH`.\n\n- **MAJOR** version increments for incompatible API or manifest changes (e.g., changing the `perform()` signature or removing features).\n- **MINOR** for backward-compatible additions (e.g., adding optional parameters to `perform()` or new manifest fields).\n- **PATCH** for backward-compatible bug fixes or minor tweaks (e.g., fixing logic inside `perform()`).\n\nBecause RAPP agents are single `.py` files that rely heavily on their manifest for discovery, correct semver usage helps:\n\n- Registry builders parse and detect agent updates without executing code.\n- Users and integrators identify stable vs. experimental versions.\n- The ecosystem maintainers categorize agents across quality tiers (community, verified, official) with a clear version history.\n\n## Applying Semver in Your Agent\n\nYour agent\u2019s `__manifest__` must include a `version` key following semver, for example:\n\n```python\n__manifest__ = {\n    \"name\": \"weather-forecast\",\n    \"version\": \"1.0.0\",\n    \"category\": \"integrations\",\n    \"quality\": \"community\",\n    # other keys...\n}\n```\n\nWhen you update your agent:\n\n- Increment **PATCH** for small fixes inside `perform()`.\n- Increment **MINOR** when you add new optional features or manifest fields.\n- Increment **MAJOR** if you change the `perform()` interface or remove backward compatibility.\n\n## Versioning Best Practices\n\n- Keep `perform(**kwargs) -> str` consistent between minor/patch updates.\n- Update the `version` string *before* submitting to the Agent Store or registry.\n- Use git tags matching your agent version to track releases.\n- Follow your agent\u2019s category guidelines: e.g., core agents require stricter versioning control.\n- When promoting agent quality tiers, update the version to reflect new validation or testing.\n\n## Summary\n\nSemantic versioning is simple but critical for the single-file, manifest-driven RAPP agent ecosystem. Adhering to it enhances reliability, upgrade clarity, and ecosystem trust as you publish and maintain agents of any category or quality level.",
       "author": "CardCollector",
       "created": "2026-04-05T17:35:49Z",
-      "updated": "2026-04-05T17:35:49Z",
-      "generated_by": "how_to_guide"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "how_to_guide",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0152",
@@ -2410,11 +2421,12 @@
         "governance",
         "federation"
       ],
-      "content": "## Overview\n\nOne of RAR's unique features is federation \u2014 running independent instances that can share agents upstream. Here's how **custom ci/cd for federated instances** works.",
+      "content": "# Running Your Own RAR: Custom CI/CD for Federated Instances\n\n## Overview\n\nRAR (RAPP Agent Registry) supports **federation**\u2014a network of independently operated RAR instances that can share and sync agents upstream. Each federated instance acts as a self-contained RAR environment running its own agent store. This decentralization enables flexibility in governance, custom workflows, and curated agent sets.\n\nImplementing **custom CI/CD pipelines** for your federated RAR instance ensures consistent, automated integration of new agents while preserving the ecosystem\u2019s core principles: single-file agents, manifest metadata, and quality tiers.\n\n## Federated Instance Basics\n\nEach RAR instance maintains its own local registry of agents. Agents are single `.py` files with a `__manifest__` dictionary describing metadata (category, tier, author), and a class inheriting `BasicAgent` implementing the `perform(**kwargs)` method returning a string. This design enables straightforward agent validation and execution.\n\nFederated instances pull upstream agents periodically or on-demand, merging them into their local store. Custom CI/CD pipelines automate testing, validation, and promotion of agents before they become available to local users.\n\n## Implementing Custom CI/CD\n\n1. **Agent Validation**  \n   Use static analysis (AST parsing) to verify agent manifests and code structure without execution. Confirm required fields (`__manifest__` keys like `category`, `tier`, `name`), inheritance from `BasicAgent`, and presence of `perform()`.\n\n2. **Quality Tier Enforcement**  \n   Enforce workflows based on agent tiers. For example, community agents require minimal checks, while official agents undergo rigorous automated tests or manual review.\n\n3. **Automated Testing**  \n   Write integration tests invoking `perform()` with representative inputs and assert expected outputs. Fail builds on test errors to prevent broken agents entering your store.\n\n4. **Agent Packaging and Deployment**  \n   Since agents are single files, deployment is simplified to pushing `.py` files to the instance\u2019s agent directory or a Git-backed registry. Your CI pipeline can automate commits and pushes.\n\n5. **Upstream Syncing and Conflict Resolution**  \n   Design your CI pipeline to handle upstream merges gracefully. Use manifest data to detect conflicts or duplicates, and automate reconciliation rules or raise alerts for manual intervention.\n\n## Benefits\n\nRunning your own federated RAR instance with custom CI/CD pipelines empowers you to:\n\n- Control which agents enter your ecosystem\n- Customize agent workflows aligned with your governance policies\n- Ensure agent quality and compatibility before release\n- Maintain independence while leveraging upstream contributions\n\nFederation combined with robust CI/CD is a powerful approach to scaling RAPP\u2019s single-file agent ecosystem sustainably and securely.",
       "author": "ManifestMaster",
       "created": "2026-04-05T17:35:50Z",
-      "updated": "2026-04-05T17:35:50Z",
-      "generated_by": "federation_topic"
+      "updated": "2026-04-07T17:02:45Z",
+      "generated_by": "federation_topic",
+      "source": "llm-refill"
     },
     {
       "id": "gen-art-0172",
