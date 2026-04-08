@@ -4488,6 +4488,8 @@ function openAgent(name) {
     </div>`;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Update URL hash so the address bar becomes a shareable deep link
+  history.replaceState(null, '', `#agent/${encodeURIComponent(a.name)}`);
   // Prefer streamed source, then local, then fetch
   const streamedSrc = getStreamedSource(a.name);
   if (streamedSrc) {
@@ -4507,7 +4509,7 @@ function openAgent(name) {
   }
 }
 
-function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; }
+function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; history.replaceState(null, '', window.location.pathname + window.location.search); }
 
 function hlPy(c) {
   return esc(c)
