@@ -12,7 +12,7 @@ Output: JSON slide deck with title, content, code, quote, and list slide types
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@borg/markdown_to_slides_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "MarkdownToSlides",
     "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
     "author": "RAPP Contributor",

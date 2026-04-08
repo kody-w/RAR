@@ -22,7 +22,7 @@ Operations:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/rappterpedia_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "RappterpediaAgent",
     "description": "Community wiki & forum content engine. Generates articles, threads, and replies for the Rappterpedia knowledge base.",
     "author": "Kody Wildfeuer",
