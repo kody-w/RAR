@@ -88,12 +88,23 @@ jobs:
           script: |
             const issueNumber = context.issue?.number || ${{ github.event.inputs.issue_number || 0 }};
             if (!issueNumber) return;
+            // Guard: don't mutate issues already in a terminal state
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+            });
+            const labels = issue.labels.map(l => l.name || l);
+            const terminal = ['approved', 'forged', 'processed'];
+            if (terminal.some(l => labels.includes(l))) {
+              console.log(`Issue #${issueNumber} already terminal (${labels.join(',')}) — skipping`);
+              return;
+            }
             const fs = require('fs');
             let result = '';
             try { result = fs.readFileSync('/tmp/result.txt', 'utf8'); } catch(e) {}
             const isSubmission = result.includes('pending_review');
             if (isSubmission) {
-              // Submission → label for review, do NOT close
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -107,7 +118,6 @@ jobs:
                 labels: ['pending-review', 'agent-submission']
               });
             } else {
-              // Vote/review → close as processed
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -130,6 +140,18 @@ jobs:
           script: |
             const issueNumber = context.issue?.number || ${{ github.event.inputs.issue_number || 0 }};
             if (issueNumber) {
+              // Guard: don't clobber labels if the issue was already approved/forged/processed
+              const { data: issue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+              });
+              const labels = issue.labels.map(l => l.name || l);
+              const protected_labels = ['approved', 'forged', 'processed'];
+              if (protected_labels.some(l => labels.includes(l))) {
+                console.log(`Issue #${issueNumber} already has ${labels.join(',')} — skipping failure labeling`);
+                return;
+              }
               const fs = require('fs');
               let detail = '';
               try { detail = fs.readFileSync('/tmp/result.txt', 'utf8'); } catch(e) {}

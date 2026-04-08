@@ -15,9 +15,10 @@ concurrency:
 jobs:
   approve:
     runs-on: ubuntu-latest
-    # Only fires when admin adds 'approved' label to a pending submission
+    # Only fires when admin adds 'approved' label to an open pending submission
     if: >
       github.event.label.name == 'approved' &&
+      github.event.issue.state == 'open' &&
       contains(github.event.issue.labels.*.name, 'agent-submission')
     steps:
       - uses: actions/checkout@v4
@@ -28,20 +29,40 @@ jobs:
 
       - name: Promote staging → agents
         id: promote
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           python -c "
-          import ast, json, shutil, sys, hashlib
+          import ast, json, re, shutil, sys, hashlib, os
           from pathlib import Path
 
           staging = Path('staging')
           agents = Path('agents')
+
+          # Extract agent name from issue title: [AGENT] @publisher/slug
+          title = os.environ.get('ISSUE_TITLE', '')
+          m = re.search(r'\[AGENT\]\s*(@[^/\s]+/[^\s]+)', title)
+          target_slug = None
+          if m:
+              raw = m.group(1)
+              parts = raw.split('/')
+              publisher = parts[0]
+              slug = parts[1]
+              if not slug.endswith('_agent'):
+                  slug += '_agent'
+              target_slug = f'{publisher}/{slug}.py'
+              print(f'Scoped promotion: only {target_slug}')
+
           promoted = []
 
           for py in staging.rglob('*.py'):
               if py.name == '.gitkeep':
                   continue
-              # Destination mirrors staging structure
               rel = py.relative_to(staging)
+              # Only promote the specific file tied to this issue
+              if target_slug and str(rel) != target_slug:
+                  print(f'Skipping {rel} (not target)')
+                  continue
               dest = agents / rel
               dest.parent.mkdir(parents=True, exist_ok=True)
               shutil.move(str(py), str(dest))

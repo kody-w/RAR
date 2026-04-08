@@ -200,6 +200,33 @@
     background: var(--surface); border-bottom: 1px solid var(--border);
     font-size: .85rem;
   }
+
+  /* Pipeline smoke test */
+  .smoke-test-section { margin-top: 32px; }
+  .smoke-test-section h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+  .smoke-log {
+    background: #0d1117; color: #c9d1d9; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px; font-family: monospace;
+    font-size: .8rem; max-height: 400px; overflow-y: auto; white-space: pre-wrap;
+  }
+  .smoke-log .pass { color: #3fb950; }
+  .smoke-log .fail { color: #f85149; }
+  .smoke-log .info { color: #58a6ff; }
+  .smoke-log .warn { color: #d29922; }
+  .smoke-progress {
+    display: flex; gap: 8px; align-items: center; margin-bottom: 12px;
+  }
+  .smoke-progress .step {
+    width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: .75rem; font-weight: 700; border: 2px solid var(--border);
+    color: var(--text-muted); background: var(--surface);
+  }
+  .smoke-progress .step.active { border-color: var(--accent); color: var(--accent); animation: pulse 1s infinite; }
+  .smoke-progress .step.done { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+  .smoke-progress .step.fail { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+  .smoke-progress .connector { flex: 1; height: 2px; background: var(--border); }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+
   .auth-bar .gh-login {
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--surface2); border: 1px solid var(--border); color: var(--text);
@@ -309,6 +336,22 @@
     <div id="dupes-list"></div>
   </div>
 
+  <div class="smoke-test-section" id="smoke-section" style="display:none">
+    <h3>🧪 Pipeline Smoke Test</h3>
+    <div class="smoke-progress" id="smoke-steps">
+      <div class="step" id="ss-1" title="Create test issue">1</div><div class="connector"></div>
+      <div class="step" id="ss-2" title="Wait for staging">2</div><div class="connector"></div>
+      <div class="step" id="ss-3" title="Approve">3</div><div class="connector"></div>
+      <div class="step" id="ss-4" title="Wait for forge">4</div><div class="connector"></div>
+      <div class="step" id="ss-5" title="Verify & cleanup">5</div>
+    </div>
+    <div class="smoke-log" id="smoke-log">Pipeline smoke test ready. Click "Run Smoke Test" to begin.\n</div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="action-btn btn-approve" id="smoke-run-btn" onclick="runSmokeTest()">▶ Run Smoke Test</button>
+      <button class="action-btn btn-view" onclick="document.getElementById('smoke-log').textContent=''">Clear Log</button>
+    </div>
+  </div>
+
   <div class="activity-section">
     <h3>📋 Recent Activity</h3>
     <div class="activity-log" id="activity-log"></div>
@@ -356,10 +399,11 @@ function extractAgentName(title) {
 
 function classifyIssue(issue) {
   const labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
+  if (labels.includes('smoke-test') && issue.state === 'closed') return 'closed';
   if (labels.includes('duplicate') || labels.includes('rejected')) return 'closed';
   if (labels.includes('failed')) return 'failed';
-  if (labels.includes('processed')) return 'merged';
-  if (labels.includes('approved') || labels.includes('forged')) return 'review';
+  if (labels.includes('processed') || labels.includes('forged')) return 'merged';
+  if (labels.includes('approved') && issue.state === 'open') return 'review';
   if (issue.state === 'closed') return 'closed';
   return 'pending';
 }
@@ -433,23 +477,19 @@ function authHeaders() {
 async function approveIssue(num) {
   if (!ghToken) return showToast('Sign in first', 'error');
   try {
-    // Add approved label
-    await fetch(`${API}/issues/${num}/labels`, {
+    // Add approved label — triggers approve-agent.yml automatically
+    const labelResp = await fetch(`${API}/issues/${num}/labels`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ labels: ['approved'] })
     });
-    // Comment
-    await fetch(`${API}/issues/${num}/comments`, {
+    if (!labelResp.ok) throw new Error(`Label failed: ${labelResp.status}`);
+    const commentResp = await fetch(`${API}/issues/${num}/comments`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ body: `✅ Approved by @${ghUser.login} via RAR Admin` })
     });
-    // Trigger processing workflow (single dispatch — CI handles the rest)
-    await fetch(`${API}/actions/workflows/process-issues.yml/dispatches`, {
-      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: 'main', inputs: { issue_number: String(num) } })
-    });
-    showToast(`#${num} approved & processing triggered`, 'success');
-    setTimeout(loadPipeline, 15000);
+    if (!commentResp.ok) throw new Error(`Comment failed: ${commentResp.status}`);
+    showToast(`#${num} approved — CI will promote & forge`, 'success');
+    setTimeout(loadPipeline, 30000);
   } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
 }
 
@@ -486,20 +526,26 @@ async function processIssue(num) {
 async function retryIssue(num) {
   if (!ghToken) return showToast('Sign in first', 'error');
   try {
+    // Fetch issue to check if it's an agent submission
+    const issueResp = await fetch(`${API}/issues/${num}`, { headers: authHeaders() });
+    const issue = issueResp.ok ? await issueResp.json() : {};
+    const isAgent = (issue.title || '').startsWith('[AGENT]');
     // Reopen the issue
     await fetch(`${API}/issues/${num}`, {
       method: 'PATCH', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ state: 'open' })
     });
-    // Remove failed label, add pending-review
+    // Remove failed label
     try {
       await fetch(`${API}/issues/${num}/labels/failed`, {
         method: 'DELETE', headers: authHeaders()
       });
     } catch {}
+    // Restore labels — include agent-submission if it's an [AGENT] issue
+    const restoreLabels = isAgent ? ['pending-review', 'agent-submission'] : ['pending-review'];
     await fetch(`${API}/issues/${num}/labels`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ labels: ['pending-review'] })
+      body: JSON.stringify({ labels: restoreLabels })
     });
     await fetch(`${API}/issues/${num}/comments`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
@@ -558,6 +604,7 @@ function logout() {
 
 function renderAuthBar() {
   const bar = document.getElementById('auth-bar');
+  const smokeSection = document.getElementById('smoke-section');
   if (ghUser) {
     bar.innerHTML = `
       <span style="color:var(--green)">● Signed in</span>
@@ -567,12 +614,14 @@ function renderAuthBar() {
         <span class="logout" onclick="logout()">sign out</span>
       </div>
       <span style="color:var(--text-muted);font-size:.78rem;margin-left:8px">You can approve, reject, process, and retry submissions</span>`;
+    if (smokeSection) smokeSection.style.display = 'block';
   } else {
     bar.innerHTML = `
       <span style="color:var(--text-muted)">Sign in to approve, reject, or retry submissions →</span>
       <button class="gh-login" onclick="loginWithGitHub()">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Sign in with GitHub</button>`;
+    if (smokeSection) smokeSection.style.display = 'none';
   }
 }
 
@@ -690,6 +739,302 @@ async function loadDuplicates() {
       </div>`).join('');
   } catch (e) {
     section.style.display = 'none';
+  }
+}
+
+// ─── Pipeline Smoke Test ────────────────────────────
+
+const SMOKE_AGENT_CODE = `"""
+Pipeline Smoke Test Agent — DO NOT USE. Created by automated testing.
+This agent is created and destroyed by the admin pipeline smoke test.
+"""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/_smoke_test_agent",
+    "version": "1.0.0",
+    "display_name": "SmokeTestAgent",
+    "description": "Automated pipeline smoke test — created and destroyed by CI testing.",
+    "author": "RAR Pipeline",
+    "tags": ["test", "smoke", "pipeline"],
+    "category": "devtools",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+try:
+    from agents.basic_agent import BasicAgent
+except ModuleNotFoundError:
+    class BasicAgent:
+        def __init__(self, name="", metadata=None): self.name = name; self.metadata = metadata or {}
+        def perform(self, **kw): return ""
+
+class SmokeTestAgent(BasicAgent):
+    def __init__(self):
+        self.name = "SmokeTestAgent"
+        self.metadata = {"description": __manifest__["description"], "parameters": {"type": "object", "properties": {"operation": {"type": "string", "enum": ["ping"]}}}}
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        return "pong — smoke test passed"
+
+if __name__ == "__main__":
+    agent = SmokeTestAgent()
+    print(agent.perform(operation="ping"))
+`;
+
+let smokeRunning = false;
+
+function slog(msg, cls = '') {
+  const el = document.getElementById('smoke-log');
+  const span = document.createElement('span');
+  if (cls) span.className = cls;
+  span.textContent = msg + '\n';
+  el.appendChild(span);
+  el.scrollTop = el.scrollHeight;
+}
+
+function setStep(n, state) {
+  const el = document.getElementById(`ss-${n}`);
+  if (el) { el.className = 'step ' + state; }
+}
+
+async function ghFetch(path, opts = {}) {
+  const resp = await fetch(`${API}${path}`, {
+    ...opts,
+    headers: { ...authHeaders(), 'Content-Type': 'application/json', ...(opts.headers || {}) },
+  });
+  return resp;
+}
+
+async function pollForLabel(issueNum, label, timeoutMs = 120000) {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    const resp = await ghFetch(`/issues/${issueNum}/labels`);
+    if (resp.ok) {
+      const labels = await resp.json();
+      if (labels.some(l => l.name === label)) return true;
+    }
+    await new Promise(r => setTimeout(r, 8000));
+    slog(`  ⏳ waiting for "${label}" label... (${Math.round((Date.now() - start) / 1000)}s)`);
+  }
+  return false;
+}
+
+async function pollForFile(filePath, timeoutMs = 120000) {
+  const start = Date.now();
+  const rawUrl = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${filePath}`;
+  while (Date.now() - start < timeoutMs) {
+    const resp = await fetch(rawUrl + '?t=' + Date.now());
+    if (resp.ok) return true;
+    await new Promise(r => setTimeout(r, 10000));
+    slog(`  ⏳ waiting for file on main... (${Math.round((Date.now() - start) / 1000)}s)`);
+  }
+  return false;
+}
+
+async function runSmokeTest() {
+  if (!ghToken || !ghUser) return showToast('Sign in first', 'error');
+  if (smokeRunning) return showToast('Test already running', 'error');
+
+  smokeRunning = true;
+  const btn = document.getElementById('smoke-run-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Running…';
+  document.getElementById('smoke-log').textContent = '';
+  for (let i = 1; i <= 5; i++) setStep(i, '');
+
+  const startTime = Date.now();
+  let issueNum = null;
+
+  try {
+    // ── Pre-flight: ensure staging is empty ──
+    slog('Pre-flight: checking staging directory…', 'info');
+    const stagingCheck = await ghFetch('/contents/staging');
+    if (stagingCheck.ok) {
+      const stagingFiles = await stagingCheck.json();
+      const pyFiles = stagingFiles.filter(f => f.name.endsWith('.py'));
+      if (pyFiles.length > 0) {
+        slog(`  ✗ Staging has ${pyFiles.length} pending file(s) — aborting to avoid accidental promotion`, 'fail');
+        slog('  Clear staging or approve pending submissions first.', 'warn');
+        throw new Error('Staging not empty');
+      }
+    }
+    slog('  ✓ Staging is clean', 'pass');
+
+    // ── Step 1: Create test issue ──
+    setStep(1, 'active');
+    slog('Step 1: Creating test submission issue…', 'info');
+    const issueBody = '```json\n' + JSON.stringify({
+      action: 'submit_agent',
+      payload: { code: SMOKE_AGENT_CODE }
+    }, null, 2) + '\n```';
+
+    const createResp = await ghFetch('/issues', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: '[AGENT] @rapp/_smoke_test_agent',
+        body: issueBody,
+        labels: ['smoke-test'],
+      }),
+    });
+    if (!createResp.ok) throw new Error(`Failed to create issue: ${createResp.status}`);
+    const issue = await createResp.json();
+    issueNum = issue.number;
+    slog(`  ✓ Created issue #${issueNum}`, 'pass');
+    setStep(1, 'done');
+
+    // ── Step 2: Wait for process-issues.yml to stage it ──
+    setStep(2, 'active');
+    slog('Step 2: Waiting for CI to stage (pending-review label)…', 'info');
+    const staged = await pollForLabel(issueNum, 'pending-review', 180000);
+    if (!staged) {
+      // Check if it went straight to failed
+      const resp = await ghFetch(`/issues/${issueNum}/labels`);
+      const labels = resp.ok ? (await resp.json()).map(l => l.name) : [];
+      if (labels.includes('failed')) {
+        slog('  ✗ CI marked as failed — check workflow logs', 'fail');
+        throw new Error('Staging failed');
+      }
+      slog('  ✗ Timed out waiting for staging (3 min)', 'fail');
+      throw new Error('Staging timeout');
+    }
+    slog('  ✓ Agent staged for review', 'pass');
+    setStep(2, 'done');
+
+    // ── Step 3: Approve (add label to trigger approve-agent.yml) ──
+    setStep(3, 'active');
+    slog('Step 3: Approving — adding "approved" label…', 'info');
+    await ghFetch(`/issues/${issueNum}/labels`, {
+      method: 'POST',
+      body: JSON.stringify({ labels: ['approved'] }),
+    });
+    slog('  ✓ Approved label added — approve-agent.yml should trigger', 'pass');
+    setStep(3, 'done');
+
+    // ── Step 4: Wait for forge (approved + forged labels, issue closed) ──
+    setStep(4, 'active');
+    slog('Step 4: Waiting for approve-agent.yml to forge…', 'info');
+    const forged = await pollForLabel(issueNum, 'forged', 180000);
+    if (!forged) {
+      slog('  ✗ Timed out waiting for forge (3 min)', 'fail');
+      throw new Error('Forge timeout');
+    }
+    slog('  ✓ Agent forged by CI', 'pass');
+
+    // Verify file exists on main
+    slog('  Verifying agent file on main branch…', 'info');
+    const fileExists = await pollForFile('agents/@rapp/_smoke_test_agent.py', 60000);
+    if (!fileExists) {
+      slog('  ✗ Agent file not found on main after forge', 'fail');
+      throw new Error('File not committed');
+    }
+    slog('  ✓ Agent file verified on main', 'pass');
+    setStep(4, 'done');
+
+    // ── Step 5: Cleanup ──
+    setStep(5, 'active');
+    slog('Step 5: Cleaning up test artifacts…', 'info');
+
+    // Delete agent file via Contents API (no [skip ci] so build-registry runs)
+    const fileResp = await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py');
+    if (fileResp.ok) {
+      const fileData = await fileResp.json();
+      await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          message: 'Smoke test cleanup: remove _smoke_test_agent',
+          sha: fileData.sha,
+        }),
+      });
+      slog('  ✓ Deleted agent file (registry rebuild will trigger)', 'pass');
+    }
+
+    // Clean staging if it exists
+    const stagingResp = await ghFetch('/contents/staging/@rapp/_smoke_test_agent.py');
+    if (stagingResp.ok) {
+      const stagingData = await stagingResp.json();
+      await ghFetch('/contents/staging/@rapp/_smoke_test_agent.py', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          message: 'Smoke test cleanup: remove staging [skip ci]',
+          sha: stagingData.sha,
+        }),
+      });
+      slog('  ✓ Deleted staging file', 'pass');
+    }
+
+    // Clean up any .card file
+    const cardResp = await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py.card');
+    if (cardResp.ok) {
+      const cardData = await cardResp.json();
+      await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py.card', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          message: 'Smoke test cleanup: remove card [skip ci]',
+          sha: cardData.sha,
+        }),
+      });
+      slog('  ✓ Deleted card file', 'pass');
+    }
+
+    // Close the test issue
+    await ghFetch(`/issues/${issueNum}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ state: 'closed', labels: ['smoke-test', 'processed'] }),
+    });
+    await ghFetch(`/issues/${issueNum}/comments`, {
+      method: 'POST',
+      body: JSON.stringify({ body: '🧪 Smoke test completed successfully. All artifacts cleaned up.' }),
+    });
+    slog('  ✓ Test issue closed', 'pass');
+    setStep(5, 'done');
+
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    slog(`\n━━━ PIPELINE SMOKE TEST PASSED ━━━  (${elapsed}s)`, 'pass');
+    showToast('Smoke test passed! ✓', 'success');
+
+  } catch (err) {
+    const failStep = [1,2,3,4,5].find(i => document.getElementById(`ss-${i}`)?.classList.contains('active'));
+    if (failStep) setStep(failStep, 'fail');
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    slog(`\n━━━ PIPELINE SMOKE TEST FAILED ━━━  (${elapsed}s)`, 'fail');
+    slog(`Error: ${err.message}`, 'fail');
+    showToast(`Smoke test failed: ${err.message}`, 'error');
+
+    // Best-effort cleanup
+    if (issueNum) {
+      try {
+        await ghFetch(`/issues/${issueNum}`, {
+          method: 'PATCH',
+          body: JSON.stringify({ state: 'closed', labels: ['smoke-test', 'failed'] }),
+        });
+        await ghFetch(`/issues/${issueNum}/comments`, {
+          method: 'POST',
+          body: JSON.stringify({ body: `🧪 Smoke test failed at step ${failStep || '?'}: ${err.message}` }),
+        });
+        slog('  (test issue closed with failure note)', 'warn');
+      } catch {}
+      // Try to clean up files
+      for (const path of ['agents/@rapp/_smoke_test_agent.py', 'staging/@rapp/_smoke_test_agent.py', 'agents/@rapp/_smoke_test_agent.py.card']) {
+        try {
+          const r = await ghFetch(`/contents/${path}`);
+          if (r.ok) {
+            const d = await r.json();
+            await ghFetch(`/contents/${path}`, {
+              method: 'DELETE',
+              body: JSON.stringify({ message: 'Smoke test cleanup (failed) [skip ci]', sha: d.sha }),
+            });
+          }
+        } catch {}
+      }
+    }
+  } finally {
+    smokeRunning = false;
+    btn.disabled = false;
+    btn.textContent = '▶ Run Smoke Test';
+    loadPipeline();
   }
 }
 
