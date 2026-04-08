@@ -16,7 +16,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
   --bg:#0a0a1a;--panel:#111118;--border:#222;
 }
 
-/* ═══ Screens ═══ */
 .screen{display:none;height:100vh;flex-direction:column;align-items:center;justify-content:center}
 .screen.active{display:flex}
 
@@ -27,142 +26,133 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
   background:linear-gradient(135deg,var(--wealth),var(--logic),var(--heal));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-#title .subtitle{color:#888;max-width:520px;text-align:center;line-height:1.6;font-size:.95rem}
-.controls-preview{
-  display:flex;gap:6px;align-items:center;margin:8px 0;
+.subtitle{color:#888;max-width:540px;text-align:center;line-height:1.7;font-size:.95rem}
+.example-inc{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:4px 0;
 }
-.controls-preview .key{
-  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-  border:2px solid #444;border-radius:8px;font-size:1.4rem;background:#181828;
-  color:#aaa;
+.example-inc .word{
+  padding:4px 10px;border-radius:5px;font-size:.85rem;font-weight:700;
+  background:#181828;border:1px solid #333;color:var(--logic);letter-spacing:1px;
 }
-.controls-preview .key.wasd{font-size:1rem;font-weight:700}
 .btn{
   padding:12px 32px;border:2px solid var(--logic);background:transparent;
   color:var(--logic);font-size:1rem;border-radius:8px;cursor:pointer;
-  transition:all .2s;min-width:240px;font-family:inherit;
+  transition:all .2s;min-width:260px;font-family:inherit;
 }
 .btn:hover{background:var(--logic);color:var(--bg);transform:scale(1.04)}
 .btn.mythic{border-color:var(--mythic);color:var(--mythic)}
 .btn.mythic:hover{background:var(--mythic);color:var(--bg)}
 .btn.gold{border-color:var(--gold);color:var(--gold)}
 .btn.gold:hover{background:var(--gold);color:var(--bg)}
+.btn.sm{min-width:auto;padding:8px 16px;font-size:.85rem}
 
 /* ═══ Game ═══ */
-#game{background:var(--bg);gap:0;justify-content:stretch}
-
-/* HUD */
+#game{gap:0;justify-content:stretch}
 #hud{
   width:100%;display:flex;justify-content:space-between;align-items:center;
-  padding:10px 24px;background:var(--panel);border-bottom:1px solid var(--border);
-  flex-shrink:0;
+  padding:10px 24px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0;
 }
 .hud-stat{display:flex;flex-direction:column;align-items:center}
 .hud-label{font-size:.65rem;text-transform:uppercase;color:#555;letter-spacing:1px}
 .hud-val{font-size:1.3rem;font-weight:700}
-
-/* Timer bar */
 #timer-bar{width:100%;height:5px;background:#111;flex-shrink:0}
-#timer-fill{height:100%;width:100%;transition:width .15s linear;background:linear-gradient(90deg,var(--craft),var(--gold),var(--data))}
+#timer-fill{height:100%;width:100%;transition:width .1s linear;background:linear-gradient(90deg,var(--data),var(--logic))}
 
-/* ═══ Arena ═══ */
+/* Arena */
 #arena{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;padding:20px;
+  gap:16px;padding:20px;position:relative;overflow:hidden;
   background:radial-gradient(ellipse at 50% 60%,#12122a,var(--bg) 70%);
-  position:relative;overflow:hidden;
 }
-
-/* Summoning circle background decoration */
 #arena::before{
-  content:'';position:absolute;width:500px;height:500px;
+  content:'';position:absolute;width:440px;height:440px;
   border:1px solid #ffffff08;border-radius:50%;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-#arena::after{
-  content:'';position:absolute;width:340px;height:340px;
-  border:1px solid #ffffff06;border-radius:50%;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
 }
 
-/* Card being summoned */
-#current-card{
-  text-align:center;position:relative;z-index:2;
-  transition:opacity .3s;
-}
+/* Card display */
+#card-display{text-align:center;z-index:2}
 #card-art-frame{
-  width:180px;height:180px;margin:0 auto 10px;border-radius:12px;
+  width:160px;height:160px;margin:0 auto 8px;border-radius:12px;
   overflow:hidden;display:flex;align-items:center;justify-content:center;
-  background:#0a0a14;border:2px solid #333;
-  transition:border-color .3s, box-shadow .3s;
+  background:#0a0a14;border:2px solid #333;transition:border-color .3s,box-shadow .3s;
 }
 #card-art-frame svg{width:100%;height:100%}
-#card-name{font-size:1.6rem;font-weight:800;margin-bottom:2px}
-#card-title{font-size:.85rem;color:#777;font-style:italic;margin-bottom:4px}
-#card-type-line{font-size:.75rem;color:#555;margin-bottom:2px}
-#card-mana{font-size:.8rem;color:var(--wealth);letter-spacing:1px;margin-bottom:12px}
+#card-name{font-size:1.5rem;font-weight:800;margin-bottom:2px}
+#card-title{font-size:.8rem;color:#777;font-style:italic;margin-bottom:2px}
+#card-type-line{font-size:.7rem;color:#555}
 
-/* ═══ Encantation sequence display ═══ */
-#encantation{
-  display:flex;gap:8px;align-items:center;justify-content:center;
-  flex-wrap:wrap;position:relative;z-index:2;
-  min-height:60px;
+/* Incantation word slots */
+#incantation-slots{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:2;
+  min-height:50px;margin:8px 0;
 }
-.arrow-key{
-  width:52px;height:52px;display:flex;align-items:center;justify-content:center;
-  border:2px solid #444;border-radius:10px;font-size:1.6rem;
-  background:#181828;color:#666;
-  transition:all .15s;position:relative;
+.word-slot{
+  padding:8px 14px;border-radius:6px;font-size:1rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  border:2px solid #333;background:#111;color:#555;
+  transition:all .2s;min-width:50px;text-align:center;
 }
-.arrow-key.pending{border-color:#555;color:#888}
-.arrow-key.active{
-  border-color:var(--logic);color:var(--logic);
-  box-shadow:0 0 20px rgba(88,166,255,0.3);
-  transform:scale(1.15);
-}
-.arrow-key.correct{
-  border-color:var(--data);color:var(--data);background:#0a1a0a;
-  box-shadow:0 0 15px rgba(63,185,80,0.3);
-}
-.arrow-key.wrong{
-  border-color:var(--craft);color:var(--craft);background:#1a0a0a;
-  box-shadow:0 0 15px rgba(248,81,73,0.3);
-  animation:shake .3s;
-}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.word-slot.revealed{color:var(--logic);border-color:var(--logic);background:#0a1020}
+.word-slot.correct{color:var(--data);border-color:var(--data);background:#0a1a0a;box-shadow:0 0 10px rgba(63,185,80,0.2)}
+.word-slot.current{border-color:var(--gold);box-shadow:0 0 12px rgba(255,215,0,0.25)}
+.word-slot.wrong{border-color:var(--craft);color:var(--craft);background:#1a0a0a;animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 
-/* Round indicator */
-#round-info{
-  position:absolute;top:16px;left:50%;transform:translateX(-50%);
-  font-size:.8rem;color:#555;letter-spacing:2px;text-transform:uppercase;z-index:2;
-}
+/* Hint area */
+#hint-area{font-size:.75rem;color:#555;z-index:2;min-height:20px;text-align:center}
 
-/* Queue — upcoming cards */
-#queue{
-  position:absolute;right:20px;top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:8px;z-index:2;
+/* Input */
+#input-area{
+  padding:12px 24px;background:#0d0d1f;border-top:1px solid var(--border);
+  display:flex;gap:12px;align-items:center;flex-shrink:0;
 }
-.queue-card{
-  padding:6px 12px;border-radius:6px;font-size:.75rem;
-  background:#111;border:1px solid #222;color:#666;
-  max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+#word-input{
+  flex:1;padding:12px 18px;font-size:1.2rem;font-weight:600;
+  background:#111;border:2px solid #333;border-radius:8px;
+  color:#fff;outline:none;font-family:inherit;
+  text-transform:uppercase;letter-spacing:2px;
+  transition:border-color .2s;
+}
+#word-input:focus{border-color:var(--logic)}
+#word-input.correct{border-color:var(--data);box-shadow:0 0 12px rgba(63,185,80,0.2)}
+#word-input.wrong{border-color:var(--craft);box-shadow:0 0 12px rgba(248,81,73,0.2)}
+#word-counter{font-size:.8rem;color:#555;white-space:nowrap}
+
+/* Progress (cards in round) */
+#round-progress{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:2;
+}
+.progress-pip{
+  width:10px;height:10px;border-radius:50%;border:1px solid #333;background:#111;
   transition:all .3s;
 }
-.queue-card:first-child{border-color:#444;color:#999}
+.progress-pip.done{background:var(--data);border-color:var(--data)}
+.progress-pip.active{border-color:var(--gold);box-shadow:0 0 8px rgba(255,215,0,0.3)}
+.progress-pip.missed{background:var(--craft);border-color:var(--craft)}
 
-/* ═══ Summon flash ═══ */
+/* Queue */
+#queue{
+  position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:6px;z-index:2;
+}
+.queue-card{
+  padding:4px 10px;border-radius:5px;font-size:.7rem;
+  background:#111;border:1px solid #222;color:#555;
+  max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* ═══ Summon effects ═══ */
 #summon-flash{
   position:fixed;inset:0;pointer-events:none;z-index:50;
   opacity:0;transition:opacity .1s;
 }
 #summon-flash.flash{opacity:1;animation:flash-fade .6s ease-out forwards}
-@keyframes flash-fade{0%{opacity:.7}100%{opacity:0}}
+@keyframes flash-fade{0%{opacity:.6}100%{opacity:0}}
 
-/* Summoned card reveal */
 #summon-reveal{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0) rotate(-10deg);
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0) rotate(-8deg);
   z-index:60;pointer-events:none;opacity:0;
   transition:all .5s cubic-bezier(0.34,1.56,0.64,1);
 }
@@ -174,68 +164,72 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
   box-shadow:0 0 60px rgba(88,166,255,0.4),0 20px 60px rgba(0,0,0,0.6);
 }
 .reveal-card .rc-rarity{font-size:.65rem;text-transform:uppercase;letter-spacing:2px}
-.reveal-card .rc-name{font-size:1.5rem;font-weight:900;margin:4px 0}
-.reveal-card .rc-title{font-size:.8rem;color:#888;font-style:italic;margin-bottom:8px}
-.reveal-card .rc-art{width:100%;height:130px;border-radius:8px;overflow:hidden;background:#0a0a14;margin-bottom:8px;display:flex;align-items:center;justify-content:center}
+.reveal-card .rc-name{font-size:1.4rem;font-weight:900;margin:4px 0}
+.reveal-card .rc-title{font-size:.8rem;color:#888;font-style:italic;margin-bottom:6px}
+.reveal-card .rc-art{width:100%;height:120px;border-radius:8px;overflow:hidden;background:#0a0a14;margin-bottom:6px;display:flex;align-items:center;justify-content:center}
 .reveal-card .rc-art svg{width:100%;height:100%}
-.reveal-card .rc-stats{display:flex;justify-content:space-around;font-size:.7rem;color:#888;margin:8px 0}
-.reveal-card .rc-stats span{font-size:1rem;font-weight:700;color:#fff;display:block}
-.reveal-card .rc-flavor{font-size:.7rem;color:#555;font-style:italic;border-top:1px solid #222;padding-top:8px;margin-top:4px;line-height:1.3}
-.reveal-card .rc-points{font-size:1.3rem;font-weight:800;color:var(--gold);margin-top:8px}
+.reveal-card .rc-incantation{
+  display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:8px 0;
+}
+.reveal-card .rc-incantation .rc-word{
+  padding:2px 6px;border-radius:3px;font-size:.65rem;font-weight:700;
+  background:#0a0a1a;border:1px solid var(--logic);color:var(--logic);letter-spacing:1px;
+}
+.reveal-card .rc-stats{display:flex;justify-content:space-around;font-size:.65rem;color:#888;margin:6px 0}
+.reveal-card .rc-stats span{font-size:.9rem;font-weight:700;color:#fff;display:block}
+.reveal-card .rc-points{font-size:1.2rem;font-weight:800;color:var(--gold);margin-top:6px}
 
-/* Particles */
 .particle{position:fixed;pointer-events:none;border-radius:50%;z-index:55;animation:pfly .7s ease-out forwards}
 @keyframes pfly{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
 
 /* ═══ Results ═══ */
-#results{background:radial-gradient(ellipse at 50% 30%,#1a1040,var(--bg) 70%);gap:16px}
+#results{background:radial-gradient(ellipse at 50% 30%,#1a1040,var(--bg) 70%);gap:14px}
 #results h2{
   font-size:2.2rem;font-weight:900;
   background:linear-gradient(135deg,var(--gold),var(--mythic));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 .rank{font-size:1rem;padding:8px 24px;border-radius:20px;font-weight:700;border:2px solid}
-.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:460px;width:100%}
-.rgrid .rs{background:var(--panel);border-radius:8px;padding:14px;text-align:center;border:1px solid var(--border)}
-.rgrid .rs .rl{font-size:.65rem;text-transform:uppercase;color:#555;letter-spacing:1px}
-.rgrid .rs .rv{font-size:1.6rem;font-weight:800;margin-top:4px}
-#gallery{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:560px}
-#gallery .gc{padding:3px 8px;border-radius:4px;font-size:.7rem;font-weight:600;border:1px solid #333;background:#111}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;width:100%}
+.rgrid .rs{background:var(--panel);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--border)}
+.rgrid .rs .rl{font-size:.6rem;text-transform:uppercase;color:#555;letter-spacing:1px}
+.rgrid .rs .rv{font-size:1.5rem;font-weight:800;margin-top:2px}
+#gallery{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:500px}
+#gallery .gc{padding:2px 7px;border-radius:3px;font-size:.65rem;font-weight:600;border:1px solid #333;background:#111}
 
 /* ═══ Codex ═══ */
-#codex{background:var(--bg);gap:0;justify-content:flex-start;overflow-y:auto}
+#codex{gap:0;justify-content:flex-start;overflow-y:auto}
 #codex-header{
-  width:100%;padding:16px 24px;background:var(--panel);border-bottom:1px solid var(--border);
+  width:100%;padding:14px 24px;background:var(--panel);border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:16px;flex-shrink:0;
 }
-#codex-header h2{font-size:1.3rem;font-weight:800}
+#codex-header h2{font-size:1.2rem;font-weight:800}
 #codex-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:12px;padding:20px;width:100%;max-width:1000px;align-self:center;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:10px;padding:16px;width:100%;max-width:1100px;align-self:center;
 }
 .codex-entry{
   background:var(--panel);border:1px solid var(--border);border-radius:10px;
-  padding:14px;display:flex;gap:12px;align-items:center;cursor:default;
-  transition:border-color .2s;
+  padding:12px;display:flex;gap:10px;align-items:center;cursor:default;transition:border-color .2s;
 }
 .codex-entry:hover{border-color:#444}
-.codex-entry .ce-art{width:60px;height:60px;border-radius:8px;overflow:hidden;background:#0a0a14;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.codex-entry .ce-art{width:50px;height:50px;border-radius:8px;overflow:hidden;background:#0a0a14;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .codex-entry .ce-art svg{width:100%;height:100%}
 .codex-entry .ce-info{flex:1;min-width:0}
-.codex-entry .ce-name{font-weight:700;font-size:.9rem;margin-bottom:2px}
-.codex-entry .ce-enc{display:flex;gap:3px;margin-top:4px}
-.codex-entry .ce-enc .mini-arrow{
-  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
-  border:1px solid #333;border-radius:4px;font-size:.8rem;color:#888;background:#0a0a14;
+.codex-entry .ce-name{font-weight:700;font-size:.85rem}
+.codex-entry .ce-words{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.codex-entry .ce-words .cw{
+  padding:1px 5px;border-radius:3px;font-size:.6rem;font-weight:600;
+  background:#0a0a14;border:1px solid #333;color:var(--logic);letter-spacing:.5px;
 }
 
-/* Mobile */
 @media(max-width:600px){
   #title h1{font-size:2rem}
-  .arrow-key{width:40px;height:40px;font-size:1.2rem}
+  .word-slot{padding:6px 8px;font-size:.8rem;min-width:40px}
   #card-art-frame{width:120px;height:120px}
-  #card-name{font-size:1.2rem}
-  .reveal-card{width:200px}
+  #card-name{font-size:1.1rem}
+  .reveal-card{width:220px}
+  #word-input{font-size:1rem}
   #queue{display:none}
 }
 </style>
@@ -246,18 +240,18 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
 <div class="screen active" id="title">
   <h1>⚡ Encantation Hero</h1>
   <p class="subtitle">
-    Each RAPP agent card has a unique encantation — a directional arrow sequence.<br>
-    Input the correct sequence to summon the card. Rounds escalate. Learn the codes!
+    Every RAPP agent card has a unique <strong>7-word incantation</strong> — speak the words and the card appears.<br>
+    Practice memorizing incantations to summon cards on demand.
   </p>
-  <div class="controls-preview">
-    <div class="key">↑</div><div class="key">↓</div><div class="key">←</div><div class="key">→</div>
-    <span style="color:#555;margin:0 8px">or</span>
-    <div class="key wasd">W</div><div class="key wasd">A</div><div class="key wasd">S</div><div class="key wasd">D</div>
+  <div class="example-inc">
+    <span class="word">SABRE</span><span class="word">MUSK</span><span class="word">NICKEL</span>
+    <span class="word">CREEK</span><span class="word">GUARD</span><span class="word">GLAIVE</span><span class="word">SMELT</span>
   </div>
-  <button class="btn" onclick="startGame('normal')">🎮 Normal — Learn the Codes</button>
-  <button class="btn" onclick="startGame('endless')">⚡ Endless — How Far Can You Go?</button>
+  <p style="color:#666;font-size:.8rem;margin-top:-4px">↑ This summons <strong style="color:var(--logic)">Borg</strong></p>
+  <button class="btn" onclick="startGame('practice')">📖 Practice — Hints Shown</button>
+  <button class="btn" onclick="startGame('normal')">🎮 Normal — Recall From Memory</button>
   <button class="btn mythic" onclick="startGame('mythic')">🔮 Mythic Trial — Legends Only</button>
-  <button class="btn gold" onclick="showCodex()">📖 Codex — Study All Encantations</button>
+  <button class="btn gold" onclick="showCodex()">📜 Codex — Study All Incantations</button>
 </div>
 
 <!-- ═══ GAME ═══ -->
@@ -271,16 +265,20 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
   </div>
   <div id="timer-bar"><div id="timer-fill"></div></div>
   <div id="arena">
-    <div id="round-info"></div>
-    <div id="current-card">
+    <div id="round-progress"></div>
+    <div id="card-display">
       <div id="card-art-frame"></div>
       <div id="card-name"></div>
       <div id="card-title"></div>
       <div id="card-type-line"></div>
-      <div id="card-mana"></div>
     </div>
-    <div id="encantation"></div>
+    <div id="incantation-slots"></div>
+    <div id="hint-area"></div>
     <div id="queue"></div>
+  </div>
+  <div id="input-area">
+    <input type="text" id="word-input" placeholder="TYPE EACH WORD..." autocomplete="off" spellcheck="false">
+    <span id="word-counter">0 / 7</span>
   </div>
 </div>
 
@@ -301,63 +299,49 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#e0e0e
     <div class="rs"><span class="rl">Best Round</span><div class="rv" id="res-round">1</div></div>
   </div>
   <div id="gallery"></div>
-  <button class="btn" onclick="switchScreen('title')" style="margin-top:12px">🏠 Back to Menu</button>
+  <button class="btn" onclick="switchScreen('title')" style="margin-top:10px">🏠 Back to Menu</button>
 </div>
 
 <!-- ═══ CODEX ═══ -->
 <div class="screen" id="codex">
   <div id="codex-header">
-    <button class="btn" onclick="switchScreen('title')" style="min-width:auto;padding:8px 16px">← Back</button>
-    <h2>📖 Encantation Codex</h2>
-    <span id="codex-count" style="color:#555;font-size:.85rem"></span>
+    <button class="btn sm" onclick="switchScreen('title')">← Back</button>
+    <h2>📜 Incantation Codex</h2>
+    <span id="codex-count" style="color:#555;font-size:.8rem"></span>
   </div>
   <div id="codex-grid"></div>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   ENCANTATION HERO — Stratagem-Hero-style summoner
-   Arrow key / WASD sequences to summon RAPP agent cards.
-   Loads real card data from cards/holo_cards.json.
+   ENCANTATION HERO — 7-word incantation practice game
+   Every RAPP card has a seed → 7-word mnemonic.
+   Memorize the words. Speak the incantation. Summon the card.
    ═══════════════════════════════════════════════════════ */
 
-const ARROWS = ['↑','↓','←','→'];
-const ARROW_NAMES = {ArrowUp:'↑',ArrowDown:'↓',ArrowLeft:'←',ArrowRight:'→',
-                     w:'↑',W:'↑',a:'←',A:'←',s:'↓',S:'↓',d:'→',D:'→'};
+// ── Mnemonic word list (same as rapp_sdk.py — the protocol) ──
+const MNEM_WORDS="FORGE ANVIL BLADE RUNE SHARD SMELT TEMPER WELD CHISEL BRAND MOLD CAST STAMP ETCH CARVE BIND FUSE ALLOY INGOT RIVET CLASP THORN BARB SPIKE PRONG EDGE HONE GRIND QUENCH SEAR HAMMER STOKE FIRE FROST STORM TIDE QUAKE GUST BOLT SURGE BLAZE EMBER PYRE ASH SMOKE SPARK FLARE FLASH FLOOD GALE DRIFT MIST HAZE VOID FLUX PULSE WAVE SHOCK BURST CRACK ROAR HOWL ECHO BOOM THUNDER VENOM BLIGHT SCORCH SINGE CHAR WITHER ERODE CORRODE DISSOLVE OAK PINE MOSS FERN ROOT VINE BLOOM SEED GROVE GLEN VALE CRAG PEAK RIDGE GORGE CLIFF SHORE REEF DUNE MARSH CAVE LAIR DEN NEST HIVE BURROW STONE IRON STEEL GOLD JADE ONYX RUBY OPAL AMBER PEARL CORAL QUARTZ OBSIDIAN FLINT GRANITE BASALT COBALT CHROME BRONZE COPPER NICKEL RELIC TOTEM SIGIL GLYPH WARD CHARM BANE DOOM FATE OMEN ORACLE SAGE SEER MAGE DRUID SHAMAN WRAITH SHADE PHANTOM SPECTER GOLEM TITAN DRAKE WYRM GRYPHON SPHINX HYDRA CHIMERA SCROLL TOME CODEX LORE MYTH FABLE SAGA EPIC VERSE CHANT HYMN DIRGE OATH CREED VOW AURA MANA ETHER PRISM NEXUS VORTEX RIFT WARP BREACH PORTAL GATE VAULT SHRINE ALTAR CRYPT SPIRE STRIKE SLASH THRUST PARRY GUARD SHIELD HELM LANCE MACE PIKE STAFF WAND DAGGER BOW ARROW QUIVER ARMOR PLATE GAUNTLET VISOR CLOAK CAPE MANTLE AEGIS BULWARK RAMPART BASTION CITADEL KEEP TOWER FORT RALLY CHARGE SIEGE FLANK AMBUSH ROUT VALOR MIGHT FURY WRATH RAGE SPITE MALICE GRUDGE HAVOC CHAOS DASH LEAP SPRINT LUNGE DIVE SOAR GLIDE PROWL STALK CREEP SWIFT FLEET BRISK RAPID SPIN WHIRL TWIST COIL SPIRAL ORBIT ARC CURVE BEND LOOP DAWN DUSK NOON NIGHT SHADOW GLEAM GLOW SHINE BEAM RAY HALO LUSTER MURK GLOOM DREAD FELL GRIM STARK BLEAK PALE ASHEN DIRE GRAVE SOMBER EBON ABYSS SHRIEK WAIL RUMBLE HISS GROWL SNARL BARK BELLOW DRONE CHIME TOLL KNELL CLANG CLASH SNAP THUD RING PEAL GONG HORN DRUM FLUTE LYRE PIPE BOLD KEEN FIERCE STERN VAST DEEP GRAND PRIME NOBLE ROYAL SACRED ANCIENT PRIMAL ELDER PURE VIVID SHARP BRIGHT DARK WILD CALM STILL SILENT STRONG PROUD BRAVE WISE JUST RAW DENSE SOLID WHOLE CORE APEX ZENITH NADIR CUSP BRINK VERGE CREST STAR MOON SUN COMET NOVA SOLAR LUNAR ASTRAL COSMIC NEBULA QUASAR PULSAR ECLIPSE AURORA CORONA PHASE WANE WAX WOLF HAWK EAGLE RAVEN SERPENT VIPER COBRA FALCON STAG BEAR LION TIGER LYNX PANTHER CONDOR OSPREY CRANE HERON OWL CROW BULL BOAR RAM HORSE MARE STALLION AX ORB AWE OAT EEL URN ELK ELM ION IRE ORE AIM ZAP JAB JAW JET JOT JAG HEX HEW HUE HUM DIN DUB DYE FIN FIG FOG FUR GAP GEM GNU SOUL MIND WILL FORCE POWER CRAFT SKILL GRACE POISE NERVE GRIT METTLE VIGOR ZEAL VERVE PLUCK GUILE CUNNING WILE LURE TRAP SNARE BAIT DECOY RUSE FEINT GAMBIT PLOY MESA TARN FORD PASS BLUFF KNOLL MOOR HEATH STEPPE TUNDRA DELTA BASIN PLATEAU FJORD ISLE ATOLL STRAIT CHANNEL HARBOR COVE BAY GULF SOUND CREEK BROOK RAPIDS FALLS CASCADE ARCH DOME PILLAR COLUMN BRIDGE WALL MOAT RAMP LEDGE STEP STAIR HALL NAVE ALCOVE NICHE SILL TRUSS BRACE STRUT JOIST FRAME PLINTH DAIS THRONE QUEST HUNT TRIAL ORDEAL RITE RITUAL PACT BOND PLEDGE DECREE EDICT MANDATE LAW RULE REIGN CROWN SCEPTER BANNER EMBLEM BADGE MARK SEAL TOKEN GUILD CLAN TRIBE ORDER SECT COVEN LEGION HORDE SWARM PACK FLOCK BROOD CLUTCH CRUX JINX GLINT DINT STINT KNIT SLIT SPLIT WHIT CLEFT DEFT HEFT LEFT THEFT WEFT BEREFT SHAFT GRAFT RAFT DRAFT TUFT LOFT CROFT DROIT BRUNT BLUNT STUNT RUNT GRUNT FRONT FONT HAUNT GAUNT FLAUNT JAUNT TAUNT SALT MALT HALT JOLT COLT MOLT SMOLT QUALM BALM PSALM FARM HARM ALARM DISARM FOREARM PLUME FUME LOOM ZOOM GROOM BROOM VROOM SCARCE TERSE MORSE COURSE SOURCE NORSE REMORSE WRENCH CLENCH STENCH TRENCH DRENCH FRENCH BENCH TORCH PORCH MARCH LARCH STARCH SEARCH PERCH BIRCH CHURCH THATCH CATCH MATCH BATCH HATCH LATCH PATCH WATCH SCRATCH SNATCH HEDGE WEDGE DREDGE SLEDGE FRIDGE DANCE TRANCE GLANCE STANCE PRANCE CHANCE ADVANCE ENHANCE BLISS MISS KISS DISMISS AMISS REMISS WHISK DISK RISK FRISK TUSK MUSK RUSK HUSK CROAK SOAK STROKE SPOKE BROKE WOKE INVOKE EVOKE PROVOKE VEIN CHAIN PLAIN STRAIN GRAIN TRAIN BRAIN DOMAIN TERRAIN REMAIN TREAD SPREAD THREAD SHRED BRED SLED STEAD INSTEAD COST LOST HOST GHOST MOST POST ROAST TOAST COAST BOAST STREAM DREAM TEAM CREAM SCHEME THEME SUPREME EXTREME SWAY FRAY PRAY STRAY ARRAY DECAY RELAY CONVEY OBEY SURVEY BETRAY THROW FLOW SNOW GROW KNOW BELOW HOLLOW CLIMB RHYME SLIME THYME SUBLIME PARADIGM PROWESS DURESS FORTRESS MISTRESS COMPASS BYPASS SURPASS AMASS CRIMSON LINDEN MAIDEN WARDEN GOLDEN MOLTEN FROZEN CHOSEN WOVEN SCYTHE CRUCIBLE TORRENT TEMPEST MAELSTROM CINDER INFERNO TYPHOON CYCLONE GLACIER ICECAP PERMAFROST MONSOON SOLSTICE EQUINOX MERIDIAN TWILIGHT MIDNIGHT DAYBREAK SENTINEL WATCHER HUNTER RANGER SCOUT TRACKER SEEKER FINDER KEEPER BINDER ARBITER HERALD ENVOY REGENT PREFECT CONSUL MARSHAL VASSAL SQUIRE KNIGHT PALADIN CHAMPION PARAGON MONARCH SOVEREIGN OVERLORD WARLORD CHIEFTAIN PATRIARCH MATRIARCH PROPHET MYSTIC HERMIT ASCETIC NOMAD PILGRIM WANDERER EXILE OUTCAST ROGUE REBEL VAGRANT DRIFTER MARAUDER BRIGAND CORSAIR BUCCANEER RAIDER REAVER SLAYER BERSERKER GLADIATOR CENTURION LEGIONNAIRE TEMPLAR CRUSADER INQUISITOR ZEALOT HARBINGER AUGUR PORTENT PRESAGE AUGURY PROPHECY DIVINATION REVELATION EPIPHANY REMNANT VESTIGE ARTIFACT FRAGMENT SPLINTER SLIVER MORSEL CRUMB PARTICLE MOTE FILAMENT STRAND FIBER SINEW TENDON LIGAMENT MARROW ICHOR ELIXIR POTION TONIC SALVE REMEDY ANTIDOTE CURE PANACEA CATALYST REAGENT COMPOUND TINCTURE DISTILL INFUSE IMBUE ENCHANT CONJURE SUMMON BANISH DISPEL REVOKE ANNUL NEGATE NULLIFY SUNDER CLEAVE REND SHATTER FRACTURE RUPTURE PIERCE IMPALE SKEWER GORE MAIM RAVAGE DEVASTATE OBLITERATE ANNIHILATE ERADICATE PURGE EXPUNGE EFFACE EXTINGUISH QUELL SUBDUE VANQUISH CONQUER PREVAIL TRIUMPH ASCEND TRANSCEND EVOLVE AWAKEN ARISE EMERGE MANIFEST EMBODY HARNESS WIELD MASTER COMMAND PROCLAIM SANCTIFY CONSECRATE ANOINT BESTOW ENDOW BEQUEST LEGACY HEIRLOOM COVENANT COMPACT TREATY ACCORD ALLIANCE FEDERATION DOMINION REALM KINGDOM EMPIRE DYNASTY EPOCH AEON CYCLE HELIX MATRIX LATTICE TAPESTRY MOSAIC CIPHER ENIGMA RIDDLE PUZZLE LABYRINTH MAZE CAULDRON CHALICE GOBLET GRAIL TRIDENT MAUL FLAIL HALBERD GLAIVE RAPIER SABRE KATANA MACHETE SCIMITAR CUTLASS BROADSWORD GREATSWORD LONGBOW CROSSBOW BALLISTA CATAPULT TREBUCHET MIRAGE ILLUSION REVENANT LICH BANSHEE GHOUL VAMPIRE WEREWOLF GARGOYLE BASILISK KRAKEN LEVIATHAN BEHEMOTH COLOSSUS JUGGERNAUT MONOLITH OBELISK ZIGGURAT MINARET PAGODA DOLMEN BARROW CATACOMB DUNGEON PARAPET TURRET BATTLEMENT DRAWBRIDGE PORTCULLIS BARBICAN PALISADE CONDUIT PYLON TORQUE RATCHET LODESTONE KEYSTONE CAPSTONE BEDROCK SEQUOIA REDWOOD CYPRESS HEMLOCK WILLOW ASPEN HICKORY JUNIPER MAGNOLIA HAWTHORN SAFFRON MYRRH MANGROVE ORCHID THISTLE POPPY HEATHER JASMINE VECTOR SCALAR TENSOR FULCRUM PIVOT CRESCENT PINNACLE VERTEX".split(' ');
+const MNEM_IDX = Object.fromEntries(MNEM_WORDS.map((w,i)=>[w,i]));
+
+function seedToWords(seed) {
+  const words = [];
+  let remaining = BigInt(seed);
+  for (let i = 0; i < 7; i++) {
+    words.push(MNEM_WORDS[Number(remaining & BigInt(1023))]);
+    remaining >>= BigInt(10);
+  }
+  return words;
+}
+
 const TYPE_COLORS = {WEALTH:'#bc8cff',LOGIC:'#58a6ff',SOCIAL:'#d29922',SHIELD:'#c8c8c8',DATA:'#3fb950',CRAFT:'#f85149',HEAL:'#ff7eb3'};
 const RARITY_COLORS = {mythic:'#ff6ec7',rare:'#58a6ff',uncommon:'#3fb950',common:'#888'};
-const RARITY_POINTS = {mythic:200,rare:150,uncommon:120,common:100};
-
-// ── Deterministic hash for encantation generation ──
-function hashStr(s) {
-  let h = 5381;
-  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
-  return h;
-}
-
-// Generate a unique arrow sequence for a card (4–8 arrows based on rarity/complexity)
-function generateEncantation(card) {
-  const h = hashStr(card.agent_name || card.name);
-  const rarity = card.rarity || 'common';
-  // Longer sequences for rarer cards
-  const len = rarity === 'mythic' ? 7 + (h % 2) :
-              rarity === 'rare' ? 6 + (h % 2) :
-              rarity === 'uncommon' ? 5 + (h % 2) : 4 + (h % 2);
-  const seq = [];
-  let seed = h;
-  for (let i = 0; i < len; i++) {
-    seed = (seed * 1103515245 + 12345) >>> 0;
-    seq.push(ARROWS[seed % 4]);
-  }
-  return seq;
-}
+const RARITY_POINTS = {mythic:300,rare:200,uncommon:150,common:100};
 
 // ── State ──
 let allCards = [], gameCards = [];
-let encantationMap = new Map(); // card → arrow sequence
-let roundCards = [];       // cards in current round
-let currentIdx = 0;        // which card in the round we're on
-let inputIdx = 0;          // which arrow in the sequence we're on
+let roundCards = [], currentIdx = 0;
+let wordIdx = 0; // which of the 7 words we're on
+let currentIncantation = []; // the 7 words for current card
 let round = 1, score = 0, combo = 1, bestCombo = 1;
 let summonedList = [], missedCount = 0, totalAttempted = 0;
 let timeLeft = 0, maxTime = 0, timerInterval = null;
@@ -365,7 +349,7 @@ let gameMode = 'normal';
 let gameActive = false;
 let popupTimeout = null;
 
-// ── Card loading ──
+// ── Load cards ──
 async function loadCards() {
   if (allCards.length > 0) return;
   try {
@@ -376,35 +360,24 @@ async function loadCards() {
     console.warn('Fallback cards');
     allCards = fallbackCards();
   }
-  // Pre-generate all encantations
-  for (const c of allCards) {
-    encantationMap.set(c, generateEncantation(c));
-  }
 }
 
 function fallbackCards() {
-  const names = ['Borg','Anvil','CardSmith','Agent Workbench','DealDesk',
-    'RappterEngine','Memory Agent','Pipeline Runner','Registry Client','Basic Agent'];
-  return names.map((name,i) => ({
-    name, title:['The Assimilator','The Enforcer','The Catalyst','The Assessor','The Sage',
-      'The Overseer','The Keeper','The Runner','The Client','The Foundation'][i],
-    mana_cost:`{${i%4+1}}{${'WUBRG'[i%5]}}`,
-    rarity:i<2?'mythic':i<5?'rare':'uncommon',
-    agent_types:[Object.keys(TYPE_COLORS)[i%7]],
-    type_colors:[Object.values(TYPE_COLORS)[i%7]],
-    type_line:'Creature — Agent',
-    stats:{hp:50+i*5,atk:40+i*3,def:30+i*4,spd:60-i*2,int:50+i},
+  return ['Borg','Anvil','CardSmith','Agent Workbench','DealDesk'].map((name,i) => ({
+    name, title:['The Assimilator','The Enforcer','The Catalyst','The Assessor','The Sage'][i],
+    rarity:i<2?'mythic':'rare', agent_types:[Object.keys(TYPE_COLORS)[i%7]],
+    type_colors:[Object.values(TYPE_COLORS)[i%7]], type_line:'Creature — Agent',
+    stats:{hp:50+i*10,atk:40+i*5,def:30+i*5,spd:60,int:50},
+    seed: [6828785747777692595,0,0,3115334458036463931,0][i] || Math.floor(Math.random()*Number.MAX_SAFE_INTEGER),
     avatar_svg:`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#111"/><text x="100" y="115" text-anchor="middle" fill="${Object.values(TYPE_COLORS)[i%7]}" font-size="56" font-weight="bold">${name[0]}</text></svg>`,
-    flavor_text:'"Every agent has a purpose."',
-    agent_name:'@rapp/'+name.toLowerCase().replace(/ /g,'_'),
-    abilities:[{keyword:['Assimilate','Verify','Transform','Inspect','Negotiate'][i%5]}],
   }));
 }
 
-// ── Screen management ──
+// ── Screens ──
 function switchScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  if (id === 'title') { clearInterval(timerInterval); gameActive = false; }
 }
 
 // ── Codex ──
@@ -412,27 +385,23 @@ async function showCodex() {
   await loadCards();
   const grid = document.getElementById('codex-grid');
   grid.innerHTML = '';
-
-  // Sort by rarity then name
   const order = {mythic:0,rare:1,uncommon:2,common:3};
-  const sorted = [...allCards].sort((a,b) => (order[a.rarity]||9) - (order[b.rarity]||9) || a.name.localeCompare(b.name));
-
+  const sorted = [...allCards].sort((a,b) => (order[a.rarity]||9)-(order[b.rarity]||9) || a.name.localeCompare(b.name));
   for (const card of sorted) {
-    const enc = encantationMap.get(card);
+    const words = seedToWords(card.seed);
     const rc = RARITY_COLORS[card.rarity] || '#888';
     const tc = card.type_colors?.[0] || '#58a6ff';
-    const entry = document.createElement('div');
-    entry.className = 'codex-entry';
-    entry.style.borderLeftColor = rc;
-    entry.innerHTML = `
-      <div class="ce-art">${card.avatar_svg || ''}</div>
+    const d = document.createElement('div');
+    d.className = 'codex-entry';
+    d.style.borderLeftColor = rc;
+    d.innerHTML = `
+      <div class="ce-art">${card.avatar_svg||''}</div>
       <div class="ce-info">
-        <div class="ce-name" style="color:${tc}">${esc(card.name)}</div>
-        <div style="font-size:.7rem;color:${rc};text-transform:uppercase;letter-spacing:1px">${card.rarity || 'common'}</div>
-        <div class="ce-enc">${enc.map(a => `<div class="mini-arrow">${a}</div>`).join('')}</div>
+        <div class="ce-name" style="color:${tc}">${esc(card.name)} <span style="color:${rc};font-size:.65rem;text-transform:uppercase">${card.rarity||''}</span></div>
+        <div class="ce-words">${words.map(w=>`<span class="cw">${w}</span>`).join('')}</div>
       </div>
     `;
-    grid.appendChild(entry);
+    grid.appendChild(d);
   }
   document.getElementById('codex-count').textContent = `${sorted.length} cards`;
   switchScreen('codex');
@@ -442,42 +411,30 @@ async function showCodex() {
 async function startGame(mode) {
   await loadCards();
   gameMode = mode;
+  gameCards = mode === 'mythic'
+    ? allCards.filter(c => c.rarity === 'mythic' || c.rarity === 'rare')
+    : [...allCards];
 
-  if (mode === 'mythic') {
-    gameCards = allCards.filter(c => c.rarity === 'mythic' || c.rarity === 'rare');
-  } else {
-    gameCards = [...allCards];
-  }
-
-  // Reset
   round = 1; score = 0; combo = 1; bestCombo = 1;
   summonedList = []; missedCount = 0; totalAttempted = 0;
   gameActive = true;
-
   switchScreen('game');
   startRound();
 }
 
 function startRound() {
-  // Each round: pick N cards (starts at 4, grows)
-  const count = Math.min(4 + round - 1, 16);
-  roundCards = [];
-  const shuffled = [...gameCards].sort(() => Math.random() - 0.5);
-  for (let i = 0; i < count && i < shuffled.length; i++) {
-    roundCards.push(shuffled[i]);
-  }
+  const count = Math.min(3 + round, 12);
+  roundCards = [...gameCards].sort(() => Math.random() - 0.5).slice(0, count);
   currentIdx = 0;
   totalAttempted += roundCards.length;
 
-  // Timer — generous at first, tighter as rounds climb
-  const baseTime = gameMode === 'endless' ? 4 : 6;
-  const perCard = Math.max(1.5, baseTime - round * 0.15);
+  // Timer
+  const perCard = gameMode === 'practice' ? 30 : Math.max(8, 20 - round * 0.8);
   maxTime = Math.ceil(perCard * roundCards.length);
   timeLeft = maxTime;
 
-  document.getElementById('round-info').textContent = `ROUND ${round}`;
+  renderProgress();
   updateHUD();
-  renderQueue();
   showCurrentCard();
   startTimer();
 }
@@ -486,37 +443,40 @@ function startTimer() {
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
     timeLeft = Math.max(0, timeLeft - 0.05);
-    document.getElementById('timer-fill').style.width = `${(timeLeft / maxTime) * 100}%`;
+    document.getElementById('timer-fill').style.width = `${(timeLeft/maxTime)*100}%`;
     document.getElementById('h-time').textContent = Math.ceil(timeLeft) + 's';
-
-    // Color shifts as time runs low
     const pct = timeLeft / maxTime;
     document.getElementById('timer-fill').style.background =
       pct > 0.5 ? 'linear-gradient(90deg,var(--data),var(--logic))' :
-      pct > 0.2 ? 'linear-gradient(90deg,var(--social),var(--gold))' :
-      'var(--craft)';
-
+      pct > 0.2 ? 'linear-gradient(90deg,var(--social),var(--gold))' : 'var(--craft)';
     if (timeLeft <= 0) {
-      // Missed remaining cards in this round
-      const remaining = roundCards.length - currentIdx;
-      missedCount += remaining;
+      missedCount += roundCards.length - currentIdx;
       combo = 1;
       endRound(false);
     }
   }, 50);
 }
 
-// ── Display current card ──
-function showCurrentCard() {
-  if (currentIdx >= roundCards.length) {
-    endRound(true);
-    return;
+function renderProgress() {
+  const prog = document.getElementById('round-progress');
+  prog.innerHTML = '';
+  for (let i = 0; i < roundCards.length; i++) {
+    const pip = document.createElement('div');
+    pip.className = 'progress-pip' + (i === currentIdx ? ' active' : '');
+    pip.id = `pip-${i}`;
+    prog.appendChild(pip);
   }
+}
+
+// ── Show current card ──
+function showCurrentCard() {
+  if (currentIdx >= roundCards.length) { endRound(true); return; }
 
   const card = roundCards[currentIdx];
-  const enc = encantationMap.get(card);
   const tc = card.type_colors?.[0] || TYPE_COLORS[card.agent_types?.[0]] || '#58a6ff';
   const rc = RARITY_COLORS[card.rarity] || '#888';
+  currentIncantation = seedToWords(card.seed);
+  wordIdx = 0;
 
   // Card display
   document.getElementById('card-art-frame').innerHTML = card.avatar_svg || '';
@@ -525,88 +485,139 @@ function showCurrentCard() {
   document.getElementById('card-name').style.color = tc;
   document.getElementById('card-title').textContent = card.title || '';
   document.getElementById('card-type-line').textContent = card.type_line || '';
-  document.getElementById('card-mana').textContent = card.mana_cost || '';
 
-  // Encantation arrows
-  inputIdx = 0;
-  const container = document.getElementById('encantation');
-  container.innerHTML = '';
-  for (let i = 0; i < enc.length; i++) {
-    const div = document.createElement('div');
-    div.className = 'arrow-key pending';
-    div.id = `arrow-${i}`;
-    div.textContent = enc[i];
-    container.appendChild(div);
+  // Word slots
+  renderWordSlots();
+
+  // Hint (practice mode shows all words, normal hides them)
+  const hint = document.getElementById('hint-area');
+  if (gameMode === 'practice') {
+    hint.innerHTML = `<span style="color:#666">Incantation: </span>` +
+      currentIncantation.map(w => `<span style="color:var(--logic)">${w}</span>`).join(' ');
+  } else {
+    hint.textContent = 'Type each word and press Enter (or Space)';
   }
-  // Highlight first
-  document.getElementById('arrow-0').classList.remove('pending');
-  document.getElementById('arrow-0').classList.add('active');
 
-  renderQueue();
-}
-
-function renderQueue() {
+  // Queue
   const q = document.getElementById('queue');
   q.innerHTML = '';
-  // Show next few cards after current
-  for (let i = currentIdx + 1; i < roundCards.length && i < currentIdx + 5; i++) {
-    const c = roundCards[i];
-    const div = document.createElement('div');
-    div.className = 'queue-card';
-    div.style.color = c.type_colors?.[0] || '#888';
-    div.textContent = c.name;
-    q.appendChild(div);
+  for (let i = currentIdx + 1; i < roundCards.length && i < currentIdx + 4; i++) {
+    const d = document.createElement('div');
+    d.className = 'queue-card';
+    d.style.color = roundCards[i].type_colors?.[0] || '#888';
+    d.textContent = roundCards[i].name;
+    q.appendChild(d);
+  }
+
+  // Progress pips
+  document.querySelectorAll('.progress-pip').forEach((p,i) => {
+    p.classList.toggle('active', i === currentIdx);
+  });
+
+  // Focus input
+  const input = document.getElementById('word-input');
+  input.value = '';
+  input.className = '';
+  input.focus();
+  document.getElementById('word-counter').textContent = `0 / 7`;
+}
+
+function renderWordSlots() {
+  const container = document.getElementById('incantation-slots');
+  container.innerHTML = '';
+  for (let i = 0; i < 7; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'word-slot' + (i === 0 ? ' current' : '');
+    slot.id = `slot-${i}`;
+
+    if (gameMode === 'practice') {
+      // Show first letter as hint in practice mode
+      slot.textContent = currentIncantation[i][0] + '···';
+      slot.classList.add('revealed');
+    } else {
+      slot.textContent = '?';
+    }
+    container.appendChild(slot);
   }
 }
 
 // ── Input handling ──
-function handleKey(e) {
+document.getElementById('word-input').addEventListener('keydown', (e) => {
   if (!gameActive) return;
-  const arrow = ARROW_NAMES[e.key];
-  if (!arrow) return;
-  e.preventDefault();
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    submitWord();
+  }
+  if (e.key === 'Escape') {
+    skipCard();
+  }
+});
 
-  const card = roundCards[currentIdx];
-  const enc = encantationMap.get(card);
-  const el = document.getElementById(`arrow-${inputIdx}`);
+function submitWord() {
+  const input = document.getElementById('word-input');
+  const typed = input.value.trim().toUpperCase();
+  if (!typed) return;
 
-  if (arrow === enc[inputIdx]) {
+  const expected = currentIncantation[wordIdx];
+  const slot = document.getElementById(`slot-${wordIdx}`);
+
+  if (typed === expected) {
     // Correct!
-    el.classList.remove('active');
-    el.classList.add('correct');
-    inputIdx++;
+    slot.className = 'word-slot correct';
+    slot.textContent = expected;
+    wordIdx++;
+    input.value = '';
+    input.classList.add('correct');
+    setTimeout(() => input.classList.remove('correct'), 200);
 
-    // Add time bonus per correct input
-    timeLeft = Math.min(maxTime, timeLeft + 0.3);
+    // Time bonus
+    timeLeft = Math.min(maxTime, timeLeft + 1.5);
 
-    if (inputIdx >= enc.length) {
-      // Card fully summoned!
-      summonCard(card);
+    document.getElementById('word-counter').textContent = `${wordIdx} / 7`;
+
+    if (wordIdx >= 7) {
+      // Full incantation complete — summon!
+      summonCard(roundCards[currentIdx]);
     } else {
-      // Highlight next
-      const next = document.getElementById(`arrow-${inputIdx}`);
-      next.classList.remove('pending');
-      next.classList.add('active');
+      // Highlight next slot
+      const next = document.getElementById(`slot-${wordIdx}`);
+      next.classList.add('current');
     }
   } else {
-    // Wrong! Reset this card's sequence
-    el.classList.add('wrong');
+    // Wrong word
+    slot.classList.add('wrong');
+    input.classList.add('wrong');
     setTimeout(() => {
-      // Reset all arrows back to pending, restart sequence
-      for (let i = 0; i < enc.length; i++) {
-        const a = document.getElementById(`arrow-${i}`);
-        a.className = 'arrow-key pending';
-      }
-      inputIdx = 0;
-      document.getElementById('arrow-0').classList.remove('pending');
-      document.getElementById('arrow-0').classList.add('active');
-    }, 300);
+      slot.classList.remove('wrong');
+      input.classList.remove('wrong');
+      slot.classList.add('current');
+    }, 350);
+
+    // Show correct word briefly in practice mode
+    if (gameMode === 'practice') {
+      slot.textContent = expected;
+      setTimeout(() => {
+        if (wordIdx < 7) slot.textContent = expected[0] + '···';
+      }, 800);
+    }
 
     // Penalty
     combo = 1;
-    timeLeft = Math.max(0, timeLeft - 1);
+    timeLeft = Math.max(0, timeLeft - 2);
+    input.value = '';
     updateHUD();
   }
+}
+
+function skipCard() {
+  // Skip current card (counts as miss)
+  missedCount++;
+  combo = 1;
+  const pip = document.getElementById(`pip-${currentIdx}`);
+  if (pip) pip.classList.add('missed');
+  currentIdx++;
+  updateHUD();
+  showCurrentCard();
 }
 
 // ── Summon! ──
@@ -616,33 +627,40 @@ function summonCard(card) {
   score += pts;
   combo++;
   if (combo > bestCombo) bestCombo = combo;
+  timeLeft = Math.min(maxTime, timeLeft + 3);
 
-  // Time bonus for completing a card
-  timeLeft = Math.min(maxTime, timeLeft + 2);
+  const pip = document.getElementById(`pip-${currentIdx}`);
+  if (pip) pip.classList.add('done');
 
   updateHUD();
   showSummonEffect(card, pts);
 
   currentIdx++;
-  // Brief pause then show next
-  setTimeout(() => {
-    if (gameActive) showCurrentCard();
-  }, 800);
+  setTimeout(() => { if (gameActive) showCurrentCard(); }, 1000);
 }
 
 function showSummonEffect(card, pts) {
   const rc = RARITY_COLORS[card.rarity] || '#888';
   const tc = card.type_colors?.[0] || '#58a6ff';
+  const words = seedToWords(card.seed);
 
   // Flash
   const flash = document.getElementById('summon-flash');
   flash.style.background = `radial-gradient(circle at 50% 50%, ${rc}60, transparent 70%)`;
-  flash.classList.remove('flash');
-  void flash.offsetWidth;
-  flash.classList.add('flash');
+  flash.classList.remove('flash'); void flash.offsetWidth; flash.classList.add('flash');
 
   // Particles
-  spawnParticles(tc, rc);
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  const colors = [tc, rc, '#ffd700', '#fff'];
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const a = (Math.PI*2*i)/16 + Math.random()*.3;
+    const d = 80 + Math.random()*120;
+    p.style.cssText = `left:${cx}px;top:${cy}px;width:${3+Math.random()*5}px;height:${3+Math.random()*5}px;background:${colors[i%4]};--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 700);
+  }
 
   // Card reveal
   const reveal = document.getElementById('summon-reveal');
@@ -655,6 +673,7 @@ function showSummonEffect(card, pts) {
     <div class="rc-name" style="color:${tc}">${esc(card.name)}</div>
     <div class="rc-title">${esc(card.title||'')}</div>
     <div class="rc-art">${card.avatar_svg||''}</div>
+    <div class="rc-incantation">${words.map(w=>`<span class="rc-word">${w}</span>`).join('')}</div>
     <div class="rc-stats">
       <div>HP<span>${stats.hp||'?'}</span></div>
       <div>ATK<span>${stats.atk||'?'}</span></div>
@@ -666,87 +685,37 @@ function showSummonEffect(card, pts) {
   `;
   if (popupTimeout) clearTimeout(popupTimeout);
   reveal.classList.add('show');
-  popupTimeout = setTimeout(() => reveal.classList.remove('show'), 750);
-}
-
-function spawnParticles(c1, c2) {
-  const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-  const colors = [c1, c2, '#ffd700', '#fff'];
-  for (let i = 0; i < 16; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const angle = (Math.PI * 2 * i) / 16 + Math.random() * 0.3;
-    const dist = 80 + Math.random() * 120;
-    p.style.cssText = `left:${cx}px;top:${cy}px;width:${3+Math.random()*5}px;height:${3+Math.random()*5}px;background:${colors[i%colors.length]};--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;`;
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 700);
-  }
+  popupTimeout = setTimeout(() => reveal.classList.remove('show'), 900);
 }
 
 // ── Round end ──
 function endRound(success) {
   clearInterval(timerInterval);
-
-  if (!success && gameMode !== 'normal') {
-    // Endless / Mythic — game over on timeout
+  if (success) {
+    round++;
+    if (round > 10 && gameMode !== 'mythic') { gameActive = false; showResults(); return; }
+    document.getElementById('incantation-slots').innerHTML =
+      '<div style="color:var(--data);font-size:1.1rem;font-weight:700">✓ Round Complete — Next round in a moment...</div>';
+    setTimeout(() => startRound(), 1200);
+  } else {
     gameActive = false;
     showResults();
-    return;
-  }
-
-  if (success) {
-    // Next round
-    round++;
-    if (gameMode === 'normal' && round > 10) {
-      // Normal mode has 10 rounds
-      gameActive = false;
-      showResults();
-      return;
-    }
-    // Brief pause between rounds
-    document.getElementById('round-info').textContent = `ROUND ${round - 1} CLEAR!`;
-    document.getElementById('round-info').style.color = 'var(--data)';
-    document.getElementById('encantation').innerHTML = '<div style="color:var(--data);font-size:1.2rem;font-weight:700">✓ Round Complete</div>';
-    document.getElementById('current-card').style.opacity = '0.3';
-    setTimeout(() => {
-      document.getElementById('current-card').style.opacity = '1';
-      document.getElementById('round-info').style.color = '#555';
-      startRound();
-    }, 1200);
-  } else {
-    // Normal mode — continue even on timeout, just count misses
-    if (gameMode === 'normal') {
-      round++;
-      if (round > 10) {
-        gameActive = false;
-        showResults();
-        return;
-      }
-      document.getElementById('round-info').textContent = `TIME'S UP — ROUND ${round}`;
-      document.getElementById('round-info').style.color = 'var(--craft)';
-      setTimeout(() => {
-        document.getElementById('round-info').style.color = '#555';
-        startRound();
-      }, 1200);
-    }
   }
 }
 
 // ── Results ──
 function showResults() {
   clearInterval(timerInterval);
-  const acc = totalAttempted > 0 ? Math.round((summonedList.length / totalAttempted) * 100) : 0;
-
+  const acc = totalAttempted > 0 ? Math.round((summonedList.length/totalAttempted)*100) : 0;
   let rank, rc;
   if (score >= 8000) { rank = '🏆 Archmage'; rc = 'var(--mythic)'; }
-  else if (score >= 5000) { rank = '⭐ Grand Summoner'; rc = 'var(--gold)'; }
-  else if (score >= 2500) { rank = '🔮 Enchanter'; rc = 'var(--wealth)'; }
-  else if (score >= 1000) { rank = '📖 Apprentice'; rc = 'var(--logic)'; }
+  else if (score >= 4000) { rank = '⭐ Grand Summoner'; rc = 'var(--gold)'; }
+  else if (score >= 2000) { rank = '🔮 Enchanter'; rc = 'var(--wealth)'; }
+  else if (score >= 800) { rank = '📖 Apprentice'; rc = 'var(--logic)'; }
   else { rank = '🌱 Initiate'; rc = 'var(--data)'; }
 
   document.getElementById('res-rank').textContent = rank;
-  document.getElementById('res-rank').style.borderColor = rc;
-  document.getElementById('res-rank').style.color = rc;
+  document.getElementById('res-rank').style.cssText = `border-color:${rc};color:${rc}`;
   document.getElementById('res-score').textContent = score.toLocaleString();
   document.getElementById('res-score').style.color = rc;
   document.getElementById('res-summoned').textContent = summonedList.length;
@@ -759,25 +728,21 @@ function showResults() {
   document.getElementById('res-acc').style.color = acc >= 80 ? 'var(--data)' : acc >= 50 ? 'var(--social)' : 'var(--craft)';
   document.getElementById('res-round').textContent = round;
 
-  // Gallery
   const gal = document.getElementById('gallery');
   gal.innerHTML = '';
   const seen = new Set();
   for (const c of summonedList) {
-    if (seen.has(c.name)) continue;
-    seen.add(c.name);
+    if (seen.has(c.name)) continue; seen.add(c.name);
     const d = document.createElement('div');
     d.className = 'gc';
-    d.style.borderColor = RARITY_COLORS[c.rarity] || '#333';
-    d.style.color = c.type_colors?.[0] || '#888';
+    d.style.borderColor = RARITY_COLORS[c.rarity]||'#333';
+    d.style.color = c.type_colors?.[0]||'#888';
     d.textContent = c.name;
     gal.appendChild(d);
   }
-
   switchScreen('results');
 }
 
-// ── HUD ──
 function updateHUD() {
   document.getElementById('h-score').textContent = score.toLocaleString();
   document.getElementById('h-round').textContent = round;
@@ -786,10 +751,8 @@ function updateHUD() {
   document.getElementById('h-summoned').textContent = summonedList.length;
 }
 
-function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function esc(s) { const d = document.createElement('div'); d.textContent = s||''; return d.innerHTML; }
 
-// ── Boot ──
-document.addEventListener('keydown', handleKey);
 loadCards();
 </script>
 </body>
