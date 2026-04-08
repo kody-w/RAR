@@ -32,13 +32,11 @@
       }
     },
     "@borg/borg_agent": {
-      "up": 1,
+      "up": 0,
       "down": 0,
-      "score": 1,
-      "voters": {
-        "kody-w": "up"
-      }
+      "score": 0,
+      "voters": {}
     }
   },
-  "updated_at": "2026-04-08T18:35:19.530060+00:00"
+  "updated_at": "2026-04-08T18:36:02.915028+00:00"
 }
