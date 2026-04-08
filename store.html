@@ -2922,6 +2922,7 @@
             <option value="date">By Date</option>
           </select>
           <button onclick="exportCollection()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Export All</button>
+          <button onclick="resetCollection()" style="padding:6px 14px;border-radius:6px;border:1px solid rgba(248,81,73,.3);background:rgba(248,81,73,.1);color:#f85149;font-size:.78rem;cursor:pointer">Reset</button>
         </div>
       </div>
       <div id="collection-grid">
@@ -7968,6 +7969,20 @@ async function saveMinted(card) {
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
   });
+}
+
+async function resetCollection() {
+  if (!confirm('Reset your entire card collection? This cannot be undone.')) return;
+  const db = await openCollDB();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction(COLL_STORE, 'readwrite');
+    tx.objectStore(COLL_STORE).clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+  localStorage.removeItem('rar_howard_starter');
+  showToast('Collection reset — open a pack to start fresh', 'success');
+  renderCollection();
 }
 
 // ── Minting Engine ──
