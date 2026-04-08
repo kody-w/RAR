@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ORAPPTER — Run AI in Your Browser</title>
+<meta name="description" content="ORAPPTER is the easiest way to run AI models locally — no install, no cloud, no API key. Open a tab and go.">
+<meta property="og:title" content="ORAPPTER — Run AI in Your Browser">
+<meta property="og:description" content="Local-first AI runtime. Run Gemma 4 and other models directly in your browser via WebGPU. No download. No server. No account.">
+<meta property="og:type" content="website">
+<meta property="twitter:card" content="summary">
+<meta property="twitter:title" content="ORAPPTER — Run AI in Your Browser">
+<meta property="twitter:description" content="Local-first AI runtime. Run Gemma 4 and other models directly in your browser via WebGPU. No download. No server. No account.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff;
+  --bg: #fafafa;
+  --text: #111111;
+  --muted: #6b7280;
+  --light: #e5e7eb;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --dark: #18181b;
+  --dark-hover: #000000;
+  --radius: 9999px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 40; background: var(--white); border-bottom: 1px solid transparent; display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; }
+nav.scrolled { border-color: var(--light); }
+.nav-brand { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 16px; }
+.nav-links a:hover { text-decoration: underline; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-size: 16px; font-weight: 500; text-decoration: none; padding: 8px 20px; transition: background 0.15s; cursor: pointer; border: none; }
+.btn-ghost { background: rgba(0,0,0,0.05); color: var(--text); }
+.btn-ghost:hover { background: rgba(0,0,0,0.1); }
+.btn-dark { background: var(--dark); color: white; }
+.btn-dark:hover { background: var(--dark-hover); }
+.btn-accent { background: var(--accent); color: white; }
+.btn-accent:hover { background: var(--accent-hover); }
+.btn-lg { padding: 14px 32px; font-size: 18px; }
+.btn-outline { background: white; border: 1px solid var(--light); color: var(--text); }
+.btn-outline:hover { background: var(--bg); }
+.nav-mobile { display: none; }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile { display: block; }
+}
+
+/* ── HERO ── */
+.hero { max-width: 720px; margin: 0 auto; padding: 100px 24px 60px; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(22,163,74,0.08); color: var(--accent); padding: 6px 16px; border-radius: var(--radius); font-size: 14px; font-weight: 500; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 600; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px; }
+.hero p { font-size: 18px; color: var(--muted); margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hero-cmd { display: flex; align-items: center; background: rgba(0,0,0,0.04); border: 1px solid var(--light); border-radius: 12px; font-family: var(--mono); font-size: 14px; padding: 14px 20px; max-width: 460px; margin: 0 auto 12px; gap: 12px; }
+.hero-cmd code { flex: 1; text-align: left; user-select: all; }
+.hero-cmd button { background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px; }
+.hero-cmd button:hover { color: var(--text); }
+.hero-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+.hero-sub a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.hero-sub a:hover { color: var(--text); }
+.hero-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── SECTIONS ── */
+.section { max-width: 1100px; margin: 0 auto; padding: 0 24px 140px; }
+.section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+@media (max-width: 768px) { .section-grid { grid-template-columns: 1fr; gap: 40px; } }
+.section h2 { font-size: 36px; font-weight: 600; line-height: 1.2; margin-bottom: 24px; letter-spacing: -0.3px; }
+.section p { font-size: 18px; color: var(--text); margin-bottom: 20px; }
+.section .muted { color: var(--muted); }
+
+.check-list { list-style: none; padding: 0; margin-bottom: 32px; }
+.check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16px; margin-bottom: 12px; }
+.check-icon { width: 20px; height: 20px; color: var(--muted); flex-shrink: 0; margin-top: 2px; }
+
+/* ── TERMINAL MOCKUP ── */
+.terminal { border-radius: 16px; overflow: hidden; border: 1px solid var(--light); background: white; }
+.terminal-bar { background: white; padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--light); }
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.terminal-body { padding: 20px; font-family: var(--mono); font-size: 13px; color: var(--muted); line-height: 1.8; background: var(--bg); }
+.terminal-body .cmd { color: var(--text); }
+.terminal-body .accent { color: var(--accent); }
+
+/* ── MODEL CARDS ── */
+.model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }
+.model-card { border: 1px solid var(--light); border-radius: 16px; padding: 24px; background: white; }
+.model-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.model-card .model-meta { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+.model-card p { font-size: 14px; color: var(--muted); margin: 0; }
+.model-card .tag { display: inline-block; background: rgba(22,163,74,0.08); color: var(--accent); font-size: 12px; padding: 2px 10px; border-radius: var(--radius); font-weight: 500; }
+
+/* ── COMPARISON TABLE ── */
+.compare-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 15px; }
+.compare-table th { text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid var(--light); }
+.compare-table td { padding: 12px 16px; border-bottom: 1px solid var(--light); }
+.compare-table .check { color: var(--accent); font-weight: 700; }
+.compare-table .cross { color: #d1d5db; }
+
+/* ── FOOTER ── */
+footer { margin-top: auto; border-top: 1px solid var(--light); padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { text-decoration: none; color: var(--muted); font-size: 14px; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 14px; color: var(--muted); }
+
+/* ── MISC ── */
+.divider { border: none; border-top: 1px solid var(--light); margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">ORAPPTER</a>
+  <div class="nav-links">
+    <a href="models.html">Models</a>
+    <a href="docs.html">Docs</a>
+    <a href="download.html">Get Started</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
+    <a href="playground.html" class="btn btn-dark">Open Playground →</a>
+  </div>
+  <a href="playground.html" class="btn btn-dark nav-mobile">Open Playground</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+    No install required
+  </div>
+  <h1>Run AI models directly<br>in your browser</h1>
+  <p>ORAPPTER is the local-first AI runtime. Run Gemma 4 and 130+ models with WebGPU — no download, no server, no API key, no account.</p>
+
+  <div class="hero-cmd">
+    <code id="hero-code">open playground.html</code>
+    <button onclick="copyCmd()" title="Copy">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6"/></svg>
+    </button>
+  </div>
+  <p class="hero-sub">That's it. One HTML file. Or <a href="playground.html">open it now →</a></p>
+
+  <div class="hero-cta-row">
+    <a href="playground.html" class="btn btn-dark btn-lg">Open Playground →</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank" class="btn btn-outline btn-lg">View on GitHub</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="section-grid">
+    <div>
+      <h2>AI that runs on your device</h2>
+      <p>ORAPPTER uses WebGPU to run open models entirely in your browser tab. Your prompts never leave your machine. The model weights cache locally — once downloaded, it works offline forever.</p>
+      <ul class="check-list">
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Zero install</strong> — no download, no terminal, no Python</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>100% private</strong> — your data never leaves your browser</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Works offline</strong> — model cached locally after first pull</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>No rate limits</strong> — run as many prompts as you want, forever free</span>
+        </li>
+      </ul>
+      <a href="playground.html" class="btn btn-accent btn-lg">Try it now →</a>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:#f87171"></span>
+        <span class="terminal-dot" style="background:#facc15"></span>
+        <span class="terminal-dot" style="background:#4ade80"></span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="cmd">orappter&gt;</span> pull gemma4</p>
+        <p>Pulling gemma-2-2b-it-q4f16...</p>
+        <p>████████████████████████ 100%</p>
+        <p class="accent">✓ Model loaded into GPU.</p>
+        <p>&nbsp;</p>
+        <p><span class="cmd">orappter&gt;</span> run</p>
+        <p class="accent">Running gemma-2-2b-it. Type /bye to exit.</p>
+        <p>&nbsp;</p>
+        <p><span class="cmd">&gt;&gt;&gt;</span> What is a digital twin?</p>
+        <p>A digital twin is a virtual replica of a physical entity — a person, product, or process — that mirrors its real-world counterpart in real time...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMMABLE -->
+<section class="section">
+  <div class="section-grid">
+    <div>
+      <h2>Programmable with LisPy</h2>
+      <p>ORAPPTER isn't just a chat box. It's a full runtime with a built-in Lisp interpreter. Write agents, chain models, build pipelines — all in one browser tab.</p>
+      <ul class="check-list">
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Full LisPy REPL</strong> — evaluate expressions alongside chat</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Agent cards</strong> — activate any card as an AI persona</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Knowledge base</strong> — store and query with local embeddings</span>
+        </li>
+        <li>
+          <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          <span><strong>Same API everywhere</strong> — agents run in browser or CLI</span>
+        </li>
+      </ul>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:#f87171"></span>
+        <span class="terminal-dot" style="background:#facc15"></span>
+        <span class="terminal-dot" style="background:#4ade80"></span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="cmd">orappter&gt;</span> (+ 1 2 3)</p>
+        <p class="accent">6</p>
+        <p>&nbsp;</p>
+        <p><span class="cmd">orappter&gt;</span> (activate-card "@borg/card_smith_agent")</p>
+        <p class="accent">✓ Activated CardSmith as AI agent.</p>
+        <p>Type /bye to exit. Your digital twin awaits.</p>
+        <p>&nbsp;</p>
+        <p><span class="cmd">&gt;&gt;&gt;</span> Design a card for a security auditor</p>
+        <p>Forging card... Name: SentinelWatch. Tier: Verified. Category: devtools. P/T: 4/5. Ability: scans any codebase for vulnerabilities in one pass...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section class="section" id="models">
+  <h2 style="text-align:center;margin-bottom:8px;">130+ models, ready to run</h2>
+  <p style="text-align:center;color:var(--muted);margin-bottom:8px;font-size:18px;">Powered by WebLLM. Download once, run forever.</p>
+  <p style="text-align:center;color:var(--muted);margin-bottom:0;font-size:14px;">Type <code style="background:rgba(0,0,0,0.05);padding:2px 8px;border-radius:6px;font-family:var(--mono)">models</code> in the playground to see the full list.</p>
+  <div class="model-grid">
+    <div class="model-card">
+      <h4>Gemma 2 2B</h4>
+      <div class="model-meta">google · 1.4 GB · <span class="tag">recommended</span></div>
+      <p>Fast, capable, great for chat and general tasks. Perfect starting model.</p>
+    </div>
+    <div class="model-card">
+      <h4>Gemma 2 9B</h4>
+      <div class="model-meta">google · 5.5 GB</div>
+      <p>Higher quality responses. Needs more VRAM but significantly smarter.</p>
+    </div>
+    <div class="model-card">
+      <h4>Llama 3.2 3B</h4>
+      <div class="model-meta">meta · 2.1 GB</div>
+      <p>Meta's compact model. Strong reasoning and instruction following.</p>
+    </div>
+    <div class="model-card">
+      <h4>Phi 3.5 Mini</h4>
+      <div class="model-meta">microsoft · 2.4 GB</div>
+      <p>Microsoft's small model with outsized reasoning capabilities.</p>
+    </div>
+    <div class="model-card">
+      <h4>Qwen 2.5 1.5B</h4>
+      <div class="model-meta">alibaba · 1.0 GB</div>
+      <p>Compact multilingual model. Strong in code and math.</p>
+    </div>
+    <div class="model-card">
+      <h4>SmolLM2 1.7B</h4>
+      <div class="model-meta">huggingface · 1.1 GB</div>
+      <p>Tiny and fast. Runs on almost any device with WebGPU.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="section" id="compare">
+  <div class="section-grid">
+    <div>
+      <h2>ORAPPTER vs Ollama</h2>
+      <p class="muted">Same idea — run AI locally. Different approach. ORAPPTER runs in your browser. No install. No terminal. Open a tab and go.</p>
+      <p class="muted">Ollama is great if you want CLI tooling and server-mode. ORAPPTER is for everyone else.</p>
+    </div>
+    <div>
+      <table class="compare-table">
+        <thead>
+          <tr><th></th><th>ORAPPTER</th><th>Ollama</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Install required</td><td class="check">No</td><td class="cross">Yes</td></tr>
+          <tr><td>Runs in browser</td><td class="check">✓</td><td class="cross">✗</td></tr>
+          <tr><td>Works offline</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Data stays local</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>GPU acceleration</td><td class="check">WebGPU</td><td class="check">CUDA/Metal</td></tr>
+          <tr><td>Programmable runtime</td><td class="check">LisPy VM</td><td class="cross">✗</td></tr>
+          <tr><td>Agent system</td><td class="check">Cards + Decks</td><td class="cross">✗</td></tr>
+          <tr><td>Free forever</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Open source</td><td class="check">✓</td><td class="check">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- QUICKSTART -->
+<section class="section">
+  <div style="text-align:center;max-width:600px;margin:0 auto;">
+    <h2>Get started in 30 seconds</h2>
+    <p class="muted" style="margin-bottom:40px;">No download. No account. No credit card. Open the playground, pull a model, start chatting.</p>
+    <div style="display:flex;flex-direction:column;gap:20px;text-align:left;margin-bottom:40px;">
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <span style="background:var(--accent);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">1</span>
+        <div>
+          <strong>Open the playground</strong>
+          <p style="font-size:14px;color:var(--muted);margin:0;">Click "Open Playground" or open <code style="background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px;">playground.html</code> in Chrome or Edge.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <span style="background:var(--accent);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">2</span>
+        <div>
+          <strong>Pull a model</strong>
+          <p style="font-size:14px;color:var(--muted);margin:0;">Type <code style="background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px;">pull gemma4</code> — the model downloads and caches in your browser.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <span style="background:var(--accent);color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">3</span>
+        <div>
+          <strong>Start chatting</strong>
+          <p style="font-size:14px;color:var(--muted);margin:0;">Type <code style="background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px;">run</code> — you're talking to a local AI. No cloud. No limits.</p>
+        </div>
+      </div>
+    </div>
+    <a href="playground.html" class="btn btn-dark btn-lg">Open Playground →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">ORAPPTER — Offline Rappter Runtime for Agents. Part of the <a href="https://github.com/kody-w/CommunityRAPP" style="color:var(--muted);text-decoration:underline;">Rappter</a> ecosystem.</span>
+    <div class="footer-links">
+      <a href="playground.html">Playground</a>
+      <a href="models.html">Models</a>
+      <a href="docs.html">Docs</a>
+      <a href="blog.html">Blog</a>
+      <a href="https://github.com/kody-w/RAR">GitHub</a>
+      <a href="../store.html">Agent Store</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll shadow on nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Copy command
+function copyCmd() {
+  const code = document.getElementById('hero-code').textContent;
+  navigator.clipboard.writeText(code).catch(() => {});
+}
+</script>
+</body>
+</html>

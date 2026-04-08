@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ORAPPTER — Model Library</title>
+<meta name="description" content="Browse 130+ AI models you can run directly in your browser. No download, no server, no API key.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff; --bg: #fafafa; --text: #111; --muted: #6b7280; --light: #e5e7eb;
+  --accent: #16a34a; --accent-hover: #15803d; --accent-bg: rgba(22,163,74,0.07);
+  --dark: #18181b; --dark-hover: #000; --radius: 9999px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'SF Mono','Cascadia Code','Fira Code', Consolas, monospace;
+}
+body { font-family: var(--font); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 40; background: var(--white); border-bottom: 1px solid var(--light); display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; }
+.nav-brand { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 15px; }
+.nav-links a:hover { text-decoration: underline; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-size: 14px; font-weight: 500; text-decoration: none; padding: 7px 18px; border: none; cursor: pointer; transition: background 0.15s; }
+.btn-dark { background: var(--dark); color: white; }
+.btn-dark:hover { background: var(--dark-hover); }
+@media (max-width: 640px) { .nav-links a:not(.btn) { display: none; } }
+
+/* HEADER */
+.page-header { max-width: 1100px; margin: 0 auto; padding: 40px 24px 0; }
+.page-header h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+.page-header p { color: var(--muted); font-size: 16px; margin-bottom: 24px; }
+
+/* SEARCH */
+.search-bar { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.search-input { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--light); border-radius: 10px; font-size: 15px; font-family: var(--font); background: var(--bg); outline: none; }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.filter-btn { padding: 5px 14px; border-radius: var(--radius); border: 1px solid var(--light); background: white; font-size: 13px; cursor: pointer; color: var(--muted); transition: all 0.15s; font-family: var(--font); }
+.filter-btn:hover { border-color: #ccc; color: var(--text); }
+.filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+.result-count { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+/* MODEL LIST */
+.model-list { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+.model-item { display: block; text-decoration: none; color: inherit; border-bottom: 1px solid var(--light); padding: 20px 0; transition: background 0.1s; }
+.model-item:first-child { border-top: 1px solid var(--light); }
+.model-item:hover { background: var(--bg); margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: 8px; }
+.model-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.model-desc { font-size: 14px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; max-width: 700px; }
+.model-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.tag { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: var(--radius); font-size: 12px; font-weight: 500; border: 1px solid var(--light); color: var(--muted); background: white; }
+.tag-green { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+.meta-text { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+.meta-sep { color: var(--light); }
+
+/* DETAIL MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; justify-content: center; align-items: flex-start; padding: 60px 24px; overflow-y: auto; }
+.modal-overlay.open { display: flex; }
+.modal { background: white; border-radius: 16px; max-width: 700px; width: 100%; padding: 32px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); padding: 4px; }
+.modal-close:hover { color: var(--text); }
+.modal h2 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+.modal .model-desc { margin-bottom: 20px; }
+.modal .cmd-box { background: var(--bg); border: 1px solid var(--light); border-radius: 10px; padding: 14px 18px; font-family: var(--mono); font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.modal .cmd-box code { flex: 1; }
+.modal .cmd-box button { background: none; border: none; cursor: pointer; color: var(--muted); }
+.modal .cmd-box button:hover { color: var(--text); }
+.modal .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.modal .detail-item { }
+.modal .detail-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.modal .detail-value { font-size: 15px; font-weight: 500; }
+.modal .variant-list { margin-top: 16px; }
+.modal .variant-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--light); font-size: 14px; }
+.modal .variant-item:last-child { border: none; }
+.modal .variant-name { font-family: var(--mono); font-weight: 500; }
+.modal .variant-size { color: var(--muted); }
+
+/* FOOTER */
+footer { margin-top: auto; border-top: 1px solid var(--light); padding: 32px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { text-decoration: none; color: var(--muted); font-size: 13px; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 13px; color: var(--muted); }
+
+/* LOADING */
+.loading { text-align: center; padding: 60px 24px; color: var(--muted); }
+.spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--light); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">ORAPPTER</a>
+  <div class="nav-links">
+    <a href="models.html" style="font-weight:600;">Models</a>
+    <a href="docs.html">Docs</a>
+    <a href="download.html">Get Started</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
+    <a href="playground.html" class="btn btn-dark">Open Playground →</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Models</h1>
+  <p>Browse AI models you can run directly in your browser via WebGPU. No install. No server. No API key.</p>
+  <div class="search-bar">
+    <input class="search-input" id="search" type="text" placeholder="Search models..." autocomplete="off" autofocus>
+  </div>
+  <div class="filter-bar" id="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="gemma">Gemma</button>
+    <button class="filter-btn" data-filter="llama">Llama</button>
+    <button class="filter-btn" data-filter="phi">Phi</button>
+    <button class="filter-btn" data-filter="qwen">Qwen</button>
+    <button class="filter-btn" data-filter="mistral">Mistral</button>
+    <button class="filter-btn" data-filter="smollm">SmolLM</button>
+    <button class="filter-btn" data-filter="tiny">≤ 2B</button>
+    <button class="filter-btn" data-filter="small">2B–5B</button>
+    <button class="filter-btn" data-filter="medium">5B+</button>
+  </div>
+</div>
+
+<div class="model-list" id="model-list">
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Loading model library from WebLLM...</p>
+  </div>
+</div>
+
+<!-- Detail modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2 id="modal-name"></h2>
+    <p class="model-desc" id="modal-desc"></p>
+    <div class="cmd-box">
+      <code id="modal-cmd"></code>
+      <button onclick="copyText(document.getElementById('modal-cmd').textContent)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6"/></svg>
+      </button>
+    </div>
+    <div class="detail-grid" id="modal-details"></div>
+    <h3 style="font-size:15px;font-weight:600;margin:20px 0 8px;">Variants</h3>
+    <div class="variant-list" id="modal-variants"></div>
+    <div style="margin-top:24px;text-align:center;">
+      <a href="playground.html" class="btn btn-dark" style="padding:10px 28px;font-size:15px;">Open in Playground →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">ORAPPTER — Offline Rappter Runtime for Agents</span>
+    <div class="footer-links">
+      <a href="playground.html">Playground</a>
+      <a href="docs.html">Docs</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html">Home</a>
+      <a href="https://github.com/kody-w/RAR">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+// ================================================================
+// MODEL LIBRARY — loads real model list from WebLLM at runtime
+// ================================================================
+
+const MODEL_INFO = {
+  'gemma': { provider: 'Google', color: '#4285f4', desc: 'Google\'s open model family. Efficient, capable, great for on-device AI.', icon: '◆' },
+  'llama': { provider: 'Meta', color: '#0668E1', desc: 'Meta\'s open-weight LLM family. Strong general-purpose capabilities.', icon: '🦙' },
+  'phi': { provider: 'Microsoft', color: '#00a4ef', desc: 'Microsoft\'s compact models with strong reasoning for their size.', icon: 'Φ' },
+  'qwen': { provider: 'Alibaba', color: '#ff6a00', desc: 'Alibaba\'s multilingual models. Strong in code, math, and reasoning.', icon: '◎' },
+  'mistral': { provider: 'Mistral AI', color: '#f97316', desc: 'French AI lab\'s efficient models. Great for code and analysis.', icon: '✦' },
+  'smollm': { provider: 'Hugging Face', color: '#ffd21e', desc: 'Tiny models from Hugging Face. Runs on almost anything.', icon: '⚡' },
+  'stablelm': { provider: 'Stability AI', color: '#9333ea', desc: 'Stability AI\'s language models for general tasks.', icon: '◈' },
+  'tinyllama': { provider: 'Community', color: '#6b7280', desc: 'Community-built tiny Llama variant for edge devices.', icon: '🦙' },
+  'redpajama': { provider: 'Together AI', color: '#ef4444', desc: 'Open-source base models from Together AI.', icon: '▣' },
+  'snowflake': { provider: 'Snowflake', color: '#29b5e8', desc: 'Snowflake\'s Arctic embedding and language models.', icon: '❄' },
+};
+
+function getModelFamily(id) {
+  const lc = id.toLowerCase();
+  for (const fam of Object.keys(MODEL_INFO)) {
+    if (lc.includes(fam)) return fam;
+  }
+  return 'other';
+}
+
+function getInfo(family) {
+  return MODEL_INFO[family] || { provider: 'Community', color: '#6b7280', desc: 'Open-weight model available via WebLLM.', icon: '●' };
+}
+
+function estimateSize(id) {
+  const lc = id.toLowerCase();
+  // Try to extract parameter count from model ID
+  const match = lc.match(/(\d+\.?\d*)b/);
+  if (match) {
+    const b = parseFloat(match[1]);
+    // q4f16 is roughly 0.5-0.6 bytes per param → GB
+    if (lc.includes('q4f16')) return (b * 0.55).toFixed(1) + ' GB';
+    if (lc.includes('q4f32')) return (b * 0.7).toFixed(1) + ' GB';
+    return (b * 0.6).toFixed(1) + ' GB';
+  }
+  return '~1–5 GB';
+}
+
+function extractParamCount(id) {
+  const match = id.toLowerCase().match(/(\d+\.?\d*)b/);
+  return match ? parseFloat(match[1]) : 0;
+}
+
+function getQuantization(id) {
+  const lc = id.toLowerCase();
+  if (lc.includes('q4f16')) return 'q4f16';
+  if (lc.includes('q4f32')) return 'q4f32';
+  if (lc.includes('q0f16')) return 'f16';
+  if (lc.includes('q0f32')) return 'f32';
+  return 'quantized';
+}
+
+function getTags(id) {
+  const tags = [];
+  const lc = id.toLowerCase();
+  const params = extractParamCount(id);
+  if (params > 0 && params <= 2) tags.push({ label: `${params}B`, cls: '' });
+  else if (params > 2 && params <= 5) tags.push({ label: `${params}B`, cls: '' });
+  else if (params > 5) tags.push({ label: `${params}B`, cls: '' });
+  if (lc.includes('instruct') || lc.includes('-it')) tags.push({ label: 'instruct', cls: '' });
+  if (lc.includes('vision') || lc.includes('-vl')) tags.push({ label: 'vision', cls: '' });
+  if (lc.includes('code') || lc.includes('coder')) tags.push({ label: 'code', cls: '' });
+  const q = getQuantization(id);
+  tags.push({ label: q, cls: '' });
+  if (lc.includes('1k')) tags.push({ label: '1k ctx', cls: '' });
+  return tags;
+}
+
+// ── Group models by family and base ──
+function groupModels(models) {
+  const families = {};
+  for (const id of models) {
+    // Extract base name: strip quantization and MLC suffix
+    const base = id.replace(/-q\d+f\d+.*$/i, '').replace(/-MLC.*$/i, '');
+    const family = getModelFamily(id);
+    const key = base;
+    if (!families[key]) {
+      families[key] = { base, family, variants: [], bestId: id };
+    }
+    families[key].variants.push(id);
+  }
+  // Sort: gemma first, then by param count descending within each family
+  const entries = Object.values(families);
+  entries.sort((a, b) => {
+    const famOrder = { gemma: 0, llama: 1, phi: 2, qwen: 3, mistral: 4, smollm: 5 };
+    const fa = famOrder[a.family] ?? 99;
+    const fb = famOrder[b.family] ?? 99;
+    if (fa !== fb) return fa - fb;
+    return extractParamCount(b.bestId) - extractParamCount(a.bestId);
+  });
+  return entries;
+}
+
+// ── Render ──
+let allGroups = [];
+let activeFilter = 'all';
+
+function renderList(groups) {
+  const container = document.getElementById('model-list');
+  if (!groups.length) {
+    container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--muted);">No models match your search.</p>';
+    return;
+  }
+  container.innerHTML = `<p class="result-count">${groups.length} model${groups.length !== 1 ? 's' : ''} · ${groups.reduce((s,g) => s + g.variants.length, 0)} variants</p>` +
+    groups.map(g => {
+      const info = getInfo(g.family);
+      const params = extractParamCount(g.bestId);
+      const size = estimateSize(g.bestId);
+      const tags = getTags(g.bestId);
+      const variantCount = g.variants.length;
+      return `
+      <a class="model-item" href="#" onclick="openModal('${g.base}');return false;">
+        <div class="model-name">${g.base}</div>
+        <div class="model-desc">${info.desc}</div>
+        <div class="model-meta">
+          ${tags.map(t => `<span class="tag">${t.label}</span>`).join('')}
+          <span class="meta-text">${info.provider}</span>
+          <span class="meta-sep">·</span>
+          <span class="meta-text">${size}</span>
+          ${variantCount > 1 ? `<span class="meta-sep">·</span><span class="meta-text">${variantCount} variants</span>` : ''}
+        </div>
+      </a>`;
+    }).join('');
+}
+
+function applyFilters() {
+  const query = document.getElementById('search').value.toLowerCase().trim();
+  let filtered = allGroups;
+
+  if (activeFilter !== 'all') {
+    if (activeFilter === 'tiny') {
+      filtered = filtered.filter(g => { const p = extractParamCount(g.bestId); return p > 0 && p <= 2; });
+    } else if (activeFilter === 'small') {
+      filtered = filtered.filter(g => { const p = extractParamCount(g.bestId); return p > 2 && p <= 5; });
+    } else if (activeFilter === 'medium') {
+      filtered = filtered.filter(g => extractParamCount(g.bestId) > 5);
+    } else {
+      filtered = filtered.filter(g => g.family === activeFilter);
+    }
+  }
+
+  if (query) {
+    filtered = filtered.filter(g => {
+      const info = getInfo(g.family);
+      return g.base.toLowerCase().includes(query) ||
+             g.family.includes(query) ||
+             info.provider.toLowerCase().includes(query) ||
+             g.variants.some(v => v.toLowerCase().includes(query));
+    });
+  }
+
+  renderList(filtered);
+}
+
+// ── Modal ──
+function openModal(baseName) {
+  const group = allGroups.find(g => g.base === baseName);
+  if (!group) return;
+  const info = getInfo(group.family);
+  document.getElementById('modal-name').textContent = group.base;
+  document.getElementById('modal-desc').textContent = info.desc;
+  document.getElementById('modal-cmd').textContent = `pull ${group.variants[0]}`;
+
+  const params = extractParamCount(group.bestId);
+  document.getElementById('modal-details').innerHTML = `
+    <div class="detail-item"><div class="detail-label">Provider</div><div class="detail-value">${info.provider}</div></div>
+    <div class="detail-item"><div class="detail-label">Parameters</div><div class="detail-value">${params > 0 ? params + 'B' : 'Unknown'}</div></div>
+    <div class="detail-item"><div class="detail-label">Family</div><div class="detail-value" style="text-transform:capitalize;">${group.family}</div></div>
+    <div class="detail-item"><div class="detail-label">Estimated Size</div><div class="detail-value">${estimateSize(group.bestId)}</div></div>
+  `;
+
+  document.getElementById('modal-variants').innerHTML = group.variants.map(v => `
+    <div class="variant-item">
+      <span class="variant-name">${v}</span>
+      <span class="variant-size">${getQuantization(v)} · ${estimateSize(v)}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.copyText = function(text) { navigator.clipboard.writeText(text).catch(() => {}); };
+
+// Close on overlay click
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── Filters ──
+document.getElementById('filters').addEventListener('click', (e) => {
+  if (!e.target.classList.contains('filter-btn')) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeFilter = e.target.dataset.filter;
+  applyFilters();
+});
+
+// ── Search ──
+document.getElementById('search').addEventListener('input', () => applyFilters());
+
+// ── Boot: load models from WebLLM ──
+async function boot() {
+  try {
+    const webllm = await import('https://esm.run/@mlc-ai/web-llm');
+    const cfg = webllm.prebuiltAppConfig || webllm.default?.prebuiltAppConfig;
+    if (!cfg || !cfg.model_list) throw new Error('No model list found');
+    const models = cfg.model_list.map(m => m.model_id || m.model || m.local_id || '').filter(Boolean);
+    allGroups = groupModels(models);
+    renderList(allGroups);
+  } catch(e) {
+    document.getElementById('model-list').innerHTML = `
+      <div style="text-align:center;padding:60px 24px;">
+        <p style="color:var(--muted);margin-bottom:16px;">Could not load model list from WebLLM.</p>
+        <p style="font-size:14px;color:#d1d5db;">${e.message}</p>
+        <p style="margin-top:24px;"><a href="playground.html" class="btn btn-dark">Open Playground to browse models →</a></p>
+      </div>`;
+  }
+}
+
+boot();
+</script>
+</body>
+</html>

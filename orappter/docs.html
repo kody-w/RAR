@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ORAPPTER — Documentation</title>
+<meta name="description" content="ORAPPTER documentation. Commands, LisPy reference, AI API, Agent Cards, architecture, and FAQ.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff; --bg: #fafafa; --text: #111111; --muted: #6b7280; --light: #e5e7eb;
+  --accent: #16a34a; --accent-hover: #15803d; --accent-bg: rgba(22,163,74,0.07);
+  --dark: #18181b; --dark-hover: #000000;
+  --radius: 9999px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 40; background: var(--white); border-bottom: 1px solid transparent; display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; transition: border-color 0.2s; }
+nav.scrolled { border-color: var(--light); }
+.nav-brand { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 16px; }
+.nav-links a:hover { text-decoration: underline; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-size: 16px; font-weight: 500; text-decoration: none; padding: 8px 20px; transition: background 0.15s; cursor: pointer; border: none; }
+.btn-dark { background: var(--dark); color: white; }
+.btn-dark:hover { background: var(--dark-hover); }
+.btn-accent { background: var(--accent); color: white; }
+.btn-accent:hover { background: var(--accent-hover); }
+.btn-outline { background: white; border: 1px solid var(--light); color: var(--text); }
+.btn-outline:hover { background: var(--bg); }
+.btn-lg { padding: 14px 32px; font-size: 18px; }
+.nav-mobile { display: none; }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile { display: block; }
+}
+
+/* ── DOCS LAYOUT ── */
+.docs-layout { display: flex; max-width: 1200px; margin: 0 auto; width: 100%; flex: 1; }
+
+/* Sidebar */
+.sidebar { width: 240px; flex-shrink: 0; padding: 32px 0 32px 24px; position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto; border-right: 1px solid var(--light); }
+.sidebar-section { margin-bottom: 24px; }
+.sidebar-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; padding-left: 12px; }
+.sidebar a { display: block; text-decoration: none; color: var(--muted); font-size: 14px; padding: 5px 12px; border-radius: 6px; transition: all 0.1s; line-height: 1.5; }
+.sidebar a:hover { color: var(--text); background: var(--bg); }
+.sidebar a.active { color: var(--accent); font-weight: 500; background: var(--accent-bg); }
+
+/* Mobile sidebar toggle */
+.sidebar-toggle { display: none; position: fixed; bottom: 24px; right: 24px; z-index: 50; width: 48px; height: 48px; border-radius: 50%; background: var(--dark); color: white; border: none; cursor: pointer; font-size: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+
+/* Main content */
+.docs-main { flex: 1; min-width: 0; padding: 40px 48px 80px; max-width: 800px; }
+
+/* ── TYPOGRAPHY ── */
+.docs-main h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.3px; }
+.docs-main h2 { font-size: 24px; font-weight: 600; margin: 56px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--light); letter-spacing: -0.2px; }
+.docs-main h2:first-of-type { margin-top: 32px; }
+.docs-main h3 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
+.docs-main p { font-size: 16px; color: var(--text); margin-bottom: 16px; line-height: 1.7; }
+.docs-main .lead { font-size: 18px; color: var(--muted); margin-bottom: 32px; }
+.docs-main ul, .docs-main ol { margin-bottom: 16px; padding-left: 24px; }
+.docs-main li { font-size: 16px; margin-bottom: 8px; line-height: 1.6; }
+.docs-main a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.docs-main a:hover { color: var(--accent-hover); }
+.docs-main strong { font-weight: 600; }
+
+/* Inline code */
+.docs-main code {
+  font-family: var(--mono);
+  font-size: 14px;
+  background: var(--bg);
+  border: 1px solid var(--light);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Code blocks */
+.code-block {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--light);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.code-block pre {
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--text);
+}
+.code-block pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+}
+.code-block .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--white);
+  border: 1px solid var(--light);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: var(--font);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.code-block:hover .copy-btn { opacity: 1; }
+.code-block .copy-btn:hover { color: var(--text); background: var(--bg); }
+
+/* Command reference table */
+.cmd-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 15px; }
+.cmd-table th { text-align: left; padding: 10px 16px; font-weight: 600; border-bottom: 2px solid var(--light); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+.cmd-table td { padding: 10px 16px; border-bottom: 1px solid var(--light); vertical-align: top; }
+.cmd-table td:first-child { font-family: var(--mono); font-size: 14px; white-space: nowrap; font-weight: 500; }
+.cmd-table tr:hover { background: var(--bg); }
+
+/* Info callout */
+.callout {
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+.callout code { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.2); }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--light); padding: 16px 0; }
+.faq-q { font-weight: 600; font-size: 16px; margin-bottom: 6px; cursor: default; }
+.faq-a { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+/* Separator */
+.docs-divider { border: none; border-top: 1px solid var(--light); margin: 48px 0; }
+
+/* ── FOOTER ── */
+footer { margin-top: auto; border-top: 1px solid var(--light); padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { text-decoration: none; color: var(--muted); font-size: 14px; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 14px; color: var(--muted); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .docs-main { padding: 32px 24px 60px; }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; position: fixed; top: 0; left: 0; width: 280px; height: 100vh; z-index: 50; background: var(--white); border-right: 1px solid var(--light); padding-top: 64px; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+  .sidebar.open { display: block; }
+  .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 45; }
+  .sidebar-overlay.open { display: block; }
+  .docs-main { padding: 24px 20px 60px; }
+  .docs-main h1 { font-size: 26px; }
+  .docs-main h2 { font-size: 20px; }
+  .cmd-table td:first-child { white-space: normal; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">ORAPPTER</a>
+  <div class="nav-links">
+    <a href="models.html">Models</a>
+    <a href="docs.html" style="font-weight:600;">Docs</a>
+    <a href="download.html">Get Started</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
+    <a href="playground.html" class="btn btn-dark">Open Playground →</a>
+  </div>
+  <a href="playground.html" class="btn btn-dark nav-mobile">Open Playground</a>
+</nav>
+
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="docs-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Getting Started</div>
+      <a href="#getting-started">What is ORAPPTER</a>
+      <a href="#browser-requirements">Browser Requirements</a>
+      <a href="#quick-start">Quick Start</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Reference</div>
+      <a href="#commands">Commands</a>
+      <a href="#chat-commands">Chat Commands</a>
+      <a href="#lispy">LisPy Language</a>
+      <a href="#lispy-builtins">LisPy Builtins</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">AI &amp; Agents</div>
+      <a href="#ai-api">AI API</a>
+      <a href="#knowledge-base">Knowledge Base</a>
+      <a href="#agent-cards">Agent Cards</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Internals</div>
+      <a href="#architecture">Architecture</a>
+      <a href="#offline-layers">Offline Layers</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="docs-main">
+
+    <h1>Documentation</h1>
+    <p class="lead">Everything you need to run AI models, write LisPy programs, and build agent workflows — entirely in your browser.</p>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- GETTING STARTED                         -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="getting-started">What is ORAPPTER</h2>
+    <p>ORAPPTER (<strong>Offline Rappter Runtime</strong>) is a local-first AI runtime that runs entirely in your browser. It uses <strong>WebGPU</strong> to execute language models on your GPU — no server, no API key, no cloud, no install.</p>
+    <p>It provides an Ollama-style command interface, a Lisp dialect called <strong>LisPy</strong> for scripting, and a full agent card system for the <a href="https://github.com/kody-w/CommunityRAPP">Rappter</a> ecosystem.</p>
+
+    <div class="callout">
+      <strong>Zero install.</strong> Open <code>playground.html</code> in Chrome or Edge. Pull a model. Start chatting. That's it.
+    </div>
+
+    <h3 id="browser-requirements">Browser Requirements</h3>
+    <ul>
+      <li><strong>Chrome 113+</strong> or <strong>Edge 113+</strong> (WebGPU required)</li>
+      <li>A GPU with at least 4 GB VRAM for small models (1B–4B)</li>
+      <li>8 GB+ VRAM recommended for 7B+ models</li>
+      <li>Firefox and Safari do not yet support WebGPU</li>
+    </ul>
+
+    <h3 id="quick-start">Quick Start</h3>
+    <p>Three steps to your first conversation:</p>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># 1. Open the playground
+open playground.html
+
+# 2. Pull a model
+pull gemma4
+
+# 3. Start chatting
+run</code></pre>
+    </div>
+
+    <p>Models are cached in IndexedDB. After the first pull, subsequent loads are instant — even offline.</p>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- COMMANDS REFERENCE                      -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="commands">Commands Reference</h2>
+    <p>ORAPPTER uses an Ollama-style command interface. Type commands directly into the playground prompt.</p>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Command</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>pull &lt;model&gt;</td><td>Download and cache a model in IndexedDB. Example: <code>pull gemma4</code></td></tr>
+        <tr><td>run [model]</td><td>Start chatting with the loaded model. Streams responses token-by-token. Optionally specify a model name to pull and run in one step.</td></tr>
+        <tr><td>models</td><td>List all available models with sizes and parameter counts.</td></tr>
+        <tr><td>list</td><td>Alias for <code>models</code>.</td></tr>
+        <tr><td>show &lt;model&gt;</td><td>Display model details — family, parameters, VRAM, quantization.</td></tr>
+        <tr><td>unload</td><td>Unload the current model from GPU memory.</td></tr>
+        <tr><td>status</td><td>Show runtime status — loaded model, GPU info, memory usage.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="chat-commands">Chat Mode Commands</h3>
+    <p>While in a conversation (after <code>run</code>), these slash commands are available:</p>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Command</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>/bye</td><td>Exit chat mode and return to the command prompt.</td></tr>
+        <tr><td>/clear</td><td>Clear the conversation history and start fresh.</td></tr>
+        <tr><td>/history</td><td>Show the full conversation history for the current session.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Examples</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code># Pull and run in one step
+run gemma4
+
+# Check what's loaded
+status
+
+# List available models
+models
+
+# View details about a model
+show Llama-3.1-8B-q4f16_1-MLC
+
+# Free GPU memory
+unload</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- LISPY REFERENCE                         -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="lispy">LisPy Language</h2>
+    <p>LisPy is a Lisp dialect that runs inside the ORAPPTER browser VM. It gives you a programmable scripting layer on top of the AI runtime — define variables, write functions, manipulate data, and call AI models from code.</p>
+
+    <h3>Basic Syntax</h3>
+    <p>Everything is an expression wrapped in parentheses. The first element is the operator, the rest are arguments.</p>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; Arithmetic
+(+ 1 2 3)          ; → 6
+(* 4 5)             ; → 20
+(- 10 3 2)          ; → 5
+
+;; Variables
+(define x 42)
+(define name "ORAPPTER")
+
+;; Functions
+(define square (lambda (x) (* x x)))
+(square 7)          ; → 49
+
+;; Conditionals
+(if (> x 10) "big" "small")
+
+;; Let bindings
+(let ((a 3) (b 4))
+  (+ (* a a) (* b b)))  ; → 25</code></pre>
+    </div>
+
+    <h3>Data Types</h3>
+    <ul>
+      <li><strong>Numbers</strong> — integers and floats: <code>42</code>, <code>3.14</code></li>
+      <li><strong>Strings</strong> — double-quoted: <code>"hello world"</code></li>
+      <li><strong>Booleans</strong> — <code>#t</code> (true), <code>#f</code> (false)</li>
+      <li><strong>Lists</strong> — <code>(list 1 2 3)</code> or quoted: <code>'(1 2 3)</code></li>
+      <li><strong>Dicts</strong> — key-value maps: <code>(dict "name" "Ada" "age" 36)</code></li>
+      <li><strong>nil</strong> — null / empty</li>
+    </ul>
+
+    <h3 id="lispy-builtins">Core Builtins</h3>
+
+    <p><strong>Arithmetic:</strong> <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>abs</code> <code>min</code> <code>max</code> <code>floor</code> <code>ceil</code> <code>round</code></p>
+
+    <p><strong>Comparison:</strong> <code>=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> <code>not</code> <code>and</code> <code>or</code></p>
+
+    <p><strong>Strings:</strong> <code>string-append</code> <code>string-length</code> <code>substring</code> <code>string-upcase</code> <code>string-downcase</code> <code>string-split</code> <code>string-join</code></p>
+
+    <p><strong>Lists:</strong> <code>list</code> <code>car</code> <code>cdr</code> <code>cons</code> <code>length</code> <code>map</code> <code>filter</code> <code>reduce</code> <code>append</code> <code>reverse</code> <code>nth</code></p>
+
+    <p><strong>Dicts:</strong> <code>dict</code> <code>dict-get</code> <code>dict-set</code> <code>dict-keys</code> <code>dict-values</code> <code>dict-has?</code></p>
+
+    <p><strong>I/O:</strong> <code>print</code> <code>display</code> <code>newline</code></p>
+
+    <p><strong>Control:</strong> <code>if</code> <code>cond</code> <code>begin</code> <code>let</code> <code>define</code> <code>lambda</code> <code>apply</code> <code>eval</code> <code>quote</code></p>
+
+    <h3>Examples</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; Map and filter
+(define nums (list 1 2 3 4 5 6 7 8 9 10))
+(filter (lambda (n) (= (% n 2) 0)) nums)
+; → (2 4 6 8 10)
+
+;; String operations
+(string-append "Hello, " "world!")
+; → "Hello, world!"
+
+;; Dict usage
+(define user (dict "name" "Kody" "role" "builder"))
+(dict-get user "name")
+; → "Kody"
+
+;; Higher-order functions
+(define (compose f g) (lambda (x) (f (g x))))
+(define add1-then-square (compose square (lambda (x) (+ x 1))))
+(add1-then-square 4)
+; → 25</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- AI API                                  -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="ai-api">AI API</h2>
+    <p>Call the loaded language model directly from LisPy. All AI functions work with whichever model is currently loaded via <code>run</code>.</p>
+
+    <h3>Generation</h3>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Function</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(generate prompt)</td><td>One-shot text generation. Returns the model's response as a string.</td></tr>
+        <tr><td>(smart-generate prompt)</td><td>Auto-fallback generation. Uses the local LLM if loaded, falls back to templates if offline.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; One-shot generation
+(generate "Explain WebGPU in one sentence.")
+; → "WebGPU is a modern graphics API..."
+
+;; Smart generation with fallback
+(smart-generate "What is RAPP?")
+; → Uses LLM if loaded, otherwise template response</code></pre>
+    </div>
+
+    <h3>Conversations</h3>
+    <p>Multi-turn conversations with persistent history. Each conversation has an ID and an optional system prompt.</p>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Function</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(conversation-new id system)</td><td>Start a new conversation. <code>id</code> is a string identifier, <code>system</code> is the system prompt.</td></tr>
+        <tr><td>(conversation-say id message)</td><td>Send a message in an existing conversation. Returns the model's response.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; Start a conversation with a system prompt
+(conversation-new "tutor" "You are a patient programming tutor.")
+
+;; Chat with history
+(conversation-say "tutor" "What is recursion?")
+; → "Recursion is when a function calls itself..."
+
+(conversation-say "tutor" "Give me an example in Python.")
+; → "Sure! Here's a factorial function..."</code></pre>
+    </div>
+
+    <h3 id="knowledge-base">Knowledge Base</h3>
+    <p>Store and retrieve knowledge locally. Data is persisted in the browser and available across sessions.</p>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Function</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(kb-store key value)</td><td>Store a key-value pair in the local knowledge base.</td></tr>
+        <tr><td>(kb-query question n)</td><td>Query the knowledge base. Returns the top <code>n</code> matching entries.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; Store knowledge
+(kb-store "project-goal" "Build a local-first AI agent runtime.")
+(kb-store "stack" "WebGPU + LisPy + IndexedDB")
+
+;; Query it later
+(kb-query "What is the tech stack?" 3)
+; → Returns top 3 matching entries</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- AGENT CARDS                             -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="agent-cards">Agent Cards</h2>
+    <p>Agent Cards are trading-card-style identities for AI agents in the Rappter ecosystem. Each card represents a registered agent with a name, personality, capabilities, and stats. You can look up cards, activate them as AI personas, and even pit them against each other.</p>
+
+    <table class="cmd-table">
+      <thead>
+        <tr><th>Function</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>(resolve-card name)</td><td>Look up a card from the registry. Example: <code>(resolve-card "@kody/workbench_agent")</code></td></tr>
+        <tr><td>(activate-card name)</td><td>Activate a card as the AI's current persona. The model adopts the agent's personality and system prompt.</td></tr>
+        <tr><td>(card-battle a b question)</td><td>Two cards debate a question. Each answers from their persona, then a judge picks the winner.</td></tr>
+        <tr><td>(search-agents query)</td><td>Search the agent registry by keyword. Returns matching cards.</td></tr>
+        <tr><td>(binder-status)</td><td>Show registry statistics — total agents, categories, publishers.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>;; Look up a card
+(resolve-card "@borg/cardsmith_agent")
+
+;; Activate as persona
+(activate-card "@kody/memory_agent")
+;; Now the AI responds as the Memory Agent
+
+;; Card battle
+(card-battle
+  "@kody/workbench_agent"
+  "@borg/cardsmith_agent"
+  "What's the best way to organize agent code?")
+
+;; Search the registry
+(search-agents "productivity")
+
+;; Registry stats
+(binder-status)
+; → { agents: 142, publishers: 5, categories: 5 }</code></pre>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ARCHITECTURE                            -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="architecture">Architecture</h2>
+    <p>ORAPPTER is a layered runtime that runs entirely in the browser. No backend. No build step. One HTML file.</p>
+
+    <div class="code-block">
+      <pre><code>┌─────────────────────────────────────────┐
+│              Your Code / Chat           │
+├─────────────────────────────────────────┤
+│            LisPy VM (scripting)         │
+├─────────────────────────────────────────┤
+│          AI API (generate, converse)    │
+├─────────────────────────────────────────┤
+│    WebLLM (model loading + inference)   │
+├─────────────────────────────────────────┤
+│       WebGPU (hardware acceleration)    │
+├─────────────────────────────────────────┤
+│     IndexedDB (model cache + state)     │
+└─────────────────────────────────────────┘</code></pre>
+    </div>
+
+    <p><strong>WebLLM</strong> handles model loading and token generation via WebGPU compute shaders. Models are downloaded once and cached in <strong>IndexedDB</strong>, so they persist across sessions and work offline.</p>
+    <p>The <strong>LisPy VM</strong> provides a programmable scripting layer. It can call any AI API function, manipulate data, and orchestrate multi-step workflows.</p>
+    <p>The <strong>same API surface</strong> works in both the browser (WebLLM backend) and CLI environments (Ollama backend), so code is portable.</p>
+
+    <h3 id="offline-layers">Offline Layers</h3>
+    <p>ORAPPTER has three fallback layers to ensure it always works, even without a GPU or network:</p>
+
+    <ul>
+      <li><strong>Layer 2 — Local LLM:</strong> Full model inference via WebGPU. Best quality. Requires a cached model and compatible GPU.</li>
+      <li><strong>Layer 1 — Templates:</strong> Rule-based response templates. No GPU needed. Provides structured answers for common queries.</li>
+      <li><strong>Layer 0 — Card Engine:</strong> Pure card resolution and agent metadata. Works with zero resources. Always available.</li>
+    </ul>
+
+    <p>The <code>smart-generate</code> function automatically walks down these layers. If the LLM is loaded, it uses Layer 2. If not, it falls back to Layer 1, then Layer 0.</p>
+
+    <h3>Model Caching</h3>
+    <p>When you <code>pull</code> a model, ORAPPTER downloads the model weights and stores them in IndexedDB. Key details:</p>
+    <ul>
+      <li>Models are stored per-origin in the browser's IndexedDB</li>
+      <li>Cached models load instantly on subsequent visits</li>
+      <li>Use <code>unload</code> to free GPU memory without deleting the cache</li>
+      <li>Storage is persistent — survives tab closes and browser restarts</li>
+    </ul>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FAQ                                     -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <h2 id="faq">FAQ</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What browsers are supported?</div>
+      <div class="faq-a">Chrome 113+ and Edge 113+ with WebGPU enabled. Firefox and Safari do not yet support WebGPU. On mobile, Chrome for Android works on devices with sufficient GPU memory.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How much disk space do models use?</div>
+      <div class="faq-a">It varies by model and quantization. Small models (1B–2B) are typically 0.5–1.5 GB. Medium models (3B–4B) are 2–3 GB. Larger models (7B–8B) can be 4–6 GB. All stored in IndexedDB.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I use my own models?</div>
+      <div class="faq-a">ORAPPTER supports any model compiled for WebLLM's MLC format. Check the <a href="models.html">models page</a> for the full list of 130+ supported models, or compile your own with the MLC-LLM toolchain.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is my data sent anywhere?</div>
+      <div class="faq-a">No. All inference runs locally on your GPU. No data leaves your browser. No telemetry. No analytics. The only network request is the initial model download.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How does this compare to Ollama?</div>
+      <div class="faq-a">Ollama runs models natively via llama.cpp and requires a local install. ORAPPTER runs in the browser via WebGPU — no install, but models run slightly slower and are limited by browser GPU access. Both use the same command-style interface. ORAPPTER adds LisPy scripting and Agent Cards.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens if I don't have a GPU?</div>
+      <div class="faq-a">The playground will still load, but model inference requires WebGPU (a hardware-accelerated GPU). Without it, you can still use the LisPy VM, card engine (Layer 0), and template responses (Layer 1).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I use ORAPPTER offline?</div>
+      <div class="faq-a">Yes — once you've pulled a model, everything works offline. Models are cached in IndexedDB, and the runtime is a single HTML file with no external dependencies.</div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Mobile sidebar toggle button -->
+<button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">ORAPPTER — Offline Rappter Runtime for Agents</span>
+    <div class="footer-links">
+      <a href="playground.html">Playground</a>
+      <a href="models.html">Models</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html">Home</a>
+      <a href="https://github.com/kody-w/RAR">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll border
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 2);
+}, { passive: true });
+
+// Sidebar toggle (mobile)
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+
+// Close sidebar when clicking a link (mobile)
+document.querySelectorAll('.sidebar a').forEach(a => {
+  a.addEventListener('click', () => {
+    if (window.innerWidth <= 768) toggleSidebar();
+  });
+});
+
+// Active sidebar link on scroll
+const sections = document.querySelectorAll('.docs-main h2[id], .docs-main h3[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+
+function updateActive() {
+  let current = '';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= 80) current = s.id;
+  });
+  sidebarLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+
+// Copy code block
+function copyCode(btn) {
+  const code = btn.parentElement.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+</script>
+</body>
+</html>

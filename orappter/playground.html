@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORAPPTER Playground — Local-First AI Runtime</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e14; --bg-alt: #0d1117; --text: #c9d1d9; --text-muted: #6e7681;
+  --accent: #3fb950; --accent2: #58a6ff; --err: #f85149; --warn: #d29922;
+  --font: 'SF Mono','Cascadia Code','Fira Code',Consolas,'Liberation Mono',monospace;
+}
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 13px; }
+#terminal { display: flex; flex-direction: column; height: 100%; }
+#output { flex: 1; overflow-y: auto; padding: 12px 16px; white-space: pre-wrap; word-wrap: break-word; line-height: 1.5; }
+#output::-webkit-scrollbar { width: 6px; }
+#output::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+#input-wrap { display: flex; align-items: center; padding: 6px 16px 10px; border-top: 1px solid #21262d; background: var(--bg-alt); flex-shrink: 0; }
+#prompt { color: var(--accent); font-weight: 700; white-space: nowrap; margin-right: 8px; }
+#input { flex: 1; background: none; border: none; outline: none; color: var(--text); font-family: var(--font); font-size: 13px; caret-color: var(--accent); }
+#status { display: flex; gap: 16px; padding: 4px 16px; background: #161b22; border-top: 1px solid #21262d; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+.s-ok { color: var(--accent); } .s-warn { color: var(--warn); } .s-err { color: var(--err); }
+.line { min-height: 1em; }
+.line-cmd { color: var(--text-muted); }
+.line-result { color: var(--accent2); }
+.line-err { color: var(--err); }
+.line-warn { color: var(--warn); }
+.line-sys { color: var(--accent); }
+.line-info { color: var(--text-muted); font-style: italic; }
+.line-stream { color: var(--text); }
+.line-progress { color: var(--warn); }
+.line-boot { color: var(--accent); }
+</style>
+</head>
+<body>
+<div id="terminal">
+  <div id="output"></div>
+  <div id="input-wrap">
+    <span id="prompt">orappter&gt; </span>
+    <input id="input" type="text" autofocus spellcheck="false" autocomplete="off">
+  </div>
+  <div id="status">
+    <span id="s-model">model: none</span>
+    <span id="s-gpu"></span>
+    <span id="s-vm">vm: lispy</span>
+  </div>
+</div>
+
+<script type="module">
+/* ================================================================
+   ORAPPTER PLAYGROUND v1.0.0
+   Local-first AI runtime — like Ollama, in your browser.
+   All runtime logic is LisPy. WebLLM is the inference engine.
+   ================================================================ */
+
+// ================================================================
+// SECTION 0: Terminal renderer (needed first for boot messages)
+// ================================================================
+const outputEl = document.getElementById('output');
+const inputEl  = document.getElementById('input');
+const promptEl = document.getElementById('prompt');
+
+function print(text, cls) {
+  const line = document.createElement('div');
+  line.className = 'line' + (cls ? ' line-' + cls : '');
+  line.textContent = String(text);
+  outputEl.appendChild(line);
+  outputEl.scrollTop = outputEl.scrollHeight;
+}
+
+let _progressEl = null;
+function printProgress(text) {
+  if (!_progressEl) {
+    _progressEl = document.createElement('div');
+    _progressEl.className = 'line line-progress';
+    outputEl.appendChild(_progressEl);
+  }
+  _progressEl.textContent = String(text);
+  outputEl.scrollTop = outputEl.scrollHeight;
+}
+function clearProgress() { _progressEl = null; }
+
+let _streamEl = null;
+function streamToken(tok) {
+  if (!_streamEl) {
+    _streamEl = document.createElement('div');
+    _streamEl.className = 'line line-stream';
+    outputEl.appendChild(_streamEl);
+  }
+  _streamEl.textContent += tok;
+  outputEl.scrollTop = outputEl.scrollHeight;
+}
+function endStream() { _streamEl = null; }
+
+function setStatus(id, text, cls) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = text; el.className = cls || ''; }
+}
+
+// ================================================================
+// SECTION 1: WebLLM — in-browser inference engine
+// ================================================================
+let webllm = null;
+let engine = null;
+let availableModels = [];
+let currentModelId = null;
+
+// Aliases are populated dynamically from the real model list at boot
+let MODEL_ALIASES = {};
+let DEFAULT_MODEL_ID = null;
+
+function buildAliases() {
+  MODEL_ALIASES = {};
+  const lower = availableModels.map(m => ({ id: m, lc: m.toLowerCase() }));
+
+  // Helper: find first model matching a pattern
+  const find = (pattern) => {
+    const m = lower.find(x => x.lc.includes(pattern));
+    return m ? m.id : null;
+  };
+  // Helper: find smallest quantized variant preferring q4f16
+  const findSmall = (family) => {
+    const candidates = lower.filter(x => x.lc.includes(family) && x.lc.includes('q4f16'));
+    if (candidates.length) return candidates[0].id;
+    const any = lower.find(x => x.lc.includes(family));
+    return any ? any.id : null;
+  };
+
+  // Gemma 4 (priority — user wants this)
+  const g4 = find('gemma-4') || find('gemma4');
+  if (g4) { MODEL_ALIASES['gemma4'] = g4; MODEL_ALIASES['gemma'] = g4; }
+  // Specific Gemma 4 variants
+  const g4e2b = lower.find(x => x.lc.includes('gemma') && x.lc.includes('4') && x.lc.includes('e2b'));
+  if (g4e2b) MODEL_ALIASES['gemma4-e2b'] = g4e2b.id;
+  const g4e4b = lower.find(x => x.lc.includes('gemma') && x.lc.includes('4') && x.lc.includes('e4b'));
+  if (g4e4b) MODEL_ALIASES['gemma4-e4b'] = g4e4b.id;
+
+  // Gemma 3
+  const g3 = findSmall('gemma-3') || findSmall('gemma3');
+  if (g3) MODEL_ALIASES['gemma3'] = g3;
+
+  // Gemma 2
+  const g2 = findSmall('gemma-2-2b');
+  if (g2) { MODEL_ALIASES['gemma2'] = g2; MODEL_ALIASES['gemma2-2b'] = g2; }
+
+  // If no gemma4 alias yet, try any gemma
+  if (!MODEL_ALIASES['gemma4'] && !MODEL_ALIASES['gemma']) {
+    const anyGemma = findSmall('gemma');
+    if (anyGemma) { MODEL_ALIASES['gemma4'] = anyGemma; MODEL_ALIASES['gemma'] = anyGemma; }
+  }
+
+  // Llama
+  const llama3b = find('llama-3.2-3b') || find('llama3.2-3b');
+  if (llama3b) { MODEL_ALIASES['llama'] = llama3b; MODEL_ALIASES['llama-3b'] = llama3b; }
+  const llama1b = find('llama-3.2-1b') || find('llama3.2-1b');
+  if (llama1b) MODEL_ALIASES['llama-1b'] = llama1b;
+
+  // Phi
+  const phi = findSmall('phi-3') || findSmall('phi3');
+  if (phi) { MODEL_ALIASES['phi'] = phi; MODEL_ALIASES['phi-mini'] = phi; }
+
+  // SmolLM
+  const smol = findSmall('smollm');
+  if (smol) MODEL_ALIASES['smollm'] = smol;
+
+  // Qwen
+  const qwen = findSmall('qwen2.5-1.5b') || findSmall('qwen');
+  if (qwen) MODEL_ALIASES['qwen'] = qwen;
+
+  // Set default: prefer gemma4, fall back through the list
+  DEFAULT_MODEL_ID = MODEL_ALIASES['gemma4'] || MODEL_ALIASES['gemma3'] || MODEL_ALIASES['gemma2'] || MODEL_ALIASES['gemma'] || MODEL_ALIASES['llama'] || MODEL_ALIASES['smollm'] || availableModels[0] || null;
+}
+
+function resolveModelId(name) {
+  if (!name) return DEFAULT_MODEL_ID;
+  const n = name.trim();
+  // Check aliases first
+  if (MODEL_ALIASES[n]) return MODEL_ALIASES[n];
+  // Exact match
+  if (availableModels.includes(n)) return n;
+  // Case-insensitive exact match
+  const exact = availableModels.find(m => m.toLowerCase() === n.toLowerCase());
+  if (exact) return exact;
+  // Fuzzy: find models containing the search term
+  const lower = n.toLowerCase();
+  const matches = availableModels.filter(m => m.toLowerCase().includes(lower));
+  // Prefer q4f16 quantized variants (smaller, faster)
+  const q4 = matches.find(m => m.toLowerCase().includes('q4f16'));
+  if (q4) return q4;
+  if (matches.length) return matches[0];
+  return n; // Return as-is, will error with a helpful message
+}
+
+async function pullModel(modelId) {
+  if (!webllm) throw new Error('WebLLM not available — cannot pull models');
+  const id = resolveModelId(modelId);
+  if (id !== modelId) print(`  Resolved '${modelId}' → ${id}`, 'info');
+  print(`Pulling ${id}...`, 'sys');
+  try {
+    engine = await webllm.CreateMLCEngine(id, {
+      initProgressCallback: (p) => {
+        const pct = p.progress !== undefined ? Math.round(p.progress * 100) : '?';
+        printProgress(`  ${p.text || 'Loading...'} [${pct}%]`);
+      }
+    });
+    clearProgress();
+    currentModelId = id;
+    setStatus('s-model', `model: ${id}`, 's-ok');
+    return id;
+  } catch(e) {
+    clearProgress();
+    throw new Error(`Failed to pull ${id}: ${e.message}`);
+  }
+}
+
+async function generateStream(messages) {
+  if (!engine) throw new Error('No model loaded. Try: pull gemma4');
+  const stream = await engine.chat.completions.create({
+    messages,
+    stream: true,
+    temperature: 0.7,
+    max_tokens: 2048,
+  });
+  let full = '';
+  for await (const chunk of stream) {
+    const delta = chunk.choices?.[0]?.delta?.content;
+    if (delta) { streamToken(delta); full += delta; }
+  }
+  endStream();
+  return full;
+}
+
+async function generateOnce(messages) {
+  if (!engine) throw new Error('No model loaded. Try: pull gemma4');
+  const reply = await engine.chat.completions.create({ messages, temperature: 0.7, max_tokens: 2048 });
+  return reply.choices?.[0]?.message?.content || '';
+}
+
+async function getEmbedding(text) {
+  if (!engine) return null;
+  try {
+    const result = await engine.embeddings.create({ input: text, model: currentModelId });
+    return result?.data?.[0]?.embedding || null;
+  } catch { return null; }
+}
+
+// ================================================================
+// SECTION 2: LisPy VM — Async-capable Lisp interpreter
+// ================================================================
+const NIL = Object.freeze({ _type: 'nil', toString: () => '()' });
+function isNil(v) { return v === NIL || v === null || v === undefined || (v && v._type === 'nil'); }
+
+class LispError extends Error { constructor(m) { super(m); this.name = 'LispError'; } }
+class LispSyntaxError extends LispError { constructor(m) { super(m); this.name = 'LispSyntaxError'; } }
+class LispSymbol { constructor(n) { this._name = n; } toString() { return this._name; } }
+class LispLambda {
+  constructor(params, body, env, name) { this.params = params; this.body = body; this.env = env; this.name = name || '<lambda>'; }
+  toString() { return `#<lambda:${this.name}>`; }
+}
+class LispMacro {
+  constructor(params, body, env, name) { this.params = params; this.body = body; this.env = env; this.name = name || '<macro>'; }
+  toString() { return `#<macro:${this.name}>`; }
+}
+class Env {
+  constructor(params, args, outer) {
+    this._b = {};
+    this.outer = outer || null;
+    if (params !== undefined) {
+      if (typeof params === 'string') { this._b[params] = Array.from(args || []); }
+      else {
+        const p = params || [], a = args || [];
+        // Rest params: last param prefixed with '&' captures remaining args
+        if (p.length > 0 && typeof p[p.length-1] === 'string' && p[p.length-1].startsWith('&')) {
+          const restName = p[p.length-1].slice(1);
+          const regular = p.slice(0, -1);
+          if (a.length < regular.length) throw new LispError(`expected at least ${regular.length} args, got ${a.length}`);
+          for (let i = 0; i < regular.length; i++) this._b[regular[i]] = a[i];
+          this._b[restName] = a.slice(regular.length);
+        } else {
+          if (p.length !== a.length) throw new LispError(`expected ${p.length} args, got ${a.length}`);
+          for (let i = 0; i < p.length; i++) this._b[p[i]] = a[i];
+        }
+      }
+    }
+  }
+  get(n) { if (n in this._b) return this._b[n]; if (this.outer) return this.outer.get(n); throw new LispError(`unbound: ${n}`); }
+  set(n, v) { this._b[n] = v; }
+  find(n) { if (n in this._b) return this; if (this.outer) return this.outer.find(n); throw new LispError(`unbound: ${n}`); }
+  has(n) { if (n in this._b) return true; if (this.outer) return this.outer.has(n); return false; }
+}
+
+function tokenize(src) {
+  const t = []; let i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (' \t\n\r'.includes(c)) { i++; continue; }
+    if (c === ';') { while (i < src.length && src[i] !== '\n') i++; continue; }
+    if ('()[]\'`,'.includes(c)) { t.push(c); i++; continue; }
+    if (c === '"') {
+      let j = i + 1;
+      while (j < src.length) { if (src[j] === '\\' && j+1 < src.length) { j += 2; continue; } if (src[j] === '"') break; j++; }
+      t.push(src.slice(i, j+1)); i = j+1; continue;
+    }
+    let j = i;
+    while (j < src.length && !' \t\n\r()[]";,'.includes(src[j])) j++;
+    t.push(src.slice(i, j)); i = j;
+  }
+  return t;
+}
+
+function parse(src) {
+  const tokens = tokenize(src); const exprs = []; let pos = 0;
+  function readExpr() {
+    if (pos >= tokens.length) throw new LispSyntaxError('unexpected end of input');
+    const tok = tokens[pos];
+    if (tok === "'") { pos++; return [new LispSymbol('quote'), readExpr()]; }
+    if (tok === '`') { pos++; return [new LispSymbol('quasiquote'), readExpr()]; }
+    if (tok === ',') { pos++; return [new LispSymbol('unquote'), readExpr()]; }
+    if (tok === '(' || tok === '[') {
+      pos++; const close = tok === '(' ? ')' : ']'; const lst = [];
+      while (pos < tokens.length && tokens[pos] !== close) lst.push(readExpr());
+      if (pos >= tokens.length) throw new LispSyntaxError(`missing '${close}'`);
+      pos++; return lst;
+    }
+    if (tok === ')' || tok === ']') throw new LispSyntaxError(`unexpected '${tok}'`);
+    pos++; return parseAtom(tok);
+  }
+  while (pos < tokens.length) exprs.push(readExpr());
+  return exprs;
+}
+
+function parseAtom(tok) {
+  if (tok === '#t') return true;
+  if (tok === '#f') return false;
+  if (tok === 'nil') return NIL;
+  const n = Number(tok);
+  if (!isNaN(n) && tok !== '') return n;
+  if (tok.startsWith('"') && tok.endsWith('"'))
+    return tok.slice(1,-1).replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\');
+  return new LispSymbol(tok);
+}
+
+function vRepr(v) {
+  if (v === true) return '#t';
+  if (v === false) return '#f';
+  if (isNil(v)) return '()';
+  if (v instanceof LispSymbol) return String(v);
+  if (typeof v === 'string') return '"' + v.replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n') + '"';
+  if (typeof v === 'number') return String(v);
+  if (Array.isArray(v)) return '(' + v.map(vRepr).join(' ') + ')';
+  if (v && typeof v === 'object' && !(v instanceof LispLambda) && !(v instanceof LispMacro) && !(v instanceof Env)) {
+    if (v._type === 'nil') return '()';
+    return '(dict ' + Object.entries(v).map(([k,val]) => `(${vRepr(k)} . ${vRepr(val)})`).join(' ') + ')';
+  }
+  if (v instanceof LispLambda || v instanceof LispMacro) return v.toString();
+  if (typeof v === 'function') return '#<builtin>';
+  return String(v);
+}
+
+function displayVal(v) { return typeof v === 'string' && !(v instanceof LispSymbol) ? v : vRepr(v); }
+
+let _out = [];
+function vmPrint(s) { _out.push(s); }
+
+async function callFn(fn, args) {
+  if (typeof fn === 'function') { let r = fn(...args); if (r instanceof Promise) r = await r; return r; }
+  if (fn instanceof LispLambda) {
+    const e = new Env(fn.params, args, fn.env);
+    let result = NIL;
+    for (const ex of fn.body) result = await evaluate(ex, e);
+    return result;
+  }
+  throw new LispError(`not callable: ${vRepr(fn)}`);
+}
+
+async function evaluate(expr, env) {
+  while (true) {
+    if (expr === true || expr === false) return expr;
+    if (typeof expr === 'number') return expr;
+    if (isNil(expr)) return NIL;
+    if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+    if (expr instanceof LispSymbol) return env.get(String(expr));
+    if (!Array.isArray(expr)) return expr;
+    if (expr.length === 0) return NIL;
+
+    const head = expr[0];
+    if (head instanceof LispSymbol || typeof head === 'string') {
+      const h = String(head);
+      if (h === 'quote') return expr[1];
+      if (h === 'if') {
+        const t = await evaluate(expr[1], env);
+        if (t !== false && !isNil(t)) { expr = expr[2]; continue; }
+        else if (expr.length > 3) { expr = expr[3]; continue; }
+        return NIL;
+      }
+      if (h === 'cond') {
+        let found = false;
+        for (let i = 1; i < expr.length; i++) {
+          const cl = expr[i];
+          if (!Array.isArray(cl) || cl.length < 2) throw new LispError('invalid cond clause');
+          const ch = String(cl[0]);
+          if (ch === 'else' || ch === 'true') { expr = cl.length === 2 ? cl[1] : [new LispSymbol('begin'), ...cl.slice(1)]; found = true; break; }
+          const tv = await evaluate(cl[0], env);
+          if (tv !== false && !isNil(tv)) { expr = cl.length === 2 ? cl[1] : [new LispSymbol('begin'), ...cl.slice(1)]; found = true; break; }
+        }
+        if (!found) return NIL;
+        continue;
+      }
+      if (h === 'define') {
+        const tgt = expr[1];
+        if (Array.isArray(tgt)) {
+          const nm = String(tgt[0]);
+          const rawParams = tgt.slice(1);
+          // Handle dotted rest params: (define (name . rest) body) or (define (name a b . rest) body)
+          const dotIdx = rawParams.findIndex(p => String(p) === '.');
+          let prms;
+          if (dotIdx !== -1 && dotIdx < rawParams.length - 1) {
+            const regular = rawParams.slice(0, dotIdx).map(String);
+            const restParam = '&' + String(rawParams[dotIdx + 1]);
+            prms = [...regular, restParam];
+          } else {
+            prms = rawParams.map(String);
+          }
+          const fn = new LispLambda(prms, expr.slice(2), env, nm);
+          env.set(nm, fn); return fn;
+        }
+        const nm = String(tgt), val = await evaluate(expr[2], env);
+        env.set(nm, val); return val;
+      }
+      if (h === 'set!') {
+        const nm = String(expr[1]), val = await evaluate(expr[2], env);
+        env.find(nm).set(nm, val); return val;
+      }
+      if (h === 'lambda') {
+        const p = expr[1];
+        if (p instanceof LispSymbol || typeof p === 'string') return new LispLambda(String(p), expr.slice(2), env);
+        if (Array.isArray(p)) {
+          // Handle dotted rest params: (lambda (a b . rest) body)
+          const dotIdx = p.findIndex(x => String(x) === '.');
+          let prms;
+          if (dotIdx !== -1 && dotIdx < p.length - 1) {
+            const regular = p.slice(0, dotIdx).map(String);
+            const restParam = '&' + String(p[dotIdx + 1]);
+            prms = [...regular, restParam];
+          } else {
+            prms = p.map(String);
+          }
+          return new LispLambda(prms, expr.slice(2), env);
+        }
+        throw new LispError('invalid lambda params');
+      }
+      if (h === 'let') {
+        const binds = expr[1], body = expr.slice(2), ne = new Env(undefined, undefined, env);
+        for (const b of binds) ne.set(String(b[0]), await evaluate(b[1], env));
+        for (let i = 0; i < body.length - 1; i++) await evaluate(body[i], ne);
+        expr = body[body.length - 1]; env = ne; continue;
+      }
+      if (h === 'let*') {
+        const binds = expr[1], body = expr.slice(2), ne = new Env(undefined, undefined, env);
+        for (const b of binds) ne.set(String(b[0]), await evaluate(b[1], ne));
+        for (let i = 0; i < body.length - 1; i++) await evaluate(body[i], ne);
+        expr = body[body.length - 1]; env = ne; continue;
+      }
+      if (h === 'begin') {
+        if (expr.length === 1) return NIL;
+        for (let i = 1; i < expr.length - 1; i++) await evaluate(expr[i], env);
+        expr = expr[expr.length - 1]; continue;
+      }
+      if (h === 'and') {
+        let r = true;
+        for (let i = 1; i < expr.length; i++) { r = await evaluate(expr[i], env); if (r === false || isNil(r)) return r; }
+        return r;
+      }
+      if (h === 'or') {
+        for (let i = 1; i < expr.length; i++) { const r = await evaluate(expr[i], env); if (r !== false && !isNil(r)) return r; }
+        return false;
+      }
+      if (h === 'define-macro') {
+        if (!Array.isArray(expr[1])) throw new LispError('invalid define-macro');
+        const nm = String(expr[1][0]), prms = expr[1].slice(1).map(String);
+        const mac = new LispMacro(prms, expr.slice(2), env, nm);
+        env.set(nm, mac); return mac;
+      }
+      if (h === 'do') return NIL;
+    }
+
+    const fn = await evaluate(head, env);
+    if (fn instanceof LispMacro) {
+      const me = new Env(fn.params, expr.slice(1), fn.env);
+      let r = NIL; for (const ex of fn.body) r = await evaluate(ex, me);
+      expr = r; continue;
+    }
+
+    const args = [];
+    for (let i = 1; i < expr.length; i++) args.push(await evaluate(expr[i], env));
+
+    if (typeof fn === 'function') { let r = fn(...args); if (r instanceof Promise) r = await r; return r; }
+    if (fn instanceof LispLambda) {
+      const ce = new Env(fn.params, args, fn.env);
+      for (let i = 0; i < fn.body.length - 1; i++) await evaluate(fn.body[i], ce);
+      expr = fn.body[fn.body.length - 1]; env = ce; continue;
+    }
+    throw new LispError(`not callable: ${vRepr(head)}`);
+  }
+}
+
+// ================================================================
+// SECTION 3: Global environment — builtins
+// ================================================================
+let REGISTRY = { agents: [], loaded: false };
+
+function seedHash(s) { let h = 0; for (let i = 0; i < String(s).length; i++) h = ((h << 5) - h) + String(s).charCodeAt(i); return Math.abs(h); }
+function mulberry32(seed) {
+  let s = seed >>> 0;
+  return function() { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+}
+
+function makeGlobalEnv() {
+  const env = new Env();
+  // Arithmetic
+  env.set('+', (...a) => a.reduce((s,x) => s+x, 0));
+  env.set('-', (a,...r) => r.length ? a - r.reduce((s,x)=>s+x,0) : -a);
+  env.set('*', (...a) => a.reduce((p,x) => p*x, 1));
+  env.set('/', (a,b) => { if (b===0) throw new LispError('division by zero'); return a/b; });
+  env.set('%', (a,b) => a % b);
+  env.set('modulo', (a,b) => ((a % b) + b) % b);
+  env.set('abs', Math.abs); env.set('min', (...a) => Math.min(...a)); env.set('max', (...a) => Math.max(...a));
+  env.set('floor', Math.floor); env.set('ceil', Math.ceil); env.set('round', Math.round);
+  env.set('sqrt', Math.sqrt); env.set('expt', Math.pow);
+  env.set('random', (n) => n !== undefined ? Math.floor(Math.random()*n) : Math.random());
+  // Comparison
+  env.set('=', (a,b) => a === b); env.set('equal?', (a,b) => JSON.stringify(a) === JSON.stringify(b));
+  env.set('<', (a,b) => a < b); env.set('>', (a,b) => a > b);
+  env.set('<=', (a,b) => a <= b); env.set('>=', (a,b) => a >= b); env.set('!=', (a,b) => a !== b);
+  env.set('not', x => x === false || isNil(x));
+  // Predicates
+  env.set('null?', x => isNil(x) || (Array.isArray(x) && x.length === 0));
+  env.set('pair?', x => Array.isArray(x) && x.length > 0);
+  env.set('list?', x => Array.isArray(x));
+  env.set('number?', x => typeof x === 'number' && !isNaN(x));
+  env.set('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.set('symbol?', x => x instanceof LispSymbol);
+  env.set('boolean?', x => typeof x === 'boolean');
+  env.set('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.set('dict?', x => x !== null && typeof x === 'object' && !Array.isArray(x) && !(x instanceof LispLambda) && !(x instanceof LispMacro) && x !== NIL);
+  env.set('empty?', x => isNil(x) || (typeof x === 'string' && x.length === 0) || (Array.isArray(x) && x.length === 0));
+  // Lists
+  env.set('cons', (a,b) => Array.isArray(b) ? [a,...b] : [a,b]);
+  env.set('car', x => { if (Array.isArray(x) && x.length > 0) return x[0]; throw new LispError('car: not a pair'); });
+  env.set('cdr', x => { if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL; throw new LispError('cdr: not a pair'); });
+  env.set('list', (...a) => a);
+  env.set('length', x => Array.isArray(x) ? x.length : typeof x === 'string' ? x.length : 0);
+  env.set('append', (...lists) => { const r = []; for (const l of lists) { if (Array.isArray(l)) r.push(...l); else if (!isNil(l)) r.push(l); } return r; });
+  env.set('reverse', x => Array.isArray(x) ? [...x].reverse() : x);
+  env.set('nth', (l,n) => Array.isArray(l) ? (l[n] !== undefined ? l[n] : NIL) : NIL);
+  env.set('take', (l,n) => Array.isArray(l) ? l.slice(0,n) : NIL);
+  env.set('drop', (l,n) => Array.isArray(l) ? l.slice(n) : NIL);
+  env.set('range', (...a) => { let s=0,e,st=1; if(a.length===1)e=a[0]; else if(a.length===2){s=a[0];e=a[1];} else{s=a[0];e=a[1];st=a[2];} const r=[]; for(let i=s;i<e;i+=st)r.push(i); return r; });
+  env.set('flatten', function f(l){if(!Array.isArray(l))return[l];return l.flatMap(x=>Array.isArray(x)?f(x):[x]);});
+  env.set('first', x => Array.isArray(x) && x.length ? x[0] : NIL);
+  env.set('rest', x => Array.isArray(x) && x.length > 1 ? x.slice(1) : NIL);
+  env.set('last', x => Array.isArray(x) && x.length ? x[x.length-1] : NIL);
+  env.set('sort', (l,fn) => {
+    if (!Array.isArray(l)) return l; const c = [...l];
+    if (fn) c.sort((a,b) => { const r = fn(a,b); return typeof r === 'number' ? r : (r ? -1 : 1); });
+    else c.sort((a,b) => String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
+    return c;
+  });
+  // Higher-order (async-capable via callFn)
+  env.set('map', async (fn, ...lists) => {
+    if (!lists.length) throw new LispError('map requires list');
+    const lst = lists[0]; if (!Array.isArray(lst)) return NIL;
+    if (lists.length === 1) { const r = []; for (const x of lst) r.push(await callFn(fn,[x])); return r; }
+    const minLen = Math.min(...lists.filter(Array.isArray).map(l=>l.length));
+    const r = []; for (let i=0;i<minLen;i++) r.push(await callFn(fn, lists.map(l=>l[i]))); return r;
+  });
+  env.set('filter', async (fn, lst) => {
+    if (!Array.isArray(lst)) return NIL;
+    const r = []; for (const x of lst) { const v = await callFn(fn,[x]); if (v !== false && !isNil(v)) r.push(x); } return r;
+  });
+  env.set('reduce', async (fn, lst, ...init) => {
+    if (!Array.isArray(lst)) throw new LispError('reduce requires list');
+    let acc = init.length ? init[0] : lst[0];
+    const items = init.length ? lst : lst.slice(1);
+    for (const x of items) acc = await callFn(fn, [acc, x]);
+    return acc;
+  });
+  env.set('for-each', async (fn, lst) => { if (Array.isArray(lst)) for (const x of lst) await callFn(fn,[x]); return NIL; });
+  env.set('apply', async (fn, args) => { if (Array.isArray(args)) return await callFn(fn, args); throw new LispError('apply requires list'); });
+  // Strings
+  env.set('concat', (...a) => a.map(String).join(''));
+  env.set('string-append', (...a) => a.map(String).join(''));
+  env.set('string-length', s => String(s).length);
+  env.set('substring', (s,a,b) => b !== undefined ? String(s).slice(a,b) : String(s).slice(a));
+  env.set('string-upcase', s => String(s).toUpperCase());
+  env.set('string-downcase', s => String(s).toLowerCase());
+  env.set('string-lower', s => String(s).toLowerCase());
+  env.set('string-contains?', (s,sub) => String(s).includes(String(sub)));
+  env.set('string-split', (s,d) => d !== undefined ? String(s).split(String(d)) : String(s).split(''));
+  env.set('string-join', (lst,sep) => (Array.isArray(lst)?lst:[lst]).map(String).join(sep !== undefined ? String(sep) : ' '));
+  env.set('string-trim', s => String(s).trim());
+  env.set('string-replace', (s,o,n) => String(s).split(String(o)).join(String(n)));
+  env.set('string-ref', (s,i) => String(s)[i] || NIL);
+  env.set('string-index-of', (s, sub, ...start) => String(s).indexOf(String(sub), start.length ? start[0] : 0));
+  env.set('starts-with?', (s,p) => String(s).startsWith(String(p)));
+  env.set('ends-with?', (s,p) => String(s).endsWith(String(p)));
+  env.set('->string', x => String(x));
+  env.set('->number', x => Number(x));
+  env.set('number->string', n => String(n));
+  env.set('string->number', s => { const n = Number(s); return isNaN(n) ? false : n; });
+  // Dicts
+  env.set('make-dict', (...p) => { const d={}; for(let i=0;i<p.length;i+=2) d[p[i]]=p[i+1]; return d; });
+  env.set('get', (o,k,...d) => { const df=d.length?d[0]:NIL; if(o && typeof o==='object' && !Array.isArray(o)){const v=o[k];return v!==undefined?v:df;} if(Array.isArray(o)&&typeof k==='number')return k>=0&&k<o.length?o[k]:df; return df; });
+  env.set('dict-get', (o,k,...d) => { const df=d.length?d[0]:NIL; if(o && typeof o==='object') { const v=o[k]; return v!==undefined?v:df; } return df; });
+  env.set('keys', d => d && typeof d==='object' && !Array.isArray(d) ? Object.keys(d) : NIL);
+  env.set('values', d => d && typeof d==='object' && !Array.isArray(d) ? Object.values(d) : NIL);
+  env.set('has-key?', (d,k) => d && typeof d==='object' ? k in d : false);
+  env.set('dict-set', (d,k,v) => d && typeof d==='object' ? {...d,[k]:v} : NIL);
+  env.set('dict-set!', (d,k,v) => { if(d && typeof d==='object') d[k]=v; return d; });
+  env.set('dict-merge', (...ds) => Object.assign({}, ...ds.filter(d=>d&&typeof d==='object')));
+  env.set('dict-keys', d => d && typeof d==='object' && !Array.isArray(d) ? Object.keys(d) : NIL);
+  // I/O (prints to VM buffer, flushed by lispEval)
+  env.set('display', (...a) => { a.forEach(x => vmPrint(displayVal(x))); return NIL; });
+  env.set('newline', () => { vmPrint('\n'); return NIL; });
+  env.set('print', x => { vmPrint(vRepr(x)); return NIL; });
+  env.set('println', x => { vmPrint(displayVal(x) + '\n'); return NIL; });
+  env.set('log', (...a) => { a.forEach(x => vmPrint(displayVal(x) + '\n')); return NIL; });
+  // JSON
+  env.set('json-parse', s => { try { return JSON.parse(String(s)); } catch { return NIL; } });
+  env.set('json-dump', v => JSON.stringify(v, null, 2));
+  // Special
+  env.set('#t', true); env.set('#f', false); env.set('nil', NIL);
+  env.set('true', true); env.set('false', false);
+  env.set('pi', Math.PI); env.set('e', Math.E);
+  env.set('error', m => { throw new LispError(String(m)); });
+  env.set('timestamp', () => Date.now());
+  env.set('date-string', () => new Date().toISOString().slice(0,10));
+  // Card system
+  env.set('seed-hash', s => seedHash(s));
+  env.set('mulberry32', s => mulberry32(typeof s === 'number' ? s : 0));
+  env.set('resolve-card', (name) => {
+    const n = String(name);
+    const agent = REGISTRY.agents.find(a => a.name === n || a.slug === n);
+    const tiers = ['community','verified','official'];
+    const cats = ['core','pipeline','integrations','productivity','devtools'];
+    if (!agent) {
+      const hash = seedHash(n), rng = mulberry32(hash);
+      return { name: n, display_name: n.split('/').pop() || n, description: 'Seed-generated card', tier: tiers[Math.floor(rng()*3)], category: cats[Math.floor(rng()*5)], rarity_label: 'Core', type_line: 'Agent', power: 1+Math.floor(rng()*5), toughness: 1+Math.floor(rng()*5), flavor: 'A digital twin awaits activation.', seed: hash, floor_pts: 40, _generated: true };
+    }
+    const hash = seedHash(n), rng = mulberry32(hash);
+    return { name: agent.name, display_name: agent.display_name || agent.name, description: agent.description || '', version: agent.version || '1.0.0', tier: agent.quality_tier || 'community', category: agent.category || 'unknown', tags: agent.tags || [], rarity_label: agent.quality_tier === 'official' ? 'Legendary' : agent.quality_tier === 'verified' ? 'Elite' : 'Core', type_line: 'Agent — ' + (agent.category || 'unknown'), power: 1+Math.floor(rng()*5), toughness: 1+Math.floor(rng()*5), flavor: (agent.description || '').slice(0,80), seed: hash, floor_pts: agent.quality_tier === 'official' ? 200 : agent.quality_tier === 'verified' ? 100 : 40 };
+  });
+  env.set('search-agents', (q) => {
+    const ql = String(q).toLowerCase();
+    const m = REGISTRY.agents.filter(a => (a.name||'').toLowerCase().includes(ql) || (a.description||'').toLowerCase().includes(ql) || (a.tags||[]).some(t=>t.toLowerCase().includes(ql)));
+    if (!m.length) return `No agents matching "${q}"`;
+    return m.slice(0,10).map(a => `  ${a.name}  [${a.quality_tier||'community'}] — ${(a.description||'').slice(0,50)}`).join('\n');
+  });
+  env.set('binder-status', () => {
+    const total = REGISTRY.agents.length;
+    const tiers = {}, cats = {};
+    for (const a of REGISTRY.agents) { const t=a.quality_tier||'community', c=a.category||'unknown'; tiers[t]=(tiers[t]||0)+1; cats[c]=(cats[c]||0)+1; }
+    return `Binder: ${total} agents [${REGISTRY.loaded?'live':'offline'}]\nTiers: ${Object.entries(tiers).map(([k,v])=>`${k}:${v}`).join(' ')}\nCats:  ${Object.entries(cats).map(([k,v])=>`${k}:${v}`).join(' ')}`;
+  });
+
+  // ── WebLLM native bridge ──
+  env.set('_webllm-available?', () => !!webllm);
+  env.set('_webllm-gpu?', () => !!navigator.gpu);
+  env.set('_webllm-pull', async (name) => {
+    const id = resolveModelId(String(name));
+    await pullModel(id);
+    return id;
+  });
+  env.set('_webllm-generate', async (prompt) => {
+    const msgs = [{ role: 'user', content: String(prompt) }];
+    return await generateStream(msgs);
+  });
+  env.set('_webllm-chat', async (messages) => {
+    if (!Array.isArray(messages)) throw new LispError('_webllm-chat requires message list');
+    const msgs = messages.map(m => ({ role: m.role || 'user', content: String(m.content || '') }));
+    return await generateStream(msgs);
+  });
+  env.set('_webllm-chat-quiet', async (messages) => {
+    if (!Array.isArray(messages)) throw new LispError('requires message list');
+    const msgs = messages.map(m => ({ role: m.role || 'user', content: String(m.content || '') }));
+    return await generateOnce(msgs);
+  });
+  env.set('_webllm-embed', async (text) => await getEmbedding(String(text)));
+  env.set('_webllm-models', () => {
+    if (!webllm) return 'WebLLM not loaded';
+    const models = availableModels.length ? availableModels : ['(loading model list...)'];
+    const gemma = models.filter(m => m.toLowerCase().includes('gemma'));
+    const others = models.filter(m => !m.toLowerCase().includes('gemma')).slice(0,15);
+    let out = 'Available models:\n\n  GEMMA (recommended):\n';
+    if (gemma.length) out += gemma.map(m => `    ${m}${m === currentModelId ? ' ✓ loaded' : ''}`).join('\n');
+    else out += '    (none found — check WebLLM version)';
+    out += '\n\n  OTHER:\n' + others.map(m => `    ${m}${m === currentModelId ? ' ✓ loaded' : ''}`).join('\n');
+    // Show aliases
+    const aliasEntries = Object.entries(MODEL_ALIASES);
+    if (aliasEntries.length) {
+      out += '\n\n  ALIASES:\n' + aliasEntries.map(([k,v]) => `    ${k} → ${v}`).join('\n');
+    }
+    out += `\n\n  ${models.length} models total. Use an alias or full model ID.`;
+    if (DEFAULT_MODEL_ID) out += `\n  Default: ${DEFAULT_MODEL_ID}`;
+    return out;
+  });
+  env.set('_webllm-current', () => currentModelId || 'none');
+  env.set('_webllm-unload', async () => {
+    if (engine) { await engine.unload(); engine = null; currentModelId = null; setStatus('s-model','model: none',''); }
+    return 'Model unloaded';
+  });
+  // Print directly to terminal (bypasses VM buffer for streaming)
+  env.set('_print-terminal', (text, cls) => { print(String(text), cls || ''); return NIL; });
+
+  return env;
+}
+
+const GLOBAL_ENV = makeGlobalEnv();
+
+async function lispEval(src, env) {
+  _out = [];
+  const evalEnv = env || GLOBAL_ENV;
+  try {
+    const exprs = parse(src);
+    let result = NIL;
+    for (const expr of exprs) {
+      result = await evaluate(expr, evalEnv);
+    }
+    return { ok: true, result, repr: vRepr(result), output: _out.join('') };
+  } catch(e) {
+    return { ok: false, error: e.message, repr: `; error: ${e.message}`, output: _out.join('') };
+  }
+}
+
+
+// ================================================================
+// SECTION 4: ORAPPTER LisPy source — the runtime logic
+// All model management, conversation, cards, pipelines in LisPy.
+// ================================================================
+const ORAPPTER_SOURCE = `
+;; ═══════════════════════════════════════════════════════════════
+;; ORAPPTER v1.0.0 — Local-First AI Runtime
+;; Like Ollama, but runs in your browser. Written in LisPy.
+;; Gemma 4 is the default model.
+;; ═══════════════════════════════════════════════════════════════
+
+(define ORAPPTER_VERSION "1.0.0")
+(define *current-model* nil)
+(define *engine-ready* false)
+(define *chat-mode* false)
+(define *chat-id* "default")
+(define *conversations* (make-dict))
+(define *system-prompt* "You are a helpful AI assistant running locally via ORAPPTER. You run entirely in the browser — no cloud, no server, no API key. Be concise and helpful.")
+(define *knowledge* (list))
+
+;; ── Model management ──
+
+(define (pull name)
+  (let ((id (_webllm-pull name)))
+    (set! *current-model* id)
+    (set! *engine-ready* true)
+    (log (concat "\\nReady. Model " id " loaded into GPU."))
+    id))
+
+(define (run . args)
+  (let ((name (if (null? args) (or *current-model* "gemma4") (car args))))
+    (if (not *engine-ready*)
+      (pull name)
+      (if (and (not (null? args)) (not (= (car args) *current-model*)))
+        (pull (car args))
+        nil))
+    (set! *chat-mode* true)
+    (set! *chat-id* (concat "chat-" (->string *current-model*)))
+    (conversation-new *chat-id* *system-prompt*)
+    (log (concat "\\nRunning " (->string *current-model*) ". Type /bye to exit.\\n"))
+    nil))
+
+(define (models) (_webllm-models))
+(define (list-models) (_webllm-models))
+
+(define (show name)
+  (let ((id (->string name)))
+    (concat "Model: " id "\\nStatus: " (if (= id *current-model*) "loaded" "not loaded") "\\nBackend: WebLLM (WebGPU in-browser inference)")))
+
+(define (unload)
+  (_webllm-unload)
+  (set! *engine-ready* false)
+  (set! *current-model* nil)
+  "Model unloaded.")
+
+;; ── Generation ──
+
+(define (generate prompt)
+  (if (not *engine-ready*)
+    (smart-generate prompt)
+    (_webllm-generate prompt)))
+
+(define (chat-with-messages messages)
+  (if (not *engine-ready*)
+    "No model loaded. Try: pull gemma4"
+    (_webllm-chat messages)))
+
+;; ── Conversations ──
+
+(define (conversation-new id system)
+  (dict-set! *conversations* id
+    (list (make-dict "role" "system" "content" system)))
+  id)
+
+(define (conversation-say id message)
+  (let ((history (dict-get *conversations* id (list))))
+    (let ((updated (append history (list (make-dict "role" "user" "content" message)))))
+      (let ((response (_webllm-chat updated)))
+        (dict-set! *conversations* id
+          (append updated (list (make-dict "role" "assistant" "content" response))))
+        response))))
+
+(define (conversation-history id)
+  (dict-get *conversations* id (list)))
+
+(define (conversation-clear id)
+  (dict-set! *conversations* id (list)) id)
+
+;; ── Knowledge base ──
+
+(define (kb-store key value)
+  (let ((emb (_webllm-embed value)))
+    (set! *knowledge*
+      (append *knowledge*
+        (list (make-dict "key" key "value" value "embedding" emb))))
+    key))
+
+(define (kb-query question n)
+  (let ((results (filter
+    (lambda (entry)
+      (string-contains? (string-downcase (get entry "value" ""))
+                        (string-downcase question)))
+    *knowledge*)))
+    (take results (if (number? n) n 3))))
+
+;; ── Card agents ──
+
+(define (activate-card name)
+  (if (not *engine-ready*)
+    "No model loaded. Pull a model first: pull gemma4"
+    (let ((card (resolve-card name)))
+      (let ((id (concat "card:" (->string name)))
+            (sys (concat
+              "You are " (get card "display_name" (->string name)) ", "
+              "a " (get card "type_line" "Agent") ". "
+              "Rarity: " (get card "rarity_label" "Core") ". "
+              "Power: " (->string (get card "power" 1))
+              ", Toughness: " (->string (get card "toughness" 1)) ". "
+              (get card "description" "") " "
+              "Flavor: \\"" (get card "flavor" "") "\\" "
+              "You are a living digital twin. Answer in character.")))
+        (conversation-new id sys)
+        (set! *chat-mode* true)
+        (set! *chat-id* id)
+        (log (concat "\\nActivated " (get card "display_name" (->string name)) " as AI agent."))
+        (log "Type /bye to exit. Your digital twin awaits.\\n")
+        nil))))
+
+(define (card-battle name1 name2 question)
+  (if (not *engine-ready*)
+    "No model loaded."
+    (let ((card1 (resolve-card name1))
+          (card2 (resolve-card name2)))
+      (let ((sys1 (concat "You are " (get card1 "display_name" "") ". Answer in character. Be concise."))
+            (sys2 (concat "You are " (get card2 "display_name" "") ". Answer in character. Be concise.")))
+        (log (concat "\\n⚔ CARD BATTLE: " (get card1 "display_name" "") " vs " (get card2 "display_name" "") "\\n"))
+        (log (concat "Question: " question "\\n"))
+        (let ((r1 (_webllm-chat (list (make-dict "role" "system" "content" sys1) (make-dict "role" "user" "content" question)))))
+          (log (concat "\\n" (get card1 "display_name" "") ":\\n"))
+          (let ((r2 (_webllm-chat (list (make-dict "role" "system" "content" sys2) (make-dict "role" "user" "content" question)))))
+            (log (concat "\\n" (get card2 "display_name" "") ":\\n"))
+            "Battle complete. You decide the winner."))))))
+
+;; ── Pipelines ──
+
+(define (pipeline steps input)
+  (reduce (lambda (acc step) (step acc)) steps input))
+
+(define (parallel-ask agents prompt)
+  (map (lambda (name) (make-dict "agent" name "response" (generate (concat name ": " prompt)))) agents))
+
+;; ── Offline fallback ──
+
+(define (offline-generate prompt)
+  (let ((p (string-downcase prompt)))
+    (cond
+      ((string-contains? p "what is")
+        (let ((kw (string-trim (substring p (+ (string-index-of p "what is") 8) (string-length p)))))
+          (let ((found (search-agents kw)))
+            (if (starts-with? found "No agents")
+              (concat "Offline: No info for \\"" kw "\\". Connect a model for AI responses.")
+              found))))
+      ((string-contains? p "how many")
+        (binder-status))
+      ((or (string-contains? p "help") (string-contains? p "what can"))
+        "I'm ORAPPTER — your local AI runtime. Pull a model to start: pull gemma4")
+      (else
+        "Running offline. Pull a model for AI: pull gemma4"))))
+
+(define (smart-generate prompt)
+  (if *engine-ready*
+    (generate prompt)
+    (offline-generate prompt)))
+
+;; ── Command handler ──
+
+(define (handle-command input)
+  (let ((s (string-trim input)))
+    (cond
+      ;; Empty
+      ((= s "") nil)
+
+      ;; Chat mode
+      (*chat-mode*
+        (cond
+          ((= s "/bye")
+            (set! *chat-mode* false)
+            (log "\\nExiting chat.\\n") nil)
+          ((= s "/clear")
+            (conversation-new *chat-id* *system-prompt*)
+            (log "Context cleared.\\n") nil)
+          ((= s "/history")
+            (let ((h (conversation-history *chat-id*)))
+              (for-each (lambda (m)
+                (log (concat "[" (get m "role" "?") "] " (substring (get m "content" "") 0 80)))) h)
+              nil))
+          ((starts-with? s "/")
+            (log (concat "Unknown: " s ". Commands: /bye /clear /history\\n")) nil)
+          (else
+            (conversation-say *chat-id* s))))
+
+      ;; Model commands
+      ((starts-with? s "pull ")
+        (pull (string-trim (substring s 5 (string-length s)))))
+      ((starts-with? s "run ")
+        (run (string-trim (substring s 4 (string-length s)))))
+      ((= s "run")
+        (run))
+      ((or (= s "list") (= s "models") (= s "ls"))
+        (models))
+      ((starts-with? s "show ")
+        (show (string-trim (substring s 5 (string-length s)))))
+      ((= s "unload")
+        (unload))
+      ((= s "status")
+        (concat "Model: " (or *current-model* "none")
+                "\\nEngine: " (if *engine-ready* "ready" "not loaded")
+                "\\nWebGPU: " (if (_webllm-gpu?) "available" "not available")
+                "\\nWebLLM: " (if (_webllm-available?) "loaded" "not loaded")
+                "\\nRegistry: " (binder-status)))
+
+      ;; Card commands
+      ((starts-with? s "activate ")
+        (activate-card (string-trim (substring s 9 (string-length s)))))
+      ((starts-with? s "card ")
+        (let ((name (string-trim (substring s 5 (string-length s)))))
+          (let ((c (resolve-card name)))
+            (concat (get c "display_name" name) "\\n"
+                    "Type: " (get c "type_line" "Agent") "\\n"
+                    "Tier: " (get c "tier" "community") " (" (get c "rarity_label" "Core") ")\\n"
+                    "P/T: " (->string (get c "power" 1)) "/" (->string (get c "toughness" 1)) "\\n"
+                    (get c "description" "") "\\n"
+                    "Flavor: \\"" (get c "flavor" "") "\\""))))
+
+      ;; Registry
+      ((starts-with? s "search ")
+        (search-agents (string-trim (substring s 7 (string-length s)))))
+      ((= s "binder")
+        (binder-status))
+
+      ;; Help
+      ((= s "help")
+        (display-help))
+
+      ;; Default: if model loaded, generate; else offline
+      (else
+        (smart-generate s)))))
+
+(define (display-help)
+  (concat
+"ORAPPTER — Local-First AI Runtime v" ORAPPTER_VERSION "
+Like Ollama, but runs in your browser. Powered by WebLLM + LisPy VM.
+Gemma 4 is the default model.
+
+MODEL COMMANDS
+  pull <model>        Download and load a model (default: gemma4)
+  run [model]         Load model and start chatting
+  models / list       List available models
+  show <model>        Model info
+  unload              Unload current model
+  status              Runtime status
+
+CHAT MODE (after 'run')
+  /bye                Exit chat
+  /clear              Clear conversation
+  /history            Show message history
+
+CARD AGENTS
+  activate <name>     Activate a card as an AI persona
+  card <name>         Show card details
+  search <query>      Search agent registry
+  binder              Registry stats
+
+LISPY REPL
+  (+ 1 2 3)                     Arithmetic
+  (generate \\"prompt\\")          One-shot AI generation
+  (activate-card \\"@name/agent\\") Activate card agent
+  (kb-store \\"key\\" \\"value\\")      Store knowledge
+  (kb-query \\"question\\" 3)       Query knowledge base
+  (binder-status)               Registry stats
+  (resolve-card \\"@name/agent\\")  Resolve a card
+
+ALIASES: gemma4, gemma4-e2b, gemma4-e4b, gemma3-1b, gemma3-4b,
+         gemma2-2b, llama-3b, llama-1b, phi-mini, smollm, qwen-1.5b"))
+`;
+
+// ================================================================
+// SECTION 5: Terminal input handler
+// ================================================================
+let chatMode = false;
+const inputHistory = [];
+let histIdx = -1;
+
+function updatePrompt() {
+  // Read chat mode from LisPy state
+  try {
+    const cm = GLOBAL_ENV.get('*chat-mode*');
+    chatMode = cm === true;
+  } catch { chatMode = false; }
+  promptEl.textContent = chatMode ? '>>> ' : 'orappter> ';
+}
+
+async function processInput(raw) {
+  const trimmed = raw.trim();
+  if (!trimmed) return;
+  inputHistory.unshift(trimmed);
+  histIdx = -1;
+
+  // Display the input
+  print((chatMode ? '>>> ' : 'orappter> ') + trimmed, 'cmd');
+
+  let src;
+  if (trimmed.startsWith('(')) {
+    src = trimmed;
+  } else {
+    const escaped = trimmed.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    src = `(handle-command "${escaped}")`;
+  }
+
+  const result = await lispEval(src);
+
+  if (result.output) {
+    for (const line of result.output.split('\n')) {
+      if (line) print(line, result.ok ? '' : 'err');
+    }
+  }
+  if (result.ok && !isNil(result.result) && result.repr !== '()' && result.repr !== '#<builtin>') {
+    if (typeof result.result === 'string') {
+      for (const line of result.result.split('\n')) print(line, 'result');
+    } else {
+      print(result.repr, 'result');
+    }
+  }
+  if (!result.ok) {
+    print(result.repr, 'err');
+  }
+
+  updatePrompt();
+}
+
+inputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const val = inputEl.value;
+    inputEl.value = '';
+    processInput(val);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (histIdx < inputHistory.length - 1) { histIdx++; inputEl.value = inputHistory[histIdx]; }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (histIdx > 0) { histIdx--; inputEl.value = inputHistory[histIdx]; }
+    else { histIdx = -1; inputEl.value = ''; }
+  }
+});
+
+// Focus input on any click
+document.addEventListener('click', () => inputEl.focus());
+
+// ================================================================
+// SECTION 6: Boot sequence
+// ================================================================
+async function boot() {
+  print('', 'boot');
+  print('  ┌──────────────────────────────────────────────────┐', 'boot');
+  print('  │                                                  │', 'boot');
+  print('  │    ORAPPTER — Local-First AI Runtime v1.0.0      │', 'boot');
+  print('  │                                                  │', 'boot');
+  print('  │    Like Ollama, but runs in your browser.        │', 'boot');
+  print('  │    All runtime logic is LisPy.                   │', 'boot');
+  print('  │    Gemma 4 is the default model.                 │', 'boot');
+  print('  │                                                  │', 'boot');
+  print('  └──────────────────────────────────────────────────┘', 'boot');
+  print('');
+
+  // Step 1: Check WebGPU
+  if (navigator.gpu) {
+    setStatus('s-gpu', 'webgpu: ✓', 's-ok');
+    print('  ✓ WebGPU available', 'sys');
+  } else {
+    setStatus('s-gpu', 'webgpu: ✗', 's-err');
+    print('  ✗ WebGPU not available — AI inference disabled', 'err');
+    print('    Use Chrome 113+ or Edge 113+ for WebGPU support', 'info');
+  }
+
+  // Step 2: Load WebLLM
+  print('  ⋯ Loading WebLLM runtime...', 'info');
+  try {
+    webllm = await import('https://esm.run/@mlc-ai/web-llm');
+    print('  ✓ WebLLM loaded', 'sys');
+    // Enumerate available models
+    try {
+      const cfg = webllm.prebuiltAppConfig || webllm.default?.prebuiltAppConfig;
+      if (cfg && cfg.model_list) {
+        availableModels = cfg.model_list.map(m => m.model_id || m.model || m.local_id || '').filter(Boolean);
+        print(`  ✓ ${availableModels.length} models available`, 'sys');
+        // Build dynamic aliases from real model list
+        buildAliases();
+        const gemmaModels = availableModels.filter(m => m.toLowerCase().includes('gemma'));
+        if (gemmaModels.length) {
+          print(`  ✓ Gemma models found: ${gemmaModels.length}`, 'sys');
+          for (const gm of gemmaModels.slice(0, 6)) print(`      ${gm}`, 'info');
+          if (gemmaModels.length > 6) print(`      ... and ${gemmaModels.length - 6} more`, 'info');
+        }
+        if (DEFAULT_MODEL_ID) {
+          print(`  ✓ Default model: ${DEFAULT_MODEL_ID}`, 'sys');
+        } else {
+          print(`  ⚠ No Gemma model found — type 'models' to see what's available`, 'warn');
+        }
+      }
+    } catch(e) {
+      print(`  ⚠ Could not enumerate models: ${e.message}`, 'warn');
+    }
+  } catch(e) {
+    print('  ⚠ WebLLM not loaded — running in offline mode', 'warn');
+    print(`    (${e.message})`, 'info');
+    print('    LisPy REPL, cards, and registry still work.', 'info');
+  }
+
+  // Step 3: Load registry
+  print('  ⋯ Loading agent registry...', 'info');
+  try {
+    let resp = await fetch('../registry.json');
+    if (!resp.ok) resp = await fetch('https://raw.githubusercontent.com/kody-w/RAR/main/registry.json');
+    if (resp.ok) {
+      const data = await resp.json();
+      REGISTRY.agents = data.agents || data || [];
+      REGISTRY.loaded = true;
+      print(`  ✓ Registry loaded: ${REGISTRY.agents.length} agents`, 'sys');
+    } else {
+      print('  ⚠ Registry not found — card system uses seed generation', 'warn');
+    }
+  } catch {
+    print('  ⚠ Registry fetch failed — cards still work via seed generation', 'warn');
+  }
+
+  // Step 4: Evaluate ORAPPTER LisPy source
+  print('  ⋯ Initializing LisPy runtime...', 'info');
+  const initResult = await lispEval(ORAPPTER_SOURCE);
+  if (initResult.ok) {
+    print('  ✓ ORAPPTER LisPy runtime loaded', 'sys');
+  } else {
+    print('  ✗ LisPy init error: ' + initResult.error, 'err');
+  }
+  setStatus('s-vm', 'vm: lispy ✓', 's-ok');
+
+  // Step 5: Ready
+  print('');
+  const defAlias = DEFAULT_MODEL_ID ? 'gemma4' : '<model-id>';
+  const defSize = DEFAULT_MODEL_ID ? '' : ' (type "models" to see list)';
+  print(`  Type 'help' for commands.`, '');
+  print(`  Type 'pull ${defAlias}' to download the default model.${defSize}`, '');
+  print(`  Type 'run' to start chatting after pull.`, '');
+  print(`  Type any LisPy expression: (+ 1 2 3)`, '');
+  print('');
+  print('  No cloud. No API key. No rate limits.', 'info');
+  print('  Your AI runs in your browser.', 'info');
+  print('');
+
+  updatePrompt();
+  inputEl.focus();
+}
+
+boot();
+</script>
+</body>
+</html>

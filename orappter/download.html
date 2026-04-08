@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ORAPPTER — Get Started</title>
+<meta name="description" content="Get started with ORAPPTER. No download, no install — open a browser tab and run AI models locally via WebGPU.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff;
+  --bg: #fafafa;
+  --text: #111111;
+  --muted: #6b7280;
+  --light: #e5e7eb;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --accent-bg: rgba(22,163,74,0.07);
+  --dark: #18181b;
+  --dark-hover: #000000;
+  --radius: 9999px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  --warn: #ca8a04;
+  --warn-bg: rgba(202,138,4,0.08);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 40; background: var(--white); border-bottom: 1px solid var(--light); display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; }
+.nav-brand { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 16px; }
+.nav-links a:hover { text-decoration: underline; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-size: 16px; font-weight: 500; text-decoration: none; padding: 8px 20px; transition: background 0.15s; cursor: pointer; border: none; }
+.btn-dark { background: var(--dark); color: white; }
+.btn-dark:hover { background: var(--dark-hover); text-decoration: none; }
+.btn-accent { background: var(--accent); color: white; }
+.btn-accent:hover { background: var(--accent-hover); text-decoration: none; }
+.btn-lg { padding: 14px 32px; font-size: 18px; }
+.btn-outline { background: white; border: 1px solid var(--light); color: var(--text); }
+.btn-outline:hover { background: var(--bg); text-decoration: none; }
+@media (max-width: 768px) { .nav-links a:not(.btn) { display: none; } }
+
+/* ── HERO ── */
+.hero { max-width: 720px; margin: 0 auto; padding: 80px 24px 60px; text-align: center; }
+.hero h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 600; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px; }
+.hero p { font-size: 18px; color: var(--muted); margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── SECTIONS ── */
+.section { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+.section h2 { font-size: 28px; font-weight: 600; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; }
+.section p.sub { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+.divider { border: none; border-top: 1px solid var(--light); margin: 0 auto; max-width: 1100px; }
+
+/* ── PLATFORM CARDS ── */
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 768px) { .card-grid { grid-template-columns: 1fr; } }
+.card { border: 1px solid var(--light); border-radius: 16px; padding: 28px; background: white; display: flex; flex-direction: column; }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: var(--bg); flex-shrink: 0; }
+.card-title { font-size: 18px; font-weight: 600; }
+.card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+.card .req { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: var(--radius); font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+.badge-green { background: var(--accent-bg); color: var(--accent); }
+.badge-yellow { background: var(--warn-bg); color: var(--warn); }
+.card .btn { margin-top: auto; align-self: flex-start; font-size: 14px; padding: 7px 18px; }
+
+/* ── CMD BOX ── */
+.cmd-box { background: var(--bg); border: 1px solid var(--light); border-radius: 10px; padding: 12px 16px; font-family: var(--mono); font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; overflow-x: auto; }
+.cmd-box code { flex: 1; white-space: nowrap; }
+.cmd-box button { background: none; border: none; cursor: pointer; color: var(--muted); padding: 2px; flex-shrink: 0; }
+.cmd-box button:hover { color: var(--text); }
+
+/* ── REQUIREMENTS TABLE ── */
+.req-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.req-table th { text-align: left; padding: 12px 16px; font-weight: 600; border-bottom: 2px solid var(--light); }
+.req-table td { padding: 12px 16px; border-bottom: 1px solid var(--light); }
+.req-table tr:last-child td { border-bottom: none; }
+.req-table td:first-child { font-weight: 500; white-space: nowrap; }
+@media (max-width: 640px) { .req-table { font-size: 13px; } .req-table th, .req-table td { padding: 10px 10px; } }
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; gap: 32px; counter-reset: step; }
+.step { display: flex; gap: 20px; align-items: flex-start; }
+.step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+.step-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.step-body p { font-size: 15px; color: var(--muted); line-height: 1.5; }
+.step-body code { font-family: var(--mono); background: var(--bg); padding: 2px 8px; border-radius: 6px; font-size: 14px; }
+
+/* ── WEBGPU CHECK ── */
+.gpu-check { border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; max-width: 600px; margin: 0 auto; }
+.gpu-check.ok { background: var(--accent-bg); color: var(--accent); border: 1px solid rgba(22,163,74,0.15); }
+.gpu-check.no { background: rgba(234,179,8,0.08); color: var(--warn); border: 1px solid rgba(234,179,8,0.15); }
+.gpu-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.gpu-dot.ok { background: var(--accent); }
+.gpu-dot.no { background: var(--warn); }
+
+/* ── FOOTER ── */
+footer { margin-top: auto; border-top: 1px solid var(--light); padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { text-decoration: none; color: var(--muted); font-size: 14px; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">ORAPPTER</a>
+  <div class="nav-links">
+    <a href="models.html">Models</a>
+    <a href="docs.html">Docs</a>
+    <a href="download.html" style="font-weight:600;">Get Started</a>
+    <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>
+    <a href="playground.html" class="btn btn-dark">Open Playground →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Get Started with ORAPPTER</h1>
+  <p>No download. No install. Open a browser tab and go.</p>
+  <div class="hero-cta">
+    <a href="playground.html" class="btn btn-accent btn-lg">Open Playground →</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BROWSER SUPPORT -->
+<section class="section" style="padding-top:60px;">
+  <h2>Browser Support</h2>
+  <p class="sub">ORAPPTER runs entirely in the browser via WebGPU. Pick your platform.</p>
+
+  <div class="card-grid">
+    <!-- Chrome / Edge -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🌐</div>
+        <span class="card-title">Chrome / Edge</span>
+      </div>
+      <span class="badge badge-green">
+        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+        Recommended
+      </span>
+      <p>Full WebGPU support. Best performance for running models locally in the browser.</p>
+      <p class="req">Chrome 113+ / Edge 113+</p>
+      <a href="playground.html" class="btn btn-dark">Open Playground →</a>
+    </div>
+
+    <!-- Firefox -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🦊</div>
+        <span class="card-title">Firefox</span>
+      </div>
+      <span class="badge badge-yellow">Coming Soon</span>
+      <p>WebGPU support arriving. Firefox Nightly builds have experimental WebGPU behind a flag.</p>
+      <p class="req">Enable <code style="font-family:var(--mono);background:var(--bg);padding:1px 6px;border-radius:4px;font-size:13px;">dom.webgpu.enabled</code> in about:config</p>
+      <a href="https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly" target="_blank" class="btn btn-outline">Get Firefox Nightly →</a>
+    </div>
+
+    <!-- Safari -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🧭</div>
+        <span class="card-title">Safari</span>
+      </div>
+      <span class="badge badge-yellow">Experimental</span>
+      <p>WebGPU preview available in Safari 18+. Enable via Develop → Feature Flags → WebGPU.</p>
+      <p class="req">Safari 18+ on macOS Sonoma or later</p>
+      <a href="playground.html" class="btn btn-outline">Try Playground →</a>
+    </div>
+
+    <!-- CLI Alternative -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="font-size:16px;">⌨</div>
+        <span class="card-title">CLI Alternative (Ollama)</span>
+      </div>
+      <span class="badge badge-green">Available Now</span>
+      <p>Prefer the terminal? Use Ollama for CLI access to the same models.</p>
+      <div class="cmd-box">
+        <code id="cmd-install">curl -fsSL https://ollama.com/install.sh | sh</code>
+        <button onclick="copyText('cmd-install')" title="Copy">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6"/></svg>
+        </button>
+      </div>
+      <div class="cmd-box">
+        <code id="cmd-run">ollama pull gemma2:2b && ollama run gemma2:2b</code>
+        <button onclick="copyText('cmd-run')" title="Copy">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-7.5A2.25 2.25 0 018.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 00-2.25 2.25v6"/></svg>
+        </button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:4px;">Same models. Different runtime.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SYSTEM REQUIREMENTS -->
+<section class="section" style="padding-top:60px;">
+  <h2>System Requirements</h2>
+  <p class="sub">ORAPPTER runs in the browser — if your hardware supports WebGPU, you're good.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="req-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Minimum</th>
+          <th>Recommended</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Browser</td>
+          <td>Chrome 113+</td>
+          <td>Chrome latest</td>
+        </tr>
+        <tr>
+          <td>GPU</td>
+          <td>Any WebGPU-capable</td>
+          <td>4 GB+ VRAM</td>
+        </tr>
+        <tr>
+          <td>RAM</td>
+          <td>4 GB</td>
+          <td>8 GB+</td>
+        </tr>
+        <tr>
+          <td>Storage</td>
+          <td>1 GB (cached models)</td>
+          <td>5 GB+</td>
+        </tr>
+        <tr>
+          <td>Internet</td>
+          <td>First model pull only</td>
+          <td>Not needed after</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- QUICK START -->
+<section class="section" style="padding-top:60px;">
+  <h2>Quick Start</h2>
+  <p class="sub">Three steps. Under a minute.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Open the Playground</h3>
+        <p>Click the button below or navigate to <a href="playground.html" style="color:var(--accent);">playground.html</a>. That's the entire runtime — one HTML file.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Pull a Model</h3>
+        <p>Type <code>pull gemma4</code> to download Gemma (~1.5 GB). The model caches in your browser — you only download once.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Start Chatting</h3>
+        <p>Type <code>run</code> and talk to your local AI. Everything runs on-device — nothing leaves your machine.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;">
+    <a href="playground.html" class="btn btn-accent btn-lg">Open Playground →</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WEBGPU CHECK -->
+<section class="section" style="padding-top:60px;text-align:center;">
+  <h2>WebGPU Check</h2>
+  <p class="sub">Let's see if your browser is ready.</p>
+
+  <div class="gpu-check no" id="gpu-check">
+    <div class="gpu-dot no" id="gpu-dot"></div>
+    <span id="gpu-msg">Checking WebGPU support…</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">ORAPPTER — Offline Rappter Runtime for Agents</span>
+    <div class="footer-links">
+      <a href="playground.html">Playground</a>
+      <a href="models.html">Models</a>
+      <a href="docs.html">Docs</a>
+      <a href="blog.html">Blog</a>
+      <a href="https://github.com/kody-w/RAR">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Copy helper
+function copyText(id) {
+  const el = document.getElementById(id);
+  if (el) navigator.clipboard.writeText(el.textContent).catch(() => {});
+}
+
+// WebGPU detection
+(async function checkWebGPU() {
+  const box = document.getElementById('gpu-check');
+  const dot = document.getElementById('gpu-dot');
+  const msg = document.getElementById('gpu-msg');
+
+  if (navigator.gpu) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      if (adapter) {
+        box.className = 'gpu-check ok';
+        dot.className = 'gpu-dot ok';
+        msg.textContent = 'Your browser supports WebGPU! You\'re ready to go.';
+      } else {
+        box.className = 'gpu-check no';
+        dot.className = 'gpu-dot no';
+        msg.textContent = 'WebGPU API found but no adapter available. Check your GPU drivers.';
+      }
+    } catch (e) {
+      box.className = 'gpu-check no';
+      dot.className = 'gpu-dot no';
+      msg.textContent = 'WebGPU error: ' + e.message + '. Try Chrome 113+ or Edge 113+.';
+    }
+  } else {
+    box.className = 'gpu-check no';
+    dot.className = 'gpu-dot no';
+    msg.textContent = 'WebGPU not detected. Try Chrome 113+ or Edge 113+.';
+  }
+})();
+</script>
+</body>
+</html>
