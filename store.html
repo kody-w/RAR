@@ -7985,6 +7985,17 @@ async function resetCollection() {
   renderCollection();
 }
 
+async function deleteCard(mintId) {
+  const db = await openCollDB();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction(COLL_STORE, 'readwrite');
+    tx.objectStore(COLL_STORE).delete(mintId);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+  renderCollection();
+}
+
 // ── Minting Engine ──
 function generateMintId() {
   const chars = '0123456789ABCDEF';
@@ -9942,6 +9953,7 @@ async function renderGridView(cards, gridEl) {
     return `<div class="coll-card" onclick="openSlabViewer('${c.mintId}')" style="position:relative">
       <canvas width="250" height="350" data-mint="${c.mintId}"></canvas>
       <div class="card-value" title="Gauntlet Points — public reputation">${gp} GP</div>
+      <button onclick="event.stopPropagation();deleteCard('${c.mintId}')" title="Remove card" style="position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(248,81,73,.4);background:rgba(248,81,73,.15);color:#f85149;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;opacity:.6;transition:opacity .15s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'">×</button>
       <div class="coll-card-info">
         <div class="coll-card-name">${esc(c.displayName)}</div>
         <div class="coll-card-meta">
