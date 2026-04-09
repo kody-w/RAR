@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Demo Script — Engineering Review</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;--text:#e6edf3;--dim:#8b949e;--accent:#58a6ff;--green:#39d353;--purple:#d2a8ff;--orange:#f0883e;--yellow:#e3b341;--red:#f85149}
+html{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+body{max-width:900px;margin:0 auto;padding:40px 24px 120px}
+h1{font-size:2rem;font-weight:800;margin-bottom:4px}
+.subtitle{color:var(--dim);font-size:1rem;margin-bottom:40px}
+h2{font-size:1.5rem;font-weight:700;margin:48px 0 8px;padding-top:32px;border-top:1px solid var(--border)}
+h2:first-of-type{border:none;margin-top:24px}
+h3{font-size:1.1rem;font-weight:600;color:var(--accent);margin:24px 0 8px}
+p{line-height:1.7;color:var(--dim);margin-bottom:12px}
+strong{color:var(--text)}
+.pillar{display:inline-block;padding:6px 16px;border-radius:6px;font-weight:700;font-size:.85rem;margin-bottom:12px}
+.p1{background:rgba(88,166,255,.12);color:var(--accent);border:1px solid rgba(88,166,255,.3)}
+.p2{background:rgba(57,211,83,.12);color:var(--green);border:1px solid rgba(57,211,83,.3)}
+.p3{background:rgba(210,168,255,.12);color:var(--purple);border:1px solid rgba(210,168,255,.3)}
+.time{display:inline-block;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:.8rem;color:var(--orange);font-weight:600;font-family:monospace;margin-right:8px}
+.action{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:.95rem}
+.action .label{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px}
+.action .label.show{color:var(--green)}
+.action .label.say{color:var(--accent)}
+.action .label.do{color:var(--orange)}
+.action .label.note{color:var(--purple)}
+.script{color:var(--text);font-style:italic;line-height:1.6}
+code{background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:.9em;color:var(--green)}
+.divider{height:2px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--orange));border-radius:2px;margin:40px 0}
+.overview{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin:24px 0}
+.overview h4{margin-bottom:12px;font-size:1rem}
+.overview table{width:100%;border-collapse:collapse}
+.overview td{padding:8px 12px;border-bottom:1px solid var(--border);font-size:.95rem}
+.overview td:first-child{font-weight:600;color:var(--accent);width:120px}
+.overview tr:last-child td{border:0}
+.cta{background:linear-gradient(135deg,rgba(88,166,255,.08),rgba(210,168,255,.08));border:1px solid var(--border);border-radius:12px;padding:24px;margin:32px 0;text-align:center}
+.cta a{color:var(--accent);text-decoration:none;font-weight:600}
+.cta a:hover{text-decoration:underline}
+@media print{body{max-width:100%;padding:20px}h2{page-break-before:always}}
+</style>
+</head>
+<body>
+
+<h1>🎬 RAPP Engineering Demo Script</h1>
+<p class="subtitle">5–10 minute live demo for Microsoft engineering leadership &nbsp;·&nbsp; Three pillars, one story</p>
+
+<div class="overview">
+<h4>Run of Show</h4>
+<table>
+<tr><td>Total</td><td>~8 minutes (tight) to ~12 minutes (with Q&A buffer)</td></tr>
+<tr><td>Pillar 1</td><td><span class="pillar p1">Agent Conversion</span> — n8n workflow → RAPP → Copilot Studio (~3 min)</td></tr>
+<tr><td>Pillar 2</td><td><span class="pillar p2">Agent Creation</span> — Live transcript → pipeline → deployed prototype (~3 min)</td></tr>
+<tr><td>Pillar 3</td><td><span class="pillar p3">The Platform</span> — Patent, hot-loading, registry, cards, open-source (~2–3 min)</td></tr>
+<tr><td>Close</td><td>Partnership ask + call to action (~1 min)</td></tr>
+</table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Opening — Set the Stage</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Thanks for having me. I'm going to show you three things in the next eight minutes — and I'm not going to tell you what the platform can do. I'm going to show you what we use today, in production, for real customer engagements."</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Three pillars. First: <strong>agent conversion</strong> — take something built outside our ecosystem and bring it into Copilot Studio. Second: <strong>agent creation</strong> — go from a customer conversation to a working prototype. Third: <strong>the platform</strong> — the patented engine that makes it all work."</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Pillar 1 — Agent Conversion</h2>
+<p><span class="pillar p1">~3 MINUTES</span> &nbsp; The headline: take a competitor workflow and bring it home to Copilot Studio.</p>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<h3>Setup</h3>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Let's start with the thing everyone's been asking about. Can we really convert agents from other platforms into Copilot Studio? Let's find out."</p>
+</div>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Open <strong>n8n</strong> in a browser tab. Display a non-trivial workflow — email intake, CRM lookup, conditional routing, response generation. Something with 8–12 nodes that clearly does real work.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"This is an n8n workflow — a direct competitor to Power Automate. It handles inbound email, looks up the customer in CRM, routes based on priority, and drafts a response. It's real. It works. And it's not in our ecosystem."</p>
+</div>
+
+<h3>The Conversion</h3>
+
+<div class="action">
+<div class="label do">DO</div>
+<p>Export the n8n workflow JSON. Feed it into the RAPP transpiler agent. Show the output: a clean RAPP agent <code>.py</code> file with a <code>__manifest__</code> and <code>perform()</code> method.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"One command. The transpiler reads the n8n JSON, understands the nodes, the connections, the logic — and produces a single-file RAPP agent. Same behavior. Our platform."</p>
+</div>
+
+<div class="action">
+<div class="label do">DO</div>
+<p>Now run the Copilot Studio transpiler on the RAPP agent. Show the MCS-compatible output.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"And now one more step — RAPP to Copilot Studio. Same agent. Same logic. Now it's a Copilot skill that power users can extend without writing code."</p>
+</div>
+
+<h3>Side-by-Side</h3>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Split screen: n8n on the left, Copilot Studio on the right. Trigger the same input on both. Show identical outputs.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Same input. Same output. n8n on the left. Copilot Studio on the right. That's agent conversion."</p>
+</div>
+
+<div class="action">
+<div class="label note">TRANSITION</div>
+<p class="script">"Now — if I can convert code-based agents, Anthropic agents, n8n workflows — that's powerful. But what about creating agents from scratch? That's where it gets really interesting."</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Pillar 2 — Agent Creation</h2>
+<p><span class="pillar p2">~3 MINUTES</span> &nbsp; Transcript to working prototype. The production pipeline.</p>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<h3>The Transcript</h3>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Flash the raw transcript on screen — a real customer discovery call. Highlight key details: customer name, pain points, desired outcomes.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"This is a real discovery call transcript from an account team engagement. The customer described what they need. Now watch what happens when we feed this into the RAPP pipeline."</p>
+</div>
+
+<h3>The Pipeline</h3>
+
+<div class="action">
+<div class="label do">DO</div>
+<p>Run the RAPP pipeline. Show it processing: transcript analysis → agent generation → validation → deployment. Either live or via the pre-recorded pipeline video with narration.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"The pipeline reads the transcript, extracts the use case, generates the agent code, validates the manifest, runs contract tests, and deploys it. What used to take weeks takes minutes."</p>
+</div>
+
+<h3>The Result</h3>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Open Copilot Studio. Show the deployed agent responding to a real query. The agent works.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"From a conversation to a working Copilot Studio prototype. The account team can show this to the customer tomorrow. That's what 20x faster looks like."</p>
+</div>
+
+<div class="action">
+<div class="label note">TRANSITION</div>
+<p class="script">"So we can convert agents in. We can create agents from scratch. But what's underneath all of this?"</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Pillar 3 — The Platform</h2>
+<p><span class="pillar p3">~2–3 MINUTES</span> &nbsp; The patented engine. Hot-loading. Registry. Open-source. The full picture.</p>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<h3>The Patent</h3>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Everything you just saw runs on a platform we built called RAPP — the Rapid Agent Prototype Pattern. We filed the patent on this before anyone else was talking about agent ecosystems. Hot-loading agents. Universal memory across channels. The waiter pattern for orchestration. All of it."</p>
+</div>
+
+<h3>The Registry</h3>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Open <a href="https://kody-w.github.io/RAR/" target="_blank">kody-w.github.io/RAR</a>. Browse the registry — 138 agents, 19 categories. Click a publisher filter. Open an agent detail. Show the deep link.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"138 agents. 7 publishers. 19 industry categories. B2B sales, healthcare, financial services, government — every vertical has templates ready to deploy. This is the open-source agent registry. Anyone can browse it, install agents, or contribute."</p>
+</div>
+
+<h3>Hot-Loading</h3>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"Here's what makes the architecture special. Agents live in Azure File Storage. Drop a new .py file — it's live instantly. No redeployment. No build pipeline. No downtime. We had this working before anyone else announced agent hot-loading."</p>
+</div>
+
+<h3>The Cards (Quick Hit)</h3>
+
+<div class="action">
+<div class="label show">SHOW</div>
+<p>Open the <a href="https://kody-w.github.io/RAR/store.html" target="_blank">Agent Store</a>. Switch to Cards view. Show a holographic card. Open a pack if time allows.</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"And because we believe agents should be fun to discover — every agent gets a trading card. Deterministic. Offline. Self-assembles from 18 characters. It's the discoverability layer that makes people actually want to browse the registry."</p>
+</div>
+
+<h3>Open Source</h3>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"The entire thing is open source. The registry is a GitHub template — any org can fork it, run their own internal registry, and optionally federate back upstream. We built it to be the npm of AI agents."</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Close — The Ask</h2>
+<p><span class="time">~1 MIN</span> Partnership + call to action</p>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"So here's the picture. We can <strong>convert</strong> agents from any platform into Copilot Studio. We can <strong>create</strong> agents from customer conversations in minutes. And we have the <strong>platform</strong> — patented, open-source, with 138 agents already in the registry."</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"What we want to partner on: the conversion path has some Copilot Studio limitations we've documented. We'd love to work with the engineering team to close those gaps. Because when we do — every agent, from any platform, becomes a Copilot skill. That's the opportunity."</p>
+</div>
+
+<div class="action">
+<div class="label say">SAY</div>
+<p class="script">"I'll leave you with this: everything I just showed you is live, right now, at the links I'm sharing. The installer, the registry, the architecture docs. Thank you."</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>Pre-Demo Checklist</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div class="overview">
+<table>
+<tr><td>Tab 1</td><td>n8n — complex workflow open and ready</td></tr>
+<tr><td>Tab 2</td><td>Terminal — transpiler commands ready to paste</td></tr>
+<tr><td>Tab 3</td><td>Copilot Studio — logged in, ready to show converted agent</td></tr>
+<tr><td>Tab 4</td><td>Transcript — customer discovery call ready to display</td></tr>
+<tr><td>Tab 5</td><td>RAPP pipeline — either live or video ready</td></tr>
+<tr><td>Tab 6</td><td><a href="https://kody-w.github.io/RAR/" target="_blank">Agent Registry</a> — loaded</td></tr>
+<tr><td>Tab 7</td><td><a href="https://kody-w.github.io/RAR/store.html" target="_blank">Agent Store</a> — Cards view ready</td></tr>
+<tr><td>Backup</td><td>Pre-recorded pipeline video in case of live demo failure</td></tr>
+<tr><td>Links</td><td>
+  <a href="https://kody-w.github.io/rapp-installer/" target="_blank">RAPP Installer</a> ·
+  <a href="https://kody-w.github.io/RAR/" target="_blank">Agent Registry</a> ·
+  <a href="https://kody-w.github.io/RAR/pitch.html" target="_blank">Pitch Deck</a> ·
+  <a href="https://blazingbeard.github.io/quests/rapp-brainstem.html" target="_blank">Brainstem</a> ·
+  <a href="https://microsoft.github.io/aibast-agents-library/#architecture" target="_blank">AIBAST Architecture</a>
+</td></tr>
+</table>
+</div>
+
+<div class="cta">
+  <p style="color:var(--text);font-size:1.1rem;font-weight:600;margin-bottom:8px">Share Links</p>
+  <p>
+    <a href="https://kody-w.github.io/RAR/pitch.html">Pitch Deck</a> &nbsp;·&nbsp;
+    <a href="https://kody-w.github.io/rapp-installer/">RAPP Installer</a> &nbsp;·&nbsp;
+    <a href="https://kody-w.github.io/RAR/">Agent Registry</a> &nbsp;·&nbsp;
+    <a href="https://blazingbeard.github.io/quests/rapp-brainstem.html">Brainstem</a> &nbsp;·&nbsp;
+    <a href="https://microsoft.github.io/aibast-agents-library/#architecture">AIBAST Docs</a>
+  </p>
+</div>
+
+</body>
+</html>
