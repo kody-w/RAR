@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP — The Agent Ecosystem</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--text-dim:#8b949e;--accent:#58a6ff;--green:#39d353;
+  --purple:#d2a8ff;--orange:#f0883e;--yellow:#e3b341;--red:#f85149;
+}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.deck{position:relative;width:100%;height:100%}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s;transform:translateX(40px)}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.prev{opacity:0;transform:translateX(-40px)}
+
+/* Typography */
+h1{font-size:3.2rem;font-weight:800;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:2.4rem;font-weight:700;margin-bottom:24px;color:var(--text)}
+h3{font-size:1.3rem;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;font-size:0.85rem}
+p{font-size:1.2rem;line-height:1.7;color:var(--text-dim);max-width:800px}
+.big{font-size:1.5rem;color:var(--text);line-height:1.6}
+.highlight{color:var(--accent);font-weight:600}
+.green{color:var(--green)}
+.purple{color:var(--purple)}
+.orange{color:var(--orange)}
+.dim{color:var(--text-dim)}
+
+/* Layout */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;width:100%;max-width:1100px;align-items:start}
+.cols-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;width:100%;max-width:1100px}
+.center{text-align:center}
+.left{text-align:left;align-items:flex-start}
+.full{max-width:1100px;width:100%}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .2s}
+.card:hover{border-color:var(--accent)}
+.card h4{font-size:1.1rem;margin-bottom:8px;color:var(--text)}
+.card p{font-size:.95rem;margin:0}
+
+/* Stats */
+.stat-row{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin:32px 0}
+.stat{text-align:center}
+.stat .num{font-size:3rem;font-weight:800;display:block;line-height:1}
+.stat .lbl{font-size:.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+
+/* Code */
+.code{background:#0d1117;border:1px solid var(--border);border-radius:10px;padding:20px 24px;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:.95rem;line-height:1.6;color:var(--green);text-align:left;max-width:700px;width:100%;overflow-x:auto;white-space:pre}
+.code .comment{color:var(--text-dim)}
+.code .kw{color:var(--purple)}
+.code .str{color:var(--orange)}
+.code .fn{color:var(--accent)}
+
+/* Steps */
+.steps{display:flex;gap:24px;margin:24px 0;flex-wrap:wrap;justify-content:center}
+.step{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 24px;min-width:200px}
+.step-num{font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1}
+.step-text{font-size:.95rem;color:var(--text)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;font-size:1.05rem;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#79c0ff;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-purple{background:rgba(210,168,255,.15);border:2px solid var(--purple);color:var(--purple)}
+.btn-purple:hover{background:rgba(210,168,255,.25)}
+.btn-row{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;justify-content:center}
+
+/* Flow diagram */
+.flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin:24px 0}
+.flow-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 20px;font-size:.9rem;color:var(--text);font-weight:600}
+.flow-arrow{color:var(--accent);font-size:1.2rem}
+
+/* List */
+.feature-list{list-style:none;text-align:left;max-width:700px}
+.feature-list li{padding:10px 0;font-size:1.1rem;color:var(--text-dim);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.feature-list li:last-child{border:0}
+.feature-list .icon{font-size:1.3rem;flex-shrink:0;width:28px;text-align:center}
+
+/* Navigation */
+.nav{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;background:var(--surface);border:1px solid var(--border);border-radius:40px;padding:8px 20px}
+.nav button{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:1.2rem;padding:6px 10px;border-radius:6px;transition:all .15s}
+.nav button:hover{color:var(--text);background:var(--surface2)}
+.nav .dots{display:flex;gap:6px}
+.nav .dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .2s}
+.nav .dot.active{background:var(--accent);width:24px;border-radius:4px}
+.slide-counter{font-size:.8rem;color:var(--text-dim);font-variant-numeric:tabular-nums}
+
+/* Logo */
+.logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#f85149,#f0883e);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#fff;margin-bottom:16px}
+
+/* Table */
+.tbl{width:100%;max-width:900px;border-collapse:collapse;margin:16px 0}
+.tbl th{text-align:left;padding:10px 16px;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);border-bottom:2px solid var(--border)}
+.tbl td{padding:10px 16px;font-size:1rem;border-bottom:1px solid var(--border);color:var(--text)}
+.tbl td:first-child{font-weight:600;color:var(--accent)}
+.tbl tr:last-child td{border:0}
+
+/* Responsive */
+@media(max-width:768px){
+  .slide{padding:32px 24px}
+  h1{font-size:2rem}h2{font-size:1.6rem}
+  .cols,.cols-3{grid-template-columns:1fr;gap:20px}
+  .stat .num{font-size:2rem}
+  .code{font-size:.8rem;padding:14px}
+}
+
+/* Animate in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .animate{animation:fadeUp .6s ease both}
+.slide.active .animate.d1{animation-delay:.1s}
+.slide.active .animate.d2{animation-delay:.2s}
+.slide.active .animate.d3{animation-delay:.3s}
+.slide.active .animate.d4{animation-delay:.4s}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 0: Title -->
+<div class="slide active center">
+  <div class="logo animate">R</div>
+  <h1 class="animate d1">RAPP</h1>
+  <p class="big animate d2">The open agent ecosystem.<br>One file. One registry. Works everywhere.</p>
+  <div class="stat-row animate d3">
+    <div class="stat"><span class="num" style="color:var(--accent)">138</span><span class="lbl">Agents</span></div>
+    <div class="stat"><span class="num" style="color:var(--green)">7</span><span class="lbl">Publishers</span></div>
+    <div class="stat"><span class="num" style="color:var(--purple)">19</span><span class="lbl">Categories</span></div>
+    <div class="stat"><span class="num" style="color:var(--orange)">1</span><span class="lbl">File per agent</span></div>
+  </div>
+  <p class="animate d4 dim" style="font-size:.95rem">Press → or swipe to navigate &nbsp;·&nbsp; Built for Microsoft AI enthusiasts</p>
+</div>
+
+<!-- SLIDE 1: The Problem -->
+<div class="slide center">
+  <h3 class="animate">Born at Microsoft</h3>
+  <h2 class="animate d1">From AIBAST's <span class="orange">Buzz Saw</span> to Open Ecosystem</h2>
+  <div class="cols animate d2" style="margin-top:16px">
+    <div style="text-align:left">
+      <p style="font-size:1.1rem;line-height:1.7;color:var(--text-dim)">The <strong style="color:var(--text)">Rapid Agent Prototype Pattern</strong> was created by Microsoft's AI Business Applications Specialist Team (AIBAST).</p>
+      <p style="font-size:1.1rem;line-height:1.7;color:var(--text-dim);margin-top:12px">Traditional dev is a <strong style="color:var(--text-dim)">handsaw</strong> — slow, manual. RAPP is the <strong style="color:var(--orange)">buzz saw</strong> — fast, tireless, scalable. Feed it transcripts, MVPs, feedback. It keeps processing.</p>
+      <div class="stat-row" style="justify-content:flex-start;margin-top:24px">
+        <div class="stat"><span class="num" style="font-size:2.2rem;color:var(--accent)">20x</span><span class="lbl">Faster Dev</span></div>
+        <div class="stat"><span class="num" style="font-size:2.2rem;color:var(--green)">∞</span><span class="lbl">Parallel</span></div>
+        <div class="stat"><span class="num" style="font-size:2.2rem;color:var(--orange)">60</span><span class="lbl">Agents at lunch</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="border-color:var(--accent)">
+        <h4>🎯 The RAPP 14-Step Process</h4>
+        <p>Discovery → Transcript Analysis → MVP "Poke" → Customer Validation → Generate Agents → Code Review → Deploy → Demo → Video → Feedback → Iterate → Production → Audit → Scale</p>
+        <p style="margin-top:8px;font-size:.85rem;color:var(--accent)">6 human quality gates. AI does the heavy lifting. Humans provide the taste.</p>
+      </div>
+      <a href="https://microsoft.github.io/aibast-agents-library/#architecture" target="_blank" class="btn btn-outline" style="margin-top:12px;padding:10px 20px;font-size:.9rem;width:100%;justify-content:center">📖 Read the Full AIBAST Architecture →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: The Answer -->
+<div class="slide center">
+  <h3 class="animate">The RAPP Principle</h3>
+  <h2 class="animate d1">Every agent is <span style="color:var(--green)">one .py file</span>.</h2>
+  <div class="cols animate d2" style="margin-top:16px">
+    <div style="text-align:left">
+      <ul class="feature-list">
+        <li><span class="icon">📄</span> <strong>Docstring</strong> = documentation</li>
+        <li><span class="icon">📋</span> <strong>__manifest__</strong> = package metadata</li>
+        <li><span class="icon">🧬</span> <strong>BasicAgent</strong> subclass = the agent</li>
+        <li><span class="icon">⚡</span> <strong>perform()</strong> → always returns a string</li>
+      </ul>
+    </div>
+    <div class="code" style="font-size:.85rem"><span class="comment"># This IS the entire package</span>
+<span class="kw">__manifest__</span> = {
+  <span class="str">"name"</span>: <span class="str">"@you/my_agent"</span>,
+  <span class="str">"version"</span>: <span class="str">"1.0.0"</span>,
+  <span class="str">"category"</span>: <span class="str">"productivity"</span>,
+}
+
+<span class="kw">class</span> <span class="fn">MyAgent</span>(BasicAgent):
+    <span class="kw">def</span> <span class="fn">perform</span>(self, **kwargs):
+        <span class="kw">return</span> <span class="str">"Hello from RAPP!"</span></div>
+  </div>
+  <p class="animate d3" style="margin-top:24px">No <code>requirements.txt</code>. No <code>manifest.json</code>. No subdirectories.<br>One file. Fetch it with one HTTP GET. Read it in one LLM context window.</p>
+</div>
+
+<!-- SLIDE 3: The Ecosystem -->
+<div class="slide center">
+  <h3 class="animate">The Ecosystem</h3>
+  <h2 class="animate d1">Build → Publish → Discover → Compose</h2>
+  <div class="flow animate d2">
+    <div class="flow-box">✍️ Author</div><span class="flow-arrow">→</span>
+    <div class="flow-box">🧪 Validate</div><span class="flow-arrow">→</span>
+    <div class="flow-box">📤 Submit</div><span class="flow-arrow">→</span>
+    <div class="flow-box">✅ Review</div><span class="flow-arrow">→</span>
+    <div class="flow-box">🃏 Forge Card</div><span class="flow-arrow">→</span>
+    <div class="flow-box" style="border-color:var(--green);color:var(--green)">🌐 Live</div>
+  </div>
+  <div class="cols-3 animate d3" style="margin-top:24px">
+    <div class="card">
+      <h4>🛠️ RAPP Installer</h4>
+      <p>One-click setup. Get the SDK, scaffold agents, submit to registry. Zero friction onboarding.</p>
+      <a href="https://kody-w.github.io/rapp-installer/" target="_blank" class="btn btn-outline" style="margin-top:12px;padding:8px 16px;font-size:.85rem">Open Installer →</a>
+    </div>
+    <div class="card">
+      <h4>🏪 Agent Registry</h4>
+      <p>Browse 138 agents. Search, filter by category or publisher. Deep links, trading cards, community reviews.</p>
+      <a href="https://kody-w.github.io/RAR/" target="_blank" class="btn btn-outline" style="margin-top:12px;padding:8px 16px;font-size:.85rem">Browse Registry →</a>
+    </div>
+    <div class="card">
+      <h4>🧠 Brainstem</h4>
+      <p>Local-first agent runtime. Run agents on your machine with cloud or local inference. No server required.</p>
+      <a href="https://blazingbeard.github.io/quests/rapp-brainstem.html" target="_blank" class="btn btn-outline" style="margin-top:12px;padding:8px 16px;font-size:.85rem">Explore Brainstem →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Architecture -->
+<div class="slide center">
+  <h3 class="animate">The Architecture</h3>
+  <h2 class="animate d1">Four layers. <span class="green">Zero coupling.</span></h2>
+  <div class="cols animate d2" style="margin-top:16px">
+    <div>
+      <div class="card" style="margin-bottom:12px;border-left:3px solid var(--accent)">
+        <h4>1. Interface Layer</h4>
+        <p>M365 Copilot, Teams, Web, Mobile, Voice — same AI, every channel</p>
+      </div>
+      <div class="card" style="margin-bottom:12px;border-left:3px solid var(--purple)">
+        <h4>2. Orchestration Layer</h4>
+        <p>Copilot Studio + Power Automate — conversation routing & history</p>
+      </div>
+      <div class="card" style="margin-bottom:12px;border-left:3px solid var(--green)">
+        <h4>3. Intelligence Layer</h4>
+        <p>Azure Function App — <strong>500 lines of code</strong>. Loads agents dynamically. Stateless = infinite scale.</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--orange)">
+        <h4>4. Storage Layer</h4>
+        <p>Azure File Storage — agent code, user memory, workflows. Hot-load agents with zero downtime.</p>
+      </div>
+    </div>
+    <div style="text-align:left">
+      <p class="big" style="margin-bottom:16px">The <span class="highlight">"Waiter" pattern</span>:</p>
+      <ul class="feature-list">
+        <li><span class="icon">🍽️</span> The <strong>Assistant</strong> is the waiter — talks to the user</li>
+        <li><span class="icon">👨‍🍳</span> The <strong>Agents</strong> are kitchen staff — do the real work</li>
+        <li><span class="icon">👤</span> The <strong>User</strong> never sees the kitchen</li>
+      </ul>
+      <div class="code" style="font-size:.78rem;margin-top:16px"><span class="comment"># Drop a new .py file → it's live instantly</span>
+memory/{user-guid}/agents/
+  ├── sales_coach.py
+  ├── deal_tracker.py
+  └── route_planner.py  <span class="comment"># ← just added</span>
+
+<span class="comment"># Next request auto-loads it. Zero deploy.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Industry Coverage -->
+<div class="slide center">
+  <h3 class="animate">Industry Coverage</h3>
+  <h2 class="animate d1">138 agents across <span class="purple">19 categories</span></h2>
+  <table class="tbl animate d2">
+    <tr><th>Category</th><th>Agents</th><th>Examples</th></tr>
+    <tr><td>B2B Sales</td><td>24</td><td>Deal Tracking, Pipeline Velocity, Win Probability, Revenue Forecast</td></tr>
+    <tr><td>Financial Services</td><td>10</td><td>Fraud Detection, Portfolio Rebalancing, Underwriting, Wealth Insights</td></tr>
+    <tr><td>Healthcare</td><td>5</td><td>Clinical Notes Summarizer, Prior Authorization, Care Gap Closure</td></tr>
+    <tr><td>Productivity</td><td>12</td><td>VaultMind (3260 lines!), Recon, TufteLove, Markdown to Slides</td></tr>
+    <tr><td>Pipeline & DevTools</td><td>10</td><td>Agent Generator, Copilot Studio Transpiler, RAPP Pipeline</td></tr>
+    <tr><td>Government</td><td>10</td><td>FOIA Requests, Grants Management, Permit Processing</td></tr>
+    <tr><td>+ 13 more</td><td>67</td><td>Manufacturing, Energy, Retail, HR, IT, Professional Services...</td></tr>
+  </table>
+  <p class="animate d3" style="margin-top:16px">Every agent works with <span class="highlight">Azure OpenAI</span>. Every agent returns a string. Every agent is one file.</p>
+</div>
+
+<!-- SLIDE 5: Getting Started -->
+<div class="slide center">
+  <h3 class="animate">Getting Started</h3>
+  <h2 class="animate d1">From zero to agent in <span class="green">5 commands</span></h2>
+  <div class="code animate d2" style="max-width:750px;font-size:.9rem"><span class="comment"># 1. Get the SDK (one file, zero deps)</span>
+curl -O https://raw.githubusercontent.com/kody-w/RAR/main/rapp_sdk.py
+
+<span class="comment"># 2. Scaffold your agent</span>
+python rapp_sdk.py new @yourname/my_agent
+
+<span class="comment"># 3. Run 9 contract tests (all pass by default)</span>
+python rapp_sdk.py test agents/@yourname/my_agent.py
+
+<span class="comment"># 4. Submit to the registry</span>
+python rapp_sdk.py submit agents/@yourname/my_agent.py
+
+<span class="comment"># 5. Your agent is live. Card forged. Discoverable.</span>
+python rapp_sdk.py card resolve @yourname/my_agent</div>
+  <div class="btn-row animate d3">
+    <a href="https://kody-w.github.io/rapp-installer/" target="_blank" class="btn btn-primary">🚀 Open RAPP Installer</a>
+    <a href="https://kody-w.github.io/RAR/" target="_blank" class="btn btn-outline">🏪 Browse the Registry</a>
+  </div>
+</div>
+
+<!-- SLIDE 6: Microsoft Integration -->
+<div class="slide center">
+  <h3 class="animate">Microsoft AI Stack</h3>
+  <h2 class="animate d1">Built <span class="highlight">by</span> Microsoft. Built <span class="highlight">for</span> Microsoft.</h2>
+  <div class="cols animate d2" style="margin-top:16px">
+    <div>
+      <ul class="feature-list">
+        <li><span class="icon">🤖</span> <strong>Azure OpenAI</strong> — Every agent calls Azure APIs natively</li>
+        <li><span class="icon">💬</span> <strong>Copilot Studio</strong> — RAPP agents transpile to Copilot skills</li>
+        <li><span class="icon">⚡</span> <strong>Power Automate</strong> — Dynamics 365, SharePoint, email connectors</li>
+        <li><span class="icon">👥</span> <strong>Teams</strong> — Deploy agents as Teams bots</li>
+        <li><span class="icon">☁️</span> <strong>Azure Functions</strong> — 500-line Intelligence Layer, infinite scale</li>
+        <li><span class="icon">🧠</span> <strong>Brainstem</strong> — Local-first runtime, cloud or local inference</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="border-color:var(--purple)">
+        <h4 style="color:var(--purple)">🔄 Copilot Studio Transpiler</h4>
+        <p>The <code>@discreetRappers/copilot_studio_transpiler_agent</code> converts any RAPP agent into a Copilot Studio–compatible skill. One command. Bidirectional.</p>
+      </div>
+      <div class="card" style="margin-top:12px;border-color:var(--orange)">
+        <h4 style="color:var(--orange)">📊 104 AIBAST Templates</h4>
+        <p>@aibast-agents-library contributed 104 industry vertical agents — B2B Sales, Healthcare, Financial Services, Government, and 10 more verticals. Ready to deploy.</p>
+      </div>
+      <a href="https://microsoft.github.io/aibast-agents-library/#architecture" target="_blank" class="btn btn-outline" style="margin-top:12px;padding:10px 20px;font-size:.9rem;width:100%;justify-content:center">📖 Full AIBAST Architecture Docs →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: The Trading Card System -->
+<div class="slide center">
+  <h3 class="animate">The Magic</h3>
+  <h2 class="animate d1">Every agent gets a <span class="orange">trading card</span></h2>
+  <div class="cols animate d2">
+    <div style="text-align:left">
+      <p class="big" style="margin-bottom:20px">Each agent has a <strong>64-bit seed</strong> that deterministically generates:</p>
+      <ul class="feature-list">
+        <li><span class="icon">🎨</span> Holographic card art (MTG-style)</li>
+        <li><span class="icon">⚔️</span> Stats: HP, ATK, DEF, SPD, INT</li>
+        <li><span class="icon">🔮</span> Type, abilities, rarity, flavor text</li>
+        <li><span class="icon">🗣️</span> 7-word incantation (speak it → card appears)</li>
+      </ul>
+      <p style="margin-top:16px;color:var(--green);font-weight:600">Same card on every device. Offline. Forever.</p>
+    </div>
+    <div style="text-align:center">
+      <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid var(--purple);border-radius:16px;padding:32px;max-width:280px;margin:0 auto">
+        <div style="font-size:.75rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">HOLO CARD</div>
+        <div style="font-size:1.4rem;font-weight:700;margin-bottom:4px">VaultMind</div>
+        <div style="font-size:.8rem;color:var(--text-dim);margin-bottom:16px">@borg/vaultmind_agent</div>
+        <div style="font-family:monospace;font-size:.7rem;color:var(--green);line-height:1.4;margin-bottom:16px">
+          ╔══════════════╗<br>
+          ║ ◆ LEGENDARY ◆║<br>
+          ║ 3260 LINES   ║<br>
+          ║ 28 ACTIONS   ║<br>
+          ╚══════════════╝
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-dim)">
+          <span>⚔️ 9/7</span>
+          <span style="color:var(--yellow)">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Federation -->
+<div class="slide center">
+  <h3 class="animate">Enterprise Ready</h3>
+  <h2 class="animate d1">Run your own registry. <span class="purple">Federate upstream.</span></h2>
+  <div class="cols animate d2" style="margin-top:16px">
+    <div style="text-align:left">
+      <p class="big">RAPP is a <strong>GitHub template repo</strong>. Fork it and you get:</p>
+      <ul class="feature-list" style="margin-top:16px">
+        <li><span class="icon">🏠</span> Your own agent registry + GitHub Pages store</li>
+        <li><span class="icon">🔒</span> Internal agents stay private</li>
+        <li><span class="icon">🔄</span> Sync from/to the public registry</li>
+        <li><span class="icon">📤</span> Submit your best agents upstream</li>
+        <li><span class="icon">🌐</span> CI/CD pipeline included</li>
+      </ul>
+    </div>
+    <div>
+      <div class="code" style="font-size:.85rem"><span class="comment"># Fork the template</span>
+gh repo create my-org/agents \
+  --template kody-w/RAR
+
+<span class="comment"># Add your internal agents</span>
+python rapp_sdk.py new @my-org/sales_bot
+python rapp_sdk.py submit ...
+
+<span class="comment"># Optionally sync upstream</span>
+python scripts/federate.py sync
+python scripts/federate.py submit</div>
+      <p style="margin-top:12px;font-size:.9rem;color:var(--text-dim)">Every org gets their own store. Same tools. Same card system. Optional upstream federation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: What Makes RAPP Different -->
+<div class="slide center">
+  <h3 class="animate">Why RAPP Wins</h3>
+  <h2 class="animate d1">The unfair advantages</h2>
+  <div class="cols-3 animate d2" style="margin-top:24px">
+    <div class="card" style="border-color:var(--green)">
+      <h4><span class="green">🟢 Zero Friction</span></h4>
+      <p>No install. No build. No config. <code>curl</code> one file and you have an agent. <code>curl</code> another file and you have the SDK.</p>
+    </div>
+    <div class="card" style="border-color:var(--accent)">
+      <h4><span class="highlight">🔵 Offline-First</span></h4>
+      <p>Registry works from <code>file://</code>. Cards self-assemble without network. The store is one HTML file. Works on a plane.</p>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h4><span class="purple">🟣 AI-Native</span></h4>
+      <p>Feed <code>skill.md</code> to any LLM and it can search, install, scaffold, and submit agents autonomously. Agents discover agents.</p>
+    </div>
+    <div class="card" style="border-color:var(--orange)">
+      <h4><span class="orange">🟠 Composable</span></h4>
+      <p><code>perform()</code> always returns a string. Pipe agents together. Build pipelines. No type conversion, no exceptions.</p>
+    </div>
+    <div class="card" style="border-color:var(--yellow)">
+      <h4><span style="color:var(--yellow)">🟡 Deterministic</span></h4>
+      <p>Every agent has a seed. Same card on every device, forever. 7-word incantation. 18 characters to reconstruct.</p>
+    </div>
+    <div class="card" style="border-color:var(--red)">
+      <h4><span style="color:var(--red)">🔴 Battle-Tested</span></h4>
+      <p>138 agents. 7 publishers. 19 categories. Automated CI pipeline. Community reviews. Quality tiers.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: CTA -->
+<div class="slide center">
+  <div class="logo animate" style="width:80px;height:80px;font-size:2.5rem;border-radius:18px">R</div>
+  <h1 class="animate d1" style="font-size:2.8rem">Start building with RAPP</h1>
+  <p class="big animate d2" style="margin-bottom:32px">The agent ecosystem is open. The registry is live.<br>Your first agent is 5 commands away.</p>
+  <div class="btn-row animate d3">
+    <a href="https://kody-w.github.io/rapp-installer/" target="_blank" class="btn btn-primary" style="font-size:1.15rem;padding:16px 36px">🚀 Get the Installer</a>
+    <a href="https://kody-w.github.io/RAR/" target="_blank" class="btn btn-outline" style="font-size:1.15rem;padding:16px 36px">🏪 Browse 138 Agents</a>
+    <a href="https://blazingbeard.github.io/quests/rapp-brainstem.html" target="_blank" class="btn btn-purple" style="font-size:1.15rem;padding:16px 36px">🧠 Explore Brainstem</a>
+  </div>
+  <p class="animate d4" style="margin-top:40px;color:var(--text-dim);font-size:.9rem">
+    GitHub: <a href="https://github.com/kody-w/RAR" target="_blank" style="color:var(--accent)">kody-w/RAR</a> &nbsp;·&nbsp;
+    Community: <a href="https://github.com/kody-w/CommunityRAPP" target="_blank" style="color:var(--accent)">CommunityRAPP</a> &nbsp;·&nbsp;
+    Built by Kody Wildfeuer
+  </p>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <button onclick="prev()" aria-label="Previous">◀</button>
+  <div class="dots" id="dots"></div>
+  <button onclick="next()" aria-label="Next">▶</button>
+  <span class="slide-counter" id="counter">1 / 11</span>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+
+function showSlide(n) {
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i === n) s.classList.add('active');
+    else if (i < n) s.classList.add('prev');
+  });
+  current = n;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  document.getElementById('counter').textContent = `${n + 1} / ${total}`;
+}
+
+function next() { if (current < total - 1) showSlide(current + 1); }
+function prev() { if (current > 0) showSlide(current - 1); }
+
+// Build dots
+const dotsEl = document.getElementById('dots');
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => showSlide(i);
+  dotsEl.appendChild(d);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  if (e.key === 'Home') { e.preventDefault(); showSlide(0); }
+  if (e.key === 'End') { e.preventDefault(); showSlide(total - 1); }
+});
+
+// Touch/swipe support
+let touchX = 0;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+});
+</script>
+</body>
+</html>
