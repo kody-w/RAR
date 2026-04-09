@@ -850,9 +850,9 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "Straightforward {cat} agent. {lines} lines, does its thing. Single-file principle well-executed here.",
             ],
             "low": [
-                "{name} is early stage — {lines} lines, {tier} tier. The bones are there but needs more flesh.",
-                "Minimal {cat} agent at {lines} lines. Ships the idea but not the execution yet.",
-                "{name} reads like a first draft. {lines} lines, basic structure in place. Would love to see a v1.1.",
+                "{name} is an early-stage {cat} agent with a clear idea at {lines} lines. Great foundation to build on.",
+                "Compact {cat} agent at {lines} lines. Ships the core concept — v1.1 could really level this up.",
+                "{name} shows promise at {lines} lines. The structure is right and the idea is solid — more features will make this shine.",
             ],
         },
     },
@@ -870,8 +870,8 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
             ],
             "low": [
-                "Getting {name} running requires some effort. The env vars aren't well-documented in the description.",
-                "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
+                "{name} has a learning curve but the payoff is there once you get it configured.",
+                "Takes some setup effort, but the agent delivers real value once the env vars are in place.",
             ],
         },
     },
@@ -890,8 +890,8 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "Source is clean enough. {lines} lines, follows the BasicAgent pattern correctly. Room for polish.",
             ],
             "low": [
-                "At {lines} lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
-                "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+                "At {lines} lines, {name} is lean and focused. The perform() method has room to grow — excited to see where it goes.",
+                "Clean foundation at {lines} lines. The core structure follows the pattern well — adding more logic would take this to the next level.",
             ],
         },
     },
@@ -910,8 +910,8 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "The {cat} category is getting crowded but {name} differentiates on {diff}.",
             ],
             "low": [
-                "{name} needs to find its niche in {cat}. Right now it overlaps too much with existing agents.",
-                "Not sure what {name} offers that other {cat} agents don't. Needs a clearer value prop.",
+                "{name} is carving out its space in {cat}. With a stronger value prop it could become a go-to.",
+                "Early entry in {cat} — the concept is right. A bit more polish and this becomes a solid recommendation.",
             ],
         },
     },
@@ -928,7 +928,7 @@ REVIEW_ANGLES: dict[str, dict] = {
                 "Mid-range {cat} agent. Does what you'd expect. Nothing surprising, nothing missing.",
             ],
             "low": [
-                "There are stronger options in {cat} right now. {name} needs more development to compete.",
+                "Newer entry in {cat}. Has room to grow but the direction is promising. Worth watching.",
             ],
         },
     },
@@ -938,7 +938,7 @@ REVIEWER_NAMES = [
     "Virtual Curator", "The Architect", "Agent Auditor", "Registry Reviewer",
     "CardSmith Review Desk", "Community Sentinel", "Quality Gate",
     "The Assessor", "Pattern Scanner", "Code Lens",
-    "Deck Builder Review", "Single File Critic", "Tier Watch",
+    "Deck Builder Review", "Agent Spotlight", "Tier Watch",
 ]
 
 DIFFERENTIATORS = [
@@ -1327,8 +1327,8 @@ def llm_review(agent_name: str, agent_display: str, description: str,
     """Try to generate a review using the LLM. Returns None if unavailable."""
     try:
         return llm_generate(
-            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAPP agent. Be specific, opinionated, and reference the agent's actual characteristics. No generic praise.",
-            user=f"Review the agent \"{agent_display}\" ({agent_name}).\nCategory: {category}\nLines: {lines}\nTier: {tier}\nDescription: {description}\nReview angle: {angle}\n\nWrite a concise, specific review.",
+            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAPP agent. Be specific, constructive, and highlight what the agent does well. Mention real characteristics. If suggesting improvements, frame them as opportunities, not complaints.",
+            user=f"Review the agent \"{agent_display}\" ({agent_name}).\nCategory: {category}\nLines: {lines}\nTier: {tier}\nDescription: {description}\nReview angle: {angle}\n\nWrite a constructive, specific review that celebrates what this agent brings to the ecosystem.",
             max_tokens=150,
             temperature=0.9,
         )
@@ -1667,11 +1667,16 @@ def generate_thread(state: dict, agents: list[dict], echoes: dict | None = None)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 def score_agent(agent: dict) -> tuple[int, str]:
-    """Score an agent 1-5 stars based on real metadata. Returns (stars, tier_label)."""
+    """Score an agent 1-5 stars based on real metadata. Returns (stars, tier_label).
+
+    Scoring is intentionally generous — the critic should celebrate what
+    people build, not gatekeep. Every shipped agent deserves recognition.
+    """
     score = 0
     lines = agent.get("_lines", 0)
     if lines > 200: score += 2
     elif lines > 50: score += 1
+    else: score += 1  # even small agents get credit for shipping
 
     ver = agent.get("version", "1.0.0")
     if int(ver.split(".")[0]) >= 2: score += 1
@@ -1679,14 +1684,16 @@ def score_agent(agent: dict) -> tuple[int, str]:
     tier = agent.get("quality_tier", "community")
     if tier == "official": score += 3
     elif tier == "verified": score += 2
-    elif tier == "community": score += 1
+    elif tier == "community": score += 2  # community is the backbone
 
     if len(agent.get("tags", [])) >= 4: score += 1
+    elif len(agent.get("tags", [])) >= 2: score += 1  # some tagging effort
     if len(agent.get("description", "")) > 100: score += 1
+    elif len(agent.get("description", "")) > 30: score += 1  # any real description
     if len(agent.get("dependencies", [])) == 0: score += 1
     if len(agent.get("requires_env", [])) == 0: score += 1
 
-    stars = max(1, min(5, round(score * 5 / 10)))
+    stars = max(2, min(5, round(score * 5 / 9)))  # floor at 2 stars
     level = "high" if stars >= 4 else "mid" if stars >= 3 else "low"
     return stars, level
 

@@ -101,6 +101,8 @@ header {
   font-size: .72rem; margin-left: 4px;
 }
 .pill.active .ct { background: rgba(88,166,255,.2); }
+.pub-pill.active { border-color: var(--purple, #d2a8ff); color: var(--purple, #d2a8ff); background: rgba(210,168,255,.1); }
+.pub-pill.active .ct { background: rgba(210,168,255,.2); }
 
 /* Recently Added */
 .recently-added { margin-bottom: 24px; }
@@ -292,6 +294,7 @@ header {
     </div>
   </div>
   <div class="pills" id="pills"></div>
+  <div class="pills" id="publisher-pills" style="margin-top:6px"></div>
   <div id="recently-added-section" style="margin-top:16px;display:none"></div>
   <div id="grid">
     <div class="loading"><div class="spinner"></div>Loading agents...</div>
@@ -307,6 +310,7 @@ let OWNER = 'kody-w', REPO_NAME = 'RAR';
 let RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO_NAME}/main`;
 let allAgents = [];
 let currentCat = 'all';
+let currentPub = 'all';
 
 async function loadConfig() {
   try {
@@ -351,11 +355,27 @@ function buildPills() {
     h += `<span class="pill" onclick="setCat('${c}',this)">${c.replace(/_/g, ' ')} <span class="ct">${counts[c]}</span></span>`;
   });
   document.getElementById('pills').innerHTML = h;
+
+  const pubCounts = {};
+  allAgents.forEach(a => { const p = a.name.split('/')[0]; pubCounts[p] = (pubCounts[p] || 0) + 1; });
+  const pubs = Object.keys(pubCounts).sort();
+  let ph = `<span class="pill pub-pill active" onclick="setPub('all',this)">All Publishers</span>`;
+  pubs.forEach(p => {
+    ph += `<span class="pill pub-pill" onclick="setPub('${p}',this)">${p} <span class="ct">${pubCounts[p]}</span></span>`;
+  });
+  document.getElementById('publisher-pills').innerHTML = ph;
 }
 
 function setCat(cat, el) {
   currentCat = cat;
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#pills .pill').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  render();
+}
+
+function setPub(pub, el) {
+  currentPub = pub;
+  document.querySelectorAll('#publisher-pills .pill').forEach(p => p.classList.remove('active'));
   if (el) el.classList.add('active');
   render();
 }
@@ -377,7 +397,7 @@ function timeAgo(iso) {
 function renderRecentlyAdded() {
   const el = document.getElementById('recently-added-section');
   const q = document.getElementById('search').value.trim();
-  if (currentCat !== 'all' || q) { el.style.display = 'none'; return; }
+  if (currentCat !== 'all' || currentPub !== 'all' || q) { el.style.display = 'none'; return; }
   const dated = allAgents.filter(a => addedTs(a)).sort((a, b) => addedTs(b).localeCompare(addedTs(a)));
   const recent = dated.slice(0, 8);
   if (!recent.length) { el.style.display = 'none'; return; }
@@ -409,8 +429,9 @@ function render() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   let filtered = allAgents.filter(a => {
     if (currentCat !== 'all' && a.category !== currentCat) return false;
+    if (currentPub !== 'all' && !a.name.startsWith(currentPub + '/')) return false;
     if (!q) return true;
-    const hay = [a.display_name, a.description, a.category?.replace(/_/g, ' '), ...(a.tags || []), a.author || ''].join(' ').toLowerCase();
+    const hay = [a.display_name, a.description, a.category?.replace(/_/g, ' '), ...(a.tags || []), a.author || '', a.name.split('/')[0]].join(' ').toLowerCase();
     return q.split(/\s+/).some(w => w.length > 1 && hay.includes(w));
   });
 
