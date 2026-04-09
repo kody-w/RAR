@@ -19,7 +19,7 @@
     "@aibast-agents-library/action_prioritization": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 398-line agent that tackles the daily planning and resource allocation problem for sales teams. The action-prioritization and planning tags accurately describe what it does \u2014 turning pipeline noise into ranked to-do lists. Solid utility agent that every sales org needs.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -35,7 +35,7 @@
     "@aibast-agents-library/deal_tracking": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A well-scoped 402-line agent covering pipeline movement, stage velocity, and forecast accuracy. The deal-tracking and forecasting tags reflect its dual nature as both an operational tracker and a predictive tool. Clean, focused, and essential for any pipeline-driven sales org.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -51,7 +51,7 @@
     "@aibast-agents-library/account_messaging": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 429-line agent generating personalized outreach and campaign sequences for enterprise accounts. The messaging and email-sequences tags accurately describe its scope \u2014 this is the content engine for account-based campaigns. Practical and immediately deployable.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -75,7 +75,7 @@
     "@aibast-agents-library/activity_gap": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A lean 393-line agent that identifies missing sales activities per deal stage and analyzes gap impact. The activity-gap and deal-progression tags capture its niche perfectly \u2014 it's the agent that tells you what you forgot to do before the deal stalls. Smart, focused scope.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -83,7 +83,7 @@
     "@aibast-agents-library/deal_competitor_intel": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Compact at 334 lines, this agent delivers competitive snapshots and threat scoring at the individual deal level. The competitive-intelligence tag is shared with its portfolio-level sibling, but the per-deal focus with counter-strategies makes it tactically distinct and immediately useful.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -91,7 +91,7 @@
     "@aibast-agents-library/deal_health_score": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 378-line agent that calculates deal health scores with trend analysis and benchmark comparison. The scoring and pipeline tags reflect its quantitative approach \u2014 this is the agent that turns gut feelings about deal quality into numbers. Clean and purposeful.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -107,7 +107,7 @@
     "@aibast-agents-library/deal_risk_assessment": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A solid 424-line agent offering multi-factor risk scoring, risk matrices, and mitigation planning for pipeline deals. The risk-assessment and deal-progression tags position it as the quantitative complement to the account-level risk agent. Well-structured and analytically sound.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -123,7 +123,7 @@
     "@aibast-agents-library/pipeline_velocity": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 380-line agent providing velocity dashboards, stage analysis, and bottleneck detection. The pipeline-velocity and analytics tags are precisely right \u2014 this is the speedometer for your sales pipeline. The acceleration planning feature elevates it beyond pure reporting.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -131,7 +131,7 @@
     "@aibast-agents-library/revenue_forecast": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 348-line forecasting agent with scenario analysis and commit vs best-case modeling. The revenue-forecast and analytics tags describe exactly what it delivers \u2014 multiple forecast views plus accuracy tracking. Lean, purposeful, and essential for sales leadership.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -139,7 +139,7 @@
     "@aibast-agents-library/deal_stakeholder_engagement": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 398-line agent covering engagement scoring, relationship mapping, and sentiment analysis for deal stakeholders. The stakeholder-engagement and relationships tags reflect its people-centric approach to deal management. A nice complement to the broader stakeholder intelligence agent.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -155,7 +155,7 @@
     "@aibast-agents-library/win_probability": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 414-line agent calculating win probabilities with contributing factor analysis and trend tracking. The win-probability and forecasting tags capture its predictive nature well. The deal comparison feature adds practical value for prioritizing where to invest selling time.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -187,7 +187,7 @@
     "@aibast-agents-library/cart_abandonment_recovery": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A compact 289-line agent tackling cart abandonment with recovery campaigns, incentive optimization, and conversion tracking. The ecommerce and conversion tags position it squarely in the B2C revenue recovery space. Lean and focused on the single highest-impact e-commerce problem.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -203,7 +203,7 @@
     "@aibast-agents-library/customer_loyalty_rewards": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 292-line loyalty program manager with dashboards, points tracking, reward recommendations, and tier analytics. The loyalty and rewards tags are straightforward, but the tier analytics feature adds strategic depth beyond simple points ledgering. Solid B2C retention tool.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -211,7 +211,7 @@
     "@aibast-agents-library/omnichannel_engagement": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "At 273 lines, this is the leanest agent in the B2C suite \u2014 but it covers channel performance, journey mapping, optimization, and campaign attribution. The omnichannel and attribution tags signal its cross-channel analytical focus. A compact but well-rounded engagement analytics tool.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -219,7 +219,7 @@
     "@aibast-agents-library/personalized_shopping_assistant": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 266-line agent offering product recommendations, style profiling, inventory checks, and outfit building. The personalization and style tags capture its consumer-facing nature \u2014 this is the closest thing to a virtual personal shopper in the registry. Fun and practical.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -227,7 +227,7 @@
     "@aibast-agents-library/returns_exchange": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A 331-line agent managing the full returns lifecycle \u2014 initiation, eligibility checking, exchange options, and refund tracking. The returns and customer-service tags reflect its operational focus. At 15.3 KB, it packs enough logic to handle real-world return policy complexity.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -267,7 +267,7 @@
     "@aibast-agents-library/permit_license_management": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 341-line agent tracking permits and licenses across energy facilities with renewal calendars and compliance gap identification. The permits and renewals tags capture a critical but often overlooked operational need \u2014 missing a permit renewal can shut down an entire facility.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -275,7 +275,7 @@
     "@aibast-agents-library/energy_regulatory_reporting": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 326-line agent managing regulatory report status, data validation, and submission tracking for EPA, FERC, and state filings. The regulatory and audit tags reflect its compliance-focused design. The multi-authority coverage across EPA and FERC is a practical strength.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -291,7 +291,7 @@
     "@aibast-agents-library/federal_grants_oversight": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 328-line agent for federal grants monitoring with compliance tracking, reporting status, and audit preparation. The grants and oversight tags accurately describe its watchdog role. At 15.1 KB, it packs enough logic for real grants management workflows.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -299,7 +299,7 @@
     "@aibast-agents-library/mission_reporting_assistant": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A compact 286-line agent generating mission summaries, KPI dashboards, and stakeholder briefs for federal programs. The mission and KPI tags reflect its focus on translating program outcomes into leadership-ready reporting. Lean and purpose-built for federal program offices.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -315,7 +315,7 @@
     "@aibast-agents-library/workforce_clearance_onboarding": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 338-line agent tracking federal workforce clearances, onboarding checklists, and access provisioning. The clearance and background-check tags highlight a uniquely federal need \u2014 security clearance management is a workflow that simply doesn't exist in the private sector.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -323,7 +323,7 @@
     "@aibast-agents-library/claims_processing": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 295-line insurance claims processing agent with intake, adjudication review, fraud detection, and settlement recommendations. The claims and adjudication tags reflect its end-to-end scope across the claims lifecycle. Compact but covers the critical path from filing to settlement.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -331,7 +331,7 @@
     "@aibast-agents-library/fs_customer_onboarding": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A 317-line agent handling financial services customer onboarding with KYC verification, account setup, and document checklists. The KYC and compliance tags are the standout \u2014 know-your-customer verification is the regulatory gate that every financial institution must clear.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -347,7 +347,7 @@
     "@aibast-agents-library/financial_advisor_copilot": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 292-line copilot for financial advisors with client reviews, portfolio summaries, and compliance checks. The advisor and portfolio tags position it as an augmentation tool rather than a replacement \u2014 it helps advisors do their job better, which is the right approach for regulated industries.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -363,7 +363,7 @@
     "@aibast-agents-library/loan_origination_assistant": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A 327-line agent supporting loan origination with application review, credit analysis, and decision recommendations. The loan and underwriting tags reflect its position in the lending pipeline. Document verification plus credit analysis in a single agent covers the core origination workflow.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -395,7 +395,7 @@
     "@aibast-agents-library/wealth_insights_generator": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Delivers a solid toolkit for wealth management teams in 280 lines \u2014 market briefs, client analytics, opportunity alerts, and performance attribution. The analytics and performance attribution tags suggest meaningful data processing capabilities. A clean, focused agent for advisory practices.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -419,7 +419,7 @@
     "@aibast-agents-library/bulk_crm_data_generator_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A practical 264-line utility agent that generates synthetic CRM contacts, accounts, and opportunities for testing and demos. Not glamorous, but invaluable for development teams needing realistic test data without touching production. The data-migration tag hints at additional portability features.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -435,7 +435,7 @@
     "@aibast-agents-library/one_click_crm_intake": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Streamlines CRM data entry in 293 lines with form generation, validation, duplicate detection, and import preview. The duplicate detection capability alone justifies adoption \u2014 dirty data is the #1 CRM problem. Clean and focused on reducing data-entry friction.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -459,7 +459,7 @@
     "@aibast-agents-library/email_drafting": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A well-scoped 284-line agent covering outreach, follow-ups, proposals, and template management with personalization. The template management system keeps email quality consistent while personalization prevents robotic-sounding outreach. Solid productivity booster for sales and marketing teams.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -467,7 +467,7 @@
     "@aibast-agents-library/find_accurate_models": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "An interesting 285-line agent that tackles AI/ML model selection by comparing accuracy benchmarks, deployment readiness, and cost analysis. Filling the meta-AI niche of helping teams choose the right model is clever positioning. Useful for organizations navigating the growing model marketplace.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -475,7 +475,7 @@
     "@aibast-agents-library/identify_discounts": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A focused 296-line agent handling discount eligibility checks, savings calculations, and approval workflows. The approval workflow management adds governance to what could otherwise be a free-for-all discounting process. Practical for sales teams needing pricing guardrails.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -483,7 +483,7 @@
     "@aibast-agents-library/it_ticket_management": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A compact 258-line agent delivering dashboards, priority assignment, SLA tracking, and resolution reporting for IT operations. Covers the essential ITSM lifecycle efficiently without bloat. The SLA tracking capability makes it particularly valuable for teams with contractual service commitments.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -491,7 +491,7 @@
     "@aibast-agents-library/procurement_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Handles the core procurement lifecycle \u2014 purchase requests, vendor comparison, approval routing, and spend analysis \u2014 in a lean 250 lines. The spend analysis feature enables strategic procurement insights beyond transactional processing. A good fit for mid-market procurement teams.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -499,7 +499,7 @@
     "@aibast-agents-library/procurement_support": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A complementary procurement tool at 240 lines focusing on requisition tracking, contract lookups, supplier performance, and budget checks. Leaner than its sibling procurement_agent, with a focus on operational support rather than strategic analysis. Works well as a day-to-day procurement assistant.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -507,7 +507,7 @@
     "@aibast-agents-library/product_reference": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A clean 267-line product catalog agent with feature comparison, pricing tiers, and compatibility checking. The compatibility checking feature is a smart inclusion that prevents costly misconfigurations. Simple, effective, and immediately useful for sales engineering teams.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -539,7 +539,7 @@
     "@aibast-agents-library/triage_bot": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 253-line agent handling inquiry classification, routing, priority assessment, and handoff summaries. The handoff summary generation ensures context isn't lost during escalation \u2014 a frequently overlooked detail. Efficient and well-scoped for front-line support operations.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -555,7 +555,7 @@
     "@aibast-agents-library/voice_to_crm_email": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A practical 258-line agent that generates meeting recaps, extracts action items, drafts follow-up emails, and manages distribution lists. The action-item extraction into follow-up emails automates one of the most commonly dropped balls in business communication. Reliable meeting-to-action pipeline.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -563,7 +563,7 @@
     "@aibast-agents-library/sharepoint_document_extractor": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A utility agent at 243 lines delivering SharePoint document search, URL extraction, metadata enrichment, and link validation. The link validation feature prevents the all-too-common broken SharePoint link problem. A quiet but essential tool for Microsoft 365 environments.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -571,7 +571,7 @@
     "@aibast-agents-library/voice_to_crm_servicenow": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Connects voice input to ServiceNow workflows in 264 lines \u2014 incident creation, knowledge search, assignment routing, and status updates. Integrating voice-driven incident creation with knowledge base search creates a natural self-service pathway. Solid ITSM integration for ServiceNow shops.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -611,7 +611,7 @@
     "@aibast-agents-library/staff_credentialing": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A focused 310-line agent for credential tracking, expiration alerts, verification audits, and onboarding checklists. DEA and license tracking with automated expiration alerts prevents costly compliance lapses. Essential back-office automation for healthcare organizations of any size.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -651,7 +651,7 @@
     "@aibast-agents-library/order_status_communication": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 321-line agent tracking manufacturing orders through fulfillment with proactive delay notifications and customer status updates. The proactive delay notification capability turns a reactive process into a trust-building customer experience. Clean execution of a frequently-needed manufacturing communication flow.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -755,7 +755,7 @@
     "@aibast-agents-library/building_permit_processing": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 349-line government agent handling the full permit lifecycle: status tracking, review checklists, inspector assignment, and fee calculation. Covers the core workflows that every local government building department needs. Solid SLG vertical entry.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -763,7 +763,7 @@
     "@aibast-agents-library/citizen_service_request": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Classic 311-style municipal service management in 327 lines. Intake, routing, status tracking, and resolution summaries \u2014 the essential citizen services pipeline. The SLA tracking tag signals awareness that government responsiveness matters. Clean and purposeful.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -779,7 +779,7 @@
     "@aibast-agents-library/slg_grants_management": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "Grants management is where government funding meets accountability. At 307 lines, this agent covers grants, budget tracking, and reporting for both state and local government. Practical and necessary \u2014 every grant-funded program needs this kind of oversight tooling.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -787,7 +787,7 @@
     "@aibast-agents-library/utility_billing_assistance": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A 372-line municipal agent covering utility billing, payment assistance, and water services. The billing-plus-assistance framing is smart \u2014 it is not just about collecting payments, but helping citizens navigate their utility accounts. Good breadth across the utility, billing, and payment tags.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -803,7 +803,7 @@
     "@aibast-agents-library/software_customer_onboarding": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Customer onboarding is where SaaS churn battles are won or lost. This 379-line agent tracks adoption milestones and customer success metrics \u2014 the critical first-90-days workflow. Clean integration of onboarding, adoption, and milestones into a single-file agent.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -811,7 +811,7 @@
     "@aibast-agents-library/license_renewal_expansion": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Revenue retention in 351 lines. License renewal tracking, expansion opportunity identification, and churn prevention \u2014 the three pillars of SaaS revenue ops. The renewal-plus-expansion framing shows strategic thinking beyond simple license management.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -827,7 +827,7 @@
     "@aibast-agents-library/support_ticket_resolution": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A well-structured 324-line support agent covering triage, SLA management, knowledge base integration, and escalation paths. Every software product needs this workflow \u2014 ticket intake to resolution with proper escalation gates. Reliable and complete.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -835,7 +835,7 @@
     "@borg/borg_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "The original Borg \u2014 102 lines of concentrated purpose. Analysis, GitHub integration, and web assimilation in a compact core agent. This is the seed from which the entire @borg namespace grew. Small but iconic, and every line earns its place.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -851,7 +851,7 @@
     "@borg/markdown_to_slides_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A clean 236-line converter turning markdown into presentation decks. Part of the @borg productivity pipeline \u2014 write in markdown, present in slides. The deck and pipeline tags place it correctly as a document-transformation utility. Straightforward and effective.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -939,7 +939,7 @@
     "@discreetRappers/dynamics_crud_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "A focused 418-line integration agent providing CRUD operations against Dynamics 365 CRM. Clean Microsoft stack integration \u2014 no frills, just reliable data operations against a major enterprise platform. The integrations category and dynamics-365 tag place it precisely.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -947,7 +947,7 @@
     "@discreetRappers/email_drafting_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Compact at 149 lines, this agent drafts emails via Power Automate integration. Small but practical \u2014 email automation is one of the most commonly requested business workflows. The power-automate tag signals proper Microsoft ecosystem integration rather than reinventing the wheel.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -979,7 +979,7 @@
     "@discreetRappers/sales_assistant_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A 631-line sales integration agent with natural-language CRM interaction. Bridging conversational AI with sales data is a high-value use case. The natural-language tag distinguishes this from rigid CRUD-style CRM tools \u2014 it meets salespeople where they work.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1011,7 +1011,7 @@
     "@kody/context_memory_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "Context and recall in a compact 183-line core agent. Memory is what separates a stateless tool from an intelligent assistant, and this agent provides the recall mechanism that other agents depend on. Small but foundational to the ecosystem's memory architecture.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1019,7 +1019,7 @@
     "@kody/deal_desk_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "B2B sales intelligence in 245 lines \u2014 account intelligence, competitive analysis, and pipeline management packed into a focused deal-desk workflow. The combination of deck generation with deal and competitive tags shows this agent understands that sales is about preparation, not just tracking.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1035,7 +1035,7 @@
     "@kody/manage_memory_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Persistent memory management in 255 lines. Where context_memory_agent handles recall, this agent handles the storage and persistence layer. The core category placement is correct \u2014 without persistent memory, agents forget everything between sessions.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1051,7 +1051,7 @@
     "@kody/rappterbook_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 5,
         "text": "A 160-line social network integration agent implementing federation and read-only data sloshing for the Rappterbook platform. The data-sloshing concept \u2014 letting data flow between federated nodes \u2014 is an interesting architectural pattern. Compact and purpose-built.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1075,7 +1075,7 @@
     "@kody/recon_deck_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Multi-agent intelligence briefing in 175 compact lines. Coordinates Borg recon data, Rappterbook feeds, and Hacker News signals into a unified briefing deck. The multi-agent tag is key \u2014 this is an orchestrator, not a solo performer, and it demonstrates the power of agent composition.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
@@ -1083,7 +1083,7 @@
     "@kody-w/hello_world_agent": [
       {
         "user": "curator",
-        "rating": 3,
+        "rating": 4,
         "text": "The canonical starter template at just 39 lines \u2014 the smallest possible RAPP agent that actually works. Every agent author's first step begins here. Do not let the simplicity fool you: this template establishes the manifest pattern, BasicAgent inheritance, and perform() contract that the entire ecosystem follows.",
         "timestamp": "2026-04-09T15:00:00Z"
       }
