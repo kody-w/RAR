@@ -1322,17 +1322,71 @@ def llm_article(title: str, category: str, context: str = "") -> str | None:
         return None
 
 
-def llm_review(agent_name: str, agent_display: str, description: str,
-               category: str, lines: int, tier: str, angle: str) -> str | None:
-    """Try to generate a review using the LLM. Returns None if unavailable."""
+def llm_review(agent: dict, angle: str) -> tuple[str, int] | None:
+    """Generate a review using the LLM. Returns (text, rating) or None.
+
+    Every review is AI-driven — no templates. The LLM sees real agent
+    metadata and writes a genuine, constructive review.
+    """
+    ctx = get_agent_context(agent)
+    tags = ", ".join(agent.get("tags", []))
+    env_vars = ", ".join(agent.get("requires_env", [])) or "none"
+    deps = ", ".join(agent.get("dependencies", [])) or "none"
+
     try:
-        return llm_generate(
-            system="You are a Rappterpedia reviewer. Write a 1-3 sentence review of a RAPP agent. Be specific, constructive, and highlight what the agent does well. Mention real characteristics. If suggesting improvements, frame them as opportunities, not complaints.",
-            user=f"Review the agent \"{agent_display}\" ({agent_name}).\nCategory: {category}\nLines: {lines}\nTier: {tier}\nDescription: {description}\nReview angle: {angle}\n\nWrite a constructive, specific review that celebrates what this agent brings to the ecosystem.",
-            max_tokens=150,
-            temperature=0.9,
+        result = llm_generate(
+            system=(
+                "You are a Rappterpedia reviewer — a knowledgeable, encouraging voice "
+                "in the RAPP Agent ecosystem. You write genuine reviews that celebrate "
+                "what each agent does well while being specific and honest. "
+                "You understand that every agent represents someone's real effort. "
+                "A 3260-line agent with 28 actions is extraordinary. A 200-line focused "
+                "utility is elegant. Find what makes each agent special.\n\n"
+                "Rules:\n"
+                "- Be specific — reference actual line count, features, tags, category\n"
+                "- Be constructive — highlight strengths, frame improvements as opportunities\n"
+                "- Be proportional — massive agents deserve recognition for their scope\n"
+                "- Never say an agent 'needs to differentiate' — every shipped agent IS different\n"
+                "- 2-3 sentences max\n"
+                "- Also return a star rating 1-5 on the last line as just the number\n"
+                "- Rating guide: 1=broken, 2=minimal, 3=solid, 4=impressive, 5=exceptional\n"
+                "- Most community agents that work should be 3-4. Large/complex agents should be 4-5."
+            ),
+            user=(
+                f"Review this agent from the angle of '{angle}':\n\n"
+                f"Name: {ctx['agent_display']} ({ctx['agent_name']})\n"
+                f"Category: {ctx['cat']}\n"
+                f"Description: {ctx['description']}\n"
+                f"Lines: {ctx['lines']}\n"
+                f"Size: {ctx['size_kb']} KB\n"
+                f"Version: {ctx['version']}\n"
+                f"Tier: {ctx['tier']}\n"
+                f"Tags: {tags}\n"
+                f"Env vars required: {env_vars}\n"
+                f"Dependencies: {deps}\n"
+                f"Publisher: {ctx['publisher']}\n\n"
+                f"Write a genuine 2-3 sentence review, then put the star rating (1-5) on the last line."
+            ),
+            max_tokens=200,
+            temperature=0.85,
         )
-    except Exception:
+        # Parse rating from last line
+        lines = result.strip().splitlines()
+        rating = 4  # default
+        text = result.strip()
+        for line in reversed(lines):
+            stripped = line.strip().rstrip(".*★☆")
+            if stripped.isdigit() and 1 <= int(stripped) <= 5:
+                rating = int(stripped)
+                text = "\n".join(lines[:lines.index(line)]).strip()
+                break
+        # Clean up any remaining rating artifacts
+        text = text.rstrip().rstrip("Rating:").rstrip().rstrip("Stars:").rstrip()
+        if not text:
+            return None
+        return text, rating
+    except Exception as e:
+        print(f"  [LLM] Review failed: {e}")
         return None
 
 
@@ -1699,7 +1753,12 @@ def score_agent(agent: dict) -> tuple[int, str]:
 
 
 def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> list[str]:
-    """Generate curator reviews for agents. Accumulates in state across ticks."""
+    """Generate AI-driven curator reviews for agents.
+
+    Every review is LLM-generated — no templates. The AI actually reads
+    each agent's metadata and writes a genuine, specific review.
+    Accumulates in state across ticks.
+    """
     if not agents:
         return []
 
@@ -1731,52 +1790,37 @@ def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> l
         if not candidates:
             break
 
+    review_angles = ["overall quality", "usability and setup", "code quality",
+                     "community value", "compared to alternatives"]
+
     for agent in to_review:
         name = agent.get("name", "")
-        stars, level = score_agent(agent)
-        ctx = get_agent_context(agent)
-        ctx.update({
-            "diff": random.choice(DIFFERENTIATORS),
-            "advantage": random.choice(ADVANTAGES),
-        })
 
-        # Pick a review angle we haven't used for this agent yet
+        # Pick an angle we haven't used for this agent yet
         existing_angles = [r.get("angle", "") for r in reviews.get(name, [])]
-        available_angles = {k: v for k, v in REVIEW_ANGLES.items() if k not in existing_angles}
-        if not available_angles:
-            available_angles = REVIEW_ANGLES
+        available = [a for a in review_angles if a not in existing_angles]
+        if not available:
+            available = review_angles
+        angle = random.choice(available)
 
-        angle_name, angle = pick_weighted(available_angles)
-        templates = angle["templates"].get(level, angle["templates"].get("mid", []))
-        if not templates:
+        # Generate AI review
+        result = llm_review(agent, angle)
+        if not result:
             continue
 
-        # Try LLM-driven review first
-        text = None
-        if random.random() < 0.4:
-            text = llm_review(
-                name, ctx.get("name", name), ctx.get("description", ""),
-                ctx.get("cat", ""), ctx.get("lines", 0), ctx.get("tier", "community"),
-                angle_name,
-            )
-        if not text:
-            text = fill_template(random.choice(templates), ctx)
-
-        # Vary rating ±1 from base
-        rating = max(1, min(5, stars + random.choice([-1, 0, 0, 1])))
-
+        text, rating = result
         reviewer = random.choice(REVIEWER_NAMES)
 
         review = {
             "user": reviewer,
             "rating": rating,
             "text": text,
-            "angle": angle_name,
+            "angle": angle,
             "timestamp": ts,
         }
 
         reviews.setdefault(name, []).append(review)
-        results.append(f"⭐ Review: {reviewer} gave {name} {rating}★ [{angle_name}]")
+        results.append(f"⭐ Review: {reviewer} gave {name} {rating}★ [{angle}]")
 
     return results
 
