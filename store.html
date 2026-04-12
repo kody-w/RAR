@@ -3643,6 +3643,8 @@ async function init() {
     // Sync stack decks — maps AI Agent Templates stacks to browsable decks
     _registryStacks = reg.stacks || null;
     syncStackDecks(reg);
+    // Build vertical packs — each vertical = a pack bundling its decks
+    buildVerticalPacks(reg);
   }
   if (v) votes = v;
   if (r) reviews = r;
@@ -8035,26 +8037,77 @@ async function shareDeck() {
 // ═══════════════════════════════════════════════════════
 
 // ── Seasonal Sets ──
-const PACK_SETS = [
+// ── Pack generation — each vertical = a pack bundling its decks ──
+// Packs are built dynamically from registry stacks after load.
+// Fallback set shown before registry arrives.
+let PACK_SETS = [
   {
-    id: 'genesis', name: 'Genesis', sub: 'Season 1 — The Beginning',
-    cssClass: 'pack-genesis', get icon() { return svgIcon('crystal', '#d2a8ff', 48); }, cards: 5,
-    desc: 'The original set. 5 cards per pack. Weighted rarity.',
-    filter: () => true,
-  },
-  {
-    id: 'frontier', name: 'Frontier', sub: 'Experimental & Bleeding Edge',
-    cssClass: 'pack-frontier', get icon() { return svgIcon('flask', '#39d353', 48); }, cards: 3,
-    desc: '3 experimental-tier agents. Higher mythic chance.',
-    filter: a => a.quality_tier === 'experimental' || a.category === 'pipeline' || a.category === 'devtools',
-  },
-  {
-    id: 'inferno', name: 'Inferno', sub: 'Sales & Industry Power',
-    cssClass: 'pack-inferno', get icon() { return svgIcon('flame', '#f97583', 48); }, cards: 5,
-    desc: '5 industry vertical agents. B2B, healthcare, finance.',
-    filter: a => ['b2b_sales','b2c_sales','healthcare','financial_services','manufacturing','energy','retail_cpg','professional_services'].includes(a.category),
+    id: 'core', name: 'Core', sub: 'Foundation — tools, memory, workbench',
+    cssClass: 'pack-genesis', get icon() { return svgIcon('brain', '#d2a8ff', 48); }, cards: 5,
+    desc: 'Core toolkit and infrastructure agents.',
+    filter: a => !a._stack,
   },
 ];
+
+// Color palette per vertical
+const VERTICAL_PACK_COLORS = {
+  b2b_sales:             { bg1: '#1a1040', bg2: '#2d1b69', border: '#7c3aed', accent: '#d2a8ff' },
+  b2c_sales:             { bg1: '#0a1a2a', bg2: '#0d2a4a', border: '#3b82f6', accent: '#93c5fd' },
+  energy:                { bg1: '#1a1a00', bg2: '#3a3a0a', border: '#eab308', accent: '#fde68a' },
+  federal_government:    { bg1: '#0a1a2a', bg2: '#0a2a3a', border: '#0ea5e9', accent: '#7dd3fc' },
+  financial_services:    { bg1: '#0a2a1a', bg2: '#0d4a2a', border: '#10b981', accent: '#6ee7b7' },
+  general:               { bg1: '#1a1a2a', bg2: '#2a2a3a', border: '#6366f1', accent: '#a5b4fc' },
+  healthcare:            { bg1: '#2a0a1a', bg2: '#4a0a2a', border: '#ec4899', accent: '#f9a8d4' },
+  human_resources:       { bg1: '#1a1a2a', bg2: '#2d2a3a', border: '#8b5cf6', accent: '#c4b5fd' },
+  it_management:         { bg1: '#0a1a1a', bg2: '#0a2a2a', border: '#14b8a6', accent: '#5eead4' },
+  manufacturing:         { bg1: '#1a1a0a', bg2: '#2a2a0a', border: '#f59e0b', accent: '#fcd34d' },
+  professional_services: { bg1: '#1a0a1a', bg2: '#2a0a2a', border: '#a855f7', accent: '#d8b4fe' },
+  retail_cpg:            { bg1: '#2a0a0a', bg2: '#4a1a0a', border: '#ef4444', accent: '#fca5a5' },
+  slg_government:        { bg1: '#0a1a2a', bg2: '#0a2a3a', border: '#0284c7', accent: '#7dd3fc' },
+  software_dp:           { bg1: '#0a2a1a', bg2: '#0a3a2a', border: '#22c55e', accent: '#86efac' },
+};
+
+function buildVerticalPacks(reg) {
+  if (!reg || !reg.stacks) return;
+  // Group stacks by vertical
+  const verticals = {};
+  for (const [slug, stack] of Object.entries(reg.stacks)) {
+    const v = stack.vertical || 'general';
+    if (!verticals[v]) verticals[v] = { stackNames: [], agents: new Set() };
+    verticals[v].stackNames.push(stack.display_name);
+    stack.agents.forEach(a => verticals[v].agents.add(a));
+  }
+  // Core pack for non-stack agents
+  const packs = [{
+    id: 'core', name: 'Core', sub: 'Foundation — tools, memory, workbench',
+    cssClass: 'pack-genesis', get icon() { return svgIcon('brain', '#d2a8ff', 48); }, cards: 5,
+    desc: 'Core toolkit and infrastructure agents.',
+    filter: a => !a._stack,
+  }];
+  // One pack per vertical
+  for (const [v, data] of Object.entries(verticals).sort((a, b) => a[0].localeCompare(b[0]))) {
+    if (data.agents.size < 2) continue;
+    const label = VERTICAL_LABELS[v] || v.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const colors = VERTICAL_PACK_COLORS[v] || VERTICAL_PACK_COLORS.general;
+    const glyph = CAT_TO_GLYPH[v] || 'gear';
+    const deckCount = data.stackNames.length;
+    const agentCount = data.agents.size;
+    const vert = v;  // capture for closure
+    packs.push({
+      id: vert,
+      name: label,
+      sub: `${deckCount} stack${deckCount !== 1 ? 's' : ''} \u00b7 ${agentCount} agents`,
+      cssClass: '',
+      _inlineStyle: `background:linear-gradient(135deg,${colors.bg1},${colors.bg2},${colors.bg1});border:2px solid ${colors.border}`,
+      get icon() { return svgIcon(glyph, colors.accent, 48); },
+      cards: Math.min(5, agentCount),
+      desc: `${agentCount} agents from ${label} industry stacks.`,
+      filter: a => a._stack_vertical === vert,
+    });
+  }
+  PACK_SETS = packs;
+  renderPackShelf();
+}
 
 // ── Collection (IndexedDB) ──
 const COLL_DB = 'rar_collection';
@@ -11034,7 +11087,7 @@ function renderPackShelfWithOdds() {
     const pool = allAgents.filter(p.filter);
     const mythicCount = pool.filter(a => (TIER_TO_RARITY[a.quality_tier] || 'uncommon') === 'mythic').length;
     const rareCount = pool.filter(a => (TIER_TO_RARITY[a.quality_tier] || 'uncommon') === 'rare').length;
-    return `<div class="pack-box ${p.cssClass}" onclick="openPack('${p.id}')">
+    return `<div class="pack-box ${p.cssClass || ''}" ${p._inlineStyle ? `style="${p._inlineStyle}"` : ''} onclick="openPack('${p.id}')">
       <div class="pack-icon">${p.icon}</div>
       <div class="pack-name">${p.name}</div>
       <div class="pack-sub">${p.sub}</div>
