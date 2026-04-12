@@ -5749,7 +5749,8 @@ function switchDeck(name) {
   localStorage.setItem('rar_current_deck', name);
   renderDeckSelect();
   renderCompanion();
-  renderCards();
+  // Auto-filter to show this deck's cards (also calls renderCards)
+  setCardFilter('deck', null);
 }
 
 function newDeck() {
