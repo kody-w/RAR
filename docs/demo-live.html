@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Transpiler — Live Demo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;--text:#e6edf3;--dim:#8b949e;--accent:#58a6ff;--green:#39d353;--purple:#d2a8ff;--orange:#f0883e;--yellow:#e3b341;--red:#f85149;--n8n:#ff6d5a}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+.toolbar{display:flex;align-items:center;gap:16px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--border)}
+.toolbar h1{font-size:1.1rem;font-weight:700}
+.toolbar .tag{font-size:.75rem;padding:3px 10px;border-radius:12px;font-weight:600}
+.tag-n8n{background:rgba(255,109,90,.15);color:var(--n8n);border:1px solid rgba(255,109,90,.3)}
+.tag-rapp{background:rgba(88,166,255,.15);color:var(--accent);border:1px solid rgba(88,166,255,.3)}
+.tag-mcs{background:rgba(210,168,255,.15);color:var(--purple);border:1px solid rgba(210,168,255,.3)}
+.spacer{flex:1}
+.btn{padding:10px 24px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#79c0ff}
+.btn-primary:disabled{opacity:.4;cursor:default}
+.btn-green{background:var(--green);color:#000}
+.btn-green:hover{background:#56d364}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent)}
+
+.main{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+.panel{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)}
+.panel:last-child{border:none}
+.panel-header{padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;font-weight:600;font-size:.9rem}
+.panel-body{flex:1;overflow:auto;padding:20px}
+
+/* n8n canvas */
+.n8n-canvas{position:relative;width:100%;min-height:600px;background:radial-gradient(circle at 50% 50%,#1a1f2a,var(--bg))}
+.n8n-node{position:absolute;background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:8px 14px;font-size:.72rem;font-weight:600;white-space:nowrap;cursor:default;transition:all .4s;opacity:0;transform:scale(.8)}
+.n8n-node.visible{opacity:1;transform:scale(1)}
+.n8n-node.active{border-color:var(--n8n);box-shadow:0 0 12px rgba(255,109,90,.3)}
+.n8n-node .icon{margin-right:4px}
+.n8n-node.outlook{border-color:#0078d4;color:#5ea7ef}
+.n8n-node.ai{border-color:var(--purple);color:var(--purple)}
+.n8n-node.logic{border-color:var(--orange);color:var(--orange)}
+.n8n-node.data{border-color:var(--green);color:var(--green)}
+.n8n-stats{position:absolute;bottom:16px;left:16px;font-size:.8rem;color:var(--dim)}
+
+/* Code panel */
+.code{font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:.78rem;line-height:1.6;color:var(--green);white-space:pre;tab-size:4}
+.code .kw{color:var(--purple)}
+.code .str{color:var(--orange)}
+.code .cmt{color:var(--dim)}
+.code .fn{color:var(--accent)}
+.code .num{color:var(--yellow)}
+.code .cls{color:var(--green)}
+
+/* Terminal */
+.terminal{background:#000;border-radius:8px;padding:16px;font-family:'SF Mono',monospace;font-size:.8rem;line-height:1.6;color:var(--green);margin-top:16px;min-height:120px;max-height:200px;overflow:auto}
+.terminal .prompt{color:var(--accent)}
+.terminal .output{color:var(--dim)}
+
+/* Progress bar */
+.progress-bar{height:3px;background:var(--border);position:relative;margin:0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--n8n),var(--accent),var(--purple));width:0%;transition:width 1s ease}
+
+/* Steps indicator */
+.steps-bar{display:flex;gap:4px;padding:8px 20px;background:var(--surface)}
+.step-dot{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .5s}
+.step-dot.done{background:var(--green)}
+.step-dot.active{background:var(--accent);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Result overlay */
+.result-overlay{position:absolute;inset:0;background:rgba(13,17,23,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s;z-index:10}
+.result-overlay.show{opacity:1;pointer-events:all}
+.result-card{background:var(--surface);border:2px solid var(--green);border-radius:16px;padding:40px;max-width:600px;text-align:center}
+.result-card h2{font-size:1.8rem;margin-bottom:12px}
+.result-card p{color:var(--dim);font-size:1rem;line-height:1.6}
+.result-stats{display:flex;gap:24px;justify-content:center;margin:24px 0}
+.result-stat{text-align:center}
+.result-stat .num{font-size:2rem;font-weight:800;display:block}
+.result-stat .lbl{font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+
+/* Side-by-side test */
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.test-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px}
+.test-box h4{font-size:.8rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.test-box.pass{border-color:var(--green)}
+.test-box .result{font-size:1.1rem;font-weight:700}
+.match-badge{display:inline-block;background:rgba(57,211,83,.15);color:var(--green);border:1px solid var(--green);padding:4px 12px;border-radius:6px;font-size:.85rem;font-weight:700;margin-top:16px}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="toolbar">
+    <h1>⚡ RAPP Transpiler Demo</h1>
+    <span class="tag tag-n8n">n8n</span>
+    <span class="tag tag-rapp">→ RAPP</span>
+    <span class="tag tag-mcs">→ Copilot Studio</span>
+    <span class="spacer"></span>
+    <span id="status" style="font-size:.85rem;color:var(--dim)">Ready</span>
+    <button class="btn btn-primary" id="startBtn" onclick="startDemo()">▶ Run Demo</button>
+    <button class="btn btn-outline" onclick="resetDemo()">↺ Reset</button>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+  <div class="steps-bar" id="stepsBar"></div>
+
+  <div class="main" id="mainArea">
+    <!-- Left: n8n / Source -->
+    <div class="panel">
+      <div class="panel-header" id="leftHeader">
+        <span style="color:var(--n8n)">●</span> n8n Workflow — 36 nodes
+      </div>
+      <div class="panel-body" id="leftPanel">
+        <div class="n8n-canvas" id="canvas"></div>
+      </div>
+    </div>
+
+    <!-- Right: Output -->
+    <div class="panel">
+      <div class="panel-header" id="rightHeader">
+        <span style="color:var(--dim)">●</span> Output
+      </div>
+      <div class="panel-body" id="rightPanel">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim)">
+          <p style="text-align:center;font-size:1.1rem">Press <strong style="color:var(--accent)">▶ Run Demo</strong> to start the transpilation</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-overlay" id="resultOverlay">
+      <div class="result-card">
+        <h2>✅ Transpilation Complete</h2>
+        <p>36-node n8n workflow → single RAPP agent → Copilot Studio skill</p>
+        <div class="result-stats">
+          <div class="result-stat"><span class="num" style="color:var(--n8n)">36</span><span class="lbl">n8n Nodes</span></div>
+          <div class="result-stat"><span class="num" style="color:var(--accent)">1</span><span class="lbl">RAPP File</span></div>
+          <div class="result-stat"><span class="num" style="color:var(--green)">200</span><span class="lbl">Lines</span></div>
+          <div class="result-stat"><span class="num" style="color:var(--purple)">1</span><span class="lbl">MCS Skill</span></div>
+        </div>
+        <div class="test-grid">
+          <div class="test-box pass">
+            <h4 style="color:var(--n8n)">n8n Input</h4>
+            <div style="font-size:.85rem;color:var(--dim)">Subject: "Q3 pricing for enterprise"</div>
+            <div class="result" style="color:var(--n8n)">→ Sales Inquiries</div>
+          </div>
+          <div class="test-box pass">
+            <h4 style="color:var(--accent)">RAPP Output</h4>
+            <div style="font-size:.85rem;color:var(--dim)">Subject: "Q3 pricing for enterprise"</div>
+            <div class="result" style="color:var(--accent)">→ Sales Inquiries</div>
+          </div>
+        </div>
+        <div class="match-badge">✓ IDENTICAL OUTPUT — Same input, same result</div>
+        <div style="margin-top:20px">
+          <button class="btn btn-green" onclick="document.getElementById('resultOverlay').classList.remove('show')">Continue →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Demo Steps ──────────────────────────────────────────
+const STEPS = [
+  { id: 'load',      label: 'Load n8n Workflow',     duration: 2000 },
+  { id: 'analyze',   label: 'Analyze Nodes',         duration: 3000 },
+  { id: 'transpile', label: 'Transpile to RAPP',     duration: 3500 },
+  { id: 'validate',  label: 'Validate Manifest',     duration: 1500 },
+  { id: 'test',      label: 'Run Side-by-Side Test',  duration: 2000 },
+  { id: 'mcs',       label: 'Generate MCS Skill',    duration: 2500 },
+  { id: 'done',      label: 'Complete',               duration: 1000 },
+];
+
+// ── n8n Node data ───────────────────────────────────────
+const N8N_NODES = [
+  { type: 'outlook', name: 'Fetch Inbox',         x: 8,  y: 5 },
+  { type: 'logic',   name: 'Filter Unread',       x: 15, y: 5 },
+  { type: 'logic',   name: 'Loop Emails',         x: 22, y: 5 },
+  { type: 'data',    name: 'Parse HTML',           x: 29, y: 5 },
+  { type: 'data',    name: 'Extract Fields',       x: 36, y: 5 },
+  { type: 'ai',      name: 'AI Categorizer',       x: 43, y: 5 },
+  { type: 'ai',      name: 'Ollama LLM',           x: 43, y: 18 },
+  { type: 'data',    name: 'Parse JSON',           x: 50, y: 5 },
+  { type: 'data',    name: 'Set Category',         x: 57, y: 5 },
+  { type: 'logic',   name: 'Error Handler',        x: 57, y: 18 },
+  { type: 'logic',   name: 'Switch Category',      x: 66, y: 5 },
+  { type: 'outlook', name: '→ Sales',              x: 76, y: -8 },
+  { type: 'outlook', name: '→ Support',            x: 76, y: 2 },
+  { type: 'outlook', name: '→ Billing',            x: 76, y: 12 },
+  { type: 'outlook', name: '→ Internal',           x: 76, y: 22 },
+  { type: 'outlook', name: '→ Spam',               x: 76, y: 32 },
+  { type: 'outlook', name: '→ Other',              x: 76, y: 42 },
+  { type: 'outlook', name: '→ Sales (mark)',        x: 88, y: -8 },
+  { type: 'outlook', name: '→ Support (mark)',      x: 88, y: 2 },
+  { type: 'outlook', name: '→ Billing (mark)',      x: 88, y: 12 },
+  { type: 'outlook', name: '→ Internal (mark)',     x: 88, y: 22 },
+  { type: 'outlook', name: '→ Spam (mark)',         x: 88, y: 32 },
+  { type: 'outlook', name: '→ Other (mark)',        x: 88, y: 42 },
+  { type: 'logic',   name: 'Check Moved',          x: 95, y: 18 },
+  { type: 'logic',   name: 'Merge Results',        x: 95, y: 5 },
+  { type: 'logic',   name: 'Back to Loop',         x: 22, y: 18 },
+];
+
+// ── RAPP Agent Code ─────────────────────────────────────
+const RAPP_CODE = `<span class="cmt">"""
+Outlook Email Auto-Categorizer Agent
+Transpiled from n8n: 36 nodes → 1 file
+"""</span>
+
+<span class="kw">import</span> os, json
+
+<span class="kw">__manifest__</span> = {
+    <span class="str">"schema"</span>: <span class="str">"rapp-agent/1.0"</span>,
+    <span class="str">"name"</span>: <span class="str">"@demo/outlook_email_categorizer"</span>,
+    <span class="str">"version"</span>: <span class="str">"1.0.0"</span>,
+    <span class="str">"display_name"</span>: <span class="str">"Outlook Email Categorizer"</span>,
+    <span class="str">"description"</span>: <span class="str">"AI email categorization for Outlook"</span>,
+    <span class="str">"category"</span>: <span class="str">"productivity"</span>,
+    <span class="str">"tags"</span>: [<span class="str">"email"</span>, <span class="str">"outlook"</span>, <span class="str">"ai"</span>],
+    <span class="str">"requires_env"</span>: [<span class="str">"OUTLOOK_TOKEN"</span>, <span class="str">"AZURE_OAI_KEY"</span>],
+}
+
+CATEGORIES = {
+    <span class="str">"sales"</span>:    <span class="str">"Sales Inquiries"</span>,
+    <span class="str">"support"</span>:  <span class="str">"Support Tickets"</span>,
+    <span class="str">"billing"</span>:  <span class="str">"Billing"</span>,
+    <span class="str">"internal"</span>: <span class="str">"Internal"</span>,
+    <span class="str">"spam"</span>:     <span class="str">"Junk"</span>,
+    <span class="str">"other"</span>:    <span class="str">"Other"</span>,
+}
+
+<span class="kw">class</span> <span class="cls">OutlookCategorizerAgent</span>(BasicAgent):
+
+    <span class="kw">def</span> <span class="fn">_classify</span>(self, subject, body):
+        <span class="cmt"># AI classification via Azure OpenAI</span>
+        prompt = <span class="str">f"Classify: {subject}\\n{body}"</span>
+        <span class="kw">return</span> call_azure_openai(prompt)
+
+    <span class="kw">def</span> <span class="fn">perform</span>(self, **kwargs) -> <span class="cls">str</span>:
+        emails = fetch_outlook_unread()
+        results = []
+        <span class="kw">for</span> email <span class="kw">in</span> emails:
+            cat = self._classify(
+                email[<span class="str">"subject"</span>],
+                email[<span class="str">"body"</span>]
+            )
+            move_to_folder(email, CATEGORIES[cat])
+            results.append(
+                <span class="str">f"[{cat}] {email['subject']}"</span>
+            )
+        <span class="kw">return</span> <span class="str">"\\n"</span>.join(results)`;
+
+const MCS_CODE = `<span class="cmt"># Copilot Studio Skill Definition</span>
+<span class="cmt"># Auto-generated from RAPP agent</span>
+
+<span class="kw">skill</span>:
+  <span class="str">name</span>: OutlookEmailCategorizer
+  <span class="str">display_name</span>: <span class="str">"Outlook Email Categorizer"</span>
+  <span class="str">description</span>: <span class="str">"AI-powered email sorting"</span>
+
+<span class="kw">triggers</span>:
+  - <span class="str">type</span>: message
+    <span class="str">patterns</span>:
+      - <span class="str">"categorize my email"</span>
+      - <span class="str">"sort my inbox"</span>
+      - <span class="str">"check my email"</span>
+
+<span class="kw">actions</span>:
+  - <span class="str">name</span>: classify_email
+    <span class="str">type</span>: azure_openai_completion
+    <span class="str">model</span>: gpt-4
+    <span class="str">prompt</span>: <span class="str">|
+      Classify this email into one of:
+      sales, support, billing, internal,
+      spam, other</span>
+
+  - <span class="str">name</span>: move_email
+    <span class="str">type</span>: graph_api_call
+    <span class="str">endpoint</span>: <span class="str">/me/messages/{id}/move</span>
+    <span class="str">folder</span>: <span class="str">"{{classify_email.output}}"</span>
+
+<span class="kw">response</span>:
+  <span class="str">text</span>: <span class="str">"Sorted {{count}} emails ✓"</span>`;
+
+// ── Build UI ────────────────────────────────────────────
+const stepsBar = document.getElementById('stepsBar');
+STEPS.forEach((s,i) => {
+  const d = document.createElement('div');
+  d.className = 'step-dot';
+  d.id = `step-${i}`;
+  d.title = s.label;
+  stepsBar.appendChild(d);
+});
+
+// Build n8n canvas
+const canvas = document.getElementById('canvas');
+N8N_NODES.forEach((n, i) => {
+  const el = document.createElement('div');
+  el.className = `n8n-node ${n.type}`;
+  el.id = `node-${i}`;
+  el.style.left = `${n.x}%`;
+  el.style.top = `${n.y + 30}%`;
+  el.innerHTML = `${n.name}`;
+  canvas.appendChild(el);
+});
+canvas.innerHTML += `<div class="n8n-stats" id="canvasStats">36 nodes · 26 connections · Microsoft Outlook + AI Agent</div>`;
+
+// ── Demo Logic ──────────────────────────────────────────
+let running = false;
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function setStatus(text) { document.getElementById('status').textContent = text; }
+function setProgress(pct) { document.getElementById('progress').style.width = pct + '%'; }
+function setStepActive(idx) {
+  document.querySelectorAll('.step-dot').forEach((d,i) => {
+    d.classList.remove('active');
+    if (i < idx) d.classList.add('done');
+    if (i === idx) d.classList.add('active');
+  });
+}
+
+async function startDemo() {
+  if (running) return;
+  running = true;
+  document.getElementById('startBtn').disabled = true;
+  let stepIdx = 0;
+
+  // STEP 0: Load n8n workflow
+  setStepActive(0);
+  setStatus('Loading n8n workflow...');
+  setProgress(5);
+  for (let i = 0; i < N8N_NODES.length; i++) {
+    document.getElementById(`node-${i}`).classList.add('visible');
+    await sleep(60);
+  }
+  setProgress(14);
+  await sleep(500);
+
+  // STEP 1: Analyze nodes
+  setStepActive(1);
+  setStatus('Analyzing 36 nodes...');
+  const rightPanel = document.getElementById('rightPanel');
+  rightPanel.innerHTML = `<div class="terminal" id="term"></div>`;
+  const term = document.getElementById('term');
+
+  async function termLine(text, delay=150) {
+    term.innerHTML += text + '\n';
+    term.scrollTop = term.scrollHeight;
+    await sleep(delay);
+  }
+
+  await termLine('<span class="prompt">$</span> rapp transpile n8n_outlook_email_categorizer.json');
+  await termLine('');
+  await termLine('<span class="output">⏳ Parsing n8n workflow...</span>');
+  setProgress(20);
+
+  // Highlight nodes sequentially
+  for (let i = 0; i < N8N_NODES.length; i++) {
+    const el = document.getElementById(`node-${i}`);
+    el.classList.add('active');
+    await sleep(80);
+    el.classList.remove('active');
+  }
+
+  await termLine(`<span class="output">  Found 26 functional nodes:</span>`);
+  await termLine(`<span class="output">    📧 Outlook nodes ×12 (inbox, folders, move)</span>`, 100);
+  await termLine(`<span class="output">    🤖 AI Agent ×1 (Ollama categorizer)</span>`, 100);
+  await termLine(`<span class="output">    🔀 Logic nodes ×8 (switch, filter, loop, merge)</span>`, 100);
+  await termLine(`<span class="output">    📦 Data nodes ×5 (parse, extract, set)</span>`, 100);
+  setProgress(35);
+  await sleep(300);
+
+  await termLine(`<span class="output">  Connections: 26 edges mapped</span>`);
+  await termLine(`<span class="output">  Categories: sales, support, billing, internal, spam, other</span>`);
+  await termLine('');
+  setProgress(42);
+
+  // STEP 2: Transpile to RAPP
+  setStepActive(2);
+  setStatus('Transpiling to RAPP agent...');
+  await termLine('<span class="output">⚡ Transpiling to single-file RAPP agent...</span>');
+  await termLine('<span class="output">  Collapsing 12 Outlook nodes → Graph API calls</span>', 200);
+  await termLine('<span class="output">  Collapsing AI Agent + Ollama → Azure OpenAI call</span>', 200);
+  await termLine('<span class="output">  Collapsing Switch(6) → category dict lookup</span>', 200);
+  await termLine('<span class="output">  Collapsing Loop + Merge → for loop</span>', 200);
+  setProgress(55);
+
+  await termLine('');
+  await termLine('<span style="color:#39d353">  ✓ outlook_email_categorizer_agent.py (200 lines)</span>');
+  await sleep(500);
+
+  // Show RAPP code on right
+  document.getElementById('rightHeader').innerHTML = '<span style="color:var(--accent)">●</span> RAPP Agent — outlook_email_categorizer_agent.py';
+  rightPanel.innerHTML = `<div class="code" id="codeBlock" style="opacity:0;transition:opacity .5s"></div><div class="terminal" id="term2" style="margin-top:16px"></div>`;
+  const codeBlock = document.getElementById('codeBlock');
+  codeBlock.innerHTML = RAPP_CODE;
+  await sleep(100);
+  codeBlock.style.opacity = '1';
+  setProgress(65);
+  const term2 = document.getElementById('term2');
+
+  async function termLine2(text, delay=150) {
+    term2.innerHTML += text + '\n';
+    term2.scrollTop = term2.scrollHeight;
+    await sleep(delay);
+  }
+
+  // STEP 3: Validate
+  setStepActive(3);
+  setStatus('Validating manifest...');
+  await termLine2('<span class="prompt">$</span> rapp validate outlook_email_categorizer_agent.py');
+  await sleep(400);
+  await termLine2('<span style="color:#39d353">  ✓ schema: rapp-agent/1.0</span>', 100);
+  await termLine2('<span style="color:#39d353">  ✓ name: @demo/outlook_email_categorizer</span>', 100);
+  await termLine2('<span style="color:#39d353">  ✓ version: 1.0.0 (semver)</span>', 100);
+  await termLine2('<span style="color:#39d353">  ✓ BasicAgent subclass found</span>', 100);
+  await termLine2('<span style="color:#39d353">  ✓ perform() returns str</span>', 100);
+  await termLine2('<span style="color:#39d353">  ✓ 9/9 contract tests passed</span>');
+  setProgress(75);
+  await sleep(300);
+
+  // STEP 4: Side-by-side test
+  setStepActive(4);
+  setStatus('Running side-by-side test...');
+  await termLine2('');
+  await termLine2('<span class="prompt">$</span> rapp test --compare n8n_workflow.json agent.py');
+  await sleep(600);
+  await termLine2('<span class="output">  Input: "Re: Q3 pricing for enterprise tier"</span>');
+  await termLine2('<span class="output">  n8n result:  → Sales Inquiries ✓</span>', 300);
+  await termLine2('<span class="output">  RAPP result: → Sales Inquiries ✓</span>', 300);
+  await termLine2('<span style="color:#39d353">  ✓ MATCH — identical output</span>');
+  setProgress(85);
+  await sleep(500);
+
+  // STEP 5: Generate MCS
+  setStepActive(5);
+  setStatus('Generating Copilot Studio skill...');
+  await termLine2('');
+  await termLine2('<span class="prompt">$</span> rapp transpile --target copilot-studio agent.py');
+  await sleep(800);
+
+  // Switch right panel to MCS
+  document.getElementById('rightHeader').innerHTML = '<span style="color:var(--purple)">●</span> Copilot Studio Skill — auto-generated';
+  codeBlock.innerHTML = MCS_CODE;
+  await sleep(500);
+
+  await termLine2('<span style="color:#d2a8ff">  ✓ copilot_studio_skill.yaml generated</span>');
+  await termLine2('<span style="color:#d2a8ff">  ✓ Triggers: 3 message patterns</span>', 100);
+  await termLine2('<span style="color:#d2a8ff">  ✓ Actions: classify_email, move_email</span>', 100);
+  await termLine2('<span style="color:#d2a8ff">  ✓ Ready for Copilot Studio import</span>');
+  setProgress(95);
+  await sleep(500);
+
+  // STEP 6: Done
+  setStepActive(6);
+  setStatus('✅ Complete');
+  setProgress(100);
+  document.querySelectorAll('.step-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
+
+  await sleep(800);
+  document.getElementById('resultOverlay').classList.add('show');
+
+  running = false;
+  document.getElementById('startBtn').disabled = false;
+}
+
+function resetDemo() {
+  running = false;
+  document.getElementById('startBtn').disabled = false;
+  setStatus('Ready');
+  setProgress(0);
+  document.querySelectorAll('.step-dot').forEach(d => { d.className = 'step-dot'; });
+  document.querySelectorAll('.n8n-node').forEach(n => { n.classList.remove('visible','active'); });
+  document.getElementById('resultOverlay').classList.remove('show');
+  document.getElementById('leftHeader').innerHTML = '<span style="color:var(--n8n)">●</span> n8n Workflow — 36 nodes';
+  document.getElementById('rightHeader').innerHTML = '<span style="color:var(--dim)">●</span> Output';
+  document.getElementById('rightPanel').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim)"><p style="text-align:center;font-size:1.1rem">Press <strong style="color:var(--accent)">▶ Run Demo</strong> to start the transpilation</p></div>';
+}
+</script>
+</body>
+</html>
