@@ -5608,19 +5608,39 @@ function saveDecks() {
 }
 
 // ── Stack-to-deck sync — maps AI Agent Templates stacks to decks ──
-// Each stack from the original templates becomes a deck; each agent.py = a card.
-// Runs after registry loads. Non-destructive: only adds stacks not already in user's decks.
+// Multi-agent stacks become their own deck. Single-agent stacks roll up
+// into a vertical-level deck (e.g. "B2C Sales", "Healthcare").
+// Runs after registry loads. Non-destructive: only adds decks not already present.
 let _stackDeckNames = new Set();  // track which decks came from stacks (for grouping)
 let _registryStacks = null;       // populated on registry load
 
 function syncStackDecks(reg) {
   if (!reg || !reg.stacks) return;
   let changed = false;
+  // Collect single-agent stacks by vertical for rollup
+  const verticalRollup = {};  // vertical -> [agent names]
   for (const [slug, stack] of Object.entries(reg.stacks)) {
-    const deckName = stack.display_name;
+    if (stack.agents.length >= 2) {
+      // Multi-agent stack = its own deck
+      const deckName = stack.display_name;
+      _stackDeckNames.add(deckName);
+      if (!allDecks[deckName]) {
+        allDecks[deckName] = [...stack.agents];
+        changed = true;
+      }
+    } else {
+      // Single-agent stack — roll up into vertical deck
+      const vert = stack.vertical || 'general';
+      if (!verticalRollup[vert]) verticalRollup[vert] = [];
+      verticalRollup[vert].push(...stack.agents);
+    }
+  }
+  // Build vertical rollup decks
+  for (const [vert, agents] of Object.entries(verticalRollup)) {
+    const deckName = VERTICAL_LABELS[vert] || vert.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     _stackDeckNames.add(deckName);
     if (!allDecks[deckName]) {
-      allDecks[deckName] = [...stack.agents];
+      allDecks[deckName] = agents;
       changed = true;
     }
   }
