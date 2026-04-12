@@ -32,16 +32,17 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .panel-body{flex:1;overflow:auto;padding:20px}
 
 /* n8n canvas */
-.n8n-canvas{position:relative;width:100%;min-height:600px;background:radial-gradient(circle at 50% 50%,#1a1f2a,var(--bg))}
-.n8n-node{position:absolute;background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:8px 14px;font-size:.72rem;font-weight:600;white-space:nowrap;cursor:default;transition:all .4s;opacity:0;transform:scale(.8)}
+.n8n-canvas{position:relative;width:100%;height:100%;min-height:500px;background:radial-gradient(circle at 50% 50%,#1a1f2a,var(--bg));overflow:hidden}
+.n8n-node{position:absolute;background:var(--surface);border:2px solid var(--border);border-radius:6px;padding:4px 10px;font-size:.65rem;font-weight:600;white-space:nowrap;cursor:default;transition:all .4s;opacity:0;transform:scale(.8)}
 .n8n-node.visible{opacity:1;transform:scale(1)}
 .n8n-node.active{border-color:var(--n8n);box-shadow:0 0 12px rgba(255,109,90,.3)}
-.n8n-node .icon{margin-right:4px}
 .n8n-node.outlook{border-color:#0078d4;color:#5ea7ef}
 .n8n-node.ai{border-color:var(--purple);color:var(--purple)}
 .n8n-node.logic{border-color:var(--orange);color:var(--orange)}
 .n8n-node.data{border-color:var(--green);color:var(--green)}
-.n8n-stats{position:absolute;bottom:16px;left:16px;font-size:.8rem;color:var(--dim)}
+.n8n-edge{position:absolute;pointer-events:none;opacity:0;transition:opacity .6s}
+.n8n-edge.visible{opacity:.4}
+.n8n-stats{position:absolute;bottom:12px;left:12px;font-size:.75rem;color:var(--dim)}
 
 /* Code panel */
 .code{font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:.78rem;line-height:1.6;color:var(--green);white-space:pre;tab-size:4}
@@ -172,32 +173,39 @@ const STEPS = [
 
 // ── n8n Node data ───────────────────────────────────────
 const N8N_NODES = [
-  { type: 'outlook', name: 'Fetch Inbox',         x: 8,  y: 5 },
-  { type: 'logic',   name: 'Filter Unread',       x: 15, y: 5 },
-  { type: 'logic',   name: 'Loop Emails',         x: 22, y: 5 },
-  { type: 'data',    name: 'Parse HTML',           x: 29, y: 5 },
-  { type: 'data',    name: 'Extract Fields',       x: 36, y: 5 },
-  { type: 'ai',      name: 'AI Categorizer',       x: 43, y: 5 },
-  { type: 'ai',      name: 'Ollama LLM',           x: 43, y: 18 },
-  { type: 'data',    name: 'Parse JSON',           x: 50, y: 5 },
-  { type: 'data',    name: 'Set Category',         x: 57, y: 5 },
-  { type: 'logic',   name: 'Error Handler',        x: 57, y: 18 },
-  { type: 'logic',   name: 'Switch Category',      x: 66, y: 5 },
-  { type: 'outlook', name: '→ Sales',              x: 76, y: -8 },
-  { type: 'outlook', name: '→ Support',            x: 76, y: 2 },
-  { type: 'outlook', name: '→ Billing',            x: 76, y: 12 },
-  { type: 'outlook', name: '→ Internal',           x: 76, y: 22 },
-  { type: 'outlook', name: '→ Spam',               x: 76, y: 32 },
-  { type: 'outlook', name: '→ Other',              x: 76, y: 42 },
-  { type: 'outlook', name: '→ Sales (mark)',        x: 88, y: -8 },
-  { type: 'outlook', name: '→ Support (mark)',      x: 88, y: 2 },
-  { type: 'outlook', name: '→ Billing (mark)',      x: 88, y: 12 },
-  { type: 'outlook', name: '→ Internal (mark)',     x: 88, y: 22 },
-  { type: 'outlook', name: '→ Spam (mark)',         x: 88, y: 32 },
-  { type: 'outlook', name: '→ Other (mark)',        x: 88, y: 42 },
-  { type: 'logic',   name: 'Check Moved',          x: 95, y: 18 },
-  { type: 'logic',   name: 'Merge Results',        x: 95, y: 5 },
-  { type: 'logic',   name: 'Back to Loop',         x: 22, y: 18 },
+  // Row 1: Main pipeline (left to right, y=42%)
+  { type: 'outlook', name: 'Fetch Inbox',       x: 2,  y: 42 },
+  { type: 'logic',   name: 'Filter Unread',     x: 13, y: 42 },
+  { type: 'logic',   name: 'Loop Emails',       x: 24, y: 42 },
+  { type: 'data',    name: 'Parse HTML',         x: 35, y: 42 },
+  { type: 'data',    name: 'Extract Fields',     x: 46, y: 42 },
+  { type: 'ai',      name: 'AI Categorizer',     x: 57, y: 42 },
+  { type: 'data',    name: 'Parse JSON',         x: 68, y: 42 },
+  { type: 'data',    name: 'Set Category',       x: 79, y: 42 },
+
+  // Row 2: Below main (support nodes)
+  { type: 'ai',      name: 'Ollama LLM',         x: 57, y: 58 },
+  { type: 'logic',   name: 'Error Handler',      x: 68, y: 58 },
+  { type: 'logic',   name: 'Back to Loop',       x: 24, y: 58 },
+
+  // Switch node (center-right)
+  { type: 'logic',   name: 'Switch',             x: 90, y: 42 },
+
+  // Row 3: Category folder targets (fan out from switch)
+  { type: 'outlook', name: '→ Sales',            x: 78, y: 8 },
+  { type: 'outlook', name: '→ Support',          x: 78, y: 20 },
+  { type: 'outlook', name: '→ Billing',          x: 78, y: 70 },
+  { type: 'outlook', name: '→ Internal',         x: 78, y: 82 },
+  { type: 'outlook', name: '→ Spam',             x: 90, y: 8 },
+  { type: 'outlook', name: '→ Other',            x: 90, y: 20 },
+
+  // Mark-read nodes
+  { type: 'outlook', name: 'Mark Read',          x: 90, y: 70 },
+  { type: 'outlook', name: 'Move Msg',           x: 90, y: 82 },
+
+  // Merge/end
+  { type: 'logic',   name: 'Check OK',           x: 78, y: 94 },
+  { type: 'logic',   name: 'Merge',              x: 90, y: 94 },
 ];
 
 // ── RAPP Agent Code ─────────────────────────────────────
@@ -293,16 +301,43 @@ STEPS.forEach((s,i) => {
 
 // Build n8n canvas
 const canvas = document.getElementById('canvas');
+
+// Draw connection lines as SVG
+const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svg.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none');
+const EDGES = [
+  [0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,11], // main pipeline
+  [5,8],  // AI → Ollama
+  [6,9],  // Parse JSON → Error Handler
+  [10,2], // Back to Loop
+  [11,12],[11,13],[11,14],[11,15],[11,16],[11,17], // Switch fan-out
+  [14,18],[15,19], // Billing/Internal → Mark/Move
+  [20,21], // Check → Merge
+];
+EDGES.forEach(([from, to]) => {
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  const n1 = N8N_NODES[from], n2 = N8N_NODES[to];
+  line.setAttribute('x1', (n1.x + 5) + '%');
+  line.setAttribute('y1', (n1.y + 2) + '%');
+  line.setAttribute('x2', (n2.x + 2) + '%');
+  line.setAttribute('y2', (n2.y + 2) + '%');
+  line.setAttribute('stroke', '#30363d');
+  line.setAttribute('stroke-width', '1.5');
+  line.setAttribute('class', 'n8n-edge');
+  svg.appendChild(line);
+});
+canvas.appendChild(svg);
+
 N8N_NODES.forEach((n, i) => {
   const el = document.createElement('div');
   el.className = `n8n-node ${n.type}`;
   el.id = `node-${i}`;
   el.style.left = `${n.x}%`;
-  el.style.top = `${n.y + 30}%`;
-  el.innerHTML = `${n.name}`;
+  el.style.top = `${n.y}%`;
+  el.textContent = n.name;
   canvas.appendChild(el);
 });
-canvas.innerHTML += `<div class="n8n-stats" id="canvasStats">36 nodes · 26 connections · Microsoft Outlook + AI Agent</div>`;
+canvas.innerHTML += `<div class="n8n-stats" id="canvasStats">26 nodes · 22 connections · Microsoft Outlook + AI Agent + Switch Routing</div>`;
 
 // ── Demo Logic ──────────────────────────────────────────
 let running = false;
@@ -333,6 +368,8 @@ async function startDemo() {
     document.getElementById(`node-${i}`).classList.add('visible');
     await sleep(60);
   }
+  // Show edges
+  document.querySelectorAll('.n8n-edge').forEach(e => e.classList.add('visible'));
   setProgress(14);
   await sleep(500);
 
@@ -471,6 +508,7 @@ function resetDemo() {
   setProgress(0);
   document.querySelectorAll('.step-dot').forEach(d => { d.className = 'step-dot'; });
   document.querySelectorAll('.n8n-node').forEach(n => { n.classList.remove('visible','active'); });
+  document.querySelectorAll('.n8n-edge').forEach(e => { e.classList.remove('visible'); });
   document.getElementById('resultOverlay').classList.remove('show');
   document.getElementById('leftHeader').innerHTML = '<span style="color:var(--n8n)">●</span> n8n Workflow — 36 nodes';
   document.getElementById('rightHeader').innerHTML = '<span style="color:var(--dim)">●</span> Output';
