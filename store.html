@@ -3638,7 +3638,12 @@ async function init() {
     fetchJSON(`${RAW}/cards/holo_cards.json`),
   ]);
   if (holoData) _holoCards = holoData;
-  if (reg) { allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' })); }
+  if (reg) {
+    allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' }));
+    // Sync stack decks — maps AI Agent Templates stacks to browsable decks
+    _registryStacks = reg.stacks || null;
+    syncStackDecks(reg);
+  }
   if (v) votes = v;
   if (r) reviews = r;
 
@@ -4366,6 +4371,7 @@ function openAgent(name) {
           <div class="badges" style="margin-top:6px">
             ${sealHtml}
             <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
+            ${a._stack ? `<span style="font-size:.72rem;background:rgba(88,166,255,.1);color:var(--accent);padding:2px 8px;border-radius:4px;border:1px solid rgba(88,166,255,.2);font-weight:600">${a._stack.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())} Stack</span>` : ''}
             <span style="color:var(--text-muted);font-size:.82rem">${a._size_kb} KB &middot; ${a._lines} lines &middot; by ${esc(a.author)}</span>
             ${avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
           </div>
@@ -5579,20 +5585,8 @@ if (!Object.keys(allDecks).length) {
   if (old.length) {
     allDecks = { 'My Deck': old };
   } else {
-    // Pre-populated starter decks — like exhibits, interact to make them yours
+    // Curated starter decks — stack decks from registry get merged in syncStackDecks()
     allDecks = {
-      'Starter Deck': [
-        '@aibast-agents-library/email-drafting',
-        '@aibast-agents-library/meeting-prep',
-        '@aibast-agents-library/it-ticket-management',
-        '@aibast-agents-library/voice-to-crm-email',
-        '@aibast-agents-library/ai-customer-assistant',
-        '@kody/context_memory',
-        '@kody/manage_memory',
-        '@aibast-agents-library/sharepoint-document-extractor',
-        '@aibast-agents-library/triage-bot',
-        '@aibast-agents-library/next-best-action',
-      ],
       'Core Toolkit': ['@rapp/basic-agent', '@kody/rar_remote_agent', '@kody/agent_workbench', '@kody/github_agent_library', '@kody/manage_memory'],
       'Sales Suite': ['@discreetRappers/sales_assistant', '@discreetRappers/demo_script_generator', '@discreetRappers/email_drafting', '@discreetRappers/dynamics_crud'],
       'Builder Stack': ['@kody/agent_workbench', '@discreetRappers/agent_generator', '@discreetRappers/agent_transpiler', '@borg/cardsmith_agent', '@discreetRappers/rapp_pipeline'],
@@ -5613,12 +5607,76 @@ function saveDecks() {
   localStorage.setItem('rar_current_deck', currentDeckName);
 }
 
+// ── Stack-to-deck sync — maps AI Agent Templates stacks to decks ──
+// Each stack from the original templates becomes a deck; each agent.py = a card.
+// Runs after registry loads. Non-destructive: only adds stacks not already in user's decks.
+let _stackDeckNames = new Set();  // track which decks came from stacks (for grouping)
+let _registryStacks = null;       // populated on registry load
+
+function syncStackDecks(reg) {
+  if (!reg || !reg.stacks) return;
+  let changed = false;
+  for (const [slug, stack] of Object.entries(reg.stacks)) {
+    const deckName = stack.display_name;
+    _stackDeckNames.add(deckName);
+    if (!allDecks[deckName]) {
+      allDecks[deckName] = [...stack.agents];
+      changed = true;
+    }
+  }
+  if (changed) {
+    localStorage.setItem('rar_decks', JSON.stringify(allDecks));
+    renderDeckSelect();
+  }
+}
+
+// Vertical display labels
+const VERTICAL_LABELS = {
+  b2b_sales: 'B2B Sales', b2c_sales: 'B2C Sales', energy: 'Energy',
+  federal_government: 'Federal Gov', financial_services: 'Financial Services',
+  general: 'General Purpose', healthcare: 'Healthcare', human_resources: 'HR',
+  it_management: 'IT Management', manufacturing: 'Manufacturing',
+  professional_services: 'Professional Services', retail_cpg: 'Retail & CPG',
+  slg_government: 'State/Local Gov', software_dp: 'Software & Digital',
+};
+
 function renderDeckSelect() {
   const sel = document.getElementById('deck-select');
   if (!sel) return;
-  sel.innerHTML = Object.keys(allDecks).map(n =>
-    `<option value="${esc(n)}" ${n === currentDeckName ? 'selected' : ''}>${esc(n)} (${(allDecks[n] || []).length})</option>`
-  ).join('');
+  // Split into user/curated decks vs stack decks
+  const userDecks = [];
+  const stacksByVertical = {};
+  for (const name of Object.keys(allDecks)) {
+    if (_stackDeckNames.has(name)) {
+      // Look up vertical from registry stacks
+      const entry = _registryStacks && Object.values(_registryStacks).find(s => s.display_name === name);
+      const vert = entry ? entry.vertical : 'other';
+      if (!stacksByVertical[vert]) stacksByVertical[vert] = [];
+      stacksByVertical[vert].push(name);
+    } else {
+      userDecks.push(name);
+    }
+  }
+  let html = '';
+  // User/curated decks first
+  if (userDecks.length) {
+    html += `<optgroup label="Your Decks">`;
+    html += userDecks.map(n =>
+      `<option value="${esc(n)}" ${n === currentDeckName ? 'selected' : ''}>${esc(n)} (${(allDecks[n] || []).length})</option>`
+    ).join('');
+    html += `</optgroup>`;
+  }
+  // Stack decks grouped by vertical
+  const verticals = Object.keys(stacksByVertical).sort();
+  for (const v of verticals) {
+    const label = VERTICAL_LABELS[v] || v.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    html += `<optgroup label="${esc(label)} Stacks">`;
+    html += stacksByVertical[v].sort().map(n =>
+      `<option value="${esc(n)}" ${n === currentDeckName ? 'selected' : ''}>${esc(n)} (${(allDecks[n] || []).length})</option>`
+    ).join('');
+    html += `</optgroup>`;
+  }
+  sel.innerHTML = html;
 }
 
 function switchDeck(name) {

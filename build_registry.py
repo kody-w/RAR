@@ -134,6 +134,22 @@ DANGEROUS_PATTERNS = [
 ]
 
 
+def extract_stack_info(file_path: Path) -> tuple:
+    """Extract stack name and vertical from file path.
+    Pattern: agents/@publisher/VERTICAL_stacks/NAME_stack/agent.py
+    Maps directly to the AI Agent Templates stack structure —
+    each stack becomes a deck, each agent.py becomes a card.
+    Returns (stack_name, vertical) or (None, None) if not in a stack.
+    """
+    parts = file_path.parts
+    for i, part in enumerate(parts):
+        if part.endswith('_stacks') and i + 1 < len(parts) and parts[i + 1].endswith('_stack'):
+            vertical = part[:-7]   # strip '_stacks'
+            stack = parts[i + 1][:-6]  # strip '_stack'
+            return stack, vertical
+    return None, None
+
+
 def compute_sha256(file_path: Path) -> str:
     """Compute SHA256 hash of file contents."""
     return hashlib.sha256(file_path.read_bytes()).hexdigest()
@@ -271,6 +287,13 @@ def build_registry():
         # Add file metadata
         content = py_path.read_text()
         manifest["_file"] = str(py_path)
+
+        # Extract stack membership from directory structure
+        # (maps AI Agent Templates stacks -> deck groupings)
+        stack_name, stack_vertical = extract_stack_info(py_path)
+        if stack_name:
+            manifest["_stack"] = stack_name
+            manifest["_stack_vertical"] = stack_vertical
         manifest["_sha256"] = sha256
         manifest["_seed"] = compute_seed(
             name,
@@ -330,6 +353,24 @@ def build_registry():
         "duplicates": [{"display_name": dn, "agents": [a1, a2]} for dn, a1, a2 in duplicates],
         "agents": agents
     }
+
+    # Build stacks index — maps AI Agent Templates stacks to deck groupings
+    # Each stack = a deck, each agent in the stack = a card in that deck
+    stacks = {}
+    for a in agents:
+        s = a.get("_stack")
+        if not s:
+            continue
+        if s not in stacks:
+            stacks[s] = {
+                "name": s,
+                "display_name": s.replace("_", " ").title(),
+                "vertical": a.get("_stack_vertical", ""),
+                "agents": [],
+            }
+        stacks[s]["agents"].append(a["name"])
+    if stacks:
+        registry["stacks"] = stacks
 
     # Include instance metadata if rar.config.json exists
     config_file = Path("rar.config.json")
