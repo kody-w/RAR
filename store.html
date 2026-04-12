@@ -5617,34 +5617,74 @@ let _registryStacks = null;       // populated on registry load
 function syncStackDecks(reg) {
   if (!reg || !reg.stacks) return;
   let changed = false;
-  // Collect single-agent stacks by vertical for rollup
-  const verticalRollup = {};  // vertical -> [agent names]
+
+  // First pass: figure out which decks the registry WANTS to create
+  const wantedDecks = {};          // deckName -> [agent names]
+  const verticalRollup = {};       // vertical -> [agent names]
   for (const [slug, stack] of Object.entries(reg.stacks)) {
     if (stack.agents.length >= 2) {
-      // Multi-agent stack = its own deck
-      const deckName = stack.display_name;
-      _stackDeckNames.add(deckName);
-      if (!allDecks[deckName]) {
-        allDecks[deckName] = [...stack.agents];
-        changed = true;
-      }
+      wantedDecks[stack.display_name] = [...stack.agents];
     } else {
-      // Single-agent stack — roll up into vertical deck
       const vert = stack.vertical || 'general';
       if (!verticalRollup[vert]) verticalRollup[vert] = [];
       verticalRollup[vert].push(...stack.agents);
     }
   }
-  // Build vertical rollup decks
+  // Roll up single-agent stacks into vertical decks
   for (const [vert, agents] of Object.entries(verticalRollup)) {
     const deckName = VERTICAL_LABELS[vert] || vert.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-    _stackDeckNames.add(deckName);
+    if (wantedDecks[deckName]) {
+      // Vertical name collides with a multi-agent stack — merge into it
+      agents.forEach(a => { if (!wantedDecks[deckName].includes(a)) wantedDecks[deckName].push(a); });
+    } else {
+      wantedDecks[deckName] = agents;
+    }
+  }
+
+  // Remove any deck with only 1 card — fold its agent into General Purpose
+  const tooSmall = Object.entries(wantedDecks).filter(([_, a]) => a.length < 2);
+  for (const [name, agents] of tooSmall) {
+    delete wantedDecks[name];
+    if (!wantedDecks['General Purpose']) wantedDecks['General Purpose'] = [];
+    agents.forEach(a => { if (!wantedDecks['General Purpose'].includes(a)) wantedDecks['General Purpose'].push(a); });
+  }
+
+  // Record all wanted deck names for grouping in the selector
+  for (const name of Object.keys(wantedDecks)) _stackDeckNames.add(name);
+
+  // Clean up stale stack decks from previous syncs that are no longer wanted
+  // (e.g. old single-agent decks from a prior version)
+  for (const name of Object.keys(allDecks)) {
+    // Only touch decks we previously created (don't delete user's custom decks)
+    // A deck is stale if it existed as a stack deck name but isn't in the new wanted set
+    // Heuristic: if every agent in the deck is a registry agent with _stack, it's a stack deck
+    const agents = allDecks[name] || [];
+    if (wantedDecks[name]) continue;  // still wanted, keep it
+    if (['Core Toolkit','Sales Suite','Builder Stack','Creative Studio','My Deck'].includes(name)) continue;
+    const allFromStacks = agents.length > 0 && agents.every(n => {
+      const a = allAgents.find(x => x.name === n);
+      return a && a._stack;
+    });
+    if (allFromStacks) {
+      delete allDecks[name];
+      changed = true;
+    }
+  }
+
+  // Add wanted decks that don't exist yet
+  for (const [deckName, agents] of Object.entries(wantedDecks)) {
     if (!allDecks[deckName]) {
       allDecks[deckName] = agents;
       changed = true;
     }
   }
+
   if (changed) {
+    // If current deck was deleted, switch to first available
+    if (!allDecks[currentDeckName]) {
+      currentDeckName = Object.keys(allDecks)[0] || 'My Deck';
+      deck = new Set(allDecks[currentDeckName] || []);
+    }
     localStorage.setItem('rar_decks', JSON.stringify(allDecks));
     renderDeckSelect();
   }
