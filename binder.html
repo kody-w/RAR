@@ -525,6 +525,15 @@ function seedToWords(seed){
   return words
 }
 
+async function _autoSaveResolved(card){
+  try{
+    if(!card||!card._binder_key) return
+    card._added_at=card._added_at||new Date().toISOString()
+    await dbPut(card)
+    if(typeof renderCollection==='function') renderCollection()
+  }catch(e){}
+}
+
 function resolveSeed(){
   const input=document.getElementById('seedInput').value.trim()
   const words=input.toUpperCase().split(/[\s,\-]+/).filter(w=>w)
@@ -542,6 +551,7 @@ function resolveSeed(){
   const localHit = _findLocalBySeed(seed)
   if (localHit) {
     document.getElementById('seedGrid').innerHTML=renderCard(localHit)
+    _autoSaveResolved(localHit)
     showDetail(localHit)
     return
   }
@@ -549,9 +559,10 @@ function resolveSeed(){
   _walkFederation(seed, incant).then(hit=>{
     if (hit) {
       document.getElementById('seedGrid').innerHTML=renderCard(hit)
+      _autoSaveResolved(hit)
       showDetail(hit)
     } else {
-      // No peer owns it — fall back to RAR's generic synthesis preview
+      // No peer owns it — fall back to RAR's generic synthesis preview (not saved)
       const card=resolveFromSeed(seed)
       card._binder_key=`seed:${seed}`
       card._incantation=incant
@@ -674,10 +685,11 @@ function startVoice(){
       if(seed!==null){
         const incant=matched.slice(0,7).join(' ')
         const localHit=_findLocalBySeed(seed)
-        const show=(card)=>{
+        const show=(card,save=true)=>{
           card._binder_key=card._binder_key||`seed:${seed}`
           card._incantation=card._incantation||incant
           document.getElementById('seedGrid').innerHTML=renderCard(card)
+          if(save) _autoSaveResolved(card)
           status.textContent=`Incantation complete: ${incant}`
           btn.textContent='Speak Incantation'
           btn.style.background='var(--s2)'
@@ -687,7 +699,7 @@ function startVoice(){
         if(localHit){ show(localHit) }
         else _walkFederation(seed,incant).then(hit=>{
           if(hit) show(hit)
-          else show(resolveFromSeed(seed))
+          else show(resolveFromSeed(seed), false)
         })
       }
     }
