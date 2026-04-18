@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAPP Binder</title>
+<meta name="rappcards-spec" content="1.1">
+<meta name="rappcards-binder" content="rar">
+<meta name="rappcards-federation" content="https://raw.githubusercontent.com/kody-w/RAPPcards/main/peers.json">
 <meta name="description" content="Your personal agent card binder. Collect, browse, resolve, and export. Works offline.">
 <meta property="og:title" content="RAPP Binder">
 <meta property="og:description" content="Your personal agent card binder. Collect cards, resolve seeds, browse offline. Works without network.">
@@ -524,29 +527,111 @@ function seedToWords(seed){
 
 function resolveSeed(){
   const input=document.getElementById('seedInput').value.trim()
-
-  // Try as 7-word mnemonic
   const words=input.toUpperCase().split(/[\s,\-]+/).filter(w=>w)
+  let seed=null, incant=''
   if(words.length>=7&&MNEM_IDX[words[0]]!==undefined){
-    const seed=wordsToSeed(words)
-    if(seed!==null){
+    const s=wordsToSeed(words)
+    if(s!==null){ seed=s; incant=words.slice(0,7).join(' ') }
+  }
+  if(seed===null){
+    const n=parseInt(input)
+    if(isNaN(n)){alert('Enter a seed number or 7-word incantation');return}
+    seed=n; incant=seedToWords(seed).join(' ')
+  }
+  // Local registered RAR card?
+  const localHit = _findLocalBySeed(seed)
+  if (localHit) {
+    document.getElementById('seedGrid').innerHTML=renderCard(localHit)
+    showDetail(localHit)
+    return
+  }
+  // Walk federation (SPEC §5.4) — foreign binders may own this seed
+  _walkFederation(seed, incant).then(hit=>{
+    if (hit) {
+      document.getElementById('seedGrid').innerHTML=renderCard(hit)
+      showDetail(hit)
+    } else {
+      // No peer owns it — fall back to RAR's generic synthesis preview
       const card=resolveFromSeed(seed)
       card._binder_key=`seed:${seed}`
-      card._incantation=words.slice(0,7).join(' ')
+      card._incantation=incant
       document.getElementById('seedGrid').innerHTML=renderCard(card)
       showDetail(card)
-      return
+    }
+  })
+}
+
+// ═══════════════════════════════════════════════════════
+// SPEC §5.4 FEDERATION — resolve foreign seeds via peers.json
+// ═══════════════════════════════════════════════════════
+const CANONICAL_PEERS_URL='https://raw.githubusercontent.com/kody-w/RAPPcards/main/peers.json'
+let _peersCache=null, _indexCache=new Map()
+function _findLocalBySeed(seed){
+  const seedStr=String(seed)
+  for(const cid in HOLO_CARDS){
+    const c=HOLO_CARDS[cid]
+    if(c && String(c.seed)===seedStr){
+      const card={...c, _binder_key:cid, _incantation:seedToWords(seed).join(' ')}
+      return card
     }
   }
-
-  // Try as number
-  const seed=parseInt(input)
-  if(isNaN(seed)){alert('Enter a seed number or 7-word incantation');return}
-  const card=resolveFromSeed(seed)
-  card._binder_key=`seed:${seed}`
-  card._incantation=seedToWords(seed).join(' ')
-  document.getElementById('seedGrid').innerHTML=renderCard(card)
-  showDetail(card)
+  return null
+}
+async function _loadPeers(){
+  if(_peersCache) return _peersCache
+  try{
+    const r=await fetch(CANONICAL_PEERS_URL,{cache:'no-cache'})
+    if(!r.ok) throw 0
+    const j=await r.json()
+    _peersCache=j.peers||[]
+  }catch(e){ _peersCache=[] }
+  return _peersCache
+}
+async function _fetchSeedIndex(url){
+  if(_indexCache.has(url)) return _indexCache.get(url)
+  try{
+    const r=await fetch(url,{cache:'no-cache'})
+    if(!r.ok) throw 0
+    const j=await r.json()
+    _indexCache.set(url,j); return j
+  }catch(e){ _indexCache.set(url,null); return null }
+}
+async function _walkFederation(seed, incant){
+  const seedStr=String(seed)
+  const peers=await _loadPeers()
+  for(const peer of peers){
+    if(!peer.seed_index || peer.binder==='rar') continue
+    const idx=await _fetchSeedIndex(peer.seed_index)
+    if(!idx||!idx.seeds) continue
+    const entry=idx.seeds[seedStr]
+    if(!entry) continue
+    try{
+      const r=await fetch(entry.url,{cache:'no-cache'})
+      if(!r.ok) continue
+      let txt=await r.text()
+      txt=txt.replace(/("seed"\s*:\s*)(-?\d{10,})/g,'$1"$2"')
+      const blob=JSON.parse(txt)
+      let card
+      if(entry.url_is_bundle||blob.cards){
+        const key=entry.bundle_key||entry.id
+        card=(blob.cards&&blob.cards[key])||blob[key]
+      } else { card=blob }
+      if(!card) continue
+      // Normalize into RAR binder's card shape
+      card._binder_key=`${peer.binder}:${entry.id}`
+      card._incantation=incant
+      card._foreign_binder=peer.binder
+      card._foreign_home=peer.homepage
+      card._foreign_id=entry.id
+      card.display_name=card.display_name||card.name||entry.name||entry.id
+      card.rarity=card.rarity||card.rarity_tier||entry.rarity_tier||'core'
+      card.rarity_label=card.rarity_label||(RARITY_LABEL&&RARITY_LABEL[card.rarity])||card.rarity
+      card.types=card.types||card.agent_types||[]
+      card.seed=seed
+      return card
+    }catch(e){ continue }
+  }
+  return null
 }
 
 // ═══════════════════════════════════════════════════════
@@ -587,15 +672,23 @@ function startVoice(){
       recognition.stop()
       const seed=wordsToSeed(matched)
       if(seed!==null){
-        const card=resolveFromSeed(seed)
-        card._binder_key=`seed:${seed}`
-        card._incantation=matched.slice(0,7).join(' ')
-        document.getElementById('seedGrid').innerHTML=renderCard(card)
-        status.textContent=`Incantation complete: ${matched.slice(0,7).join(' ')}`
-        btn.textContent='Speak Incantation'
-        btn.style.background='var(--s2)'
-        btn.style.color='var(--acc)'
-        showDetail(card)
+        const incant=matched.slice(0,7).join(' ')
+        const localHit=_findLocalBySeed(seed)
+        const show=(card)=>{
+          card._binder_key=card._binder_key||`seed:${seed}`
+          card._incantation=card._incantation||incant
+          document.getElementById('seedGrid').innerHTML=renderCard(card)
+          status.textContent=`Incantation complete: ${incant}`
+          btn.textContent='Speak Incantation'
+          btn.style.background='var(--s2)'
+          btn.style.color='var(--acc)'
+          showDetail(card)
+        }
+        if(localHit){ show(localHit) }
+        else _walkFederation(seed,incant).then(hit=>{
+          if(hit) show(hit)
+          else show(resolveFromSeed(seed))
+        })
       }
     }
   }
@@ -751,7 +844,31 @@ showDetail=function(card){
   await loadRegistry()
   renderCollection()
   renderBrowse()
+  // SPEC §5.1 hash router — #incant=... / #seed=... / #add=...
+  _handleSummonHash()
+  window.addEventListener('hashchange',_handleSummonHash)
 })()
+
+function _handleSummonHash(){
+  const h=location.hash.slice(1); if(!h) return
+  const params=new URLSearchParams(h.replace(/^\//,''))
+  const incant=params.get('incant')
+  const seedStr=params.get('seed')
+  const addId=params.get('add')
+  const input=document.getElementById('seedInput')
+  if(incant && input){
+    input.value=decodeURIComponent(incant).replace(/\+/g,' ').toUpperCase()
+    const tab=document.querySelector('[data-tab="seed"],[onclick*="seed"]'); if(tab) tab.click()
+    resolveSeed()
+  } else if(seedStr && input){
+    input.value=decodeURIComponent(seedStr)
+    resolveSeed()
+  } else if(addId){
+    const card=HOLO_CARDS[decodeURIComponent(addId)]
+    if(card){ const c={...card,_binder_key:decodeURIComponent(addId),_incantation:seedToWords(card.seed).join(' ')}; showDetail(c) }
+  }
+  history.replaceState(null,'',location.pathname)
+}
 </script>
 </body>
 </html>
