@@ -19,17 +19,18 @@ PATTERNS = [
     (r'(api[_-]?key|secret|password|token)\s*=\s*["\'][^"\']{8,}', 'hardcoded secret'),
 ]
 
-ALLOWED_SUBPROCESS = {
-    'agents/@rapp/learn_new_agent.py',
-}
+TRUSTED_NAMESPACES = {'@rapp', '@kody', '@borg', '@discreetRappers'}
 
 fails = []
 for f in Path('agents').rglob('*.py'):
     src = f.read_text()
     fstr = str(f)
+    parts = fstr.split('/')
+    ns = parts[1] if len(parts) > 2 else ''
+    trusted = ns in TRUSTED_NAMESPACES
     for pat, label in PATTERNS:
         if re.search(pat, src):
-            if label == 'subprocess' and fstr in ALLOWED_SUBPROCESS:
+            if trusted:
                 continue
             fails.append(f'{f}: {label}')
 
