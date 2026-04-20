@@ -2462,6 +2462,7 @@
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
+    <button class="nav-btn" data-tab="swarms" onclick="switchTab('swarms')">Swarms</button>
     <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
 
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
@@ -2587,6 +2588,26 @@
     </div>
     <div class="cards-grid" id="cards-grid">
       <div class="loading"><div class="spinner"></div><br>Loading cards...</div>
+    </div>
+  </div>
+
+  <!-- Swarms -->
+  <div class="panel" id="panel-swarms">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Multi-Agent Composites</div>
+      <h2 style="font-size:1.4rem;font-weight:800;margin:4px 0">AGENT SWARMS</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">
+        Converged multi-agent pipelines and agent stacks — each downloadable as a unit.
+        Drop converged singletons into your brainstem's agents/ directory. Download stack bundles as ZIP.
+      </p>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+        <button class="pill active" onclick="filterSwarms('all',this)">All</button>
+        <button class="pill" onclick="filterSwarms('converged',this)">Converged</button>
+        <button class="pill" onclick="filterSwarms('stack',this)">Stacks</button>
+      </div>
+    </div>
+    <div class="agent-grid" id="swarms-grid">
+      <div class="loading"><div class="spinner"></div><br>Loading swarms...</div>
     </div>
   </div>
 
@@ -3226,6 +3247,7 @@ let IS_INSTANCE = false;
 // State
 // ═══════════════════════════════════════════════════════
 let allAgents = [];
+let allSwarms = [];
 let votes = { agents: {} };
 let reviews = { agents: {} };
 let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
@@ -3640,6 +3662,7 @@ async function init() {
   if (holoData) _holoCards = holoData;
   if (reg) {
     allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' }));
+    allSwarms = (reg.swarms || []);
     // Sync stack decks — maps AI Agent Templates stacks to browsable decks
     _registryStacks = reg.stacks || null;
     syncStackDecks(reg);
@@ -3890,6 +3913,7 @@ function switchTab(tab) {
   if (tab === 'cards') renderCards();
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
+  if (tab === 'swarms') renderSwarms();
   if (tab === 'market') renderMarketExchange();
 
   if (tab === 'submit' && ghUser?.login) {
@@ -3898,6 +3922,157 @@ function switchTab(tab) {
       ta.value = (ta.value || ta.placeholder).replaceAll('@your_username/', `@${ghUser.login}/`).replaceAll('"Your Name"', `"${ghUser.login}"`);
       previewManifest();
     }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Swarms
+// ═══════════════════════════════════════════════════════
+let _swarmFilter = 'all';
+function filterSwarms(type, btn) {
+  _swarmFilter = type;
+  if (btn) {
+    btn.closest('div').querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderSwarms();
+}
+
+function renderSwarms() {
+  const grid = document.getElementById('swarms-grid');
+  if (!grid) return;
+  let swarms = allSwarms;
+  if (_swarmFilter !== 'all') swarms = swarms.filter(s => s.type === _swarmFilter);
+  if (swarms.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px">No swarms found.</div>';
+    return;
+  }
+  grid.innerHTML = swarms.map(s => swarmCard(s)).join('');
+}
+
+function swarmCard(s) {
+  const isConverged = s.type === 'converged';
+  const badge = isConverged
+    ? '<span style="background:var(--purple);color:#fff;padding:2px 6px;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:1px">CONVERGED</span>'
+    : '<span style="background:var(--green);color:#000;padding:2px 6px;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:1px">STACK</span>';
+  const agentCount = isConverged
+    ? (s._swarm?.produced_by?.specialists?.length || '?') + ' specialists inlined'
+    : (s.agent_count || 0) + ' agents bundled';
+  const size = s._size_kb ? `${s._size_kb} KB` : '';
+  const lines = s._lines ? `${s._lines} lines` : '';
+  const desc = isConverged ? (s._swarm?.tagline || s.description || '') : (s.display_name || '');
+  const category = s.category || s.vertical || '';
+  const dlBtn = isConverged
+    ? `<button class="btn-sm" onclick="event.stopPropagation();downloadSwarmPy('${esc(s._file)}','${esc(s.name)}')">Download .py</button>`
+    : `<button class="btn-sm" onclick="event.stopPropagation();downloadSwarmZip(${JSON.stringify(s.agent_files||[]).replace(/"/g,'&quot;')},'${esc(s.display_name)}')">Download ZIP</button>`;
+
+  return `
+  <div class="agent-card" onclick="openSwarmDetail(${allSwarms.indexOf(s)})" style="cursor:pointer;border-left:3px solid ${isConverged ? 'var(--purple)' : 'var(--green)'}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-weight:700;font-size:.95rem">${esc(s.display_name || s.name)}</span>
+      ${badge}
+    </div>
+    <div style="color:var(--text-dim);font-size:.82rem;margin-bottom:8px">${esc(desc)}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:.72rem;color:var(--text-muted);margin-bottom:8px">
+      <span>${agentCount}</span>
+      ${size ? `<span>${size}</span>` : ''}
+      ${lines ? `<span>${lines}</span>` : ''}
+      ${category ? `<span style="background:var(--bg-card);padding:1px 5px;border-radius:3px">${esc(category)}</span>` : ''}
+    </div>
+    <div style="display:flex;gap:6px">${dlBtn}</div>
+  </div>`;
+}
+
+function downloadSwarmPy(filePath, name) {
+  const url = `https://raw.githubusercontent.com/kody-w/RAR/main/${filePath}`;
+  const a = document.createElement('a');
+  fetch(url).then(r => r.blob()).then(blob => {
+    a.href = URL.createObjectURL(blob);
+    a.download = filePath.split('/').pop();
+    a.click();
+  }).catch(() => window.open(url));
+}
+
+async function downloadSwarmZip(files, name) {
+  if (!files || files.length === 0) return;
+  if (!window.JSZip) {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    document.head.appendChild(s);
+    await new Promise(r => s.onload = r);
+  }
+  const zip = new JSZip();
+  const folder = zip.folder(name.replace(/[^a-zA-Z0-9_-]/g, '_'));
+  for (const f of files) {
+    try {
+      const resp = await fetch(`https://raw.githubusercontent.com/kody-w/RAR/main/${f}`);
+      const text = await resp.text();
+      folder.file(f.split('/').pop(), text);
+    } catch(e) { console.warn('Skip', f, e); }
+  }
+  folder.file('README.md', `# ${name}\n\nAgent stack downloaded from the RAPP Agent Registry.\nDrop all .py files into your brainstem's agents/ directory.\n`);
+  const blob = await zip.generateAsync({type: 'blob'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${name.replace(/[^a-zA-Z0-9_-]/g, '_')}.zip`;
+  a.click();
+}
+
+function openSwarmDetail(idx) {
+  const s = allSwarms[idx];
+  if (!s) return;
+  const isConverged = s.type === 'converged';
+  const sw = s._swarm || {};
+  const specialists = sw.produced_by?.specialists || s.agents || [];
+  const metrics = sw.metrics || {};
+
+  let html = `<div style="max-width:600px;margin:auto;padding:20px">`;
+  html += `<h2 style="margin:0 0 4px">${esc(s.display_name || s.name)}</h2>`;
+  html += `<div style="color:var(--text-muted);font-size:.82rem;margin-bottom:12px">${esc(s.name)} &bull; ${s.type}</div>`;
+
+  if (isConverged && sw.tagline) {
+    html += `<p style="font-style:italic;color:var(--text-dim);margin-bottom:12px">${esc(sw.tagline)}</p>`;
+  }
+  if (sw.summary || s.description) {
+    html += `<p style="margin-bottom:16px">${esc(sw.summary || s.description)}</p>`;
+  }
+
+  // Specialists / agents list
+  html += `<h3 style="font-size:.9rem;margin:16px 0 8px">${isConverged ? 'Inlined Specialists' : 'Agents in Stack'} (${specialists.length})</h3>`;
+  html += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px">`;
+  specialists.forEach(sp => {
+    html += `<span style="background:var(--bg-card);padding:2px 8px;border-radius:4px;font-size:.75rem;font-family:monospace">${esc(sp)}</span>`;
+  });
+  html += `</div>`;
+
+  // Metrics (converged only)
+  if (isConverged && Object.keys(metrics).length > 0) {
+    html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Metrics</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px">`;
+    for (const [k, v] of Object.entries(metrics)) {
+      html += `<div style="background:var(--bg-card);padding:6px 10px;border-radius:4px;font-size:.78rem"><div style="color:var(--text-muted)">${esc(k.replace(/_/g,' '))}</div><div style="font-weight:700">${v}</div></div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Install
+  html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Install</h3>`;
+  if (isConverged) {
+    const curl = `curl -sO https://raw.githubusercontent.com/kody-w/RAR/main/${s._file}`;
+    html += `<div style="background:var(--bg-card);padding:10px;border-radius:6px;font-family:monospace;font-size:.75rem;word-break:break-all;margin-bottom:8px">${esc(curl)}</div>`;
+    html += `<button class="btn-sm" onclick="downloadSwarmPy('${esc(s._file)}','${esc(s.name)}')">Download .py</button>`;
+  } else {
+    html += `<p style="font-size:.82rem;color:var(--text-dim);margin-bottom:8px">Downloads all ${s.agent_count} agents as a ZIP bundle.</p>`;
+    html += `<button class="btn-sm" onclick="downloadSwarmZip(${JSON.stringify(s.agent_files||[]).replace(/"/g,'&quot;')},'${esc(s.display_name)}')">Download ZIP (${s.agent_count} agents)</button>`;
+  }
+
+  html += `</div>`;
+
+  // Show in modal
+  const overlay = document.getElementById('agent-overlay');
+  const detail = document.getElementById('agent-detail');
+  if (overlay && detail) {
+    detail.innerHTML = html;
+    overlay.classList.add('open');
   }
 }
 
@@ -3911,8 +4086,10 @@ function renderStats(stats) {
   const vc = allAgents.filter(a => a.quality_tier === 'verified').length;
   const voteLabel = tv;
   const revLabel = tr;
+  const swarmCount = allSwarms.length;
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-chip"><span class="num">${stats.total_agents}</span><span class="lbl">Agents</span></div>
+    ${swarmCount ? `<div class="stat-chip"><span class="num">${swarmCount}</span><span class="lbl">Swarms</span></div>` : ''}
     <div class="stat-chip"><span class="num">${stats.publishers}</span><span class="lbl">Publishers</span></div>
     ${ vc ? `<div class="stat-chip"><span class="num">${vc}</span><span class="lbl">Verified</span></div>` : ''}
     ${ tv ? `<div class="stat-chip"><span class="num">${voteLabel}</span><span class="lbl">Votes</span></div>` : ''}

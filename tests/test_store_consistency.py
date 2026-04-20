@@ -190,8 +190,34 @@ def test_sdk_executable():
 
 
 # ═══════════════════════════════════════════════════════
+# Swarms Tab
+# ═══════════════════════════════════════════════════════
+
+def test_store_has_swarms_tab():
+    assert "panel-swarms" in html
+    assert "switchTab('swarms')" in html
+
+def test_store_has_render_swarms():
+    assert "renderSwarms" in html
+
+def test_store_has_swarm_download():
+    assert "downloadSwarmPy" in html
+    assert "downloadSwarmZip" in html
+
+def test_store_swarms_nav_button():
+    assert 'data-tab="swarms"' in html
+
+
+# ═══════════════════════════════════════════════════════
 # Registry Consistency
 # ═══════════════════════════════════════════════════════
+
+def test_registry_has_swarms_key():
+    assert "swarms" in registry
+    assert isinstance(registry["swarms"], list)
+
+def test_registry_swarms_total_matches_stats():
+    assert registry["stats"]["total_swarms"] == len(registry["swarms"])
 
 def test_registry_agent_count():
     assert len(registry["agents"]) >= 131  # 131 founding + new agents

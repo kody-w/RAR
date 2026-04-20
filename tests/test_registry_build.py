@@ -36,3 +36,26 @@ def test_no_seed_collisions():
             f"both have seed {seed}"
         )
         seen[seed] = a["name"]
+
+
+def test_registry_has_swarms():
+    """Registry must include a swarms array."""
+    reg = json.loads((REPO_ROOT / "registry.json").read_text())
+    assert "swarms" in reg
+    assert isinstance(reg["swarms"], list)
+    assert len(reg["swarms"]) > 0
+
+
+def test_no_seed_collisions_across_agents_and_swarms():
+    """Seeds must be unique across both agents AND converged swarms."""
+    reg = json.loads((REPO_ROOT / "registry.json").read_text())
+    seen = {}
+    for item in reg.get("agents", []) + reg.get("swarms", []):
+        seed = item.get("_seed")
+        if seed is None:
+            continue
+        assert seed not in seen, (
+            f"Seed collision: {item['name']} and {seen[seed]} "
+            f"both have seed {seed}"
+        )
+        seen[seed] = item["name"]

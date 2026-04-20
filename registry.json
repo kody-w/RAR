@@ -1,9 +1,10 @@
 {
-  "schema": "rapp-registry/1.0",
-  "version": "1.0.0",
-  "generated_at": "2026-04-19T22:59:13.311513+00:00",
+  "schema": "rapp-registry/1.1",
+  "version": "1.1.0",
+  "generated_at": "2026-04-20T16:01:50.822460+00:00",
   "stats": {
     "total_agents": 161,
+    "total_swarms": 82,
     "publishers": 8,
     "categories": 19,
     "publisher_list": [
@@ -3417,7 +3418,7 @@
       "_size_kb": 33.0,
       "_lines": 742,
       "_has_card": true,
-      "_added_at": null
+      "_added_at": "2026-04-07T23:21:37Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5035,6 +5036,1484 @@
       "_lines": 325,
       "_has_card": true,
       "_added_at": "2026-04-05T16:43:55-04:00"
+    }
+  ],
+  "swarms": [
+    {
+      "type": "converged",
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/bookfactory_agent",
+      "version": "0.3.0",
+      "display_name": "BookFactory",
+      "description": "Five-persona content pipeline (Writer, Editor, CEO, Publisher, Reviewer). Source material in, publishable chapter out \u2014 8 LLM calls under one POST.",
+      "author": "RAPP",
+      "tags": [
+        "composite",
+        "creative-pipeline",
+        "twin-stack",
+        "singleton",
+        "swarm"
+      ],
+      "category": "pipeline",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "swarms/@rapp/bookfactory_agent.py",
+      "_sha256": "701beef6a75cee1c79dc3e7f6fb80c3a2652273a59f05526df989911d997fcb4",
+      "_seed": 2002538221670117503,
+      "_size_kb": 24.5,
+      "_lines": 561,
+      "_added_at": null,
+      "_swarm": {
+        "schema": "rapp-swarm/1.0",
+        "id": "bookfactoryagent",
+        "display_name": "BookFactory",
+        "summary": "Five-persona content pipeline (Writer -> Editor [5 specialists] -> CEO [2 specialists] -> Publisher -> Reviewer). One call, one chapter back. Best for: engineering writeups, blog posts, briefing docs, narrative content under 1500 words.",
+        "tagline": "Source material in, publishable chapter out \ufffd\ufffd\ufffd 8 LLM calls under one POST.",
+        "category": "creative-pipeline",
+        "publisher": "@rarbookworld",
+        "type": "converged",
+        "produced_by": {
+          "method": "double-jump-loop",
+          "cycles": 3,
+          "source_files_collapsed": 13,
+          "specialists": [
+            "@rapp/persona-writer",
+            "@rapp/persona-editor",
+            "@rapp/editor-strip-scaffolding",
+            "@rapp/editor-cutweak",
+            "@rapp/editor-restructure",
+            "@rapp/editor-factcheck",
+            "@rapp/editor-voicecheck",
+            "@rapp/persona-ceo",
+            "@rapp/ceo-risk",
+            "@rapp/ceo-decision",
+            "@rapp/persona-publisher",
+            "@rapp/persona-reviewer"
+          ]
+        },
+        "metrics": {
+          "llm_calls_per_invocation": 8,
+          "wall_time_sec_per_call_p50": 75,
+          "wall_time_sec_per_call_p90": 110,
+          "cycle_3_corpus_win_rate": 0.625
+        },
+        "example_call": {
+          "endpoint": "POST /api/swarm/{guid}/agent",
+          "body": {
+            "name": "BookFactory",
+            "args": {
+              "source": "<your raw source material>",
+              "chapter_title": "Whatever You Want",
+              "author": "@you"
+            }
+          }
+        },
+        "egg_url": null,
+        "spec_post": "blog/89-double-jump-loop.md",
+        "license": "BSD-style"
+      }
+    },
+    {
+      "type": "converged",
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/momentfactory_agent",
+      "version": "0.1.0",
+      "display_name": "MomentFactory",
+      "description": "Seven-persona moment-to-Drop pipeline (Sensorium, SignificanceFilter, HookWriter, BodyWriter, ChannelRouter, CardForger, SeedStamper). Candidate engine for Rappterbook.",
+      "author": "RAPP",
+      "tags": [
+        "composite",
+        "moment-pipeline",
+        "rapplication",
+        "rappterbook-engine",
+        "singleton",
+        "swarm"
+      ],
+      "category": "pipeline",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "swarms/@rapp/momentfactory_agent.py",
+      "_sha256": "903da182e152e6db55774c8e4cddcdc7fbfbd9115a9bc2a80d802553419b6ca3",
+      "_seed": 14612914359979752431,
+      "_size_kb": 21.4,
+      "_lines": 498,
+      "_added_at": null,
+      "_swarm": {
+        "schema": "rapp-swarm/1.0",
+        "id": "momentfactoryagent",
+        "display_name": "MomentFactory",
+        "summary": "Seven-persona moment-to-Drop pipeline (Sensorium -> SignificanceFilter -> HookWriter -> BodyWriter -> ChannelRouter -> CardForger -> SeedStamper). Candidate engine for Rappterbook.",
+        "tagline": "Raw moment in, publishable Drop out \u2014 significance-gated with card + seed.",
+        "category": "moment-pipeline",
+        "publisher": "@rarbookworld",
+        "type": "converged",
+        "produced_by": {
+          "method": "double-jump-loop",
+          "cycles": 2,
+          "source_files_collapsed": 8,
+          "specialists": [
+            "@rapp/sensorium",
+            "@rapp/significance-filter",
+            "@rapp/hook-writer",
+            "@rapp/body-writer",
+            "@rapp/channel-router",
+            "@rapp/card-forger",
+            "@rapp/seed-stamper"
+          ]
+        },
+        "metrics": {
+          "llm_calls_per_invocation": 6,
+          "wall_time_sec_per_call_p50": 45,
+          "wall_time_sec_per_call_p90": 80
+        },
+        "example_call": {
+          "endpoint": "POST /api/swarm/{guid}/agent",
+          "body": {
+            "name": "MomentFactory",
+            "args": {
+              "source": "git commit hash + diff + msg",
+              "source_type": "code-commit"
+            }
+          }
+        },
+        "egg_url": null,
+        "spec_post": "blog/104-momentfactory-vs-rappter.md",
+        "license": "BSD-style"
+      }
+    },
+    {
+      "type": "stack",
+      "name": "@b2b_sales/account_intelligence",
+      "display_name": "Account Intelligence",
+      "vertical": "b2b_sales",
+      "category": "b2b_sales",
+      "agent_count": 9,
+      "agents": [
+        "@aibast-agents-library/account_intelligence",
+        "@aibast-agents-library/account_intelligence_orchestrator_agent",
+        "@aibast-agents-library/action_prioritization",
+        "@aibast-agents-library/competitive_intelligence",
+        "@aibast-agents-library/deal_tracking",
+        "@aibast-agents-library/meeting_prep",
+        "@aibast-agents-library/account_messaging",
+        "@aibast-agents-library/account_risk_assessment",
+        "@aibast-agents-library/stakeholder_intelligence"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py"
+      ],
+      "_size_kb": 195.5,
+      "_lines": 4039
+    },
+    {
+      "type": "stack",
+      "name": "@b2b_sales/deal_progression",
+      "display_name": "Deal Progression",
+      "vertical": "b2b_sales",
+      "category": "b2b_sales",
+      "agent_count": 11,
+      "agents": [
+        "@aibast-agents-library/activity_gap",
+        "@aibast-agents-library/deal_competitor_intel",
+        "@aibast-agents-library/deal_health_score",
+        "@aibast-agents-library/deal_progression",
+        "@aibast-agents-library/deal_risk_assessment",
+        "@aibast-agents-library/next_best_action",
+        "@aibast-agents-library/pipeline_velocity",
+        "@aibast-agents-library/revenue_forecast",
+        "@aibast-agents-library/deal_stakeholder_engagement",
+        "@aibast-agents-library/stalled_deal_detection",
+        "@aibast-agents-library/win_probability"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py",
+        "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py"
+      ],
+      "_size_kb": 226.0,
+      "_lines": 4595
+    },
+    {
+      "type": "stack",
+      "name": "@b2b_sales/proposal_generation",
+      "display_name": "Proposal Generation",
+      "vertical": "b2b_sales",
+      "category": "b2b_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/proposal_generation"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py"
+      ],
+      "_size_kb": 34.6,
+      "_lines": 673
+    },
+    {
+      "type": "stack",
+      "name": "@b2b_sales/sales_qualification",
+      "display_name": "Sales Qualification",
+      "vertical": "b2b_sales",
+      "category": "b2b_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/sales_qualification"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py"
+      ],
+      "_size_kb": 47.4,
+      "_lines": 570
+    },
+    {
+      "type": "stack",
+      "name": "@b2b_sales/win_loss_analysis",
+      "display_name": "Win Loss Analysis",
+      "vertical": "b2b_sales",
+      "category": "b2b_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/win_loss_analysis"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py"
+      ],
+      "_size_kb": 89.7,
+      "_lines": 921
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/cart_abandonment_recovery",
+      "display_name": "Cart Abandonment Recovery",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/cart_abandonment_recovery"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py"
+      ],
+      "_size_kb": 13.0,
+      "_lines": 289
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/customer_360_speech",
+      "display_name": "Customer 360 Speech",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/customer_360_speech"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py"
+      ],
+      "_size_kb": 14.6,
+      "_lines": 289
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/customer_loyalty_rewards",
+      "display_name": "Customer Loyalty Rewards",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/customer_loyalty_rewards"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py"
+      ],
+      "_size_kb": 13.0,
+      "_lines": 292
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/omnichannel_engagement",
+      "display_name": "Omnichannel Engagement",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/omnichannel_engagement"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py"
+      ],
+      "_size_kb": 12.9,
+      "_lines": 273
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/personalized_shopping_assistant",
+      "display_name": "Personalized Shopping Assistant",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/personalized_shopping_assistant"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py"
+      ],
+      "_size_kb": 13.7,
+      "_lines": 266
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/returns_exchange",
+      "display_name": "Returns Exchange",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/returns_exchange"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py"
+      ],
+      "_size_kb": 15.3,
+      "_lines": 331
+    },
+    {
+      "type": "stack",
+      "name": "@b2c_sales/sales_chat",
+      "display_name": "Sales Chat",
+      "vertical": "b2c_sales",
+      "category": "b2c_sales",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/sales_chat"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py"
+      ],
+      "_size_kb": 14.8,
+      "_lines": 360
+    },
+    {
+      "type": "stack",
+      "name": "@energy/asset_maintenance_forecast",
+      "display_name": "Asset Maintenance Forecast",
+      "vertical": "energy",
+      "category": "energy",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/asset_maintenance_forecast"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py"
+      ],
+      "_size_kb": 13.3,
+      "_lines": 328
+    },
+    {
+      "type": "stack",
+      "name": "@energy/emission_tracking",
+      "display_name": "Emission Tracking",
+      "vertical": "energy",
+      "category": "energy",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/emission_tracking"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py"
+      ],
+      "_size_kb": 13.8,
+      "_lines": 328
+    },
+    {
+      "type": "stack",
+      "name": "@energy/field_service_dispatch",
+      "display_name": "Field Service Dispatch",
+      "vertical": "energy",
+      "category": "energy",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/field_service_dispatch"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py"
+      ],
+      "_size_kb": 14.4,
+      "_lines": 369
+    },
+    {
+      "type": "stack",
+      "name": "@energy/permit_license_management",
+      "display_name": "Permit License Management",
+      "vertical": "energy",
+      "category": "energy",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/permit_license_management"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py"
+      ],
+      "_size_kb": 12.9,
+      "_lines": 341
+    },
+    {
+      "type": "stack",
+      "name": "@energy/regulatory_reporting",
+      "display_name": "Regulatory Reporting",
+      "vertical": "energy",
+      "category": "energy",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/energy_regulatory_reporting"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py"
+      ],
+      "_size_kb": 12.8,
+      "_lines": 326
+    },
+    {
+      "type": "stack",
+      "name": "@federal_government/acquisition_support",
+      "display_name": "Acquisition Support",
+      "vertical": "federal_government",
+      "category": "federal_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/acquisition_support"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py"
+      ],
+      "_size_kb": 16.9,
+      "_lines": 398
+    },
+    {
+      "type": "stack",
+      "name": "@federal_government/federal_grants_oversight",
+      "display_name": "Federal Grants Oversight",
+      "vertical": "federal_government",
+      "category": "federal_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/federal_grants_oversight"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py"
+      ],
+      "_size_kb": 15.1,
+      "_lines": 328
+    },
+    {
+      "type": "stack",
+      "name": "@federal_government/mission_reporting_assistant",
+      "display_name": "Mission Reporting Assistant",
+      "vertical": "federal_government",
+      "category": "federal_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/mission_reporting_assistant"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py"
+      ],
+      "_size_kb": 13.0,
+      "_lines": 286
+    },
+    {
+      "type": "stack",
+      "name": "@federal_government/regulatory_compliance_fed",
+      "display_name": "Regulatory Compliance Fed",
+      "vertical": "federal_government",
+      "category": "federal_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/regulatory_compliance_fed"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py"
+      ],
+      "_size_kb": 14.8,
+      "_lines": 290
+    },
+    {
+      "type": "stack",
+      "name": "@federal_government/workforce_clearance_onboarding",
+      "display_name": "Workforce Clearance Onboarding",
+      "vertical": "federal_government",
+      "category": "federal_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/workforce_clearance_onboarding"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py"
+      ],
+      "_size_kb": 14.9,
+      "_lines": 338
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/claims_processing",
+      "display_name": "Claims Processing",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/claims_processing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py"
+      ],
+      "_size_kb": 13.9,
+      "_lines": 295
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/customer_onboarding_fs",
+      "display_name": "Customer Onboarding Fs",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/fs_customer_onboarding"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py"
+      ],
+      "_size_kb": 13.6,
+      "_lines": 317
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/customer_sentiment_churn",
+      "display_name": "Customer Sentiment Churn",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/customer_sentiment_churn"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py"
+      ],
+      "_size_kb": 15.0,
+      "_lines": 327
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/financial_advisor_copilot",
+      "display_name": "Financial Advisor Copilot",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/financial_advisor_copilot"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py"
+      ],
+      "_size_kb": 13.2,
+      "_lines": 292
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/fraud_detection_alert",
+      "display_name": "Fraud Detection Alert",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/fraud_detection_alert"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py"
+      ],
+      "_size_kb": 14.6,
+      "_lines": 272
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/loan_origination_assistant",
+      "display_name": "Loan Origination Assistant",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/loan_origination_assistant"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py"
+      ],
+      "_size_kb": 14.0,
+      "_lines": 327
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/portfolio_rebalancing",
+      "display_name": "Portfolio Rebalancing",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/portfolio_rebalancing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py"
+      ],
+      "_size_kb": 14.1,
+      "_lines": 306
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/regulatory_compliance_fs",
+      "display_name": "Regulatory Compliance Fs",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/fs_regulatory_compliance"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py"
+      ],
+      "_size_kb": 12.8,
+      "_lines": 268
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/underwriting_support",
+      "display_name": "Underwriting Support",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/underwriting_support"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py"
+      ],
+      "_size_kb": 14.4,
+      "_lines": 329
+    },
+    {
+      "type": "stack",
+      "name": "@financial_services/wealth_insights_generator",
+      "display_name": "Wealth Insights Generator",
+      "vertical": "financial_services",
+      "category": "financial_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/wealth_insights_generator"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py"
+      ],
+      "_size_kb": 12.6,
+      "_lines": 280
+    },
+    {
+      "type": "stack",
+      "name": "@general/ai_customer_assistant",
+      "display_name": "Ai Customer Assistant",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/ai_customer_assistant"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py"
+      ],
+      "_size_kb": 18.2,
+      "_lines": 369
+    },
+    {
+      "type": "stack",
+      "name": "@general/ask_hr",
+      "display_name": "Ask Hr",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 2,
+      "agents": [
+        "@aibast-agents-library/general_ask_hr",
+        "@aibast-agents-library/ask_hr"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
+        "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py"
+      ],
+      "_size_kb": 36.2,
+      "_lines": 792
+    },
+    {
+      "type": "stack",
+      "name": "@general/crm_bulk_data_creator",
+      "display_name": "Crm Bulk Data Creator",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 3,
+      "agents": [
+        "@aibast-agents-library/bulk_crm_data_generator_agent",
+        "@aibast-agents-library/dynamics_365_connector",
+        "@aibast-agents-library/one_click_crm_intake"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
+        "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
+        "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py"
+      ],
+      "_size_kb": 48.3,
+      "_lines": 882
+    },
+    {
+      "type": "stack",
+      "name": "@general/cross_selling_opportunities",
+      "display_name": "Cross Selling Opportunities",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/cross_selling"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py"
+      ],
+      "_size_kb": 15.2,
+      "_lines": 300
+    },
+    {
+      "type": "stack",
+      "name": "@general/customer_360",
+      "display_name": "Customer 360",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/customer_360"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py"
+      ],
+      "_size_kb": 17.7,
+      "_lines": 317
+    },
+    {
+      "type": "stack",
+      "name": "@general/email_drafting",
+      "display_name": "Email Drafting",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/email_drafting"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py"
+      ],
+      "_size_kb": 14.7,
+      "_lines": 284
+    },
+    {
+      "type": "stack",
+      "name": "@general/find_accurate_models",
+      "display_name": "Find Accurate Models",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/find_accurate_models"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py"
+      ],
+      "_size_kb": 14.9,
+      "_lines": 285
+    },
+    {
+      "type": "stack",
+      "name": "@general/identify_discounts",
+      "display_name": "Identify Discounts",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/identify_discounts"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py"
+      ],
+      "_size_kb": 15.8,
+      "_lines": 296
+    },
+    {
+      "type": "stack",
+      "name": "@general/it_ticket_management",
+      "display_name": "It Ticket Management",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/it_ticket_management"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py"
+      ],
+      "_size_kb": 15.8,
+      "_lines": 258
+    },
+    {
+      "type": "stack",
+      "name": "@general/procurement_agent",
+      "display_name": "Procurement Agent",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/procurement_agent"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py"
+      ],
+      "_size_kb": 14.4,
+      "_lines": 250
+    },
+    {
+      "type": "stack",
+      "name": "@general/procurement_support",
+      "display_name": "Procurement Support",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/procurement_support"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py"
+      ],
+      "_size_kb": 14.8,
+      "_lines": 240
+    },
+    {
+      "type": "stack",
+      "name": "@general/product_reference",
+      "display_name": "Product Reference",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/product_reference"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py"
+      ],
+      "_size_kb": 14.8,
+      "_lines": 267
+    },
+    {
+      "type": "stack",
+      "name": "@general/sales_coach",
+      "display_name": "Sales Coach",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/sales_coach"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py"
+      ],
+      "_size_kb": 15.9,
+      "_lines": 283
+    },
+    {
+      "type": "stack",
+      "name": "@general/simulation_sales",
+      "display_name": "Simulation Sales",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/sales_simulation"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py"
+      ],
+      "_size_kb": 16.2,
+      "_lines": 306
+    },
+    {
+      "type": "stack",
+      "name": "@general/speech_to_crm",
+      "display_name": "Speech To Crm",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/speech_to_crm"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py"
+      ],
+      "_size_kb": 14.6,
+      "_lines": 265
+    },
+    {
+      "type": "stack",
+      "name": "@general/triage_bot",
+      "display_name": "Triage Bot",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/triage_bot"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py"
+      ],
+      "_size_kb": 14.3,
+      "_lines": 253
+    },
+    {
+      "type": "stack",
+      "name": "@general/voice_to_crm",
+      "display_name": "Voice To Crm",
+      "vertical": "general",
+      "category": "general",
+      "agent_count": 4,
+      "agents": [
+        "@aibast-agents-library/voice_to_crm_d365",
+        "@aibast-agents-library/voice_to_crm_email",
+        "@aibast-agents-library/sharepoint_document_extractor",
+        "@aibast-agents-library/voice_to_crm_servicenow"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py",
+        "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
+        "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
+        "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py"
+      ],
+      "_size_kb": 54.4,
+      "_lines": 1018
+    },
+    {
+      "type": "stack",
+      "name": "@healthcare/care_gap_closure",
+      "display_name": "Care Gap Closure",
+      "vertical": "healthcare",
+      "category": "healthcare",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/care_gap_closure"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py"
+      ],
+      "_size_kb": 12.7,
+      "_lines": 324
+    },
+    {
+      "type": "stack",
+      "name": "@healthcare/clinical_notes_summarizer",
+      "display_name": "Clinical Notes Summarizer",
+      "vertical": "healthcare",
+      "category": "healthcare",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/clinical_notes_summarizer"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py"
+      ],
+      "_size_kb": 15.8,
+      "_lines": 354
+    },
+    {
+      "type": "stack",
+      "name": "@healthcare/patient_intake",
+      "display_name": "Patient Intake",
+      "vertical": "healthcare",
+      "category": "healthcare",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/patient_intake"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py"
+      ],
+      "_size_kb": 14.0,
+      "_lines": 369
+    },
+    {
+      "type": "stack",
+      "name": "@healthcare/prior_authorization",
+      "display_name": "Prior Authorization",
+      "vertical": "healthcare",
+      "category": "healthcare",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/prior_authorization"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py"
+      ],
+      "_size_kb": 15.0,
+      "_lines": 364
+    },
+    {
+      "type": "stack",
+      "name": "@healthcare/staff_credentialing",
+      "display_name": "Staff Credentialing",
+      "vertical": "healthcare",
+      "category": "healthcare",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/staff_credentialing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py"
+      ],
+      "_size_kb": 14.7,
+      "_lines": 310
+    },
+    {
+      "type": "stack",
+      "name": "@it_management/it_helpdesk",
+      "display_name": "It Helpdesk",
+      "vertical": "it_management",
+      "category": "it_management",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/it_helpdesk"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py"
+      ],
+      "_size_kb": 18.7,
+      "_lines": 425
+    },
+    {
+      "type": "stack",
+      "name": "@manufacturing/inventory_rebalancing",
+      "display_name": "Inventory Rebalancing",
+      "vertical": "manufacturing",
+      "category": "manufacturing",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/inventory_rebalancing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py"
+      ],
+      "_size_kb": 15.0,
+      "_lines": 353
+    },
+    {
+      "type": "stack",
+      "name": "@manufacturing/maintenance_scheduling",
+      "display_name": "Maintenance Scheduling",
+      "vertical": "manufacturing",
+      "category": "manufacturing",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/maintenance_scheduling"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py"
+      ],
+      "_size_kb": 16.2,
+      "_lines": 367
+    },
+    {
+      "type": "stack",
+      "name": "@manufacturing/order_status_communication",
+      "display_name": "Order Status Communication",
+      "vertical": "manufacturing",
+      "category": "manufacturing",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/order_status_communication"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py"
+      ],
+      "_size_kb": 12.5,
+      "_lines": 321
+    },
+    {
+      "type": "stack",
+      "name": "@manufacturing/production_line_optimization",
+      "display_name": "Production Line Optimization",
+      "vertical": "manufacturing",
+      "category": "manufacturing",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/production_line_optimization"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py"
+      ],
+      "_size_kb": 14.9,
+      "_lines": 319
+    },
+    {
+      "type": "stack",
+      "name": "@manufacturing/supplier_risk_monitoring",
+      "display_name": "Supplier Risk Monitoring",
+      "vertical": "manufacturing",
+      "category": "manufacturing",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/supplier_risk_monitoring"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py"
+      ],
+      "_size_kb": 13.8,
+      "_lines": 330
+    },
+    {
+      "type": "stack",
+      "name": "@professional_services/client_health_score",
+      "display_name": "Client Health Score",
+      "vertical": "professional_services",
+      "category": "professional_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/client_health_score"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py"
+      ],
+      "_size_kb": 13.0,
+      "_lines": 342
+    },
+    {
+      "type": "stack",
+      "name": "@professional_services/contract_risk_review",
+      "display_name": "Contract Risk Review",
+      "vertical": "professional_services",
+      "category": "professional_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/contract_risk_review"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py"
+      ],
+      "_size_kb": 13.8,
+      "_lines": 315
+    },
+    {
+      "type": "stack",
+      "name": "@professional_services/proposal_copilot",
+      "display_name": "Proposal Copilot",
+      "vertical": "professional_services",
+      "category": "professional_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/proposal_copilot"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py"
+      ],
+      "_size_kb": 13.7,
+      "_lines": 333
+    },
+    {
+      "type": "stack",
+      "name": "@professional_services/resource_utilization",
+      "display_name": "Resource Utilization",
+      "vertical": "professional_services",
+      "category": "professional_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/resource_utilization"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py"
+      ],
+      "_size_kb": 15.6,
+      "_lines": 335
+    },
+    {
+      "type": "stack",
+      "name": "@professional_services/time_entry_billing",
+      "display_name": "Time Entry Billing",
+      "vertical": "professional_services",
+      "category": "professional_services",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/time_entry_billing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py"
+      ],
+      "_size_kb": 17.7,
+      "_lines": 362
+    },
+    {
+      "type": "stack",
+      "name": "@retail_cpg/inventory_visibility",
+      "display_name": "Inventory Visibility",
+      "vertical": "retail_cpg",
+      "category": "retail_cpg",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/inventory_visibility"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py"
+      ],
+      "_size_kb": 15.6,
+      "_lines": 370
+    },
+    {
+      "type": "stack",
+      "name": "@retail_cpg/personalized_marketing",
+      "display_name": "Personalized Marketing",
+      "vertical": "retail_cpg",
+      "category": "retail_cpg",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/personalized_marketing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py"
+      ],
+      "_size_kb": 17.2,
+      "_lines": 436
+    },
+    {
+      "type": "stack",
+      "name": "@retail_cpg/returns_complaints_resolution",
+      "display_name": "Returns Complaints Resolution",
+      "vertical": "retail_cpg",
+      "category": "retail_cpg",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/returns_complaints_resolution"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py"
+      ],
+      "_size_kb": 20.4,
+      "_lines": 506
+    },
+    {
+      "type": "stack",
+      "name": "@retail_cpg/store_associate_copilot",
+      "display_name": "Store Associate Copilot",
+      "vertical": "retail_cpg",
+      "category": "retail_cpg",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/store_associate_copilot"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py"
+      ],
+      "_size_kb": 22.4,
+      "_lines": 538
+    },
+    {
+      "type": "stack",
+      "name": "@retail_cpg/supply_chain_disruption_alert",
+      "display_name": "Supply Chain Disruption Alert",
+      "vertical": "retail_cpg",
+      "category": "retail_cpg",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/supply_chain_disruption_alert"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py"
+      ],
+      "_size_kb": 23.8,
+      "_lines": 631
+    },
+    {
+      "type": "stack",
+      "name": "@slg_government/building_permit_processing",
+      "display_name": "Building Permit Processing",
+      "vertical": "slg_government",
+      "category": "slg_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/building_permit_processing"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py"
+      ],
+      "_size_kb": 14.6,
+      "_lines": 349
+    },
+    {
+      "type": "stack",
+      "name": "@slg_government/citizen_service_request",
+      "display_name": "Citizen Service Request",
+      "vertical": "slg_government",
+      "category": "slg_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/citizen_service_request"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py"
+      ],
+      "_size_kb": 14.6,
+      "_lines": 327
+    },
+    {
+      "type": "stack",
+      "name": "@slg_government/foia_request_assistant",
+      "display_name": "Foia Request Assistant",
+      "vertical": "slg_government",
+      "category": "slg_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/foia_request_assistant"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py"
+      ],
+      "_size_kb": 14.7,
+      "_lines": 308
+    },
+    {
+      "type": "stack",
+      "name": "@slg_government/grants_management",
+      "display_name": "Grants Management",
+      "vertical": "slg_government",
+      "category": "slg_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/slg_grants_management"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py"
+      ],
+      "_size_kb": 12.9,
+      "_lines": 307
+    },
+    {
+      "type": "stack",
+      "name": "@slg_government/utility_billing_assistance",
+      "display_name": "Utility Billing Assistance",
+      "vertical": "slg_government",
+      "category": "slg_government",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/utility_billing_assistance"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py"
+      ],
+      "_size_kb": 16.3,
+      "_lines": 372
+    },
+    {
+      "type": "stack",
+      "name": "@software_dp/competitive_intel",
+      "display_name": "Competitive Intel",
+      "vertical": "software_dp",
+      "category": "software_dp",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/software_competitive_intel"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py"
+      ],
+      "_size_kb": 15.8,
+      "_lines": 421
+    },
+    {
+      "type": "stack",
+      "name": "@software_dp/customer_onboarding",
+      "display_name": "Customer Onboarding",
+      "vertical": "software_dp",
+      "category": "software_dp",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/software_customer_onboarding"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py"
+      ],
+      "_size_kb": 14.3,
+      "_lines": 379
+    },
+    {
+      "type": "stack",
+      "name": "@software_dp/license_renewal_expansion",
+      "display_name": "License Renewal Expansion",
+      "vertical": "software_dp",
+      "category": "software_dp",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/license_renewal_expansion"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py"
+      ],
+      "_size_kb": 13.6,
+      "_lines": 351
+    },
+    {
+      "type": "stack",
+      "name": "@software_dp/product_feedback_synthesizer",
+      "display_name": "Product Feedback Synthesizer",
+      "vertical": "software_dp",
+      "category": "software_dp",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/product_feedback_synthesizer"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py"
+      ],
+      "_size_kb": 13.1,
+      "_lines": 363
+    },
+    {
+      "type": "stack",
+      "name": "@software_dp/support_ticket_resolution",
+      "display_name": "Support Ticket Resolution",
+      "vertical": "software_dp",
+      "category": "software_dp",
+      "agent_count": 1,
+      "agents": [
+        "@aibast-agents-library/support_ticket_resolution"
+      ],
+      "agent_files": [
+        "agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py"
+      ],
+      "_size_kb": 13.1,
+      "_lines": 324
     }
   ],
   "stacks": {

@@ -11,6 +11,9 @@ Scans agents/@publisher/ for .py and .py.card files with __manifest__ dicts and 
 - Validates all manifests against schema
 - Reports errors for malformed agents
 
+Also scans swarms/@publisher/ for converged multi-agent singletons with __swarm__ dicts,
+and promotes existing agent stacks to downloadable swarm bundles.
+
 Supports two file formats:
 - slug.py      — bare agent (code + manifest)
 - slug.py.card — complete agent+card package (code + manifest + __card__ shell)
@@ -27,6 +30,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 AGENTS_DIR = Path("agents")
+SWARMS_DIR = Path("swarms")
 REGISTRY_FILE = Path("registry.json")
 HOLO_CARDS_FILE = Path("cards/holo_cards.json")
 
@@ -111,6 +115,44 @@ def extract_card(py_path: Path) -> dict:
     return None
 
 
+def extract_swarm(py_path: Path) -> dict:
+    """Extract __swarm__ dict from a Python file using AST parsing."""
+    try:
+        source = py_path.read_text()
+        tree = ast.parse(source)
+    except SyntaxError:
+        return None
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and target.id == "__swarm__":
+                    try:
+                        return ast.literal_eval(node.value)
+                    except (ValueError, TypeError):
+                        return None
+    return None
+
+
+REQUIRED_SWARM_FIELDS = [
+    "schema", "id", "display_name", "summary", "category", "publisher", "produced_by"
+]
+
+
+def validate_swarm(py_path: Path, swarm: dict) -> list:
+    """Validate a __swarm__ dict and return list of errors."""
+    errors = []
+    for field in REQUIRED_SWARM_FIELDS:
+        if field not in swarm:
+            errors.append(f"Missing required __swarm__ field: {field}")
+    if swarm.get("schema") != "rapp-swarm/1.0":
+        errors.append(f"Invalid swarm schema: {swarm.get('schema')} (expected rapp-swarm/1.0)")
+    pb = swarm.get("produced_by", {})
+    if not isinstance(pb, dict) or "method" not in pb:
+        errors.append("produced_by must be a dict with at least 'method'")
+    return errors
+
+
 # First-party agents that legitimately need elevated capabilities.
 # Community submissions are NEVER added here — they must find safe alternatives.
 SECURITY_ALLOWLIST = {
@@ -119,6 +161,8 @@ SECURITY_ALLOWLIST = {
     "agents/@kody/rar_remote_agent.py",             # remote agent needs subprocess for git/install
     "agents/@borg/prompt_to_video_agent.py",        # video rendering needs subprocess for ffmpeg
     "agents/@discreetRappers/scripted_demo_agent.py", # demo runner needs exec for script execution
+    "swarms/@rapp/bookfactory_agent.py",            # converged swarm with inlined LLM dispatch
+    "swarms/@rapp/momentfactory_agent.py",          # converged swarm with inlined LLM dispatch
 }
 
 # Patterns that should never appear in agent code (supply chain defense)
@@ -315,7 +359,83 @@ def build_registry():
 
         agents.append(manifest)
 
-    # Seed collision check — every agent must have a unique seed
+    # ─── Scan swarms/ for converged multi-agent singletons ──────────────
+    converged_swarms = []
+    if SWARMS_DIR.exists():
+        swarm_files = sorted(SWARMS_DIR.rglob("*.py"))
+        for py_path in swarm_files:
+            if py_path.name == "__init__.py":
+                continue
+            stem = py_path.stem
+            if '-' in stem:
+                errors.append(f"{py_path}: filename contains dashes — rename to snake_case")
+                continue
+
+            manifest = extract_manifest(py_path)
+            if manifest is None:
+                continue
+            validation_errors = validate_manifest(py_path, manifest)
+            if validation_errors:
+                for err in validation_errors:
+                    errors.append(f"{py_path}: {err}")
+                continue
+
+            swarm_meta = extract_swarm(py_path)
+            if swarm_meta is None:
+                errors.append(f"{py_path}: missing __swarm__ dict (required for swarms/)")
+                continue
+            swarm_errors = validate_swarm(py_path, swarm_meta)
+            if swarm_errors:
+                for err in swarm_errors:
+                    errors.append(f"{py_path}: {err}")
+                continue
+
+            # Security scan
+            if str(py_path) not in SECURITY_ALLOWLIST:
+                sec_warnings = scan_security(py_path)
+                if sec_warnings:
+                    for w in sec_warnings:
+                        errors.append(w)
+                    continue
+
+            sha256 = compute_sha256(py_path)
+            content = py_path.read_text()
+
+            name = manifest["name"]
+            publisher = name.split("/")[0]
+            publishers.add(publisher)
+            categories.add(manifest.get("category", "uncategorized"))
+
+            entry = {
+                "type": "converged",
+                "schema": manifest.get("schema", "rapp-agent/1.0"),
+                "name": name,
+                "version": manifest.get("version", "0.0.0"),
+                "display_name": manifest.get("display_name", ""),
+                "description": manifest.get("description", ""),
+                "author": manifest.get("author", ""),
+                "tags": manifest.get("tags", []),
+                "category": manifest.get("category", ""),
+                "quality_tier": manifest.get("quality_tier", "community"),
+                "requires_env": manifest.get("requires_env", []),
+                "dependencies": manifest.get("dependencies", []),
+                "_file": str(py_path),
+                "_sha256": sha256,
+                "_seed": compute_seed(
+                    name,
+                    manifest.get("category", "general"),
+                    manifest.get("quality_tier", "community"),
+                    manifest.get("tags", []),
+                    manifest.get("dependencies", []),
+                ),
+                "_size_kb": round(py_path.stat().st_size / 1024, 1),
+                "_lines": len(content.split('\n')),
+                "_added_at": _git_first_committed(py_path),
+                "_swarm": swarm_meta,
+            }
+            converged_swarms.append(entry)
+
+    # ─── Seed collision check (agents + converged swarms) ─────────────
     seen_seeds = {}
     for a in agents:
         seed = a.get("_seed")
@@ -329,6 +449,18 @@ def build_registry():
         else:
             seen_seeds[seed] = a["name"]
 
+    for s in converged_swarms:
+        seed = s.get("_seed")
+        if seed is None:
+            continue
+        if seed in seen_seeds:
+            errors.append(
+                f"Seed collision: {s['name']} and {seen_seeds[seed]} "
+                f"both resolve to seed {seed}"
+            )
+        else:
+            seen_seeds[seed] = s["name"]
+
     # Detect duplicate display_names (different manifest names, same user-facing name)
     seen_display = {}
     duplicates = []
@@ -339,23 +471,7 @@ def build_registry():
         else:
             seen_display[dn] = a["name"]
 
-    registry = {
-        "schema": "rapp-registry/1.0",
-        "version": "1.0.0",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "stats": {
-            "total_agents": len(agents),
-            "publishers": len(publishers),
-            "categories": len(categories),
-            "publisher_list": sorted(publishers),
-            "category_list": sorted(categories)
-        },
-        "duplicates": [{"display_name": dn, "agents": [a1, a2]} for dn, a1, a2 in duplicates],
-        "agents": agents
-    }
-
-    # Build stacks index — maps AI Agent Templates stacks to deck groupings
-    # Each stack = a deck, each agent in the stack = a card in that deck
+    # ─── Build stacks index (backward compat) ──────────────���─────────
     stacks = {}
     for a in agents:
         s = a.get("_stack")
@@ -369,6 +485,53 @@ def build_registry():
                 "agents": [],
             }
         stacks[s]["agents"].append(a["name"])
+
+    # ─── Promote stacks to swarms (type: stack) ──────────────────────
+    stack_swarms = []
+    for stack_name, stack_data in stacks.items():
+        agent_files = []
+        total_size = 0
+        total_lines = 0
+        for agent_entry in agents:
+            if agent_entry.get("_stack") == stack_name:
+                agent_files.append(agent_entry["_file"])
+                total_size += agent_entry.get("_size_kb", 0)
+                total_lines += agent_entry.get("_lines", 0)
+
+        stack_swarms.append({
+            "type": "stack",
+            "name": f"@{stack_data['vertical']}/{stack_name}",
+            "display_name": stack_data["display_name"],
+            "vertical": stack_data["vertical"],
+            "category": stack_data["vertical"],
+            "agent_count": len(stack_data["agents"]),
+            "agents": stack_data["agents"],
+            "agent_files": agent_files,
+            "_size_kb": round(total_size, 1),
+            "_lines": total_lines,
+        })
+
+    # Combine all swarms
+    all_swarms = converged_swarms + stack_swarms
+
+    # ─── Build registry ───────────────────────────────────────────────
+    registry = {
+        "schema": "rapp-registry/1.1",
+        "version": "1.1.0",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "stats": {
+            "total_agents": len(agents),
+            "total_swarms": len(all_swarms),
+            "publishers": len(publishers),
+            "categories": len(categories),
+            "publisher_list": sorted(publishers),
+            "category_list": sorted(categories)
+        },
+        "duplicates": [{"display_name": dn, "agents": [a1, a2]} for dn, a1, a2 in duplicates],
+        "agents": agents,
+        "swarms": all_swarms,
+    }
+
     if stacks:
         registry["stacks"] = stacks
 
@@ -385,11 +548,12 @@ def build_registry():
             }
         except (json.JSONDecodeError, KeyError):
             pass
-    
+
     with open(REGISTRY_FILE, "w") as f:
         json.dump(registry, f, indent=2)
-    
+
     print(f"✓ Registry built: {len(agents)} agents from {len(publishers)} publishers")
+    print(f"  Swarms: {len(converged_swarms)} converged + {len(stack_swarms)} stacks = {len(all_swarms)} total")
     print(f"  Categories: {', '.join(sorted(categories))}")
     print(f"  Publishers: {', '.join(sorted(publishers))}")
 
@@ -397,13 +561,13 @@ def build_registry():
         print(f"\n⚠ {len(duplicates)} duplicate display names:")
         for dn, a1, a2 in duplicates:
             print(f"  - \"{dn}\": {a1} vs {a2}")
-    
+
     if errors:
         print(f"\n⚠ {len(errors)} validation errors:")
         for err in errors:
             print(f"  - {err}")
         return 1
-    
+
     return 0
 
 
