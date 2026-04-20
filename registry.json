@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-20T16:01:50.822460+00:00",
+  "generated_at": "2026-04-20T16:48:19.365563+00:00",
   "stats": {
-    "total_agents": 161,
+    "total_agents": 163,
     "total_swarms": 82,
     "publishers": 8,
     "categories": 19,
@@ -4236,6 +4236,73 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@rapp/learn_new",
+      "version": "2.0.0",
+      "display_name": "LearnNew",
+      "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+      "author": "RAPP",
+      "tags": [
+        "meta",
+        "generator",
+        "scaffolding",
+        "learn",
+        "swarm"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "args": {
+          "action": "create",
+          "description": "An agent that summarizes web pages by URL"
+        }
+      },
+      "_file": "agents/@rapp/learn_new_agent.py",
+      "_sha256": "0edcecec861b4dce7ad6c06ef77a320d4c8affe51f8a9944b8c77aca0803c21c",
+      "_seed": 2538772095262403840,
+      "_size_kb": 38.0,
+      "_lines": 1025,
+      "_has_card": false,
+      "_added_at": "2026-04-20T12:38:45-04:00"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/swarm_factory",
+      "display_name": "SwarmFactory",
+      "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
+      "author": "RAPP",
+      "version": "0.2.0",
+      "tags": [
+        "meta",
+        "build",
+        "singleton",
+        "swarm-factory",
+        "store"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "args": {
+          "action": "list"
+        }
+      },
+      "_file": "agents/@rapp/swarm_factory_agent.py",
+      "_sha256": "1afd5d43b4aed58f47fa91bfbf738a44d423f92837adf81970a9b50d7d4692c0",
+      "_seed": 6043219247042799700,
+      "_size_kb": 19.6,
+      "_lines": 450,
+      "_has_card": false,
+      "_added_at": "2026-04-20T12:38:45-04:00"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/body_writer",
       "version": "0.1.0",
       "display_name": "Body Writer",
@@ -5065,7 +5132,7 @@
       "_seed": 2002538221670117503,
       "_size_kb": 24.5,
       "_lines": 561,
-      "_added_at": null,
+      "_added_at": "2026-04-19T18:58:15-04:00",
       "_swarm": {
         "schema": "rapp-swarm/1.0",
         "id": "bookfactoryagent",
@@ -5143,7 +5210,7 @@
       "_seed": 14612914359979752431,
       "_size_kb": 21.4,
       "_lines": 498,
-      "_added_at": null,
+      "_added_at": "2026-04-19T18:58:15-04:00",
       "_swarm": {
         "schema": "rapp-swarm/1.0",
         "id": "momentfactoryagent",
