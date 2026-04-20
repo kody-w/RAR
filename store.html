@@ -3965,6 +3965,9 @@ function swarmCard(s) {
   const dlBtn = isConverged
     ? `<button class="btn-sm" onclick="event.stopPropagation();downloadSwarmPy('${esc(s._file)}','${esc(s.name)}')">Download .py</button>`
     : `<button class="btn-sm" onclick="event.stopPropagation();downloadSwarmZip(${JSON.stringify(s.agent_files||[]).replace(/"/g,'&quot;')},'${esc(s.display_name)}')">Download ZIP</button>`;
+  const swarmId = isConverged ? (s._swarm?.id || s.name) : s.name.replace(/[^a-z0-9]/gi, '_');
+  const packId = isConverged ? `swarm-${swarmId}` : `swarm-stack-${swarmId}`;
+  const packBtn = `<button class="btn-sm" style="background:var(--bg-card);border:1px solid var(--border)" onclick="event.stopPropagation();openSwarmAsPack('${esc(packId)}')">Open Pack</button>`;
 
   return `
   <div class="agent-card" onclick="openSwarmDetail(${allSwarms.indexOf(s)})" style="cursor:pointer;border-left:3px solid ${isConverged ? 'var(--purple)' : 'var(--green)'}">
@@ -3979,7 +3982,7 @@ function swarmCard(s) {
       ${lines ? `<span>${lines}</span>` : ''}
       ${category ? `<span style="background:var(--bg-card);padding:1px 5px;border-radius:3px">${esc(category)}</span>` : ''}
     </div>
-    <div style="display:flex;gap:6px">${dlBtn}</div>
+    <div style="display:flex;gap:6px">${dlBtn}${packBtn}</div>
   </div>`;
 }
 
@@ -4054,6 +4057,13 @@ function openSwarmDetail(idx) {
     html += `</div>`;
   }
 
+  // Open as Pack
+  const swarmId = isConverged ? (sw.id || s.name) : s.name.replace(/[^a-z0-9]/gi, '_');
+  const packId = isConverged ? `swarm-${swarmId}` : `swarm-stack-${swarmId}`;
+  html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Cards</h3>`;
+  html += `<p style="font-size:.82rem;color:var(--text-dim);margin-bottom:8px">Open this swarm as a pack of agent cards.</p>`;
+  html += `<button class="btn-sm" style="background:linear-gradient(135deg,${isConverged ? '#7c3aed,#5b21b6' : '#22c55e,#15803d'});color:#fff;border:none;margin-bottom:16px" onclick="openSwarmAsPack('${esc(packId)}')">Open as Pack</button>`;
+
   // Install
   html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Install</h3>`;
   if (isConverged) {
@@ -4074,6 +4084,17 @@ function openSwarmDetail(idx) {
     detail.innerHTML = html;
     overlay.classList.add('open');
   }
+}
+
+function openSwarmAsPack(packId) {
+  // Close the detail modal
+  const overlay = document.getElementById('agent-overlay');
+  if (overlay) overlay.classList.remove('open');
+  // Switch to packs tab and open this pack
+  switchTab('packs');
+  setTimeout(() => {
+    if (typeof openPack === 'function') openPack(packId);
+  }, 300);
 }
 
 // ═══════════════════════════════════════════════════════
@@ -8283,8 +8304,75 @@ function buildVerticalPacks(reg) {
       filter: a => a._stack_vertical === vert,
     });
   }
+  // Add swarm packs — each swarm (converged or stack) becomes an openable pack
+  buildSwarmPacks(packs);
   PACK_SETS = packs;
   renderPackShelf();
+}
+
+function buildSwarmPacks(packs) {
+  if (!allSwarms || allSwarms.length === 0) return;
+
+  // Converged swarms — specialists map to cards in the pool
+  const converged = allSwarms.filter(s => s.type === 'converged');
+  for (const sw of converged) {
+    const swMeta = sw._swarm || {};
+    const specialists = swMeta.produced_by?.specialists || [];
+    if (specialists.length < 2) continue;
+
+    // Find which specialists have matching agent entries in allAgents
+    const matchedNames = new Set();
+    for (const spec of specialists) {
+      const match = allAgents.find(a =>
+        a.name === spec ||
+        a.name === spec.replace(/-/g, '_') ||
+        a.name.endsWith('/' + spec.split('/').pop()?.replace(/-/g, '_'))
+      );
+      if (match) matchedNames.add(match.name);
+    }
+
+    // If we have agent matches, use those as the pool; otherwise use a name-based filter
+    const packId = `swarm-${swMeta.id || sw.name}`;
+    packs.push({
+      id: packId,
+      name: sw.display_name || sw.name,
+      sub: `${specialists.length} specialists \u00b7 converged swarm`,
+      cssClass: 'pack-frontier',
+      _inlineStyle: 'background:linear-gradient(135deg,#2d1f4e,#1a1035,#2d1f4e);border:2px solid #7c3aed',
+      get icon() { return svgIcon('zap', '#a78bfa', 48); },
+      cards: Math.min(5, matchedNames.size || specialists.length),
+      desc: swMeta.summary || sw.description || '',
+      filter: matchedNames.size > 0
+        ? (a => matchedNames.has(a.name))
+        : (a => (a.tags || []).some(t => (sw.tags || []).includes(t))),
+      _isSwarm: true,
+      _swarmType: 'converged',
+    });
+  }
+
+  // Stack swarms — each multi-agent stack is also an openable pack
+  const stackSwarms = allSwarms.filter(s => s.type === 'stack' && s.agent_count >= 3);
+  for (const sw of stackSwarms) {
+    const agentNames = new Set(sw.agents || []);
+    const packId = `swarm-stack-${sw.name.replace(/[^a-z0-9]/gi, '_')}`;
+    // Skip if a vertical pack already covers this (avoid duplication)
+    const alreadyCovered = packs.some(p => p.id === sw.vertical);
+    if (alreadyCovered && sw.agent_count < 5) continue;
+
+    packs.push({
+      id: packId,
+      name: sw.display_name,
+      sub: `${sw.agent_count} agents \u00b7 ${sw.vertical?.replace(/_/g, ' ') || 'stack'} swarm`,
+      cssClass: '',
+      _inlineStyle: 'background:linear-gradient(135deg,#1f3d2d,#102a1a,#1f3d2d);border:2px solid #22c55e',
+      get icon() { return svgIcon('layers', '#4ade80', 48); },
+      cards: Math.min(5, sw.agent_count),
+      desc: `${sw.agent_count} specialist agents from the ${sw.display_name} stack.`,
+      filter: a => agentNames.has(a.name),
+      _isSwarm: true,
+      _swarmType: 'stack',
+    });
+  }
 }
 
 // ── Collection (IndexedDB) ──

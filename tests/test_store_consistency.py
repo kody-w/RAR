@@ -207,6 +207,12 @@ def test_store_has_swarm_download():
 def test_store_swarms_nav_button():
     assert 'data-tab="swarms"' in html
 
+def test_store_swarm_packs():
+    """Swarms should be presentable as openable card packs."""
+    assert "buildSwarmPacks" in html
+    assert "openSwarmAsPack" in html
+    assert "Open Pack" in html or "Open as Pack" in html
+
 
 # ═══════════════════════════════════════════════════════
 # Registry Consistency
