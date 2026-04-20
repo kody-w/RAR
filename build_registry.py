@@ -161,6 +161,7 @@ SECURITY_ALLOWLIST = {
     "agents/@kody/rar_remote_agent.py",             # remote agent needs subprocess for git/install
     "agents/@borg/prompt_to_video_agent.py",        # video rendering needs subprocess for ffmpeg
     "agents/@discreetRappers/scripted_demo_agent.py", # demo runner needs exec for script execution
+    "agents/@rapp/learn_new_agent.py",               # meta-agent uses subprocess for Copilot code gen + pip install
     "swarms/@rapp/bookfactory_agent.py",            # converged swarm with inlined LLM dispatch
     "swarms/@rapp/momentfactory_agent.py",          # converged swarm with inlined LLM dispatch
 }

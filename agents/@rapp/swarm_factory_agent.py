@@ -29,11 +29,16 @@ RAPP_STORE_CATALOG_URL = "https://raw.githubusercontent.com/kody-w/RAPP/main/rap
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@rapp/swarm-factory",
-    "tier": "core",
-    "trust": "official",
+    "name": "@rapp/swarm_factory",
+    "display_name": "SwarmFactory",
+    "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
+    "author": "RAPP",
     "version": "0.2.0",
     "tags": ["meta", "build", "singleton", "swarm-factory", "store"],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "list"}},
 }
 
