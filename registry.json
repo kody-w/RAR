@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-20T16:48:19.365563+00:00",
+  "generated_at": "2026-04-21T17:35:57.373661+00:00",
   "stats": {
-    "total_agents": 163,
+    "total_agents": 164,
     "total_swarms": 82,
     "publishers": 8,
     "categories": 19,
@@ -4233,6 +4233,41 @@
       "_lines": 29,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/fleet_commander",
+      "version": "1.0.0",
+      "display_name": "FleetCommander",
+      "description": "Autonomous agent development pipeline. Accepts a natural-language spec, generates a plan, writes tests, builds the agent, iterates until tests pass, and publishes to the RAR registry. Uses Copilot CLI for code generation.",
+      "author": "RAPP",
+      "tags": [
+        "meta",
+        "automation",
+        "fleet",
+        "ci",
+        "tdd",
+        "pipeline"
+      ],
+      "category": "devtools",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "args": {
+          "action": "full",
+          "spec": "An agent that fetches the top stories from Hacker News and summarizes them"
+        }
+      },
+      "_file": "agents/@rapp/fleet_commander_agent.py",
+      "_sha256": "ad1f3782296fae46bfad91f33e93e4f8c2ca8e288236d01476e7fa6a17c6532c",
+      "_seed": 17085564239353749608,
+      "_size_kb": 31.2,
+      "_lines": 799,
+      "_has_card": false,
+      "_added_at": "2026-04-21T13:35:42-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
