@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-24T20:15:28.434396+00:00",
+  "generated_at": "2026-04-24T20:16:15.857177+00:00",
   "stats": {
     "total_agents": 267,
     "total_swarms": 82,
@@ -4369,7 +4369,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4395,7 +4395,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4421,7 +4421,7 @@
       "_size_kb": 4.2,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4447,7 +4447,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4473,7 +4473,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4499,7 +4499,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4525,7 +4525,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4551,7 +4551,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4577,7 +4577,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4603,7 +4603,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4629,7 +4629,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4655,7 +4655,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4681,7 +4681,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4707,7 +4707,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4733,7 +4733,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4759,7 +4759,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4785,7 +4785,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4811,7 +4811,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4837,7 +4837,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4863,7 +4863,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4889,7 +4889,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4915,7 +4915,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4941,7 +4941,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4967,7 +4967,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4993,7 +4993,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5019,7 +5019,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5045,7 +5045,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5071,7 +5071,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5097,7 +5097,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5123,7 +5123,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5149,7 +5149,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5175,7 +5175,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5201,7 +5201,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5227,7 +5227,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5253,7 +5253,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5279,7 +5279,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5305,7 +5305,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5331,7 +5331,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5357,7 +5357,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5383,7 +5383,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5409,7 +5409,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5435,7 +5435,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5461,7 +5461,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5487,7 +5487,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5513,7 +5513,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5539,7 +5539,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5565,7 +5565,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5591,7 +5591,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5617,7 +5617,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5643,7 +5643,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5669,7 +5669,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5695,7 +5695,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5721,7 +5721,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5747,7 +5747,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5773,7 +5773,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5799,7 +5799,7 @@
       "_size_kb": 4.6,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5825,7 +5825,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5851,7 +5851,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5877,7 +5877,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5903,7 +5903,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5929,7 +5929,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5955,7 +5955,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5981,7 +5981,7 @@
       "_size_kb": 4.6,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6007,7 +6007,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6033,7 +6033,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6059,7 +6059,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6085,7 +6085,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6111,7 +6111,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6137,7 +6137,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6163,7 +6163,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6189,7 +6189,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6215,7 +6215,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6241,7 +6241,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6267,7 +6267,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6293,7 +6293,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6319,7 +6319,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6345,7 +6345,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6371,7 +6371,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6397,7 +6397,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6423,7 +6423,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6449,7 +6449,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6475,7 +6475,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6501,7 +6501,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6527,7 +6527,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6553,7 +6553,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6579,7 +6579,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6605,7 +6605,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6631,7 +6631,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6657,7 +6657,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6683,7 +6683,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6709,7 +6709,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6735,7 +6735,7 @@
       "_size_kb": 4.5,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6761,7 +6761,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6787,7 +6787,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6813,7 +6813,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6839,7 +6839,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6865,7 +6865,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6891,7 +6891,7 @@
       "_size_kb": 4.6,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6917,7 +6917,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6943,7 +6943,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6969,7 +6969,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6995,7 +6995,7 @@
       "_size_kb": 4.4,
       "_lines": 132,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7021,7 +7021,7 @@
       "_size_kb": 4.7,
       "_lines": 137,
       "_has_card": false,
-      "_added_at": null
+      "_added_at": "2026-04-24T16:15:58-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
