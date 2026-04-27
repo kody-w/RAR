@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-27T21:24:10.445559+00:00",
+  "generated_at": "2026-04-27T21:26:01.984223+00:00",
   "stats": {
     "total_agents": 271,
     "total_swarms": 82,
@@ -4419,16 +4419,16 @@
       "_seed": 2887497502801280520,
       "_size_kb": 56.0,
       "_lines": 1087,
-      "_has_card": false,
-      "_added_at": null
+      "_has_card": true,
+      "_added_at": "2026-04-27T21:14:20Z"
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@rapp/swarm_factory",
+      "name": "@rapp/swarm_factory_agent",
       "display_name": "SwarmFactory",
       "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
       "author": "RAPP",
-      "version": "0.2.0",
+      "version": "0.2.2",
       "tags": [
         "meta",
         "build",
@@ -4437,7 +4437,7 @@
         "store"
       ],
       "category": "core",
-      "quality_tier": "official",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4448,11 +4448,11 @@
         }
       },
       "_file": "agents/@rapp/swarm_factory_agent.py",
-      "_sha256": "1afd5d43b4aed58f47fa91bfbf738a44d423f92837adf81970a9b50d7d4692c0",
-      "_seed": 6043219247042799700,
-      "_size_kb": 19.6,
-      "_lines": 450,
-      "_has_card": true,
+      "_sha256": "b0cde195f8b3ca50caac01f1651d904b27ba3151df2236566f4418626de0171e",
+      "_seed": 10141477066647414868,
+      "_size_kb": 36.7,
+      "_lines": 699,
+      "_has_card": false,
       "_added_at": "2026-04-20T12:38:45-04:00"
     },
     {

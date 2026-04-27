@@ -1,17 +1,19 @@
 """
-swarm_factory_agent.py — Build, install, and manage RAPP swarms.
+swarm_factory_agent.py — Build, install, generate, and manage RAPP swarms.
 
 Actions:
-  build   — Converge local agents into a single shareable .py singleton
-  list    — Show available swarms in the RAPP Store
-  install — Pull a swarm from the RAPP Store into your agents/ dir
+  generate  — Design a brand-new single-file agent from scratch and persist it
+  build     — Converge existing local agents into a single shareable .py singleton
+  list      — Show available swarms in the RAPP Store
+  install   — Pull a swarm from the RAPP Store into your agents/ dir
   uninstall — Remove an installed swarm
 
 Usage:
-  "Package my agents as a swarm called SalesBot"
-  "What swarms are available in the RAPP Store?"
-  "Install the BookFactory swarm"
-  "Uninstall BookFactory"
+  "Build me an agent that fetches today's NYT front page and summarizes it" → generate
+  "Package my agents as a swarm called SalesBot"                            → build
+  "What swarms are available in the RAPP Store?"                            → list
+  "Install the BookFactory swarm"                                           → install
+  "Uninstall BookFactory"                                                   → uninstall
 """
 
 from agents.basic_agent import BasicAgent
@@ -29,14 +31,14 @@ RAPP_STORE_CATALOG_URL = "https://raw.githubusercontent.com/kody-w/RAPP/main/rap
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@rapp/swarm_factory",
+    "name": "@rapp/swarm_factory_agent",
     "display_name": "SwarmFactory",
     "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
     "author": "RAPP",
-    "version": "0.2.0",
+    "version": "0.2.2",
     "tags": ["meta", "build", "singleton", "swarm-factory", "store"],
     "category": "core",
-    "quality_tier": "official",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "list"}},
@@ -49,33 +51,174 @@ class SwarmFactoryAgent(BasicAgent):
         self.metadata = {
             "name": "SwarmFactory",
             "description": (
-                "Build, install, list, and uninstall RAPP swarms. "
-                "Actions: 'build' converges local agents into a shareable singleton .py file. "
-                "'list' shows available swarms in the RAPP Store. "
-                "'install' pulls a swarm from the store into agents/. "
-                "'uninstall' removes an installed swarm. "
-                "Call this when the user wants to package/export agents, browse the store, "
-                "or install/remove a swarm."
+                "Generate, build, install, list, and uninstall RAPP swarms.\n\n"
+                "A SWARM is a multi-persona pipeline collapsed into ONE shareable "
+                "agent file — like BookFactory (Writer→Editor→CEO→Publisher→Reviewer "
+                "all inlined as _Internal* classes behind one public entrypoint). "
+                "The point of a swarm is that each persona has its own SOUL/system "
+                "prompt and the public composite calls them in sequence to do "
+                "something no single agent could do in one shot.\n\n"
+                "ROLE BOUNDARY (read this before choosing a tool):\n"
+                " • Single one-shot agent (fetch xkcd, roll dice, lookup a stock "
+                "price) → use the LearnNew tool with action='create'. Do NOT use "
+                "SwarmFactory for these.\n"
+                " • Multi-persona converged singleton (research→write→critique, "
+                "plan→draft→review, write→edit→publish) → SwarmFactory.generate. "
+                "This is the BookFactory pattern.\n"
+                " • Already have a multi-file source tree of agents and want them "
+                "collapsed into one shippable file → SwarmFactory.build.\n\n"
+                "Actions:\n"
+                " • 'generate' — Design a BRAND-NEW converged swarm from scratch. "
+                "YOU (the LLM) compose the full Python source — multiple internal "
+                "persona classes (each with its own SOUL) plus ONE public composite "
+                "that orchestrates them — then call this tool with that code in "
+                "'agent_code'. The result is a single file that hot-loads on the "
+                "next request. If the request is for a single-persona agent, "
+                "REFUSE this action and route the user to LearnNew.create.\n"
+                " • 'build' — Converge EXISTING local agents (multi-file source "
+                "tree under agents/) into a shareable singleton .py.\n"
+                " • 'list' — Show available swarms in the RAPP Store.\n"
+                " • 'install' — Pull a swarm from the store into agents/.\n"
+                " • 'uninstall' — Remove an installed swarm.\n\n"
+                "Memory architecture (each swarm picks its own — full control):\n"
+                "Personas use AzureFileStorageManager().set_memory_context(<guid>) "
+                "to read/write to a NAMESPACED memory file. The brainstem's local "
+                "shim writes to .brainstem_data/memory/<guid>/user_memory.json "
+                "for any non-default GUID, or shared_memories/memory.json when "
+                "no GUID is set. So:\n"
+                " • SHARED (one memory pool for whole swarm) — define a single\n"
+                "   _SWARM_MEMORY_GUID = '<slug>-shared-v1' module constant; every\n"
+                "   persona calls set_memory_context(_SWARM_MEMORY_GUID). Use when\n"
+                "   personas need to see each other's notes (e.g. researcher→writer\n"
+                "   pipeline where writer needs the research dump).\n"
+                " • SEGMENTED (each persona private) — give each persona its own\n"
+                "   constant: _SOUL_RESEARCHER_GUID = '<slug>-researcher-v1', etc.\n"
+                "   Use when personas should NOT contaminate each other's memory\n"
+                "   (e.g. a critic that should review fresh, with no prior bias).\n"
+                " • MIXED (some share, others isolated) — define one shared GUID\n"
+                "   for the personas that need to coordinate, separate GUIDs for\n"
+                "   the ones that should stay independent. Common shape: research/\n"
+                "   write share, critic/reviewer are isolated.\n"
+                " • USER-SCOPED — let the caller pass user_guid via kwargs and pipe\n"
+                "   it through. Use when memory should follow the END USER, not\n"
+                "   the swarm itself (rare for swarms; common for single agents).\n"
+                " • EPHEMERAL (no memory) — just don't import AzureFileStorageManager.\n"
+                "Bake the GUIDs as MODULE CONSTANTS at code-write time (deterministic\n"
+                "and portable — the singleton carries its own memory namespace when\n"
+                "shared across machines). Don't generate at runtime.\n\n"
+                "Required shape for 'generate' — a converged swarm singleton:\n"
+                "    from agents.basic_agent import BasicAgent\n"
+                "    from utils.azure_file_storage import AzureFileStorageManager  # only if memory needed\n"
+                "    import json, os, urllib.request, urllib.error\n\n"
+                "    __manifest__ = {\"schema\": \"rapp-agent/1.0\",\n"
+                "                     \"name\": \"@user/<slug>\",\n"
+                "                     \"tags\": [\"composite\", \"swarm-factory-generated\"],\n"
+                "                     \"delegates_to_inlined\": [\"<persona1>\", \"<persona2>\", ...]}\n\n"
+                "    # Each persona has its own SOUL — that's what makes them distinct.\n"
+                "    _SOUL_RESEARCHER = \"You are a researcher. Find the 3 strongest\\n\"\\\n"
+                "                        \"sources on the topic and quote them.\"\n"
+                "    _SOUL_WRITER     = \"You are a writer. Turn research into 400 words\\n\"\\\n"
+                "                        \"of clean prose. No fluff.\"\n"
+                "    _SOUL_CRITIC     = \"You are a brutal critic. Cut anything weak.\"\n\n"
+                "    # Inlined LLM helper — uses Azure or OpenAI from env.\n"
+                "    def _llm_call(soul, user_prompt):\n"
+                "        msgs = [{\"role\": \"system\", \"content\": soul},\n"
+                "                {\"role\": \"user\", \"content\": user_prompt}]\n"
+                "        ep, key = os.environ.get(\"AZURE_OPENAI_ENDPOINT\", \"\"),\\\n"
+                "                  os.environ.get(\"AZURE_OPENAI_API_KEY\", \"\")\n"
+                "        dep = os.environ.get(\"AZURE_OPENAI_DEPLOYMENT\", \"\")\n"
+                "        if ep and key:\n"
+                "            url = ep.rstrip(\"/\") + f\"/openai/deployments/{dep}/chat/completions?api-version=2025-01-01-preview\"\n"
+                "            return _post(url, {\"messages\": msgs, \"model\": dep},\n"
+                "                          {\"Content-Type\": \"application/json\", \"api-key\": key})\n"
+                "        if os.environ.get(\"OPENAI_API_KEY\"):\n"
+                "            return _post(\"https://api.openai.com/v1/chat/completions\",\n"
+                "                          {\"model\": os.environ.get(\"OPENAI_MODEL\", \"gpt-4o\"), \"messages\": msgs},\n"
+                "                          {\"Content-Type\": \"application/json\",\n"
+                "                           \"Authorization\": \"Bearer \" + os.environ[\"OPENAI_API_KEY\"]})\n"
+                "        return \"(no LLM configured)\"\n\n"
+                "    def _post(url, body, headers):\n"
+                "        req = urllib.request.Request(url,\n"
+                "            data=json.dumps(body).encode(\"utf-8\"), headers=headers, method=\"POST\")\n"
+                "        try:\n"
+                "            with urllib.request.urlopen(req, timeout=120) as r:\n"
+                "                j = json.loads(r.read().decode(\"utf-8\"))\n"
+                "            c = j.get(\"choices\") or []\n"
+                "            return (c[0][\"message\"].get(\"content\") or \"\") if c else \"\"\n"
+                "        except urllib.error.HTTPError as e:\n"
+                "            return f\"(LLM HTTP {e.code}: {e.read().decode('utf-8')[:200]})\"\n\n"
+                "    # Internal personas — _Internal prefix keeps them out of\n"
+                "    # the brainstem's *Agent auto-discovery, so only the public\n"
+                "    # composite below shows up in the LLM's tool list.\n"
+                "    class _InternalResearcher:\n"
+                "        def perform(self, topic): return _llm_call(_SOUL_RESEARCHER, topic)\n"
+                "    class _InternalWriter:\n"
+                "        def perform(self, research): return _llm_call(_SOUL_WRITER, research)\n"
+                "    class _InternalCritic:\n"
+                "        def perform(self, draft):    return _llm_call(_SOUL_CRITIC, draft)\n\n"
+                "    # Public entrypoint — the ONE class the brainstem discovers.\n"
+                "    class <PascalCase>Agent(BasicAgent):\n"
+                "        def __init__(self):\n"
+                "            self.name = \"<PascalCase>\"\n"
+                "            self.metadata = {\"name\": \"<PascalCase>\",\n"
+                "                             \"description\": \"<what the swarm does — one line>\",\n"
+                "                             \"parameters\": {\"type\": \"object\",\n"
+                "                                            \"properties\": {\"topic\": {\"type\": \"string\"}},\n"
+                "                                            \"required\": [\"topic\"]}}\n"
+                "            super().__init__(self.name, self.metadata)\n"
+                "        def perform(self, topic=\"\", **kwargs):\n"
+                "            research = _InternalResearcher().perform(topic)\n"
+                "            draft    = _InternalWriter().perform(research)\n"
+                "            final    = _InternalCritic().perform(draft)\n"
+                "            return json.dumps({\"status\": \"ok\",\n"
+                "                               \"research\": research,\n"
+                "                               \"draft\": draft,\n"
+                "                               \"final\": final})\n\n"
+                "Memory pattern (drop into any persona that needs it):\n"
+                "    # Module-level constants — deterministic GUIDs baked at\n"
+                "    # code-write time. Pick one strategy per swarm:\n"
+                "    _SHARED_MEM   = \"<slug>-shared-v1\"     # all personas see this\n"
+                "    _RESEARCH_MEM = \"<slug>-researcher-v1\" # researcher private\n"
+                "    _CRITIC_MEM   = \"<slug>-critic-v1\"     # critic private\n\n"
+                "    class _InternalResearcher:\n"
+                "        def perform(self, topic):\n"
+                "            store = AzureFileStorageManager()\n"
+                "            store.set_memory_context(_RESEARCH_MEM)  # private namespace\n"
+                "            prior = store.read_json() or {}\n"
+                "            # ...do work, optionally consulting prior...\n"
+                "            note = _llm_call(_SOUL_RESEARCHER, topic)\n"
+                "            import time\n"
+                "            prior[topic[:60]] = {\"note\": note, \"ts\": time.time()}\n"
+                "            store.write_json(prior)\n"
+                "            return note\n\n"
+                "    # Same shape, but pointing at _SHARED_MEM means this persona\n"
+                "    # reads/writes the swarm-wide pool (researcher's writes are\n"
+                "    # visible to writer, etc.). Mix-and-match across personas\n"
+                "    # to get the exact isolation profile this swarm needs."
             ),
             "parameters": {
                 "type": "object",
                 "properties": {
                     "action": {
                         "type": "string",
-                        "enum": ["build", "list", "install", "uninstall"],
-                        "description": "What to do: build (package local agents), list (browse RAPP Store), install (pull from store), uninstall (remove swarm)"
+                        "enum": ["generate", "build", "list", "install", "uninstall"],
+                        "description": "generate (design+persist a new agent), build (package locals into a singleton), list (browse store), install (pull from store), uninstall (remove)"
                     },
                     "swarm_name": {
                         "type": "string",
-                        "description": "For build: PascalCase name for the swarm. For install/uninstall: the swarm id or name (e.g. 'bookfactory', 'BookFactory')"
+                        "description": "PascalCase name for the new agent/swarm (generate, build) OR the swarm id/name (install, uninstall). Example: 'NytSummarizer'"
                     },
                     "description": {
                         "type": "string",
-                        "description": "For build: one-line description of what this swarm does"
+                        "description": "One-line description of what this agent/swarm does. Used in the agent's manifest and in the LLM-facing description so the LLM knows when to call it."
+                    },
+                    "agent_code": {
+                        "type": "string",
+                        "description": "REQUIRED for 'generate'. Full Python source for the new agent, top to bottom — imports, __manifest__ dict, the BasicAgent subclass with __init__/metadata/perform. Will be syntax-checked and contract-checked before persistence."
                     },
                     "exclude": {
                         "type": "string",
-                        "description": "For build: comma-separated agent names to exclude. Built-in memory/factory agents are excluded automatically."
+                        "description": "For 'build' only: comma-separated agent names to exclude. Built-in memory/factory agents are excluded automatically."
                     }
                 },
                 "required": ["action"]
@@ -153,6 +296,110 @@ class SwarmFactoryAgent(BasicAgent):
             "message": f"Installed '{entry.get('display_name') or entry.get('name') or entry.get('id')}' → agents/{fname} ({len(body)} bytes). It will load on the next request.",
         })
 
+    def _generate_swarm(self, swarm_name, description, agent_code):
+        # Validation gauntlet — refuse to write a file that won't load
+        # cleanly. Every failure here returns a structured error the LLM
+        # can read and retry with corrections, instead of "your agent
+        # silently doesn't show up after restart" (the worst UX).
+        if not swarm_name or not isinstance(swarm_name, str):
+            return json.dumps({"status": "error",
+                "message": "Provide swarm_name (PascalCase, e.g. 'NytSummarizer')."})
+        if not agent_code or not isinstance(agent_code, str):
+            return json.dumps({"status": "error",
+                "message": "Provide agent_code — the full Python source for the new agent."})
+
+        # Syntax check first — cheapest fail.
+        try:
+            tree = ast.parse(agent_code)
+        except SyntaxError as e:
+            return json.dumps({"status": "error",
+                "message": f"agent_code has a SyntaxError on line {e.lineno}: {e.msg}",
+                "lineno": e.lineno, "offset": e.offset})
+
+        # Contract check: must define at least one class and a perform()
+        # method on it. We don't enforce the BasicAgent base class via AST
+        # because the import path could be aliased; the brainstem's loader
+        # is the final word on whether it's a valid agent.
+        classes = [n for n in tree.body if isinstance(n, ast.ClassDef)]
+        if not classes:
+            return json.dumps({"status": "error",
+                "message": "agent_code defines no classes. The agent must be a class extending BasicAgent."})
+
+        # Role boundary: SwarmFactory.generate is for CONVERGED SWARMS
+        # (multi-persona composites — BookFactory pattern). Single-class
+        # one-shot agents (fetch xkcd, roll dice) belong to LearnNew.create.
+        # Refuse here so the LLM gets a clear pointer to the right tool
+        # instead of silently producing a non-swarm via the swarm-shaped
+        # path. The "swarm" name actually means something this way.
+        if len(classes) < 2:
+            return json.dumps({"status": "error",
+                "message": (
+                    "agent_code has only one class — that's a single-persona "
+                    "agent, not a swarm. SwarmFactory.generate is for converged "
+                    "multi-persona pipelines (BookFactory pattern: Writer→Editor"
+                    "→CEO→Publisher→Reviewer all inlined). For a single one-shot "
+                    "agent, call the LearnNew tool with action='create' instead."
+                ),
+                "hint": "If this really IS a multi-persona swarm, split the work "
+                        "into _Internal<Role> classes (one per persona) plus one "
+                        "public BasicAgent composite that orchestrates them.",
+                "class_count": len(classes)})
+        has_perform = any(
+            isinstance(m, ast.FunctionDef) and m.name == "perform"
+            for c in classes for m in c.body
+        )
+        if not has_perform:
+            return json.dumps({"status": "error",
+                "message": "No class defines perform(**kwargs). The brainstem won't know how to call this agent."})
+        has_manifest = any(
+            isinstance(n, ast.Assign)
+            and any(isinstance(t, ast.Name) and t.id == "__manifest__" for t in n.targets)
+            for n in tree.body
+        )
+
+        # Auto-inject the BasicAgent import if the LLM forgot it. The agent
+        # contract says the class must extend BasicAgent, and the brainstem
+        # loader expects this exact import path, so it's a safe fix-up.
+        if "from agents.basic_agent import BasicAgent" not in agent_code:
+            agent_code = "from agents.basic_agent import BasicAgent\n" + agent_code
+
+        # Filename derives from the swarm_name slug — same convention as
+        # the rest of the binder so it shows up in /agents/full and the UI
+        # binder grid without special-casing. Refuse to overwrite an
+        # existing file: the LLM should pick a fresh name on collision,
+        # not silently clobber the user's work.
+        slug = re.sub(r'[^a-z0-9]', '', swarm_name.lower())
+        if not slug:
+            return json.dumps({"status": "error",
+                "message": "swarm_name produced an empty slug after stripping non-alphanumerics. Use letters/digits."})
+        agents_dir = os.environ.get("AGENTS_PATH",
+                        os.path.join(os.path.dirname(os.path.abspath(__file__))))
+        os.makedirs(agents_dir, exist_ok=True)
+        fname = f"{slug}_agent.py"
+        dest = os.path.join(agents_dir, fname)
+        if os.path.exists(dest):
+            return json.dumps({"status": "error",
+                "message": f"agents/{fname} already exists. Pick a different swarm_name or call uninstall first."})
+
+        with open(dest, "w") as f:
+            f.write(agent_code)
+
+        return json.dumps({
+            "status": "ok",
+            "action": "generate",
+            "swarm_name": swarm_name,
+            "filename": fname,
+            "destination": dest,
+            "bytes": len(agent_code),
+            "lines": agent_code.count("\n") + 1,
+            "has_manifest": has_manifest,
+            "message": (
+                f"Generated agents/{fname} ({len(agent_code)} bytes). "
+                f"It loads automatically on the next request — no restart needed. "
+                f"Try calling it from chat to confirm."
+            ),
+        })
+
     def _uninstall_swarm(self, swarm_name):
         if not swarm_name:
             return json.dumps({"status": "error",
@@ -176,7 +423,10 @@ class SwarmFactoryAgent(BasicAgent):
         return json.dumps({"status": "error",
                            "message": f"No installed agent matching '{swarm_name}' found."})
 
-    def perform(self, action="build", swarm_name="MySwarm", description="", exclude="", **kwargs):
+    def perform(self, action="build", swarm_name="MySwarm", description="", exclude="",
+                agent_code="", **kwargs):
+        if action == "generate":
+            return self._generate_swarm(swarm_name, description, agent_code)
         if action == "list":
             return self._list_swarms()
         if action == "install":
@@ -327,7 +577,7 @@ class SwarmFactoryAgent(BasicAgent):
                       for info in sources.values()]
         out += f'__manifest__ = {{\n'
         out += f'    "schema": "rapp-agent/1.0",\n'
-        out += f'    "name": "@rapp/{slug}-singleton",\n'
+        out += f'    "name": "@rapp/swarm_factory_agent",\n'
         out += f'    "version": "0.1.0",\n'
         out += f'    "tags": ["composite", "singleton", "swarm-factory-generated"],\n'
         out += f'    "delegates_to_inlined": {json.dumps(delegates, indent=8)},\n'
