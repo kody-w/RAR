@@ -85,13 +85,20 @@ jobs:
           print(f'Total promoted: {len(promoted)}')
           "
 
+      # Build registry FIRST so the card forge sees the just-promoted agent.
+      # generate_holo_cards.py iterates over registry.json — running it before
+      # build_registry.py leaves new agents un-forged (_has_card: false).
+      - name: Build registry (pre-forge — surfaces the promoted agent)
+        run: python build_registry.py
+
       - name: Forge cards for approved agents
         run: |
           if [ -f /tmp/promoted.txt ]; then
             python scripts/generate_holo_cards.py
           fi
 
-      - name: Build registry
+      # Rebuild so build_registry.py's _has_card check picks up the new card.
+      - name: Build registry (post-forge — flips _has_card)
         run: python build_registry.py
 
       - name: Commit approved agents
