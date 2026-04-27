@@ -4,12 +4,14 @@ on:
   push:
     paths:
       - 'agents/**/*.py'
+      - 'agents/**/*.py.card'
       - 'build_registry.py'
       - 'rar.config.json'
       - '.github/workflows/build-registry.yml'
   pull_request:
     paths:
       - 'agents/**/*.py'
+      - 'agents/**/*.py.card'
   workflow_dispatch:
 
 permissions:
