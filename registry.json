@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-27T22:52:46.650254+00:00",
+  "generated_at": "2026-04-27T22:58:59.123227+00:00",
   "stats": {
-    "total_agents": 273,
+    "total_agents": 272,
     "total_swarms": 82,
     "publishers": 9,
     "categories": 22,
@@ -4421,40 +4421,6 @@
       "_lines": 1087,
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:20Z"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rapp/rapplication",
-      "display_name": "Rapplication",
-      "description": "Bundle a teammate's single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
-      "author": "RAPP",
-      "version": "1.0.0",
-      "tags": [
-        "meta",
-        "build",
-        "rapplication",
-        "bundler",
-        "publish"
-      ],
-      "category": "core",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "action": "bundle",
-          "agent_path": "agents/kanban_agent.py"
-        }
-      },
-      "_file": "agents/@rapp/rapplication_agent.py",
-      "_sha256": "f8d61e9eabb9df6ba3ab3258b68cae24d79fc09af294bd3e1909ef38d67ccd65",
-      "_seed": 4410997650108331786,
-      "_size_kb": 23.3,
-      "_lines": 595,
-      "_has_card": false,
-      "_added_at": "2026-04-27T18:52:28Z"
     },
     {
       "schema": "rapp-agent/1.0",
