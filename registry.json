@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-27T23:18:27.070708+00:00",
+  "generated_at": "2026-04-27T23:24:40.728013+00:00",
   "stats": {
     "total_agents": 275,
     "total_swarms": 82,
@@ -3225,7 +3225,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@borg/borg_agent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "display_name": "Borg",
       "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
       "author": "Howard",
@@ -3243,10 +3243,10 @@
         "@rapp/basic-agent"
       ],
       "_file": "agents/@borg/borg_agent.py.card",
-      "_sha256": "452db6dfad5d5daa4ea73c44b6df677e86ac7ce7d7e172128c09f4e949570f70",
+      "_sha256": "2674f191c96037d9bf5a535a7111c2ec50da0671ff8ce8830a4a685c202e88a8",
       "_seed": 6828785747777692595,
-      "_size_kb": 5.0,
-      "_lines": 102,
+      "_size_kb": 40.7,
+      "_lines": 990,
       "_has_card": true,
       "_added_at": "2026-04-04T11:22:10-04:00",
       "_card": {
@@ -4481,7 +4481,7 @@
       "_size_kb": 18.2,
       "_lines": 454,
       "_has_card": true,
-      "_added_at": null
+      "_added_at": "2026-04-27T23:17:53Z"
     },
     {
       "schema": "rapp-agent/1.0",
