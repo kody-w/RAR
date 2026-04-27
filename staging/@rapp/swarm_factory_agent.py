@@ -35,7 +35,7 @@ __manifest__ = {
     "display_name": "SwarmFactory",
     "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
     "author": "RAPP",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "tags": ["meta", "build", "singleton", "swarm-factory", "store"],
     "category": "core",
     "quality_tier": "community",
@@ -187,7 +187,8 @@ class SwarmFactoryAgent(BasicAgent):
                 "            prior = store.read_json() or {}\n"
                 "            # ...do work, optionally consulting prior...\n"
                 "            note = _llm_call(_SOUL_RESEARCHER, topic)\n"
-                "            prior[topic[:60]] = {\"note\": note, \"ts\": __import__('time').time()}\n"
+                "            import time\n"
+                "            prior[topic[:60]] = {\"note\": note, \"ts\": time.time()}\n"
                 "            store.write_json(prior)\n"
                 "            return note\n\n"
                 "    # Same shape, but pointing at _SHARED_MEM means this persona\n"
