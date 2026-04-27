@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-27T21:23:24.723935+00:00",
+  "generated_at": "2026-04-27T21:24:10.445559+00:00",
   "stats": {
-    "total_agents": 270,
+    "total_agents": 271,
     "total_swarms": 82,
     "publishers": 9,
     "categories": 22,
@@ -4277,8 +4277,8 @@
       "_seed": 7814512477617920547,
       "_size_kb": 27.1,
       "_lines": 685,
-      "_has_card": false,
-      "_added_at": null
+      "_has_card": true,
+      "_added_at": "2026-04-27T21:14:43Z"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4391,6 +4391,36 @@
       "_lines": 512,
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/pitch_deck_agent",
+      "display_name": "PitchDeck",
+      "description": "Generates a polished HTML executive pitch deck from a topic and thesis. Output: a single self-contained HTML file with exec/rehearse modes, light/dark theme, keyboard/swipe nav.",
+      "author": "RAPP / AIBAST",
+      "version": "1.0.0",
+      "tags": [
+        "pitch",
+        "deck",
+        "slides",
+        "narrative",
+        "html",
+        "executive"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": "Generate an executive pitch deck for our internal agent-sharing proposal, framed as a contribution that complements existing tooling",
+      "_file": "agents/@rapp/pitch_deck_agent.py",
+      "_sha256": "7882b22bae29b0092079a7568dcfc13a1d6991e9e0f0ff312a32d7ca0072b41b",
+      "_seed": 2887497502801280520,
+      "_size_kb": 56.0,
+      "_lines": 1087,
+      "_has_card": false,
+      "_added_at": null
     },
     {
       "schema": "rapp-agent/1.0",
