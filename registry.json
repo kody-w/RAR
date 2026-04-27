@@ -1,12 +1,12 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-27T21:16:54.250252+00:00",
+  "generated_at": "2026-04-27T21:23:24.723935+00:00",
   "stats": {
-    "total_agents": 269,
+    "total_agents": 270,
     "total_swarms": 82,
     "publishers": 9,
-    "categories": 21,
+    "categories": 22,
     "publisher_list": [
       "@aibast-agents-library",
       "@borg",
@@ -19,6 +19,7 @@
       "@wildhaven"
     ],
     "category_list": [
+      "analysis",
       "b2b_sales",
       "b2c_sales",
       "core",
@@ -4247,6 +4248,40 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@rapp/exec_brief_agent",
+      "version": "1.2.0",
+      "display_name": "Executive Brief",
+      "description": "Four-agent pipeline that produces polished executive briefs on any topic.",
+      "author": "@rapp",
+      "tags": [
+        "composite",
+        "exec-brief-pipeline",
+        "singleton"
+      ],
+      "category": "analysis",
+      "quality_tier": "community",
+      "requires_env": [],
+      "delegates_to_inlined": [
+        "@rapp/brief-scout",
+        "@rapp/brief-analyst",
+        "@rapp/brief-strategist",
+        "@rapp/brief-writer"
+      ],
+      "example_call": {
+        "args": {
+          "topic": "Why our org needs a unified agent sharing standard"
+        }
+      },
+      "_file": "agents/@rapp/exec_brief_agent.py",
+      "_sha256": "4f2fea99af55fc820d350f71f91b4e122b9eaa834b4cf1a7fc31fc714f914b76",
+      "_seed": 7814512477617920547,
+      "_size_kb": 27.1,
+      "_lines": 685,
+      "_has_card": false,
+      "_added_at": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@rapp/fleet_commander",
       "version": "1.0.0",
       "display_name": "FleetCommander",
@@ -4354,8 +4389,8 @@
       "_seed": 11866480277881234391,
       "_size_kb": 23.7,
       "_lines": 512,
-      "_has_card": false,
-      "_added_at": null
+      "_has_card": true,
+      "_added_at": "2026-04-19T18:58:15-04:00"
     },
     {
       "schema": "rapp-agent/1.0",
