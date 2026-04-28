@@ -1,16 +1,17 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-28T21:17:42.054076+00:00",
+  "generated_at": "2026-04-28T21:29:29.762010+00:00",
   "stats": {
-    "total_agents": 277,
+    "total_agents": 278,
     "total_swarms": 82,
-    "publishers": 9,
+    "publishers": 10,
     "categories": 22,
     "publisher_list": [
       "@aibast-agents-library",
       "@borg",
       "@discreetRappers",
+      "@howardh",
       "@kody",
       "@kody-w",
       "@rapp",
@@ -3907,6 +3908,36 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@howardh/chief_of_staff_agent",
+      "version": "1.0.0",
+      "display_name": "ChiefOfStaff",
+      "description": "Personal AI executive partner \u2014 live M365-grounded brief, triage, meeting prep, commitments, drafts, weekly review.",
+      "author": "Howard Hoy",
+      "tags": [
+        "productivity",
+        "chief-of-staff",
+        "m365",
+        "workiq",
+        "executive",
+        "triage",
+        "meeting-prep"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@howardh/chief_of_staff_agent.py",
+      "_sha256": "f624281fea118bbe53fc6726d71543985e95c6ddba37affbc2215149da742d63",
+      "_seed": 11483753548010627847,
+      "_size_kb": 32.5,
+      "_lines": 683,
+      "_has_card": true,
+      "_added_at": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/agent_workbench",
       "version": "1.1.0",
       "display_name": "Agent Workbench",
@@ -4277,7 +4308,7 @@
       "_seed": 12529120966313924386,
       "_size_kb": 39.1,
       "_lines": 904,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00"
     },
     {
@@ -4311,7 +4342,7 @@
       "_seed": 6041207226650733437,
       "_size_kb": 43.8,
       "_lines": 1010,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00"
     },
     {
