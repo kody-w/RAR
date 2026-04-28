@@ -81,8 +81,11 @@ _MS_TEMPLATES = {
 }
 _MS_SCHEMA_URL = f"{_MS_REPO_RAW}/reference/bot.schema.yaml-authoring.json"
 
-# Default Copilot Studio model hint (matches Microsoft's agent.mcs.yml template)
-_DEFAULT_MODEL_HINT = "GPT5Chat"
+# Default Copilot Studio model hint. Matches the export YAML shape in
+# microsoft/enhanced-task-completion sample (Sonnet46 = Claude Sonnet 4.6).
+# Switchable per-forge via display_name / args; overrides apply to the root
+# agent's aISettings.model.modelNameHint.
+_DEFAULT_MODEL_HINT = "Sonnet46"
 
 
 __manifest__ = {
@@ -95,7 +98,7 @@ __manifest__ = {
         "cloud bridge."
     ),
     "author": "RAPP",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "tags": ["meta", "copilot-studio", "forge", "translation", "deploy-prep"],
     "category": "core",
     "quality_tier": "experimental",
@@ -352,19 +355,33 @@ def _extract_personas(tree, src):
 # ─── YAML emission ────────────────────────────────────────────────────────
 
 def _emit_root_agent(public_name, display_name, instructions, starters):
-    out = ["mcs.metadata:",
-           f"  componentName: {_yaml_quote(public_name)}",
-           "kind: GptComponentMetadata",
-           f"displayName: {_yaml_quote(display_name)}",
-           "instructions: |",
-           _yaml_block_scalar(instructions, indent=2),
-           "conversationStarters:"]
-    for s in starters:
-        out.append(f"  - title: {_yaml_quote(s['title'])}")
-        out.append(f"    text: {_yaml_quote(s['text'])}")
-    out.append("aISettings:")
-    out.append("  model:")
-    out.append(f"    modelNameHint: {_DEFAULT_MODEL_HINT}")
+    """Emit the gpt.default data file in the EXPORT shape (matching the
+    botcomponent.../data files Microsoft ships in solution zips like
+    enhanced-task-completion). The export shape is much leaner than the
+    authoring template:
+      - no `mcs.metadata` wrapper (componentName lives on the bot record,
+        not the data field)
+      - no `displayName` (also on the bot record)
+      - no `conversationStarters` at this level
+      - `gptCapabilities` + `aISettings.model.modelNameHint` + an
+        `extensionData.lastUsedCustomModel` placeholder
+    Display name + conversation starters are still useful — but they
+    belong on the bot record itself, set during deploy, not in this YAML."""
+    out = [
+        "kind: GptComponentMetadata",
+        "instructions: |",
+        _yaml_block_scalar(instructions, indent=2),
+        "gptCapabilities:",
+        "  webBrowsing: true",
+        "  codeInterpreter: true",
+        "",
+        "aISettings:",
+        "  model:",
+        f"    modelNameHint: {_DEFAULT_MODEL_HINT}",
+        "",
+        "  extensionData:",
+        "    lastUsedCustomModel: {}",
+    ]
     return "\n".join(out) + "\n"
 
 
