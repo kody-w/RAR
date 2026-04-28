@@ -34,18 +34,30 @@ SWARMS_DIR = Path("swarms")
 REGISTRY_FILE = Path("registry.json")
 HOLO_CARDS_FILE = Path("cards/holo_cards.json")
 
-# Cache holo card slugs for _has_card check
-_holo_slugs = None
-def _has_holo_card(agent_name):
-    global _holo_slugs
-    if _holo_slugs is None:
+# Cache holo card slugs and per-card content for _has_card / _card_sha256 lookups
+_holo_data = None
+def _holo_cards():
+    global _holo_data
+    if _holo_data is None:
         try:
             data = json.loads(HOLO_CARDS_FILE.read_text())
-            _holo_slugs = set(data.keys()) if isinstance(data, dict) else set()
+            _holo_data = data if isinstance(data, dict) else {}
         except (FileNotFoundError, json.JSONDecodeError):
-            _holo_slugs = set()
-    # holo_cards.json keys are full agent names like "@kody/deal-desk"
-    return agent_name in _holo_slugs or agent_name.replace('_', '-') in _holo_slugs or agent_name.replace('-', '_') in _holo_slugs
+            _holo_data = {}
+    return _holo_data
+
+def _has_holo_card(agent_name):
+    cards = _holo_cards()
+    return agent_name in cards or agent_name.replace('_', '-') in cards or agent_name.replace('-', '_') in cards
+
+def _holo_card_for(agent_name):
+    """Return the holo card dict for `agent_name`, or None. Tolerates the
+    same dash/underscore variants as _has_holo_card."""
+    cards = _holo_cards()
+    for key in (agent_name, agent_name.replace('_', '-'), agent_name.replace('-', '_')):
+        if key in cards:
+            return cards[key]
+    return None
 REQUIRED_MANIFEST_FIELDS = [
     "schema", "name", "version", "display_name",
     "description", "author", "tags", "category"
@@ -267,6 +279,47 @@ def _git_first_committed(path: Path):
         return None
 
 
+def _git_first_commit_sha(path: Path):
+    """Return the commit SHA where `path` first appeared. This is the
+    permanent address for the file's initial publication — anyone can
+    fetch the original bytes via raw.githubusercontent.com/<repo>/<sha>/<path>
+    and verify against the recorded _sha256. Part of the poor-man's-
+    blockchain provenance chain (commit graph IS the ledger)."""
+    try:
+        result = subprocess.run(
+            ["git", "log", "--diff-filter=A", "--format=%H", "--follow", "--", str(path)],
+            capture_output=True, text=True, timeout=10
+        )
+        shas = result.stdout.strip().splitlines()
+        return shas[-1] if shas else None
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None
+
+
+def _git_latest_commit_sha(path: Path):
+    """Return the commit SHA of the most recent change to `path`. Together
+    with _first_commit_sha this bounds the file's edit window — anyone
+    can `git log <first>..<latest> -- <path>` to audit every change."""
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%H", "--follow", "--", str(path)],
+            capture_output=True, text=True, timeout=10
+        )
+        sha = result.stdout.strip()
+        return sha or None
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None
+
+
+def _card_content_sha256(card_data: dict) -> str:
+    """Hash the card's content for that specific agent. Uses canonical
+    JSON (sorted keys, no whitespace) so the hash is reproducible from
+    any consumer. Lets binders verify card integrity per-agent without
+    trusting the aggregate holo_cards.json file."""
+    canonical = json.dumps(card_data, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -358,11 +411,26 @@ def build_registry():
         manifest["_has_card"] = is_card or _has_holo_card(name)
         manifest["_added_at"] = _git_first_committed(py_path)
 
+        # Provenance chain — git commit graph IS the ledger.
+        # _first_commit_sha pins the original publication; consumers can
+        # fetch the bytes via raw.githubusercontent.com/<repo>/<sha>/<path>
+        # and verify against _sha256. _latest_commit_sha bounds the edit
+        # window. _card_sha256 hashes this agent's specific card content
+        # (canonical JSON) so binders can verify per-card without
+        # trusting the aggregate holo_cards.json.
+        manifest["_first_commit_sha"] = _git_first_commit_sha(py_path)
+        manifest["_latest_commit_sha"] = _git_latest_commit_sha(py_path)
+        if manifest["_has_card"] and not is_card:
+            holo = _holo_card_for(name)
+            if holo is not None:
+                manifest["_card_sha256"] = _card_content_sha256(holo)
+
         # Extract __card__ shell from .py.card files
         if is_card:
             card_data = extract_card(py_path)
             if card_data:
                 manifest["_card"] = card_data
+                manifest["_card_sha256"] = _card_content_sha256(card_data)
 
         agents.append(manifest)
 
@@ -438,8 +506,13 @@ def build_registry():
                 "_size_kb": round(py_path.stat().st_size / 1024, 1),
                 "_lines": len(content.split('\n')),
                 "_added_at": _git_first_committed(py_path),
+                "_first_commit_sha": _git_first_commit_sha(py_path),
+                "_latest_commit_sha": _git_latest_commit_sha(py_path),
                 "_swarm": swarm_meta,
             }
+            holo = _holo_card_for(name)
+            if holo is not None:
+                entry["_card_sha256"] = _card_content_sha256(holo)
             converged_swarms.append(entry)
 
     # ─── Seed collision check (agents + converged swarms) ─────────────

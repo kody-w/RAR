@@ -47,7 +47,7 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_publish_agent",
     "display_name": "RappPublish",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": (
         "Submit any RAPP artifact (agent, rapplication, sense) to the right "
         "store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue "
@@ -213,12 +213,13 @@ def _build_agent_issue(src: str, submitter_login: str | None) -> tuple[str, str]
         f"Submission via `@rapp/rapp_publish_agent` (Constitution Article XXIX). "
         f"Auto-detected as a bare agent (BasicAgent subclass with perform). "
         f"Routed to kody-w/RAR per Article XXVII/XXXI.\n\n"
+        f"{_attestation_block('agent', submitter_login, src.encode('utf-8'), name)}"
         f"```python\n{src}\n```\n"
     )
     return title, body
 
 
-def _build_rapp_issue(blob: bytes, manifest: dict) -> tuple[str, str]:
+def _build_rapp_issue(blob: bytes, manifest: dict, submitter_login: str | None = None) -> tuple[str, str]:
     name = manifest.get("publisher", "@unknown") + "/" + manifest.get("id", "id")
     title = f"[RAPP] {name} v{manifest.get('version', '0.0.0')}"
     sha = hashlib.sha256(blob).hexdigest()
@@ -239,6 +240,7 @@ def _build_rapp_issue(blob: bytes, manifest: dict) -> tuple[str, str]:
         f"Submission via `@rapp/rapp_publish_agent` (Constitution Article XXIX). "
         f"Auto-detected as a rapplication bundle (manifest.json with "
         f"schema=rapp-application/1.0). Routed to kody-w/RAPP_Store.\n\n"
+        f"{_attestation_block('rapplication', submitter_login, blob, name)}"
         f"## Rapplication Submission\n\n"
         f"**Mode:** bundle\n\n"
         f"```json\n{json.dumps(meta, indent=2)}\n```\n\n"
@@ -251,14 +253,63 @@ def _build_rapp_issue(blob: bytes, manifest: dict) -> tuple[str, str]:
 
 def _build_sense_issue(src: str, sense_name: str, submitter_login: str | None) -> tuple[str, str]:
     publisher = f"@{submitter_login}" if submitter_login else "@unknown"
-    title = f"[SENSE] {publisher}/{sense_name}"
+    name = f"{publisher}/{sense_name}"
+    title = f"[SENSE] {name}"
     body = (
         f"Submission via `@rapp/rapp_publish_agent` (Constitution Article XXIX). "
         f"Auto-detected as a sense (no BasicAgent import, exports name/delimiter/"
         f"response_key/wrapper_tag/system_prompt). Routed to kody-w/RAPP_Sense_Store.\n\n"
+        f"{_attestation_block('sense', submitter_login, src.encode('utf-8'), name)}"
         f"```python\n{src}\n```\n"
     )
     return title, body
+
+
+# ── Attestation block (poor-man's blockchain — submitter signs by filing) ─
+
+def _attestation_block(kind: str, submitter_login: str | None,
+                       content: bytes, claimed_name: str) -> str:
+    """Render the ATTESTATION block embedded in every submission issue.
+
+    The block binds three things that anyone can independently verify:
+
+      - submitter — the GitHub login that opened the issue (also recorded
+        server-side by GitHub; the receiver workflow MUST verify it
+        matches `issue.user.login`).
+      - content_sha256 — hash of the raw submission bytes. The receiver
+        re-hashes the source on extract; mismatch → reject. Anyone
+        auditing later can recompute the hash from the issue body and
+        confirm the file at `_first_commit_sha` matches.
+      - claimed_name — the publisher/slug the submitter is asking the
+        artifact to be registered under. The receiver MUST verify that
+        the publisher portion equals `@<submitter_login>` (or appears
+        in a verified-brand allowlist — not implemented yet).
+
+    Together, these turn the GitHub issue into a signed ledger entry.
+    The submitter's GitHub identity provides authenticity (you can't
+    open an issue as someone else without compromising their account);
+    the content hash provides integrity; the claimed name provides
+    intent. All three are visible in plain text in the issue body."""
+    from datetime import datetime, timezone
+    sha = hashlib.sha256(content).hexdigest()
+    submitter = f"@{submitter_login}" if submitter_login else "@unknown"
+    submitted_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return (
+        "## Attestation\n\n"
+        "```attestation\n"
+        f"kind: {kind}\n"
+        f"submitter: {submitter}\n"
+        f"submitted_at: {submitted_at}\n"
+        f"claimed_name: {claimed_name}\n"
+        f"content_sha256: {sha}\n"
+        f"agent_version: rapp_publish_agent/0.2.0\n"
+        "```\n\n"
+        "*The receiver workflow verifies that `submitter` matches the "
+        "GitHub issue author and that `claimed_name`'s publisher prefix "
+        "equals the submitter (or is on the verified-brand allowlist). "
+        "Receipt of a validated submission is recorded by promotion to "
+        "the registry; the commit graph is the audit log.*\n\n"
+    )
 
 
 # ── HTTP / GH issue API ──────────────────────────────────────────────────
@@ -422,7 +473,7 @@ class RappPublishAgent(BasicAgent):
             else:
                 blob = _bundle_dir_to_zip(p)
                 manifest = json.loads((p / "manifest.json").read_text())
-            title, body = _build_rapp_issue(blob, manifest)
+            title, body = _build_rapp_issue(blob, manifest, submitter)
         else:
             return json.dumps({"error": f"no submission builder for kind={kind}"})
 

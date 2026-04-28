@@ -43,6 +43,65 @@ REQUIRED_MANIFEST_FIELDS = [
 VALID_TIERS = {"official", "verified", "community", "experimental", "unverified"}
 SUBMITTABLE_TIERS = {"unverified", "community", "experimental"}
 
+# Default: a submitter can only publish under their own GitHub username
+# (e.g. github user `BlazingBeard` can publish as `@BlazingBeard/...`).
+# A brand namespace requires explicit authorization — only logins listed
+# below can publish under it. Add new brand authorizations by editing
+# this dict in a maintainer-merged PR; never via an issue submission.
+# Keys are lowercased for case-insensitive matching.
+BRAND_ALLOWLIST: dict[str, set[str]] = {
+    "@rapp": {"kody-w"},
+    "@kody": {"kody-w"},
+    "@kody-w": {"kody-w"},
+}
+
+
+def _attestation_re():
+    return re.compile(r"```attestation\s*\n(.*?)\n```", re.DOTALL)
+
+
+def extract_attestation(body: str) -> dict | None:
+    """Pull the ATTESTATION block emitted by `@rapp/rapp_publish_agent`
+    (v0.2.0+). Returns a dict of keys → values, or None if no block."""
+    if not body:
+        return None
+    m = _attestation_re().search(body)
+    if not m:
+        return None
+    out: dict[str, str] = {}
+    for line in m.group(1).splitlines():
+        line = line.strip()
+        if not line or ":" not in line:
+            continue
+        k, v = line.split(":", 1)
+        out[k.strip()] = v.strip()
+    return out
+
+
+def verify_attestation(att: dict, *, expected_submitter: str,
+                        expected_name: str, content: bytes) -> str | None:
+    """Verify an ATTESTATION block. Returns an error string on mismatch,
+    or None on pass. Missing block (att=None) is the caller's call to
+    handle — older publish agents pre-date this contract."""
+    import hashlib as _h
+    sub = (att.get("submitter") or "").lstrip("@").lower()
+    if sub and sub != expected_submitter.lstrip("@").lower():
+        return (f"Attestation submitter '@{sub}' does not match GitHub "
+                f"issue author '@{expected_submitter}'. Refile from your "
+                f"own account.")
+    claimed = (att.get("claimed_name") or "").strip()
+    if claimed and claimed != expected_name:
+        return (f"Attestation claimed_name '{claimed}' differs from "
+                f"resolved name '{expected_name}'.")
+    declared_hash = (att.get("content_sha256") or "").strip()
+    if declared_hash:
+        actual = _h.sha256(content).hexdigest()
+        if declared_hash != actual:
+            return (f"Attestation content_sha256 '{declared_hash[:12]}…' "
+                    f"does not match actual content hash "
+                    f"'{actual[:12]}…'. Body may have been tampered with.")
+    return None
+
 
 # ──────────────────────────────────────────────────────────────────────
 # State I/O
@@ -352,17 +411,46 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
                      f"(e.g., '{slug.replace('-', '_')}')"
         }
 
-    # Namespace check: publisher must match GitHub username,
-    # UNLESS the issue title explicitly declares the agent name (e.g. [AGENT] @borg/sherlock).
-    # This allows maintainers to grant namespace access by accepting the issue.
+    # Namespace check: a submitter can only publish under their own
+    # GitHub username — UNLESS the publisher namespace is explicitly
+    # listed in BRAND_ALLOWLIST and the submitter is one of the logins
+    # authorized for it. The previous title-fallback (publisher matched
+    # if it appeared in the issue title) was a no-op security check —
+    # the submitter controls the title — and let `BlazingBeard` publish
+    # as `@howardh` in #70.
     expected_publisher = f"@{user}"
-    title_ns = payload.get("_title_namespace")  # injected by dispatcher
-    if publisher != expected_publisher and publisher != title_ns:
+    pub_lc = publisher.lower()
+    user_lc = user.lower()
+    is_self = pub_lc == expected_publisher.lower()
+    is_allowlisted_brand = (
+        pub_lc in BRAND_ALLOWLIST
+        and user_lc in {u.lower() for u in BRAND_ALLOWLIST[pub_lc]}
+    )
+    if not (is_self or is_allowlisted_brand):
         return {
-            "error": f"Publisher must be '{expected_publisher}' for community submissions. "
-                     f"Got '{publisher}'. To use a reserved namespace, include it in the "
-                     f"issue title: [AGENT] {name}"
+            "error": f"Publisher must be '{expected_publisher}' (your "
+                     f"GitHub username). Got '{publisher}'. Brand "
+                     f"namespaces are gated on a maintainer-curated "
+                     f"allowlist; if you need '{publisher}' authorized "
+                     f"for your account, open a PR adding "
+                     f"`{publisher}: [\"{user}\"]` to BRAND_ALLOWLIST in "
+                     f"`scripts/process_issues.py`."
         }
+
+    # Verify attestation block (rapp_publish_agent v0.2.0+).
+    # Older publish agents that didn't emit one pass through — but they
+    # also can't claim a brand namespace, so the BRAND_ALLOWLIST check
+    # above is the primary gate.
+    att = extract_attestation(payload.get("_issue_body") or "")
+    if att is not None:
+        att_err = verify_attestation(
+            att,
+            expected_submitter=user,
+            expected_name=name,
+            content=code.encode("utf-8"),
+        )
+        if att_err:
+            return {"error": f"Attestation rejected: {att_err}"}
 
     # Check if already in agents/ — version must be greater
     agent_file = AGENTS_DIR / publisher / f"{slug}.py"
@@ -509,11 +597,10 @@ def main() -> int:
         print(f"RESULT_ERROR=Could not parse JSON from issue body: {e}")
         return 1
 
-    # Extract namespace from title (e.g. "[AGENT] @borg/sherlock" → "@borg")
-    # This grants namespace access when the title explicitly declares the agent
-    title_ns_match = re.search(r"\[(?:AGENT|RAR)\]\s*(@[\w-]+)/", title)
-    if title_ns_match and data.get("action") == "submit_agent":
-        data.setdefault("payload", {})["_title_namespace"] = title_ns_match.group(1)
+    # Pass the raw issue body through so handle_submit_agent can extract
+    # and verify the ATTESTATION block emitted by rapp_publish_agent.
+    if data.get("action") == "submit_agent":
+        data.setdefault("payload", {})["_issue_body"] = body
 
     result = process(data, user)
     result_json = json.dumps(result, indent=2)
