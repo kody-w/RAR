@@ -261,13 +261,17 @@ class TestSecurityScanner:
         assert any("os.system" in w for w in warnings)
 
     @pytest.mark.security
-    def test_rejects_subprocess(self, tmp_path):
+    def test_allows_subprocess(self, tmp_path):
+        """Subprocess is intentionally permitted — agents commonly wrap
+        external CLIs (gh, kubectl, ffmpeg, workiq). Submitters should
+        declare wrapped binaries in `requires_env` so consumers see what
+        gets shelled out before installing."""
         sys.path.insert(0, str(REPO_ROOT))
         import build_registry as br
-        f = tmp_path / "evil.py"
+        f = tmp_path / "wraps_cli.py"
         f.write_text('import subprocess\nsubprocess.run(["ls"])')
         warnings = br.scan_security(f)
-        assert any("subprocess" in w for w in warnings)
+        assert not any("subprocess" in w for w in warnings)
 
     @pytest.mark.security
     def test_rejects_dunder_import(self, tmp_path):

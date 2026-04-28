@@ -153,8 +153,12 @@ def validate_swarm(py_path: Path, swarm: dict) -> list:
     return errors
 
 
-# First-party agents that legitimately need elevated capabilities.
-# Community submissions are NEVER added here — they must find safe alternatives.
+# Files that legitimately need elevated capabilities (eval / exec) which
+# stay banned for everyone else. Subprocess is no longer banned — agents
+# routinely wrap external CLIs (gh, kubectl, terraform, ffmpeg, az, gcloud,
+# npm, workiq, etc.), and the allowlist approach didn't scale to the
+# integration category. Submitters should declare wrapped binaries in
+# `requires_env` so consumers know what gets shelled out at install time.
 SECURITY_ALLOWLIST = {
     "agents/@kody/agent_workbench_agent.py",       # workbench needs exec for agent orchestration
     "agents/@kody/rappter_engine_agent.py",         # engine needs subprocess for CLI mode
@@ -167,14 +171,15 @@ SECURITY_ALLOWLIST = {
     "swarms/@rapp/momentfactory_agent.py",          # converged swarm with inlined LLM dispatch
 }
 
-# Patterns that should never appear in agent code (supply chain defense)
+# Patterns that should never appear in agent code (supply chain defense).
+# Subprocess is intentionally NOT here — wrapping external CLIs is a normal
+# integration pattern. See SECURITY_ALLOWLIST comment above.
 DANGEROUS_PATTERNS = [
     (r'\beval\s*\(', "eval() is forbidden — use safe alternatives"),
     (r'\bexec\s*\(', "exec() is forbidden — use safe alternatives"),
     (r'\b__import__\s*\(', "__import__() is forbidden — use standard imports"),
     (r'\bcompile\s*\(.*["\']exec["\']', "compile() with exec mode is forbidden"),
-    (r'\bos\.system\s*\(', "os.system() is forbidden — declare in requires_env"),
-    (r'\bsubprocess\.\w+\s*\(', "subprocess is forbidden in agents"),
+    (r'\bos\.system\s*\(', "os.system() is forbidden — use subprocess and declare in requires_env"),
     (r'\bopen\s*\(.*(\/etc|\/proc|\.env|\.ssh|passwd)', "suspicious file access pattern"),
     (r'(api[_-]?key|secret|password|token)\s*=\s*["\'][^"\']{8,}', "possible hardcoded secret"),
 ]
