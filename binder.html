@@ -438,6 +438,7 @@ function showDetail(card){
     <div class="actions">
       <button class="primary" onclick="addToCollection(${JSON.stringify(key).replace(/"/g,'&quot;')})">Add to Binder</button>
       <button onclick="removeFromCollection(${JSON.stringify(key).replace(/"/g,'&quot;')})">Remove</button>
+      <a href="grail.html#${encodeURIComponent(key)}" style="display:inline-flex;align-items:center;justify-content:center;padding:0 14px;border-radius:8px;background:transparent;border:1px solid var(--border,#30363d);color:inherit;text-decoration:none;font:inherit">View Grail</a>
       <button onclick="closeModal()">Close</button>
     </div>`
   document.getElementById('modal').classList.add('open')
