@@ -374,26 +374,84 @@ header {
 }
 .share-btn:hover { border-color: var(--border-hover); color: var(--text); text-decoration: none; }
 
-/* ── Source code section ────────────────────────────────────────── */
-.source-section { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 24px; }
-.source-head {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+/* ── Summon section (QR code) ───────────────────────────────── */
+.summon-section {
+  margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px;
+  display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center;
 }
-.source-head h2 { color: var(--text); text-transform: none; letter-spacing: 0; font-size: 1.1rem; font-weight: 700; }
-.source-head .source-meta { color: var(--text-muted); font-size: .82rem; }
-.source-pre {
-  background: #0a0d12; border: 1px solid var(--border); border-radius: 10px;
-  padding: 16px; overflow: auto; max-height: 650px;
-  font-size: .82rem; line-height: 1.5;
+@media (max-width: 720px) {
+  .summon-section { grid-template-columns: 1fr; text-align: center; }
 }
-.source-pre code { color: #c9d1d9; }
-/* tiny inline python highlighter */
-.tok-kw { color: #ff7b72; }
-.tok-str { color: #a5d6ff; }
-.tok-num { color: #79c0ff; }
-.tok-com { color: #8b949e; font-style: italic; }
-.tok-fn  { color: #d2a8ff; }
-.tok-cls { color: #ffa657; }
+.summon-qr {
+  background: #fff; border-radius: 16px; padding: 14px;
+  width: 280px; height: 280px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 0 1px var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto;
+}
+.summon-qr img { width: 100%; height: 100%; display: block; }
+.summon-info h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--text); text-transform: none; letter-spacing: 0; }
+.summon-info p { color: var(--text-dim); font-size: .95rem; margin-bottom: 14px; line-height: 1.55; }
+.summon-link {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; display: flex; align-items: center; gap: 10px;
+  font-family: ui-monospace, SFMono-Regular, monospace; font-size: .78rem;
+  color: var(--accent); word-break: break-all; user-select: all;
+}
+.summon-link button {
+  flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text-dim); padding: 5px 10px; border-radius: 6px;
+  font-size: .72rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.summon-link button:hover { color: var(--text); border-color: var(--border-hover); }
+.summon-link button.copied { color: var(--green); border-color: rgba(63,185,80,.4); }
+.summon-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; padding: 10px 18px; border-radius: 8px; font-size: .9rem;
+  font-weight: 700; text-decoration: none; margin-top: 14px;
+}
+.summon-cta:hover { text-decoration: none; opacity: .92; }
+
+/* ── Fullscreen card overlay (tap card → expand, tilt to shine) ── */
+.fs-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: radial-gradient(ellipse at 50% 50%, #0a0d14 0%, #000 80%);
+  display: none; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}
+.fs-overlay.open { display: flex; }
+.fs-overlay .agent-card-wrap {
+  width: min(86vw, calc(86vh * 5 / 7));
+  max-width: 540px; aspect-ratio: 5 / 7;
+  filter: drop-shadow(0 30px 80px rgba(0,0,0,.7));
+}
+.fs-close {
+  position: absolute; top: max(env(safe-area-inset-top), 14px); right: 14px;
+  background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.18);
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; line-height: 1; cursor: pointer; z-index: 10;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.fs-tilt-prompt {
+  position: absolute; bottom: max(env(safe-area-inset-bottom), 24px); left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.55); color: #f0e6d0; padding: 10px 18px;
+  border-radius: 999px; font-size: .82rem; border: 1px solid rgba(255,215,0,.3);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  cursor: pointer; user-select: none;
+}
+.fs-hint {
+  position: absolute; top: max(env(safe-area-inset-top), 14px); left: 14px;
+  color: rgba(255,255,255,.55); font-size: .75rem; letter-spacing: .3px;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  /* Desktop: card is clickable but doesn't auto-fullscreen */
+  .agent-card-wrap { cursor: zoom-in; }
+}
 
 .loading, .error {
   text-align: center; padding: 80px 20px; color: var(--text-dim);
@@ -441,39 +499,13 @@ function parseManaCost(cost) {
   return out;
 }
 
-function manaPip(sym) {
-  const code = sym.toUpperCase();
-  if (['W','U','B','R','G','C'].includes(code)) {
-    return `<span class="mana mana-${code}" title="${code}">${code}</span>`;
-  }
-  // Numeric / generic
-  return `<span class="mana mana-C" title="${esc(sym)}">${esc(sym)}</span>`;
+const SUMMON_BASE = 'https://kody-w.github.io/RAR/virtual-brainstem-summon.html';
+function summonUrl(name) {
+  return `${SUMMON_BASE}?agent=${encodeURIComponent(name)}`;
 }
-
-// Tiny syntax highlighter for python — good enough for display, no deps.
-const PY_KW = ['False','None','True','and','as','assert','async','await','break','class','continue','def','del','elif','else','except','finally','for','from','global','if','import','in','is','lambda','nonlocal','not','or','pass','raise','return','try','while','with','yield'];
-function highlightPython(src) {
-  // Mask strings & comments first to protect them from keyword regex
-  const tokens = [];
-  let masked = src
-    .replace(/("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')/g, (m) => { tokens.push(['str', m]); return `\x00${tokens.length-1}\x00`; })
-    .replace(/(#[^\n]*)/g, (m) => { tokens.push(['com', m]); return `\x00${tokens.length-1}\x00`; });
-  masked = esc(masked);
-  // Keywords
-  const kwRe = new RegExp('\\b(' + PY_KW.join('|') + ')\\b', 'g');
-  masked = masked.replace(kwRe, '<span class="tok-kw">$1</span>');
-  // Numbers
-  masked = masked.replace(/\b(\d+\.?\d*|0x[0-9a-fA-F]+)\b/g, '<span class="tok-num">$1</span>');
-  // class definitions
-  masked = masked.replace(/(<span class="tok-kw">class<\/span>)\s+([A-Z]\w*)/g, '$1 <span class="tok-cls">$2</span>');
-  // function definitions
-  masked = masked.replace(/(<span class="tok-kw">def<\/span>)\s+(\w+)/g, '$1 <span class="tok-fn">$2</span>');
-  // Restore strings/comments
-  masked = masked.replace(/\x00(\d+)\x00/g, (_, i) => {
-    const [kind, raw] = tokens[+i];
-    return `<span class="tok-${kind}">${esc(raw)}</span>`;
-  });
-  return masked;
+function qrSrc(data, size = 540) {
+  // Same QR provider store.html uses — no new dep.
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=8&qzone=2&format=png&data=${encodeURIComponent(data)}`;
 }
 
 async function load() {
@@ -650,23 +682,38 @@ async function load() {
       </div>
     </div>
 
-    <div class="source-section">
-      <div class="source-head">
-        <h2>${esc(filePath || 'agent.py')}</h2>
-        <div class="source-meta" id="src-meta">loading…</div>
+    <div class="summon-section">
+      <div class="summon-qr">
+        <img src="${qrSrc(summonUrl(agent.name))}" alt="QR — Summon ${esc(agent.display_name || slug)} on your Virtual Brainstem" loading="eager">
       </div>
-      <pre class="source-pre"><code id="src-code">loading…</code></pre>
+      <div class="summon-info">
+        <h2>Summon to your Brainstem</h2>
+        <p>Scan with any phone camera — opens this agent in your Virtual Brainstem and enables it instantly. Tap the card to view it fullscreen with tilt-shine effects.</p>
+        <div class="summon-link">
+          <span id="summon-url">${esc(summonUrl(agent.name))}</span>
+          <button data-copy="summon-url">copy</button>
+        </div>
+        <a class="summon-cta" href="${summonUrl(agent.name)}">Open on this device →</a>
+      </div>
+    </div>
+
+    <div class="fs-overlay" id="fs-overlay" aria-hidden="true">
+      <div class="fs-hint">Tilt to shine</div>
+      <button class="fs-close" id="fs-close" aria-label="Close fullscreen">×</button>
+      <div class="agent-card-wrap" id="fs-wrap"></div>
+      <div class="fs-tilt-prompt" id="fs-tilt-prompt" style="display:none">Tap to enable motion</div>
     </div>
   `;
 
-  // Wire up copy buttons + share link
-  document.querySelectorAll('.copy-btn').forEach(btn => {
+  // Wire up all copy buttons (install command, summon URL, etc.)
+  document.querySelectorAll('button[data-copy]').forEach(btn => {
     btn.onclick = () => {
       const target = document.getElementById(btn.dataset.copy);
       navigator.clipboard.writeText(target.textContent).then(() => {
+        const orig = btn.textContent;
         btn.textContent = '✓ copied';
         btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
+        setTimeout(() => { btn.textContent = orig === '✓ copied' ? 'copy' : orig; btn.classList.remove('copied'); }, 1500);
       });
     };
   });
@@ -707,18 +754,136 @@ async function load() {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.setAttribute('content', `${agent.display_name || slug} — RAPP Grail`);
 
-  // Fetch the source code (pinned to commit if we have one, else main)
-  try {
-    const src = await fetch(py_url_pinned).then(r => r.ok ? r.text() : Promise.reject(new Error('HTTP ' + r.status)));
-    document.getElementById('src-code').innerHTML = highlightPython(src);
-    const lines = src.split('\n').length;
-    const bytes = new Blob([src]).size;
-    document.getElementById('src-meta').textContent =
-      `${lines} lines · ${bytes.toLocaleString()} bytes${latestSha ? ' · pinned to ' + shortSha(latestSha) : ''}`;
-  } catch (e) {
-    document.getElementById('src-code').textContent = `# Failed to load source: ${e.message}\n# Try the raw URL: ${py_url_main}`;
-    document.getElementById('src-meta').textContent = 'load error';
+  // ── Fullscreen tilt-shine mode ─────────────────────────────────
+  // Tap the card → expand into the fixed overlay. Re-bind motion handlers
+  // to the cloned card. On phones, also wire DeviceOrientation for the
+  // "shine" effect — tilt to make the holo shift like a real foil.
+  const overlay = document.getElementById('fs-overlay');
+  const fsWrap = document.getElementById('fs-wrap');
+  const fsClose = document.getElementById('fs-close');
+  const tiltPrompt = document.getElementById('fs-tilt-prompt');
+  let orientHandler = null;
+  let lastTarget = { mx: 50, my: 50, px: 0.5, py: 0.5, angle: 0 };
+  let current = { ...lastTarget };
+  let rafId = null;
+
+  function applyVars(holo) {
+    holo.style.setProperty('--mx', current.mx.toFixed(0) + '%');
+    holo.style.setProperty('--my', current.my.toFixed(0) + '%');
+    holo.style.setProperty('--px', current.px.toFixed(3));
+    holo.style.setProperty('--py', current.py.toFixed(3));
+    holo.style.setProperty('--angle', current.angle.toFixed(0) + 'deg');
+    const shimmer = holo.querySelector('.holo-shimmer-track');
+    if (shimmer) {
+      shimmer.style.setProperty('--mx', current.mx.toFixed(0) + '%');
+      shimmer.style.setProperty('--my', current.my.toFixed(0) + '%');
+    }
   }
+
+  function tickTowards(holo) {
+    // Lerp toward target — feels like liquid, not jitter
+    const k = 0.18;
+    current.mx += (lastTarget.mx - current.mx) * k;
+    current.my += (lastTarget.my - current.my) * k;
+    current.px += (lastTarget.px - current.px) * k;
+    current.py += (lastTarget.py - current.py) * k;
+    // angle wraps; lerp via shortest path
+    let d = lastTarget.angle - current.angle;
+    if (d > 180) d -= 360;
+    if (d < -180) d += 360;
+    current.angle += d * k;
+    applyVars(holo);
+    rafId = requestAnimationFrame(() => tickTowards(holo));
+  }
+
+  function setTargetFromXY(x, y) {
+    lastTarget.mx = x * 100;
+    lastTarget.my = y * 100;
+    lastTarget.px = x;
+    lastTarget.py = y;
+    lastTarget.angle = Math.atan2(y - 0.5, x - 0.5) * 180 / Math.PI;
+  }
+
+  function openFullscreen() {
+    // Clone the holo card markup so the inline card keeps its own state
+    fsWrap.innerHTML = document.querySelector('#holo-wrap .agent-card-holo').outerHTML;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const holo = fsWrap.querySelector('.agent-card-holo');
+    current = { mx: 50, my: 50, px: 0.5, py: 0.5, angle: 0 };
+    lastTarget = { ...current };
+    applyVars(holo);
+    rafId = requestAnimationFrame(() => tickTowards(holo));
+
+    // Touch / mouse drag inside the overlay
+    const onPoint = (cx, cy) => {
+      const r = fsWrap.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1, (cx - r.left) / r.width));
+      const y = Math.max(0, Math.min(1, (cy - r.top) / r.height));
+      setTargetFromXY(x, y);
+    };
+    const onTouch = e => { const t = e.touches[0]; if (t) { onPoint(t.clientX, t.clientY); e.preventDefault(); } };
+    const onMouse = e => onPoint(e.clientX, e.clientY);
+    overlay._handlers = {
+      touchmove: onTouch, mousemove: onMouse,
+    };
+    overlay.addEventListener('touchmove', onTouch, { passive: false });
+    overlay.addEventListener('mousemove', onMouse);
+
+    // DeviceOrientation: "shine" via phone tilt
+    const supportsOrient = 'DeviceOrientationEvent' in window;
+    const needsPermission = supportsOrient && typeof DeviceOrientationEvent.requestPermission === 'function';
+    const bindOrient = () => {
+      orientHandler = (e) => {
+        // gamma: left-right tilt (-90..90), beta: front-back (-180..180)
+        const g = (e.gamma || 0);
+        const b = (e.beta || 0);
+        // Map to 0..1 with clamp; gamma ±35° is comfortable phone-tilt range
+        const x = Math.max(0, Math.min(1, 0.5 + g / 70));
+        const y = Math.max(0, Math.min(1, 0.5 + (b - 30) / 70));
+        setTargetFromXY(x, y);
+      };
+      window.addEventListener('deviceorientation', orientHandler);
+    };
+    if (needsPermission) {
+      tiltPrompt.style.display = '';
+      tiltPrompt.onclick = async () => {
+        try {
+          const result = await DeviceOrientationEvent.requestPermission();
+          if (result === 'granted') { bindOrient(); tiltPrompt.style.display = 'none'; }
+          else { tiltPrompt.textContent = 'Motion permission denied — drag instead'; }
+        } catch (_) { tiltPrompt.style.display = 'none'; }
+      };
+    } else if (supportsOrient) {
+      bindOrient();
+    }
+  }
+
+  function closeFullscreen() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (orientHandler) { window.removeEventListener('deviceorientation', orientHandler); orientHandler = null; }
+    if (overlay._handlers) {
+      overlay.removeEventListener('touchmove', overlay._handlers.touchmove);
+      overlay.removeEventListener('mousemove', overlay._handlers.mousemove);
+      overlay._handlers = null;
+    }
+    tiltPrompt.style.display = 'none';
+    fsWrap.innerHTML = '';
+  }
+
+  document.getElementById('holo-wrap').addEventListener('click', openFullscreen);
+  fsClose.addEventListener('click', closeFullscreen);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFullscreen(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFullscreen(); });
+
+  // On narrow viewports (phones), auto-open fullscreen so QR scanners
+  // get the wow moment immediately.
+  const isPhone = window.matchMedia('(max-width: 720px)').matches && 'ontouchstart' in window;
+  if (isPhone) setTimeout(openFullscreen, 350);
 }
 
 window.addEventListener('hashchange', () => location.reload());

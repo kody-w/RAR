@@ -1,0 +1,4363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAPP Brainstem — Summon</title>
+<meta name="description" content="Browser-native agent runtime — run any RAPP agent in a LisPy VM, no server required. This variant accepts ?agent=@pub/slug deep-links from QR scans.">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --surface3: #30363d;
+  --border: #30363d;
+  --border-hover: #484f58;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-muted: #656d76;
+  --accent: #58a6ff;
+  --accent-bg: rgba(88,166,255,.1);
+  --green: #3fb950;
+  --green-bg: rgba(63,185,80,.12);
+  --orange: #d29922;
+  --orange-bg: rgba(210,153,34,.12);
+  --purple: #bc8cff;
+  --purple-bg: rgba(188,140,255,.12);
+  --red: #f85149;
+  --red-bg: rgba(248,81,73,.12);
+  --yellow: #e3b341;
+  --gold: #ffd700;
+  --shadow: 0 3px 12px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.5);
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); min-height:100vh;
+  display: flex; flex-direction: column;
+}
+a { color: var(--accent); text-decoration:none; }
+code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menlo,monospace; }
+
+/* Header */
+.bs-header {
+  background: var(--surface); border-bottom:1px solid var(--border);
+  padding:12px 24px; display:flex; align-items:center; justify-content:space-between;
+  flex-shrink:0;
+}
+.bs-logo { display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:700; }
+.bs-logo-mark {
+  background: linear-gradient(135deg, var(--green), var(--accent));
+  color:#fff; width:30px; height:30px; border-radius:7px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.75rem; font-weight:800;
+}
+.bs-status {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 12px; border-radius:12px; font-size:.8rem; font-weight:600;
+}
+.bs-status.idle { background:var(--surface2); color:var(--text-dim); }
+.bs-status.loading { background:var(--orange-bg); color:var(--orange); }
+.bs-status.running { background:var(--green-bg); color:var(--green); }
+.bs-status.error { background:var(--red-bg); color:var(--red); }
+.bs-status-dot {
+  width:8px; height:8px; border-radius:50%; background:currentColor;
+}
+.bs-status.running .bs-status-dot { animation: pulse 1.2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.bs-header-right { display:flex; align-items:center; gap:10px; }
+.bs-btn {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:6px 14px; border-radius:7px; cursor:pointer; font-size:.82rem; transition:all .15s;
+}
+.bs-btn:hover { border-color:var(--border-hover); background:var(--surface3); }
+.bs-btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+.bs-btn.primary:hover { opacity:.85; }
+.bs-btn.green { background:var(--green); border-color:var(--green); color:#fff; }
+.bs-btn.green:hover { opacity:.85; }
+
+/* GitHub auth */
+.gh-pill {
+  display:flex; align-items:center; gap:6px; padding:5px 12px;
+  background:var(--surface2); border:1px solid var(--border); border-radius:7px;
+  font-size:.8rem; cursor:pointer; color:var(--text); transition:all .15s;
+}
+.gh-pill:hover { border-color:var(--border-hover); }
+.gh-pill .gh-avatar {
+  width:20px; height:20px; border-radius:50%; background:var(--surface3);
+}
+.gh-pill .gh-dot {
+  width:6px; height:6px; border-radius:50%;
+}
+.gh-pill .gh-dot.on { background:var(--green); }
+.gh-pill .gh-dot.off { background:var(--red); }
+
+/* Chat */
+.chat-wrap { display:flex; flex-direction:column; flex:1; overflow:hidden; position:relative; }
+.chat-messages {
+  flex:1; overflow-y:auto; padding:20px; max-width:820px; width:100%; margin:0 auto;
+}
+.chat-msg { display:flex; gap:10px; margin-bottom:18px; align-items:flex-start; }
+.chat-msg.user { flex-direction:row-reverse; }
+.chat-avatar {
+  width:30px; height:30px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:.65rem; font-weight:700; flex-shrink:0;
+}
+.chat-msg.user .chat-avatar { background:var(--accent); color:#fff; }
+.chat-msg.assistant .chat-avatar { background:var(--green); color:var(--bg); }
+.chat-bubble {
+  max-width:72%; padding:10px 14px; border-radius:14px; font-size:.85rem; line-height:1.55;
+  word-wrap:break-word; white-space:pre-wrap;
+}
+.chat-msg.user .chat-bubble {
+  background:var(--accent); color:#fff; border-bottom-right-radius:4px;
+}
+.chat-msg.assistant .chat-bubble {
+  background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:4px;
+  color:var(--text);
+}
+.chat-bubble table { border-collapse:collapse; margin:6px 0; width:auto; }
+.chat-bubble th, .chat-bubble td {
+  border:1px solid var(--border); padding:3px 10px; text-align:left; font-size:.8rem;
+}
+.chat-bubble th { background:var(--surface2); color:var(--accent); font-weight:600; }
+.chat-bubble strong { color:inherit; font-weight:700; }
+.chat-bubble a { color:var(--accent); text-decoration:underline; }
+.chat-bubble code {
+  background:var(--surface2); padding:1px 5px; border-radius:3px; font-size:.8rem;
+}
+.chat-activity {
+  text-align:center; margin:10px 0; font-size:.75rem; color:var(--text-muted);
+  font-family:'SF Mono',monospace;
+}
+.chat-activity-pill {
+  display:inline-flex; align-items:center; gap:6px; padding:4px 12px;
+  background:var(--surface); border:1px dashed var(--border); border-radius:12px;
+}
+.chat-activity-dot {
+  width:5px; height:5px; border-radius:50%; background:var(--green);
+  animation: pulse 1s infinite;
+}
+.chat-input-bar {
+  display:flex; gap:8px; padding:12px 20px; border-top:1px solid var(--border);
+  background:var(--surface); max-width:820px; width:100%; margin:0 auto;
+}
+.chat-input {
+  flex:1; padding:10px 14px; background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; color:var(--text); font-size:.85rem; outline:none;
+  font-family:inherit; resize:none;
+}
+.chat-input:focus { border-color:var(--accent); }
+.chat-input::placeholder { color:var(--text-muted); }
+.chat-send {
+  padding:10px 18px; background:var(--accent); color:#fff; border:none;
+  border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; transition:all .15s;
+}
+.chat-send:hover { opacity:.85; }
+.chat-send:disabled { opacity:.4; cursor:not-allowed; }
+
+.chat-welcome-box {
+  text-align:center; padding:60px 24px 40px; max-width:560px; margin:0 auto;
+}
+.chat-welcome-box h2 { font-size:1.3rem; margin-bottom:8px; }
+.chat-welcome-box p { color:var(--text-dim); line-height:1.6; margin-bottom:16px; }
+.chat-agent-pills {
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;
+}
+.chat-agent-pill {
+  padding:4px 12px; background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; font-size:.75rem; color:var(--green); font-weight:600;
+}
+.chat-suggestions {
+  display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:8px;
+}
+.chat-suggestion {
+  padding:8px 14px; background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; font-size:.8rem; color:var(--text-dim); cursor:pointer;
+  transition:all .15s;
+}
+.chat-suggestion:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+
+.typing-indicator { display:flex; gap:4px; padding:4px 0; }
+.typing-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--text-muted);
+  animation:typeBounce .6s infinite alternate;
+}
+.typing-dot:nth-child(2) { animation-delay:.15s; }
+.typing-dot:nth-child(3) { animation-delay:.3s; }
+@keyframes typeBounce { from{opacity:.3;transform:translateY(0)} to{opacity:1;transform:translateY(-3px)} }
+
+.chat-model-bar {
+  padding:4px 20px; font-size:.7rem; color:var(--text-muted); text-align:center;
+  border-top:1px solid var(--border); display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.model-select {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
+  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
+  max-width:260px;
+}
+.model-select:focus { border-color:var(--accent); }
+.model-select option { background:var(--surface); color:var(--text); }
+
+/* Agent dropdown */
+.agent-dropdown-wrap {
+  position:relative; display:inline-block;
+}
+.agent-dropdown-btn {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
+  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
+  transition:all .15s;
+}
+.agent-dropdown-btn:hover { border-color:var(--border-hover); color:var(--text); }
+.agent-dropdown-btn .agent-count {
+  background:var(--green); color:#fff; padding:0 5px; border-radius:8px;
+  font-size:.65rem; margin-left:4px; font-weight:700;
+}
+.agent-dropdown-panel {
+  display:none; position:absolute; bottom:100%; left:0;
+  margin-bottom:6px; background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; width:320px; max-height:400px; overflow:hidden;
+  box-shadow:var(--shadow-lg); z-index:100;
+}
+.agent-dropdown-panel.open { display:block; }
+.agent-dropdown-search {
+  width:100%; background:var(--bg); border:none; border-bottom:1px solid var(--border);
+  padding:10px 12px; color:var(--text); font-size:.82rem; outline:none;
+}
+.agent-dropdown-list {
+  max-height:320px; overflow-y:auto; padding:4px;
+}
+.agent-dropdown-item {
+  display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:6px;
+  cursor:pointer; transition:background .1s; font-size:.8rem;
+}
+.agent-dropdown-item:hover { background:var(--surface2); }
+.agent-dropdown-item .agent-check {
+  width:16px; height:16px; border:1.5px solid var(--border); border-radius:4px;
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  transition:all .15s; font-size:.65rem; color:transparent;
+}
+.agent-dropdown-item.enabled .agent-check {
+  background:var(--green); border-color:var(--green); color:#fff;
+}
+.agent-dropdown-item-info { flex:1; min-width:0; }
+.agent-dropdown-item-name { font-weight:600; color:var(--text); }
+.agent-dropdown-item-desc {
+  font-size:.72rem; color:var(--text-muted); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.agent-enabled-pills {
+  display:flex; gap:4px; flex-wrap:wrap; padding:0 4px;
+}
+.agent-enabled-pill {
+  padding:1px 8px; background:var(--green-bg); border:1px solid rgba(63,185,80,.3);
+  border-radius:10px; font-size:.65rem; color:var(--green); font-weight:600;
+  cursor:pointer; transition:all .15s;
+}
+.agent-enabled-pill:hover { border-color:var(--red); color:var(--red); background:var(--red-bg); }
+
+/* Drop zone overlay */
+.chat-drop-overlay {
+  display:none; position:absolute; inset:0; z-index:90;
+  background:rgba(13,17,23,.85); backdrop-filter:blur(4px);
+  flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  border:3px dashed var(--accent); border-radius:12px; margin:8px;
+  pointer-events:none;
+}
+.chat-drop-overlay.active { display:flex; }
+.chat-drop-overlay .drop-icon { font-size:2.5rem; opacity:.7; }
+.chat-drop-overlay .drop-text { font-size:1rem; color:var(--accent); font-weight:600; }
+.chat-drop-overlay .drop-hint { font-size:.8rem; color:var(--text-muted); }
+
+/* Toast notification */
+.vb-toast {
+  position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+  background:var(--green); color:#fff; padding:10px 20px; border-radius:8px;
+  font-size:.85rem; font-weight:600; z-index:200; box-shadow:var(--shadow-lg);
+  animation: toastIn .3s ease-out;
+}
+@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+/* Agent download button in dropdown */
+.agent-dl-btn {
+  flex-shrink:0; width:24px; height:24px; border:none; background:none;
+  color:var(--text-muted); cursor:pointer; border-radius:4px; font-size:.75rem;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
+}
+.agent-dl-btn:hover { background:var(--accent); color:#fff; }
+
+/* Chat toolbar (export/import/clear) */
+.chat-toolbar {
+  display:flex; gap:4px; align-items:center; margin-left:auto;
+}
+.chat-toolbar-btn {
+  padding:2px 8px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; color:var(--text-muted); font-size:.65rem; cursor:pointer;
+  transition:all .15s; white-space:nowrap;
+}
+.chat-toolbar-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+/* Responsive */
+@media (max-width:768px) {
+  .bs-header { padding:10px 16px; }
+  .chat-bubble { max-width:88%; }
+  .chat-input-bar { padding:10px 12px; }
+}
+
+/* ─── Summon toast (variant-only) ────────────────────────── */
+.summon-toast {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translate(-50%, 120%);
+  background: linear-gradient(135deg, #58a6ff, #bc8cff);
+  color: #fff; padding: 12px 22px; border-radius: 999px;
+  font-size: .9rem; font-weight: 600; letter-spacing: .2px;
+  box-shadow: 0 12px 40px rgba(88,166,255,.35), 0 0 0 1px rgba(255,255,255,.15) inset;
+  z-index: 10000; opacity: 0;
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.2), opacity .35s ease;
+  max-width: calc(100vw - 32px); text-align: center;
+  pointer-events: none;
+}
+.summon-toast.show { transform: translate(-50%, 0); opacity: 1; }
+.summon-toast b { font-weight: 800; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="bs-header">
+  <div class="bs-logo">
+    <div class="bs-logo-mark">RB</div>
+    <span>RAPP Brainstem</span>
+  </div>
+  <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
+  <div class="bs-header-right">
+    <div class="gh-pill" id="ghPill" onclick="handleGHAuth()">
+      <div class="gh-dot off" id="ghDot"></div>
+      <span id="ghLabel">Sign in</span>
+    </div>
+    <a href="index.html" class="bs-btn">Back to RAPP</a>
+  </div>
+</div>
+
+<!-- Chat Mode (default) -->
+<div id="chatMode" class="chat-wrap"
+  ondragover="event.preventDefault();document.getElementById('dropOverlay').classList.add('active')"
+  ondragleave="if(!event.relatedTarget||!this.contains(event.relatedTarget))document.getElementById('dropOverlay').classList.remove('active')"
+  ondrop="handleAgentDrop(event)">
+  <div class="chat-drop-overlay" id="dropOverlay">
+    <div class="drop-icon">&#128230;</div>
+    <div class="drop-text">Drop agent.py to hot-load</div>
+    <div class="drop-hint">The agent will be parsed, enabled, and ready to use instantly</div>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-welcome-box" id="chatWelcome">
+      <h2>RAPP Brainstem</h2>
+      <p>A brainstem running in your browser. Chat naturally -- I'll route to the right agent automatically.</p>
+      <div class="chat-agent-pills" id="welcomeAgentPills">
+        <span class="chat-agent-pill">ManageMemory</span>
+        <span class="chat-agent-pill">ContextMemory</span>
+        <span class="chat-agent-pill">HackerNews</span>
+      </div>
+      <div class="chat-suggestions">
+        <div class="chat-suggestion" onclick="useSuggestion(this)">What's trending on Hacker News?</div>
+        <div class="chat-suggestion" onclick="useSuggestion(this)">Remember that I prefer dark mode</div>
+        <div class="chat-suggestion" onclick="useSuggestion(this)">What do you know about me?</div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-model-bar" id="chatModelBar">
+    <div class="agent-enabled-pills" id="enabledAgentPills"></div>
+    <div class="agent-dropdown-wrap">
+      <button class="agent-dropdown-btn" onclick="toggleAgentDropdown(event)">
+        Agents <span class="agent-count" id="agentCount">3</span>
+      </button>
+      <div class="agent-dropdown-panel" id="agentDropdownPanel">
+        <input class="agent-dropdown-search" type="text" placeholder="Search agents..." oninput="filterAgentDropdown(this.value)">
+        <div class="agent-dropdown-list" id="agentDropdownList"></div>
+      </div>
+    </div>
+    <span style="color:var(--border)">|</span>
+    <span id="chatModelLabel">GitHub Models -- sign in to start chatting</span>
+    <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
+    <div class="chat-toolbar">
+      <button class="chat-toolbar-btn" onclick="exportChat()" title="Export chat transcript">Export</button>
+      <button class="chat-toolbar-btn" onclick="importChat()" title="Import chat transcript">Import</button>
+      <input type="file" id="importChatFile" accept=".json" style="display:none" onchange="handleChatImport(event)">
+    </div>
+  </div>
+  <div class="chat-input-bar">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" disabled>
+    <button class="chat-send" id="chatSend" onclick="sendChat()" disabled>Send</button>
+  </div>
+</div>
+
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 1: lispy.js — Complete Lisp Interpreter in JavaScript
+// ═══════════════════════════════════════════════════════════════════════
+
+// Output callback — UI hooks into this
+let brainstemOutput = (text) => {};
+
+// --- Types ---
+class LispSymbol extends String {
+  constructor(s) { super(s); }
+  get isSymbol() { return true; }
+}
+
+const _symbolCache = {};
+function Sym(name) {
+  if (!_symbolCache[name]) _symbolCache[name] = new LispSymbol(name);
+  return _symbolCache[name];
+}
+
+const NIL = Object.freeze({
+  toString() { return '()'; },
+  isNil: true,
+  length: 0,
+  [Symbol.iterator]() { return { next() { return { done: true }; } }; }
+});
+
+class LispPair {
+  constructor(car, cdr) { this.car = car; this.cdr = cdr; }
+  toString() { return '(' + pairRepr(this) + ')'; }
+  get length() {
+    let n = 0, cur = this;
+    while (cur instanceof LispPair) { n++; cur = cur.cdr; }
+    return n;
+  }
+  [Symbol.iterator]() {
+    let cur = this;
+    return {
+      next() {
+        if (cur instanceof LispPair) {
+          const val = cur.car; cur = cur.cdr; return { value: val, done: false };
+        }
+        if (cur !== NIL && cur !== undefined && cur !== null) {
+          const val = cur; cur = NIL; return { value: val, done: false };
+        }
+        return { done: true };
+      }
+    };
+  }
+}
+
+class LispLambda {
+  constructor(params, body, env, name = 'lambda') {
+    this.params = params; this.body = body; this.env = env; this.name = name;
+  }
+  toString() { return `#<procedure ${this.name}>`; }
+}
+
+class LispMacro {
+  constructor(params, body, env, name = 'macro') {
+    this.params = params; this.body = body; this.env = env; this.name = name;
+  }
+  toString() { return `#<macro ${this.name}>`; }
+}
+
+class LispEnv {
+  constructor(params, args, parent) {
+    this.bindings = new Map();
+    this.parent = parent || null;
+    if (params && args) {
+      if (typeof params === 'string' || params instanceof LispSymbol) {
+        // variadic
+        this.bindings.set(String(params), Array.from(args));
+      } else if (Array.isArray(params)) {
+        for (let i = 0; i < params.length; i++) {
+          this.bindings.set(String(params[i]), args[i]);
+        }
+      }
+    }
+  }
+  get(name) {
+    const s = String(name);
+    if (this.bindings.has(s)) return this.bindings.get(s);
+    if (this.parent) return this.parent.get(s);
+    throw new LispError(`unbound variable: ${s}`);
+  }
+  set(name, val) {
+    const s = String(name);
+    if (this.bindings.has(s)) { this.bindings.set(s, val); return val; }
+    if (this.parent) return this.parent.set(s, val);
+    throw new LispError(`unbound variable: ${s}`);
+  }
+  define(name, val) { this.bindings.set(String(name), val); return val; }
+}
+
+class LispError extends Error {
+  constructor(msg) { super(msg); this.name = 'LispError'; }
+}
+
+// --- Helpers ---
+function isNil(x) { return x === NIL || x === null || x === undefined; }
+function isTruthy(x) { return x !== false && !isNil(x); }
+
+function pairRepr(p) {
+  const parts = [];
+  let cur = p;
+  while (cur instanceof LispPair) { parts.push(valueRepr(cur.car)); cur = cur.cdr; }
+  if (!isNil(cur)) { parts.push('.'); parts.push(valueRepr(cur)); }
+  return parts.join(' ');
+}
+
+function valueRepr(val) {
+  if (val === true) return '#t';
+  if (val === false) return '#f';
+  if (isNil(val)) return '()';
+  if (val instanceof LispSymbol) return String(val);
+  if (typeof val === 'string') return '"' + val.replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n') + '"';
+  if (Array.isArray(val)) return '(' + val.map(valueRepr).join(' ') + ')';
+  if (val instanceof LispPair) return val.toString();
+  if (val instanceof LispLambda || val instanceof LispMacro) return val.toString();
+  if (typeof val === 'object' && val !== null && !(val instanceof LispEnv)) {
+    const items = Object.entries(val).map(([k,v]) => `(${valueRepr(k)} . ${valueRepr(v)})`).join(' ');
+    return `(dict ${items})`;
+  }
+  return String(val);
+}
+
+function displayValue(val) {
+  if (typeof val === 'string' && !(val instanceof LispSymbol)) return val;
+  return valueRepr(val);
+}
+
+// --- Tokenizer ---
+function lispTokenize(source) {
+  const tokens = [];
+  let i = 0;
+  while (i < source.length) {
+    const c = source[i];
+    if (c === ' ' || c === '\t' || c === '\n' || c === '\r') { i++; continue; }
+    if (c === ';') { while (i < source.length && source[i] !== '\n') i++; continue; }
+    if ('()[]\'`,'.includes(c)) { tokens.push(c); i++; continue; }
+    if (c === '"') {
+      let j = i + 1;
+      while (j < source.length) {
+        if (source[j] === '\\' && j + 1 < source.length) { j += 2; continue; }
+        if (source[j] === '"') break;
+        j++;
+      }
+      tokens.push(source.slice(i, j + 1));
+      i = j + 1;
+      continue;
+    }
+    let j = i;
+    while (j < source.length && !' \t\n\r()[]";,'.includes(source[j])) j++;
+    tokens.push(source.slice(i, j));
+    i = j;
+  }
+  return tokens;
+}
+
+// --- Parser ---
+function lispParse(source) {
+  const tokens = lispTokenize(source);
+  const exprs = [];
+  let pos = 0;
+
+  function readExpr() {
+    if (pos >= tokens.length) throw new LispError('unexpected end of input');
+    const tok = tokens[pos];
+    if (tok === "'") { pos++; return [Sym('quote'), readExpr()]; }
+    if (tok === '`') { pos++; return [Sym('quasiquote'), readExpr()]; }
+    if (tok === ',') { pos++; return [Sym('unquote'), readExpr()]; }
+    if (tok === '(' || tok === '[') {
+      pos++;
+      const close = tok === '(' ? ')' : ']';
+      const lst = [];
+      while (pos < tokens.length && tokens[pos] !== close) lst.push(readExpr());
+      if (pos >= tokens.length) throw new LispError(`missing closing '${close}'`);
+      pos++;
+      return lst;
+    }
+    if (tok === ')' || tok === ']') throw new LispError(`unexpected '${tok}'`);
+    pos++;
+    return parseAtom(tok);
+  }
+
+  while (pos < tokens.length) exprs.push(readExpr());
+  return exprs;
+}
+
+function parseAtom(tok) {
+  if (tok === '#t') return true;
+  if (tok === '#f') return false;
+  if (tok === 'nil') return NIL;
+  const n = Number(tok);
+  if (!isNaN(n) && tok !== '') return n;
+  if (tok.startsWith('"') && tok.endsWith('"')) {
+    let s = tok.slice(1, -1);
+    s = s.replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    return s;
+  }
+  return Sym(tok);
+}
+
+// --- Evaluator ---
+function lispEval(expr, env) {
+  // Self-evaluating
+  if (typeof expr === 'number' || typeof expr === 'boolean') return expr;
+  if (isNil(expr)) return NIL;
+  if (typeof expr === 'string' && !(expr instanceof LispSymbol)) return expr;
+  if (expr instanceof LispPair) return expr;
+  if (typeof expr === 'object' && !Array.isArray(expr) && expr !== null && !(expr instanceof LispSymbol)) return expr;
+
+  // Symbol
+  if (expr instanceof LispSymbol) return env.get(expr);
+
+  // Not a list
+  if (!Array.isArray(expr)) return expr;
+
+  // Empty list
+  if (expr.length === 0) return NIL;
+
+  const head = expr[0];
+
+  // Special forms
+  if (head instanceof LispSymbol) {
+    const h = String(head);
+
+    if (h === 'quote') return expr[1];
+
+    if (h === 'if') {
+      const test = lispEval(expr[1], env);
+      if (isTruthy(test)) return lispEval(expr[2], env);
+      return expr.length > 3 ? lispEval(expr[3], env) : NIL;
+    }
+
+    if (h === 'cond') {
+      for (let i = 1; i < expr.length; i++) {
+        const clause = expr[i];
+        if (clause[0] instanceof LispSymbol && String(clause[0]) === 'else') return evalBody(clause.slice(1), env);
+        if (isTruthy(lispEval(clause[0], env))) return evalBody(clause.slice(1), env);
+      }
+      return NIL;
+    }
+
+    if (h === 'define') {
+      const target = expr[1];
+      if (Array.isArray(target)) {
+        const name = String(target[0]);
+        const params = target.slice(1).map(String);
+        const fn = new LispLambda(params, expr.slice(2), env, name);
+        env.define(name, fn);
+        return fn;
+      }
+      const val = lispEval(expr[2], env);
+      env.define(String(target), val);
+      return val;
+    }
+
+    if (h === 'set!') {
+      const val = lispEval(expr[2], env);
+      env.set(String(expr[1]), val);
+      return val;
+    }
+
+    if (h === 'lambda') {
+      const params = expr[1];
+      if (params instanceof LispSymbol || typeof params === 'string') {
+        return new LispLambda(String(params), expr.slice(2), env);
+      }
+      return new LispLambda(params.map(String), expr.slice(2), env);
+    }
+
+    if (h === 'let') {
+      const bindings = expr[1];
+      const newEnv = new LispEnv(null, null, env);
+      for (const b of bindings) newEnv.define(String(b[0]), lispEval(b[1], env));
+      return evalBody(expr.slice(2), newEnv);
+    }
+
+    if (h === 'let*') {
+      const bindings = expr[1];
+      const newEnv = new LispEnv(null, null, env);
+      for (const b of bindings) newEnv.define(String(b[0]), lispEval(b[1], newEnv));
+      return evalBody(expr.slice(2), newEnv);
+    }
+
+    if (h === 'begin') return evalBody(expr.slice(1), env);
+
+    if (h === 'and') {
+      let result = true;
+      for (let i = 1; i < expr.length; i++) {
+        result = lispEval(expr[i], env);
+        if (!isTruthy(result)) return result;
+      }
+      return result;
+    }
+
+    if (h === 'or') {
+      for (let i = 1; i < expr.length; i++) {
+        const result = lispEval(expr[i], env);
+        if (isTruthy(result)) return result;
+      }
+      return false;
+    }
+
+    if (h === 'define-macro') {
+      const target = expr[1];
+      if (Array.isArray(target)) {
+        const name = String(target[0]);
+        const params = target.slice(1).map(String);
+        const mac = new LispMacro(params, expr.slice(2), env, name);
+        env.define(name, mac);
+        return mac;
+      }
+      throw new LispError('invalid define-macro syntax');
+    }
+
+    if (h === 'do') return NIL;
+  }
+
+  // Function application
+  const fn = lispEval(head, env);
+
+  // Macro expansion
+  if (fn instanceof LispMacro) {
+    const macArgs = expr.slice(1);
+    const macEnv = new LispEnv(fn.params, macArgs, fn.env);
+    const expanded = evalBody(fn.body, macEnv);
+    return lispEval(expanded, env);
+  }
+
+  // Eval arguments
+  const args = expr.slice(1).map(a => lispEval(a, env));
+
+  if (typeof fn === 'function') {
+    try { return fn(...args); }
+    catch(e) { throw new LispError(`call error: ${e.message}`); }
+  }
+
+  if (fn instanceof LispLambda) {
+    const callEnv = new LispEnv(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+function evalBody(body, env) {
+  let result = NIL;
+  for (const expr of body) result = lispEval(expr, env);
+  return result;
+}
+
+// --- Call helper ---
+function callFn(fn, args) {
+  if (typeof fn === 'function') return fn(...args);
+  if (fn instanceof LispLambda) {
+    const callEnv = new LispEnv(fn.params, args, fn.env);
+    return evalBody(fn.body, callEnv);
+  }
+  throw new LispError(`not callable: ${valueRepr(fn)}`);
+}
+
+// --- Global Environment ---
+function createGlobalEnv() {
+  const env = new LispEnv();
+
+  // Arithmetic
+  env.define('+', (...args) => args.reduce((a,b) => a+b, 0));
+  env.define('-', (a, ...rest) => rest.length ? a - rest.reduce((x,y)=>x+y,0) : -a);
+  env.define('*', (...args) => args.reduce((a,b) => a*b, 1));
+  env.define('/', (a,b) => { if(b===0) throw new LispError('division by zero'); return a/b; });
+  env.define('%', (a,b) => a % b);
+  env.define('abs', Math.abs);
+  env.define('round', (n, d) => {
+    if (d === undefined || d === 0) return Math.round(n);
+    const f = Math.pow(10, d);
+    return Math.round(n * f) / f;
+  });
+  env.define('floor', Math.floor);
+  env.define('ceil', Math.ceil);
+  env.define('min', (...a) => Math.min(...a));
+  env.define('max', (...a) => Math.max(...a));
+  env.define('expt', Math.pow);
+  env.define('sqrt', Math.sqrt);
+  env.define('modulo', (a,b) => a%b);
+
+  // Comparison
+  env.define('=', (a,b) => a === b || (typeof a === 'number' && typeof b === 'number' && a == b));
+  env.define('equal?', (a,b) => JSON.stringify(a) === JSON.stringify(b));
+  env.define('<', (a,b) => a < b);
+  env.define('>', (a,b) => a > b);
+  env.define('<=', (a,b) => a <= b);
+  env.define('>=', (a,b) => a >= b);
+  env.define('!=', (a,b) => a !== b);
+
+  // Logic
+  env.define('not', x => !isTruthy(x));
+
+  // Predicates
+  env.define('null?', x => isNil(x) || (Array.isArray(x) && x.length === 0));
+  env.define('pair?', x => (x instanceof LispPair) || (Array.isArray(x) && !(x instanceof LispSymbol)));
+  env.define('list?', x => Array.isArray(x));
+  env.define('number?', x => typeof x === 'number');
+  env.define('string?', x => typeof x === 'string' && !(x instanceof LispSymbol));
+  env.define('symbol?', x => x instanceof LispSymbol);
+  env.define('boolean?', x => typeof x === 'boolean');
+  env.define('procedure?', x => typeof x === 'function' || x instanceof LispLambda);
+  env.define('dict?', x => typeof x === 'object' && x !== null && !Array.isArray(x) && !(x instanceof LispPair) && !isNil(x) && !(x instanceof LispEnv));
+  env.define('zero?', x => x === 0);
+  env.define('integer?', x => typeof x === 'number' && Number.isInteger(x));
+
+  // Lists
+  env.define('cons', (a,b) => new LispPair(a,b));
+  env.define('car', x => {
+    if (x instanceof LispPair) return x.car;
+    if (Array.isArray(x) && x.length > 0) return x[0];
+    throw new LispError('car: not a pair');
+  });
+  env.define('cdr', x => {
+    if (x instanceof LispPair) return x.cdr;
+    if (Array.isArray(x)) return x.length > 1 ? x.slice(1) : NIL;
+    throw new LispError('cdr: not a pair');
+  });
+  env.define('list', (...args) => [...args]);
+  env.define('length', x => {
+    if (isNil(x)) return 0;
+    if (typeof x === 'string') return x.length;
+    if (Array.isArray(x)) return x.length;
+    if (typeof x === 'object') return Object.keys(x).length;
+    return 0;
+  });
+  env.define('append', (...lists) => {
+    const result = [];
+    for (const lst of lists) {
+      if (Array.isArray(lst)) result.push(...lst);
+      else if (!isNil(lst)) result.push(lst);
+    }
+    return result;
+  });
+  env.define('reverse', x => Array.isArray(x) ? [...x].reverse() : x);
+  env.define('nth', (lst, n) => Array.isArray(lst) ? lst[n] : NIL);
+  env.define('range', (...args) => {
+    let start=0, end=0, step=1;
+    if (args.length===1) end=args[0];
+    else if (args.length===2) { start=args[0]; end=args[1]; }
+    else { start=args[0]; end=args[1]; step=args[2]; }
+    const r = [];
+    if (step > 0) for (let i=start; i<end; i+=step) r.push(i);
+    else for (let i=start; i>end; i+=step) r.push(i);
+    return r;
+  });
+  env.define('flatten', function flatten(lst) {
+    if (!Array.isArray(lst)) return [lst];
+    const r = [];
+    for (const item of lst) {
+      if (Array.isArray(item)) r.push(...flatten(item));
+      else r.push(item);
+    }
+    return r;
+  });
+  env.define('sort', (lst, keyFn, reverse) => {
+    if (!Array.isArray(lst)) return lst;
+    const sorted = [...lst];
+    if (keyFn) {
+      sorted.sort((a,b) => {
+        const ka = callFn(keyFn, [a]);
+        const kb = callFn(keyFn, [b]);
+        if (ka < kb) return -1;
+        if (ka > kb) return 1;
+        return 0;
+      });
+    } else {
+      sorted.sort((a,b) => {
+        if (typeof a === 'number' && typeof b === 'number') return a - b;
+        return String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0;
+      });
+    }
+    if (reverse === true) sorted.reverse();
+    return sorted;
+  });
+  env.define('first', x => Array.isArray(x) && x.length > 0 ? x[0] : NIL);
+  env.define('last', x => Array.isArray(x) && x.length > 0 ? x[x.length-1] : NIL);
+  env.define('empty?', x => isNil(x) || (Array.isArray(x) && x.length===0) || (typeof x==='string' && x.length===0));
+  env.define('take', (lst,n) => Array.isArray(lst) ? lst.slice(0,n) : NIL);
+  env.define('drop', (lst,n) => Array.isArray(lst) ? lst.slice(n) : NIL);
+
+  // Higher-order
+  env.define('map', (fn, ...lists) => {
+    if (lists.length === 1) {
+      const lst = lists[0];
+      if (!Array.isArray(lst)) return NIL;
+      return lst.map(x => callFn(fn, [x]));
+    }
+    const minLen = Math.min(...lists.map(l => Array.isArray(l) ? l.length : 0));
+    const result = [];
+    for (let i = 0; i < minLen; i++) result.push(callFn(fn, lists.map(l => l[i])));
+    return result;
+  });
+  env.define('filter', (fn, lst) => {
+    if (!Array.isArray(lst)) return NIL;
+    return lst.filter(x => isTruthy(callFn(fn, [x])));
+  });
+  env.define('reduce', (fn, init, lst) => {
+    // Support both (reduce fn init lst) and (reduce fn lst)
+    if (lst === undefined) { lst = init; init = undefined; }
+    if (!Array.isArray(lst)) throw new LispError('reduce requires a list');
+    if (init !== undefined) return lst.reduce((acc, x) => callFn(fn, [acc, x]), init);
+    return lst.reduce((acc, x) => callFn(fn, [acc, x]));
+  });
+  env.define('for-each', (fn, lst) => {
+    if (Array.isArray(lst)) lst.forEach(x => callFn(fn, [x]));
+    return NIL;
+  });
+  env.define('apply', (fn, args) => callFn(fn, Array.isArray(args) ? args : [args]));
+
+  // Strings
+  env.define('string-append', (...args) => args.map(a => {
+    if (typeof a === 'number') return String(a);
+    if (isNil(a)) return '';
+    return String(a);
+  }).join(''));
+  env.define('string-length', s => String(s).length);
+  env.define('substring', (s, start, end) => end !== undefined ? String(s).slice(start, end) : String(s).slice(start));
+  env.define('string-split', (s, delim) => String(s).split(delim !== undefined ? delim : ' '));
+  env.define('string-join', (lst, sep) => {
+    if (!Array.isArray(lst)) return '';
+    return lst.map(x => {
+      if (typeof x === 'number') return String(x);
+      if (isNil(x)) return '';
+      return String(x);
+    }).join(sep !== undefined ? sep : ' ');
+  });
+  env.define('string-upcase', s => String(s).toUpperCase());
+  env.define('string-downcase', s => String(s).toLowerCase());
+  env.define('string-titlecase', s => String(s).replace(/\b\w/g, c => c.toUpperCase()));
+  env.define('string-replace', (s, old, nw) => String(s).split(old).join(nw));
+  env.define('string-contains?', (s, sub) => String(s).includes(sub));
+  env.define('string-ref', (s, i) => String(s)[i]);
+  env.define('string-trim', s => String(s).trim());
+  env.define('string-starts-with?', (s, pre) => String(s).startsWith(pre));
+  env.define('string-ends-with?', (s, suf) => String(s).endsWith(suf));
+
+  // Conversion
+  env.define('number->string', n => String(n));
+  env.define('string->number', s => { const n = Number(s); return isNaN(n) ? 0 : n; });
+  env.define('->string', x => typeof x === 'string' ? x : String(x));
+  env.define('->number', x => typeof x === 'number' ? x : Number(x));
+
+  // Number formatting
+  env.define('number-format', (n, fmt) => {
+    if (fmt === ',' || fmt === ':,') return Number(n).toLocaleString('en-US');
+    if (fmt === ',.0f' || fmt === ':,.0f') return Math.round(Number(n)).toLocaleString('en-US');
+    const m = String(fmt).match(/[,:]?\.(\d+)f/);
+    if (m) {
+      const digits = parseInt(m[1]);
+      const hasSep = fmt.includes(',');
+      if (hasSep) return Number(n).toLocaleString('en-US', {minimumFractionDigits:digits, maximumFractionDigits:digits});
+      return Number(n).toFixed(digits);
+    }
+    return String(n);
+  });
+
+  // Dicts
+  env.define('make-dict', (...pairs) => {
+    const d = {};
+    for (let i = 0; i < pairs.length; i += 2) d[String(pairs[i])] = pairs[i+1];
+    return d;
+  });
+  env.define('dict-get', (d, k, dflt) => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) {
+      const v = d[String(k)];
+      if (v !== undefined) return v;
+      return dflt !== undefined ? dflt : NIL;
+    }
+    if (Array.isArray(d) && typeof k === 'number') {
+      return k >= 0 && k < d.length ? d[k] : (dflt !== undefined ? dflt : NIL);
+    }
+    return dflt !== undefined ? dflt : NIL;
+  });
+  env.define('dict-set', (d, k, v) => {
+    if (typeof d !== 'object' || d === null || Array.isArray(d)) return d;
+    return {...d, [String(k)]: v};
+  });
+  env.define('dict-keys', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) return Object.keys(d);
+    return [];
+  });
+  env.define('dict-values', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d)) return Object.values(d);
+    return [];
+  });
+  env.define('dict-items', d => {
+    if (typeof d === 'object' && d !== null && !Array.isArray(d))
+      return Object.entries(d).map(([k,v]) => [k, v]);
+    return [];
+  });
+  env.define('dict-has?', (d, k) => typeof d === 'object' && d !== null && String(k) in d);
+  env.define('dict-merge', (...dicts) => Object.assign({}, ...dicts.filter(d => typeof d === 'object' && d !== null)));
+  env.define('dict-remove', (d, k) => {
+    if (typeof d !== 'object' || d === null) return d;
+    const r = {...d}; delete r[String(k)]; return r;
+  });
+
+  // I/O — all route through brainstemOutput
+  env.define('display', (...args) => { brainstemOutput(args.map(displayValue).join('')); return NIL; });
+  env.define('log', (...args) => { brainstemOutput(args.map(displayValue).join(' ')); return NIL; });
+  env.define('newline', () => { brainstemOutput('\n'); return NIL; });
+  env.define('format', (...args) => {
+    if (args.length === 0) return '';
+    let s = String(args[0]);
+    for (let i = 1; i < args.length; i++) s = s.replace('~a', displayValue(args[i]));
+    return s;
+  });
+  env.define('error', msg => { throw new LispError(String(msg)); });
+  env.define('print', x => { brainstemOutput(valueRepr(x)); return NIL; });
+  env.define('println', x => { brainstemOutput(displayValue(x) + '\n'); return NIL; });
+
+  // JSON
+  env.define('json->sexp', s => JSON.parse(s));
+  env.define('sexp->json', v => JSON.stringify(v, null, 2));
+
+  // Integer division
+  env.define('//', (a,b) => { if(b===0) throw new LispError('division by zero'); return Math.trunc(a/b); });
+
+  // Constants
+  env.define('#t', true);
+  env.define('#f', false);
+  env.define('nil', NIL);
+  env.define('pi', Math.PI);
+  env.define('e', Math.E);
+
+  // Misc
+  env.define('int', x => typeof x === 'number' ? Math.trunc(x) : parseInt(x) || 0);
+  env.define('float', x => typeof x === 'number' ? x : parseFloat(x) || 0);
+
+  return env;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 2: unrapp.js — Python-to-JS Transpiler (Hybrid Approach)
+//
+// Strategy: Python agent code is converted to JavaScript functions.
+// Data dicts become JS objects. Helper functions and class methods become
+// JS functions. Everything is injected into the LisPy environment as
+// callable builtins. The REPL can interact with all data and functions.
+// ═══════════════════════════════════════════════════════════════════════
+
+function unrappTranspile(pythonSource) {
+  const errors = [];
+  const t0 = performance.now();
+  let manifest = null;
+  let operations = [];
+  let dataObjects = {};
+  let jsFunctions = {}; // name -> JS function body string
+
+  try {
+    // Stage 1: Extract manifest
+    manifest = extractManifest(pythonSource);
+
+    // Stage 2: Extract module-level data dicts as JS objects
+    dataObjects = extractDataDicts(pythonSource);
+
+    // Stage 3: Find operations from dispatch/perform method
+    operations = extractOperations(pythonSource);
+
+    // Stage 4: Convert all Python functions to JavaScript
+    jsFunctions = convertFunctionsToJS(pythonSource, dataObjects);
+
+  } catch(e) {
+    errors.push(e.message);
+  }
+
+  // Build LisPy perform dispatcher
+  let lispy = '';
+  if (operations.length > 0) {
+    const lines = ['(define (perform kwargs)',
+      '  (let* ((op (dict-get kwargs "operation" "' + operations[0] + '")))'];
+    lines.push('    (cond');
+    for (const op of operations) {
+      lines.push(`      ((equal? op "${op}") (op-${op} kwargs))`);
+    }
+    lines.push('      (else (string-append "Unknown operation: " op))');
+    lines.push('    )))');
+    lispy = lines.join('\n');
+  }
+
+  const elapsed = performance.now() - t0;
+  return { lispy, manifest, operations, dataObjects, jsFunctions, errors, elapsed };
+}
+
+function extractManifest(src) {
+  const match = src.match(/__manifest__\s*=\s*\{/);
+  if (!match) return null;
+  let block = extractBracketBlock(src, match.index + match[0].length - 1, '{', '}');
+  block = pythonDictToJson(block);
+  // Handle parenthesized string concatenation: ("str1" "str2") -> "str1str2"
+  block = block.replace(/\(\s*"((?:[^"\\]|\\.)*)"\s*\)/g, '"$1"');
+  block = block.replace(/"((?:[^"\\]|\\.)*)"\s*\n\s*"((?:[^"\\]|\\.)*)"/g, '"$1$2"');
+  try { return JSON.parse(block); } catch(e) {
+    const m = {};
+    const nameMatch = src.match(/"name"\s*:\s*"([^"]+)"/);
+    if (nameMatch) m.name = nameMatch[1];
+    const descMatch = src.match(/"description"\s*:\s*"([^"]+)"/);
+    if (descMatch) m.description = descMatch[1];
+    const dispMatch = src.match(/"display_name"\s*:\s*"([^"]+)"/);
+    if (dispMatch) m.display_name = dispMatch[1];
+    return Object.keys(m).length > 0 ? m : null;
+  }
+}
+
+function extractOperations(src) {
+  const ops = [];
+  // Pattern 1: dispatch dict
+  const dispatchMatch = src.match(/dispatch\s*=\s*\{([^}]+)\}/);
+  if (dispatchMatch) {
+    for (const m of dispatchMatch[1].matchAll(/"(\w+)"\s*:/g)) ops.push(m[1]);
+  }
+  // Pattern 2: if/elif chain
+  if (ops.length === 0) {
+    for (const m of src.matchAll(/(?:if|elif)\s+op\s*==\s*"(\w+)"/g)) ops.push(m[1]);
+  }
+  // Pattern 3: enum
+  if (ops.length === 0) {
+    const enumMatch = src.match(/"enum"\s*:\s*\[([\s\S]*?)\]/);
+    if (enumMatch) for (const m of enumMatch[1].matchAll(/"(\w+)"/g)) ops.push(m[1]);
+  }
+  return ops;
+}
+
+// --- Bracket block extractor ---
+function extractBracketBlock(src, start, open, close) {
+  let depth = 0, i = start;
+  while (i < src.length) {
+    if (src[i] === open) depth++;
+    else if (src[i] === close) { depth--; if (depth === 0) break; }
+    else if (src[i] === '"' || src[i] === "'") {
+      const q = src[i]; i++;
+      while (i < src.length && src[i] !== q) { if (src[i] === '\\') i++; i++; }
+    }
+    else if (open === '{' && src[i] === '[') depth++;
+    else if (open === '{' && src[i] === ']') depth--;
+    else if (open === '[' && src[i] === '{') depth++;
+    else if (open === '[' && src[i] === '}') depth--;
+    i++;
+  }
+  return src.slice(start, i + 1);
+}
+
+// --- Python dict/list to JSON ---
+function pythonDictToJson(block) {
+  let result = '';
+  let inStr = false, strChar = '';
+  for (let i = 0; i < block.length; i++) {
+    const c = block[i];
+    if (inStr) {
+      if (c === '\\') { result += c + (block[i+1]||''); i++; continue; }
+      if (c === strChar) { result += '"'; inStr = false; continue; }
+      if (c === '"') { result += '\\"'; continue; }
+      result += c;
+    } else {
+      if (c === "'" || c === '"') { inStr = true; strChar = c; result += '"'; continue; }
+      result += c;
+    }
+  }
+  result = result.replace(/True/g, 'true').replace(/False/g, 'false').replace(/None/g, 'null');
+  result = result.replace(/,(\s*[}\]])/g, '$1');
+  result = result.replace(/\(([^()]*)\)/g, '[$1]');
+  // Strip Python numeric underscores: 2_800_000 -> 2800000
+  result = result.replace(/\b(\d[\d_]*\d)\b/g, m => m.replace(/_/g, ''));
+  return result;
+}
+
+// --- Extract data dicts as JS objects ---
+function extractDataDicts(src) {
+  const dataObjects = {};
+  // Dicts: UPPER_CASE or _UPPER_CASE = { ... }
+  for (const match of src.matchAll(/^(_?[A-Z][A-Z_0-9]+)\s*=\s*\{/gm)) {
+    if (match[1] === '__manifest__') continue;
+    const block = extractBracketBlock(src, match.index + match[0].length - 1, '{', '}');
+    try {
+      dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
+    } catch(e) {}
+  }
+  // Arrays: UPPER_CASE or _UPPER_CASE = [ ... ]
+  for (const match of src.matchAll(/^(_?[A-Z][A-Z_0-9]+)\s*=\s*\[/gm)) {
+    const block = extractBracketBlock(src, match.index + match[0].length - 1, '[', ']');
+    try {
+      dataObjects[match[1]] = JSON.parse(pythonDictToJson(block));
+    } catch(e) {}
+  }
+  return dataObjects;
+}
+
+// --- Convert Python functions to JavaScript ---
+function convertFunctionsToJS(src, dataObjects) {
+  const fns = {};
+  const lines = src.split('\n');
+
+  // Pass 1: Extract module-level helper functions (no indent or leading spaces < 4)
+  let i = 0;
+  let inClass = false;
+  let classIndent = -1;
+
+  // First, find class boundary
+  let classStart = -1, classEnd = lines.length;
+  for (let k = 0; k < lines.length; k++) {
+    if (lines[k].match(/^class\s+\w+/)) {
+      classStart = k;
+      classIndent = getIndent(lines[k]);
+      break;
+    }
+  }
+
+  // Extract module-level functions (before or outside class)
+  i = 0;
+  while (i < lines.length) {
+    const defMatch = lines[i].match(/^def\s+(\w+)\s*\(([^)]*)\)\s*(?:->.*)?:\s*$/);
+    if (defMatch) {
+      const name = defMatch[1];
+      const rawParams = defMatch[2];
+      const params = rawParams.split(',').map(p => p.trim()).filter(p => p && p !== 'self' && !p.startsWith('*'));
+      i++;
+      const bodyIndent = 4;
+      const bodyStart = i;
+      while (i < lines.length) {
+        if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+        if (lines[i].match(/\S/) && getIndent(lines[i]) < bodyIndent) break;
+        i++;
+      }
+      const bodyLines = lines.slice(bodyStart, i);
+      const jsBody = convertPythonBodyToJS(bodyLines, bodyIndent, dataObjects);
+      fns[name] = { params, body: jsBody, isHelper: true };
+      continue;
+    }
+    if (lines[i].match(/^class\s+\w+/)) break; // stop at class
+    i++;
+  }
+
+  // Pass 2: Extract class methods (inside class)
+  if (classStart >= 0) {
+    const methodIndent = classIndent + 4;
+    i = classStart + 1;
+    while (i < lines.length) {
+      const mRe = new RegExp(`^\\s{${methodIndent}}def\\s+(\\w+)\\s*\\(([^)]*)\\)\\s*(?:->.*)?:\\s*$`);
+      const defMatch = lines[i].match(mRe);
+      if (defMatch) {
+        const name = defMatch[1];
+        const rawParams = defMatch[2];
+
+        if (['__init__', 'perform'].includes(name)) { i++; continue; }
+
+        // Filter self, convert **kwargs to kwargs
+        const params = rawParams.split(',').map(p => p.trim().replace(/^\*\*/, '')).filter(p => p && p !== 'self');
+        i++;
+        const bodyIndent = methodIndent + 4;
+        const bodyStart = i;
+        while (i < lines.length) {
+          if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+          if (lines[i].match(/\S/) && getIndent(lines[i]) < bodyIndent) break;
+          i++;
+        }
+        const bodyLines = lines.slice(bodyStart, i);
+        const jsBody = convertPythonBodyToJS(bodyLines, bodyIndent, dataObjects);
+        const opName = name.startsWith('_') ? name.slice(1) : name;
+        fns['method_' + opName] = { params: params.length > 0 ? params : ['kwargs'], body: jsBody, isMethod: true };
+        continue;
+      }
+      i++;
+    }
+  }
+
+  return fns;
+}
+
+function getIndent(line) {
+  const m = line.match(/^(\s*)/);
+  return m ? m[1].length : 0;
+}
+
+function joinLogicalLines(bodyLines) {
+  // Join lines that are inside brackets (Python's implicit line continuation)
+  const logical = [];
+  let current = '';
+  let depth = 0;
+
+  for (const raw of bodyLines) {
+    if (raw.trim() === '' || raw.trim().startsWith('#')) {
+      if (depth === 0) { logical.push(raw); continue; }
+      continue;
+    }
+    if (depth === 0) {
+      if (current) logical.push(mergeImplicitStringConcat(current));
+      current = raw;
+    } else {
+      current += ' ' + raw.trim();
+    }
+    // Count brackets (skip inside strings)
+    let inStr = false, sc = '';
+    for (let k = 0; k < raw.length; k++) {
+      const c = raw[k];
+      if (inStr) { if (c === '\\') { k++; continue; } if (c === sc) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+      if (c === '(' || c === '[' || c === '{') depth++;
+      else if (c === ')' || c === ']' || c === '}') depth--;
+    }
+  }
+  if (current) logical.push(mergeImplicitStringConcat(current));
+  return logical;
+}
+
+function mergeImplicitStringConcat(line) {
+  // Python implicit string concatenation: "abc" "def" -> "abcdef", f"abc" f"def" -> f"abcdef"
+  // Handle: f"..." f"..." and "..." "..." patterns
+  line = line.replace(/"\s+f"/g, '');  // f"part1" f"part2" -> f"part1part2"
+  line = line.replace(/"\s+"/g, '');   // "part1" "part2" -> "part1part2"
+  return line;
+}
+
+function convertPythonBodyToJS(bodyLines, baseIndent, dataObjects) {
+  // First, join multi-line expressions
+  bodyLines = joinLogicalLines(bodyLines);
+
+  const jsLines = [];
+  const dataNames = Object.keys(dataObjects || {});
+
+  for (let i = 0; i < bodyLines.length; i++) {
+    const raw = bodyLines[i];
+    if (raw.trim() === '' || raw.trim().startsWith('#')) continue;
+    // Skip docstrings (triple-quoted strings as statements)
+    if (raw.trim().startsWith('"""') || raw.trim().startsWith("'''")) {
+      const q = raw.trim().slice(0, 3);
+      if (raw.trim().endsWith(q) && raw.trim().length > 6) continue; // single-line docstring
+      // Multi-line: skip until closing triple-quote
+      i++;
+      while (i < bodyLines.length && !bodyLines[i].includes(q)) i++;
+      continue;
+    }
+    const indent = getIndent(raw);
+    const line = raw.trim();
+    const relIndent = Math.max(0, indent - baseIndent);
+    const pad = '  '.repeat(relIndent / 4 + 1);
+
+    // for k, v in DICT.items():
+    const forItemsMatch = line.match(/^for\s+(\w+),\s*(\w+)\s+in\s+(\w+)\.items\(\)\s*:$/);
+    if (forItemsMatch) {
+      const [, k, v, dict] = forItemsMatch;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const [${k}, ${v}] of Object.entries(${dictRef})) {`);
+      // Collect body
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      const innerJS = convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects);
+      jsLines.push(innerJS);
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in DICT.values():
+    const forValuesMatch = line.match(/^for\s+(\w+)\s+in\s+(\w+)\.values\(\)\s*:$/);
+    if (forValuesMatch) {
+      const [, v, dict] = forValuesMatch;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const ${v} of Object.values(${dictRef})) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in sorted(DICT.keys()):
+    const forSortedKeys = line.match(/^for\s+(\w+)\s+in\s+sorted\((\w+)\.keys\(\)\)\s*:$/);
+    if (forSortedKeys) {
+      const [, v, dict] = forSortedKeys;
+      const dictRef = dataNames.includes(dict) ? `DATA.${dict}` : dict;
+      jsLines.push(`${pad}for (const ${v} of Object.keys(${dictRef}).sort()) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for k, v in list (tuple unpacking from non-.items() source)
+    const forTupleMatch = line.match(/^for\s+(\w+),\s*(\w+)\s+in\s+(.+)\s*:$/);
+    if (forTupleMatch) {
+      const [, k, v, iter] = forTupleMatch;
+      jsLines.push(`${pad}for (const [${k}, ${v}] of ${pyExprToJS(iter, dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // for x in list/sorted(list):
+    const forMatch = line.match(/^for\s+(\w+)\s+in\s+(.+)\s*:$/);
+    if (forMatch) {
+      const [, v, iter] = forMatch;
+      jsLines.push(`${pad}for (const ${v} of ${pyExprToJS(iter, dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // if/elif/else
+    const ifMatch = line.match(/^if\s+(.+)\s*:$/);
+    if (ifMatch) {
+      jsLines.push(`${pad}if (${pyCondToJS(ifMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    const elifMatch = line.match(/^elif\s+(.+)\s*:$/);
+    if (elifMatch) {
+      // Remove last closing brace and add else if
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} else if (${pyCondToJS(elifMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    if (line === 'else:') {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} else {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // try/except → try/catch
+    if (line === 'try:') {
+      jsLines.push(`${pad}try {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    const exceptMatch = line.match(/^except(?:\s+[\w.,() ]+?)?(?:\s+as\s+(\w+))?\s*:$/);
+    if (exceptMatch) {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      const errVar = exceptMatch[1] || 'e';
+      jsLines.push(`${pad}} catch(${errVar}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+    if (line === 'finally:') {
+      if (jsLines.length > 0 && jsLines[jsLines.length-1].trim() === '}') jsLines.pop();
+      jsLines.push(`${pad}} finally {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // while loop
+    const whileMatch = line.match(/^while\s+(.+)\s*:$/);
+    if (whileMatch) {
+      jsLines.push(`${pad}while (${pyCondToJS(whileMatch[1], dataNames)}) {`);
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // with statement → just execute the body (skip resource management)
+    if (line.startsWith('with ')) {
+      const bodyEnd = collectBlock(bodyLines, i + 1, indent + 4);
+      jsLines.push(`${pad}/* with */ {`);
+      jsLines.push(convertPythonBodyToJS(bodyLines.slice(i + 1, bodyEnd), indent + 4, dataObjects));
+      jsLines.push(`${pad}}`);
+      i = bodyEnd - 1;
+      continue;
+    }
+
+    // pass, continue, break, import
+    if (line === 'pass') continue;
+    if (line === 'continue') { jsLines.push(`${pad}continue;`); continue; }
+    if (line === 'break') { jsLines.push(`${pad}break;`); continue; }
+    if (line.startsWith('import ') || line.startsWith('from ')) continue;
+
+    // raise → throw
+    if (line.startsWith('raise ')) {
+      jsLines.push(`${pad}throw new Error(${pyExprToJS(line.slice(6), dataNames)});`);
+      continue;
+    }
+
+    // return
+    if (line.startsWith('return ')) {
+      jsLines.push(`${pad}return ${pyExprToJS(line.slice(7), dataNames)};`);
+      continue;
+    }
+    if (line === 'return') { jsLines.push(`${pad}return;`); continue; }
+
+    // list.append(x)
+    const appendMatch = line.match(/^(\w+)\.append\((.+)\)$/);
+    if (appendMatch) {
+      jsLines.push(`${pad}${appendMatch[1]}.push(${pyExprToJS(appendMatch[2], dataNames)});`);
+      continue;
+    }
+
+    // list.sort(key=...)
+    const sortMatch = line.match(/^(\w+)\.sort\(key=lambda\s+(\w+):\s*(.+?)(?:,\s*reverse=(\w+))?\)$/);
+    if (sortMatch) {
+      const rev = sortMatch[4] === 'True' ? '.reverse()' : '';
+      jsLines.push(`${pad}${sortMatch[1]}.sort((a,b) => { const ka = ${pyExprToJS(sortMatch[3].replace(new RegExp(sortMatch[2],'g'), 'a'), dataNames)}; const kb = ${pyExprToJS(sortMatch[3].replace(new RegExp(sortMatch[2],'g'), 'b'), dataNames)}; return ka < kb ? -1 : ka > kb ? 1 : 0; })${rev};`);
+      continue;
+    }
+
+    // Dict key augmented assignment: d["key"] += x or d[var] += x
+    const dictAugAssign = line.match(/^(\w+)\[(.+?)\]\s*(\+=|-=|\*=|\/=)\s*(.+)$/);
+    if (dictAugAssign) {
+      const obj = dataNames.includes(dictAugAssign[1]) ? `DATA.${dictAugAssign[1]}` : dictAugAssign[1];
+      const key = pyExprToJS(dictAugAssign[2], dataNames);
+      jsLines.push(`${pad}${obj}[${key}] ${dictAugAssign[3]} ${pyExprToJS(dictAugAssign[4], dataNames)};`);
+      continue;
+    }
+
+    // Dict key assignment: d["key"] = expr or d[var] = expr
+    const dictAssign = line.match(/^(\w+)\[(.+?)\]\s*=\s*(.+)$/);
+    if (dictAssign) {
+      const obj = dataNames.includes(dictAssign[1]) ? `DATA.${dictAssign[1]}` : dictAssign[1];
+      const key = pyExprToJS(dictAssign[2], dataNames);
+      jsLines.push(`${pad}${obj}[${key}] = ${pyExprToJS(dictAssign[3], dataNames)};`);
+      continue;
+    }
+
+    // total_cost += x
+    const augAssign = line.match(/^(\w+)\s*(\+=|-=|\*=|\/=)\s*(.+)$/);
+    if (augAssign) {
+      jsLines.push(`${pad}${augAssign[1]} ${augAssign[2]} ${pyExprToJS(augAssign[3], dataNames)};`);
+      continue;
+    }
+
+    // Assignment: x = expr
+    const assignMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
+    if (assignMatch) {
+      const varName = assignMatch[1];
+      const val = pyExprToJS(assignMatch[2], dataNames);
+      jsLines.push(`${pad}let ${varName} = ${val};`);
+      continue;
+    }
+
+    // Pass-through (function calls etc)
+    jsLines.push(`${pad}${pyExprToJS(line, dataNames)};`);
+  }
+
+  return jsLines.join('\n');
+}
+
+function collectBlock(lines, start, minIndent) {
+  let i = start;
+  while (i < lines.length) {
+    if (lines[i].trim() === '' || lines[i].trim().startsWith('#')) { i++; continue; }
+    if (getIndent(lines[i]) < minIndent) break;
+    i++;
+  }
+  return i;
+}
+
+// Convert a Python expression to JavaScript
+let _pyExprDepth = 0;
+function pyExprToJS(expr, dataNames) {
+  if (!expr) return 'null';
+  expr = expr.trim();
+  if (++_pyExprDepth > 80) { _pyExprDepth--; return expr; }
+  try {
+  return _pyExprToJSInner(expr, dataNames);
+  } finally { _pyExprDepth--; }
+}
+function _pyExprToJSInner(expr, dataNames) {
+
+  // Remove trailing comment
+  const ci = expr.indexOf(' #');
+  if (ci > 0) {
+    let inStr = false, sc = '';
+    for (let k = 0; k < ci; k++) {
+      if (!inStr && (expr[k]==='"'||expr[k]==="'")) { inStr=true; sc=expr[k]; }
+      else if (inStr && expr[k]===sc) inStr=false;
+    }
+    if (!inStr) expr = expr.slice(0, ci).trim();
+  }
+
+  if (expr === 'None') return 'null';
+  if (expr === 'True') return 'true';
+  if (expr === 'False') return 'false';
+
+  // Python `or` / `and` at depth 0 → JS `||` / `&&`
+  {
+    const boolParts = splitBoolOp(expr);
+    if (boolParts) {
+      const jsOp = boolParts.op === 'or' ? '||' : '&&';
+      return boolParts.parts.map(p => pyExprToJS(p.trim(), dataNames)).join(` ${jsOp} `);
+    }
+  }
+
+  // f-string -> template literal
+  if (expr.startsWith('f"') || expr.startsWith("f'")) {
+    return pyFStringToJS(expr, dataNames);
+  }
+
+  // String
+  if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+    return '"' + expr.slice(1, -1).replace(/"/g, '\\"') + '"';
+  }
+
+  // Number
+  if (/^-?\d+(\.\d+)?$/.test(expr)) return expr;
+
+  // Tuple literal (a, b) -> [a, b], or parenthesized expression (expr) -> expr
+  // Only if the opening ( matches the closing ) (they form a pair)
+  if (expr.startsWith('(') && expr.endsWith(')') && !expr.match(/^\w+\(/) && isMatchingParens(expr)) {
+    const inner = expr.slice(1, -1).trim();
+    const parts = splitComma(inner);
+    if (parts.length >= 2) {
+      return `[${parts.map(p => pyExprToJS(p.trim(), dataNames)).join(', ')}]`;
+    }
+    // Single-element parens: strip and recurse, preserving grouping
+    if (parts.length === 1) {
+      return `(${pyExprToJS(inner, dataNames)})`;
+    }
+  }
+
+  // List literal: [x for y in z] or [a, b, c]
+  if (expr.startsWith('[') && expr.endsWith(']')) {
+    const inner = expr.slice(1, -1).trim();
+    if (!inner) return '[]';
+    // List comprehension
+    const compMatch = inner.match(/^(.+)\s+for\s+(\w+)\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (compMatch) {
+      let src = pyExprToJS(compMatch[3], dataNames);
+      if (compMatch[4]) src = `${src}.filter(${compMatch[2]} => ${pyCondToJS(compMatch[4], dataNames)})`;
+      return `${src}.map(${compMatch[2]} => ${pyExprToJS(compMatch[1], dataNames)})`;
+    }
+    const items = splitComma(inner).map(x => pyExprToJS(x.trim(), dataNames));
+    return `[${items.join(', ')}]`;
+  }
+
+  // Dict literal: {k: v, ...} or dict comprehension {k: v for x in y}
+  if (expr.startsWith('{') && expr.endsWith('}')) {
+    const inner = expr.slice(1, -1).trim();
+    if (!inner) return '{}';
+    // Dict comprehension: {keyExpr: valExpr for var in iter}
+    // Guard: only match if no commas at depth 0 before the `for` (otherwise it's a plain dict with a gen-expr value)
+    const dictCompMatch = inner.match(/^(.+?)\s*:\s*(.+?)\s+for\s+(\w+),?\s*(\w+)?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (dictCompMatch && splitComma(dictCompMatch[1] + ':' + dictCompMatch[2]).length === 1) {
+      const [, kExpr, vExpr, v1, v2, iterExpr, filterExpr] = dictCompMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      // Check if iterating over .items()
+      if (v2) {
+        // for k, v in dict.items() pattern
+        let base = `Object.fromEntries(Object.entries(${src}).map(([${v1}, ${v2}]) => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        if (filterExpr) base = `Object.fromEntries(Object.entries(${src}).filter(([${v1}, ${v2}]) => ${pyCondToJS(filterExpr, dataNames)}).map(([${v1}, ${v2}]) => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        return base + ')';
+      } else {
+        let base = `Object.fromEntries(${src}.map(${v1} => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        if (filterExpr) base = `Object.fromEntries(${src}.filter(${v1} => ${pyCondToJS(filterExpr, dataNames)}).map(${v1} => [${pyExprToJS(kExpr, dataNames)}, ${pyExprToJS(vExpr, dataNames)}])`;
+        return base + ')';
+      }
+    }
+    const pairs = splitComma(inner).map(p => {
+      p = p.trim();
+      // Dict unpacking: **expr → ...expr (JS spread)
+      if (p.startsWith('**')) return `...${pyExprToJS(p.slice(2).trim(), dataNames)}`;
+      const [k, v] = splitFirst(p, ':');
+      return `${pyExprToJS(k.trim(), dataNames)}: ${pyExprToJS(v.trim(), dataNames)}`;
+    });
+    return `{${pairs.join(', ')}}`;
+  }
+
+  // Ternary: a if cond else b — only match if/else at bracket depth 0
+  {
+    const ternParts = splitTernary(expr);
+    if (ternParts) {
+      return `(${pyCondToJS(ternParts.cond, dataNames)} ? ${pyExprToJS(ternParts.value, dataNames)} : ${pyExprToJS(ternParts.alt, dataNames)})`;
+    }
+  }
+
+  // sum(gen_expr)
+  const sumMatch = expr.match(/^sum\((.+)\)$/);
+  if (sumMatch) {
+    const inner = sumMatch[1].trim();
+    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)(?:,\s*(\w+))?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (genMatch) {
+      const [, mapExpr, v1, v2, iterExpr, filterExpr] = genMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      if (v2) src = `Object.entries(${src})`;
+      const param = v2 ? `([${v1},${v2}])` : v1;
+      if (filterExpr) src = `${src}.filter(${param} => ${pyCondToJS(filterExpr, dataNames)})`;
+      return `${src}.map(${param} => ${pyExprToJS(mapExpr, dataNames)}).reduce((a,b) => a+b, 0)`;
+    }
+    return `${pyExprToJS(inner, dataNames)}.reduce((a,b) => a+b, 0)`;
+  }
+
+  // sorted(x, key=lambda y: expr, reverse=True/False)
+  const sortedMatch = expr.match(/^sorted\((.+?),\s*key=lambda\s+(\w+):\s*(.+?)(?:,\s*reverse=(\w+))?\)$/);
+  if (sortedMatch) {
+    const arr = pyExprToJS(sortedMatch[1], dataNames);
+    const v = sortedMatch[2];
+    const keyExpr = pyExprToJS(sortedMatch[3], dataNames);
+    const rev = sortedMatch[4] === 'True';
+    const cmp = rev
+      ? `(a,b) => { const ka=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'a')}; const kb=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'b')}; return kb<ka?-1:kb>ka?1:0; }`
+      : `(a,b) => { const ka=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'a')}; const kb=${keyExpr.replace(new RegExp('\\b'+v+'\\b','g'),'b')}; return ka<kb?-1:ka>kb?1:0; }`;
+    return `[...${arr}].sort(${cmp})`;
+  }
+
+  // sorted(x)
+  const sortedSimple = expr.match(/^sorted\((.+)\)$/);
+  if (sortedSimple) return `[...${pyExprToJS(sortedSimple[1], dataNames)}].sort()`;
+
+  // len(x)
+  const lenMatch = expr.match(/^len\((.+)\)$/);
+  if (lenMatch) return `${pyExprToJS(lenMatch[1], dataNames)}.length`;
+
+  // round(x, n)
+  const roundMatch = expr.match(/^round\((.+?),\s*(.+)\)$/);
+  if (roundMatch) return `Math.round(${pyExprToJS(roundMatch[1], dataNames)} * Math.pow(10, ${roundMatch[2]})) / Math.pow(10, ${roundMatch[2]})`;
+  const roundMatch2 = expr.match(/^round\((.+)\)$/);
+  if (roundMatch2) return `Math.round(${pyExprToJS(roundMatch2[1], dataNames)})`;
+
+  // max(a, b) / min(a, b) / max(expr for x in y)
+  const maxMinMatch = expr.match(/^(max|min)\((.+)\)$/);
+  if (maxMinMatch) {
+    const inner = maxMinMatch[2].trim();
+    // Generator expression: max(expr for x in y [if cond])
+    const genMatch = inner.match(/^(.+)\s+for\s+(\w+)(?:,\s*(\w+))?\s+in\s+(.+?)(?:\s+if\s+(.+))?$/);
+    if (genMatch) {
+      const [, mapExpr, v1, v2, iterExpr, filterExpr] = genMatch;
+      let src = pyExprToJS(iterExpr, dataNames);
+      if (v2) src = `Object.entries(${src})`;
+      if (filterExpr) src = `${src}.filter(${v2 ? `([${v1},${v2}])` : v1} => ${pyCondToJS(filterExpr, dataNames)})`;
+      const param = v2 ? `([${v1},${v2}])` : v1;
+      return `Math.${maxMinMatch[1]}(...${src}.map(${param} => ${pyExprToJS(mapExpr, dataNames)}))`;
+    }
+    const args = splitComma(inner).map(a => pyExprToJS(a.trim(), dataNames));
+    return `Math.${maxMinMatch[1]}(${args.join(', ')})`;
+  }
+
+  // int(x)
+  const intMatch = expr.match(/^int\((.+)\)$/);
+  if (intMatch) return `Math.trunc(${pyExprToJS(intMatch[1], dataNames)})`;
+
+  // str(x)
+  const strMatch = expr.match(/^str\((.+)\)$/);
+  if (strMatch) return `String(${pyExprToJS(strMatch[1], dataNames)})`;
+
+  // all(cond for x in list)
+  const allMatch = expr.match(/^all\((.+)\s+for\s+(\w+)\s+in\s+(.+)\)$/);
+  if (allMatch) return `${pyExprToJS(allMatch[3], dataNames)}.every(${allMatch[2]} => ${pyCondToJS(allMatch[1], dataNames)})`;
+
+  // any(cond for x in list)
+  const anyMatch = expr.match(/^any\((.+)\s+for\s+(\w+)\s+in\s+(.+)\)$/);
+  if (anyMatch) return `${pyExprToJS(anyMatch[3], dataNames)}.some(${anyMatch[2]} => ${pyCondToJS(anyMatch[1], dataNames)})`;
+
+  // Method chains — handle from left to right
+  // x.items()
+  if (expr.endsWith('.items()')) {
+    const obj = expr.slice(0, -8);
+    return `Object.entries(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.values()')) {
+    const obj = expr.slice(0, -9);
+    return `Object.values(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.keys()')) {
+    const obj = expr.slice(0, -7);
+    return `Object.keys(${pyExprToJS(obj, dataNames)})`;
+  }
+  if (expr.endsWith('.title()')) {
+    const s = expr.slice(0, -8);
+    return `${pyExprToJS(s, dataNames)}.replace(/\\b\\w/g, c => c.toUpperCase())`;
+  }
+  if (expr.endsWith('.upper()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.toUpperCase()`;
+  }
+  if (expr.endsWith('.lower()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.toLowerCase()`;
+  }
+  if (expr.endsWith('.strip()')) {
+    return `${pyExprToJS(expr.slice(0, -8), dataNames)}.trim()`;
+  }
+
+  if (expr.endsWith('.lstrip()')) return `${pyExprToJS(expr.slice(0, -9), dataNames)}.trimStart()`;
+  if (expr.endsWith('.rstrip()')) return `${pyExprToJS(expr.slice(0, -9), dataNames)}.trimEnd()`;
+
+  // x.lstrip("#") → trimStart equivalent with char
+  const lstripMatch = expr.match(/^(.+)\.lstrip\((.+)\)$/);
+  if (lstripMatch) return `${pyExprToJS(lstripMatch[1], dataNames)}.replace(new RegExp('^[' + ${pyExprToJS(lstripMatch[2], dataNames)} + ']+'), '')`;
+
+  // x.startswith("a") / x.endswith("a")
+  const swMatch = expr.match(/^(.+)\.(startswith|endswith)\((.+)\)$/);
+  if (swMatch) {
+    const method = swMatch[2] === 'startswith' ? 'startsWith' : 'endsWith';
+    return `${pyExprToJS(swMatch[1], dataNames)}.${method}(${pyExprToJS(swMatch[3], dataNames)})`;
+  }
+
+  // x.index(val) → indexOf
+  const indexMatch = expr.match(/^(.+)\.index\((.+)\)$/);
+  if (indexMatch) return `${pyExprToJS(indexMatch[1], dataNames)}.indexOf(${pyExprToJS(indexMatch[2], dataNames)})`;
+
+  // x.split("a") / x.split()
+  const splitMatch = expr.match(/^(.+)\.split\(([^)]*)\)$/);
+  if (splitMatch) {
+    const obj = pyExprToJS(splitMatch[1], dataNames);
+    const arg = splitMatch[2].trim();
+    return arg ? `${obj}.split(${pyExprToJS(arg, dataNames)})` : `${obj}.split(/\\s+/)`;
+  }
+
+  // x.replace("a", "b")
+  const replaceMatch = expr.match(/^(.+)\.replace\(([^,]+),\s*([^)]+)\)$/);
+  if (replaceMatch) return `${pyExprToJS(replaceMatch[1], dataNames)}.split(${pyExprToJS(replaceMatch[2], dataNames)}).join(${pyExprToJS(replaceMatch[3], dataNames)})`;
+
+  // "sep".join(list)
+  const joinMatch = expr.match(/^(["'][^"']*["'])\.join\((.+)\)$/);
+  if (joinMatch) return `${pyExprToJS(joinMatch[2], dataNames)}.join(${pyExprToJS(joinMatch[1], dataNames)})`;
+
+  // var.join(list)
+  const varJoinMatch = expr.match(/^(\w+)\.join\((.+)\)$/);
+  if (varJoinMatch && !dataNames.includes(varJoinMatch[1])) {
+    return `${pyExprToJS(varJoinMatch[2], dataNames)}.join(${varJoinMatch[1]})`;
+  }
+
+  // x.get("key", default) — dict access with default
+  // Use bracket-aware parsing to handle nested .get() calls properly
+  {
+    const getPos = findMethodCall(expr, 'get');
+    if (getPos) {
+      const obj = pyExprToJS(getPos.receiver, dataNames);
+      const args = splitComma(getPos.args);
+      const key = pyExprToJS(args[0].trim(), dataNames);
+      const dflt = args.length > 1 ? pyExprToJS(args.slice(1).join(',').trim(), dataNames) : 'undefined';
+      // If there's a suffix (chained .get()), handle it
+      let result = `(${obj}[${key}] !== undefined ? ${obj}[${key}] : ${dflt})`;
+      if (getPos.suffix) {
+        result = pyExprToJS(result + getPos.suffix, dataNames);
+      }
+      return result;
+    }
+  }
+
+  // Binary operators — must check BEFORE dict chain to avoid
+  // 'c in t["x"]' being parsed as dict access on 'c in t'
+
+  // Handle 'not' prefix
+  if (expr.startsWith('not ')) return `!(${pyCondToJS(expr.slice(4), dataNames)})`;
+
+  // 'x not in y' membership
+  const notInMatch = expr.match(/^(.+?)\s+not\s+in\s+(.+)$/);
+  if (notInMatch) {
+    const item = pyExprToJS(notInMatch[1], dataNames);
+    const collection = pyExprToJS(notInMatch[2], dataNames);
+    return `!(Array.isArray(${collection}) ? ${collection}.includes(${item}) : String(${collection}).includes(String(${item})))`;
+  }
+
+  // 'x in y' membership
+  const inMatch = expr.match(/^(.+?)\s+in\s+(.+)$/);
+  if (inMatch && !inMatch[1].includes(' for ') && !inMatch[1].includes(' if ')) {
+    const item = pyExprToJS(inMatch[1], dataNames);
+    const collection = pyExprToJS(inMatch[2], dataNames);
+    return `(Array.isArray(${collection}) ? ${collection}.includes(${item}) : String(${collection}).includes(String(${item})))`;
+  }
+
+  // Comparison operators (==, !=, <, >, <=, >=, is, is not) — route through pyCondToJS
+  // Only match at bracket depth 0 to avoid matching inside generated subexpressions
+  {
+    // Note: ' is not ' and ' is ' require word-char boundary check to avoid matching inside words
+    const cmpOps = [' is not ', ' is ', ' !== ', ' != ', ' === ', ' == ', ' <= ', ' >= ', ' < ', ' > '];
+    let cmpInStr = false, cmpSc = '', cmpDepth = 0;
+    let foundCmp = false;
+    for (let ci = 0; ci < expr.length && !foundCmp; ci++) {
+      const c = expr[ci];
+      if (cmpInStr) { if (c === '\\') { ci++; continue; } if (c === cmpSc) cmpInStr = false; continue; }
+      if (c === '"' || c === "'") { cmpInStr = true; cmpSc = c; continue; }
+      if ('([{'.includes(c)) { cmpDepth++; continue; }
+      if (')]}'.includes(c)) { cmpDepth--; continue; }
+      if (cmpDepth === 0) {
+        for (const op of cmpOps) {
+          if (expr.slice(ci, ci + op.length) === op) {
+            foundCmp = true; break;
+          }
+        }
+      }
+    }
+    if (foundCmp) return pyCondToJS(expr, dataNames);
+  }
+
+  // Binary arithmetic: split on +, -, *, / at depth 0
+  {
+    const binOp = splitBinaryOp(expr);
+    if (binOp) {
+      const l = pyExprToJS(binOp.left, dataNames);
+      const r = pyExprToJS(binOp.right, dataNames);
+      if (binOp.op === '//') return 'Math.floor(' + l + ' / ' + r + ')';
+      if (binOp.op === '**') return `Math.pow(${l}, ${r})`;
+      return `${l} ${binOp.op} ${r}`;
+    }
+  }
+
+  // Python slice: expr[start:end] -> expr.slice(start, end) — supports expressions, not just numbers
+  {
+    // Find the last [...] and check if it contains a colon at depth 0 (it's a slice)
+    const lastBracket = expr.lastIndexOf(']');
+    if (lastBracket === expr.length - 1) {
+      // Find matching [
+      let depth = 0, bi = lastBracket;
+      while (bi >= 0) {
+        if (expr[bi] === ']') depth++;
+        else if (expr[bi] === '[') { depth--; if (depth === 0) break; }
+        bi--;
+      }
+      if (bi > 0) {
+        const inside = expr.slice(bi + 1, lastBracket);
+        // Check for colon at depth 0 inside the brackets (slice indicator)
+        let hasSlice = false, d = 0, colonPos = -1, inS = false, sC = '';
+        for (let k = 0; k < inside.length; k++) {
+          const c = inside[k];
+          if (inS) { if (c === '\\') k++; else if (c === sC) inS = false; continue; }
+          if (c === '"' || c === "'") { inS = true; sC = c; continue; }
+          if ('([{'.includes(c)) d++;
+          else if (')]}'.includes(c)) d--;
+          else if (c === ':' && d === 0) { hasSlice = true; colonPos = k; break; }
+        }
+        if (hasSlice) {
+          const obj = pyExprToJS(expr.slice(0, bi), dataNames);
+          const startExpr = inside.slice(0, colonPos).trim();
+          const endExpr = inside.slice(colonPos + 1).trim();
+          const jsStart = startExpr ? pyExprToJS(startExpr, dataNames) : '0';
+          const jsEnd = endExpr ? pyExprToJS(endExpr, dataNames) : '';
+          return jsEnd ? `${obj}.slice(${jsStart}, ${jsEnd})` : `${obj}.slice(${jsStart})`;
+        }
+      }
+    }
+  }
+
+  // dict[key] access — bracket-aware chained parsing
+  {
+    const bracketAccess = splitBracketAccess(expr);
+    if (bracketAccess) {
+      const obj = pyExprToJS(bracketAccess.obj, dataNames);
+      const key = pyExprToJS(bracketAccess.key, dataNames);
+      const suffix = bracketAccess.suffix;
+      let result = `${obj}[${key}]`;
+      if (suffix) result = pyExprToJS(result + suffix, dataNames);
+      return result;
+    }
+  }
+
+  // Simple variable — check if it's a data reference
+  if (/^\w+$/.test(expr)) {
+    if (dataNames.includes(expr)) return `DATA.${expr}`;
+    return expr;
+  }
+
+  // Attribute access: x.y (not a method call)
+  if (/^\w+\.\w+$/.test(expr) && !expr.endsWith(')')) {
+    const [obj, attr] = expr.split('.');
+    if (dataNames.includes(obj)) return `DATA.${obj}.${attr}`;
+    return expr;
+  }
+
+  // Function call: name(args)
+  const callMatch = expr.match(/^(\w+)\((.*)?\)$/);
+  if (callMatch) {
+    const fn = callMatch[1];
+    const argsStr = callMatch[2] || '';
+    if (fn === 'print') return `/* print */ void 0`;
+    const args = argsStr ? splitComma(argsStr).map(a => pyExprToJS(a.trim(), dataNames)).join(', ') : '';
+    // Python builtins -> PY.name()
+    const pyBuiltins = ['len','int','float','str','list','sorted','sum','max','min','abs','round','range','all','any','dict','enumerate','zip','isinstance','type','bool','tuple','set'];
+    if (pyBuiltins.includes(fn)) return `PY.${fn}(${args})`;
+    // Known helper -> HELPERS.name()
+    return `HELPERS.${fn}(${args})`;
+  }
+
+  // Fallback — return as-is
+  return expr;
+}
+
+function pyCondToJS(cond, dataNames) {
+  cond = cond.trim();
+  // and/or
+  const andParts = cond.split(/\s+and\s+/);
+  if (andParts.length > 1) return andParts.map(p => pyCondToJS(p, dataNames)).join(' && ');
+  const orParts = cond.split(/\s+or\s+/);
+  if (orParts.length > 1) return orParts.map(p => pyCondToJS(p, dataNames)).join(' || ');
+  // not
+  if (cond.startsWith('not ')) return `!(${pyCondToJS(cond.slice(4), dataNames)})`;
+  // Comparisons — check longer operators first to avoid partial matches (e.g. !== vs !=)
+  // Use \b word boundaries for `is`/`is not` to avoid matching inside words like "history"
+  const cmpMatch = cond.match(/^(.+?)\s*(!==|===|\bis not\b|\bis\b|==|!=|<=|>=|<|>)\s*(.+)$/);
+  if (cmpMatch) {
+    const l = pyExprToJS(cmpMatch[1], dataNames);
+    const r = pyExprToJS(cmpMatch[3], dataNames);
+    const op = cmpMatch[2] === '==' ? '===' : cmpMatch[2] === '!=' ? '!==' : cmpMatch[2] === 'is not' ? '!==' : cmpMatch[2] === 'is' ? '===' : cmpMatch[2];
+    return `${l} ${op} ${r}`;
+  }
+  // in
+  const inMatch = cond.match(/^(.+?)\s+in\s+(.+)$/);
+  if (inMatch && !inMatch[1].includes(' for ')) {
+    return pyExprToJS(`${inMatch[1]} in ${inMatch[2]}`, dataNames);
+  }
+  return pyExprToJS(cond, dataNames);
+}
+
+function pyFStringToJS(fstr, dataNames) {
+  const inner = fstr.slice(2, -1);
+  let result = '`';
+  let i = 0;
+  while (i < inner.length) {
+    if (inner[i] === '{') {
+      i++;
+      let depth = 1, expr = '';
+      while (i < inner.length && depth > 0) {
+        if (inner[i] === '{') depth++;
+        else if (inner[i] === '}') { depth--; if (depth === 0) break; }
+        expr += inner[i]; i++;
+      }
+      i++; // skip }
+      // Format spec — find last colon at bracket depth 0 (skip colons in dicts/slices)
+      let colonIdx = -1;
+      { let d=0, inS=false, sC='';
+        for (let k=0; k<expr.length; k++) {
+          const c = expr[k];
+          if (inS) { if (c==='\\') k++; else if (c===sC) inS=false; continue; }
+          if (c==='"'||c==="'") { inS=true; sC=c; continue; }
+          if ('([{'.includes(c)) d++;
+          else if (')]}'.includes(c)) d--;
+          else if (c===':' && d===0) colonIdx = k;
+        }
+      }
+      if (colonIdx > 0) {
+        const varPart = expr.slice(0, colonIdx);
+        const fmt = expr.slice(colonIdx + 1);
+        if (fmt === ',') {
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toLocaleString('en-US')` + '}';
+        } else if (fmt.match(/^,\.\d+f$/)) {
+          const d = fmt.match(/\.(\d+)f/)[1];
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toLocaleString('en-US',{minimumFractionDigits:${d},maximumFractionDigits:${d}})` + '}';
+        } else if (fmt.match(/^\.\d+f$/)) {
+          const d = fmt.match(/\.(\d+)f/)[1];
+          result += '${' + `Number(${pyExprToJS(varPart, dataNames)}).toFixed(${d})` + '}';
+        } else if (fmt === ',.0f') {
+          result += '${' + `Math.round(Number(${pyExprToJS(varPart, dataNames)})).toLocaleString('en-US')` + '}';
+        } else if (fmt.match(/^\.0f$/)) {
+          result += '${' + `Math.round(${pyExprToJS(varPart, dataNames)})` + '}';
+        } else if (fmt.match(/^\.\d*%$/)) {
+          // Percentage format: :.0% or :.1% etc
+          const d = (fmt.match(/\.(\d+)%/) || [,'0'])[1];
+          result += '${' + `(${pyExprToJS(varPart, dataNames)} * 100).toFixed(${d})` + '}%';
+        } else if (fmt.match(/^>\d+|^<\d+|^\d+/)) {
+          // Width/alignment specs — just output the value
+          result += '${' + pyExprToJS(varPart, dataNames) + '}';
+        } else {
+          // Unknown format spec — try to transpile just the var part
+          result += '${' + pyExprToJS(varPart, dataNames) + '}';
+        }
+      } else {
+        result += '${' + pyExprToJS(expr, dataNames) + '}';
+      }
+    } else {
+      if (inner[i] === '`') result += '\\`';
+      else if (inner[i] === '$' && inner[i+1] === '{') result += '\\$';
+      else result += inner[i];
+      i++;
+    }
+  }
+  result += '`';
+  return result;
+}
+
+// Split on `or` / `and` at bracket depth 0 (outside strings)
+function splitBoolOp(expr) {
+  // Try `or` first, then `and` (or has lower precedence)
+  for (const op of ['or', 'and']) {
+    const re = new RegExp(`\\s+${op}\\s+`, 'g');
+    let depth = 0, inStr = false, strChar = '', m;
+    const positions = [];
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (inStr) { if (c === '\\') i++; else if (c === strChar) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; strChar = c; continue; }
+      if ('([{'.includes(c)) { depth++; continue; }
+      if (')]}'.includes(c)) { depth--; continue; }
+      if (depth === 0) {
+        re.lastIndex = i;
+        m = re.exec(expr);
+        if (m && m.index === i) positions.push({ start: i, end: i + m[0].length });
+      }
+    }
+    if (positions.length > 0) {
+      const parts = [];
+      let prev = 0;
+      for (const p of positions) { parts.push(expr.slice(prev, p.start)); prev = p.end; }
+      parts.push(expr.slice(prev));
+      return { op, parts };
+    }
+  }
+  return null;
+}
+
+function splitComma(s) {
+  const result = [];
+  let depth = 0, current = '', inStr = false, strChar = '';
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (inStr) {
+      if (c === '\\') { current += c + (s[i+1]||''); i++; continue; }
+      if (c === strChar) inStr = false;
+      current += c;
+    } else {
+      if (c === '"' || c === "'") { inStr = true; strChar = c; current += c; }
+      else if ('([{'.includes(c)) { depth++; current += c; }
+      else if (')]}'.includes(c)) { depth--; current += c; }
+      else if (c === ',' && depth === 0) { result.push(current); current = ''; }
+      else current += c;
+    }
+  }
+  if (current.trim()) result.push(current);
+  return result;
+}
+
+function splitFirst(s, delim) {
+  const idx = s.indexOf(delim);
+  if (idx < 0) return [s, ''];
+  return [s.slice(0, idx), s.slice(idx + 1)];
+}
+
+// Find a .method(args) call in an expression, handling nested brackets
+// Returns { receiver, args, suffix } or null
+function findMethodCall(expr, method) {
+  const needle = '.' + method + '(';
+  // Search right-to-left to find the outermost .get() first for chaining
+  // But we want to find ALL .get() positions and pick the right one
+  // Strategy: find the FIRST .get( at depth 0
+  let inStr = false, sc = '', depth = 0;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(' || c === '[' || c === '{') { depth++; continue; }
+    if (c === ')' || c === ']' || c === '}') { depth--; continue; }
+    if (depth === 0 && expr.slice(i, i + needle.length) === needle) {
+      const receiver = expr.slice(0, i);
+      const argsStart = i + needle.length;
+      // Find matching closing paren
+      let d = 1, j = argsStart, inS2 = false, sc2 = '';
+      while (j < expr.length && d > 0) {
+        const ch = expr[j];
+        if (inS2) { if (ch === '\\') { j++; } else if (ch === sc2) inS2 = false; }
+        else {
+          if (ch === '"' || ch === "'") { inS2 = true; sc2 = ch; }
+          else if (ch === '(' || ch === '[' || ch === '{') d++;
+          else if (ch === ')' || ch === ']' || ch === '}') d--;
+        }
+        j++;
+      }
+      const args = expr.slice(argsStart, j - 1);
+      const suffix = expr.slice(j);
+      return { receiver, args, suffix: suffix || null };
+    }
+  }
+  return null;
+}
+
+// Split expr into obj[key] access — finds the LAST [...] access at bracket depth 0
+// Returns { obj, key, suffix } or null
+function splitBracketAccess(expr) {
+  let inStr = false, sc = '', depth = 0;
+  let lastBracketStart = -1, lastBracketEnd = -1;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(' || c === '{') { depth++; continue; }
+    if (c === ')' || c === '}') { depth--; continue; }
+    if (c === '[' && depth === 0) {
+      // Find matching ] using full bracket tracking
+      let d = 1, j = i + 1, iS = false, sC = '';
+      while (j < expr.length && d > 0) {
+        const ch = expr[j];
+        if (iS) { if (ch === '\\') j++; else if (ch === sC) iS = false; }
+        else {
+          if (ch === '"' || ch === "'") { iS = true; sC = ch; }
+          else if (ch === '[' || ch === '(' || ch === '{') d++;
+          else if (ch === ']' || ch === ')' || ch === '}') d--;
+        }
+        j++;
+      }
+      if (d === 0) {
+        lastBracketStart = i;
+        lastBracketEnd = j;
+        // Skip past this bracket in the outer loop
+        i = j - 1;
+      }
+    }
+  }
+  if (lastBracketStart > 0 && lastBracketEnd > 0) {
+    const obj = expr.slice(0, lastBracketStart);
+    const key = expr.slice(lastBracketStart + 1, lastBracketEnd - 1);
+    const suffix = expr.slice(lastBracketEnd) || null;
+    // Don't match slice patterns (key contains bare ':')
+    if (/^\d*:\d*$/.test(key.trim())) return null;
+    // Don't match if obj contains operators/spaces (part of a larger expression)
+    // Only match if obj looks like an identifier chain: word, word.word, word[...], etc.
+    if (/\s/.test(obj.trim())) return null;
+    return { obj, key, suffix };
+  }
+  return null;
+}
+
+// Check if the first ( and last ) in an expression are a matching pair
+function isMatchingParens(expr) {
+  if (expr[0] !== '(') return false;
+  let depth = 1, inStr = false, sc = '';
+  for (let i = 1; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if (c === '(') depth++;
+    else if (c === ')') { depth--; if (depth === 0) return i === expr.length - 1; }
+  }
+  return false;
+}
+
+// Split a Python ternary expression: value if cond else alt
+// Only matches if 'if' and 'else' keywords are at bracket depth 0
+function splitTernary(expr) {
+  let inStr = false, sc = '', depth = 0;
+  let ifPos = -1, elsePos = -1;
+  for (let i = 0; i < expr.length; i++) {
+    const c = expr[i];
+    if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+    if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+    if ('([{'.includes(c)) { depth++; continue; }
+    if (')]}'.includes(c)) { depth--; continue; }
+    if (depth === 0) {
+      // Check for ' if ' at this position
+      if (ifPos < 0 && expr.slice(i, i + 4) === ' if ' && i > 0) {
+        ifPos = i;
+      }
+      // Check for ' else ' — use the LAST one at depth 0 after ifPos
+      if (ifPos >= 0 && expr.slice(i, i + 6) === ' else ') {
+        elsePos = i;
+      }
+    }
+  }
+  if (ifPos >= 0 && elsePos > ifPos) {
+    return {
+      value: expr.slice(0, ifPos).trim(),
+      cond: expr.slice(ifPos + 4, elsePos).trim(),
+      alt: expr.slice(elsePos + 6).trim(),
+    };
+  }
+  return null;
+}
+
+// Split an expression on a binary arithmetic operator at depth 0
+// Splits on lowest-precedence op found, scanning left-to-right
+// Returns { left, op, right } or null
+function splitBinaryOp(expr) {
+  // Try operator groups from lowest to highest precedence
+  for (const ops of [[' + ', ' - '], [' * ', ' / ', ' // ', ' ** ', ' % ']]) {
+    let inStr = false, sc = '', depth = 0;
+    for (let i = 0; i < expr.length; i++) {
+      const c = expr[i];
+      if (inStr) { if (c === '\\') { i++; continue; } if (c === sc) inStr = false; continue; }
+      if (c === '"' || c === "'") { inStr = true; sc = c; continue; }
+      if ('([{'.includes(c)) { depth++; continue; }
+      if (')]}'.includes(c)) { depth--; continue; }
+      if (depth === 0) {
+        for (const op of ops) {
+          if (expr.slice(i, i + op.length) === op) {
+            const left = expr.slice(0, i).trim();
+            const right = expr.slice(i + op.length).trim();
+            if (left && right) return { left, op: op.trim(), right };
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 3: brainstem.js — Runtime
+// ═══════════════════════════════════════════════════════════════════════
+
+const REGISTRY_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
+const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main/';
+
+// ── Virtual Filesystem (VFS) — localStorage-backed, mirrors local agents/ dir ──
+const VFS = {
+  _prefix: 'vfs:',
+  read(path)   { return localStorage.getItem(VFS._prefix + path); },
+  write(path, content) { localStorage.setItem(VFS._prefix + path, content); },
+  exists(path) { return localStorage.getItem(VFS._prefix + path) !== null; },
+  remove(path) { localStorage.removeItem(VFS._prefix + path); },
+  list(dir) {
+    dir = dir || 'agents/';
+    if (!dir.endsWith('/')) dir += '/';
+    const results = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith(VFS._prefix + dir)) {
+        results.push(key.slice(VFS._prefix.length));
+      }
+    }
+    return results;
+  },
+  // List all agents in the virtual FS
+  listAgents() {
+    return VFS.list('agents/').filter(f => f.endsWith('.py'));
+  }
+};
+
+const vm = {
+  registry: null,
+  env: null,
+  loadedAgent: null,
+  outputBuffer: [],
+  stats: { transpileMs: 0, evalMs: 0, ops: 0, errors: 0 },
+};
+
+async function loadRegistry() {
+  setStatus('loading', 'Loading registry...');
+  try {
+    const resp = await fetch(REGISTRY_URL);
+    const data = await resp.json();
+    vm.registry = data.agents || [];
+    // Filter to agents that can run in browser (verified/community, no requires_env)
+    vm.registry = vm.registry.filter(a =>
+      (!a.requires_env || a.requires_env.length === 0) &&
+      a._file
+    );
+    setStatus('idle', 'Idle');
+    return vm.registry;
+  } catch(e) {
+    setStatus('error', 'Registry failed');
+    vm.stats.errors++;
+    throw e;
+  }
+}
+
+async function fetchAgent(entry) {
+  const url = RAW_BASE + entry._file;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
+  return resp.text();
+}
+
+function transpileAndLoad(pythonSource) {
+  setStatus('loading', 'Transpiling...');
+  const result = unrappTranspile(pythonSource);
+  vm.stats.transpileMs = result.elapsed;
+
+  if (result.errors.length > 0 && !result.jsFunctions) {
+    setStatus('error', 'Transpile errors');
+    vm.stats.errors += result.errors.length;
+    return result;
+  }
+
+  // Create fresh environment
+  vm.env = createGlobalEnv();
+
+  // Inject data objects into env (accessible from LisPy REPL)
+  const DATA = result.dataObjects || {};
+  for (const [name, obj] of Object.entries(DATA)) {
+    vm.env.define(name, obj);
+  }
+
+  // Python builtins for the JS compilation context
+  const PY = {
+    len: x => { if (x == null) return 0; if (typeof x === 'object') return Array.isArray(x) ? x.length : Object.keys(x).length; return String(x).length; },
+    int: x => Math.trunc(Number(x)) || 0,
+    float: x => Number(x) || 0,
+    str: x => String(x),
+    list: x => { if (x == null) return []; if (Array.isArray(x)) return [...x]; if (typeof x === 'object') return Object.keys(x); return [x]; },
+    sorted: (x, opts) => {
+      const arr = Array.isArray(x) ? [...x] : Object.keys(x);
+      if (opts && opts.key) {
+        arr.sort((a,b) => { const ka = opts.key(a), kb = opts.key(b); return ka < kb ? -1 : ka > kb ? 1 : 0; });
+      } else {
+        arr.sort((a,b) => a < b ? -1 : a > b ? 1 : 0);
+      }
+      if (opts && opts.reverse) arr.reverse();
+      return arr;
+    },
+    sum: x => { if (Array.isArray(x)) return x.reduce((a,b) => a+b, 0); return 0; },
+    max: (...args) => { if (args.length === 1 && Array.isArray(args[0])) return Math.max(...args[0]); return Math.max(...args); },
+    min: (...args) => { if (args.length === 1 && Array.isArray(args[0])) return Math.min(...args[0]); return Math.min(...args); },
+    abs: Math.abs,
+    round: (n, d) => { if (d === undefined) return Math.round(n); const f = Math.pow(10, d); return Math.round(n * f) / f; },
+    range: (...args) => { let s=0,e=0,step=1; if(args.length===1)e=args[0]; else if(args.length>=2){s=args[0];e=args[1];} if(args.length>=3)step=args[2]; const r=[]; if(step>0)for(let i=s;i<e;i+=step)r.push(i); else for(let i=s;i>e;i+=step)r.push(i); return r; },
+    all: x => Array.isArray(x) ? x.every(Boolean) : Boolean(x),
+    any: x => Array.isArray(x) ? x.some(Boolean) : Boolean(x),
+    dict: x => { if (x == null) return {}; return Object.fromEntries(x); },
+    enumerate: x => Array.isArray(x) ? x.map((v,i) => [i,v]) : [],
+    zip: (...arrs) => { const len = Math.min(...arrs.map(a=>a.length)); return Array.from({length:len}, (_,i) => arrs.map(a=>a[i])); },
+    isinstance: () => true,
+    // Safe dict .get() equivalent
+    get: (obj, key, dflt) => { if (obj == null) return dflt !== undefined ? dflt : null; const v = obj[key]; return v !== undefined ? v : (dflt !== undefined ? dflt : null); },
+  };
+
+  // Compile and inject JS functions
+  const HELPERS = {};
+  const jsFns = result.jsFunctions || {};
+
+  // Synthetic self for class method references
+  const self = {
+    name: (result.manifest || {}).display_name || (result.manifest || {}).name || 'Agent',
+    metadata: result.manifest || {},
+  };
+
+  function compileAgentFn(fnDef) {
+    const paramList = fnDef.params.join(', ');
+    let body = fnDef.body;
+    // Fix var scoping
+    body = body.replace(/^\s*let\s+/gm, 'var ');
+    // Fix Python .get() calls on dicts -> PY.get()
+    // Use bracket-aware replacement to handle nested .get() calls
+    for (let pass = 0; pass < 3; pass++) {
+      let newBody = '';
+      let idx = 0;
+      while (idx < body.length) {
+        const rest = body.slice(idx);
+        const gm = rest.match(/^([a-zA-Z_]\w*(?:\[[^\]]*\])*)\.get\(/);
+        if (gm) {
+          const obj = gm[1];
+          if (['Math','Number','String','Array','Object','JSON','Map','Set','PY'].includes(obj)) {
+            newBody += body[idx]; idx++; continue;
+          }
+          const argsStart = idx + gm[0].length;
+          // Find matching closing paren with bracket awareness
+          let d = 1, j = argsStart, inS = false, sCh = '';
+          while (j < body.length && d > 0) {
+            const c = body[j];
+            if (inS) { if (c === '\\') j++; else if (c === sCh) inS = false; }
+            else { if (c==='"'||c==="'") { inS=true; sCh=c; } else if ('([{'.includes(c)) d++; else if (')]}'.includes(c)) d--; }
+            j++;
+          }
+          const args = body.slice(argsStart, j - 1);
+          newBody += `PY.get(${obj}, ${args})`;
+          idx = j;
+        } else {
+          newBody += body[idx]; idx++;
+        }
+      }
+      body = newBody;
+    }
+    // Fix .values() / .keys() / .items() on plain objects
+    body = body.replace(/(\w+)\.values\(\)/g, 'Object.values($1)');
+    body = body.replace(/(\w+)\.keys\(\)/g, 'Object.keys($1)');
+    body = body.replace(/(\w+)\.items\(\)/g, 'Object.entries($1)');
+    // Fix Python builtins — only when NOT preceded by '.' (to avoid Math.round -> Math.PY.round)
+    const pyBuiltinReplacements = ['len','int','sorted','list','sum','round','abs','all','any','range','str','float'];
+    for (const b of pyBuiltinReplacements) {
+      body = body.replace(new RegExp('(?<!\\.)\\b' + b + '\\(', 'g'), 'PY.' + b + '(');
+    }
+
+    const fnCode = `(function(${paramList}) {\n${body}\n})`;
+    return (new Function('DATA', 'HELPERS', 'PY', 'self', `return ${fnCode}`))(DATA, HELPERS, PY, self);
+  }
+
+  // First pass: compile module-level helpers
+  for (const [name, fnDef] of Object.entries(jsFns)) {
+    if (!fnDef.isHelper) continue;
+    try {
+      const compiled = compileAgentFn(fnDef);
+      HELPERS[name] = compiled;
+      vm.env.define(name.replace(/_/g, '-'), (...args) => compiled(...args));
+    } catch(e) {
+      result.errors.push(`Compile helper ${name}: ${e.message}`);
+    }
+  }
+
+  // Second pass: compile class methods (operation formatters)
+  for (const [name, fnDef] of Object.entries(jsFns)) {
+    if (!fnDef.isMethod) continue;
+    try {
+      const compiled = compileAgentFn(fnDef);
+      const opName = name.replace(/^method_/, '');
+      HELPERS['method_' + opName] = compiled;
+      vm.env.define(`op-${opName}`, (kwargs) => {
+        try { return compiled(kwargs || {}); }
+        catch(e) { return `Error in ${opName}: ${e.message}`; }
+      });
+    } catch(e) {
+      result.errors.push(`Compile method ${name}: ${e.message}`);
+    }
+  }
+
+  // Hook output
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  // Eval LisPy dispatcher
+  const t0 = performance.now();
+  try {
+    if (result.lispy) {
+      const exprs = lispParse(result.lispy);
+      for (const expr of exprs) lispEval(expr, vm.env);
+    }
+    vm.stats.evalMs = performance.now() - t0;
+  } catch(e) {
+    result.errors.push('Eval error: ' + e.message);
+    vm.stats.errors++;
+    vm.stats.evalMs = performance.now() - t0;
+  }
+
+  vm.loadedAgent = {
+    manifest: result.manifest,
+    operations: result.operations,
+    lispySource: result.lispy,
+  };
+
+  setStatus('idle', 'Ready');
+  return result;
+}
+
+function runOperation(opName) {
+  if (!vm.env) return 'No agent loaded';
+  setStatus('running', 'Running...');
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  const t0 = performance.now();
+  try {
+    const kwargs = { operation: opName };
+    const kwargsExpr = `(make-dict "operation" "${opName}")`;
+    const callExpr = `(perform ${kwargsExpr})`;
+    const exprs = lispParse(callExpr);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, vm.env);
+    vm.stats.evalMs = performance.now() - t0;
+    vm.stats.ops++;
+    setStatus('idle', 'Ready');
+
+    // Combine output buffer + return value
+    const output = vm.outputBuffer.join('');
+    const returnVal = displayValue(result);
+    return output || returnVal || '(no output)';
+  } catch(e) {
+    vm.stats.evalMs = performance.now() - t0;
+    vm.stats.errors++;
+    setStatus('error', 'Error');
+    return 'Error: ' + e.message;
+  }
+}
+
+function evalRepl() {
+  const input = document.getElementById('replInput');
+  const code = input.value.trim();
+  if (!code) return;
+  input.value = '';
+
+  appendOutput(`\u03bb> ${code}`, 'system');
+
+  if (!vm.env) vm.env = createGlobalEnv();
+  vm.outputBuffer = [];
+  brainstemOutput = (text) => vm.outputBuffer.push(text);
+
+  try {
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, vm.env);
+
+    if (vm.outputBuffer.length > 0) {
+      appendOutput(vm.outputBuffer.join(''), 'line');
+    }
+    if (result !== NIL && result !== undefined && result !== null) {
+      appendOutput(`=> ${valueRepr(result)}`, 'result');
+    }
+  } catch(e) {
+    appendOutput(`Error: ${e.message}`, 'error');
+    vm.stats.errors++;
+  }
+  updateFooter();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 4: UI
+// ═══════════════════════════════════════════════════════════════════════
+
+let activeCategory = null;
+
+function setStatus(type, text) {
+  const el = document.getElementById('vmStatus');
+  el.className = 'bs-status ' + type;
+  el.innerHTML = `<div class="bs-status-dot"></div><span>${text}</span>`;
+}
+
+function updateFooter() {
+  document.getElementById('fTranspile').textContent = vm.stats.transpileMs.toFixed(1) + 'ms';
+  document.getElementById('fEval').textContent = vm.stats.evalMs.toFixed(1) + 'ms';
+  document.getElementById('fOps').textContent = vm.stats.ops;
+  document.getElementById('fErrors').textContent = vm.stats.errors;
+}
+
+function populateAgentList(agents) {
+  const list = document.getElementById('agentList');
+  const cats = new Set();
+  agents.forEach(a => { if (a.category) cats.add(a.category); });
+
+  // Populate category pills
+  const catContainer = document.getElementById('catPills');
+  catContainer.innerHTML = '<span class="bs-cat-pill active" onclick="filterCategory(null)">All</span>' +
+    [...cats].sort().map(c => `<span class="bs-cat-pill" onclick="filterCategory('${c}')">${c}</span>`).join('');
+
+  renderAgentList(agents);
+}
+
+function renderAgentList(agents) {
+  const list = document.getElementById('agentList');
+  const search = (document.getElementById('agentSearch').value || '').toLowerCase();
+  const filtered = agents.filter(a => {
+    if (activeCategory && a.category !== activeCategory) return false;
+    if (search) {
+      const hay = `${a.name} ${a.display_name} ${a.description} ${(a.tags||[]).join(' ')} ${a.category}`.toLowerCase();
+      return hay.includes(search);
+    }
+    return true;
+  });
+
+  list.innerHTML = filtered.map((a, i) => `
+    <div class="bs-agent-item" data-idx="${i}" onclick="selectAgent('${a.name.replace(/'/g,"\\'")}')">
+      <div class="bs-agent-name">${a.display_name || a.name}</div>
+      <div class="bs-agent-cat">${a.category || ''} &middot; v${a.version || '?'}</div>
+      <div class="bs-agent-desc">${a.description || ''}</div>
+    </div>
+  `).join('');
+}
+
+function filterAgents() {
+  if (vm.registry) renderAgentList(vm.registry);
+}
+
+function filterCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.bs-cat-pill').forEach(el => {
+    el.classList.toggle('active', (cat === null && el.textContent === 'All') || el.textContent === cat);
+  });
+  filterAgents();
+}
+
+async function selectAgent(name) {
+  const entry = vm.registry.find(a => a.name === name);
+  if (!entry) return;
+
+  // Highlight in sidebar
+  document.querySelectorAll('.bs-agent-item').forEach(el => el.classList.remove('active'));
+  const items = document.querySelectorAll('.bs-agent-item');
+  items.forEach(el => {
+    if (el.querySelector('.bs-agent-name').textContent === (entry.display_name || entry.name)) {
+      el.classList.add('active');
+    }
+  });
+
+  setStatus('loading', 'Fetching agent...');
+  clearTerminal();
+  appendOutput(`Loading ${entry.display_name || entry.name}...`, 'system');
+
+  try {
+    const source = await fetchAgent(entry);
+    const result = transpileAndLoad(source);
+
+    // Update info bar
+    showInfoBar(entry, result);
+
+    if (result.errors.length > 0) {
+      appendOutput('Transpile errors:', 'error');
+      result.errors.forEach(e => appendOutput('  ' + e, 'error'));
+    } else {
+      appendOutput(`Loaded ${result.operations.length} operations. Running first...`, 'system');
+      // Auto-run first operation
+      if (result.operations.length > 0) {
+        const output = runOperation(result.operations[0]);
+        renderMarkdown(output);
+      }
+    }
+    updateFooter();
+  } catch(e) {
+    appendOutput(`Failed: ${e.message}`, 'error');
+    vm.stats.errors++;
+    setStatus('error', 'Error');
+    updateFooter();
+  }
+}
+
+function showInfoBar(entry, result) {
+  const bar = document.getElementById('infoBar');
+  bar.style.display = 'flex';
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
+  document.getElementById('agentTitle').textContent = entry.display_name || entry.name;
+  document.getElementById('agentMeta').textContent = `${entry.category || ''} | v${entry.version || '?'} | ${entry.quality_tier || 'community'}`;
+
+  const select = document.getElementById('opSelect');
+  const ops = result.operations || [];
+  select.innerHTML = ops.map(op => `<option value="${op}">${op.replace(/_/g, ' ')}</option>`).join('');
+}
+
+function selectOp() {
+  // Preview the selected operation
+}
+
+function runOp() {
+  const select = document.getElementById('opSelect');
+  const op = select.value;
+  if (!op) return;
+
+  clearTerminal();
+  appendOutput(`Running: ${op}`, 'system');
+  const output = runOperation(op);
+  renderMarkdown(output);
+  updateFooter();
+}
+
+function clearTerminal() {
+  const term = document.getElementById('terminal');
+  // Remove all children except the welcome div
+  const children = [...term.childNodes];
+  for (const child of children) {
+    if (child.id !== 'welcome') term.removeChild(child);
+  }
+}
+
+function appendOutput(text, type) {
+  const term = document.getElementById('terminal');
+  const div = document.createElement('div');
+  div.className = 'line ' + (type || '');
+  div.textContent = text;
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+
+function renderMarkdown(text) {
+  const term = document.getElementById('terminal');
+
+  // Split by lines and render
+  const lines = text.split('\n');
+  let inTable = false;
+  let tableRows = [];
+
+  function flushTable() {
+    if (tableRows.length === 0) return;
+    const table = document.createElement('table');
+    tableRows.forEach((row, rowIdx) => {
+      // Skip separator rows
+      if (row.match(/^\|[\s\-:|]+\|$/)) return;
+      const tr = document.createElement('tr');
+      const cells = row.split('|').slice(1, -1);
+      cells.forEach(cell => {
+        const el = document.createElement(rowIdx === 0 ? 'th' : 'td');
+        el.innerHTML = renderInlineMarkdown(cell.trim());
+        tr.appendChild(el);
+      });
+      table.appendChild(tr);
+    });
+    term.appendChild(table);
+    tableRows = [];
+    inTable = false;
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Table row
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      if (!inTable) inTable = true;
+      tableRows.push(trimmed);
+      continue;
+    }
+    if (inTable) flushTable();
+
+    // Headers
+    if (trimmed.startsWith('### ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h3>${renderInlineMarkdown(trimmed.slice(4))}</h3>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+    if (trimmed.startsWith('## ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h2>${renderInlineMarkdown(trimmed.slice(3))}</h2>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+    if (trimmed.startsWith('# ')) {
+      const h = document.createElement('div');
+      h.innerHTML = `<h1>${renderInlineMarkdown(trimmed.slice(2))}</h1>`;
+      term.appendChild(h.firstChild);
+      continue;
+    }
+
+    // List items
+    if (trimmed.startsWith('- ')) {
+      const div = document.createElement('div');
+      div.className = 'list-item';
+      div.innerHTML = '&#8226; ' + renderInlineMarkdown(trimmed.slice(2));
+      term.appendChild(div);
+      continue;
+    }
+
+    // Empty line
+    if (!trimmed) {
+      const br = document.createElement('div');
+      br.style.height = '4px';
+      term.appendChild(br);
+      continue;
+    }
+
+    // Regular text
+    const div = document.createElement('div');
+    div.className = 'line result';
+    div.innerHTML = renderInlineMarkdown(trimmed);
+    term.appendChild(div);
+  }
+
+  if (inTable) flushTable();
+  term.scrollTop = term.scrollHeight;
+}
+
+function renderInlineMarkdown(text) {
+  // Bold
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Code
+  text = text.replace(/`(.+?)`/g, '<code style="background:var(--surface2);padding:1px 4px;border-radius:3px;">$1</code>');
+  return text;
+}
+
+async function handleDrop(event) {
+  event.preventDefault();
+  document.getElementById('dropZone').classList.remove('dragover');
+
+  const files = event.dataTransfer.files;
+  if (files.length === 0) return;
+
+  const file = files[0];
+  if (!file.name.endsWith('.py')) {
+    appendOutput('Please drop a .py agent file', 'error');
+    return;
+  }
+
+  const text = await file.text();
+  clearTerminal();
+  appendOutput(`Loading dropped file: ${file.name}`, 'system');
+
+  const result = transpileAndLoad(text);
+
+  // Show info bar
+  const fakeEntry = {
+    display_name: result.manifest?.display_name || file.name,
+    name: result.manifest?.name || file.name,
+    category: result.manifest?.category || 'local',
+    version: result.manifest?.version || '?',
+    quality_tier: 'local',
+  };
+  showInfoBar(fakeEntry, result);
+
+  if (result.errors.length > 0) {
+    appendOutput('Transpile errors:', 'error');
+    result.errors.forEach(e => appendOutput('  ' + e, 'error'));
+  } else {
+    appendOutput(`Loaded ${result.operations.length} operations. Running first...`, 'system');
+    if (result.operations.length > 0) {
+      const output = runOperation(result.operations[0]);
+      renderMarkdown(output);
+    }
+  }
+  updateFooter();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 5: Tests
+// ═══════════════════════════════════════════════════════════════════════
+
+function runTests() {
+  clearTerminal();
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
+  document.getElementById('infoBar').style.display = 'none';
+  appendOutput('=== RAPP Brainstem Test Suite ===', 'system');
+  appendOutput('', 'system');
+
+  let passed = 0;
+  let failed = 0;
+
+  function test(name, fn) {
+    try {
+      fn();
+      appendOutput(`  PASS: ${name}`, 'line');
+      passed++;
+    } catch(e) {
+      appendOutput(`  FAIL: ${name} — ${e.message}`, 'error');
+      failed++;
+    }
+  }
+
+  function assert(cond, msg) {
+    if (!cond) throw new Error(msg || 'assertion failed');
+  }
+
+  function assertEq(a, b, msg) {
+    if (a !== b) throw new Error(msg || `expected ${JSON.stringify(b)}, got ${JSON.stringify(a)}`);
+  }
+
+  // Helper to eval lispy
+  function ev(code) {
+    const env = createGlobalEnv();
+    brainstemOutput = () => {};
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, env);
+    return result;
+  }
+
+  // Helper to eval in shared env
+  function evIn(env, code) {
+    brainstemOutput = () => {};
+    const exprs = lispParse(code);
+    let result = NIL;
+    for (const expr of exprs) result = lispEval(expr, env);
+    return result;
+  }
+
+  appendOutput('--- LisPy Interpreter Tests ---', 'system');
+
+  // Test 1
+  test('1. Basic arithmetic: (+ 1 2 3) = 6', () => {
+    assertEq(ev('(+ 1 2 3)'), 6);
+  });
+
+  // Test 2
+  test('2. Round with precision: (round (* (/ 482000 500000) 100) 1) = 96.4', () => {
+    assertEq(ev('(round (* (/ 482000 500000) 100) 1)'), 96.4);
+  });
+
+  // Test 3
+  test('3. String join: (string-join (list "a" "b" "c") "\\n")', () => {
+    assertEq(ev('(string-join (list "a" "b" "c") "\\n")'), 'a\nb\nc');
+  });
+
+  // Test 4
+  test('4. Dict create + access', () => {
+    assertEq(ev('(dict-get (make-dict "name" "X") "name")'), 'X');
+  });
+
+  // Test 5
+  test('5. Nested dict: 3 levels deep', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define d (make-dict "a" (make-dict "b" (make-dict "c" 482000))))');
+    assertEq(evIn(env, '(dict-get (dict-get (dict-get d "a") "b") "c")'), 482000);
+  });
+
+  // Test 6
+  test('6. Lambda closure: ((make-adder 10) 5) = 15', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define (make-adder n) (lambda (x) (+ n x)))');
+    assertEq(evIn(env, '((make-adder 10) 5)'), 15);
+  });
+
+  // Test 7
+  test('7. Map: (map (lambda (x) (* x x)) (list 1 2 3))', () => {
+    const result = ev('(map (lambda (x) (* x x)) (list 1 2 3))');
+    assert(Array.isArray(result) && result[0]===1 && result[1]===4 && result[2]===9);
+  });
+
+  // Test 8
+  test('8. Reduce: (reduce + 0 (list 10 20 30)) = 60', () => {
+    assertEq(ev('(reduce + 0 (list 10 20 30))'), 60);
+  });
+
+  // Test 9
+  test('9. Sort with key fn', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define items (list (make-dict "v" 3) (make-dict "v" 1) (make-dict "v" 2)))');
+    const result = evIn(env, '(sort items (lambda (x) (dict-get x "v")))');
+    assert(Array.isArray(result));
+    assertEq(result[0].v, 1);
+    assertEq(result[1].v, 2);
+    assertEq(result[2].v, 3);
+  });
+
+  // Test 10
+  test('10. Cond: multi-branch dispatch', () => {
+    const env = createGlobalEnv();
+    evIn(env, '(define (classify x) (cond ((< x 0) "negative") ((= x 0) "zero") (else "positive")))');
+    assertEq(evIn(env, '(classify -5)'), 'negative');
+    assertEq(evIn(env, '(classify 0)'), 'zero');
+    assertEq(evIn(env, '(classify 7)'), 'positive');
+  });
+
+  appendOutput('', 'system');
+  appendOutput('--- Transpiler Tests ---', 'system');
+
+  // Test 11
+  test('11. pyExprToJS: .get() with default', () => {
+    const r = pyExprToJS('kwargs.get("op", "default")', []);
+    assert(r.includes('kwargs') && r.includes('"op"') && r.includes('"default"'), r);
+  });
+
+  // Test 12
+  test('12. pyFStringToJS: f-string with :, format', () => {
+    const r = pyFStringToJS('f"{val:,}"', []);
+    assert(r.includes('toLocaleString'), r);
+  });
+
+  // Test 13
+  test('13. pyExprToJS: .items() -> Object.entries', () => {
+    const r = pyExprToJS('D.items()', []);
+    assert(r.includes('Object.entries'), r);
+  });
+
+  // Test 14
+  test('14. pyExprToJS: list comprehension with filter', () => {
+    const r = pyExprToJS('[x for x in items if x > 0]', []);
+    assert(r.includes('filter') && r.includes('map'), r);
+  });
+
+  // Test 15
+  test('15. pyExprToJS: sorted with key and reverse', () => {
+    const r = pyExprToJS('sorted(x, key=lambda e: e["v"], reverse=True)', []);
+    assert(r.includes('sort') && r.includes('reverse'), r);
+  });
+
+  // Test 16
+  test('16. pyExprToJS: ternary', () => {
+    const r = pyExprToJS('"YES" if compliant else "NO"', []);
+    assert(r.includes('?') && r.includes('YES') && r.includes('NO'), r);
+  });
+
+  // Test 17
+  test('17. pyExprToJS: sum(d["total"] for d in list)', () => {
+    const r = pyExprToJS('sum(d["total"] for d in dashboard)', []);
+    assert(r.includes('reduce') && r.includes('map'), r);
+  });
+
+  // Test 18
+  test('18. pyExprToJS: .replace() and .title()', () => {
+    const r1 = pyExprToJS('x.replace("a", "b")', []);
+    assert(r1.includes('split') && r1.includes('join'), r1);
+    const r2 = pyExprToJS('x.title()', []);
+    assert(r2.includes('toUpperCase'), r2);
+  });
+
+  appendOutput('', 'system');
+  appendOutput('--- Agent Execution Tests (require network) ---', 'system');
+
+  // Tests 19-22 require network — run as async
+  const agentTests = [
+    {
+      num: 19,
+      name: 'emission_tracking: emissions_dashboard',
+      file: 'agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py',
+      op: 'emissions_dashboard',
+      checks: ['Emissions Dashboard', 'Riverside'],
+    },
+    {
+      num: 20,
+      name: 'field_service_dispatch: dispatch_dashboard',
+      file: 'agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py',
+      op: 'dispatch_dashboard',
+      checks: ['CRITICAL', 'Dispatch'],
+    },
+    {
+      num: 21,
+      name: 'inventory_visibility: stock_alerts',
+      file: 'agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py',
+      op: 'stock_alerts',
+      checks: ['Stock Alerts'],
+    },
+    {
+      num: 22,
+      name: 'customer_loyalty_rewards: loyalty_dashboard',
+      file: 'agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py',
+      op: 'loyalty_dashboard',
+      checks: ['Loyalty', 'Platinum'],
+    },
+  ];
+
+  // Run agent tests
+  (async () => {
+    for (const at of agentTests) {
+      try {
+        const resp = await fetch(RAW_BASE + at.file);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const source = await resp.text();
+        const result = transpileAndLoad(source);
+        const compileErrors = (result.errors || []).filter(e => !e.startsWith('Compile'));
+        if (compileErrors.length > 0) throw new Error(compileErrors.join('; '));
+
+        // Run operation
+        const output = runOperation(at.op);
+
+        let ok = true;
+        for (const check of at.checks) {
+          if (!output.toLowerCase().includes(check.toLowerCase())) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok) {
+          appendOutput(`  PASS: ${at.num}. ${at.name}`, 'line');
+          passed++;
+        } else {
+          appendOutput(`  FAIL: ${at.num}. ${at.name} — output missing expected strings`, 'error');
+          failed++;
+        }
+      } catch(e) {
+        appendOutput(`  FAIL: ${at.num}. ${at.name} — ${e.message}`, 'error');
+        failed++;
+      }
+    }
+
+    // UI tests 23-25
+    appendOutput('', 'system');
+    appendOutput('--- UI Tests ---', 'system');
+
+    // Test 23
+    test('23. Agent list populated after registry load', () => {
+      assert(vm.registry && vm.registry.length > 0, `registry has ${vm.registry ? vm.registry.length : 0} agents`);
+      const items = document.querySelectorAll('.bs-agent-item');
+      assert(items.length > 0, 'no agent items rendered');
+    });
+
+    // Test 24
+    test('24. Drop zone exists and is interactive', () => {
+      const dz = document.getElementById('dropZone');
+      assert(dz, 'drop zone not found');
+      assert(dz.textContent.includes('Drop'), 'drop zone text missing');
+    });
+
+    // Test 25
+    test('25. REPL evaluates in agent env', () => {
+      const env = createGlobalEnv();
+      evIn(env, '(define FACILITIES (make-dict "FAC-001" "test"))');
+      const keys = evIn(env, '(dict-keys FACILITIES)');
+      assert(Array.isArray(keys) && keys[0] === 'FAC-001', 'REPL env test failed');
+    });
+
+    appendOutput('', 'system');
+    appendOutput(`=== Results: ${passed} passed, ${failed} failed, ${passed + failed} total ===`, passed + failed === passed ? 'line' : 'error');
+  })();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 6: Chat Mode — GitHub Models + Built-in Agents
+// ═══════════════════════════════════════════════════════════════════════
+
+const GH_MODELS_URL = 'https://models.inference.ai.azure.com/chat/completions';
+const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
+const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
+
+let chatToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token') || null;
+let chatUser = null;
+let chatModel = localStorage.getItem('vb_model') || 'gpt-4o-mini';
+let availableModels = [];
+let chatHistory = [];
+let chatBusy = false;
+
+let availableAgents = [];  // All agents — registry + hot-loaded
+let enabledAgents = new Set(JSON.parse(localStorage.getItem('vb_enabled_agents') || '[]'));
+const BUILTIN_AGENTS = ['store_memory', 'recall_memories', 'hacker_news'];
+
+function buildSystemPrompt() {
+  let prompt = `You are the RAPP Brainstem — a browser-native AI assistant running inside a LisPy VM. You have these agents loaded:
+
+1. **store_memory** — Stores facts, preferences, insights, and tasks to the user's persistent local memory. Use this when the user tells you something about themselves, asks you to remember something, or shares a preference.
+
+2. **recall_memories** — Recalls stored memories from past interactions. Use this when the user asks what you know about them, what you remember, or when context from past conversations would help.
+
+3. **hacker_news** — Fetches the latest top posts from Hacker News in real-time. Use this when the user asks about tech news, what's trending, or anything Hacker News related.`;
+
+  // Add enabled registry agents
+  let i = 4;
+  for (const slug of enabledAgents) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent) {
+      prompt += `\n\n${i}. **${agent.display_name}** — ${agent.description}. Category: ${agent.category}. To use this agent, call the run_agent tool with slug "${agent.name}".`;
+      i++;
+    }
+  }
+
+  prompt += `\n\nGuidelines:
+- Be concise and conversational. No filler.
+- When you store a memory, confirm what you stored.
+- When recalling memories, present them naturally, not as raw data.
+- When showing HN posts, format them as a readable list with titles, scores, and links.
+- You can call multiple tools in one turn if needed.
+- If the user hasn't signed in yet or there's an auth issue, you won't reach this point — the UI handles that.`;
+
+  if (enabledAgents.size > 0) {
+    prompt += `\n- When the user asks about something an enabled agent covers, use the run_agent tool to invoke it. Tell the user which agent you're routing to.`;
+  }
+
+  return prompt;
+}
+
+const CHAT_TOOLS = [
+  {
+    type: 'function',
+    function: {
+      name: 'store_memory',
+      description: 'Store a fact, preference, insight, or task to persistent local memory. Use when the user shares information about themselves or asks you to remember something.',
+      parameters: {
+        type: 'object',
+        properties: {
+          memory_type: { type: 'string', enum: ['fact', 'preference', 'insight', 'task'], description: 'Type of memory' },
+          content: { type: 'string', description: 'The memory content to store' },
+          importance: { type: 'integer', minimum: 1, maximum: 5, description: 'Importance level (1=low, 5=critical)' },
+          tags: { type: 'array', items: { type: 'string' }, description: 'Tags for categorization' }
+        },
+        required: ['memory_type', 'content']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'recall_memories',
+      description: 'Recall stored memories from past interactions. Use when the user asks what you know about them or when past context would help.',
+      parameters: {
+        type: 'object',
+        properties: {
+          keywords: { type: 'array', items: { type: 'string' }, description: 'Filter by keywords' },
+          max_results: { type: 'integer', description: 'Max memories to return' },
+          full_recall: { type: 'boolean', description: 'Return all memories' }
+        }
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'hacker_news',
+      description: 'Fetch the latest top posts from Hacker News. Use when the user asks about tech news or trending stories.',
+      parameters: {
+        type: 'object',
+        properties: {
+          limit: { type: 'integer', description: 'Number of posts to fetch (1-30)', minimum: 1, maximum: 30 }
+        },
+        required: ['limit']
+      }
+    }
+  }
+];
+
+function buildChatTools() {
+  const tools = [...CHAT_TOOLS];
+  if (enabledAgents.size > 0) {
+    tools.push({
+      type: 'function',
+      function: {
+        name: 'run_agent',
+        description: 'Run an enabled RAPP agent. The agent will process the request and return a result.',
+        parameters: {
+          type: 'object',
+          properties: {
+            agent_slug: { type: 'string', description: 'The agent slug (e.g. @kody/context_memory_agent)' },
+            request: { type: 'string', description: 'What you want the agent to do' }
+          },
+          required: ['agent_slug', 'request']
+        }
+      }
+    });
+  }
+  return tools;
+}
+
+// ── Built-in Agents (localStorage + live API) ──
+
+function agentStoreMemory(args) {
+  const memories = JSON.parse(localStorage.getItem('vb_memories') || '[]');
+  const mem = {
+    id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2),
+    type: args.memory_type || 'fact',
+    content: args.content,
+    importance: args.importance || 3,
+    tags: args.tags || [],
+    timestamp: new Date().toISOString()
+  };
+  memories.push(mem);
+  localStorage.setItem('vb_memories', JSON.stringify(memories));
+  return { stored: true, id: mem.id, type: mem.type, content: mem.content, total_memories: memories.length };
+}
+
+function agentRecallMemories(args) {
+  const memories = JSON.parse(localStorage.getItem('vb_memories') || '[]');
+  if (memories.length === 0) return { memories: [], message: 'No memories stored yet.' };
+
+  let results = memories;
+  if (args.keywords && args.keywords.length > 0) {
+    results = memories.filter(m => {
+      const hay = (m.content + ' ' + m.type + ' ' + (m.tags || []).join(' ')).toLowerCase();
+      return args.keywords.some(k => hay.includes(k.toLowerCase()));
+    });
+  }
+  results.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  if (args.max_results) results = results.slice(0, args.max_results);
+
+  return {
+    memories: results.map(m => ({
+      type: m.type,
+      content: m.content,
+      importance: m.importance,
+      tags: m.tags,
+      when: m.timestamp
+    })),
+    total_stored: memories.length
+  };
+}
+
+async function agentHackerNews(args) {
+  const limit = Math.min(Math.max(args.limit || 5, 1), 30);
+  const idsResp = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+  const ids = await idsResp.json();
+  const topIds = ids.slice(0, limit);
+  const stories = await Promise.all(topIds.map(async id => {
+    const r = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
+    return r.json();
+  }));
+  return stories.map((s, i) => ({
+    rank: i + 1,
+    title: s.title,
+    url: s.url || `https://news.ycombinator.com/item?id=${s.id}`,
+    score: s.score,
+    by: s.by,
+    comments: s.descendants || 0,
+    hn_link: `https://news.ycombinator.com/item?id=${s.id}`
+  }));
+}
+
+async function executeToolCall(name, args) {
+  switch (name) {
+    case 'store_memory': return agentStoreMemory(args);
+    case 'recall_memories': return agentRecallMemories(args);
+    case 'hacker_news': return await agentHackerNews(args);
+    case 'run_agent': return await executeRegistryAgent(args);
+    default: return { error: 'Unknown agent: ' + name };
+  }
+}
+
+async function executeRegistryAgent(args) {
+  const slug = args.agent_slug;
+  const agent = availableAgents.find(a => a.name === slug);
+  if (!agent) return { error: `Agent not found: ${slug}` };
+  if (!enabledAgents.has(slug)) return { error: `Agent not enabled: ${slug}` };
+
+  // Detect LearnNewAgent — route to create_agent handler
+  const isLearnNew = /learn.?new/i.test(slug) || /learn.?new/i.test(agent.display_name);
+  if (isLearnNew) {
+    return await executeCreateAgent({ description: args.request });
+  }
+
+  try {
+    let source, doc;
+
+    // Check hot-loaded agents first (already have source in memory)
+    if (hotLoadedAgents[slug]) {
+      source = hotLoadedAgents[slug].source;
+      doc = hotLoadedAgents[slug].doc || agent.description;
+    } else {
+      // Fetch from registry
+      source = await fetchAgent(agent);
+      const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
+      doc = (docMatch && (docMatch[1] || docMatch[2])) || agent.description;
+    }
+
+    // Actually transpile and run the agent in the LisPy VM
+    try {
+      const transpiled = unrappTranspile(source);
+      if (transpiled.operations && transpiled.operations.length > 0) {
+        // Create a temp env and run
+        const savedEnv = vm.env;
+        const savedAgent = vm.loadedAgent;
+        transpileAndLoad(source);
+        const firstOp = transpiled.operations[0];
+        const output = runOperation(firstOp);
+        const result = {
+          agent: agent.display_name,
+          slug: agent.name,
+          executed: true,
+          operation: firstOp,
+          output: output
+        };
+        // Restore previous VM state
+        if (savedEnv) { vm.env = savedEnv; vm.loadedAgent = savedAgent; }
+        return result;
+      }
+    } catch(e) {
+      // Transpilation not possible — fall through to documentation mode
+    }
+
+    return {
+      agent: agent.display_name,
+      slug: agent.name,
+      description: agent.description,
+      documentation: doc.trim().slice(0, 500),
+      category: agent.category,
+      version: agent.version,
+      request: args.request,
+      source_available: true,
+      result: `[${agent.display_name}] Agent loaded. ${doc.trim().slice(0, 300)}`
+    };
+  } catch(e) {
+    return { error: `Failed to load agent: ${e.message}` };
+  }
+}
+
+// ── Create Agent — generates .py source via LLM, stores in VFS, hot-loads ──
+
+async function executeCreateAgent(args) {
+  const description = args.description || args.request || '';
+  if (!description) return { error: 'Please describe what the agent should do.' };
+
+  // Ask the LLM to generate agent Python source
+  const genPrompt = `Generate a complete single-file Python agent for the RAPP framework.
+
+Description: ${description}
+
+Rules:
+- The file must contain a class inheriting from BasicAgent
+- Must have a perform(**kwargs) method that returns a string (JSON)
+- Must have self.name and self.metadata in __init__
+- Import: from agents.basic_agent import BasicAgent
+- Keep it simple and functional
+- Return ONLY the Python code, no markdown fences, no explanation
+
+Template to follow:
+"""
+<docstring describing the agent>
+"""
+import json
+from agents.basic_agent import BasicAgent
+
+class <ClassName>Agent(BasicAgent):
+    def __init__(self):
+        self.name = '<ClassName>'
+        self.metadata = {
+            "name": self.name,
+            "description": "<one line>",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "The user request."}
+                },
+                "required": []
+            }
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs):
+        query = kwargs.get('query', '')
+        # Agent logic here
+        return json.dumps({"status": "success", "result": "..."})`;
+
+  try {
+    const genMessages = [
+      { role: 'system', content: 'You are a Python code generator. Output ONLY valid Python code. No markdown. No explanation.' },
+      { role: 'user', content: genPrompt }
+    ];
+
+    const resp = await fetch(GH_MODELS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${chatToken}` },
+      body: JSON.stringify({ model: chatModel, messages: genMessages, temperature: 0.4, max_tokens: 2048 })
+    });
+
+    if (!resp.ok) throw new Error(`LLM error: ${resp.status}`);
+    const data = await resp.json();
+    let source = data.choices[0].message.content;
+
+    // Strip markdown fences if the LLM wrapped it anyway
+    source = source.replace(/^```python\s*/m, '').replace(/^```\s*$/m, '').trim();
+
+    // Extract class name for filename
+    const classMatch = source.match(/class\s+(\w+)/);
+    const className = classMatch ? classMatch[1] : 'CustomAgent';
+    const stem = className.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    const filename = stem.endsWith('_agent') ? `${stem}.py` : `${stem}_agent.py`;
+
+    // Store in VFS
+    VFS.write(`agents/${filename}`, source);
+
+    // Hot-load into the brainstem (reuses the drag-and-drop path)
+    hotLoadAgent(filename, source);
+
+    return {
+      status: 'success',
+      message: `Created and loaded ${className}`,
+      agent_name: className,
+      file: filename,
+      stored_in_vfs: true,
+      hot_loaded: true
+    };
+  } catch(e) {
+    return { error: `Failed to create agent: ${e.message}` };
+  }
+}
+
+// ── GitHub Models API ──
+
+async function callGitHubModels(messages) {
+  if (!chatToken) throw new Error('Not signed in');
+  const resp = await fetch(GH_MODELS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${chatToken}`
+    },
+    body: JSON.stringify({
+      model: chatModel,
+      messages,
+      tools: buildChatTools(),
+      tool_choice: 'auto',
+      temperature: 0.7,
+      max_tokens: 2048
+    })
+  });
+  if (!resp.ok) {
+    const errText = await resp.text();
+    if (resp.status === 401) {
+      chatToken = null;
+      localStorage.removeItem('rb_access_token');
+      localStorage.removeItem('gh_token');
+      updateGHPill();
+      throw new Error('Token expired -- please sign in again');
+    }
+    throw new Error(`GitHub Models (${resp.status}): ${errText.slice(0, 200)}`);
+  }
+  return resp.json();
+}
+
+// ── Chat UI ──
+
+function addChatMsg(role, html) {
+  const welcome = document.getElementById('chatWelcome');
+  if (welcome) welcome.style.display = 'none';
+
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'chat-avatar';
+  avatar.textContent = role === 'user' ? (chatUser ? chatUser[0].toUpperCase() : 'U') : 'VM';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  bubble.innerHTML = html;
+
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return bubble;
+}
+
+function addChatActivity(text) {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-activity';
+  div.innerHTML = `<span class="chat-activity-pill"><span class="chat-activity-dot"></span>${text}</span>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return div;
+}
+
+function finishChatActivity(el, agentName, args, result) {
+  if (!el) return;
+  const pill = el.querySelector('.chat-activity-pill');
+  if (!pill) return;
+
+  // Build a concise summary of what happened
+  const name = agentName.replace(/_/g, ' ');
+  let detail = '';
+  if (agentName === 'store_memory') {
+    detail = `stored ${args.memory_type || 'fact'}: "${(args.content || '').slice(0, 60)}"`;
+    if (result && result.total_memories) detail += ` (${result.total_memories} total)`;
+  } else if (agentName === 'recall_memories') {
+    const count = result && result.memories ? result.memories.length : 0;
+    detail = `recalled ${count} memor${count === 1 ? 'y' : 'ies'}`;
+    if (result && result.total_stored) detail += ` of ${result.total_stored} stored`;
+  } else if (agentName === 'hacker_news') {
+    const count = result ? (Array.isArray(result) ? result.length : 0) : 0;
+    detail = `fetched ${count} top stor${count === 1 ? 'y' : 'ies'}`;
+  } else if (agentName === 'run_agent') {
+    const name = result && result.agent ? result.agent : args.agent_slug;
+    detail = `routed to ${name}`;
+  } else {
+    detail = JSON.stringify(result).slice(0, 80);
+  }
+
+  // Replace the spinning dot with a check, keep it visible
+  pill.innerHTML = `<span style="color:var(--green)">&#10003;</span> <strong>${name}</strong> &mdash; ${detail}`;
+  pill.style.borderStyle = 'solid';
+  pill.style.borderColor = 'var(--green)';
+  pill.style.color = 'var(--text-dim)';
+
+  const container = document.getElementById('chatMessages');
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeChatActivity(el) {
+  if (el && el.parentNode) el.parentNode.removeChild(el);
+}
+
+function showTypingIndicator() {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg assistant';
+  div.id = 'typingMsg';
+  div.innerHTML = `<div class="chat-avatar">VM</div><div class="chat-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const el = document.getElementById('typingMsg');
+  if (el) el.remove();
+}
+
+function renderChatMarkdown(text) {
+  // Bold
+  let html = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Headers
+  html = html.replace(/^### (.+)$/gm, '<strong style="font-size:.9rem">$1</strong>');
+  html = html.replace(/^## (.+)$/gm, '<strong style="font-size:.95rem">$1</strong>');
+  // Newlines
+  html = html.replace(/\n/g, '<br>');
+  // Tables (pipe-based)
+  html = html.replace(/(<br>)?\|(.+\|.+)\|(<br>)?/g, (m) => {
+    const rows = m.split('<br>').filter(r => r.trim().startsWith('|'));
+    if (rows.length < 2) return m;
+    const sep = rows[1];
+    if (/^\|\s*[-:]+/.test(sep)) {
+      const headers = rows[0].split('|').filter(Boolean).map(h => `<th>${h.trim()}</th>`).join('');
+      const body = rows.slice(2).map(r => '<tr>' + r.split('|').filter(Boolean).map(c => `<td>${c.trim()}</td>`).join('') + '</tr>').join('');
+      return `<table><tr>${headers}</tr>${body}</table>`;
+    }
+    return m;
+  });
+  return html;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text || chatBusy) return;
+
+  input.value = '';
+  chatBusy = true;
+  document.getElementById('chatSend').disabled = true;
+
+  // Render user message
+  addChatMsg('user', text.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>'));
+  chatHistory.push({ role: 'user', content: text });
+
+  showTypingIndicator();
+
+  try {
+    // Build messages with system prompt
+    const messages = [{ role: 'system', content: buildSystemPrompt() }, ...chatHistory];
+    let response = await callGitHubModels(messages);
+    let msg = response.choices[0].message;
+
+    // Handle tool calls (loop for multi-turn)
+    let maxLoops = 5;
+    while (msg.tool_calls && msg.tool_calls.length > 0 && maxLoops-- > 0) {
+      removeTypingIndicator();
+
+      // Add assistant's tool_calls message to history
+      chatHistory.push({
+        role: 'assistant',
+        content: msg.content || null,
+        tool_calls: msg.tool_calls
+      });
+
+      // Execute each tool call
+      for (const tc of msg.tool_calls) {
+        const fnName = tc.function.name;
+        const fnArgs = JSON.parse(tc.function.arguments || '{}');
+        const activityEl = addChatActivity(`${fnName.replace(/_/g, ' ')} agent working...`);
+
+        let result;
+        try {
+          result = await executeToolCall(fnName, fnArgs);
+        } catch(e) {
+          result = { error: e.message };
+        }
+
+        // Replace spinner with persistent agent result summary
+        finishChatActivity(activityEl, fnName, fnArgs, result);
+
+        chatHistory.push({
+          role: 'tool',
+          tool_call_id: tc.id,
+          content: JSON.stringify(result)
+        });
+      }
+
+      showTypingIndicator();
+      const followUp = [{ role: 'system', content: buildSystemPrompt() }, ...chatHistory];
+      response = await callGitHubModels(followUp);
+      msg = response.choices[0].message;
+    }
+
+    removeTypingIndicator();
+
+    const reply = msg.content || '(no response)';
+    chatHistory.push({ role: 'assistant', content: reply });
+    addChatMsg('assistant', renderChatMarkdown(reply));
+
+  } catch(e) {
+    removeTypingIndicator();
+    addChatMsg('assistant', `<span style="color:var(--red)">Error: ${e.message}</span>`);
+  }
+
+  chatBusy = false;
+  document.getElementById('chatSend').disabled = false;
+  document.getElementById('chatInput').focus();
+}
+
+function useSuggestion(el) {
+  if (!chatToken) { handleGHAuth(); return; }
+  document.getElementById('chatInput').value = el.textContent;
+  sendChat();
+}
+
+// ── GitHub Auth ──
+
+function updateGHPill() {
+  const dot = document.getElementById('ghDot');
+  const label = document.getElementById('ghLabel');
+  const input = document.getElementById('chatInput');
+  const send = document.getElementById('chatSend');
+  const modelLabel = document.getElementById('chatModelLabel');
+  const modelSelect = document.getElementById('modelSelect');
+
+  if (chatToken) {
+    dot.className = 'gh-dot on';
+    label.textContent = chatUser || 'Connected';
+    input.disabled = false;
+    send.disabled = false;
+    input.placeholder = 'Ask me anything...';
+    modelLabel.textContent = 'Model:';
+    modelSelect.style.display = '';
+  } else {
+    dot.className = 'gh-dot off';
+    label.textContent = 'Sign in';
+    input.disabled = true;
+    send.disabled = true;
+    input.placeholder = 'Sign in with GitHub to chat...';
+    modelLabel.textContent = 'GitHub Models -- sign in to start chatting';
+    modelSelect.style.display = 'none';
+  }
+}
+
+function extractModelName(raw) {
+  // Handle azureml://registries/azure-openai/models/gpt-4o/versions/2 -> gpt-4o
+  if (raw.includes('azureml://')) {
+    const match = raw.match(/\/models\/([^/]+)/);
+    if (match) return match[1];
+  }
+  // Handle other URI formats
+  if (raw.includes('/')) {
+    const parts = raw.split('/');
+    return parts[parts.length - 1] || parts[parts.length - 2] || raw;
+  }
+  return raw;
+}
+
+async function fetchModels() {
+  if (!chatToken) return;
+  try {
+    const resp = await fetch('https://models.inference.ai.azure.com/models', {
+      headers: { 'Authorization': `Bearer ${chatToken}` }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const list = data.data || data || [];
+
+    // Extract clean model names, filter to chat models
+    const seen = new Set();
+    const models = [];
+    for (const m of list) {
+      const rawId = m.id || m.name || '';
+      const caps = m.capabilities || {};
+      // Skip non-chat models
+      if (caps.chat_completion === false) continue;
+      if (/embed|whisper|dall-e|tts|audio/i.test(rawId)) continue;
+
+      const clean = extractModelName(rawId);
+      if (!seen.has(clean)) {
+        seen.add(clean);
+        models.push(clean);
+      }
+    }
+    models.sort();
+
+    if (models.length > 0) {
+      availableModels = models;
+      populateModelSelect(models);
+    }
+  } catch(e) {
+    console.warn('Failed to fetch models:', e.message);
+    populateModelSelect(['gpt-4o-mini', 'gpt-4o', 'gpt-4.1-mini', 'gpt-4.1-nano']);
+  }
+}
+
+function populateModelSelect(models) {
+  const select = document.getElementById('modelSelect');
+  select.innerHTML = models.map(m =>
+    `<option value="${m}" ${m === chatModel ? 'selected' : ''}>${m}</option>`
+  ).join('');
+  // If saved model not in list, select first
+  if (!models.includes(chatModel) && models.length > 0) {
+    chatModel = models[0];
+    select.value = chatModel;
+    localStorage.setItem('vb_model', chatModel);
+  }
+}
+
+function selectModel(model) {
+  chatModel = model;
+  localStorage.setItem('vb_model', model);
+}
+
+async function fetchGHUser() {
+  if (!chatToken) return;
+  try {
+    const resp = await fetch('https://api.github.com/user', {
+      headers: { 'Authorization': `Bearer ${chatToken}` }
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      chatUser = data.login;
+    } else {
+      chatToken = null;
+      localStorage.removeItem('rb_access_token');
+      localStorage.removeItem('gh_token');
+    }
+  } catch(e) { /* offline, keep token */ }
+  updateGHPill();
+}
+
+function handleGHAuth() {
+  if (chatToken) {
+    // Already signed in — sign out
+    if (confirm('Sign out of GitHub?')) {
+      chatToken = null;
+      chatUser = null;
+      localStorage.removeItem('rb_access_token');
+      localStorage.removeItem('gh_token');
+      updateGHPill();
+    }
+  } else {
+    // OAuth redirect
+    const redirect = window.location.origin + window.location.pathname;
+    const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo&redirect_uri=${encodeURIComponent(redirect)}`;
+    window.location.href = url;
+  }
+}
+
+async function handleAuthCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+
+  // Clean URL
+  const cleanUrl = window.location.href.split('?')[0] + (window.location.hash || '');
+  window.history.replaceState({}, '', cleanUrl);
+
+  try {
+    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    const data = await resp.json();
+    if (data.access_token) {
+      chatToken = data.access_token;
+      localStorage.setItem('rb_access_token', chatToken);
+      await fetchGHUser();
+      fetchModels();
+    }
+  } catch(e) {
+    console.error('Auth failed:', e);
+  }
+}
+
+
+// ── Agent Dropdown ──
+
+async function loadRegistryForChat() {
+  try {
+    const resp = await fetch(REGISTRY_URL);
+    const data = await resp.json();
+    availableAgents = (data.agents || []).filter(a => a._file);
+    populateAgentDropdown();
+    updateEnabledPills();
+  } catch(e) {
+    console.warn('Registry load for agent dropdown failed:', e.message);
+  }
+}
+
+function populateAgentDropdown(filter) {
+  const list = document.getElementById('agentDropdownList');
+  const q = (filter || '').toLowerCase();
+  let agents = availableAgents;
+  if (q) {
+    agents = agents.filter(a => {
+      const hay = [a.display_name, a.description, a.category, ...(a.tags || []), a.name].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  agents.sort((a, b) => {
+    const aOn = enabledAgents.has(a.name) ? 0 : 1;
+    const bOn = enabledAgents.has(b.name) ? 0 : 1;
+    if (aOn !== bOn) return aOn - bOn;
+    return a.display_name.localeCompare(b.display_name);
+  });
+
+  list.innerHTML = agents.map(a => {
+    const on = enabledAgents.has(a.name);
+    return `<div class="agent-dropdown-item ${on ? 'enabled' : ''}" onclick="toggleAgent('${a.name.replace(/'/g, "\\'")}')">
+      <div class="agent-check">${on ? '&#10003;' : ''}</div>
+      <div class="agent-dropdown-item-info">
+        <div class="agent-dropdown-item-name">${a.display_name}</div>
+        <div class="agent-dropdown-item-desc">${a.description}</div>
+      </div>
+      <button class="agent-dl-btn" onclick="event.stopPropagation();downloadAgent('${a.name.replace(/'/g, "\\'")}')" title="Download .py">&#8615;</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleAgent(slug) {
+  if (enabledAgents.has(slug)) {
+    enabledAgents.delete(slug);
+  } else {
+    enabledAgents.add(slug);
+  }
+  localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+  populateAgentDropdown(document.querySelector('.agent-dropdown-search')?.value);
+  updateEnabledPills();
+}
+
+function updateEnabledPills() {
+  // Update count badge
+  const total = BUILTIN_AGENTS.length + enabledAgents.size;
+  document.getElementById('agentCount').textContent = total;
+
+  // Update bottom-bar pills
+  const pillsEl = document.getElementById('enabledAgentPills');
+  let html = '';
+  for (const slug of enabledAgents) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent) {
+      html += `<span class="agent-enabled-pill" onclick="toggleAgent('${slug.replace(/'/g, "\\'")}')" title="Click to disable">${agent.display_name}</span>`;
+    }
+  }
+  pillsEl.innerHTML = html;
+
+  // Update welcome pills
+  const welcomePills = document.getElementById('welcomeAgentPills');
+  if (welcomePills) {
+    let whtml = '<span class="chat-agent-pill">ManageMemory</span><span class="chat-agent-pill">ContextMemory</span><span class="chat-agent-pill">HackerNews</span>';
+    for (const slug of enabledAgents) {
+      const agent = availableAgents.find(a => a.name === slug);
+      if (agent) {
+        whtml += `<span class="chat-agent-pill">${agent.display_name}</span>`;
+      }
+    }
+    welcomePills.innerHTML = whtml;
+  }
+}
+
+function toggleAgentDropdown(e) {
+  e.stopPropagation();
+  const panel = document.getElementById('agentDropdownPanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    panel.querySelector('.agent-dropdown-search').focus();
+    populateAgentDropdown();
+  }
+}
+
+function filterAgentDropdown(q) {
+  populateAgentDropdown(q);
+}
+
+// ── Hot-Load Agent via Drag & Drop ──
+
+let hotLoadedAgents = {};  // slug -> { manifest, source }
+
+function handleAgentDrop(event) {
+  event.preventDefault();
+  document.getElementById('dropOverlay').classList.remove('active');
+
+  const files = event.dataTransfer.files;
+  for (const file of files) {
+    if (!file.name.endsWith('.py')) {
+      showToast(`Skipped ${file.name} — only .py files`, true);
+      continue;
+    }
+    const reader = new FileReader();
+    reader.onload = () => hotLoadAgent(file.name, reader.result);
+    reader.readAsText(file);
+  }
+}
+
+function hotLoadAgent(filename, source) {
+  // Extract docstring (used for description fallback)
+  const docMatch = source.match(/^(?:"""([\s\S]*?)"""|'''([\s\S]*?)''')/m);
+  const docstring = (docMatch && (docMatch[1] || docMatch[2]) || '').trim();
+
+  // Try to parse __manifest__ from source using regex (safe, no eval)
+  const manifestMatch = source.match(/__manifest__\s*=\s*(\{[\s\S]*?\n\})/);
+  let manifest = null;
+
+  if (manifestMatch) {
+    let jsonStr = manifestMatch[1]
+      .replace(/#[^\n]*/g, '')            // strip comments
+      .replace(/'/g, '"')                  // single to double quotes
+      .replace(/True/g, 'true')
+      .replace(/False/g, 'false')
+      .replace(/None/g, 'null')
+      .replace(/,\s*([\]}])/g, '$1');      // trailing commas
+    try {
+      manifest = JSON.parse(jsonStr);
+    } catch(e) {
+      // Manifest exists but can't parse — still accept the agent
+      manifest = null;
+    }
+  }
+
+  // If no manifest or missing required fields, synthesize one from the file
+  if (!manifest || !manifest.name || !manifest.display_name) {
+    const stem = filename.replace(/\.py$/, '');
+    // Try to find a class name in the source
+    const classMatch = source.match(/class\s+(\w+)/);
+    const className = classMatch ? classMatch[1] : stem.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).replace(/\s/g, '');
+    const displayName = manifest?.display_name || className;
+    const slug = manifest?.name || `@local/${stem}`;
+
+    manifest = {
+      schema: 'rapp-agent/1.0',
+      name: slug,
+      display_name: displayName,
+      description: manifest?.description || docstring.split('\n')[0] || `Loaded from ${filename}`,
+      author: manifest?.author || 'Local',
+      tags: manifest?.tags || [],
+      category: manifest?.category || 'general',
+      version: manifest?.version || '0.0.0',
+      requires_env: manifest?.requires_env || [],
+      ...(manifest || {})  // keep anything else the partial manifest had
+    };
+  }
+
+  const slug = manifest.name;
+  const doc = docstring || manifest.description || '';
+
+  // Store the hot-loaded agent in memory and VFS
+  hotLoadedAgents[slug] = { manifest, source, doc: doc.trim() };
+  VFS.write(`agents/${filename}`, source);
+
+  // Add to availableAgents if not already there
+  const existing = availableAgents.findIndex(a => a.name === slug);
+  const entry = {
+    name: slug,
+    display_name: manifest.display_name,
+    description: manifest.description || '',
+    category: manifest.category || 'general',
+    version: manifest.version || '1.0.0',
+    author: manifest.author || 'Local',
+    tags: manifest.tags || [],
+    quality_tier: 'local',
+    requires_env: manifest.requires_env || [],
+    _file: filename,
+    _hot_loaded: true
+  };
+  if (existing >= 0) {
+    availableAgents[existing] = entry;
+  } else {
+    availableAgents.unshift(entry);
+  }
+
+  // Auto-enable
+  enabledAgents.add(slug);
+  localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+  populateAgentDropdown();
+  updateEnabledPills();
+
+  const hadManifest = !!manifestMatch;
+
+  if (!_silentRestore) {
+    showToast(`${manifest.display_name} hot-loaded and enabled`);
+    if (hadManifest) {
+      addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code>. I can now route requests to this agent.`);
+    } else {
+      addChatMsg('assistant', `<strong>${manifest.display_name}</strong> has been hot-loaded from <code>${filename}</code> (no manifest — inferred from source). I can now route requests to this agent.`);
+    }
+  }
+}
+
+function showToast(msg, isError) {
+  const existing = document.querySelector('.vb-toast');
+  if (existing) existing.remove();
+
+  const el = document.createElement('div');
+  el.className = 'vb-toast';
+  if (isError) { el.style.background = 'var(--red)'; }
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', e => {
+  const panel = document.getElementById('agentDropdownPanel');
+  if (panel && panel.classList.contains('open') && !e.target.closest('.agent-dropdown-wrap')) {
+    panel.classList.remove('open');
+  }
+});
+
+// ── Agent Download ──
+
+async function downloadAgent(slug) {
+  let source = null;
+  let filename = null;
+
+  // Check VFS / hot-loaded first
+  if (hotLoadedAgents[slug]) {
+    source = hotLoadedAgents[slug].source;
+    filename = slug.replace(/^@\w+\//, '') + '.py';
+  }
+
+  // Try VFS
+  if (!source) {
+    const vfsFiles = VFS.listAgents();
+    for (const f of vfsFiles) {
+      const content = VFS.read(f);
+      if (content && content.includes(slug)) {
+        source = content;
+        filename = f.replace('agents/', '');
+        break;
+      }
+    }
+  }
+
+  // Fetch from registry
+  if (!source) {
+    const agent = availableAgents.find(a => a.name === slug);
+    if (agent && agent._file) {
+      try {
+        source = await fetchAgent(agent);
+        filename = agent._file.split('/').pop();
+      } catch(e) {
+        showToast(`Failed to download: ${e.message}`, true);
+        return;
+      }
+    }
+  }
+
+  if (!source) {
+    showToast('Agent source not available', true);
+    return;
+  }
+
+  // Trigger browser download
+  const blob = new Blob([source], { type: 'text/x-python' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`Downloaded ${filename}`);
+}
+
+// ── Chat Export / Import ──
+
+function exportChat() {
+  if (chatHistory.length === 0) {
+    showToast('No chat to export', true);
+    return;
+  }
+  const payload = {
+    version: 1,
+    exported: new Date().toISOString(),
+    user: chatUser || 'anonymous',
+    model: chatModel,
+    messages: chatHistory
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `brainstem-chat-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Chat exported');
+}
+
+function importChat() {
+  document.getElementById('importChatFile').click();
+}
+
+function handleChatImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      const messages = data.messages || data;
+      if (!Array.isArray(messages)) throw new Error('Invalid format');
+
+      // Clear current chat UI
+      const container = document.getElementById('chatMessages');
+      const welcome = document.getElementById('chatWelcome');
+      if (welcome) welcome.style.display = 'none';
+      container.querySelectorAll('.chat-msg').forEach(el => el.remove());
+
+      // Restore history and render
+      chatHistory = messages;
+      for (const msg of messages) {
+        if (msg.role === 'user') {
+          addChatMsg('user', msg.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+        } else if (msg.role === 'assistant' && msg.content) {
+          addChatMsg('assistant', renderChatMarkdown(msg.content));
+        }
+      }
+      showToast(`Imported ${messages.length} messages`);
+    } catch(e) {
+      showToast(`Import failed: ${e.message}`, true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ── VFS Agent Restore — reload agents persisted across sessions ──
+
+let _silentRestore = false;
+
+function restoreVFSAgents() {
+  const agentFiles = VFS.listAgents();
+  if (agentFiles.length === 0) return;
+  _silentRestore = true;
+  for (const path of agentFiles) {
+    const source = VFS.read(path);
+    if (!source) continue;
+    const filename = path.replace('agents/', '');
+    hotLoadAgent(filename, source);
+  }
+  _silentRestore = false;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SECTION 7: Init
+// ═══════════════════════════════════════════════════════════════════════
+
+// ── Summon variant: deep-link toast ──
+function showSummonToast(addedNames, registry) {
+  const t = document.createElement('div');
+  t.className = 'summon-toast';
+  const display = (slug) => {
+    const a = registry.find(x => x.name === slug);
+    return a?.display_name || slug;
+  };
+  if (addedNames.length === 1) {
+    t.innerHTML = `Summoned <b>${display(addedNames[0])}</b> &middot; ready in agent dropdown`;
+  } else {
+    t.innerHTML = `Summoned <b>${addedNames.length} agents</b> &middot; ready in agent dropdown`;
+  }
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('show'));
+  setTimeout(() => {
+    t.classList.remove('show');
+    setTimeout(() => t.remove(), 400);
+  }, 3500);
+}
+
+async function applySummonDeepLink() {
+  const params = new URLSearchParams(location.search);
+  const slugs = params.getAll('agent');
+  if (!slugs.length) return;
+  const known = new Set(availableAgents.map(a => a.name));
+  // Also tolerate slug variants (dash/underscore)
+  const resolve = (s) => {
+    if (known.has(s)) return s;
+    const v1 = s.replace(/_/g, '-'); if (known.has(v1)) return v1;
+    const v2 = s.replace(/-/g, '_'); if (known.has(v2)) return v2;
+    return null;
+  };
+  const added = [];
+  for (const s of slugs) {
+    const real = resolve(s);
+    if (real && !enabledAgents.has(real)) {
+      enabledAgents.add(real);
+      added.push(real);
+    }
+  }
+  if (added.length) {
+    localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+    try { populateAgentDropdown(); } catch (_) {}
+    try { updateEnabledPills(); } catch (_) {}
+    showSummonToast(added, availableAgents);
+  }
+  // Strip ?agent= so a refresh doesn't re-summon
+  const url = new URL(location.href);
+  url.searchParams.delete('agent');
+  history.replaceState({}, '', url.toString());
+}
+
+(async function init() {
+  // Handle OAuth callback if present
+  await handleAuthCallback();
+
+  // Check existing token
+  if (chatToken) {
+    await fetchGHUser();
+    fetchModels(); // non-blocking — populates dropdown in background
+  }
+  updateGHPill();
+
+  // Restore agents from VFS (persisted across sessions)
+  restoreVFSAgents();
+
+  // Load registry for agent dropdown — await so summon can validate
+  await loadRegistryForChat();
+
+  // Apply summon deep-link (?agent=@pub/slug) if present
+  await applySummonDeepLink();
+})();
+
+</script>
+</body>
+</html>
