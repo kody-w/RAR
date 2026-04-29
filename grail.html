@@ -880,10 +880,12 @@ async function load() {
   overlay.addEventListener('click', e => { if (e.target === overlay) closeFullscreen(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeFullscreen(); });
 
-  // On narrow viewports (phones), auto-open fullscreen so QR scanners
-  // get the wow moment immediately.
+  // Auto-open fullscreen if (a) ?fs=1 is in the URL, or (b) we're on a
+  // touch + narrow viewport — QR scanners and direct fullscreen links
+  // both get the wow moment immediately.
+  const wantsFs = new URLSearchParams(location.search).get('fs') === '1';
   const isPhone = window.matchMedia('(max-width: 720px)').matches && 'ontouchstart' in window;
-  if (isPhone) setTimeout(openFullscreen, 350);
+  if (wantsFs || isPhone) setTimeout(openFullscreen, 350);
 }
 
 window.addEventListener('hashchange', () => location.reload());
