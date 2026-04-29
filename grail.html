@@ -73,94 +73,248 @@ header {
   .top { grid-template-columns: 1fr; }
 }
 
-/* ── Card frame (MTG-ish) ───────────────────────────────────────── */
-.card-wrap { perspective: 1200px; }
-.card {
-  width: 100%; max-width: 380px; aspect-ratio: 5 / 7;
-  border-radius: 16px; padding: 14px;
-  background:
-    radial-gradient(ellipse at 30% 0%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(160deg, #1a1a2e 0%, #0d0d18 60%, #050511 100%);
-  border: 1px solid rgba(255,255,255,.1);
-  box-shadow:
-    0 24px 60px rgba(0,0,0,.6),
-    0 4px 16px rgba(88,166,255,.1),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-  display: flex; flex-direction: column; gap: 10px;
-  font-family: 'Cinzel', Georgia, serif;
-  position: relative; overflow: hidden;
-  transition: transform .35s ease;
+/* ── Holo card frame (ported from store.html — MTG-style) ─────── */
+.agent-card-wrap {
+  position: relative; width: 100%; max-width: 380px;
+  aspect-ratio: 5 / 7; perspective: 1200px;
+  --mx: 50%; --my: 50%; --px: 0.5; --py: 0.5; --angle: 0deg;
 }
-.card:hover { transform: rotateY(2deg) rotateX(-1deg); }
-.card-rarity-rare    { box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 32px rgba(212,175,55,.18), inset 0 0 0 1px rgba(212,175,55,.18); }
-.card-rarity-mythic  { box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 36px rgba(255,107,53,.22), inset 0 0 0 1px rgba(255,107,53,.25); }
-.card-rarity-legendary { box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 40px rgba(188,140,255,.30), inset 0 0 0 1px rgba(188,140,255,.30); }
-
-.card-top {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 4px 6px;
-  background: linear-gradient(90deg, rgba(0,0,0,.3), rgba(0,0,0,.15));
-  border-radius: 8px;
+@keyframes holoShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-.card-name {
-  font-size: 1.1rem; font-weight: 700; letter-spacing: .3px;
-  color: #f5f3ea; text-shadow: 0 1px 2px rgba(0,0,0,.7);
+@keyframes holoRainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
-.mana-cost { display: flex; gap: 3px; }
-.mana {
-  width: 22px; height: 22px; border-radius: 50%;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: .75rem; font-weight: 800; font-family: -apple-system, sans-serif;
-  color: #1a1a1a;
-  box-shadow: inset 0 -2px 3px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.4);
+@keyframes holoScanScroll { to { background-position-y: 200px; } }
+@keyframes holoOrbitA {
+  0%   { background-position: 0% 0%; }
+  25%  { background-position: 100% 0%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
 }
-.mana-W { background: var(--mana-w); }
-.mana-U { background: var(--mana-u); }
-.mana-B { background: var(--mana-b); }
-.mana-R { background: var(--mana-r); }
-.mana-G { background: var(--mana-g); }
-.mana-C { background: var(--mana-c); }
-
-.card-art {
-  flex: 0 0 auto; aspect-ratio: 4 / 3;
-  background: #050811; border-radius: 6px;
-  border: 1px solid rgba(255,255,255,.08);
-  overflow: hidden;
+@keyframes holoOrbitB {
+  0%   { background-position: 100% 100%; }
+  25%  { background-position: 0% 100%; }
+  50%  { background-position: 0% 0%; }
+  75%  { background-position: 100% 0%; }
+  100% { background-position: 100% 100%; }
 }
-.card-art svg { width: 100%; height: 100%; display: block; }
-
-.card-typeline {
-  font-size: .82rem; padding: 4px 8px;
-  background: linear-gradient(90deg, rgba(0,0,0,.3), rgba(0,0,0,.1));
-  color: #f5f3ea; border-radius: 4px; font-style: italic;
+@keyframes rarityPulse {
+  0%, 100% { box-shadow: 0 0 10px currentColor; transform: scale(1); }
+  50% { box-shadow: 0 0 18px currentColor, 0 0 30px currentColor; transform: scale(1.15); }
 }
-
-.card-text {
-  flex: 1 1 auto; padding: 10px 12px;
-  background: rgba(245, 243, 234, .92); color: #1a1a1a;
-  border-radius: 6px; font-family: 'Charter', Georgia, serif;
-  font-size: .82rem; overflow: auto;
-  display: flex; flex-direction: column; gap: 7px;
+.agent-card-holo {
+  position: absolute; inset: 0; border-radius: 14px;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  overflow: hidden; border: 3px solid #c9a84c;
+  background: linear-gradient(160deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
+  display: flex; flex-direction: column; padding: 0;
+  box-shadow: 0 24px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,215,0,.08);
 }
-.ability { line-height: 1.35; }
-.ability .kw { font-weight: 700; }
-.ability .cost { color: #555; font-size: .9em; }
-.flavor {
-  margin-top: auto; padding-top: 8px;
-  border-top: 1px dashed rgba(0,0,0,.2);
-  font-style: italic; color: #555; font-size: .78rem;
+.agent-card-holo::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(125deg,
+    transparent 0%, rgba(255,0,128,.06) 15%, rgba(0,200,255,.08) 30%, transparent 40%,
+    rgba(255,215,0,.06) 55%, rgba(128,0,255,.07) 70%, transparent 80%,
+    rgba(0,255,128,.05) 90%, transparent 100%);
+  background-size: 300% 300%;
+  animation: holoShimmer 6s ease-in-out infinite;
+  mix-blend-mode: screen;
+  transition: background-position .1s ease;
 }
-
-.card-bottom {
+.agent-card-holo .holo-shimmer-track {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(ellipse 60% 80% at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,.22) 0%, rgba(255,220,150,.10) 20%, rgba(0,200,255,.06) 40%, transparent 70%);
+  opacity: 0; transition: opacity .3s ease;
+  mix-blend-mode: screen;
+}
+.agent-card-wrap:hover .holo-shimmer-track { opacity: 1; }
+.agent-card-holo .holo-prism {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(calc(var(--angle, 0deg) + 90deg),
+    rgba(255,0,80,.0) 0%, rgba(255,0,120,.10) 12%, rgba(255,165,0,.08) 22%,
+    rgba(255,255,0,.06) 32%, rgba(0,255,100,.08) 42%, rgba(0,180,255,.10) 52%,
+    rgba(100,0,255,.08) 62%, rgba(255,0,200,.06) 72%, rgba(255,0,80,.0) 82%);
+  opacity: 0; transition: opacity .3s ease;
+  mix-blend-mode: screen;
+}
+.agent-card-wrap:hover .holo-prism { opacity: 1; }
+.holo-fresnel {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  border-radius: inherit; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(ellipse at var(--mx, 50%) var(--my, 50%),
+    transparent 30%, rgba(0,255,255,.1) 60%, rgba(255,0,255,.15) 100%);
+  mix-blend-mode: screen;
+}
+.agent-card-wrap:hover .holo-fresnel { opacity: 1; }
+.holo-scanlines {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  border-radius: inherit; opacity: 0; transition: opacity .3s;
+  background: repeating-linear-gradient(0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,255,255,.025) 2px, rgba(0,255,255,.025) 4px);
+  animation: holoScanScroll 4s linear infinite;
+  mix-blend-mode: screen;
+}
+.agent-card-wrap:hover .holo-scanlines { opacity: 1; }
+.holo-orbit-cyan, .holo-orbit-magenta {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  border-radius: inherit; opacity: 0; transition: opacity .3s;
+  mix-blend-mode: screen; background-size: 200% 200%;
+}
+.agent-card-wrap:hover .holo-orbit-cyan,
+.agent-card-wrap:hover .holo-orbit-magenta { opacity: 1; }
+.holo-orbit-cyan {
+  background: radial-gradient(circle at 30% 30%, rgba(0,255,255,.1), transparent 50%);
+  animation: holoOrbitA 6s linear infinite;
+}
+.holo-orbit-magenta {
+  background: radial-gradient(circle at 70% 70%, rgba(255,0,255,.1), transparent 50%);
+  animation: holoOrbitB 6s linear infinite;
+}
+.agent-card-holo::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: repeating-linear-gradient(
+    calc(105deg + var(--angle, 0deg) * 0.3),
+    transparent 0px, rgba(255,255,255,.025) 1px, transparent 3px,
+    rgba(255,255,255,.015) 4px, transparent 6px);
+  mix-blend-mode: overlay;
+}
+.agent-card-holo:hover::before {
+  animation: none;
+  background: linear-gradient(calc(125deg + var(--angle, 0deg)),
+    transparent 0%, rgba(255,0,128,.14) 15%, rgba(0,200,255,.16) 30%, transparent 40%,
+    rgba(255,215,0,.14) 55%, rgba(128,0,255,.16) 70%, transparent 80%,
+    rgba(0,255,128,.12) 90%, transparent 100%);
+  background-size: 300% 300%;
+  background-position: var(--mx, 50%) var(--my, 50%);
+}
+.holo-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 10px 14px 4px; position: relative; z-index: 5;
+  flex-shrink: 0; gap: 10px;
+}
+.holo-name {
+  font-size: 1rem; font-weight: 700; color: #f0e6d0;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  line-height: 1.15; font-family: 'Cinzel', Georgia, serif;
+}
+.holo-title { font-size: .72rem; color: #c8a870; font-style: italic; margin-top: 2px; }
+.holo-pips { display: flex; gap: 4px; }
+.holo-pip {
+  width: 22px; height: 22px; border-radius: 50%; font-size: .7rem;
+  font-weight: 800; display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid rgba(0,0,0,.5); text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  box-shadow: 0 1px 4px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.holo-pip.W { background: #f9faf4; color: #333; }
+.holo-pip.U { background: #0e68ab; color: #fff; }
+.holo-pip.B { background: #150b00; color: #cbc2b6; border-color: #4a3f32; }
+.holo-pip.R { background: #d3202a; color: #fff; }
+.holo-pip.G { background: #00733e; color: #fff; }
+.holo-pip.N, .holo-pip.C { background: #9e9e9e; color: #333; }
+.holo-art {
+  margin: 0 12px; border: 2px solid #6a5a30;
+  border-radius: 4px;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(40,35,20,.9) 0%, #0d0a06 70%);
+  position: relative; z-index: 5;
+  flex: 1 1 0; min-height: 0;
+}
+.holo-art::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.12) 0%, rgba(201,168,76,.04) 40%, transparent 70%);
+}
+.holo-art svg {
+  width: 92%; height: 92%; position: relative; z-index: 2;
+  transform: translate(
+    calc((0.5 - var(--px, 0.5)) * 6px),
+    calc((0.5 - var(--py, 0.5)) * 6px)
+  ) scale(1.04);
+  transition: transform .1s ease-out;
+}
+.holo-art::after {
+  content: ''; position: absolute; inset: -10%; pointer-events: none; z-index: 3;
+  background: linear-gradient(calc(135deg + var(--angle, 0deg)),
+    rgba(255,100,200,.12) 0%, transparent 25%,
+    rgba(100,200,255,.15) 45%, transparent 55%,
+    rgba(255,200,50,.10) 75%, transparent 100%);
+  background-size: 200% 200%;
+  background-position: var(--mx, 50%) var(--my, 50%);
+  animation: holoRainbow 8s linear infinite;
+  mix-blend-mode: screen;
+  transition: background-position .1s ease-out;
+}
+.agent-card-wrap:hover .holo-art::after { animation: none; }
+.holo-type {
+  font-size: .72rem; color: #c8b89a; padding: 4px 14px;
+  border-top: 1px solid #4d4332; border-bottom: 1px solid #4d4332;
+  background: rgba(50,40,25,.6);
+  position: relative; z-index: 5;
+  flex-shrink: 0;
+}
+.holo-text {
+  padding: 7px 12px; overflow: hidden;
+  font-size: .74rem; color: #d8c8a8; line-height: 1.4;
+  background: rgba(30,25,15,.4); margin: 0;
+  position: relative; z-index: 5;
+  flex-shrink: 0;
+}
+.holo-ability { margin-bottom: 4px; }
+.holo-ability .kw { font-weight: 700; color: #ffd700; }
+.holo-flavor {
+  font-style: italic; font-size: .65rem; color: #9a8e7a;
+  border-top: 1px solid #3d3322; padding-top: 4px; margin-top: 5px;
+  line-height: 1.35;
+}
+.holo-footer {
   display: flex; justify-content: space-between; align-items: center;
-  font-size: .72rem; color: #cdc8b8; padding: 0 4px;
+  padding: 5px 14px 7px; font-size: .7rem;
+  position: relative; z-index: 5;
+  white-space: nowrap; overflow: hidden;
+  flex-shrink: 0; margin-top: auto;
 }
-.set-code { letter-spacing: .5px; opacity: .8; }
-.pt-box {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border: 1px solid rgba(255,255,255,.18); padding: 4px 12px;
-  border-radius: 6px; font-weight: 700; font-size: .9rem; color: #f5f3ea;
-  box-shadow: inset 0 -2px 4px rgba(0,0,0,.4);
+.holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
+.holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 10px rgba(255,140,0,.6), 0 0 20px rgba(255,140,0,.3); }
+.holo-rarity.rare { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,.5), 0 0 16px rgba(255,215,0,.2); }
+.holo-rarity.uncommon, .holo-rarity.core { color: #c0c0c0; text-shadow: 0 0 4px rgba(192,192,192,.3); }
+.holo-rarity.common, .holo-rarity.starter { color: #8899aa; }
+.holo-stats {
+  font-weight: 800; font-size: 1.15rem; color: #f0e6d0;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  background: rgba(40,35,20,.6); padding: 2px 10px; border-radius: 4px;
+  border: 1px solid rgba(201,168,76,.3);
+}
+.holo-artist { font-style: italic; color: #c9a84c; }
+.holo-promo { color: #ffd700; font-weight: 700; font-size: .6rem; letter-spacing: .5px; }
+.holo-rarity-gem {
+  position: absolute; top: 8px; right: -1px; z-index: 6;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.4);
+  pointer-events: none;
+}
+.holo-rarity-gem.mythic {
+  background: radial-gradient(circle, #ffaa00, #ff6600);
+  box-shadow: 0 0 10px rgba(255,140,0,.8), 0 0 20px rgba(255,140,0,.4);
+  animation: rarityPulse 2s ease-in-out infinite;
+}
+.holo-rarity-gem.rare {
+  background: radial-gradient(circle, #ffe44d, #ffc800);
+  box-shadow: 0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.3);
+  animation: rarityPulse 2.5s ease-in-out infinite;
+}
+.holo-rarity-gem.uncommon, .holo-rarity-gem.core {
+  background: radial-gradient(circle, #e0e0e0, #a0a0a0);
+  box-shadow: 0 0 6px rgba(192,192,192,.5);
+}
+.holo-rarity-gem.common, .holo-rarity-gem.starter {
+  background: radial-gradient(circle, #8899aa, #667788);
+  box-shadow: 0 0 4px rgba(100,120,140,.3);
 }
 
 /* ── Metadata column ────────────────────────────────────────────── */
@@ -365,49 +519,66 @@ async function load() {
   if (!card) card = {};
 
   const rarity = card.rarity || 'common';
-  const cls = ['card', `card-rarity-${rarity}`].join(' ');
-  const manaPips = parseManaCost(card.mana_cost).map(manaPip).join('');
-  const abilities = (card.abilities || []).map(a => `
-    <div class="ability">
-      ${a.keyword ? `<span class="kw">${esc(a.keyword)}</span>` : ''}
-      ${a.cost ? `<span class="cost">${esc(a.cost)}</span>` : ''}
-      ${a.text ? ` — ${esc(a.text)}` : ''}
-    </div>`).join('');
-  const ptBox = (card.power !== undefined && card.toughness !== undefined)
-    ? `<div class="pt-box">${esc(card.power)}/${esc(card.toughness)}</div>` : '';
 
-  const setCode = card.set_code || 'RAPP·' + (rarity.slice(0,3).toUpperCase());
+  // Mana pips: prefer mana_cost string ({3}{N}{R}), fall back to colors[]
+  const manaSyms = card.mana_cost ? parseManaCost(card.mana_cost) : (card.colors || []);
+  const manaPipsHtml = manaSyms.map(sym => {
+    const code = String(sym).toUpperCase();
+    const cls = 'WUBRGN'.includes(code) ? code : 'C';
+    return `<span class="holo-pip ${cls}">${esc(sym)}</span>`;
+  }).join('');
+
+  const abilitiesHtml = (card.abilities || []).slice(0, 3).map(a => {
+    const kw = a.keyword + (a.cost ? ` ${a.cost}` : '');
+    return `<div class="holo-ability"><span class="kw">${esc(kw)}:</span> ${esc(a.text || '')}</div>`;
+  }).join('');
+
   const filePath = agent._file || '';
   const firstSha = agent._first_commit_sha || '';
   const latestSha = agent._latest_commit_sha || '';
   const py_url_main = `${RAW_BASE}/main/${filePath}`;
   const py_url_pinned = latestSha ? `${RAW_BASE}/${latestSha}/${filePath}` : py_url_main;
 
-  // Avatar SVG comes pre-rendered from the forge — inject it directly
   const avatar = card.avatar_svg
     ? card.avatar_svg
-    : `<svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d1117"/><text x="100" y="105" text-anchor="middle" fill="#58a6ff" font-size="14" font-family="monospace">${esc(agent.display_name || agent.name.split('/').pop())}</text></svg>`;
+    : `<svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d0a06"/><text x="100" y="105" text-anchor="middle" fill="#c9a84c" font-size="14" font-family="monospace">${esc(agent.display_name || agent.name.split('/').pop())}</text></svg>`;
 
   const publisher = (agent.name || '').split('/')[0];
   const slug = (agent.name || '').split('/').slice(1).join('/');
 
+  const setCode = card.set_code || 'HOLO';
+  const rarityLabel = rarity.charAt(0).toUpperCase() + rarity.slice(1);
+  const power = card.power, toughness = card.toughness;
+  const ptHtml = (power != null && toughness != null)
+    ? `<span class="holo-stats">${esc(power)}/${esc(toughness)}</span>` : '';
+
   root.innerHTML = `
     <div class="top">
-      <div class="card-wrap">
-        <div class="${cls}">
-          <div class="card-top">
-            <div class="card-name">${esc(card.name || agent.display_name || slug)}</div>
-            <div class="mana-cost">${manaPips}</div>
+      <div class="agent-card-wrap" id="holo-wrap">
+        <div class="agent-card-holo">
+          <div class="holo-rarity-gem ${rarity}"></div>
+          <div class="holo-shimmer-track"></div>
+          <div class="holo-prism"></div>
+          <div class="holo-fresnel"></div>
+          <div class="holo-scanlines"></div>
+          <div class="holo-orbit-cyan"></div>
+          <div class="holo-orbit-magenta"></div>
+          <div class="holo-header">
+            <div style="min-width:0;flex:1;overflow:hidden">
+              <div class="holo-name">${esc(card.name || agent.display_name || slug)}</div>
+              ${card.title ? `<div class="holo-title">${esc(card.title)}</div>` : ''}
+            </div>
+            <div class="holo-pips" style="flex-shrink:0">${manaPipsHtml}</div>
           </div>
-          <div class="card-art">${avatar}</div>
-          <div class="card-typeline">${esc(card.type_line || agent.category || 'Agent')}</div>
-          <div class="card-text">
-            ${abilities || `<div class="ability">${esc(agent.description || '')}</div>`}
-            ${card.flavor_text ? `<div class="flavor">${esc(card.flavor_text)}</div>` : ''}
+          <div class="holo-art">${avatar}</div>
+          <div class="holo-type">${esc(card.type_line || 'Creature — Agent')}</div>
+          <div class="holo-text">
+            ${abilitiesHtml || `<div class="holo-ability">${esc(agent.description || '')}</div>`}
+            ${card.flavor_text ? `<div class="holo-flavor">${esc(card.flavor_text)}</div>` : ''}
           </div>
-          <div class="card-bottom">
-            <div class="set-code">${esc(setCode)}</div>
-            ${ptBox}
+          <div class="holo-footer">
+            <span class="holo-rarity ${rarity}">${esc(setCode)}${card.promo ? ' <span class="holo-promo">★ Promo</span>' : ''} • ${esc(rarityLabel)}${card.artist ? ` • <span class="holo-artist">${esc(card.artist)}</span>` : ''}</span>
+            ${ptHtml}
           </div>
         </div>
       </div>
@@ -499,6 +670,29 @@ async function load() {
       });
     };
   });
+  // Cursor-tracked shimmer / prism / parallax on the holo card
+  const wrap = document.getElementById('holo-wrap');
+  const holo = wrap?.querySelector('.agent-card-holo');
+  if (wrap && holo) {
+    const onMove = (cx, cy) => {
+      const rect = wrap.getBoundingClientRect();
+      const x = (cx - rect.left) / rect.width;
+      const y = (cy - rect.top) / rect.height;
+      const angle = (Math.atan2(y - 0.5, x - 0.5) * 180 / Math.PI).toFixed(0);
+      const mxPct = (x * 100).toFixed(0) + '%';
+      const myPct = (y * 100).toFixed(0) + '%';
+      holo.style.setProperty('--mx', mxPct);
+      holo.style.setProperty('--my', myPct);
+      holo.style.setProperty('--px', x.toFixed(3));
+      holo.style.setProperty('--py', y.toFixed(3));
+      holo.style.setProperty('--angle', angle + 'deg');
+      const shimmer = holo.querySelector('.holo-shimmer-track');
+      if (shimmer) { shimmer.style.setProperty('--mx', mxPct); shimmer.style.setProperty('--my', myPct); }
+    };
+    wrap.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+    wrap.addEventListener('touchmove', e => { const t = e.touches[0]; if (t) onMove(t.clientX, t.clientY); }, { passive: true });
+  }
+
   document.getElementById('share-link').onclick = () => {
     navigator.clipboard.writeText(location.href).then(() => {
       const el = document.getElementById('share-link');
