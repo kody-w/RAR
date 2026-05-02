@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-04-28T21:57:38.330074+00:00",
+  "generated_at": "2026-05-02T18:13:56.249825+00:00",
   "stats": {
-    "total_agents": 278,
+    "total_agents": 280,
     "total_swarms": 82,
     "publishers": 10,
     "categories": 22,
@@ -4637,6 +4637,44 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/workiq",
+      "version": "1.0.0",
+      "display_name": "WorkIQ",
+      "description": "Natural-language access to Microsoft 365 data \u2014 emails, calendar, SharePoint/OneDrive, Teams messages, people. Wraps the workiq CLI (Entra ID auth required).",
+      "author": "Kody",
+      "tags": [
+        "m365",
+        "microsoft",
+        "email",
+        "calendar",
+        "teams",
+        "sharepoint",
+        "workiq"
+      ],
+      "category": "integrations",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "npm install -g @microsoft/workiq",
+        "workiq accept-eula",
+        "Entra ID login (run `workiq ask` once)"
+      ],
+      "example_call": "What emails did I receive from my manager this week?",
+      "_file": "agents/@kody/workiq_agent.py",
+      "_sha256": "f52f3f6bb1a714375e4ad0ad083b725061e2150847fcce2da26d566235ccef1f",
+      "_seed": 11504693252822279853,
+      "_size_kb": 9.5,
+      "_lines": 249,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/hello_world_agent",
       "version": "1.0.0",
       "display_name": "Hello World",
@@ -4734,7 +4772,7 @@
       "display_name": "CopilotStudioForge",
       "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
       "author": "RAPP",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "tags": [
         "meta",
         "copilot-studio",
@@ -4755,14 +4793,14 @@
       },
       "anchored_on": "https://github.com/microsoft/skills-for-copilot-studio",
       "_file": "agents/@rapp/copilot_studio_forge_agent.py",
-      "_sha256": "6a98073e0469ac6fa7a0ce7906650d283e6e7d3054d5d69e3a734b10b64121b2",
+      "_sha256": "c5aad52466df06e1ae329064d4252b6c474b88c97fcd0c53714252018c9dd79a",
       "_seed": 6041207226650733437,
-      "_size_kb": 43.8,
-      "_lines": 1010,
+      "_size_kb": 44.5,
+      "_lines": 1027,
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "6a3798346214837567a08619a026575a4198e448",
+      "_latest_commit_sha": "a82c6ba64b0257f08b2628e15934a217209ee08d",
       "_card_sha256": "993a8390a15cf5f6db9b2c9657544317c22aa6088c5d19ffb55a890530c1aaed"
     },
     {
@@ -4839,6 +4877,32 @@
       "_first_commit_sha": "8893033dba286f7269a6e171f4729639fd15fa9b",
       "_latest_commit_sha": "8893033dba286f7269a6e171f4729639fd15fa9b",
       "_card_sha256": "bbb50180a4140e2d907e9ffcd24ed9b2bc1e431a68cef109d521c5f46131d7d7"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/hacker_news",
+      "version": "1.0.0",
+      "display_name": "Hacker News",
+      "description": "Fetches the top N stories from Hacker News.",
+      "author": "RAPP",
+      "tags": [
+        "starter",
+        "news",
+        "http"
+      ],
+      "category": "integrations",
+      "quality_tier": "official",
+      "requires_env": [],
+      "example_call": "What are the top 5 stories on Hacker News right now?",
+      "_file": "agents/@rapp/hacker_news_agent.py",
+      "_sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
+      "_seed": 12872764946609739620,
+      "_size_kb": 4.2,
+      "_lines": 115,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5020,7 +5084,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T23:17:53Z",
       "_first_commit_sha": "e0f39cd415ef22807efe0748c20bb145098b2fb5",
-      "_latest_commit_sha": "778c9173337e99d4a44fb0f6ec6788c17f25e555",
+      "_latest_commit_sha": "fdd532eaa9d3195f8bb63ca6960344ffa91e8318",
       "_card_sha256": "b31d6e0b72e5387182822dd9be2c768cb96fc2d201b7ee65084d0cf52c304afa"
     },
     {
