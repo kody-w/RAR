@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__portfolio_rebalancing",
+  "name": "Portfolio Rebalancing Agent",
+  "rar_name": "@aibast-agents-library/portfolio_rebalancing",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/portfolio_rebalancing:d09d431617eb48a36ebf61cf8839137a",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "financial_services",
+  "tags": [
+    "portfolio",
+    "rebalancing",
+    "allocation",
+    "tax",
+    "trading",
+    "financial-services"
+  ],
+  "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 306,
+  "size_kb": 14.1,
+  "sha256": "d09d431617eb48a36ebf61cf8839137aa014206d8b98548f7985214bd1c81275",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__portfolio_rebalancing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py"
+}

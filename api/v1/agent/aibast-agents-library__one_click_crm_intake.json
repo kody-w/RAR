@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__one_click_crm_intake",
+  "name": "One-Click CRM Intake",
+  "rar_name": "@aibast-agents-library/one_click_crm_intake",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/one_click_crm_intake:2da3039e90aeabf99eaf9b080c144fc8",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "crm",
+    "intake",
+    "data-validation",
+    "duplicate-detection",
+    "import"
+  ],
+  "description": "Streamlined CRM data intake with form generation, validation, duplicate detection, and import preview.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 293,
+  "size_kb": 15.6,
+  "sha256": "2da3039e90aeabf99eaf9b080c144fc8f047c63e9609a5eb8273dd05f8ffad5d",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__one_click_crm_intake.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py"
+}

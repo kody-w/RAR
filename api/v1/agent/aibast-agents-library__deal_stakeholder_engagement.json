@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__deal_stakeholder_engagement",
+  "name": "Stakeholder Engagement",
+  "rar_name": "@aibast-agents-library/deal_stakeholder_engagement",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/deal_stakeholder_engagement:86b5a0c9b6a756444273da7c7e6ff7f4",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2b_sales",
+  "tags": [
+    "b2b",
+    "sales",
+    "stakeholder-engagement",
+    "deal-progression",
+    "relationships"
+  ],
+  "description": "Engagement scoring, relationship mapping, engagement planning, and sentiment analysis for deal stakeholders.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 398,
+  "size_kb": 19.2,
+  "sha256": "86b5a0c9b6a756444273da7c7e6ff7f4c9fc3c3e6756d8da0ef94e3072c86562",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__deal_stakeholder_engagement.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py"
+}

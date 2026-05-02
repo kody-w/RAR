@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__deal_risk_assessment",
+  "name": "Deal Risk Assessment",
+  "rar_name": "@aibast-agents-library/deal_risk_assessment",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/deal_risk_assessment:908ae5cb4a5997b2e33fa38f92d1444e",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2b_sales",
+  "tags": [
+    "b2b",
+    "sales",
+    "risk-assessment",
+    "deal-progression",
+    "pipeline"
+  ],
+  "description": "Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 424,
+  "size_kb": 19.2,
+  "sha256": "908ae5cb4a5997b2e33fa38f92d1444eb88332539a41b0e6871ed88b62454dd5",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__deal_risk_assessment.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_risk_assessment.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_risk_assessment.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_risk_assessment.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py"
+}

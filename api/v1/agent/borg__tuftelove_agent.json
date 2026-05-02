@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__tuftelove_agent",
+  "name": "TufteLove",
+  "rar_name": "@borg/tuftelove_agent",
+  "rappid": "rappid:v2:agent:@borg/tuftelove_agent:f30363cec6010a9bc170400f82025007",
+  "version": "1.0.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "ui",
+    "design",
+    "tufte",
+    "oversight",
+    "ux",
+    "review",
+    "accessibility",
+    "data-visualization"
+  ],
+  "description": "UI design advisor combining Edward Tufte's visual principles, Microsoft Aether Agent Oversight Taxonomy (32+ patterns), and 8 academic papers \u2014 shapes how agents create UI and reviews existing UI for design quality.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 512,
+  "size_kb": 28.9,
+  "sha256": "f30363cec6010a9bc170400f820250077d404dc322a1c3f39b1250bbc88b9b8b",
+  "has_card": true,
+  "added_at": "2026-04-07T18:54:58Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__tuftelove_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/tuftelove_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/tuftelove_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__tuftelove_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__tuftelove_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__tuftelove_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/tuftelove_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__wealth_insights_generator",
+  "name": "Wealth Insights Generator Agent",
+  "rar_name": "@aibast-agents-library/wealth_insights_generator",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/wealth_insights_generator:57b74757d5c154a6869f89bf1ba3318d",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "financial_services",
+  "tags": [
+    "wealth",
+    "insights",
+    "market",
+    "performance",
+    "analytics",
+    "financial-services"
+  ],
+  "description": "Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 280,
+  "size_kb": 12.6,
+  "sha256": "57b74757d5c154a6869f89bf1ba3318d9f406ac56df4a07feb84565bd20dd854",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__wealth_insights_generator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__wealth_insights_generator.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__wealth_insights_generator.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__wealth_insights_generator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py"
+}

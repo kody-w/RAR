@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__sales_simulation",
+  "name": "Sales Simulation",
+  "rar_name": "@aibast-agents-library/sales_simulation",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/sales_simulation:782f7524e8b8f6274563f7da9245d1bc",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "sales",
+    "simulation",
+    "training",
+    "objections",
+    "personas",
+    "scoring"
+  ],
+  "description": "Sales scenario simulation with buyer personas, objection practice, and performance scoring.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 306,
+  "size_kb": 16.2,
+  "sha256": "782f7524e8b8f6274563f7da9245d1bc2230b80bfc28b78fec73508f40a57a1b",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__sales_simulation.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_simulation.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_simulation.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_simulation.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py"
+}

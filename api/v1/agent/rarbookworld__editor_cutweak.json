@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__editor_cutweak",
+  "name": "Editor: Cut Weakest 20%",
+  "rar_name": "@rarbookworld/editor_cutweak",
+  "rappid": "rappid:v2:agent:@rarbookworld/editor_cutweak:60d1d1ea7a6b8a6beec134ccf7e85bfd",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "editor-specialist",
+    "creative-pipeline"
+  ],
+  "description": "Editor specialist. Returns the same prose with the weakest 20% cut. Preserves fenced code blocks as evidence.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 94,
+  "size_kb": 4.1,
+  "sha256": "60d1d1ea7a6b8a6beec134ccf7e85bfd0afc7696a7e69200cf2125fb0d92b008",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__editor_cutweak.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_cutweak_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_cutweak_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_cutweak.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_cutweak.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_cutweak.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/editor_cutweak_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__channel_router",
+  "name": "Channel Router",
+  "rar_name": "@rarbookworld/channel_router",
+  "rappid": "rappid:v2:agent:@rarbookworld/channel_router:b2c36f35edfc78cfb04af1a94bd18860",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "router"
+  ],
+  "description": "Picks one Subrappter (r/builders, r/dreams, r/decisions, r/lessons, r/connections, etc.) for a Drop. Auto-classifies, no manual tagging.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 120,
+  "size_kb": 5.5,
+  "sha256": "b2c36f35edfc78cfb04af1a94bd1886007449cfd71196b93bf6b43d749b42fd4",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__channel_router.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/channel_router_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/channel_router_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__channel_router.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__channel_router.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__channel_router.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/channel_router_agent.py"
+}

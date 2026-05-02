@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__license_renewal_expansion",
+  "name": "License Renewal & Expansion Agent",
+  "rar_name": "@aibast-agents-library/license_renewal_expansion",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/license_renewal_expansion:7cc52cc77603e87f4645999e4529ccd7",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "software_digital_products",
+  "tags": [
+    "license",
+    "renewal",
+    "expansion",
+    "churn",
+    "revenue",
+    "saas"
+  ],
+  "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 351,
+  "size_kb": 13.6,
+  "sha256": "7cc52cc77603e87f4645999e4529ccd7ca801881128ce91a4be654066f51abbb",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__license_renewal_expansion.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py"
+}

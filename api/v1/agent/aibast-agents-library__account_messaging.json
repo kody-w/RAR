@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__account_messaging",
+  "name": "Account Messaging",
+  "rar_name": "@aibast-agents-library/account_messaging",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/account_messaging:26254ea240db4bdbe8f6c084792d2ea7",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2b_sales",
+  "tags": [
+    "b2b",
+    "sales",
+    "messaging",
+    "outreach",
+    "email-sequences"
+  ],
+  "description": "Generates personalized outreach, follow-ups, and campaign sequences for enterprise accounts.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 429,
+  "size_kb": 20.3,
+  "sha256": "26254ea240db4bdbe8f6c084792d2ea7ff5e25f70312ee4748e4ddfe0fe27217",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__account_messaging.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_messaging.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_messaging.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_messaging.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py"
+}

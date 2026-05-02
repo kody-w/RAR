@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__store_navigator_agent",
+  "name": "StoreNavigator",
+  "rar_name": "@rapp/store_navigator_agent",
+  "rappid": "rappid:v2:agent:@rapp/store_navigator_agent:be39e9015e595c226b93e3ce44b76fd5",
+  "version": "0.1.0",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "meta",
+    "navigator",
+    "store",
+    "discovery",
+    "rapplication"
+  ],
+  "description": "Navigate the kody-w/RAPP_Store catalog. List, search, describe, recommend, get install commands, compare rapplications, browse categories, and explain the spec. Use this whenever the user asks what's in the store, what to install, or how to find a rapp that fits their goal.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 428,
+  "size_kb": 16.8,
+  "sha256": "be39e9015e595c226b93e3ce44b76fd5c7fc341c760658e5053371e7dee6090e",
+  "has_card": true,
+  "added_at": "2026-04-27T21:49:48Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__store_navigator_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/store_navigator_agent.py"
+}

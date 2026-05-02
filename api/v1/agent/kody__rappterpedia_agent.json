@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody__rappterpedia_agent",
+  "name": "RappterpediaAgent",
+  "rar_name": "@kody/rappterpedia_agent",
+  "rappid": "rappid:v2:agent:@kody/rappterpedia_agent:c1288ede9644cc733d9201d6268b4f78",
+  "version": "1.1.0",
+  "publisher": "@kody",
+  "category": "productivity",
+  "tags": [
+    "wiki",
+    "forum",
+    "content",
+    "community",
+    "rappterpedia",
+    "engine"
+  ],
+  "description": "Community wiki & forum content engine. Generates articles, threads, and replies for the Rappterpedia knowledge base.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 540,
+  "size_kb": 24.2,
+  "sha256": "c1288ede9644cc733d9201d6268b4f785cf708714a3acde4b41922afc48ef277",
+  "has_card": true,
+  "added_at": "2026-04-05T11:18:10-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody__rappterpedia_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rappterpedia_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rappterpedia_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rappterpedia_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rappterpedia_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rappterpedia_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody/rappterpedia_agent.py"
+}

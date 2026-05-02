@@ -1,0 +1,36 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody__context_memory_agent",
+  "name": "ContextMemory",
+  "rar_name": "@kody/context_memory_agent",
+  "rappid": "rappid:v2:agent:@kody/context_memory_agent:bd36a39a4f7fed0b5abc768c0c9878ef",
+  "version": "1.0.0",
+  "publisher": "@kody",
+  "category": "core",
+  "tags": [
+    "core",
+    "memory",
+    "context",
+    "recall"
+  ],
+  "description": "Recalls conversation history and stored memories from past interactions.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 183,
+  "size_kb": 8.4,
+  "sha256": "bd36a39a4f7fed0b5abc768c0c9878efaf683353679e3141881f2dedbf9b8fc8",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody__context_memory_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/context_memory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/context_memory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__context_memory_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__context_memory_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__context_memory_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody/context_memory_agent.py"
+}

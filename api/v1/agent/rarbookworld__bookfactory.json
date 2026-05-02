@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__bookfactory",
+  "name": "BookFactory (converged singleton)",
+  "rar_name": "@rarbookworld/bookfactory",
+  "rappid": "rappid:v2:agent:@rarbookworld/bookfactory:cea961a7f8ed77e85590a2efb1d72f4c",
+  "version": "0.3.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "creative-pipeline",
+    "twin-stack",
+    "singleton",
+    "rapplication"
+  ],
+  "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 557,
+  "size_kb": 24.6,
+  "sha256": "cea961a7f8ed77e85590a2efb1d72f4c7e95b8d5fcfb053f990b316fac29eda9",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__bookfactory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/bookfactory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/bookfactory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__bookfactory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__bookfactory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__bookfactory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/bookfactory_agent.py"
+}

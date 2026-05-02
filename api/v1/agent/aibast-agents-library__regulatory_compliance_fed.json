@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__regulatory_compliance_fed",
+  "name": "Regulatory Compliance (Federal) Agent",
+  "rar_name": "@aibast-agents-library/regulatory_compliance_fed",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/regulatory_compliance_fed:555b663ffb8d5573eb8a85493b76a0a4",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "federal_government",
+  "tags": [
+    "compliance",
+    "FISMA",
+    "FedRAMP",
+    "NIST",
+    "audit",
+    "federal",
+    "regulatory"
+  ],
+  "description": "Federal regulatory compliance management with FISMA, FedRAMP, and NIST gap analysis, remediation planning, and audit readiness.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 290,
+  "size_kb": 14.8,
+  "sha256": "555b663ffb8d5573eb8a85493b76a0a4ae17a23149c006c89dd89d244acca6f0",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__regulatory_compliance_fed.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__regulatory_compliance_fed.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__regulatory_compliance_fed.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__regulatory_compliance_fed.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py"
+}

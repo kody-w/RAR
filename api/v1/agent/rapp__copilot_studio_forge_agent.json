@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__copilot_studio_forge_agent",
+  "name": "CopilotStudioForge",
+  "rar_name": "@rapp/copilot_studio_forge_agent",
+  "rappid": "rappid:v2:agent:@rapp/copilot_studio_forge_agent:c5aad52466df06e1ae329064d4252b6c",
+  "version": "0.2.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "meta",
+    "copilot-studio",
+    "forge",
+    "translation",
+    "deploy-prep"
+  ],
+  "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
+  "author": "RAPP",
+  "quality_tier": "experimental",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1027,
+  "size_kb": 44.5,
+  "sha256": "c5aad52466df06e1ae329064d4252b6c474b88c97fcd0c53714252018c9dd79a",
+  "has_card": true,
+  "added_at": "2026-04-28T16:27:14-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__copilot_studio_forge_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/copilot_studio_forge_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/copilot_studio_forge_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_forge_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_forge_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_forge_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/copilot_studio_forge_agent.py"
+}

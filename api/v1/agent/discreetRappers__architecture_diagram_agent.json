@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__architecture_diagram_agent",
+  "name": "ArchitectureDiagramAgent",
+  "rar_name": "@discreetRappers/architecture_diagram_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/architecture_diagram_agent:16d6806f58215a099bd638a22c08640b",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "diagrams",
+    "architecture",
+    "visualization",
+    "mermaid"
+  ],
+  "description": "Generates professional architecture diagrams from system configurations using Mermaid, SVG, and ASCII.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 996,
+  "size_kb": 38.3,
+  "sha256": "16d6806f58215a099bd638a22c08640b1d8ea0ce22e319542c437d59ccf963bb",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__architecture_diagram_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__architecture_diagram_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__architecture_diagram_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__architecture_diagram_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/architecture_diagram_agent.py"
+}

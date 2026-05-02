@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__sharepoint_contract_analysis_agent",
+  "name": "ContractAnalysis",
+  "rar_name": "@discreetRappers/sharepoint_contract_analysis_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/sharepoint_contract_analysis_agent:bbe89adb2e1271c1d44004afeffac1f0",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "integrations",
+  "tags": [
+    "integrations",
+    "sharepoint",
+    "contracts",
+    "analysis",
+    "legal"
+  ],
+  "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_FILES_SHARE_NAME",
+    "AZURE_OPENAI_API_VERSION",
+    "AZURE_OPENAI_DEPLOYMENT_NAME",
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_STORAGE_ACCOUNT_NAME"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2468,
+  "size_kb": 119.9,
+  "sha256": "bbe89adb2e1271c1d44004afeffac1f081b0813878bfd949dd6eb0729f2d579e",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__sharepoint_contract_analysis_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sharepoint_contract_analysis_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sharepoint_contract_analysis_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sharepoint_contract_analysis_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py"
+}

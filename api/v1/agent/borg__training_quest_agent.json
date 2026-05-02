@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__training_quest_agent",
+  "name": "TrainingQuest",
+  "rar_name": "@borg/training_quest_agent",
+  "rappid": "rappid:v2:agent:@borg/training_quest_agent:1a613eda28f03852bc43f9b1b681f024",
+  "version": "1.0.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "training",
+    "onboarding",
+    "quest",
+    "html",
+    "interactive",
+    "gamification"
+  ],
+  "description": "Generates a personalized interactive training quest HTML page based on the brainstem's loaded agents \u2014 auto-discovers capabilities and builds a gamified onboarding experience with progress tracking, copy-to-clipboard prompts, and celebrations.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 689,
+  "size_kb": 46.3,
+  "sha256": "1a613eda28f03852bc43f9b1b681f0246d979d7377024e930c14550c2e768156",
+  "has_card": true,
+  "added_at": "2026-04-07T03:12:16Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__training_quest_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/training_quest_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/training_quest_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__training_quest_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__training_quest_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__training_quest_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/training_quest_agent.py"
+}

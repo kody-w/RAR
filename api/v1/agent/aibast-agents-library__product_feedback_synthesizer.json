@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__product_feedback_synthesizer",
+  "name": "Product Feedback Synthesizer Agent",
+  "rar_name": "@aibast-agents-library/product_feedback_synthesizer",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/product_feedback_synthesizer:09cd824b6e2b11562231b2804bbda089",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "software_digital_products",
+  "tags": [
+    "feedback",
+    "product",
+    "feature-requests",
+    "sentiment",
+    "roadmap",
+    "nps"
+  ],
+  "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 363,
+  "size_kb": 13.1,
+  "sha256": "09cd824b6e2b11562231b2804bbda08959f91254022574bc798b834e3fee90f6",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__product_feedback_synthesizer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py"
+}

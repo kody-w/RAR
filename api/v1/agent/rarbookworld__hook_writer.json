@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__hook_writer",
+  "name": "Hook Writer",
+  "rar_name": "@rarbookworld/hook_writer",
+  "rappid": "rappid:v2:agent:@rarbookworld/hook_writer:b0ddf2ea4f8c45cfae34545e708b9567",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "hook"
+  ],
+  "description": "Writes the one sentence that earns a tap on the feed. Single sentence. Concrete over abstract. No clickbait.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 97,
+  "size_kb": 4.1,
+  "sha256": "b0ddf2ea4f8c45cfae34545e708b956733ee7b15710b57e0a3a91c4528b1cd96",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__hook_writer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/hook_writer_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/hook_writer_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__hook_writer.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__hook_writer.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__hook_writer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/hook_writer_agent.py"
+}

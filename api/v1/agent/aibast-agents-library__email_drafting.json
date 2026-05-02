@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__email_drafting",
+  "name": "Email Drafting",
+  "rar_name": "@aibast-agents-library/email_drafting",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/email_drafting:60b946fb5b01b7525d55ac21a78dd4fb",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "email",
+    "drafting",
+    "outreach",
+    "follow-up",
+    "proposal",
+    "templates"
+  ],
+  "description": "AI-powered email drafting for outreach, follow-ups, proposals, and template management with personalization.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 284,
+  "size_kb": 14.7,
+  "sha256": "60b946fb5b01b7525d55ac21a78dd4fbebe18a55fc9ba5f7bb052eb9287c57de",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__email_drafting.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__email_drafting.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__email_drafting.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__email_drafting.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py"
+}

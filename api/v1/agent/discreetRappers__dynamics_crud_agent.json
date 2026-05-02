@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__dynamics_crud_agent",
+  "name": "DynamicsCRUD",
+  "rar_name": "@discreetRappers/dynamics_crud_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/dynamics_crud_agent:7829a1d0a0d53506eae7d975e38d37e6",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "integrations",
+  "tags": [
+    "integrations",
+    "dynamics-365",
+    "crm",
+    "crud",
+    "microsoft"
+  ],
+  "description": "Dynamics 365 CRUD operations \u2014 accounts, contacts, opportunities, leads, tasks, activities.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 418,
+  "size_kb": 21.1,
+  "sha256": "7829a1d0a0d53506eae7d975e38d37e66cdec790bcb2d8273663937cf710cf4b",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__dynamics_crud_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/dynamics_crud_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/dynamics_crud_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__dynamics_crud_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__dynamics_crud_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__dynamics_crud_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/dynamics_crud_agent.py"
+}

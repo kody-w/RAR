@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__federal_grants_oversight",
+  "name": "Federal Grants Oversight Agent",
+  "rar_name": "@aibast-agents-library/federal_grants_oversight",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/federal_grants_oversight:f9f23f7b5735cf46e2cb1c2ed14af0c2",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "federal_government",
+  "tags": [
+    "grants",
+    "oversight",
+    "compliance",
+    "audit",
+    "federal",
+    "reporting"
+  ],
+  "description": "Federal grants monitoring with dashboards, compliance tracking, reporting status, and audit preparation.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 328,
+  "size_kb": 15.1,
+  "sha256": "f9f23f7b5735cf46e2cb1c2ed14af0c2e9a3ea6418ddaa31d0a650bdb92ae80f",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__federal_grants_oversight.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__federal_grants_oversight.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__federal_grants_oversight.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__federal_grants_oversight.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py"
+}

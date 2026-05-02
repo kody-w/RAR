@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__chief_of_staff_agent",
+  "name": "ChiefOfStaff",
+  "rar_name": "@howardh/chief_of_staff_agent",
+  "rappid": "rappid:v2:agent:@howardh/chief_of_staff_agent:f624281fea118bbe53fc6726d7154398",
+  "version": "1.0.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "chief-of-staff",
+    "m365",
+    "workiq",
+    "executive",
+    "triage",
+    "meeting-prep"
+  ],
+  "description": "Personal AI executive partner \u2014 live M365-grounded brief, triage, meeting prep, commitments, drafts, weekly review.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 683,
+  "size_kb": 32.5,
+  "sha256": "f624281fea118bbe53fc6726d71543985e95c6ddba37affbc2215149da742d63",
+  "has_card": true,
+  "added_at": "2026-04-28T14:40:54Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__chief_of_staff_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/chief_of_staff_agent.py"
+}

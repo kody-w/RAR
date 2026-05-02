@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__revenue_forecast",
+  "name": "Revenue Forecast",
+  "rar_name": "@aibast-agents-library/revenue_forecast",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/revenue_forecast:63a6c9d2cfaea366d2deb3f4510a0583",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2b_sales",
+  "tags": [
+    "b2b",
+    "sales",
+    "revenue-forecast",
+    "deal-progression",
+    "analytics"
+  ],
+  "description": "Quarterly forecasting, scenario analysis, commit vs best-case modeling, and forecast accuracy tracking.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 348,
+  "size_kb": 16.1,
+  "sha256": "63a6c9d2cfaea366d2deb3f4510a0583dc21785f4ab6e884cf733b76c427885c",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__revenue_forecast.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__revenue_forecast.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__revenue_forecast.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__revenue_forecast.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py"
+}

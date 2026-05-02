@@ -1,0 +1,36 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__sales_assistant_agent",
+  "name": "SalesAssistant",
+  "rar_name": "@discreetRappers/sales_assistant_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/sales_assistant_agent:b4defb076c6e8fdcaa96b1187fffb984",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "integrations",
+  "tags": [
+    "integrations",
+    "sales",
+    "crm",
+    "natural-language"
+  ],
+  "description": "Natural language CRM assistant \u2014 handles requests about accounts, opportunities, contacts, and pipeline.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 631,
+  "size_kb": 26.7,
+  "sha256": "b4defb076c6e8fdcaa96b1187fffb9840927d383ffef0f513e1d89ea03676bb1",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__sales_assistant_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sales_assistant_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sales_assistant_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sales_assistant_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/sales_assistant_agent.py"
+}

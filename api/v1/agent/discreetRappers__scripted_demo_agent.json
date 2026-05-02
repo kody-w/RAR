@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__scripted_demo_agent",
+  "name": "ScriptedDemo",
+  "rar_name": "@discreetRappers/scripted_demo_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/scripted_demo_agent:b59f4e466d8e4b4faa74fe7f878e2477",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "demos",
+    "scripted",
+    "interactive",
+    "sales"
+  ],
+  "description": "Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1301,
+  "size_kb": 54.2,
+  "sha256": "b59f4e466d8e4b4faa74fe7f878e24770fa0840f0ddfe5a2f2a14afabd31a2db",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__scripted_demo_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__scripted_demo_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__scripted_demo_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__scripted_demo_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/scripted_demo_agent.py"
+}

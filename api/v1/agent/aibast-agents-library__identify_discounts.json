@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__identify_discounts",
+  "name": "Identify Discounts",
+  "rar_name": "@aibast-agents-library/identify_discounts",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/identify_discounts:8c1d8b3761f43f3955bcc78def6a0c7e",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "discounts",
+    "pricing",
+    "savings",
+    "eligibility",
+    "approval"
+  ],
+  "description": "Discount identification with eligibility checks, savings calculations, and approval workflow management.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 296,
+  "size_kb": 15.8,
+  "sha256": "8c1d8b3761f43f3955bcc78def6a0c7e98379bab00cf11446a6094ea28495352",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__identify_discounts.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__it_ticket_management",
+  "name": "IT Ticket Management",
+  "rar_name": "@aibast-agents-library/it_ticket_management",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/it_ticket_management:1fb67a93549856d549d030f41f26e30b",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "it",
+    "tickets",
+    "helpdesk",
+    "sla",
+    "priority",
+    "resolution"
+  ],
+  "description": "IT ticket management with dashboards, priority assignment, SLA tracking, and resolution reporting.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 258,
+  "size_kb": 15.8,
+  "sha256": "1fb67a93549856d549d030f41f26e30b2f08bcb2b1116949cd224f49759abcd6",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__it_ticket_management.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_ticket_management.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_ticket_management.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_ticket_management.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py"
+}

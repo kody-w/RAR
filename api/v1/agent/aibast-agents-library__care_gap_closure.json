@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__care_gap_closure",
+  "name": "Care Gap Closure Agent",
+  "rar_name": "@aibast-agents-library/care_gap_closure",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/care_gap_closure:23cde0d7691d7fde92738dc8cf13e38c",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "healthcare",
+  "tags": [
+    "hedis",
+    "care-gaps",
+    "quality-measures",
+    "outreach",
+    "population-health",
+    "healthcare"
+  ],
+  "description": "Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 324,
+  "size_kb": 12.7,
+  "sha256": "23cde0d7691d7fde92738dc8cf13e38ca4e9fb86d913d42c1350824325e867ef",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__care_gap_closure.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__care_gap_closure.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__care_gap_closure.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__care_gap_closure.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py"
+}

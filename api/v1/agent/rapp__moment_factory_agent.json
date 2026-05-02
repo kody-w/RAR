@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__moment_factory_agent",
+  "name": "MomentFactory",
+  "rar_name": "@rapp/moment_factory_agent",
+  "rappid": "rappid:v2:agent:@rapp/moment_factory_agent:099d6645c9f837609f63b439ead2e4d1",
+  "version": "0.1.1",
+  "publisher": "@rapp",
+  "category": "creative",
+  "tags": [
+    "composite",
+    "moment-pipeline",
+    "rapplication",
+    "rappterbook-engine",
+    "singleton"
+  ],
+  "description": "Seven-persona moment-to-Drop pipeline (Sensorium \u2192 SignificanceFilter \u2192 HookWriter \u2192 BodyWriter \u2192 ChannelRouter \u2192 CardForger \u2192 SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 512,
+  "size_kb": 23.7,
+  "sha256": "099d6645c9f837609f63b439ead2e4d1b047aac9f72ebf4ed7137e97343ff7e4",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__moment_factory_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/moment_factory_agent.py"
+}

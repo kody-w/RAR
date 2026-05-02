@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__maintenance_scheduling",
+  "name": "Maintenance Scheduling Agent",
+  "rar_name": "@aibast-agents-library/maintenance_scheduling",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/maintenance_scheduling:eeb6366bbe100b7780485b55ae1591f7",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "manufacturing",
+  "tags": [
+    "maintenance",
+    "predictive",
+    "scheduling",
+    "manufacturing",
+    "IoT"
+  ],
+  "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 367,
+  "size_kb": 16.2,
+  "sha256": "eeb6366bbe100b7780485b55ae1591f7b0e81db404f567b9eaaa85481ba99a7c",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__maintenance_scheduling.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py"
+}

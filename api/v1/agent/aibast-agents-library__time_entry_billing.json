@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__time_entry_billing",
+  "name": "Time Entry & Billing Agent",
+  "rar_name": "@aibast-agents-library/time_entry_billing",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/time_entry_billing:937d0c6105813b2d835f1c8d8e8a9d48",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "professional_services",
+  "tags": [
+    "billing",
+    "time-entry",
+    "invoicing",
+    "audit",
+    "professional-services"
+  ],
+  "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 362,
+  "size_kb": 17.7,
+  "sha256": "937d0c6105813b2d835f1c8d8e8a9d488b165f83223e9d2d23f868f3c0623131",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__time_entry_billing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__time_entry_billing.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__time_entry_billing.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__time_entry_billing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py"
+}

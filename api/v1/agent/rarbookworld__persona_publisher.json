@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__persona_publisher",
+  "name": "Publisher Persona",
+  "rar_name": "@rarbookworld/persona_publisher",
+  "rappid": "rappid:v2:agent:@rarbookworld/persona_publisher:dc29b50ca0cbad67dc8d0988794a821f",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "persona",
+    "creative-pipeline",
+    "publisher"
+  ],
+  "description": "Indie-press publisher. Takes edited prose plus a CEO note and outputs publication-ready markdown with YAML frontmatter.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 123,
+  "size_kb": 5.0,
+  "sha256": "dc29b50ca0cbad67dc8d0988794a821f011ebb708e31fa19ed0af52d86f81323",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__persona_publisher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_publisher_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_publisher_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_publisher.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_publisher.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_publisher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/persona_publisher_agent.py"
+}

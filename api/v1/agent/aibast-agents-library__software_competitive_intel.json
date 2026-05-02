@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__software_competitive_intel",
+  "name": "Competitive Intelligence Agent",
+  "rar_name": "@aibast-agents-library/software_competitive_intel",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/software_competitive_intel:58b06754918102a4e1006eaeffa8c582",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "software_digital_products",
+  "tags": [
+    "competitive-intel",
+    "market-analysis",
+    "saas",
+    "pricing",
+    "threat-assessment"
+  ],
+  "description": "AI-powered competitive intelligence for SaaS market landscape analysis, feature comparisons, pricing analysis, and threat assessments.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 421,
+  "size_kb": 15.8,
+  "sha256": "58b06754918102a4e1006eaeffa8c582fb2ceadbb13d56461b2b9c61ddb73666",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__software_competitive_intel.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_competitive_intel.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_competitive_intel.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_competitive_intel.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py"
+}

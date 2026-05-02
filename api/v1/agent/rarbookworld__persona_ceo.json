@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__persona_ceo",
+  "name": "CEO Persona (composite)",
+  "rar_name": "@rarbookworld/persona_ceo",
+  "rappid": "rappid:v2:agent:@rarbookworld/persona_ceo:e36a17b24c4ae540372d1a06390aa23e",
+  "version": "0.2.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "persona",
+    "creative-pipeline",
+    "composite"
+  ],
+  "description": "CEO persona. Composite of 2 specialists: decision + partner-risk. Returns a strategic-message-discipline review.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@rarbookworld/ceo_risk",
+    "@rarbookworld/ceo_decision"
+  ],
+  "lines": 86,
+  "size_kb": 3.1,
+  "sha256": "e36a17b24c4ae540372d1a06390aa23ea10f3bc0d907a591e64a2b33b00de799",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__persona_ceo.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_ceo_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_ceo_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_ceo.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_ceo.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_ceo.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/persona_ceo_agent.py"
+}

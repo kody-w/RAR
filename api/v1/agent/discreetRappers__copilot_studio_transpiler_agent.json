@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__copilot_studio_transpiler_agent",
+  "name": "CopilotStudioTranspiler",
+  "rar_name": "@discreetRappers/copilot_studio_transpiler_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/copilot_studio_transpiler_agent:acccbacba2be5acb4aa7583abb1c85ae",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "pipeline",
+  "tags": [
+    "pipeline",
+    "transpiler",
+    "copilot-studio",
+    "native",
+    "no-code"
+  ],
+  "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_TENANT_ID",
+    "COPILOT_STUDIO_CLIENT_ID",
+    "DATAVERSE_ENVIRONMENT_URL"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2154,
+  "size_kb": 88.5,
+  "sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__copilot_studio_transpiler_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__copilot_studio_transpiler_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__copilot_studio_transpiler_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__copilot_studio_transpiler_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py"
+}

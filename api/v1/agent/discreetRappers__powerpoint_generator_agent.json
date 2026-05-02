@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__powerpoint_generator_agent",
+  "name": "PowerPointGeneratorV2",
+  "rar_name": "@discreetRappers/powerpoint_generator_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/powerpoint_generator_agent:cbd34b4863b492b9a367c2dc8ea00bbc",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "powerpoint",
+    "presentations",
+    "templates",
+    "microsoft"
+  ],
+  "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1549,
+  "size_kb": 61.2,
+  "sha256": "cbd34b4863b492b9a367c2dc8ea00bbc07c8803f00b1f035e567276654521250",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__powerpoint_generator_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/powerpoint_generator_agent.py"
+}

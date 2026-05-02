@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__sharepoint_document_extractor",
+  "name": "SharePoint Document Extractor",
+  "rar_name": "@aibast-agents-library/sharepoint_document_extractor",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/sharepoint_document_extractor:e7d1b2c541faff9fb2c72302ca05469a",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "sharepoint",
+    "documents",
+    "url-extraction",
+    "metadata",
+    "search"
+  ],
+  "description": "SharePoint document search, URL extraction, metadata enrichment, and link validation.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 243,
+  "size_kb": 14.2,
+  "sha256": "e7d1b2c541faff9fb2c72302ca05469a889b6a1ddcd33140e2a768bbed38fcfc",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__sharepoint_document_extractor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sharepoint_document_extractor.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sharepoint_document_extractor.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sharepoint_document_extractor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py"
+}

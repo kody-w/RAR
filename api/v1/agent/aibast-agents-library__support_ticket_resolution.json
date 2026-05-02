@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__support_ticket_resolution",
+  "name": "Support Ticket Resolution Agent",
+  "rar_name": "@aibast-agents-library/support_ticket_resolution",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/support_ticket_resolution:9b77d44e6a38d8404479f18f82012e66",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "software_digital_products",
+  "tags": [
+    "support",
+    "tickets",
+    "triage",
+    "sla",
+    "knowledge-base",
+    "escalation"
+  ],
+  "description": "Intelligent ticket triage, KB resolution search, escalation routing, and SLA compliance dashboards.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 324,
+  "size_kb": 13.1,
+  "sha256": "9b77d44e6a38d8404479f18f82012e6654dbe0e7797092d315d1e8725098adca",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__support_ticket_resolution.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__support_ticket_resolution.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__support_ticket_resolution.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__support_ticket_resolution.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py"
+}

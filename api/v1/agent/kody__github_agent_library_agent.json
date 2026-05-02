@@ -1,0 +1,36 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody__github_agent_library_agent",
+  "name": "GitHubAgentLibrary",
+  "rar_name": "@kody/github_agent_library_agent",
+  "rappid": "rappid:v2:agent:@kody/github_agent_library_agent:bf6702d40d8d000b744b13d1a58a3bc6",
+  "version": "1.0.0",
+  "publisher": "@kody",
+  "category": "core",
+  "tags": [
+    "core",
+    "package-manager",
+    "install",
+    "discovery"
+  ],
+  "description": "Browse, search, and install agents from the RAPP Agent Repo via chat. The autonomous package manager.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 957,
+  "size_kb": 43.7,
+  "sha256": "bf6702d40d8d000b744b13d1a58a3bc6460bc0fd7b7f6f940206bb2c5d1d32e3",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody__github_agent_library_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/github_agent_library_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/github_agent_library_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__github_agent_library_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__github_agent_library_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__github_agent_library_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody/github_agent_library_agent.py"
+}

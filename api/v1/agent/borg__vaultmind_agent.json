@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__vaultmind_agent",
+  "name": "VaultMind",
+  "rar_name": "@borg/vaultmind_agent",
+  "rappid": "rappid:v2:agent:@borg/vaultmind_agent:b75435ce4e53f1ee0b3de8e92936f54f",
+  "version": "1.0.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "obsidian",
+    "30-60-90",
+    "onboarding",
+    "wiki",
+    "knowledge-base",
+    "vault",
+    "automation",
+    "scheduling",
+    "monitoring"
+  ],
+  "description": "Your second brain has a brain. 28-action Obsidian vault manager: multi-person 30-60-90 plans, OKRs, Kanban boards, Now/Next/Later priorities, Karpathy-style LLM knowledge bases, training quests, morning briefs, wiki health checks, auto-bootstrap with plugins. One file, zero deps.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [
+    "OBSIDIAN_VAULT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 3260,
+  "size_kb": 149.5,
+  "sha256": "b75435ce4e53f1ee0b3de8e92936f54fcae98212151a8ee55292091603f9dd13",
+  "has_card": true,
+  "added_at": "2026-04-08T14:18:36-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__vaultmind_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/vaultmind_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/vaultmind_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__vaultmind_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__vaultmind_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__vaultmind_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/vaultmind_agent.py"
+}
