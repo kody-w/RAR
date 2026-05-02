@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__fraud_detection_alert",
+  "name": "Fraud Detection & Alert Agent",
+  "rar_name": "@aibast-agents-library/fraud_detection_alert",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/fraud_detection_alert:0c10561b7ecece9c9c5b9be22e5a27c4",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "financial_services",
+  "tags": [
+    "fraud",
+    "detection",
+    "alerts",
+    "transactions",
+    "investigation",
+    "financial-services"
+  ],
+  "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 14.6,
+  "sha256": "0c10561b7ecece9c9c5b9be22e5a27c47c5227130c2f4e13307461660f3b346d",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__fraud_detection_alert.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fraud_detection_alert.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fraud_detection_alert.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fraud_detection_alert.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py"
+}

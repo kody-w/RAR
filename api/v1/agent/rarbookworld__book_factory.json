@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__book_factory",
+  "name": "BookFactory (multi-file source)",
+  "rar_name": "@rarbookworld/book_factory",
+  "rappid": "rappid:v2:agent:@rarbookworld/book_factory:8034a912940d4a93d3203690713f80bc",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "creative-pipeline",
+    "twin-stack"
+  ],
+  "description": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer) as a composite of 13 sibling agent.py files.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@rarbookworld/persona_writer",
+    "@rarbookworld/persona_editor",
+    "@rarbookworld/persona_ceo",
+    "@rarbookworld/persona_publisher",
+    "@rarbookworld/persona_reviewer"
+  ],
+  "lines": 157,
+  "size_kb": 6.0,
+  "sha256": "8034a912940d4a93d3203690713f80bcbee297db25bc9469a810767a32696820",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__book_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/book_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/book_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__book_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__book_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__book_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/book_factory_agent.py"
+}

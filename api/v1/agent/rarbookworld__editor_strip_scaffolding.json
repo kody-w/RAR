@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__editor_strip_scaffolding",
+  "name": "Editor: Strip Scaffolding",
+  "rar_name": "@rarbookworld/editor_strip_scaffolding",
+  "rappid": "rappid:v2:agent:@rarbookworld/editor_strip_scaffolding:63af9afc3de5fdc2ebfd036bebd83272",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "editor-specialist",
+    "creative-pipeline"
+  ],
+  "description": "Editor specialist. Removes ## Outline headers, TODO markers, and draft-state labels left by the writer.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 106,
+  "size_kb": 4.8,
+  "sha256": "63af9afc3de5fdc2ebfd036bebd83272322c9caa499e526ee46a466dd02ed020",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__editor_strip_scaffolding.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_strip_scaffolding_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_strip_scaffolding_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_strip_scaffolding.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_strip_scaffolding.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_strip_scaffolding.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/editor_strip_scaffolding_agent.py"
+}

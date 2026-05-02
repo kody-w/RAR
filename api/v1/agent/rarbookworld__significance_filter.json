@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__significance_filter",
+  "name": "Significance Filter",
+  "rar_name": "@rarbookworld/significance_filter",
+  "rappid": "rappid:v2:agent:@rarbookworld/significance_filter:46cef06c0b322c5fc430e5a6506ecd7c",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "filter"
+  ],
+  "description": "Refuses moments that don't compound. The platform's defining constraint, encoded as one persona with veto power. Default: ship=false.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 110,
+  "size_kb": 5.0,
+  "sha256": "46cef06c0b322c5fc430e5a6506ecd7cbacad7d4fb081dd7a976da7634a97b10",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__significance_filter.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/significance_filter_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/significance_filter_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__significance_filter.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__significance_filter.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__significance_filter.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/significance_filter_agent.py"
+}

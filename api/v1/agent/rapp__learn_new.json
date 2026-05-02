@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__learn_new",
+  "name": "LearnNew",
+  "rar_name": "@rapp/learn_new",
+  "rappid": "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d",
+  "version": "2.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "meta",
+    "generator",
+    "scaffolding",
+    "learn",
+    "swarm"
+  ],
+  "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1025,
+  "size_kb": 38.0,
+  "sha256": "0edcecec861b4dce7ad6c06ef77a320d4c8affe51f8a9944b8c77aca0803c21c",
+  "has_card": true,
+  "added_at": "2026-04-20T12:38:45-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__learn_new.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/learn_new_agent.py"
+}

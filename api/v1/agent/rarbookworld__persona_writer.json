@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__persona_writer",
+  "name": "Writer Persona",
+  "rar_name": "@rarbookworld/persona_writer",
+  "rappid": "rappid:v2:agent:@rarbookworld/persona_writer:283397ffe90cc8558a4f289545137b54",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "persona",
+    "creative-pipeline",
+    "writer"
+  ],
+  "description": "Senior nonfiction writer. Takes raw source material and returns chapter-style prose with code preserved verbatim.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 140,
+  "size_kb": 5.8,
+  "sha256": "283397ffe90cc8558a4f289545137b54242d49c674883f14ac609993bfc88cd8",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__persona_writer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_writer_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_writer_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_writer.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_writer.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_writer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/persona_writer_agent.py"
+}

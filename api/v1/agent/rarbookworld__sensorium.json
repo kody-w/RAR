@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__sensorium",
+  "name": "Sensorium",
+  "rar_name": "@rarbookworld/sensorium",
+  "rappid": "rappid:v2:agent:@rarbookworld/sensorium:ee2e110d4bf2c29747e524a5eb84ce69",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "ingest"
+  ],
+  "description": "Normalizes a raw moment (code commit, voice memo, bookmark, agent run, location, conversation, decision, reading note) into a structured JSON shape.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 102,
+  "size_kb": 4.8,
+  "sha256": "ee2e110d4bf2c29747e524a5eb84ce69c7bafc9b0ad2ff59931aa53264bb420d",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__sensorium.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/sensorium_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/sensorium_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__sensorium.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__sensorium.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__sensorium.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/sensorium_agent.py"
+}

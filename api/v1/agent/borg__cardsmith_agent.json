@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__cardsmith_agent",
+  "name": "CardSmith",
+  "rar_name": "@borg/cardsmith_agent",
+  "rappid": "rappid:v2:agent:@borg/cardsmith_agent:eb7fb3c00348ba0bdb83931415c28c20",
+  "version": "1.0.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "cards",
+    "visualization",
+    "trading-cards",
+    "sneakernet"
+  ],
+  "description": "Forges trading cards for AI agents. Turn any agent into a collectible card with stats, abilities, and art.",
+  "author": "Howard",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic-agent"
+  ],
+  "lines": 104,
+  "size_kb": 5.1,
+  "sha256": "eb7fb3c00348ba0bdb83931415c28c2068aa5fb22781765298a3e499d729d4ef",
+  "has_card": true,
+  "added_at": "2026-04-04T11:22:10-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__cardsmith_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/cardsmith_agent.py.card",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/cardsmith_agent.py.card.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__cardsmith_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__cardsmith_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__cardsmith_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/cardsmith_agent.py.card"
+}

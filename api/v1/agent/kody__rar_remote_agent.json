@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody__rar_remote_agent",
+  "name": "RAR Remote Agent",
+  "rar_name": "@kody/rar_remote_agent",
+  "rappid": "rappid:v2:agent:@kody/rar_remote_agent:cc2def2e4e2467d63dd2eef301dcf077",
+  "version": "1.3.0",
+  "publisher": "@kody",
+  "category": "core",
+  "tags": [
+    "core",
+    "registry",
+    "package-manager",
+    "install",
+    "discovery",
+    "voting",
+    "community"
+  ],
+  "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
+  "author": "RAPP Core Team",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 840,
+  "size_kb": 33.5,
+  "sha256": "cc2def2e4e2467d63dd2eef301dcf0775f0a28a0e07552018c5f46cc51a8e045",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody__rar_remote_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rar_remote_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/rar_remote_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rar_remote_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rar_remote_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__rar_remote_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody/rar_remote_agent.py"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__hacker_news",
+  "name": "Hacker News",
+  "rar_name": "@rapp/hacker_news",
+  "rappid": "rappid:v2:agent:@rapp/hacker_news:51dd9c04dd7eb5a0701c5008a3797945",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "integrations",
+  "tags": [
+    "starter",
+    "news",
+    "http"
+  ],
+  "description": "Fetches the top N stories from Hacker News.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 115,
+  "size_kb": 4.2,
+  "sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__hacker_news.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__hacker_news.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__hacker_news.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/hacker_news_agent.py"
+}

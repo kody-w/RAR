@@ -1,0 +1,33 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__exec_brief_agent",
+  "name": "Executive Brief",
+  "rar_name": "@rapp/exec_brief_agent",
+  "rappid": "rappid:v2:agent:@rapp/exec_brief_agent:4f2fea99af55fc820d350f71f91b4e12",
+  "version": "1.2.0",
+  "publisher": "@rapp",
+  "category": "analysis",
+  "tags": [
+    "composite",
+    "exec-brief-pipeline",
+    "singleton"
+  ],
+  "description": "Four-agent pipeline that produces polished executive briefs on any topic.",
+  "author": "@rapp",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 685,
+  "size_kb": 27.1,
+  "sha256": "4f2fea99af55fc820d350f71f91b4e122b9eaa834b4cf1a7fc31fc714f914b76",
+  "has_card": true,
+  "added_at": "2026-04-27T21:14:43Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__exec_brief_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__exec_brief_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__exec_brief_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__exec_brief_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/exec_brief_agent.py"
+}

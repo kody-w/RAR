@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__activity_gap",
+  "name": "Activity Gap Analyzer",
+  "rar_name": "@aibast-agents-library/activity_gap",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/activity_gap:1dca5a2e99732f7aadf05fac1f4dbf3d",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2b_sales",
+  "tags": [
+    "b2b",
+    "sales",
+    "activity-gap",
+    "deal-progression",
+    "pipeline"
+  ],
+  "description": "Identifies missing sales activities per stage, evaluates completion, generates roadmaps, and analyzes gap impact.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 393,
+  "size_kb": 18.0,
+  "sha256": "1dca5a2e99732f7aadf05fac1f4dbf3dfad0f14855265eaacb9fd16dff4938e8",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__activity_gap.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py"
+}

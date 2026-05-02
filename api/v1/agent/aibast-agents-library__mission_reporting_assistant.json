@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__mission_reporting_assistant",
+  "name": "Mission Reporting Assistant Agent",
+  "rar_name": "@aibast-agents-library/mission_reporting_assistant",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/mission_reporting_assistant:e3459b8792513bffd47c56ab5fc10811",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "federal_government",
+  "tags": [
+    "mission",
+    "reporting",
+    "KPI",
+    "stakeholder",
+    "federal",
+    "dashboard"
+  ],
+  "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 286,
+  "size_kb": 13.0,
+  "sha256": "e3459b8792513bffd47c56ab5fc10811eb0aec0b4b5f4f81831770b35607c3be",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__mission_reporting_assistant.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py"
+}

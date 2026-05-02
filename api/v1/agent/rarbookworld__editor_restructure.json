@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__editor_restructure",
+  "name": "Editor: Restructure",
+  "rar_name": "@rarbookworld/editor_restructure",
+  "rappid": "rappid:v2:agent:@rarbookworld/editor_restructure:29157b7376d341c913c9a7865cae8578",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "editor-specialist",
+    "creative-pipeline"
+  ],
+  "description": "Editor specialist. Consolidates repetitive middle sections without rewriting the writer's voice.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 106,
+  "size_kb": 4.8,
+  "sha256": "29157b7376d341c913c9a7865cae857836d01c8daa720ee59a580e93c9822e62",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__editor_restructure.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_restructure_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_restructure_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_restructure.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_restructure.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_restructure.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/editor_restructure_agent.py"
+}

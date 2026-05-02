@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__pitch_deck_agent",
+  "name": "PitchDeck",
+  "rar_name": "@rapp/pitch_deck_agent",
+  "rappid": "rappid:v2:agent:@rapp/pitch_deck_agent:7882b22bae29b0092079a7568dcfc13a",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "productivity",
+  "tags": [
+    "pitch",
+    "deck",
+    "slides",
+    "narrative",
+    "html",
+    "executive"
+  ],
+  "description": "Generates a polished HTML executive pitch deck from a topic and thesis. Output: a single self-contained HTML file with exec/rehearse modes, light/dark theme, keyboard/swipe nav.",
+  "author": "RAPP / AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1087,
+  "size_kb": 56.0,
+  "sha256": "7882b22bae29b0092079a7568dcfc13a1d6991e9e0f0ff312a32d7ca0072b41b",
+  "has_card": true,
+  "added_at": "2026-04-27T21:14:20Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__pitch_deck_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/pitch_deck_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__building_permit_processing",
+  "name": "Building Permit Processing Agent",
+  "rar_name": "@aibast-agents-library/building_permit_processing",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/building_permit_processing:10b25609d84be3a1d909641753295b75",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "slg_government",
+  "tags": [
+    "permits",
+    "building",
+    "zoning",
+    "inspection",
+    "local-government",
+    "fees"
+  ],
+  "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 349,
+  "size_kb": 14.6,
+  "sha256": "10b25609d84be3a1d909641753295b75c1979178adaec483b6c66d0a5905f863",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__building_permit_processing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__building_permit_processing.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__building_permit_processing.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__building_permit_processing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py"
+}

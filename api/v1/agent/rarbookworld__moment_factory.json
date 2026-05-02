@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__moment_factory",
+  "name": "MomentFactory (multi-file source)",
+  "rar_name": "@rarbookworld/moment_factory",
+  "rappid": "rappid:v2:agent:@rarbookworld/moment_factory:35acddf55241c363538abbcc87cc6700",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "moment-pipeline",
+    "rappterbook-engine"
+  ],
+  "description": "Seven-persona moment-to-Drop pipeline as a composite of 8 sibling agent.py files. The candidate engine for any feed-driven AI-agent platform.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@rarbookworld/sensorium",
+    "@rarbookworld/significance_filter",
+    "@rarbookworld/hook_writer",
+    "@rarbookworld/body_writer",
+    "@rarbookworld/channel_router",
+    "@rarbookworld/card_forger",
+    "@rarbookworld/seed_stamper"
+  ],
+  "lines": 191,
+  "size_kb": 7.8,
+  "sha256": "35acddf55241c363538abbcc87cc670032490f6a414218d2113533210c3c77df",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__moment_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/moment_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/moment_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__moment_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__moment_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__moment_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/moment_factory_agent.py"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__project_tracker_agent",
+  "name": "ProjectTracker",
+  "rar_name": "@discreetRappers/project_tracker_agent",
+  "rappid": "rappid:v2:agent:@discreetRappers/project_tracker_agent:701fe6481c8d3b00c27426e912b659a1",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "pipeline",
+  "tags": [
+    "pipeline",
+    "project-management",
+    "tracking"
+  ],
+  "description": "RAPP project management \u2014 create, update, list, retrieve, import, and export project tracking data.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 894,
+  "size_kb": 39.1,
+  "sha256": "701fe6481c8d3b00c27426e912b659a18da5a358a429b6c9c6fb275a3c1ff244",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__project_tracker_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/project_tracker_agent.py"
+}

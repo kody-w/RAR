@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__bulk_crm_data_generator_agent",
+  "name": "Bulk CRM Data Generator",
+  "rar_name": "@aibast-agents-library/bulk_crm_data_generator_agent",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/bulk_crm_data_generator_agent:9774eb4288d6c6e6c6155427e51378e6",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "crm",
+    "data-generation",
+    "testing",
+    "contacts",
+    "accounts",
+    "opportunities"
+  ],
+  "description": "Generates synthetic CRM contacts, accounts, and opportunities for testing, demos, and data migration.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 264,
+  "size_kb": 15.9,
+  "sha256": "9774eb4288d6c6e6c6155427e51378e62d9d34b31d624750b46d33eb93feac92",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__bulk_crm_data_generator_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__bulk_crm_data_generator_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__bulk_crm_data_generator_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__bulk_crm_data_generator_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py"
+}

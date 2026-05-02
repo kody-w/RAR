@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__find_accurate_models",
+  "name": "Find Accurate Models",
+  "rar_name": "@aibast-agents-library/find_accurate_models",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/find_accurate_models:c1d4c185ea1f0af5da3c1446b0717990",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "ai",
+    "ml",
+    "model-selection",
+    "benchmarks",
+    "accuracy",
+    "deployment"
+  ],
+  "description": "AI/ML model search and comparison by accuracy benchmarks, deployment readiness, and cost analysis.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 285,
+  "size_kb": 14.9,
+  "sha256": "c1d4c185ea1f0af5da3c1446b0717990545daf85d94c041f6aa4b97c2df9c470",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__find_accurate_models.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__find_accurate_models.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__find_accurate_models.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__find_accurate_models.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py"
+}

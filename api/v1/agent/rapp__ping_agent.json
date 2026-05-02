@@ -1,0 +1,35 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__ping_agent",
+  "name": "Ping",
+  "rar_name": "@rapp/ping_agent",
+  "rappid": "rappid:v2:agent:@rapp/ping_agent:b069847786f516d1dc3f957fec801505",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "devtools",
+  "tags": [
+    "diagnostic",
+    "smoke-test",
+    "minimal"
+  ],
+  "description": "Returns 'pong'. The smallest possible agent \u2014 useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 37,
+  "size_kb": 1.2,
+  "sha256": "b069847786f516d1dc3f957fec8015059366f47870fd5bf7b63e16454e8ee1c3",
+  "has_card": true,
+  "added_at": "2026-04-27T23:08:03Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__ping_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__ping_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__ping_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__ping_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/ping_agent.py"
+}

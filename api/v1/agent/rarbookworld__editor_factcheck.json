@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__editor_factcheck",
+  "name": "Editor: Factcheck",
+  "rar_name": "@rarbookworld/editor_factcheck",
+  "rappid": "rappid:v2:agent:@rarbookworld/editor_factcheck:bee2e5070ec9bb7e5526cebb8bc0f0e0",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "editor-specialist",
+    "creative-pipeline"
+  ],
+  "description": "Editor specialist. Surfaces 2-5 claims that need a source and what kind of source would prove or disprove each.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 86,
+  "size_kb": 3.7,
+  "sha256": "bee2e5070ec9bb7e5526cebb8bc0f0e059d47e32be7ed38f93084782fd8c91a6",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__editor_factcheck.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_factcheck_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_factcheck_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_factcheck.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_factcheck.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_factcheck.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/editor_factcheck_agent.py"
+}

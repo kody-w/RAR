@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__it_helpdesk",
+  "name": "IT Helpdesk",
+  "rar_name": "@aibast-agents-library/it_helpdesk",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/it_helpdesk:e9ca3f2340ba138eeb7ca0f844284a66",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "it_management",
+  "tags": [
+    "it",
+    "helpdesk",
+    "troubleshooting",
+    "itsm",
+    "support"
+  ],
+  "description": "AI-powered IT helpdesk with automated troubleshooting, knowledge retrieval, remote remediation, and ticket management.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 425,
+  "size_kb": 18.7,
+  "sha256": "e9ca3f2340ba138eeb7ca0f844284a66ce8178a67c917589bce02460c3ffc1c7",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__it_helpdesk.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_helpdesk.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_helpdesk.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__it_helpdesk.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py"
+}

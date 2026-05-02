@@ -1,0 +1,35 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__hello_world_agent",
+  "name": "Hello World",
+  "rar_name": "@kody-w/hello_world_agent",
+  "rappid": "rappid:v2:agent:@kody-w/hello_world_agent:bc98fc54ed0471fcc12b075ebba0a591",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "general",
+  "tags": [
+    "tutorial",
+    "hello-world",
+    "starter"
+  ],
+  "description": "A friendly greeting agent that says hello.",
+  "author": "kody-w",
+  "quality_tier": "unverified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 39,
+  "size_kb": 1.2,
+  "sha256": "bc98fc54ed0471fcc12b075ebba0a5913772791667bbb988f251fb06634e4c4b",
+  "has_card": true,
+  "added_at": "2026-04-04T22:27:48Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__hello_world_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hello_world_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hello_world_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hello_world_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/hello_world_agent.py"
+}

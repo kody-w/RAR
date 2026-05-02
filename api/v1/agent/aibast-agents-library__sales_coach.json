@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__sales_coach",
+  "name": "Sales Coach",
+  "rar_name": "@aibast-agents-library/sales_coach",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/sales_coach:5d85d9a34ac1095a69bc8781df5c9ead",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "sales",
+    "coaching",
+    "training",
+    "performance",
+    "call-review"
+  ],
+  "description": "AI-powered sales coaching with call reviews, skill assessments, coaching plans, and performance dashboards.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 283,
+  "size_kb": 15.9,
+  "sha256": "5d85d9a34ac1095a69bc8781df5c9ead71c3ada1c8337fc7d8be0b01420d1926",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__sales_coach.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_coach.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_coach.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__sales_coach.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py"
+}

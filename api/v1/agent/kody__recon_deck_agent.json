@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody__recon_deck_agent",
+  "name": "ReconDeck",
+  "rar_name": "@kody/recon_deck_agent",
+  "rappid": "rappid:v2:agent:@kody/recon_deck_agent:0b01321a9a20378638d8cbbbc5140090",
+  "version": "1.0.0",
+  "publisher": "@kody",
+  "category": "core",
+  "tags": [
+    "deck",
+    "recon",
+    "intelligence",
+    "borg",
+    "rappterbook",
+    "hackernews",
+    "briefing",
+    "multi-agent"
+  ],
+  "description": "Multi-source intelligence deck \u2014 combines Borg assimilation, Rappterbook social intel, and HackerNews trends into a unified recon briefing on any topic.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@borg/borg_agent",
+    "@kody/rappterbook"
+  ],
+  "lines": 175,
+  "size_kb": 6.9,
+  "sha256": "0b01321a9a20378638d8cbbbc514009026be4939bf91706631cd512e97aa19f7",
+  "has_card": true,
+  "added_at": "2026-04-04T21:14:50Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody__recon_deck_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/recon_deck_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody/recon_deck_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__recon_deck_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__recon_deck_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody__recon_deck_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody/recon_deck_agent.py"
+}

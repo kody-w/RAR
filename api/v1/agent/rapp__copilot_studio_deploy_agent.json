@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__copilot_studio_deploy_agent",
+  "name": "CopilotStudioDeploy",
+  "rar_name": "@rapp/copilot_studio_deploy_agent",
+  "rappid": "rappid:v2:agent:@rapp/copilot_studio_deploy_agent:67d0ed6f996314d577542bc271d222c9",
+  "version": "0.1.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "meta",
+    "copilot-studio",
+    "deploy",
+    "dataverse",
+    "destructive"
+  ],
+  "description": "Push a forged Copilot Studio bundle into a Dataverse environment via OAuth client_credentials + ImportSolutionAsync. Reads creds from local.settings.json. Destructive deploy is gated by confirm.",
+  "author": "RAPP",
+  "quality_tier": "experimental",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@rapp/copilot_studio_forge_agent"
+  ],
+  "lines": 904,
+  "size_kb": 39.1,
+  "sha256": "67d0ed6f996314d577542bc271d222c967826826cb165f661e09326a742bcf93",
+  "has_card": true,
+  "added_at": "2026-04-28T16:27:14-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__copilot_studio_deploy_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/copilot_studio_deploy_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/copilot_studio_deploy_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_deploy_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_deploy_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__copilot_studio_deploy_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/copilot_studio_deploy_agent.py"
+}

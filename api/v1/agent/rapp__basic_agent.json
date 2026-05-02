@@ -1,0 +1,33 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__basic_agent",
+  "name": "BasicAgent",
+  "rar_name": "@rapp/basic_agent",
+  "rappid": "rappid:v2:agent:@rapp/basic_agent:641fd31cec2ba24c532a289aac91a8fb",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "devtools",
+  "tags": [
+    "devtools",
+    "base-class",
+    "required"
+  ],
+  "description": "Base class that every RAPP agent inherits from. Required dependency.",
+  "author": "RAPP Core",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 29,
+  "size_kb": 1.3,
+  "sha256": "641fd31cec2ba24c532a289aac91a8fb865ea2cda0b08de56db249462af369aa",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__basic_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__basic_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__basic_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__basic_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/basic_agent.py"
+}

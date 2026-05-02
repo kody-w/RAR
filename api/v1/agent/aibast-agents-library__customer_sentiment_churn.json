@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__customer_sentiment_churn",
+  "name": "Customer Sentiment & Churn Agent",
+  "rar_name": "@aibast-agents-library/customer_sentiment_churn",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/customer_sentiment_churn:4c01159068a0389f719941a69988be19",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "financial_services",
+  "tags": [
+    "sentiment",
+    "churn",
+    "retention",
+    "NPS",
+    "analytics",
+    "financial-services"
+  ],
+  "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 327,
+  "size_kb": 15.0,
+  "sha256": "4c01159068a0389f719941a69988be192606859bbe0f3aa44e02503c4778797c",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_sentiment_churn.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py"
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__resource_utilization",
+  "name": "Resource Utilization Agent",
+  "rar_name": "@aibast-agents-library/resource_utilization",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/resource_utilization:829086c01ea3c3fac32aefc67d7a9565",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "professional_services",
+  "tags": [
+    "utilization",
+    "staffing",
+    "capacity",
+    "bench",
+    "professional-services"
+  ],
+  "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 335,
+  "size_kb": 15.6,
+  "sha256": "829086c01ea3c3fac32aefc67d7a9565699adbabedef1ed85229927aad4b76dc",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__resource_utilization.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__resource_utilization.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__resource_utilization.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__resource_utilization.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__fleet_commander",
+  "name": "FleetCommander",
+  "rar_name": "@rapp/fleet_commander",
+  "rappid": "rappid:v2:agent:@rapp/fleet_commander:ad1f3782296fae46bfad91f33e93e4f8",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "devtools",
+  "tags": [
+    "meta",
+    "automation",
+    "fleet",
+    "ci",
+    "tdd",
+    "pipeline"
+  ],
+  "description": "Autonomous agent development pipeline. Accepts a natural-language spec, generates a plan, writes tests, builds the agent, iterates until tests pass, and publishes to the RAR registry. Uses Copilot CLI for code generation.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 799,
+  "size_kb": 31.2,
+  "sha256": "ad1f3782296fae46bfad91f33e93e4f8c2ca8e288236d01476e7fa6a17c6532c",
+  "has_card": true,
+  "added_at": "2026-04-21T13:35:42-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__fleet_commander.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/fleet_commander_agent.py"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__ceo_decision",
+  "name": "CEO: Decision",
+  "rar_name": "@rarbookworld/ceo_decision",
+  "rappid": "rappid:v2:agent:@rarbookworld/ceo_decision:50e4cf49c7fddff390c0096a361d9cc3",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "ceo-specialist",
+    "creative-pipeline"
+  ],
+  "description": "CEO specialist. Returns a one-line ship/edit/hold decision with the reasoning behind it.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 87,
+  "size_kb": 3.8,
+  "sha256": "50e4cf49c7fddff390c0096a361d9cc31a0c784418a51c5fc53cbc38bcbd11e6",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__ceo_decision.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/ceo_decision_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/ceo_decision_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__ceo_decision.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__ceo_decision.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__ceo_decision.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/ceo_decision_agent.py"
+}

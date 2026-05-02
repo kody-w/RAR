@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rapp_publish_agent",
+  "name": "RappPublish",
+  "rar_name": "@rapp/rapp_publish_agent",
+  "rappid": "rappid:v2:agent:@rapp/rapp_publish_agent:3d33b03aef705e0ec9ecad9cb23ff44f",
+  "version": "0.2.0",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "publish",
+    "submission",
+    "router",
+    "ecosystem",
+    "store",
+    "registry"
+  ],
+  "description": "Submit any RAPP artifact (agent, rapplication, sense) to the right store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue in kody-w/RAR / kody-w/RAPP_Store / kody-w/RAPP_Sense_Store respectively. Replaces the rapplication-only publish_to_rapp_store agent with a unified router covering all three peer stores.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 505,
+  "size_kb": 20.8,
+  "sha256": "3d33b03aef705e0ec9ecad9cb23ff44f02992eb8d01ea958bf223b5b16a6c5ca",
+  "has_card": true,
+  "added_at": "2026-04-27T23:17:53Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp_publish_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_publish_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_publish_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_publish_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapp_publish_agent.py"
+}

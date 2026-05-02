@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__cart_abandonment_recovery",
+  "name": "Cart Abandonment Recovery Agent",
+  "rar_name": "@aibast-agents-library/cart_abandonment_recovery",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/cart_abandonment_recovery:493a08a3736139e87c4d0215e52e9738",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2c_sales",
+  "tags": [
+    "cart-abandonment",
+    "recovery",
+    "ecommerce",
+    "conversion",
+    "email",
+    "b2c"
+  ],
+  "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 289,
+  "size_kb": 13.0,
+  "sha256": "493a08a3736139e87c4d0215e52e9738db8588f1637bde2540a47f89f97dd3b5",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__cart_abandonment_recovery.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py"
+}

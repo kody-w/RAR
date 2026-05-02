@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__seed_stamper",
+  "name": "Seed Stamper",
+  "rar_name": "@rarbookworld/seed_stamper",
+  "rappid": "rappid:v2:agent:@rarbookworld/seed_stamper:0ded681d09647341f27b7ebb667d9c09",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "seed",
+    "incantation"
+  ],
+  "description": "Pure function (no LLM). Returns deterministic 64-bit seed + 7-word incantation from a 256-word wordlist. Speak the words \u2192 reconstruct the Drop offline.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 92,
+  "size_kb": 4.1,
+  "sha256": "0ded681d09647341f27b7ebb667d9c09bca5347150185f79567e57c65209a832",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__seed_stamper.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/seed_stamper_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/seed_stamper_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__seed_stamper.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__seed_stamper.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__seed_stamper.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/seed_stamper_agent.py"
+}

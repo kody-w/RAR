@@ -1,0 +1,33 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__vibe_builder_agent",
+  "name": "VibeBuilder",
+  "rar_name": "@rapp/vibe_builder_agent",
+  "rappid": "rappid:v2:agent:@rapp/vibe_builder_agent:294001aa426d891c7024e0e4fbd7ac6b",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "meta",
+    "builder",
+    "rapplication"
+  ],
+  "description": "Builds a complete rapplication (agent + service) from a natural language description.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 532,
+  "size_kb": 20.2,
+  "sha256": "294001aa426d891c7024e0e4fbd7ac6b9211393d69fcf82c1b833cfad9483148",
+  "has_card": true,
+  "added_at": "2026-04-27T21:14:02Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__vibe_builder_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/vibe_builder_agent.py"
+}

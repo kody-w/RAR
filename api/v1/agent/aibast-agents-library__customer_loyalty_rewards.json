@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__customer_loyalty_rewards",
+  "name": "Customer Loyalty & Rewards Agent",
+  "rar_name": "@aibast-agents-library/customer_loyalty_rewards",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/customer_loyalty_rewards:8a5606496641b9afe34413aa26052b13",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "b2c_sales",
+  "tags": [
+    "loyalty",
+    "rewards",
+    "points",
+    "retention",
+    "tier",
+    "b2c"
+  ],
+  "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 292,
+  "size_kb": 13.0,
+  "sha256": "8a5606496641b9afe34413aa26052b13b625f320ef6fb9471b30927b82df733b",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_loyalty_rewards.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_loyalty_rewards.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_loyalty_rewards.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_loyalty_rewards.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py"
+}

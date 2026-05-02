@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__customer_360",
+  "name": "Customer 360",
+  "rar_name": "@aibast-agents-library/customer_360",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/customer_360:3fa23ccf9158d0892802d65c7987fb56",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "general",
+  "tags": [
+    "customer-360",
+    "unified-profile",
+    "health-score",
+    "next-best-action",
+    "crm"
+  ],
+  "description": "Unified customer profiles merging CRM, support, and billing data with health scores and next-best-action recommendations.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 317,
+  "size_kb": 17.7,
+  "sha256": "3fa23ccf9158d0892802d65c7987fb56b9737abf548ff12bee7bdb6d7e452271",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_360.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py"
+}

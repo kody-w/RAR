@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__editor_voicecheck",
+  "name": "Editor: Voice Drift",
+  "rar_name": "@rarbookworld/editor_voicecheck",
+  "rappid": "rappid:v2:agent:@rarbookworld/editor_voicecheck:598e475761b8ae780e4551f33def6cbf",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "editor-specialist",
+    "creative-pipeline"
+  ],
+  "description": "Editor specialist. Flags voice drift \u2014 sentences that don't sound like the author's established voice.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 87,
+  "size_kb": 3.8,
+  "sha256": "598e475761b8ae780e4551f33def6cbfca2d3d510841916af7e2a18a91fa6c1e",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__editor_voicecheck.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_voicecheck_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/editor_voicecheck_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_voicecheck.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_voicecheck.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__editor_voicecheck.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/editor_voicecheck_agent.py"
+}

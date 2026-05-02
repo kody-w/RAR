@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__prior_authorization",
+  "name": "Prior Authorization Agent",
+  "rar_name": "@aibast-agents-library/prior_authorization",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/prior_authorization:6ec82bc15d44ac15abcf43deb8c7203f",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "healthcare",
+  "tags": [
+    "prior-auth",
+    "authorization",
+    "payer",
+    "clinical-criteria",
+    "appeals",
+    "healthcare"
+  ],
+  "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 364,
+  "size_kb": 15.0,
+  "sha256": "6ec82bc15d44ac15abcf43deb8c7203f2f59e025ede9d97a3b730538223cb057",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__prior_authorization.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__prior_authorization.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__prior_authorization.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__prior_authorization.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py"
+}

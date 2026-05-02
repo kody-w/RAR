@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__recon_agent",
+  "name": "Recon",
+  "rar_name": "@borg/recon_agent",
+  "rappid": "rappid:v2:agent:@borg/recon_agent:3e316dd8917d04049ac91e17c0f68408",
+  "version": "1.0.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "recon",
+    "url",
+    "security",
+    "api",
+    "scanner",
+    "headers",
+    "ssl",
+    "tech-stack"
+  ],
+  "description": "URL intelligence scanner \u2014 point it at any URL for a full recon report: tech stack, security headers, API schema, SSL, performance. Every scan produces an auto-opening HTML report.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 742,
+  "size_kb": 33.0,
+  "sha256": "3e316dd8917d04049ac91e17c0f684082f5742140ffeed43ef8ea258965daebd",
+  "has_card": true,
+  "added_at": "2026-04-07T23:21:37Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__recon_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/recon_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/recon_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__recon_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__recon_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__recon_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/recon_agent.py"
+}

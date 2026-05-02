@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__ask_hr",
+  "name": "Ask HR",
+  "rar_name": "@aibast-agents-library/ask_hr",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/ask_hr:320ad3d936428f7de7d972178082eb35",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "human_resources",
+  "tags": [
+    "hr",
+    "human-resources",
+    "benefits",
+    "time-off",
+    "employee-self-service"
+  ],
+  "description": "AI-powered HR assistant for time-off requests, benefits inquiries, parental leave, and policy lookups.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 390,
+  "size_kb": 17.3,
+  "sha256": "320ad3d936428f7de7d972178082eb35e50d501375ef457d88f2a31b9fd645b3",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__ask_hr.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__ask_hr.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__ask_hr.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__ask_hr.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py"
+}

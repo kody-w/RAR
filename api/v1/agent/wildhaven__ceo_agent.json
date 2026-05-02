@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "wildhaven__ceo_agent",
+  "name": "CEO Agent",
+  "rar_name": "@wildhaven/ceo_agent",
+  "rappid": "rappid:v2:agent:@wildhaven/ceo_agent:252842017521a19e87f2febdaabc624b",
+  "version": "1.0.0",
+  "publisher": "@wildhaven",
+  "category": "core",
+  "tags": [
+    "ceo",
+    "digital-twin",
+    "wildhaven",
+    "rappter",
+    "strategy",
+    "leadership",
+    "stewardship"
+  ],
+  "description": "Molly Wildfeuer's digital twin \u2014 the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
+  "author": "Wildhaven of America",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 325,
+  "size_kb": 13.5,
+  "sha256": "252842017521a19e87f2febdaabc624bea8e21aff2165bf0ba89fbf612172374",
+  "has_card": true,
+  "added_at": "2026-04-05T16:43:55-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__ceo_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/ceo_agent.py"
+}

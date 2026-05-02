@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__citizen_service_request",
+  "name": "Citizen Service Request Agent",
+  "rar_name": "@aibast-agents-library/citizen_service_request",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/citizen_service_request:c7d3ec4ff988173d90118bf2936df4f0",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "slg_government",
+  "tags": [
+    "311",
+    "citizen-services",
+    "municipal",
+    "routing",
+    "SLA",
+    "local-government"
+  ],
+  "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 327,
+  "size_kb": 14.6,
+  "sha256": "c7d3ec4ff988173d90118bf2936df4f04a4ac96a0fb6a21d4ad777e6fffaa0a2",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__citizen_service_request.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py"
+}

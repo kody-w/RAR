@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__body_writer",
+  "name": "Body Writer",
+  "rar_name": "@rarbookworld/body_writer",
+  "rappid": "rappid:v2:agent:@rarbookworld/body_writer:31f23ee7380e9c39db8fa20960b4ed4e",
+  "version": "0.1.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "moment-pipeline",
+    "body"
+  ],
+  "description": "Writes the 3-5 sentence body of a Drop. Expands the hook, never restates. At least one concrete detail from key_facts.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 102,
+  "size_kb": 4.4,
+  "sha256": "31f23ee7380e9c39db8fa20960b4ed4e7ea015f1f3f1b2fc54d69edb961173b9",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__body_writer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/body_writer_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/body_writer_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__body_writer.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__body_writer.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__body_writer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/body_writer_agent.py"
+}

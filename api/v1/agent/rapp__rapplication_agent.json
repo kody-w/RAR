@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rapplication_agent",
+  "name": "Rapplication",
+  "rar_name": "@rapp/rapplication_agent",
+  "rappid": "rappid:v2:agent:@rapp/rapplication_agent:b9157463be242d97e8c0a789e7a755fe",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "meta",
+    "build",
+    "rapplication",
+    "bundler",
+    "publish"
+  ],
+  "description": "Bundle a teammate's single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 594,
+  "size_kb": 23.3,
+  "sha256": "b9157463be242d97e8c0a789e7a755fe41b2f43cff4e7dca7476ed4596ff6132",
+  "has_card": true,
+  "added_at": "2026-04-27T18:52:28Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapplication_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapplication_agent.py"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "aibast-agents-library__fs_regulatory_compliance",
+  "name": "FS Regulatory Compliance Agent",
+  "rar_name": "@aibast-agents-library/fs_regulatory_compliance",
+  "rappid": "rappid:v2:agent:@aibast-agents-library/fs_regulatory_compliance:f36b9a6fe906f317cc208a21caed0bc5",
+  "version": "1.0.0",
+  "publisher": "@aibast-agents-library",
+  "category": "financial_services",
+  "tags": [
+    "compliance",
+    "SOX",
+    "Dodd-Frank",
+    "BSA",
+    "AML",
+    "regulatory",
+    "financial-services"
+  ],
+  "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
+  "author": "AIBAST",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 268,
+  "size_kb": 12.8,
+  "sha256": "f36b9a6fe906f317cc208a21caed0bc5a1c23e908fe53cce9622ebbff23e8faf",
+  "has_card": true,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__fs_regulatory_compliance.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py"
+}

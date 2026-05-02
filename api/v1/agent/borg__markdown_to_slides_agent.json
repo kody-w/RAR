@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "borg__markdown_to_slides_agent",
+  "name": "MarkdownToSlides",
+  "rar_name": "@borg/markdown_to_slides_agent",
+  "rappid": "rappid:v2:agent:@borg/markdown_to_slides_agent:46191e5e122e05938e56a0a19e1e5cc0",
+  "version": "1.1.0",
+  "publisher": "@borg",
+  "category": "productivity",
+  "tags": [
+    "markdown",
+    "slides",
+    "presentation",
+    "converter",
+    "deck",
+    "pipeline"
+  ],
+  "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+  "author": "RAPP Contributor",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 236,
+  "size_kb": 7.9,
+  "sha256": "46191e5e122e05938e56a0a19e1e5cc05a11906b72641f92046b0cd33432f3cd",
+  "has_card": true,
+  "added_at": "2026-04-06T20:58:31Z",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/borg__markdown_to_slides_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/markdown_to_slides_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/markdown_to_slides_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__markdown_to_slides_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__markdown_to_slides_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/borg__markdown_to_slides_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@borg/markdown_to_slides_agent.py"
+}

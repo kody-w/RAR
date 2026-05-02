@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__persona_editor",
+  "name": "Editor Persona (composite)",
+  "rar_name": "@rarbookworld/persona_editor",
+  "rappid": "rappid:v2:agent:@rarbookworld/persona_editor:1583e25c62cebb600300ceb9ee5ae05e",
+  "version": "0.3.0",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "persona",
+    "creative-pipeline",
+    "composite"
+  ],
+  "description": "Editor persona. Composite of 5 specialists: strip \u2192 cut \u2192 restructure, plus factcheck + voicecheck for the editor's note.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@rarbookworld/editor_strip_scaffolding",
+    "@rarbookworld/editor_cutweak",
+    "@rarbookworld/editor_restructure",
+    "@rarbookworld/editor_factcheck",
+    "@rarbookworld/editor_voicecheck"
+  ],
+  "lines": 119,
+  "size_kb": 4.9,
+  "sha256": "1583e25c62cebb600300ceb9ee5ae05ecb250ac4a23f6b4aa0c4e1ac16374baa",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__persona_editor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_editor_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/persona_editor_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_editor.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_editor.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__persona_editor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/persona_editor_agent.py"
+}
