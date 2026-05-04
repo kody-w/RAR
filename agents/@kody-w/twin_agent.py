@@ -51,7 +51,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Twin",
     "description": "One cartridge for the full twin lifecycle: summon a new twin, hatch an .egg, boot a twin on its own port, stop it, list everything. Drop in to any standard brainstem; no extra layers required.",
     "author": "kody-w",
@@ -65,7 +65,7 @@ __manifest__ = {
 
 # ── Constants ───────────────────────────────────────────────────────────
 
-ACTIONS = ("summon", "hatch", "boot", "stop", "list")
+ACTIONS = ("summon", "hatch", "boot", "stop", "list", "update_identity")
 KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 
 WILDHAVEN_RAPPID = "37ad22f5-ed6d-48b1-b8b4-61019f58a42b"
@@ -481,7 +481,10 @@ class TwinAgent(BasicAgent):
                 "'boot' to start a twin as its own brainstem on a fresh port "
                 "(need rappid_uuid); 'stop' to terminate a running twin "
                 "(need rappid_uuid); 'list' to show every twin on this device "
-                "and whether it's running."
+                "and whether it's running; 'update_identity' to append the "
+                "current identity block to an older twin's soul.md so it "
+                "stops introducing itself as 'RAPP' (need rappid_uuid; "
+                "append-only, never overwrites local data)."
             ),
             "parameters": {
                 "type": "object",
@@ -527,11 +530,12 @@ class TwinAgent(BasicAgent):
         if action not in ACTIONS:
             return f"Error: action must be one of {', '.join(ACTIONS)}. Got: {action!r}"
 
-        if action == "summon":  return self._summon(**kwargs)
-        if action == "hatch":   return self._hatch(**kwargs)
-        if action == "boot":    return self._boot(**kwargs)
-        if action == "stop":    return self._stop(**kwargs)
-        if action == "list":    return self._list(**kwargs)
+        if action == "summon":          return self._summon(**kwargs)
+        if action == "hatch":           return self._hatch(**kwargs)
+        if action == "boot":            return self._boot(**kwargs)
+        if action == "stop":            return self._stop(**kwargs)
+        if action == "list":            return self._list(**kwargs)
+        if action == "update_identity": return self._update_identity(**kwargs)
         return f"Error: unhandled action {action!r}"
 
     # ── summon ──────────────────────────────────────────────────────────
@@ -728,6 +732,70 @@ class TwinAgent(BasicAgent):
             time.sleep(0.1)
         _clear_pid(rappid)
         return f"Stopped twin {rappid} (pid {pid})."
+
+    # ── update_identity ─────────────────────────────────────────────────
+
+    def _update_identity(self, **kwargs):
+        """Append the current identity block to an existing twin's soul.md.
+
+        Append-only, idempotent — won't add the block twice. Use this to
+        upgrade twins summoned before v1.0.1 (whose souls don't yet have
+        the strong "Your name is X" instructions, so they default to
+        introducing themselves as "RAPP").
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return ("Error: rappid_uuid required for update_identity. "
+                    "Use action='list' first to find the rappid.")
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        soul_path = workspace / "soul.md"
+        if not soul_path.exists():
+            return f"Error: soul.md not found at {soul_path}"
+
+        # Resolve display name from rappid.json (fall back to dir name)
+        rj_path = workspace / "rappid.json"
+        twin_slug = ws_name
+        if rj_path.exists():
+            try:
+                rj = json.loads(rj_path.read_text())
+                twin_slug = rj.get("name") or twin_slug
+            except (json.JSONDecodeError, OSError):
+                pass
+        dn = _display_name(twin_slug)
+
+        soul_text = soul_path.read_text()
+
+        # Idempotent: skip if any v1.0.1+ identity block is already present
+        if "## Identity — read this every turn" in soul_text:
+            return (
+                f"Twin '{dn}' (rappid {rappid}) already has the identity "
+                f"block. No changes made.\n  soul.md: {soul_path}"
+            )
+
+        block = "\n\n" + _identity_block(dn).rstrip() + "\n"
+
+        # Append. Never modifies existing content.
+        try:
+            with open(soul_path, "a", encoding="utf-8") as f:
+                f.write(block)
+        except OSError as e:
+            return f"Error: could not write {soul_path}: {e}"
+
+        return (
+            f"Updated identity for '{dn}' (rappid {rappid}).\n"
+            f"  soul.md: {soul_path}\n"
+            f"  Appended {block.count(chr(10))} lines to the end (existing content untouched).\n"
+            f"  Restart the twin to pick up the change:\n"
+            f"    1. action='stop', rappid_uuid='{rappid}'\n"
+            f"    2. action='boot', rappid_uuid='{rappid}'\n"
+            f"  Or, if it's running pointed at this soul.md, the next chat "
+            f"turn picks up the new system prompt automatically."
+        )
 
     # ── list ────────────────────────────────────────────────────────────
 
