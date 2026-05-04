@@ -51,7 +51,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Twin",
     "description": "One cartridge for the full twin lifecycle: summon a new twin, hatch an .egg, boot a twin on its own port, stop it, list everything. Drop in to any standard brainstem; no extra layers required.",
     "author": "kody-w",
@@ -65,7 +65,7 @@ __manifest__ = {
 
 # ── Constants ───────────────────────────────────────────────────────────
 
-ACTIONS = ("summon", "hatch", "boot", "stop", "list", "update_identity")
+ACTIONS = ("summon", "hatch", "boot", "stop", "list", "update_identity", "update_soul")
 KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 
 WILDHAVEN_RAPPID = "37ad22f5-ed6d-48b1-b8b4-61019f58a42b"
@@ -483,8 +483,12 @@ class TwinAgent(BasicAgent):
                 "(need rappid_uuid); 'list' to show every twin on this device "
                 "and whether it's running; 'update_identity' to append the "
                 "current identity block to an older twin's soul.md so it "
-                "stops introducing itself as 'RAPP' (need rappid_uuid; "
-                "append-only, never overwrites local data)."
+                "stops introducing itself as 'RAPP' (need rappid_uuid); "
+                "'update_soul' to fully replace a twin's soul.md with new "
+                "content as the twin adapts (need rappid_uuid + new_soul). "
+                "Every soul edit creates a timestamped backup at "
+                "~/.rapp/twins/<rappid>/.brainstem_data/soul_history/ so "
+                "you can always revert."
             ),
             "parameters": {
                 "type": "object",
@@ -519,6 +523,14 @@ class TwinAgent(BasicAgent):
                         "type": "integer",
                         "description": "Optional port for boot. Auto-allocates from 7081-7200 if omitted.",
                     },
+                    "new_soul": {
+                        "type": "string",
+                        "description": "The new soul.md content (markdown). Used by 'update_soul'. The previous soul.md is backed up to .brainstem_data/soul_history/ before being replaced. Twins adapt — this is how their voice grows.",
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Optional human-readable reason for an update_soul edit. Recorded in the backup filename for future-you to know why each version exists.",
+                    },
                 },
                 "required": ["action"],
             },
@@ -536,6 +548,7 @@ class TwinAgent(BasicAgent):
         if action == "stop":            return self._stop(**kwargs)
         if action == "list":            return self._list(**kwargs)
         if action == "update_identity": return self._update_identity(**kwargs)
+        if action == "update_soul":     return self._update_soul(**kwargs)
         return f"Error: unhandled action {action!r}"
 
     # ── summon ──────────────────────────────────────────────────────────
@@ -733,6 +746,28 @@ class TwinAgent(BasicAgent):
         _clear_pid(rappid)
         return f"Stopped twin {rappid} (pid {pid})."
 
+    # ── soul backup helper ──────────────────────────────────────────────
+
+    def _backup_soul(self, workspace, reason=None):
+        """Copy the current soul.md into .brainstem_data/soul_history/<ts>.md.
+        Returns the backup path or None if there was nothing to back up.
+
+        Reason (optional) gets folded into the filename so the history
+        directory reads like a changelog.
+        """
+        soul = pathlib.Path(workspace) / "soul.md"
+        if not soul.exists():
+            return None
+        history = pathlib.Path(workspace) / ".brainstem_data" / "soul_history"
+        history.mkdir(parents=True, exist_ok=True)
+        ts = time.strftime("%Y-%m-%dT%H-%M-%SZ", time.gmtime())
+        slug = ""
+        if reason:
+            slug = "-" + re.sub(r"[^a-z0-9]+", "-", reason.lower()).strip("-")[:40]
+        backup = history / f"{ts}{slug}.md"
+        shutil.copy2(soul, backup)
+        return backup
+
     # ── update_identity ─────────────────────────────────────────────────
 
     def _update_identity(self, **kwargs):
@@ -741,7 +776,8 @@ class TwinAgent(BasicAgent):
         Append-only, idempotent — won't add the block twice. Use this to
         upgrade twins summoned before v1.0.1 (whose souls don't yet have
         the strong "Your name is X" instructions, so they default to
-        introducing themselves as "RAPP").
+        introducing themselves as "RAPP"). Backs up the previous soul.md
+        before appending so reverts are always possible.
         """
         rappid = kwargs.get("rappid_uuid") or ""
         if not rappid:
@@ -779,6 +815,10 @@ class TwinAgent(BasicAgent):
 
         block = "\n\n" + _identity_block(dn).rstrip() + "\n"
 
+        # Backup the existing soul before any edit — twins adapt; backups
+        # let them un-adapt.
+        backup = self._backup_soul(workspace, reason="update_identity")
+
         # Append. Never modifies existing content.
         try:
             with open(soul_path, "a", encoding="utf-8") as f:
@@ -790,11 +830,92 @@ class TwinAgent(BasicAgent):
             f"Updated identity for '{dn}' (rappid {rappid}).\n"
             f"  soul.md: {soul_path}\n"
             f"  Appended {block.count(chr(10))} lines to the end (existing content untouched).\n"
+            f"  Backup:  {backup}\n"
             f"  Restart the twin to pick up the change:\n"
             f"    1. action='stop', rappid_uuid='{rappid}'\n"
             f"    2. action='boot', rappid_uuid='{rappid}'\n"
             f"  Or, if it's running pointed at this soul.md, the next chat "
             f"turn picks up the new system prompt automatically."
+        )
+
+    # ── update_soul ─────────────────────────────────────────────────────
+
+    def _update_soul(self, **kwargs):
+        """Replace a twin's soul.md with new content. The previous version
+        is backed up first to .brainstem_data/soul_history/<timestamp>.md
+        so reverting is always possible.
+
+        Twins adapt over time — this is how the voice grows. Use it when
+        the twin needs to take on a new responsibility, change its tone,
+        absorb new corpus material, or pivot. The model can author the
+        new soul based on the existing one + the user's intent, then
+        invoke this action to persist it.
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        new_soul = kwargs.get("new_soul") or ""
+        reason = kwargs.get("reason") or ""
+
+        if not rappid:
+            return ("Error: rappid_uuid required for update_soul. "
+                    "Use action='list' first to find the rappid.")
+        if not new_soul.strip():
+            return "Error: new_soul required for update_soul (the new soul.md content)."
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        soul_path = workspace / "soul.md"
+
+        # Read the previous to detect no-ops + report old size
+        previous_text = ""
+        if soul_path.exists():
+            try:
+                previous_text = soul_path.read_text()
+            except OSError:
+                pass
+        if previous_text == new_soul:
+            return (
+                f"No change — the new soul is identical to the existing "
+                f"soul.md ({len(previous_text)} chars). Skipped."
+            )
+
+        # Resolve display name for the success message
+        rj_path = workspace / "rappid.json"
+        twin_slug = ws_name
+        if rj_path.exists():
+            try:
+                rj = json.loads(rj_path.read_text())
+                twin_slug = rj.get("name") or twin_slug
+            except (json.JSONDecodeError, OSError):
+                pass
+        dn = _display_name(twin_slug)
+
+        # Backup before edit (rule: every soul edit is reversible)
+        backup = self._backup_soul(workspace, reason=reason or "update_soul")
+
+        try:
+            soul_path.write_text(new_soul)
+        except OSError as e:
+            return f"Error: could not write {soul_path}: {e}"
+
+        old_lines = len(previous_text.splitlines()) if previous_text else 0
+        new_lines = len(new_soul.splitlines())
+
+        return (
+            f"Updated soul.md for '{dn}' (rappid {rappid}).\n"
+            f"  soul.md: {soul_path}\n"
+            f"  Lines:   {old_lines} → {new_lines}\n"
+            f"  Reason:  {reason or '(not specified)'}\n"
+            f"  Backup:  {backup}\n"
+            f"  History: {workspace / '.brainstem_data' / 'soul_history'}\n"
+            f"  Restart the twin to pick up the change:\n"
+            f"    1. action='stop', rappid_uuid='{rappid}'\n"
+            f"    2. action='boot', rappid_uuid='{rappid}'\n"
+            f"  Or, if it's running pointed at this soul.md, the next chat "
+            f"turn picks up the new system prompt automatically.\n"
+            f"  Revert: copy any file from soul_history/ back to soul.md."
         )
 
     # ── list ────────────────────────────────────────────────────────────
