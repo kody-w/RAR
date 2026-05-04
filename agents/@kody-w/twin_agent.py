@@ -51,7 +51,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_agent",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "display_name": "Twin",
     "description": "One cartridge for the full twin lifecycle: summon a new twin, hatch an .egg, boot a twin on its own port, stop it, list everything. Drop in to any standard brainstem; no extra layers required.",
     "author": "kody-w",
@@ -477,7 +477,9 @@ class TwinAgent(BasicAgent):
             "description": (
                 "Full digital-twin lifecycle in one tool. Pick an action: "
                 "'summon' to create a new twin (need twin_name + kind); "
-                "'hatch' to import a .egg cartridge (need egg_path); "
+                "'hatch' to import a .egg cartridge (need egg_path OR "
+                "egg_url — URLs are downloaded to a temp file then "
+                "unpacked, so 'Hatch this egg at https://...' works); "
                 "'boot' to start a twin as its own brainstem on a fresh port "
                 "(need rappid_uuid); 'stop' to terminate a running twin "
                 "(need rappid_uuid); 'list' to show every twin on this device "
@@ -513,7 +515,11 @@ class TwinAgent(BasicAgent):
                     },
                     "egg_path": {
                         "type": "string",
-                        "description": "Absolute path to a .egg file (hatch).",
+                        "description": "Absolute path to a local .egg file (hatch). One of egg_path or egg_url is required.",
+                    },
+                    "egg_url": {
+                        "type": "string",
+                        "description": "URL to a remote .egg file (hatch). Downloads to a temp file, then unpacks. Use for hatching eggs from rapp-egg-hub: 'https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/grandma-rose.egg'.",
                     },
                     "rappid_uuid": {
                         "type": "string",
@@ -608,11 +614,41 @@ class TwinAgent(BasicAgent):
 
     def _hatch(self, **kwargs):
         egg_path_str = kwargs.get("egg_path") or ""
-        if not egg_path_str:
-            return "Error: egg_path required for hatch"
-        egg_path = pathlib.Path(egg_path_str).expanduser()
-        if not egg_path.is_file():
-            return f"Error: file not found: {egg_path}"
+        egg_url = kwargs.get("egg_url") or ""
+
+        if not egg_path_str and not egg_url:
+            return "Error: hatch needs egg_path (local file) OR egg_url (remote URL)."
+
+        # If egg_url, download to a temp file first
+        source_label = ""
+        if egg_url:
+            try:
+                import tempfile
+                tmpdir = pathlib.Path(_rapp_home()) / ".tmp"
+                tmpdir.mkdir(parents=True, exist_ok=True)
+                # Use last URL segment as the temp filename when sane,
+                # else fall back to a hash-derived name.
+                from urllib.parse import urlparse
+                fname = os.path.basename(urlparse(egg_url).path) or "remote.egg"
+                if not fname.endswith(".egg"):
+                    fname += ".egg"
+                downloaded = tmpdir / fname
+                # urllib.request — stdlib, no extra deps
+                req = urllib.request.Request(
+                    egg_url,
+                    headers={"User-Agent": "rapp-twin-agent"},
+                )
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    downloaded.write_bytes(r.read())
+                egg_path = downloaded
+                source_label = f"{egg_url} (downloaded to {downloaded})"
+            except (urllib.error.URLError, urllib.error.HTTPError, OSError) as e:
+                return f"Error: download failed for {egg_url}: {e}"
+        else:
+            egg_path = pathlib.Path(egg_path_str).expanduser()
+            if not egg_path.is_file():
+                return f"Error: file not found: {egg_path}"
+            source_label = str(egg_path)
 
         try:
             blob = egg_path.read_bytes()
@@ -634,7 +670,7 @@ class TwinAgent(BasicAgent):
         return (
             f"Hatched twin '{twin_name}' (rappid {rappid}) — {viability}.\n"
             f"  Workspace:  {workspace}\n"
-            f"  Source egg: {egg_path}\n"
+            f"  Source:     {source_label}\n"
             f"  To talk to it: invoke me again with action='boot', "
             f"rappid_uuid='{rappid}'"
         )

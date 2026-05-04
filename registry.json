@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-04T16:44:02.930268+00:00",
+  "generated_at": "2026-05-04T16:56:46.606523+00:00",
   "stats": {
     "total_agents": 285,
     "total_swarms": 82,
@@ -4700,9 +4700,9 @@
       "_size_kb": 17.6,
       "_lines": 486,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-04T12:44:02-04:00",
+      "_first_commit_sha": "62528e29632e74f75d23aadfbd93eb0b26e183ba",
+      "_latest_commit_sha": "62528e29632e74f75d23aadfbd93eb0b26e183ba"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4798,7 +4798,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_agent",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "display_name": "Twin",
       "description": "One cartridge for the full twin lifecycle: summon a new twin, hatch an .egg, boot a twin on its own port, stop it, list everything. Drop in to any standard brainstem; no extra layers required.",
       "author": "kody-w",
@@ -4818,10 +4818,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/twin_agent.py",
-      "_sha256": "47b76286b20b9c645023387ec13a493de524f92cf342ab52f594a7d801ec2ea3",
+      "_sha256": "1b361f57cf713ae08ea6d643779c06004f4c60ef51dcfd105a1cace53f6c05bd",
       "_seed": 17788523199471692886,
-      "_size_kb": 36.0,
-      "_lines": 939,
+      "_size_kb": 37.9,
+      "_lines": 975,
       "_has_card": false,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
