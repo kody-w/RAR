@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-04T16:41:58.246074+00:00",
+  "generated_at": "2026-05-04T16:44:02.930268+00:00",
   "stats": {
-    "total_agents": 284,
+    "total_agents": 285,
     "total_swarms": 82,
     "publishers": 10,
     "categories": 23,
@@ -4676,6 +4676,36 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/estate_agent",
+      "version": "1.0.0",
+      "display_name": "Estate",
+      "description": "Inspect the user's local twin estate. Shows running status, soul history, eggs, lineage. Read-only \u2014 companion to twin_agent for lifecycle ops.",
+      "author": "kody-w",
+      "tags": [
+        "twin",
+        "estate",
+        "inspect",
+        "track",
+        "local-first"
+      ],
+      "category": "general",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/estate_agent.py",
+      "_sha256": "67cf7ab733501301b4cc87e5933af6da61992ec9827060c5a52c0ad5441e7601",
+      "_seed": 3565696409871721937,
+      "_size_kb": 17.6,
+      "_lines": 486,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/hatch_egg_agent",
       "version": "1.0.1",
       "display_name": "Hatch Egg",
@@ -4795,7 +4825,7 @@
       "_has_card": false,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
-      "_latest_commit_sha": "e5e38cde383a6423a52d4a2a6af2d8ad39075fe2"
+      "_latest_commit_sha": "e3216e0976a244464cb8404759b64d8b074a68a4"
     },
     {
       "schema": "rapp-agent/1.0",
