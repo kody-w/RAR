@@ -16,7 +16,7 @@ memory (.brainstem_data), and any local mutations are restored intact.
 The hatched twin is fully viable — required files are verified before
 the result is reported.
 
-Per the rappbox console contract: this cartridge does not modify the
+Per the rappterbox console contract: this cartridge does not modify the
 brainstem. It uses the brainstem's vendored utils/egg.py to do the
 unpack — no shelling out, no network calls.
 """
@@ -30,11 +30,11 @@ import time
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/hatch_egg_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Hatch Egg",
     "description": "Imports a .egg cartridge file (brainstem-egg/2.x format) and hatches it as a fully-viable digital twin on this device. The hatched twin's identity (rappid), memory, and any local mutations are restored intact.",
     "author": "kody-w",
-    "tags": ["twin", "egg", "import", "hatch", "rappbox", "local-first", "transport"],
+    "tags": ["twin", "egg", "import", "hatch", "rappterbox", "local-first", "transport"],
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
@@ -148,8 +148,8 @@ class HatchEggAgent(BasicAgent):
         egg = _try_import_egg()
         if egg is None:
             return ("Error: the brainstem's egg module is unavailable. "
-                    "Reinstall the rappbox console: curl -fsSL "
-                    "https://kody-w.github.io/rappbox-console/installer/install.sh | bash")
+                    "Reinstall the rappterbox console: curl -fsSL "
+                    "https://kody-w.github.io/rappterbox/installer/install.sh | bash")
 
         try:
             with open(egg_path, "rb") as f:

@@ -1,4 +1,4 @@
-"""Summon Twin — generate a fresh digital twin organism on the local rappbox console.
+"""Summon Twin — generate a fresh digital twin organism on the local rappterbox console.
 
 Drop into ~/.brainstem/agents/. The brainstem auto-loads the cartridge; the
 LLM gets a tool called `SummonTwin`. In chat:
@@ -16,7 +16,7 @@ workspace at ~/.rapp/twins/<rappid>/ (rappid.json + soul.md + MANIFEST.md
 local peer registry so the estate UIs see it. Six soul templates are
 embedded: personal | pre-founder | memorial | project | place | custom.
 
-Per the rappbox console contract: this cartridge does not modify the
+Per the rappterbox console contract: this cartridge does not modify the
 brainstem. It conforms to the BasicAgent contract and uses only the
 brainstem's stable interfaces.
 """
@@ -32,11 +32,11 @@ import uuid
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/summon_twin_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Summon Twin",
     "description": "Generates a new digital twin organism on this device with one of six baked soul templates (personal, pre-founder, memorial, project, place, custom). Mints a fresh rappid, writes the twin workspace at ~/.rapp/twins/<rappid>/, and registers it in the local peer registry.",
     "author": "kody-w",
-    "tags": ["twin", "summon", "organism", "rappbox", "local-first"],
+    "tags": ["twin", "summon", "organism", "rappterbox", "local-first"],
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],

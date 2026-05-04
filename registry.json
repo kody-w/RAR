@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-04T15:24:42.338881+00:00",
+  "generated_at": "2026-05-04T15:27:25.929329+00:00",
   "stats": {
     "total_agents": 283,
     "total_swarms": 82,
@@ -4677,7 +4677,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/hatch_egg_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Hatch Egg",
       "description": "Imports a .egg cartridge file (brainstem-egg/2.x format) and hatches it as a fully-viable digital twin on this device. The hatched twin's identity (rappid), memory, and any local mutations are restored intact.",
       "author": "kody-w",
@@ -4686,7 +4686,7 @@
         "egg",
         "import",
         "hatch",
-        "rappbox",
+        "rappterbox",
         "local-first",
         "transport"
       ],
@@ -4697,14 +4697,14 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/hatch_egg_agent.py",
-      "_sha256": "30ac7495e91dce135a57237ce959b0f55cc7180cecd61b4779f44ab8a10e0800",
-      "_seed": 16575155244163284363,
+      "_sha256": "820b3490b0266138628c85ec53f41499f715bca15e9b95498ebc1df52a9fbd42",
+      "_seed": 16575155244163284568,
       "_size_kb": 7.9,
       "_lines": 225,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-04T11:25:03-04:00",
+      "_first_commit_sha": "d8f4439980ca4dfc52383b13c94c421d63cc018a",
+      "_latest_commit_sha": "d8f4439980ca4dfc52383b13c94c421d63cc018a"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4738,7 +4738,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/summon_twin_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Summon Twin",
       "description": "Generates a new digital twin organism on this device with one of six baked soul templates (personal, pre-founder, memorial, project, place, custom). Mints a fresh rappid, writes the twin workspace at ~/.rapp/twins/<rappid>/, and registers it in the local peer registry.",
       "author": "kody-w",
@@ -4746,7 +4746,7 @@
         "twin",
         "summon",
         "organism",
-        "rappbox",
+        "rappterbox",
         "local-first"
       ],
       "category": "general",
@@ -4756,14 +4756,14 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/summon_twin_agent.py",
-      "_sha256": "bcec15100dfa8b777c972d5bef4865e5471573443694f490f5df8ddb5732ce32",
-      "_seed": 14703631422649415683,
+      "_sha256": "9ed451fbc2945fcfa7db5eaa4e6731c44ee237ec23e56c39e29cff3a6042e45c",
+      "_seed": 14703631422649410414,
       "_size_kb": 12.0,
       "_lines": 337,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-04T11:25:03-04:00",
+      "_first_commit_sha": "d8f4439980ca4dfc52383b13c94c421d63cc018a",
+      "_latest_commit_sha": "d8f4439980ca4dfc52383b13c94c421d63cc018a"
     },
     {
       "schema": "rapp-agent/1.0",
