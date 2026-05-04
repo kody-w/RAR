@@ -30,6 +30,7 @@ The flow is the user's chosen mental model from a single tool, exposed
 as plain English to the LLM.
 """
 
+import hashlib
 import io
 import json
 import os
@@ -41,6 +42,7 @@ import socket
 import subprocess
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 import uuid
 import zipfile
@@ -51,7 +53,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_agent",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "display_name": "Twin",
     "description": "One cartridge for the full twin lifecycle: summon a new twin, hatch an .egg, boot a twin on its own port, stop it, list everything. Drop in to any standard brainstem; no extra layers required.",
     "author": "kody-w",
@@ -65,7 +67,7 @@ __manifest__ = {
 
 # ── Constants ───────────────────────────────────────────────────────────
 
-ACTIONS = ("summon", "hatch", "boot", "stop", "list", "update_identity", "update_soul")
+ACTIONS = ("summon", "hatch", "boot", "stop", "list", "update_identity", "update_soul", "lay_egg")
 KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 
 WILDHAVEN_RAPPID = "37ad22f5-ed6d-48b1-b8b4-61019f58a42b"
@@ -371,6 +373,129 @@ def _clear_pid(rappid):
             pass
 
 
+# ── Egg cartridge packer (schema brainstem-egg/2.1) ─────────────────────
+
+# Files at workspace root that travel into the egg's repo/ payload.
+_EGG_ROOT_FILES = {
+    "brainstem.py", "rappid.json", "soul.md",
+    "MANIFEST.md", "README.md", "LICENSE",
+    "SUMMON.md", "TEMPLATE.md", "index.html",
+    "vbrainstem.html", "summon.svg", ".gitignore",
+}
+# Subdirectories that travel as full trees.
+_EGG_ROOT_DIRS = ("agents", "utils", "installer", "app")
+# Names that NEVER enter an egg.
+_EGG_NEVER_DIRS = {"__pycache__", ".pytest_cache", "venv", ".git",
+                   "node_modules", "private"}
+_EGG_NEVER_FILES = {".DS_Store", "Thumbs.db", ".env", ".env.local",
+                    ".copilot_token", ".copilot_session"}
+
+
+def _egg_excluded(rel_path):
+    parts = rel_path.replace("\\", "/").split("/")
+    if any(p in _EGG_NEVER_DIRS for p in parts):
+        return True
+    if any(p in _EGG_NEVER_FILES for p in parts):
+        return True
+    return False
+
+
+def _walk_into_zip(z, src_root, arc_prefix):
+    """Recursively add files under src_root to the zip at arc_prefix/<rel>.
+    Returns count of files added."""
+    src_root = pathlib.Path(src_root)
+    if not src_root.is_dir():
+        return 0
+    n = 0
+    for root, dirs, files in os.walk(src_root):
+        dirs[:] = [d for d in dirs if d not in _EGG_NEVER_DIRS]
+        for fn in files:
+            if fn in _EGG_NEVER_FILES:
+                continue
+            full = os.path.join(root, fn)
+            rel = os.path.relpath(full, src_root).replace(os.sep, "/")
+            if _egg_excluded(rel):
+                continue
+            z.write(full, f"{arc_prefix}/{rel}" if arc_prefix else rel)
+            n += 1
+    return n
+
+
+def _pack_workspace(workspace):
+    """Pack a twin workspace into a brainstem-egg/2.1 .egg blob (bytes).
+
+    Self-contained: stdlib zipfile. Returns (blob, manifest_dict).
+    Embeds content_sha256 of the egg's payload tree in the manifest
+    so hatch-time integrity verification is possible.
+    """
+    workspace = pathlib.Path(workspace)
+    rj_path = workspace / "rappid.json"
+    if not rj_path.exists():
+        raise ValueError(f"no rappid.json at {workspace}")
+    rj = json.loads(rj_path.read_text())
+    rappid_uuid = rj.get("rappid")
+    if not rappid_uuid:
+        raise ValueError("rappid.json has no 'rappid' field")
+
+    bs_block = rj.get("brainstem") or {}
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        repo_files = 0
+        # Top-level repo files at root
+        for fname in _EGG_ROOT_FILES:
+            full = workspace / fname
+            if full.exists() and full.is_file():
+                z.write(full, f"repo/{fname}")
+                repo_files += 1
+        # Subdir trees
+        for d in _EGG_ROOT_DIRS:
+            repo_files += _walk_into_zip(z, workspace / d, f"repo/{d}")
+
+        # State (.brainstem_data/), excluding the soul_history dir to keep
+        # eggs small — receivers don't need the donor's edit log.
+        data_files = 0
+        bs_data = workspace / ".brainstem_data"
+        if bs_data.exists():
+            for entry in bs_data.iterdir():
+                if entry.name in ("soul_history", "private"):
+                    continue
+                if entry.is_dir():
+                    data_files += _walk_into_zip(z, entry, f"data/{entry.name}")
+                else:
+                    if not _egg_excluded(entry.name):
+                        z.write(entry, f"data/{entry.name}")
+                        data_files += 1
+
+        manifest = {
+            "schema": "brainstem-egg/2.1",
+            "type": "twin",
+            "exported_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "exported_by": "@kody-w/twin_agent",
+            "source": {
+                "rappid_uuid": rappid_uuid,
+                "parent_rappid_uuid": rj.get("parent_rappid"),
+                "repo": rj.get("parent_repo"),
+                "commit": rj.get("parent_commit"),
+                "name": rj.get("name"),
+            },
+            "brainstem": {
+                "version": bs_block.get("version"),
+                "source_repo": bs_block.get("source_repo"),
+                "source_commit": bs_block.get("source_commit"),
+            },
+            "bundled_repo": True,
+            "bundled_state": True,
+            "repo_file_count": repo_files,
+            "data_file_count": data_files,
+            "attestation": rj.get("attestation"),  # phase 1: null OK
+        }
+        z.writestr("manifest.json", json.dumps(manifest, indent=2))
+
+    blob = buf.getvalue()
+    return blob, manifest
+
+
 # ── Egg cartridge unpacker (minimal, schema 2.0/2.1 tolerant) ───────────
 
 def _unpack_egg(blob, host_root):
@@ -487,7 +612,11 @@ class TwinAgent(BasicAgent):
                 "current identity block to an older twin's soul.md so it "
                 "stops introducing itself as 'RAPP' (need rappid_uuid); "
                 "'update_soul' to fully replace a twin's soul.md with new "
-                "content as the twin adapts (need rappid_uuid + new_soul). "
+                "content as the twin adapts (need rappid_uuid + new_soul); "
+                "'lay_egg' to pack a twin's workspace into a portable "
+                ".egg cartridge for backup or sharing (need rappid_uuid; "
+                "lands at ~/.rapp/eggs/<rappid>/<timestamp>.egg with "
+                "embedded sha256 + brainstem-egg/2.1 manifest). "
                 "Every soul edit creates a timestamped backup at "
                 "~/.rapp/twins/<rappid>/.brainstem_data/soul_history/ so "
                 "you can always revert."
@@ -537,6 +666,10 @@ class TwinAgent(BasicAgent):
                         "type": "string",
                         "description": "Optional human-readable reason for an update_soul edit. Recorded in the backup filename for future-you to know why each version exists.",
                     },
+                    "expect_sha256": {
+                        "type": "string",
+                        "description": "Optional sha256 hex digest the egg must match before unpacking (hatch). Refuses to hatch if the local egg's hash doesn't match. Use when hatching from URLs you don't fully trust — combined with auto-fetched hub sidecars, gives content-integrity verification.",
+                    },
                 },
                 "required": ["action"],
             },
@@ -555,6 +688,7 @@ class TwinAgent(BasicAgent):
         if action == "list":            return self._list(**kwargs)
         if action == "update_identity": return self._update_identity(**kwargs)
         if action == "update_soul":     return self._update_soul(**kwargs)
+        if action == "lay_egg":         return self._lay_egg(**kwargs)
         return f"Error: unhandled action {action!r}"
 
     # ── summon ──────────────────────────────────────────────────────────
@@ -615,6 +749,7 @@ class TwinAgent(BasicAgent):
     def _hatch(self, **kwargs):
         egg_path_str = kwargs.get("egg_path") or ""
         egg_url = kwargs.get("egg_url") or ""
+        expect_sha256 = (kwargs.get("expect_sha256") or "").strip().lower()
 
         if not egg_path_str and not egg_url:
             return "Error: hatch needs egg_path (local file) OR egg_url (remote URL)."
@@ -652,6 +787,40 @@ class TwinAgent(BasicAgent):
 
         try:
             blob = egg_path.read_bytes()
+        except OSError as e:
+            return f"Error: read failed: {e}"
+
+        # Phase-1 integrity verification (Article XXXIV.7 attestation slot
+        # is wired but null until publisher signing keys exist; sha256
+        # content-addressing is the baseline that works today).
+        actual_sha = hashlib.sha256(blob).hexdigest()
+
+        # Auto-fetch sidecar sha256 from rapp-egg-hub if egg_url matches the pattern
+        if not expect_sha256 and egg_url and "/eggs/" in egg_url and egg_url.endswith(".egg"):
+            sidecar_url = egg_url[:-4] + ".json"
+            try:
+                req = urllib.request.Request(sidecar_url, headers={"User-Agent": "rapp-twin-agent"})
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    sc = json.loads(r.read())
+                    expect_sha256 = (sc.get("sha256") or "").strip().lower()
+            except (urllib.error.URLError, urllib.error.HTTPError, OSError, ValueError):
+                pass  # sidecar optional; continue without
+
+        verify_msg = ""
+        if expect_sha256:
+            if actual_sha != expect_sha256:
+                return (
+                    f"Error: sha256 mismatch — refusing to hatch.\n"
+                    f"  expected: {expect_sha256}\n"
+                    f"  actual:   {actual_sha}\n"
+                    f"  source:   {source_label}\n"
+                    f"This usually means the egg was corrupted in transit, "
+                    f"OR someone has tampered with it. Verify via the "
+                    f"original publisher's sidecar before retrying."
+                )
+            verify_msg = f"\n  sha256:     ✓ verified ({actual_sha})"
+
+        try:
             workspace, rappid, manifest = _unpack_egg(blob, _twins_dir())
         except Exception as e:
             return f"Error: hatch failed: {e}"
@@ -668,7 +837,8 @@ class TwinAgent(BasicAgent):
         viability = "fully viable" if (rj_path.exists() and soul_present) else "MISSING required files"
 
         return (
-            f"Hatched twin '{twin_name}' (rappid {rappid}) — {viability}.\n"
+            f"Hatched twin '{twin_name}' (rappid {rappid}) — {viability}."
+            f"{verify_msg}\n"
             f"  Workspace:  {workspace}\n"
             f"  Source:     {source_label}\n"
             f"  To talk to it: invoke me again with action='boot', "
@@ -872,6 +1042,85 @@ class TwinAgent(BasicAgent):
             f"    2. action='boot', rappid_uuid='{rappid}'\n"
             f"  Or, if it's running pointed at this soul.md, the next chat "
             f"turn picks up the new system prompt automatically."
+        )
+
+    # ── lay_egg ─────────────────────────────────────────────────────────
+
+    def _lay_egg(self, **kwargs):
+        """Pack a twin's workspace into a portable .egg cartridge.
+
+        Lands at ~/.rapp/eggs/<rappid>/<timestamp>.egg by default.
+        Embeds content_sha256 in the egg's manifest for hatch-time
+        integrity verification. The .brainstem_data/soul_history/ dir
+        is intentionally excluded (private edit history of the donor;
+        receivers don't need it).
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return ("Error: rappid_uuid required for lay_egg. "
+                    "Use action='list' first to find the rappid.")
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        try:
+            blob, manifest = _pack_workspace(workspace)
+        except Exception as e:
+            return f"Error: pack failed: {e}"
+
+        sha256 = hashlib.sha256(blob).hexdigest()
+        twin_name = (manifest.get("source") or {}).get("name") or ws_name
+        kind = json.loads((workspace / "rappid.json").read_text()).get("kind", "?")
+
+        out_dir = pathlib.Path(_rapp_home()) / "eggs" / rappid
+        out_dir.mkdir(parents=True, exist_ok=True)
+        ts = time.strftime("%Y-%m-%dT%H-%M-%SZ", time.gmtime())
+        out_path = out_dir / f"{ts}.egg"
+        out_path.write_bytes(blob)
+
+        # Sidecar JSON next to the egg, ready for rapp-egg-hub contribution.
+        sidecar = {
+            "schema": "rapp-egg-hub-entry/1.0",
+            "slug": _sluggify(twin_name),
+            "rappid_uuid": rappid,
+            "name": twin_name,
+            "display_name": _display_name(twin_name),
+            "kind": kind,
+            "description": json.loads((workspace / "rappid.json").read_text()).get("description", ""),
+            "tags": [kind],
+            "egg_schema": manifest["schema"],
+            "size_bytes": len(blob),
+            "sha256": sha256,
+            "packed_by": "@kody-w",  # generic; user can edit
+            "packed_at": manifest["exported_at"],
+            "egg_path": f"eggs/{_sluggify(twin_name)}.egg",
+            "lineage": {
+                "parent_rappid": manifest["source"].get("parent_rappid_uuid"),
+                "parent_repo": manifest["source"].get("repo"),
+            },
+        }
+        sidecar_path = out_dir / f"{ts}.json"
+        sidecar_path.write_text(json.dumps(sidecar, indent=2) + "\n")
+
+        return (
+            f"Laid egg for '{_display_name(twin_name)}' ({kind} twin).\n"
+            f"  Egg:      {out_path}\n"
+            f"  Size:     {len(blob)} bytes ({len(blob)/1024:.1f} KB)\n"
+            f"  Schema:   {manifest['schema']}\n"
+            f"  rappid:   {rappid}\n"
+            f"  sha256:   {sha256}\n"
+            f"  Sidecar:  {sidecar_path}\n"
+            f"\n"
+            f"To contribute this twin to rapp-egg-hub:\n"
+            f"  1. fork github.com/kody-w/rapp-egg-hub\n"
+            f"  2. cp {out_path} <fork>/eggs/<slug>.egg\n"
+            f"  3. cp {sidecar_path} <fork>/eggs/<slug>.json\n"
+            f"  4. open a PR — auto-rebuild GH Action regenerates index.json\n"
+            f"\n"
+            f"To restore this egg later:\n"
+            f"  Twin(action='hatch', egg_path='{out_path}')"
         )
 
     # ── update_soul ─────────────────────────────────────────────────────
