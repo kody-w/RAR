@@ -1,12 +1,12 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-02T18:13:56.249825+00:00",
+  "generated_at": "2026-05-04T15:24:42.338881+00:00",
   "stats": {
-    "total_agents": 280,
+    "total_agents": 283,
     "total_swarms": 82,
     "publishers": 10,
-    "categories": 22,
+    "categories": 23,
     "publisher_list": [
       "@aibast-agents-library",
       "@borg",
@@ -41,7 +41,8 @@
       "professional_services",
       "retail_cpg",
       "slg_government",
-      "software_digital_products"
+      "software_digital_products",
+      "workflow"
     ]
   },
   "duplicates": [
@@ -4669,6 +4670,38 @@
       "_size_kb": 9.5,
       "_lines": 249,
       "_has_card": false,
+      "_added_at": "2026-05-02T14:14:24-04:00",
+      "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
+      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/hatch_egg_agent",
+      "version": "1.0.0",
+      "display_name": "Hatch Egg",
+      "description": "Imports a .egg cartridge file (brainstem-egg/2.x format) and hatches it as a fully-viable digital twin on this device. The hatched twin's identity (rappid), memory, and any local mutations are restored intact.",
+      "author": "kody-w",
+      "tags": [
+        "twin",
+        "egg",
+        "import",
+        "hatch",
+        "rappbox",
+        "local-first",
+        "transport"
+      ],
+      "category": "general",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/hatch_egg_agent.py",
+      "_sha256": "30ac7495e91dce135a57237ce959b0f55cc7180cecd61b4779f44ab8a10e0800",
+      "_seed": 16575155244163284363,
+      "_size_kb": 7.9,
+      "_lines": 225,
+      "_has_card": false,
       "_added_at": null,
       "_first_commit_sha": null,
       "_latest_commit_sha": null
@@ -4701,6 +4734,70 @@
       "_first_commit_sha": "006f73e52274e5f67cfd43f50796001f8b6236c8",
       "_latest_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_card_sha256": "c5b59fe293a5ba5ef68bbbb0ff91f4c86249cb250131f0280be3f8623741d1e5"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/summon_twin_agent",
+      "version": "1.0.0",
+      "display_name": "Summon Twin",
+      "description": "Generates a new digital twin organism on this device with one of six baked soul templates (personal, pre-founder, memorial, project, place, custom). Mints a fresh rappid, writes the twin workspace at ~/.rapp/twins/<rappid>/, and registers it in the local peer registry.",
+      "author": "kody-w",
+      "tags": [
+        "twin",
+        "summon",
+        "organism",
+        "rappbox",
+        "local-first"
+      ],
+      "category": "general",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/summon_twin_agent.py",
+      "_sha256": "bcec15100dfa8b777c972d5bef4865e5471573443694f490f5df8ddb5732ce32",
+      "_seed": 14703631422649415683,
+      "_size_kb": 12.0,
+      "_lines": 337,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/vibe-coding-loop",
+      "version": "1.0.0",
+      "display_name": "Vibe Coding Demo Loop",
+      "description": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships. This agent returns the templates you feed to your LLM/sub-agents \u2014 provider-agnostic.",
+      "author": "kody-w",
+      "tags": [
+        "publishing",
+        "orchestration",
+        "vibe-coding",
+        "single-file-html",
+        "loop"
+      ],
+      "category": "workflow",
+      "quality_tier": "core",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "action": "loop",
+        "domain": "first-person rooftop scenes"
+      },
+      "_file": "agents/@kody-w/vibe_coding_loop_agent.py",
+      "_sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
+      "_seed": 5122591396406633282,
+      "_size_kb": 14.8,
+      "_lines": 357,
+      "_has_card": false,
+      "_added_at": "2026-05-03T14:51:56-04:00",
+      "_first_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
+      "_latest_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4900,9 +4997,9 @@
       "_size_kb": 4.2,
       "_lines": 115,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-02T14:14:24-04:00",
+      "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
+      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde"
     },
     {
       "schema": "rapp-agent/1.0",
