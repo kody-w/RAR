@@ -53,11 +53,11 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_agent",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "Twin",
-    "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
+    "description": "Full digital-twin lifecycle, estate inspection, and inter-twin chat in one cartridge: summon (with auto-seeded memory agents), hatch, boot, stop, list, chat (route a message to a running twin's /chat endpoint), inspect, browse eggs, soul history, lineage. Newly summoned twins are born with basic_agent.py + ContextMemory + ManageMemory so they have continuity from breath one. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
     "author": "kody-w",
-    "tags": ["twin", "summon", "hatch", "boot", "lifecycle", "egg", "estate", "local-first"],
+    "tags": ["twin", "summon", "hatch", "boot", "lifecycle", "egg", "estate", "local-first", "chat", "memory"],
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
@@ -71,6 +71,7 @@ ACTIONS = (
     "summon", "hatch", "boot", "stop", "list",
     "update_identity", "update_soul", "lay_egg",
     "overview", "inspect", "eggs", "history", "lineage",
+    "chat",
 )
 KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 
@@ -265,6 +266,62 @@ def _pids_dir():
 
 def _ports_dir():
     return os.path.join(_rapp_home(), "ports")
+
+
+def _detect_brainstem_dir():
+    """Find the brainstem source directory (where this agent lives).
+
+    twin_agent.py is at <brainstem>/agents/twin_agent.py, so dirname twice
+    reaches the brainstem source dir. Used to locate the canonical memory
+    agents to seed into newly summoned twins.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    brainstem_dir = os.path.dirname(here)
+    if os.path.isfile(os.path.join(brainstem_dir, "brainstem.py")):
+        return brainstem_dir
+    fallback = os.path.expanduser("~/.brainstem/src/rapp_brainstem")
+    if os.path.isfile(os.path.join(fallback, "brainstem.py")):
+        return fallback
+    return None
+
+
+# Memory agents that EVERY summoned twin should be born with.
+# These are the twin's continuity — without them a twin has no past.
+# Sourced from the parent brainstem install (canonical local copy of
+# the RAR-published agents). If they're missing locally, summon still
+# succeeds but logs a warning to the return string.
+SEED_AGENT_FILES = (
+    ("agents/basic_agent.py",          "agents/basic_agent.py"),
+    ("agents/context_memory_agent.py", "agents/context_memory_agent.py"),
+    ("agents/manage_memory_agent.py",  "agents/manage_memory_agent.py"),
+)
+
+
+def _seed_twin_agents(workspace):
+    """Copy the canonical memory agents into a freshly summoned twin's
+    agents/ directory so it's born with continuity (memory) tools.
+
+    Returns a tuple (copied_list, missing_list) so the summon caller can
+    surface which agents made it across.
+    """
+    brainstem_dir = _detect_brainstem_dir()
+    copied, missing = [], []
+    if not brainstem_dir:
+        return copied, [src for src, _ in SEED_AGENT_FILES] + ["(brainstem dir not found)"]
+    workspace = pathlib.Path(workspace)
+    for src_rel, dst_rel in SEED_AGENT_FILES:
+        src = pathlib.Path(brainstem_dir) / src_rel
+        dst = workspace / dst_rel
+        if not src.is_file():
+            missing.append(src_rel)
+            continue
+        try:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(src.read_bytes())
+            copied.append(dst_rel)
+        except OSError as e:
+            missing.append(f"{src_rel} ({e})")
+    return copied, missing
 
 
 def _detect_brainstem_start_sh():
@@ -984,7 +1041,15 @@ class TwinAgent(BasicAgent):
                     },
                     "rappid_uuid": {
                         "type": "string",
-                        "description": "Twin identifier for boot/stop. Use 'list' first if unsure.",
+                        "description": "Twin identifier for boot/stop/chat. Use 'list' first if unsure.",
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "User message to send to the twin (chat). The twin processes it through its own /chat endpoint and returns its response. Use this to delegate sub-tasks to specialized twins (e.g., 'Twin chat with kaizen-monk: take a breath').",
+                    },
+                    "session_id": {
+                        "type": "string",
+                        "description": "Optional session_id for chat — pass the previous session_id to continue a conversation thread with a twin (preserves memory across calls).",
                     },
                     "port": {
                         "type": "integer",
@@ -1018,6 +1083,7 @@ class TwinAgent(BasicAgent):
         if action == "boot":            return self._boot(**kwargs)
         if action == "stop":            return self._stop(**kwargs)
         if action == "list":            return self._list(**kwargs)
+        if action == "chat":            return self._chat(**kwargs)
         if action == "update_identity": return self._update_identity(**kwargs)
         if action == "update_soul":     return self._update_soul(**kwargs)
         if action == "lay_egg":         return self._lay_egg(**kwargs)
@@ -1077,9 +1143,21 @@ class TwinAgent(BasicAgent):
         except OSError as e:
             return f"Error: writing twin files: {e}"
 
+        # Seed the twin with its continuity (memory) agents. A twin without
+        # ContextMemory + ManageMemory has no past — every breath starts
+        # blank. We pull the canonical copies from this brainstem install.
+        seeded, missing_agents = _seed_twin_agents(workspace)
+        seed_line = ""
+        if seeded:
+            seed_line = "\n  Seeded agents: " + ", ".join(
+                p.split("/")[-1] for p in seeded
+            )
+        if missing_agents:
+            seed_line += "\n  ⚠ missing: " + ", ".join(missing_agents)
+
         return (
             f"Created {kind} twin '{twin_name}' (rappid {rappid}).\n"
-            f"  Workspace:  {workspace}\n"
+            f"  Workspace:  {workspace}{seed_line}\n"
             f"  To talk to it: invoke me again with action='boot', "
             f"rappid_uuid='{rappid}'\n"
             f"  Or edit soul.md first: {workspace / 'soul.md'}"
@@ -1292,6 +1370,90 @@ class TwinAgent(BasicAgent):
             time.sleep(0.1)
         _clear_pid(rappid)
         return f"Stopped twin {rappid} (pid {pid})."
+
+    # ── chat ────────────────────────────────────────────────────────────
+
+    def _chat(self, **kwargs):
+        """Forward a message to a running twin's /chat endpoint and return
+        its response. The bridge that lets brainstems, twins, and the user
+        all talk to each other through one tool.
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        message = kwargs.get("message") or ""
+        session_id = kwargs.get("session_id") or ""
+        if not rappid:
+            return (
+                "Error: chat needs rappid_uuid. Use action='list' to see "
+                "running twins, or action='overview' for the full estate."
+            )
+        if not message.strip():
+            return "Error: chat needs a message (the user_input to forward)."
+
+        port = _read_port(rappid)
+        pid = _read_pid(rappid)
+        if not port or not pid or not _pid_alive(pid):
+            return (
+                f"Twin {rappid} is not running. Boot it first: "
+                f"action='boot', rappid_uuid='{rappid}'"
+            )
+
+        # Resolve the twin's name for a friendlier reply prefix.
+        twin_name = rappid[:8]
+        try:
+            for t in _scan_twins():
+                if t.get("rappid") == rappid:
+                    twin_name = t.get("name") or twin_name
+                    break
+        except Exception:
+            pass
+
+        url = f"http://127.0.0.1:{port}/chat"
+        payload = {"user_input": message}
+        if session_id:
+            payload["session_id"] = session_id
+
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={
+                    "Content-Type": "application/json",
+                    "User-Agent": "rapp-twin-agent/chat",
+                },
+                method="POST",
+            )
+            # Twins can take a while to think (LLM round-trips).
+            with urllib.request.urlopen(req, timeout=240) as r:
+                body = r.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as e:
+            try:
+                body = e.read().decode("utf-8", errors="replace")
+            except Exception:
+                body = str(e)
+            return f"[chat→{twin_name}] HTTP {e.code}: {body[:500]}"
+        except (urllib.error.URLError, OSError) as e:
+            return f"[chat→{twin_name}] connection error: {e}"
+
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
+            return f"[chat→{twin_name}] non-JSON reply: {body[:500]}"
+
+        reply = (data.get("response") or "").strip()
+        new_session = data.get("session_id") or session_id or ""
+        agent_logs = (data.get("agent_logs") or "").strip()
+
+        out = [f"[{twin_name} replied]"]
+        out.append(reply or "(no text response)")
+        if agent_logs:
+            # Keep tool-log noise in a fenced section the model can ignore.
+            out.append("")
+            out.append("--- agent_logs ---")
+            out.append(agent_logs[:2000])
+        if new_session:
+            out.append("")
+            out.append(f"(session_id: {new_session} — pass back to continue)")
+        return "\n".join(out)
 
     # ── soul backup helper ──────────────────────────────────────────────
 
