@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-04T22:37:26.125294+00:00",
+  "generated_at": "2026-05-05T12:58:02.399396+00:00",
   "stats": {
-    "total_agents": 179,
+    "total_agents": 180,
     "total_swarms": 82,
     "publishers": 9,
     "categories": 23,
@@ -4696,6 +4696,39 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/perpetual_loop_factory",
+      "display_name": "PerpetualLoopFactory",
+      "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch.",
+      "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
+      "version": "1.0.0",
+      "tags": [
+        "meta",
+        "factory",
+        "perpetual",
+        "chain",
+        "twins",
+        "self-correcting",
+        "kaizen"
+      ],
+      "category": "core",
+      "quality_tier": "experimental",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent",
+        "@kody-w/twin_agent"
+      ],
+      "_file": "agents/@kody-w/perpetual_loop_factory_agent.py",
+      "_sha256": "fa4aaf0f621afdd62a8f588773c59ca0e08efa8bb4254f72d5a5ee86b9847a5c",
+      "_seed": 18392963094642842750,
+      "_size_kb": 54.5,
+      "_lines": 1356,
+      "_has_card": false,
+      "_added_at": "2026-05-05T08:57:33-04:00",
+      "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
+      "_latest_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_agent",
       "version": "1.1.0",
       "display_name": "Twin",
@@ -4725,7 +4758,7 @@
       "_has_card": false,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
-      "_latest_commit_sha": "7e5570884bbd5cb7505b6547dd8aca4907ac308f"
+      "_latest_commit_sha": "55f748effd1877636c51e30f55e42813bbf743f8"
     },
     {
       "schema": "rapp-agent/1.0",
