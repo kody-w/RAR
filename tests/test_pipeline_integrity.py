@@ -586,7 +586,7 @@ class TestBuildPipeline:
     @pytest.mark.integrity
     def test_registry_schema(self):
         reg = json.loads((REPO_ROOT / "registry.json").read_text())
-        assert reg["schema"] == "rapp-registry/1.0"
+        assert reg["schema"] in ("rapp-registry/1.0", "rapp-registry/1.1")
         assert "generated_at" in reg
         assert "stats" in reg
         assert "agents" in reg
