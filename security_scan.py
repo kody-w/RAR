@@ -19,7 +19,7 @@ PATTERNS = [
     (r'(api[_-]?key|secret|password|token)\s*=\s*["\'][^"\']{8,}', 'hardcoded secret'),
 ]
 
-TRUSTED_NAMESPACES = {'@rapp', '@kody', '@kody-w', '@borg', '@discreetRappers'}
+TRUSTED_NAMESPACES = {'@rapp', '@kody', '@kody-w', '@borg', '@discreetRappers', '@howardh'}
 
 fails = []
 for f in Path('agents').rglob('*.py'):
