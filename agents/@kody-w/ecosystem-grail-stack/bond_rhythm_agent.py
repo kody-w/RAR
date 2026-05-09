@@ -45,6 +45,30 @@ except ImportError:
     from basic_agent import BasicAgent
 
 
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/bond_rhythm_agent",
+    "version": "1.0.0",
+    "display_name": "Bond Pulse",
+    "description": "The on-going local\u2194global heartbeat for the FULL RAPP organism. Audit drift; classify direction (LOCAL\u2192GLOBAL push / GLOBAL\u2192LOCAL pull / informational); SUGGEST actuator (operator-mediated; never auto-executes); record kind='rhythm' bond event. Returns rapp-rhythm-pulse/1.0. Connection-aware: degrades to local-only when offline.",
+    "author": "kody-w",
+    "tags": [
+        "heartbeat",
+        "drift-detection",
+        "ecosystem",
+        "operator-mediated",
+        "bond-pulse",
+        "rhythm"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+        "@rapp/basic_agent"
+    ]
+}
+
+
 _PULSE_SCHEMA = "rapp-rhythm-pulse/1.0"
 _DEFAULT_BONDS_FILE = os.path.expanduser("~/.brainstem/bonds.json")
 _AUDIT_SUBPROCESS_TIMEOUT_SECONDS = 30
