@@ -340,9 +340,49 @@ async function init() {
 
     buildPills();
     render();
+    // Fire-and-forget: fetch LIVE commit dates from GitHub so Recently
+    // Added reflects ACTUAL recent commits, not the stale registry.json
+    // _added_at field (which is only updated when build_registry.py runs).
+    refreshLiveAddedDates().then(() => render()).catch(e => console.warn('live-dates fetch failed:', e));
   } catch (e) {
     document.getElementById('grid').innerHTML =
       '<div class="empty">Failed to load registry. <a href="store.html">Try the full store</a>.</div>';
+  }
+}
+
+// Pull live commit timestamps from GitHub for the most-recent commits in
+// agents/. Overlays accurate _added_at on existing agents so Recently
+// Added reflects truth, not the stale build artifact.
+async function refreshLiveAddedDates() {
+  try {
+    const r = await fetch('https://api.github.com/repos/kody-w/RAR/commits?path=agents&per_page=15');
+    if (!r.ok) return;
+    const commits = await r.json();
+    const fileMap = {};   // path → most-recent-iso-date
+    // Fetch each commit's detail to get files[]
+    for (const c of commits) {
+      try {
+        const detail = await (await fetch(c.url)).json();
+        if (!detail.files) continue;
+        for (const f of detail.files) {
+          if (!f.filename || !f.filename.startsWith('agents/')) continue;
+          if (!fileMap[f.filename] || c.commit.committer.date > fileMap[f.filename]) {
+            fileMap[f.filename] = c.commit.committer.date;
+          }
+        }
+      } catch (e) { /* skip this commit on error */ }
+    }
+    // Overlay onto existing agents
+    let updated = 0;
+    for (const a of allAgents) {
+      if (a._file && fileMap[a._file]) {
+        a._added_at = fileMap[a._file];
+        updated++;
+      }
+    }
+    console.log(`[live-dates] overlayed ${updated} agent timestamps from ${commits.length} recent commits`);
+  } catch (e) {
+    console.warn('[live-dates] failed:', e);
   }
 }
 
