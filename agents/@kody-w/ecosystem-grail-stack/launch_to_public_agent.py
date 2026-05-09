@@ -59,6 +59,30 @@ try:
 except ImportError:
     from basic_agent import BasicAgent
 
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/launch_to_public_agent",
+    "version": "1.0.0",
+    "display_name": "Launch to Public",
+    "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
+    "author": "kody-w",
+    "tags": [
+        "launch",
+        "publish",
+        "local-to-global",
+        "bond-technique",
+        "operator-mediated",
+        "platform"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+        "@rapp/basic_agent"
+    ]
+}
+
 # Reuse the existing graft + bond + scaffolding machinery
 try:
     from agents.graft_neighborhood_agent import (
