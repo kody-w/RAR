@@ -46,6 +46,33 @@ except ImportError:
     from basic_agent import BasicAgent
 
 
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/plant_seed_agent",
+    "version": "1.0.0",
+    "display_name": "Plant Seed",
+    "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
+    "author": "kody-w",
+    "tags": [
+        "plant",
+        "seed",
+        "neighborhood",
+        "twin",
+        "holocard",
+        "grail",
+        "operator-mediated"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+        "@rapp/basic_agent",
+        "tools/holo_card_generator",
+        "tools/front_door_specs"
+    ]
+}
+
+
 _RESULT_SCHEMA = "rapp-plant-seed-result/1.0"
 
 # Lift the canonical grail tooling from tools/ if available
