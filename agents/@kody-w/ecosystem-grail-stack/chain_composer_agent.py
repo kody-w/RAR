@@ -72,6 +72,30 @@ except ImportError:
     from basic_agent import BasicAgent
 
 
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/chain_composer_agent",
+    "version": "1.0.0",
+    "display_name": "Chain Composer",
+    "description": "Compose multi-primitive chain plans from any high-level operator prompt. Reads the canonical RAPP toolbox (BondRhythm, ant pheromones, art submissions, braintrust requests, vbrainstem, tick_twin, push_canvas, holo card grail, etc.) and returns rapp-chain-plan/1.0 envelope + writes an executable bash script. Calls `claude` CLI under the hood. Operator-mediated: never auto-runs.",
+    "author": "kody-w",
+    "tags": [
+        "compose",
+        "chain",
+        "planning",
+        "claude-cli",
+        "operator-mediated",
+        "meta"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+        "@rapp/basic_agent"
+    ]
+}
+
+
 _PLAN_SCHEMA = "rapp-chain-plan/1.0"
 _DEFAULT_OUT_DIR = os.path.expanduser("~/RAPP-sim/chain-plans")
 _CLAUDE_TIMEOUT_S = 120
