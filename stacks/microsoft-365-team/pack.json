@@ -1,0 +1,25 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "microsoft-365-team",
+  "display_name": "Microsoft 365 Team Starter",
+  "version": "1.0.0",
+  "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content \u2014 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field patterns for Copilot Studio / Power Platform / consent delays, plus the canonical workflow gate set). Sneakernet-portable per the kernel two-file rule. PII never enters the planted repo by default per PUBLIC_PRIVATE_BOUNDARY \u00a71.5.",
+  "files": {
+    "factory_agent.py": {
+      "purpose": "Drop into local brainstem agents/. Run NeighborhoodFactory to plant.",
+      "size": 16279,
+      "sha256": "8b8df0351b8e08bd044ec0ca467782152034688ca9526617294c01eda7ce6610"
+    },
+    "microsoft-365-team.egg": {
+      "purpose": "Template content (11 agents). The factory pulls + customizes this at plant time.",
+      "size": 71456,
+      "sha256": "983381582c32cad96e4af722133ab55c66004ad0570cbe422b5d583cce288f99"
+    }
+  },
+  "agents_in_template": 11,
+  "include_workiq": true,
+  "see_also": [
+    "https://github.com/kody-w/microsoft-365-team",
+    "https://github.com/kody-w/RAPP/blob/main/pages/docs/PUBLIC_PRIVATE_BOUNDARY.md"
+  ]
+}
