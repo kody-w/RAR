@@ -13,8 +13,8 @@
     },
     "neighborhood-starter.egg": {
       "purpose": "Template content. The factory pulls + customizes this at plant time.",
-      "size": 64293,
-      "sha256": "37dd2ed98db641dd14f7ce6e48e94ad7efb71a57ae23af2d8b2bfb9087b74d09"
+      "size": 66662,
+      "sha256": "5bc1c3987318f4ff5279f09a7932c2a616290346b311ce9390841d6b0417630e"
     }
   },
   "agents_in_template": 10,
