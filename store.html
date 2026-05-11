@@ -10933,11 +10933,11 @@ async function signAndShowClaim(chainMintId) {
       </div>
       <div style="background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:12px;font-family:monospace;font-size:.65rem;color:#8b949e;word-break:break-all;margin-bottom:12px">
         <div><span style="color:#58a6ff">mintId:</span> ${claim.mintId}</div>
-        <div><span style="color:#58a6ff">identity:</span> ${claim.identity}</div>
+        <div><span style="color:#58a6ff">identity:</span> ${claim.identity ?? claim.binder}</div>
         <div><span style="color:#58a6ff">timestamp:</span> ${claim.timestamp}</div>
         <div style="margin-top:8px"><span style="color:#39d353">signature:</span> ${claim.signature.slice(0, 64)}...</div>
       </div>
-      <div style="font-size:.7rem;color:#484f58">This cryptographic proof demonstrates that the holder of identity <span style="color:#58a6ff">${formatIdentityAddress(claim.identity)}</span> signed a claim for this card at the stated time. The signature can be verified by anyone with the public key.</div>
+      <div style="font-size:.7rem;color:#484f58">This cryptographic proof demonstrates that the holder of identity <span style="color:#58a6ff">${formatIdentityAddress(claim.identity ?? claim.binder)}</span> signed a claim for this card at the stated time. The signature can be verified by anyone with the public key.</div>
       <div style="margin-top:16px;text-align:right">
         <button onclick="navigator.clipboard.writeText(JSON.stringify(${JSON.stringify(claim).replace(/"/g, '&quot;')}));this.textContent='Copied!'" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-right:8px">Copy Proof</button>
         <button onclick="this.closest('div[style]').remove()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem">Close</button>
@@ -14088,6 +14088,11 @@ async function loadChainState() {
     const res = await fetch(`${RAR_CHAIN_API}/chain-state.json`);
     if (res.ok) _chainState = await res.json();
   } catch {}
+  // Migration shim: chain server may still serve legacy `binders` field.
+  // Normalize to `identities` so all client reads work either way.
+  if (_chainState && !_chainState.identities && _chainState.binders) {
+    _chainState.identities = _chainState.binders;
+  }
   return _chainState;
 }
 
@@ -14187,6 +14192,11 @@ async function verifyFullChain() {
 async function lookupIdentity(address) {
   try {
     const res = await fetch(`${RAR_CHAIN_API}/identities/${address}.json`);
+    if (res.ok) return await res.json();
+  } catch {}
+  // Migration fallback: chain server may still expose legacy /binders/ path.
+  try {
+    const res = await fetch(`${RAR_CHAIN_API}/binders/${address}.json`);
     if (res.ok) return await res.json();
   } catch {}
   return null;
@@ -14511,18 +14521,23 @@ async function verifyIdentityClaim(claim) {
       'jwk', claim.publicKey, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']
     );
     const fp = await computeFingerprint(claim.publicKey);
-    if (fp !== claim.identity) return { valid: false, reason: 'Fingerprint mismatch' };
+    // Migration shim: accept legacy claim.binder field for pre-rename claims.
+    // The verify payload must reconstruct EXACTLY what the original signer
+    // committed to, so we use whichever field name the claim itself carries.
+    const claimedFp = claim.identity ?? claim.binder;
+    const fieldName = (claim.identity !== undefined) ? 'identity' : 'binder';
+    if (fp !== claimedFp) return { valid: false, reason: 'Fingerprint mismatch' };
 
     const payload = JSON.stringify({
       action: 'claim', mintId: claim.mintId,
-      identity: claim.identity, timestamp: claim.timestamp
+      [fieldName]: claimedFp, timestamp: claim.timestamp
     });
     const sigBytes = new Uint8Array(claim.signature.match(/.{2}/g).map(b => parseInt(b, 16)));
     const valid = await crypto.subtle.verify(
       { name: 'ECDSA', hash: 'SHA-256' }, key, sigBytes,
       new TextEncoder().encode(payload)
     );
-    return { valid, identity: claim.identity };
+    return { valid, identity: claimedFp };
   } catch (err) {
     return { valid: false, reason: err.message };
   }
