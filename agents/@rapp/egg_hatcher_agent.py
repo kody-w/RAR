@@ -52,9 +52,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/egg_hatcher",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "EggHatcher",
-    "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood / estate. Refuses on unknown kinds — never a destructive fallback.",
+    "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood (real — joins via Article XLVI two-tier estate) / estate (planned). Refuses on unknown kinds — never a destructive fallback.",
     "author": "RAPP",
     "tags": ["egg", "cartridge", "hatch", "organism", "rapplication", "lifecycle"],
     "category": "core",
@@ -169,18 +169,99 @@ def _route_rapplication(manifest: dict, blob: bytes) -> str:
 
 
 def _route_neighborhood(manifest: dict) -> str:
-    """Neighborhood cartridges mint a new GitHub repo. Planned — not yet wired."""
-    rappid = manifest.get("rappid", "(no rappid)")
-    return (
-        f"Neighborhood cartridge identified: rappid={rappid}\n"
-        f"Neighborhood hatching is on the v0.4 roadmap (kody-w/rappterbox/carts/SCHEMA.md).\n"
-        f"For now, the manual route:\n"
-        f"  1. Unzip the .egg into a working directory\n"
-        f"  2. gh repo create <owner>/<name> --private (or --public)\n"
-        f"  3. cd <dir> && git init && git add . && git commit -m 'mint neighborhood'\n"
-        f"  4. git remote add origin https://github.com/<owner>/<name>.git && git push -u origin main\n"
-        f"  5. Operators run JoinNeighborhood (kernel agent) to subscribe to the new gate.\n"
-    )
+    """Neighborhood eggs are JOIN invites — they append the operator's two-tier
+    estate's `member[]` with `{rappid, added_at, via: "egg"}` per Article XLVI.
+    The egg carries the neighborhood's canonical URLs; the operator's brainstem
+    fetches the full neighborhood.json from there going forward.
+    """
+    import datetime as _dt
+    rappid = manifest.get("rappid")
+    if not rappid:
+        return "Neighborhood egg invalid: no rappid in manifest. Refusing to join."
+    # Light format check — Article XLVI forbids fallback parsers, but the
+    # real parser is in the RAPP-side tools/door_address.py; if available we
+    # use it, otherwise we accept any non-empty string and let the brainstem's
+    # own validator reject malformed entries on next estate rebuild.
+    try:
+        from door_address import door_from_rappid, InvalidRappidError  # type: ignore
+        try:
+            door_from_rappid(rappid)
+        except InvalidRappidError as e:
+            return f"Neighborhood egg invalid: malformed rappid '{rappid}' — {e}"
+    except ImportError:
+        pass
+
+    name = manifest.get("display_name") or manifest.get("name") or rappid
+    url = manifest.get("neighborhood_url") or ""
+    nbhd_json = manifest.get("neighborhood_json") or ""
+    tether = manifest.get("tether_url") or ""
+    soul_summary = manifest.get("soul_summary") or ""
+
+    # Locate the operator's two-tier estate file.
+    estate_path = os.path.expanduser("~/.brainstem/estate.json")
+    estate_dir = os.path.dirname(estate_path)
+    try:
+        os.makedirs(estate_dir, exist_ok=True)
+    except Exception as e:
+        return f"Could not create {estate_dir}: {e}"
+
+    # Load existing estate or seed a minimal skeleton. The skeleton is
+    # incomplete (no owner.rappid until the operator's identity is known),
+    # so we don't write a skeleton unilaterally — instead we ask the operator
+    # to bootstrap their estate first via `tools/rebuild_estate.py`.
+    if not os.path.exists(estate_path):
+        return (
+            f"No estate file at {estate_path}. Bootstrap yours first:\n"
+            f"  python3 tools/rebuild_estate.py --handle <your-gh> --apply\n"
+            f"Then re-hatch this neighborhood egg to join {name}.\n"
+        )
+
+    try:
+        estate = json.loads(pathlib.Path(estate_path).read_text())
+    except Exception as e:
+        return f"Couldn't read {estate_path}: {e}"
+
+    member = estate.get("member") or []
+    if not isinstance(member, list):
+        return f"Estate file shape unexpected: 'member' is {type(member).__name__}, expected list."
+
+    # Idempotent: already joined?
+    if any(isinstance(m, dict) and m.get("rappid") == rappid for m in member):
+        msg = f"Already a member of {name} (rappid={rappid})."
+        if tether:
+            msg += f"\nTether: {tether}"
+        return msg
+
+    # Append per Article XLVI: ONLY rappid + added_at + via.
+    member.append({
+        "rappid":   rappid,
+        "added_at": _dt.datetime.now(_dt.timezone.utc).isoformat().replace("+00:00", "Z"),
+        "via":      "egg",
+    })
+    estate["member"] = member
+    estate["updated_at"] = _dt.datetime.now(_dt.timezone.utc).isoformat().replace("+00:00", "Z")
+
+    try:
+        pathlib.Path(estate_path).write_text(json.dumps(estate, indent=2) + "\n")
+    except Exception as e:
+        return f"Joined in-memory but could not write {estate_path}: {e}"
+
+    lines = [
+        f"Joined neighborhood: {name}",
+        f"  rappid:    {rappid}",
+    ]
+    if url:
+        lines.append(f"  homepage:  {url}")
+    if nbhd_json:
+        lines.append(f"  manifest:  {nbhd_json}")
+    if tether:
+        lines.append(f"  tether:    {tether}  ← go here to chat with the neighborhood")
+    if soul_summary:
+        lines.append("")
+        lines.append(f"  {soul_summary}")
+    lines.append("")
+    lines.append(f"Wrote {estate_path}. Total memberships: {len(member)}.")
+    return "\n".join(lines)
 
 
 def _route_estate(manifest: dict) -> str:
@@ -201,8 +282,8 @@ def _route_unknown(manifest: dict) -> str:
     kind = manifest.get("type", "(no type)")
     return (
         f"Unknown egg cartridge: schema='{schema}' type='{kind}'.\n"
-        f"This hatcher knows: organism, rapplication, session.\n"
-        f"Planned: neighborhood, estate.\n"
+        f"This hatcher knows: organism, rapplication, session, neighborhood.\n"
+        f"Planned: estate.\n"
         f"See kody-w/rappterbox/carts/SCHEMA.md for the cartridge family.\n"
         f"NOT routing — refusing to guess. Operator action required."
     )

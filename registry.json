@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-11T16:53:31.588095+00:00",
+  "generated_at": "2026-05-11T17:33:24.102876+00:00",
   "stats": {
     "total_agents": 186,
     "total_swarms": 82,
@@ -5039,9 +5039,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/egg_hatcher",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "display_name": "EggHatcher",
-      "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood / estate. Refuses on unknown kinds \u2014 never a destructive fallback.",
+      "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood (real \u2014 joins via Article XLVI two-tier estate) / estate (planned). Refuses on unknown kinds \u2014 never a destructive fallback.",
       "author": "RAPP",
       "tags": [
         "egg",
@@ -5063,15 +5063,15 @@
         }
       },
       "_file": "agents/@rapp/egg_hatcher_agent.py",
-      "_sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5",
+      "_sha256": "bdd2b796aeac17d01a8c675acf8dfcf717aaa29601451aefccf7feffe6b8cf04",
       "_seed": 11747276046260251558,
-      "_size_kb": 11.5,
-      "_lines": 266,
+      "_size_kb": 14.6,
+      "_lines": 347,
       "_has_card": true,
       "_added_at": "2026-05-11T10:53:36-04:00",
       "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
-      "_card_sha256": "4b4fbd87f338f7565c3da69b441a15f2aa099c69435df84d397e3757b555e3b4"
+      "_card_sha256": "fc16c2526d434520e027a27ec273db00eaec4c194a2820e5cd90a7c0acc2fbdc"
     },
     {
       "schema": "rapp-agent/1.0",
