@@ -50,7 +50,7 @@ __manifest__ = {
     "display_name": "MomentFactory",
     "description": "Seven-persona moment-to-Drop pipeline (Sensorium → SignificanceFilter → HookWriter → BodyWriter → ChannelRouter → CardForger → SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
     "author": "RAPP",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "tags": ["composite", "moment-pipeline", "rapplication", "rappterbook-engine", "singleton"],
     "category": "creative",
     "quality_tier": "community",
@@ -210,7 +210,7 @@ You output a JSON object with EXACTLY these keys:
                   novelty         — how new the underlying pattern is
                   compoundability — how much it sets up future moments
   ability     — one sentence describing what this card "does" if drawn from
-                a binder later (e.g. "Files itself in the framework's
+                an agents/ directory later (e.g. "Files itself in the framework's
                 lessons-learned cache" or "Triggers a re-read of related Drops")
   lore        — one sentence of backstory connecting this Drop to its origin
   art_seed    — integer 0..9999999999, deterministic art reconstruction seed

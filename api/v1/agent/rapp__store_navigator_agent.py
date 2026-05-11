@@ -275,10 +275,10 @@ class StoreNavigatorAgent(BasicAgent):
             "ui_url": r.get("ui_url"),
             "egg_url": r.get("egg_url"),
             "service_url": r.get("service_url"),
-            "binder_install": (
-                f"Use the binder agent: action='install', id='{rid}' — "
-                f"the binder fetches singleton, service, ui, and registers "
-                f"the rapp in .brainstem_data/binder.json."
+            "install": (
+                f"Use install_agent(id='{rid}') — "
+                f"the installer fetches singleton, service, ui, and registers "
+                f"the rapp in .brainstem_data/agents.json."
             ),
         }
         if r.get("singleton_url") and r.get("singleton_filename"):

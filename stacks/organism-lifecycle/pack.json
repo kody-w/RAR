@@ -1,0 +1,35 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "organism-lifecycle",
+  "display_name": "Organism Lifecycle",
+  "version": "1.0.0",
+  "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect — full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate). Both were kernel-shipped through 2026-05-10; relocated to RAR so the base install stays minimal and operators opt in when they're ready to host sub-twins or take in eggs. Drop both files into your brainstem's agents/ and restart.",
+  "files": {
+    "twin_agent.py": {
+      "purpose": "Full digital-twin lifecycle in one drop-in agent. Source: agents/@rapp/twin_agent.py.",
+      "source": "agents/@rapp/twin_agent.py",
+      "size": 73527,
+      "sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450"
+    },
+    "egg_hatcher_agent.py": {
+      "purpose": "Universal .egg cartridge router. Source: agents/@rapp/egg_hatcher_agent.py.",
+      "source": "agents/@rapp/egg_hatcher_agent.py",
+      "size": 11744,
+      "sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5"
+    }
+  },
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "agents/@rapp/twin_agent.py",
+      "agents/@rapp/egg_hatcher_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Drop both files into your brainstem's agents/ directory and restart. The LLM picks up Twin(...) and HatchEgg(...) as tools on the next /chat request."
+  },
+  "agents_in_pack": 2,
+  "see_also": [
+    "https://github.com/kody-w/RAPP/blob/main/CLAUDE.md",
+    "https://github.com/kody-w/RAPP/blob/main/pages/docs/SPEC.md"
+  ]
+}

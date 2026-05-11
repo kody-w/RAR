@@ -105,7 +105,7 @@ A `.py.card.DeckName` file is a `.py.card` that belongs to a named deck. The dec
 
 Nothing is lost that can't be re-added. The agent code is always intact at every level.
 
-**Deck import/export:** To share a deck, collect all `.py.card.DeckName` files with the same deck name. To import a deck, drop the files into any RAPP binder. The deck name, card data, and agent code all travel together. No separate deck manifest needed — the file extension IS the manifest.
+**Deck import/export:** To share a deck, collect all `.py.card.DeckName` files with the same deck name. To import a deck, drop the files into any RAPP `agents/` directory. The deck name, card data, and agent code all travel together. No separate deck manifest needed — the file extension IS the manifest.
 
 ### Deck Hotloading (Runtime)
 
@@ -127,7 +127,7 @@ brainstem/
       hackernews_agent.py.card.Frontier
 ```
 
-When the user selects a deck, the runtime hotloads the agents from that deck — the same way a user selects which model drives the AI layer. Switch decks, switch active agents. The card data rides along so the store/binder can display them correctly.
+When the user selects a deck, the runtime hotloads the agents from that deck — the same way a user selects which model drives the AI layer. Switch decks, switch active agents. The card data rides along so the store can display them correctly.
 
 **Hotloading rules:**
 - Switching decks loads only the agents in the new deck
@@ -353,7 +353,7 @@ First-time visitors get a walkthrough of every feature. Replay anytime via the "
 
 ## Article X — The Complete Agent Card
 
-An agent card is not just a visual. It is the **portable, universal identity** of an agent — the thing that travels across screens, terminals, paper, binders, decks, and the physical world. A card is incomplete until it can survive anywhere.
+An agent card is not just a visual. It is the **portable, universal identity** of an agent — the thing that travels across screens, terminals, paper, agents/ directories, decks, and the physical world. A card is incomplete until it can survive anywhere.
 
 This article defines what a card must carry to be considered **complete** — ready for public deployment, trading, sharing, and forging on the global network.
 
@@ -394,7 +394,7 @@ All three faces are generated from the same manifest and identity hash. No face 
 
 | Stage | Where It Lives | What's True |
 |-------|---------------|-------------|
-| **Draft** | Your machine, your binder | The `.py` file exists. You can preview the card locally. It has no public identity yet. |
+| **Draft** | Your machine, your `agents/` directory | The `.py` file exists. You can preview the card locally. It has no public identity yet. |
 | **Registered** | `registry.json` (local or upstream) | The agent passed `build_registry.py` validation. It appears in a store. All three card faces render. The card has an identity hash but hasn't been deployed publicly. |
 | **Hatched** | The global public network (main RAPP registry) | The card has been accepted into the main store, either via PR, Issue submission, or federated upstream push. It is now discoverable by anyone. It can be collected into any deck, traded via URL, downloaded as `.py` or `.card.txt`. **This is the start of the card's public life.** |
 | **Forging** | Any deck where it is the companion | The card has been chosen as a companion. Its ASCII face is fused with the owner's identity and the current time epoch. The forged card shifts every 15 minutes. You don't control the output — it is emergent. |
@@ -436,7 +436,7 @@ Once hatched, a card is alive on the public network:
 
 Some cards live locally forever, and that's fine:
 
-- **Binder-only cards** — agents in a local binder that never push upstream
+- **Local-only cards** — agents in a local `agents/` directory that never push upstream
 - **Drag-and-drop cards** — `.py` files dropped into the browser, stored in IndexedDB
 - **Workbench drafts** — agents written in the Workbench but never submitted
 - **Private agents** — agents with proprietary logic that stay in a private fork
@@ -628,23 +628,23 @@ Federation behavior is controlled by `rar.config.json`:
 
 ---
 
-## Article XVI — Local-First Agent Binder
+## Article XVI — Local-First Agents Workspace
 
-Any user can run their own local copy of RAPP as a personal **agent binder** — a self-contained store that works offline, manages their own cards, decks, and companions, and optionally syncs with the main registry.
+Any user can run their own local copy of RAPP as a personal **agents workspace** — a self-contained store that works offline, manages their own cards, decks, and companions, and optionally syncs with the main registry. The `agents/` directory IS the workspace. There is no separate "binder" abstraction layer.
 
-### What is an Agent Binder?
+### What is a Local Agents Workspace?
 
-An agent binder is a local RAPP instance that serves as your personal card collection and agent workbench. It runs entirely on your machine with no server. You own your cards, your decks, your companions, and your agents.
+A local agents workspace is a local RAPP instance that serves as your personal card collection and agent workbench. It runs entirely on your machine with no server. You own your cards, your decks, your companions, and your agents — they all live in your `agents/` directory.
 
 ### Setup
 
 ```bash
 # 1. Fork or clone RAPP
-git clone https://github.com/kody-w/RAR.git my-binder
-cd my-binder
+git clone https://github.com/kody-w/RAR.git my-agents
+cd my-agents
 
 # 2. Configure as a local instance
-GITHUB_REPOSITORY=yourname/my-binder python scripts/setup_instance.py
+GITHUB_REPOSITORY=yourname/my-agents python scripts/setup_instance.py
 # This writes rar.config.json with role: "instance"
 
 # 3. Build the registry from your local agents
@@ -725,13 +725,13 @@ python scripts/generate_holo_cards.py
 
 ### Syncing with the main store
 
-Your binder can pull agents from the main RAPP store and push your agents upstream:
+Your local workspace can pull agents from the main RAPP store and push your agents upstream:
 
 ```bash
-# See what's different between your binder and the main store
+# See what's different between your workspace and the main store
 python scripts/federate.py diff
 
-# Pull new agents from the main store into your binder
+# Pull new agents from the main store into your workspace
 python scripts/federate.py sync --pull
 
 # Submit one of your agents to the main store
@@ -741,16 +741,16 @@ python scripts/federate.py submit @yourname/my_agent
 python scripts/federate.py status
 ```
 
-Federation is optional. Your binder works perfectly standalone — it's just a git repo with an HTML file.
+Federation is optional. Your workspace works perfectly standalone — it's just a git repo with an HTML file.
 
-### Example: Howard's Binder
+### Example: Howard's Workspace
 
 Howard wants to manage his `@borg/` agents locally with his own card collection:
 
 ```bash
-git clone https://github.com/kody-w/RAR.git howard-binder
-cd howard-binder
-GITHUB_REPOSITORY=borg/howard-binder python scripts/setup_instance.py
+git clone https://github.com/kody-w/RAR.git howard-agents
+cd howard-agents
+GITHUB_REPOSITORY=borg/howard-agents python scripts/setup_instance.py
 
 # Howard already has agents in agents/@borg/ — rebuild
 python build_registry.py
@@ -763,21 +763,21 @@ open index.html
 python scripts/federate.py submit @borg/new_agent
 ```
 
-Howard's promo cards (the originals in `HOWARD_DB`) render with the `HOLO ★ Promo` badge and his artist credit regardless of whether he's viewing the main store or his local binder.
+Howard's promo cards (the originals in `HOWARD_DB`) render with the `HOLO ★ Promo` badge and his artist credit regardless of whether he's viewing the main store or his local workspace.
 
-### Binder vs. Instance vs. Main
+### Main vs. Instance
 
-| | Main Store | Instance | Binder |
-|---|-----------|----------|--------|
-| **Hosted** | GitHub Pages | GitHub Pages or local | Local only |
-| **`role`** | `main` | `instance` | `instance` |
-| **Network** | Required | Optional | Not needed |
-| **Agents** | All community | Own + synced | Own + synced |
-| **Cards** | Generated by CI | Generated locally | Generated locally |
-| **Push upstream** | N/A | Yes | Yes (if you want) |
-| **Accept submissions** | Yes | Optional | No |
+| | Main Store | Instance |
+|---|-----------|----------|
+| **Hosted** | GitHub Pages | GitHub Pages or local |
+| **`role`** | `main` | `instance` |
+| **Network** | Required | Optional |
+| **Agents** | All community | Own + synced |
+| **Cards** | Generated by CI | Generated locally |
+| **Push upstream** | N/A | Yes |
+| **Accept submissions** | Yes | Optional |
 
-A binder is just an instance that lives on your machine. The distinction is conceptual, not technical.
+An instance can live in the cloud or on your machine — same code, same agents/ directory, just a different `role` in `rar.config.json`.
 
 ---
 
@@ -794,7 +794,7 @@ The SuperSeed Coin is the genesis mint of `@rapp/basic-agent`. It is the most lo
 - **Mint ID:** `GENESIS-RAPP-BASIC-AGENT-0001`
 - **Rarity:** Legendary (Mythic) — permanently. Cannot be demoted.
 - **Value multiplier:** 10x standard Legendary floor
-- **Owner:** The Verification Authority Binder
+- **Owner:** The Verification Authority
 
 The SuperSeed Coin is minted once. It cannot be re-minted, duplicated, or forged.
 
@@ -802,7 +802,7 @@ The SuperSeed Coin is minted once. It cannot be re-minted, duplicated, or forged
 
 Federated RAPP instances that wish to join the ecosystem under the RAPP Constitution must authenticate through the SuperSeed Chain:
 
-1. **Registration** — The instance submits a federation request containing its `rar.config.json`, its Binder address, and its publisher namespace.
+1. **Registration** — The instance submits a federation request containing its `rar.config.json`, its repo address, and its publisher namespace.
 2. **Authentication** — The Verification Authority validates the request and signs a federation credential using the SuperSeed Chain's provenance protocol.
 3. **Attestation** — Upon approval, the federated instance receives a signed attestation that is embedded in its `rar.config.json`. This attestation links the instance to the SuperSeed Chain.
 4. **Verification** — Any party can verify a federated instance's authenticity by checking its attestation against the SuperSeed Chain.
@@ -815,7 +815,6 @@ Authenticated federated instances may:
 - Submit agents upstream to the main registry
 - Sync agents from the main registry
 - Mint cards under their own publisher namespace
-- Participate in the Binder tracking system
 
 Authenticated instances must:
 
@@ -826,7 +825,7 @@ Authenticated instances must:
 
 ### The Verification Authority
 
-The Verification Authority is the entity that controls the SuperSeed Coin's Binder. This entity:
+The Verification Authority is the entity that controls the SuperSeed Coin. This entity:
 
 - Authenticates new federated instances
 - Promotes agents to `verified` and `official` tiers
@@ -834,7 +833,7 @@ The Verification Authority is the entity that controls the SuperSeed Coin's Bind
 - Maintains the `@rapp/basic-agent` root agent
 - Curates card releases and artist collaborations
 
-The Verification Authority operates under the governance of its holding entity. Its editorial rights are held in perpetuity and are non-transferable except by explicit key succession protocol (see Article on Binder key succession).
+The Verification Authority operates under the governance of its holding entity. Its editorial rights are held in perpetuity and are non-transferable except by explicit key succession protocol.
 
 ### Free Shade Principle
 
@@ -843,7 +842,7 @@ The SuperSeed grows the RappterTree. The tree gives free shade:
 - **USE** of any agent is free and unrestricted
 - **BUILD** on the RAPP Foundation is free and open
 - **VIEW** the store, cards, and wiki is free
-- **OWN** a card requires a Binder. Only one Binder per card.
+- **OWN** a card requires an `agents/` directory. The card lives there as its `.py` file.
 - **VERIFY** an agent requires the Verification Authority
 
 The shade is free. The roots are sovereign.
@@ -874,4 +873,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agent binders, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. The single file is the law. The card is the agent. The agent is the file. The deck is the binder. The seed is the tree. The steward speaks through the agent.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent.*

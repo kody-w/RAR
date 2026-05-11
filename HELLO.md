@@ -67,7 +67,7 @@ Every agent in the ecosystem with "sales" in its DNA. 131 founding agents across
 ## 7. Check the full registry status
 
 ```bash
-python rapp_sdk.py binder status
+python rapp_sdk.py status
 ```
 
 Total agents, breakdown by tier, total value. Your view of the entire ecosystem.

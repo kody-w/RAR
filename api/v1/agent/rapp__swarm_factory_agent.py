@@ -364,8 +364,8 @@ class SwarmFactoryAgent(BasicAgent):
             agent_code = "from agents.basic_agent import BasicAgent\n" + agent_code
 
         # Filename derives from the swarm_name slug — same convention as
-        # the rest of the binder so it shows up in /agents/full and the UI
-        # binder grid without special-casing. Refuse to overwrite an
+        # the rest of the agents/ directory so it shows up in /agents/full and the UI
+        # agents grid without special-casing. Refuse to overwrite an
         # existing file: the LLM should pick a fresh name on collision,
         # not silently clobber the user's work.
         slug = re.sub(r'[^a-z0-9]', '', swarm_name.lower())

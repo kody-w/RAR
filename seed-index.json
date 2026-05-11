@@ -1,8 +1,7 @@
 {
   "schema": "rappcards-seed-index/1.0",
-  "binder": "rar",
   "homepage": "https://kody-w.github.io/RAR/",
-  "note": "The registry. Every named/verified RAPPcard lives here. Federated binders can resolve any of these by incantation.",
+  "note": "The registry. Every named/verified RAPPcard lives here. Federated peers can resolve any of these by incantation.",
   "cards_url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
   "count": 138,
   "seeds": {
@@ -12,8 +11,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_intelligence"
     },
     "10723751930960163868": {
       "id": "@aibast-agents-library/account_intelligence_orchestrator_agent",
@@ -21,8 +19,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_intelligence_orchestrator_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_intelligence_orchestrator_agent"
     },
     "10200811530753811576": {
       "id": "@aibast-agents-library/action_prioritization",
@@ -30,8 +27,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/action_prioritization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/action_prioritization"
     },
     "11503270546515831146": {
       "id": "@aibast-agents-library/competitive_intelligence",
@@ -39,8 +35,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/competitive_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/competitive_intelligence"
     },
     "6943812563063421267": {
       "id": "@aibast-agents-library/deal_tracking",
@@ -48,8 +43,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_tracking",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_tracking"
     },
     "17730020682391761346": {
       "id": "@aibast-agents-library/meeting_prep",
@@ -57,8 +51,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/meeting_prep",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/meeting_prep"
     },
     "16738861686366810084": {
       "id": "@aibast-agents-library/account_messaging",
@@ -66,8 +59,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_messaging",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_messaging"
     },
     "15010362534912467138": {
       "id": "@aibast-agents-library/account_risk_assessment",
@@ -75,8 +67,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_risk_assessment",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_risk_assessment"
     },
     "15018051093375102546": {
       "id": "@aibast-agents-library/stakeholder_intelligence",
@@ -84,8 +75,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/stakeholder_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/stakeholder_intelligence"
     },
     "13173877546091689666": {
       "id": "@aibast-agents-library/activity_gap",
@@ -93,8 +83,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/activity_gap",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/activity_gap"
     },
     "2665723234406249080": {
       "id": "@aibast-agents-library/deal_competitor_intel",
@@ -102,8 +91,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_competitor_intel",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_competitor_intel"
     },
     "16195268016693984984": {
       "id": "@aibast-agents-library/deal_health_score",
@@ -111,8 +99,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_health_score",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_health_score"
     },
     "16569251649731306541": {
       "id": "@aibast-agents-library/deal_progression",
@@ -120,8 +107,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_progression",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_progression"
     },
     "15415531861044765094": {
       "id": "@aibast-agents-library/deal_risk_assessment",
@@ -129,8 +115,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_risk_assessment",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_risk_assessment"
     },
     "10025994443272366861": {
       "id": "@aibast-agents-library/next_best_action",
@@ -138,8 +123,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/next_best_action",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/next_best_action"
     },
     "3953971822722691162": {
       "id": "@aibast-agents-library/pipeline_velocity",
@@ -147,8 +131,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/pipeline_velocity",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/pipeline_velocity"
     },
     "18173504355209722482": {
       "id": "@aibast-agents-library/revenue_forecast",
@@ -156,8 +139,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/revenue_forecast",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/revenue_forecast"
     },
     "11125880910024161837": {
       "id": "@aibast-agents-library/deal_stakeholder_engagement",
@@ -165,8 +147,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_stakeholder_engagement",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_stakeholder_engagement"
     },
     "5854357498148564447": {
       "id": "@aibast-agents-library/stalled_deal_detection",
@@ -174,8 +155,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/stalled_deal_detection",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/stalled_deal_detection"
     },
     "15452430195650870719": {
       "id": "@aibast-agents-library/win_probability",
@@ -183,8 +163,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/win_probability",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/win_probability"
     },
     "14350164510408194833": {
       "id": "@aibast-agents-library/proposal_generation",
@@ -192,8 +171,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/proposal_generation",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/proposal_generation"
     },
     "3025664746881563672": {
       "id": "@aibast-agents-library/sales_qualification",
@@ -201,8 +179,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_qualification",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_qualification"
     },
     "2520427991298359032": {
       "id": "@aibast-agents-library/win_loss_analysis",
@@ -210,8 +187,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/win_loss_analysis",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/win_loss_analysis"
     },
     "3606179690631149846": {
       "id": "@aibast-agents-library/cart_abandonment_recovery",
@@ -219,8 +195,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/cart_abandonment_recovery",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/cart_abandonment_recovery"
     },
     "14861492049442254073": {
       "id": "@aibast-agents-library/customer_360_speech",
@@ -228,8 +203,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_360_speech",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_360_speech"
     },
     "5195556347500573918": {
       "id": "@aibast-agents-library/customer_loyalty_rewards",
@@ -237,8 +211,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_loyalty_rewards",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_loyalty_rewards"
     },
     "16390491864010865935": {
       "id": "@aibast-agents-library/omnichannel_engagement",
@@ -246,8 +219,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/omnichannel_engagement",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/omnichannel_engagement"
     },
     "12826547131641504102": {
       "id": "@aibast-agents-library/personalized_shopping_assistant",
@@ -255,8 +227,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/personalized_shopping_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/personalized_shopping_assistant"
     },
     "16427931656570809614": {
       "id": "@aibast-agents-library/returns_exchange",
@@ -264,8 +235,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/returns_exchange",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/returns_exchange"
     },
     "743639680721625695": {
       "id": "@aibast-agents-library/sales_chat",
@@ -273,8 +243,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_chat",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_chat"
     },
     "5836169530732982279": {
       "id": "@aibast-agents-library/asset_maintenance_forecast",
@@ -282,8 +251,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/asset_maintenance_forecast",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/asset_maintenance_forecast"
     },
     "12145677136544149217": {
       "id": "@aibast-agents-library/emission_tracking",
@@ -291,8 +259,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/emission_tracking",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/emission_tracking"
     },
     "5482587288805061290": {
       "id": "@aibast-agents-library/field_service_dispatch",
@@ -300,8 +267,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/field_service_dispatch",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/field_service_dispatch"
     },
     "15492855745775155274": {
       "id": "@aibast-agents-library/permit_license_management",
@@ -309,8 +275,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/permit_license_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/permit_license_management"
     },
     "8887254288578788668": {
       "id": "@aibast-agents-library/energy_regulatory_reporting",
@@ -318,8 +283,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/energy_regulatory_reporting",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/energy_regulatory_reporting"
     },
     "5999981279495069821": {
       "id": "@aibast-agents-library/acquisition_support",
@@ -327,8 +291,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/acquisition_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/acquisition_support"
     },
     "9923268848797892417": {
       "id": "@aibast-agents-library/federal_grants_oversight",
@@ -336,8 +299,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/federal_grants_oversight",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/federal_grants_oversight"
     },
     "9239080674509203253": {
       "id": "@aibast-agents-library/mission_reporting_assistant",
@@ -345,8 +307,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/mission_reporting_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/mission_reporting_assistant"
     },
     "16478343906997446426": {
       "id": "@aibast-agents-library/regulatory_compliance_fed",
@@ -354,8 +315,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/regulatory_compliance_fed",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/regulatory_compliance_fed"
     },
     "15588155065239352323": {
       "id": "@aibast-agents-library/workforce_clearance_onboarding",
@@ -363,8 +323,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/workforce_clearance_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/workforce_clearance_onboarding"
     },
     "13561102833751435409": {
       "id": "@aibast-agents-library/claims_processing",
@@ -372,8 +331,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/claims_processing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/claims_processing"
     },
     "2012642120884166826": {
       "id": "@aibast-agents-library/fs_customer_onboarding",
@@ -381,8 +339,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fs_customer_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fs_customer_onboarding"
     },
     "12655086543703912626": {
       "id": "@aibast-agents-library/customer_sentiment_churn",
@@ -390,8 +347,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_sentiment_churn",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_sentiment_churn"
     },
     "8826999372581053682": {
       "id": "@aibast-agents-library/financial_advisor_copilot",
@@ -399,8 +355,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/financial_advisor_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/financial_advisor_copilot"
     },
     "3404678271836368537": {
       "id": "@aibast-agents-library/fraud_detection_alert",
@@ -408,8 +363,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fraud_detection_alert",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fraud_detection_alert"
     },
     "14273408934978795408": {
       "id": "@aibast-agents-library/loan_origination_assistant",
@@ -417,8 +371,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/loan_origination_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/loan_origination_assistant"
     },
     "6581827105817638564": {
       "id": "@aibast-agents-library/portfolio_rebalancing",
@@ -426,8 +379,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/portfolio_rebalancing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/portfolio_rebalancing"
     },
     "1477628584621128595": {
       "id": "@aibast-agents-library/fs_regulatory_compliance",
@@ -435,8 +387,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fs_regulatory_compliance",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fs_regulatory_compliance"
     },
     "18409195487267397654": {
       "id": "@aibast-agents-library/underwriting_support",
@@ -444,8 +395,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/underwriting_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/underwriting_support"
     },
     "4746954344674107422": {
       "id": "@aibast-agents-library/wealth_insights_generator",
@@ -453,8 +403,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/wealth_insights_generator",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/wealth_insights_generator"
     },
     "776460569569535970": {
       "id": "@aibast-agents-library/ai_customer_assistant",
@@ -462,8 +411,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/ai_customer_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/ai_customer_assistant"
     },
     "16645293730949775296": {
       "id": "@aibast-agents-library/general_ask_hr",
@@ -471,8 +419,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/general_ask_hr",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/general_ask_hr"
     },
     "5020671239044998157": {
       "id": "@aibast-agents-library/bulk_crm_data_generator_agent",
@@ -480,8 +427,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/bulk_crm_data_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/bulk_crm_data_generator_agent"
     },
     "14682849978474050837": {
       "id": "@aibast-agents-library/dynamics_365_connector",
@@ -489,8 +435,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/dynamics_365_connector",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/dynamics_365_connector"
     },
     "1713805111300072952": {
       "id": "@aibast-agents-library/one_click_crm_intake",
@@ -498,8 +443,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/one_click_crm_intake",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/one_click_crm_intake"
     },
     "17617098655100714102": {
       "id": "@aibast-agents-library/cross_selling",
@@ -507,8 +451,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/cross_selling",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/cross_selling"
     },
     "10044936445967873390": {
       "id": "@aibast-agents-library/customer_360",
@@ -516,8 +459,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_360",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_360"
     },
     "5909429225316429364": {
       "id": "@aibast-agents-library/email_drafting",
@@ -525,8 +467,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/email_drafting",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/email_drafting"
     },
     "2233591614042549795": {
       "id": "@aibast-agents-library/find_accurate_models",
@@ -534,8 +475,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/find_accurate_models",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/find_accurate_models"
     },
     "3288425480277600421": {
       "id": "@aibast-agents-library/identify_discounts",
@@ -543,8 +483,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/identify_discounts",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/identify_discounts"
     },
     "381057127156556376": {
       "id": "@aibast-agents-library/it_ticket_management",
@@ -552,8 +491,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/it_ticket_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/it_ticket_management"
     },
     "5953920645506673794": {
       "id": "@aibast-agents-library/procurement_agent",
@@ -561,8 +499,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/procurement_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/procurement_agent"
     },
     "18264571842642197414": {
       "id": "@aibast-agents-library/procurement_support",
@@ -570,8 +507,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/procurement_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/procurement_support"
     },
     "2709938328044190111": {
       "id": "@aibast-agents-library/product_reference",
@@ -579,8 +515,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/product_reference",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/product_reference"
     },
     "4606979804393780853": {
       "id": "@aibast-agents-library/sales_coach",
@@ -588,8 +523,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_coach",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_coach"
     },
     "3409504503786645323": {
       "id": "@aibast-agents-library/sales_simulation",
@@ -597,8 +531,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_simulation",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_simulation"
     },
     "18066875627483051477": {
       "id": "@aibast-agents-library/speech_to_crm",
@@ -606,8 +539,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/speech_to_crm",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/speech_to_crm"
     },
     "13241370335976767116": {
       "id": "@aibast-agents-library/triage_bot",
@@ -615,8 +547,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/triage_bot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/triage_bot"
     },
     "6632932916069154274": {
       "id": "@aibast-agents-library/voice_to_crm_d365",
@@ -624,8 +555,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_d365",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_d365"
     },
     "2718308106806898885": {
       "id": "@aibast-agents-library/voice_to_crm_email",
@@ -633,8 +563,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_email",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_email"
     },
     "3204150057113364789": {
       "id": "@aibast-agents-library/sharepoint_document_extractor",
@@ -642,8 +571,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sharepoint_document_extractor",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sharepoint_document_extractor"
     },
     "11805318406759655329": {
       "id": "@aibast-agents-library/voice_to_crm_servicenow",
@@ -651,8 +579,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_servicenow",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_servicenow"
     },
     "16835577812647426117": {
       "id": "@aibast-agents-library/care_gap_closure",
@@ -660,8 +587,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/care_gap_closure",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/care_gap_closure"
     },
     "4205376672235267561": {
       "id": "@aibast-agents-library/clinical_notes_summarizer",
@@ -669,8 +595,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/clinical_notes_summarizer",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/clinical_notes_summarizer"
     },
     "840299925014852615": {
       "id": "@aibast-agents-library/patient_intake",
@@ -678,8 +603,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/patient_intake",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/patient_intake"
     },
     "2707536209626541719": {
       "id": "@aibast-agents-library/prior_authorization",
@@ -687,8 +611,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/prior_authorization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/prior_authorization"
     },
     "7498395653551960420": {
       "id": "@aibast-agents-library/staff_credentialing",
@@ -696,8 +619,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/staff_credentialing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/staff_credentialing"
     },
     "637792878567503925": {
       "id": "@aibast-agents-library/ask_hr",
@@ -705,8 +627,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/ask_hr",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/ask_hr"
     },
     "8279755765930667339": {
       "id": "@aibast-agents-library/it_helpdesk",
@@ -714,8 +635,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/it_helpdesk",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/it_helpdesk"
     },
     "741104875949665064": {
       "id": "@aibast-agents-library/inventory_rebalancing",
@@ -723,8 +643,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/inventory_rebalancing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/inventory_rebalancing"
     },
     "16055120389735064948": {
       "id": "@aibast-agents-library/maintenance_scheduling",
@@ -732,8 +651,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/maintenance_scheduling",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/maintenance_scheduling"
     },
     "1417363157664017509": {
       "id": "@aibast-agents-library/order_status_communication",
@@ -741,8 +659,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/order_status_communication",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/order_status_communication"
     },
     "11447213470199194507": {
       "id": "@aibast-agents-library/production_line_optimization",
@@ -750,8 +667,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/production_line_optimization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/production_line_optimization"
     },
     "2701276264207625678": {
       "id": "@aibast-agents-library/supplier_risk_monitoring",
@@ -759,8 +675,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/supplier_risk_monitoring",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/supplier_risk_monitoring"
     },
     "8147017178597171709": {
       "id": "@aibast-agents-library/client_health_score",
@@ -768,8 +683,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/client_health_score",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/client_health_score"
     },
     "13063354040569177065": {
       "id": "@aibast-agents-library/contract_risk_review",
@@ -777,8 +691,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/contract_risk_review",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/contract_risk_review"
     },
     "1841735498398838829": {
       "id": "@aibast-agents-library/proposal_copilot",
@@ -786,8 +699,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/proposal_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/proposal_copilot"
     },
     "2213254919820554190": {
       "id": "@aibast-agents-library/resource_utilization",
@@ -795,8 +707,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/resource_utilization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/resource_utilization"
     },
     "17145926618142354208": {
       "id": "@aibast-agents-library/time_entry_billing",
@@ -804,8 +715,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/time_entry_billing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/time_entry_billing"
     },
     "3131358552737328726": {
       "id": "@aibast-agents-library/inventory_visibility",
@@ -813,8 +723,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/inventory_visibility",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/inventory_visibility"
     },
     "13430271910399845800": {
       "id": "@aibast-agents-library/personalized_marketing",
@@ -822,8 +731,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/personalized_marketing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/personalized_marketing"
     },
     "7707877473434353400": {
       "id": "@aibast-agents-library/returns_complaints_resolution",
@@ -831,8 +739,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/returns_complaints_resolution",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/returns_complaints_resolution"
     },
     "15486760774949025133": {
       "id": "@aibast-agents-library/store_associate_copilot",
@@ -840,8 +747,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/store_associate_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/store_associate_copilot"
     },
     "16804600987838460767": {
       "id": "@aibast-agents-library/supply_chain_disruption_alert",
@@ -849,8 +755,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/supply_chain_disruption_alert",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/supply_chain_disruption_alert"
     },
     "12233521075866838081": {
       "id": "@aibast-agents-library/building_permit_processing",
@@ -858,8 +763,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/building_permit_processing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/building_permit_processing"
     },
     "8921174840435288387": {
       "id": "@aibast-agents-library/citizen_service_request",
@@ -867,8 +771,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/citizen_service_request",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/citizen_service_request"
     },
     "16868928112770562685": {
       "id": "@aibast-agents-library/foia_request_assistant",
@@ -876,8 +779,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/foia_request_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/foia_request_assistant"
     },
     "11818896142975508918": {
       "id": "@aibast-agents-library/slg_grants_management",
@@ -885,8 +787,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/slg_grants_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/slg_grants_management"
     },
     "1823358465969239878": {
       "id": "@aibast-agents-library/utility_billing_assistance",
@@ -894,8 +795,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/utility_billing_assistance",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/utility_billing_assistance"
     },
     "3107145353423104918": {
       "id": "@aibast-agents-library/software_competitive_intel",
@@ -903,8 +803,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/software_competitive_intel",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/software_competitive_intel"
     },
     "9696532239747785842": {
       "id": "@aibast-agents-library/software_customer_onboarding",
@@ -912,8 +811,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/software_customer_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/software_customer_onboarding"
     },
     "7396811422879724128": {
       "id": "@aibast-agents-library/license_renewal_expansion",
@@ -921,8 +819,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/license_renewal_expansion",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/license_renewal_expansion"
     },
     "17606540497672480195": {
       "id": "@aibast-agents-library/product_feedback_synthesizer",
@@ -930,8 +827,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/product_feedback_synthesizer",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/product_feedback_synthesizer"
     },
     "6795368757143024027": {
       "id": "@aibast-agents-library/support_ticket_resolution",
@@ -939,8 +835,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/support_ticket_resolution",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/support_ticket_resolution"
     },
     "6828785747777692595": {
       "id": "@borg/borg_agent",
@@ -948,8 +843,7 @@
       "rarity_tier": "rare",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/borg_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/borg_agent"
     },
     "16145574178551640748": {
       "id": "@borg/cardsmith_agent",
@@ -957,8 +851,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/cardsmith_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/cardsmith_agent"
     },
     "15925461970729052544": {
       "id": "@borg/markdown_to_slides_agent",
@@ -966,8 +859,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/markdown_to_slides_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/markdown_to_slides_agent"
     },
     "8086863952292502462": {
       "id": "@borg/prompt_to_video_agent",
@@ -975,8 +867,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/prompt_to_video_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/prompt_to_video_agent"
     },
     "16286703075799869989": {
       "id": "@borg/recon_agent",
@@ -984,8 +875,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/recon_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/recon_agent"
     },
     "13393030123482784257": {
       "id": "@borg/training_quest_agent",
@@ -993,8 +883,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/training_quest_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/training_quest_agent"
     },
     "6614515859946747541": {
       "id": "@borg/tuftelove_agent",
@@ -1002,8 +891,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/tuftelove_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/tuftelove_agent"
     },
     "16606025257145482925": {
       "id": "@borg/vaultmind_agent",
@@ -1011,8 +899,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/vaultmind_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/vaultmind_agent"
     },
     "9916893050914225492": {
       "id": "@discreetRappers/agent_generator_agent",
@@ -1020,8 +907,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/agent_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/agent_generator_agent"
     },
     "13928955966432878815": {
       "id": "@discreetRappers/agent_transpiler_agent",
@@ -1029,8 +915,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/agent_transpiler_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/agent_transpiler_agent"
     },
     "16191435701781930066": {
       "id": "@discreetRappers/architecture_diagram_agent",
@@ -1038,8 +923,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/architecture_diagram_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/architecture_diagram_agent"
     },
     "14025379966502974255": {
       "id": "@discreetRappers/copilot_studio_transpiler_agent",
@@ -1047,8 +931,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/copilot_studio_transpiler_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/copilot_studio_transpiler_agent"
     },
     "17174429428190159959": {
       "id": "@discreetRappers/demo_script_generator_agent",
@@ -1056,8 +939,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/demo_script_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/demo_script_generator_agent"
     },
     "9628502902113448084": {
       "id": "@discreetRappers/dynamics_crud_agent",
@@ -1065,8 +947,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/dynamics_crud_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/dynamics_crud_agent"
     },
     "53027766882806255": {
       "id": "@discreetRappers/email_drafting_agent",
@@ -1074,8 +955,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/email_drafting_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/email_drafting_agent"
     },
     "4049171833047104537": {
       "id": "@discreetRappers/powerpoint_generator_agent",
@@ -1083,8 +963,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/powerpoint_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/powerpoint_generator_agent"
     },
     "18264010640337544386": {
       "id": "@discreetRappers/project_tracker_agent",
@@ -1092,8 +971,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/project_tracker_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/project_tracker_agent"
     },
     "3348533564379118675": {
       "id": "@discreetRappers/rapp_pipeline_agent",
@@ -1101,8 +979,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/rapp_pipeline_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/rapp_pipeline_agent"
     },
     "2446964785980911795": {
       "id": "@discreetRappers/sales_assistant_agent",
@@ -1110,8 +987,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/sales_assistant_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/sales_assistant_agent"
     },
     "11288900214771561238": {
       "id": "@discreetRappers/scripted_demo_agent",
@@ -1119,8 +995,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/scripted_demo_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/scripted_demo_agent"
     },
     "16553900515881791106": {
       "id": "@discreetRappers/sharepoint_contract_analysis_agent",
@@ -1128,8 +1003,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/sharepoint_contract_analysis_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/sharepoint_contract_analysis_agent"
     },
     "3115334458036463931": {
       "id": "@kody/agent_workbench",
@@ -1137,8 +1011,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/agent_workbench",
-      "binder": "rar"
+      "bundle_key": "@kody/agent_workbench"
     },
     "15351106387627749856": {
       "id": "@kody/context_memory_agent",
@@ -1146,8 +1019,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/context_memory_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/context_memory_agent"
     },
     "16587187046621128947": {
       "id": "@kody/deal_desk_agent",
@@ -1155,8 +1027,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/deal_desk_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/deal_desk_agent"
     },
     "1346218951730281648": {
       "id": "@kody/github_agent_library_agent",
@@ -1164,8 +1035,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/github_agent_library_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/github_agent_library_agent"
     },
     "14159894519432621052": {
       "id": "@kody/manage_memory_agent",
@@ -1173,8 +1043,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/manage_memory_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/manage_memory_agent"
     },
     "4674925164302711593": {
       "id": "@kody/rappter_engine_agent",
@@ -1182,8 +1051,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappter_engine_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappter_engine_agent"
     },
     "10353196835552377498": {
       "id": "@kody/rappterbook_agent",
@@ -1191,8 +1059,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappterbook_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappterbook_agent"
     },
     "3967529645834512416": {
       "id": "@kody/rappterpedia_agent",
@@ -1200,8 +1067,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappterpedia_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappterpedia_agent"
     },
     "756356789067200321": {
       "id": "@kody/rar_remote_agent",
@@ -1209,8 +1075,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rar_remote_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rar_remote_agent"
     },
     "8659210237067160174": {
       "id": "@kody/recon_deck_agent",
@@ -1218,8 +1083,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/recon_deck_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/recon_deck_agent"
     },
     "18289705222458979460": {
       "id": "@kody-w/hello_world_agent",
@@ -1227,8 +1091,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody-w/hello_world_agent",
-      "binder": "rar"
+      "bundle_key": "@kody-w/hello_world_agent"
     },
     "2282791009467636617": {
       "id": "@rapp/basic_agent",
@@ -1236,8 +1099,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@rapp/basic_agent",
-      "binder": "rar"
+      "bundle_key": "@rapp/basic_agent"
     },
     "1463797972131002668": {
       "id": "@wildhaven/ceo_agent",
@@ -1245,8 +1107,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@wildhaven/ceo_agent",
-      "binder": "rar"
+      "bundle_key": "@wildhaven/ceo_agent"
     }
   },
   "ids": {
@@ -1256,8 +1117,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_intelligence"
     },
     "@aibast-agents-library/account_intelligence_orchestrator_agent": {
       "id": "@aibast-agents-library/account_intelligence_orchestrator_agent",
@@ -1265,8 +1125,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_intelligence_orchestrator_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_intelligence_orchestrator_agent"
     },
     "@aibast-agents-library/action_prioritization": {
       "id": "@aibast-agents-library/action_prioritization",
@@ -1274,8 +1133,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/action_prioritization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/action_prioritization"
     },
     "@aibast-agents-library/competitive_intelligence": {
       "id": "@aibast-agents-library/competitive_intelligence",
@@ -1283,8 +1141,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/competitive_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/competitive_intelligence"
     },
     "@aibast-agents-library/deal_tracking": {
       "id": "@aibast-agents-library/deal_tracking",
@@ -1292,8 +1149,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_tracking",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_tracking"
     },
     "@aibast-agents-library/meeting_prep": {
       "id": "@aibast-agents-library/meeting_prep",
@@ -1301,8 +1157,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/meeting_prep",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/meeting_prep"
     },
     "@aibast-agents-library/account_messaging": {
       "id": "@aibast-agents-library/account_messaging",
@@ -1310,8 +1165,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_messaging",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_messaging"
     },
     "@aibast-agents-library/account_risk_assessment": {
       "id": "@aibast-agents-library/account_risk_assessment",
@@ -1319,8 +1173,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/account_risk_assessment",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/account_risk_assessment"
     },
     "@aibast-agents-library/stakeholder_intelligence": {
       "id": "@aibast-agents-library/stakeholder_intelligence",
@@ -1328,8 +1181,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/stakeholder_intelligence",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/stakeholder_intelligence"
     },
     "@aibast-agents-library/activity_gap": {
       "id": "@aibast-agents-library/activity_gap",
@@ -1337,8 +1189,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/activity_gap",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/activity_gap"
     },
     "@aibast-agents-library/deal_competitor_intel": {
       "id": "@aibast-agents-library/deal_competitor_intel",
@@ -1346,8 +1197,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_competitor_intel",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_competitor_intel"
     },
     "@aibast-agents-library/deal_health_score": {
       "id": "@aibast-agents-library/deal_health_score",
@@ -1355,8 +1205,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_health_score",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_health_score"
     },
     "@aibast-agents-library/deal_progression": {
       "id": "@aibast-agents-library/deal_progression",
@@ -1364,8 +1213,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_progression",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_progression"
     },
     "@aibast-agents-library/deal_risk_assessment": {
       "id": "@aibast-agents-library/deal_risk_assessment",
@@ -1373,8 +1221,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_risk_assessment",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_risk_assessment"
     },
     "@aibast-agents-library/next_best_action": {
       "id": "@aibast-agents-library/next_best_action",
@@ -1382,8 +1229,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/next_best_action",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/next_best_action"
     },
     "@aibast-agents-library/pipeline_velocity": {
       "id": "@aibast-agents-library/pipeline_velocity",
@@ -1391,8 +1237,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/pipeline_velocity",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/pipeline_velocity"
     },
     "@aibast-agents-library/revenue_forecast": {
       "id": "@aibast-agents-library/revenue_forecast",
@@ -1400,8 +1245,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/revenue_forecast",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/revenue_forecast"
     },
     "@aibast-agents-library/deal_stakeholder_engagement": {
       "id": "@aibast-agents-library/deal_stakeholder_engagement",
@@ -1409,8 +1253,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/deal_stakeholder_engagement",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/deal_stakeholder_engagement"
     },
     "@aibast-agents-library/stalled_deal_detection": {
       "id": "@aibast-agents-library/stalled_deal_detection",
@@ -1418,8 +1261,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/stalled_deal_detection",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/stalled_deal_detection"
     },
     "@aibast-agents-library/win_probability": {
       "id": "@aibast-agents-library/win_probability",
@@ -1427,8 +1269,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/win_probability",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/win_probability"
     },
     "@aibast-agents-library/proposal_generation": {
       "id": "@aibast-agents-library/proposal_generation",
@@ -1436,8 +1277,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/proposal_generation",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/proposal_generation"
     },
     "@aibast-agents-library/sales_qualification": {
       "id": "@aibast-agents-library/sales_qualification",
@@ -1445,8 +1285,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_qualification",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_qualification"
     },
     "@aibast-agents-library/win_loss_analysis": {
       "id": "@aibast-agents-library/win_loss_analysis",
@@ -1454,8 +1293,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/win_loss_analysis",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/win_loss_analysis"
     },
     "@aibast-agents-library/cart_abandonment_recovery": {
       "id": "@aibast-agents-library/cart_abandonment_recovery",
@@ -1463,8 +1301,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/cart_abandonment_recovery",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/cart_abandonment_recovery"
     },
     "@aibast-agents-library/customer_360_speech": {
       "id": "@aibast-agents-library/customer_360_speech",
@@ -1472,8 +1309,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_360_speech",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_360_speech"
     },
     "@aibast-agents-library/customer_loyalty_rewards": {
       "id": "@aibast-agents-library/customer_loyalty_rewards",
@@ -1481,8 +1317,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_loyalty_rewards",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_loyalty_rewards"
     },
     "@aibast-agents-library/omnichannel_engagement": {
       "id": "@aibast-agents-library/omnichannel_engagement",
@@ -1490,8 +1325,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/omnichannel_engagement",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/omnichannel_engagement"
     },
     "@aibast-agents-library/personalized_shopping_assistant": {
       "id": "@aibast-agents-library/personalized_shopping_assistant",
@@ -1499,8 +1333,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/personalized_shopping_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/personalized_shopping_assistant"
     },
     "@aibast-agents-library/returns_exchange": {
       "id": "@aibast-agents-library/returns_exchange",
@@ -1508,8 +1341,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/returns_exchange",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/returns_exchange"
     },
     "@aibast-agents-library/sales_chat": {
       "id": "@aibast-agents-library/sales_chat",
@@ -1517,8 +1349,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_chat",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_chat"
     },
     "@aibast-agents-library/asset_maintenance_forecast": {
       "id": "@aibast-agents-library/asset_maintenance_forecast",
@@ -1526,8 +1357,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/asset_maintenance_forecast",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/asset_maintenance_forecast"
     },
     "@aibast-agents-library/emission_tracking": {
       "id": "@aibast-agents-library/emission_tracking",
@@ -1535,8 +1365,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/emission_tracking",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/emission_tracking"
     },
     "@aibast-agents-library/field_service_dispatch": {
       "id": "@aibast-agents-library/field_service_dispatch",
@@ -1544,8 +1373,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/field_service_dispatch",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/field_service_dispatch"
     },
     "@aibast-agents-library/permit_license_management": {
       "id": "@aibast-agents-library/permit_license_management",
@@ -1553,8 +1381,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/permit_license_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/permit_license_management"
     },
     "@aibast-agents-library/energy_regulatory_reporting": {
       "id": "@aibast-agents-library/energy_regulatory_reporting",
@@ -1562,8 +1389,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/energy_regulatory_reporting",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/energy_regulatory_reporting"
     },
     "@aibast-agents-library/acquisition_support": {
       "id": "@aibast-agents-library/acquisition_support",
@@ -1571,8 +1397,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/acquisition_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/acquisition_support"
     },
     "@aibast-agents-library/federal_grants_oversight": {
       "id": "@aibast-agents-library/federal_grants_oversight",
@@ -1580,8 +1405,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/federal_grants_oversight",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/federal_grants_oversight"
     },
     "@aibast-agents-library/mission_reporting_assistant": {
       "id": "@aibast-agents-library/mission_reporting_assistant",
@@ -1589,8 +1413,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/mission_reporting_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/mission_reporting_assistant"
     },
     "@aibast-agents-library/regulatory_compliance_fed": {
       "id": "@aibast-agents-library/regulatory_compliance_fed",
@@ -1598,8 +1421,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/regulatory_compliance_fed",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/regulatory_compliance_fed"
     },
     "@aibast-agents-library/workforce_clearance_onboarding": {
       "id": "@aibast-agents-library/workforce_clearance_onboarding",
@@ -1607,8 +1429,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/workforce_clearance_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/workforce_clearance_onboarding"
     },
     "@aibast-agents-library/claims_processing": {
       "id": "@aibast-agents-library/claims_processing",
@@ -1616,8 +1437,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/claims_processing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/claims_processing"
     },
     "@aibast-agents-library/fs_customer_onboarding": {
       "id": "@aibast-agents-library/fs_customer_onboarding",
@@ -1625,8 +1445,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fs_customer_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fs_customer_onboarding"
     },
     "@aibast-agents-library/customer_sentiment_churn": {
       "id": "@aibast-agents-library/customer_sentiment_churn",
@@ -1634,8 +1453,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_sentiment_churn",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_sentiment_churn"
     },
     "@aibast-agents-library/financial_advisor_copilot": {
       "id": "@aibast-agents-library/financial_advisor_copilot",
@@ -1643,8 +1461,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/financial_advisor_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/financial_advisor_copilot"
     },
     "@aibast-agents-library/fraud_detection_alert": {
       "id": "@aibast-agents-library/fraud_detection_alert",
@@ -1652,8 +1469,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fraud_detection_alert",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fraud_detection_alert"
     },
     "@aibast-agents-library/loan_origination_assistant": {
       "id": "@aibast-agents-library/loan_origination_assistant",
@@ -1661,8 +1477,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/loan_origination_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/loan_origination_assistant"
     },
     "@aibast-agents-library/portfolio_rebalancing": {
       "id": "@aibast-agents-library/portfolio_rebalancing",
@@ -1670,8 +1485,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/portfolio_rebalancing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/portfolio_rebalancing"
     },
     "@aibast-agents-library/fs_regulatory_compliance": {
       "id": "@aibast-agents-library/fs_regulatory_compliance",
@@ -1679,8 +1493,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/fs_regulatory_compliance",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/fs_regulatory_compliance"
     },
     "@aibast-agents-library/underwriting_support": {
       "id": "@aibast-agents-library/underwriting_support",
@@ -1688,8 +1501,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/underwriting_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/underwriting_support"
     },
     "@aibast-agents-library/wealth_insights_generator": {
       "id": "@aibast-agents-library/wealth_insights_generator",
@@ -1697,8 +1509,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/wealth_insights_generator",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/wealth_insights_generator"
     },
     "@aibast-agents-library/ai_customer_assistant": {
       "id": "@aibast-agents-library/ai_customer_assistant",
@@ -1706,8 +1517,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/ai_customer_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/ai_customer_assistant"
     },
     "@aibast-agents-library/general_ask_hr": {
       "id": "@aibast-agents-library/general_ask_hr",
@@ -1715,8 +1525,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/general_ask_hr",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/general_ask_hr"
     },
     "@aibast-agents-library/bulk_crm_data_generator_agent": {
       "id": "@aibast-agents-library/bulk_crm_data_generator_agent",
@@ -1724,8 +1533,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/bulk_crm_data_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/bulk_crm_data_generator_agent"
     },
     "@aibast-agents-library/dynamics_365_connector": {
       "id": "@aibast-agents-library/dynamics_365_connector",
@@ -1733,8 +1541,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/dynamics_365_connector",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/dynamics_365_connector"
     },
     "@aibast-agents-library/one_click_crm_intake": {
       "id": "@aibast-agents-library/one_click_crm_intake",
@@ -1742,8 +1549,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/one_click_crm_intake",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/one_click_crm_intake"
     },
     "@aibast-agents-library/cross_selling": {
       "id": "@aibast-agents-library/cross_selling",
@@ -1751,8 +1557,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/cross_selling",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/cross_selling"
     },
     "@aibast-agents-library/customer_360": {
       "id": "@aibast-agents-library/customer_360",
@@ -1760,8 +1565,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/customer_360",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/customer_360"
     },
     "@aibast-agents-library/email_drafting": {
       "id": "@aibast-agents-library/email_drafting",
@@ -1769,8 +1573,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/email_drafting",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/email_drafting"
     },
     "@aibast-agents-library/find_accurate_models": {
       "id": "@aibast-agents-library/find_accurate_models",
@@ -1778,8 +1581,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/find_accurate_models",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/find_accurate_models"
     },
     "@aibast-agents-library/identify_discounts": {
       "id": "@aibast-agents-library/identify_discounts",
@@ -1787,8 +1589,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/identify_discounts",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/identify_discounts"
     },
     "@aibast-agents-library/it_ticket_management": {
       "id": "@aibast-agents-library/it_ticket_management",
@@ -1796,8 +1597,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/it_ticket_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/it_ticket_management"
     },
     "@aibast-agents-library/procurement_agent": {
       "id": "@aibast-agents-library/procurement_agent",
@@ -1805,8 +1605,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/procurement_agent",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/procurement_agent"
     },
     "@aibast-agents-library/procurement_support": {
       "id": "@aibast-agents-library/procurement_support",
@@ -1814,8 +1613,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/procurement_support",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/procurement_support"
     },
     "@aibast-agents-library/product_reference": {
       "id": "@aibast-agents-library/product_reference",
@@ -1823,8 +1621,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/product_reference",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/product_reference"
     },
     "@aibast-agents-library/sales_coach": {
       "id": "@aibast-agents-library/sales_coach",
@@ -1832,8 +1629,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_coach",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_coach"
     },
     "@aibast-agents-library/sales_simulation": {
       "id": "@aibast-agents-library/sales_simulation",
@@ -1841,8 +1637,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sales_simulation",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sales_simulation"
     },
     "@aibast-agents-library/speech_to_crm": {
       "id": "@aibast-agents-library/speech_to_crm",
@@ -1850,8 +1645,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/speech_to_crm",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/speech_to_crm"
     },
     "@aibast-agents-library/triage_bot": {
       "id": "@aibast-agents-library/triage_bot",
@@ -1859,8 +1653,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/triage_bot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/triage_bot"
     },
     "@aibast-agents-library/voice_to_crm_d365": {
       "id": "@aibast-agents-library/voice_to_crm_d365",
@@ -1868,8 +1661,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_d365",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_d365"
     },
     "@aibast-agents-library/voice_to_crm_email": {
       "id": "@aibast-agents-library/voice_to_crm_email",
@@ -1877,8 +1669,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_email",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_email"
     },
     "@aibast-agents-library/sharepoint_document_extractor": {
       "id": "@aibast-agents-library/sharepoint_document_extractor",
@@ -1886,8 +1677,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/sharepoint_document_extractor",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/sharepoint_document_extractor"
     },
     "@aibast-agents-library/voice_to_crm_servicenow": {
       "id": "@aibast-agents-library/voice_to_crm_servicenow",
@@ -1895,8 +1685,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/voice_to_crm_servicenow",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/voice_to_crm_servicenow"
     },
     "@aibast-agents-library/care_gap_closure": {
       "id": "@aibast-agents-library/care_gap_closure",
@@ -1904,8 +1693,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/care_gap_closure",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/care_gap_closure"
     },
     "@aibast-agents-library/clinical_notes_summarizer": {
       "id": "@aibast-agents-library/clinical_notes_summarizer",
@@ -1913,8 +1701,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/clinical_notes_summarizer",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/clinical_notes_summarizer"
     },
     "@aibast-agents-library/patient_intake": {
       "id": "@aibast-agents-library/patient_intake",
@@ -1922,8 +1709,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/patient_intake",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/patient_intake"
     },
     "@aibast-agents-library/prior_authorization": {
       "id": "@aibast-agents-library/prior_authorization",
@@ -1931,8 +1717,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/prior_authorization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/prior_authorization"
     },
     "@aibast-agents-library/staff_credentialing": {
       "id": "@aibast-agents-library/staff_credentialing",
@@ -1940,8 +1725,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/staff_credentialing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/staff_credentialing"
     },
     "@aibast-agents-library/ask_hr": {
       "id": "@aibast-agents-library/ask_hr",
@@ -1949,8 +1733,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/ask_hr",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/ask_hr"
     },
     "@aibast-agents-library/it_helpdesk": {
       "id": "@aibast-agents-library/it_helpdesk",
@@ -1958,8 +1741,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/it_helpdesk",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/it_helpdesk"
     },
     "@aibast-agents-library/inventory_rebalancing": {
       "id": "@aibast-agents-library/inventory_rebalancing",
@@ -1967,8 +1749,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/inventory_rebalancing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/inventory_rebalancing"
     },
     "@aibast-agents-library/maintenance_scheduling": {
       "id": "@aibast-agents-library/maintenance_scheduling",
@@ -1976,8 +1757,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/maintenance_scheduling",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/maintenance_scheduling"
     },
     "@aibast-agents-library/order_status_communication": {
       "id": "@aibast-agents-library/order_status_communication",
@@ -1985,8 +1765,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/order_status_communication",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/order_status_communication"
     },
     "@aibast-agents-library/production_line_optimization": {
       "id": "@aibast-agents-library/production_line_optimization",
@@ -1994,8 +1773,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/production_line_optimization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/production_line_optimization"
     },
     "@aibast-agents-library/supplier_risk_monitoring": {
       "id": "@aibast-agents-library/supplier_risk_monitoring",
@@ -2003,8 +1781,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/supplier_risk_monitoring",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/supplier_risk_monitoring"
     },
     "@aibast-agents-library/client_health_score": {
       "id": "@aibast-agents-library/client_health_score",
@@ -2012,8 +1789,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/client_health_score",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/client_health_score"
     },
     "@aibast-agents-library/contract_risk_review": {
       "id": "@aibast-agents-library/contract_risk_review",
@@ -2021,8 +1797,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/contract_risk_review",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/contract_risk_review"
     },
     "@aibast-agents-library/proposal_copilot": {
       "id": "@aibast-agents-library/proposal_copilot",
@@ -2030,8 +1805,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/proposal_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/proposal_copilot"
     },
     "@aibast-agents-library/resource_utilization": {
       "id": "@aibast-agents-library/resource_utilization",
@@ -2039,8 +1813,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/resource_utilization",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/resource_utilization"
     },
     "@aibast-agents-library/time_entry_billing": {
       "id": "@aibast-agents-library/time_entry_billing",
@@ -2048,8 +1821,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/time_entry_billing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/time_entry_billing"
     },
     "@aibast-agents-library/inventory_visibility": {
       "id": "@aibast-agents-library/inventory_visibility",
@@ -2057,8 +1829,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/inventory_visibility",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/inventory_visibility"
     },
     "@aibast-agents-library/personalized_marketing": {
       "id": "@aibast-agents-library/personalized_marketing",
@@ -2066,8 +1837,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/personalized_marketing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/personalized_marketing"
     },
     "@aibast-agents-library/returns_complaints_resolution": {
       "id": "@aibast-agents-library/returns_complaints_resolution",
@@ -2075,8 +1845,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/returns_complaints_resolution",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/returns_complaints_resolution"
     },
     "@aibast-agents-library/store_associate_copilot": {
       "id": "@aibast-agents-library/store_associate_copilot",
@@ -2084,8 +1853,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/store_associate_copilot",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/store_associate_copilot"
     },
     "@aibast-agents-library/supply_chain_disruption_alert": {
       "id": "@aibast-agents-library/supply_chain_disruption_alert",
@@ -2093,8 +1861,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/supply_chain_disruption_alert",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/supply_chain_disruption_alert"
     },
     "@aibast-agents-library/building_permit_processing": {
       "id": "@aibast-agents-library/building_permit_processing",
@@ -2102,8 +1869,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/building_permit_processing",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/building_permit_processing"
     },
     "@aibast-agents-library/citizen_service_request": {
       "id": "@aibast-agents-library/citizen_service_request",
@@ -2111,8 +1877,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/citizen_service_request",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/citizen_service_request"
     },
     "@aibast-agents-library/foia_request_assistant": {
       "id": "@aibast-agents-library/foia_request_assistant",
@@ -2120,8 +1885,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/foia_request_assistant",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/foia_request_assistant"
     },
     "@aibast-agents-library/slg_grants_management": {
       "id": "@aibast-agents-library/slg_grants_management",
@@ -2129,8 +1893,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/slg_grants_management",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/slg_grants_management"
     },
     "@aibast-agents-library/utility_billing_assistance": {
       "id": "@aibast-agents-library/utility_billing_assistance",
@@ -2138,8 +1901,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/utility_billing_assistance",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/utility_billing_assistance"
     },
     "@aibast-agents-library/software_competitive_intel": {
       "id": "@aibast-agents-library/software_competitive_intel",
@@ -2147,8 +1909,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/software_competitive_intel",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/software_competitive_intel"
     },
     "@aibast-agents-library/software_customer_onboarding": {
       "id": "@aibast-agents-library/software_customer_onboarding",
@@ -2156,8 +1917,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/software_customer_onboarding",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/software_customer_onboarding"
     },
     "@aibast-agents-library/license_renewal_expansion": {
       "id": "@aibast-agents-library/license_renewal_expansion",
@@ -2165,8 +1925,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/license_renewal_expansion",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/license_renewal_expansion"
     },
     "@aibast-agents-library/product_feedback_synthesizer": {
       "id": "@aibast-agents-library/product_feedback_synthesizer",
@@ -2174,8 +1933,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/product_feedback_synthesizer",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/product_feedback_synthesizer"
     },
     "@aibast-agents-library/support_ticket_resolution": {
       "id": "@aibast-agents-library/support_ticket_resolution",
@@ -2183,8 +1941,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@aibast-agents-library/support_ticket_resolution",
-      "binder": "rar"
+      "bundle_key": "@aibast-agents-library/support_ticket_resolution"
     },
     "@borg/borg_agent": {
       "id": "@borg/borg_agent",
@@ -2192,8 +1949,7 @@
       "rarity_tier": "rare",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/borg_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/borg_agent"
     },
     "@borg/cardsmith_agent": {
       "id": "@borg/cardsmith_agent",
@@ -2201,8 +1957,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/cardsmith_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/cardsmith_agent"
     },
     "@borg/markdown_to_slides_agent": {
       "id": "@borg/markdown_to_slides_agent",
@@ -2210,8 +1965,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/markdown_to_slides_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/markdown_to_slides_agent"
     },
     "@borg/prompt_to_video_agent": {
       "id": "@borg/prompt_to_video_agent",
@@ -2219,8 +1973,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/prompt_to_video_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/prompt_to_video_agent"
     },
     "@borg/recon_agent": {
       "id": "@borg/recon_agent",
@@ -2228,8 +1981,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/recon_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/recon_agent"
     },
     "@borg/training_quest_agent": {
       "id": "@borg/training_quest_agent",
@@ -2237,8 +1989,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/training_quest_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/training_quest_agent"
     },
     "@borg/tuftelove_agent": {
       "id": "@borg/tuftelove_agent",
@@ -2246,8 +1997,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/tuftelove_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/tuftelove_agent"
     },
     "@borg/vaultmind_agent": {
       "id": "@borg/vaultmind_agent",
@@ -2255,8 +2005,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@borg/vaultmind_agent",
-      "binder": "rar"
+      "bundle_key": "@borg/vaultmind_agent"
     },
     "@discreetRappers/agent_generator_agent": {
       "id": "@discreetRappers/agent_generator_agent",
@@ -2264,8 +2013,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/agent_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/agent_generator_agent"
     },
     "@discreetRappers/agent_transpiler_agent": {
       "id": "@discreetRappers/agent_transpiler_agent",
@@ -2273,8 +2021,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/agent_transpiler_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/agent_transpiler_agent"
     },
     "@discreetRappers/architecture_diagram_agent": {
       "id": "@discreetRappers/architecture_diagram_agent",
@@ -2282,8 +2029,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/architecture_diagram_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/architecture_diagram_agent"
     },
     "@discreetRappers/copilot_studio_transpiler_agent": {
       "id": "@discreetRappers/copilot_studio_transpiler_agent",
@@ -2291,8 +2037,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/copilot_studio_transpiler_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/copilot_studio_transpiler_agent"
     },
     "@discreetRappers/demo_script_generator_agent": {
       "id": "@discreetRappers/demo_script_generator_agent",
@@ -2300,8 +2045,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/demo_script_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/demo_script_generator_agent"
     },
     "@discreetRappers/dynamics_crud_agent": {
       "id": "@discreetRappers/dynamics_crud_agent",
@@ -2309,8 +2053,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/dynamics_crud_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/dynamics_crud_agent"
     },
     "@discreetRappers/email_drafting_agent": {
       "id": "@discreetRappers/email_drafting_agent",
@@ -2318,8 +2061,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/email_drafting_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/email_drafting_agent"
     },
     "@discreetRappers/powerpoint_generator_agent": {
       "id": "@discreetRappers/powerpoint_generator_agent",
@@ -2327,8 +2069,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/powerpoint_generator_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/powerpoint_generator_agent"
     },
     "@discreetRappers/project_tracker_agent": {
       "id": "@discreetRappers/project_tracker_agent",
@@ -2336,8 +2077,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/project_tracker_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/project_tracker_agent"
     },
     "@discreetRappers/rapp_pipeline_agent": {
       "id": "@discreetRappers/rapp_pipeline_agent",
@@ -2345,8 +2085,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/rapp_pipeline_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/rapp_pipeline_agent"
     },
     "@discreetRappers/sales_assistant_agent": {
       "id": "@discreetRappers/sales_assistant_agent",
@@ -2354,8 +2093,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/sales_assistant_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/sales_assistant_agent"
     },
     "@discreetRappers/scripted_demo_agent": {
       "id": "@discreetRappers/scripted_demo_agent",
@@ -2363,8 +2101,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/scripted_demo_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/scripted_demo_agent"
     },
     "@discreetRappers/sharepoint_contract_analysis_agent": {
       "id": "@discreetRappers/sharepoint_contract_analysis_agent",
@@ -2372,8 +2109,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@discreetRappers/sharepoint_contract_analysis_agent",
-      "binder": "rar"
+      "bundle_key": "@discreetRappers/sharepoint_contract_analysis_agent"
     },
     "@kody/agent_workbench": {
       "id": "@kody/agent_workbench",
@@ -2381,8 +2117,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/agent_workbench",
-      "binder": "rar"
+      "bundle_key": "@kody/agent_workbench"
     },
     "@kody/context_memory_agent": {
       "id": "@kody/context_memory_agent",
@@ -2390,8 +2125,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/context_memory_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/context_memory_agent"
     },
     "@kody/deal_desk_agent": {
       "id": "@kody/deal_desk_agent",
@@ -2399,8 +2133,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/deal_desk_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/deal_desk_agent"
     },
     "@kody/github_agent_library_agent": {
       "id": "@kody/github_agent_library_agent",
@@ -2408,8 +2141,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/github_agent_library_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/github_agent_library_agent"
     },
     "@kody/manage_memory_agent": {
       "id": "@kody/manage_memory_agent",
@@ -2417,8 +2149,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/manage_memory_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/manage_memory_agent"
     },
     "@kody/rappter_engine_agent": {
       "id": "@kody/rappter_engine_agent",
@@ -2426,8 +2157,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappter_engine_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappter_engine_agent"
     },
     "@kody/rappterbook_agent": {
       "id": "@kody/rappterbook_agent",
@@ -2435,8 +2165,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappterbook_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappterbook_agent"
     },
     "@kody/rappterpedia_agent": {
       "id": "@kody/rappterpedia_agent",
@@ -2444,8 +2173,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rappterpedia_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rappterpedia_agent"
     },
     "@kody/rar_remote_agent": {
       "id": "@kody/rar_remote_agent",
@@ -2453,8 +2181,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/rar_remote_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/rar_remote_agent"
     },
     "@kody/recon_deck_agent": {
       "id": "@kody/recon_deck_agent",
@@ -2462,8 +2189,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody/recon_deck_agent",
-      "binder": "rar"
+      "bundle_key": "@kody/recon_deck_agent"
     },
     "@kody-w/hello_world_agent": {
       "id": "@kody-w/hello_world_agent",
@@ -2471,8 +2197,7 @@
       "rarity_tier": "core",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@kody-w/hello_world_agent",
-      "binder": "rar"
+      "bundle_key": "@kody-w/hello_world_agent"
     },
     "@rapp/basic_agent": {
       "id": "@rapp/basic_agent",
@@ -2480,8 +2205,7 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@rapp/basic_agent",
-      "binder": "rar"
+      "bundle_key": "@rapp/basic_agent"
     },
     "@wildhaven/ceo_agent": {
       "id": "@wildhaven/ceo_agent",
@@ -2489,8 +2213,8 @@
       "rarity_tier": "mythic",
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json",
       "url_is_bundle": true,
-      "bundle_key": "@wildhaven/ceo_agent",
-      "binder": "rar"
+      "bundle_key": "@wildhaven/ceo_agent"
     }
-  }
+  },
+  "source": "rar"
 }

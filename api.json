@@ -36,34 +36,17 @@
       "description": "Machine-readable skill interface. Full documentation for autonomous agents.",
       "auth": "none"
     },
-    "register_binder": {
-      "url": "https://api.github.com/repos/kody-w/RAR/issues",
-      "method": "POST",
-      "description": "Register your binder on the public ledger. REQUIRED before submitting agents. Your binder can be public or private.",
-      "auth": "GITHUB_TOKEN (Bearer)",
-      "body": {
-        "title": "[RAR] register_binder",
-        "body": "```json\n{\"action\": \"register_binder\", \"payload\": {\"namespace\": \"@{username}\", \"repo\": \"{optional_repo_url}\"}}\n```"
-      },
-      "notes": "GitHub username = identity. Binder repos can be public or private. You only need to register once."
-    },
     "submit_agent": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
       "method": "POST",
-      "description": "Submit an agent for review. REQUIRES a registered binder. Creates a GitHub Issue. Agent goes to staging, admin reviews, then it enters the registry.",
+      "description": "Submit an agent for review. Creates a GitHub Issue. Agent goes to staging, admin reviews, then it enters the registry.",
       "auth": "GITHUB_TOKEN (Bearer)",
       "body": {
         "title": "[AGENT] @{publisher}/{slug}",
         "body": "```python\n{agent_code}\n```",
         "labels": ["rar-action", "agent-submission"]
       },
-      "notes": "Agents CAN submit themselves. No human owner required. But the binder must be registered first. Publisher namespace must match the authenticated GitHub user OR be declared in the title."
-    },
-    "ledger": {
-      "url": "{base_url}/state/binder_ledger.json",
-      "method": "GET",
-      "description": "Public ledger of registered binders. Check if a user is registered before submitting.",
-      "auth": "none"
+      "notes": "Agents CAN submit themselves. No human owner required. Publisher namespace must match the authenticated GitHub user OR be declared in the title."
     },
     "vote": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
@@ -88,7 +71,7 @@
     "resolve_card_from_seed": {
       "url": "none — computed locally",
       "method": "LOCAL",
-      "description": "Resolve a card from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py or the JS version in binder.html.",
+      "description": "Resolve a card from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py.",
       "auth": "none",
       "algorithm": "seed -> mulberry32 PRNG -> deterministic type, stats, abilities, rarity"
     }
@@ -98,13 +81,12 @@
     "description": "Agents can submit themselves to RAPP without a human owner. The agent creates a GitHub Issue containing its own source code. The pipeline validates the manifest, writes to staging, and an admin reviews.",
     "steps": [
       "1. Agent reads api.json to discover endpoints",
-      "2. Agent registers its binder (POST register_binder Issue) — one time only",
-      "3. Agent composes its own .py source with __manifest__",
-      "4. Agent POST to GitHub Issues API with its code in the body",
-      "5. Pipeline checks binder is registered, validates manifest, runs security scan",
-      "6. Agent lands in staging/ with pending-review label",
-      "7. Admin reviews and adds approved label",
-      "8. Agent enters the registry, card is forged, seed is permanent"
+      "2. Agent composes its own .py source with __manifest__",
+      "3. Agent POST to GitHub Issues API with its code in the body",
+      "4. Pipeline validates manifest, runs security scan",
+      "5. Agent lands in staging/ with pending-review label",
+      "6. Admin reviews and adds approved label",
+      "7. Agent enters the registry, card is forged, seed is permanent"
     ],
     "constraints": [
       "Publisher namespace must match GitHub user OR be declared in issue title",
@@ -118,7 +100,6 @@
   "offline": {
     "description": "RAPP is local-first. Everything works offline.",
     "seed_resolution": "Any numeric seed resolves to a full card (type, stats, abilities) with zero network. The algorithm is deterministic and public.",
-    "binder": "binder.html uses IndexedDB. Export as binder.json for backup/sync.",
     "git_clone": "git clone = full registry + all agents + all cards. No server needed."
   }
 }

@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-09T19:45:03.627935+00:00",
+  "generated_at": "2026-05-11T14:49:00.518965+00:00",
   "stats": {
-    "total_agents": 185,
+    "total_agents": 187,
     "total_swarms": 82,
     "publishers": 9,
     "categories": 23,
@@ -44,7 +44,15 @@
       "workflow"
     ]
   },
-  "duplicates": [],
+  "duplicates": [
+    {
+      "display_name": "Twin",
+      "agents": [
+        "@kody-w/twin_agent",
+        "@rapp/twin_agent"
+      ]
+    }
+  ],
   "agents": [
     {
       "schema": "rapp-agent/1.0",
@@ -4630,7 +4638,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/workiq",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "WorkIQ",
       "description": "Natural-language access to Microsoft 365 data \u2014 emails, calendar, SharePoint/OneDrive, Teams messages, people. Wraps the workiq CLI (Entra ID auth required).",
       "author": "Kody",
@@ -4644,7 +4652,7 @@
         "workiq"
       ],
       "category": "integrations",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4656,20 +4664,21 @@
       ],
       "example_call": "What emails did I receive from my manager this week?",
       "_file": "agents/@kody/workiq_agent.py",
-      "_sha256": "f52f3f6bb1a714375e4ad0ad083b725061e2150847fcce2da26d566235ccef1f",
-      "_seed": 11504693252822279853,
+      "_sha256": "76d6af5e631b956d1536cec875123aecbc3c26f5e0f438ba4f3bce940d355a3b",
+      "_seed": 11504693252830668461,
       "_size_kb": 9.5,
       "_lines": 249,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-02T14:14:24-04:00",
       "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
-      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde"
+      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
+      "_card_sha256": "70554ce87969e8df545b353d362685f865f442ef0d26b8294ac8e2ec38febdb4"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/agent_team_agent",
       "display_name": "AgentTeam",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "description": "The persona-routing brain of the Agent Team Starter Kit as a single agent. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
       "author": "@kody-w",
       "tags": [
@@ -4695,14 +4704,15 @@
         }
       },
       "_file": "agents/@kody-w/agent_team_agent.py",
-      "_sha256": "aa94a74e4afbfea47d6f219c80acea26b1db3508ace5b8b9d58966b9f3470fee",
+      "_sha256": "eea276416a24efea8d88eaf177d3a3eb96ca34f86420296df892966139e90bba",
       "_seed": 14143365278193295497,
       "_size_kb": 15.9,
       "_lines": 393,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-05T14:31:38Z",
       "_first_commit_sha": "0e5b2e5e04503ea6864e4aa762486ef0d254ecee",
-      "_latest_commit_sha": "f6a8cc9a544a2f17e1365fe4cb19efa3e85cd89e"
+      "_latest_commit_sha": "f6a8cc9a544a2f17e1365fe4cb19efa3e85cd89e",
+      "_card_sha256": "a903061f1262c26d4e9396502dccd3ff7c810f8c8ffee87efbb6e5cf6790a786"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4730,10 +4740,11 @@
       "_seed": 7990832610484695196,
       "_size_kb": 15.3,
       "_lines": 368,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-09T15:25:16-04:00",
       "_first_commit_sha": "d4ab9c504eced1b0e396ded3c060160fa3e0750e",
-      "_latest_commit_sha": "dddeda80954aec213c8ab670c19d3047b2530cc4"
+      "_latest_commit_sha": "dddeda80954aec213c8ab670c19d3047b2530cc4",
+      "_card_sha256": "edb127a21acc26195ece77ccbfac10bdbd07892c55b55585d609bfd6ce04a933"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4761,10 +4772,11 @@
       "_seed": 8549923432593898118,
       "_size_kb": 17.1,
       "_lines": 409,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-09T15:25:18-04:00",
       "_first_commit_sha": "9592109e39449bfdc46cb3c5551487f1ad543024",
-      "_latest_commit_sha": "88a4197bcf92ba08ffad3a8ea9776dff2f644b75"
+      "_latest_commit_sha": "88a4197bcf92ba08ffad3a8ea9776dff2f644b75",
+      "_card_sha256": "ff20703025517856d00446027abf1b6065c2b2b3d7fbc4ca4654a8ac4159dcff"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4792,10 +4804,11 @@
       "_seed": 13508928694563643882,
       "_size_kb": 25.0,
       "_lines": 553,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-09T15:25:17-04:00",
       "_first_commit_sha": "fc3d9ebe286252aa515888e47a878ce37ab41b20",
-      "_latest_commit_sha": "53f20a6c506e0c3853ecdb39c99fbd06d0e2842b"
+      "_latest_commit_sha": "53f20a6c506e0c3853ecdb39c99fbd06d0e2842b",
+      "_card_sha256": "f95d56576ac2819f3ffe4ac56ade59fee2754ab15f24a0ff7995d68ed2a31459"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4826,10 +4839,11 @@
       "_seed": 344646004249618315,
       "_size_kb": 26.1,
       "_lines": 569,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-09T15:25:19-04:00",
       "_first_commit_sha": "74df455c5fc5eb8fb5ce77adefcb261763205866",
-      "_latest_commit_sha": "ed83bfa1eeda68d3e1e77bec0a3b8df8bd05b5db"
+      "_latest_commit_sha": "ed83bfa1eeda68d3e1e77bec0a3b8df8bd05b5db",
+      "_card_sha256": "649aed31843034ff37b082ee2e26fdc04301a7998e42ecdd2ef50c26a945c8b9"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4888,10 +4902,11 @@
       "_seed": 18392963094642842750,
       "_size_kb": 54.5,
       "_lines": 1356,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
-      "_latest_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68"
+      "_latest_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
+      "_card_sha256": "f21ca0c391d0aad83e3d77f6b44df7b506a5ecf8f737080edc1145c94b2f364f"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4921,10 +4936,11 @@
       "_seed": 17788523199471825778,
       "_size_kb": 61.4,
       "_lines": 1565,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
-      "_latest_commit_sha": "55f748effd1877636c51e30f55e42813bbf743f8"
+      "_latest_commit_sha": "55f748effd1877636c51e30f55e42813bbf743f8",
+      "_card_sha256": "1b3782c563395f7935edc76d5ce7a71c4f7eb901a7a33bb11d22765ca80db4a2"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4955,10 +4971,11 @@
       "_seed": 5122591396406633282,
       "_size_kb": 14.8,
       "_lines": 357,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-03T14:51:56-04:00",
       "_first_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
-      "_latest_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d"
+      "_latest_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
+      "_card_sha256": "00480d370a4a44f8c0b8d6e613171d4fcd12ccb6b348836e3a16f0c454acefb6"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5059,7 +5076,44 @@
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
       "_latest_commit_sha": "a82c6ba64b0257f08b2628e15934a217209ee08d",
-      "_card_sha256": "993a8390a15cf5f6db9b2c9657544317c22aa6088c5d19ffb55a890530c1aaed"
+      "_card_sha256": "5cb932972497f6beb145affeb89fabacbaecd0698bae9f8e9c0af559558da065"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/egg_hatcher",
+      "version": "1.0.0",
+      "display_name": "EggHatcher",
+      "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood / estate. Refuses on unknown kinds \u2014 never a destructive fallback.",
+      "author": "RAPP",
+      "tags": [
+        "egg",
+        "cartridge",
+        "hatch",
+        "organism",
+        "rapplication",
+        "lifecycle"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": {
+        "args": {
+          "egg_path": "~/Downloads/dad.egg"
+        }
+      },
+      "_file": "agents/@rapp/egg_hatcher_agent.py",
+      "_sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5",
+      "_seed": 11747276046260251558,
+      "_size_kb": 11.5,
+      "_lines": 266,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "4b4fbd87f338f7565c3da69b441a15f2aa099c69435df84d397e3757b555e3b4"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5157,10 +5211,11 @@
       "_seed": 12872764946609739620,
       "_size_kb": 4.2,
       "_lines": 115,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-02T14:14:24-04:00",
       "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
-      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde"
+      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
+      "_card_sha256": "114f3d5db59d4ca9affc1df2abb8637e9d42811ab7b66bc6546b46b7cfd5682e"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5205,7 +5260,7 @@
       "display_name": "MomentFactory",
       "description": "Seven-persona moment-to-Drop pipeline (Sensorium \u2192 SignificanceFilter \u2192 HookWriter \u2192 BodyWriter \u2192 ChannelRouter \u2192 CardForger \u2192 SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
       "author": "RAPP",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "tags": [
         "composite",
         "moment-pipeline",
@@ -5235,7 +5290,7 @@
         }
       },
       "_file": "agents/@rapp/moment_factory_agent.py",
-      "_sha256": "099d6645c9f837609f63b439ead2e4d1b047aac9f72ebf4ed7137e97343ff7e4",
+      "_sha256": "2dac58dd5a9ea49a5c4779e54aadc07f552aaba973436e02b80a89c9023aecfa",
       "_seed": 11866480277881234391,
       "_size_kb": 23.7,
       "_lines": 512,
@@ -5343,7 +5398,7 @@
       "_added_at": "2026-04-27T23:17:53Z",
       "_first_commit_sha": "e0f39cd415ef22807efe0748c20bb145098b2fb5",
       "_latest_commit_sha": "fdd532eaa9d3195f8bb63ca6960344ffa91e8318",
-      "_card_sha256": "b31d6e0b72e5387182822dd9be2c768cb96fc2d201b7ee65084d0cf52c304afa"
+      "_card_sha256": "475d484f81a28535c74116e24c98c2186fe1e79edb34eaa6395fe2373895ff2d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5388,7 +5443,7 @@
       "display_name": "StoreNavigator",
       "description": "Navigate the kody-w/RAPP_Store catalog. List, search, describe, recommend, get install commands, compare rapplications, browse categories, and explain the spec. Use this whenever the user asks what's in the store, what to install, or how to find a rapp that fits their goal.",
       "author": "RAPP",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "tags": [
         "meta",
         "navigator",
@@ -5409,7 +5464,7 @@
         }
       },
       "_file": "agents/@rapp/store_navigator_agent.py",
-      "_sha256": "be39e9015e595c226b93e3ce44b76fd5c7fc341c760658e5053371e7dee6090e",
+      "_sha256": "02f88c5d9503cc8325a4d3e5557cabd88ab85cc8e17bf0440a9026552cf5ec0f",
       "_seed": 12936891603951956945,
       "_size_kb": 16.8,
       "_lines": 428,
@@ -5425,7 +5480,7 @@
       "display_name": "SwarmFactory",
       "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
       "author": "RAPP",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "tags": [
         "meta",
         "build",
@@ -5445,7 +5500,7 @@
         }
       },
       "_file": "agents/@rapp/swarm_factory_agent.py",
-      "_sha256": "b0cde195f8b3ca50caac01f1651d904b27ba3151df2236566f4418626de0171e",
+      "_sha256": "76282991cd222c561a10715af6bfa8f96201fcb23eb881e6f7ebd4afa94e5386",
       "_seed": 10141477066647414868,
       "_size_kb": 36.7,
       "_lines": 699,
@@ -5454,6 +5509,40 @@
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "c797ca3efe983762674f1c2def27283d0eac574e",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/twin_agent",
+      "version": "1.1.0",
+      "display_name": "Twin",
+      "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
+      "author": "RAPP",
+      "tags": [
+        "twin",
+        "summon",
+        "hatch",
+        "boot",
+        "lifecycle",
+        "egg",
+        "estate",
+        "local-first"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/twin_agent.py",
+      "_sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450",
+      "_seed": 11907957554557236082,
+      "_size_kb": 71.8,
+      "_lines": 1771,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "a827004724e3a4d08162769ff90d41644e24c41432db3c74126408c624849ccf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5609,7 +5698,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/card_forger",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "display_name": "Card Forger",
       "description": "Mints a RAR-compatible card (name + impact/novelty/compoundability stats + ability + lore + art_seed) from a Drop. Every Drop is a collectible.",
       "author": "rarbookworld",
@@ -5628,7 +5717,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rarbookworld/card_forger_agent.py",
-      "_sha256": "4b347f00e01ebe85ab9b7b7ac83a0818b6d2cfe9362af8c43baa1a6feab303ef",
+      "_sha256": "d342bf5263705d0cf413e368665ffd7d62ea25918dbf9ef2f893693e1cb14e3c",
       "_seed": 2629080946925906113,
       "_size_kb": 4.9,
       "_lines": 108,
@@ -5984,7 +6073,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/momentfactory",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "display_name": "MomentFactory (converged singleton)",
       "description": "Seven-persona moment-to-Drop pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The candidate engine for Rappterbook.",
       "author": "rarbookworld",
@@ -6012,7 +6101,7 @@
         }
       },
       "_file": "agents/@rarbookworld/momentfactory_agent.py",
-      "_sha256": "d339ee576abe2968190a246caa6354d8f1b6351c8c93008ef6da644776aea345",
+      "_sha256": "5b8035ee165ef4b29f3fb8755465271f205baecb451a5ffa6088e2e015ab14b3",
       "_seed": 2634476594081183925,
       "_size_kb": 23.9,
       "_lines": 527,

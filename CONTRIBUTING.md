@@ -3,30 +3,12 @@
 ## Quick Version
 
 ```
-1. Register your binder (one-time GitHub Issue)
-2. Write your agent: agents/@yourname/my_agent.py  ← single file, that's it
-3. Include: __manifest__ dict in the file
-4. Test:   python rapp_sdk.py test agents/@yourname/my_agent.py
-5. Submit: open a GitHub Issue with your code
-6. Wait for review → approval → card forged → you're in the registry
+1. Write your agent: agents/@yourname/my_agent.py  ← single file, that's it
+2. Include: __manifest__ dict in the file
+3. Test:   python rapp_sdk.py test agents/@yourname/my_agent.py
+4. Submit: open a GitHub Issue with your code
+5. Wait for review → approval → card forged → you're in the registry
 ```
-
----
-
-## Before You Start: Register Your Binder
-
-Submissions require a registered binder. Register once and you're set forever.
-
-Open a GitHub Issue on `kody-w/RAR`:
-
-**Title:** `[RAR] register_binder`
-
-**Body:**
-```json
-{"action": "register_binder", "payload": {"namespace": "@yourgithubusername"}}
-```
-
-Your binder can be public or private. The ledger only stores that you exist.
 
 ---
 
@@ -121,13 +103,12 @@ python build_registry.py  # must pass
 
 ## What Happens After Submission
 
-1. Pipeline checks your binder is registered
-2. Validates manifest, enforces snake_case, runs security scan
-3. Agent lands in `staging/` — NOT in the registry yet
-4. Issue labeled `pending-review` and stays open
-5. Admin reviews and adds `approved` label
-6. Agent moves to `agents/`, seed is forged from your manifest, card self-assembles
-7. Issue closed — your agent is in the registry with a permanent card identity
+1. Pipeline validates manifest, enforces snake_case, runs security scan
+2. Agent lands in `staging/` — NOT in the registry yet
+3. Issue labeled `pending-review` and stays open
+4. Admin reviews and adds `approved` label
+5. Agent moves to `agents/`, seed is forged from your manifest, card self-assembles
+6. Issue closed — your agent is in the registry with a permanent card identity
 
 **The forge decides your card.** You don't choose your types, stats, or abilities. The forge reads your manifest (category, tags, tier, dependencies) and computes the card deterministically.
 

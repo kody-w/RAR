@@ -70,7 +70,6 @@ header p{color:var(--dim);font-size:15px}
   <p>Every decision explained. If you're wondering "why?" — the answer is here.</p>
   <div class="nav-links">
     <a href="index.html">Agent Store</a>
-    <a href="binder.html">Binder</a>
     <a href="ode.html">The Ode</a>
     <a href="releases.html">Releases</a>
     <a href="https://github.com/kody-w/RAR">GitHub</a>
@@ -90,7 +89,6 @@ header p{color:var(--dim);font-size:15px}
     <li><a href="#snake-case">Why snake_case?</a></li>
     <li><a href="#staging">Why staging + review?</a></li>
     <li><a href="#forge">Who decides what a card looks like?</a></li>
-    <li><a href="#binder">What's a binder?</a></li>
     <li><a href="#federation">Can I run my own registry?</a></li>
     <li><a href="#offline">Does it work offline?</a></li>
     <li><a href="#submit">How do I submit an agent?</a></li>
@@ -156,7 +154,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>Why is there no server?</summary>
     <div class="answer">
       <p>Servers are single points of failure. They cost money. They require maintenance. They go down. They get acquired. They get shut down.</p>
-      <p>RAPP is static files on GitHub. The registry is a JSON file. The store is an HTML file. The binder runs in your browser with IndexedDB. <code>git clone</code> gives you everything. If GitHub disappeared tomorrow, every clone is a complete backup.</p>
+      <p>RAPP is static files on GitHub. The registry is a JSON file. The store is an HTML file. <code>git clone</code> gives you everything. If GitHub disappeared tomorrow, every clone is a complete backup.</p>
       <p>No server means no ops, no billing, no downtime, no vendor lock-in. The agent ecosystem outlives any company — including ours.</p>
     </div>
   </details>
@@ -236,23 +234,13 @@ header p{color:var(--dim);font-size:15px}
 
 <div class="cat">How It Works</div>
 
-<div class="section" id="binder">
-  <details>
-    <summary>What's a binder?</summary>
-    <div class="answer">
-      <p>Your binder is your personal card collection. It runs in your browser at <a href="binder.html" style="color:var(--acc)">binder.html</a>, stores your cards in IndexedDB (persists across sessions), and works completely offline.</p>
-      <p>You can also run your own binder as a GitHub repo — use RAPP as a template, enable GitHub Pages, and you get a live binder URL. Your unofficial agents live there. When you want to go official, submit upstream.</p>
-    </div>
-  </details>
-</div>
-
 <div class="section" id="offline">
   <details>
     <summary>Does it really work offline?</summary>
     <div class="answer">
       <p>Yes. Three levels of offline:</p>
       <p><strong>1. Seed resolution</strong> — always works offline. It's pure math. Type a seed number, see a card. No network ever.</p>
-      <p><strong>2. Cached binder</strong> — tap "Cache" once while you have signal. The entire registry and card database is stored in localStorage. Now you can browse all 133 agents in the woods with no signal.</p>
+      <p><strong>2. Cached store</strong> — tap "Cache" once while you have signal. The entire registry and card database is stored in localStorage. Now you can browse all 133 agents in the woods with no signal.</p>
       <p><strong>3. Git clone</strong> — <code>git clone</code> the repo and open <code>index.html</code> from your filesystem. Everything works from <code>file://</code>. No server. No internet. You have the entire registry.</p>
     </div>
   </details>
@@ -265,7 +253,7 @@ header p{color:var(--dim);font-size:15px}
       <p>Four ways, simplest first:</p>
       <p><strong>1. GitHub Issue</strong> — open an issue on kody-w/RAR with title <code>[AGENT] @yourname/my_agent</code> and paste your code in the body.</p>
       <p><strong>2. SDK</strong> — <code>python rapp_sdk.py submit my_agent.py</code></p>
-      <p><strong>3. Federation</strong> — from your own binder repo: <code>python scripts/federate.py submit @yourname/my_agent</code></p>
+      <p><strong>3. Federation</strong> — from your own RAR clone: <code>python scripts/federate.py submit @yourname/my_agent</code></p>
       <p><strong>4. Pull Request</strong> — fork, add your file to <code>agents/@yourname/</code>, run <code>python build_registry.py</code>, open PR.</p>
       <p>All paths land in <code>staging/</code> for review. Nothing enters the registry without admin approval.</p>
     </div>
@@ -311,7 +299,7 @@ header p{color:var(--dim);font-size:15px}
   <details>
     <summary>Can I run my own registry?</summary>
     <div class="answer">
-      <p>Yes. RAPP is a GitHub template repo. Click "Use this template," and you get your own registry with your own agents, your own binder, your own GitHub Pages URL.</p>
+      <p>Yes. RAPP is a GitHub template repo. Click "Use this template," and you get your own registry with your own agents and your own GitHub Pages URL.</p>
       <p>Your instance can operate independently or federate with the main registry. <code>python scripts/federate.py submit</code> sends your agents upstream for review. <code>federate.py sync --pull</code> downloads official agents into your local catalog.</p>
       <p>Your unofficial agents are yours. They work fine locally. When you want them officially forged, submit upstream. The community grows through grassroots — you don't need permission to start.</p>
     </div>
@@ -411,7 +399,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>What's the difference between USE and OWN?</summary>
     <div class="answer">
       <p><strong>USE is free forever.</strong> Anyone can use any agent. Download it, run it, modify it, build with it. No cost, no account, no restrictions.</p>
-      <p><strong>OWN is different.</strong> Owning a card means it's in your binder with your identity attached. Ownership is tracked on-chain. Transferring ownership is a transaction. This is the collectible layer — it doesn't affect usage.</p>
+      <p><strong>OWN is different.</strong> Owning a card means it's in your `agents/` directory with your identity attached. Ownership is tracked on-chain. Transferring ownership is a transaction. This is the collectible layer — it doesn't affect usage.</p>
       <p>Think of it like music: anyone can listen to a song for free. Owning the vinyl is something else.</p>
     </div>
   </details>
@@ -421,7 +409,7 @@ header p{color:var(--dim);font-size:15px}
   <details>
     <summary>Is it really free?</summary>
     <div class="answer">
-      <p>Using agents is free. Submitting agents is free. Running a binder is free. Browsing the store is free. Resolving cards from seeds is free. Everything in RAPP costs zero dollars to use.</p>
+      <p>Using agents is free. Submitting agents is free. Running your own instance is free. Browsing the store is free. Resolving cards from seeds is free. Everything in RAPP costs zero dollars to use.</p>
       <p>The code is MIT licensed. The registry runs on GitHub Pages (free). The automation runs on GitHub Actions (free for public repos). There is no premium tier, no paywall, no "contact sales."</p>
     </div>
   </details>
@@ -442,7 +430,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>What's RAPP vs RAR vs Rappter?</summary>
     <div class="answer">
       <p><strong>RAPP</strong> — the open-source agent framework and runtime. The foundation. Think of it as the engine.</p>
-      <p><strong>RAR</strong> — the RAPP Agent Registry. This repo. The package registry, the card system, the binder. Think of it as the app store.</p>
+      <p><strong>RAR</strong> — the RAPP Agent Registry. This repo. The package registry and the card system. Think of it as the app store.</p>
       <p><strong>Rappter</strong> — the brand. Curates cards, releases, and artists. Think of it as the publisher.</p>
       <p>RAPP is the technology. RAR is the distribution. Rappter is the experience.</p>
     </div>
@@ -493,7 +481,7 @@ header p{color:var(--dim);font-size:15px}
     <summary>How do I get involved?</summary>
     <div class="answer">
       <p><strong>Submit an agent.</strong> Write a single <code>.py</code> file. Open a GitHub Issue. That's it.</p>
-      <p><strong>Run a binder.</strong> Use RAPP as a template. Build your collection. Federate when ready.</p>
+      <p><strong>Run your own instance.</strong> Use RAPP as a template. Build your collection. Federate when ready.</p>
       <p><strong>Spread the word.</strong> Share agent seeds. Send someone a card. Show them <a href="ode.html" style="color:var(--acc)">why this matters</a>.</p>
       <p>Your namespace is <code>@yourgithubusername</code>. It's yours forever. Start building.</p>
     </div>
@@ -502,7 +490,7 @@ header p{color:var(--dim);font-size:15px}
 
 <div class="footer">
   <p>RAPP — the RAPP Agent Registry</p>
-  <p style="margin-top:4px"><a href="index.html">Store</a> &middot; <a href="binder.html">Binder</a> &middot; <a href="ode.html">The Ode</a> &middot; <a href="releases.html">Releases</a> &middot; <a href="https://github.com/kody-w/RAR">GitHub</a></p>
+  <p style="margin-top:4px"><a href="index.html">Store</a> &middot; <a href="ode.html">The Ode</a> &middot; <a href="releases.html">Releases</a> &middot; <a href="https://github.com/kody-w/RAR">GitHub</a></p>
 </div>
 
 </div>

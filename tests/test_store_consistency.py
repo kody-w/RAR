@@ -88,9 +88,9 @@ def test_collector_mode_gallery_effects():
     assert "--shadow-x" in html
     assert "collectorCardIn" in html
 
-def test_collector_mode_binder_value():
-    """Collector mode must show Binder value."""
-    assert "showntell-btc" in html or "Binder Value" in html
+def test_collector_mode_identity_value():
+    """Collector mode must show Identity value."""
+    assert "showntell-btc" in html or "Identity Value" in html
 
 def test_collector_mode_chain_ownership():
     """Collector mode must show chain ownership status."""

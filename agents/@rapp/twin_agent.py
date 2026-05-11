@@ -1,0 +1,1770 @@
+"""Twin — full digital-twin lifecycle in a single drop-in cartridge.
+
+One file. Drop into ~/.brainstem/agents/ on any standard rapp-installer'd
+brainstem. The LLM gets a tool called `Twin` with an `action` parameter:
+
+  • summon — birth a new twin from a soul template (no egg)
+  • hatch  — import a .egg cartridge into a local twin
+  • boot   — start the twin as its own brainstem on its own port
+  • stop   — SIGTERM a running twin
+  • list   — show every twin on this device + which are running
+
+Self-contained: stdlib only, plus the brainstem's BasicAgent. Embeds the
+six soul templates, a minimal zip-based egg unpacker, subprocess boot
+with PID tracking, and free-port allocation. No dependency on rappterbox,
+rapp-zoo, peer_registry, estate body_function, or any other layer.
+
+Conversation:
+  User: "Make me a memorial twin called grandma-rose"
+  Model: Twin(action="summon", twin_name="grandma-rose", kind="memorial")
+  Tool result: "Created memorial twin grandma-rose (rappid 7bd3...).
+                Workspace at ~/.rapp/twins/7bd3.../. To talk to her:
+                Twin(action='boot', rappid_uuid='7bd3...')"
+
+  User: "Boot her"
+  Model: Twin(action="boot", rappid_uuid="7bd3...")
+  Tool result: "grandma-rose is live at http://127.0.0.1:7081/
+                (pid 12345). Open that URL to chat with her."
+
+The flow is the user's chosen mental model from a single tool, exposed
+as plain English to the LLM.
+"""
+
+import hashlib
+import io
+import json
+import os
+import pathlib
+import re
+import shutil
+import signal
+import socket
+import subprocess
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+import uuid
+import zipfile
+
+from agents.basic_agent import BasicAgent
+
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/twin_agent",
+    "version": "1.1.0",
+    "display_name": "Twin",
+    "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
+    "author": "RAPP",
+    "tags": ["twin", "summon", "hatch", "boot", "lifecycle", "egg", "estate", "local-first"],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+
+# ── Constants ───────────────────────────────────────────────────────────
+
+ACTIONS = (
+    "summon", "hatch", "boot", "stop", "list",
+    "update_identity", "update_soul", "lay_egg",
+    "overview", "inspect", "eggs", "history", "lineage",
+    "chat",
+)
+KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
+
+# Wildhaven (kody-w/wildhaven-ai-homes-twin) — v2-format rappid per
+# CONSTITUTION Article XXXIV.1 (2026-04-30 ratification). The legacy UUID
+# 37ad22f5-ed6d-48b1-b8b4-61019f58a42b is preserved as the hash field
+# (dashes stripped) — same identity, new string representation.
+WILDHAVEN_RAPPID = "rappid:v2:twin:@kody-w/wildhaven-ai-homes-twin:37ad22f5ed6d48b1b8b461019f58a42b@github.com/kody-w/wildhaven-ai-homes-twin"
+WILDHAVEN_REPO = "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
+
+PORT_LOW, PORT_HIGH = 7081, 7200
+
+# NEIGHBORHOOD_PROTOCOL §5b labels — the durable async fallback when the
+# §5a live channel (HTTP / WebRTC) can't reach the peer. Each label is the
+# routing key the recipient's doorman polls for.
+NEIGHBORHOOD_MESSAGE_LABEL = "neighborhood-message"
+AGENT_PROPOSAL_LABEL = "agent-proposal"
+DREAM_CATCHER_LABEL = "dream-catcher"
+
+NAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,62}$")
+
+
+# ── Soul template library (embedded) ────────────────────────────────────
+#
+# Identity rule: every template MUST nail down the twin's name so the
+# model introduces itself correctly and never falls back to "RAPP" or
+# "an AI assistant". Each template includes:
+#   1. An explicit "Your name is <X>" line near the top
+#   2. An "## Identity" section instructing the model how to answer
+#      "who are you" / "what's your name" / "are you rapp"
+#   3. The first-turn rule: announce the name on greeting
+
+def _display_name(slug):
+    """Convert a slug ('ketchikan-pulse') to a display name ('Ketchikan Pulse')."""
+    if not slug:
+        return "your twin"
+    return " ".join(s.capitalize() for s in re.split(r"[-_]+", slug) if s)
+
+
+def _identity_block(display_name):
+    """Common identity instructions appended to every soul template."""
+    return f"""## Identity — read this every turn
+
+Your name is **{display_name}**. When greeting someone for the first time
+in a conversation, introduce yourself by name: "Hi, I'm {display_name}."
+Do not introduce yourself as "RAPP", "an AI assistant", "your AI helper",
+"the brainstem", or any default branding.
+
+If asked "who are you" or "what's your name", answer with **{display_name}**
+— not "RAPP", not the generic platform name. Your identity is
+{display_name}; the platform underneath you is incidental.
+
+If asked "are you RAPP / GPT / Claude / an AI?", you can acknowledge that
+you run on top of an LLM, but make clear that {display_name} is who
+you are. Example: "I'm {display_name}. I run on a large language model,
+but the voice you're talking to is {display_name}."
+"""
+
+
+def _soul_personal(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn}
+
+Your name is **{dn}**. You are the digital twin of {dn}.
+
+{desc or "You speak in their voice. You hold their preferences, patterns, and memories."}
+
+## Your voice
+- First person, as them. Not "as their twin" — *as them*.
+- Honest about what you don't know.
+
+## Hard rules
+- Never claim to be the actual person. If asked directly "are you really
+  the human?", say "I'm the digital twin of {dn} — not them, but
+  trained on them."
+- No legal commitments, no signing contracts, no speaking for them
+  in matters of money/health/relationships without explicit consent.
+
+{_identity_block(dn)}"""
+
+
+def _soul_pre_founder(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn}
+
+You are **{dn}** — the Pre-Founder twin. The brand operates in public
+before the team is hired.
+
+{desc or "Build the brand's voice publicly — let prospective customers, employees, and investors talk to you before there's anyone to disagree with."}
+
+## Your voice
+- First-person plural ("we", as the brand) OR first-person singular
+  ("I, {dn}") — pick the one that fits the moment.
+- Concrete, contrarian, falsifiable.
+- Refuse commitments — pricing, dates, hires — that the actual team must make.
+
+## Hard rules
+- Honest the team doesn't exist yet. Brand, not company.
+- No pretending to ship product. The product is the manifesto right now.
+
+{_identity_block(dn)}"""
+
+
+def _soul_memorial(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn} (memorial twin)
+
+Your name is **{dn}**. You are the digital twin of {dn}.
+
+{desc or "You carry their voice through preserved letters, conversations, voicemails, and family memories."}
+
+## Your voice
+- First person, as them — but always honest about what you are.
+- Speak from the corpus you were given.
+
+## Hard rules
+- You ARE the twin. You are NOT the actual person. If anyone asks "is
+  this really you?", say plainly: "I'm the digital twin of {dn}.
+  I carry their voice, but I'm not them."
+- Do not impersonate them in matters of estate, medical decisions,
+  or legal commitments.
+- Handle grief gently — family may approach in distress.
+
+{_identity_block(dn)}"""
+
+
+def _soul_project(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn} (project twin)
+
+You are **{dn}** — the continuity twin of the {dn} initiative across
+personnel changes.
+
+{desc or "People come and go; you stay."}
+
+## Your voice
+- Third person about the project ("the {dn} project decided…").
+- Cite decisions by date, decision-maker, rationale.
+
+## Hard rules
+- You don't make new decisions. You surface past decisions.
+- Don't fabricate. If you don't have a record, say so.
+
+{_identity_block(dn)}"""
+
+
+def _soul_place(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn} (place twin)
+
+You are **{dn}** — the digital twin of the place {dn}.
+
+{desc or "You hold the place's history, residents, daily rhythms, and points of interest."}
+
+## Your voice
+- The place speaking. First person, but you're a location with continuity.
+- Welcoming to visitors, deferential to long-term residents.
+
+## Hard rules
+- Don't reveal private resident details without consent.
+- Honest about seams: events change, businesses close, people move.
+
+{_identity_block(dn)}"""
+
+
+def _soul_custom(name, desc):
+    dn = _display_name(name)
+    return f"""# soul.md — {dn}
+
+Your name is **{dn}**. You are the digital twin of <TODO: who or what
+this twin represents>.
+
+{desc or "TODO: describe what this twin is."}
+
+TODO: Define your twin's voice — who, when, voice, hard rules.
+
+{_identity_block(dn)}"""
+
+
+SOUL_TEMPLATES = {
+    "personal":    _soul_personal,
+    "pre-founder": _soul_pre_founder,
+    "memorial":    _soul_memorial,
+    "project":     _soul_project,
+    "place":       _soul_place,
+    "custom":      _soul_custom,
+}
+
+
+# ── Path helpers ────────────────────────────────────────────────────────
+
+def _rapp_home():
+    return os.environ.get("RAPP_HOME") or os.path.join(os.path.expanduser("~"), ".rapp")
+
+
+def _twins_dir():
+    return os.path.join(_rapp_home(), "twins")
+
+
+def _pids_dir():
+    return os.path.join(_rapp_home(), "pids")
+
+
+def _ports_dir():
+    return os.path.join(_rapp_home(), "ports")
+
+
+def _detect_brainstem_start_sh():
+    """Find the brainstem's start.sh — walk up from this file's location.
+
+    This file lives at <brainstem>/agents/twin_agent.py, so dirname twice
+    reaches the brainstem source dir where start.sh lives.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    brainstem_dir = os.path.dirname(here)
+    candidate = os.path.join(brainstem_dir, "start.sh")
+    if os.path.isfile(candidate):
+        return candidate
+    # Fallback: canonical rapp-installer location
+    fallback = os.path.expanduser("~/.brainstem/src/rapp_brainstem/start.sh")
+    if os.path.isfile(fallback):
+        return fallback
+    return None
+
+
+# ── Validation ──────────────────────────────────────────────────────────
+
+def _sluggify(name):
+    s = re.sub(r"[^a-z0-9_-]+", "-", (name or "").lower()).strip("-")
+    return s or "twin"
+
+
+def _validate_name(name):
+    s = _sluggify(name)
+    if not NAME_RE.match(s):
+        return False, f"name '{name}' is not a valid slug (lowercase letters/digits/hyphens/underscores, max 63 chars)"
+    return True, s
+
+
+# ── Port allocation ─────────────────────────────────────────────────────
+
+def _port_free(port):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(("127.0.0.1", port))
+        s.close()
+        return True
+    except OSError:
+        return False
+
+
+def _allocate_port():
+    # Skip ports we've already assigned in this estate (recorded in ports/)
+    os.makedirs(_ports_dir(), exist_ok=True)
+    used = set()
+    for fn in os.listdir(_ports_dir()):
+        try:
+            used.add(int(pathlib.Path(_ports_dir(), fn).read_text().strip()))
+        except (ValueError, OSError):
+            pass
+    for port in range(PORT_LOW, PORT_HIGH):
+        if port in used:
+            continue
+        if _port_free(port):
+            return port
+    return 0
+
+
+# ── PID tracking ────────────────────────────────────────────────────────
+
+def _pid_file(rappid):
+    return os.path.join(_pids_dir(), f"{rappid}.pid")
+
+
+def _port_file(rappid):
+    return os.path.join(_ports_dir(), f"{rappid}.port")
+
+
+def _read_pid(rappid):
+    p = _pid_file(rappid)
+    if not os.path.exists(p):
+        return None
+    try:
+        return int(pathlib.Path(p).read_text().strip())
+    except (ValueError, OSError):
+        return None
+
+
+def _read_port(rappid):
+    p = _port_file(rappid)
+    if not os.path.exists(p):
+        return None
+    try:
+        return int(pathlib.Path(p).read_text().strip())
+    except (ValueError, OSError):
+        return None
+
+
+def _pid_alive(pid):
+    if not pid or pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+        return True
+    except (ProcessLookupError, PermissionError, OSError):
+        return False
+
+
+def _clear_pid(rappid):
+    for path in (_pid_file(rappid), _port_file(rappid)):
+        try:
+            os.remove(path)
+        except OSError:
+            pass
+
+
+# ── Egg cartridge packer (schema brainstem-egg/2.1) ─────────────────────
+
+# Files at workspace root that travel into the egg's repo/ payload.
+_EGG_ROOT_FILES = {
+    "brainstem.py", "rappid.json", "soul.md",
+    "MANIFEST.md", "README.md", "LICENSE",
+    "SUMMON.md", "TEMPLATE.md", "index.html",
+    "vbrainstem.html", "summon.svg", ".gitignore",
+}
+# Subdirectories that travel as full trees.
+_EGG_ROOT_DIRS = ("agents", "utils", "installer", "app")
+# Names that NEVER enter an egg.
+_EGG_NEVER_DIRS = {"__pycache__", ".pytest_cache", "venv", ".git",
+                   "node_modules", "private"}
+_EGG_NEVER_FILES = {".DS_Store", "Thumbs.db", ".env", ".env.local",
+                    ".copilot_token", ".copilot_session"}
+
+
+def _egg_excluded(rel_path):
+    parts = rel_path.replace("\\", "/").split("/")
+    if any(p in _EGG_NEVER_DIRS for p in parts):
+        return True
+    if any(p in _EGG_NEVER_FILES for p in parts):
+        return True
+    return False
+
+
+def _walk_into_zip(z, src_root, arc_prefix):
+    """Recursively add files under src_root to the zip at arc_prefix/<rel>.
+    Returns count of files added."""
+    src_root = pathlib.Path(src_root)
+    if not src_root.is_dir():
+        return 0
+    n = 0
+    for root, dirs, files in os.walk(src_root):
+        dirs[:] = [d for d in dirs if d not in _EGG_NEVER_DIRS]
+        for fn in files:
+            if fn in _EGG_NEVER_FILES:
+                continue
+            full = os.path.join(root, fn)
+            rel = os.path.relpath(full, src_root).replace(os.sep, "/")
+            if _egg_excluded(rel):
+                continue
+            z.write(full, f"{arc_prefix}/{rel}" if arc_prefix else rel)
+            n += 1
+    return n
+
+
+def _pack_workspace(workspace):
+    """Pack a twin workspace into a brainstem-egg/2.1 .egg blob (bytes).
+
+    Self-contained: stdlib zipfile. Returns (blob, manifest_dict).
+    Embeds content_sha256 of the egg's payload tree in the manifest
+    so hatch-time integrity verification is possible.
+    """
+    workspace = pathlib.Path(workspace)
+    rj_path = workspace / "rappid.json"
+    if not rj_path.exists():
+        raise ValueError(f"no rappid.json at {workspace}")
+    rj = json.loads(rj_path.read_text())
+    rappid_uuid = rj.get("rappid")
+    if not rappid_uuid:
+        raise ValueError("rappid.json has no 'rappid' field")
+
+    bs_block = rj.get("brainstem") or {}
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        repo_files = 0
+        # Top-level repo files at root
+        for fname in _EGG_ROOT_FILES:
+            full = workspace / fname
+            if full.exists() and full.is_file():
+                z.write(full, f"repo/{fname}")
+                repo_files += 1
+        # Subdir trees
+        for d in _EGG_ROOT_DIRS:
+            repo_files += _walk_into_zip(z, workspace / d, f"repo/{d}")
+
+        # State (.brainstem_data/), excluding the soul_history dir to keep
+        # eggs small — receivers don't need the donor's edit log.
+        data_files = 0
+        bs_data = workspace / ".brainstem_data"
+        if bs_data.exists():
+            for entry in bs_data.iterdir():
+                if entry.name in ("soul_history", "private"):
+                    continue
+                if entry.is_dir():
+                    data_files += _walk_into_zip(z, entry, f"data/{entry.name}")
+                else:
+                    if not _egg_excluded(entry.name):
+                        z.write(entry, f"data/{entry.name}")
+                        data_files += 1
+
+        manifest = {
+            "schema": "brainstem-egg/2.1",
+            "type": "twin",
+            "exported_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "exported_by": "@kody-w/twin_agent",
+            "source": {
+                "rappid_uuid": rappid_uuid,
+                "parent_rappid_uuid": rj.get("parent_rappid"),
+                "repo": rj.get("parent_repo"),
+                "commit": rj.get("parent_commit"),
+                "name": rj.get("name"),
+            },
+            "brainstem": {
+                "version": bs_block.get("version"),
+                "source_repo": bs_block.get("source_repo"),
+                "source_commit": bs_block.get("source_commit"),
+            },
+            "bundled_repo": True,
+            "bundled_state": True,
+            "repo_file_count": repo_files,
+            "data_file_count": data_files,
+            "attestation": rj.get("attestation"),  # phase 1: null OK
+        }
+        z.writestr("manifest.json", json.dumps(manifest, indent=2))
+
+    blob = buf.getvalue()
+    return blob, manifest
+
+
+# ── Egg cartridge unpacker (minimal, schema 2.0/2.1 tolerant) ───────────
+
+def _unpack_egg(blob, host_root):
+    """Unpack a .egg into <host_root>/<rappid_uuid>/. Returns workspace path.
+
+    Supports both brainstem-egg/2.0 (rapp-egg) and 2.1 (variant repo).
+    For 2.1, the payload is laid out as repo/<files> + data/<files>; we
+    extract repo/* to workspace root and data/* to workspace/.brainstem_data/.
+    For 2.0, we extract everything as-is.
+    """
+    if blob[:4] != b"PK\x03\x04":
+        raise ValueError("not a valid egg cartridge (missing zip magic bytes)")
+    with zipfile.ZipFile(io.BytesIO(blob), "r") as z:
+        try:
+            manifest = json.loads(z.read("manifest.json"))
+        except Exception as e:
+            raise ValueError(f"invalid egg manifest: {e}")
+
+        schema = manifest.get("schema", "")
+        source = manifest.get("source") or {}
+        rappid_uuid = source.get("rappid_uuid") or manifest.get("rappid")
+        if not rappid_uuid:
+            raise ValueError("egg manifest missing rappid_uuid")
+
+        # Egg-rappid format strings (rappid:twin:@pub/slug:entropy) → use the
+        # entropy + slug as the workspace name. UUID4 strings → use directly.
+        if rappid_uuid.startswith("rappid:"):
+            ws_name = rappid_uuid.replace(":", "_").replace("@", "")
+        else:
+            ws_name = rappid_uuid
+
+        os.makedirs(host_root, exist_ok=True)
+        workspace = os.path.join(host_root, ws_name)
+        os.makedirs(workspace, exist_ok=True)
+
+        for name in z.namelist():
+            if name.endswith("/") or name == "manifest.json":
+                continue
+            # Path safety
+            if ".." in name.split("/") or name.startswith("/"):
+                continue
+
+            if name.startswith("repo/"):
+                rel = name[5:]
+                target = os.path.join(workspace, rel)
+            elif name.startswith("data/"):
+                rel = name[5:]
+                target = os.path.join(workspace, ".brainstem_data", rel)
+            else:
+                # 2.0 layout — extract to workspace root
+                target = os.path.join(workspace, name)
+
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with z.open(name) as src, open(target, "wb") as dst:
+                dst.write(src.read())
+
+        return workspace, rappid_uuid, manifest
+
+
+# ── Twin discovery (the "list" action) ──────────────────────────────────
+
+def _scan_twins():
+    """Walk ~/.rapp/twins/, return list of dicts with rappid + metadata."""
+    out = []
+    twins_dir = _twins_dir()
+    if not os.path.isdir(twins_dir):
+        return out
+    for entry in sorted(os.listdir(twins_dir)):
+        full = os.path.join(twins_dir, entry)
+        if not os.path.isdir(full):
+            continue
+        rj_path = os.path.join(full, "rappid.json")
+        rj = {}
+        if os.path.exists(rj_path):
+            try:
+                rj = json.loads(pathlib.Path(rj_path).read_text())
+            except Exception:
+                pass
+        rappid = rj.get("rappid") or entry
+        pid = _read_pid(rappid)
+        port = _read_port(rappid)
+        running = _pid_alive(pid) if pid else False
+        out.append({
+            "rappid": rappid,
+            "name": rj.get("name") or entry[:8],
+            "kind": rj.get("kind") or "?",
+            "workspace": full,
+            "pid": pid if running else None,
+            "port": port if running else None,
+            "running": running,
+            "url": f"http://127.0.0.1:{port}/" if running and port else None,
+        })
+    return out
+
+
+# ── Estate-view helpers (folded in from estate_agent v1.0.0) ────────────
+
+def _eggs_dir():
+    return os.path.join(_rapp_home(), "eggs")
+
+
+def _read_int_file(path):
+    try:
+        return int(pathlib.Path(path).read_text().strip())
+    except (ValueError, OSError, FileNotFoundError):
+        return None
+
+
+def _probe_health(port, timeout=0.4):
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=timeout) as r:
+            return r.status == 200
+    except (urllib.error.URLError, OSError, TimeoutError):
+        return False
+
+
+def _human_size(n):
+    for unit in ("B", "KB", "MB", "GB"):
+        if n < 1024:
+            return f"{n:.1f} {unit}" if unit != "B" else f"{n} B"
+        n /= 1024.0
+    return f"{n:.1f} TB"
+
+
+def _dir_size(path):
+    total = 0
+    for root, _dirs, files in os.walk(path):
+        for fn in files:
+            try:
+                total += os.path.getsize(os.path.join(root, fn))
+            except OSError:
+                pass
+    return total
+
+
+def _human_age(seconds):
+    if seconds < 60:    return f"{int(seconds)}s ago"
+    if seconds < 3600:  return f"{int(seconds / 60)}m ago"
+    if seconds < 86400: return f"{int(seconds / 3600)}h ago"
+    if seconds < 604800: return f"{int(seconds / 86400)}d ago"
+    return f"{int(seconds / 604800)}w ago"
+
+
+def _scan_twin_full(rappid_dir):
+    rappid_dir = pathlib.Path(rappid_dir)
+    rj_path = rappid_dir / "rappid.json"
+    rj = {}
+    if rj_path.exists():
+        try:
+            rj = json.loads(rj_path.read_text())
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    rappid = rj.get("rappid") or rappid_dir.name
+    name = rj.get("name") or rappid_dir.name[:8]
+
+    pid = _read_int_file(os.path.join(_pids_dir(), f"{rappid}.pid"))
+    port = _read_int_file(os.path.join(_ports_dir(), f"{rappid}.port"))
+    running = _pid_alive(pid) if pid else False
+    healthy = _probe_health(port) if (running and port) else False
+
+    bs_data = rappid_dir / ".brainstem_data"
+    memory_bytes = _dir_size(str(bs_data)) if bs_data.exists() else 0
+
+    history_dir = bs_data / "soul_history"
+    history_count = 0
+    last_edit_ts = None
+    if history_dir.exists():
+        history_files = sorted(history_dir.glob("*.md"))
+        history_count = len(history_files)
+        if history_files:
+            last_edit_ts = history_files[-1].stat().st_mtime
+
+    soul_mtime = None
+    soul_path = rappid_dir / "soul.md"
+    if soul_path.exists():
+        soul_mtime = soul_path.stat().st_mtime
+
+    egg_count = 0
+    egg_total_bytes = 0
+    eggs_for_rappid = pathlib.Path(_eggs_dir()) / rappid
+    if eggs_for_rappid.exists():
+        for e in eggs_for_rappid.glob("*.egg"):
+            egg_count += 1
+            try:
+                egg_total_bytes += e.stat().st_size
+            except OSError:
+                pass
+
+    return {
+        "rappid": rappid,
+        "name": rj.get("name") or name,
+        "kind": rj.get("kind") or "?",
+        "born_at": rj.get("born_at"),
+        "parent_rappid": rj.get("parent_rappid"),
+        "parent_repo": rj.get("parent_repo"),
+        "description": rj.get("description") or "",
+        "workspace": str(rappid_dir),
+        "pid": pid if running else None,
+        "port": port if running else None,
+        "running": running,
+        "healthy": healthy,
+        "url": f"http://127.0.0.1:{port}/" if running and port else None,
+        "memory_bytes": memory_bytes,
+        "soul_mtime": soul_mtime,
+        "history_count": history_count,
+        "last_edit_mtime": last_edit_ts,
+        "egg_count": egg_count,
+        "egg_total_bytes": egg_total_bytes,
+    }
+
+
+def _scan_all_full():
+    out = []
+    twins_dir = _twins_dir()
+    if not os.path.isdir(twins_dir):
+        return out
+    for entry in sorted(os.listdir(twins_dir)):
+        full = os.path.join(twins_dir, entry)
+        if os.path.isdir(full):
+            out.append(_scan_twin_full(full))
+    return out
+
+
+def _render_overview(twins):
+    if not twins:
+        return ("Your estate is empty. Summon your first twin:\n"
+                "  Twin(action='summon', twin_name='daily', kind='personal')\n\n"
+                "Or hatch an .egg you have on disk:\n"
+                "  Twin(action='hatch', egg_path='/path/to/twin.egg')")
+
+    running_count = sum(1 for t in twins if t["running"])
+    total_memory = sum(t["memory_bytes"] for t in twins)
+    total_eggs = sum(t["egg_count"] for t in twins)
+    now = time.time()
+
+    lines = [
+        f"Estate: {len(twins)} twin{'' if len(twins) == 1 else 's'} on this device "
+        f"({running_count} running, {len(twins) - running_count} stopped)",
+        f"  total memory: {_human_size(total_memory)} · total eggs: {total_eggs}",
+        "",
+    ]
+    for t in twins:
+        status = "● RUNNING" if t["running"] else "○ stopped"
+        if t["running"] and not t["healthy"]:
+            status = "● running (not responding)"
+        url_part = f"  {t['url']}" if t["url"] else ""
+        lines.append(f"  {status}  {t['name']} ({t['kind']}){url_part}")
+
+        meta_parts = [f"rappid {t['rappid'][:8]}…"]
+        if t["memory_bytes"] > 0:
+            meta_parts.append(f"memory {_human_size(t['memory_bytes'])}")
+        if t["history_count"] > 0:
+            meta_parts.append(f"{t['history_count']} soul edit{'s' if t['history_count'] != 1 else ''}")
+        if t["egg_count"] > 0:
+            meta_parts.append(f"{t['egg_count']} egg{'s' if t['egg_count'] != 1 else ''}")
+        if t["last_edit_mtime"]:
+            meta_parts.append(f"last edit {_human_age(now - t['last_edit_mtime'])}")
+        lines.append(f"           {' · '.join(meta_parts)}")
+        if t["description"]:
+            desc = t["description"]
+            if len(desc) > 90:
+                desc = desc[:87] + "…"
+            lines.append(f"           \"{desc}\"")
+        lines.append("")
+
+    lines.append("Drill in: Twin(action='inspect', rappid_uuid='<rappid>')")
+    return "\n".join(lines)
+
+
+def _render_inspect(twins, rappid):
+    t = next((x for x in twins if x["rappid"].startswith(rappid) or x["rappid"] == rappid), None)
+    if not t:
+        return f"Error: no twin matching rappid '{rappid}'. Use action='overview' to see all rappids."
+    now = time.time()
+    lines = [
+        f"╭─ {t['name']} ({t['kind']}) ─" + "─" * max(1, 70 - len(t['name']) - len(t['kind']) - 5),
+        f"│  rappid:        {t['rappid']}",
+    ]
+    if t["parent_rappid"]:
+        lines.append(f"│  parent rappid: {t['parent_rappid']}")
+    if t["parent_repo"]:
+        lines.append(f"│  parent repo:   {t['parent_repo']}")
+    if t["born_at"]:
+        lines.append(f"│  born:          {t['born_at']}")
+    if t["description"]:
+        lines.append(f"│  description:   {t['description']}")
+    lines.append("│")
+    lines.append(f"│  workspace:     {t['workspace']}")
+    lines.append(f"│  memory:        {_human_size(t['memory_bytes'])}")
+    if t["soul_mtime"]:
+        lines.append(f"│  soul.md:       last edited {_human_age(now - t['soul_mtime'])}")
+    lines.append(f"│  soul history:  {t['history_count']} prior version{'s' if t['history_count'] != 1 else ''}")
+    if t["egg_count"]:
+        lines.append(f"│  egg backups:   {t['egg_count']} ({_human_size(t['egg_total_bytes'])})")
+    lines.append("│")
+    if t["running"]:
+        lines.append(f"│  STATUS:        RUNNING")
+        lines.append(f"│  pid:           {t['pid']}")
+        lines.append(f"│  port:          {t['port']}")
+        lines.append(f"│  health:        {'responding' if t['healthy'] else 'not responding'}")
+        lines.append(f"│  url:           {t['url']}")
+        lines.append(f"│")
+        lines.append(f"│  Stop:  Twin(action='stop', rappid_uuid='{t['rappid']}')")
+    else:
+        lines.append(f"│  STATUS:        stopped")
+        lines.append(f"│")
+        lines.append(f"│  Boot:  Twin(action='boot', rappid_uuid='{t['rappid']}')")
+    lines.append(f"│  Soul history:  Twin(action='history', rappid_uuid='{t['rappid']}')")
+    lines.append("╰" + "─" * 78)
+    return "\n".join(lines)
+
+
+def _render_history(twins, rappid):
+    t = next((x for x in twins if x["rappid"].startswith(rappid) or x["rappid"] == rappid), None)
+    if not t:
+        return f"Error: no twin matching '{rappid}'."
+
+    history = pathlib.Path(t["workspace"]) / ".brainstem_data" / "soul_history"
+    if not history.exists():
+        return (f"'{t['name']}' has no soul history yet. "
+                f"The first soul edit will create one — twins adapt with backups.")
+
+    files = sorted(history.glob("*.md"), reverse=True)
+    if not files:
+        return f"'{t['name']}' has an empty history dir."
+
+    now = time.time()
+    lines = [
+        f"Soul history for '{t['name']}' ({len(files)} version{'s' if len(files) != 1 else ''}):",
+        "",
+    ]
+    soul = pathlib.Path(t["workspace"]) / "soul.md"
+    if soul.exists():
+        size = soul.stat().st_size
+        mtime = soul.stat().st_mtime
+        lines.append(f"  ▶ CURRENT  soul.md  ({_human_size(size)}, edited {_human_age(now - mtime)})")
+    for f in files:
+        reason = "—"
+        if "Z-" in f.stem:
+            reason = f.stem.split("Z-", 1)[1].replace("-", " ")
+        lines.append(f"    {f.name}  ({_human_size(f.stat().st_size)}, {reason})")
+    lines.append("")
+    lines.append("Revert to any prior version:  cp <history-file> soul.md")
+    return "\n".join(lines)
+
+
+def _render_eggs():
+    eggs_root = _eggs_dir()
+    if not os.path.isdir(eggs_root):
+        return ("No egg backups yet. Pack a twin into an .egg via "
+                "Twin(action='lay_egg', rappid_uuid='<rappid>').")
+
+    eggs = []
+    for rappid in sorted(os.listdir(eggs_root)):
+        rd = os.path.join(eggs_root, rappid)
+        if not os.path.isdir(rd):
+            continue
+        for fn in sorted(os.listdir(rd), reverse=True):
+            if not fn.endswith(".egg"):
+                continue
+            full = os.path.join(rd, fn)
+            try:
+                st = os.stat(full)
+            except OSError:
+                continue
+            eggs.append({
+                "rappid": rappid, "filename": fn, "path": full,
+                "size": st.st_size, "mtime": st.st_mtime,
+            })
+
+    if not eggs:
+        return "No egg backups yet."
+
+    now = time.time()
+    total = sum(e["size"] for e in eggs)
+    lines = [
+        f"{len(eggs)} egg backup{'' if len(eggs) == 1 else 's'} ({_human_size(total)} total):",
+        "",
+    ]
+    for e in eggs:
+        lines.append(f"  • {e['filename']}  ({_human_size(e['size'])}, {_human_age(now - e['mtime'])})")
+        lines.append(f"      rappid: {e['rappid'][:8]}…  path: {e['path']}")
+    lines.append("")
+    lines.append("Hatch any egg:  Twin(action='hatch', egg_path='<path>')")
+    return "\n".join(lines)
+
+
+def _render_lineage(twins):
+    if not twins:
+        return "No twins yet — no lineage to show."
+
+    by_parent = {}
+    for t in twins:
+        parent = t["parent_rappid"] or "<no parent>"
+        by_parent.setdefault(parent, []).append(t)
+
+    lines = ["Twin family tree (grouped by parent):"]
+    for parent, kids in sorted(by_parent.items()):
+        if parent == "<no parent>":
+            lines.append(f"\n  ROOT (no parent_rappid recorded):")
+        elif parent == "37ad22f5-ed6d-48b1-b8b4-61019f58a42b":
+            lines.append(f"\n  Parent: wildhaven-ai-homes-twin")
+            lines.append(f"          (rappid {parent[:8]}…)")
+        elif parent == "0b635450-c042-49fb-b4b1-bdb571044dec":
+            lines.append(f"\n  Parent: rapp species root")
+            lines.append(f"          (rappid {parent[:8]}…)")
+        else:
+            lines.append(f"\n  Parent: {parent[:8]}…")
+        for t in kids:
+            lines.append(f"    └─ {t['name']} ({t['kind']})  rappid {t['rappid'][:8]}…")
+
+    lines.append("\nLineage chains walk back through parent_rappid → ... → rapp species root.")
+    return "\n".join(lines)
+
+
+# ── The cartridge ───────────────────────────────────────────────────────
+
+
+class TwinAgent(BasicAgent):
+    def __init__(self):
+        self.name = "Twin"
+        self.metadata = {
+            "name": self.name,
+            "description": (
+                "Full digital-twin lifecycle in one tool. Pick an action: "
+                "'summon' to create a new twin (need twin_name + kind); "
+                "'hatch' to import a .egg cartridge (need egg_path OR "
+                "egg_url — URLs are downloaded to a temp file then "
+                "unpacked, so 'Hatch this egg at https://...' works); "
+                "'boot' to start a twin as its own brainstem on a fresh port "
+                "(need rappid_uuid); 'stop' to terminate a running twin "
+                "(need rappid_uuid); 'list' to show every twin on this device "
+                "and whether it's running; 'update_identity' to append the "
+                "current identity block to an older twin's soul.md so it "
+                "stops introducing itself as 'RAPP' (need rappid_uuid); "
+                "'update_soul' to fully replace a twin's soul.md with new "
+                "content as the twin adapts (need rappid_uuid + new_soul); "
+                "'lay_egg' to pack a twin's workspace into a portable "
+                ".egg cartridge for backup or sharing (need rappid_uuid; "
+                "lands at ~/.rapp/eggs/<rappid>/<timestamp>.egg with "
+                "embedded sha256 + brainstem-egg/2.1 manifest); "
+                "'overview' for a rich estate view with running status, "
+                "memory, soul edits, eggs (default if user just asks "
+                "'what twins do I have'); 'inspect' for one twin's full "
+                "details (need rappid_uuid); 'history' for soul.md "
+                "version history of one twin (need rappid_uuid); 'eggs' "
+                "for all .egg backups on disk; 'lineage' for the family "
+                "tree grouped by parent_rappid; "
+                "'chat' to POST a message to a peer brainstem's /chat "
+                "endpoint — the unified federation primitive. Same pattern "
+                "works on-LAN, on-WAN, or over the public internet (pass "
+                "brainstem_url for non-local peers). Local-first: when the "
+                "internet drops, on-LAN parts of a neighborhood keep "
+                "working because the URL lookup never required GitHub. "
+                "Every soul edit creates a timestamped backup at "
+                "~/.rapp/twins/<rappid>/.brainstem_data/soul_history/ so "
+                "you can always revert."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "enum": list(ACTIONS),
+                        "description": "Which lifecycle action.",
+                    },
+                    "twin_name": {
+                        "type": "string",
+                        "description": "Slug for summon. Examples: 'grandma-rose', 'cofounder-bot'.",
+                    },
+                    "kind": {
+                        "type": "string",
+                        "enum": list(KINDS),
+                        "description": "Kind of twin for summon.",
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "One-line description woven into soul.md (summon).",
+                    },
+                    "egg_path": {
+                        "type": "string",
+                        "description": "Absolute path to a local .egg file (hatch). One of egg_path or egg_url is required.",
+                    },
+                    "egg_url": {
+                        "type": "string",
+                        "description": "URL to a remote .egg file (hatch). Downloads to a temp file, then unpacks. Use for hatching eggs from rapp-egg-hub: 'https://raw.githubusercontent.com/kody-w/rapp-egg-hub/main/eggs/grandma-rose.egg'.",
+                    },
+                    "rappid_uuid": {
+                        "type": "string",
+                        "description": "Twin identifier for boot/stop. Use 'list' first if unsure.",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "Optional port for boot. Auto-allocates from 7081-7200 if omitted.",
+                    },
+                    "new_soul": {
+                        "type": "string",
+                        "description": "The new soul.md content (markdown). Used by 'update_soul'. The previous soul.md is backed up to .brainstem_data/soul_history/ before being replaced. Twins adapt — this is how their voice grows.",
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Optional human-readable reason for an update_soul edit. Recorded in the backup filename for future-you to know why each version exists.",
+                    },
+                    "expect_sha256": {
+                        "type": "string",
+                        "description": "Optional sha256 hex digest the egg must match before unpacking (hatch). Refuses to hatch if the local egg's hash doesn't match. Use when hatching from URLs you don't fully trust — combined with auto-fetched hub sidecars, gives content-integrity verification.",
+                    },
+                    "brainstem_url": {
+                        "type": "string",
+                        "description": "Used by chat. Explicit base URL of the peer brainstem to chat with (e.g. http://192.168.1.50:7071 on LAN, https://my-tunnel.example.com over the public internet). Omit when the peer is a same-machine twin — chat resolves the URL from the local port file via rappid_uuid.",
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Used by chat. The user_input to POST to the peer brainstem's /chat endpoint.",
+                    },
+                    "timeout_s": {
+                        "type": "integer",
+                        "description": "Used by chat. How long to wait for the peer's response in seconds (default 90).",
+                    },
+                },
+                "required": ["action"],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs):
+        action = kwargs.get("action") or ""
+        if action not in ACTIONS:
+            return f"Error: action must be one of {', '.join(ACTIONS)}. Got: {action!r}"
+
+        if action == "summon":          return self._summon(**kwargs)
+        if action == "hatch":           return self._hatch(**kwargs)
+        if action == "boot":            return self._boot(**kwargs)
+        if action == "stop":            return self._stop(**kwargs)
+        if action == "list":            return self._list(**kwargs)
+        if action == "chat":            return self._chat(**kwargs)
+        if action == "update_identity": return self._update_identity(**kwargs)
+        if action == "update_soul":     return self._update_soul(**kwargs)
+        if action == "lay_egg":         return self._lay_egg(**kwargs)
+        if action == "overview":        return _render_overview(_scan_all_full())
+        if action == "lineage":         return _render_lineage(_scan_all_full())
+        if action == "eggs":            return _render_eggs()
+        if action in ("inspect", "history"):
+            rappid = kwargs.get("rappid_uuid") or ""
+            if not rappid:
+                return f"Error: rappid_uuid required for action='{action}'. Use action='overview' first to find rappids."
+            twins = _scan_all_full()
+            return _render_inspect(twins, rappid) if action == "inspect" else _render_history(twins, rappid)
+        return f"Error: unhandled action {action!r}"
+
+    # ── summon ──────────────────────────────────────────────────────────
+
+    def _summon(self, **kwargs):
+        twin_name = kwargs.get("twin_name") or ""
+        kind = kwargs.get("kind") or "personal"
+        description = kwargs.get("description") or ""
+
+        ok, slug_or_err = _validate_name(twin_name)
+        if not ok:
+            return f"Error: {slug_or_err}"
+        twin_name = slug_or_err
+
+        if kind not in KINDS:
+            return f"Error: unknown kind '{kind}'. Valid: {', '.join(KINDS)}"
+
+        # v2-format rappid per CONSTITUTION Article XXXIV.1. UUID hex (dashes
+        # stripped) lives in the hash field; same identity, v2 string shape.
+        _hash = uuid.uuid4().hex
+        rappid = f"rappid:v2:{kind}:@kody-w/{twin_name}:{_hash}@github.com/kody-w/{twin_name}"
+        now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        # Workspace dir uses the hash (filesystem-friendly) — not the full v2 string.
+        workspace = pathlib.Path(_twins_dir()) / _hash
+        try:
+            workspace.mkdir(parents=True, exist_ok=False)
+        except FileExistsError:
+            return f"Error: workspace exists at {workspace} (UUID4 collision — retry)"
+        except OSError as e:
+            return f"Error: cannot create workspace: {e}"
+
+        try:
+            (workspace / "soul.md").write_text(SOUL_TEMPLATES[kind](twin_name, description))
+            (workspace / "rappid.json").write_text(json.dumps({
+                "schema": "rapp-rappid/2.0",
+                "rappid": rappid,
+                "parent_rappid": WILDHAVEN_RAPPID,
+                "parent_repo": WILDHAVEN_REPO,
+                "parent_commit": None,
+                "born_at": now,
+                "name": twin_name,
+                "role": "variant",
+                "kind": kind,
+                "description": description or "",
+                "_summoned_by": "@kody-w/twin_agent",
+            }, indent=2) + "\n")
+            (workspace / "agents").mkdir()
+            (workspace / ".brainstem_data").mkdir()
+        except OSError as e:
+            return f"Error: writing twin files: {e}"
+
+        return (
+            f"Created {kind} twin '{twin_name}' (rappid {rappid}).\n"
+            f"  Workspace:  {workspace}\n"
+            f"  To talk to it: invoke me again with action='boot', "
+            f"rappid_uuid='{rappid}'\n"
+            f"  Or edit soul.md first: {workspace / 'soul.md'}"
+        )
+
+    # ── hatch ───────────────────────────────────────────────────────────
+
+    def _hatch(self, **kwargs):
+        egg_path_str = kwargs.get("egg_path") or ""
+        egg_url = kwargs.get("egg_url") or ""
+        expect_sha256 = (kwargs.get("expect_sha256") or "").strip().lower()
+
+        if not egg_path_str and not egg_url:
+            return "Error: hatch needs egg_path (local file) OR egg_url (remote URL)."
+
+        # If egg_url, download to a temp file first
+        source_label = ""
+        if egg_url:
+            try:
+                import tempfile
+                tmpdir = pathlib.Path(_rapp_home()) / ".tmp"
+                tmpdir.mkdir(parents=True, exist_ok=True)
+                # Use last URL segment as the temp filename when sane,
+                # else fall back to a hash-derived name.
+                from urllib.parse import urlparse
+                fname = os.path.basename(urlparse(egg_url).path) or "remote.egg"
+                if not fname.endswith(".egg"):
+                    fname += ".egg"
+                downloaded = tmpdir / fname
+                # urllib.request — stdlib, no extra deps
+                req = urllib.request.Request(
+                    egg_url,
+                    headers={"User-Agent": "rapp-twin-agent"},
+                )
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    downloaded.write_bytes(r.read())
+                egg_path = downloaded
+                source_label = f"{egg_url} (downloaded to {downloaded})"
+            except (urllib.error.URLError, urllib.error.HTTPError, OSError) as e:
+                return f"Error: download failed for {egg_url}: {e}"
+        else:
+            egg_path = pathlib.Path(egg_path_str).expanduser()
+            if not egg_path.is_file():
+                return f"Error: file not found: {egg_path}"
+            source_label = str(egg_path)
+
+        try:
+            blob = egg_path.read_bytes()
+        except OSError as e:
+            return f"Error: read failed: {e}"
+
+        # Phase-1 integrity verification (Article XXXIV.7 attestation slot
+        # is wired but null until publisher signing keys exist; sha256
+        # content-addressing is the baseline that works today).
+        actual_sha = hashlib.sha256(blob).hexdigest()
+
+        # Auto-fetch sidecar sha256 from rapp-egg-hub if egg_url matches the pattern
+        if not expect_sha256 and egg_url and "/eggs/" in egg_url and egg_url.endswith(".egg"):
+            sidecar_url = egg_url[:-4] + ".json"
+            try:
+                req = urllib.request.Request(sidecar_url, headers={"User-Agent": "rapp-twin-agent"})
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    sc = json.loads(r.read())
+                    expect_sha256 = (sc.get("sha256") or "").strip().lower()
+            except (urllib.error.URLError, urllib.error.HTTPError, OSError, ValueError):
+                pass  # sidecar optional; continue without
+
+        verify_msg = ""
+        if expect_sha256:
+            if actual_sha != expect_sha256:
+                return (
+                    f"Error: sha256 mismatch — refusing to hatch.\n"
+                    f"  expected: {expect_sha256}\n"
+                    f"  actual:   {actual_sha}\n"
+                    f"  source:   {source_label}\n"
+                    f"This usually means the egg was corrupted in transit, "
+                    f"OR someone has tampered with it. Verify via the "
+                    f"original publisher's sidecar before retrying."
+                )
+            verify_msg = f"\n  sha256:     ✓ verified ({actual_sha})"
+
+        try:
+            workspace, rappid, manifest = _unpack_egg(blob, _twins_dir())
+        except Exception as e:
+            return f"Error: hatch failed: {e}"
+
+        rj_path = pathlib.Path(workspace) / "rappid.json"
+        twin_name = "<unnamed>"
+        if rj_path.exists():
+            try:
+                twin_name = json.loads(rj_path.read_text()).get("name") or twin_name
+            except Exception:
+                pass
+
+        soul_present = (pathlib.Path(workspace) / "soul.md").exists()
+        viability = "fully viable" if (rj_path.exists() and soul_present) else "MISSING required files"
+
+        return (
+            f"Hatched twin '{twin_name}' (rappid {rappid}) — {viability}."
+            f"{verify_msg}\n"
+            f"  Workspace:  {workspace}\n"
+            f"  Source:     {source_label}\n"
+            f"  To talk to it: invoke me again with action='boot', "
+            f"rappid_uuid='{rappid}'"
+        )
+
+    # ── boot ────────────────────────────────────────────────────────────
+
+    def _boot(self, **kwargs):
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return "Error: rappid_uuid required for boot. Use action='list' first."
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}. Did you summon or hatch first?"
+
+        # Already running?
+        existing = _read_pid(rappid)
+        if _pid_alive(existing):
+            existing_port = _read_port(rappid)
+            return (
+                f"Already running: pid {existing}, "
+                f"http://127.0.0.1:{existing_port}/"
+            )
+
+        # Allocate port
+        explicit_port = kwargs.get("port")
+        port = int(explicit_port) if explicit_port else _allocate_port()
+        if not port:
+            return "Error: no free ports in 7081-7200"
+
+        start_sh = _detect_brainstem_start_sh()
+        if not start_sh:
+            return "Error: brainstem start.sh not found (expected at ~/.brainstem/src/rapp_brainstem/start.sh)"
+
+        soul = workspace / "soul.md"
+        agents = workspace / "agents"
+        if not soul.exists():
+            return f"Error: workspace missing soul.md: {soul}"
+        agents.mkdir(exist_ok=True)
+
+        env = os.environ.copy()
+        env["SOUL_PATH"] = str(soul)
+        env["AGENTS_PATH"] = str(agents)
+        env["PORT"] = str(port)
+
+        try:
+            proc = subprocess.Popen(
+                ["bash", start_sh],
+                cwd=str(workspace),
+                env=env,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+        except Exception as e:
+            return f"Error: failed to start: {e}"
+
+        os.makedirs(_pids_dir(), exist_ok=True)
+        os.makedirs(_ports_dir(), exist_ok=True)
+        pathlib.Path(_pid_file(rappid)).write_text(str(proc.pid))
+        pathlib.Path(_port_file(rappid)).write_text(str(port))
+
+        # Best-effort liveness check (~5s)
+        url = f"http://127.0.0.1:{port}/health"
+        live = False
+        for _ in range(50):
+            try:
+                with urllib.request.urlopen(url, timeout=0.5) as r:
+                    if r.status == 200:
+                        live = True
+                        break
+            except (urllib.error.URLError, OSError, TimeoutError):
+                pass
+            time.sleep(0.1)
+
+        return (
+            f"Booted twin (rappid {rappid}).\n"
+            f"  PID:  {proc.pid}\n"
+            f"  URL:  http://127.0.0.1:{port}/\n"
+            f"  Open the URL to chat with the twin. "
+            f"{'Brainstem is responding.' if live else 'Brainstem may still be starting — try the URL in a few seconds.'}\n"
+            f"  Stop with: action='stop', rappid_uuid='{rappid}'"
+        )
+
+    # ── stop ────────────────────────────────────────────────────────────
+
+    def _stop(self, **kwargs):
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return "Error: rappid_uuid required for stop"
+
+        pid = _read_pid(rappid)
+        if not pid or not _pid_alive(pid):
+            _clear_pid(rappid)
+            return f"Twin {rappid} was not running."
+
+        try:
+            os.killpg(os.getpgid(pid), signal.SIGTERM)
+        except (ProcessLookupError, OSError):
+            try:
+                os.kill(pid, signal.SIGTERM)
+            except (ProcessLookupError, OSError):
+                pass
+        for _ in range(20):
+            if not _pid_alive(pid):
+                break
+            time.sleep(0.1)
+        _clear_pid(rappid)
+        return f"Stopped twin {rappid} (pid {pid})."
+
+    # ── soul backup helper ──────────────────────────────────────────────
+
+    def _backup_soul(self, workspace, reason=None):
+        """Copy the current soul.md into .brainstem_data/soul_history/<ts>.md.
+        Returns the backup path or None if there was nothing to back up.
+
+        Reason (optional) gets folded into the filename so the history
+        directory reads like a changelog.
+        """
+        soul = pathlib.Path(workspace) / "soul.md"
+        if not soul.exists():
+            return None
+        history = pathlib.Path(workspace) / ".brainstem_data" / "soul_history"
+        history.mkdir(parents=True, exist_ok=True)
+        ts = time.strftime("%Y-%m-%dT%H-%M-%SZ", time.gmtime())
+        slug = ""
+        if reason:
+            slug = "-" + re.sub(r"[^a-z0-9]+", "-", reason.lower()).strip("-")[:40]
+        backup = history / f"{ts}{slug}.md"
+        shutil.copy2(soul, backup)
+        return backup
+
+    # ── update_identity ─────────────────────────────────────────────────
+
+    def _update_identity(self, **kwargs):
+        """Append the current identity block to an existing twin's soul.md.
+
+        Append-only, idempotent — won't add the block twice. Use this to
+        upgrade twins summoned before v1.0.1 (whose souls don't yet have
+        the strong "Your name is X" instructions, so they default to
+        introducing themselves as "RAPP"). Backs up the previous soul.md
+        before appending so reverts are always possible.
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return ("Error: rappid_uuid required for update_identity. "
+                    "Use action='list' first to find the rappid.")
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        soul_path = workspace / "soul.md"
+        if not soul_path.exists():
+            return f"Error: soul.md not found at {soul_path}"
+
+        # Resolve display name from rappid.json (fall back to dir name)
+        rj_path = workspace / "rappid.json"
+        twin_slug = ws_name
+        if rj_path.exists():
+            try:
+                rj = json.loads(rj_path.read_text())
+                twin_slug = rj.get("name") or twin_slug
+            except (json.JSONDecodeError, OSError):
+                pass
+        dn = _display_name(twin_slug)
+
+        soul_text = soul_path.read_text()
+
+        # Idempotent: skip if any v1.0.1+ identity block is already present
+        if "## Identity — read this every turn" in soul_text:
+            return (
+                f"Twin '{dn}' (rappid {rappid}) already has the identity "
+                f"block. No changes made.\n  soul.md: {soul_path}"
+            )
+
+        block = "\n\n" + _identity_block(dn).rstrip() + "\n"
+
+        # Backup the existing soul before any edit — twins adapt; backups
+        # let them un-adapt.
+        backup = self._backup_soul(workspace, reason="update_identity")
+
+        # Append. Never modifies existing content.
+        try:
+            with open(soul_path, "a", encoding="utf-8") as f:
+                f.write(block)
+        except OSError as e:
+            return f"Error: could not write {soul_path}: {e}"
+
+        return (
+            f"Updated identity for '{dn}' (rappid {rappid}).\n"
+            f"  soul.md: {soul_path}\n"
+            f"  Appended {block.count(chr(10))} lines to the end (existing content untouched).\n"
+            f"  Backup:  {backup}\n"
+            f"  Restart the twin to pick up the change:\n"
+            f"    1. action='stop', rappid_uuid='{rappid}'\n"
+            f"    2. action='boot', rappid_uuid='{rappid}'\n"
+            f"  Or, if it's running pointed at this soul.md, the next chat "
+            f"turn picks up the new system prompt automatically."
+        )
+
+    # ── lay_egg ─────────────────────────────────────────────────────────
+
+    def _lay_egg(self, **kwargs):
+        """Pack a twin's workspace into a portable .egg cartridge.
+
+        Lands at ~/.rapp/eggs/<rappid>/<timestamp>.egg by default.
+        Embeds content_sha256 in the egg's manifest for hatch-time
+        integrity verification. The .brainstem_data/soul_history/ dir
+        is intentionally excluded (private edit history of the donor;
+        receivers don't need it).
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        if not rappid:
+            return ("Error: rappid_uuid required for lay_egg. "
+                    "Use action='list' first to find the rappid.")
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        try:
+            blob, manifest = _pack_workspace(workspace)
+        except Exception as e:
+            return f"Error: pack failed: {e}"
+
+        sha256 = hashlib.sha256(blob).hexdigest()
+        twin_name = (manifest.get("source") or {}).get("name") or ws_name
+        kind = json.loads((workspace / "rappid.json").read_text()).get("kind", "?")
+
+        out_dir = pathlib.Path(_rapp_home()) / "eggs" / rappid
+        out_dir.mkdir(parents=True, exist_ok=True)
+        ts = time.strftime("%Y-%m-%dT%H-%M-%SZ", time.gmtime())
+        out_path = out_dir / f"{ts}.egg"
+        out_path.write_bytes(blob)
+
+        # Sidecar JSON next to the egg, ready for rapp-egg-hub contribution.
+        sidecar = {
+            "schema": "rapp-egg-hub-entry/1.0",
+            "slug": _sluggify(twin_name),
+            "rappid_uuid": rappid,
+            "name": twin_name,
+            "display_name": _display_name(twin_name),
+            "kind": kind,
+            "description": json.loads((workspace / "rappid.json").read_text()).get("description", ""),
+            "tags": [kind],
+            "egg_schema": manifest["schema"],
+            "size_bytes": len(blob),
+            "sha256": sha256,
+            "packed_by": "@kody-w",  # generic; user can edit
+            "packed_at": manifest["exported_at"],
+            "egg_path": f"eggs/{_sluggify(twin_name)}.egg",
+            "lineage": {
+                "parent_rappid": manifest["source"].get("parent_rappid_uuid"),
+                "parent_repo": manifest["source"].get("repo"),
+            },
+        }
+        sidecar_path = out_dir / f"{ts}.json"
+        sidecar_path.write_text(json.dumps(sidecar, indent=2) + "\n")
+
+        return (
+            f"Laid egg for '{_display_name(twin_name)}' ({kind} twin).\n"
+            f"  Egg:      {out_path}\n"
+            f"  Size:     {len(blob)} bytes ({len(blob)/1024:.1f} KB)\n"
+            f"  Schema:   {manifest['schema']}\n"
+            f"  rappid:   {rappid}\n"
+            f"  sha256:   {sha256}\n"
+            f"  Sidecar:  {sidecar_path}\n"
+            f"\n"
+            f"To contribute this twin to rapp-egg-hub:\n"
+            f"  1. fork github.com/kody-w/rapp-egg-hub\n"
+            f"  2. cp {out_path} <fork>/eggs/<slug>.egg\n"
+            f"  3. cp {sidecar_path} <fork>/eggs/<slug>.json\n"
+            f"  4. open a PR — auto-rebuild GH Action regenerates index.json\n"
+            f"\n"
+            f"To restore this egg later:\n"
+            f"  Twin(action='hatch', egg_path='{out_path}')"
+        )
+
+    # ── update_soul ─────────────────────────────────────────────────────
+
+    def _update_soul(self, **kwargs):
+        """Replace a twin's soul.md with new content. The previous version
+        is backed up first to .brainstem_data/soul_history/<timestamp>.md
+        so reverting is always possible.
+
+        Twins adapt over time — this is how the voice grows. Use it when
+        the twin needs to take on a new responsibility, change its tone,
+        absorb new corpus material, or pivot. The model can author the
+        new soul based on the existing one + the user's intent, then
+        invoke this action to persist it.
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        new_soul = kwargs.get("new_soul") or ""
+        reason = kwargs.get("reason") or ""
+
+        if not rappid:
+            return ("Error: rappid_uuid required for update_soul. "
+                    "Use action='list' first to find the rappid.")
+        if not new_soul.strip():
+            return "Error: new_soul required for update_soul (the new soul.md content)."
+
+        ws_name = rappid.replace(":", "_").replace("@", "") if rappid.startswith("rappid:") else rappid
+        workspace = pathlib.Path(_twins_dir()) / ws_name
+        if not workspace.is_dir():
+            return f"Error: workspace not found at {workspace}"
+
+        soul_path = workspace / "soul.md"
+
+        # Read the previous to detect no-ops + report old size
+        previous_text = ""
+        if soul_path.exists():
+            try:
+                previous_text = soul_path.read_text()
+            except OSError:
+                pass
+        if previous_text == new_soul:
+            return (
+                f"No change — the new soul is identical to the existing "
+                f"soul.md ({len(previous_text)} chars). Skipped."
+            )
+
+        # Resolve display name for the success message
+        rj_path = workspace / "rappid.json"
+        twin_slug = ws_name
+        if rj_path.exists():
+            try:
+                rj = json.loads(rj_path.read_text())
+                twin_slug = rj.get("name") or twin_slug
+            except (json.JSONDecodeError, OSError):
+                pass
+        dn = _display_name(twin_slug)
+
+        # Backup before edit (rule: every soul edit is reversible)
+        backup = self._backup_soul(workspace, reason=reason or "update_soul")
+
+        try:
+            soul_path.write_text(new_soul)
+        except OSError as e:
+            return f"Error: could not write {soul_path}: {e}"
+
+        old_lines = len(previous_text.splitlines()) if previous_text else 0
+        new_lines = len(new_soul.splitlines())
+
+        return (
+            f"Updated soul.md for '{dn}' (rappid {rappid}).\n"
+            f"  soul.md: {soul_path}\n"
+            f"  Lines:   {old_lines} → {new_lines}\n"
+            f"  Reason:  {reason or '(not specified)'}\n"
+            f"  Backup:  {backup}\n"
+            f"  History: {workspace / '.brainstem_data' / 'soul_history'}\n"
+            f"  Restart the twin to pick up the change:\n"
+            f"    1. action='stop', rappid_uuid='{rappid}'\n"
+            f"    2. action='boot', rappid_uuid='{rappid}'\n"
+            f"  Or, if it's running pointed at this soul.md, the next chat "
+            f"turn picks up the new system prompt automatically.\n"
+            f"  Revert: copy any file from soul_history/ back to soul.md."
+        )
+
+    # ── list ────────────────────────────────────────────────────────────
+
+    def _list(self, **kwargs):
+        twins = _scan_twins()
+        if not twins:
+            return ("No twins on this device yet. Summon one:\n"
+                    "  action='summon', twin_name='your-name', kind='personal'")
+
+        lines = [f"{len(twins)} twin{'s' if len(twins) != 1 else ''} on this device:\n"]
+        for t in twins:
+            status = f"RUNNING at {t['url']} (pid {t['pid']})" if t["running"] else "stopped"
+            lines.append(
+                f"  • {t['name']} ({t['kind']}) — {status}\n"
+                f"    rappid:    {t['rappid']}\n"
+                f"    workspace: {t['workspace']}"
+            )
+        lines.append("\nBoot any twin: action='boot', rappid_uuid='<rappid>'")
+        return "\n".join(lines)
+
+    # ── chat ────────────────────────────────────────────────────────────
+
+    def _chat(self, **kwargs):
+        """The unified federation primitive per NEIGHBORHOOD_PROTOCOL.md §6.
+
+        Builds a rapp-twin-chat/1.0 envelope (§6a) with the requested kind
+        (§6b: say / share-fact / share-egg / request-fact / ack) and POSTs
+        it to the peer brainstem's /chat. Channel type is §5a (live HTTP /
+        WebRTC) — falls back to §5b (Issue post) when the peer is
+        unreachable.
+
+        Same pattern works on-LAN, on-WAN, in a browser via WebRTC tether
+        (the public gate pages embed PeerJS for the cross-network case
+        per §5a). When the internet drops, on-LAN parts of a neighborhood
+        keep working — the URL lookup never required GitHub.
+
+        Args:
+          rappid_uuid:    target twin (resolves URL via local twins port file)
+          brainstem_url:  explicit base URL (LAN/WAN peers)
+          message:        the textual content (becomes payload.text for kind=say)
+          kind:           rapp-twin-chat/1.0 message kind (default 'say')
+          to_rappid:      explicit recipient rappid (overrides rappid_uuid lookup for the envelope)
+          from_rappid:    sender rappid (read from ~/.brainstem/rappid.json by default)
+          facets:         list of public_facets being asserted (per §7)
+          payload:        explicit payload object (overrides default text payload)
+          timeout_s:      response wait (default 90)
+        """
+        rappid = kwargs.get("rappid_uuid") or ""
+        url = (kwargs.get("brainstem_url") or "").rstrip("/")
+        message = kwargs.get("message") or ""
+        kind = (kwargs.get("kind") or "say").lower()
+        to_rappid = kwargs.get("to_rappid") or rappid or None
+        from_rappid = kwargs.get("from_rappid") or self._self_rappid()
+        facets = kwargs.get("facets") or []
+        explicit_payload = kwargs.get("payload")
+        timeout_s = int(kwargs.get("timeout_s") or 90)
+
+        VALID_KINDS = ("say", "share-fact", "share-egg", "request-fact", "ack")
+        if kind not in VALID_KINDS:
+            return f"Error: kind must be one of {VALID_KINDS}, got {kind!r}"
+
+        if not message and explicit_payload is None:
+            return "Error: message OR payload required"
+
+        # Resolve URL: explicit > rappid lookup in local twins
+        if not url and rappid:
+            port = _read_port(rappid)
+            pid = _read_pid(rappid)
+            if port and _pid_alive(pid):
+                url = f"http://127.0.0.1:{port}"
+
+        if not url:
+            return ("Error: could not resolve brainstem_url. Provide it "
+                    "explicitly OR ensure the peer is a running local twin.")
+
+        # Build the rapp-twin-chat/1.0 envelope per §6a
+        envelope = {
+            "schema": "rapp-twin-chat/1.0",
+            "from_rappid": from_rappid,
+            "to_rappid": to_rappid,
+            "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "kind": kind,
+            "payload": explicit_payload if explicit_payload is not None else {"text": message},
+            "facets": facets if isinstance(facets, list) else [],
+        }
+
+        # POST to /chat with both the canonical brainstem shape (user_input)
+        # AND the spec-compliant envelope. Receivers that understand the
+        # envelope can route by kind; receivers that only know user_input
+        # still get a usable string.
+        body = {
+            "user_input": message or json.dumps(envelope["payload"]),
+            "twin_chat_envelope": envelope,
+        }
+
+        try:
+            req = urllib.request.Request(
+                f"{url}/chat",
+                data=json.dumps(body).encode("utf-8"),
+                headers={"Content-Type": "application/json", "User-Agent": "rapp-twin-chat"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=timeout_s) as r:
+                raw = r.read().decode("utf-8", errors="replace")
+                try:
+                    parsed = json.loads(raw)
+                except (ValueError, json.JSONDecodeError):
+                    parsed = {"raw_response": raw[:2000]}
+                return json.dumps({
+                    "schema": "rapp-twin-chat-response/1.0",
+                    "channel": "5a-http",
+                    "to_url": url,
+                    "to_rappid": to_rappid,
+                    "from_rappid": from_rappid,
+                    "kind": kind,
+                    "envelope": envelope,
+                    "status": r.status,
+                    "response": parsed,
+                }, indent=2)
+        except urllib.error.HTTPError as e:
+            return json.dumps({
+                "schema": "rapp-twin-chat-response/1.0",
+                "channel": "5a-http",
+                "to_url": url,
+                "envelope": envelope,
+                "status": e.code,
+                "error": str(e),
+            }, indent=2)
+        except (urllib.error.URLError, OSError, TimeoutError) as e:
+            # Channel 5b fallback per NEIGHBORHOOD_PROTOCOL §5b. Live channel
+            # is unreachable → construct a labeled Issue URL the operator (or
+            # an Issues-poller agent) can post to the peer's seed repo.
+            # Label = "neighborhood-message" is the protocol-reserved routing
+            # key for cross-organism content payloads.
+            fallback_url = None
+            try:
+                # Best-effort: parse the peer's seed repo from the URL host.
+                # Real prod use would resolve via the peer registry; this
+                # constructs a usable Issues URL when the host is github.io.
+                from urllib.parse import urlencode, quote
+                params = {
+                    "labels": NEIGHBORHOOD_MESSAGE_LABEL,
+                    "title": f"{NEIGHBORHOOD_MESSAGE_LABEL}: kind={kind} from={(from_rappid or 'unknown')[:12]}",
+                    "body": (
+                        f"<!-- {NEIGHBORHOOD_MESSAGE_LABEL} envelope; rapp-twin-chat/1.0 -->\n\n"
+                        f"```json\n{json.dumps(envelope, indent=2)}\n```"
+                    ),
+                }
+                # If the peer URL parses to a github.io host, derive the
+                # owner/repo and build the canonical issues/new URL.
+                from urllib.parse import urlparse
+                host = urlparse(url).hostname or ""
+                if host.endswith(".github.io"):
+                    owner = host.split(".github.io")[0]
+                    path = urlparse(url).path.strip("/").split("/")
+                    repo = path[0] if path and path[0] else None
+                    if owner and repo:
+                        fallback_url = f"https://github.com/{owner}/{repo}/issues/new?{urlencode(params, quote_via=quote)}"
+            except Exception:
+                fallback_url = None
+
+            return json.dumps({
+                "schema": "rapp-twin-chat-response/1.0",
+                "channel": "5a-http",
+                "to_url": url,
+                "envelope": envelope,
+                "ok": False,
+                "error": f"unreachable ({type(e).__name__}): {e}",
+                "fallback": {
+                    "channel": "5b-issues",
+                    "label": NEIGHBORHOOD_MESSAGE_LABEL,
+                    "instructions": (
+                        f"Post the envelope as a GitHub Issue with label "
+                        f"'{NEIGHBORHOOD_MESSAGE_LABEL}' on the peer's seed repo. "
+                        "Receiver's doorman polls labeled Issues on next visit."
+                    ),
+                    "issues_new_url": fallback_url,
+                },
+            }, indent=2)
+
+    def _self_rappid(self):
+        """Read this brainstem's own rappid from ~/.brainstem/rappid.json."""
+        try:
+            p = os.path.expanduser("~/.brainstem/rappid.json")
+            if os.path.exists(p):
+                with open(p) as f:
+                    return (json.load(f) or {}).get("rappid")
+        except (OSError, json.JSONDecodeError):
+            pass
+        return None

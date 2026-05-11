@@ -1,23 +1,23 @@
 {
   "schema": "rappcards-peers/1.0",
-  "updated": "2026-04-17",
+  "updated": "2026-05-11",
   "note": "RAR's federation peer list. Canonical is at kody-w/RAPPcards/main/peers.json.",
   "canonical_source": "https://raw.githubusercontent.com/kody-w/RAPPcards/main/peers.json",
   "peers": [
     {
-      "binder": "rar",
+      "id": "rar",
       "homepage": "https://kody-w.github.io/RAR/",
       "seed_index": "https://raw.githubusercontent.com/kody-w/RAR/main/seed-index.json",
       "role": "registry"
     },
     {
-      "binder": "rappcards",
+      "id": "rappcards",
       "homepage": "https://kody-w.github.io/RAPPcards/",
       "seed_index": "https://raw.githubusercontent.com/kody-w/RAPPcards/main/seed-index.json",
       "role": "twin"
     },
     {
-      "binder": "red-binder",
+      "id": "red-binder",
       "homepage": "https://kody-w.github.io/red-binder/",
       "seed_index": "https://raw.githubusercontent.com/kody-w/red-binder/main/seed-index.json",
       "role": "third-party"

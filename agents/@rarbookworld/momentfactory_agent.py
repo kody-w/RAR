@@ -54,7 +54,7 @@ import urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/momentfactory",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "MomentFactory (converged singleton)",
     "description": "Seven-persona moment-to-Drop pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The candidate engine for Rappterbook.",
     "author": "rarbookworld",
@@ -225,7 +225,7 @@ You output a JSON object with EXACTLY these keys:
                   novelty         — how new the underlying pattern is
                   compoundability — how much it sets up future moments
   ability     — one sentence describing what this card "does" if drawn from
-                a binder later (e.g. "Files itself in the framework's
+                an agents/ directory later (e.g. "Files itself in the framework's
                 lessons-learned cache" or "Triggers a re-read of related Drops")
   lore        — one sentence of backstory connecting this Drop to its origin
   art_seed    — integer 0..9999999999, deterministic art reconstruction seed

@@ -468,12 +468,12 @@ header {
 <body>
 
 <header>
-  <a class="logo" href="binder.html">
+  <a class="logo" href="index.html">
     <div class="logo-mark">R</div>
     <span>RAPP Grail</span>
   </a>
   <div class="header-right">
-    <a class="back-link" href="binder.html">All cards</a>
+    <a class="back-link" href="index.html">All cards</a>
   </div>
 </header>
 
@@ -544,7 +544,7 @@ async function load() {
       <div class="error">
         <h2>Agent not found in registry</h2>
         <div class="error-detail">No entry for <code>${esc(key)}</code>.<br>
-        <a href="binder.html">Browse all cards</a></div>
+        <a href="index.html">Browse all cards</a></div>
       </div>`;
     return;
   }
@@ -619,7 +619,7 @@ async function load() {
         <h1>${esc(agent.display_name || slug)}</h1>
         <p class="subtitle">${esc(agent.description || '')}</p>
         <div>
-          <a class="pub-pill" href="binder.html?publisher=${encodeURIComponent(publisher)}">${esc(publisher)}</a>
+          <a class="pub-pill" href="index.html?publisher=${encodeURIComponent(publisher)}">${esc(publisher)}</a>
           <span class="ver-pill">v${esc(agent.version || '0.0.0')}</span>
           ${agent.quality_tier ? `<span class="ver-pill" style="margin-left:6px">${esc(agent.quality_tier)}</span>` : ''}
         </div>
@@ -627,7 +627,7 @@ async function load() {
         <div class="section">
           <h2>Install</h2>
           <div class="install">
-            <code id="install-cmd">@rapp/binder install_agent ${esc(agent.name)}</code>
+            <code id="install-cmd">python rapp_sdk.py install ${esc(agent.name)}</code>
             <button class="copy-btn" data-copy="install-cmd">copy</button>
           </div>
         </div>

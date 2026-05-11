@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Federation CLI — Manages the relationship between a RAPP binder and upstream.
+Federation CLI — Manages the relationship between a RAPP instance and upstream.
 
 Usage:
   python scripts/federate.py status              Show federation config
-  python scripts/federate.py binder              Show binder: your agents, synced, pending
+  python scripts/federate.py mine                Show your agents, synced, pending
   python scripts/federate.py diff                Show local agents not in upstream
   python scripts/federate.py submit              Submit delta agents to upstream (goes to staging)
   python scripts/federate.py submit @me/agent    Submit a specific agent
@@ -300,14 +300,12 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
     return 0 if success == len(to_submit) else 1
 
 
-def cmd_binder(config: dict) -> int:
-    """Show binder status — what's local, what's official, what's pending."""
-    binder_file = REPO_ROOT / "binder" / "binder_state.json"
+def cmd_mine(config: dict) -> int:
+    """Show your agents/ inventory — what's local, what's official, what's pending."""
     owner = config.get("owner", "?")
     namespace = config.get("namespace", f"@{owner}")
-    upstream = config.get("upstream")
 
-    print(f"\nBinder: {namespace}")
+    print(f"\nNamespace: {namespace}")
     print(f"{'=' * 50}")
 
     # Count local agents
@@ -336,19 +334,9 @@ def cmd_binder(config: dict) -> int:
         for f in staged:
             print(f"    {f.relative_to(REPO_ROOT)}")
 
-    # Binder state
-    if binder_file.exists():
-        state = json.loads(binder_file.read_text())
-        owned = state.get("owned_cards", [])
-        decks = state.get("decks", [])
-        if owned:
-            print(f"\n  Owned cards:               {len(owned)}")
-        if decks:
-            print(f"  Decks:                     {len(decks)}")
-
-    pages_url = config.get("binder", {}).get("pages_url", "")
+    pages_url = config.get("pages_url", "")
     if pages_url:
-        print(f"\n  Binder URL: {pages_url}")
+        print(f"\n  Pages URL: {pages_url}")
 
     print()
     return 0
@@ -446,7 +434,7 @@ def main() -> int:
     )
     parser.add_argument(
         "command",
-        choices=["status", "binder", "diff", "submit", "sync"],
+        choices=["status", "mine", "diff", "submit", "sync"],
         help="Federation command",
     )
     parser.add_argument(
@@ -470,7 +458,7 @@ def main() -> int:
 
     commands = {
         "status": lambda: cmd_status(config),
-        "binder": lambda: cmd_binder(config),
+        "mine": lambda: cmd_mine(config),
         "diff": lambda: cmd_diff(config),
         "submit": lambda: cmd_submit(config, args.agent),
         "sync": lambda: cmd_sync(config, args.pull),

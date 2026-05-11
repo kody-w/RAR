@@ -12,7 +12,11 @@
     "model": "3-of-5",
     "threshold": 0.6
   },
-  "binders": {
+  "verification": {
+    "method": "sha256-hash-chain",
+    "description": "Each block hash = SHA-256 of block contents. prevHash links to prior block. Replay from genesis to verify integrity."
+  },
+  "publishers_registered": {
     "41eacba49218b45e9e3c8cccfdaccc107b40e87d": {
       "alias": "Howard Hoy",
       "cards": 13,
@@ -23,9 +27,5 @@
       "cards": 126,
       "role": "genesis-holder"
     }
-  },
-  "verification": {
-    "method": "sha256-hash-chain",
-    "description": "Each block hash = SHA-256 of block contents. prevHash links to prior block. Replay from genesis to verify integrity."
   }
 }

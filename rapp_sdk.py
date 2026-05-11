@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RAPP Foundation SDK — Build agents, mint cards, track Binders. The open developer toolkit for the RAPP agent ecosystem."""
+"""RAPP Foundation SDK — Build agents, mint cards, manage your agents/ directory. The open developer toolkit for the RAPP agent ecosystem."""
 
 from __future__ import annotations
 
@@ -1111,8 +1111,8 @@ def resolve_card(name: str) -> dict:
     return card
 
 
-def binder_status() -> dict:
-    """Check local registry.json and count agents by tier, computing total binder value."""
+def agents_status() -> dict:
+    """Check local registry.json and count agents by tier, computing total collection value."""
     local = Path(__file__).parent / "registry.json"
     if not local.exists():
         return {"error": "No local registry.json found. Run build_registry.py first."}
@@ -1144,8 +1144,8 @@ def binder_status() -> dict:
     }
 
 
-def binder_transfer(mint_id: str, dest: str) -> dict:
-    """Create a signed transfer intent for a card in the binder."""
+def transfer_card(mint_id: str, dest: str) -> dict:
+    """Create a signed transfer intent for a card."""
     import time
 
     timestamp = int(time.time())
@@ -1177,7 +1177,7 @@ def binder_transfer(mint_id: str, dest: str) -> dict:
 #
 # The egg is the recipe, not the meal. Seeds self-assemble. Payloads travel inline.
 # Refs are fetched on demand — the hash guarantees you get the right content
-# from ANY source (binder repo, IPFS, USB stick, peer).
+# from ANY source (agents repo, IPFS, USB stick, peer).
 #
 # 20 agents + 3 small configs + 2 cartridge refs = ~2KB. Fits in a QR code.
 
@@ -1313,8 +1313,8 @@ def hatch_egg(egg: dict, output_dir: str = "agents") -> list:
 # SECTION 7: CLI DISPATCHER
 # =============================================================================
 
-def init_binder(repo_name: str = None) -> dict:
-    """Initialize a RAPP-compliant binder in the current directory or a new one.
+def init_agents(repo_name: str = None) -> dict:
+    """Initialize a RAPP-compliant agents/ workspace in the current directory or a new one.
     Returns dict with paths created."""
     import subprocess as _sp
 
@@ -1346,57 +1346,15 @@ def init_binder(repo_name: str = None) -> dict:
         _sp.run([sys.executable, str(setup_script)], env=env, cwd=str(cwd))
 
     result = {
-        "binder_dir": str(cwd),
+        "agents_dir": str(cwd),
         "namespace": f"@{github_user}" if 'github_user' in dir() else "@local",
     }
 
     # Ensure minimal structure even without setup_instance
-    for d in ["agents", "staging", "binder"]:
+    for d in ["agents", "staging"]:
         (cwd / d).mkdir(exist_ok=True)
 
     return result
-
-
-def _auto_register_binder(token: str, namespace: str, upstream: str) -> None:
-    """Auto-register binder on the ledger if not already registered.
-    Creates a GitHub Issue with register_binder action. Silent if already registered."""
-    # Check ledger first
-    try:
-        ledger_url = f"https://raw.githubusercontent.com/{upstream}/main/state/binder_ledger.json"
-        ledger = _fetch_json(ledger_url, token)
-        if ledger:
-            # Get GitHub username from token
-            user_data = _fetch_json("https://api.github.com/user", token)
-            username = user_data.get("login", "") if user_data else ""
-            if username and username in ledger.get("binders", {}):
-                return  # already registered
-    except Exception:
-        pass  # can't check — try to register anyway
-
-    # Register
-    body_data = {"action": "register_binder", "payload": {"namespace": namespace}}
-    issue_body = f"```json\n{json.dumps(body_data, indent=2)}\n```"
-    payload = json.dumps({
-        "title": "[RAR] register_binder",
-        "body": issue_body,
-    }).encode()
-
-    req = urllib.request.Request(
-        f"https://api.github.com/repos/{upstream}/issues",
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-            "Accept": "application/vnd.github.v3+json",
-            "User-Agent": "RAPP-SDK/1.0",
-        },
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=15):
-            pass  # registration issued — pipeline will process it
-    except Exception:
-        pass  # non-fatal — submit will fail with a clear error if not registered
 
 
 def submit_agent(path: str, upstream: str = None) -> dict:
@@ -1428,10 +1386,6 @@ def submit_agent(path: str, upstream: str = None) -> dict:
         raise RuntimeError(
             "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
         )
-
-    # Auto-register binder if not yet registered
-    publisher = manifest["name"].split("/")[0]
-    _auto_register_binder(token, publisher, upstream)
 
     body_data = {"action": "submit_agent", "payload": {"code": code}}
     issue_body = f"```json\n{json.dumps(body_data, indent=2)}\n```"
@@ -1533,14 +1487,14 @@ def _fmt_test_results(results: list[tuple[str, bool, str]], use_json: bool) -> s
 def main():
     parser = argparse.ArgumentParser(
         prog="rapp_sdk",
-        description="RAPP Foundation SDK — Build agents, mint cards, track Binders.",
+        description="RAPP Foundation SDK — Build agents, mint cards, manage your agents/ directory.",
     )
     parser.add_argument("--version", action="version", version=f"rapp_sdk {__version__}")
 
     sub = parser.add_subparsers(dest="command", metavar="<command>")
 
     # init
-    p_init = sub.add_parser("init", help="Initialize a RAPP binder (agent workspace)")
+    p_init = sub.add_parser("init", help="Initialize a RAPP agents/ workspace")
     p_init.add_argument("name", nargs="?", help="Optional repo/directory name")
     p_init.add_argument("--json", action="store_true", help="Output JSON")
 
@@ -1600,17 +1554,15 @@ def main():
     p_card_words.add_argument("name", help="Agent name (@pub/slug) or path to .py file")
     p_card_words.add_argument("--json", action="store_true", help="Output JSON")
 
-    # binder
-    p_binder = sub.add_parser("binder", help="Binder operations")
-    binder_sub = p_binder.add_subparsers(dest="binder_command", metavar="<subcommand>")
+    # status
+    p_status = sub.add_parser("status", help="Show your agents/ collection inventory")
+    p_status.add_argument("--json", action="store_true", help="Output JSON")
 
-    p_binder_status = binder_sub.add_parser("status", help="Show binder inventory")
-    p_binder_status.add_argument("--json", action="store_true", help="Output JSON")
-
-    p_binder_transfer = binder_sub.add_parser("transfer", help="Transfer a card to another address")
-    p_binder_transfer.add_argument("id", help="Mint ID of the card")
-    p_binder_transfer.add_argument("to", help="Destination address")
-    p_binder_transfer.add_argument("--json", action="store_true", help="Output JSON")
+    # transfer
+    p_transfer = sub.add_parser("transfer", help="Transfer a card to another address")
+    p_transfer.add_argument("id", help="Mint ID of the card")
+    p_transfer.add_argument("to", help="Destination address")
+    p_transfer.add_argument("--json", action="store_true", help="Output JSON")
 
     # egg
     p_egg = sub.add_parser("egg", help="Sneakernet Brainstem transfer — forge, compact, hatch")
@@ -1639,12 +1591,12 @@ def main():
     # ---- init ----
     if args.command == "init":
         try:
-            result = init_binder(args.name)
+            result = init_agents(args.name)
             if use_json:
                 print(json.dumps(result, indent=2))
             else:
-                print(f"\n  RAPP Binder initialized!")
-                print(f"  Directory: {result['binder_dir']}")
+                print(f"\n  RAPP agents/ workspace initialized!")
+                print(f"  Directory: {result['agents_dir']}")
                 print(f"  Namespace: {result.get('namespace', '?')}")
                 print(f"\n  Next steps:")
                 print(f"    python rapp_sdk.py new @you/my_agent    # scaffold an agent")
@@ -1893,37 +1845,35 @@ def main():
         else:
             p_card.print_help()
 
-    # ---- binder ----
-    elif args.command == "binder":
-        if args.binder_command == "status":
-            status = binder_status()
-            if use_json:
-                print(json.dumps(status, indent=2))
-            else:
-                if "error" in status:
-                    print(f"  Error: {status['error']}")
-                    sys.exit(1)
-                print(f"  Total agents: {status['total_agents']}")
-                print(f"  By tier:")
-                for tier, count in sorted(status["by_tier"].items()):
-                    rarity = TIER_TO_RARITY.get(tier, "core")
-                    label = RARITY_LABELS.get(rarity, rarity)
-                    print(f"    {tier:<15} {count:>4} agents  ({label})")
-                print(f"  Total value: {status['total_pts']} pts  /  {status['total_btc']} BTC")
-                print(f"  Registry:    {status['registry_generated_at']}")
-
-        elif args.binder_command == "transfer":
-            result = binder_transfer(args.id, args.to)
-            if use_json:
-                print(json.dumps(result, indent=2))
-            else:
-                print(f"  Transfer Intent Created")
-                print(f"  Mint ID:   {result['mintId']}")
-                print(f"  To:        {result['to']}")
-                print(f"  Timestamp: {result['timestamp']}")
-                print(f"  Hash:      {result['hash']}")
+    # ---- status ----
+    elif args.command == "status":
+        status = agents_status()
+        if use_json:
+            print(json.dumps(status, indent=2))
         else:
-            p_binder.print_help()
+            if "error" in status:
+                print(f"  Error: {status['error']}")
+                sys.exit(1)
+            print(f"  Total agents: {status['total_agents']}")
+            print(f"  By tier:")
+            for tier, count in sorted(status["by_tier"].items()):
+                rarity = TIER_TO_RARITY.get(tier, "core")
+                label = RARITY_LABELS.get(rarity, rarity)
+                print(f"    {tier:<15} {count:>4} agents  ({label})")
+            print(f"  Total value: {status['total_pts']} pts  /  {status['total_btc']} BTC")
+            print(f"  Registry:    {status['registry_generated_at']}")
+
+    # ---- transfer ----
+    elif args.command == "transfer":
+        result = transfer_card(args.id, args.to)
+        if use_json:
+            print(json.dumps(result, indent=2))
+        else:
+            print(f"  Transfer Intent Created")
+            print(f"  Mint ID:   {result['mintId']}")
+            print(f"  To:        {result['to']}")
+            print(f"  Timestamp: {result['timestamp']}")
+            print(f"  Hash:      {result['hash']}")
 
     # ---- egg ----
     elif args.command == "egg":

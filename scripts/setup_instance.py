@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Instance Setup — Auto-configures rar.config.json and binder structure
+Instance Setup — Auto-configures rar.config.json and agents/ structure
 when a repo is created from the RAPP template.
 
 Creates:
   - rar.config.json (instance config, points upstream to main RAPP)
-  - binder/ directory (personal collection: owned cards, decks, preferences)
+  - agents/@<owner>/ (your publisher namespace inside agents/)
   - staging/ directory (holds agents pending upstream submission)
 
 Called by:  .github/workflows/template_setup.yml
@@ -19,7 +19,6 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_FILE = REPO_ROOT / "rar.config.json"
-BINDER_DIR = REPO_ROOT / "binder"
 STAGING_DIR = REPO_ROOT / "staging"
 UPSTREAM = "kody-w/RAR"
 
@@ -49,28 +48,10 @@ def main() -> int:
             "accept_submissions": True,
             "allow_upstream_sync": True,
         },
-        "binder": {
-            "enabled": True,
-            "pages_url": f"https://{owner}.github.io/{repo}/",
-        },
+        "pages_url": f"https://{owner}.github.io/{repo}/",
     }
 
     CONFIG_FILE.write_text(json.dumps(config, indent=2) + "\n")
-
-    # Create binder directory structure
-    BINDER_DIR.mkdir(exist_ok=True)
-    binder_state = BINDER_DIR / "binder_state.json"
-    if not binder_state.exists():
-        state = {
-            "schema": "rar-binder/1.0",
-            "owner": owner,
-            "namespace": f"@{owner}",
-            "owned_cards": [],
-            "decks": [],
-            "companions": [],
-            "synced_at": None,
-        }
-        binder_state.write_text(json.dumps(state, indent=2) + "\n")
 
     # Create staging directory
     STAGING_DIR.mkdir(exist_ok=True)
@@ -85,7 +66,7 @@ def main() -> int:
     print(f"Configured as RAPP instance: {owner}/{repo}")
     print(f"  Upstream:   {UPSTREAM}")
     print(f"  Namespace:  @{owner}")
-    print(f"  Binder:     {BINDER_DIR.relative_to(REPO_ROOT)}/")
+    print(f"  Agents:     agents/@{owner}/")
     print(f"  Staging:    {STAGING_DIR.relative_to(REPO_ROOT)}/")
     print(f"  Pages URL:  https://{owner}.github.io/{repo}/")
     print(f"  Config:     {CONFIG_FILE.relative_to(REPO_ROOT)}")

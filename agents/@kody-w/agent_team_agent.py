@@ -22,7 +22,7 @@ useful as a companion to a real deployment of the kit (paste the
 `issue_body` into a GitHub issue and the kit's workflows take over).
 
 Drop into any RAPP brainstem's `agents/` directory. Headless via /chat,
-LLM tool call, or `/api/binder/agent`. UI mounts via the cartridge
+LLM tool call, or `/api/agents/install`. UI mounts via the cartridge
 protocol.
 
 Inspired by `billwhalenmsft/agent-team-starter-kit`. Published under
@@ -45,7 +45,7 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/agent_team_agent",
     "display_name": "AgentTeam",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": (
         "The persona-routing brain of the Agent Team Starter Kit as a "
         "single agent. Given a project goal, returns the outcome frame, "

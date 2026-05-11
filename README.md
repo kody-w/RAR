@@ -4,7 +4,7 @@
 
 133 agents. 7 publishers. 19 categories. 1,117 tests. Every card has a seed.
 
-**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[Binder](https://kody-w.github.io/RAR/binder.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
+**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
 > **Need a bundled rapplication** (agent + UI / service / state) **rather than a single file?** Browse **[kody-w/RAPP_Store](https://kody-w.github.io/RAPP_Store/)** — the catalog of packaged rapplications. Per [Constitution Article XXVII](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxvii--rar-holds-files-the-rapp-store-holds-bundles): bare agents live here in RAR; bundles live in the rapp store.
 
@@ -19,11 +19,11 @@ curl -O https://raw.githubusercontent.com/kody-w/RAR/main/rapp_sdk.py
 # Write your agent
 python rapp_sdk.py new @yourname/my_cool_agent
 
-# Submit (auto-registers your binder if needed)
+# Submit
 python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
 
-That's it. The SDK validates, registers your binder, and creates the submission. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry.
+That's it. The SDK validates and creates the submission. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry.
 
 **Update an agent:** bump the version in `__manifest__` and submit again.
 
@@ -52,16 +52,6 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 - **Workbench** — write agents in the browser, validate, preview as card
 - **Submit** — publish through the UI or the SDK
 
-## The Binder
-
-Your personal card collection at **[binder.html](https://kody-w.github.io/RAR/binder.html)**.
-
-- **Offline** — IndexedDB + localStorage cache, works in the woods with no signal
-- **Mobile** — bottom nav, swipe between cards, PWA-ready
-- **Seed Resolver** — type a number or speak 7 words, card appears
-- **Voice Incantation** — speak your 7-word incantation aloud, card self-assembles via Web Speech API
-- **Import/Export** — download `binder.json`, load anywhere
-
 ## The SDK
 
 `rapp_sdk.py` — zero dependencies, one file.
@@ -71,7 +61,7 @@ Your personal card collection at **[binder.html](https://kody-w.github.io/RAR/bi
 | `new @pub/slug` | Scaffold agent from template |
 | `validate path.py` | Validate manifest |
 | `test path.py` | Run contract tests |
-| `submit path.py` | Submit to RAPP (auto-registers binder) |
+| `submit path.py` | Submit to RAPP |
 | `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
@@ -151,7 +141,7 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 
 ## Federation
 
-RAPP is a GitHub template repo. Clone it → your own registry + binder + GitHub Pages.
+RAPP is a GitHub template repo. Clone it → your own registry + agents/ collection + GitHub Pages.
 
 ```bash
 python scripts/federate.py status    # check federation config
@@ -164,7 +154,6 @@ python scripts/federate.py sync      # pull from upstream
 ## Links
 
 - **[Agent Store](https://kody-w.github.io/RAR/)** — browse and collect
-- **[Binder](https://kody-w.github.io/RAR/binder.html)** — your card collection
 - **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)** — the protocol specification
 - **[FAQ](https://kody-w.github.io/RAR/faq.html)** — every design decision explained
 - **[The Ode](https://kody-w.github.io/RAR/ode.html)** — why single-file agents matter

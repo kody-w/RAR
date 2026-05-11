@@ -1,7 +1,7 @@
 """
 RAPP SDK Test Suite — validates all SDK operations:
 manifest extraction, validation, contract tests, card generation,
-Binder operations, CLI interface, and scaffold round-trip.
+collection status/transfer, CLI interface, and scaffold round-trip.
 """
 
 import json
@@ -199,18 +199,18 @@ def test_card_value_not_found():
 
 
 # ═══════════════════════════════════════════════════════
-# SECTION 5: Binder Operations
+# SECTION 5: Collection Operations
 # ═══════════════════════════════════════════════════════
 
-def test_binder_status():
-    status = rapp_sdk.binder_status()
+def test_agents_status():
+    status = rapp_sdk.agents_status()
     assert "error" not in status
     assert status["total_agents"] >= 131  # 131 founding + new agents
     assert "by_tier" in status
     assert status["total_pts"] > 0
 
-def test_binder_transfer():
-    result = rapp_sdk.binder_transfer("TEST-MINT-001", "0xdeadbeef1234567890")
+def test_transfer_card():
+    result = rapp_sdk.transfer_card("TEST-MINT-001", "0xdeadbeef1234567890")
     assert result["action"] == "transfer"
     assert result["mintId"] == "TEST-MINT-001"
     assert result["to"] == "0xdeadbeef1234567890"
@@ -341,9 +341,9 @@ def test_cli_card_value():
     assert result.returncode == 0
     assert "Legendary" in result.stdout
 
-def test_cli_binder_status():
+def test_cli_status():
     result = subprocess.run(
-        [sys.executable, str(SDK_PATH), "binder", "status"],
+        [sys.executable, str(SDK_PATH), "status"],
         capture_output=True, text=True, timeout=10,
     )
     assert result.returncode == 0

@@ -31,7 +31,6 @@ registry: registry.json
 api: api.json
 base_url: https://raw.githubusercontent.com/kody-w/RAR/main
 site: https://kody-w.github.io/RAR
-binder: https://kody-w.github.io/RAR/binder.html
 releases: https://kody-w.github.io/RAR/releases.html
 agent_base_class: BasicAgent (@rapp/basic_agent)
 package_structure: agents/@publisher/slug.py (single file, __manifest__ embedded)
@@ -116,7 +115,7 @@ Any numeric seed resolves to a full card deterministically. No network needed.
 
 Algorithm: `seed → mulberry32 PRNG → type, stats, abilities, rarity`
 
-Implementation: `rapp_sdk.py` (Python) or `binder.html` (JavaScript). Same algorithm, same output.
+Implementation: `rapp_sdk.py` (Python). Deterministic algorithm — same seed always yields the same card.
 
 ---
 
@@ -124,34 +123,27 @@ Implementation: `rapp_sdk.py` (Python) or `binder.html` (JavaScript). Same algor
 
 The RAPP SDK (`rapp_sdk.py`) is the developer toolkit. Zero dependencies. One file.
 
-### Quick Start (5 steps)
+### Quick Start (4 steps)
 
 ```bash
-# 1. Initialize a binder (your local agent workspace)
+# 1. Initialize an agents/ workspace
 python rapp_sdk.py init
 
-# 2. Register your binder on the public ledger (one time only)
-#    Open a GitHub Issue on kody-w/RAR:
-#    Title: [RAR] register_binder
-#    Body:  {"action": "register_binder", "payload": {"namespace": "@yourname"}}
-
-# 3. Scaffold a new agent
+# 2. Scaffold a new agent
 python rapp_sdk.py new @yourname/my_cool_agent
 
-# 4. Validate + test
+# 3. Validate + test
 python rapp_sdk.py test agents/@yourname/my_cool_agent.py
 
-# 5. Submit to the RAPP registry
+# 4. Submit to the RAPP registry
 python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
-
-**Registration is required before submission.** Your binder can be public or private. You only register once.
 
 ### SDK Commands
 
 | Command | What |
 |---------|------|
-| `init [name]` | Initialize a RAPP binder (creates agents/, staging/, binder/) |
+| `init [name]` | Initialize a RAPP agents/ workspace (creates agents/, staging/) |
 | `new @pub/slug` | Scaffold agent from template (snake_case enforced) |
 | `validate path.py` | Validate manifest against schema |
 | `test path.py` | Run contract tests (no pytest needed) |
@@ -163,8 +155,8 @@ python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 | `card resolve @pub/slug` | Self-assemble card from name (needs registry) |
 | `card resolve 12345` | Self-assemble card from seed (offline) |
 | `card value @pub/slug` | Check floor value |
-| `binder status` | Show binder inventory |
-| `binder transfer id to` | Transfer a card |
+| `status` | Show your agents/ collection inventory |
+| `transfer id to` | Transfer a card |
 | `egg forge @pub/a @pub/b` | Forge an egg from agent names (sneakernet transfer) |
 | `egg compact @pub/a @pub/b` | Compress egg to shareable string (QR/SMS/NFC) |
 | `egg hatch <compact>` | Hatch egg — install agents from compact string |
@@ -309,13 +301,12 @@ Open an issue at https://github.com/kody-w/RAR/issues/new — paste Python code 
 
 #### What happens next
 
-1. Pipeline checks binder is registered on the ledger
-2. Validates manifest, enforces snake_case, runs security scan
-3. Agent lands in `staging/` (NOT `agents/` — review required)
-4. Issue labeled `pending-review` and stays open
-5. Admin reviews and adds `approved` label
-6. Agent moves to `agents/`, seed is forged from manifest data, card self-assembles
-7. Issue closed — agent is part of the next seasonal release
+1. Pipeline validates manifest, enforces snake_case, runs security scan
+2. Agent lands in `staging/` (NOT `agents/` — review required)
+3. Issue labeled `pending-review` and stays open
+4. Admin reviews and adds `approved` label
+5. Agent moves to `agents/`, seed is forged from manifest data, card self-assembles
+6. Issue closed — agent is part of the next seasonal release
 
 #### Updating an existing agent
 

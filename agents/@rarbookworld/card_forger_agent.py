@@ -12,7 +12,7 @@ import json, os, urllib.request, urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/card_forger",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "Card Forger",
     "description": "Mints a RAR-compatible card (name + impact/novelty/compoundability stats + ability + lore + art_seed) from a Drop. Every Drop is a collectible.",
     "author": "rarbookworld",
@@ -42,7 +42,7 @@ You output a JSON object with EXACTLY these keys:
                   novelty         — how new the underlying pattern is
                   compoundability — how much it sets up future moments
   ability     — one sentence describing what this card "does" if drawn from
-                a binder later (e.g. "Files itself in the framework's
+                an agents/ directory later (e.g. "Files itself in the framework's
                 lessons-learned cache" or "Triggers a re-read of related Drops")
   lore        — one sentence of backstory connecting this Drop to its origin
   art_seed    — integer 0..9999999999, deterministic art reconstruction seed

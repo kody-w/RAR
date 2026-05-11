@@ -314,7 +314,7 @@ def _git_latest_commit_sha(path: Path):
 def _card_content_sha256(card_data: dict) -> str:
     """Hash the card's content for that specific agent. Uses canonical
     JSON (sorted keys, no whitespace) so the hash is reproducible from
-    any consumer. Lets binders verify card integrity per-agent without
+    any consumer. Lets consumers verify card integrity per-agent without
     trusting the aggregate holo_cards.json file."""
     canonical = json.dumps(card_data, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
@@ -416,7 +416,7 @@ def build_registry():
         # fetch the bytes via raw.githubusercontent.com/<repo>/<sha>/<path>
         # and verify against _sha256. _latest_commit_sha bounds the edit
         # window. _card_sha256 hashes this agent's specific card content
-        # (canonical JSON) so binders can verify per-card without
+        # (canonical JSON) so consumers can verify per-card without
         # trusting the aggregate holo_cards.json.
         manifest["_first_commit_sha"] = _git_first_commit_sha(py_path)
         manifest["_latest_commit_sha"] = _git_latest_commit_sha(py_path)

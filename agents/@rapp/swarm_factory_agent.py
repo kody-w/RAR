@@ -35,7 +35,7 @@ __manifest__ = {
     "display_name": "SwarmFactory",
     "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
     "author": "RAPP",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "tags": ["meta", "build", "singleton", "swarm-factory", "store"],
     "category": "core",
     "quality_tier": "community",
@@ -364,8 +364,8 @@ class SwarmFactoryAgent(BasicAgent):
             agent_code = "from agents.basic_agent import BasicAgent\n" + agent_code
 
         # Filename derives from the swarm_name slug — same convention as
-        # the rest of the binder so it shows up in /agents/full and the UI
-        # binder grid without special-casing. Refuse to overwrite an
+        # the rest of the agents/ directory so it shows up in /agents/full and the UI
+        # agents grid without special-casing. Refuse to overwrite an
         # existing file: the LLM should pick a fresh name on collision,
         # not silently clobber the user's work.
         slug = re.sub(r'[^a-z0-9]', '', swarm_name.lower())

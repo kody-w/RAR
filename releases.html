@@ -172,7 +172,7 @@
     <ul>
       <li><strong>64-bit forged seed</strong> &mdash; encodes name identity (32 bits), category (5), secondary type (3), tier (2), tag count (5), dep count (4), tag hash (13). The card's DNA.</li>
       <li><strong>Lossless three-path resolution</strong> &mdash; mint from file, resolve from name, resolve from seed all produce identical cards. One canonical path: manifest &rarr; <code>forge_seed()</code> &rarr; <code>resolve_card_from_seed()</code>.</li>
-      <li><strong>Public seeds, private ownership</strong> &mdash; seeds are public (anyone sees the card). Ownership is private (one binder holds it). Use is free. Owning is collectible.</li>
+      <li><strong>Public seeds, private ownership</strong> &mdash; seeds are public (anyone sees the card). Ownership is private (one <code>agents/</code> directory holds it). Use is free. Owning is collectible.</li>
     </ul>
 
     <h3>Card Type System</h3>
@@ -182,19 +182,6 @@
       <li><strong>1-3 abilities</strong> &mdash; name, cost, damage. Derived from type + tier.</li>
       <li><strong>Matchup chart</strong> &mdash; weakness/resistance cycle across all 7 types.</li>
       <li><strong>Evolution stages</strong> &mdash; Seed &rarr; Base &rarr; Evolved &rarr; Legendary (maps to quality tiers).</li>
-    </ul>
-
-    <h3>Binder Ledger</h3>
-    <ul>
-      <li><strong>Register before you submit</strong> &mdash; binder registration required via GitHub Issue before agent submission accepted.</li>
-      <li><strong>Public or private binders</strong> &mdash; the ledger stores identity (GitHub username), not contents.</li>
-    </ul>
-
-    <h3>Binder App</h3>
-    <ul>
-      <li><strong><a href="binder.html" style="color:var(--accent)">binder.html</a></strong> &mdash; zero-dependency card binder. IndexedDB persistence, import/export, seed resolver, type system display.</li>
-      <li><strong>Mobile-first</strong> &mdash; bottom nav, 48px+ touch targets, swipe between cards, full-screen modal, PWA meta tags.</li>
-      <li><strong>Offline cache</strong> &mdash; tap Cache to store entire registry in localStorage. Browse 133 cards in the woods with no signal.</li>
     </ul>
 
     <h3>API &amp; Discovery</h3>
@@ -207,7 +194,7 @@
 
     <h3>SDK Onboarding</h3>
     <ul>
-      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; create a binder in one command.</li>
+      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; create an agents/ workspace in one command.</li>
       <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAPP from CLI.</li>
       <li><strong><code>rapp_sdk.py card resolve 12345</code></strong> &mdash; resolve card from seed (offline).</li>
       <li><strong>snake_case enforced in scaffold</strong> &mdash; <code>new</code> command rejects dashes.</li>
@@ -339,17 +326,17 @@
       <li><strong>Release gate</strong> &mdash; all tests must pass, staging must be clean, security scan must pass before any release ships.</li>
     </ul>
 
-    <h3>Federation &amp; Binder</h3>
+    <h3>Federation &amp; Instances</h3>
     <ul>
-      <li><strong>Binder setup</strong> &mdash; <code>setup_instance.py</code> creates <code>binder/</code>, <code>staging/</code>, namespace dir, GitHub Pages config</li>
-      <li><strong>Federation CLI</strong> &mdash; <code>federate.py binder/diff/submit/sync</code> for managing upstream relationship</li>
-      <li><strong>GitHub Pages</strong> &mdash; auto-enabled on template instances. Your binder gets a live URL.</li>
+      <li><strong>Instance setup</strong> &mdash; <code>setup_instance.py</code> creates <code>agents/</code>, <code>staging/</code>, namespace dir, GitHub Pages config</li>
+      <li><strong>Federation CLI</strong> &mdash; <code>federate.py status/diff/submit/sync</code> for managing upstream relationship</li>
+      <li><strong>GitHub Pages</strong> &mdash; auto-enabled on template instances. Your registry gets a live URL.</li>
       <li><strong>Submit upstream</strong> &mdash; agents go to staging on the main repo for review before entering the registry</li>
     </ul>
 
     <h3>SDK Onboarding</h3>
     <ul>
-      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; initialize a RAPP binder in one command</li>
+      <li><strong><code>rapp_sdk.py init</code></strong> &mdash; initialize a RAPP agents/ workspace in one command</li>
       <li><strong><code>rapp_sdk.py submit</code></strong> &mdash; submit an agent to RAPP from CLI</li>
       <li><strong>Snake_case enforced in scaffold</strong> &mdash; <code>rapp_sdk.py new</code> rejects kebab-case slugs</li>
       <li><strong>Full quickstart in <code>skill.md</code></strong> &mdash; AI agents can onboard autonomously</li>

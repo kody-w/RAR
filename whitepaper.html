@@ -777,13 +777,10 @@ One sentence description here.
   <div class="section-number">Section 9</div>
   <h2>The Submission Protocol</h2>
 
-  <p>Agent submission is a two-step process. The protocol uses GitHub Issues as its API surface — no custom infrastructure, no application server, no authentication service beyond GitHub's own.</p>
+  <p>Agent submission uses GitHub Issues as its API surface — no custom infrastructure, no application server, no authentication service beyond GitHub's own.</p>
 
-  <h3>Step 1 — Register a binder</h3>
-  <p>The submitter opens a GitHub Issue with the title prefix <code>[RAR] register_binder</code> and a body containing their publisher handle, display name, and a brief description of their namespace. The <code>process-issues.yml</code> workflow fires on issue open, validates the handle format (<code>@publisher</code>, alphanumeric plus hyphens, no reserved names), and acknowledges the registration. The binder is now associated with the publisher's GitHub identity.</p>
-
-  <h3>Step 2 — Submit an agent</h3>
-  <p>The submitter opens a second Issue with the prefix <code>[RAR] submit_agent</code> and attaches or pastes their agent file. The automation validates the file against the protocol contract: manifest presence, required fields, naming convention, AST extractability, security scan pass. On validation success, the file is written to staging. A human reviewer is notified.</p>
+  <h3>Submit an agent</h3>
+  <p>The submitter opens a GitHub Issue with the prefix <code>[RAR] submit_agent</code> and attaches or pastes their agent file. The automation validates the file against the protocol contract: manifest presence, required fields, naming convention, AST extractability, security scan pass. The publisher namespace must match the authenticated GitHub identity OR be declared in the issue title. On validation success, the file is written to staging. A human reviewer is notified.</p>
 
   <h3>The forge is not the submitter</h3>
   <p>This is the most important security property of the submission protocol: <strong>the submitter does not choose their card attributes</strong>. The forge algorithm determines everything. A submitter who wants a Legendary rarity card cannot write that into the manifest — the <code>quality_tier</code> field is validated by the reviewer and defaults to <code>community</code>. Tier promotions are granted by the registry maintainers, not requested by authors.</p>
@@ -817,7 +814,7 @@ One sentence description here.
 
   <p>Federation configuration lives in <code>rar.config.json</code>. The upstream URL, sync policy, namespace reservations, and feature flags are all defined there. The template automation reads this file on first setup and configures the repository accordingly.</p>
 
-  <p>A binder (personal card collection) is the individual counterpart to the registry. A binder is stored in the browser's <code>IndexedDB</code> and <code>localStorage</code>. It can be exported as a JSON file and imported on any other device or any other instance. A binder is not tied to any server. A binder travels with the person.</p>
+  <p>An <code>agents/</code> directory <em>is</em> a personal collection. Clone any registry, and the <code>agents/</code> tree comes with it — the same Python files that the registry serves are the ones you run locally. The directory is the collection. There is no separate database layer.</p>
 
   <blockquote>The community grows grassroots. Every fork is a node. Every node is a registry. Every registry can contribute upstream. No single node is required for the system to function.</blockquote>
 </div>
@@ -829,20 +826,20 @@ One sentence description here.
 
   <p>The seed is <strong>public</strong>. Anyone can resolve a card from its seed. The stats, types, abilities, weakness, and rarity are visible to everyone. This is by design — the card's identity is open, just like a trading card's printed face is visible to anyone who looks at it.</p>
 
-  <p><strong>Ownership is private.</strong> A card lives in exactly one binder at a time. Ownership is recorded in the binder's local state — not on any public server, not in the registry, not in the seed. The binder is the deed.</p>
+  <p><strong>Ownership is private.</strong> A card lives in exactly one <code>agents/</code> directory at a time. Ownership is recorded in that directory's local state — not on any public server, not in the registry, not in the seed. The directory is the deed.</p>
 
   <p>This separation is fundamental:</p>
 
   <ul style="padding-left:24px; margin-bottom:18px; font-size:16px; line-height:2.1; font-family:-apple-system,sans-serif;">
     <li><strong>Seed</strong> — public, deterministic, shareable. The blueprint. Everyone can see it.</li>
-    <li><strong>Binder</strong> — private, personal, portable. The deed. Only the owner controls it.</li>
+    <li><strong>agents/ directory</strong> — private, personal, portable. The deed. Only the owner controls it.</li>
   </ul>
 
-  <p>When a card is transferred, it leaves one binder and enters another. The seed does not change — the identity is permanent. Only the location changes. This mirrors physical trading cards: the printed stats are the same in every collection, but the card itself is in one person's binder.</p>
+  <p>When a card is transferred, it leaves one <code>agents/</code> directory and enters another. The seed does not change — the identity is permanent. Only the location changes. This mirrors physical trading cards: the printed stats are the same in every collection, but the card itself is in one person's collection.</p>
 
   <p>Using an agent is always free. Ownership is the collectible layer — it does not gate access. Anyone can download, run, and modify any agent. Owning the card is something else entirely: it is provenance, identity, and membership in the collection.</p>
 
-  <blockquote>The seed is the face of the card. The binder is the hand that holds it.</blockquote>
+  <blockquote>The seed is the face of the card. The <code>agents/</code> directory is the hand that holds it.</blockquote>
 </div>
 
 <!-- ─── 11. Security Model ─────────────────────────────────────────────────── -->
@@ -873,7 +870,7 @@ One sentence description here.
   <p>The registry stores a SHA256 hash of each agent file at registration time. Any consumer of the registry can verify that the file they hold matches the registered version. This prevents silent file tampering between the registry and the consumer.</p>
 
   <h3>Namespace access control</h3>
-  <p>CODEOWNERS in the repository enforces that only the registered owner of a namespace can merge changes under that path. A pull request to <code>agents/@kody/</code> from a non-<code>@kody</code> identity will be blocked by the branch protection rules. Namespace squatting — registering a handle to block a legitimate publisher — is addressed by the binder registration process, which requires a GitHub identity match.</p>
+  <p>CODEOWNERS in the repository enforces that only the registered owner of a namespace can merge changes under that path. A pull request to <code>agents/@kody/</code> from a non-<code>@kody</code> identity will be blocked by the branch protection rules. Namespace squatting — registering a handle to block a legitimate publisher — is addressed by the GitHub-identity match at submission time: the publisher namespace must match the authenticated user.</p>
 </div>
 
 <!-- ─── 12. Offline-First Design ───────────────────────────────────────────── -->
@@ -893,17 +890,16 @@ One sentence description here.
       <tr><td>Browse the registry</td><td>No</td><td><code>registry.json</code> is a local file in the clone</td></tr>
       <tr><td>Resolve a card</td><td>No</td><td>Seed algorithm runs locally, zero bandwidth</td></tr>
       <tr><td>Open the agent store</td><td>No</td><td><code>index.html</code> is a single file, works from <code>file://</code></td></tr>
-      <tr><td>View the binder</td><td>No</td><td>IndexedDB + localStorage, browser-native</td></tr>
       <tr><td>Read agent documentation</td><td>No</td><td>Docstring is in the file</td></tr>
       <tr><td>Run an agent</td><td>No*</td><td>The file is the agent (* unless the agent calls external APIs)</td></tr>
     </tbody>
   </table>
 
   <h3>Write operations require connectivity</h3>
-  <p>Submitting a new agent, voting on a review, and registering a binder all require GitHub access. These are write operations — they modify the shared state of the registry. But the offline read path is unaffected. A node can hold and use the full registry indefinitely without ever writing to it.</p>
+  <p>Submitting a new agent and voting on a review both require GitHub access. These are write operations — they modify the shared state of the registry. But the offline read path is unaffected. A node can hold and use the full registry indefinitely without ever writing to it.</p>
 
-  <h3>The binder is a local-first database</h3>
-  <p>The binder uses <code>IndexedDB</code> as its primary storage and <code>localStorage</code> as a fallback. The card collection, deck configurations, and favorites are all stored locally. The binder can be exported as a portable JSON file — a snapshot of the collection at any point in time — and imported on any device without any server interaction.</p>
+  <h3>Your agents/ directory is your local-first database</h3>
+  <p>The <code>agents/</code> directory <em>is</em> your collection — it's just files on disk. The card collection, deck configurations, and favorites can all live alongside the agent files in the same git repo. The directory can be cloned, pushed, exported, and imported on any device without any server interaction.</p>
 
   <blockquote>A git clone is a full node. The file is the agent. The seed is the card. Nothing else is required.</blockquote>
 </div>
@@ -1028,7 +1024,7 @@ One sentence description here.
 
   <p>Any person with Python 3.11 and a text editor can write an agent that is fully compliant with this protocol. Any person with git can hold the complete registry. Any person with a browser can resolve any card without contacting any server. Any organization with a GitHub account can operate a federated instance. Two people with a QR code can trade entire AI environments without an internet connection.</p>
 
-  <p>The file is the agent. The manifest is the identity. The seed is the card. The egg is the environment. The registry is the index. The store is the interface. The binder is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
+  <p>The file is the agent. The manifest is the identity. The seed is the card. The egg is the environment. The registry is the index. The store is the interface. The <code>agents/</code> directory is the collection. All of it runs from a local directory. All of it works when the network is down. None of it requires a company to exist for it to keep working.</p>
 
   <p>This is not a product. It is a protocol. Protocols outlast products. The internet outlasted every ISP that helped build it. Bitcoin outlasted every exchange that said it needed. The RAPP protocol is designed to the same standard: define the rules clearly enough that the rules enforce themselves, and then step back.</p>
 
@@ -1076,7 +1072,6 @@ One sentence description here.
 <div class="footer">
   <div class="footer-links">
     <a href="index.html">Agent Store</a>
-    <a href="binder.html">Binder</a>
     <a href="faq.html">FAQ</a>
     <a href="ode.html">The Ode</a>
     <a href="https://github.com/kody-w/RAR" target="_blank">GitHub</a>

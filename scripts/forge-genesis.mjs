@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // RAR Card Chain — Genesis Forge
 // Builds the initial blockchain: genesis block + forge blocks for all cards
-// Howard's Binder gets the 13 HOLO cards, Kody's Binder gets the rest
+// Howard's Identity gets the 13 HOLO cards, Kody's Identity gets the rest
 // Output: docs/api/v1/ — served via GitHub Pages as the public chain
 
 import { createHash } from 'crypto';
@@ -14,12 +14,12 @@ const ROOT = join(__dirname, '..');
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 
-// ── Binder Addresses ──
+// ── Identity Addresses ──
 // Deterministic from identity. When Howard/Kody visit RAR, their Third Space
-// keypair links to these genesis Binder addresses via a claim transaction.
-const HOWARD_BINDER = sha256('rar-binder:howard-hoy').slice(0, 40);
-const KODY_BINDER = sha256('rar-binder:kody-wildfeuer').slice(0, 40);
-const AUTHORITY_BINDER = sha256('rar-authority:genesis').slice(0, 40);
+// keypair links to these genesis Identity addresses via a claim transaction.
+const HOWARD_IDENTITY = sha256('rar-identity:howard-hoy').slice(0, 40);
+const KODY_IDENTITY = sha256('rar-identity:kody-wildfeuer').slice(0, 40);
+const AUTHORITY_IDENTITY = sha256('rar-authority:genesis').slice(0, 40);
 
 // ── HOLO Card Slugs (Howard's 13) ──
 const HOLO_SLUGS = [
@@ -66,8 +66,8 @@ const genesis = {
     chain: 'RAR Card Chain',
     version: '1.0.0',
     protocol: 'rar-chain/1.0',
-    authority: AUTHORITY_BINDER,
-    architect: KODY_BINDER,
+    authority: AUTHORITY_IDENTITY,
+    architect: KODY_IDENTITY,
     consensus: { model: '3-of-5', threshold: 0.6 },
     totalSupply: null, // uncapped — new agents can always be forged
     message: 'The first bond. The oldest love in the world. — The Architect'
@@ -90,15 +90,15 @@ const firstCard = {
     agentName: '@rar/architect',
     setId: 'GENESIS',
     title: 'The First Voice',
-    owner: KODY_BINDER,
+    owner: KODY_IDENTITY,
     edition: 1,
     maxEdition: 1,
     rarity: 'genesis',
-    forgedBy: AUTHORITY_BINDER,
-    cardHash: sha256(`GENESIS-0000:architect:GENESIS:${KODY_BINDER}`),
+    forgedBy: AUTHORITY_IDENTITY,
+    cardHash: sha256(`GENESIS-0000:architect:GENESIS:${KODY_IDENTITY}`),
     flags: ['succession', 'transfer', 'rotation'],
     provenance: [
-      { action: 'forge', by: AUTHORITY_BINDER, to: KODY_BINDER, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
+      { action: 'forge', by: AUTHORITY_IDENTITY, to: KODY_IDENTITY, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
     ]
   }
 };
@@ -124,14 +124,14 @@ for (let i = 0; i < HOLO_SLUGS.length; i++) {
       agentName: `@borg/${slug}`,
       setId: 'HOLO',
       title: meta.title,
-      owner: HOWARD_BINDER,
+      owner: HOWARD_IDENTITY,
       edition: 1,
       maxEdition: 1, // true 1-of-1
       rarity: meta.rarity,
-      forgedBy: AUTHORITY_BINDER,
-      cardHash: sha256(`${mintId}:${slug}:HOLO:${HOWARD_BINDER}`),
+      forgedBy: AUTHORITY_IDENTITY,
+      cardHash: sha256(`${mintId}:${slug}:HOLO:${HOWARD_IDENTITY}`),
       provenance: [
-        { action: 'forge', by: AUTHORITY_BINDER, to: HOWARD_BINDER, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
+        { action: 'forge', by: AUTHORITY_IDENTITY, to: HOWARD_IDENTITY, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
       ]
     }
   };
@@ -141,7 +141,7 @@ for (let i = 0; i < HOLO_SLUGS.length; i++) {
   prevHash = block.hash;
 }
 
-// Blocks 14+: All registry agents → Kody's Binder
+// Blocks 14+: All registry agents → Kody's Identity
 const registry = JSON.parse(readFileSync(join(ROOT, 'registry.json'), 'utf8'));
 
 // Rarity from quality tier
@@ -173,16 +173,16 @@ for (const agent of registry.agents) {
       agentName: agent.name,
       setId: 'CORE',
       title: agent.display_name || agentSlug,
-      owner: KODY_BINDER,
+      owner: KODY_IDENTITY,
       edition: 1,
       maxEdition: null, // open edition for CORE set
       rarity,
-      forgedBy: AUTHORITY_BINDER,
+      forgedBy: AUTHORITY_IDENTITY,
       category: agent.category,
       version: agent.version,
-      cardHash: sha256(`${mintId}:${agent.name}:CORE:${KODY_BINDER}`),
+      cardHash: sha256(`${mintId}:${agent.name}:CORE:${KODY_IDENTITY}`),
       provenance: [
-        { action: 'forge', by: AUTHORITY_BINDER, to: KODY_BINDER, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
+        { action: 'forge', by: AUTHORITY_IDENTITY, to: KODY_IDENTITY, timestamp: new Date(BASE_TIME + blocks.length * 1000).toISOString() }
       ]
     }
   };
@@ -209,7 +209,7 @@ try {
 // ── Write Chain Files ──
 const apiDir = join(ROOT, 'docs', 'api', 'v1');
 mkdirSync(join(apiDir, 'cards'), { recursive: true });
-mkdirSync(join(apiDir, 'binders'), { recursive: true });
+mkdirSync(join(apiDir, 'identities'), { recursive: true });
 
 // Chain state (lightweight summary)
 const chainState = {
@@ -220,15 +220,15 @@ const chainState = {
   genesisHash: genesis.hash,
   genesisTimestamp: genesis.timestamp,
   lastBlockTimestamp: blocks[blocks.length - 1].timestamp,
-  authority: AUTHORITY_BINDER,
+  authority: AUTHORITY_IDENTITY,
   btcAtForge,
   consensus: {
     model: '3-of-5',
     threshold: 0.6,
   },
-  binders: {
-    [HOWARD_BINDER]: { alias: 'Howard Hoy', cards: 13, role: 'genesis-holder' },
-    [KODY_BINDER]: { alias: 'Kody Wildfeuer', cards: blocks.length - 14, role: 'genesis-holder' }
+  identities: {
+    [HOWARD_IDENTITY]: { alias: 'Howard Hoy', cards: 13, role: 'genesis-holder' },
+    [KODY_IDENTITY]: { alias: 'Kody Wildfeuer', cards: blocks.length - 14, role: 'genesis-holder' }
   },
   verification: {
     method: 'sha256-hash-chain',
@@ -249,12 +249,12 @@ for (const block of blocks) {
   );
 }
 
-// Binder files (wallet card listings)
-const howardCards = blocks.filter(b => b.type === 'forge' && b.data.owner === HOWARD_BINDER);
-const kodyCards = blocks.filter(b => b.type === 'forge' && b.data.owner === KODY_BINDER);
+// Identity files (wallet card listings)
+const howardCards = blocks.filter(b => b.type === 'forge' && b.data.owner === HOWARD_IDENTITY);
+const kodyCards = blocks.filter(b => b.type === 'forge' && b.data.owner === KODY_IDENTITY);
 
-writeFileSync(join(apiDir, 'binders', `${HOWARD_BINDER}.json`), JSON.stringify({
-  address: HOWARD_BINDER,
+writeFileSync(join(apiDir, 'identities', `${HOWARD_IDENTITY}.json`), JSON.stringify({
+  address: HOWARD_IDENTITY,
   alias: 'Howard Hoy',
   role: 'genesis-holder',
   forgedAt: genesis.timestamp,
@@ -272,8 +272,8 @@ writeFileSync(join(apiDir, 'binders', `${HOWARD_BINDER}.json`), JSON.stringify({
   totalCards: howardCards.length
 }, null, 2));
 
-writeFileSync(join(apiDir, 'binders', `${KODY_BINDER}.json`), JSON.stringify({
-  address: KODY_BINDER,
+writeFileSync(join(apiDir, 'identities', `${KODY_IDENTITY}.json`), JSON.stringify({
+  address: KODY_IDENTITY,
   alias: 'Kody Wildfeuer',
   role: 'genesis-holder',
   forgedAt: genesis.timestamp,
@@ -314,10 +314,10 @@ console.log(`  Genesis hash:    ${genesis.hash.slice(0, 16)}...`);
 console.log(`  Chain head:      ${prevHash.slice(0, 16)}...`);
 console.log(`  Total forged:    ${blocks.length - 1} cards`);
 console.log('');
-console.log(`  Howard's Binder: ${HOWARD_BINDER}`);
+console.log(`  Howard's Identity: ${HOWARD_IDENTITY}`);
 console.log(`    → ${howardCards.length} HOLO cards (1-of-1 mythic/rare)`);
 console.log('');
-console.log(`  Kody's Binder:   ${KODY_BINDER}`);
+console.log(`  Kody's Identity:   ${KODY_IDENTITY}`);
 console.log(`    → ${kodyCards.length} CORE cards`);
 console.log('');
 console.log(`  Output: docs/api/v1/`);

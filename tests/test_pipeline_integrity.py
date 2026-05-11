@@ -115,7 +115,6 @@ def isolated_pipeline(tmp_path, monkeypatch):
 
     (state / "votes.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
     (state / "reviews.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
-    (state / "binder_ledger.json").write_text(json.dumps({"binders": {"testuser": {"namespace": "@testuser", "registered_at": "2026-04-06T00:00:00Z"}}, "updated_at": ""}))
 
     monkeypatch.setattr(pi, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(pi, "STATE_DIR", state)
@@ -123,7 +122,6 @@ def isolated_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(pi, "STAGING_DIR", staging)
     monkeypatch.setattr(pi, "VOTES_FILE", state / "votes.json")
     monkeypatch.setattr(pi, "REVIEWS_FILE", state / "reviews.json")
-    monkeypatch.setattr(pi, "LEDGER_FILE", state / "binder_ledger.json")
 
     return tmp_path
 
@@ -174,18 +172,9 @@ class TestStagingPipeline:
     @pytest.mark.pipeline
     def test_submission_rejects_wrong_namespace(self, isolated_pipeline):
         """User 'alice' can't submit under @testuser/ namespace."""
-        # Register alice's binder first, then try to submit under @testuser
-        pi.handle_register_binder({"namespace": "@alice"}, "alice")
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "alice")
         assert "error" in result
         assert "Publisher" in result["error"] or "publisher" in result["error"]
-
-    @pytest.mark.pipeline
-    def test_submission_auto_registers_binder(self, isolated_pipeline):
-        """Unregistered users get auto-registered on first submission."""
-        result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
-        assert "ok" in result
-        assert pi.is_binder_registered("testuser")
 
     @pytest.mark.pipeline
     def test_submission_rejects_kebab_slug(self, isolated_pipeline):
@@ -467,7 +456,7 @@ class TestFilenameEnforcement:
 # ──────────────────────────────────────────────────────────────────────
 
 class TestFederation:
-    """Federation setup and binder initialization."""
+    """Federation setup and instance configuration."""
 
     @pytest.mark.federation
     def test_setup_instance_creates_config(self, tmp_path, monkeypatch):
@@ -475,7 +464,6 @@ class TestFederation:
         import setup_instance as si
         monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
         monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
         monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
         monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-agents")
 
@@ -488,23 +476,6 @@ class TestFederation:
         assert config["upstream"] == "kody-w/RAR"
         assert config["namespace"] == "@alice"
 
-    @pytest.mark.federation
-    def test_setup_creates_binder_state(self, tmp_path, monkeypatch):
-        sys.path.insert(0, str(REPO_ROOT / "scripts"))
-        import setup_instance as si
-        monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
-        monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
-        monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
-        monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-agents")
-
-        si.main()
-
-        binder_state = tmp_path / "binder" / "binder_state.json"
-        assert binder_state.exists()
-        state = json.loads(binder_state.read_text())
-        assert state["schema"] == "rar-binder/1.0"
-        assert state["namespace"] == "@alice"
 
     @pytest.mark.federation
     def test_setup_creates_staging_dir(self, tmp_path, monkeypatch):
@@ -512,7 +483,6 @@ class TestFederation:
         import setup_instance as si
         monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
         monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
         monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
         monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-agents")
 
@@ -525,7 +495,6 @@ class TestFederation:
         import setup_instance as si
         monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
         monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
         monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
         monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-agents")
 
@@ -538,7 +507,6 @@ class TestFederation:
         import setup_instance as si
         monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
         monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
         monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
         monkeypatch.setenv("GITHUB_REPOSITORY", "kody-w/RAR")
 
@@ -553,18 +521,18 @@ class TestFederation:
         assert config["upstream"] is None
 
     @pytest.mark.federation
-    def test_binder_pages_url_format(self, tmp_path, monkeypatch):
+    def test_pages_url_format(self, tmp_path, monkeypatch):
         sys.path.insert(0, str(REPO_ROOT / "scripts"))
         import setup_instance as si
         monkeypatch.setattr(si, "REPO_ROOT", tmp_path)
         monkeypatch.setattr(si, "CONFIG_FILE", tmp_path / "rar.config.json")
-        monkeypatch.setattr(si, "BINDER_DIR", tmp_path / "binder")
         monkeypatch.setattr(si, "STAGING_DIR", tmp_path / "staging")
-        monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-binder")
+        monkeypatch.setenv("GITHUB_REPOSITORY", "alice/my-agents")
 
         si.main()
         config = json.loads((tmp_path / "rar.config.json").read_text())
-        assert config["binder"]["pages_url"] == "https://alice.github.io/my-binder/"
+        assert config["pages_url"] == "https://alice.github.io/my-agents/"
+
 
 
 # ──────────────────────────────────────────────────────────────────────
