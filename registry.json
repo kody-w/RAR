@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-11T14:49:00.518965+00:00",
+  "generated_at": "2026-05-11T14:54:17.315703+00:00",
   "stats": {
     "total_agents": 187,
     "total_swarms": 82,
@@ -4671,8 +4671,8 @@
       "_has_card": true,
       "_added_at": "2026-05-02T14:14:24-04:00",
       "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
-      "_latest_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
-      "_card_sha256": "70554ce87969e8df545b353d362685f865f442ef0d26b8294ac8e2ec38febdb4"
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_card_sha256": "533a87b3fd7ecbb8878619c25dd2f621b1754e7bfc90aa4625c2d0232a4662e2"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4711,7 +4711,7 @@
       "_has_card": true,
       "_added_at": "2026-05-05T14:31:38Z",
       "_first_commit_sha": "0e5b2e5e04503ea6864e4aa762486ef0d254ecee",
-      "_latest_commit_sha": "f6a8cc9a544a2f17e1365fe4cb19efa3e85cd89e",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "a903061f1262c26d4e9396502dccd3ff7c810f8c8ffee87efbb6e5cf6790a786"
     },
     {
@@ -5110,9 +5110,9 @@
       "_size_kb": 11.5,
       "_lines": 266,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-05-11T10:53:36-04:00",
+      "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "4b4fbd87f338f7565c3da69b441a15f2aa099c69435df84d397e3757b555e3b4"
     },
     {
@@ -5297,7 +5297,7 @@
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "402803456fb795b747528ab122420beb2cfdedcf",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "d6efc4b54e1324e9ae76b123c8e42178e3b819f786292b57e15c30ed66947968"
     },
     {
@@ -5471,7 +5471,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T21:49:48Z",
       "_first_commit_sha": "63cf956f3ddf3cfa6c10c07c1535228ed6c260e5",
-      "_latest_commit_sha": "04f0446aa5721dd5ae04daf143317285d02e5dc0",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "708d4eded24849dbfb64ce924a6ee6087acba6023837270fe2bf6e516405284a"
     },
     {
@@ -5507,7 +5507,7 @@
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "c797ca3efe983762674f1c2def27283d0eac574e",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
     },
     {
@@ -5539,9 +5539,9 @@
       "_size_kb": 71.8,
       "_lines": 1771,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-05-04T12:36:05-04:00",
+      "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "a827004724e3a4d08162769ff90d41644e24c41432db3c74126408c624849ccf"
     },
     {
@@ -5724,7 +5724,7 @@
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "5c7995371fe96f20d1ba97987c0cce44e40df2be1552d18d665ab08fb51b1f11"
     },
     {
@@ -6108,7 +6108,7 @@
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
+      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "087c7dfed2e94f1e09d88755eec7a7a480485c8fd745fd676b1cc567c0777723"
     },
     {
