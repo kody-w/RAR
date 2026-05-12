@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-12T01:06:27.885077+00:00",
+  "generated_at": "2026-05-12T02:07:41.384213+00:00",
   "stats": {
     "total_agents": 190,
     "total_swarms": 82,
@@ -4562,7 +4562,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/rar_remote_agent",
-      "version": "1.7.1",
+      "version": "1.7.2",
       "display_name": "RAR Remote Agent",
       "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
       "author": "RAPP Core Team",
@@ -4582,10 +4582,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody/rar_remote_agent.py",
-      "_sha256": "48f4e1aed521108178d65e290db9b79d766175fc8efcee247e00d83cc3171a03",
+      "_sha256": "1e78c80984d5ab89330a75127e6425f9b22c35583dd2b6edd505e634dcb29592",
       "_seed": 756356789067200321,
-      "_size_kb": 59.1,
-      "_lines": 1397,
+      "_size_kb": 58.4,
+      "_lines": 1382,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -5302,15 +5302,17 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/local_tether",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "display_name": "LocalTether",
-      "description": "Serves the RAPP tether locally on http://localhost:8000 so it can freely talk to the brainstem at localhost:7071 (no mixed-content blocking). Auto-opens the browser pre-tethered to the requested neighborhood (commons by default). Phone guests join via the live HTTPS tether \u2014 both meet in the same lobby through the PeerJS broker.",
+      "description": "Serves the RAPP tether locally on http://localhost:8000 AND spawns a LAN-local PeerJS broker on :9000 (via `npx peerjs`). Auto-injects ?broker + ?lan params so PeerJS skips the public broker entirely. Phone joins via the LAN IP (also injected). Solves both mixed-content (HTTPS\u2192HTTP brainstem) and tracking-prevention/firewall blocks on peerjs.com.",
       "author": "Kody",
       "tags": [
         "tether",
         "lobby",
         "local-server",
-        "mixed-content-fix"
+        "lan-broker",
+        "mixed-content-fix",
+        "peerjs-bypass"
       ],
       "category": "core",
       "quality_tier": "official",
@@ -5324,10 +5326,10 @@
         }
       },
       "_file": "agents/@rapp/local_tether_agent.py",
-      "_sha256": "632aeb578138163fbdbc864cc44ee645239739770aede143112f45dbcad05d8c",
-      "_seed": 2886267251957704524,
-      "_size_kb": 11.1,
-      "_lines": 273,
+      "_sha256": "5b2dbfd92bf243b92c78b9a371667a0f56d672b986dc7a95b85699b74ce2bf00",
+      "_seed": 2886267251957971465,
+      "_size_kb": 17.5,
+      "_lines": 431,
       "_has_card": true,
       "_added_at": "2026-05-11T21:01:44-04:00",
       "_first_commit_sha": "0eed4b10aa4d67f37f38bcec04204c54f6d11f46",

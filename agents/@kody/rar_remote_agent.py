@@ -16,7 +16,7 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/rar_remote_agent",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "display_name": "RAR Remote Agent",
     "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
@@ -1132,34 +1132,19 @@ class RARRemoteAgent(BasicAgent):
         written = []
         errors = []
 
-        # Two source modes, tried in order:
-        #   1. Local: if cwd contains a private-rar-template/ directory
-        #      (e.g., running from inside the public RAR repo before the
-        #      template has been pushed), read from disk.
-        #   2. Remote: otherwise fetch from raw.githubusercontent.com.
-        # Local-first lets the agent self-bootstrap during development;
-        # remote-fallback keeps users on other machines working.
-        local_template_root = os.path.abspath("private-rar-template")
-        use_local = os.path.isdir(local_template_root)
-
+        # Template is always fetched from the canonical remote so every
+        # user gets the same content regardless of cwd. (An earlier
+        # version checked for a local private-rar-template/ directory
+        # first — that created surprising behavior where running the
+        # agent from inside the public RAR repo gave different results
+        # than running it from anywhere else.)
         for entry in self.PRIVATE_RAR_TEMPLATE_FILES:
-            content = None
-            if use_local:
-                src_path = os.path.join(local_template_root, entry["src"])
-                if os.path.exists(src_path):
-                    try:
-                        with open(src_path) as f:
-                            content = f.read()
-                    except OSError as e:
-                        errors.append(f"read {entry['src']}: {e}")
-                        continue
-            if content is None:
-                src_url = f"{self.RAW_BASE}/private-rar-template/{entry['src']}"
-                try:
-                    content = self._fetch_text(src_url)
-                except Exception as e:
-                    errors.append(f"fetch {entry['src']}: {e}")
-                    continue
+            src_url = f"{self.RAW_BASE}/private-rar-template/{entry['src']}"
+            try:
+                content = self._fetch_text(src_url)
+            except Exception as e:
+                errors.append(f"fetch {entry['src']}: {e}")
+                continue
             if entry["substitute"]:
                 for old, new in replacements:
                     content = content.replace(old, new)
