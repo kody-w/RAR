@@ -1,0 +1,44 @@
+"""
+Gated stub — actual agent.py lives in kody-w/RAR-private.
+
+Wildhaven IP-separation strategist. Walks the operator through the IP
+boundary between Wildhaven (rappter / consumer-AI / digital-twin /
+perpetuity) and Microsoft (RAPP engine / business applications).
+
+Eight actions: audit_separation, recommend_filings, draft_attribution,
+check_artifact, prepare_employer_letter, next_action, find_lawyer,
+get_status.
+
+Every output ends with NOT LEGAL ADVICE. The agent helps you organize
+your thinking and identify what to consult a real IP attorney about —
+it is not a substitute for one.
+
+To install: you need pull access on kody-w/RAR-private. The brainstem's
+loader resolves the __source__ pointer below using your GitHub token at
+install time. No access → clean access-denied; you don't see the bytes.
+
+This stub is pure metadata per the RAR stub contract — no functions,
+no classes, no imports, no executable code.
+"""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody/legal_helper",
+    "version": "1.0.0",
+    "display_name": "LegalHelper",
+    "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy — NOT legal advice; every reply ends with the disclaimer.",
+    "author": "Kody Wildfeuer",
+    "tags": ["legal", "ip", "wildhaven", "private", "stub", "operator-personal"],
+    "category": "productivity",
+    "quality_tier": "private",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+__source__ = {
+    "schema": "rapp-source/1.0",
+    "type": "github_private",
+    "repo": "kody-w/RAR-private",
+    "ref": "main",
+    "path": "agents/legal_helper_agent.py",
+}
