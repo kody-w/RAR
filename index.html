@@ -163,6 +163,95 @@ header {
 
 .empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
 .loading { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+
+/* ─── Cart (ported from store.html) ───────────────────────── */
+.cart-toggle {
+  position: relative; background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text-dim); width: 34px; height: 34px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: all .15s;
+}
+.cart-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.cart-badge {
+  position: absolute; top: -6px; right: -6px;
+  background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700;
+  min-width: 18px; height: 18px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; padding: 0 4px;
+}
+.cart-sidebar {
+  position: fixed; top: 0; right: -440px; width: 420px; height: 100vh;
+  background: var(--surface); border-left: 1px solid var(--border);
+  z-index: 60; transition: right .3s ease; display: flex; flex-direction: column;
+  box-shadow: -4px 0 30px rgba(0,0,0,.4);
+}
+.cart-sidebar.open { right: 0; }
+.cart-header {
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-header h3 { font-size: 1.1rem; font-weight: 600; }
+.cart-close {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+}
+.cart-close:hover { color: var(--text); }
+.cart-body { flex: 1; overflow-y: auto; padding: 16px 24px; }
+.cart-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface2); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;
+}
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-weight: 600; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cart-item-ns { font-size: .75rem; color: var(--text-muted); font-family: 'SF Mono', Consolas, monospace; }
+.cart-item-remove {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-size: .9rem; padding: 4px 8px; border-radius: 4px;
+}
+.cart-item-remove:hover { color: #f85149; background: rgba(248,81,73,.1); }
+.cart-empty { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: .9rem; }
+.cart-footer {
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.cart-btn {
+  width: 100%; padding: 10px; border-radius: 8px; border: none;
+  font-size: .9rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.cart-btn:hover { opacity: .9; }
+.cart-btn.primary { background: linear-gradient(135deg, var(--accent), #d2a8ff); color: #fff; }
+.cart-btn.secondary { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+.cart-btn.danger { background: none; border: 1px solid var(--border); color: #f85149; font-weight: 400; font-size: .82rem; }
+.share-box {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; display: flex; align-items: center; gap: 8px; margin-top: 8px;
+}
+.share-box input {
+  flex: 1; background: none; border: none; color: var(--green);
+  font-family: 'SF Mono', Consolas, monospace; font-size: .8rem; outline: none;
+}
+.share-box .copy-btn {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+  padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: .75rem;
+}
+.add-cart-btn {
+  background: none; border: 1px solid var(--border); color: var(--text-dim);
+  padding: 2px 8px; border-radius: 5px; font-size: .72rem; cursor: pointer;
+  transition: all .15s; line-height: 1;
+}
+.add-cart-btn:hover { border-color: var(--accent); color: var(--accent); }
+.add-cart-btn.in-cart { border-color: var(--green); color: var(--green); background: rgba(63,185,80,.1); }
+.cart-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--surface); border: 1px solid var(--accent); color: var(--text);
+  padding: 10px 18px; border-radius: 8px; font-size: .85rem; z-index: 70;
+  box-shadow: 0 4px 20px rgba(0,0,0,.5);
+}
+@media (max-width: 768px) {
+  .cart-sidebar { width: 100%; right: -100%; }
+}
 .spinner {
   width: 28px; height: 28px; border: 3px solid var(--border);
   border-top-color: var(--accent); border-radius: 50%;
@@ -269,8 +358,32 @@ header {
     <a class="adv-link" href="submit.html">Submit</a>
     <a class="adv-link" href="admin.html">Admin</a>
     <a class="adv-link" href="store.html">Advanced</a>
+    <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="currentColor" opacity="0.5"/><circle cx="18" cy="19" r="2" fill="currentColor" opacity="0.5"/></svg>
+      <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+    </div>
   </div>
 </header>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle;margin-right:6px"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>Agent Cart (<span id="cart-count">0</span>)</h3>
+    <button class="cart-close" onclick="toggleCart()">&#10005;</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty">Your cart is empty. Browse agents and click <strong>+</strong> to add them.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="share-box" id="share-box" style="display:none">
+      <input type="text" id="share-url" readonly>
+      <button class="copy-btn" onclick="copyShareUrl()">Copy</button>
+    </div>
+    <button class="cart-btn primary" onclick="downloadCart()" id="download-cart-btn" style="display:none">Download All (.zip)</button>
+    <button class="cart-btn secondary" onclick="shareCart()" id="share-cart-btn" style="display:none">Share Collection</button>
+    <button class="cart-btn danger" onclick="clearCart()" id="clear-cart-btn" style="display:none">Clear cart</button>
+  </div>
+</div>
 
 <div class="container">
   <div class="search-box">
@@ -526,16 +639,170 @@ function card(a) {
   const lockBadge = isStub
     ? `<span class="cat-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)" title="Gated agent — bytes hosted in ${esc(a._source?.repo || 'a private repo')}. Install requires access.">${LOCK_SVG}LOCKED</span>`
     : '';
+  const inCart = cart.has(a.name);
+  const cartBtn = isStub
+    ? '' // Stubs can't be batch-downloaded — the bytes live in a private repo.
+    : `<button class="add-cart-btn ${inCart ? 'in-cart' : ''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')" title="${inCart ? 'In cart' : 'Add to cart'}">${inCart ? '&#10003;' : '+'}</button>`;
   return `
     <div class="agent-card" onclick="openAgent('${esc(a.name)}')">
       <div class="card-name">${lockBadge}${esc(a.display_name)}</div>
       <div class="card-desc">${esc(a.description)}</div>
       <div class="card-footer">
-        <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
-        <span>by ${esc(a.author)}</span>
+        <span style="display:flex;gap:8px;align-items:center;min-width:0">
+          <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by ${esc(a.author)}</span>
+        </span>
+        ${cartBtn}
       </div>
     </div>`;
 }
+
+// ─── Cart (ported from store.html, trimmed to essentials) ─────
+let cart = new Set(JSON.parse(localStorage.getItem('rar_cart') || '[]'));
+
+function saveCart() {
+  localStorage.setItem('rar_cart', JSON.stringify([...cart]));
+}
+function toggleCartItem(name) {
+  if (cart.has(name)) cart.delete(name); else cart.add(name);
+  saveCart();
+  render();
+  updateCartUI();
+}
+function clearCart() {
+  cart.clear();
+  saveCart();
+  render();
+  updateCartUI();
+}
+function toggleCart() {
+  document.getElementById('cart-sidebar').classList.toggle('open');
+  updateCartUI();
+}
+function updateCartUI() {
+  const badge = document.getElementById('cart-badge');
+  const n = cart.size;
+  badge.style.display = n > 0 ? 'flex' : 'none';
+  badge.textContent = n;
+  document.getElementById('cart-count').textContent = n;
+
+  const show = n > 0 ? '' : 'none';
+  document.getElementById('download-cart-btn').style.display = show;
+  document.getElementById('share-cart-btn').style.display = show;
+  document.getElementById('clear-cart-btn').style.display = show;
+
+  const body = document.getElementById('cart-body');
+  if (n === 0) {
+    body.innerHTML = '<div class="cart-empty">Your cart is empty. Browse agents and click <strong>+</strong> to add them.</div>';
+    document.getElementById('share-box').style.display = 'none';
+    return;
+  }
+  body.innerHTML = [...cart].map(name => {
+    const a = allAgents.find(x => x.name === name);
+    if (!a) return '';
+    return `<div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(a.display_name)}</div>
+        <div class="cart-item-ns">${esc(a.name)}</div>
+      </div>
+      <button class="cart-item-remove" onclick="toggleCartItem('${esc(name)}')">&#10005;</button>
+    </div>`;
+  }).join('');
+}
+
+function cartToast(msg) {
+  document.querySelector('.cart-toast')?.remove();
+  const t = document.createElement('div');
+  t.className = 'cart-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+async function downloadCart() {
+  if (cart.size === 0) return;
+  cartToast('Preparing download...');
+
+  const files = [];
+  for (const name of cart) {
+    const a = allAgents.find(x => x.name === name);
+    if (!a || !a._file) continue;
+    try {
+      const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+      if (res.ok) {
+        files.push({ name: a._file.split('/').pop(), content: await res.text(), agent: a });
+      }
+    } catch {}
+  }
+  if (files.length === 0) { cartToast('No files to download'); return; }
+
+  // Single file → direct download, no zip needed.
+  if (files.length === 1) {
+    const blob = new Blob([files[0].content], { type: 'text/x-python' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = files[0].name;
+    link.click(); URL.revokeObjectURL(url);
+    cartToast(`Downloaded ${files[0].name}`);
+    return;
+  }
+
+  // Multiple files → zip via JSZip (loaded on demand from CDN).
+  if (typeof JSZip === 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    document.head.appendChild(s);
+    await new Promise(r => s.onload = r);
+  }
+  const zip = new JSZip();
+  const agentsFolder = zip.folder('agents');
+  files.forEach(f => agentsFolder.file(f.name, f.content));
+  zip.file('README.md',
+    `# RAPP Agent Collection\nDownloaded ${new Date().toISOString().split('T')[0]}\n\n` +
+    `## Agents (${files.length})\n${files.map(f => `- ${f.agent.display_name} (${f.agent.name}) v${f.agent.version}`).join('\n')}\n\n` +
+    `## Install\nCopy the .py files into your project's agents/ directory.\n\n` +
+    `## More\nhttps://${OWNER}.github.io/${REPO_NAME}/\n`);
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url; link.download = `rar-agents-${files.length}.zip`;
+  link.click(); URL.revokeObjectURL(url);
+  cartToast(`Downloaded ${files.length} agents as ZIP`);
+}
+
+function shareCart() {
+  if (cart.size === 0) return;
+  const agents = [...cart].map(n => encodeURIComponent(n)).join(',');
+  const url = `${window.location.origin}${window.location.pathname}?agents=${agents}`;
+  document.getElementById('share-url').value = url;
+  document.getElementById('share-box').style.display = 'flex';
+  navigator.clipboard.writeText(url);
+  cartToast('Share link copied to clipboard');
+}
+function copyShareUrl() {
+  const el = document.getElementById('share-url');
+  el.select();
+  navigator.clipboard.writeText(el.value);
+  cartToast('Copied');
+}
+
+function loadSharedCart() {
+  const params = new URLSearchParams(window.location.search);
+  const agents = params.get('agents');
+  if (!agents) return;
+  const names = agents.split(',').map(a => decodeURIComponent(a)).filter(Boolean);
+  window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+  names.forEach(a => cart.add(a));
+  saveCart();
+  // Show the cart so the user sees what was loaded.
+  setTimeout(() => {
+    updateCartUI();
+    document.getElementById('cart-sidebar').classList.add('open');
+    cartToast(`Loaded ${names.length} shared agent(s) into your cart`);
+  }, 300);
+}
+
+window.addEventListener('load', () => { updateCartUI(); loadSharedCart(); });
 
 function openAgent(name) {
   const a = allAgents.find(x => x.name === name);
