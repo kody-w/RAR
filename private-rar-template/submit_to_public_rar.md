@@ -35,19 +35,23 @@ __source__ = {
 }
 ```
 
-## Three ways to generate one
+## Two ways to generate one
 
-### 1. Easiest: `@kody/publish_private_agent`
+### 1. Easiest: `action='publish_private'` on `@kody/rar_remote_agent`
 
-If you have the brainstem set up, run the publish helper. It reads a
-local agent file and writes the matching `.py.stub` to wherever you
-want.
+If you have the brainstem set up, point the remote agent at the GitHub
+URL of your private agent.py. It fetches the agent (using your own
+GitHub token, which proves you can read it), extracts the manifest,
+generates the matching `.py.stub`, and opens a submission issue on
+public RAR — all in one call.
 
 ```bash
-rapp run @kody/publish_private_agent \
-    --agent_path agents/@yourname/your_slug_agent.py \
-    --private_repo yourname/yourname-private-rar
+rapp run @kody/rar_remote_agent \
+    --action publish_private \
+    --agent_url https://github.com/yourname/yourname-private-rar/blob/main/agents/@yourname/your_slug_agent.py
 ```
+
+Add `--dry_run true` to preview the generated stub without submitting.
 
 ### 2. By hand
 
@@ -55,7 +59,7 @@ Copy the template above, fill in your fields, save it as
 `agents/@yourname/your_slug_agent.py.stub`, and open a PR against
 [CommunityRAPP/RAR][rar].
 
-### 3. Skip public RAR entirely
+## Skip public RAR entirely
 
 If you don't care about discoverability and just want your agents
 installable on machines you own, you can skip the stub flow. Use

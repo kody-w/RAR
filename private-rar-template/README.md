@@ -44,9 +44,9 @@ private-rar-template/
 4. **Optional: rebuild the local registry.** Run
    `python build_local_registry.py` to refresh `private-registry.json`
    so you can see what you've got.
-5. **Publish a stub to public RAR.** Use `@kody/publish_private_agent`
-   from your brainstem to generate the matching `.py.stub` file for
-   public RAR — see [submit_to_public_rar.md](./submit_to_public_rar.md).
+5. **Publish a stub to public RAR.** Run `@kody/rar_remote_agent` with
+   `action='publish_private'` and the GitHub URL of your agent.py —
+   see [submit_to_public_rar.md](./submit_to_public_rar.md).
 
 ## Why a separate repo and not just a folder in public RAR?
 
