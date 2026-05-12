@@ -77,7 +77,7 @@ __manifest__ = {
     "version": "0.1.0",
     "tags": ["meta", "copilot-studio", "deploy", "dataverse", "destructive"],
     "category": "core",
-    "quality_tier": "experimental",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent", "@rapp/copilot_studio_forge_agent"],
     "example_call": {"args": {"action": "auth_test"}},
