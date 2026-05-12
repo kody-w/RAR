@@ -23,3 +23,6 @@ agents/@billwhalen/customer-*/
 # CEO private workspace
 .wildhaven/
 rappter-fleet/
+
+# Build artifacts for the private RAR template (the source dir is tracked)
+private-rar-template.tar.gz

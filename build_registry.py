@@ -14,9 +14,14 @@ Scans agents/@publisher/ for .py and .py.card files with __manifest__ dicts and 
 Also scans swarms/@publisher/ for converged multi-agent singletons with __swarm__ dicts,
 and promotes existing agent stacks to downloadable swarm bundles.
 
-Supports two file formats:
+Supports three file formats:
 - slug.py      — bare agent (code + manifest)
 - slug.py.card — complete agent+card package (code + manifest + __card__ shell)
+- slug.py.stub — gated agent (manifest + __source__ pointer, no code).
+                 The actual agent.py lives in a private repo; the brainstem
+                 resolves the pointer at install time using the user's own
+                 GitHub credentials. Public RAR lists the entry, the user's
+                 private repo gates the bytes.
 """
 
 import ast
@@ -162,6 +167,86 @@ def validate_swarm(py_path: Path, swarm: dict) -> list:
     pb = swarm.get("produced_by", {})
     if not isinstance(pb, dict) or "method" not in pb:
         errors.append("produced_by must be a dict with at least 'method'")
+    return errors
+
+
+REQUIRED_SOURCE_FIELDS = ["schema", "type"]
+SUPPORTED_SOURCE_TYPES = {"github_private", "github_public"}
+
+
+def extract_source(py_path: Path) -> dict:
+    """Extract __source__ dict from a .py.stub file via AST literal_eval."""
+    try:
+        source = py_path.read_text()
+        tree = ast.parse(source)
+    except SyntaxError as e:
+        print(f"  ⚠ Syntax error in {py_path}: {e}")
+        return None
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and target.id == "__source__":
+                    try:
+                        return ast.literal_eval(node.value)
+                    except (ValueError, TypeError) as e:
+                        print(f"  ⚠ Cannot parse __source__ in {py_path}: {e}")
+                        return None
+    return None
+
+
+def validate_source(py_path: Path, src: dict) -> list:
+    """Validate a stub's __source__ pointer."""
+    errors = []
+    if not isinstance(src, dict):
+        return [f"{py_path}: __source__ must be a dict"]
+    for field in REQUIRED_SOURCE_FIELDS:
+        if field not in src:
+            errors.append(f"Missing __source__ field: {field}")
+    if src.get("schema") != "rapp-source/1.0":
+        errors.append(f"Invalid __source__ schema: {src.get('schema')} (expected rapp-source/1.0)")
+    stype = src.get("type")
+    if stype not in SUPPORTED_SOURCE_TYPES:
+        errors.append(
+            f"Unsupported __source__ type: {stype} "
+            f"(supported: {sorted(SUPPORTED_SOURCE_TYPES)})"
+        )
+    if stype in ("github_private", "github_public"):
+        for field in ("repo", "path"):
+            if field not in src:
+                errors.append(f"github_* source missing required field: {field}")
+        repo = src.get("repo", "")
+        if repo and "/" not in repo:
+            errors.append(f"Invalid repo '{repo}' — must be owner/name")
+    return errors
+
+
+def validate_stub_purity(py_path: Path) -> list:
+    """A .py.stub file may contain only a docstring and the __manifest__
+    and __source__ assignments. Any other top-level statement (function,
+    class, import, executable code) is rejected — stubs are pure metadata."""
+    try:
+        tree = ast.parse(py_path.read_text())
+    except SyntaxError as e:
+        return [f"Syntax error: {e}"]
+
+    errors = []
+    allowed_names = {"__manifest__", "__source__"}
+    for i, node in enumerate(tree.body):
+        # Allow module docstring (first Expr with a string constant)
+        if (i == 0
+                and isinstance(node, ast.Expr)
+                and isinstance(node.value, ast.Constant)
+                and isinstance(node.value.value, str)):
+            continue
+        if isinstance(node, ast.Assign) and len(node.targets) == 1:
+            tgt = node.targets[0]
+            if isinstance(tgt, ast.Name) and tgt.id in allowed_names:
+                continue
+        errors.append(
+            f"stub contains non-metadata statement at line {node.lineno} — "
+            f"stubs may contain only a docstring, __manifest__, and __source__"
+        )
     return errors
 
 
@@ -515,6 +600,89 @@ def build_registry():
                 entry["_card_sha256"] = _card_content_sha256(holo)
             converged_swarms.append(entry)
 
+    # ─── Scan agents/ for .py.stub gated entries ───────────────────────
+    # Stubs are manifest-only files that point at a private repo for the
+    # actual agent.py bytes. They appear in the registry like normal
+    # agents but with type:"stub", and the brainstem's install path
+    # resolves the __source__ pointer at install time using the user's
+    # own GitHub credentials.
+    stub_files = sorted(AGENTS_DIR.rglob("*.py.stub"))
+    for py_path in stub_files:
+        stem = py_path.name[:-len(".py.stub")]
+        if '-' in stem:
+            errors.append(f"{py_path}: filename contains dashes — rename to snake_case")
+            continue
+
+        purity_errors = validate_stub_purity(py_path)
+        if purity_errors:
+            for err in purity_errors:
+                errors.append(f"{py_path}: {err}")
+            continue
+
+        manifest = extract_manifest(py_path)
+        if manifest is None:
+            errors.append(f"{py_path}: missing __manifest__ dict")
+            continue
+        validation_errors = validate_manifest(py_path, manifest)
+        if validation_errors:
+            for err in validation_errors:
+                errors.append(f"{py_path}: {err}")
+            continue
+
+        src = extract_source(py_path)
+        if src is None:
+            errors.append(f"{py_path}: missing __source__ dict (required for stubs)")
+            continue
+        source_errors = validate_source(py_path, src)
+        if source_errors:
+            for err in source_errors:
+                errors.append(f"{py_path}: {err}")
+            continue
+
+        name = manifest["name"]
+        if name in seen_names:
+            errors.append(f"{py_path}: duplicate name '{name}' (already registered)")
+            continue
+        seen_names.add(name)
+
+        publisher = name.split("/")[0]
+        publishers.add(publisher)
+        categories.add(manifest.get("category", "uncategorized"))
+
+        # Stubs are forced to quality_tier "private" — the source isn't
+        # readable by reviewers, so the standard promotion ladder
+        # (community → verified → official) doesn't apply.
+        manifest["quality_tier"] = "private"
+
+        # Hash the stub file itself (not the bytes it points at — those
+        # live in the private repo and may not be accessible here).
+        stub_sha = compute_sha256(py_path)
+        content = py_path.read_text()
+
+        manifest["type"] = "stub"
+        manifest["_file"] = str(py_path)
+        manifest["_stub_sha256"] = stub_sha
+        manifest["_source"] = src
+        manifest["_seed"] = compute_seed(
+            name,
+            manifest.get("category", "general"),
+            "private",
+            manifest.get("tags", []),
+            manifest.get("dependencies", []),
+        )
+        manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
+        manifest["_lines"] = len(content.split('\n'))
+        manifest["_has_card"] = _has_holo_card(name)
+        manifest["_added_at"] = _git_first_committed(py_path)
+        manifest["_first_commit_sha"] = _git_first_commit_sha(py_path)
+        manifest["_latest_commit_sha"] = _git_latest_commit_sha(py_path)
+        if manifest["_has_card"]:
+            holo = _holo_card_for(name)
+            if holo is not None:
+                manifest["_card_sha256"] = _card_content_sha256(holo)
+
+        agents.append(manifest)
+
     # ─── Seed collision check (agents + converged swarms) ─────────────
     seen_seeds = {}
     for a in agents:
@@ -602,6 +770,7 @@ def build_registry():
         "stats": {
             "total_agents": len(agents),
             "total_swarms": len(all_swarms),
+            "total_stubs": sum(1 for a in agents if a.get("type") == "stub"),
             "publishers": len(publishers),
             "categories": len(categories),
             "publisher_list": sorted(publishers),

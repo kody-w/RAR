@@ -1,10 +1,11 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-11T17:59:39.763802+00:00",
+  "generated_at": "2026-05-12T00:40:24.957260+00:00",
   "stats": {
-    "total_agents": 188,
+    "total_agents": 190,
     "total_swarms": 82,
+    "total_stubs": 1,
     "publishers": 9,
     "categories": 23,
     "publisher_list": [
@@ -4464,6 +4465,36 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody/publish_private_agent",
+      "version": "1.0.0",
+      "display_name": "PublishPrivateAgent",
+      "description": "Generate a public RAR stub from a private agent.py \u2014 pure metadata, points back at your private repo for the bytes.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "registry",
+        "private",
+        "publish",
+        "stub",
+        "federation"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/publish_private_agent_agent.py",
+      "_sha256": "adc7d2d1dc463bae9f117ba508100649c36889073910dfd2b0288e241219148a",
+      "_seed": 11346284636772378980,
+      "_size_kb": 7.0,
+      "_lines": 191,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody/rappter_engine_agent",
       "version": "1.0.0",
       "display_name": "RappterEngine",
@@ -4561,7 +4592,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/rar_remote_agent",
-      "version": "1.3.0",
+      "version": "1.7.0",
       "display_name": "RAR Remote Agent",
       "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
       "author": "RAPP Core Team",
@@ -4581,10 +4612,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody/rar_remote_agent.py",
-      "_sha256": "cc2def2e4e2467d63dd2eef301dcf0775f0a28a0e07552018c5f46cc51a8e045",
+      "_sha256": "0bf253883a2d8678f138c3834bebccca4dde45ae953ea054756806c3869edb8b",
       "_seed": 756356789067200321,
-      "_size_kb": 33.5,
-      "_lines": 840,
+      "_size_kb": 56.1,
+      "_lines": 1352,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -6489,6 +6520,42 @@
       "_first_commit_sha": "4212871e1ea4a9f49f6e4f223a7c3ce8a0b12b19",
       "_latest_commit_sha": "16f7fd56ce13b32a66f31dfc44c63946afe0bb55",
       "_card_sha256": "047bc0d643e690555988557489bd1f911d4c2f031b0db7fa230c9f62cf4c962d"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/example_private",
+      "version": "1.0.0",
+      "display_name": "ExamplePrivate",
+      "description": "Sample gated stub demonstrating the private layer.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "example",
+        "private",
+        "stub"
+      ],
+      "category": "productivity",
+      "quality_tier": "private",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "type": "stub",
+      "_file": "agents/@kody/private/example_private_agent.py.stub",
+      "_stub_sha256": "d52b05d557ce7a450970baf9ddcb61d7c8062a8387e6451a8875aedd08f38b11",
+      "_source": {
+        "schema": "rapp-source/1.0",
+        "type": "github_private",
+        "repo": "kody-w/example-private-rar",
+        "ref": "main",
+        "path": "agents/@kody/example_private_agent.py"
+      },
+      "_seed": 11275657597958891553,
+      "_size_kb": 1.2,
+      "_lines": 40,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     }
   ],
   "swarms": [

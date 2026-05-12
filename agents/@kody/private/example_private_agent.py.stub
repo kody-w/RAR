@@ -1,0 +1,39 @@
+"""
+Example gated stub — the actual agent.py lives in a private repo.
+
+This file is metadata only. Public RAR lists it so the agent is
+discoverable; the brainstem resolves __source__ at install time using
+the user's own GitHub credentials. If the user can read the private
+repo, they get the bytes. If not, they get a clean access-denied
+message.
+
+Stubs may contain ONLY:
+  - a module docstring (this block)
+  - __manifest__ = { ... }
+  - __source__   = { ... }
+
+Anything else (functions, classes, imports, executable code) is
+rejected by build_registry.py — stubs are pure metadata.
+"""
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody/example_private",
+    "version": "1.0.0",
+    "display_name": "ExamplePrivate",
+    "description": "Sample gated stub demonstrating the private layer.",
+    "author": "Kody Wildfeuer",
+    "tags": ["example", "private", "stub"],
+    "category": "productivity",
+    "quality_tier": "private",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+__source__ = {
+    "schema": "rapp-source/1.0",
+    "type": "github_private",
+    "repo": "kody-w/example-private-rar",
+    "ref": "main",
+    "path": "agents/@kody/example_private_agent.py",
+}

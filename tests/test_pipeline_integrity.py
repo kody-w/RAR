@@ -310,6 +310,13 @@ class TestIntegrity:
     def test_registry_has_sha256_hashes(self):
         reg = json.loads((REPO_ROOT / "registry.json").read_text())
         for agent in reg["agents"]:
+            # Stubs don't host bytes locally — they hash the stub file itself
+            # (`_stub_sha256`), not the agent.py bytes (which live in a private
+            # repo and may not be readable by anyone running these tests).
+            if agent.get("type") == "stub":
+                assert "_stub_sha256" in agent, f"{agent['name']} missing _stub_sha256"
+                assert len(agent["_stub_sha256"]) == 64, f"{agent['name']} bad stub hash length"
+                continue
             assert "_sha256" in agent, f"{agent['name']} missing _sha256"
             assert len(agent["_sha256"]) == 64, f"{agent['name']} bad hash length"
 
@@ -321,6 +328,14 @@ class TestIntegrity:
             filepath = REPO_ROOT / agent["_file"]
             if not filepath.exists():
                 continue  # skip if file moved
+            if agent.get("type") == "stub":
+                # Stubs hash the .py.stub file (not the private-repo bytes).
+                actual = hashlib.sha256(filepath.read_bytes()).hexdigest()
+                assert agent["_stub_sha256"] == actual, (
+                    f"{agent['name']}: stub registry hash doesn't match file "
+                    f"(registry={agent['_stub_sha256'][:16]}... file={actual[:16]}...)"
+                )
+                continue
             actual = hashlib.sha256(filepath.read_bytes()).hexdigest()
             assert agent["_sha256"] == actual, (
                 f"{agent['name']}: registry hash doesn't match file "
@@ -570,9 +585,16 @@ class TestBuildPipeline:
     @pytest.mark.integrity
     def test_registry_all_agents_have_required_fields(self):
         reg = json.loads((REPO_ROOT / "registry.json").read_text())
-        required = ["schema", "name", "version", "display_name", "description",
-                     "author", "tags", "category", "_file", "_sha256"]
+        base = ["schema", "name", "version", "display_name", "description",
+                "author", "tags", "category", "_file"]
         for agent in reg["agents"]:
+            # Stubs swap _sha256 for _stub_sha256 + _source (pointer to the
+            # private repo that hosts the actual bytes).
+            required = base + (
+                ["_stub_sha256", "_source"]
+                if agent.get("type") == "stub"
+                else ["_sha256"]
+            )
             for field in required:
                 assert field in agent, f"{agent.get('name', '?')} missing {field}"
 
