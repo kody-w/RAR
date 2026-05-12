@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-12T17:57:00.761823+00:00",
+  "generated_at": "2026-05-12T17:59:28.552871+00:00",
   "stats": {
     "total_agents": 191,
     "total_swarms": 82,
@@ -5082,7 +5082,7 @@
       "display_name": "CopilotStudioForge",
       "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
       "author": "RAPP",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5091,7 +5091,7 @@
         "deploy-prep"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5103,8 +5103,8 @@
       },
       "anchored_on": "https://github.com/microsoft/skills-for-copilot-studio",
       "_file": "agents/@rapp/copilot_studio_forge_agent.py",
-      "_sha256": "c5aad52466df06e1ae329064d4252b6c474b88c97fcd0c53714252018c9dd79a",
-      "_seed": 6041207226650733437,
+      "_sha256": "49a45f92ef91c6a77520c3c06433cd0e0cc99dfdacc9a5c91a7bfdde38e684db",
+      "_seed": 6041207226663316349,
       "_size_kb": 44.5,
       "_lines": 1027,
       "_has_card": true,
