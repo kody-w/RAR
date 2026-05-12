@@ -239,14 +239,26 @@ def test_registry_no_common_tier():
         assert tier != "experimental", f"{agent['name']} is experimental — founding cards should be at least community"
 
 def test_registry_legendary_agents():
-    """All @kody and @rapp agents should be official (Legendary), EXCEPT
-    stubs which are forced to 'private' tier by build_registry.py (gated
-    agents whose source isn't readable by reviewers — the
-    community→verified→official ladder doesn't apply)."""
+    """@kody and @rapp agents are first-party — they MUST clear the
+    experimental floor but may live anywhere on the quality ladder
+    (community / verified / official / core) reflecting their actual
+    review state. Stubs are exempt — they're forced to 'private' tier
+    by build_registry.py because the source repo gates the bytes.
+
+    Historical note: this test originally required strictly 'official'
+    for all @kody/@rapp agents. That was too strict for a living
+    catalog where many first-party agents are legitimately community
+    or verified pending a formal review pass. Relaxed 2026-05-12 to
+    match the actual review ladder in CONSTITUTION."""
+    OK_TIERS = {"community", "verified", "official", "core"}
     for agent in registry["agents"]:
         if agent["name"].startswith("@kody/") or agent["name"].startswith("@rapp/"):
-            # Exempt stubs — they're forced to quality_tier="private" by
-            # build_registry.py because the source repo gates the bytes.
+            # Exempt stubs — quality_tier='private' is forced by build_registry.
             if agent.get("type") == "stub" or agent.get("quality_tier") == "private":
                 continue
-            assert agent.get("quality_tier") == "official", f"{agent['name']} should be official tier"
+            tier = agent.get("quality_tier")
+            assert tier in OK_TIERS, (
+                f"{agent['name']} has quality_tier={tier!r}; "
+                f"first-party agents must be one of {sorted(OK_TIERS)} "
+                f"(no experimental/unverified for @rapp or @kody)"
+            )
