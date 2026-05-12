@@ -3249,6 +3249,13 @@ let votes = { agents: {} };
 let reviews = { agents: {} };
 let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
 let currentCat = 'all';
+// Gated (type:'stub') cards default to hidden — most users only want
+// to see agents whose bytes are actually accessible. Authorized users
+// can flip the pill on; preference is sticky per browser.
+let showGated = (() => {
+  try { return localStorage.getItem('rar_show_gated') === '1'; }
+  catch (e) { return false; }
+})();
 let ghUser = null;
 // Shared auth with RAPPterBook — check rb_access_token first, then gh_token
 let ghToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token');
@@ -4125,6 +4132,10 @@ function buildCategoryPills(stats) {
   if (expCount > 0 && window.RAR_FEATURES?.experimental_filter_pill !== false) {
     h += `<span class="pill" data-cat="__experimental" onclick="setCat('__experimental',this)" style="border-color:rgba(188,140,255,.3);color:#bc8cff">&#9878; Frontier <span class="ct">${expCount}</span></span>`;
   }
+  const gatedCount = allAgents.filter(a => a.type === 'stub').length;
+  if (gatedCount > 0) {
+    h += `<span class="pill ${showGated ? 'active' : ''}" id="pill-gated" onclick="toggleGated(this)" title="Gated agents are hosted in private repos and require auth to install." style="border-color:rgba(188,140,255,.35);color:#bc8cff">${svgIcon('lock','#bc8cff',12)} ${showGated ? 'Hide' : 'Show'} gated <span class="ct">${gatedCount}</span></span>`;
+  }
   document.getElementById('category-pills').innerHTML = h;
 }
 
@@ -4132,6 +4143,14 @@ function setCat(cat, el) {
   currentCat = cat;
   document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
   renderAgents();
+}
+
+function toggleGated() {
+  showGated = !showGated;
+  try { localStorage.setItem('rar_show_gated', showGated ? '1' : '0'); } catch (e) {}
+  renderCategoryPills();
+  renderAgents();
+  if (typeof renderCards === 'function') renderCards();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -4149,6 +4168,7 @@ function renderAgents() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   const sort = document.getElementById('sort-select').value;
   let f = allAgents.filter(a => {
+    if (a.type === 'stub' && !showGated) return false;
     const catOk = currentCat === 'all' || (currentCat === '__experimental' ? a.quality_tier === 'experimental' : a.category === currentCat);
     if (!catOk) return false;
     if (!q) return true;
@@ -4189,14 +4209,21 @@ function renderAgents() {
 function agentCard(a) {
   const s = score(a);
   const tier = a.quality_tier || 'community';
+  const isStub = a.type === 'stub';
   const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
-  const sealHtml = tier === 'verified'
+  const stubRepo = isStub ? (a._source?.repo || '') : '';
+  const lockedTitle = isStub
+    ? `Gated agent — bytes hosted at ${stubRepo}. Install via brainstem requires read access to that repo.`
+    : '';
+  const sealHtml = isStub
+    ? `<span class="seal" style="font-size:.65rem;padding:2px 6px;background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.35)" title="${esc(lockedTitle)}">${svgIcon('lock','#bc8cff',12)}LOCKED</span>`
+    : tier === 'verified'
     ? '<span class="seal" style="font-size:.65rem;padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>VERIFIED</span>'
     : tier === 'experimental'
     ? '<span class="tier tier-experimental">&#9878; experimental</span>'
     : `<span class="tier tier-${tier}">${tier}</span>`;
   const isLocal = a._source === 'local-device';
-  const rawUrl = isLocal || !a._file ? '#' : `${RAW}/${a._file}`;
+  const rawUrl = isLocal || !a._file || isStub ? '#' : `${RAW}/${a._file}`;
   return `
     <div class="agent-card tier-${tier}" onclick='openAgent(${JSON.stringify(a.name)})'>
       <div class="card-top"><span class="card-title">${esc(a.display_name)}</span>${sealHtml}</div>
@@ -4214,11 +4241,13 @@ function agentCard(a) {
           <span>${a._lines || '?'} lines</span>
           <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
           ${isLocal ? '<span class="local-badge">LOCAL</span>' : ''}
+          ${isStub ? `<span class="local-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)" title="${esc(lockedTitle)}">GATED</span>` : ''}
           ${a._streamed ? '<span class="local-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">STREAMED</span>' : ''}
           ${IS_INSTANCE && a._source === 'upstream' ? '<span style="color:var(--text-muted);font-size:.65rem;opacity:.7">from RAPP</span>' : ''}
         </div>
         <div style="display:flex;gap:6px;align-items:center">
-          ${!isLocal && a._file ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
+          ${isStub ? `<span class="add-cart-btn" title="${esc(lockedTitle)}" style="font-size:.7rem;padding:2px 6px;cursor:help;opacity:.7;display:inline-flex;align-items:center;gap:4px">${svgIcon('lock','#bc8cff',11)}gated</span>` : ''}
+          ${!isLocal && a._file && !isStub ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
           ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAPP registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAPP</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
@@ -4587,6 +4616,30 @@ function openAgent(name) {
     </div>
     <div class="modal-body">
       ${experimentalWarning}
+      ${a.type === 'stub' ? (() => {
+        const src = a._source || {};
+        const publisher = (src.repo || '').split('/')[0];
+        const stubGhUrl = src.repo && src.path
+          ? `https://github.com/${src.repo}/blob/${src.ref || 'main'}/${src.path}`
+          : null;
+        const title = `request: access to ${a.name}`;
+        const body =
+          `Hi @${publisher},\n\n` +
+          `I'd like access to **${a.display_name}** (\`${a.name}\`).\n\n` +
+          `Source: \`${src.repo}/${src.path}\`\n\n` +
+          `If granted, please add me as a read collaborator on \`${src.repo}\` so the brainstem can resolve the bytes on install.\n\n` +
+          `_Use case (optional): describe how you'd use this agent._\n`;
+        const issueUrl = `https://github.com/${REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent('request-access')}`;
+        return `<div style="background:rgba(188,140,255,.08);border:1px solid rgba(188,140,255,.3);border-radius:8px;padding:14px 16px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">${svgIcon('lock','#bc8cff',16)}<strong style="color:#bc8cff">Gated agent</strong></div>
+          <div style="color:var(--text-muted);font-size:.88rem;margin-bottom:12px">The bytes live in a private repo. To install, your GitHub account needs read access to:</div>
+          <div style="margin-bottom:12px"><a href="${esc(stubGhUrl || '#')}" target="_blank" style="color:var(--accent);font-family:'SF Mono','Consolas',monospace;font-size:.85rem">${esc(src.repo || '?')}/${esc(src.path || '?')}</a></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a href="${esc(issueUrl)}" target="_blank" class="vote-btn" style="text-decoration:none;background:rgba(188,140,255,.15);border-color:rgba(188,140,255,.4);color:#bc8cff;display:inline-flex;align-items:center;gap:6px">${svgIcon('lock','#bc8cff',14)} Request access</a>
+            <span style="color:var(--text-muted);font-size:.78rem;align-self:center">Opens a pre-filled GitHub issue that @-mentions <code>@${esc(publisher)}</code>.</span>
+          </div>
+        </div>`;
+      })() : ''}
       ${true ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
         <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : '') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not rated yet</span>'}</span>
@@ -7120,6 +7173,7 @@ const UI_GLYPHS = {
   handshake: (p, x, y) => `<path d="M${x-12},${y} h6 l4,-4 l4,4 h6" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><path d="M${x-12},${y+4} l6,-4" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/><path d="M${x+12},${y+4} l-6,-4" fill="none" stroke="${p}" stroke-width="1.2" opacity="0.3"/>`,
   desktop: (p, x, y) => `<rect x="${x-14}" y="${y-10}" width="28" height="18" rx="2" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.4"/><line x1="${x-4}" y1="${y+8}" x2="${x+4}" y2="${y+8}" stroke="${p}" stroke-width="1" opacity="0.3"/><line x1="${x}" y1="${y+8}" x2="${x}" y2="${y+12}" stroke="${p}" stroke-width="1.5" opacity="0.35"/><line x1="${x-6}" y1="${y+12}" x2="${x+6}" y2="${y+12}" stroke="${p}" stroke-width="1.5" opacity="0.35"/>`,
   sparkle: (p, x, y) => `<path d="M${x},${y-10} l2,6 l6,2 l-6,2 l-2,6 l-2,-6 l-6,-2 l6,-2 z" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.5"/><circle cx="${x+8}" cy="${y-6}" r="1.5" fill="${p}" opacity="0.3"/><circle cx="${x-7}" cy="${y+7}" r="1" fill="${p}" opacity="0.25"/>`,
+  lock: (p, x, y) => `<rect x="${x-7}" y="${y-2}" width="14" height="11" rx="2" fill="none" stroke="${p}" stroke-width="1.6" opacity="0.55"/><path d="M${x-4},${y-2} v-4 a4,4 0 0,1 8,0 v4" fill="none" stroke="${p}" stroke-width="1.5" opacity="0.45"/><circle cx="${x}" cy="${y+3}" r="1.5" fill="${p}" opacity="0.5"/><line x1="${x}" y1="${y+3}" x2="${x}" y2="${y+6}" stroke="${p}" stroke-width="1.5" opacity="0.5"/>`,
 };
 
 // Render any glyph as an inline SVG icon — no emojis needed
@@ -8064,6 +8118,8 @@ function renderCards() {
   const words = q.split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
 
   let filtered = allAgents.filter(a => {
+    // Gated stubs hidden unless the user has flipped the global toggle on
+    if (a.type === 'stub' && !showGated) return false;
     // Apply rarity/deck filter first
     if (cardFilter === 'deck' && !deck.has(a.name)) return false;
     if (cardFilter !== 'all' && cardFilter !== 'deck') {

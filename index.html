@@ -311,6 +311,10 @@ let RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO_NAME}/main`;
 let allAgents = [];
 let currentCat = 'all';
 let currentPub = 'all';
+let showGated = (() => {
+  try { return localStorage.getItem('rar_show_gated') === '1'; }
+  catch (e) { return false; }
+})();
 
 async function loadConfig() {
   try {
@@ -388,12 +392,17 @@ async function refreshLiveAddedDates() {
 
 function buildPills() {
   const counts = {};
-  allAgents.forEach(a => { counts[a.category] = (counts[a.category] || 0) + 1; });
+  const visibleAgents = allAgents.filter(a => showGated || a.type !== 'stub');
+  visibleAgents.forEach(a => { counts[a.category] = (counts[a.category] || 0) + 1; });
   const cats = Object.keys(counts).sort();
-  let h = `<span class="pill active" onclick="setCat('all',this)">All <span class="ct">${allAgents.length}</span></span>`;
+  let h = `<span class="pill active" onclick="setCat('all',this)">All <span class="ct">${visibleAgents.length}</span></span>`;
   cats.forEach(c => {
     h += `<span class="pill" onclick="setCat('${c}',this)">${c.replace(/_/g, ' ')} <span class="ct">${counts[c]}</span></span>`;
   });
+  const gatedCount = allAgents.filter(a => a.type === 'stub').length;
+  if (gatedCount > 0) {
+    h += `<span class="pill ${showGated ? 'active' : ''}" onclick="toggleGated()" title="Gated agents are hosted in private repos and require auth to install." style="border-color:rgba(188,140,255,.35);color:#bc8cff">${LOCK_SVG}${showGated ? 'Hide' : 'Show'} gated <span class="ct">${gatedCount}</span></span>`;
+  }
   document.getElementById('pills').innerHTML = h;
 
   const pubCounts = {};
@@ -410,6 +419,13 @@ function setCat(cat, el) {
   currentCat = cat;
   document.querySelectorAll('#pills .pill').forEach(p => p.classList.remove('active'));
   if (el) el.classList.add('active');
+  render();
+}
+
+function toggleGated() {
+  showGated = !showGated;
+  try { localStorage.setItem('rar_show_gated', showGated ? '1' : '0'); } catch (e) {}
+  buildPills();
   render();
 }
 
@@ -438,7 +454,7 @@ function renderRecentlyAdded() {
   const el = document.getElementById('recently-added-section');
   const q = document.getElementById('search').value.trim();
   if (currentCat !== 'all' || currentPub !== 'all' || q) { el.style.display = 'none'; return; }
-  const dated = allAgents.filter(a => addedTs(a)).sort((a, b) => addedTs(b).localeCompare(addedTs(a)));
+  const dated = allAgents.filter(a => addedTs(a) && (showGated || a.type !== 'stub')).sort((a, b) => addedTs(b).localeCompare(addedTs(a)));
   const recent = dated.slice(0, 8);
   if (!recent.length) { el.style.display = 'none'; return; }
   el.style.display = 'block';
@@ -468,6 +484,7 @@ function renderRecentlyAdded() {
 function render() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   let filtered = allAgents.filter(a => {
+    if (a.type === 'stub' && !showGated) return false;
     if (currentCat !== 'all' && a.category !== currentCat) return false;
     if (currentPub !== 'all' && !a.name.startsWith(currentPub + '/')) return false;
     if (!q) return true;
@@ -502,10 +519,16 @@ function render() {
   renderRecentlyAdded();
 }
 
+const LOCK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle;margin-right:3px"><rect x="3" y="8" width="14" height="11" rx="2" fill="none" stroke="#bc8cff" stroke-width="1.6" opacity="0.7"/><path d="M6 8 v-4 a4 4 0 0 1 8 0 v4" fill="none" stroke="#bc8cff" stroke-width="1.5" opacity="0.6"/><circle cx="10" cy="13" r="1.5" fill="#bc8cff" opacity="0.7"/><line x1="10" y1="13" x2="10" y2="16" stroke="#bc8cff" stroke-width="1.5" opacity="0.7"/></svg>';
+
 function card(a) {
+  const isStub = a.type === 'stub';
+  const lockBadge = isStub
+    ? `<span class="cat-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)" title="Gated agent — bytes hosted in ${esc(a._source?.repo || 'a private repo')}. Install requires access.">${LOCK_SVG}LOCKED</span>`
+    : '';
   return `
     <div class="agent-card" onclick="openAgent('${esc(a.name)}')">
-      <div class="card-name">${esc(a.display_name)}</div>
+      <div class="card-name">${lockBadge}${esc(a.display_name)}</div>
       <div class="card-desc">${esc(a.description)}</div>
       <div class="card-footer">
         <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
@@ -517,17 +540,44 @@ function card(a) {
 function openAgent(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
-  const rawUrl = a._file ? RAW + '/' + a._file : null;
+  const isStub = a.type === 'stub';
+  const rawUrl = a._file && !isStub ? RAW + '/' + a._file : null;
   const ghUrl = a._file ? `https://github.com/${OWNER}/${REPO_NAME}/blob/main/${a._file}` : null;
   const envHtml = (a.requires_env || []).length
     ? a.requires_env.map(e => `<span class="env-tag">${esc(e)}</span>`).join('')
     : '<span style="color:var(--green)">None required</span>';
+  const src = a._source || {};
+  const stubGhUrl = isStub && src.repo && src.path
+    ? `https://github.com/${src.repo}/blob/${src.ref || 'main'}/${src.path}`
+    : null;
+  const publisher = (src.repo || '').split('/')[0];
+  const issueTitle = `request: access to ${a.name}`;
+  const issueBody =
+    `Hi @${publisher},\n\n` +
+    `I'd like access to **${a.display_name}** (\`${a.name}\`).\n\n` +
+    `Source: \`${src.repo || '?'}/${src.path || '?'}\`\n\n` +
+    `If granted, please add me as a read collaborator on \`${src.repo || '?'}\` so the brainstem can resolve the bytes on install.\n\n` +
+    `_Use case (optional): describe how you'd use this agent._\n`;
+  const issueUrl = isStub
+    ? `https://github.com/${OWNER}/${REPO_NAME}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}&labels=request-access`
+    : null;
+  const stubSection = isStub ? `<div class="section">
+      <h3>${LOCK_SVG}Gated agent</h3>
+      <div class="install-block">
+        <div style="margin-bottom:8px;color:var(--text-muted)">The listing is public, but the source is hosted in a private repo. Install via the brainstem requires read access to:</div>
+        <a href="${esc(stubGhUrl || '#')}" target="_blank">${esc(src.repo || '?')}/${esc(src.path || '?')}</a>
+        <div style="margin-top:10px;color:var(--text-muted);font-size:.85rem">From your brainstem: <code>rar install ${esc(a.name)}</code> &mdash; it will use your <code>gh auth</code> token to resolve the bytes.</div>
+      </div>
+      <a href="${esc(issueUrl)}" target="_blank" class="get-btn" style="display:inline-block;text-decoration:none;background:rgba(188,140,255,.15);border:1px solid rgba(188,140,255,.4);color:#bc8cff;margin-top:8px">${LOCK_SVG}Request access</a>
+      <div style="color:var(--text-muted);font-size:.78rem;margin-top:6px">Opens a pre-filled GitHub issue that @-mentions <code>@${esc(publisher)}</code>.</div>
+    </div>` : '';
 
   document.getElementById('modal-content').innerHTML = `
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <h2>${esc(a.display_name)}</h2>
     <div class="meta">${esc(a.category.replace(/_/g, ' '))} &middot; v${esc(a.version)} &middot; by ${esc(a.author)}</div>
     <div class="desc">${esc(a.description)}</div>
+    ${stubSection}
     ${rawUrl ? `<div class="section">
       <h3>Get this agent</h3>
       <div class="install-block">
