@@ -100,7 +100,7 @@ __manifest__ = {
     "version": "1.0.0",
     "tags": ["meta", "factory", "perpetual", "chain", "twins", "self-correcting", "kaizen"],
     "category": "core",
-    "quality_tier": "experimental",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent", "@kody-w/twin_agent"],
 }
@@ -440,7 +440,7 @@ __manifest__ = {
     "version": "1.0.0",
     "tags": ["frame", "{{loop_name}}", "perpetual"],
     "category": "general",
-    "quality_tier": "experimental",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
 }
@@ -629,7 +629,7 @@ __manifest__ = {
     "version": "1.0.0",
     "tags": ["audit", "diversity", "{{loop_name}}"],
     "category": "general",
-    "quality_tier": "experimental",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
 }
