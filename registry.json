@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-12T02:08:23.298526+00:00",
+  "generated_at": "2026-05-12T02:09:29.360886+00:00",
   "stats": {
-    "total_agents": 190,
+    "total_agents": 189,
     "total_swarms": 82,
     "total_stubs": 1,
     "publishers": 9,
@@ -5298,41 +5298,6 @@
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_card_sha256": "ad2abb2ed19dc45b600a080846c624b25094eceb5e34a2402c95f18c2210d262"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rapp/local_tether",
-      "version": "1.0.0",
-      "display_name": "LocalTether",
-      "description": "Serves the RAPP tether locally on http://localhost:8000 so it can freely talk to the brainstem at localhost:7071 (no mixed-content blocking). Auto-opens the browser pre-tethered to the requested neighborhood (commons by default). Phone guests join via the live HTTPS tether \u2014 both meet in the same lobby through the PeerJS broker.",
-      "author": "Kody",
-      "tags": [
-        "tether",
-        "lobby",
-        "local-server",
-        "mixed-content-fix"
-      ],
-      "category": "core",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "action": "start"
-        }
-      },
-      "_file": "agents/@rapp/local_tether_agent.py",
-      "_sha256": "632aeb578138163fbdbc864cc44ee645239739770aede143112f45dbcad05d8c",
-      "_seed": 2886267251957704524,
-      "_size_kb": 11.1,
-      "_lines": 273,
-      "_has_card": true,
-      "_added_at": "2026-05-11T21:01:44-04:00",
-      "_first_commit_sha": "0eed4b10aa4d67f37f38bcec04204c54f6d11f46",
-      "_latest_commit_sha": "0eed4b10aa4d67f37f38bcec04204c54f6d11f46",
-      "_card_sha256": "491e18a68a84642b3579c0bba76c9766ba35b016666a179529d0fba99710fa25"
     },
     {
       "schema": "rapp-agent/1.0",
