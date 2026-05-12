@@ -1,0 +1,14 @@
+{
+  "schema": "rar-config/1.0",
+  "role": "private",
+  "owner": "yourname",
+  "repo": "yourname-private-rar",
+  "upstream": {
+    "owner": "CommunityRAPP",
+    "repo": "RAR"
+  },
+  "federation": {
+    "accept_submissions": false,
+    "allow_upstream_sync": false
+  }
+}

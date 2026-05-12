@@ -16,7 +16,7 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/rar_remote_agent",
-    "version": "1.3.0",
+    "version": "1.7.0",
     "display_name": "RAR Remote Agent",
     "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
@@ -419,6 +419,9 @@ class RARRemoteAgent(BasicAgent):
             "submit": self._submit,
             "submit_upstream": self._submit_upstream,
             "federation_status": self._federation_status,
+            "request_access": self._request_access,
+            "publish_private": self._publish_private,
+            "setup_private_rar": self._setup_private_rar,
         }
 
         handler = handlers.get(action)
@@ -638,8 +641,45 @@ class RARRemoteAgent(BasicAgent):
     # Write actions (create GitHub Issues via brainstem's token)
     # ──────────────────────────────────────────────────────────
 
+    def _resolve_private_source(self, src: dict) -> str:
+        """Fetch agent bytes from a private repo via the GitHub contents API.
+        Uses the brainstem's existing token. Returns the file's text.
+        Raises with a clean access-denied message if the user can't read
+        the repo (GitHub returns 404 for unauthorized reads on private
+        repos — that is intentional and not a bug). """
+        stype = src.get("type")
+        if stype not in ("github_private", "github_public"):
+            raise ValueError(f"Unsupported source type: {stype}")
+
+        repo = src.get("repo", "")
+        path = src.get("path", "")
+        ref = src.get("ref", "main")
+        if not repo or not path:
+            raise ValueError("source missing 'repo' or 'path'")
+
+        url = f"https://api.github.com/repos/{repo}/contents/{path}?ref={ref}"
+        headers = self._build_headers()
+        # Ask the contents API for raw bytes rather than the wrapped JSON.
+        headers["Accept"] = "application/vnd.github.raw"
+
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                return resp.read().decode()
+        except urllib.error.HTTPError as e:
+            if e.code in (401, 403, 404):
+                raise PermissionError(
+                    f"Access denied to {repo}/{path} (HTTP {e.code}). "
+                    f"You need read access to the private repo '{repo}'. "
+                    f"Authenticate with `gh auth login` or set GITHUB_TOKEN."
+                )
+            raise
+
     def _install(self, params):
-        """Download an agent file to the local filesystem."""
+        """Download an agent file to the local filesystem.
+        For stub entries (type=='stub') the bytes are fetched from the
+        private repo declared in __source__ using the user's own GitHub
+        credentials — public RAR only ever hosts the stub manifest."""
         name = params.get("agent_name", "")
         if not name:
             return "Error: 'agent_name' is required."
@@ -649,14 +689,35 @@ class RARRemoteAgent(BasicAgent):
         if not agent:
             return f"Agent '{name}' not found. Use action='search' first."
 
-        raw_url = f"{self.RAW_BASE}/{agent['_file']}"
-        filename = agent["_file"].split("/")[-1]
         output_dir = params.get("output_dir", "agents")
+        is_stub = agent.get("type") == "stub"
 
-        try:
-            code = self._fetch_text(raw_url)
-        except Exception as e:
-            return f"Error downloading agent: {e}"
+        if is_stub:
+            src = agent.get("_source") or {}
+            try:
+                code = self._resolve_private_source(src)
+            except PermissionError as e:
+                return (
+                    f"Locked: {agent['display_name']}\n\n"
+                    f"{e}\n\n"
+                    f"This is a gated agent — the listing is public but the source\n"
+                    f"is hosted in a private repo. If you should have access, check\n"
+                    f"that your GitHub account has been granted read access to:\n"
+                    f"  {src.get('repo', '?')}\n\n"
+                    f"To ask the publisher for access, run:\n"
+                    f"  action='request_access', agent_name='{name}'\n"
+                )
+            except Exception as e:
+                return f"Error resolving private source: {e}"
+            # Save under the path the private repo uses, not the stub path
+            filename = src.get("path", "").split("/")[-1] or f"{name.split('/')[-1]}.py"
+        else:
+            raw_url = f"{self.RAW_BASE}/{agent['_file']}"
+            filename = agent["_file"].split("/")[-1]
+            try:
+                code = self._fetch_text(raw_url)
+            except Exception as e:
+                return f"Error downloading agent: {e}"
 
         try:
             os.makedirs(output_dir, exist_ok=True)
@@ -689,6 +750,457 @@ class RARRemoteAgent(BasicAgent):
 
         out += "Ready to use.\n"
         return out
+
+    def _request_access(self, params):
+        """Open a GitHub Issue on public RAR asking the gated agent's
+        publisher to grant the requester read access to the private repo.
+        The issue @-mentions the publisher (extracted from the source
+        repo owner) so they get notified the standard way. Only valid
+        for type='stub' agents — regular agents don't need access."""
+        name = params.get("agent_name", "")
+        use_case = (params.get("use_case") or "").strip()
+        if not name:
+            return "Error: 'agent_name' is required."
+
+        agents = self._agents()
+        agent = next((a for a in agents if a["name"] == name), None)
+        if not agent:
+            return f"Agent '{name}' not found. Use action='search' first."
+        if agent.get("type") != "stub":
+            return (
+                f"'{name}' is not a gated agent — no access request needed. "
+                f"Use action='install' to fetch it."
+            )
+
+        src = agent.get("_source") or {}
+        repo = src.get("repo") or ""
+        path = src.get("path") or ""
+        publisher = repo.split("/")[0] if "/" in repo else repo
+        if not publisher:
+            return f"Cannot determine publisher for '{name}' — source repo missing."
+
+        token = self._get_token()
+        if not token:
+            return (
+                "Error: No GitHub token available. The brainstem should set this; "
+                "if running standalone, run `gh auth login` or set GITHUB_TOKEN."
+            )
+
+        body_lines = [
+            f"Hi @{publisher},",
+            "",
+            f"I'd like access to **{agent['display_name']}** (`{name}`).",
+            "",
+            f"Source: `{repo}/{path}`",
+            "",
+            f"If granted, please add me as a read collaborator on `{repo}` "
+            f"so the brainstem can resolve the bytes on install.",
+        ]
+        if use_case:
+            body_lines += ["", f"Use case: {use_case}"]
+
+        payload = json.dumps({
+            "title": f"[RAR] request: access to {name}",
+            "body": "\n".join(body_lines),
+            "labels": ["request-access", "rar-action"],
+        }).encode()
+
+        req = urllib.request.Request(
+            f"{self.API_BASE}/issues",
+            data=payload,
+            headers=self._build_headers(content_type="application/json"),
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                result = json.loads(resp.read().decode())
+                url = result.get("html_url", "Issue created")
+                return (
+                    f"Access request opened for {name}.\n"
+                    f"Publisher @{publisher} has been notified.\n"
+                    f"Issue: {url}\n\n"
+                    f"Next: wait for @{publisher} to add you as a read collaborator "
+                    f"on {repo}, then retry action='install'."
+                )
+        except urllib.error.HTTPError as e:
+            body = e.read().decode() if e.fp else str(e)
+            return f"Error creating issue: {e.code} — {body[:200]}"
+        except Exception as e:
+            return f"Error: {e}"
+
+    def _parse_github_blob_url(self, url: str) -> dict | None:
+        """Parse a GitHub blob or raw URL into source-pointer components.
+        Accepts:
+          https://github.com/<owner>/<repo>/blob/<ref>/<path>
+          https://raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>
+        Returns {repo, ref, path} or None if it doesn't look like one."""
+        if not url:
+            return None
+        u = url.strip()
+        m = None
+        if "github.com/" in u and "/blob/" in u:
+            tail = u.split("github.com/", 1)[1]
+            owner_repo, _, rest = tail.partition("/blob/")
+            ref, _, path = rest.partition("/")
+            if owner_repo.count("/") == 1 and ref and path:
+                m = {"repo": owner_repo, "ref": ref, "path": path}
+        elif "raw.githubusercontent.com/" in u:
+            tail = u.split("raw.githubusercontent.com/", 1)[1]
+            parts = tail.split("/", 3)
+            if len(parts) == 4:
+                m = {"repo": f"{parts[0]}/{parts[1]}", "ref": parts[2], "path": parts[3]}
+        return m
+
+    def _publish_private(self, params):
+        """Submit a gated stub to public RAR by pointing at a private
+        agent.py URL. The flow:
+          1. Parse the GitHub URL into (repo, ref, path).
+          2. Fetch the agent.py via the contents API using YOUR token.
+             If you don't have access, GitHub returns 404 — proves you
+             can't publish someone else's gated agent.
+          3. AST-extract __manifest__ from the fetched code.
+          4. Render the matching .py.stub source.
+          5. Open a GitHub Issue on public RAR carrying the stub.
+        Args:
+          agent_url: GitHub blob or raw URL to the private agent.py.
+          dry_run:   if truthy, returns the stub source without opening
+                     an issue.
+        """
+        url = params.get("agent_url", "").strip()
+        dry_run = bool(params.get("dry_run", False))
+
+        if not url:
+            return "Error: 'agent_url' is required (a github.com/<owner>/<repo>/blob/<ref>/<path> URL)."
+
+        parts = self._parse_github_blob_url(url)
+        if not parts:
+            return (
+                "Error: Could not parse 'agent_url'. Expected a URL like "
+                "https://github.com/owner/repo/blob/main/agents/@you/foo_agent.py "
+                "or the matching raw.githubusercontent.com form."
+            )
+
+        src = {
+            "schema": "rapp-source/1.0",
+            "type": "github_private",
+            "repo": parts["repo"],
+            "ref": parts["ref"],
+            "path": parts["path"],
+        }
+        try:
+            code = self._resolve_private_source(src)
+        except PermissionError as e:
+            return (
+                f"Cannot publish: {e}\n\n"
+                f"You can only publish a stub for an agent you can read. "
+                f"Confirm you have access to {src['repo']}, then retry."
+            )
+        except Exception as e:
+            return f"Error fetching agent source: {e}"
+
+        try:
+            import ast as _ast
+            tree = _ast.parse(code)
+            manifest = None
+            for node in _ast.walk(tree):
+                if isinstance(node, _ast.Assign):
+                    for t in node.targets:
+                        if isinstance(t, _ast.Name) and t.id == "__manifest__":
+                            try:
+                                manifest = _ast.literal_eval(node.value)
+                            except (ValueError, TypeError):
+                                pass
+                if manifest:
+                    break
+        except SyntaxError as e:
+            return f"Error: agent source has syntax errors — {e}"
+
+        if not isinstance(manifest, dict):
+            return "Error: could not extract __manifest__ dict from the agent source."
+
+        required = ["schema", "name", "version", "display_name",
+                    "description", "author", "tags", "category"]
+        missing = [f for f in required if f not in manifest]
+        if missing:
+            return f"Error: manifest is missing required fields: {missing}"
+
+        # Stubs are always tier 'private' — they aren't reviewable.
+        manifest["quality_tier"] = "private"
+
+        # Render a clean .py.stub source. ast.literal_eval-friendly:
+        # only literals, no expressions.
+        def _render(d):
+            lines = ["{"]
+            for k, v in d.items():
+                lines.append(f"    {repr(k)}: {repr(v)},")
+            lines.append("}")
+            return "\n".join(lines)
+
+        docstring = (
+            f'"""\n'
+            f"Gated stub for {manifest['name']} — bytes live in the private repo\n"
+            f"{src['repo']} at {src['path']}. Public RAR carries only this\n"
+            f"manifest pointer; the brainstem resolves the source at install\n"
+            f"time using the installer's own GitHub credentials.\n"
+            f'"""\n\n'
+        )
+        stub_src = (
+            docstring
+            + "__manifest__ = " + _render(manifest) + "\n\n"
+            + "__source__ = " + _render(src) + "\n"
+        )
+
+        if dry_run:
+            return (
+                f"Dry run — stub generated for {manifest['name']}:\n\n"
+                f"{stub_src}\n"
+                f"To actually submit, re-run without dry_run."
+            )
+
+        # Convention: stubs land under agents/<publisher>/private/<slug>.py.stub
+        publisher = manifest["name"].split("/")[0]  # "@you"
+        slug_basename = src["path"].rsplit("/", 1)[-1]  # "foo_agent.py"
+        stub_path = f"agents/{publisher}/private/{slug_basename}.stub"
+
+        result = self._create_issue(
+            f"submit_stub: {manifest['name']}",
+            {
+                "action": "submit_stub",
+                "payload": {
+                    "name": manifest["name"],
+                    "stub_path": stub_path,
+                    "stub_source": stub_src,
+                    "source": src,
+                },
+            },
+        )
+
+        if result.startswith("Error"):
+            return result
+        return (
+            f"Gated stub submitted for {manifest['name']}.\n"
+            f"Issue: {result}\n\n"
+            f"The submission contains the .py.stub ready to land at:\n"
+            f"  {stub_path}\n\n"
+            f"What happens next:\n"
+            f"  - A maintainer (or the pipeline, when stub support lands) "
+            f"reviews and merges the stub.\n"
+            f"  - Once merged, your agent appears in public RAR as LOCKED.\n"
+            f"  - Anyone with read access to {src['repo']} can install it; "
+            f"anyone else sees a clean access-denied message."
+        )
+
+    # The private-RAR template lives in public RAR at private-rar-template/.
+    # `setup_private_rar` fetches each entry via raw.githubusercontent and
+    # writes it locally — no need to embed kilobytes of templates in this
+    # agent. The `substitute` flag controls token replacement on functional
+    # files (rar.config.json, sample_private_agent.py); docs are written
+    # verbatim because they carry placeholder strings deliberately.
+    PRIVATE_RAR_TEMPLATE_FILES = [
+        {"src": "README.md", "dst": "README.md", "substitute": False},
+        {"src": "rar.config.json", "dst": "rar.config.json", "substitute": True},
+        {"src": "build_local_registry.py", "dst": "build_local_registry.py", "substitute": False},
+        {"src": "submit_to_public_rar.md", "dst": "submit_to_public_rar.md", "substitute": False},
+        {"src": "agents/@yourname/sample_private_agent.py",
+         "dst": "agents/@{login}/sample_private_agent.py", "substitute": True},
+        {"src": ".github/workflows/build-private-registry.yml",
+         "dst": ".github/workflows/build-private-registry.yml", "substitute": False},
+    ]
+
+    def _gh_login(self) -> str | None:
+        """Resolve the authenticated user's GitHub login. Tries `gh api user`
+        first (most reliable), then a token-authed call to api.github.com/user."""
+        try:
+            r = subprocess.run(
+                ["gh", "api", "user", "--jq", ".login"],
+                capture_output=True, text=True, timeout=10,
+            )
+            if r.returncode == 0 and r.stdout.strip():
+                return r.stdout.strip()
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
+        try:
+            req = urllib.request.Request(
+                "https://api.github.com/user",
+                headers=self._build_headers(),
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return json.loads(resp.read().decode()).get("login")
+        except Exception:
+            return None
+
+    def _setup_private_rar(self, params):
+        """One-shot scaffold of a private RAR: fetch the template from public
+        RAR (so it's always up-to-date), write it under `local_path`, init
+        git, and — unless `push=False` — create a private GitHub repo and
+        push the scaffold to it.
+
+        Args:
+          repo_name:  name of the GitHub repo to create. Default: '<login>-private-rar'.
+          local_path: where to scaffold on disk. Default: './<repo_name>'.
+          author:     "Your Name" replacement in the sample agent. Default: '<login>'.
+          push:       create + push to GitHub via `gh repo create --private`. Default: True.
+          force:      overwrite local_path if it exists. Default: False.
+        """
+        login = self._gh_login()
+        if not login:
+            return (
+                "Error: Could not determine your GitHub login. Run `gh auth login` "
+                "or set GITHUB_TOKEN to a token with `read:user` scope, then retry."
+            )
+
+        repo_name = params.get("repo_name") or f"{login}-private-rar"
+        local_path = params.get("local_path") or f"./{repo_name}"
+        author = params.get("author") or login
+        push = params.get("push", True)
+        if isinstance(push, str):
+            push = push.lower() not in ("false", "0", "no")
+        force = bool(params.get("force", False))
+
+        # Substitution map applied to files with substitute=True.
+        # Order matters where strings overlap — see comment below.
+        replacements = [
+            # Combined form must run before split substitutions so we don't
+            # double-replace (e.g., 'yourname/yourname-private-rar').
+            ("yourname/yourname-private-rar", f"{login}/{repo_name}"),
+            ("yourname-private-rar", repo_name),
+            ("@yourname", f"@{login}"),
+            ('"yourname"', f'"{login}"'),
+            ("Your Name", author),
+        ]
+
+        local = os.path.abspath(local_path)
+        if os.path.exists(local):
+            if not force:
+                return (
+                    f"Error: {local} already exists. Pass force=True to overwrite, "
+                    f"or pick a different local_path."
+                )
+            # Light cleanup — only remove if it's our own scaffold (has rar.config.json)
+            if not os.path.exists(os.path.join(local, "rar.config.json")):
+                return (
+                    f"Error: {local} exists but doesn't look like a private RAR "
+                    f"(no rar.config.json). Refusing to overwrite. Choose another path."
+                )
+
+        os.makedirs(local, exist_ok=True)
+        written = []
+        errors = []
+
+        # Two source modes, tried in order:
+        #   1. Local: if cwd contains a private-rar-template/ directory
+        #      (e.g., running from inside the public RAR repo before the
+        #      template has been pushed), read from disk.
+        #   2. Remote: otherwise fetch from raw.githubusercontent.com.
+        # Local-first lets the agent self-bootstrap during development;
+        # remote-fallback keeps users on other machines working.
+        local_template_root = os.path.abspath("private-rar-template")
+        use_local = os.path.isdir(local_template_root)
+
+        for entry in self.PRIVATE_RAR_TEMPLATE_FILES:
+            content = None
+            if use_local:
+                src_path = os.path.join(local_template_root, entry["src"])
+                if os.path.exists(src_path):
+                    try:
+                        with open(src_path) as f:
+                            content = f.read()
+                    except OSError as e:
+                        errors.append(f"read {entry['src']}: {e}")
+                        continue
+            if content is None:
+                src_url = f"{self.RAW_BASE}/private-rar-template/{entry['src']}"
+                try:
+                    content = self._fetch_text(src_url)
+                except Exception as e:
+                    errors.append(f"fetch {entry['src']}: {e}")
+                    continue
+            if entry["substitute"]:
+                for old, new in replacements:
+                    content = content.replace(old, new)
+            dst_rel = entry["dst"].format(login=login)
+            dst_abs = os.path.join(local, dst_rel)
+            os.makedirs(os.path.dirname(dst_abs), exist_ok=True)
+            with open(dst_abs, "w") as f:
+                f.write(content)
+            written.append(dst_rel)
+
+        # Add a marker .gitkeep so the namespace dir is non-empty even
+        # without the sample agent (some users delete it immediately).
+        ns_dir = os.path.join(local, f"agents/@{login}")
+        os.makedirs(ns_dir, exist_ok=True)
+        keep_path = os.path.join(ns_dir, ".gitkeep")
+        if not os.path.exists(keep_path):
+            with open(keep_path, "w") as f:
+                f.write("")
+            written.append(f"agents/@{login}/.gitkeep")
+
+        if errors:
+            return (
+                f"Setup partial — fetched {len(written)} files, "
+                f"{len(errors)} failures:\n  " + "\n  ".join(errors) +
+                f"\n\nNothing was pushed. Resolve the fetch errors and retry."
+            )
+
+        if not push:
+            return (
+                f"Scaffolded {len(written)} files under {local}\n\n"
+                f"Next steps (manual):\n"
+                f"  cd {local}\n"
+                f"  git init && git add . && git commit -m 'Initial scaffold'\n"
+                f"  gh repo create {login}/{repo_name} --private --source=. --push\n\n"
+                f"Or re-run setup_private_rar with push=True to do this automatically."
+            )
+
+        # Init git, commit, and push via gh CLI. gh is the right tool here:
+        # it handles repo creation + remote wiring + initial push atomically,
+        # and uses the same auth chain (`gh auth`) the rest of this agent
+        # already relies on.
+        try:
+            subprocess.run(["gh", "--version"], capture_output=True, timeout=5, check=True)
+        except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            return (
+                f"Scaffolded {len(written)} files under {local}, but `gh` CLI is "
+                f"not available — cannot push automatically.\n\n"
+                f"Install gh (https://cli.github.com) then run:\n"
+                f"  cd {local}\n"
+                f"  git init && git add . && git commit -m 'Initial scaffold'\n"
+                f"  gh repo create {login}/{repo_name} --private --source=. --push"
+            )
+
+        def _run(cmd, **kw):
+            return subprocess.run(cmd, capture_output=True, text=True, timeout=60, cwd=local, **kw)
+
+        steps = [
+            ["git", "init", "-q"],
+            ["git", "add", "."],
+            ["git", "-c", "commit.gpgsign=false", "commit", "-q",
+             "-m", "Initial scaffold — created by @kody/rar_remote_agent setup_private_rar"],
+            ["gh", "repo", "create", f"{login}/{repo_name}",
+             "--private", "--source=.", "--push", "--remote=origin"],
+        ]
+        for step in steps:
+            r = _run(step)
+            if r.returncode != 0:
+                tail = (r.stderr or r.stdout).strip().splitlines()[-1:]
+                return (
+                    f"Setup failed at: {' '.join(step)}\n"
+                    f"  {tail[0] if tail else '(no output)'}\n\n"
+                    f"Local files are at {local} — re-run the failing command "
+                    f"manually, or delete the directory and retry with force=True."
+                )
+
+        repo_url = f"https://github.com/{login}/{repo_name}"
+        return (
+            f"Private RAR ready.\n\n"
+            f"  Local:  {local}\n"
+            f"  Remote: {repo_url}  (private)\n"
+            f"  Files:  {len(written)} scaffolded\n\n"
+            f"To publish your first gated agent:\n"
+            f"  1. Drop your agent.py into {local}/agents/@{login}/\n"
+            f"  2. git add . && git commit -m 'add my agent' && git push\n"
+            f"  3. action='publish_private', agent_url='{repo_url}/blob/main/agents/@{login}/<your_agent>.py'\n"
+        )
 
     def _vote(self, params):
         """Upvote or downvote an agent via GitHub Issue."""
