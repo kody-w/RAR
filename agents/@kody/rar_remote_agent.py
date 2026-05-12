@@ -16,7 +16,7 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/rar_remote_agent",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "display_name": "RAR Remote Agent",
     "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
@@ -95,14 +95,27 @@ class RARRemoteAgent(BasicAgent):
                             "'get_info' — agent details (REQUIRES agent_name). "
                             "'leaderboard' — top agents by votes. "
                             "'reviews' — show reviews (REQUIRES agent_name). "
-                            "'install' — download agent to local filesystem (REQUIRES agent_name). "
+                            "'install' — download agent (REQUIRES agent_name). For type='stub' "
+                            "entries, resolves the bytes from the private repo declared in "
+                            "__source__ using your GitHub credentials. "
                             "'vote' — upvote/downvote (REQUIRES agent_name; optional: direction). "
                             "'review' — write review (REQUIRES agent_name, rating, text). "
-                            "'submit' — submit new agent (REQUIRES code)."
+                            "'submit' — submit new public agent (REQUIRES code). "
+                            "'submit_upstream' — federate a local agent to the upstream RAR. "
+                            "'federation_status' — show federation config. "
+                            "'request_access' — ask the publisher to grant you access to a gated "
+                            "stub (REQUIRES agent_name; optional: use_case). "
+                            "'publish_private' — generate and submit a .py.stub pointing at your "
+                            "private agent.py (REQUIRES agent_url; optional: dry_run). "
+                            "'setup_private_rar' — scaffold + git-init + create a private GitHub "
+                            "repo for hosting gated agents (optional: repo_name, local_path, "
+                            "author, push, force)."
                         ),
                         "enum": [
                             "discover", "search", "get_info", "leaderboard",
                             "reviews", "install", "vote", "review", "submit",
+                            "submit_upstream", "federation_status",
+                            "request_access", "publish_private", "setup_private_rar",
                         ],
                     },
                     "agent_name": {
@@ -146,6 +159,38 @@ class RARRemoteAgent(BasicAgent):
                     "output_dir": {
                         "type": "string",
                         "description": "Directory to save installed agents. Default: ./agents/",
+                    },
+                    "use_case": {
+                        "type": "string",
+                        "description": "Optional 'why' text for 'request_access' — included in the issue body the publisher sees.",
+                    },
+                    "agent_url": {
+                        "type": "string",
+                        "description": "For 'publish_private': a github.com/<owner>/<repo>/blob/<ref>/<path> URL (or matching raw.githubusercontent.com URL) pointing at your private agent.py.",
+                    },
+                    "dry_run": {
+                        "type": "boolean",
+                        "description": "For 'publish_private': return the generated stub without submitting an issue.",
+                    },
+                    "repo_name": {
+                        "type": "string",
+                        "description": "For 'setup_private_rar': name of the GitHub repo to create. Default: '<login>-private-rar'.",
+                    },
+                    "local_path": {
+                        "type": "string",
+                        "description": "For 'setup_private_rar': local directory to scaffold into. Default: './<repo_name>'.",
+                    },
+                    "author": {
+                        "type": "string",
+                        "description": "For 'setup_private_rar': name used in the sample agent's manifest. Default: '<login>'.",
+                    },
+                    "push": {
+                        "type": "boolean",
+                        "description": "For 'setup_private_rar': if true, creates the private GitHub repo via gh CLI and pushes. Default: true.",
+                    },
+                    "force": {
+                        "type": "boolean",
+                        "description": "For 'setup_private_rar': overwrite local_path if it already exists. Default: false.",
                     },
                 },
                 "required": ["action"],
