@@ -1,11 +1,11 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-12T17:37:34.707998+00:00",
+  "generated_at": "2026-05-12T17:54:51.552740+00:00",
   "stats": {
-    "total_agents": 190,
+    "total_agents": 191,
     "total_swarms": 82,
-    "total_stubs": 1,
+    "total_stubs": 2,
     "publishers": 10,
     "categories": 23,
     "publisher_list": [
@@ -4908,7 +4908,7 @@
       "display_name": "PerpetualLoopFactory",
       "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch.",
       "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "tags": [
         "meta",
         "factory",
@@ -4919,21 +4919,21 @@
         "kaizen"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
         "@kody-w/twin_agent"
       ],
       "_file": "agents/@kody-w/perpetual_loop_factory_agent.py",
-      "_sha256": "fa4aaf0f621afdd62a8f588773c59ca0e08efa8bb4254f72d5a5ee86b9847a5c",
-      "_seed": 18392963094642842750,
+      "_sha256": "d93da05b5891a41ffdbfc0f2089a578dccc9ca15be66c118023d26cd66d2108b",
+      "_seed": 18392963094647037054,
       "_size_kb": 54.5,
       "_lines": 1356,
       "_has_card": true,
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
-      "_latest_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
+      "_latest_commit_sha": "da26c9c92b2d833c2ca4591c6fe5b5b8696c2eaf",
       "_card_sha256": "f21ca0c391d0aad83e3d77f6b44df7b506a5ecf8f737080edc1145c94b2f364f"
     },
     {
@@ -5045,7 +5045,7 @@
       "display_name": "CopilotStudioDeploy",
       "description": "Push a forged Copilot Studio bundle into a Dataverse environment via OAuth client_credentials + ImportSolutionAsync. Reads creds from local.settings.json. Destructive deploy is gated by confirm.",
       "author": "RAPP",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5054,7 +5054,7 @@
         "destructive"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
@@ -5066,14 +5066,14 @@
         }
       },
       "_file": "agents/@rapp/copilot_studio_deploy_agent.py",
-      "_sha256": "67d0ed6f996314d577542bc271d222c967826826cb165f661e09326a742bcf93",
-      "_seed": 12529120966313924386,
+      "_sha256": "19d947d09009bc00ea6167aea838fa2f396891834bd23a62b4d153e3a9711200",
+      "_seed": 12529120966326507298,
       "_size_kb": 39.1,
       "_lines": 904,
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "6a3798346214837567a08619a026575a4198e448",
+      "_latest_commit_sha": "300054f84887a9ab5a8b7d2ed3368189e78fb019",
       "_card_sha256": "f5ac406966c03a6b48ee07636a03aa76087eb881299d6dbd65808eba5758ab8e"
     },
     {
@@ -6525,6 +6525,45 @@
       "_first_commit_sha": "4212871e1ea4a9f49f6e4f223a7c3ce8a0b12b19",
       "_latest_commit_sha": "16f7fd56ce13b32a66f31dfc44c63946afe0bb55",
       "_card_sha256": "047bc0d643e690555988557489bd1f911d4c2f031b0db7fa230c9f62cf4c962d"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/legal_helper",
+      "version": "1.0.0",
+      "display_name": "LegalHelper",
+      "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy \u2014 NOT legal advice; every reply ends with the disclaimer.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "legal",
+        "ip",
+        "wildhaven",
+        "private",
+        "stub",
+        "operator-personal"
+      ],
+      "category": "productivity",
+      "quality_tier": "private",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "type": "stub",
+      "_file": "agents/@kody/legal_helper_agent.py.stub",
+      "_stub_sha256": "ab1ad1a3014fab9c5dc90811be59294ab3ff1f4c0ac86391e182089982d2a7eb",
+      "_source": {
+        "schema": "rapp-source/1.0",
+        "type": "github_private",
+        "repo": "kody-w/RAR-private",
+        "ref": "main",
+        "path": "agents/legal_helper_agent.py"
+      },
+      "_seed": 17266621794552130474,
+      "_size_kb": 1.7,
+      "_lines": 45,
+      "_has_card": false,
+      "_added_at": "2026-05-12T13:49:20-04:00",
+      "_first_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593",
+      "_latest_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593"
     },
     {
       "schema": "rapp-agent/1.0",
