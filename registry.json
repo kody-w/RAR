@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-12T17:59:52.166094+00:00",
+  "generated_at": "2026-05-12T18:04:45.498165+00:00",
   "stats": {
     "total_agents": 191,
     "total_swarms": 82,
@@ -4908,7 +4908,7 @@
       "display_name": "PerpetualLoopFactory",
       "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch.",
       "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
-      "version": "1.0.1",
+      "version": "1.0.0",
       "tags": [
         "meta",
         "factory",
@@ -4919,15 +4919,15 @@
         "kaizen"
       ],
       "category": "core",
-      "quality_tier": "community",
+      "quality_tier": "experimental",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
         "@kody-w/twin_agent"
       ],
       "_file": "agents/@kody-w/perpetual_loop_factory_agent.py",
-      "_sha256": "d93da05b5891a41ffdbfc0f2089a578dccc9ca15be66c118023d26cd66d2108b",
-      "_seed": 18392963094647037054,
+      "_sha256": "a5179e5d1b0922767c2437f63f61e7980ee7abd61a943cd81274756b61ed088b",
+      "_seed": 18392963094642842750,
       "_size_kb": 54.5,
       "_lines": 1356,
       "_has_card": true,
@@ -5045,7 +5045,7 @@
       "display_name": "CopilotStudioDeploy",
       "description": "Push a forged Copilot Studio bundle into a Dataverse environment via OAuth client_credentials + ImportSolutionAsync. Reads creds from local.settings.json. Destructive deploy is gated by confirm.",
       "author": "RAPP",
-      "version": "0.1.1",
+      "version": "0.1.0",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5054,7 +5054,7 @@
         "destructive"
       ],
       "category": "core",
-      "quality_tier": "official",
+      "quality_tier": "experimental",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
@@ -5066,8 +5066,8 @@
         }
       },
       "_file": "agents/@rapp/copilot_studio_deploy_agent.py",
-      "_sha256": "19d947d09009bc00ea6167aea838fa2f396891834bd23a62b4d153e3a9711200",
-      "_seed": 12529120966326507298,
+      "_sha256": "67d0ed6f996314d577542bc271d222c967826826cb165f661e09326a742bcf93",
+      "_seed": 12529120966313924386,
       "_size_kb": 39.1,
       "_lines": 904,
       "_has_card": true,
@@ -5082,7 +5082,7 @@
       "display_name": "CopilotStudioForge",
       "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
       "author": "RAPP",
-      "version": "0.2.1",
+      "version": "0.2.0",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5091,7 +5091,7 @@
         "deploy-prep"
       ],
       "category": "core",
-      "quality_tier": "official",
+      "quality_tier": "experimental",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5103,8 +5103,8 @@
       },
       "anchored_on": "https://github.com/microsoft/skills-for-copilot-studio",
       "_file": "agents/@rapp/copilot_studio_forge_agent.py",
-      "_sha256": "49a45f92ef91c6a77520c3c06433cd0e0cc99dfdacc9a5c91a7bfdde38e684db",
-      "_seed": 6041207226663316349,
+      "_sha256": "c5aad52466df06e1ae329064d4252b6c474b88c97fcd0c53714252018c9dd79a",
+      "_seed": 6041207226650733437,
       "_size_kb": 44.5,
       "_lines": 1027,
       "_has_card": true,

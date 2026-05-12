@@ -74,10 +74,10 @@ __manifest__ = {
         "from local.settings.json. Destructive deploy is gated by confirm."
     ),
     "author": "RAPP",
-    "version": "0.1.1",
+    "version": "0.1.0",
     "tags": ["meta", "copilot-studio", "deploy", "dataverse", "destructive"],
     "category": "core",
-    "quality_tier": "official",
+    "quality_tier": "experimental",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent", "@rapp/copilot_studio_forge_agent"],
     "example_call": {"args": {"action": "auth_test"}},
