@@ -594,12 +594,36 @@ function openAgent(name) {
   `;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Permalink: reflect the open agent in the URL hash so the page
+  // can be copy-shared. Same pattern as store.html#agent/<name>.
+  history.replaceState(null, '', '#agent/' + encodeURIComponent(name));
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
+  history.replaceState(null, '', location.pathname + location.search);
 }
+
+// On page load (and on hash changes from back/forward), open the
+// agent named in the URL hash. The agents list may not be loaded
+// yet, so retry briefly until it's populated.
+function handleAgentHash() {
+  const h = location.hash;
+  if (!h.startsWith('#agent/')) return;
+  const name = decodeURIComponent(h.slice('#agent/'.length));
+  let tries = 0;
+  const tick = setInterval(() => {
+    if (allAgents.length) {
+      clearInterval(tick);
+      openAgent(name);
+    } else if (++tries > 40) {
+      clearInterval(tick);
+    }
+  }, 200);
+}
+window.addEventListener('hashchange', handleAgentHash);
+window.addEventListener('load', handleAgentHash);
 
 async function download(name) {
   const a = allAgents.find(x => x.name === name);
