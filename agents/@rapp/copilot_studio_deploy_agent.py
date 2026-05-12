@@ -74,7 +74,7 @@ __manifest__ = {
         "from local.settings.json. Destructive deploy is gated by confirm."
     ),
     "author": "RAPP",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "tags": ["meta", "copilot-studio", "deploy", "dataverse", "destructive"],
     "category": "core",
     "quality_tier": "official",
