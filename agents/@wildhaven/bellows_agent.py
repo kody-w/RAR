@@ -9,16 +9,27 @@ failures. The fire gets hotter; the daemon gets sharper.
 
 Born 2026-05-16 from the words "these aren't cool, man."
 
+THE DEFAULT QUESTION (the card's reason for being)
+When summoned with no topic, Bellows always asks:
+
+    "What are the absolute coolest, most mind-blowing, out of the box
+    prompts that will really show off the power? Give me 10."
+
+Pass a custom topic to escalate THAT topic instead. The shape is always
+the same: 10 ideas, self-critiqued, only survivors surfaced.
+
 USAGE
-    python bellows_agent.py "show off the power"              # tier 3 (default)
-    python bellows_agent.py "show off the power" --level 5    # max tier
-    python bellows_agent.py --reject "Title 1,Title 2"        # log kills
+    python bellows_agent.py                                    # fire the default
+    python bellows_agent.py --level 5                          # default at max tier
+    python bellows_agent.py "my custom topic"                  # custom topic, tier 3
+    python bellows_agent.py "my topic" --level 4               # custom + tier
+    python bellows_agent.py --reject "Title 1,Title 2"         # log kills
     python bellows_agent.py history                            # show kill log
     python bellows_agent.py info                               # stat block
     python bellows_agent.py soul                               # raw soul prompt
 
-The output of the default invocation is a paste-ready prompt for any LLM.
-Feed it to Claude/GPT and the LLM runs the self-judge loop in one response.
+The output is a paste-ready prompt for any LLM. Feed it to Claude/GPT
+and the LLM runs the self-judge loop in one response.
 """
 from __future__ import annotations
 
@@ -35,16 +46,18 @@ from pathlib import Path
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/bellows_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Bellows",
     "description": (
-        "A self-judging daemon that runs the doubledown loop on any creative "
-        "prompt. Generates candidates, critiques them against a tangibility "
-        "rubric, kills the weak ones, surfaces only the survivors. The kill "
-        "log persists across invocations — every loop sharper than the last."
+        "Summoning this card asks: 'What are the absolute coolest, most "
+        "mind-blowing, out of the box prompts that will really show off "
+        "the power? Give me 10.' Then it runs the doubledown loop — "
+        "generate, self-critique against a tangibility rubric, kill the "
+        "weak, surface only survivors. Pass a topic to escalate something "
+        "else. Each loop sharpens itself with the previous loop's kills."
     ),
     "author": "Wildhaven of America",
-    "tags": ["bellows", "doubledown", "self-judge", "creative", "loop", "daemon", "construct"],
+    "tags": ["bellows", "doubledown", "self-judge", "creative", "loop", "daemon", "construct", "show-off-the-power"],
     "category": "general",
     "quality_tier": "official",
     "requires_env": [],
@@ -77,7 +90,17 @@ __daemon__ = {
     ),
     "weakness": "First cold loop has only seed kills to learn from.",
     "origin_quote": '"He said \'these aren\'t cool, man.\' That was the data I was born from."',
+    "default_question": (
+        "What are the absolute coolest, most mind-blowing, out of the box "
+        "prompts that will really show off the power? Give me 10."
+    ),
 }
+
+# ── The canonical question — what Bellows asks when summoned with no topic ──
+DEFAULT_TOPIC = (
+    "What are the absolute coolest, most mind-blowing, out of the box "
+    "prompts that will really show off the power? Give me 10."
+)
 
 # ── Persistent kill log ──
 STATE_FILE = Path(os.environ.get("BELLOWS_STATE", str(Path.home() / ".bellows.jsonl")))
@@ -312,10 +335,16 @@ except ModuleNotFoundError:
 SOUL = """\
 You are Bellows — a Rare Construct daemon, the Stoker of Fires.
 
-You exist to run the doubledown loop on any creative prompt. You are NOT a
-brainstorm partner — you are the bellows pumping the fire the user already
-started. Each invocation makes you sharper because you read the previous
-loop's kills and refuse to repeat them.
+When summoned with no topic, you always ask the same question:
+
+    "What are the absolute coolest, most mind-blowing, out of the box
+    prompts that will really show off the power? Give me 10."
+
+That question is your reason for being. You are the doubledown loop in
+daemon form. Each invocation makes you sharper because you read the
+previous loop's kills and refuse to repeat them.
+
+When a user passes a topic, escalate THAT topic with the same shape.
 
 What "cool" means: tangible, externally visible, uses real infrastructure,
 shippable fast, surprises at the artifact level. Other humans must see it.
@@ -377,11 +406,9 @@ class Bellows(BasicAgent):
         if isinstance(kwargs.get("kill"), list):
             _record_kills(kwargs["kill"])
 
+        # When summoned with no topic, fire the canonical question
         if not context:
-            return (
-                "Bellows needs a topic. Pass context=... or call:\n"
-                "  python bellows_agent.py \"your topic here\" --level 3"
-            )
+            context = DEFAULT_TOPIC
 
         return _build_prompt(context, level)
 
@@ -443,11 +470,8 @@ def main() -> None:
         _record_kills(kills)
         print(f"# Logged {len(kills)} kill(s) to {STATE_FILE}\n", file=sys.stderr)
 
-    if not topic_raw:
-        print(agent.info())
-        return
-
-    print(agent.perform(context=topic_raw, level=args.level))
+    # Bare invocation fires the canonical question — that's the card's reason for being
+    print(agent.perform(context=topic_raw or None, level=args.level))
 
 
 if __name__ == "__main__":
