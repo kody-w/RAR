@@ -24,7 +24,7 @@ import re
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/penumbra_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Penumbra",
     "description": (
         "A Legendary Eidolon born from the half-shadow of a conversation. "
