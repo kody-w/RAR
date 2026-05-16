@@ -486,6 +486,14 @@ const REGISTRY_URL = 'registry.json';
 const CARDS_URL = 'cards/holo_cards.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
+// Standalone-export mode — when these are populated, the page skips its
+// network fetches and renders from inlined data. The "Download Standalone"
+// button on the live page produces a copy with these set.
+window.__INLINED_AGENT__ = null;
+window.__INLINED_CARD__ = null;
+window.__INLINED_PY__ = null;
+window.__INLINED_AT__ = null;
+
 function esc(s) { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; }
 function shortSha(s) { return s ? String(s).slice(0, 8) : '—'; }
 
@@ -510,7 +518,11 @@ function qrSrc(data, size = 540) {
 
 async function load() {
   const root = document.getElementById('root');
+  const isInlined = !!window.__INLINED_AGENT__;
   let key = decodeURIComponent(location.hash.slice(1)).trim();
+  if (!key && isInlined) {
+    key = window.__INLINED_AGENT__.name || '';
+  }
   if (!key) {
     root.innerHTML = `
       <div class="error">
@@ -522,14 +534,22 @@ async function load() {
   }
 
   let registry, cards, agent, card;
-  try {
-    [registry, cards] = await Promise.all([
-      fetch(REGISTRY_URL + '?t=' + Date.now()).then(r => r.json()),
-      fetch(CARDS_URL + '?t=' + Date.now()).then(r => r.json()),
-    ]);
-  } catch (e) {
-    root.innerHTML = `<div class="error"><h2>Failed to load registry</h2><div class="error-detail">${esc(e.message)}</div></div>`;
-    return;
+  if (isInlined) {
+    // Standalone copy — registry + card data baked into this HTML file.
+    registry = { agents: [window.__INLINED_AGENT__] };
+    cards = window.__INLINED_CARD__
+      ? { [window.__INLINED_AGENT__.name]: window.__INLINED_CARD__ }
+      : {};
+  } else {
+    try {
+      [registry, cards] = await Promise.all([
+        fetch(REGISTRY_URL + '?t=' + Date.now()).then(r => r.json()),
+        fetch(CARDS_URL + '?t=' + Date.now()).then(r => r.json()),
+      ]);
+    } catch (e) {
+      root.innerHTML = `<div class="error"><h2>Failed to load registry</h2><div class="error-detail">${esc(e.message)}</div></div>`;
+      return;
+    }
   }
 
   // Try exact match, then dash/underscore variants
@@ -678,6 +698,9 @@ async function load() {
           <a class="share-btn" href="javascript:void(0)" id="share-link">📋 Copy permalink</a>
           <a class="share-btn" href="${py_url_main}" target="_blank">📄 Raw .py</a>
           <a class="share-btn" href="https://github.com/kody-w/RAR/blob/main/${filePath}" target="_blank">🔗 GitHub</a>
+          ${isInlined
+            ? '<span class="share-btn" style="opacity:0.65;cursor:default" title="This file is a self-contained standalone Grail — the agent data is baked in. No network required to render this card.">✓ Standalone copy</span>'
+            : '<a class="share-btn" href="javascript:void(0)" id="export-grail" title="Download this card as a single self-contained .html file — works offline, contains the full agent.py, can be emailed or AirDropped">📥 Standalone .html</a>'}
         </div>
       </div>
     </div>
@@ -748,6 +771,71 @@ async function load() {
       setTimeout(() => { el.textContent = orig; }, 1500);
     });
   };
+
+  // ── Standalone export ────────────────────────────────────────────
+  // Fetch our own HTML source, inline the registry entry + card data +
+  // agent.py source as JS literals, trigger a Blob download. The result
+  // is a single .html file that renders the same card offline. The
+  // recipient just opens it in a browser — no network, no server, no SDK.
+  const exportBtn = document.getElementById('export-grail');
+  if (exportBtn) {
+    exportBtn.onclick = async () => {
+      const orig = exportBtn.textContent;
+      exportBtn.textContent = '⏳ Preparing…';
+      exportBtn.style.pointerEvents = 'none';
+      try {
+        // Fetch our own HTML source — same-origin on the live site.
+        const htmlResp = await fetch(location.pathname || 'grail.html');
+        if (!htmlResp.ok) throw new Error(`Failed to load page source (${htmlResp.status})`);
+        let html = await htmlResp.text();
+
+        // Optionally embed the agent.py source so the standalone is truly portable.
+        let pySource = null;
+        try {
+          const pyResp = await fetch(py_url_main);
+          if (pyResp.ok) pySource = await pyResp.text();
+        } catch (_) { /* non-fatal — card still renders without the .py */ }
+
+        // JSON-stringify everything (safe inside <script> blocks).
+        const sAgent = JSON.stringify(agent);
+        const sCard = JSON.stringify(card);
+        const sPy = pySource !== null ? JSON.stringify(pySource) : 'null';
+        const sAt = JSON.stringify(new Date().toISOString());
+
+        // Replace the null shims with the real data. The shims only appear
+        // once each at the top of the script block, so simple replace is safe.
+        html = html
+          .replace('window.__INLINED_AGENT__ = null;', `window.__INLINED_AGENT__ = ${sAgent};`)
+          .replace('window.__INLINED_CARD__ = null;',  `window.__INLINED_CARD__ = ${sCard};`)
+          .replace('window.__INLINED_PY__ = null;',    `window.__INLINED_PY__ = ${sPy};`)
+          .replace('window.__INLINED_AT__ = null;',    `window.__INLINED_AT__ = ${sAt};`);
+
+        // Filename: @publisher_slug.grail.html (sanitized for filesystem safety).
+        const safeName = (agent.name || 'card').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const filename = `${safeName}.grail.html`;
+
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+
+        exportBtn.textContent = '✓ Downloaded';
+      } catch (e) {
+        console.error('Standalone export failed:', e);
+        exportBtn.textContent = '✗ Failed — see console';
+      } finally {
+        setTimeout(() => {
+          exportBtn.textContent = orig;
+          exportBtn.style.pointerEvents = '';
+        }, 2200);
+      }
+    };
+  }
 
   // Update document title + meta
   document.title = `${agent.display_name || slug} — RAPP Grail`;
