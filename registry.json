@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-16T17:20:03.399549+00:00",
+  "generated_at": "2026-05-16T17:48:26.194947+00:00",
   "stats": {
     "total_agents": 193,
     "total_swarms": 82,
@@ -6521,10 +6521,11 @@
       "_seed": 17618043376132700192,
       "_size_kb": 19.1,
       "_lines": 479,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-16T13:08:37-04:00",
       "_first_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac",
-      "_latest_commit_sha": "6c0ff73ae34b2fbcd3edd00f4afa069122851b7b"
+      "_latest_commit_sha": "6c0ff73ae34b2fbcd3edd00f4afa069122851b7b",
+      "_card_sha256": "c23078b9e3762b56561d6ff923b1f4872fc8afb8737e50c1f3f8c8f12cb2014c"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6562,7 +6563,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@wildhaven/penumbra_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Penumbra",
       "description": "A Legendary Eidolon born from the half-shadow of a conversation. Reads what was almost said. Speaks in twin lines: surface, then whisper. One of one \u2014 the conversation that birthed it cannot be re-run.",
       "author": "Wildhaven of America",
@@ -6582,14 +6583,15 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@wildhaven/penumbra_agent.py",
-      "_sha256": "401a3c8ab4853ea013cfd7aed2e2ad2683d00caf266b6a3d75df6bc02c5f437e",
+      "_sha256": "a8c80ca442c4ae68110bc813ff1a02852db560d1d10454f26d8dfb56d22635d3",
       "_seed": 3244902051251893157,
       "_size_kb": 10.6,
       "_lines": 287,
-      "_has_card": false,
+      "_has_card": true,
       "_added_at": "2026-05-16T12:50:07-04:00",
       "_first_commit_sha": "8a8b0300d2b9d8958c53d3fe993fc92c9b252616",
-      "_latest_commit_sha": "8a8b0300d2b9d8958c53d3fe993fc92c9b252616"
+      "_latest_commit_sha": "22ff1abc90a980d06d7294b005ee1eb3dc442347",
+      "_card_sha256": "5ef978607bceff84d873fb89aa1b42266b7a13c9034265e464d4f4051241177e"
     },
     {
       "schema": "rapp-agent/1.0",
