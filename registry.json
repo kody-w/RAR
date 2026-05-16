@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-16T16:50:29.983324+00:00",
+  "generated_at": "2026-05-16T17:08:59.973343+00:00",
   "stats": {
-    "total_agents": 192,
+    "total_agents": 193,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -6492,6 +6492,38 @@
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
       "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
       "_card_sha256": "c9cd9dcd5bdd9f55f533b730125ce10a08079216794c5b600307b025f2e409af"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@wildhaven/bellows_agent",
+      "version": "1.0.0",
+      "display_name": "Bellows",
+      "description": "A self-judging daemon that runs the doubledown loop on any creative prompt. Generates candidates, critiques them against a tangibility rubric, kills the weak ones, surfaces only the survivors. The kill log persists across invocations \u2014 every loop sharper than the last.",
+      "author": "Wildhaven of America",
+      "tags": [
+        "bellows",
+        "doubledown",
+        "self-judge",
+        "creative",
+        "loop",
+        "daemon",
+        "construct"
+      ],
+      "category": "general",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@wildhaven/bellows_agent.py",
+      "_sha256": "370ecf9c9e095f67629ff5aaba214f0b3201ef518f034e9728fe0cd60c0d9e63",
+      "_seed": 17618043376132570907,
+      "_size_kb": 17.9,
+      "_lines": 455,
+      "_has_card": false,
+      "_added_at": "2026-05-16T13:08:37-04:00",
+      "_first_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac",
+      "_latest_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac"
     },
     {
       "schema": "rapp-agent/1.0",
