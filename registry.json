@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-16T17:08:59.973343+00:00",
+  "generated_at": "2026-05-16T17:20:03.399549+00:00",
   "stats": {
     "total_agents": 193,
     "total_swarms": 82,
@@ -6496,9 +6496,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@wildhaven/bellows_agent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "display_name": "Bellows",
-      "description": "A self-judging daemon that runs the doubledown loop on any creative prompt. Generates candidates, critiques them against a tangibility rubric, kills the weak ones, surfaces only the survivors. The kill log persists across invocations \u2014 every loop sharper than the last.",
+      "description": "Summoning this card asks: 'What are the absolute coolest, most mind-blowing, out of the box prompts that will really show off the power? Give me 10.' Then it runs the doubledown loop \u2014 generate, self-critique against a tangibility rubric, kill the weak, surface only survivors. Pass a topic to escalate something else. Each loop sharpens itself with the previous loop's kills.",
       "author": "Wildhaven of America",
       "tags": [
         "bellows",
@@ -6507,7 +6507,8 @@
         "creative",
         "loop",
         "daemon",
-        "construct"
+        "construct",
+        "show-off-the-power"
       ],
       "category": "general",
       "quality_tier": "official",
@@ -6516,14 +6517,14 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@wildhaven/bellows_agent.py",
-      "_sha256": "370ecf9c9e095f67629ff5aaba214f0b3201ef518f034e9728fe0cd60c0d9e63",
-      "_seed": 17618043376132570907,
-      "_size_kb": 17.9,
-      "_lines": 455,
+      "_sha256": "70f4a8f70083460a20dbddd6772f151ee5ad25dfba73fe6b8ea03fb071a463d9",
+      "_seed": 17618043376132700192,
+      "_size_kb": 19.1,
+      "_lines": 479,
       "_has_card": false,
       "_added_at": "2026-05-16T13:08:37-04:00",
       "_first_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac",
-      "_latest_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac"
+      "_latest_commit_sha": "6c0ff73ae34b2fbcd3edd00f4afa069122851b7b"
     },
     {
       "schema": "rapp-agent/1.0",
