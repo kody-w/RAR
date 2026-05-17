@@ -1,0 +1,91 @@
+{
+  "id": "rapp2mcs_factory",
+  "name": "RAPP2MCS Factory",
+  "version": "0.3.0-singleton",
+  "summary": "End-to-end converter: rapp_brainstem/agents/*.py \u2192 Copilot Studio native agent solution \u2192 deployed to Power Platform. AIBAST_RAPP pipeline (analyzer \u2192 normalizer \u2192 wrapper_generator) embedded; pac CLI for deploy.",
+  "tagline": "One singleton, one button, one Copilot Studio agent in your Power Platform env.",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "factory",
+    "mcs",
+    "copilot-studio",
+    "power-platform",
+    "deploy",
+    "singleton",
+    "aibast"
+  ],
+  "manifest_name": "@rapp/rapp2mcs_factory",
+  "singleton_filename": "rapp2mcs_factory_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapp/rapp2mcs_factory_agent.py",
+  "singleton_sha256": "26f1990680565681907c3f411319d129d2cd13b2501b90a130456bb38226251d",
+  "singleton_lines": 2802,
+  "singleton_bytes": 252153,
+  "singleton_includes": {
+    "orchestrator_loc": 350,
+    "aibast_bundle": {
+      "embedding": "gzip+base64",
+      "bundle_tag": "H4sIADgVCWoC",
+      "scripts": [
+        "analyzer/analyzer_agent.py",
+        "analyzer/ir_generator.py",
+        "normalizer/normalizer_agent.py",
+        "normalizer/llm_enricher.py",
+        "normalizer/connector_catalog.json",
+        "wrapper_generator/wrapper_generator.py",
+        "wrapper_generator/solution_packager.py",
+        "wrapper_generator/templates.py",
+        "wrapper_generator/azure_function_generator.py",
+        "wrapper_generator/openapi_generator.py",
+        "wrapper_generator/_default_icon.py",
+        "fetcher/run_fetcher.py",
+        "fetcher/config.py",
+        "fetcher/rapp_analyzer/github_fetcher.py",
+        "llm_client.py"
+      ]
+    }
+  },
+  "requires_env": {
+    "analyze_phase": [
+      "OPENAI_API_KEY (or AZURE_OPENAI_* + mode=azure)"
+    ],
+    "normalize_phase": [
+      "OPENAI_API_KEY (catalog fallback LLM calls)"
+    ],
+    "deploy_phase": [
+      "pac CLI on PATH, authenticated to target Dataverse env"
+    ]
+  },
+  "policy": {
+    "azure_functions": false,
+    "custom_connectors": false,
+    "custom_dataverse_tables": false,
+    "ootb_only_native_connector": "shared_commondataserviceforapps"
+  },
+  "actions": [
+    "scan",
+    "analyze",
+    "normalize",
+    "package",
+    "deploy",
+    "pipeline"
+  ],
+  "example_call": {
+    "args": {
+      "action": "pipeline"
+    }
+  },
+  "produced_by": {
+    "method": "singleton-bundle",
+    "bundled_from": "https://github.com/kody-w/rapp2mcs/tree/main/AIBAST_RAPP/scripts",
+    "emitter": "build/emit_singleton.py"
+  },
+  "install": {
+    "curl": "curl -L https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapp/rapp2mcs_factory_agent.py -o rapp_brainstem/agents/rapp2mcs_factory_agent.py",
+    "note": "Drop into any RAPP brainstem agents/ directory. Bundle self-extracts to a per-user temp dir on first use."
+  },
+  "license": "Same as kody-w/rapp2mcs",
+  "publisher": "@rapp",
+  "quality_tier": "community",
+  "generated_at": "2026-05-17T01:10:59Z"
+}
