@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-17T02:49:15.437835+00:00",
+  "generated_at": "2026-05-17T03:01:28.430129+00:00",
   "stats": {
-    "total_agents": 196,
+    "total_agents": 197,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -4468,6 +4468,37 @@
       "_first_commit_sha": "d0b60841d8a926d2579efab8b2fc96dc41398b1a",
       "_latest_commit_sha": "d0b60841d8a926d2579efab8b2fc96dc41398b1a",
       "_card_sha256": "505fc7510cbd15425b48b88511ffddb52050eee8ea5b7371ad9f96cbb96a4503"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody/install_rappter_distro_agent",
+      "version": "1.0.0",
+      "display_name": "Install Rappter Distro",
+      "description": "Single-file installer that pulls the full rappter-distro (organs, senses, lib/, rich UI, @rappter agents) from raw.githubusercontent.com via MANIFEST.json with sha256 verification per file. Refuses to touch the three sacred kernel files.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "installer",
+        "distro",
+        "rappter",
+        "bootstrap",
+        "organism"
+      ],
+      "category": "pipeline",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody/install_rappter_distro_agent.py",
+      "_sha256": "108a57436f11ec1d4e647c31da4e25d6bb4601d8a76215015202cd70099cba86",
+      "_seed": 5748067776166766871,
+      "_size_kb": 36.5,
+      "_lines": 944,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "84d45687c7194ad76e311e44be486bdee7487675d1446bdd95c40b9680a07ce6"
     },
     {
       "schema": "rapp-agent/1.0",

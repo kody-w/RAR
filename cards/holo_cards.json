@@ -9659,6 +9659,78 @@
     "floor_pts": 200,
     "seed": 1346218951730281648
   },
+  "@kody/install_rappter_distro_agent": {
+    "name": "Install Rappter Distro",
+    "title": "The Catalyst",
+    "mana_cost": "{2}{B}",
+    "colors": [
+      "B"
+    ],
+    "type_line": "Creature — Agent Alchemist",
+    "rarity": "uncommon",
+    "power": 2,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Single-file installer that pulls the full rappter-distro (organs, senses, lib/, rich UI, @rappter agents) from raw.githubusercontent.com via MANIFEST.json with sha256 verification per file. Refuses to"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c53d30\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-c53d30\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c53d30)\"/><g filter=\"url(#gl-c53d30)\"><circle cx=\"111.3\" cy=\"72.2\" r=\"18\" fill=\"#f778ba\" opacity=\"0.15\" stroke=\"#f778ba\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"88.7\" cy=\"127.8\" r=\"17\" fill=\"#f778ba\" opacity=\"0.1\" stroke=\"#f778ba\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"111.3\" y1=\"72.2\" x2=\"88.7\" y2=\"127.8\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"40\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody/install_rappter_distro_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 68,
+    "stats": {
+      "hp": 68,
+      "atk": 69,
+      "def": 34,
+      "spd": 52,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 3,
+        "damage": 15
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 1,
+        "damage": 38
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 5748067776166766871
+  },
   "@kody/manage_memory_agent": {
     "name": "ManageMemory",
     "title": "The Scribe",
