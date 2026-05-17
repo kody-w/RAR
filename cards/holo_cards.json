@@ -14382,5 +14382,83 @@
     "rarity_label": "Core",
     "floor_pts": 40,
     "seed": 13371367910196391944
+  },
+  "@rapp/topic_wizard": {
+    "name": "Topic Wizard",
+    "title": "The Cartographer",
+    "mana_cost": "{1}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Enchantment - Wizard Pipeline",
+    "rarity": "core",
+    "power": 49,
+    "toughness": 47,
+    "abilities": [
+      {
+        "keyword": "Survey",
+        "cost": "{T}",
+        "text": "Walk each agents/*.py and propose the matching MCS topic shape: topic-only, web-browse, memory-save, or memory-recall."
+      },
+      {
+        "keyword": "Step",
+        "cost": "{1}",
+        "text": "Emit a self-contained HTML wizard with live YAML preview. No CDN, no server."
+      },
+      {
+        "keyword": "Forge",
+        "cost": "",
+        "text": "Write fully-built .mcs.yml from the wizard's exported config. OOTB Dataverse annotation only; no Azure Functions."
+      }
+    ],
+    "flavor_text": "\"A guide is the difference between a path and a wilderness.\" --RAR/agents/@rapp/topic_wizard_agent.py",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-tw\"><stop offset=\"0%\" stop-color=\"#1a2540\"/><stop offset=\"100%\" stop-color=\"#0a0f1f\"/></radialGradient></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-tw)\"/><g stroke=\"#58a6ff\" stroke-width=\"2\" fill=\"none\"><polyline points=\"40,150 70,150 70,120 100,120 100,90 130,90 130,60 160,60\"/></g><g fill=\"#bc8cff\"><circle cx=\"55\" cy=\"150\" r=\"3\"/><circle cx=\"85\" cy=\"120\" r=\"3\"/><circle cx=\"115\" cy=\"90\" r=\"3\"/><circle cx=\"145\" cy=\"60\" r=\"3\"/></g><rect x=\"155\" y=\"55\" width=\"3\" height=\"10\" fill=\"#e6edf3\"/></svg>",
+    "set_code": "HOLO",
+    "promo": false,
+    "artist": "@rapp",
+    "agent_name": "@rapp/topic_wizard",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 58,
+    "stats": {
+      "hp": 58,
+      "atk": 49,
+      "def": 47,
+      "spd": 52,
+      "int": 54
+    },
+    "typed_abilities": [
+      {
+        "name": "Sync",
+        "text": "",
+        "cost": 1,
+        "damage": 26
+      },
+      {
+        "name": "Extract",
+        "text": "",
+        "cost": 2,
+        "damage": 21
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 14837227561104978653
   }
 }
