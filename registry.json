@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-17T01:24:54.969754+00:00",
+  "generated_at": "2026-05-17T01:41:13.104386+00:00",
   "stats": {
-    "total_agents": 194,
+    "total_agents": 195,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -5699,6 +5699,38 @@
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/topic_wizard",
+      "version": "0.1.0",
+      "display_name": "Topic Wizard",
+      "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions.",
+      "author": "RAPP",
+      "tags": [
+        "mcs",
+        "copilot-studio",
+        "topic",
+        "wizard",
+        "ui",
+        "singleton"
+      ],
+      "category": "pipeline",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/topic_wizard_agent.py",
+      "_sha256": "95e7e792e061c008d955ef2ba4488e570c1b89f6c0a85a31cbec5a9ba6a03e76",
+      "_seed": 14837227561104978653,
+      "_size_kb": 54.9,
+      "_lines": 1317,
+      "_has_card": true,
+      "_added_at": "2026-05-17T01:41:12.387578+00:00",
+      "_first_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
+      "_latest_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
+      "_card_sha256": "1c7c00451f434e145d664ca5f2dd46370a91d6d41ce667a4cea78ef0843dfab7"
     },
     {
       "schema": "rapp-agent/1.0",
