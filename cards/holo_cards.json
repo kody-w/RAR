@@ -14532,5 +14532,94 @@
     "rarity_label": "Core",
     "floor_pts": 40,
     "seed": 14837227561104978653
+  },
+  "@kody-w/rapp_leviathan_factory": {
+    "name": "RappLeviathanFactory",
+    "title": "The Anatomist",
+    "mana_cost": "{W}{U}{B}{R}{G}",
+    "colors": [
+      "W",
+      "U",
+      "B",
+      "R",
+      "G"
+    ],
+    "type_line": "Legendary Artifact Creature — Leviathan Forge",
+    "rarity": "mythic",
+    "power": 5,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Anatomize",
+        "cost": "",
+        "text": "When ~ enters, generate up to five Estate tokens — Sanctum (soul), Polity (will), Works (hands), Press (eyes), Commons (mouth) — each a 1/1 Legendary Creature you control."
+      },
+      {
+        "keyword": "Self-Contained",
+        "cost": "",
+        "text": "~ has no sibling dependencies. Drop it into any RAPP brainstem and it runs."
+      },
+      {
+        "keyword": "Bootstrap",
+        "cost": "",
+        "text": "Diagnose the realm before forging. If the brainstem, LLM, or workspace cannot sustain a Leviathan, ~ does not enter."
+      }
+    ],
+    "flavor_text": "“One file. One operator. One leviathan. Five organs to remember, decide, produce, judge, and speak.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-lvfx\" cx=\"50%\" cy=\"55%\" r=\"72%\"><stop offset=\"0%\" stop-color=\"#1f1530\"/><stop offset=\"55%\" stop-color=\"#0d0820\"/><stop offset=\"100%\" stop-color=\"#040208\"/></radialGradient><radialGradient id=\"core-lvfx\" cx=\"50%\" cy=\"50%\" r=\"50%\"><stop offset=\"0%\" stop-color=\"#fff2c4\" stop-opacity=\"0.95\"/><stop offset=\"55%\" stop-color=\"#d9a657\" stop-opacity=\"0.45\"/><stop offset=\"100%\" stop-color=\"#3a2a08\" stop-opacity=\"0\"/></radialGradient><filter id=\"g-lvfx\"><feGaussianBlur stdDeviation=\"1.6\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-lvfx)\"/><polygon points=\"100,50 148,85 129,140 71,140 52,85\" stroke=\"#d9a657\" stroke-width=\"0.4\" fill=\"none\" opacity=\"0.3\"/><g stroke=\"#d9a657\" stroke-width=\"0.4\" opacity=\"0.3\"><line x1=\"100\" y1=\"100\" x2=\"100\" y2=\"50\"/><line x1=\"100\" y1=\"100\" x2=\"148\" y2=\"85\"/><line x1=\"100\" y1=\"100\" x2=\"129\" y2=\"140\"/><line x1=\"100\" y1=\"100\" x2=\"71\" y2=\"140\"/><line x1=\"100\" y1=\"100\" x2=\"52\" y2=\"85\"/></g><g filter=\"url(#g-lvfx)\" opacity=\"0.7\"><g fill=\"#fff2c4\"><circle cx=\"65\" cy=\"4\" r=\"0.9\"/><circle cx=\"68\" cy=\"3\" r=\"0.9\"/><circle cx=\"71\" cy=\"2\" r=\"0.9\"/><circle cx=\"81\" cy=\"0\" r=\"0.9\"/><circle cx=\"85\" cy=\"-1\" r=\"0.9\"/><circle cx=\"90\" cy=\"-2\" r=\"0.9\"/><circle cx=\"90\" cy=\"-1\" r=\"0.9\"/><circle cx=\"94\" cy=\"-2\" r=\"0.9\"/><circle cx=\"97\" cy=\"-2\" r=\"0.9\"/><circle cx=\"107\" cy=\"-2\" r=\"0.9\"/><circle cx=\"109\" cy=\"-2\" r=\"0.9\"/><circle cx=\"113\" cy=\"-1\" r=\"0.9\"/><circle cx=\"116\" cy=\"-1\" r=\"0.9\"/><circle cx=\"117\" cy=\"-1\" r=\"0.9\"/><circle cx=\"123\" cy=\"1\" r=\"0.9\"/><circle cx=\"128\" cy=\"2\" r=\"0.9\"/><circle cx=\"131\" cy=\"3\" r=\"0.9\"/><circle cx=\"134\" cy=\"4\" r=\"0.9\"/></g><g fill=\"#9bd3ae\"><circle cx=\"178\" cy=\"35\" r=\"0.9\"/><circle cx=\"182\" cy=\"39\" r=\"0.9\"/><circle cx=\"184\" cy=\"42\" r=\"0.9\"/><circle cx=\"190\" cy=\"51\" r=\"0.9\"/><circle cx=\"191\" cy=\"54\" r=\"0.9\"/><circle cx=\"193\" cy=\"57\" r=\"0.9\"/><circle cx=\"193\" cy=\"58\" r=\"0.9\"/><circle cx=\"194\" cy=\"62\" r=\"0.9\"/><circle cx=\"196\" cy=\"65\" r=\"0.9\"/><circle cx=\"198\" cy=\"70\" r=\"0.9\"/><circle cx=\"198\" cy=\"73\" r=\"0.9\"/><circle cx=\"199\" cy=\"76\" r=\"0.9\"/><circle cx=\"200\" cy=\"78\" r=\"0.9\"/><circle cx=\"200\" cy=\"80\" r=\"0.9\"/><circle cx=\"201\" cy=\"86\" r=\"0.9\"/><circle cx=\"202\" cy=\"95\" r=\"0.9\"/><circle cx=\"202\" cy=\"101\" r=\"0.9\"/><circle cx=\"202\" cy=\"103\" r=\"0.9\"/></g><g fill=\"#f9aa8f\"><circle cx=\"187\" cy=\"153\" r=\"0.9\"/><circle cx=\"186\" cy=\"155\" r=\"0.9\"/><circle cx=\"183\" cy=\"160\" r=\"0.9\"/><circle cx=\"178\" cy=\"166\" r=\"0.9\"/><circle cx=\"175\" cy=\"169\" r=\"0.9\"/><circle cx=\"175\" cy=\"170\" r=\"0.9\"/><circle cx=\"168\" cy=\"176\" r=\"0.9\"/><circle cx=\"167\" cy=\"177\" r=\"0.9\"/><circle cx=\"164\" cy=\"179\" r=\"0.9\"/><circle cx=\"154\" cy=\"186\" r=\"0.9\"/><circle cx=\"153\" cy=\"187\" r=\"0.9\"/><circle cx=\"149\" cy=\"190\" r=\"0.9\"/><circle cx=\"143\" cy=\"192\" r=\"0.9\"/><circle cx=\"140\" cy=\"194\" r=\"0.9\"/><circle cx=\"136\" cy=\"195\" r=\"0.9\"/><circle cx=\"128\" cy=\"198\" r=\"0.9\"/><circle cx=\"123\" cy=\"199\" r=\"0.9\"/><circle cx=\"119\" cy=\"200\" r=\"0.9\"/></g><g fill=\"#c9a4ff\"><circle cx=\"74\" cy=\"199\" r=\"0.9\"/><circle cx=\"73\" cy=\"198\" r=\"0.9\"/><circle cx=\"69\" cy=\"197\" r=\"0.9\"/><circle cx=\"55\" cy=\"191\" r=\"0.9\"/><circle cx=\"53\" cy=\"190\" r=\"0.9\"/><circle cx=\"48\" cy=\"188\" r=\"0.9\"/><circle cx=\"52\" cy=\"190\" r=\"0.9\"/><circle cx=\"49\" cy=\"188\" r=\"0.9\"/><circle cx=\"46\" cy=\"187\" r=\"0.9\"/><circle cx=\"37\" cy=\"180\" r=\"0.9\"/><circle cx=\"33\" cy=\"177\" r=\"0.9\"/><circle cx=\"32\" cy=\"176\" r=\"0.9\"/><circle cx=\"30\" cy=\"174\" r=\"0.9\"/><circle cx=\"27\" cy=\"171\" r=\"0.9\"/><circle cx=\"25\" cy=\"169\" r=\"0.9\"/><circle cx=\"19\" cy=\"161\" r=\"0.9\"/><circle cx=\"17\" cy=\"159\" r=\"0.9\"/><circle cx=\"15\" cy=\"157\" r=\"0.9\"/></g><g fill=\"#aae0fa\"><circle cx=\"-2\" cy=\"109\" r=\"0.9\"/><circle cx=\"-2\" cy=\"105\" r=\"0.9\"/><circle cx=\"-2\" cy=\"100\" r=\"0.9\"/><circle cx=\"-2\" cy=\"94\" r=\"0.9\"/><circle cx=\"-1\" cy=\"90\" r=\"0.9\"/><circle cx=\"-1\" cy=\"87\" r=\"0.9\"/><circle cx=\"0\" cy=\"81\" r=\"0.9\"/><circle cx=\"0\" cy=\"78\" r=\"0.9\"/><circle cx=\"2\" cy=\"73\" r=\"0.9\"/><circle cx=\"5\" cy=\"63\" r=\"0.9\"/><circle cx=\"7\" cy=\"58\" r=\"0.9\"/><circle cx=\"8\" cy=\"55\" r=\"0.9\"/><circle cx=\"10\" cy=\"53\" r=\"0.9\"/><circle cx=\"12\" cy=\"49\" r=\"0.9\"/><circle cx=\"13\" cy=\"46\" r=\"0.9\"/><circle cx=\"19\" cy=\"38\" r=\"0.9\"/><circle cx=\"20\" cy=\"36\" r=\"0.9\"/><circle cx=\"23\" cy=\"33\" r=\"0.9\"/></g></g><g filter=\"url(#g-lvfx)\" opacity=\"0.85\"><g fill=\"#fff2c4\"><circle cx=\"70\" cy=\"13\" r=\"1.6\"/><circle cx=\"87\" cy=\"9\" r=\"1.6\"/><circle cx=\"95\" cy=\"8\" r=\"1.6\"/><circle cx=\"109\" cy=\"8\" r=\"1.6\"/><circle cx=\"117\" cy=\"10\" r=\"1.6\"/><circle cx=\"128\" cy=\"13\" r=\"1.6\"/></g><g fill=\"#9bd3ae\"><circle cx=\"173\" cy=\"44\" r=\"1.6\"/><circle cx=\"182\" cy=\"58\" r=\"1.6\"/><circle cx=\"185\" cy=\"64\" r=\"1.6\"/><circle cx=\"189\" cy=\"77\" r=\"1.6\"/><circle cx=\"191\" cy=\"83\" r=\"1.6\"/><circle cx=\"192\" cy=\"100\" r=\"1.6\"/></g><g fill=\"#f9aa8f\"><circle cx=\"177\" cy=\"150\" r=\"1.6\"/><circle cx=\"169\" cy=\"161\" r=\"1.6\"/><circle cx=\"159\" cy=\"170\" r=\"1.6\"/><circle cx=\"147\" cy=\"179\" r=\"1.6\"/><circle cx=\"136\" cy=\"185\" r=\"1.6\"/><circle cx=\"121\" cy=\"189\" r=\"1.6\"/></g><g fill=\"#c9a4ff\"><circle cx=\"75\" cy=\"188\" r=\"1.6\"/><circle cx=\"57\" cy=\"181\" r=\"1.6\"/><circle cx=\"53\" cy=\"179\" r=\"1.6\"/><circle cx=\"41\" cy=\"170\" r=\"1.6\"/><circle cx=\"34\" cy=\"164\" r=\"1.6\"/><circle cx=\"25\" cy=\"153\" r=\"1.6\"/></g><g fill=\"#aae0fa\"><circle cx=\"8\" cy=\"104\" r=\"1.6\"/><circle cx=\"8\" cy=\"92\" r=\"1.6\"/><circle cx=\"10\" cy=\"79\" r=\"1.6\"/><circle cx=\"16\" cy=\"63\" r=\"1.6\"/><circle cx=\"20\" cy=\"54\" r=\"1.6\"/><circle cx=\"29\" cy=\"42\" r=\"1.6\"/></g></g><g filter=\"url(#g-lvfx)\"><g fill=\"#fff2c4\" opacity=\"0.92\"><circle cx=\"81\" cy=\"26\" r=\"2.6\"/><circle cx=\"101\" cy=\"24\" r=\"2.6\"/><circle cx=\"119\" cy=\"26\" r=\"2.6\"/></g><g fill=\"none\" stroke=\"#fff2c4\" stroke-width=\"0.4\" opacity=\"0.4\"><circle cx=\"81\" cy=\"26\" r=\"4.5\"/><circle cx=\"101\" cy=\"24\" r=\"4.5\"/><circle cx=\"119\" cy=\"26\" r=\"4.5\"/></g><g fill=\"#9bd3ae\" opacity=\"0.92\"><circle cx=\"165\" cy=\"60\" r=\"2.6\"/><circle cx=\"172\" cy=\"75\" r=\"2.6\"/><circle cx=\"176\" cy=\"94\" r=\"2.6\"/></g><g fill=\"none\" stroke=\"#9bd3ae\" stroke-width=\"0.4\" opacity=\"0.4\"><circle cx=\"165\" cy=\"60\" r=\"4.5\"/><circle cx=\"172\" cy=\"75\" r=\"4.5\"/><circle cx=\"176\" cy=\"94\" r=\"4.5\"/></g><g fill=\"#f9aa8f\" opacity=\"0.92\"><circle cx=\"160\" cy=\"147\" r=\"2.6\"/><circle cx=\"143\" cy=\"162\" r=\"2.6\"/><circle cx=\"125\" cy=\"172\" r=\"2.6\"/></g><g fill=\"none\" stroke=\"#f9aa8f\" stroke-width=\"0.4\" opacity=\"0.4\"><circle cx=\"160\" cy=\"147\" r=\"4.5\"/><circle cx=\"143\" cy=\"162\" r=\"4.5\"/><circle cx=\"125\" cy=\"172\" r=\"4.5\"/></g><g fill=\"#c9a4ff\" opacity=\"0.92\"><circle cx=\"71\" cy=\"170\" r=\"2.6\"/><circle cx=\"55\" cy=\"161\" r=\"2.6\"/><circle cx=\"42\" cy=\"150\" r=\"2.6\"/></g><g fill=\"none\" stroke=\"#c9a4ff\" stroke-width=\"0.4\" opacity=\"0.4\"><circle cx=\"71\" cy=\"170\" r=\"4.5\"/><circle cx=\"55\" cy=\"161\" r=\"4.5\"/><circle cx=\"42\" cy=\"150\" r=\"4.5\"/></g><g fill=\"#aae0fa\" opacity=\"0.92\"><circle cx=\"24\" cy=\"98\" r=\"2.6\"/><circle cx=\"28\" cy=\"75\" r=\"2.6\"/><circle cx=\"38\" cy=\"57\" r=\"2.6\"/></g><g fill=\"none\" stroke=\"#aae0fa\" stroke-width=\"0.4\" opacity=\"0.4\"><circle cx=\"24\" cy=\"98\" r=\"4.5\"/><circle cx=\"28\" cy=\"75\" r=\"4.5\"/><circle cx=\"38\" cy=\"57\" r=\"4.5\"/></g></g><g filter=\"url(#g-lvfx)\"><circle cx=\"100\" cy=\"50\" r=\"6\" fill=\"#fff2c4\" opacity=\"0.95\"/><circle cx=\"100\" cy=\"50\" r=\"10\" fill=\"none\" stroke=\"#fff2c4\" stroke-width=\"0.7\" opacity=\"0.55\"/><circle cx=\"148\" cy=\"85\" r=\"6\" fill=\"#9bd3ae\" opacity=\"0.95\"/><circle cx=\"148\" cy=\"85\" r=\"10\" fill=\"none\" stroke=\"#9bd3ae\" stroke-width=\"0.7\" opacity=\"0.55\"/><circle cx=\"129\" cy=\"140\" r=\"6\" fill=\"#f9aa8f\" opacity=\"0.95\"/><circle cx=\"129\" cy=\"140\" r=\"10\" fill=\"none\" stroke=\"#f9aa8f\" stroke-width=\"0.7\" opacity=\"0.55\"/><circle cx=\"71\" cy=\"140\" r=\"6\" fill=\"#c9a4ff\" opacity=\"0.95\"/><circle cx=\"71\" cy=\"140\" r=\"10\" fill=\"none\" stroke=\"#c9a4ff\" stroke-width=\"0.7\" opacity=\"0.55\"/><circle cx=\"52\" cy=\"85\" r=\"6\" fill=\"#aae0fa\" opacity=\"0.95\"/><circle cx=\"52\" cy=\"85\" r=\"10\" fill=\"none\" stroke=\"#aae0fa\" stroke-width=\"0.7\" opacity=\"0.55\"/></g><g filter=\"url(#g-lvfx)\"><circle cx=\"100\" cy=\"100\" r=\"22\" fill=\"url(#core-lvfx)\"/><circle cx=\"100\" cy=\"100\" r=\"14\" fill=\"none\" stroke=\"#fff2c4\" stroke-width=\"0.6\" opacity=\"0.7\"/><circle cx=\"100\" cy=\"100\" r=\"7\" fill=\"none\" stroke=\"#fff2c4\" stroke-width=\"0.5\" opacity=\"0.85\"/><circle cx=\"100\" cy=\"100\" r=\"2.4\" fill=\"#fff2c4\" opacity=\"0.95\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/rapp_leviathan_factory",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d9a657",
+      "#c9a4ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 55,
+      "def": 99,
+      "spd": 15,
+      "int": 99
+    },
+    "typed_abilities": [
+      {
+        "name": "Design",
+        "text": "Preview the leviathan blueprint. Estates, industries, neighborhoods, factories — no files written.",
+        "cost": 1,
+        "damage": 0
+      },
+      {
+        "name": "Generate",
+        "text": "Forge the full five-organ being. Writes every file each estate needs to live.",
+        "cost": 5,
+        "damage": 99
+      },
+      {
+        "name": "Provision",
+        "text": "Mark the rappid live. ~ enters the lattice and begins to think.",
+        "cost": 2,
+        "damage": 0
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 5,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "mythic",
+    "rarity_label": "Mythic",
+    "floor_pts": 250,
+    "seed": 5202550512345678901
   }
 }
