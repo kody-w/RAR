@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-18T23:00:55.259093+00:00",
+  "generated_at": "2026-05-18T23:02:27.546084+00:00",
   "stats": {
     "total_agents": 199,
     "total_swarms": 82,
@@ -4497,7 +4497,7 @@
       "_has_card": true,
       "_added_at": "2026-05-17T02:49:15Z",
       "_first_commit_sha": "c9e43878f5205df7ef1d076337726c3764814d12",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "84d45687c7194ad76e311e44be486bdee7487675d1446bdd95c40b9680a07ce6"
     },
     {
@@ -5060,7 +5060,7 @@
       "_has_card": true,
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
-      "_latest_commit_sha": "f128bdd7c1856e6823f0f850634803340ca2b71c",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "f21ca0c391d0aad83e3d77f6b44df7b506a5ecf8f737080edc1145c94b2f364f"
     },
     {
@@ -5243,7 +5243,7 @@
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "f5ac406966c03a6b48ee07636a03aa76087eb881299d6dbd65808eba5758ab8e"
     },
     {
@@ -5280,7 +5280,7 @@
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "5cb932972497f6beb145affeb89fabacbaecd0698bae9f8e9c0af559558da065"
     },
     {
@@ -5399,7 +5399,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:43Z",
       "_first_commit_sha": "5ef7e1c716768da9cfb87f46cb16b81134c7b6c5",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "6ce92d164f8f0cd2f9387b7ec70dc6872f34b16dedb307289b02d5278f6a5821"
     },
     {
@@ -5547,7 +5547,7 @@
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "d6efc4b54e1324e9ae76b123c8e42178e3b819f786292b57e15c30ed66947968"
     },
     {
@@ -5576,7 +5576,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T23:08:03Z",
       "_first_commit_sha": "11c5191f56c3de5b9f776206b3c6815165af7195",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "baec8ef325176e7cef389109ef4175db0d702ab2a4a6c530caa85f42dad93512"
     },
     {
@@ -5609,7 +5609,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:20Z",
       "_first_commit_sha": "85bace6a431feedaf23abe36e129c4a26b7f1b94",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "6417ee68aa010ea6a6d2f39c76589a0f57e640066719eaae83ed98de3247d1df"
     },
     {
@@ -5648,7 +5648,7 @@
       "_has_card": true,
       "_added_at": "2026-05-16T21:09:45-04:00",
       "_first_commit_sha": "25080091ae84a24baa067cee51843e60b53bf410",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "5c4f348b94539c31d970d1b6666a08784259f21b354c09dcf2ce030b0e4bf56a"
     },
     {
@@ -5686,7 +5686,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T23:17:53Z",
       "_first_commit_sha": "e0f39cd415ef22807efe0748c20bb145098b2fb5",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "475d484f81a28535c74116e24c98c2186fe1e79edb34eaa6395fe2373895ff2d"
     },
     {
@@ -5723,7 +5723,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T18:52:28Z",
       "_first_commit_sha": "65d878eaea899a9ae718afdca6f1de7d997bbf94",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "cec5bd85e4fc355d4c65db2e424925add72fb175975d5df1a6ef1f34761f136e"
     },
     {
@@ -5760,7 +5760,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T21:49:48Z",
       "_first_commit_sha": "63cf956f3ddf3cfa6c10c07c1535228ed6c260e5",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "708d4eded24849dbfb64ce924a6ee6087acba6023837270fe2bf6e516405284a"
     },
     {
@@ -5796,7 +5796,7 @@
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
     },
     {
@@ -5833,7 +5833,7 @@
       "_has_card": true,
       "_added_at": "2026-05-16T21:41:11-04:00",
       "_first_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "1c7c00451f434e145d664ca5f2dd46370a91d6d41ce667a4cea78ef0843dfab7"
     },
     {
@@ -5894,7 +5894,7 @@
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:02Z",
       "_first_commit_sha": "b7a77b76993d3ea56e7ffd38988791a21fc97cc1",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "bcd83e717bf69f3f81fb7e5d1b8a08ad2b65d1c9a007f69452c746fdd5154241"
     },
     {
@@ -6876,7 +6876,7 @@
       "_has_card": false,
       "_added_at": "2026-05-12T13:49:20-04:00",
       "_first_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488"
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6912,7 +6912,7 @@
       "_has_card": true,
       "_added_at": "2026-05-11T20:46:08-04:00",
       "_first_commit_sha": "2833f55bfbdc15d6bbc6229290ea11076a99189d",
-      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
+      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "b36ffdd2f53696007085a31e7923ccfd0ba13021b3ed75d2a3b90c335f1cfa67"
     }
   ],
