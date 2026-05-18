@@ -97,7 +97,7 @@ from pathlib import Path
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp2mcs_factory",
-    "version": "0.3.0-singleton",
+    "version": "0.3.0",
     "display_name": "RAPP2MCS Factory",
     "description": (
         "End-to-end RAPP→MCS factory. Orchestrates AIBAST_RAPP/scripts "

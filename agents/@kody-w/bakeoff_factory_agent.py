@@ -785,7 +785,7 @@ class BakeoffFactoryAgent(BasicAgent):
                 pid_file.unlink(missing_ok=True)
         # Spawn a child python that loops calling _round
         runner_code = (
-            "import time, sys, json, urllib.request\n"
+            "import os, time, sys, json, datetime, urllib.request\n"
             f"from pathlib import Path\n"
             f"sys.path.insert(0, '{os.path.dirname(os.path.abspath(__file__))}')\n"
             "import bakeoff_factory_agent as bf\n"
@@ -794,14 +794,14 @@ class BakeoffFactoryAgent(BasicAgent):
             "agent = bf.BakeoffFactoryAgent()\n"
             "ws = bf._workspace(name)\n"
             "cfg = bf._load_json(bf._config_path(ws), {})\n"
-            "(ws/'pump.pid').write_text(str(__import__('os').getpid()))\n"
+            "(ws/'pump.pid').write_text(str(os.getpid()))\n"
             "(ws/'logs').mkdir(exist_ok=True)\n"
             "rounds = 0\n"
             "log = open(ws/'logs'/'pump.log', 'a')\n"
             "while True:\n"
             "    try:\n"
             "        r = agent._round(name=name)\n"
-            "        log.write(f'[{__import__(\"datetime\").datetime.utcnow().isoformat()}Z] {r}\\n')\n"
+            "        log.write(f'[{datetime.datetime.utcnow().isoformat()}Z] {r}\\n')\n"
             "        log.flush()\n"
             "    except Exception as e:\n"
             "        log.write(f'ERR {e}\\n')\n"
