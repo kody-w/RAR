@@ -1,0 +1,51 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "fleet-management",
+  "display_name": "Fleet Management",
+  "version": "1.0.0",
+  "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter — discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_brainstem / install_agent / hatch_egg / boot_federation; AND escape-hatch actions custom / extend / cap / list_caps so the brainstem can invent new capabilities at runtime) + twin_egg_hatcher_agent.py (the generic single-file scale-aware hatcher used to deploy agents / twins / neighborhoods / containers across the fleet). Together they make the entire local mini fleet addressable from one brainstem chat. Pairs with the organism-lifecycle stack (Twin + EggHatcher) for full peer-to-peer federation. SSH key-auth required; first run of action='authorize' generates a key and emits the one-line paste command for each mini operator.",
+  "files": {
+    "fleet_agent.py": {
+      "purpose": "Drop into local brainstem agents/. Run Fleet to drive remote minis (any number of actions: shell, files, deploys, chat, mesh, AND custom/extend for new capabilities).",
+      "size": 37761,
+      "sha256": "9b4c43f787d3bfb56d87e4f4304b96249c589b872c95b86dcce0651de43b53cc"
+    },
+    "twin_egg_hatcher_agent.py": {
+      "purpose": "Scale-aware single-file hatcher (agent / twin / neighborhood / swarm / factory / industry / estate eggs). Required on every peer mini Fleet talks to. Also useful locally for hatching .egg files from other operators.",
+      "size": 43827,
+      "sha256": "0df6f6eac947e10c9777b480ad98775081a6a85900775e2eae1fb3168214ba17"
+    }
+  },
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "agents/@kody/fleet_agent.py",
+      "agents/@kody/twin_egg_hatcher_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Drop both files into your brainstem's agents/ directory. load_agents() picks them up on the next /chat — no restart. The LLM gets Fleet(...) and HatchTwinEgg(...) as tools immediately. To deploy to a peer mini: (1) Fleet(action='authorize', host='<mini>.local') and paste the printed line on the mini's terminal; (2) Fleet(action='provision_brainstem', host='<mini>.local'); (3) Fleet(action='hatch_egg', host='<mini>.local', egg_url='http://your-host:8765/some.egg'); (4) Fleet(action='boot_federation', host='<mini>.local'). Or just describe it in natural language and the brainstem composes the calls itself."
+  },
+  "agents_in_pack": 2,
+  "capabilities": [
+    "discover", "ping", "authorize",
+    "exec", "read", "write", "ls", "tail", "ports", "ps",
+    "brainstem_health", "chat", "mesh_chat", "mesh_exec",
+    "provision_brainstem", "install_agent",
+    "hatch_egg", "boot_federation", "status",
+    "custom", "extend", "cap", "list_caps"
+  ],
+  "self_extending": {
+    "actions": ["custom", "extend", "cap", "list_caps"],
+    "rationale": "When the fixed action list doesn't cover what the brainstem needs (an unforeseen file format, an oddly-shaped peer service, a one-off SSH dance), the LLM can synthesize a Python `def run(ctx, args):` snippet that operates on the fleet helpers and either run it once via 'custom' or persist it as a named capability via 'extend' for later invocation via 'cap'.",
+    "ctx_keys_exposed": ["ssh", "ssh_many", "http_health", "http_chat", "probe_tcp", "EGG_SERVER_URL", "DEFAULT_SSH_USER", "FEDERATION_PORTS", "HATCHER_RAW_URL", "json", "os", "subprocess", "Path", "shlex", "datetime", "timezone"]
+  },
+  "pairs_with": [
+    "stacks/organism-lifecycle (Twin + EggHatcher — required on every peer for full federation)",
+    "agents/@kody/twin_egg_hatcher (the same hatcher, also available as a standalone agent)"
+  ],
+  "see_also": [
+    "https://github.com/kody-w/RAPP/blob/main/pages/vault/Architecture/The%20Federated%20Twin%20Egg%20Hatcher%20Pattern.md",
+    "https://github.com/kody-w/twin-egg-hatcher",
+    "https://github.com/kody-w/aibast-twin"
+  ]
+}
