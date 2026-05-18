@@ -58,7 +58,7 @@ from typing import Callable, Optional
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody/install_rappter_distro_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Install Rappter Distro",
     "description": (
         "Single-file installer that pulls the full rappter-distro "
@@ -70,7 +70,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["installer", "distro", "rappter", "bootstrap", "organism"],
     "category": "pipeline",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
 }

@@ -97,7 +97,7 @@ from pathlib import Path
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp2mcs_factory",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "display_name": "RAPP2MCS Factory",
     "description": (
         "End-to-end RAPP→MCS factory. Orchestrates AIBAST_RAPP/scripts "
@@ -110,7 +110,7 @@ __manifest__ = {
     "tags": ["composite", "factory", "mcs", "copilot-studio",
              "power-platform", "deploy", "singleton", "aibast"],
     "category": "pipeline",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],  # OPENAI_API_KEY required only for analyze/normalize
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "pipeline"}},

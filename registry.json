@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-18T22:38:30.421710+00:00",
+  "generated_at": "2026-05-18T23:00:55.259093+00:00",
   "stats": {
     "total_agents": 199,
     "total_swarms": 82,
@@ -4472,7 +4472,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/install_rappter_distro_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Install Rappter Distro",
       "description": "Single-file installer that pulls the full rappter-distro (organs, senses, lib/, rich UI, @rappter agents) from raw.githubusercontent.com via MANIFEST.json with sha256 verification per file. Refuses to touch the three sacred kernel files.",
       "author": "Kody Wildfeuer",
@@ -4484,20 +4484,20 @@
         "organism"
       ],
       "category": "pipeline",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody/install_rappter_distro_agent.py",
-      "_sha256": "108a57436f11ec1d4e647c31da4e25d6bb4601d8a76215015202cd70099cba86",
-      "_seed": 5748067776166766871,
+      "_sha256": "519f94bee1c82933a6d86e0443096ba95d6d7a6c9b2cb9d2ea4e1dae4f7b11c2",
+      "_seed": 5748067776175155479,
       "_size_kb": 36.5,
       "_lines": 944,
       "_has_card": true,
       "_added_at": "2026-05-17T02:49:15Z",
       "_first_commit_sha": "c9e43878f5205df7ef1d076337726c3764814d12",
-      "_latest_commit_sha": "cf028f8b6988e8a246f4f0f7444aed903105d4fe",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "84d45687c7194ad76e311e44be486bdee7487675d1446bdd95c40b9680a07ce6"
     },
     {
@@ -5035,7 +5035,7 @@
       "display_name": "PerpetualLoopFactory",
       "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch.",
       "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "tags": [
         "meta",
         "factory",
@@ -5046,21 +5046,21 @@
         "kaizen"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "community",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
         "@kody-w/twin_agent"
       ],
       "_file": "agents/@kody-w/perpetual_loop_factory_agent.py",
-      "_sha256": "a5179e5d1b0922767c2437f63f61e7980ee7abd61a943cd81274756b61ed088b",
-      "_seed": 18392963094642842750,
+      "_sha256": "d93da05b5891a41ffdbfc0f2089a578dccc9ca15be66c118023d26cd66d2108b",
+      "_seed": 18392963094647037054,
       "_size_kb": 54.5,
       "_lines": 1356,
       "_has_card": true,
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
-      "_latest_commit_sha": "7e368c2a57dbabdd2637975c5e7fef98b560ac5f",
+      "_latest_commit_sha": "f128bdd7c1856e6823f0f850634803340ca2b71c",
       "_card_sha256": "f21ca0c391d0aad83e3d77f6b44df7b506a5ecf8f737080edc1145c94b2f364f"
     },
     {
@@ -5215,7 +5215,7 @@
       "display_name": "CopilotStudioDeploy",
       "description": "Push a forged Copilot Studio bundle into a Dataverse environment via OAuth client_credentials + ImportSolutionAsync. Reads creds from local.settings.json. Destructive deploy is gated by confirm.",
       "author": "RAPP",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5224,7 +5224,7 @@
         "destructive"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent",
@@ -5236,14 +5236,14 @@
         }
       },
       "_file": "agents/@rapp/copilot_studio_deploy_agent.py",
-      "_sha256": "67d0ed6f996314d577542bc271d222c967826826cb165f661e09326a742bcf93",
-      "_seed": 12529120966313924386,
+      "_sha256": "19d947d09009bc00ea6167aea838fa2f396891834bd23a62b4d153e3a9711200",
+      "_seed": 12529120966326507298,
       "_size_kb": 39.1,
       "_lines": 904,
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "7e368c2a57dbabdd2637975c5e7fef98b560ac5f",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "f5ac406966c03a6b48ee07636a03aa76087eb881299d6dbd65808eba5758ab8e"
     },
     {
@@ -5252,7 +5252,7 @@
       "display_name": "CopilotStudioForge",
       "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
       "author": "RAPP",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "tags": [
         "meta",
         "copilot-studio",
@@ -5261,7 +5261,7 @@
         "deploy-prep"
       ],
       "category": "core",
-      "quality_tier": "experimental",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5273,14 +5273,14 @@
       },
       "anchored_on": "https://github.com/microsoft/skills-for-copilot-studio",
       "_file": "agents/@rapp/copilot_studio_forge_agent.py",
-      "_sha256": "c5aad52466df06e1ae329064d4252b6c474b88c97fcd0c53714252018c9dd79a",
-      "_seed": 6041207226650733437,
+      "_sha256": "49a45f92ef91c6a77520c3c06433cd0e0cc99dfdacc9a5c91a7bfdde38e684db",
+      "_seed": 6041207226663316349,
       "_size_kb": 44.5,
       "_lines": 1027,
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "7e368c2a57dbabdd2637975c5e7fef98b560ac5f",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "5cb932972497f6beb145affeb89fabacbaecd0698bae9f8e9c0af559558da065"
     },
     {
@@ -5368,7 +5368,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/exec_brief_agent",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "display_name": "Executive Brief",
       "description": "Four-agent pipeline that produces polished executive briefs on any topic.",
       "author": "@rapp",
@@ -5378,7 +5378,7 @@
         "singleton"
       ],
       "category": "analysis",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "delegates_to_inlined": [
         "@rapp/brief-scout",
@@ -5392,14 +5392,14 @@
         }
       },
       "_file": "agents/@rapp/exec_brief_agent.py",
-      "_sha256": "4f2fea99af55fc820d350f71f91b4e122b9eaa834b4cf1a7fc31fc714f914b76",
-      "_seed": 7814512477617920547,
+      "_sha256": "e6961038f1b78fa4ef4357967240dadb3265a2038cb2983c9dc954a54fb81108",
+      "_seed": 7814512477626309155,
       "_size_kb": 27.1,
       "_lines": 685,
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:43Z",
       "_first_commit_sha": "5ef7e1c716768da9cfb87f46cb16b81134c7b6c5",
-      "_latest_commit_sha": "b6c7da374ea493a726d1dfa469cabe0d5cbdaf0f",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "6ce92d164f8f0cd2f9387b7ec70dc6872f34b16dedb307289b02d5278f6a5821"
     },
     {
@@ -5510,7 +5510,7 @@
       "display_name": "MomentFactory",
       "description": "Seven-persona moment-to-Drop pipeline (Sensorium \u2192 SignificanceFilter \u2192 HookWriter \u2192 BodyWriter \u2192 ChannelRouter \u2192 CardForger \u2192 SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
       "author": "RAPP",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "tags": [
         "composite",
         "moment-pipeline",
@@ -5519,7 +5519,7 @@
         "singleton"
       ],
       "category": "creative",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5540,20 +5540,20 @@
         }
       },
       "_file": "agents/@rapp/moment_factory_agent.py",
-      "_sha256": "2dac58dd5a9ea49a5c4779e54aadc07f552aaba973436e02b80a89c9023aecfa",
-      "_seed": 11866480277881234391,
+      "_sha256": "ef274fad5f3cb9f2e5035d2e0463fe0d245be6e52757a9000f6ccece93f78f1a",
+      "_seed": 11866480277889622999,
       "_size_kb": 23.7,
       "_lines": 512,
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "d6efc4b54e1324e9ae76b123c8e42178e3b819f786292b57e15c30ed66947968"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/ping_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Ping",
       "description": "Returns 'pong'. The smallest possible agent \u2014 useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
       "author": "RAPP",
@@ -5563,20 +5563,20 @@
         "minimal"
       ],
       "category": "devtools",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/ping_agent.py",
-      "_sha256": "b069847786f516d1dc3f957fec8015059366f47870fd5bf7b63e16454e8ee1c3",
-      "_seed": 5582206618780973258,
+      "_sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
+      "_seed": 5582206618789361866,
       "_size_kb": 1.2,
       "_lines": 37,
       "_has_card": true,
       "_added_at": "2026-04-27T23:08:03Z",
       "_first_commit_sha": "11c5191f56c3de5b9f776206b3c6815165af7195",
-      "_latest_commit_sha": "029027a44fe16a408ce05f40c8a5b5bf071acd78",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "baec8ef325176e7cef389109ef4175db0d702ab2a4a6c530caa85f42dad93512"
     },
     {
@@ -5585,7 +5585,7 @@
       "display_name": "PitchDeck",
       "description": "Generates a polished HTML executive pitch deck from a topic and thesis. Output: a single self-contained HTML file with exec/rehearse modes, light/dark theme, keyboard/swipe nav.",
       "author": "RAPP / AIBAST",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "tags": [
         "pitch",
         "deck",
@@ -5595,27 +5595,27 @@
         "executive"
       ],
       "category": "productivity",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
       ],
       "example_call": "Generate an executive pitch deck for our internal agent-sharing proposal, framed as a contribution that complements existing tooling",
       "_file": "agents/@rapp/pitch_deck_agent.py",
-      "_sha256": "7882b22bae29b0092079a7568dcfc13a1d6991e9e0f0ff312a32d7ca0072b41b",
-      "_seed": 2887497502801280520,
+      "_sha256": "ae2d11bc41afefedecf4373a56478bb908d808074d38f09642cafeac646eb9da",
+      "_seed": 2887497502809669128,
       "_size_kb": 56.0,
       "_lines": 1087,
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:20Z",
       "_first_commit_sha": "85bace6a431feedaf23abe36e129c4a26b7f1b94",
-      "_latest_commit_sha": "19a12cd44ac21bb729195545dd4d3e3ea0f605b8",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "6417ee68aa010ea6a6d2f39c76589a0f57e640066719eaae83ed98de3247d1df"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp2mcs_factory",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "display_name": "RAPP2MCS Factory",
       "description": "End-to-end RAPP\u2192MCS factory. Orchestrates AIBAST_RAPP/scripts (analyzer \u2192 normalizer \u2192 wrapper_generator) plus pac CLI to convert a RAPP brainstem's agents/ directory into a deployed Copilot Studio native agent. No Azure Functions, no custom connectors, no custom Dataverse tables \u2014 only OOTB CDS.",
       "author": "RAPP",
@@ -5630,7 +5630,7 @@
         "aibast"
       ],
       "category": "pipeline",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5641,21 +5641,21 @@
         }
       },
       "_file": "agents/@rapp/rapp2mcs_factory_agent.py",
-      "_sha256": "9d9f58abb643b884011d04b78477b34f568113c6eb26c8dabc87876311085932",
-      "_seed": 13371367910196391944,
-      "_size_kb": 246.2,
+      "_sha256": "3c159606b512a38731537fda4817a3506eea8dc9b9d910cd313aa03528ee0a99",
+      "_seed": 13371367910204780552,
+      "_size_kb": 243.5,
       "_lines": 2802,
       "_has_card": true,
       "_added_at": "2026-05-16T21:09:45-04:00",
       "_first_commit_sha": "25080091ae84a24baa067cee51843e60b53bf410",
-      "_latest_commit_sha": "df5585abeead83bcf7a502bb75b078fc1832b0c5",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "5c4f348b94539c31d970d1b6666a08784259f21b354c09dcf2ce030b0e4bf56a"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp_publish_agent",
       "display_name": "RappPublish",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Submit any RAPP artifact (agent, rapplication, sense) to the right store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue in kody-w/RAR / kody-w/RAPP_Store / kody-w/RAPP_Sense_Store respectively. Replaces the rapplication-only publish_to_rapp_store agent with a unified router covering all three peer stores.",
       "author": "RAPP",
       "tags": [
@@ -5667,7 +5667,7 @@
         "registry"
       ],
       "category": "platform",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5679,14 +5679,14 @@
         }
       },
       "_file": "agents/@rapp/rapp_publish_agent.py",
-      "_sha256": "3d33b03aef705e0ec9ecad9cb23ff44f02992eb8d01ea958bf223b5b16a6c5ca",
-      "_seed": 1515458409989418896,
+      "_sha256": "4f895373c2f5d397dfb226f55b4cf2884773ce9a2322cf19e5b4c7537fbada4c",
+      "_seed": 1515458409997807504,
       "_size_kb": 20.8,
       "_lines": 505,
       "_has_card": true,
       "_added_at": "2026-04-27T23:17:53Z",
       "_first_commit_sha": "e0f39cd415ef22807efe0748c20bb145098b2fb5",
-      "_latest_commit_sha": "fdd532eaa9d3195f8bb63ca6960344ffa91e8318",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "475d484f81a28535c74116e24c98c2186fe1e79edb34eaa6395fe2373895ff2d"
     },
     {
@@ -5695,7 +5695,7 @@
       "display_name": "Rapplication",
       "description": "Bundle a teammate's single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
       "author": "RAPP",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "tags": [
         "meta",
         "build",
@@ -5704,7 +5704,7 @@
         "publish"
       ],
       "category": "core",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5716,14 +5716,14 @@
         }
       },
       "_file": "agents/@rapp/rapplication_agent.py",
-      "_sha256": "b9157463be242d97e8c0a789e7a755fe41b2f43cff4e7dca7476ed4596ff6132",
-      "_seed": 2918317732431279882,
+      "_sha256": "19e35f25df4515cfb7a8fadf6379f79eea8128d7a5a33b701f1c5962faa74abd",
+      "_seed": 2918317732439668490,
       "_size_kb": 23.3,
       "_lines": 594,
       "_has_card": true,
       "_added_at": "2026-04-27T18:52:28Z",
       "_first_commit_sha": "65d878eaea899a9ae718afdca6f1de7d997bbf94",
-      "_latest_commit_sha": "9171f66ff58e85db73da6ac2d3936f0e8f3530e1",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "cec5bd85e4fc355d4c65db2e424925add72fb175975d5df1a6ef1f34761f136e"
     },
     {
@@ -5732,7 +5732,7 @@
       "display_name": "StoreNavigator",
       "description": "Navigate the kody-w/RAPP_Store catalog. List, search, describe, recommend, get install commands, compare rapplications, browse categories, and explain the spec. Use this whenever the user asks what's in the store, what to install, or how to find a rapp that fits their goal.",
       "author": "RAPP",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "tags": [
         "meta",
         "navigator",
@@ -5741,7 +5741,7 @@
         "rapplication"
       ],
       "category": "platform",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5753,14 +5753,14 @@
         }
       },
       "_file": "agents/@rapp/store_navigator_agent.py",
-      "_sha256": "02f88c5d9503cc8325a4d3e5557cabd88ab85cc8e17bf0440a9026552cf5ec0f",
-      "_seed": 12936891603951956945,
+      "_sha256": "fc68e1427a68912c2973ef9afd46aa366be612d479e928926db45838a4aa800a",
+      "_seed": 12936891603960345553,
       "_size_kb": 16.8,
       "_lines": 428,
       "_has_card": true,
       "_added_at": "2026-04-27T21:49:48Z",
       "_first_commit_sha": "63cf956f3ddf3cfa6c10c07c1535228ed6c260e5",
-      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "708d4eded24849dbfb64ce924a6ee6087acba6023837270fe2bf6e516405284a"
     },
     {
@@ -5769,7 +5769,7 @@
       "display_name": "SwarmFactory",
       "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
       "author": "RAPP",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "tags": [
         "meta",
         "build",
@@ -5778,7 +5778,7 @@
         "store"
       ],
       "category": "core",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5789,20 +5789,20 @@
         }
       },
       "_file": "agents/@rapp/swarm_factory_agent.py",
-      "_sha256": "76282991cd222c561a10715af6bfa8f96201fcb23eb881e6f7ebd4afa94e5386",
-      "_seed": 10141477066647414868,
+      "_sha256": "4671fdc60a5e667f69c98570d6aede370b33c4c9a328bcdaecc32ca067f53adb",
+      "_seed": 10141477066655803476,
       "_size_kb": 36.7,
       "_lines": 699,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/topic_wizard",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "display_name": "Topic Wizard",
       "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions.",
       "author": "RAPP",
@@ -5815,7 +5815,7 @@
         "singleton"
       ],
       "category": "pipeline",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5826,14 +5826,14 @@
         }
       },
       "_file": "agents/@rapp/topic_wizard_agent.py",
-      "_sha256": "95e7e792e061c008d955ef2ba4488e570c1b89f6c0a85a31cbec5a9ba6a03e76",
-      "_seed": 14837227561104978653,
+      "_sha256": "f081b64cd83a2c39da556f8fb2e3e5d1d9c03837172f4acbe276f2311655c15b",
+      "_seed": 14837227561113367261,
       "_size_kb": 54.9,
       "_lines": 1317,
       "_has_card": true,
       "_added_at": "2026-05-16T21:41:11-04:00",
       "_first_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
-      "_latest_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "1c7c00451f434e145d664ca5f2dd46370a91d6d41ce667a4cea78ef0843dfab7"
     },
     {
@@ -5873,7 +5873,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/vibe_builder_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "VibeBuilder",
       "description": "Builds a complete rapplication (agent + service) from a natural language description.",
       "author": "RAPP",
@@ -5883,18 +5883,18 @@
         "rapplication"
       ],
       "category": "platform",
-      "quality_tier": "community",
+      "quality_tier": "official",
       "requires_env": [],
       "example_call": "Build me a bookmark manager",
       "_file": "agents/@rapp/vibe_builder_agent.py",
-      "_sha256": "294001aa426d891c7024e0e4fbd7ac6b9211393d69fcf82c1b833cfad9483148",
-      "_seed": 18349068374262553918,
+      "_sha256": "8fd77f26eacf4f4f22b7b48c06cc22e0fa76af51c2d20bb21a2194cc16de967f",
+      "_seed": 18349068374270942526,
       "_size_kb": 20.2,
       "_lines": 532,
       "_has_card": true,
       "_added_at": "2026-04-27T21:14:02Z",
       "_first_commit_sha": "b7a77b76993d3ea56e7ffd38988791a21fc97cc1",
-      "_latest_commit_sha": "8a19c70962f7e44dbdd6a09117eee1cf57d3da0e",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "bcd83e717bf69f3f81fb7e5d1b8a08ad2b65d1c9a007f69452c746fdd5154241"
     },
     {
@@ -6842,7 +6842,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/legal_helper",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "LegalHelper",
       "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy \u2014 NOT legal advice; every reply ends with the disclaimer.",
       "author": "Kody Wildfeuer",
@@ -6862,7 +6862,7 @@
       ],
       "type": "stub",
       "_file": "agents/@kody/legal_helper_agent.py.stub",
-      "_stub_sha256": "ab1ad1a3014fab9c5dc90811be59294ab3ff1f4c0ac86391e182089982d2a7eb",
+      "_stub_sha256": "43da5af5441b9f75833497cffafe32a0d549d01c4f6435e0c7485a228ec5b490",
       "_source": {
         "schema": "rapp-source/1.0",
         "type": "github_private",
@@ -6876,12 +6876,12 @@
       "_has_card": false,
       "_added_at": "2026-05-12T13:49:20-04:00",
       "_first_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593",
-      "_latest_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593"
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody/example_private",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "ExamplePrivate",
       "description": "Sample gated stub demonstrating the private layer.",
       "author": "Kody Wildfeuer",
@@ -6898,7 +6898,7 @@
       ],
       "type": "stub",
       "_file": "agents/@kody/private/example_private_agent.py.stub",
-      "_stub_sha256": "d52b05d557ce7a450970baf9ddcb61d7c8062a8387e6451a8875aedd08f38b11",
+      "_stub_sha256": "eec37c124d71dd277b806f8d7269d10ccadd1e159fb7320e2d14f8244ae06203",
       "_source": {
         "schema": "rapp-source/1.0",
         "type": "github_private",
@@ -6912,7 +6912,7 @@
       "_has_card": true,
       "_added_at": "2026-05-11T20:46:08-04:00",
       "_first_commit_sha": "2833f55bfbdc15d6bbc6229290ea11076a99189d",
-      "_latest_commit_sha": "2833f55bfbdc15d6bbc6229290ea11076a99189d",
+      "_latest_commit_sha": "f1a6a2296ebb03a1f21edc841b4eaa39d0552488",
       "_card_sha256": "b36ffdd2f53696007085a31e7923ccfd0ba13021b3ed75d2a3b90c335f1cfa67"
     }
   ],

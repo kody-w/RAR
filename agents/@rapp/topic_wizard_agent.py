@@ -65,7 +65,7 @@ from pathlib import Path
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/topic_wizard",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "Topic Wizard",
     "description": (
         "Step-by-step UI for converting rapp_brainstem/agents/*.py into "
@@ -77,7 +77,7 @@ __manifest__ = {
     "author": "RAPP",
     "tags": ["mcs", "copilot-studio", "topic", "wizard", "ui", "singleton"],
     "category": "pipeline",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "wizard"}},

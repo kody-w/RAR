@@ -50,10 +50,10 @@ __manifest__ = {
     "display_name": "MomentFactory",
     "description": "Seven-persona moment-to-Drop pipeline (Sensorium → SignificanceFilter → HookWriter → BodyWriter → ChannelRouter → CardForger → SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
     "author": "RAPP",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "tags": ["composite", "moment-pipeline", "rapplication", "rappterbook-engine", "singleton"],
     "category": "creative",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "delegates_to_inlined": [

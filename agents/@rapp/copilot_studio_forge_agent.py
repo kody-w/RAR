@@ -98,10 +98,10 @@ __manifest__ = {
         "cloud bridge."
     ),
     "author": "RAPP",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "tags": ["meta", "copilot-studio", "forge", "translation", "deploy-prep"],
     "category": "core",
-    "quality_tier": "experimental",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "list"}},

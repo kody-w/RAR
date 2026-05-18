@@ -239,7 +239,15 @@ def test_registry_no_common_tier():
         assert tier != "experimental", f"{agent['name']} is experimental — founding cards should be at least community"
 
 def test_registry_legendary_agents():
-    """All @kody and @rapp agents should be official (Legendary)."""
+    """All @kody and @rapp agents should be official (Legendary).
+
+    Exception: `.py.stub` gated entries are forced to `private` by
+    build_registry.py (the source bytes live in a private companion
+    repo; the public registry carries only the pointer).  Stubs are
+    allowed to be `private` without violating the Legendary contract.
+    """
     for agent in registry["agents"]:
         if agent["name"].startswith("@kody/") or agent["name"].startswith("@rapp/"):
+            if (agent.get("_file") or "").endswith(".py.stub"):
+                continue
             assert agent.get("quality_tier") == "official", f"{agent['name']} should be official tier"
