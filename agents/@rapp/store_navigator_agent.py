@@ -35,10 +35,10 @@ __manifest__ = {
         "fits their goal."
     ),
     "author": "RAPP",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "tags": ["meta", "navigator", "store", "discovery", "rapplication"],
     "category": "platform",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {
