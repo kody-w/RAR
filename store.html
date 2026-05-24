@@ -7463,10 +7463,11 @@ function agentToCard(a) {
   const sizeKb = a._size_kb || '?';
   // QR encodes the raw agent.py URL — scan = get the file directly
   const agentRawUrl = a._file ? `https://raw.githubusercontent.com/${REPO}/main/${a._file}` : `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  // Salt: append a fingerprint fragment so each QR is unique per brainstem
-  // Per-card unique salt from agent name hash
+  // Per-card fingerprint from agent name hash (shown on the back as identity).
   const qrSalt = Array.from(a.name).reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0).toString(16).replace('-','').slice(0, 8);
-  const qrData = `${agentRawUrl}#${qrSalt}`;
+  // QR opens the card's Grail page (visual + lore), which has a one-tap
+  // "Load this into vBrainstem" button to run the agent instantly.
+  const qrData = `https://kody-w.github.io/RAR/grail.html#${a.name}`;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(qrData)}`;
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
@@ -7559,7 +7560,7 @@ function agentToCard(a) {
 
   // ── QR Back Face ──
   const qrImgHtml = `<div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
-       <div class="ac-back-hint">Scan to download agent.py${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
+       <div class="ac-back-hint">Scan to open grail &amp; summon${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
     <div class="agent-card-back">
       <div class="ac-back-logo">RAPP</div>
