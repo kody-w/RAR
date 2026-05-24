@@ -436,7 +436,7 @@ header {
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
 .fs-tilt-prompt {
-  position: absolute; bottom: max(env(safe-area-inset-bottom), 24px); left: 50%;
+  position: absolute; bottom: calc(max(env(safe-area-inset-bottom), 24px) + 76px); left: 50%;
   transform: translateX(-50%);
   background: rgba(0,0,0,.55); color: #f0e6d0; padding: 10px 18px;
   border-radius: 999px; font-size: .82rem; border: 1px solid rgba(255,215,0,.3);
@@ -448,6 +448,18 @@ header {
   color: rgba(255,255,255,.55); font-size: .75rem; letter-spacing: .3px;
   pointer-events: none;
 }
+/* Primary action on the fullscreen card — summon straight into vBrainstem */
+.fs-summon-cta {
+  position: absolute; left: 50%; transform: translateX(-50%); z-index: 12;
+  bottom: max(env(safe-area-inset-bottom), 20px);
+  display: inline-flex; align-items: center; gap: 9px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; padding: 15px 30px; border-radius: 13px;
+  font-size: 1.05rem; font-weight: 800; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 12px 34px rgba(0,0,0,.55), 0 0 26px rgba(255,215,0,.28);
+  -webkit-tap-highlight-color: transparent;
+}
+.fs-summon-cta:active { transform: translateX(-50%) scale(.97); }
 @media (hover: hover) and (pointer: fine) {
   /* Desktop: card is clickable but doesn't auto-fullscreen */
   .agent-card-wrap { cursor: zoom-in; }
@@ -716,7 +728,7 @@ async function load() {
           <span id="summon-url">${esc(summonUrl(agent.name))}</span>
           <button data-copy="summon-url">copy</button>
         </div>
-        <a class="summon-cta" href="${summonUrl(agent.name)}">⚡ Load this into vBrainstem →</a>
+        <a class="summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem →</a>
       </div>
     </div>
 
@@ -724,6 +736,7 @@ async function load() {
       <div class="fs-hint">Tilt to shine</div>
       <button class="fs-close" id="fs-close" aria-label="Close fullscreen">×</button>
       <div class="agent-card-wrap" id="fs-wrap"></div>
+      <a class="fs-summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem</a>
       <div class="fs-tilt-prompt" id="fs-tilt-prompt" style="display:none">Tap to enable motion</div>
     </div>
   `;
