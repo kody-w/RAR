@@ -1106,7 +1106,10 @@
     filter: drop-shadow(var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,.7))
             drop-shadow(0 0 30px rgba(201,168,76,.12));
     flex-shrink: 0; position: relative; z-index: 1;
-    animation: collectorCardIn .8s cubic-bezier(.16,1,.3,1) both;
+    /* fill-mode 'backwards' (not 'both'): the entrance animation must NOT keep
+       pinning `transform` after it ends, or it overrides the .flipped rotateY
+       and the card never flips. Its `to` transform equals the base, so no flash. */
+    animation: collectorCardIn .8s cubic-bezier(.16,1,.3,1) backwards;
   }
   @keyframes collectorCardIn {
     from { opacity: 0; transform: perspective(1000px) rotateX(4deg) rotateY(0deg) scale(.85) translateZ(-60px); }

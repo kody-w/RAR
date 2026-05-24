@@ -54,6 +54,31 @@ try:
 except Exception:
     pass
 
+# ── Curated custom cards ──
+# Hand-forged art + flavor for specific agents. These override procedural
+# generation (and survive regeneration) so a bespoke card stays bespoke.
+# Keyed by full agent name (@publisher/slug).
+CUSTOM_CARDS = {
+    "@kody-w/predictive_asset_maintenance_intelligence": {
+        "name": "Predictive Asset Maintenance Intelligence",
+        "title": "The Gridkeeper",
+        "mana_cost": "{2}{R}{G}",
+        "colors": ["R", "G"],
+        "type_line": "Legendary Creature — Agent Warden",
+        "rarity": "core",
+        "power": 6,
+        "toughness": 8,
+        "abilities": [
+            {"keyword": "Regulate", "cost": "{T}", "text": "End-to-end predictive maintenance for grid infrastructure: aggregates telemetry, scores asset health, ranks failure probability over 30/90/180 days, drafts Field Service work orders and parts procurement, and builds a multi-year capex replacement pipeline — eight specialist agents plus an orchestrator in one file."},
+            {"keyword": "Grid Sync", "cost": "", "text": "Specializes in energy, predictive-maintenance, asset-management. Gains +1/+1 for each matching agent in your deck."},
+        ],
+        "flavor_text": "The grid remembers every watt.",
+        "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"pamBg\" cx=\"50%\" cy=\"44%\" r=\"72%\"><stop offset=\"0%\" stop-color=\"#13262b\"/><stop offset=\"55%\" stop-color=\"#0c181c\"/><stop offset=\"100%\" stop-color=\"#050a0d\"/></radialGradient><linearGradient id=\"pamGauge\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0%\" stop-color=\"#3fb950\"/><stop offset=\"55%\" stop-color=\"#e3b341\"/><stop offset=\"100%\" stop-color=\"#f0533f\"/></linearGradient><linearGradient id=\"pamPulse\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0%\" stop-color=\"#3fb950\" stop-opacity=\"0.15\"/><stop offset=\"45%\" stop-color=\"#3fb950\"/><stop offset=\"72%\" stop-color=\"#e3b341\"/><stop offset=\"100%\" stop-color=\"#f0883e\" stop-opacity=\"0.15\"/></linearGradient><filter id=\"pamGlow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feGaussianBlur stdDeviation=\"1.6\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#pamBg)\"/><path d=\"M40 104 A 62 62 0 0 1 160 104\" fill=\"none\" stroke=\"url(#pamGauge)\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.9\" filter=\"url(#pamGlow)\"/><g stroke=\"#cfe3df\" stroke-width=\"1\" opacity=\"0.3\"><line x1=\"41\" y1=\"104\" x2=\"47\" y2=\"105\"/><line x1=\"100\" y1=\"42\" x2=\"100\" y2=\"49\"/><line x1=\"159\" y1=\"104\" x2=\"153\" y2=\"105\"/></g><line x1=\"100\" y1=\"100\" x2=\"131\" y2=\"66\" stroke=\"#f0883e\" stroke-width=\"1.6\" opacity=\"0.95\" filter=\"url(#pamGlow)\"/><circle cx=\"100\" cy=\"100\" r=\"3\" fill=\"#f0883e\"/><g fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.5\"><path d=\"M68 92 Q38 112 8 100\"/><path d=\"M132 92 Q162 112 192 100\"/><path d=\"M80 78 Q44 96 8 84\"/><path d=\"M120 78 Q156 96 192 84\"/></g><g stroke=\"#9bbecd\" stroke-width=\"1.6\" fill=\"none\" stroke-linejoin=\"round\" stroke-linecap=\"round\" filter=\"url(#pamGlow)\"><line x1=\"83\" y1=\"152\" x2=\"97\" y2=\"66\"/><line x1=\"117\" y1=\"152\" x2=\"103\" y2=\"66\"/><line x1=\"68\" y1=\"92\" x2=\"132\" y2=\"92\"/><line x1=\"80\" y1=\"78\" x2=\"120\" y2=\"78\"/><line x1=\"100\" y1=\"66\" x2=\"100\" y2=\"56\"/><line x1=\"96\" y1=\"66\" x2=\"104\" y2=\"66\"/><path d=\"M86 138 L114 122 M114 138 L86 122 M88 122 L112 106 M112 122 L88 106 M90 106 L110 92 M110 106 L90 92\"/></g><g fill=\"#e3b341\"><circle cx=\"68\" cy=\"92\" r=\"2.2\"/><circle cx=\"132\" cy=\"92\" r=\"2.2\"/><circle cx=\"80\" cy=\"78\" r=\"2\"/><circle cx=\"120\" cy=\"78\" r=\"2\"/><circle cx=\"100\" cy=\"56\" r=\"2.4\"/></g><polyline points=\"6,158 58,158 68,158 74,148 80,120 86,170 92,158 126,158 133,143 140,158 194,158\" fill=\"none\" stroke=\"url(#pamPulse)\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-linecap=\"round\" filter=\"url(#pamGlow)\"/><circle cx=\"133\" cy=\"143\" r=\"2.6\" fill=\"#f0883e\"/><circle cx=\"133\" cy=\"143\" r=\"6\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.45\"/></svg>",
+        "set_code": "HOLO",
+        "artist": "RAPP",
+    },
+}
+
 # Howard's canonical cards — we embed them directly with full SVGs from his agent
 HOWARD_DB = {
     "borg": {
@@ -636,6 +661,14 @@ def main():
     generated_count = 0
 
     for agent in agents:
+        # Curated custom cards override procedural generation (and survive regen)
+        if agent["name"] in CUSTOM_CARDS:
+            card = dict(CUSTOM_CARDS[agent["name"]])
+            card["agent_name"] = agent["name"]
+            _add_type_system(card, agent)
+            cards[agent["name"]] = card
+            generated_count += 1
+            continue
         # Check if this agent matches one of Howard's 13 originals
         slug = ''.join(c for c in (agent.get('display_name', '') or '') if c.isalpha()).lower()
 
