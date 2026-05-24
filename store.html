@@ -1103,8 +1103,12 @@
     transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
     transition: transform .4s ease-out, filter .3s ease;
     cursor: pointer;
-    filter: drop-shadow(var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,.7))
-            drop-shadow(0 0 30px rgba(201,168,76,.12));
+    /* Use box-shadow, NOT filter: `filter` flattens transform-style:preserve-3d,
+       which kills backface-visibility so flipping shows a mirrored front instead
+       of the QR back. box-shadow gives the same glow without breaking 3D. */
+    border-radius: 12px;
+    box-shadow: var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,.7),
+                0 0 30px rgba(201,168,76,.12);
     flex-shrink: 0; position: relative; z-index: 1;
     /* fill-mode 'backwards' (not 'both'): the entrance animation must NOT keep
        pinning `transform` after it ends, or it overrides the .flipped rotateY
