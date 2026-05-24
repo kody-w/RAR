@@ -3514,12 +3514,12 @@ async function executeRegistryAgent(args) {
       const pyres = await runAgentInPyodide(source, agent.display_name, args.request);
       setStatus('ready', 'Ready');
       if (pyres && pyres.output != null && pyres.error == null) {
-        let out = pyres.output;
-        const full = typeof out === 'string' ? out.length : 0;
-        if (typeof out === 'string' && out.length > 8000) out = out.slice(0, 8000) + `\n… [output truncated, ${full} chars total]`;
+        const fullOut = typeof pyres.output === 'string' ? pyres.output : JSON.stringify(pyres.output);
+        let out = fullOut;
+        if (out.length > 8000) out = out.slice(0, 8000) + `\n… [truncated for the model; full output is shown in the chat, ${fullOut.length} chars]`;
         return {
           agent: agent.display_name, slug: agent.name, executed: true, engine: 'pyodide',
-          ran_class: pyres.ran_class, output: out
+          ran_class: pyres.ran_class, output: out, output_full: fullOut
         };
       }
       if (pyres && pyres.error) {
@@ -3762,6 +3762,41 @@ function finishChatActivity(el, agentName, args, result) {
   pill.style.borderColor = 'var(--green)';
   pill.style.color = 'var(--text-dim)';
 
+  // Show the RAW output the agent returned to the brainstem — collapsible,
+  // consistent with the local brainstem chat ("agent called → raw output").
+  if (agentName === 'run_agent' && result && !el.querySelector('.vb-agent-output')) {
+    let raw = '';
+    if (result.output_full != null || result.output != null) {
+      const o = result.output_full != null ? result.output_full : result.output;
+      raw = typeof o === 'string' ? o : JSON.stringify(o, null, 2);
+    } else if (result.error) {
+      raw = 'ERROR: ' + result.error + (result.trace ? '\n\n' + result.trace : '');
+    }
+    if (raw) {
+      let pretty = raw;
+      try { pretty = JSON.stringify(JSON.parse(raw), null, 2); } catch (e) {}
+      const ranClass = result.ran_class ? ` &middot; <span style="color:var(--green)">${result.ran_class}</span>` : '';
+      const out = document.createElement('div');
+      out.className = 'vb-agent-output';
+      out.style.cssText = 'max-width:760px;margin:4px auto 0;width:100%';
+      out.innerHTML =
+        '<div class="vb-ao-label" style="cursor:pointer;font-size:.72rem;color:var(--text-dim);padding:3px 2px;user-select:none">' +
+        '<span class="vb-ao-arrow" style="display:inline-block;transition:transform .15s">&#9654;</span> ' +
+        (result.error ? 'agent error' : 'agent output') + ranClass + '</div>' +
+        '<pre class="vb-ao-box" style="display:none;margin:4px 0 0;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:.72rem;line-height:1.45;max-height:340px;overflow:auto;white-space:pre-wrap;word-break:break-word;color:var(--text)"></pre>';
+      out.querySelector('.vb-ao-box').textContent = pretty;
+      const label = out.querySelector('.vb-ao-label');
+      const box = out.querySelector('.vb-ao-box');
+      const arrow = out.querySelector('.vb-ao-arrow');
+      label.onclick = () => {
+        const open = box.style.display === 'none';
+        box.style.display = open ? 'block' : 'none';
+        arrow.style.transform = open ? 'rotate(90deg)' : 'none';
+      };
+      el.appendChild(out);
+    }
+  }
+
   const container = document.getElementById('chatMessages');
   container.scrollTop = container.scrollHeight;
 }
@@ -3864,7 +3899,8 @@ async function sendChat() {
         chatHistory.push({
           role: 'tool',
           tool_call_id: tc.id,
-          content: JSON.stringify(result)
+          // Strip output_full from the model's context (UI shows it); keep the trimmed `output`.
+          content: JSON.stringify(result && result.output_full !== undefined ? { ...result, output_full: undefined } : result)
         });
       }
 
