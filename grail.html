@@ -412,6 +412,13 @@ header {
   font-weight: 700; text-decoration: none; margin-top: 14px;
 }
 .summon-cta:hover { text-decoration: none; opacity: .92; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; margin-left: 10px;
+  background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+  padding: 10px 18px; border-radius: 8px; font-size: .9rem; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ── Fullscreen card overlay (tap card → expand, tilt to shine) ── */
 .fs-overlay {
@@ -449,17 +456,26 @@ header {
   pointer-events: none;
 }
 /* Primary action on the fullscreen card — summon straight into vBrainstem */
-.fs-summon-cta {
+.fs-actions {
   position: absolute; left: 50%; transform: translateX(-50%); z-index: 12;
   bottom: max(env(safe-area-inset-bottom), 20px);
-  display: inline-flex; align-items: center; gap: 9px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: #fff; padding: 15px 30px; border-radius: 13px;
-  font-size: 1.05rem; font-weight: 800; text-decoration: none; white-space: nowrap;
-  box-shadow: 0 12px 34px rgba(0,0,0,.55), 0 0 26px rgba(255,215,0,.28);
-  -webkit-tap-highlight-color: transparent;
+  display: flex; gap: 10px; align-items: center; max-width: calc(100vw - 28px);
 }
-.fs-summon-cta:active { transform: translateX(-50%) scale(.97); }
+.fs-summon-cta, .fs-share-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 15px 24px; border-radius: 13px; border: none; cursor: pointer;
+  font-size: 1.02rem; font-weight: 800; text-decoration: none; white-space: nowrap;
+  font-family: inherit; -webkit-tap-highlight-color: transparent;
+}
+.fs-summon-cta {
+  background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+  box-shadow: 0 12px 34px rgba(0,0,0,.55), 0 0 26px rgba(255,215,0,.28);
+}
+.fs-share-cta {
+  background: rgba(255,255,255,.10); color: #fff; border: 1px solid rgba(255,255,255,.22);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.fs-summon-cta:active, .fs-share-cta:active { transform: scale(.97); }
 @media (hover: hover) and (pointer: fine) {
   /* Desktop: card is clickable but doesn't auto-fullscreen */
   .agent-card-wrap { cursor: zoom-in; }
@@ -522,6 +538,40 @@ function parseManaCost(cost) {
 const SUMMON_BASE = 'https://kody-w.github.io/RAR/virtual-brainstem-summon.html';
 function summonUrl(name) {
   return `${SUMMON_BASE}?agent=${encodeURIComponent(name)}`;
+}
+
+// Share the actual agent.py through the native share sheet (Mail / Messages /
+// Teams / …). Falls back to sharing a link, then to copying the raw URL.
+async function shareAgentPy(url, filename, title, btn) {
+  const label = btn ? btn.textContent : '';
+  const restore = () => { if (btn) setTimeout(() => { btn.textContent = label; }, 1600); };
+  try {
+    let file = null;
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) file = new File([await res.text()], filename, { type: 'text/x-python' });
+    } catch (e) { /* offline / CORS — fall back to link share */ }
+
+    // 1) Share the real .py file as an attachment (iOS/Android Web Share L2).
+    if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: filename, text: `${title} — RAPP single-file agent` });
+      return;
+    }
+    // 2) No file-share support — share a link + text.
+    if (navigator.share) {
+      await navigator.share({ title, text: `${title} — RAPP agent (agent.py): ${url}`, url });
+      return;
+    }
+    // 3) Desktop / no Web Share — copy the raw .py URL.
+    await navigator.clipboard.writeText(url);
+    if (btn) { btn.textContent = '✓ link copied'; restore(); }
+  } catch (e) {
+    if (e && e.name === 'AbortError') return; // user dismissed the sheet
+    try {
+      await navigator.clipboard.writeText(url);
+      if (btn) { btn.textContent = '✓ link copied'; restore(); }
+    } catch (_) {}
+  }
 }
 function qrSrc(data, size = 540) {
   // Same QR provider store.html uses — no new dep.
@@ -729,6 +779,7 @@ async function load() {
           <button data-copy="summon-url">copy</button>
         </div>
         <a class="summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem →</a>
+        <button class="share-btn" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share .py</button>
       </div>
     </div>
 
@@ -736,7 +787,10 @@ async function load() {
       <div class="fs-hint">Tilt to shine</div>
       <button class="fs-close" id="fs-close" aria-label="Close fullscreen">×</button>
       <div class="agent-card-wrap" id="fs-wrap"></div>
-      <a class="fs-summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem</a>
+      <div class="fs-actions">
+        <a class="fs-summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem</a>
+        <button class="fs-share-cta" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share</button>
+      </div>
       <div class="fs-tilt-prompt" id="fs-tilt-prompt" style="display:none">Tap to enable motion</div>
     </div>
   `;
@@ -752,6 +806,10 @@ async function load() {
         setTimeout(() => { btn.textContent = orig === '✓ copied' ? 'copy' : orig; btn.classList.remove('copied'); }, 1500);
       });
     };
+  });
+  // Wire share buttons — send the actual agent.py via the native share sheet.
+  document.querySelectorAll('[data-share-url]').forEach(btn => {
+    btn.addEventListener('click', () => shareAgentPy(btn.dataset.shareUrl, btn.dataset.shareFile || 'agent.py', btn.dataset.shareTitle || 'RAPP agent', btn));
   });
   // Cursor-tracked shimmer / prism / parallax on the holo card
   const wrap = document.getElementById('holo-wrap');
