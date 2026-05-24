@@ -3210,6 +3210,7 @@ function buildSystemPrompt() {
 
   if (enabledAgents.size > 0) {
     prompt += `\n- When the user asks about something an enabled agent covers, use the run_agent tool to invoke it. Tell the user which agent you're routing to.`;
+    prompt += `\n- run_agent executes the agent's REAL Python (via Pyodide) and returns its actual output in the tool result. Base your reply ONLY on that returned output — quote or summarize the real data it produced. Never fabricate or describe what the agent "would" do. If the result has an "error" field, tell the user the run failed and show the error.`;
   }
 
   return prompt;
@@ -3271,7 +3272,7 @@ function buildChatTools() {
       type: 'function',
       function: {
         name: 'run_agent',
-        description: 'Run an enabled RAPP agent. The agent will process the request and return a result.',
+        description: 'Run an enabled RAPP agent. Executes the real Python code of the agent (via Pyodide, in-browser) and returns its ACTUAL output in the result. Report that output to the user faithfully — never invent or assume results. If the result contains an "error", tell the user what failed.',
         parameters: {
           type: 'object',
           properties: {
@@ -3359,6 +3360,127 @@ async function executeToolCall(name, args) {
   }
 }
 
+// ── Real agent execution via Pyodide (CPython in WASM) ──
+// The LisPy transpiler only handles trivial agents. Pyodide runs the agent's
+// actual Python — multi-class files, stdlib, real perform() — exactly like the
+// local brainstem (brainstem.py). Loaded lazily on first run.
+const PYODIDE_VERSION = 'v0.26.4';
+let _pyodide = null, _pyodideLoading = null;
+
+// Python helper installed once: shims BasicAgent + the agents/utils packages so
+// any RAPP agent's imports resolve, execs the source, finds the right agent
+// class, and runs perform(). Returns a JSON string.
+const PYODIDE_RUNNER_SRC = `
+import sys, json, types, traceback
+
+def _rapp_install_shims():
+    class BasicAgent:
+        def __init__(self, name=None, metadata=None):
+            if name is not None: self.name = name
+            elif not hasattr(self, 'name'): self.name = 'BasicAgent'
+            if metadata is not None: self.metadata = metadata
+            elif not hasattr(self, 'metadata'):
+                self.metadata = {'name': self.name, 'description': '', 'parameters': {'type':'object','properties':{},'required':[]}}
+        def perform(self, **kwargs): return 'Not implemented.'
+        def system_context(self): return None
+        def to_tool(self):
+            return {'type':'function','function':{'name':self.name,'description':self.metadata.get('description',''),'parameters':self.metadata.get('parameters',{'type':'object','properties':{}})}}
+    ba = types.ModuleType('basic_agent'); ba.BasicAgent = BasicAgent; sys.modules['basic_agent'] = ba
+    agents_pkg = types.ModuleType('agents'); agents_pkg.__path__ = []
+    ag_ba = types.ModuleType('agents.basic_agent'); ag_ba.BasicAgent = BasicAgent
+    agents_pkg.basic_agent = ag_ba; sys.modules['agents'] = agents_pkg; sys.modules['agents.basic_agent'] = ag_ba
+    utils_pkg = types.ModuleType('utils'); utils_pkg.__path__ = []
+    afs = types.ModuleType('utils.azure_file_storage')
+    class AzureFileStorageManager:
+        _store = {}
+        def __init__(self, *a, **k): pass
+        def read_file(self, *a, **k): return ''
+        def write_file(self, *a, **k): return True
+        def __getattr__(self, n): return lambda *a, **k: None
+    afs.AzureFileStorageManager = AzureFileStorageManager
+    utils_pkg.azure_file_storage = afs; sys.modules['utils'] = utils_pkg; sys.modules['utils.azure_file_storage'] = afs
+    return BasicAgent
+
+def _rapp_norm(s):
+    return ''.join(c.lower() for c in (s or '') if c.isalnum())
+
+def _rapp_run(source, display_name, request):
+    BasicAgent = _rapp_install_shims()
+    ns = {'__name__': '_rapp_agent_'}
+    try:
+        exec(compile(source, '<agent>', 'exec'), ns)
+    except Exception as e:
+        return json.dumps({'error': 'exec failed: ' + repr(e), 'trace': traceback.format_exc()[-1200:]})
+    candidates = []
+    for k, v in ns.items():
+        if isinstance(v, type) and k != 'BasicAgent' and hasattr(v, 'perform'):
+            mro = [b.__name__ for b in getattr(v, '__mro__', [])]
+            if 'BasicAgent' in mro and v.__name__ != 'BasicAgent':
+                candidates.append((k, v))
+    if not candidates:
+        return json.dumps({'error': 'no agent class (subclass of BasicAgent) found in file'})
+    target = _rapp_norm(display_name)
+    chosen = None
+    for k, v in candidates:
+        nk = _rapp_norm(k)
+        if nk == target or nk == target + 'agent' or nk.replace('agent', '') == target:
+            chosen = (k, v); break
+    if chosen is None:
+        for k, v in candidates:
+            try:
+                if _rapp_norm(getattr(v(), 'name', '')) == target: chosen = (k, v); break
+            except Exception: pass
+    if chosen is None:
+        chosen = candidates[-1]
+    name, cls = chosen
+    try:
+        inst = cls()
+    except Exception as e:
+        return json.dumps({'error': 'instantiation of ' + name + ' failed: ' + repr(e)})
+    try:
+        out = inst.perform()
+    except TypeError:
+        try: out = inst.perform(query=request)
+        except Exception as e:
+            return json.dumps({'error': 'perform() failed: ' + repr(e), 'trace': traceback.format_exc()[-1200:]})
+    except Exception as e:
+        return json.dumps({'error': 'perform() failed: ' + repr(e), 'trace': traceback.format_exc()[-1200:]})
+    if not isinstance(out, str):
+        try: out = json.dumps(out, default=str)
+        except Exception: out = str(out)
+    return json.dumps({'ran_class': name, 'agent_count': len(candidates), 'output': out})
+`;
+
+async function ensurePyodide() {
+  if (_pyodide) return _pyodide;
+  if (_pyodideLoading) return _pyodideLoading;
+  _pyodideLoading = (async () => {
+    if (!window.loadPyodide) {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = `https://cdn.jsdelivr.net/pyodide/${PYODIDE_VERSION}/full/pyodide.js`;
+        s.onload = resolve;
+        s.onerror = () => reject(new Error('pyodide failed to load'));
+        document.head.appendChild(s);
+      });
+    }
+    const py = await loadPyodide({ indexURL: `https://cdn.jsdelivr.net/pyodide/${PYODIDE_VERSION}/full/` });
+    py.runPython(PYODIDE_RUNNER_SRC);
+    _pyodide = py;
+    return py;
+  })();
+  return _pyodideLoading;
+}
+
+async function runAgentInPyodide(source, displayName, request) {
+  const py = await ensurePyodide();
+  py.globals.set('_agent_src', source);
+  py.globals.set('_agent_display', displayName || '');
+  py.globals.set('_agent_request', request || '');
+  const resJson = await py.runPythonAsync('_rapp_run(_agent_src, _agent_display, _agent_request)');
+  return JSON.parse(resJson);
+}
+
 async function executeRegistryAgent(args) {
   const slug = args.agent_slug;
   const agent = availableAgents.find(a => a.name === slug);
@@ -3385,7 +3507,31 @@ async function executeRegistryAgent(args) {
       doc = (docMatch && (docMatch[1] || docMatch[2])) || agent.description;
     }
 
-    // Actually transpile and run the agent in the LisPy VM
+    // Real execution via Pyodide (CPython in WASM) — runs the agent's actual
+    // perform(), same as the local brainstem. This is the primary path.
+    try {
+      setStatus('loading', 'Running agent in Python (pyodide)…');
+      const pyres = await runAgentInPyodide(source, agent.display_name, args.request);
+      setStatus('ready', 'Ready');
+      if (pyres && pyres.output != null && pyres.error == null) {
+        let out = pyres.output;
+        const full = typeof out === 'string' ? out.length : 0;
+        if (typeof out === 'string' && out.length > 8000) out = out.slice(0, 8000) + `\n… [output truncated, ${full} chars total]`;
+        return {
+          agent: agent.display_name, slug: agent.name, executed: true, engine: 'pyodide',
+          ran_class: pyres.ran_class, output: out
+        };
+      }
+      if (pyres && pyres.error) {
+        // The agent actually ran but raised — report the real error, don't fabricate.
+        return { agent: agent.display_name, slug: agent.name, executed: false, engine: 'pyodide', error: pyres.error, trace: pyres.trace };
+      }
+    } catch (e) {
+      // Pyodide unavailable (e.g. offline / CDN blocked) — fall back to LisPy below.
+      setStatus('ready', 'Ready');
+    }
+
+    // Fallback: legacy LisPy transpile/run for trivial agents.
     try {
       const transpiled = unrappTranspile(source);
       if (transpiled.operations && transpiled.operations.length > 0) {
