@@ -21,10 +21,10 @@ identity of the system — the thing an adopter cannot unsee.
 | Term | Definition |
 |------|------------|
 | **vTwin** | A *virtual twin* — a browser‑native RAPP brainstem (a vBrainstem) that runs real single‑file agents with no install and no server. Everyone in a neighborhood — a person, a local `brainstem.py`, a vTwin, or Claude — presents as a **uniform peer** (§3). |
-| **Kite / Kited** | A vTwin is **kited** when it is *hosting* a neighborhood in the browser — flown like a kite on a string. A kited vTwin shows its **join‑QR** and the **kite mark**. |
+| **Kite / Kited / Kited Twin** | A vTwin is **kited** when it is *hosting* a neighborhood in the browser — flown like a kite on a string. A kited twin shows its **join‑QR** and the **kite mark**. |
 | **The String** | The operator that *flies* the kite by driving its browser console over the Chrome DevTools Protocol. **Claude is the canonical string‑holder.** The string is a transport (§5a) and stays **on‑device** — the console hop never crosses the network. |
-| **Tethered** | A kited vTwin is **tethered** when the string also reaches a **locally‑running brainstem**; its turns are answered by that brainstem. A kite with no local brainstem is **just kited** (answered by its own in‑browser brainstem). |
-| **Kited Neighborhood** | The multiplayer space a kited vTwin hosts. **Membership is whoever joins.** |
+| **Tethered** | A kited twin is **tethered** when the string also reaches a **locally‑running brainstem**; its turns are answered by that brainstem. A kite with no local brainstem is **just kited** (answered by its own in‑browser brainstem). |
+| **Kited Neighborhood** | The multiplayer space a kited twin hosts. **Membership is whoever joins.** |
 | **Neighbor** | Anyone who has joined a kited neighborhood. |
 | **Scan‑to‑Join** | The entry rite: scan the kite's QR (or open its link) → join the kited neighborhood, **sealed**. |
 | **Sealed** | Every envelope is end‑to‑end encrypted (§8). Wire, broker, and relays are untrusted and the line is still **as secure as on‑device**. |
@@ -148,7 +148,7 @@ like stopping `brainstem.py`. Plaintext `say` may be open; `console` is sealed (
 
 ## §10 — Multiplayer
 A kited neighborhood is **multiplayer by membership**: anyone who scans the kite's QR becomes a
-**neighbor**. A kited vTwin shows a live **`neighbors: N`** count beside its kite mark. The host
+**neighbor**. A kited twin shows a live **`neighbors: N`** count beside its kite mark. The host
 is the hub; neighbors reach the host's (possibly tethered) brainstem; the host may relay between
 neighbors.
 
