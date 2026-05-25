@@ -30,7 +30,7 @@ produces a self-contained HTML report that auto-opens in your browser.
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@borg/recon_agent",
+    "name": "@howardh/recon_agent",
     "version": "1.0.0",
     "display_name": "Recon",
     "description": "URL intelligence scanner — point it at any URL for a full recon report: tech stack, security headers, API schema, SSL, performance. Every scan produces an auto-opening HTML report.",

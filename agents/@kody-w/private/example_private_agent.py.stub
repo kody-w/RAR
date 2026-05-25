@@ -18,7 +18,7 @@ rejected by build_registry.py — stubs are pure metadata.
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/example_private",
+    "name": "@kody-w/example_private",
     "version": "1.0.1",
     "display_name": "ExamplePrivate",
     "description": "Sample gated stub demonstrating the private layer.",
@@ -35,5 +35,5 @@ __source__ = {
     "type": "github_private",
     "repo": "kody-w/example-private-rar",
     "ref": "main",
-    "path": "agents/@kody/example_private_agent.py",
+    "path": "agents/@kody-w/example_private_agent.py",
 }

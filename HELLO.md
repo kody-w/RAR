@@ -77,7 +77,7 @@ Total agents, breakdown by tier, total value. Your view of the entire ecosystem.
 ## 8. Resolve any card from just a name
 
 ```bash
-python rapp_sdk.py card resolve @kody/deal_desk_agent
+python rapp_sdk.py card resolve @kody-w/deal_desk_agent
 ```
 
 22 characters. Full card. Try any agent name in the registry. They all self-assemble.

@@ -34,7 +34,7 @@ deep dives into patterns, checklists, and reviews.
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@borg/tuftelove_agent",
+    "name": "@howardh/tuftelove_agent",
     "version": "1.0.0",
     "display_name": "TufteLove",
     "description": "UI design advisor combining Edward Tufte's visual principles, Microsoft Aether Agent Oversight Taxonomy (32+ patterns), and 8 academic papers — shapes how agents create UI and reviews existing UI for design quality.",

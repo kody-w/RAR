@@ -99,7 +99,7 @@ manifest → forge_seed() → resolve_card_from_seed() = the card
 
 Three ways to resolve a card:
 - **From file:** `python rapp_sdk.py card mint agent.py`
-- **From name:** `python rapp_sdk.py card resolve @kody/deal_desk`
+- **From name:** `python rapp_sdk.py card resolve @kody-w/deal_desk`
 - **From seed:** `python rapp_sdk.py card resolve 3736335358696106227`
 - **From incantation:** `python rapp_sdk.py card resolve TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
 

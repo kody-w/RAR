@@ -482,7 +482,7 @@ The registry detects duplicate agents by `display_name`. The `duplicates` array 
 
 ```json
 "duplicates": [
-  {"display_name": "TrainingQuest", "agents": ["@borg/training_quest", "@borg/training_quest_agent"]}
+  {"display_name": "TrainingQuest", "agents": ["@howardh/training_quest", "@howardh/training_quest_agent"]}
 ]
 ```
 

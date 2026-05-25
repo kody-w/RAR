@@ -19,7 +19,7 @@ problems before they reach the registry.
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/agent_workbench",
+    "name": "@kody-w/agent_workbench",
     "version": "1.1.0",
     "display_name": "Agent Workbench",
     "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",

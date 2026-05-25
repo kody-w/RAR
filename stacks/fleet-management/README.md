@@ -101,7 +101,7 @@ Fleet(action="cap", name="probe_sw_vers", args={"host": "RappterTwos-Mac-mini.lo
 ## Pairs with
 
 - [`organism-lifecycle`](../organism-lifecycle/) — the prereq peer-side stack (`Twin` + `EggHatcher`).  Install on every peer mini before they federate.
-- [`@kody/twin_egg_hatcher`](../../agents/@kody/twin_egg_hatcher_agent.py) — the same hatcher, available as a standalone RAR agent.
+- [`@kody-w/twin_egg_hatcher`](../../agents/@kody-w/twin_egg_hatcher_agent.py) — the same hatcher, available as a standalone RAR agent.
 
 ## Trust model
 

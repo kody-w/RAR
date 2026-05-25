@@ -97,12 +97,12 @@ __manifest__ = {
         "spawn, watch."
     ),
     "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "tags": ["meta", "factory", "perpetual", "chain", "twins", "self-correcting", "kaizen"],
     "category": "core",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic_agent", "@kody-w/twin_agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 

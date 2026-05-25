@@ -45,7 +45,7 @@ Operations:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/rappter_engine_agent",
+    "name": "@kody-w/rappter_engine_agent",
     "version": "1.0.0",
     "display_name": "RappterEngine",
     "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",

@@ -72,7 +72,7 @@ from __future__ import annotations
 # ═══════════════════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/twin_egg_hatcher",
+    "name": "@kody-w/twin_egg_hatcher",
     "version": "1.0.0",
     "display_name": "HatchTwinEgg",
     "description": (
