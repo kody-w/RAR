@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🔮 Incantation Hero — Summoner's Path</title>
+<style>
+  :root{
+    --bg:#07060d; --panel:rgba(20,18,34,.72); --line:rgba(150,130,255,.18);
+    --gold:#ffd76a; --rune:#c9b8ff; --good:#3ddc84; --bad:#ff5d6c; --muted:#7a7596;
+    --glow:rgba(150,110,255,.55);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0; height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:#ece9ff; background:
+      radial-gradient(1200px 800px at 50% -10%, #1a1140 0%, transparent 60%),
+      radial-gradient(900px 700px at 90% 110%, #14203a 0%, transparent 55%),
+      radial-gradient(900px 700px at 5% 100%, #2a0f33 0%, transparent 55%),
+      var(--bg);
+    min-height:100%; overflow-x:hidden;
+  }
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif}
+  /* ── Top bar ── */
+  header{
+    position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:14px;
+    padding:10px 16px; background:linear-gradient(180deg,rgba(10,8,20,.92),rgba(10,8,20,.5));
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:800; letter-spacing:.5px; font-size:18px; display:flex; align-items:center; gap:8px; white-space:nowrap}
+  .brand .o{filter:drop-shadow(0 0 8px var(--glow))}
+  .stats{display:flex; gap:8px; margin-left:auto; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+  .chip{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.05); border:1px solid var(--line);
+        padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px}
+  .chip small{color:var(--muted); font-weight:600}
+  .mana{display:flex; gap:3px}
+  .mana .o{width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #b89bff, #5b34c9);
+           box-shadow:0 0 6px var(--glow)}
+  .mana .o.empty{background:#241f3a; box-shadow:none; opacity:.6}
+  select{background:#15122a; color:#ece9ff; border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; font-weight:600}
+  /* ── Layout ── */
+  main{max-width:1080px; margin:0 auto; padding:14px 14px 90px; display:grid; gap:14px; grid-template-columns:1fr 300px}
+  @media(max-width:880px){ main{grid-template-columns:1fr} .grimoire{order:3} }
+  .progressbar{grid-column:1/-1; height:10px; border-radius:999px; background:rgba(255,255,255,.06); overflow:hidden; border:1px solid var(--line)}
+  .progressbar > i{display:block; height:100%; width:0;
+    background:linear-gradient(90deg,#7c5bff,#c39bff,#ffd76a); transition:width .4s ease; box-shadow:0 0 12px var(--glow)}
+  /* ── Altar / flash card ── */
+  .altar{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:18px;
+         position:relative; overflow:hidden; min-height:520px}
+  .altar:before{content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(600px 300px at 50% 0%, rgba(124,91,255,.10), transparent 70%)}
+  .rankline{display:flex; align-items:center; gap:10px; margin-bottom:6px}
+  .rankbadge{font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px; border:1px solid var(--line); color:var(--gold);
+    background:rgba(255,215,106,.08)}
+  .rankhint{color:var(--muted); font-size:12px}
+  /* flash card (the target) */
+  .flash{display:flex; gap:16px; align-items:center; margin:8px 0 14px; flex-wrap:wrap}
+  .cardface{width:150px; height:210px; border-radius:14px; flex-shrink:0; position:relative; overflow:hidden;
+    border:2px solid var(--cc,#7c5bff); background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(0,0,0,.35));
+    box-shadow:0 10px 40px rgba(0,0,0,.5), inset 0 0 30px rgba(0,0,0,.4)}
+  .cardface .art{position:absolute; inset:0; opacity:.9}
+  .cardface .name{position:absolute; left:8px; right:8px; bottom:8px; font-weight:800; font-size:13px; line-height:1.15;
+    text-shadow:0 1px 6px #000}
+  .cardface .tier{position:absolute; top:7px; right:8px; font-size:9px; font-weight:800; letter-spacing:1px;
+    text-transform:uppercase; padding:2px 6px; border-radius:6px; background:rgba(0,0,0,.45); color:var(--gold)}
+  .cardface .typ{position:absolute; top:7px; left:8px; font-size:9px; font-weight:800; color:#fff; opacity:.85}
+  .target-meta{flex:1; min-width:200px}
+  .target-meta h2{margin:0 0 4px; font-size:20px}
+  .target-meta .ns{color:var(--muted); font-size:12px; font-family:ui-monospace,Menlo,monospace; word-break:break-all}
+  .target-meta .desc{color:#cfc9ee; font-size:13px; margin-top:8px; line-height:1.45}
+  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .tags span{font-size:10px; padding:3px 8px; border-radius:999px; background:rgba(255,255,255,.06); color:var(--rune); border:1px solid var(--line)}
+  /* incantation on flash card (reference / study) */
+  .reference{margin:6px 0 4px; padding:12px; border-radius:12px; border:1px dashed var(--line);
+    background:rgba(124,91,255,.06); position:relative}
+  .reference .lbl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px}
+  .refwords{font-family:"Iowan Old Style",Georgia,serif; font-size:18px; letter-spacing:1px; color:var(--rune);
+    display:flex; gap:10px 14px; flex-wrap:wrap}
+  .refwords b{font-weight:700; text-shadow:0 0 10px rgba(150,110,255,.5)}
+  .refwords b.need{color:var(--gold); text-decoration:underline; text-underline-offset:3px; text-shadow:0 0 12px rgba(255,215,106,.7)}
+  .reference.memory .refwords{filter:blur(7px); opacity:.5; transition:filter .25s, opacity .25s; user-select:none}
+  .reference.memory.revealed .refwords{filter:none; opacity:1}
+  .studytag{position:absolute; top:10px; right:12px; font-size:11px; color:var(--gold); font-weight:700}
+  /* ── input slots ── */
+  .spellbar{margin-top:14px}
+  .spellbar .lbl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px}
+  .slots{display:flex; gap:8px 10px; flex-wrap:wrap; align-items:center}
+  .slot{display:flex; flex-direction:column; align-items:center; gap:4px}
+  .slot .idx{font-size:9px; color:var(--muted); font-weight:700}
+  .slot .word{min-width:96px; text-align:center; padding:11px 8px; border-radius:11px; font-weight:800;
+    font-family:"Iowan Old Style",Georgia,serif; font-size:15px; letter-spacing:.5px}
+  .slot .word.locked{background:rgba(255,215,106,.08); border:1px solid rgba(255,215,106,.25); color:var(--gold)}
+  input.word{background:#100d22; color:#fff; border:2px solid var(--line); outline:none; text-transform:uppercase; width:120px}
+  input.word::placeholder{color:#4a456a; font-weight:600}
+  input.word:focus{border-color:#9b7bff; box-shadow:0 0 0 3px rgba(124,91,255,.25)}
+  input.word.ok{border-color:var(--good); color:var(--good); box-shadow:0 0 14px rgba(61,220,132,.4)}
+  input.word.err{border-color:var(--bad); color:var(--bad); animation:shake .35s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  /* ── controls ── */
+  .controls{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+  button{font-family:inherit; font-weight:800; border:none; border-radius:12px; padding:14px 20px; cursor:pointer; font-size:15px; transition:transform .08s, filter .15s}
+  button:active{transform:translateY(1px) scale(.99)}
+  .btn-summon{background:linear-gradient(135deg,#7c5bff,#b06bff); color:#fff; box-shadow:0 8px 30px rgba(124,91,255,.45); flex:1; min-width:180px}
+  .btn-summon:hover{filter:brightness(1.08)}
+  .btn-ghost{background:rgba(255,255,255,.06); color:#cfc9ee; border:1px solid var(--line)}
+  .btn-peek{background:rgba(255,215,106,.1); color:var(--gold); border:1px solid rgba(255,215,106,.3)}
+  /* ── grimoire ── */
+  .grimoire{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px; align-self:start}
+  .grimoire h3{margin:0 0 4px; font-size:14px; letter-spacing:.5px}
+  .grimoire .sub{color:var(--muted); font-size:12px; margin-bottom:12px}
+  .gmeter{height:8px; border-radius:999px; background:rgba(255,255,255,.06); overflow:hidden; margin-bottom:14px}
+  .gmeter>i{display:block; height:100%; background:linear-gradient(90deg,#7c5bff,#ffd76a)}
+  .ggrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(56px,1fr)); gap:8px; max-height:340px; overflow:auto}
+  .gcard{aspect-ratio:5/7; border-radius:8px; border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer; background:#0d0a1c}
+  .gcard.mastered{border-color:var(--gold); box-shadow:0 0 10px rgba(255,215,106,.4)}
+  .gcard .glabel{position:absolute; left:0; right:0; bottom:0; font-size:7px; padding:3px; text-align:center; background:rgba(0,0,0,.55); font-weight:700; line-height:1.05}
+  .gcard .gm{position:absolute; top:2px; right:3px; font-size:8px}
+  /* ── overlay summon ── */
+  .overlay{position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 45%, rgba(40,20,80,.85), rgba(5,4,12,.95)); backdrop-filter:blur(6px)}
+  .overlay.show{display:flex}
+  .summoned{text-align:center; animation:rise .6s cubic-bezier(.2,1.3,.4,1)}
+  @keyframes rise{0%{transform:scale(.4) translateY(40px); opacity:0}100%{transform:scale(1) translateY(0); opacity:1}}
+  .bigcard{width:240px; height:336px; border-radius:20px; margin:0 auto 18px; position:relative; overflow:hidden;
+    border:3px solid var(--cc,#7c5bff); box-shadow:0 0 60px var(--cc,#7c5bff), inset 0 0 40px rgba(0,0,0,.5);
+    background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(0,0,0,.4))}
+  .bigcard .art{position:absolute; inset:0}
+  .bigcard .nm{position:absolute; left:12px; right:12px; bottom:14px; font-weight:800; font-size:18px; text-shadow:0 2px 8px #000}
+  .bigcard .tl{position:absolute; left:12px; bottom:42px; font-size:11px; color:#fff; opacity:.8; font-weight:700}
+  .bigcard .tr{position:absolute; top:10px; right:12px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--gold); text-transform:uppercase; background:rgba(0,0,0,.4); padding:3px 7px; border-radius:6px}
+  .summoned h1{font-size:26px; margin:6px 0; text-shadow:0 0 20px var(--glow)}
+  .summoned .xp{color:var(--gold); font-weight:800; font-size:16px; margin-bottom:4px}
+  .summoned .inc{color:var(--rune); font-family:Georgia,serif; letter-spacing:1px; margin:8px 0 18px; font-size:14px}
+  .sparks{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+  .spark{position:absolute; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px var(--gold)}
+  /* loading / toast */
+  #loading{position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; z-index:80; background:var(--bg); text-align:center; padding:20px}
+  .spin{width:46px; height:46px; border-radius:50%; border:4px solid rgba(150,110,255,.2); border-top-color:#b89bff; animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(80px); z-index:70;
+    background:#1a1535; border:1px solid var(--line); padding:12px 18px; border-radius:12px; font-weight:700; opacity:0; transition:.3s}
+  .toast.show{transform:translateX(-50%) translateY(0); opacity:1}
+  .hidden{display:none!important}
+
+/* ===== REAL RAR HOLO CARD — ported verbatim from store.html ===== */
+/* Back of card — universal design like Pokemon/MTG card backs */
+  .agent-card-back {
+    background: linear-gradient(180deg, #1a1510 0%, #2a2418 30%, #1a1510 70%, #0f0c08 100%) !important;
+    border-color: #8b7332 !important;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; position: absolute; inset: 0; border-radius: 12px;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: rotateY(180deg);
+    overflow: hidden; border: 2px solid #8b7332;
+  }
+.agent-card-back::before {
+    content: ''; position: absolute; inset: 8px; border-radius: 8px;
+    border: 1px solid rgba(139,115,50,.4);
+    background: radial-gradient(ellipse at center, rgba(139,115,50,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+.agent-card-back::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-conic-gradient(
+      rgba(139,115,50,.03) 0deg 10deg,
+      transparent 10deg 20deg
+    );
+    opacity: .5;
+  }
+.ac-back-logo {
+    font-size: 1.4rem; font-weight: 900; letter-spacing: 3px;
+    color: #8b7332; opacity: .6; text-transform: uppercase;
+    position: relative; z-index: 1; margin-bottom: 8px;
+  }
+.ac-qr { margin: 10px 0; position: relative; z-index: 1; }
+.ac-qr img {
+    width: 120px; height: 120px; border-radius: 8px;
+    border: 2px solid rgba(139,115,50,.4); padding: 4px;
+    background: #0d0a06;
+  }
+.ac-back-name {
+    font-size: .78rem; font-weight: 600; text-align: center;
+    color: #c8b89a; margin-top: 6px; position: relative; z-index: 1;
+  }
+.ac-back-hint {
+    font-size: .6rem; color: #6a5d4a; text-align: center;
+    position: relative; z-index: 1;
+  }
+.ac-back-actions {
+    display: flex; gap: 6px; margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+.ac-back-actions button {
+    background: rgba(42,36,24,.8); border: 1px solid rgba(139,115,50,.4); color: #c8b89a;
+    padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: .7rem; transition: all .15s;
+  }
+.ac-back-actions button:hover { border-color: #c9a84c; color: #e8dcc8; }
+.agent-card-holo {
+    position: absolute; inset: 0; border-radius: 14px;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    overflow: hidden; border: 3px solid #c9a84c;
+    background: linear-gradient(160deg, #2a2418 0%, #1a1510 40%, #1f1a12 100%);
+    display: flex; flex-direction: column; padding: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,215,0,.08);
+  }
+.agent-card-holo::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(
+      125deg,
+      transparent 0%,
+      rgba(255,0,128,.06) 15%,
+      rgba(0,200,255,.08) 30%,
+      transparent 40%,
+      rgba(255,215,0,.06) 55%,
+      rgba(128,0,255,.07) 70%,
+      transparent 80%,
+      rgba(0,255,128,.05) 90%,
+      transparent 100%
+    );
+    background-size: 300% 300%;
+    animation: holoShimmer 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+    transition: background-position .1s ease;
+  }
+/* Mouse-tracked shimmer — specular highlight that follows cursor */
+  .agent-card-holo .holo-shimmer-track {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: radial-gradient(
+      ellipse 60% 80% at var(--mx, 50%) var(--my, 50%),
+      rgba(255,255,255,.22) 0%,
+      rgba(255,220,150,.10) 20%,
+      rgba(0,200,255,.06) 40%,
+      transparent 70%
+    );
+    opacity: 0; transition: opacity .3s ease;
+    mix-blend-mode: screen;
+  }
+.agent-card-wrap:hover .holo-shimmer-track { opacity: 1; }
+/* Prismatic refraction layer — rainbow bands that shift with angle */
+  .agent-card-holo .holo-prism {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(
+      calc(var(--angle, 0deg) + 90deg),
+      rgba(255,0,80,.0) 0%,
+      rgba(255,0,120,.10) 12%,
+      rgba(255,165,0,.08) 22%,
+      rgba(255,255,0,.06) 32%,
+      rgba(0,255,100,.08) 42%,
+      rgba(0,180,255,.10) 52%,
+      rgba(100,0,255,.08) 62%,
+      rgba(255,0,200,.06) 72%,
+      rgba(255,0,80,.0) 82%
+    );
+    opacity: 0; transition: opacity .3s ease;
+    mix-blend-mode: screen;
+  }
+.agent-card-wrap:hover .holo-prism { opacity: 1; }
+/* ─── BothAngles Effects ─── */
+  /* Fresnel edge glow — cyan/magenta, transparent center, shifts with cursor */
+  .holo-fresnel {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(ellipse at var(--mx, 50%) var(--my, 50%),
+      transparent 30%, rgba(0,255,255,.1) 60%, rgba(255,0,255,.15) 100%);
+    mix-blend-mode: screen;
+  }
+.agent-card-wrap:hover .holo-fresnel { opacity: 1; }
+/* Interference scanlines — scrolling horizontal lines */
+  .holo-scanlines {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    background: repeating-linear-gradient(0deg,
+      transparent 0px, transparent 2px,
+      rgba(0,255,255,.025) 2px, rgba(0,255,255,.025) 4px);
+    animation: holoScanScroll 4s linear infinite;
+    mix-blend-mode: screen;
+  }
+.agent-card-wrap:hover .holo-scanlines { opacity: 1; }
+/* Orbiting lights — cyan + magenta blobs */
+  .holo-orbit-cyan, .holo-orbit-magenta {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    border-radius: inherit; opacity: 0; transition: opacity .3s;
+    mix-blend-mode: screen; background-size: 200% 200%;
+  }
+.agent-card-wrap:hover .holo-orbit-cyan,
+  .agent-card-wrap:hover .holo-orbit-magenta { opacity: 1; }
+.holo-orbit-cyan {
+    background: radial-gradient(circle at 30% 30%, rgba(0,255,255,.1), transparent 50%);
+    animation: holoOrbitA 6s linear infinite;
+  }
+.holo-orbit-magenta {
+    background: radial-gradient(circle at 70% 70%, rgba(255,0,255,.1), transparent 50%);
+    animation: holoOrbitB 6s linear infinite;
+  }
+/* Fine holographic foil texture — shifts with tilt */
+  .agent-card-holo::after {
+    content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background: repeating-linear-gradient(
+      calc(105deg + var(--angle, 0deg) * 0.3),
+      transparent 0px,
+      rgba(255,255,255,.025) 1px,
+      transparent 3px,
+      rgba(255,255,255,.015) 4px,
+      transparent 6px
+    );
+    mix-blend-mode: overlay;
+  }
+/* Active hover: rainbow gradient follows mouse position */
+  .agent-card-holo:hover::before {
+    animation: none;
+    background: linear-gradient(
+      calc(125deg + var(--angle, 0deg)),
+      transparent 0%,
+      rgba(255,0,128,.14) 15%,
+      rgba(0,200,255,.16) 30%,
+      transparent 40%,
+      rgba(255,215,0,.14) 55%,
+      rgba(128,0,255,.16) 70%,
+      transparent 80%,
+      rgba(0,255,128,.12) 90%,
+      transparent 100%
+    );
+    background-size: 300% 300%;
+    background-position: var(--mx, 50%) var(--my, 50%);
+  }
+.holo-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 8px 12px 2px; position: relative; z-index: 5;
+    flex-shrink: 0;
+  }
+.holo-name {
+    font-size: .85rem; font-weight: 700; color: #f0e6d0;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    line-height: 1.15;
+  }
+.holo-title {
+    font-size: .65rem; color: #c8a870; font-style: italic;
+  }
+.holo-pips { display: flex; gap: 4px; }
+.holo-pip {
+    width: 20px; height: 20px; border-radius: 50%; font-size: .65rem;
+    font-weight: 800; display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid rgba(0,0,0,.5); text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    box-shadow: 0 1px 4px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+.holo-pip.W { background: #f9faf4; color: #333; }
+.holo-pip.U { background: #0e68ab; color: #fff; }
+.holo-pip.B { background: #150b00; color: #cbc2b6; border-color: #4a3f32; }
+.holo-pip.R { background: #d3202a; color: #fff; }
+.holo-pip.G { background: #00733e; color: #fff; }
+.holo-pip.N { background: #9e9e9e; color: #333; }
+.holo-art {
+    margin: 0 10px; border: 2px solid #6a5a30;
+    border-radius: 4px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 40%, rgba(40,35,20,.9) 0%, #0d0a06 70%);
+    position: relative; z-index: 5;
+    flex: 1 1 0; min-height: 0;
+  }
+/* Inner glow vignette — makes art area feel alive */
+  .holo-art::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.12) 0%, rgba(201,168,76,.04) 40%, transparent 70%);
+  }
+.holo-art svg {
+    width: 92%; height: 92%; position: relative; z-index: 2;
+    /* Parallax: art is deepest layer — shifts OPPOSITE to tilt for depth */
+    transform: translate(
+      calc((0.5 - var(--px, 0.5)) * 6px),
+      calc((0.5 - var(--py, 0.5)) * 6px)
+    ) scale(1.04);
+    transition: transform .1s ease-out;
+  }
+.holo-art::after {
+    content: ''; position: absolute; inset: -10%; pointer-events: none; z-index: 3;
+    background: linear-gradient(
+      calc(135deg + var(--angle, 0deg)),
+      rgba(255,100,200,.12) 0%, transparent 25%,
+      rgba(100,200,255,.15) 45%, transparent 55%,
+      rgba(255,200,50,.10) 75%, transparent 100%);
+    background-size: 200% 200%;
+    background-position: var(--mx, 50%) var(--my, 50%);
+    animation: holoRainbow 8s linear infinite;
+    mix-blend-mode: screen;
+    transition: background-position .1s ease-out;
+  }
+.agent-card-wrap:hover .holo-art::after { animation: none; }
+.holo-type {
+    font-size: .65rem; color: #c8b89a; padding: 3px 12px;
+    border-top: 1px solid #4d4332; border-bottom: 1px solid #4d4332;
+    background: rgba(50,40,25,.6);
+    position: relative; z-index: 5;
+    flex-shrink: 0;
+  }
+.holo-text {
+    padding: 5px 10px; overflow: hidden;
+    font-size: .68rem; color: #d8c8a8; line-height: 1.4;
+    background: rgba(30,25,15,.4); margin: 0;
+    position: relative; z-index: 5;
+    flex-shrink: 0;
+  }
+.holo-ability { margin-bottom: 3px; }
+.holo-ability .kw { font-weight: 700; color: #ffd700; }
+.holo-flavor {
+    font-style: italic; font-size: .58rem; color: #9a8e7a;
+    border-top: 1px solid #3d3322; padding-top: 3px; margin-top: 4px;
+    line-height: 1.35;
+  }
+.holo-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 12px 5px; font-size: .65rem;
+    position: relative; z-index: 5;
+    white-space: nowrap; overflow: hidden;
+    flex-shrink: 0; margin-top: auto;
+  }
+.holo-rarity { text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #8b7332; overflow: hidden; text-overflow: ellipsis; }
+.holo-rarity.mythic { color: #ff8c00; text-shadow: 0 0 10px rgba(255,140,0,.6), 0 0 20px rgba(255,140,0,.3); }
+.holo-rarity.rare { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,.5), 0 0 16px rgba(255,215,0,.2); }
+.holo-rarity.uncommon, .holo-rarity.core { color: #c0c0c0; text-shadow: 0 0 4px rgba(192,192,192,.3); }
+.holo-rarity.common, .holo-rarity.starter { color: #8899aa; }
+.holo-stats {
+    font-weight: 800; font-size: 1.1rem; color: #f0e6d0;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    background: rgba(40,35,20,.6); padding: 1px 8px; border-radius: 4px;
+    border: 1px solid rgba(201,168,76,.3);
+  }
+.holo-artist { font-style: italic; color: #c9a84c; }
+.holo-promo { color: #ffd700; font-weight: 700; font-size: .6rem; letter-spacing: .5px; }
+.holo-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+/* Rarity glow indicator — top-right corner gem */
+  .holo-rarity-gem {
+    position: absolute; top: 8px; right: -1px; z-index: 6;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.4);
+    pointer-events: none;
+  }
+.holo-rarity-gem.mythic {
+    background: radial-gradient(circle, #ffaa00, #ff6600);
+    box-shadow: 0 0 10px rgba(255,140,0,.8), 0 0 20px rgba(255,140,0,.4);
+    animation: rarityPulse 2s ease-in-out infinite;
+  }
+.holo-rarity-gem.rare {
+    background: radial-gradient(circle, #ffe44d, #ffc800);
+    box-shadow: 0 0 8px rgba(255,215,0,.7), 0 0 16px rgba(255,215,0,.3);
+    animation: rarityPulse 2.5s ease-in-out infinite;
+  }
+.holo-rarity-gem.uncommon, .holo-rarity-gem.core {
+    background: radial-gradient(circle, #e0e0e0, #a0a0a0);
+    box-shadow: 0 0 6px rgba(192,192,192,.5);
+  }
+.holo-rarity-gem.common, .holo-rarity-gem.starter {
+    background: radial-gradient(circle, #8899aa, #667788);
+    box-shadow: 0 0 4px rgba(100,120,140,.3);
+  }
+/* Holo border shimmer + lift glow on hover */
+  .agent-card-wrap:hover .agent-card-holo {
+    box-shadow: 0 8px 30px rgba(201,168,76,.35), 0 0 20px rgba(201,168,76,.2), inset 0 0 15px rgba(201,168,76,.05);
+    filter: brightness(1.1);
+  }
+/* Hover peek — always show holo face on hover regardless of mode */
+  .agent-card-holo.holo-peek {
+    z-index: 5; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+  }
+.agent-card-wrap:hover .agent-card-holo.holo-peek { opacity: 1; }
+/* Hologram Viewer */
+  .holo-viewer-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+.holo-viewer-overlay canvas { cursor: grab; border-radius: 4px; }
+.holo-viewer-overlay canvas:active { cursor: grabbing; }
+.holo-viewer-label {
+    position: absolute; bottom: 84px; left: 50%; transform: translateX(-50%);
+    color: rgba(0,255,255,.6); font: 600 .75rem/1 -apple-system, sans-serif;
+    letter-spacing: 3px; text-transform: uppercase; text-align: center;
+    text-shadow: 0 0 8px rgba(0,255,255,.3);
+  }
+.holo-viewer-label.sw-theme {
+    color: rgba(120,160,255,.6);
+    text-shadow: 0 0 8px rgba(80,120,255,.3);
+  }
+/* ===== summoned card = the REAL grail.html in an iframe (russian-doll) ===== */
+/* front face: live grail renderer · back face: incantation-summon QR */
+.card3d{width:min(94vw,390px); height:min(80vh,660px); margin:0 auto 12px; perspective:1600px}
+.card3d-stage{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .22s ease-in; will-change:transform}
+.card3d-stage > div{position:absolute; inset:0; border-radius:14px; overflow:hidden}
+.grailframe{width:100%; height:100%; border:0; border-radius:14px; background:#0d0a06; box-shadow:0 14px 50px rgba(0,0,0,.55)}
+.face-qr{display:none}
+.ac-qr svg{display:block}
+.ac-back-inc{font-family:Georgia,serif; font-size:.66rem; letter-spacing:.5px; color:#e0c074; text-align:center; margin-top:9px; line-height:1.55; position:relative; z-index:1; max-width:240px; font-style:italic}
+.ac-back-actions button{font-family:inherit}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="o">🔮</span> Incantation&nbsp;Hero</div>
+  <div class="stats">
+    <label class="chip"><small>Realm</small>
+      <select id="realm"></select>
+    </label>
+    <div class="chip">🔥 <span id="streak">0</span><small>streak</small></div>
+    <div class="chip">⭐ <span id="level">1</span><small>lvl</small></div>
+    <div class="chip">✦ <span id="xp">0</span><small>xp</small></div>
+    <div class="chip mana" id="mana" title="Mana — a wrong summon costs one"></div>
+    <button class="btn-ghost" id="soundbtn" style="padding:6px 10px;font-size:12px">🔊</button>
+  </div>
+</header>
+
+<main id="game" class="hidden">
+  <div class="progressbar"><i id="lessonbar"></i></div>
+
+  <section class="altar" id="altar">
+    <div class="rankline">
+      <span class="rankbadge" id="rankbadge">Apprentice</span>
+      <span class="rankhint" id="rankhint">Fill the missing word — read it off the flash card.</span>
+    </div>
+
+    <div class="flash">
+      <div class="cardface" id="cardface" style="--cc:#7c5bff">
+        <div class="art" id="faceart"></div>
+        <div class="typ" id="facetyp"></div>
+        <div class="tier" id="facetier"></div>
+        <div class="name" id="facename"></div>
+      </div>
+      <div class="target-meta">
+        <h2 id="t-display">—</h2>
+        <div class="ns" id="t-name"></div>
+        <div class="desc" id="t-desc"></div>
+        <div class="tags" id="t-tags"></div>
+      </div>
+    </div>
+
+    <div class="reference" id="reference">
+      <div class="lbl">The Incantation <span style="opacity:.6">— 7 words summon this card</span></div>
+      <div class="studytag hidden" id="studytag"></div>
+      <div class="refwords" id="refwords"></div>
+    </div>
+
+    <div class="spellbar">
+      <div class="lbl">Speak it — complete the incantation to summon</div>
+      <div class="slots" id="slots"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-summon" id="summon">⚡ Summon</button>
+      <button class="btn-peek" id="peek">👁 Peek</button>
+      <button class="btn-ghost" id="skip">Skip ↦</button>
+    </div>
+  </section>
+
+  <aside class="grimoire">
+    <h3>📖 Your Grimoire</h3>
+    <div class="sub" id="gsub">0 summoned</div>
+    <div class="gmeter"><i id="gmeter"></i></div>
+    <div class="ggrid" id="ggrid"></div>
+  </aside>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="summoned">
+    <div class="card3d" id="card3d"><div class="card3d-stage" id="cardstage">
+      <div class="face-card" id="facecard"><iframe class="grailframe" id="grailframe" title="RAPP Grail card" loading="eager" referrerpolicy="no-referrer"></iframe></div>
+      <div class="face-qr" id="faceqr"></div>
+    </div></div>
+    <div class="xp" id="gainxp">+0 XP</div>
+    <h1 id="summontitle">Summoned!</h1>
+    <div class="inc" id="summoninc"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <button class="btn-peek" id="flipbtn">⟳ Flip → QR</button>
+      <button class="btn-summon" id="continue" style="min-width:150px;flex:0 0 auto">Continue →</button>
+    </div>
+    <div class="sparks" id="sparks"></div>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="spin"></div>
+  <div style="font-weight:800; font-size:18px">Drawing the registry from the aether…</div>
+  <div style="color:var(--muted); font-size:13px" id="loadmsg">fetching live agents from GitHub</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* qrcode-generator v1.4.4 (MIT, Kazuhiko Arase) — inlined for offline QR */
+/**
+ * Minified by jsDelivr using Terser v5.37.0.
+ * Original file: /npm/qrcode-generator@1.4.4/qrcode.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,(function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1}))},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}((function(){return qrcode}));
+//# sourceMappingURL=/sm/26b4b0d0b1e283d6b3ec9857ac597d7a60c76ac17be1ef4c965f03086de426bb.map
+</script>
+<script>
+/* ============================================================================
+   INCANTATION HERO  —  a Duolingo-style trainer for RAR card incantations.
+   The seed<->words math is a byte-exact port of rapp_sdk.py (validated against
+   SDK test vectors). Seeds are 64-bit, so everything uses BigInt and we
+   string-wrap "_seed" in the raw JSON before parsing to avoid float corruption.
+   ========================================================================== */
+
+// ── The protocol word list (1024 words). Injected verbatim from rapp_sdk.py. ──
+const MNEMONIC_WORDS = "FORGE ANVIL BLADE RUNE SHARD SMELT TEMPER WELD CHISEL BRAND MOLD CAST STAMP ETCH CARVE BIND FUSE ALLOY INGOT RIVET CLASP THORN BARB SPIKE PRONG EDGE HONE GRIND QUENCH SEAR HAMMER STOKE FIRE FROST STORM TIDE QUAKE GUST BOLT SURGE BLAZE EMBER PYRE ASH SMOKE SPARK FLARE FLASH FLOOD GALE DRIFT MIST HAZE VOID FLUX PULSE WAVE SHOCK BURST CRACK ROAR HOWL ECHO BOOM THUNDER VENOM BLIGHT SCORCH SINGE CHAR WITHER ERODE CORRODE DISSOLVE OAK PINE MOSS FERN ROOT VINE BLOOM SEED GROVE GLEN VALE CRAG PEAK RIDGE GORGE CLIFF SHORE REEF DUNE MARSH CAVE LAIR DEN NEST HIVE BURROW STONE IRON STEEL GOLD JADE ONYX RUBY OPAL AMBER PEARL CORAL QUARTZ OBSIDIAN FLINT GRANITE BASALT COBALT CHROME BRONZE COPPER NICKEL RELIC TOTEM SIGIL GLYPH WARD CHARM BANE DOOM FATE OMEN ORACLE SAGE SEER MAGE DRUID SHAMAN WRAITH SHADE PHANTOM SPECTER GOLEM TITAN DRAKE WYRM GRYPHON SPHINX HYDRA CHIMERA SCROLL TOME CODEX LORE MYTH FABLE SAGA EPIC VERSE CHANT HYMN DIRGE OATH CREED VOW AURA MANA ETHER PRISM NEXUS VORTEX RIFT WARP BREACH PORTAL GATE VAULT SHRINE ALTAR CRYPT SPIRE STRIKE SLASH THRUST PARRY GUARD SHIELD HELM LANCE MACE PIKE STAFF WAND DAGGER BOW ARROW QUIVER ARMOR PLATE GAUNTLET VISOR CLOAK CAPE MANTLE AEGIS BULWARK RAMPART BASTION CITADEL KEEP TOWER FORT RALLY CHARGE SIEGE FLANK AMBUSH ROUT VALOR MIGHT FURY WRATH RAGE SPITE MALICE GRUDGE HAVOC CHAOS DASH LEAP SPRINT LUNGE DIVE SOAR GLIDE PROWL STALK CREEP SWIFT FLEET BRISK RAPID SPIN WHIRL TWIST COIL SPIRAL ORBIT ARC CURVE BEND LOOP DAWN DUSK NOON NIGHT SHADOW GLEAM GLOW SHINE BEAM RAY HALO LUSTER MURK GLOOM DREAD FELL GRIM STARK BLEAK PALE ASHEN DIRE GRAVE SOMBER EBON ABYSS SHRIEK WAIL RUMBLE HISS GROWL SNARL BARK BELLOW DRONE CHIME TOLL KNELL CLANG CLASH SNAP THUD RING PEAL GONG HORN DRUM FLUTE LYRE PIPE BOLD KEEN FIERCE STERN VAST DEEP GRAND PRIME NOBLE ROYAL SACRED ANCIENT PRIMAL ELDER PURE VIVID SHARP BRIGHT DARK WILD CALM STILL SILENT STRONG PROUD BRAVE WISE JUST RAW DENSE SOLID WHOLE CORE APEX ZENITH NADIR CUSP BRINK VERGE CREST STAR MOON SUN COMET NOVA SOLAR LUNAR ASTRAL COSMIC NEBULA QUASAR PULSAR ECLIPSE AURORA CORONA PHASE WANE WAX WOLF HAWK EAGLE RAVEN SERPENT VIPER COBRA FALCON STAG BEAR LION TIGER LYNX PANTHER CONDOR OSPREY CRANE HERON OWL CROW BULL BOAR RAM HORSE MARE STALLION AX ORB AWE OAT EEL URN ELK ELM ION IRE ORE AIM ZAP JAB JAW JET JOT JAG HEX HEW HUE HUM DIN DUB DYE FIN FIG FOG FUR GAP GEM GNU SOUL MIND WILL FORCE POWER CRAFT SKILL GRACE POISE NERVE GRIT METTLE VIGOR ZEAL VERVE PLUCK GUILE CUNNING WILE LURE TRAP SNARE BAIT DECOY RUSE FEINT GAMBIT PLOY MESA TARN FORD PASS BLUFF KNOLL MOOR HEATH STEPPE TUNDRA DELTA BASIN PLATEAU FJORD ISLE ATOLL STRAIT CHANNEL HARBOR COVE BAY GULF SOUND CREEK BROOK RAPIDS FALLS CASCADE ARCH DOME PILLAR COLUMN BRIDGE WALL MOAT RAMP LEDGE STEP STAIR HALL NAVE ALCOVE NICHE SILL TRUSS BRACE STRUT JOIST FRAME PLINTH DAIS THRONE QUEST HUNT TRIAL ORDEAL RITE RITUAL PACT BOND PLEDGE DECREE EDICT MANDATE LAW RULE REIGN CROWN SCEPTER BANNER EMBLEM BADGE MARK SEAL TOKEN GUILD CLAN TRIBE ORDER SECT COVEN LEGION HORDE SWARM PACK FLOCK BROOD CLUTCH CRUX JINX GLINT DINT STINT KNIT SLIT SPLIT WHIT CLEFT DEFT HEFT LEFT THEFT WEFT BEREFT SHAFT GRAFT RAFT DRAFT TUFT LOFT CROFT DROIT BRUNT BLUNT STUNT RUNT GRUNT FRONT FONT HAUNT GAUNT FLAUNT JAUNT TAUNT SALT MALT HALT JOLT COLT MOLT SMOLT QUALM BALM PSALM FARM HARM ALARM DISARM FOREARM PLUME FUME LOOM ZOOM GROOM BROOM VROOM SCARCE TERSE MORSE COURSE SOURCE NORSE REMORSE WRENCH CLENCH STENCH TRENCH DRENCH FRENCH BENCH TORCH PORCH MARCH LARCH STARCH SEARCH PERCH BIRCH CHURCH THATCH CATCH MATCH BATCH HATCH LATCH PATCH WATCH SCRATCH SNATCH HEDGE WEDGE DREDGE SLEDGE FRIDGE DANCE TRANCE GLANCE STANCE PRANCE CHANCE ADVANCE ENHANCE BLISS MISS KISS DISMISS AMISS REMISS WHISK DISK RISK FRISK TUSK MUSK RUSK HUSK CROAK SOAK STROKE SPOKE BROKE WOKE INVOKE EVOKE PROVOKE VEIN CHAIN PLAIN STRAIN GRAIN TRAIN BRAIN DOMAIN TERRAIN REMAIN TREAD SPREAD THREAD SHRED BRED SLED STEAD INSTEAD COST LOST HOST GHOST MOST POST ROAST TOAST COAST BOAST STREAM DREAM TEAM CREAM SCHEME THEME SUPREME EXTREME SWAY FRAY PRAY STRAY ARRAY DECAY RELAY CONVEY OBEY SURVEY BETRAY THROW FLOW SNOW GROW KNOW BELOW HOLLOW CLIMB RHYME SLIME THYME SUBLIME PARADIGM PROWESS DURESS FORTRESS MISTRESS COMPASS BYPASS SURPASS AMASS CRIMSON LINDEN MAIDEN WARDEN GOLDEN MOLTEN FROZEN CHOSEN WOVEN SCYTHE CRUCIBLE TORRENT TEMPEST MAELSTROM CINDER INFERNO TYPHOON CYCLONE GLACIER ICECAP PERMAFROST MONSOON SOLSTICE EQUINOX MERIDIAN TWILIGHT MIDNIGHT DAYBREAK SENTINEL WATCHER HUNTER RANGER SCOUT TRACKER SEEKER FINDER KEEPER BINDER ARBITER HERALD ENVOY REGENT PREFECT CONSUL MARSHAL VASSAL SQUIRE KNIGHT PALADIN CHAMPION PARAGON MONARCH SOVEREIGN OVERLORD WARLORD CHIEFTAIN PATRIARCH MATRIARCH PROPHET MYSTIC HERMIT ASCETIC NOMAD PILGRIM WANDERER EXILE OUTCAST ROGUE REBEL VAGRANT DRIFTER MARAUDER BRIGAND CORSAIR BUCCANEER RAIDER REAVER SLAYER BERSERKER GLADIATOR CENTURION LEGIONNAIRE TEMPLAR CRUSADER INQUISITOR ZEALOT HARBINGER AUGUR PORTENT PRESAGE AUGURY PROPHECY DIVINATION REVELATION EPIPHANY REMNANT VESTIGE ARTIFACT FRAGMENT SPLINTER SLIVER MORSEL CRUMB PARTICLE MOTE FILAMENT STRAND FIBER SINEW TENDON LIGAMENT MARROW ICHOR ELIXIR POTION TONIC SALVE REMEDY ANTIDOTE CURE PANACEA CATALYST REAGENT COMPOUND TINCTURE DISTILL INFUSE IMBUE ENCHANT CONJURE SUMMON BANISH DISPEL REVOKE ANNUL NEGATE NULLIFY SUNDER CLEAVE REND SHATTER FRACTURE RUPTURE PIERCE IMPALE SKEWER GORE MAIM RAVAGE DEVASTATE OBLITERATE ANNIHILATE ERADICATE PURGE EXPUNGE EFFACE EXTINGUISH QUELL SUBDUE VANQUISH CONQUER PREVAIL TRIUMPH ASCEND TRANSCEND EVOLVE AWAKEN ARISE EMERGE MANIFEST EMBODY HARNESS WIELD MASTER COMMAND PROCLAIM SANCTIFY CONSECRATE ANOINT BESTOW ENDOW BEQUEST LEGACY HEIRLOOM COVENANT COMPACT TREATY ACCORD ALLIANCE FEDERATION DOMINION REALM KINGDOM EMPIRE DYNASTY EPOCH AEON CYCLE HELIX MATRIX LATTICE TAPESTRY MOSAIC CIPHER ENIGMA RIDDLE PUZZLE LABYRINTH MAZE CAULDRON CHALICE GOBLET GRAIL TRIDENT MAUL FLAIL HALBERD GLAIVE RAPIER SABRE KATANA MACHETE SCIMITAR CUTLASS BROADSWORD GREATSWORD LONGBOW CROSSBOW BALLISTA CATAPULT TREBUCHET MIRAGE ILLUSION REVENANT LICH BANSHEE GHOUL VAMPIRE WEREWOLF GARGOYLE BASILISK KRAKEN LEVIATHAN BEHEMOTH COLOSSUS JUGGERNAUT MONOLITH OBELISK ZIGGURAT MINARET PAGODA DOLMEN BARROW CATACOMB DUNGEON PARAPET TURRET BATTLEMENT DRAWBRIDGE PORTCULLIS BARBICAN PALISADE CONDUIT PYLON TORQUE RATCHET LODESTONE KEYSTONE CAPSTONE BEDROCK SEQUOIA REDWOOD CYPRESS HEMLOCK WILLOW ASPEN HICKORY JUNIPER MAGNOLIA HAWTHORN SAFFRON MYRRH MANGROVE ORCHID THISTLE POPPY HEATHER JASMINE VECTOR SCALAR TENSOR FULCRUM PIVOT CRESCENT PINNACLE VERTEX".trim().split(/\s+/);
+const BITS = 10n, MASK = 1023n;
+const W2I = new Map(MNEMONIC_WORDS.map((w, i) => [w, i]));
+if (MNEMONIC_WORDS.length !== 1024) console.warn("wordlist length", MNEMONIC_WORDS.length);
+
+// 7 words = 70 bits, little-endian base-1024 — same as SDK seed_to_words.
+function seedToWords(seed /* BigInt */) {
+  let r = seed, out = [];
+  for (let i = 0; i < 7; i++) { out.push(MNEMONIC_WORDS[Number(r & MASK)]); r >>= BITS; }
+  return out;
+}
+function wordsToSeed(words /* array of 7 */) {
+  let seed = 0n;
+  words.forEach((w, i) => { seed |= BigInt(W2I.get(w.toUpperCase())) << (BITS * BigInt(i)); });
+  return seed;
+}
+
+// ── Category palette (authentic colors from the store, extended) ──
+const CAT_COLORS = {
+  core:{c:'#ffd700'}, integrations:{c:'#42a5f5'}, productivity:{c:'#4caf50'},
+  devtools:{c:'#f44336'}, pipeline:{c:'#ab47bc'}, b2b_sales:{c:'#29b6f6'},
+  b2c_sales:{c:'#ec407a'}, healthcare:{c:'#26c6da'}, financial_services:{c:'#66bb6a'},
+  human_resources:{c:'#ffa726'}, manufacturing:{c:'#8d6e63'}, retail_cpg:{c:'#ef5350'},
+  it_management:{c:'#5c6bc0'}, professional_services:{c:'#26a69a'},
+  software_digital_products:{c:'#7e57c2'}, energy:{c:'#fdd835'},
+  federal_government:{c:'#90a4ae'}, slg_government:{c:'#78909c'}, general:{c:'#90a4ae'}
+};
+function catColor(cat){
+  if (CAT_COLORS[cat]) return CAT_COLORS[cat].c;
+  // deterministic hue for any unknown category
+  let h=0; for(const ch of (cat||'general')) h=(h*31+ch.charCodeAt(0))%360;
+  return `hsl(${h} 65% 60%)`;
+}
+const TIER_RARITY = {official:'Legendary', verified:'Evolved', community:'Base', experimental:'Seed'};
+
+// ── seeded PRNG for procedural sigils (mulberry32, matches store.html) ──
+function seedHash(str){ let h=0; for(let i=0;i<str.length;i++) h=((h<<5)-h+str.charCodeAt(i))|0; return h>>>0; }
+function mulberry32(a){ return function(){ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function sigilSVG(name, color){
+  const rng = mulberry32(seedHash(name)); const r=()=>rng();
+  const parts=[`<defs><radialGradient id="g" cx="50%" cy="35%"><stop offset="0%" stop-color="${color}" stop-opacity=".55"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></radialGradient></defs>`];
+  parts.push(`<rect width="100" height="140" fill="#0c0a1a"/>`);
+  parts.push(`<rect width="100" height="140" fill="url(#g)"/>`);
+  const cx=50, cy=58, n=3+Math.floor(r()*4);
+  for(let i=0;i<n;i++){
+    const rad=10+r()*30, rot=r()*360, sides=3+Math.floor(r()*5), op=(0.15+r()*0.45).toFixed(2);
+    let pts='';
+    for(let s=0;s<sides;s++){ const a=rot+s*360/sides; pts+=`${(cx+rad*Math.cos(a*Math.PI/180)).toFixed(1)},${(cy+rad*Math.sin(a*Math.PI/180)).toFixed(1)} `; }
+    parts.push(`<polygon points="${pts}" fill="none" stroke="${color}" stroke-width="${(0.7+r()*1.6).toFixed(1)}" opacity="${op}"/>`);
+  }
+  for(let i=0;i<14;i++) parts.push(`<circle cx="${(r()*100).toFixed(1)}" cy="${(r()*140).toFixed(1)}" r="${(0.4+r()*1.4).toFixed(1)}" fill="${color}" opacity="${(0.2+r()*0.5).toFixed(2)}"/>`);
+  parts.push(`<circle cx="${cx}" cy="${cy}" r="3" fill="${color}"/>`);
+  return `<svg viewBox="0 0 100 140" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">${parts.join('')}</svg>`;
+}
+
+// ── persistent state ──
+const SAVE_KEY = 'incantation_hero_v1';
+let S = loadState();
+function loadState(){
+  try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); if(s) return s; }catch(e){}
+  return { xp:0, level:1, streak:0, best:0, mana:5, sound:true, realm:'starter', cards:{} /* name -> {rank,summons} */ , summoned:[] };
+}
+function save(){ localStorage.setItem(SAVE_KEY, JSON.stringify(S)); }
+
+// ── registry data ──
+const RAW_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
+const HOLO_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json';
+const SHARE_BASE = 'https://kody-w.github.io/RAR/incantation-hero.html'; // QR target (live once published)
+const GRAIL_BASE = 'https://kody-w.github.io/RAR/grail.html'; // canonical single-card renderer we embed
+let HOLO = {};         // agent_name -> real RAR card (avatar_svg, stats, abilities, etc.)
+let ALL = [];          // every agent {name, display, desc, cat, tags, tier, seed(BigInt), words[]}
+let POOL = [];         // current realm's agents
+let current = null;    // active question
+let lessonCount = 0, LESSON = 8;
+const RANKS = ['—','Apprentice','Adept','Conjurer','Mage','Archmage','Sage','Grand Summoner'];
+
+async function boot(){
+  let text;
+  try{
+    const res = await fetch(RAW_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error(res.status);
+    text = await res.text();
+  }catch(e){
+    // fallback for local repo serving
+    try{ const r2=await fetch('./registry.json',{cache:'no-store'}); text=await r2.text(); }
+    catch(e2){ document.getElementById('loadmsg').textContent='Could not reach the registry. Check your connection and reload.'; return; }
+  }
+  // CRITICAL: wrap 64-bit _seed as a string before JSON.parse, or doubles corrupt it.
+  text = text.replace(/"_seed":\s*(\d+)/g, '"_seed":"$1"');
+  const data = JSON.parse(text);
+  const agents = data.agents || [];
+  ALL = agents.filter(a=>a._seed).map(a=>{
+    const seed = BigInt(a._seed);
+    return {
+      name:a.name, display:a.display_name||a.name.split('/').pop(),
+      desc:a.description||'', cat:a.category||'general',
+      tags:(a.tags||[]).slice(0,4), tier:a.quality_tier||'community',
+      seed, words:seedToWords(seed)
+    };
+  });
+  // load the REAL card data (avatar art + MTG stats) the RAR store renders
+  document.getElementById('loadmsg').textContent='fetching the holo card forge';
+  try{
+    let htext;
+    try{ htext = await (await fetch(HOLO_URL,{cache:'no-store'})).text(); }
+    catch(e){ htext = await (await fetch('./cards/holo_cards.json',{cache:'no-store'})).text(); }
+    htext = htext.replace(/"seed":\s*(\d+)/g, '"seed":"$1"'); // cosmetic only, keep parser happy
+    HOLO = JSON.parse(htext);
+  }catch(e){ HOLO = {}; } // game still works with procedural sigils if forge is unreachable
+  buildRealms();
+  setRealm(S.realm || 'starter');
+  document.getElementById('loading').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  renderMeta(); renderGrimoire();
+  nextCard();
+  handleSharedSummon();   // if opened via a QR ?summon= link, reveal that card
+}
+
+// publisher/category priority for the curated starter path
+const PUB_PRIO = {'@rapp':0,'@kody':1,'@borg':2,'@discreetRappers':3,'@wildhaven':4};
+const TIER_PRIO = {official:0, verified:1, community:2, experimental:3};
+function pub(name){ return name.split('/')[0]; }
+
+function buildRealms(){
+  const cats = [...new Set(ALL.map(a=>a.cat))].sort();
+  const sel = document.getElementById('realm');
+  const opts = [['starter','✦ Starter Path'], ['all','All Agents ('+ALL.length+')']]
+    .concat(cats.map(c=>['cat:'+c, prettyCat(c)+' ('+ALL.filter(a=>a.cat===c).length+')']));
+  sel.innerHTML = opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+  sel.value = S.realm || 'starter';
+  sel.onchange = ()=>{ setRealm(sel.value); lessonCount=0; nextCard(); };
+}
+function prettyCat(c){ return c.replace(/_/g,' ').replace(/\b\w/g,m=>m.toUpperCase()); }
+
+function setRealm(r){
+  S.realm = r; save();
+  if(r==='all') POOL = ALL.slice();
+  else if(r.startsWith('cat:')) POOL = ALL.filter(a=>a.cat===r.slice(4));
+  else { // starter: recognizable infra first, dedupe display names, cap ~48
+    const seen=new Set();
+    POOL = ALL.slice().sort((a,b)=>
+      (PUB_PRIO[pub(a.name)]??9)-(PUB_PRIO[pub(b.name)]??9) ||
+      (TIER_PRIO[a.tier]??9)-(TIER_PRIO[b.tier]??9) ||
+      a.display.length-b.display.length
+    ).filter(a=>{ if(seen.has(a.display)) return false; seen.add(a.display); return true; }).slice(0,48);
+  }
+  document.getElementById('realm').value = r;
+}
+
+// ── pick next card: favor low mastery / few summons, occasional review ──
+function cardState(a){ return S.cards[a.name] || (S.cards[a.name]={rank:1, summons:0}); }
+function pickNext(){
+  const pool = POOL.filter(a=>a!==(current&&current.agent));
+  if(!pool.length) return POOL[0];
+  // 25% review a mastered card at high rank, else weakest card
+  const mastered = pool.filter(a=>cardState(a).rank>=7);
+  if(mastered.length && Math.random()<0.25) return mastered[Math.floor(Math.random()*mastered.length)];
+  return pool.slice().sort((a,b)=> cardState(a).rank-cardState(b).rank || cardState(a).summons-cardState(b).summons || Math.random()-0.5)[0];
+}
+
+function nextCard(){
+  const agent = pickNext();
+  const cs = cardState(agent);
+  const rank = Math.min(cs.rank, 7);          // 1..7 == number of blanks
+  // choose which slot indices are blank
+  const idxs=[0,1,2,3,4,5,6]; for(let i=idxs.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[idxs[i],idxs[j]]=[idxs[j],idxs[i]];}
+  const blanks = new Set(idxs.slice(0,rank));
+  const memory = rank>=5;                       // hide reference -> recall from memory
+  current = {agent, rank, blanks, memory, peeked:false, revealed:!memory, solved:false};
+  renderCard();
+}
+
+function renderCard(){
+  const {agent, rank, blanks, memory} = current;
+  const color = catColor(agent.cat);
+  document.documentElement.style.setProperty('--cc', color);
+  // flash card
+  const cf = document.getElementById('cardface'); cf.style.setProperty('--cc', color);
+  document.getElementById('faceart').innerHTML = sigilSVG(agent.name, color);
+  document.getElementById('facetyp').textContent = prettyCat(agent.cat);
+  document.getElementById('facetier').textContent = TIER_RARITY[agent.tier]||'Base';
+  document.getElementById('facename').textContent = agent.display;
+  // meta
+  document.getElementById('t-display').textContent = agent.display;
+  document.getElementById('t-name').textContent = agent.name;
+  document.getElementById('t-desc').textContent = agent.desc;
+  document.getElementById('t-tags').innerHTML = agent.tags.map(t=>`<span>${t}</span>`).join('');
+  // rank badge
+  document.getElementById('rankbadge').textContent = RANKS[rank];
+  document.getElementById('rankhint').textContent = memory
+    ? `Recall ${rank} of 7 from memory — the incantation is veiled. Tap Peek for a glimpse.`
+    : `Complete ${rank} blank${rank>1?'s':''} — the answer${rank>1?'s are':' is'} highlighted on the flash card above.`;
+  // reference incantation (study/hint)
+  const ref = document.getElementById('reference');
+  ref.classList.toggle('memory', memory);
+  ref.classList.toggle('revealed', !memory);
+  document.getElementById('studytag').classList.toggle('hidden', !memory);
+  if(memory){ document.getElementById('studytag').textContent='👁 veiled — tap Peek'; }
+  // Flash card is the answer key: always show the full incantation; gold-highlight the
+  // words you must type. In memory mode the whole thing is blurred by CSS until Peek.
+  document.getElementById('refwords').innerHTML = agent.words.map((w,i)=>
+    `<b class="${blanks.has(i)?'need':''}">${w}</b>`).join('');
+  // Peek only exists when the incantation is hidden (memory ranks); otherwise it's redundant.
+  document.getElementById('peek').style.display = memory ? '' : 'none';
+  // slots
+  const slots = document.getElementById('slots'); slots.innerHTML='';
+  agent.words.forEach((w,i)=>{
+    const wrap=document.createElement('div'); wrap.className='slot';
+    const idx=document.createElement('div'); idx.className='idx'; idx.textContent=(i+1); wrap.appendChild(idx);
+    if(blanks.has(i)){
+      const inp=document.createElement('input'); inp.className='word'; inp.setAttribute('list','wordbank');
+      inp.placeholder='____'; inp.autocapitalize='characters'; inp.autocomplete='off'; inp.spellcheck=false;
+      inp.dataset.answer=w; inp.dataset.i=i;
+      inp.addEventListener('input',()=>onType(inp));
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault(); trySummon();} });
+      wrap.appendChild(inp);
+    } else {
+      const d=document.createElement('div'); d.className='word locked'; d.textContent=w; wrap.appendChild(d);
+    }
+    slots.appendChild(wrap);
+  });
+  // focus first blank
+  const first = slots.querySelector('input.word'); if(first) setTimeout(()=>first.focus(),50);
+}
+
+function onType(inp){
+  const v=inp.value.trim().toUpperCase();
+  if(v===inp.dataset.answer){
+    inp.classList.add('ok'); inp.classList.remove('err');
+    // auto-advance to next empty blank
+    const inputs=[...document.querySelectorAll('#slots input.word')];
+    const next=inputs.find(x=>!x.classList.contains('ok'));
+    if(next) next.focus(); else trySummon();
+  } else {
+    inp.classList.remove('ok');
+  }
+}
+
+function trySummon(){
+  if(!current || current.solved) return;
+  const inputs=[...document.querySelectorAll('#slots input.word')];
+  let allOk=true;
+  inputs.forEach(inp=>{
+    const ok=inp.value.trim().toUpperCase()===inp.dataset.answer;
+    if(!ok){ allOk=false; inp.classList.add('err'); inp.classList.remove('ok'); setTimeout(()=>inp.classList.remove('err'),400); }
+  });
+  if(!allOk){ wrongSummon(); return; }
+  // canonical proof: the assembled 7 words must hash back to the agent's seed
+  const words = current.agent.words.map((w,i)=> w); // all correct now
+  if(wordsToSeed(words) !== current.agent.seed){ toast('Seed mismatch — that shouldn’t happen!'); return; }
+  successSummon();
+}
+
+function wrongSummon(){
+  S.streak=0; S.mana=Math.max(0,S.mana-1); save(); renderMeta();
+  beep(160,0.12,'sawtooth');
+  if(S.mana<=0){ toast('Out of mana — channeling more…'); setTimeout(()=>{S.mana=5; save(); renderMeta();}, 900); }
+  else toast('Not quite — check the flash card.');
+}
+
+function successSummon(){
+  current.solved=true;
+  const {agent, rank, peeked} = current;
+  const cs=cardState(agent); cs.summons++;
+  const leveledCard = rank>cs.rank-0 ? false : false;
+  cs.rank = Math.min(rank+1, 7);                 // this card gets harder next time
+  if(!S.summoned.includes(agent.name)) S.summoned.push(agent.name);
+  // xp: harder ranks + streak, minus peek
+  let gain = 10 + (rank-1)*6 + Math.min(S.streak,10)*2 - (peeked?6:0);
+  gain=Math.max(5,gain);
+  S.xp+=gain; S.streak++; S.best=Math.max(S.best,S.streak);
+  const need=lvlNeed(S.level);
+  let levelUp=false;
+  while(S.xp>=need){ S.level++; levelUp=true; }
+  S.mana=Math.min(5,S.mana+ (S.streak%5===0?1:0));
+  save();
+  showSummon(agent, gain, levelUp);
+  renderMeta(); renderGrimoire();
+}
+function lvlNeed(l){ return l*120; } // cumulative-ish threshold; simple ramp
+
+// ── summon overlay + fx ──
+// The card itself is the REAL grail.html embedded in an iframe (russian-doll):
+// grail injects the card "bytecode" (the @publisher/agent_name key) and renders
+// the canonical holo card — same renderer as the rest of RAR, and the user can
+// export it to a standalone .html straight from inside the embedded grail.
+function grailURL(agent){ return GRAIL_BASE + '#' + encodeURIComponent(agent.name); }
+function mountCard(agent){
+  const fc = document.getElementById('facecard');
+  // (re)create the iframe so the new card's grail loads fresh
+  fc.innerHTML = '<iframe class="grailframe" id="grailframe" title="RAPP Grail card" loading="eager" referrerpolicy="no-referrer"></iframe>';
+  const f = document.getElementById('grailframe');
+  // if grail (GitHub Pages) is unreachable, fall back to the locally-ported holo card
+  f.onerror = ()=>{ fc.innerHTML = holoCardHTML(agent); };
+  f.src = grailURL(agent);
+  document.getElementById('faceqr').innerHTML = qrBackHTML(agent);
+  setFace('card');
+}
+function showSummon(agent, gain, levelUp){
+  const color=catColor(agent.cat);
+  document.documentElement.style.setProperty('--cc',color);
+  mountCard(agent);
+  document.getElementById('gainxp').textContent='+'+gain+' XP'+(levelUp?'   🎉 LEVEL UP!':'');
+  document.getElementById('summontitle').textContent = (current.rank>=7?'Mastered ✦ ':'Summoned! ')+agent.display;
+  document.getElementById('summoninc').textContent = '“'+agent.words.join(' ')+'”  ·  flip for a summon QR · export from the card';
+  document.getElementById('overlay').classList.add('show');
+  spawnSparks(color); chime();
+}
+
+// ── the ACTUAL RAR holo card (markup ported from store.html) ──
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+const TIER_TO_RARITY = {official:'mythic', verified:'rare', community:'core', experimental:'starter'};
+function manaPipsHTML(holo){
+  if(holo && holo.mana_cost) return holo.mana_cost.replace(/\{(\w+)\}/g,(_,p)=>`<span class="holo-pip ${p.length===1&&'WUBRGN'.includes(p)?p:'C'}">${p}</span>`);
+  return `<span class="holo-pip C">&bull;</span>`;
+}
+function holoCardHTML(agent){
+  const holo = HOLO[agent.name];
+  const color = catColor(agent.cat);
+  const rarity = holo?.rarity || TIER_TO_RARITY[agent.tier] || 'core';
+  const typeLine = holo?.type_line || (prettyCat(agent.cat)+' — Agent');
+  const title = holo?.title || '';
+  const art = holo?.avatar_svg || sigilSVG(agent.name,color);
+  const setCode = holo?.set_code || 'HOLO';
+  const artist = holo?.artist || 'RAPP';
+  const power = holo?.power, tough = holo?.toughness;
+  const abilities = (holo?.abilities||[]).slice(0,2);
+  const flavor = holo?.flavor_text || agent.desc;
+  return `
+   <div class="agent-card-holo" style="border-color:${color}">
+     <div class="holo-rarity-gem ${rarity}"></div>
+     <div class="holo-shimmer-track"></div><div class="holo-prism"></div>
+     <div class="holo-fresnel"></div><div class="holo-scanlines"></div>
+     <div class="holo-orbit-cyan"></div><div class="holo-orbit-magenta"></div>
+     <div class="holo-header">
+       <div style="min-width:0;flex:1;overflow:hidden">
+         <div class="holo-name">${esc(agent.display)}</div>
+         ${title?`<div class="holo-title">${esc(title)}</div>`:''}
+       </div>
+       <div class="holo-pips" style="flex-shrink:0">${manaPipsHTML(holo)}</div>
+     </div>
+     <div class="holo-art">${art}</div>
+     <div class="holo-type">${esc(typeLine)}</div>
+     <div class="holo-text">
+       <div class="holo-abilities">${abilities.map(ab=>`<div class="holo-ability"><span class="kw">${esc(ab.keyword||'')}${ab.cost?(' '+esc(ab.cost)):''}:</span> ${esc(ab.text||'')}</div>`).join('')}</div>
+       <div class="holo-flavor">${esc(flavor)}</div>
+     </div>
+     <div class="holo-footer">
+       <span class="holo-rarity ${rarity}">${esc(setCode)} &bull; ${rarity.charAt(0).toUpperCase()+rarity.slice(1)} &bull; <span class="holo-artist">${esc(artist)}</span></span>
+       ${power!=null&&tough!=null?`<span class="holo-stats">${power}/${tough}</span>`:''}
+     </div>
+   </div>`;
+}
+
+// ── the QR back: scan to summon this exact card via its incantation ──
+function summonURL(agent){ return SHARE_BASE + '?summon=' + agent.seed.toString(); }
+function renderQR(text, size){
+  try{
+    const qr = qrcode(0,'M'); qr.addData(text); qr.make();
+    const n = qr.getModuleCount(), quiet = 2, cell = size/(n+quiet*2);
+    let rects='';
+    for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(qr.isDark(r,c))
+      rects += `<rect x="${((c+quiet)*cell).toFixed(2)}" y="${((r+quiet)*cell).toFixed(2)}" width="${cell.toFixed(2)}" height="${cell.toFixed(2)}"/>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="border:2px solid rgba(139,115,50,.5);border-radius:8px;background:#fff">`
+      + `<rect width="${size}" height="${size}" fill="#fff" rx="6"/><g fill="#0b0b0b" shape-rendering="crispEdges">${rects}</g></svg>`;
+  }catch(e){ return '<div style="color:#c8b89a;font-size:.6rem">QR unavailable</div>'; }
+}
+function qrBackHTML(agent){
+  const url = summonURL(agent), spell = agent.words.join(' ');
+  return `
+   <div class="agent-card-back">
+     <div class="ac-back-logo">RAPP</div>
+     <div class="ac-qr">${renderQR(url,128)}</div>
+     <div class="ac-back-name">${esc(agent.display)}</div>
+     <div class="ac-back-inc">“${esc(spell)}”</div>
+     <div class="ac-back-hint">Scan to summon &middot; or speak the 7 words</div>
+     <div class="ac-back-actions">
+       <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${url}');toast('🔗 Summon link copied')">Copy link</button>
+       <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${esc(spell)}');toast('✨ Incantation copied')">Copy spell</button>
+     </div>
+   </div>`;
+}
+
+// ── shared summon: opened via a QR ?summon=<seed> (or ?cast=word+word...) link ──
+function handleSharedSummon(){
+  const p = new URLSearchParams(location.search);
+  let agent=null;
+  if(p.get('summon')){ try{ const s=BigInt(p.get('summon')); agent=ALL.find(a=>a.seed===s); }catch(e){} }
+  else if(p.get('cast')){ const w=p.get('cast').replace(/\+/g,' ').trim().split(/\s+/);
+    if(w.length===7){ try{ const s=wordsToSeed(w); agent=ALL.find(a=>a.seed===s); }catch(e){} } }
+  if(!agent) return;
+  if(!S.summoned.includes(agent.name)){ S.summoned.push(agent.name); save(); renderGrimoire(); }
+  const color=catColor(agent.cat); document.documentElement.style.setProperty('--cc',color);
+  mountCard(agent);
+  document.getElementById('gainxp').textContent='✦ A spell was cast for you';
+  document.getElementById('summontitle').textContent='Summoned for you: '+agent.display;
+  document.getElementById('summoninc').textContent='“'+agent.words.join(' ')+'”';
+  document.getElementById('overlay').classList.add('show');
+  spawnSparks(color); chime();
+}
+
+// ── flip between the live grail card and the summon-QR back ──
+// rotateY to edge-on, swap which face is shown, rotate back. The grail iframe
+// stays mounted (display toggle, not re-created) so flipping never reloads it.
+let _showingQR=false;
+function setFace(which){
+  _showingQR = (which==='qr');
+  document.getElementById('facecard').style.display = _showingQR?'none':'';
+  document.getElementById('faceqr').style.display   = _showingQR?'':'none';
+  document.getElementById('flipbtn').textContent = _showingQR?'⟳ Flip → Card':'⟳ Flip → QR';
+}
+function flipCard(){
+  const stage=document.getElementById('cardstage');
+  beep(440,0.05,'sine');
+  stage.style.transition='transform .2s ease-in';
+  stage.style.transform='rotateY(90deg)';      // turn edge-on (front hidden)
+  clearTimeout(flipCard._t);
+  flipCard._t=setTimeout(()=>{
+    setFace(_showingQR?'card':'qr');            // swap face while invisible
+    stage.style.transition='none';
+    stage.style.transform='rotateY(-90deg)';    // jump to the other side
+    void stage.offsetWidth;                      // reflow so the next transition animates
+    stage.style.transition='transform .2s ease-out';
+    stage.style.transform='rotateY(0deg)';      // reveal the new face
+  }, 200);
+}
+document.getElementById('flipbtn').onclick=flipCard;
+function spawnSparks(color){
+  const box=document.getElementById('sparks'); box.innerHTML='';
+  for(let i=0;i<28;i++){
+    const s=document.createElement('div'); s.className='spark';
+    s.style.background=color; s.style.boxShadow='0 0 8px '+color;
+    s.style.left='50%'; s.style.top='42%';
+    const ang=Math.random()*Math.PI*2, dist=80+Math.random()*220, dur=600+Math.random()*700;
+    box.appendChild(s);
+    s.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},
+      {transform:`translate(${Math.cos(ang)*dist-50}%,${Math.sin(ang)*dist-50}%) scale(0)`,opacity:0}],
+      {duration:dur, easing:'cubic-bezier(.2,.8,.3,1)'});
+  }
+}
+
+document.getElementById('continue').onclick=()=>{
+  document.getElementById('overlay').classList.remove('show');
+  lessonCount++;
+  if(lessonCount>=LESSON){ lessonCount=0; toast('🏆 Lesson complete! +20 XP'); S.xp+=20; save(); renderMeta(); }
+  document.getElementById('lessonbar').style.width=(lessonCount/LESSON*100)+'%';
+  nextCard();
+};
+
+// ── peek / skip ──
+document.getElementById('peek').onclick=()=>{
+  const ref=document.getElementById('reference');
+  if(current.memory){
+    current.peeked=true;
+    ref.classList.add('revealed');
+    clearTimeout(current._peekT);
+    current._peekT=setTimeout(()=>ref.classList.remove('revealed'),1800);
+    toast('👁 The veil lifts briefly (small XP cost)');
+  } else {
+    // answer is already shown; draw the eye to the highlighted words
+    ref.animate([{boxShadow:'0 0 0 0 rgba(255,215,106,.7)'},{boxShadow:'0 0 0 10px rgba(255,215,106,0)'}],{duration:650});
+    toast('☝ The answer is highlighted on the flash card');
+  }
+};
+document.getElementById('skip').onclick=()=>{ S.streak=0; save(); renderMeta(); nextCard(); };
+document.getElementById('summon').onclick=trySummon;
+
+// ── meta / grimoire render ──
+function renderMeta(){
+  document.getElementById('streak').textContent=S.streak;
+  document.getElementById('level').textContent=S.level;
+  document.getElementById('xp').textContent=S.xp;
+  const m=document.getElementById('mana'); m.innerHTML='';
+  for(let i=0;i<5;i++){ const o=document.createElement('div'); o.className='o'+(i<S.mana?'':' empty'); m.appendChild(o); }
+  document.getElementById('soundbtn').textContent=S.sound?'🔊':'🔇';
+}
+function renderGrimoire(){
+  const total=ALL.length, got=S.summoned.length;
+  document.getElementById('gsub').textContent=`${got} / ${total} agents summoned`;
+  document.getElementById('gmeter').style.width=(got/total*100)+'%';
+  const grid=document.getElementById('ggrid'); grid.innerHTML='';
+  // most recent first
+  S.summoned.slice().reverse().slice(0,60).forEach(name=>{
+    const a=ALL.find(x=>x.name===name); if(!a) return;
+    const cs=S.cards[name]||{rank:1};
+    const d=document.createElement('div'); d.className='gcard'+(cs.rank>=7?' mastered':'');
+    d.title=a.display+' — '+a.words.join(' ');
+    d.innerHTML=(HOLO[a.name]?.avatar_svg||sigilSVG(a.name,catColor(a.cat)))
+      +`<div class="gm">${cs.rank>=7?'★':''}</div>`
+      +`<div class="glabel">${a.display}</div>`;
+    d.onclick=()=>toast(a.display+': '+a.words.join(' '));
+    grid.appendChild(d);
+  });
+}
+
+// ── sound (tiny WebAudio, no assets) ──
+let AC; function ctx(){ return AC||(AC=new (window.AudioContext||window.webkitAudioContext)()); }
+function beep(freq,dur,type){ if(!S.sound) return; try{ const c=ctx(); const o=c.createOscillator(),g=c.createGain();
+  o.type=type||'sine'; o.frequency.value=freq; o.connect(g); g.connect(c.destination);
+  g.gain.setValueAtTime(0.0001,c.currentTime); g.gain.exponentialRampToValueAtTime(0.18,c.currentTime+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+dur); o.start(); o.stop(c.currentTime+dur); }catch(e){} }
+function chime(){ if(!S.sound) return; [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,0.25,'triangle'),i*80)); }
+document.getElementById('soundbtn').onclick=()=>{ S.sound=!S.sound; save(); renderMeta(); };
+
+// ── toast ──
+let toastT; function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1800); }
+
+// ── datalist for word autocomplete (helps spelling) ──
+const dl=document.createElement('datalist'); dl.id='wordbank';
+dl.innerHTML=MNEMONIC_WORDS.map(w=>`<option value="${w}">`).join('');
+document.body.appendChild(dl);
+
+// global Enter -> summon when not in overlay
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && document.getElementById('overlay').classList.contains('show')){ document.getElementById('continue').click(); }
+});
+
+boot();
+</script>
+</body>
+</html>
