@@ -465,11 +465,10 @@ def install_agent(name: str, output_dir: str = "agents") -> str:
     except Exception as e:
         raise RuntimeError(f"Failed to download agent: {e}")
 
-    # Reconstruct output path relative to output_dir
-    parts = Path(file_path).parts  # e.g. agents/@kody/my_agent.py
-    if parts[0] == "agents":
-        parts = parts[1:]  # strip leading "agents/"
-    dest = Path(output_dir) / Path(*parts)
+    # Agents must land FLAT at the agents root — a brainstem hot-loads
+    # agents/<slug>_agent.py, not nested @publisher/... paths. Strip the
+    # namespace and write just the basename.
+    dest = Path(output_dir) / Path(file_path).name
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(content)
     return str(dest)

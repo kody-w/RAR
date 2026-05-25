@@ -3587,7 +3587,7 @@ async function exportLocalAgents() {
     const blob = new Blob([a._code], { type: 'text/x-python' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url; link.download = a._file || `${a.name.split('/')[1]}.py`;
+    link.href = url; link.download = (a._file ? a._file.split('/').pop() : `${a.name.split('/').pop()}.py`);
     link.click(); URL.revokeObjectURL(url);
   } else {
     // Download as individual files in sequence
@@ -3595,7 +3595,7 @@ async function exportLocalAgents() {
       const blob = new Blob([a._code], { type: 'text/x-python' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = url; link.download = a._file || `${a.name.split('/')[1]}.py`;
+      link.href = url; link.download = (a._file ? a._file.split('/').pop() : `${a.name.split('/').pop()}.py`);
       link.click(); URL.revokeObjectURL(url);
       await new Promise(r => setTimeout(r, 200));
     }
