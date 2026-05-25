@@ -429,7 +429,8 @@ def build_registry():
         # Skip utility/template files
         is_utility = py_path.name in ("update_agents.py", "d365_base_agent.py", "__init__.py")
         is_template = "templates" in py_path.parts
-        if is_utility or is_template:
+        is_source = "_sources" in py_path.parts   # converged-factory component sources (not standalone agents)
+        if is_utility or is_template or is_source:
             continue
 
         manifest = extract_manifest(py_path)

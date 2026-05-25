@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🔮 Incantation Hero — Summoner's Path</title>
+<style>
+  :root{
+    --bg:#07060d; --panel:rgba(20,18,34,.72); --line:rgba(150,130,255,.18);
+    --gold:#ffd76a; --rune:#c9b8ff; --good:#3ddc84; --bad:#ff5d6c; --muted:#7a7596;
+    --glow:rgba(150,110,255,.55);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  html,body{margin:0; height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:#ece9ff; background:
+      radial-gradient(1200px 800px at 50% -10%, #1a1140 0%, transparent 60%),
+      radial-gradient(900px 700px at 90% 110%, #14203a 0%, transparent 55%),
+      radial-gradient(900px 700px at 5% 100%, #2a0f33 0%, transparent 55%),
+      var(--bg);
+    min-height:100%; overflow-x:hidden;
+  }
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif}
+  /* ── Top bar ── */
+  header{
+    position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:14px;
+    padding:10px 16px; background:linear-gradient(180deg,rgba(10,8,20,.92),rgba(10,8,20,.5));
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:800; letter-spacing:.5px; font-size:18px; display:flex; align-items:center; gap:8px; white-space:nowrap}
+  .brand .o{filter:drop-shadow(0 0 8px var(--glow))}
+  .stats{display:flex; gap:8px; margin-left:auto; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+  .chip{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.05); border:1px solid var(--line);
+        padding:6px 10px; border-radius:999px; font-weight:700; font-size:13px}
+  .chip small{color:var(--muted); font-weight:600}
+  .mana{display:flex; gap:3px}
+  .mana .o{width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #b89bff, #5b34c9);
+           box-shadow:0 0 6px var(--glow)}
+  .mana .o.empty{background:#241f3a; box-shadow:none; opacity:.6}
+  select{background:#15122a; color:#ece9ff; border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; font-weight:600}
+  /* ── Layout ── */
+  main{max-width:1080px; margin:0 auto; padding:14px 14px 90px; display:grid; gap:14px; grid-template-columns:1fr 300px}
+  @media(max-width:880px){ main{grid-template-columns:1fr} .grimoire{order:3} }
+  .progressbar{grid-column:1/-1; height:10px; border-radius:999px; background:rgba(255,255,255,.06); overflow:hidden; border:1px solid var(--line)}
+  .progressbar > i{display:block; height:100%; width:0;
+    background:linear-gradient(90deg,#7c5bff,#c39bff,#ffd76a); transition:width .4s ease; box-shadow:0 0 12px var(--glow)}
+  /* ── Altar / flash card ── */
+  .altar{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:18px;
+         position:relative; overflow:hidden; min-height:520px}
+  .altar:before{content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(600px 300px at 50% 0%, rgba(124,91,255,.10), transparent 70%)}
+  .rankline{display:flex; align-items:center; gap:10px; margin-bottom:6px}
+  .rankbadge{font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px; border:1px solid var(--line); color:var(--gold);
+    background:rgba(255,215,106,.08)}
+  .rankhint{color:var(--muted); font-size:12px}
+  /* flash card (the target) */
+  .flash{display:flex; gap:16px; align-items:center; margin:8px 0 14px; flex-wrap:wrap}
+  .cardface{width:150px; height:210px; border-radius:14px; flex-shrink:0; position:relative; overflow:hidden;
+    border:2px solid var(--cc,#7c5bff); background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(0,0,0,.35));
+    box-shadow:0 10px 40px rgba(0,0,0,.5), inset 0 0 30px rgba(0,0,0,.4)}
+  .cardface .art{position:absolute; inset:0; opacity:.9}
+  .cardface .name{position:absolute; left:8px; right:8px; bottom:8px; font-weight:800; font-size:13px; line-height:1.15;
+    text-shadow:0 1px 6px #000}
+  .cardface .tier{position:absolute; top:7px; right:8px; font-size:9px; font-weight:800; letter-spacing:1px;
+    text-transform:uppercase; padding:2px 6px; border-radius:6px; background:rgba(0,0,0,.45); color:var(--gold)}
+  .cardface .typ{position:absolute; top:7px; left:8px; font-size:9px; font-weight:800; color:#fff; opacity:.85}
+  .target-meta{flex:1; min-width:200px}
+  .target-meta h2{margin:0 0 4px; font-size:20px}
+  .target-meta .ns{color:var(--muted); font-size:12px; font-family:ui-monospace,Menlo,monospace; word-break:break-all}
+  .target-meta .desc{color:#cfc9ee; font-size:13px; margin-top:8px; line-height:1.45}
+  .tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+  .tags span{font-size:10px; padding:3px 8px; border-radius:999px; background:rgba(255,255,255,.06); color:var(--rune); border:1px solid var(--line)}
+  /* incantation on flash card (reference / study) */
+  .reference{margin:6px 0 4px; padding:12px; border-radius:12px; border:1px dashed var(--line);
+    background:rgba(124,91,255,.06); position:relative}
+  .reference .lbl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px}
+  .refwords{font-family:"Iowan Old Style",Georgia,serif; font-size:18px; letter-spacing:1px; color:var(--rune);
+    display:flex; gap:10px 14px; flex-wrap:wrap}
+  .refwords b{font-weight:700; text-shadow:0 0 10px rgba(150,110,255,.5)}
+  .refwords b.hole{color:transparent; background:rgba(255,255,255,.07); border-radius:6px; padding:0 8px}
+  .reference.memory .refwords{filter:blur(7px); opacity:.5; transition:filter .25s, opacity .25s; user-select:none}
+  .reference.memory.revealed .refwords{filter:none; opacity:1}
+  .studytag{position:absolute; top:10px; right:12px; font-size:11px; color:var(--gold); font-weight:700}
+  /* ── input slots ── */
+  .spellbar{margin-top:14px}
+  .spellbar .lbl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px}
+  .slots{display:flex; gap:8px 10px; flex-wrap:wrap; align-items:center}
+  .slot{display:flex; flex-direction:column; align-items:center; gap:4px}
+  .slot .idx{font-size:9px; color:var(--muted); font-weight:700}
+  .slot .word{min-width:96px; text-align:center; padding:11px 8px; border-radius:11px; font-weight:800;
+    font-family:"Iowan Old Style",Georgia,serif; font-size:15px; letter-spacing:.5px}
+  .slot .word.locked{background:rgba(255,215,106,.08); border:1px solid rgba(255,215,106,.25); color:var(--gold)}
+  input.word{background:#100d22; color:#fff; border:2px solid var(--line); outline:none; text-transform:uppercase; width:120px}
+  input.word::placeholder{color:#4a456a; font-weight:600}
+  input.word:focus{border-color:#9b7bff; box-shadow:0 0 0 3px rgba(124,91,255,.25)}
+  input.word.ok{border-color:var(--good); color:var(--good); box-shadow:0 0 14px rgba(61,220,132,.4)}
+  input.word.err{border-color:var(--bad); color:var(--bad); animation:shake .35s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  /* ── controls ── */
+  .controls{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+  button{font-family:inherit; font-weight:800; border:none; border-radius:12px; padding:14px 20px; cursor:pointer; font-size:15px; transition:transform .08s, filter .15s}
+  button:active{transform:translateY(1px) scale(.99)}
+  .btn-summon{background:linear-gradient(135deg,#7c5bff,#b06bff); color:#fff; box-shadow:0 8px 30px rgba(124,91,255,.45); flex:1; min-width:180px}
+  .btn-summon:hover{filter:brightness(1.08)}
+  .btn-ghost{background:rgba(255,255,255,.06); color:#cfc9ee; border:1px solid var(--line)}
+  .btn-peek{background:rgba(255,215,106,.1); color:var(--gold); border:1px solid rgba(255,215,106,.3)}
+  /* ── grimoire ── */
+  .grimoire{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:16px; align-self:start}
+  .grimoire h3{margin:0 0 4px; font-size:14px; letter-spacing:.5px}
+  .grimoire .sub{color:var(--muted); font-size:12px; margin-bottom:12px}
+  .gmeter{height:8px; border-radius:999px; background:rgba(255,255,255,.06); overflow:hidden; margin-bottom:14px}
+  .gmeter>i{display:block; height:100%; background:linear-gradient(90deg,#7c5bff,#ffd76a)}
+  .ggrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(56px,1fr)); gap:8px; max-height:340px; overflow:auto}
+  .gcard{aspect-ratio:5/7; border-radius:8px; border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer; background:#0d0a1c}
+  .gcard.mastered{border-color:var(--gold); box-shadow:0 0 10px rgba(255,215,106,.4)}
+  .gcard .glabel{position:absolute; left:0; right:0; bottom:0; font-size:7px; padding:3px; text-align:center; background:rgba(0,0,0,.55); font-weight:700; line-height:1.05}
+  .gcard .gm{position:absolute; top:2px; right:3px; font-size:8px}
+  /* ── overlay summon ── */
+  .overlay{position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 45%, rgba(40,20,80,.85), rgba(5,4,12,.95)); backdrop-filter:blur(6px)}
+  .overlay.show{display:flex}
+  .summoned{text-align:center; animation:rise .6s cubic-bezier(.2,1.3,.4,1)}
+  @keyframes rise{0%{transform:scale(.4) translateY(40px); opacity:0}100%{transform:scale(1) translateY(0); opacity:1}}
+  .bigcard{width:240px; height:336px; border-radius:20px; margin:0 auto 18px; position:relative; overflow:hidden;
+    border:3px solid var(--cc,#7c5bff); box-shadow:0 0 60px var(--cc,#7c5bff), inset 0 0 40px rgba(0,0,0,.5);
+    background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(0,0,0,.4))}
+  .bigcard .art{position:absolute; inset:0}
+  .bigcard .nm{position:absolute; left:12px; right:12px; bottom:14px; font-weight:800; font-size:18px; text-shadow:0 2px 8px #000}
+  .bigcard .tl{position:absolute; left:12px; bottom:42px; font-size:11px; color:#fff; opacity:.8; font-weight:700}
+  .bigcard .tr{position:absolute; top:10px; right:12px; font-size:10px; font-weight:800; letter-spacing:1px; color:var(--gold); text-transform:uppercase; background:rgba(0,0,0,.4); padding:3px 7px; border-radius:6px}
+  .summoned h1{font-size:26px; margin:6px 0; text-shadow:0 0 20px var(--glow)}
+  .summoned .xp{color:var(--gold); font-weight:800; font-size:16px; margin-bottom:4px}
+  .summoned .inc{color:var(--rune); font-family:Georgia,serif; letter-spacing:1px; margin:8px 0 18px; font-size:14px}
+  .sparks{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+  .spark{position:absolute; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px var(--gold)}
+  /* loading / toast */
+  #loading{position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; z-index:80; background:var(--bg); text-align:center; padding:20px}
+  .spin{width:46px; height:46px; border-radius:50%; border:4px solid rgba(150,110,255,.2); border-top-color:#b89bff; animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(80px); z-index:70;
+    background:#1a1535; border:1px solid var(--line); padding:12px 18px; border-radius:12px; font-weight:700; opacity:0; transition:.3s}
+  .toast.show{transform:translateX(-50%) translateY(0); opacity:1}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="o">🔮</span> Incantation&nbsp;Hero</div>
+  <div class="stats">
+    <label class="chip"><small>Realm</small>
+      <select id="realm"></select>
+    </label>
+    <div class="chip">🔥 <span id="streak">0</span><small>streak</small></div>
+    <div class="chip">⭐ <span id="level">1</span><small>lvl</small></div>
+    <div class="chip">✦ <span id="xp">0</span><small>xp</small></div>
+    <div class="chip mana" id="mana" title="Mana — a wrong summon costs one"></div>
+    <button class="btn-ghost" id="soundbtn" style="padding:6px 10px;font-size:12px">🔊</button>
+  </div>
+</header>
+
+<main id="game" class="hidden">
+  <div class="progressbar"><i id="lessonbar"></i></div>
+
+  <section class="altar" id="altar">
+    <div class="rankline">
+      <span class="rankbadge" id="rankbadge">Apprentice</span>
+      <span class="rankhint" id="rankhint">Fill the missing word — read it off the flash card.</span>
+    </div>
+
+    <div class="flash">
+      <div class="cardface" id="cardface" style="--cc:#7c5bff">
+        <div class="art" id="faceart"></div>
+        <div class="typ" id="facetyp"></div>
+        <div class="tier" id="facetier"></div>
+        <div class="name" id="facename"></div>
+      </div>
+      <div class="target-meta">
+        <h2 id="t-display">—</h2>
+        <div class="ns" id="t-name"></div>
+        <div class="desc" id="t-desc"></div>
+        <div class="tags" id="t-tags"></div>
+      </div>
+    </div>
+
+    <div class="reference" id="reference">
+      <div class="lbl">The Incantation <span style="opacity:.6">— 7 words summon this card</span></div>
+      <div class="studytag hidden" id="studytag"></div>
+      <div class="refwords" id="refwords"></div>
+    </div>
+
+    <div class="spellbar">
+      <div class="lbl">Speak it — complete the incantation to summon</div>
+      <div class="slots" id="slots"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-summon" id="summon">⚡ Summon</button>
+      <button class="btn-peek" id="peek">👁 Peek</button>
+      <button class="btn-ghost" id="skip">Skip ↦</button>
+    </div>
+  </section>
+
+  <aside class="grimoire">
+    <h3>📖 Your Grimoire</h3>
+    <div class="sub" id="gsub">0 summoned</div>
+    <div class="gmeter"><i id="gmeter"></i></div>
+    <div class="ggrid" id="ggrid"></div>
+  </aside>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="summoned">
+    <div class="bigcard" id="bigcard" style="--cc:#7c5bff">
+      <div class="art" id="bigart"></div>
+      <div class="tr" id="bigtier"></div>
+      <div class="tl" id="bigtl"></div>
+      <div class="nm" id="bignm"></div>
+    </div>
+    <div class="xp" id="gainxp">+0 XP</div>
+    <h1 id="summontitle">Summoned!</h1>
+    <div class="inc" id="summoninc"></div>
+    <button class="btn-summon" id="continue" style="min-width:220px">Continue →</button>
+    <div class="sparks" id="sparks"></div>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="spin"></div>
+  <div style="font-weight:800; font-size:18px">Drawing the registry from the aether…</div>
+  <div style="color:var(--muted); font-size:13px" id="loadmsg">fetching live agents from GitHub</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================================
+   INCANTATION HERO  —  a Duolingo-style trainer for RAR card incantations.
+   The seed<->words math is a byte-exact port of rapp_sdk.py (validated against
+   SDK test vectors). Seeds are 64-bit, so everything uses BigInt and we
+   string-wrap "_seed" in the raw JSON before parsing to avoid float corruption.
+   ========================================================================== */
+
+// ── The protocol word list (1024 words). Injected verbatim from rapp_sdk.py. ──
+const MNEMONIC_WORDS = "FORGE ANVIL BLADE RUNE SHARD SMELT TEMPER WELD CHISEL BRAND MOLD CAST STAMP ETCH CARVE BIND FUSE ALLOY INGOT RIVET CLASP THORN BARB SPIKE PRONG EDGE HONE GRIND QUENCH SEAR HAMMER STOKE FIRE FROST STORM TIDE QUAKE GUST BOLT SURGE BLAZE EMBER PYRE ASH SMOKE SPARK FLARE FLASH FLOOD GALE DRIFT MIST HAZE VOID FLUX PULSE WAVE SHOCK BURST CRACK ROAR HOWL ECHO BOOM THUNDER VENOM BLIGHT SCORCH SINGE CHAR WITHER ERODE CORRODE DISSOLVE OAK PINE MOSS FERN ROOT VINE BLOOM SEED GROVE GLEN VALE CRAG PEAK RIDGE GORGE CLIFF SHORE REEF DUNE MARSH CAVE LAIR DEN NEST HIVE BURROW STONE IRON STEEL GOLD JADE ONYX RUBY OPAL AMBER PEARL CORAL QUARTZ OBSIDIAN FLINT GRANITE BASALT COBALT CHROME BRONZE COPPER NICKEL RELIC TOTEM SIGIL GLYPH WARD CHARM BANE DOOM FATE OMEN ORACLE SAGE SEER MAGE DRUID SHAMAN WRAITH SHADE PHANTOM SPECTER GOLEM TITAN DRAKE WYRM GRYPHON SPHINX HYDRA CHIMERA SCROLL TOME CODEX LORE MYTH FABLE SAGA EPIC VERSE CHANT HYMN DIRGE OATH CREED VOW AURA MANA ETHER PRISM NEXUS VORTEX RIFT WARP BREACH PORTAL GATE VAULT SHRINE ALTAR CRYPT SPIRE STRIKE SLASH THRUST PARRY GUARD SHIELD HELM LANCE MACE PIKE STAFF WAND DAGGER BOW ARROW QUIVER ARMOR PLATE GAUNTLET VISOR CLOAK CAPE MANTLE AEGIS BULWARK RAMPART BASTION CITADEL KEEP TOWER FORT RALLY CHARGE SIEGE FLANK AMBUSH ROUT VALOR MIGHT FURY WRATH RAGE SPITE MALICE GRUDGE HAVOC CHAOS DASH LEAP SPRINT LUNGE DIVE SOAR GLIDE PROWL STALK CREEP SWIFT FLEET BRISK RAPID SPIN WHIRL TWIST COIL SPIRAL ORBIT ARC CURVE BEND LOOP DAWN DUSK NOON NIGHT SHADOW GLEAM GLOW SHINE BEAM RAY HALO LUSTER MURK GLOOM DREAD FELL GRIM STARK BLEAK PALE ASHEN DIRE GRAVE SOMBER EBON ABYSS SHRIEK WAIL RUMBLE HISS GROWL SNARL BARK BELLOW DRONE CHIME TOLL KNELL CLANG CLASH SNAP THUD RING PEAL GONG HORN DRUM FLUTE LYRE PIPE BOLD KEEN FIERCE STERN VAST DEEP GRAND PRIME NOBLE ROYAL SACRED ANCIENT PRIMAL ELDER PURE VIVID SHARP BRIGHT DARK WILD CALM STILL SILENT STRONG PROUD BRAVE WISE JUST RAW DENSE SOLID WHOLE CORE APEX ZENITH NADIR CUSP BRINK VERGE CREST STAR MOON SUN COMET NOVA SOLAR LUNAR ASTRAL COSMIC NEBULA QUASAR PULSAR ECLIPSE AURORA CORONA PHASE WANE WAX WOLF HAWK EAGLE RAVEN SERPENT VIPER COBRA FALCON STAG BEAR LION TIGER LYNX PANTHER CONDOR OSPREY CRANE HERON OWL CROW BULL BOAR RAM HORSE MARE STALLION AX ORB AWE OAT EEL URN ELK ELM ION IRE ORE AIM ZAP JAB JAW JET JOT JAG HEX HEW HUE HUM DIN DUB DYE FIN FIG FOG FUR GAP GEM GNU SOUL MIND WILL FORCE POWER CRAFT SKILL GRACE POISE NERVE GRIT METTLE VIGOR ZEAL VERVE PLUCK GUILE CUNNING WILE LURE TRAP SNARE BAIT DECOY RUSE FEINT GAMBIT PLOY MESA TARN FORD PASS BLUFF KNOLL MOOR HEATH STEPPE TUNDRA DELTA BASIN PLATEAU FJORD ISLE ATOLL STRAIT CHANNEL HARBOR COVE BAY GULF SOUND CREEK BROOK RAPIDS FALLS CASCADE ARCH DOME PILLAR COLUMN BRIDGE WALL MOAT RAMP LEDGE STEP STAIR HALL NAVE ALCOVE NICHE SILL TRUSS BRACE STRUT JOIST FRAME PLINTH DAIS THRONE QUEST HUNT TRIAL ORDEAL RITE RITUAL PACT BOND PLEDGE DECREE EDICT MANDATE LAW RULE REIGN CROWN SCEPTER BANNER EMBLEM BADGE MARK SEAL TOKEN GUILD CLAN TRIBE ORDER SECT COVEN LEGION HORDE SWARM PACK FLOCK BROOD CLUTCH CRUX JINX GLINT DINT STINT KNIT SLIT SPLIT WHIT CLEFT DEFT HEFT LEFT THEFT WEFT BEREFT SHAFT GRAFT RAFT DRAFT TUFT LOFT CROFT DROIT BRUNT BLUNT STUNT RUNT GRUNT FRONT FONT HAUNT GAUNT FLAUNT JAUNT TAUNT SALT MALT HALT JOLT COLT MOLT SMOLT QUALM BALM PSALM FARM HARM ALARM DISARM FOREARM PLUME FUME LOOM ZOOM GROOM BROOM VROOM SCARCE TERSE MORSE COURSE SOURCE NORSE REMORSE WRENCH CLENCH STENCH TRENCH DRENCH FRENCH BENCH TORCH PORCH MARCH LARCH STARCH SEARCH PERCH BIRCH CHURCH THATCH CATCH MATCH BATCH HATCH LATCH PATCH WATCH SCRATCH SNATCH HEDGE WEDGE DREDGE SLEDGE FRIDGE DANCE TRANCE GLANCE STANCE PRANCE CHANCE ADVANCE ENHANCE BLISS MISS KISS DISMISS AMISS REMISS WHISK DISK RISK FRISK TUSK MUSK RUSK HUSK CROAK SOAK STROKE SPOKE BROKE WOKE INVOKE EVOKE PROVOKE VEIN CHAIN PLAIN STRAIN GRAIN TRAIN BRAIN DOMAIN TERRAIN REMAIN TREAD SPREAD THREAD SHRED BRED SLED STEAD INSTEAD COST LOST HOST GHOST MOST POST ROAST TOAST COAST BOAST STREAM DREAM TEAM CREAM SCHEME THEME SUPREME EXTREME SWAY FRAY PRAY STRAY ARRAY DECAY RELAY CONVEY OBEY SURVEY BETRAY THROW FLOW SNOW GROW KNOW BELOW HOLLOW CLIMB RHYME SLIME THYME SUBLIME PARADIGM PROWESS DURESS FORTRESS MISTRESS COMPASS BYPASS SURPASS AMASS CRIMSON LINDEN MAIDEN WARDEN GOLDEN MOLTEN FROZEN CHOSEN WOVEN SCYTHE CRUCIBLE TORRENT TEMPEST MAELSTROM CINDER INFERNO TYPHOON CYCLONE GLACIER ICECAP PERMAFROST MONSOON SOLSTICE EQUINOX MERIDIAN TWILIGHT MIDNIGHT DAYBREAK SENTINEL WATCHER HUNTER RANGER SCOUT TRACKER SEEKER FINDER KEEPER BINDER ARBITER HERALD ENVOY REGENT PREFECT CONSUL MARSHAL VASSAL SQUIRE KNIGHT PALADIN CHAMPION PARAGON MONARCH SOVEREIGN OVERLORD WARLORD CHIEFTAIN PATRIARCH MATRIARCH PROPHET MYSTIC HERMIT ASCETIC NOMAD PILGRIM WANDERER EXILE OUTCAST ROGUE REBEL VAGRANT DRIFTER MARAUDER BRIGAND CORSAIR BUCCANEER RAIDER REAVER SLAYER BERSERKER GLADIATOR CENTURION LEGIONNAIRE TEMPLAR CRUSADER INQUISITOR ZEALOT HARBINGER AUGUR PORTENT PRESAGE AUGURY PROPHECY DIVINATION REVELATION EPIPHANY REMNANT VESTIGE ARTIFACT FRAGMENT SPLINTER SLIVER MORSEL CRUMB PARTICLE MOTE FILAMENT STRAND FIBER SINEW TENDON LIGAMENT MARROW ICHOR ELIXIR POTION TONIC SALVE REMEDY ANTIDOTE CURE PANACEA CATALYST REAGENT COMPOUND TINCTURE DISTILL INFUSE IMBUE ENCHANT CONJURE SUMMON BANISH DISPEL REVOKE ANNUL NEGATE NULLIFY SUNDER CLEAVE REND SHATTER FRACTURE RUPTURE PIERCE IMPALE SKEWER GORE MAIM RAVAGE DEVASTATE OBLITERATE ANNIHILATE ERADICATE PURGE EXPUNGE EFFACE EXTINGUISH QUELL SUBDUE VANQUISH CONQUER PREVAIL TRIUMPH ASCEND TRANSCEND EVOLVE AWAKEN ARISE EMERGE MANIFEST EMBODY HARNESS WIELD MASTER COMMAND PROCLAIM SANCTIFY CONSECRATE ANOINT BESTOW ENDOW BEQUEST LEGACY HEIRLOOM COVENANT COMPACT TREATY ACCORD ALLIANCE FEDERATION DOMINION REALM KINGDOM EMPIRE DYNASTY EPOCH AEON CYCLE HELIX MATRIX LATTICE TAPESTRY MOSAIC CIPHER ENIGMA RIDDLE PUZZLE LABYRINTH MAZE CAULDRON CHALICE GOBLET GRAIL TRIDENT MAUL FLAIL HALBERD GLAIVE RAPIER SABRE KATANA MACHETE SCIMITAR CUTLASS BROADSWORD GREATSWORD LONGBOW CROSSBOW BALLISTA CATAPULT TREBUCHET MIRAGE ILLUSION REVENANT LICH BANSHEE GHOUL VAMPIRE WEREWOLF GARGOYLE BASILISK KRAKEN LEVIATHAN BEHEMOTH COLOSSUS JUGGERNAUT MONOLITH OBELISK ZIGGURAT MINARET PAGODA DOLMEN BARROW CATACOMB DUNGEON PARAPET TURRET BATTLEMENT DRAWBRIDGE PORTCULLIS BARBICAN PALISADE CONDUIT PYLON TORQUE RATCHET LODESTONE KEYSTONE CAPSTONE BEDROCK SEQUOIA REDWOOD CYPRESS HEMLOCK WILLOW ASPEN HICKORY JUNIPER MAGNOLIA HAWTHORN SAFFRON MYRRH MANGROVE ORCHID THISTLE POPPY HEATHER JASMINE VECTOR SCALAR TENSOR FULCRUM PIVOT CRESCENT PINNACLE VERTEX".trim().split(/\s+/);
+const BITS = 10n, MASK = 1023n;
+const W2I = new Map(MNEMONIC_WORDS.map((w, i) => [w, i]));
+if (MNEMONIC_WORDS.length !== 1024) console.warn("wordlist length", MNEMONIC_WORDS.length);
+
+// 7 words = 70 bits, little-endian base-1024 — same as SDK seed_to_words.
+function seedToWords(seed /* BigInt */) {
+  let r = seed, out = [];
+  for (let i = 0; i < 7; i++) { out.push(MNEMONIC_WORDS[Number(r & MASK)]); r >>= BITS; }
+  return out;
+}
+function wordsToSeed(words /* array of 7 */) {
+  let seed = 0n;
+  words.forEach((w, i) => { seed |= BigInt(W2I.get(w.toUpperCase())) << (BITS * BigInt(i)); });
+  return seed;
+}
+
+// ── Category palette (authentic colors from the store, extended) ──
+const CAT_COLORS = {
+  core:{c:'#ffd700'}, integrations:{c:'#42a5f5'}, productivity:{c:'#4caf50'},
+  devtools:{c:'#f44336'}, pipeline:{c:'#ab47bc'}, b2b_sales:{c:'#29b6f6'},
+  b2c_sales:{c:'#ec407a'}, healthcare:{c:'#26c6da'}, financial_services:{c:'#66bb6a'},
+  human_resources:{c:'#ffa726'}, manufacturing:{c:'#8d6e63'}, retail_cpg:{c:'#ef5350'},
+  it_management:{c:'#5c6bc0'}, professional_services:{c:'#26a69a'},
+  software_digital_products:{c:'#7e57c2'}, energy:{c:'#fdd835'},
+  federal_government:{c:'#90a4ae'}, slg_government:{c:'#78909c'}, general:{c:'#90a4ae'}
+};
+function catColor(cat){
+  if (CAT_COLORS[cat]) return CAT_COLORS[cat].c;
+  // deterministic hue for any unknown category
+  let h=0; for(const ch of (cat||'general')) h=(h*31+ch.charCodeAt(0))%360;
+  return `hsl(${h} 65% 60%)`;
+}
+const TIER_RARITY = {official:'Legendary', verified:'Evolved', community:'Base', experimental:'Seed'};
+
+// ── seeded PRNG for procedural sigils (mulberry32, matches store.html) ──
+function seedHash(str){ let h=0; for(let i=0;i<str.length;i++) h=((h<<5)-h+str.charCodeAt(i))|0; return h>>>0; }
+function mulberry32(a){ return function(){ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function sigilSVG(name, color){
+  const rng = mulberry32(seedHash(name)); const r=()=>rng();
+  const parts=[`<defs><radialGradient id="g" cx="50%" cy="35%"><stop offset="0%" stop-color="${color}" stop-opacity=".55"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></radialGradient></defs>`];
+  parts.push(`<rect width="100" height="140" fill="#0c0a1a"/>`);
+  parts.push(`<rect width="100" height="140" fill="url(#g)"/>`);
+  const cx=50, cy=58, n=3+Math.floor(r()*4);
+  for(let i=0;i<n;i++){
+    const rad=10+r()*30, rot=r()*360, sides=3+Math.floor(r()*5), op=(0.15+r()*0.45).toFixed(2);
+    let pts='';
+    for(let s=0;s<sides;s++){ const a=rot+s*360/sides; pts+=`${(cx+rad*Math.cos(a*Math.PI/180)).toFixed(1)},${(cy+rad*Math.sin(a*Math.PI/180)).toFixed(1)} `; }
+    parts.push(`<polygon points="${pts}" fill="none" stroke="${color}" stroke-width="${(0.7+r()*1.6).toFixed(1)}" opacity="${op}"/>`);
+  }
+  for(let i=0;i<14;i++) parts.push(`<circle cx="${(r()*100).toFixed(1)}" cy="${(r()*140).toFixed(1)}" r="${(0.4+r()*1.4).toFixed(1)}" fill="${color}" opacity="${(0.2+r()*0.5).toFixed(2)}"/>`);
+  parts.push(`<circle cx="${cx}" cy="${cy}" r="3" fill="${color}"/>`);
+  return `<svg viewBox="0 0 100 140" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">${parts.join('')}</svg>`;
+}
+
+// ── persistent state ──
+const SAVE_KEY = 'incantation_hero_v1';
+let S = loadState();
+function loadState(){
+  try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); if(s) return s; }catch(e){}
+  return { xp:0, level:1, streak:0, best:0, mana:5, sound:true, realm:'starter', cards:{} /* name -> {rank,summons} */ , summoned:[] };
+}
+function save(){ localStorage.setItem(SAVE_KEY, JSON.stringify(S)); }
+
+// ── registry data ──
+const RAW_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
+let ALL = [];          // every agent {name, display, desc, cat, tags, tier, seed(BigInt), words[]}
+let POOL = [];         // current realm's agents
+let current = null;    // active question
+let lessonCount = 0, LESSON = 8;
+const RANKS = ['—','Apprentice','Adept','Conjurer','Mage','Archmage','Sage','Grand Summoner'];
+
+async function boot(){
+  let text;
+  try{
+    const res = await fetch(RAW_URL, {cache:'no-store'});
+    if(!res.ok) throw new Error(res.status);
+    text = await res.text();
+  }catch(e){
+    // fallback for local repo serving
+    try{ const r2=await fetch('./registry.json',{cache:'no-store'}); text=await r2.text(); }
+    catch(e2){ document.getElementById('loadmsg').textContent='Could not reach the registry. Check your connection and reload.'; return; }
+  }
+  // CRITICAL: wrap 64-bit _seed as a string before JSON.parse, or doubles corrupt it.
+  text = text.replace(/"_seed":\s*(\d+)/g, '"_seed":"$1"');
+  const data = JSON.parse(text);
+  const agents = data.agents || [];
+  ALL = agents.filter(a=>a._seed).map(a=>{
+    const seed = BigInt(a._seed);
+    return {
+      name:a.name, display:a.display_name||a.name.split('/').pop(),
+      desc:a.description||'', cat:a.category||'general',
+      tags:(a.tags||[]).slice(0,4), tier:a.quality_tier||'community',
+      seed, words:seedToWords(seed)
+    };
+  });
+  buildRealms();
+  setRealm(S.realm || 'starter');
+  document.getElementById('loading').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  renderMeta(); renderGrimoire();
+  nextCard();
+}
+
+// publisher/category priority for the curated starter path
+const PUB_PRIO = {'@rapp':0,'@kody':1,'@borg':2,'@discreetRappers':3,'@wildhaven':4};
+const TIER_PRIO = {official:0, verified:1, community:2, experimental:3};
+function pub(name){ return name.split('/')[0]; }
+
+function buildRealms(){
+  const cats = [...new Set(ALL.map(a=>a.cat))].sort();
+  const sel = document.getElementById('realm');
+  const opts = [['starter','✦ Starter Path'], ['all','All Agents ('+ALL.length+')']]
+    .concat(cats.map(c=>['cat:'+c, prettyCat(c)+' ('+ALL.filter(a=>a.cat===c).length+')']));
+  sel.innerHTML = opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+  sel.value = S.realm || 'starter';
+  sel.onchange = ()=>{ setRealm(sel.value); lessonCount=0; nextCard(); };
+}
+function prettyCat(c){ return c.replace(/_/g,' ').replace(/\b\w/g,m=>m.toUpperCase()); }
+
+function setRealm(r){
+  S.realm = r; save();
+  if(r==='all') POOL = ALL.slice();
+  else if(r.startsWith('cat:')) POOL = ALL.filter(a=>a.cat===r.slice(4));
+  else { // starter: recognizable infra first, dedupe display names, cap ~48
+    const seen=new Set();
+    POOL = ALL.slice().sort((a,b)=>
+      (PUB_PRIO[pub(a.name)]??9)-(PUB_PRIO[pub(b.name)]??9) ||
+      (TIER_PRIO[a.tier]??9)-(TIER_PRIO[b.tier]??9) ||
+      a.display.length-b.display.length
+    ).filter(a=>{ if(seen.has(a.display)) return false; seen.add(a.display); return true; }).slice(0,48);
+  }
+  document.getElementById('realm').value = r;
+}
+
+// ── pick next card: favor low mastery / few summons, occasional review ──
+function cardState(a){ return S.cards[a.name] || (S.cards[a.name]={rank:1, summons:0}); }
+function pickNext(){
+  const pool = POOL.filter(a=>a!==(current&&current.agent));
+  if(!pool.length) return POOL[0];
+  // 25% review a mastered card at high rank, else weakest card
+  const mastered = pool.filter(a=>cardState(a).rank>=7);
+  if(mastered.length && Math.random()<0.25) return mastered[Math.floor(Math.random()*mastered.length)];
+  return pool.slice().sort((a,b)=> cardState(a).rank-cardState(b).rank || cardState(a).summons-cardState(b).summons || Math.random()-0.5)[0];
+}
+
+function nextCard(){
+  const agent = pickNext();
+  const cs = cardState(agent);
+  const rank = Math.min(cs.rank, 7);          // 1..7 == number of blanks
+  // choose which slot indices are blank
+  const idxs=[0,1,2,3,4,5,6]; for(let i=idxs.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[idxs[i],idxs[j]]=[idxs[j],idxs[i]];}
+  const blanks = new Set(idxs.slice(0,rank));
+  const memory = rank>=5;                       // hide reference -> recall from memory
+  current = {agent, rank, blanks, memory, peeked:false, revealed:!memory, solved:false};
+  renderCard();
+}
+
+function renderCard(){
+  const {agent, rank, blanks, memory} = current;
+  const color = catColor(agent.cat);
+  document.documentElement.style.setProperty('--cc', color);
+  // flash card
+  const cf = document.getElementById('cardface'); cf.style.setProperty('--cc', color);
+  document.getElementById('faceart').innerHTML = sigilSVG(agent.name, color);
+  document.getElementById('facetyp').textContent = prettyCat(agent.cat);
+  document.getElementById('facetier').textContent = TIER_RARITY[agent.tier]||'Base';
+  document.getElementById('facename').textContent = agent.display;
+  // meta
+  document.getElementById('t-display').textContent = agent.display;
+  document.getElementById('t-name').textContent = agent.name;
+  document.getElementById('t-desc').textContent = agent.desc;
+  document.getElementById('t-tags').innerHTML = agent.tags.map(t=>`<span>${t}</span>`).join('');
+  // rank badge
+  document.getElementById('rankbadge').textContent = RANKS[rank];
+  document.getElementById('rankhint').textContent = memory
+    ? `Recall ${rank} of 7 from memory — the incantation is veiled.`
+    : `Complete ${rank} blank${rank>1?'s':''} — read ${rank>1?'them':'it'} off the flash card.`;
+  // reference incantation (study/hint)
+  const ref = document.getElementById('reference');
+  ref.classList.toggle('memory', memory);
+  ref.classList.toggle('revealed', !memory);
+  document.getElementById('studytag').classList.toggle('hidden', !memory);
+  if(memory){ document.getElementById('studytag').textContent='👁 veiled — tap Peek'; }
+  document.getElementById('refwords').innerHTML = agent.words.map((w,i)=>
+    `<b class="${blanks.has(i)&&!memory?'hole':''}">${blanks.has(i)&&!memory?'•••':w}</b>`).join('');
+  // slots
+  const slots = document.getElementById('slots'); slots.innerHTML='';
+  agent.words.forEach((w,i)=>{
+    const wrap=document.createElement('div'); wrap.className='slot';
+    const idx=document.createElement('div'); idx.className='idx'; idx.textContent=(i+1); wrap.appendChild(idx);
+    if(blanks.has(i)){
+      const inp=document.createElement('input'); inp.className='word'; inp.setAttribute('list','wordbank');
+      inp.placeholder='____'; inp.autocapitalize='characters'; inp.autocomplete='off'; inp.spellcheck=false;
+      inp.dataset.answer=w; inp.dataset.i=i;
+      inp.addEventListener('input',()=>onType(inp));
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault(); trySummon();} });
+      wrap.appendChild(inp);
+    } else {
+      const d=document.createElement('div'); d.className='word locked'; d.textContent=w; wrap.appendChild(d);
+    }
+    slots.appendChild(wrap);
+  });
+  // focus first blank
+  const first = slots.querySelector('input.word'); if(first) setTimeout(()=>first.focus(),50);
+}
+
+function onType(inp){
+  const v=inp.value.trim().toUpperCase();
+  if(v===inp.dataset.answer){
+    inp.classList.add('ok'); inp.classList.remove('err');
+    // auto-advance to next empty blank
+    const inputs=[...document.querySelectorAll('#slots input.word')];
+    const next=inputs.find(x=>!x.classList.contains('ok'));
+    if(next) next.focus(); else trySummon();
+  } else {
+    inp.classList.remove('ok');
+  }
+}
+
+function trySummon(){
+  if(!current || current.solved) return;
+  const inputs=[...document.querySelectorAll('#slots input.word')];
+  let allOk=true;
+  inputs.forEach(inp=>{
+    const ok=inp.value.trim().toUpperCase()===inp.dataset.answer;
+    if(!ok){ allOk=false; inp.classList.add('err'); inp.classList.remove('ok'); setTimeout(()=>inp.classList.remove('err'),400); }
+  });
+  if(!allOk){ wrongSummon(); return; }
+  // canonical proof: the assembled 7 words must hash back to the agent's seed
+  const words = current.agent.words.map((w,i)=> w); // all correct now
+  if(wordsToSeed(words) !== current.agent.seed){ toast('Seed mismatch — that shouldn’t happen!'); return; }
+  successSummon();
+}
+
+function wrongSummon(){
+  S.streak=0; S.mana=Math.max(0,S.mana-1); save(); renderMeta();
+  beep(160,0.12,'sawtooth');
+  if(S.mana<=0){ toast('Out of mana — channeling more…'); setTimeout(()=>{S.mana=5; save(); renderMeta();}, 900); }
+  else toast('Not quite — check the flash card.');
+}
+
+function successSummon(){
+  current.solved=true;
+  const {agent, rank, peeked} = current;
+  const cs=cardState(agent); cs.summons++;
+  const leveledCard = rank>cs.rank-0 ? false : false;
+  cs.rank = Math.min(rank+1, 7);                 // this card gets harder next time
+  if(!S.summoned.includes(agent.name)) S.summoned.push(agent.name);
+  // xp: harder ranks + streak, minus peek
+  let gain = 10 + (rank-1)*6 + Math.min(S.streak,10)*2 - (peeked?6:0);
+  gain=Math.max(5,gain);
+  S.xp+=gain; S.streak++; S.best=Math.max(S.best,S.streak);
+  const need=lvlNeed(S.level);
+  let levelUp=false;
+  while(S.xp>=need){ S.level++; levelUp=true; }
+  S.mana=Math.min(5,S.mana+ (S.streak%5===0?1:0));
+  save();
+  showSummon(agent, gain, levelUp);
+  renderMeta(); renderGrimoire();
+}
+function lvlNeed(l){ return l*120; } // cumulative-ish threshold; simple ramp
+
+// ── summon overlay + fx ──
+function showSummon(agent, gain, levelUp){
+  const color=catColor(agent.cat);
+  const bc=document.getElementById('bigcard'); bc.style.setProperty('--cc',color);
+  document.getElementById('bigart').innerHTML=sigilSVG(agent.name,color);
+  document.getElementById('bigtier').textContent=TIER_RARITY[agent.tier]||'Base';
+  document.getElementById('bigtl').textContent=prettyCat(agent.cat);
+  document.getElementById('bignm').textContent=agent.display;
+  document.getElementById('gainxp').textContent='+'+gain+' XP'+(levelUp?'   🎉 LEVEL UP!':'');
+  document.getElementById('summontitle').textContent = (current.rank>=7?'Mastered ✦ ':'Summoned! ')+agent.display;
+  document.getElementById('summoninc').textContent = '“'+agent.words.join(' ')+'”';
+  const ov=document.getElementById('overlay'); ov.classList.add('show');
+  spawnSparks(color); chime();
+}
+function spawnSparks(color){
+  const box=document.getElementById('sparks'); box.innerHTML='';
+  for(let i=0;i<28;i++){
+    const s=document.createElement('div'); s.className='spark';
+    s.style.background=color; s.style.boxShadow='0 0 8px '+color;
+    s.style.left='50%'; s.style.top='42%';
+    const ang=Math.random()*Math.PI*2, dist=80+Math.random()*220, dur=600+Math.random()*700;
+    box.appendChild(s);
+    s.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},
+      {transform:`translate(${Math.cos(ang)*dist-50}%,${Math.sin(ang)*dist-50}%) scale(0)`,opacity:0}],
+      {duration:dur, easing:'cubic-bezier(.2,.8,.3,1)'});
+  }
+}
+
+document.getElementById('continue').onclick=()=>{
+  document.getElementById('overlay').classList.remove('show');
+  lessonCount++;
+  if(lessonCount>=LESSON){ lessonCount=0; toast('🏆 Lesson complete! +20 XP'); S.xp+=20; save(); renderMeta(); }
+  document.getElementById('lessonbar').style.width=(lessonCount/LESSON*100)+'%';
+  nextCard();
+};
+
+// ── peek / skip ──
+document.getElementById('peek').onclick=()=>{
+  current.peeked=true;
+  const ref=document.getElementById('reference');
+  if(current.memory){ ref.classList.add('revealed'); setTimeout(()=>ref.classList.remove('revealed'),1600); }
+  else { ref.animate([{boxShadow:'0 0 0 0 rgba(255,215,106,.6)'},{boxShadow:'0 0 0 8px rgba(255,215,106,0)'}],{duration:600}); }
+  toast('👁 Peeked (small XP cost)');
+};
+document.getElementById('skip').onclick=()=>{ S.streak=0; save(); renderMeta(); nextCard(); };
+document.getElementById('summon').onclick=trySummon;
+
+// ── meta / grimoire render ──
+function renderMeta(){
+  document.getElementById('streak').textContent=S.streak;
+  document.getElementById('level').textContent=S.level;
+  document.getElementById('xp').textContent=S.xp;
+  const m=document.getElementById('mana'); m.innerHTML='';
+  for(let i=0;i<5;i++){ const o=document.createElement('div'); o.className='o'+(i<S.mana?'':' empty'); m.appendChild(o); }
+  document.getElementById('soundbtn').textContent=S.sound?'🔊':'🔇';
+}
+function renderGrimoire(){
+  const total=ALL.length, got=S.summoned.length;
+  document.getElementById('gsub').textContent=`${got} / ${total} agents summoned`;
+  document.getElementById('gmeter').style.width=(got/total*100)+'%';
+  const grid=document.getElementById('ggrid'); grid.innerHTML='';
+  // most recent first
+  S.summoned.slice().reverse().slice(0,60).forEach(name=>{
+    const a=ALL.find(x=>x.name===name); if(!a) return;
+    const cs=S.cards[name]||{rank:1};
+    const d=document.createElement('div'); d.className='gcard'+(cs.rank>=7?' mastered':'');
+    d.title=a.display+' — '+a.words.join(' ');
+    d.innerHTML=sigilSVG(a.name,catColor(a.cat))
+      +`<div class="gm">${cs.rank>=7?'★':''}</div>`
+      +`<div class="glabel">${a.display}</div>`;
+    d.onclick=()=>toast(a.display+': '+a.words.join(' '));
+    grid.appendChild(d);
+  });
+}
+
+// ── sound (tiny WebAudio, no assets) ──
+let AC; function ctx(){ return AC||(AC=new (window.AudioContext||window.webkitAudioContext)()); }
+function beep(freq,dur,type){ if(!S.sound) return; try{ const c=ctx(); const o=c.createOscillator(),g=c.createGain();
+  o.type=type||'sine'; o.frequency.value=freq; o.connect(g); g.connect(c.destination);
+  g.gain.setValueAtTime(0.0001,c.currentTime); g.gain.exponentialRampToValueAtTime(0.18,c.currentTime+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+dur); o.start(); o.stop(c.currentTime+dur); }catch(e){} }
+function chime(){ if(!S.sound) return; [523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,0.25,'triangle'),i*80)); }
+document.getElementById('soundbtn').onclick=()=>{ S.sound=!S.sound; save(); renderMeta(); };
+
+// ── toast ──
+let toastT; function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1800); }
+
+// ── datalist for word autocomplete (helps spelling) ──
+const dl=document.createElement('datalist'); dl.id='wordbank';
+dl.innerHTML=MNEMONIC_WORDS.map(w=>`<option value="${w}">`).join('');
+document.body.appendChild(dl);
+
+// global Enter -> summon when not in overlay
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && document.getElementById('overlay').classList.contains('show')){ document.getElementById('continue').click(); }
+});
+
+boot();
+</script>
+</body>
+</html>

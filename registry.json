@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-25T01:44:09.379616+00:00",
+  "generated_at": "2026-05-25T01:48:24.355659+00:00",
   "stats": {
-    "total_agents": 201,
+    "total_agents": 180,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -4006,9 +4006,9 @@
       "_size_kb": 39.8,
       "_lines": 990,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-04-04T11:22:10-04:00",
+      "_first_commit_sha": "7796545310a6d62795971eafbef458344af8e88c",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_card": {
         "name": "Borg",
         "title": "The Assimilator",
@@ -4066,9 +4066,9 @@
       "_size_kb": 32.1,
       "_lines": 318,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:51:24-04:00",
+      "_first_commit_sha": "1ed07b4032fa0413056b942d0bb2fb2db973c7f3",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4130,9 +4130,9 @@
       "_size_kb": 7.9,
       "_lines": 236,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-06T20:58:31Z",
+      "_first_commit_sha": "80ac71026353983a176f9e148986b40ab8c13cc7",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4163,9 +4163,9 @@
       "_size_kb": 26.3,
       "_lines": 792,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-06T17:05:10Z",
+      "_first_commit_sha": "ca25f03cd8e8359ca3aa0f73d6b10e6aee4e7f4a",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4196,9 +4196,9 @@
       "_size_kb": 33.0,
       "_lines": 742,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-07T23:21:37Z",
+      "_first_commit_sha": "bb3d461c87f4bfe9eebe3a82b6bbcb362849a959",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4227,9 +4227,9 @@
       "_size_kb": 46.3,
       "_lines": 689,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-07T03:12:16Z",
+      "_first_commit_sha": "6b8c94cc7f9b4d681f0ad2b56a07fad217bff1ab",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4260,9 +4260,9 @@
       "_size_kb": 28.9,
       "_lines": 512,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-07T18:54:58Z",
+      "_first_commit_sha": "e451c7be93c853f20ed7e3ce927b26f88dd00ac1",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4296,9 +4296,9 @@
       "_size_kb": 149.5,
       "_lines": 3260,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-08T14:18:36-04:00",
+      "_first_commit_sha": "8d56aeefbe39e0ce82a9a8b3f548249afd86184e",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4367,9 +4367,9 @@
       "_size_kb": 28.6,
       "_lines": 723,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:51:24-04:00",
+      "_first_commit_sha": "1ed07b4032fa0413056b942d0bb2fb2db973c7f3",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4453,9 +4453,9 @@
       "_size_kb": 8.4,
       "_lines": 183,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:15:52-04:00",
+      "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4486,9 +4486,9 @@
       "_size_kb": 10.1,
       "_lines": 245,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-04T21:15:40Z",
+      "_first_commit_sha": "81784bb84806c7a0d1c4f2db5bd38cffe663d500",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4616,7 +4616,7 @@
       "_has_card": true,
       "_added_at": "2026-05-09T15:25:19-04:00",
       "_first_commit_sha": "74df455c5fc5eb8fb5ce77adefcb261763205866",
-      "_latest_commit_sha": "ed83bfa1eeda68d3e1e77bec0a3b8df8bd05b5db",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_card_sha256": "649aed31843034ff37b082ee2e26fdc04301a7998e42ecdd2ef50c26a945c8b9"
     },
     {
@@ -4682,9 +4682,9 @@
       "_size_kb": 43.7,
       "_lines": 957,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:15:52-04:00",
+      "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4712,7 +4712,7 @@
       "_has_card": true,
       "_added_at": "2026-04-04T22:27:48Z",
       "_first_commit_sha": "006f73e52274e5f67cfd43f50796001f8b6236c8",
-      "_latest_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_card_sha256": "c5b59fe293a5ba5ef68bbbb0ff91f4c86249cb250131f0280be3f8623741d1e5"
     },
     {
@@ -4741,9 +4741,9 @@
       "_size_kb": 36.5,
       "_lines": 944,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-17T02:49:15Z",
+      "_first_commit_sha": "c9e43878f5205df7ef1d076337726c3764814d12",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4770,9 +4770,9 @@
       "_size_kb": 10.8,
       "_lines": 255,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:15:52-04:00",
+      "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4804,7 +4804,7 @@
       "_has_card": true,
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_card_sha256": "f21ca0c391d0aad83e3d77f6b44df7b506a5ecf8f737080edc1145c94b2f364f"
     },
     {
@@ -4908,9 +4908,9 @@
       "_size_kb": 17.5,
       "_lines": 479,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-05T11:18:10-04:00",
+      "_first_commit_sha": "81a9d40b9855e556b1d28d6ca774888e89e36fd1",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4939,9 +4939,9 @@
       "_size_kb": 6.3,
       "_lines": 160,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-04T20:40:49Z",
+      "_first_commit_sha": "fc3887c822893d2ea66080c948155b1e37731e91",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4970,9 +4970,9 @@
       "_size_kb": 24.2,
       "_lines": 540,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-05T11:18:10-04:00",
+      "_first_commit_sha": "81a9d40b9855e556b1d28d6ca774888e89e36fd1",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5002,9 +5002,9 @@
       "_size_kb": 58.4,
       "_lines": 1382,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-03T16:15:52-04:00",
+      "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5037,9 +5037,9 @@
       "_size_kb": 7.0,
       "_lines": 175,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-04-04T21:14:50Z",
+      "_first_commit_sha": "6d9682d6da8128ae690078c2941643b0f81ae287",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5069,9 +5069,9 @@
       "_size_kb": 32.0,
       "_lines": 892,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-18T19:04:20-04:00",
+      "_first_commit_sha": "d2f4ef04825beb10c55243c80152a7ddc25af57a",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5105,7 +5105,7 @@
       "_has_card": true,
       "_added_at": "2026-05-03T14:51:56-04:00",
       "_first_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
-      "_latest_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_card_sha256": "00480d370a4a44f8c0b8d6e613171d4fcd12ccb6b348836e3a16f0c454acefb6"
     },
     {
@@ -5142,9 +5142,9 @@
       "_size_kb": 9.5,
       "_lines": 249,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-02T14:14:24-04:00",
+      "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5904,89 +5904,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/body_writer",
-      "version": "0.1.0",
-      "display_name": "Body Writer",
-      "description": "Writes the 3-5 sentence body of a Drop. Expands the hook, never restates. At least one concrete detail from key_facts.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "body"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/body_writer_agent.py",
-      "_sha256": "31f23ee7380e9c39db8fa20960b4ed4e7ea015f1f3f1b2fc54d69edb961173b9",
-      "_seed": 8250377806568236883,
-      "_size_kb": 4.4,
-      "_lines": 102,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "ab546da08fdcf91c8207759cbab1c3289224d3287851ec446e1193ef281b4ba0"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/book_factory",
-      "version": "0.1.0",
-      "display_name": "BookFactory (multi-file source)",
-      "description": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer) as a composite of 13 sibling agent.py files.",
-      "author": "rarbookworld",
-      "tags": [
-        "composite",
-        "creative-pipeline",
-        "twin-stack"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent",
-        "@rarbookworld/persona_writer",
-        "@rarbookworld/persona_editor",
-        "@rarbookworld/persona_ceo",
-        "@rarbookworld/persona_publisher",
-        "@rarbookworld/persona_reviewer"
-      ],
-      "delegates_to": [
-        "@rarbookworld/persona_writer",
-        "@rarbookworld/persona_editor",
-        "@rarbookworld/persona_ceo",
-        "@rarbookworld/persona_publisher",
-        "@rarbookworld/persona_reviewer"
-      ],
-      "example_call": {
-        "args": {
-          "source": "raw notes...",
-          "chapter_title": "Chapter 1"
-        }
-      },
-      "_file": "agents/@rarbookworld/book_factory_agent.py",
-      "_sha256": "8034a912940d4a93d3203690713f80bcbee297db25bc9469a810767a32696820",
-      "_seed": 11543063794842784636,
-      "_size_kb": 6.0,
-      "_lines": 157,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "2aef9c15c1e6ee1d453fadd1504af8b71c31cdf149dfa3a7e8f1c6884ae56dbf"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/bookfactory",
       "version": "0.3.0",
       "display_name": "BookFactory (converged singleton)",
@@ -6028,381 +5945,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/card_forger",
-      "version": "0.1.1",
-      "display_name": "Card Forger",
-      "description": "Mints a RAR-compatible card (name + impact/novelty/compoundability stats + ability + lore + art_seed) from a Drop. Every Drop is a collectible.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "card"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/card_forger_agent.py",
-      "_sha256": "d342bf5263705d0cf413e368665ffd7d62ea25918dbf9ef2f893693e1cb14e3c",
-      "_seed": 2629080946925906113,
-      "_size_kb": 4.9,
-      "_lines": 108,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
-      "_card_sha256": "5c7995371fe96f20d1ba97987c0cce44e40df2be1552d18d665ab08fb51b1f11"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/ceo_decision",
-      "version": "0.1.0",
-      "display_name": "CEO: Decision",
-      "description": "CEO specialist. Returns a one-line ship/edit/hold decision with the reasoning behind it.",
-      "author": "rarbookworld",
-      "tags": [
-        "ceo-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/ceo_decision_agent.py",
-      "_sha256": "50e4cf49c7fddff390c0096a361d9cc31a0c784418a51c5fc53cbc38bcbd11e6",
-      "_seed": 13401587927272925009,
-      "_size_kb": 3.8,
-      "_lines": 87,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "171adf9f11936e02c7aafb202d400322b5d2bbbfef7e8900e2e7053cf1af1604"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/ceo_risk",
-      "version": "0.1.0",
-      "display_name": "CEO: Partner Risk",
-      "description": "CEO specialist. Lists 1-3 partner-conversation risks that would actually matter in a real meeting.",
-      "author": "rarbookworld",
-      "tags": [
-        "ceo-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/ceo_risk_agent.py",
-      "_sha256": "67d499eedaa4218ec8422ad038e3c2fba7d5bb7739fc5fb4761f64ff77f06c9b",
-      "_seed": 5167354636872722257,
-      "_size_kb": 3.7,
-      "_lines": 87,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "3411574e0de0aa8ca5e25859edf5fa6c372eb303301b80af3e21707e55f23c53"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/channel_router",
-      "version": "0.1.0",
-      "display_name": "Channel Router",
-      "description": "Picks one Subrappter (r/builders, r/dreams, r/decisions, r/lessons, r/connections, etc.) for a Drop. Auto-classifies, no manual tagging.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "router"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/channel_router_agent.py",
-      "_sha256": "b2c36f35edfc78cfb04af1a94bd1886007449cfd71196b93bf6b43d749b42fd4",
-      "_seed": 7180516189167434938,
-      "_size_kb": 5.5,
-      "_lines": 120,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "3d78af77bd361c5bc3a62befa7ec5b8033454f49131b81108eb214d5004be488"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/editor_cutweak",
-      "version": "0.1.0",
-      "display_name": "Editor: Cut Weakest 20%",
-      "description": "Editor specialist. Returns the same prose with the weakest 20% cut. Preserves fenced code blocks as evidence.",
-      "author": "rarbookworld",
-      "tags": [
-        "editor-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/editor_cutweak_agent.py",
-      "_sha256": "60d1d1ea7a6b8a6beec134ccf7e85bfd0afc7696a7e69200cf2125fb0d92b008",
-      "_seed": 3932081528116623921,
-      "_size_kb": 4.1,
-      "_lines": 94,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "23690c5779b72f6947868b6decf2426967115fa238e2b818aeaccb2511d9126b"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/editor_factcheck",
-      "version": "0.1.0",
-      "display_name": "Editor: Factcheck",
-      "description": "Editor specialist. Surfaces 2-5 claims that need a source and what kind of source would prove or disprove each.",
-      "author": "rarbookworld",
-      "tags": [
-        "editor-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/editor_factcheck_agent.py",
-      "_sha256": "bee2e5070ec9bb7e5526cebb8bc0f0e059d47e32be7ed38f93084782fd8c91a6",
-      "_seed": 17230568709224151601,
-      "_size_kb": 3.7,
-      "_lines": 86,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "78980c244a25727447d5a1bddc504a4dca221db7203458980f501b182c682cb7"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/editor_restructure",
-      "version": "0.1.0",
-      "display_name": "Editor: Restructure",
-      "description": "Editor specialist. Consolidates repetitive middle sections without rewriting the writer's voice.",
-      "author": "rarbookworld",
-      "tags": [
-        "editor-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/editor_restructure_agent.py",
-      "_sha256": "29157b7376d341c913c9a7865cae857836d01c8daa720ee59a580e93c9822e62",
-      "_seed": 16440007496527264305,
-      "_size_kb": 4.8,
-      "_lines": 106,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "5a2179dda0f97e3f3673257a2f4836fdb1c3f5b1df244a288a84c587570385f8"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/editor_strip_scaffolding",
-      "version": "0.1.0",
-      "display_name": "Editor: Strip Scaffolding",
-      "description": "Editor specialist. Removes ## Outline headers, TODO markers, and draft-state labels left by the writer.",
-      "author": "rarbookworld",
-      "tags": [
-        "editor-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/editor_strip_scaffolding_agent.py",
-      "_sha256": "63af9afc3de5fdc2ebfd036bebd83272322c9caa499e526ee46a466dd02ed020",
-      "_seed": 11921669624456034865,
-      "_size_kb": 4.8,
-      "_lines": 106,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "80d229076d9429cfd579279e5829d48a78aee04c6892a2535a026a3dc73bb7da"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/editor_voicecheck",
-      "version": "0.1.0",
-      "display_name": "Editor: Voice Drift",
-      "description": "Editor specialist. Flags voice drift \u2014 sentences that don't sound like the author's established voice.",
-      "author": "rarbookworld",
-      "tags": [
-        "editor-specialist",
-        "creative-pipeline"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/editor_voicecheck_agent.py",
-      "_sha256": "598e475761b8ae780e4551f33def6cbfca2d3d510841916af7e2a18a91fa6c1e",
-      "_seed": 4918063967529876017,
-      "_size_kb": 3.8,
-      "_lines": 87,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "4008ac6ac452cc4a8f0da1cba56ac9d664f88478b850c5ebb4954b70c8a2e3f0"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/hook_writer",
-      "version": "0.1.0",
-      "display_name": "Hook Writer",
-      "description": "Writes the one sentence that earns a tap on the feed. Single sentence. Concrete over abstract. No clickbait.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "hook"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/hook_writer_agent.py",
-      "_sha256": "b0ddf2ea4f8c45cfae34545e708b956733ee7b15710b57e0a3a91c4528b1cd96",
-      "_seed": 11564043477427954388,
-      "_size_kb": 4.1,
-      "_lines": 97,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "da875225b1f527db0b641d54c638cf0b9cd743fc4447b906311ea9ee1db8dde4"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/moment_factory",
-      "version": "0.1.0",
-      "display_name": "MomentFactory (multi-file source)",
-      "description": "Seven-persona moment-to-Drop pipeline as a composite of 8 sibling agent.py files. The candidate engine for any feed-driven AI-agent platform.",
-      "author": "rarbookworld",
-      "tags": [
-        "composite",
-        "moment-pipeline",
-        "rappterbook-engine"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent",
-        "@rarbookworld/sensorium",
-        "@rarbookworld/significance_filter",
-        "@rarbookworld/hook_writer",
-        "@rarbookworld/body_writer",
-        "@rarbookworld/channel_router",
-        "@rarbookworld/card_forger",
-        "@rarbookworld/seed_stamper"
-      ],
-      "delegates_to": [
-        "@rarbookworld/sensorium",
-        "@rarbookworld/significance_filter",
-        "@rarbookworld/hook_writer",
-        "@rarbookworld/body_writer",
-        "@rarbookworld/channel_router",
-        "@rarbookworld/card_forger",
-        "@rarbookworld/seed_stamper"
-      ],
-      "example_call": {
-        "args": {
-          "source": "git commit hash + diff + message",
-          "source_type": "code-commit"
-        }
-      },
-      "_file": "agents/@rarbookworld/moment_factory_agent.py",
-      "_sha256": "35acddf55241c363538abbcc87cc670032490f6a414218d2113533210c3c77df",
-      "_seed": 11124362993822274878,
-      "_size_kb": 7.8,
-      "_lines": 191,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "7e06c0fb8f9e23b018c047a609df77e2096a781dceded5bca4eca9995afc9a43"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/momentfactory",
       "version": "0.1.1",
       "display_name": "MomentFactory (converged singleton)",
@@ -6441,308 +5983,6 @@
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
       "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_card_sha256": "087c7dfed2e94f1e09d88755eec7a7a480485c8fd745fd676b1cc567c0777723"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/persona_ceo",
-      "version": "0.2.0",
-      "display_name": "CEO Persona (composite)",
-      "description": "CEO persona. Composite of 2 specialists: decision + partner-risk. Returns a strategic-message-discipline review.",
-      "author": "rarbookworld",
-      "tags": [
-        "persona",
-        "creative-pipeline",
-        "composite"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent",
-        "@rarbookworld/ceo_risk",
-        "@rarbookworld/ceo_decision"
-      ],
-      "delegates_to": [
-        "@rarbookworld/ceo_risk",
-        "@rarbookworld/ceo_decision"
-      ],
-      "example_call": {
-        "args": {
-          "input": "edited chapter"
-        }
-      },
-      "_file": "agents/@rarbookworld/persona_ceo_agent.py",
-      "_sha256": "e36a17b24c4ae540372d1a06390aa23ea10f3bc0d907a591e64a2b33b00de799",
-      "_seed": 17774958348022999795,
-      "_size_kb": 3.1,
-      "_lines": 86,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "59c556f39a36eab1cbe7dce364592b22e10d684edee388ae7080f3ee31dd6e05"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/persona_editor",
-      "version": "0.3.0",
-      "display_name": "Editor Persona (composite)",
-      "description": "Editor persona. Composite of 5 specialists: strip \u2192 cut \u2192 restructure, plus factcheck + voicecheck for the editor's note.",
-      "author": "rarbookworld",
-      "tags": [
-        "persona",
-        "creative-pipeline",
-        "composite"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent",
-        "@rarbookworld/editor_strip_scaffolding",
-        "@rarbookworld/editor_cutweak",
-        "@rarbookworld/editor_restructure",
-        "@rarbookworld/editor_factcheck",
-        "@rarbookworld/editor_voicecheck"
-      ],
-      "delegates_to": [
-        "@rarbookworld/editor_strip_scaffolding",
-        "@rarbookworld/editor_cutweak",
-        "@rarbookworld/editor_restructure",
-        "@rarbookworld/editor_factcheck",
-        "@rarbookworld/editor_voicecheck"
-      ],
-      "example_call": {
-        "args": {
-          "input": "draft text"
-        }
-      },
-      "_file": "agents/@rarbookworld/persona_editor_agent.py",
-      "_sha256": "1583e25c62cebb600300ceb9ee5ae05ecb250ac4a23f6b4aa0c4e1ac16374baa",
-      "_seed": 1790436802256358131,
-      "_size_kb": 4.9,
-      "_lines": 119,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "358a847388751ac7475cee15715cb7d2f6c2de72b37b2277a83f2f8b2581a019"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/persona_publisher",
-      "version": "0.1.0",
-      "display_name": "Publisher Persona",
-      "description": "Indie-press publisher. Takes edited prose plus a CEO note and outputs publication-ready markdown with YAML frontmatter.",
-      "author": "rarbookworld",
-      "tags": [
-        "persona",
-        "creative-pipeline",
-        "publisher"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "input": "edited",
-          "ceo_note": "ship with one edit"
-        }
-      },
-      "_file": "agents/@rarbookworld/persona_publisher_agent.py",
-      "_sha256": "dc29b50ca0cbad67dc8d0988794a821f011ebb708e31fa19ed0af52d86f81323",
-      "_seed": 5087182054316456552,
-      "_size_kb": 5.0,
-      "_lines": 123,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "b5d073905b8c92ee1e8cc4e0105addf10ea8341ae2f04193c256aaf0222a06d3"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/persona_reviewer",
-      "version": "0.1.0",
-      "display_name": "Reviewer Persona",
-      "description": "Cold-read reviewer. Returns a 1-5 score, the strongest single line, and whether they would keep reading.",
-      "author": "rarbookworld",
-      "tags": [
-        "persona",
-        "creative-pipeline",
-        "reviewer"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/persona_reviewer_agent.py",
-      "_sha256": "a0f87223607202fc77d45b916812b6f674d2d5911d58f314317634890baecf5b",
-      "_seed": 15503340868039227417,
-      "_size_kb": 3.7,
-      "_lines": 88,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "481426b66115ea38b6c8b6ae6f9643f03c8565a67e82c3de59544ff71597ffcb"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/persona_writer",
-      "version": "0.1.0",
-      "display_name": "Writer Persona",
-      "description": "Senior nonfiction writer. Takes raw source material and returns chapter-style prose with code preserved verbatim.",
-      "author": "rarbookworld",
-      "tags": [
-        "persona",
-        "creative-pipeline",
-        "writer"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "input": "raw notes",
-          "chapter_title": "Chapter 1"
-        }
-      },
-      "_file": "agents/@rarbookworld/persona_writer_agent.py",
-      "_sha256": "283397ffe90cc8558a4f289545137b54242d49c674883f14ac609993bfc88cd8",
-      "_seed": 4059269176337245063,
-      "_size_kb": 5.8,
-      "_lines": 140,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "7010883772ad7ee1e9f3fe077bd07908a22ed0bd9c14c4d9de55867644c8d1b1"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/seed_stamper",
-      "version": "0.1.0",
-      "display_name": "Seed Stamper",
-      "description": "Pure function (no LLM). Returns deterministic 64-bit seed + 7-word incantation from a 256-word wordlist. Speak the words \u2192 reconstruct the Drop offline.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "seed",
-        "incantation"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/seed_stamper_agent.py",
-      "_sha256": "0ded681d09647341f27b7ebb667d9c09bca5347150185f79567e57c65209a832",
-      "_seed": 9893979069677451342,
-      "_size_kb": 4.1,
-      "_lines": 92,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "ed5962c66f9fe420f0835155a66c402325aabb40d5235cd96b02bc9157b2c600"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/sensorium",
-      "version": "0.1.0",
-      "display_name": "Sensorium",
-      "description": "Normalizes a raw moment (code commit, voice memo, bookmark, agent run, location, conversation, decision, reading note) into a structured JSON shape.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "ingest"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/sensorium_agent.py",
-      "_sha256": "ee2e110d4bf2c29747e524a5eb84ce69c7bafc9b0ad2ff59931aa53264bb420d",
-      "_seed": 16170563406112502741,
-      "_size_kb": 4.8,
-      "_lines": 102,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "cb4791e2d54e04ed7c46fbf8dfdbde799d8c65ffb6413b4ea39c3fcc1a14aa6d"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rarbookworld/significance_filter",
-      "version": "0.1.0",
-      "display_name": "Significance Filter",
-      "description": "Refuses moments that don't compound. The platform's defining constraint, encoded as one persona with veto power. Default: ship=false.",
-      "author": "rarbookworld",
-      "tags": [
-        "moment-pipeline",
-        "filter"
-      ],
-      "category": "pipeline",
-      "quality_tier": "community",
-      "requires_env": [
-        "AZURE_OPENAI_ENDPOINT",
-        "AZURE_OPENAI_API_KEY",
-        "AZURE_OPENAI_DEPLOYMENT"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@rarbookworld/significance_filter_agent.py",
-      "_sha256": "46cef06c0b322c5fc430e5a6506ecd7cbacad7d4fb081dd7a976da7634a97b10",
-      "_seed": 4107001295381213417,
-      "_size_kb": 5.0,
-      "_lines": 110,
-      "_has_card": true,
-      "_added_at": "2026-04-19T18:58:15-04:00",
-      "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_card_sha256": "c9cd9dcd5bdd9f55f533b730125ce10a08079216794c5b600307b025f2e409af"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6879,9 +6119,9 @@
       "_size_kb": 1.7,
       "_lines": 45,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-12T13:49:20-04:00",
+      "_first_commit_sha": "43dd8b7bcd8324b3ca70b79eebf24edbbe117593",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6915,9 +6155,9 @@
       "_size_kb": 1.2,
       "_lines": 40,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-05-11T20:46:08-04:00",
+      "_first_commit_sha": "2833f55bfbdc15d6bbc6229290ea11076a99189d",
+      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
     }
   ],
   "swarms": [
