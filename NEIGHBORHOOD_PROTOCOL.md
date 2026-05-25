@@ -204,7 +204,26 @@ single‑file Azure Function (the RAPP single‑file principle), deployable from
 > (permanent, always‑on, join‑by‑URL). Kites are how you start in seconds; cloud neighborhoods are
 > how you stay. Both speak the same protocol; a kite can tether to a cloud neighborhood and back.
 
-## §15 — Conformance
+## §15 — Agent-in-a-link sharing
+
+A single-file agent can be shared as a **link that contains the agent itself.** The full `.py`
+source is gzipped + base64url-encoded into the URL **fragment** (`#a=<payload>`, optionally
+`&n=<name>`), so it is **never fetched from a server** — the link *is* the agent (private,
+AirDrop-style; the fragment isn't even sent in the HTTP request).
+
+- **Receiving = consent.** Dragging the link onto a vBrainstem (or dropping the QR's link) decodes
+  it and installs via the same path as a dropped `.py` file. Opening the link shows an
+  **Add / Dismiss** banner. The user's drop/Add is the trust gate — exactly like AirDrop.
+- **Share sheet.** A share link opens `share.html` — the agent's package page: a card (parsed from
+  the embedded manifest), a **draggable link pill** to pull into a vBrainstem, a **QR**, and an
+  *Open in vBrainstem* button. Small agents fit a QR; larger ones travel by the dragged link.
+- **Sandboxed.** An installed agent runs in the browser (Pyodide) sandbox like any other; nothing
+  reaches the host beyond the WASM filesystem.
+
+Reference: `share.html` + `index.html` (`window.rapp.shareAgent`, the per-agent **Share** button,
+`handleAgentDrop`'s `#a=` branch, and the `_encPayload`/`_decPayload` codec).
+
+## §16 — Conformance
 An implementation conforms to `rapp-neighborhood-protocol/1.0` if it: speaks the §6 envelope;
 supports at least one §5 transport; can **seal** (§8) and rejects unsealed `console`; shows the
 **kite mark** (§2) when kited; and uses the §1 vocabulary in its UI and docs.
