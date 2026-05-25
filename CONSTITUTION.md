@@ -861,6 +861,19 @@ The steward (CEO or designee) interacts with the ecosystem through this agent. T
 
 The steward's role is editorial judgment — deciding what gets verified, what gets released, and how the brand is positioned. The agent handles everything else. This is the design: human judgment where it matters, autonomous operation everywhere else.
 
+## Article XXI — The Kited Neighborhood
+
+RAPP brainstems meet as a **neighborhood** of uniform peers. The canonical specification is [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md) (`rapp-neighborhood-protocol/1.0`); this Article enshrines its **vocabulary** and **mark** as the identity of the system.
+
+- A **vTwin** is a browser-native RAPP brainstem. Everyone — a person, a `brainstem.py`, a vTwin, or Claude — presents as a uniform peer speaking **twin-chat**.
+- A vTwin is **kited** when it hosts a neighborhood in the browser, flown on a **string** (an operator — canonically Claude — driving its console). It is **tethered** when the string also reaches a locally-running brainstem; otherwise it is **just kited**.
+- A **kited neighborhood** is **multiplayer by membership**: whoever **scans to join** is a **neighbor**. Every channel is **sealed** — end-to-end AES-256-GCM, *as secure as on-device.*
+- Claude as **doorman** stands up and guards a machine's brainstem through a kited, tethered vTwin; closing the door ends access.
+
+**The Kite Mark.** When a vTwin is actively kited it shows the **kite mark**: the Microsoft four-colour logo turned on its point and stretched into a real kite — red/green panels up top, blue/yellow stretched to the long bottom point, white spars, a bow-tie tail, gently swaying. The kite mark is the canonical sign of a hosted neighborhood — *scan to join.*
+
+The vocabulary (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**) and the **kite mark** are the canonical identity of the RAPP neighborhood. Implementations and federated instances use them exactly. Single file. Uniform peer. Sealed line. Scan to join.
+
 ---
 
 This constitution can be amended by:
@@ -873,4 +886,4 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join.*
