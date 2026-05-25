@@ -30,6 +30,8 @@ identity of the system — the thing an adopter cannot unsee.
 | **Sealed** | Every envelope is end‑to‑end encrypted (§8). Wire, broker, and relays are untrusted and the line is still **as secure as on‑device**. |
 | **Twin‑chat** | The one envelope everyone speaks (§6). Because the shape is uniform, a neighbor cannot tell what's on the other end. |
 | **Doorman** | Claude acting as guardian/operator of a machine's brainstem through a kited, tethered vTwin (§11). |
+| **Cloud Neighborhood** | A **permanent, always‑on** neighborhood hosted as an **Azure Function** (§14). A kite is temporary (tab‑bound); a cloud neighborhood is a **permanent endpoint** that persists when every kite closes. Members join by URL; a local machine can still **kite to** it. |
+| **Graduate** | To promote a temporary **kite** into a permanent **cloud neighborhood** — re‑home it onto an always‑on Azure Function endpoint, ending the *open‑tab problem* while keeping the functionality. |
 
 ---
 
@@ -80,6 +82,8 @@ A *tether* is the live link between two neighbors. Transports are interchangeabl
   DevTools Protocol and relays. No broker, no STUN, no CORS — *the string is the transport.*
   **`5a-kite+tether`** when the string also reaches a local brainstem. **CDP is unauthenticated
   → the kite hop MUST stay on the machine;** cross‑machine traffic rides `5a-tether`, sealed.
+- **`5a-cloud`** — a **permanent** neighborhood hosted as an **Azure Function** (HTTPS `/chat`,
+  sealed). Always on; survives every kite closing. The graduation target (§14).
 
 ### §5b — Durable async fallback
 - **`5b-issues`** — when no live channel can reach a peer, post the envelope to a routing label
@@ -169,7 +173,38 @@ becomes a doorman by reading the doorman skill
 
 ---
 
-## §13 — Conformance
+## §13 — The Kited Demo (the canonical hello world)
+
+`kited-demo.html` is the canonical demonstration of this protocol — *the hello world.* Open it and
+it **kites itself**: it shows the kite mark (§2) and a **scan‑to‑join** QR. Scan from any device and
+you are **connected in real time** — end‑to‑end **sealed** (§8) — in a multiplayer room where every
+neighbor sees everyone live, with a `🟢 N here` presence count. No install, no accounts, no server:
+the demo *is* the product. Tether it to a local brainstem (§4) and a customer can **watch a demo
+running on your machine in real time — and respond.** This is the pattern's Kleenex moment: scan a
+kite, you're in. Live: `https://kody-w.github.io/vbrainstem/kited-demo.html`.
+
+## §14 — Cloud Neighborhoods (permanent, Azure Function)
+
+A **kite** is temporary — it lives in a browser tab; close the tab and the session ends.
+**Graduate** a kite to a **cloud neighborhood** to make it permanent: re‑home the neighborhood
+onto an **Azure Function** (the RAPP platform) that serves sealed twin‑chat over HTTPS — channel
+**`5a-cloud`**. Because the endpoint is always on:
+
+- closing your kite window no longer ends the neighborhood — the **cloud endpoint persists**;
+- members **join by URL** (no broker, no tab to keep open) — the *open‑tab problem* is gone;
+- a local machine can still **kite to** the cloud neighborhood (a local kite tethers *up* to the
+  cloud endpoint), and the cloud can fan back *down* to local brainstems.
+
+The Function holds the **roster** (membership) in durable storage (Azure Table/Blob), speaks the
+§6 envelope, enforces the §8 seal, and routes `say` to its brainstem/agents. **Same envelope, same
+seal, same vocabulary — only the host moved from a tab to the cloud.** A cloud neighborhood is a
+single‑file Azure Function (the RAPP single‑file principle), deployable from the registry.
+
+> **Lifecycle:** *kite* (temporary, on‑device, scan‑to‑join) → **graduate** → *cloud neighborhood*
+> (permanent, always‑on, join‑by‑URL). Kites are how you start in seconds; cloud neighborhoods are
+> how you stay. Both speak the same protocol; a kite can tether to a cloud neighborhood and back.
+
+## §15 — Conformance
 An implementation conforms to `rapp-neighborhood-protocol/1.0` if it: speaks the §6 envelope;
 supports at least one §5 transport; can **seal** (§8) and rejects unsealed `console`; shows the
 **kite mark** (§2) when kited; and uses the §1 vocabulary in its UI and docs.
