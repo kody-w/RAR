@@ -25,7 +25,7 @@ agent management) and adds dynamic checkpoints for each loaded agent.
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@borg/training_quest_agent",
+    "name": "@howardh/training_quest_agent",
     "version": "1.0.0",
     "display_name": "TrainingQuest",
     "description": "Generates a personalized interactive training quest HTML page based on the brainstem's loaded agents — auto-discovers capabilities and builds a gamified onboarding experience with progress tracking, copy-to-clipboard prompts, and celebrations.",

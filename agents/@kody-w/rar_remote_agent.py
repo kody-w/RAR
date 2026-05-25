@@ -15,7 +15,7 @@ Fully compatible with the RAPP brainstem runtime:
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/rar_remote_agent",
+    "name": "@kody-w/rar_remote_agent",
     "version": "1.7.2",
     "display_name": "RAR Remote Agent",
     "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
@@ -122,7 +122,7 @@ class RARRemoteAgent(BasicAgent):
                         "type": "string",
                         "description": (
                             "Full @publisher/slug name. "
-                            "Example: '@kody/rar_remote_agent'. "
+                            "Example: '@kody-w/rar_remote_agent'. "
                             "Get this from discover or search results."
                         ),
                     },
@@ -1205,7 +1205,7 @@ class RARRemoteAgent(BasicAgent):
             ["git", "init", "-q"],
             ["git", "add", "."],
             ["git", "-c", "commit.gpgsign=false", "commit", "-q",
-             "-m", "Initial scaffold — created by @kody/rar_remote_agent setup_private_rar"],
+             "-m", "Initial scaffold — created by @kody-w/rar_remote_agent setup_private_rar"],
             ["gh", "repo", "create", f"{login}/{repo_name}",
              "--private", "--source=.", "--push", "--remote=origin"],
         ]

@@ -21,7 +21,7 @@ Operations:
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/rappterpedia_agent",
+    "name": "@kody-w/rappterpedia_agent",
     "version": "1.1.0",
     "display_name": "RappterpediaAgent",
     "description": "Community wiki & forum content engine. Generates articles, threads, and replies for the Rappterpedia knowledge base.",
@@ -247,7 +247,7 @@ REPLY_RULES = {
         "templates": [
             "Nice work! Consider adding more tags for discoverability.",
             "Looks solid. Have you thought about handling missing API keys gracefully?",
-            "Good start! Look at how `@kody/context_memory.py` handles similar patterns — clean reference.",
+            "Good start! Look at how `@kody-w/context_memory.py` handles similar patterns — clean reference.",
         ],
     },
 }

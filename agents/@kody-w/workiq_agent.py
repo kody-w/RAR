@@ -32,7 +32,7 @@ from agents.basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/workiq",
+    "name": "@kody-w/workiq",
     "version": "1.0.1",
     "display_name": "WorkIQ",
     "description": "Natural-language access to Microsoft 365 data — emails, calendar, SharePoint/OneDrive, Teams messages, people. Wraps the workiq CLI (Entra ID auth required).",

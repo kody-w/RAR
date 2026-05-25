@@ -19,7 +19,7 @@ Style presets: bold (dark+red), minimal (light+blue), neon (dark+green), warm (d
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@borg/prompt_to_video_agent",
+    "name": "@howardh/prompt_to_video_agent",
     "version": "1.1.0",
     "display_name": "PromptToVideo",
     "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
@@ -28,7 +28,7 @@ __manifest__ = {
     "category": "productivity",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic_agent", "@borg/markdown_to_slides"],
+    "dependencies": ["@rapp/basic_agent", "@howardh/markdown_to_slides_agent"],
 }
 # ═══════════════════════════════════════════════════════════════
 

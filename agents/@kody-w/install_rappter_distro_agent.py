@@ -57,7 +57,7 @@ from typing import Callable, Optional
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/install_rappter_distro_agent",
+    "name": "@kody-w/install_rappter_distro_agent",
     "version": "1.0.1",
     "display_name": "Install Rappter Distro",
     "description": (

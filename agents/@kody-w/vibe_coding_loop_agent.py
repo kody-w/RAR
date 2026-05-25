@@ -31,7 +31,7 @@ import json
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody-w/vibe-coding-loop",
+    "name": "@kody-w/vibe_coding_loop",
     "version": "1.0.0",
     "display_name": "Vibe Coding Demo Loop",
     "description": (
@@ -42,7 +42,7 @@ __manifest__ = {
     "author": "kody-w",
     "tags": ["publishing", "orchestration", "vibe-coding", "single-file-html", "loop"],
     "category": "workflow",
-    "quality_tier": "core",
+    "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {

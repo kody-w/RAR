@@ -41,7 +41,7 @@ bases, training quests, and scheduled automation — all through your Obsidian v
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@borg/vaultmind_agent",
+    "name": "@howardh/vaultmind_agent",
     "version": "1.0.0",
     "display_name": "VaultMind",
     "description": (

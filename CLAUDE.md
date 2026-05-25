@@ -89,8 +89,8 @@ __manifest__ = {
 | Publisher | Focus |
 |-----------|-------|
 | `@rapp` | Official base class (BasicAgent) |
-| `@kody` | Core infrastructure — registry client, memory, workbench |
-| `@borg` | Borg assimilator + CardSmith (Howard Hoy) |
+| `@kody-w` | Core infrastructure — registry client, memory, workbench |
+| `@howardh` | Borg assimilator + CardSmith (Howard Hoy) |
 | `@discreetRappers` | Pipeline, integrations, sales, productivity |
 | `@aibast-agents-library` | 104 industry vertical templates across 14 verticals |
 
@@ -164,7 +164,7 @@ Each frame reads previous state to make intelligent decisions. Underserved categ
 
 ## Rappter Engine
 
-The `@kody/rappter-engine-agent` is the base class for building data-driven content engines. Subclass it, define RULES as data, override `tick()`. Works as both a CLI and a Brainstem-harnessable agent. All engines in the ecosystem (Zoo, Economy, Academy, Interaction, Rappterpedia) follow this pattern.
+The `@kody-w/rappter_engine_agent` is the base class for building data-driven content engines. Subclass it, define RULES as data, override `tick()`. Works as both a CLI and a Brainstem-harnessable agent. All engines in the ecosystem (Zoo, Economy, Academy, Interaction, Rappterpedia) follow this pattern.
 
 ## Naming Conventions
 

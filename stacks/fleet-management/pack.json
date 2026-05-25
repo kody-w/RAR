@@ -19,8 +19,8 @@
   "install": {
     "type": "agent_pack",
     "agents": [
-      "agents/@kody/fleet_agent.py",
-      "agents/@kody/twin_egg_hatcher_agent.py"
+      "agents/@kody-w/fleet_agent.py",
+      "agents/@kody-w/twin_egg_hatcher_agent.py"
     ],
     "destination": "agents/",
     "notes": "Drop both files into your brainstem's agents/ directory. load_agents() picks them up on the next /chat — no restart. The LLM gets Fleet(...) and HatchTwinEgg(...) as tools immediately. To deploy to a peer mini: (1) Fleet(action='authorize', host='<mini>.local') and paste the printed line on the mini's terminal; (2) Fleet(action='provision_brainstem', host='<mini>.local'); (3) Fleet(action='hatch_egg', host='<mini>.local', egg_url='http://your-host:8765/some.egg'); (4) Fleet(action='boot_federation', host='<mini>.local'). Or just describe it in natural language and the brainstem composes the calls itself."
@@ -41,7 +41,7 @@
   },
   "pairs_with": [
     "stacks/organism-lifecycle (Twin + EggHatcher — required on every peer for full federation)",
-    "agents/@kody/twin_egg_hatcher (the same hatcher, also available as a standalone agent)"
+    "agents/@kody-w/twin_egg_hatcher (the same hatcher, also available as a standalone agent)"
   ],
   "see_also": [
     "https://github.com/kody-w/RAPP/blob/main/pages/vault/Architecture/The%20Federated%20Twin%20Egg%20Hatcher%20Pattern.md",

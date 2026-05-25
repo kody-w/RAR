@@ -45,7 +45,7 @@ from __future__ import annotations
 # ═══════════════════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/fleet",
+    "name": "@kody-w/fleet",
     "version": "1.0.0",
     "display_name": "Fleet",
     "description": (
@@ -62,7 +62,7 @@ __manifest__ = {
     "category": "devtools",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic_agent", "@kody/twin_egg_hatcher"],
+    "dependencies": ["@rapp/basic_agent", "@kody-w/twin_egg_hatcher"],
 }
 
 
