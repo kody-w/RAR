@@ -113,7 +113,7 @@ def llm_ollama(system: str, user: str, max_tokens: int = 500) -> str:
 
 
 def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
-    """GitHub Copilot CLI — UNLIMITED tokens. Always try first."""
+    """GitHub Copilot CLI — tried first (preferred backend)."""
     combined = f"{system}\n\n{user}"
     try:
         result = subprocess.run(
@@ -145,10 +145,10 @@ def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
 
 
 def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
-    """Try all LLM backends. Copilot CLI FIRST — unlimited tokens, infinite, free.
+    """Try all LLM backends. The GitHub Copilot CLI is tried first (preferred backend).
     Fallback: Copilot CLI → GitHub Models → Ollama."""
     backends = [
-        ("copilot", llm_copilot),    # FIRST — unlimited, infinite, free
+        ("copilot", llm_copilot),    # first (preferred backend)
         ("github", llm_github),       # Second — rate-limited
     ]
     if os.environ.get("OLLAMA_MODEL", ""):
