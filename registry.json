@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-05-25T02:27:41.828875+00:00",
+  "generated_at": "2026-06-03T19:54:55.967024+00:00",
   "stats": {
     "total_agents": 180,
     "total_swarms": 82,
@@ -4589,7 +4589,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/plant_seed_agent",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "display_name": "Plant Seed",
       "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
       "author": "kody-w",
@@ -4609,10 +4609,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
-      "_sha256": "7739d2c2fa924624423cbdeedd4a8f439f0741dd3463ff85f1fd98e9da02ff11",
+      "_sha256": "4c69621f93f28ba9d71b9aff350a7f815a5623f397443a1d9c67ce3163dba6c7",
       "_seed": 344646004249601931,
-      "_size_kb": 26.0,
-      "_lines": 567,
+      "_size_kb": 26.3,
+      "_lines": 571,
       "_has_card": true,
       "_added_at": "2026-05-09T15:25:19-04:00",
       "_first_commit_sha": "74df455c5fc5eb8fb5ce77adefcb261763205866",
@@ -5844,7 +5844,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/twin_agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Twin",
       "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
       "author": "RAPP",
@@ -5865,10 +5865,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/twin_agent.py",
-      "_sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450",
+      "_sha256": "40e008117509434d46035b4f40d665cc2d4b406361c1e5aa86bc3cbc91a6b2d6",
       "_seed": 11907957554557236082,
       "_size_kb": 71.8,
-      "_lines": 1771,
+      "_lines": 1772,
       "_has_card": true,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
