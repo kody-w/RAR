@@ -101,7 +101,8 @@ def _build_entry(agent: dict) -> dict:
     file_rel = agent.get("_file", "")           # agents/@rapp/learn_new_agent.py
     has_card = bool(agent.get("_has_card"))
     sha256 = agent.get("_sha256") or ""
-    rappid = f"rappid:v2:agent:{publisher}/{name.split('/')[-1]}:{(sha256 or _slug(name))[:32]}"
+    # Consolidated rappid (CONSTITUTION Art. XXXIV.1): rappid:@<owner>/<slug>:<64hex>.
+    rappid = f"rappid:{publisher}/{name.split('/')[-1]}:{sha256 or hashlib.sha256(_slug(name).encode()).hexdigest()}"
 
     # File-on-disk references (publisher-namespaced under agents/)
     py_url = f"{RAW_PREFIX}/{file_rel}" if file_rel else None
@@ -134,7 +135,7 @@ def _build_entry(agent: dict) -> dict:
         "added_at": agent.get("_added_at"),
 
         # Lineage
-        "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+        "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
 
         # Asset URLs
         "sprite_url":  f"{RAW_PREFIX}/api/v1/sprite/{slug}.svg",
