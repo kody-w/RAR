@@ -291,9 +291,10 @@ class NeighborhoodFactoryAgent(BasicAgent):
             return json.dumps({"ok": False, "error": str(e)})
 
         # 2. Mint identifiers
-        nb_uuid = uuid.uuid4().hex
-        rappid = (f"rappid:v2:neighborhood:@{owner}/{nb_slug}:"
-                   f"{nb_uuid}@github.com/{owner}/{nb_slug}")
+        # Consolidated rappid: self-locating + 256-bit identity. The "neighborhood"
+        # kind lives in the rappid.json record, never in the string.
+        nb_digest = hashlib.sha256(uuid.uuid4().bytes).hexdigest()
+        rappid = f"rappid:@{owner}/{nb_slug}:{nb_digest}"
         rapp_uuid_dashboard = uuid.uuid4().hex
         plant_ts = _now_iso()
 

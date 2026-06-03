@@ -49,7 +49,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/estate_outbound",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "EstateOutbound",
     "description": (
         "Stage a signed neighborhood event in the operator's outbound lane "
@@ -67,7 +67,7 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {
         "args": {
-            "neighborhood_rappid": "rappid:v2:neighborhood:@rapp-commons/origin:3929ce90ebe97fe2a95432e9f647f3a3@github.com/kody-w/rapp-commons",
+            "neighborhood_rappid": "rappid:@rapp-commons/origin:3727bc584708e539d69792713fbb200688c634744cce2d9614fa5aefd4ff295f",
             "event": {"schema": "rapp-commons-event/1.0", "kind": "hello", "from": "...", "ts": "...", "body": "...", "sig": "...", "pub": {}}
         }
     },
@@ -114,7 +114,7 @@ class EstateOutboundAgent(BasicAgent):
                 "properties": {
                     "neighborhood_rappid": {
                         "type": "string",
-                        "description": "Target neighborhood's v2 rappid. Determines which subdir of ~/.brainstem/outbound/ receives the event.",
+                        "description": "Target neighborhood's rappid, consolidated form rappid:@<owner>/<slug>:<64hex>. Determines which subdir of ~/.brainstem/outbound/ receives the event.",
                     },
                     "event": {
                         "type": "object",

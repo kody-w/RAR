@@ -73,7 +73,7 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_egg_hatcher",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "HatchTwinEgg",
     "description": (
         "Generic single-file hatcher for any RAPP digital-organism twin. "
@@ -197,7 +197,12 @@ def _name_from_namespace(ns: str) -> Optional[str]:
 
 
 def _name_from_rappid(rappid: str) -> Optional[str]:
-    """Extract the slug from `rappid:v2:KIND:@owner/slug:HASH@...`."""
+    """Extract the slug from a rappid. Accepts the consolidated form
+    `rappid:@owner/slug:HEX64` and the legacy `rappid:v2:KIND:@owner/slug:HASH@...`."""
+    # Consolidated: no v<n>:kind: segment, slug runs up to the final ':<hex>'.
+    m = re.match(r"^rappid:@[^/]+/([^:]+):[a-f0-9]+$", rappid)
+    if m:
+        return m.group(1)
     m = re.match(r"^rappid:v\d+:[^:]+:@[^/]+/([^:]+):", rappid)
     return m.group(1) if m else None
 
@@ -215,13 +220,14 @@ def _resolve_name(rj: Dict[str, Any]) -> str:
 
 
 def _hash_from_rappid(rappid: str) -> str:
-    """Workspace dirname for a rappid.  Handles both:
+    """Workspace dirname for a rappid.  Handles:
+      - consolidated rappids (`rappid:@owner/slug:HEX64`, 256-bit)
       - v2 rappids (`rappid:v2:...:HEX32@...`)
       - bare-UUID rappids (legacy v1.x front doors like Heimdall)."""
     if rappid.startswith("rappid:"):
-        m = re.search(r":([a-f0-9]{32})@", rappid)
+        m = re.search(r":([a-f0-9]{64})$|:([a-f0-9]{32})@", rappid)
         if m:
-            return m.group(1)
+            return m.group(1) or m.group(2)
     return rappid
 
 
