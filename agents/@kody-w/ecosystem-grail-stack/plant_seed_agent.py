@@ -33,6 +33,7 @@ clone locally. No follow-up commands required.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import subprocess
@@ -49,7 +50,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/plant_seed_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Plant Seed",
     "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
     "author": "kody-w",
@@ -103,7 +104,10 @@ def _now_iso() -> str:
 
 
 def _mint_rappid(kind: str, owner: str, name: str) -> str:
-    return f"rappid:v2:{kind}:@{owner}/{name}:{uuid.uuid4().hex}@github.com/{owner}/{name}"
+    # Consolidated rappid (CONSTITUTION Art. XXXIV.1, locked 2026-06-03):
+    # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity. `kind`
+    # is written to the rappid.json record, not the string.
+    return f"rappid:@{owner}/{name}:{hashlib.sha256(uuid.uuid4().bytes).hexdigest()}"
 
 
 def _gh(args: list[str], timeout: int = 30) -> tuple[int, str, str]:

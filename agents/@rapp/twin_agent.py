@@ -53,7 +53,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/twin_agent",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Twin",
     "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
     "author": "RAPP",
@@ -79,7 +79,7 @@ KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 # CONSTITUTION Article XXXIV.1 (2026-04-30 ratification). The legacy UUID
 # 37ad22f5-ed6d-48b1-b8b4-61019f58a42b is preserved as the hash field
 # (dashes stripped) — same identity, new string representation.
-WILDHAVEN_RAPPID = "rappid:v2:twin:@kody-w/wildhaven-ai-homes-twin:37ad22f5ed6d48b1b8b461019f58a42b@github.com/kody-w/wildhaven-ai-homes-twin"
+WILDHAVEN_RAPPID = "rappid:@kody-w/wildhaven-ai-homes-twin:37ad22f5ed6d48b1b8b461019f58a42b"
 WILDHAVEN_REPO = "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
 
 PORT_LOW, PORT_HIGH = 7081, 7200
@@ -1078,10 +1078,11 @@ class TwinAgent(BasicAgent):
         if kind not in KINDS:
             return f"Error: unknown kind '{kind}'. Valid: {', '.join(KINDS)}"
 
-        # v2-format rappid per CONSTITUTION Article XXXIV.1. UUID hex (dashes
-        # stripped) lives in the hash field; same identity, v2 string shape.
-        _hash = uuid.uuid4().hex
-        rappid = f"rappid:v2:{kind}:@kody-w/{twin_name}:{_hash}@github.com/kody-w/{twin_name}"
+        # Consolidated rappid per CONSTITUTION Article XXXIV.1 (locked 2026-06-03):
+        # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity hash.
+        # `kind` is written to the rappid.json record, not the string.
+        _hash = hashlib.sha256(uuid.uuid4().bytes).hexdigest()
+        rappid = f"rappid:@kody-w/{twin_name}:{_hash}"
         now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         # Workspace dir uses the hash (filesystem-friendly) — not the full v2 string.
         workspace = pathlib.Path(_twins_dir()) / _hash
