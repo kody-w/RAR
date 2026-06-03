@@ -16,7 +16,7 @@
       "method": "GET",
       "description": "Download a single agent file. The file IS the package.",
       "auth": "none",
-      "example": "{base_url}/agents/@kody/deal_desk_agent.py"
+      "example": "{base_url}/agents/@kody-w/deal_desk_agent.py"
     },
     "cards": {
       "url": "{base_url}/cards/holo_cards.json",
@@ -74,6 +74,14 @@
       "description": "Resolve a card from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py.",
       "auth": "none",
       "algorithm": "seed -> mulberry32 PRNG -> deterministic type, stats, abilities, rarity"
+    },
+    "mcp": {
+      "url": "{base_url}/registry.json",
+      "method": "GET",
+      "description": "MCP on-ramp. This static surface IS a rapp-static-mcp/1.0 catalog: catalog = registry.json, frames = agents/* pinned by _sha256 / _first_commit_sha. Any MCP host reads the catalog, fetches a content-addressed agent frame, and verifies-before-exec against the published hash. MCP is transport realizing 'Chat Is The Only Wire' — MCP clients are Layer 2 callers of a brainstem's /chat (via rapp_brainstem_mcp.py), not a new agent unit.",
+      "auth": "none",
+      "profile": "rapp-static-mcp/1.0 (built on rapp-static-api/1.0)",
+      "verify_before_exec": "Pin each agent by registry _sha256 (and _first_commit_sha for first-seen provenance); recompute the SHA256 of the fetched agent file and refuse to exec on mismatch."
     }
   },
 

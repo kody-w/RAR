@@ -2,7 +2,7 @@
 
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
-133 agents. 7 publishers. 19 categories. 1,117 tests. Every card has a seed.
+180 agents. 8 publishers. 24 categories. 1,144 tests. Every card has a seed.
 
 **[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
@@ -46,7 +46,7 @@ Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file ag
 
 The store (`index.html`) is a single HTML file. Open it in any browser.
 
-- **Browse** — search 133 agents across 19 categories, filter by tier, sort by votes
+- **Browse** — search 180 agents across 24 categories, filter by tier, sort by votes
 - **Cards** — every agent is a collectible card with types, stats, abilities, and art
 - **Decks** — collect agents into named decks, present as slideshows
 - **Workbench** — write agents in the browser, validate, preview as card
@@ -99,7 +99,7 @@ manifest → forge_seed() → resolve_card_from_seed() = the card
 
 Three ways to resolve a card:
 - **From file:** `python rapp_sdk.py card mint agent.py`
-- **From name:** `python rapp_sdk.py card resolve @kody-w/deal_desk`
+- **From name:** `python rapp_sdk.py card resolve @kody-w/deal_desk_agent`
 - **From seed:** `python rapp_sdk.py card resolve 3736335358696106227`
 - **From incantation:** `python rapp_sdk.py card resolve TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
 
@@ -131,11 +131,13 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 | Publisher | Agents | Focus |
 |-----------|--------|-------|
 | **@aibast-agents-library** | 104 | Industry vertical templates (14 verticals) |
+| **@kody-w** | 27 | Core infrastructure, registry, engine, Rappterpedia |
+| **@rapp** | 21 | BasicAgent base class, core platform agents |
 | **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
-| **@kody** | 11 | Core infrastructure, registry, engine, Rappterpedia |
-| **@borg** | 3 | Assimilation, cards, video |
-| **@wildhaven** | 1 | CEO agent |
-| **@rapp** | 1 | BasicAgent base class |
+| **@howardh** | 9 | Assimilation, cards, productivity |
+| **@wildhaven** | 3 | CEO agent |
+| **@rarbookworld** | 2 | Pipeline |
+| **@bill** | 1 | Core |
 
 ---
 
