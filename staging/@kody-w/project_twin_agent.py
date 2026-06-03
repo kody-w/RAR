@@ -29,7 +29,7 @@ Spec conformance (sibling to twin_egg_hatcher_agent.py):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/project_twin_agent",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "display_name": "ProjectTwin",
     "description": (
         "Single-file lifecycle agent for project-anchored brainstem twins. "
@@ -53,6 +53,7 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+import hashlib
 import json
 import os
 import re
@@ -427,7 +428,9 @@ class ProjectWorkspaceAgent(BasicAgent):
 
 
 
-_HASH_RE = re.compile(r":([a-f0-9]{32})@")
+# Consolidated form: `rappid:@<owner>/<slug>:<64hex>` (256-bit, no trailing @suffix).
+# Legacy form (still read): `rappid:v2:<kind>:@<owner>/<slug>:<32hex>@github.com/...`.
+_HASH_RE = re.compile(r":([a-f0-9]{64})$|:([a-f0-9]{32})@")
 _AGENT_NAME_RE = re.compile(r"""self\.name\s*=\s*['"]([^'"]+)['"]""")
 _AGENT_DESC_RE = re.compile(r"""['"]description['"]\s*:\s*\(?\s*['"]([^'"]+)['"]""")
 
@@ -444,12 +447,15 @@ def _hash_from_rappid(rappid: str) -> str:
     if rappid and rappid.startswith("rappid:"):
         m = _HASH_RE.search(rappid)
         if m:
-            return m.group(1)
+            return m.group(1) or m.group(2)
     return rappid or ""
 
 
 def _mint_v2_rappid(kind: str, owner: str, repo: str) -> str:
-    return f"rappid:v2:{kind}:@{owner}/{repo}:{uuid.uuid4().hex}@github.com/{owner}/{repo}"
+    # Consolidated rappid: self-locating + 256-bit identity. `kind` lives in the
+    # rappid.json record, never in the string. (Param name kept for callers.)
+    digest = hashlib.sha256(uuid.uuid4().bytes).hexdigest()
+    return f"rappid:@{owner}/{repo}:{digest}"
 
 
 def _slug(s: str) -> str:

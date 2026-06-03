@@ -12,8 +12,8 @@
     },
     "twin_egg_hatcher_agent.py": {
       "purpose": "Scale-aware single-file hatcher (agent / twin / neighborhood / swarm / factory / industry / estate eggs). Required on every peer mini Fleet talks to. Also useful locally for hatching .egg files from other operators.",
-      "size": 43827,
-      "sha256": "0df6f6eac947e10c9777b480ad98775081a6a85900775e2eae1fb3168214ba17"
+      "size": 44186,
+      "sha256": "7456fc537e8b525ae9108bec87deca67e29e21f730a7ce40f3a94a705d3600aa"
     }
   },
   "install": {
