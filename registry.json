@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-03T19:54:55.967024+00:00",
+  "generated_at": "2026-06-03T20:17:10.009817+00:00",
   "stats": {
     "total_agents": 180,
     "total_swarms": 82,
@@ -4616,7 +4616,7 @@
       "_has_card": true,
       "_added_at": "2026-05-09T15:25:19-04:00",
       "_first_commit_sha": "74df455c5fc5eb8fb5ce77adefcb261763205866",
-      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
+      "_latest_commit_sha": "5d43b0fc63a83cf57f040d040344a07f3424625c",
       "_card_sha256": "649aed31843034ff37b082ee2e26fdc04301a7998e42ecdd2ef50c26a945c8b9"
     },
     {
@@ -5328,7 +5328,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/estate_outbound",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "EstateOutbound",
       "description": "Stage a signed neighborhood event in the operator's outbound lane (Article XLVIII). The companion to commons_post \u2014 once an event is signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the neighborhood's federation roll-up can pull it on its beat. Does NOT push to the operator's public-estate repo \u2014 that's a separate step the operator owns (gh CLI or a future estate_publish_agent).",
       "author": "RAPP",
@@ -5347,7 +5347,7 @@
       ],
       "example_call": {
         "args": {
-          "neighborhood_rappid": "rappid:v2:neighborhood:@rapp-commons/origin:3929ce90ebe97fe2a95432e9f647f3a3@github.com/kody-w/rapp-commons",
+          "neighborhood_rappid": "rappid:@kody-w/rapp-commons:3929ce90ebe97fe2a95432e9f647f3a3",
           "event": {
             "schema": "rapp-commons-event/1.0",
             "kind": "hello",
@@ -5360,9 +5360,9 @@
         }
       },
       "_file": "agents/@rapp/estate_outbound_agent.py",
-      "_sha256": "71038491a2b017bdb580588291f94fd1f2e6478c282b222f0bfcc195042f1c1a",
+      "_sha256": "84ce6d63393462b6cf580612593065fc06a99f009e107a3878c9ddb1a6e43876",
       "_seed": 13191466770999423966,
-      "_size_kb": 7.0,
+      "_size_kb": 6.9,
       "_lines": 183,
       "_has_card": true,
       "_added_at": "2026-05-11T13:59:12-04:00",
@@ -5872,7 +5872,7 @@
       "_has_card": true,
       "_added_at": "2026-05-04T12:36:05-04:00",
       "_first_commit_sha": "7c5a0b0fea9bb1a0c1272fc1a23f0ef2ed49d521",
-      "_latest_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
+      "_latest_commit_sha": "5d43b0fc63a83cf57f040d040344a07f3424625c",
       "_card_sha256": "a827004724e3a4d08162769ff90d41644e24c41432db3c74126408c624849ccf"
     },
     {

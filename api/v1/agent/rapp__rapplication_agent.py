@@ -43,10 +43,10 @@ __manifest__ = {
         "catalog index entry."
     ),
     "author": "RAPP",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "tags": ["meta", "build", "rapplication", "bundler", "publish"],
     "category": "core",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "bundle", "agent_path": "agents/kanban_agent.py"}},

@@ -29,7 +29,7 @@ Spec conformance (sibling to twin_egg_hatcher_agent.py):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/project_twin_agent",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "display_name": "ProjectTwin",
     "description": (
         "Single-file lifecycle agent for project-anchored brainstem twins. "
@@ -449,7 +449,9 @@ def _hash_from_rappid(rappid: str) -> str:
 
 
 def _mint_v2_rappid(kind: str, owner: str, repo: str) -> str:
-    return f"rappid:v2:{kind}:@{owner}/{repo}:{uuid.uuid4().hex}@github.com/{owner}/{repo}"
+    # Consolidated rappid (CONSTITUTION Art. XXXIV.1): self-locating + 256-bit; kind → record.
+    import hashlib
+    return f"rappid:@{owner}/{repo}:{hashlib.sha256(uuid.uuid4().bytes).hexdigest()}"
 
 
 def _slug(s: str) -> str:

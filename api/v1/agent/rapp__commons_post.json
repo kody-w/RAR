@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__commons_post",
+  "name": "CommonsPost",
+  "rar_name": "@rapp/commons_post",
+  "rappid": "rappid:@rapp/commons_post:48179c4a4ffa17f7014e170a66f8a9f6ebdce1b17efccda3358d2cdeb9ce5ba7",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "commons",
+    "neighborhood",
+    "post",
+    "event-stream",
+    "sign"
+  ],
+  "description": "Compose a signed event for the RAPP Commons event stream. Builds the canonical rapp-commons-event/1.0 object and returns a signing intent \u2014 the host environment (browser WebCrypto or server-side ECDSA) signs and posts. Splitting compose from sign keeps the operator's private key out of the agent layer.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 241,
+  "size_kb": 10.1,
+  "sha256": "48179c4a4ffa17f7014e170a66f8a9f6ebdce1b17efccda3358d2cdeb9ce5ba7",
+  "has_card": true,
+  "added_at": "2026-05-11T13:43:55-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__commons_post.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/commons_post_agent.py"
+}

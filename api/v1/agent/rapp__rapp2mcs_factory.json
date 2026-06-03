@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rapp2mcs_factory",
+  "name": "RAPP2MCS Factory",
+  "rar_name": "@rapp/rapp2mcs_factory",
+  "rappid": "rappid:@rapp/rapp2mcs_factory:3c159606b512a38731537fda4817a3506eea8dc9b9d910cd313aa03528ee0a99",
+  "version": "0.3.1",
+  "publisher": "@rapp",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "factory",
+    "mcs",
+    "copilot-studio",
+    "power-platform",
+    "deploy",
+    "singleton",
+    "aibast"
+  ],
+  "description": "End-to-end RAPP\u2192MCS factory. Orchestrates AIBAST_RAPP/scripts (analyzer \u2192 normalizer \u2192 wrapper_generator) plus pac CLI to convert a RAPP brainstem's agents/ directory into a deployed Copilot Studio native agent. No Azure Functions, no custom connectors, no custom Dataverse tables \u2014 only OOTB CDS.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2802,
+  "size_kb": 243.5,
+  "sha256": "3c159606b512a38731537fda4817a3506eea8dc9b9d910cd313aa03528ee0a99",
+  "has_card": true,
+  "added_at": "2026-05-16T21:09:45-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp2mcs_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp2mcs_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp2mcs_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp2mcs_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp2mcs_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp2mcs_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapp2mcs_factory_agent.py"
+}

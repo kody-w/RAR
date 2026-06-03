@@ -21,13 +21,13 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/vibe_builder_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "VibeBuilder",
     "description": "Builds a complete rapplication (agent + service) from a natural language description.",
     "author": "RAPP",
     "tags": ["meta", "builder", "rapplication"],
     "category": "platform",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "example_call": "Build me a bookmark manager",
 }

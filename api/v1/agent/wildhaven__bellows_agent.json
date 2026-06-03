@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "wildhaven__bellows_agent",
+  "name": "Bellows",
+  "rar_name": "@wildhaven/bellows_agent",
+  "rappid": "rappid:@wildhaven/bellows_agent:70f4a8f70083460a20dbddd6772f151ee5ad25dfba73fe6b8ea03fb071a463d9",
+  "version": "1.1.0",
+  "publisher": "@wildhaven",
+  "category": "general",
+  "tags": [
+    "bellows",
+    "doubledown",
+    "self-judge",
+    "creative",
+    "loop",
+    "daemon",
+    "construct",
+    "show-off-the-power"
+  ],
+  "description": "Summoning this card asks: 'What are the absolute coolest, most mind-blowing, out of the box prompts that will really show off the power? Give me 10.' Then it runs the doubledown loop \u2014 generate, self-critique against a tangibility rubric, kill the weak, surface only survivors. Pass a topic to escalate something else. Each loop sharpens itself with the previous loop's kills.",
+  "author": "Wildhaven of America",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 479,
+  "size_kb": 19.1,
+  "sha256": "70f4a8f70083460a20dbddd6772f151ee5ad25dfba73fe6b8ea03fb071a463d9",
+  "has_card": true,
+  "added_at": "2026-05-16T13:08:37-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__bellows_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/bellows_agent.py"
+}

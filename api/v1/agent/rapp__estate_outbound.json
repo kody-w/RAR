@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__estate_outbound",
+  "name": "EstateOutbound",
+  "rar_name": "@rapp/estate_outbound",
+  "rappid": "rappid:@rapp/estate_outbound:71038491a2b017bdb580588291f94fd1f2e6478c282b222f0bfcc195042f1c1a",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "estate",
+    "outbound",
+    "federation",
+    "neighborhood",
+    "publish"
+  ],
+  "description": "Stage a signed neighborhood event in the operator's outbound lane (Article XLVIII). The companion to commons_post \u2014 once an event is signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the neighborhood's federation roll-up can pull it on its beat. Does NOT push to the operator's public-estate repo \u2014 that's a separate step the operator owns (gh CLI or a future estate_publish_agent).",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 183,
+  "size_kb": 7.0,
+  "sha256": "71038491a2b017bdb580588291f94fd1f2e6478c282b222f0bfcc195042f1c1a",
+  "has_card": true,
+  "added_at": "2026-05-11T13:59:12-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__estate_outbound.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/estate_outbound_agent.py"
+}

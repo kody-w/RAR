@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__plant_seed_agent",
+  "name": "Plant Seed",
+  "rar_name": "@kody-w/plant_seed_agent",
+  "rappid": "rappid:@kody-w/plant_seed_agent:4c69621f93f28ba9d71b9aff350a7f815a5623f397443a1d9c67ce3163dba6c7",
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "platform",
+  "tags": [
+    "plant",
+    "seed",
+    "neighborhood",
+    "twin",
+    "holocard",
+    "grail",
+    "operator-mediated"
+  ],
+  "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
+  "author": "kody-w",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 571,
+  "size_kb": 26.3,
+  "sha256": "4c69621f93f28ba9d71b9aff350a7f815a5623f397443a1d9c67ce3163dba6c7",
+  "has_card": true,
+  "added_at": "2026-05-09T15:25:19-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__plant_seed_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py"
+}

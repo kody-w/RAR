@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__twin_agent",
+  "name": "Twin",
+  "rar_name": "@rapp/twin_agent",
+  "rappid": "rappid:@rapp/twin_agent:40e008117509434d46035b4f40d665cc2d4b406361c1e5aa86bc3cbc91a6b2d6",
+  "version": "1.1.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "twin",
+    "summon",
+    "hatch",
+    "boot",
+    "lifecycle",
+    "egg",
+    "estate",
+    "local-first"
+  ],
+  "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1772,
+  "size_kb": 71.8,
+  "sha256": "40e008117509434d46035b4f40d665cc2d4b406361c1e5aa86bc3cbc91a6b2d6",
+  "has_card": true,
+  "added_at": "2026-05-04T12:36:05-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__twin_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/twin_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/twin_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__twin_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__twin_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__twin_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/twin_agent.py"
+}

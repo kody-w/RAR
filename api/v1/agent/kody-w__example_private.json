@@ -1,0 +1,35 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__example_private",
+  "name": "ExamplePrivate",
+  "rar_name": "@kody-w/example_private",
+  "rappid": "rappid:@kody-w/example_private:f6d92b6d5d226a748b2eafa5ec4bb44a205d0e8cc54d282672af3c8d4b42d5d0",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "example",
+    "private",
+    "stub"
+  ],
+  "description": "Sample gated stub demonstrating the private layer.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "private",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 40,
+  "size_kb": 1.2,
+  "sha256": "",
+  "has_card": false,
+  "added_at": "2026-05-11T20:46:08-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__example_private.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/private/example_private_agent.py.stub"
+}

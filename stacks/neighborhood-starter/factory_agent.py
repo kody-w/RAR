@@ -186,7 +186,7 @@ def _build_rar_index(files: dict[str, bytes], owner: str, nb_slug: str) -> bytes
             "Joining brainstems hot-load these agents (sha256-verified) "
             "into their local agents/ directory via EggHatcher."
         ),
-        "version": "1.0",
+        "version": "1.0.1",
         "created_at": _now_iso(),
         "raw_url_prefix": raw_prefix,
         "required_for_participation": required,
@@ -292,8 +292,7 @@ class NeighborhoodFactoryAgent(BasicAgent):
 
         # 2. Mint identifiers
         nb_uuid = uuid.uuid4().hex
-        rappid = (f"rappid:v2:neighborhood:@{owner}/{nb_slug}:"
-                   f"{nb_uuid}@github.com/{owner}/{nb_slug}")
+        rappid = f"rappid:@{owner}/{nb_slug}:{hashlib.sha256(nb_uuid.encode()).hexdigest()}"
         rapp_uuid_dashboard = uuid.uuid4().hex
         plant_ts = _now_iso()
 

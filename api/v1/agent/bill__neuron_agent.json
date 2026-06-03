@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "bill__neuron_agent",
+  "name": "Neuron",
+  "rar_name": "@bill/neuron_agent",
+  "rappid": "rappid:@bill/neuron_agent:6bf5e44870ad56d83816cb330b6eb170a6f637b396f8ce6d2b51f7ab6f5dc275",
+  "version": "1.0.0",
+  "publisher": "@bill",
+  "category": "core",
+  "tags": [
+    "memory",
+    "neuron",
+    "knowledge-base",
+    "bootstrap",
+    "platform",
+    "copilot-studio",
+    "dataverse",
+    "d365",
+    "power-platform"
+  ],
+  "description": "Portable memory packs \u2014 drop the file in, get a compact Knowledge Base block injected at session start.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 384,
+  "size_kb": 27.7,
+  "sha256": "6bf5e44870ad56d83816cb330b6eb170a6f637b396f8ce6d2b51f7ab6f5dc275",
+  "has_card": false,
+  "added_at": "2026-05-12T13:37:05-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/bill__neuron_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@bill/neuron_agent.py"
+}

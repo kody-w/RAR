@@ -1,0 +1,36 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__manage_memory_agent",
+  "name": "ManageMemory",
+  "rar_name": "@kody-w/manage_memory_agent",
+  "rappid": "rappid:@kody-w/manage_memory_agent:a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "core",
+    "memory",
+    "storage",
+    "persistence"
+  ],
+  "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 255,
+  "size_kb": 10.8,
+  "sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "has_card": false,
+  "added_at": "2026-04-03T16:15:52-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__manage_memory_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__manage_memory_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__manage_memory_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/manage_memory_agent.py"
+}

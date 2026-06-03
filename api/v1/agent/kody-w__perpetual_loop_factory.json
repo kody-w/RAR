@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__perpetual_loop_factory",
+  "name": "PerpetualLoopFactory",
+  "rar_name": "@kody-w/perpetual_loop_factory",
+  "rappid": "rappid:@kody-w/perpetual_loop_factory:682571f1001e37328bcfdd08c0370a521810551df308bcb6e8651d9c4b62f2f5",
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "meta",
+    "factory",
+    "perpetual",
+    "chain",
+    "twins",
+    "self-correcting",
+    "kaizen"
+  ],
+  "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch.",
+  "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1356,
+  "size_kb": 54.5,
+  "sha256": "682571f1001e37328bcfdd08c0370a521810551df308bcb6e8651d9c4b62f2f5",
+  "has_card": true,
+  "added_at": "2026-05-05T08:57:33-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__perpetual_loop_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__perpetual_loop_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__perpetual_loop_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__perpetual_loop_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/perpetual_loop_factory_agent.py"
+}

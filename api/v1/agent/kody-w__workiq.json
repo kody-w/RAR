@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__workiq",
+  "name": "WorkIQ",
+  "rar_name": "@kody-w/workiq",
+  "rappid": "rappid:@kody-w/workiq:d0683cd1faff9e14310e6408449bee8b643d9cbefed32e591c3a01e59d5c73cd",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "m365",
+    "microsoft",
+    "email",
+    "calendar",
+    "teams",
+    "sharepoint",
+    "workiq"
+  ],
+  "description": "Natural-language access to Microsoft 365 data \u2014 emails, calendar, SharePoint/OneDrive, Teams messages, people. Wraps the workiq CLI (Entra ID auth required).",
+  "author": "Kody",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 249,
+  "size_kb": 9.5,
+  "sha256": "d0683cd1faff9e14310e6408449bee8b643d9cbefed32e591c3a01e59d5c73cd",
+  "has_card": false,
+  "added_at": "2026-05-02T14:14:24-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__workiq.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__workiq.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__workiq.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/workiq_agent.py"
+}

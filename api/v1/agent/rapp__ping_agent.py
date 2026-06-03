@@ -3,13 +3,13 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/ping_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Ping",
     "description": "Returns 'pong'. The smallest possible agent — useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
     "author": "RAPP",
     "tags": ["diagnostic", "smoke-test", "minimal"],
     "category": "devtools",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
 }

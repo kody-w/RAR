@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__topic_wizard",
+  "name": "Topic Wizard",
+  "rar_name": "@rapp/topic_wizard",
+  "rappid": "rappid:@rapp/topic_wizard:f081b64cd83a2c39da556f8fb2e3e5d1d9c03837172f4acbe276f2311655c15b",
+  "version": "0.1.1",
+  "publisher": "@rapp",
+  "category": "pipeline",
+  "tags": [
+    "mcs",
+    "copilot-studio",
+    "topic",
+    "wizard",
+    "ui",
+    "singleton"
+  ],
+  "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1317,
+  "size_kb": 54.9,
+  "sha256": "f081b64cd83a2c39da556f8fb2e3e5d1d9c03837172f4acbe276f2311655c15b",
+  "has_card": true,
+  "added_at": "2026-05-16T21:41:11-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__topic_wizard.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/topic_wizard_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/topic_wizard_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__topic_wizard.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__topic_wizard.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__topic_wizard.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/topic_wizard_agent.py"
+}

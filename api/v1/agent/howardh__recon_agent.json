@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__recon_agent",
+  "name": "Recon",
+  "rar_name": "@howardh/recon_agent",
+  "rappid": "rappid:@howardh/recon_agent:8a533821ac5c24f61602d5bc79cf6c2386c5e4d42d0bcb1aaf23e5f7ad866b19",
+  "version": "1.0.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "recon",
+    "url",
+    "security",
+    "api",
+    "scanner",
+    "headers",
+    "ssl",
+    "tech-stack"
+  ],
+  "description": "URL intelligence scanner \u2014 point it at any URL for a full recon report: tech stack, security headers, API schema, SSL, performance. Every scan produces an auto-opening HTML report.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 742,
+  "size_kb": 33.0,
+  "sha256": "8a533821ac5c24f61602d5bc79cf6c2386c5e4d42d0bcb1aaf23e5f7ad866b19",
+  "has_card": false,
+  "added_at": "2026-04-07T23:21:37Z",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__recon_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/recon_agent.py"
+}

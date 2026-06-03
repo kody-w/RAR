@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__twin_egg_hatcher",
+  "name": "HatchTwinEgg",
+  "rar_name": "@kody-w/twin_egg_hatcher",
+  "rappid": "rappid:@kody-w/twin_egg_hatcher:8bed674e4cfb3091536952cc3af3466e41012e757fe66ad836cd707aa319af5b",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "twin",
+    "egg",
+    "hatcher",
+    "organism",
+    "federation",
+    "single-file",
+    "rapp"
+  ],
+  "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 892,
+  "size_kb": 32.0,
+  "sha256": "8bed674e4cfb3091536952cc3af3466e41012e757fe66ad836cd707aa319af5b",
+  "has_card": false,
+  "added_at": "2026-05-18T19:04:20-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__twin_egg_hatcher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/twin_egg_hatcher_agent.py"
+}

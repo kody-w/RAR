@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__install_rappter_distro_agent",
+  "name": "Install Rappter Distro",
+  "rar_name": "@kody-w/install_rappter_distro_agent",
+  "rappid": "rappid:@kody-w/install_rappter_distro_agent:bf4c72dd5bedca676382aa50d9eb72a8f1537f48d5ae8ca8b667c943d09b54be",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "pipeline",
+  "tags": [
+    "installer",
+    "distro",
+    "rappter",
+    "bootstrap",
+    "organism"
+  ],
+  "description": "Single-file installer that pulls the full rappter-distro (organs, senses, lib/, rich UI, @rappter agents) from raw.githubusercontent.com via MANIFEST.json with sha256 verification per file. Refuses to touch the three sacred kernel files.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 944,
+  "size_kb": 36.5,
+  "sha256": "bf4c72dd5bedca676382aa50d9eb72a8f1537f48d5ae8ca8b667c943d09b54be",
+  "has_card": false,
+  "added_at": "2026-05-17T02:49:15Z",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__install_rappter_distro_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/install_rappter_distro_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__install_rappter_distro_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__install_rappter_distro_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/install_rappter_distro_agent.py"
+}

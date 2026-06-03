@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__launch_to_public_agent",
+  "name": "Launch to Public",
+  "rar_name": "@kody-w/launch_to_public_agent",
+  "rappid": "rappid:@kody-w/launch_to_public_agent:835c9fbece61153785de3efea29e74daec46e9dd598c5a42d1c2661168b5e695",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "platform",
+  "tags": [
+    "launch",
+    "publish",
+    "local-to-global",
+    "bond-technique",
+    "operator-mediated",
+    "platform"
+  ],
+  "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
+  "author": "kody-w",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 553,
+  "size_kb": 25.0,
+  "sha256": "835c9fbece61153785de3efea29e74daec46e9dd598c5a42d1c2661168b5e695",
+  "has_card": true,
+  "added_at": "2026-05-09T15:25:17-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__launch_to_public_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py"
+}

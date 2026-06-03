@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__legal_helper",
+  "name": "LegalHelper",
+  "rar_name": "@kody-w/legal_helper",
+  "rappid": "rappid:@kody-w/legal_helper:04befacedf56d6b6a79eaf129eb02fefb0df2a979149ab4b3d94638aed11bf84",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "legal",
+    "ip",
+    "wildhaven",
+    "private",
+    "stub",
+    "operator-personal"
+  ],
+  "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy \u2014 NOT legal advice; every reply ends with the disclaimer.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "private",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 45,
+  "size_kb": 1.7,
+  "sha256": "",
+  "has_card": false,
+  "added_at": "2026-05-12T13:49:20-04:00",
+  "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__legal_helper.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/legal_helper_agent.py.stub",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__legal_helper.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__legal_helper.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/legal_helper_agent.py.stub"
+}
