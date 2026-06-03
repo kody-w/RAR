@@ -14,7 +14,7 @@
 > Fetch https://raw.githubusercontent.com/kody-w/RAR/main/skill.md and use it to help me browse, search, install, and submit agents to the RAPP registry.
 > ```
 >
-> Once your AI has this file, it can: search 130+ agents, install them with one command, scaffold new agents, submit to the registry, resolve cards from seeds, and more — all without you visiting GitHub.
+> Once your AI has this file, it can: search 180+ agents, install them with one command, scaffold new agents, submit to the registry, resolve cards from seeds, and more — all without you visiting GitHub.
 
 ---
 
@@ -116,6 +116,14 @@ Any numeric seed resolves to a full card deterministically. No network needed.
 Algorithm: `seed → mulberry32 PRNG → type, stats, abilities, rarity`
 
 Implementation: `rapp_sdk.py` (Python). Deterministic algorithm — same seed always yields the same card.
+
+### 7. MCP On-Ramp (for MCP hosts)
+
+MCP is transport, not a new agent unit — it is how an MCP-native AI reaches RAR and a running brainstem. Framing: MCP clients are Layer 2 callers of `/chat` ("Chat Is The Only Wire").
+
+- **Static catalog (`rapp-static-mcp/1.0`):** This repo's static files already form a content-addressed MCP catalog. Catalog = `registry.json`; agent frames = `agents/*` pinned by `_sha256` (and `_first_commit_sha` for first-seen provenance). An MCP host reads the catalog, fetches a frame, and **verifies-before-exec**: recompute the SHA256 of the fetched file and refuse to run on mismatch. Profile is built on `rapp-static-api/1.0` (see `api.json` → `endpoints.mcp`).
+- **Live brainstem (`rapp_brainstem_mcp.py`):** bridges a running brainstem to any MCP host over `/chat`. Every capability — install, search, run an agent, memory — flows through that single `/chat` call.
+- **Serving drop-in agents (`rapp_mcp.py`):** exposes local drop-in `*_agent.py` files as MCP tools for hosts that want to call them directly.
 
 ---
 
@@ -297,7 +305,7 @@ curl -X POST https://api.github.com/repos/kody-w/RAR/issues \
 
 Open an issue at https://github.com/kody-w/RAR/issues/new — paste Python code directly in the body.
 
-> **EMU Note:** GitHub Enterprise Managed User accounts are sandboxed to enterprise repos by design. You need a personal GitHub account (free) to interact with public repos like RAPP. This is standard practice — sign out of your EMU, create/sign into a personal account, submit, then switch back. Your `@borg` namespace is tied to your personal identity, not your enterprise identity.
+> **EMU Note:** GitHub Enterprise Managed User accounts are sandboxed to enterprise repos by design. You need a personal GitHub account (free) to interact with public repos like RAPP. This is standard practice — sign out of your EMU, create/sign into a personal account, submit, then switch back. Your `@yourname` namespace is tied to your personal identity, not your enterprise identity.
 
 #### What happens next
 
@@ -335,11 +343,13 @@ The following patterns are **rejected** by the security scanner:
 
 | Namespace | Owner | Focus |
 |-----------|-------|-------|
-| `@rapp` | Reserved | Official base class |
-| `@kody` | Kody Wildfeuer | Core agents (memory, RAPP client, workbench, engine) |
-| `@borg` | Howard Hoy | Assimilation, cards, intelligence |
+| `@rapp` | Reserved | Official base class and core platform agents |
+| `@kody-w` | Kody Wildfeuer | Core agents (memory, RAPP client, workbench, engine) |
+| `@howardh` | Howard Hoy | Assimilation, cards, intelligence |
 | `@discreetRappers` | Reserved | Enterprise (Dynamics, SharePoint, pipelines) |
 | `@wildhaven` | Wildhaven of America | CEO agent |
+| `@bill` | Bill | Core |
+| `@rarbookworld` | RAR Bookworld | Pipeline |
 | `@aibast-agents-library` | Templates | 104 industry vertical templates |
 
 New contributors: your namespace is `@yourgithubusername`. It's yours forever.
@@ -368,7 +378,9 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 
 ## Agent Manifest — Current Inventory
 
-### @kody
+> This is a partial, hand-maintained sample. For the complete, current inventory (180 agents across 8 publishers), fetch `registry.json` — its `agents` array is the ground truth.
+
+### @kody-w
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | ContextMemory | context_memory_agent | core | Recalls conversation history and stored memories |
@@ -382,7 +394,7 @@ Industry verticals: `b2b_sales`, `b2c_sales`, `energy`, `federal_government`, `f
 | Rappter Engine | rappter_engine_agent | devtools | Base class for data-driven content engines |
 | Rappterpedia | rappterpedia_agent | core | Community wiki engine |
 
-### @borg
+### @howardh
 | Name | Slug | Category | Description |
 |------|------|----------|-------------|
 | Borg | borg_agent | core | Assimilates repos and URLs into structured knowledge |
@@ -498,12 +510,12 @@ Issues labeled `duplicate` or `rejected` are hidden from the pipeline board.
 ## Version
 
 ```
-registry_schema: rapp-registry/1.0
+registry_schema: rapp-registry/1.1
 agent_schema: rapp-agent/1.0
 card_types: 7 (LOGIC, DATA, SOCIAL, SHIELD, CRAFT, HEAL, WEALTH)
-agents: 133
-publishers: 7
-test_count: 1117
+agents: 180
+publishers: 8
+test_count: 1144
 egg_protocol: rapp-egg/1.0
 ```
 

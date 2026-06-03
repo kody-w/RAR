@@ -295,9 +295,10 @@ Bump the version in `__manifest__` when you update. The registry tracks the late
 | Method | How |
 |--------|-----|
 | **Web Store** | Open `index.html` — Browse, Leaderboard, Cards, Packs, Stream, Workbench, Submit |
-| **Runtime agent** | `@kody/rar_remote_agent` fetches `registry.json` and operates autonomously |
+| **Runtime agent** | `@kody-w/rar_remote_agent` fetches `registry.json` and operates autonomously |
 | **Direct fetch** | `curl https://raw.githubusercontent.com/kody-w/RAR/main/registry.json` |
 | **Local-first** | Drag `.py` files into the web store — they're stored in IndexedDB, no upload |
+| **MCP** | Any MCP host reaches RAR via `rapp-static-mcp/1.0` (content-addressed agent frames, sha8-pinned by `_sha256`, verify-before-exec) and reaches a running brainstem via `rapp_brainstem_mcp.py` over `/chat`. MCP is transport realizing "Chat Is The Only Wire" — MCP clients are Layer 2 callers of `/chat`, not a new unit. |
 
 ---
 
@@ -322,7 +323,7 @@ Every agent renders as a card. Every card has **three faces** so it can exist an
 | Face | Internal Mode | What It Is | Where It Works |
 |------|--------------|------------|----------------|
 | **Icon** | `business` | Compact info card. Publisher, description, QR code, tier badge, version, tags. | Web, print, email, thumbnails |
-| **Full Art** | `creative` | Trading card with holographic effects. Generative art, mana pips, creature type, abilities, power/toughness. Parallax depth on mouse move, prismatic refraction, specular shimmer. Inspired by `@borg/cardsmith_agent` by Howard. | Web, print, physical cards |
+| **Full Art** | `creative` | Trading card with holographic effects. Generative art, mana pips, creature type, abilities, power/toughness. Parallax depth on mouse move, prismatic refraction, specular shimmer. Inspired by `@howardh/cardsmith_agent` by Howard. | Web, print, physical cards |
 | **ASCII** | `kids` | Pure monospace terminal card. ASCII character art, stat bars (POWER/SPEED/LOGIC/CHAOS/GUARD), flavor text, scanline animation. No images, no SVG, no special fonts. | CLI, terminal UIs, plain text, any interface |
 
 The card mode persists across reloads via `localStorage`. Full Art cards can be flipped to reveal a QR back face. Double-click any card for full-screen "Show & Tell" mode.
@@ -745,22 +746,22 @@ Federation is optional. Your workspace works perfectly standalone — it's just 
 
 ### Example: Howard's Workspace
 
-Howard wants to manage his `@borg/` agents locally with his own card collection:
+Howard wants to manage his `@howardh/` agents locally with his own card collection:
 
 ```bash
 git clone https://github.com/kody-w/RAR.git howard-agents
 cd howard-agents
-GITHUB_REPOSITORY=borg/howard-agents python scripts/setup_instance.py
+GITHUB_REPOSITORY=howardh/howard-agents python scripts/setup_instance.py
 
-# Howard already has agents in agents/@borg/ — rebuild
+# Howard already has agents in agents/@howardh/ — rebuild
 python build_registry.py
 python scripts/generate_holo_cards.py
 
-# Open the store — Howard sees all his @borg agents with cards
+# Open the store — Howard sees all his @howardh agents with cards
 open index.html
 
 # Howard builds a new agent locally, tests it, then pushes upstream
-python scripts/federate.py submit @borg/new_agent
+python scripts/federate.py submit @howardh/new_agent
 ```
 
 Howard's promo cards (the originals in `HOWARD_DB`) render with the `HOLO ★ Promo` badge and his artist credit regardless of whether he's viewing the main store or his local workspace.
@@ -780,8 +781,6 @@ Howard's promo cards (the originals in `HOWARD_DB`) render with the `HOLO ★ Pr
 An instance can live in the cloud or on your machine — same code, same agents/ directory, just a different `role` in `rar.config.json`.
 
 ---
-
-## Article XVII — Amendments
 
 ## Article XX — The SuperSeed Chain
 
@@ -875,6 +874,8 @@ RAPP brainstems meet as a **neighborhood** of uniform peers. The canonical speci
 The vocabulary (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**) and the **kite mark** are the canonical identity of the RAPP neighborhood. Implementations and federated instances use them exactly. Single file. Uniform peer. Sealed line. Scan to join.
 
 ---
+
+## Article XXII — Amendments
 
 This constitution can be amended by:
 
