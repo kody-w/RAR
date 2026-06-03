@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-03T19:55:53.664438+00:00",
+  "generated_at": "2026-06-03T21:33:37.153835+00:00",
   "stats": {
     "total_agents": 180,
     "total_swarms": 82,
@@ -5044,7 +5044,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_egg_hatcher",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "HatchTwinEgg",
       "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
       "author": "Kody Wildfeuer",
@@ -5064,14 +5064,14 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/twin_egg_hatcher_agent.py",
-      "_sha256": "8bed674e4cfb3091536952cc3af3466e41012e757fe66ad836cd707aa319af5b",
+      "_sha256": "aa53c3d325959dfe46094788204fbdb8d210c345763a6e0180b6908fb89496f5",
       "_seed": 8075652905997056003,
-      "_size_kb": 32.0,
-      "_lines": 892,
+      "_size_kb": 32.4,
+      "_lines": 898,
       "_has_card": false,
       "_added_at": "2026-05-18T19:04:20-04:00",
       "_first_commit_sha": "d2f4ef04825beb10c55243c80152a7ddc25af57a",
-      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
+      "_latest_commit_sha": "1b230b0de84cdf4fb77498793d366e95d11f5347"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5328,7 +5328,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/estate_outbound",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "EstateOutbound",
       "description": "Stage a signed neighborhood event in the operator's outbound lane (Article XLVIII). The companion to commons_post \u2014 once an event is signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the neighborhood's federation roll-up can pull it on its beat. Does NOT push to the operator's public-estate repo \u2014 that's a separate step the operator owns (gh CLI or a future estate_publish_agent).",
       "author": "RAPP",
@@ -5347,7 +5347,7 @@
       ],
       "example_call": {
         "args": {
-          "neighborhood_rappid": "rappid:v2:neighborhood:@rapp-commons/origin:3929ce90ebe97fe2a95432e9f647f3a3@github.com/kody-w/rapp-commons",
+          "neighborhood_rappid": "rappid:@rapp-commons/origin:3727bc584708e539d69792713fbb200688c634744cce2d9614fa5aefd4ff295f",
           "event": {
             "schema": "rapp-commons-event/1.0",
             "kind": "hello",
@@ -5360,14 +5360,14 @@
         }
       },
       "_file": "agents/@rapp/estate_outbound_agent.py",
-      "_sha256": "71038491a2b017bdb580588291f94fd1f2e6478c282b222f0bfcc195042f1c1a",
+      "_sha256": "e34c853f3b1ae2a6349519436760bd1531ead304ba022d4c7109d143006cb8d9",
       "_seed": 13191466770999423966,
       "_size_kb": 7.0,
       "_lines": 183,
       "_has_card": true,
       "_added_at": "2026-05-11T13:59:12-04:00",
       "_first_commit_sha": "b1b409ae141ba89b565787d3033b75323e1fdd2b",
-      "_latest_commit_sha": "b1b409ae141ba89b565787d3033b75323e1fdd2b",
+      "_latest_commit_sha": "1b230b0de84cdf4fb77498793d366e95d11f5347",
       "_card_sha256": "bad63df2c79b5d96ef403a36ec4ef0e3a503e817b2db83945ef1b8927bc8bf70"
     },
     {
