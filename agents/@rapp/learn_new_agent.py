@@ -7,6 +7,10 @@ Generated agents follow the Single File Agent pattern: one file
 containing documentation, metadata contract, and deterministic code.
 
 v2: adds swarm generation, RAR registry compatibility, and submit workflow.
+v2.1: the orchestrating model can now pass the real perform() body via
+'perform_code' (with optional 'imports'), so generated agents ship working
+logic instead of stubs. The autonomous fallback now uses the brainstem's live
+Copilot session and validates that every generated body compiles.
 Output is dual-compatible — works in local brainstem AND ready for the
 RAR registry (https://github.com/kody-w/RAR).
 
@@ -34,9 +38,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "display_name": "LearnNew",
-    "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+    "description": "Creates new RAPP agents or swarms from natural-language descriptions. The model supplies the real perform() body via 'perform_code' so generated agents ship working logic, not stubs. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
     "author": "RAPP",
     "tags": ["meta", "generator", "scaffolding", "learn", "swarm"],
     "category": "core",
@@ -292,6 +296,11 @@ if __name__ == "__main__":
             "name": self.name,
             "description": (
                 "Creates new RAPP agents or swarms from natural-language descriptions. "
+                "IMPORTANT: when creating an agent, YOU (the model) should write the actual "
+                "working Python for the agent's perform() method and pass it as 'perform_code' "
+                "(plus any non-stdlib imports as 'imports'). Write real, runnable logic — not a "
+                "placeholder. If you omit 'perform_code', the agent falls back to generating its "
+                "own body, which is less reliable. "
                 "Actions: 'create' generates a single agent, 'swarm' creates a multi-agent "
                 "pipeline, 'list' shows generated agents, 'delete' removes one, "
                 "'preview' dry-runs generation, 'submit' prepares a RAR registry submission. "
@@ -304,6 +313,26 @@ if __name__ == "__main__":
                     "description": {
                         "type": "string",
                         "description": "Natural language description of what the new agent should do."
+                    },
+                    "perform_code": {
+                        "type": "string",
+                        "description": (
+                            "The REAL Python body of the new agent's perform(self, **kwargs) method. "
+                            "Write complete, runnable logic: read inputs via kwargs.get(...), do the "
+                            "actual work, and return a json.dumps({...}) string containing at least a "
+                            "'status' key. Wrap network/IO in try/except. Do NOT include the 'def "
+                            "perform' line, the class, imports, or markdown fences — only the method "
+                            "body. Indentation is normalized automatically. This is the recommended "
+                            "way to give the new agent real capabilities."
+                        )
+                    },
+                    "imports": {
+                        "type": "string",
+                        "description": (
+                            "Optional import lines that perform_code needs, one per line, e.g. "
+                            "'import urllib.request\\nfrom bs4 import BeautifulSoup'. Non-stdlib "
+                            "packages are auto-installed when the agent loads."
+                        )
                     },
                     "name": {
                         "type": "string",
@@ -407,7 +436,7 @@ if __name__ == "__main__":
             })
 
         try:
-            file_path.write_text(agent_code)
+            file_path.write_text(agent_code, encoding="utf-8")
         except Exception as e:
             return json.dumps({"status": "error", "message": f"Failed to write agent file: {e}"})
 
@@ -496,7 +525,7 @@ if __name__ == "__main__":
             if write:
                 dest = self.agents_dir / sub_filename
                 try:
-                    dest.write_text(sub_code)
+                    dest.write_text(sub_code, encoding="utf-8")
                 except Exception as e:
                     return json.dumps({"status": "error",
                                        "message": f"Failed to write {sub_filename}: {e}"})
@@ -545,7 +574,7 @@ if __name__ == "__main__":
         if write:
             dest = self.agents_dir / orch_filename
             try:
-                dest.write_text(orch_code)
+                dest.write_text(orch_code, encoding="utf-8")
             except Exception as e:
                 return json.dumps({"status": "error",
                                    "message": f"Failed to write {orch_filename}: {e}"})
@@ -668,9 +697,19 @@ if __name__ == "__main__":
     # ── Code generation ───────────────────────────────────────────────────
 
     def _generate_agent_code(self, description, name, class_name, **kwargs):
-        perform_body = self._generate_perform_body(description)
+        explicit_code = (kwargs.get('perform_code') or '').strip()
+        perform_body = ''
+        if explicit_code:
+            candidate = self._normalize_body(explicit_code)
+            if self._body_compiles(candidate):
+                perform_body = candidate
+        if not perform_body.strip():
+            perform_body = self._generate_perform_body(description)
         extra_params = self._generate_extra_params(description)
         extra_imports = self._generate_extra_imports(description)
+        explicit_imports = (kwargs.get('imports') or '').strip()
+        if explicit_imports:
+            extra_imports = self._merge_imports(extra_imports, explicit_imports)
         safe_desc = description.replace('"', '\\"').replace('\n', ' ')[:200]
         tags = self._generate_tags(description)
         snake = self._to_snake_case(name)
@@ -760,46 +799,171 @@ if __name__ == "__main__":
 
         return extra
 
-    def _generate_perform_body(self, description):
+    def _normalize_body(self, body_text):
+        """Clean orchestrator/LLM-supplied code into a valid 8-space-indented perform() body.
+
+        Strips markdown fences, drops a stray 'def perform...' line, and re-bases the
+        indentation to exactly 8 spaces so it drops cleanly into AGENT_TEMPLATE.
+        """
+        if not body_text:
+            return ''
+
+        # Strip markdown fences if present.
+        if '```python' in body_text:
+            body_text = body_text.split('```python', 1)[1].split('```', 1)[0]
+        elif '```' in body_text:
+            parts = body_text.split('```')
+            body_text = max((p for p in parts), key=len)
+
+        lines = body_text.splitlines()
+        # Drop a leading "def perform" line if the model included one.
+        if lines and lines[0].lstrip().startswith('def perform'):
+            lines = lines[1:]
+
+        non_blank = [ln for ln in lines if ln.strip()]
+        if not non_blank:
+            return ''
+
+        common = min(len(ln) - len(ln.lstrip(' ')) for ln in non_blank)
+        rebased = []
+        for ln in lines:
+            if not ln.strip():
+                rebased.append('')
+            else:
+                rebased.append('        ' + ln[common:].rstrip())
+        return '\n'.join(rebased).rstrip()
+
+    def _merge_imports(self, base, extra):
+        """Combine keyword-inferred imports with explicit ones, de-duplicated, order-preserving."""
+        seen = []
+        for block in (base, extra):
+            for line in (block or '').splitlines():
+                line = line.rstrip()
+                if line and line not in seen:
+                    seen.append(line)
+        return ('\n'.join(seen) + '\n') if seen else ''
+
+    def _body_compiles(self, body):
+        """Return True if `body` is syntactically valid as a perform() method body.
+
+        Guards against ever writing an agent whose perform() won't parse — if an
+        orchestrator- or LLM-supplied body is malformed, callers fall back to a
+        clean alternative instead.
+        """
+        if not body or not body.strip():
+            return False
+        src = "def _check(self, **kwargs):\n" + body + "\n"
         try:
-            prompt = (
-                f"Generate ONLY the Python code for the body of a perform() method "
-                f"for an agent that: {description}\n\n"
-                f"Rules:\n"
-                f"- Return a JSON string with status and result\n"
-                f"- Use kwargs.get() to access parameters\n"
-                f"- Keep it simple and functional\n"
-                f"- Do NOT include the method signature, just the body\n"
-                f"- Indent with 8 spaces\n\n"
-                f"Example format:\n"
-                f"        # Process the query\n"
-                f"        result = \"processed: \" + query\n"
-                f'        return json.dumps({{"status": "success", "result": result}})'
-            )
+            compile(src, "<agent-body>", "exec")
+            return True
+        except SyntaxError:
+            return False
 
-            result = subprocess.run(
-                ['copilot', '--message', prompt],
-                capture_output=True, text=True, timeout=30
-            )
+    def _llm_complete(self, messages):
+        """Run a one-shot completion through the brainstem's live Copilot session.
 
-            if result.returncode == 0 and result.stdout.strip():
-                body = result.stdout.strip()
-                if '```python' in body:
-                    body = body.split('```python')[1].split('```')[0]
-                elif '```' in body:
-                    body = body.split('```')[1].split('```')[0]
+        The agent executes inside the brainstem process, so we reach back into the
+        running module (loaded as __main__ when started via `python brainstem.py`)
+        and reuse its authenticated call_copilot(). No tools are passed, so this is a
+        plain text completion with no risk of recursive tool calls.
+        """
+        import sys
 
-                lines = body.strip().split('\n')
-                indented = '\n'.join(
-                    '        ' + line.lstrip() if line.strip() else ''
-                    for line in lines
-                )
-                if indented.strip():
-                    return indented
+        call = None
+        main_mod = sys.modules.get('__main__')
+        if main_mod is not None and hasattr(main_mod, 'call_copilot'):
+            call = main_mod.call_copilot
+        if call is None:
+            try:
+                import brainstem  # type: ignore
+                call = brainstem.call_copilot
+            except Exception:
+                return ''
+
+        try:
+            result = call(messages)
+            choice = (result.get('choices') or [{}])[0]
+            return (choice.get('message', {}) or {}).get('content', '') or ''
         except Exception:
-            pass
+            return ''
 
-        return '''        # Default implementation - customize this
+    def _generate_perform_body(self, description):
+        """Generate the perform() body autonomously when no perform_code was supplied.
+
+        Strategy (in order):
+          1. In-process call_copilot — the same Copilot session the brainstem chat
+             uses (works whether the upstream model is Claude, GPT, or Gemini).
+          2. `copilot` CLI as a legacy fallback.
+          3. A clearly-labelled stub if both fail.
+        """
+        prompt_messages = [
+            {
+                "role": "system",
+                "content": (
+                    "You write the BODY ONLY of a Python perform(self, **kwargs) method "
+                    "for a RAPP brainstem agent. You do NOT include the method signature, "
+                    "the class, the manifest, imports, the __main__ block, or markdown fences. "
+                    "Write normal Python with the outermost statements at column 0 (NO leading "
+                    "indentation — the caller indents your code automatically); use standard "
+                    "4-space indentation for nested blocks. Output must be valid, runnable Python."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Agent description:\n{description}\n\n"
+                    "Requirements for the body:\n"
+                    "- Read parameters via kwargs.get('name', default).\n"
+                    "- Return a JSON string (json.dumps) with at minimum a 'status' key.\n"
+                    "- Wrap network/IO in try/except; on error return "
+                    "json.dumps({'status': 'error', 'message': str(e)}).\n"
+                    "- Use ONLY modules already imported at the top of the file or "
+                    "stdlib modules (json, urllib.request, urllib.error, re, datetime, "
+                    "os, base64, pathlib, hashlib, time, random, csv, xml.etree.ElementTree). "
+                    "Re-import inside the method if you must.\n"
+                    "- Do NOT use the requests library. Do NOT import openai or anthropic. "
+                    "Use urllib.request for HTTP.\n"
+                    "- Do NOT indent the outermost statements — start them at column 0. "
+                    "Do NOT include the def line. Do NOT include triple backticks.\n\n"
+                    "Output the body now:"
+                ),
+            },
+        ]
+
+        body_text = ""
+
+        # ── 1. In-process LLM via the brainstem's live Copilot session ──
+        try:
+            body_text = (self._llm_complete(prompt_messages) or "").strip()
+        except Exception:
+            body_text = ""
+
+        # ── 2. Legacy `copilot` CLI fallback ────────────────────────────
+        if not body_text:
+            try:
+                cli_prompt = (
+                    "Generate ONLY the Python body for perform(self, **kwargs) for an "
+                    f"agent that: {description}\n"
+                    "Use kwargs.get(), return json.dumps({...}), wrap IO in try/except, "
+                    "stdlib only, no requests/openai, indent 8 spaces, no fences, no def line."
+                )
+                result = subprocess.run(
+                    ['copilot', '--message', cli_prompt],
+                    capture_output=True, text=True, timeout=30,
+                )
+                if result.returncode == 0:
+                    body_text = (result.stdout or "").strip()
+            except Exception:
+                body_text = ""
+
+        if body_text:
+            body = self._normalize_body(body_text)
+            if body.strip() and self._body_compiles(body):
+                return body
+
+        # ── 3. Last-resort stub (clearly marked) ───────────────────────
+        return '''        # ⚠ LLM body generation unavailable — stub only. Edit me.
+        query = kwargs.get('query', '')
         if not query:
             return json.dumps({
                 "status": "error",
@@ -846,7 +1010,7 @@ if __name__ == "__main__":
         try:
             import importlib.util
 
-            code = file_path.read_text()
+            code = file_path.read_text(encoding="utf-8")
             missing_deps = self._detect_missing_imports(code)
 
             if missing_deps:
@@ -964,7 +1128,7 @@ if __name__ == "__main__":
         for f in sorted(self.agents_dir.glob('*_agent.py')):
             if f.name in core:
                 continue
-            content = f.read_text()
+            content = f.read_text(encoding="utf-8")
             is_generated = 'Auto-generated by LearnNewAgent' in content
             agents.append({
                 "name": f.stem.replace('_agent', ''),

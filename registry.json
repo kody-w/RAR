@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-03T21:33:37.153835+00:00",
+  "generated_at": "2026-06-05T22:46:26.247544+00:00",
   "stats": {
     "total_agents": 180,
     "total_swarms": 82,
@@ -5475,9 +5475,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "display_name": "LearnNew",
-      "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+      "description": "Creates new RAPP agents or swarms from natural-language descriptions. The model supplies the real perform() body via 'perform_code' so generated agents ship working logic, not stubs. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
       "author": "RAPP",
       "tags": [
         "meta",
@@ -5499,10 +5499,10 @@
         }
       },
       "_file": "agents/@rapp/learn_new_agent.py",
-      "_sha256": "0edcecec861b4dce7ad6c06ef77a320d4c8affe51f8a9944b8c77aca0803c21c",
+      "_sha256": "5c2eb36d0e2b168b7181cefcff2d4b05b93e005114cc64abe8447a5f4c8d7b89",
       "_seed": 2538772095262403840,
-      "_size_kb": 38.0,
-      "_lines": 1025,
+      "_size_kb": 46.2,
+      "_lines": 1189,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
