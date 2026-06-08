@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-08T00:34:28.822044+00:00",
+  "generated_at": "2026-06-08T17:49:16.092890+00:00",
   "stats": {
-    "total_agents": 180,
+    "total_agents": 181,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -5072,6 +5072,40 @@
       "_added_at": "2026-05-18T19:04:20-04:00",
       "_first_commit_sha": "d2f4ef04825beb10c55243c80152a7ddc25af57a",
       "_latest_commit_sha": "1b230b0de84cdf4fb77498793d366e95d11f5347"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/twin_me",
+      "version": "1.0.0",
+      "display_name": "TwinMe",
+      "description": "Say 'twin me' to pack a generic, PII-stripped digital-twin .egg of this brainstem \u2014 your persona/voice + custom agents + calibration baseline only, with the entire workspace memory corpus and all secrets stripped. Hatchable on anyone else's local brainstem via @kody-w/twin_egg_hatcher.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "twin",
+        "egg",
+        "twin-me",
+        "pii-strip",
+        "persona",
+        "portable",
+        "federation",
+        "rapp"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "example_call": "twin me",
+      "_file": "agents/@kody-w/twin_me_agent.py",
+      "_sha256": "5988d1232444265a67138cf88bf885a30a6b7ddf4ef762680e1c68eaabc6592a",
+      "_seed": 7154277121291989206,
+      "_size_kb": 33.0,
+      "_lines": 780,
+      "_has_card": false,
+      "_added_at": "2026-06-08T13:48:48-04:00",
+      "_first_commit_sha": "5db14098aff17d349699789944523da57b83db4f",
+      "_latest_commit_sha": "5db14098aff17d349699789944523da57b83db4f"
     },
     {
       "schema": "rapp-agent/1.0",
