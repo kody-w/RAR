@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-08T00:27:27.018375+00:00",
+  "generated_at": "2026-06-08T00:34:28.822044+00:00",
   "stats": {
-    "total_agents": 181,
+    "total_agents": 180,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -45,15 +45,7 @@
       "workflow"
     ]
   },
-  "duplicates": [
-    {
-      "display_name": "CopilotStudioDeploy",
-      "agents": [
-        "@kody-w/copilot_studio_deploy_agent",
-        "@rapp/copilot_studio_deploy_agent"
-      ]
-    }
-  ],
+  "duplicates": [],
   "agents": [
     {
       "schema": "rapp-agent/1.0",
@@ -4467,38 +4459,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody-w/copilot_studio_deploy_agent",
-      "version": "1.0.0",
-      "display_name": "CopilotStudioDeploy",
-      "description": "Convert any RAPP agent and deploy it into your own Microsoft Copilot Studio environment, locally.",
-      "author": "kody-w",
-      "tags": [
-        "copilot",
-        "copilot_studio",
-        "power_platform",
-        "deploy",
-        "integration",
-        "automation"
-      ],
-      "category": "integrations",
-      "quality_tier": "community",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": "Deploy the emission tracking agent to my Copilot Studio environment",
-      "_file": "agents/@kody-w/copilot_studio_deploy_agent.py",
-      "_sha256": "b1687d989d54861b179947e5d454cae794bb37f3245f1560d14c8b89219a7869",
-      "_seed": 9376612446116789900,
-      "_size_kb": 33.5,
-      "_lines": 527,
-      "_has_card": false,
-      "_added_at": "2026-06-07T20:27:02-04:00",
-      "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
-      "_latest_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@kody-w/deal_desk_agent",
       "version": "1.1.0",
       "display_name": "DealDesk",
@@ -5257,38 +5217,34 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/copilot_studio_deploy_agent",
+      "version": "1.0.0",
       "display_name": "CopilotStudioDeploy",
-      "description": "Push a forged Copilot Studio bundle into a Dataverse environment via OAuth client_credentials + ImportSolutionAsync. Reads creds from local.settings.json. Destructive deploy is gated by confirm.",
-      "author": "RAPP",
-      "version": "0.1.1",
+      "description": "Convert any RAPP agent (from AI-Agent-Templates, a public URL, or a local file) and deploy it into your own Microsoft Copilot Studio environment, locally. Device-code or service-principal auth; credentials stay on your machine.",
+      "author": "kody-w",
       "tags": [
-        "meta",
-        "copilot-studio",
+        "copilot",
+        "copilot_studio",
+        "power_platform",
         "deploy",
-        "dataverse",
-        "destructive"
+        "integration",
+        "automation"
       ],
-      "category": "core",
+      "category": "integrations",
       "quality_tier": "official",
       "requires_env": [],
       "dependencies": [
-        "@rapp/basic_agent",
-        "@rapp/copilot_studio_forge_agent"
+        "@rapp/basic_agent"
       ],
-      "example_call": {
-        "args": {
-          "action": "auth_test"
-        }
-      },
+      "example_call": "Deploy the emission tracking agent to my Copilot Studio environment",
       "_file": "agents/@rapp/copilot_studio_deploy_agent.py",
-      "_sha256": "19d947d09009bc00ea6167aea838fa2f396891834bd23a62b4d153e3a9711200",
-      "_seed": 12529120966326507298,
-      "_size_kb": 39.1,
-      "_lines": 904,
+      "_sha256": "3de55a0a92a1ac4b9d1608e463f487fba3d6c85b95b2913fe056b52527648a62",
+      "_seed": 12529120966829948556,
+      "_size_kb": 33.6,
+      "_lines": 527,
       "_has_card": true,
       "_added_at": "2026-04-28T16:27:14-04:00",
       "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
+      "_latest_commit_sha": "899a143cf37e0f6935e096fa4cab751ec3ef42c9",
       "_card_sha256": "f5ac406966c03a6b48ee07636a03aa76087eb881299d6dbd65808eba5758ab8e"
     },
     {
