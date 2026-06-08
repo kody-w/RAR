@@ -1,803 +1,293 @@
 """
-copilot_studio_deploy_agent.py — Push a forged Copilot Studio bundle into a
-real Dataverse / Power Platform environment.
+CopilotStudioDeploy — a RAPP rapplication (agent + local UI).
 
-Pipeline (one shot, intentionally automatic so the user only has to point
-at a swarm):
+Convert any RAPP agent into a Microsoft Copilot Studio agent and deploy it into
+YOUR OWN Copilot Studio environment, fully locally. No PII or secrets ship with
+this agent — you provide a local.settings.json (service principal) at deploy
+time and it is used and stored ONLY on your machine.
 
-    SwarmName ──► [forge]    ──► .brainstem_data/forged/<slug>/  (CS YAML)
-              ──► [package]  ──► <slug>.solution.zip             (PowerPlatform)
-              ──► [auth]     ──► OAuth client_credentials token
-              ──► [inspect]  ──► WhoAmI + existing bots in env (read-only)
-              ──► [import]   ──► POST ImportSolutionAsync (DESTRUCTIVE)
+────────────────────────────────────────────────────────────────────────────
+HUMAN — two steps
+  1. Hatch this rapplication:  ask the brainstem  "hatch <egg_url>"  (egg_hatcher),
+     or drop this file into your brainstem's agents/ folder.
+  2. Open the local UI the brainstem serves at  /rapp_ui/copilot_studio_deploy/
+     — pick an agent (or paste a raw agent.py URL), optionally import your
+     local.settings.json credentials, and click Deploy.
 
-Auth is **service-principal** client_credentials grant against the env's
-Dataverse resource URL. Reads `local.settings.json` for:
-    DYNAMICS_365_TENANT_ID    → Entra tenant
-    DYNAMICS_365_CLIENT_ID    → app registration id
-    DYNAMICS_365_CLIENT_SECRET→ app secret
-    DYNAMICS_365_RESOURCE     → https://<env>.crm.dynamics.com (Dataverse base)
+LLM — procedure (the agent IS the API; drive it via these actions)
+  deploy_template     -> {query_or_url} FASTEST PATH. One call: search (default repo
+                         AI-Agent-Templates) OR a raw URL OR a local path -> fetch ->
+                         derive instructions -> package -> start deploy. Returns a
+                         device-login code to relay (or deploys via saved credentials).
+                         Then complete_deploy with the device_code. Don't re-search.
+  search_templates    -> {query?} (advanced) browse kody-w/AI-Agent-Templates raw_urls
+  list_catalog        -> pre-converted ready-to-deploy solutions
+  fetch_source        -> {source_url} a template raw_url, ANY public GitHub raw agent.py
+                         URL, OR a LOCAL file path; returns the text; YOU then author a
+                         display name + Copilot Studio instructions from it
+  package             -> {agent_name, instructions} -> packaged solution (package_id)
+  deploy              -> {solution_url|package_id} -> begin device-code sign-in
+  complete_deploy     -> {device_code} -> finish, discover env, import + publish
+  set_credentials     -> {credentials: local.settings.json} -> save SP creds LOCALLY
+  credentials_status  -> is a local service principal configured?
+  deploy_with_credentials -> {solution_url|package_id} -> autonomous SP deploy (no login)
 
-The SPN must be (1) granted Power Platform access on the tenant AND
-(2) registered as an Application User in the target Dataverse env with
-a security role that allows solution import. If either is missing,
-auth_test shows a clear error and no destructive action runs.
-
-Actions (run in this order; each gates the next):
-  auth_test     — token + WhoAmI; non-destructive; shows the SPN's identity
-  inspect_env   — list bots, solutions, publishers in the env; non-destructive
-  package       — clone an exported Tier-3 solution as template and swap in
-                  the forge output's YAMLs; produces a signed .solution.zip
-  plan_deploy   — dry-run: shows what would be pushed (file list, target,
-                  publisher prefix); non-destructive
-  deploy        — DESTRUCTIVE. POSTs the .zip to ImportSolutionAsync; gated
-                  by confirm=true. Polls the import job, returns final status.
-
-  one_shot      — convenience: forge + package + plan_deploy. Stops short of
-                  the destructive import — the user runs deploy with
-                  confirm=true once they're happy with the plan.
-
-Sacred rules:
- 1. Never log a secret. Token, client_secret, etc. are redacted in all
-    structured output.
- 2. Never push without explicit confirm=true. The full chain runs without
-    confirm only up to plan_deploy. deploy is the only gate that touches
-    the env destructively.
- 3. Read the env config from local.settings.json (the file the user already
-    maintains for Tier 2). Don't ask the user to paste creds into the agent.
- 4. Tier-3 solution shape (the existing
-    installer/MSFTAIBASMultiAgentCopilot_*.zip) is the canonical template —
-    we clone its layout because we know that shape imports cleanly.
+  Boundary rules: never echo a client_secret back to the user or into chat; creds
+  live only in ~/.rapp_deploy_settings.json. Prefer deploy_with_credentials when
+  credentials_status reports found=true.
 """
-
-from agents.basic_agent import BasicAgent
-import os
-import re
-import json
-import time
-import uuid
-import glob
-import zipfile
-import shutil
-import urllib.request
-import urllib.error
-import urllib.parse
-
+import base64, io, json, os, re, time, urllib.request, urllib.parse, uuid, zipfile
+try:
+    from agents.basic_agent import BasicAgent
+except ImportError:  # alternate kernel layouts (SPEC kernel/SPEC.md §5)
+    try:
+        from basic_agent import BasicAgent
+    except ImportError:
+        try:
+            from openrappter.agents.basic_agent import BasicAgent
+        except ImportError:  # standalone fallback so the file runs anywhere (RAR rapp_sdk test)
+            class BasicAgent:
+                def __init__(self, name=None, metadata=None):
+                    if name is not None: self.name = name
+                    if metadata is not None: self.metadata = metadata
+                def perform(self, **kwargs): return 'Not implemented.'
+                def system_context(self): return None
+                def to_tool(self):
+                    return {'type': 'function', 'function': {'name': self.name,
+                            'description': self.metadata.get('description', ''),
+                            'parameters': self.metadata.get('parameters', {})}}
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/copilot_studio_deploy_agent",
+    "version": "1.0.0",
     "display_name": "CopilotStudioDeploy",
-    "description": (
-        "Push a forged Copilot Studio bundle into a Dataverse environment "
-        "via OAuth client_credentials + ImportSolutionAsync. Reads creds "
-        "from local.settings.json. Destructive deploy is gated by confirm."
-    ),
-    "author": "RAPP",
-    "version": "0.1.1",
-    "tags": ["meta", "copilot-studio", "deploy", "dataverse", "destructive"],
-    "category": "core",
+    "description": "Convert any RAPP agent (from AI-Agent-Templates, a public URL, or a local file) and deploy it into your own Microsoft Copilot Studio environment, locally. Device-code or service-principal auth; credentials stay on your machine.",
+    "author": "kody-w",
+    "tags": ["copilot", "copilot_studio", "power_platform", "deploy", "integration", "automation"],
+    "category": "integrations",
     "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapp/basic_agent", "@rapp/copilot_studio_forge_agent"],
-    "example_call": {"args": {"action": "auth_test"}},
+    "dependencies": ["@rapp/basic_agent"],
+    "example_call": "Deploy the emission tracking agent to my Copilot Studio environment",
 }
 
 
-# ─── Settings discovery + token cache ─────────────────────────────────────
+REPO_RAW = "https://raw.githubusercontent.com/kody-w/rapp-oneclick-deploy/main"
+TEMPLATES_REPO = "kody-w/AI-Agent-Templates"   # default source of deployable agents
+PUBLIC_CLIENT = "9cee029c-6210-4654-90bb-17e6e9d36617"   # Power Platform CLI public client
+AUTH = "https://login.microsoftonline.com"
+DISCO = "https://globaldisco.crm.dynamics.com"
+REF_SCHEMA, REF_DISPLAY, REF_VERSION = "dealprogression", "deal progression", "1.0.470.0"
 
-_TOKEN_CACHE = {"token": None, "expires_at": 0, "resource": None, "tenant": None}
-
-
-def _redact(s, keep=4):
-    if not isinstance(s, str) or not s:
-        return s
-    if len(s) <= keep + 4:
-        return "***"
-    return s[:keep] + "…(" + str(len(s)) + " chars)"
+_CACHE = {}   # package_id -> zip bytes ;  device_code -> {"zip":bytes,"env":str|None}
 
 
-def _brainstem_dir():
-    here = os.path.dirname(os.path.abspath(__file__))
-    return os.path.dirname(here)
-
-
-def _read_local_settings():
-    """Read local.settings.json next to brainstem.py. Returns (settings_dict, path)."""
-    candidate = os.path.join(_brainstem_dir(), "local.settings.json")
-    if not os.path.exists(candidate):
-        return None, candidate
-    with open(candidate) as f:
-        raw = json.load(f)
-    return raw.get("Values", {}), candidate
-
-
-def _normalize_resource(url):
-    """Trim trailing slash + ensure scheme. Dataverse expects bare base url
-    for /.default scope and for API calls."""
-    if not url:
-        return ""
-    url = url.strip().rstrip("/")
-    if not url.startswith("http"):
-        url = "https://" + url
-    return url
-
-
-def _settings_summary(values):
-    """Public-facing summary that NEVER includes secret values."""
-    return {
-        "tenant_id":        _redact(values.get("DYNAMICS_365_TENANT_ID", ""), keep=8),
-        "client_id":        _redact(values.get("DYNAMICS_365_CLIENT_ID", ""), keep=8),
-        "client_secret":    "<REDACTED>" if values.get("DYNAMICS_365_CLIENT_SECRET") else "<MISSING>",
-        "resource":         _normalize_resource(values.get("DYNAMICS_365_RESOURCE", "")),
-        "use_dynamics":     values.get("USE_DYNAMICS_STORAGE"),
-    }
-
-
-# ─── OAuth client_credentials ─────────────────────────────────────────────
-
-def _acquire_token(values):
-    """Client-credentials grant. Returns (token, expires_at_epoch).
-    Caches in-memory until 60s before expiry."""
-    tenant   = values.get("DYNAMICS_365_TENANT_ID", "").strip()
-    client_id = values.get("DYNAMICS_365_CLIENT_ID", "").strip()
-    secret   = values.get("DYNAMICS_365_CLIENT_SECRET", "").strip()
-    resource = _normalize_resource(values.get("DYNAMICS_365_RESOURCE", ""))
-
-    missing = [k for k, v in [("DYNAMICS_365_TENANT_ID", tenant),
-                              ("DYNAMICS_365_CLIENT_ID", client_id),
-                              ("DYNAMICS_365_CLIENT_SECRET", secret),
-                              ("DYNAMICS_365_RESOURCE", resource)] if not v]
-    if missing:
-        raise RuntimeError(f"local.settings.json is missing: {missing}")
-
-    now = time.time()
-    if (_TOKEN_CACHE["token"]
-            and _TOKEN_CACHE["resource"] == resource
-            and _TOKEN_CACHE["tenant"] == tenant
-            and _TOKEN_CACHE["expires_at"] - 60 > now):
-        return _TOKEN_CACHE["token"], _TOKEN_CACHE["expires_at"]
-
-    url = f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
-    body = urllib.parse.urlencode({
-        "grant_type":    "client_credentials",
-        "client_id":     client_id,
-        "client_secret": secret,
-        "scope":         f"{resource}/.default",
-    }).encode("utf-8")
-    req = urllib.request.Request(url, data=body, method="POST",
-                                 headers={"Content-Type": "application/x-www-form-urlencoded"})
+# ── http ──────────────────────────────────────────────────────────────────────
+def _req(url, data=None, headers=None, method=None, timeout=300):
+    if isinstance(data, dict):
+        data = urllib.parse.urlencode(data).encode()
+    elif data is not None and not isinstance(data, (bytes, bytearray)):
+        data = json.dumps(data).encode()
+    req = urllib.request.Request(url, data=data, headers=headers or {}, method=method)
     try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            data = json.loads(r.read().decode("utf-8"))
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            body = r.read().decode("utf-8", "replace")
+            return r.status, (json.loads(body) if body[:1] in ("{", "[") else body)
     except urllib.error.HTTPError as e:
-        try:
-            err_body = e.read().decode("utf-8", errors="replace")
-        except Exception:
-            err_body = ""
-        # Surface AAD error code/description but never echo the secret
-        try:
-            err_json = json.loads(err_body)
-            description = err_json.get("error_description", err_body)[:600]
-            code = err_json.get("error", "http_error")
-        except Exception:
-            description = err_body[:600]
-            code = "http_error"
-        raise RuntimeError(f"AAD token error [{code}]: {description}")
-    token = data["access_token"]
-    expires_at = now + int(data.get("expires_in", 3600))
-    _TOKEN_CACHE.update({"token": token, "expires_at": expires_at,
-                         "resource": resource, "tenant": tenant})
-    return token, expires_at
+        body = e.read().decode("utf-8", "replace")
+        try: body = json.loads(body)
+        except Exception: pass
+        return e.code, body
+
+def _search_templates(query="", repo=TEMPLATES_REPO, limit=60):
+    """Search a public GitHub repo (default: AI-Agent-Templates) for deployable
+    agent.py files. Returns [{name, path, stack, raw_url}]."""
+    code, tree = _req(f"https://api.github.com/repos/{repo}/git/trees/HEAD?recursive=1",
+                      headers={"Accept": "application/vnd.github+json", "User-Agent": "rapp"})
+    if code != 200 or not isinstance(tree, dict) or "tree" not in tree:
+        raise RuntimeError(f"could not list {repo} ({code}) — check the repo name or GitHub rate limit")
+    q = (query or "").lower()
+    out = []
+    for b in tree["tree"]:
+        p = b.get("path", "")
+        if b.get("type") != "blob" or not re.search(r"/agents/[^/]*agent\.py$", p):
+            continue
+        if any(x in p.lower() for x in ("copy", "experimental", "__pycache__", "disabled", "/tests/")):
+            continue
+        if q:
+            norm = p.lower().replace("_", " ")               # "emission tracking" matches emission_tracking_agent.py
+            if not all(w in norm for w in q.split()):
+                continue
+        m = re.search(r"/([^/]+_stack)/", p)
+        out.append({"name": p.rsplit("/", 1)[-1].replace("_agent.py", "").replace("_", " ").title(),
+                    "path": p, "stack": m.group(1) if m else None,
+                    "raw_url": f"https://raw.githubusercontent.com/{repo}/main/" + urllib.parse.quote(p)})
+        if len(out) >= limit:
+            break
+    return out
 
 
-def _dataverse_get(values, rel_path, query=""):
-    token, _ = _acquire_token(values)
-    resource = _normalize_resource(values.get("DYNAMICS_365_RESOURCE", ""))
-    # OData query strings often contain spaces (e.g. 'eq true') — quote them
-    # while leaving OData syntax characters intact.
-    if query:
-        prefix = "?" if query.startswith("?") else ""
-        q = query[1:] if prefix else query
-        query = prefix + urllib.parse.quote(q, safe="$=&,()'/.: ").replace(" ", "%20")
-    url = f"{resource}/api/data/v9.2/{rel_path.lstrip('/')}{query}"
-    req = urllib.request.Request(url, headers={
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/json",
-        "OData-MaxVersion": "4.0",
-        "OData-Version": "4.0",
-    })
+def _read_source(src):
+    """Read an agent.py from a public URL OR a local file path."""
+    src = (src or "").strip()
+    if src.startswith(("http://", "https://")):
+        return _get_bytes(src).decode("utf-8", "replace")
+    local = os.path.expanduser(src)
+    if os.path.isfile(local):
+        with open(local, "r", encoding="utf-8", errors="replace") as f:
+            return f.read()
+    raise FileNotFoundError("provide a raw GitHub URL or an existing local file path")
+
+
+def _derive_spec(source_code):
+    """Deterministically derive a Copilot Studio agent spec from agent.py source —
+    no LLM hop. Parses the class docstring + public methods into instructions."""
+    import ast as _ast
+    name, doc, methods = "RAPP Agent", "", []
     try:
-        with urllib.request.urlopen(req, timeout=20) as r:
-            return json.loads(r.read().decode("utf-8")), r.status
-    except urllib.error.HTTPError as e:
-        try:
-            err_body = e.read().decode("utf-8", errors="replace")
-        except Exception:
-            err_body = ""
-        return {"error": err_body[:1000], "status": e.code}, e.code
+        tree = _ast.parse(source_code)
+        cls = next((n for n in tree.body if isinstance(n, _ast.ClassDef) and n.name.endswith("Agent")), None) \
+            or next((n for n in tree.body if isinstance(n, _ast.ClassDef)), None)
+        if cls:
+            name = cls.name
+            doc = _ast.get_docstring(cls) or ""
+            for m in cls.body:
+                if isinstance(m, (_ast.FunctionDef, _ast.AsyncFunctionDef)) and not m.name.startswith("_") \
+                        and m.name not in ("perform", "system_context", "to_tool"):
+                    first = (_ast.get_docstring(m) or "").strip().split("\n")[0]
+                    methods.append((m.name, first))
+    except Exception:
+        g = re.search(r"class\s+(\w+)", source_code)
+        name = g.group(1) if g else name
+        doc = (re.search(r'"""(.*?)"""', source_code, re.S) or ["", ""])[1].strip() if '"""' in source_code else ""
+    display = (re.sub(r"(?<!^)(?=[A-Z])", " ", name).replace("Agent", "").strip()) or "RAPP Agent"
+    caps = "\n".join(f"- {re.sub(r'(?<!^)(?=[A-Z])', ' ', n).replace('_', ' ').strip().title()}"
+                     + (f": {d}" if d else "") for n, d in methods[:14]) \
+        or "- Assist the user within this agent's domain."
+    instructions = (f"# Purpose\n{doc.strip() or ('You are the ' + display + ' agent.')}\n\n"
+                    f"# Capabilities\n{caps}\n\n"
+                    f"# Guidelines\n- Confirm the user's request and collect any required inputs.\n"
+                    f"- Be concise, accurate, and helpful; stay within scope.")
+    return {"display_name": display[:60], "unique_name": _sanitize(display),
+            "description": ((doc.strip().split('\n')[0]) or display)[:200], "instructions": instructions}
 
 
-def _dataverse_post(values, rel_path, payload):
-    token, _ = _acquire_token(values)
-    resource = _normalize_resource(values.get("DYNAMICS_365_RESOURCE", ""))
-    url = f"{resource}/api/data/v9.2/{rel_path.lstrip('/')}"
-    body = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=body, method="POST", headers={
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "OData-MaxVersion": "4.0",
-        "OData-Version": "4.0",
-    })
-    try:
-        with urllib.request.urlopen(req, timeout=120) as r:
-            text = r.read().decode("utf-8")
-            try:
-                return json.loads(text) if text else {}, r.status
-            except Exception:
-                return {"raw": text}, r.status
-    except urllib.error.HTTPError as e:
-        try:
-            err_body = e.read().decode("utf-8", errors="replace")
-        except Exception:
-            err_body = ""
-        return {"error": err_body[:1000], "status": e.code}, e.code
+def _get_bytes(url, timeout=120):
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "rapp"}), timeout=timeout) as r:
+        return r.read()
 
 
-# ─── Tier-3 solution template discovery ───────────────────────────────────
+# ── packaging (rebrand skeleton + inject brainstem-authored instructions) ──────
+def _render_gpt(display_name, instructions):
+    body = "\n".join("  " + ln for ln in (instructions or "Be a helpful agent.").splitlines())
+    return f"kind: GptComponentMetadata\ndisplayName: {display_name}\ninstructions: |-\n{body}\n".encode()
 
-def _find_t3_template():
-    """The canonical CS solution shape we clone from. The Tier 3 zip in
-    installer/ exported cleanly from CS once and is our ground truth for
-    layout (botcomponents/, solution.xml shape, [Content_Types].xml)."""
-    repo_root = os.path.dirname(_brainstem_dir())
-    candidates = sorted(glob.glob(
-        os.path.join(repo_root, "installer", "MSFTAIBASMultiAgentCopilot_*.zip")))
-    return candidates[-1] if candidates else None
+def _sanitize(name, fallback="ragent"):
+    return re.sub(r"[^a-z0-9]", "", (name or "").lower()) or fallback
+
+def build_solution(skeleton_bytes, agent_name, unique_name, instructions, version="1.0.1.0"):
+    out = io.BytesIO()
+    with zipfile.ZipFile(io.BytesIO(skeleton_bytes)) as zin, \
+         zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.namelist():
+            data = zin.read(item)
+            newpath = item.replace(REF_SCHEMA, unique_name)
+            if newpath.endswith(".gpt.default/data"):
+                data = _render_gpt(agent_name, instructions)
+            else:
+                data = (data.decode("utf-8", "replace")
+                        .replace(REF_SCHEMA, unique_name)
+                        .replace(REF_DISPLAY, agent_name)
+                        .replace(REF_VERSION, version)).encode()
+            zout.writestr(newpath, data)
+    return out.getvalue()
 
 
-# ─── Action: auth_test ────────────────────────────────────────────────────
-
-def _action_auth_test():
-    values, settings_path = _read_local_settings()
-    if values is None:
-        return {"status": "error",
-                "message": f"local.settings.json not found at {settings_path}. "
-                           f"Place your Tier 2 settings file in rapp_brainstem/."}
-
-    summary = _settings_summary(values)
-    try:
-        token, exp = _acquire_token(values)
-    except Exception as e:
-        return {"status": "error", "stage": "token",
-                "message": str(e), "settings": summary}
-
-    who, code = _dataverse_get(values, "WhoAmI")
+# ── auth + deploy ──────────────────────────────────────────────────────────────
+def _device_start(scope):
+    code, r = _req(f"{AUTH}/organizations/oauth2/v2.0/devicecode",
+                   data={"client_id": PUBLIC_CLIENT, "scope": scope},
+                   headers={"Content-Type": "application/x-www-form-urlencoded"})
     if code != 200:
-        return {"status": "error", "stage": "whoami",
-                "message": f"Dataverse WhoAmI failed: HTTP {code} — "
-                           f"{(who or {}).get('error', '')[:300]}",
-                "settings": summary,
-                "hint": ("Token acquired but WhoAmI rejected. The SPN is "
-                         "not registered as an Application User in this "
-                         "Dataverse env, OR lacks a security role. Open "
-                         "Power Platform Admin Center → Environments → "
-                         "<env> → Settings → Users → Application Users → "
-                         "+New app user, pick the SPN's app id, assign it "
-                         "the System Customizer (or Solution Importer) role.")}
+        raise RuntimeError(f"device code start failed: {r}")
+    return r
 
-    return {
-        "status": "ok",
-        "action": "auth_test",
-        "settings": summary,
-        "token_expires_at_epoch": exp,
-        "token_lifetime_sec": int(exp - time.time()),
-        "whoami": who,
-        "message": (
-            f"SPN authenticated against {summary['resource']}. "
-            f"BusinessUnitId={who.get('BusinessUnitId')}, "
-            f"UserId={who.get('UserId')}, "
-            f"OrganizationId={who.get('OrganizationId')}. "
-            f"Token valid for {int(exp - time.time())}s."
-        ),
-    }
+def _token_from_device(device_code):
+    return _req(f"{AUTH}/organizations/oauth2/v2.0/token",
+                data={"grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+                      "client_id": PUBLIC_CLIENT, "device_code": device_code},
+                headers={"Content-Type": "application/x-www-form-urlencoded"})
 
+def _refresh(refresh_token, scope):
+    code, t = _req(f"{AUTH}/organizations/oauth2/v2.0/token",
+                   data={"grant_type": "refresh_token", "refresh_token": refresh_token,
+                         "client_id": PUBLIC_CLIENT, "scope": scope},
+                   headers={"Content-Type": "application/x-www-form-urlencoded"})
+    if code != 200:
+        raise RuntimeError(f"token refresh failed: {t}")
+    return t["access_token"]
 
-# ─── Action: inspect_env ──────────────────────────────────────────────────
+def _discover(disco_token):
+    code, r = _req(f"{DISCO}/api/discovery/v2.0/Instances",
+                   headers={"Authorization": "Bearer " + disco_token, "Accept": "application/json"})
+    return [e for e in (r.get("value", []) if isinstance(r, dict) else []) if e.get("ApiUrl")]
 
-def _action_inspect_env():
-    values, _ = _read_local_settings()
-    if values is None:
-        return {"status": "error",
-                "message": "local.settings.json missing — run auth_test first."}
+def _dataverse(env, token, action, body=None, method="POST"):
+    # JSON-encode here (pass bytes) — _req form-encodes dicts for the OAuth endpoints,
+    # but the Dataverse Web API needs a JSON body.
+    data = json.dumps(body).encode() if body is not None else None
+    return _req(f"{env.rstrip('/')}/api/data/v9.2/{action}",
+                data=data, method=method,
+                headers={"Authorization": "Bearer " + token, "Content-Type": "application/json",
+                         "Accept": "application/json", "OData-MaxVersion": "4.0", "OData-Version": "4.0"})
 
-    # Solutions (publisher prefix is what we'll use for new components)
-    solutions, code1 = _dataverse_get(
-        values, "solutions",
-        query="?$select=uniquename,friendlyname,version,ismanaged,publisherid"
-              "&$expand=publisherid($select=uniquename,customizationprefix)"
-              "&$filter=isvisible eq true&$top=50")
-    if code1 != 200:
-        return {"status": "error", "stage": "solutions",
-                "message": f"List solutions failed: HTTP {code1}",
-                "raw": solutions}
-
-    # Existing bots in the env (so user sees what they're deploying alongside)
-    bots, code2 = _dataverse_get(
-        values, "bots",
-        query="?$select=name,schemaname,solutionid,statecode&$top=50")
-
-    # Publishers — useful to see prefixes available
-    publishers, code3 = _dataverse_get(
-        values, "publishers",
-        query="?$select=uniquename,customizationprefix,friendlyname&$top=50")
-
-    return {
-        "status": "ok",
-        "action": "inspect_env",
-        "solutions_count": len(solutions.get("value", []))
-            if isinstance(solutions, dict) else None,
-        "solutions_sample": [
-            {"uniquename": s.get("uniquename"),
-             "friendlyname": s.get("friendlyname"),
-             "version": s.get("version"),
-             "managed": s.get("ismanaged"),
-             "publisher": (s.get("publisherid") or {}).get("uniquename"),
-             "prefix": (s.get("publisherid") or {}).get("customizationprefix")}
-            for s in (solutions.get("value", [])[:20]
-                      if isinstance(solutions, dict) else [])
-        ],
-        "bots_count": len(bots.get("value", []))
-            if isinstance(bots, dict) and code2 == 200 else None,
-        "bots_sample": [
-            {"name": b.get("name"),
-             "schemaname": b.get("schemaname"),
-             "statecode": b.get("statecode")}
-            for b in (bots.get("value", [])[:20]
-                      if isinstance(bots, dict) and code2 == 200 else [])
-        ],
-        "publishers_sample": [
-            {"uniquename": p.get("uniquename"),
-             "prefix": p.get("customizationprefix"),
-             "friendlyname": p.get("friendlyname")}
-            for p in (publishers.get("value", [])[:20]
-                      if isinstance(publishers, dict) and code3 == 200 else [])
-        ],
-    }
+def _import(env, token, zip_bytes):
+    code, r = _dataverse(env, token, "ImportSolution", {
+        "OverwriteUnmanagedCustomizations": True, "PublishWorkflows": True,
+        "ImportJobId": str(uuid.uuid4()), "CustomizationFile": base64.b64encode(zip_bytes).decode()})
+    if code not in (200, 204):
+        raise RuntimeError(f"ImportSolution failed ({code}): {r}")
+    _dataverse(env, token, "PublishAllXml")
 
 
-# ─── Action: package — clone Tier-3 layout, swap in forged YAMLs ──────────
+# ── service-principal credentials (import/export a local.settings.json) ─────────
+SETTINGS_PATH = os.path.expanduser("~/.rapp_deploy_settings.json")
 
-def _action_package(forge_dir, solution_unique_name, publisher_unique_name,
-                     publisher_prefix, version):
-    """Build a Power Platform solution zip from a forge output dir.
+def _extract_dyn(creds):
+    """Accept a settings dict {IsEncrypted,Values}, a bare Values dict, or a JSON
+    string; return {client_id, client_secret, tenant_id, resource} or None."""
+    if isinstance(creds, str):
+        try: creds = json.loads(creds)
+        except Exception: return None
+    if not isinstance(creds, dict):
+        return None
+    vals = creds.get("Values", creds)
+    cid, sec = vals.get("DYNAMICS_365_CLIENT_ID"), vals.get("DYNAMICS_365_CLIENT_SECRET")
+    ten, res = vals.get("DYNAMICS_365_TENANT_ID"), vals.get("DYNAMICS_365_RESOURCE")
+    if not all([cid, sec, ten, res]):
+        return None
+    return {"client_id": cid, "client_secret": sec, "tenant_id": ten, "resource": res.rstrip("/")}
 
-    Strategy: clone the Tier-3 zip's structure (solution.xml + customizations.xml
-    + [Content_Types].xml + botcomponents/ layout), then swap the bot data
-    files with our forged YAMLs. The schemanames are remapped to use the
-    user-provided publisher prefix.
+def _load_local_settings():
+    for p in (os.environ.get("RAPP_DEPLOY_SETTINGS"), SETTINGS_PATH):
+        if p and os.path.isfile(p):
+            try:
+                d = _extract_dyn(json.load(open(p)))
+                if d: return d
+            except Exception:
+                pass
+    return _extract_dyn({"Values": dict(os.environ)})  # fall back to process env
 
-    NOTE: This is best-effort. Microsoft's Copilot Studio import has internal
-    validators that may reject hand-crafted bundles that diverge from what
-    its own export emits. The plan_deploy action surfaces the file diff so
-    the user sees exactly what's about to be sent BEFORE deploy is called."""
-    if not os.path.isdir(forge_dir):
-        return {"status": "error",
-                "message": f"forge_dir not found: {forge_dir}. "
-                           f"Run CopilotStudioForge.forge first."}
+def _sp_token(client_id, secret, tenant, resource):
+    code, t = _req(f"{AUTH}/{tenant}/oauth2/v2.0/token",
+                   data={"grant_type": "client_credentials", "client_id": client_id,
+                         "client_secret": secret, "scope": resource.rstrip("/") + "/.default"},
+                   headers={"Content-Type": "application/x-www-form-urlencoded"})
+    if code != 200 or not isinstance(t, dict) or "access_token" not in t:
+        raise RuntimeError(f"service-principal auth failed: {t}")
+    return t["access_token"]
 
-    template = _find_t3_template()
-    if not template:
-        return {"status": "error",
-                "message": "No Tier-3 template found in installer/. "
-                           "Place an exported CS solution zip there first."}
-
-    # Stage workspace
-    out_root = os.path.join(_brainstem_dir(), ".brainstem_data", "packaged")
-    os.makedirs(out_root, exist_ok=True)
-    pkg_id = f"{solution_unique_name}-{int(time.time())}"
-    stage = os.path.join(out_root, pkg_id)
-    os.makedirs(stage, exist_ok=True)
-
-    # Unzip template
-    with zipfile.ZipFile(template, "r") as z:
-        z.extractall(stage)
-
-    # Identify the forge output: root agent + child agents
-    root_yaml = os.path.join(forge_dir, "agent.mcs.yml")
-    child_dir = os.path.join(forge_dir, "agents")
-    if not os.path.exists(root_yaml):
-        return {"status": "error",
-                "message": f"forge_dir missing agent.mcs.yml: {forge_dir}"}
-
-    children = []
-    if os.path.isdir(child_dir):
-        for sub in sorted(os.listdir(child_dir)):
-            ch_yaml = os.path.join(child_dir, sub, "agent.mcs.yml")
-            if os.path.exists(ch_yaml):
-                children.append((sub, ch_yaml))
-
-    # Compute schema name pattern matching Tier 3 conventions:
-    #   <prefix>_<botname>            ← root bot
-    #   <prefix>_<botname>.gpt.default← root agent component
-    #   <prefix>_<botname>.<child>.<ChildName>
-    bot_id = re.sub(r"[^a-z0-9]", "", solution_unique_name.lower()) or "swarm"
-    bot_schema = f"{publisher_prefix}_{bot_id}"
-
-    # Replace the bot data in cloned template
-    bc_root = os.path.join(stage, "botcomponents")
-    if os.path.isdir(bc_root):
-        shutil.rmtree(bc_root)
-    os.makedirs(bc_root)
-
-    overrides_for_content_types = []
-
-    def _write_botcomponent(schema, name, description, kind_xml, data_yaml,
-                             componenttype):
-        comp_dir = os.path.join(bc_root, schema)
-        os.makedirs(comp_dir, exist_ok=True)
-        xml = (
-            f'<botcomponent schemaname="{schema}">\n'
-            f'  <componenttype>{componenttype}</componenttype>\n'
-            f'  <description>{_xml_escape(description)}</description>\n'
-            f'  <iscustomizable>0</iscustomizable>\n'
-            f'  <name>{_xml_escape(name)}</name>\n'
-            f'  <parentbotid>\n'
-            f'    <schemaname>{bot_schema}</schemaname>\n'
-            f'  </parentbotid>\n'
-            f'  <statecode>0</statecode>\n'
-            f'  <statuscode>1</statuscode>\n'
-            f'</botcomponent>\n'
-        )
-        with open(os.path.join(comp_dir, "botcomponent.xml"), "w") as f:
-            f.write(xml)
-        with open(os.path.join(comp_dir, "data"), "w") as f:
-            f.write(data_yaml)
-        overrides_for_content_types.append(f"/botcomponents/{schema}/data")
-
-    # Root agent (componenttype 15 = gpt component, observed in Tier 3)
-    with open(root_yaml) as f:
-        root_data = f.read()
-    _write_botcomponent(
-        schema=f"{bot_schema}.gpt.default",
-        name=os.path.basename(forge_dir),
-        description=f"Forged from {os.path.basename(forge_dir)}",
-        kind_xml="GptComponentMetadata",
-        data_yaml=root_data,
-        componenttype=15,
-    )
-
-    for child_name, ch_path in children:
-        with open(ch_path) as f:
-            ch_data = f.read()
-        _write_botcomponent(
-            schema=f"{bot_schema}.agent.{child_name}",
-            name=child_name,
-            description=f"Child agent {child_name}",
-            kind_xml="AgentDialog",
-            data_yaml=ch_data,
-            componenttype=15,
-        )
-
-    # Rebuild [Content_Types].xml to match the new component list
-    ct_path = os.path.join(stage, "[Content_Types].xml")
-    with open(ct_path, "w") as f:
-        parts = ['﻿<?xml version="1.0" encoding="utf-8"?>',
-                 '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
-                 '<Default Extension="xml" ContentType="application/octet-stream" />',
-                 '<Default Extension="json" ContentType="application/octet-stream" />']
-        for p in overrides_for_content_types:
-            parts.append(f'<Override PartName="{p}" ContentType="application/octet-stream" />')
-        parts.append('</Types>')
-        f.write("".join(parts))
-
-    # Rewrite solution.xml (uniquename, version, publisher prefix)
-    sol_path = os.path.join(stage, "solution.xml")
-    if os.path.exists(sol_path):
-        with open(sol_path) as f:
-            sol = f.read()
-        sol = re.sub(r"<UniqueName>[^<]+</UniqueName>",
-                     f"<UniqueName>{solution_unique_name}</UniqueName>", sol, count=1)
-        sol = re.sub(r"<Version>[^<]+</Version>",
-                     f"<Version>{version}</Version>", sol, count=1)
-        sol = re.sub(r"(<Publisher>\s*<UniqueName>)[^<]+(</UniqueName>)",
-                     rf"\1{publisher_unique_name}\2", sol, count=1)
-        sol = re.sub(r"<CustomizationPrefix>[^<]+</CustomizationPrefix>",
-                     f"<CustomizationPrefix>{publisher_prefix}</CustomizationPrefix>", sol, count=1)
-        # Strip RootComponents — Microsoft will rebuild from the bot components
-        # we ship; keeping the old GUIDs would import Tier-3's workflows.
-        sol = re.sub(r"<RootComponents>.*?</RootComponents>",
-                     "<RootComponents></RootComponents>", sol, flags=re.DOTALL)
-        with open(sol_path, "w") as f:
-            f.write(sol)
-
-    # Drop Workflows/ + Assets/ — they referenced Tier-3's flows that aren't
-    # in our scope. Then strip the <Workflows>...</Workflows> block from
-    # customizations.xml so it doesn't have dangling references to files we
-    # just deleted (Dataverse rejects the whole import on a single missing
-    # workflow file).
-    for d in ("Workflows", "Assets"):
-        full = os.path.join(stage, d)
-        if os.path.exists(full):
-            shutil.rmtree(full)
-    cust_path = os.path.join(stage, "customizations.xml")
-    if os.path.exists(cust_path):
-        with open(cust_path) as f:
-            cust = f.read()
-        cust = re.sub(r"<Workflows>.*?</Workflows>",
-                      "<Workflows></Workflows>", cust, flags=re.DOTALL)
-        # Also remove any other section that points at /Workflows or /Assets
-        with open(cust_path, "w") as f:
-            f.write(cust)
-
-    # Re-zip
-    zip_path = os.path.join(out_root, f"{pkg_id}.zip")
-    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-        for root, _, fnames in os.walk(stage):
-            for fn in fnames:
-                full = os.path.join(root, fn)
-                arc = os.path.relpath(full, stage)
-                z.write(full, arc)
-
-    return {
-        "status": "ok",
-        "action": "package",
-        "package_dir": stage,
-        "package_zip": zip_path,
-        "package_zip_bytes": os.path.getsize(zip_path),
-        "solution_unique_name": solution_unique_name,
-        "publisher_prefix": publisher_prefix,
-        "components": {
-            "root_agent": f"{bot_schema}.gpt.default",
-            "child_agents": [f"{bot_schema}.agent.{c}" for c, _ in children],
-            "total": 1 + len(children),
-        },
-        "warning": (
-            "Solution layout cloned from Tier-3 template. Microsoft's CS "
-            "import has internal validators that may reject hand-crafted "
-            "bundles. plan_deploy + deploy will surface any import errors."
-        ),
-    }
-
-
-def _xml_escape(s):
-    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
-            .replace(">", "&gt;").replace('"', "&quot;").replace("'", "&apos;"))
-
-
-# ─── Action: plan_deploy + deploy ─────────────────────────────────────────
-
-def _action_plan_deploy(package_zip):
-    if not package_zip or not os.path.exists(package_zip):
-        return {"status": "error",
-                "message": f"package_zip not found: {package_zip}"}
-    values, _ = _read_local_settings()
-    if values is None:
-        return {"status": "error", "message": "local.settings.json missing."}
-
-    # Probe target env
-    try:
-        token, _ = _acquire_token(values)
-    except Exception as e:
-        return {"status": "error", "stage": "token", "message": str(e)}
-    summary = _settings_summary(values)
-
-    files = []
-    with zipfile.ZipFile(package_zip, "r") as z:
-        for info in z.infolist():
-            files.append({"name": info.filename, "bytes": info.file_size})
-
-    return {
-        "status": "ok",
-        "action": "plan_deploy",
-        "would_post_to": f"{summary['resource']}/api/data/v9.2/ImportSolutionAsync",
-        "package_zip": package_zip,
-        "package_zip_bytes": os.path.getsize(package_zip),
-        "files_in_package": files[:60],
-        "files_total": len(files),
-        "tenant": summary["tenant_id"],
-        "destructive": True,
-        "next_step": (
-            "Re-run with action='deploy' and confirm=true to actually push. "
-            "Polls the import job until completion or 5 minute timeout."
-        ),
-    }
-
-
-def _ensure_parent_bot(values, package_zip):
-    """Inspect the package zip to find the bot schemaname (everything before
-    the first '.' in any botcomponent schemaname). If no bot record exists
-    in the env with that schemaname, create one. This is the missing
-    prerequisite for ImportSolutionAsync — child botcomponents reference
-    `<parentbotid><schemaname>...</schemaname></parentbotid>` which fails
-    to resolve unless the bot already exists.
-
-    Returns dict with bot_schemaname, bot_id (existing or newly created),
-    and creation_action ('existed' | 'created' | 'failed')."""
-    bot_schema = None
-    with zipfile.ZipFile(package_zip, "r") as z:
-        for name in z.namelist():
-            if name.startswith("botcomponents/") and name.endswith("/botcomponent.xml"):
-                schema_part = name.split("/")[1]  # botcomponents/<schema>/botcomponent.xml
-                # schemaname pattern: <bot>.<kind>.<name> — take before first '.'
-                bot_schema = schema_part.split(".")[0]
-                break
-    if not bot_schema:
-        return {"bot_schemaname": None, "creation_action": "skipped_no_components"}
-
-    # Lookup existing
-    existing, code = _dataverse_get(
-        values, "bots",
-        query=f"?$select=botid,name,schemaname&$filter=schemaname eq '{bot_schema}'&$top=1")
-    if code == 200 and existing.get("value"):
-        return {"bot_schemaname": bot_schema,
-                "bot_id": existing["value"][0]["botid"],
-                "creation_action": "existed"}
-
-    # Create — minimal payload mirrored from a known-good rapp_* bot
-    name = bot_schema.split("_", 1)[-1].replace("_", " ").title()
-    config = {
-        "$kind": "BotConfiguration",
-        "channels": [],
-        "publishOnImport": False,
-        "settings": {"GenerativeActionsEnabled": True},
-        "gPTSettings": {
-            "$kind": "GPTSettings",
-            "defaultSchemaName": f"{bot_schema}.gpt.default",
-        },
-        "isLightweightBot": False,
-        "aISettings": {
-            "$kind": "AISettings",
-            "useModelKnowledge": True,
-            "isSemanticSearchEnabled": True,
-            "optInUseLatestModels": False,
-        },
-        "recognizer": {"$kind": "GenerativeAIRecognizer"},
-    }
-    payload = {
-        "name": name,
-        "schemaname": bot_schema,
-        "template": "default-2.1.0",
-        "language": 1033,
-        "configuration": json.dumps(config),
-    }
-    body, c = _dataverse_post(values, "bots", payload)
-    if c not in (200, 201, 204):
-        return {"bot_schemaname": bot_schema,
-                "creation_action": "failed",
-                "create_status_code": c,
-                "create_error": (body.get("error") if isinstance(body, dict) else str(body))[:600]}
-    return {"bot_schemaname": bot_schema,
-            "bot_id": (body or {}).get("botid"),
-            "creation_action": "created",
-            "name": name}
-
-
-def _action_deploy(package_zip, confirm):
-    if confirm is not True:
-        return {"status": "error",
-                "message": "deploy is destructive and requires confirm=true. "
-                           "Run plan_deploy first to see what would be sent."}
-    if not package_zip or not os.path.exists(package_zip):
-        return {"status": "error", "message": f"package_zip not found: {package_zip}"}
-    values, _ = _read_local_settings()
-    if values is None:
-        return {"status": "error", "message": "local.settings.json missing."}
-
-    # Step 1: ensure parent bot exists (pre-req for ImportSolutionAsync)
-    bot_step = _ensure_parent_bot(values, package_zip)
-    if bot_step.get("creation_action") == "failed":
-        return {"status": "error", "stage": "ensure_parent_bot",
-                "bot_step": bot_step,
-                "message": ("Could not pre-create the parent bot record. "
-                            "Solution import would fail on parentbotid "
-                            "resolution.")}
-
-    import base64
-    with open(package_zip, "rb") as f:
-        zip_b64 = base64.b64encode(f.read()).decode("ascii")
-
-    import_job_id = str(uuid.uuid4())
-    payload = {
-        "OverwriteUnmanagedCustomizations": True,
-        "PublishWorkflows": True,
-        "CustomizationFile": zip_b64,
-        "ImportJobId": import_job_id,
-    }
-    body, code = _dataverse_post(values, "ImportSolutionAsync", payload)
-    if code not in (200, 202, 204):
-        return {"status": "error", "stage": "import_post",
-                "message": f"ImportSolutionAsync rejected: HTTP {code}",
-                "body": body}
-
-    # Poll the import job
-    deadline = time.time() + 300  # 5 min
-    last_progress = -1
-    while time.time() < deadline:
-        job, c = _dataverse_get(values, f"importjobs({import_job_id})",
-                                query="?$select=progress,completedon,solutionname,data")
-        if c == 200 and isinstance(job, dict):
-            progress = float(job.get("progress") or 0)
-            if progress != last_progress:
-                last_progress = progress
-            if job.get("completedon"):
-                return {
-                    "status": "ok",
-                    "action": "deploy",
-                    "import_job_id": import_job_id,
-                    "completed_at": job.get("completedon"),
-                    "solution_name": job.get("solutionname"),
-                    "progress": progress,
-                    "bot_step": bot_step,
-                    "message": f"Import job completed at {job.get('completedon')}.",
-                }
-        time.sleep(5)
-
-    return {"status": "pending",
-            "action": "deploy",
-            "import_job_id": import_job_id,
-            "last_progress": last_progress,
-            "message": ("Import did not complete within 5 minutes. "
-                        f"Poll {values.get('DYNAMICS_365_RESOURCE')}"
-                        f"/api/data/v9.2/importjobs({import_job_id}) for status.")}
-
-
-# ─── Action: one_shot — forge → package → plan_deploy ────────────────────
-
-def _action_one_shot(swarm_name, publisher_prefix, publisher_unique_name, version):
-    """Run the full chain up to (but NOT including) the destructive deploy.
-    Calls the forge agent in-process to avoid duplicating its logic."""
-    # 1. Forge
-    try:
-        from agents.copilot_studio_forge_agent import CopilotStudioForgeAgent
-    except Exception as e:
-        return {"status": "error", "stage": "import_forge",
-                "message": f"Could not import the forge: {e}. "
-                           f"Ensure copilot_studio_forge_agent.py is in agents/."}
-    forge = CopilotStudioForgeAgent()
-    forge_result = json.loads(forge.perform(action="forge", swarm_name=swarm_name))
-    if forge_result.get("status") != "ok":
-        return {"status": "error", "stage": "forge", "forge_result": forge_result}
-    bundle_dir = forge_result["bundle_dir"]
-
-    # 2. Package
-    pkg = _action_package(bundle_dir,
-                           solution_unique_name=re.sub(r"[^A-Za-z0-9]", "", swarm_name),
-                           publisher_unique_name=publisher_unique_name,
-                           publisher_prefix=publisher_prefix,
-                           version=version)
-    if pkg.get("status") != "ok":
-        return {"status": "error", "stage": "package", "package_result": pkg}
-
-    # 3. Plan
-    plan = _action_plan_deploy(pkg["package_zip"])
-    if plan.get("status") != "ok":
-        return {"status": "error", "stage": "plan_deploy",
-                "plan_result": plan,
-                "package_result": pkg,
-                "forge_result": forge_result}
-
-    return {
-        "status": "ok",
-        "action": "one_shot",
-        "forge": {"bundle_dir": forge_result.get("bundle_dir"),
-                  "bundle_zip": forge_result.get("bundle_zip"),
-                  "stats": (forge_result.get("plan") or {}).get("stats")},
-        "package": {"package_zip": pkg["package_zip"],
-                    "components": pkg["components"]},
-        "plan_deploy": {"would_post_to": plan["would_post_to"],
-                        "files_total": plan["files_total"]},
-        "next_step": (
-            f"Inspect the package at {pkg['package_zip']} and the plan above. "
-            f"When ready, call action='deploy' with package_zip='{pkg['package_zip']}' "
-            f"and confirm=true to push to {plan['would_post_to']}. "
-            f"This is the only step that touches the env destructively."
-        ),
-    }
-
-
-# ─── The agent ────────────────────────────────────────────────────────────
 
 class CopilotStudioDeployAgent(BasicAgent):
     def __init__(self):
@@ -805,99 +295,232 @@ class CopilotStudioDeployAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": (
-                "Push a forged Copilot Studio bundle into a Dataverse / Power "
-                "Platform environment via OAuth client_credentials + "
-                "ImportSolutionAsync. Reads SPN creds from local.settings.json "
-                "(DYNAMICS_365_TENANT_ID/CLIENT_ID/CLIENT_SECRET/RESOURCE).\n\n"
-                "Run actions in order — each gates the next:\n"
-                " 1. auth_test    — token + WhoAmI; non-destructive\n"
-                " 2. inspect_env  — list bots, solutions, publishers; non-destructive\n"
-                " 3. one_shot     — forge + package + plan_deploy in one call;\n"
-                "                   STOPS before the destructive import\n"
-                " 4. plan_deploy  — show what would be POSTed; non-destructive\n"
-                " 5. deploy       — POST ImportSolutionAsync; DESTRUCTIVE,\n"
-                "                   requires confirm=true\n\n"
-                "Secrets are NEVER printed — token/client_secret are redacted "
-                "in all output."
-            ),
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "action": {
-                        "type": "string",
-                        "enum": ["auth_test", "inspect_env", "package",
-                                 "plan_deploy", "deploy", "one_shot"],
-                        "description": "auth_test (start here) | inspect_env | one_shot | package | plan_deploy | deploy",
-                    },
-                    "swarm_name": {
-                        "type": "string",
-                        "description": "For one_shot: the installed swarm to forge + deploy (e.g. 'BookFactory').",
-                    },
-                    "forge_dir": {
-                        "type": "string",
-                        "description": "For package: absolute path to a .brainstem_data/forged/<bundle> dir.",
-                    },
-                    "package_zip": {
-                        "type": "string",
-                        "description": "For plan_deploy/deploy: absolute path to a packaged solution .zip.",
-                    },
-                    "solution_unique_name": {
-                        "type": "string",
-                        "description": "Power Platform solution UniqueName (no spaces). Defaults from swarm_name.",
-                    },
-                    "publisher_prefix": {
-                        "type": "string",
-                        "description": "Publisher prefix for new components (e.g. 'rapp'). Must match an existing publisher in the env or be created beforehand.",
-                    },
-                    "publisher_unique_name": {
-                        "type": "string",
-                        "description": "Publisher UniqueName. Defaults to 'RAPP'.",
-                    },
-                    "version": {
-                        "type": "string",
-                        "description": "Solution version (e.g. '0.1.0.1'). Defaults to '0.1.0.0'.",
-                    },
-                    "confirm": {
-                        "type": "boolean",
-                        "description": "REQUIRED true for deploy action. Otherwise deploy refuses.",
-                    },
-                },
-                "required": ["action"],
-            },
+                "Convert and deploy a RAPP agent into the user's own Microsoft Copilot Studio "
+                "environment. **FASTEST PATH — use this first: action=deploy_template** with "
+                "`query_or_url` = an agent name to search for (default source: kody-w/AI-Agent-Templates), "
+                "OR any public raw agent.py URL, OR a local file path. It searches, fetches, converts, "
+                "packages and STARTS the deploy in ONE call — returns a device-login user_code+URL to relay "
+                "(or deploys autonomously if a service principal is saved). Then call action=complete_deploy "
+                "with the device_code once the user signs in. Do NOT re-search; deploy_template handles it. "
+                "If the user wants a service principal so deploys run with NO sign-in, action=credentials_help "
+                "walks them through creating it, set_credentials saves it locally, and verify_credentials "
+                "confirms it works. Advanced/granular actions: search_templates, fetch_source, package, deploy, "
+                "deploy_with_credentials, list_catalog (pre-converted solutions), credentials_status."),
+            "parameters": {"type": "object", "properties": {
+                "action": {"type": "string", "enum": ["deploy_template", "complete_deploy", "search_templates",
+                                                       "list_catalog", "fetch_source", "package", "deploy",
+                                                       "credentials_help", "set_credentials", "verify_credentials",
+                                                       "credentials_status", "deploy_with_credentials"]},
+                "query_or_url": {"type": "string", "description": "deploy_template: agent name to search, OR a raw agent.py URL, OR a local path"},
+                "query": {"type": "string", "description": "optional filter for search_templates"},
+                "repo": {"type": "string", "description": "optional public repo for search_templates (default kody-w/AI-Agent-Templates)"},
+                "source_url": {"type": "string", "description": "raw agent.py URL OR a local file path (fetch_source)"},
+                "agent_name": {"type": "string", "description": "human display name (package)"},
+                "instructions": {"type": "string", "description": "Copilot Studio system instructions you authored (package)"},
+                "unique_name": {"type": "string", "description": "optional lowercase id (package)"},
+                "package_id": {"type": "string", "description": "id returned by package (deploy)"},
+                "solution_url": {"type": "string", "description": "raw URL of a prebuilt solution .zip (deploy)"},
+                "environment_url": {"type": "string", "description": "optional target env https://org.crm.dynamics.com"},
+                "device_code": {"type": "string", "description": "device_code from deploy (complete_deploy)"},
+                "credentials": {"type": "object", "description": "a local.settings.json (or its Values) holding "
+                                "DYNAMICS_365_CLIENT_ID/SECRET/TENANT_ID/RESOURCE — for set_credentials or "
+                                "deploy_with_credentials (service-principal, no device login)"},
+            }, "required": ["action"]},
         }
-        super().__init__(self.name, self.metadata)
+        super().__init__(name=self.name, metadata=self.metadata)
 
-    def perform(self, action="auth_test", swarm_name="", forge_dir="",
-                package_zip="", solution_unique_name="", publisher_prefix="rapp",
-                publisher_unique_name="RAPP", version="0.1.0.0",
-                confirm=False, **kwargs):
+    def perform(self, **kwargs):
+        action = (kwargs.get("action") or "").strip()
         try:
-            if action == "auth_test":
-                return json.dumps(_action_auth_test())
-            if action == "inspect_env":
-                return json.dumps(_action_inspect_env())
+            if action == "deploy_template":
+                # ONE-SHOT: resolve source -> fetch -> derive instructions -> package -> start deploy.
+                q = (kwargs.get("query_or_url") or kwargs.get("source_url") or kwargs.get("query") or "").strip()
+                if not q:
+                    return json.dumps({"status": "error", "message": "query_or_url required (agent name, raw URL, or local path)"})
+                chosen = None
+                if q.startswith(("http://", "https://")) or os.path.isfile(os.path.expanduser(q)):
+                    source_ref = q
+                else:
+                    tpls = _search_templates(q)
+                    if not tpls:
+                        return json.dumps({"status": "error", "message": f"no agent matched '{q}' — try a different name, a raw URL, or a local path"})
+                    source_ref, chosen = tpls[0]["raw_url"], tpls[0]["name"]
+                spec = _derive_spec(_read_source(source_ref))
+                zip_bytes = build_solution(_get_bytes(f"{REPO_RAW}/pipeline/skeleton.zip"),
+                                           spec["display_name"], spec["unique_name"], spec["instructions"])
+                creds = _extract_dyn(kwargs["credentials"]) if kwargs.get("credentials") else _load_local_settings()
+                if creds:  # autonomous service-principal deploy, no login
+                    token = _sp_token(creds["client_id"], creds["client_secret"], creds["tenant_id"], creds["resource"])
+                    _import(creds["resource"], token, zip_bytes)
+                    return json.dumps({"status": "success", "agent": spec["display_name"], "source": source_ref,
+                                       "environment_url": creds["resource"],
+                                       "message": f"Deployed '{spec['display_name']}' to {creds['resource']}. Open https://copilotstudio.microsoft.com/."})
+                dc = _device_start(f"{DISCO}/user_impersonation offline_access")
+                _CACHE[dc["device_code"]] = {"zip": zip_bytes, "env": kwargs.get("environment_url")}
+                return json.dumps({"status": "auth_required", "agent": spec["display_name"], "source": source_ref,
+                                   "device_code": dc["device_code"], "user_code": dc["user_code"],
+                                   "verification_uri": dc["verification_uri"],
+                                   "message": (f"Converted '{spec['display_name']}'. Tell the user: open "
+                                               f"{dc['verification_uri']} and enter code {dc['user_code']}, sign into "
+                                               "the target Copilot Studio environment, then call action=complete_deploy "
+                                               "with this device_code. Do NOT search again.")})
+
+            if action == "search_templates":
+                tpls = _search_templates(kwargs.get("query", ""), kwargs.get("repo") or TEMPLATES_REPO)
+                return json.dumps({"status": "success", "repo": kwargs.get("repo") or TEMPLATES_REPO,
+                                   "count": len(tpls), "templates": tpls,
+                                   "next": "Pick a raw_url, then action=fetch_source with it (or any public URL / local path)."})
+
+            if action == "list_catalog":
+                cat = json.loads(_get_bytes(f"{REPO_RAW}/catalog/agents.json").decode())
+                return json.dumps({"status": "success", "agents": [
+                    {"id": a["id"], "name": a["name"], "category": a.get("category"),
+                     "status": a["status"],
+                     "solution_url": (f"{REPO_RAW}/{a['solution']}" if a.get("solution") else None),
+                     "source": a.get("source")} for a in cat.get("agents", [])]})
+
+            if action == "fetch_source":
+                src = kwargs.get("source_url") or kwargs.get("source") or kwargs.get("path") or ""
+                try:
+                    text = _read_source(src)   # public URL OR local file path
+                except (FileNotFoundError, Exception) as e:
+                    return json.dumps({"status": "error", "message": str(e)})
+                origin = "url" if src.strip().startswith("http") else "local-file"
+                return json.dumps({"status": "success", "source_ref": src, "origin": origin, "length": len(text),
+                                   "source": text[:12000],
+                                   "next": "Author agent_name + instructions, then call action=package."})
+
             if action == "package":
-                if not solution_unique_name:
-                    solution_unique_name = (
-                        re.sub(r"[^A-Za-z0-9]", "", os.path.basename(forge_dir.rstrip("/")))
-                        or "ForgedSwarm"
-                    )
-                return json.dumps(_action_package(
-                    forge_dir, solution_unique_name, publisher_unique_name,
-                    publisher_prefix, version))
-            if action == "plan_deploy":
-                return json.dumps(_action_plan_deploy(package_zip))
+                name = kwargs.get("agent_name") or "RAPP Agent"
+                instr = kwargs.get("instructions")
+                if not instr:
+                    return json.dumps({"status": "error", "message": "instructions required — author them from the agent source first"})
+                uniq = _sanitize(kwargs.get("unique_name") or name)
+                skel = _get_bytes(f"{REPO_RAW}/pipeline/skeleton.zip")
+                zip_bytes = build_solution(skel, name, uniq, instr)
+                pid = uniq + "-" + uuid.uuid4().hex[:8]
+                _CACHE[pid] = zip_bytes
+                return json.dumps({"status": "success", "package_id": pid, "unique_name": uniq,
+                                   "size": len(zip_bytes), "next": "Call action=deploy with this package_id."})
+
             if action == "deploy":
-                return json.dumps(_action_deploy(package_zip, confirm))
-            if action == "one_shot":
-                if not swarm_name:
-                    return json.dumps({"status": "error",
-                                       "message": "one_shot requires swarm_name."})
-                return json.dumps(_action_one_shot(
-                    swarm_name, publisher_prefix, publisher_unique_name, version))
-            return json.dumps({"status": "error",
-                               "message": f"Unknown action {action!r}."})
+                if kwargs.get("solution_url"):
+                    zip_bytes = _get_bytes(kwargs["solution_url"])
+                elif kwargs.get("package_id") in _CACHE:
+                    zip_bytes = _CACHE[kwargs["package_id"]]
+                else:
+                    return json.dumps({"status": "error", "message": "provide solution_url or a valid package_id"})
+                dc = _device_start(f"{DISCO}/user_impersonation offline_access")
+                _CACHE[dc["device_code"]] = {"zip": zip_bytes, "env": kwargs.get("environment_url")}
+                return json.dumps({"status": "auth_required", "device_code": dc["device_code"],
+                                   "user_code": dc["user_code"], "verification_uri": dc["verification_uri"],
+                                   "message": (f"Tell the user: open {dc['verification_uri']} and enter code "
+                                               f"{dc['user_code']}, sign into the Copilot Studio environment, "
+                                               "then call action=complete_deploy with this device_code.")})
+
+            if action == "complete_deploy":
+                dc = kwargs.get("device_code", "")
+                pending = _CACHE.get(dc)
+                if not pending:
+                    return json.dumps({"status": "error", "message": "unknown device_code — call action=deploy first"})
+                # poll briefly for the token (user should have signed in by now)
+                tok = None
+                for _ in range(20):
+                    code, t = _token_from_device(dc)
+                    if code == 200:
+                        tok = t; break
+                    if isinstance(t, dict) and t.get("error") in ("authorization_pending", "slow_down"):
+                        time.sleep(3); continue
+                    return json.dumps({"status": "error", "message": f"sign-in failed: {t}"})
+                if not tok:
+                    return json.dumps({"status": "pending", "message": "Still waiting on sign-in — retry complete_deploy."})
+                envs = _discover(tok["access_token"])
+                want = kwargs.get("environment_url") or pending.get("env")
+                env = next((e for e in envs if e["ApiUrl"].rstrip("/").lower() == (want or "").rstrip("/").lower()),
+                           envs[0] if envs else None)
+                if env is None:
+                    return json.dumps({"status": "error", "message": "no Power Platform environments for this account"})
+                if want is None and len(envs) > 1:
+                    return json.dumps({"status": "choose_environment",
+                                       "environments": [{"name": e["FriendlyName"], "url": e["ApiUrl"]} for e in envs],
+                                       "message": "Multiple environments — call complete_deploy again with environment_url set."})
+                env_token = _refresh(tok["refresh_token"], f"{env['ApiUrl'].rstrip('/')}/user_impersonation")
+                _import(env["ApiUrl"], env_token, pending["zip"])
+                _CACHE.pop(dc, None)
+                return json.dumps({"status": "success",
+                                   "environment": env["FriendlyName"], "environment_url": env["ApiUrl"],
+                                   "message": f"Deployed to {env['FriendlyName']}. Open https://copilotstudio.microsoft.com/ to use the agent."})
+
+            if action == "credentials_help":
+                return json.dumps({"status": "success",
+                    "title": "Set up a service principal so deploys run end-to-end with no sign-in",
+                    "steps": [
+                        "1. App registration: https://entra.microsoft.com -> Applications -> App registrations -> New registration. Name it (e.g. 'RAPP Copilot Studio Deploy'), single-tenant, Register.",
+                        "2. On the Overview page copy 'Application (client) ID' -> DYNAMICS_365_CLIENT_ID, and 'Directory (tenant) ID' -> DYNAMICS_365_TENANT_ID.",
+                        "3. Certificates & secrets -> New client secret -> copy the secret VALUE (not the Secret ID) -> DYNAMICS_365_CLIENT_SECRET.",
+                        "4. Give it access to your environment: https://admin.powerplatform.microsoft.com -> pick your environment -> Settings -> Users + permissions -> Application users -> New app user -> add the app -> assign a security role that can import solutions (System Customizer or System Administrator).",
+                        "5. DYNAMICS_365_RESOURCE = your environment URL, e.g. https://yourorg.crm.dynamics.com",
+                        "6. Put those 4 values into a local.settings.json (template below), call action=set_credentials with it, then action=verify_credentials to confirm, then deploy with no sign-in.",
+                    ],
+                    "local_settings_template": {"IsEncrypted": False, "Values": {
+                        "DYNAMICS_365_CLIENT_ID": "<application (client) id>",
+                        "DYNAMICS_365_CLIENT_SECRET": "<client secret value>",
+                        "DYNAMICS_365_TENANT_ID": "<directory (tenant) id>",
+                        "DYNAMICS_365_RESOURCE": "https://yourorg.crm.dynamics.com"}},
+                    "note": "The secret is stored only on your machine (~/.rapp_deploy_settings.json); it is never sent to any cloud model. No service principal? Skip all this — just run a deploy and use the device-login code instead.",
+                    "next": "After set_credentials, call action=verify_credentials, then deploy_template."})
+
+            if action == "verify_credentials":
+                d = _extract_dyn(kwargs["credentials"]) if kwargs.get("credentials") else _load_local_settings()
+                if not d:
+                    return json.dumps({"status": "error", "message": "no credentials — run credentials_help, then set_credentials"})
+                try:
+                    tok = _sp_token(d["client_id"], d["client_secret"], d["tenant_id"], d["resource"])
+                except Exception as e:
+                    return json.dumps({"status": "error", "stage": "token",
+                                       "message": f"Could not get a token — check client id/secret/tenant. ({e})"})
+                code, who = _req(f"{d['resource'].rstrip('/')}/api/data/v9.2/WhoAmI",
+                                 headers={"Authorization": "Bearer " + tok, "Accept": "application/json"})
+                if code == 200 and isinstance(who, dict):
+                    return json.dumps({"status": "success", "resource": d["resource"], "user_id": who.get("UserId"),
+                                       "message": "Service principal works and can reach the environment — ready to deploy with no sign-in."})
+                return json.dumps({"status": "error", "stage": "environment", "http": code,
+                                   "message": "Token OK, but this app can't reach the environment. Add it as an Application User (step 4) with a solution-import role.",
+                                   "detail": str(who)[:300]})
+
+            if action == "set_credentials":
+                creds = kwargs.get("credentials")
+                if not _extract_dyn(creds):
+                    return json.dumps({"status": "error", "message": "credentials missing DYNAMICS_365_CLIENT_ID/SECRET/TENANT_ID/RESOURCE"})
+                obj = json.loads(creds) if isinstance(creds, str) else creds
+                with open(SETTINGS_PATH, "w") as f:
+                    json.dump(obj, f, indent=2)
+                d = _extract_dyn(creds)
+                return json.dumps({"status": "success", "saved": SETTINGS_PATH, "resource": d["resource"],
+                                   "message": f"Credentials saved locally for {d['resource']} — deploys are now autonomous (no device login)."})
+
+            if action == "credentials_status":
+                d = _load_local_settings()
+                if not d:
+                    return json.dumps({"status": "success", "found": False})
+                return json.dumps({"status": "success", "found": True, "resource": d["resource"],
+                                   "client_id": d["client_id"], "client_secret": "***", "source": SETTINGS_PATH})
+
+            if action == "deploy_with_credentials":
+                if kwargs.get("solution_url"):
+                    zip_bytes = _get_bytes(kwargs["solution_url"])
+                elif kwargs.get("package_id") in _CACHE:
+                    zip_bytes = _CACHE[kwargs["package_id"]]
+                else:
+                    return json.dumps({"status": "error", "message": "provide solution_url or a valid package_id"})
+                d = _extract_dyn(kwargs["credentials"]) if kwargs.get("credentials") else _load_local_settings()
+                if not d:
+                    return json.dumps({"status": "error", "message": "no Dynamics credentials — call set_credentials or place ~/.rapp_deploy_settings.json"})
+                token = _sp_token(d["client_id"], d["client_secret"], d["tenant_id"], d["resource"])
+                _import(d["resource"], token, zip_bytes)
+                return json.dumps({"status": "success", "environment_url": d["resource"],
+                                   "message": f"Deployed to {d['resource']} (service principal). Open https://copilotstudio.microsoft.com/ to use the agent."})
+
+            return json.dumps({"status": "error", "message": f"unknown action '{action}'"})
         except Exception as e:
-            return json.dumps({"status": "error",
-                               "stage": "agent_dispatch",
-                               "message": f"{type(e).__name__}: {e}"})
+            return json.dumps({"status": "error", "message": str(e)})
