@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-08T17:49:16.092890+00:00",
+  "generated_at": "2026-06-09T22:58:34.764722+00:00",
   "stats": {
     "total_agents": 181,
     "total_swarms": 82,
@@ -5802,9 +5802,9 @@
       "schema": "rapp-agent/1.0",
       "name": "@rapp/swarm_factory_agent",
       "display_name": "SwarmFactory",
-      "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
+      "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog. v0.3: generated swarms follow the orchestration hard rules (raise-don't-prose errors, gating verdicts, per-run workspaces, static bounds, safe parallelism, tier fallback).",
       "author": "RAPP",
-      "version": "0.2.4",
+      "version": "0.3.0",
       "tags": [
         "meta",
         "build",
@@ -5824,14 +5824,14 @@
         }
       },
       "_file": "agents/@rapp/swarm_factory_agent.py",
-      "_sha256": "4671fdc60a5e667f69c98570d6aede370b33c4c9a328bcdaecc32ca067f53adb",
+      "_sha256": "85069fbb9cdc1fbfe05e567a034f8b4cf0c65a0fd72b546314cf9246232f9fb3",
       "_seed": 10141477066655803476,
-      "_size_kb": 36.7,
-      "_lines": 699,
+      "_size_kb": 40.6,
+      "_lines": 752,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
+      "_latest_commit_sha": "fec89f1e100934281bc8a92d0aae7b6972420c64",
       "_card_sha256": "64a0967ee8fb2a61560499f2a0d7fb41b2a98b57415d3cadbe4ab52ee6a6684c"
     },
     {
@@ -5935,9 +5935,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rarbookworld/bookfactory",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "display_name": "BookFactory (converged singleton)",
-      "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication.",
+      "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication. v0.4: structured CEO/Reviewer verdicts that actually gate, raise-don't-prose error handling, per-run workspaces, concurrent independent checks, bounded revision pass, optional small-model tiering.",
       "author": "rarbookworld",
       "tags": [
         "composite",
@@ -5963,14 +5963,14 @@
         }
       },
       "_file": "agents/@rarbookworld/bookfactory_agent.py",
-      "_sha256": "cea961a7f8ed77e85590a2efb1d72f4c7e95b8d5fcfb053f990b316fac29eda9",
+      "_sha256": "8f26b6655bda3546d8519e221affaa83dc2c9f5a5cc5859e176e2ccdb74c5bfb",
       "_seed": 8003489415513650359,
-      "_size_kb": 24.6,
-      "_lines": 557,
+      "_size_kb": 37.7,
+      "_lines": 823,
       "_has_card": true,
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
-      "_latest_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
+      "_latest_commit_sha": "fec89f1e100934281bc8a92d0aae7b6972420c64",
       "_card_sha256": "f3f31fed0d9ba49da9444f2728f7af063da707f3b6420a08028de2b280981f20"
     },
     {
