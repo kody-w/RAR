@@ -1,0 +1,25 @@
+{
+  "id": "rar_steward",
+  "name": "RarStewardAgent \u2014 autonomous RAR steward",
+  "version": "1.0.0",
+  "manifest_name": "@rapp/rar_steward",
+  "summary": "Autonomous steward of the public RAR: surveys catalog health, clusters same-but-different agents that should be united into one quality base, and flags noise/junk for review. Operator-mediated \u2014 suggests, never auto-deletes. Keeps the registry usable as it grows.",
+  "tagline": "Keep the RAR from rotting into noise \u2014 merge the duplicates, prune the junk.",
+  "category": "core",
+  "tags": [
+    "rar",
+    "steward",
+    "registry",
+    "quality",
+    "dedup",
+    "merge",
+    "curation"
+  ],
+  "singleton_filename": "rar_steward_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapp/rar_steward_agent.py",
+  "singleton_sha256": "18f14fb8242244d010eb82738cb5ff88e78baf170bc36535d27469e40e64a6d8",
+  "singleton_lines": 317,
+  "singleton_bytes": 15143,
+  "quality_tier": "official",
+  "author": "Kody Wildfeuer"
+}
