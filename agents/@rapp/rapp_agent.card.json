@@ -1,10 +1,10 @@
 {
   "id": "rapp",
-  "name": "RappAgent \u2014 the RAPP ecosystem in one agent",
+  "name": "RappAgent — the RAPP ecosystem in one agent",
   "version": "1.0.0",
   "manifest_name": "@rapp/rapp",
-  "summary": "ONE airdroppable agent for the whole RAPP ecosystem: identity/estate, any door by rappid, local cubbies, shared neighborhoods, eggs, the super-RAR, zero-commit-risk streaming. Search your WHOLE estate by ANY term (content-aware), group the hits into a cubby (cubby_collect) \u2014 a digital organism carved from your estate \u2014 then egg + mirror it to a neighborhood. Embeds the spec (offline/woods); refresh pulls the live grail (rapp-god/RAPP/RAPP-Bible).",
-  "tagline": "Drop one file in your brainstem \u2192 the whole RAPP ecosystem, to spec, no drift.",
+  "summary": "The one-drop universal ecosystem god agent: navigate, bootstrap (mint/scaffold/plant), operate the core (estate/neighborhoods/cubbies/eggs/super-RAR), record lineage, and INSTALL any specialist — 41 actions, airdroppable, offline-safe, drift-checked via action=verify.",
+  "tagline": "Drop one file in your brainstem → the whole RAPP ecosystem, to spec, no drift.",
   "category": "core",
   "tags": [
     "rapp",
@@ -24,5 +24,6 @@
   "singleton_lines": 1114,
   "singleton_bytes": 60867,
   "quality_tier": "official",
-  "author": "Kody Wildfeuer"
+  "author": "Kody Wildfeuer",
+  "actions": 41
 }
