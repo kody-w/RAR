@@ -16,6 +16,7 @@ measures part-level drift) — it is a witness, never the judge; the SOURCE wins
   scan        full cross-source drift report (default)
   authority   the precedence order — which source wins over which, and why
   part name=… drift detail for one ecosystem part (from rapp-god)
+  file_issues file the prune plan as GitHub Issues (dry-run by default)
   help
 
 Online by nature (it trolls the network); degrades to a clear "offline" note.
@@ -24,9 +25,11 @@ Generic + cover-safe: touches only public canon. MIT © Kody Wildfeuer.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
+import subprocess
 from datetime import datetime, timezone
 
 try:
@@ -61,6 +64,10 @@ RAPP_SPECIES = os.environ.get("RAPP_SPECIES", "kody-w/RAPP")
 RAPP_GOD = os.environ.get("RAPP_GOD", "kody-w/rapp-god")
 RAPP_MAP = os.environ.get("RAPP_MAP", "kody-w/rapp-map")
 RAPP_BIBLE = os.environ.get("RAPP_BIBLE", "kody-w/RAPP-Bible")
+
+# Where drift Issues land for traceability (public canon only — never private).
+DRIFT_TRACKER = os.environ.get("DRIFT_TRACKER", "kody-w/RAPP")
+DRIFT_LABEL = os.environ.get("DRIFT_LABEL", "rapp-drift")
 
 # Text sources to extract schema-strings + invariants from. Tier marks the
 # constitutional rank used to resolve who wins (lower = higher authority).
@@ -118,6 +125,29 @@ def _fetch(url, timeout=12):
         return None
 
 
+def _run(cmd):
+    """Run a subprocess; return (rc, out, err). Mirrors the other agents:
+    FileNotFoundError (e.g. gh not installed) -> rc 127, 120s timeout."""
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        return p.returncode, p.stdout, p.stderr
+    except FileNotFoundError as e:
+        return 127, "", str(e)
+    except subprocess.TimeoutExpired as e:
+        return 124, "", str(e)
+
+
+def _scrub(text):
+    """Redact tokens/secrets before they enter a return envelope or issue."""
+    if not text:
+        return text
+    text = re.sub(r"gh[pousr]_[A-Za-z0-9]{20,}", "[redacted-token]", text)
+    text = re.sub(r"github_pat_[A-Za-z0-9_]{20,}", "[redacted-token]", text)
+    text = re.sub(r"(?i)(authorization|token|bearer|secret|password)\s*[:=]\s*\S+",
+                  r"\1=[redacted]", text)
+    return text
+
+
 def _schemas(text):
     """schema -> set(versions) found in this text."""
     out = {}
@@ -138,11 +168,14 @@ class DriftAgent(BasicAgent):
                 "type": "object",
                 "properties": {
                     "action": {"type": "string",
-                               "enum": ["scan", "authority", "part", "graph",
-                                        "blast_radius", "help"]},
+                               "enum": ["scan", "canon", "prune", "authority",
+                                        "part", "graph", "blast_radius",
+                                        "file_issues", "help"]},
                     "name": {"type": "string", "description": "part: ecosystem part name (from rapp-god)"},
                     "repo": {"type": "string", "description": "blast_radius: the mutated repo/node"},
                     "verbose": {"type": "boolean", "description": "scan: include in-sync schemas too"},
+                    "confirm": {"type": "boolean", "description": "file_issues: actually create the GitHub Issues (default false = dry-run plan only)"},
+                    "tracker": {"type": "string", "description": "file_issues: optional owner/repo override for where Issues land (default DRIFT_TRACKER)"},
                 },
                 "required": ["action"],
             },
@@ -167,8 +200,14 @@ class DriftAgent(BasicAgent):
 
         if action in ("graph", "blast_radius"):
             return self._graph(action, kwargs)
+        if action == "canon":
+            return self._canon(action)
+        if action == "prune":
+            return self._prune(action)
+        if action == "file_issues":
+            return self._file_issues_action(action, kwargs)
 
-        if action == "help" or action not in ("scan", "authority", "part", "graph", "blast_radius"):
+        if action == "help" or action not in ("scan", "canon", "prune", "authority", "part", "graph", "blast_radius", "file_issues"):
             return (
                 "DriftAgent — make sure the whole RAPP ecosystem aligns.\n"
                 "  action=scan              cross-source drift report + who wins\n"
@@ -176,6 +215,7 @@ class DriftAgent(BasicAgent):
                 "  action=part name=…       drift detail for one part (rapp-god)\n"
                 "  action=graph             the ecosystem relationship graph (rapp-map)\n"
                 "  action=blast_radius repo=X   who consumes X → review for update if X mutates\n"
+                "  action=file_issues [confirm=true] [tracker=owner/repo]   file the prune plan as GitHub Issues (dry-run by default)\n"
                 "It trolls the species specs, rapp-god (observatory), rapp-map, "
                 "and RAPP-Bible, flags every conflicting schema/invariant, and "
                 "names the winner per the constitutional authority order.")
@@ -420,6 +460,213 @@ class DriftAgent(BasicAgent):
                                  "species root wins on conflict; observers (rapp-god) "
                                  "just re-snapshot."),
                          note="keeps the digital organism aligned: one mutation → its full consumer set.")
+
+    # ── canon: materialize the RESOLVED single-source so the tree blossoms
+    #    with the latest instead of re-traversing scattered old versions ──
+    def _resolve(self):
+        """Fetch + resolve once → (canon, prune_plan, fetched, missed). canon is
+        the rapp-canon/1.0 registry: every schema → its ONE canonical version +
+        the legacy versions it supersedes."""
+        fetched, missed = {}, []
+        for src in SOURCES:
+            t = _fetch(src["url"])
+            (missed.append(src["key"]) if t is None else fetched.__setitem__(src["key"], (src, t)))
+        if not fetched:
+            return None, None, fetched, missed
+
+        def _norm(v):
+            return re.sub(r"\.0$", "", v)
+        schema_map = {}
+        for key, (src, text) in fetched.items():
+            for name, vers in _schemas(text).items():
+                for v in vers:
+                    schema_map.setdefault(name, {}).setdefault(_norm(v), []).append(key)
+
+        canon, prune = [], []
+        for schema, by_ver in schema_map.items():
+            bases = {}
+            for v in by_ver:
+                m = re.match(r"^(\d+(?:\.\d+)*)(?:-([a-z0-9]+))?$", v)
+                if m:
+                    bases.setdefault(m.group(1), set()).add(m.group(2) or "")
+            suffixed = any(suf for sufs in bases.values() for suf in sufs)
+            if suffixed:
+                # family — canonical IS the whole family (all variants kept)
+                canon.append({"schema": schema, "kind": "family",
+                              "canonical": sorted(by_ver),
+                              "note": "family variants are all canonical (types, not versions)."})
+                continue
+            if len(bases) < 2:
+                only = next(iter(by_ver))
+                canon.append({"schema": schema, "kind": "single",
+                              "canonical": f"{schema}/{only}", "legacy": []})
+                continue
+            wins = self._winner([s for srcs in by_ver.values() for s in srcs])
+            top = max(bases, key=lambda v: tuple(int(x) for x in v.split(".")))
+            legacy = sorted(v for v in by_ver if v != top)
+            canon.append({"schema": schema, "kind": "versioned",
+                          "canonical": f"{schema}/{top}",
+                          "legacy_read_only": [f"{schema}/{v}" for v in legacy],
+                          "authority": wins["source"]})
+            # dead branch = any source that carries ONLY an older version (still
+            # presents it as current) → prune to canonical
+            for v in legacy:
+                for s in by_ver[v]:
+                    if s not in by_ver.get(top, []):
+                        prune.append({"source": s, "stale": f"{schema}/{v}",
+                                      "replace_with": f"{schema}/{top}",
+                                      "why": "presents a superseded version; align to canon (keep only as explicit read-compat)."})
+
+        # the rappid invariant → an explicit prune of the v2-minting dead branch
+        inv = self._rappid_drift(fetched)
+        if inv:
+            for s in inv["where"].get("still_show_v2", []):
+                prune.append({"source": s, "stale": "rappid v2 minting",
+                              "replace_with": "Eternity rappid:@<owner>/<slug>:<64hex>",
+                              "why": "Art. XXXIV.1 forbids minting parallel formats; v2 is read-only legacy."})
+        return canon, prune, fetched, missed
+
+    def _canon(self, action):
+        canon, prune, fetched, missed = self._resolve()
+        if canon is None:
+            return self._env(action, "offline", note="no network — cannot resolve canon.", missed=missed)
+        versioned = [c for c in canon if c["kind"] == "versioned"]
+        return self._env(action, "success",
+                         registry_schema="rapp-canon/1.0",
+                         resolved_at=_now(),
+                         sources=sorted(fetched),
+                         authority_order=AUTHORITY,
+                         schemas=sorted(canon, key=lambda c: c["schema"]),
+                         note=("This is the MATERIALIZED single source of truth — read it "
+                               "instead of re-traversing every spec. Each schema has ONE "
+                               "canonical version; older numerics are read-only legacy. "
+                               "Commit it to rapp-map/canon.json so the tree blossoms with "
+                               "the latest; regenerate when canon moves."),
+                         prune_count=len(prune))
+
+    def _prune(self, action):
+        canon, prune, fetched, missed = self._resolve()
+        if canon is None:
+            return self._env(action, "offline", note="no network — cannot compute the prune plan.", missed=missed)
+        return self._env(action, "success",
+                         resolved_at=_now(),
+                         dead_branches=len(prune),
+                         prune_plan=prune,
+                         materialized_canon="rapp-canon/1.0 (action=canon for the full registry)",
+                         ruling=("Operator-mediated, surgical: cut each dead branch (a source "
+                                 "still presenting a superseded version as current) to the "
+                                 "canonical, keeping it ONLY as explicit read-compat. Then "
+                                 "commit canon.json so consumers read the resolved tree and "
+                                 "never re-traverse scattered old versions. The steward never "
+                                 "auto-edits other repos — it stages the cut for you."))
+
+    # ── file the prune plan as GitHub Issues for traceability ──
+    def _file_issues(self, items, tracker, label, prefix, confirm):
+        """Reusable, idempotent Issue filer. SHARED ISSUE-FILING CONTRACT.
+
+        items: list of {title, fingerprint, body_md, machine}. tracker is
+        "owner/repo". A stable fingerprint => same drift never spams a dup.
+        Dry-run by default (confirm=False) — filing public Issues is
+        outward-facing and must be opt-in. COVER: callers must put only public
+        canon in titles/bodies — never a private repo name, token, or secret."""
+        filed, skipped_existing, planned = [], [], []
+
+        # IDEMPOTENCY: GitHub full-text search of a hex inside a code fence is
+        # unreliable, so dedupe by ONE exhaustive, label-scoped listing and
+        # harvest fingerprints from titles + bodies. The fp also rides the
+        # TITLE (fp:<hex>) so it's visible + matchable.
+        rc, out, err = _run(["gh", "issue", "list", "--repo", tracker,
+                             "--label", label, "--state", "all", "--limit", "500",
+                             "--json", "number,title,body"])
+        if rc != 0:
+            # fail-safe: if we cannot confirm absence, refuse to file (no dup spam)
+            return {"tracker": tracker, "label": label, "confirm": confirm,
+                    "error": ("could not list existing issues to dedupe (" +
+                              _scrub((err or "").strip())[:160] +
+                              ") — refusing to file to avoid duplicates."),
+                    "filed": [], "skipped_existing": [], "planned": []}
+        existing = {}   # fingerprint -> issue number
+        try:
+            for it in json.loads(out or "[]"):
+                blob = (it.get("title", "") or "") + "\n" + (it.get("body", "") or "")
+                for fpm in re.findall(r"(?:fp:|\"fingerprint\"\s*:\s*\")([0-9a-f]{12})", blob):
+                    existing.setdefault(fpm, it.get("number"))
+        except ValueError:
+            pass
+
+        label_ensured = False
+        for item in items:
+            fp = item["fingerprint"]
+            title = f"[{prefix}] {item['title']} (fp:{fp})"
+            machine = {"schema": "rapp-drift-issue/1.0", "fingerprint": fp,
+                       "prefix": prefix, **item.get("machine", {})}
+            body = (item["body_md"] + "\n\n```json\n" +
+                    json.dumps(machine, indent=2, ensure_ascii=False) + "\n```\n")
+            if fp in existing:
+                skipped_existing.append({"title": title, "fingerprint": fp,
+                                         "issue": existing[fp]})
+                continue
+            if not confirm:
+                planned.append({"title": title, "fingerprint": fp, "would_file": True})
+                continue
+            if not label_ensured:
+                _run(["gh", "label", "create", label, "--repo", tracker, "--force"])
+                label_ensured = True
+            crc, cout, cerr = _run(["gh", "issue", "create", "--repo", tracker,
+                                    "--title", title, "--body", body, "--label", label])
+            url = (cout or "").strip().splitlines()[-1] if cout and cout.strip() else None
+            filed.append(url or {"title": title, "fingerprint": fp,
+                                 "error": _scrub((cerr or "").strip()) or f"rc={crc}"})
+            existing[fp] = "just-filed"   # guard same-run duplicates
+
+        return {"tracker": tracker, "label": label, "confirm": confirm,
+                "filed": filed, "skipped_existing": skipped_existing,
+                "planned": planned}
+
+    def _file_issues_action(self, action, kwargs):
+        canon, prune, fetched, missed = self._resolve()
+        if canon is None:
+            return self._env(action, "offline",
+                             note="no network — cannot resolve the prune plan to file Issues.",
+                             missed=missed)
+        tracker = (kwargs.get("tracker") or DRIFT_TRACKER).strip()
+        confirm = bool(kwargs.get("confirm", False))
+        items = []
+        for p in prune:
+            fp = hashlib.sha1(
+                (p["source"] + "|" + p["stale"] + "|" + p["replace_with"]).encode()
+            ).hexdigest()[:12]
+            title = f"{p['stale']} → {p['replace_with']} (in {p['source']})"
+            body_md = (
+                f"**Dead branch:** `{p['source']}` presents `{p['stale']}` as current.\n\n"
+                f"**Winner / why:** `{p['replace_with']}` wins — {p['why']}\n\n"
+                f"**Remediation:** align `{p['source']}` to `{p['replace_with']}`, "
+                "keeping the old form ONLY as explicit read-compat (never minted/declared current).\n\n"
+                "Resolved per the constitutional authority order: MASTER_PLAN > CONSTITUTION > "
+                "spec docs > vault > code; the species root (kody-w/RAPP) is canon and other "
+                "repos mirror it. (Public canon only — no private sources referenced.)"
+            )
+            items.append({
+                "title": title,
+                "fingerprint": fp,
+                "body_md": body_md,
+                "machine": {"kind": "prune", "source": p["source"],
+                            "stale": p["stale"], "replace_with": p["replace_with"]},
+            })
+        result = self._file_issues(items, tracker, DRIFT_LABEL, "drift", confirm)
+        return self._env(action, "success",
+                         filed_at=_now(),
+                         dead_branches=len(prune),
+                         dry_run=(not confirm),
+                         counts={"candidates": len(items),
+                                 "filed": len(result["filed"]),
+                                 "skipped_existing": len(result["skipped_existing"]),
+                                 "planned": len(result["planned"])},
+                         **result,
+                         note=("Dry-run by default — pass confirm=true to actually open the "
+                               "Issues. Each Issue carries a stable fingerprint so re-running "
+                               "never spams duplicates (same drift => same Issue). Only public "
+                               "canon is ever written to a title or body."))
 
     def _part(self, name, god):
         if not god:
