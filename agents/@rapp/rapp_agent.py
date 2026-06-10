@@ -280,6 +280,23 @@ def _build_super_rar(cubby_root):
     return entries
 
 
+def _q_match(q, entry, abs_path=None):
+    """Search on ANYTHING: match the query against the entry's metadata AND the
+    file's actual content (code, docstrings, tags) — so the operator can grep
+    the whole estate by any term, not just filenames, and group the hits."""
+    if not q:
+        return True
+    if q in json.dumps(entry, ensure_ascii=False).lower():
+        return True
+    if abs_path and os.path.isfile(abs_path):
+        try:
+            if os.path.getsize(abs_path) <= 512 * 1024:   # bound: skip huge blobs
+                return q in open(abs_path, encoding="utf-8", errors="ignore").read().lower()
+        except OSError:
+            pass
+    return False
+
+
 _SPEC = """# Navigating a full RAPP estate — the map this agent embeds
 
 RAPP is fractal: the same five primitives (rappid · door · card · tether ·
@@ -337,6 +354,12 @@ above so it works airdropped into the woods with no network. When online,
 To go end to end: refresh (if online) → whoami → estate → ecosystem/find (what
 exists) → door (resolve a neighbor) → mount → join → browse → super_rar → load
 (stream what you need) / hatch (share what you made). One file. No drift.
+
+The natural-language estate move (same super-RAR pattern, local + neighborhood):
+"look up X in my local super-rar and show me what exists" → super_rar where=local
+query=X. "put the twins for this project in their own cubby, egg it, and mirror
+it in the batcave" → cubby_collect slug=project-twins query=twin → cubby_egg
+cubby=project-twins → mount → hatch path=<egg>. Search → collect → egg → mirror.
 """
 
 
@@ -361,7 +384,7 @@ class RappAgent(BasicAgent):
                         "enum": ["spec", "help", "protocol", "ecosystem",
                                  "find", "refresh", "whoami", "estate",
                                  "door", "cubby_new", "cubby_list", "cubby_show",
-                                 "cubby_egg", "cubby_import", "super_rar",
+                                 "cubby_collect", "cubby_egg", "cubby_import", "super_rar",
                                  "mount", "join", "browse", "stash", "hatch",
                                  "load", "unload", "sync", "branch", "invite",
                                  "qr", "enter", "show_and_tell"],
@@ -373,7 +396,9 @@ class RappAgent(BasicAgent):
                     "slug": {"type": "string", "description": "cubby_new: local cubby slug"},
                     "what": {"type": "string", "description": "cubby_new/join: one-line 'what I'm working on'"},
                     "path": {"type": "string", "description": "stash/hatch/cubby_import/cubby_egg: a file path"},
-                    "query": {"type": "string", "description": "super_rar: search term"},
+                    "query": {"type": "string", "description": "super_rar/cubby_collect: search term across your estate"},
+                    "source": {"type": "string", "enum": ["cubbies", "brainstem", "all"],
+                               "description": "cubby_collect: where to gather from (default all)"},
                     "where": {"type": "string", "enum": ["local", "neighborhood"],
                               "description": "super_rar: which stack (default neighborhood if mounted, else local)"},
                     "title": {"type": "string", "description": "show_and_tell: post title"},
@@ -560,7 +585,9 @@ class RappAgent(BasicAgent):
                 "  orient   : spec · ecosystem · find query=… · refresh (pull latest grail)\n"
                 "  identity : whoami · estate · door rappid=…\n"
                 "  on-device: cubby_new slug=… · cubby_list · cubby_show cubby=… ·\n"
-                "             cubby_egg cubby=… · cubby_import path=… · super_rar where=local\n"
+                "             super_rar where=local query=… (search your whole estate) ·\n"
+                "             cubby_collect slug=… query=… (assemble a cubby from a search) ·\n"
+                "             cubby_egg cubby=… · cubby_import path=…\n"
                 "  neighborhood (repo=<owner/repo>):\n"
                 "             mount · join · browse · stash path=… · hatch path=… ·\n"
                 "             load [cubby=…] · unload · show_and_tell title=… ·\n"
@@ -652,7 +679,7 @@ class RappAgent(BasicAgent):
         if action == "super_rar":   # where=local
             entries = _build_super_rar(root)
             q = (kwargs.get("query") or "").strip().lower()
-            hits = [e for e in entries if q in json.dumps(e).lower()] if q else entries
+            hits = [e for e in entries if _q_match(q, e, os.path.join(root, e["path"]))] if q else entries
             return self._env(action, "success", where="local", query=q or None,
                              matches=len(hits), total=len(entries),
                              by_kind={k: sum(1 for e in entries if e["kind"] == k)
@@ -669,7 +696,10 @@ class RappAgent(BasicAgent):
                 z.writestr("manifest.json", json.dumps({
                     "schema": CUBBY_EGG_SCHEMA, "type": "cubby", "version": "1.0",
                     "slug": slug, "cubby_schema": CUBBY_SCHEMA, "minted_at": _now(),
-                    "anatomy": list(CUBBY_ANATOMY)}, indent=2))
+                    "anatomy": list(CUBBY_ANATOMY),
+                    "organism": ("A digital organism carved from a rapp estate — a "
+                                 "coherent slice (its own anatomy) that lives on in its "
+                                 "own cubby, hatchable anywhere (Article XXXVII).")}, indent=2))
                 z.writestr("HATCH.md", f"# Cubby egg: {slug}\nHatch local with "
                            "`cubby_import path=<egg>`, or land it in a neighborhood "
                            "cubby with `hatch path=<egg>`.\n")
@@ -687,7 +717,84 @@ class RappAgent(BasicAgent):
         if action == "cubby_import":
             return self._hatch_egg(kwargs.get("path"), os.path.join(root, "{slug}"),
                                    action, ctx, local=True)
+        if action == "cubby_collect":
+            return self._collect(kwargs, ctx, root)
         return self._env(action, "error", error="unknown cubby op")
+
+    def _collect(self, kwargs, ctx, root):
+        """Assemble a new local cubby from a super-RAR search across everything
+        on-device. The natural-language move: 'put the X for this project in its
+        own cubby' → search local stack for X, copy the matches into a fresh
+        cubby (ready to egg + mirror to a neighborhood)."""
+        slug = (kwargs.get("slug") or kwargs.get("cubby") or "").strip()
+        q = (kwargs.get("query") or "").strip().lower()
+        if not _SLUG_RE.match(slug):
+            return self._env("cubby_collect", "error", error="pass slug=<new cubby name>")
+        if not q:
+            return self._env("cubby_collect", "error", error="pass query=<what to collect>")
+        source = (kwargs.get("source") or "all").lower()   # cubbies | brainstem | all
+        # gather candidates with ABSOLUTE source paths
+        candidates = []
+        if source in ("cubbies", "all"):
+            for e in _build_super_rar(root):
+                if e["cubby"] == slug:           # don't recollect the target
+                    continue
+                candidates.append({**e, "abs": os.path.join(root, e["path"])})
+        if source in ("brainstem", "all"):
+            bs = kwargs.get("_brainstem_dir") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            for kind, (sub, pat) in SUPER_RAR_KINDS.items():
+                for p in sorted(glob.glob(os.path.join(bs, sub, pat))):
+                    nm = os.path.basename(p)
+                    if nm.startswith(".") or not os.path.isfile(p):
+                        continue
+                    candidates.append({"kind": kind, "name": nm, "cubby": "(brainstem)",
+                                       "abs": p, "path": os.path.relpath(p, bs)})
+        # filter by the query — search on ANYTHING (metadata + file content)
+        matched, skipped = [], []
+        for c in candidates:
+            meta = {k: c.get(k) for k in ("kind", "name", "path", "cubby")}
+            if not _q_match(q, meta, c["abs"]):
+                continue
+            if _SECRET_NAME_RE.search(c["name"]):
+                skipped.append({"name": c["name"], "why": "secret-shaped"}); continue
+            matched.append(c)
+        if not matched:
+            return self._env("cubby_collect", "empty", query=q,
+                             searched=len(candidates),
+                             note="nothing matched — try `super_rar where=local query=…` to see what exists.")
+        # create the cubby + copy the matches in (dedupe by name within a kind)
+        cubby = os.path.join(root, slug)
+        for d in CUBBY_ANATOMY:
+            os.makedirs(os.path.join(cubby, d), exist_ok=True)
+        if not os.path.isfile(os.path.join(cubby, "cubby.json")):
+            _write_json(os.path.join(cubby, "cubby.json"), {
+                "schema": CUBBY_SCHEMA, "github_login": ctx["handle"], "slug": slug,
+                "display_name": slug, "what_im_cooking": kwargs.get("what", f"collected: {q}"),
+                "created_at": _now(), "estate": {"anatomy": list(CUBBY_ANATOMY)},
+                "streamable": {"agents": True},
+                "collected_from": {"query": q, "source": source, "at": _now()}})
+        kind_dir = {"agent": "agents", "organ": "organs", "sense": "senses",
+                    "rapplication": "rapplications", "neighborhood": "neighborhoods", "egg": "eggs"}
+        collected = []
+        for c in matched:
+            sub = kind_dir.get(c["kind"], "agents")
+            dst = os.path.join(cubby, sub, c["name"])
+            if os.path.exists(dst):
+                continue
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(c["abs"], dst)
+            collected.append({"kind": c["kind"], "name": c["name"],
+                              "from": c["cubby"], "into": f"cubbies/{slug}/{sub}/{c['name']}"})
+        return self._env("cubby_collect", "success", cubby=slug, query=q,
+                         collected=collected, count=len(collected),
+                         skipped_secrets=skipped,
+                         is_organism=True,
+                         note=("you just carved a digital organism out of your estate — a "
+                               "coherent slice that now lives in its own cubby and can be "
+                               "egged + hatched anywhere."),
+                         next=("now: `cubby_egg cubby=%s` to pack the organism, then `hatch "
+                               "path=<egg>` (after `mount`) to mirror it into your "
+                               "neighborhood cubby." % slug))
 
     # ── neighborhood ops (the shared-neighborhood flow (generic; cover-safe)) ──
     def _neighborhood(self, action, kwargs, ctx):
@@ -739,9 +846,10 @@ class RappAgent(BasicAgent):
             return self._env(action, "success", cubbies=cubbies, count=len(cubbies))
 
         if action == "super_rar":   # where=neighborhood (default)
-            entries = _build_super_rar(os.path.join(rd, "cubbies"))
+            croot = os.path.join(rd, "cubbies")
+            entries = _build_super_rar(croot)
             q = (kwargs.get("query") or "").strip().lower()
-            hits = [e for e in entries if q in json.dumps(e).lower()] if q else entries
+            hits = [e for e in entries if _q_match(q, e, os.path.join(croot, e["path"]))] if q else entries
             return self._env(action, "success", where="neighborhood", query=q or None,
                              matches=len(hits), total=len(entries),
                              by_kind={k: sum(1 for e in entries if e["kind"] == k)
