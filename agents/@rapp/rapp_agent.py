@@ -676,15 +676,20 @@ class RappAgent(BasicAgent):
             return self._env(action, "success", cubby=slug,
                              meta=_read_json(os.path.join(root, slug, "cubby.json")),
                              inventory=mine, count=len(mine))
-        if action == "super_rar":   # where=local
-            entries = _build_super_rar(root)
+        if action == "super_rar":   # where=local — your WHOLE local estate
             q = (kwargs.get("query") or "").strip().lower()
-            hits = [e for e in entries if _q_match(q, e, os.path.join(root, e["path"]))] if q else entries
-            return self._env(action, "success", where="local", query=q or None,
-                             matches=len(hits), total=len(entries),
-                             by_kind={k: sum(1 for e in entries if e["kind"] == k)
-                                      for k in {x["kind"] for x in entries}},
-                             results=hits[:50])
+            source = (kwargs.get("source") or "all").lower()  # cubbies|brainstem|all
+            bs = kwargs.get("_brainstem_dir") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            cands = self._local_candidates(root, bs, source)
+            hits = [c for c in cands
+                    if _q_match(q, {k: c.get(k) for k in ("kind", "name", "path", "cubby")}, c["abs"])] \
+                if q else cands
+            view = [{k: c[k] for k in ("kind", "name", "cubby", "path") if k in c} for c in hits]
+            return self._env(action, "success", where="local", source=source, query=q or None,
+                             matches=len(hits), total=len(cands),
+                             by_kind={k: sum(1 for c in cands if c["kind"] == k)
+                                      for k in {x["kind"] for x in cands}},
+                             results=view[:50])
         if action == "cubby_egg":
             slug = (kwargs.get("cubby") or "").strip()
             cubby = os.path.join(root, slug)
@@ -721,6 +726,23 @@ class RappAgent(BasicAgent):
             return self._collect(kwargs, ctx, root)
         return self._env(action, "error", error="unknown cubby op")
 
+    def _local_candidates(self, root, bs, source):
+        """Your whole local estate as candidates (abs paths): organized cubbies
+        + the live brainstem (agents/organs/senses/rapps/neighborhoods/eggs)."""
+        cands = []
+        if source in ("cubbies", "all"):
+            for e in _build_super_rar(root):
+                cands.append({**e, "abs": os.path.join(root, e["path"])})
+        if source in ("brainstem", "all"):
+            for kind, (sub, pat) in SUPER_RAR_KINDS.items():
+                for p in sorted(glob.glob(os.path.join(bs, sub, pat))):
+                    nm = os.path.basename(p)
+                    if nm.startswith(".") or not os.path.isfile(p):
+                        continue
+                    cands.append({"kind": kind, "name": nm, "cubby": "(brainstem)",
+                                  "path": os.path.relpath(p, bs), "abs": p})
+        return cands
+
     def _collect(self, kwargs, ctx, root):
         """Assemble a new local cubby from a super-RAR search across everything
         on-device. The natural-language move: 'put the X for this project in its
@@ -733,22 +755,9 @@ class RappAgent(BasicAgent):
         if not q:
             return self._env("cubby_collect", "error", error="pass query=<what to collect>")
         source = (kwargs.get("source") or "all").lower()   # cubbies | brainstem | all
-        # gather candidates with ABSOLUTE source paths
-        candidates = []
-        if source in ("cubbies", "all"):
-            for e in _build_super_rar(root):
-                if e["cubby"] == slug:           # don't recollect the target
-                    continue
-                candidates.append({**e, "abs": os.path.join(root, e["path"])})
-        if source in ("brainstem", "all"):
-            bs = kwargs.get("_brainstem_dir") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            for kind, (sub, pat) in SUPER_RAR_KINDS.items():
-                for p in sorted(glob.glob(os.path.join(bs, sub, pat))):
-                    nm = os.path.basename(p)
-                    if nm.startswith(".") or not os.path.isfile(p):
-                        continue
-                    candidates.append({"kind": kind, "name": nm, "cubby": "(brainstem)",
-                                       "abs": p, "path": os.path.relpath(p, bs)})
+        bs = kwargs.get("_brainstem_dir") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # gather candidates across the whole local estate; don't recollect target
+        candidates = [c for c in self._local_candidates(root, bs, source) if c.get("cubby") != slug]
         # filter by the query — search on ANYTHING (metadata + file content)
         matched, skipped = [], []
         for c in candidates:
@@ -835,8 +844,8 @@ class RappAgent(BasicAgent):
             cubbies = []
             root = os.path.join(rd, "cubbies")
             for entry in sorted(os.listdir(root) if os.path.isdir(root) else []):
-                if entry.startswith(("_", ".")):
-                    continue
+                if entry.startswith(("_", ".")) or not os.path.isdir(os.path.join(root, entry)):
+                    continue   # skip index.json + any stray files — cubbies are dirs
                 c = _read_json(os.path.join(root, entry, "cubby.json")) or {}
                 agents = sorted(f for f in (os.listdir(os.path.join(root, entry, "agents"))
                                 if os.path.isdir(os.path.join(root, entry, "agents")) else [])
