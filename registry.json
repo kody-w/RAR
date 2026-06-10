@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-09T22:58:34.764722+00:00",
+  "generated_at": "2026-06-10T13:20:53.344793+00:00",
   "stats": {
-    "total_agents": 181,
+    "total_agents": 185,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -5320,6 +5320,71 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@rapp/drift",
+      "version": "1.0.0",
+      "display_name": "DriftAgent",
+      "description": "Troll every canonical RAPP source for spec drift and report each conflict with which source wins (per the ecosystem authority order) and how to reconcile it.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "drift",
+        "spec",
+        "authority",
+        "rapp-god",
+        "alignment",
+        "audit"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/drift_agent.py",
+      "_sha256": "e454968abad64125ca8fae9ec700a1cba145f2b3b5b3b1073a8ac95f06c2530a",
+      "_seed": 2087148261022121127,
+      "_size_kb": 36.3,
+      "_lines": 687,
+      "_has_card": false,
+      "_added_at": "2026-06-09T21:40:07-04:00",
+      "_first_commit_sha": "f1952442eb6627946f9e306c0804202134549c62",
+      "_latest_commit_sha": "8a4cd0bac96bdd586a190b3b85982e6f31b7cb90"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/drift_watcher",
+      "version": "1.0.0",
+      "display_name": "DriftWatcherAgent",
+      "description": "Watch GitHub Issues filed by the drift/steward agents and stage the local-repo fix as a pull request \u2014 operator-mediated: it proposes PRs (Fixes #), never merges or closes. Closes the drift traceability loop.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "drift",
+        "spec",
+        "github",
+        "issues",
+        "pull-request",
+        "traceability",
+        "steward",
+        "alignment",
+        "operator-mediated"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/drift_watcher_agent.py",
+      "_sha256": "c43f286cae6dc16a1fdc8ae2372697f7c132615af35839baa866b4b2c546690f",
+      "_seed": 17977580014137392578,
+      "_size_kb": 20.3,
+      "_lines": 421,
+      "_has_card": false,
+      "_added_at": "2026-06-10T09:05:29-04:00",
+      "_first_commit_sha": "8908cd98178e9a4c2b7a0e45f758e16ece7635bc",
+      "_latest_commit_sha": "8908cd98178e9a4c2b7a0e45f758e16ece7635bc"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@rapp/egg_hatcher",
       "version": "1.1.0",
       "display_name": "EggHatcher",
@@ -5688,6 +5753,41 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@rapp/rapp",
+      "version": "1.0.0",
+      "display_name": "RappAgent",
+      "description": "The one agent for the whole RAPP ecosystem: identity, doors, local cubbies, shared neighborhoods, eggs, the super-RAR, and zero-commit-risk streaming \u2014 and it knows the spec (action=spec) for navigating it all end to end.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "rapp",
+        "ecosystem",
+        "estate",
+        "cubby",
+        "neighborhood",
+        "egg",
+        "super-rar",
+        "door",
+        "spec",
+        "universal"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/rapp_agent.py",
+      "_sha256": "17e1079bdb4b3f0d58239435d48cdec0b2e5b68419d6999e1869ef72207bfa25",
+      "_seed": 6614668339448129688,
+      "_size_kb": 60.2,
+      "_lines": 1123,
+      "_has_card": false,
+      "_added_at": "2026-06-09T21:40:04-04:00",
+      "_first_commit_sha": "7b2333f1ee396314f2e926e60282a5904e3fc07c",
+      "_latest_commit_sha": "0c6b107f4304073cb43e3555c6d3fef7cc07f252"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp_publish_agent",
       "display_name": "RappPublish",
       "version": "0.2.1",
@@ -5760,6 +5860,38 @@
       "_first_commit_sha": "65d878eaea899a9ae718afdca6f1de7d997bbf94",
       "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
       "_card_sha256": "cec5bd85e4fc355d4c65db2e424925add72fb175975d5df1a6ef1f34761f136e"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@rapp/rar_steward",
+      "version": "1.0.0",
+      "display_name": "RarStewardAgent",
+      "description": "Autonomous steward of the public RAR: surveys catalog health, clusters same-but-different agents that should be merged into one quality base, and flags noise/junk for review \u2014 operator-mediated guidance, never auto-deletes.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "rar",
+        "steward",
+        "registry",
+        "quality",
+        "dedup",
+        "merge",
+        "curation"
+      ],
+      "category": "core",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/rar_steward_agent.py",
+      "_sha256": "fa38826bf176d010c6c329b330ec93e0e6ed7b6459cabfd1455bbe4ae39bc14c",
+      "_seed": 4423138620711250150,
+      "_size_kb": 23.6,
+      "_lines": 478,
+      "_has_card": false,
+      "_added_at": "2026-06-09T21:45:37-04:00",
+      "_first_commit_sha": "21f71404c460bcf76cda6eac6c1a75a726fa21cd",
+      "_latest_commit_sha": "52dc5639738542a3c8ee0a4c82a5e746a8cab812"
     },
     {
       "schema": "rapp-agent/1.0",
