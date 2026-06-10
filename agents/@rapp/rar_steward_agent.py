@@ -22,9 +22,11 @@ Generic + cover-safe. MIT © Kody Wildfeuer.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
+import subprocess
 from datetime import datetime, timezone
 
 try:
@@ -60,11 +62,36 @@ _RAW = "https://raw.githubusercontent.com"
 INDEX_URL = f"{_RAW}/{RAR}/main/api/v1/index.json"
 AGENT_URL = f"{_RAW}/{RAR}/main/api/v1/agent/{{id}}.json"
 
+# Where steward findings become traceable GitHub Issues (public canon only).
+STEWARD_TRACKER = os.environ.get("STEWARD_TRACKER", "kody-w/RAR")
+STEWARD_LABEL = os.environ.get("STEWARD_LABEL", "rar-steward")
+
 # name tokens that carry no distinguishing meaning
 _STOP = {"agent", "the", "a", "an", "of", "for", "to", "and", "or", "rapp",
          "generator", "helper", "tool", "assistant", "v1", "v2", "py"}
 _PLACEHOLDER = re.compile(r"\b(test|tmp|temp|demo|foo|bar|baz|example|placeholder|untitled|copy|wip|draft|sample|hello[_-]?world)\b", re.IGNORECASE)
 _DUP_THRESHOLD = 0.6   # name-token Jaccard at/above this = merge candidate
+
+
+def _run(cmd, cwd=None):
+    try:
+        r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=120)
+        return r.returncode, r.stdout.strip(), r.stderr.strip()
+    except FileNotFoundError:
+        return 127, "", f"{cmd[0]}: not found"
+    except subprocess.TimeoutExpired:
+        return 124, "", "timed out"
+
+
+def _scrub(text):
+    """Redact tokens/secrets before they enter a return envelope or issue."""
+    if not text:
+        return text
+    text = re.sub(r"gh[pousr]_[A-Za-z0-9]{20,}", "[redacted-token]", text)
+    text = re.sub(r"github_pat_[A-Za-z0-9_]{20,}", "[redacted-token]", text)
+    text = re.sub(r"(?i)(authorization|token|bearer|secret|password)\s*[:=]\s*\S+",
+                  r"\1=[redacted]", text)
+    return text
 
 
 def _now():
@@ -112,10 +139,17 @@ class RarStewardAgent(BasicAgent):
                 "type": "object",
                 "properties": {
                     "action": {"type": "string",
-                               "enum": ["health", "duplicates", "junk", "agent", "help"]},
+                               "enum": ["health", "duplicates", "junk", "agent",
+                                        "file_issues", "help"]},
                     "name": {"type": "string", "description": "agent: rar_name or id to deep-assess"},
                     "publisher": {"type": "string", "description": "filter to one publisher (e.g. @kody-w)"},
                     "limit": {"type": "integer", "description": "max clusters/items to return (default 25)"},
+                    "scope": {"type": "string", "enum": ["merge", "junk", "all"],
+                              "description": "file_issues: which findings to file (default all)"},
+                    "confirm": {"type": "boolean",
+                                "description": "file_issues: actually create issues (default false = dry-run plan)"},
+                    "tracker": {"type": "string",
+                                "description": "file_issues: owner/repo to file into (default STEWARD_TRACKER)"},
                 },
                 "required": ["action"],
             },
@@ -209,15 +243,81 @@ class RarStewardAgent(BasicAgent):
                             "publisher": a.get("publisher"), "reasons": reasons})
         return out
 
+    # ── shared issue-filing contract (rapp-drift-issue/1.0) ──────────────────
+    #   items: list of {title, fingerprint, body_md, machine}
+    #   tracker: "owner/repo"  label: e.g. "rar-steward"  prefix: e.g. "drift"
+    #   confirm: bool (default FALSE upstream — filing public issues is opt-in)
+    # Idempotent: a stable fingerprint per finding means same drift => same fp =>
+    # no duplicate issue. Cover-safe: only public canon ever lands in title/body.
+    def _file_issues(self, items, tracker, label, prefix, confirm):
+        """Idempotent Issue filer (same contract as the drift agent). Dedupe by
+        ONE exhaustive label-scoped listing (search of a hex in a code fence is
+        unreliable); the fp also rides the TITLE. Fail-safe: if we can't list,
+        refuse to file. COVER: callers put only public canon in title/body."""
+        filed, skipped_existing, planned = [], [], []
+        rc, out, err = _run(["gh", "issue", "list", "--repo", tracker,
+                             "--label", label, "--state", "all", "--limit", "500",
+                             "--json", "number,title,body"])
+        if rc != 0:
+            return {"tracker": tracker, "label": label, "confirm": confirm,
+                    "error": ("could not list existing issues to dedupe (" +
+                              _scrub((err or "").strip())[:160] +
+                              ") — refusing to file to avoid duplicates."),
+                    "filed": [], "skipped_existing": [], "planned": []}
+        existing = {}
+        try:
+            for it in json.loads(out or "[]"):
+                blob = (it.get("title", "") or "") + "\n" + (it.get("body", "") or "")
+                for fpm in re.findall(r"(?:fp:|\"fingerprint\"\s*:\s*\")([0-9a-f]{12})", blob):
+                    existing.setdefault(fpm, it.get("number"))
+        except ValueError:
+            pass
+        labelled = False
+        for item in items:
+            fp = item["fingerprint"]
+            title = f"[{prefix}] {item['title']} (fp:{fp})"
+            machine = {"schema": "rapp-drift-issue/1.0", "fingerprint": fp,
+                       "prefix": prefix, **(item.get("machine") or {})}
+            body = (item["body_md"] + "\n\n```json\n" +
+                    json.dumps(machine, ensure_ascii=False) + "\n```\n")
+            if fp in existing:
+                skipped_existing.append({"fingerprint": fp, "title": title,
+                                         "number": existing[fp]})
+                continue
+            if not confirm:
+                planned.append({"title": title, "fingerprint": fp, "would_file": True})
+                continue
+            if not labelled:
+                _run(["gh", "label", "create", label, "--repo", tracker, "--force"])
+                labelled = True
+            crc, cout, cerr = _run(["gh", "issue", "create", "--repo", tracker,
+                                    "--title", title, "--body", body, "--label", label])
+            if crc == 0 and cout:
+                filed.append(cout.strip().splitlines()[-1])
+            else:
+                planned.append({"title": title, "fingerprint": fp,
+                                "would_file": True, "error": _scrub(cerr) or "create failed"})
+            existing[fp] = "just-filed"
+        return {"tracker": tracker, "label": label, "confirm": confirm,
+                "filed": filed, "skipped_existing": skipped_existing, "planned": planned}
+
+    def _fp(self, *parts):
+        key = "|".join(str(p) for p in parts)
+        return hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
+
     def perform(self, **kwargs):
         action = (kwargs.get("action") or "health").lower()
-        if action == "help" or action not in ("health", "duplicates", "junk", "agent"):
+        if action == "help" or action not in ("health", "duplicates", "junk",
+                                               "agent", "file_issues"):
             return (
                 "RarStewardAgent — keep the public RAR clean + usable.\n"
                 "  action=health           catalog health + quality score\n"
                 "  action=duplicates       same-but-different clusters to UNITE into one base\n"
                 "  action=junk             noise/low-quality candidates to review (no auto-delete)\n"
                 "  action=agent name=…     deep quality assessment of one agent\n"
+                "  action=file_issues      turn merge-cluster + junk findings into GitHub Issues\n"
+                "                          scope=merge|junk|all (default all); confirm=true to file\n"
+                "                          (default dry-run — plans only; tracker=owner/repo override)\n"
                 "  publisher=@kody-w       (optional) scope any action to one publisher\n"
                 "Steward, not executioner: it suggests; the operator acts.")
 
@@ -252,6 +352,67 @@ class RarStewardAgent(BasicAgent):
                              note="could not reach the RAR catalog (api/v1/index.json). Try again online.")
         if not agents:
             return self._env(action, "empty", note="no agents matched.")
+
+        if action == "file_issues":
+            scope = (kwargs.get("scope") or "all").lower()
+            if scope not in ("merge", "junk", "all"):
+                scope = "all"
+            confirm = bool(kwargs.get("confirm", False))   # dry-run default
+            tracker = (kwargs.get("tracker") or STEWARD_TRACKER).strip()
+            items = []
+
+            if scope in ("merge", "all"):
+                for c in self._clusters(agents):
+                    members = [m["rar_name"] for m in c["members"]]
+                    fp = self._fp("merge", *sorted(members))
+                    body = (
+                        f"**Merge candidate** — {c['size']} same-but-different agents.\n\n"
+                        f"Recommended unified base: `{c['recommended_base']}`\n\n"
+                        "Members:\n" +
+                        "".join(f"- `{m}`\n" for m in sorted(members)) +
+                        f"\nWhy: {c['why']}\n\n"
+                        "Unite into one quality base (operator-mediated). Steward "
+                        "suggests; the operator authors the base and retires the variants.")
+                    items.append({
+                        "title": f"merge {c['size']} same-but-different → {c['recommended_base']}",
+                        "fingerprint": fp,
+                        "body_md": body,
+                        "machine": {"kind": "merge",
+                                    "recommended_base": c["recommended_base"],
+                                    "members": members},
+                    })
+
+            if scope in ("junk", "all"):
+                _CONFIRMABLE = ("no card", "placeholder", "duplicate")
+                for j in self._junk(agents):
+                    reasons = j["reasons"]
+                    joined = " ".join(reasons).lower()
+                    if not any(k in joined for k in _CONFIRMABLE):
+                        continue
+                    fp = self._fp("junk", j["rar_name"], *reasons)
+                    body = (
+                        f"**Review candidate** — `{j['rar_name']}`\n\n"
+                        "Reasons flagged:\n" +
+                        "".join(f"- {r}\n" for r in reasons) +
+                        "\nReview and either add a card or retire the noise "
+                        "(operator-mediated). The steward never deletes.")
+                    items.append({
+                        "title": f"review: {j['rar_name']} ({', '.join(reasons)})",
+                        "fingerprint": fp,
+                        "body_md": body,
+                        "machine": {"kind": "junk", "rar_name": j["rar_name"],
+                                    "reasons": reasons},
+                    })
+
+            result = self._file_issues(items, tracker, STEWARD_LABEL,
+                                       "rar-steward", confirm)
+            return self._env(action, "success", scope=scope, scanned=len(agents),
+                             candidates=len(items), result=result,
+                             ruling=("Operator-mediated traceability: each finding becomes "
+                                     "one idempotent GitHub Issue (same finding => same "
+                                     "fingerprint => no dup). Dry-run by default — set "
+                                     "confirm=true to actually file. Only public canon "
+                                     "lands in issue titles/bodies."))
 
         if action == "duplicates":
             clusters = self._clusters(agents)
