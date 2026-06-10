@@ -1,0 +1,26 @@
+{
+  "id": "drift",
+  "name": "DriftAgent \u2014 cross-repo spec-drift detector + authority resolver",
+  "version": "1.0.0",
+  "summary": "Trolls every canonical RAPP source (rapp-god observatory, rapp-map, RAPP species specs, RAPP-Bible), flags where schemas/invariants disagree across repos, and names which source WINS per the constitutional authority order (MASTER_PLAN > CONSTITUTION > spec docs > vault > code) with remediation. Traverses the ecosystem graph (rapp-map) for blast-radius: when one repo mutates, which others to review \u2014 keeping the digital organism aligned.",
+  "tagline": "Make sure the whole ecosystem aligns \u2014 and know which source wins when it doesn't.",
+  "category": "core",
+  "tags": [
+    "drift",
+    "spec",
+    "authority",
+    "alignment",
+    "rapp-god",
+    "graph",
+    "blast-radius",
+    "audit"
+  ],
+  "manifest_name": "@rapp/drift",
+  "singleton_filename": "drift_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapp/drift_agent.py",
+  "singleton_sha256": "4a21e456d740efe62eb36782824e113a6ebffaede02a223000820c9fd554f92b",
+  "singleton_lines": 440,
+  "singleton_bytes": 23304,
+  "quality_tier": "official",
+  "author": "Kody Wildfeuer"
+}
