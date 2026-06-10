@@ -1,0 +1,29 @@
+{
+  "id": "rapp",
+  "name": "RappAgent \u2014 the RAPP ecosystem in one agent",
+  "version": "1.0.0",
+  "summary": "ONE airdroppable agent that navigates the whole RAPP ecosystem end to end: identity/estate, any door by rappid, local cubbies, shared neighborhoods + cubbies, eggs, the super-RAR, and zero-commit-risk streaming. Embeds the spec so it works offline (the woods); action=refresh pulls the latest global grail (rapp-god + RAPP specs + RAPP-Bible) so it stays drift-free.",
+  "tagline": "Drop one file in your brainstem \u2192 the whole RAPP ecosystem, to spec, no drift.",
+  "category": "core",
+  "tags": [
+    "rapp",
+    "ecosystem",
+    "estate",
+    "cubby",
+    "neighborhood",
+    "egg",
+    "super-rar",
+    "door",
+    "spec",
+    "universal",
+    "god-agent"
+  ],
+  "manifest_name": "@rapp/rapp",
+  "singleton_filename": "rapp_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapp/rapp_agent.py",
+  "singleton_sha256": "5c61a49cd3a6274ffbe5ad3f938c6447f1b569688590aefff1cc2979326958c9",
+  "singleton_lines": 1006,
+  "singleton_bytes": 54352,
+  "quality_tier": "official",
+  "author": "Kody Wildfeuer"
+}
