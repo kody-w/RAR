@@ -463,7 +463,7 @@ exists) → door (resolve a neighbor) → mount → join → browse → super_ra
 The natural-language estate move (same super-RAR pattern, local + neighborhood):
 "look up X in my local super-rar and show me what exists" → super_rar where=local
 query=X. "put the twins for this project in their own cubby, egg it, and mirror
-it in the batcave" → cubby_collect slug=project-twins query=twin → cubby_egg
+it in our private neighborhood" → cubby_collect slug=project-twins query=twin → cubby_egg
 cubby=project-twins → mount → hatch path=<egg>. Search → collect → egg → mirror.
 """
 
