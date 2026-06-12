@@ -465,6 +465,16 @@ The natural-language estate move (same super-RAR pattern, local + neighborhood):
 query=X. "put the twins for this project in their own cubby, egg it, and mirror
 it in our private neighborhood" → cubby_collect slug=project-twins query=twin → cubby_egg
 cubby=project-twins → mount → hatch path=<egg>. Search → collect → egg → mirror.
+
+FORK A NAMED OWNED CUBBY + POP A TWIN: "egg-and-cubby this into a new cubby still
+under my ownership" → cubby_fork slug=… from=non-kernel-agents. A neighborhood
+fork is FRACTAL — it lands at cubbies/<me>/cubbies/<slug>/ (inside your own cubby,
+so the guard passes and ownership is unambiguous) and ships a self-backup .egg in
+its eggs/. A local fork lives at ~/.brainstem/cubbies/<slug>/. "cubby the non-kernel
+agents into a twin and pop its chat" → twin cubby=<slug> (or cubby_fork …twin=true):
+builds a twin workspace (~/.brainstem/twins/<name>/) from just those agents (+ the
+kernel agents so it boots), boots a child brainstem on a free port, and hands back
+a chat URL you use INSTEAD of the global brainstem.
 """
 
 
@@ -489,7 +499,8 @@ class RappAgent(BasicAgent):
                         "enum": ["spec", "help", "protocol", "ecosystem",
                                  "find", "refresh", "whoami", "estate",
                                  "door", "cubby_new", "cubby_list", "cubby_show",
-                                 "cubby_collect", "cubby_egg", "cubby_import", "super_rar",
+                                 "cubby_collect", "cubby_egg", "cubby_import",
+                                 "cubby_fork", "twin", "twin_from_cubby", "super_rar",
                                  "mount", "join", "browse", "stash", "hatch",
                                  "load", "unload", "sync", "branch", "invite",
                                  "qr", "enter", "show_and_tell",
@@ -501,10 +512,17 @@ class RappAgent(BasicAgent):
                     },
                     "repo": {"type": "string", "description": "neighborhood door owner/repo (or set RAPP_NEIGHBORHOOD)"},
                     "rappid": {"type": "string", "description": "door: any rappid to resolve"},
-                    "cubby": {"type": "string", "description": "cubby/neighborhood: a cubby slug or handle"},
-                    "slug": {"type": "string", "description": "cubby_new: local cubby slug"},
-                    "what": {"type": "string", "description": "cubby_new/join: one-line 'what I'm working on'"},
-                    "path": {"type": "string", "description": "stash/hatch/cubby_import/cubby_egg: a file path"},
+                    "cubby": {"type": "string", "description": "cubby/neighborhood/twin: a cubby slug or handle (stash: cubby=<slug> → an owned sub-cubby)"},
+                    "slug": {"type": "string", "description": "cubby_new/cubby_fork: local cubby slug"},
+                    "what": {"type": "string", "description": "cubby_new/join/cubby_fork: one-line 'what I'm working on'"},
+                    "path": {"type": "string", "description": "stash/hatch/cubby_import/cubby_egg/cubby_fork: a file path"},
+                    "paths": {"type": "array", "items": {"type": "string"},
+                              "description": "cubby_fork: explicit file paths to fork in"},
+                    "from": {"type": "string",
+                             "description": "cubby_fork/twin: content set — 'non-kernel-agents' | 'brainstem' | 'cubby:<slug>'"},
+                    "egg": {"type": "boolean", "description": "cubby_fork: pack a self-backup .egg into the new cubby (default true)"},
+                    "twin": {"type": "boolean", "description": "cubby_fork: after forking, also boot a twin from the new cubby"},
+                    "soul": {"type": "string", "description": "twin: soul.md text for the twin workspace"},
                     "query": {"type": "string", "description": "super_rar/cubby_collect: search term across your estate"},
                     "source": {"type": "string", "enum": ["cubbies", "brainstem", "all"],
                                "description": "cubby_collect: where to gather from (default all)"},
@@ -556,8 +574,10 @@ class RappAgent(BasicAgent):
                 "RAPP_Sense_Store / a neighborhood's rar) + `route` (name the "
                 "provider for any operator need). It also natively navigates "
                 "identity/estate, doors by rappid, local cubbies, shared "
-                "neighborhoods + cubbies, eggs, the super-RAR, and "
-                "zero-commit-risk streaming, and self-checks the drift triangle "
+                "neighborhoods + cubbies, eggs, the super-RAR, "
+                "zero-commit-risk streaming, fork a NAMED cubby you own "
+                "(cubby_fork slug=… from=…) and pop a twin chat from any "
+                "cubby's agents (twin cubby=…), and self-checks the drift triangle "
                 "(verify). When a user wants to do ANYTHING across rapp estates "
                 "— find, install, share, organize, bootstrap, move — use it. "
                 "Call action=spec for the full map, or action=route need=… to "
@@ -734,6 +754,8 @@ class RappAgent(BasicAgent):
                 "  on-device: cubby_new slug=… · cubby_list · cubby_show cubby=… ·\n"
                 "             super_rar where=local query=… (search your whole estate) ·\n"
                 "             cubby_collect slug=… query=… (assemble a cubby from a search) ·\n"
+                "             cubby_fork slug=… from=… (fork a NAMED cubby you own) ·\n"
+                "             twin cubby=… (pop a twin chat from just a cubby's agents) ·\n"
                 "             cubby_egg cubby=… · cubby_import path=…\n"
                 "  neighborhood (repo=<owner/repo>):\n"
                 "             mount · join · browse · stash path=… · hatch path=… ·\n"
@@ -784,6 +806,12 @@ class RappAgent(BasicAgent):
                       "memory", "bond", "lineage", "beacon", "sniff",
                       "mmr", "verify"):
             return self._god(action, kwargs, ctx)
+
+        # ── fork a NAMED owned cubby / pop a twin chat from a cubby ──
+        if action == "cubby_fork":
+            return self._cubby_fork(kwargs, ctx)
+        if action in ("twin", "twin_from_cubby"):
+            return self._twin(kwargs, ctx)
 
         # ── on-device cubbies ──
         if action.startswith("cubby_") or (action == "super_rar" and kwargs.get("where") == "local"):
@@ -1589,6 +1617,347 @@ class RappAgent(BasicAgent):
                                "path=<egg>` (after `mount`) to mirror it into your "
                                "neighborhood cubby." % slug))
 
+    # ══════════════════════════════════════════════════════════════════════
+    # FORK A NAMED OWNED CUBBY (fractal) + POP A TWIN CHAT FROM ITS AGENTS.
+    # A new neighborhood cubby is fractal: it lives INSIDE the owner's cubby at
+    # cubbies/<me>/cubbies/<slug>/ — so the repo's cubby-guard (which scopes a
+    # member's writes to cubbies/<me>/) passes and ownership is unambiguous. The
+    # operator can also pop a twin: a child brainstem booted from JUST a cubby's
+    # agents, used INSTEAD of the global brainstem.
+    # ══════════════════════════════════════════════════════════════════════
+    def _make_sub_cubby(self, cubby_dir, owner, slug, what, forked_from=None):
+        """Create the anatomy + cubby.json for an owned (sub-)cubby. Ownership:
+        github_login stays the OWNER; a neighborhood sub-cubby is fractal."""
+        for d in CUBBY_ANATOMY:
+            os.makedirs(os.path.join(cubby_dir, d), exist_ok=True)
+            gk = os.path.join(cubby_dir, d, ".gitkeep")
+            if not os.path.exists(gk):
+                open(gk, "w").close()
+        is_sub = bool(forked_from is not None or owner not in (None, "local"))
+        meta = {"schema": CUBBY_SCHEMA, "github_login": owner or "local", "slug": slug,
+                "parent_cubby": owner if (forked_from is not None and owner != "local") else None,
+                "is_sub_cubby": bool(forked_from is not None and owner != "local"),
+                "display_name": slug, "what_im_cooking": what or "",
+                "created_at": _now(), "estate": {"anatomy": list(CUBBY_ANATOMY)},
+                "streamable": {"agents": True}}
+        if forked_from is not None:
+            meta["forked_from"] = forked_from
+        _write_json(os.path.join(cubby_dir, "cubby.json"), meta)
+        return meta
+
+    _KIND_DIR = {"agent": "agents", "organ": "organs", "sense": "senses",
+                 "rapplication": "rapplications", "neighborhood": "neighborhoods", "egg": "eggs"}
+
+    def _content_set(self, kwargs, ctx, bs, root):
+        """Resolve the fork/twin content set → list of {kind, name, abs}. Secret
+        files are refused. Sources: non-kernel-agents · brainstem · a search ·
+        a local cubby (cubby:<slug>) · explicit path/paths."""
+        frm = (kwargs.get("from") or "").strip().lower()
+        items, skipped = [], []
+
+        def add(kind, abs_path):
+            nm = os.path.basename(abs_path)
+            if nm.startswith(".") or not os.path.isfile(abs_path):
+                return
+            if _SECRET_NAME_RE.search(nm):
+                skipped.append({"name": nm, "why": "secret-shaped"}); return
+            items.append({"kind": kind, "name": nm, "abs": abs_path})
+
+        explicit = list(kwargs.get("paths") or [])
+        if kwargs.get("path"):
+            explicit.append(kwargs.get("path"))
+        if explicit:
+            for p in explicit:
+                if os.path.isfile(p):
+                    kind = ("organ" if p.endswith("_organ.py") else "egg" if p.endswith(".egg")
+                            else "agent")
+                    add(kind, p)
+        elif kwargs.get("query"):
+            q = (kwargs.get("query") or "").strip().lower()
+            source = (kwargs.get("source") or "all").lower()
+            for c in self._local_candidates(root, bs, source):
+                meta = {k: c.get(k) for k in ("kind", "name", "path", "cubby")}
+                if _q_match(q, meta, c["abs"]):
+                    add(c["kind"], c["abs"])
+        elif frm.startswith("cubby:"):
+            sub = _slugify(frm.split(":", 1)[1])
+            base = os.path.join(root, sub)
+            for kind, (d, pat) in SUPER_RAR_KINDS.items():
+                for p in sorted(glob.glob(os.path.join(base, d, pat))):
+                    add(kind, p)
+        elif frm in ("brainstem",):
+            agents = os.path.join(bs, "agents")
+            for p in sorted(glob.glob(os.path.join(agents, "*_agent.py"))):
+                add("agent", p)
+        else:   # default: non-kernel-agents
+            agents = os.path.join(bs, "agents")
+            for p in sorted(glob.glob(os.path.join(agents, "*_agent.py"))):
+                if os.path.basename(p) in KERNEL_AGENTS:
+                    continue
+                add("agent", p)
+            for p in sorted(glob.glob(os.path.join(agents, "*_organ.py"))):
+                add("organ", p)
+        # dedupe by (kind, name)
+        seen, deduped = set(), []
+        for it in items:
+            key = (it["kind"], it["name"])
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(it)
+        return deduped, skipped
+
+    def _pack_cubby_egg(self, cubby_dir, slug, owner):
+        """Pack a cubby into a brainstem-egg/2.3-cubby self-backup zip (EXCLUDING
+        its own eggs/ to avoid recursion). Returns (blob, manifest, file_count)."""
+        buf = io.BytesIO()
+        files, manifest_files = 0, []
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            for dp, dirs, fns in os.walk(cubby_dir):
+                rel_dir = os.path.relpath(dp, cubby_dir)
+                if rel_dir == "eggs" or rel_dir.startswith("eggs" + os.sep):
+                    continue   # don't pack the egg shelf into the egg (recursion)
+                for fn in fns:
+                    ap = os.path.join(dp, fn)
+                    rel = os.path.relpath(ap, cubby_dir)
+                    body = open(ap, "rb").read()
+                    z.writestr("cubby/" + rel, body)
+                    manifest_files.append({"path": rel,
+                                           "sha256": hashlib.sha256(body).hexdigest()})
+                    files += 1
+            manifest = {"schema": CUBBY_EGG_SCHEMA, "type": "cubby", "version": "1.0",
+                        "slug": slug, "owner": owner, "cubby_schema": CUBBY_SCHEMA,
+                        "anatomy": list(CUBBY_ANATOMY), "files": manifest_files,
+                        "packed_at": _now()}
+            z.writestr("manifest.json", json.dumps(manifest, indent=2))
+            z.writestr("HATCH.md", f"# Cubby egg: {slug}\nA self-backup of an owned "
+                       "cubby. Hatch local with `cubby_import path=<egg>`, or land it "
+                       "in a neighborhood cubby with `hatch path=<egg>`.\n")
+        return buf.getvalue(), manifest, files
+
+    def _cubby_fork(self, kwargs, ctx):
+        """Egg-and-cubby a content set into a NEW owned cubby. Neighborhood forks
+        are fractal (cubbies/<me>/cubbies/<slug>/ — inside the owner's path so the
+        guard passes); local forks live at ~/.brainstem/cubbies/<slug>/."""
+        slug = _slugify((kwargs.get("slug") or "").strip())
+        if not (kwargs.get("slug") or "").strip() or not _SLUG_RE.match(slug):
+            return self._env("cubby_fork", "error", error="pass slug=<new cubby name>")
+        where = (kwargs.get("where") or "neighborhood").lower()
+        root = ctx["cubby_root_local"]
+        bs = self._bs_dir(kwargs)
+        items, skipped = self._content_set(kwargs, ctx, bs, root)
+
+        # resolve the target dir + ownership
+        if where == "local":
+            me = "local"
+            cubby_dir = os.path.join(root, slug)
+            cubby_label = cubby_dir
+            forked_from = None
+        else:
+            mounted = ctx["repo_dir"] and os.path.isdir(ctx["repo_dir"]) and \
+                os.path.exists(os.path.join(ctx["repo_dir"], "neighborhood.json"))
+            if not mounted:
+                return self._env("cubby_fork", "error",
+                                 error="not mounted — mount + join the neighborhood first (or where=local).")
+            me = ctx["handle"]
+            if not me or not _HANDLE_RE.match(me):
+                return self._env("cubby_fork", "error", error="run `gh auth login` (or pass _handle).")
+            cubby_dir = os.path.join(ctx["repo_dir"], "cubbies", me, "cubbies", slug)
+            cubby_label = f"cubbies/{me}/cubbies/{slug}/"
+            forked_from = {"by": me, "from": (kwargs.get("from") or kwargs.get("query")
+                                              or "non-kernel-agents"), "at": _now()}
+
+        what = kwargs.get("what") or (
+            "forked: " + (kwargs.get("from") or kwargs.get("query") or "non-kernel-agents"))
+        if where == "local":
+            self._make_sub_cubby(cubby_dir, "local", slug, what)
+        else:
+            self._make_sub_cubby(cubby_dir, me, slug, what, forked_from=forked_from)
+
+        # copy the content into the right anatomy subdir (dedupe, secret-refused already)
+        collected = []
+        for it in items:
+            sub = self._KIND_DIR.get(it["kind"], "agents")
+            dst = os.path.join(cubby_dir, sub, it["name"])
+            if os.path.exists(dst):
+                continue
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(it["abs"], dst)
+            collected.append({"kind": it["kind"], "name": it["name"],
+                              "into": f"{sub}/{it['name']}"})
+
+        # pack a self-backup egg into the new cubby's eggs/ (default true)
+        egg_rel = None
+        if kwargs.get("egg", True):
+            blob, _mani, _fc = self._pack_cubby_egg(cubby_dir, slug, me)
+            egg_path = os.path.join(cubby_dir, "eggs", f"{slug}.egg")
+            os.makedirs(os.path.dirname(egg_path), exist_ok=True)
+            open(egg_path, "wb").write(blob)
+            egg_rel = os.path.relpath(egg_path, cubby_dir if where == "local" else ctx["repo_dir"])
+
+        git = {}
+        if where != "local":
+            git = self._commit_push(ctx, f"cubby({me}): fork {slug} ({len(collected)} items)",
+                                    kwargs.get("push", True))
+
+        env = {"cubby": cubby_label, "owner": me, "where": where, "count": len(collected),
+               "collected": collected, "skipped_secrets": skipped, "egg": egg_rel,
+               "is_organism": True,
+               "note": ("a named cubby you OWN — fractal, inside your cubby; the egg inside "
+                        "it is a self-backup."),
+               "next": f"`twin cubby={slug}` to pop a chat from just these agents."}
+        env.update(git)
+
+        # twin=true → also pop a twin from the fresh cubby and merge the result
+        if kwargs.get("twin"):
+            twin = json.loads(self._twin({"cubby": slug, "where": where,
+                                          "name": kwargs.get("name") or f"twin-{slug}",
+                                          "soul": kwargs.get("soul"),
+                                          "_brainstem_dir": kwargs.get("_brainstem_dir"),
+                                          "_repo_dir": kwargs.get("_repo_dir"),
+                                          "_handle": kwargs.get("_handle"),
+                                          "_home_dir": kwargs.get("_home_dir")}, ctx))
+            env["twin"] = twin
+            env["twin_url"] = twin.get("twin_url")
+        return self._env("cubby_fork", "success", **env)
+
+    def _twin(self, kwargs, ctx):
+        """Pop a twin chat: build a workspace from a cubby's agents (+ the KERNEL
+        agents so it boots), write a soul, boot a child brainstem on a free port,
+        return its chat URL. Offline-safe — never crashes; if the brainstem source
+        is missing it returns the workspace as 'degraded'."""
+        bs = self._bs_dir(kwargs)
+        root = ctx["cubby_root_local"]
+        cubby = _slugify((kwargs.get("cubby") or "").strip()) if kwargs.get("cubby") else None
+        where = (kwargs.get("where") or "").lower()
+        name = _slugify(kwargs.get("name") or (f"twin-{cubby}" if cubby else "twin"))
+
+        # resolve the agents source → a directory of *_agent.py
+        agent_src = None
+        if cubby:
+            if where == "neighborhood" or (where != "local" and ctx.get("repo_dir") and ctx.get("handle")):
+                me = ctx.get("handle")
+                if me:
+                    cand = os.path.join(ctx["repo_dir"], "cubbies", me, "cubbies", cubby, "agents")
+                    if os.path.isdir(cand):
+                        agent_src = cand
+            if agent_src is None:
+                cand = os.path.join(root, cubby, "agents")
+                if os.path.isdir(cand):
+                    agent_src = cand
+
+        # assemble the agent file list (non-kernel from the cubby, or non-kernel-agents)
+        agent_files = []   # (name, abs)
+        if agent_src:
+            for p in sorted(glob.glob(os.path.join(agent_src, "*_agent.py"))):
+                nm = os.path.basename(p)
+                if nm in KERNEL_AGENTS or _SECRET_NAME_RE.search(nm):
+                    continue
+                agent_files.append((nm, p))
+        else:   # fall back to the live brainstem's non-kernel agents
+            for p in sorted(glob.glob(os.path.join(bs, "agents", "*_agent.py"))):
+                nm = os.path.basename(p)
+                if nm in KERNEL_AGENTS or _SECRET_NAME_RE.search(nm):
+                    continue
+                agent_files.append((nm, p))
+
+        # build the twin workspace ~/.brainstem/twins/<name>/
+        workspace = os.path.join(ctx["home"], ".brainstem", "twins", name)
+        ws_agents = os.path.join(workspace, "agents")
+        os.makedirs(ws_agents, exist_ok=True)
+        loaded = []
+        for nm, p in agent_files:
+            shutil.copy2(p, os.path.join(ws_agents, nm))
+            loaded.append(nm)
+        # ALSO copy the kernel agents from bs/agents/ so it boots as a real brainstem
+        kernel_copied = []
+        for kn in sorted(KERNEL_AGENTS):
+            kp = os.path.join(bs, "agents", kn)
+            if os.path.isfile(kp) and not os.path.exists(os.path.join(ws_agents, kn)):
+                shutil.copy2(kp, os.path.join(ws_agents, kn))
+                kernel_copied.append(kn)
+        # write the soul
+        soul = kwargs.get("soul") or (
+            "You are a focused brainstem running a curated agent loadout: "
+            + (", ".join(loaded) or "(none)") + ". Operate them through natural "
+            "language. This is a twin the operator uses instead of the global brainstem.")
+        soul_path = os.path.join(workspace, "soul.md")
+        with open(soul_path, "w") as f:
+            f.write(soul + "\n")
+
+        # find start.sh; allocate a free port; boot a child brainstem (best-effort)
+        start_sh = None
+        for cand in (os.path.join(ctx["home"], ".brainstem", "src", "rapp_brainstem", "start.sh"),
+                     os.path.join(os.path.dirname(bs), "start.sh"),
+                     os.path.join(bs, "start.sh")):
+            if os.path.isfile(cand):
+                start_sh = cand
+                break
+        if not start_sh or kwargs.get("_no_boot"):
+            return self._env("twin", "degraded", workspace=workspace,
+                             agents_loaded=loaded, kernel_agents=kernel_copied,
+                             soul=soul_path,
+                             note=("workspace built; boot needs the brainstem source / a "
+                                   "backend. Point a brainstem at AGENTS_PATH=%s to run this "
+                                   "loadout." % ws_agents))
+        port = self._free_port()
+        src_dir = os.path.dirname(start_sh)
+        # share the brainstem's Copilot session if present (best-effort)
+        for tk in (".copilot_token", ".copilot_session"):
+            sp, dp = os.path.join(src_dir, tk), None
+            host_tk = os.path.join(bs, tk)
+            if not os.path.isfile(sp) and os.path.isfile(host_tk):
+                try:
+                    shutil.copy2(host_tk, sp)
+                except OSError:
+                    pass
+        env = {**os.environ, "SOUL_PATH": soul_path, "AGENTS_PATH": ws_agents,
+               "PORT": str(port)}
+        try:
+            subprocess.Popen(["bash", start_sh], cwd=workspace, env=env,
+                             start_new_session=True,
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except OSError as e:
+            return self._env("twin", "degraded", workspace=workspace,
+                             agents_loaded=loaded, kernel_agents=kernel_copied,
+                             soul=soul_path,
+                             note=f"workspace built; boot failed to launch ({e}).")
+        twin_url = f"http://127.0.0.1:{port}/"
+        self._twin_liveness(port)
+        return self._env("twin", "success", twin_url=twin_url, workspace=workspace,
+                         agents_loaded=loaded, kernel_agents=kernel_copied, soul=soul_path,
+                         port=port,
+                         note=("your twin is up — open the url and use it INSTEAD of the "
+                               "global brainstem. If it can't auth, it shares the brainstem's "
+                               "Copilot session (re-login at /login on the main brainstem)."))
+
+    @staticmethod
+    def _free_port(lo=7081, hi=7200):
+        import socket
+        for p in range(lo, hi):
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            try:
+                s.bind(("127.0.0.1", p))
+                s.close()
+                return p
+            except OSError:
+                s.close()
+                continue
+        return lo
+
+    @staticmethod
+    def _twin_liveness(port, seconds=10):
+        import time
+        import urllib.request
+        deadline = time.time() + seconds
+        while time.time() < deadline:
+            try:
+                with urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=1):
+                    return True
+            except Exception:
+                time.sleep(0.5)
+        return False
+
     # ── neighborhood ops (the shared-neighborhood flow (generic; cover-safe)) ──
     def _neighborhood(self, action, kwargs, ctx):
         mounted = ctx["repo_dir"] and os.path.isdir(ctx["repo_dir"]) and \
@@ -1681,18 +2050,28 @@ class RappAgent(BasicAgent):
             src = kwargs.get("path")
             if not src or not os.path.isfile(src):
                 return self._env(action, "error", error="pass path=<existing file>")
-            if (kwargs.get("cubby") or me) != me:
-                return self._env(action, "refused", error=f"cubbies are isolated — you write only in cubbies/{me}/.")
+            # destination: your cubby, OR a sub-cubby you OWN (cubbies/<me>/cubbies/<slug>/).
+            target_root, rel_root = my_cubby, f"cubbies/{me}"
+            cval = (kwargs.get("cubby") or "").strip()
+            if cval and cval != me:
+                if "/" in cval or ".." in cval:
+                    return self._env(action, "refused",
+                                     error=f"cubbies are isolated — you write only in cubbies/{me}/.")
+                sub_slug = _slugify(cval)
+                target_root = os.path.join(my_cubby, "cubbies", sub_slug)
+                rel_root = f"cubbies/{me}/cubbies/{sub_slug}"
+                if not os.path.isfile(os.path.join(target_root, "cubby.json")):
+                    self._make_sub_cubby(target_root, me, sub_slug, kwargs.get("what", ""))
             base = os.path.basename(src)
             if _SECRET_NAME_RE.search(base):
                 return self._env(action, "refused", error=f"'{base}' is secret-shaped — bones, not substance.")
             sub = ("agents" if base.endswith("_agent.py") else "organs" if base.endswith("_organ.py")
                    else "eggs" if base.endswith(".egg") else "show-and-tell")
-            dst = os.path.join(my_cubby, sub, base)
+            dst = os.path.join(target_root, sub, base)
             os.makedirs(os.path.dirname(dst), exist_ok=True)
             shutil.copy2(src, dst)
             git = self._commit_push(ctx, f"cubby({me}): stash {sub}/{base}", kwargs.get("push", True))
-            return self._env(action, "success", stashed=f"cubbies/{me}/{sub}/{base}", **git)
+            return self._env(action, "success", stashed=f"{rel_root}/{sub}/{base}", **git)
 
         if action == "hatch":
             res = self._hatch_egg(kwargs.get("path"), my_cubby, action, ctx, local=False)
