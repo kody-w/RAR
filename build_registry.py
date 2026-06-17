@@ -258,6 +258,7 @@ def validate_stub_purity(py_path: Path) -> list:
 # `requires_env` so consumers know what gets shelled out at install time.
 SECURITY_ALLOWLIST = {
     "agents/@kody-w/agent_workbench_agent.py",       # workbench needs exec for agent orchestration
+    "agents/@kody-w/transcript2prototype_agent.py",   # exec/compile to load its own generated + trusted-sibling agent.pys (test-local twin + factory export)
     "agents/@kody-w/rappter_engine_agent.py",         # engine needs subprocess for CLI mode
     "agents/@kody-w/rar_remote_agent.py",             # remote agent needs subprocess for git/install
     "agents/@howardh/prompt_to_video_agent.py",        # video rendering needs subprocess for ffmpeg

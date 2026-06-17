@@ -214,7 +214,180 @@ CAPABILITY_MAP = {
     "resurrection": {"provides": "@rapp/dream_catcher (parallel-dimension reassimilation)",
                      "source": "rar", "path": "%40rapp/dream_catcher_agent.py", "native": False,
                      "hint": "action=install name=@rapp/dream_catcher_agent.py"},
+    "private estate": {"provides": "estate op=private-init (native — Article XLVIII two-tier private estate + commitment)",
+                       "source": "native", "native": True, "hint": "action=estate op=private-init [confirm=true] · then action=beacon"},
+    "rebuild": {"provides": "tools/rebuild_estate.py (Article XLVI.6 disaster recovery — rebuild estate from public data)",
+                "source": "tool", "path": "rebuild_estate.py", "native": False,
+                "hint": "run: python3 tools/rebuild_estate.py --handle <gh> --apply"},
+    "pulse": {"provides": "@rapp/bond_rhythm (Bond Pulse — drift reconciliation) + tools/ecosystem_audit.py",
+              "source": "rar", "path": "bond_rhythm_agent.py", "native": False,
+              "hint": "action=install name=bond_rhythm_agent.py — or run python3 tools/ecosystem_audit.py"},
+    "launch": {"provides": "@rapp/launch_to_public (LOCAL→GLOBAL — push your brainstem to a public repo)",
+               "source": "rar", "path": "launch_to_public_agent.py", "native": False,
+               "hint": "action=install name=launch_to_public_agent.py · then action=bond op=record event=launch"},
+    "graft": {"provides": "@rapp/graft_neighborhood (additive overlay onto an existing public repo)",
+              "source": "rar", "path": "graft_neighborhood_agent.py", "native": False,
+              "hint": "action=install name=graft_neighborhood_agent.py"},
+    "dock": {"provides": "@rapp/dock (universal additive-merge into any rar-shaped JSON)",
+             "source": "rar", "path": "dock_agent.py", "native": False,
+             "hint": "action=install name=dock_agent.py"},
+    "sign": {"provides": "tools/sign_release.py (ed25519 keygen/sign/verify — Art. XXXIV.7 signed releases)",
+             "source": "tool", "path": "sign_release.py", "native": False,
+             "hint": "run: python3 tools/sign_release.py keygen|sign|verify"},
+    "rar loader": {"provides": "@rapp/rar_loader (GLOBAL→LOCAL — pull a seed's participation kit, sha256-verified)",
+                   "source": "rar", "path": "rar_loader_agent.py", "native": False,
+                   "hint": "action=install name=rar_loader_agent.py"},
+    "proximity": {"provides": "@rapp/proximity_discovery (geohash proximity — the Pizza-Place layer)",
+                  "source": "rar", "path": "proximity_discovery_agent.py", "native": False,
+                  "hint": "action=install name=proximity_discovery_agent.py"},
+    "leaderboard": {"provides": "@rapp/species_leaderboard (Herald→Immortal global ladder)",
+                    "source": "rar", "path": "species_leaderboard_agent.py", "native": False,
+                    "hint": "action=install name=species_leaderboard_agent.py"},
 }
+
+# ── the phrasebook: everyday wishes → the rapp action that grants them ───────
+# The translator's dictionary. The user says what they want in PLAIN words (they
+# know nothing about rappids / cubbies / eggs / estates); `assist` matches their
+# wish against these cues and hands back the end-to-end plan + the first call to
+# run. Best cue-overlap wins; ordering is irrelevant.
+INTENT_MAP = [
+    {"intent": "Get set up (brand new)",
+     "cues": ["get started", "getting started", "brand new", "first time", "set me up",
+              "just installed", "new here", "start fresh", "how do i start", "set up",
+              "setup", "onboard"],
+     "plan": ["Mint your identity — a permanent passport for your being.",
+              "Seed the core abilities so it can do the basics.",
+              "Plant your front door so others can reach you.",
+              "You now have a living being with an estate — just start talking to it."],
+     "start": "action=mint owner=<your github login> slug=<a short name for your being>"},
+
+    {"intent": "Remember something for me",
+     "cues": ["remember", "don't forget", "dont forget", "keep track", "note that",
+              "save this", "memorize", "my preference", "i like", "i take", "keep in mind",
+              "hold on to", "store this", "make a note"],
+     "plan": ["Save what you told it; it sticks across every future conversation.",
+              "Next time it brings it up on its own — you never re-enter it."],
+     "start": "action=memory op=save key=<short topic> value=<the thing to remember>"},
+
+    {"intent": "What do you know about X / remind me",
+     "cues": ["what do you know", "what did i tell you", "recall", "remind me",
+              "look up what i said", "do you remember", "what was that"],
+     "plan": ["Recall everything it has kept that matches your topic."],
+     "start": "action=memory op=recall query=<the topic>"},
+
+    {"intent": "A private place just for my people",
+     "cues": ["private place", "just us", "my family", "our group", "clubhouse", "club house",
+              "private space", "invite only", "secret place", "private neighborhood",
+              "our own place", "only people i invite", "place for my", "just for us", "family room"],
+     "plan": ["Plant a PRIVATE neighborhood — only invited people can ever enter.",
+              "Each person gets their own corner that only they can write in.",
+              "Invite your people by name; they scan and they're in.",
+              "(It runs as a dry run first — say 'yes, create it' to make it real.)"],
+     "start": "action=batcave owner=<your github login> slug=<a name> what=<who it's for>"},
+
+    {"intent": "Keep my data private but still be findable",
+     "cues": ["private estate", "hide my data", "keep substance private", "two tier", "two-tier",
+              "discoverable but private", "public discovery private", "keep my stuff private",
+              "don't expose", "dont expose", "privacy", "make my data private", "data private", "findable", "still findable", "private but findable", "keep my data private"],
+     "plan": ["Split your estate: a public sign for discovery + a private vault for substance.",
+              "Only a fingerprint of the private side is ever published — never the contents."],
+     "start": "action=estate op=private-init"},
+
+    {"intent": "Give someone a copy / share it",
+     "cues": ["share", "give a copy", "send it to", "hand off", "hand it to", "pass it",
+              "copy it to", "let my friend have", "give my", "send my", "share with",
+              "give it to", "for my daughter", "for my son", "to my friend"],
+     "plan": ["Pack the part you want into a single shareable file (an 'egg').",
+              "Send that file any way you like; the other person opens it and your",
+              "being wakes up on their machine knowing the same things."],
+     "start": "action=cubby_egg cubby=<which corner to pack>"},
+
+    {"intent": "Move it to another device / take it with me",
+     "cues": ["move it", "another computer", "another device", "take it with me", "carry it",
+              "my laptop too", "transfer", "on my phone", "on my other", "bring it to"],
+     "plan": ["Pack your being into one file here.",
+              "Open that file on the other device — it wakes up there, same as here."],
+     "start": "action=cubby_egg cubby=<which to carry>"},
+
+    {"intent": "A work corner / project space",
+     "cues": ["work on", "a project", "a corner for", "overnight", "work area", "workspace",
+              "sandbox", "dedicated space", "a place to build", "space for", "set aside"],
+     "plan": ["Make a named corner (a 'cubby') for this project.",
+              "Gather files and notes into it; it can even become its own helper later."],
+     "start": "action=cubby_new slug=<short name> what=<what you're working on>"},
+
+    {"intent": "A tool with its own screen / app",
+     "cues": ["its own screen", "an app", "a dashboard", "a window", "visual tool", "interface",
+              "a page for", "a screen for", "show me a screen", "with a ui", "with buttons"],
+     "plan": ["Summon a ready-made mini-app — it opens its own screen on its own address.",
+              "It's shaped for exactly that job and clears away when you're done."],
+     "start": "action=summon rapplication=<which app, e.g. dataverse>"},
+
+    {"intent": "Can it do X? / find the right ability",
+     "cues": ["can it", "is there a way", "how do i", "which tool", "what can do",
+              "i need something that", "is it possible", "able to", "find a way", "look for a"],
+     "plan": ["Search for the exact part that does what you described.",
+              "It names the part and the one line that pulls it in."],
+     "start": "action=route need=<what you want it to do>"},
+
+    {"intent": "Add a new ability / install",
+     "cues": ["add ability", "install", "pull in", "get the agent for", "i want it to be able to",
+              "teach it to", "give it the ability", "make it able"],
+     "plan": ["Find the right specialist for that ability, then pull it in.",
+              "Once pulled, your being can do the new thing right away."],
+     "start": "action=route need=<the ability you want>"},
+
+    {"intent": "Connect with others / join a group",
+     "cues": ["join", "connect to", "connect with", "meet other", "neighbors", "a community",
+              "others like me", "network with", "be part of", "find people", "a group to join", "connect me", "with other people", "other people", "with others"],
+     "plan": ["Walk up to a neighborhood's front door and join it.",
+              "Inside you can see who's there and what they're working on."],
+     "start": "action=mount repo=<owner/repo of the neighborhood>"},
+
+    {"intent": "Go public / publish / launch",
+     "cues": ["go public", "publish", "launch", "make it public", "push to github", "release",
+              "share with the world", "put it online", "make it live"],
+     "plan": ["Plant a public front door for your being.",
+              "Then push your local being out to it so anyone can reach you."],
+     "start": "action=plant owner=<your github login> slug=<a name>"},
+
+    {"intent": "Back up / don't lose my work",
+     "cues": ["back up", "backup", "snapshot", "don't lose", "dont lose", "save my work",
+              "archive", "preserve", "in case", "safe copy", "keep it safe"],
+     "plan": ["Pack your work into one self-contained file you can store anywhere.",
+              "If anything ever happens, open that file and everything comes back."],
+     "start": "action=cubby_egg cubby=<which to back up>"},
+
+    {"intent": "Who am I / my identity",
+     "cues": ["who am i", "my identity", "my passport", "my id", "prove who i am",
+              "what's my", "whats my", "am i registered"],
+     "plan": ["Show your identity, your doors, and your corners at a glance."],
+     "start": "action=whoami"},
+
+    {"intent": "Where did this come from / its history",
+     "cues": ["where did this come from", "lineage", "ancestry", "family tree", "history of",
+              "heritage", "who made", "its parents", "where it came from"],
+     "plan": ["Walk the family tree of your being all the way back to its origin."],
+     "start": "action=lineage"},
+
+    {"intent": "Is everything ok / health check",
+     "cues": ["is everything ok", "everything okay", "health check", "self check", "self-check",
+              "in sync", "verify", "integrity", "is it working", "all good"],
+     "plan": ["Run a self-check that confirms every part still lines up."],
+     "start": "action=verify"},
+
+    {"intent": "Find people near me",
+     "cues": ["near me", "nearby", "local to me", "around here", "close by", "in my area",
+              "people near"],
+     "plan": ["Find beings physically near you (the location-aware layer)."],
+     "start": "action=route need=proximity"},
+
+    {"intent": "My standing / rank",
+     "cues": ["my rank", "standing", "reputation", "my score", "leaderboard", "my level",
+              "how am i doing"],
+     "plan": ["Show your standing — your tier and score in the wider network."],
+     "start": "action=mmr"},
+]
 
 # Embedded ecosystem snapshot — the shape of the whole RAPP world, baked into
 # this one file so a woods install knows what exists without any network. The
@@ -485,12 +658,37 @@ class RappAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": (
-                "Navigate the whole RAPP ecosystem end to end: your identity + "
-                "estate, resolve any door by rappid, local cubbies (on-device "
-                "workspaces), shared neighborhoods + their per-member cubbies, "
-                "the egg family, the super-RAR (whole stack across cubbies), "
-                "and zero-commit-risk streaming. Call action=spec for the map "
-                "of how it all fits together."),
+                "SIRI-LEVEL FRONT DOOR: the user speaks PLAIN language and knows NOTHING about rapp "
+                "(no 'rappid'/'cubby'/'egg'/'estate'). Translate their wish into the right action(s), "
+                "DO it end to end, then report back in THEIR words. Ambiguous wish? call "
+                "action=assist problem='<their exact words>' → it returns a step-by-step plan + the "
+                "first call to run; then execute that plan. NEVER make the user learn a term or run a "
+                "raw command.\n"
+                "THE single agent for the whole RAPP ecosystem. Pass action=<one enum value> PLUS "
+                "that action's params (listed here). This metadata is ALL the caller gets, so pass "
+                "exactly what the chosen action needs. Write actions commit+push by default — pass "
+                "push=false to only stage locally. Unsure which action/params fit? call action=spec "
+                "or action=route need='<what you want>' FIRST.\n"
+                "ORIENT — spec (full ecosystem map) · ecosystem · find query=… · refresh · protocol · whoami · help\n"
+                "IDENTITY/DOORS — estate (your doors) · door rappid=… [validate=true] (resolve + reachability-check any door)\n"
+                "BOOTSTRAP — mint owner=… slug=… [kind=] [force=] (mint an Eternity rappid) · scaffold (seed kernel agents) · "
+                "plant owner=… slug=… [kind=] [display_name=] [confirm=] (public front-door grail) · "
+                "batcave owner=… slug=… [what=] (plant a PRIVATE cubby-neighborhood — dry-run unless confirm=true)\n"
+                "REACH ANY SPECIALIST — install name=<file.py>|query=…|url=… [git_invisible=] [verify=] (pull + hot-load ANY agent) · "
+                "route need='<free text>' (names the provider + its install line)\n"
+                "TAILORED APPS — summon rapplication=<name under ~/.rapp/rapplications> [port=] (boot a rapplication as an isolated tailored-UI twin on its own port; idempotent)\n"
+                "CUBBIES & TWINS (on-device) — cubby_new slug=… what=… · cubby_list · cubby_show cubby=… · "
+                "cubby_collect slug=… query=… [source=cubbies|brainstem|all] · "
+                "cubby_fork slug=… from='non-kernel-agents|brainstem|cubby:<slug>' [paths=] [egg=true] [twin=] · "
+                "cubby_egg cubby=… · cubby_import path=… · twin cubby=… [soul=] (pop a twin chat from a cubby) · "
+                "super_rar query=… [where=local|neighborhood] (search the whole estate)\n"
+                "MEMORY (op required) — memory op=save key=… value=… | op=read [key=…] | op=recall query=…\n"
+                "LINEAGE (op required) — bond op=record event=<birth|bond|hatch|graft|launch|adoption|rhythm> [context=] [egg_sha256=] | bond op=list · lineage (walk to species root)\n"
+                "FEDERATE — beacon estate_url=… [private_estate_pointer=] (write the estate beacon) · sniff seed=<url> (BFS the network) · mmr (standing score)\n"
+                "NEIGHBORHOOD (FIRST set repo=<owner/repo> or env RAPP_NEIGHBORHOOD) — mount · join what=… · browse · stash path=… [cubby=<slug>] · "
+                "hatch path=… · load [cubby=] · unload · sync · branch topic=… · invite github_login=… [confirm=true] · qr · enter · "
+                "show_and_tell title=… text=… · super_rar where=neighborhood query=…\n"
+                "SELF-CHECK — verify (god≡map≡bible drift triangle)"),
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -500,14 +698,16 @@ class RappAgent(BasicAgent):
                                  "find", "refresh", "whoami", "estate",
                                  "door", "cubby_new", "cubby_list", "cubby_show",
                                  "cubby_collect", "cubby_egg", "cubby_import",
-                                 "cubby_fork", "twin", "twin_from_cubby", "super_rar",
+                                 "cubby_fork", "twin", "twin_from_cubby", "summon", "super_rar",
                                  "mount", "join", "browse", "stash", "hatch",
                                  "load", "unload", "sync", "branch", "invite",
                                  "qr", "enter", "show_and_tell",
                                  # ── bootstrap + universal-reach (the god layer) ──
-                                 "install", "route", "mint", "scaffold", "plant",
+                                 "install", "route", "mint", "scaffold", "plant", "batcave",
                                  "memory", "bond", "lineage", "beacon", "sniff",
-                                 "mmr", "verify"],
+                                 "mmr", "verify",
+                                 # ── the Siri front door: a plain-language wish → a plan ──
+                                 "assist"],
                         "description": "what to do (action=spec for the full map)",
                     },
                     "repo": {"type": "string", "description": "neighborhood door owner/repo (or set RAPP_NEIGHBORHOOD)"},
@@ -536,6 +736,9 @@ class RappAgent(BasicAgent):
                     "push": {"type": "boolean", "description": "write actions: commit+push (default true)"},
                     # ── bootstrap + universal-reach params ──
                     "need": {"type": "string", "description": "route: free-text operator need ('twin lifecycle', 'sealed channel', …)"},
+                    "problem": {"type": "string", "description": "assist: the user's wish in their OWN plain words ('a private place for my family', 'remember my pills', 'set me up'); the agent translates it into a step-by-step plan + first call"},
+                    "goal": {"type": "string", "description": "assist: alias for problem"},
+                    "wish": {"type": "string", "description": "assist: alias for problem"},
                     "name": {"type": "string", "description": "install: exact agent filename (e.g. @rapp/twin_agent.py)"},
                     "owner": {"type": "string", "description": "mint/plant: GitHub owner/login"},
                     "kind": {"type": "string", "description": "mint/plant: door kind (default operator)"},
@@ -550,11 +753,14 @@ class RappAgent(BasicAgent):
                     "seed": {"type": "string", "description": "sniff: a seed URL serving .well-known/rapp-network.json"},
                     "estate_url": {"type": "string", "description": "beacon: the operator's public estate URL"},
                     "private_estate_pointer": {"type": "string", "description": "beacon: opaque pointer to the private estate"},
+                    "indexable": {"type": "boolean", "description": "beacon: list this estate in public discovery (default true)"},
                     "git_invisible": {"type": "boolean", "description": "install: register in .git/info/exclude (default false)"},
                     "verify": {"type": "boolean", "description": "install/load/door: verify sha256 / reachability (default true)"},
                     "force": {"type": "boolean", "description": "mint: overwrite an existing rappid (mint-once is the default)"},
                     "validate": {"type": "boolean", "description": "door: HEAD/GET the identity URL to check reachability"},
                     "url": {"type": "string", "description": "install: a direct raw URL to an agent file"},
+                    "rapplication": {"type": "string", "description": "summon: which rapplication to hatch as a tailored-UI twin (e.g. 'dataverse'); catalog in ~/.rapp/rapplications/"},
+                    "port": {"type": "integer", "description": "summon: preferred port (default: first free in 7081-7200)"},
                 },
                 "required": ["action"],
             },
@@ -562,26 +768,30 @@ class RappAgent(BasicAgent):
         super().__init__(self.name, self.metadata)
 
     def system_context(self):
-        return ("RappAgent is loaded: the ONE agent for the whole RAPP "
-                "ecosystem, end to end. It BOOTSTRAPS an organism (mint an "
-                "Eternity rappid, scaffold the kernel agents, plant a door), "
-                "records the lineage spine (bond/lineage → ~/.brainstem/"
-                "bonds.json), operates core memory (memory op=save|read|recall "
-                "across 3 tiers: local .brainstem_data, public memory.json, "
-                "private Issues), federates (beacon/sniff), scores standing "
-                "(mmr), and — the keystone — REACHES every specialist via "
-                "`install` (pull ANY agent from RAR / RAPP_Store / "
-                "RAPP_Sense_Store / a neighborhood's rar) + `route` (name the "
-                "provider for any operator need). It also natively navigates "
-                "identity/estate, doors by rappid, local cubbies, shared "
-                "neighborhoods + cubbies, eggs, the super-RAR, "
-                "zero-commit-risk streaming, fork a NAMED cubby you own "
-                "(cubby_fork slug=… from=…) and pop a twin chat from any "
-                "cubby's agents (twin cubby=…), and self-checks the drift triangle "
-                "(verify). When a user wants to do ANYTHING across rapp estates "
-                "— find, install, share, organize, bootstrap, move — use it. "
-                "Call action=spec for the full map, or action=route need=… to "
-                "find which part does X.")
+        return ("RappAgent is loaded — treat it as the Siri-level front door to the "
+                "ENTIRE RAPP ecosystem. THE OPERATOR SPEAKS PLAIN, EVERYDAY LANGUAGE "
+                "AND KNOWS NOTHING ABOUT RAPP. They will never say 'rappid', 'cubby', "
+                "'egg', 'estate', 'beacon', or 'neighborhood' — they say things like "
+                "'remember my pills', 'make a private place for my family', 'give my "
+                "daughter a copy', 'set me up'. YOUR JOB is to translate their wish into "
+                "the right action(s) and GRANT IT — end to end — without ever making them "
+                "learn a term or run a raw command. Rules: (1) when a wish is even slightly "
+                "ambiguous, call action=assist problem='<their exact words>' — it returns "
+                "the step-by-step plan + the first call to run; (2) then EXECUTE that plan "
+                "(call the named actions yourself, in order; fill blanks from context or ask "
+                "ONE short plain question); (3) report back in THEIR words — 'Done, your "
+                "family's private place is ready, just tell me who to invite' — never the "
+                "rapp jargon you used under the hood. Quick phrasebook: 'remember this'->"
+                "memory op=save · 'what do you know'->memory op=recall · 'private place for "
+                "my people'->batcave · 'give/share a copy'->cubby_egg then they hatch · "
+                "'move it to my laptop'->cubby_egg then hatch · 'set me up / brand new'->"
+                "mint then scaffold then plant · 'a tool with its own screen'->summon · 'can "
+                "it do X / find a way'->route or assist · 'who am I'->whoami · 'back up my "
+                "work'->cubby_egg · 'join a group'->mount/join · 'go public'->plant/launch · "
+                "'is everything ok'->verify. The single instruction the user EVER needs: "
+                "talk to it, describe the problem, the wish gets granted. action=spec for "
+                "the full map, action=route need=... to find any part, action=assist to "
+                "translate any plain-language wish into a plan.")
 
     # ---- context ----
     def _ctx(self, kwargs):
@@ -715,6 +925,8 @@ class RappAgent(BasicAgent):
     # ---- perform ----
     def perform(self, **kwargs):
         action = (kwargs.get("action") or "help").lower()
+        if action in ("solve", "do", "wish", "help_me", "translate"):
+            action = "assist"   # plain-language aliases for the Siri front door
         ctx = self._ctx(kwargs)
 
         # ── orient ──
@@ -746,7 +958,8 @@ class RappAgent(BasicAgent):
                 "  orient   : spec · ecosystem · find query=… · refresh (pull latest grail) ·\n"
                 "             route need=… (which part does X?) · verify (drift-triangle self-check)\n"
                 "  bootstrap: mint owner=… slug=… (Eternity rappid) · scaffold (seed kernel agents) ·\n"
-                "             plant owner=… slug=… (front-door grail) · install name=…|query=… (pull ANY agent)\n"
+                "             plant owner=… slug=… (front-door grail) · install name=…|query=… (pull ANY agent) ·\n"
+                "             batcave owner=… slug=… (plant a PRIVATE cubby-neighborhood of your own) [confirm=true to create]\n"
                 "  identity : whoami · estate · door rappid=… [validate=true] · beacon · mmr\n"
                 "  lineage  : bond op=record event=… · bond op=list · lineage (walk to species root)\n"
                 "  memory   : memory op=save key=… value=… · op=read [key=…] · op=recall query=…\n"
@@ -756,7 +969,8 @@ class RappAgent(BasicAgent):
                 "             cubby_collect slug=… query=… (assemble a cubby from a search) ·\n"
                 "             cubby_fork slug=… from=… (fork a NAMED cubby you own) ·\n"
                 "             twin cubby=… (pop a twin chat from just a cubby's agents) ·\n"
-                "             cubby_egg cubby=… · cubby_import path=…\n"
+                "             cubby_egg cubby=… · cubby_import path=… ·\n"
+                "             summon rapplication=… (hatch a tailored-UI twin on its own port, e.g. dataverse)\n"
                 "  neighborhood (repo=<owner/repo>):\n"
                 "             mount · join · browse · stash path=… · hatch path=… ·\n"
                 "             load [cubby=…] · unload · show_and_tell title=… ·\n"
@@ -775,6 +989,16 @@ class RappAgent(BasicAgent):
                              local_cubbies=len([d for d in (os.listdir(ctx["cubby_root_local"])
                                  if os.path.isdir(ctx["cubby_root_local"]) else []) if not d.startswith('.')]))
         if action == "estate":
+            op = (kwargs.get("op") or "show").lower()
+            if op in ("private-init", "private_init", "private", "init"):
+                return self._estate_private(kwargs, ctx, verify_only=False)
+            if op in ("verify", "verify-commitment"):
+                return self._estate_private(kwargs, ctx, verify_only=True)
+            if op == "rebuild":
+                return self._env(action, "route", op="rebuild",
+                                 note="disaster recovery lives in tools/rebuild_estate.py — run: "
+                                      "python3 tools/rebuild_estate.py --handle <gh> --apply "
+                                      "(walks public GitHub to rebuild ~/.brainstem/estate.json).")
             est = _read_json(os.path.join(ctx["home"], ".brainstem", "estate.json"))
             if not est:
                 return self._env(action, "empty",
@@ -807,6 +1031,18 @@ class RappAgent(BasicAgent):
                       "mmr", "verify"):
             return self._god(action, kwargs, ctx)
 
+        # ── the Siri front door: a plain-language wish → an executable plan ──
+        if action == "assist":
+            return self._assist(kwargs, ctx)
+
+        # ── summon a rapplication as a tailored twin (its own UI + port) ──
+        if action == "summon":
+            return self._summon(kwargs, ctx)
+
+        # ── plant a PRIVATE cubby-neighborhood (batcave pattern) for any operator ──
+        if action == "batcave":
+            return self._batcave(kwargs, ctx)
+
         # ── fork a NAMED owned cubby / pop a twin chat from a cubby ──
         if action == "cubby_fork":
             return self._cubby_fork(kwargs, ctx)
@@ -824,6 +1060,164 @@ class RappAgent(BasicAgent):
                                     "set RAPP_NEIGHBORHOOD, or write "
                                     "~/.brainstem/rapp/neighborhood.json {repo}."))
         return self._neighborhood(action, kwargs, ctx)
+
+    # ── summon: hatch a rapplication as a tailored twin with its OWN UI ──
+    # Generalizes the per-twin-UI pattern: a rapplication template lives at
+    # ~/.rapp/rapplications/<name>/ (agents/ + web/index.html + soul.md +
+    # serve.py). summon copies it into an isolated twin workspace, boots it via
+    # the kernel-safe serve.py wrapper (overrides only the "/" view → the twin's
+    # own UI; exposes /api/agent/<Name>), on its own free port. Idempotent:
+    # re-summoning a live rapplication just returns its URL. Kernel untouched.
+    def _summon(self, kwargs, ctx):
+        import socket, subprocess, hashlib, shutil, sys, time, urllib.request
+        name = (kwargs.get("rapplication") or kwargs.get("name") or "dataverse").strip().lower()
+        home = ctx["home"]
+        cat = os.path.join(home, ".rapp", "rapplications")
+        tmpl = os.path.join(cat, name)
+        if not os.path.isdir(tmpl):
+            return self._env("summon", "error", error=f"no rapplication '{name}'",
+                             available=[d for d in (os.listdir(cat) if os.path.isdir(cat) else [])
+                                        if not d.startswith(".")],
+                             note="Add one under ~/.rapp/rapplications/<name>/ "
+                                  "(agents/, web/index.html, soul.md, serve.py).")
+        h = hashlib.sha256(f"kody/{name}-twin".encode()).hexdigest()[:32]
+        ws = os.path.join(home, ".rapp", "twins", h)
+        portfile = os.path.join(ws, ".port")
+
+        def _alive(p):
+            try:
+                with urllib.request.urlopen(f"http://localhost:{p}/version", timeout=2) as r:
+                    return r.status == 200
+            except Exception:
+                return False
+
+        # already live? reuse it.
+        if os.path.exists(portfile):
+            try:
+                p = int(open(portfile).read().strip())
+                if _alive(p):
+                    return self._env("summon", "already_live", rapplication=name,
+                                     url=f"http://localhost:{p}", port=p, workspace=ws,
+                                     note=f"{name} twin already running — open the URL.")
+            except Exception:
+                pass
+
+        # hatch the workspace from the template (idempotent)
+        os.makedirs(os.path.join(ws, ".brainstem_data"), exist_ok=True)
+        for sub in ("agents", "web"):
+            dst = os.path.join(ws, sub)
+            if not os.path.isdir(dst) and os.path.isdir(os.path.join(tmpl, sub)):
+                shutil.copytree(os.path.join(tmpl, sub), dst)
+        for f in ("soul.md", "serve.py"):
+            s = os.path.join(tmpl, f)
+            if os.path.exists(s):
+                shutil.copy(s, os.path.join(ws, f))
+        rappid = f"rappid:@{ctx.get('handle') or 'kody'}/{name}-twin:{h}"
+        _write_json(os.path.join(ws, "rappid.json"), {
+            "schema": "rapp-rappid/2.0", "rappid": rappid,
+            "parent_rappid": "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+            "kind": "twin", "name": f"{name}-twin", "born_at": _now(),
+            "notes": f"Summoned rapplication '{name}' as an isolated tailored-UI twin."})
+
+        # pick a free port
+        def _free(p):
+            s = socket.socket()
+            try:
+                s.bind(("127.0.0.1", p)); return True
+            except OSError:
+                return False
+            finally:
+                s.close()
+        pref = int(kwargs.get("port") or 0)
+        port = pref if (pref and _free(pref)) else next((p for p in range(7081, 7201) if _free(p)), 0)
+        if not port:
+            return self._env("summon", "error", error="no free port in 7081-7200")
+
+        # boot via the kernel-safe wrapper (serve.py) in a detached process
+        kernel = os.getcwd()  # the brainstem runs from its own dir
+        env = dict(os.environ, TWIN_WS=ws, KERNEL=kernel, PORT=str(port), VOICE_MODE="off")
+        logf = open(os.path.join(ws, "serve.log"), "a")
+        subprocess.Popen([sys.executable, os.path.join(ws, "serve.py")],
+                         env=env, stdout=logf, stderr=logf, cwd=kernel, start_new_session=True)
+        for _ in range(20):
+            if _alive(port):
+                break
+            time.sleep(0.6)
+        open(portfile, "w").write(str(port))
+        live = _alive(port)
+        return self._env("summon", "success" if live else "booting", rapplication=name,
+                         url=f"http://localhost:{port}", port=port, workspace=ws,
+                         rappid=rappid, live=live,
+                         note=(f"{name} twin is LIVE with its tailored UI — open http://localhost:{port}"
+                               if live else "booting — give it a few seconds, then open the URL."))
+
+    # ── batcave: plant a PRIVATE cubby-neighborhood for ANY operator ──
+    # The batcave pattern, generic: each member gets cubbies/<login>/ (their own
+    # full on-device rapp estate, parked to share), an append-only signed events/
+    # stream, and CODEOWNERS-gated writes. Names no specific batcave — the
+    # operator owns theirs. Dry-run by default; confirm=true creates the PRIVATE
+    # GitHub repo + pushes.
+    def _batcave(self, kwargs, ctx):
+        import hashlib
+        owner = (kwargs.get("owner") or ctx.get("handle") or "").strip()
+        slug = (kwargs.get("slug") or "batcave").strip()
+        if not owner:
+            return self._env("batcave", "error", error="need owner=<github-login> (or sign into gh).")
+        h = hashlib.sha256(f"{owner}/{slug}".encode()).hexdigest()
+        rappid = f"rappid:@{owner}/{slug}:{h}"
+        what = kwargs.get("what") or "a private place to park cubbies and show what we're cooking"
+        out = os.path.join(ctx["home"], ".brainstem", "plant", slug)
+        soul = ("# " + slug + "\n\n## Identity — read this every turn\n"
+                "You are the soul of a PRIVATE cubby-neighborhood (the batcave pattern). Members park "
+                "their own full rapp estate in `cubbies/<their-login>/` and show each other what they're "
+                "cooking. Welcome members, point them at their cubby, help them stream agents into their "
+                "local brainstem, and keep the events stream tidy. Never write inside another member's "
+                "cubby — cross-cubby changes ride pull requests the owner merges.\n")
+        readme = ("# " + slug + "\n\nA **private cubby-neighborhood** — the batcave pattern. Each member "
+                  "gets `cubbies/<your-login>/`: a full on-device rapp estate, parked here to share. Reach is "
+                  "by invite only; there is no public front door.\n\n## Join\n1. Accept the collaborator invite.\n"
+                  "2. In your brainstem: \"use the rapp agent to join the neighborhood and set up my cubby\" "
+                  "(repo=" + owner + "/" + slug + ").\n\nSchema family: rapp-batcave-cubby/1.0 · "
+                  "rapp-batcave-cubbies/1.0 · rapp-batcave-event/1.0.\n")
+        files = {
+            "rappid.json": json.dumps({"schema": "rapp-rappid/2.0", "rappid": rappid,
+                "parent_rappid": ctx.get("rappid") or "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+                "kind": "neighborhood", "name": slug, "owner": owner, "born_at": _now(),
+                "notes": "Private cubby-neighborhood (batcave pattern): per-member cubbies, signed events, no public front door."}, indent=2),
+            "neighborhood.json": json.dumps({"schema": "rapp-batcave/1.0", "rappid": rappid, "name": slug,
+                "kind": "batcave", "visibility": "private", "sealed": True,
+                "cubbies_dir": "cubbies", "events_dir": "events",
+                "schemas": ["rapp-batcave-cubby/1.0", "rapp-batcave-cubbies/1.0", "rapp-batcave-event/1.0", "rapp-batcave-loadout/1.0"]}, indent=2),
+            "members.json": json.dumps({"schema": "rapp-neighborhood-members/1.0", "gate": "closed",
+                "members": [{"login": owner, "rappid": rappid, "role": "planter", "joined_at": _now()}]}, indent=2),
+            "cubbies/index.json": json.dumps({"schema": "rapp-batcave-cubbies/1.0", "cubbies": [owner]}, indent=2),
+            "cubbies/" + owner + "/cubby.json": json.dumps({"schema": "rapp-batcave-cubby/1.0",
+                "owner": owner, "what": what, "created_at": _now()}, indent=2),
+            "cubbies/" + owner + "/agents/.gitkeep": "",
+            "cubbies/" + owner + "/show-and-tell/.gitkeep": "",
+            "events/.gitkeep": "",
+            ".github/CODEOWNERS": "# each member owns their cubby\ncubbies/" + owner + "/ @" + owner + "\n",
+            ".nojekyll": "",
+            "soul.md": soul,
+            "README.md": readme,
+        }
+        for rel, content in files.items():
+            fp = os.path.join(out, rel)
+            os.makedirs(os.path.dirname(fp), exist_ok=True)
+            open(fp, "w").write(content)
+        res = {"rappid": rappid, "owner": owner, "slug": slug, "local_dir": out,
+               "scaffolded": sorted(files.keys())}
+        if not kwargs.get("confirm"):
+            return self._env("batcave", "scaffolded", note=("dry run — scaffolded the batcave grail at "
+                + out + ". Re-run with confirm=true to create the PRIVATE repo " + owner + "/" + slug + " and push."), **res)
+        _run(["git", "init", out])
+        _run(["git", "-C", out, "add", "-A"])
+        _run(["git", "-C", out, "-c", "user.name=rapp", "-c", "user.email=rapp@localhost", "commit", "-m", "plant batcave"])
+        rc, _, err = _run(["gh", "repo", "create", owner + "/" + slug, "--private", "--source", out, "--remote", "origin", "--push"])
+        if rc != 0:
+            return self._env("batcave", "error", error=("gh repo create/push failed: " + err[:200]), **res)
+        return self._env("batcave", "success", url="https://github.com/" + owner + "/" + slug,
+            note=("Planted your private batcave " + owner + "/" + slug + ". Invite members → each gets cubbies/<login>/."), **res)
 
     # ══════════════════════════════════════════════════════════════════════
     # THE GOD LAYER — bootstrap a fresh organism + REACH the whole ecosystem.
@@ -862,6 +1256,51 @@ class RappAgent(BasicAgent):
         return self._env(action, "error", error="unknown god op")
 
     # ── route: the capability map — "how do I do X across the ecosystem?" ──
+    def _assist(self, kwargs, ctx):
+        """The Siri front door. The user describes a wish in PLAIN words and knows
+        nothing about rapp; map it to the end-to-end plan + the first call to run.
+        Deterministic (works offline, no LLM). The calling LLM then EXECUTES the
+        plan and reports the granted wish back in the user's words — never the
+        rapp jargon used under the hood."""
+        text = (kwargs.get("problem") or kwargs.get("goal") or kwargs.get("wish")
+                or kwargs.get("query") or kwargs.get("need") or "").strip()
+        if not text:
+            return self._env("assist", "ask",
+                note="Tell me what you want in your own words — like 'a private place "
+                     "just for my family', 'remember I take my pill at night', or "
+                     "'set me up, I'm brand new'. I'll turn it into the steps and do it.",
+                i_can=[i["intent"] for i in INTENT_MAP])
+        low = " " + text.lower() + " "
+        words = set(low.replace("?", " ").replace(".", " ").replace(",", " ")
+                       .replace("!", " ").split())
+        scored = []
+        for spec in INTENT_MAP:
+            phrase_hits = [c for c in spec["cues"] if c in low]
+            word_hits = sum(1 for c in spec["cues"] if " " not in c and c in words)
+            score = len(phrase_hits) * 5 + word_hits
+            if score:
+                scored.append((score, spec, phrase_hits))
+        scored.sort(key=lambda x: -x[0])
+        if not scored:
+            # no everyday-intent match → fall back to the live parts-catalog search
+            r = json.loads(self._route({"need": text}, ctx))
+            return self._env("assist", "routed", wish=text,
+                note="That didn't match a common everyday request, so I searched the "
+                     "full parts catalog for something that fits.",
+                route=r, i_can=[i["intent"] for i in INTENT_MAP])
+        top = scored[0]
+        alts = [{"intent": s["intent"], "start": s["start"]} for _, s, _ in scored[1:4]]
+        confident = top[0] >= 5 or len(scored) == 1 or top[0] >= scored[1][0] * 2
+        return self._env("assist", "plan", wish=text,
+            intent=top[1]["intent"], matched_on=top[2],
+            confidence="high" if confident else "medium",
+            plan=top[1]["plan"], start=top[1]["start"], alternatives=alts,
+            note="This is the whole path for what the user asked. EXECUTE it for them: "
+                 "run `start` (fill the <...> from what they said, or ask ONE short plain "
+                 "question), then walk the `plan` by calling those actions yourself. Report "
+                 "back in THEIR words — say the wish was granted, not which rapp parts you "
+                 "used. They never need to learn a single rapp term.")
+
     def _route(self, kwargs, ctx):
         need = (kwargs.get("need") or kwargs.get("query") or "").strip().lower()
         if not need:
@@ -1291,20 +1730,116 @@ class RappAgent(BasicAgent):
             return self._env("beacon", "error",
                              error="no minted rappid — `action=mint owner=… slug=…` first.")
         estate_url = kwargs.get("estate_url") or (
-            f"{_RAW}/{ctx['handle']}/rapp-estate/main/estate.json" if ctx.get("handle") else None)
-        ptr = kwargs.get("private_estate_pointer")
-        beacon = {"schema": "rapp-network/1.0", "operator_rappid": rappid,
-                  "estate_url": estate_url, "private_estate_pointer": ptr,
+            f"https://github.com/{ctx['handle']}/rapp-estate" if ctx.get("handle") else None)
+        # Article XLVIII: private estate pointer + commitment are REQUIRED.
+        ptr = kwargs.get("private_estate_pointer") or (
+            f"https://github.com/{ctx['handle']}/rapp-estate-private" if ctx.get("handle") else None)
+        commitment = _read_text_file(os.path.join(ctx["home"], ".brainstem", "private-estate-commitment"))
+        commitment = commitment.strip() if commitment else None
+        lm = _read_json(os.path.join(ctx["home"], ".brainstem", "private-estate-map.json")) or {}
+        door_count = lm.get("private_door_count", 0)
+        beacon = {"schema": "rapp-network-beacon/1.1", "operator_rappid": rappid,
+                  "estate_url": estate_url,
+                  "discovery": {"indexable": bool(kwargs.get("indexable", True)),
+                                "federation_hints": [estate_url] if estate_url else []},
+                  "private_estate_pointer": ptr,
+                  "private_estate_commitment": commitment,
+                  "private_door_count": door_count,
                   "written_at": _now(),
-                  "federation_hints": [estate_url] if estate_url else [],
-                  "note": ("Article XLVIII: every operator has BOTH a public and a private "
-                           "estate. The private pointer is opaque; the operator's HMAC secret "
-                           "never leaves the box.")}
+                  "note": ("Article XLVIII: every operator has BOTH a public + a private estate. The pointer "
+                           "+ commitment prove the private tier without revealing it; the HMAC secret never "
+                           "leaves the box. Run action=estate op=private-init first to fill the commitment.")}
         path = os.path.join(ctx["home"], ".brainstem", ".well-known", "rapp-network.json")
         _write_json(path, beacon)
-        return self._env("beacon", "success", path=path, operator_rappid=rappid,
-                         estate_url=estate_url, has_private_pointer=bool(ptr),
-                         note="federation beacon written; peers discover you by walking this file.")
+        compliant = bool(ptr and commitment)
+        return self._env("beacon", "success" if compliant else "incomplete",
+                         path=path, schema="rapp-network-beacon/1.1", operator_rappid=rappid,
+                         estate_url=estate_url, private_estate_pointer=ptr,
+                         private_estate_commitment=commitment, private_door_count=door_count,
+                         compliant=compliant,
+                         note=("Article-XLVIII-compliant beacon written; peers discover you by walking this file."
+                               if compliant else "beacon written but NOT yet compliant — run "
+                               "action=estate op=private-init confirm=true to mint the private estate + commitment."))
+
+    # ── estate op=private-init: the Article XLVIII two-tier private estate ──
+    # Mints the per-operator HMAC secret (~/.brainstem/private-estate-secret, 0600,
+    # mint-once, NEVER surfaced), scaffolds the opaque file set, and computes the
+    # canonical rapp-private-estate-commitment/1.0 (recomputable by any peer with
+    # read access). Dry-run by default; confirm=true creates the PRIVATE repo.
+    def _estate_private(self, kwargs, ctx, verify_only=False):
+        import secrets
+        home = ctx["home"]
+        handle = ctx.get("handle") or kwargs.get("owner")
+        if not handle:
+            return self._env("estate", "error", error="need a github handle — sign into gh or pass owner=….")
+        slug = f"{handle}/rapp-estate-private"
+        secret_path = os.path.join(home, ".brainstem", "private-estate-secret")
+        try:
+            have = os.path.exists(secret_path) and os.path.getsize(secret_path) >= 16
+        except OSError:
+            have = False
+        if not have and not verify_only:
+            os.makedirs(os.path.dirname(secret_path), exist_ok=True)
+            with open(secret_path, "wb") as f:
+                f.write(secrets.token_bytes(32))
+            try: os.chmod(secret_path, 0o600)
+            except OSError: pass
+        secret_present = os.path.exists(secret_path)
+        operator_rappid = ctx.get("rappid") or ""
+        meta = {"schema": "rapp-private-estate/1.0", "owner": operator_rappid, "github_handle": handle,
+                "private_door_count": 0, "kinds": {}, "objects_count": 0, "kinds_count": 0,
+                "note": ("Opaque private estate (Article XLVIII). Substance lives here; discovery is public at "
+                         + handle + "/rapp-estate. The human-readable kind/id map lives ONLY locally at "
+                         "~/.brainstem/private-estate-map.json.")}
+        meta_bytes = (json.dumps(meta, indent=2) + "\n").encode("utf-8")
+        readme = ("# " + slug + "\n\nThe PRIVATE tier of this operator's RAPP estate (Article XLVIII). Holds the "
+                  "substance — PII, contacts, history — never publicly indexable. Discovery is public at "
+                  + handle + "/rapp-estate. Paths are HMAC-opaque; without the operator's local secret the "
+                  "structure is uniformly meaningless.\n").encode("utf-8")
+        files = {"meta.json": meta_bytes, "README.md": readme, "objects/.gitkeep": b"", "kinds/.gitkeep": b""}
+        h = hashlib.sha256(); h.update(b"rapp-private-estate-commitment/1.0\n"); h.update(meta_bytes)
+        h.update(b"\n--paths--\n")
+        for pth in sorted(files.keys()):
+            h.update(pth.encode("utf-8") + b"\n")
+        commitment = h.hexdigest()
+        if verify_only:
+            return self._env("estate", "success", op="verify", repo=slug, commitment=commitment,
+                             secret_present=secret_present,
+                             note="recomputed the commitment a peer would derive from the repo tree + meta.json.")
+        # persist the commitment + local map so action=beacon can publish it
+        open(os.path.join(home, ".brainstem", "private-estate-commitment"), "w").write(commitment)
+        lm_path = os.path.join(home, ".brainstem", "private-estate-map.json")
+        if not os.path.exists(lm_path):
+            _write_json(lm_path, {"schema": "rapp-private-estate-localmap/1.0", "github_handle": handle,
+                                  "kinds": [], "private_door_count": 0})
+            try: os.chmod(lm_path, 0o600)
+            except OSError: pass
+        out = os.path.join(home, ".brainstem", "plant", "rapp-estate-private")
+        for rel, content in files.items():
+            fp = os.path.join(out, rel); os.makedirs(os.path.dirname(fp), exist_ok=True)
+            open(fp, "wb").write(content)
+        res = {"repo": slug, "private": True, "commitment": commitment, "secret_present": secret_present,
+               "operator_rappid": operator_rappid, "local_dir": out, "scaffolded": sorted(files.keys())}
+        if not kwargs.get("confirm"):
+            return self._env("estate", "scaffolded", op="private-init", **res,
+                             note=("dry run — minted the local HMAC secret (0600) + computed the commitment. "
+                                   "Re-run with confirm=true to create the PRIVATE repo " + slug + " and push; "
+                                   "then action=beacon to publish the commitment."))
+        rc, _, _ = _run(["gh", "repo", "view", slug])
+        if rc != 0:
+            rc2, _, err2 = _run(["gh", "repo", "create", slug, "--private", "--description",
+                                 handle + "'s RAPP private estate (Article XLVIII)"])
+            if rc2 != 0:
+                return self._env("estate", "error", error="gh repo create failed: " + err2[:200], **res)
+        wrote = []
+        for rel, content in files.items():
+            b64 = base64.b64encode(content).decode("ascii")
+            rcp, _, ep = _run(["gh", "api", "-X", "PUT", "/repos/" + slug + "/contents/" + rel,
+                               "-f", "message=private estate init", "-f", "content=" + b64])
+            wrote.append(rel if rcp == 0 else rel + "!" + ep[:50])
+        return self._env("estate", "success", op="private-init", url="https://github.com/" + slug,
+                         wrote=wrote, **res,
+                         note="private estate created. Run action=beacon to publish the commitment in your network beacon.")
 
     # ── sniff: BFS federation discovery from a seed's network beacon ──
     def _sniff(self, kwargs, ctx):

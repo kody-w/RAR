@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-10T13:20:53.344793+00:00",
+  "generated_at": "2026-06-17T21:05:22.335344+00:00",
   "stats": {
-    "total_agents": 185,
+    "total_agents": 186,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -5043,6 +5043,39 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/transcript2prototype",
+      "version": "1.0.0",
+      "display_name": "Transcript2Prototype",
+      "description": "Transcript -> demo script -> injected M365 demo iframe -> generated agent.pys -> local twin run -> live twin run -> factory singleton export (gate). One cubby per prototype.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "rapplication",
+        "pipeline",
+        "prototype",
+        "demo",
+        "cubby",
+        "factory",
+        "twin",
+        "m365"
+      ],
+      "category": "workflow",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/transcript2prototype_agent.py",
+      "_sha256": "c885b4175e646b84b517ab5452372c7fcd2dea7381ffd2ef8a6415e48bfbd30e",
+      "_seed": 3263925633160324011,
+      "_size_kb": 387.2,
+      "_lines": 6939,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_egg_hatcher",
       "version": "1.0.1",
       "display_name": "HatchTwinEgg",
@@ -5777,14 +5810,14 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/rapp_agent.py",
-      "_sha256": "17e1079bdb4b3f0d58239435d48cdec0b2e5b68419d6999e1869ef72207bfa25",
+      "_sha256": "ef930aa057ac5d840f3757bf4577aee5a6cff8a64fea295a01be9a881c3a6ceb",
       "_seed": 6614668339448129688,
-      "_size_kb": 60.2,
-      "_lines": 1123,
+      "_size_kb": 166.7,
+      "_lines": 2836,
       "_has_card": false,
       "_added_at": "2026-06-09T21:40:04-04:00",
       "_first_commit_sha": "7b2333f1ee396314f2e926e60282a5904e3fc07c",
-      "_latest_commit_sha": "0c6b107f4304073cb43e3555c6d3fef7cc07f252"
+      "_latest_commit_sha": "ca0b66290e7cfb15a550094b8db7155958096aaf"
     },
     {
       "schema": "rapp-agent/1.0",
