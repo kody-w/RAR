@@ -44,7 +44,15 @@
       "voters": {
         "jzh24516": "down"
       }
+    },
+    "@howardh/borg_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
     }
   },
-  "updated_at": "2026-04-27T14:12:48.679527+00:00"
+  "updated_at": "2026-06-18T01:42:28.840250+00:00"
 }
