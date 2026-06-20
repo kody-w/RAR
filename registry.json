@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-20T22:58:54.532825+00:00",
+  "generated_at": "2026-06-20T23:05:34.287980+00:00",
   "stats": {
-    "total_agents": 190,
+    "total_agents": 191,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -4427,6 +4427,36 @@
       "_added_at": "2026-05-16T16:03:13-04:00",
       "_first_commit_sha": "e6cd9f56504cb8f49311fb0794ad527b3c010868",
       "_latest_commit_sha": "df5585abeead83bcf7a502bb75b078fc1832b0c5"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/commons_life_agent",
+      "version": "1.0.0",
+      "display_name": "Commons Life",
+      "author": "kody-w",
+      "category": "creative",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "description": "Record, grow, and play the life of the commons as a digital organism, cradle to grave: capture frozen signed frames at a chosen resolution, grow the fidelity between them with EZsharpen, and emit a LifePlayer HTML scrubber that spins/plays the grown life back with signed events ticking like vitals.",
+      "tags": [
+        "commons",
+        "frames",
+        "playback",
+        "lifeplayer",
+        "digital-organism"
+      ],
+      "_file": "agents/@kody-w/commons_life_agent.py",
+      "_sha256": "0fc96ce4a5b18853b95a16ec0650a0e736bb58737be5d9a8f243e18313f2c5ad",
+      "_seed": 7432950825842517063,
+      "_size_kb": 21.2,
+      "_lines": 321,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
