@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-20T23:40:29.201057+00:00",
+  "generated_at": "2026-06-20T23:46:03.571623+00:00",
   "stats": {
-    "total_agents": 193,
+    "total_agents": 194,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -4579,6 +4579,36 @@
       "_added_at": "2026-04-04T21:15:40Z",
       "_first_commit_sha": "81784bb84806c7a0d1c4f2db5bd38cffe663d500",
       "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/double_jump_agent",
+      "version": "1.0.0",
+      "display_name": "Double Jump",
+      "author": "kody-w",
+      "category": "workflow",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "description": "A general improvement engine: two loops compete on the same task and ratchet it up. Jump 1 is the caller's draft; Jump 2 is the brainstem (via /chat). Each round it judges, keeps the winner, and feeds what made it better forward \u2014 pulling the laggard up without losing gains. Point it at anything: an agent.py, a commons feature, a plan, a draft.",
+      "tags": [
+        "improvement",
+        "competition",
+        "brainstem",
+        "double-jump",
+        "self-improvement"
+      ],
+      "_file": "agents/@kody-w/double_jump_agent.py",
+      "_sha256": "dc062bf427a7a569a266a05b51965c8f84f140343f54bdbb6289c92e8ef3e0a1",
+      "_seed": 2892501414042020695,
+      "_size_kb": 12.7,
+      "_lines": 213,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
