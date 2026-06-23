@@ -76,7 +76,7 @@ Self-contained: standard library only. Drop into any RAPP agents/ directory.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/connected_solution_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ConnectedSolution",
     "description": "Turn any agent stack (BasicAgent *.py files) into ONE import-ready "
                    "Microsoft Copilot Studio connected-agents solution: an orchestrator plus one "
@@ -1533,6 +1533,11 @@ class ConnectedSolutionPackager:
 
     def __init__(self, spec: ConnectedSolutionSpec):
         self.spec = spec
+        # publisher_prefix is the one untamed length input feeding the schema caps
+        # below; bound it to Dataverse's 8-char prefix limit so no schema exceeds
+        # MAX_SCHEMA for ANY direct caller (perform() already caps it). Mutate the
+        # spec too so the CustomizationPrefix stays consistent with the schemas.
+        spec.publisher_prefix = spec.publisher_prefix[:8]
         prefix = spec.publisher_prefix
 
         # Connected-agent components are named
@@ -1555,8 +1560,12 @@ class ConnectedSolutionPackager:
         self._children = []  # list of (SubAgentSpec, child_schema, action_name)
         seen_schemas = {self.orch_schema}
         seen_actions = set()
+        # Children need room for a ".topic.<Name>" suffix within MAX_SCHEMA. The
+        # orchestrator schema is capped above; children were NOT, so a long
+        # solution + capability name overflowed the Dataverse 100-char limit.
+        child_base_max = max(4, MAX_SCHEMA - 35 - len(prefix) - 1)
         for sub in spec.subagents:
-            base = _sanitize_schema(sub.agent_name) or "agent"
+            base = (_sanitize_schema(sub.agent_name) or "agent")[:child_base_max]
             child_schema = f"{prefix}_{base}"
             n = 2
             while child_schema in seen_schemas:
@@ -1721,6 +1730,8 @@ class ConnectedSolutionPackager:
         # orchestrator stays a pure router and never carries one.
         if capir and not is_orchestrator:
             action = capir_topic_action_name(capir)
+            # keep "{bot_schema}.topic.{action}" within the 100-char schema limit
+            action = action[: max(4, MAX_SCHEMA - len(bot_schema) - len(".topic."))]
             schema_name = f"{bot_schema}.topic.{action}"
             folder = f"botcomponents/{schema_name}"
             zf.writestr(

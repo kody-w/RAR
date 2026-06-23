@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-23T01:25:20.019112+00:00",
+  "generated_at": "2026-06-23T19:34:37.568132+00:00",
   "stats": {
     "total_agents": 195,
     "total_swarms": 82,
@@ -4521,7 +4521,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/connected_solution_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "ConnectedSolution",
       "description": "Turn any agent stack (BasicAgent *.py files) into ONE import-ready Microsoft Copilot Studio connected-agents solution: an orchestrator plus one connected sub-agent per agent, each with a deterministic topic that runs the agent's perform() logic on synthetic stand-in data and declares its perform() params as typed inputs. Optionally imports AND publishes into your own Copilot Studio (Dataverse) environment via the Web API (no pac CLI; credentials read only from env/settings, never chat).",
       "author": "Kody Wildfeuer",
@@ -4540,10 +4540,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/connected_solution_agent.py",
-      "_sha256": "d4e50b5fd599c6ffb06478523728ff1181bdf3681955931d787e007db82d57ec",
+      "_sha256": "07f85a7da6626411c14dd4be371752901b30fd17619017a3e1354eae33ca57cf",
       "_seed": 8602904848306551721,
-      "_size_kb": 126.9,
-      "_lines": 2726,
+      "_size_kb": 127.7,
+      "_lines": 2737,
       "_has_card": false,
       "_added_at": "2026-06-22T21:04:42-04:00",
       "_first_commit_sha": "f6b8574fd0ef175bbaaae750cbeed0ce4d2c8a1a",
