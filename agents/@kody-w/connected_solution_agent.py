@@ -1428,36 +1428,21 @@ def capir_topic_data_yaml(display_name: str, capir: dict) -> str:
                 + doc_block)
     trig = "\n".join("      - " + _yaml_dq(t) for t in triggers) or ("      - " + _yaml_dq(display_name))
 
-    # intake: when the orchestrator passes the agent.py's first param as a typed
-    # input, READ it into Topic.Query so the same value the perform() arg drives
-    # flows into this filter; only ask the user when no input was supplied.
-    input_var = re.sub(r"[^A-Za-z0-9_]", "", str(capir.get("input_var") or ""))
-    question_action = (
+    # intake: ask for the value to filter on. We intentionally do NOT read an
+    # orchestrator-passed `Global.<param>` here. A connected agent can only
+    # reference a global it has DECLARED as external-settable, and the solution
+    # package format gives no reliable way to emit that declaration — referencing
+    # an undeclared Global makes Copilot Studio's topic checker throw a
+    # PowerFxError ("Identifier not recognized"), which blocks publish. The
+    # orchestrator still DECLARES + PASSES the typed inputs (see the connected
+    # action's inputType); the agent's generative layer receives them, and this
+    # deterministic topic captures the value it filters on via the Question.
+    intake_actions = (
         "    - kind: Question\n"
         "      id: question_query\n"
         "      variable: Topic.Query\n"
         "      prompt: " + _yaml_dq(prompt) + "\n"
         "      entity: StringPrebuiltEntity\n")
-    if input_var:
-        intake_actions = (
-            "    - kind: SetVariable\n"
-            "      id: readInput\n"
-            "      variable: Topic.Query\n"
-            "      value: " + _yaml_dq("=If(IsBlank(Global." + input_var
-                                       + "), Blank(), Text(Global." + input_var + "))") + "\n"
-            "    - kind: ConditionGroup\n"
-            "      id: askIfNoInput\n"
-            "      conditions:\n"
-            "        - id: askIfNoInput_needed\n"
-            "          condition: " + _yaml_dq("=IsBlank(Topic.Query)") + "\n"
-            "          actions:\n"
-            "            - kind: Question\n"
-            "              id: question_query\n"
-            "              variable: Topic.Query\n"
-            "              prompt: " + _yaml_dq(prompt) + "\n"
-            "              entity: StringPrebuiltEntity\n")
-    else:
-        intake_actions = question_action
 
     return (
         "kind: AdaptiveDialog\n"
@@ -2206,10 +2191,6 @@ def _subagents_from_stack(stack_dir: Path, capir_mode: str = "auto") -> List[Sub
             continue
         display, agent_name, description, module_doc, params, recovered = parsed
         capir = _resolve_capir(recovered, display, agent_name, description, params, capir_mode)
-        if capir and params and not capir.get("input_var"):
-            # the topic reads this input (the first perform() param) from the
-            # orchestrator-passed Global of the same name (see capir_topic_data_yaml)
-            capir["input_var"] = re.sub(r"[^A-Za-z0-9_]", "", str(params[0][0]))
         subs.append(SubAgentSpec(
             agent_name=agent_name,
             display_name=display,
