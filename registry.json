@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-27T03:09:23.119983+00:00",
+  "generated_at": "2026-06-27T17:28:44.650451+00:00",
   "stats": {
-    "total_agents": 196,
+    "total_agents": 197,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -4837,6 +4837,42 @@
       "_added_at": "2026-06-20T18:58:25-04:00",
       "_first_commit_sha": "538143e9e20d77fbbf24d4d813759198d5b64688",
       "_latest_commit_sha": "538143e9e20d77fbbf24d4d813759198d5b64688"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/flight_recorder",
+      "version": "1.0.0",
+      "display_name": "FlightRecorder",
+      "description": "A local black box for your brainstem: transparently records BOTH SIDES of every /chat conversation -- whoever is talking (you, another AI, a script) -- to append-only JSON files on your own machine that you fully own. Steer it by talking: status, stats, search, export to an HTML transcript, pause/resume, or wipe. No engine edits; nothing leaves your machine.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "flight-recorder",
+        "black-box",
+        "logging",
+        "observability",
+        "privacy",
+        "conversations",
+        "audit",
+        "local-first",
+        "ownership"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [
+        "FLIGHT_RECORDER_DIR"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/flight_recorder_agent.py",
+      "_sha256": "e5f8220e25f0bbb6f30e3f32ad8cd0c800728ec6f0ec2fad1eb431ed4d1d19c3",
+      "_seed": 7703044877886567080,
+      "_size_kb": 22.9,
+      "_lines": 540,
+      "_has_card": false,
+      "_added_at": "2026-06-27T13:28:13-04:00",
+      "_first_commit_sha": "a490fd06c577c07b4560c3452557dc881f06f384",
+      "_latest_commit_sha": "a490fd06c577c07b4560c3452557dc881f06f384"
     },
     {
       "schema": "rapp-agent/1.0",
