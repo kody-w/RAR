@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-06-23T19:35:13.417733+00:00",
+  "generated_at": "2026-06-27T03:09:23.119983+00:00",
   "stats": {
-    "total_agents": 195,
+    "total_agents": 196,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 8,
@@ -5014,6 +5014,38 @@
       "_added_at": "2026-06-20T19:39:59-04:00",
       "_first_commit_sha": "952e42b5d80dc0dbad1b39ecf6c674c88dc7a320",
       "_latest_commit_sha": "952e42b5d80dc0dbad1b39ecf6c674c88dc7a320"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/neuron_swarm",
+      "version": "1.0.0",
+      "display_name": "NeuronSwarm",
+      "description": "Summon a neuron swarm on demand: fan any task out across many independent expert 'neuron' lenses, then reconcile their takes into one converged, higher-confidence answer -- using your brainstem's own model, no API keys.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "swarm",
+        "orchestration",
+        "reasoning",
+        "multi-agent",
+        "analysis",
+        "ensemble",
+        "brainstem"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/neuron_swarm_agent.py",
+      "_sha256": "88da16f36a7df9d803acdae57291e914e5cad12159f6e31747ec97071aa74e18",
+      "_seed": 17637454415722852404,
+      "_size_kb": 18.8,
+      "_lines": 365,
+      "_has_card": false,
+      "_added_at": "2026-06-26T23:08:53-04:00",
+      "_first_commit_sha": "2d3ff59c24ab9bab9ad09d02bcc07ec95a3d5caf",
+      "_latest_commit_sha": "2d3ff59c24ab9bab9ad09d02bcc07ec95a3d5caf"
     },
     {
       "schema": "rapp-agent/1.0",
