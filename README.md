@@ -1,5 +1,7 @@
 # RAR — RAPP Agent Registry
 
+> **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
+
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
 180 agents. 8 publishers. 24 categories. 1,144 tests. Every card has a seed.
