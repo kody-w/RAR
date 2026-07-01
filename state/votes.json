@@ -52,7 +52,15 @@
       "voters": {
         "kody-w": "up"
       }
+    },
+    "@borg/hacker_news_agent": {
+      "up": 1,
+      "down": 0,
+      "score": 1,
+      "voters": {
+        "kody-w": "up"
+      }
     }
   },
-  "updated_at": "2026-06-18T01:42:28.840250+00:00"
+  "updated_at": "2026-07-01T23:56:54.452935+00:00"
 }
