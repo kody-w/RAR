@@ -6692,6 +6692,93 @@
       "_added_at": "2026-07-01T16:22:23Z",
       "_first_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db",
       "_latest_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@borg/borg_agent",
+      "version": "1.1.0",
+      "display_name": "Borg",
+      "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
+      "author": "Howard",
+      "tags": [
+        "core",
+        "analysis",
+        "github",
+        "web",
+        "assimilation"
+      ],
+      "category": "core",
+      "quality_tier": "verified",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@borg/borg_agent.py.card",
+      "_sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
+      "_seed": 6693527250417623987,
+      "_size_kb": 39.7,
+      "_lines": 989,
+      "_has_card": true,
+      "_added_at": "2026-07-01T19:14:26Z",
+      "_first_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db",
+      "_latest_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db",
+      "_card": {
+        "name": "Borg",
+        "title": "The Assimilator",
+        "mana_cost": "{2}{U}{B}",
+        "colors": [
+          "U",
+          "B"
+        ],
+        "type_line": "Creature \u2014 Agent Assimilator",
+        "rarity": "mythic",
+        "power": 6,
+        "toughness": 4,
+        "abilities": [
+          {
+            "keyword": "Assimilate",
+            "cost": "{T}",
+            "text": "Target GitHub repository or URL becomes part of the collective. Create a structured knowledge report."
+          },
+          {
+            "keyword": "Adaptive Analysis",
+            "cost": "",
+            "text": "When Borg assimilates, it detects the tech stack and maps 40+ framework patterns."
+          }
+        ],
+        "flavor_text": "\"Resistance is futile. Your codebase will be added to our own. Your architectural distinctiveness will be catalogued.\" \u2014Borg Collective Directive 7.1",
+        "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-borg\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"glow-borg\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-borg)\"/><g filter=\"url(#glow-borg)\"><rect x=\"55\" y=\"55\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"2\" rx=\"4\"/><rect x=\"70\" y=\"70\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1.5\" rx=\"2\"/><line x1=\"55\" y1=\"100\" x2=\"145\" y2=\"100\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"100\" y1=\"55\" x2=\"100\" y2=\"145\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><polygon points=\"100,25 135,45 135,85 100,105 65,85 65,45\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1\" opacity=\"0.4\"/><polygon points=\"100,95 135,115 135,155 100,175 65,155 65,115\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.4\"/><circle cx=\"100\" cy=\"100\" r=\"15\" fill=\"#4a9eff\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"6\" fill=\"#8b5cf6\" opacity=\"0.9\"/><circle cx=\"85\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"85\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/></g></svg>",
+        "set_code": "HOLO",
+        "artist": "Howard"
+      },
+      "_card_sha256": "fd52a2a0fe2072465b0e0d1c053db868ab6637ade4af844d400340586fd16709"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@borg/hacker_news_agent",
+      "version": "1.0.0",
+      "display_name": "Hacker News",
+      "description": "Fetches the top N stories from Hacker News.",
+      "author": "RAPP",
+      "tags": [
+        "starter",
+        "news",
+        "http"
+      ],
+      "category": "integrations",
+      "quality_tier": "official",
+      "requires_env": [],
+      "example_call": "What are the top 5 stories on Hacker News right now?",
+      "_file": "agents/@borg/hacker_news_agent.py",
+      "_sha256": "e83a236ebf1ff5281e3f4630b4da885ace9ea68c1777cf4ebf8879b1954b31bb",
+      "_seed": 12872764946609739620,
+      "_size_kb": 4.2,
+      "_lines": 114,
+      "_has_card": true,
+      "_added_at": "2026-07-01T19:14:26Z",
+      "_first_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db",
+      "_latest_commit_sha": "a5e5419cc9b26c5b4f9603f382a1aa32a344f4db",
+      "_card_sha256": "114f3d5db59d4ca9affc1df2abb8637e9d42811ab7b66bc6546b46b7cfd5682e"
     }
   ],
   "swarms": [

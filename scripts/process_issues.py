@@ -52,6 +52,7 @@ BRAND_ALLOWLIST: dict[str, set[str]] = {
     "@rapp": {"kody-w"},
     "@kody": {"kody-w"},
     "@kody-w": {"kody-w"},
+    "@borg": {"howardh", "kody-w"},
 }
 
 
