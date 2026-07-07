@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-07T01:00:09.998190+00:00",
+  "generated_at": "2026-07-07T01:07:47.948593+00:00",
   "stats": {
-    "total_agents": 203,
+    "total_agents": 199,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -52,20 +52,6 @@
       "agents": [
         "@borg/borg_agent",
         "@howardh/borg_agent"
-      ]
-    },
-    {
-      "display_name": "CopilotStudioDeploy",
-      "agents": [
-        "@kody-w/copilot_studio_deploy_agent",
-        "@rapp/copilot_studio_deploy_agent"
-      ]
-    },
-    {
-      "display_name": "CopilotStudioForge",
-      "agents": [
-        "@kody-w/copilot_studio_forge_agent",
-        "@rapp/copilot_studio_forge_agent"
       ]
     },
     {
@@ -4739,9 +4725,9 @@
       "_size_kb": 274.8,
       "_lines": 3538,
       "_has_card": true,
-      "_added_at": "2026-06-07T20:27:02-04:00",
-      "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
-      "_latest_commit_sha": "899a143cf37e0f6935e096fa4cab751ec3ef42c9",
+      "_added_at": "2026-05-16T21:09:45-04:00",
+      "_first_commit_sha": "25080091ae84a24baa067cee51843e60b53bf410",
+      "_latest_commit_sha": "e679bf281004377950225a39fbfac54c90dfd252",
       "_card_sha256": "bc35d9b3bccfaa4846c674d6762d9230bd462e97996ed61659d23a8dd8a77fc9"
     },
     {
@@ -5918,76 +5904,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@rapp/copilot_studio_deploy_agent",
-      "version": "1.0.0",
-      "display_name": "CopilotStudioDeploy",
-      "description": "Convert any RAPP agent (from AI-Agent-Templates, a public URL, or a local file) and deploy it into your own Microsoft Copilot Studio environment, locally. Device-code or service-principal auth; credentials stay on your machine.",
-      "author": "kody-w",
-      "tags": [
-        "copilot",
-        "copilot_studio",
-        "power_platform",
-        "deploy",
-        "integration",
-        "automation"
-      ],
-      "category": "integrations",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": "Deploy the emission tracking agent to my Copilot Studio environment",
-      "_file": "agents/@rapp/copilot_studio_deploy_agent.py",
-      "_sha256": "3de55a0a92a1ac4b9d1608e463f487fba3d6c85b95b2913fe056b52527648a62",
-      "_seed": 12529120966829948556,
-      "_size_kb": 33.6,
-      "_lines": 527,
-      "_has_card": true,
-      "_added_at": "2026-04-28T16:27:14-04:00",
-      "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "899a143cf37e0f6935e096fa4cab751ec3ef42c9",
-      "_card_sha256": "406ad2ac5e2db35fb8bd2af500fc5832666894525f0621eaad88dd9575153b46"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rapp/copilot_studio_forge_agent",
-      "display_name": "CopilotStudioForge",
-      "description": "Translate a RAPP swarm (singleton .py) into a validated Microsoft Copilot Studio YAML bundle. Native multi-agent CS solution, no cloud bridge.",
-      "author": "RAPP",
-      "version": "0.2.1",
-      "tags": [
-        "meta",
-        "copilot-studio",
-        "forge",
-        "translation",
-        "deploy-prep"
-      ],
-      "category": "core",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "action": "list"
-        }
-      },
-      "anchored_on": "https://github.com/microsoft/skills-for-copilot-studio",
-      "_file": "agents/@rapp/copilot_studio_forge_agent.py",
-      "_sha256": "49a45f92ef91c6a77520c3c06433cd0e0cc99dfdacc9a5c91a7bfdde38e684db",
-      "_seed": 6041207226663316349,
-      "_size_kb": 44.5,
-      "_lines": 1027,
-      "_has_card": true,
-      "_added_at": "2026-04-28T16:27:14-04:00",
-      "_first_commit_sha": "6a3798346214837567a08619a026575a4198e448",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
-      "_card_sha256": "88d6bca1529769aa0a54e343a8254058f0093febd0c39fba8c36b64c61c0696e"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@rapp/drift",
       "version": "1.0.0",
       "display_name": "DriftAgent",
@@ -6384,45 +6300,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@rapp/rapp2mcs_factory",
-      "version": "0.3.1",
-      "display_name": "RAPP2MCS Factory",
-      "description": "End-to-end RAPP\u2192MCS factory. Orchestrates AIBAST_RAPP/scripts (analyzer \u2192 normalizer \u2192 wrapper_generator) plus pac CLI to convert a RAPP brainstem's agents/ directory into a deployed Copilot Studio native agent. No Azure Functions, no custom connectors, no custom Dataverse tables \u2014 only OOTB CDS.",
-      "author": "RAPP",
-      "tags": [
-        "composite",
-        "factory",
-        "mcs",
-        "copilot-studio",
-        "power-platform",
-        "deploy",
-        "singleton",
-        "aibast"
-      ],
-      "category": "pipeline",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "action": "pipeline"
-        }
-      },
-      "_file": "agents/@rapp/rapp2mcs_factory_agent.py",
-      "_sha256": "3c159606b512a38731537fda4817a3506eea8dc9b9d910cd313aa03528ee0a99",
-      "_seed": 13371367910204780552,
-      "_size_kb": 243.5,
-      "_lines": 2802,
-      "_has_card": true,
-      "_added_at": "2026-05-16T21:09:45-04:00",
-      "_first_commit_sha": "25080091ae84a24baa067cee51843e60b53bf410",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
-      "_card_sha256": "0c183862b00001f5381ee5f5fb833e33108cc2d7341d3f8548a878f860660c4a"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp",
       "version": "1.0.0",
       "display_name": "RappAgent",
@@ -6637,43 +6514,6 @@
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "fec89f1e100934281bc8a92d0aae7b6972420c64",
       "_card_sha256": "aa16dc06594b9a3e2e2d4790ab749d0a5dce343db877b22f32a2f420765a4fbd"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@rapp/topic_wizard",
-      "version": "0.1.1",
-      "display_name": "Topic Wizard",
-      "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions.",
-      "author": "RAPP",
-      "tags": [
-        "mcs",
-        "copilot-studio",
-        "topic",
-        "wizard",
-        "ui",
-        "singleton"
-      ],
-      "category": "pipeline",
-      "quality_tier": "official",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "example_call": {
-        "args": {
-          "action": "wizard"
-        }
-      },
-      "_file": "agents/@rapp/topic_wizard_agent.py",
-      "_sha256": "f081b64cd83a2c39da556f8fb2e3e5d1d9c03837172f4acbe276f2311655c15b",
-      "_seed": 14837227561113367261,
-      "_size_kb": 54.9,
-      "_lines": 1317,
-      "_has_card": true,
-      "_added_at": "2026-05-16T21:41:11-04:00",
-      "_first_commit_sha": "6720122b04ff99cb7c75096817014595760254be",
-      "_latest_commit_sha": "ce4d2aa63a3ebb409c34534643e32ab7cccd8aa2",
-      "_card_sha256": "5c0757e6e9ff87243a8a990d797139bb5f2662ec3390d8ca84a7cad998773aa6"
     },
     {
       "schema": "rapp-agent/1.0",
