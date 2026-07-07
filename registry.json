@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-07T00:52:21.557469+00:00",
+  "generated_at": "2026-07-07T01:00:09.998190+00:00",
   "stats": {
-    "total_agents": 202,
+    "total_agents": 203,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -52,6 +52,13 @@
       "agents": [
         "@borg/borg_agent",
         "@howardh/borg_agent"
+      ]
+    },
+    {
+      "display_name": "CopilotStudioDeploy",
+      "agents": [
+        "@kody-w/copilot_studio_deploy_agent",
+        "@rapp/copilot_studio_deploy_agent"
       ]
     },
     {
@@ -4705,6 +4712,40 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/copilot_studio_deploy_agent",
+      "version": "1.0.0",
+      "display_name": "CopilotStudioDeploy",
+      "description": "Deploy a forged Copilot Studio bundle into a Dataverse / Power Platform environment. Assimilates two overlapping agents: REST ImportSolutionAsync (service-principal) and the pac-CLI end-to-end pipeline (analyze->normalize->package->deploy). Destructive imports are confirm-gated.",
+      "author": "kody-w",
+      "tags": [
+        "copilot-studio",
+        "deploy",
+        "dataverse",
+        "power-platform",
+        "pac",
+        "import-solution",
+        "destructive",
+        "assimilated"
+      ],
+      "category": "core",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/copilot_studio_deploy_agent.py",
+      "_sha256": "b22e5a097c595e702b1de6f97f751d1f2f9ac554b1673fd3478c977a843d4aea",
+      "_seed": 9376612445613730479,
+      "_size_kb": 274.8,
+      "_lines": 3538,
+      "_has_card": true,
+      "_added_at": "2026-06-07T20:27:02-04:00",
+      "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
+      "_latest_commit_sha": "899a143cf37e0f6935e096fa4cab751ec3ef42c9",
+      "_card_sha256": "bc35d9b3bccfaa4846c674d6762d9230bd462e97996ed61659d23a8dd8a77fc9"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/copilot_studio_forge_agent",
       "version": "1.0.0",
       "display_name": "CopilotStudioForge",
@@ -4737,9 +4778,9 @@
       "_size_kb": 218.5,
       "_lines": 5330,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-07-07T00:50:32Z",
+      "_first_commit_sha": "216ae006d91c6a62466753780c3f4a2b8d88c6fe",
+      "_latest_commit_sha": "f818123b2c136494ddf03bbe59add4dd454162fe",
       "_card_sha256": "31e7f26d2fbde35ee5e127b9d52fb2cdb0c3fdf94106094266f06eebd3f7f8b8"
     },
     {
