@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/software_customer_onboarding",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Customer Onboarding Agent",
     "description": "Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.",
     "author": "AIBAST",
@@ -262,7 +262,7 @@ class CustomerOnboardingAgent(BasicAgent):
     """Customer onboarding tracking and risk assessment agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/software-customer-onboarding"
+        self.name = "CustomerOnboardingAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

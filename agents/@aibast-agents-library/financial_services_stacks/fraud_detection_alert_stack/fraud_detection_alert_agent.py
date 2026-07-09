@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fraud_detection_alert",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Fraud Detection & Alert Agent",
     "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.",
     "author": "AIBAST",
@@ -120,7 +120,7 @@ class FraudDetectionAlertAgent(BasicAgent):
     """Fraud detection and alert management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/fraud-detection-alert"
+        self.name = "FraudDetectionAlertAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Fraud Detection & Alert Agent",

@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_chat",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Sales Chat Agent",
     "description": "Retail sales chat support with product inquiries, availability checks, promotion lookups, and order assistance.",
     "author": "AIBAST",
@@ -190,7 +190,7 @@ class SalesChatAgent(BasicAgent):
     """Retail sales chat assistant agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/sales-chat"
+        self.name = "SalesChatAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Sales Chat Agent",

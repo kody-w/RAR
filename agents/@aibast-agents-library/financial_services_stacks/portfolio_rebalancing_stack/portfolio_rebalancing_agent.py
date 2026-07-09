@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/portfolio_rebalancing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Portfolio Rebalancing Agent",
     "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
     "author": "AIBAST",
@@ -131,7 +131,7 @@ class PortfolioRebalancingAgent(BasicAgent):
     """Portfolio rebalancing agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/portfolio-rebalancing"
+        self.name = "PortfolioRebalancingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Portfolio Rebalancing Agent",

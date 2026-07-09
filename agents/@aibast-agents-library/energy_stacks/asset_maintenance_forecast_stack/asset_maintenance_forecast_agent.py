@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/asset_maintenance_forecast",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Asset Maintenance Forecast Agent",
     "description": "Predictive maintenance forecasting, asset health monitoring, budget projections, and work order planning for energy infrastructure.",
     "author": "AIBAST",
@@ -206,7 +206,7 @@ class AssetMaintenanceForecastAgent(BasicAgent):
     """Predictive maintenance and asset health agent for energy infrastructure."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/asset-maintenance-forecast"
+        self.name = "AssetMaintenanceForecastAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

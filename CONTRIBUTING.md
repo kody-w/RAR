@@ -64,7 +64,14 @@ except ImportError:
 
 class MyAgent(BasicAgent):
     def __init__(self):
-        super().__init__(__manifest__["display_name"], {})
+        self.name = "MyAgent"
+        self.metadata = {
+            "name": self.name,
+            "display_name": __manifest__["display_name"],
+            "description": __manifest__["description"],
+            "parameters": {"type": "object", "properties": {}},
+        }
+        super().__init__(self.name, self.metadata)
 
     def perform(self, **kwargs):
         return "result"
@@ -131,6 +138,7 @@ Same flow: staging → review → approval. The new version gets a new forged se
 5. **No secrets in code** — use `os.environ.get()`, declare in `requires_env`
 6. **Works offline** — handle missing env vars gracefully
 7. **No network calls in `__init__`** — keep constructor fast
+8. **Tool-safe runtime name** — `self.name` and `metadata["name"]` must match `^[A-Za-z0-9_-]+$`; keep spaces and punctuation in `display_name`
 
 ## Security
 

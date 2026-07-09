@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/support_ticket_resolution",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Support Ticket Resolution Agent",
     "description": "Intelligent ticket triage, KB resolution search, escalation routing, and SLA compliance dashboards.",
     "author": "AIBAST",
@@ -203,7 +203,7 @@ class SupportTicketResolutionAgent(BasicAgent):
     """Support ticket triage, resolution, and SLA management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/support-ticket-resolution"
+        self.name = "SupportTicketResolutionAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/field_service_dispatch",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Field Service Dispatch Agent",
     "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure.",
     "author": "AIBAST",
@@ -243,7 +243,7 @@ class FieldServiceDispatchAgent(BasicAgent):
     """Field service dispatch and technician management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/field-service-dispatch"
+        self.name = "FieldServiceDispatchAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

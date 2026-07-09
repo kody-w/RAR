@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/financial_advisor_copilot",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Financial Advisor Copilot Agent",
     "description": "Financial advisor support with client reviews, portfolio summaries, recommendation engine, and compliance checks.",
     "author": "AIBAST",
@@ -159,7 +159,7 @@ class FinancialAdvisorCopilotAgent(BasicAgent):
     """Financial advisor copilot agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/financial-advisor-copilot"
+        self.name = "FinancialAdvisorCopilotAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Financial Advisor Copilot Agent",

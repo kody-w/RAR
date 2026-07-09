@@ -242,6 +242,26 @@ def test_get_agent_info_not_found():
     assert info is None
 
 
+def test_install_agent_uses_collision_safe_registry_filename(tmp_path, monkeypatch):
+    agent = {
+        "name": "@one/shared",
+        "_file": "agents/@one/shared_agent.py",
+        "_install_filename": "rar_one_shared_agent.py",
+    }
+    monkeypatch.setattr(rapp_sdk, "get_agent_info", lambda name: agent)
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: None)
+
+    class Response:
+        def __enter__(self): return self
+        def __exit__(self, *args): return False
+        def read(self): return b"print('loaded')\n"
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", lambda *args, **kwargs: Response())
+    installed = Path(rapp_sdk.install_agent(agent["name"], str(tmp_path)))
+    assert installed.name == agent["_install_filename"]
+    assert installed.read_text(encoding="utf-8") == "print('loaded')\n"
+
+
 # ═══════════════════════════════════════════════════════
 # SECTION 7: Scaffold Round-Trip
 # ═══════════════════════════════════════════════════════
@@ -263,6 +283,32 @@ def test_scaffold_creates_valid_agent():
 
         errors = rapp_sdk.validate_manifest(str(agent_path), manifest)
         assert errors == [], f"Scaffold produced invalid agent: {errors}"
+        source = agent_path.read_text()
+        assert 'self.name = "RoundTrip"' in source
+        assert '"display_name": "Round Trip"' in source
+
+        contract = dict((name, passed) for name, passed, _ in rapp_sdk.run_contract_tests(str(agent_path)))
+        assert contract["runtime_name_is_tool_safe"] is True
+
+
+def test_contract_rejects_display_name_as_runtime_name(tmp_path):
+    agent_path = tmp_path / "bad_runtime_agent.py"
+    agent_path.write_text('''
+__manifest__ = {
+    "schema": "rapp-agent/1.0", "name": "@test/bad_runtime", "version": "1.0.0",
+    "display_name": "Bad Runtime", "description": "test", "author": "test",
+    "tags": [], "category": "general"
+}
+from agents.basic_agent import BasicAgent
+class BadRuntimeAgent(BasicAgent):
+    def __init__(self):
+        self.name = "Bad Runtime"
+        self.metadata = {"name": self.name}
+        super().__init__(self.name, self.metadata)
+    def perform(self, **kwargs): return "ok"
+''')
+    results = dict((name, passed) for name, passed, _ in rapp_sdk.run_contract_tests(str(agent_path)))
+    assert results["runtime_name_is_tool_safe"] is False
 
 
 def test_scaffold_rejects_kebab():

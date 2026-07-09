@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/claims_processing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Claims Processing Agent",
     "description": "Insurance claims processing with intake, adjudication review, fraud detection, and settlement recommendations.",
     "author": "AIBAST",
@@ -150,7 +150,7 @@ class ClaimsProcessingAgent(BasicAgent):
     """Insurance claims processing agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/claims-processing"
+        self.name = "ClaimsProcessingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Claims Processing Agent",

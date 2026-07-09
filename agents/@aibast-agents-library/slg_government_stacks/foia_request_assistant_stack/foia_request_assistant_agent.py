@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/foia_request_assistant",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FOIA Request Assistant Agent",
     "description": "FOIA request processing support with request analysis, document search, redaction review, and response preparation.",
     "author": "AIBAST",
@@ -151,7 +151,7 @@ class FOIARequestAssistantAgent(BasicAgent):
     """FOIA request assistant for government records management."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/foia-request-assistant"
+        self.name = "FOIARequestAssistantAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "FOIA Request Assistant Agent",

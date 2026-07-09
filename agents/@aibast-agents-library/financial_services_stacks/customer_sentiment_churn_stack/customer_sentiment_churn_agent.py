@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_sentiment_churn",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Customer Sentiment & Churn Agent",
     "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
     "author": "AIBAST",
@@ -172,7 +172,7 @@ class CustomerSentimentChurnAgent(BasicAgent):
     """Customer sentiment and churn prediction agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/customer-sentiment-churn"
+        self.name = "CustomerSentimentChurnAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Customer Sentiment & Churn Agent",

@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/underwriting_support",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Underwriting Support Agent",
     "description": "Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.",
     "author": "AIBAST",
@@ -180,7 +180,7 @@ class UnderwritingSupportAgent(BasicAgent):
     """Insurance underwriting support agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/underwriting-support"
+        self.name = "UnderwritingSupportAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Underwriting Support Agent",

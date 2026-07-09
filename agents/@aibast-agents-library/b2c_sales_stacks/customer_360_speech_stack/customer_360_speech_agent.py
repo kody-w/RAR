@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_360_speech",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Customer 360 & Speech Agent",
     "description": "Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations.",
     "author": "AIBAST",
@@ -132,7 +132,7 @@ class Customer360SpeechAgent(BasicAgent):
     """Customer 360 and speech analytics agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/customer-360-speech"
+        self.name = "Customer360SpeechAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Customer 360 & Speech Agent",

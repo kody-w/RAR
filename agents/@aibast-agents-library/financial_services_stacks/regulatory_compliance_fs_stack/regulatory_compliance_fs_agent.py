@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_regulatory_compliance",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FS Regulatory Compliance Agent",
     "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
     "author": "AIBAST",
@@ -117,7 +117,7 @@ class FSRegulatoryComplianceAgent(BasicAgent):
     """Financial services regulatory compliance agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/fs-regulatory-compliance"
+        self.name = "FSRegulatoryComplianceAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "FS Regulatory Compliance Agent",

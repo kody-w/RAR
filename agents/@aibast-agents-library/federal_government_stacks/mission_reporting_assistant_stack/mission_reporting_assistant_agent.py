@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/mission_reporting_assistant",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Mission Reporting Assistant Agent",
     "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
     "author": "AIBAST",
@@ -144,7 +144,7 @@ class MissionReportingAssistantAgent(BasicAgent):
     """Mission reporting assistant for federal program management."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/mission-reporting-assistant"
+        self.name = "MissionReportingAssistantAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Mission Reporting Assistant Agent",

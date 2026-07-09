@@ -35,7 +35,7 @@ __manifest__ = {
         "fits their goal."
     ),
     "author": "RAPP",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "tags": ["meta", "navigator", "store", "discovery", "rapplication"],
     "category": "platform",
     "quality_tier": "official",
@@ -97,7 +97,7 @@ class StoreNavigatorAgent(BasicAgent):
     def __init__(self):
         self.name = "StoreNavigator"
         self.metadata = {
-            "name": "navigate_rapp_store",
+            "name": self.name,
             "description": (
                 "Help the user navigate the kody-w/RAPP_Store catalog. Call "
                 "this whenever the user asks what's in the store, what they "

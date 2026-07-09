@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cart_abandonment_recovery",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Cart Abandonment Recovery Agent",
     "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
     "author": "AIBAST",
@@ -155,7 +155,7 @@ class CartAbandonmentRecoveryAgent(BasicAgent):
     """Cart abandonment recovery agent for e-commerce."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/cart-abandonment-recovery"
+        self.name = "CartAbandonmentRecoveryAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Cart Abandonment Recovery Agent",

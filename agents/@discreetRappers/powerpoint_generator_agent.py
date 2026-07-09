@@ -19,13 +19,15 @@ Usage:
 2. Without template: action="create_presentation", slides=[...] (uses default styling)
 """
 
+from __future__ import annotations
+
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST — Do not remove. Used by registry builder.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/powerpoint_generator_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "PowerPointGeneratorV2",
     "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
     "author": "Bill Whalen",

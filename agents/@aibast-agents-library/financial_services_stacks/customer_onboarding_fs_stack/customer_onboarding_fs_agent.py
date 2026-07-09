@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_customer_onboarding",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FS Customer Onboarding Agent",
     "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
     "author": "AIBAST",
@@ -167,7 +167,7 @@ class FSCustomerOnboardingAgent(BasicAgent):
     """Financial services customer onboarding agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/fs-customer-onboarding"
+        self.name = "FSCustomerOnboardingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "FS Customer Onboarding Agent",

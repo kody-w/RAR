@@ -47,6 +47,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -63,7 +64,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/launch_to_public_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Launch to Public",
     "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
     "author": "kody-w",
@@ -83,19 +84,255 @@ __manifest__ = {
     ]
 }
 
-# Reuse the existing graft + bond + scaffolding machinery
-try:
-    from agents.graft_neighborhood_agent import (
-        _build_scaffolding, _snapshot_upstream, _verify_upstream_preserved,
-        _restore_clobbered, _gh_fork_clone, _now_iso, _run, _sha256_file,
-        SPECIES_ROOT_RAPPID,
+SPECIES_ROOT_RAPPID = (
+    "rappid:v2:prototype:@rapp/origin:"
+    "0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP"
+)
+_AGENT_MANAGED_FILES = {"bonds.json"}
+
+
+def _now_iso() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def _run(cmd: list[str], cwd: str | None = None,
+         check: bool = True) -> tuple[int, str, str]:
+    """Run a bounded subprocess and return (status, stdout, stderr)."""
+    try:
+        process = subprocess.run(
+            cmd, cwd=cwd, check=False, capture_output=True,
+            text=True, timeout=120,
+        )
+    except FileNotFoundError as exc:
+        raise RuntimeError(f"binary not found: {cmd[0]}") from exc
+    if check and process.returncode != 0:
+        detail = (process.stderr or process.stdout or "").strip()[:500]
+        raise RuntimeError(f"{cmd[0]} failed (rc={process.returncode}): {detail}")
+    return process.returncode, process.stdout or "", process.stderr or ""
+
+
+def _sha256_file(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as source:
+        for chunk in iter(lambda: source.read(8192), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _walk_files(root: str) -> list[str]:
+    files = []
+    for current, directories, names in os.walk(root):
+        directories[:] = [name for name in directories if name != ".git"]
+        for name in names:
+            full_path = os.path.join(current, name)
+            files.append(os.path.relpath(full_path, root).replace(os.sep, "/"))
+    return sorted(files)
+
+
+def _snapshot_upstream(root: str) -> dict:
+    snapshot = {}
+    for relative_path in _walk_files(root):
+        full_path = os.path.join(root, relative_path)
+        snapshot[relative_path] = {
+            "sha256": _sha256_file(full_path),
+            "size": os.path.getsize(full_path),
+        }
+    return snapshot
+
+
+def _verify_upstream_preserved(root: str, snapshot: dict) -> tuple[list, list]:
+    preserved, clobbered = [], []
+    for relative_path, metadata in snapshot.items():
+        if relative_path in _AGENT_MANAGED_FILES:
+            continue
+        full_path = os.path.join(root, relative_path)
+        if not os.path.exists(full_path):
+            clobbered.append({"path": relative_path, "reason": "deleted"})
+        elif _sha256_file(full_path) != metadata["sha256"]:
+            clobbered.append({"path": relative_path, "reason": "modified"})
+        else:
+            preserved.append(relative_path)
+    return preserved, clobbered
+
+
+def _restore_clobbered(root: str, snapshot: dict, clobbered: list,
+                       backup_root: str) -> int:
+    del snapshot
+    restored = 0
+    for record in clobbered:
+        relative_path = record["path"]
+        backup_path = os.path.join(backup_root, relative_path)
+        target_path = os.path.join(root, relative_path)
+        if not os.path.exists(backup_path):
+            continue
+        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+        shutil.copy2(backup_path, target_path)
+        restored += 1
+    return restored
+
+
+def _infer_agent_name(filename: str, path: str) -> str:
+    try:
+        with open(path, encoding="utf-8") as source:
+            match = re.search(
+                r'"name":\s*"([A-Za-z][A-Za-z0-9_-]*)"', source.read()
+            )
+        if match:
+            return match.group(1)
+    except OSError:
+        pass
+    stem = filename[:-3].removesuffix("_agent")
+    return "".join(part.capitalize() for part in stem.split("_") if part) + "Agent"
+
+
+def _build_rar_index(base: str, owner: str, repo: str, kind: str) -> dict:
+    entries = []
+    agents_dir = os.path.join(base, "agents")
+    if os.path.isdir(agents_dir):
+        for filename in sorted(os.listdir(agents_dir)):
+            if not filename.endswith(".py"):
+                continue
+            path = os.path.join(agents_dir, filename)
+            entries.append({
+                "kind": "agent",
+                "name": _infer_agent_name(filename, path),
+                "file": f"agents/{filename}",
+                "raw_url": (
+                    f"https://raw.githubusercontent.com/{owner}/{repo}/main/"
+                    f"agents/{filename}"
+                ),
+                "sha256": _sha256_file(path),
+                "schema": "rapp-agent/1.0",
+            })
+    return {
+        "schema": "rapp-rar-index/1.0",
+        "name": repo,
+        "rar_for": f"{owner}/{repo}",
+        "version": "1.0",
+        "created_at": _now_iso(),
+        "kind": kind,
+        "required_for_participation": entries,
+        "optional_for_participation": [],
+        "kernel_base_included": [],
+        "verification": {"schema": "rapp-rar-manifest/1.0", "scheme": "sha256"},
+    }
+
+
+def _build_scaffolding(workspace: str, *, gh_user: str, repo_name: str,
+                       neighborhood_name: str, display_name: str, kind: str,
+                       upstream_repo: str, upstream_commit: str,
+                       agent_files: dict[str, bytes] | None = None,
+                       graft_path: str = "") -> dict:
+    """Write minimum neighborhood scaffolding without replacing existing files."""
+    written, skipped = [], []
+    base = os.path.join(workspace, graft_path) if graft_path else workspace
+    os.makedirs(base, exist_ok=True)
+
+    def write_if_absent(relative_path: str, content: str | bytes) -> bool:
+        target = os.path.join(base, relative_path)
+        reported_path = f"{graft_path}/{relative_path}" if graft_path else relative_path
+        if os.path.exists(target):
+            skipped.append({"path": reported_path, "reason": "already_in_upstream"})
+            return False
+        os.makedirs(os.path.dirname(target) or base, exist_ok=True)
+        if isinstance(content, bytes):
+            with open(target, "wb") as destination:
+                destination.write(content)
+        else:
+            with open(target, "w", encoding="utf-8") as destination:
+                destination.write(content)
+        written.append({"path": reported_path})
+        return True
+
+    rappid = (
+        f"rappid:v2:{kind}:@{gh_user}/{repo_name}:{uuid.uuid4().hex}"
+        f"@github.com/{gh_user}/{repo_name}"
     )
-except ImportError:
-    from graft_neighborhood_agent import (
-        _build_scaffolding, _snapshot_upstream, _verify_upstream_preserved,
-        _restore_clobbered, _gh_fork_clone, _now_iso, _run, _sha256_file,
-        SPECIES_ROOT_RAPPID,
+    grafted_onto = {
+        "upstream_repo": upstream_repo,
+        "upstream_url": f"https://github.com/{upstream_repo}",
+        "upstream_commit": upstream_commit,
+        "graft_mode": "additive_overlay",
+        "graft_path": graft_path or "(root)",
+        "grafted_at": _now_iso(),
+        "bond_kind": "graft",
+    }
+    write_if_absent("rappid.json", json.dumps({
+        "schema": "rapp-rappid/2.0",
+        "rappid": rappid,
+        "kind": kind,
+        "name": neighborhood_name,
+        "display_name": display_name,
+        "github": f"https://github.com/{gh_user}/{repo_name}",
+        "url": f"https://{gh_user}.github.io/{repo_name}",
+        "parent_rappid": SPECIES_ROOT_RAPPID,
+        "parent_repo": "https://github.com/kody-w/RAPP",
+        "planted_by": gh_user,
+        "planted_at": _now_iso(),
+        "kernel_version": "0.6.0",
+        "grafted_onto": grafted_onto,
+    }, indent=2) + "\n")
+    write_if_absent("neighborhood.json", json.dumps({
+        "schema": "rapp-neighborhood/1.0",
+        "name": neighborhood_name,
+        "display_name": display_name,
+        "kind": kind,
+        "visibility": "public",
+        "neighborhood_rappid": rappid,
+        "gate_repo": f"{gh_user}/{repo_name}",
+        "gate_url": f"https://{gh_user}.github.io/{repo_name}/",
+        "members_path": "members.json",
+        "join_via": "public_link",
+        "rar_index_path": "rar/index.json",
+        "grafted_onto": grafted_onto,
+    }, indent=2) + "\n")
+    write_if_absent("soul.md", (
+        f"# {display_name} — Soul\n\n"
+        f"You are **{display_name}**, a RAPP neighborhood layered additively "
+        f"on {upstream_repo}. Preserve the upstream and its identity.\n"
+    ))
+    write_if_absent("card.json", json.dumps({
+        "schema": "rapp-card/1.0",
+        "title": display_name,
+        "type_line": f"Neighborhood — Graft of {upstream_repo}",
+        "abilities": [{"kw": "Bond", "text": "Additive overlay; upstream preserved."}],
+    }, indent=2) + "\n")
+    write_if_absent("members.json", json.dumps({
+        "schema": "rapp-neighborhood-members/1.0",
+        "neighborhood": f"{gh_user}/{repo_name}",
+        "updated_at": _now_iso(),
+        "members": [{"rappid": SPECIES_ROOT_RAPPID, "github": gh_user,
+                     "role": "operator", "joined_at": _now_iso()}],
+        "open_to_anyone": True,
+    }, indent=2) + "\n")
+    write_if_absent(".nojekyll", "")
+
+    for relative_path, content in (agent_files or {}).items():
+        write_if_absent(relative_path, content)
+
+    rar_path = os.path.join(base, "rar", "index.json")
+    if os.path.exists(rar_path):
+        reported = f"{graft_path}/rar/index.json" if graft_path else "rar/index.json"
+        skipped.append({"path": reported, "reason": "already_in_upstream"})
+    else:
+        write_if_absent(
+            "rar/index.json",
+            json.dumps(_build_rar_index(base, gh_user, repo_name, kind), indent=2) + "\n",
+        )
+    return {"written": written, "skipped": skipped, "rappid": rappid}
+
+
+def _gh_fork_clone(upstream: str, destination: str) -> tuple[str, str]:
+    status, stdout, stderr = _run(
+        ["gh", "repo", "fork", upstream, "--clone=false"], check=False
     )
+    if status != 0 and "already exists" not in (stdout + stderr).lower():
+        raise RuntimeError(f"gh repo fork failed: {stderr or stdout}")
+    _, login, _ = _run(["gh", "api", "user", "--jq", ".login"])
+    fork = f"{login.strip() or 'anon'}/{upstream.split('/')[-1]}"
+    _run(["git", "clone", "--depth", "1", f"https://github.com/{fork}.git", destination])
+    _, head, _ = _run(["git", "-C", destination, "rev-parse", "HEAD"])
+    return fork, head.strip()
 
 
 _LAUNCH_RESULT_SCHEMA = "rapp-launch-result/1.0"
@@ -436,14 +673,14 @@ class LaunchToPublicAgent(BasicAgent):
 
             fingerprint_path = os.path.join(data_dir, "launch_fingerprint.json")
             if not os.path.exists(fingerprint_path):
-                with open(fingerprint_path, "w") as f:
+                with open(fingerprint_path, "w", encoding="utf-8") as f:
                     json.dump(fingerprint, f, indent=2)
                     f.write("\n")
                 scaffold["written"].append({"path": "data/launch_fingerprint.json"})
 
             cont_path = os.path.join(workspace, "LAUNCH_CONTINUATION.md")
             if not os.path.exists(cont_path):
-                with open(cont_path, "w") as f:
+                with open(cont_path, "w", encoding="utf-8") as f:
                     f.write(continuation_md)
                 scaffold["written"].append({"path": "LAUNCH_CONTINUATION.md"})
 
@@ -480,7 +717,7 @@ class LaunchToPublicAgent(BasicAgent):
                     "note": "Local brainstem snapshot launched as public repo handoff (rapp-launch-result/1.0).",
                 }
                 bonds["events"].append(bond_event)
-                with open(bonds_path, "w") as f:
+                with open(bonds_path, "w", encoding="utf-8") as f:
                     json.dump(bonds, f, indent=2)
                     f.write("\n")
 

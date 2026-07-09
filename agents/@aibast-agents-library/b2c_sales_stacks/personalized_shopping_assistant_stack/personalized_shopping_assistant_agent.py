@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_shopping_assistant",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Personalized Shopping Assistant Agent",
     "description": "Personalized retail shopping with product recommendations, style profiling, inventory checks, and outfit building.",
     "author": "AIBAST",
@@ -119,7 +119,7 @@ class PersonalizedShoppingAssistantAgent(BasicAgent):
     """Personalized shopping assistant agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/personalized-shopping-assistant"
+        self.name = "PersonalizedShoppingAssistantAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Personalized Shopping Assistant Agent",

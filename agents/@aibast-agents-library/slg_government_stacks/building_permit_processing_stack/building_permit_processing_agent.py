@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/building_permit_processing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Building Permit Processing Agent",
     "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.",
     "author": "AIBAST",
@@ -202,7 +202,7 @@ class BuildingPermitProcessingAgent(BasicAgent):
     """Building permit processing agent for local government."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/building-permit-processing"
+        self.name = "BuildingPermitProcessingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Building Permit Processing Agent",

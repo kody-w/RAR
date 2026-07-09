@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/omnichannel_engagement",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Omnichannel Engagement Agent",
     "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
     "author": "AIBAST",
@@ -112,7 +112,7 @@ class OmnichannelEngagementAgent(BasicAgent):
     """Omnichannel engagement analytics agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/omnichannel-engagement"
+        self.name = "OmnichannelEngagementAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Omnichannel Engagement Agent",
