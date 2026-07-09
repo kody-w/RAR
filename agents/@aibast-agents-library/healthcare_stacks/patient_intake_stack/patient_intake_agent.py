@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/patient_intake",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Patient Intake Agent",
     "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
     "author": "AIBAST",
@@ -260,7 +260,7 @@ class PatientIntakeAgent(BasicAgent):
     """Patient intake workflow and insurance verification agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/patient-intake"
+        self.name = "PatientIntakeAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

@@ -64,7 +64,7 @@ __manifest__ = {
 - No network calls in `__init__()` — constructors must be fast for agent loading.
 - Secrets via `os.environ.get()`, declared in `requires_env`, never hardcoded.
 - Handle missing env vars gracefully — return an error message, don't crash.
-- `display_name` in manifest must match `self.name` in the agent class.
+- `display_name` is the human label; `self.name` and `metadata["name"]` are the callable tool ID and must match `^[A-Za-z0-9_-]+$`.
 - Imports use CommunityRAPP paths: `from agents.basic_agent import BasicAgent`.
 - Agents should not hardcode AI model names (Azure OpenAI is the platform).
 

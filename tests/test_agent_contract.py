@@ -3,6 +3,7 @@ Contract tests — parametrized over ALL agents.
 Validates manifest, class structure, perform() return type, and standalone execution.
 """
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -57,6 +58,19 @@ def test_instantiation(agent_info):
     assert cls is not None, f"{path.name}: no agent class found"
     instance = cls()
     assert instance is not None
+
+
+def test_runtime_name_is_tool_safe(agent_info):
+    mod, cls, path = agent_info
+    assert cls is not None, f"{path.name}: no agent class found"
+    instance = cls()
+    name = getattr(instance, "name", "")
+    assert re.fullmatch(r"[A-Za-z0-9_-]+", name), (
+        f"{path.name}: runtime name {name!r} is not a valid function name"
+    )
+    assert instance.metadata.get("name", name) == name, (
+        f"{path.name}: metadata name must match runtime name {name!r}"
+    )
 
 
 def test_perform_returns_str(agent_info):

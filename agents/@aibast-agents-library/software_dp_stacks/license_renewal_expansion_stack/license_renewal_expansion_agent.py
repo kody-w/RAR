@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/license_renewal_expansion",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "License Renewal & Expansion Agent",
     "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
     "author": "AIBAST",
@@ -213,7 +213,7 @@ class LicenseRenewalExpansionAgent(BasicAgent):
     """License renewal pipeline and expansion opportunity agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/license-renewal-expansion"
+        self.name = "LicenseRenewalExpansionAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

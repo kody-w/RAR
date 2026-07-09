@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/care_gap_closure",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Care Gap Closure Agent",
     "description": "Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.",
     "author": "AIBAST",
@@ -205,7 +205,7 @@ class CareGapClosureAgent(BasicAgent):
     """HEDIS care gap analysis and outreach management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/care-gap-closure"
+        self.name = "CareGapClosureAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

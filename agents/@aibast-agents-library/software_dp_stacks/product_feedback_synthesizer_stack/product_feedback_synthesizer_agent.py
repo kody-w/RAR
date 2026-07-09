@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_feedback_synthesizer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Product Feedback Synthesizer Agent",
     "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
     "author": "AIBAST",
@@ -221,7 +221,7 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
     """Product feedback synthesis and roadmap impact agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/product-feedback-synthesizer"
+        self.name = "ProductFeedbackSynthesizerAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

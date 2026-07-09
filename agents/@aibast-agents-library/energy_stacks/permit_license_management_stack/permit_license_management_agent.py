@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/permit_license_management",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Permit & License Management Agent",
     "description": "Tracks permits and licenses across energy facilities, manages renewal calendars, identifies compliance gaps, and monitors applications.",
     "author": "AIBAST",
@@ -221,7 +221,7 @@ class PermitLicenseManagementAgent(BasicAgent):
     """Permit and license tracking and compliance management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/permit-license-management"
+        self.name = "PermitLicenseManagementAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

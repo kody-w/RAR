@@ -20,7 +20,7 @@ problems before they reach the registry.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/agent_workbench",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Agent Workbench",
     "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
     "author": "RAPP Core Team",
@@ -78,14 +78,21 @@ TEMPLATES = {
             "dependencies": ["@rapp/basic_agent"],
         }}
 
-        from agents.basic_agent import BasicAgent
+        try:
+            from agents.basic_agent import BasicAgent
+        except ModuleNotFoundError:
+            class BasicAgent:
+                def __init__(self, name, metadata):
+                    self.name = name
+                    self.metadata = metadata
 
 
         class {class_name}(BasicAgent):
             def __init__(self):
-                self.name = "{display_name}"
+                self.name = "{class_name}"
                 self.metadata = {{
                     "name": self.name,
+                    "display_name": "{display_name}",
                     "description": __manifest__["description"],
                     "parameters": {{
                         "type": "object",
@@ -129,14 +136,21 @@ TEMPLATES = {
         import os
         import urllib.request
         import json
-        from agents.basic_agent import BasicAgent
+        try:
+            from agents.basic_agent import BasicAgent
+        except ModuleNotFoundError:
+            class BasicAgent:
+                def __init__(self, name, metadata):
+                    self.name = name
+                    self.metadata = metadata
 
 
         class {class_name}(BasicAgent):
             def __init__(self):
-                self.name = "{display_name}"
+                self.name = "{class_name}"
                 self.metadata = {{
                     "name": self.name,
+                    "display_name": "{display_name}",
                     "description": __manifest__["description"],
                     "parameters": {{
                         "type": "object",

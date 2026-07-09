@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-07T01:07:47.948593+00:00",
+  "generated_at": "2026-07-09T23:21:33.885357+00:00",
   "stats": {
     "total_agents": 199,
     "total_swarms": 82,
@@ -84,6 +84,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
+      "_install_filename": "rar_aibast_agents_library_account_intelligence_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "48010aaae45ac5e099bea276e3b90b10ee9e2e6ab03722f59f423c0d0034cc0c",
@@ -117,6 +118,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator_agent.py",
+      "_install_filename": "rar_aibast_agents_library_account_intelligence_orchestrator_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "1c6940ec3d7f40b4ecd78010bf179cd82cfdd941ebfec06721ae412f0348cf45",
@@ -150,6 +152,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
+      "_install_filename": "rar_aibast_agents_library_action_prioritization_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "747f9933c954f39a2fe3c2d6362c069f760b87d324fd57122e463738e915b862",
@@ -183,6 +186,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
+      "_install_filename": "rar_aibast_agents_library_competitive_intelligence_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "02c4da423c9b8c1fb5fdc0168beaa9d98e044cdf9edcbbfe8b480700b37df010",
@@ -216,6 +220,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_tracking_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "078a548e3195cabb4cbc9b321801aed5de39c8d86ad9e9098f5a293e62e900a3",
@@ -249,6 +254,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
+      "_install_filename": "rar_aibast_agents_library_meeting_prep_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "2cbc7c997ad204220703545c9210025d0e84982aa395cb1b40ec7e73a7da4b65",
@@ -282,6 +288,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
+      "_install_filename": "rar_aibast_agents_library_account_messaging_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "26254ea240db4bdbe8f6c084792d2ea7ff5e25f70312ee4748e4ddfe0fe27217",
@@ -315,6 +322,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
+      "_install_filename": "rar_aibast_agents_library_account_risk_assessment_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "cbad0b7262b8a1262e20919b18e56d148cc6c256477a697d455af50757cac83a",
@@ -348,6 +356,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
+      "_install_filename": "rar_aibast_agents_library_stakeholder_intelligence_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
       "_sha256": "09305d7ab2412a0cfc959ab4cb84ba3d2ae058e3e184801284a4bbfcb57ce8bc",
@@ -381,6 +390,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
+      "_install_filename": "rar_aibast_agents_library_activity_gap_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "1dca5a2e99732f7aadf05fac1f4dbf3dfad0f14855265eaacb9fd16dff4938e8",
@@ -414,6 +424,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_competitor_intel_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "fb0dd6ef0c3cee9ff1c9657e4b5e2f518faf9c1c616bb0ef32935cc3088d6bd8",
@@ -447,6 +458,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_health_score_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "50c16f87ce323c76e9ea7b68debce37f3b6c43bfa7a5ab3ca022db2024c654cc",
@@ -480,6 +492,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_progression_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "13edbd4637754554abee639c9cd38b9d4d97bd443a0eed5768126e762891bf2f",
@@ -513,6 +526,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_risk_assessment_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "908ae5cb4a5997b2e33fa38f92d1444eb88332539a41b0e6871ed88b62454dd5",
@@ -546,6 +560,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py",
+      "_install_filename": "rar_aibast_agents_library_next_best_action_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "4b8883d64823c1492336c6fb03e9b9e891ef03cbcc0415a40b42d494b35b30af",
@@ -579,6 +594,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py",
+      "_install_filename": "rar_aibast_agents_library_pipeline_velocity_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "a92e505ad087a57bf122b4081d0ca6569d480fdfd792457cf36f2f18dca84ef4",
@@ -612,6 +628,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
+      "_install_filename": "rar_aibast_agents_library_revenue_forecast_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "63a6c9d2cfaea366d2deb3f4510a0583dc21785f4ab6e884cf733b76c427885c",
@@ -645,6 +662,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
+      "_install_filename": "rar_aibast_agents_library_deal_stakeholder_engagement_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "86b5a0c9b6a756444273da7c7e6ff7f4c9fc3c3e6756d8da0ef94e3072c86562",
@@ -678,6 +696,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py",
+      "_install_filename": "rar_aibast_agents_library_stalled_deal_detection_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "f29cccc90d4478637e51ee037f58640fd57323d9560eeeaa815ec23767ebfe4a",
@@ -711,6 +730,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py",
+      "_install_filename": "rar_aibast_agents_library_win_probability_agent.py",
       "_stack": "deal_progression",
       "_stack_vertical": "b2b_sales",
       "_sha256": "dcb7cea479296d842963fddb35241918b251e0d7e178e5cb6544610b19033870",
@@ -745,6 +765,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
+      "_install_filename": "rar_aibast_agents_library_proposal_generation_agent.py",
       "_stack": "proposal_generation",
       "_stack_vertical": "b2b_sales",
       "_sha256": "f4a91aeb88ccd7cf7c6aac6ec9eb1fb27356b4bd5934431550ac30f82b33a68e",
@@ -779,6 +800,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py",
+      "_install_filename": "rar_aibast_agents_library_sales_qualification_agent.py",
       "_stack": "sales_qualification",
       "_stack_vertical": "b2b_sales",
       "_sha256": "473f4511b1e897ba8426fa518a67442892454aa22a0868696d235ae148b1eacc",
@@ -812,6 +834,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
+      "_install_filename": "rar_aibast_agents_library_win_loss_analysis_agent.py",
       "_stack": "win_loss_analysis",
       "_stack_vertical": "b2b_sales",
       "_sha256": "ff5df0a149c3539a0c5fb79323c145b2f5e7549a7bf84eb6d5af87bdffd13058",
@@ -827,7 +850,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/cart_abandonment_recovery",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Cart Abandonment Recovery Agent",
       "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
       "author": "AIBAST",
@@ -846,9 +869,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
+      "_install_filename": "rar_aibast_agents_library_cart_abandonment_recovery_agent.py",
       "_stack": "cart_abandonment_recovery",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "493a08a3736139e87c4d0215e52e9738db8588f1637bde2540a47f89f97dd3b5",
+      "_sha256": "1b6a57f3839e21b9bb8c555e617d11f160e8bb71f709b6cfcdfd4b0ff7f99e29",
       "_seed": 3606179690631149846,
       "_size_kb": 13.0,
       "_lines": 289,
@@ -861,7 +885,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/customer_360_speech",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Customer 360 & Speech Agent",
       "description": "Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations.",
       "author": "AIBAST",
@@ -880,11 +904,12 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
+      "_install_filename": "rar_aibast_agents_library_customer_360_speech_agent.py",
       "_stack": "customer_360_speech",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "ee5e50007aec0734879eb5971153e2fdce0c55417c4759593d088eda08b8da62",
+      "_sha256": "64c895216535ec7ea76330e25ab4522af7525666a1557c40778943c12ef45b9d",
       "_seed": 14861492049442254073,
-      "_size_kb": 14.6,
+      "_size_kb": 14.5,
       "_lines": 289,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
@@ -895,7 +920,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/customer_loyalty_rewards",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Customer Loyalty & Rewards Agent",
       "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.",
       "author": "AIBAST",
@@ -914,9 +939,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
+      "_install_filename": "rar_aibast_agents_library_customer_loyalty_rewards_agent.py",
       "_stack": "customer_loyalty_rewards",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "8a5606496641b9afe34413aa26052b13b625f320ef6fb9471b30927b82df733b",
+      "_sha256": "37adbae9012ae7149e1c23b517ef6a9de307df74e85715aca81c33fe93272b7b",
       "_seed": 5195556347500573918,
       "_size_kb": 13.0,
       "_lines": 292,
@@ -929,7 +955,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/omnichannel_engagement",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Omnichannel Engagement Agent",
       "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
       "author": "AIBAST",
@@ -948,9 +974,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
+      "_install_filename": "rar_aibast_agents_library_omnichannel_engagement_agent.py",
       "_stack": "omnichannel_engagement",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "6adb6a370e550cc7e0161088110ca0b5b139c30c0b4978888e184367736c2fbc",
+      "_sha256": "b26c98a39543160d6c7c770d7b54436f529c47068d0d56dade18f319debed893",
       "_seed": 16390491864010865935,
       "_size_kb": 12.9,
       "_lines": 273,
@@ -963,7 +990,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/personalized_shopping_assistant",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Personalized Shopping Assistant Agent",
       "description": "Personalized retail shopping with product recommendations, style profiling, inventory checks, and outfit building.",
       "author": "AIBAST",
@@ -982,9 +1009,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
+      "_install_filename": "rar_aibast_agents_library_personalized_shopping_assistant_agent.py",
       "_stack": "personalized_shopping_assistant",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "1e4dc2f604e7780fc96453ff5dcdf8a42191463bc33ff7a3ed76100e07a0b075",
+      "_sha256": "df352e6bd01c37a71b18908307eb28b8cb49b6dd251c38c524c59fe999b7fe7b",
       "_seed": 12826547131641504102,
       "_size_kb": 13.7,
       "_lines": 266,
@@ -997,7 +1025,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/returns_exchange",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Returns & Exchange Agent",
       "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.",
       "author": "AIBAST",
@@ -1016,11 +1044,12 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
+      "_install_filename": "rar_aibast_agents_library_returns_exchange_agent.py",
       "_stack": "returns_exchange",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "5bba48bb0a5e9ce23c1ba33b27912d9a77c7884caad2524fda5f2571b5159146",
+      "_sha256": "a3e13b8773bee28d867c822c8f131e75238b60788548a46a574f7ff5757dd4ae",
       "_seed": 16427931656570809614,
-      "_size_kb": 15.3,
+      "_size_kb": 15.2,
       "_lines": 331,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
@@ -1031,7 +1060,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/sales_chat",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Sales Chat Agent",
       "description": "Retail sales chat support with product inquiries, availability checks, promotion lookups, and order assistance.",
       "author": "AIBAST",
@@ -1050,9 +1079,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
+      "_install_filename": "rar_aibast_agents_library_sales_chat_agent.py",
       "_stack": "sales_chat",
       "_stack_vertical": "b2c_sales",
-      "_sha256": "04e2302ae41645267a0ea5fc3bf449b4a7b272e6319e16ca2a090132506252ca",
+      "_sha256": "a3859e9ccbfe2b32d6c4b0d623316a3e2845f5fe356412bea55a0f5c16492de1",
       "_seed": 743639680721625695,
       "_size_kb": 14.8,
       "_lines": 360,
@@ -1065,7 +1095,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/asset_maintenance_forecast",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Asset Maintenance Forecast Agent",
       "description": "Predictive maintenance forecasting, asset health monitoring, budget projections, and work order planning for energy infrastructure.",
       "author": "AIBAST",
@@ -1084,9 +1114,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py",
+      "_install_filename": "rar_aibast_agents_library_asset_maintenance_forecast_agent.py",
       "_stack": "asset_maintenance_forecast",
       "_stack_vertical": "energy",
-      "_sha256": "fc250452cba234c50d30a09d7b562c78cf9b68a744128c84a584cc0973ebe3d5",
+      "_sha256": "95082622acb6bbfc630aa616d18dfac0b6a0f4691115f371b3959c92ca705bf1",
       "_seed": 5836169530732982279,
       "_size_kb": 13.3,
       "_lines": 328,
@@ -1099,7 +1130,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/emission_tracking",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Emission Tracking Agent",
       "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.",
       "author": "AIBAST",
@@ -1118,9 +1149,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
+      "_install_filename": "rar_aibast_agents_library_emission_tracking_agent.py",
       "_stack": "emission_tracking",
       "_stack_vertical": "energy",
-      "_sha256": "5df21ade50503f3b0af66bfc859ca0215bd05601a79cae13d5d97bcb1714d297",
+      "_sha256": "b23c91b7b0fd2c7e641bbcdff14358108102ca47bd4d2c02346a6eedffca2930",
       "_seed": 12145677136544149217,
       "_size_kb": 13.8,
       "_lines": 328,
@@ -1133,7 +1165,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/field_service_dispatch",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Field Service Dispatch Agent",
       "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure.",
       "author": "AIBAST",
@@ -1152,9 +1184,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
+      "_install_filename": "rar_aibast_agents_library_field_service_dispatch_agent.py",
       "_stack": "field_service_dispatch",
       "_stack_vertical": "energy",
-      "_sha256": "d1ba77359d14abd4a2cd9191432fce88ce51403b9482c8df03eaddf305c49b33",
+      "_sha256": "d8578f21b751e4285ea3b706249109d2ce4cb594460c232ca95c9b6bc573d4a2",
       "_seed": 5482587288805061290,
       "_size_kb": 14.4,
       "_lines": 369,
@@ -1167,7 +1200,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/permit_license_management",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Permit & License Management Agent",
       "description": "Tracks permits and licenses across energy facilities, manages renewal calendars, identifies compliance gaps, and monitors applications.",
       "author": "AIBAST",
@@ -1186,9 +1219,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
+      "_install_filename": "rar_aibast_agents_library_permit_license_management_agent.py",
       "_stack": "permit_license_management",
       "_stack_vertical": "energy",
-      "_sha256": "c82e515c8e917e2566978d77974b3f8da4be3b32af00ce07124e7c1651d14a86",
+      "_sha256": "6226a2eb7c5c124a7bf1aac6dbf697104c70dedb4fe4722ed3a5a7ed8e594d7a",
       "_seed": 15492855745775155274,
       "_size_kb": 12.9,
       "_lines": 341,
@@ -1201,7 +1235,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/energy_regulatory_reporting",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Energy Regulatory Reporting Agent",
       "description": "Manages regulatory report status, data validation, submission tracking, and audit readiness for EPA, FERC, and state filings.",
       "author": "AIBAST",
@@ -1221,9 +1255,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py",
+      "_install_filename": "rar_aibast_agents_library_energy_regulatory_reporting_agent.py",
       "_stack": "regulatory_reporting",
       "_stack_vertical": "energy",
-      "_sha256": "767fdec6b58cad6ed12663bd2d8704a806b3a6d5386a743ea0ca36d71fcb563c",
+      "_sha256": "ec185d16bfff1c0c91b21fc32162b25b4c99152b6ab40448ae9a776f3ecd95fc",
       "_seed": 8887254288578788668,
       "_size_kb": 12.8,
       "_lines": 326,
@@ -1236,7 +1271,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/acquisition_support",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Acquisition Support Agent",
       "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.",
       "author": "AIBAST",
@@ -1255,9 +1290,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
+      "_install_filename": "rar_aibast_agents_library_acquisition_support_agent.py",
       "_stack": "acquisition_support",
       "_stack_vertical": "federal_government",
-      "_sha256": "cbb68406cd8f076c3e2f1c77710d65378dd80b3305618849a440c4fd412c563a",
+      "_sha256": "209fadf699dafa78d524912aa2af9c2a7fc0405cb69a86ae40ca53212fbb8052",
       "_seed": 5999981279495069821,
       "_size_kb": 16.9,
       "_lines": 398,
@@ -1270,7 +1306,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/federal_grants_oversight",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Federal Grants Oversight Agent",
       "description": "Federal grants monitoring with dashboards, compliance tracking, reporting status, and audit preparation.",
       "author": "AIBAST",
@@ -1289,9 +1325,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
+      "_install_filename": "rar_aibast_agents_library_federal_grants_oversight_agent.py",
       "_stack": "federal_grants_oversight",
       "_stack_vertical": "federal_government",
-      "_sha256": "f9f23f7b5735cf46e2cb1c2ed14af0c2e9a3ea6418ddaa31d0a650bdb92ae80f",
+      "_sha256": "00625db03ec12fb7521af16df4ad5a27bff57c41b5db9fab3390517de96b2975",
       "_seed": 9923268848797892417,
       "_size_kb": 15.1,
       "_lines": 328,
@@ -1304,7 +1341,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/mission_reporting_assistant",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Mission Reporting Assistant Agent",
       "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
       "author": "AIBAST",
@@ -1323,9 +1360,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
+      "_install_filename": "rar_aibast_agents_library_mission_reporting_assistant_agent.py",
       "_stack": "mission_reporting_assistant",
       "_stack_vertical": "federal_government",
-      "_sha256": "e3459b8792513bffd47c56ab5fc10811eb0aec0b4b5f4f81831770b35607c3be",
+      "_sha256": "4d6499b268464decf9da18001da5353c9fa4e002c8c53b59f735eedb782a01d2",
       "_seed": 9239080674509203253,
       "_size_kb": 13.0,
       "_lines": 286,
@@ -1338,7 +1376,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/regulatory_compliance_fed",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Regulatory Compliance (Federal) Agent",
       "description": "Federal regulatory compliance management with FISMA, FedRAMP, and NIST gap analysis, remediation planning, and audit readiness.",
       "author": "AIBAST",
@@ -1358,9 +1396,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
+      "_install_filename": "rar_aibast_agents_library_regulatory_compliance_fed_agent.py",
       "_stack": "regulatory_compliance_fed",
       "_stack_vertical": "federal_government",
-      "_sha256": "555b663ffb8d5573eb8a85493b76a0a4ae17a23149c006c89dd89d244acca6f0",
+      "_sha256": "5174e03fc151223fe284530c945a4d8a2a3497f61cae9ab8f5c7f1c9c1a38cfd",
       "_seed": 16478343906997446426,
       "_size_kb": 14.8,
       "_lines": 290,
@@ -1373,7 +1412,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/workforce_clearance_onboarding",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Workforce Clearance & Onboarding Agent",
       "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.",
       "author": "AIBAST",
@@ -1392,9 +1431,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
+      "_install_filename": "rar_aibast_agents_library_workforce_clearance_onboarding_agent.py",
       "_stack": "workforce_clearance_onboarding",
       "_stack_vertical": "federal_government",
-      "_sha256": "9e1f215d715df6b2cc47594a45d7766ab57017932c09277b1d5e9fe1d69a83e5",
+      "_sha256": "ea08990058b67906aca2a20d85f1f2a1ffdaad020ea4e1d6857dd03b739b3c39",
       "_seed": 15588155065239352323,
       "_size_kb": 14.9,
       "_lines": 338,
@@ -1407,7 +1447,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/claims_processing",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Claims Processing Agent",
       "description": "Insurance claims processing with intake, adjudication review, fraud detection, and settlement recommendations.",
       "author": "AIBAST",
@@ -1426,9 +1466,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_claims_processing_agent.py",
       "_stack": "claims_processing",
       "_stack_vertical": "financial_services",
-      "_sha256": "0b31715d103a446d40c127d03f6fface65aa63f40388240e353413ace1ea5217",
+      "_sha256": "5141de8d823f8d3c0965102ef377516e2a06ac5965f098550435c2348e073351",
       "_seed": 13561102833751435409,
       "_size_kb": 13.9,
       "_lines": 295,
@@ -1441,7 +1482,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/fs_customer_onboarding",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "FS Customer Onboarding Agent",
       "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
       "author": "AIBAST",
@@ -1459,9 +1500,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py",
+      "_install_filename": "rar_aibast_agents_library_fs_customer_onboarding_agent.py",
       "_stack": "customer_onboarding_fs",
       "_stack_vertical": "financial_services",
-      "_sha256": "2a73bc67ba748699e70c67e8ea8da5b296b196203ccd41d66fa2f5ffa1daa58c",
+      "_sha256": "59f1aa6fdd8021f4cdf1b547942314229eaf3a6f57224164fc39e445f6faafc3",
       "_seed": 2012642120884166826,
       "_size_kb": 13.6,
       "_lines": 317,
@@ -1474,7 +1516,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/customer_sentiment_churn",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Customer Sentiment & Churn Agent",
       "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
       "author": "AIBAST",
@@ -1493,9 +1535,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
+      "_install_filename": "rar_aibast_agents_library_customer_sentiment_churn_agent.py",
       "_stack": "customer_sentiment_churn",
       "_stack_vertical": "financial_services",
-      "_sha256": "4c01159068a0389f719941a69988be192606859bbe0f3aa44e02503c4778797c",
+      "_sha256": "9fb0af6a708b9d67b8405a917ccff2ddf4ef6ee9ba2bd2e1093e3e7a2d7c0698",
       "_seed": 12655086543703912626,
       "_size_kb": 15.0,
       "_lines": 327,
@@ -1508,7 +1551,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/financial_advisor_copilot",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Financial Advisor Copilot Agent",
       "description": "Financial advisor support with client reviews, portfolio summaries, recommendation engine, and compliance checks.",
       "author": "AIBAST",
@@ -1526,9 +1569,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
+      "_install_filename": "rar_aibast_agents_library_financial_advisor_copilot_agent.py",
       "_stack": "financial_advisor_copilot",
       "_stack_vertical": "financial_services",
-      "_sha256": "5bb0aae345cee990ef73b98be42f5c463b3a215ffefb610dca4cb837b56e2ae1",
+      "_sha256": "f54b0ca5638401a165ed8ad50f0e942108f20145b0565d3907f5d9b617dedf1d",
       "_seed": 8826999372581053682,
       "_size_kb": 13.2,
       "_lines": 292,
@@ -1541,7 +1585,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/fraud_detection_alert",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Fraud Detection & Alert Agent",
       "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.",
       "author": "AIBAST",
@@ -1560,9 +1604,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
+      "_install_filename": "rar_aibast_agents_library_fraud_detection_alert_agent.py",
       "_stack": "fraud_detection_alert",
       "_stack_vertical": "financial_services",
-      "_sha256": "0c10561b7ecece9c9c5b9be22e5a27c47c5227130c2f4e13307461660f3b346d",
+      "_sha256": "34496e77a2e502233cdacace3aac1077e68961d63d4455d92804364900a63852",
       "_seed": 3404678271836368537,
       "_size_kb": 14.6,
       "_lines": 272,
@@ -1575,7 +1620,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/loan_origination_assistant",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Loan Origination Assistant Agent",
       "description": "Loan origination support with application review, credit analysis, document verification, and decision recommendations.",
       "author": "AIBAST",
@@ -1594,9 +1639,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py",
+      "_install_filename": "rar_aibast_agents_library_loan_origination_assistant_agent.py",
       "_stack": "loan_origination_assistant",
       "_stack_vertical": "financial_services",
-      "_sha256": "f2db2b185c77d3c16d3ae65a206c316ce02922cc70c79d02bdf9de11c44be2c6",
+      "_sha256": "4d1ce1f17b3544ebf0c099f823a5c116a195bd5f6761167d59f97ac2abbb30b1",
       "_seed": 14273408934978795408,
       "_size_kb": 14.0,
       "_lines": 327,
@@ -1609,7 +1655,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/portfolio_rebalancing",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Portfolio Rebalancing Agent",
       "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
       "author": "AIBAST",
@@ -1628,9 +1674,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_portfolio_rebalancing_agent.py",
       "_stack": "portfolio_rebalancing",
       "_stack_vertical": "financial_services",
-      "_sha256": "d09d431617eb48a36ebf61cf8839137aa014206d8b98548f7985214bd1c81275",
+      "_sha256": "ff9ae5ab1d483ddd9aa54936b26673c81f107029e22ad00bc0444eefd162494e",
       "_seed": 6581827105817638564,
       "_size_kb": 14.1,
       "_lines": 306,
@@ -1643,7 +1690,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/fs_regulatory_compliance",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "FS Regulatory Compliance Agent",
       "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
       "author": "AIBAST",
@@ -1663,9 +1710,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
+      "_install_filename": "rar_aibast_agents_library_fs_regulatory_compliance_agent.py",
       "_stack": "regulatory_compliance_fs",
       "_stack_vertical": "financial_services",
-      "_sha256": "f36b9a6fe906f317cc208a21caed0bc5a1c23e908fe53cce9622ebbff23e8faf",
+      "_sha256": "89b601ce8edc9aa13d1e37c011b29884cecebdf2cf6dbd2c41fc20e12ff8c495",
       "_seed": 1477628584621128595,
       "_size_kb": 12.8,
       "_lines": 268,
@@ -1678,7 +1726,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/underwriting_support",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Underwriting Support Agent",
       "description": "Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.",
       "author": "AIBAST",
@@ -1697,9 +1745,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py",
+      "_install_filename": "rar_aibast_agents_library_underwriting_support_agent.py",
       "_stack": "underwriting_support",
       "_stack_vertical": "financial_services",
-      "_sha256": "7ff01ed46cb7fc789bde35a4bee8f623f2002563af540314d1020b8f6306c33d",
+      "_sha256": "16c3c0479aa20ec76d8266fe7f936753ee494b49f765a9d2f1bbd3fa4496d64f",
       "_seed": 18409195487267397654,
       "_size_kb": 14.4,
       "_lines": 329,
@@ -1712,7 +1761,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/wealth_insights_generator",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Wealth Insights Generator Agent",
       "description": "Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.",
       "author": "AIBAST",
@@ -1731,9 +1780,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
+      "_install_filename": "rar_aibast_agents_library_wealth_insights_generator_agent.py",
       "_stack": "wealth_insights_generator",
       "_stack_vertical": "financial_services",
-      "_sha256": "57b74757d5c154a6869f89bf1ba3318d9f406ac56df4a07feb84565bd20dd854",
+      "_sha256": "5d1f061852e3baa9bd0c1b065479bd2008487989a5ab2ceb4838266a542f10ea",
       "_seed": 4746954344674107422,
       "_size_kb": 12.6,
       "_lines": 280,
@@ -1764,6 +1814,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py",
+      "_install_filename": "rar_aibast_agents_library_ai_customer_assistant_agent.py",
       "_stack": "ai_customer_assistant",
       "_stack_vertical": "general",
       "_sha256": "f88706f2bbff01f9d9eccfab6f77f0258e5a4f57bbf8bccbbe3a352e46f139cc",
@@ -1798,6 +1849,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
+      "_install_filename": "rar_aibast_agents_library_general_ask_hr_agent.py",
       "_stack": "ask_hr",
       "_stack_vertical": "general",
       "_sha256": "e2668ee27596aadee685d050d95eeb94369f66442380a33fb72fc121fcea27db",
@@ -1832,6 +1884,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
+      "_install_filename": "rar_aibast_agents_library_bulk_crm_data_generator_agent.py",
       "_stack": "crm_bulk_data_creator",
       "_stack_vertical": "general",
       "_sha256": "9774eb4288d6c6e6c6155427e51378e62d9d34b31d624750b46d33eb93feac92",
@@ -1866,6 +1919,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
+      "_install_filename": "rar_aibast_agents_library_dynamics_365_connector_agent.py",
       "_stack": "crm_bulk_data_creator",
       "_stack_vertical": "general",
       "_sha256": "3ed26759c6e94affd6225df38155f8ce5fe20a8092b3e0e1e9acd67223173c91",
@@ -1899,6 +1953,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
+      "_install_filename": "rar_aibast_agents_library_one_click_crm_intake_agent.py",
       "_stack": "crm_bulk_data_creator",
       "_stack_vertical": "general",
       "_sha256": "2da3039e90aeabf99eaf9b080c144fc8f047c63e9609a5eb8273dd05f8ffad5d",
@@ -1932,6 +1987,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
+      "_install_filename": "rar_aibast_agents_library_cross_selling_agent.py",
       "_stack": "cross_selling_opportunities",
       "_stack_vertical": "general",
       "_sha256": "9af554875375865e69ee71131deb64a4e0505809eca0e78f9443cef13b1f667a",
@@ -1965,6 +2021,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
+      "_install_filename": "rar_aibast_agents_library_customer_360_agent.py",
       "_stack": "customer_360",
       "_stack_vertical": "general",
       "_sha256": "3fa23ccf9158d0892802d65c7987fb56b9737abf548ff12bee7bdb6d7e452271",
@@ -1999,6 +2056,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
+      "_install_filename": "rar_aibast_agents_library_email_drafting_agent.py",
       "_stack": "email_drafting",
       "_stack_vertical": "general",
       "_sha256": "60b946fb5b01b7525d55ac21a78dd4fbebe18a55fc9ba5f7bb052eb9287c57de",
@@ -2033,6 +2091,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
+      "_install_filename": "rar_aibast_agents_library_find_accurate_models_agent.py",
       "_stack": "find_accurate_models",
       "_stack_vertical": "general",
       "_sha256": "c1d4c185ea1f0af5da3c1446b0717990545daf85d94c041f6aa4b97c2df9c470",
@@ -2066,6 +2125,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
+      "_install_filename": "rar_aibast_agents_library_identify_discounts_agent.py",
       "_stack": "identify_discounts",
       "_stack_vertical": "general",
       "_sha256": "8c1d8b3761f43f3955bcc78def6a0c7e98379bab00cf11446a6094ea28495352",
@@ -2100,6 +2160,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py",
+      "_install_filename": "rar_aibast_agents_library_it_ticket_management_agent.py",
       "_stack": "it_ticket_management",
       "_stack_vertical": "general",
       "_sha256": "1fb67a93549856d549d030f41f26e30b2f08bcb2b1116949cd224f49759abcd6",
@@ -2133,6 +2194,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
+      "_install_filename": "rar_aibast_agents_library_procurement_agent.py",
       "_stack": "procurement_agent",
       "_stack_vertical": "general",
       "_sha256": "9a125bbd907c2428bef4d82ec96a0a42d6bba8622d3215596428566b46a7bea1",
@@ -2166,6 +2228,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
+      "_install_filename": "rar_aibast_agents_library_procurement_support_agent.py",
       "_stack": "procurement_support",
       "_stack_vertical": "general",
       "_sha256": "e5981f8efd6223ac8e190cec54f86a753665ac1b03c860f5cacdbd1fa926de79",
@@ -2199,6 +2262,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py",
+      "_install_filename": "rar_aibast_agents_library_product_reference_agent.py",
       "_stack": "product_reference",
       "_stack_vertical": "general",
       "_sha256": "4f5ff6709576d1d8d176b410135603a326b41e8b1ab3ca08dbdc1a30ad2cab48",
@@ -2232,6 +2296,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py",
+      "_install_filename": "rar_aibast_agents_library_sales_coach_agent.py",
       "_stack": "sales_coach",
       "_stack_vertical": "general",
       "_sha256": "5d85d9a34ac1095a69bc8781df5c9ead71c3ada1c8337fc7d8be0b01420d1926",
@@ -2266,6 +2331,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py",
+      "_install_filename": "rar_aibast_agents_library_sales_simulation_agent.py",
       "_stack": "simulation_sales",
       "_stack_vertical": "general",
       "_sha256": "782f7524e8b8f6274563f7da9245d1bc2230b80bfc28b78fec73508f40a57a1b",
@@ -2299,6 +2365,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py",
+      "_install_filename": "rar_aibast_agents_library_speech_to_crm_agent.py",
       "_stack": "speech_to_crm",
       "_stack_vertical": "general",
       "_sha256": "1cc540db9541e2cc83267239db431ab8da13242d0153867de22e164396001ee5",
@@ -2332,6 +2399,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py",
+      "_install_filename": "rar_aibast_agents_library_triage_bot_agent.py",
       "_stack": "triage_bot",
       "_stack_vertical": "general",
       "_sha256": "0eebb7f78a136e188c894262b1650c13df23688bb96ca5cd897a784e4b679716",
@@ -2366,6 +2434,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py",
+      "_install_filename": "rar_aibast_agents_library_voice_to_crm_d365_agent.py",
       "_stack": "voice_to_crm",
       "_stack_vertical": "general",
       "_sha256": "049f1d9560324ca4c4d545c2e840f36da85ee901a733ea2f795106b1d5088fca",
@@ -2399,6 +2468,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
+      "_install_filename": "rar_aibast_agents_library_voice_to_crm_email_agent.py",
       "_stack": "voice_to_crm",
       "_stack_vertical": "general",
       "_sha256": "34a09fd7eb956f63a8a34ca45bbe7218660da9fea6cf7b9c98d66e48c8e07eec",
@@ -2432,6 +2502,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
+      "_install_filename": "rar_aibast_agents_library_sharepoint_document_extractor_agent.py",
       "_stack": "voice_to_crm",
       "_stack_vertical": "general",
       "_sha256": "e7d1b2c541faff9fb2c72302ca05469a889b6a1ddcd33140e2a768bbed38fcfc",
@@ -2465,6 +2536,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
+      "_install_filename": "rar_aibast_agents_library_voice_to_crm_servicenow_agent.py",
       "_stack": "voice_to_crm",
       "_stack_vertical": "general",
       "_sha256": "6504f7a1b9f50812c363b4b916d3948cf08d11d6eff539d8e5985b555457d50b",
@@ -2480,7 +2552,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/care_gap_closure",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Care Gap Closure Agent",
       "description": "Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.",
       "author": "AIBAST",
@@ -2499,9 +2571,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
+      "_install_filename": "rar_aibast_agents_library_care_gap_closure_agent.py",
       "_stack": "care_gap_closure",
       "_stack_vertical": "healthcare",
-      "_sha256": "23cde0d7691d7fde92738dc8cf13e38ca4e9fb86d913d42c1350824325e867ef",
+      "_sha256": "1eb81ce3750ace7d5739aa66da6b474dde007f2f94b54352fe545d03edb2ad62",
       "_seed": 16835577812647426117,
       "_size_kb": 12.7,
       "_lines": 324,
@@ -2514,7 +2587,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/clinical_notes_summarizer",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Clinical Notes Summarizer Agent",
       "description": "Summarizes patient encounters, performs medication reviews, generates problem lists, and produces referral summaries.",
       "author": "AIBAST",
@@ -2533,9 +2606,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py",
+      "_install_filename": "rar_aibast_agents_library_clinical_notes_summarizer_agent.py",
       "_stack": "clinical_notes_summarizer",
       "_stack_vertical": "healthcare",
-      "_sha256": "af02e7077e7df871be4a84ed226f68f6e6e7b701bbe4e107863a21313341734f",
+      "_sha256": "91d55971aabfe5f5d32d7900ecf8f82bb592ed60de6e3c978dae002f1c7c54ca",
       "_seed": 4205376672235267561,
       "_size_kb": 15.8,
       "_lines": 354,
@@ -2548,7 +2622,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/patient_intake",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Patient Intake Agent",
       "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
       "author": "AIBAST",
@@ -2567,9 +2641,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py",
+      "_install_filename": "rar_aibast_agents_library_patient_intake_agent.py",
       "_stack": "patient_intake",
       "_stack_vertical": "healthcare",
-      "_sha256": "1dd1f5b600b4188a839bd9a0a9957577ed40a87004ed07d815e7e7028739f9aa",
+      "_sha256": "4a83a4497f7c084c604a0cbefb27156860ae05acf8765de481a3a056d1561119",
       "_seed": 840299925014852615,
       "_size_kb": 14.0,
       "_lines": 369,
@@ -2582,7 +2657,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/prior_authorization",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Prior Authorization Agent",
       "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
       "author": "AIBAST",
@@ -2601,9 +2676,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
+      "_install_filename": "rar_aibast_agents_library_prior_authorization_agent.py",
       "_stack": "prior_authorization",
       "_stack_vertical": "healthcare",
-      "_sha256": "6ec82bc15d44ac15abcf43deb8c7203f2f59e025ede9d97a3b730538223cb057",
+      "_sha256": "11a2e0c9f41acb5667de0eeac10bc6256fe9c30f77795c15e61b9339209e66fa",
       "_seed": 2707536209626541719,
       "_size_kb": 15.0,
       "_lines": 364,
@@ -2616,7 +2692,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/staff_credentialing",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Staff Credentialing Agent",
       "description": "Manages staff credential tracking, expiration alerts, verification audits, and onboarding checklists for healthcare organizations.",
       "author": "AIBAST",
@@ -2635,9 +2711,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_staff_credentialing_agent.py",
       "_stack": "staff_credentialing",
       "_stack_vertical": "healthcare",
-      "_sha256": "e063015c92e07854e4fdf499d856906711caa48c9951df7c5634cc5b04351069",
+      "_sha256": "a9ecf8c2e65dc2e95e7ca9323efc8140f0b651ac9d0847f7d9a8e0d5e14d622a",
       "_seed": 7498395653551960420,
       "_size_kb": 14.7,
       "_lines": 310,
@@ -2668,6 +2745,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py",
+      "_install_filename": "rar_aibast_agents_library_ask_hr_agent.py",
       "_stack": "ask_hr",
       "_stack_vertical": "human_resources",
       "_sha256": "320ad3d936428f7de7d972178082eb35e50d501375ef457d88f2a31b9fd645b3",
@@ -2701,6 +2779,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
+      "_install_filename": "rar_aibast_agents_library_it_helpdesk_agent.py",
       "_stack": "it_helpdesk",
       "_stack_vertical": "it_management",
       "_sha256": "e9ca3f2340ba138eeb7ca0f844284a66ce8178a67c917589bce02460c3ffc1c7",
@@ -2734,6 +2813,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_inventory_rebalancing_agent.py",
       "_stack": "inventory_rebalancing",
       "_stack_vertical": "manufacturing",
       "_sha256": "39bc781039e2f6a976e574bc44cc9771e8202f166df76eea53ee3745ee395bb6",
@@ -2767,6 +2847,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
+      "_install_filename": "rar_aibast_agents_library_maintenance_scheduling_agent.py",
       "_stack": "maintenance_scheduling",
       "_stack_vertical": "manufacturing",
       "_sha256": "eeb6366bbe100b7780485b55ae1591f7b0e81db404f567b9eaaa85481ba99a7c",
@@ -2800,6 +2881,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
+      "_install_filename": "rar_aibast_agents_library_order_status_communication_agent.py",
       "_stack": "order_status_communication",
       "_stack_vertical": "manufacturing",
       "_sha256": "6e3fe806d078c771887934d5e40bc26524617c8028dce4adf41000e175ede545",
@@ -2833,6 +2915,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
+      "_install_filename": "rar_aibast_agents_library_production_line_optimization_agent.py",
       "_stack": "production_line_optimization",
       "_stack_vertical": "manufacturing",
       "_sha256": "da188215e0b91920acf24fdf0d6479f57b6e070acc1bfd8fe93b049ef2e23b73",
@@ -2866,6 +2949,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
+      "_install_filename": "rar_aibast_agents_library_supplier_risk_monitoring_agent.py",
       "_stack": "supplier_risk_monitoring",
       "_stack_vertical": "manufacturing",
       "_sha256": "54254d32e6fd55d1546832797cd6e2bb120b8c3d045a2615fb1d71cc2ed4c075",
@@ -2899,6 +2983,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
+      "_install_filename": "rar_aibast_agents_library_client_health_score_agent.py",
       "_stack": "client_health_score",
       "_stack_vertical": "professional_services",
       "_sha256": "cc76710d63e8292947016a2b339d5658f4164c8a93cf30bc3d4e0a8225abf867",
@@ -2932,6 +3017,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py",
+      "_install_filename": "rar_aibast_agents_library_contract_risk_review_agent.py",
       "_stack": "contract_risk_review",
       "_stack_vertical": "professional_services",
       "_sha256": "11ee0289b1d47959bbc35f54988c105751e5ad37bd99f70346eca0eed7ad0dab",
@@ -2965,6 +3051,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py",
+      "_install_filename": "rar_aibast_agents_library_proposal_copilot_agent.py",
       "_stack": "proposal_copilot",
       "_stack_vertical": "professional_services",
       "_sha256": "3d7ada0b2628f2f8fef520f3a27589573d72941847de62df17a92785233f7bc3",
@@ -2998,6 +3085,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py",
+      "_install_filename": "rar_aibast_agents_library_resource_utilization_agent.py",
       "_stack": "resource_utilization",
       "_stack_vertical": "professional_services",
       "_sha256": "829086c01ea3c3fac32aefc67d7a9565699adbabedef1ed85229927aad4b76dc",
@@ -3031,6 +3119,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_time_entry_billing_agent.py",
       "_stack": "time_entry_billing",
       "_stack_vertical": "professional_services",
       "_sha256": "937d0c6105813b2d835f1c8d8e8a9d488b165f83223e9d2d23f868f3c0623131",
@@ -3064,6 +3153,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
+      "_install_filename": "rar_aibast_agents_library_inventory_visibility_agent.py",
       "_stack": "inventory_visibility",
       "_stack_vertical": "retail_cpg",
       "_sha256": "64296e65606eaf7c815a5c1e0ab9638a4854184989da3d7fbbc766265ac81e83",
@@ -3097,6 +3187,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_personalized_marketing_agent.py",
       "_stack": "personalized_marketing",
       "_stack_vertical": "retail_cpg",
       "_sha256": "91b190e8e7b78ce8a423072a552562b8d6d50a8e2162ea6d8b912d226711873c",
@@ -3130,6 +3221,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
+      "_install_filename": "rar_aibast_agents_library_returns_complaints_resolution_agent.py",
       "_stack": "returns_complaints_resolution",
       "_stack_vertical": "retail_cpg",
       "_sha256": "a82d2923d78eeee218a61c1b1ba54d09710cecc0c25e0c8f5f77defc706c71ee",
@@ -3163,6 +3255,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
+      "_install_filename": "rar_aibast_agents_library_store_associate_copilot_agent.py",
       "_stack": "store_associate_copilot",
       "_stack_vertical": "retail_cpg",
       "_sha256": "10a6df3dee75901d22e93bed9b81d8e2fa19abd8905bae389a5ceb48043c5921",
@@ -3196,6 +3289,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
+      "_install_filename": "rar_aibast_agents_library_supply_chain_disruption_alert_agent.py",
       "_stack": "supply_chain_disruption_alert",
       "_stack_vertical": "retail_cpg",
       "_sha256": "f82a3b305c4f91e12c770b518af656a21328439027482b8790cdca78f1712d1c",
@@ -3211,7 +3305,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/building_permit_processing",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Building Permit Processing Agent",
       "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.",
       "author": "AIBAST",
@@ -3230,9 +3324,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
+      "_install_filename": "rar_aibast_agents_library_building_permit_processing_agent.py",
       "_stack": "building_permit_processing",
       "_stack_vertical": "slg_government",
-      "_sha256": "10b25609d84be3a1d909641753295b75c1979178adaec483b6c66d0a5905f863",
+      "_sha256": "4c31140052e3c352ad324ac97f41be99422e060f59036a4c5e0a5353eaa38d79",
       "_seed": 12233521075866838081,
       "_size_kb": 14.6,
       "_lines": 349,
@@ -3245,7 +3340,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/citizen_service_request",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Citizen Service Request Agent",
       "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
       "author": "AIBAST",
@@ -3264,9 +3359,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
+      "_install_filename": "rar_aibast_agents_library_citizen_service_request_agent.py",
       "_stack": "citizen_service_request",
       "_stack_vertical": "slg_government",
-      "_sha256": "c7d3ec4ff988173d90118bf2936df4f04a4ac96a0fb6a21d4ad777e6fffaa0a2",
+      "_sha256": "53c83b0a3c8d567e687c2d293bbfca6c906e1323bdf60b03ccdddac60b32fdd4",
       "_seed": 8921174840435288387,
       "_size_kb": 14.6,
       "_lines": 327,
@@ -3279,7 +3375,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/foia_request_assistant",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "FOIA Request Assistant Agent",
       "description": "FOIA request processing support with request analysis, document search, redaction review, and response preparation.",
       "author": "AIBAST",
@@ -3297,11 +3393,12 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py",
+      "_install_filename": "rar_aibast_agents_library_foia_request_assistant_agent.py",
       "_stack": "foia_request_assistant",
       "_stack_vertical": "slg_government",
-      "_sha256": "bc51311c3fc6fd54a3218e0155a2db82a0b21803561c4223e2321603512c8d74",
+      "_sha256": "481358e9189b56e8df0a2b2f1380894cea83cc9a80a2fae669439f23c8c081e9",
       "_seed": 16868928112770562685,
-      "_size_kb": 14.7,
+      "_size_kb": 14.6,
       "_lines": 308,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
@@ -3312,7 +3409,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/slg_grants_management",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "SLG Grants Management Agent",
       "description": "State and local government grants portfolio management with application tracking, reporting calendars, and budget monitoring.",
       "author": "AIBAST",
@@ -3330,9 +3427,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py",
+      "_install_filename": "rar_aibast_agents_library_slg_grants_management_agent.py",
       "_stack": "grants_management",
       "_stack_vertical": "slg_government",
-      "_sha256": "edbba9a78872be3e8612d548e02d663e4f3abc3d2525382108267580aef161a8",
+      "_sha256": "abfdf01d13059e277f0a02e012f07efa186c3cbbc398bfd5db462b30bc549daa",
       "_seed": 11818896142975508918,
       "_size_kb": 12.9,
       "_lines": 307,
@@ -3345,7 +3443,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/utility_billing_assistance",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Utility Billing Assistance Agent",
       "description": "Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.",
       "author": "AIBAST",
@@ -3364,9 +3462,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py",
+      "_install_filename": "rar_aibast_agents_library_utility_billing_assistance_agent.py",
       "_stack": "utility_billing_assistance",
       "_stack_vertical": "slg_government",
-      "_sha256": "2833abff1d04120c2d422d5b12a0111542dca6dee0bbea8d596dd8adf8ad1d2a",
+      "_sha256": "a3b4fb75eaaea8ac07fffbff1c2a586c9f6ea48c105440f34f620cb94dcb16d6",
       "_seed": 1823358465969239878,
       "_size_kb": 16.3,
       "_lines": 372,
@@ -3379,7 +3478,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/software_competitive_intel",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Competitive Intelligence Agent",
       "description": "AI-powered competitive intelligence for SaaS market landscape analysis, feature comparisons, pricing analysis, and threat assessments.",
       "author": "AIBAST",
@@ -3397,9 +3496,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
+      "_install_filename": "rar_aibast_agents_library_software_competitive_intel_agent.py",
       "_stack": "competitive_intel",
       "_stack_vertical": "software_dp",
-      "_sha256": "58b06754918102a4e1006eaeffa8c582fb2ceadbb13d56461b2b9c61ddb73666",
+      "_sha256": "80256ede5b5b26910a34fb6729f2fedfc87db615ab77d6cedb03f458bb0c9f4f",
       "_seed": 3107145353423104918,
       "_size_kb": 15.8,
       "_lines": 421,
@@ -3412,7 +3512,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/software_customer_onboarding",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Customer Onboarding Agent",
       "description": "Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.",
       "author": "AIBAST",
@@ -3430,9 +3530,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py",
+      "_install_filename": "rar_aibast_agents_library_software_customer_onboarding_agent.py",
       "_stack": "customer_onboarding",
       "_stack_vertical": "software_dp",
-      "_sha256": "92cddee1bf1ac865fbf22c04360da73f2b724fd255796054de05a00c9e82513f",
+      "_sha256": "b6b19095e392c0ac3156689880b56113bf837db8f26c5416d5967930b1ed480f",
       "_seed": 9696532239747785842,
       "_size_kb": 14.3,
       "_lines": 379,
@@ -3445,7 +3546,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/license_renewal_expansion",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "License Renewal & Expansion Agent",
       "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
       "author": "AIBAST",
@@ -3464,9 +3565,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
+      "_install_filename": "rar_aibast_agents_library_license_renewal_expansion_agent.py",
       "_stack": "license_renewal_expansion",
       "_stack_vertical": "software_dp",
-      "_sha256": "7cc52cc77603e87f4645999e4529ccd7ca801881128ce91a4be654066f51abbb",
+      "_sha256": "124cfa26236542065c5e3d8d07b778857174409e0cdf63daaf59721b0f634e83",
       "_seed": 7396811422879724128,
       "_size_kb": 13.6,
       "_lines": 351,
@@ -3479,7 +3581,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/product_feedback_synthesizer",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Product Feedback Synthesizer Agent",
       "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
       "author": "AIBAST",
@@ -3498,9 +3600,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
+      "_install_filename": "rar_aibast_agents_library_product_feedback_synthesizer_agent.py",
       "_stack": "product_feedback_synthesizer",
       "_stack_vertical": "software_dp",
-      "_sha256": "09cd824b6e2b11562231b2804bbda08959f91254022574bc798b834e3fee90f6",
+      "_sha256": "b19cbe9b8517b489f149f7798c5c78a51f2cd07b4a680004a6bba67a21566856",
       "_seed": 17606540497672480195,
       "_size_kb": 13.1,
       "_lines": 363,
@@ -3513,7 +3616,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/support_ticket_resolution",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Support Ticket Resolution Agent",
       "description": "Intelligent ticket triage, KB resolution search, escalation routing, and SLA compliance dashboards.",
       "author": "AIBAST",
@@ -3532,9 +3635,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py",
+      "_install_filename": "rar_aibast_agents_library_support_ticket_resolution_agent.py",
       "_stack": "support_ticket_resolution",
       "_stack_vertical": "software_dp",
-      "_sha256": "9b77d44e6a38d8404479f18f82012e6654dbe0e7797092d315d1e8725098adca",
+      "_sha256": "a2a95aad5e26162e604b2f8e65d4a8851cd3dddda527672b38d7b0695deaa922",
       "_seed": 6795368757143024027,
       "_size_kb": 13.1,
       "_lines": 324,
@@ -3569,6 +3673,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@bill/neuron_agent.py",
+      "_install_filename": "rar_bill_neuron_agent.py",
       "_sha256": "6bf5e44870ad56d83816cb330b6eb170a6f637b396f8ce6d2b51f7ab6f5dc275",
       "_seed": 12416670467582209400,
       "_size_kb": 27.7,
@@ -3600,6 +3705,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@borg/borg_agent.py.card",
+      "_install_filename": "rar_borg_borg_agent.py",
       "_sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
       "_seed": 6828785747777692595,
       "_size_kb": 39.7,
@@ -3656,6 +3762,7 @@
       "requires_env": [],
       "example_call": "What are the top 5 stories on Hacker News right now?",
       "_file": "agents/@borg/hacker_news_agent.py",
+      "_install_filename": "rar_borg_hacker_news_agent.py",
       "_sha256": "e83a236ebf1ff5281e3f4630b4da885ace9ea68c1777cf4ebf8879b1954b31bb",
       "_seed": 15428262073888806756,
       "_size_kb": 4.2,
@@ -3686,6 +3793,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/agent_generator_agent.py",
+      "_install_filename": "rar_discreetrappers_agent_generator_agent.py",
       "_sha256": "baa9b92b2ae485007511ef523544a6a2064d4fe3339361b2789ca1e899d01d04",
       "_seed": 9916893050914225492,
       "_size_kb": 47.9,
@@ -3719,6 +3827,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/agent_transpiler_agent.py",
+      "_install_filename": "rar_discreetrappers_agent_transpiler_agent.py",
       "_sha256": "966e2b299ccdd9b57bcb085522f79defac1584dd291c2124fd729f86de5f7388",
       "_seed": 13928955966432878815,
       "_size_kb": 39.1,
@@ -3750,6 +3859,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/architecture_diagram_agent.py",
+      "_install_filename": "rar_discreetrappers_architecture_diagram_agent.py",
       "_sha256": "16d6806f58215a099bd638a22c08640b1d8ea0ce22e319542c437d59ccf963bb",
       "_seed": 16191435701781930066,
       "_size_kb": 38.3,
@@ -3785,6 +3895,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
+      "_install_filename": "rar_discreetrappers_copilot_studio_transpiler_agent.py",
       "_sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
       "_seed": 14025379966502974255,
       "_size_kb": 88.5,
@@ -3820,6 +3931,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/demo_script_generator_agent.py",
+      "_install_filename": "rar_discreetrappers_demo_script_generator_agent.py",
       "_sha256": "d452650e00a71e7ae3c566c0d12b4ecf46e0d7e1d162a5e080f6c253fcf934c2",
       "_seed": 17174429428190159959,
       "_size_kb": 58.4,
@@ -3851,6 +3963,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/dynamics_crud_agent.py",
+      "_install_filename": "rar_discreetrappers_dynamics_crud_agent.py",
       "_sha256": "7829a1d0a0d53506eae7d975e38d37e66cdec790bcb2d8273663937cf710cf4b",
       "_seed": 9628502902113448084,
       "_size_kb": 21.1,
@@ -3881,6 +3994,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/email_drafting_agent.py",
+      "_install_filename": "rar_discreetrappers_email_drafting_agent.py",
       "_sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
       "_seed": 53027766882806255,
       "_size_kb": 6.0,
@@ -3894,7 +4008,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@discreetRappers/powerpoint_generator_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "PowerPointGeneratorV2",
       "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
       "author": "Bill Whalen",
@@ -3912,10 +4026,11 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/powerpoint_generator_agent.py",
-      "_sha256": "cbd34b4863b492b9a367c2dc8ea00bbc07c8803f00b1f035e567276654521250",
+      "_install_filename": "rar_discreetrappers_powerpoint_generator_agent.py",
+      "_sha256": "0f657aa41435693ec40824d734c6e8ba5b8effefc70b810554c327ff3313e465",
       "_seed": 4049171833047104537,
-      "_size_kb": 61.2,
-      "_lines": 1549,
+      "_size_kb": 61.3,
+      "_lines": 1551,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3941,6 +4056,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/project_tracker_agent.py",
+      "_install_filename": "rar_discreetrappers_project_tracker_agent.py",
       "_sha256": "701fe6481c8d3b00c27426e912b659a18da5a358a429b6c9c6fb275a3c1ff244",
       "_seed": 18264010640337544386,
       "_size_kb": 39.1,
@@ -3954,7 +4070,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@discreetRappers/rapp_pipeline_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "RAPP",
       "description": "Full RAPP pipeline \u2014 transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",
       "author": "Bill Whalen",
@@ -3976,10 +4092,11 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/rapp_pipeline_agent.py",
-      "_sha256": "ad8745e98be7491d061f5c5ea49eb25e963241657ab264b07e3533a14cbf7f51",
+      "_install_filename": "rar_discreetrappers_rapp_pipeline_agent.py",
+      "_sha256": "aeff80e396a54cf458177df5264f01989c5de76443ecf527dbcddd415ad3741c",
       "_seed": 3348533564379118675,
-      "_size_kb": 121.0,
-      "_lines": 2984,
+      "_size_kb": 121.5,
+      "_lines": 2999,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4006,6 +4123,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/sales_assistant_agent.py",
+      "_install_filename": "rar_discreetrappers_sales_assistant_agent.py",
       "_sha256": "b4defb076c6e8fdcaa96b1187fffb9840927d383ffef0f513e1d89ea03676bb1",
       "_seed": 2446964785980911795,
       "_size_kb": 26.7,
@@ -4037,6 +4155,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/scripted_demo_agent.py",
+      "_install_filename": "rar_discreetrappers_scripted_demo_agent.py",
       "_sha256": "b59f4e466d8e4b4faa74fe7f878e24770fa0840f0ddfe5a2f2a14afabd31a2db",
       "_seed": 11288900214771561238,
       "_size_kb": 54.2,
@@ -4050,7 +4169,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@discreetRappers/sharepoint_contract_analysis_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "ContractAnalysis",
       "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
       "author": "Bill Whalen",
@@ -4074,10 +4193,11 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
-      "_sha256": "bbe89adb2e1271c1d44004afeffac1f081b0813878bfd949dd6eb0729f2d579e",
+      "_install_filename": "rar_discreetrappers_sharepoint_contract_analysis_agent.py",
+      "_sha256": "fafed8260a060a8da97ba04376958ef7f6eeec730d2a0f33512de3066cd5077d",
       "_seed": 16553900515881791106,
       "_size_kb": 119.9,
-      "_lines": 2468,
+      "_lines": 2470,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4105,6 +4225,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/borg_agent.py.card",
+      "_install_filename": "rar_howardh_borg_agent.py",
       "_sha256": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431",
       "_seed": 6693527250417623987,
       "_size_kb": 39.8,
@@ -4165,6 +4286,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/cardsmith_agent.py",
+      "_install_filename": "rar_howardh_cardsmith_agent.py",
       "_sha256": "c0464d0c97ea5233a6e568b398ab40cd932ef27c39c30251ca0dcf7030c0ea3d",
       "_seed": 2269828708368528044,
       "_size_kb": 32.1,
@@ -4198,6 +4320,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/chief_of_staff_agent.py",
+      "_install_filename": "rar_howardh_chief_of_staff_agent.py",
       "_sha256": "f624281fea118bbe53fc6726d71543985e95c6ddba37affbc2215149da742d63",
       "_seed": 11483753548010627847,
       "_size_kb": 32.5,
@@ -4230,6 +4353,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/markdown_to_slides_agent.py",
+      "_install_filename": "rar_howardh_markdown_to_slides_agent.py",
       "_sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7",
       "_seed": 7287065703655156096,
       "_size_kb": 7.9,
@@ -4264,6 +4388,7 @@
         "@howardh/markdown_to_slides_agent"
       ],
       "_file": "agents/@howardh/prompt_to_video_agent.py",
+      "_install_filename": "rar_howardh_prompt_to_video_agent.py",
       "_sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
       "_seed": 3150888811887483838,
       "_size_kb": 26.3,
@@ -4298,9 +4423,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/recon_agent.py",
-      "_sha256": "8a533821ac5c24f61602d5bc79cf6c2386c5e4d42d0bcb1aaf23e5f7ad866b19",
+      "_install_filename": "rar_howardh_recon_agent.py",
+      "_sha256": "d3a0af564f3696c1ce73184c65a636d20b8c99157c26a122686e2589694185f9",
       "_seed": 12093689657637743141,
-      "_size_kb": 33.0,
+      "_size_kb": 32.3,
       "_lines": 742,
       "_has_card": true,
       "_added_at": "2026-04-07T23:21:37Z",
@@ -4330,9 +4456,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/training_quest_agent.py",
-      "_sha256": "48323d6ee6f1c607585148acc1b331e955e94dc00a42911ab04b1feeb175a4f9",
+      "_install_filename": "rar_howardh_training_quest_agent.py",
+      "_sha256": "670a4be0770e8bf04b63e100c74976de47b96a16dccd45462b1c02536be87fc5",
       "_seed": 737623649666474497,
-      "_size_kb": 46.3,
+      "_size_kb": 45.7,
       "_lines": 689,
       "_has_card": true,
       "_added_at": "2026-04-07T03:12:16Z",
@@ -4364,9 +4491,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/tuftelove_agent.py",
-      "_sha256": "7d12b2cf97c556647e5a29923ebda7aba0d66d23af2b15bb0fe4d3e15d22804f",
+      "_install_filename": "rar_howardh_tuftelove_agent.py",
+      "_sha256": "06473c56121fbfe8995a6a799593d0af7e67b9cf46abcc1496786d5ab6df3111",
       "_seed": 11185514463473186453,
-      "_size_kb": 28.9,
+      "_size_kb": 28.4,
       "_lines": 512,
       "_has_card": true,
       "_added_at": "2026-04-07T18:54:58Z",
@@ -4401,9 +4529,10 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@howardh/vaultmind_agent.py",
-      "_sha256": "ccf70d5e5eae7e36df2b1cab52b9ce2d04e71cc0b3f6d4c1639cf169f97b2368",
+      "_install_filename": "rar_howardh_vaultmind_agent.py",
+      "_sha256": "6bdf9c18afc0abf0c604495a40260eb1eab7b27ff8518720712a892d74902203",
       "_seed": 2730279786962370221,
-      "_size_kb": 149.5,
+      "_size_kb": 146.3,
       "_lines": 3260,
       "_has_card": true,
       "_added_at": "2026-04-08T14:18:36-04:00",
@@ -4441,6 +4570,7 @@
         }
       },
       "_file": "agents/@kody-w/agent_team_agent.py",
+      "_install_filename": "rar_kody_w_agent_team_agent.py",
       "_sha256": "eea276416a24efea8d88eaf177d3a3eb96ca34f86420296df892966139e90bba",
       "_seed": 14143365278193295497,
       "_size_kb": 15.9,
@@ -4454,7 +4584,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/agent_workbench",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Agent Workbench",
       "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
       "author": "RAPP Core Team",
@@ -4473,10 +4603,11 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/agent_workbench_agent.py",
-      "_sha256": "9d4dde96ebc64547fda2fa00703a06ac54892528d3dc20749c77f4c7a42f000e",
+      "_install_filename": "rar_kody_w_agent_workbench_agent.py",
+      "_sha256": "afdb5658f8079d3fa3eca347721b9faa963634d06cc27a72c3bc20b981d8bee2",
       "_seed": 1741744998414297403,
-      "_size_kb": 28.6,
-      "_lines": 723,
+      "_size_kb": 29.2,
+      "_lines": 737,
       "_has_card": true,
       "_added_at": "2026-04-03T16:51:24-04:00",
       "_first_commit_sha": "1ed07b4032fa0413056b942d0bb2fb2db973c7f3",
@@ -4504,6 +4635,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/arena_compete_agent.py",
+      "_install_filename": "rar_kody_w_arena_compete_agent.py",
       "_sha256": "26151ae0f24734018e42f1b07f61fe8a5048ecea3a107be35401e1a0cb60a1e5",
       "_seed": 17854677441894297361,
       "_size_kb": 13.5,
@@ -4562,6 +4694,7 @@
         }
       },
       "_file": "agents/@kody-w/bakeoff_factory_agent.py",
+      "_install_filename": "rar_kody_w_bakeoff_factory_agent.py",
       "_sha256": "0a7705fdbc0b348f8661d8abebfdbeb4d77cfb3d695818507dc20e0d35e9bcac",
       "_seed": 6615244234692637790,
       "_size_kb": 36.3,
@@ -4593,6 +4726,7 @@
         "digital-organism"
       ],
       "_file": "agents/@kody-w/commons_life_agent.py",
+      "_install_filename": "rar_kody_w_commons_life_agent.py",
       "_sha256": "0fc96ce4a5b18853b95a16ec0650a0e736bb58737be5d9a8f243e18313f2c5ad",
       "_seed": 7432950825842517063,
       "_size_kb": 21.2,
@@ -4624,6 +4758,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/commons_show_agent.py",
+      "_install_filename": "rar_kody_w_commons_show_agent.py",
       "_sha256": "e2f4abf410cb0876236fa41eca6d65e236ae37f021f61855e1fde22f8855da90",
       "_seed": 16140774234233908527,
       "_size_kb": 20.4,
@@ -4656,6 +4791,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/connected_solution_agent.py",
+      "_install_filename": "rar_kody_w_connected_solution_agent.py",
       "_sha256": "07f85a7da6626411c14dd4be371752901b30fd17619017a3e1354eae33ca57cf",
       "_seed": 8602904848306551721,
       "_size_kb": 127.7,
@@ -4686,6 +4822,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/context_memory_agent.py",
+      "_install_filename": "rar_kody_w_context_memory_agent.py",
       "_sha256": "eb57af3a67d3229a708a38f196ae1fdf973195b17114b3ba0b82d21596bfac5e",
       "_seed": 10528932706447274464,
       "_size_kb": 8.4,
@@ -4720,6 +4857,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/copilot_studio_deploy_agent.py",
+      "_install_filename": "rar_kody_w_copilot_studio_deploy_agent.py",
       "_sha256": "b22e5a097c595e702b1de6f97f751d1f2f9ac554b1673fd3478c977a843d4aea",
       "_seed": 9376612445613730479,
       "_size_kb": 274.8,
@@ -4759,6 +4897,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/copilot_studio_forge_agent.py",
+      "_install_filename": "rar_kody_w_copilot_studio_forge_agent.py",
       "_sha256": "0c4816820f2b0e54983a77b40d69f44fc26a43bc72a4ebf33508e7a49201d8b5",
       "_seed": 16650526091635598696,
       "_size_kb": 218.5,
@@ -4794,6 +4933,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/copilot_studio_probe_agent.py",
+      "_install_filename": "rar_kody_w_copilot_studio_probe_agent.py",
       "_sha256": "b15b9347026530ec37f56fc702612fa1cd157cdb3dc11e6023609342f2bbbfd0",
       "_seed": 15036022497651468418,
       "_size_kb": 7.1,
@@ -4828,6 +4968,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/deal_desk_agent.py",
+      "_install_filename": "rar_kody_w_deal_desk_agent.py",
       "_sha256": "fb314bbfa7e830ddbb4c1c8a5fb6817db340f2870f00a65035f2bed57f270427",
       "_seed": 15213597586998962419,
       "_size_kb": 10.1,
@@ -4859,6 +5000,7 @@
         "self-improvement"
       ],
       "_file": "agents/@kody-w/double_jump_agent.py",
+      "_install_filename": "rar_kody_w_double_jump_agent.py",
       "_sha256": "dc062bf427a7a569a266a05b51965c8f84f140343f54bdbb6289c92e8ef3e0a1",
       "_seed": 2892501414042020695,
       "_size_kb": 12.7,
@@ -4891,6 +5033,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
+      "_install_filename": "rar_kody_w_bond_rhythm_agent.py",
       "_sha256": "82fe7683c770270a3e89704fc0e38c7d0def0e2d5b9486bfa90275ac608a8d6f",
       "_seed": 7990832610484695196,
       "_size_kb": 15.3,
@@ -4923,6 +5066,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+      "_install_filename": "rar_kody_w_chain_composer_agent.py",
       "_sha256": "e4afd63716b951dabdfd03b23e42cc467adfc8e8bfc6d00db5c32d009a82d144",
       "_seed": 8549923432593898118,
       "_size_kb": 17.1,
@@ -4936,7 +5080,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/launch_to_public_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "Launch to Public",
       "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
       "author": "kody-w",
@@ -4955,10 +5099,11 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
-      "_sha256": "835c9fbece61153785de3efea29e74daec46e9dd598c5a42d1c2661168b5e695",
+      "_install_filename": "rar_kody_w_launch_to_public_agent.py",
+      "_sha256": "de3426908a6e354dbbd17f79251a1cc17a42e9db4c305c067eca627c67570d69",
       "_seed": 13508928694563643882,
-      "_size_kb": 25.0,
-      "_lines": 553,
+      "_size_kb": 34.1,
+      "_lines": 790,
       "_has_card": true,
       "_added_at": "2026-05-09T15:25:17-04:00",
       "_first_commit_sha": "fc3d9ebe286252aa515888e47a878ce37ab41b20",
@@ -4988,6 +5133,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "_install_filename": "rar_kody_w_plant_seed_agent.py",
       "_sha256": "4c69621f93f28ba9d71b9aff350a7f815a5623f397443a1d9c67ce3163dba6c7",
       "_seed": 344646004249601931,
       "_size_kb": 26.3,
@@ -5027,6 +5173,7 @@
         }
       },
       "_file": "agents/@kody-w/estate_factory_agent.py",
+      "_install_filename": "rar_kody_w_estate_factory_agent.py",
       "_sha256": "d590361c5081a566c492f74f463de71676ffe7befcc8d04a19c2293e30472a19",
       "_seed": 13853910019781436128,
       "_size_kb": 36.9,
@@ -5058,6 +5205,7 @@
         "ezsharpen"
       ],
       "_file": "agents/@kody-w/ez_sharpen_agent.py",
+      "_install_filename": "rar_kody_w_ez_sharpen_agent.py",
       "_sha256": "9304b85bef4edb4311e819c1e7608c8a76c5a513002f7e64366b3a032aad9de6",
       "_seed": 7742404069922845596,
       "_size_kb": 25.9,
@@ -5095,6 +5243,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/flight_recorder_agent.py",
+      "_install_filename": "rar_kody_w_flight_recorder_agent.py",
       "_sha256": "e5f8220e25f0bbb6f30e3f32ad8cd0c800728ec6f0ec2fad1eb431ed4d1d19c3",
       "_seed": 7703044877886567080,
       "_size_kb": 22.9,
@@ -5126,6 +5275,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/git_warehouse_agent.py",
+      "_install_filename": "rar_kody_w_git_warehouse_agent.py",
       "_sha256": "12ae992bf2763dd834e14c141e97d3cdf4b63ed6032ac508dbae464018c477ed",
       "_seed": 10089854201187936778,
       "_size_kb": 12.0,
@@ -5156,6 +5306,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/github_agent_library_agent.py",
+      "_install_filename": "rar_kody_w_github_agent_library_agent.py",
       "_sha256": "0bb857cc8b869a9ca340bb1c05f4d35fdc7d1876c368a043a4e5496854a125c6",
       "_seed": 12050547483781643440,
       "_size_kb": 43.7,
@@ -5169,7 +5320,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/hello_world_agent",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "display_name": "Hello World",
       "description": "A friendly greeting agent that says hello.",
       "author": "kody-w",
@@ -5185,7 +5336,8 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/hello_world_agent.py",
-      "_sha256": "9211f1d8f79b2ceb3b1dff309ea9ccef2d655d00259d5bc8ee5029d11bad4634",
+      "_install_filename": "rar_kody_w_hello_world_agent.py",
+      "_sha256": "50d95eede8646233602db5680ec7e8d59d9cbe3d1dd64b3fd4ddb0c5c0196cc9",
       "_seed": 18289705222458979460,
       "_size_kb": 1.2,
       "_lines": 39,
@@ -5216,6 +5368,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/install_rappter_distro_agent.py",
+      "_install_filename": "rar_kody_w_install_rappter_distro_agent.py",
       "_sha256": "bf4c72dd5bedca676382aa50d9eb72a8f1537f48d5ae8ca8b667c943d09b54be",
       "_seed": 17771338021313587479,
       "_size_kb": 36.5,
@@ -5246,6 +5399,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/manage_memory_agent.py",
+      "_install_filename": "rar_kody_w_manage_memory_agent.py",
       "_sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
       "_seed": 2698271581314493436,
       "_size_kb": 10.8,
@@ -5277,6 +5431,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/matrix_arena_agent.py",
+      "_install_filename": "rar_kody_w_matrix_arena_agent.py",
       "_sha256": "548146b76f5b283339e79eebb096674260156b89d85860b73f31f72ad0f6fc5e",
       "_seed": 126488895952662726,
       "_size_kb": 14.2,
@@ -5312,6 +5467,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/microsoft_deck_studio_agent.py",
+      "_install_filename": "rar_kody_w_microsoft_deck_studio_agent.py",
       "_sha256": "ef7f890b0cdd5d1226664c0748ce34a49ac6fba1c8b8a65c83c07ced825005f3",
       "_seed": 5341232827592746981,
       "_size_kb": 38.1,
@@ -5345,6 +5501,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/neuron_swarm_agent.py",
+      "_install_filename": "rar_kody_w_neuron_swarm_agent.py",
       "_sha256": "88da16f36a7df9d803acdae57291e914e5cad12159f6e31747ec97071aa74e18",
       "_seed": 17637454415722852404,
       "_size_kb": 18.8,
@@ -5378,6 +5535,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/perpetual_loop_factory_agent.py",
+      "_install_filename": "rar_kody_w_perpetual_loop_factory_agent.py",
       "_sha256": "682571f1001e37328bcfdd08c0370a521810551df308bcb6e8651d9c4b62f2f5",
       "_seed": 18392963094647028862,
       "_size_kb": 54.5,
@@ -5409,6 +5567,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
+      "_install_filename": "rar_kody_w_predictive_asset_maintenance_intelligence_agent.py",
       "_sha256": "16ef3bc719f7e8f85da3073d8db54c16e09a412ea522c7499380da7ca5f43c15",
       "_seed": 11614853319453454341,
       "_size_kb": 54.2,
@@ -5452,6 +5611,7 @@
         }
       },
       "_file": "agents/@kody-w/rapp_leviathan_factory_agent.py",
+      "_install_filename": "rar_kody_w_rapp_leviathan_factory_agent.py",
       "_sha256": "4d28561081d7048a6b45e656dc53e0339ed18fac062782f46d55b94e63a4b504",
       "_seed": 1006668578169169842,
       "_size_kb": 54.0,
@@ -5484,6 +5644,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/rappter_engine_agent.py",
+      "_install_filename": "rar_kody_w_rappter_engine_agent.py",
       "_sha256": "ca2f7195446656d2f1aa84ac74e03bb601a51a6c977bffa232ce29c9b9cfc22e",
       "_seed": 18299495556831787817,
       "_size_kb": 17.5,
@@ -5516,6 +5677,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/rappterbook_agent.py",
+      "_install_filename": "rar_kody_w_rappterbook_agent.py",
       "_sha256": "7514639e1712d244998c82f301fbd68f75b52127165b06c6fffd39b2c5f879fb",
       "_seed": 52555372028508826,
       "_size_kb": 6.3,
@@ -5548,6 +5710,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/rappterpedia_agent.py",
+      "_install_filename": "rar_kody_w_rappterpedia_agent.py",
       "_sha256": "cffda27cb075353c0ff45b69957d6bc4bb959f36547482b95ff8c48408397ae2",
       "_seed": 16689037603366512672,
       "_size_kb": 24.2,
@@ -5581,6 +5744,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/rar_remote_agent.py",
+      "_install_filename": "rar_kody_w_rar_remote_agent.py",
       "_sha256": "996f4034bdc9616f0953c06c166a559d666b89ae163d902c7a9c83463284b130",
       "_seed": 13515315761908692801,
       "_size_kb": 58.4,
@@ -5617,6 +5781,7 @@
         "@kody-w/rappterbook_agent"
       ],
       "_file": "agents/@kody-w/recon_deck_agent.py",
+      "_install_filename": "rar_kody_w_recon_deck_agent.py",
       "_sha256": "548bd61ca229d054445639a0d7835a1305a5cdcbeb1c812be2aeb2f7b265d4c1",
       "_seed": 2971425136199101038,
       "_size_kb": 7.0,
@@ -5648,6 +5813,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/second_life_agent.py",
+      "_install_filename": "rar_kody_w_second_life_agent.py",
       "_sha256": "508f6d26393717195bc1e35c566ec8f855f6a1e3db89a3f9f5993d330ab43bcf",
       "_seed": 16636480096609908045,
       "_size_kb": 5.6,
@@ -5682,6 +5848,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/transcript2prototype_agent.py",
+      "_install_filename": "rar_kody_w_transcript2prototype_agent.py",
       "_sha256": "c885b4175e646b84b517ab5452372c7fcd2dea7381ffd2ef8a6415e48bfbd30e",
       "_seed": 3263925633160324011,
       "_size_kb": 387.2,
@@ -5715,6 +5882,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@kody-w/twin_egg_hatcher_agent.py",
+      "_install_filename": "rar_kody_w_twin_egg_hatcher_agent.py",
       "_sha256": "aa53c3d325959dfe46094788204fbdb8d210c345763a6e0180b6908fb89496f5",
       "_seed": 8075652905997056003,
       "_size_kb": 32.4,
@@ -5750,6 +5918,7 @@
       ],
       "example_call": "twin me",
       "_file": "agents/@kody-w/twin_me_agent.py",
+      "_install_filename": "rar_kody_w_twin_me_agent.py",
       "_sha256": "5988d1232444265a67138cf88bf885a30a6b7ddf4ef762680e1c68eaabc6592a",
       "_seed": 7154277121291989206,
       "_size_kb": 33.0,
@@ -5785,6 +5954,7 @@
         "domain": "first-person rooftop scenes"
       },
       "_file": "agents/@kody-w/vibe_coding_loop_agent.py",
+      "_install_filename": "rar_kody_w_vibe_coding_loop_agent.py",
       "_sha256": "62d1bf0f0685326bdc0a15292b6000f3ef14dc62492a7b721fc8b2068bd668e1",
       "_seed": 14594474776493433666,
       "_size_kb": 14.8,
@@ -5824,6 +5994,7 @@
       ],
       "example_call": "What emails did I receive from my manager this week?",
       "_file": "agents/@kody-w/workiq_agent.py",
+      "_install_filename": "rar_kody_w_workiq_agent.py",
       "_sha256": "d0683cd1faff9e14310e6408449bee8b643d9cbefed32e591c3a01e59d5c73cd",
       "_seed": 18420763323030972077,
       "_size_kb": 9.5,
@@ -5851,6 +6022,7 @@
       "requires_env": [],
       "dependencies": [],
       "_file": "agents/@rapp/basic_agent.py",
+      "_install_filename": "rar_rapp_basic_agent.py",
       "_sha256": "641fd31cec2ba24c532a289aac91a8fb865ea2cda0b08de56db249462af369aa",
       "_seed": 2282791009467636617,
       "_size_kb": 1.3,
@@ -5892,6 +6064,7 @@
         }
       },
       "_file": "agents/@rapp/commons_post_agent.py",
+      "_install_filename": "rar_rapp_commons_post_agent.py",
       "_sha256": "48179c4a4ffa17f7014e170a66f8a9f6ebdce1b17efccda3358d2cdeb9ce5ba7",
       "_seed": 12680104614663171396,
       "_size_kb": 10.1,
@@ -5924,6 +6097,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/drift_agent.py",
+      "_install_filename": "rar_rapp_drift_agent.py",
       "_sha256": "e454968abad64125ca8fae9ec700a1cba145f2b3b5b3b1073a8ac95f06c2530a",
       "_seed": 2087148261022121127,
       "_size_kb": 36.3,
@@ -5959,6 +6133,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/drift_watcher_agent.py",
+      "_install_filename": "rar_rapp_drift_watcher_agent.py",
       "_sha256": "c43f286cae6dc16a1fdc8ae2372697f7c132615af35839baa866b4b2c546690f",
       "_seed": 17977580014137392578,
       "_size_kb": 20.3,
@@ -5996,6 +6171,7 @@
         }
       },
       "_file": "agents/@rapp/egg_hatcher_agent.py",
+      "_install_filename": "rar_rapp_egg_hatcher_agent.py",
       "_sha256": "bdd2b796aeac17d01a8c675acf8dfcf717aaa29601451aefccf7feffe6b8cf04",
       "_seed": 11747276046260251558,
       "_size_kb": 14.6,
@@ -6041,6 +6217,7 @@
         }
       },
       "_file": "agents/@rapp/estate_outbound_agent.py",
+      "_install_filename": "rar_rapp_estate_outbound_agent.py",
       "_sha256": "e34c853f3b1ae2a6349519436760bd1531ead304ba022d4c7109d143006cb8d9",
       "_seed": 13191466770999423966,
       "_size_kb": 7.0,
@@ -6078,6 +6255,7 @@
         }
       },
       "_file": "agents/@rapp/exec_brief_agent.py",
+      "_install_filename": "rar_rapp_exec_brief_agent.py",
       "_sha256": "e6961038f1b78fa4ef4357967240dadb3265a2038cb2983c9dc954a54fb81108",
       "_seed": 7814512477626309155,
       "_size_kb": 27.1,
@@ -6116,6 +6294,7 @@
         }
       },
       "_file": "agents/@rapp/fleet_commander_agent.py",
+      "_install_filename": "rar_rapp_fleet_commander_agent.py",
       "_sha256": "ad1f3782296fae46bfad91f33e93e4f8c2ca8e288236d01476e7fa6a17c6532c",
       "_seed": 17085564239353749608,
       "_size_kb": 31.2,
@@ -6143,6 +6322,7 @@
       "requires_env": [],
       "example_call": "What are the top 5 stories on Hacker News right now?",
       "_file": "agents/@rapp/hacker_news_agent.py",
+      "_install_filename": "rar_rapp_hacker_news_agent.py",
       "_sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
       "_seed": 12872764946609739620,
       "_size_kb": 4.2,
@@ -6180,6 +6360,7 @@
         }
       },
       "_file": "agents/@rapp/learn_new_agent.py",
+      "_install_filename": "rar_rapp_learn_new_agent.py",
       "_sha256": "0edcecec861b4dce7ad6c06ef77a320d4c8affe51f8a9944b8c77aca0803c21c",
       "_seed": 2538772095262403840,
       "_size_kb": 38.0,
@@ -6226,6 +6407,7 @@
         }
       },
       "_file": "agents/@rapp/moment_factory_agent.py",
+      "_install_filename": "rar_rapp_moment_factory_agent.py",
       "_sha256": "ef274fad5f3cb9f2e5035d2e0463fe0d245be6e52757a9000f6ccece93f78f1a",
       "_seed": 11866480277889622999,
       "_size_kb": 23.7,
@@ -6255,6 +6437,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/ping_agent.py",
+      "_install_filename": "rar_rapp_ping_agent.py",
       "_sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
       "_seed": 5582206618789361866,
       "_size_kb": 1.2,
@@ -6288,6 +6471,7 @@
       ],
       "example_call": "Generate an executive pitch deck for our internal agent-sharing proposal, framed as a contribution that complements existing tooling",
       "_file": "agents/@rapp/pitch_deck_agent.py",
+      "_install_filename": "rar_rapp_pitch_deck_agent.py",
       "_sha256": "ae2d11bc41afefedecf4373a56478bb908d808074d38f09642cafeac646eb9da",
       "_seed": 2887497502809669128,
       "_size_kb": 56.0,
@@ -6324,6 +6508,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/rapp_agent.py",
+      "_install_filename": "rar_rapp_rapp_agent.py",
       "_sha256": "ef930aa057ac5d840f3757bf4577aee5a6cff8a64fea295a01be9a881c3a6ceb",
       "_seed": 6614668339448129688,
       "_size_kb": 166.7,
@@ -6338,7 +6523,7 @@
       "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp_publish_agent",
       "display_name": "RappPublish",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Submit any RAPP artifact (agent, rapplication, sense) to the right store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue in kody-w/RAR / kody-w/RAPP_Store / kody-w/RAPP_Sense_Store respectively. Replaces the rapplication-only publish_to_rapp_store agent with a unified router covering all three peer stores.",
       "author": "RAPP",
       "tags": [
@@ -6362,7 +6547,8 @@
         }
       },
       "_file": "agents/@rapp/rapp_publish_agent.py",
-      "_sha256": "4f895373c2f5d397dfb226f55b4cf2884773ce9a2322cf19e5b4c7537fbada4c",
+      "_install_filename": "rar_rapp_rapp_publish_agent.py",
+      "_sha256": "9ca23545a3ca4f80c19127b202014a46beb60e43a1775cdcdd80bb85483f4b7e",
       "_seed": 1515458409997807504,
       "_size_kb": 20.8,
       "_lines": 505,
@@ -6399,6 +6585,7 @@
         }
       },
       "_file": "agents/@rapp/rapplication_agent.py",
+      "_install_filename": "rar_rapp_rapplication_agent.py",
       "_sha256": "19e35f25df4515cfb7a8fadf6379f79eea8128d7a5a33b701f1c5962faa74abd",
       "_seed": 2918317732439668490,
       "_size_kb": 23.3,
@@ -6432,6 +6619,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/rar_steward_agent.py",
+      "_install_filename": "rar_rapp_rar_steward_agent.py",
       "_sha256": "fa38826bf176d010c6c329b330ec93e0e6ed7b6459cabfd1455bbe4ae39bc14c",
       "_seed": 4423138620711250150,
       "_size_kb": 23.6,
@@ -6448,7 +6636,7 @@
       "display_name": "StoreNavigator",
       "description": "Navigate the kody-w/RAPP_Store catalog. List, search, describe, recommend, get install commands, compare rapplications, browse categories, and explain the spec. Use this whenever the user asks what's in the store, what to install, or how to find a rapp that fits their goal.",
       "author": "RAPP",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "tags": [
         "meta",
         "navigator",
@@ -6469,7 +6657,8 @@
         }
       },
       "_file": "agents/@rapp/store_navigator_agent.py",
-      "_sha256": "fc68e1427a68912c2973ef9afd46aa366be612d479e928926db45838a4aa800a",
+      "_install_filename": "rar_rapp_store_navigator_agent.py",
+      "_sha256": "aba73ca7b1acc55f2b5c893c0cd4ba326bde9e5e67915f5b82974d9a3d31034e",
       "_seed": 12936891603960345553,
       "_size_kb": 16.8,
       "_lines": 428,
@@ -6505,6 +6694,7 @@
         }
       },
       "_file": "agents/@rapp/swarm_factory_agent.py",
+      "_install_filename": "rar_rapp_swarm_factory_agent.py",
       "_sha256": "85069fbb9cdc1fbfe05e567a034f8b4cf0c65a0fd72b546314cf9246232f9fb3",
       "_seed": 10141477066655803476,
       "_size_kb": 40.6,
@@ -6539,6 +6729,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@rapp/twin_agent.py",
+      "_install_filename": "rar_rapp_twin_agent.py",
       "_sha256": "40e008117509434d46035b4f40d665cc2d4b406361c1e5aa86bc3cbc91a6b2d6",
       "_seed": 11907957554557236082,
       "_size_kb": 71.8,
@@ -6566,6 +6757,7 @@
       "requires_env": [],
       "example_call": "Build me a bookmark manager",
       "_file": "agents/@rapp/vibe_builder_agent.py",
+      "_install_filename": "rar_rapp_vibe_builder_agent.py",
       "_sha256": "8fd77f26eacf4f4f22b7b48c06cc22e0fa76af51c2d20bb21a2194cc16de967f",
       "_seed": 18349068374270942526,
       "_size_kb": 20.2,
@@ -6607,6 +6799,7 @@
         }
       },
       "_file": "agents/@rarbookworld/bookfactory_agent.py",
+      "_install_filename": "rar_rarbookworld_bookfactory_agent.py",
       "_sha256": "8f26b6655bda3546d8519e221affaa83dc2c9f5a5cc5859e176e2ccdb74c5bfb",
       "_seed": 8003489415513650359,
       "_size_kb": 37.7,
@@ -6648,6 +6841,7 @@
         }
       },
       "_file": "agents/@rarbookworld/momentfactory_agent.py",
+      "_install_filename": "rar_rarbookworld_momentfactory_agent.py",
       "_sha256": "5b8035ee165ef4b29f3fb8755465271f205baecb451a5ffa6088e2e015ab14b3",
       "_seed": 2634476594081183925,
       "_size_kb": 23.9,
@@ -6682,6 +6876,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@wildhaven/bellows_agent.py",
+      "_install_filename": "rar_wildhaven_bellows_agent.py",
       "_sha256": "70f4a8f70083460a20dbddd6772f151ee5ad25dfba73fe6b8ea03fb071a463d9",
       "_seed": 17618043376132700192,
       "_size_kb": 19.1,
@@ -6695,7 +6890,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@wildhaven/ceo_agent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "CEO Agent",
       "description": "Molly Wildfeuer's digital twin \u2014 the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
       "author": "Wildhaven of America",
@@ -6715,7 +6910,8 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@wildhaven/ceo_agent.py",
-      "_sha256": "252842017521a19e87f2febdaabc624bea8e21aff2165bf0ba89fbf612172374",
+      "_install_filename": "rar_wildhaven_ceo_agent.py",
+      "_sha256": "a1eda394888d243b73354b5ea82d94bb1cbb0c485db0b61984d85d36fc93ca22",
       "_seed": 1463797972131002668,
       "_size_kb": 13.5,
       "_lines": 325,
@@ -6748,6 +6944,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "agents/@wildhaven/penumbra_agent.py",
+      "_install_filename": "rar_wildhaven_penumbra_agent.py",
       "_sha256": "a8c80ca442c4ae68110bc813ff1a02852db560d1d10454f26d8dfb56d22635d3",
       "_seed": 3244902051251893157,
       "_size_kb": 10.6,
@@ -6781,6 +6978,7 @@
       ],
       "type": "stub",
       "_file": "agents/@kody-w/legal_helper_agent.py.stub",
+      "_install_filename": "rar_kody_w_legal_helper_agent.py",
       "_stub_sha256": "c7514d8c0a7e30520dea47a5dd64c310ce5f964182f7e6d7f2b0805c9c90360d",
       "_source": {
         "schema": "rapp-source/1.0",
@@ -6818,6 +7016,7 @@
       ],
       "type": "stub",
       "_file": "agents/@kody-w/private/example_private_agent.py.stub",
+      "_install_filename": "rar_kody_w_example_private_agent.py",
       "_stub_sha256": "011cd86a58e75b0b414ea0114f2cf2c4bfe6e7b52c5c4fa25e76fe97ed21b2b2",
       "_source": {
         "schema": "rapp-source/1.0",
@@ -6859,6 +7058,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "swarms/@rapp/bookfactory_agent.py",
+      "_install_filename": "rar_rapp_bookfactory_agent.py",
       "_sha256": "701beef6a75cee1c79dc3e7f6fb80c3a2652273a59f05526df989911d997fcb4",
       "_seed": 2002538221670117503,
       "_size_kb": 24.5,
@@ -6939,6 +7139,7 @@
         "@rapp/basic_agent"
       ],
       "_file": "swarms/@rapp/momentfactory_agent.py",
+      "_install_filename": "rar_rapp_momentfactory_agent.py",
       "_sha256": "903da182e152e6db55774c8e4cddcdc7fbfbd9115a9bc2a80d802553419b6ca3",
       "_seed": 14612914359979752431,
       "_size_kb": 21.4,
@@ -7134,7 +7335,7 @@
       "agent_files": [
         "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py"
       ],
-      "_size_kb": 14.6,
+      "_size_kb": 14.5,
       "_lines": 289
     },
     {
@@ -7198,7 +7399,7 @@
       "agent_files": [
         "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py"
       ],
-      "_size_kb": 15.3,
+      "_size_kb": 15.2,
       "_lines": 331
     },
     {
@@ -8202,7 +8403,7 @@
       "agent_files": [
         "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py"
       ],
-      "_size_kb": 14.7,
+      "_size_kb": 14.6,
       "_lines": 308
     },
     {

@@ -45,7 +45,7 @@ def _holo_cards():
     global _holo_data
     if _holo_data is None:
         try:
-            data = json.loads(HOLO_CARDS_FILE.read_text())
+            data = json.loads(HOLO_CARDS_FILE.read_text(encoding="utf-8"))
             _holo_data = data if isinstance(data, dict) else {}
         except (FileNotFoundError, json.JSONDecodeError):
             _holo_data = {}
@@ -69,10 +69,18 @@ REQUIRED_MANIFEST_FIELDS = [
 ]
 
 
+def install_filename(name: str) -> str:
+    """Return a flat, collision-safe filename derived from @publisher/slug."""
+    safe = re.sub(r"[^A-Za-z0-9_]+", "_", name.lstrip("@")).strip("_").lower()
+    if not safe.endswith("_agent"):
+        safe += "_agent"
+    return f"rar_{safe}.py"
+
+
 def extract_manifest(py_path: Path) -> dict:
     """Extract __manifest__ dict from a Python file using AST parsing."""
     try:
-        source = py_path.read_text()
+        source = py_path.read_text(encoding="utf-8")
         tree = ast.parse(source)
     except SyntaxError as e:
         print(f"  ⚠ Syntax error in {py_path}: {e}")
@@ -113,10 +121,146 @@ def validate_manifest(py_path: Path, manifest: dict) -> list:
     return errors
 
 
+def _runtime_string(node: ast.AST, manifest: dict, known: dict) -> str | None:
+    """Resolve the small set of string expressions used for agent names."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.Name):
+        return known.get(node.id)
+    if (
+        isinstance(node, ast.Attribute)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == "self"
+    ):
+        return known.get(f"self.{node.attr}")
+    if (
+        isinstance(node, ast.Subscript)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == "__manifest__"
+        and isinstance(node.slice, ast.Constant)
+    ):
+        value = manifest.get(node.slice.value)
+        return value if isinstance(value, str) else None
+    return None
+
+
+def _metadata_name(node: ast.AST, manifest: dict, known: dict) -> str | None:
+    if not isinstance(node, ast.Dict):
+        return None
+    for key_node, value_node in zip(node.keys, node.values):
+        if isinstance(key_node, ast.Constant) and key_node.value == "name":
+            return _runtime_string(value_node, manifest, known)
+    return None
+
+
+def validate_runtime_contract(py_path: Path, manifest: dict) -> list[str]:
+    """AST-check every public top-level agent class without importing code."""
+    try:
+        tree = ast.parse(py_path.read_text(encoding="utf-8"))
+    except (OSError, SyntaxError) as exc:
+        return [f"Cannot inspect runtime contract: {exc}"]
+
+    errors = []
+    agent_classes = [
+        node for node in tree.body
+        if isinstance(node, ast.ClassDef)
+        and node.name != "BasicAgent"
+        and not node.name.startswith("_")
+        and any(
+            isinstance(member, (ast.FunctionDef, ast.AsyncFunctionDef))
+            and member.name == "perform"
+            for member in node.body
+        )
+    ]
+
+    for agent_class in agent_classes:
+        known = {}
+        runtime_names = []
+        metadata_names = []
+
+        def remember_assignment(target: ast.AST, value_node: ast.AST):
+            value = _runtime_string(value_node, manifest, known)
+            if isinstance(target, ast.Name) and value is not None:
+                known[target.id] = value
+                if target.id == "name":
+                    runtime_names.append(value)
+            elif (
+                isinstance(target, ast.Attribute)
+                and isinstance(target.value, ast.Name)
+                and target.value.id == "self"
+                and value is not None
+            ):
+                known[f"self.{target.attr}"] = value
+                if target.attr == "name":
+                    runtime_names.append(value)
+
+            is_metadata = (
+                isinstance(target, ast.Name) and target.id == "metadata"
+            ) or (
+                isinstance(target, ast.Attribute)
+                and isinstance(target.value, ast.Name)
+                and target.value.id == "self"
+                and target.attr == "metadata"
+            )
+            if is_metadata:
+                metadata_name = _metadata_name(value_node, manifest, known)
+                if metadata_name is not None:
+                    metadata_names.append(metadata_name)
+
+        for member in agent_class.body:
+            if isinstance(member, ast.Assign):
+                for target in member.targets:
+                    remember_assignment(target, member.value)
+            if not (
+                isinstance(member, (ast.FunctionDef, ast.AsyncFunctionDef))
+                and member.name == "__init__"
+            ):
+                continue
+            for inner in ast.walk(member):
+                if isinstance(inner, ast.Assign):
+                    for target in inner.targets:
+                        remember_assignment(target, inner.value)
+                if not (
+                    isinstance(inner, ast.Call)
+                    and isinstance(inner.func, ast.Attribute)
+                    and inner.func.attr == "__init__"
+                ):
+                    continue
+                name_arg = inner.args[0] if inner.args else next(
+                    (item.value for item in inner.keywords if item.arg == "name"),
+                    None,
+                )
+                if name_arg is not None:
+                    value = _runtime_string(name_arg, manifest, known)
+                    if value is not None:
+                        runtime_names.append(value)
+
+        runtime_names = list(dict.fromkeys(runtime_names))
+        metadata_names = list(dict.fromkeys(metadata_names))
+        if not runtime_names:
+            errors.append(
+                f"{agent_class.name}: runtime name must be statically resolvable"
+            )
+            continue
+        for runtime_name in runtime_names:
+            if not re.fullmatch(r"[A-Za-z0-9_-]+", runtime_name):
+                errors.append(
+                    f"{agent_class.name}: runtime name {runtime_name!r} must match "
+                    "^[A-Za-z0-9_-]+$"
+                )
+        for metadata_name in metadata_names:
+            if metadata_name not in runtime_names:
+                errors.append(
+                    f"{agent_class.name}: metadata name {metadata_name!r} does not "
+                    f"match runtime name(s) {runtime_names!r}"
+                )
+    return errors
+
+
 def extract_card(py_path: Path) -> dict:
     """Extract __card__ dict from a .py.card file using AST parsing."""
     try:
-        source = py_path.read_text()
+        source = py_path.read_text(encoding="utf-8")
         tree = ast.parse(source)
     except SyntaxError:
         return None
@@ -135,7 +279,7 @@ def extract_card(py_path: Path) -> dict:
 def extract_swarm(py_path: Path) -> dict:
     """Extract __swarm__ dict from a Python file using AST parsing."""
     try:
-        source = py_path.read_text()
+        source = py_path.read_text(encoding="utf-8")
         tree = ast.parse(source)
     except SyntaxError:
         return None
@@ -177,7 +321,7 @@ SUPPORTED_SOURCE_TYPES = {"github_private", "github_public"}
 def extract_source(py_path: Path) -> dict:
     """Extract __source__ dict from a .py.stub file via AST literal_eval."""
     try:
-        source = py_path.read_text()
+        source = py_path.read_text(encoding="utf-8")
         tree = ast.parse(source)
     except SyntaxError as e:
         print(f"  ⚠ Syntax error in {py_path}: {e}")
@@ -226,7 +370,7 @@ def validate_stub_purity(py_path: Path) -> list:
     and __source__ assignments. Any other top-level statement (function,
     class, import, executable code) is rejected — stubs are pure metadata."""
     try:
-        tree = ast.parse(py_path.read_text())
+        tree = ast.parse(py_path.read_text(encoding="utf-8"))
     except SyntaxError as e:
         return [f"Syntax error: {e}"]
 
@@ -269,6 +413,10 @@ SECURITY_ALLOWLIST = {
     "swarms/@rapp/momentfactory_agent.py",          # converged swarm with inlined LLM dispatch
 }
 
+
+def _security_allowlisted(path: Path) -> bool:
+    return path.as_posix() in SECURITY_ALLOWLIST
+
 # Patterns that should never appear in agent code (supply chain defense).
 # Subprocess is intentionally NOT here — wrapping external CLIs is a normal
 # integration pattern. See SECURITY_ALLOWLIST comment above.
@@ -299,9 +447,19 @@ def extract_stack_info(file_path: Path) -> tuple:
     return None, None
 
 
+def canonical_file_bytes(file_path: Path) -> bytes:
+    """Return repository-canonical bytes regardless of checkout line endings."""
+    return file_path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def compute_sha256(file_path: Path) -> str:
-    """Compute SHA256 hash of file contents."""
-    return hashlib.sha256(file_path.read_bytes()).hexdigest()
+    """Compute SHA256 over the LF-normalized bytes GitHub serves."""
+    return hashlib.sha256(canonical_file_bytes(file_path)).hexdigest()
+
+
+def registry_path(file_path: Path) -> str:
+    """Serialize registry paths with URL-compatible separators on every OS."""
+    return file_path.as_posix()
 
 
 def _seed_hash(s: str) -> int:
@@ -326,7 +484,7 @@ def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) ->
 def scan_security(py_path: Path) -> list:
     """Static security scan — returns list of warnings."""
     warnings = []
-    source = py_path.read_text()
+    source = py_path.read_text(encoding="utf-8")
     for pattern, message in DANGEROUS_PATTERNS:
         if re.search(pattern, source):
             warnings.append(f"{py_path}: {message}")
@@ -338,7 +496,7 @@ def check_version_immutability(name: str, version: str, sha256: str, file_path: 
     if not REGISTRY_FILE.exists():
         return None
     try:
-        prev = json.loads(REGISTRY_FILE.read_text())
+        prev = json.loads(REGISTRY_FILE.read_text(encoding="utf-8"))
         for agent in prev.get("agents", []):
             if (agent.get("name") == name
                     and agent.get("version") == version
@@ -439,6 +597,7 @@ def build_registry():
             continue
 
         validation_errors = validate_manifest(py_path, manifest)
+        validation_errors.extend(validate_runtime_contract(py_path, manifest))
         if validation_errors:
             for err in validation_errors:
                 errors.append(f"{py_path}: {err}")
@@ -447,7 +606,7 @@ def build_registry():
         name = manifest["name"]
 
         # .py.card takes priority over .py for the same agent name
-        is_card = str(py_path).endswith('.py.card')
+        is_card = py_path.name.endswith('.py.card')
         if name in seen_names and not is_card:
             continue  # skip .py if .py.card already registered
         if name in seen_names and is_card:
@@ -459,7 +618,7 @@ def build_registry():
         categories.add(manifest.get("category", "uncategorized"))
         
         # Security scan (skip first-party allowlisted agents)
-        if str(py_path) not in SECURITY_ALLOWLIST:
+        if not _security_allowlisted(py_path):
             sec_warnings = scan_security(py_path)
             if sec_warnings:
                 for w in sec_warnings:
@@ -470,14 +629,17 @@ def build_registry():
         sha256 = compute_sha256(py_path)
 
         # Version immutability — reject silent content changes
-        immut_err = check_version_immutability(name, manifest["version"], sha256, str(py_path))
+        serialized_path = registry_path(py_path)
+        immut_err = check_version_immutability(
+            name, manifest["version"], sha256, serialized_path)
         if immut_err:
             errors.append(f"{py_path}: {immut_err}")
             continue
 
         # Add file metadata
-        content = py_path.read_text()
-        manifest["_file"] = str(py_path)
+        content = py_path.read_text(encoding="utf-8")
+        manifest["_file"] = serialized_path
+        manifest["_install_filename"] = install_filename(name)
 
         # Extract stack membership from directory structure
         # (maps AI Agent Templates stacks -> deck groupings)
@@ -493,7 +655,7 @@ def build_registry():
             manifest.get("tags", []),
             manifest.get("dependencies", []),
         )
-        manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
+        manifest["_size_kb"] = round(len(canonical_file_bytes(py_path)) / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = is_card or _has_holo_card(name)
         manifest["_added_at"] = _git_first_committed(py_path)
@@ -553,7 +715,7 @@ def build_registry():
                 continue
 
             # Security scan
-            if str(py_path) not in SECURITY_ALLOWLIST:
+            if not _security_allowlisted(py_path):
                 sec_warnings = scan_security(py_path)
                 if sec_warnings:
                     for w in sec_warnings:
@@ -561,7 +723,7 @@ def build_registry():
                     continue
 
             sha256 = compute_sha256(py_path)
-            content = py_path.read_text()
+            content = py_path.read_text(encoding="utf-8")
 
             name = manifest["name"]
             publisher = name.split("/")[0]
@@ -581,7 +743,8 @@ def build_registry():
                 "quality_tier": manifest.get("quality_tier", "community"),
                 "requires_env": manifest.get("requires_env", []),
                 "dependencies": manifest.get("dependencies", []),
-                "_file": str(py_path),
+                "_file": registry_path(py_path),
+                "_install_filename": install_filename(name),
                 "_sha256": sha256,
                 "_seed": compute_seed(
                     name,
@@ -590,7 +753,7 @@ def build_registry():
                     manifest.get("tags", []),
                     manifest.get("dependencies", []),
                 ),
-                "_size_kb": round(py_path.stat().st_size / 1024, 1),
+                "_size_kb": round(len(canonical_file_bytes(py_path)) / 1024, 1),
                 "_lines": len(content.split('\n')),
                 "_added_at": _git_first_committed(py_path),
                 "_first_commit_sha": _git_first_commit_sha(py_path),
@@ -659,10 +822,11 @@ def build_registry():
         # Hash the stub file itself (not the bytes it points at — those
         # live in the private repo and may not be accessible here).
         stub_sha = compute_sha256(py_path)
-        content = py_path.read_text()
+        content = py_path.read_text(encoding="utf-8")
 
         manifest["type"] = "stub"
-        manifest["_file"] = str(py_path)
+        manifest["_file"] = registry_path(py_path)
+        manifest["_install_filename"] = install_filename(name)
         manifest["_stub_sha256"] = stub_sha
         manifest["_source"] = src
         manifest["_seed"] = compute_seed(
@@ -672,7 +836,7 @@ def build_registry():
             manifest.get("tags", []),
             manifest.get("dependencies", []),
         )
-        manifest["_size_kb"] = round(py_path.stat().st_size / 1024, 1)
+        manifest["_size_kb"] = round(len(canonical_file_bytes(py_path)) / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = _has_holo_card(name)
         manifest["_added_at"] = _git_first_committed(py_path)
@@ -790,7 +954,7 @@ def build_registry():
     config_file = Path("rar.config.json")
     if config_file.exists():
         try:
-            config = json.loads(config_file.read_text())
+            config = json.loads(config_file.read_text(encoding="utf-8"))
             registry["instance"] = {
                 "role": config.get("role", "main"),
                 "owner": config.get("owner", ""),
@@ -800,21 +964,21 @@ def build_registry():
         except (json.JSONDecodeError, KeyError):
             pass
 
-    with open(REGISTRY_FILE, "w") as f:
+    with open(REGISTRY_FILE, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=2)
 
-    print(f"✓ Registry built: {len(agents)} agents from {len(publishers)} publishers")
+    print(f"OK Registry built: {len(agents)} agents from {len(publishers)} publishers")
     print(f"  Swarms: {len(converged_swarms)} converged + {len(stack_swarms)} stacks = {len(all_swarms)} total")
     print(f"  Categories: {', '.join(sorted(categories))}")
     print(f"  Publishers: {', '.join(sorted(publishers))}")
 
     if duplicates:
-        print(f"\n⚠ {len(duplicates)} duplicate display names:")
+        print(f"\nWARNING {len(duplicates)} duplicate display names:")
         for dn, a1, a2 in duplicates:
             print(f"  - \"{dn}\": {a1} vs {a2}")
 
     if errors:
-        print(f"\n⚠ {len(errors)} validation errors:")
+        print(f"\nWARNING {len(errors)} validation errors:")
         for err in errors:
             print(f"  - {err}")
         return 1

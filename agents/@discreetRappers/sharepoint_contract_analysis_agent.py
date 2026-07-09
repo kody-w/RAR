@@ -8,13 +8,15 @@ Supported formats: PDF, DOCX, TXT
 Storage path: contracts/ folder in Azure File Storage
 """
 
+from __future__ import annotations
+
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST — Do not remove. Used by registry builder.
 # ═══════════════════════════════════════════════════════════════
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/sharepoint_contract_analysis_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ContractAnalysis",
     "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
     "author": "Bill Whalen",

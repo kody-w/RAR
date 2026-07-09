@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/loan_origination_assistant",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Loan Origination Assistant Agent",
     "description": "Loan origination support with application review, credit analysis, document verification, and decision recommendations.",
     "author": "AIBAST",
@@ -172,7 +172,7 @@ class LoanOriginationAssistantAgent(BasicAgent):
     """Loan origination assistant agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/loan-origination-assistant"
+        self.name = "LoanOriginationAssistantAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Loan Origination Assistant Agent",

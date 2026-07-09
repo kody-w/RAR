@@ -3,7 +3,7 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/hello_world_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Hello World",
     "description": "A friendly greeting agent that says hello.",
     "author": "kody-w",
@@ -19,7 +19,7 @@ from agents.basic_agent import BasicAgent
 
 class HelloWorldAgent(BasicAgent):
     def __init__(self):
-        self.name = "Hello World"
+        self.name = "HelloWorldAgent"
         self.metadata = {
             "name": self.name,
             "description": "Says hello to the user.",

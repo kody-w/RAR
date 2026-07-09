@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/acquisition_support",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Acquisition Support Agent",
     "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.",
     "author": "AIBAST",
@@ -239,7 +239,7 @@ class AcquisitionSupportAgent(BasicAgent):
     """Federal acquisition support agent for procurement lifecycle management."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/acquisition-support"
+        self.name = "AcquisitionSupportAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Acquisition Support Agent",

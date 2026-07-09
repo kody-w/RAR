@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/staff_credentialing",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Staff Credentialing Agent",
     "description": "Manages staff credential tracking, expiration alerts, verification audits, and onboarding checklists for healthcare organizations.",
     "author": "AIBAST",
@@ -190,7 +190,7 @@ class StaffCredentialingAgent(BasicAgent):
     """Staff credential tracking and compliance management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/staff-credentialing"
+        self.name = "StaffCredentialingAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/federal_grants_oversight",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Federal Grants Oversight Agent",
     "description": "Federal grants monitoring with dashboards, compliance tracking, reporting status, and audit preparation.",
     "author": "AIBAST",
@@ -175,7 +175,7 @@ class FederalGrantsOversightAgent(BasicAgent):
     """Federal grants oversight agent for program monitoring and compliance."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/federal-grants-oversight"
+        self.name = "FederalGrantsOversightAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Federal Grants Oversight Agent",

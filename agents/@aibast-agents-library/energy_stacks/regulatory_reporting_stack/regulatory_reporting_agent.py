@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/energy_regulatory_reporting",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Energy Regulatory Reporting Agent",
     "description": "Manages regulatory report status, data validation, submission tracking, and audit readiness for EPA, FERC, and state filings.",
     "author": "AIBAST",
@@ -204,7 +204,7 @@ class RegulatoryReportingAgent(BasicAgent):
     """Regulatory reporting status and audit readiness agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/energy-regulatory-reporting"
+        self.name = "RegulatoryReportingAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

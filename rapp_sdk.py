@@ -75,17 +75,26 @@ __manifest__ = {
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
-    "dependencies": ["@rapp/basic-agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
-from agents.basic_agent import BasicAgent
+try:
+    from agents.basic_agent import BasicAgent
+except ModuleNotFoundError:
+    class BasicAgent:
+        def __init__(self, name, metadata):
+            self.name = name
+            self.metadata = metadata
 
 
 class __CLASS_NAME__(BasicAgent):
     def __init__(self):
-        self.name = "__DISPLAY_NAME__"
+        self.name = "__CLASS_NAME__"
         self.metadata = {
+            "name": self.name,
+            "display_name": "__DISPLAY_NAME__",
             "description": "__DESCRIPTION__",
+            "parameters": {"type": "object", "properties": {}},
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -107,7 +116,7 @@ if __name__ == "__main__":
 def extract_manifest(path: str) -> dict | None:
     """Extract __manifest__ dict from a Python file using AST parsing (no code execution)."""
     try:
-        source = Path(path).read_text()
+        source = Path(path).read_text(encoding="utf-8")
         tree = ast.parse(source)
     except (SyntaxError, OSError) as e:
         return None
@@ -168,7 +177,7 @@ def validate_manifest(path: str, manifest: dict = None) -> list[str]:
 def extract_card(path: str) -> dict | None:
     """Extract __card__ dict from a Python file using AST parsing."""
     try:
-        source = Path(path).read_text()
+        source = Path(path).read_text(encoding="utf-8")
         tree = ast.parse(source)
     except (SyntaxError, OSError):
         return None
@@ -283,7 +292,31 @@ def run_contract_tests(path: str) -> list[tuple[str, bool, str]]:
     except Exception as e:
         record("instantiation", False, f"Instantiation failed: {e}")
 
-    # 6. perform_returns_str
+    # 6. runtime_name_is_tool_safe
+    try:
+        if agent_instance is not None:
+            import re
+            runtime_name = getattr(agent_instance, "name", "")
+            metadata = getattr(agent_instance, "metadata", {})
+            metadata_name = metadata.get("name", runtime_name) if isinstance(metadata, dict) else None
+            if not re.fullmatch(r"[A-Za-z0-9_-]+", runtime_name):
+                record(
+                    "runtime_name_is_tool_safe", False,
+                    f"Runtime name {runtime_name!r} must match [A-Za-z0-9_-]+",
+                )
+            elif metadata_name != runtime_name:
+                record(
+                    "runtime_name_is_tool_safe", False,
+                    f"metadata name {metadata_name!r} must match runtime name {runtime_name!r}",
+                )
+            else:
+                record("runtime_name_is_tool_safe", True, f"Runtime name '{runtime_name}' is tool-safe")
+        else:
+            record("runtime_name_is_tool_safe", False, "Skipped — no agent instance")
+    except Exception as e:
+        record("runtime_name_is_tool_safe", False, f"Error: {e}")
+
+    # 7. perform_returns_str
     try:
         if agent_instance is not None:
             result = agent_instance.perform()
@@ -296,7 +329,7 @@ def run_contract_tests(path: str) -> list[tuple[str, bool, str]]:
     except Exception as e:
         record("perform_returns_str", False, f"perform() raised: {e}")
 
-    # 7. standalone_execution
+    # 8. standalone_execution
     try:
         proc = subprocess.run(
             [sys.executable, str(agent_path)],
@@ -313,7 +346,7 @@ def run_contract_tests(path: str) -> list[tuple[str, bool, str]]:
     except Exception as e:
         record("standalone_execution", False, f"Error: {e}")
 
-    # 8. has_docstring
+    # 9. has_docstring
     try:
         if agent_module is not None:
             doc = getattr(agent_module, "__doc__", None)
@@ -322,7 +355,7 @@ def run_contract_tests(path: str) -> list[tuple[str, bool, str]]:
             else:
                 record("has_docstring", False, "Module docstring missing or empty")
         else:
-            source = agent_path.read_text()
+            source = agent_path.read_text(encoding="utf-8")
             tree = ast.parse(source)
             doc = ast.get_docstring(tree)
             if doc:
@@ -332,9 +365,9 @@ def run_contract_tests(path: str) -> list[tuple[str, bool, str]]:
     except Exception as e:
         record("has_docstring", False, f"Error: {e}")
 
-    # 9. no_hardcoded_secrets
+    # 10. no_hardcoded_secrets
     try:
-        source = agent_path.read_text()
+        source = agent_path.read_text(encoding="utf-8")
         suspicious_patterns = [
             'API_KEY = "sk-',
             "API_KEY = 'sk-",
@@ -400,7 +433,7 @@ def fetch_registry() -> dict:
     local = Path(__file__).parent / "registry.json"
     if local.exists():
         try:
-            return json.loads(local.read_text())
+            return json.loads(local.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
 
@@ -465,12 +498,16 @@ def install_agent(name: str, output_dir: str = "agents") -> str:
     except Exception as e:
         raise RuntimeError(f"Failed to download agent: {e}")
 
-    # Agents must land FLAT at the agents root — a brainstem hot-loads
-    # agents/<slug>_agent.py, not nested @publisher/... paths. Strip the
-    # namespace and write just the basename.
-    dest = Path(output_dir) / Path(file_path).name
+    # Agents land flat at the agents root. Prefer the registry's package-derived
+    # filename so same-basename agents from different publishers cannot collide.
+    install_name = agent.get("_install_filename")
+    if not install_name:
+        install_name = Path(file_path.replace("\\", "/")).name
+    if Path(install_name).name != install_name or not install_name.endswith("_agent.py"):
+        raise ValueError(f"Invalid _install_filename for '{name}': {install_name!r}")
+    dest = Path(output_dir) / install_name
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(content)
+    dest.write_text(content, encoding="utf-8")
     return str(dest)
 
 
@@ -1117,7 +1154,7 @@ def agents_status() -> dict:
         return {"error": "No local registry.json found. Run build_registry.py first."}
 
     try:
-        registry = json.loads(local.read_text())
+        registry = json.loads(local.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
         return {"error": f"Failed to parse registry.json: {e}"}
 
@@ -1363,7 +1400,7 @@ def submit_agent(path: str, upstream: str = None) -> dict:
     if not agent_path.exists():
         raise FileNotFoundError(f"Agent file not found: {path}")
 
-    code = agent_path.read_text()
+    code = agent_path.read_text(encoding="utf-8")
 
     # Validate first
     manifest = extract_manifest(path)
@@ -1462,7 +1499,7 @@ def scaffold_agent(name: str, output_dir: str = None) -> str:
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(content)
+    output_path.write_text(content, encoding="utf-8")
     return str(output_path)
 
 

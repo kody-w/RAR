@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/prior_authorization",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Prior Authorization Agent",
     "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
     "author": "AIBAST",
@@ -241,7 +241,7 @@ class PriorAuthorizationAgent(BasicAgent):
     """Prior authorization management and clinical criteria checking agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/prior-authorization"
+        self.name = "PriorAuthorizationAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

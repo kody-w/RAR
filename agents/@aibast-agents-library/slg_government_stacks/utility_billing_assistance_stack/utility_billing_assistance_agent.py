@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/utility_billing_assistance",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Utility Billing Assistance Agent",
     "description": "Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.",
     "author": "AIBAST",
@@ -213,7 +213,7 @@ class UtilityBillingAssistanceAgent(BasicAgent):
     """Municipal utility billing assistance agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/utility-billing-assistance"
+        self.name = "UtilityBillingAssistanceAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Utility Billing Assistance Agent",

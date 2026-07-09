@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/wealth_insights_generator",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Wealth Insights Generator Agent",
     "description": "Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.",
     "author": "AIBAST",
@@ -138,7 +138,7 @@ class WealthInsightsGeneratorAgent(BasicAgent):
     """Wealth management insights generator agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/wealth-insights-generator"
+        self.name = "WealthInsightsGeneratorAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Wealth Insights Generator Agent",

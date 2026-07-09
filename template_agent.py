@@ -83,8 +83,15 @@ class YourAgentName(BasicAgent):
     """
 
     def __init__(self):
-        # This MUST match the display_name in __manifest__
-        super().__init__(__manifest__["display_name"], {})
+        # Runtime names become function names, so they must not contain spaces.
+        self.name = "YourAgentName"
+        self.metadata = {
+            "name": self.name,
+            "display_name": __manifest__["display_name"],
+            "description": __manifest__["description"],
+            "parameters": {"type": "object", "properties": {}},
+        }
+        super().__init__(self.name, self.metadata)
 
         # Set up any state your agent needs (no network calls here)
         # Example:

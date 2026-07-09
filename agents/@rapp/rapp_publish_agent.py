@@ -47,7 +47,7 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_publish_agent",
     "display_name": "RappPublish",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": (
         "Submit any RAPP artifact (agent, rapplication, sense) to the right "
         "store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue "
@@ -349,7 +349,7 @@ class RappPublishAgent(BasicAgent):
     def __init__(self):
         self.name = "RappPublish"
         self.metadata = {
-            "name": "rapp_publish",
+            "name": self.name,
             "description": (
                 "Submit any RAPP artifact to its right home. Pass a path to a "
                 "single .py file, a rapplication directory, or a .zip bundle, "
