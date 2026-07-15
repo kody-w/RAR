@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-15T15:33:30.225846+00:00",
+  "generated_at": "2026-07-15T16:05:31.322241+00:00",
   "stats": {
     "total_agents": 200,
     "total_swarms": 82,
@@ -6516,7 +6516,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "RappAgent",
       "description": "The one agent for the whole RAPP ecosystem: identity, doors, local cubbies, shared neighborhoods, eggs, the super-RAR, and zero-commit-risk streaming \u2014 and it knows the spec (action=spec) for navigating it all end to end.",
       "author": "Kody Wildfeuer",
@@ -6540,14 +6540,14 @@
       ],
       "_file": "agents/@rapp/rapp_agent.py",
       "_install_filename": "rar_rapp_rapp_agent.py",
-      "_sha256": "ef930aa057ac5d840f3757bf4577aee5a6cff8a64fea295a01be9a881c3a6ceb",
+      "_sha256": "57d7d7b0e5f6e5bb912d83fa6b9f42cbe97f04a35de5bfad54de4f7858207ed6",
       "_seed": 6614668339448129688,
-      "_size_kb": 166.7,
-      "_lines": 2836,
+      "_size_kb": 166.9,
+      "_lines": 2838,
       "_has_card": true,
       "_added_at": "2026-06-09T21:40:04-04:00",
       "_first_commit_sha": "7b2333f1ee396314f2e926e60282a5904e3fc07c",
-      "_latest_commit_sha": "4602c5186e0ece571f0635f727d38cf01a81fb46",
+      "_latest_commit_sha": "6b70e3ef07f320011b5ee4c0399fb878d4da483b",
       "_card_sha256": "beb294db4c47334149387da1b1ac9214d23121653841174229e9d3c933643ec7"
     },
     {
