@@ -79,7 +79,7 @@ except Exception:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_me",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "TwinMe",
     "description": (
         "Say 'twin me' to pack a generic, PII-stripped digital-twin .egg of this "
@@ -98,7 +98,7 @@ __manifest__ = {
 PACKER = "@kody-w/twin_me"
 EGG_SCHEMA = "brainstem-egg/2.1"
 EGG_SCALE = "twin"
-ORIGIN_RAPPID = "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec"
+ORIGIN_RAPPID = "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9"
 
 # ── what NEVER travels ────────────────────────────────────────────────────────
 EXCLUDE_DIR_NAMES = {
@@ -252,7 +252,11 @@ def _load_rappid(ws: Path, kwargs) -> dict:
         except Exception:
             continue
     owner = (os.environ.get("GITHUB_USER") or os.environ.get("USER") or "operator").lower()
-    h = hashlib.sha256(f"{owner}/twin/{time.time()}".encode()).hexdigest()
+    owner = re.sub(r"[^a-z0-9]+", "-", owner).strip("-") or "operator"
+    # Keyless mint (spec §6.2): Hb("rapp/1:rappid", uuid4) — never a hash of the
+    # name (a name-hash address is the cardinal sin the spec exists to end).
+    import uuid
+    h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
     return {
         "schema": "rapp-rappid/2.0",
         "rappid": f"rappid:@{owner}/twin:{h}",

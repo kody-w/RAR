@@ -83,7 +83,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/transcript2prototype",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Transcript2Prototype",
     "description": ("Transcript -> demo script -> injected M365 demo iframe -> "
                     "generated agent.pys -> local twin run -> live twin run -> "
@@ -5398,9 +5398,15 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
                     f"PORT={port}\nSOUL_PATH=./soul.md\nAGENTS_PATH=./agents\n"
                     f"VOICE_MODE=false\n{model}\n")
         _write_text(os.path.join(tdir, "soul.md"), self._twin_soul(proto))
-        rappid = "rappid:" + hashlib.sha256(f"t2p/{slug}".encode()).hexdigest()[:32]
         parent = _read_json(os.path.join(self._home(kwargs), ".brainstem",
                                          "rappid.json")) or {}
+        # Canonical keyless mint (spec §6.2): Hb("rapp/1:rappid", uuid4). NEVER a
+        # hash of the name/slug — a name-hash address is the cardinal sin. Mint-
+        # once: guarded by the rappid.json existence check just below.
+        import uuid
+        _own = re.sub(r"[^a-z0-9]+", "-", str(parent.get("owner") or "local").lower()).strip("-") or "local"
+        _slug = re.sub(r"[^a-z0-9]+", "-", f"t2p-{slug}".lower()).strip("-") or "twin"
+        rappid = f"rappid:@{_own}/{_slug}:" + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
         if not os.path.isfile(os.path.join(tdir, "rappid.json")):
             _write_json(os.path.join(tdir, "rappid.json"), {
                 "schema": "rapp-rappid/3.0", "rappid": rappid,

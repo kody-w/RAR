@@ -64,7 +64,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/launch_to_public_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Launch to Public",
     "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
     "author": "kody-w",
@@ -85,8 +85,8 @@ __manifest__ = {
 }
 
 SPECIES_ROOT_RAPPID = (
-    "rappid:v2:prototype:@rapp/origin:"
-    "0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP"
+    "rappid:@kody-w/rapp:"
+    "9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9"
 )
 _AGENT_MANAGED_FILES = {"bonds.json"}
 
@@ -244,9 +244,12 @@ def _build_scaffolding(workspace: str, *, gh_user: str, repo_name: str,
         written.append({"path": reported_path})
         return True
 
+    # Canonical keyless mint (spec §6.2): Hb("rapp/1:rappid", uuid4). owner/slug
+    # (@gh_user/repo_name) locate the door; kind lives in the rappid.json record,
+    # never in the string. NEVER a hash of the name (the cardinal sin).
     rappid = (
-        f"rappid:v2:{kind}:@{gh_user}/{repo_name}:{uuid.uuid4().hex}"
-        f"@github.com/{gh_user}/{repo_name}"
+        f"rappid:@{gh_user}/{repo_name}:"
+        + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
     )
     grafted_onto = {
         "upstream_repo": upstream_repo,
