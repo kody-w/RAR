@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-15T16:05:31.322241+00:00",
+  "generated_at": "2026-07-15T17:58:50.377565+00:00",
   "stats": {
     "total_agents": 200,
     "total_swarms": 82,
@@ -4154,6 +4154,10 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
+      "_capabilities": [
+        "exec"
+      ],
+      "_uses_exec": true,
       "_file": "agents/@discreetRappers/scripted_demo_agent.py",
       "_install_filename": "rar_discreetrappers_scripted_demo_agent.py",
       "_sha256": "b59f4e466d8e4b4faa74fe7f878e24770fa0840f0ddfe5a2f2a14afabd31a2db",
@@ -4602,6 +4606,11 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
+      "_capabilities": [
+        "compile_exec",
+        "exec"
+      ],
+      "_uses_exec": true,
       "_file": "agents/@kody-w/agent_workbench_agent.py",
       "_install_filename": "rar_kody_w_agent_workbench_agent.py",
       "_sha256": "afdb5658f8079d3fa3eca347721b9faa963634d06cc27a72c3bc20b981d8bee2",
@@ -5878,6 +5887,11 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
+      "_capabilities": [
+        "compile_exec",
+        "exec"
+      ],
+      "_uses_exec": true,
       "_file": "agents/@kody-w/transcript2prototype_agent.py",
       "_install_filename": "rar_kody_w_transcript2prototype_agent.py",
       "_sha256": "c885b4175e646b84b517ab5452372c7fcd2dea7381ffd2ef8a6415e48bfbd30e",
