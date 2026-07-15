@@ -73,7 +73,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RappAgent",
     "description": ("The one agent for the whole RAPP ecosystem: identity, "
                     "doors, local cubbies, shared neighborhoods, eggs, the "
@@ -494,9 +494,10 @@ _OWNERREPO_RE = re.compile(r"^([A-Za-z0-9][\w.-]*)/([A-Za-z0-9][\w.-]*)$")
 
 def mint_rappid(owner, slug):
     """Eternity format (CONSTITUTION Art. XXXIV.1, locked 2026-06-03):
-    `rappid:@<owner>/<slug>:<64hex>` — full 256-bit SHA-256 of `<owner>/<slug>`.
+    `rappid:@<owner>/<slug>:<64hex>` — tail is Hb("rapp/1:rappid", uuid4), never a name-hash.
     `kind` lives in the record, never the string. We NEVER mint the v2 form."""
-    h = hashlib.sha256(f"{owner}/{slug}".encode()).hexdigest()
+    import uuid
+    h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()  # canonical keyless mint (spec §6.2), never sha256(name)
     return f"rappid:@{owner}/{slug}:{h}"
 
 
@@ -1163,7 +1164,8 @@ class RappAgent(BasicAgent):
         slug = (kwargs.get("slug") or "batcave").strip()
         if not owner:
             return self._env("batcave", "error", error="need owner=<github-login> (or sign into gh).")
-        h = hashlib.sha256(f"{owner}/{slug}".encode()).hexdigest()
+        import uuid
+        h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()  # canonical keyless mint (spec §6.2), never sha256(name)
         rappid = f"rappid:@{owner}/{slug}:{h}"
         what = kwargs.get("what") or "a private place to park cubbies and show what we're cooking"
         out = os.path.join(ctx["home"], ".brainstem", "plant", slug)
