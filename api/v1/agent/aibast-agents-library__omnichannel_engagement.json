@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__omnichannel_engagement",
   "name": "Omnichannel Engagement Agent",
   "rar_name": "@aibast-agents-library/omnichannel_engagement",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/omnichannel_engagement:6adb6a370e550cc7e0161088110ca0b5",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/omnichannel_engagement:cb25554252f4193b40feed5866395dc1f604afc74beed8e2f0d83a5770e1ed82",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 273,
-  "size_kb": 12.9,
-  "sha256": "6adb6a370e550cc7e0161088110ca0b5b139c30c0b4978888e184367736c2fbc",
+  "lines": 384,
+  "size_kb": 19.4,
+  "sha256": "cb25554252f4193b40feed5866395dc1f604afc74beed8e2f0d83a5770e1ed82",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__omnichannel_engagement.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py.card",

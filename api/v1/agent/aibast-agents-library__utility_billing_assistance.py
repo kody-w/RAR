@@ -4,10 +4,17 @@ Utility Billing Assistance Agent — SLG Government Stack
 Provides utility billing support including account inquiries, usage
 analysis, payment plan management, and assistance program eligibility
 for municipal utility departments.
+
+Version 1.1.0 adds evidence-derived smart-meter analysis, leak adjustments,
+eligibility screening, assistance enrollment, repair scheduling, and customer
+resolution capabilities. Existing operations remain unchanged; new write
+operations return deterministic simulated receipts and never modify an
+external system.
 """
 
 import sys
 import os
+import re
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
@@ -15,11 +22,11 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/utility_billing_assistance",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Utility Billing Assistance Agent",
     "description": "Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.",
     "author": "AIBAST",
-    "tags": ["utility", "billing", "water", "payment", "assistance", "municipal"],
+    "tags": ["utility", "billing", "water", "payment", "assistance", "municipal", "leak-detection", "smart-meter"],
     "category": "slg_government",
     "quality_tier": "community",
     "requires_env": [],
@@ -156,6 +163,243 @@ ASSISTANCE_PROGRAMS = {
     },
 }
 
+EVIDENCE_CAPABILITIES = {
+    "smart_meter_analysis": {
+        "display_name": "Smart Meter Anomaly and Leak Analysis",
+        "source_system": "Dynamics 365 CRM and utility meter data",
+        "key_field": "analysis_id",
+        "write": False,
+        "knowledge": [
+            "Compares current consumption with the account's historical baseline.",
+            "Uses hourly smart-meter readings to locate concentrated usage anomalies.",
+            "Identifies leak-consistent patterns and explains the likely cause.",
+        ],
+        "records": [
+            {
+                "analysis_id": "METER-RES-782MD",
+                "account_id": "RES-782MD",
+                "current_usage": "22,000 gallons",
+                "baseline_usage": "4,500 gallons",
+                "increase": "389%",
+                "anomaly_window": "March 10-13; 182 gallons/hour",
+                "diagnosis": "Internal leak, likely toilet flapper",
+            },
+            {
+                "analysis_id": "METER-ACCT-90001",
+                "account_id": "ACCT-90001",
+                "current_usage": "3,200 gallons",
+                "baseline_usage": "3,400 gallons",
+                "increase": "-6%",
+                "anomaly_window": "None",
+                "diagnosis": "Stable usage",
+            },
+            {
+                "analysis_id": "METER-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "current_usage": "11,500 gallons",
+                "baseline_usage": "8,500 gallons",
+                "increase": "35%",
+                "anomaly_window": "Overnight continuous flow",
+                "diagnosis": "Possible fixture leak",
+            },
+        ],
+    },
+    "leak_adjustment": {
+        "display_name": "Municipal Leak Adjustment",
+        "source_system": "Municipal billing system",
+        "key_field": "adjustment_id",
+        "write": True,
+        "knowledge": [
+            "Applies municipal policy consistently to excess consumption.",
+            "Calculates water-only charges, sewer waivers, credits, and the revised bill.",
+            "Creates a full audit trail and states repair-proof requirements.",
+        ],
+        "records": [
+            {
+                "adjustment_id": "ADJ-RES-782MD",
+                "account_id": "RES-782MD",
+                "policy": "Municipal Code 18.42 one-time leak adjustment",
+                "excess_volume": "17,500 gallons",
+                "credit": "$97.80",
+                "new_bill": "$86.70",
+                "condition": "Proof of repair within 30 days",
+            },
+            {
+                "adjustment_id": "ADJ-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "policy": "Residential verified-leak adjustment",
+                "excess_volume": "3,000 gallons",
+                "credit": "$28.35",
+                "new_bill": "$217.45",
+                "condition": "Licensed repair invoice within 30 days",
+            },
+            {
+                "adjustment_id": "ADJ-ACCT-90002",
+                "account_id": "ACCT-90002",
+                "policy": "Commercial anomaly review",
+                "excess_volume": "Pending verification",
+                "credit": "$0.00",
+                "new_bill": "$4,265.90",
+                "condition": "Meter inspection required",
+            },
+        ],
+    },
+    "assistance_eligibility": {
+        "display_name": "Assistance Eligibility Screening",
+        "source_system": "Dynamics 365 CRM and assistance program rules",
+        "key_field": "screening_id",
+        "write": False,
+        "knowledge": [
+            "Screens household income against municipal and emergency assistance rules.",
+            "Surfaces available credits, grants, discounts, and payment-plan options.",
+            "Explains qualification and total potential financial relief.",
+        ],
+        "records": [
+            {
+                "screening_id": "SCREEN-RES-782MD",
+                "account_id": "RES-782MD",
+                "income": "$32,400 (68% AMI)",
+                "eligible_programs": "LIWAP; LIHEAP emergency fund; 6-month payment plan",
+                "potential_relief": "$350",
+                "decision": "Qualifies",
+            },
+            {
+                "screening_id": "SCREEN-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "income": "142% FPL",
+                "eligible_programs": "LIHWAP; extended payment arrangement",
+                "potential_relief": "Up to $1,500",
+                "decision": "Qualifies",
+            },
+            {
+                "screening_id": "SCREEN-ACCT-90001",
+                "account_id": "ACCT-90001",
+                "income": "Not supplied",
+                "eligible_programs": "Extended payment arrangement",
+                "potential_relief": "Payment flexibility",
+                "decision": "Income documentation required for other programs",
+            },
+        ],
+    },
+    "assistance_enrollment": {
+        "display_name": "Payment Plan and Assistance Enrollment",
+        "source_system": "Municipal billing system and customer portal",
+        "key_field": "enrollment_id",
+        "write": True,
+        "knowledge": [
+            "Configures a payment plan and initiates program enrollment in one workflow.",
+            "Pre-fills application forms and lists the required income and residency documents.",
+            "Sends forms with a portal link and a deterministic response deadline.",
+        ],
+        "records": [
+            {
+                "enrollment_id": "ENROLL-RES-782MD",
+                "account_id": "RES-782MD",
+                "payment_plan": "6 months at $14.45; 0% interest",
+                "program": "LIWAP",
+                "documents": "Pay stubs or tax return; lease or property deed",
+                "deadline": "14 days",
+                "status": "Application pre-filled",
+            },
+            {
+                "enrollment_id": "ENROLL-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "payment_plan": "12 months at $40.77",
+                "program": "LIHWAP",
+                "documents": "Proof of income; utility bill; ID; household size",
+                "deadline": "14 days",
+                "status": "Application pre-filled",
+            },
+            {
+                "enrollment_id": "ENROLL-ACCT-90002",
+                "account_id": "ACCT-90002",
+                "payment_plan": "6 months at $236.72",
+                "program": "Extended Payment Arrangement",
+                "documents": "Signed payment agreement",
+                "deadline": "10 days",
+                "status": "Agreement generated",
+            },
+        ],
+    },
+    "repair_scheduling": {
+        "display_name": "Conservation Repair Scheduling",
+        "source_system": "Municipal field service schedule",
+        "key_field": "repair_id",
+        "write": True,
+        "knowledge": [
+            "Matches eligible residents with city-certified repair providers.",
+            "Schedules a repair window and lists included conservation equipment.",
+            "States program value and expected water savings.",
+        ],
+        "records": [
+            {
+                "repair_id": "REPAIR-RES-782MD",
+                "account_id": "RES-782MD",
+                "appointment": "Tuesday, April 2, 1:00-3:00 PM",
+                "provider": "City Maintenance licensed plumber",
+                "services": "Toilet flapper; faucet aerators; leak detection tablets; low-flow showerhead",
+                "program_value": "$85",
+                "estimated_savings": "6,000 gallons/month",
+            },
+            {
+                "repair_id": "REPAIR-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "appointment": "Thursday, April 4, 9:00-11:00 AM",
+                "provider": "City Conservation Crew",
+                "services": "Fixture inspection; leak repair kit",
+                "program_value": "$75",
+                "estimated_savings": "3,000 gallons/month",
+            },
+            {
+                "repair_id": "REPAIR-ACCT-90001",
+                "account_id": "ACCT-90001",
+                "appointment": "Friday, April 5, 1:00-3:00 PM",
+                "provider": "City Conservation Crew",
+                "services": "Efficiency audit; faucet aerators",
+                "program_value": "$40",
+                "estimated_savings": "500 gallons/month",
+            },
+        ],
+    },
+    "resolution_summary": {
+        "display_name": "Customer Resolution and Account Update",
+        "source_system": "Dynamics 365 CRM and Microsoft Outlook",
+        "key_field": "resolution_id",
+        "write": True,
+        "knowledge": [
+            "Packages credits, payment plans, enrollment, and repair actions into one resolution.",
+            "Updates the synthetic account audit summary and schedules follow-up.",
+            "Creates a transparent customer communication for Outlook and portal delivery.",
+        ],
+        "records": [
+            {
+                "resolution_id": "RESOLVE-RES-782MD",
+                "account_id": "RES-782MD",
+                "actions": "$97.80 credit; payment plan; LIWAP pending; LIHEAP info; repair scheduled",
+                "delivery": "Outlook email and postal mail",
+                "follow_up": "30 days",
+                "total_relief": "$347.80 plus future leak savings",
+            },
+            {
+                "resolution_id": "RESOLVE-ACCT-90003",
+                "account_id": "ACCT-90003",
+                "actions": "$28.35 credit; payment plan; LIHWAP pending; repair scheduled",
+                "delivery": "Outlook email and customer portal",
+                "follow_up": "30 days",
+                "total_relief": "Up to $1,528.35",
+            },
+            {
+                "resolution_id": "RESOLVE-ACCT-90002",
+                "account_id": "ACCT-90002",
+                "actions": "Payment agreement generated; meter inspection requested",
+                "delivery": "Outlook email",
+                "follow_up": "10 days",
+                "total_relief": "Pending inspection",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -205,6 +449,57 @@ def _usage_trend(account_id):
     return "stable"
 
 
+def _evidence_capability(operation_name, **kwargs):
+    """Return an offline capability summary or an exact synthetic record."""
+    capability = EVIDENCE_CAPABILITIES[operation_name]
+    key_field = capability["key_field"]
+    selector = str(kwargs.get(key_field) or kwargs.get("key") or "").strip()
+    user_input = str(kwargs.get("user_input", "")).strip()
+    input_tokens = {
+        token.casefold()
+        for token in re.findall(r"[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*", user_input)
+    }
+
+    record = None
+    for candidate in capability["records"]:
+        candidate_key = str(candidate[key_field])
+        normalized_key = candidate_key.casefold()
+        if selector and normalized_key == selector.casefold():
+            record = candidate
+            break
+        if not selector and user_input and normalized_key in input_tokens:
+            record = candidate
+            break
+
+    if selector or user_input:
+        if record is None:
+            available = ", ".join(str(item[key_field]) for item in capability["records"])
+            return f"**Error:** No {key_field.replace('_', ' ')} matched. Available keys: {available}."
+        lines = [f"# {capability['display_name']}: {record[key_field]}\n"]
+        for field, value in record.items():
+            lines.append(f"- **{field.replace('_', ' ').title()}:** {value}")
+        lines.append(f"- **Source System:** {capability['source_system']}")
+        if capability["write"]:
+            lines.extend([
+                "\n## Simulated Write Receipt\n",
+                f"- **Receipt:** SIM-{operation_name.upper()}-{record[key_field]}",
+                f"- **Action:** {capability['display_name']}",
+                "- **Result:** Simulated only; no external system was modified.",
+            ])
+        return "\n".join(lines)
+
+    lines = [f"# {capability['display_name']}\n"]
+    lines.append(f"**Mode:** {'Simulated write' if capability['write'] else 'Read-only'}")
+    lines.append(f"**Source System:** {capability['source_system']}\n")
+    lines.append("## Capability\n")
+    lines.extend(f"- {item}" for item in capability["knowledge"])
+    lines.append("\n## Available Records\n")
+    for item in capability["records"]:
+        lines.append(f"- `{item[key_field]}`")
+    lines.append(f"\nProvide `{key_field}` or `key` for an exact offline lookup.")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -213,7 +508,7 @@ class UtilityBillingAssistanceAgent(BasicAgent):
     """Municipal utility billing assistance agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/utility-billing-assistance"
+        self.name = "UtilityBillingAssistanceAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Utility Billing Assistance Agent",
@@ -228,9 +523,23 @@ class UtilityBillingAssistanceAgent(BasicAgent):
                             "usage_analysis",
                             "payment_plan",
                             "assistance_programs",
+                            "smart_meter_analysis",
+                            "leak_adjustment",
+                            "assistance_eligibility",
+                            "assistance_enrollment",
+                            "repair_scheduling",
+                            "resolution_summary",
                         ],
                     },
                     "account_id": {"type": "string"},
+                    "key": {
+                        "type": "string",
+                        "description": "Exact record key advertised by the selected evidence operation.",
+                    },
+                    "user_input": {
+                        "type": "string",
+                        "description": "Natural-language request containing an exact advertised record key.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -245,6 +554,8 @@ class UtilityBillingAssistanceAgent(BasicAgent):
             "payment_plan": self._payment_plan,
             "assistance_programs": self._assistance_programs,
         }
+        if operation in EVIDENCE_CAPABILITIES:
+            return _evidence_capability(operation, **kwargs)
         handler = dispatch.get(operation)
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."

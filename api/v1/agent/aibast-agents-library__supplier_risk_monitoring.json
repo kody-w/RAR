@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__supplier_risk_monitoring",
   "name": "Supplier Risk Monitoring Agent",
   "rar_name": "@aibast-agents-library/supplier_risk_monitoring",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/supplier_risk_monitoring:54254d32e6fd55d1546832797cd6e2bb",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/supplier_risk_monitoring:78cddc420353351eb65f2cd5d23b2833a0187c02316a966f4321f828c9477f38",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 330,
-  "size_kb": 13.8,
-  "sha256": "54254d32e6fd55d1546832797cd6e2bb120b8c3d045a2615fb1d71cc2ed4c075",
+  "lines": 467,
+  "size_kb": 20.4,
+  "sha256": "78cddc420353351eb65f2cd5d23b2833a0187c02316a966f4321f828c9477f38",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__supplier_risk_monitoring.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py.card",

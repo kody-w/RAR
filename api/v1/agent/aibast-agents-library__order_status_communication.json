@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__order_status_communication",
   "name": "Order Status Communication Agent",
   "rar_name": "@aibast-agents-library/order_status_communication",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/order_status_communication:6e3fe806d078c771887934d5e40bc265",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/order_status_communication:34800e6050e3d7b2251d072df9ac8662685932a85dd1aa3b88f189da23d7cbc9",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 321,
-  "size_kb": 12.5,
-  "sha256": "6e3fe806d078c771887934d5e40bc26524617c8028dce4adf41000e175ede545",
+  "lines": 480,
+  "size_kb": 19.7,
+  "sha256": "34800e6050e3d7b2251d072df9ac8662685932a85dd1aa3b88f189da23d7cbc9",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__order_status_communication.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py.card",

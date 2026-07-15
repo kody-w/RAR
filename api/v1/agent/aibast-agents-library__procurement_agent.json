@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__procurement_agent",
   "name": "Procurement Agent",
   "rar_name": "@aibast-agents-library/procurement_agent",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/procurement_agent:9a125bbd907c2428bef4d82ec96a0a42",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/procurement_agent:be7c4d0a3acbf157800f04016527d529150f0d0591c7cf76e40f232b4b583639",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 250,
-  "size_kb": 14.4,
-  "sha256": "9a125bbd907c2428bef4d82ec96a0a42d6bba8622d3215596428566b46a7bea1",
+  "lines": 403,
+  "size_kb": 21.8,
+  "sha256": "be7c4d0a3acbf157800f04016527d529150f0d0591c7cf76e40f232b4b583639",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__procurement_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py.card",

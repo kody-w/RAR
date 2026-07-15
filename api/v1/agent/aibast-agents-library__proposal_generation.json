@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__proposal_generation",
   "name": "Proposal Generation",
   "rar_name": "@aibast-agents-library/proposal_generation",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/proposal_generation:f4a91aeb88ccd7cf7c6aac6ec9eb1fb2",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/proposal_generation:887bdf670652002106ec7a6209799ff0bc42135a7a7548162d8e1c47588da3da",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 673,
-  "size_kb": 34.6,
-  "sha256": "f4a91aeb88ccd7cf7c6aac6ec9eb1fb27356b4bd5934431550ac30f82b33a68e",
+  "lines": 710,
+  "size_kb": 36.3,
+  "sha256": "887bdf670652002106ec7a6209799ff0bc42135a7a7548162d8e1c47588da3da",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__proposal_generation.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py.card",

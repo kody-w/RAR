@@ -3,6 +3,9 @@ Supply Chain Disruption Alert Agent — Retail & CPG Stack
 
 Monitors supply chain routes for disruptions, assesses risk levels,
 generates mitigation plans, and identifies alternative suppliers.
+
+Version 1.1.0 adds deterministic, exact-keyed disruption impact, response
+scenario, simulated execution, recovery tracking, and incident reporting.
 """
 
 import sys
@@ -17,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supply_chain_disruption_alert",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Supply Chain Disruption Alert Agent",
     "description": (
         "Monitors supply chain networks for disruption events, performs "
@@ -365,6 +368,138 @@ ALTERNATIVE_SUPPLIERS = {
     ],
 }
 
+EVIDENCE_CAPABILITIES = {
+    "disruption_impact": {
+        "title": "Disruption Root Cause and Impact",
+        "source_system": "Dynamics 365 Supply Chain Management",
+        "write": False,
+        "key_field": "incident_id",
+        "summary": (
+            "Connects a detected disruption to root cause, severity, affected "
+            "stores, SKUs, revenue, and customer impact."
+        ),
+        "record": {
+            "incident_id": "INC-PORTLAND-DC",
+            "root_cause": "Portland distribution-center conveyor failure causing a 3-day backlog",
+            "scope": "12 Northwest stores; 143 products; Seattle Flagship at 47% stockout",
+            "category_impact": "Electronics 42 SKUs; apparel 38; home goods 31; sporting 32",
+            "revenue_exposure": "$84,300 per week and escalating",
+            "customer_impact": "37 complaints, 280% above baseline, with social mentions rising",
+            "severity": "Critical; immediate management decision required",
+        },
+    },
+    "response_scenarios": {
+        "title": "Emergency Response Scenarios",
+        "source_system": "Dynamics 365 Supply Chain Management",
+        "write": False,
+        "key_field": "scenario_id",
+        "summary": (
+            "Compares response timelines, fulfillment coverage, cost, revenue "
+            "recovery, and ROI before making a recommendation."
+        ),
+        "record": {
+            "scenario_id": "SCENARIO-DENVER-TRANSFER",
+            "option_a": "Denver DC transfer; 36 hours; 80 priority SKUs; $15,600 cost; $47,000 recovery; 3:1 ROI",
+            "option_b": "Wait for Portland; 2 days; 40% restored; $0 response cost; $127,000 additional loss",
+            "expansion": "Add five high-impact stores for $8,900, bringing total response investment to $24,500",
+            "recommendation": "Execute Denver transfer and five-store expansion to protect $78,000 revenue",
+        },
+    },
+    "response_execution": {
+        "title": "Emergency Response Execution",
+        "source_system": "Dynamics 365 Supply Chain Management and Microsoft Teams",
+        "write": True,
+        "key_field": "execution_id",
+        "summary": (
+            "Prepares transfer, receiving, restocking, and notification actions "
+            "without triggering connected operations systems."
+        ),
+        "record": {
+            "execution_id": "EXEC-DENVER-NORTHWEST",
+            "seattle": "80 priority electronics SKUs; simulated departure 18:00; simulated arrival Friday 10:00",
+            "additional_stores": "Portland South, Tacoma Mall, Bellevue Square, Olympia Center, Spokane Valley; 60 SKUs each",
+            "coordination": "Store notifications, receiving staff, tablet restocking plans, and customer SMS prepared",
+            "economics": "$24,500 response investment; $78,000 projected recovery",
+            "execution_note": "Simulation only; no freight, workflow, staffing, or notification action occurs",
+        },
+    },
+    "recovery_tracking": {
+        "title": "Shipment Tracking and Recovery Plan",
+        "source_system": "Dynamics 365 Supply Chain Management",
+        "write": False,
+        "key_field": "tracking_id",
+        "summary": (
+            "Provides deterministic shipment status, recovery milestones, "
+            "backlog clearance, and prevention recommendations."
+        ),
+        "record": {
+            "tracking_id": "TRACK-DENVER-PORTLAND",
+            "shipment": "Denver truck departed 18:04; Seattle ETA Friday 09:47; on schedule",
+            "repair": "Conveyor repair Thursday 20:00; backlog processing Friday 06:00; normal operations Friday noon",
+            "backlog": "340 pending orders; Seattle and affected stores first; full clearance Saturday end of day",
+            "prevention": "$145,000 backup conveyor; 48-hour installation; $340,000 three-year avoided-loss value",
+        },
+    },
+    "incident_report": {
+        "title": "Incident Report and Leadership Distribution",
+        "source_system": "Microsoft Teams",
+        "write": True,
+        "key_field": "report_id",
+        "summary": (
+            "Builds a financial and operational incident report with a "
+            "simulated leadership distribution receipt."
+        ),
+        "record": {
+            "report_id": "REPORT-PORTLAND-DC",
+            "financial_impact": "$84,300 at risk; $24,500 response cost; $78,000 recovered; $53,500 net value protected",
+            "performance": "47 minutes detection-to-action; 36-hour alternate DC activation; 95% inventory in 3 days",
+            "lessons": "Backup conveyor, multi-DC sourcing rules, and monitoring tuned to reduce response by 18 minutes",
+            "prevention_value": "$340,000 avoided losses over three years versus $145,000 investment",
+            "distribution": "Prepared for executive team review in Microsoft Teams",
+        },
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    record = capability["record"]
+    key_field = capability["key_field"]
+    if key:
+        if str(record[key_field]).lower() == str(key).strip().lower():
+            return "match", record
+        return "not_found", None
+    query_tokens = _normalize_evidence_tokens(user_input)
+    key_tokens = _normalize_evidence_tokens(record[key_field])
+    width = len(key_tokens)
+    if width and any(
+        query_tokens[index:index + width] == key_tokens
+        for index in range(len(query_tokens) - width + 1)
+    ):
+        return "match", record
+    return "summary", None
+
+
+def _format_evidence_record(record):
+    return "\n".join(
+        f"- **{field.replace('_', ' ').title()}:** {value}"
+        for field, value in record.items()
+    )
+
 
 # ---------------------------------------------------------------------------
 # Helper Functions
@@ -430,11 +565,18 @@ class SupplyChainDisruptionAlertAgent(BasicAgent):
                             "risk_assessment",
                             "mitigation_plan",
                             "supplier_alternatives",
+                            "disruption_impact",
+                            "response_scenarios",
+                            "response_execution",
+                            "recovery_tracking",
+                            "incident_report",
                         ],
                     },
                     "route_id": {"type": "string"},
                     "disruption_id": {"type": "string"},
                     "category": {"type": "string"},
+                    "key": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -599,6 +741,52 @@ class SupplyChainDisruptionAlertAgent(BasicAgent):
         lines.append(f"**Total Qualified Alternatives:** {total_suppliers} suppliers across {len(ALTERNATIVE_SUPPLIERS)} categories")
         return "\n".join(lines)
 
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        lookup_status, record = _record_for_evidence_request(
+            capability,
+            kwargs.get("key", ""),
+            kwargs.get("user_input", ""),
+        )
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["summary"],
+            "",
+            f"## {capability['source_system']} (synthetic demo data)",
+            "",
+        ]
+        if lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            selected = record or capability["record"]
+            label = "Exact keyed record" if lookup_status == "match" else "Worked example"
+            lines.extend([f"**{label}:**", _format_evidence_record(selected)])
+
+        if capability["write"] and lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- **Action Status:** simulated",
+                f"- **Receipt:** SIM-{capability_name.upper()}-{receipt_key}",
+                f"- **Target System:** {capability['source_system']}",
+                "- **External Changes:** none; no live freight, workflow, message, or report distribution occurred",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable workflow; provide an exact key to generate a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend(["", "_Read-only; no external system is modified._"])
+        return "\n".join(lines)
+
     def perform(self, **kwargs):
         operation = kwargs.get("operation", "disruption_dashboard")
         dispatch = {
@@ -606,10 +794,17 @@ class SupplyChainDisruptionAlertAgent(BasicAgent):
             "risk_assessment": self._risk_assessment,
             "mitigation_plan": self._mitigation_plan,
             "supplier_alternatives": self._supplier_alternatives,
+            "disruption_impact": self._evidence_capability,
+            "response_scenarios": self._evidence_capability,
+            "response_execution": self._evidence_capability,
+            "recovery_tracking": self._evidence_capability,
+            "incident_report": self._evidence_capability,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        if operation in EVIDENCE_CAPABILITIES:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
 
 

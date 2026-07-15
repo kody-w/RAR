@@ -3,6 +3,13 @@ Loan Origination Assistant Agent — Financial Services Stack
 
 Supports loan application review, credit analysis, document verification,
 and decision recommendations for lending operations.
+
+v1.1.0 adds five spec-derived mortgage-origination operations that reproduce
+the guided demo workflow — application intake, program eligibility, credit and
+property evaluation, underwriting condition tracking, and a loan processing
+summary. Each new operation is grounded in synthetic source-system data with
+deterministic exact-key lookups, embedded knowledge, and simulated (non-mutating)
+write-backs for the condition-tracking step.
 """
 
 import sys
@@ -14,7 +21,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/loan_origination_assistant",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Loan Origination Assistant Agent",
     "description": "Loan origination support with application review, credit analysis, document verification, and decision recommendations.",
     "author": "AIBAST",
@@ -165,6 +172,193 @@ def _eligibility_check(app):
 
 
 # ---------------------------------------------------------------------------
+# Spec-derived operations (v1.1.0)
+# Reproduces the mortgage-origination guided demo workflow. Each operation maps
+# to one external-spec agent and carries the actual spec response, knowledge
+# bullets, source system, and three deterministic keyed records. Writes are
+# simulated — receipts only, no state mutation.
+# ---------------------------------------------------------------------------
+
+SPEC_OPERATIONS = {
+    "application_intake": {
+        "title": "Loan Application Intake",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "application_id",
+        "response": "Here is the intake evaluation for the requested application, including borrower details, documentation status, and outstanding items.",
+        "knowledge": [
+            "Intake evaluates a new application immediately and returns key borrower details and documentation status.",
+            "The agent highlights what documentation is still needed so nothing stalls at intake.",
+            "Auto-ingesting applications and organizing borrower documentation reduces manual document handling.",
+        ],
+        "records": [
+            {"application_id": "APP-40021", "borrower": "Jordan Avery", "program": "Conventional 30-year fixed", "documents_received": 7, "documents_outstanding": 2, "missing_item": "Recent pay stub"},
+            {"application_id": "APP-40022", "borrower": "Priya Nandakumar", "program": "FHA 30-year", "documents_received": 9, "documents_outstanding": 0, "missing_item": "None"},
+            {"application_id": "APP-40023", "borrower": "Marcus Delacroix", "program": "VA 15-year", "documents_received": 5, "documents_outstanding": 3, "missing_item": "Homeowner insurance binder"},
+        ],
+    },
+    "eligibility_assessment": {
+        "title": "Loan Program Eligibility",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "eligibility_id",
+        "response": "Here is the eligibility view comparing programs, rate and payment scenarios, with a clear recommendation.",
+        "knowledge": [
+            "The eligibility view compares programs, rate, and payment scenarios and provides a clear recommendation.",
+            "It presents what once required multiple tools as a single decision-ready view.",
+            "The recommendation makes it easy to see which product sets the borrower up for success.",
+        ],
+        "records": [
+            {"eligibility_id": "ELIG-51001", "borrower": "Jordan Avery", "recommended_program": "Conventional 30-year fixed", "rate_percent": 6.5, "monthly_payment": 2140, "decision": "Recommended"},
+            {"eligibility_id": "ELIG-51002", "borrower": "Priya Nandakumar", "recommended_program": "FHA 30-year", "rate_percent": 6.25, "monthly_payment": 1980, "decision": "Recommended"},
+            {"eligibility_id": "ELIG-51003", "borrower": "Dana Okafor", "recommended_program": "Jumbo 30-year", "rate_percent": 6.9, "monthly_payment": 3560, "decision": "Conditional"},
+        ],
+    },
+    "credit_property": {
+        "title": "Credit and Property Evaluation",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "evaluation_id",
+        "response": "Here is the credit and property evaluation covering credit summary, financial strength, and property valuation.",
+        "knowledge": [
+            "Deeper evaluation returns a concise credit and property picture with credit summary, financial strength, and property valuation.",
+            "The picture helps the officer quickly validate risk and move forward with confidence.",
+            "Pre-analyzing credit and property data surfaces risks and readiness signals early.",
+        ],
+        "records": [
+            {"evaluation_id": "EVAL-62001", "borrower": "Jordan Avery", "credit_score": 742, "dti_ratio": "34%", "property_value": 415000, "risk_flag": "Low"},
+            {"evaluation_id": "EVAL-62002", "borrower": "Priya Nandakumar", "credit_score": 705, "dti_ratio": "39%", "property_value": 388000, "risk_flag": "Moderate"},
+            {"evaluation_id": "EVAL-62003", "borrower": "Dana Okafor", "credit_score": 688, "dti_ratio": "45%", "property_value": 690000, "risk_flag": "Elevated"},
+        ],
+    },
+    "condition_tracking": {
+        "title": "Underwriting Condition Tracking",
+        "source_system": "Dynamics 365",
+        "write": True,
+        "generative": False,
+        "key_field": "condition_id",
+        "response": "Here are the outstanding conditions with due dates and next actions; updates are pushed through Dynamics 365 and Microsoft Teams.",
+        "knowledge": [
+            "The agent tracks every outstanding item with clear due dates and next actions.",
+            "It pushes updates through Dynamics 365 and Microsoft Teams, streamlining documentation and team alignment.",
+            "Automated condition tracking shortens closing timelines by managing underwriting conditions in real time.",
+        ],
+        "records": [
+            {"condition_id": "COND-73001", "borrower": "Jordan Avery", "condition": "Provide updated pay stub", "due_date": "2026-07-22", "status": "Open", "next_action": "Request from borrower"},
+            {"condition_id": "COND-73002", "borrower": "Priya Nandakumar", "condition": "Verify homeowner insurance", "due_date": "2026-07-19", "status": "In progress", "next_action": "Follow up with insurance agent"},
+            {"condition_id": "COND-73003", "borrower": "Dana Okafor", "condition": "Clear title exception", "due_date": "2026-07-25", "status": "Open", "next_action": "Escalate to title company"},
+        ],
+    },
+    "loan_summary": {
+        "title": "Loan Processing Summary",
+        "source_system": "Dynamics 365",
+        "write": False,
+        "generative": True,
+        "key_field": "summary_id",
+        "response": "Here is the compiled loan processing summary noting progress, remaining steps, and a projected timeline.",
+        "knowledge": [
+            "The agent compiles a loan processing summary noting progress, remaining steps, and a projected timeline.",
+            "The summary gives a clear view of the loan process and next steps.",
+            "It helps lenders accelerate cycle times and strengthen underwriting readiness.",
+        ],
+        "records": [
+            {"summary_id": "SUM-84001", "borrower": "Jordan Avery", "progress": "70% complete", "remaining_steps": "Underwriting sign-off", "projected_close": "2026-08-05"},
+            {"summary_id": "SUM-84002", "borrower": "Priya Nandakumar", "progress": "90% complete", "remaining_steps": "Final QC review", "projected_close": "2026-07-28"},
+            {"summary_id": "SUM-84003", "borrower": "Dana Okafor", "progress": "55% complete", "remaining_steps": "Title clearance", "projected_close": "2026-08-15"},
+        ],
+    },
+}
+
+_CURRENCY_FIELDS = {"property_value", "monthly_payment"}
+
+
+def _fmt_field_value(field, value):
+    """Render a record field value for display."""
+    if field in _CURRENCY_FIELDS and isinstance(value, (int, float)):
+        return f"${value:,.0f}"
+    return str(value)
+
+
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_tokens(user_input, value):
+    """Return True only when the complete value is a normalized token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(value)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _resolve_spec_record(spec, user_input):
+    """Deterministically resolve a single record from free-text user_input.
+
+    A record key or complete borrower name must match normalized token
+    boundaries. Multiple candidate records are rejected as ambiguous.
+    """
+    if not user_input:
+        return None
+    key_field = spec["key_field"]
+    matches = [
+        record for record in spec["records"]
+        if (
+            _contains_normalized_tokens(user_input, record[key_field])
+            or _contains_normalized_tokens(user_input, record["borrower"])
+        )
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _render_spec_record_detail(spec, record):
+    """Render the full detail block for a single resolved record."""
+    lines = []
+    for field, value in record.items():
+        lines.append(f"- **{field.replace('_', ' ').title()}:** {_fmt_field_value(field, value)}")
+    return "\n".join(lines)
+
+
+def _render_spec_summary(spec):
+    """Render a no-input summary table over all three records."""
+    records = spec["records"]
+    headers = list(records[0].keys())
+    lines = ["| " + " | ".join(h.replace("_", " ").title() for h in headers) + " |"]
+    lines.append("|" + "---|" * len(headers))
+    for record in records:
+        lines.append("| " + " | ".join(_fmt_field_value(h, record[h]) for h in headers) + " |")
+    return "\n".join(lines)
+
+
+def _render_write_receipt(spec, record):
+    """Render a simulated (non-mutating) write-back receipt for write ops."""
+    lines = ["## Write-Back Receipt (Simulated)\n"]
+    lines.append(f"- **Target System:** {spec['source_system']} + Microsoft Teams")
+    lines.append("- **Mode:** Simulated — no records were mutated.")
+    if record is not None:
+        lines.append(f"- **Condition:** {record['condition_id']} — {record['condition']}")
+        lines.append(f"- **Would Push:** status `{record['status']}`, next action `{record['next_action']}`, due {record['due_date']}")
+        lines.append(f"- **Recipients:** underwriting queue and borrower thread for {record['borrower']}")
+    else:
+        open_items = [r for r in spec["records"] if r["status"].lower() != "closed"]
+        lines.append(f"- **Would Push:** {len(open_items)} outstanding condition update(s) to the underwriting queue")
+        lines.append("- **Recipients:** loan team Microsoft Teams channel")
+    lines.append("- **Result:** Receipt generated; persistence intentionally skipped in this environment.")
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
 
@@ -172,7 +366,7 @@ class LoanOriginationAssistantAgent(BasicAgent):
     """Loan origination assistant agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/loan-origination-assistant"
+        self.name = "LoanOriginationAssistantAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Loan Origination Assistant Agent",
@@ -187,9 +381,18 @@ class LoanOriginationAssistantAgent(BasicAgent):
                             "credit_analysis",
                             "document_verification",
                             "decision_recommendation",
+                            "application_intake",
+                            "eligibility_assessment",
+                            "credit_property",
+                            "condition_tracking",
+                            "loan_summary",
                         ],
                     },
                     "application_id": {"type": "string"},
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional free text for the newer spec operations; may name a record key (e.g. APP-40021) or borrower. Omit for a summary view.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -205,9 +408,11 @@ class LoanOriginationAssistantAgent(BasicAgent):
             "decision_recommendation": self._decision_recommendation,
         }
         handler = dispatch.get(operation)
-        if not handler:
-            return f"**Error:** Unknown operation `{operation}`."
-        return handler(**kwargs)
+        if handler:
+            return handler(**kwargs)
+        if operation in SPEC_OPERATIONS:
+            return self._spec_operation(**kwargs)
+        return f"**Error:** Unknown operation `{operation}`."
 
     def _application_review(self, **kwargs) -> str:
         lines = ["# Loan Application Pipeline\n"]
@@ -310,6 +515,53 @@ class LoanOriginationAssistantAgent(BasicAgent):
             lines.append(f"- **Rationale:** {rationale}\n")
         return "\n".join(lines)
 
+    def _spec_operation(self, **kwargs) -> str:
+        """Generic handler for the v1.1.0 spec-derived operations.
+
+        Deterministic exact-key behavior over three synthetic records with an
+        optional ``user_input``; renders a no-input summary when no key
+        is supplied, and a simulated (non-mutating) write receipt for write ops.
+        """
+        operation = kwargs.get("operation")
+        spec = SPEC_OPERATIONS[operation]
+        user_input = kwargs.get("user_input") or kwargs.get(spec["key_field"])
+        record = _resolve_spec_record(spec, user_input)
+
+        lines = [f"# {spec['title']}\n"]
+        lines.append(f"_{spec['response']}_\n")
+        lines.append(f"**Source System:** {spec['source_system']}")
+        mode_bits = []
+        if spec["generative"]:
+            mode_bits.append("generative")
+        mode_bits.append("write-back" if spec["write"] else "read-only")
+        lines.append(f"**Mode:** {', '.join(mode_bits)}\n")
+
+        if record is not None:
+            lines.append(f"## Record {record[spec['key_field']]}\n")
+            lines.append(_render_spec_record_detail(spec, record))
+        elif user_input:
+            lines.append(
+                f"No exact normalized `{spec['key_field']}` or complete borrower "
+                "name matched the request, or the request was ambiguous."
+            )
+        else:
+            lines.append("## Summary (no record key supplied)\n")
+            lines.append(_render_spec_summary(spec))
+            lines.append(
+                f"\n_Provide a `user_input` naming a {spec['key_field'].replace('_', ' ')} "
+                "to drill into a single record._"
+            )
+
+        lines.append("\n## Knowledge\n")
+        for item in spec["knowledge"]:
+            lines.append(f"- {item}")
+
+        if spec["write"] and (record is not None or not user_input):
+            lines.append("")
+            lines.append(_render_write_receipt(spec, record))
+
+        return "\n".join(lines)
+
 
 # ---------------------------------------------------------------------------
 # Main
@@ -324,3 +576,13 @@ if __name__ == "__main__":
     print(agent.perform(operation="document_verification", application_id="LA-2025-4004"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="decision_recommendation"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="application_intake", user_input="Process new application APP-40021 and show its documentation status"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="eligibility_assessment", user_input="Show the eligibility view for ELIG-51002"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="credit_property", user_input="Give a deeper credit and property evaluation for EVAL-62003"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="condition_tracking", user_input="What conditions remain for COND-73001?"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="loan_summary"))

@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__customer_loyalty_rewards",
   "name": "Customer Loyalty & Rewards Agent",
   "rar_name": "@aibast-agents-library/customer_loyalty_rewards",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/customer_loyalty_rewards:8a5606496641b9afe34413aa26052b13",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/customer_loyalty_rewards:5d5cfac2c7d96aee179d81d4cbf577b03aef8e4273378fe1f3daed05faf6a687",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 292,
-  "size_kb": 13.0,
-  "sha256": "8a5606496641b9afe34413aa26052b13b625f320ef6fb9471b30927b82df733b",
+  "lines": 413,
+  "size_kb": 19.7,
+  "sha256": "5d5cfac2c7d96aee179d81d4cbf577b03aef8e4273378fe1f3daed05faf6a687",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_loyalty_rewards.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py.card",

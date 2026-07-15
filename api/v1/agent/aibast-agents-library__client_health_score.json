@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__client_health_score",
   "name": "Client Health Score Agent",
   "rar_name": "@aibast-agents-library/client_health_score",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/client_health_score:cc76710d63e8292947016a2b339d5658",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/client_health_score:1c57db3369c0b979b0bf86da9f0add1efe7d5fb7f41ac274a1aa08095ff4b3c0",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "professional_services",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 342,
-  "size_kb": 13.0,
-  "sha256": "cc76710d63e8292947016a2b339d5658f4164c8a93cf30bc3d4e0a8225abf867",
+  "lines": 445,
+  "size_kb": 17.4,
+  "sha256": "1c57db3369c0b979b0bf86da9f0add1efe7d5fb7f41ac274a1aa08095ff4b3c0",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__client_health_score.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py.card",

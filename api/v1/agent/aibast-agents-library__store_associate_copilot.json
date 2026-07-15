@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__store_associate_copilot",
   "name": "Store Associate Copilot Agent",
   "rar_name": "@aibast-agents-library/store_associate_copilot",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/store_associate_copilot:10a6df3dee75901d22e93bed9b81d8e2",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/store_associate_copilot:f8e40f1b84cd222f3c8a35bb0c30b6c908ca9974ea8647f4c5accea189cd32b3",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "retail_cpg",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 538,
-  "size_kb": 22.4,
-  "sha256": "10a6df3dee75901d22e93bed9b81d8e2fa19abd8905bae389a5ceb48043c5921",
+  "lines": 877,
+  "size_kb": 37.3,
+  "sha256": "f8e40f1b84cd222f3c8a35bb0c30b6c908ca9974ea8647f4c5accea189cd32b3",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__store_associate_copilot.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py.card",

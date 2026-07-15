@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_qualification",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Sales Qualification",
     "description": "ICP scoring, BANT analysis, personalized outreach, AE routing, and SLA tracking for inbound leads.",
     "author": "AIBAST",
@@ -116,6 +116,8 @@ _LEADS = [
     {"id": "L044", "company": "Forge Industrial",       "contact_name": "Christopher Hall","title": "Plant Director",         "employees": 3500, "industry": "Manufacturing",       "revenue": 920_000_000,  "source": "Trade Show",     "budget": "exploring", "authority_level": "Director",  "need": "Predictive maintenance data platform",                           "timeline": "Q2",    "engagement_signals": ["Attended session", "Brief booth visit"],                                                       "tech_stack": ["Azure", "Salesforce"]},
     {"id": "L045", "company": "Luminary Wealth",        "contact_name": "Jessica Wang",    "title": "VP Technology",         "employees": 250,  "industry": "Financial Services",  "revenue": 38_000_000,   "source": "Trade Show",     "budget": "exploring", "authority_level": "VP",        "need": "Client portfolio reporting automation",                          "timeline": "Q3",    "engagement_signals": ["Booth conversation"],                                                                          "tech_stack": ["Salesforce", "AWS"]},
 ]
+
+_LEADS_BY_ID = {lead["id"]: lead for lead in _LEADS}
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -260,6 +262,7 @@ class SalesQualificationAgent(BasicAgent):
         assign_leads         - Route to AEs by territory/expertise/capacity
         setup_tracking       - SLA rules and escalation configuration
         qualification_report - Full pipeline summary with conversion targets
+        handoff_lead         - route one exact lead with CRM/Teams receipts
     """
 
     def __init__(self):
@@ -276,12 +279,17 @@ class SalesQualificationAgent(BasicAgent):
                             "score_leads", "bant_analysis",
                             "create_outreach", "assign_leads",
                             "setup_tracking", "qualification_report",
+                            "handoff_lead",
                         ],
                         "description": "The qualification operation to perform",
                     },
                     "tier_filter": {
                         "type": "string",
                         "description": "Optional tier filter: Hot, Warm, Nurture, Disqualified",
+                    },
+                    "lead_id": {
+                        "type": "string",
+                        "description": "Exact lead ID for handoff_lead (e.g. 'L001')",
                     },
                 },
                 "required": ["operation"],
@@ -306,6 +314,8 @@ class SalesQualificationAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "score_leads")
+        if op == "handoff_lead":
+            return self._handoff_lead(kwargs.get("lead_id"))
         dispatch = {
             "score_leads": self._score_leads,
             "bant_analysis": self._bant_analysis,
@@ -318,6 +328,33 @@ class SalesQualificationAgent(BasicAgent):
         if not handler:
             return json.dumps({"status": "error", "message": f"Unknown operation: {op}"})
         return handler(kwargs.get("tier_filter"))
+
+    def _handoff_lead(self, lead_id):
+        lead = _LEADS_BY_ID.get(lead_id)
+        if lead is None:
+            return json.dumps({
+                "status": "error",
+                "message": f"Unknown lead_id: {lead_id!r}",
+                "valid_lead_ids": ", ".join(sorted(_LEADS_BY_ID)),
+            })
+        scored = next(item for item in self._ensure_scored() if item["id"] == lead_id)
+        ae = _match_ae(scored, _AE_TEAM)
+        outreach = _generate_outreach(scored, scored["tier"], scored["icp_score"])
+        sla = _SLA_RULES[scored["tier"]]
+        receipt = {
+            "status": "simulated",
+            "lead_id": lead_id,
+            "company": scored["company"],
+            "tier": scored["tier"],
+            "combined_score": scored["combined_score"],
+            "bant_score": scored["bant"]["composite"],
+            "assigned_ae": ae["name"] if ae else "Marketing nurture",
+            "outreach_subject": outreach["subject"],
+            "response_sla_hours": sla["response_hours"],
+            "crm_assignment_id": f"sim-d365-lead-{lead_id.lower()}",
+            "teams_message_id": f"sim-teams-sla-{lead_id.lower()}",
+        }
+        return "**Qualified Lead Handoff Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
     # ── score_leads ───────────────────────────────────────────
     def _score_leads(self, tier_filter):

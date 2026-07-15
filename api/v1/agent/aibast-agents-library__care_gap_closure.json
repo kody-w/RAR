@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__care_gap_closure",
   "name": "Care Gap Closure Agent",
   "rar_name": "@aibast-agents-library/care_gap_closure",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/care_gap_closure:23cde0d7691d7fde92738dc8cf13e38c",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/care_gap_closure:fca48b400ade45b7d8eb4acc45c16cdc04309fb6861230c8549ea53a760f0319",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "healthcare",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 324,
-  "size_kb": 12.7,
-  "sha256": "23cde0d7691d7fde92738dc8cf13e38ca4e9fb86d913d42c1350824325e867ef",
+  "lines": 434,
+  "size_kb": 17.3,
+  "sha256": "fca48b400ade45b7d8eb4acc45c16cdc04309fb6861230c8549ea53a760f0319",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__care_gap_closure.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py.card",

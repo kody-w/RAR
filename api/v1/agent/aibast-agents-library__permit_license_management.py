@@ -4,6 +4,10 @@ Permit and License Management Agent for Energy sector.
 Tracks permits and licenses across energy facilities, manages renewal
 calendars, identifies compliance gaps, and monitors application status
 for regulatory requirements.
+
+Version 1.1.0 adds an evidence-backed at-risk permit view and a dry-run
+renewal workflow with Teams and Outlook notifications. Legacy operations are
+unchanged, and simulated writes never mutate external systems.
 """
 
 import sys
@@ -15,7 +19,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/permit_license_management",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Permit & License Management Agent",
     "description": "Tracks permits and licenses across energy facilities, manages renewal calendars, identifies compliance gaps, and monitors applications.",
     "author": "AIBAST",
@@ -213,6 +217,40 @@ def _application_status():
     return {"applications": statuses, "total": len(statuses)}
 
 
+def _at_risk_permits():
+    risk = {
+        "PRM-6002": ("critical", "Expired; renewal remains under review"),
+        "PRM-6005": ("critical", "Expires within 30 days"),
+        "PRM-6004": ("at_risk", "Renewal lead window is open"),
+    }
+    return [
+        {
+            "permit_id": permit_id,
+            "permit": PERMITS[permit_id]["name"],
+            "facility": PERMITS[permit_id]["facility"],
+            "expiration": PERMITS[permit_id]["expiration_date"],
+            "risk": severity,
+            "reason": reason,
+        }
+        for permit_id, (severity, reason) in risk.items()
+    ]
+
+
+def _renewal_workflow(permit_id):
+    permit = PERMITS.get(permit_id)
+    if not permit:
+        return None
+    return {
+        "permit_id": permit_id,
+        "permit": permit["name"],
+        "facility": permit["facility"],
+        "workflow_id": f"RNW-{permit_id[4:]}-2026",
+        "system": "Dynamics 365",
+        "stakeholders": ["Compliance Manager", "Facility Manager"],
+        "channels": ["Microsoft Teams", "Outlook"],
+    }
+
+
 # ---------------------------------------------------------------------------
 # Agent
 # ---------------------------------------------------------------------------
@@ -221,7 +259,7 @@ class PermitLicenseManagementAgent(BasicAgent):
     """Permit and license tracking and compliance management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/permit-license-management"
+        self.name = "PermitLicenseManagementAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
@@ -235,12 +273,18 @@ class PermitLicenseManagementAgent(BasicAgent):
                             "renewal_calendar",
                             "compliance_gaps",
                             "application_status",
+                            "at_risk_permits",
+                            "initiate_renewal_workflow",
                         ],
                         "description": "The permit management operation to perform.",
                     },
                     "facility": {
                         "type": "string",
                         "description": "Optional facility name to filter results.",
+                    },
+                    "permit_id": {
+                        "type": "string",
+                        "description": "Exact permit ID required by initiate_renewal_workflow.",
                     },
                 },
                 "required": ["operation"],
@@ -258,6 +302,10 @@ class PermitLicenseManagementAgent(BasicAgent):
             return self._compliance_gaps()
         elif op == "application_status":
             return self._application_status()
+        elif op == "at_risk_permits":
+            return self._at_risk_permits()
+        elif op == "initiate_renewal_workflow":
+            return self._initiate_renewal_workflow(kwargs.get("permit_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _permit_inventory(self) -> str:
@@ -328,6 +376,50 @@ class PermitLicenseManagementAgent(BasicAgent):
                 f"| {a['expected_decision']} | {a['comments']} |"
             )
         return "\n".join(lines)
+
+    def _at_risk_permits(self) -> str:
+        lines = [
+            "# Unified At-Risk and Critical Permit View",
+            "",
+            "| Permit ID | Permit | Facility | Expiration | Risk | Reason |",
+            "|-----------|--------|----------|------------|------|--------|",
+        ]
+        for row in _at_risk_permits():
+            lines.append(
+                f"| {row['permit_id']} | {row['permit']} | {row['facility']} "
+                f"| {row['expiration']} | {row['risk'].upper()} | {row['reason']} |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Energy Operations demo 01:27-01:49 — automated "
+            "tracking and a unified view of at-risk and critical permits.",
+        ])
+        return "\n".join(lines)
+
+    def _initiate_renewal_workflow(self, permit_id) -> str:
+        if not permit_id:
+            return (
+                "# Initiate Renewal Workflow\n\nProvide an exact `permit_id`. "
+                f"Available IDs: {', '.join(sorted(PERMITS))}."
+            )
+        receipt = _renewal_workflow(permit_id)
+        if not receipt:
+            return f"**Error:** Unknown permit_id `{permit_id}`."
+        return "\n".join([
+            "# Permit Renewal Workflow",
+            "",
+            f"- **Permit:** {receipt['permit']} (`{receipt['permit_id']}`)",
+            f"- **Facility:** {receipt['facility']}",
+            f"- **Workflow ID:** {receipt['workflow_id']}",
+            f"- **Stakeholders:** {', '.join(receipt['stakeholders'])}",
+            "",
+            "## Simulated Write Receipt",
+            "",
+            f"- **Workflow:** Simulated creation in {receipt['system']}.",
+            f"- **Notifications:** Simulated delivery through {', '.join(receipt['channels'])}.",
+            "- **Mode:** dry-run; no live workflow, permit, message, or email was mutated.",
+            "- **Evidence:** Energy Operations demo 01:49-01:56.",
+        ])
 
 
 # ---------------------------------------------------------------------------

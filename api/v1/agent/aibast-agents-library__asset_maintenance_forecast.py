@@ -4,6 +4,10 @@ Asset Maintenance Forecast Agent for Energy sector.
 Provides predictive maintenance forecasting, asset health monitoring,
 budget projections, and work order planning for energy infrastructure
 including turbines, transformers, and pipelines.
+
+Version 1.1.0 adds evidence-backed IoT failure analysis and a dry-run
+Dynamics 365 ERP maintenance scheduling workflow. Legacy operations are
+unchanged; all new behavior is deterministic and embedded in this file.
 """
 
 import sys
@@ -15,7 +19,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/asset_maintenance_forecast",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Asset Maintenance Forecast Agent",
     "description": "Predictive maintenance forecasting, asset health monitoring, budget projections, and work order planning for energy infrastructure.",
     "author": "AIBAST",
@@ -115,6 +119,33 @@ BUDGET_RATES = {
     "inspection": {"wind_turbine": 4000, "transformer": 7000, "pipeline": 16000, "gas_turbine": 15000},
 }
 
+IOT_SIGNALS = {
+    "AST-T001": {
+        "signal": "gearbox vibration",
+        "reading": 8.4,
+        "unit": "mm/s",
+        "threshold": 7.1,
+        "risk": "high",
+        "targeted_action": "Inspect gearbox bearings and confirm lubrication quality.",
+    },
+    "AST-X002": {
+        "signal": "dissolved acetylene",
+        "reading": 42,
+        "unit": "ppm",
+        "threshold": 35,
+        "risk": "critical",
+        "targeted_action": "Perform an expedited DGA review and internal transformer inspection.",
+    },
+    "AST-T004": {
+        "signal": "exhaust temperature spread",
+        "reading": 18,
+        "unit": "C",
+        "threshold": 22,
+        "risk": "watch",
+        "targeted_action": "Trend combustor performance at the next operating interval.",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -198,6 +229,39 @@ def _work_order_plan():
     return {"work_orders": orders, "total_cost": sum(o["estimated_cost"] for o in orders)}
 
 
+def _iot_failure_analysis():
+    results = []
+    for asset_id, signal in IOT_SIGNALS.items():
+        asset = ASSETS[asset_id]
+        results.append({
+            "asset_id": asset_id,
+            "asset": asset["name"],
+            "signal": signal["signal"],
+            "reading": f"{signal['reading']} {signal['unit']}",
+            "threshold": f"{signal['threshold']} {signal['unit']}",
+            "risk": signal["risk"],
+            "predicted_failure": asset["predicted_next_failure"],
+            "targeted_action": signal["targeted_action"],
+        })
+    return results
+
+
+def _schedule_maintenance(asset_id):
+    asset = ASSETS.get(asset_id)
+    if not asset:
+        return None
+    work_type = "major" if asset["condition_score"] < 50 else "inspection"
+    return {
+        "asset_id": asset_id,
+        "asset": asset["name"],
+        "work_type": work_type,
+        "scheduled_window": "2026-04-06T08:00:00Z",
+        "estimated_cost": BUDGET_RATES[work_type][asset["type"]],
+        "system": "Dynamics 365 ERP",
+        "status": "simulated",
+    }
+
+
 # ---------------------------------------------------------------------------
 # Agent
 # ---------------------------------------------------------------------------
@@ -206,7 +270,7 @@ class AssetMaintenanceForecastAgent(BasicAgent):
     """Predictive maintenance and asset health agent for energy infrastructure."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/asset-maintenance-forecast"
+        self.name = "AssetMaintenanceForecastAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
@@ -220,12 +284,14 @@ class AssetMaintenanceForecastAgent(BasicAgent):
                             "asset_health",
                             "budget_projection",
                             "work_order_plan",
+                            "iot_failure_analysis",
+                            "schedule_maintenance",
                         ],
                         "description": "The maintenance operation to perform.",
                     },
                     "asset_id": {
                         "type": "string",
-                        "description": "Optional asset ID to filter results.",
+                        "description": "Asset ID; required by schedule_maintenance.",
                     },
                 },
                 "required": ["operation"],
@@ -243,6 +309,10 @@ class AssetMaintenanceForecastAgent(BasicAgent):
             return self._budget_projection()
         elif op == "work_order_plan":
             return self._work_order_plan()
+        elif op == "iot_failure_analysis":
+            return self._iot_failure_analysis()
+        elif op == "schedule_maintenance":
+            return self._schedule_maintenance(kwargs.get("asset_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _maintenance_forecast(self) -> str:
@@ -315,6 +385,51 @@ class AssetMaintenanceForecastAgent(BasicAgent):
                 f"| {wo['description']} | ${wo['estimated_cost']:,} | {wo['target_date']} |"
             )
         return "\n".join(lines)
+
+    def _iot_failure_analysis(self) -> str:
+        rows = _iot_failure_analysis()
+        lines = [
+            "# Real-Time IoT Failure Analysis",
+            "",
+            "| Asset ID | Asset | Signal | Reading | Threshold | Risk | Predicted Failure | Targeted Action |",
+            "|----------|-------|--------|---------|-----------|------|-------------------|-----------------|",
+        ]
+        for row in rows:
+            lines.append(
+                f"| {row['asset_id']} | {row['asset']} | {row['signal']} | {row['reading']} "
+                f"| {row['threshold']} | {row['risk'].upper()} | "
+                f"{row['predicted_failure']} | {row['targeted_action']} |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Energy Operations demo 00:52-01:15 — real-time IoT "
+            "monitoring, AI-driven failure prediction, and targeted actions.",
+        ])
+        return "\n".join(lines)
+
+    def _schedule_maintenance(self, asset_id) -> str:
+        if not asset_id:
+            return (
+                "# Schedule Maintenance\n\nProvide an exact `asset_id`. "
+                f"Available IDs: {', '.join(sorted(ASSETS))}."
+            )
+        receipt = _schedule_maintenance(asset_id)
+        if not receipt:
+            return f"**Error:** Unknown asset_id `{asset_id}`."
+        return "\n".join([
+            "# Maintenance Scheduling",
+            "",
+            f"- **Asset:** {receipt['asset']} (`{receipt['asset_id']}`)",
+            f"- **Work Type:** {receipt['work_type']}",
+            f"- **Scheduled Window:** {receipt['scheduled_window']}",
+            f"- **Estimated Cost:** ${receipt['estimated_cost']:,}",
+            "",
+            "## Simulated Write Receipt",
+            "",
+            f"- **Action:** Schedule maintenance in {receipt['system']}.",
+            "- **Mode:** dry-run; no live ERP record was created or mutated.",
+            "- **Evidence:** Energy Operations demo 01:15-01:20.",
+        ])
 
 
 # ---------------------------------------------------------------------------

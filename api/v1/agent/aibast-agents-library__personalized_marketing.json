@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__personalized_marketing",
   "name": "Personalized Marketing Agent",
   "rar_name": "@aibast-agents-library/personalized_marketing",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/personalized_marketing:91b190e8e7b78ce8a423072a552562b8",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/personalized_marketing:3e8a27d4300383d81ab2bce986e6d48da643f6bb4a59df44f9e760cc29fcebd7",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "retail_cpg",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 436,
-  "size_kb": 17.2,
-  "sha256": "91b190e8e7b78ce8a423072a552562b8d6d50a8e2162ea6d8b912d226711873c",
+  "lines": 693,
+  "size_kb": 27.2,
+  "sha256": "3e8a27d4300383d81ab2bce986e6d48da643f6bb4a59df44f9e760cc29fcebd7",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__personalized_marketing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py.card",

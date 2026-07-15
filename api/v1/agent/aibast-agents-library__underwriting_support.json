@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__underwriting_support",
   "name": "Underwriting Support Agent",
   "rar_name": "@aibast-agents-library/underwriting_support",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/underwriting_support:7ff01ed46cb7fc789bde35a4bee8f623",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/underwriting_support:d58c4f2c83d8b48b9e19bea9962d4e717e5d3025615d97c9d96eab05dac6c63e",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 329,
-  "size_kb": 14.4,
-  "sha256": "7ff01ed46cb7fc789bde35a4bee8f623f2002563af540314d1020b8f6306c33d",
+  "lines": 614,
+  "size_kb": 30.8,
+  "sha256": "d58c4f2c83d8b48b9e19bea9962d4e717e5d3025615d97c9d96eab05dac6c63e",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__underwriting_support.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py.card",

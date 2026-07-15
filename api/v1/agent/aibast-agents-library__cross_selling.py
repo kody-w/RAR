@@ -6,6 +6,10 @@ product affinity rules, and revenue impact projections.
 
 Where a real deployment would connect to CRM and product databases, this agent
 uses a synthetic data layer so it runs anywhere without credentials.
+
+Version 1.1.0 adds evidence-backed buying-signal analysis, tailored outreach,
+growth planning, and simulated account assignment while preserving all legacy
+operations and identities.
 """
 
 import sys, os
@@ -19,7 +23,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cross_selling",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Cross-Selling Opportunities",
     "description": "Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections.",
     "author": "AIBAST",
@@ -91,6 +95,20 @@ _CROSS_SELL_SUCCESS_RATES = {
     "SMB": {"avg_success_rate": 0.28, "avg_deal_cycle_days": 55, "avg_expansion_pct": 18},
 }
 
+_BUYING_SIGNALS = {
+    "CUST-001": ["Analytics exports increased 38% in 30 days", "Requested predictive dashboard capability", "Budget window opens in Q4"],
+    "CUST-002": ["Integration API usage reached 87% of plan", "Requested security review materials", "Renewal is due in 45 days"],
+    "CUST-003": ["Added 240 active users this quarter", "Requested analytics benchmark data", "Capital committee meets in 21 days"],
+    "CUST-004": ["Store count increased from 18 to 24", "Support contacts rose 22%", "Annual planning starts next month"],
+    "CUST-005": ["Security adoption reached 94%", "Requested enablement for new administrators", "Training budget remains available"],
+}
+
+_REP_ASSIGNMENTS = {
+    "Enterprise": ("Maya Patel", "enterprise expansion and analytics"),
+    "Mid-Market": ("Jordan Kim", "mid-market adoption and integrations"),
+    "SMB": ("Alex Rivera", "digital expansion"),
+}
+
 
 # ═══════════════════════════════════════════════════════════════
 # HELPERS
@@ -100,14 +118,7 @@ def _resolve_customer(query):
     if not query:
         return "CUST-001"
     q = query.upper().strip()
-    for key in _CUSTOMER_OWNERSHIP:
-        if key in q:
-            return key
-    q_lower = query.lower()
-    for key, cust in _CUSTOMER_OWNERSHIP.items():
-        if q_lower in cust["name"].lower():
-            return key
-    return "CUST-001"
+    return q if q in _CUSTOMER_OWNERSHIP else None
 
 
 def _find_opportunities(customer_id):
@@ -149,6 +160,10 @@ class CrossSellingAgent(BasicAgent):
         product_affinity      - display product affinity rules and scores
         recommendation_engine - generate prioritized recommendations
         revenue_impact        - project revenue impact of cross-sell pipeline
+        buying_signals        - surface real-time product and timing signals
+        outreach_plan         - create tailored talking points and sequence
+        growth_plan           - stage opportunities by conversion timeline
+        account_assignments   - simulate rep assignment and Teams alignment
     """
 
     def __init__(self):
@@ -164,6 +179,8 @@ class CrossSellingAgent(BasicAgent):
                         "enum": [
                             "opportunity_scan", "product_affinity",
                             "recommendation_engine", "revenue_impact",
+                            "buying_signals", "outreach_plan",
+                            "growth_plan", "account_assignments",
                         ],
                         "description": "The cross-selling operation to perform",
                     },
@@ -185,10 +202,19 @@ class CrossSellingAgent(BasicAgent):
             "product_affinity": self._product_affinity,
             "recommendation_engine": self._recommendation_engine,
             "revenue_impact": self._revenue_impact,
+            "buying_signals": self._buying_signals,
+            "outreach_plan": self._outreach_plan,
+            "growth_plan": self._growth_plan,
+            "account_assignments": self._account_assignments,
         }
         handler = dispatch.get(op)
         if not handler:
             return f"Unknown operation: {op}"
+        if cust_id is None:
+            return (
+                f"**Error:** Unknown customer_id `{kwargs.get('customer_id')}`. "
+                f"Available customer IDs: {', '.join(sorted(_CUSTOMER_OWNERSHIP))}."
+            )
         return handler(cust_id)
 
     # ── opportunity_scan ───────────────────────────────────────
@@ -290,10 +316,82 @@ class CrossSellingAgent(BasicAgent):
             f"Source: [Revenue Analytics + CRM + Product Database]\nAgents: CrossSellingAgent"
         )
 
+    def _buying_signals(self, cust_id):
+        cust = _CUSTOMER_OWNERSHIP[cust_id]
+        opps = _find_opportunities(cust_id)
+        signals = "\n".join(f"- {signal}" for signal in _BUYING_SIGNALS[cust_id])
+        top = opps[0] if opps else None
+        return (
+            f"**Buying Signals: {cust['name']}**\n\n{signals}\n\n"
+            f"**Priority:** {'High' if cust['health_score'] >= 80 else 'Monitor'}\n"
+            f"**Recommended Product:** {top['product_name'] if top else 'No uncovered product'}\n"
+            f"**Confidence:** {top['affinity_score']:.0%}\n" if top else
+            f"**Buying Signals: {cust['name']}**\n\n{signals}\n\nNo uncovered product.\n"
+        ) + "\nSource: [Dynamics 365 CRM + Product Usage + Feature Requests]\nAgents: CrossSellingAgent"
+
+    def _outreach_plan(self, cust_id):
+        cust = _CUSTOMER_OWNERSHIP[cust_id]
+        opps = _find_opportunities(cust_id)
+        top = opps[0] if opps else None
+        if not top:
+            return f"**Outreach Plan: {cust['name']}**\n\nNo uncovered product to promote."
+        return (
+            f"**Tailored Outreach Plan: {cust['name']}**\n\n"
+            f"**Contact:** {cust['contact']} | **Offer:** {top['product_name']}\n"
+            f"**Talking points:**\n"
+            f"- Your current adoption and peer benchmark indicate a {top['affinity_score']:.0%} product fit.\n"
+            f"- The estimated annual investment is ${top['annual_price']:,}.\n"
+            f"- {_BUYING_SIGNALS[cust_id][0]}.\n\n"
+            f"**Sequence:** Day 0 personalized email; Day 3 value workshop; "
+            f"Day 10 business-case review; Day {top['est_close_days']} decision target.\n\n"
+            f"Source: [Dynamics 365 CRM + Microsoft Teams]\nAgents: CrossSellingAgent"
+        )
+
+    def _growth_plan(self, cust_id):
+        rows = []
+        for cid, cust in _CUSTOMER_OWNERSHIP.items():
+            opps = _find_opportunities(cid)
+            if not opps:
+                continue
+            top = opps[0]
+            stage = "Quick Win" if top["est_close_days"] <= 21 else "Strategic"
+            rows.append(
+                f"| {cust['name']} | {top['product_name']} | {stage} | "
+                f"{top['est_close_days']} days | ${top['annual_price']:,} |"
+            )
+        return (
+            "**Expansion Growth Plan**\n\n"
+            "| Account | Opportunity | Stage | Target | ARR |\n|---|---|---|---|---|\n"
+            + "\n".join(rows)
+            + "\n\nSource: [Dynamics 365 CRM + Conversion Model]\nAgents: CrossSellingAgent"
+        )
+
+    def _account_assignments(self, cust_id):
+        rows = []
+        for cid, cust in _CUSTOMER_OWNERSHIP.items():
+            rep, expertise = _REP_ASSIGNMENTS[cust["segment"]]
+            top = _find_opportunities(cid)
+            rows.append(
+                f"| {cust['name']} | {rep} | {expertise} | "
+                f"{top[0]['product_name'] if top else 'Portfolio review'} | Prepared |"
+            )
+        return (
+            "**Simulated Account Assignments**\n\n"
+            "| Account | Rep | Expertise | Focus | Status |\n|---|---|---|---|---|\n"
+            + "\n".join(rows)
+            + "\n\nEmail templates, notifications, and a Teams alignment post are prepared "
+              "but were not sent; no CRM assignments were changed.\n\n"
+              "Source: [Dynamics 365 CRM + Microsoft Teams]\nAgents: CrossSellingAgent"
+        )
+
 
 if __name__ == "__main__":
     agent = CrossSellingAgent()
-    for op in ["opportunity_scan", "product_affinity", "recommendation_engine", "revenue_impact"]:
+    for op in [
+        "opportunity_scan", "product_affinity", "recommendation_engine",
+        "revenue_impact", "buying_signals", "outreach_plan", "growth_plan",
+        "account_assignments",
+    ]:
         print("=" * 60)
         print(agent.perform(operation=op, customer_id="CUST-001"))
         print()

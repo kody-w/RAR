@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__wealth_insights_generator",
   "name": "Wealth Insights Generator Agent",
   "rar_name": "@aibast-agents-library/wealth_insights_generator",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/wealth_insights_generator:57b74757d5c154a6869f89bf1ba3318d",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/wealth_insights_generator:4558524d03a32fb14d57c7b9521b7793b69e273c4050b78e0ad9b45b8cc8226d",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 280,
-  "size_kb": 12.6,
-  "sha256": "57b74757d5c154a6869f89bf1ba3318d9f406ac56df4a07feb84565bd20dd854",
+  "lines": 556,
+  "size_kb": 28.0,
+  "sha256": "4558524d03a32fb14d57c7b9521b7793b69e273c4050b78e0ad9b45b8cc8226d",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__wealth_insights_generator.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py.card",

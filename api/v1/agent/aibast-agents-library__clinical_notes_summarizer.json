@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__clinical_notes_summarizer",
   "name": "Clinical Notes Summarizer Agent",
   "rar_name": "@aibast-agents-library/clinical_notes_summarizer",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/clinical_notes_summarizer:af02e7077e7df871be4a84ed226f68f6",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/clinical_notes_summarizer:3a8157287c2b813dd34e90da6b00c70b8ce70f94324a20c44659be518b1b3005",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "healthcare",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 354,
-  "size_kb": 15.8,
-  "sha256": "af02e7077e7df871be4a84ed226f68f6e6e7b701bbe4e107863a21313341734f",
+  "lines": 508,
+  "size_kb": 22.4,
+  "sha256": "3a8157287c2b813dd34e90da6b00c70b8ce70f94324a20c44659be518b1b3005",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__clinical_notes_summarizer.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py.card",

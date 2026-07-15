@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__inventory_visibility",
   "name": "Inventory Visibility Agent",
   "rar_name": "@aibast-agents-library/inventory_visibility",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/inventory_visibility:64296e65606eaf7c815a5c1e0ab9638a",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/inventory_visibility:6370dc6730222f71410bb67218a8990198c21d6b9bc7c8ffe02701890faebd0e",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "retail_cpg",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 370,
-  "size_kb": 15.6,
-  "sha256": "64296e65606eaf7c815a5c1e0ab9638a4854184989da3d7fbbc766265ac81e83",
+  "lines": 549,
+  "size_kb": 23.4,
+  "sha256": "6370dc6730222f71410bb67218a8990198c21d6b9bc7c8ffe02701890faebd0e",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__inventory_visibility.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py.card",
