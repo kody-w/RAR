@@ -359,10 +359,15 @@ class RappSdkBuilderAgent(BasicAgent):
                     out[node.name] = ast.unparse(node)
             return out
 
-        try:
-            local_src = inspect.getsource(sys.modules[__name__])
-        except Exception as e:
-            return json.dumps({"status": "error", "action": "sync", "message": f"cannot read local source: {e}"})
+        local_src = None
+        for get in (lambda: inspect.getsource(sys.modules[__name__]),
+                    lambda: open(__file__, "r", encoding="utf-8").read()):
+            try:
+                local_src = get(); break
+            except Exception:
+                continue
+        if local_src is None:
+            return json.dumps({"status": "error", "action": "sync", "message": "cannot read local source"})
 
         remote_defs, local_defs = _defs(remote_src), _defs(local_src)
         per = {p: (p in remote_defs and local_defs.get(p) == remote_defs.get(p)) for p in prims}
