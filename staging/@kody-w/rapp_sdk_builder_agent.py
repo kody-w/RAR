@@ -19,7 +19,8 @@ Then just talk to your brainstem:
 The RAPP primitives are embedded here verbatim from the reference implementation
 (kody-w/rapp-1 · rapp.py), so the agent is self-contained and offline-capable. The
 `sync` action fetches the canonical rapp.py from the public repo and proves this file's
-embedded copy is byte-identical — provenance you can check, not trust.
+embedded primitive definitions are identical to it — by comparing source (parsed with
+ast, never executed), so it is provenance you can check, not trust, and safe to run.
 """
 import hashlib
 import json
@@ -46,7 +47,7 @@ except Exception:                               # dropped in / run standalone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody-w/rapp_sdk_builder_agent",
+    "name": "@kody-w/rapp_sdk_builder",
     "version": "1.0.0",
     "display_name": "RAPP SDK Builder",
     "description": "A hotloadable RAPP toolkit: mint compliant rappids, build/verify frames, "
@@ -56,7 +57,7 @@ __manifest__ = {
     "author": "Kody Wildfeuer",
     "tags": ["starter", "rapp", "sdk", "identity", "frame", "builder"],
     "category": "devtools",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "example_call": "scaffold a new RAPP organism called @me/scratch",
 }
@@ -326,23 +327,55 @@ class RappSdkBuilderAgent(BasicAgent):
                            "verdict": verdict, "findings": findings, "evidence": evidence}, indent=2)
 
     def _sync(self):
-        """Prove the embedded SDK matches the canonical public reference implementation."""
+        """Prove the embedded SDK matches the canonical public reference implementation.
+
+        We do NOT execute the fetched code — running remote code is a security hazard (and
+        registries forbid it). Instead we compare the *source definitions* of the primitive
+        functions (canonical/H/Hb) textually, parsing with `ast` (which never executes),
+        against our own embedded copy. Identical definitions ⇒ identical addresses.
+        """
+        import ast, inspect, sys
         try:
-            remote = _fetch(SRC).decode("utf-8")
+            remote_src = _fetch(SRC).decode("utf-8")
         except Exception as e:
             return json.dumps({"status": "error", "action": "sync", "message": f"fetch failed: {e}"})
-        # compare the primitive bodies by re-deriving a known vector through both
-        vec = {"b": 1, "a": [3, 2]}
-        local_particle = H("rapp/1:particle", vec)
-        ns = {}
-        exec(remote, ns)
-        remote_particle = ns["H"]("rapp/1:particle", vec)
-        match = local_particle == remote_particle
+
+        prims = ("canonical", "H", "Hb")
+
+        def _defs(src):
+            # Normalize each primitive to its executable form: strip a leading docstring,
+            # then ast.unparse (which also drops comments). What survives is exactly the
+            # code that computes addresses — so equality means identical computation, not
+            # identical formatting.
+            out = {}
+            for node in ast.parse(src).body:
+                if isinstance(node, ast.FunctionDef) and node.name in prims:
+                    body = list(node.body)
+                    if (body and isinstance(body[0], ast.Expr)
+                            and isinstance(getattr(body[0], "value", None), ast.Constant)
+                            and isinstance(body[0].value.value, str)):
+                        body = body[1:] or [ast.Pass()]
+                    node.body = body
+                    out[node.name] = ast.unparse(node)
+            return out
+
+        try:
+            local_src = inspect.getsource(sys.modules[__name__])
+        except Exception as e:
+            return json.dumps({"status": "error", "action": "sync", "message": f"cannot read local source: {e}"})
+
+        remote_defs, local_defs = _defs(remote_src), _defs(local_src)
+        per = {p: (p in remote_defs and local_defs.get(p) == remote_defs.get(p)) for p in prims}
+        match = all(per.values())
         return json.dumps({"status": "ok", "action": "sync",
                            "embedded_matches_public_reference": match,
-                           "source": SRC, "vector_particle": local_particle,
-                           "note": "Same vector hashed through the embedded and the freshly-fetched "
-                                   "reference implementation; equal ⇒ this agent computes canonical RAPP addresses."})
+                           "per_primitive": per,
+                           "source": SRC,
+                           "vector_particle": H("rapp/1:particle", {"b": 1, "a": [3, 2]}),
+                           "note": "The embedded canonical/H/Hb definitions were compared textually "
+                                   "(parsed with ast — no code executed) against the freshly-fetched public "
+                                   "reference. Equal ⇒ this agent computes canonical RAPP addresses byte-for-byte "
+                                   "with rapp.py."}, indent=2)
 
 
 # standalone self-test: `python3 rapp_sdk_builder_agent.py`
