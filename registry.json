@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-15T15:23:19.200136+00:00",
+  "generated_at": "2026-07-15T15:33:30.225846+00:00",
   "stats": {
     "total_agents": 200,
     "total_swarms": 82,
@@ -5625,7 +5625,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/rapp_sdk_builder",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "RAPP SDK Builder",
       "description": "A hotloadable RAPP toolkit: mint compliant rappids, build/verify frames, content-address values, scaffold organism seeds, and lint any public repo in the stack for compliance. Build with RAPP and stay synced against the public GitHubs \u2014 and back again. Builds on the public RAPP standard (kody-w/rapp-1).",
       "author": "Kody Wildfeuer",
@@ -5643,14 +5643,14 @@
       "example_call": "scaffold a new RAPP organism called @me/scratch",
       "_file": "agents/@kody-w/rapp_sdk_builder_agent.py",
       "_install_filename": "rar_kody_w_rapp_sdk_builder_agent.py",
-      "_sha256": "43a172926aca295df82eb549ca33614eb24cea8a70277007939a9079d9fd32a9",
+      "_sha256": "d635c90a066daecd863a7c0600f57529cb25107313e3eab4e9fb90497ec80b13",
       "_seed": 8864751416184144236,
-      "_size_kb": 19.3,
-      "_lines": 389,
+      "_size_kb": 19.5,
+      "_lines": 394,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-07-15T15:09:14Z",
+      "_first_commit_sha": "b036f8536b5b693ec1b09a760485749e98162b76",
+      "_latest_commit_sha": "1b47858b46c55699a36d90a0c61a63515bd3629d",
       "_card_sha256": "971cdd30f77190ddf07aaaef8c83be68d71fa90b66ebb4fdac64d87a6d3b4273"
     },
     {
