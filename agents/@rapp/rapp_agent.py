@@ -73,7 +73,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "RappAgent",
     "description": ("The one agent for the whole RAPP ecosystem: identity, "
                     "doors, local cubbies, shared neighborhoods, eggs, the "
@@ -486,14 +486,13 @@ def _slugify(text, fallback="x"):
 
 
 # ── door_from_rappid (inline mirror of tools/door_address.py — agents are
-#    self-contained per the contract; this parses Eternity + v2 + owner/repo) ──
-_ETERNITY_RE = re.compile(r"^rappid:@([A-Za-z0-9][\w.-]*)/([A-Za-z0-9][\w.-]*):([a-f0-9]{32,64})$")
-_V2_RE = re.compile(r"^rappid:v2:[a-z][\w-]*:@([A-Za-z0-9][\w.-]*)/([A-Za-z0-9][\w.-]*):[0-9a-f]{32}@github\.com/")
+#    self-contained per the contract; this parses canonical + owner/repo) ──
+_ETERNITY_RE = re.compile(r"^rappid:@([a-z0-9]+(?:-[a-z0-9]+)*)/([a-z0-9]+(?:-[a-z0-9]+)*):([0-9a-f]{64})$")
 _OWNERREPO_RE = re.compile(r"^([A-Za-z0-9][\w.-]*)/([A-Za-z0-9][\w.-]*)$")
 
 
 def mint_rappid(owner, slug):
-    """Eternity format (CONSTITUTION Art. XXXIV.1, locked 2026-06-03):
+    """Canonical RAPP mint (spec §6.2, keyless):
     `rappid:@<owner>/<slug>:<64hex>` — tail is Hb("rapp/1:rappid", uuid4), never a name-hash.
     `kind` lives in the record, never the string. We NEVER mint the v2 form."""
     import uuid
@@ -506,7 +505,7 @@ def door_from_rappid(rappid):
     for a non-locatable form (e.g. a v3 key-fingerprint commons rappid)."""
     s = (rappid or "").strip()
     owner = slug = None
-    for rx in (_ETERNITY_RE, _V2_RE, _OWNERREPO_RE):
+    for rx in (_ETERNITY_RE, _OWNERREPO_RE):
         m = rx.match(s)
         if m:
             owner, slug = m.group(1), m.group(2)
@@ -1010,7 +1009,7 @@ class RappAgent(BasicAgent):
             d = door_from_rappid(kwargs.get("rappid", ""))
             if not d:
                 return self._env(action, "error",
-                                 error="not a locatable rappid (Eternity / v2 / owner/repo).")
+                                 error="not a locatable rappid (canonical / owner/repo).")
             if kwargs.get("validate") or kwargs.get("verify"):
                 # HEAD/GET the identity URL → is this door actually reachable?
                 text, status = _fetch_status(d["urls"]["identity"])
