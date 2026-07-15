@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_rebalancing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Inventory Rebalancing Agent",
     "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
     "author": "AIBAST",
@@ -207,6 +207,29 @@ class InventoryRebalancingAgent(BasicAgent):
                 "policy_update",
                 "continuous_optimization",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to inventory_snapshot when omitted.",
+                        "enum": [
+                            "inventory_snapshot",
+                            "rebalance_recommendation",
+                            "transfer_plan",
+                            "cost_analysis",
+                            "portfolio_analysis",
+                            "recovery_plan",
+                            "policy_update",
+                            "continuous_optimization",
+                        ],
+                    },
+                    "sku": {
+                        "type": "string",
+                        "description": "SKU identifier used to select inventory recovery, policy, and optimization records.",
+                    },
+                },
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 

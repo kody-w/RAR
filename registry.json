@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-15T20:09:23.537461+00:00",
+  "generated_at": "2026-07-15T20:29:24.410493+00:00",
   "stats": {
     "total_agents": 200,
     "total_swarms": 82,
@@ -2808,7 +2808,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/inventory_rebalancing",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Inventory Rebalancing Agent",
       "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
       "author": "AIBAST",
@@ -2829,20 +2829,20 @@
       "_install_filename": "rar_aibast_agents_library_inventory_rebalancing_agent.py",
       "_stack": "inventory_rebalancing",
       "_stack_vertical": "manufacturing",
-      "_sha256": "e72ce13c22a87cf121ec1679dac642cf2c93d41ce8f0e22537fc0e64ac1931e5",
+      "_sha256": "b227465ff849a70ccad8b5f24862e200ccf8fa80353c49af60f97eae42db3899",
       "_seed": 741104875949665064,
-      "_size_kb": 20.2,
-      "_lines": 461,
+      "_size_kb": 21.2,
+      "_lines": 484,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "d6199b8239aa05521c5ca8c92c07e697cdad98a58f9c05c1c102498160d518d1"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/maintenance_scheduling",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Maintenance Scheduling Agent",
       "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
       "author": "AIBAST",
@@ -2863,20 +2863,20 @@
       "_install_filename": "rar_aibast_agents_library_maintenance_scheduling_agent.py",
       "_stack": "maintenance_scheduling",
       "_stack_vertical": "manufacturing",
-      "_sha256": "e726d3727dd5b6ddc6574ece42c4211bbb979b156c13b6a1aee5fdad0b7b66ed",
+      "_sha256": "1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36",
       "_seed": 16055120389735064948,
-      "_size_kb": 22.0,
-      "_lines": 479,
+      "_size_kb": 23.0,
+      "_lines": 502,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "e5a407829946659da491994c0e89cdc6cbfa4212c60016fd7450649c0eb7d884"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/order_status_communication",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Order Status Communication Agent",
       "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
       "author": "AIBAST",
@@ -2897,20 +2897,20 @@
       "_install_filename": "rar_aibast_agents_library_order_status_communication_agent.py",
       "_stack": "order_status_communication",
       "_stack_vertical": "manufacturing",
-      "_sha256": "34800e6050e3d7b2251d072df9ac8662685932a85dd1aa3b88f189da23d7cbc9",
+      "_sha256": "b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61",
       "_seed": 1417363157664017509,
-      "_size_kb": 19.7,
-      "_lines": 480,
+      "_size_kb": 20.7,
+      "_lines": 503,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "f0a683143687c3f89213b0fd709bcffc46987d345f73bb579494eb9948c600a7"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/production_line_optimization",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Production Line Optimization Agent",
       "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling.",
       "author": "AIBAST",
@@ -2931,20 +2931,20 @@
       "_install_filename": "rar_aibast_agents_library_production_line_optimization_agent.py",
       "_stack": "production_line_optimization",
       "_stack_vertical": "manufacturing",
-      "_sha256": "75147237803a5bb9c2e2d53c5c8139cbd77f6470b861fb25afc7961ab2ce8055",
+      "_sha256": "62b2178c928ca3bad6c45798652200b60ab73dc40d22cf957d2d83cc7636dd79",
       "_seed": 11447213470199194507,
-      "_size_kb": 20.5,
-      "_lines": 434,
+      "_size_kb": 21.5,
+      "_lines": 457,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "3821d4b45d3adf62397ee72dd5344ac64268bb352de0cfe5b20d0e85278e092c"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/supplier_risk_monitoring",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Supplier Risk Monitoring Agent",
       "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
       "author": "AIBAST",
@@ -2965,20 +2965,20 @@
       "_install_filename": "rar_aibast_agents_library_supplier_risk_monitoring_agent.py",
       "_stack": "supplier_risk_monitoring",
       "_stack_vertical": "manufacturing",
-      "_sha256": "78cddc420353351eb65f2cd5d23b2833a0187c02316a966f4321f828c9477f38",
+      "_sha256": "52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00",
       "_seed": 2701276264207625678,
-      "_size_kb": 20.4,
-      "_lines": 467,
+      "_size_kb": 21.5,
+      "_lines": 491,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "7a891807b95cf5dfbbede71a5e35017ef25a65910d02e47d80aa3dcd19ae9756"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/client_health_score",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Client Health Score Agent",
       "description": "Computes client health scores from NPS, margins, utilization, and escalation data to identify at-risk accounts and drive retention strategies.",
       "author": "AIBAST",
@@ -2999,20 +2999,20 @@
       "_install_filename": "rar_aibast_agents_library_client_health_score_agent.py",
       "_stack": "client_health_score",
       "_stack_vertical": "professional_services",
-      "_sha256": "1c57db3369c0b979b0bf86da9f0add1efe7d5fb7f41ac274a1aa08095ff4b3c0",
+      "_sha256": "9f453e765982e3089fc23ae06c8715063b3a0bd54fc09f3c1aaaa8942051c95d",
       "_seed": 8147017178597171709,
-      "_size_kb": 17.4,
-      "_lines": 445,
+      "_size_kb": 19.3,
+      "_lines": 488,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "f75466c8958cda7ac91425ff76579014a0fbe72e9d0f7ecd1949137ef070b092"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/contract_risk_review",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Contract Risk Review Agent",
       "description": "Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.",
       "author": "AIBAST",
@@ -3033,14 +3033,14 @@
       "_install_filename": "rar_aibast_agents_library_contract_risk_review_agent.py",
       "_stack": "contract_risk_review",
       "_stack_vertical": "professional_services",
-      "_sha256": "2302e298cfa508e1accf2e787804f2aeebf53c144c435e53908786dc99bb031b",
+      "_sha256": "9588cd7ff5bc8aed36fcde067b1ce30e2b07d311694ff7e8b0f1956ba1dd4826",
       "_seed": 13063354040569177065,
-      "_size_kb": 17.1,
-      "_lines": 394,
+      "_size_kb": 18.8,
+      "_lines": 434,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "92adc05c33d7d2abf39b0cfd20811d4fc4ea4d89bece7f1b877d431207c4213d"
     },
     {
@@ -3080,7 +3080,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/resource_utilization",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Resource Utilization Agent",
       "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
       "author": "AIBAST",
@@ -3101,20 +3101,20 @@
       "_install_filename": "rar_aibast_agents_library_resource_utilization_agent.py",
       "_stack": "resource_utilization",
       "_stack_vertical": "professional_services",
-      "_sha256": "29d73044d8fe0ae0b49810b1d1d96c17f940db4ac2d2b104e481eb66d66d1d8d",
+      "_sha256": "c8f0735a4fc7fe48c66c470bd742c6cffa80de5e5a425fc57d52eeeab095c17a",
       "_seed": 2213254919820554190,
-      "_size_kb": 21.8,
-      "_lines": 494,
+      "_size_kb": 23.7,
+      "_lines": 539,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "c7485472c70697f571431cccd3e9452d2a8620d20fab8b31b13def504064896d"
     },
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/time_entry_billing",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "Time Entry & Billing Agent",
       "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.",
       "author": "AIBAST",
@@ -3135,14 +3135,14 @@
       "_install_filename": "rar_aibast_agents_library_time_entry_billing_agent.py",
       "_stack": "time_entry_billing",
       "_stack_vertical": "professional_services",
-      "_sha256": "9752bf6a2568970de40c263ade1701e173c62b684f5aa9dc2daf8ad17a157fe4",
+      "_sha256": "2de79d4202676ea09ef4f832180fe317b99620fde45d61b79b4a1764b6300c28",
       "_seed": 17145926618142354208,
-      "_size_kb": 22.3,
-      "_lines": 464,
+      "_size_kb": 24.1,
+      "_lines": 506,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
+      "_latest_commit_sha": "e6687d3f021349e0bf8ad7764f9d73f2c4889dfd",
       "_card_sha256": "100a958c80178787396dea4b22414d61e5eb13cfc6de3ef0e2d0ee3dd35dbdee"
     },
     {
@@ -8193,8 +8193,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py"
       ],
-      "_size_kb": 20.2,
-      "_lines": 461
+      "_size_kb": 21.2,
+      "_lines": 484
     },
     {
       "type": "stack",
@@ -8209,8 +8209,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py"
       ],
-      "_size_kb": 22.0,
-      "_lines": 479
+      "_size_kb": 23.0,
+      "_lines": 502
     },
     {
       "type": "stack",
@@ -8225,8 +8225,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py"
       ],
-      "_size_kb": 19.7,
-      "_lines": 480
+      "_size_kb": 20.7,
+      "_lines": 503
     },
     {
       "type": "stack",
@@ -8241,8 +8241,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py"
       ],
-      "_size_kb": 20.5,
-      "_lines": 434
+      "_size_kb": 21.5,
+      "_lines": 457
     },
     {
       "type": "stack",
@@ -8257,8 +8257,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py"
       ],
-      "_size_kb": 20.4,
-      "_lines": 467
+      "_size_kb": 21.5,
+      "_lines": 491
     },
     {
       "type": "stack",
@@ -8273,8 +8273,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py"
       ],
-      "_size_kb": 17.4,
-      "_lines": 445
+      "_size_kb": 19.3,
+      "_lines": 488
     },
     {
       "type": "stack",
@@ -8289,8 +8289,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py"
       ],
-      "_size_kb": 17.1,
-      "_lines": 394
+      "_size_kb": 18.8,
+      "_lines": 434
     },
     {
       "type": "stack",
@@ -8321,8 +8321,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py"
       ],
-      "_size_kb": 21.8,
-      "_lines": 494
+      "_size_kb": 23.7,
+      "_lines": 539
     },
     {
       "type": "stack",
@@ -8337,8 +8337,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py"
       ],
-      "_size_kb": 22.3,
-      "_lines": 464
+      "_size_kb": 24.1,
+      "_lines": 506
     },
     {
       "type": "stack",

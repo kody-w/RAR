@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/production_line_optimization",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Production Line Optimization Agent",
     "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling.",
     "author": "AIBAST",
@@ -186,6 +186,29 @@ class ProductionLineOptimizationAgent(BasicAgent):
                 "roi_analysis",
                 "monitoring_plan",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to line_efficiency when omitted.",
+                        "enum": [
+                            "line_efficiency",
+                            "bottleneck_analysis",
+                            "throughput_optimization",
+                            "shift_planning",
+                            "capacity_model",
+                            "implementation_plan",
+                            "roi_analysis",
+                            "monitoring_plan",
+                        ],
+                    },
+                    "line_id": {
+                        "type": "string",
+                        "description": "Production line identifier used to select optimization, ROI, and monitoring records.",
+                    },
+                },
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 

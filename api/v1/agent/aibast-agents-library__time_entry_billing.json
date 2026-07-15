@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__time_entry_billing",
   "name": "Time Entry & Billing Agent",
   "rar_name": "@aibast-agents-library/time_entry_billing",
-  "rappid": "rappid:@aibast-agents-library/time_entry_billing:9752bf6a2568970de40c263ade1701e173c62b684f5aa9dc2daf8ad17a157fe4",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/time_entry_billing:2de79d4202676ea09ef4f832180fe317b99620fde45d61b79b4a1764b6300c28",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "professional_services",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 464,
-  "size_kb": 22.3,
-  "sha256": "9752bf6a2568970de40c263ade1701e173c62b684f5aa9dc2daf8ad17a157fe4",
+  "lines": 506,
+  "size_kb": 24.1,
+  "sha256": "2de79d4202676ea09ef4f832180fe317b99620fde45d61b79b4a1764b6300c28",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

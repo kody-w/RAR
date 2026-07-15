@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__maintenance_scheduling",
   "name": "Maintenance Scheduling Agent",
   "rar_name": "@aibast-agents-library/maintenance_scheduling",
-  "rappid": "rappid:@aibast-agents-library/maintenance_scheduling:e726d3727dd5b6ddc6574ece42c4211bbb979b156c13b6a1aee5fdad0b7b66ed",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/maintenance_scheduling:1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 479,
-  "size_kb": 22.0,
-  "sha256": "e726d3727dd5b6ddc6574ece42c4211bbb979b156c13b6a1aee5fdad0b7b66ed",
+  "lines": 502,
+  "size_kb": 23.0,
+  "sha256": "1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

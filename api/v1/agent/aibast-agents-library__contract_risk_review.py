@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/contract_risk_review",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Contract Risk Review Agent",
     "description": "Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.",
     "author": "AIBAST",
@@ -208,6 +208,20 @@ def _evidence_matches(user_input, records):
     ]
 
 
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or contract identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("contract_id"):
+        record_ids = [
+            record["record_id"]
+            for record in EVIDENCE_CAPABILITIES[capability]["records"]
+            if record["contract_id"] == kwargs["contract_id"]
+        ]
+        return " ".join(record_ids) or kwargs["contract_id"]
+    return kwargs.get("user_input", "")
+
+
 def _render_evidence_operation(capability, user_input=""):
     spec = EVIDENCE_CAPABILITIES[capability]
     records = spec["records"]
@@ -250,6 +264,31 @@ class ContractRiskReviewAgent(BasicAgent):
                 "renegotiation_brief",
                 "implementation_package",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to risk_scan when omitted.",
+                        "enum": [
+                            "risk_scan",
+                            "clause_analysis",
+                            "compliance_check",
+                            "renegotiation_brief",
+                            "implementation_package",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence amendment record identifier for implementation_package, such as CRR-501.",
+                    },
+                    "contract_id": {
+                        "type": "string",
+                        "description": "Contract identifier, such as CTR-5001; selects all implementation-package records for that contract.",
+                    },
+                },
+                "required": [],
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -377,7 +416,8 @@ class ContractRiskReviewAgent(BasicAgent):
     # ------------------------------------------------------------------
     def _implementation_package(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "implementation_package", kwargs.get("user_input", "")
+            "implementation_package",
+            _evidence_selector("implementation_package", kwargs),
         )
 
 

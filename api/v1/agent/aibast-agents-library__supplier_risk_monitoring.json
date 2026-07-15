@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__supplier_risk_monitoring",
   "name": "Supplier Risk Monitoring Agent",
   "rar_name": "@aibast-agents-library/supplier_risk_monitoring",
-  "rappid": "rappid:@aibast-agents-library/supplier_risk_monitoring:78cddc420353351eb65f2cd5d23b2833a0187c02316a966f4321f828c9477f38",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/supplier_risk_monitoring:52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 467,
-  "size_kb": 20.4,
-  "sha256": "78cddc420353351eb65f2cd5d23b2833a0187c02316a966f4321f828c9477f38",
+  "lines": 491,
+  "size_kb": 21.5,
+  "sha256": "52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

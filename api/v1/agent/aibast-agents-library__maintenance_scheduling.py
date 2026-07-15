@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/maintenance_scheduling",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Maintenance Scheduling Agent",
     "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
     "author": "AIBAST",
@@ -232,6 +232,29 @@ class MaintenanceSchedulingAgent(BasicAgent):
                 "maintenance_calendar",
                 "fleet_optimization",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to schedule_overview when omitted.",
+                        "enum": [
+                            "schedule_overview",
+                            "predictive_alerts",
+                            "work_order_plan",
+                            "downtime_analysis",
+                            "maintenance_plan",
+                            "create_work_order",
+                            "maintenance_calendar",
+                            "fleet_optimization",
+                        ],
+                    },
+                    "equipment_id": {
+                        "type": "string",
+                        "description": "Equipment identifier used to select maintenance planning and work-order records.",
+                    },
+                },
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 

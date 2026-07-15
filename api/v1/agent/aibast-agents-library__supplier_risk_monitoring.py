@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supplier_risk_monitoring",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Supplier Risk Monitoring Agent",
     "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
     "author": "AIBAST",
@@ -213,6 +213,30 @@ class SupplierRiskMonitoringAgent(BasicAgent):
                 "execution_timeline",
                 "monitoring_plan",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to risk_dashboard when omitted.",
+                        "enum": [
+                            "risk_dashboard",
+                            "supplier_scorecard",
+                            "disruption_alerts",
+                            "alternative_sourcing",
+                            "risk_driver_analysis",
+                            "mitigation_plan",
+                            "financial_exposure",
+                            "execution_timeline",
+                            "monitoring_plan",
+                        ],
+                    },
+                    "supplier_id": {
+                        "type": "string",
+                        "description": "Supplier identifier used to select risk, mitigation, exposure, timeline, and monitoring records.",
+                    },
+                },
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/order_status_communication",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Order Status Communication Agent",
     "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
     "author": "AIBAST",
@@ -268,6 +268,29 @@ class OrderStatusCommunicationAgent(BasicAgent):
                 "quality_validation",
                 "performance_review",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to order_lookup when omitted.",
+                        "enum": [
+                            "order_lookup",
+                            "shipment_tracking",
+                            "delay_notification",
+                            "customer_update",
+                            "recovery_plan",
+                            "engagement_execution",
+                            "quality_validation",
+                            "performance_review",
+                        ],
+                    },
+                    "order_id": {
+                        "type": "string",
+                        "description": "Order identifier used to select recovery, engagement, quality, and performance records.",
+                    },
+                },
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 

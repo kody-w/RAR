@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__order_status_communication",
   "name": "Order Status Communication Agent",
   "rar_name": "@aibast-agents-library/order_status_communication",
-  "rappid": "rappid:@aibast-agents-library/order_status_communication:34800e6050e3d7b2251d072df9ac8662685932a85dd1aa3b88f189da23d7cbc9",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/order_status_communication:b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 480,
-  "size_kb": 19.7,
-  "sha256": "34800e6050e3d7b2251d072df9ac8662685932a85dd1aa3b88f189da23d7cbc9",
+  "lines": 503,
+  "size_kb": 20.7,
+  "sha256": "b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
