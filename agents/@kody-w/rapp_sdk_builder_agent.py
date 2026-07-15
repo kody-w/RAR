@@ -48,7 +48,7 @@ except Exception:                               # dropped in / run standalone
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_sdk_builder",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RAPP SDK Builder",
     "description": "A hotloadable RAPP toolkit: mint compliant rappids, build/verify frames, "
                    "content-address values, scaffold organism seeds, and lint any public repo in "
