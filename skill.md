@@ -332,12 +332,20 @@ Submit a new Issue with the updated code. The version in `__manifest__` must be 
 
 ### Security Constraints
 
-The following patterns are **rejected** by the security scanner:
+**Rejected** (build fails) — genuine supply-chain hazards:
 
-- `eval()`, `exec()`, `compile()` with exec mode
-- `os.system()`, `subprocess.*`
-- `__import__()`
+- `os.system()` — use `subprocess` and declare wrapped binaries in `requires_env`
+- Suspicious file access (`/etc`, `/proc`, `.env`, `.ssh`, `passwd`)
 - Hardcoded secrets (api_key, token, password patterns)
+
+**Allowed but TAGGED** — dynamic-code capabilities are legitimate (meta-programming,
+self-verification against a fetched reference, sandboxed interpreters). They are not
+rejected; the agent's registry entry records `_capabilities` (and `_uses_exec`) so
+consumers who want to restrict dynamic code can **filter** on the tag:
+
+- `eval()`, `exec()`, `compile()` with exec mode, `__import__()`
+
+**Allowed** — `subprocess.*` (wrapping external CLIs is a normal integration pattern).
 
 ### Namespace Registry
 

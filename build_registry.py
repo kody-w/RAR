@@ -421,14 +421,33 @@ def _security_allowlisted(path: Path) -> bool:
 # Subprocess is intentionally NOT here — wrapping external CLIs is a normal
 # integration pattern. See SECURITY_ALLOWLIST comment above.
 DANGEROUS_PATTERNS = [
-    (r'\beval\s*\(', "eval() is forbidden — use safe alternatives"),
-    (r'\bexec\s*\(', "exec() is forbidden — use safe alternatives"),
-    (r'\b__import__\s*\(', "__import__() is forbidden — use standard imports"),
-    (r'\bcompile\s*\(.*["\']exec["\']', "compile() with exec mode is forbidden"),
     (r'\bos\.system\s*\(', "os.system() is forbidden — use subprocess and declare in requires_env"),
     (r'\bopen\s*\(.*(\/etc|\/proc|\.env|\.ssh|passwd)', "suspicious file access pattern"),
     (r'(api[_-]?key|secret|password|token)\s*=\s*["\'][^"\']{8,}', "possible hardcoded secret"),
 ]
+
+# Dynamic-code capabilities. These used to be hard-rejected, which broke
+# genuinely useful agents over a blunt rule. Now they are ALLOWED and TAGGED:
+# an agent that uses them gets its capability recorded in the registry entry
+# (`_capabilities`), so consumers who want to restrict dynamic code can simply
+# FILTER on the tag instead of the registry refusing to build. exec/eval are
+# legitimate for meta-programming, self-verification against a fetched
+# reference, sandboxed interpreters, etc. — the registry's job is to surface
+# the capability, not to forbid it.
+CAPABILITY_PATTERNS = [
+    (r'\bexec\s*\(', "exec"),
+    (r'\beval\s*\(', "eval"),
+    (r'\b__import__\s*\(', "dynamic_import"),
+    (r'\bcompile\s*\(.*["\']exec["\']', "compile_exec"),
+]
+
+
+def scan_capabilities(py_path: Path) -> list:
+    """Return sorted dynamic-code capability tags present in the file (e.g.
+    ['eval', 'exec']). Empty list if none. Informational — never fatal."""
+    source = py_path.read_text(encoding="utf-8")
+    tags = {tag for pattern, tag in CAPABILITY_PATTERNS if re.search(pattern, source)}
+    return sorted(tags)
 
 
 def extract_stack_info(file_path: Path) -> tuple:
@@ -624,6 +643,13 @@ def build_registry():
                 for w in sec_warnings:
                     errors.append(w)
                 continue
+
+        # Dynamic-code capabilities: allowed but TAGGED, never fatal. Consumers
+        # who want to restrict exec/eval can filter on manifest["_capabilities"].
+        caps = scan_capabilities(py_path)
+        if caps:
+            manifest["_capabilities"] = caps
+            manifest["_uses_exec"] = ("exec" in caps or "compile_exec" in caps)
 
         # Integrity hash
         sha256 = compute_sha256(py_path)

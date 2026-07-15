@@ -223,22 +223,25 @@ class TestSecurityScanner:
         assert hasattr(br, "DANGEROUS_PATTERNS")
 
     @pytest.mark.security
-    def test_rejects_eval(self, tmp_path):
+    def test_tags_eval_not_fatal(self, tmp_path):
+        """eval is a dynamic-code capability: allowed but TAGGED, not rejected."""
         sys.path.insert(0, str(REPO_ROOT))
         import build_registry as br
-        f = tmp_path / "evil.py"
+        f = tmp_path / "uses_eval.py"
         f.write_text('result = eval("1+1")')
-        warnings = br.scan_security(f)
-        assert any("eval" in w for w in warnings)
+        assert not any("eval" in w for w in br.scan_security(f))  # no longer fatal
+        assert "eval" in br.scan_capabilities(f)                  # surfaced as a capability
 
     @pytest.mark.security
-    def test_rejects_exec(self, tmp_path):
+    def test_tags_exec_not_fatal(self, tmp_path):
+        """exec is a dynamic-code capability: allowed but TAGGED, not rejected.
+        Consumers who want to restrict dynamic code filter on _capabilities."""
         sys.path.insert(0, str(REPO_ROOT))
         import build_registry as br
-        f = tmp_path / "evil.py"
+        f = tmp_path / "uses_exec.py"
         f.write_text('exec("import os")')
-        warnings = br.scan_security(f)
-        assert any("exec" in w for w in warnings)
+        assert not any("exec" in w for w in br.scan_security(f))
+        assert "exec" in br.scan_capabilities(f)
 
     @pytest.mark.security
     def test_rejects_os_system(self, tmp_path):
@@ -263,13 +266,14 @@ class TestSecurityScanner:
         assert not any("subprocess" in w for w in warnings)
 
     @pytest.mark.security
-    def test_rejects_dunder_import(self, tmp_path):
+    def test_tags_dunder_import_not_fatal(self, tmp_path):
+        """__import__ is a dynamic-code capability: allowed but TAGGED."""
         sys.path.insert(0, str(REPO_ROOT))
         import build_registry as br
-        f = tmp_path / "evil.py"
+        f = tmp_path / "uses_dyn_import.py"
         f.write_text('mod = __import__("os")')
-        warnings = br.scan_security(f)
-        assert any("__import__" in w for w in warnings)
+        assert not any("__import__" in w for w in br.scan_security(f))
+        assert "dynamic_import" in br.scan_capabilities(f)
 
     @pytest.mark.security
     def test_rejects_hardcoded_secret(self, tmp_path):
