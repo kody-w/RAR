@@ -73,7 +73,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "display_name": "RappAgent",
     "description": ("The one agent for the whole RAPP ecosystem: identity, "
                     "doors, local cubbies, shared neighborhoods, eggs, the "
@@ -127,6 +127,9 @@ LOBBY_URL = os.environ.get(
 RAPP_GOD = os.environ.get("RAPP_GOD", "kody-w/rapp-god")        # registry of every part + version
 RAPP_MAP = os.environ.get("RAPP_MAP", "kody-w/rapp-map")        # which repo houses which part
 RAPP_SPECIES = os.environ.get("RAPP_SPECIES", "kody-w/RAPP")    # the species root (specs + kernel)
+# Canonical §6.1 species root rappid — the one true parent every kody-w door
+# points at. NOT RAPP_SPECIES.replace("/",":") (that yields a malformed rappid).
+SPECIES_ROOT_RAPPID = "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9"
 RAPP_BIBLE = os.environ.get("RAPP_BIBLE", "kody-w/RAPP-Bible")  # the specs hub (human-facing canon)
 _RAW = "https://raw.githubusercontent.com"
 GRAIL_SOURCES = {
@@ -494,8 +497,14 @@ _OWNERREPO_RE = re.compile(r"^([A-Za-z0-9][\w.-]*)/([A-Za-z0-9][\w.-]*)$")
 def mint_rappid(owner, slug):
     """Canonical RAPP mint (spec §6.2, keyless):
     `rappid:@<owner>/<slug>:<64hex>` — tail is Hb("rapp/1:rappid", uuid4), never a name-hash.
-    `kind` lives in the record, never the string. We NEVER mint the v2 form."""
+    `kind` lives in the record, never the string. We NEVER mint the v2 form.
+
+    owner/slug are canonicalized to the §6.1 grammar (lowercase, single hyphens):
+    a real GitHub login like `Kody-W` or a repo like `My_Door.v2` would otherwise
+    produce a rappid that fails rappid_valid — the address must be lowercase."""
     import uuid
+    owner = _slugify(owner, fallback="anon")
+    slug = _slugify(slug, fallback="x")
     h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()  # canonical keyless mint (spec §6.2), never sha256(name)
     return f"rappid:@{owner}/{slug}:{h}"
 
@@ -1080,8 +1089,10 @@ class RappAgent(BasicAgent):
                                         if not d.startswith(".")],
                              note="Add one under ~/.rapp/rapplications/<name>/ "
                                   "(agents/, web/index.html, soul.md, serve.py).")
-        h = hashlib.sha256(f"kody/{name}-twin".encode()).hexdigest()[:32]
-        ws = os.path.join(home, ".rapp", "twins", h)
+        # Directory key — a stable slug of the name so re-summons reuse the same
+        # workspace. This is a FILESYSTEM path, not an identity; name-derived is fine.
+        dir_key = hashlib.sha256(f"kody/{name}-twin".encode()).hexdigest()[:32]
+        ws = os.path.join(home, ".rapp", "twins", dir_key)
         portfile = os.path.join(ws, ".port")
 
         def _alive(p):
@@ -1112,9 +1123,17 @@ class RappAgent(BasicAgent):
             s = os.path.join(tmpl, f)
             if os.path.exists(s):
                 shutil.copy(s, os.path.join(ws, f))
-        rappid = f"rappid:@{ctx.get('handle') or 'kody'}/{name}-twin:{h}"
-        _write_json(os.path.join(ws, "rappid.json"), {
-            "schema": "rapp-rappid/2.0", "rappid": rappid,
+        # Identity: mint ONCE, keyless (§6.2), then reuse — re-summoning must not
+        # change the twin's rappid. Never sha256(name): that's the cardinal sin
+        # and yields an invalid 32-hex tail. kind lives in the record, not the string.
+        rj_path = os.path.join(ws, "rappid.json")
+        existing = _read_json(rj_path, default=None)
+        if isinstance(existing, dict) and _ETERNITY_RE.match(str(existing.get("rappid", ""))):
+            rappid = existing["rappid"]
+        else:
+            rappid = mint_rappid(ctx.get("handle") or "kody", _slugify(f"{name}-twin"))
+        _write_json(rj_path, {
+            "schema": "rapp/1", "rappid": rappid,
             "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
             "kind": "twin", "name": f"{name}-twin", "born_at": _now(),
             "notes": f"Summoned rapplication '{name}' as an isolated tailored-UI twin."})
@@ -1158,14 +1177,12 @@ class RappAgent(BasicAgent):
     # operator owns theirs. Dry-run by default; confirm=true creates the PRIVATE
     # GitHub repo + pushes.
     def _batcave(self, kwargs, ctx):
-        import hashlib
         owner = (kwargs.get("owner") or ctx.get("handle") or "").strip()
         slug = (kwargs.get("slug") or "batcave").strip()
         if not owner:
             return self._env("batcave", "error", error="need owner=<github-login> (or sign into gh).")
-        import uuid
-        h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()  # canonical keyless mint (spec §6.2), never sha256(name)
-        rappid = f"rappid:@{owner}/{slug}:{h}"
+        # Canonical keyless §6.2 mint (owner/slug canonicalized to §6.1 by mint_rappid).
+        rappid = mint_rappid(owner, slug)
         what = kwargs.get("what") or "a private place to park cubbies and show what we're cooking"
         out = os.path.join(ctx["home"], ".brainstem", "plant", slug)
         soul = ("# " + slug + "\n\n## Identity — read this every turn\n"
@@ -1180,9 +1197,14 @@ class RappAgent(BasicAgent):
                   "2. In your brainstem: \"use the rapp agent to join the neighborhood and set up my cubby\" "
                   "(repo=" + owner + "/" + slug + ").\n\nSchema family: rapp-batcave-cubby/1.0 · "
                   "rapp-batcave-cubbies/1.0 · rapp-batcave-event/1.0.\n")
+        # Parent is the operator's own rappid IF they've minted a valid one — the
+        # ctx sentinel "rappid:unregistered" is truthy but fails §6.1, so guard on
+        # the grammar and fall back to the canonical species root, never the sentinel.
+        _op = ctx.get("rappid") or ""
+        parent = _op if _ETERNITY_RE.match(_op) else SPECIES_ROOT_RAPPID
         files = {
-            "rappid.json": json.dumps({"schema": "rapp-rappid/2.0", "rappid": rappid,
-                "parent_rappid": ctx.get("rappid") or "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+            "rappid.json": json.dumps({"schema": "rapp/1", "rappid": rappid,
+                "parent_rappid": parent,
                 "kind": "neighborhood", "name": slug, "owner": owner, "born_at": _now(),
                 "notes": "Private cubby-neighborhood (batcave pattern): per-member cubbies, signed events, no public front door."}, indent=2),
             "neighborhood.json": json.dumps({"schema": "rapp-batcave/1.0", "rappid": rappid, "name": slug,
@@ -1476,14 +1498,16 @@ class RappAgent(BasicAgent):
                                    "survives every kernel upgrade. Pass force=true only to "
                                    "re-mint a fresh organism."))
         rappid = mint_rappid(owner, slug)
-        rec = {"schema": "rapp-rappid/2.0", "rappid": rappid, "kind": kind,
+        rec = {"schema": "rapp/1", "rappid": rappid, "kind": kind,
                "name": slug, "owner": owner, "repo": slug, "host": "github.com",
                "github": f"https://github.com/{owner}/{slug}",
-               "parent_rappid": (existing or {}).get("parent_rappid") or f"rappid:@{RAPP_SPECIES.replace('/', ':')}",
+               "parent_rappid": (existing or {}).get("parent_rappid") or SPECIES_ROOT_RAPPID,
                "parent_repo": f"https://github.com/{RAPP_SPECIES}",
                "minted_at": _now(),
                "notes": ("Eternity format (Art. XXXIV.1): rappid:@<owner>/<slug>:<64hex>, "
-                         "the deterministic sha256 of '%s/%s'. kind lives in the record." % (owner, slug))}
+                         "the 64-hex tail is a keyless domain-separated mint "
+                         "Hb('rapp/1:rappid', uuid4) — NOT sha256('%s/%s'). kind lives "
+                         "in the record, not the string." % (owner, slug))}
         _write_json(path, rec)
         # the spine: a mint is a birth — record it on the lineage ledger
         self._bond_record(ctx, {"kind": "birth", "rappid": rappid,
@@ -1533,7 +1557,7 @@ class RappAgent(BasicAgent):
         out = kwargs.get("path") or os.path.join(ctx["home"], ".brainstem", "doors", slug)
         rappid = mint_rappid(owner, slug)
         parent = _read_json(os.path.join(ctx["home"], ".brainstem", "rappid.json")) or {}
-        parent_rappid = parent.get("rappid") or f"rappid:@{RAPP_SPECIES.replace('/', ':')}"
+        parent_rappid = parent.get("rappid") or SPECIES_ROOT_RAPPID
         raw = f"{_RAW}/{owner}/{slug}/main"
         written = []
 
@@ -1546,7 +1570,7 @@ class RappAgent(BasicAgent):
 
         # the canonical front-door grail set (mirror of tools/front_door_grail.py)
         _write_json(os.path.join(out, "rappid.json"), {
-            "schema": "rapp-rappid/2.0", "rappid": rappid, "kind": kind, "name": slug,
+            "schema": "rapp/1", "rappid": rappid, "kind": kind, "name": slug,
             "display_name": display, "host": "github.com", "owner": owner, "repo": slug,
             "github": f"https://github.com/{owner}/{slug}", "url": f"https://{owner}.github.io/{slug}/",
             "parent_rappid": parent_rappid, "parent_repo": f"https://github.com/{RAPP_SPECIES}",
