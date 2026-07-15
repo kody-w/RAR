@@ -16,7 +16,7 @@ neighborhood through natural language:
   action=remove       Unlink twin's canonical entry (and optionally wipe anchor).
 
 Spec conformance (sibling to twin_egg_hatcher_agent.py):
-  - rappid.json schema rapp-rappid/2.0, kind="project", parent_rappid
+  - rappid.json schema rapp/1, kind="project", parent_rappid
     from ~/.brainstem/rappid.json. Same shape twin_egg_hatcher writes.
   - manifest.json schema rapp-twin-manifest/1.0 with port_hint.
   - HATCH_RECEIPT.json same fields the canonical hatcher writes.
