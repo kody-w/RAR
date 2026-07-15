@@ -73,7 +73,7 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_egg_hatcher",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "HatchTwinEgg",
     "description": (
         "Generic single-file hatcher for any RAPP digital-organism twin. "
@@ -633,7 +633,7 @@ def _hatch_neighborhood_egg(egg_path: Path, manifest: Dict[str, Any]) -> Dict[st
     )
     (n_dir / "rappid.json").write_text(
         json.dumps({
-            "schema":  "rapp-rappid/2.0",
+            "schema":  "rapp/1",
             "rappid":  manifest.get("rappid"),
             "hash":    n_hash,
             "kind":    "neighborhood",

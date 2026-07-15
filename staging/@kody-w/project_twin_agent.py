@@ -29,7 +29,7 @@ Spec conformance (sibling to twin_egg_hatcher_agent.py):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/project_twin_agent",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "display_name": "ProjectTwin",
     "description": (
         "Single-file lifecycle agent for project-anchored brainstem twins. "
@@ -452,10 +452,14 @@ def _hash_from_rappid(rappid: str) -> str:
 
 
 def _mint_v2_rappid(kind: str, owner: str, repo: str) -> str:
-    # Consolidated rappid: self-locating + 256-bit identity. `kind` lives in the
-    # rappid.json record, never in the string. (Param name kept for callers.)
-    digest = hashlib.sha256(uuid.uuid4().bytes).hexdigest()
-    return f"rappid:@{owner}/{repo}:{digest}"
+    # Canonical RAPP §6.2 keyless mint: rappid:@<owner>/<slug>:<64hex>, tail is
+    # Hb("rapp/1:rappid", uuid4) (domain-separated, never a name-hash). owner/repo
+    # are canonicalized to the §6.1 grammar so a real login "Kody-W" / repo
+    # "My_Repo" yields a valid rappid. `kind` lives in the record, not the string.
+    _o = re.sub(r"[^a-z0-9]+", "-", (owner or "anon").lower()).strip("-") or "anon"
+    _r = re.sub(r"[^a-z0-9]+", "-", (repo or "x").lower()).strip("-") or "x"
+    digest = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
+    return f"rappid:@{_o}/{_r}:{digest}"
 
 
 def _slug(s: str) -> str:
@@ -944,7 +948,7 @@ def _do_hatch(**kwargs) -> dict:
         port = int(port)
 
     rappid_doc = {
-        "schema": "rapp-rappid/2.0",
+        "schema": "rapp/1",
         "rappid": rappid,
         "hash": twin_hash,
         "kind": "project",
