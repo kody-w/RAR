@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__resource_utilization",
   "name": "Resource Utilization Agent",
   "rar_name": "@aibast-agents-library/resource_utilization",
-  "rappid": "rappid:@aibast-agents-library/resource_utilization:29d73044d8fe0ae0b49810b1d1d96c17f940db4ac2d2b104e481eb66d66d1d8d",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/resource_utilization:c8f0735a4fc7fe48c66c470bd742c6cffa80de5e5a425fc57d52eeeab095c17a",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "professional_services",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 494,
-  "size_kb": 21.8,
-  "sha256": "29d73044d8fe0ae0b49810b1d1d96c17f940db4ac2d2b104e481eb66d66d1d8d",
+  "lines": 539,
+  "size_kb": 23.7,
+  "sha256": "c8f0735a4fc7fe48c66c470bd742c6cffa80de5e5a425fc57d52eeeab095c17a",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

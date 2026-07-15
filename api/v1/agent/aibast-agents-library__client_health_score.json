@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__client_health_score",
   "name": "Client Health Score Agent",
   "rar_name": "@aibast-agents-library/client_health_score",
-  "rappid": "rappid:@aibast-agents-library/client_health_score:1c57db3369c0b979b0bf86da9f0add1efe7d5fb7f41ac274a1aa08095ff4b3c0",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/client_health_score:9f453e765982e3089fc23ae06c8715063b3a0bd54fc09f3c1aaaa8942051c95d",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "professional_services",
   "tags": [
@@ -21,9 +21,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 445,
-  "size_kb": 17.4,
-  "sha256": "1c57db3369c0b979b0bf86da9f0add1efe7d5fb7f41ac274a1aa08095ff4b3c0",
+  "lines": 488,
+  "size_kb": 19.3,
+  "sha256": "9f453e765982e3089fc23ae06c8715063b3a0bd54fc09f3c1aaaa8942051c95d",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

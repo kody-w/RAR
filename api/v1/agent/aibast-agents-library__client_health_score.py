@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/client_health_score",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Client Health Score Agent",
     "description": "Computes client health scores from NPS, margins, utilization, and escalation data to identify at-risk accounts and drive retention strategies.",
     "author": "AIBAST",
@@ -246,6 +246,23 @@ def _evidence_matches(user_input, records):
     ]
 
 
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or client identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("client_id"):
+        client = CLIENTS.get(kwargs["client_id"])
+        if not client:
+            return kwargs["client_id"]
+        record_ids = [
+            record["record_id"]
+            for record in EVIDENCE_CAPABILITIES[capability]["records"]
+            if record["client"] == client["name"]
+        ]
+        return " ".join(record_ids) or kwargs["client_id"]
+    return kwargs.get("user_input", "")
+
+
 def _render_evidence_operation(capability, user_input=""):
     """Render deterministic evidence data and simulated write receipts."""
     spec = EVIDENCE_CAPABILITIES[capability]
@@ -292,6 +309,32 @@ class ClientHealthScoreAgent(BasicAgent):
                 "retention_roadmap",
                 "stakeholder_outreach",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to health_dashboard when omitted.",
+                        "enum": [
+                            "health_dashboard",
+                            "engagement_analysis",
+                            "satisfaction_trend",
+                            "at_risk_clients",
+                            "retention_roadmap",
+                            "stakeholder_outreach",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence record identifier for retention_roadmap or stakeholder_outreach, such as CHS-401 or CHS-OUT-401.",
+                    },
+                    "client_id": {
+                        "type": "string",
+                        "description": "Client identifier from the client portfolio, such as CL-301; selects that client's evidence record.",
+                    },
+                },
+                "required": [],
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -422,13 +465,13 @@ class ClientHealthScoreAgent(BasicAgent):
     # ------------------------------------------------------------------
     def _retention_roadmap(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "retention_roadmap", kwargs.get("user_input", "")
+            "retention_roadmap", _evidence_selector("retention_roadmap", kwargs)
         )
 
     # ------------------------------------------------------------------
     def _stakeholder_outreach(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "stakeholder_outreach", kwargs.get("user_input", "")
+            "stakeholder_outreach", _evidence_selector("stakeholder_outreach", kwargs)
         )
 
 

@@ -16,6 +16,26 @@ REQUIRED_MANIFEST_FIELDS = [
     "description", "author", "tags", "category",
 ]
 
+CALLABLE_OPERATION_SCHEMA_PACKAGES = {
+    "@aibast-agents-library/client_health_score": {
+        "record_id", "client_id",
+    },
+    "@aibast-agents-library/contract_risk_review": {
+        "record_id", "contract_id",
+    },
+    "@aibast-agents-library/inventory_rebalancing": {"sku"},
+    "@aibast-agents-library/maintenance_scheduling": {"equipment_id"},
+    "@aibast-agents-library/order_status_communication": {"order_id"},
+    "@aibast-agents-library/production_line_optimization": {"line_id"},
+    "@aibast-agents-library/resource_utilization": {
+        "record_id", "consultant_id",
+    },
+    "@aibast-agents-library/supplier_risk_monitoring": {"supplier_id"},
+    "@aibast-agents-library/time_entry_billing": {
+        "record_id", "entry_id",
+    },
+}
+
 
 def test_filename_is_snake_case(agent_info):
     mod, cls, path = agent_info
@@ -135,6 +155,31 @@ def test_standalone_execution(agent_info):
         f"{path.name}: standalone execution failed (exit {result.returncode})\n"
         f"stderr: {result.stderr[:500]}"
     )
+
+
+def test_v111_operations_are_exposed_as_tool_parameters(agent_info):
+    mod, cls, path = agent_info
+    manifest = getattr(mod, "__manifest__", {})
+    package_id = manifest.get("name")
+    if package_id not in CALLABLE_OPERATION_SCHEMA_PACKAGES:
+        return
+
+    instance = cls()
+    metadata = instance.metadata
+    operations = metadata.get("operations")
+    parameters = metadata.get("parameters", {})
+    properties = parameters.get("properties", {})
+
+    assert manifest.get("version") == "1.1.1"
+    assert isinstance(operations, list) and operations
+    assert properties.get("operation", {}).get("type") == "string"
+    assert properties["operation"].get("enum") == operations
+    assert "operation" not in parameters.get("required", [])
+    assert set(properties) == {
+        "operation", *CALLABLE_OPERATION_SCHEMA_PACKAGES[package_id],
+    }
+    for selector in CALLABLE_OPERATION_SCHEMA_PACKAGES[package_id]:
+        assert properties[selector].get("type") == "string"
 
 
 def test_store_associate_evidence_id_matrix(agent_info):

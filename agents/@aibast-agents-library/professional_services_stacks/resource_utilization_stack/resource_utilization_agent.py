@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/resource_utilization",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Resource Utilization Agent",
     "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
     "author": "AIBAST",
@@ -257,6 +257,24 @@ def _evidence_matches(user_input, records):
     ]
 
 
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or consultant identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("consultant_id"):
+        consultant = CONSULTANTS.get(kwargs["consultant_id"])
+        if not consultant:
+            return kwargs["consultant_id"]
+        records = EVIDENCE_CAPABILITIES[capability]["records"]
+        record_ids = [
+            record["record_id"]
+            for record in records
+            if record.get("consultant") == consultant["name"]
+        ]
+        return " ".join(record_ids) or kwargs["consultant_id"]
+    return kwargs.get("user_input", "")
+
+
 def _render_evidence_operation(capability, user_input=""):
     spec = EVIDENCE_CAPABILITIES[capability]
     records = (
@@ -306,6 +324,32 @@ class ResourceUtilizationAgent(BasicAgent):
                 "skill_gap_options",
                 "executive_impact_report",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to utilization_dashboard when omitted.",
+                        "enum": [
+                            "utilization_dashboard",
+                            "capacity_forecast",
+                            "bench_analysis",
+                            "staffing_recommendation",
+                            "skill_gap_options",
+                            "executive_impact_report",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence record identifier for skill_gap_options or executive_impact_report, such as RU-601 or RU-EXEC-601.",
+                    },
+                    "consultant_id": {
+                        "type": "string",
+                        "description": "Consultant identifier, such as CON-405; selects that consultant's skill-gap option.",
+                    },
+                },
+                "required": [],
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -471,13 +515,14 @@ class ResourceUtilizationAgent(BasicAgent):
     # ------------------------------------------------------------------
     def _skill_gap_options(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "skill_gap_options", kwargs.get("user_input", "")
+            "skill_gap_options", _evidence_selector("skill_gap_options", kwargs)
         )
 
     # ------------------------------------------------------------------
     def _executive_impact_report(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "executive_impact_report", kwargs.get("user_input", "")
+            "executive_impact_report",
+            _evidence_selector("executive_impact_report", kwargs),
         )
 
 

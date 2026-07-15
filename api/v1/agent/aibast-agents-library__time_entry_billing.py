@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/time_entry_billing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Time Entry & Billing Agent",
     "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.",
     "author": "AIBAST",
@@ -212,6 +212,20 @@ def _evidence_matches(user_input, records):
     ]
 
 
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or time-entry identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("entry_id"):
+        record_ids = [
+            record["record_id"]
+            for record in EVIDENCE_CAPABILITIES[capability]["records"]
+            if record.get("entry_id") == kwargs["entry_id"]
+        ]
+        return " ".join(record_ids) or kwargs["entry_id"]
+    return kwargs.get("user_input", "")
+
+
 def _render_evidence_operation(capability, user_input=""):
     spec = EVIDENCE_CAPABILITIES[capability]
     records = spec["records"]
@@ -257,6 +271,32 @@ class TimeEntryBillingAgent(BasicAgent):
                 "exception_resolution",
                 "billing_close_package",
             ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to unbilled_report when omitted.",
+                        "enum": [
+                            "unbilled_report",
+                            "billing_summary",
+                            "time_entry_audit",
+                            "invoice_preparation",
+                            "exception_resolution",
+                            "billing_close_package",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence record identifier for exception_resolution or billing_close_package, such as TEB-701 or TEB-CLOSE-701.",
+                    },
+                    "entry_id": {
+                        "type": "string",
+                        "description": "Time-entry identifier, such as TE-9004; selects its exception-resolution record.",
+                    },
+                },
+                "required": [],
+            },
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -441,13 +481,15 @@ class TimeEntryBillingAgent(BasicAgent):
     # ------------------------------------------------------------------
     def _exception_resolution(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "exception_resolution", kwargs.get("user_input", "")
+            "exception_resolution",
+            _evidence_selector("exception_resolution", kwargs),
         )
 
     # ------------------------------------------------------------------
     def _billing_close_package(self, **kwargs) -> str:
         return _render_evidence_operation(
-            "billing_close_package", kwargs.get("user_input", "")
+            "billing_close_package",
+            _evidence_selector("billing_close_package", kwargs),
         )
 
 
