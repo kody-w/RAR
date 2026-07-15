@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__fs_customer_onboarding",
   "name": "FS Customer Onboarding Agent",
   "rar_name": "@aibast-agents-library/fs_customer_onboarding",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/fs_customer_onboarding:2a73bc67ba748699e70c67e8ea8da5b2",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/fs_customer_onboarding:8a2339188fbcef2dae722509ed43372eadd43a91f8321126146e47a1ef567a1a",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -12,7 +12,10 @@
     "onboarding",
     "account-setup",
     "compliance",
-    "financial-services"
+    "financial-services",
+    "identity-verification",
+    "sanctions-screening",
+    "account-provisioning"
   ],
   "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
   "author": "AIBAST",
@@ -21,12 +24,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 317,
-  "size_kb": 13.6,
-  "sha256": "2a73bc67ba748699e70c67e8ea8da5b296b196203ccd41d66fa2f5ffa1daa58c",
+  "lines": 550,
+  "size_kb": 25.9,
+  "sha256": "8a2339188fbcef2dae722509ed43372eadd43a91f8321126146e47a1ef567a1a",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__fs_customer_onboarding.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py.card",

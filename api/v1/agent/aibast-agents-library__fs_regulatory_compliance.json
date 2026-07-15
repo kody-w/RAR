@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__fs_regulatory_compliance",
   "name": "FS Regulatory Compliance Agent",
   "rar_name": "@aibast-agents-library/fs_regulatory_compliance",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/fs_regulatory_compliance:f36b9a6fe906f317cc208a21caed0bc5",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/fs_regulatory_compliance:74a85537defa7ce67746cd20cd330d069078ae0b4eda290e774322cf3710a07d",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -14,7 +14,11 @@
     "BSA",
     "AML",
     "regulatory",
-    "financial-services"
+    "financial-services",
+    "MiFID-II",
+    "trade-surveillance",
+    "best-execution",
+    "venue-ranking"
   ],
   "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
   "author": "AIBAST",
@@ -23,12 +27,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 268,
-  "size_kb": 12.8,
-  "sha256": "f36b9a6fe906f317cc208a21caed0bc5a1c23e908fe53cce9622ebbff23e8faf",
+  "lines": 572,
+  "size_kb": 28.8,
+  "sha256": "74a85537defa7ce67746cd20cd330d069078ae0b4eda290e774322cf3710a07d",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__fs_regulatory_compliance.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py.card",

@@ -4,6 +4,10 @@ Energy Regulatory Reporting Agent.
 Manages regulatory report status tracking, data validation, submission
 workflows, and audit readiness assessments for EPA, FERC, and state
 regulatory filings.
+
+Version 1.1.0 adds evidence-backed emissions consolidation, deterministic
+report generation, and dry-run EPA submission preparation. Legacy operations
+remain unchanged and no external filing system is mutated.
 """
 
 import sys
@@ -15,7 +19,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/energy_regulatory_reporting",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Energy Regulatory Reporting Agent",
     "description": "Manages regulatory report status, data validation, submission tracking, and audit readiness for EPA, FERC, and state filings.",
     "author": "AIBAST",
@@ -128,6 +132,30 @@ AUDIT_FINDINGS = {
     "AUD-004": {"report": "RPT-9006", "finding": "Pipeline mileage discrepancy between GIS and PIMS", "severity": "high", "status": "open", "due_date": "2026-03-20"},
 }
 
+EMISSIONS_SUMMARY = [
+    {
+        "facility": "Riverside Generating Station",
+        "report_id": "RPT-9001",
+        "scope_1_co2e": 482000,
+        "year_over_year_pct": -6.2,
+        "quality_score": 87,
+    },
+    {
+        "facility": "Bayshore Refinery",
+        "report_id": "RPT-9005",
+        "scope_1_co2e": 890000,
+        "year_over_year_pct": -4.8,
+        "quality_score": 74,
+    },
+    {
+        "facility": "Ridgeline Coal Station",
+        "report_id": "RPT-9004",
+        "scope_1_co2e": 1420000,
+        "year_over_year_pct": -8.1,
+        "quality_score": 0,
+    },
+]
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -196,6 +224,19 @@ def _audit_readiness():
             "open_findings": open_findings, "high_severity_open": high_sev}
 
 
+def _report_risks(report_id):
+    report = REGULATORY_REPORTS[report_id]
+    risks = []
+    if report["completeness_pct"] < 100:
+        risks.append(f"Data is {report['completeness_pct']}% complete")
+    if report["data_quality_score"] < 80:
+        risks.append(f"Quality score {report['data_quality_score']}/100 is below threshold")
+    for finding in AUDIT_FINDINGS.values():
+        if finding["report"] == report_id and finding["status"] == "open":
+            risks.append(finding["finding"])
+    return risks
+
+
 # ---------------------------------------------------------------------------
 # Agent
 # ---------------------------------------------------------------------------
@@ -204,7 +245,7 @@ class RegulatoryReportingAgent(BasicAgent):
     """Regulatory reporting status and audit readiness agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/energy-regulatory-reporting"
+        self.name = "RegulatoryReportingAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
@@ -218,6 +259,9 @@ class RegulatoryReportingAgent(BasicAgent):
                             "data_validation",
                             "submission_tracker",
                             "audit_readiness",
+                            "emissions_summary",
+                            "generate_regulatory_report",
+                            "prepare_epa_submission",
                         ],
                         "description": "The regulatory reporting operation to perform.",
                     },
@@ -241,6 +285,12 @@ class RegulatoryReportingAgent(BasicAgent):
             return self._submission_tracker()
         elif op == "audit_readiness":
             return self._audit_readiness()
+        elif op == "emissions_summary":
+            return self._emissions_summary()
+        elif op == "generate_regulatory_report":
+            return self._generate_regulatory_report(kwargs.get("report_id"))
+        elif op == "prepare_epa_submission":
+            return self._prepare_epa_submission(kwargs.get("report_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _report_status(self) -> str:
@@ -312,6 +362,88 @@ class RegulatoryReportingAgent(BasicAgent):
             for f in findings:
                 lines.append(f"| {f['finding']} | {f['severity'].upper()} | {f['status'].upper()} | {f['due_date']} |")
             lines.append("")
+        return "\n".join(lines)
+
+    def _emissions_summary(self) -> str:
+        total = sum(row["scope_1_co2e"] for row in EMISSIONS_SUMMARY)
+        lines = [
+            "# Consolidated Emissions Summary",
+            "",
+            f"**Portfolio Scope 1 CO2e:** {total:,} tonnes",
+            "",
+            "| Facility | Report | Scope 1 CO2e | YoY Change | Quality |",
+            "|----------|--------|--------------|------------|---------|",
+        ]
+        for row in EMISSIONS_SUMMARY:
+            lines.append(
+                f"| {row['facility']} | {row['report_id']} | {row['scope_1_co2e']:,} "
+                f"| {row['year_over_year_pct']}% | {row['quality_score']}/100 |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Energy Operations demo 02:02-02:20 — emissions data "
+            "consolidation and a rich summary for reporting progress.",
+        ])
+        return "\n".join(lines)
+
+    def _generate_regulatory_report(self, report_id) -> str:
+        if not report_id:
+            return (
+                "# Generate Regulatory Report\n\nProvide an exact `report_id`. "
+                f"Available IDs: {', '.join(sorted(REGULATORY_REPORTS))}."
+            )
+        report = REGULATORY_REPORTS.get(report_id)
+        if not report:
+            return f"**Error:** Unknown report_id `{report_id}`."
+        risks = _report_risks(report_id)
+        lines = [
+            f"# Generated Regulatory Report — {report_id}",
+            "",
+            f"- **Filing:** {report['name']}",
+            f"- **Authority:** {report['authority']}",
+            f"- **Reporting Period:** {report['reporting_period']}",
+            f"- **Completeness:** {report['completeness_pct']}%",
+            f"- **Data Quality:** {report['data_quality_score']}/100",
+            "",
+            "## Compliance Checks",
+            "",
+        ]
+        lines.extend(f"- RISK: {risk}" for risk in risks)
+        if not risks:
+            lines.append("- PASS: No pre-filing risks identified.")
+        lines.extend([
+            "",
+            "**Evidence:** Energy Operations demo 02:02-02:30 — automated report "
+            "generation and compliance checks before filing.",
+        ])
+        return "\n".join(lines)
+
+    def _prepare_epa_submission(self, report_id) -> str:
+        if not report_id:
+            return "# Prepare EPA Submission\n\nProvide an exact EPA `report_id`: RPT-9001 or RPT-9005."
+        report = REGULATORY_REPORTS.get(report_id)
+        if not report:
+            return f"**Error:** Unknown report_id `{report_id}`."
+        if report["authority"] != "EPA":
+            return f"**Error:** Report `{report_id}` is not an EPA filing."
+        risks = _report_risks(report_id)
+        disposition = "HOLD — resolve risks before filing" if risks else "READY"
+        lines = [
+            f"# EPA Submission Preparation — {report_id}",
+            "",
+            f"- **Filing:** {report['name']}",
+            f"- **Disposition:** {disposition}",
+            f"- **Risk Count:** {len(risks)}",
+        ]
+        lines.extend(f"- **Risk:** {risk}" for risk in risks)
+        lines.extend([
+            "",
+            "## Simulated Write Receipt",
+            "",
+            "- **Action:** Prepare submission package for the EPA portal.",
+            "- **Mode:** dry-run; no filing was transmitted and no live record was mutated.",
+            "- **Evidence:** Energy Operations demo 02:20-02:30.",
+        ])
         return "\n".join(lines)
 
 

@@ -3,6 +3,14 @@ Financial Services Regulatory Compliance Agent — Financial Services Stack
 
 Manages compliance dashboards, regulation tracking, remediation planning,
 and examination preparation for financial institution compliance teams.
+
+Version 1.1.0 adds six real-time trade compliance capabilities modeled on the
+Regulatory Compliance Monitoring spec (MiFID II surveillance, reporting issue
+triage, batch remediation, execution-quality analysis with venue ranking,
+certification tracking, and a shareable compliance summary). Each capability
+embeds its curated response, knowledge notes, exactly three synthetic records,
+an exact-key lookup, no-input summaries, and — for write-capable operations —
+simulated write receipts that never mutate the in-memory data.
 """
 
 import sys
@@ -14,11 +22,11 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_regulatory_compliance",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "FS Regulatory Compliance Agent",
     "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
     "author": "AIBAST",
-    "tags": ["compliance", "SOX", "Dodd-Frank", "BSA", "AML", "regulatory", "financial-services"],
+    "tags": ["compliance", "SOX", "Dodd-Frank", "BSA", "AML", "regulatory", "financial-services", "MiFID-II", "trade-surveillance", "best-execution", "venue-ranking"],
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
@@ -94,6 +102,167 @@ UPCOMING_EXAMINATIONS = [
 
 
 # ---------------------------------------------------------------------------
+# Real-time trade compliance capabilities (Regulatory Compliance Monitoring spec)
+#
+# Each entry embeds the curated response, knowledge notes, exactly three
+# synthetic records, the exact-lookup key field, and write/generative metadata.
+# ---------------------------------------------------------------------------
+
+SPEC_OPERATIONS = {
+    "trade_surveillance": {
+        "name": "Trade Surveillance Review",
+        "description": "Analyzes executed trades in real time, highlights overall compliance performance, and surfaces the items that need immediate attention.",
+        "source_system": "Microsoft Dataverse",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "trade_id",
+        "triggers": [
+            "Review our trading activity for compliance",
+            "Scan all executed trades for reporting accuracy",
+            "Which trades need immediate attention?",
+        ],
+        "knowledge": [
+            "The agent analyzes all 12,000 trades and surfaces the 24 items that need immediate attention (demo 00:00:57-00:01:06).",
+            "Trades are scanned against MiFID II rules automatically to detect errors and issues before they become violations (one-pager, Slide 1).",
+            "The manager gets a targeted view of only the most relevant insights instead of scanning dashboards (demo 00:01:07-00:01:14).",
+        ],
+        "response": "Here is the compliance surveillance view for the requested trades.",
+        "records": [
+            {"trade_id": "TRD-10432", "instrument": "EU Govt Bond", "desk": "Rates Desk", "compliance_status": "Reportable breach", "flagged_items": 3},
+            {"trade_id": "TRD-10588", "instrument": "Equity Swap", "desk": "Equities Desk", "compliance_status": "Pass", "flagged_items": 0},
+            {"trade_id": "TRD-10743", "instrument": "FX Forward", "desk": "FX Desk", "compliance_status": "Needs review", "flagged_items": 1},
+        ],
+    },
+    "reporting_issue": {
+        "name": "Reporting Issue Triage",
+        "description": "Categorizes each reporting issue, identifies which fields can be auto-corrected, and flags the trades needing manual review with impact and effort.",
+        "source_system": "Microsoft Dataverse",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "issue_id",
+        "triggers": [
+            "Show reporting issues and suggested fixes",
+            "Which fields can be auto-corrected?",
+            "Which trades need manual review?",
+        ],
+        "knowledge": [
+            "The agent categorizes each issue, identifies which fields can be auto-corrected, and flags the few trades needing manual review (demo 00:01:20-00:01:30).",
+            "The manager receives clarity on both impact and effort required to move forward (demo 00:01:30-00:01:32).",
+            "Reporting errors, venue mismatches, and other issues previously required time-consuming investigation (one-pager, Slide 1).",
+        ],
+        "response": "Here is the triaged reporting issue with its category, suggested fix, and effort.",
+        "records": [
+            {"issue_id": "RPT-2207", "field_name": "Execution venue", "category": "Auto-correctable", "remediation": "Auto-correct venue code", "effort": "Low"},
+            {"issue_id": "RPT-2311", "field_name": "Trade timestamp", "category": "Auto-correctable", "remediation": "Normalize timestamp", "effort": "Low"},
+            {"issue_id": "RPT-2450", "field_name": "Counterparty LEI", "category": "Manual review", "remediation": "Confirm LEI with desk", "effort": "High"},
+        ],
+    },
+    "batch_remediation": {
+        "name": "Batch Remediation",
+        "description": "Amends eligible trades, submits updates to the regulatory portal, and outlines missing documentation for the impacted strategy in one automated sequence.",
+        "source_system": "Microsoft Dataverse",
+        "write": True,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "batch_id",
+        "triggers": [
+            "Execute the batch fix and show documentation gaps",
+            "Amend eligible trades and submit updates",
+            "Automate corrections and submissions to the regulatory portal",
+        ],
+        "knowledge": [
+            "The agent amends eligible trades, submits updates, and outlines missing documentation for the impacted strategy within the same streamlined workflow (demo 00:01:42-00:01:52).",
+            "Corrections and submissions to the regulatory portal are automated (one-pager, Slide 1).",
+            "Strategy documentation was inconsistent, risking non-compliance, so documentation gaps are flagged (one-pager, Slide 1).",
+        ],
+        "response": "The batch fix has been executed; here are the amended trades, submission status, and documentation gaps.",
+        "records": [
+            {"batch_id": "FIX-0091", "strategy": "Momentum Alpha", "trades_amended": 18, "submission_status": "Submitted", "doc_gap": "Missing algo sign-off"},
+            {"batch_id": "FIX-0092", "strategy": "Mean Reversion", "trades_amended": 4, "submission_status": "Queued", "doc_gap": "None"},
+            {"batch_id": "FIX-0093", "strategy": "Cross-Venue Arb", "trades_amended": 2, "submission_status": "Submitted", "doc_gap": "Outdated risk memo"},
+        ],
+    },
+    "execution_analysis": {
+        "name": "Execution Quality Analysis",
+        "description": "Delivers execution quality insights and venue performance rankings, and auto-generates a report ready for client distribution.",
+        "source_system": "Microsoft Dataverse",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "analysis_id",
+        "triggers": [
+            "Run an execution analysis",
+            "Show venue performance rankings",
+            "Generate an execution quality report",
+        ],
+        "knowledge": [
+            "The agent delivers execution quality insights, venue performance rankings, and an auto-generated report ready for client distribution (demo 00:02:01-00:02:11).",
+            "The report helps leadership easily validate performance (demo 00:02:11-00:02:12).",
+            "Trades are scanned for best-execution performance (one-pager, Slide 1).",
+        ],
+        "response": "Here is the execution quality analysis with venue ranking and an auto-generated report for client distribution.",
+        "records": [
+            {"analysis_id": "EXA-5501", "venue": "Xetra", "execution_score": 96, "ranking": "Top venue", "report_status": "Report generated"},
+            {"analysis_id": "EXA-5502", "venue": "Euronext", "execution_score": 88, "ranking": "Second", "report_status": "Report generated"},
+            {"analysis_id": "EXA-5503", "venue": "Turquoise", "execution_score": 72, "ranking": "Underperformer", "report_status": "Report generated"},
+        ],
+    },
+    "certification_tracking": {
+        "name": "Certification and Training Tracking",
+        "description": "Surfaces upcoming certification expirations, schedules required sessions, and enrolls traders to maintain audit readiness.",
+        "source_system": "Microsoft Dataverse",
+        "write": True,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "cert_id",
+        "triggers": [
+            "Check trader certifications and training gaps",
+            "Which certifications are expiring soon?",
+            "Enroll traders in required training",
+        ],
+        "knowledge": [
+            "The agent surfaces upcoming expirations, schedules required sessions, and provides a training dashboard for team visibility (demo 00:02:17-00:02:25).",
+            "Certification expirations are identified and traders are enrolled (one-pager, Slide 1).",
+            "Certification readiness is maintained across the desk with automated scheduling and alerts (one-pager, Slide 1).",
+        ],
+        "response": "Here are the trader certification statuses, upcoming expirations, and scheduled training actions.",
+        "records": [
+            {"cert_id": "CERT-3120", "trader": "Priya Nolan", "certification": "MiFID II Best Execution", "expires_on": "2026-09-30", "action": "Enroll in refresher"},
+            {"cert_id": "CERT-3121", "trader": "Marco Field", "certification": "Market Abuse Regulation", "expires_on": "2026-11-15", "action": "Schedule session"},
+            {"cert_id": "CERT-3122", "trader": "Dana Ruiz", "certification": "Algo Trading Governance", "expires_on": "2027-01-20", "action": "Up to date"},
+        ],
+    },
+    "compliance_summary": {
+        "name": "Compliance Summary",
+        "description": "Creates a clean, shareable summary capturing fixes completed, risks resolved, and next steps for collaboration through Microsoft Teams.",
+        "source_system": "Microsoft Dataverse",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "summary_id",
+        "triggers": [
+            "Create a shareable compliance summary",
+            "Close out the compliance workflow",
+            "Summarize fixes completed and risks resolved",
+        ],
+        "knowledge": [
+            "The agent creates a clean, shareable summary capturing fixes completed, risks resolved, and next steps (demo 00:02:27-00:02:35).",
+            "Collaboration is supported through Microsoft Teams (demo 00:00:37-00:00:38; featured tools).",
+            "The manager is already seeing progress and has a clear path to resolution (demo 00:01:52-00:01:56).",
+        ],
+        "response": "Here is the shareable compliance summary with fixes completed, risks resolved, and next steps.",
+        "records": [
+            {"summary_id": "SUM-7788", "period": "Q3 review", "fixes_completed": 22, "risks_resolved": 19, "next_step": "Distribute to leadership"},
+            {"summary_id": "SUM-7789", "period": "Ad hoc audit", "fixes_completed": 5, "risks_resolved": 5, "next_step": "Archive record"},
+            {"summary_id": "SUM-7790", "period": "Monthly close", "fixes_completed": 12, "risks_resolved": 10, "next_step": "Escalate documentation gap"},
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
 
@@ -109,6 +278,118 @@ def _open_findings_count():
     return sum(1 for f in EXAMINATION_FINDINGS if f["status"] not in ("closed",))
 
 
+def _humanize(field):
+    """Turn a snake_case field name into a Title Case label."""
+    return field.replace("_", " ").title()
+
+
+def _render_record(record):
+    """Render a single record as a bullet list of its fields."""
+    return "\n".join(f"- **{_humanize(k)}:** {v}" for k, v in record.items())
+
+
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_key(user_input, key):
+    """Return True only when the complete normalized key is a token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(key)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _match_records(spec, user_input):
+    """Return the uniquely matched record for a complete normalized key."""
+    key_field = spec["key_field"]
+    matches = [
+        record for record in spec["records"]
+        if _contains_normalized_key(user_input, record[key_field])
+    ]
+    return matches if len(matches) == 1 else []
+
+
+def _spec_metadata_block(spec):
+    """Render the source/behavior metadata for a capability."""
+    return "\n".join([
+        "## Capability Metadata\n",
+        f"- **Source System:** {spec['source_system']}",
+        f"- **Key Field:** `{spec['key_field']}`",
+        f"- **Exact Key Required:** {spec['exact_key_required']}",
+        f"- **Write:** {spec['write']}",
+        f"- **Generative:** {spec['generative']}",
+    ])
+
+
+def _run_spec_operation(op_key, spec, **kwargs):
+    """
+    Data-driven handler for the six real-time compliance capabilities.
+
+    Behavior:
+      * No `user_input`  -> no-input summary listing all three records.
+      * With `user_input`-> exact-key lookup (exact_key_required); only records
+        whose key string is present in the input are returned.
+      * Write-capable ops append a *simulated* write receipt and never mutate
+        the embedded records.
+    """
+    user_input = kwargs.get("user_input")
+    lines = [f"# {spec['name']}\n"]
+    lines.append(f"_{spec['description']}_\n")
+    lines.append(f"> {spec['response']}\n")
+
+    if user_input:
+        matches = _match_records(spec, user_input)
+        if matches:
+            lines.append(f"## Exact Lookup ({len(matches)} match)\n")
+            for record in matches:
+                lines.append(_render_record(record))
+                lines.append("")
+        else:
+            lines.append("## Exact Lookup\n")
+            lines.append(
+                f"No record matched an exact normalized `{spec['key_field']}` "
+                "in your request.\n"
+            )
+    else:
+        matches = spec["records"]
+        lines.append(f"## Summary — {len(matches)} records\n")
+        headers = list(matches[0].keys())
+        lines.append("| " + " | ".join(_humanize(h) for h in headers) + " |")
+        lines.append("|" + "|".join(["---"] * len(headers)) + "|")
+        for record in matches:
+            lines.append("| " + " | ".join(str(record[h]) for h in headers) + " |")
+        lines.append("")
+
+    if spec["write"] and (not user_input or matches):
+        lines.append("## Simulated Write Receipt\n")
+        affected = matches if user_input else spec["records"]
+        keys = ", ".join(str(r[spec["key_field"]]) for r in affected) or "none"
+        lines.append(
+            f"- **Action:** Simulated write to {spec['source_system']} for {keys}."
+        )
+        lines.append(
+            "- **Result:** Receipt generated for demo purposes only — "
+            "no records were mutated (read-only simulation)."
+        )
+        lines.append("")
+
+    lines.append(_spec_metadata_block(spec))
+    lines.append("\n## Knowledge\n")
+    for note in spec["knowledge"]:
+        lines.append(f"- {note}")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -117,7 +398,7 @@ class FSRegulatoryComplianceAgent(BasicAgent):
     """Financial services regulatory compliance agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/fs-regulatory-compliance"
+        self.name = "FSRegulatoryComplianceAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "FS Regulatory Compliance Agent",
@@ -132,9 +413,19 @@ class FSRegulatoryComplianceAgent(BasicAgent):
                             "regulation_tracker",
                             "remediation_plan",
                             "examiner_prep",
+                            "trade_surveillance",
+                            "reporting_issue",
+                            "batch_remediation",
+                            "execution_analysis",
+                            "certification_tracking",
+                            "compliance_summary",
                         ],
                     },
                     "regulation": {"type": "string"},
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional. Exact key (e.g. TRD-10432, EXA-5503) for the real-time compliance capabilities; omit for a full summary.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -150,9 +441,12 @@ class FSRegulatoryComplianceAgent(BasicAgent):
             "examiner_prep": self._examiner_prep,
         }
         handler = dispatch.get(operation)
-        if not handler:
-            return f"**Error:** Unknown operation `{operation}`."
-        return handler(**kwargs)
+        if handler:
+            return handler(**kwargs)
+        spec = SPEC_OPERATIONS.get(operation)
+        if spec:
+            return _run_spec_operation(operation, spec, **kwargs)
+        return f"**Error:** Unknown operation `{operation}`."
 
     def _compliance_dashboard(self, **kwargs) -> str:
         overall = _overall_compliance()
@@ -265,3 +559,13 @@ if __name__ == "__main__":
     print(agent.perform(operation="remediation_plan"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="examiner_prep"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="trade_surveillance"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="execution_analysis", user_input="Run execution analysis EXA-5503"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="batch_remediation", user_input="Execute batch fix FIX-0091 and show documentation gaps"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="certification_tracking"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="compliance_summary", user_input="Create the shareable compliance summary SUM-7788"))

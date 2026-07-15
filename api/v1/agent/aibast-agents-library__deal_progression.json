@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__deal_progression",
   "name": "Deal Progression",
   "rar_name": "@aibast-agents-library/deal_progression",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/deal_progression:13edbd4637754554abee639c9cd38b9d",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/deal_progression:6d1658f2c8b8e3301d33ebabc0ff2bcf4587e463ff77db1848c627b40805e3ee",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 643,
-  "size_kb": 41.6,
-  "sha256": "13edbd4637754554abee639c9cd38b9d4d97bd443a0eed5768126e762891bf2f",
+  "lines": 682,
+  "size_kb": 43.4,
+  "sha256": "6d1658f2c8b8e3301d33ebabc0ff2bcf4587e463ff77db1848c627b40805e3ee",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__deal_progression.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py.card",

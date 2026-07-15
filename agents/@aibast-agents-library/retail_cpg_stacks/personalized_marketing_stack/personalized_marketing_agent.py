@@ -3,6 +3,9 @@ Personalized Marketing Agent — Retail & CPG Stack
 
 Drives customer segmentation, campaign design, content personalization,
 and performance analysis for targeted retail marketing programs.
+
+Version 1.1.0 adds deterministic, exact-keyed holiday planning, creative
+testing, simulated scheduling, and revenue-scenario workflows.
 """
 
 import sys
@@ -17,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_marketing",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Personalized Marketing Agent",
     "description": (
         "Enables customer segmentation, personalized campaign design, "
@@ -228,6 +231,201 @@ CONTENT_BLOCKS = {
     },
 }
 
+VIP_REVENUE_AUDIENCE = 12400
+
+VIP_REVENUE_SCENARIO_INPUTS = {
+    "conservative": {
+        "open_rate": 0.68,
+        "click_rate": 0.24,
+        "conversion_rate": 0.124,
+        "average_order_value": 340,
+    },
+    "expected": {
+        "open_rate": 0.72,
+        "click_rate": 0.28,
+        "conversion_rate": 0.142,
+        "average_order_value": 380,
+    },
+    "optimistic": {
+        "open_rate": 0.78,
+        "click_rate": 0.32,
+        "conversion_rate": 0.168,
+        "average_order_value": 420,
+    },
+}
+
+
+def _calculate_scenario_revenue(audience, conversion_rate, average_order_value):
+    return round(audience * conversion_rate * average_order_value, 2)
+
+
+def _format_revenue_scenario(scenario):
+    revenue = _calculate_scenario_revenue(
+        VIP_REVENUE_AUDIENCE,
+        scenario["conversion_rate"],
+        scenario["average_order_value"],
+    )
+    return (
+        f"{scenario['open_rate']:.0%} open; "
+        f"{scenario['click_rate']:.0%} click; "
+        f"{scenario['conversion_rate']:.1%} conversion; "
+        f"${scenario['average_order_value']:,.0f} average order; "
+        f"${revenue:,.2f} revenue"
+    )
+
+
+def _validate_revenue_formula_contract():
+    expected_revenue = {
+        "conservative": 522784,
+        "expected": 669104,
+        "optimistic": 874944,
+    }
+    for name, scenario in VIP_REVENUE_SCENARIO_INPUTS.items():
+        actual = _calculate_scenario_revenue(
+            VIP_REVENUE_AUDIENCE,
+            scenario["conversion_rate"],
+            scenario["average_order_value"],
+        )
+        assert actual == expected_revenue[name]
+
+    baseline = expected_revenue["expected"]
+    assert _calculate_scenario_revenue(
+        VIP_REVENUE_AUDIENCE * 2, 0.142, 380
+    ) == baseline * 2
+    assert _calculate_scenario_revenue(
+        VIP_REVENUE_AUDIENCE, 0.152, 380
+    ) == baseline + 47120
+    assert _calculate_scenario_revenue(
+        VIP_REVENUE_AUDIENCE, 0.142, 400
+    ) == baseline + 35216
+
+
+EVIDENCE_CAPABILITIES = {
+    "holiday_campaign_plan": {
+        "title": "High-Value Holiday Campaign Plan",
+        "source_system": "Dynamics 365 Customer Insights",
+        "write": False,
+        "key_field": "campaign_id",
+        "summary": (
+            "Connects behavior-and-value segmentation to a complete multi-wave "
+            "holiday campaign strategy with segment-level performance."
+        ),
+        "record": {
+            "campaign_id": "HOLIDAY-VIP-2026",
+            "customer_base": "240,000 active customers across five value segments",
+            "priority_segment": "VIP Shoppers; 12,400 customers; $340 average order; 12.4% predicted conversion",
+            "waves": "VIP launch day; Frequent Buyers day 2; Seasonal Shoppers day 5; New Subscribers day 7",
+            "offers": "VIP 30% early access; favorites sale; holiday gifts with free shipping; 40% welcome offer",
+            "projection": "$8.12M revenue from a $47,000 campaign investment",
+            "strategy": "Launch VIP first, then expand sequentially using segment behavior",
+        },
+    },
+    "creative_ab_test": {
+        "title": "Personalized Creative and A/B Test",
+        "source_system": "Dynamics 365 Customer Insights - Journeys",
+        "write": False,
+        "key_field": "test_id",
+        "summary": (
+            "Generates segment-personalized content and a deterministic "
+            "A/B test design with winner-selection criteria."
+        ),
+        "record": {
+            "test_id": "AB-VIP-EARLY-ACCESS",
+            "campaign": "Early Access VIP - 30% Off Everything",
+            "variant_a": "Product focus; purchase-history hero; subject 'Sarah, Your Favorites Are 30% Off'; CTA Shop My Picks",
+            "variant_b": "Urgency focus; countdown hero; 24-hour VIP access subject; CTA Activate My VIP Access",
+            "variant_c": "Rewards focus; 3X points subject; CTA Claim VIP Rewards",
+            "split": "33% / 33% / 34% for 12 hours",
+            "selection_rule": "Automatically select winner by open rate plus revenue",
+        },
+    },
+    "campaign_scheduling": {
+        "title": "Campaign Scheduling Workflow",
+        "source_system": "Dynamics 365 Customer Insights - Journeys",
+        "write": True,
+        "key_field": "schedule_id",
+        "summary": (
+            "Prepares audience scheduling, multistep nurture automation, "
+            "tracking, and optimization without activating a live campaign."
+        ),
+        "record": {
+            "schedule_id": "SCHED-VIP-0800",
+            "launch": "08:00 PST for 12,400 VIP customers",
+            "test": "Three variants with 33/33/34 split; winner selection after 12 hours",
+            "workflow": "Hour 0 initial send; hour 24 browse abandonment; hour 48 cart abandonment; hour 72 final call",
+            "tracking": "Open, click, conversion, and revenue dashboard with milestone alerts",
+            "approval": "Prepared for marketing director review and approval",
+            "execution_note": "Simulation only; no campaign, message, or customer journey is activated",
+        },
+    },
+    "revenue_scenarios": {
+        "title": "Campaign Revenue Scenarios and Executive Brief",
+        "source_system": "Dynamics 365 Customer Insights",
+        "write": False,
+        "key_field": "model_id",
+        "summary": (
+            "Models conservative, expected, and optimistic campaign outcomes "
+            "and produces a stakeholder-ready strategy recap."
+        ),
+        "record": {
+            "model_id": "ROI-VIP-HOLIDAY",
+            "audience": f"{VIP_REVENUE_AUDIENCE:,} VIP customers",
+            "formula": "audience * conversion rate * average order value",
+            "conservative": _format_revenue_scenario(
+                VIP_REVENUE_SCENARIO_INPUTS["conservative"]
+            ),
+            "expected": _format_revenue_scenario(
+                VIP_REVENUE_SCENARIO_INPUTS["expected"]
+            ),
+            "optimistic": _format_revenue_scenario(
+                VIP_REVENUE_SCENARIO_INPUTS["optimistic"]
+            ),
+            "economics": "$47,000 investment; 30:1 to 45:1 VIP-wave ROI; $8.12M all-wave projection",
+            "executive_brief": "Five segments, four waves over seven days, three creative variants, and a 72-hour nurture workflow",
+        },
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    record = capability["record"]
+    key_field = capability["key_field"]
+    if key:
+        if str(record[key_field]).lower() == str(key).strip().lower():
+            return "match", record
+        return "not_found", None
+    query_tokens = _normalize_evidence_tokens(user_input)
+    key_tokens = _normalize_evidence_tokens(record[key_field])
+    width = len(key_tokens)
+    if width and any(
+        query_tokens[index:index + width] == key_tokens
+        for index in range(len(query_tokens) - width + 1)
+    ):
+        return "match", record
+    return "summary", None
+
+
+def _format_evidence_record(record):
+    return "\n".join(
+        f"- **{field.replace('_', ' ').title()}:** {value}"
+        for field, value in record.items()
+    )
+
 
 # ---------------------------------------------------------------------------
 # Helper Functions
@@ -279,10 +477,16 @@ class PersonalizedMarketingAgent(BasicAgent):
                             "campaign_design",
                             "content_personalization",
                             "performance_analysis",
+                            "holiday_campaign_plan",
+                            "creative_ab_test",
+                            "campaign_scheduling",
+                            "revenue_scenarios",
                         ],
                     },
                     "segment_id": {"type": "string"},
                     "campaign_id": {"type": "string"},
+                    "key": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -404,6 +608,52 @@ class PersonalizedMarketingAgent(BasicAgent):
         lines.append(f"**Total Projected Campaign Revenue:** ${total_rev:,.2f}")
         return "\n".join(lines)
 
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        lookup_status, record = _record_for_evidence_request(
+            capability,
+            kwargs.get("key", ""),
+            kwargs.get("user_input", ""),
+        )
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["summary"],
+            "",
+            f"## {capability['source_system']} (synthetic demo data)",
+            "",
+        ]
+        if lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            selected = record or capability["record"]
+            label = "Exact keyed record" if lookup_status == "match" else "Worked example"
+            lines.extend([f"**{label}:**", _format_evidence_record(selected)])
+
+        if capability["write"] and lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- **Action Status:** simulated",
+                f"- **Receipt:** SIM-{capability_name.upper()}-{receipt_key}",
+                f"- **Target System:** {capability['source_system']}",
+                "- **External Changes:** none; no live campaign or message was created",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable workflow; provide an exact key to generate a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend(["", "_Read-only; no external system is modified._"])
+        return "\n".join(lines)
+
     def perform(self, **kwargs):
         operation = kwargs.get("operation", "customer_segmentation")
         dispatch = {
@@ -411,10 +661,16 @@ class PersonalizedMarketingAgent(BasicAgent):
             "campaign_design": self._campaign_design,
             "content_personalization": self._content_personalization,
             "performance_analysis": self._performance_analysis,
+            "holiday_campaign_plan": self._evidence_capability,
+            "creative_ab_test": self._evidence_capability,
+            "campaign_scheduling": self._evidence_capability,
+            "revenue_scenarios": self._evidence_capability,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        if operation in EVIDENCE_CAPABILITIES:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
 
 
@@ -423,6 +679,7 @@ class PersonalizedMarketingAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
+    _validate_revenue_formula_contract()
     agent = PersonalizedMarketingAgent()
     print("=" * 80)
     print(agent.perform(operation="customer_segmentation"))

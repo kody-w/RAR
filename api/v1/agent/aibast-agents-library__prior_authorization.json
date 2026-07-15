@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__prior_authorization",
   "name": "Prior Authorization Agent",
   "rar_name": "@aibast-agents-library/prior_authorization",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/prior_authorization:6ec82bc15d44ac15abcf43deb8c7203f",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/prior_authorization:f00f7e02adb345a7f3d4ea21488f9d9b94311ce01850bbb079aae51bb7d29f9e",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "healthcare",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 364,
-  "size_kb": 15.0,
-  "sha256": "6ec82bc15d44ac15abcf43deb8c7203f2f59e025ede9d97a3b730538223cb057",
+  "lines": 752,
+  "size_kb": 33.9,
+  "sha256": "f00f7e02adb345a7f3d4ea21488f9d9b94311ce01850bbb079aae51bb7d29f9e",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__prior_authorization.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py.card",

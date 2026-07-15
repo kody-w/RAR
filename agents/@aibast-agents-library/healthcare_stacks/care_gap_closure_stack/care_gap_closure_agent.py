@@ -4,6 +4,11 @@ Care Gap Closure Agent for Healthcare.
 Analyzes HEDIS quality measure gaps, prioritizes patient outreach,
 manages outreach campaigns, and provides HEDIS compliance dashboards
 for population health management teams.
+
+Version 1.1.0 retains those operations and adds the demonstrated barrier
+analysis, simulated campaign launch, and live campaign monitoring outcomes.
+The added operations use the Medicare Advantage A1C scenario captured in the
+source demo and return deterministic results keyed by ``CDC-HBA1C``.
 """
 
 import sys
@@ -15,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/care_gap_closure",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Care Gap Closure Agent",
     "description": "Analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides HEDIS compliance dashboards.",
     "author": "AIBAST",
@@ -123,6 +128,39 @@ OUTREACH_CHANNELS = {
     "email": {"cost_per_contact": 0.08, "avg_response_rate_pct": 28, "avg_conversion_pct": 14},
 }
 
+DEMO_A1C_CAMPAIGN = {
+    "measure_id": "CDC-HBA1C",
+    "measure": "Diabetes A1C testing",
+    "patients": 387,
+    "revenue_at_risk": 189450,
+    "risk_tiers": [
+        "A1C >9.0 (Critical): 156 patients, average gap 8.7 months",
+        "A1C 7-9 (Moderate): 137 patients, average gap 7.2 months",
+    ],
+    "barriers": [
+        "Transportation: 34% (132 patients)",
+        "No-show history: 28% (108 patients)",
+        "Spanish language: 18% (70 patients)",
+        "Insurance lapsed: 12% (46 patients)",
+    ],
+    "deployment": [
+        "SMS: 294 patients (76% valid mobile)",
+        "Patient portal: 312 messages",
+        "Voicemail: 387 queued over 3 days",
+        "RN outreach: 94 callbacks scheduled",
+        "Mobile clinic: 47 slots reserved for the next 2 weeks",
+        "Uber Health: 132 vouchers issued",
+    ],
+    "projected_close_rate": "68%",
+    "projected_revenue_saved": 128700,
+    "alerts": [
+        "Close rate below 60%",
+        "3 failed contact attempts",
+        "Critical patient non-response over 48 hours",
+        "Campaign budget variance over 15%",
+    ],
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -219,12 +257,15 @@ class CareGapClosureAgent(BasicAgent):
                             "patient_prioritization",
                             "outreach_campaign",
                             "hedis_dashboard",
+                            "barrier_analysis",
+                            "launch_outreach_campaign",
+                            "campaign_monitoring",
                         ],
                         "description": "The care gap closure operation to perform.",
                     },
                     "measure_id": {
                         "type": "string",
-                        "description": "Optional HEDIS measure ID to filter results.",
+                        "description": "Optional exact HEDIS measure ID; CDC-HBA1C selects the demonstrated A1C campaign.",
                     },
                 },
                 "required": ["operation"],
@@ -242,7 +283,19 @@ class CareGapClosureAgent(BasicAgent):
             return self._outreach_campaign()
         elif op == "hedis_dashboard":
             return self._hedis_dashboard()
+        elif op == "barrier_analysis":
+            return self._barrier_analysis(kwargs.get("measure_id"))
+        elif op == "launch_outreach_campaign":
+            return self._launch_outreach_campaign(kwargs.get("measure_id"))
+        elif op == "campaign_monitoring":
+            return self._campaign_monitoring(kwargs.get("measure_id"))
         return f"**Error:** Unknown operation `{op}`."
+
+    @staticmethod
+    def _demo_campaign(measure_id):
+        if measure_id and measure_id != DEMO_A1C_CAMPAIGN["measure_id"]:
+            return None
+        return DEMO_A1C_CAMPAIGN
 
     def _gap_analysis(self) -> str:
         data = _gap_analysis()
@@ -312,11 +365,68 @@ class CareGapClosureAgent(BasicAgent):
             )
         return "\n".join(lines)
 
+    def _barrier_analysis(self, measure_id=None) -> str:
+        data = self._demo_campaign(measure_id)
+        if not data:
+            return f"**Error:** No demonstrated campaign for measure `{measure_id}`. Available measure: CDC-HBA1C."
+        lines = [
+            "# A1C Risk and Barrier Analysis",
+            "",
+            f"**Measure ID:** {data['measure_id']} | **Patients:** {data['patients']} | "
+            f"**Revenue at risk:** ${data['revenue_at_risk']:,}",
+            "",
+            "## Risk tiers",
+        ]
+        lines.extend(f"- {item}" for item in data["risk_tiers"])
+        lines.append("\n## Engagement barriers")
+        lines.extend(f"- {item}" for item in data["barriers"])
+        lines.append("\n_Read-only result grounded in the demonstrated Medicare Advantage cohort._")
+        return "\n".join(lines)
+
+    def _launch_outreach_campaign(self, measure_id=None) -> str:
+        data = self._demo_campaign(measure_id)
+        if not data:
+            return f"**Error:** No demonstrated campaign for measure `{measure_id}`. Available measure: CDC-HBA1C."
+        lines = [
+            "# Simulated A1C Outreach Campaign Launch",
+            "",
+            f"**Measure ID:** {data['measure_id']} | **Scope:** {data['patients']} patients",
+            "",
+        ]
+        lines.extend(f"- {item}" for item in data["deployment"])
+        lines += [
+            "",
+            f"**Simulated receipt:** SIM-CAMPAIGN-{data['measure_id']}",
+            "**Status:** SIMULATED — no Dynamics 365, Power Automate, Teams, or patient channel was contacted or changed.",
+        ]
+        return "\n".join(lines)
+
+    def _campaign_monitoring(self, measure_id=None) -> str:
+        data = self._demo_campaign(measure_id)
+        if not data:
+            return f"**Error:** No demonstrated campaign for measure `{measure_id}`. Available measure: CDC-HBA1C."
+        lines = [
+            "# A1C Campaign Monitoring",
+            "",
+            f"**Measure ID:** {data['measure_id']}",
+            f"**Projected close rate:** {data['projected_close_rate']}",
+            f"**Projected revenue saved:** ${data['projected_revenue_saved']:,}",
+            "**Teams cadence:** Daily 8 AM summary",
+            "",
+            "## Alert triggers",
+        ]
+        lines.extend(f"- {item}" for item in data["alerts"])
+        lines.append("\n_Read-only deterministic snapshot; no external systems were queried._")
+        return "\n".join(lines)
+
 
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = CareGapClosureAgent()
-    for op in ["gap_analysis", "patient_prioritization", "outreach_campaign", "hedis_dashboard"]:
+    for op in [
+        "gap_analysis", "patient_prioritization", "outreach_campaign", "hedis_dashboard",
+        "barrier_analysis", "launch_outreach_campaign", "campaign_monitoring",
+    ]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

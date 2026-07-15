@@ -23,7 +23,7 @@ from datetime import datetime
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/win_loss_analysis",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Win/Loss Analysis",
     "description": "AI-powered win/loss analysis with pattern recognition, competitive insights, revenue recovery modeling, and board-ready presentations.",
     "author": "AIBAST",
@@ -384,6 +384,15 @@ _INTERVENTIONS = {
     },
 }
 
+_ANALYSIS_RECORDS = {
+    "Q3-COMPETITORX": {
+        "quarter": "Q3",
+        "competitor": "CompetitorX",
+        "segment": "enterprise",
+        "crm_topic": "Enterprise win-rate recovery",
+    },
+}
+
 
 # ═══════════════════════════════════════════════════════════════
 # HELPERS -- real computation, synthetic inputs
@@ -545,6 +554,7 @@ class WinLossAnalysisAgent(BasicAgent):
         revenue_impact      - Financial modeling of interventions with ROI
         board_presentation  - Slide-by-slide board presentation framework
         action_summary      - Complete findings and next steps
+        publish_findings    - update CRM and share exact analysis via Teams
     """
 
     def __init__(self):
@@ -561,12 +571,17 @@ class WinLossAnalysisAgent(BasicAgent):
                             "win_loss_overview", "root_cause_analysis",
                             "counter_strategies", "revenue_impact",
                             "board_presentation", "action_summary",
+                            "publish_findings",
                         ],
                         "description": "The analysis to perform",
                     },
                     "quarter": {
                         "type": "string",
                         "description": "Quarter to analyze (default: Q3 current)",
+                    },
+                    "analysis_id": {
+                        "type": "string",
+                        "description": "Exact analysis ID for publish_findings (e.g. 'Q3-COMPETITORX')",
                     },
                 },
                 "required": ["operation"],
@@ -576,6 +591,8 @@ class WinLossAnalysisAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "win_loss_overview")
+        if op == "publish_findings":
+            return self._publish_findings(kwargs.get("analysis_id"))
         dispatch = {
             "win_loss_overview": self._win_loss_overview,
             "root_cause_analysis": self._root_cause_analysis,
@@ -588,6 +605,36 @@ class WinLossAnalysisAgent(BasicAgent):
         if not handler:
             return json.dumps({"status": "error", "message": f"Unknown operation: {op}"})
         return handler()
+
+    def _publish_findings(self, analysis_id):
+        analysis = _ANALYSIS_RECORDS.get(analysis_id)
+        if analysis is None:
+            return json.dumps({
+                "status": "error",
+                "message": f"Unknown analysis_id: {analysis_id!r}",
+                "valid_analysis_ids": ", ".join(sorted(_ANALYSIS_RECORDS)),
+            })
+        stats = _quarter_stats(_Q3_OPPORTUNITIES)
+        competitor = analysis["competitor"]
+        reasons = _loss_reason_analysis(_Q3_OPPORTUNITIES, competitor=competitor)
+        top_reason, top_data = max(reasons.items(), key=lambda item: item[1]["count"])
+        _, recoverable, investment = _revenue_recovery_model(_Q3_OPPORTUNITIES)
+        receipt = {
+            "status": "simulated",
+            "analysis_id": analysis_id,
+            "quarter": analysis["quarter"],
+            "segment": analysis["segment"],
+            "competitor": competitor,
+            "opportunities_analyzed": stats["total"],
+            "win_rate_pct": stats["win_rate"],
+            "top_loss_driver": top_reason,
+            "top_loss_driver_frequency_pct": top_data["frequency_pct"],
+            "recoverable_pipeline": recoverable,
+            "recommended_investment": investment,
+            "crm_insight_id": f"sim-d365-insight-{analysis_id.lower()}",
+            "teams_message_id": f"sim-teams-board-{analysis_id.lower()}",
+        }
+        return "**Win/Loss Findings Publication Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
     # ── win_loss_overview ──────────────────────────────────────
     def _win_loss_overview(self):

@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/maintenance_scheduling",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Maintenance Scheduling Agent",
     "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
     "author": "AIBAST",
@@ -138,6 +138,35 @@ DOWNTIME_COST_PER_HOUR = {
     "Injection Molder": 1400, "Conveyor": 2200,
 }
 
+MAINTENANCE_PLAN_RECORDS = {
+    "EQ-INJ-01": {
+        "production_order": "ORD-7813", "delivery_priority": "critical",
+        "window": "2026-03-21 22:00-2026-03-22 06:00", "capacity_impact_pct": 4.0,
+        "parts": ["Heater band HB-220 x2", "Thermocouple TC-K x1"],
+        "crew": ["James Whitfield", "Lin Zhao"], "backup_equipment": "EQ-INJ-02",
+        "backup_status": "available", "estimated_hours": 8,
+    },
+    "EQ-PRS-01": {
+        "production_order": "ORD-7810", "delivery_priority": "high",
+        "window": "2026-03-28 06:00-11:00", "capacity_impact_pct": 6.5,
+        "parts": ["Hydraulic seal kit HS-400 x1", "ISO 46 fluid x40L"],
+        "crew": ["Marcus Rivera"], "backup_equipment": "EQ-PRS-02",
+        "backup_status": "available at 80% capacity", "estimated_hours": 5,
+    },
+    "EQ-CNC-01": {
+        "production_order": "ORD-7811", "delivery_priority": "standard",
+        "window": "2026-04-04 14:00-17:00", "capacity_impact_pct": 2.0,
+        "parts": ["Spindle bearing kit SB-42 x1"],
+        "crew": ["Marcus Rivera"], "backup_equipment": "EQ-CNC-02",
+        "backup_status": "available", "estimated_hours": 3,
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: maintenance-scheduling one-pager and demo transcript; "
+    "production-aware windows, parts/crew staging, work-order execution, and calendar]"
+)
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -198,6 +227,10 @@ class MaintenanceSchedulingAgent(BasicAgent):
                 "predictive_alerts",
                 "work_order_plan",
                 "downtime_analysis",
+                "maintenance_plan",
+                "create_work_order",
+                "maintenance_calendar",
+                "fleet_optimization",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -209,6 +242,10 @@ class MaintenanceSchedulingAgent(BasicAgent):
             "predictive_alerts": self._predictive_alerts,
             "work_order_plan": self._work_order_plan,
             "downtime_analysis": self._downtime_analysis,
+            "maintenance_plan": self._maintenance_plan,
+            "create_work_order": self._create_work_order,
+            "maintenance_calendar": self._maintenance_calendar,
+            "fleet_optimization": self._fleet_optimization,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -351,6 +388,81 @@ class MaintenanceSchedulingAgent(BasicAgent):
         lines.append(f"- Preventive work orders: **{prev_count}**")
         lines.append(f"- Corrective (unplanned) work orders: **{corr_count}**")
         lines.append(f"- Preventive-to-corrective ratio: **{prev_count}:{corr_count}** (target 5:1)")
+        return "\n".join(lines)
+
+    def _maintenance_record(self, **kwargs):
+        equipment_id = str(kwargs.get("equipment_id", "EQ-INJ-01")).strip().upper()
+        record = MAINTENANCE_PLAN_RECORDS.get(equipment_id)
+        if record is None:
+            valid = ", ".join(MAINTENANCE_PLAN_RECORDS)
+            return equipment_id, None, f"**Error:** Unknown equipment `{equipment_id}`. Valid: {valid}"
+        return equipment_id, record, ""
+
+    def _maintenance_plan(self, **kwargs) -> str:
+        equipment_id, plan, error = self._maintenance_record(**kwargs)
+        if error:
+            return error
+        eq = EQUIPMENT[equipment_id]
+        fp = FAILURE_PROBABILITIES[equipment_id]
+        return "\n".join([
+            "## Production-Aware Maintenance Plan",
+            EVIDENCE_MARKER,
+            f"**Equipment lookup:** {equipment_id} — {eq['name']}",
+            f"- Related production order: {plan['production_order']} ({plan['delivery_priority']} priority)",
+            f"- 30-day failure probability: {fp['30_day'] * 100:.0f}% ({fp['failure_mode']})",
+            f"- Lowest-impact window: {plan['window']}",
+            f"- Modeled capacity impact: {plan['capacity_impact_pct']}%",
+            f"- Parts confirmed: {', '.join(plan['parts'])}",
+            f"- Crew confirmed: {', '.join(plan['crew'])}",
+            f"- Backup: {plan['backup_equipment']} — {plan['backup_status']}",
+            f"- Estimated duration: {plan['estimated_hours']} hours",
+        ])
+
+    def _create_work_order(self, **kwargs) -> str:
+        equipment_id, plan, error = self._maintenance_record(**kwargs)
+        if error:
+            return error
+        receipt = f"WO-SIM-{equipment_id.replace('EQ-', '')}-202603"
+        return "\n".join([
+            "## Simulated Work-Order Execution",
+            EVIDENCE_MARKER,
+            f"**Equipment lookup:** {equipment_id} — {EQUIPMENT[equipment_id]['name']}",
+            f"- **SIMULATED WRITE RECEIPT:** `{receipt}`",
+            f"- Dynamics 365 work order window: {plan['window']}",
+            f"- Teams crew assignment: {', '.join(plan['crew'])}",
+            f"- Reserved parts: {', '.join(plan['parts'])}",
+            f"- Backup equipment validated: {plan['backup_equipment']} ({plan['backup_status']})",
+            "- Simulation only; no work order, inventory, calendar, or Teams message was created.",
+        ])
+
+    def _maintenance_calendar(self, **kwargs) -> str:
+        lines = ["## 30-Day Maintenance Calendar", EVIDENCE_MARKER, "",
+                 "| Equipment | Window | Production Order | Capacity Impact | Crew |",
+                 "|-----------|--------|------------------|-----------------|------|"]
+        for equipment_id, plan in MAINTENANCE_PLAN_RECORDS.items():
+            lines.append(
+                f"| {equipment_id} | {plan['window']} | {plan['production_order']} | "
+                f"{plan['capacity_impact_pct']}% | {', '.join(plan['crew'])} |"
+            )
+        lines.append("\nAll windows are deterministic planning records; no external calendars were changed.")
+        return "\n".join(lines)
+
+    def _fleet_optimization(self, **kwargs) -> str:
+        ranked = sorted(
+            EQUIPMENT, key=lambda equipment_id: _risk_priority(equipment_id), reverse=True
+        )
+        lines = ["## Long-Term Fleet Maintenance Optimization", EVIDENCE_MARKER, "",
+                 "| Rank | Equipment | Risk | 90-Day Failure Probability | Action |",
+                 "|------|-----------|------|----------------------------|--------|"]
+        for rank, equipment_id in enumerate(ranked, 1):
+            risk = _risk_priority(equipment_id)
+            probability = FAILURE_PROBABILITIES[equipment_id]["90_day"] * 100
+            action = "planned overhaul" if probability >= 70 else "condition monitor" if probability >= 30 else "routine PM"
+            lines.append(
+                f"| {rank} | {equipment_id} | {risk} | {probability:.0f}% | {action} |"
+            )
+        lines.append("\n**Optimization KPIs:** unplanned downtime, schedule adherence, "
+                     "emergency repair spend, and preventive-to-corrective ratio.")
         return "\n".join(lines)
 
 

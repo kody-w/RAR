@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/order_status_communication",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Order Status Communication Agent",
     "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
     "author": "AIBAST",
@@ -137,6 +137,50 @@ CUSTOMER_CONTACTS = {
     },
 }
 
+RECOVERY_PLANS = {
+    "ORD-7813": {
+        "root_cause": "Alloy steel bar stock shipment missed supplier departure cutoff",
+        "containment": "Release 200-unit partial shipment from completed stock",
+        "corrective_action": "Dual-source remaining bar stock and add weekend CNC shifts",
+        "revised_milestones": ["200 units: 2026-03-28", "400 units: 2026-04-04", "complete: 2026-04-08"],
+        "owner": "Robert Kim", "next_review": "2026-03-20 09:00",
+    },
+}
+
+QUALITY_VALIDATIONS = {
+    "ORD-7813": {
+        "incoming_material": "Mill certificate MTR-7813 verified; chemistry within ASTM A519",
+        "production_quality": "First-piece dimensional inspection passed 18/18 characteristics",
+        "final_validation": "Pressure test required on each recovery lot before release",
+        "quality_status": "conditional release approved",
+    },
+    "ORD-7812": {
+        "incoming_material": "Coil certificate COIL-MY-442 verified",
+        "production_quality": "Stamping capability Cpk 1.48",
+        "final_validation": "Final dimensional audit passed",
+        "quality_status": "released",
+    },
+}
+
+PERFORMANCE_RECORDS = {
+    "ORD-7813": {
+        "on_time_before_pct": 82, "on_time_recovery_pct": 96,
+        "quality_ppm_before": 920, "quality_ppm_recovery": 310,
+        "customer_inquiries_before": 14, "customer_inquiries_after": 3,
+        "lesson": "Trigger dual-source review when material ETA slips more than 48 hours",
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: order-status-communication one-pager and demo transcript; "
+    "recovery planning, multichannel execution, QA validation, and performance review]"
+)
+
+DELIVERY_DATE_CONTRACT_CASES = (
+    {"order_id": "ORD-7813", "expected": "2026-04-08", "obsolete": "2026-03-28"},
+    {"order_id": "ORD-7810", "expected": "2026-03-20", "obsolete": None},
+)
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -151,6 +195,12 @@ def _order_value(order_id):
 def _is_at_risk(order_id):
     """Determine if an order is delayed or at risk of missing its date."""
     return ORDERS[order_id]["status"] == "delayed" or order_id in DELAY_REASONS
+
+
+def _published_delivery_date(order_id):
+    """Return a revised delivery date when one exists, otherwise the promise date."""
+    delay = DELAY_REASONS.get(order_id, {})
+    return delay.get("revised_date", ORDERS[order_id]["promised_date"])
 
 
 def _days_until_promise(order_id):
@@ -213,6 +263,10 @@ class OrderStatusCommunicationAgent(BasicAgent):
                 "shipment_tracking",
                 "delay_notification",
                 "customer_update",
+                "recovery_plan",
+                "engagement_execution",
+                "quality_validation",
+                "performance_review",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -224,6 +278,10 @@ class OrderStatusCommunicationAgent(BasicAgent):
             "shipment_tracking": self._shipment_tracking,
             "delay_notification": self._delay_notification,
             "customer_update": self._customer_update,
+            "recovery_plan": self._recovery_plan,
+            "engagement_execution": self._engagement_execution,
+            "quality_validation": self._quality_validation,
+            "performance_review": self._performance_review,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -307,6 +365,106 @@ class OrderStatusCommunicationAgent(BasicAgent):
             lines.append("")
         return "\n".join(lines)
 
+    def _order_record(self, records, default_order_id, **kwargs):
+        order_id = str(kwargs.get("order_id", default_order_id)).strip().upper()
+        record = records.get(order_id)
+        if record is None:
+            return order_id, None, (
+                f"**Error:** No record for order `{order_id}`. Valid: {', '.join(records)}"
+            )
+        return order_id, record, ""
+
+    def _recovery_plan(self, **kwargs) -> str:
+        order_id, plan, error = self._order_record(RECOVERY_PLANS, "ORD-7813", **kwargs)
+        if error:
+            return error
+        order = ORDERS[order_id]
+        lines = [
+            "## Order Recovery Plan", EVIDENCE_MARKER,
+            f"**Order lookup:** {order_id} — {order['customer']} / {order['product']}",
+            f"- Root cause: {plan['root_cause']}",
+            f"- Containment: {plan['containment']}",
+            f"- Corrective action: {plan['corrective_action']}",
+            f"- Owner: {plan['owner']}",
+            f"- Next review: {plan['next_review']}",
+            "- Revised delivery timeline:",
+        ]
+        lines.extend(f"  - {milestone}" for milestone in plan["revised_milestones"])
+        return "\n".join(lines)
+
+    def _engagement_execution(self, **kwargs) -> str:
+        order_id = str(kwargs.get("order_id", "ORD-7813")).strip().upper()
+        if order_id not in ORDERS:
+            return f"**Error:** Unknown order `{order_id}`. Valid: {', '.join(ORDERS)}"
+        order = ORDERS[order_id]
+        contact = CUSTOMER_CONTACTS[order["customer"]]
+        plan = RECOVERY_PLANS.get(order_id)
+        delivery_date = _published_delivery_date(order_id)
+        follow_up = plan["next_review"] if plan else order["promised_date"] + " 09:00"
+        return "\n".join([
+            "## Multichannel Engagement Execution",
+            EVIDENCE_MARKER,
+            f"**Order lookup:** {order_id} — {order['customer']}",
+            f"- Preferred channel: {contact['preferred_channel']}",
+            f"- Email draft: prepared for {order['contact_email']} with delivery date {delivery_date}",
+            f"- EDI status: prepared with {order['status']} / {order['pct_complete']}% complete / delivery date {delivery_date}",
+            f"- Portal update: prepared with delivery date {delivery_date}",
+            f"- Follow-up scheduled: {follow_up}",
+            f"- CRM note: recovery and customer-notification summary prepared with delivery date {delivery_date}",
+            f"- **SIMULATED WRITE RECEIPT:** `ENG-SIM-{order_id}`",
+            "- Simulation only; no email, EDI message, portal update, meeting, or CRM note was sent.",
+        ])
+
+    def _quality_validation(self, **kwargs) -> str:
+        order_id, quality, error = self._order_record(
+            QUALITY_VALIDATIONS, "ORD-7813", **kwargs
+        )
+        if error:
+            return error
+        return "\n".join([
+            "## Order Quality Assurance Validation",
+            EVIDENCE_MARKER,
+            f"**Order lookup:** {order_id} — {ORDERS[order_id]['product']}",
+            f"- Incoming material: {quality['incoming_material']}",
+            f"- Production quality: {quality['production_quality']}",
+            f"- Final validation: {quality['final_validation']}",
+            f"- Release status: **{quality['quality_status']}**",
+        ])
+
+    def _performance_review(self, **kwargs) -> str:
+        order_id, perf, error = self._order_record(
+            PERFORMANCE_RECORDS, "ORD-7813", **kwargs
+        )
+        if error:
+            return error
+        return "\n".join([
+            "## Recovery Performance Review",
+            EVIDENCE_MARKER,
+            f"**Order lookup:** {order_id} — {ORDERS[order_id]['customer']}",
+            "",
+            "| Measure | Before | Recovery Projection |",
+            "|---------|--------|---------------------|",
+            f"| On-time delivery | {perf['on_time_before_pct']}% | {perf['on_time_recovery_pct']}% |",
+            f"| Quality PPM | {perf['quality_ppm_before']} | {perf['quality_ppm_recovery']} |",
+            f"| Customer inquiries | {perf['customer_inquiries_before']} | {perf['customer_inquiries_after']} |",
+            "",
+            f"**Lesson learned:** {perf['lesson']}",
+        ])
+
+
+def _validate_delivery_date_contracts(agent):
+    """Exercise delayed and non-delayed dates across customer and engagement views."""
+    for case in DELIVERY_DATE_CONTRACT_CASES:
+        order_id = case["order_id"]
+        expected = case["expected"]
+        assert _published_delivery_date(order_id) == expected
+        assert expected in _build_customer_update(order_id)
+        engagement = agent.perform(operation="engagement_execution", order_id=order_id)
+        assert expected in engagement
+        obsolete = case["obsolete"]
+        if obsolete:
+            assert obsolete not in engagement
+
 
 # ---------------------------------------------------------------------------
 # Main
@@ -314,6 +472,7 @@ class OrderStatusCommunicationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = OrderStatusCommunicationAgent()
+    _validate_delivery_date_contracts(agent)
     for op in agent.metadata["operations"]:
         print("=" * 72)
         print(agent.perform(operation=op))

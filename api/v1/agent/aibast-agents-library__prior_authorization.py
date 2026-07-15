@@ -4,10 +4,27 @@ Prior Authorization Agent for Healthcare.
 Manages prior authorization requests, checks clinical criteria against
 payer rules, tracks authorization status, and prepares appeal documentation
 for denied or pending authorizations.
+
+Version 1.1.0 extends the agent with six outcomes demonstrated in the source
+prior authorization demo while preserving every legacy operation:
+
+- ``authorization_verification`` — Authorization Intake and Verification
+- ``payer_requirement``          — Payer Requirement Analysis
+- ``authorization_submission``   — Authorization Submission and Notification (simulated write)
+- ``approval_prediction``        — Approval Probability and Appeal Strategy (generative)
+- ``authorization_tracking``     — Authorization Tracking and Teams Notification (simulated write)
+- ``denial_appeal_status``       — Denial and Active Appeal Insight
+
+Each new capability is a keyed lookup over embedded evidence records. Pass an
+exact record key via ``key`` (or embed it in ``user_input``) to retrieve one
+record; omit it for a no-input evidence summary. Write-capable operations emit
+an explicit *simulated* write receipt and never mutate an external system — all
+data lives in-file and every response is fully deterministic.
 """
 
 import sys
 import os
+import re
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,7 +32,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/prior_authorization",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Prior Authorization Agent",
     "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
     "author": "AIBAST",
@@ -149,6 +166,241 @@ PAYER_APPROVAL_RATES = {
 
 
 # ---------------------------------------------------------------------------
+# v1.1.0 — Data-driven capabilities (source demo)
+#
+# Each capability is a self-contained record: the demonstrated response,
+# knowledge statements, and evidence records keyed by an exact identifier,
+# and the write/generative provenance flags. Everything is embedded in-file;
+# nothing calls an external system. Write-capable operations return a clearly
+# labelled *simulated* receipt only.
+# ---------------------------------------------------------------------------
+
+CAPABILITIES = {
+    "authorization_verification": {
+        "display_name": "Authorization Intake and Verification",
+        "class_ref": "AuthorizationVerificationAgent",
+        "summary": "Verifies patient demographics, coverage, and clinical documentation into a single decision-ready view.",
+        "response": "I've verified patient demographics, insurance coverage, and clinical documentation into one decision-ready view. Ready to submit.",
+        "source_system": "EHR and insurance verification",
+        "customer": "multispecialty orthopedic practice",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "request_id",
+        "key_label": "Request ID",
+        "knowledge": [
+            "Connects to EHR systems and insurance verification to confirm patient demographics, coverage, and clinical documentation before submission.",
+            "Presents verified patient, coverage, and documentation status together in a single decision-ready view.",
+            "The coordinator provides key context while the agent assembles the verified authorization intake.",
+        ],
+        "records": [
+            {
+                "request_id": "MR-489327",
+                "patient": "Robert Chen, DOB 05/22/1965",
+                "payer": "PPO #XY4829103",
+                "procedure": "72148 - Lumbar MRI without contrast",
+                "diagnosis": "M54.5 - Chronic low back pain",
+                "provider": "Dr. Thompson, NPI 1234567890",
+                "coverage_status": "Verified",
+                "documentation_status": "Complete - failed 6 weeks conservative therapy",
+            },
+        ],
+    },
+    "payer_requirement": {
+        "display_name": "Payer Requirement Analysis",
+        "class_ref": "PayerRequirementAgent",
+        "summary": "Checks payer-specific requirements against the patient's documentation and confirms whether all criteria are met.",
+        "response": "Payer requirement analysis complete. I checked the payer criteria against the patient's documentation and confirmed the matches.",
+        "source_system": "Payer portal and clinical documentation",
+        "customer": "multispecialty orthopedic practice",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "cpt_code",
+        "key_label": "CPT Code",
+        "knowledge": [
+            "Pulls payer-specific requirements and matches them with EHR data through automated criteria screening.",
+            "Automatically checks payer requirements against the patient's documentation and confirms when all criteria are met.",
+            "Flags missing elements when payer criteria are only partially satisfied.",
+        ],
+        "records": [
+            {
+                "cpt_code": "72148",
+                "payer": "PPO #XY4829103",
+                "procedure": "Lumbar MRI without contrast",
+                "requirement_met": "Yes",
+                "evidence_source": "Last 3 office visits; PT for 6 weeks; NSAIDs; symptoms for 8 weeks without improvement",
+                "estimated_review": "24-48 hours",
+            },
+        ],
+    },
+    "authorization_submission": {
+        "display_name": "Authorization Submission and Notification",
+        "class_ref": "AuthorizationSubmissionAgent",
+        "summary": "Submits the request to the payer, returns submission details, and notifies the patient and care team.",
+        "response": "Authorization request submitted. Here are the submission details, and I've sent notifications to the patient and the care team.",
+        "source_system": "Electronic payer portal",
+        "customer": "multispecialty orthopedic practice",
+        "write": True,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "submission_id",
+        "key_label": "Submission ID",
+        "knowledge": [
+            "Submits requests directly to payer portals and sends real-time updates once submitted.",
+            "Provides submission details in moments, including submission time and expected decision timeline.",
+            "Intelligently sends notifications to the patient and the care team after submission.",
+        ],
+        "records": [
+            {
+                "submission_id": "PA-2024-892741",
+                "patient": "Robert Chen",
+                "payer_reference": "Case #4729183",
+                "submitted_at": "Today at 3:47 PM",
+                "expected_decision": "2 business days",
+                "screening": "Automated criteria screening",
+                "notifications_sent": "Patient SMS with tracking link and care team update",
+            },
+        ],
+    },
+    "approval_prediction": {
+        "display_name": "Approval Probability and Appeal Strategy",
+        "class_ref": "ApprovalPredictionAgent",
+        "summary": "Calculates an approval probability from documentation and outlines an appeal strategy if the request is denied.",
+        "response": "I analyzed the documentation to calculate an approval probability and prepared an appeal strategy in case the request is denied.",
+        "source_system": "Clinical documentation and historical authorization outcomes",
+        "customer": "multispecialty orthopedic practice",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "authorization",
+        "key_label": "Authorization",
+        "knowledge": [
+            "Analyzes documentation and calculates an approval probability based on comprehensive evidence meeting payer criteria.",
+            "Predicts approval likelihood and prepares automated appeal packages to protect revenue and reduce delays.",
+            "In the same motion, outlines an appeal strategy should the request be denied.",
+        ],
+        "records": [
+            {
+                "authorization": "PA-2024-892741",
+                "procedure": "Lumbar MRI",
+                "approval_probability": "87%",
+                "historical_approval_rate": "94% for similar cases",
+                "appeal_strategy": "Peer-to-peer review with radiologist; add functional impact documentation and imaging-guideline citation",
+            },
+        ],
+    },
+    "authorization_tracking": {
+        "display_name": "Authorization Tracking and Teams Notification",
+        "class_ref": "AuthorizationTrackingAgent",
+        "summary": "Configures multi-party notifications and scheduled status checks, then shares the dashboard via Microsoft Teams.",
+        "response": "Automated tracking configured with multi-party notifications and scheduled status checks, and I've shared the monitoring dashboard through Microsoft Teams.",
+        "source_system": "Payer portal, secure messaging, and Microsoft Teams",
+        "customer": "multispecialty orthopedic practice",
+        "write": True,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "authorization",
+        "key_label": "Authorization",
+        "knowledge": [
+            "Sets up multi-party notifications and scheduled status checks for an authorization.",
+            "Shares the monitoring dashboard through Microsoft Teams to drive alignment with the broader clinical team.",
+            "Configures auto-escalation rules that trigger if no decision is reached within the set window.",
+        ],
+        "records": [
+            {
+                "authorization": "PA-2024-892741",
+                "status_check_interval": "Every 4 hours",
+                "expected_decision": "2 business days",
+                "escalation_rule": "Auto-trigger if no decision in 48 hours; alert within 2 hours of decision",
+                "notifications_sent": "Patient SMS on approval; radiology scheduling alert; Dr. Thompson secure message",
+                "appeal_readiness": "Appeal workflow ready if denied",
+            },
+        ],
+    },
+    "denial_appeal_status": {
+        "display_name": "Denial and Active Appeal Insight",
+        "class_ref": "DenialAppealStatusAgent",
+        "summary": "Explains the demonstrated Medicare sleep-study denial and its active appeal status; the legacy auth_request operation already supplies the portfolio view.",
+        "response": "Here is the Medicare denial analysis and the active appeal status, including actions already taken and the expected decision timeline.",
+        "source_system": "Medicare portal and appeal tracking",
+        "customer": "multispecialty orthopedic practice",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "case_key",
+        "key_label": "Case Key",
+        "knowledge": [
+            "Captures denial details and outlines how the appeal is already underway when a request is denied.",
+            "Gives the coordinator clarity and confidence on next steps for pending and denied cases.",
+            "The existing auth_request operation remains the portfolio view, avoiding a duplicate operation.",
+        ],
+        "records": [
+            {
+                "case_key": "Johnson Sleep Study",
+                "patient": "Johnson",
+                "procedure": "Sleep Study",
+                "status": "Denied - active appeal in peer-to-peer review",
+                "appeal_actions": "Peer-to-peer review tomorrow at 2 PM; additional symptom questionnaire completed",
+                "appeal_probability": "78%",
+                "expected_decision": "Within 5 business days",
+            },
+        ],
+    },
+}
+
+# Human-friendly labels for record fields when rendered.
+_FIELD_LABELS = {
+    "request_id": "Request ID", "cpt_code": "CPT Code", "submission_id": "Submission ID",
+    "case_key": "Case Key",
+    "patient": "Patient", "payer": "Payer", "procedure": "Procedure",
+    "diagnosis": "Diagnosis", "provider": "Provider", "payer_reference": "Payer Reference",
+    "coverage_status": "Coverage Status", "documentation_status": "Documentation Status",
+    "requirement_met": "Requirement Met", "evidence_source": "Evidence Source",
+    "estimated_review": "Estimated Review", "screening": "Screening",
+    "submitted_at": "Submitted At", "expected_decision": "Expected Decision",
+    "notifications_sent": "Notifications Sent", "approval_probability": "Approval Probability",
+    "historical_approval_rate": "Historical Approval Rate",
+    "appeal_probability": "Appeal Probability", "appeal_strategy": "Appeal Strategy",
+    "authorization": "Authorization", "status_check_interval": "Status Check Interval",
+    "escalation_rule": "Escalation Rule", "appeal_readiness": "Appeal Readiness",
+    "status": "Status", "appeal_actions": "Appeal Actions",
+}
+
+
+def _field_label(field: str) -> str:
+    return _FIELD_LABELS.get(field, field.replace("_", " ").title())
+
+
+def _normalize_lookup_token(value: str) -> str:
+    normalized = " ".join(str(value or "").strip().lower().split())
+    return re.sub(r"^[^a-z0-9]+|[^a-z0-9]+$", "", normalized)
+
+
+def _resolve_record(cap: dict, user_input: str, key: str):
+    """Exact keyed lookup. Returns (mode, record) where mode is match/notfound/summary."""
+    key_field = cap["key_field"]
+    raw_key = str(key or "").strip()
+    if raw_key:
+        explicit_key = _normalize_lookup_token(raw_key)
+        for rec in cap["records"]:
+            record_key = _normalize_lookup_token(rec[key_field])
+            if record_key == explicit_key:
+                return ("match", rec)
+        return ("notfound", None)
+
+    normalized_input = " ".join(str(user_input or "").strip().lower().split())
+    if normalized_input:
+        for rec in cap["records"]:
+            record_key = _normalize_lookup_token(rec[key_field])
+            boundary_pattern = rf"(?<![a-z0-9_-]){re.escape(record_key)}(?![a-z0-9_-])"
+            if re.search(boundary_pattern, normalized_input):
+                return ("match", rec)
+        return ("notfound", None)
+    return ("summary", None)
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
@@ -241,7 +493,7 @@ class PriorAuthorizationAgent(BasicAgent):
     """Prior authorization management and clinical criteria checking agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/prior-authorization"
+        self.name = "PriorAuthorizationAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
@@ -255,12 +507,26 @@ class PriorAuthorizationAgent(BasicAgent):
                             "clinical_criteria_check",
                             "status_tracking",
                             "appeal_preparation",
+                            "authorization_verification",
+                            "payer_requirement",
+                            "authorization_submission",
+                            "approval_prediction",
+                            "authorization_tracking",
+                            "denial_appeal_status",
                         ],
                         "description": "The prior authorization operation to perform.",
                     },
                     "auth_id": {
                         "type": "string",
                         "description": "Optional authorization ID to filter results.",
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "Optional exact evidence key (MR-489327, 72148, PA-2024-892741, or Johnson Sleep Study).",
+                    },
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional natural-language request; an exact record key embedded here is matched automatically.",
                     },
                 },
                 "required": ["operation"],
@@ -278,6 +544,12 @@ class PriorAuthorizationAgent(BasicAgent):
             return self._status_tracking()
         elif op == "appeal_preparation":
             return self._appeal_preparation()
+        elif op in CAPABILITIES:
+            return self._run_capability(
+                op,
+                user_input=kwargs.get("user_input", ""),
+                key=kwargs.get("key", ""),
+            )
         return f"**Error:** Unknown operation `{op}`."
 
     def _auth_request(self) -> str:
@@ -353,11 +625,127 @@ class PriorAuthorizationAgent(BasicAgent):
         return "\n".join(lines)
 
 
+    # -----------------------------------------------------------------
+    # v1.1.0 — data-driven capability renderer (exact keyed lookup)
+    # -----------------------------------------------------------------
+    def _run_capability(self, op: str, user_input: str = "", key: str = "") -> str:
+        cap = CAPABILITIES[op]
+        mode, record = _resolve_record(cap, user_input, key)
+        if mode == "notfound":
+            attempted = str(key or "").strip() or str(user_input or "").strip()
+            return self._capability_notfound(cap, attempted)
+        if mode == "match":
+            return self._capability_detail(cap, record)
+        return self._capability_summary(cap)
+
+    def _provenance_lines(self, cap: dict) -> list:
+        return [
+            "",
+            "**Provenance**",
+            f"- Source system: {cap['source_system']} (evidence-derived data embedded in-agent)",
+            f"- Customer: {cap['customer']}",
+            f"- Write: {'yes (simulated only)' if cap['write'] else 'no (read-only)'} "
+            f"| Generative: {'yes' if cap['generative'] else 'no'} "
+            f"| Exact key required: {'yes' if cap['exact_key_required'] else 'no'}",
+        ]
+
+    def _knowledge_lines(self, cap: dict) -> list:
+        lines = ["", "**Knowledge**"]
+        for k in cap["knowledge"]:
+            lines.append(f"- {k}")
+        return lines
+
+    def _capability_detail(self, cap: dict, record: dict) -> str:
+        key_field = cap["key_field"]
+        key_val = record[key_field]
+        lines = [
+            f"# {cap['display_name']}",
+            "",
+            f"> {cap['response']}",
+            "",
+            f"## {cap['key_label']}: {key_val}",
+        ]
+        for field, value in record.items():
+            lines.append(f"- **{_field_label(field)}:** {value}")
+        if cap["generative"]:
+            lines.append("")
+            lines.append("_Deterministic generative outcome captured from the demonstrated documentation analysis._")
+        lines += self._knowledge_lines(cap)
+        if cap["write"]:
+            receipt = f"SIM-RCPT-{key_val}"
+            lines += [
+                "",
+                "**Simulated Write Receipt**",
+                f"- Receipt ID: {receipt}",
+                f"- Action: recorded against `{key_val}` in the in-agent store",
+                "- Status: SIMULATED — no external system was contacted or mutated.",
+                "- All evidence-derived data is embedded; this call has no side effects.",
+            ]
+        else:
+            lines += [
+                "",
+                "_Read-only operation: no data was written and no external system was mutated._",
+            ]
+        lines += self._provenance_lines(cap)
+        return "\n".join(lines)
+
+    def _capability_summary(self, cap: dict) -> str:
+        key_field = cap["key_field"]
+        fields = list(cap["records"][0].keys())
+        headers = [_field_label(f) for f in fields]
+        lines = [
+            f"# {cap['display_name']}",
+            "",
+            f"> {cap['response']}",
+            "",
+            cap["summary"],
+            "",
+            f"**Portfolio ({len(cap['records'])} records)** — provide an exact "
+            f"{cap['key_label']} via `key` or in `user_input` for full detail.",
+            "",
+            "| " + " | ".join(headers) + " |",
+            "|" + "|".join(["---"] * len(headers)) + "|",
+        ]
+        for rec in cap["records"]:
+            lines.append("| " + " | ".join(str(rec[f]) for f in fields) + " |")
+        keys = ", ".join(rec[key_field] for rec in cap["records"])
+        lines += ["", f"**Available {cap['key_label']}s:** {keys}"]
+        lines += self._knowledge_lines(cap)
+        if cap["write"]:
+            lines += [
+                "",
+                "_This capability can record a simulated write when a specific key is supplied; "
+                "no external system is ever mutated._",
+            ]
+        lines += self._provenance_lines(cap)
+        return "\n".join(lines)
+
+    def _capability_notfound(self, cap: dict, key: str) -> str:
+        keys = ", ".join(rec[cap["key_field"]] for rec in cap["records"])
+        return (
+            f"# {cap['display_name']}\n\n"
+            f"**Error:** No record found for {cap['key_label']} `{key}`.\n\n"
+            f"This capability requires an exact key match. "
+            f"Available {cap['key_label']}s: {keys}."
+        )
+
+
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PriorAuthorizationAgent()
-    for op in ["auth_request", "clinical_criteria_check", "status_tracking", "appeal_preparation"]:
+    legacy_ops = ["auth_request", "clinical_criteria_check", "status_tracking", "appeal_preparation"]
+    for op in legacy_ops:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)
         print(agent.perform(operation=op))
+    for op in CAPABILITIES:
+        print(f"\n{'='*60}")
+        print(f"Operation: {op} (no-input summary)")
+        print("=" * 60)
+        print(agent.perform(operation=op))
+        sample_key = CAPABILITIES[op]["records"][0][CAPABILITIES[op]["key_field"]]
+        print(f"\n{'-'*60}")
+        print(f"Operation: {op} (keyed: {sample_key})")
+        print("-" * 60)
+        print(agent.perform(operation=op, key=sample_key))

@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__contract_risk_review",
   "name": "Contract Risk Review Agent",
   "rar_name": "@aibast-agents-library/contract_risk_review",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/contract_risk_review:11ee0289b1d47959bbc35f54988c1057",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/contract_risk_review:2302e298cfa508e1accf2e787804f2aeebf53c144c435e53908786dc99bb031b",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "professional_services",
   "tags": [
@@ -21,12 +21,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 315,
-  "size_kb": 13.8,
-  "sha256": "11ee0289b1d47959bbc35f54988c105751e5ad37bd99f70346eca0eed7ad0dab",
+  "lines": 394,
+  "size_kb": 17.1,
+  "sha256": "2302e298cfa508e1accf2e787804f2aeebf53c144c435e53908786dc99bb031b",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__contract_risk_review.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py.card",

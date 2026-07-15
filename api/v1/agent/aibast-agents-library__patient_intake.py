@@ -4,6 +4,11 @@ Patient Intake Agent for Healthcare.
 Manages patient intake workflows including form generation, insurance
 verification, appointment scheduling, and pre-visit summary preparation
 for front desk and clinical staff.
+
+Version 1.1.0 preserves those read operations and adds the demonstrated
+registration, booking, digital packet, and no-show prevention outcomes. The
+new operations use the Sarah Martinez demo facts, support exact keyed results,
+and return simulated receipts instead of writing to clinical systems.
 """
 
 import sys
@@ -15,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/patient_intake",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Patient Intake Agent",
     "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
     "author": "AIBAST",
@@ -179,6 +184,48 @@ INTAKE_QUESTIONNAIRES = {
     },
 }
 
+DEMO_INTAKE = {
+    "patient_key": "Sarah Martinez",
+    "patient": "Sarah Martinez",
+    "patient_type": "New Patient",
+    "chief_complaint": "Chronic migraines",
+    "provider": "Dr. James Anderson, MD",
+    "specialty": "Neurology",
+    "insurance": "Blue Cross Blue Shield",
+    "policy_number": "XXX-XX-7392",
+    "group_number": "84721",
+    "insurance_status": "Active — verified in real time",
+    "copay": "$35 specialist visit",
+    "deductible": "$450 met of $1,500",
+    "prior_authorization": "Not required for initial consultation",
+    "network": "In network — Tier 1",
+    "appointment": {
+        "date": "Tuesday, January 30, 2024",
+        "time": "2:30 PM",
+        "duration": "60 minutes",
+        "location": "Neurology Clinic — Suite 405",
+        "visit_type": "New Patient Consultation",
+    },
+    "packet": [
+        "Demographics and emergency contacts",
+        "Insurance verification and card images",
+        "Current medications, allergies, prior surgeries, and medical history",
+        "HIT-6 migraine questionnaire",
+        "HIPAA authorization with digital signature",
+        "Financial policy and copay acknowledgment",
+    ],
+    "portal_phone": "(555) 234-8921",
+    "reminders": [
+        "72-hour: SMS and email (Saturday 2:30 PM)",
+        "24-hour: SMS and optional voice call (Monday 2:30 PM)",
+        "2-hour: final SMS (Tuesday 12:30 PM)",
+        "Forms completion alert if incomplete by Monday",
+        "SMS rescheduling using RESCHEDULE",
+        "Waitlist auto-fill when cancellation notice exceeds 24 hours",
+    ],
+    "historical_no_show_rate": "8% for new patients using this protocol",
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -260,7 +307,7 @@ class PatientIntakeAgent(BasicAgent):
     """Patient intake workflow and insurance verification agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/patient-intake"
+        self.name = "PatientIntakeAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],
@@ -274,12 +321,20 @@ class PatientIntakeAgent(BasicAgent):
                             "insurance_verification",
                             "appointment_scheduling",
                             "pre_visit_summary",
+                            "register_patient",
+                            "book_appointment",
+                            "send_digital_intake_packet",
+                            "activate_reminder_workflow",
                         ],
                         "description": "The intake operation to perform.",
                     },
                     "patient_id": {
                         "type": "string",
                         "description": "Optional patient ID to filter results.",
+                    },
+                    "patient_key": {
+                        "type": "string",
+                        "description": "Optional exact demo patient key; use Sarah Martinez.",
                     },
                 },
                 "required": ["operation"],
@@ -297,7 +352,25 @@ class PatientIntakeAgent(BasicAgent):
             return self._appointment_scheduling()
         elif op == "pre_visit_summary":
             return self._pre_visit_summary()
+        elif op == "register_patient":
+            return self._register_patient(kwargs.get("patient_key"))
+        elif op == "book_appointment":
+            return self._book_appointment(kwargs.get("patient_key"))
+        elif op == "send_digital_intake_packet":
+            return self._send_digital_intake_packet(kwargs.get("patient_key"))
+        elif op == "activate_reminder_workflow":
+            return self._activate_reminder_workflow(kwargs.get("patient_key"))
         return f"**Error:** Unknown operation `{op}`."
+
+    @staticmethod
+    def _demo_intake(patient_key):
+        if patient_key and patient_key.lower() != DEMO_INTAKE["patient_key"].lower():
+            return None
+        return DEMO_INTAKE
+
+    @staticmethod
+    def _missing_demo(patient_key):
+        return f"**Error:** No demonstrated intake for patient `{patient_key}`. Available key: Sarah Martinez."
 
     def _intake_form(self) -> str:
         data = _intake_form()
@@ -357,11 +430,85 @@ class PatientIntakeAgent(BasicAgent):
             lines.append("")
         return "\n".join(lines)
 
+    def _register_patient(self, patient_key=None) -> str:
+        data = self._demo_intake(patient_key)
+        if not data:
+            return self._missing_demo(patient_key)
+        return "\n".join([
+            "# Simulated Patient Registration",
+            "",
+            f"**Patient:** {data['patient']} | **Type:** {data['patient_type']}",
+            f"**Requested provider:** {data['provider']}, {data['specialty']}",
+            f"**Chief complaint:** {data['chief_complaint']}",
+            f"**Insurance:** {data['insurance']}",
+            f"**Simulated receipt:** SIM-REG-SARAH-MARTINEZ",
+            "",
+            "**Status:** SIMULATED — no Epic registration or patient record was created or changed.",
+        ])
+
+    def _book_appointment(self, patient_key=None) -> str:
+        data = self._demo_intake(patient_key)
+        if not data:
+            return self._missing_demo(patient_key)
+        appt = data["appointment"]
+        return "\n".join([
+            "# Simulated Appointment Booking",
+            "",
+            f"**Patient:** {data['patient']} | **Provider:** {data['provider']}",
+            f"**When:** {appt['date']} at {appt['time']} ({appt['duration']})",
+            f"**Location:** {appt['location']} | **Type:** {appt['visit_type']}",
+            f"**Coverage:** {data['insurance_status']}; {data['copay']}; {data['prior_authorization']}",
+            "**Simulated receipt:** SIM-APPT-SARAH-MARTINEZ-2024-01-30-1430",
+            "",
+            "**Status:** SIMULATED — no provider calendar, EHR appointment, SMS, or email was changed.",
+        ])
+
+    def _send_digital_intake_packet(self, patient_key=None) -> str:
+        data = self._demo_intake(patient_key)
+        if not data:
+            return self._missing_demo(patient_key)
+        lines = [
+            "# Simulated Digital Intake Packet",
+            "",
+            f"**Patient:** {data['patient']} | **Portal phone:** {data['portal_phone']}",
+            "",
+            "## Included forms",
+        ]
+        lines.extend(f"- {item}" for item in data["packet"])
+        lines += [
+            "",
+            "**Simulated receipt:** SIM-PACKET-SARAH-MARTINEZ",
+            "**Status:** SIMULATED — no SharePoint file, portal packet, SMS, or signature request was created.",
+        ]
+        return "\n".join(lines)
+
+    def _activate_reminder_workflow(self, patient_key=None) -> str:
+        data = self._demo_intake(patient_key)
+        if not data:
+            return self._missing_demo(patient_key)
+        lines = [
+            "# Simulated No-Show Prevention Workflow",
+            "",
+            f"**Patient:** {data['patient']} | **Historical no-show rate:** {data['historical_no_show_rate']}",
+            "",
+        ]
+        lines.extend(f"- {item}" for item in data["reminders"])
+        lines += [
+            "",
+            "**Simulated receipt:** SIM-REMINDER-SARAH-MARTINEZ",
+            "**Status:** SIMULATED — no Power Automate flow, reminder, reschedule, or waitlist action was created.",
+        ]
+        return "\n".join(lines)
+
 
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PatientIntakeAgent()
-    for op in ["intake_form", "insurance_verification", "appointment_scheduling", "pre_visit_summary"]:
+    for op in [
+        "intake_form", "insurance_verification", "appointment_scheduling", "pre_visit_summary",
+        "register_patient", "book_appointment", "send_digital_intake_packet",
+        "activate_reminder_workflow",
+    ]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

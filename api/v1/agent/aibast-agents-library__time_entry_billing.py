@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/time_entry_billing",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Time Entry & Billing Agent",
     "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.",
     "author": "AIBAST",
@@ -104,6 +104,55 @@ INVOICE_HISTORY = [
      "status": "overdue", "days_outstanding": 45},
 ]
 
+EVIDENCE_CAPABILITIES = {
+    "exception_resolution": {
+        "title": "Guided Billing Exception Resolution",
+        "write": False,
+        "records": [
+            {
+                "record_id": "TEB-701",
+                "entry_id": "TE-9004",
+                "classification": "billable / missing description",
+                "draft_description": "Apex data-pipeline development supported by project backlog item AP-214",
+                "contract_evidence": "T&M statement of work permits data engineering delivery",
+                "review_action": "approve drafted description or return to consultant",
+            },
+            {
+                "record_id": "TEB-702",
+                "entry_id": "TE-9011",
+                "classification": "premium billing / disputed hours",
+                "draft_description": "Weekend Azure migration cutover under approved change order CO-18",
+                "contract_evidence": "CO-18 authorizes weekend premium rate of $412 per hour",
+                "review_action": "attach evidence and route for billing-manager approval",
+            },
+        ],
+    },
+    "billing_close_package": {
+        "title": "Invoice, Revenue Recognition, and Audit Package",
+        "write": True,
+        "records": [
+            {
+                "record_id": "TEB-CLOSE-701",
+                "client": "TechCorp Industries",
+                "invoice_action": "issue approved entries; hold disputed TE-9011 for review",
+                "write_off_exposure": "$0 approved; $4,532 pending evidence review",
+                "revenue_recognition": "$4,812.50 approved for invoicing this cycle",
+                "supporting_evidence": "contract clause, CO-18, Teams approval, and time-entry log",
+                "audit_trail": "source, classification, reviewer, decision, and timestamp",
+            },
+            {
+                "record_id": "TEB-CLOSE-702",
+                "client": "Apex Manufacturing",
+                "invoice_action": "issue approved TE-9003; hold TE-9004 until description approval",
+                "write_off_exposure": "$2,080 pending description review",
+                "revenue_recognition": "$1,950 approved for invoicing this cycle",
+                "supporting_evidence": "T&M statement of work, backlog item AP-214, and time-entry log",
+                "audit_trail": "source, classification, reviewer, decision, and timestamp",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -151,6 +200,43 @@ def _budget_status(project_name):
     return round(budget["billed_to_date"] / budget["total_budget"] * 100, 1)
 
 
+def _evidence_matches(user_input, records):
+    """Match explicit billing IDs without substituting another client."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _render_evidence_operation(capability, user_input=""):
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = spec["records"]
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute billing record was used.")
+    else:
+        lines.append("Deterministic contract- and project-grounded billing records:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        target = matches[0]["record_id"] if matches else "NO-MATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-{capability.upper()}-{target}",
+            "- status: simulated",
+            "- target_systems: Dynamics 365, SharePoint, and Microsoft Teams",
+            "- No invoice was issued and no revenue record changed; this is a preview-only write.",
+        ])
+    else:
+        lines.append("\n_Read-only guided review; no external system changed._")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -168,6 +254,8 @@ class TimeEntryBillingAgent(BasicAgent):
                 "billing_summary",
                 "time_entry_audit",
                 "invoice_preparation",
+                "exception_resolution",
+                "billing_close_package",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -179,6 +267,8 @@ class TimeEntryBillingAgent(BasicAgent):
             "billing_summary": self._billing_summary,
             "time_entry_audit": self._time_entry_audit,
             "invoice_preparation": self._invoice_preparation,
+            "exception_resolution": self._exception_resolution,
+            "billing_close_package": self._billing_close_package,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -347,6 +437,18 @@ class TimeEntryBillingAgent(BasicAgent):
         lines.append(f"**Total collected:** ${total_collected:,.2f}")
         lines.append(f"**Collection rate:** {round(total_collected/total_billed*100,1)}%")
         return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _exception_resolution(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "exception_resolution", kwargs.get("user_input", "")
+        )
+
+    # ------------------------------------------------------------------
+    def _billing_close_package(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "billing_close_package", kwargs.get("user_input", "")
+        )
 
 
 # ---------------------------------------------------------------------------

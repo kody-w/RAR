@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/resource_utilization",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Resource Utilization Agent",
     "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
     "author": "AIBAST",
@@ -90,6 +90,49 @@ BENCH_COST_PER_MONTH = {
     "Junior": 10000,
 }
 
+EVIDENCE_CAPABILITIES = {
+    "skill_gap_options": {
+        "title": "Near-Ready Skill Gap Options",
+        "write": False,
+        "records": [
+            {
+                "record_id": "RU-601",
+                "consultant": "Sarah Kim",
+                "pipeline_need": "FinanceHub Cloud Migration / Azure architecture",
+                "gap": "AWS-to-Azure platform mapping",
+                "option": "two-week Azure landing-zone accelerator",
+                "delivery_guardrail": "pair with Elena Vasquez for architecture review",
+                "upskilling_roi": "$29,600 monthly billable value versus $14,000 bench cost",
+            },
+            {
+                "record_id": "RU-602",
+                "consultant": "Robert Garcia",
+                "pipeline_need": "FinanceHub Cloud Migration / DevOps",
+                "gap": "Terraform delivery evidence",
+                "option": "three-week Terraform lab plus internal deployment",
+                "delivery_guardrail": "technical gate before client assignment",
+                "upskilling_roi": "$31,200 monthly billable value versus $14,000 bench cost",
+            },
+        ],
+    },
+    "executive_impact_report": {
+        "title": "Executive Utilization Impact Report",
+        "write": True,
+        "records": [
+            {
+                "record_id": "RU-EXEC-601",
+                "scenario": "deploy direct bench-to-pipeline matches",
+                "dashboard": "utilization, bench cost, skills, pipeline, and financial upside",
+            },
+            {
+                "record_id": "RU-EXEC-602",
+                "scenario": "deploy matches, close near-ready gaps, and move remaining bench to billable innovation work",
+                "dashboard": "utilization, bench cost, skills, pipeline, and financial upside",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -143,6 +186,106 @@ def _find_matches_for_pipeline():
     return matches
 
 
+def _deployment_metrics(consultant_ids):
+    """Calculate financial and utilization impact from current source records."""
+    bench = _bench_consultants()
+    selected_ids = list(dict.fromkeys(
+        cid for cid in consultant_ids if cid in bench
+    ))
+    monthly_savings = sum(
+        BENCH_COST_PER_MONTH.get(bench[cid]["level"], 14000)
+        for cid in selected_ids
+    )
+    monthly_capacity_revenue = sum(
+        bench[cid]["rate_hr"] * 160 for cid in selected_ids
+    )
+    total = len(CONSULTANTS)
+    projected_billable = total - len(bench) + len(selected_ids)
+    projected_utilization = (
+        round(projected_billable / total * 87, 1) if total else 0
+    )
+    return {
+        "monthly_savings": monthly_savings,
+        "monthly_capacity_revenue": monthly_capacity_revenue,
+        "current_utilization": _firm_utilization(),
+        "projected_utilization": projected_utilization,
+    }
+
+
+def _executive_impact_records():
+    """Build executive records from consultants, matches, rates, and cost tables."""
+    templates = EVIDENCE_CAPABILITIES["executive_impact_report"]["records"]
+    direct_ids = [
+        match["consultant_id"] for match in _find_matches_for_pipeline()
+    ]
+    scenario_ids = [
+        direct_ids,
+        list(_bench_consultants()),
+    ]
+    records = []
+    for template, consultant_ids in zip(templates, scenario_ids):
+        metrics = _deployment_metrics(consultant_ids)
+        records.append({
+            "record_id": template["record_id"],
+            "scenario": template["scenario"],
+            "projected_savings": (
+                f"${metrics['monthly_savings']:,.0f} "
+                "monthly bench-cost reduction"
+            ),
+            "new_revenue": (
+                f"${metrics['monthly_capacity_revenue']:,.0f} "
+                "monthly billable capacity/revenue"
+            ),
+            "utilization_progress": (
+                f"{metrics['current_utilization']}% current to "
+                f"{metrics['projected_utilization']}% projected"
+            ),
+            "dashboard": template["dashboard"],
+        })
+    return records
+
+
+def _evidence_matches(user_input, records):
+    """Match explicit scenario IDs without silently substituting another plan."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _render_evidence_operation(capability, user_input=""):
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = (
+        _executive_impact_records()
+        if capability == "executive_impact_report"
+        else spec["records"]
+    )
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute scenario was used.")
+    else:
+        lines.append("Deterministic workforce-planning scenarios:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        target = matches[0]["record_id"] if matches else "NO-MATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-{capability.upper()}-{target}",
+            "- status: simulated",
+            "- target_system: Microsoft Teams executive dashboard",
+            "- No dashboard or message was published; this is a preview-only write.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -160,6 +303,8 @@ class ResourceUtilizationAgent(BasicAgent):
                 "capacity_forecast",
                 "bench_analysis",
                 "staffing_recommendation",
+                "skill_gap_options",
+                "executive_impact_report",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -171,6 +316,8 @@ class ResourceUtilizationAgent(BasicAgent):
             "capacity_forecast": self._capacity_forecast,
             "bench_analysis": self._bench_analysis,
             "staffing_recommendation": self._staffing_recommendation,
+            "skill_gap_options": self._skill_gap_options,
+            "executive_impact_report": self._executive_impact_report,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -320,6 +467,18 @@ class ResourceUtilizationAgent(BasicAgent):
         lines.append(f"- Projected after deployment: **{projected_util}%**")
         lines.append(f"- Target: **{UTILIZATION_TARGETS['firm_target']}%**")
         return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _skill_gap_options(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "skill_gap_options", kwargs.get("user_input", "")
+        )
+
+    # ------------------------------------------------------------------
+    def _executive_impact_report(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "executive_impact_report", kwargs.get("user_input", "")
+        )
 
 
 # ---------------------------------------------------------------------------

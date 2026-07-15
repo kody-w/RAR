@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_intelligence",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Account Intelligence",
     "description": "360-degree account briefings with stakeholder mapping, competitive analysis, and deal risk assessment.",
     "author": "AIBAST",
@@ -136,6 +136,8 @@ _OUR_PROFILE = {
         "Superior customer references in target industry",
     ],
 }
+
+_ACCOUNT_KEYS_BY_ID = {account["id"]: key for key, account in _ACCOUNTS.items()}
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -250,6 +252,7 @@ class AccountIntelligenceAgent(BasicAgent):
         value_messaging   - stakeholder-specific talking points
         risk_assessment   - deal risks with mitigation actions
         executive_briefing - full compiled briefing
+        share_briefing    - post a briefing to Teams with simulated receipts
     """
 
     def __init__(self):
@@ -266,12 +269,17 @@ class AccountIntelligenceAgent(BasicAgent):
                             "account_overview", "stakeholder_map",
                             "competitive_intel", "value_messaging",
                             "risk_assessment", "executive_briefing",
+                            "share_briefing",
                         ],
                         "description": "The analysis to perform",
                     },
                     "account_name": {
                         "type": "string",
                         "description": "Account name to analyze (e.g. 'Acme Corporation')",
+                    },
+                    "account_id": {
+                        "type": "string",
+                        "description": "Exact CRM account ID for share_briefing (e.g. 'acc-001')",
                     },
                 },
                 "required": ["operation"],
@@ -281,6 +289,8 @@ class AccountIntelligenceAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "account_overview")
+        if op == "share_briefing":
+            return self._share_briefing(kwargs.get("account_id"))
         key = _resolve_account(kwargs.get("account_name", ""))
         dispatch = {
             "account_overview": self._account_overview,
@@ -294,6 +304,33 @@ class AccountIntelligenceAgent(BasicAgent):
         if not handler:
             return json.dumps({"status": "error", "message": f"Unknown operation: {op}"})
         return handler(key)
+
+    def _share_briefing(self, account_id):
+        key = _ACCOUNT_KEYS_BY_ID.get(account_id)
+        if key is None:
+            valid_ids = ", ".join(sorted(_ACCOUNT_KEYS_BY_ID))
+            return json.dumps({
+                "status": "error",
+                "message": f"Unknown account_id: {account_id!r}",
+                "valid_account_ids": valid_ids,
+            })
+
+        account = _ACCOUNTS[key]
+        health = _health_score(key)
+        risks, win_probability = _deal_risks(key)
+        receipt = {
+            "status": "simulated",
+            "account_id": account_id,
+            "account": account["name"],
+            "artifact": f"account-briefing-{account_id}.docx",
+            "teams_message_id": f"sim-teams-account-{account_id}",
+            "crm_activity_id": f"sim-d365-activity-{account_id}",
+            "health_score": health["overall"],
+            "win_probability": win_probability,
+            "risk_count": len(risks),
+            "next_action": risks[0]["mitigation"] if risks else "Maintain current engagement cadence",
+        }
+        return "**Account Briefing Share Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
     # ── account_overview ──────────────────────────────────────
     def _account_overview(self, key):

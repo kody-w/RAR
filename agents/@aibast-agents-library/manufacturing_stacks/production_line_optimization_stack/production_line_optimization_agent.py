@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/production_line_optimization",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Production Line Optimization Agent",
     "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling.",
     "author": "AIBAST",
@@ -102,6 +102,29 @@ DEFECT_CATEGORIES = {
     "LINE-C": {"short_shot": 35, "flash": 25, "sink_mark": 20, "weld_line": 12, "warpage": 8},
 }
 
+OPTIMIZATION_SCENARIOS = {
+    "LINE-A": {
+        "change": "Reprogram functional test sequence and add one parallel test station",
+        "investment": 92000, "projected_uph": 171, "annual_margin_gain": 286000,
+        "quick_win": "Balance work between A2 and A4", "process_tuning": "Reduce A5 cycle to 19.0s",
+    },
+    "LINE-B": {
+        "change": "Reprogram robotic weld path and pre-stage fixtures",
+        "investment": 48000, "projected_uph": 286, "annual_margin_gain": 174000,
+        "quick_win": "Pre-stage B3 fixtures", "process_tuning": "Reduce B3 cycle to 11.6s",
+    },
+    "LINE-C": {
+        "change": "Tune molding recipe and add cavity-pressure monitoring",
+        "investment": 68000, "projected_uph": 215, "annual_margin_gain": 231000,
+        "quick_win": "Standardize resin drying", "process_tuning": "Reduce C2 cycle to 14.4s",
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: product-line-optimization one-pager and demo transcript; "
+    "capacity modeling, phased implementation, ROI, and real-time monitoring]"
+)
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -158,6 +181,10 @@ class ProductionLineOptimizationAgent(BasicAgent):
                 "bottleneck_analysis",
                 "throughput_optimization",
                 "shift_planning",
+                "capacity_model",
+                "implementation_plan",
+                "roi_analysis",
+                "monitoring_plan",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -169,6 +196,10 @@ class ProductionLineOptimizationAgent(BasicAgent):
             "bottleneck_analysis": self._bottleneck_analysis,
             "throughput_optimization": self._throughput_optimization,
             "shift_planning": self._shift_planning,
+            "capacity_model": self._capacity_model,
+            "implementation_plan": self._implementation_plan,
+            "roi_analysis": self._roi_analysis,
+            "monitoring_plan": self._monitoring_plan,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -304,6 +335,90 @@ class ProductionLineOptimizationAgent(BasicAgent):
             d = _daily_output(lid)
             lines.append(f"| {pl['name'][:28]} | {d*5:,} | {d*6:,} | {d*7:,} |")
         return "\n".join(lines)
+
+    def _selected_scenarios(self, **kwargs):
+        line_id = str(kwargs.get("line_id", "")).strip().upper()
+        if not line_id:
+            return list(OPTIMIZATION_SCENARIOS.items()), ""
+        scenario = OPTIMIZATION_SCENARIOS.get(line_id)
+        if scenario is None:
+            return [], f"**Error:** Unknown line `{line_id}`. Valid: {', '.join(OPTIMIZATION_SCENARIOS)}"
+        return [(line_id, scenario)], ""
+
+    def _capacity_model(self, **kwargs) -> str:
+        scenarios, error = self._selected_scenarios(**kwargs)
+        if error:
+            return error
+        lines = ["## Production Capacity Model", EVIDENCE_MARKER, "",
+                 "| Line | Current UPH | Design UPH | Modeled UPH | Gap Closed | Change |",
+                 "|------|-------------|------------|-------------|------------|--------|"]
+        for line_id, scenario in scenarios:
+            line = PRODUCTION_LINES[line_id]
+            current = line["actual_output_per_hour"]
+            design = line["design_capacity_per_hour"]
+            gap = design - current
+            closed = round((scenario["projected_uph"] - current) / gap * 100, 1) if gap else 100.0
+            lines.append(
+                f"| {line_id} | {current} | {design} | {scenario['projected_uph']} | "
+                f"{closed}% | {scenario['change']} |"
+            )
+        return "\n".join(lines)
+
+    def _implementation_plan(self, **kwargs) -> str:
+        scenarios, error = self._selected_scenarios(**kwargs)
+        if error:
+            return error
+        lines = ["## Phased Optimization Implementation Plan", EVIDENCE_MARKER, ""]
+        for line_id, scenario in scenarios:
+            lines.extend([
+                f"### {line_id} — {PRODUCTION_LINES[line_id]['name']}",
+                f"1. **Quick win (days 1-7):** {scenario['quick_win']}",
+                f"2. **Scheduling and tuning (days 8-21):** {scenario['process_tuning']}",
+                f"3. **Investment (days 22-60):** {scenario['change']}",
+                "4. **Risk mitigation:** Run parallel quality checks until three consecutive lots pass.",
+                "",
+            ])
+        return "\n".join(lines)
+
+    def _roi_analysis(self, **kwargs) -> str:
+        scenarios, error = self._selected_scenarios(**kwargs)
+        if error:
+            return error
+        lines = ["## Optimization ROI Analysis", EVIDENCE_MARKER, "",
+                 "| Line | Investment | Annual Margin Gain | Payback | 3-Year Net Benefit |",
+                 "|------|------------|--------------------|---------|--------------------|"]
+        for line_id, scenario in scenarios:
+            investment = scenario["investment"]
+            gain = scenario["annual_margin_gain"]
+            payback = round(investment / gain * 12, 1)
+            net = gain * 3 - investment
+            lines.append(
+                f"| {line_id} | ${investment:,.0f} | ${gain:,.0f} | "
+                f"{payback} months | ${net:,.0f} |"
+            )
+        return "\n".join(lines)
+
+    def _monitoring_plan(self, **kwargs) -> str:
+        line_id = str(kwargs.get("line_id", "LINE-A")).strip().upper()
+        if line_id not in PRODUCTION_LINES:
+            return f"**Error:** Unknown line `{line_id}`. Valid: {', '.join(PRODUCTION_LINES)}"
+        return "\n".join([
+            "## Real-Time Optimization Monitoring Plan",
+            EVIDENCE_MARKER,
+            f"**Line lookup:** {line_id} — {PRODUCTION_LINES[line_id]['name']}",
+            "",
+            "| Metric | Current | Target | Alert |",
+            "|--------|---------|--------|-------|",
+            f"| OEE | {_oee(line_id)}% | 85% | Below 80% for 30 minutes |",
+            f"| Throughput | {PRODUCTION_LINES[line_id]['actual_output_per_hour']} uph | "
+            f"{OPTIMIZATION_SCENARIOS[line_id]['projected_uph']} uph | Below target for 2 hours |",
+            f"| Bottleneck cycle | {_bottleneck_station(line_id)['cycle_time_s']}s | "
+            f"{_bottleneck_station(line_id)['takt_time_s']}s | Above takt for 10 cycles |",
+            f"| Quality | {PRODUCTION_LINES[line_id]['quality_pct']}% | 99.5% | Below 99% |",
+            "",
+            f"- **SIMULATED WRITE RECEIPT:** `MON-SIM-{line_id}` for Power BI/Teams alert subscription",
+            "- Simulation only; no dashboard, alert, or external system was changed.",
+        ])
 
 
 # ---------------------------------------------------------------------------

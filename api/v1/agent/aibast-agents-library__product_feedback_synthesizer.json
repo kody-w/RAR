@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__product_feedback_synthesizer",
   "name": "Product Feedback Synthesizer Agent",
   "rar_name": "@aibast-agents-library/product_feedback_synthesizer",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/product_feedback_synthesizer:09cd824b6e2b11562231b2804bbda089",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/product_feedback_synthesizer:9ef149464ffdacf6b0ab8833fdbb95eeefb071fba041440854d30543ed5b3876",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "software_digital_products",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 363,
-  "size_kb": 13.1,
-  "sha256": "09cd824b6e2b11562231b2804bbda08959f91254022574bc798b834e3fee90f6",
+  "lines": 528,
+  "size_kb": 19.9,
+  "sha256": "9ef149464ffdacf6b0ab8833fdbb95eeefb071fba041440854d30543ed5b3876",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__product_feedback_synthesizer.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py.card",

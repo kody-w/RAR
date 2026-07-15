@@ -3,6 +3,10 @@ Omnichannel Engagement Agent — B2C Sales Stack
 
 Analyzes channel performance, maps customer journeys, optimizes
 engagement strategies, and provides campaign attribution insights.
+
+Version 1.1.0 adds five demo-grounded customer-journey operations with
+deterministic records, exact record-key lookup, and a simulated handoff receipt.
+No external system is changed, and all legacy operations remain unchanged.
 """
 
 import sys
@@ -14,7 +18,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/omnichannel_engagement",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Omnichannel Engagement Agent",
     "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
     "author": "AIBAST",
@@ -78,10 +82,101 @@ CAMPAIGN_RESULTS = {
     "CAMP-305": {"name": "App Push — Loyalty Members", "channel": "mobile_app", "sent": 85000, "opens": 42500, "clicks": 17000, "conversions": 5100, "revenue": 765000, "cost": 2000},
 }
 
+EVIDENCE_ACTIONS = {
+    "unified_customer_journey": {
+        "title": "Unified Customer Journey",
+        "write": False,
+        "records": [
+            {"record_id": "JOURNEY-SARAH", "customer": "Sarah Mitchell", "history": "8 channels over 3 days", "cart": "$289", "status": "currently holding", "mood": "likely frustrated"},
+            {"record_id": "TOUCH-MOBILE", "day": "3 days ago", "channel": "mobile app", "action": "checkout started", "issue": "payment declined"},
+            {"record_id": "TOUCH-CHAT", "day": "2 days ago", "channel": "chat", "action": "sizing question", "issue": "disconnected"},
+            {"record_id": "TOUCH-EMAIL", "day": "yesterday", "channel": "email", "action": "cart reminder", "issue": "no action"},
+            {"record_id": "TOUCH-PHONE", "day": "today", "channel": "phone", "action": "support call", "issue": "currently holding"},
+        ],
+        "context": "Channel preferences over 30 days: mobile app 12 interactions, website 8, chat 3 with frustration.",
+    },
+    "friction_resolution": {
+        "title": "Journey Friction Resolution",
+        "write": False,
+        "records": [
+            {"record_id": "ISSUE-SIZING", "issue": "Alpine Parka sizing guidance", "status": "unanswered", "impact": "blocking purchase", "resolution": "runs one size small"},
+            {"record_id": "ISSUE-COLOR", "issue": "navy availability", "status": "unanswered", "impact": "blocking purchase", "resolution": "navy in stock, S-XL"},
+            {"record_id": "ISSUE-PAYMENT", "issue": "card declined", "status": "needs resolution", "impact": "checkout stalled", "resolution": "offer payment alternatives"},
+        ],
+        "context": "The disconnected chat left two questions unresolved after 18 minutes; the prepared opening apologizes and continues without asking Sarah to repeat context.",
+    },
+    "channel_recommendation": {
+        "title": "Channel and Timing Recommendation",
+        "write": False,
+        "records": [
+            {"record_id": "CHANNEL-PHONE", "channel": "Phone", "engagement": "resolve now", "use": "current payment issue"},
+            {"record_id": "CHANNEL-SMS", "channel": "SMS", "engagement": "76% response", "use": "confirmation and order status"},
+            {"record_id": "CHANNEL-PUSH", "channel": "Mobile push", "engagement": "82% open", "use": "promotions at 10 AM"},
+            {"record_id": "CHANNEL-EMAIL", "channel": "Email", "engagement": "34% open", "use": "avoid for urgency"},
+        ],
+        "context": "Sarah responds to urgency, values fit guidance, and peaks from 7-9 PM; avoid chat in the short term.",
+    },
+    "proactive_engagement_plan": {
+        "title": "Proactive Engagement and Recovery Plan",
+        "write": False,
+        "records": [
+            {"record_id": "PLAN-AFTER-PURCHASE", "timing": "order through day 7", "actions": "SMS size guide, delivery-day mobile styling tips, in-app review request"},
+            {"record_id": "PLAN-UPCOMING", "timing": "3 days through 8 weeks", "actions": "accessory bundle, birthday bonus, spring preview"},
+            {"record_id": "PLAN-WIN-BACK", "timing": "hour 1 through day 5", "actions": "SMS reminder, low-stock push, 10% code, personal stylist call"},
+        ],
+        "context": "Avoid email campaigns, chat offers, and generic messages because they conflict with observed channel history.",
+    },
+    "handoff_package": {
+        "title": "Seamless Service Handoff Package",
+        "write": True,
+        "records": [
+            {"record_id": "HANDOFF-SARAH", "customer": "Sarah Mitchell", "tier": "Gold", "ltv": "$2,400", "purchase": "Alpine Parka", "blockers": "sizing resolved; payment in progress", "mood": "previously frustrated, now engaged"},
+            {"record_id": "HANDOFF-CONTEXT", "payments": "card decline and alternatives", "styling": "size preferences and past purchases", "pickup": "location and inventory", "loyalty": "points and tier benefits"},
+        ],
+        "context": "The transfer script says complete history is shared so the customer need not repeat anything; preview includes CRM note, cart link, and conversation summary.",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
+
+def _evidence_action(action, **kwargs):
+    """Render a demo-grounded action with exact record-key lookup."""
+    spec = EVIDENCE_ACTIONS[action]
+    user_input = str(kwargs.get("user_input", ""))
+    normalized = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in user_input.split()
+    }
+    records = spec["records"]
+    if user_input:
+        records = [
+            record for record in records
+            if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in normalized
+        ]
+        if not records:
+            return "No exact `record_id` match was found; no substitute customer or touchpoint was used."
+    lines = [
+        f"## {spec['title']}",
+        f"\n{spec['context']}",
+        "\nDeterministic evidence-backed records:",
+    ]
+    for record in records:
+        lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        receipt_key = records[0]["record_id"] if len(records) == 1 else "BATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-HANDOFF-{receipt_key}",
+            "- status: simulated",
+            "- target_systems: Dynamics 365 and Microsoft Teams",
+            "- No external system changed; CRM notes, routing, and transfer context are preview-only.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
 
 def _channel_conversion_rate(channel):
     """Calculate conversion rate for a channel."""
@@ -127,10 +222,16 @@ class OmnichannelEngagementAgent(BasicAgent):
                             "journey_analysis",
                             "engagement_optimization",
                             "campaign_attribution",
+                            "unified_customer_journey",
+                            "friction_resolution",
+                            "channel_recommendation",
+                            "proactive_engagement_plan",
+                            "handoff_package",
                         ],
                     },
                     "channel": {"type": "string"},
                     "campaign_id": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -144,11 +245,21 @@ class OmnichannelEngagementAgent(BasicAgent):
             "journey_analysis": self._journey_analysis,
             "engagement_optimization": self._engagement_optimization,
             "campaign_attribution": self._campaign_attribution,
+            "unified_customer_journey": self._evidence_action,
+            "friction_resolution": self._evidence_action,
+            "channel_recommendation": self._evidence_action,
+            "proactive_engagement_plan": self._evidence_action,
+            "handoff_package": self._evidence_action,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."
+        if operation in EVIDENCE_ACTIONS:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
+
+    def _evidence_action(self, action, **kwargs) -> str:
+        return _evidence_action(action, **kwargs)
 
     def _channel_performance(self, **kwargs) -> str:
         total_revenue = sum(c["revenue_30d"] for c in CHANNELS.values())

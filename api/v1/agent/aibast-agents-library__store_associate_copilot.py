@@ -3,6 +3,20 @@ Store Associate Copilot Agent — Retail & CPG Stack
 
 Empowers store associates with product lookup, customer assistance
 scripts, daily task management, and performance dashboards.
+
+Version 1.1.0 adds four backward-compatible operations demonstrated by the
+Retail Store Associate Copilot evidence:
+
+  - product_intelligence   Current product, inventory, promotion, and sales guidance.
+  - add_on_commission      Accessory, warranty, conversion-tip, and commission guidance.
+  - product_comparison     Alternative comparison and priority-based recommendation.
+  - transaction_preparation
+                           Discounted sale preparation with warranty, financing,
+                           and a simulated transaction receipt.
+
+The new operations use deterministic embedded records and exact-keyed lookup.
+The transaction operation only simulates a Dynamics 365 Commerce write. The
+four original operations and their outputs remain unchanged.
 """
 
 import sys
@@ -17,7 +31,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/store_associate_copilot",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Store Associate Copilot Agent",
     "description": (
         "Provides store associates with instant product lookup, guided "
@@ -327,6 +341,237 @@ COMPLEMENTARY_PRODUCTS = {
 
 
 # ---------------------------------------------------------------------------
+# Demonstrated Retail Store Associate Copilot capabilities
+# ---------------------------------------------------------------------------
+
+EVIDENCE_CAPABILITIES = {
+    "product_intelligence": {
+        "title": "Real-Time Product Intelligence",
+        "response": (
+            "Here is the current product availability, feature, promotion, "
+            "and sales guidance from the simulated commerce view."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "product_id",
+        "knowledge": [
+            "Store associates can surface product specifications, availability, and current promotions without searching multiple systems.",
+            "Unified commerce context supports faster, more confident customer conversations during peak traffic.",
+            "Sales guidance highlights a useful customer-facing talking point alongside the product facts.",
+        ],
+        "records": [
+            {
+                "product_id": "TECHPRO-X",
+                "product": "TechPro X-Series wireless headphones",
+                "availability": "14 units in the Bellevue store",
+                "features": "38-hour battery, active ANC at -42 dB, three-device pairing, foldable design with premium case",
+                "price_and_warranty": "$199.99 sale price; 2-year standard warranty",
+                "promotion": "Save $50 from $249.99; promotion ends Sunday",
+                "reviews": "4.7/5.0 from 847 reviews",
+                "sales_guidance": "Lead with comfort, battery life, and the included premium case",
+            },
+            {
+                "product_id": "PRD-7314",
+                "product": "Premium Noise-Canceling Headphones",
+                "availability": "12 in store",
+                "features": "Adaptive ANC, 30-hour battery, spatial audio",
+                "promotion": "$40 off when bundled with a laptop",
+                "sales_guidance": "Demonstrate ambient mode for frequent travelers",
+            },
+            {
+                "product_id": "PRD-9056",
+                "product": "Ultra-Light 14-inch Laptop",
+                "availability": "Out of stock; pickup tomorrow at North store",
+                "features": "16 GB RAM, 1 TB SSD, 18-hour battery",
+                "promotion": "12 months interest-free financing",
+                "sales_guidance": "Offer PRD-9138 when same-day availability is the priority",
+            },
+        ],
+    },
+    "add_on_commission": {
+        "title": "Add-On, Warranty, and Commission Guidance",
+        "response": (
+            "Here are high-value add-ons, warranty guidance, conversion tips, "
+            "and deterministic commission calculations for the selected bundle."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "bundle_id",
+        "knowledge": [
+            "Relevant accessories and warranties can be suggested in real time instead of relying on associate guesswork.",
+            "Conversion tips keep recommendations tied to customer value and increase accessory attach rates.",
+            "Item-level commission visibility helps associates explain and prioritize complete solutions.",
+        ],
+        "records": [
+            {
+                "bundle_id": "BND-TECHPRO",
+                "anchor_product": "TechPro X-Series wireless headphones",
+                "add_ons": "Premium cleaning kit, travel adapter, replacement cushions",
+                "warranty": "Extended warranty with 3-year coverage",
+                "conversion_tip": "Mention that the cleaning kit extends cushion life; observed conversion is 65%",
+                "bundle_value": "$319.95",
+                "commission_breakdown": "Headphones $16.00; warranty $7.20; accessories $9.60",
+                "commission": "$32.80",
+            },
+            {
+                "bundle_id": "BND-2402",
+                "anchor_product": "Premium Noise-Canceling Headphones",
+                "add_on": "Travel case and airline adapter",
+                "warranty": "2-year accidental damage plan",
+                "conversion_tip": "Position the case as protection for frequent travel",
+                "bundle_value": "$429.97",
+                "commission": "$12.90 at 3%",
+            },
+            {
+                "bundle_id": "BND-2403",
+                "anchor_product": "Ultra-Light 14-inch Laptop",
+                "add_on": "USB-C dock and wireless mouse",
+                "warranty": "3-year premium support",
+                "conversion_tip": "Show the one-cable desk setup",
+                "bundle_value": "$1,829.96",
+                "commission": "$54.90 at 3%",
+            },
+        ],
+    },
+    "product_comparison": {
+        "title": "Alternative Product Comparison",
+        "response": (
+            "Here is a side-by-side alternative comparison with the key "
+            "differences and a recommendation based on the stated customer priority."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "comparison_id",
+        "knowledge": [
+            "The agent compares relevant alternatives and highlights meaningful differences for the associate.",
+            "Recommendations are tied to an explicit customer priority rather than a generic ranking.",
+            "Out-of-stock alternatives can preserve trust and keep the customer interaction moving.",
+        ],
+        "records": [
+            {
+                "comparison_id": "CMP-TECHPRO-SOUNDMAX",
+                "products": "TechPro X-Series vs SoundMax Pro",
+                "key_differences": "$199.99 vs $229.99; 38 vs 30 hours; premium vs audiophile sound; -42 vs -48 dB ANC; 14 vs 3 units",
+                "customer_priority": "Travel and commute vs pure audio quality",
+                "recommendation": "TechPro for travel, all-day use, or budget; SoundMax when pure audio quality matters most",
+            },
+            {
+                "comparison_id": "CMP-3102",
+                "products": "OLED 65 vs Mini-LED 65",
+                "key_differences": "Perfect black levels vs higher peak brightness",
+                "customer_priority": "Bright-room sports viewing",
+                "recommendation": "Mini-LED 65 for higher sustained brightness",
+            },
+            {
+                "comparison_id": "CMP-3103",
+                "products": "Headphones Pro vs Headphones Lite",
+                "key_differences": "Adaptive ANC and 30 hours vs standard ANC and 24 hours",
+                "customer_priority": "Lowest price",
+                "recommendation": "Headphones Lite, saving $120 while retaining ANC",
+            },
+        ],
+    },
+    "transaction_preparation": {
+        "title": "Transaction Preparation",
+        "response": (
+            "The selected transaction has been prepared with the applicable "
+            "loyalty discount, warranty, financing option, and next steps."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": True,
+        "key_field": "transaction_id",
+        "knowledge": [
+            "Transaction preparation can apply loyalty discounts and include selected warranties without manual price calculations.",
+            "Eligible financing options are surfaced before checkout to reduce friction and pricing errors.",
+            "The associate receives explicit next steps while the demo remains offline and non-mutating.",
+        ],
+        "records": [
+            {
+                "transaction_id": "TXN-TECHPRO",
+                "items": "TechPro headphones $199.99; 3-year warranty $39.99; premium cleaning kit $24.99",
+                "subtotal": "$264.97",
+                "loyalty_discount": "-$13.25 (Gold member, 5% off)",
+                "sales_tax": "$21.40 at 8.5%",
+                "financing": "0% APR for 6 months at $45.52 per month",
+                "prepared_total": "$273.12",
+                "commission": "$32.80",
+                "customer_savings": "$63.25 from sale and loyalty discount",
+                "next_step": "Confirm loyalty discount and customer consent, then proceed to checkout",
+            },
+            {
+                "transaction_id": "TXN-81025",
+                "items": "Headphones, travel kit, 2-year protection",
+                "subtotal": "$429.97",
+                "loyalty_discount": "-$25.00",
+                "financing": "Pay in full",
+                "prepared_total": "$404.97 before tax",
+                "next_step": "Confirm protection plan and complete payment at POS",
+            },
+            {
+                "transaction_id": "TXN-81026",
+                "items": "Laptop, USB-C dock, mouse, 3-year support",
+                "subtotal": "$1,829.96",
+                "loyalty_discount": "-$100.00",
+                "financing": "$144.16/month for 12 months, 0% APR",
+                "prepared_total": "$1,729.96 before tax",
+                "next_step": "Verify financing eligibility and complete payment at POS",
+            },
+        ],
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    """Normalize text into tokens used only for exact capability-key matching."""
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    """Resolve an explicit key or an exact key token embedded in user input."""
+    key_field = capability["key_field"]
+    records = capability["records"]
+    if key:
+        wanted = _normalize_evidence_tokens(key)
+        for record in records:
+            if wanted and _normalize_evidence_tokens(record[key_field]) == wanted:
+                return "match", record
+        return "not_found", None
+
+    explicit_input = str(user_input or "").strip()
+    if not explicit_input:
+        return "summary", None
+
+    query_tokens = _normalize_evidence_tokens(explicit_input)
+    for record in records:
+        key_tokens = _normalize_evidence_tokens(record[key_field])
+        width = len(key_tokens)
+        if width and any(
+            query_tokens[index:index + width] == key_tokens
+            for index in range(len(query_tokens) - width + 1)
+        ):
+            return "match", record
+    return "not_found", None
+
+
+def _format_evidence_record(record):
+    return ", ".join(
+        f"{field.replace('_', ' ').title()}: {value}"
+        for field, value in record.items()
+    )
+
+
+# ---------------------------------------------------------------------------
 # Helper Functions
 # ---------------------------------------------------------------------------
 
@@ -380,12 +625,24 @@ class StoreAssociateCopilotAgent(BasicAgent):
                             "customer_assist",
                             "task_checklist",
                             "performance_dashboard",
+                            "product_intelligence",
+                            "add_on_commission",
+                            "product_comparison",
+                            "transaction_preparation",
                         ],
                     },
                     "query": {"type": "string"},
                     "sku_id": {"type": "string"},
                     "scenario": {"type": "string"},
                     "shift": {"type": "string"},
+                    "key": {
+                        "type": "string",
+                        "description": "Exact record key for a v1.1.0 evidence operation.",
+                    },
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional request containing an exact v1.1.0 record key.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -506,6 +763,84 @@ class StoreAssociateCopilotAgent(BasicAgent):
         lines.append(f"- **Top Upsell Rate:** {best_upsell['name']} — {best_upsell['upsell_rate']*100:.0f}%")
         return "\n".join(lines)
 
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        key = kwargs.get("key", "")
+        user_input = str(kwargs.get("user_input") or "").strip()
+        lookup_status, record = _record_for_evidence_request(
+            capability, key, user_input
+        )
+
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["response"],
+            "",
+            "## Grounded Capability",
+        ]
+        lines.extend(f"- {fact}" for fact in capability["knowledge"])
+        lines.extend([
+            "",
+            f"## Records — {capability['source_system']} (synthetic demo data)",
+            "",
+        ])
+
+        receipt_key = "BATCH"
+        if lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.append(
+                f"Exact match on `{capability['key_field']}`:"
+            )
+            lines.append(f"- {_format_evidence_record(record)}")
+        elif lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            lines.append(
+                "Worked examples (synthetic demo data; no customer data required):"
+            )
+            lines.extend(
+                f"- {_format_evidence_record(item)}"
+                for item in capability["records"]
+            )
+
+        if capability["write"] and lookup_status == "match":
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- Action Status: simulated",
+                f"- Receipt: SIM-{capability_name.upper()}-{receipt_key}",
+                f"- Target System: {capability['source_system']}",
+                "- No external system changed (no live mutation).",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable operation; provide an exact key to prepare a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend([
+                "",
+                "_Read-only capability; no external system is modified._",
+            ])
+        return "\n".join(lines)
+
+    def _product_intelligence(self, **kwargs):
+        return self._evidence_capability("product_intelligence", **kwargs)
+
+    def _add_on_commission(self, **kwargs):
+        return self._evidence_capability("add_on_commission", **kwargs)
+
+    def _product_comparison(self, **kwargs):
+        return self._evidence_capability("product_comparison", **kwargs)
+
+    def _transaction_preparation(self, **kwargs):
+        return self._evidence_capability("transaction_preparation", **kwargs)
+
     def perform(self, **kwargs):
         operation = kwargs.get("operation", "product_lookup")
         dispatch = {
@@ -513,6 +848,10 @@ class StoreAssociateCopilotAgent(BasicAgent):
             "customer_assist": self._customer_assist,
             "task_checklist": self._task_checklist,
             "performance_dashboard": self._performance_dashboard,
+            "product_intelligence": self._product_intelligence,
+            "add_on_commission": self._add_on_commission,
+            "product_comparison": self._product_comparison,
+            "transaction_preparation": self._transaction_preparation,
         }
         handler = dispatch.get(operation)
         if not handler:

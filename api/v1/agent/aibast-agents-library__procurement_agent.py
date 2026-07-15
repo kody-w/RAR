@@ -6,6 +6,10 @@ spend analysis for organizational procurement workflows.
 
 Where a real deployment would connect to ERP and procurement platforms,
 this agent uses a synthetic data layer so it runs anywhere without credentials.
+
+Version 1.1.0 adds evidence-backed optimal-vendor selection, discounted PO
+creation previews, Teams reminder preparation, and RFQ orchestration. Existing
+operations and package identity are preserved.
 """
 
 import sys, os
@@ -19,7 +23,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Procurement Agent",
     "description": "Procurement management for purchase requests, vendor comparison, approval routing, and spend analysis.",
     "author": "AIBAST",
@@ -67,6 +71,11 @@ _SPEND_CATEGORIES = {
     "Travel": {"budget": 200000, "spent_ytd": 142000, "committed": 18000, "available": 40000, "trend": "-15% YoY"},
 }
 
+_OFFICE_FURNITURE_QUOTES = {
+    "VND-003": {"unit_price": 1425, "volume_discount_pct": 12, "delivery_days": 4, "contract_compliant": True},
+    "VND-004": {"unit_price": 1510, "volume_discount_pct": 15, "delivery_days": 7, "contract_compliant": True},
+}
+
 
 # ═══════════════════════════════════════════════════════════════
 # HELPERS
@@ -90,6 +99,24 @@ def _total_spend_summary():
     return total_budget, total_spent, total_committed
 
 
+def _rank_office_furniture_vendors(quantity=30):
+    ranked = []
+    for vendor_id, quote in _OFFICE_FURNITURE_QUOTES.items():
+        vendor = _VENDOR_CATALOG[vendor_id]
+        gross = quote["unit_price"] * quantity
+        net = gross * (1 - quote["volume_discount_pct"] / 100)
+        score = vendor["rating"] * 20 - quote["delivery_days"] - net / 10000
+        ranked.append({
+            "score": score,
+            "vendor_id": vendor_id,
+            "vendor": vendor,
+            "quote": quote,
+            "gross": gross,
+            "net": net,
+        })
+    return sorted(ranked, key=lambda item: (-item["score"], item["vendor_id"]))
+
+
 # ═══════════════════════════════════════════════════════════════
 # AGENT CLASS
 # ═══════════════════════════════════════════════════════════════
@@ -103,6 +130,11 @@ class ProcurementAgent(BasicAgent):
         vendor_comparison  - compare vendors for a category
         approval_routing   - determine approval path for a request
         spend_analysis     - analyze spend by category and budget
+        optimal_vendor     - apply contract terms and rank approved vendors
+        create_purchase_order - preview a discounted PO and approval route
+        approval_reminders - prepare Teams reminders for approvers
+        create_rfq         - simulate RFQ distribution and response tracking
+        duplicate_license_check - flag overlapping software entitlements
     """
 
     def __init__(self):
@@ -118,12 +150,19 @@ class ProcurementAgent(BasicAgent):
                         "enum": [
                             "purchase_request", "vendor_comparison",
                             "approval_routing", "spend_analysis",
+                            "optimal_vendor", "create_purchase_order",
+                            "approval_reminders", "create_rfq",
+                            "duplicate_license_check",
                         ],
                         "description": "The procurement operation to perform",
                     },
                     "request_id": {
                         "type": "string",
                         "description": "Purchase request ID (e.g. 'PR-5001')",
+                    },
+                    "vendor_id": {
+                        "type": "string",
+                        "description": "Optional approved office-furniture vendor ID for create_purchase_order",
                     },
                 },
                 "required": ["operation"],
@@ -138,6 +177,11 @@ class ProcurementAgent(BasicAgent):
             "vendor_comparison": self._vendor_comparison,
             "approval_routing": self._approval_routing,
             "spend_analysis": self._spend_analysis,
+            "optimal_vendor": self._optimal_vendor,
+            "create_purchase_order": self._create_purchase_order,
+            "approval_reminders": self._approval_reminders,
+            "create_rfq": self._create_rfq,
+            "duplicate_license_check": self._duplicate_license_check,
         }
         handler = dispatch.get(op)
         if not handler:
@@ -146,32 +190,27 @@ class ProcurementAgent(BasicAgent):
 
     # ── purchase_request ───────────────────────────────────────
     def _purchase_request(self, params):
-        req_id = params.get("request_id", "PR-5001")
-        if req_id in _PURCHASE_REQUESTS:
-            pr = _PURCHASE_REQUESTS[req_id]
-            approval = _get_approval_level(pr["amount"])
+        req_id = params.get("request_id") or "PR-5001"
+        if req_id not in _PURCHASE_REQUESTS:
             return (
-                f"**Purchase Request: {pr['id']}**\n\n"
-                f"| Field | Detail |\n|---|---|\n"
-                f"| Title | {pr['title']} |\n"
-                f"| Requester | {pr['requester']} ({pr['department']}) |\n"
-                f"| Category | {pr['category']} |\n"
-                f"| Amount | ${pr['amount']:,} |\n"
-                f"| Priority | {pr['priority']} |\n"
-                f"| Status | {pr['status']} |\n"
-                f"| Preferred Vendor | {pr['vendor_preferred']} |\n"
-                f"| Budget Code | {pr['budget_code']} |\n"
-                f"| Required Approver | {approval['approver']} |\n\n"
-                f"**Justification:** {pr['justification']}\n\n"
-                f"Source: [Procurement System]\nAgents: ProcurementAgent"
+                f"**Error:** Unknown request_id `{req_id}`. "
+                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
             )
-        rows = ""
-        for pr in _PURCHASE_REQUESTS.values():
-            rows += f"| {pr['id']} | {pr['title'][:35]} | ${pr['amount']:,} | {pr['status']} | {pr['priority']} |\n"
+        pr = _PURCHASE_REQUESTS[req_id]
+        approval = _get_approval_level(pr["amount"])
         return (
-            f"**Purchase Requests**\n\n"
-            f"| ID | Title | Amount | Status | Priority |\n|---|---|---|---|---|\n"
-            f"{rows}\n\n"
+            f"**Purchase Request: {pr['id']}**\n\n"
+            f"| Field | Detail |\n|---|---|\n"
+            f"| Title | {pr['title']} |\n"
+            f"| Requester | {pr['requester']} ({pr['department']}) |\n"
+            f"| Category | {pr['category']} |\n"
+            f"| Amount | ${pr['amount']:,} |\n"
+            f"| Priority | {pr['priority']} |\n"
+            f"| Status | {pr['status']} |\n"
+            f"| Preferred Vendor | {pr['vendor_preferred']} |\n"
+            f"| Budget Code | {pr['budget_code']} |\n"
+            f"| Required Approver | {approval['approver']} |\n\n"
+            f"**Justification:** {pr['justification']}\n\n"
             f"Source: [Procurement System]\nAgents: ProcurementAgent"
         )
 
@@ -193,8 +232,13 @@ class ProcurementAgent(BasicAgent):
 
     # ── approval_routing ───────────────────────────────────────
     def _approval_routing(self, params):
-        req_id = params.get("request_id", "PR-5001")
-        pr = _PURCHASE_REQUESTS.get(req_id, list(_PURCHASE_REQUESTS.values())[0])
+        req_id = params.get("request_id") or "PR-5001"
+        if req_id not in _PURCHASE_REQUESTS:
+            return (
+                f"**Error:** Unknown request_id `{req_id}`. "
+                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+            )
+        pr = _PURCHASE_REQUESTS[req_id]
         approval = _get_approval_level(pr["amount"])
         threshold_rows = ""
         for t in _APPROVAL_THRESHOLDS:
@@ -240,10 +284,119 @@ class ProcurementAgent(BasicAgent):
             f"Source: [ERP + Finance System]\nAgents: ProcurementAgent"
         )
 
+    def _optimal_vendor(self, params):
+        quantity = 30
+        ranked = _rank_office_furniture_vendors(quantity)
+        rows = "\n".join(
+            f"| {item['vendor_id']} | {item['vendor']['name']} | {item['vendor']['rating']}/5 | "
+            f"{item['quote']['volume_discount_pct']}% | {item['quote']['delivery_days']} days | "
+            f"${item['net']:,.0f} | {'Yes' if item['quote']['contract_compliant'] else 'No'} |"
+            for item in ranked
+        )
+        winner = ranked[0]
+        return (
+            "**Optimal Approved Vendor**\n\n"
+            "| Vendor ID | Vendor | Rating | Volume Discount | Delivery | Net Cost | Contract Compliant |\n"
+            "|---|---|---|---|---|---|---|\n" + rows
+            + f"\n\n**Recommendation:** {winner['vendor']['name']} ({winner['vendor_id']}) for best combined "
+              "contract value, delivery timing, and performance.\n\n"
+              "Source: [Dynamics 365 Vendor Master + Contract Terms]\nAgents: ProcurementAgent"
+        )
+
+    def _create_purchase_order(self, params):
+        request_id = params.get("request_id") or "PR-5002"
+        if request_id not in _PURCHASE_REQUESTS:
+            return (
+                f"**Error:** Unknown request_id `{request_id}`. "
+                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+            )
+        pr = _PURCHASE_REQUESTS[request_id]
+        if pr["category"] != "Office Supplies":
+            return (
+                f"**Error:** Request `{request_id}` has category `{pr['category']}` and is "
+                "incompatible with the approved office-furniture quote set. "
+                "Use request_id `PR-5002`."
+            )
+        ranked = _rank_office_furniture_vendors(30)
+        vendor_id = params.get("vendor_id") or ranked[0]["vendor_id"]
+        if vendor_id not in _OFFICE_FURNITURE_QUOTES:
+            return (
+                f"**Error:** Unknown or ineligible office-furniture vendor_id `{vendor_id}`. "
+                f"Available vendor IDs: {', '.join(sorted(_OFFICE_FURNITURE_QUOTES))}."
+            )
+        vendor = _VENDOR_CATALOG[vendor_id]
+        quote = _OFFICE_FURNITURE_QUOTES[vendor_id]
+        gross = quote["unit_price"] * 30
+        discount = gross * quote["volume_discount_pct"] / 100
+        total = gross - discount
+        approval = _get_approval_level(total)
+        return (
+            f"**Purchase Order Preview for {pr['id']}**\n\n"
+            f"- Vendor: {vendor['name']} ({vendor_id})\n"
+            "- Bundle: 30 ergonomic workstation packages\n"
+            f"- Gross: ${gross:,}\n"
+            f"- Volume discount: {quote['volume_discount_pct']}% (${discount:,.0f})\n"
+            f"- PO total: ${total:,.0f}\n"
+            f"- Budget check: Within {pr['budget_code']}\n"
+            f"- Approval route: {approval['approver']} ({approval['sla_hours']}h SLA)\n\n"
+            "Dry-run receipt: no Dynamics 365 PO or approval was created.\n\n"
+            "Source: [Dynamics 365 Procurement + Microsoft Teams]\nAgents: ProcurementAgent"
+        )
+
+    def _approval_reminders(self, params):
+        request_id = params.get("request_id") or "PR-5002"
+        if request_id not in _PURCHASE_REQUESTS:
+            return (
+                f"**Error:** Unknown request_id `{request_id}`. "
+                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+            )
+        pr = _PURCHASE_REQUESTS[request_id]
+        approval = _get_approval_level(pr["amount"])
+        return (
+            f"**Approval Reminder Preview: {pr['id']}**\n\n"
+            f"- Approver: {approval['approver']}\n"
+            f"- Teams reminders: 8 hours and 2 hours before the {approval['sla_hours']}h SLA\n"
+            f"- Escalation: Finance Operations at SLA breach\n"
+            f"- Status: Prepared, not sent\n\n"
+            "Source: [Microsoft Teams + Dynamics 365]\nAgents: ProcurementAgent"
+        )
+
+    def _create_rfq(self, params):
+        rows = "\n".join(
+            f"| {vendor_id} | {vendor['name']} | Prepared | 2025-11-24 | "
+            f"Price, delivery, warranty, sustainability |"
+            for vendor_id, vendor in _VENDOR_CATALOG.items()
+            if vendor["category"] == "Office Furniture"
+        )
+        return (
+            "**Office Furniture RFQ Preview**\n\n"
+            "| Vendor ID | Vendor | Distribution | Due | Evaluation Criteria |\n"
+            "|---|---|---|---|---|\n" + rows
+            + "\n\nResponse tracker and weighted evaluation matrix are prepared. "
+              "No RFQ was distributed and no vendor record was changed.\n\n"
+              "Source: [Dynamics 365 Procurement + Microsoft Teams]\nAgents: ProcurementAgent"
+        )
+
+    def _duplicate_license_check(self, params):
+        return (
+            "**Duplicate Software License Check**\n\n"
+            "| Product | Purchased | Assigned | Overlap | Annual Avoidable Spend | Action |\n"
+            "|---|---|---|---|---|---|\n"
+            "| CRM Enterprise | 200 | 176 | 24 | $25,800 | Remove inactive seats before renewal |\n"
+            "| Diagram Pro | 80 | 61 | 9 shared-suite overlaps | $4,860 | Consolidate to suite entitlement |\n\n"
+            "**Total flagged:** $30,660 annual avoidable spend.\n"
+            "Analysis only; no license, contract, or purchase record was changed.\n\n"
+            "Source: [Dynamics 365 Procurement + License Inventory]\nAgents: ProcurementAgent"
+        )
+
 
 if __name__ == "__main__":
     agent = ProcurementAgent()
-    for op in ["purchase_request", "vendor_comparison", "approval_routing", "spend_analysis"]:
+    for op in [
+        "purchase_request", "vendor_comparison", "approval_routing",
+        "spend_analysis", "optimal_vendor", "create_purchase_order",
+        "approval_reminders", "create_rfq", "duplicate_license_check",
+    ]:
         print("=" * 60)
         print(agent.perform(operation=op, request_id="PR-5001"))
         print()

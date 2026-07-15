@@ -3,6 +3,10 @@ Customer Loyalty & Rewards Agent — B2C Sales Stack
 
 Manages loyalty program dashboards, points summaries, reward
 recommendations, and tier analysis for customer retention.
+
+Version 1.1.0 adds six demo-grounded loyalty operations with deterministic
+records, exact record-key lookup, and simulated campaign/Teams receipts. No
+external system is changed, and all legacy operations remain unchanged.
 """
 
 import sys
@@ -14,7 +18,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_loyalty_rewards",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Customer Loyalty & Rewards Agent",
     "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.",
     "author": "AIBAST",
@@ -105,10 +109,109 @@ ENGAGEMENT_ACTIVITIES = [
     {"activity": "App Download", "points": "250 one-time bonus", "frequency": "once"},
 ]
 
+EVIDENCE_ACTIONS = {
+    "churn_risk_analysis": {
+        "title": "Member Churn-Risk Analysis",
+        "write": False,
+        "records": [
+            {"record_id": "SEG-ENGAGED", "segment": "Engaged", "members": "124K", "churn_risk": "5%"},
+            {"record_id": "SEG-ACTIVE", "segment": "Active", "members": "198K", "churn_risk": "12%"},
+            {"record_id": "SEG-AT-RISK", "segment": "At-risk", "members": "34K", "churn_risk": "68%"},
+            {"record_id": "SEG-DORMANT", "segment": "Dormant", "members": "94K", "churn_risk": "89%"},
+        ],
+        "context": "450K members analyzed; 34K at risk with $2.1M in unredeemed points; $840K expires in 30 days. Signals include 60+ days without purchase, high balances without redemption, sudden disengagement, and browse-without-buy.",
+    },
+    "at_risk_profiles": {
+        "title": "Top At-Risk Member Profiles",
+        "write": False,
+        "records": [
+            {"record_id": "MEM-LINDA-M", "member": "Linda M.", "points": 12400, "last_purchase": "72 days", "risk": "94%", "trigger": "favorite designer-accessories brand on sale; 8K points expire in 21 days"},
+            {"record_id": "MEM-KEVIN-R", "member": "Kevin R.", "points": 8900, "last_purchase": "65 days", "risk": "88%", "trigger": "high balance and recent disengagement"},
+            {"record_id": "MEM-SARAH-T", "member": "Sarah T.", "points": 7200, "last_purchase": "81 days", "risk": "86%", "trigger": "browse-without-buy pattern"},
+        ],
+        "context": "The three highlighted members represent $48K in annual value and warrant personalized outreach.",
+    },
+    "win_back_offers": {
+        "title": "Personalized Win-Back Offers",
+        "write": False,
+        "records": [
+            {"record_id": "OFFER-LINDA-M", "audience": "Linda M.", "offer": "favorite bags 40% off, double points, 8K-point expiry reminder"},
+            {"record_id": "OFFER-HIGH-VALUE", "audience": "High-value (8,400)", "offer": "VIP early access and 3X points for 14 days"},
+            {"record_id": "OFFER-EXPIRY", "audience": "Point expiry (12,000)", "offer": "25% bonus when points are redeemed this week"},
+            {"record_id": "OFFER-LAPSED", "audience": "Lapsed browsers (13,600)", "offer": "viewed items, 20% off, and free shipping"},
+        ],
+        "context": "Offers are tailored from member interests, preferences, activity patterns, and point-expiry context.",
+    },
+    "campaign_launch": {
+        "title": "Loyalty Campaign Launch and Forecast",
+        "write": True,
+        "records": [
+            {"record_id": "LOY-CAMP-HIGH-VALUE", "campaign": "High-value win-back", "members": 8400, "status": "sent"},
+            {"record_id": "LOY-CAMP-EXPIRY", "campaign": "Point expiry alert", "members": 12000, "status": "sent"},
+            {"record_id": "LOY-CAMP-LAPSED", "campaign": "Lapsed browser", "members": 13600, "status": "active"},
+        ],
+        "context": "Expected 14-day results: 24% re-engagement, $489,600 revenue, $640K liability reduction, $1.4M LTV protected, and 58:1 ROI on $8,400 cost.",
+    },
+    "program_optimization": {
+        "title": "Loyalty Program Optimization",
+        "write": False,
+        "records": [
+            {"record_id": "LOY-OPT-EXPIRY", "improvement": "Dynamic point expiry", "impact": "+$340K/year", "priority": "high"},
+            {"record_id": "LOY-OPT-TIER", "improvement": "Tier advancement alerts", "impact": "+18% engagement", "priority": "high"},
+            {"record_id": "LOY-OPT-REWARDS", "improvement": "Personalized rewards", "impact": "+24% redemption", "priority": "high"},
+        ],
+        "context": "Quick win: alert members within 200 points of Gold; rolling expiry with activity extension targets a 40% dormancy reduction.",
+    },
+    "program_summary": {
+        "title": "Loyalty Optimization Summary",
+        "write": True,
+        "records": [
+            {"record_id": "LOY-SUMMARY-001", "members_analyzed": "450K", "at_risk": "34K ($2.1M points)", "campaigns": "3 segments / 34K members", "expected_revenue": "$489,600", "ltv_protected": "$1.4M", "roi": "58:1"},
+        ],
+        "context": "Next steps: monitor daily, implement tier alerts this week, and plan a personalized-rewards pilot. The recap is prepared for Microsoft Teams sharing.",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
+
+def _evidence_action(action, **kwargs):
+    """Render a demo-grounded action with exact record-key lookup."""
+    spec = EVIDENCE_ACTIONS[action]
+    user_input = str(kwargs.get("user_input", ""))
+    normalized = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in user_input.split()
+    }
+    records = spec["records"]
+    if user_input:
+        records = [
+            record for record in records
+            if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in normalized
+        ]
+        if not records:
+            return "No exact `record_id` match was found; no substitute member or segment was used."
+    lines = [
+        f"## {spec['title']}",
+        f"\n{spec['context']}",
+        "\nDeterministic evidence-backed records:",
+    ]
+    for record in records:
+        lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        receipt_key = records[0]["record_id"] if len(records) == 1 else "BATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-LOYALTY-{receipt_key}",
+            "- status: simulated",
+            "- target_systems: Dynamics 365, Outlook, and Microsoft Teams",
+            "- No external system changed; campaign activation and recap sharing are preview-only.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
 
 def _points_value(points):
     """Convert points to dollar value (1 point = $0.02)."""
@@ -159,9 +262,16 @@ class CustomerLoyaltyRewardsAgent(BasicAgent):
                             "points_summary",
                             "reward_recommendations",
                             "tier_analysis",
+                            "churn_risk_analysis",
+                            "at_risk_profiles",
+                            "win_back_offers",
+                            "campaign_launch",
+                            "program_optimization",
+                            "program_summary",
                         ],
                     },
                     "member_id": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -175,11 +285,22 @@ class CustomerLoyaltyRewardsAgent(BasicAgent):
             "points_summary": self._points_summary,
             "reward_recommendations": self._reward_recommendations,
             "tier_analysis": self._tier_analysis,
+            "churn_risk_analysis": self._evidence_action,
+            "at_risk_profiles": self._evidence_action,
+            "win_back_offers": self._evidence_action,
+            "campaign_launch": self._evidence_action,
+            "program_optimization": self._evidence_action,
+            "program_summary": self._evidence_action,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."
+        if operation in EVIDENCE_ACTIONS:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
+
+    def _evidence_action(self, action, **kwargs) -> str:
+        return _evidence_action(action, **kwargs)
 
     def _loyalty_dashboard(self, **kwargs) -> str:
         total_members = len(LOYALTY_MEMBERS)

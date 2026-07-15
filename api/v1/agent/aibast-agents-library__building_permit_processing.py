@@ -4,10 +4,16 @@ Building Permit Processing Agent — SLG Government Stack
 Manages building permit workflows including status tracking, review
 checklists, inspector assignments, and fee calculations for local
 government permitting offices.
+
+Version 1.1.0 adds evidence-derived application intake, code compliance,
+review routing, approval workflow, and permit issuance capabilities. Existing
+operations remain unchanged; new write operations return deterministic
+simulated receipts and never modify an external system.
 """
 
 import sys
 import os
+import re
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
@@ -15,11 +21,11 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/building_permit_processing",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Building Permit Processing Agent",
     "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.",
     "author": "AIBAST",
-    "tags": ["permits", "building", "zoning", "inspection", "local-government", "fees"],
+    "tags": ["permits", "building", "zoning", "inspection", "local-government", "fees", "code-compliance", "workflow-routing"],
     "category": "slg_government",
     "quality_tier": "community",
     "requires_env": [],
@@ -137,6 +143,206 @@ INSPECTORS = {
     "Ann Kowalski": {"specialty": "Fire/Life Safety", "available_slots": 2, "zone": "All"},
 }
 
+EVIDENCE_CAPABILITIES = {
+    "application_intake": {
+        "display_name": "Application Intake and Completeness",
+        "source_system": "Dynamics 365 Customer Service and SharePoint",
+        "key_field": "permit_id",
+        "write": False,
+        "knowledge": [
+            "Classifies permit applications and validates required documents at intake.",
+            "Highlights missing or duplicate items before plan review begins.",
+            "Presents essential applicant, contractor, project, and fee details in one view.",
+        ],
+        "records": [
+            {
+                "permit_id": "BP-2024-3847",
+                "classification": "Residential Addition",
+                "applicant": "Johnson Residence",
+                "documents_complete": "4 of 5",
+                "missing_items": "HOA approval letter",
+                "intake_decision": "Hold for missing document",
+            },
+            {
+                "permit_id": "BP-2025-0102",
+                "classification": "Residential Addition",
+                "applicant": "Johnson Family Trust",
+                "documents_complete": "5 of 5",
+                "missing_items": "None",
+                "intake_decision": "Ready for plan review",
+            },
+            {
+                "permit_id": "BP-2025-0103",
+                "classification": "Commercial Alteration",
+                "applicant": "Sunrise Solar Inc.",
+                "documents_complete": "6 of 6",
+                "missing_items": "None",
+                "intake_decision": "Ready for plan review",
+            },
+        ],
+    },
+    "code_compliance_review": {
+        "display_name": "Automated Code Compliance Review",
+        "source_system": "Building, electrical, plumbing, and zoning code library",
+        "key_field": "review_id",
+        "write": False,
+        "knowledge": [
+            "Checks plans across building, electrical, plumbing, and zoning requirements.",
+            "Separates passing requirements from clarifications and required corrections.",
+            "Estimates resubmission impact so staff can prioritize the next action.",
+        ],
+        "records": [
+            {
+                "review_id": "REV-BP-2024-3847",
+                "permit_id": "BP-2024-3847",
+                "requirements_checked": 247,
+                "passed": 245,
+                "clarifications": "Egress window manufacturer cut sheet",
+                "corrections": "Add second bathroom GFCI per NEC 210.8",
+                "estimated_resubmission": "1-2 days",
+            },
+            {
+                "review_id": "REV-BP-2025-0102",
+                "permit_id": "BP-2025-0102",
+                "requirements_checked": 193,
+                "passed": 193,
+                "clarifications": "None",
+                "corrections": "None",
+                "estimated_resubmission": "Ready to advance",
+            },
+            {
+                "review_id": "REV-BP-2025-0103",
+                "permit_id": "BP-2025-0103",
+                "requirements_checked": 214,
+                "passed": 213,
+                "clarifications": "Roof loading calculation",
+                "corrections": "None",
+                "estimated_resubmission": "1 day",
+            },
+        ],
+    },
+    "review_routing": {
+        "display_name": "Intelligent Plan Review Routing",
+        "source_system": "Dynamics 365 Customer Service and Microsoft Teams",
+        "key_field": "routing_id",
+        "write": True,
+        "knowledge": [
+            "Recommends reviewers based on specialization, workload, and availability.",
+            "Generates a review packet containing the application, compliance checklist, property history, and zoning verification.",
+            "Schedules parallel specialty reviews and drafts an applicant status notification.",
+        ],
+        "records": [
+            {
+                "routing_id": "ROUTE-BP-2024-3847",
+                "permit_id": "BP-2024-3847",
+                "primary_reviewer": "Mike Chen",
+                "specialization": "Residential additions",
+                "workload": "8 permits (moderate)",
+                "parallel_reviews": "Electrical: Sarah Martinez; Plumbing: David Park",
+                "packet_status": "Generated",
+                "applicant_update": "Under review; 2 minor items need clarification",
+            },
+            {
+                "routing_id": "ROUTE-BP-2025-0102",
+                "permit_id": "BP-2025-0102",
+                "primary_reviewer": "Tom Delgado",
+                "specialization": "Residential additions",
+                "workload": "5 permits (light)",
+                "parallel_reviews": "Structural: Lisa Park",
+                "packet_status": "Generated",
+                "applicant_update": "Plan review assigned",
+            },
+            {
+                "routing_id": "ROUTE-BP-2025-0103",
+                "permit_id": "BP-2025-0103",
+                "primary_reviewer": "Karen Whitfield",
+                "specialization": "Commercial solar",
+                "workload": "7 permits (moderate)",
+                "parallel_reviews": "Electrical: Dave Martinez",
+                "packet_status": "Generated",
+                "applicant_update": "Specialty review scheduled",
+            },
+        ],
+    },
+    "approval_workflow": {
+        "display_name": "Approval Workflow Tracking",
+        "source_system": "Dynamics 365 Customer Service",
+        "key_field": "workflow_id",
+        "write": False,
+        "knowledge": [
+            "Maintains a unified timeline from intake through issuance.",
+            "Surfaces reviewer feedback, applicant revisions, and correction status.",
+            "Provides transparent real-time status and the next scheduled action.",
+        ],
+        "records": [
+            {
+                "workflow_id": "FLOW-BP-2024-3847",
+                "permit_id": "BP-2024-3847",
+                "current_stage": "Final review",
+                "completed": "Intake; completeness; compliance scan; routing; corrections",
+                "reviewer_feedback": "Provide egress specs and second GFCI",
+                "revision_status": "Both corrections validated",
+                "next_step": "Final review at 9:00 AM",
+            },
+            {
+                "workflow_id": "FLOW-BP-2025-0102",
+                "permit_id": "BP-2025-0102",
+                "current_stage": "Approved",
+                "completed": "Intake; review; approval",
+                "reviewer_feedback": "No open comments",
+                "revision_status": "Not required",
+                "next_step": "Permit issuance",
+            },
+            {
+                "workflow_id": "FLOW-BP-2025-0104",
+                "permit_id": "BP-2025-0104",
+                "current_stage": "Corrections required",
+                "completed": "Intake; compliance scan; third review cycle",
+                "reviewer_feedback": "Update seismic and life-safety sheets",
+                "revision_status": "Pending applicant",
+                "next_step": "Validate revised plans",
+            },
+        ],
+    },
+    "permit_issuance": {
+        "display_name": "Permit Package, Inspection, and Notification",
+        "source_system": "Dynamics 365 Customer Service, Microsoft Teams, and SharePoint",
+        "key_field": "issuance_id",
+        "write": True,
+        "knowledge": [
+            "Assembles the digital permit card, approved plans, safety checklist, and posting requirements.",
+            "Schedules required inspections and makes assignments available to inspectors.",
+            "Drafts a citizen notification with portal and mobile inspection instructions.",
+        ],
+        "records": [
+            {
+                "issuance_id": "ISSUE-BP-2024-3847",
+                "permit_id": "BP-2024-3847",
+                "package": "Digital card; stamped plans; safety checklist; posting requirements",
+                "inspections": "Foundation; framing; rough electrical/plumbing; final",
+                "notification": "Approved; digital documents available in portal",
+                "status": "Ready for construction",
+            },
+            {
+                "issuance_id": "ISSUE-BP-2025-0102",
+                "permit_id": "BP-2025-0102",
+                "package": "Digital card; stamped plans; posting requirements",
+                "inspections": "Foundation; framing; final",
+                "notification": "Approved; schedule inspections 24 hours in advance",
+                "status": "Ready for construction",
+            },
+            {
+                "issuance_id": "ISSUE-BP-2025-0103",
+                "permit_id": "BP-2025-0103",
+                "package": "Digital card; stamped solar plans; electrical checklist",
+                "inspections": "Structural mounting; rough electrical; final electrical",
+                "notification": "Inspection schedule available in portal",
+                "status": "Inspection scheduled",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -194,6 +400,57 @@ def _review_checklist(permit_type):
     return common + type_specific.get(permit_type, [])
 
 
+def _evidence_capability(operation_name, **kwargs):
+    """Return an offline capability summary or an exact synthetic record."""
+    capability = EVIDENCE_CAPABILITIES[operation_name]
+    key_field = capability["key_field"]
+    selector = str(kwargs.get(key_field) or kwargs.get("key") or "").strip()
+    user_input = str(kwargs.get("user_input", "")).strip()
+    input_tokens = {
+        token.casefold()
+        for token in re.findall(r"[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)*", user_input)
+    }
+
+    record = None
+    for candidate in capability["records"]:
+        candidate_key = str(candidate[key_field])
+        normalized_key = candidate_key.casefold()
+        if selector and normalized_key == selector.casefold():
+            record = candidate
+            break
+        if not selector and user_input and normalized_key in input_tokens:
+            record = candidate
+            break
+
+    if selector or user_input:
+        if record is None:
+            available = ", ".join(str(item[key_field]) for item in capability["records"])
+            return f"**Error:** No {key_field.replace('_', ' ')} matched. Available keys: {available}."
+        lines = [f"# {capability['display_name']}: {record[key_field]}\n"]
+        for field, value in record.items():
+            lines.append(f"- **{field.replace('_', ' ').title()}:** {value}")
+        lines.append(f"- **Source System:** {capability['source_system']}")
+        if capability["write"]:
+            lines.extend([
+                "\n## Simulated Write Receipt\n",
+                f"- **Receipt:** SIM-{operation_name.upper()}-{record[key_field]}",
+                f"- **Action:** {capability['display_name']}",
+                "- **Result:** Simulated only; no external system was modified.",
+            ])
+        return "\n".join(lines)
+
+    lines = [f"# {capability['display_name']}\n"]
+    lines.append(f"**Mode:** {'Simulated write' if capability['write'] else 'Read-only'}")
+    lines.append(f"**Source System:** {capability['source_system']}\n")
+    lines.append("## Capability\n")
+    lines.extend(f"- {item}" for item in capability["knowledge"])
+    lines.append("\n## Available Records\n")
+    for item in capability["records"]:
+        lines.append(f"- `{item[key_field]}`")
+    lines.append(f"\nProvide `{key_field}` or `key` for an exact offline lookup.")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -202,7 +459,7 @@ class BuildingPermitProcessingAgent(BasicAgent):
     """Building permit processing agent for local government."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/building-permit-processing"
+        self.name = "BuildingPermitProcessingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Building Permit Processing Agent",
@@ -217,9 +474,22 @@ class BuildingPermitProcessingAgent(BasicAgent):
                             "review_checklist",
                             "inspector_assignment",
                             "fee_calculation",
+                            "application_intake",
+                            "code_compliance_review",
+                            "review_routing",
+                            "approval_workflow",
+                            "permit_issuance",
                         ],
                     },
                     "permit_id": {"type": "string"},
+                    "key": {
+                        "type": "string",
+                        "description": "Exact record key advertised by the selected evidence operation.",
+                    },
+                    "user_input": {
+                        "type": "string",
+                        "description": "Natural-language request containing an exact advertised record key.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -234,6 +504,8 @@ class BuildingPermitProcessingAgent(BasicAgent):
             "inspector_assignment": self._inspector_assignment,
             "fee_calculation": self._fee_calculation,
         }
+        if operation in EVIDENCE_CAPABILITIES:
+            return _evidence_capability(operation, **kwargs)
         handler = dispatch.get(operation)
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."

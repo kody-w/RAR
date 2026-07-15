@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__utility_billing_assistance",
   "name": "Utility Billing Assistance Agent",
   "rar_name": "@aibast-agents-library/utility_billing_assistance",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/utility_billing_assistance:2833abff1d04120c2d422d5b12a01115",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/utility_billing_assistance:741c5f1fd8820404d2d0ef6ffaf2f213b5d628750cd88d069aeab3a027626a12",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "slg_government",
   "tags": [
@@ -13,7 +13,9 @@
     "water",
     "payment",
     "assistance",
-    "municipal"
+    "municipal",
+    "leak-detection",
+    "smart-meter"
   ],
   "description": "Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.",
   "author": "AIBAST",
@@ -22,12 +24,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 372,
-  "size_kb": 16.3,
-  "sha256": "2833abff1d04120c2d422d5b12a0111542dca6dee0bbea8d596dd8adf8ad1d2a",
+  "lines": 683,
+  "size_kb": 29.7,
+  "sha256": "741c5f1fd8820404d2d0ef6ffaf2f213b5d628750cd88d069aeab3a027626a12",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__utility_billing_assistance.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py.card",

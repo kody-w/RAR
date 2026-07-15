@@ -3,10 +3,21 @@ Fraud Detection & Alert Agent — Financial Services Stack
 
 Provides alert triage, transaction analysis, pattern detection, and
 investigation summaries for financial fraud operations teams.
+
+Version 1.1.0 adds AI-driven fraud monitoring capabilities reproducing the
+Fraud Detection & Alert one-pager and demo workflow: overnight alert triage,
+coordinated fraud-ring pattern analysis, account-takeover ring investigation,
+investigation case creation with protective actions, and fraud-prevention
+performance reporting into Microsoft Teams. Each new capability supports an
+optional ``user_input`` for exact-key lookup, returns a useful no-input
+summary, and clearly simulates any write (case creation / Teams posting) with
+a receipt and no external mutation. All original operations and data are
+preserved unchanged.
 """
 
 import sys
 import os
+import hashlib
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
@@ -14,7 +25,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fraud_detection_alert",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Fraud Detection & Alert Agent",
     "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management.",
     "author": "AIBAST",
@@ -90,6 +101,117 @@ INVESTIGATION_CASES = {
 
 
 # ---------------------------------------------------------------------------
+# v1.1.0 — Fraud Monitoring & Identification capabilities
+# Deterministic, spec-derived data (source: fraud-monitoring external spec).
+# Each capability carries its own response line, knowledge notes, and exactly
+# three synthetic records keyed for exact-key lookup.
+# ---------------------------------------------------------------------------
+
+FRAUD_MONITORING_CAPABILITIES = {
+    "alert_triage": {
+        "title": "Fraud Alert Triage",
+        "response": "Here is your prioritized fraud alert triage for overnight activity, with the most critical alerts surfaced first and a recommended immediate action.",
+        "source_system": "Dynamics 365 ERP",
+        "write": False,
+        "generative": False,
+        "key_field": "alert_id",
+        "key_label": "Alert",
+        "knowledge": [
+            "The agent processes all alerts instantly and surfaces the most urgent threats rather than requiring hours of manual overnight triage.",
+            "Alerts span card, account, and wire channels; the agent distinguishes noise from true risk to cut alert fatigue.",
+            "For each triage run the agent highlights the most critical alerts and recommends one that requires immediate action.",
+            "Triage draws on connected analytics, core systems, and activity logs to give a single targeted view.",
+        ],
+        "records": [
+            {"alert_id": "ALERT-4471", "channel": "Account Takeover", "risk_level": "Critical", "customer": "Dana Okoro", "recommended_action": "Escalate immediately to SIU"},
+            {"alert_id": "ALERT-4472", "channel": "Card Testing", "risk_level": "Medium", "customer": "Miguel Santos", "recommended_action": "Monitor for velocity spikes"},
+            {"alert_id": "ALERT-4473", "channel": "Wire Fraud", "risk_level": "Low", "customer": "Priya Nair", "recommended_action": "Auto-clear after review"},
+        ],
+    },
+    "fraud_ring_analysis": {
+        "title": "Fraud Ring Pattern Analysis",
+        "response": "Here is the fraud ring pattern analysis, identifying organized rings with their shared behaviors and connected accounts across account-takeover, card testing, and wire fraud.",
+        "source_system": "Dynamics 365 ERP",
+        "write": False,
+        "generative": True,
+        "key_field": "ring_id",
+        "key_label": "Ring",
+        "knowledge": [
+            "Pattern analysis identifies multiple organized fraud rings and summarizes the shared behaviors that link them.",
+            "The agent highlights connected accounts to reveal coordinated schemes across account-takeover, card testing, and wire fraud.",
+            "Detecting rings early limits combined exposure and losses before funds are lost.",
+            "The bigger-picture insight previously could have required hours of manual investigation.",
+        ],
+        "records": [
+            {"ring_id": "RING-88", "ring_type": "Account Takeover", "connected_accounts": 14, "shared_behavior": "Shared device fingerprints", "exposure_usd": 420000},
+            {"ring_id": "RING-89", "ring_type": "Card Testing", "connected_accounts": 31, "shared_behavior": "Sequential BIN testing", "exposure_usd": 85000},
+            {"ring_id": "RING-90", "ring_type": "Wire Fraud", "connected_accounts": 6, "shared_behavior": "Mule account layering", "exposure_usd": 610000},
+        ],
+    },
+    "account_takeover_investigation": {
+        "title": "Account Takeover Ring Investigation",
+        "response": "Here is the account takeover ring investigation, surfacing each at-risk customer with suspicious activity timelines and the key indicators behind the alert.",
+        "source_system": "Dynamics 365 ERP",
+        "write": False,
+        "generative": True,
+        "key_field": "customer_id",
+        "key_label": "Customer",
+        "knowledge": [
+            "The agent surfaces each at-risk customer within an account-takeover ring in one rapid sequence.",
+            "For every customer it outlines suspicious activity timelines and shows the key indicators behind the alert.",
+            "This critical context tells the analyst exactly where to intervene.",
+            "Account-takeover is one of the coordinated fraud types tracked alongside card testing and wire fraud.",
+        ],
+        "records": [
+            {"customer_id": "CUST-5012", "customer_name": "Dana Okoro", "indicator": "New device plus credential reset", "activity_timeline": "Large transfer attempt at 02:14", "status": "At risk"},
+            {"customer_id": "CUST-5013", "customer_name": "Leo Zhang", "indicator": "Impossible travel login", "activity_timeline": "Password change at 03:41", "status": "At risk"},
+            {"customer_id": "CUST-5014", "customer_name": "Amara Bello", "indicator": "SIM swap flag", "activity_timeline": "New payee added at 04:07", "status": "At risk"},
+        ],
+    },
+    "case_action": {
+        "title": "Investigation Case and Protective Actions",
+        "response": "The investigation case has been created and protective actions are queued: freezing accounts, blocking cards, resetting credentials, and notifying the responsible team, with updates logged automatically.",
+        "source_system": "Dynamics 365",
+        "write": True,
+        "generative": False,
+        "key_field": "case_id",
+        "key_label": "Case",
+        "knowledge": [
+            "When the analyst is ready to move forward the agent creates investigation cases and executes protective steps.",
+            "Protective steps include freezing accounts, blocking cards, resetting credentials, and notifying teams.",
+            "The agent performs actions consistently and logs updates automatically so the analyst can focus on critical decisions and customer communications.",
+            "Critical alerts are routed rapidly to SIU, card fraud, or wire ops teams, automating case creation and protective actions to accelerate investigations.",
+        ],
+        "records": [
+            {"case_id": "CASE-2201", "linked_alert": "ALERT-4471", "action": "Freeze account and block card", "assignee": "SIU queue", "status": "Case created and logged"},
+            {"case_id": "CASE-2202", "linked_alert": "ALERT-4472", "action": "Reset credentials", "assignee": "Card fraud queue", "status": "Case created and logged"},
+            {"case_id": "CASE-2203", "linked_alert": "ALERT-4473", "action": "Notify wire ops team", "assignee": "Wire ops queue", "status": "Case created and logged"},
+        ],
+    },
+    "performance_report": {
+        "title": "Fraud Prevention Performance and Teams Reporting",
+        "response": "Here is the fraud prevention performance summary with core metrics, trends, and suggested next steps, compiled as a clean report and distributed automatically in Microsoft Teams for internal alignment.",
+        "source_system": "Dynamics 365 ERP",
+        "write": True,
+        "generative": True,
+        "key_field": "report_id",
+        "key_label": "Report",
+        "knowledge": [
+            "The agent summarizes core metrics, trends, and suggested next steps for fraud prevention performance.",
+            "The summary helps the team understand what is working and where threats are shifting.",
+            "To close the loop the agent compiles a clean summary of findings, completed actions, and recommended next steps.",
+            "The summary is distributed automatically in Microsoft Teams to ensure internal alignment.",
+        ],
+        "records": [
+            {"report_id": "PERF-Q1", "metric": "Alert response time", "trend": "Down 38 percent", "next_step": "Expand real-time wire monitoring"},
+            {"report_id": "PERF-Q2", "metric": "Confirmed fraud loss", "trend": "Down 22 percent", "next_step": "Tune card-testing detection rules"},
+            {"report_id": "PERF-Q3", "metric": "Cases auto-created", "trend": "Up 61 percent", "next_step": "Add SIU review capacity"},
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
 
@@ -112,6 +234,45 @@ def _risk_level(score):
     return "Low"
 
 
+def _fmt_field(key):
+    """Humanize a record field key for display."""
+    return key.replace("_", " ").title()
+
+
+def _fmt_value(key, value):
+    """Format a record value, adding currency style for USD amounts."""
+    if key.endswith("_usd") and isinstance(value, (int, float)):
+        return f"${value:,.0f}"
+    return str(value)
+
+
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_key(user_input, key):
+    """Return True only when the complete normalized key is a token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(key)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _sim_receipt(operation, key):
+    """Deterministic simulated-write receipt id (no external mutation)."""
+    digest = hashlib.sha256(f"{operation}:{key}".encode("utf-8")).hexdigest()[:8].upper()
+    return f"SIM-{digest}"
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -120,7 +281,7 @@ class FraudDetectionAlertAgent(BasicAgent):
     """Fraud detection and alert management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/fraud-detection-alert"
+        self.name = "FraudDetectionAlertAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Fraud Detection & Alert Agent",
@@ -135,10 +296,22 @@ class FraudDetectionAlertAgent(BasicAgent):
                             "transaction_analysis",
                             "pattern_detection",
                             "investigation_summary",
+                            "fraud_ring_analysis",
+                            "account_takeover_investigation",
+                            "case_action",
+                            "performance_report",
                         ],
                     },
                     "case_id": {"type": "string"},
                     "account": {"type": "string"},
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional free-text request; an exact record key (e.g. ALERT-4471, RING-90, CUST-5014, CASE-2201, PERF-Q3) mentioned here triggers an exact-key lookup.",
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "Optional exact record key for direct lookup on the v1.1.0 fraud-monitoring capabilities.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -147,6 +320,12 @@ class FraudDetectionAlertAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         operation = kwargs.get("operation", "alert_triage")
+        if operation in FRAUD_MONITORING_CAPABILITIES and (
+            operation != "alert_triage"
+            or kwargs.get("user_input")
+            or kwargs.get("key")
+        ):
+            return self._capability(**kwargs)
         dispatch = {
             "alert_triage": self._alert_triage,
             "transaction_analysis": self._transaction_analysis,
@@ -157,6 +336,103 @@ class FraudDetectionAlertAgent(BasicAgent):
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."
         return handler(**kwargs)
+
+    def _capability(self, **kwargs) -> str:
+        """Render a v1.1.0 fraud-monitoring capability.
+
+        Supports optional exact-key lookup via ``key`` or ``user_input``.
+        With no key/input, returns a useful summary over all three records.
+        Write capabilities are clearly simulated with a receipt and mutate
+        nothing outside the process.
+        """
+        operation = kwargs.get("operation")
+        cap = FRAUD_MONITORING_CAPABILITIES[operation]
+        key_field = cap["key_field"]
+        records = cap["records"]
+        by_key = {r[key_field]: r for r in records}
+
+        lookup_values = []
+        for field in dict.fromkeys(("key", key_field, "user_input")):
+            value = str(kwargs.get(field) or "").strip()
+            if value:
+                lookup_values.append(value)
+
+        candidate_sets = [
+            [
+                record_key for record_key in by_key
+                if _contains_normalized_key(value, record_key)
+            ]
+            for value in lookup_values
+        ]
+        exact_lookup = bool(candidate_sets) and all(
+            len(candidates) == 1 for candidates in candidate_sets
+        )
+        if exact_lookup:
+            exact_lookup = len({candidates[0] for candidates in candidate_sets}) == 1
+        selected_key = candidate_sets[0][0] if exact_lookup else None
+
+        if selected_key:
+            return self._render_capability_record(operation, cap, by_key[selected_key])
+        if lookup_values:
+            return (
+                f"# {cap['title']}\n\n"
+                f"> No exact normalized {cap['key_label'].lower()} key matched every "
+                "supplied identifier, or the request was ambiguous. No action was simulated."
+            )
+        return self._render_capability_summary(operation, cap)
+
+    def _render_capability_record(self, operation, cap, record) -> str:
+        key_field = cap["key_field"]
+        key_value = record[key_field]
+        lines = [f"# {cap['title']} — {key_value}\n"]
+        lines.append(cap["response"] + "\n")
+        lines.append(f"**Source System:** {cap['source_system']}")
+        mode = "Generative" if cap["generative"] else "Deterministic"
+        lines.append(f"**Mode:** {mode}\n")
+        lines.append(f"## {cap['key_label']} Record\n")
+        for k, v in record.items():
+            lines.append(f"- **{_fmt_field(k)}:** {_fmt_value(k, v)}")
+        if cap["write"]:
+            receipt = _sim_receipt(operation, key_value)
+            lines.append("\n## Simulated Write Receipt\n")
+            lines.append("> **SIMULATED — no external system was modified.**")
+            lines.append(f"- **Receipt ID:** {receipt}")
+            lines.append(f"- **Target System:** {cap['source_system']} (simulated)")
+            lines.append(f"- **Simulated Action:** {cap['response']}")
+        lines.append("\n## Knowledge\n")
+        for note in cap["knowledge"]:
+            lines.append(f"- {note}")
+        return "\n".join(lines)
+
+    def _render_capability_summary(self, operation, cap) -> str:
+        key_field = cap["key_field"]
+        records = cap["records"]
+        columns = list(records[0].keys())
+        lines = [f"# {cap['title']}\n"]
+        lines.append(cap["response"] + "\n")
+        lines.append(f"**Source System:** {cap['source_system']}")
+        mode = "Generative" if cap["generative"] else "Deterministic"
+        lines.append(f"**Mode:** {mode}")
+        lines.append(f"**Records:** {len(records)}\n")
+        lines.append("## Records\n")
+        lines.append("| " + " | ".join(_fmt_field(c) for c in columns) + " |")
+        lines.append("|" + "|".join(["---"] * len(columns)) + "|")
+        for r in records:
+            lines.append("| " + " | ".join(_fmt_value(c, r[c]) for c in columns) + " |")
+        if cap["write"]:
+            lines.append(
+                "\n> **Write capability — simulated only.** Provide a "
+                f"`user_input` or `key` naming a {cap['key_label'].lower()} "
+                "to generate a simulated action receipt. No external system is modified."
+            )
+        lines.append("\n## Knowledge\n")
+        for note in cap["knowledge"]:
+            lines.append(f"- {note}")
+        lines.append(
+            f"\n_Tip: pass `user_input` mentioning a {cap['key_label'].lower()} key "
+            f"({', '.join(r[key_field] for r in records)}) for an exact-key view._"
+        )
+        return "\n".join(lines)
 
     def _alert_triage(self, **kwargs) -> str:
         metrics = _alert_metrics()
@@ -269,3 +545,13 @@ if __name__ == "__main__":
     print(agent.perform(operation="pattern_detection"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="investigation_summary", case_id="INV-2025-302"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="alert_triage", user_input="Triage overnight activity and show me ALERT-4471"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="fraud_ring_analysis", user_input="Run pattern analysis on RING-90 and summarize shared behaviors"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="account_takeover_investigation", user_input="Examine the account takeover ring for CUST-5014 and show key indicators"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="case_action", user_input="Create investigation case CASE-2201 and freeze the account"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="performance_report", user_input="Summarize fraud prevention performance for PERF-Q3 and post it to Teams"))

@@ -3,8 +3,8 @@
   "id": "aibast-agents-library__claims_processing",
   "name": "Claims Processing Agent",
   "rar_name": "@aibast-agents-library/claims_processing",
-  "rappid": "rappid:v2:agent:@aibast-agents-library/claims_processing:0b31715d103a446d40c127d03f6fface",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/claims_processing:315a1761b06cbf477550914c1fc3c8b4ac06d5f81db7c543055ebc7f5f3eef5f",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -22,12 +22,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 295,
-  "size_kb": 13.9,
-  "sha256": "0b31715d103a446d40c127d03f6fface65aa63f40388240e353413ace1ea5217",
+  "lines": 625,
+  "size_kb": 31.8,
+  "sha256": "315a1761b06cbf477550914c1fc3c8b4ac06d5f81db7c543055ebc7f5f3eef5f",
   "has_card": true,
   "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__claims_processing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py.card",

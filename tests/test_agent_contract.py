@@ -3,6 +3,7 @@ Contract tests — parametrized over ALL agents.
 Validates manifest, class structure, perform() return type, and standalone execution.
 """
 
+import importlib.util
 import re
 import subprocess
 import sys
@@ -134,3 +135,109 @@ def test_standalone_execution(agent_info):
         f"{path.name}: standalone execution failed (exit {result.returncode})\n"
         f"stderr: {result.stderr[:500]}"
     )
+
+
+def test_store_associate_evidence_id_matrix(agent_info):
+    mod, cls, path = agent_info
+    if getattr(mod, "__manifest__", {}).get("name") != (
+        "@aibast-agents-library/store_associate_copilot"
+    ):
+        return
+
+    instance = cls()
+    for operation, capability in mod.EVIDENCE_CAPABILITIES.items():
+        key_field = capability["key_field"]
+        record_id = str(capability["records"][0][key_field])
+
+        omitted = instance.perform(operation=operation)
+        assert "Worked examples" in omitted
+        assert "Simulated Write Receipt" not in omitted
+
+        exact = instance.perform(operation=operation, key=record_id.lower())
+        assert "Exact match" in exact
+        assert record_id in exact
+        assert ("Simulated Write Receipt" in exact) is capability["write"]
+
+        normalized = instance.perform(
+            operation=operation,
+            key=f"({record_id.lower()})",
+        )
+        assert "Exact match" in normalized
+        assert record_id in normalized
+        assert ("Simulated Write Receipt" in normalized) is capability["write"]
+
+        embedded = instance.perform(
+            operation=operation,
+            user_input=f"Use exact record {record_id}.",
+        )
+        assert "Exact match" in embedded
+        assert record_id in embedded
+        assert ("Simulated Write Receipt" in embedded) is capability["write"]
+
+        for malformed in (f"x{record_id}y", f"{record_id}0"):
+            for parameter in ("key", "user_input"):
+                rejected = instance.perform(
+                    operation=operation,
+                    **{parameter: malformed},
+                )
+                assert "No record matched" in rejected
+                assert record_id not in rejected
+                assert "Simulated Write Receipt" not in rejected
+
+
+def test_prior_authorization_evidence_id_matrix():
+    path = (
+        REPO_ROOT / "agents" / "@aibast-agents-library" / "healthcare_stacks"
+        / "prior_authorization_stack" / "prior_authorization_agent.py"
+    )
+    templates = REPO_ROOT / "agents" / "@aibast-agents-library" / "templates"
+    if str(templates) not in sys.path:
+        sys.path.insert(0, str(templates))
+    spec = importlib.util.spec_from_file_location("prior_authorization_matrix", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    instance = mod.PriorAuthorizationAgent()
+    for operation, capability in mod.CAPABILITIES.items():
+        key_field = capability["key_field"]
+        record_id = str(capability["records"][0][key_field])
+
+        omitted = instance.perform(operation=operation)
+        assert "**Error:**" not in omitted
+        assert "Simulated Write Receipt" not in omitted
+        assert omitted == instance.perform(operation=operation)
+
+        exact = instance.perform(operation=operation, key=record_id.swapcase())
+        assert "**Error:**" not in exact
+        assert record_id in exact
+        assert ("Simulated Write Receipt" in exact) is capability["write"]
+        assert exact == instance.perform(operation=operation, key=record_id.swapcase())
+
+        normalized = instance.perform(
+            operation=operation,
+            key=f"({record_id.swapcase()})",
+        )
+        assert "**Error:**" not in normalized
+        assert record_id in normalized
+        assert ("Simulated Write Receipt" in normalized) is capability["write"]
+
+        embedded = instance.perform(
+            operation=operation,
+            user_input=f"Use exact record [{record_id.swapcase()}], now.",
+        )
+        assert "**Error:**" not in embedded
+        assert record_id in embedded
+        assert ("Simulated Write Receipt" in embedded) is capability["write"]
+
+        for malformed in (f"x{record_id}y", f"{record_id}0"):
+            for parameter in ("key", "user_input"):
+                rejected = instance.perform(
+                    operation=operation,
+                    **{parameter: malformed},
+                )
+                assert "**Error:** No record found" in rejected
+                assert "Simulated Write Receipt" not in rejected
+                assert "Receipt ID:" not in rejected
+                assert rejected == instance.perform(
+                    operation=operation,
+                    **{parameter: malformed},
+                )

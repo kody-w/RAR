@@ -3,6 +3,9 @@ Returns & Complaints Resolution Agent — Retail & CPG Stack
 
 Handles return processing, complaint classification, resolution
 recommendation, and trend analysis for retail customer service operations.
+
+Version 1.1.0 adds deterministic, exact-keyed service recovery, quality/fraud,
+simulated resolution, follow-up, and executive reporting workflows.
 """
 
 import sys
@@ -17,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_complaints_resolution",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Returns & Complaints Resolution Agent",
     "description": (
         "Automates return processing, classifies customer complaints, "
@@ -262,6 +265,158 @@ TREND_DATA = {
     "refund_total_usd": [18720.00, 21450.00, 34200.00, 24800.00, 19650.00, 22100.00],
 }
 
+EVIDENCE_CAPABILITIES = {
+    "escalation_snapshot": {
+        "title": "Escalated Complaint Snapshot",
+        "source_system": "Dynamics 365 Customer Service and Outlook",
+        "write": False,
+        "key_field": "case_id",
+        "summary": (
+            "Combines customer value, purchase history, support interactions, "
+            "sentiment, and churn risk into an immediate-action snapshot."
+        ),
+        "record": {
+            "case_id": "CASE-DAVID-CHEN",
+            "customer": "David Chen; Diamond VIP; 47 purchases; $18,400 lifetime value",
+            "issue": "ProBook Elite 15 display flickers and will not boot on day 3",
+            "warranty": "Active 2-year standard warranty",
+            "history": "45-minute hold with three transfers, followed by failed troubleshooting",
+            "sentiment": "High frustration after two failed support calls",
+            "churn_risk": "87%; immediate recovery action recommended",
+        },
+    },
+    "recovery_options": {
+        "title": "Customer-Value Recovery Options",
+        "source_system": "Dynamics 365 Customer Service",
+        "write": False,
+        "key_field": "option_set_id",
+        "summary": (
+            "Compares resolution tiers by fulfillment speed, recovery cost, "
+            "retention probability, and customer lifetime value."
+        ),
+        "record": {
+            "option_set_id": "OPTIONS-DAVID-CHEN",
+            "tier_1": "Elite Plus upgrade; same-day courier; $200 credit; 90-day extension; $540 cost",
+            "tier_2": "Same-model replacement; 2-day shipping; $100 credit; $180 cost; 65% retention",
+            "tier_3": "Same-model replacement; standard 5-day shipping; $0 incremental cost; 35% retention",
+            "recommendation": "Tier 1 protects $18,400 lifetime value for $540, a 34:1 retention ROI",
+        },
+    },
+    "resolution_execution": {
+        "title": "Resolution Execution and Talking Points",
+        "source_system": "Dynamics 365 Customer Service, Outlook, and Teams",
+        "write": True,
+        "key_field": "resolution_id",
+        "summary": (
+            "Prepares approved fulfillment, credit, return, and empathetic "
+            "communication actions while keeping every external write simulated."
+        ),
+        "record": {
+            "resolution_id": "RESOLUTION-DAVID-TIER1",
+            "fulfillment": "Elite Plus upgrade prepared for same-day courier delivery at 4:30 PM",
+            "credit": "$200 store credit and 90-day return extension prepared",
+            "return": "Return label prepared for the defective laptop",
+            "talking_points": "Apologize, acknowledge Diamond status, explain upgrade and speed, confirm credit, provide direct ownership",
+            "execution_note": "Simulation only; no shipment, credit, label, or customer message is created",
+        },
+    },
+    "follow_up_plan": {
+        "title": "Service Recovery Follow-Up Plan",
+        "source_system": "Dynamics 365 Customer Service and Outlook",
+        "write": True,
+        "key_field": "follow_up_id",
+        "summary": (
+            "Prepares structured post-resolution touchpoints and monitoring "
+            "without scheduling messages or changing a customer record."
+        ),
+        "record": {
+            "follow_up_id": "FOLLOWUP-DAVID-30D",
+            "today": "Delivery confirmation at 18:00 and manager email at 19:00",
+            "day_3": "Customer success call and NPS survey",
+            "day_7": "Elite Plus tips and 25% accessory offer",
+            "day_30": "Relationship health check and VIP appreciation invitation",
+            "monitoring": "90-day ticket priority, churn-risk tracking, and purchase-behavior analysis",
+            "execution_note": "Simulation only; no communication, task, or CRM update is scheduled",
+        },
+    },
+    "quality_fraud_analysis": {
+        "title": "SKU Quality and Return Fraud Analysis",
+        "source_system": "Dynamics 365 Commerce and Customer Service",
+        "write": False,
+        "key_field": "analysis_id",
+        "summary": (
+            "Surfaces deterministic SKU-level defect and suspicious-return "
+            "patterns for quality and loss-prevention review."
+        ),
+        "record": {
+            "analysis_id": "ANALYSIS-PROBOOK-Q2",
+            "quality_signal": "Display-failure returns reached 4.8%, above the 1.5% category baseline",
+            "affected_batch": "ProBook Elite 15 batch PB15-0426; 23 related cases",
+            "fraud_signal": "Three accounts share delivery addresses across seven high-value return requests",
+            "recommended_actions": "Open supplier quality review; hold affected batch; route linked accounts to loss prevention",
+            "decision_boundary": "Signals require human review; no return is denied automatically",
+        },
+    },
+    "recovery_report": {
+        "title": "Service Recovery Executive Report",
+        "source_system": "Microsoft Teams",
+        "write": True,
+        "key_field": "report_id",
+        "summary": (
+            "Produces case and program economics with a simulated leadership "
+            "distribution receipt."
+        ),
+        "record": {
+            "report_id": "REPORT-RECOVERY-Q2",
+            "case_result": "Resolved in 4 hours; $18,400 lifetime value protected for $540; 34:1 retention ROI",
+            "program_metrics": "4.2-hour resolution; 94% retention; +47 NPS recovery; 76% six-month repeat purchase",
+            "program_economics": "$127,000 quarterly investment; $4.8M protected revenue; $4.67M net value",
+            "executive_summary": "Customer crisis converted into a loyalty recovery with structured 30-day follow-up",
+            "distribution": "Prepared for leadership review in Microsoft Teams",
+        },
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    record = capability["record"]
+    key_field = capability["key_field"]
+    if key:
+        if str(record[key_field]).lower() == str(key).strip().lower():
+            return "match", record
+        return "not_found", None
+    query_tokens = _normalize_evidence_tokens(user_input)
+    key_tokens = _normalize_evidence_tokens(record[key_field])
+    width = len(key_tokens)
+    if width and any(
+        query_tokens[index:index + width] == key_tokens
+        for index in range(len(query_tokens) - width + 1)
+    ):
+        return "match", record
+    return "summary", None
+
+
+def _format_evidence_record(record):
+    return "\n".join(
+        f"- **{field.replace('_', ' ').title()}:** {value}"
+        for field, value in record.items()
+    )
+
 
 # ---------------------------------------------------------------------------
 # Helper Functions
@@ -337,10 +492,18 @@ class ReturnsComplaintsResolutionAgent(BasicAgent):
                             "complaint_classification",
                             "resolution_recommendation",
                             "trend_analysis",
+                            "escalation_snapshot",
+                            "recovery_options",
+                            "resolution_execution",
+                            "follow_up_plan",
+                            "quality_fraud_analysis",
+                            "recovery_report",
                         ],
                     },
                     "return_id": {"type": "string"},
                     "complaint_text": {"type": "string"},
+                    "key": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -474,6 +637,52 @@ class ReturnsComplaintsResolutionAgent(BasicAgent):
         lines.append("- CSAT recovered to 4.1 after post-holiday dip to 3.6")
         return "\n".join(lines)
 
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        lookup_status, record = _record_for_evidence_request(
+            capability,
+            kwargs.get("key", ""),
+            kwargs.get("user_input", ""),
+        )
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["summary"],
+            "",
+            f"## {capability['source_system']} (synthetic demo data)",
+            "",
+        ]
+        if lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            selected = record or capability["record"]
+            label = "Exact keyed record" if lookup_status == "match" else "Worked example"
+            lines.extend([f"**{label}:**", _format_evidence_record(selected)])
+
+        if capability["write"] and lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- **Action Status:** simulated",
+                f"- **Receipt:** SIM-{capability_name.upper()}-{receipt_key}",
+                f"- **Target System:** {capability['source_system']}",
+                "- **External Changes:** none; no live fulfillment, credit, communication, or record update occurred",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable workflow; provide an exact key to generate a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend(["", "_Read-only; no external system is modified._"])
+        return "\n".join(lines)
+
     def perform(self, **kwargs):
         operation = kwargs.get("operation", "return_processing")
         dispatch = {
@@ -481,10 +690,18 @@ class ReturnsComplaintsResolutionAgent(BasicAgent):
             "complaint_classification": self._complaint_classification,
             "resolution_recommendation": self._resolution_recommendation,
             "trend_analysis": self._trend_analysis,
+            "escalation_snapshot": self._evidence_capability,
+            "recovery_options": self._evidence_capability,
+            "resolution_execution": self._evidence_capability,
+            "follow_up_plan": self._evidence_capability,
+            "quality_fraud_analysis": self._evidence_capability,
+            "recovery_report": self._evidence_capability,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        if operation in EVIDENCE_CAPABILITIES:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
 
 

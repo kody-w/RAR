@@ -4,6 +4,11 @@ Field Service Dispatch Agent for Energy sector.
 Manages field service operations including dispatch dashboards, route
 optimization, technician assignment based on skills, and emergency response
 coordination for energy infrastructure maintenance.
+
+Version 1.1.0 adds evidence-backed schedule optimization, outage orchestration,
+live status reporting, post-incident analysis, and dry-run follow-on work
+orders. Every legacy operation remains available and external writes are
+simulated only.
 """
 
 import sys
@@ -15,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/field_service_dispatch",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Field Service Dispatch Agent",
     "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure.",
     "author": "AIBAST",
@@ -153,6 +158,81 @@ GEOGRAPHIC_ZONES = {
     "Northeast": {"states": ["PA", "NY", "NJ", "CT", "MA"], "technicians": 1, "open_requests": 1},
 }
 
+OUTAGES = {
+    "OUT-901": {
+        "site": "Ridgeline Regional Hospital feeder",
+        "zone": "Central",
+        "priority": "critical",
+        "customers_impacted": 18400,
+        "required_certs": ["scada_systems", "electrical_high_voltage"],
+        "crew_id": "TECH-205",
+        "distance_miles": 8,
+        "eta_minutes": 22,
+        "restoration_estimate": "2026-03-20T16:30:00Z",
+        "active_order": "SR-4002",
+        "customer_channel": "SMS and email",
+    },
+    "OUT-902": {
+        "site": "Riverside water treatment feeder",
+        "zone": "West",
+        "priority": "critical",
+        "customers_impacted": 7200,
+        "required_certs": ["electrical_high_voltage"],
+        "crew_id": "TECH-201",
+        "distance_miles": 12,
+        "eta_minutes": 28,
+        "restoration_estimate": "2026-03-20T17:10:00Z",
+        "active_order": "SR-4001",
+        "customer_channel": "SMS and utility portal",
+    },
+    "OUT-903": {
+        "site": "Sweetwater north collector",
+        "zone": "Central",
+        "priority": "high",
+        "customers_impacted": 3100,
+        "required_certs": ["wind_turbine"],
+        "crew_id": "TECH-202",
+        "distance_miles": 15,
+        "eta_minutes": 34,
+        "restoration_estimate": "2026-03-20T18:00:00Z",
+        "active_order": "SR-4004",
+        "customer_channel": "email and utility portal",
+    },
+}
+
+INCIDENT_RESULTS = {
+    "OUT-901": {
+        "actual_response_minutes": 19,
+        "sla_minutes": 30,
+        "restoration_minutes": 96,
+        "avoided_outage_cost": 245000,
+        "response_cost": 32000,
+        "first_time_fix": True,
+        "preventive_action": "Replace aging SCADA radio and add redundant telemetry.",
+        "resilience_action": "Prioritize critical-facility feeder telemetry in the resilience plan.",
+    },
+    "OUT-902": {
+        "actual_response_minutes": 26,
+        "sla_minutes": 30,
+        "restoration_minutes": 118,
+        "avoided_outage_cost": 171000,
+        "response_cost": 28000,
+        "first_time_fix": True,
+        "preventive_action": "Inspect feeder relays and stage a replacement breaker.",
+        "resilience_action": "Pre-stage switching plans for essential public-service sites.",
+    },
+    "OUT-903": {
+        "actual_response_minutes": 33,
+        "sla_minutes": 45,
+        "restoration_minutes": 142,
+        "avoided_outage_cost": 92000,
+        "response_cost": 21000,
+        "first_time_fix": False,
+        "preventive_action": "Add quarterly collector-cable thermal imaging.",
+        "resilience_action": "Increase wind-farm cable spares at the Central depot.",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -235,6 +315,95 @@ def _emergency_response():
     return {"emergencies": response_plan, "total": len(response_plan)}
 
 
+def _optimized_schedule():
+    plan = [
+        ("SR-4005", "TECH-205", "08:00", 18, 3),
+        ("SR-4001", "TECH-201", "09:00", 24, 6),
+        ("SR-4003", "TECH-203", "09:30", 16, 8),
+        ("SR-4004", "TECH-204", "10:00", 21, 5),
+        ("SR-4002", "TECH-202", "13:00", 12, 4),
+    ]
+    return [
+        {
+            "request_id": request_id,
+            "technician": TECHNICIANS[tech_id]["name"],
+            "start": start,
+            "travel_minutes": travel,
+            "job_hours": hours,
+            "skill_match": "qualified",
+        }
+        for request_id, tech_id, start, travel, hours in plan
+    ]
+
+
+def _outage_orchestration(outage_id):
+    outage = OUTAGES.get(outage_id)
+    if not outage:
+        return None
+    technician = TECHNICIANS[outage["crew_id"]]
+    return {
+        **outage,
+        "outage_id": outage_id,
+        "crew": technician["name"],
+        "crew_status": technician["status"],
+    }
+
+
+def _crew_status_updates():
+    statuses = [
+        ("OUT-901", "Crew on site; SCADA radio isolated", 65),
+        ("OUT-902", "Crew en route; switching plan approved", 20),
+        ("OUT-903", "Collector cable fault located", 48),
+    ]
+    return [
+        {
+            "outage_id": outage_id,
+            "site": OUTAGES[outage_id]["site"],
+            "crew": TECHNICIANS[OUTAGES[outage_id]["crew_id"]]["name"],
+            "status": status,
+            "progress_pct": progress,
+            "customers_impacted": OUTAGES[outage_id]["customers_impacted"],
+            "restoration_estimate": OUTAGES[outage_id]["restoration_estimate"],
+        }
+        for outage_id, status, progress in statuses
+    ]
+
+
+def _post_incident_review(outage_id):
+    outage = OUTAGES.get(outage_id)
+    result = INCIDENT_RESULTS.get(outage_id)
+    if not outage or not result:
+        return None
+    return {
+        **result,
+        "outage_id": outage_id,
+        "site": outage["site"],
+        "customers_impacted": outage["customers_impacted"],
+        "roi_pct": round(
+            (result["avoided_outage_cost"] - result["response_cost"])
+            / result["response_cost"] * 100,
+            1,
+        ),
+    }
+
+
+def _follow_on_work_order(outage_id):
+    review = _post_incident_review(outage_id)
+    if not review:
+        return None
+    return {
+        "work_order_id": f"WO-{outage_id[4:]}-F1",
+        "outage_id": outage_id,
+        "site": review["site"],
+        "action": review["preventive_action"],
+        "target_date": "2026-04-15",
+        "monthly_gain": (
+            f"{review['actual_response_minutes']} minute response; "
+            f"${review['avoided_outage_cost'] - review['response_cost']:,} net avoided cost"
+        ),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Agent
 # ---------------------------------------------------------------------------
@@ -257,12 +426,21 @@ class FieldServiceDispatchAgent(BasicAgent):
                             "route_optimization",
                             "technician_assignment",
                             "emergency_response",
+                            "optimized_schedule",
+                            "outage_orchestration",
+                            "crew_status_updates",
+                            "post_incident_review",
+                            "follow_on_work_orders",
                         ],
                         "description": "The dispatch operation to perform.",
                     },
                     "zone": {
                         "type": "string",
                         "description": "Optional geographic zone filter.",
+                    },
+                    "outage_id": {
+                        "type": "string",
+                        "description": "Exact outage ID for orchestration and incident operations.",
                     },
                 },
                 "required": ["operation"],
@@ -280,6 +458,16 @@ class FieldServiceDispatchAgent(BasicAgent):
             return self._technician_assignment()
         elif op == "emergency_response":
             return self._emergency_response()
+        elif op == "optimized_schedule":
+            return self._optimized_schedule()
+        elif op == "outage_orchestration":
+            return self._outage_orchestration(kwargs.get("outage_id"))
+        elif op == "crew_status_updates":
+            return self._crew_status_updates()
+        elif op == "post_incident_review":
+            return self._post_incident_review(kwargs.get("outage_id"))
+        elif op == "follow_on_work_orders":
+            return self._follow_on_work_orders(kwargs.get("outage_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _dispatch_dashboard(self) -> str:
@@ -356,6 +544,128 @@ class FieldServiceDispatchAgent(BasicAgent):
                 lines.append(f"| {r['name']} | {r['status']} | {r['location']} |")
             lines.append("")
         return "\n".join(lines)
+
+    def _optimized_schedule(self) -> str:
+        rows = _optimized_schedule()
+        lines = [
+            "# Optimized Daily Schedule",
+            "",
+            f"**Total Travel:** {sum(row['travel_minutes'] for row in rows)} minutes",
+            f"**Crew Capacity Used:** {sum(row['job_hours'] for row in rows)} hours",
+            "",
+            "| Start | Request | Technician | Travel | Job | Skill Match |",
+            "|-------|---------|------------|--------|-----|-------------|",
+        ]
+        for row in rows:
+            lines.append(
+                f"| {row['start']} | {row['request_id']} | {row['technician']} "
+                f"| {row['travel_minutes']} min | {row['job_hours']}h | {row['skill_match']} |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Field Service Dispatch demo 00:47-01:07 — intelligently "
+            "assigned jobs, reduced travel, and maximized crew capacity.",
+        ])
+        return "\n".join(lines)
+
+    def _outage_orchestration(self, outage_id) -> str:
+        if not outage_id:
+            return (
+                "# Outage Orchestration\n\nProvide an exact `outage_id`. "
+                f"Available IDs: {', '.join(sorted(OUTAGES))}."
+            )
+        row = _outage_orchestration(outage_id)
+        if not row:
+            return f"**Error:** Unknown outage_id `{outage_id}`."
+        return "\n".join([
+            f"# Outage Orchestration — {outage_id}",
+            "",
+            f"- **Critical Site:** {row['site']}",
+            f"- **Customers Impacted:** {row['customers_impacted']:,}",
+            f"- **Nearest Qualified Crew:** {row['crew']} ({row['distance_miles']} miles)",
+            f"- **Dispatch ETA:** {row['eta_minutes']} minutes",
+            f"- **Restoration Estimate:** {row['restoration_estimate']}",
+            "",
+            "## Simulated Write Receipt",
+            "",
+            f"- **Dispatch:** Simulated assignment of {row['crew']} in Dynamics 365 Field Service.",
+            f"- **Reprioritization:** Simulated pause and reroute of {row['active_order']}.",
+            f"- **Customer Update:** Simulated notification through {row['customer_channel']}.",
+            "- **Mode:** dry-run; no work order, crew schedule, or customer record was mutated.",
+            "- **Evidence:** Field Service Dispatch demo 01:08-01:30.",
+        ])
+
+    def _crew_status_updates(self) -> str:
+        lines = [
+            "# Real-Time Crew and Customer Impact Status",
+            "",
+            "| Outage | Site | Crew | Status | Progress | Customers | Restoration Estimate |",
+            "|--------|------|------|--------|----------|-----------|----------------------|",
+        ]
+        for row in _crew_status_updates():
+            lines.append(
+                f"| {row['outage_id']} | {row['site']} | {row['crew']} | {row['status']} "
+                f"| {row['progress_pct']}% | {row['customers_impacted']:,} "
+                f"| {row['restoration_estimate']} |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Field Service Dispatch demo 01:31-01:46 — live crew "
+            "updates, customer impact analysis, and timeline estimates.",
+        ])
+        return "\n".join(lines)
+
+    def _post_incident_review(self, outage_id) -> str:
+        if not outage_id:
+            return (
+                "# Post-Incident Review\n\nProvide an exact `outage_id`. "
+                f"Available IDs: {', '.join(sorted(INCIDENT_RESULTS))}."
+            )
+        row = _post_incident_review(outage_id)
+        if not row:
+            return f"**Error:** Unknown outage_id `{outage_id}`."
+        first_fix = "YES" if row["first_time_fix"] else "NO"
+        return "\n".join([
+            f"# Post-Incident Review — {outage_id}",
+            "",
+            f"- **Site:** {row['site']}",
+            f"- **Response:** {row['actual_response_minutes']} min vs {row['sla_minutes']} min SLA",
+            f"- **Restoration:** {row['restoration_minutes']} minutes",
+            f"- **First-Time Fix:** {first_fix}",
+            f"- **Avoided Outage Cost:** ${row['avoided_outage_cost']:,}",
+            f"- **Response Cost:** ${row['response_cost']:,}",
+            f"- **ROI:** {row['roi_pct']}%",
+            f"- **Preventive Action:** {row['preventive_action']}",
+            f"- **Resilience Plan:** {row['resilience_action']}",
+            "",
+            "**Evidence:** Field Service Dispatch demo 01:47-02:03 — performance "
+            "metrics, impact, ROI, preventive actions, and resilience planning.",
+        ])
+
+    def _follow_on_work_orders(self, outage_id) -> str:
+        if not outage_id:
+            return (
+                "# Follow-On Work Orders\n\nProvide an exact `outage_id`. "
+                f"Available IDs: {', '.join(sorted(INCIDENT_RESULTS))}."
+            )
+        row = _follow_on_work_order(outage_id)
+        if not row:
+            return f"**Error:** Unknown outage_id `{outage_id}`."
+        return "\n".join([
+            f"# Follow-On Work Order — {row['work_order_id']}",
+            "",
+            f"- **Site:** {row['site']}",
+            f"- **Preventive Action:** {row['action']}",
+            f"- **Target Date:** {row['target_date']}",
+            f"- **Monthly Operational Gain:** {row['monthly_gain']}",
+            "",
+            "## Simulated Write Receipt",
+            "",
+            "- **Action:** Create the follow-on work order in Dynamics 365 Field Service.",
+            "- **Leadership Summary:** Simulated monthly operational-gains publication.",
+            "- **Mode:** dry-run; no live work order or leadership record was mutated.",
+            "- **Evidence:** Field Service Dispatch demo 02:03-02:16.",
+        ])
 
 
 # ---------------------------------------------------------------------------

@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supplier_risk_monitoring",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Supplier Risk Monitoring Agent",
     "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
     "author": "AIBAST",
@@ -124,6 +124,35 @@ BACKUP_SUPPLIERS = {
     ],
 }
 
+SUPPLY_RISK_PLANS = {
+    "SUP-101": {
+        "financial_trend": "credit outlook negative; days payable outstanding +11",
+        "operational_capacity_pct": 72, "logistics_reliability_pct": 68,
+        "safety_stock_days": 35, "dual_source": "Samsung Foundry (Korea)",
+        "mitigation_investment": 384000, "modeled_disruption_loss": 2150000,
+        "owner": "Electronics Category Manager", "next_review": "2026-03-19",
+    },
+    "SUP-102": {
+        "financial_trend": "stable; margin pressure from export controls",
+        "operational_capacity_pct": 81, "logistics_reliability_pct": 76,
+        "safety_stock_days": 21, "dual_source": "Murata Electronics (Japan)",
+        "mitigation_investment": 160000, "modeled_disruption_loss": 980000,
+        "owner": "Components Sourcing Lead", "next_review": "2026-03-22",
+    },
+    "SUP-104": {
+        "financial_trend": "stable; repair cash requirement elevated",
+        "operational_capacity_pct": 54, "logistics_reliability_pct": 71,
+        "safety_stock_days": 28, "dual_source": "Alcoa Precision Castings (USA)",
+        "mitigation_investment": 336000, "modeled_disruption_loss": 1740000,
+        "owner": "Metals Category Manager", "next_review": "2026-03-18",
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: supply-risk-monitoring one-pager and demo transcript; "
+    "risk-driver intelligence, mitigation, financial exposure, execution, and continuous alerts]"
+)
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -178,6 +207,11 @@ class SupplierRiskMonitoringAgent(BasicAgent):
                 "supplier_scorecard",
                 "disruption_alerts",
                 "alternative_sourcing",
+                "risk_driver_analysis",
+                "mitigation_plan",
+                "financial_exposure",
+                "execution_timeline",
+                "monitoring_plan",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -189,6 +223,11 @@ class SupplierRiskMonitoringAgent(BasicAgent):
             "supplier_scorecard": self._supplier_scorecard,
             "disruption_alerts": self._disruption_alerts,
             "alternative_sourcing": self._alternative_sourcing,
+            "risk_driver_analysis": self._risk_driver_analysis,
+            "mitigation_plan": self._mitigation_plan,
+            "financial_exposure": self._financial_exposure,
+            "execution_timeline": self._execution_timeline,
+            "monitoring_plan": self._monitoring_plan,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -315,6 +354,104 @@ class SupplierRiskMonitoringAgent(BasicAgent):
         lines.append(f"**Estimated annual cost of full diversification:** ${total_premium:,.0f}")
         lines.append(f"**Risk reduction value:** ${_spend_at_risk(5.0):,.0f} of spend de-risked")
         return "\n".join(lines)
+
+    def _risk_plan(self, **kwargs):
+        supplier_id = str(kwargs.get("supplier_id", "SUP-101")).strip().upper()
+        plan = SUPPLY_RISK_PLANS.get(supplier_id)
+        if plan is None:
+            valid = ", ".join(SUPPLY_RISK_PLANS)
+            return supplier_id, None, f"**Error:** Unknown supplier `{supplier_id}`. Valid: {valid}"
+        return supplier_id, plan, ""
+
+    def _risk_driver_analysis(self, **kwargs) -> str:
+        supplier_id, plan, error = self._risk_plan(**kwargs)
+        if error:
+            return error
+        supplier = SUPPLIERS[supplier_id]
+        return "\n".join([
+            "## Supply Risk Driver Analysis",
+            EVIDENCE_MARKER,
+            f"**Supplier lookup:** {supplier_id} — {supplier['name']}",
+            f"- Region/category: {supplier['region']} / {supplier['category']}",
+            f"- Financial trend: {plan['financial_trend']}",
+            f"- Operational capacity: {plan['operational_capacity_pct']}%",
+            f"- Logistics reliability: {plan['logistics_reliability_pct']}%",
+            f"- Quality score: {supplier['quality_score']}/100",
+            f"- Overall risk: {supplier['overall_risk']}/10 ({_risk_tier_label(supplier['overall_risk'])})",
+        ])
+
+    def _mitigation_plan(self, **kwargs) -> str:
+        supplier_id, plan, error = self._risk_plan(**kwargs)
+        if error:
+            return error
+        return "\n".join([
+            "## Targeted Supply Risk Mitigation",
+            EVIDENCE_MARKER,
+            f"**Supplier lookup:** {supplier_id} — {SUPPLIERS[supplier_id]['name']}",
+            "1. **Immediate:** Escalate active incidents and verify open shipment ETAs.",
+            f"2. **Containment:** Raise safety stock to {plan['safety_stock_days']} days.",
+            f"3. **Diversification:** Qualify/activate {plan['dual_source']}.",
+            "4. **Validation:** Run first-article, logistics-lane, and commercial reviews.",
+            f"5. **Owner/review:** {plan['owner']} / {plan['next_review']}.",
+        ])
+
+    def _financial_exposure(self, **kwargs) -> str:
+        supplier_id, plan, error = self._risk_plan(**kwargs)
+        if error:
+            return error
+        investment = plan["mitigation_investment"]
+        loss = plan["modeled_disruption_loss"]
+        avoided = round(loss * 0.72)
+        roi = round((avoided - investment) / investment * 100, 1)
+        return "\n".join([
+            "## Supply Risk Financial Exposure",
+            EVIDENCE_MARKER,
+            f"**Supplier lookup:** {supplier_id} — {SUPPLIERS[supplier_id]['category']}",
+            f"- Annual spend exposed: ${SUPPLIERS[supplier_id]['annual_spend']:,.0f}",
+            f"- Modeled disruption loss: ${loss:,.0f}",
+            f"- Mitigation investment: ${investment:,.0f}",
+            f"- Modeled loss avoided: ${avoided:,.0f}",
+            f"- First-year mitigation ROI: {roi}%",
+        ])
+
+    def _execution_timeline(self, **kwargs) -> str:
+        supplier_id, plan, error = self._risk_plan(**kwargs)
+        if error:
+            return error
+        return "\n".join([
+            "## Supply Risk Execution Timeline",
+            EVIDENCE_MARKER,
+            f"**Supplier lookup:** {supplier_id} — {SUPPLIERS[supplier_id]['name']}",
+            "",
+            "| Phase | Window | Action |",
+            "|-------|--------|--------|",
+            "| Immediate | 0-48 hours | Confirm shipments, incident owner, and safety-stock gap |",
+            f"| Validate | Days 3-14 | Qualify {plan['dual_source']} and test logistics lane |",
+            f"| Optimize | Days 15-45 | Hold {plan['safety_stock_days']} days stock and rebalance awards |",
+            "",
+            f"- **SIMULATED WRITE RECEIPT:** `RISK-SIM-{supplier_id}` for Teams stakeholder update",
+            "- Simulation only; no sourcing award, purchase order, or Teams message was created.",
+        ])
+
+    def _monitoring_plan(self, **kwargs) -> str:
+        supplier_id, plan, error = self._risk_plan(**kwargs)
+        if error:
+            return error
+        return "\n".join([
+            "## Continuous Supply Risk Monitoring",
+            EVIDENCE_MARKER,
+            f"**Supplier lookup:** {supplier_id} — {SUPPLIERS[supplier_id]['name']}",
+            "",
+            "| Signal | Cadence | Alert Threshold |",
+            "|--------|---------|-----------------|",
+            "| Financial health | Daily | Credit score falls 5 points |",
+            f"| Operational capacity | Hourly | Below {plan['operational_capacity_pct']}% baseline by 10 points |",
+            f"| Logistics reliability | Per shipment | Below {plan['logistics_reliability_pct']}% |",
+            "| Quality | Per lot | Defect rate above 0.5% |",
+            "| Geopolitical | Daily | Severity HIGH |",
+            "",
+            f"Next human review: **{plan['next_review']}**, owned by **{plan['owner']}**.",
+        ])
 
 
 # ---------------------------------------------------------------------------

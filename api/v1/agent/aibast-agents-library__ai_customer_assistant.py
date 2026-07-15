@@ -6,6 +6,10 @@ searches, escalation routing, and satisfaction surveys.
 
 Where a real deployment would connect to CRM, knowledge base, and ticketing
 systems, this agent uses a synthetic data layer so it runs anywhere without credentials.
+
+Version 1.1.0 adds deterministic customer-escalation briefing, action planning,
+customer-update drafting, and portfolio reporting. Existing operations and
+agent identities remain unchanged.
 """
 
 import sys, os
@@ -20,11 +24,11 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ai_customer_assistant",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "AI Customer Assistant",
     "description": "AI-powered customer service assistant for inquiries, knowledge search, escalation routing, and satisfaction surveys.",
     "author": "AIBAST",
-    "tags": ["customer-service", "support", "knowledge-base", "escalation", "satisfaction"],
+    "tags": ["customer-service", "support", "knowledge-base", "escalation", "satisfaction", "case-management", "action-plan"],
     "category": "general",
     "quality_tier": "community",
     "requires_env": [],
@@ -163,6 +167,72 @@ _SATISFACTION_DATA = {
     "trend": {"week_over_week": "+0.2", "month_over_month": "+0.1"},
 }
 
+_ESCALATION_CONTEXT = {
+    "INQ-4001": {
+        "issue": "Recurring monthly-report export failures",
+        "interaction_history": "3 contacts in 14 days; workaround attempted twice",
+        "detected_intents": ["report failure", "executive deadline", "service credit"],
+        "risk_score": 82,
+        "case_owner": "Priya Shah",
+        "escalation_reason": "Recurring report-export failures are blocking the monthly executive review.",
+        "business_impact": "Finance and operations cannot distribute the November usage report.",
+        "customer_commitment": "Provide a workaround now and confirm the permanent-fix date.",
+        "root_cause": "Large report exports exceed the synchronous processing timeout.",
+        "engineering_work_item": "BUG-382",
+        "policy_result": "Enterprise support policy permits a managed bulk export.",
+        "similar_cases": 7,
+        "retention_gesture": "One month of Analytics Pro service credit",
+        "next_update": "2025-11-14T13:00:00Z",
+        "actions": [
+            ("Send the 30-day segmented-export workaround", "Priya Shah", "2025-11-14T10:30:00Z"),
+            ("Run a one-time bulk export for Acme Corp", "Data Operations", "2025-11-14T12:00:00Z"),
+            ("Confirm v3.8.2 release timing", "Engineering", "2025-11-14T12:30:00Z"),
+        ],
+    },
+    "INQ-4002": {
+        "issue": "Disputed charges for 15 user seats that were not activated",
+        "interaction_history": "2 unresolved billing contacts in 9 days",
+        "detected_intents": ["billing dispute", "refund request", "renewal risk"],
+        "risk_score": 91,
+        "case_owner": "Elena Garcia",
+        "escalation_reason": "A billing dispute has remained unresolved through two prior contacts.",
+        "business_impact": "The customer has paused its expansion and signaled renewal risk.",
+        "customer_commitment": "Reverse the ineligible charge, apply a retention credit, and confirm corrected billing.",
+        "root_cause": "A seat-expansion order posted before the activation workflow completed.",
+        "engineering_work_item": "BILL-214",
+        "policy_result": "Billing policy permits a refund for unactivated seats and a manager-approved 10% retention credit.",
+        "similar_cases": 12,
+        "retention_gesture": "10% service credit on the next invoice",
+        "next_update": "2025-11-14T12:00:00Z",
+        "actions": [
+            ("Verify activation and invoice history", "Elena Garcia", "2025-11-14T10:30:00Z"),
+            ("Prepare refund and retention credit", "Billing Operations", "2025-11-14T11:00:00Z"),
+            ("Send confirmation and update the customer profile", "Elena Garcia", "2025-11-14T12:00:00Z"),
+        ],
+    },
+    "INQ-4003": {
+        "issue": "Enterprise-wide SSO failure after identity-provider migration",
+        "interaction_history": "1 critical contact; prior migration advisory completed",
+        "detected_intents": ["access outage", "identity migration", "executive escalation"],
+        "risk_score": 96,
+        "case_owner": "Marcus Lee",
+        "escalation_reason": "Enterprise-wide SSO failure following an identity-provider migration.",
+        "business_impact": "Employees cannot access production applications.",
+        "customer_commitment": "Restore access or establish a safe temporary sign-in path within two hours.",
+        "root_cause": "The migrated identity provider is sending an audience value that does not match the service-provider configuration.",
+        "engineering_work_item": "INC-907",
+        "policy_result": "Critical-incident policy permits a time-boxed break-glass sign-in path.",
+        "similar_cases": 4,
+        "retention_gesture": "Executive incident review and premium support extension",
+        "next_update": "2025-11-14T10:00:00Z",
+        "actions": [
+            ("Validate SAML audience and ACS values with the customer", "Marcus Lee", "2025-11-14T09:00:00Z"),
+            ("Enable a time-boxed break-glass sign-in policy", "Identity Operations", "2025-11-14T09:20:00Z"),
+            ("Verify sign-in telemetry after configuration repair", "Tier 2 Engineering", "2025-11-14T09:45:00Z"),
+        ],
+    },
+}
+
 
 # ═══════════════════════════════════════════════════════════════
 # HELPERS
@@ -172,10 +242,7 @@ def _resolve_inquiry(query):
     if not query:
         return "INQ-4001"
     q = query.upper().strip()
-    for key in _INQUIRIES:
-        if key in q:
-            return key
-    return "INQ-4001"
+    return q if q in _INQUIRIES else None
 
 
 def _match_kb_articles(inquiry_id):
@@ -205,6 +272,13 @@ def _compute_csat_breakdown():
     return dist, promoters, detractors, total
 
 
+def _resolve_escalation(query):
+    if not query:
+        return "INQ-4002"
+    resolved = _resolve_inquiry(query)
+    return resolved if resolved in _ESCALATION_CONTEXT else None
+
+
 # ═══════════════════════════════════════════════════════════════
 # AGENT CLASS
 # ═══════════════════════════════════════════════════════════════
@@ -218,6 +292,13 @@ class AICustomerAssistantAgent(BasicAgent):
         knowledge_search     - search knowledge base for relevant articles
         escalation_routing   - determine escalation path and SLA
         satisfaction_survey   - review CSAT scores and survey feedback
+        escalation_brief      - consolidate an escalated case and its evidence
+        escalation_action_plan - produce owned, time-bound resolution actions
+        draft_customer_update - preview a grounded customer status update
+        escalation_dashboard  - summarize the active escalation portfolio
+        resolution_recommendation - recommend policy-aligned resolution actions
+        process_resolution     - simulate approved refund and credit actions
+        document_resolution    - simulate case closeout and profile update
     """
 
     def __init__(self):
@@ -233,6 +314,10 @@ class AICustomerAssistantAgent(BasicAgent):
                         "enum": [
                             "handle_inquiry", "knowledge_search",
                             "escalation_routing", "satisfaction_survey",
+                            "escalation_brief", "escalation_action_plan",
+                            "draft_customer_update", "escalation_dashboard",
+                            "resolution_recommendation", "process_resolution",
+                            "document_resolution",
                         ],
                         "description": "The customer service operation to perform",
                     },
@@ -249,15 +334,41 @@ class AICustomerAssistantAgent(BasicAgent):
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "handle_inquiry")
         inq_id = _resolve_inquiry(kwargs.get("inquiry_id", ""))
+        escalation_id = _resolve_escalation(kwargs.get("inquiry_id", ""))
         dispatch = {
             "handle_inquiry": self._handle_inquiry,
             "knowledge_search": self._knowledge_search,
             "escalation_routing": self._escalation_routing,
             "satisfaction_survey": self._satisfaction_survey,
+            "escalation_brief": self._escalation_brief,
+            "escalation_action_plan": self._escalation_action_plan,
+            "draft_customer_update": self._draft_customer_update,
+            "escalation_dashboard": self._escalation_dashboard,
+            "resolution_recommendation": self._resolution_recommendation,
+            "process_resolution": self._process_resolution,
+            "document_resolution": self._document_resolution,
         }
         handler = dispatch.get(op)
         if not handler:
             return f"Unknown operation: {op}"
+        if op in {
+            "escalation_brief", "escalation_action_plan",
+            "escalation_dashboard", "draft_customer_update",
+            "resolution_recommendation", "process_resolution",
+            "document_resolution",
+        }:
+            if escalation_id is None:
+                return (
+                    f"**Error:** Unknown or ineligible escalation inquiry_id "
+                    f"`{kwargs.get('inquiry_id')}`. Available escalation IDs: "
+                    f"{', '.join(sorted(_ESCALATION_CONTEXT))}."
+                )
+            return handler(escalation_id)
+        if inq_id is None:
+            return (
+                f"**Error:** Unknown inquiry_id `{kwargs.get('inquiry_id')}`. "
+                f"Available inquiry IDs: {', '.join(sorted(_INQUIRIES))}."
+            )
         return handler(inq_id)
 
     # ── handle_inquiry ─────────────────────────────────────────
@@ -359,10 +470,150 @@ class AICustomerAssistantAgent(BasicAgent):
             f"Source: [Survey Platform + CRM Analytics]\nAgents: AICustomerAssistantAgent"
         )
 
+    def _escalation_brief(self, inq_id):
+        inq = _INQUIRIES[inq_id]
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        kb = _match_kb_articles(inq_id)[0]
+        routing = _get_routing(inq["category"], inq["priority"])
+        return (
+            f"**Customer Escalation Brief: {inq_id}**\n\n"
+            f"| Field | Detail |\n|---|---|\n"
+            f"| Customer | {inq['customer']} ({inq['account_tier']}) |\n"
+            f"| Contact | {inq['contact']} via {inq['channel']} |\n"
+            f"| Status | {inq['status']} / {inq['priority']} / {inq['sentiment']} |\n"
+            f"| Escalation Owner | {ctx['case_owner']} |\n"
+            f"| Assigned Team | {routing['team']} |\n"
+            f"| SLA | {routing['sla_hours']} hours |\n"
+            f"| Engineering Work Item | {ctx['engineering_work_item']} |\n"
+            f"| Interaction History | {ctx['interaction_history']} |\n"
+            f"| Detected Intents | {', '.join(ctx['detected_intents'])} |\n"
+            f"| Escalation Risk | {ctx['risk_score']}/100 |\n"
+            f"| Similar Cases | {ctx['similar_cases']} |\n"
+            f"| Next Customer Update | {ctx['next_update']} |\n\n"
+            f"**Escalation Reason:** {ctx['escalation_reason']}\n\n"
+            f"**Business Impact:** {ctx['business_impact']}\n\n"
+            f"**Root Cause:** {ctx['root_cause']}\n\n"
+            f"**Intent Analysis:** {len(ctx['detected_intents'])} issues detected; "
+            f"{inq['sentiment'].lower()} sentiment and {inq['priority'].lower()} urgency.\n\n"
+            f"**Policy / Eligibility:** {ctx['policy_result']}\n\n"
+            f"**Customer Commitment:** {ctx['customer_commitment']}\n\n"
+            f"**Supporting Knowledge:** [{kb['id']}] {kb['title']}\n\n"
+            f"Source: [Dynamics 365 Customer Service + Knowledge Base + Engineering Work Tracking]\n"
+            f"Agents: AICustomerAssistantAgent"
+        )
+
+    def _escalation_action_plan(self, inq_id):
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        rows = "\n".join(
+            f"| {index} | {action} | {owner} | {due} | Planned |"
+            for index, (action, owner, due) in enumerate(ctx["actions"], 1)
+        )
+        return (
+            f"**Escalation Action Plan: {inq_id}**\n\n"
+            f"| # | Action | Owner | Due (UTC) | Status |\n|---|---|---|---|---|\n"
+            f"{rows}\n\n"
+            f"**Next customer update:** {ctx['next_update']}\n"
+            f"**Commitment:** {ctx['customer_commitment']}\n\n"
+            f"This is a deterministic offline plan; no CRM, Teams, or engineering records were changed.\n\n"
+            f"Source: [Dynamics 365 Customer Service + Microsoft Teams + Engineering Work Tracking]\n"
+            f"Agents: AICustomerAssistantAgent"
+        )
+
+    def _draft_customer_update(self, inq_id):
+        inq = _INQUIRIES[inq_id]
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        first_action = ctx["actions"][0][0]
+        return (
+            f"**Customer Update Draft: {inq_id}**\n\n"
+            f"To: {inq['contact']} <{inq['email']}>\n"
+            f"Subject: Update on {ctx['issue']}\n\n"
+            f"Hello {inq['contact'].split()[0]},\n\n"
+            f"I am {ctx['case_owner']}, and I am coordinating your escalation. "
+            f"We understand the impact: {ctx['business_impact']} "
+            f"Our current finding is that {ctx['root_cause'].lower()} "
+            f"Our immediate next step is to {first_action.lower()} "
+            f"We will provide the next update by {ctx['next_update']}.\n\n"
+            f"Regards,\n{ctx['case_owner']}\n\n"
+            f"**Preview only:** this operation does not send email or update the case.\n\n"
+            f"Source: [Dynamics 365 Customer Service + Outlook]\nAgents: AICustomerAssistantAgent"
+        )
+
+    def _escalation_dashboard(self, inq_id):
+        rows = []
+        for case_id, ctx in sorted(_ESCALATION_CONTEXT.items()):
+            inq = _INQUIRIES[case_id]
+            routing = _get_routing(inq["category"], inq["priority"])
+            rows.append(
+                f"| {case_id} | {inq['customer']} | {inq['priority']} | {inq['sentiment']} "
+                f"| {ctx['case_owner']} | {routing['team']} | {routing['sla_hours']}h "
+                f"| {ctx['next_update']} |"
+            )
+        return (
+            f"**Active Customer Escalations**\n\n"
+            f"| Case | Customer | Priority | Sentiment | Owner | Team | SLA | Next Update |\n"
+            f"|---|---|---|---|---|---|---|---|\n"
+            f"{chr(10).join(rows)}\n\n"
+            f"Active escalations: {len(rows)} | Critical: "
+            f"{sum(_INQUIRIES[key]['priority'] == 'Critical' for key in _ESCALATION_CONTEXT)}\n\n"
+            f"Source: [Dynamics 365 Customer Service + SLA Configuration]\n"
+            f"Agents: AICustomerAssistantAgent"
+        )
+
+    def _resolution_recommendation(self, inq_id):
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        return (
+            f"**Resolution Recommendation: {inq_id}**\n\n"
+            f"1. Resolve the root cause: {ctx['root_cause']}\n"
+            f"2. Apply the eligible remedy: {ctx['policy_result']}\n"
+            f"3. Offer the retention gesture: {ctx['retention_gesture']}.\n"
+            f"4. Use the prepared talking points to acknowledge impact and confirm ownership.\n"
+            f"5. Complete the follow-up actions by {ctx['next_update']}.\n\n"
+            f"**Comparable evidence:** {ctx['similar_cases']} similar resolved cases support this playbook.\n\n"
+            f"Source: [SharePoint Playbooks + Dynamics 365 Case History + Billing Policy]\n"
+            f"Agents: AICustomerAssistantAgent"
+        )
+
+    def _process_resolution(self, inq_id):
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        if inq_id == "INQ-4002":
+            action = "Refund $1,875 for unactivated seats and apply a 10% next-invoice credit"
+        else:
+            action = f"Apply authorized remedy: {ctx['retention_gesture']}"
+        return (
+            f"**Simulated Resolution Receipt: {inq_id}**\n\n"
+            f"- Action: {action}\n"
+            f"- Policy check: Eligible\n"
+            f"- Approval: Escalation manager approval assumed for preview\n"
+            f"- Dynamics 365 status: Not written\n"
+            f"- Billing status: Not written\n\n"
+            f"Dry-run only; no refund, credit, or external mutation occurred.\n\n"
+            f"Source: [Dynamics 365 CRM + Billing]\nAgents: AICustomerAssistantAgent"
+        )
+
+    def _document_resolution(self, inq_id):
+        ctx = _ESCALATION_CONTEXT[inq_id]
+        return (
+            f"**Resolution Documentation Preview: {inq_id}**\n\n"
+            f"- Root cause: {ctx['root_cause']}\n"
+            f"- Resolution: {ctx['customer_commitment']}\n"
+            f"- Similar-case link count: {ctx['similar_cases']}\n"
+            f"- Product feedback: Prepared from recurring-case pattern\n"
+            f"- Customer profile update: Prepared\n"
+            f"- Outlook confirmation: Prepared for approval\n\n"
+            f"No case, customer profile, product issue, or email was changed.\n\n"
+            f"Source: [Dynamics 365 CRM + SharePoint + Outlook]\nAgents: AICustomerAssistantAgent"
+        )
+
 
 if __name__ == "__main__":
     agent = AICustomerAssistantAgent()
-    for op in ["handle_inquiry", "knowledge_search", "escalation_routing", "satisfaction_survey"]:
+    for op in [
+        "handle_inquiry", "knowledge_search", "escalation_routing",
+        "satisfaction_survey", "escalation_brief", "escalation_action_plan",
+        "draft_customer_update", "escalation_dashboard",
+        "resolution_recommendation", "process_resolution",
+        "document_resolution",
+    ]:
         print("=" * 60)
         print(agent.perform(operation=op, inquiry_id="INQ-4001"))
         print()

@@ -3,6 +3,12 @@ Underwriting Support Agent — Financial Services Stack
 
 Supports insurance underwriting with risk evaluation, pricing
 recommendations, guideline checks, and exception reviews.
+
+v1.1.0 adds evidence-grounded commercial underwriting capabilities derived
+from the commercial-underwriting spec: submission intake, risk assessment,
+pricing guidance, coverage structuring, authority/compliance validation, and
+audit-ready underwriting summary compilation. These are additive, backward
+compatible operations; every legacy operation is preserved unchanged.
 """
 
 import sys
@@ -14,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/underwriting_support",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Underwriting Support Agent",
     "description": "Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.",
     "author": "AIBAST",
@@ -135,6 +141,146 @@ PRICING_MODELS = {
     "general_liability": {"base_rate_per_1000_revenue": 2.15, "industry_factor": {"restaurant_chain": 1.35, "office": 0.70, "retail": 1.10, "construction": 1.80}},
 }
 
+# ---------------------------------------------------------------------------
+# Commercial underwriting capabilities (spec: commercial-underwriting)
+#
+# Added in v1.1.0. Each capability is a backward-compatible operation with an
+# embedded response, grounded knowledge, exactly three synthetic records, a
+# key field, and write/generative flags. Operations accept an optional
+# `user_input`: an exact keyed lookup returns the matching full record; write
+# operations return an explicit simulated receipt and perform no external
+# mutation; missing/unmatched input returns a useful summary.
+# ---------------------------------------------------------------------------
+
+UNDERWRITING_CAPABILITIES = {
+    "submission_intake": {
+        "display_name": "Submission Intake and Validation",
+        "description": "Reviews a new commercial submission, surfaces the applicant profile and industry context, and flags missing information before underwriting begins.",
+        "response": "Here is the submission intake review with applicant profile, industry context, and any missing information flagged for attention.",
+        "source_system": "Dynamics 365 CRM",
+        "customer": "Summit Mutual Insurance",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "submission_id",
+        "knowledge": [
+            "Applications previously required hours of manual review before an underwriter could act.",
+            "The agent summarizes key submission data and validates missing information.",
+            "It surfaces the applicant profile and industry context and flags missing information and risk factors so the underwriter knows exactly what needs attention.",
+        ],
+        "records": [
+            {"submission_id": "SUB4412", "applicant": "Ironvale Logistics", "industry": "Freight and Trucking", "missing_item": "3-year loss runs", "status": "Intake review"},
+            {"submission_id": "SUB4527", "applicant": "Cedarwood Foods Co", "industry": "Food Manufacturing", "missing_item": "Sprinkler certificate", "status": "Awaiting documents"},
+            {"submission_id": "SUB4630", "applicant": "Northgate Robotics", "industry": "Industrial Automation", "missing_item": "None", "status": "Ready for review"},
+        ],
+    },
+    "risk_assessment": {
+        "display_name": "Risk Assessment and Scoring",
+        "description": "Breaks a submission into clear risk dimensions such as financial strength, historical loss patterns, and operational factors, summarizing key strengths and concerns in a decision-ready view.",
+        "response": "Here is the risk assessment broken into dimensions with scores, strengths, and concerns summarized for a decision-ready view.",
+        "source_system": "Dynamics 365 Finance",
+        "customer": "Summit Mutual Insurance",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "risk_id",
+        "knowledge": [
+            "Underwriters previously identified risk factors inconsistently across submissions.",
+            "The agent scores risk across hazard, financial stability, loss experience, and operations.",
+            "It breaks the submission into clear risk dimensions like financial strength, historical loss patterns, and operational factors, summarizing key strengths and concerns in a concise, decision-ready view.",
+        ],
+        "records": [
+            {"risk_id": "RSK7701", "applicant": "Ironvale Logistics", "dimension": "Financial strength", "score": "Moderate", "concern": "Thin operating margins"},
+            {"risk_id": "RSK7802", "applicant": "Cedarwood Foods Co", "dimension": "Loss history", "score": "Elevated", "concern": "Two prior fire claims"},
+            {"risk_id": "RSK7903", "applicant": "Northgate Robotics", "dimension": "Operations", "score": "Low", "concern": "Strong safety controls"},
+        ],
+    },
+    "pricing_guidance": {
+        "display_name": "Pricing Guidance",
+        "description": "Provides scenario-based pricing guidance informed by risk characteristics and market context, applying standard rating adjustments to give the underwriter a strong starting point.",
+        "response": "Here is scenario-based pricing guidance with recommended ranges and standard rating adjustments informed by risk and market context.",
+        "source_system": "Dynamics 365 Finance",
+        "customer": "Summit Mutual Insurance",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "pricing_id",
+        "knowledge": [
+            "Pricing previously varied due to inconsistently applied rate adjustments.",
+            "The agent recommends pricing ranges and applies standard adjustments through standardized rating factors.",
+            "It provides scenario-based pricing guidance informed by risk characteristics and market context, giving the underwriter a strong starting point from which to make a professional judgement.",
+        ],
+        "records": [
+            {"pricing_id": "PRC3310", "applicant": "Ironvale Logistics", "base_rate": "1.20", "adjustment": "+5% fleet age", "range": "42k-48k"},
+            {"pricing_id": "PRC3420", "applicant": "Cedarwood Foods Co", "base_rate": "0.95", "adjustment": "+8% loss load", "range": "58k-66k"},
+            {"pricing_id": "PRC3530", "applicant": "Northgate Robotics", "base_rate": "0.80", "adjustment": "-3% safety credit", "range": "31k-35k"},
+        ],
+    },
+    "coverage_structuring": {
+        "display_name": "Coverage Structuring",
+        "description": "Proposes limits, deductibles, and endorsements aligned to the risk profile, identifying coverage needs and limitations so the underwriter can review and adjust before binding.",
+        "response": "Here is a proposed coverage structure with limits, deductibles, and endorsements aligned to the risk profile for your review and adjustment.",
+        "source_system": "Dynamics 365 CRM",
+        "customer": "Summit Mutual Insurance",
+        "write": False,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "coverage_id",
+        "knowledge": [
+            "Coverage recommendations previously required time-consuming guideline checks.",
+            "The agent identifies coverage needs, limitations, and compliance considerations.",
+            "When a coverage structure is needed, the agent proposes limits, deductibles, and endorsements aligned to the risk profile, which the underwriter can review, adjust, and collaborate on through Microsoft Teams before binding.",
+        ],
+        "records": [
+            {"coverage_id": "COV5501", "applicant": "Ironvale Logistics", "limit": "2M/4M", "deductible": "25k", "endorsement": "Motor truck cargo"},
+            {"coverage_id": "COV5602", "applicant": "Cedarwood Foods Co", "limit": "1M/2M", "deductible": "10k", "endorsement": "Spoilage coverage"},
+            {"coverage_id": "COV5703", "applicant": "Northgate Robotics", "limit": "5M/5M", "deductible": "50k", "endorsement": "Product recall"},
+        ],
+    },
+    "compliance_authority": {
+        "display_name": "Authority and Compliance Validation",
+        "description": "Validates authority thresholds and procedural requirements against guideline alignment, confirming whether a submission is ready to proceed or needs escalation.",
+        "response": "Here is the authority and compliance check with threshold results and the disposition for whether to proceed or escalate.",
+        "source_system": "Dynamics 365 Finance",
+        "customer": "Summit Mutual Insurance",
+        "write": False,
+        "generative": False,
+        "exact_key_required": True,
+        "key_field": "authority_id",
+        "knowledge": [
+            "The agent strengthens compliance by checking authority limits and guideline alignment.",
+            "It validates authority thresholds and procedural requirements, confirming whether the submission is ready to proceed or needs escalation.",
+            "This validation is critical for avoiding last minute delays.",
+        ],
+        "records": [
+            {"authority_id": "AUT9001", "applicant": "Ironvale Logistics", "limit_check": "Within authority", "requirement": "Signed application", "disposition": "Proceed"},
+            {"authority_id": "AUT9002", "applicant": "Cedarwood Foods Co", "limit_check": "Exceeds authority", "requirement": "Manager sign-off", "disposition": "Escalate"},
+            {"authority_id": "AUT9003", "applicant": "Northgate Robotics", "limit_check": "Within authority", "requirement": "Guideline attestation", "disposition": "Proceed"},
+        ],
+    },
+    "underwriting_summary": {
+        "display_name": "Underwriting Summary Compilation",
+        "description": "Compiles a complete underwriting summary that captures rationale, coverage decisions, and notes in a consistent, audit-ready format.",
+        "response": "Here is a complete underwriting summary capturing rationale, coverage decisions, and notes in a consistent, audit-ready format.",
+        "source_system": "Dynamics 365 Finance",
+        "customer": "Summit Mutual Insurance",
+        "write": True,
+        "generative": True,
+        "exact_key_required": True,
+        "key_field": "summary_id",
+        "knowledge": [
+            "By reducing evaluation time, the agent increases underwriting capacity, freeing time for complex cases.",
+            "The agent compiles a complete underwriting summary that captures rationale, coverage decisions, and notes in a consistent, audit-ready format.",
+            "With the underwriting support agent, teams can accelerate evaluations, improve pricing accuracy, and maintain compliance.",
+        ],
+        "records": [
+            {"summary_id": "SUM2201", "applicant": "Ironvale Logistics", "decision": "Quote issued", "rationale": "Balanced risk priced with fleet load", "format": "Audit-ready"},
+            {"summary_id": "SUM2302", "applicant": "Cedarwood Foods Co", "decision": "Escalated", "rationale": "Loss history above authority", "format": "Audit-ready"},
+            {"summary_id": "SUM2403", "applicant": "Northgate Robotics", "decision": "Quote issued", "rationale": "Low risk with safety credits applied", "format": "Audit-ready"},
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -172,6 +318,111 @@ def _guideline_check(app):
     return violations
 
 
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_key(user_input, key):
+    """Return True only when the complete normalized key is a token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(key)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _match_capability_record(cap, user_input):
+    """Return the uniquely matched record for a complete normalized key."""
+    if not user_input:
+        return None
+    if not str(user_input).strip():
+        return None
+    matches = [
+        record for record in cap["records"]
+        if _contains_normalized_key(user_input, record[cap["key_field"]])
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _format_field(name):
+    """Human-friendly label for a record field name."""
+    return name.replace("_", " ").title()
+
+
+def _render_capability_record(cap, record):
+    """Render a single matched record as a full, decision-ready view."""
+    key_field = cap["key_field"]
+    lines = [f"# {cap['display_name']}: {record[key_field]}\n"]
+    lines.append(cap["response"] + "\n")
+    lines.append("## Record Detail\n")
+    lines.append("| Field | Value |")
+    lines.append("|---|---|")
+    for field, value in record.items():
+        lines.append(f"| {_format_field(field)} | {value} |")
+    if cap["generative"]:
+        applicant = record.get("applicant", record[key_field])
+        lines.append("\n## Analysis\n")
+        lines.append(
+            f"Generated view for **{applicant}**: "
+            + "; ".join(f"{_format_field(f)} = {v}" for f, v in record.items() if f != key_field)
+            + "."
+        )
+    else:
+        lines.append("\n## Validation Result\n")
+        lines.append("Deterministic check — values reported exactly as recorded, no generative synthesis.")
+    lines.append(f"\n_Source system: {cap['source_system']} · Customer: {cap['customer']}_")
+    return "\n".join(lines)
+
+
+def _render_write_receipt(cap, record, user_input):
+    """Render an explicit simulated write receipt. No external mutation occurs."""
+    key_field = cap["key_field"]
+    lines = [f"# {cap['display_name']} — Simulated Write Receipt\n"]
+    lines.append(cap["response"] + "\n")
+    lines.append("> **Simulation only.** No external system was modified; this is a synthetic, in-memory receipt.\n")
+    lines.append("## Receipt\n")
+    lines.append("| Field | Value |")
+    lines.append("|---|---|")
+    lines.append(f"| Action | compile_and_record |")
+    lines.append(f"| Status | simulated_committed |")
+    lines.append(f"| Target System | {cap['source_system']} (not contacted) |")
+    for field, value in record.items():
+        lines.append(f"| {_format_field(field)} | {value} |")
+    lines.append(f"\n_Customer: {cap['customer']} · External mutation performed: none_")
+    return "\n".join(lines)
+
+
+def _render_capability_summary(cap):
+    """Render a useful summary of all records when no exact key is supplied."""
+    key_field = cap["key_field"]
+    lines = [f"# {cap['display_name']}\n"]
+    lines.append(cap["response"] + "\n")
+    lines.append(
+        f"Provide a `user_input` containing a `{key_field}` value "
+        f"(e.g. `{cap['records'][0][key_field]}`) for the full matching record. "
+        "Showing all records:\n"
+    )
+    headers = list(cap["records"][0].keys())
+    lines.append("| " + " | ".join(_format_field(h) for h in headers) + " |")
+    lines.append("|" + "---|" * len(headers))
+    for record in cap["records"]:
+        lines.append("| " + " | ".join(str(record[h]) for h in headers) + " |")
+    lines.append("\n## Knowledge\n")
+    for item in cap["knowledge"]:
+        lines.append(f"- {item}")
+    flags = f"write={cap['write']} · generative={cap['generative']} · exact_key_required={cap['exact_key_required']}"
+    lines.append(f"\n_Source system: {cap['source_system']} · Customer: {cap['customer']} · {flags}_")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -180,7 +431,7 @@ class UnderwritingSupportAgent(BasicAgent):
     """Insurance underwriting support agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/underwriting-support"
+        self.name = "UnderwritingSupportAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Underwriting Support Agent",
@@ -195,9 +446,16 @@ class UnderwritingSupportAgent(BasicAgent):
                             "pricing_recommendation",
                             "guideline_check",
                             "exception_review",
+                            "submission_intake",
+                            "risk_assessment",
+                            "pricing_guidance",
+                            "coverage_structuring",
+                            "compliance_authority",
+                            "underwriting_summary",
                         ],
                     },
                     "application_id": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -213,9 +471,28 @@ class UnderwritingSupportAgent(BasicAgent):
             "exception_review": self._exception_review,
         }
         handler = dispatch.get(operation)
-        if not handler:
-            return f"**Error:** Unknown operation `{operation}`."
-        return handler(**kwargs)
+        if handler:
+            return handler(**kwargs)
+        if operation in UNDERWRITING_CAPABILITIES:
+            return self._run_capability(**kwargs)
+        return f"**Error:** Unknown operation `{operation}`."
+
+    def _run_capability(self, **kwargs) -> str:
+        """Data-driven handler for spec-derived commercial underwriting capabilities."""
+        operation = kwargs.get("operation")
+        cap = UNDERWRITING_CAPABILITIES[operation]
+        user_input = kwargs.get("user_input")
+        record = _match_capability_record(cap, user_input)
+        if record is None:
+            if str(user_input or "").strip():
+                return (
+                    f"# {cap['display_name']}\n\n"
+                    f"No exact normalized `{cap['key_field']}` matched the request."
+                )
+            return _render_capability_summary(cap)
+        if cap["write"]:
+            return _render_write_receipt(cap, record, user_input)
+        return _render_capability_record(cap, record)
 
     def _risk_evaluation(self, **kwargs) -> str:
         lines = ["# Underwriting Risk Evaluation\n"]
@@ -326,3 +603,11 @@ if __name__ == "__main__":
     print(agent.perform(operation="guideline_check"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="exception_review"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="submission_intake", user_input="Review commercial submission SUB4412"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="compliance_authority", user_input="Check authority AUT9002"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="underwriting_summary", user_input="Compile the underwriting summary SUM2201"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="pricing_guidance"))

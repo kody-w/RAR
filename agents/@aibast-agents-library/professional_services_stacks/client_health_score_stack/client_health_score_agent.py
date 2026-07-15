@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/client_health_score",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Client Health Score Agent",
     "description": "Computes client health scores from NPS, margins, utilization, and escalation data to identify at-risk accounts and drive retention strategies.",
     "author": "AIBAST",
@@ -138,6 +138,55 @@ CLIENTS = {
     },
 }
 
+EVIDENCE_CAPABILITIES = {
+    "retention_roadmap": {
+        "title": "30-Day Retention Roadmap",
+        "write": False,
+        "records": [
+            {
+                "record_id": "CHS-401",
+                "client": "TechCorp Industries",
+                "risk_factors": "negative NPS, four escalations, no executive meeting",
+                "quick_win": "resolve the two oldest escalations within 72 hours",
+                "stakeholder_map": "client COO accountable; delivery VP owner; executive sponsor consulted",
+                "stakeholder_touchpoint": "executive sponsor value review on day 7",
+                "day_30_outcome": "approved recovery plan and weekly health-score review",
+            },
+            {
+                "record_id": "CHS-402",
+                "client": "Global Finance Corp",
+                "risk_factors": "negative NPS and 45% utilization",
+                "quick_win": "complete a scope-to-value workshop within five days",
+                "stakeholder_map": "client CFO accountable; account director owner; adoption lead consulted",
+                "stakeholder_touchpoint": "account sponsor checkpoint on day 10",
+                "day_30_outcome": "adoption plan with measurable utilization targets",
+            },
+        ],
+    },
+    "stakeholder_outreach": {
+        "title": "Stakeholder Outreach and Meeting Preparation",
+        "write": True,
+        "records": [
+            {
+                "record_id": "CHS-OUT-401",
+                "client": "TechCorp Industries",
+                "outreach": "executive sponsor email with recovery-plan summary",
+                "meeting_material": "health trend, risk drivers, ROI recap, and decision log",
+                "schedule": "2026-03-24 10:00",
+                "channels": "Outlook and Microsoft Teams",
+            },
+            {
+                "record_id": "CHS-OUT-402",
+                "client": "Global Finance Corp",
+                "outreach": "account sponsor invitation to scope-to-value workshop",
+                "meeting_material": "utilization gap, adoption milestones, and owners",
+                "schedule": "2026-03-26 14:00",
+                "channels": "Outlook and Microsoft Teams",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -185,6 +234,44 @@ def _churn_probability(client):
     return 0.03
 
 
+def _evidence_matches(user_input, records):
+    """Match explicit record IDs without substituting a different client."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _render_evidence_operation(capability, user_input=""):
+    """Render deterministic evidence data and simulated write receipts."""
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = spec["records"]
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute client was used.")
+    else:
+        lines.append("Deterministic evidence-backed records:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        target = matches[0]["record_id"] if matches else "NO-MATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-{capability.upper()}-{target}",
+            "- status: simulated",
+            "- target_systems: Outlook and Microsoft Teams",
+            "- No external system changed; outreach, materials, and meetings are preview-only.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -202,6 +289,8 @@ class ClientHealthScoreAgent(BasicAgent):
                 "engagement_analysis",
                 "satisfaction_trend",
                 "at_risk_clients",
+                "retention_roadmap",
+                "stakeholder_outreach",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -213,6 +302,8 @@ class ClientHealthScoreAgent(BasicAgent):
             "engagement_analysis": self._engagement_analysis,
             "satisfaction_trend": self._satisfaction_trend,
             "at_risk_clients": self._at_risk_clients,
+            "retention_roadmap": self._retention_roadmap,
+            "stakeholder_outreach": self._stakeholder_outreach,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -327,6 +418,18 @@ class ClientHealthScoreAgent(BasicAgent):
             lines.append(f"- Prepare value-delivered summary (ROI documentation)")
             lines.append("")
         return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _retention_roadmap(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "retention_roadmap", kwargs.get("user_input", "")
+        )
+
+    # ------------------------------------------------------------------
+    def _stakeholder_outreach(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "stakeholder_outreach", kwargs.get("user_input", "")
+        )
 
 
 # ---------------------------------------------------------------------------

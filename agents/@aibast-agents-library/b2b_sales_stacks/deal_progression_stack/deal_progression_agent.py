@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_progression",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Deal Progression",
     "description": "Pipeline health analysis, stalled-deal detection, action plan generation, and pipeline acceleration.",
     "author": "AIBAST",
@@ -117,6 +117,8 @@ _PIPELINE = [
     # ── Closed Lost (1) — for context ──────────────────────────
     {"id": "OPP-047", "name": "Omega Systems",           "account": "Omega Systems Inc.",      "value": 430_000, "stage": "Closed Lost",  "days_in_stage": 0,  "owner": "James Park",   "last_contact_days": 0,  "champion_name": "VP IT - Chris Taylor",         "champion_status": "Lost",             "blocker": "competitor_won"},
 ]
+
+_DEALS_BY_ID = {deal["id"]: deal for deal in _PIPELINE}
 
 # Blocker-to-action mapping for action plan generation
 _BLOCKER_PLAYBOOK = {
@@ -317,6 +319,7 @@ class DealProgressionAgent(BasicAgent):
         acceleration       - deals that can be pulled forward with targeted actions
         assign_tasks       - assign tasks to reps based on capacity
         executive_summary  - session summary with all findings and actions
+        activate_action_plan - update one exact deal and notify its owner
     """
 
     def __init__(self):
@@ -333,8 +336,13 @@ class DealProgressionAgent(BasicAgent):
                             "pipeline_health", "stalled_deals",
                             "action_plans", "acceleration",
                             "assign_tasks", "executive_summary",
+                            "activate_action_plan",
                         ],
                         "description": "The analysis to perform",
+                    },
+                    "opportunity_id": {
+                        "type": "string",
+                        "description": "Exact opportunity ID for activate_action_plan (e.g. 'OPP-002')",
                     },
                 },
                 "required": ["operation"],
@@ -344,6 +352,8 @@ class DealProgressionAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "pipeline_health")
+        if op == "activate_action_plan":
+            return self._activate_action_plan(kwargs.get("opportunity_id"))
         dispatch = {
             "pipeline_health": self._pipeline_health,
             "stalled_deals": self._stalled_deals,
@@ -356,6 +366,35 @@ class DealProgressionAgent(BasicAgent):
         if not handler:
             return json.dumps({"status": "error", "message": f"Unknown operation: {op}"})
         return handler()
+
+    def _activate_action_plan(self, opportunity_id):
+        deal = _DEALS_BY_ID.get(opportunity_id)
+        if deal is None:
+            return json.dumps({
+                "status": "error",
+                "message": f"Unknown opportunity_id: {opportunity_id!r}",
+                "valid_opportunity_ids": ", ".join(sorted(_DEALS_BY_ID)),
+            })
+        playbook = _BLOCKER_PLAYBOOK.get(deal["blocker"])
+        if playbook is None:
+            tasks = ["Confirm next milestone with the buyer", "Update forecast and follow-up date"]
+            diagnosis = "No active blocker; maintain momentum"
+        else:
+            tasks = playbook["week1"] + playbook["week2"]
+            diagnosis = playbook["diagnosis"]
+        receipt = {
+            "status": "simulated",
+            "opportunity_id": opportunity_id,
+            "account": deal["account"],
+            "owner": deal["owner"],
+            "diagnosis": diagnosis,
+            "tasks_created": len(tasks),
+            "first_task": tasks[0],
+            "deadline": "10 days",
+            "crm_update_id": f"sim-d365-plan-{opportunity_id.lower()}",
+            "teams_message_id": f"sim-teams-owner-{opportunity_id.lower()}",
+        }
+        return "**Deal Action Plan Activation Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
     # ── pipeline_health ───────────────────────────────────────
     def _pipeline_health(self):

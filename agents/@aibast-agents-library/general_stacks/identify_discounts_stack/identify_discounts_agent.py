@@ -6,6 +6,10 @@ savings, and manages approval workflows for discount programs.
 
 Where a real deployment would connect to pricing engines and CRM, this
 agent uses a synthetic data layer so it runs anywhere without credentials.
+
+Version 1.1.0 adds evidence-backed procurement discount prioritization,
+purchase-order drafting, bulk strategy, execution planning, and simulated
+Teams tracking. Existing sales-discount operations remain unchanged.
 """
 
 import sys, os
@@ -19,7 +23,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/identify_discounts",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Identify Discounts",
     "description": "Discount identification with eligibility checks, savings calculations, and approval workflow management.",
     "author": "AIBAST",
@@ -84,6 +88,12 @@ _SAMPLE_DEAL = {
     "tenure_years": 0, "health_score": 0, "is_edu": False, "is_npo": False,
 }
 
+_PLANNED_PURCHASES = [
+    {"category": "Medical supplies", "vendor": "MedSource", "amount": 180000, "discount_pct": 12, "expires": "2025-12-15", "timing": "Buy by 2025-12-10"},
+    {"category": "Imaging devices", "vendor": "Diagnostic Systems", "amount": 420000, "discount_pct": 8, "expires": "2025-11-30", "timing": "Act this week"},
+    {"category": "Software licenses", "vendor": "CloudWorks", "amount": 96000, "discount_pct": 15, "expires": "2025-12-31", "timing": "Consolidate before renewal"},
+]
+
 
 # ═══════════════════════════════════════════════════════════════
 # HELPERS
@@ -142,6 +152,12 @@ class IdentifyDiscountsAgent(BasicAgent):
         eligibility_check  - check eligibility for specific programs
         savings_calculation - calculate total savings
         approval_workflow  - determine approval requirements
+        purchase_savings   - prioritize vendor savings for planned purchases
+        expiring_discounts - explain time-sensitive savings impact
+        draft_purchase_order - prepare a discounted bundled PO
+        bulk_order_strategy - model consolidated volume-tier savings
+        execution_timeline - produce actionable procurement next steps
+        setup_tracking     - simulate Teams tracking and reminders
     """
 
     def __init__(self):
@@ -157,6 +173,9 @@ class IdentifyDiscountsAgent(BasicAgent):
                         "enum": [
                             "discount_scan", "eligibility_check",
                             "savings_calculation", "approval_workflow",
+                            "purchase_savings", "expiring_discounts",
+                            "draft_purchase_order", "bulk_order_strategy",
+                            "execution_timeline", "setup_tracking",
                         ],
                         "description": "The discount operation to perform",
                     },
@@ -173,6 +192,12 @@ class IdentifyDiscountsAgent(BasicAgent):
             "eligibility_check": self._eligibility_check,
             "savings_calculation": self._savings_calculation,
             "approval_workflow": self._approval_workflow,
+            "purchase_savings": self._purchase_savings,
+            "expiring_discounts": self._expiring_discounts,
+            "draft_purchase_order": self._draft_purchase_order,
+            "bulk_order_strategy": self._bulk_order_strategy,
+            "execution_timeline": self._execution_timeline,
+            "setup_tracking": self._setup_tracking,
         }
         handler = dispatch.get(op)
         if not handler:
@@ -286,10 +311,105 @@ class IdentifyDiscountsAgent(BasicAgent):
             f"Source: [Approval Engine + Deal Desk]\nAgents: IdentifyDiscountsAgent"
         )
 
+    def _purchase_savings(self):
+        ranked = sorted(
+            _PLANNED_PURCHASES,
+            key=lambda item: item["amount"] * item["discount_pct"] / 100,
+            reverse=True,
+        )
+        total_savings = sum(
+            item["amount"] * item["discount_pct"] / 100 for item in ranked
+        )
+        rows = "\n".join(
+            f"| {item['category']} | {item['vendor']} | ${item['amount']:,} | "
+            f"{item['discount_pct']}% | ${item['amount'] * item['discount_pct'] / 100:,.0f} | "
+            f"{item['expires']} |"
+            for item in ranked
+        )
+        return (
+            "**Prioritized Purchase Savings**\n\n"
+            "| Category | Vendor | Planned Spend | Discount | Savings | Expires |\n"
+            "|---|---|---|---|---|---|\n" + rows
+            + f"\n\n**Quarterly savings snapshot:** ${total_savings:,.0f} across "
+              f"{len(ranked)} purchasing areas."
+            + "\n\nSource: [Dynamics 365 Vendor Data + Contract Terms]\n"
+              "Agents: IdentifyDiscountsAgent"
+        )
+
+    def _expiring_discounts(self):
+        rows = "\n".join(
+            f"| {item['vendor']} | {item['category']} | {item['expires']} | "
+            f"${item['amount'] * item['discount_pct'] / 100:,.0f} | {item['timing']} |"
+            for item in sorted(_PLANNED_PURCHASES, key=lambda item: item["expires"])
+        )
+        return (
+            "**Expiring Discount Decisions**\n\n"
+            "| Vendor | Category | Expires | Savings at Risk | Recommendation |\n"
+            "|---|---|---|---|---|\n" + rows
+            + "\n\nSource: [Dynamics 365 + Vendor Promotions]\nAgents: IdentifyDiscountsAgent"
+        )
+
+    def _draft_purchase_order(self):
+        items = _PLANNED_PURCHASES[:2]
+        subtotal = sum(item["amount"] for item in items)
+        savings = sum(item["amount"] * item["discount_pct"] / 100 for item in items)
+        return (
+            "**Discounted Purchase Order Draft**\n\n"
+            f"- **Items bundled:** {', '.join(item['category'] for item in items)}\n"
+            f"- **Subtotal:** ${subtotal:,}\n"
+            f"- **Applied savings:** ${savings:,.0f}\n"
+            f"- **Draft total:** ${subtotal - savings:,.0f}\n"
+            "- **Status:** Prepared for procurement review\n\n"
+            "Draft only; no purchase order was created in Dynamics 365.\n\n"
+            "Source: [Dynamics 365 Procurement]\nAgents: IdentifyDiscountsAgent"
+        )
+
+    def _bulk_order_strategy(self):
+        licenses = next(item for item in _PLANNED_PURCHASES if item["category"] == "Software licenses")
+        consolidated_amount = 144000
+        tier_discount = 20
+        return (
+            "**Bulk Order Strategy**\n\n"
+            f"- Consolidate facility software renewals from ${licenses['amount']:,} "
+            f"to ${consolidated_amount:,} of managed spend.\n"
+            f"- Unlock the {tier_discount}% volume tier.\n"
+            f"- Projected consolidated savings: ${consolidated_amount * tier_discount / 100:,.0f}.\n"
+            "- Preserve the current renewal window and validate unused licenses before ordering.\n\n"
+            "Source: [Dynamics 365 + License Inventory]\nAgents: IdentifyDiscountsAgent"
+        )
+
+    def _execution_timeline(self):
+        return (
+            "**Savings Execution Timeline**\n\n"
+            "| Date | Action | Owner | Dependency |\n|---|---|---|---|\n"
+            "| 2025-11-21 | Confirm imaging-device quantities | Category Buyer | Clinical approval |\n"
+            "| 2025-11-24 | Submit discounted PO draft | Procurement Manager | Vendor quote |\n"
+            "| 2025-12-05 | Consolidate supply demand | Facility Leads | Forecast sign-off |\n"
+            "| 2025-12-10 | Secure medical-supply promotion | Finance Director | Budget approval |\n"
+            "| 2025-12-20 | Finalize license true-up | IT Procurement | Usage audit |\n\n"
+            "Source: [Procurement Plan]\nAgents: IdentifyDiscountsAgent"
+        )
+
+    def _setup_tracking(self):
+        return (
+            "**Simulated Savings Tracking Setup**\n\n"
+            "- Teams channel card: Prepared\n"
+            "- Approval reminders: Prepared for 48 and 24 hours before each deadline\n"
+            "- Stakeholders: Procurement Manager, Finance Director, Category Buyer\n"
+            "- Tracked opportunities: 3\n\n"
+            "Dry-run receipt: no Teams message, reminder, or Dynamics record was created.\n\n"
+            "Source: [Microsoft Teams + Dynamics 365]\nAgents: IdentifyDiscountsAgent"
+        )
+
 
 if __name__ == "__main__":
     agent = IdentifyDiscountsAgent()
-    for op in ["discount_scan", "eligibility_check", "savings_calculation", "approval_workflow"]:
+    for op in [
+        "discount_scan", "eligibility_check", "savings_calculation",
+        "approval_workflow", "purchase_savings", "expiring_discounts",
+        "draft_purchase_order", "bulk_order_strategy", "execution_timeline",
+        "setup_tracking",
+    ]:
         print("=" * 60)
         print(agent.perform(operation=op))
         print()
