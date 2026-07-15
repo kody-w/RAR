@@ -3,6 +3,10 @@ Cart Abandonment Recovery Agent — B2C Sales Stack
 
 Analyzes cart abandonment patterns, manages recovery campaigns,
 optimizes incentives, and tracks conversion metrics.
+
+Version 1.1.0 adds five demo-grounded recovery operations with deterministic
+records, exact record-key lookup, and simulated outreach receipts. No external
+system is changed, and all legacy operations remain available and unchanged.
 """
 
 import sys
@@ -14,7 +18,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cart_abandonment_recovery",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Cart Abandonment Recovery Agent",
     "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
     "author": "AIBAST",
@@ -117,10 +121,101 @@ CONVERSION_METRICS = {
     "total_recovered_revenue_30d": 102000,
 }
 
+EVIDENCE_ACTIONS = {
+    "cart_opportunity_scan": {
+        "title": "Today's Cart Opportunity Scan",
+        "write": False,
+        "records": [
+            {"record_id": "CART-SCAN-VIP", "segment": "VIP", "carts": 34, "value": "$18K", "recovery_likelihood": "45%"},
+            {"record_id": "CART-SCAN-REPEAT", "segment": "Repeat buyers", "carts": 89, "value": "$24K", "recovery_likelihood": "38%"},
+            {"record_id": "CART-SCAN-NEW", "segment": "New visitors", "carts": 412, "value": "$53K", "recovery_likelihood": "22%"},
+        ],
+        "context": "847 carts worth $127K; top opportunities Sarah M. $892, James K. $647, Emily R. $534; drivers: shipping 42%, comparison shopping 28%, payment friction 18%.",
+    },
+    "segment_recovery_strategy": {
+        "title": "Personalized Segment Recovery Strategies",
+        "write": False,
+        "records": [
+            {"record_id": "STRAT-VIP", "segment": "VIP", "offer": "personal note and express shipping", "sequence": "email, SMS at 1h, shipping offer at 4h, call at 24h for carts over $500"},
+            {"record_id": "STRAT-REPEAT", "segment": "Repeat buyers", "offer": "points reminder and free shipping", "sequence": "email, push at 2h, shipping hint at 12h"},
+            {"record_id": "STRAT-NEW", "segment": "New visitors", "offer": "welcome 10% off", "sequence": "email, retargeting, social proof at 24h"},
+        ],
+        "context": "Strategies reflect customer value, intent, urgency, and margin-protecting guardrails.",
+    },
+    "campaign_launch": {
+        "title": "Multi-Touch Campaign Launch",
+        "write": True,
+        "records": [
+            {"record_id": "CAMP-HIGH-VALUE", "campaign": "High-value win-back", "members": 8400, "status": "sent", "channels": "Outlook email and SMS"},
+            {"record_id": "CAMP-POINT-EXPIRY", "campaign": "Point expiry alert", "members": 12000, "status": "sent", "channels": "Outlook email and push"},
+            {"record_id": "CAMP-LAPSED", "campaign": "Lapsed browser", "members": 13600, "status": "active", "channels": "email and retargeting"},
+        ],
+        "context": "Preview-only orchestration for Outlook with real-time Microsoft Teams updates.",
+    },
+    "recovery_forecast": {
+        "title": "48-Hour Recovery Forecast",
+        "write": False,
+        "records": [
+            {"record_id": "FCST-VIP", "segment": "VIP", "recovery": "45%", "revenue": "$8,280"},
+            {"record_id": "FCST-REPEAT", "segment": "Repeat buyers", "recovery": "38%", "revenue": "$9,196"},
+            {"record_id": "FCST-NEW", "segment": "New visitors", "recovery": "22%", "revenue": "$11,616"},
+            {"record_id": "FCST-TOTAL", "segment": "Total", "recovery": "27%", "revenue": "$37,940"},
+        ],
+        "context": "Industry benchmark 18%; target 27%; monthly impact rises from $172K to $228K (+$56K).",
+    },
+    "recovery_optimization": {
+        "title": "Recovery Rate Optimization",
+        "write": False,
+        "records": [
+            {"record_id": "OPT-EXIT-INTENT", "opportunity": "Exit-intent 10% popup", "impact": "+$18K/month", "detail": "8-12% conversion; same-day implementation"},
+            {"record_id": "OPT-SMS", "opportunity": "SMS all segments", "impact": "+$12K/month", "detail": "channel expansion"},
+            {"record_id": "OPT-DYNAMIC-PRICE", "opportunity": "Dynamic pricing", "impact": "+$8K/month", "detail": "protect margin with targeted offers"},
+            {"record_id": "OPT-SHIPPING", "opportunity": "Lower free-shipping threshold $75 to $65", "impact": "+$6K/month", "detail": "addresses 42% shipping-reveal abandonment"},
+        ],
+        "context": "Combined opportunities target recovery improvement from 27% to 35%.",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
+
+def _evidence_action(action, **kwargs):
+    """Render a demo-grounded action with exact record-key lookup."""
+    spec = EVIDENCE_ACTIONS[action]
+    user_input = str(kwargs.get("user_input", ""))
+    normalized = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in user_input.split()
+    }
+    records = spec["records"]
+    if user_input:
+        records = [
+            record for record in records
+            if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in normalized
+        ]
+        if not records:
+            return "No exact `record_id` match was found; no substitute cart or segment was used."
+    lines = [
+        f"## {spec['title']}",
+        f"\n{spec['context']}",
+        "\nDeterministic evidence-backed records:",
+    ]
+    for record in records:
+        lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        receipt_key = records[0]["record_id"] if len(records) == 1 else "BATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-CART-CAMPAIGN-{receipt_key}",
+            "- status: simulated",
+            "- target_systems: Outlook and Microsoft Teams",
+            "- No external system changed; campaign sends and updates are preview-only.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
 
 def _abandonment_by_exit():
     """Break down abandonment by exit page."""
@@ -170,9 +265,15 @@ class CartAbandonmentRecoveryAgent(BasicAgent):
                             "recovery_campaign",
                             "incentive_optimization",
                             "conversion_tracking",
+                            "cart_opportunity_scan",
+                            "segment_recovery_strategy",
+                            "campaign_launch",
+                            "recovery_forecast",
+                            "recovery_optimization",
                         ],
                     },
                     "cart_id": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -186,11 +287,21 @@ class CartAbandonmentRecoveryAgent(BasicAgent):
             "recovery_campaign": self._recovery_campaign,
             "incentive_optimization": self._incentive_optimization,
             "conversion_tracking": self._conversion_tracking,
+            "cart_opportunity_scan": self._evidence_action,
+            "segment_recovery_strategy": self._evidence_action,
+            "campaign_launch": self._evidence_action,
+            "recovery_forecast": self._evidence_action,
+            "recovery_optimization": self._evidence_action,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"**Error:** Unknown operation `{operation}`."
+        if operation in EVIDENCE_ACTIONS:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
+
+    def _evidence_action(self, action, **kwargs) -> str:
+        return _evidence_action(action, **kwargs)
 
     def _abandonment_analysis(self, **kwargs) -> str:
         total_value = _total_abandoned_value()

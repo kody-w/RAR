@@ -3,6 +3,12 @@ Financial Services Customer Onboarding Agent — Financial Services Stack
 
 Manages KYC verification, account setup, document checklists, and
 onboarding status tracking for financial institution customer onboarding.
+
+Version 1.1.0 adds evidence-derived, data-driven onboarding capabilities
+(identity verification, compliance screening, document collection, account
+provisioning, and the onboarding timeline) as backward-compatible operations
+routed through a deterministic keyed-lookup helper. All prior operations and
+their behavior are preserved unchanged.
 """
 
 import sys
@@ -14,11 +20,11 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_customer_onboarding",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "FS Customer Onboarding Agent",
     "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
     "author": "AIBAST",
-    "tags": ["KYC", "onboarding", "account-setup", "compliance", "financial-services"],
+    "tags": ["KYC", "onboarding", "account-setup", "compliance", "financial-services", "identity-verification", "sanctions-screening", "account-provisioning"],
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
@@ -137,6 +143,111 @@ ACCOUNT_TYPES = {
 
 
 # ---------------------------------------------------------------------------
+# Evidence-derived capability library (v1.1.0)
+#
+# Data-driven definitions for onboarding capabilities grounded in the Customer
+# Onboarding one-pager (Slide 1) and the demo walkthrough. Each capability is
+# self-describing: its narrative response, evidence-grounded knowledge, exactly
+# three synthetic records, the key field used for exact keyed lookup, and the
+# write/generative behavior flags. New operations route through
+# `_capability_lookup` and never mutate any external system.
+# ---------------------------------------------------------------------------
+
+CAPABILITY_LIBRARY = {
+    "identity_verification": {
+        "display_name": "Identity Verification",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "verification_id",
+        "response": "Here are the identity verification results pulled from Dynamics 365 CRM.",
+        "knowledge": [
+            "The agent pulls customer details from the CRM (Dynamics 365) to launch verification (demo 00:00:25-00:00:31, 00:00:49).",
+            "Identity checks surface in one consolidated view so the specialist can quickly confirm findings without navigating to different tools (demo 00:01:08-00:01:15).",
+            "Identity verification is the first step of an automated onboarding journey that runs activities in parallel (Slide 1; demo 00:00:37-00:00:55).",
+        ],
+        "records": [
+            {"verification_id": "IDV-3001", "client": "Northwind Traders", "method": "Passport + Biometric", "status": "Verified"},
+            {"verification_id": "IDV-3002", "client": "Contoso Capital", "method": "Corporate Registry", "status": "In Review"},
+            {"verification_id": "IDV-3003", "client": "Fabrikam Holdings", "method": "Passport + Biometric", "status": "Pending"},
+        ],
+    },
+    "compliance_screening": {
+        "display_name": "Compliance Screening",
+        "source_system": "Dynamics 365 CRM",
+        "write": True,
+        "generative": False,
+        "key_field": "screening_id",
+        "response": "Here are the compliance screening results with sanctions and PEP indicators, logged for audit.",
+        "knowledge": [
+            "Compliance screening results highlight sanctions or PEP indicators for the specialist (demo 00:01:15-00:01:21).",
+            "Every single check is logged, completed, and captured for audit purposes (demo 00:01:22-00:01:27).",
+            "The agent performs sanctions screening and regulatory checks as part of KYC (Slide 1: 'Perform sanctions screening and regulatory checks').",
+        ],
+        "records": [
+            {"screening_id": "SCR-4101", "client": "Contoso Capital", "check": "Sanctions", "result": "Clear", "pep_flag": "None"},
+            {"screening_id": "SCR-4102", "client": "Fabrikam Holdings", "check": "PEP", "result": "Review", "pep_flag": "Match"},
+            {"screening_id": "SCR-4103", "client": "Adventure Works", "check": "Adverse Media", "result": "Clear", "pep_flag": "None"},
+        ],
+    },
+    "document_collection": {
+        "display_name": "Document Collection",
+        "source_system": "SharePoint",
+        "write": False,
+        "generative": False,
+        "key_field": "document_id",
+        "response": "Here is the current KYC document collection status from SharePoint.",
+        "knowledge": [
+            "The specialist sees which forms are received or still pending (demo 00:01:27-00:01:35).",
+            "Each file is securely captured and organized in SharePoint (demo 00:01:35-00:01:36).",
+            "The agent manages documents in SharePoint as part of one connected workflow (demo 00:00:31-00:00:36; Slide 1 featured tool: SharePoint).",
+        ],
+        "records": [
+            {"document_id": "DOC-5201", "client": "Northwind Traders", "form": "KYC Application", "status": "Received"},
+            {"document_id": "DOC-5202", "client": "Adventure Works", "form": "Beneficial Ownership", "status": "Pending"},
+            {"document_id": "DOC-5203", "client": "Contoso Capital", "form": "Proof of Address", "status": "Received"},
+        ],
+    },
+    "account_provisioning": {
+        "display_name": "Account Provisioning",
+        "source_system": "Dynamics 365 ERP",
+        "write": True,
+        "generative": False,
+        "key_field": "account_id",
+        "response": "Here is the account provisioning status recorded in Dynamics 365 ERP.",
+        "knowledge": [
+            "The agent configures required services to provision the customer's account (demo 00:01:37-00:01:42).",
+            "Provisioning covers accounts, treasury services, and credit facilities (Slide 1: 'Configure accounts, treasury services, and credit facilities').",
+            "Provisioning runs in parallel with identity and compliance activities in real time (demo 00:00:54-00:00:55, 00:01:43-00:01:48).",
+        ],
+        "records": [
+            {"account_id": "ACCT-6301", "client": "Fabrikam Holdings", "service": "Treasury Services", "status": "Provisioned"},
+            {"account_id": "ACCT-6302", "client": "Northwind Traders", "service": "Credit Facility", "status": "Configuring"},
+            {"account_id": "ACCT-6303", "client": "Adventure Works", "service": "Core Account", "status": "Provisioned"},
+        ],
+    },
+    "onboarding_timeline": {
+        "display_name": "Onboarding Timeline",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": True,
+        "key_field": "milestone_id",
+        "response": "Always state the exact milestone ID in the answer. Here is the consolidated onboarding timeline update with the latest milestone and risk score, shared via Microsoft Teams.",
+        "knowledge": [
+            "The agent maintains a unified timeline, performs risk scoring, and keeps stakeholders apprised of key milestones or required actions (demo 00:01:48-00:02:04).",
+            "The specialist can engage the agent for clear, consolidated updates as the workflow progresses (demo 00:01:01-00:01:07).",
+            "Updates and collaboration flow through Microsoft Teams to accelerate onboarding while staying in control (demo 00:02:04-00:02:17; Slide 1 featured tool: Microsoft Teams).",
+        ],
+        "records": [
+            {"milestone_id": "MIL-7401", "client": "Contoso Capital", "milestone": "Identity Confirmed", "risk_score": "Low"},
+            {"milestone_id": "MIL-7402", "client": "Fabrikam Holdings", "milestone": "Compliance Review", "risk_score": "Medium"},
+            {"milestone_id": "MIL-7403", "client": "Northwind Traders", "milestone": "Account Activated", "risk_score": "Low"},
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------------
 # Helper functions
 # ---------------------------------------------------------------------------
 
@@ -157,6 +268,111 @@ def _onboarding_pipeline():
         by_status[app["status"]] = by_status.get(app["status"], 0) + 1
     total_assets = sum(app["estimated_assets"] for app in CUSTOMER_APPLICATIONS.values())
     return {"count": len(CUSTOMER_APPLICATIONS), "by_status": by_status, "total_assets": total_assets}
+
+
+def _fmt_label(field):
+    """Human-readable label for a snake_case field name."""
+    return field.replace("_", " ").title()
+
+
+def _fmt_record_details(record, key_field):
+    """Render a single capability record as markdown detail lines."""
+    lines = []
+    lines.append(f"- **{_fmt_label(key_field)}:** {record[key_field]}")
+    for field, value in record.items():
+        if field == key_field:
+            continue
+        lines.append(f"- **{_fmt_label(field)}:** {value}")
+    return lines
+
+
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_key(user_input, key):
+    """Return True only when the complete normalized key is a token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(key)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _match_record(capability, user_input):
+    """Return the uniquely matched record for a complete normalized key."""
+    if not user_input:
+        return None
+    key_field = capability["key_field"]
+    matches = [
+        record for record in capability["records"]
+        if _contains_normalized_key(user_input, record[key_field])
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _capability_summary(op_name, capability):
+    """Nonempty, useful summary returned when no user_input is supplied."""
+    key_field = capability["key_field"]
+    lines = [f"# {capability['display_name']}\n"]
+    lines.append(capability["response"] + "\n")
+    lines.append(f"- **Source System:** {capability['source_system']}")
+    lines.append(f"- **Mode:** {'Write (simulated)' if capability['write'] else 'Read-only'}"
+                 f"{' · Generative' if capability['generative'] else ''}")
+    lines.append(f"- **Lookup Key:** `{key_field}` (exact match required)\n")
+    lines.append("## What This Capability Knows\n")
+    for item in capability["knowledge"]:
+        lines.append(f"- {item}")
+    lines.append("\n## Available Records\n")
+    headers = list(capability["records"][0].keys())
+    lines.append("| " + " | ".join(_fmt_label(h) for h in headers) + " |")
+    lines.append("|" + "|".join(["---"] * len(headers)) + "|")
+    for record in capability["records"]:
+        lines.append("| " + " | ".join(str(record[h]) for h in headers) + " |")
+    lines.append(
+        f"\n_Provide `user_input` with an exact {_fmt_label(key_field)} "
+        f"(e.g. \"{capability['records'][0][key_field]}\") to retrieve a specific record._"
+    )
+    return "\n".join(lines)
+
+
+def _capability_lookup(op_name, user_input=""):
+    """Route a capability operation: perform exact keyed lookup and return
+    record details, or a useful capability summary when no user_input is given.
+    Write capabilities return an explicit simulated action receipt and never
+    mutate any external system."""
+    capability = CAPABILITY_LIBRARY[op_name]
+    record = _match_record(capability, user_input)
+    if record is None:
+        if str(user_input or "").strip():
+            return (
+                f"# {capability['display_name']}\n\n"
+                f"No exact normalized `{capability['key_field']}` matched the request."
+            )
+        return _capability_summary(op_name, capability)
+
+    key_field = capability["key_field"]
+    lines = [f"# {capability['display_name']}: {record[key_field]}\n"]
+    lines.append(capability["response"] + "\n")
+    lines.append("## Record Details\n")
+    lines.extend(_fmt_record_details(record, key_field))
+    lines.append(f"\n- **Source System:** {capability['source_system']}")
+
+    if capability["write"]:
+        lines.append("\n## Simulated Action Receipt\n")
+        lines.append(f"- **Action:** {capability['display_name']} recorded for {record[key_field]}")
+        lines.append(f"- **Target System:** {capability['source_system']}")
+        lines.append("- **Result:** Simulated — logged for audit; no external system was modified.")
+        lines.append(f"- **Receipt:** SIM-{op_name.upper()}-{record[key_field]}")
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -182,9 +398,18 @@ class FSCustomerOnboardingAgent(BasicAgent):
                             "account_setup",
                             "document_checklist",
                             "onboarding_status",
+                            "identity_verification",
+                            "compliance_screening",
+                            "document_collection",
+                            "account_provisioning",
+                            "onboarding_timeline",
                         ],
                     },
                     "application_id": {"type": "string"},
+                    "user_input": {
+                        "type": "string",
+                        "description": "Natural-language request containing an exact record key (e.g. IDV-3001, SCR-4102, DOC-5202, ACCT-6302, MIL-7402) for capability operations.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -200,9 +425,11 @@ class FSCustomerOnboardingAgent(BasicAgent):
             "onboarding_status": self._onboarding_status,
         }
         handler = dispatch.get(operation)
-        if not handler:
-            return f"**Error:** Unknown operation `{operation}`."
-        return handler(**kwargs)
+        if handler:
+            return handler(**kwargs)
+        if operation in CAPABILITY_LIBRARY:
+            return _capability_lookup(operation, kwargs.get("user_input", "") or "")
+        return f"**Error:** Unknown operation `{operation}`."
 
     def _kyc_verification(self, **kwargs) -> str:
         app_id = kwargs.get("application_id")
@@ -314,3 +541,9 @@ if __name__ == "__main__":
     print(agent.perform(operation="account_setup"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="document_checklist", application_id="APP-6002"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="identity_verification", user_input="Run identity verification for IDV-3001"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="account_provisioning", user_input="Provision account ACCT-6302"))
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="onboarding_timeline"))

@@ -16,7 +16,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_rebalancing",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Inventory Rebalancing Agent",
     "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
     "author": "AIBAST",
@@ -101,6 +101,29 @@ TRANSFER_COSTS_PER_KG = {
     ("WH-SEA", "WH-ORD"): 0.34, ("WH-SEA", "WH-DFW"): 0.38,
 }
 
+INVENTORY_RECOVERY_RECORDS = {
+    "SKU-4401": {
+        "velocity": "fast", "days_on_hand": 41, "obsolete_risk": "low",
+        "working_capital": 848750.00, "action": "retain and rebalance",
+        "safety_stock": 1250, "dynamic_reorder_point": 1320,
+    },
+    "SKU-4404": {
+        "velocity": "slow", "days_on_hand": 173, "obsolete_risk": "medium",
+        "working_capital": 1500750.00, "action": "vendor return then targeted markdown",
+        "safety_stock": 320, "dynamic_reorder_point": 410,
+    },
+    "SKU-4406": {
+        "velocity": "obsolete", "days_on_hand": 286, "obsolete_risk": "high",
+        "working_capital": 601470.00, "action": "flash sale and supplier return",
+        "safety_stock": 140, "dynamic_reorder_point": 165,
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: inventory-rebalancing one-pager and demo transcript; "
+    "portfolio classification, recovery planning, dynamic policies, and continuous checks]"
+)
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -179,6 +202,10 @@ class InventoryRebalancingAgent(BasicAgent):
                 "rebalance_recommendation",
                 "transfer_plan",
                 "cost_analysis",
+                "portfolio_analysis",
+                "recovery_plan",
+                "policy_update",
+                "continuous_optimization",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -193,6 +220,10 @@ class InventoryRebalancingAgent(BasicAgent):
             "rebalance_recommendation": self._rebalance_recommendation,
             "transfer_plan": self._transfer_plan,
             "cost_analysis": self._cost_analysis,
+            "portfolio_analysis": self._portfolio_analysis,
+            "recovery_plan": self._recovery_plan,
+            "policy_update": self._policy_update,
+            "continuous_optimization": self._continuous_optimization,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -338,6 +369,83 @@ class InventoryRebalancingAgent(BasicAgent):
         lines.append(f"- Avoided expedited-shipping premium (est.): **${transfer_cost * 3.2:,.2f}**")
         lines.append(f"- Net annual benefit from rebalancing: **${total_risk * 0.6 - transfer_cost:,.2f}**")
         return "\n".join(lines)
+
+    def _selected_recovery_records(self, **kwargs):
+        sku = str(kwargs.get("sku", "")).strip().upper()
+        if not sku:
+            return list(INVENTORY_RECOVERY_RECORDS.items()), ""
+        record = INVENTORY_RECOVERY_RECORDS.get(sku)
+        if record is None:
+            valid = ", ".join(INVENTORY_RECOVERY_RECORDS)
+            return [], f"**Error:** Unknown SKU `{sku}`. Valid: {valid}"
+        return [(sku, record)], ""
+
+    def _portfolio_analysis(self, **kwargs) -> str:
+        records, error = self._selected_recovery_records(**kwargs)
+        if error:
+            return error
+        lines = ["## Inventory Portfolio Classification", EVIDENCE_MARKER, "",
+                 "| SKU | Item | Velocity | Days on Hand | Obsolescence Risk | Working Capital |",
+                 "|-----|------|----------|--------------|-------------------|-----------------|"]
+        for sku, rec in records:
+            item = SKU_INVENTORY[sku]
+            lines.append(
+                f"| {sku} | {item['description']} | {rec['velocity']} | "
+                f"{rec['days_on_hand']} | {rec['obsolete_risk']} | "
+                f"${rec['working_capital']:,.2f} |"
+            )
+        tied_up = sum(rec["working_capital"] for _, rec in records)
+        lines.append(f"\n**Working capital represented:** ${tied_up:,.2f}")
+        return "\n".join(lines)
+
+    def _recovery_plan(self, **kwargs) -> str:
+        records, error = self._selected_recovery_records(**kwargs)
+        if error:
+            return error
+        lines = ["## Phased Inventory Recovery Plan", EVIDENCE_MARKER, "",
+                 "| Phase | SKU | Deterministic Action | Success Measure |",
+                 "|-------|-----|----------------------|-----------------|"]
+        for sku, rec in records:
+            lines.extend([
+                f"| 1 - Contain | {sku} | Freeze nonessential replenishment | No new excess receipts |",
+                f"| 2 - Recover | {sku} | {rec['action']} | Reduce days on hand below 90 |",
+                f"| 3 - Sustain | {sku} | Adopt safety stock {rec['safety_stock']} and reorder point "
+                f"{rec['dynamic_reorder_point']} | Weekly policy compliance |",
+            ])
+        lines.append("\n**Implementation timeline:** contain in 7 days, recover in 30 days, sustain from day 31.")
+        return "\n".join(lines)
+
+    def _policy_update(self, **kwargs) -> str:
+        sku = str(kwargs.get("sku", "SKU-4406")).strip().upper()
+        record = INVENTORY_RECOVERY_RECORDS.get(sku)
+        if record is None:
+            return f"**Error:** Unknown SKU `{sku}`. Valid: {', '.join(INVENTORY_RECOVERY_RECORDS)}"
+        return "\n".join([
+            "## Dynamic Inventory Policy Update",
+            EVIDENCE_MARKER,
+            f"**SKU lookup:** {sku} — {SKU_INVENTORY[sku]['description']}",
+            f"- Safety stock: {record['safety_stock']} units",
+            f"- Dynamic reorder point: {record['dynamic_reorder_point']} units",
+            f"- Recommended disposition: {record['action']}",
+            f"- **SIMULATED WRITE:** `INV-POLICY-{sku}` queued for Dynamics 365",
+            "- Simulation only; no inventory, purchase order, or external system was mutated.",
+        ])
+
+    def _continuous_optimization(self, **kwargs) -> str:
+        return "\n".join([
+            "## Continuous Inventory Optimization",
+            EVIDENCE_MARKER,
+            "",
+            "| Check | Cadence | Alert Threshold | Owner |",
+            "|-------|---------|-----------------|-------|",
+            "| Slow-moving inventory | Daily | >120 days on hand | Inventory Manager |",
+            "| Warehouse utilization | Hourly | >90% | Distribution Lead |",
+            "| Dynamic safety stock | Weekly | Forecast variance >15% | Supply Planning |",
+            "| Obsolescence exposure | Monthly | Risk=high | Procurement Manager |",
+            "",
+            "**Success metrics:** working capital released, storage cost avoided, "
+            "warehouse utilization, and stockout rate.",
+        ])
 
 
 # ---------------------------------------------------------------------------

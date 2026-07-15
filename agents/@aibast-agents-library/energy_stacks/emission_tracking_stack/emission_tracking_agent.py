@@ -3,6 +3,9 @@ Emission Tracking Agent for Energy sector.
 
 Monitors greenhouse gas emissions across facilities, tracks regulatory
 compliance, develops reduction plans, and analyzes carbon offset opportunities.
+
+Version 1.1.0 adds an evidence-backed, deterministic strategic implementation
+plan while preserving every legacy operation.
 """
 
 import sys
@@ -14,7 +17,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/emission_tracking",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Emission Tracking Agent",
     "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.",
     "author": "AIBAST",
@@ -200,6 +203,26 @@ def _carbon_offset_analysis():
             "total_cost": total_cost, "emission_gap": total_gap}
 
 
+def _strategic_implementation_plan():
+    plan = _reduction_plan()["plans"]
+    phases = []
+    phase_number = 1
+    for facility in plan:
+        for action in facility["actions"][:1]:
+            phases.append({
+                "phase": phase_number,
+                "facility": facility["name"],
+                "action": action["action"],
+                "window": f"2026-Q{phase_number}",
+                "owner": ["Operations", "Sustainability", "Engineering"][phase_number - 1],
+                "reduction_tonnes": action["reduction_tonnes"],
+                "cost_mm": action["cost_mm"],
+                "success_metric": f"Verify {action['reduction_tonnes']:,} tonnes annual CO2e reduction",
+            })
+            phase_number += 1
+    return phases
+
+
 # ---------------------------------------------------------------------------
 # Agent
 # ---------------------------------------------------------------------------
@@ -222,6 +245,7 @@ class EmissionTrackingAgent(BasicAgent):
                             "compliance_status",
                             "reduction_plan",
                             "carbon_offset_analysis",
+                            "strategic_implementation_plan",
                         ],
                         "description": "The emission tracking operation to perform.",
                     },
@@ -245,6 +269,8 @@ class EmissionTrackingAgent(BasicAgent):
             return self._reduction_plan()
         elif op == "carbon_offset_analysis":
             return self._carbon_offset_analysis()
+        elif op == "strategic_implementation_plan":
+            return self._strategic_implementation_plan()
         return f"**Error:** Unknown operation `{op}`."
 
     def _emissions_dashboard(self) -> str:
@@ -314,6 +340,32 @@ class EmissionTrackingAgent(BasicAgent):
                 f"| {o['project']} | {o['type']} | {o['credits']:,} "
                 f"| ${o['price']:.2f} | ${o['total_cost']:,} | {o['verified_by']} |"
             )
+        return "\n".join(lines)
+
+    def _strategic_implementation_plan(self) -> str:
+        phases = _strategic_implementation_plan()
+        total_cost = sum(row["cost_mm"] for row in phases)
+        total_reduction = sum(row["reduction_tonnes"] for row in phases)
+        lines = [
+            "# Strategic Emissions Implementation Plan",
+            "",
+            f"**Planned Investment:** ${total_cost:.1f}M",
+            f"**Expected Annual Reduction:** {total_reduction:,} tonnes CO2e",
+            "",
+            "| Phase | Window | Facility | Action | Owner | Reduction | Cost | Success Metric |",
+            "|-------|--------|----------|--------|-------|-----------|------|----------------|",
+        ]
+        for row in phases:
+            lines.append(
+                f"| {row['phase']} | {row['window']} | {row['facility']} | {row['action']} "
+                f"| {row['owner']} | {row['reduction_tonnes']:,} t | ${row['cost_mm']}M "
+                f"| {row['success_metric']} |"
+            )
+        lines.extend([
+            "",
+            "**Evidence:** Energy Operations demo 02:47-03:02 — opportunity cost "
+            "analysis followed by a strategic implementation plan.",
+        ])
         return "\n".join(lines)
 
 

@@ -3,6 +3,10 @@ License Renewal and Expansion Agent for Software/Digital Products.
 
 Manages SaaS license renewal pipelines, identifies expansion opportunities,
 assesses churn risk, and projects revenue impact across the customer portfolio.
+
+Version 1.1.0 adds deterministic, evidence-derived account-health,
+competitive-strategy, proposal, and activation operations. The four original
+operations and the agent's package/runtime identity remain unchanged.
 """
 
 import sys
@@ -14,7 +18,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/license_renewal_expansion",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "License Renewal & Expansion Agent",
     "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
     "author": "AIBAST",
@@ -121,10 +125,85 @@ EXPANSION_PRICING = {
     "custom_integration": {"price": 36000, "description": "Custom integration package"},
 }
 
+RENEWAL_STRATEGIES = {
+    "LIC-3001": {
+        "competitor": "AtlasCloud",
+        "competitor_discount": "18%",
+        "switching_cost": 132000,
+        "differentiators": ["45% QoQ API growth", "proven SSO integrations", "zero migration downtime"],
+        "package": "Enterprise multi-year plus three subsidiary SSO extensions",
+        "term": "36 months",
+        "annual_value": 324000,
+        "concession": "8% year-one expansion discount",
+        "roi": "2.5x versus migration and retraining costs",
+        "negotiation_levers": ["phased SSO rollout", "price protection", "executive success review"],
+        "approvals": ["Sales VP", "Finance", "Legal"],
+    },
+    "LIC-3002": {
+        "competitor": "NovaMetrics",
+        "competitor_discount": "22%",
+        "switching_cost": 58000,
+        "differentiators": ["existing analytics workflows", "retained historical data", "named CSM recovery plan"],
+        "package": "Professional renewal with adoption recovery services",
+        "term": "12 months",
+        "annual_value": 72000,
+        "concession": "services credit after 80% adoption",
+        "roi": "1.8x versus replacement and migration costs",
+        "negotiation_levers": ["90-day adoption milestone", "executive sponsor reset", "quarterly value review"],
+        "approvals": ["Sales Director", "Customer Success VP"],
+    },
+    "LIC-3003": {
+        "competitor": "ChainSight",
+        "competitor_discount": "12%",
+        "switching_cost": 87000,
+        "differentiators": ["79 of 80 active seats", "embedded supply-chain workflows", "analytics add-on readiness"],
+        "package": "Enterprise renewal with advanced analytics",
+        "term": "24 months",
+        "annual_value": 216000,
+        "concession": "analytics implementation included",
+        "roi": "2.2x from avoided migration and faster analytics",
+        "negotiation_levers": ["two-year price lock", "analytics pilot", "usage-based expansion review"],
+        "approvals": ["Sales VP", "Finance"],
+    },
+    "LIC-3004": {
+        "competitor": "GuestOps",
+        "competitor_discount": "15%",
+        "switching_cost": 164000,
+        "differentiators": ["99% seat utilization", "12-location expansion", "custom integration proof of concept"],
+        "package": "Enterprise expansion for 12 new locations with custom integration",
+        "term": "36 months",
+        "annual_value": 402000,
+        "concession": "bulk-seat price protection",
+        "roi": "2.9x from rollout speed and avoided re-platforming",
+        "negotiation_levers": ["location ramp schedule", "integration milestone", "multi-year price protection"],
+        "approvals": ["Sales VP", "Finance", "Solutions Engineering"],
+    },
+    "LIC-3005": {
+        "competitor": "BuildFlow",
+        "competitor_discount": "20%",
+        "switching_cost": 41000,
+        "differentiators": ["existing project history", "configured workflows", "re-engagement playbook"],
+        "package": "Professional renewal with guided reactivation",
+        "term": "12 months",
+        "annual_value": 54000,
+        "concession": "60-day adoption services credit",
+        "roi": "1.6x versus replacement and retraining costs",
+        "negotiation_levers": ["admin reactivation", "usage milestone", "monthly CSM review"],
+        "approvals": ["Sales Director", "Customer Success VP"],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def _exact_license(license_id):
+    if not license_id:
+        return None, "Provide an exact license_id: " + ", ".join(sorted(LICENSE_AGREEMENTS))
+    if license_id not in LICENSE_AGREEMENTS:
+        return None, f"Unknown license_id `{license_id}`; exact ID required."
+    return LICENSE_AGREEMENTS[license_id], None
 
 def _renewal_pipeline():
     pipeline = []
@@ -227,6 +306,10 @@ class LicenseRenewalExpansionAgent(BasicAgent):
                             "expansion_opportunities",
                             "churn_risk",
                             "revenue_impact",
+                            "account_health_analysis",
+                            "competitive_strategy",
+                            "renewal_proposal",
+                            "activate_renewal_package",
                         ],
                         "description": "The license management operation to perform.",
                     },
@@ -250,6 +333,14 @@ class LicenseRenewalExpansionAgent(BasicAgent):
             return self._churn_risk()
         elif op == "revenue_impact":
             return self._revenue_impact()
+        elif op == "account_health_analysis":
+            return self._account_health_analysis(kwargs.get("license_id"))
+        elif op == "competitive_strategy":
+            return self._competitive_strategy(kwargs.get("license_id"))
+        elif op == "renewal_proposal":
+            return self._renewal_proposal(kwargs.get("license_id"))
+        elif op == "activate_renewal_package":
+            return self._activate_renewal_package(kwargs.get("license_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _renewal_pipeline(self) -> str:
@@ -337,6 +428,99 @@ class LicenseRenewalExpansionAgent(BasicAgent):
             "- Fast-track expansion proposals for Skyline Hospitality and Pinnacle Insurance.",
             "- Assign dedicated CSM resources to ClearView Analytics and Granite Construction.",
         ]
+        return "\n".join(lines)
+
+    def _account_health_analysis(self, license_id) -> str:
+        lic, error = _exact_license(license_id)
+        if error:
+            return f"**Error:** {error}"
+        strategy = RENEWAL_STRATEGIES[license_id]
+        utilization = round(lic["seats_used"] / lic["seats"] * 100, 1)
+        lines = [
+            f"# Account Health Analysis — {lic['customer']}",
+            "",
+            f"**License ID:** {license_id}",
+            f"**Health Score:** {lic['health_score']}/100",
+            f"**Feature Adoption:** {utilization}% seat utilization",
+            f"**Usage Trend:** {lic['usage_trend']}",
+            f"**Support Tickets (90d):** {lic['support_tickets_90d']}",
+            f"**Renewal ARR:** ${lic['arr']:,}",
+            "",
+            "## Expansion Signals",
+        ]
+        if lic["expansion_signals"]:
+            lines.extend(f"- {signal}" for signal in lic["expansion_signals"])
+        else:
+            lines.append("- None")
+        lines.extend(["", "## Competitive Context", f"- Competitor: {strategy['competitor']}"])
+        lines.extend(f"- {item}" for item in strategy["differentiators"])
+        return "\n".join(lines)
+
+    def _competitive_strategy(self, license_id) -> str:
+        lic, error = _exact_license(license_id)
+        if error:
+            return f"**Error:** {error}"
+        strategy = RENEWAL_STRATEGIES[license_id]
+        lines = [
+            f"# Competitive Counter-Strategy — {lic['customer']}",
+            "",
+            f"**License ID:** {license_id}",
+            f"**Competing Offer:** {strategy['competitor']} at a {strategy['competitor_discount']} discount",
+            f"**True Switching Cost:** ${strategy['switching_cost']:,}",
+            f"**Value Defense:** {strategy['roi']}",
+            "",
+            "## Differentiated Value",
+        ]
+        lines.extend(f"- {item}" for item in strategy["differentiators"])
+        lines.extend(["", "## Counter-Strategy", f"- Lead with quantified switching cost of ${strategy['switching_cost']:,}."])
+        lines.extend(f"- {lever}" for lever in strategy["negotiation_levers"])
+        return "\n".join(lines)
+
+    def _renewal_proposal(self, license_id) -> str:
+        lic, error = _exact_license(license_id)
+        if error:
+            return f"**Error:** {error}"
+        strategy = RENEWAL_STRATEGIES[license_id]
+        return "\n".join([
+            f"# Renewal and Expansion Proposal — {lic['customer']}",
+            "",
+            f"**License ID:** {license_id}",
+            f"**Structured Offer:** {strategy['package']}",
+            f"**Term:** {strategy['term']}",
+            f"**Annual Contract Value:** ${strategy['annual_value']:,}",
+            f"**Pre-Approved Concession:** {strategy['concession']}",
+            f"**ROI Positioning:** {strategy['roi']}",
+            f"**Dynamics Proposal Receipt:** sim-d365-proposal-{license_id.lower()}",
+        ])
+
+    def _activate_renewal_package(self, license_id) -> str:
+        lic, error = _exact_license(license_id)
+        if error:
+            return f"**Error:** {error}"
+        strategy = RENEWAL_STRATEGIES[license_id]
+        lines = [
+            f"# Customer-Ready Renewal Package — {lic['customer']}",
+            "",
+            f"**License ID:** {license_id}",
+            f"**Presentation:** renewal-expansion-{license_id.lower()}.pptx",
+            f"**Narrative:** Protect current value, quantify ${strategy['switching_cost']:,} in switching cost, and expand through {strategy['package'].lower()}.",
+            "",
+            "## Meeting Talking Points",
+            f"- Account health is {lic['health_score']}/100 with {lic['seats_used']} of {lic['seats']} seats active.",
+            f"- The offer delivers {strategy['roi']}.",
+            f"- Counter {strategy['competitor']}'s {strategy['competitor_discount']} discount with differentiated value and price protection.",
+            "",
+            "## Negotiation Levers",
+        ]
+        lines.extend(f"- {lever}" for lever in strategy["negotiation_levers"])
+        lines.extend(["", "## Pre-Staged Approvals"])
+        lines.extend(f"- {approval}: ready for review" for approval in strategy["approvals"])
+        lines.extend([
+            "",
+            f"**Approval Receipt:** sim-approval-{license_id.lower()}",
+            f"**Microsoft Teams Package Receipt:** sim-teams-renewal-{license_id.lower()}",
+            "**External Writes:** simulated; no live Dynamics 365, approval, or Teams mutation performed.",
+        ])
         return "\n".join(lines)
 
 

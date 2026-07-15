@@ -20,7 +20,7 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/proposal_generation",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Proposal Generation",
     "description": "AI-powered proposal generation with RFP analysis, personalized content, pricing optimization, and competitive positioning.",
     "author": "AIBAST",
@@ -98,6 +98,8 @@ _RFPS = {
         ],
     },
 }
+
+_RFP_KEYS_BY_ID = {rfp["id"]: key for key, rfp in _RFPS.items()}
 
 _PRODUCT_CATALOG = {
     "platform_core": {"name": "Platform Core License", "list_price": 420_000, "category": "Software", "margin_floor": 0.38},
@@ -376,6 +378,7 @@ class ProposalGenerationAgent(BasicAgent):
         references_positioning - Best references + competitive differentiator matrix
         compile_proposal     - Assemble full proposal package with page counts
         delivery_summary     - Final summary with computed win probability
+        deliver_proposal     - simulate branded document delivery with receipts
     """
 
     def __init__(self):
@@ -392,12 +395,17 @@ class ProposalGenerationAgent(BasicAgent):
                             "analyze_rfp", "executive_summary",
                             "solution_pricing", "references_positioning",
                             "compile_proposal", "delivery_summary",
+                            "deliver_proposal",
                         ],
                         "description": "The proposal operation to perform",
                     },
                     "rfp_name": {
                         "type": "string",
                         "description": "RFP or account name (e.g. 'Meridian Healthcare')",
+                    },
+                    "rfp_id": {
+                        "type": "string",
+                        "description": "Exact RFP ID for deliver_proposal (e.g. 'RFP-2024-0147')",
                     },
                 },
                 "required": ["operation"],
@@ -407,6 +415,8 @@ class ProposalGenerationAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "analyze_rfp")
+        if op == "deliver_proposal":
+            return self._deliver_proposal(kwargs.get("rfp_id"))
         key = _resolve_rfp(kwargs.get("rfp_name", ""))
         dispatch = {
             "analyze_rfp": self._analyze_rfp,
@@ -420,6 +430,33 @@ class ProposalGenerationAgent(BasicAgent):
         if not handler:
             return json.dumps({"status": "error", "message": f"Unknown operation: {op}"})
         return handler(key)
+
+    def _deliver_proposal(self, rfp_id):
+        key = _RFP_KEYS_BY_ID.get(rfp_id)
+        if key is None:
+            return json.dumps({
+                "status": "error",
+                "message": f"Unknown rfp_id: {rfp_id!r}",
+                "valid_rfp_ids": ", ".join(sorted(_RFP_KEYS_BY_ID)),
+            })
+        rfp = _RFPS[key]
+        matches, overall = _match_capabilities(rfp)
+        pricing = _compute_pricing(rfp)
+        win_probability, _ = _compute_win_probability(rfp, overall, pricing)
+        receipt = {
+            "status": "simulated",
+            "rfp_id": rfp_id,
+            "account": rfp["account"],
+            "proposal_document": f"{rfp_id.lower()}-proposal.docx",
+            "presentation_deck": f"{rfp_id.lower()}-executive-deck.pptx",
+            "requirement_coverage_pct": overall,
+            "proposed_price": pricing["total_proposed"],
+            "gross_margin_pct": pricing["overall_margin_pct"],
+            "win_probability_pct": win_probability,
+            "document_receipt_id": f"sim-m365-doc-{rfp_id.lower()}",
+            "teams_message_id": f"sim-teams-proposal-{rfp_id.lower()}",
+        }
+        return "**Proposal Delivery Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
     # ── analyze_rfp ────────────────────────────────────────────
     def _analyze_rfp(self, key):

@@ -334,13 +334,15 @@ class TestIntegrity:
                 continue  # skip if file moved
             if agent.get("type") == "stub":
                 # Stubs hash the .py.stub file (not the private-repo bytes).
-                actual = hashlib.sha256(filepath.read_bytes()).hexdigest()
+                canonical = filepath.read_bytes().replace(b"\r\n", b"\n")
+                actual = hashlib.sha256(canonical).hexdigest()
                 assert agent["_stub_sha256"] == actual, (
                     f"{agent['name']}: stub registry hash doesn't match file "
                     f"(registry={agent['_stub_sha256'][:16]}... file={actual[:16]}...)"
                 )
                 continue
-            actual = hashlib.sha256(filepath.read_bytes()).hexdigest()
+            canonical = filepath.read_bytes().replace(b"\r\n", b"\n")
+            actual = hashlib.sha256(canonical).hexdigest()
             assert agent["_sha256"] == actual, (
                 f"{agent['name']}: registry hash doesn't match file "
                 f"(registry={agent['_sha256'][:16]}... file={actual[:16]}...)"

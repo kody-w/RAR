@@ -3,6 +3,11 @@ Product Feedback Synthesizer Agent for Software/Digital Products.
 
 Aggregates and synthesizes customer feedback, feature requests, sentiment
 analysis, and roadmap impact assessments for product management teams.
+
+Version 1.1.0 adds deterministic, evidence-derived pain-point analysis,
+retention and competitive risk alerts, and simulated Jira/Teams activation.
+The four original operations and the agent's package/runtime identity remain
+unchanged.
 """
 
 import sys
@@ -14,7 +19,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_feedback_synthesizer",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Product Feedback Synthesizer Agent",
     "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
     "author": "AIBAST",
@@ -155,10 +160,80 @@ NPS_SCORES = {
     "2026-Q1": {"promoters": 158, "passives": 91, "detractors": 51, "score": 36},
 }
 
+EVIDENCE_ACTIONS = {
+    "FR-001": {
+        "pain_point": "Too many clicks to reach key metrics",
+        "theme": "Customizable experience",
+        "frequency": 87,
+        "severity": 4,
+        "retention_impact": "medium",
+        "competitive_gap": "Competitors offer configurable home views",
+        "jira_project": "PRODUCT",
+        "teams_channel": "Product Feedback Triage",
+    },
+    "FR-002": {
+        "pain_point": "Missing real-time alerting",
+        "theme": "Proactive monitoring",
+        "frequency": 134,
+        "severity": 5,
+        "retention_impact": "high",
+        "competitive_gap": "Alerting is available in competing products",
+        "jira_project": "PLATFORM",
+        "teams_channel": "Product and Engineering",
+    },
+    "FR-003": {
+        "pain_point": "Mobile workflows lag the web experience",
+        "theme": "Mobile productivity",
+        "frequency": 62,
+        "severity": 3,
+        "retention_impact": "medium",
+        "competitive_gap": "Mobile parity is becoming a buying criterion",
+        "jira_project": "MOBILE",
+        "teams_channel": "Mobile Experience",
+    },
+    "FR-004": {
+        "pain_point": "Exports fail above 10,000 rows",
+        "theme": "Reliability at scale",
+        "frequency": 41,
+        "severity": 5,
+        "retention_impact": "high",
+        "competitive_gap": "Reliable large exports are required for migrations",
+        "jira_project": "DATA",
+        "teams_channel": "Data Reliability",
+    },
+    "FR-005": {
+        "pain_point": "Student data lacks role-based access controls",
+        "theme": "Enterprise security",
+        "frequency": 156,
+        "severity": 5,
+        "retention_impact": "critical",
+        "competitive_gap": "Enterprise competitors include granular RBAC",
+        "jira_project": "SECURITY",
+        "teams_channel": "Security and Product",
+    },
+    "FR-006": {
+        "pain_point": "Teams cannot automate repeatable workflows",
+        "theme": "Workflow automation",
+        "frequency": 203,
+        "severity": 4,
+        "retention_impact": "high",
+        "competitive_gap": "Competitor automation is blocking expansion",
+        "jira_project": "AUTOMATION",
+        "teams_channel": "Automation Roadmap",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def _exact_feature(feature_id):
+    if not feature_id:
+        return None, "Provide an exact feature_id: " + ", ".join(sorted(FEATURE_REQUESTS))
+    if feature_id not in FEATURE_REQUESTS:
+        return None, f"Unknown feature_id `{feature_id}`; exact ID required."
+    return FEATURE_REQUESTS[feature_id], None
 
 def _feedback_summary():
     by_sentiment = {"positive": 0, "neutral": 0, "negative": 0}
@@ -235,8 +310,15 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
                             "feature_requests",
                             "sentiment_analysis",
                             "roadmap_impact",
+                            "pain_point_analysis",
+                            "risk_alerts",
+                            "activate_roadmap_action",
                         ],
                         "description": "The feedback operation to perform.",
+                    },
+                    "feature_id": {
+                        "type": "string",
+                        "description": "Exact feature request ID for roadmap activation.",
                     },
                 },
                 "required": ["operation"],
@@ -254,6 +336,12 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
             return self._sentiment_analysis()
         elif op == "roadmap_impact":
             return self._roadmap_impact()
+        elif op == "pain_point_analysis":
+            return self._pain_point_analysis()
+        elif op == "risk_alerts":
+            return self._risk_alerts()
+        elif op == "activate_roadmap_action":
+            return self._activate_roadmap_action(kwargs.get("feature_id"))
         return f"**Error:** Unknown operation `{op}`."
 
     def _feedback_summary(self) -> str:
@@ -350,6 +438,83 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
         lines.append("- Large Dataset Export fix is quick win with low effort and active churn risk.")
         lines.append("- Real-Time Alerting should be accelerated given competitive pressure.")
         return "\n".join(lines)
+
+    def _pain_point_analysis(self) -> str:
+        ranked = sorted(
+            EVIDENCE_ACTIONS.items(),
+            key=lambda item: (item[1]["frequency"] * item[1]["severity"], item[0]),
+            reverse=True,
+        )
+        lines = [
+            "# Pain Point and Feature Theme Analysis",
+            "",
+            "| Rank | Feature ID | Pain Point | Theme | Frequency | Severity | Retention Impact |",
+            "|------|------------|------------|-------|-----------|----------|------------------|",
+        ]
+        for rank, (feature_id, action) in enumerate(ranked, 1):
+            lines.append(
+                f"| {rank} | {feature_id} | {action['pain_point']} | {action['theme']} "
+                f"| {action['frequency']} | {action['severity']}/5 | {action['retention_impact'].upper()} |"
+            )
+        lines.extend([
+            "",
+            "Ranking is deterministic: feedback frequency multiplied by severity, with feature ID as the tie-breaker.",
+        ])
+        return "\n".join(lines)
+
+    def _risk_alerts(self) -> str:
+        ranked = sorted(
+            EVIDENCE_ACTIONS.items(),
+            key=lambda item: (FEATURE_REQUESTS[item[0]]["arr_weight"], item[0]),
+            reverse=True,
+        )
+        lines = [
+            "# Churn Risk and Competitive Gap Alerts",
+            "",
+            "| Feature ID | Retention Risk | ARR Represented | Competitive Gap |",
+            "|------------|----------------|-----------------|-----------------|",
+        ]
+        for feature_id, action in ranked:
+            request = FEATURE_REQUESTS[feature_id]
+            lines.append(
+                f"| {feature_id} | {action['retention_impact'].upper()} "
+                f"| ${request['arr_weight']:,} | {action['competitive_gap']} |"
+            )
+        lines.extend([
+            "",
+            "**Recommended Intervention:** Escalate critical/high retention risks before the next roadmap review.",
+        ])
+        return "\n".join(lines)
+
+    def _activate_roadmap_action(self, feature_id) -> str:
+        request, error = _exact_feature(feature_id)
+        if error:
+            return f"**Error:** {error}"
+        action = EVIDENCE_ACTIONS[feature_id]
+        priority_score = round(
+            request["arr_weight"] / 1000
+            / (3 if request["effort"] == "high" else 2 if request["effort"] == "medium" else 1),
+            1,
+        )
+        return "\n".join([
+            f"# Roadmap Action Activated — {request['title']}",
+            "",
+            f"**Feature ID:** {feature_id}",
+            f"**Theme:** {action['theme']}",
+            f"**Pain Point:** {action['pain_point']}",
+            f"**Evidence:** {action['frequency']} signals at severity {action['severity']}/5",
+            f"**Business Impact:** ${request['arr_weight']:,} ARR represented",
+            f"**Engineering Effort:** {request['effort'].upper()}",
+            f"**Priority Score:** {priority_score}",
+            f"**Retention Risk:** {action['retention_impact'].upper()}",
+            f"**Competitive Gap:** {action['competitive_gap']}",
+            "",
+            f"**Jira Ticket:** {action['jira_project']}-{feature_id}",
+            f"**Jira Receipt:** sim-jira-{feature_id.lower()}",
+            f"**Microsoft Teams Channel:** {action['teams_channel']}",
+            f"**Teams Receipt:** sim-teams-product-{feature_id.lower()}",
+            "**External Writes:** simulated; no live Jira or Microsoft Teams mutation performed.",
+        ])
 
 
 # ---------------------------------------------------------------------------

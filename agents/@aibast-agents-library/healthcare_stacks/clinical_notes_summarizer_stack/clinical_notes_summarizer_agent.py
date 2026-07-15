@@ -4,6 +4,11 @@ Clinical Notes Summarizer Agent for Healthcare.
 Summarizes patient encounters, performs medication reviews, generates
 problem lists, and produces referral summaries from clinical documentation
 for healthcare providers and care coordinators.
+
+Version 1.1.0 preserves those operations and adds the demonstrated pre-op
+clearance workflow. Added results use the patient facts visible in the source
+demo, are deterministic and keyed by patient ID ``78392``, and simulate the
+final EHR and care-team update without performing a live write.
 """
 
 import sys
@@ -15,7 +20,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/clinical_notes_summarizer",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Clinical Notes Summarizer Agent",
     "description": "Summarizes patient encounters, performs medication reviews, generates problem lists, and produces referral summaries.",
     "author": "AIBAST",
@@ -151,6 +156,52 @@ REFERRALS = {
     },
 }
 
+PREOP_CLEARANCE = {
+    "patient_id": "78392",
+    "patient": "John Martinez",
+    "age": 67,
+    "sex": "male",
+    "procedure_date": "November 2",
+    "encounters_reviewed": 14,
+    "cardiac": [
+        "Cardiac status: stable",
+        "Emergency evaluation 2 months ago: myocardial infarction ruled out",
+        "ECG yesterday: normal sinus rhythm, 82 bpm",
+        "Cardiac risk: low (Goldman below 1%)",
+    ],
+    "respiratory": [
+        "COPD Stage 2; FEV1 68% predicted",
+        "Exacerbation 6 weeks ago: resolved",
+        "O2 saturation: 94% on room air",
+        "Respiratory risk: moderate",
+    ],
+    "labs": "Creatinine 1.1, eGFR 67, potassium 4.2 — acceptable",
+    "medications": [
+        "Metoprolol 50 mg BID",
+        "Lisinopril 10 mg daily — hold 24 hours before procedure",
+        "Metformin 1000 mg BID",
+        "Tamsulosin 0.4 mg — floppy iris risk alert",
+        "Aspirin 81 mg",
+        "Six additional medications reconciled with no surgical concerns",
+    ],
+    "plan": [
+        "Monitored anesthesia care (MAC)",
+        "Extended PACU monitoring for 2-3 hours with continuous pulse oximetry",
+        "Notify anesthesia team of floppy iris syndrome risk",
+        "Use an afternoon slot for optimal respiratory status",
+    ],
+    "asa_class": "III",
+    "clearance_status": "APPROVED with documented precautions",
+    "reconsider_if": [
+        "COPD exacerbation within 2 weeks",
+        "Acute or new cardiac symptoms",
+        "O2 saturation below 90% on room air",
+        "Uncontrolled blood pressure above 180/100",
+        "Active URI or bronchitis; delay 2-4 weeks",
+        "Medication changes that require stability reassessment",
+    ],
+}
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -238,6 +289,11 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
                             "medication_review",
                             "problem_list",
                             "referral_summary",
+                            "preop_clearance",
+                            "cardiopulmonary_assessment",
+                            "surgical_medication_reconciliation",
+                            "anesthesia_risk_plan",
+                            "issue_clearance_note",
                         ],
                         "description": "The clinical notes operation to perform.",
                     },
@@ -247,7 +303,7 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
                     },
                     "patient_id": {
                         "type": "string",
-                        "description": "Optional patient ID to filter results.",
+                        "description": "Optional exact patient ID; 78392 selects the demonstrated pre-op case.",
                     },
                 },
                 "required": ["operation"],
@@ -265,7 +321,27 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
             return self._problem_list()
         elif op == "referral_summary":
             return self._referral_summary()
+        elif op == "preop_clearance":
+            return self._preop_clearance(kwargs.get("patient_id"))
+        elif op == "cardiopulmonary_assessment":
+            return self._cardiopulmonary_assessment(kwargs.get("patient_id"))
+        elif op == "surgical_medication_reconciliation":
+            return self._surgical_medication_reconciliation(kwargs.get("patient_id"))
+        elif op == "anesthesia_risk_plan":
+            return self._anesthesia_risk_plan(kwargs.get("patient_id"))
+        elif op == "issue_clearance_note":
+            return self._issue_clearance_note(kwargs.get("patient_id"))
         return f"**Error:** Unknown operation `{op}`."
+
+    @staticmethod
+    def _preop_case(patient_id):
+        if patient_id and patient_id != PREOP_CLEARANCE["patient_id"]:
+            return None
+        return PREOP_CLEARANCE
+
+    @staticmethod
+    def _missing_preop(patient_id):
+        return f"**Error:** No demonstrated pre-op case for patient `{patient_id}`. Available patient ID: 78392."
 
     def _summarize_encounter(self) -> str:
         data = _summarize_encounter()
@@ -342,11 +418,89 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
             )
         return "\n".join(lines)
 
+    def _preop_clearance(self, patient_id=None) -> str:
+        data = self._preop_case(patient_id)
+        if not data:
+            return self._missing_preop(patient_id)
+        return "\n".join([
+            "# Pre-Op Clearance Summary",
+            "",
+            f"**Patient:** {data['patient']} ({data['patient_id']}), {data['age']}-year-old {data['sex']}",
+            f"**Procedure date:** {data['procedure_date']}",
+            f"**Evidence reviewed:** {data['encounters_reviewed']} encounters over 12 months, recent labs, ECG, medications, and problem list",
+            f"**Labs:** {data['labs']}",
+            f"**ASA class:** {data['asa_class']}",
+            f"**Clearance:** {data['clearance_status']}",
+            "",
+            "_Read-only deterministic summary from the demonstrated EHR scenario._",
+        ])
+
+    def _cardiopulmonary_assessment(self, patient_id=None) -> str:
+        data = self._preop_case(patient_id)
+        if not data:
+            return self._missing_preop(patient_id)
+        lines = ["# Cardiopulmonary Assessment", "", f"**Patient ID:** {data['patient_id']}", "", "## Cardiac"]
+        lines.extend(f"- {item}" for item in data["cardiac"])
+        lines.append("\n## Respiratory")
+        lines.extend(f"- {item}" for item in data["respiratory"])
+        lines.append(f"\n**Labs:** {data['labs']}")
+        return "\n".join(lines)
+
+    def _surgical_medication_reconciliation(self, patient_id=None) -> str:
+        data = self._preop_case(patient_id)
+        if not data:
+            return self._missing_preop(patient_id)
+        lines = [
+            "# Surgical Medication Reconciliation",
+            "",
+            f"**Patient ID:** {data['patient_id']} | **Active medications:** 12",
+            "",
+        ]
+        lines.extend(f"- {item}" for item in data["medications"])
+        lines.append("\n_Read-only medication result; no medication order was changed._")
+        return "\n".join(lines)
+
+    def _anesthesia_risk_plan(self, patient_id=None) -> str:
+        data = self._preop_case(patient_id)
+        if not data:
+            return self._missing_preop(patient_id)
+        lines = [
+            "# Anesthesia and Risk Plan",
+            "",
+            f"**Patient ID:** {data['patient_id']} | **ASA class:** {data['asa_class']}",
+            f"**Clearance:** {data['clearance_status']}",
+            "",
+            "## Recommended plan",
+        ]
+        lines.extend(f"- {item}" for item in data["plan"])
+        lines.append("\n## Reconsider clearance if")
+        lines.extend(f"- {item}" for item in data["reconsider_if"])
+        return "\n".join(lines)
+
+    def _issue_clearance_note(self, patient_id=None) -> str:
+        data = self._preop_case(patient_id)
+        if not data:
+            return self._missing_preop(patient_id)
+        return "\n".join([
+            "# Simulated Clearance Note Issue",
+            "",
+            f"**Patient ID:** {data['patient_id']} | **ASA class:** {data['asa_class']}",
+            f"**Decision:** {data['clearance_status']}",
+            "**Destination:** Epic EHR pre-op evaluation, ophthalmology, anesthesia, and scheduling teams",
+            f"**Simulated receipt:** SIM-CLEARANCE-{data['patient_id']}",
+            "",
+            "**Status:** SIMULATED — no EHR record, signature, message, or schedule was created or changed.",
+        ])
+
 
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = ClinicalNotesSummarizerAgent()
-    for op in ["summarize_encounter", "medication_review", "problem_list", "referral_summary"]:
+    for op in [
+        "summarize_encounter", "medication_review", "problem_list", "referral_summary",
+        "preop_clearance", "cardiopulmonary_assessment",
+        "surgical_medication_reconciliation", "anesthesia_risk_plan", "issue_clearance_note",
+    ]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

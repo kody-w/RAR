@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/contract_risk_review",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Contract Risk Review Agent",
     "description": "Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.",
     "author": "AIBAST",
@@ -130,6 +130,42 @@ RENEWAL_CALENDAR = [
     {"contract_id": "CTR-5004", "renewal_date": "2030-03-31", "days_out": 1474, "action": "Option-year review in 2028"},
 ]
 
+EVIDENCE_CAPABILITIES = {
+    "implementation_package": {
+        "title": "Prioritized Amendment and Redline Package",
+        "write": True,
+        "records": [
+            {
+                "record_id": "CRR-501",
+                "contract_id": "CTR-5001",
+                "priority": "P0",
+                "benchmark": "liability cap of at least annual contract value",
+                "quantified_impact": "$6.3M additional uncovered exposure at the low end",
+                "amendment": "raise cap to $8.3M and add IP/data-breach carve-outs",
+                "redline": "Section 7.1 replacement language prepared",
+            },
+            {
+                "record_id": "CRR-502",
+                "contract_id": "CTR-5001",
+                "priority": "P0",
+                "benchmark": "supplier retains pre-existing intellectual property",
+                "quantified_impact": "all reusable improvements currently assigned to client",
+                "amendment": "carve out pre-existing IP and add a derivative license-back",
+                "redline": "Section 8.2 replacement language prepared",
+            },
+            {
+                "record_id": "CRR-503",
+                "contract_id": "CTR-5001",
+                "priority": "P1",
+                "benchmark": "Net 30 to Net 45 payment terms",
+                "quantified_impact": "$1.4M cash-flow delay under Net 60",
+                "amendment": "replace Net 60 with Net 30, fallback Net 45",
+                "redline": "Section 9.4 replacement language prepared",
+            },
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -160,6 +196,41 @@ def _total_exposure():
     return sum(c["value"] for c in CONTRACTS.values() if c["risk_score"] >= 5.0)
 
 
+def _evidence_matches(user_input, records):
+    """Match explicit evidence IDs without falling through to another contract."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _render_evidence_operation(capability, user_input=""):
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = spec["records"]
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute contract was used.")
+    else:
+        lines.append("Benchmark-grounded, deterministic amendments:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    target = matches[0]["record_id"] if matches else "NO-MATCH"
+    lines.extend([
+        "\n### Simulated Write Receipt",
+        f"- receipt_id: SIM-{capability.upper()}-{target}",
+        "- status: simulated",
+        "- target_systems: Microsoft Word and Microsoft Teams",
+        "- artifacts: redlined agreement and prioritized implementation plan",
+        "- No document was edited or shared; this is a preview-only write.",
+    ])
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -177,6 +248,7 @@ class ContractRiskReviewAgent(BasicAgent):
                 "clause_analysis",
                 "compliance_check",
                 "renegotiation_brief",
+                "implementation_package",
             ],
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -188,6 +260,7 @@ class ContractRiskReviewAgent(BasicAgent):
             "clause_analysis": self._clause_analysis,
             "compliance_check": self._compliance_check,
             "renegotiation_brief": self._renegotiation_brief,
+            "implementation_package": self._implementation_package,
         }
         handler = dispatch.get(operation)
         if handler is None:
@@ -300,6 +373,12 @@ class ContractRiskReviewAgent(BasicAgent):
         total_risk_val = sum(c["value"] for _, c in high_risk)
         lines.append(f"**Total contract value requiring renegotiation:** ${total_risk_val:,.0f}")
         return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _implementation_package(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "implementation_package", kwargs.get("user_input", "")
+        )
 
 
 # ---------------------------------------------------------------------------

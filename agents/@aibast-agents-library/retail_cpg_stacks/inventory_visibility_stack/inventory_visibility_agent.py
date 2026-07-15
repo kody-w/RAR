@@ -4,6 +4,10 @@ Inventory Visibility Agent — Retail & CPG Stack
 Provides real-time inventory visibility across stores, warehouses, and channels.
 Surfaces stock alerts, generates replenishment plans, and optimizes channel
 allocation for omni-channel retail operations.
+
+Version 1.1.0 adds deterministic, exact-keyed examples for demonstrated
+network status, store reallocation, simulated execution, and investment
+proposal workflows. All external writes are simulated.
 """
 
 import sys
@@ -18,7 +22,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_visibility",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Inventory Visibility Agent",
     "description": (
         "Delivers real-time inventory dashboards, stock-out alerts, "
@@ -134,6 +138,123 @@ DAILY_SELL_THROUGH = {
     "SKU-1005": 2.7, "SKU-1006": 12.0, "SKU-1007": 4.4, "SKU-1008": 7.3,
 }
 
+EVIDENCE_CAPABILITIES = {
+    "network_inventory_status": {
+        "title": "Cross-Location Inventory Status",
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "status_id",
+        "summary": (
+            "Returns SKU-level inventory across stores, warehouses, in-transit, "
+            "and ecommerce reserves while highlighting allocation imbalances."
+        ),
+        "record": {
+            "status_id": "STATUS-WINTER-JACKETS-NW",
+            "product": "Alpine Pro Winter Jacket",
+            "scope": "51 locations",
+            "inventory": "Stores 1,847; warehouses 940; in-transit 285; ecommerce reserve 128",
+            "imbalance": "Portland Flagship 0 units; Portland Mall 3 units at 8/day; Seattle excess 247 units at 4/day",
+            "opportunity": "Transfer 120 Seattle units to Portland to recover $18,400 in sales",
+            "inputs_considered": "Real-time inventory, POS demand, and demand forecast",
+        },
+    },
+    "reallocation_scenarios": {
+        "title": "Demand-Aware Reallocation Scenarios",
+        "source_system": "Dynamics 365 Supply Chain Management",
+        "write": False,
+        "key_field": "plan_id",
+        "summary": (
+            "Compares urgent and planned transfers using demand forecasts, "
+            "distance, transit time, cost, and revenue recovery."
+        ),
+        "record": {
+            "plan_id": "PLAN-SEATTLE-PORTLAND",
+            "phase_1": "Move 40 units Seattle Flagship to Portland Flagship by overnight van; 12 hours; $340; $6,800 recovery",
+            "phase_2": "Move 80 units from three Seattle suburban stores by regular truck; 24-48 hours; $180; $11,600 recovery",
+            "total": "120 units; $520 transportation; $18,400 recovered revenue; 35:1 ROI",
+            "source_impact": "Seattle retains 127 units, an 8-week supply at current demand",
+            "recommendation": "Execute emergency phase first, then planned replenishment",
+        },
+    },
+    "reallocation_execution": {
+        "title": "Reallocation Execution and Health",
+        "source_system": "Dynamics 365 Supply Chain Management and Microsoft Teams",
+        "write": True,
+        "key_field": "execution_id",
+        "summary": (
+            "Prepares transfer execution, stakeholder notifications, status "
+            "tracking, and a system-wide inventory health view."
+        ),
+        "record": {
+            "execution_id": "EXEC-SEATTLE-PORTLAND",
+            "transfer_status": "Phase 1 van scheduled and pickup confirmed; Phase 2 truck routed",
+            "notifications": "Store teams notified; Portland ecommerce availability prepared",
+            "health": "Balance score 72/100; 43 days supply; $2.8M overstock; 147 stockouts/month",
+            "additional_opportunities": "8 SKU reallocations; 680 units; 15 routes; $84,200 recovery for $3,400",
+            "execution_note": "Simulation only; no quantities, routes, or notifications are changed",
+        },
+    },
+    "investment_proposal": {
+        "title": "Inventory Automation Investment Proposal",
+        "source_system": "Microsoft Teams",
+        "write": True,
+        "key_field": "proposal_id",
+        "summary": (
+            "Builds an automation proposal with RFID, auto-replenishment, "
+            "predictive allocation, and deterministic financial projections."
+        ),
+        "record": {
+            "proposal_id": "PROPOSAL-NW-AUTOMATION",
+            "rfid": "$85,000; accuracy 87% to 99.8%; $127,000 annual labor savings; 8-month payback",
+            "auto_replenishment": "$45,000; stockouts down 62%; $142,000 annual savings; 3.8-month payback",
+            "predictive_allocation": "$32,000; $71,000 annual revenue protection; 5.4-month payback",
+            "three_year_projection": "$162,000 investment; $1,020,000 benefits; $858,000 net value; 530% ROI",
+            "distribution": "Prepared for CFO and operations review in Microsoft Teams",
+        },
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    record = capability["record"]
+    key_field = capability["key_field"]
+    if key:
+        if str(record[key_field]).lower() == str(key).strip().lower():
+            return "match", record
+        return "not_found", None
+
+    query_tokens = _normalize_evidence_tokens(user_input)
+    key_tokens = _normalize_evidence_tokens(record[key_field])
+    width = len(key_tokens)
+    if width and any(
+        query_tokens[index:index + width] == key_tokens
+        for index in range(len(query_tokens) - width + 1)
+    ):
+        return "match", record
+    return "summary", None
+
+
+def _format_evidence_record(record):
+    return "\n".join(
+        f"- **{field.replace('_', ' ').title()}:** {value}"
+        for field, value in record.items()
+    )
+
 
 # ---------------------------------------------------------------------------
 # Helper Functions
@@ -205,10 +326,16 @@ class InventoryVisibilityAgent(BasicAgent):
                             "stock_alerts",
                             "replenishment_plan",
                             "channel_allocation",
+                            "network_inventory_status",
+                            "reallocation_scenarios",
+                            "reallocation_execution",
+                            "investment_proposal",
                         ],
                     },
                     "sku_id": {"type": "string"},
                     "location_id": {"type": "string"},
+                    "key": {"type": "string"},
+                    "user_input": {"type": "string"},
                 },
                 "required": ["operation"],
             },
@@ -336,6 +463,52 @@ class InventoryVisibilityAgent(BasicAgent):
         lines.append("- **Marketplace Cap:** Limit marketplace allocation to prevent channel conflict")
         return "\n".join(lines)
 
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        lookup_status, record = _record_for_evidence_request(
+            capability,
+            kwargs.get("key", ""),
+            kwargs.get("user_input", ""),
+        )
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["summary"],
+            "",
+            f"## {capability['source_system']} (synthetic demo data)",
+            "",
+        ]
+        if lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            selected = record or capability["record"]
+            label = "Exact keyed record" if lookup_status == "match" else "Worked example"
+            lines.extend([f"**{label}:**", _format_evidence_record(selected)])
+
+        if capability["write"] and lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- **Action Status:** simulated",
+                f"- **Receipt:** SIM-{capability_name.upper()}-{receipt_key}",
+                f"- **Target System:** {capability['source_system']}",
+                "- **External Changes:** none; no live mutation or notification occurred",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable workflow; provide an exact key to generate a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend(["", "_Read-only; no external system is modified._"])
+        return "\n".join(lines)
+
     # ---- dispatch ----------------------------------------------------------
 
     def perform(self, **kwargs):
@@ -345,10 +518,16 @@ class InventoryVisibilityAgent(BasicAgent):
             "stock_alerts": self._stock_alerts,
             "replenishment_plan": self._replenishment_plan,
             "channel_allocation": self._channel_allocation,
+            "network_inventory_status": self._evidence_capability,
+            "reallocation_scenarios": self._evidence_capability,
+            "reallocation_execution": self._evidence_capability,
+            "investment_proposal": self._evidence_capability,
         }
         handler = dispatch.get(operation)
         if not handler:
             return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        if operation in EVIDENCE_CAPABILITIES:
+            return handler(operation, **kwargs)
         return handler(**kwargs)
 
 

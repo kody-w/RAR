@@ -3,6 +3,11 @@ Portfolio Rebalancing Agent — Financial Services Stack
 
 Analyzes portfolio drift, generates rebalancing recommendations,
 assesses tax impact, and creates execution plans.
+
+Version 1.1.0 adds the materially distinct capabilities demonstrated in the
+Portfolio Rebalancing evidence: retirement projection modeling, portfolio risk
+analysis, and client-ready Word/Excel/Teams deliverables with Dynamics audit
+logging. The four original operations and their outputs remain unchanged.
 """
 
 import sys
@@ -14,11 +19,11 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/portfolio_rebalancing",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Portfolio Rebalancing Agent",
     "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
     "author": "AIBAST",
-    "tags": ["portfolio", "rebalancing", "allocation", "tax", "trading", "financial-services"],
+    "tags": ["portfolio", "rebalancing", "allocation", "tax", "trading", "financial-services", "retirement-projection", "risk-analysis"],
     "category": "financial_services",
     "quality_tier": "community",
     "requires_env": [],
@@ -78,6 +83,60 @@ TAX_RATES = {
     "net_investment_income_tax": 0.038,
 }
 
+EVIDENCE_CAPABILITIES = {
+    "retirement_projection": {
+        "name": "Retirement Projection Modeling",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "projection_id",
+        "knowledge": [
+            "The agent models retirement projections by running simulations to estimate future values and income coverage (demo 00:01:30-00:01:37).",
+            "The manager uses the projections to validate the strategy and finalize decisions (demo 00:01:37-00:01:42).",
+            "The one-pager identifies retirement projection modeling and success calculations as a core agent capability.",
+        ],
+        "records": [
+            {"projection_id": "PROJ-7101", "portfolio_id": "PORT-5001", "horizon_years": 20, "projected_value": "$25.8M", "income_coverage": "118%", "success_probability": "91%"},
+            {"projection_id": "PROJ-7102", "portfolio_id": "PORT-5002", "horizon_years": 15, "projected_value": "$12.7M", "income_coverage": "104%", "success_probability": "86%"},
+            {"projection_id": "PROJ-7103", "portfolio_id": "PORT-5001", "horizon_years": 25, "projected_value": "$31.4M", "income_coverage": "126%", "success_probability": "94%"},
+        ],
+    },
+    "risk_analysis": {
+        "name": "Portfolio Risk Analysis",
+        "source_system": "Dynamics 365 CRM",
+        "write": False,
+        "generative": False,
+        "key_field": "risk_id",
+        "knowledge": [
+            "The agent surfaces key factors showing potential risk reduction before the manager completes the review (demo 00:01:43-00:01:55).",
+            "Portfolio drift and risk are analyzed together to keep allocations aligned to investment goals (one-pager, Slide 1).",
+            "Market signals and client-specific factors ground the risk view (demo 00:00:50-00:00:58).",
+        ],
+        "records": [
+            {"risk_id": "RISK-8201", "portfolio_id": "PORT-5001", "factor": "US large-cap concentration", "current_exposure": "35%", "proposed_exposure": "30%", "risk_effect": "Concentration reduced"},
+            {"risk_id": "RISK-8202", "portfolio_id": "PORT-5002", "factor": "Interest-rate duration", "current_exposure": "46%", "proposed_exposure": "44%", "risk_effect": "Duration reduced"},
+            {"risk_id": "RISK-8203", "portfolio_id": "PORT-5001", "factor": "International underweight", "current_exposure": "12%", "proposed_exposure": "15%", "risk_effect": "Diversification improved"},
+        ],
+    },
+    "client_deliverables": {
+        "name": "Client-Ready Deliverables and Audit Logging",
+        "source_system": "Microsoft 365 and Dynamics 365 CRM",
+        "write": True,
+        "generative": True,
+        "key_field": "deliverable_id",
+        "knowledge": [
+            "The agent drafts client-ready materials in Word and Excel and surfaces updates in Microsoft Teams (demo 00:01:56-00:02:03).",
+            "Approved actions are logged back to Dynamics for complete audit-ready records (demo 00:02:03-00:02:08).",
+            "The one-pager calls for presentations and implementation plans that clearly demonstrate advisor value.",
+        ],
+        "records": [
+            {"deliverable_id": "DLV-9301", "portfolio_id": "PORT-5001", "word_brief": "Ready", "excel_model": "Ready", "teams_update": "Prepared", "dynamics_log": "Pending approval"},
+            {"deliverable_id": "DLV-9302", "portfolio_id": "PORT-5002", "word_brief": "Ready", "excel_model": "Ready", "teams_update": "Prepared", "dynamics_log": "Pending approval"},
+            {"deliverable_id": "DLV-9303", "portfolio_id": "PORT-5001", "word_brief": "Draft", "excel_model": "Ready", "teams_update": "Not prepared", "dynamics_log": "Awaiting review"},
+        ],
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Helper functions
@@ -123,6 +182,70 @@ def _max_drift(portfolio):
     return max(drifts) if drifts else 0
 
 
+def _normalized_lookup_tokens(value):
+    """Normalize whitespace-delimited tokens without permitting embedded IDs."""
+    normalized = []
+    for token in str(value or "").casefold().split():
+        cleaned = "".join(char for char in token if char.isalnum())
+        if cleaned:
+            normalized.append(cleaned)
+    return normalized
+
+
+def _contains_normalized_key(user_input, key):
+    """Return True only when the complete normalized key is a token sequence."""
+    query = _normalized_lookup_tokens(user_input)
+    expected = _normalized_lookup_tokens(key)
+    width = len(expected)
+    return bool(width) and any(
+        query[index:index + width] == expected
+        for index in range(len(query) - width + 1)
+    )
+
+
+def _evidence_capability(operation, user_input=""):
+    """Render a deterministic evidence-derived capability."""
+    capability = EVIDENCE_CAPABILITIES[operation]
+    records = capability["records"]
+    key_field = capability["key_field"]
+    lookup_supplied = bool(str(user_input or "").strip())
+    matches = [
+        record for record in records
+        if _contains_normalized_key(user_input, record[key_field])
+    ]
+    match = matches[0] if len(matches) == 1 else None
+
+    lines = [f"# {capability['name']}\n"]
+    lines.append(f"**Source System:** {capability['source_system']}")
+    lines.append(f"**Lookup Key:** `{key_field}`\n")
+    if match:
+        lines.append(f"## Record {match[key_field]}\n")
+        for field, value in match.items():
+            lines.append(f"- **{field.replace('_', ' ').title()}:** {value}")
+    elif lookup_supplied:
+        lines.append(
+            f"No exact normalized `{key_field}` matched the request."
+        )
+    else:
+        headers = list(records[0])
+        lines.append(f"## Summary — {len(records)} records\n")
+        lines.append("| " + " | ".join(field.replace("_", " ").title() for field in headers) + " |")
+        lines.append("|" + "|".join("---" for _ in headers) + "|")
+        for record in records:
+            lines.append("| " + " | ".join(str(record[field]) for field in headers) + " |")
+
+    if capability["write"] and match:
+        lines.append("\n## Simulated Write Receipt\n")
+        lines.append(f"- **Receipt ID:** SIM-{match[key_field]}")
+        lines.append(f"- **Target:** {capability['source_system']}")
+        lines.append("- **Status:** Simulated only — no external system or record was modified.")
+
+    lines.append("\n## Knowledge\n")
+    for fact in capability["knowledge"]:
+        lines.append(f"- {fact}")
+    return "\n".join(lines)
+
+
 # ---------------------------------------------------------------------------
 # Agent class
 # ---------------------------------------------------------------------------
@@ -146,9 +269,16 @@ class PortfolioRebalancingAgent(BasicAgent):
                             "rebalance_recommendation",
                             "tax_impact",
                             "execution_plan",
+                            "retirement_projection",
+                            "risk_analysis",
+                            "client_deliverables",
                         ],
                     },
                     "portfolio_id": {"type": "string"},
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional exact evidence-record key, such as PROJ-7101, RISK-8201, or DLV-9301.",
+                    },
                 },
                 "required": ["operation"],
             },
@@ -164,9 +294,11 @@ class PortfolioRebalancingAgent(BasicAgent):
             "execution_plan": self._execution_plan,
         }
         handler = dispatch.get(operation)
-        if not handler:
-            return f"**Error:** Unknown operation `{operation}`."
-        return handler(**kwargs)
+        if handler:
+            return handler(**kwargs)
+        if operation in EVIDENCE_CAPABILITIES:
+            return _evidence_capability(operation, kwargs.get("user_input", ""))
+        return f"**Error:** Unknown operation `{operation}`."
 
     def _portfolio_analysis(self, **kwargs) -> str:
         lines = ["# Portfolio Analysis\n"]
