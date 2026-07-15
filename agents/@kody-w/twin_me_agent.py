@@ -79,7 +79,7 @@ except Exception:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_me",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "TwinMe",
     "description": (
         "Say 'twin me' to pack a generic, PII-stripped digital-twin .egg of this "
@@ -258,7 +258,7 @@ def _load_rappid(ws: Path, kwargs) -> dict:
     import uuid
     h = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
     return {
-        "schema": "rapp-rappid/2.0",
+        "schema": "rapp/1",
         "rappid": f"rappid:@{owner}/twin:{h}",
         "parent_rappid": ORIGIN_RAPPID,
         "kind": "personal",
@@ -278,7 +278,7 @@ _RAPPID_KEEP_KEYS = (
 
 def _sanitize_rappid(rappid_json: dict) -> dict:
     out = {k: rappid_json[k] for k in _RAPPID_KEEP_KEYS if k in rappid_json}
-    out.setdefault("schema", "rapp-rappid/2.0")
+    out.setdefault("schema", "rapp/1")
     return out
 
 

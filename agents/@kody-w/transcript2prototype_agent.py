@@ -83,7 +83,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/transcript2prototype",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Transcript2Prototype",
     "description": ("Transcript -> demo script -> injected M365 demo iframe -> "
                     "generated agent.pys -> local twin run -> live twin run -> "
@@ -5409,7 +5409,7 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
         rappid = f"rappid:@{_own}/{_slug}:" + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
         if not os.path.isfile(os.path.join(tdir, "rappid.json")):
             _write_json(os.path.join(tdir, "rappid.json"), {
-                "schema": "rapp-rappid/3.0", "rappid": rappid,
+                "schema": "rapp/1", "rappid": rappid,
                 "parent_rappid": parent.get("rappid"),
                 "born_at": _now(), "name": f"t2p-{slug}",
                 "owner": parent.get("owner"), "kind": "t2p-prototype-twin",

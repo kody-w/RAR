@@ -36,6 +36,7 @@ import base64
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -50,7 +51,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/plant_seed_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Plant Seed",
     "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
     "author": "kody-w",
@@ -105,9 +106,15 @@ def _now_iso() -> str:
 
 def _mint_rappid(kind: str, owner: str, name: str) -> str:
     # Consolidated rappid (CONSTITUTION Art. XXXIV.1, locked 2026-06-03):
-    # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity. `kind`
-    # is written to the rappid.json record, not the string.
-    return f"rappid:@{owner}/{name}:{hashlib.sha256(uuid.uuid4().bytes).hexdigest()}"
+    # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity. The tail
+    # is the canonical keyless mint Hb("rapp/1:rappid", uuid4) (spec §6.2,
+    # domain-separated), NEVER a name-hash. `kind` lives in the record, not the
+    # string. owner/name are canonicalized to the §6.1 grammar (lowercase, single
+    # hyphens) so a real GitHub login like "Kody-W" yields a valid rappid.
+    _o = re.sub(r"[^a-z0-9]+", "-", (owner or "anon").lower()).strip("-") or "anon"
+    _n = re.sub(r"[^a-z0-9]+", "-", (name or "x").lower()).strip("-") or "x"
+    tail = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
+    return f"rappid:@{_o}/{_n}:{tail}"
 
 
 def _gh(args: list[str], timeout: int = 30) -> tuple[int, str, str]:
@@ -191,7 +198,7 @@ def _build_neighborhood_files(rappid: str, kind: str, owner: str, name: str,
     gate_url = f"https://{owner}.github.io/{name}/"
 
     files["rappid.json"] = (json.dumps({
-        "schema": "rapp-rappid/2.0", "rappid": rappid, "kind": kind,
+        "schema": "rapp/1", "rappid": rappid, "kind": kind,
         "name": name, "display_name": display_name,
         "github": f"https://github.com/{owner}/{name}", "url": gate_url,
         "parent_rappid": None,
@@ -329,7 +336,7 @@ def _build_twin_files(rappid: str, owner: str, name: str, display_name: str,
     gate_url = f"https://{owner}.github.io/{name}/"
 
     files["rappid.json"] = (json.dumps({
-        "schema": "rapp-rappid/2.0", "rappid": rappid, "kind": "twin",
+        "schema": "rapp/1", "rappid": rappid, "kind": "twin",
         "name": name, "display_name": display_name,
         "github": f"https://github.com/{owner}/{name}", "url": gate_url,
         "parent_rappid": None,

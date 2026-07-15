@@ -53,7 +53,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/twin_agent",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Twin",
     "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
     "author": "RAPP",
@@ -79,7 +79,7 @@ KINDS = ("personal", "pre-founder", "memorial", "project", "place", "custom")
 # CONSTITUTION Article XXXIV.1 (2026-04-30 ratification). The legacy UUID
 # 37ad22f5-ed6d-48b1-b8b4-61019f58a42b is preserved as the hash field
 # (dashes stripped) — same identity, new string representation.
-WILDHAVEN_RAPPID = "rappid:@kody-w/wildhaven-ai-homes-twin:37ad22f5ed6d48b1b8b461019f58a42b"
+WILDHAVEN_RAPPID = "rappid:@kody-w/wildhaven-ai-homes-twin:df9c3f1f4b09d000720e93be4248d44213025ba5f76bf1180dc5d1ba0b0efd36"
 WILDHAVEN_REPO = "https://github.com/kody-w/wildhaven-ai-homes-twin.git"
 
 PORT_LOW, PORT_HIGH = 7081, 7200
@@ -1079,9 +1079,10 @@ class TwinAgent(BasicAgent):
             return f"Error: unknown kind '{kind}'. Valid: {', '.join(KINDS)}"
 
         # Consolidated rappid per CONSTITUTION Article XXXIV.1 (locked 2026-06-03):
-        # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity hash.
-        # `kind` is written to the rappid.json record, not the string.
-        _hash = hashlib.sha256(uuid.uuid4().bytes).hexdigest()
+        # rappid:@<owner>/<slug>:<64hex> — self-locating + 256-bit identity. The
+        # tail is the canonical keyless mint Hb("rapp/1:rappid", uuid4) (spec §6.2,
+        # domain-separated), never a name-hash. `kind` lives in the record.
+        _hash = hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
         rappid = f"rappid:@kody-w/{twin_name}:{_hash}"
         now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         # Workspace dir uses the hash (filesystem-friendly) — not the full v2 string.
@@ -1096,7 +1097,7 @@ class TwinAgent(BasicAgent):
         try:
             (workspace / "soul.md").write_text(SOUL_TEMPLATES[kind](twin_name, description))
             (workspace / "rappid.json").write_text(json.dumps({
-                "schema": "rapp-rappid/2.0",
+                "schema": "rapp/1",
                 "rappid": rappid,
                 "parent_rappid": WILDHAVEN_RAPPID,
                 "parent_repo": WILDHAVEN_REPO,

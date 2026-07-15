@@ -64,7 +64,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/launch_to_public_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Launch to Public",
     "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
     "author": "kody-w",
@@ -246,9 +246,13 @@ def _build_scaffolding(workspace: str, *, gh_user: str, repo_name: str,
 
     # Canonical keyless mint (spec §6.2): Hb("rapp/1:rappid", uuid4). owner/slug
     # (@gh_user/repo_name) locate the door; kind lives in the rappid.json record,
-    # never in the string. NEVER a hash of the name (the cardinal sin).
+    # never in the string. NEVER a hash of the name (the cardinal sin). owner/slug
+    # are canonicalized to the §6.1 grammar so a real login like "Kody-W" or a
+    # repo "My_Repo.v2" produces a valid (lowercase, hyphenated) rappid.
+    _own = re.sub(r"[^a-z0-9]+", "-", (gh_user or "anon").lower()).strip("-") or "anon"
+    _slug = re.sub(r"[^a-z0-9]+", "-", (repo_name or "x").lower()).strip("-") or "x"
     rappid = (
-        f"rappid:@{gh_user}/{repo_name}:"
+        f"rappid:@{_own}/{_slug}:"
         + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
     )
     grafted_onto = {
@@ -261,7 +265,7 @@ def _build_scaffolding(workspace: str, *, gh_user: str, repo_name: str,
         "bond_kind": "graft",
     }
     write_if_absent("rappid.json", json.dumps({
-        "schema": "rapp-rappid/2.0",
+        "schema": "rapp/1",
         "rappid": rappid,
         "kind": kind,
         "name": neighborhood_name,
