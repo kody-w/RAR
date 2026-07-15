@@ -73,7 +73,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "RappAgent",
     "description": ("The one agent for the whole RAPP ecosystem: identity, "
                     "doors, local cubbies, shared neighborhoods, eggs, the "
@@ -1115,7 +1115,7 @@ class RappAgent(BasicAgent):
         rappid = f"rappid:@{ctx.get('handle') or 'kody'}/{name}-twin:{h}"
         _write_json(os.path.join(ws, "rappid.json"), {
             "schema": "rapp-rappid/2.0", "rappid": rappid,
-            "parent_rappid": "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+            "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
             "kind": "twin", "name": f"{name}-twin", "born_at": _now(),
             "notes": f"Summoned rapplication '{name}' as an isolated tailored-UI twin."})
 
@@ -1182,7 +1182,7 @@ class RappAgent(BasicAgent):
                   "rapp-batcave-cubbies/1.0 · rapp-batcave-event/1.0.\n")
         files = {
             "rappid.json": json.dumps({"schema": "rapp-rappid/2.0", "rappid": rappid,
-                "parent_rappid": ctx.get("rappid") or "rappid:@rapp/origin:0b635450c04249fbb4b1bdb571044dec",
+                "parent_rappid": ctx.get("rappid") or "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
                 "kind": "neighborhood", "name": slug, "owner": owner, "born_at": _now(),
                 "notes": "Private cubby-neighborhood (batcave pattern): per-member cubbies, signed events, no public front door."}, indent=2),
             "neighborhood.json": json.dumps({"schema": "rapp-batcave/1.0", "rappid": rappid, "name": slug,

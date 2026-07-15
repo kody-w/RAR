@@ -135,7 +135,7 @@ def _build_entry(agent: dict) -> dict:
         "added_at": agent.get("_added_at"),
 
         # Lineage
-        "parent_rappid": "rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec",
+        "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
 
         # Asset URLs
         "sprite_url":  f"{RAW_PREFIX}/api/v1/sprite/{slug}.svg",
