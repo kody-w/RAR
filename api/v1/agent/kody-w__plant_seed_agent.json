@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__plant_seed_agent",
+  "name": "Plant Seed",
+  "rar_name": "@kody-w/plant_seed_agent",
+  "rappid": "rappid:@kody-w/plant_seed_agent:403d902fb0226ffbd74220e8c58685b084e0f2bcd915c26e41b846b603d4e5ef",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.3",
+  "publisher": "@kody-w",
+  "category": "platform",
+  "tags": [
+    "plant",
+    "seed",
+    "neighborhood",
+    "twin",
+    "holocard",
+    "grail",
+    "operator-mediated"
+  ],
+  "description": "Create a fresh public planted seed (neighborhood OR twin), grail-complete from minute one. Each planting includes the full front-door grail (rappid + soul + card.json (rappcards/1.1.2) + holo.svg + holo-qr.svg + holo.md + specs/ bundle + members + agents + .nojekyll + README + rar/). Default dry_run=True (shows the plan + file list); set dry_run=False to actually create.",
+  "author": "kody-w",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 578,
+  "size_kb": 26.7,
+  "sha256": "0792c750880ab7bb53c28229c3d94edee880055b4a8cec8135197042132f3bb6",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__plant_seed_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__plant_seed_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py"
+}

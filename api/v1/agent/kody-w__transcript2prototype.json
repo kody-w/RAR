@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__transcript2prototype",
+  "name": "Transcript2Prototype",
+  "rar_name": "@kody-w/transcript2prototype",
+  "rappid": "rappid:@kody-w/transcript2prototype:ac3731e541781cd4748b9f3698bbb3057acba5a2e8f7309076fb319b669a49ae",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "rapplication",
+    "pipeline",
+    "prototype",
+    "demo",
+    "cubby",
+    "factory",
+    "twin",
+    "m365"
+  ],
+  "description": "Transcript -> demo script -> injected M365 demo iframe -> generated agent.pys -> local twin run -> live twin run -> factory singleton export (gate). One cubby per prototype.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 6945,
+  "size_kb": 387.7,
+  "sha256": "9647c50021777c9134bdb7bf630437086797632938c11baeb344a5601e508693",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__transcript2prototype.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/transcript2prototype_agent.py"
+}

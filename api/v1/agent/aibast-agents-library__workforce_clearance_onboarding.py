@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/workforce_clearance_onboarding",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Workforce Clearance & Onboarding Agent",
     "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.",
     "author": "AIBAST",
@@ -182,7 +182,7 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
     """Federal workforce clearance and onboarding management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/workforce-clearance-onboarding"
+        self.name = "WorkforceClearanceOnboardingAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Workforce Clearance & Onboarding Agent",

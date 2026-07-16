@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__copilot_studio_deploy_agent",
+  "name": "CopilotStudioDeploy",
+  "rar_name": "@kody-w/copilot_studio_deploy_agent",
+  "rappid": "rappid:@kody-w/copilot_studio_deploy_agent:8c1526f72d240164dc7b32766fabcd2c5157bacf798efd986ad8c6ea4193228d",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "copilot-studio",
+    "deploy",
+    "dataverse",
+    "power-platform",
+    "pac",
+    "import-solution",
+    "destructive",
+    "assimilated"
+  ],
+  "description": "Deploy a forged Copilot Studio bundle into a Dataverse / Power Platform environment. Assimilates two overlapping agents: REST ImportSolutionAsync (service-principal) and the pac-CLI end-to-end pipeline (analyze->normalize->package->deploy). Destructive imports are confirm-gated.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 3538,
+  "size_kb": 274.8,
+  "sha256": "b22e5a097c595e702b1de6f97f751d1f2f9ac554b1673fd3478c977a843d4aea",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_deploy_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_deploy_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_deploy_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_deploy_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/copilot_studio_deploy_agent.py"
+}

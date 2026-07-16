@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__connected_solution_agent",
+  "name": "ConnectedSolution",
+  "rar_name": "@kody-w/connected_solution_agent",
+  "rappid": "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "copilot_studio",
+    "connected_agents",
+    "power_platform",
+    "deploy",
+    "integration",
+    "converter"
+  ],
+  "description": "Turn any agent stack (BasicAgent *.py files) into ONE import-ready Microsoft Copilot Studio connected-agents solution: an orchestrator plus one connected sub-agent per agent, each with a deterministic topic that runs the agent's perform() logic on synthetic stand-in data and declares its perform() params as typed inputs. Optionally imports AND publishes into your own Copilot Studio (Dataverse) environment via the Web API (no pac CLI; credentials read only from env/settings, never chat).",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2737,
+  "size_kb": 127.7,
+  "sha256": "07f85a7da6626411c14dd4be371752901b30fd17619017a3e1354eae33ca57cf",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__connected_solution_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/connected_solution_agent.py"
+}

@@ -3,8 +3,9 @@
   "id": "discreetRappers__sharepoint_contract_analysis_agent",
   "name": "ContractAnalysis",
   "rar_name": "@discreetRappers/sharepoint_contract_analysis_agent",
-  "rappid": "rappid:v2:agent:@discreetRappers/sharepoint_contract_analysis_agent:bbe89adb2e1271c1d44004afeffac1f0",
-  "version": "1.0.0",
+  "rappid": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd",
+  "_migrated_from": "rappid:v2:agent:@discreetRappers/sharepoint_contract_analysis_agent:bbe89adb2e1271c1d44004afeffac1f0", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@discreetRappers",
   "category": "integrations",
   "tags": [
@@ -27,12 +28,12 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2468,
+  "lines": 2470,
   "size_kb": 119.9,
-  "sha256": "bbe89adb2e1271c1d44004afeffac1f081b0813878bfd949dd6eb0729f2d579e",
+  "sha256": "fafed8260a060a8da97ba04376958ef7f6eeec730d2a0f33512de3066cd5077d",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
-  "parent_rappid": "rappid:v2:prototype:@rapp/origin:0b635450c04249fbb4b1bdb571044dec@github.com/kody-w/RAPP",
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__sharepoint_contract_analysis_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
   "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py.card",

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__prompt_to_video_agent",
+  "name": "PromptToVideo",
+  "rar_name": "@howardh/prompt_to_video_agent",
+  "rappid": "rappid:@howardh/prompt_to_video_agent:ae9033e46aba6b6556ed5d7bbed788dfeaa7177f830d23721917ea79c4d083b5",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "video",
+    "remotion",
+    "render",
+    "mp4",
+    "scenes",
+    "presentation",
+    "prompt_to_video"
+  ],
+  "description": "Renders videos from structured scene descriptions using Remotion \u2014 title, content, quote, and list scenes with style presets.",
+  "author": "RAPP Contributor",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@howardh/markdown_to_slides_agent"
+  ],
+  "lines": 792,
+  "size_kb": 26.3,
+  "sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__prompt_to_video_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__prompt_to_video_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__prompt_to_video_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__prompt_to_video_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/prompt_to_video_agent.py"
+}

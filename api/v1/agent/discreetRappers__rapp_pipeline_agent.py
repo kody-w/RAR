@@ -30,7 +30,7 @@ Use this agent for ANY RAPP Pipeline task - it handles all 14 steps.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/rapp_pipeline_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RAPP",
     "description": "Full RAPP pipeline — transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",
     "author": "Bill Whalen",
@@ -50,9 +50,19 @@ import re
 from datetime import datetime
 from typing import Dict, Any, List, Optional, Tuple
 from agents.basic_agent import BasicAgent
-from openai import AzureOpenAI
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from utils.storage_factory import get_storage_manager
+
+try:
+    from openai import AzureOpenAI
+    from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+    AZURE_OPENAI_AVAILABLE = True
+    AZURE_OPENAI_IMPORT_ERROR = None
+except ImportError as e:
+    AzureOpenAI = None
+    DefaultAzureCredential = None
+    get_bearer_token_provider = None
+    AZURE_OPENAI_AVAILABLE = False
+    AZURE_OPENAI_IMPORT_ERROR = str(e)
 
 # Import report generator (optional - handles import errors gracefully)
 try:
@@ -300,6 +310,11 @@ All actions:
 
     def _get_openai_client(self):
         """Initialize Azure OpenAI client with Entra ID authentication."""
+        if not AZURE_OPENAI_AVAILABLE:
+            raise RuntimeError(
+                "Azure OpenAI support is unavailable. Install openai and "
+                f"azure-identity ({AZURE_OPENAI_IMPORT_ERROR})."
+            )
         token_provider = get_bearer_token_provider(
             DefaultAzureCredential(),
             "https://cognitiveservices.azure.com/.default"

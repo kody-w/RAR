@@ -14,6 +14,13 @@ Usage:
   "What swarms are available in the RAPP Store?"                            → list
   "Install the BookFactory swarm"                                           → install
   "Uninstall BookFactory"                                                   → uninstall
+
+v0.3.0: the generate contract teaches the orchestration-harness hard rules —
+errors raise (never flow downstream as prose), verdicts are structured and
+actually gate, per-run workspaces, statically bounded cycles with a run
+budget, parallel only for stateless same-input stages, opportunistic small-
+model tiering with graceful fallback. Also fixes the build-mode manifest
+name bug (built singletons previously claimed to BE the factory).
 """
 
 from agents.basic_agent import BasicAgent
@@ -33,12 +40,12 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/swarm_factory_agent",
     "display_name": "SwarmFactory",
-    "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog.",
+    "description": "Build, install, list, and uninstall RAPP swarms. Converges local agents into shareable singletons and manages the RAPP Store catalog. v0.3: generated swarms follow the orchestration hard rules (raise-don't-prose errors, gating verdicts, per-run workspaces, static bounds, safe parallelism, tier fallback).",
     "author": "RAPP",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "tags": ["meta", "build", "singleton", "swarm-factory", "store"],
     "category": "core",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {"args": {"action": "list"}},
@@ -55,108 +62,144 @@ class SwarmFactoryAgent(BasicAgent):
                 "A SWARM is a multi-persona pipeline collapsed into ONE shareable "
                 "agent file — like BookFactory (Writer→Editor→CEO→Publisher→Reviewer "
                 "all inlined as _Internal* classes behind one public entrypoint). "
-                "The point of a swarm is that each persona has its own SOUL/system "
-                "prompt and the public composite calls them in sequence to do "
-                "something no single agent could do in one shot.\n\n"
-                "ROLE BOUNDARY (read this before choosing a tool):\n"
-                " • Single one-shot agent (fetch xkcd, roll dice, lookup a stock "
-                "price) → use the LearnNew tool with action='create'. Do NOT use "
-                "SwarmFactory for these.\n"
+                "Each persona has its own SOUL/system prompt; deterministic Python "
+                "in perform() orchestrates them — the LLM calls are leaf nodes, the "
+                "control flow is code.\n\n"
+                "ROLE BOUNDARY:\n"
+                " • Single one-shot agent (fetch xkcd, roll dice) → LearnNew with "
+                "action='create'. Do NOT use SwarmFactory.\n"
                 " • Multi-persona converged singleton (research→write→critique, "
-                "plan→draft→review, write→edit→publish) → SwarmFactory.generate. "
-                "This is the BookFactory pattern.\n"
-                " • Already have a multi-file source tree of agents and want them "
-                "collapsed into one shippable file → SwarmFactory.build.\n\n"
+                "write→edit→publish) → SwarmFactory.generate.\n"
+                " • Existing multi-file agents to collapse into one shippable file "
+                "→ SwarmFactory.build.\n\n"
                 "Actions:\n"
-                " • 'generate' — Design a BRAND-NEW converged swarm from scratch. "
-                "YOU (the LLM) compose the full Python source — multiple internal "
-                "persona classes (each with its own SOUL) plus ONE public composite "
-                "that orchestrates them — then call this tool with that code in "
-                "'agent_code'. The result is a single file that hot-loads on the "
-                "next request. If the request is for a single-persona agent, "
-                "REFUSE this action and route the user to LearnNew.create.\n"
-                " • 'build' — Converge EXISTING local agents (multi-file source "
-                "tree under agents/) into a shareable singleton .py.\n"
-                " • 'list' — Show available swarms in the RAPP Store.\n"
-                " • 'install' — Pull a swarm from the store into agents/.\n"
-                " • 'uninstall' — Remove an installed swarm.\n\n"
-                "Memory architecture (each swarm picks its own — full control):\n"
+                " • 'generate' — Design a BRAND-NEW converged swarm. YOU (the LLM) "
+                "compose the full Python source — multiple _Internal persona classes "
+                "(each with its own SOUL) plus ONE public composite — and pass it as "
+                "'agent_code'. Hot-loads on the next request. If the request is "
+                "single-persona, REFUSE and route to LearnNew.create.\n"
+                " • 'build' — Converge existing local agents into a singleton .py.\n"
+                " • 'list' / 'install' / 'uninstall' — RAPP Store catalog ops.\n\n"
+                "HARD RULES for generated swarm code (each maps to a shipped pattern "
+                "in @rarbookworld/bookfactory v0.4 — read it as the exemplar):\n"
+                " 1. ERRORS ARE DATA, NEVER CONTENT. _post retries once on 429/5xx/"
+                "network then RAISES RuntimeError. perform() wraps the pipeline in "
+                "ONE try/except and returns json.dumps({'status':'error',"
+                "'failed_stage':...,'completed_stages':[...]}). NEVER return "
+                "'(LLM HTTP ...)' strings — the next persona would edit the error "
+                "as if it were prose and every downstream call burns on garbage.\n"
+                " 2. GATES ACTUALLY GATE. When a persona renders a verdict (ship/"
+                "hold, a score), obtain it via _llm_json (stdlib parse + required-"
+                "keys check + one re-prompt-with-the-error) and BRANCH on it in "
+                "code; honor 'hold' by halting with a partial report. Use _llm_json "
+                "ONLY for verdict-shaped outputs — prose stages stay raw text "
+                "(JSON-wrapping a draft corrupts code fences and voice).\n"
+                " 3. PER-RUN WORKSPACE. Artifacts go under a fresh subdir per run "
+                "(timestamp+uuid). The brainstem serves requests threaded; fixed "
+                "paths make concurrent runs clobber each other.\n"
+                " 4. STATIC BOUNDS. Every revision/retry cycle is capped by a hard-"
+                "coded constant, and a run-scoped counter inside _llm_call refuses "
+                "past _MAX_LLM_CALLS with a clear error. Refusal is a feature.\n"
+                " 5. PARALLEL ONLY WHEN SAFE. If ≥2 stages consume the SAME input "
+                "and NEITHER writes a shared memory GUID, you may inline a 6-line "
+                "ThreadPoolExecutor helper (cap 3 branches). Personas sharing a "
+                "memory GUID must stay sequential — the local storage shim has no "
+                "file locking, so concurrent writers lose updates.\n"
+                " 6. TIERING IS OPPORTUNISTIC. _llm_call(soul, prompt, tier=None); "
+                "tier='small' reads AZURE_OPENAI_DEPLOYMENT_SMALL / "
+                "OPENAI_MODEL_SMALL when set and silently falls back to the primary "
+                "deployment. Never hard-code a literal model name — on Azure the "
+                "'model' is a per-tenant deployment name; a baked-in id 404s on "
+                "every box but the author's.\n\n"
+                "Memory architecture (each swarm picks its own):\n"
                 "Personas use AzureFileStorageManager().set_memory_context(<guid>) "
-                "to read/write to a NAMESPACED memory file. The brainstem's local "
-                "shim writes to .brainstem_data/memory/<guid>/user_memory.json "
-                "for any non-default GUID, or shared_memories/memory.json when "
-                "no GUID is set. So:\n"
-                " • SHARED (one memory pool for whole swarm) — define a single\n"
-                "   _SWARM_MEMORY_GUID = '<slug>-shared-v1' module constant; every\n"
-                "   persona calls set_memory_context(_SWARM_MEMORY_GUID). Use when\n"
-                "   personas need to see each other's notes (e.g. researcher→writer\n"
-                "   pipeline where writer needs the research dump).\n"
-                " • SEGMENTED (each persona private) — give each persona its own\n"
-                "   constant: _SOUL_RESEARCHER_GUID = '<slug>-researcher-v1', etc.\n"
-                "   Use when personas should NOT contaminate each other's memory\n"
-                "   (e.g. a critic that should review fresh, with no prior bias).\n"
-                " • MIXED (some share, others isolated) — define one shared GUID\n"
-                "   for the personas that need to coordinate, separate GUIDs for\n"
-                "   the ones that should stay independent. Common shape: research/\n"
-                "   write share, critic/reviewer are isolated.\n"
-                " • USER-SCOPED — let the caller pass user_guid via kwargs and pipe\n"
-                "   it through. Use when memory should follow the END USER, not\n"
-                "   the swarm itself (rare for swarms; common for single agents).\n"
-                " • EPHEMERAL (no memory) — just don't import AzureFileStorageManager.\n"
-                "Bake the GUIDs as MODULE CONSTANTS at code-write time (deterministic\n"
-                "and portable — the singleton carries its own memory namespace when\n"
-                "shared across machines). Don't generate at runtime.\n\n"
-                "Required shape for 'generate' — a converged swarm singleton:\n"
+                "to read/write a NAMESPACED memory file. Strategies:\n"
+                " • SHARED — one _SWARM_MEMORY_GUID = '<slug>-shared-v1' module "
+                "constant; every persona uses it (researcher→writer pipelines).\n"
+                " • SEGMENTED — per-persona GUID constants (a critic that must "
+                "review fresh, with no prior bias).\n"
+                " • MIXED — shared GUID for coordinating personas, private for the "
+                "isolated ones. • USER-SCOPED — pipe the caller's user_guid through. "
+                " • EPHEMERAL — don't import the storage manager at all.\n"
+                "Bake GUIDs as MODULE CONSTANTS at code-write time (deterministic "
+                "and portable). Remember rule 5: shared-GUID personas never run in "
+                "parallel.\n\n"
+                "Required shape for 'generate':\n"
                 "    from agents.basic_agent import BasicAgent\n"
-                "    from utils.azure_file_storage import AzureFileStorageManager  # only if memory needed\n"
-                "    import json, os, urllib.request, urllib.error\n\n"
-                "    __manifest__ = {\"schema\": \"rapp-agent/1.0\",\n"
-                "                     \"name\": \"@user/<slug>\",\n"
+                "    import json, os, time, uuid, threading, urllib.request, urllib.error\n\n"
+                "    __manifest__ = {\"schema\": \"rapp-agent/1.0\", \"name\": \"@user/<slug>\",\n"
+                "                     \"version\": \"0.1.0\",\n"
                 "                     \"tags\": [\"composite\", \"swarm-factory-generated\"],\n"
-                "                     \"delegates_to_inlined\": [\"<persona1>\", \"<persona2>\", ...]}\n\n"
-                "    # Each persona has its own SOUL — that's what makes them distinct.\n"
-                "    _SOUL_RESEARCHER = \"You are a researcher. Find the 3 strongest\\n\"\\\n"
-                "                        \"sources on the topic and quote them.\"\n"
-                "    _SOUL_WRITER     = \"You are a writer. Turn research into 400 words\\n\"\\\n"
-                "                        \"of clean prose. No fluff.\"\n"
-                "    _SOUL_CRITIC     = \"You are a brutal critic. Cut anything weak.\"\n\n"
-                "    # Inlined LLM helper — uses Azure or OpenAI from env.\n"
-                "    def _llm_call(soul, user_prompt):\n"
+                "                     \"delegates_to_inlined\": [\"<persona1>\", \"<persona2>\"]}\n\n"
+                "    _MAX_LLM_CALLS = 30   # static bound (rule 4)\n"
+                "    _SOUL_RESEARCHER = \"You are a researcher...\"  # one SOUL per persona\n"
+                "    _SOUL_WRITER     = \"You are a writer...\"\n"
+                "    _SOUL_CRITIC     = \"You are a brutal critic...\"\n\n"
+                "    _calls = {\"n\": 0}; _lock = threading.Lock()\n"
+                "    def _llm_call(soul, prompt, tier=None):\n"
+                "        with _lock:\n"
+                "            _calls[\"n\"] += 1\n"
+                "            if _calls[\"n\"] > _MAX_LLM_CALLS:\n"
+                "                raise RuntimeError(f\"call budget exceeded ({_MAX_LLM_CALLS})\")\n"
                 "        msgs = [{\"role\": \"system\", \"content\": soul},\n"
-                "                {\"role\": \"user\", \"content\": user_prompt}]\n"
+                "                {\"role\": \"user\", \"content\": prompt}]\n"
                 "        ep, key = os.environ.get(\"AZURE_OPENAI_ENDPOINT\", \"\"),\\\n"
                 "                  os.environ.get(\"AZURE_OPENAI_API_KEY\", \"\")\n"
                 "        dep = os.environ.get(\"AZURE_OPENAI_DEPLOYMENT\", \"\")\n"
+                "        if tier == \"small\":\n"
+                "            dep = os.environ.get(\"AZURE_OPENAI_DEPLOYMENT_SMALL\") or dep  # graceful fallback (rule 6)\n"
                 "        if ep and key:\n"
                 "            url = ep.rstrip(\"/\") + f\"/openai/deployments/{dep}/chat/completions?api-version=2025-01-01-preview\"\n"
                 "            return _post(url, {\"messages\": msgs, \"model\": dep},\n"
                 "                          {\"Content-Type\": \"application/json\", \"api-key\": key})\n"
                 "        if os.environ.get(\"OPENAI_API_KEY\"):\n"
+                "            m = os.environ.get(\"OPENAI_MODEL\", \"gpt-4o\")\n"
+                "            if tier == \"small\": m = os.environ.get(\"OPENAI_MODEL_SMALL\") or m\n"
                 "            return _post(\"https://api.openai.com/v1/chat/completions\",\n"
-                "                          {\"model\": os.environ.get(\"OPENAI_MODEL\", \"gpt-4o\"), \"messages\": msgs},\n"
+                "                          {\"model\": m, \"messages\": msgs},\n"
                 "                          {\"Content-Type\": \"application/json\",\n"
                 "                           \"Authorization\": \"Bearer \" + os.environ[\"OPENAI_API_KEY\"]})\n"
-                "        return \"(no LLM configured)\"\n\n"
+                "        raise RuntimeError(\"no LLM configured\")  # raise — never return error text (rule 1)\n\n"
                 "    def _post(url, body, headers):\n"
-                "        req = urllib.request.Request(url,\n"
-                "            data=json.dumps(body).encode(\"utf-8\"), headers=headers, method=\"POST\")\n"
-                "        try:\n"
-                "            with urllib.request.urlopen(req, timeout=120) as r:\n"
-                "                j = json.loads(r.read().decode(\"utf-8\"))\n"
-                "            c = j.get(\"choices\") or []\n"
-                "            return (c[0][\"message\"].get(\"content\") or \"\") if c else \"\"\n"
-                "        except urllib.error.HTTPError as e:\n"
-                "            return f\"(LLM HTTP {e.code}: {e.read().decode('utf-8')[:200]})\"\n\n"
-                "    # Internal personas — _Internal prefix keeps them out of\n"
-                "    # the brainstem's *Agent auto-discovery, so only the public\n"
-                "    # composite below shows up in the LLM's tool list.\n"
+                "        for attempt in (1, 2):\n"
+                "            req = urllib.request.Request(url, data=json.dumps(body).encode(\"utf-8\"),\n"
+                "                                          headers=headers, method=\"POST\")\n"
+                "            try:\n"
+                "                with urllib.request.urlopen(req, timeout=120) as r:\n"
+                "                    c = json.loads(r.read().decode(\"utf-8\")).get(\"choices\") or []\n"
+                "                return (c[0][\"message\"].get(\"content\") or \"\") if c else \"\"\n"
+                "            except urllib.error.HTTPError as e:\n"
+                "                if (e.code == 429 or e.code >= 500) and attempt == 1:\n"
+                "                    time.sleep(2); continue\n"
+                "                raise RuntimeError(f\"LLM HTTP {e.code}\")\n"
+                "            except urllib.error.URLError as e:\n"
+                "                if attempt == 1: time.sleep(2); continue\n"
+                "                raise RuntimeError(f\"LLM network error: {e}\")\n\n"
+                "    def _llm_json(soul, prompt, required_keys, retries=1):  # verdicts ONLY (rule 2)\n"
+                "        err = \"\"\n"
+                "        for _ in range(retries + 1):\n"
+                "            nudge = f\"\\nPrevious reply invalid ({err}); reply with ONLY the JSON object.\" if err else \"\"\n"
+                "            raw = _llm_call(soul, prompt + \"\\nReply with ONLY a JSON object with keys: \"\n"
+                "                            + \", \".join(required_keys) + nudge)\n"
+                "            s, e = raw.find(\"{\"), raw.rfind(\"}\")\n"
+                "            try:\n"
+                "                obj = json.loads(raw[s:e + 1])\n"
+                "            except ValueError as ex:\n"
+                "                err = str(ex); continue\n"
+                "            if all(k in obj for k in required_keys):\n"
+                "                return obj\n"
+                "            err = \"missing keys\"\n"
+                "        raise RuntimeError(\"structured handoff failed: \" + err)\n\n"
+                "    # _Internal prefix keeps personas out of *Agent auto-discovery.\n"
                 "    class _InternalResearcher:\n"
                 "        def perform(self, topic): return _llm_call(_SOUL_RESEARCHER, topic)\n"
                 "    class _InternalWriter:\n"
                 "        def perform(self, research): return _llm_call(_SOUL_WRITER, research)\n"
-                "    class _InternalCritic:\n"
-                "        def perform(self, draft):    return _llm_call(_SOUL_CRITIC, draft)\n\n"
-                "    # Public entrypoint — the ONE class the brainstem discovers.\n"
+                "    class _InternalCritic:  # renders a verdict the orchestrator branches on\n"
+                "        def verdict(self, draft):\n"
+                "            return _llm_json(_SOUL_CRITIC, \"Judge this draft:\\n\" + draft +\n"
+                "                '\\n\"verdict\" is \"ship\" or \"revise\"; \"note\" is one sentence.',\n"
+                "                [\"verdict\", \"note\"])\n\n"
                 "    class <PascalCase>Agent(BasicAgent):\n"
                 "        def __init__(self):\n"
                 "            self.name = \"<PascalCase>\"\n"
@@ -167,34 +210,21 @@ class SwarmFactoryAgent(BasicAgent):
                 "                                            \"required\": [\"topic\"]}}\n"
                 "            super().__init__(self.name, self.metadata)\n"
                 "        def perform(self, topic=\"\", **kwargs):\n"
-                "            research = _InternalResearcher().perform(topic)\n"
-                "            draft    = _InternalWriter().perform(research)\n"
-                "            final    = _InternalCritic().perform(draft)\n"
-                "            return json.dumps({\"status\": \"ok\",\n"
-                "                               \"research\": research,\n"
-                "                               \"draft\": draft,\n"
-                "                               \"final\": final})\n\n"
-                "Memory pattern (drop into any persona that needs it):\n"
-                "    # Module-level constants — deterministic GUIDs baked at\n"
-                "    # code-write time. Pick one strategy per swarm:\n"
-                "    _SHARED_MEM   = \"<slug>-shared-v1\"     # all personas see this\n"
-                "    _RESEARCH_MEM = \"<slug>-researcher-v1\" # researcher private\n"
-                "    _CRITIC_MEM   = \"<slug>-critic-v1\"     # critic private\n\n"
-                "    class _InternalResearcher:\n"
-                "        def perform(self, topic):\n"
-                "            store = AzureFileStorageManager()\n"
-                "            store.set_memory_context(_RESEARCH_MEM)  # private namespace\n"
-                "            prior = store.read_json() or {}\n"
-                "            # ...do work, optionally consulting prior...\n"
-                "            note = _llm_call(_SOUL_RESEARCHER, topic)\n"
-                "            import time\n"
-                "            prior[topic[:60]] = {\"note\": note, \"ts\": time.time()}\n"
-                "            store.write_json(prior)\n"
-                "            return note\n\n"
-                "    # Same shape, but pointing at _SHARED_MEM means this persona\n"
-                "    # reads/writes the swarm-wide pool (researcher's writes are\n"
-                "    # visible to writer, etc.). Mix-and-match across personas\n"
-                "    # to get the exact isolation profile this swarm needs."
+                "            ws = os.path.join(\"/tmp/<slug>\",  # per-run dir (rule 3)\n"
+                "                              time.strftime(\"%Y%m%dT%H%M%S\") + \"-\" + uuid.uuid4().hex[:6])\n"
+                "            os.makedirs(ws, exist_ok=True)\n"
+                "            stage = \"start\"\n"
+                "            try:\n"
+                "                stage = \"researcher\"; research = _InternalResearcher().perform(topic)\n"
+                "                stage = \"writer\";     draft = _InternalWriter().perform(research)\n"
+                "                stage = \"critic\";     v = _InternalCritic().verdict(draft)\n"
+                "                if v[\"verdict\"] != \"ship\":  # the gate is real (rule 2)\n"
+                "                    return json.dumps({\"status\": \"held\", \"reason\": v[\"note\"],\n"
+                "                                       \"draft\": draft, \"workspace\": ws})\n"
+                "                return json.dumps({\"status\": \"ok\", \"final\": draft, \"workspace\": ws})\n"
+                "            except RuntimeError as e:  # errors are data (rule 1)\n"
+                "                return json.dumps({\"status\": \"error\", \"failed_stage\": stage,\n"
+                "                                   \"message\": str(e), \"workspace\": ws})"
             ),
             "parameters": {
                 "type": "object",
@@ -228,7 +258,7 @@ class SwarmFactoryAgent(BasicAgent):
 
     def _fetch_catalog(self):
         req = urllib.request.Request(RAPP_STORE_CATALOG_URL,
-                                     headers={"User-Agent": "RAPP-SwarmFactory/0.2"})
+                                     headers={"User-Agent": "RAPP-SwarmFactory/0.3"})
         resp = urllib.request.urlopen(req, timeout=10)
         return json.loads(resp.read().decode())
 
@@ -280,7 +310,7 @@ class SwarmFactoryAgent(BasicAgent):
         if not url or not fname:
             return json.dumps({"status": "error",
                                "message": f"Catalog entry for '{swarm_name}' is missing singleton_url or filename."})
-        req = urllib.request.Request(url, headers={"User-Agent": "RAPP-SwarmFactory/0.2"})
+        req = urllib.request.Request(url, headers={"User-Agent": "RAPP-SwarmFactory/0.3"})
         body = urllib.request.urlopen(req, timeout=15).read()
         dest = os.path.join(agents_dir, fname)
         os.makedirs(agents_dir, exist_ok=True)
@@ -357,6 +387,24 @@ class SwarmFactoryAgent(BasicAgent):
             for n in tree.body
         )
 
+        # Non-blocking lint against the hard rules — surfaced so the LLM
+        # can self-correct on the next generate, but legacy-shaped code
+        # still persists (graceful, not punitive).
+        warnings = []
+        if '"(LLM HTTP' in agent_code or "'(LLM HTTP" in agent_code:
+            warnings.append(
+                "legacy error-as-prose pattern detected ('(LLM HTTP ...' string). "
+                "Hard rule 1: _post should RAISE after one retry; perform() catches "
+                "once and returns a structured {'status':'error', 'failed_stage':...} report.")
+        if "(no LLM configured" in agent_code and "raise" not in agent_code:
+            warnings.append(
+                "'(no LLM configured)' returned as a string. Hard rule 1: raise "
+                "RuntimeError instead so the failure can't flow downstream as prose.")
+        if "/tmp/" in agent_code and "uuid" not in agent_code and "strftime" not in agent_code:
+            warnings.append(
+                "fixed /tmp path with no per-run id — concurrent runs will clobber "
+                "each other's artifacts. Hard rule 3: per-run subdir (timestamp+uuid).")
+
         # Auto-inject the BasicAgent import if the LLM forgot it. The agent
         # contract says the class must extend BasicAgent, and the brainstem
         # loader expects this exact import path, so it's a safe fix-up.
@@ -393,10 +441,12 @@ class SwarmFactoryAgent(BasicAgent):
             "bytes": len(agent_code),
             "lines": agent_code.count("\n") + 1,
             "has_manifest": has_manifest,
+            "warnings": warnings,
             "message": (
                 f"Generated agents/{fname} ({len(agent_code)} bytes). "
                 f"It loads automatically on the next request — no restart needed. "
                 f"Try calling it from chat to confirm."
+                + (f" NOTE: {len(warnings)} hard-rule warning(s) — see 'warnings'." if warnings else "")
             ),
         })
 
@@ -575,9 +625,11 @@ class SwarmFactoryAgent(BasicAgent):
 
         delegates = [f'@rapp/{info["class_name"].replace("Agent","").lower()}'
                       for info in sources.values()]
+        # The singleton's manifest carries the SWARM's own name — a built
+        # artifact must never claim to be the factory that produced it.
         out += f'__manifest__ = {{\n'
         out += f'    "schema": "rapp-agent/1.0",\n'
-        out += f'    "name": "@rapp/swarm_factory_agent",\n'
+        out += f'    "name": "@rapp/{slug}",\n'
         out += f'    "version": "0.1.0",\n'
         out += f'    "tags": ["composite", "singleton", "swarm-factory-generated"],\n'
         out += f'    "delegates_to_inlined": {json.dumps(delegates, indent=8)},\n'

@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__chain_composer_agent",
+  "name": "Chain Composer",
+  "rar_name": "@kody-w/chain_composer_agent",
+  "rappid": "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "platform",
+  "tags": [
+    "compose",
+    "chain",
+    "planning",
+    "claude-cli",
+    "operator-mediated",
+    "meta"
+  ],
+  "description": "Compose multi-primitive chain plans from any high-level operator prompt. Reads the canonical RAPP toolbox (BondRhythm, ant pheromones, art submissions, braintrust requests, vbrainstem, tick_twin, push_canvas, holo card grail, etc.) and returns rapp-chain-plan/1.0 envelope + writes an executable bash script. Calls `claude` CLI under the hood. Operator-mediated: never auto-runs.",
+  "author": "kody-w",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 409,
+  "size_kb": 17.1,
+  "sha256": "e4afd63716b951dabdfd03b23e42cc467adfc8e8bfc6d00db5c32d009a82d144",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__chain_composer_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__chain_composer_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__chain_composer_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__chain_composer_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py"
+}

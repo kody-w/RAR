@@ -11,6 +11,29 @@ SHIP-TIME artifact: no sibling-import dependencies, no helper modules,
 no repo layout assumptions. Just BasicAgent + an LLM key in the
 environment, and the public BookFactory.perform(source, ...) → chapter.
 
+v0.4.0 hardening (orchestration-harness discipline):
+  - Errors never flow downstream as prose: _post retries once on 429/5xx
+    then RAISES; perform() wraps the pipeline in one try/except and
+    returns {"status": "error", "failed_stage": ..., "completed_stages":
+    [...]} instead of letting "(LLM HTTP 500: ...)" get edited, typeset,
+    and reviewed as if it were a chapter.
+  - Gates actually gate: the CEO's verdict arrives as structured JSON
+    (_llm_json) and a "hold" halts the pipeline with a partial report.
+    Previously the Publisher published regardless of the decision.
+  - Per-run workspace: artifacts land in a fresh subdir per run, so two
+    concurrent runs never clobber each other's 01-draft.md.
+  - Independent checks run concurrently: factcheck ∥ voicecheck and
+    risk ∥ decision via a stdlib thread pool (stateless personas only —
+    personas sharing a memory GUID must stay sequential).
+  - Statically bounded revision pass: opt-in revision_rounds (capped at
+    _MAX_REVISION_ROUNDS) re-runs Writer→Publisher→Reviewer when the
+    Reviewer scores below 4. Every call charges a run-scoped budget
+    (_MAX_LLM_CALLS) that refuses past the cap.
+  - Opportunistic model tiering: mechanical passes (strip/cut/restructure)
+    request tier="small", which uses AZURE_OPENAI_DEPLOYMENT_SMALL /
+    OPENAI_MODEL_SMALL when set and silently falls back to the primary
+    deployment otherwise. No literal model names are baked in.
+
 Inlined personas (sacred SOULs preserved verbatim):
   - Writer
   - Editor (composite of 5 specialists: strip-scaffolding, cutweak,
@@ -49,16 +72,20 @@ except ModuleNotFoundError:
             def __init__(self, name, metadata): self.name, self.metadata = name, metadata
 import json
 import os
+import time
+import uuid
+import threading
 import urllib.request
 import urllib.error
+from concurrent.futures import ThreadPoolExecutor
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/bookfactory",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "display_name": "BookFactory (converged singleton)",
-    "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication.",
+    "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication. v0.4: structured CEO/Reviewer verdicts that actually gate, raise-don't-prose error handling, per-run workspaces, concurrent independent checks, bounded revision pass, optional small-model tiering.",
     "author": "rarbookworld",
     "tags": [
         "composite",
@@ -84,6 +111,13 @@ __manifest__ = {
         }
     }
 }
+
+
+# ─── Static bounds (every cycle in this file is capped by a constant) ──
+
+_MAX_LLM_CALLS = 40        # base run ≈ 10 calls; headroom for retries + one revision pass
+_MAX_REVISION_ROUNDS = 1   # hard cap on the opt-in revision pass
+_PARALLEL_BRANCH_CAP = 3   # provider rate-limit courtesy
 
 
 # ─── SOUL constants (verbatim from each leaf agent.py) ─────────────────
@@ -184,6 +218,85 @@ works and what bored you. You name the strongest line. You decide whether
 you'd keep reading. You're nice but honest."""
 
 
+# ─── Failure is data, never content ─────────────────────────────────────
+# A failed LLM call must stop the pipeline, not flow downstream as prose
+# for the next persona to "edit". _post retries once on transient errors
+# (429 / 5xx / network) and then raises; the orchestrator attributes the
+# failure to a stage and returns a structured partial-results report.
+
+class _StageError(RuntimeError):
+    def __init__(self, stage, detail):
+        super().__init__(detail)
+        self.stage = stage
+
+
+# ─── Run-scoped call budget ─────────────────────────────────────────────
+# The brainstem re-imports this module fresh on every request, so the
+# counter is naturally per-run; the lock covers the concurrent branches.
+
+_budget_lock = threading.Lock()
+_llm_calls_made = 0
+
+
+def _budget_reset():
+    global _llm_calls_made
+    with _budget_lock:
+        _llm_calls_made = 0
+
+
+def _budget_charge():
+    global _llm_calls_made
+    with _budget_lock:
+        _llm_calls_made += 1
+        if _llm_calls_made > _MAX_LLM_CALLS:
+            raise RuntimeError(
+                f"call budget exceeded ({_MAX_LLM_CALLS} LLM calls) — refusing to continue. "
+                "This is a static safety bound; raise _MAX_LLM_CALLS only deliberately.")
+
+
+# ─── Concurrency for independent, stateless stages ─────────────────────
+# Eligibility rule: every branch must consume the SAME upstream input and
+# write NO shared memory GUID (the local storage shim has no file locking,
+# so concurrent writers to one memory file would lose updates). The
+# factcheck ∥ voicecheck and risk ∥ decision pairs qualify: pure reads.
+
+def _parallel(*thunks):
+    with ThreadPoolExecutor(max_workers=min(len(thunks), _PARALLEL_BRANCH_CAP)) as pool:
+        futures = [pool.submit(t) for t in thunks]
+        return [f.result() for f in futures]  # re-raises the first branch failure
+
+
+# ─── Structured handoffs — for verdict-shaped outputs ONLY ─────────────
+# Used where deterministic code must branch on a persona's output (the
+# CEO's decision, the Reviewer's score). Prose stages stay raw text:
+# JSON-wrapping an 800-word draft with fenced code blocks corrupts
+# exactly the content the SOULs fight to preserve.
+
+def _llm_json(soul, prompt, required_keys, retries=1):
+    ask = (prompt + "\n\nReply with ONLY a JSON object with these keys: "
+           + ", ".join(required_keys) + ". No prose, no code fences.")
+    last_err = ""
+    for _ in range(retries + 1):
+        nudge = (f"\n\nYour previous reply was invalid ({last_err}). "
+                 "Reply again with ONLY the JSON object.") if last_err else ""
+        raw = _llm_call(soul, ask + nudge)
+        start, end = raw.find("{"), raw.rfind("}")
+        if start == -1 or end <= start:
+            last_err = "no JSON object found"
+            continue
+        try:
+            obj = json.loads(raw[start:end + 1])
+        except ValueError as e:
+            last_err = f"JSON parse error: {e}"
+            continue
+        missing = [k for k in required_keys if k not in obj]
+        if missing:
+            last_err = f"missing keys: {missing}"
+            continue
+        return obj
+    raise RuntimeError(f"structured handoff failed after {retries + 1} attempts: {last_err}")
+
+
 # ─── Internal persona classes (prefixed to hide from *Agent discovery) ─
 
 class _InternalPersonaWriter(BasicAgent):
@@ -230,7 +343,7 @@ class _InternalEditorStripScaffolding(BasicAgent):
         return _llm_call(_SOUL_EDITOR_STRIP_SCAFFOLDING,
             f"Draft to strip:\n{input}\n\nReturn the cleaned draft. Output ONLY "
             "the cleaned text. Preserve voice, code, real headers. Cut only "
-            "scaffolding artifacts.")
+            "scaffolding artifacts.", tier="small")
 
 class _InternalEditorCutweak(BasicAgent):
     def __init__(self):
@@ -247,7 +360,7 @@ class _InternalEditorCutweak(BasicAgent):
     def perform(self, input="", **kwargs):
         return _llm_call(_SOUL_EDITOR_CUTWEAK,
             f"Draft to cut:\n{input}\n\nReturn the same draft with the weakest "
-            "20% removed. Output only the cut prose. No commentary.")
+            "20% removed. Output only the cut prose. No commentary.", tier="small")
 
 class _InternalEditorRestructure(BasicAgent):
     def __init__(self):
@@ -266,7 +379,7 @@ class _InternalEditorRestructure(BasicAgent):
         return _llm_call(_SOUL_EDITOR_RESTRUCTURE,
             f"Draft to restructure:\n{input}\n\nReturn the same draft with redundant "
             "restatements consolidated. Keep the strongest single statement of each "
-            "idea. Cut the rest. Output ONLY the restructured prose.")
+            "idea. Cut the rest. Output ONLY the restructured prose.", tier="small")
 
 class _InternalEditorFactcheck(BasicAgent):
     def __init__(self):
@@ -331,11 +444,25 @@ class _InternalCEODecision(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def decide(self, input=""):
+        """Structured verdict the orchestrator can branch on."""
+        raw = _llm_json(_SOUL_CEO_DECISION,
+            f"Content under review:\n{input}\n\nDecide. "
+            '"decision" must be exactly one of: "ship", "edits", "hold". '
+            '"line_to_change" is the ONE line you want changed (or "" if shipping as-is).',
+            required_keys=["decision", "line_to_change"])
+        d = str(raw.get("decision", "")).lower()
+        if "hold" in d:
+            d = "hold"
+        elif "edit" in d:
+            d = "edits"
+        else:
+            d = "ship"
+        return {"decision": d, "line_to_change": str(raw.get("line_to_change", ""))}
+
     def perform(self, input="", **kwargs):
-        return _llm_call(_SOUL_CEO_DECISION,
-            f"Content under review:\n{input}\n\nReply with exactly two things:\n"
-            "(1) Decision: ship as-is / ship with edits / hold\n"
-            "(2) The ONE line you want changed before it goes out (quote it).")
+        v = self.decide(input=input)
+        return f"Decision: {v['decision']}\nLine to change: {v['line_to_change'] or '(none)'}"
 
 class _InternalPersonaPublisher(BasicAgent):
     def __init__(self):
@@ -380,11 +507,27 @@ class _InternalPersonaReviewer(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def review(self, input=""):
+        """Structured verdict the orchestrator can branch on."""
+        raw = _llm_json(_SOUL_PERSONA_REVIEWER,
+            f"Final content:\n{input}\n\nReview it cold. "
+            '"score" is an integer 1-5. "strongest_line" quotes the best line. '
+            '"keep_reading" is true/false — would you read the next chapter? '
+            '"notes" is one sentence on the biggest weakness (or "" if none).',
+            required_keys=["score", "strongest_line", "keep_reading"])
+        try:
+            score = max(1, min(5, int(float(str(raw.get("score", 3)).strip()))))
+        except (ValueError, TypeError):
+            score = 3
+        return {"score": score,
+                "strongest_line": str(raw.get("strongest_line", "")),
+                "keep_reading": raw.get("keep_reading", True),
+                "notes": str(raw.get("notes", ""))}
+
     def perform(self, input="", **kwargs):
-        return _llm_call(_SOUL_PERSONA_REVIEWER,
-            f"Final content:\n{input}\n\nIn 3 short bullets:\n"
-            "(1) score 1-5\n(2) strongest line in the piece\n"
-            "(3) would you keep reading the next chapter? Why or why not?")
+        v = self.review(input=input)
+        return (f"Score: {v['score']}/5\nStrongest line: {v['strongest_line']}\n"
+                f"Keep reading: {v['keep_reading']}\nNotes: {v['notes'] or '(none)'}")
 
 
 # ─── Internal composite classes ────────────────────────────────────────
@@ -406,15 +549,18 @@ class _InternalPersonaEditor(BasicAgent):
         super().__init__(name=self.name, metadata=self.metadata)
 
     def perform(self, input="", **kwargs):
-        # Sequential transformations on the prose itself
+        # Sequential transformations on the prose itself (each consumes
+        # the previous stage's output — a genuine dependency chain)
         stripped     = _InternalEditorStripScaffolding().perform(input=input)
         cut          = _InternalEditorCutweak().perform(input=stripped)
         restructured = _InternalEditorRestructure().perform(input=cut)
 
-        # Parallel-in-spirit checks against the original draft (so the
-        # checks see what was claimed before any cutting happened)
-        facts = _InternalEditorFactcheck().perform(input=input)
-        voice = _InternalEditorVoicecheck().perform(input=input)
+        # Independent checks against the original draft run concurrently —
+        # both consume the same input and write no shared state
+        facts, voice = _parallel(
+            lambda: _InternalEditorFactcheck().perform(input=input),
+            lambda: _InternalEditorVoicecheck().perform(input=input),
+        )
 
         return (
             f"{restructured}\n"
@@ -439,10 +585,21 @@ class _InternalPersonaCEO(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def review(self, input=""):
+        """Returns (ceo_note_markdown, decision_dict). Risk and decision are
+        independent reads of the same content, so they run concurrently."""
+        risks, decision = _parallel(
+            lambda: _InternalCEORisk().perform(input=input),
+            lambda: _InternalCEODecision().decide(input=input),
+        )
+        note = (f"**Decision**\n{decision['decision']}"
+                f"{(' — change: ' + decision['line_to_change']) if decision['line_to_change'] else ''}\n\n"
+                f"**Partner-conversation risks**\n{risks}\n")
+        return note, decision
+
     def perform(self, input="", **kwargs):
-        risks    = _InternalCEORisk().perform(input=input)
-        decision = _InternalCEODecision().perform(input=input)
-        return f"**Decision**\n{decision}\n\n**Partner-conversation risks**\n{risks}\n"
+        note, _decision = self.review(input=input)
+        return note
 
 # ─── PUBLIC ENTRYPOINT ──────────────────────────────────────────────────
 
@@ -452,14 +609,17 @@ class BookFactory(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": "Five-persona content pipeline. Source → Writer → Editor → "
-                           "CEO → Publisher → Reviewer. Returns the final chapter.",
+                           "CEO → Publisher → Reviewer. Returns the final chapter. "
+                           "The CEO's verdict gates publication (a 'hold' halts the run); "
+                           "set revision_rounds=1 to allow one Reviewer-driven revision pass.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "source":        {"type": "string", "description": "Raw source material"},
-                    "chapter_title": {"type": "string", "description": "Working title"},
-                    "author":        {"type": "string", "description": "Author byline"},
-                    "workspace":     {"type": "string", "description": "Dir for intermediate artifacts"},
+                    "source":          {"type": "string", "description": "Raw source material"},
+                    "chapter_title":   {"type": "string", "description": "Working title"},
+                    "author":          {"type": "string", "description": "Author byline"},
+                    "workspace":       {"type": "string", "description": "Base dir for run artifacts (a fresh subdir is created per run)"},
+                    "revision_rounds": {"type": "integer", "description": "Revision passes allowed when the Reviewer scores below 4 (default 0, max 1)"},
                 },
                 "required": ["source"],
             },
@@ -467,9 +627,17 @@ class BookFactory(BasicAgent):
         super().__init__(name=self.name, metadata=self.metadata)
 
     def perform(self, source="", chapter_title="Untitled chapter",
-                author="@rapp", workspace=None, **kwargs):
-        ws = workspace or os.environ.get("TWIN_WORKSPACE") or "/tmp/book-factory"
+                author="@rapp", workspace=None, revision_rounds=0, **kwargs):
+        _budget_reset()
+        base = workspace or os.environ.get("TWIN_WORKSPACE") or "/tmp/book-factory"
+        # Per-run subdir: the brainstem serves /chat threaded, so two
+        # concurrent runs sharing one fixed dir would clobber each other.
+        run_id = time.strftime("%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:8]
+        ws = os.path.join(base, run_id)
         os.makedirs(ws, exist_ok=True)
+
+        trace = []        # [{stage, seconds}] — compact; this return value
+        completed = []    # feeds back into the LLM's context, keep it small
 
         def save(name, content):
             path = os.path.join(ws, name)
@@ -477,37 +645,109 @@ class BookFactory(BasicAgent):
                 f.write(content if isinstance(content, str) else str(content))
             return path
 
-        save("00-source.md", source)
+        def run_stage(stage, fn):
+            t0 = time.time()
+            try:
+                out = fn()
+            except _StageError:
+                raise
+            except Exception as e:
+                raise _StageError(stage, str(e))
+            finally:
+                trace.append({"stage": stage, "seconds": round(time.time() - t0, 1)})
+            completed.append(stage)
+            return out
 
-        # 1. Writer
-        draft = _InternalPersonaWriter().perform(input=source, chapter_title=chapter_title)
-        save("01-draft.md", draft)
+        try:
+            try:
+                rounds = max(0, min(int(revision_rounds), _MAX_REVISION_ROUNDS))
+            except (ValueError, TypeError):
+                rounds = 0
 
-        # 2. Editor (composite — calls cutweak + factcheck + voicecheck)
-        edited = _InternalPersonaEditor().perform(input=draft)
-        save("02-edited.md", edited)
+            save("00-source.md", source)
 
-        # 3. CEO (composite — calls risk + decision)
-        ceo_note = _InternalPersonaCEO().perform(input=edited)
-        save("03-ceo-note.md", ceo_note)
+            # 1. Writer
+            draft = run_stage("writer", lambda: _InternalPersonaWriter().perform(
+                input=source, chapter_title=chapter_title))
+            save("01-draft.md", draft)
 
-        # 4. Publisher
-        final = _InternalPersonaPublisher().perform(input=edited, ceo_note=ceo_note,
-                                                  title=chapter_title, author=author)
-        save("04-final-chapter.md", final)
+            # 2. Editor (composite — strip→cut→restructure, factcheck ∥ voicecheck)
+            edited = run_stage("editor", lambda: _InternalPersonaEditor().perform(input=draft))
+            save("02-edited.md", edited)
 
-        # 5. Reviewer (read it cold)
-        review = _InternalPersonaReviewer().perform(input=final)
-        save("05-review.md", review)
+            # 3. CEO (composite — risk ∥ decision; the verdict is structured)
+            ceo_note, decision = run_stage("ceo", lambda: _InternalPersonaCEO().review(input=edited))
+            save("03-ceo-note.md", ceo_note)
 
-        # Summary header + the final chapter (the artifact the caller wants)
-        return (
-            f"Book factory complete. Workspace: {ws}\n"
-            f"---\n"
-            f"FINAL CHAPTER:\n\n{final}\n"
-            f"---\n"
-            f"REVIEWER:\n\n{review}\n"
-        )
+            # The gate is real: a hold halts the pipeline with a partial
+            # report instead of publishing anyway.
+            if decision["decision"] == "hold":
+                return json.dumps({
+                    "status": "held",
+                    "message": "CEO verdict: hold — publication halted.",
+                    "line_to_change": decision["line_to_change"],
+                    "ceo_note": ceo_note,
+                    "completed_stages": completed,
+                    "workspace": ws,
+                    "trace": trace,
+                })
+
+            # 4. Publisher
+            final = run_stage("publisher", lambda: _InternalPersonaPublisher().perform(
+                input=edited, ceo_note=ceo_note, title=chapter_title, author=author))
+            save("04-final-chapter.md", final)
+
+            # 5. Reviewer (read it cold; the score is structured)
+            review = run_stage("reviewer", lambda: _InternalPersonaReviewer().review(input=final))
+            save("05-review.md", json.dumps(review, indent=2))
+
+            # Opt-in, statically bounded revision pass: when the Reviewer
+            # scores below 4, re-run Writer(with notes)→Publisher→Reviewer
+            # (~3 calls), not the full chain.
+            passes = 0
+            while passes < rounds and review["score"] < 4:
+                passes += 1
+                notes = (f"A cold reader scored this chapter {review['score']}/5. "
+                         f"Their note on the biggest weakness: {review['notes'] or '(none given)'}. "
+                         f"The strongest line was: {review['strongest_line']}. "
+                         f"Revise to fix the weakness; keep the strongest material.")
+                draft = run_stage(f"writer-revision-{passes}",
+                    lambda: _InternalPersonaWriter().perform(
+                        input=(f"{source}\n\n--- PREVIOUS DRAFT ---\n{final}\n"
+                               f"--- REVISION NOTES ---\n{notes}"),
+                        chapter_title=chapter_title))
+                final = run_stage(f"publisher-revision-{passes}",
+                    lambda: _InternalPersonaPublisher().perform(
+                        input=draft, ceo_note=ceo_note, title=chapter_title, author=author))
+                save(f"04-final-chapter-r{passes}.md", final)
+                review = run_stage(f"reviewer-revision-{passes}",
+                    lambda: _InternalPersonaReviewer().review(input=final))
+                save(f"05-review-r{passes}.md", json.dumps(review, indent=2))
+
+            # Summary header + the final chapter (the artifact the caller wants)
+            return (
+                f"Book factory complete. Workspace: {ws}\n"
+                f"CEO decision: {decision['decision']}"
+                + (f" — requested change: {decision['line_to_change']}" if decision["line_to_change"] else "")
+                + (f" | revision passes: {passes}" if passes else "")
+                + "\n---\n"
+                f"FINAL CHAPTER:\n\n{final}\n"
+                f"---\n"
+                f"REVIEWER: score {review['score']}/5 | keep reading: {review['keep_reading']} | "
+                f"strongest line: {review['strongest_line']}\n"
+                f"TRACE: {json.dumps(trace)}\n"
+            )
+
+        except _StageError as e:
+            # Errors are reported, never edited/typeset/reviewed downstream.
+            return json.dumps({
+                "status": "error",
+                "failed_stage": e.stage,
+                "message": str(e),
+                "completed_stages": completed,
+                "workspace": ws,
+                "trace": trace,
+            })
 
 
 # Alias so the brainstem's "name ends in Agent" discovery picks it up.
@@ -519,7 +759,15 @@ class BookFactoryAgent(BookFactory):
 
 # ─── Inlined LLM dispatch (one copy for the whole singleton) ──────────
 
-def _llm_call(soul: str, user_prompt: str) -> str:
+def _llm_call(soul: str, user_prompt: str, tier: str = None) -> str:
+    """One LLM call. Charges the run budget; raises on failure (after one
+    retry on transient errors) instead of returning error text as prose.
+
+    tier="small" is opportunistic: it uses AZURE_OPENAI_DEPLOYMENT_SMALL /
+    OPENAI_MODEL_SMALL when configured and silently falls back to the
+    primary deployment otherwise — a single-deployment box runs the whole
+    swarm unmodified. No literal model names are baked into this file."""
+    _budget_charge()
     messages = [{"role": "system", "content": soul},
                 {"role": "user", "content": user_prompt}]
     endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT", "")
@@ -527,6 +775,8 @@ def _llm_call(soul: str, user_prompt: str) -> str:
     deployment = (os.environ.get("AZURE_OPENAI_DEPLOYMENT")
                   or os.environ.get("AZURE_OPENAI_DEPLOYMENT_NAME", ""))
     if endpoint and api_key:
+        if tier == "small":
+            deployment = os.environ.get("AZURE_OPENAI_DEPLOYMENT_SMALL") or deployment
         is_v1 = "/openai/v1/" in endpoint
         url = endpoint
         if "/chat/completions" not in url:
@@ -536,22 +786,37 @@ def _llm_call(soul: str, user_prompt: str) -> str:
         return _post(url, {"messages": messages, "model": deployment},
                       {"Content-Type": "application/json", "api-key": api_key})
     if os.environ.get("OPENAI_API_KEY"):
+        model = os.environ.get("OPENAI_MODEL", "gpt-4o")
+        if tier == "small":
+            model = os.environ.get("OPENAI_MODEL_SMALL") or model
         return _post("https://api.openai.com/v1/chat/completions",
-                      {"model": os.environ.get("OPENAI_MODEL", "gpt-4o"), "messages": messages},
+                      {"model": model, "messages": messages},
                       {"Content-Type": "application/json",
                        "Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]})
-    return "(no LLM configured — set AZURE_OPENAI_* or OPENAI_API_KEY)"
+    raise RuntimeError("no LLM configured — set AZURE_OPENAI_* or OPENAI_API_KEY")
 
 
 def _post(url, body, headers):
-    req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"),
-                                  headers=headers, method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            j = json.loads(resp.read().decode("utf-8"))
-        choices = j.get("choices") or []
-        return (choices[0]["message"].get("content") or "") if choices else ""
-    except urllib.error.HTTPError as e:
-        return f"(LLM HTTP {e.code}: {e.read().decode('utf-8')[:200]})"
-    except urllib.error.URLError as e:
-        return f"(LLM network error: {e})"
+    last = ""
+    for attempt in (1, 2):
+        req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"),
+                                      headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                j = json.loads(resp.read().decode("utf-8"))
+            choices = j.get("choices") or []
+            return (choices[0]["message"].get("content") or "") if choices else ""
+        except urllib.error.HTTPError as e:
+            detail = f"LLM HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:200]}"
+            if (e.code == 429 or 500 <= e.code < 600) and attempt == 1:
+                last = detail
+                time.sleep(2)
+                continue
+            raise RuntimeError(detail)
+        except urllib.error.URLError as e:
+            if attempt == 1:
+                last = f"LLM network error: {e}"
+                time.sleep(2)
+                continue
+            raise RuntimeError(f"LLM network error: {e}")
+    raise RuntimeError(last)

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__tuftelove_agent",
+  "name": "TufteLove",
+  "rar_name": "@howardh/tuftelove_agent",
+  "rappid": "rappid:@howardh/tuftelove_agent:a5c51bdfbbfa7e2b7d09af7ae332fe65bdbf17d7afa585edcc0da5c12f126a17",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "ui",
+    "design",
+    "tufte",
+    "oversight",
+    "ux",
+    "review",
+    "accessibility",
+    "data-visualization"
+  ],
+  "description": "UI design advisor combining Edward Tufte's visual principles, Microsoft Aether Agent Oversight Taxonomy (32+ patterns), and 8 academic papers \u2014 shapes how agents create UI and reviews existing UI for design quality.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 512,
+  "size_kb": 28.4,
+  "sha256": "06473c56121fbfe8995a6a799593d0af7e67b9cf46abcc1496786d5ab6df3111",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__tuftelove_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__tuftelove_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__tuftelove_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__tuftelove_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py"
+}

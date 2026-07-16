@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__ez_sharpen_agent",
+  "name": "EZSharpen",
+  "rar_name": "@kody-w/ez_sharpen_agent",
+  "rappid": "rappid:@kody-w/ez_sharpen_agent:32959ba5bffcd56ff1449bebcfa1b4e6b0fa6c3a9cab6f4a6850794e71433bd9",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "analysis",
+  "tags": [
+    "frames",
+    "interpolation",
+    "dream-catcher",
+    "fidelity",
+    "ezsharpen"
+  ],
+  "description": "Recursively grow the fidelity of commons frame recordings with the EZsharpen / dream-catcher pattern: competing engines propose in-between detail, only non-conflicting proposals are merged, and the engines self-improve over passes \u2014 never contradicting the signed record.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 413,
+  "size_kb": 25.9,
+  "sha256": "9304b85bef4edb4311e819c1e7608c8a76c5a513002f7e64366b3a032aad9de6",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__ez_sharpen_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ez_sharpen_agent.py"
+}

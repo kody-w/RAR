@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__copilot_studio_probe_agent",
+  "name": "CopilotStudioProbe",
+  "rar_name": "@kody-w/copilot_studio_probe_agent",
+  "rappid": "rappid:@kody-w/copilot_studio_probe_agent:490f017dc847c25b607de45a8c4fea5eab949fd4936380f23879b736e2647e9a",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "copilot-studio",
+    "direct-line",
+    "probe",
+    "testing",
+    "integration",
+    "m365"
+  ],
+  "description": "Send a message to a deployed Microsoft Copilot Studio agent over Direct Line and return its reply \u2014 a runtime tester for published agents.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [
+    "COPILOT_DIRECTLINE_TOKEN_ENDPOINT",
+    "COPILOT_DIRECTLINE_SECRET"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 153,
+  "size_kb": 7.1,
+  "sha256": "b15b9347026530ec37f56fc702612fa1cd157cdb3dc11e6023609342f2bbbfd0",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_probe_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/copilot_studio_probe_agent.py"
+}

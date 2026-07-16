@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__matrix_arena_agent",
+  "name": "Matrix Arena",
+  "rar_name": "@kody-w/matrix_arena_agent",
+  "rappid": "rappid:@kody-w/matrix_arena_agent:67aa5f939f1effa5c4b30e5031433533ffa026b92a6e506ef86a84f41f726629",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "commons",
+    "multiplayer",
+    "testing",
+    "playwright",
+    "webrtc"
+  ],
+  "description": "Open and autonomously drive multiple headless RAPP Commons tabs \u2014 a HOST leader/recorder + FOLLOWER replicas \u2014 and sync-test them: host-led frontier, WebRTC presence sync, navigation, signed actions, and seamless host succession. Play as the leader and test the live world.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 275,
+  "size_kb": 14.2,
+  "sha256": "548146b76f5b283339e79eebb096674260156b89d85860b73f31f72ad0f6fc5e",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__matrix_arena_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/matrix_arena_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/matrix_arena_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__matrix_arena_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__matrix_arena_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__matrix_arena_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/matrix_arena_agent.py"
+}

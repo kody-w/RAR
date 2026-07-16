@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__double_jump_agent",
+  "name": "Double Jump",
+  "rar_name": "@kody-w/double_jump_agent",
+  "rappid": "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "improvement",
+    "competition",
+    "brainstem",
+    "double-jump",
+    "self-improvement"
+  ],
+  "description": "A general improvement engine: two loops compete on the same task and ratchet it up. Jump 1 is the caller's draft; Jump 2 is the brainstem (via /chat). Each round it judges, keeps the winner, and feeds what made it better forward \u2014 pulling the laggard up without losing gains. Point it at anything: an agent.py, a commons feature, a plan, a draft.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 213,
+  "size_kb": 12.7,
+  "sha256": "dc062bf427a7a569a266a05b51965c8f84f140343f54bdbb6289c92e8ef3e0a1",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__double_jump_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__double_jump_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__double_jump_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__double_jump_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/double_jump_agent.py"
+}

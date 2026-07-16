@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/software_competitive_intel",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Competitive Intelligence Agent",
     "description": "AI-powered competitive intelligence for SaaS market landscape analysis, feature comparisons, pricing analysis, and threat assessments.",
     "author": "AIBAST",
@@ -275,7 +275,7 @@ class CompetitiveIntelAgent(BasicAgent):
     """Competitive intelligence agent for SaaS market analysis."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/software-competitive-intel"
+        self.name = "CompetitiveIntelAgent"
         self.metadata = {
             "name": self.name,
             "description": __manifest__["description"],

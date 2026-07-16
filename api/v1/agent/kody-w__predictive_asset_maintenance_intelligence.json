@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__predictive_asset_maintenance_intelligence",
+  "name": "Predictive Asset Maintenance Intelligence",
+  "rar_name": "@kody-w/predictive_asset_maintenance_intelligence",
+  "rappid": "rappid:@kody-w/predictive_asset_maintenance_intelligence:2f9c3c01a7a770624ef2d411925144ad113c95cdee789d54f0e90b2a133abe2d",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "energy",
+  "tags": [
+    "energy",
+    "predictive-maintenance",
+    "asset-management",
+    "grid",
+    "field-service"
+  ],
+  "description": "End-to-end predictive maintenance for grid infrastructure: aggregates telemetry, scores asset health, ranks failure probability over 30/90/180 days, drafts Field Service work orders and parts procurement, and builds a multi-year capex replacement pipeline \u2014 eight specialist agents plus an orchestrator in one file.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1232,
+  "size_kb": 54.2,
+  "sha256": "16ef3bc719f7e8f85da3073d8db54c16e09a412ea522c7499380da7ca5f43c15",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__predictive_asset_maintenance_intelligence.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__predictive_asset_maintenance_intelligence.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__predictive_asset_maintenance_intelligence.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__predictive_asset_maintenance_intelligence.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py"
+}

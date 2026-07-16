@@ -55,13 +55,13 @@ import urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/exec_brief_agent",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "display_name": "Executive Brief",
     "description": "Four-agent pipeline that produces polished executive briefs on any topic.",
     "author": "@rapp",
     "tags": ["composite", "exec-brief-pipeline", "singleton"],
     "category": "analysis",
-    "quality_tier": "community",
+    "quality_tier": "official",
     "requires_env": [],
     "delegates_to_inlined": [
         "@rapp/brief-scout",

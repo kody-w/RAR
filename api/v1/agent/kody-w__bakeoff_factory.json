@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__bakeoff_factory",
+  "name": "BakeoffFactory",
+  "rar_name": "@kody-w/bakeoff_factory",
+  "rappid": "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "0.1.0",
+  "publisher": "@kody-w",
+  "category": "pipeline",
+  "tags": [
+    "meta",
+    "evolution",
+    "tournament",
+    "loop",
+    "self-improving",
+    "composite",
+    "rapplication"
+  ],
+  "description": "Generic content-improvement bakeoff loop. Variants compete on a task; a judge scores every output on a rubric; the worst variant evolves by grafting techniques from the best. Rising tide raises all boats. Drop it on any text-producing task.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 863,
+  "size_kb": 36.3,
+  "sha256": "0a7705fdbc0b348f8661d8abebfdbeb4d77cfb3d695818507dc20e0d35e9bcac",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__bakeoff_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__bakeoff_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__bakeoff_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__bakeoff_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/bakeoff_factory_agent.py"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__commons_life_agent",
+  "name": "Commons Life",
+  "rar_name": "@kody-w/commons_life_agent",
+  "rappid": "rappid:@kody-w/commons_life_agent:b9123a29dd53e4713479ab0d481fcfc0f6913c743fba66333c05db7e800f02c9",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "creative",
+  "tags": [
+    "commons",
+    "frames",
+    "playback",
+    "lifeplayer",
+    "digital-organism"
+  ],
+  "description": "Record, grow, and play the life of the commons as a digital organism, cradle to grave: capture frozen signed frames at a chosen resolution, grow the fidelity between them with EZsharpen, and emit a LifePlayer HTML scrubber that spins/plays the grown life back with signed events ticking like vitals.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 321,
+  "size_kb": 21.2,
+  "sha256": "0fc96ce4a5b18853b95a16ec0650a0e736bb58737be5d9a8f243e18313f2c5ad",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__commons_life_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_life_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_life_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_life_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/commons_life_agent.py"
+}

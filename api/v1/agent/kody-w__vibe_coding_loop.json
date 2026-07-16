@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__vibe_coding_loop",
+  "name": "Vibe Coding Demo Loop",
+  "rar_name": "@kody-w/vibe_coding_loop",
+  "rappid": "rappid:@kody-w/vibe_coding_loop:3c506fafbf0614679c9271b70b08baa5298031335ea3fa454c71dd68379491d8",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "publishing",
+    "orchestration",
+    "vibe-coding",
+    "single-file-html",
+    "loop"
+  ],
+  "description": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships. This agent returns the templates you feed to your LLM/sub-agents \u2014 provider-agnostic.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 357,
+  "size_kb": 14.8,
+  "sha256": "62d1bf0f0685326bdc0a15292b6000f3ef14dc62492a7b721fc8b2068bd668e1",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__vibe_coding_loop.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__vibe_coding_loop.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__vibe_coding_loop.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__vibe_coding_loop.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/vibe_coding_loop_agent.py"
+}

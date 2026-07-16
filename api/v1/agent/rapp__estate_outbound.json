@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__estate_outbound",
+  "name": "EstateOutbound",
+  "rar_name": "@rapp/estate_outbound",
+  "rappid": "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "estate",
+    "outbound",
+    "federation",
+    "neighborhood",
+    "publish"
+  ],
+  "description": "Stage a signed neighborhood event in the operator's outbound lane (Article XLVIII). The companion to commons_post \u2014 once an event is signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the neighborhood's federation roll-up can pull it on its beat. Does NOT push to the operator's public-estate repo \u2014 that's a separate step the operator owns (gh CLI or a future estate_publish_agent).",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 183,
+  "size_kb": 7.0,
+  "sha256": "e34c853f3b1ae2a6349519436760bd1531ead304ba022d4c7109d143006cb8d9",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__estate_outbound.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/estate_outbound_agent.py"
+}

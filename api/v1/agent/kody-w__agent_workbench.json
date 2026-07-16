@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__agent_workbench",
+  "name": "Agent Workbench",
+  "rar_name": "@kody-w/agent_workbench",
+  "rappid": "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.1",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "devtools",
+    "workbench",
+    "scaffolding",
+    "validation",
+    "testing",
+    "publishing"
+  ],
+  "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
+  "author": "RAPP Core Team",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 737,
+  "size_kb": 29.2,
+  "sha256": "afdb5658f8079d3fa3eca347721b9faa963634d06cc27a72c3bc20b981d8bee2",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_workbench.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/agent_workbench_agent.py"
+}

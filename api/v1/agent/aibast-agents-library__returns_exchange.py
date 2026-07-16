@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_exchange",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Returns & Exchange Agent",
     "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.",
     "author": "AIBAST",
@@ -151,7 +151,7 @@ class ReturnsExchangeAgent(BasicAgent):
     """Returns and exchange management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/returns-exchange"
+        self.name = "ReturnsExchangeAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Returns & Exchange Agent",

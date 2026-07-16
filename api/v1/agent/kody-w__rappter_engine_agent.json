@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rappter_engine_agent",
+  "name": "RappterEngine",
+  "rar_name": "@kody-w/rappter_engine_agent",
+  "rappid": "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "engine",
+    "framework",
+    "content",
+    "automation",
+    "rules-as-data",
+    "heartbeat"
+  ],
+  "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 479,
+  "size_kb": 17.5,
+  "sha256": "ca2f7195446656d2f1aa84ac74e03bb601a51a6c977bffa232ce29c9b9cfc22e",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rappter_engine_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rappter_engine_agent.py"
+}

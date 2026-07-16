@@ -32,6 +32,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import sys
 import time
@@ -44,6 +45,7 @@ _API = _REPO / "api" / "v1"
 
 SCHEMA_API_INDEX = "rar-pokedex-api/1.0"
 SCHEMA_API_AGENT = "rar-pokedex-agent/1.0"
+_PRIOR_RAPPIDS: dict = {}
 RAW_PREFIX = "https://raw.githubusercontent.com/kody-w/RAR/main"
 
 
@@ -100,9 +102,22 @@ def _build_entry(agent: dict) -> dict:
     publisher = name.split("/")[0] if "/" in name else "@anon"
     file_rel = agent.get("_file", "")           # agents/@rapp/learn_new_agent.py
     has_card = bool(agent.get("_has_card"))
-    sha256 = agent.get("_sha256") or ""
-    # Consolidated rappid (CONSTITUTION Art. XXXIV.1): rappid:@<owner>/<slug>:<64hex>.
-    rappid = f"rappid:{publisher}/{name.split('/')[-1]}:{sha256 or hashlib.sha256(_slug(name).encode()).hexdigest()}"
+    # stubs (private agents published as .stub) are content-addressed by the
+    # stub artifact itself
+    sha256 = agent.get("_sha256") or agent.get("_stub_sha256") or ""
+    # §6 identity — mirrors RAPP_Store's converged builder: a frozen catalog
+    # artifact gets a domain-separated content-address, never a name-hash and
+    # never a bare file sha. Hb("rapp/1:rappid", sha256(content)).
+    if sha256:
+        _tail = hashlib.sha256(
+            b"rapp/1:rappid\n" + bytes.fromhex(sha256)
+        ).hexdigest()
+    else:
+        _tail = None
+    rappid = f"rappid:{publisher}/{name.split('/')[-1]}:{_tail}" if _tail else None
+    # legacy bridge: carry the previously served identity as _migrated_from
+    _old, _old_bridge = _PRIOR_RAPPIDS.get(slug) or (None, None)
+    migrated_from = _old if (_old and _old != rappid) else _old_bridge
 
     # File-on-disk references (publisher-namespaced under agents/)
     py_url = f"{RAW_PREFIX}/{file_rel}" if file_rel else None
@@ -119,6 +134,11 @@ def _build_entry(agent: dict) -> dict:
         "name": agent.get("display_name", name.split("/")[-1]),
         "rar_name": name,                       # original @publisher/slug
         "rappid": rappid,
+        "_migrated_from": migrated_from,
+        "_migrated_from_note": (
+            "legacy identity string, read-forever; the canonical rappid "
+            "above is authoritative"
+        ) if migrated_from else None,
         "version": agent.get("version", "0.0.0"),
         "publisher": publisher,
         "category": agent.get("category"),
@@ -157,6 +177,18 @@ def main():
         print(f"err: registry.json not found at {_REGISTRY}", file=sys.stderr)
         sys.exit(1)
 
+    global _PRIOR_RAPPIDS
+    _PRIOR_RAPPIDS = {}
+    if (_API / "agent").is_dir():
+        for _f in (_API / "agent").glob("*.json"):
+            try:
+                _d = json.loads(_f.read_text())
+                if _d.get("rappid"):
+                    _PRIOR_RAPPIDS[_f.stem] = (
+                        _d["rappid"], _d.get("_migrated_from")
+                    )
+            except Exception:
+                pass
     if _API.exists():
         shutil.rmtree(_API)
     (_API / "agent").mkdir(parents=True)
@@ -172,9 +204,15 @@ def main():
         entries.append(entry)
 
         # Per-agent JSON
-        (_API / "agent" / f"{slug}.json").write_text(
-            json.dumps(entry, indent=2) + "\n"
+        _doc = json.dumps(entry, indent=2) + "\n"
+        # keep the legacy bridge and its note on ONE line so line-based
+        # drift lints see the marker next to the retired string
+        _doc = re.sub(
+            r'("_migrated_from": "[^"]+",)\n\s*("_migrated_from_note":)',
+            r"\1 \2",
+            _doc,
         )
+        (_API / "agent" / f"{slug}.json").write_text(_doc)
 
         # Sprite SVG
         sprite = _sprite_svg(entry["rappid"], entry.get("category") or "default")

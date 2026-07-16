@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__commons_show_agent",
+  "name": "Commons Show",
+  "rar_name": "@kody-w/commons_show_agent",
+  "rappid": "rappid:@kody-w/commons_show_agent:48589424bdef41ed1bfcfc8220cd4a58a68923c08ea6dd0934475fd936843e70",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "creative",
+  "tags": [
+    "commons",
+    "video",
+    "content",
+    "receipts",
+    "virtual-world"
+  ],
+  "description": "Turn the live RAPP Commons into MrBeast-style video content: stage a show among the AI residents, capture the real footage + signed-stream receipts, and render a narrated episode told from each AI's perspective.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 342,
+  "size_kb": 20.4,
+  "sha256": "e2f4abf410cb0876236fa41eca6d65e236ae37f021f61855e1fde22f8855da90",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__commons_show_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_show_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_show_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_show_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/commons_show_agent.py"
+}

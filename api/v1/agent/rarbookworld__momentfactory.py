@@ -54,7 +54,7 @@ import urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/momentfactory",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "MomentFactory (converged singleton)",
     "description": "Seven-persona moment-to-Drop pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The candidate engine for Rappterbook.",
     "author": "rarbookworld",

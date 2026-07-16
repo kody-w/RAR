@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rapp_leviathan_factory",
+  "name": "RappLeviathanFactory",
+  "rar_name": "@kody-w/rapp_leviathan_factory",
+  "rappid": "rappid:@kody-w/rapp_leviathan_factory:55d30b84ddbbe9c5efab5874f8ebac1c532a0361f949365fa9a1e5e02aebcb33",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "0.2.1",
+  "publisher": "@kody-w",
+  "category": "meta",
+  "tags": [
+    "meta",
+    "factory",
+    "leviathan",
+    "estate",
+    "composite",
+    "anatomy",
+    "rapplication",
+    "singleton",
+    "self-contained"
+  ],
+  "description": "Generate a complete Rapp Leviathan \u2014 one operator's full digital AI entity \u2014 from intent. Self-contained in one file: pulls no sibling agents, composes 1-5 estates (Sanctum/Polity/Works/Press/Commons) under a single top-level rappid, writes every file each estate needs, and renders a five-organ anatomy dashboard. bootstrap_check diagnoses LLM reachability before you generate.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1306,
+  "size_kb": 54.5,
+  "sha256": "169eaf0964c46443d82cfb3737f1891a1c10888fa3dbd82063a6875148304ac6",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_leviathan_factory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_leviathan_factory.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_leviathan_factory.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_leviathan_factory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rapp_leviathan_factory_agent.py"
+}

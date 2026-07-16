@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/slg_grants_management",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "SLG Grants Management Agent",
     "description": "State and local government grants portfolio management with application tracking, reporting calendars, and budget monitoring.",
     "author": "AIBAST",
@@ -170,7 +170,7 @@ class SLGGrantsManagementAgent(BasicAgent):
     """State and local government grants management agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/slg-grants-management"
+        self.name = "SLGGrantsManagementAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "SLG Grants Management Agent",

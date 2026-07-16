@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__vaultmind_agent",
+  "name": "VaultMind",
+  "rar_name": "@howardh/vaultmind_agent",
+  "rappid": "rappid:@howardh/vaultmind_agent:7614860486bf6d1d271d692e6c08fe17afda159da18a019b48cbcb597bf1005a",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "obsidian",
+    "30-60-90",
+    "onboarding",
+    "wiki",
+    "knowledge-base",
+    "vault",
+    "automation",
+    "scheduling",
+    "monitoring"
+  ],
+  "description": "Your second brain has a brain. 28-action Obsidian vault manager: multi-person 30-60-90 plans, OKRs, Kanban boards, Now/Next/Later priorities, Karpathy-style LLM knowledge bases, training quests, morning briefs, wiki health checks, auto-bootstrap with plugins. One file, zero deps.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [
+    "OBSIDIAN_VAULT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 3260,
+  "size_kb": 146.3,
+  "sha256": "6bdf9c18afc0abf0c604495a40260eb1eab7b27ff8518720712a892d74902203",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__vaultmind_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__vaultmind_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__vaultmind_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__vaultmind_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/vaultmind_agent.py"
+}

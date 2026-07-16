@@ -15,7 +15,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/regulatory_compliance_fed",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Regulatory Compliance (Federal) Agent",
     "description": "Federal regulatory compliance management with FISMA, FedRAMP, and NIST gap analysis, remediation planning, and audit readiness.",
     "author": "AIBAST",
@@ -140,7 +140,7 @@ class RegulatoryComplianceFedAgent(BasicAgent):
     """Federal regulatory compliance agent."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/regulatory-compliance-fed"
+        self.name = "RegulatoryComplianceFedAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Regulatory Compliance (Federal) Agent",

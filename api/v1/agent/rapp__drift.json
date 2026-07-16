@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__drift",
+  "name": "DriftAgent",
+  "rar_name": "@rapp/drift",
+  "rappid": "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c",
+  "_migrated_from": "rappid:@rapp/drift:6a8ba760bac1f79e922616fdc9b8c237c213f16fc201d327d4cd8190b942e3d3", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "drift",
+    "spec",
+    "authority",
+    "rapp-god",
+    "alignment",
+    "audit"
+  ],
+  "description": "Troll every canonical RAPP source for spec drift and report each conflict with which source wins (per the ecosystem authority order) and how to reconcile it.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 687,
+  "size_kb": 36.4,
+  "sha256": "51de403c7e8c6a4c543c98170e2dc119c3c05a367233c60904c0ebdca904fa87",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/drift_agent.py"
+}

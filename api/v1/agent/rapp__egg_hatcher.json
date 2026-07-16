@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__egg_hatcher",
+  "name": "EggHatcher",
+  "rar_name": "@rapp/egg_hatcher",
+  "rappid": "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "egg",
+    "cartridge",
+    "hatch",
+    "organism",
+    "rapplication",
+    "lifecycle"
+  ],
+  "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood (real \u2014 joins via Article XLVI two-tier estate) / estate (planned). Refuses on unknown kinds \u2014 never a destructive fallback.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 347,
+  "size_kb": 14.6,
+  "sha256": "bdd2b796aeac17d01a8c675acf8dfcf717aaa29601451aefccf7feffe6b8cf04",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__egg_hatcher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/egg_hatcher_agent.py"
+}

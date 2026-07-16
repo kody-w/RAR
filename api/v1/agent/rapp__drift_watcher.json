@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__drift_watcher",
+  "name": "DriftWatcherAgent",
+  "rar_name": "@rapp/drift_watcher",
+  "rappid": "rappid:@rapp/drift_watcher:94bfdf486d2c3f4fce2bc9ea3776de3e60b0c61e7f31a1700f94e026533df188",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "drift",
+    "spec",
+    "github",
+    "issues",
+    "pull-request",
+    "traceability",
+    "steward",
+    "alignment",
+    "operator-mediated"
+  ],
+  "description": "Watch GitHub Issues filed by the drift/steward agents and stage the local-repo fix as a pull request \u2014 operator-mediated: it proposes PRs (Fixes #), never merges or closes. Closes the drift traceability loop.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 421,
+  "size_kb": 20.3,
+  "sha256": "c43f286cae6dc16a1fdc8ae2372697f7c132615af35839baa866b4b2c546690f",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift_watcher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/drift_watcher_agent.py"
+}

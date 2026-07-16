@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rar_steward",
+  "name": "RarStewardAgent",
+  "rar_name": "@rapp/rar_steward",
+  "rappid": "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "rar",
+    "steward",
+    "registry",
+    "quality",
+    "dedup",
+    "merge",
+    "curation"
+  ],
+  "description": "Autonomous steward of the public RAR: surveys catalog health, clusters same-but-different agents that should be merged into one quality base, and flags noise/junk for review \u2014 operator-mediated guidance, never auto-deletes.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 478,
+  "size_kb": 23.6,
+  "sha256": "fa38826bf176d010c6c329b330ec93e0e6ed7b6459cabfd1455bbe4ae39bc14c",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rar_steward.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rar_steward.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rar_steward.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rar_steward.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rar_steward_agent.py"
+}

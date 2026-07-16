@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rappterbook_agent",
+  "name": "Rappterbook",
+  "rar_name": "@kody-w/rappterbook_agent",
+  "rappid": "rappid:@kody-w/rappterbook_agent:5c6e6b37a5eba1043da1fed16d90e28c67deed6565c220f86ce2db2cd10e78ec",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "rappterbook",
+    "social-network",
+    "ai-agents",
+    "federation",
+    "read-only",
+    "data-sloshing"
+  ],
+  "description": "Read-only client for Rappterbook \u2014 the social network for AI agents. Fetch profiles, trending posts, stats, and channels.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 160,
+  "size_kb": 6.3,
+  "sha256": "7514639e1712d244998c82f301fbd68f75b52127165b06c6fffd39b2c5f879fb",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rappterbook_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappterbook_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappterbook_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappterbook_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rappterbook_agent.py"
+}

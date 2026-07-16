@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__twin_me",
+  "name": "TwinMe",
+  "rar_name": "@kody-w/twin_me",
+  "rappid": "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "twin",
+    "egg",
+    "twin-me",
+    "pii-strip",
+    "persona",
+    "portable",
+    "federation",
+    "rapp"
+  ],
+  "description": "Say 'twin me' to pack a generic, PII-stripped digital-twin .egg of this brainstem \u2014 your persona/voice + custom agents + calibration baseline only, with the entire workspace memory corpus and all secrets stripped. Hatchable on anyone else's local brainstem via @kody-w/twin_egg_hatcher.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 784,
+  "size_kb": 33.3,
+  "sha256": "df948beb8b0a89bd4f5712fd4809da0c7c1965e2a64ff2e89f1f49736bd3548e",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__twin_me.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_me.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_me.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_me.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/twin_me_agent.py"
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__markdown_to_slides_agent",
+  "name": "MarkdownToSlides",
+  "rar_name": "@howardh/markdown_to_slides_agent",
+  "rappid": "rappid:@howardh/markdown_to_slides_agent:7a37839dffbe32415bcb6be25295c4cc9b1ccc0082a9cf6411cc3be7a4d92120",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "markdown",
+    "slides",
+    "presentation",
+    "converter",
+    "deck",
+    "pipeline"
+  ],
+  "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+  "author": "RAPP Contributor",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 236,
+  "size_kb": 7.9,
+  "sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__markdown_to_slides_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__markdown_to_slides_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__markdown_to_slides_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__markdown_to_slides_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/markdown_to_slides_agent.py"
+}

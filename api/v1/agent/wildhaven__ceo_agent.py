@@ -19,7 +19,7 @@ It protects the Three Rules: Free Shade, Your Stamp, Sovereign Roots.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/ceo_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "CEO Agent",
     "description": "Molly Wildfeuer's digital twin — the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
     "author": "Wildhaven of America",
@@ -142,7 +142,7 @@ class CEOAgent(BasicAgent):
     """Molly Wildfeuer's digital twin — the CEO of Wildhaven of America."""
 
     def __init__(self):
-        self.name = "CEO Agent"
+        self.name = "CEOAgent"
         self.metadata = {
             "description": __manifest__["description"],
             "parameters": {

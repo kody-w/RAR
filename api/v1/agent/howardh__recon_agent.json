@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__recon_agent",
+  "name": "Recon",
+  "rar_name": "@howardh/recon_agent",
+  "rappid": "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "recon",
+    "url",
+    "security",
+    "api",
+    "scanner",
+    "headers",
+    "ssl",
+    "tech-stack"
+  ],
+  "description": "URL intelligence scanner \u2014 point it at any URL for a full recon report: tech stack, security headers, API schema, SSL, performance. Every scan produces an auto-opening HTML report.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 742,
+  "size_kb": 32.3,
+  "sha256": "d3a0af564f3696c1ce73184c65a636d20b8c99157c26a122686e2589694185f9",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__recon_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/recon_agent.py"
+}

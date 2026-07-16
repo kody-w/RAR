@@ -14,7 +14,7 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/citizen_service_request",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Citizen Service Request Agent",
     "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
     "author": "AIBAST",
@@ -165,7 +165,7 @@ class CitizenServiceRequestAgent(BasicAgent):
     """Citizen service request management agent for municipalities."""
 
     def __init__(self):
-        self.name = "@aibast-agents-library/citizen-service-request"
+        self.name = "CitizenServiceRequestAgent"
         self.metadata = {
             "name": self.name,
             "display_name": "Citizen Service Request Agent",

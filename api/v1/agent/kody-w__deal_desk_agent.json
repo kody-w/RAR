@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__deal_desk_agent",
+  "name": "DealDesk",
+  "rar_name": "@kody-w/deal_desk_agent",
+  "rappid": "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@kody-w",
+  "category": "b2b_sales",
+  "tags": [
+    "deck",
+    "deal",
+    "sales",
+    "b2b",
+    "account-intelligence",
+    "competitive",
+    "pipeline",
+    "crm"
+  ],
+  "description": "B2B sales intelligence deck \u2014 runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAPP sales agents for deeper workflow.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 245,
+  "size_kb": 10.1,
+  "sha256": "fb314bbfa7e830ddbb4c1c8a5fb6817db340f2870f00a65035f2bed57f270427",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__deal_desk_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__deal_desk_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__deal_desk_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__deal_desk_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/deal_desk_agent.py"
+}
