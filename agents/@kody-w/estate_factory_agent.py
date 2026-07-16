@@ -74,7 +74,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/estate_factory",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "EstateFactory",
     "description": (
         "Generate a full functioning digital estate from intent. Picks "
@@ -134,6 +134,15 @@ def _save_json(path: pathlib.Path, data) -> None:
     tmp.write_text(json.dumps(data, indent=2))
     tmp.replace(path)
 
+
+
+def _canonical_rappid(name, owner="local"):
+    """Canonical §6.1 rappid: rappid:@<owner>/<slug>:<64hex>, tail = keyless
+    Hb("rapp/1:rappid", uuid4) (domain-separated). kind lives in the record."""
+    import re, hashlib, uuid
+    o = re.sub(r"[^a-z0-9]+", "-", (owner or "local").lower()).strip("-") or "local"
+    s = re.sub(r"[^a-z0-9]+", "-", (name or "estate").lower()).strip("-") or "estate"
+    return f"rappid:@{o}/{s}:" + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -705,7 +714,7 @@ class EstateFactoryAgent(BasicAgent):
         if designed.get("status") != "ok":
             return json.dumps(designed)
         estate = designed["estate"]
-        estate["rappid"] = str(uuid.uuid4())
+        estate["rappid"] = _canonical_rappid(name)
         estate["created_at"] = _now()
         estate["intent"] = intent
         estate.setdefault("type", designed["type_chosen"])

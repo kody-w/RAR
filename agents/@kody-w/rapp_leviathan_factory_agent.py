@@ -73,7 +73,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_leviathan_factory",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "display_name": "RappLeviathanFactory",
     "description": (
         "Generate a complete Rapp Leviathan — one operator's full digital "
@@ -220,6 +220,15 @@ ESTATE_TYPES: dict[int, dict] = {
 def _slugify(s: str) -> str:
     return re.sub(r"[^a-z0-9_]+", "_", (s or "").lower()).strip("_") or "x"
 
+
+
+def _canonical_rappid(name, owner="local"):
+    """Canonical §6.1 rappid: rappid:@<owner>/<slug>:<64hex>, tail = keyless
+    Hb("rapp/1:rappid", uuid4) (domain-separated). kind lives in the record."""
+    import re, hashlib, uuid
+    o = re.sub(r"[^a-z0-9]+", "-", (owner or "local").lower()).strip("-") or "local"
+    s = re.sub(r"[^a-z0-9]+", "-", (name or "estate").lower()).strip("-") or "estate"
+    return f"rappid:@{o}/{s}:" + hashlib.sha256(b"rapp/1:rappid\n" + uuid.uuid4().bytes).hexdigest()
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -723,7 +732,7 @@ def _generate_estate(intent: str, name: str, type: int | None = None,
                      write_souls: bool = True) -> dict:
     """End-to-end generation of one estate's filesystem footprint."""
     estate = _design_estate(intent, type, name)
-    estate["rappid"] = str(uuid.uuid4())
+    estate["rappid"] = _canonical_rappid(name)
     estate["created_at"] = _now()
     estate["intent"] = intent
 
@@ -1094,7 +1103,7 @@ class RappLeviathanFactoryAgent(BasicAgent):
 
         # Phase 2: top-level rappid + workspace
         ws = _leviathan_workspace(name)
-        leviathan_rappid = str(uuid.uuid4())
+        leviathan_rappid = _canonical_rappid(plan.get("name", name))
         _save_json(ws / "rappid.json", {
             "rappid": leviathan_rappid, "scale": "leviathan",
             "name": plan.get("name", name),
