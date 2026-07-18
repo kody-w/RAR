@@ -162,6 +162,27 @@ jobs:
               issue_number: issueNumber,
             });
             const labels = issue.labels.map(label => label.name || label);
+            if (process.env.STATUS === 'cancelled') {
+              for (const name of ['pending-review', 'approved', 'failed', 'conflict']) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issueNumber,
+                    name,
+                  });
+                } catch (error) {
+                  if (error.status !== 404) throw error;
+                }
+              }
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                labels: ['cancelled'],
+              });
+              return;
+            }
             const terminal = ['notarized', 'deleted', 'forged', 'processed', 'rejected'];
             if (issue.state !== 'open' || terminal.some(label => labels.includes(label))) {
               console.log('Issue became terminal while processing; projection skipped');
