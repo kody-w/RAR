@@ -29,5 +29,6 @@
   "slug": "rapp_x_notary_canary_agent",
   "source_body_sha256": "a8ad8f70d130d925bb4d148871074d8884b313d66c7b4d425c93a990b510266c",
   "source_url": "",
-  "status": "pending_review"
+  "status": "cancelled",
+  "cancelled_at": "2026-07-18T23:35:14.741961+00:00"
 }
