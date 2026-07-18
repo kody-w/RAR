@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-18T23:48:05.557352+00:00",
+  "generated_at": "2026-07-18T23:51:34.424701+00:00",
   "stats": {
-    "total_agents": 201,
+    "total_agents": 200,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -5842,57 +5842,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@kody-w/rapp_x_notary_canary_agent",
-      "version": "1.1.0",
-      "display_name": "RAPP X Notary Canary",
-      "description": "Validates the Issues-backed RAR notarization lifecycle.",
-      "author": "Kody W",
-      "tags": [
-        "canary",
-        "notary",
-        "rapp_x"
-      ],
-      "category": "devtools",
-      "quality_tier": "community",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@kody-w/rapp_x_notary_canary_agent.py",
-      "_install_filename": "rar_kody_w_rapp_x_notary_canary_agent.py",
-      "_sha256": "fa7eb67da52fa712937e13551ab50e9e2021050e3880abba8dfcb008162df376",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_cbfbb0cd9a57a4f906bce1230a6f75f542f5f6d0ef07d8f554cb78fed783f9e0",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": 199,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "namespace",
-          "content_sha256",
-          "base_precondition",
-          "security_scan",
-          "registry_build",
-          "card_forge",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 16785949889267118827,
-      "_size_kb": 1.3,
-      "_lines": 43,
-      "_has_card": true,
-      "_added_at": "2026-07-18T23:38:42Z",
-      "_first_commit_sha": "04cc4b8ef48733c4026ed9f580cc75a0947fa314",
-      "_latest_commit_sha": "2850d7964e97e142ba32e3bbfe2a24a5e3cbc353",
-      "_card_sha256": "100260fbf2a7b6529a1260e4b9b55f88a98c3e73fed59e8848029d4b0e92e649"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@kody-w/rappter_engine_agent",
       "version": "1.0.0",
       "display_name": "RappterEngine",
@@ -8835,7 +8784,20 @@
   "lifecycle": {
     "schema": "rar-agent-lifecycle/1.0",
     "receipt_schema": "rar-receipt/1.0",
-    "tombstones": []
+    "tombstones": [
+      {
+        "agent": "@kody-w/rapp_x_notary_canary_agent",
+        "status": "deleted",
+        "version": "1.1.0",
+        "quality_tier": "community",
+        "owner_github_id": 1735900,
+        "owner_github_login": "kody-w",
+        "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
+        "sha256": "fa7eb67da52fa712937e13551ab50e9e2021050e3880abba8dfcb008162df376",
+        "latest_receipt": "rar_1aed661e24bb8891c10457c68e3585ad0f52ce5641435e56f2cf1303a49371db",
+        "updated_at": "2026-07-18T23:49:50.956585+00:00"
+      }
+    ]
   },
   "stacks": {
     "account_intelligence": {

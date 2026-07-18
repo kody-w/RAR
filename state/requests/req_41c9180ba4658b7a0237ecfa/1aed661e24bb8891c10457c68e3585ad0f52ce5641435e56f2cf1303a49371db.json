@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/rapp_x_notary_canary_agent",
+  "applied_at": "2026-07-18T23:49:50.956585+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_cbfbb0cd9a57a4f906bce1230a6f75f542f5f6d0ef07d8f554cb78fed783f9e0",
   "base_lifecycle_sha256": "fa7eb67da52fa712937e13551ab50e9e2021050e3880abba8dfcb008162df376",
   "base_lifecycle_version": "1.1.0",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-07-18T23:49:03Z",
   "publisher": "@kody-w",
   "reason": "End-to-end RAPP + X CRUD canary deletion",
+  "receipt": "rar_1aed661e24bb8891c10457c68e3585ad0f52ce5641435e56f2cf1303a49371db",
   "repository_id": 1200565697,
   "request_id": "req_41c9180ba4658b7a0237ecfa",
   "revision_id": "1aed661e24bb8891c10457c68e3585ad0f52ce5641435e56f2cf1303a49371db",
@@ -29,5 +35,5 @@
   "slug": "rapp_x_notary_canary_agent",
   "source_body_sha256": "fd3fa3b1420501c5ace7286368222aac1bc9c552ca5613c46c1c6d2dff11638d",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }
