@@ -2,16 +2,16 @@
   "schema": "rar-agent-lifecycle/1.0",
   "agents": {
     "@kody-w/rapp_x_notary_canary_agent": {
-      "status": "deleted",
-      "version": "1.1.0",
+      "status": "active",
+      "version": "1.2.0",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
-      "sha256": "fa7eb67da52fa712937e13551ab50e9e2021050e3880abba8dfcb008162df376",
-      "latest_receipt": "rar_1aed661e24bb8891c10457c68e3585ad0f52ce5641435e56f2cf1303a49371db",
-      "updated_at": "2026-07-18T23:49:50.956585+00:00"
+      "sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+      "latest_receipt": "rar_9ae0b3801a2f3eb5c2537212a024e721a63685b0db1c5f9f55cd130a5284519d",
+      "updated_at": "2026-07-18T23:53:29.783736+00:00"
     }
   },
-  "updated_at": "2026-07-18T23:49:50.956585+00:00"
+  "updated_at": "2026-07-18T23:53:29.783736+00:00"
 }
