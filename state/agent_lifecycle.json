@@ -3,15 +3,15 @@
   "agents": {
     "@kody-w/rapp_x_notary_canary_agent": {
       "status": "active",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
-      "sha256": "e99ec1283dd5d614159190bcc7ce3f2c3cd1cfee416724f8505121a653fdd95c",
-      "latest_receipt": "rar_cfa735130f09c87e380efcf47a6e8fa4bf974743bb8c069c3a5be6d94d1d6d84",
-      "updated_at": "2026-07-18T23:39:26.764344+00:00"
+      "sha256": "fa7eb67da52fa712937e13551ab50e9e2021050e3880abba8dfcb008162df376",
+      "latest_receipt": "rar_cbfbb0cd9a57a4f906bce1230a6f75f542f5f6d0ef07d8f554cb78fed783f9e0",
+      "updated_at": "2026-07-18T23:46:22.877941+00:00"
     }
   },
-  "updated_at": "2026-07-18T23:39:26.764344+00:00"
+  "updated_at": "2026-07-18T23:46:22.877941+00:00"
 }

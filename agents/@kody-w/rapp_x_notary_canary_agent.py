@@ -3,7 +3,7 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_x_notary_canary_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "RAPP X Notary Canary",
     "description": "Validates the Issues-backed RAR notarization lifecycle.",
     "author": "Kody W",
@@ -35,7 +35,7 @@ class RappXNotaryCanaryAgent(BasicAgent):
         super().__init__(name=self.name, metadata=self.metadata)
 
     def perform(self, **kwargs) -> str:
-        return f"RAPP + X canary: {kwargs.get('message', 'ok')}"
+        return f"RAPP + X canary v1.1: {kwargs.get('message', 'ok')}"
 
 
 if __name__ == "__main__":
