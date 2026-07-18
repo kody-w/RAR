@@ -1524,7 +1524,7 @@ def _create_source_gist(code: str, filename: str, token: str) -> str:
 
 def _fetch_target_registry(upstream: str, token: str) -> dict:
     request = urllib.request.Request(
-        f"https://raw.githubusercontent.com/{upstream}/main/registry.json",
+        f"https://api.github.com/repos/{upstream}/contents/registry.json?ref=main",
         headers={
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github.raw+json",

@@ -117,6 +117,21 @@ def test_submit_uses_versioned_issue_command(tmp_path, monkeypatch):
     assert "labels" not in captured["payload"]
 
 
+def test_mutation_registry_uses_fresh_contents_api(monkeypatch):
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["url"] = request.full_url
+        return FakeResponse({"agents": [], "lifecycle": {"tombstones": []}})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    registry = rapp_sdk._fetch_target_registry("owner/rar", "test-token")
+    assert registry["agents"] == []
+    assert captured["url"] == (
+        "https://api.github.com/repos/owner/rar/contents/registry.json?ref=main"
+    )
+
+
 def test_submit_update_binds_current_hash(tmp_path, monkeypatch):
     path = _write_submission_agent(tmp_path, "1.1.0")
     monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")

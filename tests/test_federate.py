@@ -37,7 +37,7 @@ def test_sync_rejects_digest_mismatch(tmp_path, monkeypatch):
     monkeypatch.setattr(federate, "get_token", lambda: "")
     monkeypatch.setattr(
         federate,
-        "fetch_json",
+        "fetch_registry",
         lambda _url, _token: {
             "agents": [{
                 "name": "@upstream/test_agent",
@@ -64,7 +64,7 @@ def test_sync_verifies_and_writes_atomically(tmp_path, monkeypatch):
     monkeypatch.setattr(federate, "get_token", lambda: "")
     monkeypatch.setattr(
         federate,
-        "fetch_json",
+        "fetch_registry",
         lambda _url, _token: {
             "agents": [{
                 "name": "@upstream/test_agent",
@@ -99,7 +99,11 @@ def test_federated_submit_uses_change_envelope(tmp_path, monkeypatch):
     monkeypatch.setattr(federate, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(federate, "REGISTRY_FILE", registry)
     monkeypatch.setattr(federate, "get_token", lambda: "test-token")
-    monkeypatch.setattr(federate, "fetch_json", lambda _url, _token: {"agents": []})
+    monkeypatch.setattr(
+        federate,
+        "fetch_registry",
+        lambda _repository, _token: {"agents": []},
+    )
     captured = {}
 
     def fake_urlopen(request, timeout):
@@ -127,7 +131,7 @@ def test_submit_aborts_when_upstream_registry_is_unavailable(tmp_path, monkeypat
     monkeypatch.setattr(federate, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(federate, "REGISTRY_FILE", registry)
     monkeypatch.setattr(federate, "get_token", lambda: "test-token")
-    monkeypatch.setattr(federate, "fetch_json", lambda _url, _token: None)
+    monkeypatch.setattr(federate, "fetch_registry", lambda _repository, _token: None)
     assert federate.cmd_submit({"upstream": "owner/rar"}) == 1
 
 
@@ -153,7 +157,7 @@ def test_tombstone_refuses_tampered_local_bytes(tmp_path, monkeypatch):
     monkeypatch.setattr(federate, "get_token", lambda: "")
     monkeypatch.setattr(
         federate,
-        "fetch_json",
+        "fetch_registry",
         lambda _url, _token: {
             "agents": [],
             "lifecycle": {

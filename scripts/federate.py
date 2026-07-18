@@ -150,6 +150,26 @@ def fetch_json(url: str, token: str = "") -> dict | None:
         return None
 
 
+def fetch_registry(repository: str, token: str = "") -> dict | None:
+    headers = {
+        "User-Agent": "RAR-Federation/1.1",
+        "Accept": "application/vnd.github.raw+json",
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        request = urllib.request.Request(
+            f"https://api.github.com/repos/{repository}/contents/"
+            "registry.json?ref=main",
+            headers=headers,
+        )
+        with urllib.request.urlopen(request, timeout=15) as response:
+            registry = json.loads(response.read().decode())
+        return registry if isinstance(registry.get("agents"), list) else None
+    except (OSError, json.JSONDecodeError, urllib.error.HTTPError, urllib.error.URLError):
+        return None
+
+
 def fetch_text(url: str, token: str = "") -> str | None:
     headers = {"User-Agent": "RAR-Federation/1.0"}
     if token:
@@ -216,7 +236,7 @@ def cmd_diff(config: dict) -> int:
     local_agents = {a["name"]: a for a in local_reg.get("agents", [])}
 
     # Load upstream
-    upstream_reg = fetch_json(f"{upstream_raw}/registry.json", token)
+    upstream_reg = fetch_registry(upstream, token)
     if not upstream_reg:
         print("Error: Could not fetch upstream registry.")
         return 1
@@ -297,7 +317,7 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
     local_reg = json.loads(REGISTRY_FILE.read_text())
     local_agents = {a["name"]: a for a in local_reg.get("agents", [])}
 
-    upstream_reg = fetch_json(f"{upstream_raw}/registry.json", token)
+    upstream_reg = fetch_registry(upstream, token)
     if not upstream_reg:
         print("Error: Could not fetch upstream registry; refusing submissions.")
         return 1
@@ -495,7 +515,7 @@ def cmd_sync(config: dict, pull: bool = False) -> int:
         local_reg = json.loads(REGISTRY_FILE.read_text())
         local_agents = {a["name"]: a for a in local_reg.get("agents", [])}
 
-    upstream_reg = fetch_json(f"{upstream_raw}/registry.json", token)
+    upstream_reg = fetch_registry(upstream, token)
     if not upstream_reg:
         print("Error: Could not fetch upstream registry.")
         return 1
