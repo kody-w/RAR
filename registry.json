@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-18T23:30:44.355930+00:00",
+  "generated_at": "2026-07-18T23:40:59.524636+00:00",
   "stats": {
-    "total_agents": 200,
+    "total_agents": 201,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -96,7 +96,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "57564596b40540075e32a50becb78bfa8af72525d3d65b4b83eb86491261cf47"
+      "_card_sha256": "93f26dd2b94e8dc28c8439bd6cf2f2432beba24ff1464b005fd77a6d4fdbcf1f"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -516,7 +516,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "b799a377ae848dac0042da41a965864899530128ab6ed08b27fd65acd8e2d1bf"
+      "_card_sha256": "bf8a7e146f582901c5bc80a112c64c0ac55526c5f6b4182ddfb6d67dacf7cc1d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -797,7 +797,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "5d54477c92b3ecf3862c79aeb906dc314d747dd9eca243393ba9f50326b28862"
+      "_card_sha256": "031de201b8b0856a13287fa95771d0ccb470b587e9cc08a35863f7084a54ccaf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -833,7 +833,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "6fac12b6b09d4305a283b110a5d13ed8033f44068eb78d838014f7f646fe81a1"
+      "_card_sha256": "2462c1c257aa79c07f4bf97befee7f1bb7020bcfdb0cc1a999747c0c79e1dd2e"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -868,7 +868,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "1a5b4a1456fef8cb09d9e84e905f8dcc0ce8e27d3b52e28c9a4063a981522dd8"
+      "_card_sha256": "053de89cdc4d21b12e0f5c40f1a559fbee4aa985666b543a5d845774384deb8d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -904,7 +904,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "5f75bd80ff2cc55caacb9e5d416b69da2fe3c2e8e9e1f3d5358e561aad7b17c5"
+      "_card_sha256": "4b1045faea3249b6e39fa489ab48ded8c944b4f27716405b43af7a16935f0201"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -976,7 +976,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "19d92f3a76047991ace6a736ad778cbda1fc368e5878d6fabe9bb920c1f01d35"
+      "_card_sha256": "4e93c7393617d594fe9c12ea5cf044e4ca301a271c3b4bb6a45bd6b2585b31a9"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1012,7 +1012,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "5610a0900325b8fc808d3963f031c49bce0f02326451a4929be8b31c04971e02"
+      "_card_sha256": "3308851fc2b675fdae47fd282960a06680166f6513fe1ed4bab9cf7cf6aabc90"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1048,7 +1048,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "c57c356b7b5c05ea50f2a1b217f0c7ab8a58b9f7d2242fb7845f30af7c41b711"
+      "_card_sha256": "e65ed74b5c58db0e4bfd56123449c70aaa452977a1446542c3e08ef1c7360e6e"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1156,7 +1156,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "ceb919f25e5e98b83527f3621738f6c02ba272c5723f17ec59ffabf7030873ba"
+      "_card_sha256": "0962ecb1dc2016e036ebf4e3d97bbe6db35e40fde0bd907592f38fdffac32ece"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1192,7 +1192,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "f7a3ffab679f32e474a18395a860dffb11b035751be1fa6037d55652f2e7301d"
+      "_card_sha256": "d4c937e309a9e683d334fff9bdb5aae6f9f244e177970ee3a55c395ba44a614c"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1228,7 +1228,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "0d115ad070313f3212cafda5a3737f0e1ea87b4206c6be0e7b5bfafedd893cd4"
+      "_card_sha256": "c6e4e4007d0fc0a727a93f7fb962751034f13d00a83d801a8a4dc616e171b831"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1264,7 +1264,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "f4bfe61f2664e8e6f235d64c3fca127c764d757ca7f9f3432ff1d0def7fd3f82"
+      "_card_sha256": "fee6ca652aa2da5a8c9c917ff1a141bbfff7745a9f8f935e04d9455741ceebed"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1301,7 +1301,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "0bbe3c576e99b51f020b83b257ebd3caa017d935d4b2ada4fbd4bc4a459d276f"
+      "_card_sha256": "7b9e92373f94bfe9f03894bab3ce226ac65ba342c94c18971a640adac0ccd766"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1518,7 +1518,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "662dab67af54a971ece4bfb40989f22d76735d90f741e339479c7702b29611ee"
+      "_card_sha256": "5215109e497939cb9f755484237a25ab717f3bdd4d02571f5c46f0a56d08a3de"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1556,7 +1556,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "4a66c74321301413a9019efb6557e2cde9cd06c19b56eb5f3b643405f211b028"
+      "_card_sha256": "213b83ef316cf98a8b35bf7ea51d99514ce389433c980699fd69e758c5b33ac5"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1592,7 +1592,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "aabe9cfb6f1fbd2878fed0a7568c9bbfe719bfb781b02d85c9f3e5d630ffd72a"
+      "_card_sha256": "3ff9b4a19de4203680e2eb144ceed7a419b81f024eadfeff358e239a3ca3660c"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1629,7 +1629,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "13a9e50a835771956ff6983ffd6e6b6f81178d659262c735a67c2b50bab71c5b"
+      "_card_sha256": "091091a6aabe46356e2b294532696896305d322a15e12a95b9b5c1ab715b1a4d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1665,7 +1665,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "adcd2a7d80a946f5b9f21d22543f24f86b02e29e8e691be8e151355618447224"
+      "_card_sha256": "e4d444bec41c65a01214beea042d0b6fe6da6bfdc19a638cfe8a6a8e0430175b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1701,7 +1701,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "80c82159f0abd67fbc16fa0cf06940ea699a475eb0a9b97a5c7e07c3a71a4f10"
+      "_card_sha256": "ddbee6575316978032fa06701ab8b717dacb1edb2d4c87e021f3110317305f7b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1739,7 +1739,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "be4b36df2416acf8d722584cd876e0c821db680282d60afafb585186319466f5"
+      "_card_sha256": "78a628800fcb5d44355d4374d23a56739f2a6feb6ffdad85588bf46f56f44d1b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1780,7 +1780,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "a3f3c5080b584e292207ac6625627b17834e8c729c847d232a56347da28397f4"
+      "_card_sha256": "ac2b0f8258b659b1be0416d6101defd43b62147b28f39abdbaca9313f1b6e46b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1816,7 +1816,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "40061963efd6f3cbde373c5bd7e0ea83c2aee9db62bb7314086be33c078bfaeb"
+      "_card_sha256": "ccaf93ed8c5090695b5409f602f588c49b0919090611a87313efd8bc6b456183"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1852,7 +1852,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "84776f21c4297dd45214519c730922aeb808cf2a26efbef5dbbbc0f42415c315"
+      "_card_sha256": "efbe34a010420793e4f96eb64145106093c66d016d384490604235f7dd2e82eb"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1889,7 +1889,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "8f899519e3734b5f030e2803528b7afd2a48909bc106da9b8ff5524c2e9b3785"
+      "_card_sha256": "12c723c2e0f882595c91f746ab3bf9c191883cb55215015177fabc4d18a468ed"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2067,7 +2067,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "de261e682ddd604dd82be9a13e10e106cdc953ec98a8eed33aa464a97437f499"
+      "_card_sha256": "15d6ed08c38e8ec01814e086b2f071195823dc86d8d73a4bb94757085a88f2f0"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2209,7 +2209,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "462b30b5bb6ebc9c7769789014ddd073bce475a90f5eb508466aded8c9efeb1a"
+      "_card_sha256": "d97acfd1e7207445a992333d2c61fc4d1fdc268c0c791a20b7980fc9a6fa738a"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2280,7 +2280,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "feff52030df2dc9d41ce93ae82dbd62a8d869385d1c55581efd31e662fdc54ac"
+      "_card_sha256": "9a01a69469dc75ed216399a310a08910e993614c9945849d3c35c582af7103a4"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2668,7 +2668,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "59e29bcd596069198261b273c49b6b573f1c7058a71b6ef85881c6a7bfbaf527"
+      "_card_sha256": "e1d2243f0f1964b7eafa6b4f21d6616a0f23dfd8784626b1db7aadeaa76eb5d0"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2704,7 +2704,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "5ba5b2dcc6f0856bb6d996f786dbe8aba093486f41af3405a69c9c4997775247"
+      "_card_sha256": "f6a903b9cd81aca5a97267077270e806e634734e8ae9b4385c0ac8670400bbd8"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2740,7 +2740,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "188cc27279f50c49c6246ee2dc65925440180e8555127da7688a0513c88e866c"
+      "_card_sha256": "81dae51afa50992b003970c8c9f89cb8960f92d18fc98d88a8e9b11e1530ee06"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2776,7 +2776,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "19ebaf7e2969960699739bb9a87efbbef2b180303da51957421f0afdc5b61cf0"
+      "_card_sha256": "744c9ac64d3ed172f343ea6601c28538af7726c699c8695f01cedbbba3cdb18e"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2847,7 +2847,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "109408f35e7371172ab7e11900ad80c0afe60c3d8559a5eabade67f057f316dc"
+      "_card_sha256": "7998a18c77947783591b49502722a7097c3f1ac3fa61e3e7f2d7167a314ce856"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2917,7 +2917,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "d6199b8239aa05521c5ca8c92c07e697cdad98a58f9c05c1c102498160d518d1"
+      "_card_sha256": "ead27d127981d04bbecd0c4ae1f5bafc7c9e4749293525ea120dc5ecbe69b1a6"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2952,7 +2952,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "e5a407829946659da491994c0e89cdc6cbfa4212c60016fd7450649c0eb7d884"
+      "_card_sha256": "a588754dd33758f6ea8796211badc92514b4c669c4877aabbb8d52b138c7bb28"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2987,7 +2987,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "f0a683143687c3f89213b0fd709bcffc46987d345f73bb579494eb9948c600a7"
+      "_card_sha256": "534ce04f9424c778753535d792f4de5841ad505c20f346ecb22622650da5dd3b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3022,7 +3022,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "3821d4b45d3adf62397ee72dd5344ac64268bb352de0cfe5b20d0e85278e092c"
+      "_card_sha256": "083a66c89c6af28a74ae6de8f452bf44e88bbcb166dd5635480a1aeb2c40deb7"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3057,7 +3057,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "7a891807b95cf5dfbbede71a5e35017ef25a65910d02e47d80aa3dcd19ae9756"
+      "_card_sha256": "4820dd0acc9817a8fdf4bd7427481f7c5667b79172efc902ce8ba8016d06f7ad"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3092,7 +3092,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "f75466c8958cda7ac91425ff76579014a0fbe72e9d0f7ecd1949137ef070b092"
+      "_card_sha256": "502314e378caaa069c6476082892785f0cc815ee2f390b59675c3e01a4068676"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3127,7 +3127,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "92adc05c33d7d2abf39b0cfd20811d4fc4ea4d89bece7f1b877d431207c4213d"
+      "_card_sha256": "b89c5ba723c16d9c2612fe56d70e666957d773de5256b7fbd5602eabc1efc2d6"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3197,7 +3197,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "c7485472c70697f571431cccd3e9452d2a8620d20fab8b31b13def504064896d"
+      "_card_sha256": "8116855a72184515335b722ef23ebd40ed8ae4db99f165afe8833c1060106403"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3232,7 +3232,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "54c56f901c66523c6f1f03c080537800cb0c5e33",
-      "_card_sha256": "100a958c80178787396dea4b22414d61e5eb13cfc6de3ef0e2d0ee3dd35dbdee"
+      "_card_sha256": "7211ba99a0bb61867e580dcb6f77c3c8c8bb77fae33a4868baf18798e0c8d6df"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3267,7 +3267,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "6ff27c217a97024cdd037ca0c57ae03985c54b883530ec2c7b4b4892e6408285"
+      "_card_sha256": "46f5859bc30f36971332c58dcc28e84891d1f4898d86526b2acce1d8c1f13d48"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3302,7 +3302,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "1c1ae9cd7f8b1d4b9fcade685f957236f0378656284c5538b64c20d0ae096961"
+      "_card_sha256": "493371ce20f65e066de0fb28cb47390a6acc1b304c04e761cf0748e1b317a304"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3337,7 +3337,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "aaac98e70121446931fdd2d03abc27480d2c8d2834095f9b5ae901f6a560ede5"
+      "_card_sha256": "fc24d13c1e0921f567f96c174890b3fa8ea47e6ed432a2f8d82c94f475fa294b"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3372,7 +3372,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "2ecf375c712142499012e2fd720df1791b0082e05b2dfaac3d56669a0cbb4846"
+      "_card_sha256": "88e2cdcf19ff5a38be24a3e3ab08a8838abf89f49a297e19a1a789348ddca6b0"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3407,7 +3407,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "9a7dfa894326a6133ccd3e33775dd4f0510b3c62a0ae6738440561f6785ded85"
+      "_card_sha256": "6b15994390ce34626ed9264ff4f7b73dfe4b93472d324c4a263bb8a44925fd3c"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3445,7 +3445,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "add69d4f6e8ff2a8199c3b3109e670d261dd14761497d161287da4eac194e01a"
+      "_card_sha256": "46c216786209b95969414917876575fb50cc6e40627ab74fe312b2ecdb1bc62d"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3589,7 +3589,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "c5319c3aa48da62ca89bb601f87ac129715434a5576a0512eb2f454df170f49f"
+      "_card_sha256": "d82403d7b2e0c1af97671f2674188083ae82fa9f66e33eb583920969374d5dba"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3695,7 +3695,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "1878ef14400f39d8970add41268efc2533c3b06ff0181572f9cc11251aa8bb8e"
+      "_card_sha256": "8f854479b7a5999d303d4592ff69c68a9c42ebe0a05c3bb2526beecc64a89328"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3731,7 +3731,7 @@
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
       "_latest_commit_sha": "0205947f334c32611109723a876d6e1d0524dbaf",
-      "_card_sha256": "0c310bb02750b2efe47d25a84d9bf998be718bdac1bfd8714641ffdabd187ed8"
+      "_card_sha256": "da333e42053314fc9f2beeda38c091c2d822556f656717098b1510b15c067206"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5839,6 +5839,57 @@
       "_first_commit_sha": "b036f8536b5b693ec1b09a760485749e98162b76",
       "_latest_commit_sha": "1b47858b46c55699a36d90a0c61a63515bd3629d",
       "_card_sha256": "971cdd30f77190ddf07aaaef8c83be68d71fa90b66ebb4fdac64d87a6d3b4273"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/rapp_x_notary_canary_agent",
+      "version": "1.0.0",
+      "display_name": "RAPP X Notary Canary",
+      "description": "Validates the Issues-backed RAR notarization lifecycle.",
+      "author": "Kody W",
+      "tags": [
+        "canary",
+        "notary",
+        "rapp_x"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/rapp_x_notary_canary_agent.py",
+      "_install_filename": "rar_kody_w_rapp_x_notary_canary_agent.py",
+      "_sha256": "e99ec1283dd5d614159190bcc7ce3f2c3cd1cfee416724f8505121a653fdd95c",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_cfa735130f09c87e380efcf47a6e8fa4bf974743bb8c069c3a5be6d94d1d6d84",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 196,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 16785949889267118827,
+      "_size_kb": 1.3,
+      "_lines": 43,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "5581c7bf01824d917f6c71e229b1d7421d47f30b163f2ee69ec9dc48db3f9091"
     },
     {
       "schema": "rapp-agent/1.0",
