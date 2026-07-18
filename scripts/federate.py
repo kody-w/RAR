@@ -15,6 +15,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -27,6 +28,86 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_FILE = REPO_ROOT / "rar.config.json"
 REGISTRY_FILE = REPO_ROOT / "registry.json"
+LIFECYCLE_FILE = REPO_ROOT / "state" / "agent_lifecycle.json"
+RECEIPTS_DIR = REPO_ROOT / "state" / "receipts"
+
+
+def semver_key(value: str) -> tuple[int, int, int] | None:
+    parts = value.split(".")
+    if len(parts) != 3 or not all(part.isdigit() for part in parts):
+        return None
+    return tuple(int(part) for part in parts)
+
+
+def is_newer_version(candidate: str, current: str) -> bool:
+    candidate_key = semver_key(candidate)
+    current_key = semver_key(current)
+    return (
+        candidate_key is not None
+        and current_key is not None
+        and candidate_key > current_key
+    )
+
+
+def agent_digest(agent: dict) -> str:
+    return str(
+        agent.get("_stub_sha256")
+        if agent.get("type") == "stub"
+        else agent.get("_sha256", "")
+    )
+
+
+def safe_agent_destination(file_path: str) -> Path:
+    if not file_path.startswith("agents/"):
+        raise ValueError("Federated artifact path must be under agents/")
+    destination = REPO_ROOT / file_path
+    destination.resolve().relative_to((REPO_ROOT / "agents").resolve())
+    return destination
+
+
+def fetch_validated_receipt(
+    *,
+    upstream_raw: str,
+    record: dict,
+    agent_name: str,
+    expected_status: str,
+    expected_actions: set[str],
+    expected_digest: str,
+    token: str,
+) -> tuple[str, dict] | None:
+    receipt_id = str(record.get("_receipt") or record.get("latest_receipt") or "")
+    if not receipt_id.startswith("rar_"):
+        return None
+    revision_id = receipt_id.removeprefix("rar_")
+    receipt = fetch_json(
+        f"{upstream_raw}/state/receipts/{revision_id}.json",
+        token,
+    )
+    if not receipt:
+        return None
+    expected_owner_id = (
+        record.get("_controller", {}).get("github_id")
+        if isinstance(record.get("_controller"), dict)
+        else record.get("owner_github_id")
+    )
+    expected_path = record.get("_file") or record.get("canonical_path")
+    if (
+        receipt.get("schema") != "rar-receipt/1.0"
+        or receipt.get("id") != receipt_id
+        or receipt.get("agent") != agent_name
+        or receipt.get("version") != record.get("version")
+        or receipt.get("status") != expected_status
+        or receipt.get("action") not in expected_actions
+        or receipt.get("artifact", {}).get("digest") != expected_digest
+        or receipt.get("canonical_path") != expected_path
+        or (
+            expected_owner_id is not None
+            and str(receipt.get("controller", {}).get("github_id"))
+            != str(expected_owner_id)
+        )
+    ):
+        return None
+    return receipt_id, receipt
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -148,7 +229,10 @@ def cmd_diff(config: dict) -> int:
         if name not in upstream_agents:
             new_agents.append(agent)
         else:
-            if agent.get("version", "") > upstream_agents[name].get("version", ""):
+            if is_newer_version(
+                agent.get("version", ""),
+                upstream_agents[name].get("version", ""),
+            ):
                 updated_agents.append(agent)
 
     upstream_only = [
@@ -214,9 +298,15 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
     local_agents = {a["name"]: a for a in local_reg.get("agents", [])}
 
     upstream_reg = fetch_json(f"{upstream_raw}/registry.json", token)
-    upstream_agents = {}
-    if upstream_reg:
-        upstream_agents = {a["name"]: a for a in upstream_reg.get("agents", [])}
+    if not upstream_reg:
+        print("Error: Could not fetch upstream registry; refusing submissions.")
+        return 1
+    upstream_agents = {a["name"]: a for a in upstream_reg.get("agents", [])}
+    upstream_tombstones = {
+        item["agent"]: item
+        for item in upstream_reg.get("lifecycle", {}).get("tombstones", [])
+        if item.get("agent")
+    }
 
     # Determine what to submit
     if specific_agent:
@@ -227,9 +317,19 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
     else:
         to_submit = []
         for name, agent in local_agents.items():
-            if name not in upstream_agents:
+            if agent.get("type") == "stub":
+                continue
+            if name not in upstream_agents and name not in upstream_tombstones:
                 to_submit.append(agent)
-            elif agent.get("version", "") > upstream_agents[name].get("version", ""):
+            elif name in upstream_tombstones and is_newer_version(
+                agent.get("version", ""),
+                upstream_tombstones[name].get("version", ""),
+            ):
+                to_submit.append(agent)
+            elif name in upstream_agents and is_newer_version(
+                agent.get("version", ""),
+                upstream_agents[name].get("version", ""),
+            ):
                 to_submit.append(agent)
 
     if not to_submit:
@@ -241,6 +341,9 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
     success = 0
     for agent in to_submit:
         name = agent["name"]
+        if agent.get("type") == "stub":
+            print(f"  SKIP {name} — private stubs require private-registry tooling")
+            continue
         filepath = REPO_ROOT / agent["_file"]
 
         if not filepath.exists():
@@ -248,17 +351,50 @@ def cmd_submit(config: dict, specific_agent: str | None = None) -> int:
             continue
 
         code = filepath.read_text()
-        body_data = {
-            "action": "submit_agent",
-            "payload": {"code": code},
+        candidate_sha256 = hashlib.sha256(
+            code.encode("utf-8").replace(b"\r\n", b"\n")
+        ).hexdigest()
+        upstream_agent = upstream_agents.get(name)
+        upstream_tombstone = upstream_tombstones.get(name)
+        operation = (
+            "update"
+            if upstream_agent
+            else ("restore" if upstream_tombstone else "create")
+        )
+        request_id = f"req_federation_{candidate_sha256[:24]}"
+        preconditions = (
+            {"if_match": f"sha256:{upstream_agent.get('_sha256', '')}"}
+            if upstream_agent
+            else {"if_none_match": "*"}
+        )
+        source = {
+            "media_type": "text/x-python",
+            "encoding": "utf-8",
+            "sha256": f"sha256:{candidate_sha256}",
+            "content": code,
         }
+        body_data = {
+            "schema": "rar-change-request/1.0",
+            "request_id": request_id,
+            "idempotency_key": request_id,
+            "operation": operation,
+            "resource": {"kind": "agent", "id": name},
+            "preconditions": preconditions,
+            "payload": {"source": source},
+            "client": {"name": "rar-federation", "version": "1.0.0"},
+        }
+        if len(json.dumps(body_data).encode("utf-8")) > 50 * 1024:
+            if str(REPO_ROOT) not in sys.path:
+                sys.path.insert(0, str(REPO_ROOT))
+            from rapp_sdk import _create_source_gist
+            source.pop("content")
+            source["url"] = _create_source_gist(code, filepath.name, token)
         body_json = json.dumps(body_data, indent=2)
         issue_body = f"```json\n{body_json}\n```"
 
         payload = json.dumps({
-            "title": f"[RAR] submit_agent",
+            "title": f"[RAR] {operation.upper()} agent {name}",
             "body": issue_body,
-            "labels": ["rar-action", "agent-submission", "federated"],
         }).encode()
 
         req = urllib.request.Request(
@@ -364,6 +500,11 @@ def cmd_sync(config: dict, pull: bool = False) -> int:
         print("Error: Could not fetch upstream registry.")
         return 1
     upstream_agents = {a["name"]: a for a in upstream_reg.get("agents", [])}
+    upstream_tombstones = {
+        item["agent"]: item
+        for item in upstream_reg.get("lifecycle", {}).get("tombstones", [])
+        if item.get("agent")
+    }
 
     # Find what's upstream but not local
     missing = []
@@ -371,8 +512,16 @@ def cmd_sync(config: dict, pull: bool = False) -> int:
     for name, agent in upstream_agents.items():
         if name not in local_agents:
             missing.append(agent)
-        elif agent.get("version", "") > local_agents[name].get("version", ""):
+        elif is_newer_version(
+            agent.get("version", ""),
+            local_agents[name].get("version", ""),
+        ):
             updatable.append(agent)
+    tombstoned = [
+        (local_agents[name], tombstone)
+        for name, tombstone in upstream_tombstones.items()
+        if name in local_agents
+    ]
 
     print(f"\n  Upstream has {len(upstream_agents)} agents.")
     print(f"  Local has {len(local_agents)} agents.")
@@ -391,32 +540,178 @@ def cmd_sync(config: dict, pull: bool = False) -> int:
             local_v = local_agents[a["name"]].get("version", "?")
             print(f"    {a['name']} v{local_v} -> v{a['version']}")
 
-    if not missing and not updatable:
+    if tombstoned:
+        print(f"\n  Tombstoned upstream ({len(tombstoned)}):")
+        for local_agent, tombstone in sorted(
+            tombstoned,
+            key=lambda item: item[0]["name"],
+        ):
+            print(
+                f"    {local_agent['name']} v{local_agent.get('version', '?')} "
+                f"-> {tombstone.get('status', 'deleted')}"
+            )
+
+    if not missing and not updatable and not tombstoned:
         print("\n  Local registry is up to date with upstream.")
         return 0
 
     if pull:
         to_pull = missing + updatable
-        print(f"\n  Pulling {len(to_pull)} agent(s)...")
+        print(
+            f"\n  Applying {len(to_pull)} agent update(s) and "
+            f"{len(tombstoned)} tombstone(s)..."
+        )
         pulled = 0
+        failures = 0
+        file_plans = []
+        delete_plans = []
+        receipt_plans = {}
+        lifecycle = {"schema": "rar-agent-lifecycle/1.0", "agents": {}}
+        if LIFECYCLE_FILE.exists():
+            lifecycle = json.loads(LIFECYCLE_FILE.read_text())
+            lifecycle.setdefault("agents", {})
         for agent in to_pull:
             file_url = f"{upstream_raw}/{agent['_file']}"
             code = fetch_text(file_url, token)
             if not code:
                 print(f"    FAIL {agent['name']} — could not download")
+                failures += 1
+                continue
+            expected_sha256 = agent_digest(agent)
+            actual_sha256 = hashlib.sha256(
+                code.encode("utf-8").replace(b"\r\n", b"\n")
+            ).hexdigest()
+            if not expected_sha256 or actual_sha256 != expected_sha256:
+                print(f"    FAIL {agent['name']} — SHA256 mismatch")
+                failures += 1
                 continue
 
-            dest = REPO_ROOT / agent["_file"]
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_text(code)
+            try:
+                destination = safe_agent_destination(agent["_file"])
+            except (KeyError, ValueError) as exc:
+                print(f"    FAIL {agent['name']} — {exc}")
+                failures += 1
+                continue
+            if agent.get("_lifecycle") == "notarized":
+                validated = fetch_validated_receipt(
+                    upstream_raw=upstream_raw,
+                    record=agent,
+                    agent_name=agent["name"],
+                    expected_status="notarized",
+                    expected_actions={
+                        "agent.create",
+                        "agent.update",
+                        "agent.restore",
+                    },
+                    expected_digest=expected_sha256,
+                    token=token,
+                )
+                if not validated:
+                    print(f"    FAIL {agent['name']} — invalid upstream receipt")
+                    failures += 1
+                    continue
+                receipt_id, receipt = validated
+                receipt_plans[receipt_id] = receipt
+                lifecycle["agents"][agent["name"]] = {
+                    "status": "active",
+                    "version": agent["version"],
+                    "quality_tier": agent.get("quality_tier", "community"),
+                    "owner_github_id": receipt.get("controller", {}).get(
+                        "github_id"
+                    ),
+                    "owner_github_login": receipt.get("controller", {}).get(
+                        "github_login"
+                    ),
+                    "canonical_path": agent["_file"],
+                    "sha256": expected_sha256,
+                    "latest_receipt": receipt_id,
+                    "updated_at": receipt.get("created_at"),
+                }
+            elif agent["name"] in lifecycle.get("agents", {}):
+                print(
+                    f"    FAIL {agent['name']} — legacy upstream bytes cannot "
+                    "replace lifecycle-managed local state"
+                )
+                failures += 1
+                continue
+            file_plans.append((agent, destination, code))
+
+        for local_agent, tombstone in tombstoned:
+            expected = tombstone.get("sha256", "")
+            try:
+                destination = safe_agent_destination(local_agent["_file"])
+            except (KeyError, ValueError) as exc:
+                print(f"    FAIL {local_agent['name']} — {exc}")
+                failures += 1
+                continue
+            current = (
+                hashlib.sha256(
+                    destination.read_bytes().replace(b"\r\n", b"\n")
+                ).hexdigest()
+                if destination.exists()
+                else ""
+            )
+            if not expected or current != expected:
+                print(
+                    f"    FAIL {local_agent['name']} — local bytes diverge "
+                    "from upstream tombstone"
+                )
+                failures += 1
+                continue
+            validated = fetch_validated_receipt(
+                upstream_raw=upstream_raw,
+                record=tombstone,
+                agent_name=local_agent["name"],
+                expected_status=str(tombstone.get("status", "deleted")),
+                expected_actions={"agent.delete"},
+                expected_digest=expected,
+                token=token,
+            )
+            if not validated:
+                print(
+                    f"    FAIL {local_agent['name']} — invalid tombstone receipt"
+                )
+                failures += 1
+                continue
+            receipt_id, receipt = validated
+            receipt_plans[receipt_id] = receipt
+            lifecycle["agents"][local_agent["name"]] = tombstone
+            delete_plans.append((local_agent, destination))
+
+        if failures:
+            return 1
+
+        if receipt_plans:
+            RECEIPTS_DIR.mkdir(parents=True, exist_ok=True)
+            for receipt_id, receipt in receipt_plans.items():
+                destination = RECEIPTS_DIR / f"{receipt_id.removeprefix('rar_')}.json"
+                temporary = destination.with_suffix(".json.tmp")
+                temporary.write_text(json.dumps(receipt, indent=2) + "\n")
+                temporary.replace(destination)
+
+        if receipt_plans or tombstoned:
+            LIFECYCLE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            temporary = LIFECYCLE_FILE.with_suffix(".json.tmp")
+            temporary.write_text(json.dumps(lifecycle, indent=2) + "\n")
+            temporary.replace(LIFECYCLE_FILE)
+
+        for agent, destination, code in file_plans:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            temporary = destination.with_suffix(destination.suffix + ".tmp")
+            temporary.write_text(code)
+            temporary.replace(destination)
             print(f"    OK   {agent['name']} -> {agent['_file']}")
             pulled += 1
+        for local_agent, destination in delete_plans:
+            if destination.exists():
+                destination.unlink()
+            print(f"    OK   {local_agent['name']} -> tombstoned")
 
         print(f"\n  Pulled {pulled}/{len(to_pull)} agents.")
         if pulled:
             print("  Run `python build_registry.py` to update the local registry.")
     else:
-        total = len(missing) + len(updatable)
+        total = len(missing) + len(updatable) + len(tombstoned)
         print(f"\n  {total} agent(s) available. Run with --pull to download:")
         print(f"  python scripts/federate.py sync --pull")
 

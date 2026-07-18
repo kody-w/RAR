@@ -82,6 +82,79 @@ def test_registry_has_swarms():
     assert len(reg["swarms"]) > 0
 
 
+def test_registry_exposes_receipt_lifecycle():
+    reg = json.loads((REPO_ROOT / "registry.json").read_text())
+    assert reg["lifecycle"]["schema"] == "rar-agent-lifecycle/1.0"
+    assert reg["lifecycle"]["receipt_schema"] == "rar-receipt/1.0"
+    assert isinstance(reg["lifecycle"]["tombstones"], list)
+    assert all(
+        agent.get("_lifecycle") in {"legacy_active", "notarized"}
+        for agent in reg["agents"]
+    )
+    for agent in reg["agents"]:
+        if agent.get("_lifecycle") == "notarized":
+            assert agent.get("_receipt", "").startswith("rar_")
+
+
+def test_missing_receipt_cannot_claim_notarized(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_registry, "RECEIPTS_DIR", tmp_path)
+    errors = []
+    metadata = build_registry._lifecycle_metadata(
+        name="@test/example_agent",
+        version="1.0.0",
+        digest="a" * 64,
+        canonical_path="agents/@test/example_agent.py",
+        lifecycle_agents={
+            "@test/example_agent": {
+                "status": "active",
+                "version": "1.0.0",
+                "sha256": "a" * 64,
+                "latest_receipt": "rar_" + ("b" * 64),
+            }
+        },
+        errors=errors,
+    )
+    assert metadata["_lifecycle"] == "invalid"
+    assert errors
+
+
+def test_tombstone_cannot_coexist_with_active_file(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_registry, "RECEIPTS_DIR", tmp_path)
+    errors = []
+    metadata = build_registry._lifecycle_metadata(
+        name="@test/example_agent",
+        version="1.0.0",
+        digest="a" * 64,
+        canonical_path="agents/@test/example_agent.py",
+        lifecycle_agents={
+            "@test/example_agent": {
+                "status": "deleted",
+                "version": "1.0.0",
+                "sha256": "a" * 64,
+                "latest_receipt": "rar_" + ("b" * 64),
+            }
+        },
+        errors=errors,
+    )
+    assert metadata["_lifecycle"] == "invalid"
+    assert any("deleted" in error for error in errors)
+
+
+def test_tombstone_requires_matching_delete_receipt(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_registry, "RECEIPTS_DIR", tmp_path)
+    errors = []
+    result = build_registry._validated_tombstones({
+        "@test/example_agent": {
+            "status": "deleted",
+            "version": "1.0.0",
+            "sha256": "a" * 64,
+            "latest_receipt": "rar_" + ("b" * 64),
+        }
+    }, errors)
+    assert result == []
+    assert errors
+
+
 def test_no_seed_collisions_across_agents_and_swarms():
     """Seeds must be unique across both agents AND converged swarms."""
     reg = json.loads((REPO_ROOT / "registry.json").read_text())

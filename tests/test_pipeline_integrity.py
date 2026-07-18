@@ -115,6 +115,9 @@ def isolated_pipeline(tmp_path, monkeypatch):
 
     (state / "votes.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
     (state / "reviews.json").write_text(json.dumps({"agents": {}, "updated_at": ""}))
+    (state / "agent_lifecycle.json").write_text(
+        json.dumps({"agents": {}, "updated_at": ""})
+    )
 
     monkeypatch.setattr(pi, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(pi, "STATE_DIR", state)
@@ -122,6 +125,7 @@ def isolated_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(pi, "STAGING_DIR", staging)
     monkeypatch.setattr(pi, "VOTES_FILE", state / "votes.json")
     monkeypatch.setattr(pi, "REVIEWS_FILE", state / "reviews.json")
+    monkeypatch.setattr(pi, "LIFECYCLE_FILE", state / "agent_lifecycle.json")
 
     return tmp_path
 
@@ -156,7 +160,7 @@ class TestStagingPipeline:
     @pytest.mark.pipeline
     def test_submission_preserves_code(self, isolated_pipeline):
         result = pi.handle_submit_agent({"code": VALID_AGENT_CODE}, "testuser")
-        staging_file = isolated_pipeline / result["file"]
+        staging_file = (isolated_pipeline / result["file"]).parent / "candidate.py"
         assert staging_file.read_text() == VALID_AGENT_CODE
 
     @pytest.mark.pipeline
@@ -203,7 +207,7 @@ class TestStagingPipeline:
         result = pi.handle_submit_agent({"code": code}, "testuser")
         assert "ok" in result
         # Verify the staged file was downgraded
-        staged = (pi.STAGING_DIR / "@testuser" / "test_agent.py").read_text()
+        staged = (pi.REPO_ROOT / result["file"]).parent.joinpath("candidate.py").read_text()
         assert '"community"' in staged
 
 
@@ -655,3 +659,37 @@ class TestWorkflowSyntax:
         triggers = wf.get("on") or wf.get(True) or {}
         assert "issues" in triggers, f"No 'issues' trigger found in: {triggers}"
         assert "labeled" in triggers["issues"].get("types", [])
+
+    @pytest.mark.smoke
+    def test_approval_is_hash_bound_and_permission_checked(self):
+        workflow = (
+            REPO_ROOT / ".github" / "workflows" / "approve-agent.yml"
+        ).read_text()
+        assert "apply_agent_mutation.py" in workflow
+        assert "getCollaboratorPermissionLevel" in workflow
+        assert "maintain" in workflow and "admin" in workflow
+        assert "ISSUE_TITLE" not in workflow
+        assert "target_slug" not in workflow
+        assert "Issue body changed after approval" in workflow
+        assert "git pull --rebase" not in workflow
+
+    @pytest.mark.smoke
+    def test_issue_processor_reconciles_edits_and_fails_pushes(self):
+        workflow = (
+            REPO_ROOT / ".github" / "workflows" / "process-issues.yml"
+        ).read_text()
+        assert "opened, edited, reopened" in workflow
+        assert "rar-issue-" in workflow
+        assert "Fetch current issue revision" in workflow
+        assert "git pull --rebase" not in workflow
+        assert "agent.read" in workflow
+
+    @pytest.mark.smoke
+    def test_pull_requests_use_trusted_notary_policy(self):
+        workflow = (
+            REPO_ROOT / ".github" / "workflows" / "notary-policy.yml"
+        ).read_text()
+        assert "pull_request_target" in workflow
+        assert "Check out trusted validator" in workflow
+        assert "persist-credentials: false" in workflow
+        assert "--pull-request" in workflow

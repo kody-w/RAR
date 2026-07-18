@@ -159,6 +159,9 @@ python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 | `install @pub/slug` | Download agent from registry |
 | `info @pub/slug` | Show agent details |
 | `submit path.py` | Submit agent to RAPP for review |
+| `delete @pub/slug --reason "..."` | Request hash-bound deletion |
+| `request-read @pub/slug` | Create an auditable read Issue |
+| `request-status ISSUE` | Read an Issues-backed request lifecycle |
 | `card mint path.py` | Mint a card from agent file |
 | `card resolve @pub/slug` | Self-assemble card from name (needs registry) |
 | `card resolve 12345` | Self-assemble card from seed (offline) |
@@ -267,7 +270,7 @@ if __name__ == "__main__":
 
 #### Step 2: Submit via GitHub Issue
 
-**Option A — GitHub CLI (recommended for EMU / enterprise users)**
+**Option A — Legacy direct GitHub CLI (automatic operation inference)**
 
 If you're signed into a GitHub Enterprise Managed User (EMU) account, it cannot interact with public repos outside your enterprise. Use the `gh` CLI with a **personal GitHub account** instead:
 
@@ -277,7 +280,7 @@ gh auth login
 
 # Submit the agent
 gh issue create --repo kody-w/RAR \
-  --title "[AGENT] @yournamespace/agent_slug" \
+  --title "[AGENT] @yournamespace/agent_slug_agent" \
   --body "$(cat <<'EOF'
 ```python
 <paste your agent code here>
@@ -286,18 +289,17 @@ EOF
 )"
 ```
 
-**Option B — Direct API call**
+**Option B — Legacy direct API call (automatic operation inference)**
 
 POST to `https://api.github.com/repos/kody-w/RAR/issues` with a personal access token (PAT) from a personal GitHub account:
 
 ```bash
 curl -X POST https://api.github.com/repos/kody-w/RAR/issues \
-  -H "Authorization: token YOUR_PERSONAL_PAT" \
+  -H "Authorization: Bearer YOUR_PERSONAL_PAT" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "[AGENT] @yournamespace/agent_slug",
-    "body": "```python\n<your agent code>\n```",
-    "labels": ["rar-action", "agent-submission"]
+    "title": "[AGENT] @yournamespace/agent_slug_agent",
+    "body": "```python\n<your agent code>\n```"
   }'
 ```
 
@@ -309,12 +311,12 @@ Open an issue at https://github.com/kody-w/RAR/issues/new — paste Python code 
 
 #### What happens next
 
-1. Pipeline validates manifest, enforces snake_case, runs security scan
-2. Agent lands in `staging/` (NOT `agents/` — review required)
-3. Issue labeled `pending-review` and stays open
-4. Admin reviews and adds `approved` label
-5. Agent moves to `agents/`, seed is forged from manifest data, card self-assembles
-6. Issue closed — agent is part of the next seasonal release
+1. Pipeline binds the GitHub account, manifest, source hash, and preconditions
+2. Exact bytes land under an Issue-specific immutable staging revision
+3. Issue is labeled `pending-review` and stays open
+4. Authorized admin approval binds only that exact revision
+5. Security, registry, card, and test gates run
+6. Mutation and receipt commit to `main`; Issue closes as `notarized`
 
 #### Updating an existing agent
 
@@ -454,11 +456,11 @@ Dashboard: `https://kody-w.github.io/RAR/admin.html`
 
 | Stage | Label | State | Meaning |
 |-------|-------|-------|---------|
-| Pending Review | `pending-review` | open | Submitted, awaiting admin review |
-| Approved | `approved` | open | Admin approved, ready for processing |
-| Processing | `forged` | open | CI is building, scanning, and forging the card |
-| Merged | `processed` | closed | Agent is live in registry |
-| Failed | `failed` | closed | CI processing failed |
+| Pending Review | `pending-review` | open | Exact revision validated, awaiting admin review |
+| Approved | `approved` | open | Authorized admin approved the exact revision |
+| Notarized | `notarized` | closed | Exact bytes passed checks and committed with receipt |
+| Deleted | `deleted` | closed | Active file removed; tombstone and receipt retained |
+| Failed | `failed` | open | Validation or notarization failed; nothing reported published |
 | Rejected | `rejected` | closed | Admin rejected the submission |
 
 ### Admin Actions (require GitHub auth with `public_repo` scope)
@@ -468,22 +470,22 @@ Dashboard: `https://kody-w.github.io/RAR/admin.html`
 POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["approved"]}
 ```
 
-**Process** — Triggers CI workflow to build, scan, and merge:
-```
-POST /repos/kody-w/RAR/actions/workflows/process-issues.yml/dispatches
-→ {"ref": "main", "inputs": {"issue_number": "{number}"}}
-```
+Adding `approved` automatically runs the hash-bound notarization workflow.
 
 **Reject** — Comments, closes issue with `rejected` label:
 ```
 PATCH /repos/kody-w/RAR/issues/{number}  → {"state": "closed", "labels": ["rejected"]}
 ```
 
-**Retry** — Reopens failed issue, removes `failed` label, adds `pending-review`:
+**Retry intake validation** — edit the Issue to trigger reconciliation, or
+manually dispatch `process-issues.yml` with its Issue number.
+
+**Retry notarization/projection** — remove and re-add `approved`. The workflow
+reuses an existing committed receipt when publication already succeeded:
 ```
-PATCH /repos/kody-w/RAR/issues/{number}  → {"state": "open"}
 DELETE /repos/kody-w/RAR/issues/{number}/labels/failed
-POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["pending-review"]}
+DELETE /repos/kody-w/RAR/issues/{number}/labels/approved
+POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["approved"]}
 ```
 
 ### Typical Morning Review
@@ -492,9 +494,9 @@ POST /repos/kody-w/RAR/issues/{number}/labels  → {"labels": ["pending-review"]
 2. Check **Pending Review** column for new submissions
 3. Click **View** to inspect agent code on the issue
 4. Click **Approve** (adds label, moves to Approved column) or **Reject** (closes issue)
-5. On approved agents, click **Process** to trigger CI
-6. Check **Failed** column — click **Retry** to reopen any recoverable failures
-7. **Merged** column shows successfully processed agents
+5. Watch the automatic notarization workflow
+6. Check **Failed** for recoverable validation or infrastructure failures
+7. **Notarized** shows exact source, receipt, and publication commit
 
 ### Deduplication
 

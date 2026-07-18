@@ -181,7 +181,7 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
           <input type="password" id="pat-input" placeholder="ghp_..." style="flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:monospace;font-size:.85rem;outline:none">
           <button onclick="loginWithPAT()" style="padding:10px 20px;border-radius:8px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-weight:700;cursor:pointer;font-size:.85rem;white-space:nowrap">Connect</button>
         </div>
-        <p style="font-size:.72rem;color:var(--text-muted);margin-top:6px">Token needs <code>public_repo</code> scope. Stored in your browser only.</p>
+        <p style="font-size:.72rem;color:var(--text-muted);margin-top:6px">Token needs <code>public_repo</code> scope. Stored only for this browser session. Prefer the headless SDK when available.</p>
       </div>
     </div>
   </div>
@@ -232,7 +232,7 @@ h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
 const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
 const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
 let OWNER = 'kody-w', REPO_NAME = 'RAR', REPO = 'kody-w/RAR';
-let ghToken = localStorage.getItem('rb_access_token');
+let ghToken = sessionStorage.getItem('rb_access_token');
 let ghUser = null;
 let agentCode = '';
 
@@ -262,7 +262,7 @@ async function handleAuthCallback() {
     const data = await resp.json();
     if (data.access_token) {
       ghToken = data.access_token;
-      localStorage.setItem('rb_access_token', ghToken);
+      sessionStorage.setItem('rb_access_token', ghToken);
     }
   } catch {}
 }
@@ -283,7 +283,7 @@ async function checkAuth() {
         </div>`;
     } else {
       ghToken = null;
-      localStorage.removeItem('rb_access_token');
+      sessionStorage.removeItem('rb_access_token');
     }
   } catch {}
 }
@@ -301,7 +301,7 @@ async function loginWithPAT() {
     const r = await fetch('https://api.github.com/user', { headers: { Authorization: `Bearer ${pat}` } });
     if (r.ok) {
       ghToken = pat;
-      localStorage.setItem('rb_access_token', pat);
+      sessionStorage.setItem('rb_access_token', pat);
       await checkAuth();
       await loadSubmissions();
     } else {
@@ -314,7 +314,7 @@ async function loginWithPAT() {
 
 function logout() {
   ghToken = null; ghUser = null;
-  localStorage.removeItem('rb_access_token');
+  sessionStorage.removeItem('rb_access_token');
   document.getElementById('auth-gate').style.display = 'block';
   document.getElementById('submit-form').style.display = 'none';
   document.getElementById('user-area').innerHTML = '';
@@ -405,20 +405,77 @@ async function submit() {
 
   const nameMatch = agentCode.match(/"name"\s*:\s*"([^"]+)"/);
   const agentName = nameMatch?.[1] || 'agent';
-  const body = JSON.stringify({ action: 'submit_agent', payload: { code: agentCode } }, null, 2);
+  const canonicalCode = agentCode.replace(/\r\n/g, '\n');
+  const digestBytes = await crypto.subtle.digest(
+    'SHA-256',
+    new TextEncoder().encode(canonicalCode)
+  );
+  const sourceHash = Array.from(new Uint8Array(digestBytes))
+    .map(byte => byte.toString(16).padStart(2, '0'))
+    .join('');
+  let registry;
+  try {
+    const registryResponse = await fetch(`registry.json?t=${Date.now()}`);
+    if (!registryResponse.ok) throw new Error(`HTTP ${registryResponse.status}`);
+    registry = await registryResponse.json();
+    if (!Array.isArray(registry.agents)) throw new Error('invalid registry');
+  } catch (error) {
+    showResult(
+      `Could not load the current registry safely: ${error.message}. ` +
+      'No mutation was submitted.',
+      true
+    );
+    btn.disabled = false; btn.textContent = 'Submit Agent';
+    return;
+  }
+  const existing = (registry.agents || []).find(agent => agent.name === agentName);
+  const tombstone = (registry.lifecycle?.tombstones || [])
+    .find(item => item.agent === agentName);
+  const operation = existing ? 'update' : (tombstone ? 'restore' : 'create');
+  const requestId = `req_${crypto.randomUUID().replaceAll('-', '')}`;
+  const preconditions = operation === 'update'
+    ? { if_match: `sha256:${existing._sha256}` }
+    : (operation === 'create' ? { if_none_match: '*' } : {});
+  const body = JSON.stringify({
+    schema: 'rar-change-request/1.0',
+    request_id: requestId,
+    idempotency_key: requestId,
+    operation,
+    resource: { kind: 'agent', id: agentName },
+    preconditions,
+    payload: {
+      source: {
+        media_type: 'text/x-python',
+        encoding: 'utf-8',
+        content: canonicalCode,
+        sha256: `sha256:${sourceHash}`,
+      },
+    },
+    client: { name: 'rar-submit-web', version: '1.0.0' },
+  }, null, 2);
+  if (new TextEncoder().encode(body).length > 50000) {
+    showResult(
+      'This agent is too large for an inline GitHub Issue. Use ' +
+      '<code>python rapp_sdk.py submit path.py</code>; the SDK will create ' +
+      'a hash-pinned GitHub source locator automatically.',
+      true
+    );
+    btn.disabled = false; btn.textContent = 'Submit Agent';
+    return;
+  }
 
   try {
     const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: `[AGENT] ${agentName}`,
+        title: `[RAR] ${operation.toUpperCase()} agent ${agentName}`,
         body: '```json\n' + body + '\n```'
       })
     });
     if (res.ok) {
       const issue = await res.json();
-      showResult(`Submitted! <a href="${issue.html_url}" target="_blank">Issue #${issue.number}</a> created. Your agent is in staging for review.`, false);
+      showResult(`Submitted! <a href="${issue.html_url}" target="_blank">Issue #${issue.number}</a> created. Validation will bind approval to source hash <code>${sourceHash.slice(0, 12)}…</code>.`, false);
       clearFile();
       loadSubmissions();
     } else {
@@ -452,7 +509,10 @@ async function loadSubmissions() {
       { headers: { Authorization: `Bearer ${ghToken}` } }
     );
     if (!res.ok) return;
-    const issues = (await res.json()).filter(i => i.title.startsWith('[AGENT]'));
+    const issues = (await res.json()).filter(i =>
+      i.title.startsWith('[AGENT]') ||
+      /^\[RAR\]\s+(CREATE|UPDATE|RESTORE|DELETE|READ)\s+agent\s+/.test(i.title)
+    );
     if (!issues.length) {
       el.style.display = 'block';
       list.innerHTML = '<div class="sub-empty">No submissions yet. Drop an agent above to get started.</div>';
@@ -462,11 +522,16 @@ async function loadSubmissions() {
     list.innerHTML = issues.map(i => {
       const labels = (i.labels || []).map(l => l.name);
       let status, statusClass;
-      if (labels.includes('approved')) { status = 'Approved'; statusClass = 'approved'; }
+      if (labels.includes('failed')) { status = 'Failed'; statusClass = 'closed'; }
+      else if (labels.includes('rejected')) { status = 'Rejected'; statusClass = 'closed'; }
+      else if (labels.includes('notarized')) { status = 'Notarized'; statusClass = 'approved'; }
+      else if (labels.includes('deleted')) { status = 'Deleted'; statusClass = 'closed'; }
+      else if (labels.includes('processed')) { status = 'Processed'; statusClass = 'approved'; }
+      else if (labels.includes('approved')) { status = 'Approved'; statusClass = 'approved'; }
       else if (labels.includes('pending-review')) { status = 'In Review'; statusClass = 'pending'; }
       else if (i.state === 'closed') { status = 'Closed'; statusClass = 'closed'; }
       else { status = 'Submitted'; statusClass = 'open'; }
-      const name = i.title.replace('[AGENT] ', '');
+      const name = i.title.replace('[AGENT] ', '').replace(/^\[RAR\]\s+\w+\s+agent\s+/, '');
       const date = new Date(i.created_at).toLocaleDateString();
       return `<div class="sub-card">
         <div class="sub-info">

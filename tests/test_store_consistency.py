@@ -14,6 +14,11 @@ STORE_HTML = REPO_ROOT / "store.html"
 REGISTRY_JSON = REPO_ROOT / "registry.json"
 CONSTITUTION = REPO_ROOT / "CONSTITUTION.md"
 SDK_PATH = REPO_ROOT / "rapp_sdk.py"
+SEED_INDEX = json.loads((REPO_ROOT / "seed-index.json").read_text())
+FOUNDING_NAMES = {
+    entry["id"]
+    for entry in SEED_INDEX.get("seeds", {}).values()
+}
 
 html = STORE_HTML.read_text()
 registry = json.loads(REGISTRY_JSON.read_text())
@@ -235,6 +240,8 @@ def test_registry_has_basic_agent():
 def test_registry_no_common_tier():
     """No founding card should be common/experimental tier."""
     for agent in registry["agents"]:
+        if agent["name"] not in FOUNDING_NAMES:
+            continue
         tier = agent.get("quality_tier", "community")
         assert tier != "experimental", f"{agent['name']} is experimental — founding cards should be at least community"
 
@@ -247,7 +254,13 @@ def test_registry_legendary_agents():
     allowed to be `private` without violating the Legendary contract.
     """
     for agent in registry["agents"]:
-        if agent["name"].startswith("@kody/") or agent["name"].startswith("@rapp/"):
+        if (
+            agent["name"] in FOUNDING_NAMES
+            and (
+                agent["name"].startswith("@kody/")
+                or agent["name"].startswith("@rapp/")
+            )
+        ):
             if (agent.get("_file") or "").endswith(".py.stub"):
                 continue
             assert agent.get("quality_tier") == "official", f"{agent['name']} should be official tier"

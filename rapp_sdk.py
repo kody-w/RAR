@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # =============================================================================
 # SECTION 1: CONSTANTS + CONFIG
@@ -18,6 +18,7 @@ import os
 import subprocess
 import sys
 import urllib.request
+import uuid
 from pathlib import Path
 
 REQUIRED_MANIFEST_FIELDS = [
@@ -38,6 +39,7 @@ SUBMITTABLE_TIERS = ["experimental", "community"]
 REPO = "kody-w/RAR"
 RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
 API_BASE = f"https://api.github.com/repos/{REPO}"
+INLINE_ISSUE_COMMAND_LIMIT = 50 * 1024
 
 TIER_TO_RARITY = {
     "official": "mythic",
@@ -1393,7 +1395,7 @@ def init_agents(repo_name: str = None) -> dict:
     return result
 
 
-def submit_agent(path: str, upstream: str = None) -> dict:
+def _legacy_submit_agent(path: str, upstream: str = None) -> dict:
     """Submit an agent to the upstream RAPP registry via GitHub Issue.
     Returns the issue URL on success."""
     agent_path = Path(path)
@@ -1458,6 +1460,340 @@ def submit_agent(path: str, upstream: str = None) -> dict:
         raise RuntimeError(f"GitHub API error ({e.code}): {err_body}")
 
 
+def _post_change_issue(
+    *,
+    upstream: str,
+    title: str,
+    command: dict,
+    token: str,
+) -> dict:
+    issue_body = f"```json\n{json.dumps(command, indent=2)}\n```"
+    payload = json.dumps({"title": title, "body": issue_body}).encode()
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{upstream}/issues",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": f"RAPP-SDK/{__version__}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode())
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode()[:300] if exc.fp else str(exc)
+        raise RuntimeError(f"GitHub API error ({exc.code}): {body}") from exc
+
+
+def _create_source_gist(code: str, filename: str, token: str) -> str:
+    """Store oversized source in a revision-pinned unlisted GitHub Gist."""
+    payload = json.dumps({
+        "description": "RAR agent mutation source",
+        "public": False,
+        "files": {filename: {"content": code}},
+    }).encode()
+    request = urllib.request.Request(
+        "https://api.github.com/gists",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": f"RAPP-SDK/{__version__}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            result = json.loads(response.read().decode())
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode()[:300] if exc.fp else str(exc)
+        raise RuntimeError(
+            "Large agents require GitHub Gist permission. "
+            f"Gist API returned {exc.code}: {body}"
+        ) from exc
+    files = result.get("files", {})
+    raw_url = (files.get(filename) or {}).get("raw_url", "")
+    if not raw_url.startswith("https://gist.githubusercontent.com/"):
+        raise RuntimeError("GitHub did not return a revision-pinned Gist raw URL")
+    return raw_url
+
+
+def _fetch_target_registry(upstream: str, token: str) -> dict:
+    request = urllib.request.Request(
+        f"https://raw.githubusercontent.com/{upstream}/main/registry.json",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github.raw+json",
+            "User-Agent": f"RAPP-SDK/{__version__}",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            registry = json.loads(response.read().decode())
+    except (urllib.error.HTTPError, urllib.error.URLError, json.JSONDecodeError) as exc:
+        raise RuntimeError(
+            f"Could not load target registry '{upstream}': {exc}"
+        ) from exc
+    if not isinstance(registry.get("agents"), list):
+        raise RuntimeError(f"Target registry '{upstream}' is invalid")
+    return registry
+
+
+def _registry_agent(registry: dict, name: str) -> dict | None:
+    for agent in registry.get("agents", []):
+        if agent.get("name") == name:
+            return agent
+    return None
+
+
+def _registry_tombstone(registry: dict, name: str) -> dict | None:
+    for tombstone in registry.get("lifecycle", {}).get("tombstones", []):
+        if tombstone.get("agent") == name:
+            return tombstone
+    return None
+
+
+def submit_agent(
+    path: str,
+    upstream: str = None,
+    operation: str = "auto",
+) -> dict:
+    """Request create/update/restore through the GitHub Issues control plane."""
+    agent_path = Path(path)
+    if not agent_path.exists():
+        raise FileNotFoundError(f"Agent file not found: {path}")
+
+    code = agent_path.read_text(encoding="utf-8")
+    manifest = extract_manifest(path)
+    if manifest is None:
+        raise ValueError("No __manifest__ found — validate your agent first")
+    errors = validate_manifest(path, manifest)
+    if errors:
+        raise ValueError(f"Manifest errors: {'; '.join(errors)}")
+    if "-" in agent_path.stem:
+        raise ValueError(
+            f"Filename '{agent_path.name}' uses dashes — rename to snake_case"
+        )
+    upstream = upstream or REPO
+    token = _get_token()
+    if not token:
+        raise RuntimeError(
+            "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
+        )
+
+    target_registry = _fetch_target_registry(upstream, token)
+    existing = _registry_agent(target_registry, manifest["name"])
+    tombstone = _registry_tombstone(target_registry, manifest["name"])
+    if operation == "auto":
+        operation = "update" if existing else ("restore" if tombstone else "create")
+    if operation not in {"create", "update", "restore"}:
+        raise ValueError("operation must be auto, create, update, or restore")
+
+    name_parts = str(manifest.get("name", "")).split("/", 1)
+    tier = manifest.get("quality_tier", "community")
+    if operation == "create":
+        if len(name_parts) != 2 or not name_parts[1].endswith("_agent"):
+            raise ValueError(
+                "New versioned registrations require manifest names ending in _agent"
+            )
+        if tier not in SUBMITTABLE_TIERS:
+            raise ValueError(
+                "New registrations require quality_tier community or experimental"
+            )
+    elif operation == "update":
+        if not existing:
+            raise ValueError(f"{manifest['name']} is not active; cannot update")
+        if tier != existing.get("quality_tier", "community"):
+            raise ValueError("Updates cannot self-change the registry quality tier")
+    elif tombstone and tombstone.get("quality_tier") and (
+        tier != tombstone["quality_tier"]
+    ):
+        raise ValueError("Restores must preserve the tombstoned quality tier")
+    elif not tombstone:
+        raise ValueError(f"{manifest['name']} has no tombstone to restore")
+
+    preconditions = {}
+    if operation == "create":
+        preconditions["if_none_match"] = "*"
+    elif operation == "update":
+        preconditions["if_match"] = f"sha256:{existing.get('_sha256', '')}"
+
+    request_id = f"req_{uuid.uuid4().hex}"
+    source_sha256 = hashlib.sha256(code.encode("utf-8")).hexdigest()
+    source = {
+        "media_type": "text/x-python",
+        "encoding": "utf-8",
+        "sha256": f"sha256:{source_sha256}",
+        "content": code,
+    }
+    command = {
+        "schema": "rar-change-request/1.0",
+        "request_id": request_id,
+        "idempotency_key": request_id,
+        "operation": operation,
+        "resource": {"kind": "agent", "id": manifest["name"]},
+        "preconditions": preconditions,
+        "payload": {"source": source},
+        "client": {"name": "rapp_sdk", "version": __version__},
+    }
+    if len(json.dumps(command).encode("utf-8")) > INLINE_ISSUE_COMMAND_LIMIT:
+        source.pop("content")
+        source["url"] = _create_source_gist(code, agent_path.name, token)
+    issue = _post_change_issue(
+        upstream=upstream,
+        title=f"[RAR] {operation.upper()} agent {manifest['name']}",
+        command=command,
+        token=token,
+    )
+    return {
+        "ok": True,
+        "issue_url": issue.get("html_url", ""),
+        "issue_number": issue.get("number"),
+        "agent": manifest["name"],
+        "operation": operation,
+        "request_id": request_id,
+        "source_sha256": source_sha256,
+        "status": "submitted",
+    }
+
+
+def delete_agent(name: str, reason: str, upstream: str = None) -> dict:
+    """Request a hash-bound deletion; Git history remains auditable."""
+    if not reason.strip():
+        raise ValueError("A deletion reason is required")
+    token = _get_token()
+    if not token:
+        raise RuntimeError(
+            "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
+        )
+    upstream = upstream or REPO
+    target_registry = _fetch_target_registry(upstream, token)
+    current = _registry_agent(target_registry, name)
+    if current is None:
+        raise ValueError(f"Agent '{name}' is not active")
+    request_id = f"req_{uuid.uuid4().hex}"
+    command = {
+        "schema": "rar-change-request/1.0",
+        "request_id": request_id,
+        "idempotency_key": request_id,
+        "operation": "delete",
+        "resource": {"kind": "agent", "id": name},
+        "preconditions": {
+            "if_match": f"sha256:{current.get('_sha256', '')}",
+        },
+        "payload": {"reason": reason.strip()},
+        "client": {"name": "rapp_sdk", "version": __version__},
+    }
+    issue = _post_change_issue(
+        upstream=upstream,
+        title=f"[RAR] DELETE agent {name}",
+        command=command,
+        token=token,
+    )
+    return {
+        "ok": True,
+        "issue_url": issue.get("html_url", ""),
+        "issue_number": issue.get("number"),
+        "agent": name,
+        "operation": "delete",
+        "request_id": request_id,
+        "status": "submitted",
+    }
+
+
+def request_agent_read(name: str, upstream: str = None) -> dict:
+    """Create an auditable read request without mutating registry state."""
+    token = _get_token()
+    if not token:
+        raise RuntimeError(
+            "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
+        )
+    upstream = upstream or REPO
+    request_id = f"req_{uuid.uuid4().hex}"
+    command = {
+        "schema": "rar-change-request/1.0",
+        "request_id": request_id,
+        "idempotency_key": request_id,
+        "operation": "read",
+        "resource": {"kind": "agent", "id": name},
+        "preconditions": {},
+        "payload": {},
+        "client": {"name": "rapp_sdk", "version": __version__},
+    }
+    issue = _post_change_issue(
+        upstream=upstream,
+        title=f"[RAR] READ agent {name}",
+        command=command,
+        token=token,
+    )
+    return {
+        "ok": True,
+        "issue_url": issue.get("html_url", ""),
+        "issue_number": issue.get("number"),
+        "agent": name,
+        "operation": "read",
+        "request_id": request_id,
+        "status": "submitted",
+    }
+
+
+def request_status(issue_number: int, upstream: str = None) -> dict:
+    """Read one Issues-backed mutation request and projected lifecycle."""
+    token = _get_token()
+    if not token:
+        raise RuntimeError(
+            "No GitHub token. Run `gh auth login` or set GITHUB_TOKEN."
+        )
+    upstream = upstream or REPO
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{upstream}/issues/{issue_number}",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": f"RAPP-SDK/{__version__}",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            issue = json.loads(resp.read().decode())
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode()[:300] if exc.fp else str(exc)
+        raise RuntimeError(f"GitHub API error ({exc.code}): {body}") from exc
+    labels = sorted(
+        label.get("name", "") if isinstance(label, dict) else str(label)
+        for label in issue.get("labels", [])
+    )
+    phase = next(
+        (
+            label
+            for label in (
+                "notarized",
+                "deleted",
+                "rejected",
+                "failed",
+                "pending-review",
+                "processed",
+            )
+            if label in labels
+        ),
+        "submitted",
+    )
+    return {
+        "ok": True,
+        "issue_number": issue.get("number", issue_number),
+        "issue_url": issue.get("html_url", ""),
+        "title": issue.get("title", ""),
+        "state": issue.get("state", ""),
+        "status": phase,
+        "labels": labels,
+        "updated_at": issue.get("updated_at", ""),
+    }
+
+
 def scaffold_agent(name: str, output_dir: str = None) -> str:
     """
     Scaffold a new agent from template.
@@ -1475,17 +1811,21 @@ def scaffold_agent(name: str, output_dir: str = None) -> str:
         fixed = slug.replace("-", "_")
         raise ValueError(f"Slug '{slug}' uses dashes — use snake_case: {fixed}")
 
+    display_slug = slug.removesuffix("_agent")
+    if not slug.endswith("_agent"):
+        slug += "_agent"
+    name = f"{publisher}/{slug}"
+
     # class_name: "my_agent" -> "MyAgent"
-    class_name = "".join(word.title() for word in slug.split("_"))
+    class_name = "".join(word.title() for word in display_slug.split("_"))
 
     # display_name: "my_agent" -> "My Agent"
-    display_name = slug.replace("_", " ").title()
+    display_name = display_slug.replace("_", " ").title()
 
     description = "A RAPP agent."
     author = publisher.lstrip("@")
 
-    file_name = slug if slug.endswith("_agent") else slug + "_agent"
-    file_name += ".py"
+    file_name = slug + ".py"
     base_dir = Path(output_dir) if output_dir else Path(__file__).parent / "agents"
     output_path = base_dir / publisher / file_name
 
@@ -1542,7 +1882,32 @@ def main():
     # submit
     p_submit = sub.add_parser("submit", help="Submit an agent to the RAPP registry for review")
     p_submit.add_argument("path", help="Path to agent .py file")
+    p_submit.add_argument(
+        "--operation",
+        choices=["auto", "create", "update", "restore"],
+        default="auto",
+        help="Mutation type (default: infer from registry)",
+    )
     p_submit.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_delete = sub.add_parser("delete", help="Request deletion of a published agent")
+    p_delete.add_argument("name", help="Agent name: @publisher/my_agent")
+    p_delete.add_argument("--reason", required=True, help="Deletion reason")
+    p_delete.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_request_read = sub.add_parser(
+        "request-read",
+        help="Create an auditable Issues-backed read request",
+    )
+    p_request_read.add_argument("name", help="Agent name: @publisher/my_agent")
+    p_request_read.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_request_status = sub.add_parser(
+        "request-status",
+        help="Read an Issues-backed mutation request status",
+    )
+    p_request_status.add_argument("issue_number", type=int)
+    p_request_status.add_argument("--json", action="store_true", help="Output JSON")
 
     # validate
     p_val = sub.add_parser("validate", help="Validate an agent manifest")
@@ -1733,16 +2098,68 @@ def main():
                         print(f"    - {e}")
                 sys.exit(1)
 
-            result = submit_agent(args.path)
+            result = submit_agent(args.path, operation=args.operation)
             if use_json:
                 print(json.dumps(result, indent=2))
             else:
                 print(f"\n  Submitted: {result['agent']}")
                 print(f"  Status:    {result['status']}")
                 print(f"  Issue:     {result['issue_url']}")
-                print(f"\n  Your agent is now in staging for admin review.")
-                print(f"  Once approved, it will be forged and added to the registry.")
+                print(f"  Request:   {result['request_id']}")
+                print(f"\n  GitHub now records this exact mutation request.")
+                print(f"  Validation and approval bind to its source hash.")
                 print()
+        except Exception as e:
+            if use_json:
+                print(json.dumps({"error": str(e)}))
+            else:
+                print(f"  Error: {e}")
+            sys.exit(1)
+
+    # ---- delete ----
+    elif args.command == "delete":
+        try:
+            result = delete_agent(args.name, args.reason)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                print(f"  Submitted deletion request for {result['agent']}")
+                print(f"  Request: {result['request_id']}")
+                print(f"  Issue:   {result['issue_url']}")
+        except Exception as e:
+            if use_json:
+                print(json.dumps({"error": str(e)}))
+            else:
+                print(f"  Error: {e}")
+            sys.exit(1)
+
+    # ---- request-read ----
+    elif args.command == "request-read":
+        try:
+            result = request_agent_read(args.name)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                print(f"  Submitted read request for {result['agent']}")
+                print(f"  Request: {result['request_id']}")
+                print(f"  Issue:   {result['issue_url']}")
+        except Exception as e:
+            if use_json:
+                print(json.dumps({"error": str(e)}))
+            else:
+                print(f"  Error: {e}")
+            sys.exit(1)
+
+    # ---- request-status ----
+    elif args.command == "request-status":
+        try:
+            result = request_status(args.issue_number)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                print(f"  Issue:  {result['issue_url']}")
+                print(f"  State:  {result['state']}")
+                print(f"  Status: {result['status']}")
         except Exception as e:
             if use_json:
                 print(json.dumps({"error": str(e)}))

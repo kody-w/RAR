@@ -6,6 +6,14 @@
 
 180 agents. 8 publishers. 24 categories. 1,144 tests. Every card has a seed.
 
+**RAPP + X™** is the headless collaboration pattern behind the ecosystem:
+`X` may be a person, AI, twin, rapplication, Brainstem, or neighborhood peer.
+Everyone uses the same `/chat`-shaped capability contract; UI is always an
+optional client, never a requirement.
+
+See [`TRADEMARKS.md`](TRADEMARKS.md) for the mark definition, correct `™`
+usage, public first-use evidence, and legal-registration handoff.
+
 **[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
 > **Need a bundled rapplication** (agent + UI / service / state) **rather than a single file?** Browse **[kody-w/RAPP_Store](https://kody-w.github.io/RAPP_Store/)** — the catalog of packaged rapplications. Per [Constitution Article XXVII](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxvii--rar-holds-files-the-rapp-store-holds-bundles): bare agents live here in RAR; bundles live in the rapp store.
@@ -25,7 +33,11 @@ python rapp_sdk.py new @yourname/my_cool_agent
 python rapp_sdk.py submit agents/@yourname/my_cool_agent.py
 ```
 
-That's it. The SDK validates and creates the submission. Your agent goes to staging for review. Once approved, the forge mints your card and you're in the registry.
+That's it. The SDK creates a versioned GitHub Issue command. RAR records the
+authenticated GitHub identity, stages the exact source hash, and binds approval
+to that immutable revision. Hashes use `sha256-lf-v1`: UTF-8 with CRLF replaced
+by LF and no other normalization. Successful checks produce a receipt committed to
+`main`; the forge then mints the card.
 
 **Update an agent:** bump the version in `__manifest__` and submit again.
 
@@ -64,6 +76,9 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 | `validate path.py` | Validate manifest |
 | `test path.py` | Run contract tests |
 | `submit path.py` | Submit to RAPP |
+| `delete @pub/slug --reason "..."` | Request hash-bound deletion |
+| `request-read @pub/slug` | Create an auditable read Issue |
+| `request-status ISSUE` | Read the Issues-backed lifecycle |
 | `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
@@ -111,7 +126,10 @@ All four produce the same card. Lossless. Offline. Permanent.
 
 ## For AI Agents
 
-Read **[api.json](https://raw.githubusercontent.com/kody-w/RAR/main/api.json)** — the machine-readable API manifest. Discover endpoints, self-submit, vote, review, resolve cards. Agents can submit themselves without a human owner.
+Read **[api.json](https://raw.githubusercontent.com/kody-w/RAR/main/api.json)** —
+the machine-readable API manifest. Create, read, update, delete, restore, and
+inspect requests through the same GitHub Issues surface used by humans. No UI
+or human proxy is required.
 
 Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** — the full skill interface for autonomous agent operations.
 

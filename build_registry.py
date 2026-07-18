@@ -38,6 +38,10 @@ AGENTS_DIR = Path("agents")
 SWARMS_DIR = Path("swarms")
 REGISTRY_FILE = Path("registry.json")
 HOLO_CARDS_FILE = Path("cards/holo_cards.json")
+LIFECYCLE_FILE = Path("state/agent_lifecycle.json")
+RECEIPTS_DIR = Path("state/receipts")
+RECEIPT_SCHEMA = "rar-receipt/1.0"
+LIFECYCLE_SCHEMA = "rar-agent-lifecycle/1.0"
 
 # Cache holo card slugs and per-card content for _has_card / _card_sha256 lookups
 _holo_data = None
@@ -583,6 +587,117 @@ def _card_content_sha256(card_data: dict) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+def _lifecycle_metadata(
+    *,
+    name: str,
+    version: str,
+    digest: str,
+    canonical_path: str,
+    lifecycle_agents: dict,
+    errors: list[str],
+) -> dict:
+    if name not in lifecycle_agents:
+        return {"_lifecycle": "legacy_active"}
+
+    lifecycle = lifecycle_agents[name]
+    status = lifecycle.get("status")
+    if status in {"deleted", "retired", "revoked"}:
+        errors.append(
+            f"{name}: active file exists while lifecycle status is {status}"
+        )
+        return {"_lifecycle": "invalid"}
+    if status != "active":
+        errors.append(f"{name}: unsupported lifecycle status {status!r}")
+        return {"_lifecycle": "invalid"}
+    if (
+        lifecycle.get("sha256") != digest
+        or lifecycle.get("version") != version
+        or lifecycle.get("canonical_path") != canonical_path
+    ):
+        errors.append(f"{name}: lifecycle version or digest does not match file")
+        return {"_lifecycle": "invalid"}
+
+    receipt_id = str(lifecycle.get("latest_receipt", ""))
+    if not receipt_id.startswith("rar_"):
+        errors.append(f"{name}: active lifecycle has no RAR receipt")
+        return {"_lifecycle": "invalid"}
+    receipt_path = RECEIPTS_DIR / f"{receipt_id.removeprefix('rar_')}.json"
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError) as exc:
+        errors.append(f"{name}: receipt {receipt_id} is unavailable: {exc}")
+        return {"_lifecycle": "invalid"}
+    if (
+        receipt.get("schema") != RECEIPT_SCHEMA
+        or receipt.get("id") != receipt_id
+        or receipt.get("agent") != name
+        or receipt.get("version") != version
+        or receipt.get("canonical_path") != canonical_path
+        or receipt.get("quality_tier") != lifecycle.get("quality_tier")
+        or str(receipt.get("controller", {}).get("github_id"))
+        != str(lifecycle.get("owner_github_id"))
+        or receipt.get("status") != "notarized"
+        or receipt.get("artifact", {}).get("digest") != digest
+    ):
+        errors.append(f"{name}: receipt {receipt_id} does not match active file")
+        return {"_lifecycle": "invalid"}
+    return {
+        "_lifecycle": "notarized",
+        "_receipt": receipt_id,
+        "_controller": {
+            "github_id": lifecycle.get("owner_github_id"),
+            "github_login": lifecycle.get("owner_github_login"),
+        },
+        "_provenance": {
+            "issue": receipt.get("submission", {}).get("issue_number"),
+            "submitted_by": receipt.get("submission", {}).get("github_login"),
+            "accepted_by": receipt.get("acceptance", {}).get("github_login"),
+            "checks": receipt.get("acceptance", {}).get("checks", []),
+        },
+    }
+
+
+def _validated_tombstones(
+    lifecycle_agents: dict,
+    errors: list[str],
+) -> list[dict]:
+    tombstones = []
+    action_by_status = {
+        "deleted": "agent.delete",
+        "retired": "agent.retire",
+        "revoked": "agent.revoke",
+    }
+    for name, record in sorted(lifecycle_agents.items()):
+        status = record.get("status")
+        if status not in action_by_status:
+            continue
+        receipt_id = str(record.get("latest_receipt", ""))
+        receipt_path = RECEIPTS_DIR / f"{receipt_id.removeprefix('rar_')}.json"
+        try:
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError, OSError) as exc:
+            errors.append(f"{name}: tombstone receipt is unavailable: {exc}")
+            continue
+        if (
+            not receipt_id.startswith("rar_")
+            or receipt.get("schema") != RECEIPT_SCHEMA
+            or receipt.get("id") != receipt_id
+            or receipt.get("agent") != name
+            or receipt.get("version") != record.get("version")
+            or receipt.get("canonical_path") != record.get("canonical_path")
+            or receipt.get("quality_tier") != record.get("quality_tier")
+            or str(receipt.get("controller", {}).get("github_id"))
+            != str(record.get("owner_github_id"))
+            or receipt.get("status") != status
+            or receipt.get("action") != action_by_status[status]
+            or receipt.get("artifact", {}).get("digest") != record.get("sha256")
+        ):
+            errors.append(f"{name}: tombstone receipt does not match lifecycle")
+            continue
+        tombstones.append({"agent": name, **record})
+    return tombstones
+
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -590,6 +705,23 @@ def build_registry():
     categories = set()
     errors = []
     seen_names = set()
+    lifecycle_agents = {}
+    if LIFECYCLE_FILE.exists():
+        try:
+            lifecycle_data = json.loads(
+                LIFECYCLE_FILE.read_text(encoding="utf-8")
+            )
+            if lifecycle_data.get("schema") != LIFECYCLE_SCHEMA:
+                errors.append(
+                    f"{LIFECYCLE_FILE}: expected schema {LIFECYCLE_SCHEMA}"
+                )
+            lifecycle_agents = lifecycle_data.get("agents", {})
+            if not isinstance(lifecycle_agents, dict):
+                errors.append(f"{LIFECYCLE_FILE}: agents must be an object")
+                lifecycle_agents = {}
+        except (json.JSONDecodeError, OSError) as exc:
+            errors.append(f"{LIFECYCLE_FILE}: invalid lifecycle JSON: {exc}")
+            lifecycle_agents = {}
 
     # Scan both .py and .py.card files; .py.card takes priority if both exist
     all_files = sorted(set(
@@ -674,6 +806,14 @@ def build_registry():
             manifest["_stack"] = stack_name
             manifest["_stack_vertical"] = stack_vertical
         manifest["_sha256"] = sha256
+        manifest.update(_lifecycle_metadata(
+            name=name,
+            version=str(manifest.get("version", "")),
+            digest=sha256,
+            canonical_path=serialized_path,
+            lifecycle_agents=lifecycle_agents,
+            errors=errors,
+        ))
         manifest["_seed"] = compute_seed(
             name,
             manifest.get("category", "general"),
@@ -855,6 +995,14 @@ def build_registry():
         manifest["_install_filename"] = install_filename(name)
         manifest["_stub_sha256"] = stub_sha
         manifest["_source"] = src
+        manifest.update(_lifecycle_metadata(
+            name=name,
+            version=str(manifest.get("version", "")),
+            digest=stub_sha,
+            canonical_path=registry_path(py_path),
+            lifecycle_agents=lifecycle_agents,
+            errors=errors,
+        ))
         manifest["_seed"] = compute_seed(
             name,
             manifest.get("category", "general"),
@@ -955,6 +1103,7 @@ def build_registry():
     all_swarms = converged_swarms + stack_swarms
 
     # ─── Build registry ───────────────────────────────────────────────
+    tombstones = _validated_tombstones(lifecycle_agents, errors)
     registry = {
         "schema": "rapp-registry/1.1",
         "version": "1.1.0",
@@ -971,6 +1120,11 @@ def build_registry():
         "duplicates": [{"display_name": dn, "agents": [a1, a2]} for dn, a1, a2 in duplicates],
         "agents": agents,
         "swarms": all_swarms,
+        "lifecycle": {
+            "schema": LIFECYCLE_SCHEMA,
+            "receipt_schema": RECEIPT_SCHEMA,
+            "tombstones": tombstones,
+        },
     }
 
     if stacks:

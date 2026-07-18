@@ -23,6 +23,20 @@ sys.path.insert(0, str(REPO_ROOT))
 import rapp_sdk
 
 
+class FakeResponse:
+    def __init__(self, payload):
+        self.payload = payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
+    def read(self):
+        return json.dumps(self.payload).encode()
+
+
 # ═══════════════════════════════════════════════════════
 # SECTION 1: Constants
 # ═══════════════════════════════════════════════════════
@@ -56,6 +70,223 @@ def test_rarity_floor_complete():
 def test_agent_template_has_placeholders():
     for token in ["__NAME__", "__DISPLAY_NAME__", "__CLASS_NAME__", "__DESCRIPTION__", "__AUTHOR__"]:
         assert token in rapp_sdk.AGENT_TEMPLATE, f"Template missing {token}"
+
+
+def _write_submission_agent(tmp_path: Path, version: str = "1.0.0") -> Path:
+    path = tmp_path / "my_agent.py"
+    path.write_text(
+        rapp_sdk.AGENT_TEMPLATE
+        .replace("__NAME__", "@testuser/my_agent")
+        .replace("__DISPLAY_NAME__", "My Agent")
+        .replace("__CLASS_NAME__", "MyAgent")
+        .replace("__DESCRIPTION__", "A test agent.")
+        .replace("__AUTHOR__", "testuser")
+        .replace('"version": "1.0.0"', f'"version": "{version}"')
+    )
+    return path
+
+
+def test_submit_uses_versioned_issue_command(tmp_path, monkeypatch):
+    path = _write_submission_agent(tmp_path)
+    captured = {}
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {"agents": [], "lifecycle": {"tombstones": []}},
+    )
+
+    def fake_urlopen(request, timeout):
+        captured["url"] = request.full_url
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 123, "html_url": "https://example.test/123"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    result = rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command_text = captured["payload"]["body"].split("```json\n", 1)[1].rsplit(
+        "\n```", 1
+    )[0]
+    command = json.loads(command_text)
+    assert result["status"] == "submitted"
+    assert result["operation"] == "create"
+    assert command["schema"] == "rar-change-request/1.0"
+    assert command["operation"] == "create"
+    assert command["resource"]["id"] == "@testuser/my_agent"
+    assert command["preconditions"] == {"if_none_match": "*"}
+    assert command["payload"]["source"]["sha256"].startswith("sha256:")
+    assert "labels" not in captured["payload"]
+
+
+def test_submit_update_binds_current_hash(tmp_path, monkeypatch):
+    path = _write_submission_agent(tmp_path, "1.1.0")
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {
+            "agents": [{"name": "@testuser/my_agent", "_sha256": "abc123"}],
+            "lifecycle": {"tombstones": []},
+        },
+    )
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 124, "html_url": "https://example.test/124"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    result = rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command = json.loads(
+        captured["payload"]["body"].split("```json\n", 1)[1].rsplit("\n```", 1)[0]
+    )
+    assert result["operation"] == "update"
+    assert command["preconditions"]["if_match"] == "sha256:abc123"
+
+
+def test_submit_updates_legacy_official_identity(tmp_path, monkeypatch):
+    path = tmp_path / "hacker_news_agent.py"
+    path.write_text(
+        rapp_sdk.AGENT_TEMPLATE
+        .replace("__NAME__", "@rapp/hacker_news")
+        .replace("__DISPLAY_NAME__", "Hacker News")
+        .replace("__CLASS_NAME__", "HackerNews")
+        .replace("__DESCRIPTION__", "Legacy official agent.")
+        .replace("__AUTHOR__", "rapp")
+        .replace('"quality_tier": "community"', '"quality_tier": "official"')
+        .replace('"version": "1.0.0"', '"version": "1.1.0"')
+    )
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {
+            "agents": [{
+                "name": "@rapp/hacker_news",
+                "version": "1.0.0",
+                "quality_tier": "official",
+                "_sha256": "abc123",
+            }],
+            "lifecycle": {"tombstones": []},
+        },
+    )
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 128, "html_url": "https://example.test/128"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    result = rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command = json.loads(
+        captured["payload"]["body"].split("```json\n", 1)[1].rsplit("\n```", 1)[0]
+    )
+    assert result["operation"] == "update"
+    assert command["resource"]["id"] == "@rapp/hacker_news"
+    assert command["preconditions"]["if_match"] == "sha256:abc123"
+
+
+def test_large_submit_uses_hash_pinned_source_url(tmp_path, monkeypatch):
+    path = _write_submission_agent(tmp_path)
+    path.write_text(
+        path.read_text() + "\n#" + ("x" * rapp_sdk.INLINE_ISSUE_COMMAND_LIMIT)
+    )
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {"agents": [], "lifecycle": {"tombstones": []}},
+    )
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_create_source_gist",
+        lambda _code, _filename, _token: (
+            "https://gist.githubusercontent.com/user/id/raw/sha/my_agent.py"
+        ),
+    )
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 127, "html_url": "https://example.test/127"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command = json.loads(
+        captured["payload"]["body"].split("```json\n", 1)[1].rsplit("\n```", 1)[0]
+    )
+    source = command["payload"]["source"]
+    assert "content" not in source
+    assert source["url"].startswith("https://gist.githubusercontent.com/")
+    assert source["sha256"].startswith("sha256:")
+
+
+def test_delete_uses_hash_precondition(monkeypatch):
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {
+            "agents": [{"name": "@testuser/my_agent", "_sha256": "deadbeef"}],
+            "lifecycle": {"tombstones": []},
+        },
+    )
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 125, "html_url": "https://example.test/125"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    result = rapp_sdk.delete_agent(
+        "@testuser/my_agent",
+        "No longer maintained",
+        upstream="owner/rar",
+    )
+    command = json.loads(
+        captured["payload"]["body"].split("```json\n", 1)[1].rsplit("\n```", 1)[0]
+    )
+    assert result["operation"] == "delete"
+    assert command["preconditions"]["if_match"] == "sha256:deadbeef"
+    assert command["payload"]["reason"] == "No longer maintained"
+
+
+def test_request_read_uses_issue_control_plane(monkeypatch):
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    captured = {}
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({"number": 126, "html_url": "https://example.test/126"})
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    result = rapp_sdk.request_agent_read(
+        "@testuser/my_agent",
+        upstream="owner/rar",
+    )
+    command = json.loads(
+        captured["payload"]["body"].split("```json\n", 1)[1].rsplit("\n```", 1)[0]
+    )
+    assert result["operation"] == "read"
+    assert command["operation"] == "read"
+    assert command["resource"]["id"] == "@testuser/my_agent"
+
+
+def test_request_status_projects_labels(monkeypatch):
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk.urllib.request,
+        "urlopen",
+        lambda _request, timeout: FakeResponse({
+            "number": 126,
+            "html_url": "https://example.test/126",
+            "title": "[RAR] CREATE agent",
+            "state": "open",
+            "labels": [{"name": "pending-review"}],
+            "updated_at": "2026-07-18T20:00:00Z",
+        }),
+    )
+    result = rapp_sdk.request_status(126, upstream="owner/rar")
+    assert result["status"] == "pending-review"
 
 
 # ═══════════════════════════════════════════════════════
@@ -278,7 +509,7 @@ def test_scaffold_creates_valid_agent():
         # Extract and validate manifest
         manifest = rapp_sdk.extract_manifest(str(agent_path))
         assert manifest is not None
-        assert manifest["name"] == "@test/round_trip"
+        assert manifest["name"] == "@test/round_trip_agent"
         assert manifest["display_name"] == "Round Trip"
 
         errors = rapp_sdk.validate_manifest(str(agent_path), manifest)

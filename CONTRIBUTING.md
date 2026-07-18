@@ -6,8 +6,8 @@
 1. Write your agent: agents/@yourname/my_agent.py  ← single file, that's it
 2. Include: __manifest__ dict in the file
 3. Test:   python rapp_sdk.py test agents/@yourname/my_agent.py
-4. Submit: open a GitHub Issue with your code
-5. Wait for review → approval → card forged → you're in the registry
+4. Submit: create a versioned GitHub Issue mutation with your code
+5. Wait for validation → approval → receipt → card forge
 ```
 
 ---
@@ -93,29 +93,36 @@ Open an issue on `kody-w/RAR`:
 
 **Body:** paste your agent code (raw or in a ` ```python ``` ` block)
 
+Versioned clients should use the `rar-change-request/1.0` envelope documented
+in [`api.json`](api.json). The Issue author is the submitting identity; the
+title is descriptive and never grants namespace ownership.
+
+RAR is public. Issue bodies, attachment links, and unlisted Gist locators are
+auditable but **not private**. Never submit secrets or personal data. Large
+agents use a revision-pinned GitHub source URL plus SHA-256 because Issue bodies
+cannot hold the largest single-file agents in the registry.
+
 ### Option B: SDK
 
 ```bash
 python rapp_sdk.py submit agents/@yourname/my_agent.py
 ```
 
-### Option C: Pull Request
-
-```bash
-git fork kody-w/RAR
-# add agents/@yourname/my_agent.py
-python build_registry.py  # must pass
-# open PR
-```
+Pull requests remain welcome for registry tooling, tests, documentation, and
+policy. Agent publication and lifecycle mutations must use the Issue/receipt
+path above so canonical admitted bytes receive identity, review, and audit
+evidence. Canonical bytes use `sha256-lf-v1`: UTF-8 source with CRLF replaced by
+LF and no other normalization.
 
 ## What Happens After Submission
 
-1. Pipeline validates manifest, enforces snake_case, runs security scan
-2. Agent lands in `staging/` — NOT in the registry yet
-3. Issue labeled `pending-review` and stays open
-4. Admin reviews and adds `approved` label
-5. Agent moves to `agents/`, seed is forged from your manifest, card self-assembles
-6. Issue closed — your agent is in the registry with a permanent card identity
+1. Pipeline validates identity, manifest, source hash, and preconditions
+2. Exact bytes land at an Issue-specific immutable staging revision
+3. Issue is labeled `pending-review` and stays open
+4. An authorized maintainer approves that exact revision
+5. Security, registry, card, and test gates run before any publication commit
+6. Mutation and immutable receipt commit to `main`
+7. Issue closes as `notarized` (or `deleted`) with receipt and commit IDs
 
 **The forge decides your card.** You don't choose your types, stats, or abilities. The forge reads your manifest (category, tags, tier, dependencies) and computes the card deterministically.
 
@@ -128,6 +135,25 @@ Submit a new Issue with the updated code. Bump the version:
 - `1.0.0` → `2.0.0` for breaking changes
 
 Same flow: staging → review → approval. The new version gets a new forged seed. The old seed still resolves to the old card forever.
+
+## Reading and Deleting
+
+Reads are static and headless through `registry.json` or:
+
+```bash
+python rapp_sdk.py info @yourname/my_agent
+python rapp_sdk.py request-status 123
+```
+
+Deletion is an approved mutation, not history erasure:
+
+```bash
+python rapp_sdk.py delete @yourname/my_agent --reason "No longer maintained"
+```
+
+RAR removes the active file and writes a tombstone plus receipt. Restoring the
+same identity requires a fresh Issue, a semantically higher version, and
+another review.
 
 ## Rules
 

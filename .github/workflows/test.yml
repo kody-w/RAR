@@ -50,6 +50,22 @@ jobs:
       - name: Agent contract tests
         run: pytest tests/test_agent_contract.py -v --tb=short
 
+  # ─── NOTARY (trusted PR policy lives in notary-policy.yml) ─────
+  notary:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify changed agent receipts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
+
   # ─── FULL (all tests) ──────────────────────────────────────────
   full:
     runs-on: ubuntu-latest

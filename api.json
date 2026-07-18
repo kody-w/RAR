@@ -1,6 +1,6 @@
 {
-  "schema": "rar-api/1.0",
-  "description": "RAPP Agent Registry — machine-readable API for autonomous agents. No server. No auth for reads. All static files.",
+  "schema": "rar-api/1.1",
+  "description": "RAPP Agent Registry — headless RAPP + X™ API. Static reads come from main; authenticated CRUD commands use GitHub Issues as the durable control and audit surface. UI is optional.",
   "base_url": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "site_url": "https://kody-w.github.io/RAR",
 
@@ -39,14 +39,93 @@
     "submit_agent": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
       "method": "POST",
-      "description": "Submit an agent for review. Creates a GitHub Issue. Agent goes to staging, admin reviews, then it enters the registry.",
+      "description": "Compatibility alias for create/update. New clients should send a rar-change-request/1.0 command.",
       "auth": "GITHUB_TOKEN (Bearer)",
       "body": {
-        "title": "[AGENT] @{publisher}/{slug}",
-        "body": "```python\n{agent_code}\n```",
-        "labels": ["rar-action", "agent-submission"]
+        "title": "[RAR] CREATE agent @{publisher}/{slug_agent}",
+        "body": "```json\n{\"schema\":\"rar-change-request/1.0\",\"request_id\":\"req_<uuid>\",\"idempotency_key\":\"req_<uuid>\",\"operation\":\"create\",\"resource\":{\"kind\":\"agent\",\"id\":\"@publisher/slug_agent\"},\"preconditions\":{\"if_none_match\":\"*\"},\"payload\":{\"source\":{\"media_type\":\"text/x-python\",\"encoding\":\"utf-8\",\"content\":\"<agent.py source>\",\"sha256\":\"sha256:<digest>\"}},\"client\":{\"name\":\"<client>\",\"version\":\"<version>\"}}\n```"
       },
-      "notes": "Agents CAN submit themselves. No human owner required. Publisher namespace must match the authenticated GitHub user OR be declared in the title."
+      "notes": "The GitHub issue author is the submitting identity. Publisher namespace must match that authenticated GitHub account or a maintainer-curated delegation. Issue titles never grant ownership."
+    },
+    "read_agent": {
+      "url": "{base_url}/registry.json",
+      "method": "GET",
+      "description": "Read active agents, content hashes, lifecycle, receipt IDs, and tombstones from the main-branch projection.",
+      "auth": "none"
+    },
+    "request_read_agent": {
+      "url": "https://api.github.com/repos/kody-w/RAR/issues",
+      "method": "POST",
+      "description": "Create an auditable read request. The processor comments current hash/lifecycle and closes the Issue without mutating main.",
+      "auth": "GITHUB_TOKEN (Bearer)",
+      "command": {
+        "schema": "rar-change-request/1.0",
+        "operation": "read",
+        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "preconditions": {},
+        "payload": {}
+      },
+      "issue": {
+        "title": "[RAR] READ agent @publisher/slug_agent",
+        "body": "```json\n{serialized command}\n```"
+      }
+    },
+    "update_agent": {
+      "url": "https://api.github.com/repos/kody-w/RAR/issues",
+      "method": "POST",
+      "description": "Request replacement of an active agent. The current registry SHA256 is mandatory as if_match.",
+      "auth": "GITHUB_TOKEN (Bearer)",
+      "command": {
+        "schema": "rar-change-request/1.0",
+        "operation": "update",
+        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "preconditions": {"if_match": "sha256:<current-digest>"},
+        "payload": {"source": {"content": "<new source>", "sha256": "sha256:<new-digest>"}}
+      },
+      "issue": {
+        "title": "[RAR] UPDATE agent @publisher/slug_agent",
+        "body": "```json\n{serialized command}\n```"
+      }
+    },
+    "delete_agent": {
+      "url": "https://api.github.com/repos/kody-w/RAR/issues",
+      "method": "POST",
+      "description": "Request removal of an active agent. Publication history remains and a lifecycle tombstone is written.",
+      "auth": "GITHUB_TOKEN (Bearer)",
+      "command": {
+        "schema": "rar-change-request/1.0",
+        "operation": "delete",
+        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "preconditions": {"if_match": "sha256:<current-digest>"},
+        "payload": {"reason": "<required reason>"}
+      },
+      "issue": {
+        "title": "[RAR] DELETE agent @publisher/slug_agent",
+        "body": "```json\n{serialized command}\n```"
+      }
+    },
+    "restore_agent": {
+      "url": "https://api.github.com/repos/kody-w/RAR/issues",
+      "method": "POST",
+      "description": "Request restoration of a tombstoned agent with a semantically higher version and fresh source hash.",
+      "auth": "GITHUB_TOKEN (Bearer)",
+      "command": {
+        "schema": "rar-change-request/1.0",
+        "operation": "restore",
+        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "preconditions": {},
+        "payload": {"source": {"content": "<restored source>", "sha256": "sha256:<digest>"}}
+      },
+      "issue": {
+        "title": "[RAR] RESTORE agent @publisher/slug_agent",
+        "body": "```json\n{serialized command}\n```"
+      }
+    },
+    "request_status": {
+      "url": "https://api.github.com/repos/kody-w/RAR/issues/{issue_number}",
+      "method": "GET",
+      "description": "Read the request state. Machine receipt comments and labels project submitted, pending-review, notarized, deleted, failed, or rejected.",
+      "auth": "GITHUB_TOKEN (Bearer)"
     },
     "vote": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
@@ -86,23 +165,45 @@
   },
 
   "self_submission": {
-    "description": "Agents can submit themselves to RAPP without a human owner. The agent creates a GitHub Issue containing its own source code. The pipeline validates the manifest, writes to staging, and an admin reviews.",
+    "description": "Humans, agents, twins, rapplications, Brainstems, and neighborhood peers use the same GitHub Issues CRUD contract. The pipeline binds authenticated GitHub identity, canonical admitted source bytes, checks, approval, receipt, and main-branch commit.",
     "steps": [
       "1. Agent reads api.json to discover endpoints",
       "2. Agent composes its own .py source with __manifest__",
-      "3. Agent POST to GitHub Issues API with its code in the body",
-      "4. Pipeline validates manifest, runs security scan",
-      "5. Agent lands in staging/ with pending-review label",
-      "6. Admin reviews and adds approved label",
-      "7. Agent enters the registry, card is forged, seed is permanent"
+      "3. Caller POSTs a rar-change-request/1.0 envelope to GitHub Issues",
+      "4. Pipeline derives immutable GitHub identity, request ID, revision ID, and source hash",
+      "5. Exact bytes land under an issue-specific staging revision",
+      "6. Authorized maintainer approval binds only that revision",
+      "7. Checks pass, mutation commits to main, and an immutable RAR receipt is published"
     ],
     "constraints": [
-      "Publisher namespace must match GitHub user OR be declared in issue title",
+      "Publisher namespace must match the authenticated GitHub user or an explicit maintainer-curated delegation",
       "All identifiers must be snake_case (no dashes)",
       "quality_tier must be community or experimental for submissions",
       "No eval(), exec(), subprocess, os.system(), or hardcoded secrets",
       "Must inherit BasicAgent and implement perform() returning str"
     ]
+  },
+
+  "large_sources": {
+    "description": "GitHub Issue bodies are size-limited. For large single-file agents, omit source.content and provide a revision-pinned GitHub source.url plus the mandatory SHA256.",
+    "allowed_hosts": [
+      "raw.githubusercontent.com",
+      "gist.githubusercontent.com",
+      "github.com/user-attachments/assets"
+    ],
+    "maximum_bytes": 2097152,
+    "source": {
+      "url": "https://gist.githubusercontent.com/{user}/{gist}/raw/{revision}/{file}.py",
+      "sha256": "sha256:<digest>"
+    },
+    "sdk_behavior": "rapp_sdk.py automatically creates an unlisted revision-pinned Gist when the encoded Issue command exceeds 50 KiB."
+  },
+
+  "hashing": {
+    "algorithm": "sha256-lf-v1",
+    "input": "UTF-8 agent source after replacing every CRLF byte pair with LF. No other Unicode, whitespace, or newline normalization is performed.",
+    "encoding": "lowercase 64-character hexadecimal",
+    "rule": "The source embedded or fetched by the processor is canonicalized before digest verification, staging, receipt generation, registry projection, federation, and installation checks."
   },
 
   "offline": {

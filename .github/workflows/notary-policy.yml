@@ -1,0 +1,39 @@
+name: Notary Policy
+
+on:
+  pull_request_target:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  protected-state:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out trusted validator
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: trusted
+          fetch-depth: 1
+
+      - name: Check out candidate without executing it
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Enforce Issue-only canonical mutations
+        run: |
+          python trusted/scripts/check_notarized_changes.py \
+            --repo-root candidate \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --pull-request

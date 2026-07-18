@@ -1,0 +1,57 @@
+{
+  "schema": "rar-legacy-migration/1.0",
+  "baseline_commit": "96270009e475d14e1df26f71b4985ab5d5f45a38",
+  "audited_at": "2026-07-18T20:45:00Z",
+  "policy": "Historical labels are evidence, not notarization receipts.",
+  "records": [
+    {
+      "issue": 42,
+      "agent": "@kody-w/rapp_egg_agent",
+      "classification": "forged_label_without_active_artifact",
+      "staged_version": "1.0.0",
+      "staged_sha256": "eec0c35da09a0d014c13279e1ee8f8b5ea5be69c4058d39efe1588d962945048",
+      "action": "resubmit_exact_staged_bytes_through_v1"
+    },
+    {
+      "issue": 107,
+      "agent": "@kody-w/project_twin_agent",
+      "classification": "forged_label_without_active_artifact",
+      "staged_version": "0.3.2",
+      "staged_sha256": "6246c42693d2d4d75ce91a85cf0ae65a38acdb1181fa76ca5ad3c3399419d4d4",
+      "action": "resubmit_exact_staged_bytes_through_v1"
+    },
+    {
+      "issue": 71,
+      "agent": "@aibast-agents-library/software_competitive_intel",
+      "classification": "active_legacy_artifact_with_stale_open_issue",
+      "active_version": "1.0.1",
+      "active_sha256": "80256ede5b5b26910a34fb6729f2fedfc87db615ab77d6cedb03f458bb0c9f4f",
+      "action": "close_as_legacy_reconciled_without_notarization_claim"
+    },
+    {
+      "issues": [78, 79],
+      "agent": "@kody/m365_template_factory_agent",
+      "classification": "duplicate_pending_submission",
+      "staged_version": "1.0.0",
+      "staged_sha256": "5b3d3a307463e8616e6688fd8d70289e3aedf4d3b97a6765f0e22188b6631422",
+      "action": "submit_one_v1_request_and_close_both_legacy_duplicates"
+    },
+    {
+      "issue": 102,
+      "agent": "@rapp/_smoke_test_agent",
+      "classification": "obsolete_legacy_smoke_fixture",
+      "staged_version": "1.0.0",
+      "staged_sha256": "5204722f4613c6189088203ed70fcc1338654149316df9771ba5ef6fdaa9e234",
+      "action": "close_and_remove_after_new_receipt_backed_smoke_canary"
+    }
+  ],
+  "duplicate_files": [
+    {
+      "files": [
+        "staging/@kody-w/rapp_egg_agent.py",
+        "staging/@kody-w/rapp_egg_agent 2.py"
+      ],
+      "sha256": "eec0c35da09a0d014c13279e1ee8f8b5ea5be69c4058d39efe1588d962945048"
+    }
+  ]
+}

@@ -2,170 +2,273 @@ name: Process Community Issues
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited, reopened, closed]
   workflow_dispatch:
     inputs:
       issue_number:
-        description: 'Issue number to reprocess'
-        required: false
+        description: Issue number to reconcile
+        required: true
 
 permissions:
   contents: write
   issues: write
 
 concurrency:
-  group: state-writer
+  group: rar-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}
   cancel-in-progress: false
 
 jobs:
   process:
     runs-on: ubuntu-latest
-    # Only process issues with the RAR action prefix in title
     if: >
       github.event_name == 'workflow_dispatch' ||
-      startsWith(github.event.issue.title, '[RAR]') ||
-      startsWith(github.event.issue.title, '[AGENT]')
+      (
+        (
+          startsWith(github.event.issue.title, '[RAR]') ||
+          startsWith(github.event.issue.title, '[AGENT]')
+        ) &&
+        (
+          github.event.action == 'closed' ||
+          (
+            !contains(github.event.issue.labels.*.name, 'notarized') &&
+            !contains(github.event.issue.labels.*.name, 'deleted') &&
+            !contains(github.event.issue.labels.*.name, 'forged') &&
+            !contains(github.event.issue.labels.*.name, 'processed') &&
+            !contains(github.event.issue.labels.*.name, 'rejected')
+          )
+        )
+      )
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Fetch issue for manual dispatch
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.issue_number != ''
-        run: |
-          gh api repos/${{ github.repository }}/issues/${{ github.event.inputs.issue_number }} > /tmp/manual_issue.json
-          # Wrap in the event format process_issues expects
-          python3 -c "
-          import json
-          issue = json.load(open('/tmp/manual_issue.json'))
-          event = {'issue': issue}
-          json.dump(event, open('/tmp/dispatch_event.json', 'w'))
-          "
+      - name: Synchronize main
+        run: git pull --ff-only origin main
+
+      - name: Fetch current issue revision
         env:
           GH_TOKEN: ${{ github.token }}
-
-      - name: Process issue
-        id: process
-        env:
-          GITHUB_EVENT_PATH: ${{ github.event_name == 'workflow_dispatch' && '/tmp/dispatch_event.json' || github.event_path }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          REPOSITORY_ID: ${{ github.repository_id }}
         run: |
-          python scripts/process_issues.py --event-path "$GITHUB_EVENT_PATH" 2>&1 | tee /tmp/result.txt
-          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUMBER}" \
+            > /tmp/current_issue.json
+          python3 - <<'PY'
+          import json
+          import os
 
-      - name: Rebuild registry (votes/reviews only — agents stay in staging)
-        if: steps.process.outputs.exit_code == '0'
+          issue = json.load(open("/tmp/current_issue.json", encoding="utf-8"))
+          event = {
+              "issue": issue,
+              "repository": {
+                  "id": int(os.environ["REPOSITORY_ID"]),
+                  "full_name": "${{ github.repository }}",
+              },
+          }
+          json.dump(event, open("/tmp/current_event.json", "w", encoding="utf-8"))
+          PY
+
+      - name: Process current issue revision
+        id: process
+        run: |
+          set +e
+          python scripts/process_issues.py --event-path /tmp/current_event.json \
+            2>&1 | tee /tmp/result.txt
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          exit "$status"
+
+      - name: Rebuild registry projection
+        if: >
+          steps.process.outputs.success == 'true' &&
+          (
+            steps.process.outputs.action == 'vote' ||
+            steps.process.outputs.action == 'review'
+          )
         run: python build_registry.py
 
-      - name: Commit state changes
-        if: always()
+      - name: Commit staged request or state
+        if: >
+          steps.process.outputs.success == 'true' &&
+          steps.process.outputs.action != 'agent.read' &&
+          steps.process.outputs.action != 'skipped'
         env:
-          ISSUE_NUM: ${{ github.event.issue.number || github.event.inputs.issue_number || '0' }}
+          ISSUE_NUM: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          REVISION_ID: ${{ steps.process.outputs.revision_id }}
+          ACTION: ${{ steps.process.outputs.action }}
+          SOURCE_BODY_SHA256: ${{ steps.process.outputs.source_body_sha256 }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUM}" \
+            > /tmp/precommit_issue.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+
+          issue = json.load(open("/tmp/precommit_issue.json", encoding="utf-8"))
+          action = os.environ["ACTION"]
+          if action == "agent.cancel":
+              if issue.get("state") != "closed":
+                  raise SystemExit("Cancellation issue reopened before commit")
+          else:
+              if issue.get("state") != "open":
+                  raise SystemExit("Issue closed before staging commit")
+              digest = hashlib.sha256((issue.get("body") or "").encode()).hexdigest()
+              if digest != os.environ["SOURCE_BODY_SHA256"]:
+                  raise SystemExit("Issue body changed before staging commit")
+          PY
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add state/ registry.json staging/ || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Process issue #${ISSUE_NUM} [skip ci]"
-            for i in 1 2 3 4 5; do
-              git push && break
-              echo "Push attempt $i failed, rebasing..."
-              git pull --rebase origin main || git rebase --abort
-              if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
-                git rebase --abort
-                git pull origin main --no-rebase
-                git add state/ registry.json staging/ || true
-                git diff --cached --quiet || git commit -m "Process issue #${ISSUE_NUM} (retry) [skip ci]"
-              fi
-            done
+          if git diff --cached --quiet; then
+            exit 0
           fi
+          git commit \
+            -m "Stage RAR request from #${ISSUE_NUM} [skip ci]" \
+            -m "RAR-Revision: ${REVISION_ID:-state-only}"
+          git push origin HEAD:main
 
-      - name: Label submission for review (pending)
-        if: steps.process.outputs.exit_code == '0'
+      - name: Project success onto issue
+        if: >
+          steps.process.outputs.success == 'true' &&
+          steps.process.outputs.status != 'skipped'
         uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          ACTION: ${{ steps.process.outputs.action }}
+          AGENT: ${{ steps.process.outputs.agent }}
+          REQUEST_ID: ${{ steps.process.outputs.request_id }}
+          REVISION_ID: ${{ steps.process.outputs.revision_id }}
+          STATUS: ${{ steps.process.outputs.status }}
+          RESULT_JSON: ${{ steps.process.outputs.result }}
+          SOURCE_BODY_SHA256: ${{ steps.process.outputs.source_body_sha256 }}
         with:
           script: |
-            const issueNumber = context.issue?.number || ${{ github.event.inputs.issue_number || 0 }};
+            const crypto = require('crypto');
+            const issueNumber = Number(process.env.ISSUE_NUMBER);
             if (!issueNumber) return;
-            // Guard: don't mutate issues already in a terminal state
             const { data: issue } = await github.rest.issues.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
             });
-            const labels = issue.labels.map(l => l.name || l);
-            const terminal = ['approved', 'forged', 'processed'];
-            if (terminal.some(l => labels.includes(l))) {
-              console.log(`Issue #${issueNumber} already terminal (${labels.join(',')}) — skipping`);
+            const labels = issue.labels.map(label => label.name || label);
+            const terminal = ['notarized', 'deleted', 'forged', 'processed', 'rejected'];
+            if (issue.state !== 'open' || terminal.some(label => labels.includes(label))) {
+              console.log('Issue became terminal while processing; projection skipped');
               return;
             }
-            const fs = require('fs');
-            let result = '';
-            try { result = fs.readFileSync('/tmp/result.txt', 'utf8'); } catch(e) {}
-            const isSubmission = result.includes('pending_review');
-            if (isSubmission) {
+            const currentBodyHash = crypto
+              .createHash('sha256')
+              .update(issue.body || '', 'utf8')
+              .digest('hex');
+            if (
+              process.env.SOURCE_BODY_SHA256 &&
+              currentBodyHash !== process.env.SOURCE_BODY_SHA256
+            ) {
+              console.log('Issue body changed while processing; newer event will reconcile');
+              return;
+            }
+            const marker = `<!-- rar-receipt:v1 request=${process.env.REQUEST_ID || 'state'} revision=${process.env.REVISION_ID || 'state'} event=staged -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              per_page: 100,
+            });
+            const pending = process.env.STATUS === 'pending_review';
+            if (!comments.some(comment => (comment.body || '').includes(marker))) {
+              const body = pending
+                ? `${marker}\n📋 **Validated and staged for review.**\n\n` +
+                  `- Agent: \`${process.env.AGENT}\`\n` +
+                  `- Request: \`${process.env.REQUEST_ID}\`\n` +
+                  `- Revision: \`${process.env.REVISION_ID}\`\n\n` +
+                  `Approval applies only to these exact staged bytes.`
+                : `${marker}\n✅ Processed successfully.\n\n` +
+                  `\`\`\`json\n${process.env.RESULT_JSON}\n\`\`\``;
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                body: '📋 Agent staged for review. An admin will review and approve before it enters the registry.\n\nThe card will be forged upon approval — card details are determined by the forge, not the submitter.'
+                body,
               });
+            }
+            const removable = [
+              'approved', 'conflict', 'failed',
+            ];
+            for (const name of removable) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  name,
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+            }
+            if (pending) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                labels: ['pending-review', 'agent-submission']
+                labels: ['pending-review', 'agent-submission'],
               });
             } else {
-              await github.rest.issues.createComment({
+              await github.rest.issues.addLabels({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                body: '✅ Processed successfully! State updated.'
+                labels: ['processed'],
               });
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
                 state: 'closed',
-                labels: ['processed']
               });
             }
 
-      - name: Comment on issue (failure)
-        if: steps.process.outputs.exit_code != '0'
+      - name: Project failure onto issue
+        if: failure()
         uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         with:
           script: |
-            const issueNumber = context.issue?.number || ${{ github.event.inputs.issue_number || 0 }};
-            if (issueNumber) {
-              // Guard: don't clobber labels if the issue was already approved/forged/processed
-              const { data: issue } = await github.rest.issues.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issueNumber,
-              });
-              const labels = issue.labels.map(l => l.name || l);
-              const protected_labels = ['approved', 'forged', 'processed'];
-              if (protected_labels.some(l => labels.includes(l))) {
-                console.log(`Issue #${issueNumber} already has ${labels.join(',')} — skipping failure labeling`);
-                return;
-              }
-              const fs = require('fs');
-              let detail = '';
-              try { detail = fs.readFileSync('/tmp/result.txt', 'utf8'); } catch(e) {}
+            const fs = require('fs');
+            const issueNumber = Number(process.env.ISSUE_NUMBER);
+            if (!issueNumber) return;
+            let detail = '';
+            try { detail = fs.readFileSync('/tmp/result.txt', 'utf8'); } catch {}
+            const marker = '<!-- rar-receipt:v1 event=validation-failed -->';
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              per_page: 100,
+            });
+            if (!comments.some(comment => (comment.body || '').includes(marker))) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                body: `❌ Processing failed.\n\n\`\`\`\n${detail.slice(0, 500)}\n\`\`\``
-              });
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issueNumber,
-                state: 'closed',
-                labels: ['failed']
+                body: `${marker}\n❌ Validation failed.\n\n\`\`\`\n${detail.slice(0, 1000)}\n\`\`\``,
               });
             }
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: ['failed'],
+            });

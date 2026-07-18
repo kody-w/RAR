@@ -1,4 +1,4 @@
-name: Approve Agent Submission
+name: Notarize Agent Mutation
 
 on:
   issues:
@@ -9,18 +9,32 @@ permissions:
   issues: write
 
 concurrency:
-  group: state-writer
+  group: rar-issue-${{ github.event.issue.number }}
   cancel-in-progress: false
 
 jobs:
-  approve:
+  notarize:
     runs-on: ubuntu-latest
-    # Only fires when admin adds 'approved' label to an open pending submission
     if: >
       github.event.label.name == 'approved' &&
       github.event.issue.state == 'open' &&
       contains(github.event.issue.labels.*.name, 'agent-submission')
     steps:
+      - name: Authorize approver
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor,
+            });
+            if (!['admin', 'maintain'].includes(data.permission)) {
+              core.setFailed(
+                `@${context.actor} has ${data.permission} permission; maintain or admin is required`
+              );
+            }
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -29,114 +43,200 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Promote staging → agents
-        id: promote
+      - name: Install admission test dependencies
+        run: pip install pytest pyyaml
+
+      - name: Synchronize main
+        run: git pull --ff-only origin main
+
+      - name: Fetch current issue revision
         env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          python -c "
-          import ast, json, re, shutil, sys, hashlib, os
-          from pathlib import Path
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUMBER}" \
+            > /tmp/current_issue.json
+          python3 - <<'PY'
+          import json
+          import hashlib
+          import os
 
-          staging = Path('staging')
-          agents = Path('agents')
+          current = json.load(open("/tmp/current_issue.json", encoding="utf-8"))
+          original = json.load(open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8"))
+          labels = {
+              label["name"] if isinstance(label, dict) else str(label)
+              for label in current.get("labels", [])
+          }
+          if current.get("state") != "open":
+              raise SystemExit("Issue is no longer open")
+          if not {"approved", "agent-submission"} <= labels:
+              raise SystemExit("Current issue is no longer approved")
+          original_body = (original.get("issue") or {}).get("body") or ""
+          current_body = current.get("body") or ""
+          if hashlib.sha256(original_body.encode()).digest() != hashlib.sha256(
+              current_body.encode()
+          ).digest():
+              raise SystemExit("Issue body changed after approval was applied")
+          event = {
+              "issue": current,
+              "repository": original.get("repository", {}),
+              "sender": original.get("sender", {}),
+          }
+          json.dump(event, open("/tmp/approval_event.json", "w", encoding="utf-8"))
+          PY
 
-          # Extract agent name from issue title: [AGENT] @publisher/slug
-          title = os.environ.get('ISSUE_TITLE', '')
-          m = re.search(r'\[AGENT\]\s*(@[^/\s]+/[^\s]+)', title)
-          target_slug = None
-          if m:
-              raw = m.group(1)
-              parts = raw.split('/')
-              publisher = parts[0]
-              slug = parts[1]
-              if not slug.endswith('_agent'):
-                  slug += '_agent'
-              target_slug = f'{publisher}/{slug}.py'
-              print(f'Scoped promotion: only {target_slug}')
+      - name: Apply exact staged revision
+        id: apply
+        run: python scripts/apply_agent_mutation.py --event-path /tmp/approval_event.json
 
-          promoted = []
-
-          for py in staging.rglob('*.py'):
-              if py.name == '.gitkeep':
-                  continue
-              rel = py.relative_to(staging)
-              # Only promote the specific file tied to this issue
-              if target_slug and str(rel) != target_slug:
-                  print(f'Skipping {rel} (not target)')
-                  continue
-              dest = agents / rel
-              dest.parent.mkdir(parents=True, exist_ok=True)
-              shutil.move(str(py), str(dest))
-              promoted.append(str(rel))
-              print(f'Promoted: {rel}')
-
-          # Clean empty staging dirs
-          for d in sorted(staging.rglob('*'), reverse=True):
-              if d.is_dir() and not any(d.iterdir()):
-                  d.rmdir()
-
-          if not promoted:
-              print('Nothing to promote')
-              sys.exit(0)
-
-          # Write list for downstream steps
-          Path('/tmp/promoted.txt').write_text('\n'.join(promoted))
-          print(f'Total promoted: {len(promoted)}')
-          "
-
-      # Build registry FIRST so the card forge sees the just-promoted agent.
-      # generate_holo_cards.py iterates over registry.json — running it before
-      # build_registry.py leaves new agents un-forged (_has_card: false).
-      - name: Build registry (pre-forge — surfaces the promoted agent)
-        run: python build_registry.py
-
-      - name: Forge cards for approved agents
+      - name: Run admission checks
+        if: steps.apply.outputs.already_applied != 'true'
         run: |
-          if [ -f /tmp/promoted.txt ]; then
-            python scripts/generate_holo_cards.py
-          fi
+          set -euo pipefail
+          python security_scan.py
+          python build_registry.py
+          python scripts/generate_holo_cards.py
+          python build_registry.py
+          python -m pytest -q
 
-      # Rebuild so build_registry.py's _has_card check picks up the new card.
-      - name: Build registry (post-forge — flips _has_card)
-        run: python build_registry.py
-
-      - name: Commit approved agents
+      - name: Commit notarized mutation
+        id: commit
+        if: steps.apply.outputs.already_applied != 'true'
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          AGENT: ${{ steps.apply.outputs.agent }}
+          REVISION_ID: ${{ steps.apply.outputs.revision_id }}
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUMBER}" \
+            > /tmp/precommit_issue.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+
+          approved = json.load(open("/tmp/approval_event.json", encoding="utf-8"))
+          current = json.load(open("/tmp/precommit_issue.json", encoding="utf-8"))
+          labels = {
+              label["name"] if isinstance(label, dict) else str(label)
+              for label in current.get("labels", [])
+          }
+          if current.get("state") != "open" or not {
+              "approved", "agent-submission"
+          } <= labels:
+              raise SystemExit("Issue is no longer approved before commit")
+          approved_hash = hashlib.sha256(
+              ((approved.get("issue") or {}).get("body") or "").encode()
+          ).digest()
+          current_hash = hashlib.sha256((current.get("body") or "").encode()).digest()
+          if approved_hash != current_hash:
+              raise SystemExit("Issue body changed before notarization commit")
+          PY
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add agents/ staging/ registry.json cards/ || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Approved agent submission from #${{ github.event.issue.number }} [skip ci]"
-            for i in 1 2 3 4 5; do
-              git push && break
-              echo "Push attempt $i failed, rebasing..."
-              git pull --rebase origin main || git rebase --abort
-              # Re-stage and re-commit if rebase had conflicts
-              if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
-                git rebase --abort
-                git pull origin main --no-rebase
-                git add agents/ staging/ registry.json cards/ || true
-                git diff --cached --quiet || git commit -m "Approved agent submission from #${{ github.event.issue.number }} (retry) [skip ci]"
-              fi
-            done
-          fi
+          git add agents/ staging/ state/ registry.json cards/ api/v1/ || true
+          test -n "$(git diff --cached --name-only)"
+          git commit \
+            -m "Notarize ${AGENT} from #${ISSUE_NUMBER}" \
+            -m "RAR-Revision: ${REVISION_ID}" \
+            -m "RAR-Receipt: ${RECEIPT}" \
+            -m "RAR-Issue: #${ISSUE_NUMBER}" \
+            -m "RAR-Approved-By: ${{ github.event.sender.id }}"
+          git push origin HEAD:main
+          commit_sha=$(git rev-parse HEAD)
+          git fetch origin main
+          git merge-base --is-ancestor "$commit_sha" origin/main
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
 
-      - name: Close issue as approved
+      - name: Resolve publication commit
+        id: publication
+        env:
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          COMMIT_SHA: ${{ steps.commit.outputs.commit_sha }}
+        run: |
+          set -euo pipefail
+          commit_sha="$COMMIT_SHA"
+          if [ -z "$commit_sha" ]; then
+            commit_sha=$(git log -1 --format=%H -- "$RECEIPT")
+          fi
+          test -n "$commit_sha"
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Publish notarization receipt
         uses: actions/github-script@v7
+        env:
+          AGENT: ${{ steps.apply.outputs.agent }}
+          REVISION_ID: ${{ steps.apply.outputs.revision_id }}
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          STATUS: ${{ steps.apply.outputs.status }}
+          COMMIT_SHA: ${{ steps.publication.outputs.commit_sha }}
         with:
           script: |
             const issueNumber = context.issue.number;
-            await github.rest.issues.createComment({
+            const marker = `<!-- rar-receipt:v1 revision=${process.env.REVISION_ID} event=applied -->`;
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
-              body: '✅ **Approved and forged.** Agent promoted to the registry. Card details determined by the forge based on the agent code.\n\nWelcome to RAPP.'
+              per_page: 100,
+            });
+            if (!comments.some(comment => (comment.body || '').includes(marker))) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: `${marker}\n✅ **RAR notarization complete.**\n\n` +
+                  `- Agent: \`${process.env.AGENT}\`\n` +
+                  `- Revision: \`${process.env.REVISION_ID}\`\n` +
+                  `- Receipt: \`${process.env.RECEIPT}\`\n` +
+                  `- Commit: \`${process.env.COMMIT_SHA}\`\n` +
+                  `- Lifecycle: \`${process.env.STATUS}\`\n\n` +
+                  `This receipt binds the exact admitted bytes to the checks run above.`,
+              });
+            }
+            const finalLabel = process.env.STATUS === 'deleted' ? 'deleted' : 'notarized';
+            for (const name of ['pending-review', 'failed', 'conflict']) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  name,
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+            }
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: ['approved', finalLabel],
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
               state: 'closed',
-              labels: ['approved', 'forged']
+            });
+
+      - name: Report notarization failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.issue.number;
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: ['failed'],
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: '❌ RAR notarization or Issue projection failed. Repository receipts remain authoritative. Correct the failure, then remove and re-add `approved` to reconcile safely.',
             });

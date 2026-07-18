@@ -365,7 +365,7 @@ const API = `https://api.github.com/repos/${OWNER}/${REPO}`;
 const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
 const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
 
-let ghToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token');
+let ghToken = sessionStorage.getItem('rb_access_token') || sessionStorage.getItem('gh_token');
 let ghUser = null;
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
@@ -526,32 +526,40 @@ async function processIssue(num) {
 async function retryIssue(num) {
   if (!ghToken) return showToast('Sign in first', 'error');
   try {
-    // Fetch issue to check if it's an agent submission
     const issueResp = await fetch(`${API}/issues/${num}`, { headers: authHeaders() });
     const issue = issueResp.ok ? await issueResp.json() : {};
-    const isAgent = (issue.title || '').startsWith('[AGENT]');
-    // Reopen the issue
-    await fetch(`${API}/issues/${num}`, {
-      method: 'PATCH', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ state: 'open' })
-    });
-    // Remove failed label
+    const labels = (issue.labels || []).map(label => label.name || label);
     try {
       await fetch(`${API}/issues/${num}/labels/failed`, {
         method: 'DELETE', headers: authHeaders()
       });
     } catch {}
-    // Restore labels — include agent-submission if it's an [AGENT] issue
-    const restoreLabels = isAgent ? ['pending-review', 'agent-submission'] : ['pending-review'];
-    await fetch(`${API}/issues/${num}/labels`, {
-      method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ labels: restoreLabels })
-    });
+    if (labels.includes('approved')) {
+      try {
+        await fetch(`${API}/issues/${num}/labels/approved`, {
+          method: 'DELETE', headers: authHeaders()
+        });
+      } catch {}
+      await fetch(`${API}/issues/${num}/labels`, {
+        method: 'POST',
+        headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ labels: ['approved'] })
+      });
+    } else {
+      await fetch(`${API}/issues/${num}`, {
+        method: 'PATCH',
+        headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          state: 'open',
+          body: `${issue.body || ''}\n<!-- rar-reconcile:${Date.now()} -->`
+        })
+      });
+    }
     await fetch(`${API}/issues/${num}/comments`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ body: `↻ Retried by @${ghUser.login} via RAR Admin — reopened for review` })
+      body: JSON.stringify({ body: `↻ Reconciliation requested by @${ghUser.login} via RAR Admin` })
     });
-    showToast(`#${num} reopened for review`, 'success');
+    showToast(`#${num} queued for safe reconciliation`, 'success');
     loadPipeline();
   } catch (e) { showToast(`Failed: ${e.message}`, 'error'); }
 }
@@ -576,7 +584,7 @@ async function handleAuthCallback() {
     const data = await resp.json();
     if (data.access_token) {
       ghToken = data.access_token;
-      localStorage.setItem('rb_access_token', ghToken);
+      sessionStorage.setItem('rb_access_token', ghToken);
       checkAuth();
       showToast('Signed in!', 'success');
     }
@@ -589,14 +597,14 @@ function checkAuth() {
     .then(r => r.ok ? r.json() : null)
     .then(u => {
       if (u) { ghUser = u; renderAuthBar(); }
-      else { ghToken = null; localStorage.removeItem('rb_access_token'); localStorage.removeItem('gh_token'); }
+      else { ghToken = null; sessionStorage.removeItem('rb_access_token'); sessionStorage.removeItem('gh_token'); }
     }).catch(() => {});
 }
 
 function logout() {
   ghToken = null; ghUser = null;
-  localStorage.removeItem('rb_access_token');
-  localStorage.removeItem('gh_token');
+  sessionStorage.removeItem('rb_access_token');
+  sessionStorage.removeItem('gh_token');
   renderAuthBar();
   loadPipeline();
   showToast('Signed out', 'success');
@@ -847,6 +855,7 @@ async function runSmokeTest() {
 
   const startTime = Date.now();
   let issueNum = null;
+  let deleteIssueNum = null;
 
   try {
     // ── Pre-flight: ensure staging is empty ──
@@ -866,15 +875,50 @@ async function runSmokeTest() {
     // ── Step 1: Create test issue ──
     setStep(1, 'active');
     slog('Step 1: Creating test submission issue…', 'info');
+    const smokeVersion = `1.0.${Date.now()}`;
+    const smokeCode = SMOKE_AGENT_CODE.replace(
+      '"version": "1.0.0"',
+      `"version": "${smokeVersion}"`
+    );
+    const registryResp = await fetch(
+      `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/registry.json?t=${Date.now()}`
+    );
+    if (!registryResp.ok) throw new Error('Could not load registry precondition');
+    const registry = await registryResp.json();
+    const activeSmoke = (registry.agents || [])
+      .find(agent => agent.name === '@rapp/_smoke_test_agent');
+    const smokeTombstone = (registry.lifecycle?.tombstones || [])
+      .find(item => item.agent === '@rapp/_smoke_test_agent');
+    const operation = activeSmoke ? 'update' : (smokeTombstone ? 'restore' : 'create');
+    const smokeDigest = Array.from(new Uint8Array(await crypto.subtle.digest(
+      'SHA-256',
+      new TextEncoder().encode(smokeCode.replace(/\r\n/g, '\n'))
+    ))).map(byte => byte.toString(16).padStart(2, '0')).join('');
+    const requestId = `req_${crypto.randomUUID().replaceAll('-', '')}`;
     const issueBody = '```json\n' + JSON.stringify({
-      action: 'submit_agent',
-      payload: { code: SMOKE_AGENT_CODE }
+      schema: 'rar-change-request/1.0',
+      request_id: requestId,
+      idempotency_key: requestId,
+      operation,
+      resource: { kind: 'agent', id: '@rapp/_smoke_test_agent' },
+      preconditions: activeSmoke
+        ? { if_match: `sha256:${activeSmoke._sha256}` }
+        : (operation === 'create' ? { if_none_match: '*' } : {}),
+      payload: {
+        source: {
+          media_type: 'text/x-python',
+          encoding: 'utf-8',
+          content: smokeCode.replace(/\r\n/g, '\n'),
+          sha256: `sha256:${smokeDigest}`,
+        },
+      },
+      client: { name: 'rar-admin-smoke', version: '1.0.0' },
     }, null, 2) + '\n```';
 
     const createResp = await ghFetch('/issues', {
       method: 'POST',
       body: JSON.stringify({
-        title: '[AGENT] @rapp/_smoke_test_agent',
+        title: `[RAR] ${operation.toUpperCase()} agent @rapp/_smoke_test_agent`,
         body: issueBody,
         labels: ['smoke-test'],
       }),
@@ -913,15 +957,15 @@ async function runSmokeTest() {
     slog('  ✓ Approved label added — approve-agent.yml should trigger', 'pass');
     setStep(3, 'done');
 
-    // ── Step 4: Wait for forge (approved + forged labels, issue closed) ──
+    // ── Step 4: Wait for exact-byte notarization ──
     setStep(4, 'active');
-    slog('Step 4: Waiting for approve-agent.yml to forge…', 'info');
-    const forged = await pollForLabel(issueNum, 'forged', 180000);
-    if (!forged) {
-      slog('  ✗ Timed out waiting for forge (3 min)', 'fail');
-      throw new Error('Forge timeout');
+    slog('Step 4: Waiting for exact-byte notarization…', 'info');
+    const notarized = await pollForLabel(issueNum, 'notarized', 300000);
+    if (!notarized) {
+      slog('  ✗ Timed out waiting for notarization (5 min)', 'fail');
+      throw new Error('Notarization timeout');
     }
-    slog('  ✓ Agent forged by CI', 'pass');
+    slog('  ✓ Agent notarized by CI', 'pass');
 
     // Verify file exists on main
     slog('  Verifying agent file on main branch…', 'info');
@@ -933,62 +977,49 @@ async function runSmokeTest() {
     slog('  ✓ Agent file verified on main', 'pass');
     setStep(4, 'done');
 
-    // ── Step 5: Cleanup ──
+    // ── Step 5: Cleanup through the same Issue CRUD path ──
     setStep(5, 'active');
-    slog('Step 5: Cleaning up test artifacts…', 'info');
-
-    // Delete agent file via Contents API (no [skip ci] so build-registry runs)
-    const fileResp = await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py');
-    if (fileResp.ok) {
-      const fileData = await fileResp.json();
-      await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py', {
-        method: 'DELETE',
-        body: JSON.stringify({
-          message: 'Smoke test cleanup: remove _smoke_test_agent',
-          sha: fileData.sha,
-        }),
-      });
-      slog('  ✓ Deleted agent file (registry rebuild will trigger)', 'pass');
-    }
-
-    // Clean staging if it exists
-    const stagingResp = await ghFetch('/contents/staging/@rapp/_smoke_test_agent.py');
-    if (stagingResp.ok) {
-      const stagingData = await stagingResp.json();
-      await ghFetch('/contents/staging/@rapp/_smoke_test_agent.py', {
-        method: 'DELETE',
-        body: JSON.stringify({
-          message: 'Smoke test cleanup: remove staging [skip ci]',
-          sha: stagingData.sha,
-        }),
-      });
-      slog('  ✓ Deleted staging file', 'pass');
-    }
-
-    // Clean up any .card file
-    const cardResp = await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py.card');
-    if (cardResp.ok) {
-      const cardData = await cardResp.json();
-      await ghFetch('/contents/agents/@rapp/_smoke_test_agent.py.card', {
-        method: 'DELETE',
-        body: JSON.stringify({
-          message: 'Smoke test cleanup: remove card [skip ci]',
-          sha: cardData.sha,
-        }),
-      });
-      slog('  ✓ Deleted card file', 'pass');
-    }
-
-    // Close the test issue
-    await ghFetch(`/issues/${issueNum}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ state: 'closed', labels: ['smoke-test', 'processed'] }),
-    });
-    await ghFetch(`/issues/${issueNum}/comments`, {
+    slog('Step 5: Requesting receipt-backed deletion…', 'info');
+    const liveRegistryResp = await fetch(
+      `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/registry.json?t=${Date.now()}`
+    );
+    if (!liveRegistryResp.ok) throw new Error('Could not load notarized registry');
+    const liveRegistry = await liveRegistryResp.json();
+    const liveSmoke = (liveRegistry.agents || [])
+      .find(agent => agent.name === '@rapp/_smoke_test_agent');
+    if (!liveSmoke?._sha256) throw new Error('Notarized smoke agent missing from registry');
+    const deleteRequestId = `req_${crypto.randomUUID().replaceAll('-', '')}`;
+    const deleteBody = '```json\n' + JSON.stringify({
+      schema: 'rar-change-request/1.0',
+      request_id: deleteRequestId,
+      idempotency_key: deleteRequestId,
+      operation: 'delete',
+      resource: { kind: 'agent', id: '@rapp/_smoke_test_agent' },
+      preconditions: { if_match: `sha256:${liveSmoke._sha256}` },
+      payload: { reason: 'Automated pipeline smoke-test cleanup' },
+      client: { name: 'rar-admin-smoke', version: '1.0.0' },
+    }, null, 2) + '\n```';
+    const deleteResp = await ghFetch('/issues', {
       method: 'POST',
-      body: JSON.stringify({ body: '🧪 Smoke test completed successfully. All artifacts cleaned up.' }),
+      body: JSON.stringify({
+        title: '[RAR] DELETE agent @rapp/_smoke_test_agent',
+        body: deleteBody,
+        labels: ['smoke-test'],
+      }),
     });
-    slog('  ✓ Test issue closed', 'pass');
+    if (!deleteResp.ok) throw new Error('Could not create cleanup request');
+    deleteIssueNum = (await deleteResp.json()).number;
+    if (!await pollForLabel(deleteIssueNum, 'pending-review', 180000)) {
+      throw new Error('Cleanup request did not reach review');
+    }
+    await ghFetch(`/issues/${deleteIssueNum}/labels`, {
+      method: 'POST',
+      body: JSON.stringify({ labels: ['approved'] }),
+    });
+    if (!await pollForLabel(deleteIssueNum, 'deleted', 300000)) {
+      throw new Error('Cleanup deletion did not complete');
+    }
+    slog('  ✓ Smoke agent deleted through receipt-backed CRUD', 'pass');
     setStep(5, 'done');
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
@@ -1006,29 +1037,13 @@ async function runSmokeTest() {
     // Best-effort cleanup
     if (issueNum) {
       try {
-        await ghFetch(`/issues/${issueNum}`, {
-          method: 'PATCH',
-          body: JSON.stringify({ state: 'closed', labels: ['smoke-test', 'failed'] }),
-        });
         await ghFetch(`/issues/${issueNum}/comments`, {
           method: 'POST',
           body: JSON.stringify({ body: `🧪 Smoke test failed at step ${failStep || '?'}: ${err.message}` }),
         });
-        slog('  (test issue closed with failure note)', 'warn');
+        slog('  (failure note added without changing lifecycle labels)', 'warn');
       } catch {}
-      // Try to clean up files
-      for (const path of ['agents/@rapp/_smoke_test_agent.py', 'staging/@rapp/_smoke_test_agent.py', 'agents/@rapp/_smoke_test_agent.py.card']) {
-        try {
-          const r = await ghFetch(`/contents/${path}`);
-          if (r.ok) {
-            const d = await r.json();
-            await ghFetch(`/contents/${path}`, {
-              method: 'DELETE',
-              body: JSON.stringify({ message: 'Smoke test cleanup (failed) [skip ci]', sha: d.sha }),
-            });
-          }
-        } catch {}
-      }
+      slog('  No direct repository cleanup was attempted; use a DELETE Issue if the smoke agent was published.', 'warn');
     }
   } finally {
     smokeRunning = false;
