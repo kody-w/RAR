@@ -150,6 +150,20 @@ jobs:
           git merge-base --is-ancestor "$commit_sha" origin/main
           echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
 
+      - name: Refresh post-commit registry provenance
+        if: steps.apply.outputs.already_applied != 'true'
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          python build_registry.py
+          git add registry.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh registry provenance for #${ISSUE_NUMBER} [skip ci]"
+            git push origin HEAD:main
+          fi
+
       - name: Resolve publication commit
         id: publication
         env:

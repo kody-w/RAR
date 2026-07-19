@@ -537,7 +537,7 @@ def _git_first_committed(path: Path):
     """Return the ISO date a file was first committed, or None if unavailable."""
     try:
         result = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%cI", "--follow", "--", str(path)],
+            ["git", "log", "--diff-filter=A", "--format=%cI", "--", str(path)],
             capture_output=True, text=True, timeout=10
         )
         dates = result.stdout.strip().splitlines()
@@ -554,7 +554,7 @@ def _git_first_commit_sha(path: Path):
     blockchain provenance chain (commit graph IS the ledger)."""
     try:
         result = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%H", "--follow", "--", str(path)],
+            ["git", "log", "--diff-filter=A", "--format=%H", "--", str(path)],
             capture_output=True, text=True, timeout=10
         )
         shas = result.stdout.strip().splitlines()
@@ -569,7 +569,7 @@ def _git_latest_commit_sha(path: Path):
     can `git log <first>..<latest> -- <path>` to audit every change."""
     try:
         result = subprocess.run(
-            ["git", "log", "-1", "--format=%H", "--follow", "--", str(path)],
+            ["git", "log", "-1", "--format=%H", "--", str(path)],
             capture_output=True, text=True, timeout=10
         )
         sha = result.stdout.strip()
