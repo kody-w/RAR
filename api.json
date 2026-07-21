@@ -1,9 +1,8 @@
 {
   "schema": "rar-api/1.1",
-  "description": "RAPP Agent Registry — headless RAPP + X™ API. Static reads come from main; authenticated CRUD commands use GitHub Issues as the durable control and audit surface. UI is optional.",
+  "description": "RAPP Agent Registry \u2014 headless RAPP + X\u2122 API. Static reads come from main; authenticated CRUD commands use GitHub Issues as the durable control and audit surface. UI is optional.",
   "base_url": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "site_url": "https://kody-w.github.io/RAR",
-
   "endpoints": {
     "registry": {
       "url": "{base_url}/registry.json",
@@ -61,7 +60,10 @@
       "command": {
         "schema": "rar-change-request/1.0",
         "operation": "read",
-        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "resource": {
+          "kind": "agent",
+          "id": "@publisher/slug_agent"
+        },
         "preconditions": {},
         "payload": {}
       },
@@ -78,9 +80,19 @@
       "command": {
         "schema": "rar-change-request/1.0",
         "operation": "update",
-        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
-        "preconditions": {"if_match": "sha256:<current-digest>"},
-        "payload": {"source": {"content": "<new source>", "sha256": "sha256:<new-digest>"}}
+        "resource": {
+          "kind": "agent",
+          "id": "@publisher/slug_agent"
+        },
+        "preconditions": {
+          "if_match": "sha256:<current-digest>"
+        },
+        "payload": {
+          "source": {
+            "content": "<new source>",
+            "sha256": "sha256:<new-digest>"
+          }
+        }
       },
       "issue": {
         "title": "[RAR] UPDATE agent @publisher/slug_agent",
@@ -95,9 +107,16 @@
       "command": {
         "schema": "rar-change-request/1.0",
         "operation": "delete",
-        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
-        "preconditions": {"if_match": "sha256:<current-digest>"},
-        "payload": {"reason": "<required reason>"}
+        "resource": {
+          "kind": "agent",
+          "id": "@publisher/slug_agent"
+        },
+        "preconditions": {
+          "if_match": "sha256:<current-digest>"
+        },
+        "payload": {
+          "reason": "<required reason>"
+        }
       },
       "issue": {
         "title": "[RAR] DELETE agent @publisher/slug_agent",
@@ -112,9 +131,17 @@
       "command": {
         "schema": "rar-change-request/1.0",
         "operation": "restore",
-        "resource": {"kind": "agent", "id": "@publisher/slug_agent"},
+        "resource": {
+          "kind": "agent",
+          "id": "@publisher/slug_agent"
+        },
         "preconditions": {},
-        "payload": {"source": {"content": "<restored source>", "sha256": "sha256:<digest>"}}
+        "payload": {
+          "source": {
+            "content": "<restored source>",
+            "sha256": "sha256:<digest>"
+          }
+        }
       },
       "issue": {
         "title": "[RAR] RESTORE agent @publisher/slug_agent",
@@ -148,7 +175,7 @@
       }
     },
     "resolve_card_from_seed": {
-      "url": "none — computed locally",
+      "url": "none \u2014 computed locally",
       "method": "LOCAL",
       "description": "Resolve a card from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py.",
       "auth": "none",
@@ -157,13 +184,24 @@
     "mcp": {
       "url": "{base_url}/registry.json",
       "method": "GET",
-      "description": "MCP on-ramp. This static surface IS a rapp-static-mcp/1.0 catalog: catalog = registry.json, frames = agents/* pinned by _sha256 / _first_commit_sha. Any MCP host reads the catalog, fetches a content-addressed agent frame, and verifies-before-exec against the published hash. MCP is transport realizing 'Chat Is The Only Wire' — MCP clients are Layer 2 callers of a brainstem's /chat (via rapp_brainstem_mcp.py), not a new agent unit.",
+      "description": "MCP on-ramp. This static surface IS a rapp-static-mcp/1.0 catalog: catalog = registry.json, frames = agents/* pinned by _sha256 / _first_commit_sha. Any MCP host reads the catalog, fetches a content-addressed agent frame, and verifies-before-exec against the published hash. MCP is transport realizing 'Chat Is The Only Wire' \u2014 MCP clients are Layer 2 callers of a brainstem's /chat (via rapp_brainstem_mcp.py), not a new agent unit.",
       "auth": "none",
       "profile": "rapp-static-mcp/1.0 (built on rapp-static-api/1.0)",
       "verify_before_exec": "Pin each agent by registry _sha256 (and _first_commit_sha for first-seen provenance); recompute the SHA256 of the fetched agent file and refuse to exec on mismatch."
+    },
+    "federation_catalog": {
+      "url": "{base_url}/state/federation.json",
+      "method": "GET",
+      "description": "Consolidated ecosystem catalog (rar-federation/1.0): rapplications (kody-w/RAPP_Store bundles), senses (kody-w/RAPP_Sense_Store output overlays), and portable skills (kody-w/rapp-skills, kody-w/rapp-claude-skills). Slim daily projection; home repos are authoritative. Verify each entry's sha256 before exec.",
+      "auth": "none"
+    },
+    "discussion_ratings": {
+      "url": "{base_url}/state/discussion_ratings.json",
+      "method": "GET",
+      "description": "Community ratings snapshot (rar-discussion-ratings/1.0): per-agent upvotes (positive GitHub reactions only), comment counts, and the agent's Discussion URL. One Discussion per agent, title = agent name. Upvote by adding a positive reaction to the Discussion; comment by replying in the thread. Refreshed daily.",
+      "auth": "none"
     }
   },
-
   "self_submission": {
     "description": "Humans, agents, twins, rapplications, Brainstems, and neighborhood peers use the same GitHub Issues CRUD contract. The pipeline binds authenticated GitHub identity, canonical admitted source bytes, checks, approval, receipt, and main-branch commit.",
     "steps": [
@@ -183,7 +221,6 @@
       "Must inherit BasicAgent and implement perform() returning str"
     ]
   },
-
   "large_sources": {
     "description": "GitHub Issue bodies are size-limited. For large single-file agents, omit source.content and provide a revision-pinned GitHub source.url plus the mandatory SHA256.",
     "allowed_hosts": [
@@ -198,14 +235,12 @@
     },
     "sdk_behavior": "rapp_sdk.py automatically creates an unlisted revision-pinned Gist when the encoded Issue command exceeds 50 KiB."
   },
-
   "hashing": {
     "algorithm": "sha256-lf-v1",
     "input": "UTF-8 agent source after replacing every CRLF byte pair with LF. No other Unicode, whitespace, or newline normalization is performed.",
     "encoding": "lowercase 64-character hexadecimal",
     "rule": "The source embedded or fetched by the processor is canonicalized before digest verification, staging, receipt generation, registry projection, federation, and installation checks."
   },
-
   "offline": {
     "description": "RAPP is local-first. Everything works offline.",
     "seed_resolution": "Any numeric seed resolves to a full card (type, stats, abilities) with zero network. The algorithm is deterministic and public.",

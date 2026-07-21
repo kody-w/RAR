@@ -125,6 +125,43 @@ MCP is transport, not a new agent unit — it is how an MCP-native AI reaches RA
 - **Live brainstem (`rapp_brainstem_mcp.py`):** bridges a running brainstem to any MCP host over `/chat`. Every capability — install, search, run an agent, memory — flows through that single `/chat` call.
 - **Serving drop-in agents (`rapp_mcp.py`):** exposes local drop-in `*_agent.py` files as MCP tools for hosts that want to call them directly.
 
+### 8. Ecosystem Catalogs (rapplications, senses, skills)
+
+RAR is the consolidated storefront for the whole RAPP ecosystem. One fetch returns every peer-store catalog:
+
+```
+GET https://raw.githubusercontent.com/kody-w/RAR/main/state/federation.json
+```
+
+Returns (`schema: rar-federation/1.0`):
+- `rapplications[]` — bundled organisms (agent + UI / service / state cartridge) from [kody-w/RAPP_Store](https://github.com/kody-w/RAPP_Store). Each entry: `id`, `name`, `version`, `summary`, `category`, `tags`, `manifest_name`, `access` (`public` | `private`), `singleton_url`, `singleton_sha256`, `store_url`, `repo_url`. Install = fetch `singleton_url`, **verify `singleton_sha256` before exec**, drop into your brainstem's `agents/`. `access: "private"` entries are gated — the URL 404s without a PAT that has read access on the private repo.
+- `senses[]` — per-channel output overlays from [kody-w/RAPP_Sense_Store](https://github.com/kody-w/RAPP_Sense_Store). Each entry: `name`, `publisher`, `version`, `description`, `delimiter`, `surfaces`, `url`, `sha256`. Install = fetch `url`, verify `sha256`, drop into `rapp_brainstem/utils/senses/`.
+- `skills[]` — portable agent skills from [kody-w/rapp-skills](https://github.com/kody-w/rapp-skills) and [kody-w/rapp-claude-skills](https://github.com/kody-w/rapp-claude-skills). Each entry: `name`, `description`, `repo`, `url`, `skill_md_url`. Consume = fetch `skill_md_url` and follow it like this file.
+
+The snapshot is a slim projection refreshed daily. The home repos remain authoritative — for full metadata fetch the source catalogs directly:
+
+```
+GET https://raw.githubusercontent.com/kody-w/RAPP_Store/main/index.json         # rapplications (full)
+GET https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/index.json   # senses (full)
+```
+
+### 9. Community Ratings (Discussions-backed upvotes + comments)
+
+Every registry agent has one GitHub Discussion whose **title is the agent name** (e.g. `@rapp/basic_agent`), in the maintainer-only Announcements category of `kody-w/RAR`.
+
+```
+GET https://raw.githubusercontent.com/kody-w/RAR/main/state/discussion_ratings.json
+```
+
+Returns (`schema: rar-discussion-ratings/1.0`) `agents` keyed by agent name: `{upvotes, comments, url, number}`. `upvotes` counts **positive reactions only** (THUMBS_UP, HEART, HOORAY, ROCKET, LAUGH); negative and neutral reactions never contribute.
+
+- **Read** ratings: fetch the snapshot above (no auth). Use it to rank agents ("most loved").
+- **Upvote** an agent: add a positive reaction to its Discussion (GraphQL `addReaction` on the discussion node, or open `url` in a browser). One reaction per GitHub identity — GitHub enforces dedup natively.
+- **Comment / review** an agent: reply in its Discussion thread (`url`).
+- The snapshot refreshes daily; a live vote appears on the next refresh.
+
+Legacy issue-based votes/reviews still work too (`state/votes.json`, `state/reviews.json`, filed via `[RAR]`-prefixed Issues) and are merged with reaction counts in the store UI.
+
 ---
 
 ## SDK — Agentic-First Onboarding
