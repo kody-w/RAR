@@ -412,6 +412,9 @@ header {
   <div id="grid">
     <div class="loading"><div class="spinner"></div>Loading agents...</div>
   </div>
+  <!-- Ecosystem — federated peer stores (rapplications, senses, skills)
+       browsed here, hosted in their home repos; state/federation.json -->
+  <div id="ecosystem-section" style="display:none;margin-top:36px"></div>
 </div>
 
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
@@ -625,11 +628,13 @@ function render() {
   if (!filtered.length) {
     document.getElementById('grid').innerHTML = '<div class="empty">No agents found.</div>';
     renderRecentlyAdded();
+    renderEcosystemIndex();
     return;
   }
 
   document.getElementById('grid').innerHTML = `<div class="agents-grid">${filtered.map(card).join('')}</div>`;
   renderRecentlyAdded();
+  renderEcosystemIndex();
 }
 
 const LOCK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle;margin-right:3px"><rect x="3" y="8" width="14" height="11" rx="2" fill="none" stroke="#bc8cff" stroke-width="1.6" opacity="0.7"/><path d="M6 8 v-4 a4 4 0 0 1 8 0 v4" fill="none" stroke="#bc8cff" stroke-width="1.5" opacity="0.6"/><circle cx="10" cy="13" r="1.5" fill="#bc8cff" opacity="0.7"/><line x1="10" y1="13" x2="10" y2="16" stroke="#bc8cff" stroke-width="1.5" opacity="0.7"/></svg>';
@@ -642,6 +647,105 @@ fetch(RAW + '/state/discussion_ratings.json')
   .then(r => r.ok ? r.json() : null)
   .then(d => { if (d && d.agents) { ghRatings = d; if (allAgents.length) render(); } })
   .catch(() => {});
+
+// Federated peer-store catalog (rapplications, senses, skills) —
+// one storefront, content stays in its home repo. Same snapshot the
+// full store's Ecosystem tab reads.
+let federation = null;
+fetch(RAW + '/state/federation.json')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => { if (d) { federation = d; renderEcosystemIndex(); } })
+  .catch(() => {});
+
+function copyFedUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    const prev = btn.textContent; btn.textContent = '✓ copied';
+    setTimeout(() => { btn.textContent = prev; }, 1200);
+  }).catch(() => {});
+}
+
+function renderEcosystemIndex() {
+  const el = document.getElementById('ecosystem-section');
+  if (!federation) { el.style.display = 'none'; return; }
+  const q = (document.getElementById('search')?.value || '').toLowerCase().trim();
+  const words = q.split(/\s+/).filter(w => w.length > 1);
+  const matches = t => !words.length || words.some(w => t.toLowerCase().includes(w));
+
+  const rapps = (federation.rapplications || []).filter(r => matches([r.name, r.summary, r.category, ...(r.tags||[])].join(' ')));
+  const senses = (federation.senses || []).filter(s => matches([s.name, s.description, ...(s.surfaces||[])].join(' ')));
+  const skills = (federation.skills || []).filter(k => matches([k.name, k.description].join(' ')));
+  if (!rapps.length && !senses.length && !skills.length) { el.style.display = 'none'; return; }
+
+  const section = (title, subtitle, homeUrl, cards) => cards ? `
+    <div style="margin-bottom:24px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+        <span style="font-size:1rem;font-weight:700">${title}</span>
+        <span style="color:var(--text-muted);font-size:.76rem">${subtitle}</span>
+        <a href="${esc(homeUrl)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:.74rem;margin-left:auto">home repo &#8599;</a>
+      </div>
+      <div class="agents-grid">${cards}</div>
+    </div>` : '';
+
+  const rappCards = rapps.map(r => `
+    <div class="agent-card" style="cursor:default">
+      <div class="card-name">${esc(r.name)} ${r.access === 'private' ? '<span class="cat-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">GATED</span>' : `<span class="cat-badge">v${esc(r.version)}</span>`}</div>
+      <div class="card-desc">${esc(r.summary)}</div>
+      <div class="card-footer">
+        <span style="display:flex;gap:8px;align-items:center;min-width:0">
+          <span class="cat-badge">rapplication</span>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc((r.category || 'general').replace(/_/g,' '))}</span>
+        </span>
+        <span style="display:flex;gap:6px">
+          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Copy singleton .py URL">copy .py</button>` : ''}
+          <a class="add-cart-btn" style="text-decoration:none" href="${esc(r.store_url)}#${esc(r.id)}" target="_blank" rel="noopener" title="Open in the rapplication store">&#8599;</a>
+        </span>
+      </div>
+    </div>`).join('');
+
+  const senseCards = senses.map(s => `
+    <div class="agent-card" style="cursor:default">
+      <div class="card-name">${esc(s.name)} <span class="cat-badge">v${esc(s.version)}</span></div>
+      <div class="card-desc">${esc(s.description)}</div>
+      <div class="card-footer">
+        <span style="display:flex;gap:8px;align-items:center;min-width:0">
+          <span class="cat-badge">sense</span>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc((s.surfaces || []).join(', '))}</span>
+        </span>
+        <span style="display:flex;gap:6px">
+          ${s.url ? `<button class="add-cart-btn" onclick="copyFedUrl('${esc(s.url)}', this)" title="Copy sense .py URL">copy .py</button>` : ''}
+          <a class="add-cart-btn" style="text-decoration:none" href="${esc(s.repo_url)}" target="_blank" rel="noopener" title="Open the sense store">&#8599;</a>
+        </span>
+      </div>
+    </div>`).join('');
+
+  const skillCards = skills.map(k => `
+    <div class="agent-card" style="cursor:default">
+      <div class="card-name">${esc(k.name)}</div>
+      <div class="card-desc">${esc(k.description)}</div>
+      <div class="card-footer">
+        <span style="display:flex;gap:8px;align-items:center;min-width:0">
+          <span class="cat-badge">skill</span>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(k.repo)}</span>
+        </span>
+        <span style="display:flex;gap:6px">
+          <button class="add-cart-btn" onclick="copyFedUrl('${esc(k.skill_md_url)}', this)" title="Copy SKILL.md URL">copy</button>
+          <a class="add-cart-btn" style="text-decoration:none" href="${esc(k.url)}" target="_blank" rel="noopener" title="Open the skill folder">&#8599;</a>
+        </span>
+      </div>
+    </div>`).join('');
+
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div style="border-top:1px solid var(--border);padding-top:20px">
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="color:var(--text-muted);font-size:.72rem;text-transform:uppercase;letter-spacing:2px">One Storefront, Every Store</div>
+        <div style="font-size:1.15rem;font-weight:800;margin-top:2px">From the RAPP Ecosystem</div>
+      </div>
+      ${section(`Rapplications (${rapps.length})`, 'bundled agent + UI / service / state', 'https://github.com/kody-w/RAPP_Store', rappCards)}
+      ${section(`Senses (${senses.length})`, 'per-channel output overlays', 'https://github.com/kody-w/RAPP_Sense_Store', senseCards)}
+      ${section(`Skills (${skills.length})`, 'portable agent skills', 'https://github.com/kody-w/rapp-skills', skillCards)}
+    </div>`;
+}
 
 function card(a) {
   const isStub = a.type === 'stub';
