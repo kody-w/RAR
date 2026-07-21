@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/loan_origination_assistant",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Loan Origination Assistant Agent",
-    "description": "Loan origination support with application review, credit analysis, document verification, and decision recommendations.",
+    "description": "Reviews loan applications, credit, documents, and underwriting conditions with decision advice from built-in demo data.",
     "author": "AIBAST",
     "tags": ["loan", "origination", "credit", "underwriting", "mortgage", "financial-services"],
     "category": "financial_services",

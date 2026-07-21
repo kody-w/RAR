@@ -32,9 +32,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/prior_authorization",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Prior Authorization Agent",
-    "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
+    "description": "Tracks prior-authorization requests, clinical criteria checks, and appeals against built-in demo payer rules.",
     "author": "AIBAST",
     "tags": ["prior-auth", "authorization", "payer", "clinical-criteria", "appeals", "healthcare"],
     "category": "healthcare",

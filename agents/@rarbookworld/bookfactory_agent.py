@@ -83,9 +83,9 @@ from concurrent.futures import ThreadPoolExecutor
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/bookfactory",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "display_name": "BookFactory (converged singleton)",
-    "description": "Five-persona content pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The deployable rapplication. v0.4: structured CEO/Reviewer verdicts that actually gate, raise-don't-prose error handling, per-run workspaces, concurrent independent checks, bounded revision pass, optional small-model tiering.",
+    "description": "Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.",
     "author": "rarbookworld",
     "tags": [
         "composite",

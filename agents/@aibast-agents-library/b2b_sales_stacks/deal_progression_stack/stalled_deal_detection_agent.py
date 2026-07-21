@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/stalled_deal_detection",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Stalled Deal Detection",
-    "description": "Detects stalled deals, classifies root causes, generates intervention plans, and provides stall prevention.",
+    "description": "Detects stalled deals against stage thresholds and generates root causes and intervention plans from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "stalled-deals", "deal-progression", "pipeline"],
     "category": "b2b_sales",

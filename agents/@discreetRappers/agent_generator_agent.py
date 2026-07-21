@@ -25,9 +25,9 @@ Usage:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/agent_generator_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "AgentGenerator",
-    "description": "Auto-generates new RAPP agents from configurations and specifications.",
+    "description": "Generates new RAPP agent JSON configs, Python code, and Copilot Studio assets from natural-language descriptions.",
     "author": "Bill Whalen",
     "tags": ["pipeline", "generator", "scaffolding", "auto-generate"],
     "category": "pipeline",

@@ -16,9 +16,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/maintenance_scheduling",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Maintenance Scheduling Agent",
-    "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
+    "description": "Generates predictive maintenance schedules, work orders, and downtime analyses from built-in demo equipment telemetry.",
     "author": "AIBAST",
     "tags": ["maintenance", "predictive", "scheduling", "manufacturing", "IoT"],
     "category": "manufacturing",

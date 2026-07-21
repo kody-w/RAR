@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_360",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Customer 360",
-    "description": "Unified customer profiles merging CRM, support, and billing data with health scores and next-best-action recommendations.",
+    "description": "Builds unified customer profiles, timelines, health scores, and next-best actions from built-in demo CRM data.",
     "author": "AIBAST",
     "tags": ["customer-360", "unified-profile", "health-score", "next-best-action", "crm"],
     "category": "general",

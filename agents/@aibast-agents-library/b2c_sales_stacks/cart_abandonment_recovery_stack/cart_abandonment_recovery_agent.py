@@ -18,9 +18,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cart_abandonment_recovery",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Cart Abandonment Recovery Agent",
-    "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
+    "description": "Analyzes cart abandonment and runs recovery campaigns, incentive tuning, and conversion tracking on built-in demo e-commerce data.",
     "author": "AIBAST",
     "tags": ["cart-abandonment", "recovery", "ecommerce", "conversion", "email", "b2c"],
     "category": "b2c_sales",

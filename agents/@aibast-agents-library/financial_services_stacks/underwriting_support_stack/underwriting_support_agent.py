@@ -20,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/underwriting_support",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Underwriting Support Agent",
-    "description": "Insurance underwriting support with risk evaluation, pricing recommendations, guideline compliance, and exception review.",
+    "description": "Supports insurance underwriting with risk scoring, pricing guidance, and guideline checks using built-in demo data.",
     "author": "AIBAST",
     "tags": ["underwriting", "insurance", "risk", "pricing", "guidelines", "financial-services"],
     "category": "financial_services",

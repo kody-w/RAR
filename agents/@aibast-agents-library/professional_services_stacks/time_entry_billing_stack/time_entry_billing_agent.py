@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/time_entry_billing",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Time Entry & Billing Agent",
-    "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages.",
+    "description": "Audits time entries, surfaces unbilled hours, and prepares invoice packages from built-in demo billing data.",
     "author": "AIBAST",
     "tags": ["billing", "time-entry", "invoicing", "audit", "professional-services"],
     "category": "professional_services",

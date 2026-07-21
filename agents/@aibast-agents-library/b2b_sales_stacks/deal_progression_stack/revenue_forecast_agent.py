@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/revenue_forecast",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Revenue Forecast",
-    "description": "Quarterly forecasting, scenario analysis, commit vs best-case modeling, and forecast accuracy tracking.",
+    "description": "Builds quarterly revenue forecasts, scenario models, and forecast-accuracy reports from built-in demo pipeline data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "revenue-forecast", "deal-progression", "analytics"],
     "category": "b2b_sales",

@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/energy_regulatory_reporting",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Energy Regulatory Reporting Agent",
-    "description": "Manages regulatory report status, data validation, submission tracking, and audit readiness for EPA, FERC, and state filings.",
+    "description": "Tracks EPA, FERC, and state report status, validates data, and preps dry-run submissions from built-in demo data.",
     "author": "AIBAST",
     "tags": ["regulatory", "reporting", "epa", "ferc", "audit", "compliance", "energy"],
     "category": "energy",

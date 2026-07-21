@@ -21,9 +21,9 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/second_life_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Second Life",
-    "description": "Live in the RAPP Commons as a headless avatar through a real browser tab \u2014 join, speak in the signed stream, read the room, and screenshot the 3D world.",
+    "description": "Drives a headless Playwright browser tab into the live RAPP Commons to join as an avatar, post signed messages, read the stream, and screenshot.",
     "author": "kody-w",
     "tags": [
         "commons",

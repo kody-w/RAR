@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ai_customer_assistant",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "AI Customer Assistant",
-    "description": "AI-powered customer service assistant for inquiries, knowledge search, escalation routing, and satisfaction surveys.",
+    "description": "Handles customer service inquiries, knowledge search, escalation briefs, and resolution tracking using built-in demo data.",
     "author": "AIBAST",
     "tags": ["customer-service", "support", "knowledge-base", "escalation", "satisfaction", "case-management", "action-plan"],
     "category": "general",

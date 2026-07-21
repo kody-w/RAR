@@ -3,9 +3,9 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_forge_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "CopilotStudioForge",
-    "description": "Author Microsoft Copilot Studio / M365 / Foundry artifacts from RAPP agents. Assimilates 4 overlapping agents into one: swarm->native CS bundle, agents->topic .mcs.yml, single agent->full CS solution (flows+connectors), and multi-platform export.",
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports.",
     "author": "kody-w",
     "tags": ["copilot-studio", "forge", "transpiler", "mcs", "m365", "foundry", "authoring", "assimilated"],
     "category": "pipeline",

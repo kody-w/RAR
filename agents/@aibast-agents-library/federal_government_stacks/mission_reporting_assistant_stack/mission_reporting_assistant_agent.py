@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/mission_reporting_assistant",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Mission Reporting Assistant Agent",
-    "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
+    "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses from built-in demo program data.",
     "author": "AIBAST",
     "tags": ["mission", "reporting", "KPI", "stakeholder", "federal", "dashboard"],
     "category": "federal_government",

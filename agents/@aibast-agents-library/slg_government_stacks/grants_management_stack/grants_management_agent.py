@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/slg_grants_management",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "SLG Grants Management Agent",
-    "description": "State and local government grants portfolio management with application tracking, reporting calendars, and budget monitoring.",
+    "description": "Tracks grant portfolios, application status, reporting deadlines, and budgets using built-in demo government data.",
     "author": "AIBAST",
     "tags": ["grants", "budget", "reporting", "local-government", "state-government"],
     "category": "slg_government",

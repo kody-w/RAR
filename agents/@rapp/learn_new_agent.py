@@ -34,9 +34,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "display_name": "LearnNew",
-    "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
     "author": "RAPP",
     "tags": ["meta", "generator", "scaffolding", "learn", "swarm"],
     "category": "core",

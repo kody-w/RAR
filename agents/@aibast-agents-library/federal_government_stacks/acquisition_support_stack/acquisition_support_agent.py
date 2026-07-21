@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/acquisition_support",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Acquisition Support Agent",
-    "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.",
+    "description": "Supports federal acquisitions with FAR/DFAR checklists, vendor evaluations, and timelines from built-in demo data.",
     "author": "AIBAST",
     "tags": ["acquisition", "FAR", "DFAR", "procurement", "vendor-evaluation", "federal"],
     "category": "federal_government",

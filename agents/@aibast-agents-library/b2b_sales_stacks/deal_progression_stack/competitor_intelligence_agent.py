@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_competitor_intel",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Deal Competitor Intelligence",
-    "description": "Competitive snapshots, threat scoring, counter-strategies, and win/loss pattern analysis per deal.",
+    "description": "Produces competitor snapshots, threat scores, counter-strategies, and win/loss patterns per deal from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "competitive-intelligence", "deal-progression", "strategy"],
     "category": "b2b_sales",

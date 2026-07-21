@@ -28,14 +28,10 @@ __manifest__ = {
     "name": "@rapp/store_navigator_agent",
     "display_name": "StoreNavigator",
     "description": (
-        "Navigate the kody-w/RAPP_Store catalog. List, search, describe, "
-        "recommend, get install commands, compare rapplications, browse "
-        "categories, and explain the spec. Use this whenever the user asks "
-        "what's in the store, what to install, or how to find a rapp that "
-        "fits their goal."
+        "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available."
     ),
     "author": "RAPP",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "tags": ["meta", "navigator", "store", "discovery", "rapplication"],
     "category": "platform",
     "quality_tier": "official",

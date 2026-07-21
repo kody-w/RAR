@@ -42,13 +42,10 @@ bases, training quests, and scheduled automation — all through your Obsidian v
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/vaultmind_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "VaultMind",
     "description": (
-        "Your second brain has a brain. 28-action Obsidian vault manager: "
-        "multi-person 30-60-90 plans, OKRs, Kanban boards, Now/Next/Later priorities, "
-        "Karpathy-style LLM knowledge bases, training quests, morning briefs, "
-        "wiki health checks, auto-bootstrap with plugins. One file, zero deps."
+        "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."
     ),
     "author": "Howard Hoy",
     "tags": ["obsidian", "30-60-90", "onboarding", "wiki", "knowledge-base",

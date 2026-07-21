@@ -30,7 +30,7 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/ez_sharpen_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "EZSharpen",
     "author": "kody-w",
     "category": "analysis",
@@ -39,7 +39,7 @@ __manifest__ = {
     "dependencies": [
         "@rapp/basic_agent"
     ],
-    "description": "Recursively grow the fidelity of commons frame recordings with the EZsharpen / dream-catcher pattern: competing engines propose in-between detail, only non-conflicting proposals are merged, and the engines self-improve over passes \u2014 never contradicting the signed record.",
+    "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
     "tags": [
         "frames",
         "interpolation",

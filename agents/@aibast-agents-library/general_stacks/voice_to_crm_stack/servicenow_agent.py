@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_servicenow",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Voice to CRM (ServiceNow)",
-    "description": "ServiceNow integration for incident creation, knowledge search, assignment routing, and status updates.",
+    "description": "Simulates ServiceNow incident creation, knowledge search, routing, and status updates using built-in demo data.",
     "author": "AIBAST",
     "tags": ["servicenow", "itsm", "incidents", "knowledge-base", "routing"],
     "category": "general",

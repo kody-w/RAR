@@ -35,9 +35,9 @@ deep dives into patterns, checklists, and reviews.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/tuftelove_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "TufteLove",
-    "description": "UI design advisor combining Edward Tufte's visual principles, Microsoft Aether Agent Oversight Taxonomy (32+ patterns), and 8 academic papers — shapes how agents create UI and reviews existing UI for design quality.",
+    "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
     "author": "Howard Hoy",
     "tags": ["ui", "design", "tufte", "oversight", "ux", "review", "accessibility", "data-visualization"],
     "category": "productivity",
@@ -508,4 +508,4 @@ class TufteLoveAgent(BasicAgent):
     # Action: tufte
     # ------------------------------------------------------------------
     def _action_tufte(self, **kwargs):
-        return _TUFTE_PRINCIPLES + "\n---\n*\"Every pixel should earn its place.\" — Made by HOLO*"
+        return _TUFTE_PRINCIPLES + "\n---\n*\"Every pixel should earn its place.\" — Made by HOLO*"

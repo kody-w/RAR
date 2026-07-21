@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supplier_risk_monitoring",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Supplier Risk Monitoring Agent",
-    "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
+    "description": "Scores supplier risk across quality, delivery, financial, and geopolitical factors using built-in demo supplier data.",
     "author": "AIBAST",
     "tags": ["supplier", "risk", "procurement", "supply-chain", "manufacturing"],
     "category": "manufacturing",

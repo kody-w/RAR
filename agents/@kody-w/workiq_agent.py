@@ -33,9 +33,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/workiq",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "WorkIQ",
-    "description": "Natural-language access to Microsoft 365 data — emails, calendar, SharePoint/OneDrive, Teams messages, people. Wraps the workiq CLI (Entra ID auth required).",
+    "description": "Queries Microsoft 365 data \u2014 email, calendar, SharePoint/OneDrive, Teams, people \u2014 by shelling out to the workiq CLI with Entra ID auth.",
     "author": "Kody",
     "tags": ["m365", "microsoft", "email", "calendar", "teams", "sharepoint", "workiq"],
     "category": "integrations",

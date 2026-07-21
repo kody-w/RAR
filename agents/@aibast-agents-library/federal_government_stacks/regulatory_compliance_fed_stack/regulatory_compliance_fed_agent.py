@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/regulatory_compliance_fed",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Regulatory Compliance (Federal) Agent",
-    "description": "Federal regulatory compliance management with FISMA, FedRAMP, and NIST gap analysis, remediation planning, and audit readiness.",
+    "description": "Reports FISMA, FedRAMP, and NIST compliance gaps, remediation plans, and audit readiness from built-in demo data.",
     "author": "AIBAST",
     "tags": ["compliance", "FISMA", "FedRAMP", "NIST", "audit", "federal", "regulatory"],
     "category": "federal_government",

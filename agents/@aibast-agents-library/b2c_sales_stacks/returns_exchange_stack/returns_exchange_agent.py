@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_exchange",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Returns & Exchange Agent",
-    "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.",
+    "description": "Handles retail return initiation, eligibility checks, exchange options, and refund status using built-in demo order data.",
     "author": "AIBAST",
     "tags": ["returns", "exchange", "refund", "retail", "customer-service", "b2c"],
     "category": "b2c_sales",

@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/software_customer_onboarding",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Customer Onboarding Agent",
-    "description": "Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.",
+    "description": "Tracks SaaS onboarding milestones, feature adoption, and risk flags for accounts in built-in demo data.",
     "author": "AIBAST",
     "tags": ["onboarding", "customer-success", "saas", "adoption", "milestones"],
     "category": "software_digital_products",

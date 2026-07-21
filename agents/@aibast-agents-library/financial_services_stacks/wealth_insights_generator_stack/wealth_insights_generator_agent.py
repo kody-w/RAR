@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/wealth_insights_generator",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Wealth Insights Generator Agent",
-    "description": "Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution.",
+    "description": "Generates market briefs, client insights, opportunity alerts, and performance attribution for wealth teams from built-in demo data.",
     "author": "AIBAST",
     "tags": ["wealth", "insights", "market", "performance", "analytics", "financial-services"],
     "category": "financial_services",

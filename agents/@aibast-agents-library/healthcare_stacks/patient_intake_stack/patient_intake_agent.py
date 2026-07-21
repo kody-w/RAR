@@ -20,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/patient_intake",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Patient Intake Agent",
-    "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
+    "description": "Simulates patient intake \u2014 forms, insurance verification, scheduling, and pre-visit summaries \u2014 using built-in demo patient data.",
     "author": "AIBAST",
     "tags": ["intake", "insurance", "scheduling", "patient", "registration", "healthcare"],
     "category": "healthcare",

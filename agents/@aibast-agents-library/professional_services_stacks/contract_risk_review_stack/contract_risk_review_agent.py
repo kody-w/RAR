@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/contract_risk_review",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Contract Risk Review Agent",
-    "description": "Scans contracts for risky clauses, evaluates compliance with internal policies, and produces renegotiation briefs with prioritized amendments.",
+    "description": "Scans built-in demo contracts for risky clauses, checks policy compliance, and drafts renegotiation briefs.",
     "author": "AIBAST",
     "tags": ["contract", "risk", "legal", "compliance", "professional-services"],
     "category": "professional_services",

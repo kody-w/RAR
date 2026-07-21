@@ -21,9 +21,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/general_ask_hr",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "General Ask HR",
-    "description": "General-purpose HR assistant for policy lookups, benefits inquiries, leave requests, and employee directory searches.",
+    "description": "Answers HR policy, benefits, leave-balance, and employee-directory queries using built-in demo data (no live HRIS).",
     "author": "AIBAST",
     "tags": ["hr", "policy", "benefits", "leave", "directory", "general"],
     "category": "general",

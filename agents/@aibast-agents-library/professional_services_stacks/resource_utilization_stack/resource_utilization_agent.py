@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/resource_utilization",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Resource Utilization Agent",
-    "description": "Tracks consultant utilization and capacity, forecasts demand, analyzes bench costs, and generates staffing recommendations to meet targets.",
+    "description": "Reports consultant utilization, capacity forecasts, bench costs, and staffing recommendations from built-in demo data.",
     "author": "AIBAST",
     "tags": ["utilization", "staffing", "capacity", "bench", "professional-services"],
     "category": "professional_services",

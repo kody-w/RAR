@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_qualification",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Sales Qualification",
-    "description": "ICP scoring, BANT analysis, personalized outreach, AE routing, and SLA tracking for inbound leads.",
+    "description": "Scores inbound leads against an ICP, runs BANT analysis, and routes leads to AEs with SLA tracking, using built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "lead-qualification", "bant", "icp-scoring", "lead-routing"],
     "category": "b2b_sales",

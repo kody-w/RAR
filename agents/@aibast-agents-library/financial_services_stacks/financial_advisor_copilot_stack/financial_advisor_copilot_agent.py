@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/financial_advisor_copilot",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Financial Advisor Copilot Agent",
-    "description": "Financial advisor support with client reviews, portfolio summaries, recommendation engine, compliance checks, and branch banking & advisory workflows (intake, product education, account opening, planning, advisor handoff).",
+    "description": "Supports financial advisors with client reviews, portfolio summaries, compliance checks, and branch banking workflows from built-in demo data.",
     "author": "AIBAST",
     "tags": ["advisor", "portfolio", "investment", "compliance", "financial-services", "branch-banking", "advisory"],
     "category": "financial_services",

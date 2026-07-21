@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/asset_maintenance_forecast",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Asset Maintenance Forecast Agent",
-    "description": "Predictive maintenance forecasting, asset health monitoring, budget projections, and work order planning for energy infrastructure.",
+    "description": "Forecasts maintenance and asset health for turbines, transformers, and pipelines, with dry-run scheduling, from built-in demo data.",
     "author": "AIBAST",
     "tags": ["maintenance", "asset-health", "energy", "predictive", "work-orders", "budget"],
     "category": "energy",

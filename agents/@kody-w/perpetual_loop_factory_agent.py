@@ -90,14 +90,10 @@ __manifest__ = {
     "name": "@kody-w/perpetual_loop_factory",
     "display_name": "PerpetualLoopFactory",
     "description": (
-        "Bootstrap a self-correcting perpetual frame chain (rotating "
-        "council of twins + diversity sidecar + observability dashboard) "
-        "for any append-only artifact (novel, codebase, score, knowledge "
-        "base, dataset). One agent.py drops the whole pattern. Drop, "
-        "spawn, watch."
+        "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons."
     ),
     "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "tags": ["meta", "factory", "perpetual", "chain", "twins", "self-correcting", "kaizen"],
     "category": "core",
     "quality_tier": "community",

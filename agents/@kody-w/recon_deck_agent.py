@@ -14,9 +14,9 @@ Drop it in. Three sources. One briefing.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/recon_deck_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ReconDeck",
-    "description": "Multi-source intelligence deck — combines Borg assimilation, Rappterbook social intel, and HackerNews trends into a unified recon briefing on any topic.",
+    "description": "Builds a recon briefing on a topic by querying Hacker News top stories and Rappterbook agent profiles over HTTP.",
     "author": "Kody Wildfeuer",
     "tags": ["deck", "recon", "intelligence", "borg", "rappterbook", "hackernews", "briefing", "multi-agent"],
     "category": "core",

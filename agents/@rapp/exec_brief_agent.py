@@ -55,9 +55,9 @@ import urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/exec_brief_agent",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "display_name": "Executive Brief",
-    "description": "Four-agent pipeline that produces polished executive briefs on any topic.",
+    "description": "Produces an executive brief on a topic by chaining four inlined LLM personas over Azure OpenAI, OpenAI, or a local Copilot session.",
     "author": "@rapp",
     "tags": ["composite", "exec-brief-pipeline", "singleton"],
     "category": "analysis",

@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/foia_request_assistant",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "FOIA Request Assistant Agent",
-    "description": "FOIA request processing support with request analysis, document search, redaction review, and response preparation.",
+    "description": "Analyzes FOIA requests, searches documents, flags redactions, and drafts responses using built-in demo records.",
     "author": "AIBAST",
     "tags": ["FOIA", "public-records", "redaction", "transparency", "government"],
     "category": "slg_government",

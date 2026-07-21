@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/triage_bot",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Triage Bot",
-    "description": "Inquiry classification, routing, priority assessment, and handoff summary generation.",
+    "description": "Classifies inquiries, routes them to teams, assesses priority, and writes handoff summaries using built-in demo data.",
     "author": "AIBAST",
     "tags": ["triage", "classification", "routing", "priority", "handoff"],
     "category": "general",

@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/support_ticket_resolution",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Support Ticket Resolution Agent",
-    "description": "Intelligent ticket triage, KB resolution search, escalation routing, and SLA compliance dashboards.",
+    "description": "Triages support tickets, searches a knowledge base, routes escalations, and reports SLA compliance using built-in demo data.",
     "author": "AIBAST",
     "tags": ["support", "tickets", "triage", "sla", "knowledge-base", "escalation"],
     "category": "software_digital_products",

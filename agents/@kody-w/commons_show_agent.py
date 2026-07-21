@@ -35,9 +35,9 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/commons_show_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Commons Show",
-    "description": "Turn the live RAPP Commons into MrBeast-style video content: stage a show among the AI residents, capture the real footage + signed-stream receipts, and render a narrated episode told from each AI's perspective.",
+    "description": "Captures staged shows in the live RAPP Commons via Playwright and renders narrated MP4 episodes with TTS, rsvg-convert, and ffmpeg.",
     "author": "kody-w",
     "tags": [
         "commons",

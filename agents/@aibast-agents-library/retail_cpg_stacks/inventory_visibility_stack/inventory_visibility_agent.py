@@ -22,12 +22,10 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_visibility",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Inventory Visibility Agent",
     "description": (
-        "Delivers real-time inventory dashboards, stock-out alerts, "
-        "replenishment planning, and channel allocation optimization "
-        "for omni-channel retail and CPG operations."
+        "Reports stock levels, stock-out alerts, replenishment plans, and channel allocation from built-in demo retail inventory data."
     ),
     "author": "AIBAST",
     "tags": [

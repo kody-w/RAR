@@ -20,12 +20,10 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_marketing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Personalized Marketing Agent",
     "description": (
-        "Enables customer segmentation, personalized campaign design, "
-        "dynamic content personalization, and marketing performance "
-        "analysis for retail and CPG brands."
+        "Segments customers, designs campaigns, personalizes content, and analyzes performance using built-in demo retail data."
     ),
     "author": "AIBAST",
     "tags": [

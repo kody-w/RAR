@@ -48,9 +48,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/bond_rhythm_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Bond Pulse",
-    "description": "The on-going local\u2194global heartbeat for the FULL RAPP organism. Audit drift; classify direction (LOCAL\u2192GLOBAL push / GLOBAL\u2192LOCAL pull / informational); SUGGEST actuator (operator-mediated; never auto-executes); record kind='rhythm' bond event. Returns rapp-rhythm-pulse/1.0. Connection-aware: degrades to local-only when offline.",
+    "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
     "author": "kody-w",
     "tags": [
         "heartbeat",

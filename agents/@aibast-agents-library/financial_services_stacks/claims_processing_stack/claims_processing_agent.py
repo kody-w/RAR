@@ -30,9 +30,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/claims_processing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Claims Processing Agent",
-    "description": "Insurance claims processing with intake, adjudication review, fraud detection, and settlement recommendations.",
+    "description": "Processes insurance claims with intake, triage, fraud flags, and settlement recommendations using built-in demo data.",
     "author": "AIBAST",
     "tags": ["claims", "insurance", "adjudication", "fraud", "settlement", "financial-services"],
     "category": "financial_services",

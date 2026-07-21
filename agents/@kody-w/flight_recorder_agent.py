@@ -32,14 +32,10 @@ Nothing leaves your machine. This is your estate.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/flight_recorder",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FlightRecorder",
     "description": (
-        "A local black box for your brainstem: transparently records BOTH SIDES of every "
-        "/chat conversation -- whoever is talking (you, another AI, a script) -- to append-only "
-        "JSON files on your own machine that you fully own. Steer it by talking: status, stats, "
-        "search, export to an HTML transcript, pause/resume, or wipe. No engine edits; nothing "
-        "leaves your machine."
+        "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls."
     ),
     "author": "Kody Wildfeuer",
     "tags": ["flight-recorder", "black-box", "logging", "observability", "privacy",

@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_sentiment_churn",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Customer Sentiment & Churn Agent",
-    "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
+    "description": "Analyzes customer sentiment, scores churn risk, and plans retention actions for banks using built-in demo data.",
     "author": "AIBAST",
     "tags": ["sentiment", "churn", "retention", "NPS", "analytics", "financial-services"],
     "category": "financial_services",

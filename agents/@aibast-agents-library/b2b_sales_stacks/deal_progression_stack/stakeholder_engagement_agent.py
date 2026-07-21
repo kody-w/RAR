@@ -22,9 +22,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_stakeholder_engagement",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Stakeholder Engagement",
-    "description": "Engagement scoring, relationship mapping, engagement planning, and sentiment analysis for deal stakeholders.",
+    "description": "Scores stakeholder engagement, maps relationships, and analyzes sentiment for active deals using built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "stakeholder-engagement", "deal-progression", "relationships"],
     "category": "b2b_sales",

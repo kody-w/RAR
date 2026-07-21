@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/email_drafting",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Email Drafting",
-    "description": "AI-powered email drafting for outreach, follow-ups, proposals, and template management with personalization.",
+    "description": "Drafts outreach, follow-up, and proposal emails from built-in templates and demo contact data (no LLM or mail system).",
     "author": "AIBAST",
     "tags": ["email", "drafting", "outreach", "follow-up", "proposal", "templates"],
     "category": "general",

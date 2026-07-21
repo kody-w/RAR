@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/dynamics_365_connector",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Dynamics 365 Connector",
-    "description": "Dynamics 365 connector for entity queries, record creation, bulk import, and schema inspection.",
+    "description": "Simulates Dynamics 365 entity queries, record creation, bulk import, and schema inspection using built-in demo data.",
     "author": "AIBAST",
     "tags": ["dynamics-365", "crm", "d365", "entity", "bulk-import", "schema"],
     "category": "general",

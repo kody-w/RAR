@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/activity_gap",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Activity Gap Analyzer",
-    "description": "Identifies missing sales activities per stage, evaluates completion, generates roadmaps, and analyzes gap impact.",
+    "description": "Flags missing sales activities per deal stage and builds completion roadmaps and gap-impact analyses from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "activity-gap", "deal-progression", "pipeline"],
     "category": "b2b_sales",

@@ -22,9 +22,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_regulatory_compliance",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "FS Regulatory Compliance Agent",
-    "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
+    "description": "Tracks SOX, Dodd-Frank, BSA, and MiFID II compliance with remediation plans and examiner prep from built-in demo data.",
     "author": "AIBAST",
     "tags": ["compliance", "SOX", "Dodd-Frank", "BSA", "AML", "regulatory", "financial-services", "MiFID-II", "trade-surveillance", "best-execution", "venue-ranking"],
     "category": "financial_services",

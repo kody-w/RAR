@@ -46,11 +46,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/drift",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "DriftAgent",
-    "description": ("Troll every canonical RAPP source for spec drift and "
-                    "report each conflict with which source wins (per the "
-                    "ecosystem authority order) and how to reconcile it."),
+    "description": ("Fetches canonical RAPP spec sources from GitHub, detects schema-version drift, and reports which source wins per the fixed authority order."),
     "author": "Kody Wildfeuer",
     "tags": ["drift", "spec", "authority", "rapp-god", "alignment", "audit"],
     "category": "core",

@@ -20,9 +20,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/it_helpdesk",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "IT Helpdesk",
-    "description": "AI-powered IT helpdesk with automated troubleshooting, knowledge retrieval, remote remediation, and ticket management.",
+    "description": "Runs simulated IT support \u2014 device diagnostics, remediation steps, KB search, technician scheduling \u2014 on built-in demo data.",
     "author": "AIBAST",
     "tags": ["it", "helpdesk", "troubleshooting", "itsm", "support"],
     "category": "it_management",

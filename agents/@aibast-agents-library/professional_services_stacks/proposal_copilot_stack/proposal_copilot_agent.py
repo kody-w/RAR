@@ -16,9 +16,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/proposal_copilot",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Proposal Copilot Agent",
-    "description": "Generates competitive proposals with pricing models, win-theme analysis from historical data, and competitive positioning against known bidders.",
+    "description": "Generates proposals, pricing models, win-theme analyses, and competitive positioning from built-in demo RFP data.",
     "author": "AIBAST",
     "tags": ["proposal", "RFP", "pricing", "competitive-intelligence", "professional-services"],
     "category": "professional_services",

@@ -23,9 +23,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/identify_discounts",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Identify Discounts",
-    "description": "Discount identification with eligibility checks, savings calculations, and approval workflow management.",
+    "description": "Scans built-in demo pricing data for discounts, checks eligibility, calculates savings, and drafts purchase orders.",
     "author": "AIBAST",
     "tags": ["discounts", "pricing", "savings", "eligibility", "approval"],
     "category": "general",

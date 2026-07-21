@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_intelligence",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Account Intelligence",
-    "description": "360-degree account briefings with stakeholder mapping, competitive analysis, and deal risk assessment.",
+    "description": "Generates 360-degree account briefings, stakeholder maps, competitive intel, and deal risk reports from synthetic CRM demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "account-intelligence", "stakeholder-mapping", "competitive-intel"],
     "category": "b2b_sales",

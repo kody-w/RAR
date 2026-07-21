@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/citizen_service_request",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Citizen Service Request Agent",
-    "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
+    "description": "Handles citizen service request intake, routing, status updates, and resolution summaries using built-in demo city data.",
     "author": "AIBAST",
     "tags": ["311", "citizen-services", "municipal", "routing", "SLA", "local-government"],
     "category": "slg_government",

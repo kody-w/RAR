@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_risk_assessment",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Account Risk Assessment",
-    "description": "Assesses deal risk, churn probability, and financial health with mitigation recommendations.",
+    "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "risk-assessment", "churn-prediction", "deal-risk"],
     "category": "b2b_sales",

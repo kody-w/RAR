@@ -17,9 +17,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/emission_tracking",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Emission Tracking Agent",
-    "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.",
+    "description": "Tracks facility GHG emissions, compliance status, and reduction plans for energy operators using built-in demo data.",
     "author": "AIBAST",
     "tags": ["emissions", "carbon", "compliance", "ghg", "sustainability", "energy"],
     "category": "energy",

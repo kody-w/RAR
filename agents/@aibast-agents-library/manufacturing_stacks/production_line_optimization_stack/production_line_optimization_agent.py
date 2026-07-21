@@ -16,9 +16,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/production_line_optimization",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Production Line Optimization Agent",
-    "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling.",
+    "description": "Analyzes OEE and bottlenecks and generates throughput and shift plans from built-in demo production-line data.",
     "author": "AIBAST",
     "tags": ["production", "OEE", "bottleneck", "throughput", "manufacturing"],
     "category": "manufacturing",

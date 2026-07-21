@@ -43,9 +43,9 @@ recommends grounded next actions.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/chief_of_staff_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ChiefOfStaff",
-    "description": "Personal AI executive partner — live M365-grounded brief, triage, meeting prep, commitments, drafts, weekly review.",
+    "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
     "author": "Howard Hoy",
     "tags": ["productivity", "chief-of-staff", "m365", "workiq", "executive", "triage", "meeting-prep"],
     "category": "productivity",

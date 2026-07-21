@@ -22,9 +22,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/utility_billing_assistance",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Utility Billing Assistance Agent",
-    "description": "Municipal utility billing support with account inquiries, usage analysis, payment plans, and assistance program eligibility.",
+    "description": "Answers utility billing inquiries, analyzes usage, and sets up payment plans and assistance eligibility from built-in demo data.",
     "author": "AIBAST",
     "tags": ["utility", "billing", "water", "payment", "assistance", "municipal", "leak-detection", "smart-meter"],
     "category": "slg_government",

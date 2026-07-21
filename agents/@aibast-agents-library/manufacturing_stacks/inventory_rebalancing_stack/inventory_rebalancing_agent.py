@@ -16,9 +16,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_rebalancing",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Inventory Rebalancing Agent",
-    "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
+    "description": "Analyzes multi-warehouse stock against demand forecasts and generates transfer and cost plans from built-in demo inventory data.",
     "author": "AIBAST",
     "tags": ["inventory", "warehouse", "supply-chain", "rebalancing", "manufacturing"],
     "category": "manufacturing",

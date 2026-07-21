@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/workforce_clearance_onboarding",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Workforce Clearance & Onboarding Agent",
-    "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.",
+    "description": "Tracks security clearances, onboarding checklists, background checks, and access provisioning using built-in demo data.",
     "author": "AIBAST",
     "tags": ["clearance", "onboarding", "background-check", "workforce", "federal", "access"],
     "category": "federal_government",

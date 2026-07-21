@@ -18,9 +18,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_loyalty_rewards",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Customer Loyalty & Rewards Agent",
-    "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics.",
+    "description": "Reports loyalty dashboards, points, reward recommendations, and churn-risk offers from built-in demo program data.",
     "author": "AIBAST",
     "tags": ["loyalty", "rewards", "points", "retention", "tier", "b2c"],
     "category": "b2c_sales",

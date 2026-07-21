@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_progression",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Deal Progression",
-    "description": "Pipeline health analysis, stalled-deal detection, action plan generation, and pipeline acceleration.",
+    "description": "Analyzes pipeline health, flags stalled deals, and generates action plans and executive summaries from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "deal-progression", "pipeline", "forecasting"],
     "category": "b2b_sales",

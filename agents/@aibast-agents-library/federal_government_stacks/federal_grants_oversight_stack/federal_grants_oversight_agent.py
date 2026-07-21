@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/federal_grants_oversight",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Federal Grants Oversight Agent",
-    "description": "Federal grants monitoring with dashboards, compliance tracking, reporting status, and audit preparation.",
+    "description": "Monitors federal grants with compliance dashboards, reporting status, and audit prep from built-in demo data.",
     "author": "AIBAST",
     "tags": ["grants", "oversight", "compliance", "audit", "federal", "reporting"],
     "category": "federal_government",

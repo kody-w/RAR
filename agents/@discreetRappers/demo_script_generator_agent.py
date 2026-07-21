@@ -6,9 +6,9 @@ import json
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/demo_script_generator_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "DemoScriptGenerator",
-    "description": "Generates v2.0.0 demo script JSON files for ScriptedDemoAgent. Creates 60-second demos with personas.",
+    "description": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates.",
     "author": "Bill Whalen",
     "tags": ["productivity", "demos", "generator", "json", "scripted"],
     "category": "productivity",

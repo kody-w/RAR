@@ -20,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_customer_onboarding",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "FS Customer Onboarding Agent",
-    "description": "Financial services customer onboarding with KYC verification, account setup, document checklists, and status tracking.",
+    "description": "Guides bank customer onboarding with KYC checks, document checklists, and status tracking using built-in demo data.",
     "author": "AIBAST",
     "tags": ["KYC", "onboarding", "account-setup", "compliance", "financial-services", "identity-verification", "sanctions-screening", "account-provisioning"],
     "category": "financial_services",

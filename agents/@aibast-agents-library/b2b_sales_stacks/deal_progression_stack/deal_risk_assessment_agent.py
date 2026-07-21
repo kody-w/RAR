@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_risk_assessment",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Deal Risk Assessment",
-    "description": "Multi-factor risk scoring, risk matrices, mitigation planning, and risk trend tracking for pipeline deals.",
+    "description": "Scores multi-factor deal risk and builds risk matrices, mitigation plans, and trend reports from built-in demo pipeline data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "risk-assessment", "deal-progression", "pipeline"],
     "category": "b2b_sales",

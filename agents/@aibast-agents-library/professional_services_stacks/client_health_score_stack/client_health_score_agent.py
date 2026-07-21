@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/client_health_score",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Client Health Score Agent",
-    "description": "Computes client health scores from NPS, margins, utilization, and escalation data to identify at-risk accounts and drive retention strategies.",
+    "description": "Computes client health scores from NPS, margin, and utilization metrics in built-in demo data to flag at-risk accounts.",
     "author": "AIBAST",
     "tags": ["client-health", "NPS", "retention", "professional-services", "churn"],
     "category": "professional_services",

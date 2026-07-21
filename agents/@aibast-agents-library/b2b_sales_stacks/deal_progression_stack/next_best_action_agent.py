@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/next_best_action",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Next Best Action",
-    "description": "Recommends prioritized actions, sequences tasks, forecasts impact, and optimizes rep assignments.",
+    "description": "Recommends prioritized next actions, sequences, impact forecasts, and rep assignments per deal from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "next-best-action", "deal-progression", "recommendations"],
     "category": "b2b_sales",

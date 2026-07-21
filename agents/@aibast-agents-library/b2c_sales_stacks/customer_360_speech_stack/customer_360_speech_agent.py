@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_360_speech",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Customer 360 & Speech Agent",
-    "description": "Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations.",
+    "description": "Serves unified customer profiles, interaction history, sentiment, and next-best actions from built-in demo data.",
     "author": "AIBAST",
     "tags": ["customer-360", "speech", "sentiment", "omnichannel", "profile", "b2c"],
     "category": "b2c_sales",

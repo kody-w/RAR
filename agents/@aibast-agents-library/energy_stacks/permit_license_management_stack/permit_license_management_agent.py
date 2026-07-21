@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/permit_license_management",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Permit & License Management Agent",
-    "description": "Tracks permits and licenses across energy facilities, manages renewal calendars, identifies compliance gaps, and monitors applications.",
+    "description": "Tracks energy facility permits, renewal calendars, and compliance gaps, with dry-run renewal workflows, from built-in demo data.",
     "author": "AIBAST",
     "tags": ["permits", "licenses", "compliance", "regulatory", "energy", "renewals"],
     "category": "energy",

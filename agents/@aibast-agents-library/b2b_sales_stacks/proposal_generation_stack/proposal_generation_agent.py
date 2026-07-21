@@ -20,9 +20,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/proposal_generation",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Proposal Generation",
-    "description": "AI-powered proposal generation with RFP analysis, personalized content, pricing optimization, and competitive positioning.",
+    "description": "Analyzes RFPs and assembles proposal packages with pricing, references, and win probability from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "proposal", "rfp", "pricing", "competitive-positioning"],
     "category": "b2b_sales",

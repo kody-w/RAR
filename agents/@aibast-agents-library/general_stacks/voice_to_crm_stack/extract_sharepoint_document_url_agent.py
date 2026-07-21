@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sharepoint_document_extractor",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "SharePoint Document Extractor",
-    "description": "SharePoint document search, URL extraction, metadata enrichment, and link validation.",
+    "description": "Simulates SharePoint document search, URL extraction, metadata enrichment, and link validation using built-in demo data.",
     "author": "AIBAST",
     "tags": ["sharepoint", "documents", "url-extraction", "metadata", "search"],
     "category": "general",

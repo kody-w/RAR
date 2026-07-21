@@ -11,9 +11,9 @@ with built-in disambiguation when multiple records match a query.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/dynamics_crud_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "DynamicsCRUD",
-    "description": "Dynamics 365 CRUD operations — accounts, contacts, opportunities, leads, tasks, activities.",
+    "description": "Simulates Dynamics 365 CRUD on accounts, contacts, opportunities, and leads with disambiguation, using built-in demo data.",
     "author": "Bill Whalen",
     "tags": ["integrations", "dynamics-365", "crm", "crud", "microsoft"],
     "category": "integrations",

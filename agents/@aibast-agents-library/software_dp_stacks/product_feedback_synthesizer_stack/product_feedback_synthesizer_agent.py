@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_feedback_synthesizer",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Product Feedback Synthesizer Agent",
-    "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
+    "description": "Synthesizes customer feedback, sentiment, and roadmap impact reports for product teams from built-in demo data; Jira/Teams writes are simulated.",
     "author": "AIBAST",
     "tags": ["feedback", "product", "feature-requests", "sentiment", "roadmap", "nps"],
     "category": "software_digital_products",

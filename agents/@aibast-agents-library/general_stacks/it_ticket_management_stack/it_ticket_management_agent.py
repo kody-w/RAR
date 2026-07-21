@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/it_ticket_management",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "IT Ticket Management",
-    "description": "IT ticket management with dashboards, priority assignment, SLA tracking, and resolution reporting.",
+    "description": "Reports IT ticket dashboards, priority assignments, SLA tracking, and resolution stats from built-in demo ticket data.",
     "author": "AIBAST",
     "tags": ["it", "tickets", "helpdesk", "sla", "priority", "resolution"],
     "category": "general",

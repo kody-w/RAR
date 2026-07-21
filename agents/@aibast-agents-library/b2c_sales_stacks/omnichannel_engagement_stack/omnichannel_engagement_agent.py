@@ -18,9 +18,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/omnichannel_engagement",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Omnichannel Engagement Agent",
-    "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
+    "description": "Analyzes channel performance, customer journeys, and campaign attribution from built-in demo engagement data.",
     "author": "AIBAST",
     "tags": ["omnichannel", "engagement", "journey", "attribution", "campaign", "b2c"],
     "category": "b2c_sales",

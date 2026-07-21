@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_simulation",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Sales Simulation",
-    "description": "Sales scenario simulation with buyer personas, objection practice, and performance scoring.",
+    "description": "Runs sales role-play scenarios with buyer personas, objection practice, and performance scoring using built-in demo data.",
     "author": "AIBAST",
     "tags": ["sales", "simulation", "training", "objections", "personas", "scoring"],
     "category": "general",

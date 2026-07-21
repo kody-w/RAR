@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_shopping_assistant",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Personalized Shopping Assistant Agent",
-    "description": "Personalized retail shopping with product recommendations, style profiling, inventory checks, and outfit building.",
+    "description": "Recommends products, builds outfits, and checks inventory for retail shoppers using built-in demo catalog data.",
     "author": "AIBAST",
     "tags": ["shopping", "personalization", "recommendations", "style", "inventory", "b2c"],
     "category": "b2c_sales",

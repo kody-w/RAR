@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/pipeline_velocity",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Pipeline Velocity",
-    "description": "Velocity dashboard, stage analysis, bottleneck detection, and acceleration planning for the sales pipeline.",
+    "description": "Measures pipeline velocity, detects stage bottlenecks, and drafts acceleration plans from built-in demo sales data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "pipeline-velocity", "deal-progression", "analytics"],
     "category": "b2b_sales",

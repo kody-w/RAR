@@ -170,7 +170,9 @@ def test_v111_operations_are_exposed_as_tool_parameters(agent_info):
     parameters = metadata.get("parameters", {})
     properties = parameters.get("properties", {})
 
-    assert manifest.get("version") == "1.1.1"
+    # Contract introduced at 1.1.1 — holds for that version and everything after.
+    version_key = tuple(int(p) for p in manifest.get("version", "0.0.0").split("."))
+    assert version_key >= (1, 1, 1)
     assert isinstance(operations, list) and operations
     assert properties.get("operation", {}).get("type") == "string"
     assert properties["operation"].get("enum") == operations

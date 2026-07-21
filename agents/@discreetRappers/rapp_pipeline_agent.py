@@ -30,9 +30,9 @@ Use this agent for ANY RAPP Pipeline task - it handles all 14 steps.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/rapp_pipeline_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "RAPP",
-    "description": "Full RAPP pipeline — transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",
+    "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage.",
     "author": "Bill Whalen",
     "tags": ["pipeline", "rapp", "transcript-to-agent", "code-gen", "quality-gates"],
     "category": "pipeline",

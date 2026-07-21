@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_health_score",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Deal Health Score",
-    "description": "Calculates deal health scores, trend analysis, benchmark comparison, and health alerts.",
+    "description": "Calculates 0-100 deal health scores with trends, benchmarks, and alerts from built-in demo pipeline data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "deal-health", "scoring", "pipeline"],
     "category": "b2b_sales",

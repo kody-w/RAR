@@ -20,9 +20,9 @@ from datetime import date, datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ask_hr",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Ask HR",
-    "description": "AI-powered HR assistant for time-off requests, benefits inquiries, parental leave, and policy lookups.",
+    "description": "Handles time-off requests, benefits, parental leave, and policy lookups for demo employees using built-in HR data.",
     "author": "AIBAST",
     "tags": ["hr", "human-resources", "benefits", "time-off", "employee-self-service"],
     "category": "human_resources",

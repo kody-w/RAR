@@ -23,9 +23,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cross_selling",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Cross-Selling Opportunities",
-    "description": "Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections.",
+    "description": "Reports cross-sell opportunities, product affinity, and revenue projections from built-in demo account data.",
     "author": "AIBAST",
     "tags": ["cross-sell", "upsell", "revenue", "product-affinity", "recommendations"],
     "category": "general",

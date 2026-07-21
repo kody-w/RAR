@@ -46,9 +46,9 @@ Operations:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rappter_engine_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RappterEngine",
-    "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",
+    "description": "Provides a base class for rules-as-data content engines \u2014 subclass it, override tick(), and run it as a CLI or brainstem tool.",
     "author": "Kody Wildfeuer",
     "tags": ["engine", "framework", "content", "automation", "rules-as-data", "heartbeat"],
     "category": "devtools",

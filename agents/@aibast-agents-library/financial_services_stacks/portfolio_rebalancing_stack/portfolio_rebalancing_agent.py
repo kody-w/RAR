@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/portfolio_rebalancing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Portfolio Rebalancing Agent",
-    "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
+    "description": "Analyzes portfolio drift and generates rebalancing trades, tax impact, and execution plans from built-in demo data.",
     "author": "AIBAST",
     "tags": ["portfolio", "rebalancing", "allocation", "tax", "trading", "financial-services", "retirement-projection", "risk-analysis"],
     "category": "financial_services",

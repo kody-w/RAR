@@ -31,12 +31,10 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/store_associate_copilot",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Store Associate Copilot Agent",
     "description": (
-        "Provides store associates with instant product lookup, guided "
-        "customer assistance scripts, daily task checklists, and real-time "
-        "performance dashboards to improve in-store operations."
+        "Gives store associates product lookups, assist scripts, task checklists, and dashboards from built-in demo retail data."
     ),
     "author": "AIBAST",
     "tags": [

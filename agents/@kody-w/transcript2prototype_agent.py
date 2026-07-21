@@ -83,11 +83,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/transcript2prototype",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Transcript2Prototype",
-    "description": ("Transcript -> demo script -> injected M365 demo iframe -> "
-                    "generated agent.pys -> local twin run -> live twin run -> "
-                    "factory singleton export (gate). One cubby per prototype."),
+    "description": ("Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."),
     "author": "Kody Wildfeuer",
     "tags": ["rapplication", "pipeline", "prototype", "demo", "cubby",
              "factory", "twin", "m365"],

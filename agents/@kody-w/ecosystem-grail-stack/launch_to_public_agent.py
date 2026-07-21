@@ -64,9 +64,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/launch_to_public_agent",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "display_name": "Launch to Public",
-    "description": "LOCAL\u2192GLOBAL push \u2014 snapshots local brainstem state via bond.py::pack_organism, plants/grafts to a target public repo with the bond technique (additive overlay, upstream files preserved). Emits rapp-launch-result/1.0 + rapp-launch-continuation/1.0 manifest + rapp-launch-fingerprint/1.0. Records kind='launch' bond event.",
+    "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
     "author": "kody-w",
     "tags": [
         "launch",

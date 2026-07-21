@@ -73,12 +73,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "display_name": "RappAgent",
-    "description": ("The one agent for the whole RAPP ecosystem: identity, "
-                    "doors, local cubbies, shared neighborhoods, eggs, the "
-                    "super-RAR, and zero-commit-risk streaming — and it knows "
-                    "the spec (action=spec) for navigating it all end to end."),
+    "description": ("Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."),
     "author": "Kody Wildfeuer",
     "tags": ["rapp", "ecosystem", "estate", "cubby", "neighborhood", "egg",
              "super-rar", "door", "spec", "universal"],

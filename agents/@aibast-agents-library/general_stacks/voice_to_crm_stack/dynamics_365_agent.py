@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_d365",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Voice to CRM (D365)",
-    "description": "Voice-driven D365 CRM updates with voice capture, entity extraction, record updates, and sync tracking.",
+    "description": "Simulates voice-driven Dynamics 365 updates \u2014 capture, entity extraction, record updates, sync status \u2014 with built-in demo data.",
     "author": "AIBAST",
     "tags": ["voice", "d365", "crm", "speech", "entity-extraction", "sync"],
     "category": "general",

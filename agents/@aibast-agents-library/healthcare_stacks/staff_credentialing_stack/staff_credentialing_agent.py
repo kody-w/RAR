@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/staff_credentialing",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Staff Credentialing Agent",
-    "description": "Manages staff credential tracking, expiration alerts, verification audits, and onboarding checklists for healthcare organizations.",
+    "description": "Tracks healthcare staff credentials, expirations, verification audits, and onboarding checklists in built-in demo data.",
     "author": "AIBAST",
     "tags": ["credentialing", "licenses", "certifications", "dea", "compliance", "healthcare"],
     "category": "healthcare",

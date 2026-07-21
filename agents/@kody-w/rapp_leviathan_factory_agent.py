@@ -73,15 +73,10 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_leviathan_factory",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "display_name": "RappLeviathanFactory",
     "description": (
-        "Generate a complete Rapp Leviathan — one operator's full digital "
-        "AI entity — from intent. Self-contained in one file: pulls no "
-        "sibling agents, composes 1-5 estates (Sanctum/Polity/Works/Press/"
-        "Commons) under a single top-level rappid, writes every file each "
-        "estate needs, and renders a five-organ anatomy dashboard. "
-        "bootstrap_check diagnoses LLM reachability before you generate."
+        "Generates a multi-estate 'Leviathan' digital entity under ~/.rapp \u2014 estate files, a five-organ anatomy dashboard, and an LLM reachability check."
     ),
     "author": "kody-w",
     "industry": "meta",

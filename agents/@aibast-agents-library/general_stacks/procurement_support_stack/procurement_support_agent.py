@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_support",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Procurement Support",
-    "description": "Procurement support for requisition tracking, contract lookups, supplier performance, and budget checks.",
+    "description": "Tracks requisition status, contract terms, supplier performance, and budgets using built-in demo procurement data.",
     "author": "AIBAST",
     "tags": ["procurement", "requisition", "contracts", "supplier", "budget"],
     "category": "general",

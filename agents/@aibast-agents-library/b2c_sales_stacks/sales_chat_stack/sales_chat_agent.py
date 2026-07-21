@@ -14,9 +14,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_chat",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Sales Chat Agent",
-    "description": "Retail sales chat support with product inquiries, availability checks, promotion lookups, and order assistance.",
+    "description": "Answers retail chat questions on products, availability, promotions, and orders using built-in demo store data.",
     "author": "AIBAST",
     "tags": ["sales", "chat", "product", "promotion", "order", "b2c"],
     "category": "b2c_sales",

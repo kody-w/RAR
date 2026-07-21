@@ -33,9 +33,9 @@ Usage:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/architecture_diagram_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ArchitectureDiagramAgent",
-    "description": "Generates professional architecture diagrams from system configurations using Mermaid, SVG, and ASCII.",
+    "description": "Generates architecture diagrams as PNG, SVG, PDF, Mermaid, or Draw.io XML from node/connection configs via the diagrams+graphviz library.",
     "author": "Bill Whalen",
     "tags": ["productivity", "diagrams", "architecture", "visualization", "mermaid"],
     "category": "productivity",

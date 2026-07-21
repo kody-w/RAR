@@ -3,9 +3,9 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_deploy_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "CopilotStudioDeploy",
-    "description": "Deploy a forged Copilot Studio bundle into a Dataverse / Power Platform environment. Assimilates two overlapping agents: REST ImportSolutionAsync (service-principal) and the pac-CLI end-to-end pipeline (analyze->normalize->package->deploy). Destructive imports are confirm-gated.",
+    "description": "Deploys forged Copilot Studio bundles into Dataverse via REST ImportSolutionAsync or the pac CLI pipeline, with confirm-gated destructive imports.",
     "author": "kody-w",
     "tags": ["copilot-studio", "deploy", "dataverse", "power-platform", "pac", "import-solution", "destructive", "assimilated"],
     "category": "core",

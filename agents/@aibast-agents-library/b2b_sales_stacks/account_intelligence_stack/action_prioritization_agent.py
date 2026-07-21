@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/action_prioritization",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Action Prioritization",
-    "description": "Prioritizes sales actions, generates daily plans, and optimizes resource allocation across deals.",
+    "description": "Prioritizes sales actions and builds daily plans, weekly reviews, and resource allocations from built-in demo deal data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "action-prioritization", "planning", "resource-allocation"],
     "category": "b2b_sales",

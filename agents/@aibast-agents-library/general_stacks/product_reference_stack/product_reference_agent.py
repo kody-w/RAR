@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_reference",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Product Reference",
-    "description": "Product catalog with feature comparison, pricing tiers, and compatibility checking.",
+    "description": "Looks up products, compares features, and checks pricing and compatibility across a built-in demo catalog.",
     "author": "AIBAST",
     "tags": ["product", "catalog", "pricing", "features", "compatibility"],
     "category": "general",

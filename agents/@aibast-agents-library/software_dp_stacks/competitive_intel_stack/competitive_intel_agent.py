@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/software_competitive_intel",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Competitive Intelligence Agent",
-    "description": "AI-powered competitive intelligence for SaaS market landscape analysis, feature comparisons, pricing analysis, and threat assessments.",
+    "description": "Reports SaaS market landscape, feature and pricing comparisons, and threat assessments from built-in demo competitor data.",
     "author": "AIBAST",
     "tags": ["competitive-intel", "market-analysis", "saas", "pricing", "threat-assessment"],
     "category": "software_digital_products",

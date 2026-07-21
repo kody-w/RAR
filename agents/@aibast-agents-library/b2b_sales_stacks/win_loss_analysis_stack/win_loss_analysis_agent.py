@@ -23,9 +23,9 @@ from datetime import datetime
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/win_loss_analysis",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Win/Loss Analysis",
-    "description": "AI-powered win/loss analysis with pattern recognition, competitive insights, revenue recovery modeling, and board-ready presentations.",
+    "description": "Analyzes closed deals for win/loss patterns, competitor insights, and revenue recovery models using built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "win-loss", "competitive-intel", "revenue-recovery"],
     "category": "b2b_sales",

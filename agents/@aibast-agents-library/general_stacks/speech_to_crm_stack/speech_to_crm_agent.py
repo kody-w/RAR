@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/speech_to_crm",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Speech to CRM",
-    "description": "Transcribes sales calls, extracts entities, maps to CRM fields, and previews record updates.",
+    "description": "Simulates call transcription, entity extraction, CRM field mapping, and update previews using built-in demo transcripts.",
     "author": "AIBAST",
     "tags": ["speech", "transcription", "crm", "entity-extraction", "nlp"],
     "category": "general",

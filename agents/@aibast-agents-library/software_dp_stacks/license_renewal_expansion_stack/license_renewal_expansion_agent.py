@@ -18,9 +18,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/license_renewal_expansion",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "License Renewal & Expansion Agent",
-    "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
+    "description": "Manages SaaS renewal pipelines, expansion opportunities, and churn-risk analysis using built-in demo account data.",
     "author": "AIBAST",
     "tags": ["license", "renewal", "expansion", "churn", "revenue", "saas"],
     "category": "software_digital_products",

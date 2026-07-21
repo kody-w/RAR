@@ -20,12 +20,10 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supply_chain_disruption_alert",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Supply Chain Disruption Alert Agent",
     "description": (
-        "Monitors supply chain networks for disruption events, performs "
-        "risk assessments, generates mitigation playbooks, and identifies "
-        "qualified alternative suppliers to maintain retail continuity."
+        "Flags supply-chain disruptions and generates risk assessments, mitigation plans, and alternate suppliers from built-in demo data."
     ),
     "author": "AIBAST",
     "tags": [

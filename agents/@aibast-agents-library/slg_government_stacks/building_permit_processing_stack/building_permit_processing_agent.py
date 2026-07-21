@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/building_permit_processing",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Building Permit Processing Agent",
-    "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation.",
+    "description": "Tracks building permit status, review checklists, inspector assignments, and fees using built-in demo municipal data.",
     "author": "AIBAST",
     "tags": ["permits", "building", "zoning", "inspection", "local-government", "fees", "code-compliance", "workflow-routing"],
     "category": "slg_government",

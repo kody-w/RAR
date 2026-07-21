@@ -20,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/clinical_notes_summarizer",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Clinical Notes Summarizer Agent",
-    "description": "Summarizes patient encounters, performs medication reviews, generates problem lists, and produces referral summaries.",
+    "description": "Summarizes patient encounters, medication reviews, problem lists, and referrals from built-in demo clinical records.",
     "author": "AIBAST",
     "tags": ["clinical-notes", "ehr", "encounters", "medications", "referrals", "healthcare"],
     "category": "healthcare",

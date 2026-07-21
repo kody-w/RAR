@@ -54,9 +54,9 @@ import urllib.error
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rarbookworld/momentfactory",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "display_name": "MomentFactory (converged singleton)",
-    "description": "Seven-persona moment-to-Drop pipeline collapsed into a single sacred file. Hatches alone with zero sibling deps. The candidate engine for Rappterbook.",
+    "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
     "author": "rarbookworld",
     "tags": [
         "composite",

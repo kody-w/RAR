@@ -15,9 +15,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/order_status_communication",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "display_name": "Order Status Communication Agent",
-    "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
+    "description": "Tracks manufacturing orders and shipments and drafts delay notifications and customer updates using built-in demo data.",
     "author": "AIBAST",
     "tags": ["orders", "communication", "shipment", "customer-service", "manufacturing"],
     "category": "manufacturing",

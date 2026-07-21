@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/find_accurate_models",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Find Accurate Models",
-    "description": "AI/ML model search and comparison by accuracy benchmarks, deployment readiness, and cost analysis.",
+    "description": "Compares a built-in demo catalog of AI/ML models by accuracy, deployment readiness, and cost.",
     "author": "AIBAST",
     "tags": ["ai", "ml", "model-selection", "benchmarks", "accuracy", "deployment"],
     "category": "general",

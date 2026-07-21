@@ -20,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/field_service_dispatch",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Field Service Dispatch Agent",
-    "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure.",
+    "description": "Coordinates energy field-service dispatch, routing, crew assignment, and outage response using built-in demo data with simulated writes.",
     "author": "AIBAST",
     "tags": ["field-service", "dispatch", "routing", "technicians", "emergency", "energy"],
     "category": "energy",

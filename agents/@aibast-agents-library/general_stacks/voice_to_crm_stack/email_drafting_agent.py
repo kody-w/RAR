@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_email",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Voice to CRM Email",
-    "description": "Meeting recap generation, action item extraction, follow-up email drafting, and distribution list management.",
+    "description": "Generates meeting recaps, action items, follow-up email drafts, and distribution lists from built-in demo meeting data.",
     "author": "AIBAST",
     "tags": ["voice", "email", "meeting-recap", "action-items", "follow-up"],
     "category": "general",

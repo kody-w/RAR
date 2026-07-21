@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_coach",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Sales Coach",
-    "description": "AI-powered sales coaching with call reviews, skill assessments, coaching plans, and performance dashboards.",
+    "description": "Generates call reviews, skill assessments, coaching plans, and performance dashboards from built-in demo sales data.",
     "author": "AIBAST",
     "tags": ["sales", "coaching", "training", "performance", "call-review"],
     "category": "general",

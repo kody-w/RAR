@@ -31,9 +31,9 @@ produces a self-contained HTML report that auto-opens in your browser.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/recon_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Recon",
-    "description": "URL intelligence scanner — point it at any URL for a full recon report: tech stack, security headers, API schema, SSL, performance. Every scan produces an auto-opening HTML report.",
+    "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
     "author": "Howard Hoy",
     "tags": ["recon", "url", "security", "api", "scanner", "headers", "ssl", "tech-stack"],
     "category": "productivity",
@@ -738,4 +738,4 @@ class ReconAgent(BasicAgent):
             "history": self._action_history,
         }
         handler = dispatch.get(action, self._action_scan)
-        return handler(url=url, url2=url2)
+        return handler(url=url, url2=url2)

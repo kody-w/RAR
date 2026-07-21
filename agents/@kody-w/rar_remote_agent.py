@@ -16,9 +16,9 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rar_remote_agent",
-    "version": "1.7.2",
+    "version": "1.7.3",
     "display_name": "RAR Remote Agent",
-    "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
+    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
     "author": "RAPP Core Team",
     "tags": ["core", "registry", "package-manager", "install", "discovery", "voting", "community"],
     "category": "core",

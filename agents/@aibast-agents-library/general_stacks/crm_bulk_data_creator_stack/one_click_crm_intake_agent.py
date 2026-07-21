@@ -19,9 +19,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/one_click_crm_intake",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "One-Click CRM Intake",
-    "description": "Streamlined CRM data intake with form generation, validation, duplicate detection, and import preview.",
+    "description": "Generates CRM intake forms and previews validation, duplicate checks, and imports using built-in demo data.",
     "author": "AIBAST",
     "tags": ["crm", "intake", "data-validation", "duplicate-detection", "import"],
     "category": "general",

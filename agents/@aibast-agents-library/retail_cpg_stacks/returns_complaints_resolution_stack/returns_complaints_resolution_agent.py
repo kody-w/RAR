@@ -20,12 +20,10 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_complaints_resolution",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Returns & Complaints Resolution Agent",
     "description": (
-        "Automates return processing, classifies customer complaints, "
-        "recommends optimal resolutions, and identifies complaint trends "
-        "for retail and CPG customer service teams."
+        "Processes returns, classifies complaints, and recommends resolutions using built-in demo retail customer-service data."
     ),
     "author": "AIBAST",
     "tags": [

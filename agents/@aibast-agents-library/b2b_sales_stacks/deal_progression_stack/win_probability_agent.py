@@ -21,9 +21,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/win_probability",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Win Probability",
-    "description": "Calculates win probabilities, analyzes contributing factors, tracks trends, and compares deals.",
+    "description": "Calculates deal win probabilities with factor analysis, trend tracking, and deal comparisons from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "win-probability", "deal-progression", "forecasting"],
     "category": "b2b_sales",

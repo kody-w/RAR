@@ -23,9 +23,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_agent",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Procurement Agent",
-    "description": "Procurement management for purchase requests, vendor comparison, approval routing, and spend analysis.",
+    "description": "Manages purchase requests, vendor comparisons, approval routing, and spend analysis over built-in demo procurement data.",
     "author": "AIBAST",
     "tags": ["procurement", "purchasing", "vendor", "approval", "spend-analysis"],
     "category": "general",
