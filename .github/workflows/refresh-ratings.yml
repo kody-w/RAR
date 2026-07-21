@@ -1,0 +1,67 @@
+name: Refresh Community Data
+
+# Once a day: seed any missing per-agent Discussion threads, re-count
+# positive reactions, rebuild the ecosystem federation snapshot
+# (rapplications, senses, skills), and commit ONLY when something
+# actually changed — so quiet days don't produce redundant commits.
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the refreshed ratings snapshot
+  discussions: write # seed threads for newly registered agents
+
+concurrency:
+  group: refresh-ratings
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Idempotent: creates threads only for agents that don't have one
+      # yet (new registry entries). Capped per run to stay under GitHub
+      # content-creation rate limits; the daily cron drains any backlog.
+      - name: Seed missing agent threads
+        run: python scripts/discussion_ratings.py seed --limit 80
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Non-fatal by design: any API problem leaves the snapshot
+      # unchanged rather than failing the run or erasing real counts.
+      - name: Fetch ratings snapshot
+        run: python scripts/discussion_ratings.py fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Consolidated storefront: snapshot the peer stores (RAPP_Store
+      # rapplications, RAPP_Sense_Store senses, rapp-skills catalogs)
+      # into state/federation.json. Also non-fatal per source.
+      - name: Rebuild federation snapshot
+        run: python scripts/build_federation.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit snapshots if changed
+        run: |
+          FILES="state/discussion_ratings.json state/federation.json"
+          if [ -z "$(git status --porcelain $FILES)" ]; then
+            echo "No changes; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "chore(community): refresh ratings + federation snapshots [skip ci]"
+          git pull --rebase origin main
+          git push origin main

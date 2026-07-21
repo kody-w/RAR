@@ -82,6 +82,8 @@ __manifest__ = {
 | `CONSTITUTION.md` | Governing document — single-file principle, namespaces, tiers, security, categories. |
 | `rar.config.json` | Federation and feature flags. |
 | `scripts/process_issues.py` | GitHub Issues-as-API processor (vote, review, submit_agent actions). |
+| `scripts/discussion_ratings.py` | GitHub Discussions upvote/comment backend — `seed` creates one thread per agent, `fetch` snapshots positive reactions into `state/discussion_ratings.json`. |
+| `scripts/build_federation.py` | Consolidated storefront snapshot — pulls the peer-store catalogs (RAPP_Store rapplications, RAPP_Sense_Store senses, rapp-skills) into `state/federation.json` for the store's Ecosystem tab. |
 | `scripts/generate_holo_cards.py` | Procedural card art generation (MTG-style trading cards). |
 
 ### Agent Namespaces
@@ -106,6 +108,7 @@ Promotion path: **Frontier → Community → Verified → Official**
 
 - `build-registry.yml` — rebuilds `registry.json` on pushes to `agents/**`
 - `process-issues.yml` — processes GitHub Issues with `[RAR]`/`[AGENT]` prefix for votes, reviews, submissions
+- `refresh-ratings.yml` — daily: seeds Discussion threads for new agents, re-counts positive reactions (thumbs-up/heart/hooray/rocket/laugh only; downvotes never count), commits `state/discussion_ratings.json` only when counts changed
 - `rappterpedia-heartbeat.yml` — Dream Catcher fleet: 5 parallel workers every 2 hours, produces deltas, merges at frame boundary
 - `template_setup.yml` — setup automation for new federated instances
 

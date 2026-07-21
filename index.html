@@ -634,6 +634,15 @@ function render() {
 
 const LOCK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" style="display:inline-block;vertical-align:middle;margin-right:3px"><rect x="3" y="8" width="14" height="11" rx="2" fill="none" stroke="#bc8cff" stroke-width="1.6" opacity="0.7"/><path d="M6 8 v-4 a4 4 0 0 1 8 0 v4" fill="none" stroke="#bc8cff" stroke-width="1.5" opacity="0.6"/><circle cx="10" cy="13" r="1.5" fill="#bc8cff" opacity="0.7"/><line x1="10" y1="13" x2="10" y2="16" stroke="#bc8cff" stroke-width="1.5" opacity="0.7"/></svg>';
 
+// GitHub Discussion ratings (upvotes = positive reactions on each
+// agent's Discussion thread; snapshot baked by refresh-ratings.yml).
+let ghRatings = { agents: {} };
+const THUMB_SVG = '<svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor" style="display:inline-block;vertical-align:-1px"><path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184Z"/></svg>';
+fetch(RAW + '/state/discussion_ratings.json')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => { if (d && d.agents) { ghRatings = d; if (allAgents.length) render(); } })
+  .catch(() => {});
+
 function card(a) {
   const isStub = a.type === 'stub';
   const lockBadge = isStub
@@ -652,6 +661,7 @@ function card(a) {
           <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by ${esc(a.author)}</span>
         </span>
+        ${(ghRatings.agents?.[a.name]?.upvotes || 0) > 0 ? `<a href="${esc(ghRatings.agents[a.name].url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="cat-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="GitHub Discussion upvotes — react with a thumbs-up to vote">${THUMB_SVG} ${ghRatings.agents[a.name].upvotes}</a>` : ''}
         ${cartBtn}
       </div>
     </div>`;

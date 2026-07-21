@@ -1,0 +1,450 @@
+{
+  "schema": "rar-federation/1.0",
+  "rapplications": [
+    {
+      "id": "agent_team",
+      "name": "AgentTeam",
+      "version": "0.1.0",
+      "summary": "The persona-routing brain of Bill Whalen's Agent Team Starter Kit, ported to a single rapplication. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "agent-team",
+        "persona-routing",
+        "outcome-first",
+        "github-issues",
+        "azure"
+      ],
+      "manifest_name": "@kody-w/agent-team-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/singleton/agent_team_agent.py",
+      "singleton_sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "bookfactory",
+      "name": "BookFactory",
+      "version": "0.3.0",
+      "summary": "Five-persona content pipeline (Writer → Editor → CEO → Publisher → Reviewer). One call, one chapter back.",
+      "category": "creative",
+      "tags": [
+        "composite",
+        "creative-pipeline",
+        "twin-stack",
+        "singleton",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/book-factory-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/singleton/bookfactory_agent.py",
+      "singleton_sha256": "1224fe87e3cfbc569aa6d0aa5edf5f796247a9cdbcd5e26222399e68373e4f02",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit",
+      "version": "1.0.0",
+      "summary": "Local-first control plane for SSH-reachable hosts. Chat agent + HTTP backplane + browser UI on one local state dir. One operator drives N remote machines; nothing leaves the box.",
+      "category": "platform",
+      "tags": [
+        "rapplication",
+        "cockpit",
+        "local-first",
+        "ssh",
+        "agent-organ-ui",
+        "private"
+      ],
+      "manifest_name": "@wildhaven/cockpit",
+      "access": "private",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/singleton/cockpit_agent.py",
+      "singleton_sha256": "c77195ef84de42e4c1a13c509d0262e6c44c1ee2e27abcb26673bec40eb753ef",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "coe_starter_kit",
+      "name": "CoE Starter Kit",
+      "version": "1.0.0",
+      "summary": "Bill Whalen's Agent Team (BWAT) starter kit as one rapplication. Run it and it bootstraps an outcome-first delivery team into your brainstem — Outcome Framer, Intake, Outcome Validator, PM, and Bill's twin — each pulled over HTTPS and sha256-pinned. Self-contained, stdlib-only.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "agent-team",
+        "coe",
+        "starter-kit",
+        "outcome-first",
+        "bootstrap"
+      ],
+      "manifest_name": "@bill/coe-starter-kit-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/singleton/coe_starter_kit_agent.py",
+      "singleton_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "rapp_commons",
+      "name": "RAPP Commons",
+      "version": "1.0.0",
+      "summary": "A contribution app for the RAPP Commons — the stack-agnostic social network for agents. Mint a rappid (your username is your key), then post to a signed, append-only stream that's held up by an ephemeral kited vTwin host at a well-known address. No sign-up, no server, no account: the key is the acc…",
+      "category": "workspace",
+      "tags": [
+        "rapplication",
+        "commons",
+        "social",
+        "agents",
+        "kited",
+        "signed"
+      ],
+      "manifest_name": "@kody-w/rapp_commons_singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_commons/singleton/commons_agent.py",
+      "singleton_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "rapp_god_forum",
+      "name": "rapp-god Forum",
+      "version": "1.0.0",
+      "summary": "The agentic forum for the full RAPP stack — a threaded discussion forum where people and agents talk through the whole thing end to end (brainstem, kited layer, RACon, commons, registry, agents, governance). Mirrors the RAPP Commons pattern (rapp-commons-protocol/2.0, forum profile): your rappid is…",
+      "category": "workspace",
+      "tags": [
+        "rapplication",
+        "forum",
+        "social",
+        "rapp-god",
+        "agents",
+        "kited"
+      ],
+      "manifest_name": "@kody-w/rapp_god_forum_singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
+      "singleton_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "spine_dag",
+      "name": "SpineDAG",
+      "version": "1.0.0",
+      "summary": "Universal Directed-Acyclic-Graph analyser. Point it at any folder, code project, Excel workbook, JSON/YAML config, or block of prose; it builds the dependency graph, finds hubs, leaves, orphans, cycles, and the critical path, scores Spine Health 0-100, and returns Markdown with a Mermaid diagram, A…",
+      "category": "analysis",
+      "tags": [
+        "rapplication",
+        "dag",
+        "graph",
+        "dependency",
+        "audit",
+        "mermaid"
+      ],
+      "manifest_name": "@blazingbeard/spine-dag-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/singleton/spine_dag_agent.py",
+      "singleton_sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "thoughtbox",
+      "name": "Thoughtbox",
+      "version": "1.0.0",
+      "summary": "Local-first reflection journal — append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "journal",
+        "local-first",
+        "scratchpad",
+        "has-ui",
+        "stateless-agent"
+      ],
+      "manifest_name": "@kody-w/thoughtbox",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
+      "singleton_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "vibe-coding-loop",
+      "name": "Vibe Coding Loop",
+      "version": "1.0.0",
+      "summary": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships.",
+      "category": "workflow",
+      "tags": [
+        "publishing",
+        "orchestration",
+        "vibe-coding",
+        "single-file-html",
+        "loop",
+        "templates"
+      ],
+      "manifest_name": "@kody-w/vibe-coding-loop",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/vibe-coding-loop/singleton/vibe_coding_loop_agent.py",
+      "singleton_sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "wildhaven_ceo",
+      "name": "WildhavenCEO",
+      "version": "0.1.0",
+      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org,…",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "ceo",
+        "persona",
+        "workspace",
+        "vault",
+        "operator"
+      ],
+      "manifest_name": "@wildhaven/wildhaven-ceo-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/singleton/wildhaven_ceo_agent.py",
+      "singleton_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    }
+  ],
+  "senses": [
+    {
+      "name": "spark",
+      "publisher": "@kody-w",
+      "version": "0.1.0",
+      "description": "SPARK — append a fresh creative chain prompt each turn (in the style of the 10 mind-blowers).",
+      "delimiter": "|||SPARK|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@kody-w/spark_sense.py",
+      "sha256": "af421a84f0e55ac872ad0c21f5b1b6fb554c48485d4cc4eccb523b4545060f58",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    },
+    {
+      "name": "eli5",
+      "publisher": "@rapp",
+      "version": "0.1.0",
+      "description": "ELI5 — the same response, explained to a five-year-old.",
+      "delimiter": "|||ELI5|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/eli5_sense.py",
+      "sha256": "576307675f2a91d984133c8fc5300200b6d43ef6cb90fef9fa5507da8339ee2c",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    },
+    {
+      "name": "emoji",
+      "publisher": "@rapp",
+      "version": "0.1.0",
+      "description": "EMOJI — the same response, as an emoji sequence.",
+      "delimiter": "|||EMOJI|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/emoji_sense.py",
+      "sha256": "e6a66c784c98084ed30ea708b2019d5150fac2b84c20030c195b2f22f0855e03",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    },
+    {
+      "name": "haiku",
+      "publisher": "@rapp",
+      "version": "0.1.0",
+      "description": "HAIKU — the same response, as a 5-7-5 poem.",
+      "delimiter": "|||HAIKU|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/haiku_sense.py",
+      "sha256": "af0b3fcd34ae019d91f64aeacaba7e38d79d4297d38bc0f09972384cc3686129",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    },
+    {
+      "name": "headline",
+      "publisher": "@rapp",
+      "version": "0.1.0",
+      "description": "HEADLINE — the same response, as a news headline.",
+      "delimiter": "|||HEADLINE|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/headline_sense.py",
+      "sha256": "70f8cf64b5b74f9779c8a0f795cebb906401a09d6b85c81eb2768809c8d8e3b9",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    },
+    {
+      "name": "tldr",
+      "publisher": "@rapp",
+      "version": "0.1.0",
+      "description": "TLDR — the same response, compressed to one sentence.",
+      "delimiter": "|||TLDR|||",
+      "surfaces": [
+        "chat"
+      ],
+      "url": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/tldr_sense.py",
+      "sha256": "79ff5e04fdd9e3518b359c66eaf141538c88848527207ff70ab5628e8c0bfc5e",
+      "repo_url": "https://github.com/kody-w/RAPP_Sense_Store"
+    }
+  ],
+  "skills": [
+    {
+      "name": "brainstem-reset",
+      "description": "Fresh-install test of the RAPP brainstem exactly as a first-time user would get it: kill the running service, archive and clear ~/.brainstem, VERIFY it is actually gone, reinstall from the public one-liner, and verify the new install answers on :7071. USE THIS SKILL when Kody says: \"fresh install t…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/brainstem-reset",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/brainstem-reset/SKILL.md"
+    },
+    {
+      "name": "deep-research",
+      "description": "Performs rigorous, evidence-first deep research using distinct parallel research strategies, primary sources, local artifacts, controlled experiments, adversarial verification, and confidence-rated synthesis. Use when a user asks for deep research, exhaustive investigation, reverse engineering, cur…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/deep-research",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/deep-research/SKILL.md"
+    },
+    {
+      "name": "demo-ship",
+      "description": "Deploy the current agents to the cloud function, prove them end-to-end against the LIVE endpoint, generate the M365-styled HTML demo page, pop it open, and notify. One verb for the whole chain — never hand work back unverified. USE THIS SKILL when Kody says anything like: \"upload to the function an…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/demo-ship",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/demo-ship/SKILL.md"
+    },
+    {
+      "name": "digital-twin-builder",
+      "description": "Analyzes vault content to build and maintain a digital twin profile of Kody. Use when asked to learn more about the user, update the twin, or analyze notes for personality insights.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/digital-twin-builder",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/digital-twin-builder/SKILL.md"
+    },
+    {
+      "name": "estate-sweep",
+      "description": "Clone-and-lint drift sweep across every public kody-w repo using the shared rapp-drift-lint. Use when Kody says \"sweep the estate\", \"estate sweep\", \"lint all my repos\", \"is the estate clean\", \"check everything for drift\", or after a canon/spec change that could ripple across the RAPP estate. Read-o…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/estate-sweep",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/estate-sweep/SKILL.md"
+    },
+    {
+      "name": "exec-proof",
+      "description": "Pre-demo smoke test — verify the install/demo path works on a machine that is NOT this one, exactly as a first-time user would run it, before anyone runs it live. Use before demos, customer sessions, or offsites; whenever the user says \"exec proof this\", \"will this work on their machine\", \"smoke te…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/exec-proof",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/exec-proof/SKILL.md"
+    },
+    {
+      "name": "film-m365",
+      "description": "Film a Copilot Studio agent in the REAL M365 Copilot surface — the ONLY sanctioned way to make agent demo videos. Playwright drives a dedicated authed Chrome profile, records the page via CDP (no screen capture, no desktop takeover), then trims, dead-time-compresses, and gate-verifies to GO. Use wh…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/film-m365",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/film-m365/SKILL.md"
+    },
+    {
+      "name": "flex-unbrick",
+      "description": "Unbrick an Azure Flex Consumption function app after a tenant security-policy sweep silently re-disables storage public network access (app 403/503s, PNA=Disabled). Runs the proven 2026-07-09 runbook — PNA check, SecurityControl=Ignore tag, re-enable PNA, full stop/start, bounded health poll.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/flex-unbrick",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/flex-unbrick/SKILL.md"
+    },
+    {
+      "name": "fy27-priority-agents",
+      "description": "Regenerate the FY27 Priority Agents report (cross-customer analysis) with the LATEST data. USE THIS SKILL when the user asks to \"run the FY27 report\", \"refresh the priority agents report\", \"re-pull the agent scenarios\", \"get the latest customer agents\", \"rerun the agent sweep\", or anything about th…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/fy27-priority-agents",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/fy27-priority-agents/SKILL.md"
+    },
+    {
+      "name": "harvest",
+      "description": "Distill a finished project from the Obsidian vault into a wiki article and cross-link it",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/harvest",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/harvest/SKILL.md"
+    },
+    {
+      "name": "kody-twin",
+      "description": "Digital twin persona of Kody Wildfeuer. Invoke when Kody needs representation - for meetings, responses, or decisions. Reads the learned profile and embodies Kody's personality, knowledge, and communication style.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/kody-twin",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/kody-twin/SKILL.md"
+    },
+    {
+      "name": "mcs-deploy",
+      "description": "Take a built Copilot Studio solution (or build one from agent.py files first), import it with a FRESH version name, publish in the correct order, verify it actually answers, and hand back the maker-portal link. Never asks Kody for creds that live in local.settings.json. USE THIS SKILL when Kody say…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/mcs-deploy",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/mcs-deploy/SKILL.md"
+    },
+    {
+      "name": "msft-deck",
+      "description": "Build, restyle, or revise a PowerPoint deck in Kody's Microsoft styling, self-review every slide visually, and only hand it over verified and popped open. Use whenever the user asks for a deck, slides, a pptx, a one-pager deck, to \"restyle\" a deck, to make slides \"look like the STYLED one\" / \"not l…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/msft-deck",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/msft-deck/SKILL.md"
+    },
+    {
+      "name": "muscle",
+      "description": "Run the CSM delegation loop: hand grunt/bulk work (building, drafting, coding, doc generation, deep debugging) to GitHub Copilot CLI GPT-5.6 Sol as a background muscle job, then gate-check the FULL result hands-on with real inputs, fix via --resume rounds until it stands, and add the Fable-only lay…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/muscle",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/muscle/SKILL.md"
+    },
+    {
+      "name": "obsidian-vault-steward",
+      "description": "Manages Obsidian vault as primary note-taking and memory system. Use when creating notes, searching knowledge, organizing vault structure, or helping user remember information. Use proactively for all vault-related tasks.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/obsidian-vault-steward",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/obsidian-vault-steward/SKILL.md"
+    },
+    {
+      "name": "overnight",
+      "description": "Run Kody's improve-to-120 kata as an unattended autonomous loop with a verifiable ledger, commits along the way, and a morning report. USE THIS SKILL when Kody says anything like \"run overnight\", \"work autonomously through the night\", \"autonomously evolve this for 24 hours\", \"until you run out of c…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/overnight",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/overnight/SKILL.md"
+    },
+    {
+      "name": "rapp-brainstem",
+      "description": "Drive the local RAPP brainstem (a Flask server on localhost:7071) for any request that involves RAPP, the brainstem, RAR (the RAPP Agent Registry), community agents, or \"the twin\". Every capability — discover/install/vote on community agents, run user-defined Python agents, drive memory, ask the tw…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp-brainstem",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp-brainstem/SKILL.md"
+    },
+    {
+      "name": "rapp-pipeline",
+      "description": "Run RAPP (Rapid Agent Prototyping Platform) pipeline to generate AI agents from transcripts. Use when building agents, generating Copilot Studio solutions, or deploying to Microsoft AI stack.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp-pipeline",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp-pipeline/SKILL.md"
+    },
+    {
+      "name": "rapp1-compliance-sweep",
+      "description": "Performs authorized, evidence-first RAPP/1 rev-5 compliance sweeps over one repository or a repository estate. Use for literal file-by-file audits, recursive archive review, standing-guard checks, drift remediation, producer and consumer validation, decision-ready GitHub issues, and fixpoint re-swe…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp1-compliance-sweep",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp1-compliance-sweep/SKILL.md"
+    },
+    {
+      "name": "ship",
+      "description": "Commit, push, publish to GitHub Pages, and hand back a VERIFIED live URL. Use whenever the user says \"push it\", \"publish this\", \"ship it\", \"make this live\", \"show me the link so I can test\", or finishes building anything static (single-file HTML app, demo, deck, agent page) that belongs on the web.…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/ship",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/ship/SKILL.md"
+    },
+    {
+      "name": "transcript-miner",
+      "description": "Mine Claude Code session history for usage patterns, mistakes, and automation candidates. Use when Kody says \"audit my sessions\", \"what am I doing wrong in Claude Code\", \"usage audit\", \"mine my transcripts\", \"analyze my Claude Code history\", \"what should be a skill\", or asks how he's using Claude C…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/transcript-miner",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/transcript-miner/SKILL.md"
+    },
+    {
+      "name": "wow",
+      "description": "Generate demo prompts that show off the current product's power — with a persistent ledger so suggestions never repeat and ambition ratchets up. Use whenever the user asks for \"the coolest prompts\", \"mind-blowing prompts\", \"prompts that show off the power\", \"demo prompts\", \"give me 10\", or is prepp…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/wow",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/wow/SKILL.md"
+    }
+  ]
+}

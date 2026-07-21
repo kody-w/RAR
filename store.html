@@ -2468,6 +2468,7 @@
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="swarms" onclick="switchTab('swarms')">Swarms</button>
+    <button class="nav-btn" data-tab="ecosystem" onclick="switchTab('ecosystem')">Ecosystem</button>
     <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
 
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
@@ -2509,6 +2510,7 @@
         <option value="name">A-Z</option>
         <option value="newest">Newest</option>
         <option value="popular">Most Voted</option>
+        <option value="gh_rated">Top Reactions (GitHub)</option>
         <option value="rating">Top Rated</option>
         <option value="verified">Verified First</option>
       </select>
@@ -2612,6 +2614,22 @@
     </div>
     <div class="agent-grid" id="swarms-grid">
       <div class="loading"><div class="spinner"></div><br>Loading swarms...</div>
+    </div>
+  </div>
+
+  <!-- Ecosystem — federated peer stores (RAPP_Store, Sense Store, Skills) -->
+  <div class="panel" id="panel-ecosystem">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">One Storefront, Every Store</div>
+      <h2 style="font-size:1.4rem;font-weight:800;margin:4px 0">RAPP ECOSYSTEM</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:560px;margin:8px auto 0">
+        Rapplications (bundled agent + UI/service/state), Senses (per-channel output overlays),
+        and portable Skills — browsed here, hosted in their home repos.
+        Refreshed daily into <code>state/federation.json</code>.
+      </p>
+    </div>
+    <div id="ecosystem-container">
+      <div class="loading"><div class="spinner"></div><br>Loading federation catalog...</div>
     </div>
   </div>
 
@@ -3254,6 +3272,13 @@ let allAgents = [];
 let allSwarms = [];
 let votes = { agents: {} };
 let reviews = { agents: {} };
+// GitHub Discussion ratings snapshot: one Discussion per agent;
+// upvotes = positive reactions, comments = the thread. Baked at
+// refresh time into state/discussion_ratings.json.
+let ghRatings = { agents: {} };
+// Federated peer-store catalog (rapplications, senses, skills) —
+// snapshot of state/federation.json, rebuilt daily by refresh-ratings.yml.
+let federation = null;
 let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
 let currentCat = 'all';
 // Gated (type:'stub') cards default to hidden — most users only want
@@ -3664,11 +3689,13 @@ async function init() {
   await loadConfig();
   await handleAuthCallback();
   checkAuth();
-  const [reg, v, r, holoData] = await Promise.all([
+  const [reg, v, r, holoData, gr, fed] = await Promise.all([
     fetchJSON(`${RAW}/registry.json`),
     fetchJSON(`${RAW}/state/votes.json`),
     fetchJSON(`${RAW}/state/reviews.json`),
     fetchJSON(`${RAW}/cards/holo_cards.json`),
+    fetchJSON(`${RAW}/state/discussion_ratings.json`),
+    fetchJSON(`${RAW}/state/federation.json`),
   ]);
   if (holoData) _holoCards = holoData;
   if (reg) {
@@ -3682,13 +3709,16 @@ async function init() {
   }
   if (v) votes = v;
   if (r) reviews = r;
+  if (gr && gr.agents) ghRatings = gr;
+  if (fed) federation = fed;
 
   // If instance, merge upstream registry
   if (IS_INSTANCE && UPSTREAM_RAW) {
-    const [uReg, uV, uR] = await Promise.all([
+    const [uReg, uV, uR, uGR] = await Promise.all([
       fetchJSON(`${UPSTREAM_RAW}/registry.json`),
       fetchJSON(`${UPSTREAM_RAW}/state/votes.json`),
       fetchJSON(`${UPSTREAM_RAW}/state/reviews.json`),
+      fetchJSON(`${UPSTREAM_RAW}/state/discussion_ratings.json`),
     ]);
     if (uReg) {
       const localNames = new Set(allAgents.map(a => a.name));
@@ -3697,6 +3727,7 @@ async function init() {
     }
     if (uV) { for (const [k, d] of Object.entries(uV.agents || {})) { if (!votes.agents[k]) votes.agents[k] = d; } }
     if (uR) { for (const [k, d] of Object.entries(uR.agents || {})) { if (!reviews.agents[k]) reviews.agents[k] = d; } }
+    if (uGR) { for (const [k, d] of Object.entries(uGR.agents || {})) { if (!ghRatings.agents[k]) ghRatings.agents[k] = d; } }
   }
 
   if (IS_INSTANCE) renderInstanceBanner();
@@ -3925,6 +3956,7 @@ function switchTab(tab) {
   if (tab === 'packs') { renderPackShelfWithOdds(); renderCollection(); renderPullHistory(); renderTrophyCase(); }
   if (tab === 'stream') renderStreamedAgents();
   if (tab === 'swarms') renderSwarms();
+  if (tab === 'ecosystem') renderEcosystem();
   if (tab === 'market') renderMarketExchange();
 
   if (tab === 'submit' && ghUser?.login) {
@@ -4163,7 +4195,17 @@ function toggleGated() {
 // ═══════════════════════════════════════════════════════
 // Agent Grid
 // ═══════════════════════════════════════════════════════
-function score(a) { return (votes.agents?.[a.name]?.score) || 0; }
+// Combined score: issue-based votes + GitHub Discussion positive
+// reactions. Negative reactions never subtract (they're not counted
+// at all by scripts/discussion_ratings.py).
+function score(a) { return ((votes.agents?.[a.name]?.score) || 0) + ghUp(a); }
+function ghUp(a) { return ghRatings.agents?.[a.name]?.upvotes || 0; }
+function ghComments(a) { return ghRatings.agents?.[a.name]?.comments || 0; }
+function ghDiscussionUrl(a) {
+  return ghRatings.agents?.[a.name]?.url || `https://github.com/${REPO}/discussions`;
+}
+const GH_THUMB_SVG = '<svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor" style="display:inline-block;vertical-align:-1px"><path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184Z"/></svg>';
+const GH_COMMENT_SVG = '<svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor" style="display:inline-block;vertical-align:-1px"><path d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Z"/></svg>';
 function rating(a) {
   const r = reviews.agents?.[a.name]; if (!r?.length) return 0;
   return r.reduce((s, x) => s + x.rating, 0) / r.length;
@@ -4200,6 +4242,7 @@ function renderAgents() {
     f.sort((a, b) => b._searchScore - a._searchScore);
   } else {
     if (sort === 'popular') f.sort((a, b) => score(b) - score(a));
+    else if (sort === 'gh_rated') f.sort((a, b) => ghUp(b) - ghUp(a) || ghComments(b) - ghComments(a) || score(b) - score(a));
     else if (sort === 'name') f.sort((a, b) => a.display_name.localeCompare(b.display_name));
     else if (sort === 'rating') f.sort((a, b) => rating(b) - rating(a));
     else if (sort === 'newest') f.sort((a, b) => (b._lines || 0) - (a._lines || 0));
@@ -4257,10 +4300,99 @@ function agentCard(a) {
           ${!isLocal && a._file && !isStub ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
           ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAPP registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAPP</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
-          ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}` : ''}
+          ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}
+          ${ghUp(a) > 0 || ghComments(a) > 0 ? `<a class="vote-chip" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub Discussion — upvote with a reaction, comment to discuss" style="text-decoration:none">${GH_THUMB_SVG} ${ghUp(a)}${ghComments(a) > 0 ? ` &middot; ${GH_COMMENT_SVG} ${ghComments(a)}` : ''}</a>` : ''}` : ''}
         </div>
       </div>
     </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// Ecosystem — federated peer stores (one storefront, every store)
+// Content lives in its home repo (Constitution Art. XXVII/XXXI);
+// RAR browses it via the daily state/federation.json snapshot.
+// ═══════════════════════════════════════════════════════
+function ecoSection(title, subtitle, homeUrl, cardsHtml) {
+  return `<div style="margin-bottom:28px">
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap">
+      <h3 style="font-size:1.05rem;font-weight:700;margin:0">${title}</h3>
+      <span style="color:var(--text-muted);font-size:.78rem">${subtitle}</span>
+      <a href="${esc(homeUrl)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:.75rem;margin-left:auto">home repo &#8599;</a>
+    </div>
+    <div class="agents-grid">${cardsHtml}</div>
+  </div>`;
+}
+
+function copyFedUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    const prev = btn.textContent; btn.textContent = '✓ copied';
+    setTimeout(() => { btn.textContent = prev; }, 1200);
+  }).catch(() => showToast('Copy failed', 'error'));
+}
+
+function renderEcosystem() {
+  const el = document.getElementById('ecosystem-container');
+  if (!federation) {
+    el.innerHTML = '<div class="empty-state"><h3>Federation catalog unavailable</h3><p style="color:var(--text-dim)">state/federation.json has not been generated yet, or you are offline. It refreshes daily via the Refresh Community Data workflow.</p></div>';
+    return;
+  }
+  const rapps = federation.rapplications || [];
+  const senses = federation.senses || [];
+  const skills = federation.skills || [];
+
+  const rappCards = rapps.map(r => `
+    <div class="agent-card">
+      <div class="card-top"><span class="card-title">${esc(r.name)}</span>
+        ${r.access === 'private' ? `<span class="seal" style="font-size:.65rem;padding:2px 6px;background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.35)">${svgIcon('lock','#bc8cff',12)}GATED</span>` : `<span class="tier tier-community">v${esc(r.version)}</span>`}
+      </div>
+      <div class="card-ns">${esc(r.manifest_name)} &middot; rapplication</div>
+      <div class="card-desc">${esc(r.summary)}</div>
+      <div class="card-tags">${(r.tags || []).slice(0, 4).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="card-footer">
+        <div class="card-meta"><span class="cat-badge">${esc((r.category || 'general').replace(/_/g,' '))}</span></div>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Copy singleton URL — curl it into your brainstem's agents/ directory">copy .py url</button>` : ''}
+          <a class="add-cart-btn" style="font-size:.7rem;padding:2px 6px;text-decoration:none" href="${esc(r.store_url)}#${esc(r.id)}" target="_blank" rel="noopener">open &#8599;</a>
+        </div>
+      </div>
+    </div>`).join('');
+
+  const senseCards = senses.map(s => `
+    <div class="agent-card">
+      <div class="card-top"><span class="card-title">${esc(s.name)}</span><span class="tier tier-community">v${esc(s.version)}</span></div>
+      <div class="card-ns">${esc(s.publisher)}/${esc(s.name)}_sense &middot; sense</div>
+      <div class="card-desc">${esc(s.description)}</div>
+      <div class="card-tags">
+        <span class="tag" style="font-family:monospace">${esc(s.delimiter)}</span>
+        ${(s.surfaces || []).map(x => `<span class="tag">${esc(x)}</span>`).join('')}
+      </div>
+      <div class="card-footer">
+        <div class="card-meta"><span class="cat-badge">output overlay</span></div>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${s.url ? `<button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(s.url)}', this)" title="Copy sense URL — drop into rapp_brainstem/utils/senses/">copy .py url</button>` : ''}
+          <a class="add-cart-btn" style="font-size:.7rem;padding:2px 6px;text-decoration:none" href="${esc(s.repo_url)}" target="_blank" rel="noopener">open &#8599;</a>
+        </div>
+      </div>
+    </div>`).join('');
+
+  const skillCards = skills.map(k => `
+    <div class="agent-card">
+      <div class="card-top"><span class="card-title">${esc(k.name)}</span><span class="tier tier-community">skill</span></div>
+      <div class="card-ns">${esc(k.repo)}</div>
+      <div class="card-desc">${esc(k.description)}</div>
+      <div class="card-footer">
+        <div class="card-meta"><span class="cat-badge">portable skill</span></div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(k.skill_md_url)}', this)" title="Copy SKILL.md URL">copy skill.md</button>
+          <a class="add-cart-btn" style="font-size:.7rem;padding:2px 6px;text-decoration:none" href="${esc(k.url)}" target="_blank" rel="noopener">open &#8599;</a>
+        </div>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML =
+    ecoSection(`Rapplications (${rapps.length})`, 'bundled agent + UI / service / state cartridge', 'https://github.com/kody-w/RAPP_Store', rappCards || '<div class="empty-state"><p>None in snapshot.</p></div>') +
+    ecoSection(`Senses (${senses.length})`, 'per-channel output overlays for the brainstem', 'https://github.com/kody-w/RAPP_Sense_Store', senseCards || '<div class="empty-state"><p>None in snapshot.</p></div>') +
+    ecoSection(`Skills (${skills.length})`, 'portable agent skills for Claude Code + non-RAPP systems', 'https://github.com/kody-w/rapp-skills', skillCards || '<div class="empty-state"><p>None in snapshot.</p></div>');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -4651,6 +4783,7 @@ function openAgent(name) {
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
         <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : '') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not rated yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
+        <a class="vote-btn" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" title="One thread per agent on GitHub Discussions. React with a thumbs-up to upvote (counted daily); reply to discuss.">${GH_THUMB_SVG} ${ghUp(a)} on GitHub &middot; ${GH_COMMENT_SVG} Discuss${ghComments(a) > 0 ? ` (${ghComments(a)})` : ''}</a>
       </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
       <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Get agent.py'}</h3>
