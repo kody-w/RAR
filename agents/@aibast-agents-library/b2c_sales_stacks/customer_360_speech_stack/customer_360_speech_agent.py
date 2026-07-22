@@ -1,8 +1,36 @@
 """
-Customer 360 & Speech Agent — B2C Sales Stack
+Customer 360 & Speech Agent — a template you are meant to mutate.
 
-Provides unified customer profiles, interaction history, sentiment
+Serves unified customer profiles, interaction history, sentiment
 analysis, and next-best-action recommendations across all channels.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live accounts, orders, and cases over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="customer_profile",
+                  customer_id="Blue Heron Stationery")
+     — the 360 view is assembled from that account's real CRM record,
+     sales orders, and support cases.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CUSTOMER_PROFILES / INTERACTION_HISTORY) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CUSTOMER_360_SPEECH_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from your commerce/CDP stack), or
+     replace _fetch_collection() with your own client. The dict shape the
+     rest of the file needs is documented in _normalize_live_customer().
+     Segment, channel preferences, and speech sentiment are enrichment
+     seams — wire your CDP / speech analytics there; sentiment and
+     next-best-action ops stay simulated until you do.
+
+OPERATIONS
+  customer_profile | interaction_history | sentiment_analysis
+  | next_best_action
+  kwargs: operation (required), customer_id (embedded ID like "C360-001"
+  or a live tenant account name)
 """
 
 import sys
@@ -10,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_360_speech",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Customer 360 & Speech Agent",
-    "description": "Serves unified customer profiles, interaction history, sentiment, and next-best actions from built-in demo data.",
+    "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["customer-360", "speech", "sentiment", "omnichannel", "profile", "b2c"],
     "category": "b2c_sales",
@@ -26,7 +56,85 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CUSTOMER_360_SPEECH_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/CDP client. Downstream
+# code only needs the fields produced by _normalize_live_customer().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CUSTOMER_360_SPEECH_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_customer(account, orders, incidents):
+    """Project a Dynamics account (+ its orders and cases) onto the shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not knowable from the
+    CRM alone' and the renderers label it an enrichment seam (segment,
+    preferences, and speech sentiment come from your CDP / speech
+    analytics)."""
+    name = account.get("name", "Unknown")
+    acct_orders = [o for o in orders if o.get("customeridname") == name]
+    acct_cases = [i for i in incidents if i.get("customeridname") == name]
+    order_dates = sorted(str(o.get("createdon") or "")[:10] for o in acct_orders)
+    return {
+        "name": name,
+        "email": account.get("emailaddress1", ""),
+        "phone": account.get("telephone1", ""),
+        "city": f"{account.get('address1_city', '?')}, {account.get('address1_stateorprovince', '?')}",
+        "lifetime_value": sum(float(o.get("totalamount") or 0) for o in acct_orders),
+        "total_orders": len(acct_orders),
+        "last_order": order_dates[-1] if order_dates else "n/a",
+        "open_cases": sum(1 for i in acct_cases if i.get("statecode") == 0),
+        "resolved_cases": sum(1 for i in acct_cases if i.get("statecode") == 1),
+        "segment": None,      # enrichment seam — wire your CDP
+        "preferences": None,  # enrichment seam
+        "sentiment": None,    # enrichment seam — wire speech analytics
+        "_live": True,
+    }
+
+
+def _live_customer_roster():
+    """Name-keyed dict of live tenant customers; {} when offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return {}
+    orders = _fetch_collection("salesorders")
+    incidents = _fetch_collection("incidents")
+    return {
+        a["name"].lower(): _normalize_live_customer(a, orders, incidents)
+        for a in accounts
+        if a.get("name")
+    }
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CUSTOMER_PROFILES = {
@@ -171,6 +279,47 @@ class Customer360SpeechAgent(BasicAgent):
 
     def _customer_profile(self, **kwargs) -> str:
         customer_id = kwargs.get("customer_id")
+
+        # LIVE tenant lookup: a live account name (or fragment) as customer_id
+        if customer_id and customer_id not in CUSTOMER_PROFILES:
+            roster = _live_customer_roster()
+            q = customer_id.lower().strip()
+            match = next((c for key, c in roster.items() if q in key or key in q), None)
+            if match:
+                return "\n".join([
+                    f"# Customer Profile: {match['name']} — LIVE (Static Dynamics 365 tenant)\n",
+                    f"- **Email:** {match['email']}",
+                    f"- **Phone:** {match['phone']}",
+                    f"- **Location:** {match['city']}",
+                    f"- **Segment:** n/a — enrichment seam (wire your CDP)",
+                    f"- **Overall Sentiment:** n/a — enrichment seam (wire speech analytics)\n",
+                    "## Purchase Summary (from live sales orders)\n",
+                    f"- Total Orders: {match['total_orders']}",
+                    f"- Lifetime Value: ${match['lifetime_value']:,.2f}",
+                    f"- Last Order: {match['last_order']}\n",
+                    "## Service Summary (from live cases)\n",
+                    f"- Open Cases: {match['open_cases']}",
+                    f"- Resolved Cases: {match['resolved_cases']}",
+                ])
+
+        # LIVE overview when no specific embedded customer requested
+        if not customer_id:
+            roster = _live_customer_roster()
+            if roster:
+                lines = ["# Customer 360 Overview — LIVE (Static Dynamics 365 tenant)\n"]
+                lines.append("| Customer | LTV | Orders | Last Order | Open Cases | Sentiment |")
+                lines.append("|---|---|---|---|---|---|")
+                for c in sorted(roster.values(), key=lambda x: -x["lifetime_value"]):
+                    lines.append(
+                        f"| {c['name']} | ${c['lifetime_value']:,.2f} | {c['total_orders']} "
+                        f"| {c['last_order']} | {c['open_cases']} | n/a — enrichment seam |"
+                    )
+                total_ltv = sum(c["lifetime_value"] for c in roster.values())
+                lines.append(f"\n**Total Customer LTV (live orders):** ${total_ltv:,.2f}")
+                lines.append("\nSegment and sentiment stay n/a until you wire your "
+                             "CDP / speech analytics at the LIVE DATA SEAM.")
+                return "\n".join(lines)
+
         if customer_id and customer_id in CUSTOMER_PROFILES:
             p = CUSTOMER_PROFILES[customer_id]
             ph = p["purchase_history_summary"]
@@ -277,12 +426,14 @@ class Customer360SpeechAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = Customer360SpeechAgent()
+    print("=" * 80)
+    print("LIVE TENANT OVERVIEW (fetched over HTTP; embedded demo offline)")
     print(agent.perform(operation="customer_profile"))
     print("\n" + "=" * 80 + "\n")
+    print("LIVE TENANT CUSTOMER (falls back to demo default offline)")
+    print(agent.perform(operation="customer_profile", customer_id="Blue Heron Stationery"))
+    print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO CUSTOMER (works offline)")
     print(agent.perform(operation="customer_profile", customer_id="C360-001"))
     print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="interaction_history", customer_id="C360-003"))
-    print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="sentiment_analysis"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="next_best_action"))

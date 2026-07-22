@@ -1,17 +1,41 @@
 """
-Product Reference Agent
+Product Reference Agent — a template you are meant to mutate.
 
 Product catalog lookup with feature comparison, pricing information,
 and compatibility checking across the product portfolio.
 
-Where a real deployment would connect to PIM and pricing systems, this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls the live product catalog over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="product_lookup", product_id="AST-SCN-012")
+     — the tenant's real seeded "ScanDock S12" desktop document
+     scanner with its live list price and unit cost.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PRODUCTS / _PRICING_TIERS) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PRODUCT_REFERENCE_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your PIM), or replace
+     _fetch_collection() with your catalog client. The fields the rest
+     of the file needs are listed in _normalize_live_product() —
+     feature lists and compatibility rules for live entries are labeled
+     "n/a — enrichment seam"; wire your PIM there.
+
+OPERATIONS
+  product_lookup | feature_comparison | pricing_info
+  | compatibility_check
+  kwargs: operation (required), product_id (embedded 'CORE'/'ENT' or a
+  live tenant product number like 'AST-SCN-012' or name)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_reference",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Product Reference",
-    "description": "Looks up products, compares features, and checks pricing and compatibility across a built-in demo catalog.",
+    "description": "Looks up products and pricing from a live simulated Dynamics 365 tenant catalog, with feature comparison and an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["product", "catalog", "pricing", "features", "compatibility"],
     "category": "general",
@@ -32,7 +56,80 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PRODUCT_REFERENCE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your PIM/catalog client.
+# Downstream code only needs the fields produced by
+# _normalize_live_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PRODUCT_REFERENCE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from the
+    catalog alone' and renderers label it as an enrichment seam."""
+    return {
+        "id": row.get("productnumber", row.get("productid", "")),
+        "name": row.get("name", "Unknown"),
+        "category": row.get("producttypecode@OData.Community.Display.V1.FormattedValue", "Catalog Item"),
+        "description": row.get("description", ""),
+        "features": [],            # enrichment seam — wire your PIM feature data
+        "max_users": None,         # enrichment seam
+        "storage_gb": None,        # enrichment seam
+        "api_calls_monthly": None, # enrichment seam
+        "support_level": None,     # enrichment seam
+        "list_price": float(row.get("price") or 0),
+        "unit_cost": float(row.get("currentcost") or 0),
+        "uom": row.get("defaultuomidname", ""),
+        "_live": True,
+    }
+
+
+def _live_catalog():
+    """id-keyed dict of live tenant products; {} when offline."""
+    rows = _fetch_collection("products")
+    return {
+        p["id"]: p
+        for p in (_normalize_live_product(r) for r in rows)
+        if p["id"]
+    }
+
+
+def _na(value, suffix=""):
+    return "n/a — enrichment seam" if value is None else f"{value}{suffix}"
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _PRODUCTS = {
@@ -68,15 +165,23 @@ _COMPATIBILITY_MATRIX = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_product(query):
+    """Embedded demo products first, then the live tenant catalog.
+    Returns (product, is_live)."""
     if not query:
-        return "CORE"
+        return _PRODUCTS["CORE"], False
     q = query.upper().strip()
     if q in _PRODUCTS:
-        return q
+        return _PRODUCTS[q], False
     for pid, prod in _PRODUCTS.items():
         if q in prod["name"].upper():
-            return pid
-    return "CORE"
+            return prod, False
+    live = _live_catalog()
+    if q in live:
+        return live[q], True
+    for pid, prod in live.items():
+        if q in prod["name"].upper():
+            return prod, True
+    return _PRODUCTS["CORE"], False
 
 
 def _calculate_bundle_price(product_ids, num_users=100, billing="annual"):
@@ -152,26 +257,38 @@ class ProductReferenceAgent(BasicAgent):
 
     # ── product_lookup ─────────────────────────────────────────
     def _product_lookup(self, params):
-        pid = _resolve_product(params.get("product_id", ""))
-        prod = _PRODUCTS[pid]
-        features = "\n".join(f"- {f}" for f in prod["features"])
-        users = f"{prod['max_users']:,}" if prod["max_users"] > 0 else "Unlimited"
-        api = f"{prod['api_calls_monthly']:,}" if prod["api_calls_monthly"] > 0 else "Unlimited"
-        pricing = _PRICING_TIERS.get(pid, {})
-        if "monthly_per_user" in pricing:
-            price_line = f"${pricing['monthly_per_user']}/user/month (${pricing['annual_per_user']}/user/month annual)"
+        prod, is_live = _resolve_product(params.get("product_id", ""))
+        if is_live:
+            source = "Record source: LIVE product from the Aster Lane Dynamics 365 tenant"
+            price_line = f"${prod['list_price']:,.2f} list / ${prod['unit_cost']:,.2f} unit cost ({prod['uom'] or 'per unit'})"
+            features = "- n/a — enrichment seam (wire your PIM feature data)"
+            support = _na(prod["support_level"])
+            users = _na(prod["max_users"])
+            storage = _na(prod["storage_gb"], " GB")
+            api = _na(prod["api_calls_monthly"])
         else:
-            price_line = f"${pricing.get('monthly_flat', 0):,}/month (${pricing.get('annual_flat', 0):,}/year)"
+            source = "Record source: embedded demo layer (simulated)"
+            pricing = _PRICING_TIERS.get(prod["id"], {})
+            if "monthly_per_user" in pricing:
+                price_line = f"${pricing['monthly_per_user']}/user/month (${pricing['annual_per_user']}/user/month annual)"
+            else:
+                price_line = f"${pricing.get('monthly_flat', 0):,}/month (${pricing.get('annual_flat', 0):,}/year)"
+            features = "\n".join(f"- {f}" for f in prod["features"])
+            support = prod["support_level"]
+            users = f"{prod['max_users']:,}" if prod["max_users"] > 0 else "Unlimited"
+            storage = f"{prod['storage_gb']} GB"
+            api = f"{prod['api_calls_monthly']:,}" if prod["api_calls_monthly"] > 0 else "Unlimited"
         return (
             f"**Product: {prod['name']}** ({prod['id']})\n\n"
-            f"**Category:** {prod['category']} | **Support:** {prod['support_level']}\n\n"
+            f"**Category:** {prod['category']} | **Support:** {support}\n\n"
             f"**Description:** {prod['description']}\n\n"
             f"| Spec | Value |\n|---|---|\n"
             f"| Max Users | {users} |\n"
-            f"| Storage | {prod['storage_gb']} GB |\n"
+            f"| Storage | {storage} |\n"
             f"| API Calls | {api}/month |\n"
             f"| Pricing | {price_line} |\n\n"
             f"**Features:**\n{features}\n\n"
+            f"{source}\n"
             f"Source: [Product Catalog]\nAgents: ProductReferenceAgent"
         )
 
@@ -197,9 +314,17 @@ class ProductReferenceAgent(BasicAgent):
                     cells.append("Yes" if feat in p["features"] else "No")
                 rows += f"| {feat} | " + " | ".join(cells) + " |\n"
             comparison += header + sep + rows + "\n"
+        live = _live_catalog()
+        live_note = (
+            f"**Live tenant catalog:** {len(live)} products available for lookup "
+            "(feature matrices for live entries are an enrichment seam — wire your PIM).\n\n"
+            if live else
+            "**Live tenant catalog:** live tenant unreachable — embedded demo data only.\n\n"
+        )
         return (
-            f"**Feature Comparison**\n\n"
+            f"**Feature Comparison** (embedded demo catalog — simulated)\n\n"
             f"{comparison}"
+            f"{live_note}"
             f"Source: [Product Catalog]\nAgents: ProductReferenceAgent"
         )
 
@@ -217,28 +342,54 @@ class ProductReferenceAgent(BasicAgent):
             rows += f"| {name} | {monthly} | {annual} | {pricing.get('annual_savings_pct', 0)}% |\n"
         example_100 = _calculate_bundle_price(["ENT", "ANLYT-PRO", "INTGR", "SECUR"], 100, "annual")
         example_500 = _calculate_bundle_price(["ENT", "ANLYT-PRO", "INTGR", "SECUR"], 500, "annual")
+        live = _live_catalog()
+        live_rows = "".join(
+            f"| {p['id']} | {p['name']} | ${p['list_price']:,.2f} | ${p['unit_cost']:,.2f} |\n"
+            for p in sorted(live.values(), key=lambda x: x["id"])
+        )
+        live_section = (
+            f"**Live Tenant Price List (LIVE Dynamics 365 tenant):**\n\n"
+            f"| ID | Product | List Price | Unit Cost |\n|---|---|---|---|\n{live_rows}\n"
+            if live_rows else
+            "**Live Tenant Price List:** live tenant unreachable — embedded demo data only.\n\n"
+        )
         return (
-            f"**Pricing Information**\n\n"
+            f"**Pricing Information** (tiers below are embedded demo data — simulated)\n\n"
             f"| Product | Monthly | Annual | Savings |\n|---|---|---|---|\n"
             f"{rows}\n"
             f"**Bundle Examples (Annual Billing):**\n"
             f"- Enterprise Full Suite (100 users): ${example_100:,}/year\n"
             f"- Enterprise Full Suite (500 users): ${example_500:,}/year\n\n"
+            f"{live_section}"
             f"**Notes:**\n"
             f"- Volume discounts available for 50+ users\n"
             f"- Multi-year commitments receive additional 10-20% discount\n"
             f"- Non-profit and education pricing available\n\n"
-            f"Source: [Pricing Engine]\nAgents: ProductReferenceAgent"
+            f"Source: [Pricing Engine + Live Dynamics 365 Tenant]\nAgents: ProductReferenceAgent"
         )
 
     # ── compatibility_check ────────────────────────────────────
     def _compatibility_check(self, params):
-        pid = _resolve_product(params.get("product_id", ""))
-        compat = _COMPATIBILITY_MATRIX.get(pid, {})
-        prod = _PRODUCTS[pid]
-        requires = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("requires", [])) or "None (standalone)"
-        recommended = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("recommended", [])) or "None"
-        incompatible = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("incompatible", [])) or "None"
+        prod, is_live = _resolve_product(params.get("product_id", ""))
+        if is_live:
+            header = (
+                f"**Compatibility Check: {prod['name']}** ({prod['id']})\n\n"
+                "This is a LIVE tenant product — compatibility rules are an "
+                "enrichment seam (wire your PIM/dependency data). The embedded "
+                "matrix below shows the shape your rules should take.\n\n"
+            )
+        else:
+            compat = _COMPATIBILITY_MATRIX.get(prod["id"], {})
+            requires = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("requires", [])) or "None (standalone)"
+            recommended = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("recommended", [])) or "None"
+            incompatible = ", ".join(_PRODUCTS[r]["name"] for r in compat.get("incompatible", [])) or "None"
+            header = (
+                f"**Compatibility Check: {prod['name']}**\n\n"
+                f"| Relationship | Products |\n|---|---|\n"
+                f"| Requires | {requires} |\n"
+                f"| Recommended With | {recommended} |\n"
+                f"| Incompatible With | {incompatible} |\n\n"
+            )
         matrix_rows = ""
         for p_id, c in _COMPATIBILITY_MATRIX.items():
             reqs = ", ".join(c["requires"]) or "-"
@@ -246,12 +397,8 @@ class ProductReferenceAgent(BasicAgent):
             incompat = ", ".join(c["incompatible"]) or "-"
             matrix_rows += f"| {_PRODUCTS[p_id]['name']} | {reqs} | {recs} | {incompat} |\n"
         return (
-            f"**Compatibility Check: {prod['name']}**\n\n"
-            f"| Relationship | Products |\n|---|---|\n"
-            f"| Requires | {requires} |\n"
-            f"| Recommended With | {recommended} |\n"
-            f"| Incompatible With | {incompatible} |\n\n"
-            f"**Full Compatibility Matrix:**\n\n"
+            f"{header}"
+            f"**Full Compatibility Matrix (embedded demo data — simulated):**\n\n"
             f"| Product | Requires | Recommended | Incompatible |\n|---|---|---|---|\n"
             f"{matrix_rows}\n\n"
             f"Source: [Product Catalog + Compatibility Engine]\nAgents: ProductReferenceAgent"
@@ -260,7 +407,13 @@ class ProductReferenceAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProductReferenceAgent()
-    for op in ["product_lookup", "feature_comparison", "pricing_info", "compatibility_check"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, product_id="ENT"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
+    print(agent.perform(operation="product_lookup", product_id="ENT"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="product_lookup", product_id="AST-SCN-012"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="pricing_info"))

@@ -1,25 +1,51 @@
 """
-Emission Tracking Agent for Energy sector.
+Emission Tracking Agent — a template you are meant to mutate.
 
 Monitors greenhouse gas emissions across facilities, tracks regulatory
 compliance, develops reduction plans, and analyzes carbon offset opportunities.
 
-Version 1.1.0 adds an evidence-backed, deterministic strategic implementation
-plan while preserving every legacy operation.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live compliance events over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics case at an Energy-industry account is
+     reinterpreted as an environmental/telemetry compliance event — e.g.
+     CAS-260128 "Substation feeder fault flagged in telemetry export"
+     for Prairie Wind Energy Cooperative.
+     Try: perform(operation="compliance_status")
+  2. No network? Everything falls back to the embedded demo layer below
+     (FACILITIES / CARBON_OFFSETS / REGULATIONS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     EMISSION_TRACKING_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your EHS system), or replace
+     _fetch_collection() with your own API client. Fields the rest of
+     the file needs are listed in _normalize_live_event() — everything
+     else keeps working untouched. Fields marked "enrichment seam" in
+     the output (tonnes CO2e, metered values) are where you wire your
+     emissions metering / CEMS platform.
+
+OPERATIONS
+  emissions_dashboard | compliance_status | reduction_plan
+  | carbon_offset_analysis | strategic_implementation_plan
+  kwargs: operation (required), facility_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/emission_tracking",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Emission Tracking Agent",
-    "description": "Tracks facility GHG emissions, compliance status, and reduction plans for energy operators using built-in demo data.",
+    "description": "Tracks GHG compliance events from a live simulated Dynamics 365 tenant plus reduction and offset planning, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["emissions", "carbon", "compliance", "ghg", "sustainability", "energy"],
     "category": "energy",
@@ -30,7 +56,78 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export EMISSION_TRACKING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your EHS/CEMS client. Downstream
+# code only needs the fields produced by _normalize_live_event().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "EMISSION_TRACKING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_event(row):
+    """Project a Dynamics case onto the compliance-event shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a case at an Energy-industry account is reinterpreted as an
+    environmental/telemetry compliance event."""
+    return {
+        "facility": row.get("customeridname", "Unknown"),
+        "case": row.get("ticketnumber", ""),
+        "event": row.get("title", "untitled"),
+        "priority": {1: "High", 2: "Normal", 3: "Low"}.get(row.get("prioritycode"), "Normal"),
+        "status": "Open" if row.get("statecode") == 0 else "Resolved",
+        "opened": str(row.get("createdon", ""))[:10],
+        "co2_impact_tonnes": None,  # enrichment seam — wire your CEMS / metering
+        "_live": True,
+    }
+
+
+def _live_compliance_events():
+    """Compliance events at live Energy-industry accounts; [] offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return []
+    energy_names = {
+        a["name"] for a in accounts
+        if "energy" in str(a.get("industrycode", "")).lower() and a.get("name")
+    }
+    return [
+        _normalize_live_event(i)
+        for i in _fetch_collection("incidents")
+        if i.get("customeridname") in energy_names
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 FACILITIES = {
@@ -291,9 +388,33 @@ class EmissionTrackingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _compliance_status(self) -> str:
+        events = _live_compliance_events()
+        if events:
+            open_events = [e for e in events if e["status"] == "Open"]
+            lines = [
+                "# Compliance Status (live tenant data)",
+                "",
+                f"**Energy-sector compliance events on record:** {len(events)} "
+                f"({len(open_events)} open)",
+                "**Metered CO2e impact:** n/a — enrichment seam (wire your CEMS / metering)",
+                "",
+                "| Case | Facility | Event | Priority | Status | Opened | CO2e Impact |",
+                "|------|----------|-------|----------|--------|--------|-------------|",
+            ]
+            for e in sorted(events, key=lambda x: (x["status"] != "Open", x["opened"])):
+                lines.append(
+                    f"| {e['case']} | {e['facility']} | {e['event']} | {e['priority']} "
+                    f"| {e['status']} | {e['opened']} | n/a — enrichment seam |"
+                )
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (accounts + incidents). "
+                         "A case at an Energy-industry account is reinterpreted as an "
+                         "environmental/telemetry compliance event._")
+            return "\n".join(lines)
+
         data = _compliance_status()
         lines = [
-            "# Compliance Status",
+            "# Compliance Status (embedded demo data — offline)",
             "",
             "| Facility | Scope 1 CO2 | Threshold | Compliant | Gap | Target Reduction | Actual |",
             "|----------|-------------|-----------|-----------|-----|-----------------|--------|",
@@ -372,7 +493,14 @@ class EmissionTrackingAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = EmissionTrackingAgent()
-    for op in ["emissions_dashboard", "compliance_status", "reduction_plan", "carbon_offset_analysis"]:
+    print("=" * 60)
+    print("LIVE TENANT COMPLIANCE EVENTS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="compliance_status"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO PORTFOLIO (works offline)")
+    print(agent.perform(operation="emissions_dashboard"))
+    for op in ["reduction_plan", "carbon_offset_analysis"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

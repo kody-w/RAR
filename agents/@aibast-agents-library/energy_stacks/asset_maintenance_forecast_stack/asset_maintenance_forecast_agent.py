@@ -1,27 +1,55 @@
 """
-Asset Maintenance Forecast Agent for Energy sector.
+Asset Maintenance Forecast Agent — a template you are meant to mutate.
 
 Provides predictive maintenance forecasting, asset health monitoring,
 budget projections, and work order planning for energy infrastructure
 including turbines, transformers, and pipelines.
 
-Version 1.1.0 adds evidence-backed IoT failure analysis and a dry-run
-Dynamics 365 ERP maintenance scheduling workflow. Legacy operations are
-unchanged; all new behavior is deterministic and embedded in this file.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live asset and work order records over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Field Service customer asset stands in for a
+     piece of energy infrastructure: its registration date drives real
+     age math and its work orders are its maintenance history.
+     Try: perform(operation="asset_health")
+     (surfaces live assets like "Cedar Hollow Printing Sensor Kit K4 13"
+     with their open work orders)
+  2. No network? Everything falls back to the embedded demo layer below
+     (ASSETS / BUDGET_RATES / IOT_SIGNALS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ASSET_MAINTENANCE_FORECAST_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your EAM/CMMS), or
+     replace _fetch_collection() with your own API client. Fields the
+     rest of the file needs are listed in _normalize_live_asset() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (condition scores, operating hours, failure
+     rates) are where you wire your IoT historian and EAM.
+
+OPERATIONS
+  maintenance_forecast | asset_health | budget_projection
+  | work_order_plan | iot_failure_analysis | schedule_maintenance
+  kwargs: operation (required), asset_id (schedule_maintenance)
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/asset_maintenance_forecast",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Asset Maintenance Forecast Agent",
-    "description": "Forecasts maintenance and asset health for turbines, transformers, and pipelines, with dry-run scheduling, from built-in demo data.",
+    "description": "Monitors asset health and maintenance from live work orders on a simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["maintenance", "asset-health", "energy", "predictive", "work-orders", "budget"],
     "category": "energy",
@@ -32,7 +60,99 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ASSET_MAINTENANCE_FORECAST_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your EAM/CMMS client. Downstream
+# code only needs the fields produced by _normalize_live_asset().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "ASSET_MAINTENANCE_FORECAST_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _asset_age_years(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        if then.tzinfo is None:
+            then = then.replace(tzinfo=timezone.utc)
+        return round((datetime.now(timezone.utc) - then).days / 365.25, 1)
+    except (ValueError, TypeError):
+        return None
+
+
+def _normalize_live_asset(row, workorders):
+    """Project a Dynamics customer asset onto the asset shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not available from Field Service
+    records alone' and the renderers label it as an enrichment seam. In
+    this template a Field Service customer asset is reinterpreted as a
+    monitored piece of infrastructure; its work orders are its
+    maintenance history."""
+    name = row.get("msdyn_name", "Unknown")
+    account = row.get("msdyn_accountname", "")
+    related = [
+        w for w in workorders
+        if w.get("msdyn_serviceaccountname") == account
+    ]
+    open_wos = [w for w in related if w.get("statecode") == 0]
+    return {
+        "name": name,
+        "type": row.get("msdyn_productname", "asset"),
+        "location": account,
+        "serial": row.get("msdyn_serialnumber", ""),
+        "age_years": _asset_age_years(row.get("msdyn_registrationdate")),
+        "condition_score": None,       # enrichment seam — wire your IoT historian
+        "operating_hours": None,       # enrichment seam
+        "failure_rate_annual_pct": None,  # enrichment seam — wire your reliability model
+        "open_work_orders": len(open_wos),   # real count
+        "total_work_orders": len(related),   # real count
+        "_live": True,
+    }
+
+
+def _live_assets():
+    """List of live tenant assets with their work order counts; []
+    when offline."""
+    rows = _fetch_collection("msdyn_customerassets")
+    if not rows:
+        return []
+    workorders = _fetch_collection("msdyn_workorders")
+    return [_normalize_live_asset(row, workorders) for row in rows]
+
+
+def _na(value):
+    """None = Field Service records alone can't know this (enrichment
+    seam); 0 is real."""
+    return "n/a — enrichment seam" if value is None else f"{value}"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 ASSETS = {
@@ -335,9 +455,35 @@ class AssetMaintenanceForecastAgent(BasicAgent):
         return "\n".join(lines)
 
     def _asset_health(self) -> str:
+        live = _live_assets()
+        if live:
+            live.sort(key=lambda a: (-a["open_work_orders"], -(a["age_years"] or 0)))
+            lines = [
+                "# Asset Health Dashboard (live tenant data)",
+                "",
+                f"**Assets monitored:** {len(live)} (live Field Service customer assets)",
+                "**Average Condition Score:** n/a — enrichment seam (wire your IoT historian)",
+                "",
+                "| Asset | Product | Account | Age | Open WOs | Total WOs | Condition |",
+                "|-------|---------|---------|-----|----------|-----------|-----------|",
+            ]
+            for a in live:
+                age = f"{a['age_years']}yr" if a["age_years"] is not None else "n/a"
+                lines.append(
+                    f"| {a['name']} | {a['type']} | {a['location']} | {age} "
+                    f"| {a['open_work_orders']} | {a['total_work_orders']} "
+                    f"| {_na(a['condition_score'])} |"
+                )
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (msdyn_customerassets + "
+                         "msdyn_workorders). A customer asset stands in for a piece of "
+                         "infrastructure; work order counts are real, condition scoring is "
+                         "an enrichment seam._")
+            return "\n".join(lines)
+
         data = _asset_health()
         lines = [
-            "# Asset Health Dashboard",
+            "# Asset Health Dashboard (embedded demo data — offline)",
             "",
             f"**Average Condition Score:** {data['avg_condition']}",
             "",
@@ -435,7 +581,14 @@ class AssetMaintenanceForecastAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = AssetMaintenanceForecastAgent()
-    for op in ["maintenance_forecast", "asset_health", "budget_projection", "work_order_plan"]:
+    print("=" * 60)
+    print("LIVE TENANT ASSETS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="asset_health"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO FLEET (works offline)")
+    print(agent.perform(operation="maintenance_forecast"))
+    for op in ["budget_projection", "work_order_plan"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

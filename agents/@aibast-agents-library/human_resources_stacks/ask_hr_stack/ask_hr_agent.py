@@ -1,14 +1,37 @@
 """
-Ask HR Agent
+Ask HR Agent — a template you are meant to mutate.
 
 AI-powered HR assistant for employee self-service: time-off requests,
 benefits inquiries, parental leave guidance, and policy lookups.
 
-Where a real deployment would call Workday, Benefits Portal, or HR systems,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's system users are reinterpreted as the
+     employee directory that HR serves.
+     Try: perform(operation="leave_balance", employee_name="Morgan Ellis")
+  2. No network? Everything falls back to the embedded demo layer below
+     (_EMPLOYEES / _POLICIES) — the agent never crashes offline, and
+     unknown names resolve to the demo employee Jordan Chen.
+  3. Make it yours at the LIVE DATA SEAM below: set ASK_HR_DATA_URL to
+     any OData-shaped endpoint (your real Dynamics org, or JSON exported
+     from your HRIS), or replace _fetch_collection() with a Workday /
+     BambooHR client. Fields the rest of the file needs are listed in
+     _normalize_live_employee() — leave balances and benefits render as
+     "n/a — enrichment seam" until you wire your HRIS.
+
+OPERATIONS
+  leave_balance | submit_time_off | parental_leave | health_insurance
+  | remote_work | benefits_summary
+  kwargs: operation (required), employee_name, start_date, end_date,
+          return_date, request_date, days, coverage_notes, submit
 """
 
 import sys, os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
@@ -20,9 +43,9 @@ from datetime import date, datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ask_hr",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Ask HR",
-    "description": "Handles time-off requests, benefits, parental leave, and policy lookups for demo employees using built-in HR data.",
+    "description": "Answers time-off, benefits, and policy questions for employees from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["hr", "human-resources", "benefits", "time-off", "employee-self-service"],
     "category": "human_resources",
@@ -33,7 +56,70 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ASK_HR_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your HRIS client. Downstream
+# code only needs the fields produced by _normalize_live_employee().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "ASK_HR_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_employee(row):
+    """Project a Dynamics system user onto the employee shape this agent
+    uses. THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not knowable from the directory
+    record alone' and the renderer labels it as an enrichment seam (wire
+    Workday / your HRIS for balances, plans, and manager chains)."""
+    return {
+        "id": row.get("systemuserid", "")[:8] or "live",
+        "name": row.get("fullname", "Unknown"),
+        "title": row.get("title") or "n/a",
+        "email": row.get("internalemailaddress", ""),
+        "department": None,     # enrichment seam — wire your HRIS org chart
+        "manager": None,        # enrichment seam
+        "leave_balance": None,  # enrichment seam — wire Workday absences
+        "_live": True,
+    }
+
+
+def _live_directory():
+    """name-keyed dict of live tenant employees; {} when offline."""
+    return {
+        row["fullname"].lower(): _normalize_live_employee(row)
+        for row in _fetch_collection("systemusers")
+        if row.get("fullname")
+    }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _EMPLOYEES = {
@@ -417,12 +503,13 @@ class AskHRAgent(BasicAgent):
         op = kwargs.get("operation", "leave_balance")
         key = _resolve_employee(kwargs.get("employee_name", ""))
         dispatch = {
-            "leave_balance": self._leave_balance,
             "parental_leave": self._parental_leave,
             "health_insurance": self._health_insurance,
             "remote_work": self._remote_work,
             "benefits_summary": self._benefits_summary,
         }
+        if op == "leave_balance":
+            return self._leave_balance(key, kwargs.get("employee_name", ""))
         if op == "submit_time_off":
             return self._submit_time_off(key, kwargs)
         handler = dispatch.get(op)
@@ -431,7 +518,17 @@ class AskHRAgent(BasicAgent):
         return handler(key)
 
     # ── leave_balance ─────────────────────────────────────────
-    def _leave_balance(self, key):
+    def _leave_balance(self, key, query=""):
+        # Prefer a live tenant employee when the name is not one of the
+        # embedded demo employees; fall back to the embedded layer.
+        q = (query or "").lower().strip()
+        embedded_match = any(
+            k in q or q in _EMPLOYEES[k]["name"].lower() for k in _EMPLOYEES
+        ) if q else True
+        if q and not embedded_match:
+            for live_key, live_emp in _live_directory().items():
+                if live_key in q or q in live_key:
+                    return self._live_leave_balance(live_emp)
         emp = _EMPLOYEES[key]
         lb = emp["leave_balance"]
         pol = _POLICIES["time_off"]
@@ -449,6 +546,29 @@ class AskHRAgent(BasicAgent):
             f"- {pol['holiday_period']}\n"
             f"- Rollover policy: Max {pol['rollover_max']} days carry to next year\n\n"
             f"Source: [Workday + HR Portal]\nAgents: AskHRAgent"
+        )
+
+    # ── live leave_balance (tenant directory record) ──────────
+    def _live_leave_balance(self, emp):
+        seam = "n/a — enrichment seam"
+        pol = _POLICIES["time_off"]
+        holidays = "\n".join(f"- {h['name']}: {h['date']}" for h in _COMPANY_HOLIDAYS)
+        return (
+            f"**Leave Balance: {emp['name']}** (live tenant directory)\n\n"
+            f"| Detail | Value |\n|---|---|\n"
+            f"| Title | {emp['title']} |\n"
+            f"| Email | {emp['email']} |\n"
+            f"| Department | {emp['department'] or seam} |\n"
+            f"| Manager | {emp['manager'] or seam} |\n"
+            f"| Vacation | {seam} (wire Workday absences) |\n"
+            f"| Sick Leave | {seam} |\n"
+            f"| Personal Days | {seam} |\n\n"
+            f"**Upcoming Company Holidays:**\n{holidays}\n\n"
+            f"**Time Off Guidelines:**\n"
+            f"- 5+ days: Requires {pol['min_notice_5plus_days']} notice\n"
+            f"- {pol['holiday_period']}\n"
+            f"- Rollover policy: Max {pol['rollover_max']} days carry to next year\n\n"
+            f"Source: [Live Static Dynamics 365 tenant — systemusers]\nAgents: AskHRAgent"
         )
 
     # ── submit_time_off ───────────────────────────────────────
@@ -727,7 +847,15 @@ class AskHRAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = AskHRAgent()
-    for op in ["leave_balance", "submit_time_off", "parental_leave",
+    print("=" * 60)
+    print("EMBEDDED DEMO EMPLOYEE (works offline)")
+    print(agent.perform(operation="leave_balance", employee_name="Jordan Chen"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT EMPLOYEE (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="leave_balance", employee_name="Morgan Ellis"))
+    print()
+    for op in ["submit_time_off", "parental_leave",
                "health_insurance", "remote_work", "benefits_summary"]:
         print("=" * 60)
         print(agent.perform(operation=op, employee_name="Jordan Chen"))

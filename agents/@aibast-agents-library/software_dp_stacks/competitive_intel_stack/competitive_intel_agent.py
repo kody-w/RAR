@@ -1,23 +1,52 @@
 """
-Competitive Intelligence Agent for Software/Digital Products.
+Competitive Intelligence Agent — a template you are meant to mutate.
 
-Provides AI-powered competitive intelligence including market landscape analysis,
-feature comparisons, pricing analysis, and threat assessments for SaaS companies
-operating in competitive enterprise software markets.
+Provides competitive intelligence including market landscape analysis,
+feature comparisons, pricing analysis, and threat assessments for SaaS
+companies operating in competitive enterprise software markets.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM accounts and opportunities over
+     real HTTP from the globally hosted Static Dynamics 365 tenant
+     (Aster Lane Office Systems — synthetic data, no credentials, works
+     from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="market_landscape")
+     — with network up, the landscape is built from the tenant's 22 live
+     accounts (e.g. Summit Trail Software) grouped by industry, with
+     observed open-pipeline value per segment. In this template the
+     competitive landscape is read from CRM accounts; market share and
+     revenue stay enrichment seams.
+  2. No network? Everything falls back to the embedded demo layer below
+     (COMPETITORS) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SOFTWARE_COMPETITIVE_INTEL_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from Crayon/Klue), or
+     replace _fetch_collection() with your own intel API. The fields the
+     rest of the file needs are listed in _normalize_live_company() —
+     market share, revenue, and growth stay "n/a — enrichment seam"
+     until you wire your market-data provider.
+
+OPERATIONS
+  market_landscape | feature_comparison | pricing_analysis |
+  threat_assessment
+  kwargs: operation (required), competitor_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/software_competitive_intel",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Competitive Intelligence Agent",
-    "description": "Reports SaaS market landscape, feature and pricing comparisons, and threat assessments from built-in demo competitor data.",
+    "description": "Maps market landscape and threats from a live simulated Dynamics 365 tenant's accounts and pipeline, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["competitive-intel", "market-analysis", "saas", "pricing", "threat-assessment"],
     "category": "software_digital_products",
@@ -27,8 +56,70 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SOFTWARE_COMPETITIVE_INTEL_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your market-intel client.
+# Downstream code only needs the fields from _normalize_live_company().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SOFTWARE_COMPETITIVE_INTEL_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_company(row, opportunities):
+    """Project a Dynamics account record onto the shape this agent uses —
+    in this template the competitive landscape is read from CRM
+    accounts. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam."""
+    name = row.get("name", "Unknown")
+    open_pipeline = sum(
+        float(o.get("estimatedvalue") or 0)
+        for o in opportunities
+        if name in (o.get("parentaccountidname"), o.get("customeridname"))
+        and o.get("statecode") == 0
+    )
+    return {
+        "name": name,
+        "segment": row.get("industrycode", "Unknown"),
+        "hq": f"{row.get('address1_city', '?')}, {row.get('address1_stateorprovince', '?')}",
+        "primary_contact": row.get("primarycontactidname", ""),
+        "open_pipeline": open_pipeline,
+        "market_share_pct": None,  # enrichment seam — wire your market data
+        "revenue_mm": None,        # enrichment seam
+        "growth_rate_pct": None,   # enrichment seam
+        "_live": True,
+    }
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data (fixed, no randomness)
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 COMPETITORS = {
@@ -305,7 +396,7 @@ class CompetitiveIntelAgent(BasicAgent):
     def perform(self, **kwargs) -> str:
         operation = kwargs.get("operation", "market_landscape")
         if operation == "market_landscape":
-            return self._market_landscape()
+            return self._market_landscape(kwargs.get("competitor_id"))
         elif operation == "feature_comparison":
             return self._feature_comparison()
         elif operation == "pricing_analysis":
@@ -315,7 +406,68 @@ class CompetitiveIntelAgent(BasicAgent):
         return f"**Error:** Unknown operation `{operation}`."
 
     # ------------------------------------------------------------------
-    def _market_landscape(self) -> str:
+    def _live_market_landscape(self, companies):
+        """Landscape built from live tenant accounts (preferred online)."""
+        segments = {}
+        for c in companies:
+            seg = segments.setdefault(
+                c["segment"], {"accounts": 0, "pipeline": 0.0}
+            )
+            seg["accounts"] += 1
+            seg["pipeline"] += c["open_pipeline"]
+        lines = [
+            "# Competitive Market Landscape — Live Tenant Accounts",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template the landscape is read from CRM accounts. Pass",
+            "`competitor_id` (e.g. COMP-001) for the embedded demo view.",
+            "",
+            f"**Companies tracked:** {len(companies)} across {len(segments)} segments",
+            "",
+            "| Segment | Companies | Observed Open Pipeline | Market Share |",
+            "|---------|-----------|------------------------|--------------|",
+        ]
+        for seg, data in sorted(
+            segments.items(), key=lambda kv: kv[1]["pipeline"], reverse=True
+        ):
+            lines.append(
+                f"| {seg} | {data['accounts']} | ${data['pipeline']:,.0f} "
+                f"| n/a — enrichment seam |"
+            )
+        watchlist = [
+            c for c in companies
+            if any(t in str(c["segment"]) for t in ("Software", "Technology"))
+        ]
+        if watchlist:
+            lines.append("")
+            lines.append("## Software Segment Watchlist")
+            lines.append("")
+            lines.append("| Company | HQ | Primary Contact | Open Pipeline | Revenue | Growth |")
+            lines.append("|---------|----|-----------------|---------------|---------|--------|")
+            for c in sorted(watchlist, key=lambda x: x["name"]):
+                lines.append(
+                    f"| {c['name']} | {c['hq']} | {c['primary_contact']} "
+                    f"| ${c['open_pipeline']:,.0f} "
+                    f"| n/a — enrichment seam | n/a — enrichment seam |"
+                )
+        lines.append("")
+        lines.append(
+            "Market share, revenue, and growth need your market-data provider "
+            "— wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
+    def _market_landscape(self, competitor_id=None) -> str:
+        if not competitor_id:
+            rows = _fetch_collection("accounts")
+            if rows:
+                opportunities = _fetch_collection("opportunities")
+                companies = [
+                    _normalize_live_company(r, opportunities)
+                    for r in rows if r.get("name")
+                ]
+                if companies:
+                    return self._live_market_landscape(companies)
         data = _compute_market_landscape()
         lines = [
             "# Competitive Market Landscape",
@@ -411,7 +563,13 @@ class CompetitiveIntelAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CompetitiveIntelAgent()
-    ops = ["market_landscape", "feature_comparison", "pricing_analysis", "threat_assessment"]
+    print("=" * 60)
+    print("EMBEDDED DEMO LANDSCAPE (works offline)")
+    print(agent.perform(operation="market_landscape", competitor_id="COMP-001"))
+    print("\n" + "=" * 60)
+    print("LIVE TENANT LANDSCAPE (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="market_landscape"))
+    ops = ["feature_comparison", "pricing_analysis", "threat_assessment"]
     for op in ops:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")

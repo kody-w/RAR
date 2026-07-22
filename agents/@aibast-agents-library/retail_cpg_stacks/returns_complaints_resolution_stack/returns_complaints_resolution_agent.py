@@ -1,11 +1,36 @@
 """
-Returns & Complaints Resolution Agent — Retail & CPG Stack
+Returns & Complaints Resolution Agent — a template you are meant to mutate.
 
 Handles return processing, complaint classification, resolution
 recommendation, and trend analysis for retail customer service operations.
 
-Version 1.1.0 adds deterministic, exact-keyed service recovery, quality/fraud,
-simulated resolution, follow-up, and executive reporting workflows.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live service cases over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="return_processing")
+     — with network up, the queue is built from the tenant's live cases
+     (e.g. CAS-260109 "Fabric sample colors differ from order" for
+     Maple Thread Textiles). In this template a return/complaint is
+     represented as a Dynamics case (incident).
+  2. No network? Everything falls back to the embedded demo layer below
+     (RETURN_REQUESTS / COMPLAINT_CATEGORIES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     RETURNS_COMPLAINTS_RESOLUTION_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from Zendesk/your OMS), or
+     replace _fetch_collection() with your own service API. The fields the
+     rest of the file needs are listed in _normalize_live_return() —
+     purchase price and product SKU stay "n/a — enrichment seam" until
+     you wire your order management system.
+
+OPERATIONS
+  return_processing | complaint_classification | resolution_recommendation
+  | trend_analysis | escalation_snapshot | recovery_options |
+  resolution_execution | follow_up_plan | quality_fraud_analysis |
+  recovery_report
+  kwargs: operation (required), return_id, complaint_text, key, user_input
 """
 
 import sys
@@ -16,14 +41,17 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_complaints_resolution",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Returns & Complaints Resolution Agent",
     "description": (
-        "Processes returns, classifies complaints, and recommends resolutions using built-in demo retail customer-service data."
+        "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -39,8 +67,82 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export RETURNS_COMPLAINTS_RESOLUTION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your service-desk client.
+# Downstream code only needs the fields from _normalize_live_return().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "RETURNS_COMPLAINTS_RESOLUTION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_return(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a return/complaint IS a Dynamics case.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the service desk
+    alone' and the renderers label it as an enrichment seam."""
+    return {
+        "case_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "customer_name": row.get("customeridname", "Unknown"),
+        "issue": row.get("title", "untitled"),
+        "reason": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "Unclassified"
+        ),
+        "channel": row.get(
+            "caseorigincode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "open": row.get("statecode") == 0,
+        "age_days": _age_days(row.get("createdon")),
+        "purchase_price": None,   # enrichment seam — wire your OMS
+        "product_sku": None,      # enrichment seam
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Return Requests
+# EMBEDDED DEMO LAYER (offline fallback) — Return Requests
 # ---------------------------------------------------------------------------
 
 RETURN_REQUESTS = {
@@ -508,11 +610,51 @@ class ReturnsComplaintsResolutionAgent(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def _live_return_queue(self, cases):
+        """Case queue built from live tenant records (preferred online)."""
+        open_cases = [c for c in cases if c["open"]]
+        lines = [
+            "# Return & Complaint Queue — Live Tenant Cases",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a return/complaint is a Dynamics case. Pass",
+            "`return_id` (e.g. RET-4001) for the embedded demo return view.",
+            "",
+            "| Case | Customer | Issue | Type | Priority | Channel | Age | Value |",
+            "|------|----------|-------|------|----------|---------|-----|-------|",
+        ]
+        for c in sorted(open_cases, key=lambda x: x["case_id"]):
+            price = (
+                "n/a — enrichment seam"
+                if c["purchase_price"] is None
+                else f"${c['purchase_price']:.2f}"
+            )
+            lines.append(
+                f"| {c['case_id']} | {c['customer_name']} | {c['issue']} "
+                f"| {c['reason']} | {c['priority']} | {c['channel']} "
+                f"| {c['age_days']}d | {price} |"
+            )
+        high = sum(1 for c in open_cases if c["priority"] == "High")
+        lines.append("")
+        lines.append(
+            f"**Open cases:** {len(open_cases)} of {len(cases)} total | "
+            f"**High priority:** {high}"
+        )
+        lines.append(
+            "Purchase price and product SKU need your order management system — "
+            "wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _return_processing(self, **kwargs):
         return_id = kwargs.get("return_id")
         if return_id and return_id in RETURN_REQUESTS:
             returns = {return_id: RETURN_REQUESTS[return_id]}
         else:
+            live = [_normalize_live_return(r) for r in _fetch_collection("incidents")]
+            live = [c for c in live if c["case_id"]]
+            if live:
+                return self._live_return_queue(live)
             returns = RETURN_REQUESTS
         lines = ["# Return Processing Queue", ""]
         lines.append("| Return ID | Customer | Product | Reason | Condition | Days | Status |")
@@ -710,6 +852,10 @@ class ReturnsComplaintsResolutionAgent(BasicAgent):
 if __name__ == "__main__":
     agent = ReturnsComplaintsResolutionAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO RETURN (works offline)")
+    print(agent.perform(operation="return_processing", return_id="RET-4001"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT CASE QUEUE (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="return_processing"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="complaint_classification", complaint_text="The product fell apart after one week, poor quality stitching"))

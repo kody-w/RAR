@@ -1,8 +1,34 @@
 """
-Citizen Service Request Agent — SLG Government Stack
+Citizen Service Request Agent — a template you are meant to mutate.
 
 Handles citizen service request intake, department routing, status
 updates, and resolution summaries for municipal 311-style systems.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live service cases over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="request_intake")
+     — with network up, the intake dashboard is built from the tenant's
+     38 live cases (e.g. CAS-260130 "Building permit application
+     awaiting plan review" for City of Alder Creek). In this template a
+     citizen service request is represented as a Dynamics case
+     (incident).
+  2. No network? Everything falls back to the embedded demo layer below
+     (SERVICE_REQUESTS / DEPARTMENT_ROUTING) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CITIZEN_SERVICE_REQUEST_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your 311/CRM system), or
+     replace _fetch_collection() with your own service API. The fields
+     the rest of the file needs are listed in _normalize_live_request() —
+     ward and department stay "n/a — enrichment seam" until you wire
+     your municipal routing system.
+
+OPERATIONS
+  request_intake | routing_assignment | status_update | resolution_summary
+  kwargs: operation (required), request_id, category
 """
 
 import sys
@@ -10,13 +36,16 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/citizen_service_request",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Citizen Service Request Agent",
-    "description": "Handles citizen service request intake, routing, status updates, and resolution summaries using built-in demo city data.",
+    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["311", "citizen-services", "municipal", "routing", "SLA", "local-government"],
     "category": "slg_government",
@@ -25,8 +54,84 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CITIZEN_SERVICE_REQUEST_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your 311/CRM client. Downstream
+# code only needs the fields produced by _normalize_live_request().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CITIZEN_SERVICE_REQUEST_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_request(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a citizen service request IS a Dynamics case.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the case system
+    alone' and the renderers label it as an enrichment seam."""
+    return {
+        "request_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "category": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "description": row.get("title", "untitled"),
+        "submitter": row.get("customeridname", "Unknown"),
+        "channel": row.get(
+            "caseorigincode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "assigned_to": row.get("owneridname") or None,
+        "sla_target": str(row.get("resolveby") or "")[:10] or None,
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "ward": None,        # enrichment seam — wire your GIS/routing system
+        "department": None,  # enrichment seam
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 SERVICE_REQUESTS = {
@@ -203,7 +308,50 @@ class CitizenServiceRequestAgent(BasicAgent):
             return f"**Error:** Unknown operation `{operation}`."
         return handler(**kwargs)
 
+    def _live_request_intake(self, requests):
+        """Intake dashboard built from live tenant cases (preferred online)."""
+        open_reqs = [r for r in requests if r["open"]]
+        lines = [
+            "# Service Request Intake Dashboard — Live Tenant Cases\n",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a citizen service request is a Dynamics case.",
+            "Pass `request_id` (e.g. SR-2025-10001) for the embedded demo view.\n",
+            f"**Total Requests:** {len(requests)}",
+            f"**Open:** {len(open_reqs)} | **Closed:** {len(requests) - len(open_reqs)}\n",
+            "## Open Requests\n",
+            "| Case | Category | Description | Submitter | Priority | Channel | Age | Department |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+        for r in sorted(open_reqs, key=lambda x: x["request_id"]):
+            dept = r["department"] if r["department"] is not None else "n/a — enrichment seam"
+            lines.append(
+                f"| {r['request_id']} | {r['category']} | {r['description']} "
+                f"| {r['submitter']} | {r['priority']} | {r['channel']} "
+                f"| {r['age_days']}d | {dept} |"
+            )
+        lines.append("\n## Requests by Category\n")
+        by_cat = {}
+        for r in requests:
+            by_cat[r["category"]] = by_cat.get(r["category"], 0) + 1
+        for cat, count in sorted(by_cat.items()):
+            lines.append(f"- {cat}: {count}")
+        lines.append(
+            "\nWard and department routing need your GIS/municipal system — "
+            "wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _request_intake(self, **kwargs) -> str:
+        if not kwargs.get("request_id") and not kwargs.get("category"):
+            live = [
+                r for r in (
+                    _normalize_live_request(row)
+                    for row in _fetch_collection("incidents")
+                )
+                if r["request_id"]
+            ]
+            if live:
+                return self._live_request_intake(live)
         lines = ["# Service Request Intake Dashboard\n"]
         metrics = _sla_compliance()
         lines.append(f"**Total Requests:** {metrics['total']}")
@@ -317,7 +465,11 @@ class CitizenServiceRequestAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CitizenServiceRequestAgent()
+    print("LIVE TENANT INTAKE QUEUE (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="request_intake"))
+    print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO REQUEST (works offline)")
+    print(agent.perform(operation="request_intake", category="pothole_repair"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="routing_assignment"))
     print("\n" + "=" * 80 + "\n")

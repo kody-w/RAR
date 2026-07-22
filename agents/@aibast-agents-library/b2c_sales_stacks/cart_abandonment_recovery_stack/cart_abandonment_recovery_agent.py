@@ -1,12 +1,36 @@
 """
-Cart Abandonment Recovery Agent — B2C Sales Stack
+Cart Abandonment Recovery Agent — a template you are meant to mutate.
 
-Analyzes cart abandonment patterns, manages recovery campaigns,
-optimizes incentives, and tracks conversion metrics.
+Analyzes cart abandonment patterns, manages recovery campaigns, optimizes
+incentives, and tracks conversion metrics for e-commerce teams.
 
-Version 1.1.0 adds five demo-grounded recovery operations with deterministic
-records, exact record-key lookup, and simulated outreach receipts. No external
-system is changed, and all legacy operations remain available and unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live sales orders over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere). In
+     this template an UNFULFILLED or CANCELED Dynamics sales order is
+     reinterpreted as an abandoned/stalled checkout:
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="abandonment_analysis") — live stalled
+     checkouts include order ORD-260102 for Marigold Field Services
+     ($2,880, still Submitted).
+  2. No network? Everything falls back to the embedded demo layer below
+     (ABANDONED_CARTS / RECOVERY_CAMPAIGNS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CART_ABANDONMENT_RECOVERY_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON you export from Shopify/your
+     commerce stack), or replace _fetch_collection() with your own
+     client. The dict shape the rest of the file needs is documented in
+     _normalize_live_cart(). Exit page, device, and segment are
+     enrichment seams — wire your web analytics there; campaign and
+     incentive ops stay simulated until you do.
+
+OPERATIONS
+  abandonment_analysis | recovery_campaign | incentive_optimization
+  | conversion_tracking | cart_opportunity_scan | segment_recovery_strategy
+  | campaign_launch | recovery_forecast | recovery_optimization
+  kwargs: operation (required), cart_id, user_input
 """
 
 import sys
@@ -14,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cart_abandonment_recovery",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Cart Abandonment Recovery Agent",
-    "description": "Analyzes cart abandonment and runs recovery campaigns, incentive tuning, and conversion tracking on built-in demo e-commerce data.",
+    "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["cart-abandonment", "recovery", "ecommerce", "conversion", "email", "b2c"],
     "category": "b2c_sales",
@@ -30,7 +56,71 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). In this template an unfulfilled/canceled sales order is
+# reinterpreted as an abandoned checkout. To hook your own world, either:
+#   export CART_ABANDONMENT_RECOVERY_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce client. Downstream
+# code only needs the fields produced by _normalize_live_cart().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CART_ABANDONMENT_RECOVERY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_cart(row):
+    """Project a Dynamics sales order onto the cart shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (exit page, device, and segment
+    come from your web analytics)."""
+    status = row.get("statecode@OData.Community.Display.V1.FormattedValue", "")
+    return {
+        "cart_id": row.get("ordernumber", "ORD-?"),
+        "customer": row.get("customeridname", "Unknown"),
+        "cart_value": float(row.get("totalamount") or 0),
+        "status": status,
+        "abandoned_at": str(row.get("createdon") or "")[:10],
+        "segment": None,    # enrichment seam — wire your CDP
+        "page_exit": None,  # enrichment seam — wire web analytics
+        "device": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_stalled_checkouts():
+    """Live unfulfilled/canceled sales orders as stalled checkouts;
+    [] when offline."""
+    return [_normalize_live_cart(o) for o in _fetch_collection("salesorders")
+            if not o.get("datefulfilled")]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 ABANDONED_CARTS = {
@@ -304,6 +394,27 @@ class CartAbandonmentRecoveryAgent(BasicAgent):
         return _evidence_action(action, **kwargs)
 
     def _abandonment_analysis(self, **kwargs) -> str:
+        live = _live_stalled_checkouts()
+        if live:
+            total_value = sum(c["cart_value"] for c in live)
+            lines = ["# Cart Abandonment Analysis — LIVE stalled checkouts "
+                     "(Static Dynamics 365 tenant)\n"]
+            lines.append("In this template an unfulfilled or canceled Dynamics "
+                         "sales order is treated as an abandoned checkout.\n")
+            lines.append(f"**Stalled Checkouts:** {len(live)}")
+            lines.append(f"**Total Value at Risk:** ${total_value:,.2f}\n")
+            lines.append("## Stalled Checkout Detail\n")
+            lines.append("| Order | Customer | Value | Order Status | Created | Exit Page | Device |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for c in sorted(live, key=lambda x: -x["cart_value"]):
+                lines.append(
+                    f"| {c['cart_id']} | {c['customer']} | ${c['cart_value']:,.2f} "
+                    f"| {c['status']} | {c['abandoned_at']} "
+                    f"| n/a — enrichment seam | n/a |"
+                )
+            lines.append("\nExit page, device, and segment stay n/a until you "
+                         "wire your web analytics at the LIVE DATA SEAM.")
+            return "\n".join(lines)
         total_value = _total_abandoned_value()
         by_exit = _abandonment_by_exit()
         lines = ["# Cart Abandonment Analysis\n"]
@@ -390,10 +501,11 @@ class CartAbandonmentRecoveryAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CartAbandonmentRecoveryAgent()
+    print("=" * 80)
+    print("LIVE TENANT STALLED CHECKOUTS (fetched over HTTP; embedded demo offline)")
     print(agent.perform(operation="abandonment_analysis"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO (works offline, simulated)")
     print(agent.perform(operation="recovery_campaign"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="incentive_optimization"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="conversion_tracking"))

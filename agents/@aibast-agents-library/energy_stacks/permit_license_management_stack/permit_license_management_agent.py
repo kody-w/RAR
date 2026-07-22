@@ -1,27 +1,55 @@
 """
-Permit and License Management Agent for Energy sector.
+Permit and License Management Agent — a template you are meant to mutate.
 
 Tracks permits and licenses across energy facilities, manages renewal
 calendars, identifies compliance gaps, and monitors application status
 for regulatory requirements.
 
-Version 1.1.0 adds an evidence-backed at-risk permit view and a dry-run
-renewal workflow with Teams and Outlook notifications. Legacy operations are
-unchanged, and simulated writes never mutate external systems.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live application records over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a permit or license request is represented as a
+     Dynamics case — e.g. CAS-260130 "Building permit application
+     awaiting plan review" (City of Alder Creek) and CAS-260134
+     "License renewal quote requested before expiration" (Summit Trail
+     Software).
+     Try: perform(operation="application_status")
+  2. No network? Everything falls back to the embedded demo layer below
+     (PERMITS / APPLICATIONS / REGULATORY_REQUIREMENTS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PERMIT_LICENSE_MANAGEMENT_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your permitting
+     system), or replace _fetch_collection() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_application() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (issuing
+     authority, public comments) are where you wire your regulator
+     portals.
+
+OPERATIONS
+  permit_inventory | renewal_calendar | compliance_gaps
+  | application_status | at_risk_permits | initiate_renewal_workflow
+  kwargs: operation (required), facility, permit_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/permit_license_management",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Permit & License Management Agent",
-    "description": "Tracks energy facility permits, renewal calendars, and compliance gaps, with dry-run renewal workflows, from built-in demo data.",
+    "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
     "author": "AIBAST",
     "tags": ["permits", "licenses", "compliance", "regulatory", "energy", "renewals"],
     "category": "energy",
@@ -32,7 +60,83 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PERMIT_LICENSE_MANAGEMENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your permitting-system client.
+# Downstream code only needs the fields produced by
+# _normalize_live_application().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "PERMIT_LICENSE_MANAGEMENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_PERMIT_KEYWORDS = ("permit", "license", "licence", "renewal")
+
+
+def _normalize_live_application(row):
+    """Project a Dynamics case onto the application shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not available from CRM alone'
+    and the renderers label it as an enrichment seam. In this template a
+    permit or license request is represented as a Dynamics case."""
+    resolveby = row.get("resolveby")
+    return {
+        "id": row.get("ticketnumber", ""),
+        "name": row.get("title", "untitled"),
+        "facility": row.get("customeridname", "Unknown"),
+        "authority": None,        # enrichment seam — wire your regulator portal
+        "submitted": str(row.get("createdon", ""))[:10],
+        "status": "under_review" if row.get("statecode") == 0 else "decided",
+        "expected_decision": str(resolveby)[:10] if resolveby else None,
+        "comments": None,         # enrichment seam — wire public-comment tracking
+        "_live": True,
+    }
+
+
+def _live_applications():
+    """Live tenant cases that read as permit/license requests; []
+    when offline."""
+    return [
+        _normalize_live_application(i)
+        for i in _fetch_collection("incidents")
+        if any(k in str(i.get("title", "")).lower() for k in _PERMIT_KEYWORDS)
+    ]
+
+
+def _na(value):
+    """None = the CRM alone can't know this (enrichment seam); 0 is
+    real."""
+    return "n/a — enrichment seam" if value is None else f"{value}"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PERMITS = {
@@ -360,9 +464,32 @@ class PermitLicenseManagementAgent(BasicAgent):
         return "\n".join(lines)
 
     def _application_status(self) -> str:
+        live = _live_applications()
+        if live:
+            lines = [
+                "# Permit Application Status (live tenant data)",
+                "",
+                f"**Applications on record:** {len(live)} "
+                f"({sum(1 for a in live if a['status'] == 'under_review')} under review)",
+                "",
+                "| ID | Application | Applicant | Authority | Submitted | Status | Decision Date | Comments |",
+                "|----|-------------|-----------|-----------|-----------|--------|--------------|----------|",
+            ]
+            for a in sorted(live, key=lambda x: x["submitted"]):
+                lines.append(
+                    f"| {a['id']} | {a['name']} | {a['facility']} "
+                    f"| {_na(a['authority'])} | {a['submitted']} | {a['status']} "
+                    f"| {a['expected_decision'] or 'n/a'} | {_na(a['comments'])} |"
+                )
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (incidents). A permit or "
+                         "license request is represented as a Dynamics case; issuing "
+                         "authority and public comments are enrichment seams._")
+            return "\n".join(lines)
+
         data = _application_status()
         lines = [
-            "# Permit Application Status",
+            "# Permit Application Status (embedded demo data — offline)",
             "",
             f"**Active Applications:** {data['total']}",
             "",
@@ -425,7 +552,13 @@ class PermitLicenseManagementAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PermitLicenseManagementAgent()
-    for op in ["permit_inventory", "renewal_calendar", "compliance_gaps", "application_status"]:
+    print("=" * 60)
+    print("LIVE TENANT APPLICATIONS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="application_status"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO PERMITS (works offline)")
+    for op in ["permit_inventory", "renewal_calendar", "compliance_gaps"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

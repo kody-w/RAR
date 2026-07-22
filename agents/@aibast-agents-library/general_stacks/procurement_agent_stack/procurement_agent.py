@@ -1,21 +1,47 @@
 """
-Procurement Agent
+Procurement Agent — a template you are meant to mutate.
 
 Manages purchase requests, vendor comparisons, approval routing, and
 spend analysis for organizational procurement workflows.
 
-Where a real deployment would connect to ERP and procurement platforms,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+The live tenant has no native "purchase requisition" entity, so in this
+template a Dynamics SALES ORDER is read from the buying side — an order
+your organization has placed with the supplier Aster Lane Office
+Systems. Say the same in your own mutation if you reinterpret an entity.
 
-Version 1.1.0 adds evidence-backed optimal-vendor selection, discounted PO
-creation previews, Teams reminder preparation, and RFQ orchestration. Existing
-operations and package identity are preserved.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live orders over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="purchase_request", request_id="ORD-260100")
+     — the tenant's real seeded order (Cedar Hollow Printing, $4,744,
+     Fulfilled), routed through the real approval-threshold math.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PURCHASE_REQUESTS / _VENDOR_CATALOG) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PROCUREMENT_AGENT_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your ERP), or replace
+     _fetch_collection() with your procurement client. The fields the
+     rest of the file needs are listed in _normalize_live_request() —
+     requester, department, and budget code are labeled "n/a —
+     enrichment seam"; wire your HR and finance systems there.
+
+OPERATIONS
+  purchase_request | vendor_comparison | approval_routing
+  | spend_analysis | optimal_vendor | create_purchase_order
+  | approval_reminders | create_rfq | duplicate_license_check
+  kwargs: operation (required), request_id (embedded 'PR-5001' or live
+  'ORD-260100'), vendor_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -23,9 +49,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_agent",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Procurement Agent",
-    "description": "Manages purchase requests, vendor comparisons, approval routing, and spend analysis over built-in demo procurement data.",
+    "description": "Routes purchase requests and approvals over live orders from a simulated Dynamics 365 tenant, with spend analysis and offline fallback.",
     "author": "AIBAST",
     "tags": ["procurement", "purchasing", "vendor", "approval", "spend-analysis"],
     "category": "general",
@@ -36,7 +62,81 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PROCUREMENT_AGENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ERP client. Downstream code
+# only needs the fields produced by _normalize_live_request().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PROCUREMENT_AGENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_request(row):
+    """Project a Dynamics sales order (read from the buying side) onto
+    the purchase-request shape this agent uses. THIS is the contract
+    your replacement data source must meet — a dict with these keys.
+    None means 'not available from the order alone' and renderers label
+    it as an enrichment seam."""
+    return {
+        "id": row.get("ordernumber", row.get("salesorderid", "")),
+        "title": row.get("name", "Unnamed order"),
+        "requester": None,       # enrichment seam — wire your HR/identity system
+        "department": None,      # enrichment seam
+        "category": "Office Systems",
+        "amount": float(row.get("totalamount") or 0),
+        "priority": None,        # enrichment seam — wire your intake workflow
+        "status": row.get("statuscode@OData.Community.Display.V1.FormattedValue", "Open"),
+        "vendor_preferred": "Aster Lane Office Systems",
+        "justification": row.get("description", ""),
+        "budget_code": None,     # enrichment seam — wire your finance system
+        "discount": float(row.get("discountamount") or 0),
+        "_live": True,
+    }
+
+
+def _live_requests():
+    """ordernumber-keyed dict of live tenant orders; {} when offline."""
+    rows = _fetch_collection("salesorders")
+    return {
+        r["id"]: r
+        for r in (_normalize_live_request(row) for row in rows)
+        if r["id"]
+    }
+
+
+def _na(value):
+    """None = the order alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else value
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _PURCHASE_REQUESTS = {
@@ -86,6 +186,23 @@ def _get_approval_level(amount):
         if amount <= threshold["max_amount"]:
             return threshold
     return _APPROVAL_THRESHOLDS[-1]
+
+
+def _resolve_request(request_id):
+    """Embedded demo requests first, then live tenant orders.
+    Returns (request, is_live) or (None, False)."""
+    if request_id in _PURCHASE_REQUESTS:
+        return _PURCHASE_REQUESTS[request_id], False
+    live = _live_requests()
+    if request_id in live:
+        return live[request_id], True
+    return None, False
+
+
+def _known_request_ids():
+    ids = sorted(_PURCHASE_REQUESTS)
+    live = sorted(_live_requests())
+    return ", ".join(ids + live) if live else ", ".join(ids)
 
 
 def _find_competing_vendors(category):
@@ -191,26 +308,32 @@ class ProcurementAgent(BasicAgent):
     # ── purchase_request ───────────────────────────────────────
     def _purchase_request(self, params):
         req_id = params.get("request_id") or "PR-5001"
-        if req_id not in _PURCHASE_REQUESTS:
+        pr, is_live = _resolve_request(req_id)
+        if pr is None:
             return (
                 f"**Error:** Unknown request_id `{req_id}`. "
-                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+                f"Available request IDs: {_known_request_ids()}."
             )
-        pr = _PURCHASE_REQUESTS[req_id]
         approval = _get_approval_level(pr["amount"])
+        source = (
+            "Record source: LIVE order from the Aster Lane Dynamics 365 tenant (read as a purchase request)"
+            if is_live else
+            "Record source: embedded demo layer (simulated)"
+        )
         return (
             f"**Purchase Request: {pr['id']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Title | {pr['title']} |\n"
-            f"| Requester | {pr['requester']} ({pr['department']}) |\n"
+            f"| Requester | {_na(pr['requester'])} ({_na(pr['department'])}) |\n"
             f"| Category | {pr['category']} |\n"
-            f"| Amount | ${pr['amount']:,} |\n"
-            f"| Priority | {pr['priority']} |\n"
+            f"| Amount | ${pr['amount']:,.0f} |\n"
+            f"| Priority | {_na(pr['priority'])} |\n"
             f"| Status | {pr['status']} |\n"
             f"| Preferred Vendor | {pr['vendor_preferred']} |\n"
-            f"| Budget Code | {pr['budget_code']} |\n"
+            f"| Budget Code | {_na(pr['budget_code'])} |\n"
             f"| Required Approver | {approval['approver']} |\n\n"
             f"**Justification:** {pr['justification']}\n\n"
+            f"{source}\n"
             f"Source: [Procurement System]\nAgents: ProcurementAgent"
         )
 
@@ -220,7 +343,7 @@ class ProcurementAgent(BasicAgent):
         for vid, v in _VENDOR_CATALOG.items():
             rows += f"| {vid} | {v['name']} | {v['category']} | {v['tier']} | {v['rating']}/5 | ${v['annual_spend']:,} | {v['payment_terms']} |\n"
         return (
-            f"**Vendor Comparison**\n\n"
+            f"**Vendor Comparison** (embedded demo data — simulated)\n\n"
             f"| ID | Vendor | Category | Tier | Rating | Annual Spend | Terms |\n|---|---|---|---|---|---|---|\n"
             f"{rows}\n"
             f"**Vendor Tiers:**\n"
@@ -233,29 +356,35 @@ class ProcurementAgent(BasicAgent):
     # ── approval_routing ───────────────────────────────────────
     def _approval_routing(self, params):
         req_id = params.get("request_id") or "PR-5001"
-        if req_id not in _PURCHASE_REQUESTS:
+        pr, is_live = _resolve_request(req_id)
+        if pr is None:
             return (
                 f"**Error:** Unknown request_id `{req_id}`. "
-                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+                f"Available request IDs: {_known_request_ids()}."
             )
-        pr = _PURCHASE_REQUESTS[req_id]
         approval = _get_approval_level(pr["amount"])
         threshold_rows = ""
         for t in _APPROVAL_THRESHOLDS:
             limit = f"${t['max_amount']:,}" if t["max_amount"] < 999999999 else "Unlimited"
             marker = " <-- This request" if t == approval else ""
             threshold_rows += f"| Up to {limit} | {t['approver']} | {t['sla_hours']}h |{marker}\n"
+        source = (
+            "Record source: LIVE order from the Aster Lane Dynamics 365 tenant"
+            if is_live else
+            "Record source: embedded demo layer (simulated)"
+        )
         return (
             f"**Approval Routing: {pr['id']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Request | {pr['title']} |\n"
-            f"| Amount | ${pr['amount']:,} |\n"
+            f"| Amount | ${pr['amount']:,.0f} |\n"
             f"| Required Approver | {approval['approver']} |\n"
             f"| Approval SLA | {approval['sla_hours']} hours |\n"
             f"| Current Status | {pr['status']} |\n\n"
             f"**Approval Thresholds:**\n\n"
             f"| Amount Limit | Approver | SLA |\n|---|---|---|\n"
-            f"{threshold_rows}\n\n"
+            f"{threshold_rows}\n"
+            f"{source}\n"
             f"Source: [Approval Workflow Engine]\nAgents: ProcurementAgent"
         )
 
@@ -268,8 +397,16 @@ class ProcurementAgent(BasicAgent):
             utilization = (data["spent_ytd"] + data["committed"]) / data["budget"] * 100
             status = "Over Budget" if data["available"] < 0 else ("At Risk" if utilization > 85 else "On Track")
             cat_rows += f"| {cat} | ${data['budget']:,} | ${data['spent_ytd']:,} | ${data['committed']:,} | ${data['available']:,} | {status} | {data['trend']} |\n"
+        live = _live_requests()
+        live_total = sum(r["amount"] for r in live.values())
+        live_line = (
+            f"**Live tenant order book:** {len(live)} orders totaling ${live_total:,.0f} "
+            "with supplier Aster Lane Office Systems (LIVE Dynamics 365 tenant).\n\n"
+            if live else
+            "**Live tenant order book:** live tenant unreachable — embedded demo data only.\n\n"
+        )
         return (
-            f"**Spend Analysis**\n\n"
+            f"**Spend Analysis** (budget book is embedded demo data — simulated)\n\n"
             f"| Metric | Value |\n|---|---|\n"
             f"| Total Budget | ${total_budget:,} |\n"
             f"| Spent YTD | ${total_spent:,} ({total_spent/total_budget*100:.0f}%) |\n"
@@ -278,10 +415,11 @@ class ProcurementAgent(BasicAgent):
             f"**By Category:**\n\n"
             f"| Category | Budget | Spent YTD | Committed | Available | Status | Trend |\n|---|---|---|---|---|---|---|\n"
             f"{cat_rows}\n"
+            f"{live_line}"
             f"**Alerts:**\n"
             f"- Software category over budget by $60,000 - requires reallocation\n"
             f"- Technology committed spend approaching budget limit\n\n"
-            f"Source: [ERP + Finance System]\nAgents: ProcurementAgent"
+            f"Source: [ERP + Finance System + Live Dynamics 365 Tenant]\nAgents: ProcurementAgent"
         )
 
     def _optimal_vendor(self, params):
@@ -295,7 +433,7 @@ class ProcurementAgent(BasicAgent):
         )
         winner = ranked[0]
         return (
-            "**Optimal Approved Vendor**\n\n"
+            "**Optimal Approved Vendor** (embedded demo data — simulated)\n\n"
             "| Vendor ID | Vendor | Rating | Volume Discount | Delivery | Net Cost | Contract Compliant |\n"
             "|---|---|---|---|---|---|---|\n" + rows
             + f"\n\n**Recommendation:** {winner['vendor']['name']} ({winner['vendor_id']}) for best combined "
@@ -331,7 +469,7 @@ class ProcurementAgent(BasicAgent):
         total = gross - discount
         approval = _get_approval_level(total)
         return (
-            f"**Purchase Order Preview for {pr['id']}**\n\n"
+            f"**Purchase Order Preview for {pr['id']}** (embedded demo data — simulated)\n\n"
             f"- Vendor: {vendor['name']} ({vendor_id})\n"
             "- Bundle: 30 ergonomic workstation packages\n"
             f"- Gross: ${gross:,}\n"
@@ -345,12 +483,12 @@ class ProcurementAgent(BasicAgent):
 
     def _approval_reminders(self, params):
         request_id = params.get("request_id") or "PR-5002"
-        if request_id not in _PURCHASE_REQUESTS:
+        pr, is_live = _resolve_request(request_id)
+        if pr is None:
             return (
                 f"**Error:** Unknown request_id `{request_id}`. "
-                f"Available request IDs: {', '.join(sorted(_PURCHASE_REQUESTS))}."
+                f"Available request IDs: {_known_request_ids()}."
             )
-        pr = _PURCHASE_REQUESTS[request_id]
         approval = _get_approval_level(pr["amount"])
         return (
             f"**Approval Reminder Preview: {pr['id']}**\n\n"
@@ -369,7 +507,7 @@ class ProcurementAgent(BasicAgent):
             if vendor["category"] == "Office Furniture"
         )
         return (
-            "**Office Furniture RFQ Preview**\n\n"
+            "**Office Furniture RFQ Preview** (embedded demo data — simulated)\n\n"
             "| Vendor ID | Vendor | Distribution | Due | Evaluation Criteria |\n"
             "|---|---|---|---|---|\n" + rows
             + "\n\nResponse tracker and weighted evaluation matrix are prepared. "
@@ -379,7 +517,7 @@ class ProcurementAgent(BasicAgent):
 
     def _duplicate_license_check(self, params):
         return (
-            "**Duplicate Software License Check**\n\n"
+            "**Duplicate Software License Check** (embedded demo data — simulated)\n\n"
             "| Product | Purchased | Assigned | Overlap | Annual Avoidable Spend | Action |\n"
             "|---|---|---|---|---|---|\n"
             "| CRM Enterprise | 200 | 176 | 24 | $25,800 | Remove inactive seats before renewal |\n"
@@ -392,11 +530,13 @@ class ProcurementAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProcurementAgent()
-    for op in [
-        "purchase_request", "vendor_comparison", "approval_routing",
-        "spend_analysis", "optimal_vendor", "create_purchase_order",
-        "approval_reminders", "create_rfq", "duplicate_license_check",
-    ]:
-        print("=" * 60)
-        print(agent.perform(operation=op, request_id="PR-5001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO REQUEST (works offline)")
+    print(agent.perform(operation="purchase_request", request_id="PR-5001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT ORDER (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="purchase_request", request_id="ORD-260100"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="spend_analysis"))

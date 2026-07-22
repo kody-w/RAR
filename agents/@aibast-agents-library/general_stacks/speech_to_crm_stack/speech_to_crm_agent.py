@@ -1,17 +1,44 @@
 """
-Speech to CRM Agent
+Speech to CRM Agent — a template you are meant to mutate.
 
-Transcribes sales calls, extracts entities, maps to CRM fields, and generates
-update previews for CRM record enrichment.
+Transcribes sales calls, extracts entities, maps them to CRM fields,
+and generates update previews. The field mapping and update preview are
+grounded against a REAL CRM org: mapped target fields are shown next to
+live example values from actual tenant records, and proposed updates
+are pre-flight checked against the org's account roster.
 
-Where a real deployment would integrate with speech-to-text APIs and CRM,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live opportunities, accounts, and contacts
+     over real HTTP from the globally hosted Static Dynamics 365 tenant
+     (Aster Lane Office Systems — synthetic data, no credentials,
+     works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="crm_mapping")
+     — every mapped Dynamics field is shown with a live example value
+     from a real tenant record (e.g. estimatedvalue from "Marigold
+     Field Services — Mobile workstation expansion").
+  2. No network? Everything falls back to the embedded demo layer below
+     (_CALL_TRANSCRIPTS / _CRM_FIELD_MAPPINGS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SPEECH_TO_CRM_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org), or replace _fetch_collection() with your CRM
+     client. The fields the rest of the file needs are listed in
+     _normalize_live_examples(). The speech-to-text engine itself is an
+     enrichment seam — wire Azure AI Speech or your recorder where the
+     embedded transcript sits.
+
+OPERATIONS
+  transcribe_call | extract_entities | crm_mapping | update_preview
+  kwargs: operation (required), call_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +46,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/speech_to_crm",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Speech to CRM",
-    "description": "Simulates call transcription, entity extraction, CRM field mapping, and update previews using built-in demo transcripts.",
+    "description": "Maps call transcripts to CRM fields grounded against live records in a simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["speech", "transcription", "crm", "entity-extraction", "nlp"],
     "category": "general",
@@ -32,7 +59,74 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SPEECH_TO_CRM_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_examples().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SPEECH_TO_CRM_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_examples():
+    """Project live tenant records onto the grounding shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with an example open opportunity, an example contact, and
+    the account-name roster. Returns {} when offline."""
+    opportunities = _fetch_collection("opportunities")
+    contacts = _fetch_collection("contacts")
+    accounts = _fetch_collection("accounts")
+    if not (opportunities and contacts and accounts):
+        return {}
+    open_opps = [o for o in opportunities if o.get("statecode") == 0] or opportunities
+    opp = open_opps[0]
+    contact = contacts[0]
+    return {
+        "opportunity": {
+            "name": opp.get("name", ""),
+            "estimatedvalue": opp.get("estimatedvalue"),
+            "estimatedclosedate": str(opp.get("estimatedclosedate", ""))[:10],
+            "closeprobability": opp.get("closeprobability"),
+            "customeridname": opp.get("customeridname", ""),
+        },
+        "contact": {
+            "fullname": contact.get("fullname", ""),
+            "jobtitle": contact.get("jobtitle", ""),
+            "parentcustomeridname": contact.get("parentcustomeridname", ""),
+            "emailaddress1": contact.get("emailaddress1", ""),
+        },
+        "account_names": {a.get("name", "") for a in accounts if a.get("name")},
+    }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _CALL_TRANSCRIPTS = {
@@ -66,17 +160,17 @@ _ENTITY_EXTRACTION_RULES = {
 
 _CRM_FIELD_MAPPINGS = {
     "opportunity": {
-        "name": {"source": "organization + context", "mapped_value": "TechVantage Solutions - Enterprise Platform"},
-        "amount": {"source": "money entity", "mapped_value": 200000},
-        "close_date": {"source": "date entity", "mapped_value": "2025-12-15"},
-        "stage": {"source": "conversation context", "mapped_value": "Proposal"},
-        "probability": {"source": "engagement signals", "mapped_value": 65},
-        "next_step": {"source": "action_item entity", "mapped_value": "Send proposal by Dec 10, review meeting Dec 12"},
+        "name": {"source": "organization + context", "mapped_value": "TechVantage Solutions - Enterprise Platform", "d365_field": "name"},
+        "amount": {"source": "money entity", "mapped_value": 200000, "d365_field": "estimatedvalue"},
+        "close_date": {"source": "date entity", "mapped_value": "2025-12-15", "d365_field": "estimatedclosedate"},
+        "stage": {"source": "conversation context", "mapped_value": "Proposal", "d365_field": "stepname"},
+        "probability": {"source": "engagement signals", "mapped_value": 65, "d365_field": "closeprobability"},
+        "next_step": {"source": "action_item entity", "mapped_value": "Send proposal by Dec 10, review meeting Dec 12", "d365_field": "description"},
     },
     "contact": {
-        "name": {"source": "person entity", "mapped_value": "Jennifer Walsh"},
-        "title": {"source": "inferred from context", "mapped_value": "VP of Operations"},
-        "account": {"source": "organization entity", "mapped_value": "TechVantage Solutions"},
+        "name": {"source": "person entity", "mapped_value": "Jennifer Walsh", "d365_field": "fullname"},
+        "title": {"source": "inferred from context", "mapped_value": "VP of Operations", "d365_field": "jobtitle"},
+        "account": {"source": "organization entity", "mapped_value": "TechVantage Solutions", "d365_field": "parentcustomerid"},
     },
     "activity": {
         "type": {"source": "call metadata", "mapped_value": "Phone Call"},
@@ -185,7 +279,8 @@ class SpeechToCRMAgent(BasicAgent):
         call = _CALL_TRANSCRIPTS.get(call_id, list(_CALL_TRANSCRIPTS.values())[0])
         transcript = _format_transcript(call["id"])
         return (
-            f"**Call Transcription: {call['id']}**\n\n"
+            f"**Call Transcription: {call['id']}** (embedded demo transcript — "
+            f"the speech-to-text engine is an enrichment seam)\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Date | {call['date']} |\n"
             f"| Duration | {call['duration_sec'] // 60}m {call['duration_sec'] % 60}s |\n"
@@ -202,7 +297,7 @@ class SpeechToCRMAgent(BasicAgent):
         by_type = _entity_summary()
         summary = "\n".join(f"- {t.title()}: {len(entities)}" for t, entities in by_type.items())
         return (
-            f"**Entity Extraction Results**\n\n"
+            f"**Entity Extraction Results** (embedded demo transcript — simulated)\n\n"
             f"| Type | Value | Confidence | Context |\n|---|---|---|---|\n"
             f"{entity_rows}\n"
             f"**Summary by Type:**\n{summary}\n\n"
@@ -211,32 +306,72 @@ class SpeechToCRMAgent(BasicAgent):
         )
 
     def _crm_mapping(self, call_id):
+        live = _normalize_live_examples()
+        live_opp = live.get("opportunity", {})
+        live_contact = live.get("contact", {})
         opp = _CRM_FIELD_MAPPINGS["opportunity"]
-        opp_rows = "\n".join(f"| {field} | {info['source']} | {info['mapped_value']} |" for field, info in opp.items())
         contact = _CRM_FIELD_MAPPINGS["contact"]
-        contact_rows = "\n".join(f"| {field} | {info['source']} | {info['mapped_value']} |" for field, info in contact.items())
+
+        def live_example(d365_field, record, label_field=None):
+            if not record:
+                return "live tenant unreachable"
+            value = record.get(d365_field, "")
+            return f"{value}" if value not in ("", None) else "n/a"
+
+        opp_rows = "\n".join(
+            f"| {field} | {info['source']} | {info['mapped_value']} | "
+            f"`{info.get('d365_field', 'n/a')}` | {live_example(info.get('d365_field', ''), live_opp)} |"
+            for field, info in opp.items()
+        )
+        contact_rows = "\n".join(
+            f"| {field} | {info['source']} | {info['mapped_value']} | "
+            f"`{info.get('d365_field', 'n/a')}` | {live_example(info.get('d365_field', ''), live_contact)} |"
+            for field, info in contact.items()
+        )
         new_contacts = _CRM_FIELD_MAPPINGS["new_contacts"]
         new_rows = "\n".join(f"| {c['name']} | {c['title']} | {c['role']} |" for c in new_contacts)
+        if live:
+            grounding = (
+                f"Live example values come from real tenant records: opportunity "
+                f"\"{live_opp.get('name', '')}\" and contact "
+                f"\"{live_contact.get('fullname', '')}\" (LIVE Dynamics 365 tenant).\n"
+            )
+        else:
+            grounding = "Live tenant unreachable — target fields shown without live example values.\n"
         return (
-            f"**CRM Field Mapping**\n\n"
+            f"**CRM Field Mapping** (extracted values are from the embedded demo call)\n\n"
             f"**Opportunity Update:**\n\n"
-            f"| Field | Source | Mapped Value |\n|---|---|---|\n"
+            f"| Field | Source | Mapped Value | D365 Field | Live Example Value |\n|---|---|---|---|---|\n"
             f"{opp_rows}\n\n"
             f"**Contact Update:**\n\n"
-            f"| Field | Source | Mapped Value |\n|---|---|---|\n"
+            f"| Field | Source | Mapped Value | D365 Field | Live Example Value |\n|---|---|---|---|---|\n"
             f"{contact_rows}\n\n"
             f"**New Contacts to Create:**\n\n"
             f"| Name | Title | Role |\n|---|---|---|\n"
             f"{new_rows}\n\n"
-            f"Source: [CRM Mapping Engine]\nAgents: SpeechToCRMAgent"
+            f"{grounding}"
+            f"Source: [CRM Mapping Engine + Live Dynamics 365 Tenant]\nAgents: SpeechToCRMAgent"
         )
 
     def _update_preview(self, call_id):
         opp = _CRM_FIELD_MAPPINGS["opportunity"]
         activity = _CRM_FIELD_MAPPINGS["activity"]
         new_contacts = _CRM_FIELD_MAPPINGS["new_contacts"]
+        live = _normalize_live_examples()
+        target_account = _CRM_FIELD_MAPPINGS["contact"]["account"]["mapped_value"]
+        if live:
+            exists = target_account in live["account_names"]
+            preflight = (
+                f"**Pre-flight check (LIVE Dynamics 365 tenant, {len(live['account_names'])} accounts):** "
+                + (f"account \"{target_account}\" EXISTS — updates would attach to it.\n\n"
+                   if exists else
+                   f"account \"{target_account}\" NOT FOUND — applying this update "
+                   f"would create a new account record.\n\n")
+            )
+        else:
+            preflight = "**Pre-flight check:** live tenant unreachable — existence check skipped.\n\n"
         return (
-            f"**CRM Update Preview**\n\n"
+            f"**CRM Update Preview** (proposed values from the embedded demo call)\n\n"
             f"**1. Update Opportunity**\n"
             f"- Name: {opp['name']['mapped_value']}\n"
             f"- Amount: ${opp['amount']['mapped_value']:,}\n"
@@ -251,14 +386,21 @@ class SpeechToCRMAgent(BasicAgent):
             f"**3. Create Contacts ({len(new_contacts)}):**\n"
             + "\n".join(f"- {c['name']} ({c['title']}, {c['role']})" for c in new_contacts)
             + "\n\n"
-            f"**Status:** Ready to apply | Requires confirmation\n\n"
-            f"Source: [CRM Update Engine]\nAgents: SpeechToCRMAgent"
+            f"{preflight}"
+            f"**Status:** Preview only — no record was written | Requires confirmation\n\n"
+            f"Source: [CRM Update Engine + Live Dynamics 365 Tenant]\nAgents: SpeechToCRMAgent"
         )
 
 
 if __name__ == "__main__":
     agent = SpeechToCRMAgent()
-    for op in ["transcribe_call", "extract_entities", "crm_mapping", "update_preview"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, call_id="CALL-T001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO TRANSCRIPT (works offline)")
+    print(agent.perform(operation="transcribe_call", call_id="CALL-T001"))
+    print()
+    print("=" * 60)
+    print("LIVE-GROUNDED FIELD MAPPING (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="crm_mapping", call_id="CALL-T001"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="update_preview", call_id="CALL-T001"))

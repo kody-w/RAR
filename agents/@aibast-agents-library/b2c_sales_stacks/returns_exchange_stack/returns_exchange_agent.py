@@ -1,8 +1,33 @@
 """
-Returns & Exchange Agent — B2C Sales Stack
+Returns & Exchange Agent — a template you are meant to mutate.
 
 Manages return initiations, eligibility checks, exchange options,
 and refund status tracking for retail operations.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live order records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Live sales orders drive real eligibility math — e.g. ORD-260100
+     for Cedar Hollow Printing was fulfilled 2026-01-12, so the 30-day
+     window verdict is computed from the actual fulfillment date.
+     Try: perform(operation="eligibility_check", order_id="ORD-260100")
+  2. No network? Everything falls back to the embedded demo layer below
+     (ORDERS / RETURN_POLICIES / EXCHANGE_INVENTORY) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     RETURNS_EXCHANGE_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your OMS), or replace
+     _fetch_collection() with your own API client. Fields the rest of
+     the file needs are listed in _normalize_live_order() — everything
+     else keeps working untouched. Fields marked "enrichment seam" in
+     the output (line items, payment method) are where you wire your
+     order-line and payments systems.
+
+OPERATIONS
+  return_initiation | eligibility_check | exchange_options | refund_status
+  kwargs: operation (required), order_id, item_sku
 """
 
 import sys
@@ -10,13 +35,16 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/returns_exchange",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Returns & Exchange Agent",
-    "description": "Handles retail return initiation, eligibility checks, exchange options, and refund status using built-in demo order data.",
+    "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
     "author": "AIBAST",
     "tags": ["returns", "exchange", "refund", "retail", "customer-service", "b2c"],
     "category": "b2c_sales",
@@ -26,7 +54,95 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export RETURNS_EXCHANGE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your OMS client. Downstream code
+# only needs the fields produced by _normalize_live_order().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "RETURNS_EXCHANGE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_order(row):
+    """Project a Dynamics sales order onto the order shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not available from the order
+    header alone' and the renderers label it as an enrichment seam."""
+    delivered = row.get("datefulfilled")
+    return {
+        "customer": row.get("customeridname", "Unknown"),
+        "order_date": str(row.get("createdon", ""))[:10],
+        "items": None,             # enrichment seam — wire your order-line system
+        "order_total": float(row.get("totalamount") or 0),
+        "shipping_paid": float(row.get("freightamount") or 0),
+        "payment_method": None,    # enrichment seam — wire your payments system
+        "delivered": str(delivered)[:10] if delivered else None,
+        "_live": True,
+    }
+
+
+def _live_orders():
+    """ordernumber-keyed dict of live tenant orders; {} when offline."""
+    rows = _fetch_collection("salesorders")
+    return {
+        row["ordernumber"]: _normalize_live_order(row)
+        for row in rows
+        if row.get("ordernumber")
+    }
+
+
+def _days_since(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        if then.tzinfo is None:
+            then = then.replace(tzinfo=timezone.utc)
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return None
+
+
+def _live_eligibility(order):
+    """Real 30-day-window math against the order's actual fulfillment
+    date. Returns (verdict, details)."""
+    if not order["delivered"]:
+        return False, "Not yet fulfilled — return window has not started"
+    days = _days_since(order["delivered"])
+    window = RETURN_POLICIES["standard"]["window_days"]
+    if days is None:
+        return False, "Fulfillment date unreadable"
+    if days > window:
+        return False, f"Return window expired ({days} days since delivery vs {window}-day policy)"
+    return True, f"Eligible — {days} days since delivery, within the {window}-day window"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 ORDERS = {
@@ -226,6 +342,36 @@ class ReturnsExchangeAgent(BasicAgent):
         order_id = kwargs.get("order_id")
         item_sku = kwargs.get("item_sku")
         lines = ["# Return Eligibility Check\n"]
+        live = _live_orders() if (not order_id or order_id not in ORDERS) else {}
+        if order_id and order_id in live:
+            order = live[order_id]
+            eligible, details = _live_eligibility(order)
+            lines.append(f"**Order:** {order_id} (live tenant record)")
+            lines.append(f"**Customer:** {order['customer']}")
+            lines.append(f"**Order Date:** {order['order_date']}")
+            lines.append(f"**Delivered:** {order['delivered'] or 'not yet fulfilled'}")
+            lines.append(f"**Order Total:** ${order['order_total']:,.2f}")
+            lines.append(f"**Shipping Paid:** ${order['shipping_paid']:,.2f}")
+            lines.append("**Payment Method:** n/a — enrichment seam (wire your payments system)\n")
+            lines.append("## Order Eligibility\n")
+            lines.append(f"- **Eligible:** {'Yes' if eligible else 'No'}")
+            lines.append(f"- **Details:** {details}")
+            lines.append("- **Line Items:** n/a — enrichment seam (wire your order-line system "
+                         "for per-item verdicts)")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (salesorders)._")
+            return "\n".join(lines)
+        if not order_id and live:
+            lines.append("## All Orders — Eligibility Summary (live tenant data)\n")
+            lines.append("| Order | Customer | Delivered | Total | Eligible |")
+            lines.append("|---|---|---|---|---|")
+            for oid, order in sorted(live.items()):
+                eligible, details = _live_eligibility(order)
+                lines.append(
+                    f"| {oid} | {order['customer']} | {order['delivered'] or 'not fulfilled'} "
+                    f"| ${order['order_total']:,.2f} | {'Yes' if eligible else 'No — ' + details.split(' — ')[0].lower()} |"
+                )
+            lines.append("\n_Source: live Static Dynamics 365 tenant (salesorders)._")
+            return "\n".join(lines)
         if order_id and order_id in ORDERS:
             order = ORDERS[order_id]
             lines.append(f"**Order:** {order_id}")
@@ -321,10 +467,15 @@ class ReturnsExchangeAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ReturnsExchangeAgent()
-    print(agent.perform(operation="return_initiation"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("EMBEDDED DEMO ORDER (works offline)")
     print(agent.perform(operation="eligibility_check", order_id="ORD-55001"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="exchange_options", item_sku="DRS-4420"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("LIVE TENANT ORDER (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="eligibility_check", order_id="ORD-260100"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="return_initiation"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="refund_status"))

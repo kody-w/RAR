@@ -1,14 +1,37 @@
 """
-Financial Services Customer Onboarding Agent — Financial Services Stack
+Financial Services Customer Onboarding Agent — a template you are meant to mutate.
 
 Manages KYC verification, account setup, document checklists, and
 onboarding status tracking for financial institution customer onboarding.
+In this template a new-customer onboarding application is represented as a
+Dynamics 365 lead — the tenant has no native "application" entity, so leads
+stand in for the intake pipeline.
 
-Version 1.1.0 adds evidence-derived, data-driven onboarding capabilities
-(identity verification, compliance screening, document collection, account
-provisioning, and the onboarding timeline) as backward-compatible operations
-routed through a deterministic keyed-lookup helper. All prior operations and
-their behavior are preserved unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `onboarding_status` operation pulls live
+     lead records over real HTTP from the globally hosted Static Dynamics
+     365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="onboarding_status")
+     and look for the Silas Dunn / Bluegrass Credit Union application.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CUSTOMER_APPLICATIONS / VERIFICATION_STATUS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FS_CUSTOMER_ONBOARDING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your loan/deposit origination
+     system), or replace _fetch_collection() with calls into your own API.
+     The fields the rest of the file needs are listed in
+     _normalize_live_application() — everything else keeps working
+     untouched. Fields rendered "n/a — enrichment seam" (account requested,
+     KYC risk rating) are where you wire your core banking / KYC vendor.
+
+OPERATIONS
+  kyc_verification | account_setup | document_checklist | onboarding_status
+  | identity_verification | compliance_screening | document_collection
+  | account_provisioning | onboarding_timeline
+  kwargs: operation (required), application_id, user_input
 """
 
 import sys
@@ -16,13 +39,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_customer_onboarding",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "FS Customer Onboarding Agent",
-    "description": "Guides bank customer onboarding with KYC checks, document checklists, and status tracking using built-in demo data.",
+    "description": "Tracks bank customer onboarding and KYC from a live simulated Dynamics 365 tenant (leads as applications), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["KYC", "onboarding", "account-setup", "compliance", "financial-services", "identity-verification", "sanctions-screening", "account-provisioning"],
     "category": "financial_services",
@@ -31,8 +56,85 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FS_CUSTOMER_ONBOARDING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your origination-system client.
+# Downstream code only needs the fields produced by
+# _normalize_live_application().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FS_CUSTOMER_ONBOARDING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_application(row):
+    """Project a Dynamics lead onto the application shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it as an enrichment seam."""
+    state = row.get("statecode")
+    status = {0: "application_received", 1: "approved", 2: "withdrawn"}.get(state, "application_received")
+    company = row.get("companyname")
+    return {
+        "applicant": row.get("fullname") or company or "Unknown",
+        "application_type": "business" if company else "individual",
+        "account_requested": None,   # enrichment seam — wire your core banking system
+        "submitted": str(row.get("createdon", ""))[:10],
+        "status": status,
+        "risk_rating": None,         # enrichment seam — wire your KYC/AML vendor
+        "relationship_manager": row.get("owneridname", ""),
+        "estimated_assets": float(row.get("estimatedamount") or 0),
+        "_company": company or "",
+        "_live": True,
+    }
+
+
+def _live_applications():
+    """Lead-keyed dict of live tenant onboarding applications; {} offline."""
+    rows = _fetch_collection("leads")
+    if not rows:
+        return {}
+    return {
+        f"LEAD-{str(row.get('leadid', ''))[:8]}": _normalize_live_application(row)
+        for row in rows
+        if row.get("leadid")
+    }
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CUSTOMER_APPLICATIONS = {
@@ -261,13 +363,13 @@ def _kyc_completion_pct(app_id):
     return round((complete / total) * 100, 1)
 
 
-def _onboarding_pipeline():
+def _onboarding_pipeline(applications):
     """Summarize onboarding pipeline metrics."""
     by_status = {}
-    for app in CUSTOMER_APPLICATIONS.values():
+    for app in applications.values():
         by_status[app["status"]] = by_status.get(app["status"], 0) + 1
-    total_assets = sum(app["estimated_assets"] for app in CUSTOMER_APPLICATIONS.values())
-    return {"count": len(CUSTOMER_APPLICATIONS), "by_status": by_status, "total_assets": total_assets}
+    total_assets = sum(app["estimated_assets"] for app in applications.values())
+    return {"count": len(applications), "by_status": by_status, "total_assets": total_assets}
 
 
 def _fmt_label(field):
@@ -509,7 +611,9 @@ class FSCustomerOnboardingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _onboarding_status(self, **kwargs) -> str:
-        pipeline = _onboarding_pipeline()
+        live = _live_applications()
+        applications = live or CUSTOMER_APPLICATIONS
+        pipeline = _onboarding_pipeline(applications)
         lines = ["# Customer Onboarding Pipeline\n"]
         lines.append(f"**Applications:** {pipeline['count']}")
         lines.append(f"**Total Estimated Assets:** ${pipeline['total_assets']:,.0f}\n")
@@ -519,12 +623,24 @@ class FSCustomerOnboardingAgent(BasicAgent):
         lines.append("\n## Application Details\n")
         lines.append("| App ID | Applicant | Account | Risk | Est. Assets | Status | RM |")
         lines.append("|---|---|---|---|---|---|---|")
-        for aid, app in CUSTOMER_APPLICATIONS.items():
+        for aid, app in applications.items():
+            applicant = app["applicant"]
+            if app.get("_company"):
+                applicant = f"{applicant} ({app['_company']})"
             lines.append(
-                f"| {aid} | {app['applicant']} | {app['account_requested'].replace('_', ' ').title()} "
-                f"| {app['risk_rating'].title()} | ${app['estimated_assets']:,.0f} "
+                f"| {aid} | {applicant} "
+                f"| {_seam(app['account_requested'], lambda v: v.replace('_', ' ').title())} "
+                f"| {_seam(app['risk_rating'], lambda v: v.title())} | ${app['estimated_assets']:,.0f} "
                 f"| {app['status'].replace('_', ' ').title()} | {app['relationship_manager']} |"
             )
+        if live:
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — Dynamics leads "
+                "reinterpreted as onboarding applications. Account/risk columns "
+                "are enrichment seams (wire your core banking / KYC vendor)._"
+            )
+        else:
+            lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
 
@@ -534,16 +650,15 @@ class FSCustomerOnboardingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FSCustomerOnboardingAgent()
-    print(agent.perform(operation="onboarding_status"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 80)
+    print("EMBEDDED DEMO APPLICATION (works offline)")
     print(agent.perform(operation="kyc_verification", application_id="APP-6003"))
     print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="account_setup"))
+    print("LIVE TENANT PIPELINE (leads fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="onboarding_status"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="document_checklist", application_id="APP-6002"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="identity_verification", user_input="Run identity verification for IDV-3001"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="account_provisioning", user_input="Provision account ACCT-6302"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="onboarding_timeline"))

@@ -1,28 +1,53 @@
 """
-Field Service Dispatch Agent for Energy sector.
+Field Service Dispatch Agent — a template you are meant to mutate.
 
 Manages field service operations including dispatch dashboards, route
 optimization, technician assignment based on skills, and emergency response
 coordination for energy infrastructure maintenance.
 
-Version 1.1.0 adds evidence-backed schedule optimization, outage orchestration,
-live status reporting, post-incident analysis, and dry-run follow-on work
-orders. Every legacy operation remains available and external writes are
-simulated only.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live work orders and crew rosters over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's 15 Field Service work orders drive the dashboard —
+     e.g. WO-260100, a High-priority printer fault for Cedar Hollow
+     Printing that is still Unscheduled.
+     Try: perform(operation="dispatch_dashboard")
+  2. No network? Everything falls back to the embedded demo layer below
+     (TECHNICIANS / SERVICE_REQUESTS / OUTAGES) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FIELD_SERVICE_DISPATCH_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your FSM system), or
+     replace _fetch_collection() with your own API client. Fields the
+     rest of the file needs are listed in _normalize_live_workorder() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (estimated hours, certifications) are where you
+     wire your scheduling and HR systems.
+
+OPERATIONS
+  dispatch_dashboard | route_optimization | technician_assignment
+  | emergency_response | optimized_schedule | outage_orchestration
+  | crew_status_updates | post_incident_review | follow_on_work_orders
+  kwargs: operation (required), zone, outage_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/field_service_dispatch",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Field Service Dispatch Agent",
-    "description": "Coordinates energy field-service dispatch, routing, crew assignment, and outage response using built-in demo data with simulated writes.",
+    "description": "Dispatches from live work orders on a simulated Dynamics 365 tenant, with routing, crews, outage response, and an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["field-service", "dispatch", "routing", "technicians", "emergency", "energy"],
     "category": "energy",
@@ -33,7 +58,78 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FIELD_SERVICE_DISPATCH_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your FSM client. Downstream code
+# only needs the fields produced by _normalize_live_workorder().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FIELD_SERVICE_DISPATCH_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_WO_STATUS = {
+    690970000: "unscheduled",
+    690970001: "scheduled",
+    690970002: "in_progress",
+    690970003: "completed",
+    690970004: "posted",
+    690970005: "closed",
+}
+
+
+def _normalize_live_workorder(row):
+    """Project a Dynamics Field Service work order onto the request
+    shape this agent uses. THIS is the contract your replacement data
+    source must meet — a dict with these keys. None means 'not available
+    from the work order alone' and the renderers label it as an
+    enrichment seam."""
+    return {
+        "id": row.get("msdyn_name", ""),
+        "title": f"{row.get('msdyn_primaryincidenttypename', 'Service')} — "
+                 f"{row.get('msdyn_serviceaccountname', 'Unknown account')}",
+        "priority": str(row.get("msdyn_priorityname", "Normal")).lower(),
+        "type": row.get("msdyn_workordertypename", "service"),
+        "zone": row.get("msdyn_stateorprovince", "?"),
+        "location": f"{row.get('msdyn_city', '?')}, {row.get('msdyn_stateorprovince', '?')}",
+        "status": _WO_STATUS.get(row.get("msdyn_systemstatus"), "unknown"),
+        "estimated_hours": None,  # enrichment seam — wire your scheduling engine
+        "_live": True,
+    }
+
+
+def _live_workorders():
+    """Live tenant work orders as request dicts; [] when offline."""
+    return [_normalize_live_workorder(w) for w in _fetch_collection("msdyn_workorders")]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 TECHNICIANS = {
@@ -471,9 +567,38 @@ class FieldServiceDispatchAgent(BasicAgent):
         return f"**Error:** Unknown operation `{op}`."
 
     def _dispatch_dashboard(self) -> str:
+        live = _live_workorders()
+        if live:
+            resources = _fetch_collection("bookableresources")
+            bookings = _fetch_collection("bookableresourcebookings")
+            priority_order = {"critical": 0, "high": 1, "normal": 2, "medium": 2, "low": 3}
+            live.sort(key=lambda r: (priority_order.get(r["priority"], 9), r["id"]))
+            unassigned = sum(1 for r in live if r["status"] == "unscheduled")
+            lines = [
+                "# Field Service Dispatch Dashboard (live tenant data)",
+                "",
+                f"**Total Work Orders:** {len(live)} | "
+                f"**Unscheduled:** {unassigned} | "
+                f"**Bookable Crews:** {len(resources)} "
+                f"({len(bookings)} bookings on record)",
+                "",
+                "| Priority | Work Order | Request | Type | Location | Hours | Status |",
+                "|----------|------------|---------|------|----------|-------|--------|",
+            ]
+            for r in live:
+                lines.append(
+                    f"| {r['priority'].upper()} | {r['id']} | {r['title']} | {r['type']} "
+                    f"| {r['location']} | n/a — enrichment seam | {r['status']} |"
+                )
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (msdyn_workorders + "
+                         "bookableresources). Estimated hours are an enrichment seam — "
+                         "wire your scheduling engine._")
+            return "\n".join(lines)
+
         data = _dispatch_dashboard()
         lines = [
-            "# Field Service Dispatch Dashboard",
+            "# Field Service Dispatch Dashboard (embedded demo data — offline)",
             "",
             f"**Total Requests:** {data['total_requests']} | "
             f"**Unassigned:** {data['unassigned_requests']} | "
@@ -671,7 +796,13 @@ class FieldServiceDispatchAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = FieldServiceDispatchAgent()
-    for op in ["dispatch_dashboard", "route_optimization", "technician_assignment", "emergency_response"]:
+    print("=" * 60)
+    print("LIVE TENANT WORK ORDERS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="dispatch_dashboard"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO CREWS (works offline)")
+    for op in ["route_optimization", "technician_assignment", "emergency_response"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

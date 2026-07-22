@@ -1,13 +1,33 @@
 """
-Sales Qualification Agent
+Sales Qualification Agent — a template you are meant to mutate.
 
-Scores inbound leads against an Ideal Customer Profile, performs BANT
-analysis, generates personalized outreach, routes leads to AEs by
-territory and expertise, and enforces SLA-based follow-up tracking.
+Scores inbound leads against an Ideal Customer Profile, runs BANT
+analysis, generates personalized outreach, routes leads to AEs, and
+enforces SLA-based follow-up tracking.
 
-Where a real deployment would call Salesforce, ZoomInfo, 6sense, etc.,
-this agent uses a synthetic data layer so it runs anywhere without
-credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM leads over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="score_leads") — the summary tiers live
+     leads such as Priya Natarajan at "City of Alder Creek" (rated Hot
+     in the CRM, $9,825 estimated).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_LEADS / _ICP / _AE_TEAM) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SALES_QUALIFICATION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_lead(). Firmographics
+     (employees, industry, tech stack) and engagement signals are
+     enrichment seams — wire ZoomInfo / 6sense there; ICP and BANT ops
+     stay simulated until you do.
+
+OPERATIONS
+  score_leads | bant_analysis | create_outreach | assign_leads
+  | setup_tracking | qualification_report | handoff_lead
+  kwargs: operation (required), tier_filter, lead_id (handoff_lead)
 """
 
 import sys, os
@@ -15,6 +35,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
+import urllib.request
 from datetime import datetime, timedelta
 
 # ═══════════════════════════════════════════════════════════════
@@ -23,9 +44,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_qualification",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Sales Qualification",
-    "description": "Scores inbound leads against an ICP, runs BANT analysis, and routes leads to AEs with SLA tracking, using built-in demo data.",
+    "description": "Tiers live leads from a simulated Dynamics 365 tenant by CRM rating and value, with ICP/BANT tooling and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "lead-qualification", "bant", "icp-scoring", "lead-routing"],
     "category": "b2b_sales",
@@ -36,7 +57,77 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SALES_QUALIFICATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_lead().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SALES_QUALIFICATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_lead(row):
+    """Project a Dynamics lead onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire ZoomInfo / 6sense for
+    firmographics and intent signals)."""
+    quality = row.get("leadqualitycode@OData.Community.Display.V1.FormattedValue", "")
+    state = row.get("statecode")
+    if state == 2:
+        tier = "Disqualified"
+    else:
+        tier = {"Hot": "Hot", "Warm": "Warm", "Cold": "Nurture"}.get(quality, "Nurture")
+    return {
+        "id": str(row.get("leadid", ""))[:8],
+        "company": row.get("companyname", "Unknown"),
+        "contact_name": row.get("fullname", "Unknown"),
+        "subject": row.get("subject", ""),
+        "estimated_amount": int(float(row.get("estimatedamount") or 0)),
+        "crm_quality": quality or "n/a",
+        "tier": tier,
+        "owner": row.get("owneridname", ""),
+        "employees": None,           # enrichment seam — wire ZoomInfo
+        "industry": None,            # enrichment seam
+        "tech_stack": None,          # enrichment seam
+        "engagement_signals": None,  # enrichment seam — wire 6sense
+        "_live": True,
+    }
+
+
+def _live_leads():
+    """Live tenant leads normalized for this agent; [] when offline."""
+    return [_normalize_live_lead(l) for l in _fetch_collection("leads")]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # Stands in for CRM, ZoomInfo, 6sense, Clearbit, etc.
 # ═══════════════════════════════════════════════════════════════
 
@@ -356,8 +447,51 @@ class SalesQualificationAgent(BasicAgent):
         }
         return "**Qualified Lead Handoff Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
-    # ── score_leads ───────────────────────────────────────────
+    # ── score_leads (flagship: prefers LIVE tenant, falls back) ──
     def _score_leads(self, tier_filter):
+        live = _live_leads()
+        if live:
+            tiers = {"Hot": [], "Warm": [], "Nurture": [], "Disqualified": []}
+            for l in live:
+                tiers[l["tier"]].append(l)
+            actions = {"Hot": "Immediate AE handoff", "Warm": "SDR qualification call",
+                       "Nurture": "Automated email sequence", "Disqualified": "Marketing nurture list"}
+            summary = (
+                "| Tier | Leads | Est. Value | Recommended Action |\n"
+                "|---|---|---|---|\n"
+            )
+            for tier_name in ["Hot", "Warm", "Nurture", "Disqualified"]:
+                group = tiers[tier_name]
+                total = sum(l["estimated_amount"] for l in group)
+                summary += f"| {tier_name} | {len(group)} | ${total:,} | {actions[tier_name]} |\n"
+
+            top_hot = sorted(tiers["Hot"], key=lambda l: -l["estimated_amount"])[:5]
+            top_lines = ""
+            for i, lead in enumerate(top_hot, 1):
+                top_lines += (f"{i}. **{lead['company']}** — ${lead['estimated_amount']:,} — "
+                              f"{lead['contact_name']}, {lead['subject']}\n")
+
+            filtered = ""
+            if tier_filter and tier_filter in tiers:
+                filtered = f"\n**{tier_filter} Leads Detail:**\n\n"
+                filtered += "| Company | Contact | Est. Value | CRM Rating | Signals |\n|---|---|---|---|---|\n"
+                for l in tiers[tier_filter]:
+                    filtered += (f"| {l['company']} | {l['contact_name']} | "
+                                 f"${l['estimated_amount']:,} | {l['crm_quality']} | "
+                                 f"n/a — enrichment seam |\n")
+
+            return (
+                f"**Lead Qualification Summary — {len(live)} LIVE Leads** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Tiers come from the CRM lead rating (Hot/Warm/Cold) and lead "
+                f"state; ICP fit and BANT scoring activate when you wire "
+                f"ZoomInfo / 6sense at the LIVE DATA SEAM.\n\n"
+                f"{summary}\n"
+                f"**Top Hot Leads:**\n{top_lines}"
+                f"{filtered}\n"
+                "Source: [Live Dynamics 365 leads]\n"
+                "Agents: LeadEnrichmentAgent, ICPMatchingAgent"
+            )
         scored = self._ensure_scored()
         tiers = {"Hot": [], "Warm": [], "Nurture": [], "Disqualified": []}
         for s in scored:
@@ -599,8 +733,13 @@ class SalesQualificationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SalesQualificationAgent()
-    for op in ["score_leads", "bant_analysis", "create_outreach",
-               "assign_leads", "setup_tracking", "qualification_report"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT LEADS (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="score_leads"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="bant_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="qualification_report"))

@@ -1,14 +1,36 @@
 """
-Building Permit Processing Agent — SLG Government Stack
+Building Permit Processing Agent — a template you are meant to mutate.
 
 Manages building permit workflows including status tracking, review
 checklists, inspector assignments, and fee calculations for local
 government permitting offices.
 
-Version 1.1.0 adds evidence-derived application intake, code compliance,
-review routing, approval workflow, and permit issuance capabilities. Existing
-operations remain unchanged; new write operations return deterministic
-simulated receipts and never modify an external system.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live permit-office cases over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="permit_status")
+     — with network up, the queue surfaces the tenant's live permit cases
+     such as CAS-260130 "Building permit application awaiting plan
+     review" (City of Alder Creek). In this template a permit application
+     is represented as a Dynamics case (incident).
+  2. No network? Everything falls back to the embedded demo layer below
+     (PERMIT_APPLICATIONS / ZONING_REQUIREMENTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     BUILDING_PERMIT_PROCESSING_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from Accela/Tyler), or
+     replace _fetch_collection() with your permitting API. The fields the
+     rest of the file needs are listed in _normalize_live_permit() —
+     valuation, parcel, and zoning stay "n/a — enrichment seam" until you
+     wire your land-management system.
+
+OPERATIONS
+  permit_status | review_checklist | inspector_assignment |
+  fee_calculation | application_intake | code_compliance_review |
+  review_routing | approval_workflow | permit_issuance
+  kwargs: operation (required), permit_id, key, user_input
 """
 
 import sys
@@ -17,13 +39,16 @@ import re
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/building_permit_processing",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Building Permit Processing Agent",
-    "description": "Tracks building permit status, review checklists, inspector assignments, and fees using built-in demo municipal data.",
+    "description": "Tracks permit status and fees from a live simulated Dynamics 365 tenant's permit cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["permits", "building", "zoning", "inspection", "local-government", "fees", "code-compliance", "workflow-routing"],
     "category": "slg_government",
@@ -32,8 +57,93 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export BUILDING_PERMIT_PROCESSING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your permitting-system client.
+# Downstream code only needs the fields from _normalize_live_permit().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "BUILDING_PERMIT_PROCESSING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Case-title keywords that mark a tenant case as a permit-office item.
+_PERMIT_KEYWORDS = ("permit", "plan review", "inspection", "zoning", "variance")
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_permit(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a permit application IS a Dynamics case.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the case system
+    alone' and the renderers label it as an enrichment seam."""
+    return {
+        "permit_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "applicant": row.get("customeridname", "Unknown"),
+        "description": row.get("title", "untitled"),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "reviewer": row.get("owneridname", "Unassigned"),
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "valuation": None,        # enrichment seam — wire your land-mgmt system
+        "parcel_id": None,        # enrichment seam
+        "zoning_district": None,  # enrichment seam
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_permit_queue():
+    """Live tenant cases whose titles look permit-shaped; [] offline."""
+    queue = []
+    for row in _fetch_collection("incidents"):
+        title = str(row.get("title", "")).lower()
+        if any(kw in title for kw in _PERMIT_KEYWORDS):
+            permit = _normalize_live_permit(row)
+            if permit["permit_id"]:
+                queue.append(permit)
+    return queue
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 PERMIT_APPLICATIONS = {
@@ -537,6 +647,35 @@ class BuildingPermitProcessingAgent(BasicAgent):
                 lines.append(f"- Setbacks: Front {sb['front']}ft, Side {sb['side']}ft, Rear {sb['rear']}ft")
             return "\n".join(lines)
 
+        live_queue = _live_permit_queue()
+        if live_queue and not permit_id:
+            lines = [
+                "# Permit Applications Queue — Live Tenant Cases\n",
+                f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+                "In this template a permit application is a Dynamics case. Pass",
+                "`permit_id` (e.g. BP-2025-0101) for the embedded demo view.\n",
+                "| Case | Applicant | Description | Priority | Status | Reviewer | Age | Valuation |",
+                "|---|---|---|---|---|---|---|---|",
+            ]
+            for p in sorted(live_queue, key=lambda x: x["permit_id"]):
+                valuation = (
+                    "n/a — enrichment seam"
+                    if p["valuation"] is None
+                    else f"${p['valuation']:,.0f}"
+                )
+                lines.append(
+                    f"| {p['permit_id']} | {p['applicant']} | {p['description']} "
+                    f"| {p['priority']} | {p['status']} | {p['reviewer']} "
+                    f"| {p['age_days']}d | {valuation} |"
+                )
+            open_count = sum(1 for p in live_queue if p["open"])
+            lines.append(f"\n**Open permit cases:** {open_count} of {len(live_queue)} matched")
+            lines.append(
+                "Valuation, parcel, and zoning need your land-management system — "
+                "wire it at the LIVE DATA SEAM."
+            )
+            return "\n".join(lines)
+
         lines = ["# Permit Applications Dashboard\n"]
         lines.append("| Permit ID | Applicant | Type | Valuation | Status | Reviewer |")
         lines.append("|---|---|---|---|---|---|")
@@ -609,8 +748,10 @@ class BuildingPermitProcessingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = BuildingPermitProcessingAgent()
+    print("LIVE TENANT PERMIT QUEUE (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="permit_status"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO PERMIT (works offline)")
     print(agent.perform(operation="permit_status", permit_id="BP-2025-0101"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="review_checklist", permit_id="BP-2025-0104"))

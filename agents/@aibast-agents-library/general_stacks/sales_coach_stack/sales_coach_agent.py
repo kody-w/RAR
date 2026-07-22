@@ -1,17 +1,43 @@
 """
-Sales Coach Agent
+Sales Coach Agent — a template you are meant to mutate.
 
-AI-powered sales coaching with call reviews, skill assessments, personalized
-coaching plans, and performance dashboards.
+AI-powered sales coaching with call reviews, skill assessments,
+personalized coaching plans, and performance dashboards. Rep pipeline
+numbers (open value, won/lost, win rate) are computed from real CRM
+opportunities; call scores and skill rubrics come from your coaching
+platform.
 
-Where a real deployment would integrate with call recording and CRM systems,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="skill_assessment", rep_name="Sam Patel")
+     — Sam Patel is a real seeded opportunity owner in the tenant; the
+     agent computes his live pipeline and win rate from his deals.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_SKILL_ASSESSMENTS / _CALL_TRANSCRIPTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SALES_COACH_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from Salesforce), or replace
+     _fetch_collection() with your CRM client. The fields the rest of
+     the file needs are listed in _normalize_live_rep() — call scores
+     for live reps are labeled "n/a — enrichment seam"; wire your call
+     recording / conversation intelligence platform there.
+
+OPERATIONS
+  call_review | skill_assessment | coaching_plan | performance_dashboard
+  kwargs: operation (required), rep_name (embedded 'Alex Rivera' or a
+  live tenant opportunity owner like 'Sam Patel'), call_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +45,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_coach",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Sales Coach",
-    "description": "Generates call reviews, skill assessments, coaching plans, and performance dashboards from built-in demo sales data.",
+    "description": "Coaches reps with live pipeline stats from a simulated Dynamics 365 tenant plus call reviews and skill plans, with offline fallback.",
     "author": "AIBAST",
     "tags": ["sales", "coaching", "training", "performance", "call-review"],
     "category": "general",
@@ -32,7 +58,76 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SALES_COACH_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_rep().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SALES_COACH_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_rep(owner_name, opportunities):
+    """Project a rep's Dynamics opportunities onto the pipeline shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. Pipeline numbers are computed
+    from real records; None means 'not knowable from CRM alone' and
+    renderers label it as an enrichment seam (call scores live in your
+    conversation-intelligence platform)."""
+    mine = [o for o in opportunities if o.get("owneridname") == owner_name]
+    open_opps = [o for o in mine if o.get("statecode") == 0]
+    won = sum(1 for o in mine if o.get("statecode") == 1)
+    lost = sum(1 for o in mine if o.get("statecode") == 2)
+    closed = won + lost
+    return {
+        "name": owner_name,
+        "open_count": len(open_opps),
+        "open_value": sum(float(o.get("estimatedvalue") or 0) for o in open_opps),
+        "won": won,
+        "lost": lost,
+        "win_rate": round(won / closed * 100) if closed else None,
+        "overall": None,            # enrichment seam — wire your coaching platform
+        "quota_attainment": None,   # enrichment seam — wire your quota system
+        "scores": None,             # enrichment seam — wire call recordings
+        "_live": True,
+    }
+
+
+def _live_rep_roster():
+    """name-keyed dict of live tenant opportunity owners; {} offline."""
+    opportunities = _fetch_collection("opportunities")
+    owners = sorted({o.get("owneridname") for o in opportunities if o.get("owneridname")})
+    return {name: _normalize_live_rep(name, opportunities) for name in owners}
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _CALL_TRANSCRIPTS = {
@@ -104,13 +199,18 @@ _COACHING_RECOMMENDATIONS = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_rep(query):
+    """Embedded demo reps first, then live tenant opportunity owners.
+    Returns (rep_name, is_live)."""
     if not query:
-        return "Alex Rivera"
+        return "Alex Rivera", False
     q = query.lower().strip()
     for name in _SKILL_ASSESSMENTS:
         if q in name.lower():
-            return name
-    return "Alex Rivera"
+            return name, False
+    for name in _live_rep_roster():
+        if q in name.lower():
+            return name, True
+    return "Alex Rivera", False
 
 
 def _weighted_call_score(scores):
@@ -194,7 +294,7 @@ class SalesCoachAgent(BasicAgent):
         highlights = "\n".join(f"- {h}" for h in call["highlights"])
         improvements = "\n".join(f"- {i}" for i in call["improvements"])
         return (
-            f"**Call Review: {call['id']}**\n\n"
+            f"**Call Review: {call['id']}** (embedded demo call — simulated)\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Rep | {call['rep']} |\n"
             f"| Prospect | {call['prospect']} |\n"
@@ -214,13 +314,30 @@ class SalesCoachAgent(BasicAgent):
 
     # ── skill_assessment ───────────────────────────────────────
     def _skill_assessment(self, params):
-        rep_name = _resolve_rep(params.get("rep_name", ""))
+        rep_name, is_live = _resolve_rep(params.get("rep_name", ""))
+        if is_live:
+            rep = _live_rep_roster()[rep_name]
+            win_rate = f"{rep['win_rate']}%" if rep["win_rate"] is not None else "n/a (no closed deals yet)"
+            return (
+                f"**Skill Assessment: {rep_name}** (LIVE rep from the Aster Lane Dynamics 365 tenant)\n\n"
+                f"| Metric | Value |\n|---|---|\n"
+                f"| Open Pipeline | {rep['open_count']} deals, ${rep['open_value']:,.0f} |\n"
+                f"| Won / Lost | {rep['won']} / {rep['lost']} |\n"
+                f"| Win Rate | {win_rate} |\n"
+                f"| Overall Skill Score | n/a — enrichment seam |\n"
+                f"| Quota Attainment | n/a — enrichment seam |\n\n"
+                f"Pipeline numbers above are computed from this rep's real "
+                f"opportunity records in the live tenant. Skill scores are an "
+                f"enrichment seam — wire your call-recording / conversation-"
+                f"intelligence platform to populate them.\n\n"
+                f"Source: [Live Dynamics 365 Tenant — opportunities]\nAgents: SalesCoachAgent"
+            )
         assessment = _SKILL_ASSESSMENTS[rep_name]
         score_rows = "\n".join(f"| {skill.title()} | {score}/100 |" for skill, score in assessment["scores"].items())
         weakest = _identify_weakest_skills(rep_name)
         weak_list = "\n".join(f"- {skill.title()}: {score}/100" for skill, score in weakest)
         return (
-            f"**Skill Assessment: {rep_name}**\n\n"
+            f"**Skill Assessment: {rep_name}** (embedded demo rep — simulated)\n\n"
             f"| Metric | Value |\n|---|---|\n"
             f"| Overall Score | {assessment['overall']}/100 |\n"
             f"| Tenure | {assessment['tenure_months']} months |\n"
@@ -234,7 +351,20 @@ class SalesCoachAgent(BasicAgent):
 
     # ── coaching_plan ──────────────────────────────────────────
     def _coaching_plan(self, params):
-        rep_name = _resolve_rep(params.get("rep_name", ""))
+        rep_name, is_live = _resolve_rep(params.get("rep_name", ""))
+        if is_live:
+            rep = _live_rep_roster()[rep_name]
+            return (
+                f"**Coaching Plan: {rep_name}** (LIVE rep from the Aster Lane Dynamics 365 tenant)\n\n"
+                f"Live pipeline: {rep['open_count']} open deals (${rep['open_value']:,.0f}), "
+                f"{rep['won']} won, {rep['lost']} lost.\n\n"
+                f"Skill scores for this rep are n/a — enrichment seam. A coaching "
+                f"plan needs call-level scoring; wire your conversation-"
+                f"intelligence platform at the LIVE DATA SEAM, then this operation "
+                f"will target the rep's weakest skills automatically (see the "
+                f"embedded demo reps for the full plan shape).\n\n"
+                f"Source: [Live Dynamics 365 Tenant + Coaching Platform seam]\nAgents: SalesCoachAgent"
+            )
         weakest = _identify_weakest_skills(rep_name)
         plan = ""
         for skill, score in weakest:
@@ -244,7 +374,7 @@ class SalesCoachAgent(BasicAgent):
                 plan += f"- {rec['activity']} ({rec['duration']}, {rec['frequency']})\n  Resource: {rec['resource']}\n"
             plan += "\n"
         return (
-            f"**Coaching Plan: {rep_name}**\n\n"
+            f"**Coaching Plan: {rep_name}** (embedded demo rep — simulated)\n\n"
             f"**Assessment:** {_SKILL_ASSESSMENTS[rep_name]['overall']}/100 overall\n"
             f"**Goal:** Improve weakest skills by 15+ points in 30 days\n\n"
             f"{plan}"
@@ -260,23 +390,43 @@ class SalesCoachAgent(BasicAgent):
             rows += f"| {name} | {a['overall']}/100 | {a['quota_attainment']:.0%} | {a['trend']} | #{a['rank']} |\n"
         team_avg = sum(a["overall"] for a in _SKILL_ASSESSMENTS.values()) / len(_SKILL_ASSESSMENTS)
         team_quota = sum(a["quota_attainment"] for a in _SKILL_ASSESSMENTS.values()) / len(_SKILL_ASSESSMENTS)
+        live = _live_rep_roster()
+        if live:
+            live_rows = ""
+            for name, rep in live.items():
+                win_rate = f"{rep['win_rate']}%" if rep["win_rate"] is not None else "n/a"
+                live_rows += f"| {name} | {rep['open_count']} | ${rep['open_value']:,.0f} | {rep['won']} | {rep['lost']} | {win_rate} |\n"
+            live_section = (
+                f"**Live Pipeline by Rep (LIVE Dynamics 365 tenant — computed from real opportunity records):**\n\n"
+                f"| Rep | Open Deals | Open Value | Won | Lost | Win Rate |\n|---|---|---|---|---|---|\n"
+                f"{live_rows}\n"
+            )
+        else:
+            live_section = "**Live Pipeline by Rep:** live tenant unreachable — embedded demo data only.\n\n"
         return (
             f"**Sales Performance Dashboard**\n\n"
-            f"**Team Summary:**\n"
+            f"**Team Summary (embedded demo coaching data — simulated):**\n"
             f"- Team Size: {len(_SKILL_ASSESSMENTS)}\n"
             f"- Avg Score: {team_avg:.0f}/100\n"
             f"- Avg Quota Attainment: {team_quota:.0%}\n"
             f"- Calls Reviewed: {len(_CALL_TRANSCRIPTS)}\n\n"
-            f"**Individual Performance:**\n\n"
+            f"**Individual Performance (simulated):**\n\n"
             f"| Rep | Score | Quota | Trend | Rank |\n|---|---|---|---|---|\n"
-            f"{rows}\n\n"
-            f"Source: [Coaching Platform + CRM + Call Analytics]\nAgents: SalesCoachAgent"
+            f"{rows}\n"
+            f"{live_section}"
+            f"Source: [Coaching Platform + Live Dynamics 365 Tenant]\nAgents: SalesCoachAgent"
         )
 
 
 if __name__ == "__main__":
     agent = SalesCoachAgent()
-    for op in ["call_review", "skill_assessment", "coaching_plan", "performance_dashboard"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, rep_name="Alex Rivera", call_id="CALL-901"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO REP (works offline)")
+    print(agent.perform(operation="skill_assessment", rep_name="Alex Rivera"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT REP (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="skill_assessment", rep_name="Sam Patel"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="performance_dashboard"))

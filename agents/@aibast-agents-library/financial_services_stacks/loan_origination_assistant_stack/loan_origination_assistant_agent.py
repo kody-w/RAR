@@ -1,15 +1,36 @@
 """
-Loan Origination Assistant Agent — Financial Services Stack
+Loan Origination Assistant Agent — a template you are meant to mutate.
 
 Supports loan application review, credit analysis, document verification,
-and decision recommendations for lending operations.
+and decision recommendations for lending operations. In this template an
+in-flight loan application is represented as a Dynamics 365 opportunity —
+the tenant has no native loan entity, so open opportunities stand in for
+the origination pipeline (amounts are real, credit metrics stay seams).
 
-v1.1.0 adds five spec-derived mortgage-origination operations that reproduce
-the guided demo workflow — application intake, program eligibility, credit and
-property evaluation, underwriting condition tracking, and a loan processing
-summary. Each new operation is grounded in synthetic source-system data with
-deterministic exact-key lookups, embedded knowledge, and simulated (non-mutating)
-write-backs for the condition-tracking step.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `application_review` operation pulls live
+     opportunity records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="application_review")
+     and look for the Bluegrass Credit Union application in the pipeline.
+  2. No network? Everything falls back to the embedded demo layer below
+     (LOAN_APPLICATIONS / APPROVAL_CRITERIA) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     LOAN_ORIGINATION_ASSISTANT_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your LOS), or replace
+     _fetch_collection() with your own client. The fields the rest of the
+     file needs are listed in _normalize_live_application() — fields
+     rendered "n/a — enrichment seam" (loan type, credit score, LTV) are
+     where you wire your loan origination system and credit bureau.
+
+OPERATIONS
+  application_review | credit_analysis | document_verification
+  | decision_recommendation | application_intake | eligibility_assessment
+  | credit_property | condition_tracking | loan_summary
+  kwargs: operation (required), application_id, user_input
 """
 
 import sys
@@ -17,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/loan_origination_assistant",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Loan Origination Assistant Agent",
-    "description": "Reviews loan applications, credit, documents, and underwriting conditions with decision advice from built-in demo data.",
+    "description": "Reviews loan pipelines from a live simulated Dynamics 365 tenant (opportunities as applications), with credit demos and an offline fallback.",
     "author": "AIBAST",
     "tags": ["loan", "origination", "credit", "underwriting", "mortgage", "financial-services"],
     "category": "financial_services",
@@ -32,8 +55,82 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export LOAN_ORIGINATION_ASSISTANT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your LOS client. Downstream code
+# only needs the fields produced by _normalize_live_application().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "LOAN_ORIGINATION_ASSISTANT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_application(row):
+    """Project a Dynamics opportunity onto the loan-application shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the CRM
+    alone' and the renderers label it as an enrichment seam."""
+    state = row.get("statecode")
+    status = {0: "underwriting", 1: "funded", 2: "declined"}.get(state, "underwriting")
+    return {
+        "applicant": row.get("parentaccountidname") or row.get("customeridname", "Unknown"),
+        "purpose": row.get("name", ""),
+        "loan_type": None,     # enrichment seam — wire your LOS product catalog
+        "loan_amount": float(row.get("estimatedvalue") or 0),
+        "ltv": None,           # enrichment seam — wire your appraisal feed
+        "close_probability": row.get("closeprobability"),
+        "status": status,
+        "loan_officer": row.get("owneridname", ""),
+        "_live": True,
+    }
+
+
+def _live_applications():
+    """opportunity-keyed dict of live tenant loan applications; {} offline."""
+    rows = _fetch_collection("opportunities")
+    if not rows:
+        return {}
+    return {
+        f"LA-{str(row.get('opportunityid', ''))[:8]}": _normalize_live_application(row)
+        for row in rows
+        if row.get("opportunityid")
+    }
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 LOAN_APPLICATIONS = {
@@ -415,6 +512,27 @@ class LoanOriginationAssistantAgent(BasicAgent):
         return f"**Error:** Unknown operation `{operation}`."
 
     def _application_review(self, **kwargs) -> str:
+        live = _live_applications()
+        if live:
+            lines = ["# Loan Application Pipeline (live tenant)\n"]
+            lines.append("| App ID | Applicant | Purpose | Type | Amount | LTV | Status | LO |")
+            lines.append("|---|---|---|---|---|---|---|---|")
+            for aid, app in live.items():
+                lines.append(
+                    f"| {aid} | {app['applicant']} | {app['purpose']} "
+                    f"| {_seam(app['loan_type'])} | ${app['loan_amount']:,.0f} "
+                    f"| {_seam(app['ltv'])} | {app['status'].title()} | {app['loan_officer']} |"
+                )
+            open_volume = sum(a["loan_amount"] for a in live.values() if a["status"] == "underwriting")
+            lines.append(f"\n**Open Pipeline Volume:** ${open_volume:,.0f}")
+            lines.append(f"**Applications:** {len(live)}")
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — opportunities "
+                "reinterpreted as loan applications. Loan type, credit metrics, "
+                "and LTV are enrichment seams (wire your LOS and credit bureau)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Loan Application Pipeline\n"]
         lines.append("| App ID | Applicant | Type | Amount | LTV | Status | LO |")
         lines.append("|---|---|---|---|---|---|---|")
@@ -427,6 +545,7 @@ class LoanOriginationAssistantAgent(BasicAgent):
         total_pipeline = sum(a["loan_amount"] for a in LOAN_APPLICATIONS.values())
         lines.append(f"\n**Pipeline Volume:** ${total_pipeline:,.0f}")
         lines.append(f"**Applications:** {len(LOAN_APPLICATIONS)}")
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         lines.append("\n## Rate Sheet\n")
         lines.append("| Product | Rate | APR | Points |")
         lines.append("|---|---|---|---|")
@@ -569,8 +688,11 @@ class LoanOriginationAssistantAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = LoanOriginationAssistantAgent()
+    print("=" * 80)
+    print("LIVE TENANT PIPELINE (opportunities fetched over HTTP; falls back offline)")
     print(agent.perform(operation="application_review"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO CREDIT ANALYSIS (works offline)")
     print(agent.perform(operation="credit_analysis", application_id="LA-2025-4002"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="document_verification", application_id="LA-2025-4004"))

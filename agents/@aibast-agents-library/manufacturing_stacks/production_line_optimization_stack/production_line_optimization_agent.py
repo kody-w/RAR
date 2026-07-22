@@ -1,14 +1,43 @@
 """
-Production Line Optimization Agent
+Production Line Optimization Agent — a template you are meant to mutate.
 
 Analyzes manufacturing line performance metrics including OEE, station
 cycle times, and defect rates. Identifies bottlenecks, recommends
 throughput improvements, and generates shift-level production plans
 to maximize output while maintaining quality targets.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a production stoppage is represented as a Dynamics
+     case — e.g. Granite Peak Manufacturing's case "Line three unplanned
+     downtime from spindle vibration".
+     Try: perform(operation="line_efficiency")
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCTION_LINES / STATIONS / SHIFT_SCHEDULES) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PRODUCTION_LINE_OPTIMIZATION_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your MES/historian),
+     or replace _fetch_collection() with an OPC-UA / MES client. Fields
+     the rest of the file needs are listed in
+     _normalize_live_downtime_event() — affected line and lost hours
+     render as "n/a — enrichment seam" until you wire your MES. OEE and
+     cycle-time analytics stay simulated until then.
+
+OPERATIONS
+  line_efficiency | bottleneck_analysis | throughput_optimization
+  | shift_planning | capacity_model | implementation_plan | roi_analysis
+  | monitoring_plan
+  kwargs: operation (required), line_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -16,9 +45,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/production_line_optimization",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Production Line Optimization Agent",
-    "description": "Analyzes OEE and bottlenecks and generates throughput and shift plans from built-in demo production-line data.",
+    "description": "Analyzes OEE, bottlenecks, and live downtime signals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["production", "OEE", "bottleneck", "throughput", "manufacturing"],
     "category": "manufacturing",
@@ -28,8 +57,76 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PRODUCTION_LINE_OPTIMIZATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your MES/historian client.
+# Downstream code only needs the fields from
+# _normalize_live_downtime_event().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PRODUCTION_LINE_OPTIMIZATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_downtime_event(row):
+    """Project a Dynamics case onto the downtime-event shape this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the case record
+    alone' and the renderer labels it as an enrichment seam (wire your MES
+    for the affected line and lost production hours)."""
+    return {
+        "id": row.get("ticketnumber", "?"),
+        "plant": row.get("customeridname", "Unknown"),
+        "event": row.get("title", "untitled"),
+        "reported": str(row.get("createdon", ""))[:10],
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "n/a"
+        ),
+        "resolved": row.get("statecode") == 1,
+        "line": None,        # enrichment seam — wire your MES line mapping
+        "lost_hours": None,  # enrichment seam — wire your historian
+        "_live": True,
+    }
+
+
+def _live_downtime_events():
+    """Granite Peak Manufacturing cases from the live tenant, reinterpreted
+    as production downtime/quality events; [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        _normalize_live_downtime_event(r) for r in rows
+        if r.get("customeridname") == "Granite Peak Manufacturing"
+    ]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PRODUCTION_LINES = {
@@ -251,6 +348,22 @@ class ProductionLineOptimizationAgent(BasicAgent):
             gap = _throughput_gap(lid) * 24
             qcost = _quality_cost_estimate(lid)
             lines.append(f"| {pl['name']} | {daily:,} | {gap:,} units lost | ${qcost:,.2f} |")
+        live = _live_downtime_events()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Downtime Signals (Dynamics cases — Granite Peak Manufacturing)\n")
+            lines.append("| Case | Event | Reported | Priority | Status | Line | Lost Hours |")
+            lines.append("|------|-------|----------|----------|--------|------|------------|")
+            for e in live:
+                status = "Resolved" if e["resolved"] else "Open"
+                lines.append(
+                    f"| {e['id']} | {e['event']} | {e['reported']} | {e['priority']} | "
+                    f"{status} | {e['line'] or seam} | "
+                    f"{seam if e['lost_hours'] is None else e['lost_hours']} |"
+                )
+            lines.append("\n(OEE and cycle-time metrics above remain simulated until an MES is wired.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo lines only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -450,7 +563,13 @@ class ProductionLineOptimizationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProductionLineOptimizationAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO LINES + LIVE TENANT DOWNTIME SIGNALS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="line_efficiency"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

@@ -1,11 +1,34 @@
 """
-Personalized Marketing Agent — Retail & CPG Stack
+Personalized Marketing Agent — a template you are meant to mutate.
 
 Drives customer segmentation, campaign design, content personalization,
 and performance analysis for targeted retail marketing programs.
 
-Version 1.1.0 adds deterministic, exact-keyed holiday planning, creative
-testing, simulated scheduling, and revenue-scenario workflows.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live contacts and sales orders over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="customer_segmentation")
+     — with network up, segments are derived from the tenant's 40 live
+     contacts (e.g. Marcus Webb at Bluegrass Credit Union) and real
+     sales-order spend per account.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CUSTOMER_SEGMENTS / CAMPAIGN_TEMPLATES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PERSONALIZED_MARKETING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CDP/ESP), or replace
+     _fetch_collection() with your own audience API. The fields the rest
+     of the file needs are listed in _normalize_live_customer() — LTV and
+     engagement stay "n/a — enrichment seam" until you wire your loyalty
+     or analytics system.
+
+OPERATIONS
+  customer_segmentation | campaign_design | content_personalization |
+  performance_analysis | holiday_campaign_plan | creative_ab_test |
+  campaign_scheduling | revenue_scenarios
+  kwargs: operation (required), segment_id, campaign_id, key, user_input
 """
 
 import sys
@@ -16,14 +39,16 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_marketing",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Personalized Marketing Agent",
     "description": (
-        "Segments customers, designs campaigns, personalizes content, and analyzes performance using built-in demo retail data."
+        "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -39,8 +64,73 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PERSONALIZED_MARKETING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CDP/CRM client. Downstream
+# code only needs the fields produced by _normalize_live_customer().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PERSONALIZED_MARKETING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_customer(row, spend_by_account):
+    """Project a Dynamics contact record onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from CRM alone' and the
+    renderers label it as an enrichment seam."""
+    account = row.get("parentcustomeridname", "")
+    return {
+        "name": row.get("fullname", "Unknown"),
+        "account": account or "(individual)",
+        "title": row.get("jobtitle", ""),
+        "city": row.get("address1_city", ""),
+        "email_on_file": bool(row.get("emailaddress1")),
+        "spend": spend_by_account.get(account, 0.0),
+        "lifetime_value": None,     # enrichment seam — wire loyalty/analytics
+        "engagement_score": None,   # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_spend_by_account():
+    """Total live sales-order value per account name; {} when offline."""
+    spend = {}
+    for order in _fetch_collection("salesorders"):
+        name = order.get("customeridname")
+        if name:
+            spend[name] = spend.get(name, 0.0) + float(order.get("totalamount") or 0)
+    return spend
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Customer Segments
+# EMBEDDED DEMO LAYER (offline fallback) — Customer Segments
 # ---------------------------------------------------------------------------
 
 CUSTOMER_SEGMENTS = {
@@ -491,7 +581,56 @@ class PersonalizedMarketingAgent(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def _live_customer_segmentation(self, customers):
+        """Segmentation derived from live tenant records (preferred online)."""
+        buyers = [c for c in customers if c["spend"] > 0]
+        prospects = [c for c in customers if c["spend"] == 0]
+        buyer_account_spend = {c["account"]: c["spend"] for c in buyers}
+        accounts = {}
+        for c in customers:
+            accounts.setdefault(c["account"], []).append(c)
+        lines = [
+            "# Customer Segmentation — Live Tenant Audience",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "Pass `segment_id` (e.g. SEG-LOYAL) for the embedded demo segment view.",
+            "",
+            f"**Contacts on file:** {len(customers)} across {len(accounts)} accounts",
+            "",
+            "| Segment (derived from live sales orders) | Contacts | Order Spend | LTV | Engagement |",
+            "|------------------------------------------|----------|-------------|-----|------------|",
+            f"| Active Buyers (account has orders) | {len(buyers)} "
+            f"| ${sum(buyer_account_spend.values()):,.2f} "
+            f"| n/a — enrichment seam | n/a — enrichment seam |",
+            f"| Prospects (no orders yet) | {len(prospects)} | $0.00 "
+            f"| n/a — enrichment seam | n/a — enrichment seam |",
+            "",
+            "## Top Buyer Accounts",
+            "",
+            "| Account | Order Spend | Sample Contact |",
+            "|---------|-------------|----------------|",
+        ]
+        spend_ranked = sorted(
+            buyer_account_spend.items(), key=lambda kv: kv[1], reverse=True
+        )
+        for account, spend in spend_ranked[:5]:
+            sample = next(c for c in buyers if c["account"] == account)
+            title = f" ({sample['title']})" if sample["title"] else ""
+            lines.append(f"| {account} | ${spend:,.2f} | {sample['name']}{title} |")
+        lines.append("")
+        lines.append(
+            "LTV, churn risk, and engagement need your loyalty/analytics system — "
+            "wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _customer_segmentation(self, **kwargs):
+        if not kwargs.get("segment_id"):
+            contacts = _fetch_collection("contacts")
+            if contacts:
+                spend = _live_spend_by_account()
+                customers = [_normalize_live_customer(c, spend) for c in contacts]
+                return self._live_customer_segmentation(customers)
         lines = [
             "# Customer Segmentation Overview",
             "",
@@ -680,6 +819,10 @@ if __name__ == "__main__":
     _validate_revenue_formula_contract()
     agent = PersonalizedMarketingAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO SEGMENTS (works offline)")
+    print(agent.perform(operation="customer_segmentation", segment_id="SEG-LOYAL"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT AUDIENCE (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="customer_segmentation"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="campaign_design", campaign_id="CAMP-VIP"))

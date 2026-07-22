@@ -1,17 +1,45 @@
 """
-Customer 360 Agent
+Customer 360 Agent — a template you are meant to mutate.
 
-Provides unified customer profiles by merging CRM, support, and billing data,
-with interaction timelines, health scores, and next-best-action recommendations.
+Provides unified customer profiles by merging CRM, support, and billing
+data, with interaction timelines, health scores, and next-best-action
+recommendations. In this template the 360 view is assembled from real
+tenant entities: an account plus its cases, and the email threads that
+regard those cases.
 
-Where a real deployment would integrate with multiple customer data sources,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `unified_profile` operation pulls live
+     account and case records over real HTTP from the globally hosted
+     Static Dynamics 365 tenant (Aster Lane Office Systems — synthetic
+     data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="unified_profile",
+                  customer_id="Riverbend Medical Group")
+     — its two open cases (prior auth SLA, intake form sync) drive the
+     live health score. `interaction_timeline` weaves in the real email
+     activity regarding those cases.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_CUSTOMER_PROFILES / _INTERACTION_LOGS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CUSTOMER_360_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your CDP), or replace
+     _fetch_collection() with your own clients. The fields the rest of
+     the file needs are listed in _normalize_live_customer() — fields
+     rendered "n/a — enrichment seam" (ARR, contract, CSM) are where you
+     wire billing and success platforms.
+
+OPERATIONS
+  unified_profile | interaction_timeline | health_score | next_best_action
+  kwargs: operation (required), customer_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +47,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_360",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Customer 360",
-    "description": "Builds unified customer profiles, timelines, health scores, and next-best actions from built-in demo CRM data.",
+    "description": "Builds unified customer profiles and timelines from a live simulated Dynamics 365 tenant (accounts, cases, emails), with an offline fallback.",
     "author": "AIBAST",
     "tags": ["customer-360", "unified-profile", "health-score", "next-best-action", "crm"],
     "category": "general",
@@ -32,7 +60,96 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CUSTOMER_360_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CDP/CRM clients. Downstream
+# code only needs the fields produced by _normalize_live_customer().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CUSTOMER_360_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_customer(row, incidents):
+    """Project a Dynamics account + its cases onto the profile shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the CRM
+    alone' and the renderers label it as an enrichment seam."""
+    name = row.get("name", "Unknown")
+    cases = [i for i in incidents if i.get("customeridname") == name]
+    open_cases = [i for i in cases if i.get("statecode") == 0]
+    high_priority_open = [i for i in open_cases if i.get("prioritycode") == 1]
+    return {
+        "name": name,
+        "segment": None,          # enrichment seam — wire your CDP
+        "industry": row.get("industrycode", "Unknown"),
+        "arr": None,              # enrichment seam — wire your billing system
+        "primary_contact": row.get("primarycontactidname", ""),
+        "account_manager": row.get("owneridname", ""),
+        "csm": None,              # enrichment seam — wire your success platform
+        "contract_end": None,     # enrichment seam
+        "city": f"{row.get('address1_city', '?')}, {row.get('address1_stateorprovince', '?')}",
+        "total_cases": len(cases),
+        "open_cases": len(open_cases),
+        "high_priority_open": len(high_priority_open),
+        "case_titles": [c.get("title", "") for c in cases],
+        "_live": True,
+    }
+
+
+def _live_customers():
+    """name-keyed dict of live tenant customers; {} when offline."""
+    rows = _fetch_collection("accounts")
+    if not rows:
+        return {}
+    incidents = _fetch_collection("incidents")
+    return {
+        row["name"].lower(): _normalize_live_customer(row, incidents)
+        for row in rows
+        if row.get("name")
+    }
+
+
+def _live_health(cust):
+    """Health from real case signals: open and high-priority case load."""
+    return max(
+        20,
+        100 - cust["open_cases"] * 15 - cust["high_priority_open"] * 10 - cust["total_cases"] * 2,
+    )
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _CUSTOMER_PROFILES = {
@@ -127,6 +244,7 @@ _NEXT_BEST_ACTIONS = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_customer(query):
+    """Embedded demo customers first, then the live tenant account roster."""
     if not query:
         return "CUST-3001"
     q = query.upper().strip()
@@ -137,7 +255,18 @@ def _resolve_customer(query):
     for key, cust in _CUSTOMER_PROFILES.items():
         if q_lower in cust["name"].lower():
             return key
+    live = _live_customers()
+    for key in live:
+        if q_lower in key:
+            return key
     return "CUST-3001"
+
+
+def _get_customer(cust_id):
+    """Unified lookup: embedded demo customers first, then live tenant."""
+    if cust_id in _CUSTOMER_PROFILES:
+        return _CUSTOMER_PROFILES[cust_id]
+    return _live_customers().get(cust_id) or _CUSTOMER_PROFILES["CUST-3001"]
 
 
 def _compute_health_score(cust_id):
@@ -224,7 +353,28 @@ class Customer360Agent(BasicAgent):
 
     # ── unified_profile ────────────────────────────────────────
     def _unified_profile(self, cust_id):
-        cust = _CUSTOMER_PROFILES[cust_id]
+        cust = _get_customer(cust_id)
+        if cust.get("_live"):
+            score = _live_health(cust)
+            case_list = "\n".join(f"- {t}" for t in cust["case_titles"]) or "- No cases on record"
+            return (
+                f"**Customer 360: {cust['name']} (live tenant)**\n\n"
+                f"| Field | Detail |\n|---|---|\n"
+                f"| Segment | {_seam(cust['segment'])} |\n"
+                f"| Industry | {cust['industry']} |\n"
+                f"| ARR | {_seam(cust['arr'], lambda v: f'${v:,}')} |\n"
+                f"| Health Score | {score}/100 (from live case signals) |\n"
+                f"| Primary Contact | {cust['primary_contact']} |\n"
+                f"| Account Manager | {cust['account_manager']} |\n"
+                f"| CSM | {_seam(cust['csm'])} |\n"
+                f"| Location | {cust['city']} |\n\n"
+                f"**Support:** {cust['open_cases']} open of {cust['total_cases']} total cases "
+                f"({cust['high_priority_open']} high priority)\n\n"
+                f"**Cases:**\n{case_list}\n\n"
+                f"_ARR, segment, contract, and CSM are enrichment seams — wire your "
+                f"billing and success platforms._\n\n"
+                f"Source: [live Static Dynamics 365 tenant — account + cases]\nAgents: Customer360Agent"
+            )
         score, _ = _compute_health_score(cust_id)
         products_list = "\n".join(f"- {p}" for p in cust["products"])
         return (
@@ -247,7 +397,33 @@ class Customer360Agent(BasicAgent):
 
     # ── interaction_timeline ───────────────────────────────────
     def _interaction_timeline(self, cust_id):
-        cust = _CUSTOMER_PROFILES[cust_id]
+        cust = _get_customer(cust_id)
+        if cust.get("_live"):
+            case_titles = set(cust["case_titles"])
+            emails = [
+                e for e in _fetch_collection("emails")
+                if e.get("regardingobjectidname") in case_titles
+            ]
+            rows = []
+            for e in emails:
+                direction = "Outbound" if e.get("directioncode") else "Inbound"
+                rows.append((
+                    str(e.get("senton", ""))[:10],
+                    f"| {str(e.get('senton', ''))[:10]} | Email ({direction}) | "
+                    f"{e.get('subject', '')[:50]} | {e.get('regardingobjectidname', '')[:45]} "
+                    f"| n/a — enrichment seam |"
+                ))
+            rows.sort(key=lambda r: r[0], reverse=True)
+            table = "\n".join(r[1] for r in rows) or "| — | — | No email activity found | — | — |"
+            return (
+                f"**Interaction Timeline: {cust['name']} (live tenant)**\n\n"
+                f"Email activities regarding this customer's {cust['total_cases']} case(s): {len(rows)}\n\n"
+                f"| Date | Type | Subject | Regarding Case | Sentiment |\n|---|---|---|---|---|\n"
+                f"{table}\n\n"
+                f"_Sentiment is an enrichment seam — wire your sentiment model._\n\n"
+                f"Source: [live Static Dynamics 365 tenant — emails regarding the "
+                f"account's cases]\nAgents: Customer360Agent"
+            )
         logs = _INTERACTION_LOGS.get(cust_id, [])
         timeline_rows = ""
         for log in logs:
@@ -266,7 +442,20 @@ class Customer360Agent(BasicAgent):
 
     # ── health_score ───────────────────────────────────────────
     def _health_score(self, cust_id):
-        cust = _CUSTOMER_PROFILES[cust_id]
+        cust = _get_customer(cust_id)
+        if cust.get("_live"):
+            score = _live_health(cust)
+            status = "Healthy" if score >= 80 else ("At Risk" if score >= 60 else "Critical")
+            return (
+                f"**Health Score: {cust['name']} (live tenant)**\n\n"
+                f"**Overall Score: {score}/100 ({status})** — computed from live case signals\n\n"
+                f"**Key Indicators:**\n"
+                f"- Open cases: {cust['open_cases']} ({cust['high_priority_open']} high priority)\n"
+                f"- Total cases on record: {cust['total_cases']}\n"
+                f"- License utilization: n/a — enrichment seam\n"
+                f"- CSAT / billing balance: n/a — enrichment seam\n\n"
+                f"Source: [live Static Dynamics 365 tenant — case-signal model]\nAgents: Customer360Agent"
+            )
         score, components = _compute_health_score(cust_id)
         comp_rows = ""
         for name, weight in _HEALTH_SCORE_WEIGHTS.items():
@@ -289,7 +478,24 @@ class Customer360Agent(BasicAgent):
 
     # ── next_best_action ───────────────────────────────────────
     def _next_best_action(self, cust_id):
-        cust = _CUSTOMER_PROFILES[cust_id]
+        cust = _get_customer(cust_id)
+        if cust.get("_live"):
+            score = _live_health(cust)
+            actions = _get_nba(score)
+            action_rows = "".join(
+                f"| {a['action']} | {a['priority']} | {a['reason']} |\n" for a in actions
+            )
+            return (
+                f"**Next Best Actions: {cust['name']} (live tenant)**\n\n"
+                f"Health Score: {score}/100 (live case signals) | "
+                f"Segment: {_seam(cust['segment'])} | ARR: {_seam(cust['arr'])}\n\n"
+                f"| Action | Priority | Rationale |\n|---|---|---|\n"
+                f"{action_rows}\n"
+                f"**Context:**\n"
+                f"- Open cases: {cust['open_cases']} ({cust['high_priority_open']} high priority)\n"
+                f"- Contract end: n/a — enrichment seam\n\n"
+                f"Source: [live Static Dynamics 365 tenant + NBA rules]\nAgents: Customer360Agent"
+            )
         score, _ = _compute_health_score(cust_id)
         actions = _get_nba(score)
         action_rows = ""
@@ -310,7 +516,18 @@ class Customer360Agent(BasicAgent):
 
 if __name__ == "__main__":
     agent = Customer360Agent()
-    for op in ["unified_profile", "interaction_timeline", "health_score", "next_best_action"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO PROFILE (works offline)")
+    print(agent.perform(operation="unified_profile", customer_id="CUST-3001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT PROFILE (account + cases fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="unified_profile", customer_id="Riverbend Medical Group"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="interaction_timeline", customer_id="Riverbend Medical Group"))
+    print()
+    for op in ["health_score", "next_best_action"]:
         print("=" * 60)
         print(agent.perform(operation=op, customer_id="CUST-3001"))
         print()

@@ -1,14 +1,41 @@
 """
-Proposal Copilot Agent
+Proposal Copilot Agent — a template you are meant to mutate.
 
 Assists professional-services teams in building competitive proposals by
 analyzing RFP requirements, generating pricing models, evaluating win
 themes from past proposal history, and positioning against known
 competitors.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's open opportunities are read as the active pursuit
+     pipeline — e.g. "Willow Brook Legal — Office sensor deployment"
+     (estimated $6,075, Develop stage).
+     Try: perform(operation="generate_proposal")
+  2. No network? Everything falls back to the embedded demo layer below
+     (RFP_REQUIREMENTS / PRICING_TEMPLATES / PAST_PROPOSALS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PROPOSAL_COPILOT_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from Salesforce/your RFP tool), or
+     replace _fetch_collection() with a Responsive/Loopio client. Fields
+     the rest of the file needs are listed in _normalize_live_pursuit()
+     — evaluation criteria and named competitors render as "n/a —
+     enrichment seam" until you wire your RFP intake.
+
+OPERATIONS
+  generate_proposal | pricing_model | win_theme_analysis
+  | competitive_positioning
+  kwargs: operation (required)
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -16,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/proposal_copilot",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Proposal Copilot Agent",
-    "description": "Generates proposals, pricing models, win-theme analyses, and competitive positioning from built-in demo RFP data.",
+    "description": "Builds proposals, pricing models, and win-theme analyses from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["proposal", "RFP", "pricing", "competitive-intelligence", "professional-services"],
     "category": "professional_services",
@@ -28,8 +55,75 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PROPOSAL_COPILOT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/RFP-tool client.
+# Downstream code only needs the fields from _normalize_live_pursuit().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PROPOSAL_COPILOT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_pursuit(row):
+    """Project an open Dynamics opportunity onto the pursuit shape this
+    agent renders. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the CRM
+    opportunity alone' and the renderer labels it as an enrichment seam
+    (wire your RFP intake tool for criteria and competitor fields)."""
+    return {
+        "name": row.get("name", "untitled pursuit"),
+        "client": row.get("parentaccountidname", "Unknown"),
+        "budget": float(row.get("estimatedvalue") or 0),
+        "decision_date": str(row.get("estimatedclosedate") or "")[:10] or "n/a",
+        "stage": row.get(
+            "salesstagecode@OData.Community.Display.V1.FormattedValue", "n/a"
+        ),
+        "win_probability_pct": row.get("closeprobability"),
+        "evaluation_criteria": None,  # enrichment seam — wire your RFP intake
+        "competitors": None,          # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_pursuits():
+    """Open opportunities from the live tenant, read as the active pursuit
+    pipeline; [] when offline."""
+    rows = _fetch_collection("opportunities")
+    return sorted(
+        (_normalize_live_pursuit(r) for r in rows if r.get("statecode") == 0),
+        key=lambda p: p["budget"], reverse=True,
+    )
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 RFP_REQUIREMENTS = {
@@ -239,6 +333,23 @@ class ProposalCopilotAgent(BasicAgent):
 
         lines.append(f"\n**Our overall win rate:** {_win_rate()}%")
         lines.append(f"**Our average margin on wins:** {_avg_margin()}%")
+        live = _live_pursuits()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Pursuit Pipeline (open Dynamics opportunities)\n")
+            lines.append("| Pursuit | Client | Budget | Stage | Win % | Decision Date | Eval Criteria | Competitors |")
+            lines.append("|---------|--------|--------|-------|-------|---------------|---------------|-------------|")
+            for p in live:
+                win = f"{p['win_probability_pct']}%" if p["win_probability_pct"] is not None else seam
+                lines.append(
+                    f"| {p['name'][:40]} | {p['client'][:24]} | ${p['budget']:,.0f} | {p['stage']} | "
+                    f"{win} | {p['decision_date']} | {p['evaluation_criteria'] or seam} | "
+                    f"{p['competitors'] or seam} |"
+                )
+            live_total = sum(p["budget"] for p in live)
+            lines.append(f"\n**Live open pipeline value:** ${live_total:,.0f} across {len(live)} pursuits")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo RFPs only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -326,7 +437,13 @@ class ProposalCopilotAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProposalCopilotAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO RFPS + LIVE TENANT PURSUIT PIPELINE")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="generate_proposal"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

@@ -1,30 +1,45 @@
 """
-Prior Authorization Agent for Healthcare.
+Prior Authorization Agent — a template you are meant to mutate.
 
 Manages prior authorization requests, checks clinical criteria against
-payer rules, tracks authorization status, and prepares appeal documentation
-for denied or pending authorizations.
+payer rules, tracks authorization status, prepares appeal documentation,
+and replays six demonstrated capability outcomes (keyed evidence lookups
+with simulated write receipts — never live writes).
 
-Version 1.1.0 extends the agent with six outcomes demonstrated in the source
-prior authorization demo while preserving every legacy operation:
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics case (incident) for the healthcare
+     account Riverbend Medical Group is reinterpreted as an authorization
+     work-queue item — e.g. case "Prior authorization request pending
+     beyond SLA".
+     Try: perform(operation="auth_request")
+  2. No network? Everything falls back to the embedded demo layer below
+     (AUTH_REQUESTS / CLINICAL_CRITERIA / CAPABILITIES) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PRIOR_AUTHORIZATION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your payer portal / clearinghouse),
+     or replace _fetch_collection() with an X12 278 or payer-API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_auth() — CPT code, payer plan, and auth number render
+     as "n/a — enrichment seam" until you wire a payer system.
 
-- ``authorization_verification`` — Authorization Intake and Verification
-- ``payer_requirement``          — Payer Requirement Analysis
-- ``authorization_submission``   — Authorization Submission and Notification (simulated write)
-- ``approval_prediction``        — Approval Probability and Appeal Strategy (generative)
-- ``authorization_tracking``     — Authorization Tracking and Teams Notification (simulated write)
-- ``denial_appeal_status``       — Denial and Active Appeal Insight
-
-Each new capability is a keyed lookup over embedded evidence records. Pass an
-exact record key via ``key`` (or embed it in ``user_input``) to retrieve one
-record; omit it for a no-input evidence summary. Write-capable operations emit
-an explicit *simulated* write receipt and never mutate an external system — all
-data lives in-file and every response is fully deterministic.
+OPERATIONS
+  auth_request | clinical_criteria_check | status_tracking
+  | appeal_preparation | authorization_verification | payer_requirement
+  | authorization_submission | approval_prediction | authorization_tracking
+  | denial_appeal_status
+  kwargs: operation (required), auth_id, key, user_input
 """
 
 import sys
 import os
 import re
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -32,9 +47,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/prior_authorization",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Prior Authorization Agent",
-    "description": "Tracks prior-authorization requests, clinical criteria checks, and appeals against built-in demo payer rules.",
+    "description": "Tracks prior-auth requests, criteria checks, and appeals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["prior-auth", "authorization", "payer", "clinical-criteria", "appeals", "healthcare"],
     "category": "healthcare",
@@ -44,8 +59,77 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PRIOR_AUTHORIZATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your payer-portal client.
+# Downstream code only needs the fields from _normalize_live_auth().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PRIOR_AUTHORIZATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STATE = {0: "pending_review", 1: "approved", 2: "cancelled"}
+
+
+def _normalize_live_auth(row):
+    """Project a Dynamics case onto the auth-request row this agent renders.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the CRM-side record
+    alone' and the renderer labels it as an enrichment seam (wire your
+    payer portal or X12 278 clearinghouse there)."""
+    return {
+        "id": row.get("ticketnumber", "?"),
+        "patient": row.get("primarycontactidname") or "Unknown",
+        "procedure": row.get("title", "untitled request"),
+        "cpt": None,          # enrichment seam — wire your coding system
+        "payer": row.get("customeridname", "Unknown"),
+        "status": _LIVE_STATE.get(row.get("statecode"), "pending_review"),
+        "submitted": str(row.get("createdon", ""))[:10],
+        "decision": str(row.get("resolvedon") or "")[:10] or "Pending",
+        "auth_number": None,  # enrichment seam — assigned by the payer
+        "_live": True,
+    }
+
+
+def _live_auth_queue():
+    """Riverbend Medical Group cases from the live tenant, reinterpreted as
+    the authorization work queue; [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        _normalize_live_auth(r) for r in rows
+        if r.get("customeridname") == "Riverbend Medical Group"
+    ]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 AUTH_REQUESTS = {
@@ -568,6 +652,24 @@ class PriorAuthorizationAgent(BasicAgent):
                 f"| {r['payer']} | {r['status'].upper()} | {r['submitted']} "
                 f"| {r['decision']} | {r['auth_number']} |"
             )
+        live = _live_auth_queue()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines += [
+                "",
+                "## Live Tenant Authorization Queue (Dynamics cases — Riverbend Medical Group)",
+                "",
+                "| ID | Patient | Request | CPT | Account | Status | Submitted | Decision | Auth # |",
+                "|----|---------|---------|-----|---------|--------|-----------|----------|--------|",
+            ]
+            for r in live:
+                lines.append(
+                    f"| {r['id']} | {r['patient']} | {r['procedure']} | {r['cpt'] or seam} "
+                    f"| {r['payer']} | {r['status'].upper()} | {r['submitted']} "
+                    f"| {r['decision']} | {r['auth_number'] or seam} |"
+                )
+        else:
+            lines += ["", "_Live tenant unreachable — showing embedded demo requests only._"]
         return "\n".join(lines)
 
     def _clinical_criteria_check(self) -> str:
@@ -733,7 +835,12 @@ class PriorAuthorizationAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PriorAuthorizationAgent()
-    legacy_ops = ["auth_request", "clinical_criteria_check", "status_tracking", "appeal_preparation"]
+    print("=" * 60)
+    print("EMBEDDED DEMO + LIVE TENANT AUTH QUEUE")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 60)
+    print(agent.perform(operation="auth_request"))
+    legacy_ops = ["clinical_criteria_check", "status_tracking", "appeal_preparation"]
     for op in legacy_ops:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")

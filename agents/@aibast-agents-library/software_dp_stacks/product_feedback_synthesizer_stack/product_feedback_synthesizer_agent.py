@@ -1,27 +1,53 @@
 """
-Product Feedback Synthesizer Agent for Software/Digital Products.
+Product Feedback Synthesizer Agent — a template you are meant to mutate.
 
 Aggregates and synthesizes customer feedback, feature requests, sentiment
 analysis, and roadmap impact assessments for product management teams.
 
-Version 1.1.0 adds deterministic, evidence-derived pain-point analysis,
-retention and competitive risk alerts, and simulated Jira/Teams activation.
-The four original operations and the agent's package/runtime identity remain
-unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live feedback signals over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="feedback_summary")
+     — with network up, the summary synthesizes the tenant's 38 live
+     service cases (e.g. CAS-260113 "Desk assembly guide has unclear
+     step") and 60 live emails into themes by case type and channel. In
+     this template a piece of product feedback is represented as a
+     Dynamics case, and the inbound email stream as Dynamics emails.
+  2. No network? Everything falls back to the embedded demo layer below
+     (FEEDBACK_ENTRIES / FEATURE_REQUESTS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PRODUCT_FEEDBACK_SYNTHESIZER_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from Productboard/Canny),
+     or replace _fetch_collection() with your own feedback API. The
+     fields the rest of the file needs are listed in
+     _normalize_live_feedback() — sentiment scores and ARR stay
+     "n/a — enrichment seam" until you wire your NPS/billing systems.
+
+OPERATIONS
+  feedback_summary | feature_requests | sentiment_analysis |
+  roadmap_impact | pain_point_analysis | risk_alerts |
+  activate_roadmap_action
+  kwargs: operation (required), feature_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/product_feedback_synthesizer",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Product Feedback Synthesizer Agent",
-    "description": "Synthesizes customer feedback, sentiment, and roadmap impact reports for product teams from built-in demo data; Jira/Teams writes are simulated.",
+    "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
     "author": "AIBAST",
     "tags": ["feedback", "product", "feature-requests", "sentiment", "roadmap", "nps"],
     "category": "software_digital_products",
@@ -31,8 +57,80 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PRODUCT_FEEDBACK_SYNTHESIZER_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your feedback-platform client.
+# Downstream code only needs the fields from _normalize_live_feedback().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PRODUCT_FEEDBACK_SYNTHESIZER_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_feedback(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a piece of product feedback IS a Dynamics
+    case (inbound email volume comes from Dynamics emails). THIS is the
+    contract your replacement data source must meet — a dict with these
+    keys. None means 'not available from the service desk alone' and
+    the renderers label it as an enrichment seam."""
+    return {
+        "feedback_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "customer": row.get("customeridname", "Unknown"),
+        "summary": row.get("title", "untitled"),
+        "theme": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "channel": row.get(
+            "caseorigincode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "open": row.get("statecode") == 0,
+        "age_days": _age_days(row.get("createdon")),
+        "sentiment_score": None,  # enrichment seam — wire your NPS platform
+        "arr": None,              # enrichment seam — wire your billing system
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 FEEDBACK_ENTRIES = {
@@ -329,7 +427,7 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "feedback_summary")
         if op == "feedback_summary":
-            return self._feedback_summary()
+            return self._feedback_summary(kwargs.get("feature_id"))
         elif op == "feature_requests":
             return self._feature_requests()
         elif op == "sentiment_analysis":
@@ -344,7 +442,60 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
             return self._activate_roadmap_action(kwargs.get("feature_id"))
         return f"**Error:** Unknown operation `{op}`."
 
-    def _feedback_summary(self) -> str:
+    def _live_feedback_summary(self, feedback):
+        """Feedback synthesis from live tenant cases (preferred online)."""
+        emails = _fetch_collection("emails")
+        inbound = [e for e in emails if e.get("directioncode") is False]
+        themes, channels = {}, {}
+        for f in feedback:
+            themes.setdefault(f["theme"], []).append(f)
+            channels[f["channel"]] = channels.get(f["channel"], 0) + 1
+        lines = [
+            "# Product Feedback Summary — Live Tenant Signals",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a piece of feedback is a Dynamics case and the",
+            "inbound stream is Dynamics email activity.",
+            "",
+            f"**Feedback entries (live cases):** {len(feedback)} "
+            f"({sum(1 for f in feedback if f['open'])} open)",
+            f"**Inbound email volume:** {len(inbound)} of {len(emails)} messages",
+            "**Avg Satisfaction Score:** n/a — enrichment seam (wire your NPS platform)",
+            "**ARR Represented:** n/a — enrichment seam (wire your billing system)",
+            "",
+            "## Themes (by case type)",
+            "",
+            "| Theme | Count | Sample Feedback |",
+            "|-------|-------|-----------------|",
+        ]
+        for theme, items in sorted(
+            themes.items(), key=lambda kv: len(kv[1]), reverse=True
+        ):
+            sample = items[0]
+            lines.append(
+                f"| {theme} | {len(items)} | {sample['feedback_id']}: "
+                f"{sample['summary']} ({sample['customer']}) |"
+            )
+        lines.append("")
+        lines.append("## By Channel")
+        lines.append("")
+        lines.append("| Channel | Count |")
+        lines.append("|---------|-------|")
+        for ch, count in sorted(channels.items(), key=lambda kv: -kv[1]):
+            lines.append(f"| {ch} | {count} |")
+        return "\n".join(lines)
+
+    def _feedback_summary(self, feature_id=None) -> str:
+        if not feature_id:
+            feedback = [
+                f for f in (
+                    _normalize_live_feedback(row)
+                    for row in _fetch_collection("incidents")
+                )
+                if f["feedback_id"]
+            ]
+            if feedback:
+                return self._live_feedback_summary(feedback)
         data = _feedback_summary()
         lines = [
             "# Product Feedback Summary",
@@ -520,7 +671,13 @@ class ProductFeedbackSynthesizerAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = ProductFeedbackSynthesizerAgent()
-    for op in ["feedback_summary", "feature_requests", "sentiment_analysis", "roadmap_impact"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO FEEDBACK (works offline)")
+    print(agent.perform(operation="feedback_summary", feature_id="FR-001"))
+    print("\n" + "=" * 60)
+    print("LIVE TENANT FEEDBACK (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="feedback_summary"))
+    for op in ["feature_requests", "sentiment_analysis", "roadmap_impact"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

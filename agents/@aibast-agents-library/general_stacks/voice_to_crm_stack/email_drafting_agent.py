@@ -1,17 +1,47 @@
 """
-Voice to CRM Email Drafting Agent
+Voice to CRM Email Drafting Agent — a template you are meant to mutate.
 
-Generates meeting recaps, extracts action items, drafts follow-up emails,
-and manages distribution lists from voice-captured meeting data.
+Generates meeting recaps, extracts action items, drafts follow-up
+emails, and manages distribution lists from captured conversations.
 
-Where a real deployment would integrate with calendar and email systems,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+The live tenant has no native "meeting transcript" entity, so in this
+template a Dynamics CASE's email thread is read as the conversation: the
+thread's messages become the recap topics, the correspondents become the
+attendees, and the tasks regarding the case become the action items.
+Say the same in your own mutation if you reinterpret an entity.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live cases, emails, and tasks over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="meeting_recap", meeting_id="CAS-260119")
+     — recaps the tenant's real seeded email thread on "Freight
+     tracking status clarification".
+  2. No network? Everything falls back to the embedded demo layer below
+     (_MEETING_TRANSCRIPTS / _ACTION_ITEMS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     VOICE_TO_CRM_EMAIL_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or Graph-exported JSON), or replace
+     _fetch_collection() with your calendar/mail client. The fields the
+     rest of the file needs are listed in _normalize_live_thread() —
+     decisions and sentiment are labeled "n/a — enrichment seam"; wire
+     your meeting-intelligence platform there.
+
+OPERATIONS
+  meeting_recap | action_items | follow_up_draft | distribution_list
+  kwargs: operation (required), meeting_id (embedded 'MTG-001' or a
+  live case number like 'CAS-260119')
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +49,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_email",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Voice to CRM Email",
-    "description": "Generates meeting recaps, action items, follow-up email drafts, and distribution lists from built-in demo meeting data.",
+    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback.",
     "author": "AIBAST",
     "tags": ["voice", "email", "meeting-recap", "action-items", "follow-up"],
     "category": "general",
@@ -32,7 +62,112 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export VOICE_TO_CRM_EMAIL_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your mail/calendar client.
+# Downstream code only needs the fields produced by
+# _normalize_live_thread().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "VOICE_TO_CRM_EMAIL_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_thread(case, case_emails, case_tasks):
+    """Project a Dynamics case + its email thread + its tasks onto the
+    meeting shape this agent uses. THIS is the contract your replacement
+    data source must meet — a dict with these keys. None means 'not
+    available from the thread alone' and renderers label it as an
+    enrichment seam."""
+    attendees, seen = [], set()
+    for e in case_emails:
+        for name, email in ((e.get("fromname"), e.get("fromaddress")),
+                            (e.get("recipientidname"), None)):
+            if name and name not in seen:
+                seen.add(name)
+                attendees.append({
+                    "name": name,
+                    "role": None,   # enrichment seam — wire your directory
+                    "company": case.get("customeridname", ""),
+                    "email": email or "n/a",
+                })
+    _PRIORITY = {0: "Low", 1: "Normal", 2: "High"}
+    action_items = [
+        {
+            "id": t.get("activityid", "")[:8] or "task",
+            "action": t.get("subject", "Untitled task"),
+            "owner": t.get("owneridname", "unassigned"),
+            "due_date": str(t.get("scheduledend", ""))[:10] or "n/a",
+            "status": "Open" if t.get("statecode") == 0 else "Closed",
+            "priority": _PRIORITY.get(t.get("prioritycode"), "Normal"),
+        }
+        for t in case_tasks
+    ]
+    return {
+        "id": case.get("ticketnumber", ""),
+        "title": case.get("title", "Untitled case"),
+        "date": str(case.get("createdon", ""))[:10],
+        "duration_min": None,   # enrichment seam — threads have no duration
+        "attendees": attendees,
+        "key_topics": sorted({e.get("subject", "") for e in case_emails if e.get("subject")}),
+        "decisions": [],        # enrichment seam — wire your meeting-intelligence
+        "sentiment": None,      # enrichment seam
+        "action_items": action_items,
+        "_live": True,
+    }
+
+
+def _live_thread(query):
+    """Live thread for a case number or title fragment; None offline
+    or when no emails regard that case."""
+    q = (query or "").lower().strip()
+    if not q:
+        return None
+    incidents = _fetch_collection("incidents")
+    if not incidents:
+        return None
+    case = None
+    for row in incidents:
+        if q in str(row.get("ticketnumber", "")).lower() or q in str(row.get("title", "")).lower():
+            case = row
+            break
+    if case is None:
+        return None
+    title = case.get("title", "")
+    case_emails = [e for e in _fetch_collection("emails") if e.get("regardingobjectidname") == title]
+    case_tasks = [t for t in _fetch_collection("tasks") if t.get("regardingobjectidname") == title]
+    if not case_emails and not case_tasks:
+        return None
+    return _normalize_live_thread(case, case_emails, case_tasks)
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _MEETING_TRANSCRIPTS = {
@@ -88,33 +223,43 @@ _DISTRIBUTION_LISTS = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_meeting(query):
-    if not query:
-        return "MTG-001"
-    q = query.upper().strip()
-    for key in _MEETING_TRANSCRIPTS:
-        if key in q:
-            return key
-    return "MTG-001"
+    """Embedded demo meetings first, then live case threads.
+    Returns (meeting_dict, action_items, is_live)."""
+    q = (query or "").upper().strip()
+    if not q or "MTG-" in q:
+        key = "MTG-001"
+        for k in _MEETING_TRANSCRIPTS:
+            if k in q:
+                key = k
+        return _MEETING_TRANSCRIPTS[key], _ACTION_ITEMS.get(key, []), False
+    thread = _live_thread(query)
+    if thread:
+        return thread, thread["action_items"], True
+    return _MEETING_TRANSCRIPTS["MTG-001"], _ACTION_ITEMS.get("MTG-001", []), False
 
 
-def _format_action_items(meeting_id):
-    items = _ACTION_ITEMS.get(meeting_id, [])
+def _format_action_items(items):
     lines = []
     for item in items:
         lines.append(f"- [{item['priority']}] {item['action']} (Owner: {item['owner']}, Due: {item['due_date']})")
-    return "\n".join(lines)
+    return "\n".join(lines) or "- None on record"
 
 
-def _render_recap_email(meeting_id):
-    mtg = _MEETING_TRANSCRIPTS[meeting_id]
-    topics = "\n".join(f"- {t}" for t in mtg["key_topics"])
-    decisions = "\n".join(f"- {d}" for d in mtg["decisions"])
-    action_items = _format_action_items(meeting_id)
-    attendee_names = ", ".join(a["name"] for a in mtg["attendees"])
+def _render_recap_email(mtg, items):
+    topics = "\n".join(f"- {t}" for t in mtg["key_topics"]) or "- n/a"
+    decisions = "\n".join(f"- {d}" for d in mtg["decisions"]) or "- n/a — enrichment seam (wire your meeting-intelligence platform)"
+    action_items = _format_action_items(items)
+    attendee_names = ", ".join(a["name"] for a in mtg["attendees"]) or "team"
     template = _EMAIL_TEMPLATES["meeting_recap"]
     subject = template["subject"].replace("{meeting_title}", mtg["title"]).replace("{date}", mtg["date"])
     body = template["body"].replace("{attendee_names}", attendee_names).replace("{topics}", topics).replace("{decisions}", decisions).replace("{action_items}", action_items).replace("{sender_name}", "Alex Rivera")
     return subject, body
+
+
+def _source_line(is_live):
+    if is_live:
+        return "Thread source: LIVE case email thread from the Aster Lane Dynamics 365 tenant"
+    return "Thread source: embedded demo layer (simulated)"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -160,7 +305,7 @@ class VoiceToCRMEmailAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "meeting_recap")
-        mtg_id = _resolve_meeting(kwargs.get("meeting_id", ""))
+        mtg, items, is_live = _resolve_meeting(kwargs.get("meeting_id", ""))
         dispatch = {
             "meeting_recap": self._meeting_recap,
             "action_items": self._action_items,
@@ -170,51 +315,54 @@ class VoiceToCRMEmailAgent(BasicAgent):
         handler = dispatch.get(op)
         if not handler:
             return f"Unknown operation: {op}"
-        return handler(mtg_id)
+        return handler(mtg, items, is_live)
 
-    def _meeting_recap(self, mtg_id):
-        mtg = _MEETING_TRANSCRIPTS[mtg_id]
-        subject, body = _render_recap_email(mtg_id)
+    def _meeting_recap(self, mtg, items, is_live):
+        subject, body = _render_recap_email(mtg, items)
         attendee_rows = ""
         for a in mtg["attendees"]:
-            attendee_rows += f"| {a['name']} | {a['role']} | {a['company']} | {a['email']} |\n"
+            role = a["role"] or "n/a — enrichment seam"
+            attendee_rows += f"| {a['name']} | {role} | {a['company']} | {a['email']} |\n"
+        duration = f"{mtg['duration_min']} minutes" if mtg["duration_min"] else "n/a — enrichment seam"
+        sentiment = mtg["sentiment"] or "n/a — enrichment seam"
         return (
             f"**Meeting Recap: {mtg['title']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Date | {mtg['date']} |\n"
-            f"| Duration | {mtg['duration_min']} minutes |\n"
-            f"| Sentiment | {mtg['sentiment']} |\n\n"
+            f"| Duration | {duration} |\n"
+            f"| Sentiment | {sentiment} |\n\n"
             f"**Attendees:**\n\n"
             f"| Name | Role | Company | Email |\n|---|---|---|---|\n"
             f"{attendee_rows}\n"
             f"**Draft Email:**\n\n"
             f"**Subject:** {subject}\n\n"
             f"---\n{body}\n---\n\n"
-            f"Source: [Meeting Transcript + AI Summary]\nAgents: VoiceToCRMEmailAgent"
+            f"{_source_line(is_live)}\n"
+            f"Source: [Conversation Thread + AI Summary]\nAgents: VoiceToCRMEmailAgent"
         )
 
-    def _action_items(self, mtg_id):
-        items = _ACTION_ITEMS.get(mtg_id, [])
+    def _action_items(self, mtg, items, is_live):
         rows = ""
         for item in items:
             rows += f"| {item['id']} | {item['action'][:40]} | {item['owner']} | {item['due_date']} | {item['priority']} | {item['status']} |\n"
+        if not rows:
+            rows = "| - | No tasks on record for this thread | - | - | - | - |\n"
         by_owner = {}
         for item in items:
             by_owner.setdefault(item["owner"], []).append(item)
-        owner_summary = "\n".join(f"- {owner}: {len(items)} items" for owner, items in by_owner.items())
+        owner_summary = "\n".join(f"- {owner}: {len(owner_items)} items" for owner, owner_items in by_owner.items()) or "- None"
         return (
-            f"**Action Items: {mtg_id}**\n\n"
+            f"**Action Items: {mtg['id']}**\n\n"
             f"| ID | Action | Owner | Due Date | Priority | Status |\n|---|---|---|---|---|---|\n"
             f"{rows}\n"
             f"**By Owner:**\n{owner_summary}\n\n"
             f"**Total Items:** {len(items)} | **High Priority:** {sum(1 for i in items if i['priority'] == 'High')}\n\n"
-            f"Source: [Meeting Transcript + NLP Extraction]\nAgents: VoiceToCRMEmailAgent"
+            f"{_source_line(is_live)}\n"
+            f"Source: [Thread Tasks + NLP Extraction]\nAgents: VoiceToCRMEmailAgent"
         )
 
-    def _follow_up_draft(self, mtg_id):
-        mtg = _MEETING_TRANSCRIPTS[mtg_id]
-        items = _ACTION_ITEMS.get(mtg_id, [])
-        high_priority = [i for i in items if i["priority"] == "High"]
+    def _follow_up_draft(self, mtg, items, is_live):
+        high_priority = [i for i in items if i["priority"] == "High"] or items
         drafts = ""
         for item in high_priority[:2]:
             drafts += (
@@ -222,25 +370,41 @@ class VoiceToCRMEmailAgent(BasicAgent):
                 f"**Subject:** Follow-up: {item['action'][:50]} - {mtg['title']}\n"
                 f"**Due:** {item['due_date']}\n\n"
                 f"Hi {item['owner'].split()[0]},\n\n"
-                f"Following up on our meeting on {mtg['date']}. As discussed, the next step is:\n\n"
+                f"Following up on the {mtg['date']} conversation. As discussed, the next step is:\n\n"
                 f"- {item['action']}\n\n"
                 f"Please let me know if you need any additional information.\n\n"
                 f"Best, Alex\n\n---\n\n"
             )
+        if not drafts:
+            drafts = "No open action items to follow up on for this thread.\n\n"
         return (
             f"**Follow-Up Drafts: {mtg['title']}**\n\n"
-            f"Generated {len(high_priority)} high-priority follow-up emails.\n\n"
+            f"Generated {min(2, len(high_priority))} follow-up email draft(s).\n\n"
             f"{drafts}"
+            f"{_source_line(is_live)}\n"
             f"Source: [Email Template Engine]\nAgents: VoiceToCRMEmailAgent"
         )
 
-    def _distribution_list(self, mtg_id):
-        lists = _DISTRIBUTION_LISTS.get(mtg_id, {})
+    def _distribution_list(self, mtg, items, is_live):
+        if is_live:
+            addresses = sorted({a["email"] for a in mtg["attendees"] if a["email"] and a["email"] != "n/a"})
+            owners = sorted({i["owner"] for i in items})
+            return (
+                f"**Distribution Lists: {mtg['id']}** (built from the LIVE case thread)\n\n"
+                f"| List | Recipients | Members |\n|---|---|---|\n"
+                f"| Thread Correspondents | {len(addresses)} | {', '.join(addresses) or 'n/a'} |\n"
+                f"| Action Item Owners | {len(owners)} | {', '.join(owners) or 'n/a'} |\n\n"
+                f"Owner email addresses are an enrichment seam — wire your "
+                f"directory to resolve system users to mailboxes.\n\n"
+                f"{_source_line(is_live)}\n"
+                f"Source: [Thread Metadata + Contact Directory]\nAgents: VoiceToCRMEmailAgent"
+            )
+        lists = _DISTRIBUTION_LISTS.get(mtg["id"], {})
         list_rows = ""
         for list_name, emails in lists.items():
             list_rows += f"| {list_name.replace('_', ' ').title()} | {len(emails)} | {', '.join(emails[:2])}{'...' if len(emails) > 2 else ''} |\n"
         return (
-            f"**Distribution Lists: {mtg_id}**\n\n"
+            f"**Distribution Lists: {mtg['id']}** (embedded demo data — simulated)\n\n"
             f"| List | Recipients | Members |\n|---|---|---|\n"
             f"{list_rows}\n"
             f"**Recommended for Recap:** All Attendees ({len(lists.get('all_attendees', []))} recipients)\n"
@@ -251,7 +415,13 @@ class VoiceToCRMEmailAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = VoiceToCRMEmailAgent()
-    for op in ["meeting_recap", "action_items", "follow_up_draft", "distribution_list"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, meeting_id="MTG-001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO MEETING (works offline)")
+    print(agent.perform(operation="meeting_recap", meeting_id="MTG-001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT CASE THREAD (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="meeting_recap", meeting_id="CAS-260119"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="action_items", meeting_id="CAS-260131"))

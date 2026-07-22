@@ -1,13 +1,40 @@
 """
-Contract Risk Review Agent
+Contract Risk Review Agent — a template you are meant to mutate.
 
 Scans professional-services contracts for risky clauses, checks compliance
 with internal policies, and generates renegotiation briefs highlighting
 liability exposure, IP concerns, and unfavorable terms.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics quote is reinterpreted as an active
+     commercial agreement under review — e.g. quote "QUO-260108,
+     Proposal for Harbor Pine Consulting".
+     Try: perform(operation="risk_scan")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CONTRACTS / CLAUSES / COMPLIANCE_REQUIREMENTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CONTRACT_RISK_REVIEW_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CLM), or replace
+     _fetch_collection() with an Ironclad/Icertis client. Fields the
+     rest of the file needs are listed in _normalize_live_contract() —
+     clause-level risk renders as "n/a — enrichment seam" until you wire
+     a CLM with clause extraction.
+
+OPERATIONS
+  risk_scan | clause_analysis | compliance_check | renegotiation_brief
+  | implementation_package
+  kwargs: operation (required), record_id, contract_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +42,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/contract_risk_review",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Contract Risk Review Agent",
-    "description": "Scans built-in demo contracts for risky clauses, checks policy compliance, and drafts renegotiation briefs.",
+    "description": "Scans agreements for risk and drafts renegotiation briefs from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["contract", "risk", "legal", "compliance", "professional-services"],
     "category": "professional_services",
@@ -27,8 +54,75 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CONTRACT_RISK_REVIEW_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CLM client. Downstream
+# code only needs the fields from _normalize_live_contract().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CONTRACT_RISK_REVIEW_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_contract(row):
+    """Project a Dynamics quote onto the contract-register row this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the commercial
+    record alone' and the renderer labels it as an enrichment seam (wire a
+    CLM with clause extraction for risk scoring)."""
+    return {
+        "id": row.get("quotenumber", "?"),
+        "client": row.get("customeridname", "Unknown"),
+        "title": row.get("name", "n/a"),
+        "value": float(row.get("totalamount") or 0),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "expires": str(row.get("effectiveto") or "")[:10] or "n/a",
+        "risk_score": None,   # enrichment seam — wire your CLM clause analysis
+        "high_issues": None,  # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_contract_register():
+    """Tenant quotes reinterpreted as the active commercial-agreement
+    register; [] when offline."""
+    rows = _fetch_collection("quotes")
+    return sorted(
+        (_normalize_live_contract(r) for r in rows),
+        key=lambda c: c["value"], reverse=True,
+    )
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CONTRACTS = {
@@ -331,6 +425,21 @@ class ContractRiskReviewAgent(BasicAgent):
         for r in RENEWAL_CALENDAR:
             client = CONTRACTS[r["contract_id"]]["client"]
             lines.append(f"| {r['contract_id']} | {client} | {r['renewal_date']} | {r['days_out']} | {r['action']} |")
+        live = _live_contract_register()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Agreement Register (Dynamics quotes reinterpreted as contracts)\n")
+            lines.append("| Ref | Client | Title | Value | Status | Expires | Risk Score | HIGH Issues |")
+            lines.append("|-----|--------|-------|-------|--------|---------|------------|-------------|")
+            for c in live:
+                lines.append(
+                    f"| {c['id']} | {c['client']} | {c['title'][:32]} | ${c['value']:,.2f} | "
+                    f"{c['status']} | {c['expires']} | {c['risk_score'] or seam} | "
+                    f"{seam if c['high_issues'] is None else c['high_issues']} |"
+                )
+            lines.append("\n(Risk columns await a CLM with clause extraction — see the LIVE DATA SEAM.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo contracts only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -427,7 +536,13 @@ class ContractRiskReviewAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ContractRiskReviewAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO CONTRACTS + LIVE TENANT AGREEMENT REGISTER")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="risk_scan"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

@@ -1,13 +1,34 @@
 """
-Win/Loss Analysis Agent
+Win/Loss Analysis Agent — a template you are meant to mutate.
 
-Analyzes closed opportunities to surface win-rate trends, root-cause loss
-patterns, competitor-specific insights, counter-strategies, revenue recovery
-projections, and board-ready presentation frameworks.
+Analyzes closed opportunities for win-rate trends, loss patterns,
+competitor insights, counter-strategies, revenue recovery projections,
+and board-ready presentation frameworks.
 
-Where a real deployment would pull from Salesforce, Gong, win/loss survey
-platforms, etc., this agent uses a synthetic data layer so it runs anywhere
-without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live closed opportunities over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="win_loss_overview") — win rate and deal
+     values are computed from real closed records such as the won
+     "Foxglove Learning — Secure print rollout" ($13,500 actual).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_Q3_OPPORTUNITIES / _Q2_OPPORTUNITIES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     WIN_LOSS_ANALYSIS_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_closed_deal().
+     Loss reasons and competitor attribution are enrichment seams — wire
+     your win/loss survey platform there; the pattern/recovery ops stay
+     simulated until you do.
+
+OPERATIONS
+  win_loss_overview | root_cause_analysis | counter_strategies
+  | revenue_impact | board_presentation | action_summary | publish_findings
+  kwargs: operation (required), quarter, analysis_id (publish_findings)
 """
 
 import sys, os
@@ -15,6 +36,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
+import urllib.request
 from datetime import datetime
 
 # ═══════════════════════════════════════════════════════════════
@@ -23,9 +45,9 @@ from datetime import datetime
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/win_loss_analysis",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Win/Loss Analysis",
-    "description": "Analyzes closed deals for win/loss patterns, competitor insights, and revenue recovery models using built-in demo data.",
+    "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "win-loss", "competitive-intel", "revenue-recovery"],
     "category": "b2b_sales",
@@ -36,7 +58,71 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export WIN_LOSS_ANALYSIS_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_closed_deal().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "WIN_LOSS_ANALYSIS_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_closed_deal(row):
+    """Project a closed Dynamics opportunity onto the shape this agent
+    uses. THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not knowable from the CRM alone'
+    and the renderers label it an enrichment seam (loss reasons and
+    competitor attribution come from your win/loss survey platform)."""
+    won = row.get("statecode") == 1
+    value = float((row.get("actualvalue") if won else row.get("estimatedvalue")) or 0)
+    return {
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(value),
+        "outcome": "won" if won else "lost",
+        "competitor_lost_to": None,  # enrichment seam — wire win/loss surveys
+        "loss_reason": None,         # enrichment seam
+        "owner": row.get("owneridname", ""),
+        "closed_on": str(row.get("actualclosedate") or "")[:10],
+        "_live": True,
+    }
+
+
+def _live_closed_deals():
+    """Live closed opportunities (won or lost); [] when offline."""
+    return [_normalize_live_closed_deal(o)
+            for o in _fetch_collection("opportunities")
+            if o.get("statecode") in (1, 2)]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # Stands in for CRM, Gong, Win/Loss Survey System, etc.
 # ═══════════════════════════════════════════════════════════════
 
@@ -636,8 +722,40 @@ class WinLossAnalysisAgent(BasicAgent):
         }
         return "**Win/Loss Findings Publication Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
-    # ── win_loss_overview ──────────────────────────────────────
+    # ── win_loss_overview (flagship: prefers LIVE, falls back) ──
     def _win_loss_overview(self):
+        live = _live_closed_deals()
+        if live:
+            won = [d for d in live if d["outcome"] == "won"]
+            lost = [d for d in live if d["outcome"] == "lost"]
+            win_rate = round(len(won) / max(len(live), 1) * 100, 1)
+            avg_won = int(sum(d["value"] for d in won) / max(len(won), 1))
+            rows = ""
+            for d in sorted(live, key=lambda x: -x["value"]):
+                rows += (f"| {d['name']} | ${d['value']:,} | {d['outcome'].upper()} | "
+                         f"{d['closed_on'] or 'n/a'} | {d['owner']} | "
+                         f"n/a — enrichment seam |\n")
+            return (
+                f"**Win/Loss Overview — {len(live)} LIVE Closed Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"| Metric | Value |\n|---|---|\n"
+                f"| Closed opportunities | {len(live)} |\n"
+                f"| Won / Lost | {len(won)} / {len(lost)} |\n"
+                f"| Win rate | {win_rate}% |\n"
+                f"| Avg deal size (won) | ${avg_won:,} |\n"
+                f"| Won value | ${sum(d['value'] for d in won):,} |\n"
+                f"| Lost value | ${sum(d['value'] for d in lost):,} |\n\n"
+                f"**Closed Deals:**\n\n"
+                f"| Deal | Value | Outcome | Closed | Owner | Loss Reason |\n"
+                f"|------|-------|---------|--------|-------|-------------|\n"
+                f"{rows}\n"
+                f"Loss reasons and competitor attribution stay n/a until you "
+                f"wire your win/loss survey platform at the LIVE DATA SEAM. "
+                f"Prior-quarter comparison needs your historical snapshots "
+                f"(the offline demo shows the full Q3-vs-Q2 renderer).\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: WinLossDataAgent"
+            )
         q3 = _quarter_stats(_Q3_OPPORTUNITIES)
         q2 = _quarter_stats(_Q2_OPPORTUNITIES)
         wr_delta = round(q3["win_rate"] - q2["win_rate"], 1)
@@ -960,8 +1078,13 @@ class WinLossAnalysisAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = WinLossAnalysisAgent()
-    for op in ["win_loss_overview", "root_cause_analysis", "counter_strategies",
-                "revenue_impact", "board_presentation", "action_summary"]:
-        print("=" * 60)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 60)
+    print("LIVE TENANT CLOSED DEALS (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="win_loss_overview"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="root_cause_analysis"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="action_summary"))

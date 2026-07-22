@@ -1,8 +1,33 @@
 """
-Sales Chat Agent — B2C Sales Stack
+Sales Chat Agent — a template you are meant to mutate.
 
 Handles product inquiries, availability checks, promotion lookups,
 and order assistance for retail sales chat interactions.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls a live product catalog over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's 12 sellable products (AsterPrint printers, ScanDock
+     scanners, service plans) answer chat inquiries with live prices.
+     Try: perform(operation="product_inquiry", product_id="AST-PRN-620")
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCT_CATALOG / STOCK_LEVELS / ACTIVE_PROMOTIONS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SALES_CHAT_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your commerce catalog), or
+     replace _fetch_collection() with your own API client. Fields the
+     rest of the file needs are listed in _normalize_live_product() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (stock, ratings, warranty) are where you wire
+     your inventory and reviews systems.
+
+OPERATIONS
+  product_inquiry | availability_check | promotion_lookup
+  | order_assistance
+  kwargs: operation (required), product_id, category
 """
 
 import sys
@@ -10,13 +35,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_chat",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Sales Chat Agent",
-    "description": "Answers retail chat questions on products, availability, promotions, and orders using built-in demo store data.",
+    "description": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["sales", "chat", "product", "promotion", "order", "b2c"],
     "category": "b2c_sales",
@@ -26,7 +53,79 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SALES_CHAT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce catalog client.
+# Downstream code only needs the fields produced by
+# _normalize_live_product().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "SALES_CHAT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from the
+    product entity alone' and the renderers label it as an enrichment
+    seam (wire your inventory, reviews, and warranty systems)."""
+    return {
+        "name": row.get("name", "Unknown"),
+        "price": float(row.get("price") or 0),
+        "description": row.get("description", ""),
+        "rating": None,          # enrichment seam — wire your reviews platform
+        "reviews_count": None,   # enrichment seam
+        "warranty": None,        # enrichment seam — wire your warranty system
+        "stock": None,           # enrichment seam — wire your inventory system
+        "active": row.get("statecode") == 0,
+        "_live": True,
+    }
+
+
+def _live_catalog():
+    """productnumber-keyed dict of live tenant products; {} offline."""
+    rows = _fetch_collection("products")
+    return {
+        row["productnumber"]: _normalize_live_product(row)
+        for row in rows
+        if row.get("productnumber")
+    }
+
+
+def _na(value):
+    """None = the catalog alone can't know this (enrichment seam); 0 is
+    real."""
+    return "n/a — enrichment seam" if value is None else f"{value}"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PRODUCT_CATALOG = {
@@ -230,6 +329,30 @@ class SalesChatAgent(BasicAgent):
 
     def _product_inquiry(self, **kwargs) -> str:
         product_id = kwargs.get("product_id")
+        live = _live_catalog() if (not product_id or product_id not in PRODUCT_CATALOG) else {}
+        if product_id and product_id in live:
+            p = live[product_id]
+            lines = [f"# {p['name']} ({product_id}) — live tenant record\n"]
+            lines.append(f"**Price:** ${p['price']:,.2f} (live list price)")
+            lines.append(f"**Status:** {'Active' if p['active'] else 'Retired'}")
+            lines.append(f"**Rating:** {_na(p['rating'])}")
+            lines.append(f"**Warranty:** {_na(p['warranty'])}\n")
+            lines.append(f"**Description:** {p['description'] or 'n/a'}\n")
+            lines.append(f"**Availability:** {_na(p['stock'])} (wire your inventory system)")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (products)._")
+            return "\n".join(lines)
+        if not product_id and live:
+            lines = ["# Product Catalog (live tenant data)\n"]
+            lines.append("| Product ID | Name | Price | Rating | Stock |")
+            lines.append("|---|---|---|---|---|")
+            for pid, p in sorted(live.items()):
+                lines.append(
+                    f"| {pid} | {p['name']} | ${p['price']:,.2f} "
+                    f"| {_na(p['rating'])} | {_na(p['stock'])} |"
+                )
+            lines.append("\n_Source: live Static Dynamics 365 tenant (products). "
+                         "Rating and stock are enrichment seams._")
+            return "\n".join(lines)
         if product_id and product_id in PRODUCT_CATALOG:
             p = PRODUCT_CATALOG[product_id]
             promo, savings = _apply_best_promo(p)
@@ -249,7 +372,7 @@ class SalesChatAgent(BasicAgent):
             lines.append(f"\n**Availability:** {'In Stock' if total > 0 else 'Out of Stock'} ({total} units)")
             return "\n".join(lines)
 
-        lines = ["# Product Catalog\n"]
+        lines = ["# Product Catalog (embedded demo data — offline)\n"]
         lines.append("| Product ID | Name | Category | Price | Rating | In Stock |")
         lines.append("|---|---|---|---|---|---|")
         for pid, p in PRODUCT_CATALOG.items():
@@ -348,12 +471,17 @@ class SalesChatAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SalesChatAgent()
-    print(agent.perform(operation="product_inquiry"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
     print(agent.perform(operation="product_inquiry", product_id="PROD-101"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="product_inquiry", product_id="AST-PRN-620"))
+    print()
+    print("=" * 60)
     print(agent.perform(operation="availability_check", product_id="PROD-103"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="promotion_lookup"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="order_assistance"))

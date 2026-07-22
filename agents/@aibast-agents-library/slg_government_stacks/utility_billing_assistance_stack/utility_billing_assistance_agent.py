@@ -1,15 +1,36 @@
 """
-Utility Billing Assistance Agent — SLG Government Stack
+Utility Billing Assistance Agent — a template you are meant to mutate.
 
 Provides utility billing support including account inquiries, usage
 analysis, payment plan management, and assistance program eligibility
 for municipal utility departments.
 
-Version 1.1.0 adds evidence-derived smart-meter analysis, leak adjustments,
-eligibility screening, assistance enrollment, repair scheduling, and customer
-resolution capabilities. Existing operations remain unchanged; new write
-operations return deterministic simulated receipts and never modify an
-external system.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live utility service cases over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="billing_inquiry")
+     — with network up, the desk view surfaces the tenant's live
+     billing/metering cases such as CAS-260129 "Meter reading anomalies
+     across district seven" (Prairie Wind Energy Cooperative). In this
+     template a billing/metering inquiry is represented as a Dynamics
+     case (incident).
+  2. No network? Everything falls back to the embedded demo layer below
+     (UTILITY_ACCOUNTS / ASSISTANCE_PROGRAMS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     UTILITY_BILLING_ASSISTANCE_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your CIS), or
+     replace _fetch_collection() with your own billing API. The fields
+     the rest of the file needs are listed in
+     _normalize_live_billing_case() — balances and usage stay
+     "n/a — enrichment seam" until you wire your CIS/meter data.
+
+OPERATIONS
+  billing_inquiry | usage_analysis | payment_plan | assistance_programs
+  | smart_meter_analysis and other evidence operations (see enum)
+  kwargs: operation (required), account_id, key, user_input
 """
 
 import sys
@@ -18,13 +39,16 @@ import re
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/utility_billing_assistance",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Utility Billing Assistance Agent",
-    "description": "Answers utility billing inquiries, analyzes usage, and sets up payment plans and assistance eligibility from built-in demo data.",
+    "description": "Answers billing inquiries and screens assistance from a live simulated Dynamics 365 tenant's utility cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["utility", "billing", "water", "payment", "assistance", "municipal", "leak-detection", "smart-meter"],
     "category": "slg_government",
@@ -33,8 +57,95 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export UTILITY_BILLING_ASSISTANCE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CIS client. Downstream code
+# only needs the fields from _normalize_live_billing_case().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "UTILITY_BILLING_ASSISTANCE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Case-title keywords that mark a tenant case as a utility-desk item.
+_UTILITY_KEYWORDS = ("meter", "substation", "billing", "invoice", "utility", "outage")
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_billing_case(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a billing/metering inquiry IS a Dynamics
+    case. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not available from the case
+    system alone' and the renderers label it as an enrichment seam."""
+    return {
+        "case_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "customer": row.get("customeridname", "Unknown"),
+        "subject": row.get("title", "untitled"),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "channel": row.get(
+            "caseorigincode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "owner": row.get("owneridname", "Unassigned"),
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "balance_due": None,   # enrichment seam — wire your CIS
+        "usage_kwh": None,     # enrichment seam — wire your meter data
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_billing_queue():
+    """Live tenant cases whose titles look utility-desk-shaped."""
+    queue = []
+    for row in _fetch_collection("incidents"):
+        title = str(row.get("title", "")).lower()
+        if any(kw in title for kw in _UTILITY_KEYWORDS):
+            case = _normalize_live_billing_case(row)
+            if case["case_id"]:
+                queue.append(case)
+    return queue
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 UTILITY_ACCOUNTS = {
@@ -561,8 +672,44 @@ class UtilityBillingAssistanceAgent(BasicAgent):
             return f"**Error:** Unknown operation `{operation}`."
         return handler(**kwargs)
 
+    def _live_billing_inquiry(self, queue):
+        """Utility desk queue from live tenant cases (preferred online)."""
+        open_cases = [c for c in queue if c["open"]]
+        lines = [
+            "# Utility Service Desk — Live Tenant Cases\n",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a billing/metering inquiry is a Dynamics case.",
+            "Pass `account_id` (e.g. ACCT-90001) for the embedded demo view.\n",
+            "| Case | Customer | Subject | Priority | Status | Channel | Age | Balance Due |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+        for c in sorted(queue, key=lambda x: x["case_id"]):
+            balance = (
+                "n/a — enrichment seam"
+                if c["balance_due"] is None
+                else f"${c['balance_due']:,.2f}"
+            )
+            lines.append(
+                f"| {c['case_id']} | {c['customer']} | {c['subject']} "
+                f"| {c['priority']} | {c['status']} | {c['channel']} "
+                f"| {c['age_days']}d | {balance} |"
+            )
+        lines.append("")
+        lines.append(
+            f"**Open utility cases:** {len(open_cases)} of {len(queue)} matched"
+        )
+        lines.append(
+            "Balances and meter usage need your CIS/AMI system — wire it at "
+            "the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _billing_inquiry(self, **kwargs) -> str:
         account_id = kwargs.get("account_id")
+        if not account_id:
+            queue = _live_billing_queue()
+            if queue:
+                return self._live_billing_inquiry(queue)
         if account_id and account_id in UTILITY_ACCOUNTS:
             acct = UTILITY_ACCOUNTS[account_id]
             total_due = acct["balance_current"] + acct["balance_past_due"]
@@ -671,8 +818,10 @@ class UtilityBillingAssistanceAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = UtilityBillingAssistanceAgent()
+    print("LIVE TENANT UTILITY CASES (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="billing_inquiry"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO ACCOUNT (works offline)")
     print(agent.perform(operation="billing_inquiry", account_id="ACCT-90002"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="usage_analysis", account_id="ACCT-90003"))

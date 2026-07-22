@@ -1,13 +1,40 @@
 """
-Staff Credentialing Agent for Healthcare.
+Staff Credentialing Agent — a template you are meant to mutate.
 
 Manages healthcare staff credential tracking, expiration alerts,
 verification audits, and onboarding checklists for licenses, certifications,
 DEA registrations, and continuing education requirements.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's system users are reinterpreted as the
+     staff roster awaiting credential verification — e.g. user
+     "Morgan Ellis, Customer Service Manager".
+     Try: perform(operation="credential_status")
+  2. No network? Everything falls back to the embedded demo layer below
+     (STAFF_CREDENTIALS / ONBOARDING_CHECKLIST_TEMPLATE) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     STAFF_CREDENTIALING_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your HRIS), or replace
+     _fetch_collection() with a primary-source verification API client
+     (NPDB, DEA, state boards). Fields the rest of the file needs are
+     listed in _normalize_live_staff() — licenses, CME, and malpractice
+     render as "n/a — enrichment seam" until you wire those systems.
+
+OPERATIONS
+  credential_status | expiration_alerts | verification_audit
+  | onboarding_checklist
+  kwargs: operation (required), staff_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +42,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/staff_credentialing",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Staff Credentialing Agent",
-    "description": "Tracks healthcare staff credentials, expirations, verification audits, and onboarding checklists in built-in demo data.",
+    "description": "Tracks staff credentials, expirations, audits, and onboarding against a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["credentialing", "licenses", "certifications", "dea", "compliance", "healthcare"],
     "category": "healthcare",
@@ -27,8 +54,70 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export STAFF_CREDENTIALING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your HRIS / primary-source
+# verification client. Downstream code only needs the fields produced
+# by _normalize_live_staff().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "STAFF_CREDENTIALING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_staff(row):
+    """Project a Dynamics system user onto the roster row this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the directory
+    record alone' and the renderer labels it as an enrichment seam (wire
+    your credentialing database, CME tracker, and malpractice carrier)."""
+    return {
+        "id": row.get("systemuserid", "")[:8] or "live",
+        "name": row.get("fullname", "Unknown"),
+        "role": row.get("title") or "n/a",
+        "email": row.get("internalemailaddress", ""),
+        "active": not row.get("isdisabled", False),
+        "credentials": None,          # enrichment seam — wire primary-source verification
+        "cme": None,                  # enrichment seam — wire your CME tracker
+        "malpractice_expires": None,  # enrichment seam — wire your carrier feed
+        "_live": True,
+    }
+
+
+def _live_staff_roster():
+    """Tenant system users reinterpreted as the staff roster awaiting
+    credential verification; [] when offline."""
+    return [_normalize_live_staff(r) for r in _fetch_collection("systemusers")]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 STAFF_CREDENTIALS = {
@@ -243,6 +332,24 @@ class StaffCredentialingAgent(BasicAgent):
                 f"| {s['active']} | {s['expired']} | {s['cme_completed']}/{s['cme_required']} ({s['cme_pct']}%) "
                 f"| {s['malpractice_expires']} |"
             )
+        live = _live_staff_roster()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines += [
+                "",
+                "## Live Tenant Staff Roster (Dynamics system users, awaiting credential verification)",
+                "",
+                "| Staff Member | Role | Directory Status | Credentials | CME Progress | Malpractice Exp. |",
+                "|-------------|------|------------------|-------------|-------------|-----------------|",
+            ]
+            for s in live:
+                status = "Active" if s["active"] else "Disabled"
+                lines.append(
+                    f"| {s['name']} | {s['role']} | {status} | {s['credentials'] or seam} "
+                    f"| {s['cme'] or seam} | {s['malpractice_expires'] or seam} |"
+                )
+        else:
+            lines += ["", "_Live tenant unreachable — showing embedded demo staff only._"]
         return "\n".join(lines)
 
     def _expiration_alerts(self) -> str:
@@ -302,7 +409,12 @@ class StaffCredentialingAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = StaffCredentialingAgent()
-    for op in ["credential_status", "expiration_alerts", "verification_audit", "onboarding_checklist"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO + LIVE TENANT STAFF ROSTER")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 60)
+    print(agent.perform(operation="credential_status"))
+    for op in ["expiration_alerts", "verification_audit", "onboarding_checklist"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

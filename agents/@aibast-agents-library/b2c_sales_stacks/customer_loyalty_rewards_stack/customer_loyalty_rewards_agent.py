@@ -1,12 +1,36 @@
 """
-Customer Loyalty & Rewards Agent — B2C Sales Stack
+Customer Loyalty & Rewards Agent — a template you are meant to mutate.
 
 Manages loyalty program dashboards, points summaries, reward
-recommendations, and tier analysis for customer retention.
+recommendations, tier analysis, and churn-risk win-back campaigns for
+customer retention.
 
-Version 1.1.0 adds six demo-grounded loyalty operations with deterministic
-records, exact record-key lookup, and simulated campaign/Teams receipts. No
-external system is changed, and all legacy operations remain unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live customer records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Live contacts become loyalty members and their account's sales
+     orders become spend, so tiers are computed from real order totals.
+     Try: perform(operation="points_summary", member_id="Theo Dalton")
+  2. No network? Everything falls back to the embedded demo layer below
+     (LOYALTY_MEMBERS / TIER_STRUCTURE / REDEMPTION_CATALOG) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CUSTOMER_LOYALTY_REWARDS_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your commerce platform), or
+     replace _fetch_collection() with calls into your own API. Fields the
+     rest of the file needs are listed in _normalize_live_member() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (points balances, engagement scores) are where
+     you wire your actual loyalty platform.
+
+OPERATIONS
+  loyalty_dashboard | points_summary | reward_recommendations
+  | tier_analysis | churn_risk_analysis | at_risk_profiles
+  | win_back_offers | campaign_launch | program_optimization
+  | program_summary
+  kwargs: operation (required), member_id, user_input
 """
 
 import sys
@@ -14,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_loyalty_rewards",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Customer Loyalty & Rewards Agent",
-    "description": "Reports loyalty dashboards, points, reward recommendations, and churn-risk offers from built-in demo program data.",
+    "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["loyalty", "rewards", "points", "retention", "tier", "b2c"],
     "category": "b2c_sales",
@@ -30,7 +56,104 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CUSTOMER_LOYALTY_REWARDS_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your loyalty platform client.
+# Downstream code only needs the fields produced by
+# _normalize_live_member().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CUSTOMER_LOYALTY_REWARDS_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_member(contact, orders):
+    """Project a Dynamics contact record onto the loyalty member shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not available from
+    CRM alone' and the renderers label it as an enrichment seam. In this
+    template a CRM contact is reinterpreted as a loyalty member and the
+    sales orders of their parent account are their spend."""
+    account = contact.get("parentcustomeridname", "")
+    spend = sum(
+        float(o.get("totalamount") or 0)
+        for o in orders
+        if o.get("customeridname") == account
+    )
+    if spend >= 6000:
+        tier = "platinum"
+    elif spend >= 3000:
+        tier = "gold"
+    elif spend >= 1000:
+        tier = "silver"
+    else:
+        tier = "bronze"
+    return {
+        "name": contact.get("fullname", "Unknown"),
+        "tier": tier,                     # computed from real order totals
+        "points_balance": None,           # enrichment seam — wire your loyalty platform
+        "points_earned_ytd": None,        # enrichment seam
+        "points_redeemed_ytd": None,      # enrichment seam
+        "member_since": str(contact.get("createdon", ""))[:10],
+        "total_spend_ytd": int(spend),    # real zero when the account has no orders
+        "engagement_score": None,         # enrichment seam — wire your engagement analytics
+        "birthday_month": None,           # enrichment seam
+        "preferred_rewards": [],          # enrichment seam — wire preference data
+        "_live": True,
+        "_account": account,
+        "_email": contact.get("emailaddress1", ""),
+    }
+
+
+def _live_members():
+    """name-keyed dict of live tenant loyalty members; {} when offline."""
+    contacts = _fetch_collection("contacts")
+    if not contacts:
+        return {}
+    orders = _fetch_collection("salesorders")
+    return {
+        c["fullname"].lower(): _normalize_live_member(c, orders)
+        for c in contacts
+        if c.get("fullname")
+    }
+
+
+def _pts(value):
+    """None = the CRM alone can't know this (enrichment seam); 0 is real."""
+    return "n/a — enrichment seam" if value is None else f"{value:,}"
+
+
+def _pts_dollars(value):
+    return "n/a — enrichment seam" if value is None else f"${_points_value(value):,.2f}"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 LOYALTY_MEMBERS = {
@@ -303,10 +426,36 @@ class CustomerLoyaltyRewardsAgent(BasicAgent):
         return _evidence_action(action, **kwargs)
 
     def _loyalty_dashboard(self, **kwargs) -> str:
+        live = _live_members()
+        if live:
+            members = sorted(live.values(), key=lambda m: -m["total_spend_ytd"])
+            total_spend = sum(m["total_spend_ytd"] for m in members)
+            shown = members[:10]
+            lines = ["# Loyalty Program Dashboard (live tenant data)\n"]
+            lines.append(f"**Total Members:** {len(members)} (from live CRM contacts)")
+            lines.append("**Total Points Outstanding:** n/a — enrichment seam (wire your loyalty platform)")
+            lines.append(f"**Total Member Spend YTD:** ${total_spend:,.0f} (from live sales orders)\n")
+            lines.append(f"Top {len(shown)} members by spend:\n")
+            lines.append("| Member | Tier | Points | Spend YTD | Engagement | Since |")
+            lines.append("|---|---|---|---|---|---|")
+            for m in shown:
+                lines.append(
+                    f"| {m['name']} ({m['_account']}) | {m['tier'].title()} | {_pts(m['points_balance'])} "
+                    f"| ${m['total_spend_ytd']:,.0f} | {_pts(m['engagement_score'])} | {m['member_since']} |"
+                )
+            lines.append("\n## Tier Distribution (computed from live order totals)\n")
+            tier_counts = {}
+            for m in members:
+                tier_counts[m["tier"]] = tier_counts.get(m["tier"], 0) + 1
+            for tier in ["platinum", "gold", "silver", "bronze"]:
+                lines.append(f"- {tier.title()}: {tier_counts.get(tier, 0)}")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (contacts + salesorders)._")
+            return "\n".join(lines)
+
         total_members = len(LOYALTY_MEMBERS)
         total_points = sum(m["points_balance"] for m in LOYALTY_MEMBERS.values())
         total_spend = sum(m["total_spend_ytd"] for m in LOYALTY_MEMBERS.values())
-        lines = ["# Loyalty Program Dashboard\n"]
+        lines = ["# Loyalty Program Dashboard (embedded demo data — offline)\n"]
         lines.append(f"**Total Members:** {total_members}")
         lines.append(f"**Total Points Outstanding:** {total_points:,} (${_points_value(total_points):,.2f})")
         lines.append(f"**Total Member Spend YTD:** ${total_spend:,.0f}\n")
@@ -339,6 +488,24 @@ class CustomerLoyaltyRewardsAgent(BasicAgent):
             for act in ENGAGEMENT_ACTIVITIES:
                 lines.append(f"- **{act['activity']}:** {act['points']}")
             return "\n".join(lines)
+
+        if member_id:
+            m = _live_members().get(str(member_id).lower().strip())
+            if m:
+                lines = [f"# Points Summary: {m['name']} (live tenant record)\n"]
+                lines.append(f"- **Account:** {m['_account']}")
+                lines.append(f"- **Tier:** {m['tier'].title()} (computed from live order totals)")
+                lines.append(f"- **Points Balance:** {_pts(m['points_balance'])}")
+                lines.append(f"- **Earned YTD:** {_pts(m['points_earned_ytd'])}")
+                lines.append(f"- **Redeemed YTD:** {_pts(m['points_redeemed_ytd'])}")
+                lines.append(f"- **Spend YTD:** ${m['total_spend_ytd']:,.0f} (real zero means no orders on record)")
+                lines.append(f"- **Member Since:** {m['member_since']}")
+                lines.append(f"- **Multiplier:** {TIER_STRUCTURE[m['tier']]['points_multiplier']}x\n")
+                lines.append("## Earning Opportunities\n")
+                for act in ENGAGEMENT_ACTIVITIES:
+                    lines.append(f"- **{act['activity']}:** {act['points']}")
+                lines.append("\n_Source: live Static Dynamics 365 tenant (contacts + salesorders)._")
+                return "\n".join(lines)
 
         lines = ["# Points Summary — All Members\n"]
         lines.append("| Member | Tier | Balance | Earned YTD | Redeemed YTD | Value |")
@@ -403,10 +570,15 @@ class CustomerLoyaltyRewardsAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CustomerLoyaltyRewardsAgent()
-    print(agent.perform(operation="loyalty_dashboard"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("EMBEDDED DEMO MEMBER (works offline)")
     print(agent.perform(operation="points_summary", member_id="LM-10001"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="reward_recommendations"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("LIVE TENANT MEMBER (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="points_summary", member_id="Theo Dalton"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="loyalty_dashboard"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="tier_analysis"))

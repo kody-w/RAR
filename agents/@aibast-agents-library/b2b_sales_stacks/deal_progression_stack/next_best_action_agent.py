@@ -1,19 +1,41 @@
 """
-Next Best Action Agent
+Next Best Action Agent — a template you are meant to mutate.
 
-Recommends prioritized next-best actions for each deal based on stage,
-risk factors, engagement history, and rep profiles. Generates sequenced
-action plans, forecasts expected impact, and optimizes rep assignments
-to maximize pipeline velocity.
+Recommends prioritized next actions per deal from stage, risk, and
+engagement context, with sequenced plans, impact forecasts, and rep
+assignments to maximize pipeline velocity.
 
-Where a real deployment would call Salesforce, Outreach, Gong, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="recommend_actions") — recommendations are
+     generated for live open deals such as "Orchard Signal Works —
+     Managed print fleet refresh", matched to the action library by
+     their real CRM stage.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_CONTEXT / _ACTION_TEMPLATES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     NEXT_BEST_ACTION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). Blocker and
+     health context is an enrichment seam — wire Gong / your health
+     scoring there for blocker-targeted recommendations.
+
+OPERATIONS
+  recommend_actions | action_sequence | impact_forecast | rep_assignments
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/next_best_action",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Next Best Action",
-    "description": "Recommends prioritized next actions, sequences, impact forecasts, and rep assignments per deal from built-in demo data.",
+    "description": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "next-best-action", "deal-progression", "recommendations"],
     "category": "b2b_sales",
@@ -34,7 +56,99 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export NEXT_BEST_ACTION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "NEXT_BEST_ACTION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire Gong / your health scoring
+    for blocker-targeted recommendations)."""
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "probability": int(row.get("closeprobability") or 0),
+        "blocker": None,       # enrichment seam — wire call analytics
+        "risk_score": None,    # enrichment seam — wire your risk scoring
+        "health_score": None,  # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+def _recommend_for_live_deal(deal):
+    """Rank action templates for a live deal by its real CRM stage.
+    Blocker matching is skipped (enrichment seam)."""
+    recommendations = []
+    for action_id, template in _ACTION_TEMPLATES.items():
+        if deal["stage"] not in template["applicable_stages"]:
+            continue
+        outcome = _HISTORICAL_OUTCOMES.get(action_id, {})
+        priority_score = (
+            template["impact_score"] * 0.4 +
+            outcome.get("success_rate", 0.5) * 100 * 0.3 +
+            (100 - outcome.get("avg_days_to_impact", 5) * 10) * 0.3
+        )
+        recommendations.append({
+            "action_id": action_id,
+            "name": template["name"],
+            "description": template["description"],
+            "effort_hours": template["effort_hours"],
+            "priority_score": round(priority_score, 1),
+            "success_rate": outcome.get("success_rate", 0.5),
+            "days_to_impact": outcome.get("avg_days_to_impact", 5),
+        })
+    return sorted(recommendations, key=lambda r: -r["priority_score"])
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _ACTION_TEMPLATES = {
@@ -263,8 +377,36 @@ class NextBestActionAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- recommend_actions ---------------------------------------------
+    # -- recommend_actions (flagship: prefers LIVE tenant, falls back) --
     def _recommend_actions(self) -> str:
+        live = _live_open_deals()
+        if live:
+            sections = []
+            total_actions = 0
+            for d in sorted(live, key=lambda x: -x["value"]):
+                recs = _recommend_for_live_deal(d)
+                total_actions += len(recs)
+                rows = ""
+                for i, r in enumerate(recs[:4], 1):
+                    rows += (f"| {i} | {r['name']} | {r['priority_score']} | "
+                             f"{r['effort_hours']}h | {r['success_rate']:.0%} | {r['days_to_impact']}d |\n")
+                sections.append(
+                    f"**{d['name']} -- ${d['value']:,} ({d['stage']})**\n"
+                    f"CRM close probability: {d['probability']}% | Owner: {d['owner']} | "
+                    f"Risk/Health: n/a — enrichment seam\n\n"
+                    f"| # | Action | Priority | Effort | Success Rate | Time to Impact |\n"
+                    f"|---|--------|----------|--------|-------------|---------------|\n"
+                    f"{rows}"
+                )
+            return (
+                f"**Next Best Action Recommendations -- {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Total actions recommended: **{total_actions}** — matched by real CRM stage; "
+                f"blocker targeting stays off until you wire call analytics at the LIVE DATA SEAM.\n\n"
+                + "\n---\n\n".join(sections)
+                + f"\n\nSource: [Live Dynamics 365 opportunities + Action Library]\n"
+                f"Agents: ActionRecommendationEngine"
+            )
         sections = []
         total_actions = 0
         for deal_name in sorted(_DEAL_CONTEXT.keys(), key=lambda d: -_DEAL_CONTEXT[d]["value"]):
@@ -423,7 +565,13 @@ class NextBestActionAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = NextBestActionAgent()
-    for op in ["recommend_actions", "action_sequence", "impact_forecast", "rep_assignments"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT RECOMMENDATIONS (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="recommend_actions"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="action_sequence"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="rep_assignments"))

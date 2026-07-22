@@ -1,17 +1,42 @@
 """
-Voice to CRM Dynamics 365 Agent
+Voice to CRM Dynamics 365 Agent — a template you are meant to mutate.
 
-Captures voice recordings, extracts entities, updates D365 records, and
-tracks synchronization status for voice-driven CRM automation.
+Captures voice recordings, extracts entities, previews D365 record
+updates, and tracks synchronization status. Update previews are
+pre-flight validated against a REAL Dynamics org: the agent checks
+whether the accounts and contacts named in the voice note actually
+exist before you apply anything.
 
-Where a real deployment would integrate with speech APIs and D365, this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live accounts and contacts over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="record_update", voice_id="VOC-001")
+     — the preview is checked against the tenant's real 22-account
+     roster and reports whether each target record exists.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_VOICE_TRANSCRIPTS / _UPDATE_TEMPLATES) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     VOICE_TO_CRM_D365_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org), or replace _fetch_collection() with your Dataverse
+     client. The fields the rest of the file needs are listed in
+     _normalize_live_org(). The speech capture itself is an enrichment
+     seam — wire Azure AI Speech where the embedded transcripts sit.
+
+OPERATIONS
+  voice_capture | entity_extraction | record_update | sync_status
+  kwargs: operation (required), voice_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +44,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_d365",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Voice to CRM (D365)",
-    "description": "Simulates voice-driven Dynamics 365 updates \u2014 capture, entity extraction, record updates, sync status \u2014 with built-in demo data.",
+    "description": "Previews voice-driven Dynamics 365 updates pre-flight checked against a live simulated tenant, with sync status and offline fallback.",
     "author": "AIBAST",
     "tags": ["voice", "d365", "crm", "speech", "entity-extraction", "sync"],
     "category": "general",
@@ -32,7 +57,66 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export VOICE_TO_CRM_D365_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your Dataverse client.
+# Downstream code only needs the fields produced by
+# _normalize_live_org().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "VOICE_TO_CRM_D365_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_org():
+    """Project the connected Dynamics org onto the validation shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with account names, contact names, and record
+    counts. Returns {} when offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return {}
+    contacts = _fetch_collection("contacts")
+    opportunities = _fetch_collection("opportunities")
+    return {
+        "org_label": "Aster Lane Office Systems (live tenant)",
+        "account_names": {a.get("name", "") for a in accounts if a.get("name")},
+        "contact_names": {c.get("fullname", "") for c in contacts if c.get("fullname")},
+        "counts": {
+            "accounts": len(accounts),
+            "contacts": len(contacts),
+            "opportunities": len(opportunities),
+        },
+    }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _VOICE_TRANSCRIPTS = {
@@ -79,11 +163,13 @@ _D365_ENTITY_MAPPINGS = {
 
 _UPDATE_TEMPLATES = {
     "VOC-001": {
+        "target_account": "TechVantage Solutions",
         "opportunity_update": {"name": "TechVantage Solutions - Enterprise Platform", "stepname": "Proposal", "estimatedvalue": 200000, "estimatedclosedate": "2025-12-15", "closeprobability": 65},
         "activity_log": {"subject": "Discovery follow-up call with Jennifer Walsh", "description": "Budget confirmed at $200K. CEO wants proposal by Dec 15. Include IT Director Sam Patel in next meeting.", "actualdurationminutes": 4},
         "new_contacts": [{"fullname": "Mark Davidson", "jobtitle": "CEO", "account": "TechVantage Solutions"}, {"fullname": "Sam Patel", "jobtitle": "IT Director", "account": "TechVantage Solutions"}],
     },
     "VOC-002": {
+        "target_account": "Greenridge Partners",
         "opportunity_update": {"name": "Greenridge Partners - Renewal + Expansion", "stepname": "Negotiation", "estimatedvalue": 84000, "estimatedclosedate": "2026-01-10", "closeprobability": 80},
         "activity_log": {"subject": "Renewal discussion with David Park", "description": "Renewal confirmed at $72K. Adding Analytics Standard at $12K/yr. Total new amount: $84K.", "actualdurationminutes": 3},
         "new_contacts": [],
@@ -119,6 +205,26 @@ def _sync_summary():
     pending = sum(1 for s in _SYNC_STATUS if s["status"] == "Pending")
     failed = sum(1 for s in _SYNC_STATUS if s["status"] == "Failed")
     return total, synced, pending, failed
+
+
+def _preflight_lines(update, org):
+    """Real existence checks of the update's targets against the live
+    org. Returns human-readable check lines."""
+    if not org:
+        return ["Live org unreachable — existence checks skipped (offline fallback)."]
+    lines = []
+    account = update.get("target_account", "")
+    if account:
+        if account in org["account_names"]:
+            lines.append(f"Account \"{account}\": EXISTS in {org['org_label']} — update would attach to it.")
+        else:
+            lines.append(f"Account \"{account}\": NOT FOUND among {org['counts']['accounts']} accounts in {org['org_label']} — applying would create a new account.")
+    for c in update.get("new_contacts", []):
+        if c["fullname"] in org["contact_names"]:
+            lines.append(f"Contact \"{c['fullname']}\": already exists — would update, not create.")
+        else:
+            lines.append(f"Contact \"{c['fullname']}\": not found among {org['counts']['contacts']} contacts — would be created.")
+    return lines
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -179,7 +285,8 @@ class VoiceToCRMD365Agent(BasicAgent):
     def _voice_capture(self, voice_id):
         voc = _VOICE_TRANSCRIPTS[voice_id]
         return (
-            f"**Voice Capture: {voc['id']}**\n\n"
+            f"**Voice Capture: {voc['id']}** (embedded demo recording — the "
+            f"speech engine is an enrichment seam)\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Date | {voc['date']} |\n"
             f"| Speaker | {voc['speaker']} |\n"
@@ -198,7 +305,7 @@ class VoiceToCRMD365Agent(BasicAgent):
         opp = update.get("opportunity_update", {})
         extracted = "\n".join(f"- {k}: {v}" for k, v in opp.items()) if opp else "No entities extracted"
         return (
-            f"**Entity Extraction: {voice_id}**\n\n"
+            f"**Entity Extraction: {voice_id}** (embedded demo transcript — simulated)\n\n"
             f"**Extracted Values:**\n{extracted}\n\n"
             f"**D365 Entity Mapping Rules:**\n\n"
             f"| Entity | Voice Pattern | D365 Field | Type |\n|---|---|---|---|\n"
@@ -214,13 +321,16 @@ class VoiceToCRMD365Agent(BasicAgent):
         opp_lines = "\n".join(f"- {k}: {v}" for k, v in opp.items())
         act_lines = "\n".join(f"- {k}: {v}" for k, v in activity.items())
         contact_lines = "\n".join(f"- {c['fullname']} ({c['jobtitle']}) at {c['account']}" for c in new_contacts) or "None"
+        org = _normalize_live_org()
+        preflight = "\n".join(f"- {line}" for line in _preflight_lines(update, org))
         return (
             f"**D365 Record Update Preview: {voice_id}**\n\n"
             f"**1. Opportunity Update:**\n{opp_lines}\n\n"
             f"**2. Activity Log:**\n{act_lines}\n\n"
             f"**3. New Contacts:**\n{contact_lines}\n\n"
-            f"**Status:** Ready to apply | Requires confirmation\n\n"
-            f"Source: [D365 Update Engine]\nAgents: VoiceToCRMD365Agent"
+            f"**Pre-flight validation (checked against the live org):**\n{preflight}\n\n"
+            f"**Status:** Preview only — no record was written | Requires confirmation\n\n"
+            f"Source: [D365 Update Engine + Live Dynamics 365 Tenant]\nAgents: VoiceToCRMD365Agent"
         )
 
     def _sync_status(self, voice_id):
@@ -229,24 +339,40 @@ class VoiceToCRMD365Agent(BasicAgent):
         for s in _SYNC_STATUS:
             error = s["error"] or "-"
             rows += f"| {s['id']} | {s['voice_id']} | {s['entity']} | {s['status']} | {s['attempts']} | {error[:30]} |\n"
+        org = _normalize_live_org()
+        if org:
+            org_line = (
+                f"**Target org connectivity (checked now over HTTP):** {org['org_label']} reachable — "
+                f"{org['counts']['accounts']} accounts, {org['counts']['contacts']} contacts, "
+                f"{org['counts']['opportunities']} opportunities.\n\n"
+            )
+        else:
+            org_line = "**Target org connectivity (checked now over HTTP):** unreachable — sync would queue locally.\n\n"
         return (
-            f"**Sync Status Dashboard**\n\n"
+            f"**Sync Status Dashboard** (sync ledger is embedded demo data — simulated)\n\n"
             f"| Metric | Count |\n|---|---|\n"
             f"| Total Syncs | {total} |\n"
             f"| Synced | {synced} |\n"
             f"| Pending | {pending} |\n"
             f"| Failed | {failed} |\n\n"
+            f"{org_line}"
             f"**Detail:**\n\n"
             f"| ID | Voice | Entity | Status | Attempts | Error |\n|---|---|---|---|---|---|\n"
             f"{rows}\n"
             f"**Action Required:** SYNC-004 failed after 3 attempts (record locked). Manual retry recommended.\n\n"
-            f"Source: [D365 Sync Engine]\nAgents: VoiceToCRMD365Agent"
+            f"Source: [D365 Sync Engine + Live Dynamics 365 Tenant]\nAgents: VoiceToCRMD365Agent"
         )
 
 
 if __name__ == "__main__":
     agent = VoiceToCRMD365Agent()
-    for op in ["voice_capture", "entity_extraction", "record_update", "sync_status"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, voice_id="VOC-001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO RECORDING (works offline)")
+    print(agent.perform(operation="voice_capture", voice_id="VOC-001"))
+    print()
+    print("=" * 60)
+    print("LIVE PRE-FLIGHT VALIDATION (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="record_update", voice_id="VOC-001"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="sync_status", voice_id="VOC-001"))

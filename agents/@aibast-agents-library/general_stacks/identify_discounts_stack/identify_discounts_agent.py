@@ -1,21 +1,46 @@
 """
-Identify Discounts Agent
+Identify Discounts Agent — a template you are meant to mutate.
 
 Scans for applicable discounts, checks eligibility criteria, calculates
 savings, and manages approval workflows for discount programs.
 
-Where a real deployment would connect to pricing engines and CRM, this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+The live tenant has no native "vendor promotion" entity, so in this
+template an open Dynamics QUOTE is read from the buying side — a priced
+proposal on the table whose negotiated discount expires with the quote
+window. Say the same in your own mutation if you reinterpret an entity.
 
-Version 1.1.0 adds evidence-backed procurement discount prioritization,
-purchase-order drafting, bulk strategy, execution planning, and simulated
-Teams tracking. Existing sales-discount operations remain unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live quotes over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="purchase_savings")
+     — ranks the tenant's real seeded quotes (e.g. "Proposal for
+     Harbor Pine Consulting", $100 negotiated discount) by savings.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PLANNED_PURCHASES / _DISCOUNT_PROGRAMS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     IDENTIFY_DISCOUNTS_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your ERP), or replace
+     _fetch_collection() with your procurement client. The fields the
+     rest of the file needs are listed in _normalize_live_quote() —
+     everything else keeps working untouched.
+
+OPERATIONS
+  discount_scan | eligibility_check | savings_calculation
+  | approval_workflow | purchase_savings | expiring_discounts
+  | draft_purchase_order | bulk_order_strategy | execution_timeline
+  | setup_tracking
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -23,9 +48,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/identify_discounts",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Identify Discounts",
-    "description": "Scans built-in demo pricing data for discounts, checks eligibility, calculates savings, and drafts purchase orders.",
+    "description": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback.",
     "author": "AIBAST",
     "tags": ["discounts", "pricing", "savings", "eligibility", "approval"],
     "category": "general",
@@ -36,7 +61,72 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export IDENTIFY_DISCOUNTS_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ERP/procurement client.
+# Downstream code only needs the fields produced by
+# _normalize_live_quote().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "IDENTIFY_DISCOUNTS_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_quote(row):
+    """Project a Dynamics quote record onto the planned-purchase shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. 0 savings is a real zero (no
+    negotiated discount on that quote); None means 'not available'."""
+    amount = float(row.get("totalamount") or 0)
+    savings = float(row.get("discountamount") or 0)
+    gross = amount + savings
+    expires = str(row.get("effectiveto", ""))[:10] or None
+    return {
+        "category": row.get("name", "Unnamed proposal"),
+        "vendor": "Aster Lane Office Systems",
+        "amount": amount,
+        "savings": savings,
+        "discount_pct": round(savings / gross * 100, 1) if gross else 0.0,
+        "expires": expires,
+        "timing": f"Convert before {expires}" if expires else "n/a — enrichment seam (wire your contract dates)",
+        "status": row.get("statuscode@OData.Community.Display.V1.FormattedValue", "Open"),
+        "_live": True,
+    }
+
+
+def _live_planned_purchases():
+    """Live tenant quotes as planned purchases; [] when offline."""
+    rows = _fetch_collection("quotes")
+    return [_normalize_live_quote(r) for r in rows if r.get("name")]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _DISCOUNT_PROGRAMS = {
@@ -213,7 +303,7 @@ class IdentifyDiscountsAgent(BasicAgent):
             status = f"Eligible ({pct}%)" if eligible else "Not Eligible"
             rows += f"| {pid} | {prog['name']} | {prog['type']} | {prog['max_discount_pct']}% | {status} | {'Yes' if prog['requires_approval'] else 'Auto'} |\n"
         return (
-            f"**Discount Scan: {deal['customer']}**\n\n"
+            f"**Discount Scan: {deal['customer']}** (embedded demo deal — simulated)\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Licenses | {deal['licenses']} |\n"
             f"| Products | {len(deal['products'])} |\n"
@@ -242,7 +332,7 @@ class IdentifyDiscountsAgent(BasicAgent):
             marker = " <-- Current" if tier["min_licenses"] <= deal["licenses"] <= tier["max_licenses"] else ""
             vol_rows += f"| {tier['label']} | {tier['min_licenses']}-{tier['max_licenses']} | {tier['discount_pct']}% | ${tier['price_per_license']}/license |{marker}\n"
         return (
-            f"**Eligibility Check: {deal['customer']}**\n\n"
+            f"**Eligibility Check: {deal['customer']}** (embedded demo deal — simulated)\n\n"
             f"**Eligible Programs ({len(eligible_list)}):**\n\n"
             f"| Program | Discount | Stackable | Description |\n|---|---|---|---|\n"
             f"{detail_rows}\n"
@@ -262,7 +352,7 @@ class IdentifyDiscountsAgent(BasicAgent):
                 applicable.append((pid, pct))
         list_total, savings, final_price, best_pct = _calculate_savings(deal, applicable)
         return (
-            f"**Savings Calculation: {deal['customer']}**\n\n"
+            f"**Savings Calculation: {deal['customer']}** (embedded demo deal — simulated)\n\n"
             f"| Metric | Value |\n|---|---|\n"
             f"| List Price | ${deal['list_price_per_license']}/license/month |\n"
             f"| Licenses | {deal['licenses']} |\n"
@@ -301,7 +391,7 @@ class IdentifyDiscountsAgent(BasicAgent):
             approval_rows += f"| {key.replace('_', ' ').title()} | {rule['approver']} | {rule['sla_hours']}h | {rule.get('auto_approve_if', 'Manual review')}{marker} |\n"
         needs_approval = any(_DISCOUNT_PROGRAMS[pid]["requires_approval"] for pid, _ in applicable)
         return (
-            f"**Approval Workflow: {deal['customer']}**\n\n"
+            f"**Approval Workflow: {deal['customer']}** (embedded demo deal — simulated)\n\n"
             f"**Discount Level:** {best_pct}% | **Required Approver:** {approval['approver']}\n\n"
             f"**Approval Matrix:**\n\n"
             f"| Discount Range | Approver | SLA | Auto-Approve Criteria |\n|---|---|---|---|\n"
@@ -312,6 +402,26 @@ class IdentifyDiscountsAgent(BasicAgent):
         )
 
     def _purchase_savings(self):
+        live = _live_planned_purchases()
+        if live:
+            ranked = sorted(live, key=lambda item: item["savings"], reverse=True)
+            total_savings = sum(item["savings"] for item in ranked)
+            rows = "\n".join(
+                f"| {item['category'][:42]} | {item['vendor']} | ${item['amount']:,.0f} | "
+                f"{item['discount_pct']}% | ${item['savings']:,.0f} | {item['expires'] or 'n/a'} |"
+                for item in ranked
+            )
+            return (
+                "**Prioritized Purchase Savings** (LIVE quotes from the Aster Lane "
+                "Dynamics 365 tenant, read from the buying side)\n\n"
+                "| Proposal | Vendor | Quoted Spend | Discount | Savings | Quote Expires |\n"
+                "|---|---|---|---|---|---|\n" + rows
+                + f"\n\n**Savings snapshot:** ${total_savings:,.0f} of negotiated "
+                  f"discount across {len(ranked)} open proposals. 0% rows are real "
+                  "zeros — no discount negotiated yet.\n\n"
+                  "Source: [Live Dynamics 365 Tenant — quotes]\n"
+                  "Agents: IdentifyDiscountsAgent"
+            )
         ranked = sorted(
             _PLANNED_PURCHASES,
             key=lambda item: item["amount"] * item["discount_pct"] / 100,
@@ -327,26 +437,41 @@ class IdentifyDiscountsAgent(BasicAgent):
             for item in ranked
         )
         return (
-            "**Prioritized Purchase Savings**\n\n"
+            "**Prioritized Purchase Savings** (embedded demo data — live tenant unreachable)\n\n"
             "| Category | Vendor | Planned Spend | Discount | Savings | Expires |\n"
             "|---|---|---|---|---|---|\n" + rows
             + f"\n\n**Quarterly savings snapshot:** ${total_savings:,.0f} across "
               f"{len(ranked)} purchasing areas."
-            + "\n\nSource: [Dynamics 365 Vendor Data + Contract Terms]\n"
+            + "\n\nSource: [Embedded Demo Layer]\n"
               "Agents: IdentifyDiscountsAgent"
         )
 
     def _expiring_discounts(self):
+        live = _live_planned_purchases()
+        discounted = [q for q in live if q["savings"] > 0]
+        if discounted:
+            rows = "\n".join(
+                f"| {item['vendor']} | {item['category'][:42]} | {item['expires'] or 'n/a'} | "
+                f"${item['savings']:,.0f} | {item['timing']} |"
+                for item in sorted(discounted, key=lambda item: item["expires"] or "9999")
+            )
+            return (
+                "**Expiring Discount Decisions** (LIVE quotes from the Aster Lane "
+                "Dynamics 365 tenant)\n\n"
+                "| Vendor | Proposal | Quote Expires | Savings at Risk | Recommendation |\n"
+                "|---|---|---|---|---|\n" + rows
+                + "\n\nSource: [Live Dynamics 365 Tenant — quotes]\nAgents: IdentifyDiscountsAgent"
+            )
         rows = "\n".join(
             f"| {item['vendor']} | {item['category']} | {item['expires']} | "
             f"${item['amount'] * item['discount_pct'] / 100:,.0f} | {item['timing']} |"
             for item in sorted(_PLANNED_PURCHASES, key=lambda item: item["expires"])
         )
         return (
-            "**Expiring Discount Decisions**\n\n"
+            "**Expiring Discount Decisions** (embedded demo data — live tenant unreachable)\n\n"
             "| Vendor | Category | Expires | Savings at Risk | Recommendation |\n"
             "|---|---|---|---|---|\n" + rows
-            + "\n\nSource: [Dynamics 365 + Vendor Promotions]\nAgents: IdentifyDiscountsAgent"
+            + "\n\nSource: [Embedded Demo Layer]\nAgents: IdentifyDiscountsAgent"
         )
 
     def _draft_purchase_order(self):
@@ -354,7 +479,7 @@ class IdentifyDiscountsAgent(BasicAgent):
         subtotal = sum(item["amount"] for item in items)
         savings = sum(item["amount"] * item["discount_pct"] / 100 for item in items)
         return (
-            "**Discounted Purchase Order Draft**\n\n"
+            "**Discounted Purchase Order Draft** (embedded demo data — simulated)\n\n"
             f"- **Items bundled:** {', '.join(item['category'] for item in items)}\n"
             f"- **Subtotal:** ${subtotal:,}\n"
             f"- **Applied savings:** ${savings:,.0f}\n"
@@ -369,7 +494,7 @@ class IdentifyDiscountsAgent(BasicAgent):
         consolidated_amount = 144000
         tier_discount = 20
         return (
-            "**Bulk Order Strategy**\n\n"
+            "**Bulk Order Strategy** (embedded demo data — simulated)\n\n"
             f"- Consolidate facility software renewals from ${licenses['amount']:,} "
             f"to ${consolidated_amount:,} of managed spend.\n"
             f"- Unlock the {tier_discount}% volume tier.\n"
@@ -380,7 +505,7 @@ class IdentifyDiscountsAgent(BasicAgent):
 
     def _execution_timeline(self):
         return (
-            "**Savings Execution Timeline**\n\n"
+            "**Savings Execution Timeline** (embedded demo data — simulated)\n\n"
             "| Date | Action | Owner | Dependency |\n|---|---|---|---|\n"
             "| 2025-11-21 | Confirm imaging-device quantities | Category Buyer | Clinical approval |\n"
             "| 2025-11-24 | Submit discounted PO draft | Procurement Manager | Vendor quote |\n"
@@ -404,12 +529,13 @@ class IdentifyDiscountsAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = IdentifyDiscountsAgent()
-    for op in [
-        "discount_scan", "eligibility_check", "savings_calculation",
-        "approval_workflow", "purchase_savings", "expiring_discounts",
-        "draft_purchase_order", "bulk_order_strategy", "execution_timeline",
-        "setup_tracking",
-    ]:
-        print("=" * 60)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO DEAL (works offline)")
+    print(agent.perform(operation="discount_scan"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT QUOTES (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="purchase_savings"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="expiring_discounts"))

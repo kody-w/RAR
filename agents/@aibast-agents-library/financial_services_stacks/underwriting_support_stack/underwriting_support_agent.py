@@ -1,14 +1,37 @@
 """
-Underwriting Support Agent — Financial Services Stack
+Underwriting Support Agent — a template you are meant to mutate.
 
 Supports insurance underwriting with risk evaluation, pricing
-recommendations, guideline checks, and exception reviews.
+recommendations, guideline checks, and exception reviews. In this template
+an underwriting submission is represented as a Dynamics 365 quote — the
+tenant has no native policy entity, so quotes awaiting approval stand in
+for the submission queue (amounts are real, risk scores stay seams).
 
-v1.1.0 adds evidence-grounded commercial underwriting capabilities derived
-from the commercial-underwriting spec: submission intake, risk assessment,
-pricing guidance, coverage structuring, authority/compliance validation, and
-audit-ready underwriting summary compilation. These are additive, backward
-compatible operations; every legacy operation is preserved unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `risk_evaluation` operation pulls live
+     quote records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="risk_evaluation")
+     and look for submission QUO-260105 (Willow Brook Legal) in the queue.
+  2. No network? Everything falls back to the embedded demo layer below
+     (APPLICATIONS / UNDERWRITING_GUIDELINES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     UNDERWRITING_SUPPORT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your policy admin system),
+     or replace _fetch_collection() with your own client. The fields the
+     rest of the file needs are listed in _normalize_live_submission() —
+     fields rendered "n/a — enrichment seam" (line of business, risk
+     score) are where you wire your rating engine and loss-history feed.
+
+OPERATIONS
+  risk_evaluation | pricing_recommendation | guideline_check
+  | exception_review | submission_intake | risk_assessment
+  | pricing_guidance | coverage_structuring | compliance_authority
+  | underwriting_summary
+  kwargs: operation (required), application_id, user_input
 """
 
 import sys
@@ -16,13 +39,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/underwriting_support",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Underwriting Support Agent",
-    "description": "Supports insurance underwriting with risk scoring, pricing guidance, and guideline checks using built-in demo data.",
+    "description": "Evaluates underwriting queues from a live simulated Dynamics 365 tenant (quotes as submissions), with pricing demos and an offline fallback.",
     "author": "AIBAST",
     "tags": ["underwriting", "insurance", "risk", "pricing", "guidelines", "financial-services"],
     "category": "financial_services",
@@ -31,8 +56,80 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export UNDERWRITING_SUPPORT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your policy-admin client. Downstream
+# code only needs the fields produced by _normalize_live_submission().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "UNDERWRITING_SUPPORT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_submission(row):
+    """Project a Dynamics quote onto the submission shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it as an enrichment seam."""
+    state = row.get("statecode")
+    status = {0: "under_review", 1: "approved", 2: "declined", 3: "closed"}.get(state, "under_review")
+    return {
+        "applicant": row.get("customeridname", "Unknown"),
+        "line_of_business": None,  # enrichment seam — wire your policy admin system
+        "coverage_requested": float(row.get("totalamount") or 0),
+        "risk_score": None,        # enrichment seam — wire your rating engine
+        "status": status,
+        "underwriter": row.get("owneridname", ""),
+        "_live": True,
+    }
+
+
+def _live_submissions():
+    """quote-number-keyed dict of live tenant submissions; {} when offline."""
+    rows = _fetch_collection("quotes")
+    if not rows:
+        return {}
+    return {
+        row.get("quotenumber", row.get("quoteid", "")): _normalize_live_submission(row)
+        for row in rows
+        if row.get("quotenumber") or row.get("quoteid")
+    }
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 APPLICATIONS = {
@@ -495,6 +592,25 @@ class UnderwritingSupportAgent(BasicAgent):
         return _render_capability_record(cap, record)
 
     def _risk_evaluation(self, **kwargs) -> str:
+        live = _live_submissions()
+        if live:
+            lines = ["# Underwriting Risk Evaluation (live tenant)\n"]
+            lines.append("| App ID | Applicant | LOB | Coverage | Risk Score | Underwriter | Status |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for aid, app in live.items():
+                lines.append(
+                    f"| {aid} | {app['applicant']} "
+                    f"| {_seam(app['line_of_business'], lambda v: v.replace('_', ' ').title())} "
+                    f"| ${app['coverage_requested']:,.0f} | {_seam(app['risk_score'])} "
+                    f"| {app['underwriter']} | {app['status'].replace('_', ' ').title()} |"
+                )
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — quotes reinterpreted "
+                "as underwriting submissions. LOB and risk score are enrichment "
+                "seams (wire your rating engine and loss-history feed)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Underwriting Risk Evaluation\n"]
         lines.append("| App ID | Applicant | LOB | Coverage | Risk Score | Tier | Status |")
         lines.append("|---|---|---|---|---|---|---|")
@@ -504,6 +620,7 @@ class UnderwritingSupportAgent(BasicAgent):
                 f"| {aid} | {app['applicant']} | {app['line_of_business'].replace('_', ' ').title()} "
                 f"| ${app['coverage_requested']:,.0f} | {app['risk_score']} | {tier} | {app['status'].replace('_', ' ').title()} |"
             )
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         lines.append("\n## Risk Tier Definitions\n")
         lines.append("- **Preferred** (0-30): Best rates, minimal restrictions")
         lines.append("- **Standard** (31-55): Standard rates and terms")
@@ -596,8 +713,11 @@ class UnderwritingSupportAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = UnderwritingSupportAgent()
+    print("=" * 80)
+    print("LIVE TENANT SUBMISSION QUEUE (quotes fetched over HTTP; falls back offline)")
     print(agent.perform(operation="risk_evaluation"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO PRICING (works offline)")
     print(agent.perform(operation="pricing_recommendation", application_id="UW-2025-103"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="guideline_check"))

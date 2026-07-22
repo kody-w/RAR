@@ -1,9 +1,36 @@
 """
-FOIA Request Assistant Agent — SLG Government Stack
+FOIA Request Assistant Agent — a template you are meant to mutate.
 
 Supports FOIA request processing with request analysis, document
 search, redaction review, and response preparation for government
 records officers.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records-request cases over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="request_analysis")
+     — with network up, the queue surfaces the tenant's live public-
+     records cases such as CAS-260131 "Records request backlog exceeds
+     statutory deadline" plus the open tasks tracking it. In this
+     template a FOIA/public-records request is represented as a Dynamics
+     case (incident) and its work items as Dynamics tasks.
+  2. No network? Everything falls back to the embedded demo layer below
+     (FOIA_REQUESTS / EXEMPTION_CATEGORIES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FOIA_REQUEST_ASSISTANT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from GovQA/NextRequest), or
+     replace _fetch_collection() with your records system API. The
+     fields the rest of the file needs are listed in
+     _normalize_live_foia_request() — page counts and fee estimates stay
+     "n/a — enrichment seam" until you wire your records repository.
+
+OPERATIONS
+  request_analysis | document_search | redaction_review |
+  response_preparation
+  kwargs: operation (required), request_id
 """
 
 import sys
@@ -11,13 +38,16 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/foia_request_assistant",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "FOIA Request Assistant Agent",
-    "description": "Analyzes FOIA requests, searches documents, flags redactions, and drafts responses using built-in demo records.",
+    "description": "Analyzes FOIA queues and drafts responses from a live simulated Dynamics 365 tenant's records cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["FOIA", "public-records", "redaction", "transparency", "government"],
     "category": "slg_government",
@@ -26,8 +56,102 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FOIA_REQUEST_ASSISTANT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your records-system client.
+# Downstream code only needs the fields from
+# _normalize_live_foia_request().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "FOIA_REQUEST_ASSISTANT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Case-title keywords that mark a tenant case as a public-records item.
+_FOIA_KEYWORDS = ("records request", "record request", "foia", "public records")
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_foia_request(row, tasks):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a FOIA/public-records request IS a Dynamics
+    case, and its work items are Dynamics tasks. THIS is the contract
+    your replacement data source must meet — a dict with these keys.
+    None means 'not available from the case system alone' and the
+    renderers label it as an enrichment seam."""
+    title = row.get("title", "untitled")
+    open_tasks = [
+        t for t in tasks
+        if t.get("regardingobjectidname") == title and t.get("statecode") == 0
+    ]
+    return {
+        "request_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "requester": row.get("customeridname", "Unknown"),
+        "subject": title,
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "assigned_analyst": row.get("owneridname", "Unassigned"),
+        "due_date": str(row.get("resolveby") or "")[:10] or None,
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "open_tasks": len(open_tasks),
+        "estimated_pages": None,  # enrichment seam — wire records repository
+        "fee_estimate": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_foia_queue():
+    """Live tenant cases whose titles look records-request-shaped."""
+    rows = [
+        row for row in _fetch_collection("incidents")
+        if any(kw in str(row.get("title", "")).lower() for kw in _FOIA_KEYWORDS)
+    ]
+    if not rows:
+        return []
+    tasks = _fetch_collection("tasks")
+    queue = [_normalize_live_foia_request(row, tasks) for row in rows]
+    return [r for r in queue if r["request_id"]]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 FOIA_REQUESTS = {
@@ -188,7 +312,48 @@ class FOIARequestAssistantAgent(BasicAgent):
             return f"**Error:** Unknown operation `{operation}`."
         return handler(**kwargs)
 
+    def _live_request_analysis(self, queue):
+        """Records-request queue from live tenant cases (preferred online)."""
+        lines = [
+            "# FOIA Request Analysis — Live Tenant Cases\n",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a public-records request is a Dynamics case.",
+            "Pass `request_id` (e.g. FOIA-2025-0301) for the embedded demo view.\n",
+            f"**Matched Requests:** {len(queue)} "
+            f"({sum(1 for r in queue if r['open'])} open)\n",
+            "## Request Queue\n",
+            "| Case | Requester | Subject | Priority | Status | Due | Open Tasks | Pages | Fees |",
+            "|---|---|---|---|---|---|---|---|---|",
+        ]
+        for r in sorted(queue, key=lambda x: x["request_id"]):
+            pages = "n/a — enrichment seam" if r["estimated_pages"] is None else f"{r['estimated_pages']:,}"
+            fees = "n/a — enrichment seam" if r["fee_estimate"] is None else f"${r['fee_estimate']:,.2f}"
+            lines.append(
+                f"| {r['request_id']} | {r['requester']} | {r['subject']} "
+                f"| {r['priority']} | {r['status']} | {r['due_date'] or 'n/a'} "
+                f"| {r['open_tasks']} | {pages} | {fees} |"
+            )
+        overdue = [
+            r for r in queue
+            if r["open"] and r["due_date"] and r["age_days"] > 0
+        ]
+        lines.append("")
+        lines.append(
+            f"**Analyst load:** " + ", ".join(
+                sorted({f"{r['assigned_analyst']}" for r in queue})
+            )
+        )
+        lines.append(
+            "Page counts and fee estimates need your records repository — "
+            "wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _request_analysis(self, **kwargs) -> str:
+        if not kwargs.get("request_id"):
+            queue = _live_foia_queue()
+            if queue:
+                return self._live_request_analysis(queue)
         metrics = _request_metrics()
         lines = ["# FOIA Request Analysis\n"]
         lines.append(f"**Active Requests:** {metrics['total']}")
@@ -298,7 +463,11 @@ class FOIARequestAssistantAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FOIARequestAssistantAgent()
+    print("LIVE TENANT RECORDS-REQUEST QUEUE (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="request_analysis"))
+    print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO REQUEST (works offline)")
+    print(agent.perform(operation="request_analysis", request_id="FOIA-2025-0301"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="document_search", request_id="FOIA-2025-0301"))
     print("\n" + "=" * 80 + "\n")

@@ -1,17 +1,43 @@
 """
-Bulk CRM Data Generator Agent
+Bulk CRM Data Generator Agent — a template you are meant to mutate.
 
 Generates synthetic CRM records (contacts, accounts, opportunities) for
-testing, demos, and data migration validation.
+testing, demos, and data migration validation. In this template the
+`data_summary` operation also audits a real CRM: it counts and summarizes
+the live tenant's actual contacts, accounts, and opportunity pipeline, so
+you can compare generated data against a live shape.
 
-Where a real deployment would write to Salesforce or Dynamics 365, this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `data_summary` operation pulls live
+     contact/account/opportunity records over real HTTP from the globally
+     hosted Static Dynamics 365 tenant (Aster Lane Office Systems —
+     synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="data_summary")
+     and look for the 22 live accounts and 15-opportunity pipeline.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_GENERATED_CONTACTS / _GENERATED_ACCOUNTS / _GENERATED_OPPORTUNITIES)
+     — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     BULK_CRM_DATA_GENERATOR_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from Salesforce), or replace
+     _fetch_collection() with your own client. The fields the rest of
+     the file needs are listed in _normalize_live_opportunity() —
+     account revenue renders "n/a — enrichment seam" until you wire your
+     firmographics provider.
+
+OPERATIONS
+  generate_contacts | generate_accounts | generate_opportunities
+  | data_summary
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +45,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Bulk CRM Data Generator",
-    "description": "Generates synthetic CRM contacts, accounts, and opportunities for testing, demos, and data migration.",
+    "description": "Generates synthetic CRM records and audits a live simulated Dynamics 365 tenant's data shape, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["crm", "data-generation", "testing", "contacts", "accounts", "opportunities"],
     "category": "general",
@@ -32,7 +58,74 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export BULK_CRM_DATA_GENERATOR_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_opportunity().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "BULK_CRM_DATA_GENERATOR_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_opportunity(row):
+    """Project a Dynamics opportunity onto the shape this agent's
+    summaries use. THIS is the contract your replacement data source must
+    meet — a dict with these keys."""
+    stage = {0: "Open", 1: "Closed Won", 2: "Closed Lost"}.get(row.get("statecode"), "Open")
+    return {
+        "amount": float(row.get("estimatedvalue") or 0),
+        "probability": int(row.get("closeprobability") or 0),
+        "stage": stage,
+    }
+
+
+def _live_snapshot():
+    """Counts + normalized pipeline from the live tenant; None offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return None
+    contacts = _fetch_collection("contacts")
+    opportunities = [_normalize_live_opportunity(r) for r in _fetch_collection("opportunities")]
+    industries = {}
+    for a in accounts:
+        industries.setdefault(a.get("industrycode", "Unknown"), 0)
+        industries[a.get("industrycode", "Unknown")] += 1
+    return {
+        "contacts": len(contacts),
+        "accounts": len(accounts),
+        "opportunities": opportunities,
+        "industries": industries,
+    }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _NAME_POOLS = {
@@ -232,6 +325,41 @@ class BulkCRMDataGeneratorAgent(BasicAgent):
 
     # ── data_summary ───────────────────────────────────────────
     def _data_summary(self):
+        live = _live_snapshot()
+        if live:
+            opps = live["opportunities"]
+            total_val = sum(o["amount"] for o in opps)
+            weighted_val = sum(o["amount"] * o["probability"] / 100 for o in opps)
+            by_stage = {}
+            for o in opps:
+                by_stage.setdefault(o["stage"], {"count": 0, "value": 0})
+                by_stage[o["stage"]]["count"] += 1
+                by_stage[o["stage"]]["value"] += o["amount"]
+            stage_lines = "\n".join(
+                f"| {stg} | {d['count']} | ${d['value']:,.0f} |" for stg, d in by_stage.items()
+            )
+            ind_lines = "\n".join(
+                f"| {ind} | {count} | n/a — enrichment seam |"
+                for ind, count in sorted(live["industries"].items())
+            )
+            return (
+                f"**CRM Data Summary (live tenant)**\n\n"
+                f"| Entity | Count |\n|---|---|\n"
+                f"| Contacts | {live['contacts']} |\n"
+                f"| Accounts | {live['accounts']} |\n"
+                f"| Opportunities | {len(opps)} |\n\n"
+                f"**Pipeline Summary:**\n"
+                f"- Total Value: ${total_val:,.0f}\n"
+                f"- Weighted Value: ${weighted_val:,.0f}\n\n"
+                f"| Stage | Opps | Value |\n|---|---|---|\n"
+                f"{stage_lines}\n\n"
+                f"**Accounts by Industry:**\n\n"
+                f"| Industry | Count | Revenue |\n|---|---|---|\n"
+                f"{ind_lines}\n\n"
+                f"Revenue is an enrichment seam — wire your firmographics provider.\n\n"
+                f"Source: [live Static Dynamics 365 tenant]\nAgents: BulkCRMDataGeneratorAgent"
+            )
+
         total_val, weighted_val, by_stage = _summarize_pipeline()
         segments = _account_segments()
         stage_lines = "\n".join(f"| {stg} | {d['count']} | ${d['value']:,} |" for stg, d in by_stage.items())
@@ -251,13 +379,19 @@ class BulkCRMDataGeneratorAgent(BasicAgent):
             f"| Segment | Count | Revenue |\n|---|---|---|\n"
             f"{seg_lines}\n\n"
             f"**Data Quality:** All records validated, no duplicates, referential integrity confirmed.\n\n"
-            f"Source: [Synthetic Data Engine]\nAgents: BulkCRMDataGeneratorAgent"
+            f"Source: [embedded demo layer (offline fallback)]\nAgents: BulkCRMDataGeneratorAgent"
         )
 
 
 if __name__ == "__main__":
     agent = BulkCRMDataGeneratorAgent()
-    for op in ["generate_contacts", "generate_accounts", "generate_opportunities", "data_summary"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO GENERATION (works offline)")
+    for op in ["generate_contacts", "generate_accounts", "generate_opportunities"]:
         print("=" * 60)
         print(agent.perform(operation=op))
         print()
+    print("=" * 60)
+    print("LIVE TENANT DATA AUDIT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="data_summary"))
+    print()

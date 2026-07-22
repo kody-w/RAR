@@ -1,27 +1,54 @@
 """
-Energy Regulatory Reporting Agent.
+Energy Regulatory Reporting Agent — a template you are meant to mutate.
 
 Manages regulatory report status tracking, data validation, submission
 workflows, and audit readiness assessments for EPA, FERC, and state
 regulatory filings.
 
-Version 1.1.0 adds evidence-backed emissions consolidation, deterministic
-report generation, and dry-run EPA submission preparation. Legacy operations
-remain unchanged and no external filing system is mutated.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live work items over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics task is reinterpreted as a regulatory
+     reporting work item: its scheduled end is the filing deadline and
+     overdue status is computed against the clock — e.g. the open task
+     "Review service notes — CAS-260131" tied to a records-request
+     backlog that exceeds a statutory deadline.
+     Try: perform(operation="submission_tracker")
+  2. No network? Everything falls back to the embedded demo layer below
+     (REGULATORY_REPORTS / DATA_VALIDATION_RULES / AUDIT_FINDINGS) — the
+     agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ENERGY_REGULATORY_REPORTING_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your compliance
+     tracker), or replace _fetch_collection() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_work_item() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (authority,
+     quality scores) are where you wire your filing systems.
+
+OPERATIONS
+  report_status | data_validation | submission_tracker | audit_readiness
+  | emissions_summary | generate_regulatory_report | prepare_epa_submission
+  kwargs: operation (required), report_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/energy_regulatory_reporting",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Energy Regulatory Reporting Agent",
-    "description": "Tracks EPA, FERC, and state report status, validates data, and preps dry-run submissions from built-in demo data.",
+    "description": "Tracks filing deadlines from live work items on a simulated Dynamics 365 tenant, with validation and audit prep that work offline.",
     "author": "AIBAST",
     "tags": ["regulatory", "reporting", "epa", "ferc", "audit", "compliance", "energy"],
     "category": "energy",
@@ -32,7 +59,79 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ENERGY_REGULATORY_REPORTING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your compliance-tracker client.
+# Downstream code only needs the fields produced by
+# _normalize_live_work_item().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "ENERGY_REGULATORY_REPORTING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_work_item(row):
+    """Project a Dynamics task onto the reporting work-item shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a Dynamics task is reinterpreted as a regulatory reporting
+    work item and its scheduled end is the filing deadline."""
+    state = row.get("statecode")
+    deadline = str(row.get("scheduledend", ""))[:10]
+    overdue = False
+    if state == 0 and deadline:
+        try:
+            due = datetime.fromisoformat(deadline).replace(tzinfo=timezone.utc)
+            overdue = due < datetime.now(timezone.utc)
+        except ValueError:
+            pass
+    return {
+        "name": row.get("subject", "untitled"),
+        "regarding": row.get("regardingobjectidname", ""),
+        "authority": None,   # enrichment seam — wire your filing systems
+        "deadline": deadline or "n/a",
+        "status": {0: "overdue" if overdue else "open",
+                   1: "completed", 2: "canceled"}.get(state, "unknown"),
+        "owner": row.get("owneridname", ""),
+        "_live": True,
+    }
+
+
+def _live_work_items():
+    """Live tenant reporting work items, open first; [] when offline."""
+    items = [_normalize_live_work_item(t) for t in _fetch_collection("tasks")]
+    items.sort(key=lambda x: (x["status"] in ("completed", "canceled"), x["deadline"]))
+    return items
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 REGULATORY_REPORTS = {
@@ -329,9 +428,35 @@ class RegulatoryReportingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _submission_tracker(self) -> str:
+        live = _live_work_items()
+        if live:
+            open_items = [i for i in live if i["status"] in ("open", "overdue")]
+            overdue = [i for i in live if i["status"] == "overdue"]
+            lines = [
+                "# Submission Tracker (live tenant data)",
+                "",
+                f"**Reporting work items:** {len(live)} | "
+                f"**Open:** {len(open_items)} | **Overdue:** {len(overdue)}",
+                "",
+                "| Work Item | Regarding | Authority | Deadline | Status | Owner |",
+                "|-----------|-----------|-----------|----------|--------|-------|",
+            ]
+            for s in live[:15]:
+                lines.append(
+                    f"| {s['name']} | {s['regarding']} | n/a — enrichment seam "
+                    f"| {s['deadline']} | {s['status'].upper()} | {s['owner']} |"
+                )
+            if len(live) > 15:
+                lines.append(f"| ... and {len(live) - 15} more | | | | | |")
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (tasks). A task is "
+                         "reinterpreted as a reporting work item; overdue status is real "
+                         "clock math against its scheduled end._")
+            return "\n".join(lines)
+
         data = _submission_tracker()
         lines = [
-            "# Submission Tracker",
+            "# Submission Tracker (embedded demo data — offline)",
             "",
             "| Report | Authority | Deadline | Status | Last Updated |",
             "|--------|-----------|----------|--------|-------------|",
@@ -450,7 +575,13 @@ class RegulatoryReportingAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = RegulatoryReportingAgent()
-    for op in ["report_status", "data_validation", "submission_tracker", "audit_readiness"]:
+    print("=" * 60)
+    print("LIVE TENANT WORK ITEMS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="submission_tracker"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO FILINGS (works offline)")
+    for op in ["report_status", "data_validation", "audit_readiness"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

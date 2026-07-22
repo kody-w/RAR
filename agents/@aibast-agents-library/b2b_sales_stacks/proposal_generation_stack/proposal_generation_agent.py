@@ -1,10 +1,36 @@
 """
-Proposal Generation Agent
+Proposal Generation Agent — a template you are meant to mutate.
 
 Analyzes RFPs, generates executive summaries, builds solution pricing,
-selects references, assembles proposal packages, and computes win probability.
-Uses synthetic data for CRM, product catalog, reference database, and
-competitive intelligence so the agent runs anywhere without credentials.
+selects references, assembles proposal packages, and computes win
+probability.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM quotes and opportunities over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from anywhere).
+     In this template a Dynamics QUOTE is treated as the RFP/proposal
+     snapshot for its account:
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="analyze_rfp",
+                  rfp_name="Juniper Ridge Furnishings")
+  2. No network? Everything falls back to the embedded demo layer below
+     (_RFPS / _PRODUCT_CATALOG / _REFERENCES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PROPOSAL_GENERATION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_rfp(). Requirement
+     extraction, cost/margin models, and competitor shortlists are
+     enrichment seams — wire your RFP parser, pricing engine, and
+     competitive intel there.
+
+OPERATIONS
+  analyze_rfp | executive_summary | solution_pricing
+  | references_positioning | compile_proposal | delivery_summary
+  | deliver_proposal
+  kwargs: operation (required), rfp_name, rfp_id (deliver_proposal)
 """
 
 import sys, os
@@ -12,7 +38,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
-from datetime import datetime, timedelta
+import urllib.request
+from datetime import datetime, timedelta, timezone
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -20,9 +47,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/proposal_generation",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Proposal Generation",
-    "description": "Analyzes RFPs and assembles proposal packages with pricing, references, and win probability from built-in demo data.",
+    "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "proposal", "rfp", "pricing", "competitive-positioning"],
     "category": "b2b_sales",
@@ -33,7 +60,105 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). In this template a Dynamics QUOTE stands in for an
+# RFP/proposal snapshot. To hook your own world, either:
+#   export PROPOSAL_GENERATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_rfp().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PROPOSAL_GENERATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_rfp(quote, opp):
+    """Project a Dynamics quote (+ its opportunity) onto the RFP shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet. In this template a quote is reinterpreted as the RFP/proposal
+    snapshot; requirement extraction is an enrichment seam (wire your RFP
+    parser), and competitor shortlists come from your competitive intel."""
+    account = quote.get("customeridname", "Unknown")
+    opp = opp or {}
+    project = (opp.get("name") or quote.get("name") or account)
+    if "—" in project:
+        project = project.split("—", 1)[1].strip()
+    quote_total = float(quote.get("totalamount") or 0)
+    quote_list = float(quote.get("totallineitemamount") or 0) or quote_total
+    deal_value = int(float(opp.get("estimatedvalue") or 0) or quote_total)
+    try:
+        close = datetime.fromisoformat(str(opp.get("estimatedclosedate", "")).replace("Z", "+00:00"))
+        timeline_days = max(0, (close - datetime.now(timezone.utc)).days)
+    except (ValueError, TypeError):
+        timeline_days = 0
+    return {
+        "id": quote.get("quotenumber", "QUO-?"),
+        "account": account,
+        "industry": "Unknown",  # enrichment seam — wire firmographics
+        "deal_value": deal_value,
+        "budget_ceiling": int(quote_total) or deal_value,
+        "project": project,
+        "decision_timeline_days": timeline_days,
+        "key_stakeholder": opp.get("parentcontactidname") or "n/a — enrichment seam",
+        "competitors_shortlisted": [],  # enrichment seam — wire Crayon/Klue
+        "requirements": [
+            {"id": "R1", "text": project, "category": "Business", "weight": 1.0},
+        ],
+        "existing_assets": ["n/a — enrichment seam (wire your content library)"],
+        "quote_total": quote_total,
+        "quote_list": quote_list,
+        "quote_status": quote.get("statecode@OData.Community.Display.V1.FormattedValue", ""),
+        "_live": True,
+    }
+
+
+def _live_rfp_roster():
+    """Account-name-keyed dict of live quotes-as-RFPs; {} when offline."""
+    quotes = _fetch_collection("quotes")
+    if not quotes:
+        return {}
+    opps_by_name = {o.get("name"): o for o in _fetch_collection("opportunities")}
+    roster = {}
+    for q in quotes:
+        account = q.get("customeridname")
+        if not account:
+            continue
+        opp = opps_by_name.get(q.get("opportunityidname"))
+        roster.setdefault(account.lower(), _normalize_live_rfp(q, opp))
+    return roster
+
+
+def _pct(value):
+    """None = not knowable without your cost model (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else f"{value}%"
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # Stands in for CRM, Product Catalog, Reference DB, Competitive Intel
 # ═══════════════════════════════════════════════════════════════
 
@@ -189,14 +314,26 @@ _IMPL_PHASES = [
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_rfp(query):
-    """Fuzzy-match an RFP or account name to synthetic data."""
+    """Fuzzy-match an RFP or account name — embedded demo RFPs first,
+    then the live tenant quote roster."""
     if not query:
         return "meridian"
     q = query.lower().strip()
     for key in _RFPS:
         if key in q or q in _RFPS[key]["account"].lower():
             return key
+    live = _live_rfp_roster()
+    for key in live:
+        if key in q or q in key:
+            return key
     return "meridian"
+
+
+def _get_rfp(key):
+    """Unified lookup: embedded demo RFPs first, then live tenant quotes."""
+    if key in _RFPS:
+        return _RFPS[key]
+    return _live_rfp_roster().get(key) or _RFPS["meridian"]
 
 
 def _match_capabilities(rfp):
@@ -241,7 +378,25 @@ def _match_capabilities(rfp):
 
 
 def _compute_pricing(rfp):
-    """Build solution pricing with discounts, savings, and margin analysis."""
+    """Build solution pricing with discounts, savings, and margin analysis.
+    For LIVE quotes the real quote totals are used; margin is None because
+    the CRM alone has no cost model (enrichment seam)."""
+    if rfp.get("_live"):
+        total_list = int(rfp["quote_list"])
+        total_proposed = int(rfp["quote_total"])
+        discount_pct = (round((1 - total_proposed / total_list) * 100, 1)
+                        if total_list else 0.0)
+        return {
+            "line_items": [],
+            "total_list": total_list,
+            "total_proposed": total_proposed,
+            "total_savings": max(0, total_list - total_proposed),
+            "overall_discount_pct": max(0.0, discount_pct),
+            "overall_margin_pct": None,  # enrichment seam — wire your cost model
+            "budget_ceiling": rfp["budget_ceiling"],
+            "within_budget": total_proposed <= rfp["budget_ceiling"],
+            "budget_headroom": rfp["budget_ceiling"] - total_proposed,
+        }
     industry = rfp["industry"]
     components = _SOLUTION_CONFIGS.get(industry, _SOLUTION_CONFIGS["Technology"])
     budget = rfp["budget_ceiling"]
@@ -439,7 +594,7 @@ class ProposalGenerationAgent(BasicAgent):
                 "message": f"Unknown rfp_id: {rfp_id!r}",
                 "valid_rfp_ids": ", ".join(sorted(_RFP_KEYS_BY_ID)),
             })
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         matches, overall = _match_capabilities(rfp)
         pricing = _compute_pricing(rfp)
         win_probability, _ = _compute_win_probability(rfp, overall, pricing)
@@ -460,7 +615,7 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── analyze_rfp ────────────────────────────────────────────
     def _analyze_rfp(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         matches, overall = _match_capabilities(rfp)
 
         req_table = "| ID | Requirement | Category | Weight | Fit Score | Evidence |\n|---|---|---|---|---|---|\n"
@@ -472,8 +627,13 @@ class ProposalGenerationAgent(BasicAgent):
 
         assets = "\n".join(f"- {a}" for a in rfp["existing_assets"])
 
+        live_note = ("\n_LIVE tenant record (Static Dynamics 365): a Dynamics quote is "
+                     "treated as the RFP snapshot; requirement extraction is an "
+                     "enrichment seam — wire your RFP parser at the LIVE DATA SEAM._\n"
+                     if rfp.get("_live") else "")
         return (
-            f"**RFP Analysis: {rfp['account']} -- {rfp['project']}**\n\n"
+            f"**RFP Analysis: {rfp['account']} -- {rfp['project']}**\n"
+            f"{live_note}\n"
             f"| Detail | Information |\n|---|---|\n"
             f"| RFP ID | {rfp['id']} |\n"
             f"| Account | {rfp['account']} |\n"
@@ -490,7 +650,7 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── executive_summary ──────────────────────────────────────
     def _executive_summary(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         matches, overall = _match_capabilities(rfp)
         pricing = _compute_pricing(rfp)
 
@@ -513,7 +673,7 @@ class ProposalGenerationAgent(BasicAgent):
             f"**Capability Match:** {overall}% overall fit score\n"
             f"**Pricing:** ${pricing['total_proposed']:,} total ({budget_status}, "
             f"${abs(headroom):,} {'under' if headroom >= 0 else 'over'} ceiling)\n"
-            f"**Margin:** {pricing['overall_margin_pct']}% gross margin maintained\n"
+            f"**Margin:** {_pct(pricing['overall_margin_pct'])} gross margin\n"
             f"{ref_line}\n"
             f"**Personalization Applied:**\n"
             f"- Tailored to {rfp['key_stakeholder']}'s priorities\n"
@@ -525,8 +685,26 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── solution_pricing ───────────────────────────────────────
     def _solution_pricing(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         pricing = _compute_pricing(rfp)
+
+        if rfp.get("_live"):
+            return (
+                f"**Solution & Pricing: {rfp['account']}** — LIVE quote snapshot "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"| Metric | Value |\n|---|---|\n"
+                f"| Quote | {rfp['id']} ({rfp['quote_status']}) |\n"
+                f"| Line-item total | ${pricing['total_list']:,} |\n"
+                f"| Quoted total | ${pricing['total_proposed']:,} |\n"
+                f"| Discount | {pricing['overall_discount_pct']}% |\n"
+                f"| Gross margin | {_pct(pricing['overall_margin_pct'])} |\n\n"
+                f"Component-level pricing and the implementation plan are "
+                f"enrichment seams — wire your CPQ / pricing engine at the "
+                f"LIVE DATA SEAM. The embedded demo RFPs show the full "
+                f"phased pricing renderer.\n\n"
+                f"Source: [Live Dynamics 365 quotes]\n"
+                f"Agents: PricingOptimizationAgent"
+            )
 
         # Implementation phases
         phase_lines = ""
@@ -568,7 +746,7 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── references_positioning ─────────────────────────────────
     def _references_positioning(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         refs = _score_references(rfp["industry"])
         comp_keys = rfp["competitors_shortlisted"]
         matrix = _build_differentiator_matrix(comp_keys)
@@ -610,7 +788,7 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── compile_proposal ───────────────────────────────────────
     def _compile_proposal(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         pricing = _compute_pricing(rfp)
         matches, overall = _match_capabilities(rfp)
         refs = _score_references(rfp["industry"])
@@ -651,7 +829,7 @@ class ProposalGenerationAgent(BasicAgent):
             f"- Reference contact sheet ({num_refs} contacts)\n\n"
             f"**Pre-Delivery Checklist:**\n"
             f"- Legal review: Approved\n"
-            f"- Pricing approval: Confirmed (margin {pricing['overall_margin_pct']}% > 35% floor)\n"
+            f"- Pricing approval: margin {_pct(pricing['overall_margin_pct'])} (floor: 35%)\n"
             f"- Branding: Compliant\n"
             f"- Requirement coverage: {overall}% fit verified\n"
             f"- Spell check: Complete\n\n"
@@ -661,7 +839,7 @@ class ProposalGenerationAgent(BasicAgent):
 
     # ── delivery_summary ───────────────────────────────────────
     def _delivery_summary(self, key):
-        rfp = _RFPS[key]
+        rfp = _get_rfp(key)
         matches, overall = _match_capabilities(rfp)
         pricing = _compute_pricing(rfp)
         refs = _score_references(rfp["industry"])
@@ -680,7 +858,7 @@ class ProposalGenerationAgent(BasicAgent):
             f"| Capability match | {overall}% fit to {len(rfp['requirements'])} requirements |\n"
             f"| Executive summary | Personalized to {rfp['key_stakeholder']} |\n"
             f"| Solution | {_OUR_CAPABILITIES['impl_weeks']}-week implementation plan |\n"
-            f"| Pricing | ${pricing['total_proposed']:,} ({pricing['overall_discount_pct']}% discount, {pricing['overall_margin_pct']}% margin) |\n"
+            f"| Pricing | ${pricing['total_proposed']:,} ({pricing['overall_discount_pct']}% discount, {_pct(pricing['overall_margin_pct'])} margin) |\n"
             f"| References | {len(refs)} {rfp['industry']}-specific, contact-ready |\n"
             f"| Compliance | {', '.join(_OUR_CAPABILITIES['certifications'][:3])} included |\n\n"
             f"**Win Probability: {win_pct}%**\n\n{factor_table}\n"
@@ -702,8 +880,16 @@ class ProposalGenerationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProposalGenerationAgent()
-    for op in ["analyze_rfp", "executive_summary", "solution_pricing",
-               "references_positioning", "compile_proposal", "delivery_summary"]:
-        print("=" * 70)
-        print(agent.perform(operation=op, rfp_name="Meridian Healthcare"))
-        print()
+    print("=" * 70)
+    print("EMBEDDED DEMO RFP (works offline)")
+    print(agent.perform(operation="analyze_rfp", rfp_name="Meridian Healthcare"))
+    print()
+    print("=" * 70)
+    print("LIVE TENANT QUOTE-AS-RFP (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="analyze_rfp", rfp_name="Juniper Ridge Furnishings"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="solution_pricing", rfp_name="Juniper Ridge Furnishings"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="delivery_summary", rfp_name="Meridian Healthcare"))

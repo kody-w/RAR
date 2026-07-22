@@ -1,15 +1,36 @@
 """
-AI Customer Assistant Agent
+AI Customer Assistant Agent — a template you are meant to mutate.
 
 AI-powered customer service assistant handling inquiries, knowledge base
-searches, escalation routing, and satisfaction surveys.
+searches, escalation routing, and satisfaction surveys. In this template a
+customer inquiry is represented as a Dynamics 365 case — the live tenant's
+service queue stands in for your ticketing system.
 
-Where a real deployment would connect to CRM, knowledge base, and ticketing
-systems, this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `handle_inquiry` operation resolves live
+     case records over real HTTP from the globally hosted Static Dynamics
+     365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="handle_inquiry",
+                  inquiry_id="disputed card transaction")
+     to pull Bluegrass Credit Union's live case.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_INQUIRIES / _KB_ARTICLES) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     AI_CUSTOMER_ASSISTANT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from Zendesk/ServiceNow), or
+     replace _fetch_collection() with your own client. The fields the
+     rest of the file needs are listed in _normalize_live_inquiry() —
+     fields rendered "n/a — enrichment seam" (email, account tier,
+     sentiment) are where you wire your CRM and sentiment model.
 
-Version 1.1.0 adds deterministic customer-escalation briefing, action planning,
-customer-update drafting, and portfolio reporting. Existing operations and
-agent identities remain unchanged.
+OPERATIONS
+  handle_inquiry | knowledge_search | escalation_routing
+  | satisfaction_survey | escalation_brief | escalation_action_plan
+  | draft_customer_update | escalation_dashboard
+  | resolution_recommendation | process_resolution | document_resolution
+  kwargs: operation (required), inquiry_id
 """
 
 import sys, os
@@ -17,6 +38,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 from datetime import datetime, timedelta
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -24,9 +47,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ai_customer_assistant",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "AI Customer Assistant",
-    "description": "Handles customer service inquiries, knowledge search, escalation briefs, and resolution tracking using built-in demo data.",
+    "description": "Handles customer inquiries and escalations from a live simulated Dynamics 365 tenant (cases as tickets), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["customer-service", "support", "knowledge-base", "escalation", "satisfaction", "case-management", "action-plan"],
     "category": "general",
@@ -37,7 +60,86 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export AI_CUSTOMER_ASSISTANT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ticketing client. Downstream
+# code only needs the fields produced by _normalize_live_inquiry().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "AI_CUSTOMER_ASSISTANT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_inquiry(row):
+    """Project a Dynamics case onto the inquiry shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it as an enrichment seam."""
+    priority = {1: "High", 2: "Medium", 3: "Low"}.get(row.get("prioritycode"), "Medium")
+    status = {0: "Open", 1: "Resolved", 2: "Canceled"}.get(row.get("statecode"), "Open")
+    return {
+        "id": f"INQ-{str(row.get('incidentid', ''))[:8].upper()}",
+        "customer": row.get("customeridname", "Unknown"),
+        "contact": row.get("primarycontactidname") or row.get("customeridname", ""),
+        "email": None,          # enrichment seam — wire your CRM contact record
+        "channel": row.get("caseorigincode@OData.Community.Display.V1.FormattedValue", "Unknown"),
+        "subject": row.get("title", "untitled"),
+        "description": row.get("description", ""),
+        "category": row.get("casetypecode@OData.Community.Display.V1.FormattedValue", "Technical Issue"),
+        "priority": priority,
+        "created_at": str(row.get("createdon", "")),
+        "status": status,
+        "account_tier": None,   # enrichment seam — wire your billing system
+        "sentiment": None,      # enrichment seam — wire your sentiment model
+        "_live": True,
+    }
+
+
+def _live_inquiries():
+    """id-keyed dict of live tenant inquiries (cases); {} when offline."""
+    rows = _fetch_collection("incidents")
+    if not rows:
+        return {}
+    result = {}
+    for row in rows:
+        if row.get("incidentid"):
+            inquiry = _normalize_live_inquiry(row)
+            result[inquiry["id"]] = inquiry
+    return result
+
+
+def _seam(value):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else str(value)
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _INQUIRIES = {
@@ -239,14 +341,32 @@ _ESCALATION_CONTEXT = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_inquiry(query):
+    """Embedded demo inquiries first, then the live tenant case queue
+    (by live id or by a title substring, e.g. 'disputed card')."""
     if not query:
         return "INQ-4001"
     q = query.upper().strip()
-    return q if q in _INQUIRIES else None
+    if q in _INQUIRIES:
+        return q
+    live = _live_inquiries()
+    if q in live:
+        return q
+    matches = [
+        key for key, inq in live.items()
+        if query.lower().strip() in inq["subject"].lower()
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _get_inquiry(inq_id):
+    """Unified lookup: embedded demo inquiries first, then live tenant."""
+    if inq_id in _INQUIRIES:
+        return _INQUIRIES[inq_id]
+    return _live_inquiries().get(inq_id) or _INQUIRIES["INQ-4001"]
 
 
 def _match_kb_articles(inquiry_id):
-    inq = _INQUIRIES.get(inquiry_id, {})
+    inq = _get_inquiry(inquiry_id) if inquiry_id else {}
     subject = inq.get("subject", "").lower()
     matched = []
     for kb_id, article in _KB_ARTICLES.items():
@@ -373,20 +493,24 @@ class AICustomerAssistantAgent(BasicAgent):
 
     # ── handle_inquiry ─────────────────────────────────────────
     def _handle_inquiry(self, inq_id):
-        inq = _INQUIRIES[inq_id]
+        inq = _get_inquiry(inq_id)
         kb_matches = _match_kb_articles(inq_id)
         routing = _get_routing(inq["category"], inq["priority"])
         top_kb = kb_matches[0] if kb_matches else None
         kb_line = f"- Suggested Article: [{top_kb['id']}] {top_kb['title']} (relevance: {top_kb['relevance_score']:.0%})" if top_kb else "- No matching articles found"
+        source = (
+            "live Static Dynamics 365 tenant (case reinterpreted as inquiry)"
+            if inq.get("_live") else "embedded demo layer (offline fallback)"
+        )
         return (
             f"**Customer Inquiry: {inq['id']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
-            f"| Customer | {inq['customer']} ({inq['account_tier']}) |\n"
+            f"| Customer | {inq['customer']} ({_seam(inq['account_tier'])}) |\n"
             f"| Contact | {inq['contact']} |\n"
             f"| Channel | {inq['channel']} |\n"
             f"| Category | {inq['category']} |\n"
             f"| Priority | {inq['priority']} |\n"
-            f"| Sentiment | {inq['sentiment']} |\n\n"
+            f"| Sentiment | {_seam(inq['sentiment'])} |\n\n"
             f"**Subject:** {inq['subject']}\n\n"
             f"**Description:** {inq['description']}\n\n"
             f"**Recommended Response:**\n"
@@ -394,13 +518,13 @@ class AICustomerAssistantAgent(BasicAgent):
             f"- Assigned Team: {routing['team']}\n"
             f"- SLA Target: {routing['sla_hours']} hours\n"
             f"- Auto-Escalate: {'Yes' if routing['auto_escalate'] else 'No'}\n\n"
-            f"Source: [CRM + Knowledge Base + Ticketing System]\nAgents: AICustomerAssistantAgent"
+            f"Source: [{source}]\nAgents: AICustomerAssistantAgent"
         )
 
     # ── knowledge_search ───────────────────────────────────────
     def _knowledge_search(self, inq_id):
         articles = _match_kb_articles(inq_id)
-        inq = _INQUIRIES[inq_id]
+        inq = _get_inquiry(inq_id)
         rows = ""
         for a in articles:
             rows += f"| {a['id']} | {a['title']} | {a['relevance_score']:.0%} | {a['views']:,} |\n"
@@ -423,7 +547,7 @@ class AICustomerAssistantAgent(BasicAgent):
 
     # ── escalation_routing ─────────────────────────────────────
     def _escalation_routing(self, inq_id):
-        inq = _INQUIRIES[inq_id]
+        inq = _get_inquiry(inq_id)
         routing = _get_routing(inq["category"], inq["priority"])
         all_routes = []
         for cat, priorities in _ROUTING_RULES.items():
@@ -471,7 +595,7 @@ class AICustomerAssistantAgent(BasicAgent):
         )
 
     def _escalation_brief(self, inq_id):
-        inq = _INQUIRIES[inq_id]
+        inq = _get_inquiry(inq_id)
         ctx = _ESCALATION_CONTEXT[inq_id]
         kb = _match_kb_articles(inq_id)[0]
         routing = _get_routing(inq["category"], inq["priority"])
@@ -520,7 +644,7 @@ class AICustomerAssistantAgent(BasicAgent):
         )
 
     def _draft_customer_update(self, inq_id):
-        inq = _INQUIRIES[inq_id]
+        inq = _get_inquiry(inq_id)
         ctx = _ESCALATION_CONTEXT[inq_id]
         first_action = ctx["actions"][0][0]
         return (
@@ -607,8 +731,22 @@ class AICustomerAssistantAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = AICustomerAssistantAgent()
+    print("=" * 60)
+    print("EMBEDDED DEMO INQUIRY (works offline)")
+    print(agent.perform(operation="handle_inquiry", inquiry_id="INQ-4001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT INQUIRY (case fetched over HTTP; falls back offline)")
+    live_result = agent.perform(
+        operation="handle_inquiry", inquiry_id="disputed card transaction"
+    )
+    if live_result.startswith("**Error:"):
+        print("(offline — live tenant unreachable, embedded demo shown above)")
+    else:
+        print(live_result)
+    print()
     for op in [
-        "handle_inquiry", "knowledge_search", "escalation_routing",
+        "knowledge_search", "escalation_routing",
         "satisfaction_survey", "escalation_brief", "escalation_action_plan",
         "draft_customer_update", "escalation_dashboard",
         "resolution_recommendation", "process_resolution",

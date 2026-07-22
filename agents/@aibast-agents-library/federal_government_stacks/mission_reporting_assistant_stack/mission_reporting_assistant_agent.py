@@ -1,8 +1,36 @@
 """
-Mission Reporting Assistant Agent — Federal Government Stack
+Mission Reporting Assistant Agent — a template you are meant to mutate.
 
 Generates mission summaries, KPI dashboards, stakeholder briefs, and
 trend analyses for federal program and mission managers.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live operational records over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template mission KPIs are computed from real service
+     records — case resolution rate, backlog, first-response coverage,
+     and task completion — across the tenant's 38 cases and 36 tasks
+     (including CAS-260131, a records-request backlog past its
+     statutory deadline).
+     Try: perform(operation="kpi_dashboard")
+  2. No network? Everything falls back to the embedded demo layer below
+     (MISSION_OBJECTIVES / KPIS / STAKEHOLDERS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     MISSION_REPORTING_ASSISTANT_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your performance
+     system), or replace _fetch_collection() with your own API client.
+     The KPI shape the rest of the file needs is listed in
+     _normalize_live_kpis() — everything else keeps working untouched.
+     Fields marked "enrichment seam" in the output (targets, trends)
+     are where you wire your strategic-planning system.
+
+OPERATIONS
+  mission_summary | kpi_dashboard | stakeholder_brief | trend_analysis
+  kwargs: operation (required), mission_id, stakeholder_id
 """
 
 import sys
@@ -10,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/mission_reporting_assistant",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Mission Reporting Assistant Agent",
-    "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses from built-in demo program data.",
+    "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
     "author": "AIBAST",
     "tags": ["mission", "reporting", "KPI", "stakeholder", "federal", "dashboard"],
     "category": "federal_government",
@@ -26,7 +56,73 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export MISSION_REPORTING_ASSISTANT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your performance-system client.
+# Downstream code only needs the KPI shape produced by
+# _normalize_live_kpis().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "MISSION_REPORTING_ASSISTANT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_kpis(incidents, tasks):
+    """Compute mission KPIs from live service records. THIS is the
+    contract your replacement data source must meet — a list of dicts
+    with these keys (name, current, target, unit, trend). Current values
+    are real math over live records; None means 'not available from CRM
+    alone' (targets and trends live in your strategic-planning system —
+    an enrichment seam)."""
+    kpis = []
+    if incidents:
+        resolved = sum(1 for i in incidents if i.get("statecode") == 1)
+        open_cases = sum(1 for i in incidents if i.get("statecode") == 0)
+        responded = sum(1 for i in incidents if i.get("firstresponsesenton"))
+        kpis.append({"name": "Case Resolution Rate",
+                     "current": round(resolved / len(incidents) * 100, 1),
+                     "target": None, "unit": "%", "trend": None})
+        kpis.append({"name": "Open Case Backlog",
+                     "current": open_cases,
+                     "target": None, "unit": "cases", "trend": None})
+        kpis.append({"name": "First Response Coverage",
+                     "current": round(responded / len(incidents) * 100, 1),
+                     "target": None, "unit": "%", "trend": None})
+    if tasks:
+        completed = sum(1 for t in tasks if t.get("statecode") == 1)
+        kpis.append({"name": "Task Completion Rate",
+                     "current": round(completed / len(tasks) * 100, 1),
+                     "target": None, "unit": "%", "trend": None})
+    return kpis
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 MISSION_OBJECTIVES = {
@@ -205,7 +301,27 @@ class MissionReportingAssistantAgent(BasicAgent):
         return "\n".join(lines)
 
     def _kpi_dashboard(self, **kwargs) -> str:
-        lines = ["# KPI Dashboard\n"]
+        incidents = _fetch_collection("incidents")
+        if incidents:
+            tasks = _fetch_collection("tasks")
+            live = _normalize_live_kpis(incidents, tasks)
+            lines = ["# KPI Dashboard (live tenant data)\n"]
+            lines.append(f"Computed from {len(incidents)} live cases and {len(tasks)} live tasks.\n")
+            lines.append("| KPI | Current | Target | Unit | Trend | Status |")
+            lines.append("|---|---|---|---|---|---|")
+            for kpi in live:
+                lines.append(
+                    f"| {kpi['name']} | {kpi['current']} "
+                    f"| n/a — enrichment seam | {kpi['unit']} "
+                    f"| n/a — enrichment seam | measured |"
+                )
+            lines.append("\n_Source: live Static Dynamics 365 tenant (incidents + tasks). "
+                         "Current values are real math over live records; targets and "
+                         "trends are enrichment seams — wire your strategic-planning "
+                         "system._")
+            return "\n".join(lines)
+
+        lines = ["# KPI Dashboard (embedded demo data — offline)\n"]
         lines.append("| KPI ID | Name | Mission | Current | Target | Unit | Trend | Status |")
         lines.append("|---|---|---|---|---|---|---|---|")
         for kid, kpi in KPIS.items():
@@ -276,10 +392,14 @@ class MissionReportingAssistantAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = MissionReportingAssistantAgent()
-    print(agent.perform(operation="mission_summary"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("LIVE TENANT KPIs (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="kpi_dashboard"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO MISSIONS (works offline)")
+    print(agent.perform(operation="mission_summary"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="stakeholder_brief"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="trend_analysis"))

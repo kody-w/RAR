@@ -1,13 +1,33 @@
 """
-Account Intelligence Agent
+Account Intelligence Agent — a template you are meant to mutate.
 
-Surfaces org charts, news, stakeholder interests, competitive positioning,
-and deal risk assessment for enterprise accounts. Produces executive-ready
-briefing documents from CRM, enrichment, and engagement data.
+Surfaces account overviews, stakeholder maps, competitive positioning, and
+deal risk assessment for enterprise accounts, producing executive-ready
+briefings.
 
-Where a real deployment would call Salesforce/D365, LinkedIn Sales Navigator,
-ZoomInfo, etc., this agent uses a synthetic data layer so it runs anywhere
-without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="account_overview",
+                  account_name="Granite Peak Manufacturing")
+  2. No network? Everything falls back to the embedded demo layer below
+     (_ACCOUNTS / _STAKEHOLDERS / _COMPETITORS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ACCOUNT_INTELLIGENCE_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with calls into your own API. Fields the rest of
+     the file needs are listed in _normalize_live_account() — everything
+     else keeps working untouched. Fields marked "enrichment seam" in the
+     output (revenue, employees, spend) are where you wire ZoomInfo, D&B,
+     or your finance system.
+
+OPERATIONS
+  account_overview | stakeholder_map | competitive_intel | value_messaging
+  | risk_assessment | executive_briefing | share_briefing
+  kwargs: operation (required), account_name, account_id (share_briefing)
 """
 
 import sys, os
@@ -15,7 +35,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
-from datetime import datetime, timedelta
+import urllib.request
+from datetime import datetime, timedelta, timezone
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -23,9 +44,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_intelligence",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Account Intelligence",
-    "description": "Generates 360-degree account briefings, stakeholder maps, competitive intel, and deal risk reports from synthetic CRM demo data.",
+    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "account-intelligence", "stakeholder-mapping", "competitive-intel"],
     "category": "b2b_sales",
@@ -36,8 +57,121 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
-# Stands in for CRM, LinkedIn, ZoomInfo, D&B, etc.
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ACCOUNT_INTELLIGENCE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_account().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "ACCOUNT_INTELLIGENCE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_account(row, opportunities, incidents):
+    """Project a Dynamics account record onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from CRM alone' and the
+    renderers label it as an enrichment seam."""
+    name = row.get("name", "Unknown")
+    open_opp_value = sum(
+        float(o.get("estimatedvalue") or 0)
+        for o in opportunities
+        if o.get("parentaccountidname") == name and o.get("statecode") == 0
+    )
+    open_cases = [
+        i for i in incidents
+        if i.get("customeridname") == name and i.get("statecode") == 0
+    ]
+    resolved_cases = [
+        i for i in incidents
+        if i.get("customeridname") == name and i.get("statecode") == 1
+    ]
+    news = [
+        {"headline": f"Open case: {c.get('title', 'untitled')}",
+         "age_days": _age_days(c.get("createdon"))}
+        for c in open_cases[:4]
+    ] + [
+        {"headline": f"Resolved: {c.get('title', 'untitled')}",
+         "age_days": _age_days(c.get("createdon"))}
+        for c in resolved_cases[:2]
+    ]
+    return {
+        "id": row.get("accountnumber", row.get("accountid", "")),
+        "name": name,
+        "industry": row.get("industrycode", "Unknown"),
+        "hq": f"{row.get('address1_city', '?')}, {row.get('address1_stateorprovince', '?')}",
+        "revenue": None,           # enrichment seam — wire D&B / your ERP
+        "employees": None,         # enrichment seam
+        "current_spend": None,     # enrichment seam — wire your billing system
+        "opportunity_value": int(open_opp_value),
+        "products_owned": [],
+        "contract_renewal": "n/a (wire your contract system)",
+        "recent_news": news or [{"headline": "No open cases on record", "age_days": 0}],
+        "_live": True,
+        "_owner": row.get("owneridname", ""),
+        "_open_cases": len(open_cases),
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_roster():
+    """name-keyed dict of live tenant accounts; {} when offline."""
+    rows = _fetch_collection("accounts")
+    if not rows:
+        return {}
+    opportunities = _fetch_collection("opportunities")
+    incidents = _fetch_collection("incidents")
+    return {
+        row["name"].lower(): _normalize_live_account(row, opportunities, incidents)
+        for row in rows
+        if row.get("name")
+    }
+
+
+def _money(value):
+    """None = the CRM alone can't know this (enrichment seam); 0 is real."""
+    return "n/a — enrichment seam" if value is None else f"${value:,}"
+
+
+def _num(value):
+    return "n/a — enrichment seam" if value is None else f"{value:,}"
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
+# Stands in for CRM, LinkedIn, ZoomInfo, D&B when there is no network.
 # ═══════════════════════════════════════════════════════════════
 
 _ACCOUNTS = {
@@ -152,13 +286,25 @@ def _resolve_account(query):
     for key in _ACCOUNTS:
         if key in q or q in _ACCOUNTS[key]["name"].lower():
             return key
+    # Not an embedded demo account — try the live tenant roster.
+    live = _live_roster()
+    for key in live:
+        if key in q or q in key:
+            return key
     return "acme"
+
+
+def _get_account(key):
+    """Unified lookup: embedded demo accounts first, then live tenant."""
+    if key in _ACCOUNTS:
+        return _ACCOUNTS[key]
+    return _live_roster().get(key) or _ACCOUNTS["acme"]
 
 
 def _health_score(key):
     """Compute account health from engagement signals."""
     stks = _STAKEHOLDERS.get(key, [])
-    acct = _ACCOUNTS[key]
+    acct = _get_account(key)
 
     total_meetings = sum(s["meetings"] for s in stks)
     positive_ratio = sum(1 for s in stks if s["sentiment"] == "Positive") / max(len(stks), 1)
@@ -209,7 +355,7 @@ def _deal_risks(key):
 def _value_messaging(key):
     """Generate stakeholder-specific talking points."""
     stks = _STAKEHOLDERS.get(key, [])
-    acct = _ACCOUNTS[key]
+    acct = _get_account(key)
     messaging = {}
     for s in stks:
         if s["influence"] not in ("Decision Maker", "Economic Buyer", "Champion"):
@@ -315,7 +461,7 @@ class AccountIntelligenceAgent(BasicAgent):
                 "valid_account_ids": valid_ids,
             })
 
-        account = _ACCOUNTS[key]
+        account = _get_account(key)
         health = _health_score(key)
         risks, win_probability = _deal_risks(key)
         receipt = {
@@ -334,18 +480,18 @@ class AccountIntelligenceAgent(BasicAgent):
 
     # ── account_overview ──────────────────────────────────────
     def _account_overview(self, key):
-        acct = _ACCOUNTS[key]
+        acct = _get_account(key)
         h = _health_score(key)
         news = "\n".join(f"- {n['headline']} ({n['age_days']} days ago)" for n in acct["recent_news"])
         return (
             f"**Account Overview: {acct['name']}**\n\n"
             f"| Attribute | Details |\n|---|---|\n"
             f"| Industry | {acct['industry']} |\n"
-            f"| Revenue | ${acct['revenue']:,} |\n"
-            f"| Employees | {acct['employees']:,} globally |\n"
+            f"| Revenue | {_money(acct['revenue'])} |\n"
+            f"| Employees | {_num(acct['employees'])} |\n"
             f"| HQ | {acct['hq']} |\n"
-            f"| Current spend | ${acct['current_spend']:,}/year |\n"
-            f"| Opportunity | ${acct['opportunity_value']:,} expansion |\n\n"
+            f"| Current spend | {_money(acct['current_spend'])} |\n"
+            f"| Opportunity | {_money(acct['opportunity_value'])} open pipeline |\n\n"
             f"**Account Health Score: {h['overall']}/100**\n"
             f"- Engagement: {h['engagement']}% ({h['touchpoints_30d']} touchpoints last 30 days)\n"
             f"- Product adoption: {h['adoption']}% feature utilization\n"
@@ -436,7 +582,7 @@ class AccountIntelligenceAgent(BasicAgent):
 
     # ── risk_assessment ───────────────────────────────────────
     def _risk_assessment(self, key):
-        acct = _ACCOUNTS[key]
+        acct = _get_account(key)
         risks, win_prob = _deal_risks(key)
         if not risks:
             return f"No significant risks identified for {acct['name']}. Win probability: {win_prob}%."
@@ -453,13 +599,13 @@ class AccountIntelligenceAgent(BasicAgent):
         return (
             f"**Deal Risk Assessment: {acct['name']}**\n\n{table}\n"
             f"**Win Probability:** {win_prob}%\n"
-            f"**Opportunity Value:** ${acct['opportunity_value']:,}\n"
+            f"**Opportunity Value:** {_money(acct['opportunity_value'])}\n"
             f"{actions}\nSource: [Deal Analytics + Risk Models]\nAgents: DealRiskAssessmentAgent"
         )
 
     # ── executive_briefing ────────────────────────────────────
     def _executive_briefing(self, key):
-        acct = _ACCOUNTS[key]
+        acct = _get_account(key)
         h = _health_score(key)
         risks, win_prob = _deal_risks(key)
         stks = _STAKEHOLDERS.get(key, [])
@@ -470,7 +616,7 @@ class AccountIntelligenceAgent(BasicAgent):
         return (
             f"**Account Intelligence Briefing: {acct['name']}**\n\n"
             f"**Opportunity Summary:**\n"
-            f"- Deal value: ${acct['opportunity_value']:,} (expansion from ${acct['current_spend']:,} current)\n"
+            f"- Deal value: {_money(acct['opportunity_value'])} (current spend {_money(acct['current_spend'])})\n"
             f"- Win probability: {win_prob}%\n"
             f"- Account health: {h['overall']}/100\n\n"
             f"| Analysis | Key Finding |\n|---|---|\n"
@@ -485,8 +631,13 @@ class AccountIntelligenceAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = AccountIntelligenceAgent()
-    for op in ["account_overview", "stakeholder_map", "competitive_intel",
-               "value_messaging", "risk_assessment", "executive_briefing"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, account_name="Acme Corporation"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO ACCOUNT (works offline)")
+    print(agent.perform(operation="account_overview", account_name="Acme Corporation"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT ACCOUNT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="account_overview", account_name="Granite Peak Manufacturing"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="executive_briefing", account_name="Acme Corporation"))

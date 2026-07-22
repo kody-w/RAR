@@ -1,17 +1,43 @@
 """
-Voice to CRM ServiceNow Agent
+Voice to CRM ServiceNow Agent — a template you are meant to mutate.
 
-Creates ServiceNow incidents from voice input, searches knowledge articles,
-routes assignments, and tracks status updates.
+Creates ServiceNow-style incidents from voice input, searches knowledge
+articles, routes assignments, and tracks status updates. In this
+template a Dynamics 365 CASE is read as the incident record — same
+triage shape, different label — until you point the seam at a real
+ServiceNow instance.
 
-Where a real deployment would connect to ServiceNow APIs, this agent uses
-a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live cases over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="status_update", incident_number="CAS-260128")
+     — the tenant's real seeded case "Substation feeder fault flagged
+     in telemetry export" (Prairie Wind Energy Cooperative, High).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_INCIDENTS / _KB_ARTICLES) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     VOICE_TO_CRM_SERVICENOW_DATA_URL to any OData-shaped endpoint, or
+     replace _fetch_collection() with a ServiceNow Table API client.
+     The fields the rest of the file needs are listed in
+     _normalize_live_incident() — assignment group, impact, and
+     urgency are labeled "n/a — enrichment seam"; wire your CMDB and
+     priority rules there.
+
+OPERATIONS
+  incident_create | knowledge_search | assignment_routing
+  | status_update
+  kwargs: operation (required), incident_number (embedded 'INC-20001'
+  or a live case number like 'CAS-260128')
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +45,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/voice_to_crm_servicenow",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Voice to CRM (ServiceNow)",
-    "description": "Simulates ServiceNow incident creation, knowledge search, routing, and status updates using built-in demo data.",
+    "description": "Tracks incidents over live cases from a simulated Dynamics 365 tenant with KB search, routing, and status updates; offline fallback.",
     "author": "AIBAST",
     "tags": ["servicenow", "itsm", "incidents", "knowledge-base", "routing"],
     "category": "general",
@@ -32,7 +58,100 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export VOICE_TO_CRM_SERVICENOW_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with a ServiceNow Table API client.
+# Downstream code only needs the fields produced by
+# _normalize_live_incident().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "VOICE_TO_CRM_SERVICENOW_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+# Dynamics case priority has no P1 tier, so the mapping is deliberately
+# conservative: High -> P2, Normal -> P3, Low -> P4.
+_PRIORITY_MAP = {"High": "P2-High", "Normal": "P3-Medium", "Low": "P4-Low"}
+
+
+def _normalize_live_incident(row):
+    """Project a Dynamics case record onto the ServiceNow incident shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not available from
+    the case alone' and renderers label it as an enrichment seam."""
+    priority = row.get("prioritycode@OData.Community.Display.V1.FormattedValue", "Normal")
+    return {
+        "number": row.get("ticketnumber", row.get("incidentid", "")),
+        "short_description": row.get("title", "Untitled case"),
+        "description": row.get("description", ""),
+        "category": row.get("casetypecode@OData.Community.Display.V1.FormattedValue", "Case"),
+        "subcategory": None,        # enrichment seam
+        "impact": None,             # enrichment seam — wire your priority rules
+        "urgency": None,            # enrichment seam
+        "priority": _PRIORITY_MAP.get(priority, "P3-Medium"),
+        "state": row.get("statuscode@OData.Community.Display.V1.FormattedValue", "Open"),
+        "assigned_to": row.get("owneridname", "unassigned"),
+        "assignment_group": None,   # enrichment seam — wire your CMDB
+        "caller": row.get("primarycontactidname") or row.get("customeridname", "Unknown"),
+        "opened_at": row.get("createdon", ""),
+        "sla_breach_at": row.get("resolveby") or "n/a",
+        "work_notes": "",
+        "_live": True,
+    }
+
+
+def _live_incidents():
+    """number-keyed dict of live OPEN tenant cases; {} when offline."""
+    rows = _fetch_collection("incidents")
+    return {
+        i["number"]: i
+        for i in (_normalize_live_incident(r) for r in rows if r.get("statecode") == 0)
+        if i["number"]
+    }
+
+
+def _resolve_incident(inc_num):
+    """Embedded demo incidents first, then live tenant cases.
+    Returns (incident, is_live)."""
+    if inc_num in _INCIDENTS:
+        return _INCIDENTS[inc_num], False
+    live = _live_incidents()
+    if inc_num in live:
+        return live[inc_num], True
+    return list(_INCIDENTS.values())[0], False
+
+
+def _na(value):
+    return "n/a — enrichment seam" if value is None else value
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _INCIDENTS = {
@@ -103,11 +222,19 @@ def _match_kb_article(category):
     return sorted(matches, key=lambda x: x["views"], reverse=True)
 
 
-def _incident_summary():
-    by_priority = {}
-    for inc in _INCIDENTS.values():
-        by_priority.setdefault(inc["priority"], []).append(inc)
-    return by_priority
+def _incident_queue():
+    """Live open cases when reachable, embedded demo incidents otherwise.
+    Returns (incidents_by_number, is_live)."""
+    live = _live_incidents()
+    if live:
+        return live, True
+    return _INCIDENTS, False
+
+
+def _queue_source_line(is_live):
+    if is_live:
+        return "Queue source: LIVE open cases from the Aster Lane Dynamics 365 tenant (read as incidents)"
+    return "Queue source: embedded demo layer (simulated — live tenant unreachable)"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -166,29 +293,38 @@ class VoiceToCRMServiceNowAgent(BasicAgent):
         return handler(inc_num)
 
     def _incident_create(self, inc_num):
+        queue, is_live = _incident_queue()
         rows = ""
-        for inc in _INCIDENTS.values():
-            rows += f"| {inc['number']} | {inc['short_description'][:40]} | {inc['priority']} | {inc['state']} | {inc['assignment_group']} |\n"
-        inc = _INCIDENTS.get(inc_num, list(_INCIDENTS.values())[0])
+        for inc in list(queue.values())[:12]:
+            rows += f"| {inc['number']} | {inc['short_description'][:40]} | {inc['priority']} | {inc['state']} | {_na(inc['assignment_group'])} |\n"
+        more = f"(showing 12 of {len(queue)})\n" if len(queue) > 12 else ""
+        inc, inc_is_live = _resolve_incident(inc_num)
+        impact = _na(inc["impact"])
+        urgency = _na(inc["urgency"])
+        detail_source = (
+            "LIVE case from the Aster Lane Dynamics 365 tenant" if inc_is_live
+            else "embedded demo layer (simulated)"
+        )
         return (
-            f"**ServiceNow Incidents**\n\n"
+            f"**Incident Queue**\n\n"
             f"| Number | Description | Priority | State | Group |\n|---|---|---|---|---|\n"
-            f"{rows}\n"
-            f"**Detail: {inc['number']}**\n\n"
+            f"{rows}{more}\n"
+            f"**Detail: {inc['number']}** ({detail_source})\n\n"
             f"| Field | Value |\n|---|---|\n"
             f"| Short Description | {inc['short_description']} |\n"
-            f"| Category | {inc['category']} / {inc['subcategory']} |\n"
-            f"| Priority | {inc['priority']} (Impact: {inc['impact']}, Urgency: {inc['urgency']}) |\n"
+            f"| Category | {inc['category']} / {_na(inc['subcategory'])} |\n"
+            f"| Priority | {inc['priority']} (Impact: {impact}, Urgency: {urgency}) |\n"
             f"| State | {inc['state']} |\n"
             f"| Assigned To | {inc['assigned_to']} |\n"
             f"| Caller | {inc['caller']} |\n"
             f"| SLA Breach | {inc['sla_breach_at']} |\n\n"
             f"**Description:** {inc['description']}\n\n"
-            f"Source: [ServiceNow Instance]\nAgents: VoiceToCRMServiceNowAgent"
+            f"{_queue_source_line(is_live)}\n"
+            f"Source: [Incident Queue + Live Dynamics 365 Tenant]\nAgents: VoiceToCRMServiceNowAgent"
         )
 
     def _knowledge_search(self, inc_num):
-        inc = _INCIDENTS.get(inc_num, list(_INCIDENTS.values())[0])
+        inc, is_live = _resolve_incident(inc_num)
         matches = _match_kb_article(inc["category"])
         kb_rows = ""
         for kb in matches:
@@ -199,15 +335,21 @@ class VoiceToCRMServiceNowAgent(BasicAgent):
         steps = ""
         if top:
             steps = "\n".join(f"{i+1}. {s}" for i, s in enumerate(top["resolution_steps"]))
+        else:
+            steps = (
+                f"No KB articles cover category \"{inc['category']}\" yet — the "
+                "embedded KB is demo data; wire your real knowledge base at the "
+                "LIVE DATA SEAM."
+            )
         return (
-            f"**Knowledge Search: {inc['category']}**\n\n"
+            f"**Knowledge Search: {inc['category']}** (KB library is embedded demo data — simulated)\n\n"
             f"For Incident: {inc['number']} - {inc['short_description'][:40]}\n\n"
             f"| Article | Title | Category | Rating | Views |\n|---|---|---|---|---|\n"
             f"{kb_rows}\n"
-            f"**Top Match: {top['title'] if top else 'N/A'}**\n\n"
+            f"**Top Match: {top['title'] if top else 'None'}**\n\n"
             f"**Resolution Steps:**\n{steps}\n\n"
-            f"Last Updated: {top['last_updated'] if top else 'N/A'}\n\n"
-            f"Source: [ServiceNow Knowledge Base]\nAgents: VoiceToCRMServiceNowAgent"
+            f"Last Updated: {top['last_updated'] if top else 'n/a'}\n\n"
+            f"Source: [Knowledge Base]\nAgents: VoiceToCRMServiceNowAgent"
         )
 
     def _assignment_routing(self, inc_num):
@@ -218,26 +360,33 @@ class VoiceToCRMServiceNowAgent(BasicAgent):
         for pri, sla in _SLA_DATA.items():
             sla_rows += f"| {pri} | {sla['response_min']}m | {sla['resolution_hours']}h | {sla['notification']} | {sla['update_frequency_min']}m |\n"
         return (
-            f"**Assignment Routing**\n\n"
+            f"**Assignment Routing** (embedded demo data — simulated)\n\n"
             f"**Assignment Groups:**\n\n"
             f"| Group | Manager | Members | Active | Avg Resolution | SLA Met |\n|---|---|---|---|---|---|\n"
             f"{group_rows}\n"
             f"**SLA Targets:**\n\n"
             f"| Priority | Response | Resolution | Notification | Updates |\n|---|---|---|---|---|\n"
             f"{sla_rows}\n\n"
-            f"Source: [ServiceNow CMDB + SLA Engine]\nAgents: VoiceToCRMServiceNowAgent"
+            f"Source: [CMDB + SLA Engine]\nAgents: VoiceToCRMServiceNowAgent"
         )
 
     def _status_update(self, inc_num):
-        inc = _INCIDENTS.get(inc_num, list(_INCIDENTS.values())[0])
+        inc, inc_is_live = _resolve_incident(inc_num)
         sla = _SLA_DATA.get(inc["priority"], _SLA_DATA["P3-Medium"])
-        by_priority = _incident_summary()
+        queue, is_live = _incident_queue()
+        by_priority = {}
+        for i in queue.values():
+            by_priority.setdefault(i["priority"], []).append(i)
         summary_rows = ""
         for pri in ["P1-Critical", "P2-High", "P3-Medium", "P4-Low"]:
             count = len(by_priority.get(pri, []))
             summary_rows += f"| {pri} | {count} |\n"
+        detail_source = (
+            "LIVE case from the Aster Lane Dynamics 365 tenant" if inc_is_live
+            else "embedded demo layer (simulated)"
+        )
         return (
-            f"**Status Update: {inc['number']}**\n\n"
+            f"**Status Update: {inc['number']}** ({detail_source})\n\n"
             f"| Field | Current | Updated |\n|---|---|---|\n"
             f"| State | {inc['state']} | {inc['state']} |\n"
             f"| Assigned To | {inc['assigned_to']} | {inc['assigned_to']} |\n"
@@ -250,14 +399,22 @@ class VoiceToCRMServiceNowAgent(BasicAgent):
             f"- Update Frequency: Every {sla['update_frequency_min']} minutes\n\n"
             f"**Overall Queue:**\n\n"
             f"| Priority | Count |\n|---|---|\n"
-            f"{summary_rows}\n\n"
-            f"Source: [ServiceNow Instance]\nAgents: VoiceToCRMServiceNowAgent"
+            f"{summary_rows}\n"
+            f"{_queue_source_line(is_live)}\n"
+            f"Preview only — no incident record was written.\n"
+            f"Source: [Incident Queue + Live Dynamics 365 Tenant]\nAgents: VoiceToCRMServiceNowAgent"
         )
 
 
 if __name__ == "__main__":
     agent = VoiceToCRMServiceNowAgent()
-    for op in ["incident_create", "knowledge_search", "assignment_routing", "status_update"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, incident_number="INC-20001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO INCIDENT (works offline)")
+    print(agent.perform(operation="status_update", incident_number="INC-20001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT CASE (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="status_update", incident_number="CAS-260128"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="incident_create", incident_number="INC-20001"))

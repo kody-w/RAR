@@ -1,21 +1,44 @@
 """
-Cross-Selling Agent
+Cross-Selling Agent — a template you are meant to mutate.
 
-Identifies cross-selling opportunities by analyzing customer product ownership,
-product affinity rules, and revenue impact projections.
+Identifies cross-selling opportunities by analyzing customer product
+ownership, product affinity rules, and revenue impact projections. In
+this template the expansion pipeline is fed by live Dynamics 365
+opportunities — open deals become the growth plan, staged Quick Win or
+Strategic by their real close probability.
 
-Where a real deployment would connect to CRM and product databases, this agent
-uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `growth_plan` operation pulls live
+     opportunity records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="growth_plan")
+     and look for "Orchard Signal Works — Managed print fleet refresh"
+     staged as a Quick Win at 60% probability.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PRODUCT_CATALOG / _CUSTOMER_OWNERSHIP / _AFFINITY_RULES) — the
+     agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CROSS_SELLING_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your CRM), or replace
+     _fetch_collection() with your own client. The fields the rest of
+     the file needs are listed in _normalize_live_expansion() — product
+     affinity stays an enrichment seam until you wire your usage data.
 
-Version 1.1.0 adds evidence-backed buying-signal analysis, tailored outreach,
-growth planning, and simulated account assignment while preserving all legacy
-operations and identities.
+OPERATIONS
+  opportunity_scan | product_affinity | recommendation_engine
+  | revenue_impact | buying_signals | outreach_plan | growth_plan
+  | account_assignments
+  kwargs: operation (required), customer_id
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -23,9 +46,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/cross_selling",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Cross-Selling Opportunities",
-    "description": "Reports cross-sell opportunities, product affinity, and revenue projections from built-in demo account data.",
+    "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
     "author": "AIBAST",
     "tags": ["cross-sell", "upsell", "revenue", "product-affinity", "recommendations"],
     "category": "general",
@@ -36,7 +59,67 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CROSS_SELLING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_expansion().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CROSS_SELLING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_expansion(row):
+    """Project an open Dynamics opportunity onto the expansion shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the CRM
+    alone' and the renderers label it as an enrichment seam."""
+    probability = int(row.get("closeprobability") or 0)
+    return {
+        "account": row.get("parentaccountidname") or row.get("customeridname", "Unknown"),
+        "opportunity": row.get("name", "untitled"),
+        "arr": float(row.get("estimatedvalue") or 0),
+        "probability": probability,
+        "stage": "Quick Win" if probability >= 50 else "Strategic",
+        "target_date": str(row.get("estimatedclosedate", ""))[:10],
+        "affinity": None,  # enrichment seam — wire your product usage data
+        "_live": True,
+    }
+
+
+def _live_expansions():
+    """List of live tenant expansion opportunities (open); [] offline."""
+    rows = _fetch_collection("opportunities")
+    return [_normalize_live_expansion(row) for row in rows if row.get("statecode") == 0]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _PRODUCT_CATALOG = {
@@ -348,6 +431,27 @@ class CrossSellingAgent(BasicAgent):
         )
 
     def _growth_plan(self, cust_id):
+        live = _live_expansions()
+        if live:
+            rows = []
+            for e in sorted(live, key=lambda x: -x["probability"]):
+                rows.append(
+                    f"| {e['account']} | {e['opportunity']} | {e['stage']} "
+                    f"({e['probability']}%) | {e['target_date'] or 'n/a'} | ${e['arr']:,.0f} |"
+                )
+            weighted = sum(e["arr"] * e["probability"] / 100 for e in live)
+            return (
+                "**Expansion Growth Plan (live tenant)**\n\n"
+                "| Account | Opportunity | Stage | Target | ARR |\n|---|---|---|---|---|\n"
+                + "\n".join(rows)
+                + f"\n\n**Open opportunities:** {len(live)} | "
+                  f"**Weighted pipeline:** ${weighted:,.0f}\n"
+                  "Product affinity is an enrichment seam — wire your usage data.\n\n"
+                  "_Source: live Static Dynamics 365 tenant — open opportunities "
+                  "staged by real close probability._\n"
+                  "Agents: CrossSellingAgent"
+            )
+
         rows = []
         for cid, cust in _CUSTOMER_OWNERSHIP.items():
             opps = _find_opportunities(cid)
@@ -363,7 +467,7 @@ class CrossSellingAgent(BasicAgent):
             "**Expansion Growth Plan**\n\n"
             "| Account | Opportunity | Stage | Target | ARR |\n|---|---|---|---|---|\n"
             + "\n".join(rows)
-            + "\n\nSource: [Dynamics 365 CRM + Conversion Model]\nAgents: CrossSellingAgent"
+            + "\n\n_Source: embedded demo layer (offline fallback)._\nAgents: CrossSellingAgent"
         )
 
     def _account_assignments(self, cust_id):
@@ -387,9 +491,17 @@ class CrossSellingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CrossSellingAgent()
+    print("=" * 60)
+    print("EMBEDDED DEMO SCAN (works offline)")
+    print(agent.perform(operation="opportunity_scan", customer_id="CUST-001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT GROWTH PLAN (opportunities fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="growth_plan", customer_id="CUST-001"))
+    print()
     for op in [
-        "opportunity_scan", "product_affinity", "recommendation_engine",
-        "revenue_impact", "buying_signals", "outreach_plan", "growth_plan",
+        "product_affinity", "recommendation_engine",
+        "revenue_impact", "buying_signals", "outreach_plan",
         "account_assignments",
     ]:
         print("=" * 60)

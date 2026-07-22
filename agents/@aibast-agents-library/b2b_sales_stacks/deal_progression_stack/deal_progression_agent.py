@@ -1,13 +1,32 @@
 """
-Deal Progression Agent
+Deal Progression Agent — a template you are meant to mutate.
 
-Tracks deal progression across the full pipeline, identifies stalled
-opportunities using stage-velocity benchmarks, generates blocker-specific
-action plans, and surfaces acceleration opportunities. Produces executive-
-ready pipeline health reports with assigned tasks and accountability cadences.
+Tracks deal progression across the pipeline, flags stalled opportunities,
+generates blocker-specific action plans, and produces executive-ready
+pipeline health reports.
 
-Where a real deployment would call Salesforce, Gong, Clari, etc., this agent
-uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="pipeline_health") — the health report covers
+     live open deals such as "Willow Brook Legal — Office sensor
+     deployment", classified by CRM close probability and schedule slip.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PIPELINE / _BLOCKER_PLAYBOOK) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     DEAL_PROGRESSION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). Blocker and
+     champion intelligence is an enrichment seam — wire call/email
+     analytics there; blocker-driven ops stay simulated until you do.
+
+OPERATIONS
+  pipeline_health | stalled_deals | action_plans | acceleration
+  | assign_tasks | executive_summary | activate_action_plan
+  kwargs: operation (required), opportunity_id (activate_action_plan)
 """
 
 import sys, os
@@ -15,7 +34,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
-from datetime import datetime, timedelta
+import urllib.request
+from datetime import datetime, timedelta, timezone
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -23,9 +43,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_progression",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Deal Progression",
-    "description": "Analyzes pipeline health, flags stalled deals, and generates action plans and executive summaries from built-in demo data.",
+    "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "deal-progression", "pipeline", "forecasting"],
     "category": "b2b_sales",
@@ -36,7 +56,98 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export DEAL_PROGRESSION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "DEAL_PROGRESSION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _days_overdue(iso_date):
+    """Days past an ISO date (0 if in the future or unparseable)."""
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire call/email analytics for
+    blocker and champion intelligence)."""
+    return {
+        "id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "probability": int(row.get("closeprobability") or 0),
+        "days_past_est_close": _days_overdue(row.get("estimatedclosedate")),
+        "champion_name": None,    # enrichment seam — wire your contact intel
+        "champion_status": None,  # enrichment seam
+        "blocker": None,          # enrichment seam — wire call analytics
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+def _classify_live_deals(deals):
+    """Classify live deals from CRM-visible signals: past the estimated
+    close date = stalled; low close probability = at risk."""
+    on_track, at_risk, stalled = [], [], []
+    for d in deals:
+        if d["days_past_est_close"] > 0:
+            stalled.append(d)
+        elif d["probability"] < 50:
+            at_risk.append(d)
+        else:
+            on_track.append(d)
+    return on_track, at_risk, stalled
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # Stands in for Salesforce, Gong, Clari, etc.
 # ═══════════════════════════════════════════════════════════════
 
@@ -396,8 +507,34 @@ class DealProgressionAgent(BasicAgent):
         }
         return "**Deal Action Plan Activation Receipt**\n\n```json\n" + json.dumps(receipt, indent=2) + "\n```"
 
-    # ── pipeline_health ───────────────────────────────────────
+    # ── pipeline_health (flagship: prefers LIVE tenant, falls back) ──
     def _pipeline_health(self):
+        live = _live_open_deals()
+        if live:
+            on_track, at_risk, stalled = _classify_live_deals(live)
+            total_value = _total_value(live)
+            top_stalled = sorted(stalled, key=lambda x: -x["value"])[:4]
+            return (
+                f"**Pipeline Health Summary — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Analyzed **${total_value:,}** live pipeline.\n\n"
+                f"| Status | Deals | Value | Signal |\n"
+                f"|--------|-------|-------|--------|\n"
+                f"| On Track | {len(on_track)} | ${_total_value(on_track):,} | prob >= 50%, on schedule |\n"
+                f"| At Risk | {len(at_risk)} | ${_total_value(at_risk):,} | close probability < 50% |\n"
+                f"| Stalled | {len(stalled)} | ${_total_value(stalled):,} | past estimated close date |\n\n"
+                f"**Critical Stalled Deals (top {len(top_stalled)} by value):**\n\n"
+                + "".join(
+                    f"{i}. **{d['name']}** — ${d['value']:,} — "
+                    f"{d['days_past_est_close']} days past estimated close "
+                    f"({d['stage']}, prob {d['probability']}%, owner {d['owner']})\n"
+                    for i, d in enumerate(top_stalled, 1)
+                )
+                + f"\n**Root Cause Analysis:** n/a — enrichment seam "
+                f"(wire call/email analytics at the LIVE DATA SEAM)\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: PipelineAnalyticsAgent, StalledDealDetectionAgent"
+            )
         on_track, at_risk, stalled = _classify_deals()
         active = _active_pipeline()
         total_value = _total_value(active)
@@ -674,8 +811,13 @@ class DealProgressionAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = DealProgressionAgent()
-    for op in ["pipeline_health", "stalled_deals", "action_plans",
-               "acceleration", "assign_tasks", "executive_summary"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT PIPELINE (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="pipeline_health"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="stalled_deals"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="executive_summary"))

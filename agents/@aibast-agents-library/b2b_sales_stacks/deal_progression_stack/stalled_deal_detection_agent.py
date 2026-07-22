@@ -1,19 +1,42 @@
 """
-Stalled Deal Detection Agent
+Stalled Deal Detection Agent — a template you are meant to mutate.
 
-Detects stalled deals by comparing stage duration against configurable
-thresholds, performs root cause analysis to classify stall reasons,
-generates intervention plans with day-by-day actions, and provides
-stall prevention recommendations based on leading indicators.
+Detects stalled deals against thresholds, classifies root causes,
+generates day-by-day intervention plans, and surfaces leading indicators
+for stall prevention.
 
-Where a real deployment would call Salesforce, Gong, Outreach, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="detect_stalls") — live open deals such as
+     "Juniper Ridge Furnishings — Document capture modernization" are
+     flagged from real CRM dates (days past estimated close, days since
+     the record was last touched).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_TIMELINES / _INTERVENTION_PLAYBOOKS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     STALLED_DEAL_DETECTION_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON you export from Salesforce/HubSpot), or
+     replace _fetch_collection() with your own client. The dict shape the
+     rest of the file needs is documented in _normalize_live_deal().
+     Blocker and champion status are enrichment seams — wire call/email
+     analytics there; blocker-driven ops stay simulated until you do.
+
+OPERATIONS
+  detect_stalls | root_cause_analysis | intervention_plan | stall_prevention
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +44,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/stalled_deal_detection",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Stalled Deal Detection",
-    "description": "Detects stalled deals against stage thresholds and generates root causes and intervention plans from built-in demo data.",
+    "description": "Detects stalled deals from live opportunities in a simulated Dynamics 365 tenant using real CRM dates, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "stalled-deals", "deal-progression", "pipeline"],
     "category": "b2b_sales",
@@ -34,7 +57,96 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export STALLED_DEAL_DETECTION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "STALLED_DEAL_DETECTION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _days_since(iso_date):
+    """Days since an ISO date (0 if in the future or unparseable)."""
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire call/email analytics for
+    blocker and champion signals)."""
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "days_past_est_close": _days_since(row.get("estimatedclosedate")),
+        "days_since_update": _days_since(row.get("modifiedon")),
+        "champion": None,          # enrichment seam — wire contact intel
+        "champion_status": None,   # enrichment seam
+        "blocker": None,           # enrichment seam — wire call analytics
+        "next_step": None,         # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+def _classify_live_stall(deal):
+    """Classify a live deal from CRM-visible dates only."""
+    if deal["days_past_est_close"] > 30 or deal["days_since_update"] > 60:
+        return "CRITICAL"
+    if deal["days_past_est_close"] > 0:
+        return "STALLED"
+    if deal["days_since_update"] > 21:
+        return "WARNING"
+    return "ON TRACK"
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _STAGE_THRESHOLDS = {
@@ -290,8 +402,41 @@ class StalledDealDetectionAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- detect_stalls -------------------------------------------------
+    # -- detect_stalls (flagship: prefers LIVE tenant, falls back) ------
     def _detect_stalls(self) -> str:
+        live = _live_open_deals()
+        if live:
+            rows = ""
+            stalled_value = 0
+            warning_value = 0
+            stalled_ct = 0
+            warning_ct = 0
+            for d in sorted(live, key=lambda x: -x["value"]):
+                status = _classify_live_stall(d)
+                if status in ("CRITICAL", "STALLED"):
+                    stalled_ct += 1
+                    stalled_value += d["value"]
+                elif status == "WARNING":
+                    warning_ct += 1
+                    warning_value += d["value"]
+                rows += (f"| {d['name']} | ${d['value']:,} | {d['stage']} | "
+                         f"{d['days_past_est_close']}d | {d['days_since_update']}d | "
+                         f"{status} | n/a — enrichment seam |\n")
+            return (
+                f"**Stalled Deal Detection Report — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Stalled/Critical: **{stalled_ct}** (${stalled_value:,}) | "
+                f"Warning: **{warning_ct}** (${warning_value:,})\n\n"
+                f"| Deal | Value | Stage | Past Est. Close | Since Last Update | Status | Champion |\n"
+                f"|------|-------|-------|----------------|-------------------|--------|----------|\n"
+                f"{rows}\n"
+                f"**Detection Signals (CRM dates only):** past estimated close date = stalled; "
+                f">30d past or >60d untouched = critical; >21d untouched = warning. "
+                f"Champion/blocker signals stay n/a until you wire call analytics "
+                f"at the LIVE DATA SEAM.\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: StallDetectionEngine"
+            )
         stalled = []
         warning = []
         for deal_name, deal in _DEAL_TIMELINES.items():
@@ -446,7 +591,13 @@ class StalledDealDetectionAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = StalledDealDetectionAgent()
-    for op in ["detect_stalls", "root_cause_analysis", "intervention_plan", "stall_prevention"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT STALL DETECTION (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="detect_stalls"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="root_cause_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="intervention_plan"))

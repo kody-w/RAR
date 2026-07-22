@@ -1,19 +1,41 @@
 """
-Competitor Intelligence Agent
+Deal Competitor Intelligence Agent — a template you are meant to mutate.
 
-Provides competitive intelligence for active deals including competitor
-snapshots, threat assessments, counter-positioning strategies, and
-win/loss pattern analysis. Enables sales teams to proactively address
-competitive pressure with data-driven counter-strategies.
+Produces competitor snapshots, per-deal threat assessments,
+counter-positioning strategies, and win/loss patterns so sales teams can
+address competitive pressure with data-driven counter-strategies.
 
-Where a real deployment would call Crayon, Klue, Salesforce, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="competitor_snapshot") — the deal-exposure
+     table lists live open deals such as "Copper Kite Design — Secure
+     print rollout".
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_COMPETITORS / _COMPETITORS) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     DEAL_COMPETITOR_INTEL_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON you export from Salesforce/HubSpot), or
+     replace _fetch_collection() with your own client. The dict shape the
+     rest of the file needs is documented in _normalize_live_deal().
+     Which competitors sit in each evaluation is an enrichment seam —
+     wire Crayon/Klue or your CRM competitor field there. The competitor
+     landscape and win/loss ops stay simulated until you do.
+
+OPERATIONS
+  competitor_snapshot | threat_assessment | counter_strategy
+  | win_loss_patterns
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_competitor_intel",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Deal Competitor Intelligence",
-    "description": "Produces competitor snapshots, threat scores, counter-strategies, and win/loss patterns per deal from built-in demo data.",
+    "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "competitive-intelligence", "deal-progression", "strategy"],
     "category": "b2b_sales",
@@ -34,7 +56,72 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export DEAL_COMPETITOR_INTEL_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "DEAL_COMPETITOR_INTEL_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire Crayon/Klue or your CRM
+    competitor field)."""
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "competitors_in_eval": None,  # enrichment seam — wire Crayon/Klue
+        "incumbent": None,            # enrichment seam
+        "eval_status": row.get("description") or "n/a — enrichment seam",
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _COMPETITORS = {
@@ -195,7 +282,7 @@ class CompetitorIntelligenceAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- competitor_snapshot --------------------------------------------
+    # -- competitor_snapshot (flagship: deal exposure prefers LIVE) -----
     def _competitor_snapshot(self) -> str:
         rows = ""
         for name, comp in _COMPETITORS.items():
@@ -204,24 +291,42 @@ class CompetitorIntelligenceAgent(BasicAgent):
             rows += (f"| {name} | {comp['type']} | {comp['market_share']}% | "
                      f"{comp['pricing_model']} | {strengths_str} | {weakness_str} |\n")
 
-        deal_exposure = ""
-        for deal_name, deal in sorted(_DEAL_COMPETITORS.items(), key=lambda x: -x[1]["value"]):
-            comps = ", ".join(deal["competitors_in_eval"])
-            inc = deal["incumbent"] or "None"
-            deal_exposure += f"| {deal_name} | ${deal['value']:,} | {comps} | {inc} |\n"
+        live = _live_open_deals()
+        if live:
+            deal_exposure = ""
+            for deal in sorted(live, key=lambda d: -d["value"]):
+                comps = "n/a — enrichment seam"
+                inc = "n/a — enrichment seam"
+                deal_exposure += f"| {deal['name']} | ${deal['value']:,} | {comps} | {inc} |\n"
+            total_pipeline = sum(d["value"] for d in live)
+            exposure_title = (
+                f"**Deal-Level Competitive Exposure — {len(live)} LIVE open deals, "
+                f"${total_pipeline:,} pipeline (Static Dynamics 365 tenant):**\n"
+                f"Competitor attribution stays n/a until you wire Crayon/Klue "
+                f"or your CRM competitor field at the LIVE DATA SEAM.\n"
+            )
+            source_line = "Source: [Competitive Intel DB (simulated) + Live Dynamics 365 opportunities]\n"
+        else:
+            deal_exposure = ""
+            for deal_name, deal in sorted(_DEAL_COMPETITORS.items(), key=lambda x: -x[1]["value"]):
+                comps = ", ".join(deal["competitors_in_eval"])
+                inc = deal["incumbent"] or "None"
+                deal_exposure += f"| {deal_name} | ${deal['value']:,} | {comps} | {inc} |\n"
+            total_pipeline = sum(d["value"] for d in _DEAL_COMPETITORS.values())
+            exposure_title = f"**Deal-Level Competitive Exposure (${total_pipeline:,} demo pipeline):**\n"
+            source_line = "Source: [Competitive Intel DB + CRM Notes (simulated)]\n"
 
-        total_pipeline = sum(d["value"] for d in _DEAL_COMPETITORS.values())
         return (
-            f"**Competitive Landscape Snapshot**\n\n"
+            f"**Competitive Landscape Snapshot** (landscape data simulated)\n\n"
             f"**Active Competitors ({len(_COMPETITORS)}):**\n\n"
             f"| Competitor | Type | Market Share | Pricing | Top Strength | Top Weakness |\n"
             f"|-----------|------|-------------|---------|-------------|-------------|\n"
             f"{rows}\n"
-            f"**Deal-Level Competitive Exposure (${total_pipeline:,} pipeline):**\n\n"
+            f"{exposure_title}\n"
             f"| Deal | Value | Competitors in Eval | Incumbent |\n"
             f"|------|-------|--------------------|-----------|\n"
             f"{deal_exposure}\n"
-            f"Source: [Competitive Intel DB + CRM Notes]\n"
+            f"{source_line}"
             f"Agents: MarketIntelAgent, CRMDataAgent"
         )
 
@@ -327,7 +432,13 @@ class CompetitorIntelligenceAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CompetitorIntelligenceAgent()
-    for op in ["competitor_snapshot", "threat_assessment", "counter_strategy", "win_loss_patterns"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT DEAL EXPOSURE (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="competitor_snapshot"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="threat_assessment"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="win_loss_patterns"))

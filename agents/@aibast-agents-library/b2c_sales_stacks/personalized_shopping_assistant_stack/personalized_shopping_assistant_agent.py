@@ -1,13 +1,35 @@
 """
-Personalized Shopping Assistant Agent — B2C Sales Stack
+Personalized Shopping Assistant Agent — a template you are meant to mutate.
 
 Delivers product recommendations, style profiles, inventory checks,
 and outfit building for personalized retail experiences.
 
-Version 1.1.0 adds five demo-grounded clienteling operations with deterministic
-records, exact record-key lookup, and a simulated Dynamics 365/Outlook follow-up
-receipt. No external system is changed, and all legacy operations remain
-available and unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls a live product catalog over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's 12 sellable products (printers, scanners, service
+     plans) become the live catalog.
+     Try: perform(operation="inventory_check", sku="AST-PRN-620")
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCT_CATALOG / CUSTOMER_PREFERENCES / OUTFIT_TEMPLATES) — the
+     agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PERSONALIZED_SHOPPING_ASSISTANT_DATA_URL to any OData-shaped
+     endpoint (your real Dynamics org, or JSON exported from Shopify /
+     your PIM), or replace _fetch_collection() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_product() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (stock by
+     size, ratings, style tags) are where you wire your inventory and
+     reviews systems.
+
+OPERATIONS
+  product_recommendations | style_profile | inventory_check
+  | outfit_builder | occasion_analysis | occasion_outfit_options
+  | network_availability | loyalty_pricing | clienteling_follow_up
+  kwargs: operation (required), customer_id, sku, user_input
 """
 
 import sys
@@ -15,13 +37,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/personalized_shopping_assistant",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Personalized Shopping Assistant Agent",
-    "description": "Recommends products, builds outfits, and checks inventory for retail shoppers using built-in demo catalog data.",
+    "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
     "author": "AIBAST",
     "tags": ["shopping", "personalization", "recommendations", "style", "inventory", "b2c"],
     "category": "b2c_sales",
@@ -31,7 +55,78 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PERSONALIZED_SHOPPING_ASSISTANT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce/PIM client.
+# Downstream code only needs the fields produced by
+# _normalize_live_product().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "PERSONALIZED_SHOPPING_ASSISTANT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from the
+    product entity alone' and the renderers label it as an enrichment
+    seam (wire your inventory, reviews, and merchandising systems)."""
+    return {
+        "name": row.get("name", "Unknown"),
+        "category": (row.get("description") or "product").split(".")[0][:40],
+        "price": float(row.get("price") or 0),
+        "brand": None,        # enrichment seam — wire your PIM
+        "rating": None,       # enrichment seam — wire your reviews platform
+        "stock": None,        # enrichment seam — wire your inventory system
+        "active": row.get("statecode") == 0,
+        "_live": True,
+    }
+
+
+def _live_catalog():
+    """productnumber-keyed dict of live tenant products; {} offline."""
+    rows = _fetch_collection("products")
+    return {
+        row["productnumber"]: _normalize_live_product(row)
+        for row in rows
+        if row.get("productnumber")
+    }
+
+
+def _na(value):
+    """None = the product entity alone can't know this (enrichment seam);
+    0 is real."""
+    return "n/a — enrichment seam" if value is None else f"{value}"
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PRODUCT_CATALOG = {
@@ -311,6 +406,27 @@ class PersonalizedShoppingAssistantAgent(BasicAgent):
 
     def _inventory_check(self, **kwargs) -> str:
         sku = kwargs.get("sku")
+        live = _live_catalog() if (not sku or sku not in PRODUCT_CATALOG) else {}
+        if sku and sku in live:
+            p = live[sku]
+            lines = [f"# Inventory Check: {p['name']} ({sku}) — live tenant record\n"]
+            lines.append(f"- **Price:** ${p['price']:,.2f} (live list price)")
+            lines.append(f"- **Brand:** {_na(p['brand'])}")
+            lines.append(f"- **Rating:** {_na(p['rating'])}")
+            lines.append(f"- **Status:** {'Active' if p['active'] else 'Retired'}")
+            lines.append(f"- **Stock:** {_na(p['stock'])} (wire your inventory system)")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (products)._")
+            return "\n".join(lines)
+        if not sku and live:
+            lines = ["# Inventory Overview (live tenant catalog)\n"]
+            lines.append("| SKU | Product | Price | Stock | Status |")
+            lines.append("|---|---|---|---|---|")
+            for pn, p in sorted(live.items()):
+                status = "Active" if p["active"] else "Retired"
+                lines.append(f"| {pn} | {p['name']} | ${p['price']:,.2f} | {_na(p['stock'])} | {status} |")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (products). "
+                         "Stock is an enrichment seam — wire your inventory system._")
+            return "\n".join(lines)
         if sku and sku in PRODUCT_CATALOG:
             product = PRODUCT_CATALOG[sku]
             lines = [f"# Inventory Check: {product['name']} ({sku})\n"]
@@ -327,7 +443,7 @@ class PersonalizedShoppingAssistantAgent(BasicAgent):
             lines.append(f"\n**Total Units:** {total}")
             return "\n".join(lines)
 
-        lines = ["# Inventory Overview\n"]
+        lines = ["# Inventory Overview (embedded demo data — offline)\n"]
         lines.append("| SKU | Product | Price | Total Stock | Status |")
         lines.append("|---|---|---|---|---|")
         for sku, p in PRODUCT_CATALOG.items():
@@ -363,10 +479,15 @@ class PersonalizedShoppingAssistantAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = PersonalizedShoppingAssistantAgent()
-    print(agent.perform(operation="product_recommendations", customer_id="SHOP-001"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="style_profile", customer_id="SHOP-002"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
     print(agent.perform(operation="inventory_check", sku="SKU-1003"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="inventory_check", sku="AST-PRN-620"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="product_recommendations", customer_id="SHOP-001"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="outfit_builder", customer_id="SHOP-001"))

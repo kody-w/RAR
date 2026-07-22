@@ -1,16 +1,39 @@
 """
-Financial Services Regulatory Compliance Agent — Financial Services Stack
+Financial Services Regulatory Compliance Agent — a template you are meant to mutate.
 
 Manages compliance dashboards, regulation tracking, remediation planning,
 and examination preparation for financial institution compliance teams.
+In this template a compliance finding is represented as a Dynamics 365
+case and a remediation action as a Dynamics task — the tenant has no
+native regulatory entities, so the case/task queue stands in for the
+findings register and remediation tracker.
 
-Version 1.1.0 adds six real-time trade compliance capabilities modeled on the
-Regulatory Compliance Monitoring spec (MiFID II surveillance, reporting issue
-triage, batch remediation, execution-quality analysis with venue ranking,
-certification tracking, and a shareable compliance summary). Each capability
-embeds its curated response, knowledge notes, exactly three synthetic records,
-an exact-key lookup, no-input summaries, and — for write-capable operations —
-simulated write receipts that never mutate the in-memory data.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `remediation_plan` operation pulls live
+     task and case records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="remediation_plan")
+     and look for "Records request backlog exceeds statutory deadline"
+     with its "Review service notes — CAS-260131" remediation task.
+  2. No network? Everything falls back to the embedded demo layer below
+     (REGULATIONS / EXAMINATION_FINDINGS / REMEDIATION_PLANS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FS_REGULATORY_COMPLIANCE_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your GRC platform), or
+     replace _fetch_collection() with your own client. The fields the
+     rest of the file needs are listed in _normalize_live_remediation()
+     — the regulation column stays "n/a — enrichment seam" until you
+     wire your obligations register.
+
+OPERATIONS
+  compliance_dashboard | regulation_tracker | remediation_plan
+  | examiner_prep | trade_surveillance | reporting_issue
+  | batch_remediation | execution_analysis | certification_tracking
+  | compliance_summary
+  kwargs: operation (required), regulation, user_input
 """
 
 import sys
@@ -18,13 +41,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fs_regulatory_compliance",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "FS Regulatory Compliance Agent",
-    "description": "Tracks SOX, Dodd-Frank, BSA, and MiFID II compliance with remediation plans and examiner prep from built-in demo data.",
+    "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["compliance", "SOX", "Dodd-Frank", "BSA", "AML", "regulatory", "financial-services", "MiFID-II", "trade-surveillance", "best-execution", "venue-ranking"],
     "category": "financial_services",
@@ -33,8 +58,82 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FS_REGULATORY_COMPLIANCE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your GRC-platform client. Downstream
+# code only needs the fields produced by _normalize_live_remediation().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FS_REGULATORY_COMPLIANCE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_remediation(row):
+    """Project a Dynamics task onto the remediation-plan shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the CRM alone'
+    and the renderers label it as an enrichment seam."""
+    return {
+        "finding": row.get("regardingobjectidname") or "(unlinked)",
+        "action": row.get("subject", "untitled task"),
+        "regulation": None,  # enrichment seam — wire your obligations register
+        "milestone": str(row.get("scheduledend", ""))[:10],
+        "pct": int(row.get("percentcomplete") or 0),
+        "owner": row.get("owneridname", ""),
+        "_live": True,
+    }
+
+
+def _live_remediations():
+    """List of live tenant remediation actions (tasks); [] when offline."""
+    rows = _fetch_collection("tasks")
+    return [_normalize_live_remediation(row) for row in rows if row.get("activityid")]
+
+
+def _live_open_findings():
+    """List of live tenant open findings (open cases); [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        {
+            "id": f"EF-{str(row.get('incidentid', ''))[:8]}",
+            "finding": row.get("title", "untitled"),
+            "customer": row.get("customeridname", ""),
+            "due": str(row.get("resolveby", ""))[:10] or "n/a",
+        }
+        for row in rows
+        if row.get("statecode") == 0
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 REGULATIONS = {
@@ -494,6 +593,32 @@ class FSRegulatoryComplianceAgent(BasicAgent):
         return "\n".join(lines)
 
     def _remediation_plan(self, **kwargs) -> str:
+        live = _live_remediations()
+        if live:
+            lines = ["# Remediation Plan Status (live tenant)\n"]
+            lines.append("| Finding | Action | Regulation | Owner | Milestone | Progress |")
+            lines.append("|---|---|---|---|---|---|")
+            for r in live:
+                regulation = r["regulation"] if r["regulation"] is not None else "n/a — enrichment seam"
+                lines.append(
+                    f"| {r['finding']} | {r['action']} | {regulation} | {r['owner']} "
+                    f"| {r['milestone']} | {r['pct']}% |"
+                )
+            avg_progress = sum(r["pct"] for r in live) / len(live)
+            lines.append(f"\n**Average Progress:** {avg_progress:.0f}%")
+            open_findings = _live_open_findings()
+            if open_findings:
+                lines.append("\n## Open Findings Requiring Remediation\n")
+                for f in open_findings:
+                    lines.append(f"- **{f['id']}** ({f['customer']}) — {f['finding']} [Due: {f['due']}]")
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — cases reinterpreted "
+                "as compliance findings and tasks as remediation actions. The "
+                "regulation column is an enrichment seam (wire your obligations "
+                "register)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Remediation Plan Status\n"]
         lines.append("| Finding | Action | Owner | Milestone | Progress |")
         lines.append("|---|---|---|---|---|")
@@ -508,6 +633,7 @@ class FSRegulatoryComplianceAgent(BasicAgent):
         open_findings = [f for f in EXAMINATION_FINDINGS if f["status"] != "closed"]
         for f in open_findings:
             lines.append(f"- **{f['id']}** ({f['regulation']}) — {f['finding']} [Due: {f['due']}]")
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
     def _examiner_prep(self, **kwargs) -> str:
@@ -552,10 +678,13 @@ class FSRegulatoryComplianceAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FSRegulatoryComplianceAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO DASHBOARD (works offline)")
     print(agent.perform(operation="compliance_dashboard"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="regulation_tracker", regulation="BSA-AML"))
     print("\n" + "=" * 80 + "\n")
+    print("LIVE TENANT REMEDIATION PLAN (tasks fetched over HTTP; falls back offline)")
     print(agent.perform(operation="remediation_plan"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="examiner_prep"))

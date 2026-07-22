@@ -1,20 +1,39 @@
 """
-Stakeholder Engagement Agent
+Stakeholder Engagement Agent — a template you are meant to mutate.
 
-Tracks stakeholder engagement across active deals, maps relationship
-networks within buying committees, generates targeted engagement plans,
-and analyzes sentiment signals from meetings and communications. Ensures
-multi-threaded relationships and proactive stakeholder management.
+Scores stakeholder engagement, maps buying committees, generates targeted
+engagement plans, and analyzes sentiment so no deal stays single-threaded.
 
-Where a real deployment would call Salesforce, Gong, LinkedIn Sales
-Navigator, etc., this agent uses a synthetic data layer so it runs
-anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities and contacts over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="engagement_score") — live open deals such as
+     "Cedar Hollow Printing — Managed print fleet refresh" are mapped to
+     their real CRM contacts (e.g. Theo Dalton, Print Services Lead).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_STAKEHOLDERS / _SENTIMENT_SIGNALS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     DEAL_STAKEHOLDER_ENGAGEMENT_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON you export from Salesforce/HubSpot),
+     or replace _fetch_collection() with your own client. The dict shape
+     the rest of the file needs is documented in
+     _normalize_live_stakeholders(). Email/meeting counts and sentiment
+     are enrichment seams — wire Gong / email analytics there.
+
+OPERATIONS
+  engagement_score | relationship_map | engagement_plan | sentiment_analysis
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -22,9 +41,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_stakeholder_engagement",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Stakeholder Engagement",
-    "description": "Scores stakeholder engagement, maps relationships, and analyzes sentiment for active deals using built-in demo data.",
+    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "stakeholder-engagement", "deal-progression", "relationships"],
     "category": "b2b_sales",
@@ -35,7 +54,92 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export DEAL_STAKEHOLDER_ENGAGEMENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the shape produced by _normalize_live_stakeholders().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "DEAL_STAKEHOLDER_ENGAGEMENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _normalize_live_stakeholders(opp, contacts):
+    """Project a Dynamics opportunity + its account's contacts onto the
+    shape this agent uses. THIS is the contract your replacement data
+    source must meet — a deal dict with a "contacts" list. None means
+    'not knowable from the CRM alone' and the renderers label it an
+    enrichment seam (wire Gong / email analytics for engagement counts
+    and sentiment)."""
+    account = opp.get("parentaccountidname", "Unknown")
+    deal_contacts = [
+        {
+            "name": c.get("fullname", "Unknown"),
+            "title": c.get("jobtitle", "Unknown"),
+            "role": None,           # enrichment seam — classify your committee
+            "emails": None,         # enrichment seam — wire email analytics
+            "meetings": None,       # enrichment seam
+            "last_touch_days": None,  # enrichment seam
+            "sentiment": None,      # enrichment seam — wire Gong
+            "influence": None,      # enrichment seam
+            "support_level": None,  # enrichment seam
+            "email": c.get("emailaddress1", ""),
+        }
+        for c in contacts
+        if c.get("parentcustomeridname") == account
+    ]
+    return {
+        "deal_id": str(opp.get("opportunityid", ""))[:8],
+        "name": opp.get("name", "Unknown"),
+        "account": account,
+        "value": int(float(opp.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(opp.get("stepname"), "Qualification"),
+        "owner": opp.get("owneridname", ""),
+        "contacts": deal_contacts,
+        "_live": True,
+    }
+
+
+def _live_deals_with_contacts():
+    """Live open opportunities joined to their account contacts; [] offline."""
+    opps = [o for o in _fetch_collection("opportunities") if o.get("statecode") == 0]
+    if not opps:
+        return []
+    contacts = _fetch_collection("contacts")
+    return [_normalize_live_stakeholders(o, contacts) for o in opps]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _STAKEHOLDERS = {
@@ -240,8 +344,38 @@ class StakeholderEngagementAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- engagement_score ----------------------------------------------
+    # -- engagement_score (flagship: prefers LIVE tenant, falls back) ---
     def _engagement_score(self) -> str:
+        live = _live_deals_with_contacts()
+        if live:
+            sections = []
+            for deal in sorted(live, key=lambda d: -d["value"]):
+                contact_rows = ""
+                for c in deal["contacts"]:
+                    contact_rows += (f"| {c['name']} | {c['title']} | {c['email']} | "
+                                     f"n/a — enrichment seam | n/a | n/a |\n")
+                if not contact_rows:
+                    contact_rows = "| (no CRM contacts on this account yet) | | | | | |\n"
+                thread_note = ("multi-threaded" if len(deal["contacts"]) >= 3
+                               else f"only {len(deal['contacts'])} contact(s) — single-thread risk")
+                sections.append(
+                    f"**{deal['name']} -- ${deal['value']:,} ({deal['stage']})**\n"
+                    f"CRM contacts mapped: {len(deal['contacts'])} ({thread_note}) | "
+                    f"Owner: {deal['owner']}\n\n"
+                    f"| Contact | Title | Email | Score | Last Touch | Influence |\n"
+                    f"|---------|-------|-------|-------|-----------|----------|\n"
+                    f"{contact_rows}"
+                )
+            return (
+                f"**Stakeholder Engagement — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Contacts come from the live CRM; engagement scores, touch "
+                f"recency, and influence stay n/a until you wire Gong / email "
+                f"analytics at the LIVE DATA SEAM.\n\n"
+                + "\n---\n\n".join(sections)
+                + f"\n\nSource: [Live Dynamics 365 opportunities + contacts]\n"
+                f"Agents: EngagementScoringEngine"
+            )
         sections = []
         for deal_name in sorted(_STAKEHOLDERS.keys(), key=lambda d: -_STAKEHOLDERS[d]["value"]):
             deal = _STAKEHOLDERS[deal_name]
@@ -391,7 +525,13 @@ class StakeholderEngagementAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = StakeholderEngagementAgent()
-    for op in ["engagement_score", "relationship_map", "engagement_plan", "sentiment_analysis"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT BUYING COMMITTEES (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="engagement_score"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="relationship_map"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="sentiment_analysis"))

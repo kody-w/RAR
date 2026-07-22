@@ -1,19 +1,42 @@
 """
-Deal Risk Assessment Agent
+Deal Risk Assessment Agent — a template you are meant to mutate.
 
-Assesses risk across active pipeline deals using multi-factor scoring,
-generates risk matrices for portfolio-level visibility, creates mitigation
-plans with actionable steps, and tracks risk trends over time. Helps sales
-leadership proactively manage deal risk before it leads to slippage.
+Scores multi-factor deal risk, builds portfolio risk matrices, generates
+mitigation plans, and tracks risk trends so sales leadership can manage
+risk before it becomes slippage.
 
-Where a real deployment would call Salesforce, Clari, Gong, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="assess_risks") — the assessment covers live
+     open deals such as "Blue Heron Stationery — Preventive maintenance
+     program", scored from CRM-visible signals (close probability +
+     schedule slip).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_RISK_FACTORS / _MITIGATION_PLAYBOOKS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     DEAL_RISK_ASSESSMENT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON you export from Salesforce/HubSpot), or
+     replace _fetch_collection() with your own client. The dict shape the
+     rest of the file needs is documented in _normalize_live_deal().
+     Champion, budget, competitive, and decision risk are enrichment
+     seams — wire Gong / your risk signals there.
+
+OPERATIONS
+  assess_risks | risk_matrix | mitigation_plan | risk_trend
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +44,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_risk_assessment",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Deal Risk Assessment",
-    "description": "Scores multi-factor deal risk and builds risk matrices, mitigation plans, and trend reports from built-in demo pipeline data.",
+    "description": "Assesses deal risk from live opportunities in a simulated Dynamics 365 tenant, with matrices, plans, and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "risk-assessment", "deal-progression", "pipeline"],
     "category": "b2b_sales",
@@ -34,7 +57,87 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export DEAL_RISK_ASSESSMENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "DEAL_RISK_ASSESSMENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _days_overdue(iso_date):
+    """Days past an ISO date (0 if in the future or unparseable)."""
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire Gong / your risk-signal
+    systems for champion, budget, competitive, and decision risk)."""
+    overdue = _days_overdue(row.get("estimatedclosedate"))
+    prob = int(row.get("closeprobability") or 0)
+    # CRM-visible composite: inverse close probability plus schedule slip.
+    crm_risk = max(5, min(95, (100 - prob) + min(20, overdue // 14 * 5)))
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "crm_probability": prob,
+        "days_past_est_close": overdue,
+        "crm_risk": crm_risk,
+        "factors": None,  # enrichment seam — wire your risk-signal systems
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _RISK_FACTORS = {
@@ -270,8 +373,47 @@ class DealRiskAssessmentAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- assess_risks --------------------------------------------------
+    # -- assess_risks (flagship: prefers LIVE tenant, falls back) -------
     def _assess_risks(self) -> str:
+        live = _live_open_deals()
+        if live:
+            sections = []
+            for d in sorted(live, key=lambda x: -x["crm_risk"]):
+                severity = _severity_label(d["crm_risk"])
+                schedule_detail = (f"{d['days_past_est_close']} days past estimated close"
+                                   if d["days_past_est_close"] else "On schedule")
+                if d["days_past_est_close"]:
+                    timeline_score = min(95, 60 + min(35, d["days_past_est_close"] // 7 * 5))
+                else:
+                    timeline_score = 20
+                factor_rows = (
+                    f"| Timeline Risk | {timeline_score}/100 | {_severity_label(timeline_score)} | {schedule_detail} |\n"
+                    f"| Close Probability | {100 - d['crm_probability']}/100 | {_severity_label(100 - d['crm_probability'])} | CRM close probability {d['crm_probability']}% |\n"
+                    f"| Champion Risk | n/a | n/a | n/a — enrichment seam (wire contact intel) |\n"
+                    f"| Budget Risk | n/a | n/a | n/a — enrichment seam |\n"
+                    f"| Competitive Risk | n/a | n/a | n/a — enrichment seam (wire Crayon/Klue) |\n"
+                    f"| Decision Risk | n/a | n/a | n/a — enrichment seam |\n"
+                )
+                sections.append(
+                    f"**{d['name']} -- ${d['value']:,} ({d['stage']})**\n"
+                    f"CRM-Visible Risk: **{d['crm_risk']}/100 [{severity}]** | Owner: {d['owner']}\n\n"
+                    f"| Factor | Score | Level | Detail |\n"
+                    f"|--------|-------|-------|--------|\n"
+                    f"{factor_rows}"
+                )
+            total_value = sum(d["value"] for d in live)
+            critical_value = sum(d["value"] for d in live if d["crm_risk"] >= 70)
+            return (
+                f"**Deal Risk Assessment -- {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Live pipeline: ${total_value:,} | Critical risk exposure: ${critical_value:,}\n\n"
+                + "\n---\n\n".join(sections)
+                + f"\n\nComposite uses only CRM-visible signals; the remaining "
+                f"factors stay n/a until you wire real risk signals at the "
+                f"LIVE DATA SEAM.\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: RiskScoringEngine"
+            )
         sections = []
         for deal_name in sorted(_RISK_FACTORS.keys(), key=lambda d: -_composite_risk(d)):
             deal = _RISK_FACTORS[deal_name]
@@ -417,7 +559,13 @@ class DealRiskAssessmentAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = DealRiskAssessmentAgent()
-    for op in ["assess_risks", "risk_matrix", "mitigation_plan", "risk_trend"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT RISK ASSESSMENT (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="assess_risks"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="risk_matrix"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="risk_trend"))

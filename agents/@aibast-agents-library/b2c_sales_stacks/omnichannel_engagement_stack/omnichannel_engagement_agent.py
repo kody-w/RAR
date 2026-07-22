@@ -1,12 +1,35 @@
 """
-Omnichannel Engagement Agent — B2C Sales Stack
+Omnichannel Engagement Agent — a template you are meant to mutate.
 
 Analyzes channel performance, maps customer journeys, optimizes
 engagement strategies, and provides campaign attribution insights.
 
-Version 1.1.0 adds five demo-grounded customer-journey operations with
-deterministic records, exact record-key lookup, and a simulated handoff receipt.
-No external system is changed, and all legacy operations remain unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live engagement records over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Cases (Phone / Email / Web origin) and email activities become the
+     live channel mix — e.g. the Web-origin case "Disputed card
+     transaction under investigation" for Bluegrass Credit Union.
+     Try: perform(operation="channel_performance")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CHANNELS / CUSTOMER_JOURNEYS / CAMPAIGN_RESULTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     OMNICHANNEL_ENGAGEMENT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CDP/martech stack),
+     or replace _fetch_collection() with your own API client. Fields the
+     rest of the file needs are listed in _normalize_live_channels() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (revenue, cost, conversions) are where you wire
+     your commerce and ad platforms.
+
+OPERATIONS
+  channel_performance | journey_analysis | engagement_optimization
+  | campaign_attribution | unified_customer_journey | friction_resolution
+  | channel_recommendation | proactive_engagement_plan | handoff_package
+  kwargs: operation (required), channel, campaign_id, user_input
 """
 
 import sys
@@ -14,13 +37,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/omnichannel_engagement",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Omnichannel Engagement Agent",
-    "description": "Analyzes channel performance, customer journeys, and campaign attribution from built-in demo engagement data.",
+    "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["omnichannel", "engagement", "journey", "attribution", "campaign", "b2c"],
     "category": "b2c_sales",
@@ -30,7 +55,85 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export OMNICHANNEL_ENGAGEMENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CDP / martech client.
+# Downstream code only needs the shape produced by
+# _normalize_live_channels().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "OMNICHANNEL_ENGAGEMENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_CASE_ORIGIN_LABELS = {1: "phone", 2: "email", 3: "web"}
+
+
+def _normalize_live_channels(incidents, emails):
+    """Project live tenant activity onto the channel shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict of channel-name -> metrics dicts with these keys. None means
+    'not available from CRM alone' and the renderers label it as an
+    enrichment seam. In this template a case's origin (Phone/Email/Web)
+    is reinterpreted as its engagement channel and email activities are
+    email-channel touchpoints; interactions stand in for sessions."""
+    channels = {}
+    for inc in incidents:
+        label = _CASE_ORIGIN_LABELS.get(inc.get("caseorigincode"), "other")
+        ch = channels.setdefault(label, {
+            "interactions_30d": 0,   # real count of live records
+            "open_items": 0,          # real count (statecode == 0)
+            "resolved_items": 0,      # real count (statecode == 1)
+            "conversions_30d": None,  # enrichment seam — wire your commerce platform
+            "revenue_30d": None,      # enrichment seam
+            "cost_30d": None,         # enrichment seam — wire your ad platforms
+        })
+        ch["interactions_30d"] += 1
+        if inc.get("statecode") == 0:
+            ch["open_items"] += 1
+        elif inc.get("statecode") == 1:
+            ch["resolved_items"] += 1
+    if emails:
+        ch = channels.setdefault("email", {
+            "interactions_30d": 0, "open_items": 0, "resolved_items": 0,
+            "conversions_30d": None, "revenue_30d": None, "cost_30d": None,
+        })
+        ch["interactions_30d"] += len(emails)
+    return channels
+
+
+def _na(value, fmt="{:,}"):
+    """None = the CRM alone can't know this (enrichment seam); 0 is real."""
+    return "n/a — enrichment seam" if value is None else fmt.format(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CHANNELS = {
@@ -262,9 +365,33 @@ class OmnichannelEngagementAgent(BasicAgent):
         return _evidence_action(action, **kwargs)
 
     def _channel_performance(self, **kwargs) -> str:
+        incidents = _fetch_collection("incidents")
+        if incidents:
+            emails = _fetch_collection("emails")
+            live = _normalize_live_channels(incidents, emails)
+            total = sum(c["interactions_30d"] for c in live.values())
+            lines = ["# Channel Performance (live tenant data)\n"]
+            lines.append(f"**Total Interactions:** {total:,} (live cases + email activities)")
+            lines.append("**Total Revenue:** n/a — enrichment seam (wire your commerce platform)\n")
+            lines.append("| Channel | Interactions | Open | Resolved | Revenue | Cost |")
+            lines.append("|---|---|---|---|---|---|")
+            for name, ch in sorted(live.items(), key=lambda kv: -kv[1]["interactions_30d"]):
+                lines.append(
+                    f"| {name.replace('_', ' ').title()} | {ch['interactions_30d']:,} "
+                    f"| {ch['open_items']:,} | {ch['resolved_items']:,} "
+                    f"| {_na(ch['revenue_30d'])} | {_na(ch['cost_30d'])} |"
+                )
+            lines.append("\n## Interaction Share by Channel\n")
+            for name, ch in sorted(live.items(), key=lambda kv: -kv[1]["interactions_30d"]):
+                share = round((ch["interactions_30d"] / total) * 100, 1) if total else 0
+                lines.append(f"- {name.replace('_', ' ').title()}: {share}%")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (incidents + emails). "
+                         "Case origin is reinterpreted as engagement channel._")
+            return "\n".join(lines)
+
         total_revenue = sum(c["revenue_30d"] for c in CHANNELS.values())
         total_conversions = sum(c["conversions_30d"] for c in CHANNELS.values())
-        lines = ["# Channel Performance (30-Day)\n"]
+        lines = ["# Channel Performance (30-Day, embedded demo data — offline)\n"]
         lines.append(f"**Total Revenue:** ${total_revenue:,.0f}")
         lines.append(f"**Total Conversions:** {total_conversions:,}\n")
         lines.append("| Channel | Sessions | Conversions | CVR | Revenue | Cost | ROAS |")
@@ -374,10 +501,14 @@ class OmnichannelEngagementAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = OmnichannelEngagementAgent()
+    print("=" * 60)
+    print("LIVE TENANT CHANNEL MIX (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="channel_performance"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="journey_analysis"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="engagement_optimization"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO ANALYTICS (works offline)")
     print(agent.perform(operation="campaign_attribution"))
+    print("\n" + "=" * 60 + "\n")
+    print(agent.perform(operation="journey_analysis"))
+    print("\n" + "=" * 60 + "\n")
+    print(agent.perform(operation="engagement_optimization"))

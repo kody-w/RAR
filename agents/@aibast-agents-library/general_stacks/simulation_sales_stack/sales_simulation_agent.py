@@ -1,17 +1,46 @@
 """
-Sales Simulation Agent
+Sales Simulation Agent — a template you are meant to mutate.
 
 Simulates sales scenarios with buyer personas, objection practice, and
-performance scoring for training and preparation.
+performance scoring for training and preparation. Scenarios can be
+built from REAL open opportunities so reps rehearse the deals they are
+actually working.
 
-Where a real deployment would integrate with LMS and CRM, this agent uses
-a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live opportunities and accounts over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="scenario_setup",
+                  scenario_id="Copper Kite Design")
+     — builds a role-play scenario from the tenant's real seeded
+     "Copper Kite Design — Secure print rollout" opportunity ($5,700,
+     50% close probability).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_SCENARIOS / _BUYER_PERSONAS) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SALES_SIMULATION_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from Salesforce), or replace
+     _fetch_collection() with your CRM client. The fields the rest of
+     the file needs are listed in _normalize_live_scenario() —
+     difficulty is derived from close probability by a stated rule, and
+     the buyer's actual personality is an enrichment seam (wire your
+     meeting notes).
+
+OPERATIONS
+  scenario_setup | run_simulation | objection_practice
+  | performance_score
+  kwargs: operation (required), scenario_id (embedded 'SCN-001' or a
+  live opportunity/account name like 'Copper Kite Design')
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +48,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/sales_simulation",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Sales Simulation",
-    "description": "Runs sales role-play scenarios with buyer personas, objection practice, and performance scoring using built-in demo data.",
+    "description": "Builds sales role-play scenarios from live opportunities in a simulated Dynamics 365 tenant, with personas, scoring, and offline fallback.",
     "author": "AIBAST",
     "tags": ["sales", "simulation", "training", "objections", "personas", "scoring"],
     "category": "general",
@@ -32,7 +61,96 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SALES_SIMULATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_scenario().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SALES_SIMULATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_scenario(opp, accounts_by_name):
+    """Project a Dynamics opportunity onto the scenario shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. Difficulty is DERIVED from close probability
+    (<=35% Advanced, 36-60% Intermediate, >60% Beginner) — a training
+    rule, not CRM data. The buyer's real personality is an enrichment
+    seam; wire your meeting notes there."""
+    prob = int(opp.get("closeprobability") or 0)
+    account_name = opp.get("customeridname", "Unknown account")
+    account = accounts_by_name.get(account_name, {})
+    if prob <= 35:
+        difficulty = "Advanced"
+    elif prob <= 60:
+        difficulty = "Intermediate"
+    else:
+        difficulty = "Beginner"
+    return {
+        "id": opp.get("name", account_name),
+        "name": opp.get("name", "Live opportunity"),
+        "difficulty": difficulty,
+        "industry": account.get("industrycode", "Unknown"),
+        "deal_size": float(opp.get("estimatedvalue") or 0),
+        "stage": f"Open — {prob}% close probability",
+        "context": (
+            f"Real open deal with {account_name} "
+            f"(owner: {opp.get('owneridname', 'unassigned')}; est. close "
+            f"{str(opp.get('estimatedclosedate', ''))[:10]}). "
+            f"{opp.get('description', '')}"
+        ),
+        "objectives": [
+            "Confirm the pains behind this opportunity with open questions",
+            "Validate budget against the recorded estimated value",
+            "Map the decision process and any missing stakeholders",
+            "Advance the close probability with a concrete next step",
+        ],
+        "time_limit_min": 30,
+        "_live": True,
+    }
+
+
+def _live_scenarios():
+    """Scenario-shaped dicts for live OPEN opportunities; [] offline."""
+    opportunities = _fetch_collection("opportunities")
+    if not opportunities:
+        return []
+    accounts_by_name = {a.get("name", ""): a for a in _fetch_collection("accounts")}
+    return [
+        _normalize_live_scenario(o, accounts_by_name)
+        for o in opportunities
+        if o.get("statecode") == 0
+    ]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _SCENARIOS = {
@@ -132,13 +250,20 @@ _SCORING_CRITERIA = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_scenario(query):
-    if not query:
-        return "SCN-001"
-    q = query.upper().strip()
+    """Embedded demo scenarios first, then scenarios built from live
+    open opportunities. Returns (scenario, is_live)."""
+    q = (query or "").strip()
+    if not q:
+        return _SCENARIOS["SCN-001"], False
+    qu = q.upper()
     for key in _SCENARIOS:
-        if key in q:
-            return key
-    return "SCN-001"
+        if key in qu:
+            return _SCENARIOS[key], False
+    ql = q.lower()
+    for scn in _live_scenarios():
+        if ql in scn["name"].lower():
+            return scn, True
+    return _SCENARIOS["SCN-001"], False
 
 
 def _compute_simulation_score(performance):
@@ -150,6 +275,12 @@ def _compute_simulation_score(performance):
 
 
 _SAMPLE_PERFORMANCE = {"opening": 8, "discovery": 18, "value_prop": 14, "objection_handling": 16, "closing": 11, "professionalism": 9}
+
+
+def _scenario_source_line(is_live):
+    if is_live:
+        return "Scenario source: LIVE opportunity from the Aster Lane Dynamics 365 tenant"
+    return "Scenario source: embedded demo layer (simulated)"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -195,7 +326,7 @@ class SalesSimulationAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "scenario_setup")
-        scn_id = _resolve_scenario(kwargs.get("scenario_id", ""))
+        scenario, is_live = _resolve_scenario(kwargs.get("scenario_id", ""))
         dispatch = {
             "scenario_setup": self._scenario_setup,
             "run_simulation": self._run_simulation,
@@ -205,11 +336,10 @@ class SalesSimulationAgent(BasicAgent):
         handler = dispatch.get(op)
         if not handler:
             return f"Unknown operation: {op}"
-        return handler(scn_id)
+        return handler(scenario, is_live)
 
     # ── scenario_setup ─────────────────────────────────────────
-    def _scenario_setup(self, scn_id):
-        scn = _SCENARIOS[scn_id]
+    def _scenario_setup(self, scn, is_live):
         objectives = "\n".join(f"{i+1}. {o}" for i, o in enumerate(scn["objectives"]))
         persona_rows = ""
         for pid, p in _BUYER_PERSONAS.items():
@@ -218,22 +348,23 @@ class SalesSimulationAgent(BasicAgent):
             f"**Simulation Setup: {scn['name']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
             f"| Scenario | {scn['id']} |\n"
-            f"| Difficulty | {scn['difficulty']} |\n"
+            f"| Difficulty | {scn['difficulty']}{' (derived from close probability)' if is_live else ''} |\n"
             f"| Industry | {scn['industry']} |\n"
-            f"| Deal Size | ${scn['deal_size']:,} |\n"
+            f"| Deal Size | ${scn['deal_size']:,.0f} |\n"
             f"| Stage | {scn['stage']} |\n"
             f"| Time Limit | {scn['time_limit_min']} minutes |\n\n"
             f"**Context:** {scn['context']}\n\n"
             f"**Objectives:**\n{objectives}\n\n"
-            f"**Available Buyer Personas:**\n\n"
+            f"**Available Buyer Personas** (training archetypes — the real "
+            f"buyer's personality is an enrichment seam):\n\n"
             f"| Persona | Role | Personality | Priorities |\n|---|---|---|---|\n"
-            f"{persona_rows}\n\n"
-            f"Source: [Sales Training Platform]\nAgents: SalesSimulationAgent"
+            f"{persona_rows}\n"
+            f"{_scenario_source_line(is_live)}\n"
+            f"Source: [Sales Training Platform + Live Dynamics 365 Tenant]\nAgents: SalesSimulationAgent"
         )
 
     # ── run_simulation ─────────────────────────────────────────
-    def _run_simulation(self, scn_id):
-        scn = _SCENARIOS[scn_id]
+    def _run_simulation(self, scn, is_live):
         score = _compute_simulation_score(_SAMPLE_PERFORMANCE)
         perf_rows = ""
         for skill, criteria in _SCORING_CRITERIA.items():
@@ -241,7 +372,7 @@ class SalesSimulationAgent(BasicAgent):
             perf_rows += f"| {skill.replace('_', ' ').title()} | {pts}/{criteria['max_points']} | {criteria['weight']:.0%} | {criteria['criteria'][:40]} |\n"
         grade = "A" if score >= 90 else ("B" if score >= 80 else ("C" if score >= 70 else ("D" if score >= 60 else "F")))
         return (
-            f"**Simulation Results: {scn['name']}**\n\n"
+            f"**Simulation Results: {scn['name']}** (simulated sample run)\n\n"
             f"**Overall Score: {score}/100 (Grade: {grade})**\n\n"
             f"| Skill | Points | Weight | Criteria |\n|---|---|---|---|\n"
             f"{perf_rows}\n"
@@ -251,11 +382,12 @@ class SalesSimulationAgent(BasicAgent):
             f"- Discovery was thorough but missed budget qualification\n"
             f"- Objection handling was effective on price, needs work on timing\n"
             f"- Clear next steps established\n\n"
+            f"{_scenario_source_line(is_live)}\n"
             f"Source: [Simulation Engine]\nAgents: SalesSimulationAgent"
         )
 
     # ── objection_practice ─────────────────────────────────────
-    def _objection_practice(self, scn_id):
+    def _objection_practice(self, scn, is_live):
         obj_rows = ""
         for key, obj in _OBJECTION_LIBRARY.items():
             obj_rows += f"| {key.title()} | {obj['category']} | {obj['frequency']} | {obj['success_rate']:.0%} |\n"
@@ -268,7 +400,7 @@ class SalesSimulationAgent(BasicAgent):
                 f"- Recommended: {obj['recommended_response'][:120]}...\n\n"
             )
         return (
-            f"**Objection Practice Library**\n\n"
+            f"**Objection Practice Library** (embedded demo library — simulated)\n\n"
             f"| Objection | Category | Frequency | Success Rate |\n|---|---|---|---|\n"
             f"{obj_rows}\n"
             f"{detail_sections}"
@@ -276,7 +408,7 @@ class SalesSimulationAgent(BasicAgent):
         )
 
     # ── performance_score ──────────────────────────────────────
-    def _performance_score(self, scn_id):
+    def _performance_score(self, scn, is_live):
         score = _compute_simulation_score(_SAMPLE_PERFORMANCE)
         criteria_rows = ""
         for skill, c in _SCORING_CRITERIA.items():
@@ -284,7 +416,7 @@ class SalesSimulationAgent(BasicAgent):
             pct = pts / c["max_points"] * 100
             criteria_rows += f"| {skill.replace('_', ' ').title()} | {pts}/{c['max_points']} | {pct:.0f}% | {c['criteria']} |\n"
         return (
-            f"**Performance Score Detail**\n\n"
+            f"**Performance Score Detail** (simulated sample run)\n\n"
             f"**Overall: {score}/100**\n\n"
             f"| Skill | Score | Percentage | Criteria |\n|---|---|---|---|\n"
             f"{criteria_rows}\n"
@@ -299,7 +431,13 @@ class SalesSimulationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SalesSimulationAgent()
-    for op in ["scenario_setup", "run_simulation", "objection_practice", "performance_score"]:
-        print("=" * 60)
-        print(agent.perform(operation=op, scenario_id="SCN-001"))
-        print()
+    print("=" * 60)
+    print("EMBEDDED DEMO SCENARIO (works offline)")
+    print(agent.perform(operation="scenario_setup", scenario_id="SCN-001"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT SCENARIO (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="scenario_setup", scenario_id="Copper Kite Design"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="run_simulation", scenario_id="SCN-001"))

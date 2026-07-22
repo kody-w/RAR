@@ -1,13 +1,41 @@
 """
-Order Status Communication Agent
+Order Status Communication Agent — a template you are meant to mutate.
 
 Tracks manufacturing orders through production and shipment stages,
 generates customer-facing status updates, identifies delays proactively,
 and drafts notification messages with recovery timelines.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's sales orders map onto this agent's order book directly
+     — e.g. order "ORD-260100" for Cedar Hollow Printing (Fulfilled).
+     Try: perform(operation="order_lookup")
+  2. No network? Everything falls back to the embedded demo layer below
+     (ORDERS / SHIPMENTS / DELAY_REASONS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ORDER_STATUS_COMMUNICATION_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your ERP/OMS), or
+     replace _fetch_collection() with a SAP/NetSuite order API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_order() — production percent-complete and carrier
+     tracking render as "n/a — enrichment seam" until you wire your MES
+     and carrier APIs.
+
+OPERATIONS
+  order_lookup | shipment_tracking | delay_notification | customer_update
+  | recovery_plan | engagement_execution | quality_validation
+  | performance_review
+  kwargs: operation (required), order_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/order_status_communication",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Order Status Communication Agent",
-    "description": "Tracks manufacturing orders and shipments and drafts delay notifications and customer updates using built-in demo data.",
+    "description": "Tracks orders and drafts delay and status communications from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["orders", "communication", "shipment", "customer-service", "manufacturing"],
     "category": "manufacturing",
@@ -27,8 +55,70 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ORDER_STATUS_COMMUNICATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ERP/OMS client. Downstream
+# code only needs the fields produced by _normalize_live_order().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "ORDER_STATUS_COMMUNICATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_order(row):
+    """Project a Dynamics sales order onto the order-book row this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the CRM order
+    alone' and the renderer labels it as an enrichment seam (wire your MES
+    for percent-complete and your carrier API for tracking)."""
+    return {
+        "id": row.get("ordernumber", "?"),
+        "customer": row.get("customeridname", "Unknown"),
+        "product": row.get("name", "n/a"),
+        "value": float(row.get("totalamount") or 0),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "promised_date": str(row.get("requestdeliveryby") or "")[:10] or "n/a",
+        "fulfilled_date": str(row.get("datefulfilled") or "")[:10] or None,
+        "pct_complete": None,  # enrichment seam — wire your MES
+        "_live": True,
+    }
+
+
+def _live_order_book():
+    """Sales orders from the live tenant; [] when offline."""
+    return [_normalize_live_order(r) for r in _fetch_collection("salesorders")]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 ORDERS = {
@@ -328,6 +418,22 @@ class OrderStatusCommunicationAgent(BasicAgent):
         at_risk_val = sum(_order_value(oid) for oid in ORDERS if _is_at_risk(oid))
         lines.append(f"\n**Total order book value:** ${total_val:,.2f}")
         lines.append(f"**At-risk order value:** ${at_risk_val:,.2f}")
+        live = _live_order_book()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Order Book (Dynamics sales orders)\n")
+            lines.append("| Order | Customer | Description | Value | Status | Promise Date | Fulfilled | Complete |")
+            lines.append("|-------|----------|-------------|-------|--------|--------------|-----------|----------|")
+            for o in live:
+                pct = seam if o["pct_complete"] is None else f"{o['pct_complete']}%"
+                lines.append(
+                    f"| {o['id']} | {o['customer']} | {o['product'][:30]} | ${o['value']:,.2f} | "
+                    f"{o['status']} | {o['promised_date']} | {o['fulfilled_date'] or 'not yet'} | {pct} |"
+                )
+            live_total = sum(o["value"] for o in live)
+            lines.append(f"\n**Live tenant order book value:** ${live_total:,.2f}")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo orders only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -496,7 +602,13 @@ def _validate_delivery_date_contracts(agent):
 if __name__ == "__main__":
     agent = OrderStatusCommunicationAgent()
     _validate_delivery_date_contracts(agent)
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO ORDERS + LIVE TENANT ORDER BOOK")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="order_lookup"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

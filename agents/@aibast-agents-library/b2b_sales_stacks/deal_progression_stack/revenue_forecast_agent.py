@@ -1,19 +1,41 @@
 """
-Revenue Forecast Agent
+Revenue Forecast Agent — a template you are meant to mutate.
 
-Generates quarterly revenue forecasts using weighted pipeline analysis,
-runs scenario modeling (best case, commit, worst case), compares commit
-vs best-case projections, and tracks forecast accuracy over time. Provides
-sales leadership with data-driven revenue projections and confidence levels.
+Builds weighted revenue forecasts, scenario models (best/expected/worst),
+commit-vs-best-case comparisons, and forecast accuracy reports for sales
+leadership.
 
-Where a real deployment would call Salesforce, Clari, Aviso, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="quarterly_forecast") — the weighted forecast
+     is computed from live open deals such as "Marigold Field Services —
+     Mobile workstation expansion" (value x CRM close probability).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_PIPELINE_DEALS / _HISTORICAL_ACCURACY) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     REVENUE_FORECAST_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). Quota and
+     rep forecast overrides are enrichment seams — wire your sales-ops
+     system there; accuracy history stays simulated until you do.
+
+OPERATIONS
+  quarterly_forecast | scenario_analysis | commit_vs_best_case
+  | forecast_accuracy
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/revenue_forecast",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Revenue Forecast",
-    "description": "Builds quarterly revenue forecasts, scenario models, and forecast-accuracy reports from built-in demo pipeline data.",
+    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "revenue-forecast", "deal-progression", "analytics"],
     "category": "b2b_sales",
@@ -34,7 +56,86 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export REVENUE_FORECAST_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "REVENUE_FORECAST_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _forecast_category(probability_pct):
+    """Derive a forecast category from CRM close probability (a rule you
+    should tune to your own sales process)."""
+    if probability_pct >= 70:
+        return "commit"
+    if probability_pct >= 50:
+        return "best_case"
+    if probability_pct >= 25:
+        return "upside"
+    return "pipeline"
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (forecast overrides live in your
+    sales-ops system)."""
+    prob_pct = int(row.get("closeprobability") or 0)
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "probability": prob_pct / 100,
+        "close_date": str(row.get("estimatedclosedate") or "")[:10],
+        "category": _forecast_category(prob_pct),
+        "owner": row.get("owneridname", ""),
+        "forecast_override": None,  # enrichment seam — wire sales-ops
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _PIPELINE_DEALS = {
@@ -169,8 +270,41 @@ class RevenueForecastAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- quarterly_forecast --------------------------------------------
+    # -- quarterly_forecast (flagship: prefers LIVE tenant, falls back) -
     def _quarterly_forecast(self) -> str:
+        live = _live_open_deals()
+        if live:
+            weighted = round(sum(d["value"] * d["probability"] for d in live))
+            total_pipeline = sum(d["value"] for d in live)
+            cats = {"commit": 0, "best_case": 0, "upside": 0, "pipeline": 0}
+            for d in live:
+                cats[d["category"]] += d["value"]
+            rows = ""
+            for d in sorted(live, key=lambda x: -x["value"]):
+                w = round(d["value"] * d["probability"])
+                rows += (f"| {d['name']} | ${d['value']:,} | {d['stage']} | "
+                         f"{d['probability']:.0%} | ${w:,} | {d['category']} | "
+                         f"n/a — enrichment seam |\n")
+            return (
+                f"**Revenue Forecast — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"| Metric | Value |\n"
+                f"|--------|-------|\n"
+                f"| Total Pipeline | ${total_pipeline:,} |\n"
+                f"| Weighted Forecast | ${weighted:,} |\n"
+                f"| Quota | n/a — enrichment seam (set your quota in your sales-ops system) |\n\n"
+                f"**Category Breakdown** (derived from CRM close probability):\n"
+                f"- Commit (>=70%): ${cats['commit']:,}\n"
+                f"- Best Case (50-69%): ${cats['best_case']:,}\n"
+                f"- Upside (25-49%): ${cats['upside']:,}\n"
+                f"- Pipeline (<25%): ${cats['pipeline']:,}\n\n"
+                f"**Deal-Level Forecast:**\n\n"
+                f"| Deal | Value | Stage | Prob | Weighted | Category | Override |\n"
+                f"|------|-------|-------|------|---------|----------|----------|\n"
+                f"{rows}\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: ForecastEngine, PipelineAnalytics"
+            )
         weighted = _weighted_forecast()
         cats = _category_totals()
         total_pipeline = sum(d["value"] for d in _PIPELINE_DEALS.values())
@@ -341,7 +475,13 @@ class RevenueForecastAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = RevenueForecastAgent()
-    for op in ["quarterly_forecast", "scenario_analysis", "commit_vs_best_case", "forecast_accuracy"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT FORECAST (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="quarterly_forecast"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="scenario_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="forecast_accuracy"))

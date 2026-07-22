@@ -1,13 +1,34 @@
 """
-Inventory Visibility Agent — Retail & CPG Stack
+Inventory Visibility Agent — a template you are meant to mutate.
 
-Provides real-time inventory visibility across stores, warehouses, and channels.
-Surfaces stock alerts, generates replenishment plans, and optimizes channel
-allocation for omni-channel retail operations.
+Provides omni-channel inventory visibility across stores, warehouses, and
+channels: stock dashboards, stock-out alerts, replenishment plans, and
+channel allocation for retail operations.
 
-Version 1.1.0 adds deterministic, exact-keyed examples for demonstrated
-network status, store reallocation, simulated execution, and investment
-proposal workflows. All external writes are simulated.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls the live product catalog and sales orders over
+     real HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="inventory_dashboard")
+     — with network up, the dashboard is built from the tenant's live
+     products (e.g. "Mobile Cart M8", AST-CRT-008) plus live sales-order
+     demand signals.
+  2. No network? Everything falls back to the embedded demo layer below
+     (STORES / SKUS / INVENTORY) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     INVENTORY_VISIBILITY_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from your ERP/WMS), or replace
+     _fetch_collection() with your own inventory API. The fields the rest
+     of the file needs are listed in _normalize_live_product() — everything
+     else keeps working untouched. Per-location on-hand and days-of-supply
+     are labeled "n/a — enrichment seam" until you wire your WMS.
+
+OPERATIONS
+  inventory_dashboard | stock_alerts | replenishment_plan |
+  channel_allocation | network_inventory_status | reallocation_scenarios |
+  reallocation_execution | investment_proposal
+  kwargs: operation (required), sku_id, location_id, key, user_input
 """
 
 import sys
@@ -18,14 +39,17 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_visibility",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Inventory Visibility Agent",
     "description": (
-        "Reports stock levels, stock-out alerts, replenishment plans, and channel allocation from built-in demo retail inventory data."
+        "Reports stock dashboards, alerts, and replenishment plans from a live simulated Dynamics 365 tenant catalog, with an offline demo fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -41,8 +65,74 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export INVENTORY_VISIBILITY_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ERP/WMS client. Downstream
+# code only needs the fields produced by _normalize_live_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "INVENTORY_VISIBILITY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the catalog alone'
+    and the renderers label it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "unit_cost": _f(row.get("currentcost")),
+        "retail_price": _f(row.get("price")),
+        "on_hand": None,          # enrichment seam — wire your WMS
+        "description": row.get("description", ""),
+        "active": row.get("statecode") == 0,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else fmt.format(value)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Stores & Warehouses
+# EMBEDDED DEMO LAYER (offline fallback) — Stores & Warehouses
 # ---------------------------------------------------------------------------
 
 STORES = {
@@ -342,8 +432,49 @@ class InventoryVisibilityAgent(BasicAgent):
 
     # ---- operations -------------------------------------------------------
 
+    def _live_inventory_dashboard(self, products):
+        """Dashboard built from live tenant records (preferred when online)."""
+        orders = _fetch_collection("salesorders")
+        open_orders = [o for o in orders if o.get("statecode") in (0, 1)]
+        open_demand = sum(float(o.get("totalamount") or 0) for o in open_orders)
+        lines = [
+            "# Inventory Dashboard — Live Tenant Catalog",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "Pass `location_id` (e.g. STR-001) for the embedded demo store view.",
+            "",
+            "| SKU | Product | Category | Unit Cost | Retail | On-Hand | Active |",
+            "|-----|---------|----------|-----------|--------|---------|--------|",
+        ]
+        for p in sorted(products, key=lambda x: x["sku_id"]):
+            lines.append(
+                f"| {p['sku_id']} | {p['name']} | {p['category']} "
+                f"| {_na(p['unit_cost'], '${:,.2f}')} | {_na(p['retail_price'], '${:,.2f}')} "
+                f"| {_na(p['on_hand'])} | {'yes' if p['active'] else 'no'} |"
+            )
+        lines.append("")
+        lines.append(f"**Catalog size:** {len(products)} live products")
+        lines.append(
+            f"**Demand signal (live sales orders):** {len(open_orders)} open orders, "
+            f"${open_demand:,.2f} open order value"
+        )
+        lines.append(
+            "**Per-location on-hand / days-of-supply:** n/a — enrichment seam "
+            "(wire your WMS at the LIVE DATA SEAM)"
+        )
+        return "\n".join(lines)
+
     def _inventory_dashboard(self, **kwargs):
         location_id = kwargs.get("location_id")
+        if not location_id:
+            live = [
+                p for p in (
+                    _normalize_live_product(r) for r in _fetch_collection("products")
+                )
+                if p["sku_id"]
+            ]
+            if live:
+                return self._live_inventory_dashboard(live)
         locations = [location_id] if location_id and location_id in INVENTORY else list(STORES.keys())
         lines = ["# Inventory Dashboard", ""]
         for loc_id in locations:
@@ -536,7 +667,11 @@ class InventoryVisibilityAgent(BasicAgent):
 if __name__ == "__main__":
     agent = InventoryVisibilityAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO STORE (works offline)")
     print(agent.perform(operation="inventory_dashboard", location_id="STR-001"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT CATALOG (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="inventory_dashboard"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="stock_alerts"))
     print("\n" + "=" * 80)

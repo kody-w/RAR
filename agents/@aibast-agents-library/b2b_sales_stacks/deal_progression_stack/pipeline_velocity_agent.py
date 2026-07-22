@@ -1,19 +1,41 @@
 """
-Pipeline Velocity Agent
+Pipeline Velocity Agent — a template you are meant to mutate.
 
-Measures and analyzes pipeline velocity metrics across all stages,
-identifies bottlenecks slowing deal progression, benchmarks performance
-against historical data, and generates acceleration plans to improve
-time-to-close across the sales pipeline.
+Measures pipeline velocity across stages, detects bottlenecks, benchmarks
+against history, and drafts acceleration plans to improve time-to-close.
 
-Where a real deployment would call Salesforce, Clari, InsightSquared, etc.,
-this agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="velocity_dashboard") — velocity, stage
+     distribution, and cycle length are computed from live records such
+     as the closed-won "Foxglove Learning — Secure print rollout".
+  2. No network? Everything falls back to the embedded demo layer below
+     (_STAGE_TIMESTAMPS / _QUARTERLY_VELOCITY) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PIPELINE_VELOCITY_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). Per-stage
+     timestamp history is an enrichment seam — wire your CRM stage audit
+     log there; quarterly trend stays simulated until you do.
+
+OPERATIONS
+  velocity_dashboard | stage_analysis | bottleneck_detection
+  | acceleration_plan
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/pipeline_velocity",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Pipeline Velocity",
-    "description": "Measures pipeline velocity, detects stage bottlenecks, and drafts acceleration plans from built-in demo sales data.",
+    "description": "Measures pipeline velocity from live opportunities in a simulated Dynamics 365 tenant, with bottlenecks and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "pipeline-velocity", "deal-progression", "analytics"],
     "category": "b2b_sales",
@@ -34,7 +56,90 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PIPELINE_VELOCITY_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "PIPELINE_VELOCITY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _parse_dt(iso_date):
+    try:
+        return datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return None
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (per-stage timestamps need your
+    CRM stage audit log)."""
+    created = _parse_dt(row.get("createdon"))
+    closed = _parse_dt(row.get("actualclosedate"))
+    end = closed or datetime.now(timezone.utc)
+    age = max(0, (end - created).days) if created else 0
+    state = row.get("statecode")
+    if state == 1:
+        stage = "Closed Won"
+    elif state == 2:
+        stage = "Closed Lost"
+    else:
+        stage = _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification")
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "owner": row.get("owneridname", ""),
+        "current_stage": stage,
+        "total_age": age,
+        "probability": (int(row.get("closeprobability") or 0)) / 100,
+        "stages": None,  # enrichment seam — wire your stage audit log
+        "_open": state == 0,
+        "_live": True,
+    }
+
+
+def _live_deals():
+    """All live opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _STAGE_TIMESTAMPS = {
@@ -182,8 +287,51 @@ class PipelineVelocityAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- velocity_dashboard --------------------------------------------
+    # -- velocity_dashboard (flagship: prefers LIVE tenant, falls back) -
     def _velocity_dashboard(self) -> str:
+        live = _live_deals()
+        if live:
+            open_deals = [d for d in live if d["_open"]]
+            won_deals = [d for d in live if d["current_stage"] == "Closed Won"]
+            num_deals = len(open_deals)
+            total_value = sum(d["value"] for d in open_deals)
+            avg_value = round(total_value / max(num_deals, 1))
+            won_cycles = [d["total_age"] for d in won_deals if d["total_age"]]
+            avg_cycle = round(sum(won_cycles) / max(len(won_cycles), 1)) if won_cycles else \
+                round(sum(d["total_age"] for d in open_deals) / max(num_deals, 1))
+            avg_prob = round(sum(d["probability"] for d in open_deals) / max(num_deals, 1), 2)
+            velocity = _pipeline_velocity_formula(num_deals, avg_value, avg_prob, avg_cycle)
+
+            stage_counts = {}
+            for d in open_deals:
+                s = d["current_stage"]
+                stage_counts.setdefault(s, {"count": 0, "value": 0})
+                stage_counts[s]["count"] += 1
+                stage_counts[s]["value"] += d["value"]
+            stage_rows = ""
+            for stage in ["Qualification", "Discovery", "Proposal", "Negotiation", "Contract"]:
+                sc = stage_counts.get(stage, {"count": 0, "value": 0})
+                stage_rows += f"| {stage} | {sc['count']} | ${sc['value']:,} |\n"
+
+            return (
+                f"**Pipeline Velocity Dashboard — LIVE** (Static Dynamics 365 tenant)\n\n"
+                f"| Metric | Value |\n"
+                f"|--------|-------|\n"
+                f"| Active Deals | {num_deals} |\n"
+                f"| Total Pipeline | ${total_value:,} |\n"
+                f"| Avg Deal Value | ${avg_value:,} |\n"
+                f"| Avg Win Prob (CRM) | {avg_prob:.0%} |\n"
+                f"| Avg Cycle Length | {avg_cycle} days (from {len(won_cycles)} closed-won deals) |\n"
+                f"| **Pipeline Velocity** | **${velocity:,}/day** |\n\n"
+                f"**Stage Distribution (open deals):**\n\n"
+                f"| Stage | Deals | Value |\n"
+                f"|-------|-------|-------|\n"
+                f"{stage_rows}\n"
+                f"**Quarterly Velocity Trend:** n/a — enrichment seam "
+                f"(wire your historical analytics; the offline demo shows a simulated trend)\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: VelocityEngine, PipelineTracker"
+            )
         deals = _STAGE_TIMESTAMPS
         num_deals = len(deals)
         total_value = sum(d["value"] for d in deals.values())
@@ -373,7 +521,13 @@ class PipelineVelocityAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = PipelineVelocityAgent()
-    for op in ["velocity_dashboard", "stage_analysis", "bottleneck_detection", "acceleration_plan"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT DASHBOARD (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="velocity_dashboard"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="stage_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="bottleneck_detection"))

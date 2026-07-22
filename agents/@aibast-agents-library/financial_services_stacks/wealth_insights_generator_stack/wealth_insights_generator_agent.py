@@ -1,8 +1,36 @@
 """
-Wealth Insights Generator Agent — Financial Services Stack
+Wealth Insights Generator Agent — a template you are meant to mutate.
 
 Generates market briefs, client insights, opportunity alerts, and
-performance attribution reports for wealth management teams.
+performance attribution reports for wealth management teams. In this
+template a client opportunity alert is represented as an open Dynamics
+365 opportunity — the tenant has no native planning-signal entity, so the
+open pipeline stands in for the advisor's opportunity radar.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `opportunity_alerts` operation pulls
+     live opportunity records over real HTTP from the globally hosted
+     Static Dynamics 365 tenant (Aster Lane Office Systems — synthetic
+     data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="opportunity_alerts")
+     and look for "Orchard Signal Works — Managed print fleet refresh"
+     among the high-priority alerts.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CLIENT_PORTFOLIOS / OPPORTUNITY_SIGNALS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     WEALTH_INSIGHTS_GENERATOR_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your planning
+     platform), or replace _fetch_collection() with your own client. The
+     fields the rest of the file needs are listed in
+     _normalize_live_alert() — life events and planning context are
+     enrichment seams until you wire your CRM notes and planning tools.
+
+OPERATIONS
+  market_brief | client_insights | opportunity_alerts
+  | performance_attribution | portfolio-intelligence capabilities
+  kwargs: operation (required), user_input
 """
 
 import sys
@@ -10,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/wealth_insights_generator",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Wealth Insights Generator Agent",
-    "description": "Generates market briefs, client insights, opportunity alerts, and performance attribution for wealth teams from built-in demo data.",
+    "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["wealth", "insights", "market", "performance", "analytics", "financial-services"],
     "category": "financial_services",
@@ -25,8 +55,71 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export WEALTH_INSIGHTS_GENERATOR_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/planning client. Downstream
+# code only needs the fields produced by _normalize_live_alert().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "WEALTH_INSIGHTS_GENERATOR_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_alert(row):
+    """Project an open Dynamics opportunity onto the alert shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the CRM
+    alone' and the renderers label it as an enrichment seam."""
+    probability = int(row.get("closeprobability") or 0)
+    value = float(row.get("estimatedvalue") or 0)
+    close_date = str(row.get("estimatedclosedate", ""))[:10]
+    return {
+        "client": row.get("parentaccountidname") or row.get("customeridname", "Unknown"),
+        "type": "open_pipeline",
+        "description": f"{row.get('name', 'untitled')} — est ${value:,.0f}",
+        "priority": "high" if probability >= 50 else "medium",
+        "action": f"Advance toward close (probability {probability}%, target {close_date or 'n/a'})",
+        "owner": row.get("owneridname", ""),
+        "life_events": None,  # enrichment seam — wire your CRM notes / planning tools
+        "_live": True,
+    }
+
+
+def _live_alerts():
+    """List of live tenant opportunity alerts (open pipeline); [] offline."""
+    rows = _fetch_collection("opportunities")
+    return [_normalize_live_alert(row) for row in rows if row.get("statecode") == 0]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 MARKET_DATA = {
@@ -419,6 +512,28 @@ class WealthInsightsGeneratorAgent(BasicAgent):
         return "\n".join(lines)
 
     def _opportunity_alerts(self, **kwargs) -> str:
+        live = _live_alerts()
+        if live:
+            lines = ["# Opportunity Alerts (live tenant)\n"]
+            for label, priority in (("High Priority", "high"), ("Medium Priority", "medium")):
+                bucket = [s for s in live if s["priority"] == priority]
+                if not bucket:
+                    continue
+                lines.append(f"## {label}\n")
+                for s in bucket:
+                    lines.append(f"### {s['client']} — Open Pipeline\n")
+                    lines.append(f"- **Description:** {s['description']}")
+                    lines.append(f"- **Recommended Action:** {s['action']}")
+                    lines.append(f"- **Owner:** {s['owner']}")
+                    lines.append("- **Life Events:** n/a — enrichment seam\n")
+            lines.append(f"**Total Alerts:** {len(live)}")
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — open opportunities "
+                "reinterpreted as advisor opportunity alerts. Life events and "
+                "planning context are enrichment seams._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Opportunity Alerts\n"]
         high = [s for s in OPPORTUNITY_SIGNALS if s["priority"] == "high"]
         medium = [s for s in OPPORTUNITY_SIGNALS if s["priority"] == "medium"]
@@ -437,6 +552,7 @@ class WealthInsightsGeneratorAgent(BasicAgent):
                 lines.append(f"- **Description:** {s['description']}")
                 lines.append(f"- **Recommended Action:** {s['action']}\n")
         lines.append(f"**Total Alerts:** {len(OPPORTUNITY_SIGNALS)}")
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
     def _performance_attribution(self, **kwargs) -> str:
@@ -536,10 +652,13 @@ class WealthInsightsGeneratorAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = WealthInsightsGeneratorAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO MARKET BRIEF (works offline)")
     print(agent.perform(operation="market_brief"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="client_insights"))
     print("\n" + "=" * 80 + "\n")
+    print("LIVE TENANT OPPORTUNITY ALERTS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="opportunity_alerts"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="performance_attribution"))

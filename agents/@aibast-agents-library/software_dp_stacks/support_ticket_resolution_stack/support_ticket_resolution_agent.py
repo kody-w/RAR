@@ -1,22 +1,50 @@
 """
-Support Ticket Resolution Agent for Software/Digital Products.
+Support Ticket Resolution Agent — a template you are meant to mutate.
 
 Provides intelligent ticket triage, knowledge base resolution search,
 escalation routing, and SLA compliance dashboards for support operations.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live support tickets over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="ticket_triage")
+     — with network up, the triage queue is the tenant's live open cases
+     (e.g. CAS-260125 "Patient intake forms failing to sync to records
+     system" for Riverbend Medical Group). A Dynamics case maps directly
+     onto a support ticket; case priority maps to P1/P2/P3.
+  2. No network? Everything falls back to the embedded demo layer below
+     (SUPPORT_TICKETS / KB_ARTICLES) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SUPPORT_TICKET_RESOLUTION_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from Zendesk/Freshdesk),
+     or replace _fetch_collection() with your own ticketing API. The
+     fields the rest of the file needs are listed in
+     _normalize_live_ticket() — customer ARR and KB matches stay
+     "n/a — enrichment seam" until you wire your billing system and
+     knowledge base.
+
+OPERATIONS
+  ticket_triage | resolution_search | escalation_routing | sla_dashboard
+  kwargs: operation (required), category
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/support_ticket_resolution",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Support Ticket Resolution Agent",
-    "description": "Triages support tickets, searches a knowledge base, routes escalations, and reports SLA compliance using built-in demo data.",
+    "description": "Triages tickets and tracks SLAs from a live simulated Dynamics 365 tenant's support cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["support", "tickets", "triage", "sla", "knowledge-base", "escalation"],
     "category": "software_digital_products",
@@ -26,8 +54,85 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SUPPORT_TICKET_RESOLUTION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ticketing client. Downstream
+# code only needs the fields produced by _normalize_live_ticket().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SUPPORT_TICKET_RESOLUTION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Dynamics case priority -> support severity used by this agent.
+_PRIORITY_TO_SEVERITY = {"High": "P1", "Normal": "P2", "Low": "P3"}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_ticket(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — a Dynamics case maps directly onto a support ticket. THIS is
+    the contract your replacement data source must meet — a dict with
+    these keys. None means 'not available from the ticketing system
+    alone' and the renderers label it as an enrichment seam."""
+    priority = row.get(
+        "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+    )
+    return {
+        "id": row.get("ticketnumber", row.get("incidentid", "")),
+        "customer": row.get("customeridname", "Unknown"),
+        "subject": row.get("title", "untitled"),
+        "severity": _PRIORITY_TO_SEVERITY.get(priority, "P2"),
+        "category": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "assigned_to": row.get("owneridname", "Unassigned"),
+        "sla_deadline": str(row.get("resolveby") or "")[:10] or None,
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "arr": None,         # enrichment seam — wire your billing system
+        "kb_matches": None,  # enrichment seam — wire your knowledge base
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 SUPPORT_TICKETS = {
@@ -242,7 +347,49 @@ class SupportTicketResolutionAgent(BasicAgent):
             return self._sla_dashboard()
         return f"**Error:** Unknown operation `{op}`."
 
+    def _live_ticket_triage(self, tickets):
+        """Triage queue built from live tenant cases (preferred online)."""
+        open_tickets = [t for t in tickets if t["open"]]
+        sev_order = {"P1": 0, "P2": 1, "P3": 2, "P4": 3}
+        open_tickets.sort(key=lambda t: (sev_order.get(t["severity"], 9), t["id"]))
+        lines = [
+            "# Ticket Triage Queue — Live Tenant Cases",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "A Dynamics case maps directly onto a support ticket; case priority",
+            "maps to P1/P2/P3.",
+            "",
+            f"**Open Tickets:** {len(open_tickets)} of {len(tickets)} total",
+            "",
+            "| Priority | Ticket | Customer | Subject | Category | Age | SLA Target | ARR |",
+            "|----------|--------|----------|---------|----------|-----|------------|-----|",
+        ]
+        for t in open_tickets:
+            arr = "n/a — enrichment seam" if t["arr"] is None else f"${t['arr']:,}"
+            lines.append(
+                f"| {t['severity']} | {t['id']} | {t['customer']} | {t['subject']} "
+                f"| {t['category']} | {t['age_days']}d | {t['sla_deadline'] or 'n/a'} "
+                f"| {arr} |"
+            )
+        p1 = sum(1 for t in open_tickets if t["severity"] == "P1")
+        lines.append("")
+        lines.append(f"**P1 tickets needing immediate attention:** {p1}")
+        lines.append(
+            "Customer ARR and KB matches need your billing system and knowledge "
+            "base — wire them at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _ticket_triage(self) -> str:
+        live = [
+            t for t in (
+                _normalize_live_ticket(row)
+                for row in _fetch_collection("incidents")
+            )
+            if t["id"]
+        ]
+        if live:
+            return self._live_ticket_triage(live)
         data = _ticket_triage()
         lines = [
             "# Ticket Triage Queue",
@@ -316,7 +463,14 @@ class SupportTicketResolutionAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = SupportTicketResolutionAgent()
-    for op in ["ticket_triage", "resolution_search", "escalation_routing", "sla_dashboard"]:
+    print("=" * 60)
+    print("LIVE TENANT TRIAGE QUEUE (fetched over HTTP; falls back to the")
+    print("embedded demo tickets offline)")
+    print(agent.perform(operation="ticket_triage"))
+    print("\n" + "=" * 60)
+    print("EMBEDDED DEMO TICKETS (works offline)")
+    print(agent.perform(operation="sla_dashboard"))
+    for op in ["resolution_search", "escalation_routing"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

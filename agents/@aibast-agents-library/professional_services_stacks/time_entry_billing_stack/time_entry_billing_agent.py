@@ -1,13 +1,41 @@
 """
-Time Entry & Billing Agent
+Time Entry & Billing Agent — a template you are meant to mutate.
 
 Processes consultant time entries, validates against project budgets and
 billing rules, identifies unbilled hours, and prepares invoice packages
 with audit-ready documentation.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's invoices feed the receivables view directly — e.g.
+     invoice "INV-260102" for Marigold Field Services ($2,880, Active).
+     Try: perform(operation="unbilled_report")
+  2. No network? Everything falls back to the embedded demo layer below
+     (TIME_ENTRIES / PROJECT_BUDGETS / INVOICE_HISTORY) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     TIME_ENTRY_BILLING_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your PSA/finance system), or
+     replace _fetch_collection() with a QuickBooks/NetSuite AR client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_invoice() — days outstanding is computed from the
+     live due date; collection notes render as "n/a — enrichment seam"
+     until you wire your AR workflow.
+
+OPERATIONS
+  unbilled_report | billing_summary | time_entry_audit
+  | invoice_preparation | exception_resolution | billing_close_package
+  kwargs: operation (required), record_id, entry_id
 """
 
 import sys
 import os
+import json
+import urllib.request
+from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/time_entry_billing",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Time Entry & Billing Agent",
-    "description": "Audits time entries, surfaces unbilled hours, and prepares invoice packages from built-in demo billing data.",
+    "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["billing", "time-entry", "invoicing", "audit", "professional-services"],
     "category": "professional_services",
@@ -27,8 +55,80 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export TIME_ENTRY_BILLING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your finance/AR client.
+# Downstream code only needs the fields from _normalize_live_invoice().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "TIME_ENTRY_BILLING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_INVOICE_STATE = {0: "outstanding", 1: "paid", 2: "cancelled"}
+
+
+def _days_past_due(iso_date):
+    """Real computation: whole days elapsed since the due date (0 if not
+    yet due or unparseable)."""
+    try:
+        due = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - due).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _normalize_live_invoice(row):
+    """Project a Dynamics invoice onto the receivables row this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the invoice
+    record alone' and the renderer labels it as an enrichment seam (wire
+    your AR workflow for collection notes)."""
+    return {
+        "invoice_id": row.get("invoicenumber", "?"),
+        "client": row.get("customeridname", "Unknown"),
+        "amount": float(row.get("totalamount") or 0),
+        "due_date": str(row.get("duedate") or "")[:10] or "n/a",
+        "status": _LIVE_INVOICE_STATE.get(row.get("statecode"), "unknown"),
+        "days_outstanding": _days_past_due(row.get("duedate")),
+        "collection_notes": None,  # enrichment seam — wire your AR workflow
+        "_live": True,
+    }
+
+
+def _live_invoices():
+    """Invoices from the live tenant ledger; [] when offline."""
+    return [_normalize_live_invoice(r) for r in _fetch_collection("invoices")]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 TIME_ENTRIES = [
@@ -349,6 +449,23 @@ class TimeEntryBillingAgent(BasicAgent):
                 )
         total_outstanding = sum(inv["amount"] for inv in INVOICE_HISTORY if inv["status"] != "paid")
         lines.append(f"\n**Total outstanding:** ${total_outstanding:,.2f}")
+        live = _live_invoices()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Invoice Ledger (Dynamics invoices)\n")
+            lines.append("| Invoice | Client | Amount | Due Date | Status | Days Past Due | Collection Notes |")
+            lines.append("|---------|--------|--------|----------|--------|---------------|------------------|")
+            for inv in live:
+                lines.append(
+                    f"| {inv['invoice_id']} | {inv['client']} | ${inv['amount']:,.2f} | "
+                    f"{inv['due_date']} | **{inv['status'].upper()}** | {inv['days_outstanding']} | "
+                    f"{inv['collection_notes'] or seam} |"
+                )
+            live_open = sum(i["amount"] for i in live if i["status"] == "outstanding")
+            lines.append(f"\n**Live tenant outstanding:** ${live_open:,.2f} "
+                         "(days past due computed from the live due dates)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo invoices only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -499,7 +616,13 @@ class TimeEntryBillingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = TimeEntryBillingAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO BILLING + LIVE TENANT INVOICE LEDGER")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="unbilled_report"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

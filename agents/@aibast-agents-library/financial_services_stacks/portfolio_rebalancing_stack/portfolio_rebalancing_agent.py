@@ -1,13 +1,36 @@
 """
-Portfolio Rebalancing Agent — Financial Services Stack
+Portfolio Rebalancing Agent — a template you are meant to mutate.
 
-Analyzes portfolio drift, generates rebalancing recommendations,
-assesses tax impact, and creates execution plans.
+Analyzes portfolio drift, generates rebalancing recommendations, assesses
+tax impact, and creates execution plans. In this template a portfolio is
+represented as a Dynamics 365 opportunity and its product lines are the
+positions — the tenant has no native holdings entity, so line-item values
+give real allocations while target weights stay an enrichment seam.
 
-Version 1.1.0 adds the materially distinct capabilities demonstrated in the
-Portfolio Rebalancing evidence: retirement projection modeling, portfolio risk
-analysis, and client-ready Word/Excel/Teams deliverables with Dynamics audit
-logging. The four original operations and their outputs remain unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `portfolio_analysis` operation pulls live
+     opportunity product lines over real HTTP from the globally hosted
+     Static Dynamics 365 tenant (Aster Lane Office Systems — synthetic
+     data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="portfolio_analysis")
+     and look for the "Foxglove Learning — Secure print rollout" book
+     with its Sensor Kit K4 position.
+  2. No network? Everything falls back to the embedded demo layer below
+     (PORTFOLIOS / TAX_RATES) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PORTFOLIO_REBALANCING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your custodian), or replace
+     _fetch_collection() with your own client. The fields the rest of the
+     file needs are listed in _normalize_live_portfolio() — target
+     weights and cost basis render "n/a — enrichment seam" until you wire
+     your model-portfolio and tax-lot systems.
+
+OPERATIONS
+  portfolio_analysis | rebalance_recommendation | tax_impact
+  | execution_plan | retirement_projection | risk_analysis
+  | client_deliverables
+  kwargs: operation (required), portfolio_id, user_input
 """
 
 import sys
@@ -15,13 +38,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/portfolio_rebalancing",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Portfolio Rebalancing Agent",
-    "description": "Analyzes portfolio drift and generates rebalancing trades, tax impact, and execution plans from built-in demo data.",
+    "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["portfolio", "rebalancing", "allocation", "tax", "trading", "financial-services", "retirement-projection", "risk-analysis"],
     "category": "financial_services",
@@ -30,8 +55,90 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export PORTFOLIO_REBALANCING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your custodian client. Downstream
+# code only needs the fields produced by _normalize_live_portfolio().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "PORTFOLIO_REBALANCING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_portfolio(opp_name, lines):
+    """Project one opportunity's product lines onto the portfolio shape
+    this agent uses. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not knowable from the
+    CRM alone' and the renderers label it as an enrichment seam."""
+    total = sum(float(l.get("extendedamount") or 0) for l in lines)
+    holdings = {}
+    for l in lines:
+        name = l.get("productidname", "Unknown position")
+        value = float(l.get("extendedamount") or 0)
+        holdings[name] = {
+            "value": value,
+            "quantity": float(l.get("quantity") or 0),
+            "current_pct": round(value / total * 100, 1) if total else 0.0,
+            "target_pct": None,   # enrichment seam — wire your model portfolios
+            "cost_basis": None,   # enrichment seam — wire your tax-lot system
+        }
+    return {
+        "name": opp_name,
+        "manager": lines[0].get("owneridname", "") if lines else "",
+        "total_value": total,
+        "holdings": holdings,
+        "_live": True,
+    }
+
+
+def _live_portfolios():
+    """opportunity-keyed dict of live tenant portfolios; {} when offline."""
+    rows = _fetch_collection("opportunityproducts")
+    if not rows:
+        return {}
+    grouped = {}
+    for row in rows:
+        grouped.setdefault(row.get("opportunityidname", "Unknown"), []).append(row)
+    return {
+        f"PORT-{str(lines[0].get('opportunityid', ''))[:8]}": _normalize_live_portfolio(opp_name, lines)
+        for opp_name, lines in grouped.items()
+    }
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PORTFOLIOS = {
@@ -301,6 +408,31 @@ class PortfolioRebalancingAgent(BasicAgent):
         return f"**Error:** Unknown operation `{operation}`."
 
     def _portfolio_analysis(self, **kwargs) -> str:
+        live = _live_portfolios()
+        if live:
+            lines = ["# Portfolio Analysis (live tenant)\n"]
+            for pid, port in live.items():
+                lines.append(f"## {pid}: {port['name']}\n")
+                lines.append(f"- **Manager:** {port['manager']}")
+                lines.append(f"- **Total Value:** ${port['total_value']:,.0f}")
+                lines.append("- **Rebalance Needed:** unknown — target weights are an enrichment seam\n")
+                lines.append("| Position | Qty | Value | Current % | Target % | Drift |")
+                lines.append("|---|---|---|---|---|---|")
+                for asset, data in port["holdings"].items():
+                    lines.append(
+                        f"| {asset} | {data['quantity']:g} | ${data['value']:,.0f} "
+                        f"| {data['current_pct']}% | {_seam(data['target_pct'])} "
+                        f"| {_seam(data['target_pct'], lambda _: '—')} |"
+                    )
+                lines.append("")
+            lines.append(
+                "_Source: live Static Dynamics 365 tenant — opportunity product "
+                "lines reinterpreted as portfolio positions. Target weights and "
+                "cost basis are enrichment seams (wire your model-portfolio and "
+                "tax-lot systems)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Portfolio Analysis\n"]
         for pid, port in PORTFOLIOS.items():
             max_d = _max_drift(port)
@@ -323,6 +455,7 @@ class PortfolioRebalancingAgent(BasicAgent):
                     f"| {data['current_pct']}% | {data['target_pct']}% | {sign}{drift}% |"
                 )
             lines.append("")
+        lines.append("_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
     def _rebalance_recommendation(self, **kwargs) -> str:
@@ -428,8 +561,11 @@ class PortfolioRebalancingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = PortfolioRebalancingAgent()
+    print("=" * 80)
+    print("LIVE TENANT PORTFOLIOS (product lines fetched over HTTP; falls back offline)")
     print(agent.perform(operation="portfolio_analysis"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO REBALANCE (works offline)")
     print(agent.perform(operation="rebalance_recommendation", portfolio_id="PORT-5001"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="tax_impact", portfolio_id="PORT-5001"))

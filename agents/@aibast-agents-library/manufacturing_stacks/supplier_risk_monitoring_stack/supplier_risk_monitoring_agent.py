@@ -1,13 +1,42 @@
 """
-Supplier Risk Monitoring Agent
+Supplier Risk Monitoring Agent — a template you are meant to mutate.
 
 Monitors supplier health across quality, delivery, financial stability,
 and geopolitical dimensions. Produces risk scorecards, disruption alerts,
 and alternative-sourcing recommendations to protect supply continuity.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template an open high-priority Dynamics case is
+     reinterpreted as a supply-disruption event — e.g. Granite Peak
+     Manufacturing's case "Line three unplanned downtime from spindle
+     vibration".
+     Try: perform(operation="disruption_alerts")
+  2. No network? Everything falls back to the embedded demo layer below
+     (SUPPLIERS / RECENT_INCIDENTS / BACKUP_SUPPLIERS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SUPPLIER_RISK_MONITORING_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your SRM/procurement
+     suite), or replace _fetch_collection() with a Coupa/SAP Ariba
+     client. Fields the rest of the file needs are listed in
+     _normalize_live_disruption() — spend exposure and risk scores render
+     as "n/a — enrichment seam" until you wire spend analytics.
+
+OPERATIONS
+  risk_dashboard | supplier_scorecard | disruption_alerts
+  | alternative_sourcing | risk_driver_analysis | mitigation_plan
+  | financial_exposure | execution_timeline | monitoring_plan
+  kwargs: operation (required), supplier_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +44,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supplier_risk_monitoring",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Supplier Risk Monitoring Agent",
-    "description": "Scores supplier risk across quality, delivery, financial, and geopolitical factors using built-in demo supplier data.",
+    "description": "Scores supplier risk and surfaces disruption alerts from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["supplier", "risk", "procurement", "supply-chain", "manufacturing"],
     "category": "manufacturing",
@@ -27,8 +56,78 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SUPPLIER_RISK_MONITORING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your SRM client. Downstream
+# code only needs the fields from _normalize_live_disruption().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SUPPLIER_RISK_MONITORING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_SEVERITY = {"High": "HIGH", "Normal": "MEDIUM", "Low": "LOW"}
+
+
+def _normalize_live_disruption(row):
+    """Project an open Dynamics case onto the disruption-event shape this
+    agent renders. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the case
+    alone' and the renderer labels it as an enrichment seam (wire spend
+    analytics for exposure)."""
+    prio = row.get(
+        "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+    )
+    return {
+        "supplier": row.get("customeridname", "Unknown"),
+        "date": str(row.get("createdon", ""))[:10],
+        "severity": _LIVE_SEVERITY.get(prio, "MEDIUM"),
+        "description": row.get("title", "untitled"),
+        "spend_exposed": None,  # enrichment seam — wire your spend cube
+        "_live": True,
+    }
+
+
+def _live_disruptions():
+    """Open high-priority cases from the live tenant, reinterpreted as
+    supply-disruption events; [] when offline."""
+    rows = _fetch_collection("incidents")
+    events = [
+        _normalize_live_disruption(r) for r in rows
+        if r.get("statecode") == 0
+        and r.get("prioritycode@OData.Community.Display.V1.FormattedValue") == "High"
+    ]
+    return sorted(events, key=lambda e: e["date"], reverse=True)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 SUPPLIERS = {
@@ -337,6 +436,20 @@ class SupplierRiskMonitoringAgent(BasicAgent):
             has_backup = inc["supplier_id"] in BACKUP_SUPPLIERS
             lines.append(f"- Backup suppliers available: {'Yes' if has_backup else 'No'}")
             lines.append("")
+        live = _live_disruptions()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("### Live Tenant Disruption Events (open high-priority Dynamics cases)\n")
+            lines.append("| Severity | Date | Supplier/Account | Description | Spend Exposed |")
+            lines.append("|----------|------|------------------|-------------|---------------|")
+            for e in live:
+                exposed = seam if e["spend_exposed"] is None else f"${e['spend_exposed']:,.0f}"
+                lines.append(
+                    f"| **{e['severity']}** | {e['date']} | {e['supplier'][:28]} | "
+                    f"{e['description']} | {exposed} |"
+                )
+        else:
+            lines.append("_Live tenant unreachable — showing embedded demo incidents only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -484,7 +597,13 @@ class SupplierRiskMonitoringAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SupplierRiskMonitoringAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO INCIDENTS + LIVE TENANT DISRUPTION EVENTS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="disruption_alerts"))
+    print()
+    for op in [o for o in agent.metadata["operations"] if o != "disruption_alerts"]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

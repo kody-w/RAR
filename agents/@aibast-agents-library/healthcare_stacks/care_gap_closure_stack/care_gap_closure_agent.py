@@ -1,18 +1,51 @@
 """
-Care Gap Closure Agent for Healthcare.
+Care Gap Closure Agent for Healthcare — a template you are meant to mutate.
 
 Analyzes HEDIS quality measure gaps, prioritizes patient outreach,
 manages outreach campaigns, and provides HEDIS compliance dashboards
 for population health management teams.
 
-Version 1.1.0 retains those operations and adds the demonstrated barrier
-analysis, simulated campaign launch, and live campaign monitoring outcomes.
-The added operations use the Medicare Advantage A1C scenario captured in the
-source demo and return deterministic results keyed by ``CDC-HBA1C``.
+The live tenant has no native clinical registry, so in this template an
+open Dynamics CASE for the provider group Riverbend Medical Group is
+read as a patient-affecting care-coordination work item (e.g. a prior
+authorization pending beyond SLA), and the tasks regarding it become
+the outreach work queue. Say the same in your own mutation if you
+reinterpret an entity.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live cases, contacts, and tasks over real
+     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
+     Lane Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="gap_analysis")
+     — alongside the HEDIS measure table it surfaces Riverbend Medical
+     Group's real seeded queue, e.g. CAS-260124 "Prior authorization
+     request pending beyond SLA" (High priority).
+  2. No network? Everything falls back to the embedded demo layer below
+     (HEDIS_MEASURES / PATIENT_SEGMENTS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CARE_GAP_CLOSURE_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your population-health
+     platform), or replace _fetch_collection() with your registry
+     client. The fields the rest of the file needs are listed in
+     _normalize_live_work_item() — patient identifiers and measure
+     attribution are enrichment seams; wire your EHR/registry there
+     (and mind PHI: this template ships only synthetic data).
+
+OPERATIONS
+  gap_analysis | patient_prioritization | outreach_campaign
+  | hedis_dashboard | barrier_analysis | launch_outreach_campaign
+  | campaign_monitoring
+  kwargs: operation (required), measure_id (CDC-HBA1C selects the
+  demonstrated A1C campaign)
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -20,9 +53,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/care_gap_closure",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Care Gap Closure Agent",
-    "description": "Analyzes HEDIS care gaps, prioritizes patient outreach, and tracks campaigns using built-in demo patient data.",
+    "description": "Analyzes HEDIS care gaps and surfaces the live care-coordination queue from a simulated Dynamics 365 tenant, with offline demo fallback.",
     "author": "AIBAST",
     "tags": ["hedis", "care-gaps", "quality-measures", "outreach", "population-health", "healthcare"],
     "category": "healthcare",
@@ -33,7 +66,94 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CARE_GAP_CLOSURE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your registry/EHR client.
+# Downstream code only needs the fields produced by
+# _normalize_live_work_item().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CARE_GAP_CLOSURE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+_PROVIDER_GROUP = "Riverbend Medical Group"
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_work_item(case, case_tasks):
+    """Project a Dynamics case (read as a care-coordination work item)
+    onto the shape this agent uses. THIS is the contract your
+    replacement data source must meet — a dict with these keys. None
+    means 'not available from the case alone'; patient identity and
+    HEDIS measure attribution are enrichment seams (wire your EHR /
+    registry — never embed real PHI in a template)."""
+    return {
+        "case_number": case.get("ticketnumber", ""),
+        "title": case.get("title", "Untitled case"),
+        "priority": case.get("prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"),
+        "status": case.get("statuscode@OData.Community.Display.V1.FormattedValue", "Open"),
+        "opened": str(case.get("createdon", ""))[:10],
+        "owner": case.get("owneridname", "unassigned"),
+        "contact": case.get("primarycontactidname"),
+        "measure_id": None,  # enrichment seam — wire your HEDIS registry
+        "tasks": [
+            {
+                "subject": t.get("subject", "Untitled task"),
+                "owner": t.get("owneridname", "unassigned"),
+                "due": str(t.get("scheduledend", ""))[:10],
+            }
+            for t in case_tasks
+        ],
+        "_live": True,
+    }
+
+
+def _live_care_queue():
+    """Open cases for the provider group, with their tasks; [] offline."""
+    incidents = _fetch_collection("incidents")
+    open_cases = [
+        c for c in incidents
+        if c.get("customeridname") == _PROVIDER_GROUP and c.get("statecode") == 0
+    ]
+    if not open_cases:
+        return []
+    tasks = _fetch_collection("tasks")
+    queue = []
+    for case in open_cases:
+        case_tasks = [
+            t for t in tasks
+            if t.get("regardingobjectidname") == case.get("title")
+        ]
+        queue.append(_normalize_live_work_item(case, case_tasks))
+    return queue
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 HEDIS_MEASURES = {
@@ -312,6 +432,35 @@ class CareGapClosureAgent(BasicAgent):
                 f"| {m['name']} | {m['eligible']:,} | {m['compliant']:,} | {m['gap_count']:,} "
                 f"| {m['compliance_rate']}% | {m['benchmark']}% | ${m['revenue_opportunity']:,} | {m['star_impact']} |"
             )
+        lines.append("")
+        lines.append("_Measure table above is the embedded demo layer (simulated)._")
+        queue = _live_care_queue()
+        if queue:
+            lines += [
+                "",
+                f"## Live care-coordination queue — {_PROVIDER_GROUP}",
+                "",
+                "LIVE open cases from the Aster Lane Dynamics 365 tenant, read as "
+                "care-coordination work items (measure attribution is an "
+                "enrichment seam — wire your HEDIS registry):",
+                "",
+                "| Case | Work Item | Priority | Status | Owner | Open Tasks |",
+                "|------|-----------|----------|--------|-------|------------|",
+            ]
+            for item in queue:
+                task_note = "; ".join(
+                    f"{t['subject']} (due {t['due']})" for t in item["tasks"]
+                ) or "none on record"
+                lines.append(
+                    f"| {item['case_number']} | {item['title'][:45]} | {item['priority']} "
+                    f"| {item['status']} | {item['owner']} | {task_note} |"
+                )
+        else:
+            lines += [
+                "",
+                "_Live care-coordination queue: live tenant unreachable — "
+                "embedded demo layer only._",
+            ]
         return "\n".join(lines)
 
     def _patient_prioritization(self) -> str:
@@ -423,8 +572,14 @@ class CareGapClosureAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = CareGapClosureAgent()
+    print("=" * 60)
+    print("EMBEDDED DEMO MEASURES + LIVE TENANT QUEUE")
+    print("(HEDIS table works offline; the Riverbend queue is fetched")
+    print("over HTTP and falls back gracefully)")
+    print("=" * 60)
+    print(agent.perform(operation="gap_analysis"))
     for op in [
-        "gap_analysis", "patient_prioritization", "outreach_campaign", "hedis_dashboard",
+        "patient_prioritization", "outreach_campaign", "hedis_dashboard",
         "barrier_analysis", "launch_outreach_campaign", "campaign_monitoring",
     ]:
         print(f"\n{'='*60}")

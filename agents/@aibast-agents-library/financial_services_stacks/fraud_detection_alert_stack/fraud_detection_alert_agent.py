@@ -1,18 +1,38 @@
 """
-Fraud Detection & Alert Agent — Financial Services Stack
+Fraud Detection & Alert Agent — a template you are meant to mutate.
 
 Provides alert triage, transaction analysis, pattern detection, and
-investigation summaries for financial fraud operations teams.
+investigation summaries for financial fraud operations teams. In this
+template a fraud investigation is represented as a Dynamics 365 case —
+the tenant has no native fraud-case entity, so the service-case queue
+stands in for the fraud ops investigation queue (its seeded "Disputed
+card transaction under investigation" case is exactly that story).
 
-Version 1.1.0 adds AI-driven fraud monitoring capabilities reproducing the
-Fraud Detection & Alert one-pager and demo workflow: overnight alert triage,
-coordinated fraud-ring pattern analysis, account-takeover ring investigation,
-investigation case creation with protective actions, and fraud-prevention
-performance reporting into Microsoft Teams. Each new capability supports an
-optional ``user_input`` for exact-key lookup, returns a useful no-input
-summary, and clearly simulates any write (case creation / Teams posting) with
-a receipt and no external mutation. All original operations and data are
-preserved unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `investigation_summary` operation pulls
+     live case records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="investigation_summary")
+     and look for Bluegrass Credit Union's "Disputed card transaction
+     under investigation" case.
+  2. No network? Everything falls back to the embedded demo layer below
+     (TRANSACTIONS / INVESTIGATION_CASES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FRAUD_DETECTION_ALERT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your fraud case manager),
+     or replace _fetch_collection() with your own client. The fields the
+     rest of the file needs are listed in _normalize_live_case() — the
+     fraud pattern column stays "n/a — enrichment seam" until you wire
+     your detection models.
+
+OPERATIONS
+  alert_triage | transaction_analysis | pattern_detection
+  | investigation_summary | fraud_ring_analysis
+  | account_takeover_investigation | case_action | performance_report
+  kwargs: operation (required), case_id, account, user_input, key
 """
 
 import sys
@@ -21,13 +41,15 @@ import hashlib
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/fraud_detection_alert",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Fraud Detection & Alert Agent",
-    "description": "Triages fraud alerts, analyzes transactions and fraud-ring patterns, and builds investigation cases from built-in demo data.",
+    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["fraud", "detection", "alerts", "transactions", "investigation", "financial-services"],
     "category": "financial_services",
@@ -36,8 +58,76 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FRAUD_DETECTION_ALERT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your fraud-case-manager client.
+# Downstream code only needs the fields produced by _normalize_live_case().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FRAUD_DETECTION_ALERT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_case(row):
+    """Project a Dynamics case onto the investigation shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the CRM alone'
+    and the renderers label it as an enrichment seam."""
+    state_map = {0: "open", 1: "resolved", 2: "canceled"}
+    priority_map = {1: "high", 2: "medium", 3: "low"}
+    return {
+        "customer": row.get("customeridname", "Unknown"),
+        "title": row.get("title", "untitled"),
+        "pattern": None,  # enrichment seam — wire your fraud detection models
+        "status": state_map.get(row.get("statecode"), "open"),
+        "analyst": row.get("owneridname", ""),
+        "opened": str(row.get("createdon", ""))[:10],
+        "priority": priority_map.get(row.get("prioritycode"), "medium"),
+        "_live": True,
+    }
+
+
+def _live_investigations():
+    """case-keyed dict of live tenant investigations; {} when offline."""
+    rows = _fetch_collection("incidents")
+    if not rows:
+        return {}
+    return {
+        f"INV-{str(row.get('incidentid', ''))[:8]}": _normalize_live_case(row)
+        for row in rows
+        if row.get("incidentid")
+    }
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 TRANSACTIONS = {
@@ -520,6 +610,29 @@ class FraudDetectionAlertAgent(BasicAgent):
                 lines.append(f"- **{rule_id}:** {rule.get('name', 'Unknown')} [{rule.get('severity', 'N/A').upper()}]")
             return "\n".join(lines)
 
+        live = _live_investigations()
+        if live:
+            open_first = sorted(
+                live.items(),
+                key=lambda kv: (kv[1]["status"] != "open", kv[1]["priority"] != "high"),
+            )
+            lines = ["# Investigation Case Summary (live tenant)\n"]
+            lines.append("| Case ID | Customer | Title | Pattern | Status | Priority | Analyst | Opened |")
+            lines.append("|---|---|---|---|---|---|---|---|")
+            for cid, case in open_first:
+                pattern = case["pattern"].replace("_", " ").title() if case["pattern"] else "n/a — enrichment seam"
+                lines.append(
+                    f"| {cid} | {case['customer']} | {case['title']} | {pattern} "
+                    f"| {case['status'].title()} | {case['priority'].title()} "
+                    f"| {case['analyst']} | {case['opened']} |"
+                )
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — service cases "
+                "reinterpreted as the fraud ops investigation queue. The pattern "
+                "column is an enrichment seam (wire your detection models)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Investigation Case Summary\n"]
         lines.append("| Case ID | Pattern | Status | Priority | Analyst | Opened |")
         lines.append("|---|---|---|---|---|---|")
@@ -529,6 +642,7 @@ class FraudDetectionAlertAgent(BasicAgent):
                 f"| {cid} | {pattern} | {case['status'].replace('_', ' ').title()} "
                 f"| {case['priority'].title()} | {case['analyst']} | {case['opened']} |"
             )
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
 
@@ -538,9 +652,12 @@ class FraudDetectionAlertAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FraudDetectionAlertAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO TRIAGE (works offline)")
     print(agent.perform(operation="alert_triage"))
     print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="transaction_analysis"))
+    print("LIVE TENANT INVESTIGATION QUEUE (cases fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="investigation_summary"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="pattern_detection"))
     print("\n" + "=" * 80 + "\n")

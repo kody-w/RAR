@@ -1,9 +1,38 @@
 """
-Acquisition Support Agent — Federal Government Stack
+Acquisition Support Agent — a template you are meant to mutate.
 
 Provides acquisition lifecycle support including FAR/DFAR compliance,
 vendor evaluation, procurement timelines, and compliance checklists
 for federal acquisition professionals.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live procurement records over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics opportunity is reinterpreted as an
+     acquisition action: its estimated value drives real FAR-threshold
+     math — e.g. "Prairie Wind Energy Cooperative — Mobile workstation
+     expansion" at $9,450 estimated value.
+     Try: perform(operation="acquisition_overview")
+  2. No network? Everything falls back to the embedded demo layer below
+     (FAR_REQUIREMENTS / VENDOR_PROPOSALS / PROCUREMENT_TIMELINES) —
+     the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ACQUISITION_SUPPORT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your contract-writing
+     system), or replace _fetch_collection() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_acquisition() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (CAGE
+     codes, NAICS, milestone dates) are where you wire SAM.gov and your
+     acquisition system.
+
+OPERATIONS
+  acquisition_overview | vendor_evaluation | compliance_checklist
+  | timeline_tracker
+  kwargs: operation (required), project_id, vendor_id
 """
 
 import sys
@@ -11,13 +40,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/acquisition_support",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Acquisition Support Agent",
-    "description": "Supports federal acquisitions with FAR/DFAR checklists, vendor evaluations, and timelines from built-in demo data.",
+    "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
     "author": "AIBAST",
     "tags": ["acquisition", "FAR", "DFAR", "procurement", "vendor-evaluation", "federal"],
     "category": "federal_government",
@@ -27,7 +58,70 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ACQUISITION_SUPPORT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your acquisition-system client.
+# Downstream code only needs the fields produced by
+# _normalize_live_acquisition().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "ACQUISITION_SUPPORT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_acquisition(row):
+    """Project a Dynamics opportunity onto the acquisition shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a Dynamics opportunity is reinterpreted as an acquisition
+    action; its estimated value drives real FAR-threshold math."""
+    close = row.get("estimatedclosedate")
+    return {
+        "title": row.get("name", "untitled"),
+        "office": row.get("parentaccountidname", "Unknown"),
+        "estimated_value": float(row.get("estimatedvalue") or 0),
+        "stage": row.get("stepname", "n/a"),
+        "status": {0: "open", 1: "won", 2: "lost"}.get(row.get("statecode"), "unknown"),
+        "target_award": str(close)[:10] if close else None,
+        "acquisition_type": None,  # enrichment seam — wire your contract-writing system
+        "cage_code": None,          # enrichment seam — wire SAM.gov
+        "_live": True,
+    }
+
+
+def _live_acquisitions():
+    """Live tenant acquisition actions; [] when offline."""
+    return [_normalize_live_acquisition(o) for o in _fetch_collection("opportunities")]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 FAR_REQUIREMENTS = {
@@ -280,7 +374,37 @@ class AcquisitionSupportAgent(BasicAgent):
     # -- Operations ----------------------------------------------------------
 
     def _acquisition_overview(self, **kwargs) -> str:
-        lines = ["# Federal Acquisition Overview\n"]
+        live = _live_acquisitions()
+        if live:
+            open_actions = [a for a in live if a["status"] == "open"]
+            total_value = sum(a["estimated_value"] for a in live if a["status"] == "open")
+            lines = ["# Federal Acquisition Overview (live tenant data)\n"]
+            lines.append("## Acquisition Actions\n")
+            lines.append("| Action | Office | Est. Value | Stage | Status | Target Award | FAR Basis |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for a in sorted(live, key=lambda x: (x["status"] != "open", -x["estimated_value"])):
+                far = _get_applicable_far(a["estimated_value"])
+                far_str = far[-1][0] if far else "Micro-purchase"
+                lines.append(
+                    f"| {a['title']} | {a['office']} | ${a['estimated_value']:,.0f} "
+                    f"| {a['stage']} | {a['status'].upper()} | {a['target_award'] or 'n/a'} "
+                    f"| {far_str} |"
+                )
+            lines.append(f"\n**Open Actions:** {len(open_actions)} | "
+                         f"**Open Pipeline Value:** ${total_value:,.0f}")
+            lines.append("**Acquisition type / CAGE data:** n/a — enrichment seam "
+                         "(wire your contract-writing system and SAM.gov)")
+            lines.append("\n## Applicable Regulatory Framework\n")
+            for ref, data in FAR_REQUIREMENTS.items():
+                lines.append(f"- **{ref}** — {data['title']}")
+            for ref, data in DFAR_SUPPLEMENTS.items():
+                lines.append(f"- **{ref}** — {data['title']}")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (opportunities). An "
+                         "opportunity is reinterpreted as an acquisition action; the FAR "
+                         "basis is computed from its real estimated value._")
+            return "\n".join(lines)
+
+        lines = ["# Federal Acquisition Overview (embedded demo data — offline)\n"]
         lines.append("## Active Procurements\n")
         lines.append("| Project ID | Title | Type | Est. Value | Progress |")
         lines.append("|---|---|---|---|---|")
@@ -386,12 +510,16 @@ class AcquisitionSupportAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = AcquisitionSupportAgent()
+    print("=" * 60)
+    print("LIVE TENANT ACQUISITIONS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="acquisition_overview"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO EVALUATIONS (works offline)")
     print(agent.perform(operation="vendor_evaluation"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="vendor_evaluation", vendor_id="VP-2025-002"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="compliance_checklist", project_id="PRJ-FY25-101"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="timeline_tracker"))

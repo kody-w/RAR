@@ -1,14 +1,42 @@
 """
-Maintenance Scheduling Agent
+Maintenance Scheduling Agent — a template you are meant to mutate.
 
 Manages predictive and preventive maintenance for manufacturing equipment.
 Analyzes sensor telemetry, failure probability models, and technician
 availability to generate optimized work-order schedules that minimize
 unplanned downtime while controlling maintenance spend.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's Field Service work orders and customer assets map onto
+     this agent's world directly — e.g. work order "WO-260100" (printer
+     fault at Cedar Hollow Printing, Break/Fix, unscheduled).
+     Try: perform(operation="schedule_overview")
+  2. No network? Everything falls back to the embedded demo layer below
+     (EQUIPMENT / SENSOR_READINGS / TECHNICIANS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     MAINTENANCE_SCHEDULING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CMMS), or replace
+     _fetch_collection() with a Maximo/Fiix client. Fields the rest of
+     the file needs are listed in _normalize_live_work_order() — runtime
+     hours and failure probabilities render as "n/a — enrichment seam"
+     until you wire IoT telemetry.
+
+OPERATIONS
+  schedule_overview | predictive_alerts | work_order_plan
+  | downtime_analysis | maintenance_plan | create_work_order
+  | maintenance_calendar | fleet_optimization
+  kwargs: operation (required), equipment_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -16,9 +44,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/maintenance_scheduling",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Maintenance Scheduling Agent",
-    "description": "Generates predictive maintenance schedules, work orders, and downtime analyses from built-in demo equipment telemetry.",
+    "description": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback.",
     "author": "AIBAST",
     "tags": ["maintenance", "predictive", "scheduling", "manufacturing", "IoT"],
     "category": "manufacturing",
@@ -28,8 +56,76 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export MAINTENANCE_SCHEDULING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CMMS client. Downstream
+# code only needs the fields from _normalize_live_work_order().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "MAINTENANCE_SCHEDULING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_FMT = "@OData.Community.Display.V1.FormattedValue"
+
+
+def _normalize_live_work_order(row):
+    """Project a Dynamics Field Service work order onto the schedule row
+    this agent renders. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not knowable from the
+    work-order record alone' and the renderer labels it as an enrichment
+    seam (wire IoT telemetry / failure models there)."""
+    return {
+        "id": row.get("msdyn_name", "?"),
+        "asset": row.get("msdyn_customerassetname") or "n/a",
+        "account": row.get("msdyn_serviceaccountname", "Unknown"),
+        "issue": row.get("msdyn_primaryincidenttypename") or "n/a",
+        "type": row.get("msdyn_workordertypename") or "n/a",
+        "status": row.get("msdyn_systemstatus" + _FMT, "Unknown"),
+        "priority": row.get("msdyn_priorityname") or "n/a",
+        "runtime_hours": None,   # enrichment seam — wire IoT telemetry
+        "failure_prob": None,    # enrichment seam — wire your failure model
+        "_live": True,
+    }
+
+
+def _live_work_orders():
+    """Open work orders from the live tenant; [] when offline."""
+    rows = _fetch_collection("msdyn_workorders")
+    return [
+        _normalize_live_work_order(r) for r in rows
+        if "Open" in str(r.get("msdyn_systemstatus" + _FMT, ""))
+    ]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 EQUIPMENT = {
@@ -308,6 +404,20 @@ class MaintenanceSchedulingAgent(BasicAgent):
             lines.append(
                 f"| {rec['date']} | {eq_name} | {rec['type']} | {rec['hours']} | ${rec['cost']:,.2f} |"
             )
+        live = _live_work_orders()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Open Work Orders (Dynamics Field Service)\n")
+            lines.append("| WO | Asset | Account | Issue | Type | Status | Priority | Runtime (hrs) |")
+            lines.append("|----|-------|---------|-------|------|--------|----------|---------------|")
+            for w in live:
+                runtime = seam if w["runtime_hours"] is None else f"{w['runtime_hours']:,}"
+                lines.append(
+                    f"| {w['id']} | {w['asset']} | {w['account']} | {w['issue']} | "
+                    f"{w['type']} | {w['status']} | {w['priority']} | {runtime} |"
+                )
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo equipment only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -495,7 +605,13 @@ class MaintenanceSchedulingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = MaintenanceSchedulingAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO FLEET + LIVE TENANT WORK ORDERS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="schedule_overview"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

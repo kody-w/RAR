@@ -1,22 +1,34 @@
 """
-Store Associate Copilot Agent — Retail & CPG Stack
+Store Associate Copilot Agent — a template you are meant to mutate.
 
 Empowers store associates with product lookup, customer assistance
 scripts, daily task management, and performance dashboards.
 
-Version 1.1.0 adds four backward-compatible operations demonstrated by the
-Retail Store Associate Copilot evidence:
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls the live product catalog over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="product_lookup", query="Mobile Cart")
+     — with network up, that finds the tenant's live "Mobile Cart M8"
+     (AST-CRT-008) even though it is not in the embedded catalog.
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCT_CATALOG / DAILY_TASK_LIST) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     STORE_ASSOCIATE_COPILOT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your commerce platform), or
+     replace _fetch_collection() with your own catalog API. The fields
+     the rest of the file needs are listed in _normalize_live_product() —
+     aisle location, on-hand, sizes, and care instructions stay
+     "n/a — enrichment seam" until you wire your store systems.
 
-  - product_intelligence   Current product, inventory, promotion, and sales guidance.
-  - add_on_commission      Accessory, warranty, conversion-tip, and commission guidance.
-  - product_comparison     Alternative comparison and priority-based recommendation.
-  - transaction_preparation
-                           Discounted sale preparation with warranty, financing,
-                           and a simulated transaction receipt.
-
-The new operations use deterministic embedded records and exact-keyed lookup.
-The transaction operation only simulates a Dynamics 365 Commerce write. The
-four original operations and their outputs remain unchanged.
+OPERATIONS
+  product_lookup | customer_assist | task_checklist |
+  performance_dashboard | product_intelligence | add_on_commission |
+  product_comparison | transaction_preparation
+  kwargs: operation (required), query, sku_id, scenario, shift, key,
+  user_input
 """
 
 import sys
@@ -27,14 +39,16 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/store_associate_copilot",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Store Associate Copilot Agent",
     "description": (
-        "Gives store associates product lookups, assist scripts, task checklists, and dashboards from built-in demo retail data."
+        "Gives associates product lookups, scripts, and dashboards from a live simulated Dynamics 365 tenant catalog, with an offline demo fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -50,8 +64,85 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export STORE_ASSOCIATE_COPILOT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce client. Downstream
+# code only needs the fields produced by _normalize_live_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this agent
+    uses. THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not available from the catalog
+    alone' and the renderer labels it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    features = [row["description"]] if row.get("description") else []
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "brand": "Aster Lane Office Systems (live tenant)",
+        "retail_price": _f(row.get("price")),
+        "sizes": None,            # enrichment seam — wire your PIM
+        "colors": None,           # enrichment seam
+        "materials": None,        # enrichment seam
+        "care": None,             # enrichment seam
+        "location_aisle": None,   # enrichment seam — wire store planogram
+        "location_shelf": None,   # enrichment seam
+        "on_hand": None,          # enrichment seam — wire your POS/WMS
+        "upc": None,              # enrichment seam
+        "features": features,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    if value is None:
+        return "n/a — enrichment seam"
+    if isinstance(value, list):
+        return ", ".join(str(v) for v in value)
+    return fmt.format(value)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Product Catalog
+# EMBEDDED DEMO LAYER (offline fallback) — Product Catalog
 # ---------------------------------------------------------------------------
 
 PRODUCT_CATALOG = {
@@ -647,13 +738,28 @@ class StoreAssociateCopilotAgent(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def _search_live_products(self, query):
+        """Search the live tenant catalog; [] when offline or no match."""
+        q = query.lower()
+        results = []
+        for row in _fetch_collection("products"):
+            prod = _normalize_live_product(row)
+            if not prod["sku_id"]:
+                continue
+            if (q in prod["name"].lower()
+                    or q in prod["sku_id"].lower()
+                    or q in prod["category"].lower()):
+                results.append((prod["sku_id"], prod))
+        return results
+
     def _product_lookup(self, **kwargs):
         query = kwargs.get("query", "")
         sku_id = kwargs.get("sku_id", "")
         if sku_id and sku_id in PRODUCT_CATALOG:
             results = [(sku_id, PRODUCT_CATALOG[sku_id])]
         elif query:
-            results = _search_products(query)
+            # Embedded demo catalog first, then the live tenant catalog.
+            results = _search_products(query) or self._search_live_products(query)
         else:
             results = list(PRODUCT_CATALOG.items())
         lines = ["# Product Lookup", ""]
@@ -661,23 +767,33 @@ class StoreAssociateCopilotAgent(BasicAgent):
             lines.append(f"No products found for query: \"{query}\"")
             return "\n".join(lines)
         for sid, prod in results:
+            live = prod.get("_live", False)
             lines.append(f"## {prod['name']} (`{sid}`)")
             lines.append("")
+            if live:
+                lines.append(
+                    f"_Live record from {DATA_SOURCE_URL} "
+                    "(Aster Lane Office Systems)_"
+                )
             lines.append(f"- **Brand:** {prod['brand']}")
             lines.append(f"- **Category:** {prod['category']}")
-            lines.append(f"- **Price:** ${prod['retail_price']:.2f}")
-            lines.append(f"- **Sizes:** {', '.join(prod['sizes'])}")
-            lines.append(f"- **Colors:** {', '.join(prod['colors'])}")
-            lines.append(f"- **Materials:** {prod['materials']}")
-            lines.append(f"- **Care:** {prod['care']}")
-            lines.append(f"- **Location:** Aisle {prod['location_aisle']}, {prod['location_shelf']}")
-            lines.append(f"- **In Stock:** {prod['on_hand']} units")
-            lines.append(f"- **UPC:** {prod['upc']}")
+            lines.append(f"- **Price:** {_na(prod['retail_price'], '${:.2f}')}")
+            lines.append(f"- **Sizes:** {_na(prod['sizes'])}")
+            lines.append(f"- **Colors:** {_na(prod['colors'])}")
+            lines.append(f"- **Materials:** {_na(prod['materials'])}")
+            lines.append(f"- **Care:** {_na(prod['care'])}")
+            if prod["location_aisle"] is None:
+                lines.append("- **Location:** n/a — enrichment seam")
+            else:
+                lines.append(f"- **Location:** Aisle {prod['location_aisle']}, {prod['location_shelf']}")
+            lines.append(f"- **In Stock:** {_na(prod['on_hand'], '{} units')}")
+            lines.append(f"- **UPC:** {_na(prod['upc'])}")
             lines.append("")
-            lines.append("**Key Features:**")
-            for feat in prod["features"]:
-                lines.append(f"  - {feat}")
-            lines.append("")
+            if prod["features"]:
+                lines.append("**Key Features:**")
+                for feat in prod["features"]:
+                    lines.append(f"  - {feat}")
+                lines.append("")
             comp_skus = COMPLEMENTARY_PRODUCTS.get(sid, [])
             if comp_skus:
                 comp_names = [PRODUCT_CATALOG[c]["name"] for c in comp_skus if c in PRODUCT_CATALOG]
@@ -864,7 +980,11 @@ class StoreAssociateCopilotAgent(BasicAgent):
 if __name__ == "__main__":
     agent = StoreAssociateCopilotAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
     print(agent.perform(operation="product_lookup", sku_id="SKU-1005"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="product_lookup", query="Mobile Cart"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="customer_assist", scenario="upsell"))
     print("\n" + "=" * 80)

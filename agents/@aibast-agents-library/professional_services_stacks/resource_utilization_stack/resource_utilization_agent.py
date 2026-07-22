@@ -1,13 +1,41 @@
 """
-Resource Utilization Agent
+Resource Utilization Agent — a template you are meant to mutate.
 
 Tracks consultant utilization, billable hours, and capacity across a
 professional-services firm. Forecasts demand, identifies bench resources,
 and generates staffing recommendations to hit utilization targets.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's bookable resources are reinterpreted
+     as the consultant bench and their bookings as scheduled billable
+     work — e.g. resource "Riley Chen" with booked hours computed from
+     the live booking calendar.
+     Try: perform(operation="utilization_dashboard")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CONSULTANTS / PROJECT_PIPELINE / UTILIZATION_TARGETS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     RESOURCE_UTILIZATION_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your PSA), or replace
+     _fetch_collection() with a Kantata/OpenAir client. Fields the rest
+     of the file needs are listed in _normalize_live_consultant() —
+     bill rates and skills render as "n/a — enrichment seam" until you
+     wire your rate card and skills matrix.
+
+OPERATIONS
+  utilization_dashboard | capacity_forecast | bench_analysis
+  | staffing_recommendation | skill_gap_options | executive_impact_report
+  kwargs: operation (required), record_id, consultant_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/resource_utilization",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Resource Utilization Agent",
-    "description": "Reports consultant utilization, capacity forecasts, bench costs, and staffing recommendations from built-in demo data.",
+    "description": "Reports consultant utilization and staffing plans from a live simulated Dynamics 365 tenant booking calendar, with an offline fallback.",
     "author": "AIBAST",
     "tags": ["utilization", "staffing", "capacity", "bench", "professional-services"],
     "category": "professional_services",
@@ -27,8 +55,77 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export RESOURCE_UTILIZATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your PSA client. Downstream
+# code only needs the fields from _normalize_live_consultant().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "RESOURCE_UTILIZATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_consultant(row, bookings):
+    """Project a Dynamics bookable resource + its bookings onto the
+    consultant shape this agent renders. THIS is the contract your
+    replacement data source must meet — a dict with these keys. None
+    means 'not knowable from the scheduling records alone' and the
+    renderer labels it as an enrichment seam (wire your rate card and
+    skills matrix)."""
+    name = row.get("name", "Unknown")
+    mine = [b for b in bookings if b.get("resourcename") == name]
+    booked_minutes = sum(
+        int(b.get("duration") or 0) for b in mine
+        if b.get("bookingstatusname") in ("Scheduled", "In Progress", "Completed")
+    )
+    return {
+        "name": name,
+        "booked_hours": round(booked_minutes / 60, 1),  # real, from bookings
+        "bookings": len(mine),
+        "status": "billable" if booked_minutes else "bench",
+        "rate_hr": None,   # enrichment seam — wire your rate card
+        "skills": None,    # enrichment seam — wire your skills matrix
+        "level": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_bench():
+    """Tenant bookable resources reinterpreted as the consultant bench,
+    with booked hours computed from the live calendar; [] when offline."""
+    rows = _fetch_collection("bookableresources")
+    bookings = _fetch_collection("bookableresourcebookings") if rows else []
+    return [_normalize_live_consultant(r, bookings) for r in rows]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CONSULTANTS = {
@@ -403,6 +500,21 @@ class ResourceUtilizationAgent(BasicAgent):
             tgt = UTILIZATION_TARGETS.get(level, 80)
             status = "On Track" if avg >= tgt else "Below Target"
             lines.append(f"| {level} | {len(members)} | {avg}% | {tgt}% | {status} |")
+        live = _live_bench()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Consultant Bench (Dynamics bookable resources + bookings)\n")
+            lines.append("| Consultant | Booked Hours | Bookings | Status | Rate/Hr | Skills |")
+            lines.append("|------------|--------------|----------|--------|---------|--------|")
+            for c in live:
+                lines.append(
+                    f"| {c['name']} | {c['booked_hours']} | {c['bookings']} | {c['status']} | "
+                    f"{c['rate_hr'] or seam} | {c['skills'] or seam} |"
+                )
+            lines.append("\n(Booked hours are computed from the live booking calendar; "
+                         "rates and skills await enrichment.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo consultants only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -532,7 +644,13 @@ class ResourceUtilizationAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ResourceUtilizationAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO CONSULTANTS + LIVE TENANT BENCH")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="utilization_dashboard"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

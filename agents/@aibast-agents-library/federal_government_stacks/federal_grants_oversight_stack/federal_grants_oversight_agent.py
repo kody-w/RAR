@@ -1,9 +1,37 @@
 """
-Federal Grants Oversight Agent — Federal Government Stack
+Federal Grants Oversight Agent — a template you are meant to mutate.
 
 Monitors federal grant programs with dashboards, compliance tracking,
 reporting status updates, and audit preparation support for grant
 program managers and oversight officers.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live oversight events over real HTTP from
+     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a grant compliance finding is represented as a
+     Dynamics case at a government account — e.g. CAS-260136 "Grant
+     drawdown report rejected for missing form" at Federal Plaza
+     Services Agency.
+     Try: perform(operation="compliance_monitoring")
+  2. No network? Everything falls back to the embedded demo layer below
+     (FEDERAL_GRANTS / COMPLIANCE_REQUIREMENTS / AUDIT_FINDINGS) — the
+     agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FEDERAL_GRANTS_OVERSIGHT_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your grants
+     management system), or replace _fetch_collection() with your own
+     API client. Fields the rest of the file needs are listed in
+     _normalize_live_finding() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (CFDA
+     numbers, questioned costs) are where you wire your payment
+     management system.
+
+OPERATIONS
+  grants_dashboard | compliance_monitoring | reporting_status
+  | audit_preparation
+  kwargs: operation (required), grant_id
 """
 
 import sys
@@ -11,13 +39,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/federal_grants_oversight",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Federal Grants Oversight Agent",
-    "description": "Monitors federal grants with compliance dashboards, reporting status, and audit prep from built-in demo data.",
+    "description": "Monitors grant compliance events from a live simulated Dynamics 365 tenant, with dashboards and audit prep that work offline.",
     "author": "AIBAST",
     "tags": ["grants", "oversight", "compliance", "audit", "federal", "reporting"],
     "category": "federal_government",
@@ -27,7 +57,81 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FEDERAL_GRANTS_OVERSIGHT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your grants-management client.
+# Downstream code only needs the fields produced by
+# _normalize_live_finding().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FEDERAL_GRANTS_OVERSIGHT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_finding(row):
+    """Project a Dynamics case onto the oversight-finding shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a grant compliance finding is represented as a Dynamics
+    case at a government account."""
+    return {
+        "id": row.get("ticketnumber", ""),
+        "recipient": row.get("customeridname", "Unknown"),
+        "finding": row.get("title", "untitled"),
+        "severity": {1: "high", 2: "moderate", 3: "low"}.get(row.get("prioritycode"), "moderate"),
+        "status": "open" if row.get("statecode") == 0 else "resolved",
+        "opened": str(row.get("createdon", ""))[:10],
+        "cfda": None,             # enrichment seam — wire your grants system
+        "questioned_cost": None,  # enrichment seam — wire payment management
+        "_live": True,
+    }
+
+
+def _live_findings():
+    """Live oversight findings: cases at government accounts; []
+    when offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return []
+    gov_names = {
+        a["name"] for a in accounts
+        if "government" in str(a.get("industrycode", "")).lower() and a.get("name")
+    }
+    return [
+        _normalize_live_finding(i)
+        for i in _fetch_collection("incidents")
+        if i.get("customeridname") in gov_names
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 FEDERAL_GRANTS = {
@@ -234,7 +338,32 @@ class FederalGrantsOversightAgent(BasicAgent):
         return "\n".join(lines)
 
     def _compliance_monitoring(self, **kwargs) -> str:
-        lines = ["# Compliance Monitoring Report\n"]
+        live = _live_findings()
+        if live:
+            open_findings = [f for f in live if f["status"] == "open"]
+            lines = ["# Compliance Monitoring Report (live tenant data)\n"]
+            lines.append(f"**Oversight events at government accounts:** {len(live)} "
+                         f"({len(open_findings)} open)\n")
+            lines.append("## Live Findings\n")
+            lines.append("| Case | Recipient | Finding | Severity | Status | Opened | Questioned Cost |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for f in sorted(live, key=lambda x: (x["status"] != "open", x["opened"])):
+                lines.append(
+                    f"| {f['id']} | {f['recipient']} | {f['finding']} | {f['severity'].upper()} "
+                    f"| {f['status'].title()} | {f['opened']} | n/a — enrichment seam |"
+                )
+            lines.append("\n## Regulatory Framework\n")
+            for reg_id, reg in COMPLIANCE_REQUIREMENTS.items():
+                lines.append(f"### {reg_id} — {reg['title']}\n")
+                for sec_id, sec in reg["sections"].items():
+                    lines.append(f"- **{sec_id}:** {sec['name']} ({sec['frequency']})")
+                lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (accounts + incidents). "
+                         "A grant compliance finding is represented as a Dynamics case at a "
+                         "government account; CFDA and questioned costs are enrichment seams._")
+            return "\n".join(lines)
+
+        lines = ["# Compliance Monitoring Report (embedded demo data — offline)\n"]
         lines.append("## Grant Compliance Scores\n")
         lines.append("| Grant ID | Program | Compliance Score |")
         lines.append("|---|---|---|")
@@ -318,10 +447,14 @@ class FederalGrantsOversightAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FederalGrantsOversightAgent()
-    print(agent.perform(operation="grants_dashboard"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("LIVE TENANT OVERSIGHT EVENTS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="compliance_monitoring"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO PORTFOLIO (works offline)")
+    print(agent.perform(operation="grants_dashboard"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="reporting_status"))
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="audit_preparation"))

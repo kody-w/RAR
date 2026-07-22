@@ -1,19 +1,41 @@
 """
-Activity Gap Agent
+Activity Gap Agent — a template you are meant to mutate.
 
-Identifies gaps in required sales activities across deal stages, evaluates
-completion status against stage-specific requirements, generates completion
-roadmaps, and analyzes gap impact on deal progression. Helps sales teams
-ensure no critical activities are missed during the deal lifecycle.
+Flags missing sales activities per deal stage, builds completion roadmaps,
+and analyzes gap impact so no critical playbook step is skipped during the
+deal lifecycle.
 
-Where a real deployment would call Salesforce, Gong, Outreach, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="identify_gaps") — the gap report checks live
+     open deals such as "Cedar Hollow Printing — Managed print fleet
+     refresh" against the stage playbook.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_ACTIVITIES / _STAGE_REQUIREMENTS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ACTIVITY_GAP_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with calls into your own API. The dict shape the
+     rest of the file needs is documented in _normalize_live_deal().
+     Activity completion evidence (which playbook steps are actually done)
+     is an enrichment seam — wire your activity tracker there.
+
+OPERATIONS
+  identify_gaps | stage_requirements | completion_roadmap
+  | gap_impact_analysis
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/activity_gap",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Activity Gap Analyzer",
-    "description": "Flags missing sales activities per deal stage and builds completion roadmaps and gap-impact analyses from built-in demo data.",
+    "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "activity-gap", "deal-progression", "pipeline"],
     "category": "b2b_sales",
@@ -34,7 +56,72 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ACTIVITY_GAP_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "ACTIVITY_GAP_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire your activity tracker to
+    map real CRM activities onto playbook IDs)."""
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "completed": None,   # enrichment seam — wire your activity tracker
+        "skipped": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _STAGE_REQUIREMENTS = {
@@ -239,8 +326,11 @@ class ActivityGapAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- identify_gaps --------------------------------------------------
+    # -- identify_gaps (flagship: prefers LIVE tenant, falls back) ------
     def _identify_gaps(self) -> str:
+        live = _live_open_deals()
+        if live:
+            return self._identify_gaps_live(live)
         sections = []
         total_gaps = 0
         critical_gaps = 0
@@ -273,6 +363,33 @@ class ActivityGapAgent(BasicAgent):
             + "\n---\n\n".join(sections)
             + f"\n\nSource: [CRM Activity Logs + Sales Playbook]\n"
             f"Agents: ActivityTrackingAgent, StageComplianceAgent"
+        )
+
+    def _identify_gaps_live(self, deals) -> str:
+        sections = []
+        for d in sorted(deals, key=lambda x: -x["value"]):
+            required = _get_stage_activities(d["stage"])
+            rows = ""
+            for act in required[-5:]:
+                rows += (f"| {act['id']} | {act['name']} | {act['stage']} | "
+                         f"n/a — enrichment seam |\n")
+            sections.append(
+                f"**{d['name']} ({d['stage']}) -- ${d['value']:,}**\n"
+                f"Owner: {d['owner']} | Completion: n/a — enrichment seam "
+                f"(wire your activity tracker)\n\n"
+                f"| ID | Required Activity | Stage | Evidence |\n"
+                f"|----|------------------|-------|----------|\n"
+                f"{rows}"
+            )
+        return (
+            f"**Activity Gap Analysis -- {len(deals)} LIVE Open Deals** "
+            f"(Static Dynamics 365 tenant)\n\n"
+            f"Playbook requirements come from this template's stage rules; "
+            f"completion evidence stays n/a until you wire a real activity "
+            f"tracker at the LIVE DATA SEAM.\n\n"
+            + "\n---\n\n".join(sections)
+            + "\nSource: [Live Dynamics 365 opportunities + Sales Playbook]\n"
+            "Agents: ActivityTrackingAgent, StageComplianceAgent"
         )
 
     # -- stage_requirements --------------------------------------------
@@ -386,7 +503,13 @@ class ActivityGapAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ActivityGapAgent()
-    for op in ["identify_gaps", "stage_requirements", "completion_roadmap", "gap_impact_analysis"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT DEALS (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="identify_gaps"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline)")
+    print(agent.perform(operation="stage_requirements"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="gap_impact_analysis"))

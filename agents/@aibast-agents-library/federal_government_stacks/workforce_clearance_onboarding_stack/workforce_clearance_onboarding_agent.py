@@ -1,8 +1,36 @@
 """
-Workforce Clearance & Onboarding Agent — Federal Government Stack
+Workforce Clearance & Onboarding Agent — a template you are meant to mutate.
 
 Manages security clearance tracking, onboarding checklists, background
 check status, and access provisioning for federal workforce management.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live onboarding blockers over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template an onboarding or background-check hold is
+     represented as a Dynamics case — e.g. CAS-260135 "Contractor
+     onboarding blocked on background check" for Nina Kowalski of
+     Beacon Hill Staffing Partners; days-in-queue is real clock math.
+     Try: perform(operation="background_check_tracker")
+  2. No network? Everything falls back to the embedded demo layer below
+     (EMPLOYEES / ONBOARDING_STEPS / INVESTIGATION_TIMELINES) — the
+     agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL to any OData-shaped
+     endpoint (your real Dynamics org, or JSON exported from your HR
+     system), or replace _fetch_collection() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_case() — everything else keeps working untouched.
+     Fields marked "enrichment seam" in the output (investigation tier,
+     clearance level) are where you wire DCSA/eQIP and your HRIS.
+
+OPERATIONS
+  clearance_status | onboarding_checklist | background_check_tracker
+  | access_provisioning
+  kwargs: operation (required), employee_id
 """
 
 import sys
@@ -10,13 +38,16 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/workforce_clearance_onboarding",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Workforce Clearance & Onboarding Agent",
-    "description": "Tracks security clearances, onboarding checklists, background checks, and access provisioning using built-in demo data.",
+    "description": "Tracks onboarding blockers from a live simulated Dynamics 365 tenant, with clearance and access checklists that work offline.",
     "author": "AIBAST",
     "tags": ["clearance", "onboarding", "background-check", "workforce", "federal", "access"],
     "category": "federal_government",
@@ -26,7 +57,86 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your HRIS client. Downstream code
+# only needs the fields produced by _normalize_live_case().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_ONBOARDING_KEYWORDS = ("onboarding", "background check", "clearance", "badge")
+
+
+def _days_since(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        if then.tzinfo is None:
+            then = then.replace(tzinfo=timezone.utc)
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return None
+
+
+def _normalize_live_case(row):
+    """Project a Dynamics case onto the onboarding-blocker shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template an onboarding or background-check hold is represented as a
+    Dynamics case."""
+    return {
+        "id": row.get("ticketnumber", ""),
+        "candidate": row.get("customeridname", "Unknown"),
+        "issue": row.get("title", "untitled"),
+        "opened": str(row.get("createdon", ""))[:10],
+        "days_in_queue": _days_since(row.get("createdon")),  # real clock math
+        "status": "open" if row.get("statecode") == 0 else "resolved",
+        "investigation_tier": None,  # enrichment seam — wire DCSA/eQIP
+        "clearance_level": None,     # enrichment seam — wire your HRIS
+        "_live": True,
+    }
+
+
+def _live_onboarding_cases():
+    """Live tenant cases that read as onboarding/clearance holds; []
+    when offline."""
+    return [
+        _normalize_live_case(i)
+        for i in _fetch_collection("incidents")
+        if any(k in str(i.get("title", "")).lower() for k in _ONBOARDING_KEYWORDS)
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 EMPLOYEES = {
@@ -266,7 +376,33 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _background_check_tracker(self, **kwargs) -> str:
-        lines = ["# Background Check Tracker\n"]
+        live = _live_onboarding_cases()
+        if live:
+            open_holds = [c for c in live if c["status"] == "open"]
+            lines = ["# Background Check Tracker (live tenant data)\n"]
+            lines.append(f"**Onboarding/clearance holds on record:** {len(live)} "
+                         f"({len(open_holds)} open)\n")
+            lines.append("## Live Holds\n")
+            lines.append("| Case | Candidate | Issue | Opened | Days in Queue | Tier | Status |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for c in sorted(live, key=lambda x: (x["status"] != "open", x["opened"])):
+                days = c["days_in_queue"] if c["days_in_queue"] is not None else "n/a"
+                lines.append(
+                    f"| {c['id']} | {c['candidate']} | {c['issue']} | {c['opened']} "
+                    f"| {days} | n/a — enrichment seam | {c['status'].title()} |"
+                )
+            lines.append("\n## Investigation Timeline Reference\n")
+            lines.append("| Tier | Name | Avg Days | Target Days |")
+            lines.append("|---|---|---|---|")
+            for tid, t in INVESTIGATION_TIMELINES.items():
+                lines.append(f"| {tid} | {t['name']} | {t['avg_days']} | {t['target_days']} |")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (incidents). An "
+                         "onboarding or background-check hold is represented as a Dynamics "
+                         "case; days-in-queue is real clock math, investigation tier is an "
+                         "enrichment seam._")
+            return "\n".join(lines)
+
+        lines = ["# Background Check Tracker (embedded demo data — offline)\n"]
         lines.append("## Investigation Timeline Reference\n")
         lines.append("| Tier | Name | Avg Days | Target Days |")
         lines.append("|---|---|---|---|")
@@ -326,12 +462,14 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = WorkforceClearanceOnboardingAgent()
-    print(agent.perform(operation="clearance_status"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="onboarding_checklist"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="onboarding_checklist", employee_id="EMP-5001"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("LIVE TENANT ONBOARDING HOLDS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="background_check_tracker"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO WORKFORCE (works offline)")
+    print(agent.perform(operation="clearance_status"))
+    print("\n" + "=" * 60 + "\n")
+    print(agent.perform(operation="onboarding_checklist", employee_id="EMP-5001"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="access_provisioning", employee_id="EMP-5001"))

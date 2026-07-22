@@ -1,18 +1,43 @@
 """
-Clinical Notes Summarizer Agent for Healthcare.
+Clinical Notes Summarizer Agent — a template you are meant to mutate.
 
 Summarizes patient encounters, performs medication reviews, generates
-problem lists, and produces referral summaries from clinical documentation
+problem lists, produces referral summaries, and runs the demonstrated
+pre-op clearance workflow (deterministic, keyed by patient ID ``78392``)
 for healthcare providers and care coordinators.
 
-Version 1.1.0 preserves those operations and adds the demonstrated pre-op
-clearance workflow. Added results use the patient facts visible in the source
-demo, are deterministic and keyed by patient ID ``78392``, and simulate the
-final EHR and care-team update without performing a live write.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics case (incident) is reinterpreted as a
+     clinical encounter event — e.g. Riverbend Medical Group's case
+     "Patient intake forms failing to sync to records system".
+     Try: perform(operation="summarize_encounter")
+  2. No network? Everything falls back to the embedded demo layer below
+     (PATIENT_ENCOUNTERS / MEDICATIONS / REFERRALS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CLINICAL_NOTES_SUMMARIZER_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your EHR), or replace
+     _fetch_collection() with calls into an Epic/Cerner FHIR API. Fields
+     the rest of the file needs are listed in _normalize_live_encounter()
+     — vitals, diagnoses, and labs render as "n/a — enrichment seam"
+     until you wire a clinical system.
+
+OPERATIONS
+  summarize_encounter | medication_review | problem_list | referral_summary
+  | preop_clearance | cardiopulmonary_assessment
+  | surgical_medication_reconciliation | anesthesia_risk_plan
+  | issue_clearance_note
+  kwargs: operation (required), encounter_id, patient_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -20,9 +45,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/clinical_notes_summarizer",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Clinical Notes Summarizer Agent",
-    "description": "Summarizes patient encounters, medication reviews, problem lists, and referrals from built-in demo clinical records.",
+    "description": "Summarizes encounters, medication reviews, problem lists, and referrals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["clinical-notes", "ehr", "encounters", "medications", "referrals", "healthcare"],
     "category": "healthcare",
@@ -32,8 +57,78 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CLINICAL_NOTES_SUMMARIZER_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your EHR/FHIR client. Downstream
+# code only needs the fields produced by _normalize_live_encounter().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CLINICAL_NOTES_SUMMARIZER_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_encounter(row):
+    """Project a Dynamics case onto the encounter-summary shape this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None / empty list means 'not available from the
+    CRM-side record alone' and the renderer labels it as an enrichment seam
+    (wire your EHR, lab system, or vitals feed there)."""
+    return {
+        "encounter_id": row.get("ticketnumber", "?"),
+        "patient": row.get("primarycontactidname") or "Unknown",
+        "age": None,          # enrichment seam — wire your EHR demographics
+        "date": str(row.get("createdon", ""))[:10],
+        "type": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "Case"
+        ),
+        "provider": row.get("owneridname", "Unassigned"),
+        "chief_complaint": row.get("title", "untitled"),
+        "diagnoses": [],      # enrichment seam — wire your EHR problem list
+        "abnormal_labs": [],  # enrichment seam — wire your lab system
+        "bp": None,           # enrichment seam
+        "bmi": None,          # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_encounters():
+    """Riverbend Medical Group cases from the live tenant, reinterpreted as
+    clinical encounter events; [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        _normalize_live_encounter(r) for r in rows
+        if r.get("customeridname") == "Riverbend Medical Group"
+    ]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PATIENT_ENCOUNTERS = {
@@ -220,7 +315,9 @@ def _summarize_encounter(encounter_id=None):
             "bp": f"{enc['vital_signs']['bp_systolic']}/{enc['vital_signs']['bp_diastolic']}",
             "bmi": enc["vital_signs"]["bmi"],
         })
-    return {"summaries": summaries}
+    # Prefer live tenant encounters when reachable; embedded demo stays too.
+    live = [] if encounter_id else _live_encounters()
+    return {"summaries": summaries, "live": live}
 
 
 def _medication_review(patient_id=None):
@@ -365,6 +462,22 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
                 for lab in s["abnormal_labs"]:
                     lines.append(f"| {lab['test']} | {lab['value']} | {lab['reference']} | {lab['flag'].upper()} |")
             lines.append("")
+        if data["live"]:
+            lines.append("---")
+            lines.append("# Live Tenant Encounters (Dynamics cases — Riverbend Medical Group)")
+            lines.append("")
+            for s in data["live"]:
+                age = "n/a — enrichment seam" if s["age"] is None else s["age"]
+                bp = s["bp"] or "n/a — enrichment seam"
+                bmi = "n/a — enrichment seam" if s["bmi"] is None else s["bmi"]
+                lines.append(f"## {s['patient']} ({s['encounter_id']}) - {s['date']}")
+                lines.append(f"**Type:** {s['type']} | **Provider:** {s['provider']}")
+                lines.append(f"**Chief Complaint:** {s['chief_complaint']}")
+                lines.append(f"**Age:** {age} | **BP:** {bp} | **BMI:** {bmi}")
+                lines.append("**Diagnoses:** n/a — enrichment seam (wire your EHR problem list)")
+                lines.append("")
+        else:
+            lines.append("_Live tenant unreachable — showing embedded demo encounters only._")
         return "\n".join(lines)
 
     def _medication_review(self) -> str:
@@ -496,8 +609,13 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = ClinicalNotesSummarizerAgent()
+    print("=" * 60)
+    print("EMBEDDED DEMO + LIVE TENANT ENCOUNTERS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 60)
+    print(agent.perform(operation="summarize_encounter"))
     for op in [
-        "summarize_encounter", "medication_review", "problem_list", "referral_summary",
+        "medication_review", "problem_list", "referral_summary",
         "preop_clearance", "cardiopulmonary_assessment",
         "surgical_medication_reconciliation", "anesthesia_risk_plan", "issue_clearance_note",
     ]:

@@ -1,9 +1,37 @@
 """
-Regulatory Compliance (Federal) Agent — Federal Government Stack
+Regulatory Compliance (Federal) Agent — a template you are meant to mutate.
 
 Provides compliance dashboards, gap analyses, remediation planning,
 and audit readiness assessments for federal regulatory frameworks
 including FISMA, FedRAMP, and NIST standards.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live remediation records over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works from
+     anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics task is reinterpreted as a POA&M-style
+     remediation action: its owner, due date, and percent complete are
+     real record values — e.g. the open task "Review service notes —
+     CAS-260131" tied to a statutory-deadline backlog.
+     Try: perform(operation="remediation_plan")
+  2. No network? Everything falls back to the embedded demo layer below
+     (FEDERAL_REGULATIONS / COMPLIANCE_GAPS / REMEDIATION_ACTIONS) —
+     the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     REGULATORY_COMPLIANCE_FED_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your GRC platform),
+     or replace _fetch_collection() with your own API client. Fields
+     the rest of the file needs are listed in
+     _normalize_live_remediation() — everything else keeps working
+     untouched. Fields marked "enrichment seam" in the output (control
+     IDs, frameworks) are where you wire your GRC system.
+
+OPERATIONS
+  compliance_dashboard | gap_analysis | remediation_plan
+  | audit_readiness
+  kwargs: operation (required), regulation
 """
 
 import sys
@@ -11,13 +39,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/regulatory_compliance_fed",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "Regulatory Compliance (Federal) Agent",
-    "description": "Reports FISMA, FedRAMP, and NIST compliance gaps, remediation plans, and audit readiness from built-in demo data.",
+    "description": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline.",
     "author": "AIBAST",
     "tags": ["compliance", "FISMA", "FedRAMP", "NIST", "audit", "federal", "regulatory"],
     "category": "federal_government",
@@ -27,7 +57,69 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export REGULATORY_COMPLIANCE_FED_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your GRC-platform client.
+# Downstream code only needs the fields produced by
+# _normalize_live_remediation().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "REGULATORY_COMPLIANCE_FED_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_remediation(row):
+    """Project a Dynamics task onto the remediation-action shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a Dynamics task is reinterpreted as a POA&M-style
+    remediation action."""
+    state = row.get("statecode")
+    return {
+        "action": row.get("subject", "untitled"),
+        "gap": row.get("regardingobjectidname", ""),
+        "control": None,   # enrichment seam — wire your GRC platform
+        "owner": row.get("owneridname", ""),
+        "target": str(row.get("scheduledend", ""))[:10],
+        "status": {0: "in_progress", 1: "complete", 2: "canceled"}.get(state, "unknown"),
+        "pct": 100 if state == 1 else int(row.get("percentcomplete") or 0),
+        "_live": True,
+    }
+
+
+def _live_remediations():
+    """Live tenant remediation actions; [] when offline."""
+    return [_normalize_live_remediation(t) for t in _fetch_collection("tasks")]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 FEDERAL_REGULATIONS = {
@@ -223,8 +315,30 @@ class RegulatoryComplianceFedAgent(BasicAgent):
         return "\n".join(lines)
 
     def _remediation_plan(self, **kwargs) -> str:
+        live = _live_remediations()
+        if live:
+            active = [a for a in live if a["status"] == "in_progress"]
+            overall = round(sum(a["pct"] for a in live) / len(live), 1)
+            shown = sorted(live, key=lambda a: (a["status"] != "in_progress", a["target"]))[:15]
+            lines = ["# Remediation Plan (live tenant data)\n"]
+            lines.append(f"**Actions on record:** {len(live)} | **In progress:** {len(active)} "
+                         f"| **Overall Progress:** {overall}% (real percent-complete math)\n")
+            lines.append("| Action | Gap | Control | Owner | Target | Status | Progress |")
+            lines.append("|---|---|---|---|---|---|---|")
+            for a in shown:
+                lines.append(
+                    f"| {a['action']} | {a['gap']} | n/a — enrichment seam | {a['owner']} "
+                    f"| {a['target']} | {a['status'].replace('_', ' ').title()} | {a['pct']}% |"
+                )
+            if len(live) > len(shown):
+                lines.append(f"| ... and {len(live) - len(shown)} more | | | | | | |")
+            lines.append("\n_Source: live Static Dynamics 365 tenant (tasks). A task is "
+                         "reinterpreted as a POA&M-style remediation action; control "
+                         "mappings are an enrichment seam — wire your GRC platform._")
+            return "\n".join(lines)
+
         progress = _remediation_progress()
-        lines = ["# Remediation Plan\n"]
+        lines = ["# Remediation Plan (embedded demo data — offline)\n"]
         lines.append(f"**Overall Progress:** {progress}%\n")
         lines.append("| Gap | Action | Owner | Target | Status | Progress |")
         lines.append("|---|---|---|---|---|---|")
@@ -278,12 +392,14 @@ class RegulatoryComplianceFedAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = RegulatoryComplianceFedAgent()
-    print(agent.perform(operation="compliance_dashboard"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="gap_analysis"))
-    print("\n" + "=" * 80 + "\n")
-    print(agent.perform(operation="gap_analysis", regulation="FISMA"))
-    print("\n" + "=" * 80 + "\n")
+    print("=" * 60)
+    print("LIVE TENANT REMEDIATIONS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="remediation_plan"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO FRAMEWORKS (works offline)")
+    print(agent.perform(operation="compliance_dashboard"))
+    print("\n" + "=" * 60 + "\n")
+    print(agent.perform(operation="gap_analysis", regulation="FISMA"))
+    print("\n" + "=" * 60 + "\n")
     print(agent.perform(operation="audit_readiness"))

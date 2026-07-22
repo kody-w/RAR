@@ -1,19 +1,41 @@
 """
-Win Probability Agent
+Win Probability Agent — a template you are meant to mutate.
 
-Calculates win probabilities for active deals using multi-factor scoring,
-analyzes contributing factors with weighted importance, tracks probability
-trends over time, and provides deal-to-deal comparisons to surface
-patterns and actionable insights for improving close rates.
+Calculates deal win probabilities with weighted factor analysis, trend
+tracking, and deal-to-deal comparisons to improve close rates.
 
-Where a real deployment would call Salesforce, Gong, Clari, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="calculate_probability") — the scorecard uses
+     the real CRM close probability of live open deals such as "Orchard
+     Signal Works — Managed print fleet refresh" (60%).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_ATTRIBUTES / _PROBABILITY_HISTORY) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     WIN_PROBABILITY_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). The 8-factor
+     model inputs (champion strength, momentum, coverage...) are
+     enrichment seams — wire Gong / your analytics there; factor ops stay
+     simulated until you do.
+
+OPERATIONS
+  calculate_probability | factor_analysis | probability_trend
+  | deal_comparison
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/win_probability",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Win Probability",
-    "description": "Calculates deal win probabilities with factor analysis, trend tracking, and deal comparisons from built-in demo data.",
+    "description": "Scores win probability for live deals from a simulated Dynamics 365 tenant, with factor analysis and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "win-probability", "deal-progression", "forecasting"],
     "category": "b2b_sales",
@@ -34,7 +56,71 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export WIN_PROBABILITY_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "WIN_PROBABILITY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (the 8-factor model needs
+    signals from Gong / your engagement analytics)."""
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "crm_probability": int(row.get("closeprobability") or 0),
+        "factors": None,  # enrichment seam — wire your signal systems
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _DEAL_ATTRIBUTES = {
@@ -249,8 +335,36 @@ class WinProbabilityAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- calculate_probability -----------------------------------------
+    # -- calculate_probability (flagship: prefers LIVE, falls back) -----
     def _calculate_probability(self) -> str:
+        live = _live_open_deals()
+        if live:
+            rows = ""
+            probs = []
+            total_value = 0
+            weighted_value = 0.0
+            for d in sorted(live, key=lambda x: -x["value"]):
+                prob = d["crm_probability"]
+                probs.append(prob)
+                total_value += d["value"]
+                weighted_value += d["value"] * prob / 100
+                rows += (f"| {d['name']} | ${d['value']:,} | {d['stage']} | "
+                         f"**{prob}%** | n/a — enrichment seam | n/a |\n")
+            avg_prob = round(sum(probs) / max(len(probs), 1), 1)
+            return (
+                f"**Win Probability Scorecard — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Portfolio avg: **{avg_prob}%** | Total pipeline: ${total_value:,} | "
+                f"Weighted value: ${weighted_value:,.0f}\n\n"
+                f"| Deal | Value | Stage | Win Prob (CRM) | Top Factor | Biggest Gap |\n"
+                f"|------|-------|-------|---------------|-----------|------------|\n"
+                f"{rows}\n"
+                f"**Scoring:** probabilities come straight from the live CRM. The "
+                f"8-factor model activates when you wire engagement signals at the "
+                f"LIVE DATA SEAM.\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: ProbabilityScoringEngine"
+            )
         rows = ""
         probs = []
         total_value = 0
@@ -407,7 +521,13 @@ class WinProbabilityAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = WinProbabilityAgent()
-    for op in ["calculate_probability", "factor_analysis", "probability_trend", "deal_comparison"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT SCORECARD (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="calculate_probability"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="factor_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="deal_comparison"))

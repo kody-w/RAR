@@ -1,8 +1,37 @@
 """
-Customer Sentiment & Churn Agent — Financial Services Stack
+Customer Sentiment & Churn Agent — a template you are meant to mutate.
 
 Analyzes customer sentiment, predicts churn risk, recommends retention
 actions, and provides segment-level insights for financial institutions.
+In this template an account is a customer relationship and a support case
+is a complaint/sentiment signal — the tenant has no native NPS entity, so
+case volume and priority stand in for dissatisfaction signals.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `churn_prediction` operation pulls live
+     account and case records over real HTTP from the globally hosted
+     Static Dynamics 365 tenant (Aster Lane Office Systems — synthetic
+     data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="churn_prediction")
+     and look for Bluegrass Credit Union's open "Disputed card
+     transaction under investigation" case driving its risk score.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CUSTOMER_INTERACTIONS / CHURN_INDICATORS) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CUSTOMER_SENTIMENT_CHURN_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your case/survey system), or
+     replace _fetch_collection() with your own client. The fields the rest
+     of the file needs are listed in _normalize_live_customer() — fields
+     rendered "n/a — enrichment seam" (NPS, transactions, digital
+     engagement) are where you wire your survey and core banking systems.
+
+OPERATIONS
+  sentiment_dashboard | churn_prediction | retention_actions
+  | segment_analysis | churn_risk_scoring | early_warning_signals
+  | customer_snapshot | retention_strategy | retention_coordination
+  kwargs: operation (required), customer_id, user_input
 """
 
 import sys
@@ -11,13 +40,15 @@ import hashlib
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/customer_sentiment_churn",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Customer Sentiment & Churn Agent",
-    "description": "Analyzes customer sentiment, scores churn risk, and plans retention actions for banks using built-in demo data.",
+    "description": "Scores churn risk and plans retention from a live simulated Dynamics 365 tenant (cases as sentiment signals), with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["sentiment", "churn", "retention", "NPS", "analytics", "financial-services"],
     "category": "financial_services",
@@ -26,8 +57,97 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CUSTOMER_SENTIMENT_CHURN_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/survey client. Downstream
+# code only needs the fields produced by _normalize_live_customer().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CUSTOMER_SENTIMENT_CHURN_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_customer(row, incidents):
+    """Project a Dynamics account + its cases onto the customer shape this
+    agent uses. THIS is the contract your replacement data source must meet
+    — a dict with these keys. None means 'not knowable from the CRM alone'
+    and the renderers label it as an enrichment seam."""
+    name = row.get("name", "Unknown")
+    cases = [i for i in incidents if i.get("customeridname") == name]
+    open_cases = [i for i in cases if i.get("statecode") == 0]
+    high_priority_open = [i for i in open_cases if i.get("prioritycode") == 1]
+    return {
+        "name": name,
+        "segment": row.get("industrycode", "unknown"),
+        "nps_score": None,                 # enrichment seam — wire your survey platform
+        "monthly_transactions": None,      # enrichment seam — wire your core banking system
+        "digital_engagement_score": None,  # enrichment seam
+        "complaint_count_12m": len(cases),
+        "open_cases": len(open_cases),
+        "high_priority_open": len(high_priority_open),
+        "top_signal": (open_cases[0].get("title") if open_cases else "No open cases"),
+        "_live": True,
+    }
+
+
+def _live_customers():
+    """account-number-keyed dict of live tenant customers; {} when offline."""
+    rows = _fetch_collection("accounts")
+    if not rows:
+        return {}
+    incidents = _fetch_collection("incidents")
+    return {
+        row.get("accountnumber", row.get("accountid", "")): _normalize_live_customer(row, incidents)
+        for row in rows
+        if row.get("name")
+    }
+
+
+def _live_churn_score(customer):
+    """Churn risk from real case signals: open cases, high-priority open
+    cases, and lifetime complaint volume. Real computation, live inputs."""
+    return min(
+        95,
+        customer["open_cases"] * 18
+        + customer["high_priority_open"] * 12
+        + customer["complaint_count_12m"] * 4,
+    )
+
+
+def _seam(value):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else str(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CUSTOMER_INTERACTIONS = {
@@ -458,6 +578,37 @@ class CustomerSentimentChurnAgent(BasicAgent):
         return "\n".join(lines)
 
     def _churn_prediction(self, **kwargs) -> str:
+        live = _live_customers()
+        if live:
+            lines = ["# Churn Prediction Report (live tenant)\n"]
+            lines.append("| Customer | Segment | Churn Score | NPS | Open Cases | Top Signal |")
+            lines.append("|---|---|---|---|---|---|")
+            ranked = sorted(live.items(), key=lambda kv: -_live_churn_score(kv[1]))
+            at_risk = []
+            for cid, c in ranked:
+                score = _live_churn_score(c)
+                risk = "High" if score >= 50 else "Medium" if score >= 25 else "Low"
+                lines.append(
+                    f"| {c['name']} ({cid}) | {c['segment']} | {score} ({risk}) "
+                    f"| {_seam(c['nps_score'])} | {c['open_cases']} | {c['top_signal']} |"
+                )
+                if score >= 50:
+                    at_risk.append((cid, c, score))
+            if at_risk:
+                lines.append("\n## High-Risk Customers\n")
+                for cid, c, score in at_risk:
+                    lines.append(f"### {c['name']} ({cid}) — Score: {score}\n")
+                    lines.append(f"- Segment: {c['segment']}")
+                    lines.append(f"- Open cases: {c['open_cases']} ({c['high_priority_open']} high priority)")
+                    lines.append(f"- Top signal: {c['top_signal']}\n")
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — support cases "
+                "reinterpreted as complaint/sentiment signals. NPS, transactions, "
+                "and digital engagement are enrichment seams (wire your survey "
+                "and core banking systems)._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Churn Prediction Report\n"]
         lines.append("| Customer | Segment | Churn Score | NPS | Transactions | Complaints |")
         lines.append("|---|---|---|---|---|---|")
@@ -482,6 +633,7 @@ class CustomerSentimentChurnAgent(BasicAgent):
         lines.append("\n## Churn Indicators Reference\n")
         for ind_id, ind in CHURN_INDICATORS.items():
             lines.append(f"- **{ind_id.replace('_', ' ').title()}** (weight: {ind['weight']}): {ind['description']}")
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
     def _retention_actions(self, **kwargs) -> str:
@@ -562,8 +714,11 @@ class CustomerSentimentChurnAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = CustomerSentimentChurnAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO DASHBOARD (works offline)")
     print(agent.perform(operation="sentiment_dashboard"))
     print("\n" + "=" * 80 + "\n")
+    print("LIVE TENANT CHURN PREDICTION (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="churn_prediction"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="retention_actions"))

@@ -1,12 +1,34 @@
 """
-General Ask HR Agent
+General Ask HR Agent — a template you are meant to mutate.
 
 General-purpose HR assistant for policy lookups, benefits inquiries,
-leave requests, and employee directory searches.
+leave requests, and employee directory searches. In this template the
+employee directory is backed by Dynamics 365 system users — the tenant
+has no native HRIS entity, so the CRM user roster stands in for the org
+directory (leave balances and benefits stay embedded demos).
 
-Where a real deployment would connect to HRIS, benefits portals, and
-directory services, this agent uses a synthetic data layer so it runs
-anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `employee_directory` operation pulls
+     live system-user records over real HTTP from the globally hosted
+     Static Dynamics 365 tenant (Aster Lane Office Systems — synthetic
+     data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="employee_directory",
+                  employee_name="Casey Rivera")
+     to pull the live Support Specialist record.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_POLICIES / _LEAVE_BALANCES / _ORG_DIRECTORY) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set ASK_HR_DATA_URL to
+     any OData-shaped endpoint (your real Dynamics org, or JSON exported
+     from Workday/BambooHR), or replace _fetch_collection() with your
+     HRIS client. The fields the rest of the file needs are listed in
+     _normalize_live_employee() — fields rendered "n/a — enrichment
+     seam" (location, manager, phone) are where you wire your HRIS.
+
+OPERATIONS
+  policy_lookup | benefits_inquiry | leave_request | employee_directory
+  kwargs: operation (required), employee_name, policy_name
 """
 
 import sys, os
@@ -14,6 +36,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 from datetime import datetime, timedelta
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -21,9 +45,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/general_ask_hr",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "General Ask HR",
-    "description": "Answers HR policy, benefits, leave-balance, and employee-directory queries using built-in demo data (no live HRIS).",
+    "description": "Answers HR policy, leave, and directory queries from a live simulated Dynamics 365 tenant (users as employees), with an offline fallback.",
     "author": "AIBAST",
     "tags": ["hr", "policy", "benefits", "leave", "directory", "general"],
     "category": "general",
@@ -34,7 +58,76 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ASK_HR_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your HRIS client. Downstream code
+# only needs the fields produced by _normalize_live_employee().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "ASK_HR_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_employee(row):
+    """Project a Dynamics system user onto the directory shape this agent
+    uses. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the CRM alone'
+    and the renderers label it as an enrichment seam."""
+    return {
+        "id": f"emp-{str(row.get('systemuserid', ''))[:8]}",
+        "name": row.get("fullname", "Unknown"),
+        "title": row.get("title", ""),
+        "department": row.get("businessunitidname", ""),
+        "location": None,  # enrichment seam — wire your HRIS
+        "manager": None,   # enrichment seam — wire your HRIS org chart
+        "phone": None,     # enrichment seam
+        "email": row.get("internalemailaddress", ""),
+        "_live": True,
+    }
+
+
+def _live_directory():
+    """List of live tenant employees (system users); [] when offline."""
+    rows = _fetch_collection("systemusers")
+    return [
+        _normalize_live_employee(row)
+        for row in rows
+        if row.get("fullname") and not row.get("isdisabled")
+    ]
+
+
+def _seam(value):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else str(value)
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _POLICIES = {
@@ -366,15 +459,22 @@ class GeneralAskHRAgent(BasicAgent):
     # ── employee_directory ─────────────────────────────────────
     def _employee_directory(self, params):
         query = params.get("employee_name", "").lower().strip()
+        live = _live_directory()
+        directory = live or _ORG_DIRECTORY
+        source = (
+            "live Static Dynamics 365 tenant — system users reinterpreted as "
+            "the employee directory; location/manager/phone are enrichment seams"
+            if live else "embedded demo layer (offline fallback)"
+        )
         if query:
-            matches = [e for e in _ORG_DIRECTORY if query in e["name"].lower() or query in e["department"].lower()]
+            matches = [e for e in directory if query in e["name"].lower() or query in e["department"].lower()]
         else:
-            matches = _ORG_DIRECTORY
+            matches = directory
         if not matches:
-            return f"**Employee Directory Search**\n\nNo results found for \"{query}\".\n\nSource: [Active Directory]\nAgents: GeneralAskHRAgent"
+            return f"**Employee Directory Search**\n\nNo results found for \"{query}\".\n\nSource: [{source}]\nAgents: GeneralAskHRAgent"
         rows = ""
         for e in matches:
-            rows += f"| {e['name']} | {e['title']} | {e['department']} | {e['location']} | {e['email']} |\n"
+            rows += f"| {e['name']} | {e['title']} | {e['department']} | {_seam(e['location'])} | {e['email']} |\n"
         detail = matches[0]
         return (
             f"**Employee Directory Search**\n"
@@ -385,17 +485,25 @@ class GeneralAskHRAgent(BasicAgent):
             f"| Field | Value |\n|---|---|\n"
             f"| Title | {detail['title']} |\n"
             f"| Department | {detail['department']} |\n"
-            f"| Location | {detail['location']} |\n"
-            f"| Manager | {detail['manager']} |\n"
-            f"| Phone | {detail['phone']} |\n"
+            f"| Location | {_seam(detail['location'])} |\n"
+            f"| Manager | {_seam(detail['manager'])} |\n"
+            f"| Phone | {_seam(detail['phone'])} |\n"
             f"| Email | {detail['email']} |\n\n"
-            f"Source: [Active Directory + HRIS]\nAgents: GeneralAskHRAgent"
+            f"Source: [{source}]\nAgents: GeneralAskHRAgent"
         )
 
 
 if __name__ == "__main__":
     agent = GeneralAskHRAgent()
-    for op in ["policy_lookup", "benefits_inquiry", "leave_request", "employee_directory"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO LEAVE BALANCE (works offline)")
+    print(agent.perform(operation="leave_request", employee_name="Angela Martinez"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT DIRECTORY (system users fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="employee_directory", employee_name="Casey Rivera"))
+    print()
+    for op in ["policy_lookup", "benefits_inquiry"]:
         print("=" * 60)
-        print(agent.perform(operation=op, employee_name="Angela Martinez"))
+        print(agent.perform(operation=op))
         print()

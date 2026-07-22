@@ -1,17 +1,41 @@
 """
-One-Click CRM Intake Agent
+One-Click CRM Intake Agent — a template you are meant to mutate.
 
 Streamlined CRM data intake with form generation, validation, duplicate
-detection, and import preview capabilities.
+detection, and import preview capabilities. In this template duplicate
+detection runs against real CRM records: the live tenant's lead list is
+scanned for actual repeated contact names across companies.
 
-Where a real deployment would connect to CRM APIs, this agent uses a
-synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `duplicate_check` operation pulls live
+     lead records over real HTTP from the globally hosted Static Dynamics
+     365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="duplicate_check", template_name="new_lead")
+     and look for Remy Hayes, who appears on leads for both Blue Heron
+     Stationery and Juniper Ridge Furnishings.
+  2. No network? Everything falls back to the embedded demo layer below
+     (_INTAKE_TEMPLATES / _SAMPLE_INTAKE_BATCH) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     ONE_CLICK_CRM_INTAKE_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CRM), or replace
+     _fetch_collection() with your own client. The fields the rest of
+     the file needs are listed in _normalize_live_lead() — everything
+     else keeps working untouched.
+
+OPERATIONS
+  intake_form | data_validation | duplicate_check | import_preview
+  kwargs: operation (required), template_name
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -19,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/one_click_crm_intake",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "One-Click CRM Intake",
-    "description": "Generates CRM intake forms and previews validation, duplicate checks, and imports using built-in demo data.",
+    "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["crm", "intake", "data-validation", "duplicate-detection", "import"],
     "category": "general",
@@ -32,7 +56,66 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export ONE_CLICK_CRM_INTAKE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_lead().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "ONE_CLICK_CRM_INTAKE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_lead(row):
+    """Project a Dynamics lead onto the intake-record shape this agent
+    uses for duplicate scanning. THIS is the contract your replacement
+    data source must meet — a dict with these keys."""
+    return {
+        "name": row.get("fullname", ""),
+        "company": row.get("companyname", ""),
+        "email": row.get("emailaddress1", ""),
+    }
+
+
+def _live_lead_duplicates():
+    """Scan the live tenant's leads for repeated contact names.
+    Returns (total_leads, {name: [companies]}); (0, {}) when offline."""
+    rows = _fetch_collection("leads")
+    leads = [_normalize_live_lead(r) for r in rows if r.get("fullname")]
+    by_name = {}
+    for lead in leads:
+        by_name.setdefault(lead["name"], []).append(lead["company"] or "(no company)")
+    duplicates = {name: companies for name, companies in by_name.items() if len(companies) > 1}
+    return len(leads), duplicates
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _INTAKE_TEMPLATES = {
@@ -245,18 +328,39 @@ class OneClickCRMIntakeAgent(BasicAgent):
         for rule in dup_config["rules"]:
             fields = ", ".join(rule["fields"])
             rule_rows += f"| {rule['name']} | {fields} | {rule['match_type']} | {rule['confidence']} |\n"
+
+        total_live, live_dups = _live_lead_duplicates()
+        if total_live:
+            dup_lines = "\n".join(
+                f"- **{name}** appears on {len(companies)} leads: {', '.join(companies)}"
+                for name, companies in sorted(live_dups.items())
+            ) or "- No duplicate contact names found."
+            return (
+                f"**Duplicate Detection: {entity.title()} (live tenant)**\n\n"
+                f"**Detection Rules:**\n\n"
+                f"| Rule | Fields | Match Type | Confidence |\n|---|---|---|---|\n"
+                f"{rule_rows}\n"
+                f"**Action on Duplicate:** {dup_config['action_on_duplicate']}\n\n"
+                f"**Scan Results (live lead list):**\n"
+                f"- Records scanned: {total_live}\n"
+                f"- Contacts appearing on multiple leads: {len(live_dups)}\n"
+                f"{dup_lines}\n"
+                f"- Recommended action: Review and merge or link duplicate leads\n\n"
+                f"Source: [live Static Dynamics 365 tenant — real name-match scan]\nAgents: OneClickCRMIntakeAgent"
+            )
+
         return (
             f"**Duplicate Detection: {entity.title()}**\n\n"
             f"**Detection Rules:**\n\n"
             f"| Rule | Fields | Match Type | Confidence |\n|---|---|---|---|\n"
             f"{rule_rows}\n"
             f"**Action on Duplicate:** {dup_config['action_on_duplicate']}\n\n"
-            f"**Scan Results (sample batch):**\n"
+            f"**Scan Results (sample batch, simulated):**\n"
             f"- Records scanned: {len(_SAMPLE_INTAKE_BATCH)}\n"
             f"- Potential duplicates: 1\n"
             f"- Match: rachel.chen@existing-customer.com (Email Match, High confidence)\n"
             f"- Recommended action: Review and merge with existing record\n\n"
-            f"Source: [Duplicate Detection Engine]\nAgents: OneClickCRMIntakeAgent"
+            f"Source: [embedded demo layer (offline fallback)]\nAgents: OneClickCRMIntakeAgent"
         )
 
     # ── import_preview ─────────────────────────────────────────
@@ -286,7 +390,16 @@ class OneClickCRMIntakeAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = OneClickCRMIntakeAgent()
-    for op in ["intake_form", "data_validation", "duplicate_check", "import_preview"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO INTAKE (works offline)")
+    for op in ["intake_form", "data_validation"]:
         print("=" * 60)
         print(agent.perform(operation=op, template_name="new_lead"))
         print()
+    print("=" * 60)
+    print("LIVE TENANT DUPLICATE SCAN (leads fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="duplicate_check", template_name="new_lead"))
+    print()
+    print("=" * 60)
+    print(agent.perform(operation="import_preview", template_name="new_lead"))
+    print()

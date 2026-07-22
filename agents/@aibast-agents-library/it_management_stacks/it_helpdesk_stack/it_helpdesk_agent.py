@@ -1,14 +1,39 @@
 """
-IT Helpdesk Agent
+IT Helpdesk Agent — a template you are meant to mutate.
 
 AI-powered IT support with automated diagnostics, remote remediation,
 knowledge base search, escalation routing, and ticket management.
 
-Where a real deployment would call Active Directory, ITSM, and remote
-management tools, this agent uses synthetic data so it runs standalone.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's field-service bookable resources are
+     reinterpreted as the IT technician bench, and their bookings as the
+     technician calendar — e.g. technician "Riley Chen".
+     Try: perform(operation="schedule_technician",
+                  user_name="Michael Chen")
+  2. No network? Everything falls back to the embedded demo layer below
+     (_USERS / _TECHNICIANS / _KB_ARTICLES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set IT_HELPDESK_DATA_URL
+     to any OData-shaped endpoint (your real Dynamics org, or JSON you
+     export from ServiceNow/Jira Service Management), or replace
+     _fetch_collection() with your ITSM client. Fields the rest of the
+     file needs are listed in _normalize_live_technician() — specialty
+     renders as "n/a — enrichment seam" until you wire your skills matrix.
+     Device telemetry stays simulated until you wire Intune/RMM.
+
+OPERATIONS
+  device_diagnostics | quick_remediation | process_analysis
+  | schedule_technician | knowledge_search | session_summary
+  kwargs: operation (required), user_name
 """
 
 import sys, os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
@@ -20,9 +45,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/it_helpdesk",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "IT Helpdesk",
-    "description": "Runs simulated IT support \u2014 device diagnostics, remediation steps, KB search, technician scheduling \u2014 on built-in demo data.",
+    "description": "Runs IT support \u2014 diagnostics, remediation, KB search, technician booking \u2014 from a live simulated Dynamics 365 tenant, with an offline fallback.",
     "author": "AIBAST",
     "tags": ["it", "helpdesk", "troubleshooting", "itsm", "support"],
     "category": "it_management",
@@ -33,7 +58,76 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export IT_HELPDESK_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your ITSM client. Downstream
+# code only needs the fields from _normalize_live_technician().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "IT_HELPDESK_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_technician(row, bookings):
+    """Project a Dynamics bookable resource onto the technician shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the
+    scheduling record alone' and the renderer labels it as an enrichment
+    seam (wire your skills matrix / ITSM assignment groups)."""
+    name = row.get("name", "Unknown")
+    scheduled = sorted(
+        (b for b in bookings
+         if b.get("resourcename") == name
+         and b.get("bookingstatusname") in ("Scheduled", "In Progress")),
+        key=lambda b: str(b.get("starttime", "")),
+    )
+    next_slot = str(scheduled[0].get("starttime", ""))[:16].replace("T", " ") if scheduled else None
+    return {
+        "name": name,
+        "specialty": None,   # enrichment seam — wire your skills matrix
+        "available": not any(
+            b.get("bookingstatusname") == "In Progress" for b in scheduled
+        ),
+        "next_slot": next_slot,
+        "_live": True,
+    }
+
+
+def _live_technicians():
+    """Tenant bookable resources reinterpreted as the IT technician bench;
+    [] when offline."""
+    rows = _fetch_collection("bookableresources")
+    bookings = _fetch_collection("bookableresourcebookings") if rows else []
+    return [_normalize_live_technician(r, bookings) for r in rows]
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMBEDDED DEMO LAYER (offline fallback)
 # ═══════════════════════════════════════════════════════════════
 
 _USERS = {
@@ -340,23 +434,37 @@ class ITHelpdeskAgent(BasicAgent):
     # ── schedule_technician ───────────────────────────────────
     def _schedule_technician(self, key):
         user = _USERS[key]
-        tech = _find_technician("Hardware")
         ticket_id = f"INC-2024-{_TICKET_COUNTER}"
+        seam = "n/a — enrichment seam"
+
+        # Prefer the live tenant technician bench; fall back to embedded.
+        live = _live_technicians()
+        available = [t for t in live if t["available"]] or live
+        if available:
+            tech = available[0]
+            source = "Live Static Dynamics 365 tenant — bookableresources + bookings"
+            specialty = tech["specialty"] or seam
+            slot = tech["next_slot"] or f"{seam} (no scheduled booking on the tenant calendar)"
+        else:
+            tech = _find_technician("Hardware")
+            source = "ITSM + Technician Scheduling (embedded demo fallback)"
+            specialty = tech["specialty"]
+            slot = tech["next_slot"]
 
         return (
             f"**Technician Visit Scheduled: {user['name']}**\n\n"
             f"| Detail | Value |\n|---|---|\n"
             f"| Technician | {tech['name']} |\n"
-            f"| Specialty | {tech['specialty']} |\n"
-            f"| Time | {tech['next_slot']} |\n"
+            f"| Specialty | {specialty} |\n"
+            f"| Time | {slot} |\n"
             f"| Location | {user['location']} |\n"
-            f"| Ticket # | {ticket_id} |\n\n"
+            f"| Ticket # | {ticket_id} (simulated — no ITSM write) |\n\n"
             f"**Technician Will Check:**\n"
             f"- Hardware diagnostics\n"
             f"- Full system optimization\n"
             f"- Pending updates installation\n"
             f"- Upgrade assessment if needed\n\n"
-            f"Source: [ITSM + Technician Scheduling]\nAgents: ITHelpdeskAgent"
+            f"Source: [{source}]\nAgents: ITHelpdeskAgent"
         )
 
     # ── knowledge_search ──────────────────────────────────────
@@ -417,8 +525,16 @@ class ITHelpdeskAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ITHelpdeskAgent()
-    for op in ["device_diagnostics", "quick_remediation", "process_analysis",
-               "schedule_technician", "knowledge_search", "session_summary"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO DIAGNOSTICS (works offline)")
+    print(agent.perform(operation="device_diagnostics", user_name="Michael Chen"))
+    print()
+    print("=" * 60)
+    print("LIVE TENANT TECHNICIAN BOOKING (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="schedule_technician", user_name="Michael Chen"))
+    print()
+    for op in ["quick_remediation", "process_analysis",
+               "knowledge_search", "session_summary"]:
         print("=" * 60)
         print(agent.perform(operation=op, user_name="Michael Chen"))
         print()

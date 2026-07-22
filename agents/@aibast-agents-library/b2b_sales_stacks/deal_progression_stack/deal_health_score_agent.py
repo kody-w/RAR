@@ -1,19 +1,41 @@
 """
-Deal Health Score Agent
+Deal Health Score Agent — a template you are meant to mutate.
 
-Calculates composite health scores (0-100) for active deals based on
-engagement metrics, activity frequency, stakeholder sentiment, and stage
-progression velocity. Provides trend analysis, benchmark comparisons,
-and proactive health alerts to keep deals on track.
+Calculates 0-100 deal health scores from engagement, stakeholder,
+velocity, and sentiment signals, with trend analysis, benchmarks, and
+proactive alerts to keep deals on track.
 
-Where a real deployment would call Salesforce, Gong, Clari, etc., this
-agent uses a synthetic data layer so it runs anywhere without credentials.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live CRM opportunities over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="calculate_health") — the scorecard covers
+     live open deals such as "Marigold Field Services — Mobile
+     workstation expansion", scored from CRM-visible signals
+     (close probability + schedule slip).
+  2. No network? Everything falls back to the embedded demo layer below
+     (_DEAL_METRICS / _TREND_HISTORY) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     DEAL_HEALTH_SCORE_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON you export from Salesforce/HubSpot), or replace
+     _fetch_collection() with your own client. The dict shape the rest of
+     the file needs is documented in _normalize_live_deal(). Engagement
+     and sentiment signals (emails, meetings, tone) are enrichment
+     seams — wire Gong / email analytics there.
+
+OPERATIONS
+  calculate_health | trend_analysis | benchmark_comparison | health_alerts
+  kwargs: operation (required)
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 # ===================================================================
 # RAPP AGENT MANIFEST
@@ -21,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_health_score",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Deal Health Score",
-    "description": "Calculates 0-100 deal health scores with trends, benchmarks, and alerts from built-in demo pipeline data.",
+    "description": "Scores deal health from live opportunities in a simulated Dynamics 365 tenant, with trends, alerts, and an embedded offline demo fallback.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "deal-health", "scoring", "pipeline"],
     "category": "b2b_sales",
@@ -34,7 +56,89 @@ __manifest__ = {
 
 
 # ===================================================================
-# SYNTHETIC DATA LAYER
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export DEAL_HEALTH_SCORE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM client. Downstream code
+# only needs the fields produced by _normalize_live_deal().
+# ===================================================================
+
+DATA_SOURCE_URL = os.environ.get(
+    "DEAL_HEALTH_SCORE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_LIVE_STAGE_MAP = {"Qualify": "Qualification", "Develop": "Discovery",
+                   "Propose": "Proposal", "Close": "Negotiation"}
+
+
+def _days_overdue(iso_date):
+    """Days past an ISO date (0 if in the future or unparseable)."""
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _normalize_live_deal(row):
+    """Project a Dynamics opportunity onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it an enrichment seam (wire Gong / email analytics
+    for engagement and sentiment)."""
+    overdue = _days_overdue(row.get("estimatedclosedate"))
+    crm_prob = int(row.get("closeprobability") or 0)
+    # CRM-signal health: close probability, penalized when the deal has
+    # slipped past its own estimated close date. Real math on real fields.
+    crm_health = max(5, min(95, crm_prob - min(30, overdue // 7 * 5)))
+    return {
+        "deal_id": str(row.get("opportunityid", ""))[:8],
+        "name": row.get("name", "Unknown"),
+        "account": row.get("parentaccountidname", "Unknown"),
+        "value": int(float(row.get("estimatedvalue") or 0)),
+        "stage": _LIVE_STAGE_MAP.get(row.get("stepname"), "Qualification"),
+        "owner": row.get("owneridname", ""),
+        "crm_probability": crm_prob,
+        "days_past_est_close": overdue,
+        "crm_health": crm_health,
+        "engagement": None,   # enrichment seam — wire email/meeting analytics
+        "sentiment": None,    # enrichment seam — wire Gong
+        "_live": True,
+    }
+
+
+def _live_open_deals():
+    """Live open opportunities normalized for this agent; [] when offline."""
+    return [_normalize_live_deal(o) for o in _fetch_collection("opportunities")
+            if o.get("statecode") == 0]
+
+
+# ===================================================================
+# EMBEDDED DEMO LAYER (offline fallback)
 # ===================================================================
 
 _DEAL_METRICS = {
@@ -215,8 +319,36 @@ class DealHealthScoreAgent(BasicAgent):
             return f"**Error:** Unknown operation '{op}'. Valid: {', '.join(dispatch.keys())}"
         return handler()
 
-    # -- calculate_health -----------------------------------------------
+    # -- calculate_health (flagship: prefers LIVE tenant, falls back) ---
     def _calculate_health(self) -> str:
+        live = _live_open_deals()
+        if live:
+            rows = ""
+            scores = []
+            for d in sorted(live, key=lambda x: -x["value"]):
+                scores.append(d["crm_health"])
+                grade = _health_grade(d["crm_health"])
+                schedule = (f"{d['days_past_est_close']}d past est. close"
+                            if d["days_past_est_close"] else "on schedule")
+                rows += (f"| {d['name']} | ${d['value']:,} | {d['stage']} | "
+                         f"{d['crm_health']}/100 | {grade} | {schedule} | "
+                         f"n/a — enrichment seam |\n")
+            avg_score = round(sum(scores) / max(len(scores), 1))
+            critical = sum(1 for s in scores if s < 40)
+            healthy = sum(1 for s in scores if s >= 65)
+            return (
+                f"**Deal Health Scorecard — {len(live)} LIVE Open Deals** "
+                f"(Static Dynamics 365 tenant)\n\n"
+                f"Portfolio avg: **{avg_score}/100** | Healthy: {healthy} | Critical: {critical}\n\n"
+                f"| Deal | Value | Stage | CRM Health | Grade | Schedule | Engagement/Sentiment |\n"
+                f"|------|-------|-------|-----------|-------|----------|---------------------|\n"
+                f"{rows}\n"
+                f"**Scoring:** CRM-visible signals only (close probability + schedule slip). "
+                f"Engagement and sentiment stay n/a until you wire Gong / email analytics "
+                f"at the LIVE DATA SEAM.\n\n"
+                f"Source: [Live Dynamics 365 opportunities]\n"
+                f"Agents: HealthScoringEngine"
+            )
         rows = ""
         scores = []
         for deal_name in sorted(_DEAL_METRICS.keys(), key=lambda d: -_DEAL_METRICS[d]["value"]):
@@ -371,7 +503,13 @@ class DealHealthScoreAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = DealHealthScoreAgent()
-    for op in ["calculate_health", "trend_analysis", "benchmark_comparison", "health_alerts"]:
-        print("=" * 70)
-        print(agent.perform(operation=op))
-        print()
+    print("=" * 70)
+    print("LIVE TENANT SCORECARD (fetched over HTTP; embedded demo offline)")
+    print(agent.perform(operation="calculate_health"))
+    print()
+    print("=" * 70)
+    print("EMBEDDED DEMO (works offline, simulated)")
+    print(agent.perform(operation="trend_analysis"))
+    print()
+    print("=" * 70)
+    print(agent.perform(operation="health_alerts"))

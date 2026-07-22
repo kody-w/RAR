@@ -1,26 +1,54 @@
 """
-License Renewal and Expansion Agent for Software/Digital Products.
+License Renewal and Expansion Agent — a template you are meant to mutate.
 
 Manages SaaS license renewal pipelines, identifies expansion opportunities,
-assesses churn risk, and projects revenue impact across the customer portfolio.
+assesses churn risk, and projects revenue impact across the customer
+portfolio.
 
-Version 1.1.0 adds deterministic, evidence-derived account-health,
-competitive-strategy, proposal, and activation operations. The four original
-operations and the agent's package/runtime identity remain unchanged.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live renewal signals over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="renewal_pipeline")
+     — with network up, the pipeline surfaces the tenant's live renewal
+     cases such as CAS-260134 "License renewal quote requested before
+     expiration" (Summit Trail Software) alongside the live open quote
+     book. In this template a renewal signal is a Dynamics case and a
+     renewal proposal is a Dynamics quote.
+  2. No network? Everything falls back to the embedded demo layer below
+     (LICENSE_AGREEMENTS / EXPANSION_PRICING) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     LICENSE_RENEWAL_EXPANSION_DATA_URL to any OData-shaped endpoint
+     (your real Dynamics org, or JSON exported from your CPQ/billing
+     system), or replace _fetch_collection() with your own subscription
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_renewal_signal() — ARR, seats, and health scores
+     stay "n/a — enrichment seam" until you wire your billing/CS data.
+
+OPERATIONS
+  renewal_pipeline | expansion_opportunities | churn_risk |
+  revenue_impact | account_health_analysis | competitive_strategy |
+  renewal_proposal | activate_renewal_package
+  kwargs: operation (required), license_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/license_renewal_expansion",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "License Renewal & Expansion Agent",
-    "description": "Manages SaaS renewal pipelines, expansion opportunities, and churn-risk analysis using built-in demo account data.",
+    "description": "Manages renewal pipelines and churn risk from a live simulated Dynamics 365 tenant's cases and quotes, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["license", "renewal", "expansion", "churn", "revenue", "saas"],
     "category": "software_digital_products",
@@ -30,8 +58,95 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export LICENSE_RENEWAL_EXPANSION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CPQ/billing client.
+# Downstream code only needs the fields from
+# _normalize_live_renewal_signal().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "LICENSE_RENEWAL_EXPANSION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Case-title keywords that mark a tenant case as a renewal signal.
+_RENEWAL_KEYWORDS = ("renewal", "license", "subscription", "expansion")
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_renewal_signal(row):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a renewal signal IS a Dynamics case (a
+    renewal proposal is a Dynamics quote). THIS is the contract your
+    replacement data source must meet — a dict with these keys. None
+    means 'not available from CRM alone' and the renderers label it as
+    an enrichment seam."""
+    return {
+        "signal_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "customer": row.get("customeridname", "Unknown"),
+        "subject": row.get("title", "untitled"),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "csm": row.get("owneridname", "Unassigned"),
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "arr": None,           # enrichment seam — wire your billing system
+        "seats": None,         # enrichment seam
+        "health_score": None,  # enrichment seam — wire your CS platform
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_renewal_signals():
+    """Live tenant cases whose titles look renewal-shaped; [] offline."""
+    signals = []
+    for row in _fetch_collection("incidents"):
+        title = str(row.get("title", "")).lower()
+        if any(kw in title for kw in _RENEWAL_KEYWORDS):
+            signal = _normalize_live_renewal_signal(row)
+            if signal["signal_id"]:
+                signals.append(signal)
+    return signals
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 LICENSE_AGREEMENTS = {
@@ -326,7 +441,7 @@ class LicenseRenewalExpansionAgent(BasicAgent):
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "renewal_pipeline")
         if op == "renewal_pipeline":
-            return self._renewal_pipeline()
+            return self._renewal_pipeline(kwargs.get("license_id"))
         elif op == "expansion_opportunities":
             return self._expansion_opportunities()
         elif op == "churn_risk":
@@ -343,7 +458,61 @@ class LicenseRenewalExpansionAgent(BasicAgent):
             return self._activate_renewal_package(kwargs.get("license_id"))
         return f"**Error:** Unknown operation `{op}`."
 
-    def _renewal_pipeline(self) -> str:
+    def _live_renewal_pipeline(self, signals):
+        """Pipeline built from live tenant cases + quotes (preferred online)."""
+        quotes = _fetch_collection("quotes")
+        open_quotes = [q for q in quotes if q.get("statecode") in (0, 1)]
+        quote_book = sum(float(q.get("totalamount") or 0) for q in open_quotes)
+        lines = [
+            "# Renewal Pipeline — Live Tenant Signals",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a renewal signal is a Dynamics case and a renewal",
+            "proposal is a Dynamics quote. Pass `license_id` (e.g. LIC-3001)",
+            "for the embedded demo pipeline.",
+            "",
+            "## Renewal Signals (live cases)",
+            "",
+            "| Case | Customer | Subject | Priority | Status | CSM | Age | ARR | Health |",
+            "|------|----------|---------|----------|--------|-----|-----|-----|--------|",
+        ]
+        for s in sorted(signals, key=lambda x: x["signal_id"]):
+            arr = "n/a — enrichment seam" if s["arr"] is None else f"${s['arr']:,}"
+            health = "n/a — enrichment seam" if s["health_score"] is None else str(s["health_score"])
+            lines.append(
+                f"| {s['signal_id']} | {s['customer']} | {s['subject']} "
+                f"| {s['priority']} | {s['status']} | {s['csm']} "
+                f"| {s['age_days']}d | {arr} | {health} |"
+            )
+        lines.append("")
+        lines.append("## Open Quote Book (live quotes)")
+        lines.append("")
+        lines.append("| Quote | Customer | Amount | Status |")
+        lines.append("|-------|----------|--------|--------|")
+        for q in sorted(open_quotes, key=lambda x: x.get("quotenumber", "")):
+            status = q.get(
+                "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+            )
+            lines.append(
+                f"| {q.get('quotenumber', '?')} | {q.get('customeridname', '?')} "
+                f"| ${float(q.get('totalamount') or 0):,.2f} | {status} |"
+            )
+        lines.append("")
+        lines.append(
+            f"**Open quote book value:** ${quote_book:,.2f} across "
+            f"{len(open_quotes)} quotes"
+        )
+        lines.append(
+            "ARR, seats, and health scores need your billing/CS systems — "
+            "wire them at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
+    def _renewal_pipeline(self, license_id=None) -> str:
+        if not license_id:
+            signals = _live_renewal_signals()
+            if signals:
+                return self._live_renewal_pipeline(signals)
         data = _renewal_pipeline()
         lines = [
             "# Renewal Pipeline",
@@ -527,7 +696,13 @@ class LicenseRenewalExpansionAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = LicenseRenewalExpansionAgent()
-    for op in ["renewal_pipeline", "expansion_opportunities", "churn_risk", "revenue_impact"]:
+    print("=" * 60)
+    print("EMBEDDED DEMO PIPELINE (works offline)")
+    print(agent.perform(operation="renewal_pipeline", license_id="LIC-3001"))
+    print("\n" + "=" * 60)
+    print("LIVE TENANT RENEWAL SIGNALS (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="renewal_pipeline"))
+    for op in ["expansion_opportunities", "churn_risk", "revenue_impact"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

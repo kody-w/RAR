@@ -1,8 +1,37 @@
 """
-Financial Advisor Copilot Agent — Financial Services Stack
+Financial Advisor Copilot Agent — a template you are meant to mutate.
 
 Assists financial advisors with client reviews, portfolio summaries,
-investment recommendations, and compliance checks.
+investment recommendations, and compliance checks. In this template a CRM
+contact is an advisory client — the tenant has no native portfolio entity,
+so the client book comes from contacts and balances stay an enrichment
+seam until you wire your custodian.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box the flagship `client_review` operation pulls live
+     contact records over real HTTP from the globally hosted Static
+     Dynamics 365 tenant (Aster Lane Office Systems — synthetic data, no
+     credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="client_review")
+     and look for Marcus Webb, the Bluegrass Credit Union contact.
+  2. No network? Everything falls back to the embedded demo layer below
+     (CLIENT_PORTFOLIOS / COMPLIANCE_RULES) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     FINANCIAL_ADVISOR_COPILOT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your book-of-business
+     system), or replace _fetch_collection() with your own client. The
+     fields the rest of the file needs are listed in
+     _normalize_live_client() — fields rendered "n/a — enrichment seam"
+     (assets, age, risk profile) are where you wire your custodian and
+     planning platform.
+
+OPERATIONS
+  client_review | portfolio_summary | recommendation_engine
+  | compliance_check | branch_intake | advisory_education | account_opening
+  | financial_planning | advisor_handoff
+  kwargs: operation (required), client_id, user_input
 """
 
 import sys
@@ -10,13 +39,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json as _json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/financial_advisor_copilot",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Financial Advisor Copilot Agent",
-    "description": "Supports financial advisors with client reviews, portfolio summaries, compliance checks, and branch banking workflows from built-in demo data.",
+    "description": "Reviews advisory client books from a live simulated Dynamics 365 tenant (contacts as clients), with portfolio demos and an offline fallback.",
     "author": "AIBAST",
     "tags": ["advisor", "portfolio", "investment", "compliance", "financial-services", "branch-banking", "advisory"],
     "category": "financial_services",
@@ -25,8 +56,79 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export FINANCIAL_ADVISOR_COPILOT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/custodian client. Downstream
+# code only needs the fields produced by _normalize_live_client().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "FINANCIAL_ADVISOR_COPILOT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = _json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_client(row):
+    """Project a Dynamics contact onto the client shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the CRM alone' and the
+    renderers label it as an enrichment seam."""
+    return {
+        "name": row.get("fullname", "Unknown"),
+        "advisor": row.get("owneridname", ""),
+        "household": row.get("parentcustomeridname") or "",
+        "risk_profile": None,   # enrichment seam — wire your planning platform
+        "age": None,            # enrichment seam
+        "total_assets": None,   # enrichment seam — wire your custodian
+        "last_review": str(row.get("modifiedon", ""))[:10],
+        "_live": True,
+    }
+
+
+def _live_clients():
+    """contact-keyed dict of live tenant advisory clients; {} when offline."""
+    rows = _fetch_collection("contacts")
+    if not rows:
+        return {}
+    return {
+        f"CLI-{str(row.get('contactid', ''))[:8]}": _normalize_live_client(row)
+        for row in rows
+        if row.get("fullname")
+    }
+
+
+def _seam(value, formatter=str):
+    """None = the CRM alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else formatter(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CLIENT_PORTFOLIOS = {
@@ -356,6 +458,26 @@ class FinancialAdvisorCopilotAgent(BasicAgent):
         return f"**Error:** Unknown operation `{operation}`."
 
     def _client_review(self, **kwargs) -> str:
+        live = _live_clients()
+        if live:
+            lines = ["# Client Review Summary (live tenant)\n"]
+            lines.append("| Client | Advisor | Household / Employer | Risk | Assets | Last Review |")
+            lines.append("|---|---|---|---|---|---|")
+            for cid, c in live.items():
+                lines.append(
+                    f"| {c['name']} ({cid}) | {c['advisor']} | {c['household'] or '—'} "
+                    f"| {_seam(c['risk_profile'], lambda v: v.title())} "
+                    f"| {_seam(c['total_assets'], lambda v: f'${v:,.0f}')} | {c['last_review']} |"
+                )
+            lines.append(f"\n**Clients:** {len(live)}")
+            lines.append("**Total AUM:** n/a — enrichment seam (wire your custodian)")
+            lines.append(
+                "\n_Source: live Static Dynamics 365 tenant — CRM contacts "
+                "reinterpreted as advisory clients. Risk, age, and assets are "
+                "enrichment seams._"
+            )
+            return "\n".join(lines)
+
         lines = ["# Client Review Summary\n"]
         lines.append("| Client | Advisor | Risk | Assets | Age | Retirement In | Last Review |")
         lines.append("|---|---|---|---|---|---|---|")
@@ -369,6 +491,7 @@ class FinancialAdvisorCopilotAgent(BasicAgent):
         total_aum = sum(c["total_assets"] for c in CLIENT_PORTFOLIOS.values())
         lines.append(f"\n**Total AUM:** ${total_aum:,.0f}")
         lines.append(f"**Clients:** {len(CLIENT_PORTFOLIOS)}")
+        lines.append("\n_Source: embedded demo layer (offline fallback)._")
         return "\n".join(lines)
 
     def _portfolio_summary(self, **kwargs) -> str:
@@ -518,8 +641,11 @@ class FinancialAdvisorCopilotAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = FinancialAdvisorCopilotAgent()
+    print("=" * 80)
+    print("LIVE TENANT CLIENT BOOK (contacts fetched over HTTP; falls back offline)")
     print(agent.perform(operation="client_review"))
     print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO PORTFOLIO (works offline)")
     print(agent.perform(operation="portfolio_summary", client_id="CLI-3001"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="recommendation_engine", client_id="CLI-3002"))

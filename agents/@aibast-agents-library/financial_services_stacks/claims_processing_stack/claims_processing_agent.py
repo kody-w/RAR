@@ -1,24 +1,41 @@
 """
-Claims Processing Agent — Financial Services Stack
+Claims Processing Agent — a template you are meant to mutate.
 
 Supports the insurance claims lifecycle with intake, adjudication review,
-fraud flagging, and settlement recommendations.
+fraud flagging, and settlement recommendations, plus five capability
+operations (claim_triage, fraud_detection, auto_adjudication,
+complex_claim_prep, performance_metrics) derived from the Claims
+Processing external agent spec (rapp-external-agent-spec/1.0).
 
-Version 1.1.0 adds five backward-compatible capability operations derived from
-the Claims Processing external agent spec (rapp-external-agent-spec/1.0):
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live claim records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a claim or dispute IS a Dynamics case at a
+     financial-services account — e.g. CAS-260126 "Disputed card
+     transaction under investigation" at Bluegrass Credit Union, and
+     CAS-260127, member Marcus Webb's loan application review.
+     Try: perform(operation="claim_intake")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CLAIMS / POLICY_DETAILS / FRAUD_INDICATORS / SPEC_CAPABILITIES) —
+     the agent never crashes offline, and capability operations that
+     stay canned keep saying "simulated".
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CLAIMS_PROCESSING_DATA_URL to any OData-shaped endpoint (your real
+     Dynamics org, or JSON exported from your claims platform), or
+     replace _fetch_collection() with your own API client. Fields the
+     rest of the file needs are listed in _normalize_live_claim() —
+     everything else keeps working untouched. Fields marked "enrichment
+     seam" in the output (policy numbers, claimed amounts, fraud
+     scores) are where you wire your policy admin and fraud-scoring
+     systems.
 
-  - claim_triage           Classify and route the incoming claims queue into tiers.
-  - fraud_detection        Summarize fraud patterns and recommend SIU referrals.
-  - auto_adjudication      Auto-adjudicate eligible simple claims with justifications.
-  - complex_claim_prep     Pre-prepare complex claim files for adjusters.
-  - performance_metrics    Compare processing metrics to baseline and recap to leadership.
-
-Each new operation carries fully embedded, deterministic spec data (grounding
-knowledge, synthetic records, triggers, responses). They accept an optional
-``user_input`` for exact-keyed record matching, always return a useful summary,
-and — for capabilities marked as write actions — emit a simulated write receipt
-with no live mutation of any external system. The four legacy operations are
-retained exactly and remain the default behavior.
+OPERATIONS
+  claim_intake | adjudication_review | fraud_flag
+  | settlement_recommendation | claim_triage | fraud_detection
+  | auto_adjudication | complex_claim_prep | performance_metrics
+  kwargs: operation (required), claim_id, user_input
 """
 
 import sys
@@ -26,13 +43,15 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/claims_processing",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "Claims Processing Agent",
-    "description": "Processes insurance claims with intake, triage, fraud flags, and settlement recommendations using built-in demo data.",
+    "description": "Processes claims and disputes from a live simulated Dynamics 365 tenant, with triage, fraud flags, and an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["claims", "insurance", "adjudication", "fraud", "settlement", "financial-services"],
     "category": "financial_services",
@@ -42,7 +61,87 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CLAIMS_PROCESSING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your claims-platform client.
+# Downstream code only needs the fields produced by
+# _normalize_live_claim().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "CLAIMS_PROCESSING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_claim(row):
+    """Project a Dynamics case onto the claim shape this agent uses.
+    THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not available from CRM alone' and
+    the renderers label it as an enrichment seam. In this template a
+    claim or dispute IS a Dynamics case at a financial-services
+    account."""
+    return {
+        "id": row.get("ticketnumber", ""),
+        "claimant": row.get("customeridname", "Unknown"),
+        "policy_number": None,    # enrichment seam — wire your policy admin system
+        "loss_type": row.get("title", "untitled"),
+        "claimed_amount": None,   # enrichment seam — wire your claims platform
+        "adjuster": row.get("owneridname", ""),
+        "status": "open" if row.get("statecode") == 0 else "resolved",
+        "priority": {1: "High", 2: "Normal", 3: "Low"}.get(row.get("prioritycode"), "Normal"),
+        "date_filed": str(row.get("createdon", ""))[:10],
+        "fraud_score": None,      # enrichment seam — wire your fraud-scoring model
+        "_live": True,
+    }
+
+
+def _live_claims():
+    """Live claims: cases at financial-services accounts or their
+    member contacts; [] when offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return []
+    fin_names = {
+        a["name"] for a in accounts
+        if "financial" in str(a.get("industrycode", "")).lower() and a.get("name")
+    }
+    member_names = {
+        c["fullname"] for c in _fetch_collection("contacts")
+        if c.get("parentcustomeridname") in fin_names and c.get("fullname")
+    }
+    return [
+        _normalize_live_claim(i)
+        for i in _fetch_collection("incidents")
+        if i.get("customeridname") in fin_names or i.get("customeridname") in member_names
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CLAIMS = {
@@ -407,8 +506,29 @@ class ClaimsProcessingAgent(BasicAgent):
         return handler(**kwargs)
 
     def _claim_intake(self, **kwargs) -> str:
+        live = _live_claims()
+        if live:
+            open_claims = [c for c in live if c["status"] == "open"]
+            lines = ["# Claims Intake Dashboard (live tenant data)\n"]
+            lines.append(f"**Total Claims/Disputes:** {len(live)} ({len(open_claims)} open)")
+            lines.append("**Total Claimed:** n/a — enrichment seam (wire your claims platform)")
+            lines.append("**Avg Fraud Score:** n/a — enrichment seam (wire your fraud model)\n")
+            lines.append("| Claim | Claimant | Matter | Priority | Filed | Status | Amount | Fraud |")
+            lines.append("|---|---|---|---|---|---|---|---|")
+            for c in sorted(live, key=lambda x: (x["status"] != "open", x["date_filed"])):
+                lines.append(
+                    f"| {c['id']} | {c['claimant']} | {c['loss_type']} | {c['priority']} "
+                    f"| {c['date_filed']} | {c['status'].title()} "
+                    f"| n/a — enrichment seam | n/a — enrichment seam |"
+                )
+            lines.append("\n_Source: live Static Dynamics 365 tenant (accounts + contacts + "
+                         "incidents). A claim or dispute IS a Dynamics case at a "
+                         "financial-services account or one of its member contacts; claimed "
+                         "amounts and fraud scores are enrichment seams._")
+            return "\n".join(lines)
+
         summary = _claims_summary()
-        lines = ["# Claims Intake Dashboard\n"]
+        lines = ["# Claims Intake Dashboard (embedded demo data — offline)\n"]
         lines.append(f"**Total Claims:** {summary['count']}")
         lines.append(f"**Total Claimed:** ${summary['total_claimed']:,.0f}")
         lines.append(f"**Avg Fraud Score:** {summary['avg_fraud_score']}\n")
@@ -593,8 +713,12 @@ class ClaimsProcessingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ClaimsProcessingAgent()
+    print("=" * 60)
+    print("LIVE TENANT CLAIMS (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="claim_intake"))
-    print("\n" + "=" * 80 + "\n")
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO CLAIM (works offline)")
     print(agent.perform(operation="adjudication_review", claim_id="CLM-2025-7003"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="fraud_flag"))

@@ -1,14 +1,41 @@
 """
-Inventory Rebalancing Agent
+Inventory Rebalancing Agent — a template you are meant to mutate.
 
 Analyzes warehouse inventory levels across multiple facilities, identifies
 imbalances relative to demand forecasts, and generates transfer plans with
 cost-optimized rebalancing recommendations. Supports SKU-level snapshot
 reporting, inter-warehouse transfer planning, and holding-cost analysis.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's product catalog is reinterpreted as
+     the SKU master and its installed customer assets as deployed stock —
+     e.g. product "AsterPrint C620" (AST-PRN-620).
+     Try: perform(operation="inventory_snapshot")
+  2. No network? Everything falls back to the embedded demo layer below
+     (WAREHOUSES / SKU_INVENTORY / DEMAND_FORECASTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     INVENTORY_REBALANCING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your WMS/ERP), or replace
+     _fetch_collection() with a SAP/NetSuite client. Fields the rest of
+     the file needs are listed in _normalize_live_sku() — per-warehouse
+     bin levels render as "n/a — enrichment seam" until you wire your WMS.
+
+OPERATIONS
+  inventory_snapshot | rebalance_recommendation | transfer_plan
+  | cost_analysis | portfolio_analysis | recovery_plan | policy_update
+  | continuous_optimization
+  kwargs: operation (required), sku
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -16,9 +43,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_rebalancing",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Inventory Rebalancing Agent",
-    "description": "Analyzes multi-warehouse stock against demand forecasts and generates transfer and cost plans from built-in demo inventory data.",
+    "description": "Analyzes stock vs demand and builds transfer and cost plans from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["inventory", "warehouse", "supply-chain", "rebalancing", "manufacturing"],
     "category": "manufacturing",
@@ -28,8 +55,72 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export INVENTORY_REBALANCING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your WMS/ERP client. Downstream
+# code only needs the fields produced by _normalize_live_sku().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "INVENTORY_REBALANCING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_sku(row, assets):
+    """Project a Dynamics product onto the SKU shape this agent renders.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not knowable from the catalog record
+    alone' and the renderer labels it as an enrichment seam (wire your
+    WMS bin levels and demand planner there)."""
+    name = row.get("name", "Unknown")
+    deployed = sum(1 for a in assets if a.get("msdyn_productname") == name)
+    return {
+        "sku": row.get("productnumber", "?"),
+        "description": name,
+        "unit_cost": float(row.get("currentcost") or 0),
+        "list_price": float(row.get("price") or 0),
+        "deployed_assets": deployed,       # real count from customer assets
+        "warehouse_levels": None,          # enrichment seam — wire your WMS
+        "reorder_point": None,             # enrichment seam — wire demand planning
+        "_live": True,
+    }
+
+
+def _live_catalog():
+    """Tenant products reinterpreted as the SKU master, with deployed
+    units counted from installed customer assets; [] when offline."""
+    rows = _fetch_collection("products")
+    assets = _fetch_collection("msdyn_customerassets") if rows else []
+    return [_normalize_live_sku(r, assets) for r in rows]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 WAREHOUSES = {
@@ -284,6 +375,20 @@ class InventoryRebalancingAgent(BasicAgent):
             lines.append(
                 f"| {sku} | {info['description']} | {' | '.join(row_cells)} | {rp:,}{note} |"
             )
+        live = _live_catalog()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant SKU Master (Dynamics products + installed assets)\n")
+            lines.append("| SKU | Description | Unit Cost | List Price | Deployed Assets | Warehouse Levels | Reorder Pt |")
+            lines.append("|-----|-------------|-----------|------------|-----------------|------------------|------------|")
+            for s in live:
+                lines.append(
+                    f"| {s['sku']} | {s['description']} | ${s['unit_cost']:,.2f} | "
+                    f"${s['list_price']:,.2f} | {s['deployed_assets']} | "
+                    f"{s['warehouse_levels'] or seam} | {s['reorder_point'] or seam} |"
+                )
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo inventory only._")
         return "\n".join(lines)
 
     def _rebalance_recommendation(self, **kwargs) -> str:
@@ -477,7 +582,13 @@ class InventoryRebalancingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = InventoryRebalancingAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO WAREHOUSES + LIVE TENANT SKU MASTER")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="inventory_snapshot"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

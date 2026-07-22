@@ -1,13 +1,39 @@
 """
-Client Health Score Agent
+Client Health Score Agent — a template you are meant to mutate.
 
 Monitors professional-services client portfolios using engagement metrics,
 NPS scores, project margins, utilization rates, and escalation history.
 Surfaces at-risk accounts and generates retention action plans.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's accounts are read as the client
+     portfolio, its open cases as escalation signals, and its open
+     opportunities as pipeline — e.g. Harbor Pine Consulting.
+     Try: perform(operation="health_dashboard")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CLIENTS / EVIDENCE_CAPABILITIES) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CLIENT_HEALTH_SCORE_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your PSA), or replace
+     _fetch_collection() with a Salesforce/OpenAir client. Fields the
+     rest of the file needs are listed in _normalize_live_client() —
+     NPS, margin, and utilization render as "n/a — enrichment seam"
+     until you wire your survey tool and PSA.
+
+OPERATIONS
+  health_dashboard | engagement_analysis | satisfaction_trend
+  | at_risk_clients | retention_roadmap | stakeholder_outreach
+  kwargs: operation (required), record_id, client_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +41,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/client_health_score",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "display_name": "Client Health Score Agent",
-    "description": "Computes client health scores from NPS, margin, and utilization metrics in built-in demo data to flag at-risk accounts.",
+    "description": "Flags at-risk accounts from escalations and pipeline on a live simulated Dynamics 365 tenant, with an offline demo metric fallback.",
     "author": "AIBAST",
     "tags": ["client-health", "NPS", "retention", "professional-services", "churn"],
     "category": "professional_services",
@@ -27,8 +53,84 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CLIENT_HEALTH_SCORE_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CRM/PSA client. Downstream
+# code only needs the fields produced by _normalize_live_client().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CLIENT_HEALTH_SCORE_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_client(row, incidents, opportunities):
+    """Project a Dynamics account onto the client-health shape this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from CRM signals
+    alone' and the renderer labels it as an enrichment seam (wire your
+    NPS survey tool and PSA for margin/utilization)."""
+    name = row.get("name", "Unknown")
+    open_cases = sum(
+        1 for i in incidents
+        if i.get("customeridname") == name and i.get("statecode") == 0
+    )
+    open_pipeline = sum(
+        float(o.get("estimatedvalue") or 0)
+        for o in opportunities
+        if o.get("parentaccountidname") == name and o.get("statecode") == 0
+    )
+    return {
+        "name": name,
+        "open_escalations": open_cases,      # real count from live cases
+        "open_pipeline": int(open_pipeline), # real sum from live opportunities
+        "owner": row.get("owneridname", ""),
+        "nps": None,                # enrichment seam — wire your survey tool
+        "project_margin_pct": None, # enrichment seam — wire your PSA
+        "utilization_pct": None,    # enrichment seam
+        "health_score": None,       # enrichment seam — compute once wired
+        "_live": True,
+    }
+
+
+def _live_portfolio():
+    """Tenant accounts with escalation and pipeline signals; [] offline."""
+    rows = _fetch_collection("accounts")
+    if not rows:
+        return []
+    incidents = _fetch_collection("incidents")
+    opportunities = _fetch_collection("opportunities")
+    clients = [_normalize_live_client(r, incidents, opportunities) for r in rows]
+    return sorted(clients, key=lambda c: c["open_escalations"], reverse=True)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 CLIENTS = {
@@ -375,6 +477,21 @@ class ClientHealthScoreAgent(BasicAgent):
         at_risk = sum(1 for c in CLIENTS.values() if c["risk_label"] == "AT_RISK")
         healthy = sum(1 for c in CLIENTS.values() if c["risk_label"] == "HEALTHY")
         lines.append(f"\n**Distribution:** {critical} critical, {at_risk} at-risk, {healthy} healthy")
+        live = _live_portfolio()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Portfolio (Dynamics accounts + cases + pipeline)\n")
+            lines.append("| Client | Open Escalations | Open Pipeline | Owner | NPS | Margin | Util % | Health |")
+            lines.append("|--------|------------------|---------------|-------|-----|--------|--------|--------|")
+            for c in live[:10]:
+                lines.append(
+                    f"| {c['name'][:30]} | {c['open_escalations']} | ${c['open_pipeline']:,} | "
+                    f"{c['owner']} | {seam} | {seam} | {seam} | {seam} |"
+                )
+            lines.append(f"\n({len(live)} live accounts total; escalation and pipeline "
+                         "columns are real CRM signals, the rest await enrichment.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo portfolio only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -481,7 +598,13 @@ class ClientHealthScoreAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ClientHealthScoreAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO PORTFOLIO + LIVE TENANT PORTFOLIO")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="health_dashboard"))
+    print()
+    for op in agent.metadata["operations"][1:]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

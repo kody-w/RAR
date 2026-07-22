@@ -1,8 +1,36 @@
 """
-SLG Grants Management Agent — SLG Government Stack
+SLG Grants Management Agent — a template you are meant to mutate.
 
 Manages state and local government grant portfolios including
 application tracking, reporting calendars, and budget monitoring.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live grant-compliance cases over real HTTP
+     from the globally hosted Static Dynamics 365 tenant (Aster Lane
+     Office Systems — synthetic data, no credentials, works anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     Try: perform(operation="grants_portfolio")
+     — with network up, the portfolio view surfaces the tenant's live
+     grant cases such as CAS-260136 "Grant drawdown report rejected for
+     missing form" (Federal Plaza Services Agency) plus the open tasks
+     tracking them. In this template a grant compliance item is
+     represented as a Dynamics case (incident) and its work items as
+     Dynamics tasks.
+  2. No network? Everything falls back to the embedded demo layer below
+     (GRANTS_PORTFOLIO / REPORTING_REQUIREMENTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SLG_GRANTS_MANAGEMENT_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from eCivis/AmpliFund), or
+     replace _fetch_collection() with your grants-system API. The fields
+     the rest of the file needs are listed in _normalize_live_grant_case()
+     — award amounts and burn rates stay "n/a — enrichment seam" until
+     you wire your ERP/grants ledger.
+
+OPERATIONS
+  grants_portfolio | application_status | reporting_calendar |
+  budget_tracking
+  kwargs: operation (required), grant_id
 """
 
 import sys
@@ -10,13 +38,16 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/slg_grants_management",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "display_name": "SLG Grants Management Agent",
-    "description": "Tracks grant portfolios, application status, reporting deadlines, and budgets using built-in demo government data.",
+    "description": "Tracks grant compliance and budgets from a live simulated Dynamics 365 tenant's grant cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["grants", "budget", "reporting", "local-government", "state-government"],
     "category": "slg_government",
@@ -25,8 +56,101 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export SLG_GRANTS_MANAGEMENT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your grants-system client.
+# Downstream code only needs the fields from _normalize_live_grant_case().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SLG_GRANTS_MANAGEMENT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+# Case-title keywords that mark a tenant case as a grant-office item.
+_GRANT_KEYWORDS = ("grant", "drawdown", "nofo", "subaward")
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_grant_case(row, tasks):
+    """Project a Dynamics case (incident) record onto the shape this agent
+    uses — in this template a grant compliance item IS a Dynamics case,
+    and its work items are Dynamics tasks. THIS is the contract your
+    replacement data source must meet — a dict with these keys. None
+    means 'not available from the case system alone' and the renderers
+    label it as an enrichment seam."""
+    title = row.get("title", "untitled")
+    open_tasks = [
+        t for t in tasks
+        if t.get("regardingobjectidname") == title and t.get("statecode") == 0
+    ]
+    return {
+        "case_id": row.get("ticketnumber", row.get("incidentid", "")),
+        "title": title,
+        "grantee": row.get("customeridname", "Unknown"),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Active"
+        ),
+        "priority": row.get(
+            "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+        ),
+        "owner": row.get("owneridname", "Unassigned"),
+        "due_date": str(row.get("resolveby") or "")[:10] or None,
+        "age_days": _age_days(row.get("createdon")),
+        "open": row.get("statecode") == 0,
+        "open_tasks": len(open_tasks),
+        "award_amount": None,  # enrichment seam — wire your ERP/grants ledger
+        "burn_rate": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _age_days(iso_date):
+    try:
+        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
+        return max(0, (datetime.now(timezone.utc) - then).days)
+    except (ValueError, TypeError):
+        return 0
+
+
+def _live_grant_queue():
+    """Live tenant cases whose titles look grant-shaped; [] offline."""
+    rows = [
+        row for row in _fetch_collection("incidents")
+        if any(kw in str(row.get("title", "")).lower() for kw in _GRANT_KEYWORDS)
+    ]
+    if not rows:
+        return []
+    tasks = _fetch_collection("tasks")
+    queue = [_normalize_live_grant_case(row, tasks) for row in rows]
+    return [g for g in queue if g["case_id"]]
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback) — Synthetic domain data
 # ---------------------------------------------------------------------------
 
 GRANTS_PORTFOLIO = {
@@ -207,7 +331,38 @@ class SLGGrantsManagementAgent(BasicAgent):
             return f"**Error:** Unknown operation `{operation}`."
         return handler(**kwargs)
 
+    def _live_grants_portfolio(self, queue):
+        """Grant compliance queue from live tenant cases (preferred online)."""
+        lines = [
+            "# Grants Compliance Queue — Live Tenant Cases\n",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "In this template a grant compliance item is a Dynamics case.",
+            "Pass `grant_id` (e.g. LG-2025-001) for the embedded demo portfolio.\n",
+            f"**Matched grant cases:** {len(queue)} "
+            f"({sum(1 for g in queue if g['open'])} open)\n",
+            "| Case | Item | Grantee | Priority | Status | Due | Open Tasks | Award | Burn Rate |",
+            "|---|---|---|---|---|---|---|---|---|",
+        ]
+        for g in sorted(queue, key=lambda x: x["case_id"]):
+            award = "n/a — enrichment seam" if g["award_amount"] is None else f"${g['award_amount']:,.0f}"
+            burn = "n/a — enrichment seam" if g["burn_rate"] is None else f"{g['burn_rate']}%"
+            lines.append(
+                f"| {g['case_id']} | {g['title']} | {g['grantee']} "
+                f"| {g['priority']} | {g['status']} | {g['due_date'] or 'n/a'} "
+                f"| {g['open_tasks']} | {award} | {burn} |"
+            )
+        lines.append("")
+        lines.append(
+            "Award amounts, match, and burn rates need your ERP/grants ledger — "
+            "wire it at the LIVE DATA SEAM."
+        )
+        return "\n".join(lines)
+
     def _grants_portfolio(self, **kwargs) -> str:
+        if not kwargs.get("grant_id"):
+            queue = _live_grant_queue()
+            if queue:
+                return self._live_grants_portfolio(queue)
         totals = _portfolio_totals()
         lines = ["# Grants Portfolio Overview\n"]
         lines.append(f"**Total Awards:** ${totals['total_awards']:,.0f}")
@@ -297,7 +452,11 @@ class SLGGrantsManagementAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SLGGrantsManagementAgent()
+    print("LIVE TENANT GRANT CASES (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="grants_portfolio"))
+    print("\n" + "=" * 80 + "\n")
+    print("EMBEDDED DEMO PORTFOLIO (works offline)")
+    print(agent.perform(operation="grants_portfolio", grant_id="LG-2025-001"))
     print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="application_status"))
     print("\n" + "=" * 80 + "\n")
