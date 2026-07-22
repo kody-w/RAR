@@ -1531,14 +1531,14 @@
     },
     "@kody-w/copilot_studio_deploy_agent": {
       "canonical_path": "agents/@kody-w/copilot_studio_deploy_agent.py",
-      "latest_receipt": "rar_784fdeeadf7580034a530f1bfa263a46f0be11e8bfa76eb781f55090b74e5c28",
+      "latest_receipt": "rar_b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "0c4a371b5df0d9359f92b9e62af70a02247f613ac093ecafb6ade94f7393dab4",
+      "sha256": "1f3b1dcd961192bc9732874924f4a956995cd0851ceb0d9db10f1abad084e286",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.1"
+      "updated_at": "2026-07-22T22:02:29.413103+00:00",
+      "version": "1.1.0"
     },
     "@kody-w/copilot_studio_forge_agent": {
       "canonical_path": "agents/@kody-w/copilot_studio_forge_agent.py",
@@ -1737,6 +1737,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.4"
+    },
+    "@kody-w/power_apps_code_app_agent": {
+      "canonical_path": "agents/@kody-w/power_apps_code_app_agent.py",
+      "latest_receipt": "rar_4666d767ddf39501a0d05acf400315ed0cd80754911d3bfddc2802a16d49e745",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "18bc9d47a195bad70f8da114bf2abfff2b61e141410aafc490d6877a0c8a5168",
+      "status": "active",
+      "updated_at": "2026-07-22T22:02:29.413103+00:00",
+      "version": "1.1.0"
     },
     "@kody-w/predictive_asset_maintenance_intelligence": {
       "canonical_path": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
@@ -2422,5 +2433,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-22T01:42:19.597449+00:00"
+  "updated_at": "2026-07-22T22:02:29.413103+00:00"
 }

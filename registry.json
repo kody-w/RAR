@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-22T20:13:34.181302+00:00",
+  "generated_at": "2026-07-22T22:03:43.357141+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
@@ -7191,9 +7191,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/copilot_studio_deploy_agent",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "display_name": "CopilotStudioDeploy",
-      "description": "Deploys forged Copilot Studio bundles into Dataverse via REST ImportSolutionAsync or the pac CLI pipeline, with confirm-gated destructive imports.",
+      "description": "Deploys Copilot Studio agents into Dataverse three ways: REST ImportSolutionAsync, the pac CLI pipeline, or the quality-gated FACTORY chain (rich SYNTHETIC_DATA demo seeds, explicit Dataverse binding, verified twin deployment).",
       "author": "kody-w",
       "tags": [
         "copilot-studio",
@@ -7203,7 +7203,11 @@
         "pac",
         "import-solution",
         "destructive",
-        "assimilated"
+        "assimilated",
+        "factory",
+        "quality-gate",
+        "synthetic-data",
+        "pipeline"
       ],
       "category": "core",
       "quality_tier": "community",
@@ -7213,9 +7217,9 @@
       ],
       "_file": "agents/@kody-w/copilot_studio_deploy_agent.py",
       "_install_filename": "rar_kody_w_copilot_studio_deploy_agent.py",
-      "_sha256": "0c4a371b5df0d9359f92b9e62af70a02247f613ac093ecafb6ade94f7393dab4",
+      "_sha256": "1f3b1dcd961192bc9732874924f4a956995cd0851ceb0d9db10f1abad084e286",
       "_lifecycle": "notarized",
-      "_receipt": "rar_784fdeeadf7580034a530f1bfa263a46f0be11e8bfa76eb781f55090b74e5c28",
+      "_receipt": "rar_b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -7231,9 +7235,9 @@
           "full_test_suite"
         ]
       },
-      "_seed": 9376612445613730479,
-      "_size_kb": 274.7,
-      "_lines": 3538,
+      "_seed": 9376612445614259888,
+      "_size_kb": 319.3,
+      "_lines": 4469,
       "_has_card": true,
       "_added_at": "2026-06-07T20:27:02-04:00",
       "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
@@ -8286,14 +8290,30 @@
       "_file": "agents/@kody-w/power_apps_code_app_agent.py",
       "_install_filename": "rar_kody_w_power_apps_code_app_agent.py",
       "_sha256": "18bc9d47a195bad70f8da114bf2abfff2b61e141410aafc490d6877a0c8a5168",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_4666d767ddf39501a0d05acf400315ed0cd80754911d3bfddc2802a16d49e745",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 4920082107970368948,
       "_size_kb": 39.6,
       "_lines": 860,
       "_has_card": false,
       "_added_at": "2026-07-22T15:35:38-04:00",
       "_first_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b",
-      "_latest_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b"
+      "_latest_commit_sha": "ca15d6f4f9aa33510de0aaf9195f5d0abb148f00"
     },
     {
       "schema": "rapp-agent/1.0",

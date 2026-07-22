@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/copilot_studio_deploy_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "1f3b1dcd961192bc9732874924f4a956995cd0851ceb0d9db10f1abad084e286"
+ },
+ "canonical_path": "agents/@kody-w/copilot_studio_deploy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T22:02:29.413103+00:00",
+ "id": "rar_b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "0c4a371b5df0d9359f92b9e62af70a02247f613ac093ecafb6ade94f7393dab4",
+  "receipt": "rar_784fdeeadf7580034a530f1bfa263a46f0be11e8bfa76eb781f55090b74e5c28",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_b431f572e56d485e28e3dbef",
+ "revision_id": "b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "copilot_studio_deploy v1.1.0: FACTORY engine \u2014 quality-gated agent.py -> RAPP pipeline chain (SYNTHETIC_DATA seeds, Dataverse binding, verified deploy)"
+ },
+ "version": "1.1.0"
+}
