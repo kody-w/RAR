@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/procurement_support",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "08de4f1c0f746fef3915574fb31e4a3c55a817402532f4cd58b5756dd3faebf8"
+ },
+ "canonical_path": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_57cd6f4c7a8042adc314f0da99250e221974a1c4a20d0f17a2042d87699fb3cf",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "f561ff7f0606ca4bae91a3a6bd8875ba03f83c8c600eb0519834ca12321ad43b",
+  "receipt": "rar_254cca599c3bb8d72c2f7394af4b0790fd12f804f3f9169261b857ee54002b4a",
+  "version": "1.1.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_57cd6f4c7a8042adc314f0da",
+ "revision_id": "57cd6f4c7a8042adc314f0da99250e221974a1c4a20d0f17a2042d87699fb3cf",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.2.0"
+}

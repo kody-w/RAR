@@ -6,28 +6,32 @@ budget projections, and work order planning for energy infrastructure
 including turbines, transformers, and pipelines.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live asset and work order records over real
-     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
-     Lane Office Systems — synthetic data, no credentials, works from
-     anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template a Field Service customer asset stands in for a
-     piece of energy infrastructure: its registration date drives real
-     age math and its work orders are its maintenance history.
-     Try: perform(operation="asset_health")
-     (surfaces live assets like "Cedar Hollow Printing Sensor Kit K4 13"
-     with their open work orders)
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — customer assets and work orders (maintenance history)
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
+     Telemetry sensors carry REAL msdyn_customerassetid values, so
+     sensor health joins straight onto CRM assets and their work
+     orders; the three active alerts carry real CRM case numbers.
+     Try: perform(operation="iot_failure_analysis")
+     (joins the live vibration_spike alert to CRM case CAS-260132 —
+     Granite Peak Manufacturing's spindle downtime case)
   2. No network? Everything falls back to the embedded demo layer below
      (ASSETS / BUDGET_RATES / IOT_SIGNALS) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     ASSET_MAINTENANCE_FORECAST_DATA_URL to any OData-shaped endpoint
-     (your real Dynamics org, or JSON exported from your EAM/CMMS), or
-     replace _fetch_collection() with your own API client. Fields the
-     rest of the file needs are listed in _normalize_live_asset() —
-     everything else keeps working untouched. Fields marked "enrichment
-     seam" in the output (condition scores, operating hours, failure
-     rates) are where you wire your IoT historian and EAM.
+     ASSET_MAINTENANCE_FORECAST_DATA_URL (CRM) and/or
+     ASSET_MAINTENANCE_FORECAST_TEL_URL (telemetry) to your own
+     endpoints (your real Dynamics org, your IoT historian), or replace
+     _fetch_collection() / _fetch_telemetry() with your own API client.
+     Fields the rest of the file needs are listed in
+     _normalize_live_asset() — everything else keeps working untouched.
+     Fields marked "enrichment seam" in the output (condition scores,
+     operating hours, failure rates) are where you wire your
+     reliability model.
 
 OPERATIONS
   maintenance_forecast | asset_health | budget_projection
@@ -47,9 +51,9 @@ from datetime import datetime, timezone
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/asset_maintenance_forecast",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Asset Maintenance Forecast Agent",
-    "description": "Monitors asset health and maintenance from live work orders on a simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["maintenance", "asset-health", "energy", "predictive", "work-orders", "budget"],
     "category": "energy",
@@ -92,6 +96,120 @@ def _fetch_collection(collection, timeout=6):
     except Exception:
         rows = []
     _LIVE_CACHE[collection] = rows
+    return rows
+
+
+# Sibling live source: the static-telemetry API (sensors, alerts, and
+# per-sensor reading series). Sensors carry REAL msdyn_customerassetid
+# values and alerts carry real CRM case numbers, so both join onto the
+# CRM tenant above. Override with ASSET_MAINTENANCE_FORECAST_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "ASSET_MAINTENANCE_FORECAST_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _reading_stats(sensor_id):
+    """min/max/latest over one live reading series; None offline."""
+    points = _fetch_telemetry(f"readings/{sensor_id}", key="points")
+    values = [p.get("v") for p in points if isinstance(p.get("v"), (int, float))]
+    if not values:
+        return None
+    return {
+        "n": len(values),
+        "min": min(values),
+        "max": max(values),
+        "latest": values[-1],
+    }
+
+
+def _sensor_health_rows(limit=2):
+    """Join live telemetry sensors onto CRM customer assets (via the
+    REAL msdyn_customerassetid each sensor carries) and each asset's
+    work orders. Fetches at most `limit` reading series per run."""
+    sensors = _fetch_telemetry("sensors")
+    if not sensors:
+        return []
+    assets = {
+        a.get("msdyn_customerassetid"): a
+        for a in _fetch_collection("msdyn_customerassets")
+    }
+    workorders = _fetch_collection("msdyn_workorders")
+    rows = []
+    for s in sensors:
+        crm_asset = assets.get(s.get("asset_id"))
+        if not crm_asset:
+            continue
+        stats = _reading_stats(s.get("sensor_id"))
+        if not stats:
+            continue
+        account = crm_asset.get("msdyn_accountname", "")
+        related = [
+            w for w in workorders
+            if w.get("msdyn_serviceaccountname") == account
+        ]
+        rows.append({
+            "sensor": s.get("sensor_code", "?"),
+            "type": s.get("sensor_type", "?"),
+            "unit": s.get("unit", ""),
+            "asset": crm_asset.get("msdyn_name", "?"),
+            "stats": stats,
+            "open_wos": sum(1 for w in related if w.get("statecode") == 0),
+            "total_wos": len(related),
+        })
+        if len(rows) >= limit:
+            break
+    return rows
+
+
+def _active_alert_cases():
+    """The live telemetry alerts joined to their real CRM cases by
+    ticket number (e.g. vibration_spike -> CAS-260132); [] offline."""
+    alerts = _fetch_telemetry("alerts")
+    if not alerts:
+        return []
+    cases = {
+        c.get("ticketnumber"): c for c in _fetch_collection("incidents")
+    }
+    rows = []
+    for a in alerts:
+        case = cases.get(a.get("crm_case")) or {}
+        unit = a.get("unit", "")
+        rows.append({
+            "alert": a.get("alert_code", "?"),
+            "type": a.get("alert_type", "?"),
+            "severity": a.get("severity", "?"),
+            "asset": a.get("asset_name", "?"),
+            "account": a.get("account_name", "?"),
+            "reading": f"{a.get('peak_value')} {unit}".strip(),
+            "threshold": f"{a.get('threshold')} {unit}".strip(),
+            "case": a.get("crm_case") or "n/a",
+            "case_title": case.get("title", "n/a — case not found"),
+            "case_status": (
+                "Open" if case.get("statecode") == 0
+                else ("Resolved" if case else "?")
+            ),
+        })
     return rows
 
 
@@ -479,6 +597,29 @@ class AssetMaintenanceForecastAgent(BasicAgent):
                          "msdyn_workorders). A customer asset stands in for a piece of "
                          "infrastructure; work order counts are real, condition scoring is "
                          "an enrichment seam._")
+            sensor_rows = _sensor_health_rows()
+            if sensor_rows:
+                lines.extend([
+                    "",
+                    "## Live Sensor Health (telemetry joined to CRM assets)",
+                    "",
+                    "| Sensor | Signal | CRM Asset | Latest | Min | Max | Open WOs | Total WOs |",
+                    "|--------|--------|-----------|--------|-----|-----|----------|-----------|",
+                ])
+                for s in sensor_rows:
+                    st, u = s["stats"], s["unit"]
+                    lines.append(
+                        f"| {s['sensor']} | {s['type']} | {s['asset']} "
+                        f"| {st['latest']} {u} | {st['min']} {u} | {st['max']} {u} "
+                        f"| {s['open_wos']} | {s['total_wos']} |"
+                    )
+                lines.append("")
+                lines.append(
+                    "_Source: live static-telemetry sensors + reading series "
+                    f"({sensor_rows[0]['stats']['n']} points @ 15 min each), joined to CRM "
+                    "customer assets via the REAL msdyn_customerassetid each sensor "
+                    "carries. Work order counts come from the CRM side of the join._"
+                )
             return "\n".join(lines)
 
         data = _asset_health()
@@ -533,9 +674,37 @@ class AssetMaintenanceForecastAgent(BasicAgent):
         return "\n".join(lines)
 
     def _iot_failure_analysis(self) -> str:
+        live = _active_alert_cases()
+        if live:
+            lines = [
+                "# Real-Time IoT Failure Analysis (live telemetry + CRM)",
+                "",
+                f"**Active alerts:** {len(live)}",
+                "",
+                "| Alert | Type | Asset | Account | Reading | Threshold | Severity | CRM Case | Case Status |",
+                "|-------|------|-------|---------|---------|-----------|----------|----------|-------------|",
+            ]
+            for a in live:
+                lines.append(
+                    f"| {a['alert']} | {a['type']} | {a['asset']} | {a['account']} "
+                    f"| {a['reading']} | {a['threshold']} | {a['severity'].upper()} "
+                    f"| {a['case']} | {a['case_status']} |"
+                )
+            lines.append("")
+            lines.append("**Linked CRM cases:**")
+            for a in live:
+                lines.append(f"- {a['case']}: {a['case_title']} ({a['case_status']})")
+            lines.append("")
+            lines.append(
+                "_Source: live static-telemetry alerts joined to Static Dynamics "
+                "365 cases by ticket number (vibration_spike -> CAS-260132, "
+                "temperature_excursion -> CAS-260138, load_fault -> CAS-260128)._"
+            )
+            return "\n".join(lines)
+
         rows = _iot_failure_analysis()
         lines = [
-            "# Real-Time IoT Failure Analysis",
+            "# Real-Time IoT Failure Analysis (embedded demo data — offline)",
             "",
             "| Asset ID | Asset | Signal | Reading | Threshold | Risk | Predicted Failure | Targeted Action |",
             "|----------|-------|--------|---------|-----------|------|-------------------|-----------------|",
@@ -582,8 +751,12 @@ class AssetMaintenanceForecastAgent(BasicAgent):
 if __name__ == "__main__":
     agent = AssetMaintenanceForecastAgent()
     print("=" * 60)
-    print("LIVE TENANT ASSETS (fetched over HTTP; falls back offline)")
+    print("LIVE TENANT ASSETS + SENSOR HEALTH (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="asset_health"))
+    print()
+    print("=" * 60)
+    print("LIVE TELEMETRY ALERTS JOINED TO CRM CASES (falls back offline)")
+    print(agent.perform(operation="iot_failure_analysis"))
     print()
     print("=" * 60)
     print("EMBEDDED DEMO FLEET (works offline)")

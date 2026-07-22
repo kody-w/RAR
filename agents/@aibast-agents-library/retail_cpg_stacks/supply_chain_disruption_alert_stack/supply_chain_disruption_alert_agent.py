@@ -6,22 +6,28 @@ generates mitigation plans, and identifies alternative suppliers.
 
 HOW THIS TEMPLATE WORKS
   1. Out of the box it pulls live disruption signals over real HTTP from
-     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     TWO globally hosted simulated systems (synthetic data, no
+     credentials, works from anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (purchase orders, goods receipts, invoices):
+         https://kody-w.github.io/static-erp/api/v1/
      Try: perform(operation="disruption_dashboard")
-     — with network up, the feed surfaces the tenant's live supply-chain
+     — one output joins BOTH worlds: the tenant's live supply-chain
      cases such as CAS-260133 "Cold chain temperature excursion in
-     produce section" (Harbor Lights Grocery). In this template a
-     disruption signal is represented as a Dynamics case (incident).
+     produce section" (Harbor Lights Grocery) AND real inbound-supply
+     exceptions computed from ERP documents — GR-88005 posted 9 days
+     after PO-47005's expected delivery (Quarry Bend Foundry) and the
+     payment-blocked invoice SINV-92003 on PO-47003. In this template a
+     disruption signal is a Dynamics case or an ERP document exception.
   2. No network? Everything falls back to the embedded demo layer below
      (SUPPLY_ROUTES / DISRUPTION_EVENTS) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     SUPPLY_CHAIN_DISRUPTION_ALERT_DATA_URL to any OData-shaped endpoint
-     (your real Dynamics org, or JSON from your TMS/visibility platform),
-     or replace _fetch_collection() with your own logistics API. The
-     fields the rest of the file needs are listed in
+     SUPPLY_CHAIN_DISRUPTION_ALERT_DATA_URL (CRM side) and/or
+     SUPPLY_CHAIN_DISRUPTION_ALERT_ERP_URL (ERP side) to any endpoint
+     with the same shapes, or replace _fetch_collection() with your own
+     logistics API. The fields the rest of the file needs are listed in
      _normalize_live_disruption() — revenue impact and affected routes
      stay "n/a — enrichment seam" until you wire your planning system.
 
@@ -48,10 +54,10 @@ from datetime import datetime, timezone
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supply_chain_disruption_alert",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Supply Chain Disruption Alert Agent",
     "description": (
-        "Flags disruptions and builds mitigation plans from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
+        "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -68,19 +74,24 @@ __manifest__ = {
 }
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
 #   export SUPPLY_CHAIN_DISRUPTION_ALERT_DATA_URL=https://your-org/api/data/v9.2
+#   export SUPPLY_CHAIN_DISRUPTION_ALERT_ERP_URL=https://your-erp/api/v1
 # or replace _fetch_collection() with your TMS/visibility client.
-# Downstream code only needs the fields from _normalize_live_disruption().
+# Downstream code only needs the fields from _normalize_live_disruption()
+# and _erp_inbound_exceptions().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "SUPPLY_CHAIN_DISRUPTION_ALERT_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+ERP_SOURCE_URL = os.environ.get(
+    "SUPPLY_CHAIN_DISRUPTION_ALERT_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
 )
 _LIVE_CACHE = {}
 
@@ -91,22 +102,94 @@ _DISRUPTION_KEYWORDS = (
 )
 
 
-def _fetch_collection(collection, timeout=6):
-    """One bounded GET per collection per process. Returns [] on ANY
-    failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    if collection in _LIVE_CACHE:
-        return _LIVE_CACHE[collection]
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
     try:
         req = urllib.request.Request(
-            f"{DATA_SOURCE_URL}/{collection}.json",
+            url,
             headers={"User-Agent": "rapp-agent-template/1.0"},
         )
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             rows = json.loads(resp.read().decode("utf-8")).get("value", [])
     except Exception:
         rows = []
-    _LIVE_CACHE[collection] = rows
+    _LIVE_CACHE[url] = rows
     return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (purchase_orders, goods_receipts,
+    supplier_invoices, suppliers, materials); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
+
+
+def _erp_inbound_exceptions():
+    """REAL inbound-supply exceptions joined from live ERP documents:
+    goods receipts posted after the PO's expected delivery date, and
+    payment-blocked supplier invoices (with the received-vs-invoiced
+    quantity break behind them). [] when the ERP is unreachable."""
+    pos = _erp("purchase_orders")
+    if not pos:
+        return []
+    grs = _erp("goods_receipts")
+    invs = _erp("supplier_invoices")
+    by_po = {p.get("po_number"): p for p in pos}
+    events = []
+    for g in grs:
+        po = by_po.get(g.get("po_number"))
+        if not po:
+            continue
+        expected = str(po.get("expected_delivery_date", ""))[:10]
+        posted = str(g.get("posting_date", ""))[:10]
+        if expected and posted > expected:
+            try:
+                days = (
+                    datetime.fromisoformat(posted) - datetime.fromisoformat(expected)
+                ).days
+            except ValueError:
+                days = 0
+            events.append({
+                "type": "LATE DELIVERY",
+                "document": g.get("receipt_number", "?"),
+                "po_number": g.get("po_number", "?"),
+                "supplier": g.get("supplier_name", "?"),
+                "detail": (
+                    f"posted {posted}, {days} days after expected {expected}"
+                ),
+            })
+    for i in invs:
+        if not i.get("payment_block"):
+            continue
+        po = by_po.get(i.get("po_number"))
+        received = {}
+        for g in grs:
+            if g.get("po_number") != i.get("po_number"):
+                continue
+            for l in g.get("lines", []):
+                m = l.get("material_number", "?")
+                received[m] = received.get(m, 0) + int(float(l.get("quantity_received") or 0))
+        breaks = []
+        for l in i.get("lines", []):
+            m = l.get("material_number", "?")
+            qty_inv = int(float(l.get("quantity_invoiced") or 0))
+            if received and received.get(m, 0) != qty_inv:
+                breaks.append(f"{m} received {received.get(m, 0)} vs invoiced {qty_inv}")
+        events.append({
+            "type": "BLOCKED INVOICE",
+            "document": i.get("invoice_number", "?"),
+            "po_number": i.get("po_number", "?"),
+            "supplier": i.get("supplier_name", "?"),
+            "detail": (
+                f"${float(i.get('total_amount') or 0):,.2f} payment-blocked"
+                + (f"; {'; '.join(breaks)}" if breaks else "")
+            ),
+        })
+    return events
 
 
 def _normalize_live_disruption(row):
@@ -724,6 +807,26 @@ class SupplyChainDisruptionAlertAgent(BasicAgent):
             f"**Active signals:** {len(open_signals)} open of {len(signals)} matched "
             f"| **High severity:** {high}"
         )
+        exceptions = _erp_inbound_exceptions()
+        if exceptions:
+            lines.append("")
+            lines.append("## Inbound Supply Exceptions — Live ERP (POs vs receipts vs invoices)")
+            lines.append("")
+            lines.append("| Type | Document | PO | Supplier | Detail |")
+            lines.append("|------|----------|----|----------|--------|")
+            for e in exceptions:
+                lines.append(
+                    f"| **{e['type']}** | {e['document']} | {e['po_number']} "
+                    f"| {e['supplier']} | {e['detail']} |"
+                )
+            lines.append("")
+            lines.append(
+                f"**ERP exceptions:** {len(exceptions)} computed from real document "
+                "joins in the live simulated ERP — one feed with the CRM cases above."
+            )
+        else:
+            lines.append("")
+            lines.append("_Simulated ERP unreachable — inbound document exceptions unavailable._")
         lines.append(
             "Affected routes and revenue impact need your TMS/planning system — "
             "wire it at the LIVE DATA SEAM."
@@ -969,7 +1072,8 @@ if __name__ == "__main__":
     print("EMBEDDED DEMO NETWORK (works offline)")
     print(agent.perform(operation="disruption_dashboard", disruption_id="DISR-002"))
     print("\n" + "=" * 80)
-    print("LIVE TENANT DISRUPTION SIGNALS (fetched over HTTP; falls back offline)")
+    print("LIVE TENANT DISRUPTION SIGNALS + LIVE ERP INBOUND EXCEPTIONS")
+    print("(cold-chain case, late delivery, blocked invoice; falls back offline)")
     print(agent.perform(operation="disruption_dashboard"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="risk_assessment", route_id="RT-APAC-01"))

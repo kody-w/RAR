@@ -7,25 +7,32 @@ throughput improvements, and generates shift-level production plans
 to maximize output while maintaining quality targets.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template a production stoppage is represented as a Dynamics
-     case — e.g. Granite Peak Manufacturing's case "Line three unplanned
-     downtime from spindle vibration".
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — Granite Peak Manufacturing cases become downtime events
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
+     The two join on the shared story: the live vibration_spike alert
+     on Granite Peak's CNC spindle S-300 carries the real CRM case
+     number CAS-260132 ("Line three unplanned downtime from spindle
+     vibration"), and its full spindle-vibration reading series backs
+     the alert with real stats.
      Try: perform(operation="line_efficiency")
+     (renders the CRM downtime cases PLUS the spindle vibration series
+     stats and alert window joined on CAS-260132)
   2. No network? Everything falls back to the embedded demo layer below
      (PRODUCTION_LINES / STATIONS / SHIFT_SCHEDULES) — the agent never
      crashes offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     PRODUCTION_LINE_OPTIMIZATION_DATA_URL to any OData-shaped endpoint
-     (your real Dynamics org, or JSON exported from your MES/historian),
-     or replace _fetch_collection() with an OPC-UA / MES client. Fields
-     the rest of the file needs are listed in
-     _normalize_live_downtime_event() — affected line and lost hours
-     render as "n/a — enrichment seam" until you wire your MES. OEE and
-     cycle-time analytics stay simulated until then.
+     PRODUCTION_LINE_OPTIMIZATION_DATA_URL (CRM) and/or
+     PRODUCTION_LINE_OPTIMIZATION_TEL_URL (telemetry) to your own
+     endpoints, or replace _fetch_collection() / _fetch_telemetry()
+     with an OPC-UA / MES client. Fields the rest of the file needs are
+     listed in _normalize_live_downtime_event() — affected line and
+     lost hours render as "n/a — enrichment seam" until you wire your
+     MES. OEE and cycle-time analytics stay simulated until then.
 
 OPERATIONS
   line_efficiency | bottleneck_analysis | throughput_optimization
@@ -45,9 +52,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/production_line_optimization",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Production Line Optimization Agent",
-    "description": "Analyzes OEE, bottlenecks, and live downtime signals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["production", "OEE", "bottleneck", "throughput", "manufacturing"],
     "category": "manufacturing",
@@ -92,6 +99,69 @@ def _fetch_collection(collection, timeout=6):
         rows = []
     _LIVE_CACHE[collection] = rows
     return rows
+
+
+# Sibling live source: the static-telemetry API. The vibration_spike
+# alert on Granite Peak's CNC spindle S-300 joins the CRM downtime case
+# CAS-260132, and its 672-point reading series backs the alert with
+# real stats. Override with PRODUCTION_LINE_OPTIMIZATION_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "PRODUCTION_LINE_OPTIMIZATION_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _granite_peak_vibration():
+    """The live vibration_spike alert (-> CRM case CAS-260132) plus
+    stats over its full spindle-vibration reading series. Fetches ONE
+    672-point series, lazily; None when offline."""
+    alert = next(
+        (a for a in _fetch_telemetry("alerts")
+         if a.get("alert_type") == "vibration_spike"),
+        None,
+    )
+    if not alert:
+        return None
+    points = _fetch_telemetry(
+        f"readings/{alert.get('sensor_id')}", key="points"
+    )
+    values = [
+        p.get("v") for p in points if isinstance(p.get("v"), (int, float))
+    ]
+    stats = None
+    if values:
+        threshold = alert.get("threshold")
+        stats = {
+            "n": len(values),
+            "min": min(values),
+            "max": max(values),
+            "latest": values[-1],
+            "over_threshold": sum(
+                1 for v in values
+                if isinstance(threshold, (int, float)) and v > threshold
+            ),
+        }
+    return {"alert": alert, "stats": stats}
 
 
 def _normalize_live_downtime_event(row):
@@ -362,6 +432,44 @@ class ProductionLineOptimizationAgent(BasicAgent):
                     f"{seam if e['lost_hours'] is None else e['lost_hours']} |"
                 )
             lines.append("\n(OEE and cycle-time metrics above remain simulated until an MES is wired.)")
+            vib = _granite_peak_vibration()
+            if vib:
+                alert, stats = vib["alert"], vib["stats"]
+                unit = alert.get("unit", "")
+                lines.append(
+                    "\n#### Spindle Vibration Telemetry — joined to "
+                    f"{alert.get('crm_case', 'CAS-260132')}\n"
+                )
+                lines.append(
+                    f"- **Alert:** {alert.get('alert_code', '?')} "
+                    f"{alert.get('alert_type', '?')} "
+                    f"({str(alert.get('severity', '?')).upper()}) — "
+                    f"{alert.get('asset_name', '?')}, peak "
+                    f"{alert.get('peak_value')} {unit} vs threshold "
+                    f"{alert.get('threshold')} {unit}"
+                )
+                lines.append(
+                    f"- **Alert window:** {alert.get('window_start', '?')} -> "
+                    f"{alert.get('window_end', '?')}"
+                )
+                if stats:
+                    lines.append(
+                        f"- **Series ({alert.get('sensor_code', '?')}, "
+                        f"{stats['n']} points @ 15 min):** min {stats['min']} "
+                        f"{unit}, max {stats['max']} {unit}, latest "
+                        f"{stats['latest']} {unit}; "
+                        f"{stats['over_threshold']} readings above threshold"
+                    )
+                lines.append(
+                    f"- **CRM case:** {alert.get('crm_case', '?')} — the "
+                    "downtime case in the table above (joined by ticket number)"
+                )
+                lines.append(
+                    "\n_Source: live static-telemetry alert + reading series "
+                    "for Granite Peak Manufacturing's CNC spindle S-300, "
+                    "joined to the Static Dynamics 365 case by its real "
+                    "ticket number._"
+                )
         else:
             lines.append("\n_Live tenant unreachable — showing embedded demo lines only._")
         return "\n".join(lines)
@@ -565,7 +673,8 @@ if __name__ == "__main__":
     agent = ProductionLineOptimizationAgent()
     print("=" * 72)
     print("EMBEDDED DEMO LINES + LIVE TENANT DOWNTIME SIGNALS")
-    print("(live section fetched over HTTP; falls back offline)")
+    print("(live sections fetched over HTTP; falls back offline —")
+    print(" CRM downtime cases + spindle vibration telemetry joined on CAS-260132)")
     print("=" * 72)
     print(agent.perform(operation="line_efficiency"))
     print()

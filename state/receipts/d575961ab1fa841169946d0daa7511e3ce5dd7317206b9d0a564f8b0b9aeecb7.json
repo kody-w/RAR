@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/supply_chain_disruption_alert",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ed9a780b446808d9b6ac20d38a8e67344a9ee30cd4067fa095feb5884def7484"
+ },
+ "canonical_path": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_d575961ab1fa841169946d0daa7511e3ce5dd7317206b9d0a564f8b0b9aeecb7",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "8a4e1eff7e40c1b331d6153d4704a1c8d95c830767946bcbcfb3306fdc6859db",
+  "receipt": "rar_6cae7ef6df7f2b2f3ae7129e0cfd44c275df2c60d5f692dead51b8d8ca3980b2",
+  "version": "1.2.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_d575961ab1fa841169946d0d",
+ "revision_id": "d575961ab1fa841169946d0daa7511e3ce5dd7317206b9d0a564f8b0b9aeecb7",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.3.0"
+}

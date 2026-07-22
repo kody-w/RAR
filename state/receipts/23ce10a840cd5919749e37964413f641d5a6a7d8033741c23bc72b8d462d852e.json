@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/staff_credentialing",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f4e2302fd9589e02d08547a24c276c52493a853a3556a6a077ad87bcb50a701e"
+ },
+ "canonical_path": "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_23ce10a840cd5919749e37964413f641d5a6a7d8033741c23bc72b8d462d852e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d23528a22920122a8b9b525f0c48eae12e13fe43f0d4605ea70a2b2f66958c5a",
+  "receipt": "rar_aeb79660bd20293613df2dd117d4ceb803d81d60b6802722d4a5404fcf33c169",
+  "version": "1.1.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_23ce10a840cd5919749e3796",
+ "revision_id": "23ce10a840cd5919749e37964413f641d5a6a7d8033741c23bc72b8d462d852e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.2.0"
+}

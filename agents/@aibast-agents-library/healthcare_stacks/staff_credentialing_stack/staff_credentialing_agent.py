@@ -6,24 +6,36 @@ verification audits, and onboarding checklists for licenses, certifications,
 DEA registrations, and continuing education requirements.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template the tenant's system users are reinterpreted as the
-     staff roster awaiting credential verification — e.g. user
-     "Morgan Ellis, Customer Service Manager".
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM  — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+              The tenant's system users are reinterpreted as the staff
+              roster awaiting credential verification — e.g. user
+              "Morgan Ellis, Customer Service Manager".
+       FHIR — the Static FHIR R4 server (Riverbend Medical Group):
+              https://kody-w.github.io/static-fhir/fhir/
+              14 live Practitioner resources with clinician IDs and
+              qualification codes (RN, NP, PA, MD, DO...), 10 of whom
+              are the same Aster Lane identities found in the CRM
+              directory.
      Try: perform(operation="credential_status")
+     — one output renders the FHIR Practitioner registry joined to the
+     CRM system-user directory by full name (e.g. Jordan Lee is both
+     RMG-CL-1001 Care Coordinator and a CRM Customer Service Rep).
   2. No network? Everything falls back to the embedded demo layer below
      (STAFF_CREDENTIALS / ONBOARDING_CHECKLIST_TEMPLATE) — the agent
      never crashes offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     STAFF_CREDENTIALING_DATA_URL to any OData-shaped endpoint (your real
-     Dynamics org, or JSON exported from your HRIS), or replace
-     _fetch_collection() with a primary-source verification API client
+     STAFF_CREDENTIALING_DATA_URL (CRM side) to any OData-shaped
+     endpoint and STAFF_CREDENTIALING_FHIR_URL (clinical side) to any
+     FHIR R4 searchset-bundle host — or replace _fetch_collection() /
+     _fetch_fhir_bundle() with a primary-source verification API client
      (NPDB, DEA, state boards). Fields the rest of the file needs are
-     listed in _normalize_live_staff() — licenses, CME, and malpractice
-     render as "n/a — enrichment seam" until you wire those systems.
+     listed in _normalize_live_staff() — license numbers, CME, and
+     malpractice render as "n/a — enrichment seam" until you wire those
+     systems.
 
 OPERATIONS
   credential_status | expiration_alerts | verification_audit
@@ -42,9 +54,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/staff_credentialing",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "Staff Credentialing Agent",
-    "description": "Tracks staff credentials, expirations, audits, and onboarding against a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
     "author": "AIBAST",
     "tags": ["credentialing", "licenses", "certifications", "dea", "compliance", "healthcare"],
     "category": "healthcare",
@@ -55,20 +67,26 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
-#   export STAFF_CREDENTIALING_DATA_URL=https://your-org/api/data/v9.2
-# or replace _fetch_collection() with your HRIS / primary-source
-# verification client. Downstream code only needs the fields produced
-# by _normalize_live_staff().
+# Two live sources, both synthetic and hosted on GitHub Pages:
+#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
+#     export STAFF_CREDENTIALING_DATA_URL=https://your-org/api/data/v9.2
+#   FHIR (R4 searchset bundles, Riverbend Medical Group):
+#     export STAFF_CREDENTIALING_FHIR_URL=https://your-fhir-host/fhir
+# or replace _fetch_collection() / _fetch_fhir_bundle() with your
+# HRIS / primary-source verification client. Downstream code only
+# needs the fields produced by _normalize_live_staff() and
+# _live_practitioner_registry().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "STAFF_CREDENTIALING_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+FHIR_SOURCE_URL = os.environ.get(
+    "STAFF_CREDENTIALING_FHIR_URL",
+    "https://kody-w.github.io/static-fhir/fhir",
 )
 _LIVE_CACHE = {}
 
@@ -114,6 +132,62 @@ def _live_staff_roster():
     """Tenant system users reinterpreted as the staff roster awaiting
     credential verification; [] when offline."""
     return [_normalize_live_staff(r) for r in _fetch_collection("systemusers")]
+
+
+def _fetch_fhir_bundle(resource, timeout=6):
+    """Sibling helper for the FHIR side: one bounded GET per resource
+    type per process (cached by full URL). Returns the list of entry
+    resources from the R4 searchset Bundle; [] on ANY failure."""
+    url = f"{FHIR_SOURCE_URL}/{resource}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            bundle = json.loads(resp.read().decode("utf-8"))
+        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _live_practitioner_registry():
+    """FHIR Practitioner resources joined to the CRM system-user
+    directory by full name — 10 of the 14 Riverbend clinicians are the
+    same Aster Lane identities that appear in the CRM. License numbers,
+    expirations, CME, and malpractice remain enrichment seams (wire
+    primary-source verification). [] when the FHIR feed is unreachable."""
+    practitioners = _fetch_fhir_bundle("Practitioner")
+    if not practitioners:
+        return []
+    crm_by_name = {
+        u.get("fullname"): u for u in _fetch_collection("systemusers")
+    }
+    registry = []
+    for res in practitioners:
+        name = (res.get("name") or [{}])[0]
+        full = " ".join(list(name.get("given", [])) + [name.get("family", "")]).strip() or "Unknown"
+        qual = (res.get("qualification") or [{}])[0].get("code", {})
+        crm = crm_by_name.get(full)
+        registry.append({
+            "clinician_id": (res.get("identifier") or [{}])[0].get(
+                "value", res.get("id", "")[:8]
+            ),
+            "name": full,
+            "credential_code": (qual.get("coding") or [{}])[0].get("code", "n/a"),
+            "role": qual.get("text", "n/a"),
+            "active": res.get("active", True),
+            "email": next(
+                (t.get("value") for t in res.get("telecom", [])
+                 if t.get("system") == "email"),
+                "n/a",
+            ),
+            "crm_title": crm.get("title") if crm else None,
+        })
+    return registry
 
 
 # ---------------------------------------------------------------------------
@@ -350,6 +424,38 @@ class StaffCredentialingAgent(BasicAgent):
                 )
         else:
             lines += ["", "_Live tenant unreachable — showing embedded demo staff only._"]
+        registry = _live_practitioner_registry()
+        if registry:
+            seam = "n/a — enrichment seam"
+            matched = sum(1 for p in registry if p["crm_title"])
+            lines += [
+                "",
+                f"## Live FHIR Practitioner Registry ({len(registry)} Practitioner "
+                "resources — Riverbend Medical Group, joined to the CRM directory)",
+                "",
+                f"{matched} of {len(registry)} practitioners are the same Aster Lane "
+                "identities found in the CRM system-user directory above (joined on "
+                "full name) — clinical credential on the FHIR side, business role on "
+                "the CRM side, in one view:",
+                "",
+                "| Clinician ID | Practitioner | Credential | Clinical Role | Active | CRM Directory Role (Aster Lane) | License Exp. |",
+                "|--------------|--------------|-----------|---------------|--------|--------------------------------|--------------|",
+            ]
+            for p in registry:
+                active = "Yes" if p["active"] else "No"
+                crm_role = p["crm_title"] or "no CRM match — clinical-only hire"
+                lines.append(
+                    f"| {p['clinician_id']} | {p['name']} | {p['credential_code']} "
+                    f"| {p['role']} | {active} | {crm_role} | {seam} |"
+                )
+            lines += [
+                "",
+                "_License numbers, expirations, CME, and malpractice are enrichment "
+                "seams on both sides — wire primary-source verification (NPDB, DEA, "
+                "state boards) to fill them._",
+            ]
+        else:
+            lines += ["", "_Live FHIR server unreachable — practitioner registry unavailable offline._"]
         return "\n".join(lines)
 
     def _expiration_alerts(self) -> str:
@@ -410,8 +516,10 @@ class StaffCredentialingAgent(BasicAgent):
 if __name__ == "__main__":
     agent = StaffCredentialingAgent()
     print("=" * 60)
-    print("EMBEDDED DEMO + LIVE TENANT STAFF ROSTER")
-    print("(live section fetched over HTTP; falls back offline)")
+    print("EMBEDDED DEMO + LIVE CRM ROSTER + LIVE FHIR PRACTITIONERS")
+    print("(sibling-live demo: 14 FHIR Practitioner resources join the")
+    print("CRM system-user directory by full name — 10 shared identities;")
+    print("both feeds fetched over HTTP and fall back offline)")
     print("=" * 60)
     print(agent.perform(operation="credential_status"))
     for op in ["expiration_alerts", "verification_audit", "onboarding_checklist"]:

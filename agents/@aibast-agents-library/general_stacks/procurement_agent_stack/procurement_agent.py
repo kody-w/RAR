@@ -10,23 +10,30 @@ your organization has placed with the supplier Aster Lane Office
 Systems. Say the same in your own mutation if you reinterpret an entity.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live orders over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     Try: perform(operation="purchase_request", request_id="ORD-260100")
-     — the tenant's real seeded order (Cedar Hollow Printing, $4,744,
-     Fulfilled), routed through the real approval-threshold math.
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (suppliers, purchase orders, goods receipts,
+       supplier invoices):
+         https://kody-w.github.io/static-erp/api/v1/
+     Try: perform(operation="purchase_request", request_id="PO-47003")
+     — a real ERP purchase order (Orchard Signal Works print heads)
+     joined to its goods receipt GR-88003 and invoice SINV-92003: the
+     three-way match BREAKS (36 received vs 40 invoiced) and the
+     payment-blocked invoice is flagged automatically.
   2. No network? Everything falls back to the embedded demo layer below
      (_PURCHASE_REQUESTS / _VENDOR_CATALOG) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     PROCUREMENT_AGENT_DATA_URL to any OData-shaped endpoint (your real
-     Dynamics org, or JSON exported from your ERP), or replace
-     _fetch_collection() with your procurement client. The fields the
-     rest of the file needs are listed in _normalize_live_request() —
-     requester, department, and budget code are labeled "n/a —
-     enrichment seam"; wire your HR and finance systems there.
+     PROCUREMENT_AGENT_DATA_URL (CRM side) and/or
+     PROCUREMENT_AGENT_ERP_URL (ERP side) to any endpoint with the same
+     shapes, or replace _fetch_collection() with your procurement
+     client. The fields the rest of the file needs are listed in
+     _normalize_live_request() / _normalize_erp_po() — requester,
+     department, and budget code are labeled "n/a — enrichment seam";
+     wire your HR and finance systems there.
 
 OPERATIONS
   purchase_request | vendor_comparison | approval_routing
@@ -49,9 +56,9 @@ import urllib.request
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_agent",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Procurement Agent",
-    "description": "Routes purchase requests and approvals over live orders from a simulated Dynamics 365 tenant, with spend analysis and offline fallback.",
+    "description": "Routes purchase requests over a simulated Dynamics 365 tenant and ERP, flagging three-way-match breaks and blocked invoices, with offline fallback.",
     "author": "AIBAST",
     "tags": ["procurement", "purchasing", "vendor", "approval", "spend-analysis"],
     "category": "general",
@@ -62,39 +69,52 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
 #   export PROCUREMENT_AGENT_DATA_URL=https://your-org/api/data/v9.2
-# or replace _fetch_collection() with your ERP client. Downstream code
-# only needs the fields produced by _normalize_live_request().
+#   export PROCUREMENT_AGENT_ERP_URL=https://your-erp/api/v1
+# or replace _fetch_collection() with your procurement client.
+# Downstream code only needs the fields produced by
+# _normalize_live_request() and _normalize_erp_po().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "PROCUREMENT_AGENT_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+ERP_SOURCE_URL = os.environ.get(
+    "PROCUREMENT_AGENT_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
+)
 _LIVE_CACHE = {}
 
 
-def _fetch_collection(collection, timeout=6):
-    """One bounded GET per collection per process. Returns [] on ANY
-    failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    if collection in _LIVE_CACHE:
-        return _LIVE_CACHE[collection]
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
     try:
         req = urllib.request.Request(
-            f"{DATA_SOURCE_URL}/{collection}.json",
+            url,
             headers={"User-Agent": "rapp-agent-template/1.0"},
         )
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             rows = json.loads(resp.read().decode("utf-8")).get("value", [])
     except Exception:
         rows = []
-    _LIVE_CACHE[collection] = rows
+    _LIVE_CACHE[url] = rows
     return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (suppliers, materials,
+    purchase_orders, goods_receipts, supplier_invoices); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
 
 
 def _normalize_live_request(row):
@@ -128,6 +148,100 @@ def _live_requests():
         for r in (_normalize_live_request(row) for row in rows)
         if r["id"]
     }
+
+
+def _normalize_erp_po(row):
+    """Project a live ERP purchase order onto the purchase-request shape
+    this agent uses. buyer_name is a REAL field here — only department,
+    priority, and budget code stay enrichment seams."""
+    lines = row.get("lines", [])
+    title = "; ".join(
+        str(l.get("material_description", l.get("material_number", "?")))
+        for l in lines
+    ) or "Unnamed purchase order"
+    return {
+        "id": row.get("po_number", ""),
+        "title": title,
+        "requester": row.get("buyer_name"),
+        "department": None,      # enrichment seam
+        "category": "Direct Materials",
+        "amount": float(row.get("total_amount") or 0),
+        "priority": None,        # enrichment seam
+        "status": row.get("status", "open"),
+        "vendor_preferred": row.get("supplier_name", "Unknown"),
+        "justification": f"ERP purchase order for plant {row.get('plant', '?')}, "
+                         f"expected delivery {str(row.get('expected_delivery_date', ''))[:10] or 'n/a'}",
+        "budget_code": None,     # enrichment seam
+        "discount": 0.0,
+        "_live": True,
+        "_erp": True,
+    }
+
+
+def _erp_purchase_orders():
+    """po_number-keyed dict of live ERP purchase orders; {} offline."""
+    return {
+        r["id"]: r
+        for r in (_normalize_erp_po(row) for row in _erp("purchase_orders"))
+        if r["id"]
+    }
+
+
+def _erp_three_way_block(po_number):
+    """Render the three-way match for one ERP PO — PO lines vs goods
+    receipts vs supplier invoices, joined on po_number/material_number.
+    Returns '' when the ERP is unreachable or the PO has no documents."""
+    grs = [g for g in _erp("goods_receipts") if g.get("po_number") == po_number]
+    invs = [i for i in _erp("supplier_invoices") if i.get("po_number") == po_number]
+    po = next(
+        (p for p in _erp("purchase_orders") if p.get("po_number") == po_number),
+        None,
+    )
+    if po is None:
+        return ""
+    ordered, received, invoiced = {}, {}, {}
+    for l in po.get("lines", []):
+        m = l.get("material_number", "?")
+        ordered[m] = ordered.get(m, 0) + int(float(l.get("quantity") or 0))
+    for g in grs:
+        for l in g.get("lines", []):
+            m = l.get("material_number", "?")
+            received[m] = received.get(m, 0) + int(float(l.get("quantity_received") or 0))
+    for i in invs:
+        for l in i.get("lines", []):
+            m = l.get("material_number", "?")
+            invoiced[m] = invoiced.get(m, 0) + int(float(l.get("quantity_invoiced") or 0))
+    rows, flags = "", []
+    for m in ordered:
+        o, r, v = ordered[m], received.get(m, 0), invoiced.get(m, 0)
+        result = "MATCH" if o == r == v else "**BREAK**"
+        rows += f"| {m} | {o} | {r} | {v} | {result} |\n"
+        if o != r or o != v:
+            flags.append(
+                f"- **Match break** on {m}: ordered {o}, received {r}, invoiced {v}."
+            )
+    for i in invs:
+        if i.get("payment_block"):
+            flags.append(
+                f"- **Invoice {i.get('invoice_number')} is PAYMENT BLOCKED** "
+                f"(status `{i.get('status')}`, ${float(i.get('total_amount') or 0):,.2f}, "
+                f"due {str(i.get('due_date', ''))[:10]}). Resolve the quantity "
+                "discrepancy before releasing payment."
+            )
+    docs = ", ".join(
+        [g.get("receipt_number", "?") for g in grs]
+        + [i.get("invoice_number", "?") for i in invs]
+    ) or "none posted yet"
+    return (
+        "**Three-Way Match (LIVE ERP):** documents {docs}\n\n"
+        "| Material | Ordered | Received | Invoiced | Result |\n|---|---|---|---|---|\n"
+        "{rows}\n"
+        "{flags}\n"
+    ).format(
+        docs=docs,
+        rows=rows.rstrip("\n"),
+        flags="\n".join(flags) if flags else "All lines match — clear to pay.",
+    )
 
 
 def _na(value):
@@ -189,19 +303,22 @@ def _get_approval_level(amount):
 
 
 def _resolve_request(request_id):
-    """Embedded demo requests first, then live tenant orders.
-    Returns (request, is_live) or (None, False)."""
+    """Embedded demo requests first, then live tenant orders, then live
+    ERP purchase orders. Returns (request, is_live) or (None, False)."""
     if request_id in _PURCHASE_REQUESTS:
         return _PURCHASE_REQUESTS[request_id], False
     live = _live_requests()
     if request_id in live:
         return live[request_id], True
+    erp = _erp_purchase_orders()
+    if request_id in erp:
+        return erp[request_id], True
     return None, False
 
 
 def _known_request_ids():
     ids = sorted(_PURCHASE_REQUESTS)
-    live = sorted(_live_requests())
+    live = sorted(_live_requests()) + sorted(_erp_purchase_orders())
     return ", ".join(ids + live) if live else ", ".join(ids)
 
 
@@ -315,11 +432,17 @@ class ProcurementAgent(BasicAgent):
                 f"Available request IDs: {_known_request_ids()}."
             )
         approval = _get_approval_level(pr["amount"])
-        source = (
-            "Record source: LIVE order from the Aster Lane Dynamics 365 tenant (read as a purchase request)"
-            if is_live else
-            "Record source: embedded demo layer (simulated)"
-        )
+        if pr.get("_erp"):
+            source = "Record source: LIVE purchase order from the simulated ERP"
+        elif is_live:
+            source = "Record source: LIVE order from the Aster Lane Dynamics 365 tenant (read as a purchase request)"
+        else:
+            source = "Record source: embedded demo layer (simulated)"
+        match_block = ""
+        if pr.get("_erp"):
+            rendered = _erp_three_way_block(pr["id"])
+            if rendered:
+                match_block = rendered + "\n"
         return (
             f"**Purchase Request: {pr['id']}**\n\n"
             f"| Field | Detail |\n|---|---|\n"
@@ -333,6 +456,7 @@ class ProcurementAgent(BasicAgent):
             f"| Budget Code | {_na(pr['budget_code'])} |\n"
             f"| Required Approver | {approval['approver']} |\n\n"
             f"**Justification:** {pr['justification']}\n\n"
+            f"{match_block}"
             f"{source}\n"
             f"Source: [Procurement System]\nAgents: ProcurementAgent"
         )
@@ -537,6 +661,10 @@ if __name__ == "__main__":
     print("=" * 60)
     print("LIVE TENANT ORDER (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="purchase_request", request_id="ORD-260100"))
+    print()
+    print("=" * 60)
+    print("LIVE ERP PO + THREE-WAY MATCH (blocked invoice SINV-92003)")
+    print(agent.perform(operation="purchase_request", request_id="PO-47003"))
     print()
     print("=" * 60)
     print(agent.perform(operation="spend_analysis"))

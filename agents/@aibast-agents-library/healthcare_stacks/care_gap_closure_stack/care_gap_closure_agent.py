@@ -13,26 +13,34 @@ the outreach work queue. Say the same in your own mutation if you
 reinterpret an entity.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live cases, contacts, and tasks over real
-     HTTP from the globally hosted Static Dynamics 365 tenant (Aster
-     Lane Office Systems — synthetic data, no credentials, works from
-     anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM  — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+              cases, contacts, and tasks — Riverbend Medical Group's real
+              seeded queue, e.g. CAS-260124 "Prior authorization request
+              pending beyond SLA" (High priority).
+       FHIR — the Static FHIR R4 server (Riverbend Medical Group):
+              https://kody-w.github.io/static-fhir/fhir/
+              Appointment resources read as care-gap signals — cancelled
+              visits are open gaps, fulfilled visits are closed ones.
      Try: perform(operation="gap_analysis")
-     — alongside the HEDIS measure table it surfaces Riverbend Medical
-     Group's real seeded queue, e.g. CAS-260124 "Prior authorization
-     request pending beyond SLA" (High priority).
+     — alongside the HEDIS table it renders the CRM queue AND the FHIR
+     gap signals, and ties the cancelled "Cardiac MRI ... pending prior
+     authorization" Appointment to CRM case CAS-260124 in one output.
   2. No network? Everything falls back to the embedded demo layer below
      (HEDIS_MEASURES / PATIENT_SEGMENTS) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     CARE_GAP_CLOSURE_DATA_URL to any OData-shaped endpoint (your real
-     Dynamics org, or JSON exported from your population-health
-     platform), or replace _fetch_collection() with your registry
-     client. The fields the rest of the file needs are listed in
-     _normalize_live_work_item() — patient identifiers and measure
-     attribution are enrichment seams; wire your EHR/registry there
-     (and mind PHI: this template ships only synthetic data).
+     CARE_GAP_CLOSURE_DATA_URL (CRM side) to any OData-shaped endpoint
+     and CARE_GAP_CLOSURE_FHIR_URL (clinical side) to any FHIR R4
+     searchset-bundle host — or replace _fetch_collection() /
+     _fetch_fhir_bundle() with your registry client. The fields the rest
+     of the file needs are listed in _normalize_live_work_item() —
+     patient identifiers and measure attribution are enrichment seams;
+     wire your EHR/registry there (and mind PHI: this template ships
+     only synthetic data).
 
 OPERATIONS
   gap_analysis | patient_prioritization | outreach_campaign
@@ -53,9 +61,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/care_gap_closure",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Care Gap Closure Agent",
-    "description": "Analyzes HEDIS care gaps and surfaces the live care-coordination queue from a simulated Dynamics 365 tenant, with offline demo fallback.",
+    "description": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback.",
     "author": "AIBAST",
     "tags": ["hedis", "care-gaps", "quality-measures", "outreach", "population-health", "healthcare"],
     "category": "healthcare",
@@ -66,20 +74,25 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
-#   export CARE_GAP_CLOSURE_DATA_URL=https://your-org/api/data/v9.2
-# or replace _fetch_collection() with your registry/EHR client.
-# Downstream code only needs the fields produced by
-# _normalize_live_work_item().
+# Two live sources, both synthetic and hosted on GitHub Pages:
+#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
+#     export CARE_GAP_CLOSURE_DATA_URL=https://your-org/api/data/v9.2
+#   FHIR (R4 searchset bundles, Riverbend Medical Group):
+#     export CARE_GAP_CLOSURE_FHIR_URL=https://your-fhir-host/fhir
+# or replace _fetch_collection() / _fetch_fhir_bundle() with your
+# registry/EHR client. Downstream code only needs the fields produced
+# by _normalize_live_work_item() and _live_appointment_gap_signals().
 # ---------------------------------------------------------------------------
 
 DATA_SOURCE_URL = os.environ.get(
     "CARE_GAP_CLOSURE_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+FHIR_SOURCE_URL = os.environ.get(
+    "CARE_GAP_CLOSURE_FHIR_URL",
+    "https://kody-w.github.io/static-fhir/fhir",
 )
 _LIVE_CACHE = {}
 
@@ -150,6 +163,62 @@ def _live_care_queue():
         ]
         queue.append(_normalize_live_work_item(case, case_tasks))
     return queue
+
+
+def _fetch_fhir_bundle(resource, timeout=6):
+    """Sibling helper for the FHIR side: one bounded GET per resource
+    type per process (cached by full URL). Returns the list of entry
+    resources from the R4 searchset Bundle; [] on ANY failure."""
+    url = f"{FHIR_SOURCE_URL}/{resource}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            bundle = json.loads(resp.read().decode("utf-8"))
+        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _live_appointment_gap_signals():
+    """FHIR Appointment resources read as care-gap signals: a cancelled
+    visit is an open gap (care deferred or missed), a fulfilled visit is
+    a recently closed one. HEDIS measure attribution stays an enrichment
+    seam. None when the FHIR feed is unreachable."""
+    appts = _fetch_fhir_bundle("Appointment")
+    if not appts:
+        return None
+
+    def _row(a):
+        patient = practitioner = "?"
+        for p in a.get("participant", []):
+            ref = p.get("actor", {}).get("reference", "")
+            if ref.startswith("Patient/"):
+                patient = p.get("actor", {}).get("display", "?")
+            elif ref.startswith("Practitioner/"):
+                practitioner = p.get("actor", {}).get("display", "?")
+        return {
+            "description": a.get("description", "untitled"),
+            "patient": patient,
+            "practitioner": practitioner,
+            "start": str(a.get("start", ""))[:10],
+            "status": a.get("status", "?"),
+        }
+
+    counts = {}
+    for a in appts:
+        status = a.get("status", "unknown")
+        counts[status] = counts.get(status, 0) + 1
+    return {
+        "counts": counts,
+        "cancelled": [_row(a) for a in appts if a.get("status") == "cancelled"],
+        "fulfilled": [_row(a) for a in appts if a.get("status") == "fulfilled"],
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -461,6 +530,64 @@ class CareGapClosureAgent(BasicAgent):
                 "_Live care-coordination queue: live tenant unreachable — "
                 "embedded demo layer only._",
             ]
+        signals = _live_appointment_gap_signals()
+        if signals:
+            crm_pa_case = next(
+                (item["case_number"] for item in queue
+                 if "prior authorization" in item["title"].lower()),
+                None,
+            )
+            counts = " | ".join(
+                f"{status}: {n}" for status, n in sorted(signals["counts"].items())
+            )
+            lines += [
+                "",
+                "## Live FHIR appointment gap signals — Riverbend Medical Group",
+                "",
+                "LIVE Appointment resources from the FHIR R4 server, read as gap "
+                "signals: cancelled = open gap (care deferred or missed), "
+                "fulfilled = recently closed gap. HEDIS measure attribution is an "
+                "enrichment seam — wire your registry.",
+                "",
+                f"**Appointment status mix:** {counts}",
+                "",
+                f"**Open gap signals (cancelled visits — {len(signals['cancelled'])}):**",
+                "",
+                "| Patient | Deferred/Missed Visit | Was Scheduled | Practitioner | CRM Tie-in |",
+                "|---------|----------------------|---------------|--------------|------------|",
+            ]
+            for row in signals["cancelled"]:
+                if crm_pa_case and "prior authorization" in row["description"].lower():
+                    tie = f"tracked as case {crm_pa_case}"
+                else:
+                    tie = "n/a — enrichment seam"
+                lines.append(
+                    f"| {row['patient']} | {row['description'][:55]} | {row['start']} "
+                    f"| {row['practitioner']} | {tie} |"
+                )
+            closed = ", ".join(
+                f"{r['patient']} ({r['description']}, {r['start']})"
+                for r in signals["fulfilled"]
+            ) or "none"
+            lines += [
+                "",
+                f"**Recently closed signals (fulfilled visits — "
+                f"{len(signals['fulfilled'])}):** {closed}",
+            ]
+            if crm_pa_case:
+                lines += [
+                    "",
+                    "_Join: the cancelled \"Cardiac MRI ... pending prior "
+                    f"authorization\" Appointment and CRM case {crm_pa_case} in the "
+                    "queue above are the same blocked care event — clinical signal "
+                    "on the FHIR side, coordination work item on the CRM side._",
+                ]
+        else:
+            lines += [
+                "",
+                "_Live FHIR appointment gap signals: FHIR server unreachable — "
+                "embedded demo layer only._",
+            ]
         return "\n".join(lines)
 
     def _patient_prioritization(self) -> str:
@@ -573,9 +700,10 @@ class CareGapClosureAgent(BasicAgent):
 if __name__ == "__main__":
     agent = CareGapClosureAgent()
     print("=" * 60)
-    print("EMBEDDED DEMO MEASURES + LIVE TENANT QUEUE")
-    print("(HEDIS table works offline; the Riverbend queue is fetched")
-    print("over HTTP and falls back gracefully)")
+    print("EMBEDDED DEMO MEASURES + LIVE CRM QUEUE + LIVE FHIR SIGNALS")
+    print("(sibling-live demo: FHIR cancelled/fulfilled Appointments are")
+    print("gap signals, and the cancelled Cardiac MRI ties to CRM case")
+    print("CAS-260124; both feeds fetched over HTTP, offline-safe)")
     print("=" * 60)
     print(agent.perform(operation="gap_analysis"))
     for op in [

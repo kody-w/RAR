@@ -5,23 +5,33 @@ Empowers store associates with product lookup, customer assistance
 scripts, daily task management, and performance dashboards.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls the live product catalog over real HTTP from
-     the globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — the product catalog and store cases
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
      Try: perform(operation="product_lookup", query="Mobile Cart")
      — with network up, that finds the tenant's live "Mobile Cart M8"
      (AST-CRT-008) even though it is not in the embedded catalog.
+     Try: perform(operation="task_checklist")
+     — the checklist now ends with the LIVE store alert: the
+     temperature_excursion on Harbor Lights Grocery's refrigeration
+     case R-4 (aisle four), joined by ticket number to CRM case
+     CAS-260138 — the case that was created via the CRM Write API.
   2. No network? Everything falls back to the embedded demo layer below
      (PRODUCT_CATALOG / DAILY_TASK_LIST) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     STORE_ASSOCIATE_COPILOT_DATA_URL to any OData-shaped endpoint (your
-     real Dynamics org, or JSON exported from your commerce platform), or
-     replace _fetch_collection() with your own catalog API. The fields
-     the rest of the file needs are listed in _normalize_live_product() —
-     aisle location, on-hand, sizes, and care instructions stay
-     "n/a — enrichment seam" until you wire your store systems.
+     STORE_ASSOCIATE_COPILOT_DATA_URL (CRM) and/or
+     STORE_ASSOCIATE_COPILOT_TEL_URL (telemetry) to your own endpoints
+     (your real Dynamics org, your store IoT platform), or replace
+     _fetch_collection() / _fetch_telemetry() with your own catalog
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_product() — aisle location, on-hand, sizes, and
+     care instructions stay "n/a — enrichment seam" until you wire your
+     store systems.
 
 OPERATIONS
   product_lookup | customer_assist | task_checklist |
@@ -45,10 +55,10 @@ import urllib.request
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/store_associate_copilot",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Store Associate Copilot Agent",
     "description": (
-        "Gives associates product lookups, scripts, and dashboards from a live simulated Dynamics 365 tenant catalog, with an offline demo fallback."
+        "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -98,6 +108,68 @@ def _fetch_collection(collection, timeout=6):
         rows = []
     _LIVE_CACHE[collection] = rows
     return rows
+
+
+# Sibling live source: the static-telemetry API. Its refrigeration
+# temperature_excursion alert on Harbor Lights Grocery joins CRM case
+# CAS-260138 (created via the CRM Write API) and surfaces on the task
+# checklist. Override with STORE_ASSOCIATE_COPILOT_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _store_refrigeration_alert():
+    """The live Harbor Lights Grocery temperature_excursion alert
+    joined to its real CRM case (CAS-260138 — created via the CRM
+    Write API), with stats over the case-temperature reading series
+    (ONE lazy 672-point fetch); None when offline."""
+    alert = next(
+        (a for a in _fetch_telemetry("alerts")
+         if a.get("alert_type") == "temperature_excursion"),
+        None,
+    )
+    if not alert:
+        return None
+    case = next(
+        (c for c in _fetch_collection("incidents")
+         if c.get("ticketnumber") == alert.get("crm_case")),
+        None,
+    )
+    points = _fetch_telemetry(
+        f"readings/{alert.get('sensor_id')}", key="points"
+    )
+    values = [
+        p.get("v") for p in points if isinstance(p.get("v"), (int, float))
+    ]
+    return {
+        "alert": alert,
+        "case": case,
+        "latest": values[-1] if values else None,
+        "max": max(values) if values else None,
+        "n": len(values),
+    }
 
 
 def _normalize_live_product(row):
@@ -842,6 +914,54 @@ class StoreAssociateCopilotAgent(BasicAgent):
             for i, task in enumerate(tasks, 1):
                 lines.append(f"| {i} | {task['task']} | {task['priority'].upper()} | {task['est_minutes']} min |")
             lines.append("")
+        # Live telemetry overlay — purely additive: everything above is
+        # unchanged, and offline this section simply does not appear.
+        live = _store_refrigeration_alert()
+        if live:
+            alert, case = live["alert"], live["case"]
+            unit = alert.get("unit", "")
+            lines.append("## Live Store Alerts (telemetry overlay)")
+            lines.append("")
+            lines.append(
+                f"- **{alert.get('alert_code', '?')} "
+                f"{alert.get('alert_type', '?')} "
+                f"({str(alert.get('severity', '?')).upper()}):** "
+                f"{alert.get('asset_name', '?')} at "
+                f"{alert.get('account_name', '?')} — "
+                f"{alert.get('title', '')}"
+            )
+            lines.append(
+                f"- **Reading:** peak {alert.get('peak_value')} {unit} vs "
+                f"threshold {alert.get('threshold')} {unit}"
+                + (
+                    f"; latest {live['latest']} {unit}, series max "
+                    f"{live['max']} {unit} ({live['n']} samples @ 15 min)"
+                    if live["latest"] is not None else ""
+                )
+            )
+            if case:
+                case_status = "Open" if case.get("statecode") == 0 else "Resolved"
+                lines.append(
+                    f"- **CRM case:** {case.get('ticketnumber', '?')} — "
+                    f"{case.get('title', '?')} ({case_status}) — the case "
+                    "created via the CRM Write API, joined by ticket number"
+                )
+            else:
+                lines.append(
+                    f"- **CRM case:** {alert.get('crm_case', 'n/a')} "
+                    "(case detail unavailable — CRM offline)"
+                )
+            lines.append(
+                "- **Suggested task:** Check the aisle-four refrigeration "
+                "case, move perishables per SOP, and confirm the case is "
+                "acknowledged."
+            )
+            lines.append("")
+            lines.append(
+                "_Source: live static-telemetry alert + reading series "
+                "joined to the Static Dynamics 365 case by its real ticket "
+                "number._"
+            )
         return "\n".join(lines)
 
     def _performance_dashboard(self, **kwargs):
@@ -988,6 +1108,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 80)
     print(agent.perform(operation="customer_assist", scenario="upsell"))
     print("\n" + "=" * 80)
+    print("TASK CHECKLIST + LIVE REFRIGERATION ALERT (telemetry joined to CRM")
+    print("case CAS-260138; overlay disappears offline)")
     print(agent.perform(operation="task_checklist", shift="opening"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="performance_dashboard"))

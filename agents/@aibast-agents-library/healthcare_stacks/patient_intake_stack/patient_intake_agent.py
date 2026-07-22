@@ -7,24 +7,34 @@ the demonstrated Sarah Martinez registration/booking/packet/no-show flows
 (simulated receipts, never live writes) for front desk and clinical staff.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems \u2014 synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template the Dynamics contacts of the healthcare account
-     Riverbend Medical Group are reinterpreted as the patient roster \u2014
-     e.g. contact Priya Natarajan.
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM  \u2014 the Static Dynamics 365 tenant (Aster Lane Office Systems):
+              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+              Dynamics contacts of the healthcare account Riverbend
+              Medical Group are reinterpreted as the CRM-side patient
+              roster \u2014 e.g. contact Priya Natarajan.
+       FHIR \u2014 the Static FHIR R4 server (Riverbend Medical Group):
+              https://kody-w.github.io/static-fhir/fhir/
+              20 live Patient resources form the clinical intake roster,
+              with real MRNs, DOBs, and demographics.
      Try: perform(operation="intake_form")
+     \u2014 one output renders the CRM contact roster and the FHIR Patient
+     intake roster side by side, joined on the shared Riverbend Medical
+     Group organization.
   2. No network? Everything falls back to the embedded demo layer below
      (PATIENTS / INSURANCE_PLANS / PROVIDER_SCHEDULES) \u2014 the agent never
      crashes offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     PATIENT_INTAKE_DATA_URL to any OData-shaped endpoint (your real
-     Dynamics org, or JSON exported from your EHR/PM system), or replace
-     _fetch_collection() with an Epic/Cerner registration API client.
+     PATIENT_INTAKE_DATA_URL (CRM side) to any OData-shaped endpoint and
+     PATIENT_INTAKE_FHIR_URL (clinical side) to any FHIR R4
+     searchset-bundle host \u2014 or replace _fetch_collection() /
+     _fetch_fhir_bundle() with an Epic/Cerner registration API client.
      Fields the rest of the file needs are listed in
-     _normalize_live_patient() \u2014 insurance and coverage fields render as
-     "n/a \u2014 enrichment seam" until you wire an eligibility clearinghouse.
+     _normalize_live_patient() and _normalize_fhir_patient() \u2014 insurance
+     and coverage fields render as "n/a \u2014 enrichment seam" until you wire
+     an eligibility clearinghouse.
 
 OPERATIONS
   intake_form | insurance_verification | appointment_scheduling
@@ -44,9 +54,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/patient_intake",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Patient Intake Agent",
-    "description": "Runs patient intake \u2014 forms, insurance checks, scheduling, pre-visit summaries \u2014 on a live simulated Dynamics 365 tenant, with an offline fallback.",
+    "description": "Runs patient intake \u2014 forms, insurance checks, scheduling \u2014 joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.",
     "author": "AIBAST",
     "tags": ["intake", "insurance", "scheduling", "patient", "registration", "healthcare"],
     "category": "healthcare",
@@ -57,19 +67,25 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
-#   export PATIENT_INTAKE_DATA_URL=https://your-org/api/data/v9.2
-# or replace _fetch_collection() with your EHR/PM client. Downstream
-# code only needs the fields produced by _normalize_live_patient().
+# Two live sources, both synthetic and hosted on GitHub Pages:
+#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
+#     export PATIENT_INTAKE_DATA_URL=https://your-org/api/data/v9.2
+#   FHIR (R4 searchset bundles, Riverbend Medical Group):
+#     export PATIENT_INTAKE_FHIR_URL=https://your-fhir-host/fhir
+# or replace _fetch_collection() / _fetch_fhir_bundle() with your
+# EHR/PM client. Downstream code only needs the fields produced by
+# _normalize_live_patient() and _normalize_fhir_patient().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "PATIENT_INTAKE_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+FHIR_SOURCE_URL = os.environ.get(
+    "PATIENT_INTAKE_FHIR_URL",
+    "https://kody-w.github.io/static-fhir/fhir",
 )
 _LIVE_CACHE = {}
 
@@ -123,6 +139,54 @@ def _live_patients():
         _normalize_live_patient(r) for r in rows
         if r.get("parentcustomeridname") == "Riverbend Medical Group"
     ]
+
+
+def _fetch_fhir_bundle(resource, timeout=6):
+    """Sibling helper for the FHIR side: one bounded GET per resource
+    type per process (cached by full URL). Returns the list of entry
+    resources from the R4 searchset Bundle; [] on ANY failure."""
+    url = f"{FHIR_SOURCE_URL}/{resource}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            bundle = json.loads(resp.read().decode("utf-8"))
+        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _normalize_fhir_patient(res):
+    """Project a FHIR R4 Patient resource onto the intake-roster row this
+    agent renders. Real MRN, DOB, gender, and contact details come from
+    the clinical record; insurance stays an enrichment seam (wire your
+    eligibility clearinghouse or the Coverage resources)."""
+    name = (res.get("name") or [{}])[0]
+    full = " ".join(list(name.get("given", [])) + [name.get("family", "")]).strip() or "Unknown"
+    telecom = res.get("telecom") or []
+    addr = (res.get("address") or [{}])[0]
+    return {
+        "mrn": (res.get("identifier") or [{}])[0].get("value", res.get("id", "")[:8]),
+        "name": full,
+        "dob": res.get("birthDate") or None,
+        "gender": (res.get("gender") or "").title() or None,
+        "phone": next((t.get("value") for t in telecom if t.get("system") == "phone"), "n/a"),
+        "email": next((t.get("value") for t in telecom if t.get("system") == "email"), "n/a"),
+        "address": f"{addr.get('city', '?')}, {addr.get('state', '?')}",
+        "organization": res.get("managingOrganization", {}).get("display", "n/a"),
+        "active": res.get("active", True),
+    }
+
+
+def _live_fhir_intake_roster():
+    """The live FHIR Patient resources as the clinical intake roster;
+    [] when the FHIR feed is unreachable."""
+    return [_normalize_fhir_patient(r) for r in _fetch_fhir_bundle("Patient")]
 
 
 # ---------------------------------------------------------------------------
@@ -339,7 +403,8 @@ def _intake_form(patient_id=None):
         })
     # Prefer live tenant patients when reachable; embedded demo stays too.
     live = [] if patient_id else _live_patients()
-    return {"forms": forms, "live": live}
+    fhir = [] if patient_id else _live_fhir_intake_roster()
+    return {"forms": forms, "live": live, "fhir": fhir}
 
 
 def _insurance_verification():
@@ -494,6 +559,38 @@ class PatientIntakeAgent(BasicAgent):
                 lines.append("")
         else:
             lines.append("_Live tenant unreachable — showing embedded demo patients only._")
+        if data["fhir"]:
+            seam = "n/a — enrichment seam"
+            lines += [
+                "",
+                "---",
+                f"# Live FHIR Intake Roster ({len(data['fhir'])} Patient resources — "
+                "Riverbend Medical Group)",
+                "",
+                "Clinical-side roster from the live FHIR R4 server. The managing "
+                "organization is the same Riverbend Medical Group account whose CRM "
+                "contacts appear above — one provider group, two live systems. DOB "
+                "and gender, enrichment seams on the CRM side, are real here.",
+                "",
+                "| MRN | Patient | DOB | Gender | Phone | City | Insurance |",
+                "|-----|---------|-----|--------|-------|------|-----------|",
+            ]
+            for p in data["fhir"]:
+                lines.append(
+                    f"| {p['mrn']} | {p['name']} | {p['dob'] or seam} "
+                    f"| {p['gender'] or seam} | {p['phone']} | {p['address']} "
+                    f"| {seam} |"
+                )
+            orgs = {p["organization"] for p in data["fhir"]}
+            lines += [
+                "",
+                f"_Join: managing organization {', '.join(sorted(orgs))} — matches "
+                "the CRM account of the contact roster above. Insurance renders as "
+                "an enrichment seam until you wire eligibility 270/271 or the FHIR "
+                "Coverage resources._",
+            ]
+        else:
+            lines += ["", "_Live FHIR server unreachable — clinical intake roster unavailable offline._"]
         return "\n".join(lines)
 
     def _insurance_verification(self) -> str:
@@ -615,8 +712,10 @@ class PatientIntakeAgent(BasicAgent):
 if __name__ == "__main__":
     agent = PatientIntakeAgent()
     print("=" * 60)
-    print("EMBEDDED DEMO + LIVE TENANT PATIENT ROSTER")
-    print("(live section fetched over HTTP; falls back offline)")
+    print("EMBEDDED DEMO + LIVE CRM ROSTER + LIVE FHIR INTAKE ROSTER")
+    print("(sibling-live demo: 20 FHIR Patient resources join the CRM")
+    print("contact roster on the Riverbend Medical Group organization;")
+    print("both feeds fetched over HTTP and fall back offline)")
     print("=" * 60)
     print(agent.perform(operation="intake_form"))
     for op in [

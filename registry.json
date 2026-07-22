@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-22T01:07:48.043233+00:00",
+  "generated_at": "2026-07-22T01:44:28.045004+00:00",
   "stats": {
     "total_agents": 201,
     "total_swarms": 82,
@@ -1605,9 +1605,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/asset_maintenance_forecast",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Asset Maintenance Forecast Agent",
-      "description": "Monitors asset health and maintenance from live work orders on a simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "maintenance",
@@ -1627,9 +1627,9 @@
       "_install_filename": "rar_aibast_agents_library_asset_maintenance_forecast_agent.py",
       "_stack": "asset_maintenance_forecast",
       "_stack_vertical": "energy",
-      "_sha256": "f505cc26c9b7956cb6a903a3d00f4e1f6429b7c577bb3ff14e8c96f181a6c617",
+      "_sha256": "3b19a5b8d75932797bd11152c321ce6d83789f0092ed326df11e145a415120ac",
       "_lifecycle": "notarized",
-      "_receipt": "rar_fda20dc2970a7fb55d5963286374cd76dc6382775daf939b76120fc88bc6b0a9",
+      "_receipt": "rar_8776c54d5d25cb3d06ac4a1cf7ab37c050f3c1a7f9bdfc19f403c437ea894127",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -1646,8 +1646,8 @@
         ]
       },
       "_seed": 5836169530732982279,
-      "_size_kb": 24.2,
-      "_lines": 596,
+      "_size_kb": 31.1,
+      "_lines": 769,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -1657,9 +1657,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/emission_tracking",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Emission Tracking Agent",
-      "description": "Tracks GHG compliance events from a live simulated Dynamics 365 tenant plus reduction and offset planning, with an offline demo fallback.",
+      "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "emissions",
@@ -1679,9 +1679,9 @@
       "_install_filename": "rar_aibast_agents_library_emission_tracking_agent.py",
       "_stack": "emission_tracking",
       "_stack_vertical": "energy",
-      "_sha256": "dc3661b9d6c5b49355aacb9838e89f948aa5e6059c43332446b873d821eabeeb",
+      "_sha256": "a10361576bd03c8e6e27fe7c2cd6c92325dc2c594ecbef167adcad2fa34a2392",
       "_lifecycle": "notarized",
-      "_receipt": "rar_61f12016e657e1eafef957f7a7a38203d526f529ea390cb065b5e3010ad272b9",
+      "_receipt": "rar_f4658373f7d3692c4c819b6483b165e3cbafadf155376079b44a820f50dda492",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -1698,8 +1698,8 @@
         ]
       },
       "_seed": 12145677136544149217,
-      "_size_kb": 21.7,
-      "_lines": 508,
+      "_size_kb": 27.1,
+      "_lines": 639,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -1709,9 +1709,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/field_service_dispatch",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Field Service Dispatch Agent",
-      "description": "Dispatches from live work orders on a simulated Dynamics 365 tenant, with routing, crews, outage response, and an offline demo fallback.",
+      "description": "Dispatches from live simulated Dynamics 365 work orders with a telemetry alert overlay, routing, crews, and an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "field-service",
@@ -1731,9 +1731,9 @@
       "_install_filename": "rar_aibast_agents_library_field_service_dispatch_agent.py",
       "_stack": "field_service_dispatch",
       "_stack_vertical": "energy",
-      "_sha256": "f3fe8666782201a37e30d6d3397830a3094d0333920e53686122f2a55c072a5e",
+      "_sha256": "3df888f1d02db30e680e318c4aebdd3e6793e8b395d3832b771f3dc3aa9d65a1",
       "_lifecycle": "notarized",
-      "_receipt": "rar_3d5ee0e029cf1bc918c96f86b5e74fc1f8b6c027ea40acd7e819370a8d65d765",
+      "_receipt": "rar_0cfaa129ab76c41191e960925c10f10afbb9e339453cb35b91a814c392c7beee",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -1750,8 +1750,8 @@
         ]
       },
       "_seed": 5482587288805061290,
-      "_size_kb": 32.2,
-      "_lines": 810,
+      "_size_kb": 36.3,
+      "_lines": 907,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -2075,9 +2075,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/workforce_clearance_onboarding",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "Workforce Clearance & Onboarding Agent",
-      "description": "Tracks onboarding blockers from a live simulated Dynamics 365 tenant, with clearance and access checklists that work offline.",
+      "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline.",
       "author": "AIBAST",
       "tags": [
         "clearance",
@@ -2097,9 +2097,9 @@
       "_install_filename": "rar_aibast_agents_library_workforce_clearance_onboarding_agent.py",
       "_stack": "workforce_clearance_onboarding",
       "_stack_vertical": "federal_government",
-      "_sha256": "c320948b1a81ca598865613034c4e6bdf2a84d1fb4989acaa12f290b25b8c139",
+      "_sha256": "181d78db4148c5939d7f6ff52142b5f80972d15303aad8505e716a758721b0aa",
       "_lifecycle": "notarized",
-      "_receipt": "rar_c3de5de0058bfc6939fcafe210c8fe534aca4a476e59986d5a596f6a93ec6241",
+      "_receipt": "rar_9b6b7832f2b909a9339d502c46d938ad466c669799c4cf4042d51560abd5623d",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -2116,8 +2116,8 @@
         ]
       },
       "_seed": 15588155065239352323,
-      "_size_kb": 21.2,
-      "_lines": 476,
+      "_size_kb": 25.8,
+      "_lines": 575,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -2710,9 +2710,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/general_ask_hr",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "General Ask HR",
-      "description": "Answers HR policy, leave, and directory queries from a live simulated Dynamics 365 tenant (users as employees), with an offline fallback.",
+      "description": "Answers HR policy, leave, and directory queries from a live simulated HRIS (workers, time off, benefits) joined to a D365 CRM, with offline fallback.",
       "author": "AIBAST",
       "tags": [
         "hr",
@@ -2732,9 +2732,9 @@
       "_install_filename": "rar_aibast_agents_library_general_ask_hr_agent.py",
       "_stack": "ask_hr",
       "_stack_vertical": "general",
-      "_sha256": "5f535384a16933ddf6fb78446fad67435cc3d7f8035b2cd07fded571ab64f989",
+      "_sha256": "282fc9a22522b758241ccc3bada4f76bb7f968e49ff3a54101325a4066e84faa",
       "_lifecycle": "notarized",
-      "_receipt": "rar_6709aa2719cd3082faa16142f03a1cb8348ebc8f4926c8b66ee70a87d941f3b0",
+      "_receipt": "rar_20af4fb80ed92283fc64f2933bc2b6dcb0ba0975cea05eb8328b7208235e57e9",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -2751,8 +2751,8 @@
         ]
       },
       "_seed": 16645293730949775296,
-      "_size_kb": 23.7,
-      "_lines": 510,
+      "_size_kb": 32.7,
+      "_lines": 715,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3174,9 +3174,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/it_ticket_management",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "IT Ticket Management",
-      "description": "Builds ticket dashboards and SLA tracking from live cases in a simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Builds ticket dashboards from live D365 cases plus a simulated ServiceNow-shaped ITSM desk, joining repeat-CI clusters to CRM cases; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "it",
@@ -3196,9 +3196,9 @@
       "_install_filename": "rar_aibast_agents_library_it_ticket_management_agent.py",
       "_stack": "it_ticket_management",
       "_stack_vertical": "general",
-      "_sha256": "bcc9aed7a3ba9ef63030f1dbb721c642ce602e3c05395a4bcd14b982c5cc907e",
+      "_sha256": "a640f23976da1b619888599c1ec678a51601e48530ba77a6f6ace15be383ef66",
       "_lifecycle": "notarized",
-      "_receipt": "rar_c8ce892c5138ff98ce8f88f5647d9797494402f0aa51237bf8de2f42eaca46e9",
+      "_receipt": "rar_7b9542fba1beb33ba523417f84dbca460fa178876bcb4759af04d74e2d5b0550",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3215,8 +3215,8 @@
         ]
       },
       "_seed": 381057127156556376,
-      "_size_kb": 21.9,
-      "_lines": 389,
+      "_size_kb": 26.8,
+      "_lines": 497,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3226,9 +3226,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/procurement_agent",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Procurement Agent",
-      "description": "Routes purchase requests and approvals over live orders from a simulated Dynamics 365 tenant, with spend analysis and offline fallback.",
+      "description": "Routes purchase requests over a simulated Dynamics 365 tenant and ERP, flagging three-way-match breaks and blocked invoices, with offline fallback.",
       "author": "AIBAST",
       "tags": [
         "procurement",
@@ -3247,9 +3247,9 @@
       "_install_filename": "rar_aibast_agents_library_procurement_agent.py",
       "_stack": "procurement_agent",
       "_stack_vertical": "general",
-      "_sha256": "3708af5793a1db769aefd1d5b1687af7d47c67258e88832d8bb60ec4e43ea7ed",
+      "_sha256": "ec4e120ce732fa89bfc0a35f445944aa0b9fc8749b867d715eb143dab917a2aa",
       "_lifecycle": "notarized",
-      "_receipt": "rar_ac3643caa7c33361d3b2dba347425228b32f648a7da37b05436a1efe1909d974",
+      "_receipt": "rar_d9df34701802e668667391a4e02146a21c8dd3fbaec1d8aa6f2b517d77fe3b9c",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3266,8 +3266,8 @@
         ]
       },
       "_seed": 5953920645506673794,
-      "_size_kb": 28.0,
-      "_lines": 543,
+      "_size_kb": 33.3,
+      "_lines": 671,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3277,9 +3277,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/procurement_support",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "Procurement Support",
-      "description": "Tracks requisitions over live orders from a simulated Dynamics 365 tenant, plus contracts, suppliers, and budgets with offline fallback.",
+      "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
       "author": "AIBAST",
       "tags": [
         "procurement",
@@ -3298,9 +3298,9 @@
       "_install_filename": "rar_aibast_agents_library_procurement_support_agent.py",
       "_stack": "procurement_support",
       "_stack_vertical": "general",
-      "_sha256": "f561ff7f0606ca4bae91a3a6bd8875ba03f83c8c600eb0519834ca12321ad43b",
+      "_sha256": "08de4f1c0f746fef3915574fb31e4a3c55a817402532f4cd58b5756dd3faebf8",
       "_lifecycle": "notarized",
-      "_receipt": "rar_254cca599c3bb8d72c2f7394af4b0790fd12f804f3f9169261b857ee54002b4a",
+      "_receipt": "rar_57cd6f4c7a8042adc314f0da99250e221974a1c4a20d0f17a2042d87699fb3cf",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3317,8 +3317,8 @@
         ]
       },
       "_seed": 18264571842642197414,
-      "_size_kb": 20.5,
-      "_lines": 353,
+      "_size_kb": 26.2,
+      "_lines": 491,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3533,9 +3533,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/triage_bot",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "Triage Bot",
-      "description": "Classifies and prioritizes live cases from a simulated Dynamics 365 tenant, routes them to teams, and writes handoffs; offline fallback.",
+      "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
       "author": "AIBAST",
       "tags": [
         "triage",
@@ -3554,9 +3554,9 @@
       "_install_filename": "rar_aibast_agents_library_triage_bot_agent.py",
       "_stack": "triage_bot",
       "_stack_vertical": "general",
-      "_sha256": "00986901d892eea0889a7b847ffe43b5dacffe1b06d1719b5c2ad0c18a608a6b",
+      "_sha256": "c8e84498bbdc7aa20908a1d3e920e10f04e0808ed64bf5439c4e0df88102bfff",
       "_lifecycle": "notarized",
-      "_receipt": "rar_4af6d8e6277b07b810959bc1c4c9b9f141ff183f236d9ec220bb1953bd1189d7",
+      "_receipt": "rar_22557fe93ac55581d717f27faa2881e82bb783e8774ebb3bed2805ce0276699b",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3573,8 +3573,8 @@
         ]
       },
       "_seed": 13241370335976767116,
-      "_size_kb": 20.6,
-      "_lines": 399,
+      "_size_kb": 24.5,
+      "_lines": 490,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3738,9 +3738,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/voice_to_crm_servicenow",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "Voice to CRM (ServiceNow)",
-      "description": "Tracks incidents over live cases from a simulated Dynamics 365 tenant with KB search, routing, and status updates; offline fallback.",
+      "description": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "servicenow",
@@ -3759,9 +3759,9 @@
       "_install_filename": "rar_aibast_agents_library_voice_to_crm_servicenow_agent.py",
       "_stack": "voice_to_crm",
       "_stack_vertical": "general",
-      "_sha256": "6807893885fd3e7b809cd39ffc4f1728a0c40f3bf88a23994b7908bb080815f1",
+      "_sha256": "b2128e1ecda8d8cd29fc5da99be371a0bd0c914aab05cd0825b77e4c57a19210",
       "_lifecycle": "notarized",
-      "_receipt": "rar_319c2c6a25a8a479f5328a571658d2fa8a787384a9265728d4f1a8b5ccb02715",
+      "_receipt": "rar_c42bbc21c34a6169a0d22aea9ffc073b494257d64e103e2acfe5e3b238565820",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3778,8 +3778,8 @@
         ]
       },
       "_seed": 11805318406759655329,
-      "_size_kb": 21.5,
-      "_lines": 421,
+      "_size_kb": 28.2,
+      "_lines": 581,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3789,9 +3789,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/care_gap_closure",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Care Gap Closure Agent",
-      "description": "Analyzes HEDIS care gaps and surfaces the live care-coordination queue from a simulated Dynamics 365 tenant, with offline demo fallback.",
+      "description": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "hedis",
@@ -3811,9 +3811,9 @@
       "_install_filename": "rar_aibast_agents_library_care_gap_closure_agent.py",
       "_stack": "care_gap_closure",
       "_stack_vertical": "healthcare",
-      "_sha256": "6f1fb256713c840b659739c020bf8209588b3cdc0456e32355abe3b1b71f6651",
+      "_sha256": "dfb2de8ae5d620dd765bb9baa6ac77de2e8ff235c423fc3e89640996478a55a6",
       "_lifecycle": "notarized",
-      "_receipt": "rar_395ef69d7e010b5cfb0a3332ded0fdc39b1a74ebb24eda7e96fe9225e9033ceb",
+      "_receipt": "rar_054f1bb90a37b791c5efd3bb85f7609ac2856e79c0217ef81b94145ede526a7f",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3830,8 +3830,8 @@
         ]
       },
       "_seed": 16835577812647426117,
-      "_size_kb": 23.7,
-      "_lines": 589,
+      "_size_kb": 29.4,
+      "_lines": 717,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3841,9 +3841,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/clinical_notes_summarizer",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Clinical Notes Summarizer Agent",
-      "description": "Summarizes encounters, medication reviews, problem lists, and referrals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Summarizes encounters and medication reviews, joining live simulated FHIR appointment-patient headers with the Dynamics 365 CRM; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "clinical-notes",
@@ -3863,9 +3863,9 @@
       "_install_filename": "rar_aibast_agents_library_clinical_notes_summarizer_agent.py",
       "_stack": "clinical_notes_summarizer",
       "_stack_vertical": "healthcare",
-      "_sha256": "983cf11e4f9d5809516b6ae1fa7904797d769f82e0eb9ad0765bc8a33d5c0ba2",
+      "_sha256": "eb04379ac6704d21092ddb012c16a0221cafa61fe075172418f4dc12326fbe8d",
       "_lifecycle": "notarized",
-      "_receipt": "rar_5d6a4f70d6b4417b4b857b19017499e137fe05de05927a95b3e0a93b38a0ede2",
+      "_receipt": "rar_2a0a327bf6649d00ecaa32c44e39245f9fa4a99e14210b0f7247b19e90435677",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3882,8 +3882,8 @@
         ]
       },
       "_seed": 4205376672235267561,
-      "_size_kb": 28.1,
-      "_lines": 626,
+      "_size_kb": 33.0,
+      "_lines": 728,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3893,9 +3893,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/patient_intake",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Patient Intake Agent",
-      "description": "Runs patient intake \u2014 forms, insurance checks, scheduling, pre-visit summaries \u2014 on a live simulated Dynamics 365 tenant, with an offline fallback.",
+      "description": "Runs patient intake \u2014 forms, insurance checks, scheduling \u2014 joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "intake",
@@ -3915,9 +3915,9 @@
       "_install_filename": "rar_aibast_agents_library_patient_intake_agent.py",
       "_stack": "patient_intake",
       "_stack_vertical": "healthcare",
-      "_sha256": "8888ec8195da84830bd38c4f43e25c73e46ccf47706f5ce1a84dfaa204426cf6",
+      "_sha256": "f98ba4ec1b98d8a74b3053dcc3acb0e18f7c9daa1f2fc729bf716c23ec14c370",
       "_lifecycle": "notarized",
-      "_receipt": "rar_5cb5a6483753522ff880fc7394d935f92bc3ef815a428be73d573a956f226cc1",
+      "_receipt": "rar_4fb2c2039fa65037f9b256f62cff30503009d1b08674550fa26a53c6efebe5a2",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3934,8 +3934,8 @@
         ]
       },
       "_seed": 840299925014852615,
-      "_size_kb": 25.8,
-      "_lines": 631,
+      "_size_kb": 30.5,
+      "_lines": 730,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3945,9 +3945,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/prior_authorization",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Prior Authorization Agent",
-      "description": "Tracks prior-auth requests, criteria checks, and appeals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Tracks prior-auth requests and appeals, joining a live simulated FHIR server (denied preauth claim) with the Dynamics 365 CRM case; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "prior-auth",
@@ -3967,9 +3967,9 @@
       "_install_filename": "rar_aibast_agents_library_prior_authorization_agent.py",
       "_stack": "prior_authorization",
       "_stack_vertical": "healthcare",
-      "_sha256": "d76ef83bffc746f13098ce542b9a845ecb3ddf507981af8fd45c7e7b2aed6146",
+      "_sha256": "dea92230903fbd44557fa79a63bd008addf48c63d672390890f0bfb8b99e1779",
       "_lifecycle": "notarized",
-      "_receipt": "rar_7a6a45691ae8630fc962995d2e2cd02af040f813e031236ed417008b61787b9d",
+      "_receipt": "rar_40c65c85ee5dd372f43b1877757e735e6986efd71768a5c7a88bedd10d338e78",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -3986,8 +3986,8 @@
         ]
       },
       "_seed": 2707536209626541719,
-      "_size_kb": 38.6,
-      "_lines": 859,
+      "_size_kb": 45.5,
+      "_lines": 1018,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -3997,9 +3997,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/staff_credentialing",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "Staff Credentialing Agent",
-      "description": "Tracks staff credentials, expirations, audits, and onboarding against a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
       "author": "AIBAST",
       "tags": [
         "credentialing",
@@ -4019,9 +4019,9 @@
       "_install_filename": "rar_aibast_agents_library_staff_credentialing_agent.py",
       "_stack": "staff_credentialing",
       "_stack_vertical": "healthcare",
-      "_sha256": "d23528a22920122a8b9b525f0c48eae12e13fe43f0d4605ea70a2b2f66958c5a",
+      "_sha256": "f4e2302fd9589e02d08547a24c276c52493a853a3556a6a077ad87bcb50a701e",
       "_lifecycle": "notarized",
-      "_receipt": "rar_aeb79660bd20293613df2dd117d4ceb803d81d60b6802722d4a5404fcf33c169",
+      "_receipt": "rar_23ce10a840cd5919749e37964413f641d5a6a7d8033741c23bc72b8d462d852e",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4038,8 +4038,8 @@
         ]
       },
       "_seed": 7498395653551960420,
-      "_size_kb": 20.0,
-      "_lines": 422,
+      "_size_kb": 25.1,
+      "_lines": 530,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4049,9 +4049,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/ask_hr",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Ask HR",
-      "description": "Answers time-off, benefits, and policy questions for employees from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Answers time-off, benefits, and policy questions from a live simulated HRIS joined to a Dynamics 365 CRM, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "hr",
@@ -4070,9 +4070,9 @@
       "_install_filename": "rar_aibast_agents_library_ask_hr_agent.py",
       "_stack": "ask_hr",
       "_stack_vertical": "human_resources",
-      "_sha256": "4ac5d113d322f7e04249425b6ddfba80c923b0eadb339688c8700c81c97d6132",
+      "_sha256": "2f0b974bef2289408e6732461e43c4a4b18bf7c549733e1b46b719888e057d51",
       "_lifecycle": "notarized",
-      "_receipt": "rar_c65e7ca75651804e8b430eab4f54de7f14a4044a8cbc3cb1df8e0df58a80baa7",
+      "_receipt": "rar_077c31f8d1215284e979431547c3fcbe58a8f9d00b31d3005465e808ec4905ab",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4089,8 +4089,8 @@
         ]
       },
       "_seed": 637792878567503925,
-      "_size_kb": 37.5,
-      "_lines": 863,
+      "_size_kb": 47.6,
+      "_lines": 1091,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4100,9 +4100,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/it_helpdesk",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "IT Helpdesk",
-      "description": "Runs IT support \u2014 diagnostics, remediation, KB search, technician booking \u2014 from a live simulated Dynamics 365 tenant, with an offline fallback.",
+      "description": "Runs IT support \u2014 diagnostics, remediation, technician booking \u2014 over a live simulated D365 tenant plus a ServiceNow-shaped ITSM desk; offline-safe.",
       "author": "AIBAST",
       "tags": [
         "it",
@@ -4121,9 +4121,9 @@
       "_install_filename": "rar_aibast_agents_library_it_helpdesk_agent.py",
       "_stack": "it_helpdesk",
       "_stack_vertical": "it_management",
-      "_sha256": "023e456cf469cebecc236312b3554311bfa9ecb87f643fabdfe20c85c837b9bb",
+      "_sha256": "284e3ddc0ff20be638380775607d58b29b8e3e08b358992aa18292ad550e5a17",
       "_lifecycle": "notarized",
-      "_receipt": "rar_dd7ad5dc487ea6304ed86b777582df51e71fcb614ae612ac8c90944d339ccd09",
+      "_receipt": "rar_e62ba278942d60623a54748b42b08f7704d485a608f34bb3eb4a21f9b1d6e940",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4140,8 +4140,8 @@
         ]
       },
       "_seed": 8279755765930667339,
-      "_size_kb": 24.0,
-      "_lines": 541,
+      "_size_kb": 28.7,
+      "_lines": 646,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4151,9 +4151,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/inventory_rebalancing",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Inventory Rebalancing Agent",
-      "description": "Analyzes stock vs demand and builds transfer and cost plans from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "inventory",
@@ -4172,9 +4172,9 @@
       "_install_filename": "rar_aibast_agents_library_inventory_rebalancing_agent.py",
       "_stack": "inventory_rebalancing",
       "_stack_vertical": "manufacturing",
-      "_sha256": "1906c5b688e66e01ed956802194b1a1ff1e6b220271ae8610f33158ae9f84bba",
+      "_sha256": "7c44c44d6539d4a22d69eb6ace52608bed017348cd144ec56638b41c102ffd37",
       "_lifecycle": "notarized",
-      "_receipt": "rar_fffadedcc6bcd5c176a1ed009457567fd5d1ae2828c50ad621bcc5d43dfcf0b5",
+      "_receipt": "rar_bd1e5f8fa1d9237fb28986b8fce0abcbb5aef55a4e9f88263110431dd88d14e4",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4191,8 +4191,8 @@
         ]
       },
       "_seed": 741104875949665064,
-      "_size_kb": 26.5,
-      "_lines": 595,
+      "_size_kb": 31.5,
+      "_lines": 707,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4304,9 +4304,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/production_line_optimization",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Production Line Optimization Agent",
-      "description": "Analyzes OEE, bottlenecks, and live downtime signals from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "production",
@@ -4325,9 +4325,9 @@
       "_install_filename": "rar_aibast_agents_library_production_line_optimization_agent.py",
       "_stack": "production_line_optimization",
       "_stack_vertical": "manufacturing",
-      "_sha256": "742f9cb9b486389f49df82dcb6514b14d7d10f5085c4a42c0d912d0b5db2855b",
+      "_sha256": "f740a969d2c10b4d2f43e86729ec97b49aff04521d30a57e2b90db79b77124ea",
       "_lifecycle": "notarized",
-      "_receipt": "rar_6dc717e6f1d665ca36f96f008942c80b735d0ff1703a4f397ddb6f774fe21cfb",
+      "_receipt": "rar_d50d1156405181340546286d832bad2a1e42057b4cb16fb054c0ced568cbee4a",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4344,8 +4344,8 @@
         ]
       },
       "_seed": 11447213470199194507,
-      "_size_kb": 27.1,
-      "_lines": 576,
+      "_size_kb": 31.6,
+      "_lines": 685,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4355,9 +4355,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/supplier_risk_monitoring",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Supplier Risk Monitoring Agent",
-      "description": "Scores supplier risk and surfaces disruption alerts from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+      "description": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "supplier",
@@ -4376,9 +4376,9 @@
       "_install_filename": "rar_aibast_agents_library_supplier_risk_monitoring_agent.py",
       "_stack": "supplier_risk_monitoring",
       "_stack_vertical": "manufacturing",
-      "_sha256": "8ad93c9b5ab40c25aa4252dc0e38f9964b234e406ebc175f4bcf99019c33bd09",
+      "_sha256": "93ad57d2e6b7a0d36375c39acbb1314bb7f52ebd3b2bacc6136b75fc2e85d392",
       "_lifecycle": "notarized",
-      "_receipt": "rar_aa7486b4a66a5f0a057b3b923b6ade5276ccde8964bf317c8039e0e087a0a258",
+      "_receipt": "rar_05632c7e2b78ea97341ad2cb67a24109b71ae0a75cc8031a460da5361eb0603e",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4395,8 +4395,8 @@
         ]
       },
       "_seed": 2701276264207625678,
-      "_size_kb": 26.9,
-      "_lines": 610,
+      "_size_kb": 32.3,
+      "_lines": 740,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4661,9 +4661,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/inventory_visibility",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Inventory Visibility Agent",
-      "description": "Reports stock dashboards, alerts, and replenishment plans from a live simulated Dynamics 365 tenant catalog, with an offline demo fallback.",
+      "description": "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback.",
       "author": "AIBAST",
       "tags": [
         "inventory",
@@ -4682,9 +4682,9 @@
       "_install_filename": "rar_aibast_agents_library_inventory_visibility_agent.py",
       "_stack": "inventory_visibility",
       "_stack_vertical": "retail_cpg",
-      "_sha256": "c3b1ef2d853ea94c8f40fbde7267e5bb1f9029f1b9b640c8b15afbbd5b2e0005",
+      "_sha256": "1fab16e92d49c19489ed2992df56294a8c1133aa9eefc87bc1f2a93dc08ce3e5",
       "_lifecycle": "notarized",
-      "_receipt": "rar_fe08263e7435c0b1fc09d52115a1c484986bdc0519b2d15448f8fe38ba7df86c",
+      "_receipt": "rar_51591a2b4c5217f53d4830c6ec61e4b4f776aa917d7136c718bb47cb4e9cf11d",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4701,8 +4701,8 @@
         ]
       },
       "_seed": 3131358552737328726,
-      "_size_kb": 29.5,
-      "_lines": 682,
+      "_size_kb": 33.7,
+      "_lines": 779,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4814,9 +4814,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/store_associate_copilot",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Store Associate Copilot Agent",
-      "description": "Gives associates product lookups, scripts, and dashboards from a live simulated Dynamics 365 tenant catalog, with an offline demo fallback.",
+      "description": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback.",
       "author": "AIBAST",
       "tags": [
         "store-operations",
@@ -4835,9 +4835,9 @@
       "_install_filename": "rar_aibast_agents_library_store_associate_copilot_agent.py",
       "_stack": "store_associate_copilot",
       "_stack_vertical": "retail_cpg",
-      "_sha256": "81f46884458d92247736e0ca0d86e69ff059ff284ee7ebde27543834497d89e1",
+      "_sha256": "9c75b3deb9ab3750efe6e8dd200630a35dcb42458dc799fc57ae729309ae9a26",
       "_lifecycle": "notarized",
-      "_receipt": "rar_7db73f3213206fe8683f45df38c6e57208d247f2b3c2e1c624b3fe14f5691371",
+      "_receipt": "rar_052585708cb4d669bfca608908a0c859e11f8661db358881f5905da00a07f7eb",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4854,8 +4854,8 @@
         ]
       },
       "_seed": 15486760774949025133,
-      "_size_kb": 42.5,
-      "_lines": 995,
+      "_size_kb": 47.4,
+      "_lines": 1117,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -4865,9 +4865,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/supply_chain_disruption_alert",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "display_name": "Supply Chain Disruption Alert Agent",
-      "description": "Flags disruptions and builds mitigation plans from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
+      "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
       "author": "AIBAST",
       "tags": [
         "supply-chain",
@@ -4886,9 +4886,9 @@
       "_install_filename": "rar_aibast_agents_library_supply_chain_disruption_alert_agent.py",
       "_stack": "supply_chain_disruption_alert",
       "_stack_vertical": "retail_cpg",
-      "_sha256": "8a4e1eff7e40c1b331d6153d4704a1c8d95c830767946bcbcfb3306fdc6859db",
+      "_sha256": "ed9a780b446808d9b6ac20d38a8e67344a9ee30cd4067fa095feb5884def7484",
       "_lifecycle": "notarized",
-      "_receipt": "rar_6cae7ef6df7f2b2f3ae7129e0cfd44c275df2c60d5f692dead51b8d8ca3980b2",
+      "_receipt": "rar_d575961ab1fa841169946d0daa7511e3ce5dd7317206b9d0a564f8b0b9aeecb7",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -4905,8 +4905,8 @@
         ]
       },
       "_seed": 16804600987838460767,
-      "_size_kb": 39.5,
-      "_lines": 981,
+      "_size_kb": 43.9,
+      "_lines": 1085,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -10912,8 +10912,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py"
       ],
-      "_size_kb": 24.2,
-      "_lines": 596
+      "_size_kb": 31.1,
+      "_lines": 769
     },
     {
       "type": "stack",
@@ -10928,8 +10928,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py"
       ],
-      "_size_kb": 21.7,
-      "_lines": 508
+      "_size_kb": 27.1,
+      "_lines": 639
     },
     {
       "type": "stack",
@@ -10944,8 +10944,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py"
       ],
-      "_size_kb": 32.2,
-      "_lines": 810
+      "_size_kb": 36.3,
+      "_lines": 907
     },
     {
       "type": "stack",
@@ -11056,8 +11056,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py"
       ],
-      "_size_kb": 21.2,
-      "_lines": 476
+      "_size_kb": 25.8,
+      "_lines": 575
     },
     {
       "type": "stack",
@@ -11250,8 +11250,8 @@
         "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
         "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py"
       ],
-      "_size_kb": 61.2,
-      "_lines": 1373
+      "_size_kb": 80.3,
+      "_lines": 1806
     },
     {
       "type": "stack",
@@ -11366,8 +11366,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py"
       ],
-      "_size_kb": 21.9,
-      "_lines": 389
+      "_size_kb": 26.8,
+      "_lines": 497
     },
     {
       "type": "stack",
@@ -11382,8 +11382,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py"
       ],
-      "_size_kb": 28.0,
-      "_lines": 543
+      "_size_kb": 33.3,
+      "_lines": 671
     },
     {
       "type": "stack",
@@ -11398,8 +11398,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py"
       ],
-      "_size_kb": 20.5,
-      "_lines": 353
+      "_size_kb": 26.2,
+      "_lines": 491
     },
     {
       "type": "stack",
@@ -11478,8 +11478,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py"
       ],
-      "_size_kb": 20.6,
-      "_lines": 399
+      "_size_kb": 24.5,
+      "_lines": 490
     },
     {
       "type": "stack",
@@ -11500,8 +11500,8 @@
         "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
         "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py"
       ],
-      "_size_kb": 82.0,
-      "_lines": 1606
+      "_size_kb": 88.7,
+      "_lines": 1766
     },
     {
       "type": "stack",
@@ -11516,8 +11516,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py"
       ],
-      "_size_kb": 23.7,
-      "_lines": 589
+      "_size_kb": 29.4,
+      "_lines": 717
     },
     {
       "type": "stack",
@@ -11532,8 +11532,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py"
       ],
-      "_size_kb": 28.1,
-      "_lines": 626
+      "_size_kb": 33.0,
+      "_lines": 728
     },
     {
       "type": "stack",
@@ -11548,8 +11548,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py"
       ],
-      "_size_kb": 25.8,
-      "_lines": 631
+      "_size_kb": 30.5,
+      "_lines": 730
     },
     {
       "type": "stack",
@@ -11564,8 +11564,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py"
       ],
-      "_size_kb": 38.6,
-      "_lines": 859
+      "_size_kb": 45.5,
+      "_lines": 1018
     },
     {
       "type": "stack",
@@ -11580,8 +11580,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py"
       ],
-      "_size_kb": 20.0,
-      "_lines": 422
+      "_size_kb": 25.1,
+      "_lines": 530
     },
     {
       "type": "stack",
@@ -11596,8 +11596,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py"
       ],
-      "_size_kb": 24.0,
-      "_lines": 541
+      "_size_kb": 28.7,
+      "_lines": 646
     },
     {
       "type": "stack",
@@ -11612,8 +11612,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py"
       ],
-      "_size_kb": 26.5,
-      "_lines": 595
+      "_size_kb": 31.5,
+      "_lines": 707
     },
     {
       "type": "stack",
@@ -11660,8 +11660,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py"
       ],
-      "_size_kb": 27.1,
-      "_lines": 576
+      "_size_kb": 31.6,
+      "_lines": 685
     },
     {
       "type": "stack",
@@ -11676,8 +11676,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py"
       ],
-      "_size_kb": 26.9,
-      "_lines": 610
+      "_size_kb": 32.3,
+      "_lines": 740
     },
     {
       "type": "stack",
@@ -11772,8 +11772,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py"
       ],
-      "_size_kb": 29.5,
-      "_lines": 682
+      "_size_kb": 33.7,
+      "_lines": 779
     },
     {
       "type": "stack",
@@ -11820,8 +11820,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py"
       ],
-      "_size_kb": 42.5,
-      "_lines": 995
+      "_size_kb": 47.4,
+      "_lines": 1117
     },
     {
       "type": "stack",
@@ -11836,8 +11836,8 @@
       "agent_files": [
         "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py"
       ],
-      "_size_kb": 39.5,
-      "_lines": 981
+      "_size_kb": 43.9,
+      "_lines": 1085
     },
     {
       "type": "stack",

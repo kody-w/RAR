@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/workforce_clearance_onboarding",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "181d78db4148c5939d7f6ff52142b5f80972d15303aad8505e716a758721b0aa"
+ },
+ "canonical_path": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_9b6b7832f2b909a9339d502c46d938ad466c669799c4cf4042d51560abd5623d",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c320948b1a81ca598865613034c4e6bdf2a84d1fb4989acaa12f290b25b8c139",
+  "receipt": "rar_c3de5de0058bfc6939fcafe210c8fe534aca4a476e59986d5a596f6a93ec6241",
+  "version": "1.1.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_9b6b7832f2b909a9339d502c",
+ "revision_id": "9b6b7832f2b909a9339d502c46d938ad466c669799c4cf4042d51560abd5623d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.2.0"
+}

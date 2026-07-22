@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/supplier_risk_monitoring",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "93ad57d2e6b7a0d36375c39acbb1314bb7f52ebd3b2bacc6136b75fc2e85d392"
+ },
+ "canonical_path": "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_05632c7e2b78ea97341ad2cb67a24109b71ae0a75cc8031a460da5361eb0603e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "8ad93c9b5ab40c25aa4252dc0e38f9964b234e406ebc175f4bcf99019c33bd09",
+  "receipt": "rar_aa7486b4a66a5f0a057b3b923b6ade5276ccde8964bf317c8039e0e087a0a258",
+  "version": "1.2.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_05632c7e2b78ea97341ad2cb",
+ "revision_id": "05632c7e2b78ea97341ad2cb67a24109b71ae0a75cc8031a460da5361eb0603e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.3.0"
+}

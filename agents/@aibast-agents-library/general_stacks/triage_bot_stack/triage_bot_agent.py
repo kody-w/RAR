@@ -7,24 +7,30 @@ impact/urgency matrix run against REAL case records, so classification
 output changes when the source system changes.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live cases over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+  1. Out of the box it pulls live records over real HTTP from TWO
+     sibling systems (synthetic data, no credentials, works anywhere):
+       CRM — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ITSM — the Static ITSM desk (real ServiceNow Table-API shape,
+       30 INC records):
+         https://kody-w.github.io/static-itsm/api/now/table/
      Try: perform(operation="classify_inquiry")
-     — classifies the tenant's real seeded cases, e.g. CAS-260126
-     "Disputed card transaction under investigation" (Bluegrass
-     Credit Union).
+     — classifies the tenant's real seeded CRM cases AND cross-checks
+     the live ITSM desk: the keyword classifier runs over each real
+     incident short_description and its verdict is compared to the
+     desk's live ServiceNow priority (e.g. INC0010001 "Benefits portal
+     login failures during open enrollment" -> Technical Support,
+     agrees with live P1-Critical).
   2. No network? Everything falls back to the embedded demo layer below
      (_SAMPLE_INQUIRIES / _ROUTING_RULES) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     TRIAGE_BOT_DATA_URL to any OData-shaped endpoint (your real
-     Dynamics org, or JSON exported from Zendesk/ServiceNow), or
-     replace _fetch_collection() with your ticketing client. The
-     fields the rest of the file needs are listed in
-     _normalize_live_inquiry() — customer tier is labeled "n/a —
-     enrichment seam"; wire your account-tiering data there.
+     TRIAGE_BOT_DATA_URL to any OData-shaped endpoint and
+     TRIAGE_BOT_ITSM_URL to any ServiceNow Table-API-shaped endpoint,
+     or replace the fetchers with your ticketing client. The fields
+     the rest of the file needs are listed in _normalize_live_inquiry()
+     — customer tier is labeled "n/a — enrichment seam"; wire your
+     account-tiering data there.
 
 OPERATIONS
   classify_inquiry | route_request | priority_assessment
@@ -45,9 +51,9 @@ import urllib.request
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/triage_bot",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "Triage Bot",
-    "description": "Classifies and prioritizes live cases from a simulated Dynamics 365 tenant, routes them to teams, and writes handoffs; offline fallback.",
+    "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
     "author": "AIBAST",
     "tags": ["triage", "classification", "routing", "priority", "handoff"],
     "category": "general",
@@ -73,6 +79,14 @@ DATA_SOURCE_URL = os.environ.get(
     "TRIAGE_BOT_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+# Sibling system: the Static ITSM desk — real ServiceNow Table API
+# shape ({"result": [...]}, INC numbers, coded state/priority). Point
+# at your own instance:
+#   export TRIAGE_BOT_ITSM_URL=https://your-instance/api/now/table
+ITSM_SOURCE_URL = os.environ.get(
+    "TRIAGE_BOT_ITSM_URL",
+    "https://kody-w.github.io/static-itsm/api/now/table",
+)
 _LIVE_CACHE = {}
 
 
@@ -92,6 +106,44 @@ def _fetch_collection(collection, timeout=6):
         rows = []
     _LIVE_CACHE[collection] = rows
     return rows
+
+
+def _fetch_itsm_table(table, timeout=6):
+    """Sibling fetcher for the ServiceNow-shaped ITSM desk. Same rules
+    as _fetch_collection — lazy, one bounded GET, [] on ANY failure —
+    but parses the Table API envelope {"result": [...]} and caches in
+    _LIVE_CACHE keyed by full URL."""
+    url = f"{ITSM_SOURCE_URL}/{table}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("result", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+# ServiceNow incident coded values -> labels (Table API returns codes).
+_SN_STATE = {"1": "New", "2": "In Progress", "3": "On Hold",
+             "6": "Resolved", "7": "Closed", "8": "Canceled"}
+_SN_PRIORITY = {"1": "P1-Critical", "2": "P2-High",
+                "3": "P3-Medium", "4": "P4-Low"}
+
+# Which live ServiceNow priorities each classifier verdict would expect.
+# Used to grade the classifier against the desk's own triage decision.
+_CATEGORY_EXPECTED_SN_PRIORITY = {
+    "technical_support": ("1", "2"),
+    "security": ("1", "2"),
+    "billing": ("2", "3"),
+    "sales": ("3", "4"),
+    "account_management": ("3", "4"),
+    "feature_request": ("3", "4"),
+}
 
 
 # Dynamics case priority -> impact/urgency, a deliberately simple stated
@@ -223,6 +275,42 @@ def _assess_priority(impact, urgency):
     return _PRIORITY_MATRIX.get(key, _PRIORITY_MATRIX["impact_medium_urgency_medium"])
 
 
+def _itsm_crosscheck_section(limit=10):
+    """Markdown section that runs THIS agent's keyword classifier over
+    the live ITSM desk's real incident short_descriptions and compares
+    each verdict to the desk's live ServiceNow priority. One line when
+    the desk is offline."""
+    rows = _fetch_itsm_table("incident")
+    if not rows:
+        return ("**ITSM Desk Cross-Check:** desk unreachable — live "
+                "ServiceNow-shaped section skipped\n")
+    active = [r for r in rows if r.get("active") == "true"][:limit]
+    agree = 0
+    table = ""
+    for r in active:
+        text = f"{r.get('short_description', '')}. {r.get('description', '')}".strip()
+        cat, conf = _classify_inquiry(text)
+        pri = str(r.get("priority", ""))
+        ok = pri in _CATEGORY_EXPECTED_SN_PRIORITY.get(cat, ())
+        agree += 1 if ok else 0
+        table += (
+            f"| {r.get('number', '')} "
+            f"| {str(r.get('short_description', ''))[:42]} "
+            f"| {_INQUIRY_CATEGORIES[cat]['label']} ({conf:.0%}) "
+            f"| {_SN_PRIORITY.get(pri, pri)} "
+            f"| {_SN_STATE.get(str(r.get('state', '')), r.get('state', ''))} "
+            f"| {'agrees' if ok else 'differs'} |\n"
+        )
+    return (
+        f"**ITSM Desk Cross-Check (LIVE ServiceNow-shaped incidents — "
+        f"classifier verdict vs the desk's own priority; agrees on "
+        f"{agree} of {len(active)}):**\n\n"
+        f"| Number | Short Description | Classifier Verdict | Live Priority | Live State | Verdict vs Desk |\n"
+        f"|---|---|---|---|---|---|\n"
+        f"{table}"
+    )
+
+
 def _pool_source_line(is_live):
     if is_live:
         return "Inquiry source: LIVE open cases from the Aster Lane Dynamics 365 tenant"
@@ -296,8 +384,9 @@ class TriageBotAgent(BasicAgent):
             f"**Category Definitions:**\n\n"
             f"| Category | Description | Team | SLA |\n|---|---|---|---|\n"
             f"{cat_rows}\n"
+            f"{_itsm_crosscheck_section()}\n"
             f"{_pool_source_line(is_live)}\n"
-            f"Source: [Classification Engine + Case Queue]\nAgents: TriageBotAgent"
+            f"Source: [Classification Engine + Case Queue + ITSM Desk]\nAgents: TriageBotAgent"
         )
 
     def _route_request(self):
@@ -387,8 +476,10 @@ if __name__ == "__main__":
     )
     print()
     print("=" * 60)
-    print("LIVE TENANT CASES (fetched over HTTP; falls back to the")
-    print("embedded demo inquiries offline)")
+    print("LIVE CRM CASES + LIVE ITSM DESK CROSS-CHECK (both fetched")
+    print("over HTTP; the classifier runs over real ServiceNow-shaped")
+    print("incident short_descriptions and its verdict is graded")
+    print("against each incident's live priority; falls back offline)")
     print(agent.perform(operation="classify_inquiry"))
     print()
     print("=" * 60)

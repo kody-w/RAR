@@ -7,23 +7,29 @@ Dynamics 365 CASE (incident) is read as an IT ticket — same triage
 shape, different label.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live cases over real HTTP from the globally
-     hosted Static Dynamics 365 tenant (Aster Lane Office Systems —
-     synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+  1. Out of the box it pulls live data over real HTTP from TWO sibling
+     systems (synthetic data, no credentials, works from anywhere):
+       CRM — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ITSM — the Static ITSM desk (real ServiceNow Table-API shape,
+       30 INC records):
+         https://kody-w.github.io/static-itsm/api/now/table/
      Try: perform(operation="ticket_dashboard")
-     — the queue includes the tenant's real seeded cases, e.g.
-     CAS-260137 "Open enrollment benefits portal login failures"
-     (Lakeview University, High priority).
+     — the dashboard shows the CRM case queue PLUS the live ITSM desk
+     with real INC numbers, and joins repeat-CI clusters back to CRM
+     cases: INC0010001 + INC0010027 both hit "Lakeview University
+     Benefits Portal" and join to CAS-260137 "Open enrollment benefits
+     portal login failures" (Lakeview University).
   2. No network? Everything falls back to the embedded demo layer below
      (_TICKETS / _TEAM_CAPACITY) — the agent never crashes offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     IT_TICKET_MANAGEMENT_DATA_URL to any OData-shaped endpoint (your
-     real Dynamics org, or JSON exported from ServiceNow/Jira), or
-     replace _fetch_collection() with your ITSM client. The fields the
-     rest of the file needs are listed in _normalize_live_ticket() —
-     team and users_affected are labeled "n/a — enrichment seam"; wire
-     your workforce and asset systems there.
+     IT_TICKET_MANAGEMENT_DATA_URL to any OData-shaped endpoint and
+     IT_TICKET_MANAGEMENT_ITSM_URL to any ServiceNow Table-API-shaped
+     endpoint (your real instance exports), or replace the fetchers
+     with your ITSM client. The fields the rest of the file needs are
+     listed in _normalize_live_ticket() — team and users_affected are
+     labeled "n/a — enrichment seam"; wire your workforce and asset
+     systems there.
 
 OPERATIONS
   ticket_dashboard | priority_assignment | sla_tracking
@@ -45,9 +51,9 @@ from datetime import datetime, timezone
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/it_ticket_management",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "IT Ticket Management",
-    "description": "Builds ticket dashboards and SLA tracking from live cases in a simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Builds ticket dashboards from live D365 cases plus a simulated ServiceNow-shaped ITSM desk, joining repeat-CI clusters to CRM cases; offline fallback.",
     "author": "AIBAST",
     "tags": ["it", "tickets", "helpdesk", "sla", "priority", "resolution"],
     "category": "general",
@@ -72,6 +78,14 @@ DATA_SOURCE_URL = os.environ.get(
     "IT_TICKET_MANAGEMENT_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+# Sibling system: the Static ITSM desk — real ServiceNow Table API
+# shape ({"result": [...]}, INC numbers, reference fields as
+# {display_value, link, value} dicts). Point at your own instance:
+#   export IT_TICKET_MANAGEMENT_ITSM_URL=https://your-instance/api/now/table
+ITSM_SOURCE_URL = os.environ.get(
+    "IT_TICKET_MANAGEMENT_ITSM_URL",
+    "https://kody-w.github.io/static-itsm/api/now/table",
+)
 _LIVE_CACHE = {}
 
 
@@ -91,6 +105,96 @@ def _fetch_collection(collection, timeout=6):
         rows = []
     _LIVE_CACHE[collection] = rows
     return rows
+
+
+def _fetch_itsm_table(table, timeout=6):
+    """Sibling fetcher for the ServiceNow-shaped ITSM desk. Same rules
+    as _fetch_collection — lazy, one bounded GET, [] on ANY failure —
+    but parses the Table API envelope {"result": [...]} and caches in
+    _LIVE_CACHE keyed by full URL."""
+    url = f"{ITSM_SOURCE_URL}/{table}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("result", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+# ServiceNow incident coded values -> labels (Table API returns codes).
+_SN_STATE = {"1": "New", "2": "In Progress", "3": "On Hold",
+             "6": "Resolved", "7": "Closed", "8": "Canceled"}
+_SN_PRIORITY = {"1": "P1-Critical", "2": "P2-High",
+                "3": "P3-Medium", "4": "P4-Low"}
+
+
+def _sn_display(ref):
+    """ServiceNow reference fields arrive as {display_value, link, value}
+    dicts (or "" when empty) — extract the display value."""
+    return ref.get("display_value", "") if isinstance(ref, dict) else ""
+
+
+def _itsm_desk_section(limit=10):
+    """Markdown section for the live ITSM desk: active incidents with
+    real INC numbers/state/priority, plus repeat-CI clusters joined to
+    the CRM case queue by company. One line when the desk is offline."""
+    rows = _fetch_itsm_table("incident")
+    if not rows:
+        return ("**ITSM Desk:** unreachable — live ServiceNow-shaped "
+                "desk section skipped (simulated fallback above is "
+                "unaffected)\n")
+    active = [r for r in rows if r.get("active") == "true"]
+    active.sort(key=lambda r: (str(r.get("priority", "9")), str(r.get("number", ""))))
+    inc_rows = ""
+    for r in active[:limit]:
+        inc_rows += (
+            f"| {r.get('number', '')} "
+            f"| {_SN_PRIORITY.get(str(r.get('priority', '')), r.get('priority', ''))} "
+            f"| {_SN_STATE.get(str(r.get('state', '')), r.get('state', ''))} "
+            f"| {r.get('company', '')} "
+            f"| {_sn_display(r.get('cmdb_ci')) or 'n/a'} "
+            f"| {_sn_display(r.get('assigned_to')) or 'unassigned'} |\n"
+        )
+    more = f"(showing {min(limit, len(active))} of {len(active)} active)\n" if len(active) > limit else ""
+    # Repeat-CI clusters: >1 active incident on the same configuration
+    # item, joined back to the CRM case queue on the shared company.
+    by_ci = {}
+    for r in active:
+        ci = _sn_display(r.get("cmdb_ci"))
+        if ci:
+            by_ci.setdefault(ci, []).append(r)
+    crm_cases = _fetch_collection("incidents")
+    cluster_lines = ""
+    for ci, hits in sorted(by_ci.items(), key=lambda kv: -len(kv[1])):
+        if len(hits) < 2:
+            continue
+        nums = ", ".join(sorted(h.get("number", "") for h in hits))
+        company = hits[0].get("company", "")
+        related = [c for c in crm_cases if c.get("customeridname") == company]
+        if related:
+            c = related[0]
+            join = (f" <-> CRM {c.get('ticketnumber', '')} "
+                    f"\"{str(c.get('title', ''))[:45]}\"")
+        else:
+            join = " <-> CRM case: none found for this company"
+        cluster_lines += f"- {ci} ({company}): {nums}{join}\n"
+    if not cluster_lines:
+        cluster_lines = "- No repeat-CI clusters among active incidents\n"
+    return (
+        f"**ITSM Desk (LIVE ServiceNow-shaped incident table — "
+        f"{len(active)} active of {len(rows)}):**\n\n"
+        f"| Number | Priority | State | Company | Configuration Item | Assigned To |\n"
+        f"|---|---|---|---|---|---|\n"
+        f"{inc_rows}{more}\n"
+        f"**Repeat-CI Clusters (joined to the CRM case queue by company):**\n"
+        f"{cluster_lines}"
+    )
 
 
 # Dynamics case priority has no P1 tier, so the mapping is deliberately
@@ -294,8 +398,9 @@ class ITTicketManagementAgent(BasicAgent):
             f"**Open Tickets:**\n\n"
             f"| ID | Subject | Severity | Status | Assignee |\n|---|---|---|---|---|\n"
             f"{ticket_rows}{more}\n"
+            f"{_itsm_desk_section()}\n"
             f"{_queue_source_line(is_live)}\n"
-            f"Source: [Case Queue + IT Asset Management]\nAgents: ITTicketManagementAgent"
+            f"Source: [Case Queue + ITSM Desk (ServiceNow-shaped)]\nAgents: ITTicketManagementAgent"
         )
 
     # ── priority_assignment ────────────────────────────────────
@@ -381,7 +486,10 @@ if __name__ == "__main__":
     print(agent.perform(operation="priority_assignment"))
     print()
     print("=" * 60)
-    print("LIVE TENANT QUEUE (fetched over HTTP; falls back offline)")
+    print("LIVE CRM QUEUE + LIVE ITSM DESK (both fetched over HTTP;")
+    print("the dashboard joins repeat-CI incident clusters — e.g. the")
+    print("Lakeview Benefits Portal pair INC0010001 + INC0010027 —")
+    print("back to the CRM case queue; falls back offline)")
     print(agent.perform(operation="ticket_dashboard"))
     print()
     print("=" * 60)

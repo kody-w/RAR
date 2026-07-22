@@ -5,22 +5,27 @@ AI-powered IT support with automated diagnostics, remote remediation,
 knowledge base search, escalation routing, and ticket management.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template the tenant's field-service bookable resources are
-     reinterpreted as the IT technician bench, and their bookings as the
-     technician calendar — e.g. technician "Riley Chen".
-     Try: perform(operation="schedule_technician",
-                  user_name="Michael Chen")
+  1. Out of the box it pulls live records over real HTTP from TWO
+     sibling systems (synthetic data, no credentials, works anywhere):
+       CRM — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       (its field-service bookable resources are reinterpreted as the
+       IT technician bench, e.g. technician "Riley Chen")
+       ITSM — the Static ITSM desk (real ServiceNow Table-API shape,
+       30 INC records):
+         https://kody-w.github.io/static-itsm/api/now/table/
+     Try: perform(operation="session_summary", user_name="Michael Chen")
+     — the summary now closes with the live desk queue: real INC
+     numbers with state/priority, and repeat-CI clusters joined to CRM
+     cases (INC0010001 + INC0010027 both hit "Lakeview University
+     Benefits Portal" and join to CAS-260137).
   2. No network? Everything falls back to the embedded demo layer below
      (_USERS / _TECHNICIANS / _KB_ARTICLES) — the agent never crashes
      offline.
   3. Make it yours at the LIVE DATA SEAM below: set IT_HELPDESK_DATA_URL
-     to any OData-shaped endpoint (your real Dynamics org, or JSON you
-     export from ServiceNow/Jira Service Management), or replace
-     _fetch_collection() with your ITSM client. Fields the rest of the
+     to any OData-shaped endpoint and IT_HELPDESK_ITSM_URL to any
+     ServiceNow Table-API-shaped endpoint (your real instance), or
+     replace the fetchers with your ITSM client. Fields the rest of the
      file needs are listed in _normalize_live_technician() — specialty
      renders as "n/a — enrichment seam" until you wire your skills matrix.
      Device telemetry stays simulated until you wire Intune/RMM.
@@ -45,9 +50,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/it_helpdesk",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "display_name": "IT Helpdesk",
-    "description": "Runs IT support \u2014 diagnostics, remediation, KB search, technician booking \u2014 from a live simulated Dynamics 365 tenant, with an offline fallback.",
+    "description": "Runs IT support \u2014 diagnostics, remediation, technician booking \u2014 over a live simulated D365 tenant plus a ServiceNow-shaped ITSM desk; offline-safe.",
     "author": "AIBAST",
     "tags": ["it", "helpdesk", "troubleshooting", "itsm", "support"],
     "category": "it_management",
@@ -72,6 +77,14 @@ DATA_SOURCE_URL = os.environ.get(
     "IT_HELPDESK_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+# Sibling system: the Static ITSM desk — real ServiceNow Table API
+# shape ({"result": [...]}, INC numbers, coded state/priority). Point
+# at your own instance:
+#   export IT_HELPDESK_ITSM_URL=https://your-instance/api/now/table
+ITSM_SOURCE_URL = os.environ.get(
+    "IT_HELPDESK_ITSM_URL",
+    "https://kody-w.github.io/static-itsm/api/now/table",
+)
 _LIVE_CACHE = {}
 
 
@@ -91,6 +104,92 @@ def _fetch_collection(collection, timeout=6):
         rows = []
     _LIVE_CACHE[collection] = rows
     return rows
+
+
+def _fetch_itsm_table(table, timeout=6):
+    """Sibling fetcher for the ServiceNow-shaped ITSM desk. Same rules
+    as _fetch_collection — lazy, one bounded GET, [] on ANY failure —
+    but parses the Table API envelope {"result": [...]} and caches in
+    _LIVE_CACHE keyed by full URL."""
+    url = f"{ITSM_SOURCE_URL}/{table}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("result", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+# ServiceNow incident coded values -> labels (Table API returns codes).
+_SN_STATE = {"1": "New", "2": "In Progress", "3": "On Hold",
+             "6": "Resolved", "7": "Closed", "8": "Canceled"}
+_SN_PRIORITY = {"1": "P1-Critical", "2": "P2-High",
+                "3": "P3-Medium", "4": "P4-Low"}
+
+
+def _sn_display(ref):
+    """ServiceNow reference fields arrive as {display_value, link, value}
+    dicts (or "" when empty) — extract the display value."""
+    return ref.get("display_value", "") if isinstance(ref, dict) else ""
+
+
+def _itsm_desk_section(limit=8):
+    """Markdown section for the live ITSM desk: active incidents with
+    real INC numbers/state/priority, plus repeat-CI clusters joined to
+    the CRM case queue by company. One line when the desk is offline."""
+    rows = _fetch_itsm_table("incident")
+    if not rows:
+        return ("**Helpdesk Desk Queue:** ITSM desk unreachable — live "
+                "ServiceNow-shaped section skipped\n")
+    active = [r for r in rows if r.get("active") == "true"]
+    active.sort(key=lambda r: (str(r.get("priority", "9")), str(r.get("number", ""))))
+    inc_rows = ""
+    for r in active[:limit]:
+        inc_rows += (
+            f"| {r.get('number', '')} "
+            f"| {_SN_PRIORITY.get(str(r.get('priority', '')), r.get('priority', ''))} "
+            f"| {_SN_STATE.get(str(r.get('state', '')), r.get('state', ''))} "
+            f"| {r.get('company', '')} "
+            f"| {str(r.get('short_description', ''))[:40]} |\n"
+        )
+    more = f"(showing {min(limit, len(active))} of {len(active)} active)\n" if len(active) > limit else ""
+    by_ci = {}
+    for r in active:
+        ci = _sn_display(r.get("cmdb_ci"))
+        if ci:
+            by_ci.setdefault(ci, []).append(r)
+    crm_cases = _fetch_collection("incidents")
+    cluster_lines = ""
+    for ci, hits in sorted(by_ci.items(), key=lambda kv: -len(kv[1])):
+        if len(hits) < 2:
+            continue
+        nums = ", ".join(sorted(h.get("number", "") for h in hits))
+        company = hits[0].get("company", "")
+        related = [c for c in crm_cases if c.get("customeridname") == company]
+        if related:
+            c = related[0]
+            join = (f" <-> CRM {c.get('ticketnumber', '')} "
+                    f"\"{str(c.get('title', ''))[:45]}\"")
+        else:
+            join = " <-> CRM case: none found for this company"
+        cluster_lines += f"- {ci} ({company}): {nums}{join}\n"
+    if not cluster_lines:
+        cluster_lines = "- No repeat-CI clusters among active incidents\n"
+    return (
+        f"**Helpdesk Desk Queue (LIVE ServiceNow-shaped incident table — "
+        f"{len(active)} active of {len(rows)}):**\n\n"
+        f"| Number | Priority | State | Company | Short Description |\n"
+        f"|---|---|---|---|---|\n"
+        f"{inc_rows}{more}\n"
+        f"**Repeat-CI Clusters (joined to the CRM case queue by company):**\n"
+        f"{cluster_lines}"
+    )
 
 
 def _normalize_live_technician(row, bookings):
@@ -519,7 +618,8 @@ class ITHelpdeskAgent(BasicAgent):
             f"| Memory | {dev['memory_used_pct']}% | {new_mem}% |\n\n"
             f"**Follow-Up:** {tech['name']} scheduled for {tech['next_slot']}\n"
             f"**Ticket:** {ticket_id}\n\n"
-            f"Source: [All IT Systems]\nAgents: ITHelpdeskAgent"
+            f"{_itsm_desk_section()}\n"
+            f"Source: [All IT Systems + ITSM Desk (ServiceNow-shaped)]\nAgents: ITHelpdeskAgent"
         )
 
 
@@ -533,8 +633,13 @@ if __name__ == "__main__":
     print("LIVE TENANT TECHNICIAN BOOKING (fetched over HTTP; falls back offline)")
     print(agent.perform(operation="schedule_technician", user_name="Michael Chen"))
     print()
-    for op in ["quick_remediation", "process_analysis",
-               "knowledge_search", "session_summary"]:
+    for op in ["quick_remediation", "process_analysis", "knowledge_search"]:
         print("=" * 60)
         print(agent.perform(operation=op, user_name="Michael Chen"))
         print()
+    print("=" * 60)
+    print("LIVE ITSM DESK QUEUE (session summary closes with real INC")
+    print("numbers/state/priority from the ServiceNow-shaped desk and")
+    print("joins repeat-CI clusters — e.g. the Lakeview Benefits Portal")
+    print("pair INC0010001 + INC0010027 — to CRM cases; falls back offline)")
+    print(agent.perform(operation="session_summary", user_name="Michael Chen"))

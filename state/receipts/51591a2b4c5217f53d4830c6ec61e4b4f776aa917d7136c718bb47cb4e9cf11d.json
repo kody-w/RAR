@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-22"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/inventory_visibility",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "1fab16e92d49c19489ed2992df56294a8c1133aa9eefc87bc1f2a93dc08ce3e5"
+ },
+ "canonical_path": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:42:19.597449+00:00",
+ "id": "rar_51591a2b4c5217f53d4830c6ec61e4b4f776aa917d7136c718bb47cb4e9cf11d",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c3b1ef2d853ea94c8f40fbde7267e5bb1f9029f1b9b640c8b15afbbd5b2e0005",
+  "receipt": "rar_fe08263e7435c0b1fc09d52115a1c484986bdc0519b2d15448f8fe38ba7df86c",
+  "version": "1.2.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_51591a2b4c5217f53d4830c6",
+ "revision_id": "51591a2b4c5217f53d4830c6ec61e4b4f776aa917d7136c718bb47cb4e9cf11d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "sibling-API wiring: 23 industry agents joined to their domain simulators (FHIR/ITSM/HRIS/ERP/telemetry); see SIBLING_SPEC round"
+ },
+ "version": "1.3.0"
+}

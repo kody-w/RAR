@@ -7,23 +7,31 @@ cost-optimized rebalancing recommendations. Supports SKU-level snapshot
 reporting, inter-warehouse transfer planning, and holding-cost analysis.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template the tenant's product catalog is reinterpreted as
-     the SKU master and its installed customer assets as deployed stock —
-     e.g. product "AsterPrint C620" (AST-PRN-620).
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (materials, purchase orders, goods receipts):
+         https://kody-w.github.io/static-erp/api/v1/
+     The tenant's product catalog is the finished-goods SKU master; the
+     ERP's 20 materials are the component master, joined to goods
+     receipts as REAL inbound supply and back to the CRM catalog by
+     product name (e.g. material CMP-PRH-0420 "Print head assembly,
+     AsterPrint M420" feeds CRM product AST-PRN-420).
      Try: perform(operation="inventory_snapshot")
+     — the ERP section flags the real short receipt: 36 of 40 print
+     heads received on PO-47003.
   2. No network? Everything falls back to the embedded demo layer below
      (WAREHOUSES / SKU_INVENTORY / DEMAND_FORECASTS) — the agent never
      crashes offline.
   3. Make it yours at the LIVE DATA SEAM below: set
-     INVENTORY_REBALANCING_DATA_URL to any OData-shaped endpoint (your
-     real Dynamics org, or JSON exported from your WMS/ERP), or replace
-     _fetch_collection() with a SAP/NetSuite client. Fields the rest of
-     the file needs are listed in _normalize_live_sku() — per-warehouse
-     bin levels render as "n/a — enrichment seam" until you wire your WMS.
+     INVENTORY_REBALANCING_DATA_URL (CRM side) and/or
+     INVENTORY_REBALANCING_ERP_URL (ERP side) to any endpoint with the
+     same shapes, or replace _fetch_collection() with a SAP/NetSuite
+     client. Fields the rest of the file needs are listed in
+     _normalize_live_sku() — per-warehouse bin levels render as "n/a —
+     enrichment seam" until you wire your WMS.
 
 OPERATIONS
   inventory_snapshot | rebalance_recommendation | transfer_plan
@@ -43,9 +51,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_rebalancing",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Inventory Rebalancing Agent",
-    "description": "Analyzes stock vs demand and builds transfer and cost plans from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["inventory", "warehouse", "supply-chain", "rebalancing", "manufacturing"],
     "category": "manufacturing",
@@ -56,39 +64,52 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real system
+# LIVE DATA SEAM — swap this for your real systems
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
 #   export INVENTORY_REBALANCING_DATA_URL=https://your-org/api/data/v9.2
+#   export INVENTORY_REBALANCING_ERP_URL=https://your-erp/api/v1
 # or replace _fetch_collection() with your WMS/ERP client. Downstream
-# code only needs the fields produced by _normalize_live_sku().
+# code only needs the fields produced by _normalize_live_sku() and
+# _erp_material_master().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "INVENTORY_REBALANCING_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+ERP_SOURCE_URL = os.environ.get(
+    "INVENTORY_REBALANCING_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
+)
 _LIVE_CACHE = {}
 
 
-def _fetch_collection(collection, timeout=6):
-    """One bounded GET per collection per process. Returns [] on ANY
-    failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    if collection in _LIVE_CACHE:
-        return _LIVE_CACHE[collection]
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
     try:
         req = urllib.request.Request(
-            f"{DATA_SOURCE_URL}/{collection}.json",
+            url,
             headers={"User-Agent": "rapp-agent-template/1.0"},
         )
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             rows = json.loads(resp.read().decode("utf-8")).get("value", [])
     except Exception:
         rows = []
-    _LIVE_CACHE[collection] = rows
+    _LIVE_CACHE[url] = rows
     return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (materials, purchase_orders,
+    goods_receipts, suppliers, supplier_invoices); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
 
 
 def _normalize_live_sku(row, assets):
@@ -117,6 +138,72 @@ def _live_catalog():
     rows = _fetch_collection("products")
     assets = _fetch_collection("msdyn_customerassets") if rows else []
     return [_normalize_live_sku(r, assets) for r in rows]
+
+
+def _erp_material_master():
+    """Live ERP materials joined to goods receipts (REAL inbound supply)
+    and to the CRM product catalog by product name — the ERP component
+    that feeds each finished-goods SKU. [] when the ERP is unreachable."""
+    materials = _erp("materials")
+    if not materials:
+        return []
+    inbound = {}
+    for g in _erp("goods_receipts"):
+        for l in g.get("lines", []):
+            m = l.get("material_number", "?")
+            inbound[m] = inbound.get(m, 0) + int(float(l.get("quantity_received") or 0))
+    products = _fetch_collection("products")
+    rows = []
+    for m in materials:
+        num = m.get("material_number", "?")
+        desc = m.get("description", "")
+        crm = next(
+            (p for p in products if p.get("name") and p["name"] in desc), None
+        )
+        rows.append({
+            "material": num,
+            "description": desc,
+            "group": m.get("material_group", "?"),
+            "std_price": float(m.get("standard_price") or 0),
+            "lead_time_days": m.get("lead_time_days"),
+            "supplier": m.get("preferred_supplier_name", "?"),
+            "inbound_received": inbound.get(num, 0),
+            "crm_product": f"{crm.get('productnumber')} ({crm.get('name')})" if crm else None,
+        })
+    return rows
+
+
+def _erp_short_receipts():
+    """POs whose goods receipts came up short: for each ERP purchase
+    order already receipted, compare ordered vs received per material.
+    Returns [] when the ERP is unreachable or everything matched."""
+    pos = _erp("purchase_orders")
+    grs = _erp("goods_receipts")
+    shorts = []
+    for p in pos:
+        po_no = p.get("po_number")
+        p_grs = [g for g in grs if g.get("po_number") == po_no]
+        if not p_grs:
+            continue
+        received = {}
+        for g in p_grs:
+            for l in g.get("lines", []):
+                m = l.get("material_number", "?")
+                received[m] = received.get(m, 0) + int(float(l.get("quantity_received") or 0))
+        for l in p.get("lines", []):
+            m = l.get("material_number", "?")
+            ordered = int(float(l.get("quantity") or 0))
+            got = received.get(m, 0)
+            if got < ordered:
+                shorts.append({
+                    "material": m,
+                    "description": l.get("material_description", ""),
+                    "po_number": po_no,
+                    "supplier": p.get("supplier_name", "?"),
+                    "ordered": ordered,
+                    "received": got,
+                })
+    return shorts
 
 
 # ---------------------------------------------------------------------------
@@ -389,6 +476,30 @@ class InventoryRebalancingAgent(BasicAgent):
                 )
         else:
             lines.append("\n_Live tenant unreachable — showing embedded demo inventory only._")
+        erp_rows = _erp_material_master()
+        if erp_rows:
+            lines.append("\n### Live ERP Material Master + Inbound Supply (goods receipts, joined to the CRM catalog)\n")
+            lines.append("| Material | Description | Group | Std Price | Lead Time | Preferred Supplier | Inbound Received | Feeds CRM Product |")
+            lines.append("|----------|-------------|-------|-----------|-----------|--------------------|------------------|-------------------|")
+            for r in erp_rows:
+                lines.append(
+                    f"| {r['material']} | {r['description']} | {r['group']} | "
+                    f"${r['std_price']:,.2f} | {r['lead_time_days']}d | {r['supplier']} | "
+                    f"{r['inbound_received']:,} | {r['crm_product'] or '—'} |"
+                )
+            for s in _erp_short_receipts():
+                lines.append(
+                    f"\n**Short receipt flagged:** {s['material']} ({s['description']}) — "
+                    f"{s['received']} received vs {s['ordered']} ordered on {s['po_number']} "
+                    f"({s['supplier']}). Check the goods receipt before counting this "
+                    "as available supply."
+                )
+            lines.append(
+                f"\n**ERP component view:** {len(erp_rows)} live materials; per-warehouse "
+                "bin levels remain n/a — enrichment seam (wire your WMS)."
+            )
+        else:
+            lines.append("\n_Simulated ERP unreachable — component material master unavailable._")
         return "\n".join(lines)
 
     def _rebalance_recommendation(self, **kwargs) -> str:
@@ -584,7 +695,8 @@ if __name__ == "__main__":
     agent = InventoryRebalancingAgent()
     print("=" * 72)
     print("EMBEDDED DEMO WAREHOUSES + LIVE TENANT SKU MASTER")
-    print("(live section fetched over HTTP; falls back offline)")
+    print("+ LIVE ERP MATERIALS AND INBOUND SUPPLY (goods receipts, CRM join)")
+    print("(live sections fetched over HTTP; fall back offline)")
     print("=" * 72)
     print(agent.perform(operation="inventory_snapshot"))
     print()

@@ -145,7 +145,44 @@ GET https://raw.githubusercontent.com/kody-w/RAPP_Store/main/index.json         
 GET https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/index.json   # senses (full)
 ```
 
-### 9. Community Ratings (Discussions-backed upvotes + comments)
+### 9. The Simulated Enterprise Estate (live sandbox systems for agents)
+
+Every external system the industry agents touch has a globally public,
+schema-true static simulator — same API shapes, field names, and id formats
+as the real system, no auth, no rate limits. All fourteen share ONE fictional
+world (operator tenant **Aster Lane Office Systems**, 22 customer accounts,
+cross-linked stories), so agents can join records ACROSS systems. Templates
+coded against these run unchanged against a user's real tenant: point the
+agent's `<SLUG>_*_URL` env var at the real endpoint.
+
+| System | Base URL | Shape |
+|---|---|---|
+| CRM (Dynamics-CE-style, hub) | `https://kody-w.github.io/static-dynamics-365/api/data/v9.2/<entity>.json` | OData `{"@odata.count","value"}` |
+| Finance & Ops (F&O-style) | `https://kody-w.github.io/static-dynamics-fno/data/<Entity>.json` | OData data entities |
+| ITSM (ServiceNow-style) | `https://kody-w.github.io/static-itsm/api/now/table/<table>.json` | Table API `{"result":[...]}` |
+| Healthcare (FHIR R4) | `https://kody-w.github.io/static-fhir/fhir/<Resource>.json` | R4 searchset Bundles |
+| ERP / supply chain | `https://kody-w.github.io/static-erp/api/v1/<c>.json` | `{"value","count"}` |
+| HRIS | `https://kody-w.github.io/static-hris/api/v1/<c>.json` | `{"value","count"}` |
+| Sensor telemetry | `https://kody-w.github.io/static-telemetry/api/v1/…` | sensors/alerts/readings series |
+| Second CRM (Salesforce-style) | `https://kody-w.github.io/static-salesforce/services/data/v59.0/query/<SObject>.json` | `{"totalSize","done","records"}` |
+| Documents (SharePoint-style) | `https://kody-w.github.io/static-sharepoint/_api/web/lists/<List>/items.json` | classic SP REST `{"d":{"results"}}` |
+| Chat (Teams/Graph-style) | `https://kody-w.github.io/static-teams/v1.0/teams/…/messages.json` | Graph chatMessage |
+| Mail+Calendar (Graph-style) | `https://kody-w.github.io/static-outlook/v1.0/users/<user>/messages.json`, `…/events.json` | Graph message/event |
+| Issue tracking (Jira-style) | `https://kody-w.github.io/static-issue-tracker/rest/api/2/search.json` | `{"total","issues":[{key,fields}]}` |
+| Core banking | `https://kody-w.github.io/static-core-banking/api/v1/<c>.json` | members/accounts/transactions/loans |
+| Firmographic enrichment | `https://kody-w.github.io/static-enrichment/api/v1/companies/<domain>.json` | company profile + news |
+
+Cross-system join keys: account/company names, CRM ticket numbers
+(`CAS-2601xx`), ITSM numbers (`INC00100xx`), ERP documents
+(`PO-470xx`/`GR-880xx`/`SINV-920xx`), HRIS ids (`AL-00xx`/`TOR-10xx`),
+real `msdyn_customerassetid` GUIDs (telemetry sensors, ITSM CMDB), and
+company domains (enrichment). Each simulator repo documents its own
+Issues-based Write API (`[SD365]`/`[ITSM]`/`[FHIR]`/`[ERP]`/`[HRIS]`/
+`[TEL]`/`[SP]`/`[TEAMS]`/`[SFDC]`/`[MAIL]`/`[ISSUE]`/`[BANK]`/`[ENRICH]`/
+`[FNO]` + `<name>-write/1.0` schema): file an issue with a fenced JSON
+command → validated → committed → globally live in ~1 minute.
+
+### 10. Community Ratings (Discussions-backed upvotes + comments)
 
 Every registry agent has one GitHub Discussion whose **title is the agent name** (e.g. `@rapp/basic_agent`), in the maintainer-only Announcements category of `kody-w/RAR`.
 

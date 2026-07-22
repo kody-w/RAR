@@ -5,22 +5,30 @@ AI-powered HR assistant for employee self-service: time-off requests,
 benefits inquiries, parental leave guidance, and policy lookups.
 
 HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from the
-     globally hosted Static Dynamics 365 tenant (Aster Lane Office
-     Systems — synthetic data, no credentials, works from anywhere):
-     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-     In this template the tenant's system users are reinterpreted as the
-     employee directory that HR serves.
-     Try: perform(operation="leave_balance", employee_name="Morgan Ellis")
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       HRIS https://kody-w.github.io/static-hris/api/v1/
+     The HRIS is the real system of record HR serves: 25 workers
+     (AL-00xx) with manager chains and levels, time-off requests with
+     team-conflict linkage, benefits enrollments from the Nov 3-17 2025
+     open enrollment, and compensation bands. The CRM joins in where
+     the story connects — the pending open-enrollment confirmations
+     trace to CRM case CAS-260137 "benefits portal login failures".
+     Try: perform(operation="leave_balance", employee_name="Jamie Ortiz")
+     to catch the live scheduling conflict — Jamie's pending TOR-1006
+     overlaps Riley Chen's approved TOR-1005 on the same team.
   2. No network? Everything falls back to the embedded demo layer below
      (_EMPLOYEES / _POLICIES) — the agent never crashes offline, and
      unknown names resolve to the demo employee Jordan Chen.
-  3. Make it yours at the LIVE DATA SEAM below: set ASK_HR_DATA_URL to
-     any OData-shaped endpoint (your real Dynamics org, or JSON exported
-     from your HRIS), or replace _fetch_collection() with a Workday /
-     BambooHR client. Fields the rest of the file needs are listed in
-     _normalize_live_employee() — leave balances and benefits render as
-     "n/a — enrichment seam" until you wire your HRIS.
+  3. Make it yours at the LIVE DATA SEAM below: set ASK_HR_DATA_URL
+     (CRM) and ASK_HR_HRIS_URL (HRIS) to your own endpoints, or replace
+     _fetch_collection() with a Workday / BambooHR client. Fields the
+     rest of the file needs are listed in _normalize_live_employee() /
+     _normalize_hris_worker(). Per-worker salary deliberately does NOT
+     exist in the HRIS — compensation answers come from bands only;
+     individual pay is an enrichment seam (wire payroll).
 
 OPERATIONS
   leave_balance | submit_time_off | parental_leave | health_insurance
@@ -43,9 +51,9 @@ from datetime import date, datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/ask_hr",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "display_name": "Ask HR",
-    "description": "Answers time-off, benefits, and policy questions for employees from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "description": "Answers time-off, benefits, and policy questions from a live simulated HRIS joined to a Dynamics 365 CRM, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["hr", "human-resources", "benefits", "time-off", "employee-self-service"],
     "category": "human_resources",
@@ -58,37 +66,47 @@ __manifest__ = {
 # ═══════════════════════════════════════════════════════════════
 # LIVE DATA SEAM — swap this for your real system
 #
-# Default: the globally hosted Static Dynamics 365 tenant (synthetic
-# Aster Lane Office Systems data served as OData-shaped JSON from
-# GitHub Pages). To hook your own world, either:
-#   export ASK_HR_DATA_URL=https://your-org/api/data/v9.2
-# or replace _fetch_collection() with your HRIS client. Downstream
-# code only needs the fields produced by _normalize_live_employee().
+# TWO live sources, both synthetic OData-shaped JSON on GitHub Pages:
+#   CRM  (Dynamics 365):  export ASK_HR_DATA_URL=...
+#   HRIS (system of record for workers, time off, benefits, bands):
+#         export ASK_HR_HRIS_URL=...
+# or replace _fetch_collection() with your clients. Downstream code
+# only needs the fields produced by _normalize_live_employee() and
+# _normalize_hris_worker().
 # ═══════════════════════════════════════════════════════════════
 
 DATA_SOURCE_URL = os.environ.get(
     "ASK_HR_DATA_URL",
     "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
 )
+HRIS_SOURCE_URL = os.environ.get(
+    "ASK_HR_HRIS_URL",
+    "https://kody-w.github.io/static-hris/api/v1",
+)
 _LIVE_CACHE = {}
 
 
-def _fetch_collection(collection, timeout=6):
-    """One bounded GET per collection per process. Returns [] on ANY
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per URL per process. Returns [] on ANY
     failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    if collection in _LIVE_CACHE:
-        return _LIVE_CACHE[collection]
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
     try:
         req = urllib.request.Request(
-            f"{DATA_SOURCE_URL}/{collection}.json",
-            headers={"User-Agent": "rapp-agent-template/1.0"},
+            url, headers={"User-Agent": "rapp-agent-template/1.0"},
         )
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             rows = json.loads(resp.read().decode("utf-8")).get("value", [])
     except Exception:
         rows = []
-    _LIVE_CACHE[collection] = rows
+    _LIVE_CACHE[url] = rows
     return rows
+
+
+def _fetch_hris(collection):
+    """Fetch a collection from the sibling HRIS; [] when offline."""
+    return _fetch_collection(collection, base_url=HRIS_SOURCE_URL)
 
 
 def _normalize_live_employee(row):
@@ -116,6 +134,56 @@ def _live_directory():
         for row in _fetch_collection("systemusers")
         if row.get("fullname")
     }
+
+
+def _normalize_hris_worker(row):
+    """Project an HRIS worker onto the employee shape this agent uses.
+    The HRIS is a real system of record — department, manager, hire
+    date, and level are actual fields, not seams. Leave balances still
+    live in the payroll/absence module (enrichment seam)."""
+    return {
+        "id": row.get("worker_id", ""),
+        "name": row.get("full_name", "Unknown"),
+        "title": row.get("job_title") or "n/a",
+        "email": row.get("work_email", ""),
+        "department": row.get("department_name") or None,
+        "manager": row.get("manager_name") or None,
+        "level": row.get("level", ""),
+        "hire_date": row.get("hire_date", ""),
+        "location": row.get("work_location", ""),
+        "leave_balance": None,  # enrichment seam — wire your absence module
+        "_live": True,
+    }
+
+
+def _hris_workers():
+    """name-keyed dict of live HRIS workers; {} when offline."""
+    return {
+        row["full_name"].lower(): _normalize_hris_worker(row)
+        for row in _fetch_hris("workers")
+        if row.get("full_name") and row.get("status") == "active"
+    }
+
+
+def _tor_dates(req):
+    return f"{req.get('start_date', '?')} to {req.get('end_date', '?')}"
+
+
+def _live_team_conflicts(start_iso, end_iso):
+    """Approved/pending live HRIS time-off requests overlapping the
+    [start_iso, end_iso] date range (ISO strings). None when the HRIS
+    is unreachable (caller keeps the offline wording)."""
+    tors = _fetch_hris("time_off_requests")
+    if not tors:
+        return None
+    overlaps = []
+    for t in tors:
+        if t.get("status") not in ("approved", "pending"):
+            continue
+        t_start, t_end = t.get("start_date", ""), t.get("end_date", "")
+        if t_start and t_end and t_start <= end_iso and start_iso <= t_end:
+            overlaps.append(t)
+    return overlaps
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -526,6 +594,9 @@ class AskHRAgent(BasicAgent):
             k in q or q in _EMPLOYEES[k]["name"].lower() for k in _EMPLOYEES
         ) if q else True
         if q and not embedded_match:
+            for live_key, live_emp in _hris_workers().items():
+                if live_key in q or q in live_key:
+                    return self._hris_leave_balance(live_emp)
             for live_key, live_emp in _live_directory().items():
                 if live_key in q or q in live_key:
                     return self._live_leave_balance(live_emp)
@@ -546,6 +617,67 @@ class AskHRAgent(BasicAgent):
             f"- {pol['holiday_period']}\n"
             f"- Rollover policy: Max {pol['rollover_max']} days carry to next year\n\n"
             f"Source: [Workday + HR Portal]\nAgents: AskHRAgent"
+        )
+
+    # ── HRIS leave_balance (real system of record) ────────────
+    def _hris_leave_balance(self, emp):
+        seam = "n/a — enrichment seam"
+        pol = _POLICIES["time_off"]
+        tors = _fetch_hris("time_off_requests")
+        mine = [t for t in tors if t.get("worker_id") == emp["id"]]
+        tor_by_number = {t.get("request_number"): t for t in tors}
+        rows = ""
+        for t in sorted(mine, key=lambda x: x.get("start_date", "")):
+            flag = "CONFLICT" if t.get("team_conflict") else "-"
+            rows += (
+                f"| {t.get('request_number')} | {t.get('type', '')} "
+                f"| {_tor_dates(t)} | {t.get('days', '')} "
+                f"| {t.get('status', '')} | {flag} |\n"
+            )
+        if not rows:
+            rows = "| None on record | - | - | - | - | - |\n"
+        conflict_lines = ""
+        for t in mine:
+            if not t.get("team_conflict"):
+                continue
+            for other_num in t.get("conflicts_with", []):
+                o = tor_by_number.get(other_num)
+                if not o:
+                    continue
+                conflict_lines += (
+                    f"- {t.get('request_number')} ({t.get('status')}, "
+                    f"{emp['name']}, {_tor_dates(t)}) overlaps {other_num} "
+                    f"({o.get('status')}, {o.get('worker_name')}, "
+                    f"{_tor_dates(o)}) on the {t.get('department_name')} team "
+                    f"— approver {t.get('approver_name')} should resolve "
+                    f"before approving.\n"
+                )
+        conflict_block = (
+            f"**Team Scheduling Conflicts Detected:**\n{conflict_lines}\n"
+            if conflict_lines else
+            "**Team Scheduling Conflicts:** none detected for this worker.\n\n"
+        )
+        return (
+            f"**Leave Overview: {emp['name']}** ({emp['id']}, live HRIS)\n\n"
+            f"| Detail | Value |\n|---|---|\n"
+            f"| Title | {emp['title']} ({emp['level']}) |\n"
+            f"| Department | {emp['department']} |\n"
+            f"| Manager | {emp['manager'] or seam} |\n"
+            f"| Hire Date | {emp['hire_date']} |\n"
+            f"| Email | {emp['email']} |\n"
+            f"| Vacation | {seam} (wire your absence module) |\n"
+            f"| Sick Leave | {seam} |\n\n"
+            f"**Time-Off Requests (live HRIS):**\n\n"
+            f"| Request | Type | Dates | Days | Status | Team Conflict |\n"
+            f"|---|---|---|---|---|---|\n"
+            f"{rows}\n"
+            f"{conflict_block}"
+            f"**Time Off Guidelines:**\n"
+            f"- 5+ days: Requires {pol['min_notice_5plus_days']} notice\n"
+            f"- {pol['holiday_period']}\n"
+            f"- Rollover policy: Max {pol['rollover_max']} days carry to next year\n\n"
+            f"Source: [Live Static HRIS — workers + time_off_requests]\n"
+            f"Agents: AskHRAgent"
         )
 
     # ── live leave_balance (tenant directory record) ──────────
@@ -671,6 +803,26 @@ class AskHRAgent(BasicAgent):
                 "Not evaluated; compliance not established—provide request_date "
                 "to check the two-week requirement"
             )
+        parsed_range_start, _ = _parse_time_off_date(schedule_start)
+        parsed_range_end, _ = _parse_time_off_date(schedule_end)
+        live_overlaps = None
+        if parsed_range_start and parsed_range_end:
+            live_overlaps = _live_team_conflicts(
+                parsed_range_start.strftime("%Y-%m-%d"),
+                parsed_range_end.strftime("%Y-%m-%d"),
+            )
+        if live_overlaps is None:
+            conflict_status = "None detected in the offline demo calendar"
+        elif live_overlaps:
+            ex = live_overlaps[0]
+            conflict_status = (
+                f"{len(live_overlaps)} overlapping request(s) in the live "
+                f"HRIS calendar — e.g. {ex.get('request_number')} "
+                f"({ex.get('status')}, {ex.get('worker_name')}, "
+                f"{ex.get('department_name')}, {_tor_dates(ex)})"
+            )
+        else:
+            conflict_status = "None overlap in the live HRIS time-off calendar"
         coverage_notes = params.get("coverage_notes") or "Optional - add project coverage notes for your manager"
         submit = params.get("submit", True)
         req = _submit_time_off(
@@ -709,7 +861,7 @@ class AskHRAgent(BasicAgent):
             f"- {'Sufficient balance' if req['sufficient'] else 'Insufficient balance'}: "
             f"{emp['leave_balance']['vacation']} days available\n"
             f"- Advance notice: {notice_status}\n"
-            f"- Team conflicts: None detected in the offline demo calendar\n"
+            f"- Team conflicts: {conflict_status}\n"
             f"- Blackout dates: None detected\n\n"
             f"Your manager will be notified automatically.\n\n"
             f"**Workflow:** {notification}\n"
@@ -806,6 +958,65 @@ class AskHRAgent(BasicAgent):
         )
 
     # ── benefits_summary ──────────────────────────────────────
+    def _live_benefits_section(self):
+        """Live HRIS open-enrollment activity + compensation bands, with
+        the CRM join where the story connects. '' when offline."""
+        enrollments = _fetch_hris("benefits_enrollments")
+        bands = _fetch_hris("compensation_bands")
+        if not enrollments and not bands:
+            return ""
+        out = ""
+        oe = [e for e in enrollments if e.get("open_enrollment_window")]
+        if oe:
+            rows = ""
+            for e in sorted(oe, key=lambda x: x.get("enrolled_on", "")):
+                rows += (
+                    f"| {e.get('enrollment_number')} | {e.get('worker_name')} "
+                    f"({e.get('worker_id')}) | {e.get('plan_name')} "
+                    f"| {e.get('coverage_level', '').replace('_', ' ')} "
+                    f"| {str(e.get('enrolled_on', ''))[:10]} "
+                    f"| {e.get('status')} |\n"
+                )
+            out += (
+                f"**Open Enrollment Activity (live HRIS — Nov 3-17, 2025 window):**\n\n"
+                f"| Enrollment | Worker | Plan | Coverage | Enrolled | Status |\n"
+                f"|---|---|---|---|---|---|\n"
+                f"{rows}\n"
+            )
+            portal_case = next(
+                (c for c in _fetch_collection("incidents")
+                 if "benefits portal" in str(c.get("title", "")).lower()),
+                None,
+            )
+            if portal_case:
+                state = "resolved" if portal_case.get("statecode") == 1 else "open"
+                out += (
+                    f"**CRM join:** the {len(oe)} pending confirmations above trace "
+                    f"to case {portal_case.get('ticketnumber')} "
+                    f"\"{portal_case.get('title')}\" "
+                    f"({portal_case.get('customeridname')}, {state} "
+                    f"{str(portal_case.get('resolvedon') or portal_case.get('createdon', ''))[:10]}) "
+                    f"— the benefits portal outage the service desk worked.\n\n"
+                )
+        if bands:
+            band_rows = ""
+            for b in bands:
+                band_rows += (
+                    f"| {b.get('level')} | {b.get('name')} "
+                    f"| ${b.get('min_annual', 0):,} | ${b.get('mid_annual', 0):,} "
+                    f"| ${b.get('max_annual', 0):,} | {b.get('workers_in_band', '')} |\n"
+                )
+            out += (
+                f"**Compensation Bands (live HRIS):**\n\n"
+                f"| Level | Band | Min | Mid | Max | Workers |\n"
+                f"|---|---|---|---|---|---|\n"
+                f"{band_rows}\n"
+                f"Compensation questions are answered from band ranges ONLY — "
+                f"per-worker salary does not exist in this HRIS and is an "
+                f"enrichment seam (wire your payroll system).\n\n"
+            )
+        return out
+
     def _benefits_summary(self, key):
         emp = _EMPLOYEES[key]
         lb = emp["leave_balance"]
@@ -827,6 +1038,11 @@ class AskHRAgent(BasicAgent):
         items.append(f"- Equipment Stipend: ${pol['remote_work']['equipment_stipend']:,}")
 
         value_lines = "\n".join(f"- {k.replace('_', ' ').title()}: ${v:,}" for k, v in values.items())
+        live_section = self._live_benefits_section()
+        source = (
+            "All HR Systems + Live Static HRIS" if live_section
+            else "All HR Systems"
+        )
 
         return (
             f"**Benefits Summary: {emp['name']}**\n"
@@ -841,7 +1057,8 @@ class AskHRAgent(BasicAgent):
             f"2. Benefits enrollment changes within 30 days of qualifying event\n"
             f"3. Discuss remote schedule with {emp['manager']}\n\n"
             f"**Open enrollment reminder:** {_POLICIES['health_insurance']['open_enrollment']}.\n\n"
-            f"Source: [All HR Systems]\nAgents: AskHRAgent"
+            + live_section +
+            f"Source: [{source}]\nAgents: AskHRAgent"
         )
 
 
@@ -852,8 +1069,19 @@ if __name__ == "__main__":
     print(agent.perform(operation="leave_balance", employee_name="Jordan Chen"))
     print()
     print("=" * 60)
-    print("LIVE TENANT EMPLOYEE (fetched over HTTP; falls back offline)")
+    print("LIVE HRIS WORKER (fetched over HTTP; falls back to CRM, then offline)")
     print(agent.perform(operation="leave_balance", employee_name="Morgan Ellis"))
+    print()
+    print("=" * 60)
+    print("LIVE HRIS TEAM-CONFLICT CATCH (TOR-1006 pending vs TOR-1005 approved)")
+    print(agent.perform(operation="leave_balance", employee_name="Jamie Ortiz"))
+    print()
+    print("=" * 60)
+    print("LIVE HRIS CONFLICT CHECK ON A NEW REQUEST (overlaps the TOR-1005 window)")
+    print(agent.perform(
+        operation="submit_time_off", employee_name="Jordan Chen",
+        start_date="2026-01-26", end_date="2026-01-28",
+    ))
     print()
     for op in ["submit_time_off", "parental_leave",
                "health_insurance", "remote_work", "benefits_summary"]:
