@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-22T19:35:21.393866+00:00",
+  "generated_at": "2026-07-22T20:13:34.181302+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
@@ -8261,9 +8261,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/power_apps_code_app_agent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "display_name": "PowerAppsCodeApp",
-      "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec and deploys it via the PAC CLI (pac code init / npm build / pac code push), returning the live app URL.",
+      "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
       "author": "kody-w",
       "tags": [
         "power-apps",
@@ -8272,6 +8272,8 @@
         "power-platform",
         "codegen",
         "deploy",
+        "package",
+        "alm",
         "vite",
         "react"
       ],
@@ -8283,15 +8285,15 @@
       ],
       "_file": "agents/@kody-w/power_apps_code_app_agent.py",
       "_install_filename": "rar_kody_w_power_apps_code_app_agent.py",
-      "_sha256": "1e128f94f1ebf5c5a6c3465c7ede399dc6d92c5ef5f287ed5748a53c3708a40a",
+      "_sha256": "18bc9d47a195bad70f8da114bf2abfff2b61e141410aafc490d6877a0c8a5168",
       "_lifecycle": "legacy_active",
-      "_seed": 4920082107970105052,
-      "_size_kb": 28.1,
-      "_lines": 670,
+      "_seed": 4920082107970368948,
+      "_size_kb": 39.6,
+      "_lines": 860,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-22T15:35:38-04:00",
+      "_first_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b",
+      "_latest_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b"
     },
     {
       "schema": "rapp-agent/1.0",

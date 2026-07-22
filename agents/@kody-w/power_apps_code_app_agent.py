@@ -10,6 +10,11 @@ Operations:
   - deploy    build an already-generated app and `pac code push` it
   - full      generate + deploy in one call (default)
   - list      list previously generated code apps and their state
+  - package   emit shareable artifacts for other Power Platform environments:
+              ALWAYS a portable source zip (project + deploy.sh/deploy.ps1 that
+              re-init against the teammate's env), and — when solution_name is
+              given — a native solution .zip via `pac code push --solutionName`
+              + `pac solution export` for standard ALM import
 
 Prototype doctrine: generated apps ship with real end-to-end UI logic and
 mocked seed rows derived from the data entities (localStorage-persisted),
@@ -27,11 +32,11 @@ Deployment prerequisites (reported by `status`, never assumed):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/power_apps_code_app_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "PowerAppsCodeApp",
-    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec and deploys it via the PAC CLI (pac code init / npm build / pac code push), returning the live app URL.",
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
     "author": "kody-w",
-    "tags": ["power-apps", "code-apps", "pac", "power-platform", "codegen", "deploy", "vite", "react"],
+    "tags": ["power-apps", "code-apps", "pac", "power-platform", "codegen", "deploy", "package", "alm", "vite", "react"],
     "category": "core",
     "quality_tier": "community",
     "requires_env": [],
@@ -431,10 +436,13 @@ class PowerAppsCodeApp(BasicAgent):
                 "properties": {
                     "operation": {
                         "type": "string",
-                        "enum": ["status", "generate", "deploy", "full", "list"],
+                        "enum": ["status", "generate", "deploy", "full", "list", "package"],
                         "description": ("status=readiness report; generate=scaffold only; "
                                         "deploy=build+push an existing app; full=generate "
-                                        "then deploy (default); list=show generated apps."),
+                                        "then deploy (default); list=show generated apps; "
+                                        "package=produce shareable zips for other Power "
+                                        "Platform environments (portable source zip always; "
+                                        "plus an ALM solution .zip when solution_name is set)."),
                     },
                     "app_name": {
                         "type": "string",
@@ -485,6 +493,14 @@ class PowerAppsCodeApp(BasicAgent):
                         "description": ("Power Platform environment URL or GUID to deploy into. "
                                         "Omit to use the PAC auth profile's currently selected environment."),
                     },
+                    "solution_name": {
+                        "type": "string",
+                        "description": ("Dataverse solution unique name (no spaces, e.g. "
+                                        "'UnderwriterReferralWorkbench'). With operation=package, "
+                                        "associates the code app via `pac code push --solutionName` "
+                                        "and exports that solution as an importable .zip. Also "
+                                        "honored by deploy/full to push into the solution."),
+                    },
                 },
                 "required": [],
             },
@@ -506,12 +522,17 @@ class PowerAppsCodeApp(BasicAgent):
             if op == "generate":
                 return self._generate(kwargs)[0]
             if op == "deploy":
-                return self._deploy(_slug(app_name), app_name, kwargs.get("environment"))
+                return self._deploy(_slug(app_name), app_name, kwargs.get("environment"),
+                                    kwargs.get("solution_name"))
             if op == "full":
                 gen_report, app_dir = self._generate(kwargs)
-                dep_report = self._deploy(app_dir.name, app_name, kwargs.get("environment"))
+                dep_report = self._deploy(app_dir.name, app_name, kwargs.get("environment"),
+                                          kwargs.get("solution_name"))
                 return gen_report + "\n\n" + dep_report
-            return f"ERROR: unknown operation '{op}'. Use status|generate|deploy|full|list."
+            if op == "package":
+                return self._package(_slug(app_name), app_name,
+                                     kwargs.get("solution_name"), kwargs.get("environment"))
+            return f"ERROR: unknown operation '{op}'. Use status|generate|deploy|full|list|package."
         except Exception as e:
             return f"ERROR: {type(e).__name__}: {e}"
 
@@ -604,7 +625,7 @@ class PowerAppsCodeApp(BasicAgent):
 
     # -------------------------------------------------------------- deploy
 
-    def _deploy(self, slug, app_name, environment=None):
+    def _deploy(self, slug, app_name, environment=None, solution_name=None):
         app_dir = APPS_ROOT / slug
         if not (app_dir / "package.json").exists():
             return (f"ERROR: no generated app at {app_dir}. "
@@ -659,11 +680,180 @@ class PowerAppsCodeApp(BasicAgent):
         if not ok:
             return "\n".join(log)
 
-        ok, out = _run([pac, "code", "push"], cwd=app_dir, timeout=PUSH_TIMEOUT)
+        push_cmd = [pac, "code", "push"] + (["--solutionName", solution_name] if solution_name else [])
+        ok, out = _run(push_cmd, cwd=app_dir, timeout=PUSH_TIMEOUT)
         # Exit code is unreliable; only a returned app URL proves the push landed.
         m = re.search(r"https://\S*powerapps\.com\S*", out)
         ok = ok and m is not None and not re.search(r"(?i)\berror\b|is required|not found", out)
-        log.append(f"6. pac code push: {'OK' if ok else 'FAILED'}\n   {out[-1000:]}")
+        log.append(f"6. pac code push{' --solutionName ' + solution_name if solution_name else ''}: "
+                   f"{'OK' if ok else 'FAILED'}\n   {out[-1000:]}")
         if ok and m:
             log.append(f"\nLIVE APP URL: {m.group(0).rstrip('.,)')}")
+        return "\n".join(log)
+
+    # -------------------------------------------------------------- package
+
+    DEPLOY_SH = """#!/usr/bin/env bash
+# Deploy this Power Apps code app into YOUR environment.
+# Usage: ./deploy.sh [environment-url]   e.g. ./deploy.sh https://yourorg.crm.dynamics.com/
+set -euo pipefail
+ENV_URL="${1:-}"
+command -v pac >/dev/null || { echo "Install PAC CLI: dotnet tool install --global Microsoft.PowerApps.CLI.Tool"; exit 1; }
+command -v npm >/dev/null || { echo "Install Node.js: https://nodejs.org"; exit 1; }
+pac auth who >/dev/null 2>&1 || pac auth create ${ENV_URL:+--environment "$ENV_URL"}
+[ -n "$ENV_URL" ] && pac env select --environment "$ENV_URL"
+rm -f power.config.json   # env-bound; re-init against YOUR environment
+pac code init --displayName "__APP_NAME__"
+npm install --no-audit --no-fund
+npm run build
+pac code push
+"""
+
+    DEPLOY_PS1 = """# Deploy this Power Apps code app into YOUR environment.
+# Usage: ./deploy.ps1 [-EnvironmentUrl https://yourorg.crm.dynamics.com/]
+param([string]$EnvironmentUrl = "")
+$ErrorActionPreference = "Stop"
+if (-not (Get-Command pac -ErrorAction SilentlyContinue)) { throw "Install PAC CLI: dotnet tool install --global Microsoft.PowerApps.CLI.Tool" }
+if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { throw "Install Node.js: https://nodejs.org" }
+try { pac auth who | Out-Null } catch { if ($EnvironmentUrl) { pac auth create --environment $EnvironmentUrl } else { pac auth create } }
+if ($EnvironmentUrl) { pac env select --environment $EnvironmentUrl }
+Remove-Item power.config.json -ErrorAction SilentlyContinue   # env-bound; re-init against YOUR environment
+pac code init --displayName "__APP_NAME__"
+npm install --no-audit --no-fund
+npm run build
+pac code push
+"""
+
+    def _ensure_solution(self, pac, solution_name, app_name):
+        """Create the unmanaged solution in Dataverse if missing (pac has no server-side
+        create verb, so we import a minimal empty solution stub)."""
+        import tempfile
+        import zipfile
+        ok, out = _run([pac, "solution", "list"], timeout=180)
+        if ok and re.search(rf"^\s*{re.escape(solution_name)}\s", out, re.M):
+            return True, "already exists"
+        solution_xml = f"""<ImportExportXml version="9.2.0.0" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <SolutionManifest>
+  <UniqueName>{solution_name}</UniqueName>
+  <LocalizedNames><LocalizedName description="{app_name}" languagecode="1033" /></LocalizedNames>
+  <Descriptions/>
+  <Version>1.0.0.0</Version>
+  <Managed>0</Managed>
+  <Publisher>
+   <UniqueName>rappbrainstem</UniqueName>
+   <LocalizedNames><LocalizedName description="RAPP Brainstem" languagecode="1033" /></LocalizedNames>
+   <Descriptions/>
+   <EMailAddress xsi:nil="true"></EMailAddress>
+   <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+   <CustomizationPrefix>rapp</CustomizationPrefix>
+   <CustomizationOptionValuePrefix>10000</CustomizationOptionValuePrefix>
+   <Addresses/>
+  </Publisher>
+  <RootComponents/>
+  <MissingDependencies/>
+ </SolutionManifest>
+</ImportExportXml>"""
+        customizations_xml = ('<?xml version="1.0" encoding="utf-8"?><ImportExportXml '
+            'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><Entities/><Roles/><Workflows/>'
+            '<FieldSecurityProfiles/><Templates/><EntityMaps/><EntityRelationships/>'
+            '<OrganizationSettings/><optionsets/><CustomControls/><SolutionPluginAssemblies/>'
+            '<EntityDataProviders/><Languages><Language>1033</Language></Languages></ImportExportXml>')
+        content_types = ('<?xml version="1.0" encoding="utf-8"?><Types '
+            'xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            '<Default Extension="xml" ContentType="text/xml" /></Types>')
+        with tempfile.TemporaryDirectory() as td:
+            stub = Path(td) / "stub_solution.zip"
+            with zipfile.ZipFile(stub, "w", zipfile.ZIP_DEFLATED) as z:
+                z.writestr("solution.xml", solution_xml)
+                z.writestr("customizations.xml", customizations_xml)
+                z.writestr("[Content_Types].xml", content_types)
+            ok, out = _run([pac, "solution", "import", "--path", str(stub)], timeout=300)
+        if not ok or re.search(r"(?i)\berror\b", out):
+            return False, out[-500:]
+        return True, "created via empty-solution import"
+
+    def _package(self, slug, app_name, solution_name=None, environment=None):
+        import zipfile
+        app_dir = APPS_ROOT / slug
+        if not (app_dir / "package.json").exists():
+            return f"ERROR: no generated app at {app_dir}. Run operation=generate (or full) first."
+        log = [f"PACKAGING '{app_name}' from {app_dir}"]
+        desktop = Path.home() / "Desktop"
+        out_dir = desktop if desktop.is_dir() else app_dir.parent
+
+        # Portable source zip — teammates re-init against their own environment.
+        (app_dir / "deploy.sh").write_text(self.DEPLOY_SH.replace("__APP_NAME__", app_name))
+        (app_dir / "deploy.sh").chmod(0o755)
+        (app_dir / "deploy.ps1").write_text(self.DEPLOY_PS1.replace("__APP_NAME__", app_name))
+        (app_dir / "DEPLOY.md").write_text(
+            f"# {app_name} — Power Apps code app (portable)\n\n"
+            "Prereqs: PAC CLI, Node.js, a Power Platform environment with the **Code Apps** "
+            "feature enabled (admin center > environment > Settings > Product > Features), "
+            "Power Apps license.\n\n"
+            "```bash\n./deploy.sh https://yourorg.crm.dynamics.com/   # macOS/Linux\n"
+            "./deploy.ps1 -EnvironmentUrl https://yourorg.crm.dynamics.com/   # Windows\n```\n\n"
+            "The script signs in, re-inits `power.config.json` against YOUR environment, "
+            "builds, and pushes — then prints your live app URL.\n")
+        src_zip = out_dir / f"{slug}-source.zip"
+        EXCLUDE_DIRS = {"node_modules", "dist", ".git"}
+        EXCLUDE_FILES = {"power.config.json"}  # env-bound; deploy script re-creates it
+        with zipfile.ZipFile(src_zip, "w", zipfile.ZIP_DEFLATED) as z:
+            for p in sorted(app_dir.rglob("*")):
+                rel = p.relative_to(app_dir)
+                if p.is_dir() or set(rel.parts) & EXCLUDE_DIRS or rel.name in EXCLUDE_FILES:
+                    continue
+                z.write(p, Path(slug) / rel)
+        n_files = len(zipfile.ZipFile(src_zip).namelist())
+        log.append(f"1. Portable source zip: {src_zip} ({n_files} files, "
+                   f"{src_zip.stat().st_size // 1024} KB) — unzip, then ./deploy.sh <env-url>")
+
+        # Native solution zip — standard ALM import path.
+        if solution_name:
+            pac = _pac()
+            if not pac:
+                log.append("2. Solution export SKIPPED: pac CLI not found.")
+                return "\n".join(log)
+            if environment:
+                _run([pac, "env", "select", "--environment", environment], timeout=90)
+            if not (app_dir / "dist").exists():
+                ok, out = _run([_npm(), "run", "build"], cwd=app_dir, timeout=BUILD_TIMEOUT)
+                if not ok:
+                    log.append(f"2. Build FAILED before solution push — {out[-400:]}")
+                    return "\n".join(log)
+            ok, why = self._ensure_solution(pac, solution_name, app_name)
+            log.append(f"2. Solution '{solution_name}': {'OK — ' + why if ok else 'FAILED — ' + why}")
+            if not ok:
+                return "\n".join(log)
+            ok, out = _run([pac, "code", "push", "--solutionName", solution_name],
+                           cwd=app_dir, timeout=PUSH_TIMEOUT)
+            url = re.search(r"https://\S*powerapps\.com\S*", out)
+            if not (ok and url):
+                log.append(f"2b. pac code push --solutionName: FAILED — {out[-500:]}")
+                return "\n".join(log)
+            sol_zip = out_dir / f"{slug}-solution.zip"
+            ok, out = _run([pac, "solution", "export", "--name", solution_name,
+                            "--path", str(sol_zip), "--overwrite"], timeout=300)
+            if not (ok and sol_zip.exists()):
+                log.append(f"3. pac solution export FAILED — {out[-500:]}")
+                return "\n".join(log)
+            with zipfile.ZipFile(sol_zip) as z:
+                n_components = z.read("solution.xml").decode("utf-8", "ignore").count("<RootComponent ")
+            if n_components == 0:
+                # Some environments/CLI versions don't yet register code apps as solution
+                # components (no solutioncomponent row) — an empty solution zip would be
+                # a lie, so remove it and say exactly what happened.
+                sol_zip.unlink()
+                log.append("3. Solution zip SKIPPED: this environment did not register the code "
+                           "app as a solution component (pac code push --solutionName produced no "
+                           "solutioncomponent row), so the export would be an empty shell. "
+                           "Share the portable source zip instead — teammates deploy with one "
+                           "command into their own environment.")
+            else:
+                log.append(f"3. Solution zip: {sol_zip} ({max(1, sol_zip.stat().st_size // 1024)} KB, "
+                           f"{n_components} component{'s' if n_components != 1 else ''}) — import via "
+                           "make.powerapps.com > Solutions > Import, or "
+                           "`pac solution import --path <zip>` in the target environment.")
+        else:
+            log.append("2. No solution_name given — skipped the ALM solution zip "
+                       "(pass solution_name to also export an importable solution).")
         return "\n".join(log)
