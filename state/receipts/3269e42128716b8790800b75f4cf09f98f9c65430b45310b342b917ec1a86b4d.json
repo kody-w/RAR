@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/cart_abandonment_recovery",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f74e09c3d9a4fbe53fca3697ab5d147b766ded273023ef10507f94b1278e0dc2"
+ },
+ "canonical_path": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_3269e42128716b8790800b75f4cf09f98f9c65430b45310b342b917ec1a86b4d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_3269e42128716b8790800b75",
+ "revision_id": "3269e42128716b8790800b75f4cf09f98f9c65430b45310b342b917ec1a86b4d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.2.0"
+}

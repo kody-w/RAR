@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/software_competitive_intel",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "962b38fd4f10ef48c6eb7a3e0076ccc0f7f53126e5e6dffa4da292bfc3721baa"
+ },
+ "canonical_path": "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_0ab838a212e2ec53017852af7e2e03f1699a60b391e2b3bbcc11e1addcc59284",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_0ab838a212e2ec53017852af",
+ "revision_id": "0ab838a212e2ec53017852af7e2e03f1699a60b391e2b3bbcc11e1addcc59284",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}

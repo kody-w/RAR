@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/foia_request_assistant",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "18fd8a77430845666b98e622f50fea1c65cff93a06ca536d7193f8d1a4917eb1"
+ },
+ "canonical_path": "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_6fca138bd7bb8dda128eb0cf633ddb21c824101d9fbb9e7f7cd52456f6c75aab",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_6fca138bd7bb8dda128eb0cf",
+ "revision_id": "6fca138bd7bb8dda128eb0cf633ddb21c824101d9fbb9e7f7cd52456f6c75aab",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@borg/borg_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f"
+ },
+ "canonical_path": "agents/@borg/borg_agent.py.card",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_f6c10e89c35717b0094970b097feae079db8b7ea445149d51f2b8d4e9c7732e9",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_f6c10e89c35717b0094970b0",
+ "revision_id": "f6c10e89c35717b0094970b097feae079db8b7ea445149d51f2b8d4e9c7732e9",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}

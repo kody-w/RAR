@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/sales_chat",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "db0e860853560f566ee7107dad1928d1e5c14256fd8f3074ccd0957d7b6be10c"
+ },
+ "canonical_path": "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_282fe4e0401cb1a7a1b6a4a1c532b34f95e1faeb240524f3c8e0e41748132f05",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_282fe4e0401cb1a7a1b6a4a1",
+ "revision_id": "282fe4e0401cb1a7a1b6a4a1c532b34f95e1faeb240524f3c8e0e41748132f05",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}

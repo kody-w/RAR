@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/voice_to_crm_servicenow",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6807893885fd3e7b809cd39ffc4f1728a0c40f3bf88a23994b7908bb080815f1"
+ },
+ "canonical_path": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_319c2c6a25a8a479f5328a571658d2fa8a787384a9265728d4f1a8b5ccb02715",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_319c2c6a25a8a479f5328a57",
+ "revision_id": "319c2c6a25a8a479f5328a571658d2fa8a787384a9265728d4f1a8b5ccb02715",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}

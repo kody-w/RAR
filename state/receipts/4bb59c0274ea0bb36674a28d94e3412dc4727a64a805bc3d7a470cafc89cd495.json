@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/chain_composer_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18"
+ },
+ "canonical_path": "agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_4bb59c0274ea0bb36674a28d94e3412dc4727a64a805bc3d7a470cafc89cd495",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_4bb59c0274ea0bb36674a28d",
+ "revision_id": "4bb59c0274ea0bb36674a28d94e3412dc4727a64a805bc3d7a470cafc89cd495",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.0.1"
+}

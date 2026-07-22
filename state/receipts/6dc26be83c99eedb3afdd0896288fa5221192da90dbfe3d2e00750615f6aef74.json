@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@rapp/exec_brief_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d"
+ },
+ "canonical_path": "agents/@rapp/exec_brief_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_6dc26be83c99eedb3afdd0896288fa5221192da90dbfe3d2e00750615f6aef74",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "official",
+ "request_id": "req_6dc26be83c99eedb3afdd089",
+ "revision_id": "6dc26be83c99eedb3afdd0896288fa5221192da90dbfe3d2e00750615f6aef74",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.2.2"
+}

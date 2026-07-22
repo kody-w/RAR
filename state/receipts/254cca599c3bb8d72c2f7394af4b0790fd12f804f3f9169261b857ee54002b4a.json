@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-21"
+ },
+ "action": "agent.create",
+ "agent": "@aibast-agents-library/procurement_support",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f561ff7f0606ca4bae91a3a6bd8875ba03f83c8c600eb0519834ca12321ad43b"
+ },
+ "canonical_path": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-22T01:05:34.168967+00:00",
+ "id": "rar_254cca599c3bb8d72c2f7394af4b0790fd12f804f3f9169261b857ee54002b4a",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_254cca599c3bb8d72c2f7394",
+ "revision_id": "254cca599c3bb8d72c2f7394af4b0790fd12f804f3f9169261b857ee54002b4a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "maintainer bulk migration 2026-07-21: docs truth pass + live-tenant template upgrade, committed directly and receipted retroactively; see commits 026f18b and bfb52cb"
+ },
+ "version": "1.1.0"
+}
