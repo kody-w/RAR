@@ -4275,7 +4275,15 @@ function toggleGated() {
 // Combined score: issue-based votes + GitHub Discussion positive
 // reactions. Negative reactions never subtract (they're not counted
 // at all by scripts/discussion_ratings.py).
-function score(a) { return ((votes.agents?.[a.name]?.score) || 0) + ghUp(a); }
+// The headline count is the exact signal the Upvote button writes: 👍 reactions
+// on the agent's Discussion post. Legacy issue-pipeline votes (state/votes.json)
+// stay as history but no longer get summed into a displayed number — otherwise
+// the count beside the button disagrees with the "N on GitHub" pill next to it.
+// Curator mode, when a visitor explicitly turns it on, overlays its heuristic
+// instead, and every render site labels that number CURATOR.
+function score(a) {
+  return window._syntheticActive ? ((votes.agents?.[a.name]?.score) || 0) : ghUp(a);
+}
 function ghUp(a) { return ghRatings.agents?.[a.name]?.upvotes || 0; }
 function ghComments(a) { return ghRatings.agents?.[a.name]?.comments || 0; }
 // Downloads = 👍 on the thread's download-tally comment (unique installers);
