@@ -639,12 +639,6 @@
       "url": "https://github.com/kody-w/RAR/discussions/310",
       "number": 310
     },
-    "@borg/hacker_news_agent": {
-      "upvotes": 0,
-      "comments": 0,
-      "url": "https://github.com/kody-w/RAR/discussions/311",
-      "number": 311
-    },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
       "comments": 0,
@@ -722,12 +716,6 @@
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/324",
       "number": 324
-    },
-    "@howardh/borg_agent": {
-      "upvotes": 0,
-      "comments": 0,
-      "url": "https://github.com/kody-w/RAR/discussions/325",
-      "number": 325
     },
     "@howardh/cardsmith_agent": {
       "upvotes": 0,
@@ -962,6 +950,12 @@
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/364",
       "number": 364
+    },
+    "@kody-w/power_apps_code_app_agent": {
+      "upvotes": 0,
+      "comments": 0,
+      "url": "https://github.com/kody-w/RAR/discussions/408",
+      "number": 408
     },
     "@kody-w/predictive_asset_maintenance_intelligence": {
       "upvotes": 0,
