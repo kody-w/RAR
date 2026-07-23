@@ -2478,7 +2478,7 @@
   <div class="header-actions" id="header-actions">
     <a href="index.html" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px;text-decoration:none;display:inline-block" title="Switch to simple browse view">Simple</a>
     <button onclick="startTour()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px" title="Take the guided tour">Tour</button>
-    <button class="demo-toggle active" id="demo-toggle" onclick="toggleDemoMode()" title="Toggle between virtual artist in residence and human reviews"><span class="demo-dot"></span>Curator</button>
+    <button class="demo-toggle" id="demo-toggle" onclick="toggleDemoMode()" title="Off by default: real GitHub upvotes and installs. Toggle on to overlay the curator heuristic (labelled CURATOR, derived from manifest metadata — not from users)."><span class="demo-dot"></span>Curator</button>
     <div class="cart-toggle" onclick="toggleCart()" id="cart-toggle" title="Agent Cart">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" style="vertical-align:middle"><path d="M0,2 l2,0 l3,14 h12 l3,-10 h-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="19" r="2" fill="currentColor" opacity="0.5"/><circle cx="18" cy="19" r="2" fill="currentColor" opacity="0.5"/></svg>
       <span class="cart-badge" id="cart-badge" style="display:none">0</span>
@@ -3810,37 +3810,78 @@ async function fetchJSON(url) {
   catch { return null; }
 }
 
-// Register a download: 👍 the agent thread's download-tally comment
-// (sentinel <!-- rar:download-tally -->). One reaction per GitHub user =
-// unique installers. Silent no-op without a signed-in token — metrics
-// must never break a download.
+// ─── Real metrics: both signals are authenticated GitHub reactions ───
+// Upvote  = 👍 on the agent's Discussion post.
+// Install = 👍 on that thread's download-tally comment (<!-- rar:download-tally -->).
+// GitHub enforces one reaction per user per subject, so both counts are
+// unique-user counts by construction — nothing here can be inflated locally.
+async function ghGraphQL(query, variables) {
+  const res = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables }),
+  });
+  const payload = await res.json();
+  if (payload.errors) throw new Error(payload.errors[0]?.message || 'graphql');
+  return payload.data || {};
+}
+
+const THREAD_QUERY =
+  'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) { nodes {' +
+  ' ... on Discussion { id number url title repository { nameWithOwner }' +
+  ' reactionGroups { content viewerHasReacted reactors { totalCount } }' +
+  ' comments(first: 5) { nodes { id body reactionGroups { content viewerHasReacted reactors { totalCount } } } }' +
+  ' } } } }';
+
+// Resolve an agent's Discussion thread + the viewer's own reaction state.
+async function ghAgentThread(name) {
+  const data = await ghGraphQL(THREAD_QUERY, { q: `repo:${REPO} in:title "${name}"` });
+  const node = (data.search?.nodes || []).find(n =>
+    n && n.title === name && n.repository?.nameWithOwner === REPO);
+  if (!node) return null;
+  const grp = (groups, content) => (groups || []).find(g => g.content === content);
+  const tally = (node.comments?.nodes || []).find(c =>
+    (c.body || '').includes('<!-- rar:download-tally -->'));
+  const up = grp(node.reactionGroups, 'THUMBS_UP');
+  return {
+    id: node.id, url: node.url, number: node.number,
+    viewerUpvoted: !!up?.viewerHasReacted,
+    upvotes: up?.reactors?.totalCount || 0,
+    tallyId: tally?.id || null,
+    viewerInstalled: !!grp(tally?.reactionGroups, 'THUMBS_UP')?.viewerHasReacted,
+  };
+}
+
+const ADD_REACTION = 'mutation($id: ID!) { addReaction(input: {subjectId: $id,' +
+  ' content: THUMBS_UP}) { reaction { content } } }';
+const REMOVE_REACTION = 'mutation($id: ID!) { removeReaction(input: {subjectId: $id,' +
+  ' content: THUMBS_UP}) { reaction { content } } }';
+
+// Register an install. Silent no-op when signed out — metrics never break a download.
 async function trackDownload(name) {
   try {
     if (!ghToken) return;
-    const gql = async (query, variables) => {
-      const res = await fetch('https://api.github.com/graphql', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, variables }),
-      });
-      const payload = await res.json();
-      if (payload.errors) throw new Error(payload.errors[0]?.message || 'graphql');
-      return payload.data || {};
-    };
-    const data = await gql(
-      'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) {' +
-      ' nodes { ... on Discussion { id title repository { nameWithOwner }' +
-      ' comments(first: 5) { nodes { id body } } } } } }',
-      { q: `repo:${REPO} in:title "${name}"` });
-    const node = (data.search?.nodes || []).find(n =>
-      n && n.title === name && n.repository?.nameWithOwner === REPO);
-    const tally = (node?.comments?.nodes || []).find(c =>
-      (c.body || '').includes('<!-- rar:download-tally -->'));
-    if (!tally) return;
-    await gql(
-      'mutation($id: ID!) { addReaction(input: {subjectId: $id, content: THUMBS_UP})' +
-      ' { reaction { content } } }', { id: tally.id });
+    const t = await ghAgentThread(name);
+    if (!t?.tallyId || t.viewerInstalled) return;   // already counted for this user
+    await ghGraphQL(ADD_REACTION, { id: t.tallyId });
+    bumpGhRatings(name, 'downloads', +1);
   } catch {}
+}
+
+// True when this signed-in viewer holds a 👍 on the agent's Discussion post.
+// Mirrored locally on vote; the authoritative totals come from the daily snapshot.
+function viewerUpvoted(name) {
+  try { return !!localStorage.getItem(`rar_upvoted:${name}`); } catch { return false; }
+}
+
+// Local mirror of the snapshot so a fresh vote/install shows immediately;
+// state/discussion_ratings.json is re-snapshotted by refresh-ratings.yml daily.
+function bumpGhRatings(name, field, delta) {
+  if (!ghRatings.agents) ghRatings.agents = {};
+  const e = ghRatings.agents[name] || (ghRatings.agents[name] =
+    { upvotes: 0, downloads: 0, comments: 0, score: 0, url: '' });
+  e[field] = Math.max(0, (e[field] || 0) + delta);
+  e.score = 2 * (e.upvotes || 0) + (e.downloads || 0);
 }
 
 // Download agent.py via fetch+blob (cross-origin download attribute doesn't work)
@@ -4301,7 +4342,7 @@ function agentCard(a) {
   const s = score(a);
   const tier = a.quality_tier || 'community';
   const isStub = a.type === 'stub';
-  const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
+  const voted = ghUser && viewerUpvoted(a.name) ? 'up' : null;
   const stubRepo = isStub ? (a._source?.repo || '') : '';
   const lockedTitle = isStub
     ? `Gated agent — bytes hosted at ${stubRepo}. Install via brainstem requires read access to that repo.`
@@ -4467,7 +4508,7 @@ function renderLeaderboard() {
   document.getElementById('leaderboard-container').innerHTML = h;
 }
 
-let _lbTab = 'community';
+let _lbTab = 'critic';
 function switchLbTab(tab) {
   _lbTab = tab;
   document.querySelectorAll('.lb-tab').forEach(el => {
@@ -4723,7 +4764,7 @@ function openAgent(name) {
   const s = score(a);
   const ar = reviews.agents?.[a.name] || [];
   const avg = ar.length ? (ar.reduce((s, r) => s + r.rating, 0) / ar.length).toFixed(1) : null;
-  const voted = ghUser && votes.agents?.[a.name]?.voters?.[ghUser.login];
+  const voted = ghUser && viewerUpvoted(a.name) ? 'up' : null;
   const tier = a.quality_tier || 'community';
   const env = (a.requires_env || []).length > 0
     ? a.requires_env.map(e => `<code style="background:var(--surface2);color:var(--orange);padding:2px 8px;border-radius:4px;font-size:.85rem">${esc(e)}</code>`).join(' ')
@@ -4822,7 +4863,7 @@ function openAgent(name) {
       })() : ''}
       ${true ? `<div class="modal-vote">
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
-        <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : '') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not rated yet</span>'}</span>
+        <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : ' <span style="font-size:.5rem;color:var(--text-muted);font-weight:400;vertical-align:middle">UPVOTES</span>') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">No upvotes yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
         <a class="vote-btn" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" title="One thread per agent on GitHub Discussions. React with a thumbs-up to upvote (counted daily); reply to discuss. ⬇ counts unique installers (thumbs-up on the thread's download-tally comment).">${GH_THUMB_SVG} ${ghUp(a)} on GitHub${ghDownloads(a) > 0 ? ` &middot; &#8595; ${ghDownloads(a)} installs` : ''} &middot; ${GH_COMMENT_SVG} Discuss${ghComments(a) > 0 ? ` (${ghComments(a)})` : ''}</a>
       </div>` : ''}
@@ -5654,25 +5695,35 @@ async function wbAddToLocal() {
 // ═══════════════════════════════════════════════════════
 function quickVote(n) { doVote(n, 'up'); }
 
+// An upvote is a 👍 reaction on the agent's GitHub Discussion post — the same
+// mechanism as the install tally, so both numbers are unique-user counts that
+// GitHub itself enforces. It lands immediately (no CI round-trip) and is
+// toggleable: voting again removes it, and 'down' simply withdraws your 👍,
+// because negative reactions never contribute to a score
+// (scripts/discussion_ratings.py::POSITIVE_REACTIONS).
 async function doVote(agent, dir) {
   if (!ghUser) { loginWithGitHub(); return; }
-  const targetRepo = getTargetRepo(agent);
-  const body = JSON.stringify({ action: 'vote', payload: { agent, direction: dir } }, null, 2);
   try {
-    const res = await fetch(`https://api.github.com/repos/${targetRepo}/issues`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: `[RAR] vote: ${agent}`, body: '```json\n' + body + '\n```', labels: ['rar-action'] })
-    });
-    if (res.ok) {
-      if (!votes.agents[agent]) votes.agents[agent] = { up: 0, down: 0, score: 0, voters: {} };
-      const v = votes.agents[agent], prev = v.voters[ghUser.login];
-      if (prev === dir) { delete v.voters[ghUser.login]; v[dir]--; }
-      else { if (prev) v[prev]--; v.voters[ghUser.login] = dir; v[dir]++; }
-      v.score = v.up - v.down;
-      renderAgents(); showToast(`Vote recorded for ${agent}`, 'success');
-    } else { showToast('Vote failed', 'error'); }
-  } catch (e) { showToast('Network error', 'error'); }
+    const t = await ghAgentThread(agent);
+    if (!t) {
+      showToast('No discussion thread for this agent yet — it is seeded daily', 'error');
+      return;
+    }
+    const wantUp = dir === 'up' ? !t.viewerUpvoted : false;
+    if (wantUp === t.viewerUpvoted) {
+      showToast(t.viewerUpvoted ? 'Already upvoted' : 'You have no upvote to withdraw', 'info');
+      return;
+    }
+    await ghGraphQL(wantUp ? ADD_REACTION : REMOVE_REACTION, { id: t.id });
+    bumpGhRatings(agent, 'upvotes', wantUp ? +1 : -1);
+    if (!ghRatings.agents[agent].url) ghRatings.agents[agent].url = t.url;
+    try { localStorage.setItem(`rar_upvoted:${agent}`, wantUp ? '1' : ''); } catch {}
+    renderAgents();
+    if (typeof renderLeaderboard === 'function') renderLeaderboard();
+    showToast(wantUp ? `Upvoted ${agent} on GitHub` : `Upvote withdrawn`, 'success');
+  } catch (e) {
+    showToast(`Vote failed: ${e.message || 'network error'}`, 'error');
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -16094,12 +16145,16 @@ function syncDemoToggle() {
   if (btn) btn.classList.toggle('active', !!window._syntheticActive);
 }
 
-// Auto-activate Community (synthetic) data on load so leaderboard is never empty
-if (location.hash === '#critic') {
+// Real metrics are the default. Every number a visitor sees is now an
+// authenticated GitHub act — a 👍 reaction on the agent's Discussion post
+// (upvote) or on its download-tally comment (install). The curator layer
+// (a heuristic derived from manifest metadata, not from users) is opt-in
+// via the header toggle or #curator, and is always labelled CURATOR when on.
+if (location.hash === '#curator') {
   history.replaceState(null, '', location.pathname + location.search);
-  init().then(() => { handleCardHash(); });
-} else {
   init().then(() => { handleCardHash(); ensureSyntheticData(); renderAgents(); syncDemoToggle(); });
+} else {
+  init().then(() => { handleCardHash(); syncDemoToggle(); });
 }
 loadSharedCart();
 updateCartUI();

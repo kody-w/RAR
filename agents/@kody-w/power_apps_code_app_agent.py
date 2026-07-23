@@ -29,10 +29,13 @@ Deployment prerequisites (reported by `status`, never assumed):
   - the target environment must have Code Apps enabled (admin setting)
 """
 
+from __future__ import annotations
+
+
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/power_apps_code_app_agent",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "PowerAppsCodeApp",
     "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
     "author": "kody-w",
@@ -43,8 +46,6 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
-
-from __future__ import annotations
 
 import json
 import os

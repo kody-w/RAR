@@ -86,10 +86,15 @@ def extract_manifest(py_path: Path) -> dict:
     try:
         source = py_path.read_text(encoding="utf-8")
         tree = ast.parse(source)
+        # ast.parse is not the same bar as import. Misplaced __future__
+        # imports (and a few other compile-time-only errors) parse cleanly
+        # and then explode the moment a brainstem loads the agent, so the
+        # registry must clear the stricter gate before publishing.
+        compile(source, str(py_path), "exec")
     except SyntaxError as e:
         print(f"  ⚠ Syntax error in {py_path}: {e}")
         return None
-    
+
     for node in ast.walk(tree):
         if isinstance(node, ast.Assign):
             for target in node.targets:

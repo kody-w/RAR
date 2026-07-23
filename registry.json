@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-23T16:06:45.031895+00:00",
+  "generated_at": "2026-07-23T16:26:37.368592+00:00",
   "stats": {
-    "total_agents": 200,
+    "total_agents": 201,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -8127,7 +8127,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/power_apps_code_app_agent",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "display_name": "PowerAppsCodeApp",
       "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
       "author": "kody-w",
@@ -8151,9 +8151,9 @@
       ],
       "_file": "agents/@kody-w/power_apps_code_app_agent.py",
       "_install_filename": "rar_kody_w_power_apps_code_app_agent.py",
-      "_sha256": "18bc9d47a195bad70f8da114bf2abfff2b61e141410aafc490d6877a0c8a5168",
+      "_sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10",
       "_lifecycle": "notarized",
-      "_receipt": "rar_4666d767ddf39501a0d05acf400315ed0cd80754911d3bfddc2802a16d49e745",
+      "_receipt": "rar_0c4e8e88118787381a6bbb50c01e21fe40d4be05e5b68233eb132ac4ec52dc4a",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -8171,7 +8171,7 @@
       },
       "_seed": 4920082107970368948,
       "_size_kb": 39.6,
-      "_lines": 860,
+      "_lines": 861,
       "_has_card": false,
       "_added_at": "2026-07-22T15:35:38-04:00",
       "_first_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b",
@@ -8334,6 +8334,61 @@
       "_first_commit_sha": "3cfcc226736dc1ab5cbe7186c18297d2bedb7310",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "971cdd30f77190ddf07aaaef8c83be68d71fa90b66ebb4fdac64d87a6d3b4273"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/rapp_skill_bridge_agent",
+      "version": "1.0.0",
+      "display_name": "RAPP Skill Bridge",
+      "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
+      "author": "kody-w",
+      "tags": [
+        "skill",
+        "plugin",
+        "claude-code",
+        "converter",
+        "bridge",
+        "interop",
+        "determinism",
+        "roundtrip"
+      ],
+      "category": "pipeline",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_capabilities": [
+        "compile_exec"
+      ],
+      "_uses_exec": true,
+      "_file": "agents/@kody-w/rapp_skill_bridge_agent.py",
+      "_install_filename": "rar_kody_w_rapp_skill_bridge_agent.py",
+      "_sha256": "5c7a01a52a96ba4d432ed76c254334c2d8b80296dd0cc639a42b0c8cd55f841f",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_ea3683c32436a77d6878f05aae634930da7a0641ec76e9d86a23b9bd8fd93371",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 13439628186326413100,
+      "_size_kb": 53.9,
+      "_lines": 1352,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",

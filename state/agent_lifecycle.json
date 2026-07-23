@@ -1740,14 +1740,14 @@
     },
     "@kody-w/power_apps_code_app_agent": {
       "canonical_path": "agents/@kody-w/power_apps_code_app_agent.py",
-      "latest_receipt": "rar_4666d767ddf39501a0d05acf400315ed0cd80754911d3bfddc2802a16d49e745",
+      "latest_receipt": "rar_0c4e8e88118787381a6bbb50c01e21fe40d4be05e5b68233eb132ac4ec52dc4a",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "18bc9d47a195bad70f8da114bf2abfff2b61e141410aafc490d6877a0c8a5168",
+      "sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10",
       "status": "active",
-      "updated_at": "2026-07-22T22:02:29.413103+00:00",
-      "version": "1.1.0"
+      "updated_at": "2026-07-23T16:23:30.160133+00:00",
+      "version": "1.1.1"
     },
     "@kody-w/predictive_asset_maintenance_intelligence": {
       "canonical_path": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
@@ -1781,6 +1781,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/rapp_skill_bridge_agent": {
+      "canonical_path": "agents/@kody-w/rapp_skill_bridge_agent.py",
+      "latest_receipt": "rar_ea3683c32436a77d6878f05aae634930da7a0641ec76e9d86a23b9bd8fd93371",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "5c7a01a52a96ba4d432ed76c254334c2d8b80296dd0cc639a42b0c8cd55f841f",
+      "status": "active",
+      "updated_at": "2026-07-23T16:23:30.160133+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/rapp_x_notary_canary_agent": {
       "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
@@ -2433,5 +2444,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-23T15:59:27.428854+00:00"
+  "updated_at": "2026-07-23T16:23:30.160133+00:00"
 }
