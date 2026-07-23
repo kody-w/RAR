@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-22T22:04:55.997294+00:00",
+  "generated_at": "2026-07-23T01:30:43.038462+00:00",
   "stats": {
-    "total_agents": 202,
+    "total_agents": 200,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 9,
@@ -46,22 +46,7 @@
       "workflow"
     ]
   },
-  "duplicates": [
-    {
-      "display_name": "Borg",
-      "agents": [
-        "@borg/borg_agent",
-        "@howardh/borg_agent"
-      ]
-    },
-    {
-      "display_name": "Hacker News",
-      "agents": [
-        "@borg/hacker_news_agent",
-        "@rapp/hacker_news"
-      ]
-    }
-  ],
+  "duplicates": [],
   "agents": [
     {
       "schema": "rapp-agent/1.0",
@@ -5566,51 +5551,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@borg/hacker_news_agent",
-      "version": "1.0.0",
-      "display_name": "Hacker News",
-      "description": "Fetches the top N stories from Hacker News.",
-      "author": "RAPP",
-      "tags": [
-        "starter",
-        "news",
-        "http"
-      ],
-      "category": "integrations",
-      "quality_tier": "official",
-      "requires_env": [],
-      "example_call": "What are the top 5 stories on Hacker News right now?",
-      "_file": "agents/@borg/hacker_news_agent.py",
-      "_install_filename": "rar_borg_hacker_news_agent.py",
-      "_sha256": "e83a236ebf1ff5281e3f4630b4da885ace9ea68c1777cf4ebf8879b1954b31bb",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_2c3875126364db1b60752f38b3e41851195c80715fea3442f10dbeed02315413",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": null,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "content_sha256",
-          "registry_build",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 15428262073888806756,
-      "_size_kb": 4.2,
-      "_lines": 115,
-      "_has_card": true,
-      "_added_at": "2026-07-01T15:15:15-04:00",
-      "_first_commit_sha": "93b35d7eba4c70b67b78d4b56bac8f7ca977dc8b",
-      "_latest_commit_sha": "93b35d7eba4c70b67b78d4b56bac8f7ca977dc8b",
-      "_card_sha256": "09c64ce0475e89585bfd7e82fdb5f72480b4677ad7c3e9dcd8ab4ce83f11c059"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@discreetRappers/agent_generator_agent",
       "version": "1.0.1",
       "display_name": "AgentGenerator",
@@ -6264,84 +6204,6 @@
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "01de16e5e5b86e0eb0104d071f13539f38c02ec85f3ea1130a758346f410da1e"
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@howardh/borg_agent",
-      "version": "1.1.0",
-      "display_name": "Borg",
-      "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
-      "author": "Howard",
-      "tags": [
-        "core",
-        "analysis",
-        "github",
-        "web",
-        "assimilation"
-      ],
-      "category": "core",
-      "quality_tier": "verified",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "_file": "agents/@howardh/borg_agent.py.card",
-      "_install_filename": "rar_howardh_borg_agent.py",
-      "_sha256": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_85459e23d6128d3ad89134f05e77675fcfb69ccfb66b619a13c50e8ce4c38ad2",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": null,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "content_sha256",
-          "registry_build",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 6693527250417623987,
-      "_size_kb": 39.8,
-      "_lines": 990,
-      "_has_card": true,
-      "_added_at": "2026-05-24T21:45:25-04:00",
-      "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_card": {
-        "name": "Borg",
-        "title": "The Assimilator",
-        "mana_cost": "{2}{U}{B}",
-        "colors": [
-          "U",
-          "B"
-        ],
-        "type_line": "Creature \u2014 Agent Assimilator",
-        "rarity": "mythic",
-        "power": 6,
-        "toughness": 4,
-        "abilities": [
-          {
-            "keyword": "Assimilate",
-            "cost": "{T}",
-            "text": "Target GitHub repository or URL becomes part of the collective. Create a structured knowledge report."
-          },
-          {
-            "keyword": "Adaptive Analysis",
-            "cost": "",
-            "text": "When Borg assimilates, it detects the tech stack and maps 40+ framework patterns."
-          }
-        ],
-        "flavor_text": "\"Resistance is futile. Your codebase will be added to our own. Your architectural distinctiveness will be catalogued.\" \u2014Borg Collective Directive 7.1",
-        "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-borg\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"glow-borg\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-borg)\"/><g filter=\"url(#glow-borg)\"><rect x=\"55\" y=\"55\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"2\" rx=\"4\"/><rect x=\"70\" y=\"70\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1.5\" rx=\"2\"/><line x1=\"55\" y1=\"100\" x2=\"145\" y2=\"100\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"100\" y1=\"55\" x2=\"100\" y2=\"145\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><polygon points=\"100,25 135,45 135,85 100,105 65,85 65,45\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1\" opacity=\"0.4\"/><polygon points=\"100,95 135,115 135,155 100,175 65,155 65,115\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.4\"/><circle cx=\"100\" cy=\"100\" r=\"15\" fill=\"#4a9eff\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"6\" fill=\"#8b5cf6\" opacity=\"0.9\"/><circle cx=\"85\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"85\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/></g></svg>",
-        "set_code": "HOLO",
-        "artist": "Howard"
-      },
-      "_card_sha256": "fd52a2a0fe2072465b0e0d1c053db868ab6637ade4af844d400340586fd16709"
     },
     {
       "schema": "rapp-agent/1.0",

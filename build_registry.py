@@ -1153,14 +1153,20 @@ def build_registry():
     print(f"  Publishers: {', '.join(sorted(publishers))}")
 
     if duplicates:
-        print(f"\nWARNING {len(duplicates)} duplicate display names:")
+        # Duplicate display names ship a confusing store UI (two identical rows
+        # in every agent picker) — hard failure, not a warning.
+        print(f"\nERROR {len(duplicates)} duplicate display names (build blocked):")
         for dn, a1, a2 in duplicates:
             print(f"  - \"{dn}\": {a1} vs {a2}")
+        print("  Fix: delete the clone or rename its display_name — one agent per concern.")
 
     if errors:
         print(f"\nWARNING {len(errors)} validation errors:")
         for err in errors:
             print(f"  - {err}")
+        return 1
+
+    if duplicates:
         return 1
 
     return 0
