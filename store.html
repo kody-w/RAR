@@ -3810,6 +3810,39 @@ async function fetchJSON(url) {
   catch { return null; }
 }
 
+// Register a download: 👍 the agent thread's download-tally comment
+// (sentinel <!-- rar:download-tally -->). One reaction per GitHub user =
+// unique installers. Silent no-op without a signed-in token — metrics
+// must never break a download.
+async function trackDownload(name) {
+  try {
+    if (!ghToken) return;
+    const gql = async (query, variables) => {
+      const res = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, variables }),
+      });
+      const payload = await res.json();
+      if (payload.errors) throw new Error(payload.errors[0]?.message || 'graphql');
+      return payload.data || {};
+    };
+    const data = await gql(
+      'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) {' +
+      ' nodes { ... on Discussion { id title repository { nameWithOwner }' +
+      ' comments(first: 5) { nodes { id body } } } } } }',
+      { q: `repo:${REPO} in:title "${name}"` });
+    const node = (data.search?.nodes || []).find(n =>
+      n && n.title === name && n.repository?.nameWithOwner === REPO);
+    const tally = (node?.comments?.nodes || []).find(c =>
+      (c.body || '').includes('<!-- rar:download-tally -->'));
+    if (!tally) return;
+    await gql(
+      'mutation($id: ID!) { addReaction(input: {subjectId: $id, content: THUMBS_UP})' +
+      ' { reaction { content } } }', { id: tally.id });
+  } catch {}
+}
+
 // Download agent.py via fetch+blob (cross-origin download attribute doesn't work)
 async function downloadAgentPy(name) {
   const a = allAgents.find(x => x.name === name);
@@ -3824,9 +3857,11 @@ async function downloadAgentPy(name) {
     link.download = a._file.split('/').pop() || `${a.name.split('/')[1]}.py`;
     link.click();
     URL.revokeObjectURL(url);
+    trackDownload(name);
   } catch (e) {
     // Fallback: open in new tab
     window.open(`${RAW}/${a._file}`, '_blank');
+    trackDownload(name);
   }
 }
 
@@ -5854,6 +5889,7 @@ async function downloadCart() {
         const code = await res.text();
         const filename = a._file.split('/').pop();
         files.push({ name: filename, content: code, agent: a });
+        trackDownload(a.name);
       }
     } catch {}
   }
