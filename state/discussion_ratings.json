@@ -1461,8 +1461,8 @@
     },
     "@rapp/hacker_news": {
       "upvotes": 0,
-      "downloads": 0,
-      "score": 0,
+      "downloads": 1,
+      "score": 1,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/388",
       "number": 388
