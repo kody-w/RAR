@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-23"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rapp_skill_bridge_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5"
+ },
+ "canonical_path": "agents/@kody-w/rapp_skill_bridge_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-23T16:50:14.275547+00:00",
+ "id": "rar_2fc1715341adfad009953a492e86674f0e8f05705ed20a286ee71c19bf694d50",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "5c7a01a52a96ba4d432ed76c254334c2d8b80296dd0cc639a42b0c8cd55f841f",
+  "receipt": "rar_ea3683c32436a77d6878f05aae634930da7a0641ec76e9d86a23b9bd8fd93371",
+  "version": "1.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_2fc1715341adfad009953a49",
+ "revision_id": "2fc1715341adfad009953a492e86674f0e8f05705ed20a286ee71c19bf694d50",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "RappSkillBridge v1.0.1: hardens the foreign-skill importer after adversarial review \u2014 foreign text now only ever repr'd into data positions (no docstring/string-literal injection), YAML frontmatter escapes embedded quotes, tool-schema/runtime-name lifted from the agent class only, write paths fail closed on traversal, frontmatter end-detection respects block scalars"
+ },
+ "version": "1.0.1"
+}

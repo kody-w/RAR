@@ -1784,14 +1784,14 @@
     },
     "@kody-w/rapp_skill_bridge_agent": {
       "canonical_path": "agents/@kody-w/rapp_skill_bridge_agent.py",
-      "latest_receipt": "rar_ea3683c32436a77d6878f05aae634930da7a0641ec76e9d86a23b9bd8fd93371",
+      "latest_receipt": "rar_2fc1715341adfad009953a492e86674f0e8f05705ed20a286ee71c19bf694d50",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "5c7a01a52a96ba4d432ed76c254334c2d8b80296dd0cc639a42b0c8cd55f841f",
+      "sha256": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5",
       "status": "active",
-      "updated_at": "2026-07-23T16:23:30.160133+00:00",
-      "version": "1.0.0"
+      "updated_at": "2026-07-23T16:50:14.275547+00:00",
+      "version": "1.0.1"
     },
     "@kody-w/rapp_x_notary_canary_agent": {
       "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
@@ -2444,5 +2444,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-23T16:23:30.160133+00:00"
+  "updated_at": "2026-07-23T16:50:14.275547+00:00"
 }

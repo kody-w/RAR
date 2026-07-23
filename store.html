@@ -2538,12 +2538,12 @@
   <!-- Leaderboard -->
   <div class="panel" id="panel-leaderboard">
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
-      <h2 id="lb-tab-community" class="lb-tab active" onclick="switchLbTab('community')" style="cursor:pointer">Curator</h2>
-      <h2 id="lb-tab-critic" class="lb-tab" onclick="switchLbTab('critic')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Human</h2>
+      <h2 id="lb-tab-critic" class="lb-tab active" onclick="switchLbTab('critic')" style="cursor:pointer">Human</h2>
+      <h2 id="lb-tab-community" class="lb-tab" onclick="switchLbTab('community')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Curator</h2>
       <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
       <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
-    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Curated by our virtual artist in residence — take with a grain of salt</p>
+    <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Human reviews — real ratings from authenticated users</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
@@ -4769,6 +4769,19 @@ function buildInstallBlock(a, rawUrl, repo) {
 function openAgent(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
+  // Hydrate this viewer's real upvote state from GitHub (the localStorage
+  // marker is per-device, so it can be stale on another browser). When the
+  // server disagrees, correct the marker and re-render the highlight.
+  if (ghUser && ghToken) {
+    ghAgentThread(name).then(t => {
+      if (!t) return;
+      const cur = !!viewerUpvoted(name);
+      if (cur !== t.viewerUpvoted) {
+        try { localStorage.setItem(`rar_upvoted:${name}`, t.viewerUpvoted ? '1' : ''); } catch {}
+        if (document.querySelector('.modal')) openAgent(name);
+      }
+    }).catch(() => {});
+  }
   const s = score(a);
   const ar = reviews.agents?.[a.name] || [];
   const avg = ar.length ? (ar.reduce((s, r) => s + r.rating, 0) / ar.length).toFixed(1) : null;
@@ -9850,6 +9863,7 @@ async function dispatchHail() {
       const link = document.createElement('a');
       link.href = rawUrl; link.download = 'agent.py';
       document.body.appendChild(link); link.click(); document.body.removeChild(link);
+      trackDownload(a.name);
     }
     showToast(`Downloaded ${name}`, 'success');
     closeHail();
@@ -13892,6 +13906,7 @@ async function airdropPy(name) {
         files: [new File([blob], fileName, { type: 'text/x-python' })],
       });
       showToast(`Shared ${fileName}`, 'success');
+      trackDownload(name);
       return;
     } catch (e) {
       if (e.name === 'AbortError') { showToast('Share cancelled', 'info'); return; }
@@ -13907,6 +13922,7 @@ async function airdropPy(name) {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  trackDownload(name);
   showToast(`Downloaded ${fileName} — send it to someone!`, 'success');
 }
 
