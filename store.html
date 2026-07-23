@@ -2510,6 +2510,7 @@
         <option value="name">A-Z</option>
         <option value="newest">Newest</option>
         <option value="popular">Most Voted</option>
+        <option value="downloads">Most Downloaded</option>
         <option value="gh_rated">Top Reactions (GitHub)</option>
         <option value="rating">Top Rated</option>
         <option value="verified">Verified First</option>
@@ -4201,6 +4202,10 @@ function toggleGated() {
 function score(a) { return ((votes.agents?.[a.name]?.score) || 0) + ghUp(a); }
 function ghUp(a) { return ghRatings.agents?.[a.name]?.upvotes || 0; }
 function ghComments(a) { return ghRatings.agents?.[a.name]?.comments || 0; }
+// Downloads = 👍 on the thread's download-tally comment (unique installers);
+// ghScore = the snapshot's combined rank (2*upvotes + downloads).
+function ghDownloads(a) { return ghRatings.agents?.[a.name]?.downloads || 0; }
+function ghScore(a) { return ghRatings.agents?.[a.name]?.score ?? (2 * ghUp(a) + ghDownloads(a)); }
 function ghDiscussionUrl(a) {
   return ghRatings.agents?.[a.name]?.url || `https://github.com/${REPO}/discussions`;
 }
@@ -4242,7 +4247,8 @@ function renderAgents() {
     f.sort((a, b) => b._searchScore - a._searchScore);
   } else {
     if (sort === 'popular') f.sort((a, b) => score(b) - score(a));
-    else if (sort === 'gh_rated') f.sort((a, b) => ghUp(b) - ghUp(a) || ghComments(b) - ghComments(a) || score(b) - score(a));
+    else if (sort === 'gh_rated') f.sort((a, b) => ghScore(b) - ghScore(a) || ghComments(b) - ghComments(a) || score(b) - score(a));
+    else if (sort === 'downloads') f.sort((a, b) => ghDownloads(b) - ghDownloads(a) || ghScore(b) - ghScore(a));
     else if (sort === 'name') f.sort((a, b) => a.display_name.localeCompare(b.display_name));
     else if (sort === 'rating') f.sort((a, b) => rating(b) - rating(a));
     else if (sort === 'newest') f.sort((a, b) => (b._lines || 0) - (a._lines || 0));
@@ -4301,7 +4307,7 @@ function agentCard(a) {
           ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAPP registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAPP</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}
-          ${ghUp(a) > 0 || ghComments(a) > 0 ? `<a class="vote-chip" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub Discussion — upvote with a reaction, comment to discuss" style="text-decoration:none">${GH_THUMB_SVG} ${ghUp(a)}${ghComments(a) > 0 ? ` &middot; ${GH_COMMENT_SVG} ${ghComments(a)}` : ''}</a>` : ''}` : ''}
+          ${ghUp(a) > 0 || ghComments(a) > 0 || ghDownloads(a) > 0 ? `<a class="vote-chip" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub Discussion — upvote with a reaction, comment to discuss; ⬇ = unique installers" style="text-decoration:none">${GH_THUMB_SVG} ${ghUp(a)}${ghDownloads(a) > 0 ? ` &middot; &#8595; ${ghDownloads(a)}` : ''}${ghComments(a) > 0 ? ` &middot; ${GH_COMMENT_SVG} ${ghComments(a)}` : ''}</a>` : ''}` : ''}
         </div>
       </div>
     </div>`;
@@ -4783,7 +4789,7 @@ function openAgent(name) {
         <button class="vote-btn ${voted === 'up' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','up')">&#9650; Upvote</button>
         <span class="vote-score">${s > 0 ? s + (window._syntheticActive ? ' <span style="font-size:.5rem;color:#bc8cff;font-weight:400;vertical-align:middle">CURATOR</span>' : '') : '<span style="font-size:.82rem;color:var(--text-muted);font-weight:400">Not rated yet</span>'}</span>
         <button class="vote-btn ${voted === 'down' ? 'active' : ''}" onclick="doVote('${esc(a.name)}','down')">&#9660;</button>
-        <a class="vote-btn" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" title="One thread per agent on GitHub Discussions. React with a thumbs-up to upvote (counted daily); reply to discuss.">${GH_THUMB_SVG} ${ghUp(a)} on GitHub &middot; ${GH_COMMENT_SVG} Discuss${ghComments(a) > 0 ? ` (${ghComments(a)})` : ''}</a>
+        <a class="vote-btn" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" title="One thread per agent on GitHub Discussions. React with a thumbs-up to upvote (counted daily); reply to discuss. ⬇ counts unique installers (thumbs-up on the thread's download-tally comment).">${GH_THUMB_SVG} ${ghUp(a)} on GitHub${ghDownloads(a) > 0 ? ` &middot; &#8595; ${ghDownloads(a)} installs` : ''} &middot; ${GH_COMMENT_SVG} Discuss${ghComments(a) > 0 ? ` (${ghComments(a)})` : ''}</a>
       </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
       <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Get agent.py'}</h3>

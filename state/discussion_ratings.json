@@ -5,1200 +5,1600 @@
   "agents": {
     "@aibast-agents-library/account_intelligence": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/205",
       "number": 205
     },
     "@aibast-agents-library/account_intelligence_orchestrator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/206",
       "number": 206
     },
     "@aibast-agents-library/account_messaging": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/207",
       "number": 207
     },
     "@aibast-agents-library/account_risk_assessment": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/208",
       "number": 208
     },
     "@aibast-agents-library/acquisition_support": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/209",
       "number": 209
     },
     "@aibast-agents-library/action_prioritization": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/210",
       "number": 210
     },
     "@aibast-agents-library/activity_gap": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/211",
       "number": 211
     },
     "@aibast-agents-library/ai_customer_assistant": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/212",
       "number": 212
     },
     "@aibast-agents-library/ask_hr": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/213",
       "number": 213
     },
     "@aibast-agents-library/asset_maintenance_forecast": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/214",
       "number": 214
     },
     "@aibast-agents-library/building_permit_processing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/215",
       "number": 215
     },
     "@aibast-agents-library/bulk_crm_data_generator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/216",
       "number": 216
     },
     "@aibast-agents-library/care_gap_closure": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/217",
       "number": 217
     },
     "@aibast-agents-library/cart_abandonment_recovery": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/218",
       "number": 218
     },
     "@aibast-agents-library/citizen_service_request": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/219",
       "number": 219
     },
     "@aibast-agents-library/claims_processing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/220",
       "number": 220
     },
     "@aibast-agents-library/client_health_score": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/221",
       "number": 221
     },
     "@aibast-agents-library/clinical_notes_summarizer": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/222",
       "number": 222
     },
     "@aibast-agents-library/competitive_intelligence": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/223",
       "number": 223
     },
     "@aibast-agents-library/contract_risk_review": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/224",
       "number": 224
     },
     "@aibast-agents-library/cross_selling": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/225",
       "number": 225
     },
     "@aibast-agents-library/customer_360": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/226",
       "number": 226
     },
     "@aibast-agents-library/customer_360_speech": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/227",
       "number": 227
     },
     "@aibast-agents-library/customer_loyalty_rewards": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/228",
       "number": 228
     },
     "@aibast-agents-library/customer_sentiment_churn": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/229",
       "number": 229
     },
     "@aibast-agents-library/deal_competitor_intel": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/230",
       "number": 230
     },
     "@aibast-agents-library/deal_health_score": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/231",
       "number": 231
     },
     "@aibast-agents-library/deal_progression": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/232",
       "number": 232
     },
     "@aibast-agents-library/deal_risk_assessment": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/233",
       "number": 233
     },
     "@aibast-agents-library/deal_stakeholder_engagement": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/234",
       "number": 234
     },
     "@aibast-agents-library/deal_tracking": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/235",
       "number": 235
     },
     "@aibast-agents-library/dynamics_365_connector": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/236",
       "number": 236
     },
     "@aibast-agents-library/email_drafting": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/237",
       "number": 237
     },
     "@aibast-agents-library/emission_tracking": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/238",
       "number": 238
     },
     "@aibast-agents-library/energy_regulatory_reporting": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/239",
       "number": 239
     },
     "@aibast-agents-library/federal_grants_oversight": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/240",
       "number": 240
     },
     "@aibast-agents-library/field_service_dispatch": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/241",
       "number": 241
     },
     "@aibast-agents-library/financial_advisor_copilot": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/242",
       "number": 242
     },
     "@aibast-agents-library/find_accurate_models": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/243",
       "number": 243
     },
     "@aibast-agents-library/foia_request_assistant": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/244",
       "number": 244
     },
     "@aibast-agents-library/fraud_detection_alert": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/245",
       "number": 245
     },
     "@aibast-agents-library/fs_customer_onboarding": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/246",
       "number": 246
     },
     "@aibast-agents-library/fs_regulatory_compliance": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/247",
       "number": 247
     },
     "@aibast-agents-library/general_ask_hr": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/248",
       "number": 248
     },
     "@aibast-agents-library/identify_discounts": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/249",
       "number": 249
     },
     "@aibast-agents-library/inventory_rebalancing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/250",
       "number": 250
     },
     "@aibast-agents-library/inventory_visibility": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/251",
       "number": 251
     },
     "@aibast-agents-library/it_helpdesk": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/252",
       "number": 252
     },
     "@aibast-agents-library/it_ticket_management": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/253",
       "number": 253
     },
     "@aibast-agents-library/license_renewal_expansion": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/254",
       "number": 254
     },
     "@aibast-agents-library/loan_origination_assistant": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/255",
       "number": 255
     },
     "@aibast-agents-library/maintenance_scheduling": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/256",
       "number": 256
     },
     "@aibast-agents-library/meeting_prep": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/257",
       "number": 257
     },
     "@aibast-agents-library/mission_reporting_assistant": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/258",
       "number": 258
     },
     "@aibast-agents-library/next_best_action": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/259",
       "number": 259
     },
     "@aibast-agents-library/omnichannel_engagement": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/260",
       "number": 260
     },
     "@aibast-agents-library/one_click_crm_intake": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/261",
       "number": 261
     },
     "@aibast-agents-library/order_status_communication": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/262",
       "number": 262
     },
     "@aibast-agents-library/patient_intake": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/263",
       "number": 263
     },
     "@aibast-agents-library/permit_license_management": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/264",
       "number": 264
     },
     "@aibast-agents-library/personalized_marketing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/265",
       "number": 265
     },
     "@aibast-agents-library/personalized_shopping_assistant": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/266",
       "number": 266
     },
     "@aibast-agents-library/pipeline_velocity": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/267",
       "number": 267
     },
     "@aibast-agents-library/portfolio_rebalancing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/268",
       "number": 268
     },
     "@aibast-agents-library/prior_authorization": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/269",
       "number": 269
     },
     "@aibast-agents-library/procurement_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/270",
       "number": 270
     },
     "@aibast-agents-library/procurement_support": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/271",
       "number": 271
     },
     "@aibast-agents-library/product_feedback_synthesizer": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/272",
       "number": 272
     },
     "@aibast-agents-library/product_reference": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/273",
       "number": 273
     },
     "@aibast-agents-library/production_line_optimization": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/274",
       "number": 274
     },
     "@aibast-agents-library/proposal_copilot": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/275",
       "number": 275
     },
     "@aibast-agents-library/proposal_generation": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/276",
       "number": 276
     },
     "@aibast-agents-library/regulatory_compliance_fed": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/277",
       "number": 277
     },
     "@aibast-agents-library/resource_utilization": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/278",
       "number": 278
     },
     "@aibast-agents-library/returns_complaints_resolution": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/279",
       "number": 279
     },
     "@aibast-agents-library/returns_exchange": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/280",
       "number": 280
     },
     "@aibast-agents-library/revenue_forecast": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/281",
       "number": 281
     },
     "@aibast-agents-library/sales_chat": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/282",
       "number": 282
     },
     "@aibast-agents-library/sales_coach": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/283",
       "number": 283
     },
     "@aibast-agents-library/sales_qualification": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/284",
       "number": 284
     },
     "@aibast-agents-library/sales_simulation": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/285",
       "number": 285
     },
     "@aibast-agents-library/sharepoint_document_extractor": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/286",
       "number": 286
     },
     "@aibast-agents-library/slg_grants_management": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/287",
       "number": 287
     },
     "@aibast-agents-library/software_competitive_intel": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/288",
       "number": 288
     },
     "@aibast-agents-library/software_customer_onboarding": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/289",
       "number": 289
     },
     "@aibast-agents-library/speech_to_crm": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/290",
       "number": 290
     },
     "@aibast-agents-library/staff_credentialing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/291",
       "number": 291
     },
     "@aibast-agents-library/stakeholder_intelligence": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/292",
       "number": 292
     },
     "@aibast-agents-library/stalled_deal_detection": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/293",
       "number": 293
     },
     "@aibast-agents-library/store_associate_copilot": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/294",
       "number": 294
     },
     "@aibast-agents-library/supplier_risk_monitoring": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/295",
       "number": 295
     },
     "@aibast-agents-library/supply_chain_disruption_alert": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/296",
       "number": 296
     },
     "@aibast-agents-library/support_ticket_resolution": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/297",
       "number": 297
     },
     "@aibast-agents-library/time_entry_billing": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/298",
       "number": 298
     },
     "@aibast-agents-library/triage_bot": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/299",
       "number": 299
     },
     "@aibast-agents-library/underwriting_support": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/300",
       "number": 300
     },
     "@aibast-agents-library/utility_billing_assistance": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/301",
       "number": 301
     },
     "@aibast-agents-library/voice_to_crm_d365": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/302",
       "number": 302
     },
     "@aibast-agents-library/voice_to_crm_email": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/303",
       "number": 303
     },
     "@aibast-agents-library/voice_to_crm_servicenow": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/304",
       "number": 304
     },
     "@aibast-agents-library/wealth_insights_generator": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/305",
       "number": 305
     },
     "@aibast-agents-library/win_loss_analysis": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/306",
       "number": 306
     },
     "@aibast-agents-library/win_probability": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/307",
       "number": 307
     },
     "@aibast-agents-library/workforce_clearance_onboarding": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/308",
       "number": 308
     },
     "@bill/neuron_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/309",
       "number": 309
     },
     "@borg/borg_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/310",
       "number": 310
     },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/312",
       "number": 312
     },
     "@discreetRappers/agent_transpiler_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/313",
       "number": 313
     },
     "@discreetRappers/architecture_diagram_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/314",
       "number": 314
     },
     "@discreetRappers/copilot_studio_transpiler_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/315",
       "number": 315
     },
     "@discreetRappers/demo_script_generator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/316",
       "number": 316
     },
     "@discreetRappers/dynamics_crud_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/317",
       "number": 317
     },
     "@discreetRappers/email_drafting_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/318",
       "number": 318
     },
     "@discreetRappers/powerpoint_generator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/319",
       "number": 319
     },
     "@discreetRappers/project_tracker_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/320",
       "number": 320
     },
     "@discreetRappers/rapp_pipeline_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/321",
       "number": 321
     },
     "@discreetRappers/sales_assistant_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/322",
       "number": 322
     },
     "@discreetRappers/scripted_demo_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/323",
       "number": 323
     },
     "@discreetRappers/sharepoint_contract_analysis_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/324",
       "number": 324
     },
     "@howardh/cardsmith_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/326",
       "number": 326
     },
     "@howardh/chief_of_staff_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/327",
       "number": 327
     },
     "@howardh/markdown_to_slides_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/328",
       "number": 328
     },
     "@howardh/prompt_to_video_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/329",
       "number": 329
     },
     "@howardh/recon_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/330",
       "number": 330
     },
     "@howardh/training_quest_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/331",
       "number": 331
     },
     "@howardh/tuftelove_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/332",
       "number": 332
     },
     "@howardh/vaultmind_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/333",
       "number": 333
     },
     "@kody-w/agent_team_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/334",
       "number": 334
     },
     "@kody-w/agent_workbench": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/335",
       "number": 335
     },
     "@kody-w/arena_compete_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/336",
       "number": 336
     },
     "@kody-w/bakeoff_factory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/337",
       "number": 337
     },
     "@kody-w/bond_rhythm_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/338",
       "number": 338
     },
     "@kody-w/chain_composer_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/339",
       "number": 339
     },
     "@kody-w/commons_life_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/340",
       "number": 340
     },
     "@kody-w/commons_show_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/341",
       "number": 341
     },
     "@kody-w/connected_solution_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/342",
       "number": 342
     },
     "@kody-w/context_memory_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/343",
       "number": 343
     },
     "@kody-w/copilot_studio_deploy_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/344",
       "number": 344
     },
     "@kody-w/copilot_studio_forge_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/345",
       "number": 345
     },
     "@kody-w/copilot_studio_probe_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/346",
       "number": 346
     },
     "@kody-w/deal_desk_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/347",
       "number": 347
     },
     "@kody-w/double_jump_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/348",
       "number": 348
     },
     "@kody-w/estate_factory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/349",
       "number": 349
     },
     "@kody-w/example_private": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/350",
       "number": 350
     },
     "@kody-w/ez_sharpen_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/351",
       "number": 351
     },
     "@kody-w/flight_recorder": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/352",
       "number": 352
     },
     "@kody-w/git_warehouse_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/353",
       "number": 353
     },
     "@kody-w/github_agent_library_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/354",
       "number": 354
     },
     "@kody-w/hello_world_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/355",
       "number": 355
     },
     "@kody-w/install_rappter_distro_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/356",
       "number": 356
     },
     "@kody-w/launch_to_public_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/357",
       "number": 357
     },
     "@kody-w/legal_helper": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/358",
       "number": 358
     },
     "@kody-w/manage_memory_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/359",
       "number": 359
     },
     "@kody-w/matrix_arena_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/360",
       "number": 360
     },
     "@kody-w/microsoft_deck_studio_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/361",
       "number": 361
     },
     "@kody-w/neuron_swarm": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/362",
       "number": 362
     },
     "@kody-w/perpetual_loop_factory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/363",
       "number": 363
     },
     "@kody-w/plant_seed_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/364",
       "number": 364
     },
     "@kody-w/power_apps_code_app_agent": {
       "upvotes": 0,
+      "downloads": 1,
+      "score": 1,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/408",
       "number": 408
     },
     "@kody-w/predictive_asset_maintenance_intelligence": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/365",
       "number": 365
     },
     "@kody-w/rapp_leviathan_factory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/366",
       "number": 366
     },
     "@kody-w/rapp_sdk_builder": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/367",
       "number": 367
     },
     "@kody-w/rapp_x_notary_canary_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/368",
       "number": 368
     },
     "@kody-w/rappter_engine_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/369",
       "number": 369
     },
     "@kody-w/rappterbook_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/370",
       "number": 370
     },
     "@kody-w/rappterpedia_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/371",
       "number": 371
     },
     "@kody-w/rar_remote_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/372",
       "number": 372
     },
     "@kody-w/recon_deck_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/373",
       "number": 373
     },
     "@kody-w/second_life_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/374",
       "number": 374
     },
     "@kody-w/transcript2prototype": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/375",
       "number": 375
     },
     "@kody-w/twin_egg_hatcher": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/376",
       "number": 376
     },
     "@kody-w/twin_me": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/377",
       "number": 377
     },
     "@kody-w/vibe_coding_loop": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/378",
       "number": 378
     },
     "@kody-w/workiq": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/379",
       "number": 379
     },
     "@rapp/basic_agent": {
       "upvotes": 1,
+      "downloads": 0,
+      "score": 2,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/380",
       "number": 380
     },
     "@rapp/commons_post": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/381",
       "number": 381
     },
     "@rapp/drift": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/382",
       "number": 382
     },
     "@rapp/drift_watcher": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/383",
       "number": 383
     },
     "@rapp/egg_hatcher": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/384",
       "number": 384
     },
     "@rapp/estate_outbound": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/385",
       "number": 385
     },
     "@rapp/exec_brief_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/386",
       "number": 386
     },
     "@rapp/fleet_commander": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/387",
       "number": 387
     },
     "@rapp/hacker_news": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/388",
       "number": 388
     },
     "@rapp/learn_new": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/389",
       "number": 389
     },
     "@rapp/moment_factory_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/390",
       "number": 390
     },
     "@rapp/ping_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/391",
       "number": 391
     },
     "@rapp/pitch_deck_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/392",
       "number": 392
     },
     "@rapp/rapp": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/393",
       "number": 393
     },
     "@rapp/rapp_publish_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/394",
       "number": 394
     },
     "@rapp/rapplication_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/395",
       "number": 395
     },
     "@rapp/rar_steward": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/396",
       "number": 396
     },
     "@rapp/store_navigator_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/397",
       "number": 397
     },
     "@rapp/swarm_factory_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/398",
       "number": 398
     },
     "@rapp/twin_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/399",
       "number": 399
     },
     "@rapp/vibe_builder_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/400",
       "number": 400
     },
     "@rarbookworld/bookfactory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/401",
       "number": 401
     },
     "@rarbookworld/momentfactory": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/402",
       "number": 402
     },
     "@wildhaven/bellows_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/403",
       "number": 403
     },
     "@wildhaven/ceo_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/404",
       "number": 404
     },
     "@wildhaven/penumbra_agent": {
       "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
       "comments": 0,
       "url": "https://github.com/kody-w/RAR/discussions/405",
       "number": 405

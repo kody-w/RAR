@@ -37,6 +37,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Every thread needs its download-tally comment (clients thumbs-up it
+      # on install). Idempotent and capped like seed; the cron drains backlog.
+      - name: Ensure download-tally comments
+        run: python scripts/discussion_ratings.py tally --limit 80
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # Non-fatal by design: any API problem leaves the snapshot
       # unchanged rather than failing the run or erasing real counts.
       - name: Fetch ratings snapshot

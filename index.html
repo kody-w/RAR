@@ -765,7 +765,7 @@ function card(a) {
           <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by ${esc(a.author)}</span>
         </span>
-        ${(ghRatings.agents?.[a.name]?.upvotes || 0) > 0 ? `<a href="${esc(ghRatings.agents[a.name].url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="cat-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="GitHub Discussion upvotes — react with a thumbs-up to vote">${THUMB_SVG} ${ghRatings.agents[a.name].upvotes}</a>` : ''}
+        ${((ghRatings.agents?.[a.name]?.upvotes || 0) > 0 || (ghRatings.agents?.[a.name]?.downloads || 0) > 0) ? `<a href="${esc(ghRatings.agents[a.name].url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="cat-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="GitHub Discussion — thumbs-up the post to upvote; ⬇ = unique installers">${THUMB_SVG} ${ghRatings.agents[a.name].upvotes || 0}${(ghRatings.agents[a.name].downloads || 0) > 0 ? ` &middot; &#8595;${ghRatings.agents[a.name].downloads}` : ''}</a>` : ''}
         ${cartBtn}
       </div>
     </div>`;

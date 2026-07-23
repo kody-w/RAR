@@ -510,7 +510,67 @@ def install_agent(name: str, output_dir: str = "agents") -> str:
     dest = Path(output_dir) / install_name
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(content, encoding="utf-8")
+    track_download(name)  # best-effort download metric; never blocks an install
     return str(dest)
+
+
+def track_download(name: str) -> bool:
+    """Register a download: THUMBS_UP the agent's download-tally comment.
+
+    Every agent has a Discussion thread in kody-w/RAR; its pinned tally
+    comment (marked ``<!-- rar:download-tally -->``) collects one 👍 per
+    installing GitHub user, so the registry can rank agents by unique
+    installs alongside upvotes. Entirely best-effort: no token, no
+    network, or RAR_NO_TRACK=1 → silent no-op. Returns True if counted.
+    """
+    if os.environ.get("RAR_NO_TRACK"):
+        return False
+    token = _get_token()
+    if not token:
+        return False
+
+    def gql(query: str, variables: dict) -> dict:
+        req = urllib.request.Request(
+            "https://api.github.com/graphql",
+            data=json.dumps({"query": query, "variables": variables}).encode(),
+            headers={"Authorization": f"Bearer {token}",
+                     "Content-Type": "application/json",
+                     "User-Agent": "rapp-sdk"},
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            payload = json.loads(resp.read().decode())
+        if payload.get("errors"):
+            raise RuntimeError(payload["errors"][0].get("message", "?"))
+        return payload.get("data") or {}
+
+    try:
+        data = gql(
+            'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) {'
+            ' nodes { ... on Discussion { id title repository { nameWithOwner }'
+            ' comments(first: 5) { nodes { id body } } } } } }',
+            {"q": f'repo:{REPO} in:title "{name}"'},
+        )
+        node = next(
+            (n for n in (data.get("search") or {}).get("nodes", [])
+             if n and n.get("title") == name
+             and n.get("repository", {}).get("nameWithOwner") == REPO),
+            None,
+        )
+        if not node:
+            return False
+        tally = next(
+            (c for c in ((node.get("comments") or {}).get("nodes") or [])
+             if "<!-- rar:download-tally -->" in (c.get("body") or "")),
+            None,
+        )
+        if not tally:
+            return False
+        gql('mutation($id: ID!) { addReaction(input: {subjectId: $id,'
+            ' content: THUMBS_UP}) { reaction { content } } }',
+            {"id": tally["id"]})
+        return True
+    except Exception:
+        return False  # metrics must never break an install
 
 
 # =============================================================================

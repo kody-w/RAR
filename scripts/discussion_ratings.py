@@ -15,10 +15,23 @@ The pattern:
   * A build-time snapshot (``state/discussion_ratings.json``) is what
     the web store reads. A live vote shows up on the next refresh.
 
+Downloads are the second metric: every agent thread carries one pinned
+"download tally" comment (marked with an HTML comment sentinel). A client
+that downloads the agent.py reacts THUMBS_UP on that tally comment — one
+reaction per GitHub user, so the count is spam-proof and means "unique
+installers". ``fetch`` snapshots both metrics plus a combined rank score
+(``score = 2*upvotes + downloads``) for storefront ranking.
+
 Subcommands:
   seed   Create missing Discussions for registry agents (idempotent,
          capped per run to stay under content-creation rate limits).
-  fetch  Snapshot reaction/comment counts into state/discussion_ratings.json.
+         New threads get their download-tally comment immediately.
+  tally  Ensure the download-tally comment exists on existing threads
+         (idempotent, capped; --only <agent> targets a single thread).
+  fetch  Snapshot reaction/comment/download counts into
+         state/discussion_ratings.json.
+  track  Register one download: add a THUMBS_UP to an agent's tally
+         comment (what clients call after downloading the agent.py).
 
 Both are intentionally NON-FATAL: a missing token, network error, or
 missing category results in a warning and an unchanged snapshot —
@@ -66,18 +79,71 @@ POSITIVE_REACTIONS = frozenset(
     {"THUMBS_UP", "HEART", "HOORAY", "ROCKET", "LAUGH"}
 )
 
+# Sentinel embedded in each thread's download-tally comment. Clients react
+# THUMBS_UP on the comment carrying this marker to register a download.
+TALLY_MARKER = "<!-- rar:download-tally -->"
+
+TALLY_BODY = (
+    TALLY_MARKER
+    + "\n### 📥 Download tally\n\n"
+    "Installers react :+1: **on this comment** when the agent.py is "
+    "downloaded — one reaction per GitHub user, so the count reads as "
+    "*unique installers*. Upvote the agent by reacting on the top post, "
+    "not here."
+)
+
 DISCUSSIONS_QUERY = """
 query ($owner: String!, $name: String!, $after: String) {
   repository(owner: $owner, name: $name) {
     discussions(first: 100, after: $after) {
       pageInfo { hasNextPage endCursor }
       nodes {
+        id
         number
         title
         url
         category { name }
-        comments { totalCount }
+        comments(first: 5) {
+          totalCount
+          nodes {
+            id
+            body
+            reactionGroups { content reactors { totalCount } }
+          }
+        }
         reactionGroups { content reactors { totalCount } }
+      }
+    }
+  }
+}
+"""
+
+ADD_COMMENT_MUTATION = """
+mutation ($discussionId: ID!, $body: String!) {
+  addDiscussionComment(input: {discussionId: $discussionId, body: $body}) {
+    comment { id }
+  }
+}
+"""
+
+ADD_REACTION_MUTATION = """
+mutation ($subjectId: ID!) {
+  addReaction(input: {subjectId: $subjectId, content: THUMBS_UP}) {
+    reaction { content }
+  }
+}
+"""
+
+SEARCH_DISCUSSION_QUERY = """
+query ($q: String!) {
+  search(query: $q, type: DISCUSSION, first: 10) {
+    nodes {
+      ... on Discussion {
+        id
+        number
+        title
+        repository { nameWithOwner }
+        comments(first: 5) { nodes { id body } }
       }
     }
   }
@@ -98,7 +164,7 @@ mutation ($repoId: ID!, $catId: ID!, $title: String!, $body: String!) {
   createDiscussion(input: {
     repositoryId: $repoId, categoryId: $catId, title: $title, body: $body
   }) {
-    discussion { number url }
+    discussion { id number url }
   }
 }
 """
@@ -158,6 +224,25 @@ def positive_score(reaction_groups: list | None) -> int:
     return total
 
 
+def tally_comment_of(node: dict) -> dict | None:
+    """The download-tally comment of a discussion node, if seeded."""
+    for c in ((node.get("comments") or {}).get("nodes") or []):
+        if TALLY_MARKER in (c.get("body") or ""):
+            return c
+    return None
+
+
+def download_count(node: dict) -> int:
+    """THUMBS_UP reactors on the tally comment — one per unique installer."""
+    tally = tally_comment_of(node)
+    if not tally:
+        return 0
+    for group in tally.get("reactionGroups") or []:
+        if group.get("content") == "THUMBS_UP":
+            return (group.get("reactors") or {}).get("totalCount", 0)
+    return 0
+
+
 def build_snapshot(
     discussions: list[dict],
     registry_names: set[str],
@@ -176,9 +261,16 @@ def build_snapshot(
         title = str(node.get("title", "")).strip()
         if not is_agent_title(title) or title not in registry_names:
             continue
+        upvotes = positive_score(node.get("reactionGroups"))
+        downloads = download_count(node)
+        n_comments = (node.get("comments") or {}).get("totalCount", 0)
+        if tally_comment_of(node) is not None:
+            n_comments = max(0, n_comments - 1)  # the tally comment isn't discussion
         entry = {
-            "upvotes": positive_score(node.get("reactionGroups")),
-            "comments": (node.get("comments") or {}).get("totalCount", 0),
+            "upvotes": upvotes,
+            "downloads": downloads,
+            "score": 2 * upvotes + downloads,  # storefront rank: votes weigh double
+            "comments": n_comments,
             "url": node.get("url", ""),
             "number": node.get("number", 0),
         }
@@ -319,7 +411,7 @@ def cmd_seed(limit: int, delay: float) -> int:
     created = 0
     for agent_name in batch:
         try:
-            graphql(
+            made = graphql(
                 CREATE_DISCUSSION_MUTATION,
                 {
                     "repoId": repo_id,
@@ -328,6 +420,11 @@ def cmd_seed(limit: int, delay: float) -> int:
                     "body": seed_body(agents[agent_name]),
                 },
             )
+            disc_id = (((made.get("createDiscussion") or {}).get("discussion"))
+                       or {}).get("id")
+            if disc_id:  # new threads get their download tally immediately
+                graphql(ADD_COMMENT_MUTATION,
+                        {"discussionId": disc_id, "body": TALLY_BODY})
             created += 1
         except (OSError, RuntimeError, urllib.error.URLError) as exc:
             # Likely a secondary rate limit — stop here; the next run
@@ -342,16 +439,99 @@ def cmd_seed(limit: int, delay: float) -> int:
     return 0
 
 
+def cmd_tally(limit: int, delay: float, only: str | None = None) -> int:
+    """Ensure the download-tally comment exists on agent threads."""
+    if not TOKEN:
+        warn("no GITHUB_TOKEN set; cannot add tally comments.")
+        return 0
+    owner, _, name = REPO.partition("/")
+    registry_names = set(load_registry_agents())
+    try:
+        discussions = fetch_all_discussions(owner, name)
+    except (OSError, RuntimeError, urllib.error.URLError) as exc:
+        warn(f"tally preflight failed ({exc}); nothing added.")
+        return 0
+    targets = []
+    for node in discussions:
+        title = str(node.get("title", "")).strip()
+        if ((node.get("category") or {}).get("name")) != CATEGORY:
+            continue
+        if not is_agent_title(title) or title not in registry_names:
+            continue
+        if only and title != only:
+            continue
+        if tally_comment_of(node) is None:
+            targets.append((title, node.get("id")))
+    if not targets:
+        print("[discussion-ratings] every targeted thread already has a tally.")
+        return 0
+    batch = targets[:limit]
+    print(f"[discussion-ratings] adding tally to {len(batch)} of "
+          f"{len(targets)} thread(s) (limit {limit})...")
+    added = 0
+    for title, disc_id in batch:
+        try:
+            graphql(ADD_COMMENT_MUTATION,
+                    {"discussionId": disc_id, "body": TALLY_BODY})
+            added += 1
+        except (OSError, RuntimeError, urllib.error.URLError) as exc:
+            warn(f"stopping after {added} tally comment(s): {exc}")
+            break
+        time.sleep(delay)
+    print(f"[discussion-ratings] added {added} tally comment(s); "
+          f"{len(targets) - added} still missing.")
+    return 0
+
+
+def cmd_track(agent_name: str) -> int:
+    """Register one download: THUMBS_UP on the agent's tally comment."""
+    if not TOKEN:
+        warn("no GITHUB_TOKEN set; download not tracked.")
+        return 0
+    q = f'repo:{REPO} in:title "{agent_name}"'
+    try:
+        data = graphql(SEARCH_DISCUSSION_QUERY, {"q": q})
+        node = next(
+            (n for n in (data.get("search") or {}).get("nodes", [])
+             if n and n.get("title") == agent_name
+             and n.get("repository", {}).get("nameWithOwner") == REPO),
+            None,
+        )
+        if not node:
+            warn(f"no discussion found for '{agent_name}'; download not tracked.")
+            return 0
+        tally = tally_comment_of(node)
+        if not tally:
+            warn(f"'{agent_name}' has no tally comment yet; download not tracked.")
+            return 0
+        graphql(ADD_REACTION_MUTATION, {"subjectId": tally["id"]})
+        print(f"[discussion-ratings] download registered for {agent_name} "
+              f"(discussion #{node.get('number')}).")
+    except (OSError, RuntimeError, urllib.error.URLError) as exc:
+        warn(f"track failed ({exc}); download not tracked.")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = parser.add_subparsers(dest="command", required=True)
     seed = sub.add_parser("seed", help="create missing agent Discussions")
     seed.add_argument("--limit", type=int, default=80)
     seed.add_argument("--delay", type=float, default=1.2)
+    tally = sub.add_parser("tally", help="ensure download-tally comments exist")
+    tally.add_argument("--limit", type=int, default=80)
+    tally.add_argument("--delay", type=float, default=1.2)
+    tally.add_argument("--only", help="target a single agent name")
+    track = sub.add_parser("track", help="register one download (thumbs-up the tally)")
+    track.add_argument("agent", help="agent name, e.g. @kody-w/power_apps_code_app_agent")
     sub.add_parser("fetch", help="snapshot ratings to state/")
     args = parser.parse_args()
     if args.command == "seed":
         return cmd_seed(args.limit, args.delay)
+    if args.command == "tally":
+        return cmd_tally(args.limit, args.delay, args.only)
+    if args.command == "track":
+        return cmd_track(args.agent)
     return cmd_fetch()
 
 
