@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-23T15:17:51.569659+00:00",
+  "generated_at": "2026-07-23T16:06:45.031895+00:00",
   "stats": {
     "total_agents": 200,
     "total_swarms": 82,
@@ -11922,7 +11922,32 @@
   "lifecycle": {
     "schema": "rar-agent-lifecycle/1.0",
     "receipt_schema": "rar-receipt/1.0",
-    "tombstones": []
+    "tombstones": [
+      {
+        "agent": "@borg/hacker_news_agent",
+        "canonical_path": "agents/@borg/hacker_news_agent.py",
+        "latest_receipt": "rar_716bde5d6db21ade39e6c3ef86b97678a3655b88aeb23dca9520399bbc289ed7",
+        "owner_github_id": 1735900,
+        "owner_github_login": "kody-w",
+        "quality_tier": "official",
+        "sha256": "e83a236ebf1ff5281e3f4630b4da885ace9ea68c1777cf4ebf8879b1954b31bb",
+        "status": "deleted",
+        "updated_at": "2026-07-23T15:59:27.171788+00:00",
+        "version": "1.0.0"
+      },
+      {
+        "agent": "@howardh/borg_agent",
+        "canonical_path": "agents/@howardh/borg_agent.py.card",
+        "latest_receipt": "rar_19fba0de0819e4377eeb360121e9565fc77fb8bdefe87a95fba25b25b1b3aa2a",
+        "owner_github_id": 1735900,
+        "owner_github_login": "kody-w",
+        "quality_tier": "verified",
+        "sha256": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431",
+        "status": "deleted",
+        "updated_at": "2026-07-23T15:59:27.171788+00:00",
+        "version": "1.1.0"
+      }
+    ]
   },
   "stacks": {
     "account_intelligence": {

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-deletion/1.0",
+  "workflow_run": "local-maintainer-deletion-2026-07-23"
+ },
+ "action": "agent.delete",
+ "agent": "@howardh/borg_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431"
+ },
+ "canonical_path": "agents/@howardh/borg_agent.py.card",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-23T15:59:27.171788+00:00",
+ "id": "rar_19fba0de0819e4377eeb360121e9565fc77fb8bdefe87a95fba25b25b1b3aa2a",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431",
+  "receipt": "rar_85459e23d6128d3ad89134f05e77675fcfb69ccfb66b619a13c50e8ce4c38ad2",
+  "version": "1.1.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_19fba0de0819e4377eeb3601",
+ "revision_id": "19fba0de0819e4377eeb360121e9565fc77fb8bdefe87a95fba25b25b1b3aa2a",
+ "schema": "rar-receipt/1.0",
+ "status": "deleted",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "deduped: byte-identical clone of the canonical agent; display-name collisions now hard-fail the registry build (commit 8546de6)"
+ },
+ "version": "1.1.0"
+}
