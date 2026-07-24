@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-23T16:54:28.535856+00:00",
+  "generated_at": "2026-07-24T05:12:43.001100+00:00",
   "stats": {
     "total_agents": 201,
     "total_swarms": 82,
@@ -7053,9 +7053,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/copilot_studio_deploy_agent",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "display_name": "CopilotStudioDeploy",
-      "description": "Deploys Copilot Studio agents into Dataverse three ways: REST ImportSolutionAsync, the pac CLI pipeline, or the quality-gated FACTORY chain (rich SYNTHETIC_DATA demo seeds, explicit Dataverse binding, verified twin deployment).",
+      "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
       "author": "kody-w",
       "tags": [
         "copilot-studio",
@@ -7069,7 +7069,11 @@
         "factory",
         "quality-gate",
         "synthetic-data",
-        "pipeline"
+        "pipeline",
+        "mcp",
+        "new-shape",
+        "blastbox",
+        "connected-agents"
       ],
       "category": "core",
       "quality_tier": "community",
@@ -7077,11 +7081,16 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
+      "_capabilities": [
+        "compile_exec",
+        "exec"
+      ],
+      "_uses_exec": true,
       "_file": "agents/@kody-w/copilot_studio_deploy_agent.py",
       "_install_filename": "rar_kody_w_copilot_studio_deploy_agent.py",
-      "_sha256": "1f3b1dcd961192bc9732874924f4a956995cd0851ceb0d9db10f1abad084e286",
+      "_sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
       "_lifecycle": "notarized",
-      "_receipt": "rar_b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
+      "_receipt": "rar_100f470643f346e84633a1bdc4e310e49724feff91db6347a520eaac8390e324",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -7097,13 +7106,13 @@
           "full_test_suite"
         ]
       },
-      "_seed": 9376612445614259888,
-      "_size_kb": 319.3,
-      "_lines": 4469,
+      "_seed": 9376612445614782493,
+      "_size_kb": 442.8,
+      "_lines": 4724,
       "_has_card": true,
       "_added_at": "2026-06-07T20:27:02-04:00",
       "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
-      "_latest_commit_sha": "969bf36a4785ce33fee945217fff238fc423d7d9",
+      "_latest_commit_sha": "94508cbb789c5f0b7a83423a7dbc4cc9fb949052",
       "_card_sha256": "bc35d9b3bccfaa4846c674d6762d9230bd462e97996ed61659d23a8dd8a77fc9"
     },
     {
