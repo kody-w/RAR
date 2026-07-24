@@ -1531,14 +1531,14 @@
     },
     "@kody-w/copilot_studio_deploy_agent": {
       "canonical_path": "agents/@kody-w/copilot_studio_deploy_agent.py",
-      "latest_receipt": "rar_b431f572e56d485e28e3dbef02a294eebcbf218c2de6a44f42eee59c6261ee64",
+      "latest_receipt": "rar_100f470643f346e84633a1bdc4e310e49724feff91db6347a520eaac8390e324",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "1f3b1dcd961192bc9732874924f4a956995cd0851ceb0d9db10f1abad084e286",
+      "sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
       "status": "active",
-      "updated_at": "2026-07-22T22:02:29.413103+00:00",
-      "version": "1.1.0"
+      "updated_at": "2026-07-24T05:07:36.503644+00:00",
+      "version": "1.2.0"
     },
     "@kody-w/copilot_studio_forge_agent": {
       "canonical_path": "agents/@kody-w/copilot_studio_forge_agent.py",
@@ -2444,5 +2444,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-23T16:50:14.275547+00:00"
+  "updated_at": "2026-07-24T05:07:36.503644+00:00"
 }
