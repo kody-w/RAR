@@ -2441,8 +2441,19 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/project_tracker_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/project_tracker_agent.py",
+      "sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+      "latest_receipt": "rar_ffc1f1fdbc54c04a27f3a07b260297bbaa4c5a937885b0c9a7a75bba07a88054",
+      "updated_at": "2026-07-24T16:52:35.028930+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-24T05:07:36.503644+00:00"
+  "updated_at": "2026-07-24T16:52:35.028930+00:00"
 }
