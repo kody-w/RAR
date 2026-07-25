@@ -85,6 +85,153 @@
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
+      "id": "csv_surgeon",
+      "name": "CSV Surgeon",
+      "version": "1.0.0",
+      "summary": "Profile a CSV — per-column types, null rate, cardinality, min/max — or find ragged rows, duplicate and whitespace-padded headers, duplicate records, or slice rows. Stdlib only, no network.",
+      "category": "data",
+      "tags": [
+        "csv",
+        "data",
+        "profiling",
+        "quality",
+        "local-first",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/csv-surgeon",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
+      "singleton_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "json_doctor",
+      "name": "JSON Doctor",
+      "version": "1.0.0",
+      "summary": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
+      "category": "data",
+      "tags": [
+        "json",
+        "data",
+        "schema",
+        "diff",
+        "local-first",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/json-doctor",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/singleton/json_doctor_agent.py",
+      "singleton_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "log_detective",
+      "name": "Log Detective",
+      "version": "1.0.0",
+      "summary": "Summarise a log file, cluster near-identical errors into signatures by shape rather than text, build a timeline so a spike has a timestamp, or grep with context. Reads plain text and JSON-lines. Never uploads anything.",
+      "category": "operations",
+      "tags": [
+        "logs",
+        "debugging",
+        "observability",
+        "incident",
+        "local-first",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/log-detective",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/singleton/log_detective_agent.py",
+      "singleton_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "markdown_medic",
+      "name": "Markdown Medic",
+      "version": "1.0.0",
+      "summary": "Check a markdown file or docs folder for broken relative links and images, skipped heading levels and duplicate anchors, or generate a table of contents. Never makes network calls.",
+      "category": "docs",
+      "tags": [
+        "docs",
+        "markdown",
+        "lint",
+        "links",
+        "local-first",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/markdown-medic",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/singleton/markdown_medic_agent.py",
+      "singleton_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "novell",
+      "name": "Novell",
+      "version": "1.0.0",
+      "summary": "Adversarial pre-review. Twelve skeptic lenses roast your artifact and hand back the specific evidence that kills each objection. Run it as a pipeline gate so a draft fails in CI before a human ever reads it.",
+      "category": "analysis",
+      "tags": [
+        "rapplication",
+        "review",
+        "adversarial",
+        "red-team",
+        "pre-review",
+        "ci-gate"
+      ],
+      "manifest_name": "",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/singleton/novell_agent.py",
+      "singleton_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "pii_scout",
+      "name": "PII Scout",
+      "version": "1.0.0",
+      "summary": "Scan a folder for what must not be published — secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
+      "category": "operations",
+      "tags": [
+        "security",
+        "publishing",
+        "gate",
+        "local-first",
+        "singleton",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/pii-scout",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/singleton/pii_scout_agent.py",
+      "singleton_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "project_tracker",
+      "name": "Project Tracker",
+      "version": "1.0.0",
+      "summary": "A local-first tracker for a portfolio of AI-agent projects and their MVP statements. The web UI is a 1:1 clone of the aibast-agents-library project-tracker tool; the bundled ProjectTracker agent manages the same portfolio headlessly over /chat. Both speak the tool's native projectTrackerData JSON,…",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "project-tracker",
+        "portfolio",
+        "mvp",
+        "project-management",
+        "local-first"
+      ],
+      "manifest_name": "@kody-w/project-tracker-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/project_tracker/singleton/project_tracker_agent.py",
+      "singleton_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
       "id": "rapp_commons",
       "name": "RAPP Commons",
       "version": "1.0.0",
@@ -165,6 +312,27 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
       "singleton_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "toaster",
+      "name": "Toaster",
+      "version": "1.0.0",
+      "summary": "Carry a capability between agent.py, SKILL.md, openclaw and openrappter without losing fidelity. Toast a raw skill so it gains a typed contract and becomes measurable, then soak it to prove it does not drift across conversion routes.",
+      "category": "developer",
+      "tags": [
+        "skills",
+        "portability",
+        "drift",
+        "conversion",
+        "local-first",
+        "rapplication"
+      ],
+      "manifest_name": "@rapp/toaster",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
+      "singleton_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -322,14 +490,14 @@
     },
     {
       "name": "estate-sweep",
-      "description": "Clone-and-lint drift sweep across every public kody-w repo using the shared rapp-drift-lint. Use when Kody says \"sweep the estate\", \"estate sweep\", \"lint all my repos\", \"is the estate clean\", \"check everything for drift\", or after a canon/spec change that could ripple across the RAPP estate. Read-o…",
+      "description": "Clone-and-lint drift sweep across every public kody-w repo using the shared rapp-drift-lint. Use when Kody says \\\"sweep the estate\\\", \\\"estate sweep\\\", \\\"lint all my repos\\\", \\\"is the estate clean\\\", \\\"check everything for drift\\\", or after a canon/spec change that could ripple across the RAPP esta…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/estate-sweep",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/estate-sweep/SKILL.md"
     },
     {
       "name": "exec-proof",
-      "description": "Pre-demo smoke test — verify the install/demo path works on a machine that is NOT this one, exactly as a first-time user would run it, before anyone runs it live. Use before demos, customer sessions, or offsites; whenever the user says \"exec proof this\", \"will this work on their machine\", \"smoke te…",
+      "description": "Pre-demo smoke test — verify the install/demo path works on a machine that is NOT this one, exactly as a first-time user would run it, before anyone runs it live. Use before demos, customer sessions, or offsites; whenever the user says \\\"exec proof this\\\", \\\"will this work on their machine\\\", \\\"smo…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/exec-proof",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/exec-proof/SKILL.md"
@@ -378,7 +546,7 @@
     },
     {
       "name": "msft-deck",
-      "description": "Build, restyle, or revise a PowerPoint deck in Kody's Microsoft styling, self-review every slide visually, and only hand it over verified and popped open. Use whenever the user asks for a deck, slides, a pptx, a one-pager deck, to \"restyle\" a deck, to make slides \"look like the STYLED one\" / \"not l…",
+      "description": "Build, restyle, or revise a PowerPoint deck in Kody's Microsoft styling, self-review every slide visually, and only hand it over verified and popped open. Use whenever the user asks for a deck, slides, a pptx, a one-pager deck, to \\\"restyle\\\" a deck, to make slides \\\"look like the STYLED one\\\" / \\\"…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/msft-deck",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/msft-deck/SKILL.md"
@@ -399,7 +567,7 @@
     },
     {
       "name": "overnight",
-      "description": "Run Kody's improve-to-120 kata as an unattended autonomous loop with a verifiable ledger, commits along the way, and a morning report. USE THIS SKILL when Kody says anything like \"run overnight\", \"work autonomously through the night\", \"autonomously evolve this for 24 hours\", \"until you run out of c…",
+      "description": "Run Kody's improve-to-120 kata as an unattended autonomous loop with a verifiable ledger, commits along the way, and a morning report. USE THIS SKILL when Kody says anything like \\\"run overnight\\\", \\\"work autonomously through the night\\\", \\\"autonomously evolve this for 24 hours\\\", \\\"until you run o…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/overnight",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/overnight/SKILL.md"
@@ -427,21 +595,21 @@
     },
     {
       "name": "ship",
-      "description": "Commit, push, publish to GitHub Pages, and hand back a VERIFIED live URL. Use whenever the user says \"push it\", \"publish this\", \"ship it\", \"make this live\", \"show me the link so I can test\", or finishes building anything static (single-file HTML app, demo, deck, agent page) that belongs on the web.…",
+      "description": "Commit, push, publish to GitHub Pages, and hand back a VERIFIED live URL. Use whenever the user says \\\"push it\\\", \\\"publish this\\\", \\\"ship it\\\", \\\"make this live\\\", \\\"show me the link so I can test\\\", or finishes building anything static (single-file HTML app, demo, deck, agent page) that belongs o…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/ship",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/ship/SKILL.md"
     },
     {
       "name": "transcript-miner",
-      "description": "Mine Claude Code session history for usage patterns, mistakes, and automation candidates. Use when Kody says \"audit my sessions\", \"what am I doing wrong in Claude Code\", \"usage audit\", \"mine my transcripts\", \"analyze my Claude Code history\", \"what should be a skill\", or asks how he's using Claude C…",
+      "description": "Mine Claude Code session history for usage patterns, mistakes, and automation candidates. Use when Kody says \\\"audit my sessions\\\", \\\"what am I doing wrong in Claude Code\\\", \\\"usage audit\\\", \\\"mine my transcripts\\\", \\\"analyze my Claude Code history\\\", \\\"what should be a skill\\\", or asks how he's us…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/transcript-miner",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/transcript-miner/SKILL.md"
     },
     {
       "name": "wow",
-      "description": "Generate demo prompts that show off the current product's power — with a persistent ledger so suggestions never repeat and ambition ratchets up. Use whenever the user asks for \"the coolest prompts\", \"mind-blowing prompts\", \"prompts that show off the power\", \"demo prompts\", \"give me 10\", or is prepp…",
+      "description": "Generate demo prompts that show off the current product's power — with a persistent ledger so suggestions never repeat and ambition ratchets up. Use whenever the user asks for \\\"the coolest prompts\\\", \\\"mind-blowing prompts\\\", \\\"prompts that show off the power\\\", \\\"demo prompts\\\", \\\"give me 10\\\", o…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/wow",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/wow/SKILL.md"
