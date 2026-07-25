@@ -146,7 +146,7 @@ DEFAULT_CAP_LEXICON = (
     "intake", "walkthrough", "adoption", "guided", "document", "tracking",
 )
 
-# speaker labels like "Maria (Ops Lead):" / "Kunal:" at the start of a line -
+# speaker labels like "Maria (Ops Lead):" / "Priya:" at the start of a line -
 # 1-3 capitalized words + optional (role). A sentence that happens to contain
 # a colon ("Pricing optimization never happens: we ...") does NOT match.
 _SPEAKER_RE = re.compile(
@@ -2571,16 +2571,16 @@ function thSkip() { thPaused = true; clearTimeout(thTimer); var b = document.get
 // the journal also refreshes live so a reopened theater has the latest run
 // (refreshArtifacts swaps it below)
 
-// ── click-through tutorial: the Kunal proposal-generation demo ──
+// ── click-through tutorial: the Priya proposal-generation demo ──
 var TOUR = [
   { t: 'Welcome - the proposal generation walkthrough', target: null,
-    x: 'This short tour trains you on the whole loop using Kunal\'s use case: start from the Proposal Generation template, have the brainstem make sure it also generates PDF proposals, then build, test, and deploy to Copilot Studio. Next walks you through; "Do this step" runs each step for real; Skip any time.' },
+    x: 'This short tour trains you on the whole loop using Priya\'s use case: start from the Proposal Generation template, have the brainstem make sure it also generates PDF proposals, then build, test, and deploy to Copilot Studio. Next walks you through; "Do this step" runs each step for real; Skip any time.' },
   { t: '1. Start from the template', target: '#tpl-select',
     x: 'Instead of pasting a transcript, pick "Proposal Generation Stack" from this dropdown. The pipeline snaps the prototype to it: capabilities, demo script and agent plan come from the template.',
     payload: ['The user picked the template "proposal_generation_stack" from the library dropdown. Run Transcript2Prototype action=template op=use template_id=proposal_generation_stack right away. Then say what was created and that the tour continues with the feedback step.',
               'Start a prototype from the Proposal Generation Stack template.'] },
   { t: '2. Ask for what is missing - in plain language', target: '#fb-input',
-    x: 'Kunal also needs the agent to actually generate PDF proposals. Just ask for it here - the brainstem mutates the prototype: a new capability is added, the demo regenerates and the agents rebuild, live.',
+    x: 'Priya also needs the agent to actually generate PDF proposals. Just ask for it here - the brainstem mutates the prototype: a new capability is added, the demo regenerates and the agents rebuild, live.',
     payload: ['Make sure this prototype ALSO generates PDF proposals and outputs them for the user, alongside its default capabilities. Add that capability (with synthetic records that simulate the PDFs) and confirm what changed.',
               'Make sure it also generates PDF proposals for the user.'] },
   { t: '3. Build the agents', target: '.step-btn[data-key="build"]',
@@ -3141,18 +3141,18 @@ class Transcript2PrototypeAgent(BasicAgent):
                                                      "Name') - topics, actions, workflows, "
                                                      "Dataverse/connector wiring - filled with "
                                                      "this prototype's content. When omitted "
-                                                     "the AIBAST mcs_solution packager builds "
+                                                     "the the work distro mcs_solution packager builds "
                                                      "the solution natively (the default).")},
                     "packager_path": {"type": "string",
                                       "description": ("deploy: dir containing wrapper_generator/"
-                                                      "solution_packager.py (the AIBAST "
+                                                      "solution_packager.py (the the work distro "
                                                       "utility). Default discovery: T2P_PACKAGER "
                                                       "env, then the known repo locations. "
                                                       "'off' disables it (skeleton fallback).")},
                     "publisher": {"type": "string",
                                   "description": ("deploy: solution publisher display "
                                                   "name (default: Microsoft Research "
-                                                  "and Development, the AIBAST library "
+                                                  "and Development, the the work distro library "
                                                   "publisher - NEVER the pattern HPA's)")},
                     "publisher_prefix": {"type": "string",
                                          "description": ("deploy: schema customization "
@@ -5741,7 +5741,7 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
     # OUR publisher - never the pattern HPA's (theirs is e.g. PowerCAT).
     # Overridable per deploy via publisher= / publisher_prefix=.
     DEFAULT_PUBLISHER = {
-        # the AIBAST library's established publisher (the same identity as
+        # the the work distro library's established publisher (the same identity as
         # MSFTAIBASMultiAgentCopilot) - never the pattern HPA's
         "unique": "Microsoft_Research_and_Development",
         "display": "Microsoft Research and Development",
@@ -6052,15 +6052,17 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
             return None
 
     def _load_packager(self, kwargs):
-        """The AIBAST mcs_solution packager as a library - THE canonical
+        """The the work distro mcs_solution packager as a library - THE canonical
         solution builder (SolutionSpec -> SolutionPackager.package()).
         Discovery: packager_path= > T2P_PACKAGER env > the known repo
         locations. Returns the module or None (callers fall back)."""
         cands = [kwargs.get("packager_path"), os.environ.get("T2P_PACKAGER"),
-                 os.path.expanduser(
-                     "~/MSFTAIBASTRAPP/AIBAST-RAPP/mcs_pipeline/scripts"),
-                 os.path.expanduser(
-                     "~/MSFTAIBASTRAPP/AIBAST-RAPP/AIBAST_RAPP/scripts")]
+                 *[os.path.expanduser(p) for p in
+                   os.environ.get("T2P_PACKAGER_PATHS", "").split(os.pathsep) if p]]
+        # The packager fallback locations used to be hardcoded work-checkout
+        # paths. This repo is public, so they now come from $T2P_PACKAGER_PATHS
+        # (os.pathsep-separated). $T2P_PACKAGER above still takes precedence;
+        # behaviour is unchanged once either is exported.
         if any(str(c).lower() == "off" for c in cands if c):
             return None   # explicit opt-out (tests / skeleton runs)
         for c in cands:
@@ -6474,7 +6476,7 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
             except Exception as exc:  # noqa: BLE001
                 borrowed = {"pattern": pattern, "error": str(exc)[:200],
                             "fallback": "packager/skeleton"}
-        # 2. DEFAULT: the AIBAST mcs_solution packager - the canonical
+        # 2. DEFAULT: the the work distro mcs_solution packager - the canonical
         #    utility - builds the solution natively; our capability topics
         #    are injected on top
         if zip_bytes is None:
@@ -6502,13 +6504,13 @@ code {{ background: #EBF3FC; color: #0F6CBD; padding: 1px 7px; border-radius: 4p
                     zip_bytes = self._inject_capability_topics(
                         zip_bytes, a["capabilities"])
                     zip_bytes = self._patch_bot_configuration(zip_bytes)
-                    borrowed = {"builder": "aibast_mcs_solution_packager",
+                    borrowed = {"builder": "work_distro_mcs_solution_packager",
                                 "publisher": pub["display"], "fresh": display,
                                 "capability_topics": [c["name"]
                                                       for c in a["capabilities"]]}
                 except Exception as exc:  # noqa: BLE001
                     zip_bytes = None
-                    borrowed = {"builder": "aibast_mcs_solution_packager",
+                    borrowed = {"builder": "work_distro_mcs_solution_packager",
                                 "error": str(exc)[:200],
                                 "fallback": "skeleton"}
         # 3. last resort: the generic skeleton rebrand
