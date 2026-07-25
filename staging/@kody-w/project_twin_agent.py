@@ -100,8 +100,12 @@ AGENT_HELPERS = ["basic_agent.py"]
 DEFAULT_PROJECT_AGENTS = [
     "context_memory_agent.py",
     "manage_memory_agent.py",
-    "workiq_agent_agent.py",
-]
+] + [a.strip() for a in os.environ.get("RAPP_EXTRA_PROJECT_AGENTS", "").split(",") if a.strip()]
+# Extra optional agents come from $RAPP_EXTRA_PROJECT_AGENTS (comma-separated)
+# rather than being named here. This repo is public, and a hardcoded roster of
+# private agent filenames is itself a disclosure -- it publishes what exists.
+# Behaviour is unchanged for anyone who exports the variable; missing agents
+# were already silently skipped.
 # Env vars to scrub from the child process so the twin's own .env wins.
 # Without this the child inherits PORT=7071 from the global and load_dotenv
 # (which doesn't override existing vars by default) leaves the wrong port set.
@@ -1310,7 +1314,7 @@ class ProjectTwinAgent(BasicAgent):
                     "include_twins": {"type": "array", "items": {"type": "string"}, "description": "For dispatch: optional list of twin names to include (default: all project twins on the device)."},
                     "project_path": {"type": "string", "description": "For action=hatch: absolute path to the project root."},
                     "parent_dir": {"type": "string", "description": "For action=hatch_all: absolute path to a dir whose subdirs each become a project twin."},
-                    "name": {"type": "string", "description": "For action=boot/chat/stop: the twin's name (e.g. 'bchydro'), display_name, or rappid hash (full or prefix)."},
+                    "name": {"type": "string", "description": "For action=boot/chat/stop: the twin's name (e.g. 'example-co'), display_name, or rappid hash (full or prefix)."},
                     "message": {"type": "string", "description": "For action=chat / dispatch: the verbatim natural-language message to send to the twin(s). Same shape as if the user pasted it into the twin's own /chat UI directly."},
                     "auto_boot": {"type": "boolean", "description": "For action=chat: if the twin isn't running, boot it first (default true). For action=hatch: also boot immediately after hatching (default false)."},
                     "port": {"type": "integer", "description": "For action=hatch: override the auto-picked port."},
