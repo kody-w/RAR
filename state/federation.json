@@ -253,6 +253,27 @@
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
+      "id": "rapp_crispy",
+      "name": "RAPP Crispy",
+      "version": "1.4.0",
+      "summary": "A local-first meeting stack. Records a meeting, removes background noise with DeepFilterNet3 (or RNNoise), transcribes it on a whisper.cpp server bound to 127.0.0.1, and writes Summary / Decisions / Action items / Open questions through a hook you own. Also puts a denoised virtual microphone in fro…",
+      "category": "productivity",
+      "tags": [
+        "deepfilternet",
+        "denoise",
+        "has-ui",
+        "local-first",
+        "meetings",
+        "noise-cancellation"
+      ],
+      "manifest_name": "@kody-w/rapp-crispy-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/main/rapp_crispy/singleton/rapp_crispy_agent.py",
+      "singleton_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
       "id": "rapp_god_forum",
       "name": "rapp-god Forum",
       "version": "1.0.0",
@@ -270,6 +291,69 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
       "singleton_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "rapp_rewind",
+      "name": "RAPP Rewind",
+      "version": "1.1.0",
+      "summary": "A local, searchable memory of everything that has been on your screen. Captures on an interval, reads the text with Apple's on-device Vision OCR, and indexes it in SQLite FTS5 so you can search what you saw. Nothing leaves the machine: there is no network call anywhere in the capture, OCR, index or…",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "screen",
+        "ocr",
+        "search",
+        "memory",
+        "local-first"
+      ],
+      "manifest_name": "@kody-w/rapp-rewind-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/main/rapp_rewind/singleton/rapp_rewind_agent.py",
+      "singleton_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "rapp_shot",
+      "name": "RAPP Shot",
+      "version": "1.2.0",
+      "summary": "Capture, annotate and redact screenshots entirely on-device. Finds credentials in the pixels with Apple's Vision OCR and paints them out opaquely BEFORE the image is shared. Redaction is a solid fill, never a blur, because blur and pixelation are reversible often enough to have leaked real credenti…",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "screenshot",
+        "ocr",
+        "redaction",
+        "privacy",
+        "local-first"
+      ],
+      "manifest_name": "@kody-w/rapp-shot-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/main/rapp_shot/singleton/rapp_shot_agent.py",
+      "singleton_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
+      "id": "rapp_voice",
+      "name": "RAPP Voice",
+      "version": "1.0.0",
+      "summary": "Hold a key anywhere on macOS, speak, release, and cleaned-up text appears at your cursor. Speech recognition runs on-device via whisper.cpp; your voice never leaves the machine. Filler stripping, app-aware formatting and a weighted personal dictionary.",
+      "category": "productivity",
+      "tags": [
+        "rapplication",
+        "dictation",
+        "speech",
+        "whisper",
+        "local-first",
+        "privacy"
+      ],
+      "manifest_name": "@kody-w/rapp-voice-singleton",
+      "access": "public",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/main/rapp_voice/singleton/rapp_voice_agent.py",
+      "singleton_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
