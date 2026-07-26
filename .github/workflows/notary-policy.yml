@@ -37,3 +37,10 @@ jobs:
             --repo-root candidate \
             --base "${{ github.event.pull_request.base.sha }}" \
             --pull-request
+
+      # Would have caught event-stream: a namespace changing hands. The
+      # registry has recorded _controller.github_id (immutable, rename-proof)
+      # on 200 of 202 entries since it was built, and nothing has ever compared
+      # it between two builds.
+      - name: controller continuity
+        run: python3 scripts/check_controller_continuity.py

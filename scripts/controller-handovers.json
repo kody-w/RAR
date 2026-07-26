@@ -1,0 +1,5 @@
+{
+  "schema": "rar-controller-handover/1.0",
+  "note": "A namespace legitimately changing hands. Each entry converts a fatal alarm into a decision someone signed, with a reason and a date. Empty is the correct default.",
+  "handovers": {}
+}
