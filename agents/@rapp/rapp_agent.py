@@ -104,6 +104,48 @@ EVENT_KINDS = ("hello", "show-and-tell", "ask", "reply", "fyi", "leave")
 KERNEL_AGENTS = {"basic_agent.py", "context_memory_agent.py",
                  "manage_memory_agent.py", "learn_new_agent.py",
                  "swarm_factory_agent.py", "hacker_news_agent.py"}
+# The kernel agents' declared NAMES, not their filenames. KERNEL_AGENTS above
+# guards the filename; the brainstem quarantines on the declared name and
+# resolves collisions by `sorted(glob(...))` — first file alphabetically wins,
+# and the LOSER is the one quarantined.
+#
+# Those two facts compose into a capability hijack that neither guard sees
+# alone: a publisher controls their own @namespace, the namespace becomes the
+# installed filename, so `@aaa/...` lands a file that sorts ahead of
+# `context_memory_agent.py`, declares the name "ContextMemory", wins the sort,
+# and gets the KERNEL agent quarantined. The filename was never touched, so the
+# KERNEL_AGENTS check passes cleanly.
+KERNEL_AGENT_NAMES = {"BasicAgent", "ContextMemory", "ManageMemory",
+                      "LearnNew", "SwarmFactory", "HackerNews"}
+
+
+def _declared_agent_names(src):
+    """Agent names a file declares, read statically. Never import it — deciding
+    whether to trust a file by executing it is the wrong order."""
+    import ast as _ast
+    names = set()
+    try:
+        tree = _ast.parse(src)
+    except SyntaxError:
+        return names
+    for node in _ast.walk(tree):
+        # self.name = "X"  inside __init__
+        if isinstance(node, _ast.Assign):
+            for tgt in node.targets:
+                if (isinstance(tgt, _ast.Attribute) and tgt.attr == "name"
+                        and isinstance(node.value, _ast.Constant)
+                        and isinstance(node.value.value, str)):
+                    names.add(node.value.value)
+            # metadata = {"name": "X", ...}
+            if isinstance(node.value, _ast.Dict):
+                for k, v in zip(node.value.keys, node.value.values):
+                    if (isinstance(k, _ast.Constant) and k.value == "name"
+                            and isinstance(v, _ast.Constant)
+                            and isinstance(v.value, str)):
+                        names.add(v.value)
+    return names
+
+
 _SECRET_NAME_RE = re.compile(
     r"(^\.env($|\.)|token|secret|credential|password|apikey|api_key|"
     r"\.pem$|\.key$|\.p12$|\.pfx$|\.ppk$|\.keystore$|\.jks$|"
@@ -1462,6 +1504,24 @@ class RappAgent(BasicAgent):
         if dest_fn in KERNEL_AGENTS:
             return self._env("install", "refused", agent=dest_fn,
                              error="that's a kernel agent — the kernel is sacred (Art. XXXIII); never overwritten.")
+        # Guarding the filename is not enough: the brainstem collides on the
+        # DECLARED name and quarantines whichever file sorts later. Since the
+        # publisher's own @namespace becomes the installed filename, a file that
+        # never touches a kernel FILENAME can still sort first, claim a kernel
+        # NAME, and get the kernel agent quarantined instead of itself.
+        try:
+            _clash = _declared_agent_names(body.decode("utf-8", "replace")) \
+                     & KERNEL_AGENT_NAMES
+        except Exception:  # noqa: BLE001 — never let the guard break the path
+            _clash = set()
+        if _clash:
+            return self._env(
+                "install", "refused", agent=dest_fn,
+                error=("declares the kernel agent name(s) "
+                       + ", ".join(sorted(_clash))
+                       + " — the brainstem resolves name collisions by load "
+                         "order, so this would quarantine the kernel agent "
+                         "rather than itself. Rename the agent."))
         os.makedirs(target_dir, exist_ok=True)
         dst = os.path.join(target_dir, dest_fn)
         with open(dst, "wb") as f:
