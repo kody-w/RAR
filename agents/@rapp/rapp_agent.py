@@ -49,6 +49,7 @@ from __future__ import annotations
 
 import base64
 import glob
+import datetime as _dt
 import hashlib
 import io
 import json
@@ -1526,8 +1527,52 @@ class RappAgent(BasicAgent):
         dst = os.path.join(target_dir, dest_fn)
         with open(dst, "wb") as f:
             f.write(body)
+        digest = hashlib.sha256(body).hexdigest()
         result = {"agent": dest_fn, "from": label, "path": dst,
-                  "sha256": hashlib.sha256(body).hexdigest(), "verified": verified}
+                  "sha256": digest, "verified": verified}
+
+        # Provenance sidecar. Every value here was already computed on this
+        # path and thrown away into the response envelope; nothing new is
+        # fetched. Without it, "what code will execute on my next message and
+        # where did it come from" is unanswerable from disk -- and when a
+        # publisher is later found compromised there is no way to enumerate who
+        # received the bad artifact or when.
+        #
+        # It is also the substrate revocation needs: RAR already models a
+        # `revoked` lifecycle that no brainstem can act on, because no
+        # brainstem ever recorded the digest it accepted.
+        try:
+            origin = {
+                "schema": "rapp-agent-origin/1.0",
+                "agent": dest_fn,
+                "sha256": digest,
+                "bytes": len(body),
+                "source": label,
+                "source_url": kwargs.get("url") or kwargs.get("source") or None,
+                "rappid": kwargs.get("rappid") or None,
+                "verified": bool(verified),
+                "installed_at": _dt.datetime.now(
+                    _dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "installer": "@rapp/rapp",
+            }
+            with open(dst + ".origin.json", "w") as _f:
+                json.dump({k: v for k, v in origin.items() if v is not None},
+                          _f, indent=2, sort_keys=True)
+                _f.write("\n")
+            result["origin"] = os.path.basename(dst) + ".origin.json"
+            # Append-only install ledger: HASHES AND POINTERS ONLY. Never the
+            # body. An append-only log that cannot delete, combined with a
+            # constitutional duty to keep parsing it forever, turns one
+            # careless append of content into a permanent disclosure with no
+            # takedown path.
+            _ledger = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(target_dir))),
+                ".brainstem_data", "installed.jsonl")
+            os.makedirs(os.path.dirname(_ledger), exist_ok=True)
+            with open(_ledger, "a") as _f:
+                _f.write(json.dumps(origin, sort_keys=True) + "\n")
+        except Exception as _e:  # noqa: BLE001 — provenance must never block
+            result["origin_error"] = f"{type(_e).__name__}: {_e}"
         # optional git-invisibility (zero grail-repo commit risk), like `load`
         if kwargs.get("git_invisible"):
             excluded = self._register_excludes(bs, target_dir, [dest_fn])
