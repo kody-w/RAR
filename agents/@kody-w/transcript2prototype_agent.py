@@ -83,7 +83,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/transcript2prototype",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "display_name": "Transcript2Prototype",
     "description": ("Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."),
     "author": "Kody Wildfeuer",

@@ -74,7 +74,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "display_name": "RappAgent",
     "description": ("Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."),
     "author": "Kody Wildfeuer",

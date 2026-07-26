@@ -1760,6 +1760,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@kody-w/project_tracker_agent": {
+      "canonical_path": "agents/@kody-w/project_tracker_agent.py",
+      "latest_receipt": "rar_ffc1f1fdbc54c04a27f3a07b260297bbaa4c5a937885b0c9a7a75bba07a88054",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+      "status": "active",
+      "updated_at": "2026-07-24T16:52:35.028930+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/rapp_leviathan_factory": {
       "canonical_path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
       "latest_receipt": "rar_8995908d43ddc8c15f9a8c4fadce03a0c154d4473523744480f7269bcd6467fb",
@@ -1872,14 +1883,14 @@
     },
     "@kody-w/transcript2prototype": {
       "canonical_path": "agents/@kody-w/transcript2prototype_agent.py",
-      "latest_receipt": "rar_2e63ff835904a56dfa8c535cb82776194e7fb79a5373c094ec5b41a64e74dc20",
+      "latest_receipt": "rar_5a4e5d94c803c7177f97c54f36d3d9bd667e7a32495e43c519fe40d52e493081",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "1e7ec423c8683c82f74621e64224ada4e58069e398b4bc0afc0e997fa4af5a63",
+      "sha256": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.3"
+      "updated_at": "2026-07-26T02:09:02.638179+00:00",
+      "version": "1.0.4"
     },
     "@kody-w/twin_egg_hatcher": {
       "canonical_path": "agents/@kody-w/twin_egg_hatcher_agent.py",
@@ -2070,14 +2081,14 @@
     },
     "@rapp/rapp": {
       "canonical_path": "agents/@rapp/rapp_agent.py",
-      "latest_receipt": "rar_69bf7d8be28e9013cbae1fd683241f22b153aeeb8ebc08575233ff5bbad331e5",
+      "latest_receipt": "rar_e0a79191dbb7b014b146ea4cc30d5077fb66a91bfb12d5eb35c888a8406b8b1c",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "a0c4471f47a3f55d1beab414bff9f9729ee39d00488ee91b6340ac1651dacbb0",
+      "sha256": "941c9d432aabb2a4ff2ce22295c1433d6d169be9d5ed82ae1f2abecc1ced2969",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.5"
+      "updated_at": "2026-07-26T02:09:02.638179+00:00",
+      "version": "1.0.6"
     },
     "@rapp/rapp_publish_agent": {
       "canonical_path": "agents/@rapp/rapp_publish_agent.py",
@@ -2441,19 +2452,8 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
-    },
-    "@kody-w/project_tracker_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/project_tracker_agent.py",
-      "sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
-      "latest_receipt": "rar_ffc1f1fdbc54c04a27f3a07b260297bbaa4c5a937885b0c9a7a75bba07a88054",
-      "updated_at": "2026-07-24T16:52:35.028930+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-24T16:52:35.028930+00:00"
+  "updated_at": "2026-07-26T02:09:02.638179+00:00"
 }
