@@ -164,6 +164,12 @@
         "body": "```json\n{\"action\":\"vote\",\"payload\":{\"agent\":\"@pub/slug\",\"direction\":\"up\"}}\n```"
       }
     },
+    "metrics": {
+      "url": "{base_url}/state/metrics.json",
+      "method": "GET",
+      "description": "Public registry metrics — total downloads (clones + CDN hits + release assets), leaderboards for most downloaded, most upvoted, most reviewed, and highest rated agents, plus publisher/category breakdowns. Rebuilt daily. Human dashboard at {site_url}/metrics.html.",
+      "auth": "none"
+    },
     "review": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
       "method": "POST",

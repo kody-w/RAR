@@ -1,0 +1,143 @@
+{
+ "cdn": {
+  "2026-07-09": 65
+ },
+ "clones": {
+  "2026-07-14": {
+   "count": 180,
+   "uniques": 45
+  },
+  "2026-07-15": {
+   "count": 387,
+   "uniques": 84
+  },
+  "2026-07-16": {
+   "count": 152,
+   "uniques": 31
+  },
+  "2026-07-17": {
+   "count": 177,
+   "uniques": 34
+  },
+  "2026-07-18": {
+   "count": 302,
+   "uniques": 71
+  },
+  "2026-07-19": {
+   "count": 196,
+   "uniques": 45
+  },
+  "2026-07-20": {
+   "count": 154,
+   "uniques": 37
+  },
+  "2026-07-21": {
+   "count": 167,
+   "uniques": 30
+  },
+  "2026-07-22": {
+   "count": 208,
+   "uniques": 49
+  },
+  "2026-07-23": {
+   "count": 196,
+   "uniques": 38
+  },
+  "2026-07-24": {
+   "count": 156,
+   "uniques": 29
+  },
+  "2026-07-25": {
+   "count": 138,
+   "uniques": 21
+  },
+  "2026-07-26": {
+   "count": 202,
+   "uniques": 41
+  },
+  "2026-07-27": {
+   "count": 128,
+   "uniques": 26
+  }
+ },
+ "snapshots": [
+  {
+   "at": "2026-07-28T17:22:35Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:28:44Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  }
+ ],
+ "views": {
+  "2026-07-14": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-15": {
+   "count": 2,
+   "uniques": 1
+  },
+  "2026-07-16": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-17": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-18": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-19": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-20": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-07-21": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-07-22": {
+   "count": 6,
+   "uniques": 3
+  },
+  "2026-07-23": {
+   "count": 10,
+   "uniques": 3
+  },
+  "2026-07-24": {
+   "count": 7,
+   "uniques": 5
+  },
+  "2026-07-25": {
+   "count": 13,
+   "uniques": 5
+  },
+  "2026-07-26": {
+   "count": 7,
+   "uniques": 5
+  },
+  "2026-07-27": {
+   "count": 26,
+   "uniques": 1
+  }
+ }
+}

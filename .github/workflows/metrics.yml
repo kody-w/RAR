@@ -1,0 +1,45 @@
+name: Metrics Snapshot
+
+on:
+  schedule:
+    - cron: '20 5 * * *'  # 5:20 AM UTC daily, before the nightly health check
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_metrics.py'
+      - 'metrics.html'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: metrics-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Collect public metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/build_metrics.py
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/metrics.json state/metrics_history.json
+          if git diff --staged --quiet; then
+            echo "No metrics change"
+          else
+            git commit -m "chore: metrics snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi
