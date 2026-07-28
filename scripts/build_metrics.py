@@ -194,13 +194,16 @@ def apply_reviews(agents, user_doc):
 
 def apply_critic(agents, critic_doc):
     """Fold the critic panel's Rotten-Tomatoes-style verdicts onto each agent."""
-    totals = {"scored": 0, "critic_reviews": 0, "critic_sum": 0, "user_sum": 0, "rated_users": 0,
+    totals = {"scored": 0, "critic_reviews": 0, "model_reviews": 0, "rubric_reviews": 0,
+              "critic_sum": 0, "user_sum": 0, "rated_users": 0,
               "by_state": defaultdict(int), "backends": defaultdict(int)}
     for raw_key, rec in (critic_doc.get("agents") or {}).items():
         a = agents.get(norm(raw_key))
         state = rec.get("state", "unrated")
         totals["by_state"][state] += 1
         totals["critic_reviews"] += rec.get("critic_count", 0)
+        totals["model_reviews"] += rec.get("model_reviews", 0)
+        totals["rubric_reviews"] += rec.get("rubric_reviews", 0)
         for b in rec.get("backends", []):
             totals["backends"][b] += 1
         if rec.get("critic_score") is not None:
@@ -219,6 +222,8 @@ def apply_critic(agents, critic_doc):
     return {
         "agents_scored": totals["scored"],
         "critic_reviews": totals["critic_reviews"],
+        "model_reviews": totals["model_reviews"],
+        "rubric_reviews": totals["rubric_reviews"],
         "avg_critic_score": round(totals["critic_sum"] / totals["scored"]) if totals["scored"] else None,
         "avg_user_score": round(totals["user_sum"] / totals["rated_users"]) if totals["rated_users"] else None,
         "by_state": dict(totals["by_state"]),
