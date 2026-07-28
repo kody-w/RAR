@@ -29,6 +29,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -177,7 +178,8 @@ for name, inst in list(instances.items())[:3]:
     if str_keys and call.get("ok") and call.get("output_preview") is not None:
         variants = []
         # Deliberately absurd names — a real fixture must not collide with these.
-        for sentinel in ("Qwertzuiop Holdings BV", "Zzyzx Vantablack LLC"):
+        SENTINELS = ("Qwertzuiop Holdings BV", "Zzyzx Vantablack LLC")
+        for sentinel in SENTINELS:
             v_args = dict(args)
             for k in str_keys:
                 v_args[k] = sentinel
@@ -207,6 +209,8 @@ for name, inst in list(instances.items())[:3]:
             "sentinel_echoed": any("qwertzuiop" in v["text"].lower() or "zzyzx" in v["text"].lower()
                                    for v in ok_variants),
             "sample": (ok_variants[0]["text"][:400] if ok_variants else ""),
+            "sentinels": list(SENTINELS),
+            "varied_keys": str_keys,
             "errors": [v for v in variants if not v.get("ok")][:2],
         }
         out["input_sensitivity"] = sens
@@ -382,7 +386,7 @@ def _repo_snapshot():
     """Files under the tracked working tree, so we can spot an agent that writes
     into the registry while being probed."""
     out = set()
-    for sub in ("agents", "staging", "state"):
+    for sub in ("agents", "staging"):
         d = ROOT / sub
         if d.exists():
             out |= {str(p.relative_to(ROOT)) for p in d.rglob("*") if p.is_file()}
@@ -430,14 +434,43 @@ def harness(target, timeout=DEFAULT_TIMEOUT, agent=None, chat=True):
             ev["chat_probe"] = {"attempted": True, "error": f"{type(e).__name__}: {str(e)[:200]}"}
 
     created = sorted(_repo_snapshot() - before)
-    ev["side_effects"] = {"files_written": created}
+    ev["side_effects"] = {"files_written": created, "removed": [], "kept": []}
     for rel in created:
-        # Leave the repository exactly as we found it.
+        # Only clean up inside the agent trees, and only files that appeared while
+        # we were probing. Anything else is somebody else's file, not our mess.
+        if not (rel.startswith("agents/") or rel.startswith("staging/")):
+            ev["side_effects"]["kept"].append(rel)
+            continue
         try:
             (ROOT / rel).unlink()
+            ev["side_effects"]["removed"].append(rel)
         except OSError:
-            pass
+            ev["side_effects"]["kept"].append(rel)
     return ev
+
+
+SECRET_HINT = re.compile(
+    r"(?i)\b(gh[pousr]_[A-Za-z0-9]{16,}|sk-[A-Za-z0-9]{16,}|xox[baprs]-[A-Za-z0-9-]{10,}"
+    r"|eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}"
+    r"|AKIA[0-9A-Z]{16}|[A-Za-z0-9+/]{40,}={0,2})\b")
+
+
+def redact(obj):
+    """Strip anything that looks like a credential or a home path.
+
+    Transcripts are committed to a public repository, and the harness runs agents
+    with the operator's real environment. Whatever an agent echoed back must not
+    become a published secret.
+    """
+    if isinstance(obj, dict):
+        return {k: redact(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [redact(v) for v in obj]
+    if isinstance(obj, str):
+        out = SECRET_HINT.sub("[redacted]", obj)
+        out = out.replace(str(Path.home()), "~")
+        return out
+    return obj
 
 
 def summarize(ev):
@@ -478,10 +511,10 @@ def summarize(ev):
                 "NOT say so. A caller asking about one company is silently handed another company's "
                 f"numbers. Sample of what it returned: {sens.get('sample', '')[:260]!r}")
         elif not sens.get("sentinel_echoed"):
-            lines.append("INPUT SENSITIVITY: asked about two entities that certainly do not exist in any "
-                         "fixture, it never echoed either name back. It silently substituted something "
-                         "else and did not say it had done so — the caller has no way to know the answer "
-                         f"is not about what they asked. What came back: {sens.get('sample', '')[:260]!r}")
+            lines.append("INPUT SENSITIVITY: output did vary with different arguments, but neither "
+                         f"sentinel name was echoed back. That is not proof of a defect — the agent may "
+                         f"legitimately not repeat its input. Judge from the sample whether the response "
+                         f"is actually about what was asked: {sens.get('sample', '')[:240]!r}")
         else:
             lines.append("INPUT SENSITIVITY: passed — different arguments produced different output "
                          "and the requested entity is reflected back in the response.")

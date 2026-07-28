@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from basic_agent import BasicAgent
 import json
+import re
+import threading
 from datetime import datetime, timedelta
 
 # ═══════════════════════════════════════════════════════════════
@@ -185,18 +187,27 @@ def _resolve_account(query):
     if not query or not str(query).strip():
         return _DEFAULT_ACCOUNT
     q = str(query).lower().strip()
+    if len(q) < 3:
+        return None
     for key in _ACCOUNTS:
-        if key in q or q in _ACCOUNTS[key]["name"].lower():
+        if key == _CUSTOM_KEY:
+            continue
+        if re.search(rf"\b{re.escape(key)}\b", q) or q in _ACCOUNTS[key]["name"].lower():
             return key
-    # Looser pass: match on any significant word of the fixture name.
+    # Looser pass: match on any significant word of the fixture name. Requires a
+    # word boundary so "contoso-like" matches but a 4-letter fragment of an
+    # unrelated company name does not silently select a fixture.
     for key, acct in _ACCOUNTS.items():
         for word in acct["name"].lower().split():
-            if len(word) > 3 and word in q:
+            if len(word) > 3 and re.search(rf"\b{re.escape(word)}\b", q):
                 return key
     return None
 
 
 _CUSTOM_KEY = "__caller_supplied__"
+# Custom accounts are staged in module-level tables, so two concurrent calls would
+# otherwise read each other's figures. The brainstem can call agents in parallel.
+_CUSTOM_LOCK = threading.Lock()
 
 
 def _register_custom_account(data):
@@ -416,16 +427,17 @@ class RiskAssessmentAgent(BasicAgent):
                         f"`account_data` does not carry, and this agent will not invent them. "
                         f"Use `assess_deal_risk` or `executive_summary` with your figures, or run "
                         f"`{op}` against a demo account (`list_accounts`).")
-            try:
-                key = _register_custom_account(account_data)
-            except ValueError as e:
-                return f"**Error:** {e}"
-            try:
-                body = handler(key)
-            except Exception as e:
-                return f"**Error:** could not score the supplied account — {type(e).__name__}: {e}"
-            finally:
-                _clear_custom_account()
+            with _CUSTOM_LOCK:
+                try:
+                    key = _register_custom_account(account_data)
+                except ValueError as e:
+                    return f"**Error:** {e}"
+                try:
+                    body = handler(key)
+                except Exception as e:
+                    return f"**Error:** could not score the supplied account — {type(e).__name__}: {e}"
+                finally:
+                    _clear_custom_account()
             return (body + "\n\n_Scored from the figures you supplied, not from the demo dataset._")
 
         requested = kwargs.get("account_name", "")

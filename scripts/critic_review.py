@@ -49,7 +49,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from agent_harness import harness, summarize  # noqa: E402
+from agent_harness import harness, redact, summarize  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "registry.json"
@@ -468,6 +468,7 @@ def rubric_verdict(critic, agent, source, evidence=None):
 # ------------------------------------------------------------------ scoring
 
 def _frame(kind, label, text):
+    text = redact(text)
     body = text if isinstance(text, str) else json.dumps(text, indent=1)
     return {
         "kind": kind,
@@ -554,7 +555,9 @@ def write_evidence(agent, evidence, reviews, transcript_text):
         "frame_count": len(frames),
         "total_bytes": sum(f["bytes"] for f in frames),
         "note": ("Proof behind the critic verdicts. Frames are ordered and individually hashed so a "
-                 "reader can stream them one at a time and verify none was altered."),
+                 "reader can stream them one at a time and verify none was altered. Output is passed "
+                 "through a redactor before publication, but agents run with the operator's real "
+                 "environment — treat transcripts as you would any build log."),
         "frames": frames,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -727,6 +730,7 @@ def main():
 
         prior = agents_out.get(key)
         cs = critic_score(reviews)
+        model_backed = sum(1 for r in reviews if r["backend"] != "rubric")
         us, us_n = user_score(votes_norm.get(key), users_norm.get(key))
         agents_out[key] = {
             "name": a.get("name"),
@@ -737,6 +741,8 @@ def main():
             "critic_score": cs,
             "critic_avg": round(sum(r["score"] for r in reviews) / len(reviews), 1),
             "critic_count": len(reviews),
+            "model_reviews": model_backed,
+            "rubric_reviews": len(reviews) - model_backed,
             "user_score": us,
             "user_signal": us_n,
             "state": tomato_state(cs, us, len(reviews), us_n),
@@ -788,7 +794,12 @@ def main():
         rec["user_score"], rec["user_signal"] = us, n
         rec["state"] = tomato_state(rec.get("critic_score"), us, rec.get("critic_count", 0), n)
 
-    scored = [r for r in agents_out.values() if r.get("critic_score") is not None]
+    known = {norm(a.get("name")) for a in registry.get("agents", [])}
+    orphans = [k for k in agents_out if k not in known]
+    for k in orphans:
+        agents_out[k]["orphaned"] = True
+    scored = [r for r in agents_out.values()
+              if r.get("critic_score") is not None and not r.get("orphaned")]
     aud = [r for r in agents_out.values() if r.get("user_score") is not None]
     by_state = defaultdict(int)
     for r in agents_out.values():
@@ -803,7 +814,10 @@ def main():
         "panel": [{"id": c["id"], "name": c["name"], "lens": c["lens"]} for c in panel],
         "stats": {
             "agents_scored": len(scored),
-            "critic_reviews": sum(r.get("critic_count", 0) for r in agents_out.values()),
+            "critic_reviews": sum(r.get("critic_count", 0) for r in agents_out.values() if not r.get("orphaned")),
+            "model_reviews": sum(r.get("model_reviews", 0) for r in agents_out.values() if not r.get("orphaned")),
+            "rubric_reviews": sum(r.get("rubric_reviews", 0) for r in agents_out.values() if not r.get("orphaned")),
+            "orphaned_records": len(orphans),
             "avg_critic_score": round(sum(r["critic_score"] for r in scored) / len(scored)) if scored else None,
             "avg_user_score": round(sum(r["user_score"] for r in aud) / len(aud)) if aud else None,
             "by_state": dict(by_state),

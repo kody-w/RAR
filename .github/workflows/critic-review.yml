@@ -40,18 +40,25 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run the critic panel
-        # The panel calls the GitHub Models API. If inference is unavailable
-        # the script falls back to its deterministic rubric, so every agent
-        # still gets a scored verdict and the run still succeeds.
+      - name: Run the critic panel (source review only)
+        # DELIBERATELY --no-run --no-chat. Executing a contributor's agent here
+        # would run arbitrary third-party Python next to a write-scoped
+        # GITHUB_TOKEN that actions/checkout leaves in .git/config. Verdicts
+        # backed by real execution are produced by a maintainer running
+        # `python scripts/critic_review.py` locally, where the blast radius is
+        # a laptop rather than a token with push access to this repository.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RAR_CRITIC_BACKEND: models
+          INPUT_AGENT: ${{ github.event.inputs.agent }}
+          INPUT_LIMIT: ${{ github.event.inputs.limit || '12' }}
+          INPUT_FORCE: ${{ github.event.inputs.force }}
         run: |
-          python scripts/critic_review.py \
-            ${{ github.event.inputs.agent && format('--agent {0}', github.event.inputs.agent) || '' }} \
-            ${{ github.event.inputs.force == 'true' && '--force' || '' }} \
-            --limit ${{ github.event.inputs.limit || '12' }}
+          set -euo pipefail
+          ARGS=(--no-run --no-chat --limit "${INPUT_LIMIT}")
+          if [ -n "${INPUT_AGENT}" ]; then ARGS+=(--agent "${INPUT_AGENT}"); fi
+          if [ "${INPUT_FORCE}" = "true" ]; then ARGS+=(--force); fi
+          python scripts/critic_review.py "${ARGS[@]}"
 
       - name: Fold scores into the metrics snapshot
         env:
@@ -62,11 +69,17 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state/critic_reviews.json state/metrics.json state/metrics_history.json
+          git add state/critic_reviews.json state/critic_transcripts state/metrics.json state/metrics_history.json
           if git diff --staged --quiet; then
             echo "No verdict changes"
           else
             git commit -m "chore: critic panel verdicts $(date -u +%Y-%m-%dT%H:%M)"
-            git pull --rebase --strategy-option=ours origin main || true
-            git push
+            # Rebase normally. --strategy-option=ours would silently drop whatever
+            # landed on main in the meantime, including this job's own work.
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && exit 0
+              sleep 5
+            done
+            echo "could not land the verdicts on main" >&2
+            exit 1
           fi

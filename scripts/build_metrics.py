@@ -139,8 +139,13 @@ def build_agent_index(registry):
 
 
 def apply_votes(agents, votes_doc):
-    totals = {"up": 0, "down": 0, "voters": set(), "agents_voted": 0}
+    """Only votes for agents that still exist count. Stale keys for renamed or
+    removed agents would otherwise quietly inflate the public tally."""
+    totals = {"up": 0, "down": 0, "voters": set(), "agents_voted": 0, "orphaned_keys": 0}
     for raw_key, v in (votes_doc.get("agents") or {}).items():
+        if norm(raw_key) not in agents:
+            totals["orphaned_keys"] += 1
+            continue
         up, down = int(v.get("up", 0)), int(v.get("down", 0))
         totals["up"] += up
         totals["down"] += down
@@ -221,12 +226,16 @@ def apply_critic(agents, critic_doc):
 
 def apply_curator(agents, curator_doc):
     """Engine-generated curator notes. Reported separately, never counted as reviews."""
-    totals = {"reviews": 0, "agents_reviewed": 0, "reviewers": set(), "rating_sum": 0.0, "rated": 0}
+    totals = {"reviews": 0, "agents_reviewed": 0, "reviewers": set(), "rating_sum": 0.0, "rated": 0,
+              "orphaned_keys": 0}
     by_angle = defaultdict(int)
     dist = {str(i): 0 for i in range(1, 6)}
 
     for raw_key, reviews in (curator_doc.get("agents") or {}).items():
         if not isinstance(reviews, list) or not reviews:
+            continue
+        if norm(raw_key) not in agents:
+            totals["orphaned_keys"] += 1
             continue
         ratings = [float(r["rating"]) for r in reviews if isinstance(r.get("rating"), (int, float))]
         totals["reviews"] += len(reviews)
@@ -580,8 +589,12 @@ def main():
             "cdn_hits": hist_totals["cdn_all_time"],
             "release_downloads": releases.get("total_downloads", 0) if releases else 0,
             "page_views": hist_totals["views_all_time"],
-            "clone_uniques_14d": traffic.get("clones", {}).get("uniques_14d") or last_known.get("clone_uniques_14d", 0),
-            "view_uniques_14d": traffic.get("views", {}).get("uniques_14d") or last_known.get("view_uniques_14d", 0),
+            # `is None` not `or` — a genuine 0 from a live read must not be
+            # overwritten by a stale non-zero figure.
+            "clone_uniques_14d": (traffic.get("clones", {}).get("uniques_14d")
+                                  if traffic.get("clones") else last_known.get("clone_uniques_14d", 0)),
+            "view_uniques_14d": (traffic.get("views", {}).get("uniques_14d")
+                                 if traffic.get("views") else last_known.get("view_uniques_14d", 0)),
             "clone_uniques_daily_sum": hist_totals["clone_uniques_all_time"],
             "view_uniques_daily_sum": hist_totals["view_uniques_all_time"],
             "days_tracked": hist_totals["days_tracked"],
@@ -596,6 +609,7 @@ def main():
             "upvotes": vote_totals["up"],
             "downvotes": vote_totals["down"],
             "voters": vote_totals["voters"],
+            "orphaned_vote_keys": vote_totals.get("orphaned_keys", 0),
             "reviews": review_totals["reviews"],
             "reviewers": review_totals["reviewers"],
             "avg_rating": review_totals["avg_rating"],
@@ -613,8 +627,10 @@ def main():
         "traffic": {
             "paths": traffic.get("paths") or last_known.get("paths", []),
             "referrers": traffic.get("referrers") or last_known.get("referrers", []),
-            "clones_14d": traffic.get("clones", {}).get("count_14d") or last_known.get("clones_14d", 0),
-            "views_14d": traffic.get("views", {}).get("count_14d") or last_known.get("views_14d", 0),
+            "clones_14d": (traffic.get("clones", {}).get("count_14d")
+                           if traffic.get("clones") else last_known.get("clones_14d", 0)),
+            "views_14d": (traffic.get("views", {}).get("count_14d")
+                          if traffic.get("views") else last_known.get("views_14d", 0)),
             "live": traffic_live,
             "as_of": now_iso() if traffic_live else last_known.get("at"),
         },
@@ -639,7 +655,7 @@ def main():
         "leaderboards": build_leaderboards(agents),
         "agent_metrics": build_agent_metrics(agents),
         "sources": [
-            {"name": "GitHub Traffic API", "metric": "clones, views, popular paths", "url": f"{GH_API}/repos/{OWNER}/{REPO}/traffic/clones"},
+            {"name": "GitHub Traffic API", "metric": "clones, views, popular paths (clones include this repo's own CI checkouts)", "url": f"{GH_API}/repos/{OWNER}/{REPO}/traffic/clones"},
             {"name": "jsDelivr CDN", "metric": "per-file download hits", "url": f"{JSDELIVR}/stats/packages/gh/{OWNER}/{REPO}"},
             {"name": "GitHub Releases", "metric": "release asset downloads", "url": f"{GH_API}/repos/{OWNER}/{REPO}/releases"},
             {"name": "registry.json", "metric": "agents, publishers, categories", "url": f"https://{OWNER}.github.io/{REPO}/registry.json"},

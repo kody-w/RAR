@@ -294,7 +294,7 @@ const SITE = 'https://kody-w.github.io/RAR/';
 const OWNER = 'kody-w', REPO = 'RAR';
 const $ = id => document.getElementById(id);
 const num = n => (n === null || n === undefined || isNaN(n)) ? '—' : Number(n).toLocaleString();
-const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c]));
 const bytes = b => !b ? '—' : b > 1e9 ? (b/1e9).toFixed(1)+' GB' : b > 1e6 ? (b/1e6).toFixed(1)+' MB' : (b/1e3).toFixed(0)+' KB';
 const short = s => String(s || '').replace(/^@[^/]+\//, '');
 

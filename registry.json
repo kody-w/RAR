@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-28T18:28:13.913295+00:00",
+  "generated_at": "2026-07-28T18:53:36.906295+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
@@ -429,9 +429,9 @@
       "_install_filename": "rar_aibast_agents_library_account_risk_assessment_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
-      "_sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
+      "_sha256": "27c4185b7f6ed7654bf6f6b8ded0bf1c3a1043cd1129d20dcc039d46adecd2fb",
       "_lifecycle": "notarized",
-      "_receipt": "rar_982226fd5fa15251f197d4f4fc845cc5643df972b55a746278baadfc7b516136",
+      "_receipt": "rar_4d1fb05180dd0c83a21879c29a0a7511cdbefb034c1212281a0d67f59ea42005",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -448,12 +448,12 @@
         ]
       },
       "_seed": 15010362534912467138,
-      "_size_kb": 31.6,
-      "_lines": 662,
+      "_size_kb": 32.2,
+      "_lines": 674,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "e2d556438b5e2602e10718ed06d61f50a81c6ece",
       "_card_sha256": "1cf7f178c97dbcb1ed24d7ffe00733728f0ee5a359db10d8499c8b4417e810e0"
     },
     {
@@ -10745,8 +10745,8 @@
         "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
         "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py"
       ],
-      "_size_kb": 212.1,
-      "_lines": 4394
+      "_size_kb": 212.7,
+      "_lines": 4406
     },
     {
       "type": "stack",
