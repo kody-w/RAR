@@ -12,6 +12,10 @@ on:
 
 permissions:
   contents: write
+  # The traffic endpoints (clones, views, popular paths) are 403 for the default
+  # token without this. If an org policy still blocks it, build_metrics.py falls
+  # back to the last successful read recorded in state/metrics_history.json.
+  administration: read
 
 concurrency:
   group: metrics-snapshot

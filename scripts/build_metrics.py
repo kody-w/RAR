@@ -5,7 +5,8 @@ build_metrics.py — collect public RAR registry metrics into state/metrics.json
 Sources (all public, no auth required except GitHub traffic):
   - registry.json                       agents, publishers, categories, sizes, dates
   - state/votes.json                    up/down votes per agent
-  - state/curator_reviews.json          reviews + ratings per agent
+  - state/reviews.json                  real user reviews + ratings per agent
+  - state/curator_reviews.json          engine-generated curator notes (reported separately)
   - api.github.com/repos/...            stars, forks, watchers, issues, releases
   - api.github.com/.../traffic/*        clones, views, popular paths/referrers (needs token)
   - data.jsdelivr.com                   CDN download hits, per-file + per-day
@@ -122,6 +123,8 @@ def build_agent_index(registry):
             "score": 0,
             "reviews": 0,
             "rating": 0.0,
+            "curator_reviews": 0,
+            "curator_rating": 0.0,
         }
         agents[key] = rec
         if rec["file"]:
@@ -147,18 +150,46 @@ def apply_votes(agents, votes_doc):
     return totals
 
 
-def apply_reviews(agents, curator_doc, user_doc):
+def apply_reviews(agents, user_doc):
+    """Real user reviews only (state/reviews.json, written by the issues API)."""
+    totals = {"reviews": 0, "agents_reviewed": 0, "reviewers": set(), "rating_sum": 0.0, "rated": 0}
+    dist = {str(i): 0 for i in range(1, 6)}
+
+    for raw_key, reviews in (user_doc.get("agents") or {}).items():
+        if not isinstance(reviews, list) or not reviews:
+            continue
+        ratings = [float(r["rating"]) for r in reviews if isinstance(r.get("rating"), (int, float))]
+        totals["reviews"] += len(reviews)
+        totals["agents_reviewed"] += 1
+        for r in reviews:
+            if r.get("user"):
+                totals["reviewers"].add(r["user"])
+            rating = r.get("rating")
+            if isinstance(rating, (int, float)) and 1 <= rating <= 5:
+                dist[str(int(rating))] += 1
+        totals["rating_sum"] += sum(ratings)
+        totals["rated"] += len(ratings)
+        rec = agents.get(norm(raw_key))
+        if rec:
+            rec["reviews"] = len(reviews)
+            rec["rating"] = round(sum(ratings) / len(ratings), 2) if ratings else 0.0
+
+    totals["reviewers"] = len(totals["reviewers"])
+    totals["avg_rating"] = round(totals["rating_sum"] / totals["rated"], 2) if totals["rated"] else 0.0
+    totals.pop("rating_sum")
+    totals["distribution"] = dist
+    return totals
+
+
+def apply_curator(agents, curator_doc):
+    """Engine-generated curator notes. Reported separately, never counted as reviews."""
     totals = {"reviews": 0, "agents_reviewed": 0, "reviewers": set(), "rating_sum": 0.0, "rated": 0}
     by_angle = defaultdict(int)
     dist = {str(i): 0 for i in range(1, 6)}
-    merged = defaultdict(list)
 
-    for doc in (curator_doc, user_doc):
-        for raw_key, reviews in (doc.get("agents") or {}).items():
-            if isinstance(reviews, list):
-                merged[norm(raw_key)].extend(reviews)
-
-    for key, reviews in merged.items():
+    for raw_key, reviews in (curator_doc.get("agents") or {}).items():
+        if not isinstance(reviews, list) or not reviews:
+            continue
         ratings = [float(r["rating"]) for r in reviews if isinstance(r.get("rating"), (int, float))]
         totals["reviews"] += len(reviews)
         totals["agents_reviewed"] += 1
@@ -171,10 +202,10 @@ def apply_reviews(agents, curator_doc, user_doc):
                 dist[str(int(rating))] += 1
         totals["rating_sum"] += sum(ratings)
         totals["rated"] += len(ratings)
-        rec = agents.get(key)
+        rec = agents.get(norm(raw_key))
         if rec:
-            rec["reviews"] = len(reviews)
-            rec["rating"] = round(sum(ratings) / len(ratings), 2) if ratings else 0.0
+            rec["curator_reviews"] = len(reviews)
+            rec["curator_rating"] = round(sum(ratings) / len(ratings), 2) if ratings else 0.0
 
     totals["reviewers"] = len(totals["reviewers"])
     totals["avg_rating"] = round(totals["rating_sum"] / totals["rated"], 2) if totals["rated"] else 0.0
@@ -288,7 +319,12 @@ def fetch_jsdelivr(by_file, agents):
 # ------------------------------------------------------------------ history
 
 def merge_history(traffic, jsd):
-    """Accumulate rolling-window daily rows so totals survive the 14-day cutoff."""
+    """Accumulate rolling-window daily rows so totals survive the 14-day cutoff.
+
+    Also remembers the last successful traffic read. The Actions GITHUB_TOKEN is
+    403 on the traffic endpoints, so an unauthenticated or CI run must not blank
+    out figures a previous authorized run already established.
+    """
     hist = load_json(HISTORY, {"clones": {}, "views": {}, "cdn": {}, "snapshots": []})
     for bucket, rows in (("clones", traffic.get("clones", {}).get("daily", [])),
                          ("views", traffic.get("views", {}).get("daily", []))):
@@ -302,6 +338,19 @@ def merge_history(traffic, jsd):
     cdn = hist.setdefault("cdn", {})
     for row in jsd.get("daily", []):
         cdn[row["date"]] = max(cdn.get(row["date"], 0), row["count"])
+
+    last = hist.setdefault("last_known", {})
+    if traffic.get("clones"):
+        last["clone_uniques_14d"] = traffic["clones"].get("uniques_14d", 0)
+        last["clones_14d"] = traffic["clones"].get("count_14d", 0)
+        last["at"] = now_iso()
+    if traffic.get("views"):
+        last["view_uniques_14d"] = traffic["views"].get("uniques_14d", 0)
+        last["views_14d"] = traffic["views"].get("count_14d", 0)
+    if traffic.get("paths"):
+        last["paths"] = traffic["paths"]
+    if traffic.get("referrers"):
+        last["referrers"] = traffic["referrers"]
 
     totals = {
         "clones_all_time": sum(v["count"] for v in hist["clones"].values()),
@@ -327,7 +376,7 @@ def merge_history(traffic, jsd):
         })
 
     HISTORY.write_text(json.dumps(hist, indent=1, sort_keys=True) + "\n")
-    return totals, daily
+    return totals, daily, last
 
 
 # ------------------------------------------------------------- leaderboards
@@ -342,7 +391,7 @@ def top(rows, key, n=15, require=True):
 def slim(rec, *extra):
     fields = ("name", "display_name", "publisher", "category", "tier", "downloads",
               "up", "down", "score", "reviews", "rating", "lines", "size_kb",
-              "added_at", "file", "description") + extra
+              "added_at", "file", "description", "curator_reviews", "curator_rating") + extra
     return {k: rec[k] for k in fields if k in rec}
 
 
@@ -350,7 +399,7 @@ def build_agent_metrics(agents):
     """Compact per-agent map for the browse UI. Only agents with a signal."""
     out = {}
     for rec in agents.values():
-        if not (rec["downloads"] or rec["up"] or rec["down"] or rec["reviews"]):
+        if not (rec["downloads"] or rec["up"] or rec["down"] or rec["reviews"] or rec["curator_reviews"]):
             continue
         out[rec["name"]] = {
             "d": rec["downloads"],
@@ -359,6 +408,8 @@ def build_agent_metrics(agents):
             "s": rec["score"],
             "r": rec["reviews"],
             "rt": rec["rating"],
+            "cr": rec["curator_reviews"],
+            "crt": rec["curator_rating"],
         }
     return out
 
@@ -366,7 +417,7 @@ def build_agent_metrics(agents):
 def build_leaderboards(agents):
     rows = list(agents.values())
     publishers = defaultdict(lambda: {"agents": 0, "downloads": 0, "score": 0, "reviews": 0,
-                                      "rating_sum": 0.0, "rated": 0, "lines": 0})
+                                      "rating_sum": 0.0, "rated": 0, "lines": 0, "curator_reviews": 0})
     categories = defaultdict(lambda: {"agents": 0, "downloads": 0, "score": 0, "reviews": 0})
     tiers = defaultdict(int)
 
@@ -376,6 +427,7 @@ def build_leaderboards(agents):
         p["downloads"] += r["downloads"]
         p["score"] += r["score"]
         p["reviews"] += r["reviews"]
+        p["curator_reviews"] += r["curator_reviews"]
         p["lines"] += r["lines"]
         if r["rating"]:
             p["rating_sum"] += r["rating"]
@@ -392,6 +444,7 @@ def build_leaderboards(agents):
         pub_rows.append({
             "name": name, "agents": p["agents"], "downloads": p["downloads"],
             "score": p["score"], "reviews": p["reviews"], "lines": p["lines"],
+            "curator_reviews": p["curator_reviews"],
             "rating": round(p["rating_sum"] / p["rated"], 2) if p["rated"] else 0.0,
         })
     pub_rows.sort(key=lambda r: (-r["agents"], r["name"]))
@@ -435,7 +488,8 @@ def main():
     log("· indexing registry")
     agents, by_file = build_agent_index(registry)
     vote_totals = apply_votes(agents, load_json(VOTES, {}))
-    review_totals = apply_reviews(agents, load_json(CURATOR_REVIEWS, {}), load_json(USER_REVIEWS, {}))
+    review_totals = apply_reviews(agents, load_json(USER_REVIEWS, {}))
+    curator_totals = apply_curator(agents, load_json(CURATOR_REVIEWS, {}))
 
     repo = releases = traffic = {}
     jsd = {"total_hits": 0, "bandwidth": 0, "daily": [], "files": [], "agent_hits": 0}
@@ -449,7 +503,8 @@ def main():
         log("· jsdelivr cdn")
         jsd = fetch_jsdelivr(by_file, agents)
 
-    hist_totals, daily = merge_history(traffic, jsd)
+    hist_totals, daily, last_known = merge_history(traffic, jsd)
+    traffic_live = bool(traffic.get("clones"))
 
     total_downloads = (hist_totals["clones_all_time"]
                        + hist_totals["cdn_all_time"]
@@ -467,8 +522,8 @@ def main():
             "cdn_hits": hist_totals["cdn_all_time"],
             "release_downloads": releases.get("total_downloads", 0) if releases else 0,
             "page_views": hist_totals["views_all_time"],
-            "clone_uniques_14d": traffic.get("clones", {}).get("uniques_14d", 0),
-            "view_uniques_14d": traffic.get("views", {}).get("uniques_14d", 0),
+            "clone_uniques_14d": traffic.get("clones", {}).get("uniques_14d") or last_known.get("clone_uniques_14d", 0),
+            "view_uniques_14d": traffic.get("views", {}).get("uniques_14d") or last_known.get("view_uniques_14d", 0),
             "clone_uniques_daily_sum": hist_totals["clone_uniques_all_time"],
             "view_uniques_daily_sum": hist_totals["view_uniques_all_time"],
             "days_tracked": hist_totals["days_tracked"],
@@ -487,17 +542,32 @@ def main():
             "reviewers": review_totals["reviewers"],
             "avg_rating": review_totals["avg_rating"],
             "agents_reviewed": review_totals["agents_reviewed"],
+            "curator_reviews": curator_totals["reviews"],
+            "curator_agents_reviewed": curator_totals["agents_reviewed"],
+            "curator_avg_rating": curator_totals["avg_rating"],
             "agents_voted": vote_totals["agents_voted"],
         },
         "daily": daily,
-        "traffic": {"paths": traffic.get("paths", []), "referrers": traffic.get("referrers", []),
-                    "clones_14d": traffic.get("clones", {}).get("count_14d", 0),
-                    "views_14d": traffic.get("views", {}).get("count_14d", 0)},
+        "traffic": {
+            "paths": traffic.get("paths") or last_known.get("paths", []),
+            "referrers": traffic.get("referrers") or last_known.get("referrers", []),
+            "clones_14d": traffic.get("clones", {}).get("count_14d") or last_known.get("clones_14d", 0),
+            "views_14d": traffic.get("views", {}).get("count_14d") or last_known.get("views_14d", 0),
+            "live": traffic_live,
+            "as_of": now_iso() if traffic_live else last_known.get("at"),
+        },
         "cdn": {"total_hits": jsd["total_hits"], "bandwidth": jsd["bandwidth"],
                 "rank": jsd.get("rank"), "agent_hits": jsd.get("agent_hits", 0),
                 "files": jsd["files"]},
         "releases": releases or {"total_downloads": 0, "count": 0, "releases": []},
-        "reviews": {"by_angle": review_totals["by_angle"], "distribution": review_totals["distribution"]},
+        "reviews": {
+            "user": {"total": review_totals["reviews"], "reviewers": review_totals["reviewers"],
+                     "avg_rating": review_totals["avg_rating"], "distribution": review_totals["distribution"]},
+            "curator": {"total": curator_totals["reviews"], "reviewers": curator_totals["reviewers"],
+                        "avg_rating": curator_totals["avg_rating"], "agents": curator_totals["agents_reviewed"],
+                        "by_angle": curator_totals["by_angle"], "distribution": curator_totals["distribution"],
+                        "note": "Engine-generated curator notes from state/curator_reviews.json. Reported for transparency; NOT counted in the review totals or the review leaderboards."},
+        },
         "leaderboards": build_leaderboards(agents),
         "agent_metrics": build_agent_metrics(agents),
         "sources": [
@@ -505,8 +575,9 @@ def main():
             {"name": "jsDelivr CDN", "metric": "per-file download hits", "url": f"{JSDELIVR}/stats/packages/gh/{OWNER}/{REPO}"},
             {"name": "GitHub Releases", "metric": "release asset downloads", "url": f"{GH_API}/repos/{OWNER}/{REPO}/releases"},
             {"name": "registry.json", "metric": "agents, publishers, categories", "url": f"https://{OWNER}.github.io/{REPO}/registry.json"},
+            {"name": "state/reviews.json", "metric": "user reviews and ratings", "url": f"https://{OWNER}.github.io/{REPO}/state/reviews.json"},
             {"name": "state/votes.json", "metric": "up/down votes", "url": f"https://{OWNER}.github.io/{REPO}/state/votes.json"},
-            {"name": "state/curator_reviews.json", "metric": "reviews and ratings", "url": f"https://{OWNER}.github.io/{REPO}/state/curator_reviews.json"},
+            {"name": "state/curator_reviews.json", "metric": "engine-generated curator notes (not counted as reviews)", "url": f"https://{OWNER}.github.io/{REPO}/state/curator_reviews.json"},
         ],
     }
 
@@ -514,7 +585,7 @@ def main():
     t = doc["totals"]
     log(f"✓ {args.out}")
     log(f"  downloads={t['downloads']} (clones {t['clones']} + cdn {t['cdn_hits']} + releases {t['release_downloads']})")
-    log(f"  agents={t['agents']} votes={t['votes']} reviews={t['reviews']} stars={doc['repo'].get('stars', 0)}")
+    log(f"  agents={t['agents']} votes={t['votes']} user_reviews={t['reviews']} curator={t['curator_reviews']} stars={doc['repo'].get('stars', 0)}")
     return 0
 
 

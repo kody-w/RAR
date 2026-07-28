@@ -165,6 +165,7 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
     <div class="stamp">
       <span><span class="dot"></span> <span id="stamp-time">loading…</span></span>
       <span>·</span><span id="stamp-window"></span>
+      <span>·</span><span id="stamp-src"></span>
       <span>·</span><span id="stamp-mode"></span>
     </div>
   </div>
@@ -212,11 +213,11 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
       <div class="card" id="tier-bars"></div>
     </div>
     <div>
-      <div class="section-head"><h2>Rating spread</h2></div>
+      <div class="section-head"><h2>Rating spread</h2><div class="hint">engine notes</div></div>
       <div class="card" id="rating-bars"></div>
     </div>
     <div>
-      <div class="section-head"><h2>Review angles</h2></div>
+      <div class="section-head"><h2>Review angles</h2><div class="hint">engine notes</div></div>
       <div class="card" id="angle-bars"></div>
     </div>
   </div>
@@ -253,6 +254,12 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
         14-day traffic window, so <code>scripts/build_metrics.py</code> snapshots it daily into
         <code>state/metrics_history.json</code>, deduplicated by date — the all-time total grows from the first day of
         tracking and never double-counts.
+      </p>
+      <p class="note" style="margin-top:10px">
+        <b>On reviews.</b> Only real user reviews from <code>state/reviews.json</code> — submitted through the
+        GitHub issues API — are counted in the review total, the average rating, and the review leaderboards.
+        The registry also carries engine-generated curator notes in <code>state/curator_reviews.json</code>;
+        those are shown separately and labelled "engine notes", never mixed into the headline number.
       </p>
       <p class="note" style="margin-top:10px">
         <b>On unique counts.</b> GitHub reports uniques per 14-day window, not per day, so daily unique figures cannot
@@ -336,6 +343,10 @@ async function liveTopUp(force) {
 function render() {
   const t = M.totals;
   $('stamp-time').textContent = 'snapshot ' + new Date(M.generated_at).toLocaleString();
+  const tr = M.traffic || {};
+  $('stamp-src').textContent = tr.live === false
+    ? `traffic figures as of ${String(tr.as_of || '').slice(0, 10)} (last authorized read)`
+    : 'traffic read live';
   $('stamp-window').textContent = t.tracking_since
     ? `tracking since ${t.tracking_since} (${t.days_tracked} days)`
     : 'tracking started';
@@ -346,8 +357,9 @@ function render() {
   renderPublishers();
   renderBars('cat-bars', (M.leaderboards.categories || []).slice(0, 12).map(c => ({ label: c.name.replace(/_/g,' '), value: c.agents, extra: `${c.reviews} reviews` })));
   renderBars('tier-bars', Object.entries(M.leaderboards.tiers || {}).map(([k, v]) => ({ label: k, value: v })));
-  renderBars('rating-bars', Object.entries(M.reviews.distribution || {}).reverse().map(([k, v]) => ({ label: '★'.repeat(+k), value: v })));
-  renderBars('angle-bars', Object.entries(M.reviews.by_angle || {}).map(([k, v]) => ({ label: k.replace(/_/g,' '), value: v })));
+  const cur = (M.reviews && M.reviews.curator) || {};
+  renderBars('rating-bars', Object.entries(cur.distribution || {}).reverse().map(([k, v]) => ({ label: '★'.repeat(+k), value: v })));
+  renderBars('angle-bars', Object.entries(cur.by_angle || {}).map(([k, v]) => ({ label: k.replace(/_/g,' '), value: v })));
   renderCDNFiles();
   renderPaths();
   renderReferrers();
@@ -361,7 +373,7 @@ function renderKPIs() {
     { hero: true, label: 'Total downloads', value: num(t.downloads), sub: `${num(t.clones)} clones · ${num(t.cdn_hits)} CDN hits · ${num(t.release_downloads)} release assets` },
     { label: 'Unique cloners', value: num(t.clone_uniques_14d), sub: `last 14 days · ${num(t.clone_uniques_daily_sum)} daily-unique sum since ${t.tracking_since || '—'}` },
     { label: 'Agents', value: num(t.agents), sub: `${num(t.publishers)} publishers · ${num(t.categories)} categories` },
-    { label: 'Reviews', value: num(t.reviews), sub: `${num(t.agents_reviewed)} agents · ★ ${t.avg_rating} avg` },
+    { label: 'Reviews', value: num(t.reviews), sub: t.reviews ? `${num(t.agents_reviewed)} agents · ★ ${t.avg_rating} avg` : `no user reviews yet · ${num(t.curator_reviews)} engine notes` },
     { label: 'Votes', value: num(t.votes), sub: `${num(t.upvotes)} up · ${num(t.downvotes)} down` },
     { label: 'Page views', value: num(t.page_views), sub: `${num(t.view_uniques_14d)} unique visitors (14d)` },
     { label: 'Stars', value: num(r.stars), sub: `${num(r.forks)} forks · ${num(r.open_issues)} open issues` },
@@ -423,7 +435,14 @@ function renderBoards() {
   $('tabs').querySelectorAll('.tab').forEach(el => el.onclick = () => { activeBoard = el.dataset.board; renderBoards(); });
   const cfg = BOARDS.find(b => b.id === activeBoard);
   const rows = (M.leaderboards[activeBoard] || []);
-  if (!rows.length) { $('board').innerHTML = '<div class="empty">No data recorded yet for this metric.</div>'; return; }
+  if (!rows.length) {
+    const isRev = activeBoard === 'most_reviewed' || activeBoard === 'highest_rated';
+    $('board').innerHTML = isRev
+      ? `<div class="empty">No <b>user</b> reviews yet — only ${num(M.totals.curator_reviews)} engine-generated curator notes exist, and those are deliberately not counted here.<br><br>
+         <a href="https://github.com/${OWNER}/${REPO}/issues/new?title=%5BRAR%5D%20review&body=%60%60%60json%0A%7B%22action%22%3A%22review%22%2C%22payload%22%3A%7B%22agent%22%3A%22%40pub%2Fslug%22%2C%22rating%22%3A5%2C%22text%22%3A%22Your%20review%22%7D%7D%0A%60%60%60" target="_blank" rel="noopener">Leave the first review &rarr;</a></div>`
+      : '<div class="empty">No data recorded yet for this metric.</div>';
+    return;
+  }
   $('board').innerHTML = rows.map((r, i) => {
     let val = r[cfg.metric];
     if (cfg.metric === 'added_at') val = String(val).slice(0, 10);
@@ -446,12 +465,13 @@ function renderBoards() {
 function renderPublishers() {
   const rows = M.leaderboards.publishers || [];
   $('pub-table').innerHTML =
-    `<thead><tr><th>Publisher</th><th class="num">Agents</th><th class="num">Downloads</th><th class="num">Reviews</th><th class="num">★</th><th class="num">Votes</th></tr></thead>
+    `<thead><tr><th>Publisher</th><th class="num">Agents</th><th class="num">Downloads</th><th class="num">Reviews</th><th class="num">★</th><th class="num">Votes</th><th class="num">Engine notes</th></tr></thead>
      <tbody>${rows.map(p => `<tr>
        <td><a href="https://github.com/${OWNER}/${REPO}/tree/main/agents/${encodeURIComponent(p.name)}" target="_blank" rel="noopener">${esc(p.name)}</a></td>
        <td class="num">${num(p.agents)}</td><td class="num">${num(p.downloads)}</td>
        <td class="num">${num(p.reviews)}</td><td class="num">${p.rating || '—'}</td>
-       <td class="num">${p.score > 0 ? '+' : ''}${p.score || 0}</td></tr>`).join('')}</tbody>`;
+       <td class="num">${p.score > 0 ? '+' : ''}${p.score || 0}</td>
+       <td class="num" style="color:var(--text-muted)">${num(p.curator_reviews || 0)}</td></tr>`).join('')}</tbody>`;
 }
 
 function renderBars(target, rows) {
