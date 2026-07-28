@@ -140,6 +140,13 @@ header {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 20px; cursor: default; transition: border-color .2s;
 }
+.metric-strip {
+  display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+  font-size: .74rem; color: var(--text-dim); margin: -4px 0 10px;
+  font-variant-numeric: tabular-nums;
+}
+.metric-strip a:hover { text-decoration: underline; }
+.metric-sep { color: var(--border-hover); }
 .agent-card:hover { border-color: var(--accent); }
 .card-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
 .card-desc {
@@ -748,6 +755,61 @@ function renderEcosystemIndex() {
     </div>`;
 }
 
+// Registry metrics (state/metrics.json) — per-agent downloads, votes and
+// review counts, plus the engine-written reviews themselves. Both are
+// snapshots rebuilt daily; the UI degrades to no badges if either is absent.
+let agentMetrics = {};
+let agentReviews = {};
+
+// votes.json and curator_reviews.json key some agents with dashed slugs
+// while registry.json uses snake_case. Normalize before matching.
+const normKey = s => String(s || '').toLowerCase().replace(/[-\s]+/g, '_');
+function metricsFor(name) {
+  return agentMetrics[name] || agentMetrics[normKey(name)] || null;
+}
+function reviewsFor(name) {
+  return agentReviews[name] || agentReviews[normKey(name)] || [];
+}
+
+fetch(RAW + '/state/metrics.json?t=' + Date.now())
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d || !d.agent_metrics) return;
+    for (const [k, v] of Object.entries(d.agent_metrics)) agentMetrics[normKey(k)] = v;
+    if (allAgents.length) render();
+  })
+  .catch(() => {});
+
+fetch(RAW + '/state/curator_reviews.json?t=' + Date.now())
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d || !d.agents) return;
+    for (const [k, v] of Object.entries(d.agents)) agentReviews[normKey(k)] = v;
+    if (allAgents.length) render();
+  })
+  .catch(() => {});
+
+const STAR = '&#9733;';
+
+// Compact metric strip shown on every browse card.
+function metricBadges(a) {
+  const m = metricsFor(a.name);
+  const revs = reviewsFor(a.name).length;
+  if (!m && !revs) return '';
+  const bits = [];
+  if (m && m.d) bits.push(`<span title="${m.d} download${m.d === 1 ? '' : 's'} through the jsDelivr CDN">&#8595; ${m.d}</span>`);
+  if (m && (m.u || m.n)) {
+    const s = m.s > 0 ? '+' + m.s : m.s;
+    bits.push(`<span title="${m.u} up / ${m.n} down">&#9650; ${s}</span>`);
+  }
+  if (revs) {
+    const rt = m && m.rt ? m.rt : 0;
+    bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="Read all ${revs} review${revs === 1 ? '' : 's'}" style="color:var(--accent);text-decoration:none">${STAR} ${rt || '–'} (${revs})</a>`);
+  }
+  if (!bits.length) return '';
+  return `<span class="metric-strip">${bits.join('<span class="metric-sep">&middot;</span>')}</span>`;
+}
+
 function card(a) {
   const isStub = a.type === 'stub';
   const lockBadge = isStub
@@ -761,6 +823,7 @@ function card(a) {
     <div class="agent-card" onclick="openAgent('${esc(a.name)}')">
       <div class="card-name">${lockBadge}${esc(a.display_name)}</div>
       <div class="card-desc">${esc(a.description)}</div>
+      ${metricBadges(a)}
       <div class="card-footer">
         <span style="display:flex;gap:8px;align-items:center;min-width:0">
           <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
@@ -919,6 +982,67 @@ function loadSharedCart() {
 
 window.addEventListener('load', () => { updateCartUI(); loadSharedCart(); });
 
+// Per-agent metrics panel inside the detail modal.
+function metricsSection(a) {
+  const m = metricsFor(a.name);
+  const revs = reviewsFor(a.name);
+  if (!m && !revs.length) return '';
+  const cells = [
+    ['Downloads', m && m.d ? m.d : 0, 'CDN file fetches'],
+    ['Votes', m ? ((m.s > 0 ? '+' : '') + (m.s || 0)) : 0, m ? `${m.u || 0} up / ${m.n || 0} down` : ''],
+    ['Reviews', revs.length, m && m.rt ? `${STAR} ${m.rt} average` : '']
+  ];
+  return `<div class="section">
+      <h3>Metrics</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        ${cells.map(([l, v, s]) => `<div style="flex:1;min-width:110px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:11px 13px">
+            <div style="font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:700">${l}</div>
+            <div style="font-size:1.35rem;font-weight:800;margin-top:2px">${v}</div>
+            <div style="font-size:.7rem;color:var(--text-muted)">${s}</div>
+          </div>`).join('')}
+      </div>
+      <div style="margin-top:10px;font-size:.8rem">
+        <a href="metrics.html" target="_blank">See the full registry dashboard &rarr;</a>
+      </div>
+    </div>`;
+}
+
+// Full review list — this is what the card's star badge links to.
+function reviewsSection(a) {
+  const revs = reviewsFor(a.name);
+  if (!revs.length) return '';
+  const sorted = [...revs].sort((x, y) => String(y.timestamp || '').localeCompare(String(x.timestamp || '')));
+  return `<div class="section" id="reviews-section">
+      <h3>Reviews (${revs.length})</h3>
+      ${sorted.map(r => {
+        const stars = Math.max(0, Math.min(5, Math.round(Number(r.rating) || 0)));
+        return `<div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;background:var(--surface2)">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap">
+            <strong style="font-size:.86rem">${esc(r.user || 'anonymous')}</strong>
+            <span style="font-size:.78rem;color:var(--orange, #d29922)">${STAR.repeat(stars)}<span style="color:var(--border-hover)">${'\u2606'.repeat(5 - stars)}</span></span>
+          </div>
+          <div style="font-size:.85rem;color:var(--text-dim);margin-top:6px">${esc(r.text || '')}</div>
+          <div style="font-size:.7rem;color:var(--text-muted);margin-top:6px">
+            ${r.angle ? esc(String(r.angle).replace(/_/g, ' ')) + ' &middot; ' : ''}${esc(String(r.timestamp || '').slice(0, 10))}
+          </div>
+        </div>`;
+      }).join('')}
+      <div style="font-size:.8rem;margin-top:4px">
+        <a href="${RAW}/state/curator_reviews.json" target="_blank">Raw review data</a> &middot;
+        <a href="store.html#agent/${encodeURIComponent(a.name)}" target="_blank">Open in the full store</a>
+      </div>
+    </div>`;
+}
+
+// Open an agent straight to its reviews (card star badge, #reviews/<name>).
+function openReviews(name) {
+  openAgent(name);
+  setTimeout(() => {
+    const el = document.getElementById('reviews-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 60);
+}
+
 function openAgent(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
@@ -972,6 +1096,8 @@ function openAgent(name) {
       <h3>Environment Variables</h3>
       <div class="env-list">${envHtml}</div>
     </div>
+    ${metricsSection(a)}
+    ${reviewsSection(a)}
     ${ghUrl ? `<div class="section"><a href="${esc(ghUrl)}" target="_blank" style="font-size:.85rem">View source on GitHub</a></div>` : ''}
   `;
   document.getElementById('modal').classList.add('open');

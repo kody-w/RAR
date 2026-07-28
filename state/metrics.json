@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T17:37:10Z",
+ "generated_at": "2026-07-28T17:41:55Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -12,7 +12,7 @@
   "open_issues": 84,
   "size_kb": 27638,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T17:36:57Z",
+  "pushed_at": "2026-07-28T17:41:06Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -22,8 +22,8 @@
   "cdn_hits": 65,
   "release_downloads": 0,
   "page_views": 75,
-  "clone_uniques_14d": 0,
-  "view_uniques_14d": 0,
+  "clone_uniques_14d": 387,
+  "view_uniques_14d": 20,
   "clone_uniques_daily_sum": 581,
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
@@ -152,10 +152,82 @@
   }
  ],
  "traffic": {
-  "paths": [],
-  "referrers": [],
-  "clones_14d": 0,
-  "views_14d": 0
+  "paths": [
+   {
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "count": 15,
+    "uniques": 6
+   },
+   {
+    "path": "/kody-w/RAR/agents",
+    "title": "/agents",
+    "count": 4,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/discussions/228",
+    "title": "/discussions/228",
+    "count": 3,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
+    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/discussions/378",
+    "title": "/discussions/378",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/pulls",
+    "title": "/pulls",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/forks",
+    "title": "/forks",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/issues/174",
+    "title": "/issues/174",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "count": 2,
+    "uniques": 1
+   }
+  ],
+  "referrers": [
+   {
+    "referrer": "github.com",
+    "count": 57,
+    "uniques": 15
+   },
+   {
+    "referrer": "Bing",
+    "count": 2,
+    "uniques": 1
+   }
+  ],
+  "clones_14d": 2743,
+  "views_14d": 75
  },
  "cdn": {
   "total_hits": 65,
@@ -1701,6 +1773,832 @@
    "official": 39,
    "verified": 5,
    "private": 2
+  }
+ },
+ "agent_metrics": {
+  "@aibast-agents-library/account_intelligence": {
+   "d": 0,
+   "u": 2,
+   "n": 0,
+   "s": 2,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/action_prioritization": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/competitive_intelligence": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/deal_tracking": {
+   "d": 0,
+   "u": 1,
+   "n": 0,
+   "s": 1,
+   "r": 2,
+   "rt": 2.5
+  },
+  "@aibast-agents-library/meeting_prep": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/account_messaging": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/account_risk_assessment": {
+   "d": 0,
+   "u": 0,
+   "n": 1,
+   "s": -1,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/stakeholder_intelligence": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 5.0
+  },
+  "@aibast-agents-library/activity_gap": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/deal_competitor_intel": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/deal_health_score": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/deal_progression": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 2.33
+  },
+  "@aibast-agents-library/deal_risk_assessment": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/next_best_action": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 2.75
+  },
+  "@aibast-agents-library/pipeline_velocity": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/revenue_forecast": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 6,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/deal_stakeholder_engagement": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 4.4
+  },
+  "@aibast-agents-library/stalled_deal_detection": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/win_probability": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 2.33
+  },
+  "@aibast-agents-library/proposal_generation": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/sales_qualification": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/win_loss_analysis": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/cart_abandonment_recovery": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 6,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/customer_360_speech": {
+   "d": 3,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/customer_loyalty_rewards": {
+   "d": 3,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/omnichannel_engagement": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/personalized_shopping_assistant": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/returns_exchange": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.25
+  },
+  "@aibast-agents-library/asset_maintenance_forecast": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/emission_tracking": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/field_service_dispatch": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/permit_license_management": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/energy_regulatory_reporting": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/acquisition_support": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.67
+  },
+  "@aibast-agents-library/federal_grants_oversight": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/mission_reporting_assistant": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 5.0
+  },
+  "@aibast-agents-library/regulatory_compliance_fed": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/workforce_clearance_onboarding": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 3.8
+  },
+  "@aibast-agents-library/claims_processing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/fs_customer_onboarding": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/customer_sentiment_churn": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/financial_advisor_copilot": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/fraud_detection_alert": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 6,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/loan_origination_assistant": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/portfolio_rebalancing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 3.6
+  },
+  "@aibast-agents-library/fs_regulatory_compliance": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/underwriting_support": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/wealth_insights_generator": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.67
+  },
+  "@aibast-agents-library/ai_customer_assistant": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/general_ask_hr": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/dynamics_365_connector": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/one_click_crm_intake": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 5.0
+  },
+  "@aibast-agents-library/cross_selling": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 3.8
+  },
+  "@aibast-agents-library/customer_360": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/email_drafting": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.33
+  },
+  "@aibast-agents-library/find_accurate_models": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.25
+  },
+  "@aibast-agents-library/identify_discounts": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/it_ticket_management": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 2.25
+  },
+  "@aibast-agents-library/procurement_agent": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/procurement_support": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/product_reference": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.33
+  },
+  "@aibast-agents-library/sales_coach": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/sales_simulation": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.25
+  },
+  "@aibast-agents-library/speech_to_crm": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/triage_bot": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 2.5
+  },
+  "@aibast-agents-library/voice_to_crm_d365": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/voice_to_crm_email": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 4.2
+  },
+  "@aibast-agents-library/sharepoint_document_extractor": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.0
+  },
+  "@aibast-agents-library/voice_to_crm_servicenow": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.25
+  },
+  "@aibast-agents-library/care_gap_closure": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/clinical_notes_summarizer": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/patient_intake": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/prior_authorization": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/staff_credentialing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/ask_hr": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/it_helpdesk": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/inventory_rebalancing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/maintenance_scheduling": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/order_status_communication": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/production_line_optimization": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.25
+  },
+  "@aibast-agents-library/supplier_risk_monitoring": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/client_health_score": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/contract_risk_review": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 3.67
+  },
+  "@aibast-agents-library/proposal_copilot": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/resource_utilization": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/time_entry_billing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/inventory_visibility": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.25
+  },
+  "@aibast-agents-library/personalized_marketing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 5.0
+  },
+  "@aibast-agents-library/returns_complaints_resolution": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.33
+  },
+  "@aibast-agents-library/supply_chain_disruption_alert": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.75
+  },
+  "@aibast-agents-library/building_permit_processing": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 5,
+   "rt": 3.6
+  },
+  "@aibast-agents-library/citizen_service_request": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.25
+  },
+  "@aibast-agents-library/foia_request_assistant": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/slg_grants_management": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 3,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/utility_billing_assistance": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/software_competitive_intel": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 4.0
+  },
+  "@aibast-agents-library/software_customer_onboarding": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 4,
+   "rt": 3.75
+  },
+  "@aibast-agents-library/license_renewal_expansion": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.5
+  },
+  "@aibast-agents-library/product_feedback_synthesizer": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 4.5
+  },
+  "@aibast-agents-library/support_ticket_resolution": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 3.0
+  },
+  "@kody-w/power_apps_code_app_agent": {
+   "d": 0,
+   "u": 1,
+   "n": 0,
+   "s": 1,
+   "r": 0,
+   "rt": 0.0
+  },
+  "@rapp/basic_agent": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 2,
+   "rt": 2.0
+  },
+  "@rapp/learn_new": {
+   "d": 8,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 0,
+   "rt": 0.0
   }
  },
  "sources": [

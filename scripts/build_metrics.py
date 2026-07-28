@@ -346,6 +346,23 @@ def slim(rec, *extra):
     return {k: rec[k] for k in fields if k in rec}
 
 
+def build_agent_metrics(agents):
+    """Compact per-agent map for the browse UI. Only agents with a signal."""
+    out = {}
+    for rec in agents.values():
+        if not (rec["downloads"] or rec["up"] or rec["down"] or rec["reviews"]):
+            continue
+        out[rec["name"]] = {
+            "d": rec["downloads"],
+            "u": rec["up"],
+            "n": rec["down"],
+            "s": rec["score"],
+            "r": rec["reviews"],
+            "rt": rec["rating"],
+        }
+    return out
+
+
 def build_leaderboards(agents):
     rows = list(agents.values())
     publishers = defaultdict(lambda: {"agents": 0, "downloads": 0, "score": 0, "reviews": 0,
@@ -482,6 +499,7 @@ def main():
         "releases": releases or {"total_downloads": 0, "count": 0, "releases": []},
         "reviews": {"by_angle": review_totals["by_angle"], "distribution": review_totals["distribution"]},
         "leaderboards": build_leaderboards(agents),
+        "agent_metrics": build_agent_metrics(agents),
         "sources": [
             {"name": "GitHub Traffic API", "metric": "clones, views, popular paths", "url": f"{GH_API}/repos/{OWNER}/{REPO}/traffic/clones"},
             {"name": "jsDelivr CDN", "metric": "per-file download hits", "url": f"{JSDELIVR}/stats/packages/gh/{OWNER}/{REPO}"},
