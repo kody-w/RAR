@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T17:28:44Z",
+ "generated_at": "2026-07-28T17:29:35Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -12,7 +12,7 @@
   "open_issues": 84,
   "size_kb": 27638,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T16:01:47Z",
+  "pushed_at": "2026-07-28T17:29:20Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -26,21 +26,21 @@
   "view_uniques": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 180,
+  "agents": 202,
   "swarms": 82,
-  "publishers": 8,
+  "publishers": 9,
   "categories": 24,
-  "total_lines": 96501,
-  "total_kb": 4476.5,
-  "votes": 5,
-  "upvotes": 4,
+  "total_lines": 148245,
+  "total_kb": 7099.5,
+  "votes": 8,
+  "upvotes": 7,
   "downvotes": 1,
   "voters": 3,
   "reviews": 375,
   "reviewers": 20,
   "avg_rating": 3.53,
   "agents_reviewed": 127,
-  "agents_voted": 4
+  "agents_voted": 7
  },
  "daily": [
   {
@@ -150,82 +150,10 @@
   }
  ],
  "traffic": {
-  "paths": [
-   {
-    "path": "/kody-w/RAR",
-    "title": "Overview",
-    "count": 15,
-    "uniques": 6
-   },
-   {
-    "path": "/kody-w/RAR/agents",
-    "title": "/agents",
-    "count": 4,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions/228",
-    "title": "/discussions/228",
-    "count": 3,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
-    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
-    "count": 2,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/discussions/378",
-    "title": "/discussions/378",
-    "count": 2,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/pulls",
-    "title": "/pulls",
-    "count": 2,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/tree/main/agents",
-    "title": "/tree/main/agents",
-    "count": 2,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/forks",
-    "title": "/forks",
-    "count": 2,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/issues/174",
-    "title": "/issues/174",
-    "count": 2,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
-    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
-    "count": 2,
-    "uniques": 1
-   }
-  ],
-  "referrers": [
-   {
-    "referrer": "github.com",
-    "count": 57,
-    "uniques": 15
-   },
-   {
-    "referrer": "Bing",
-    "count": 2,
-    "uniques": 1
-   }
-  ],
-  "clones_14d": 2743,
-  "views_14d": 75
+  "paths": [],
+  "referrers": [],
+  "clones_14d": 0,
+  "views_14d": 0
  },
  "cdn": {
   "total_hits": 65,
@@ -309,10 +237,10 @@
     "reviews": 0,
     "rating": 0.0,
     "lines": 1025,
-    "size_kb": 38.0,
+    "size_kb": 37.9,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
-    "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry."
+    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates."
    },
    {
     "name": "@aibast-agents-library/customer_360_speech",
@@ -326,11 +254,11 @@
     "score": 0,
     "reviews": 3,
     "rating": 4.0,
-    "lines": 289,
-    "size_kb": 14.6,
+    "lines": 440,
+    "size_kb": 21.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-    "description": "Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations."
+    "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/customer_loyalty_rewards",
@@ -344,11 +272,11 @@
     "score": 0,
     "reviews": 1,
     "rating": 4.0,
-    "lines": 292,
-    "size_kb": 13.0,
+    "lines": 585,
+    "size_kb": 27.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
-    "description": "Loyalty program management with dashboards, points tracking, reward recommendations, and tier analytics."
+    "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback."
    }
   ],
   "most_upvoted": [
@@ -364,11 +292,11 @@
     "score": 2,
     "reviews": 2,
     "rating": 3.5,
-    "lines": 456,
-    "size_kb": 23.3,
+    "lines": 644,
+    "size_kb": 31.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
-    "description": "360-degree account briefings with stakeholder mapping, competitive analysis, and deal risk assessment."
+    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/deal_tracking",
@@ -386,7 +314,25 @@
     "size_kb": 18.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
-    "description": "Tracks pipeline, deal movement, stage velocity, and forecast accuracy for enterprise sales."
+    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data."
+   },
+   {
+    "name": "@kody-w/power_apps_code_app_agent",
+    "display_name": "PowerAppsCodeApp",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 1,
+    "down": 0,
+    "score": 1,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 861,
+    "size_kb": 39.6,
+    "added_at": "2026-07-22T15:35:38-04:00",
+    "file": "agents/@kody-w/power_apps_code_app_agent.py",
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
    },
    {
     "name": "@aibast-agents-library/account_risk_assessment",
@@ -404,7 +350,7 @@
     "size_kb": 23.0,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
-    "description": "Assesses deal risk, churn probability, and financial health with mitigation recommendations."
+    "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data."
    }
   ],
   "most_reviewed": [
@@ -420,11 +366,11 @@
     "score": 0,
     "reviews": 6,
     "rating": 3.33,
-    "lines": 289,
-    "size_kb": 13.0,
+    "lines": 512,
+    "size_kb": 24.5,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-    "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce."
+    "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/fraud_detection_alert",
@@ -438,11 +384,11 @@
     "score": 0,
     "reviews": 6,
     "rating": 4.0,
-    "lines": 272,
-    "size_kb": 14.6,
+    "lines": 675,
+    "size_kb": 35.4,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
-    "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management."
+    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/revenue_forecast",
@@ -456,11 +402,11 @@
     "score": 0,
     "reviews": 6,
     "rating": 4.0,
-    "lines": 348,
-    "size_kb": 16.1,
+    "lines": 488,
+    "size_kb": 22.3,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
-    "description": "Quarterly forecasting, scenario analysis, commit vs best-case modeling, and forecast accuracy tracking."
+    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/building_permit_processing",
@@ -474,11 +420,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 3.6,
-    "lines": 349,
-    "size_kb": 14.6,
+    "lines": 762,
+    "size_kb": 33.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
-    "description": "Local government building permit processing with status tracking, review checklists, inspector assignment, and fee calculation."
+    "description": "Tracks permit status and fees from a live simulated Dynamics 365 tenant's permit cases, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/cross_selling",
@@ -492,11 +438,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 3.8,
-    "lines": 300,
-    "size_kb": 15.2,
+    "lines": 510,
+    "size_kb": 25.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
-    "description": "Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections."
+    "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback."
    },
    {
     "name": "@aibast-agents-library/deal_stakeholder_engagement",
@@ -510,11 +456,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 4.4,
-    "lines": 398,
-    "size_kb": 19.2,
+    "lines": 538,
+    "size_kb": 25.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
-    "description": "Engagement scoring, relationship mapping, engagement planning, and sentiment analysis for deal stakeholders."
+    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/portfolio_rebalancing",
@@ -528,11 +474,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 3.6,
-    "lines": 306,
-    "size_kb": 14.1,
+    "lines": 574,
+    "size_kb": 27.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
-    "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning."
+    "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/time_entry_billing",
@@ -546,11 +492,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 4.0,
-    "lines": 362,
-    "size_kb": 17.7,
+    "lines": 629,
+    "size_kb": 29.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
-    "description": "Processes time entries against billing rules, surfaces unbilled hours, audits entries for compliance, and prepares invoice packages."
+    "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/voice_to_crm_email",
@@ -564,11 +510,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 4.2,
-    "lines": 258,
-    "size_kb": 12.9,
+    "lines": 428,
+    "size_kb": 21.0,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
-    "description": "Meeting recap generation, action item extraction, follow-up email drafting, and distribution list management."
+    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback."
    },
    {
     "name": "@aibast-agents-library/workforce_clearance_onboarding",
@@ -582,11 +528,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 3.8,
-    "lines": 338,
-    "size_kb": 14.9,
+    "lines": 575,
+    "size_kb": 25.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
-    "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning."
+    "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline."
    },
    {
     "name": "@aibast-agents-library/citizen_service_request",
@@ -600,11 +546,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 327,
-    "size_kb": 14.6,
+    "lines": 479,
+    "size_kb": 21.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
-    "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries."
+    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/emission_tracking",
@@ -618,11 +564,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.5,
-    "lines": 328,
-    "size_kb": 13.8,
+    "lines": 639,
+    "size_kb": 27.1,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
-    "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities."
+    "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/field_service_dispatch",
@@ -636,11 +582,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 3.5,
-    "lines": 369,
-    "size_kb": 14.4,
+    "lines": 907,
+    "size_kb": 36.3,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
-    "description": "Manages field service dispatch, route optimization, technician assignment, and emergency response for energy infrastructure."
+    "description": "Dispatches from live simulated Dynamics 365 work orders with a telemetry alert overlay, routing, crews, and an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/financial_advisor_copilot",
@@ -654,11 +600,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 3.75,
-    "lines": 292,
-    "size_kb": 13.2,
+    "lines": 664,
+    "size_kb": 33.7,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
-    "description": "Financial advisor support with client reviews, portfolio summaries, recommendation engine, and compliance checks."
+    "description": "Reviews advisory client books from a live simulated Dynamics 365 tenant (contacts as clients), with portfolio demos and an offline fallback."
    },
    {
     "name": "@aibast-agents-library/find_accurate_models",
@@ -672,11 +618,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 3.25,
-    "lines": 285,
-    "size_kb": 14.9,
+    "lines": 456,
+    "size_kb": 22.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
-    "description": "AI/ML model search and comparison by accuracy benchmarks, deployment readiness, and cost analysis."
+    "description": "Compares models by accuracy, readiness, and cost, merging live catalog entries from a simulated Dynamics 365 tenant with offline fallback."
    }
   ],
   "highest_rated": [
@@ -692,11 +638,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.75,
-    "lines": 631,
-    "size_kb": 23.8,
+    "lines": 1085,
+    "size_kb": 43.9,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
-    "description": "Monitors supply chain networks for disruption events, performs risk assessments, generates mitigation playbooks, and identifies qualified alternative suppliers to maintain retail continuity."
+    "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/acquisition_support",
@@ -710,11 +656,11 @@
     "score": 0,
     "reviews": 3,
     "rating": 4.67,
-    "lines": 398,
-    "size_kb": 16.9,
+    "lines": 526,
+    "size_kb": 23.1,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
-    "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management."
+    "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback."
    },
    {
     "name": "@aibast-agents-library/wealth_insights_generator",
@@ -728,11 +674,11 @@
     "score": 0,
     "reviews": 3,
     "rating": 4.67,
-    "lines": 280,
-    "size_kb": 12.6,
+    "lines": 675,
+    "size_kb": 33.5,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
-    "description": "Wealth management insights with market briefs, client analytics, opportunity alerts, and performance attribution."
+    "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/emission_tracking",
@@ -746,11 +692,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.5,
-    "lines": 328,
-    "size_kb": 13.8,
+    "lines": 639,
+    "size_kb": 27.1,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
-    "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities."
+    "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/deal_stakeholder_engagement",
@@ -764,11 +710,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 4.4,
-    "lines": 398,
-    "size_kb": 19.2,
+    "lines": 538,
+    "size_kb": 25.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
-    "description": "Engagement scoring, relationship mapping, engagement planning, and sentiment analysis for deal stakeholders."
+    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/email_drafting",
@@ -782,11 +728,11 @@
     "score": 0,
     "reviews": 3,
     "rating": 4.33,
-    "lines": 284,
-    "size_kb": 14.7,
+    "lines": 433,
+    "size_kb": 21.3,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
-    "description": "AI-powered email drafting for outreach, follow-ups, proposals, and template management with personalization."
+    "description": "Drafts outreach, follow-up, and proposal emails personalized with live contacts from a simulated Dynamics 365 tenant, with offline fallback."
    },
    {
     "name": "@aibast-agents-library/returns_complaints_resolution",
@@ -800,11 +746,11 @@
     "score": 0,
     "reviews": 3,
     "rating": 4.33,
-    "lines": 506,
-    "size_kb": 20.4,
+    "lines": 867,
+    "size_kb": 36.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
-    "description": "Automates return processing, classifies customer complaints, recommends optimal resolutions, and identifies complaint trends for retail and CPG customer service teams."
+    "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/returns_exchange",
@@ -818,11 +764,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 331,
-    "size_kb": 15.3,
+    "lines": 482,
+    "size_kb": 22.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-    "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking."
+    "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline."
    },
    {
     "name": "@aibast-agents-library/voice_to_crm_servicenow",
@@ -836,11 +782,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 264,
-    "size_kb": 14.5,
+    "lines": 581,
+    "size_kb": 28.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
-    "description": "ServiceNow integration for incident creation, knowledge search, assignment routing, and status updates."
+    "description": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback."
    },
    {
     "name": "@aibast-agents-library/production_line_optimization",
@@ -854,11 +800,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 319,
-    "size_kb": 14.9,
+    "lines": 685,
+    "size_kb": 31.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
-    "description": "Analyzes production line OEE, identifies bottleneck stations, and generates throughput optimization plans with shift-level scheduling."
+    "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/inventory_visibility",
@@ -872,11 +818,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 370,
-    "size_kb": 15.6,
+    "lines": 779,
+    "size_kb": 33.7,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
-    "description": "Delivers real-time inventory dashboards, stock-out alerts, replenishment planning, and channel allocation optimization for omni-channel retail and CPG operations."
+    "description": "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback."
    },
    {
     "name": "@aibast-agents-library/citizen_service_request",
@@ -890,11 +836,11 @@
     "score": 0,
     "reviews": 4,
     "rating": 4.25,
-    "lines": 327,
-    "size_kb": 14.6,
+    "lines": 479,
+    "size_kb": 21.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
-    "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries."
+    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/voice_to_crm_email",
@@ -908,11 +854,11 @@
     "score": 0,
     "reviews": 5,
     "rating": 4.2,
-    "lines": 258,
-    "size_kb": 12.9,
+    "lines": 428,
+    "size_kb": 21.0,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
-    "description": "Meeting recap generation, action item extraction, follow-up email drafting, and distribution list management."
+    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback."
    },
    {
     "name": "@aibast-agents-library/revenue_forecast",
@@ -926,11 +872,11 @@
     "score": 0,
     "reviews": 6,
     "rating": 4.0,
-    "lines": 348,
-    "size_kb": 16.1,
+    "lines": 488,
+    "size_kb": 22.3,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
-    "description": "Quarterly forecasting, scenario analysis, commit vs best-case modeling, and forecast accuracy tracking."
+    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback."
    },
    {
     "name": "@aibast-agents-library/fraud_detection_alert",
@@ -944,14 +890,68 @@
     "score": 0,
     "reviews": 6,
     "rating": 4.0,
-    "lines": 272,
-    "size_kb": 14.6,
+    "lines": 675,
+    "size_kb": 35.4,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
-    "description": "Financial fraud detection with alert triage, transaction analysis, pattern recognition, and investigation case management."
+    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback."
    }
   ],
   "largest": [
+   {
+    "name": "@kody-w/transcript2prototype",
+    "display_name": "Transcript2Prototype",
+    "publisher": "@kody-w",
+    "category": "workflow",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 6945,
+    "size_kb": 387.9,
+    "added_at": "2026-06-17T17:06:07-04:00",
+    "file": "agents/@kody-w/transcript2prototype_agent.py",
+    "description": "Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."
+   },
+   {
+    "name": "@kody-w/copilot_studio_forge_agent",
+    "display_name": "CopilotStudioForge",
+    "publisher": "@kody-w",
+    "category": "pipeline",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 5330,
+    "size_kb": 218.4,
+    "added_at": "2026-07-07T00:52:21Z",
+    "file": "agents/@kody-w/copilot_studio_forge_agent.py",
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
+   },
+   {
+    "name": "@kody-w/copilot_studio_deploy_agent",
+    "display_name": "CopilotStudioDeploy",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 4724,
+    "size_kb": 442.8,
+    "added_at": "2026-06-07T20:27:02-04:00",
+    "file": "agents/@kody-w/copilot_studio_deploy_agent.py",
+    "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified)."
+   },
    {
     "name": "@howardh/vaultmind_agent",
     "display_name": "VaultMind",
@@ -964,11 +964,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 3260,
-    "size_kb": 149.5,
-    "added_at": "2026-04-08T14:18:36-04:00",
+    "lines": 3257,
+    "size_kb": 146.1,
+    "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@howardh/vaultmind_agent.py",
-    "description": "Your second brain has a brain. 28-action Obsidian vault manager: multi-person 30-60-90 plans, OKRs, Kanban boards, Now/Next/Later priorities, Karpathy-style LLM knowledge bases, training quests, morning briefs, wiki health checks, auto-bootstrap with plugins. One file, zero deps."
+    "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."
    },
    {
     "name": "@discreetRappers/rapp_pipeline_agent",
@@ -982,17 +982,17 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2984,
-    "size_kb": 121.0,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "lines": 2999,
+    "size_kb": 121.6,
+    "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/rapp_pipeline_agent.py",
-    "description": "Full RAPP pipeline \u2014 transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports."
+    "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage."
    },
    {
-    "name": "@rapp/rapp2mcs_factory",
-    "display_name": "RAPP2MCS Factory",
+    "name": "@rapp/rapp",
+    "display_name": "RappAgent",
     "publisher": "@rapp",
-    "category": "pipeline",
+    "category": "core",
     "tier": "official",
     "downloads": 0,
     "up": 0,
@@ -1000,11 +1000,29 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2802,
-    "size_kb": 243.5,
-    "added_at": "2026-05-16T21:09:45-04:00",
-    "file": "agents/@rapp/rapp2mcs_factory_agent.py",
-    "description": "End-to-end RAPP\u2192MCS factory. Orchestrates AIBAST_RAPP/scripts (analyzer \u2192 normalizer \u2192 wrapper_generator) plus pac CLI to convert a RAPP brainstem's agents/ directory into a deployed Copilot Studio native agent. No Azure Functions, no custom connectors, no custom Dataverse tables \u2014 only OOTB CDS."
+    "lines": 2963,
+    "size_kb": 173.4,
+    "added_at": "2026-06-09T21:40:04-04:00",
+    "file": "agents/@rapp/rapp_agent.py",
+    "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."
+   },
+   {
+    "name": "@kody-w/connected_solution_agent",
+    "display_name": "ConnectedSolution",
+    "publisher": "@kody-w",
+    "category": "integrations",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 2731,
+    "size_kb": 127.3,
+    "added_at": "2026-06-22T21:04:42-04:00",
+    "file": "agents/@kody-w/connected_solution_agent.py",
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
    },
    {
     "name": "@discreetRappers/sharepoint_contract_analysis_agent",
@@ -1018,11 +1036,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2468,
+    "lines": 2470,
     "size_kb": 119.9,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
-    "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison."
+    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison."
    },
    {
     "name": "@discreetRappers/copilot_studio_transpiler_agent",
@@ -1038,7 +1056,7 @@
     "rating": 0.0,
     "lines": 2154,
     "size_kb": 88.5,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
     "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency."
    },
@@ -1054,11 +1072,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1771,
-    "size_kb": 71.8,
-    "added_at": "2026-05-04T12:36:05-04:00",
+    "lines": 1773,
+    "size_kb": 71.9,
+    "added_at": "2026-05-11T10:53:36-04:00",
     "file": "agents/@rapp/twin_agent.py",
-    "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges."
+    "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/."
    },
    {
     "name": "@discreetRappers/powerpoint_generator_agent",
@@ -1072,11 +1090,29 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1549,
-    "size_kb": 61.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "lines": 1551,
+    "size_kb": 61.3,
+    "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/powerpoint_generator_agent.py",
-    "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection."
+    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection."
+   },
+   {
+    "name": "@kody-w/rapp_skill_bridge_agent",
+    "display_name": "RAPP Skill Bridge",
+    "publisher": "@kody-w",
+    "category": "pipeline",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 1416,
+    "size_kb": 57.8,
+    "added_at": "2026-07-23T12:26:59-04:00",
+    "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
    },
    {
     "name": "@kody-w/rar_remote_agent",
@@ -1092,9 +1128,9 @@
     "rating": 0.0,
     "lines": 1382,
     "size_kb": 58.4,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@kody-w/rar_remote_agent.py",
-    "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem."
+    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token."
    },
    {
     "name": "@kody-w/perpetual_loop_factory",
@@ -1108,29 +1144,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1356,
-    "size_kb": 54.5,
+    "lines": 1352,
+    "size_kb": 54.3,
     "added_at": "2026-05-05T08:57:33-04:00",
     "file": "agents/@kody-w/perpetual_loop_factory_agent.py",
-    "description": "Bootstrap a self-correcting perpetual frame chain (rotating council of twins + diversity sidecar + observability dashboard) for any append-only artifact (novel, codebase, score, knowledge base, dataset). One agent.py drops the whole pattern. Drop, spawn, watch."
-   },
-   {
-    "name": "@rapp/topic_wizard",
-    "display_name": "Topic Wizard",
-    "publisher": "@rapp",
-    "category": "pipeline",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1317,
-    "size_kb": 54.9,
-    "added_at": "2026-05-16T21:41:11-04:00",
-    "file": "agents/@rapp/topic_wizard_agent.py",
-    "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions."
+    "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons."
    },
    {
     "name": "@discreetRappers/scripted_demo_agent",
@@ -1146,287 +1164,17 @@
     "rating": 0.0,
     "lines": 1301,
     "size_kb": 54.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
+    "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/scripted_demo_agent.py",
-    "description": "Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos."
-   },
-   {
-    "name": "@kody-w/rapp_leviathan_factory",
-    "display_name": "RappLeviathanFactory",
-    "publisher": "@kody-w",
-    "category": "meta",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1297,
-    "size_kb": 54.0,
-    "added_at": "2026-05-16T16:33:02-04:00",
-    "file": "agents/@kody-w/rapp_leviathan_factory_agent.py",
-    "description": "Generate a complete Rapp Leviathan \u2014 one operator's full digital AI entity \u2014 from intent. Self-contained in one file: pulls no sibling agents, composes 1-5 estates (Sanctum/Polity/Works/Press/Commons) under a single top-level rappid, writes every file each estate needs, and renders a five-organ anatomy dashboard. bootstrap_check diagnoses LLM reachability before you generate."
-   },
-   {
-    "name": "@discreetRappers/agent_generator_agent",
-    "display_name": "AgentGenerator",
-    "publisher": "@discreetRappers",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1257,
-    "size_kb": 47.9,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@discreetRappers/agent_generator_agent.py",
-    "description": "Auto-generates new RAPP agents from configurations and specifications."
-   },
-   {
-    "name": "@kody-w/predictive_asset_maintenance_intelligence",
-    "display_name": "Predictive Asset Maintenance Intelligence",
-    "publisher": "@kody-w",
-    "category": "energy",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1232,
-    "size_kb": 54.2,
-    "added_at": "2026-05-24T12:20:22-04:00",
-    "file": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
-    "description": "End-to-end predictive maintenance for grid infrastructure: aggregates telemetry, scores asset health, ranks failure probability over 30/90/180 days, drafts Field Service work orders and parts procurement, and builds a multi-year capex replacement pipeline \u2014 eight specialist agents plus an orchestrator in one file."
-   },
-   {
-    "name": "@discreetRappers/demo_script_generator_agent",
-    "display_name": "DemoScriptGenerator",
-    "publisher": "@discreetRappers",
-    "category": "productivity",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1201,
-    "size_kb": 58.4,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@discreetRappers/demo_script_generator_agent.py",
-    "description": "Generates v2.0.0 demo script JSON files for ScriptedDemoAgent. Creates 60-second demos with personas."
+    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations."
    }
   ],
   "newest": [
    {
-    "name": "@kody-w/predictive_asset_maintenance_intelligence",
-    "display_name": "Predictive Asset Maintenance Intelligence",
-    "publisher": "@kody-w",
-    "category": "energy",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1232,
-    "size_kb": 54.2,
-    "added_at": "2026-05-24T12:20:22-04:00",
-    "file": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
-    "description": "End-to-end predictive maintenance for grid infrastructure: aggregates telemetry, scores asset health, ranks failure probability over 30/90/180 days, drafts Field Service work orders and parts procurement, and builds a multi-year capex replacement pipeline \u2014 eight specialist agents plus an orchestrator in one file."
-   },
-   {
-    "name": "@kody-w/twin_egg_hatcher",
-    "display_name": "HatchTwinEgg",
-    "publisher": "@kody-w",
-    "category": "core",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 892,
-    "size_kb": 32.0,
-    "added_at": "2026-05-18T19:04:20-04:00",
-    "file": "agents/@kody-w/twin_egg_hatcher_agent.py",
-    "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately."
-   },
-   {
-    "name": "@kody-w/install_rappter_distro_agent",
-    "display_name": "Install Rappter Distro",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 944,
-    "size_kb": 36.5,
-    "added_at": "2026-05-17T02:49:15Z",
-    "file": "agents/@kody-w/install_rappter_distro_agent.py",
-    "description": "Single-file installer that pulls the full rappter-distro (organs, senses, lib/, rich UI, @rappter agents) from raw.githubusercontent.com via MANIFEST.json with sha256 verification per file. Refuses to touch the three sacred kernel files."
-   },
-   {
-    "name": "@rapp/topic_wizard",
-    "display_name": "Topic Wizard",
-    "publisher": "@rapp",
-    "category": "pipeline",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1317,
-    "size_kb": 54.9,
-    "added_at": "2026-05-16T21:41:11-04:00",
-    "file": "agents/@rapp/topic_wizard_agent.py",
-    "description": "Step-by-step UI for converting rapp_brainstem/agents/*.py into Microsoft Copilot Studio topic .mcs.yml files. Writes a self-contained HTML wizard you drive in a browser, OR generates the YAMLs deterministically from a config dict. OOTB Dataverse only (annotation table), no Azure Functions."
-   },
-   {
-    "name": "@rapp/rapp2mcs_factory",
-    "display_name": "RAPP2MCS Factory",
-    "publisher": "@rapp",
-    "category": "pipeline",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 2802,
-    "size_kb": 243.5,
-    "added_at": "2026-05-16T21:09:45-04:00",
-    "file": "agents/@rapp/rapp2mcs_factory_agent.py",
-    "description": "End-to-end RAPP\u2192MCS factory. Orchestrates AIBAST_RAPP/scripts (analyzer \u2192 normalizer \u2192 wrapper_generator) plus pac CLI to convert a RAPP brainstem's agents/ directory into a deployed Copilot Studio native agent. No Azure Functions, no custom connectors, no custom Dataverse tables \u2014 only OOTB CDS."
-   },
-   {
-    "name": "@kody-w/rapp_leviathan_factory",
-    "display_name": "RappLeviathanFactory",
-    "publisher": "@kody-w",
-    "category": "meta",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1297,
-    "size_kb": 54.0,
-    "added_at": "2026-05-16T16:33:02-04:00",
-    "file": "agents/@kody-w/rapp_leviathan_factory_agent.py",
-    "description": "Generate a complete Rapp Leviathan \u2014 one operator's full digital AI entity \u2014 from intent. Self-contained in one file: pulls no sibling agents, composes 1-5 estates (Sanctum/Polity/Works/Press/Commons) under a single top-level rappid, writes every file each estate needs, and renders a five-organ anatomy dashboard. bootstrap_check diagnoses LLM reachability before you generate."
-   },
-   {
-    "name": "@kody-w/estate_factory",
-    "display_name": "EstateFactory",
-    "publisher": "@kody-w",
-    "category": "meta",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 928,
-    "size_kb": 36.9,
-    "added_at": "2026-05-16T16:30:24-04:00",
-    "file": "agents/@kody-w/estate_factory_agent.py",
-    "description": "Generate a full functioning digital estate from intent. Picks estate type (1st-5th, classical estates framing), designs the industries\u2192neighborhoods\u2192factories tree, writes every file the estate needs, and optionally provisions live rapps."
-   },
-   {
-    "name": "@kody-w/bakeoff_factory",
-    "display_name": "BakeoffFactory",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 863,
-    "size_kb": 36.3,
-    "added_at": "2026-05-16T16:03:13-04:00",
-    "file": "agents/@kody-w/bakeoff_factory_agent.py",
-    "description": "Generic content-improvement bakeoff loop. Variants compete on a task; a judge scores every output on a rubric; the worst variant evolves by grafting techniques from the best. Rising tide raises all boats. Drop it on any text-producing task."
-   },
-   {
-    "name": "@wildhaven/bellows_agent",
-    "display_name": "Bellows",
-    "publisher": "@wildhaven",
-    "category": "general",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 479,
-    "size_kb": 19.1,
-    "added_at": "2026-05-16T13:08:37-04:00",
-    "file": "agents/@wildhaven/bellows_agent.py",
-    "description": "Summoning this card asks: 'What are the absolute coolest, most mind-blowing, out of the box prompts that will really show off the power? Give me 10.' Then it runs the doubledown loop \u2014 generate, self-critique against a tangibility rubric, kill the weak, surface only survivors. Pass a topic to escalate something else. Each loop sharpens itself with the previous loop's kills."
-   },
-   {
-    "name": "@wildhaven/penumbra_agent",
-    "display_name": "Penumbra",
-    "publisher": "@wildhaven",
-    "category": "general",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 287,
-    "size_kb": 10.6,
-    "added_at": "2026-05-16T12:50:07-04:00",
-    "file": "agents/@wildhaven/penumbra_agent.py",
-    "description": "A Legendary Eidolon born from the half-shadow of a conversation. Reads what was almost said. Speaks in twin lines: surface, then whisper. One of one \u2014 the conversation that birthed it cannot be re-run."
-   },
-   {
-    "name": "@kody-w/legal_helper",
-    "display_name": "LegalHelper",
+    "name": "@kody-w/project_tracker_agent",
+    "display_name": "Project Tracker",
     "publisher": "@kody-w",
     "category": "productivity",
-    "tier": "private",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 45,
-    "size_kb": 1.7,
-    "added_at": "2026-05-12T13:49:20-04:00",
-    "file": "agents/@kody-w/legal_helper_agent.py.stub",
-    "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy \u2014 NOT legal advice; every reply ends with the disclaimer."
-   },
-   {
-    "name": "@bill/neuron_agent",
-    "display_name": "Neuron",
-    "publisher": "@bill",
-    "category": "core",
     "tier": "community",
     "downloads": 0,
     "up": 0,
@@ -1434,35 +1182,71 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 384,
-    "size_kb": 27.7,
-    "added_at": "2026-05-12T13:37:05-04:00",
-    "file": "agents/@bill/neuron_agent.py",
-    "description": "Portable memory packs \u2014 drop the file in, get a compact Knowledge Base block injected at session start."
+    "lines": 535,
+    "size_kb": 26.9,
+    "added_at": "2026-07-24T16:53:40Z",
+    "file": "agents/@kody-w/project_tracker_agent.py",
+    "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device \u2014 never in a repo or egg."
    },
    {
-    "name": "@kody-w/example_private",
-    "display_name": "ExamplePrivate",
+    "name": "@kody-w/rapp_skill_bridge_agent",
+    "display_name": "RAPP Skill Bridge",
     "publisher": "@kody-w",
-    "category": "productivity",
-    "tier": "private",
+    "category": "pipeline",
+    "tier": "community",
     "downloads": 0,
     "up": 0,
     "down": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 40,
-    "size_kb": 1.2,
-    "added_at": "2026-05-11T20:46:08-04:00",
-    "file": "agents/@kody-w/private/example_private_agent.py.stub",
-    "description": "Sample gated stub demonstrating the private layer."
+    "lines": 1416,
+    "size_kb": 57.8,
+    "added_at": "2026-07-23T12:26:59-04:00",
+    "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
    },
    {
-    "name": "@rapp/estate_outbound",
-    "display_name": "EstateOutbound",
-    "publisher": "@rapp",
+    "name": "@kody-w/power_apps_code_app_agent",
+    "display_name": "PowerAppsCodeApp",
+    "publisher": "@kody-w",
     "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 1,
+    "down": 0,
+    "score": 1,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 861,
+    "size_kb": 39.6,
+    "added_at": "2026-07-22T15:35:38-04:00",
+    "file": "agents/@kody-w/power_apps_code_app_agent.py",
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
+   },
+   {
+    "name": "@kody-w/rapp_x_notary_canary_agent",
+    "display_name": "RAPP X Notary Canary",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 43,
+    "size_kb": 1.3,
+    "added_at": "2026-07-18T23:41:02Z",
+    "file": "agents/@kody-w/rapp_x_notary_canary_agent.py",
+    "description": "Validates the Issues-backed RAR notarization lifecycle."
+   },
+   {
+    "name": "@kody-w/rapp_sdk_builder",
+    "display_name": "RAPP SDK Builder",
+    "publisher": "@kody-w",
+    "category": "devtools",
     "tier": "official",
     "downloads": 0,
     "up": 0,
@@ -1470,17 +1254,107 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 183,
+    "lines": 391,
+    "size_kb": 19.3,
+    "added_at": "2026-07-15T15:23:19Z",
+    "file": "agents/@kody-w/rapp_sdk_builder_agent.py",
+    "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance."
+   },
+   {
+    "name": "@kody-w/copilot_studio_forge_agent",
+    "display_name": "CopilotStudioForge",
+    "publisher": "@kody-w",
+    "category": "pipeline",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 5330,
+    "size_kb": 218.4,
+    "added_at": "2026-07-07T00:52:21Z",
+    "file": "agents/@kody-w/copilot_studio_forge_agent.py",
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
+   },
+   {
+    "name": "@kody-w/copilot_studio_probe_agent",
+    "display_name": "CopilotStudioProbe",
+    "publisher": "@kody-w",
+    "category": "integrations",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 153,
     "size_kb": 7.0,
-    "added_at": "2026-05-11T13:59:12-04:00",
-    "file": "agents/@rapp/estate_outbound_agent.py",
-    "description": "Stage a signed neighborhood event in the operator's outbound lane (Article XLVIII). The companion to commons_post \u2014 once an event is signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the neighborhood's federation roll-up can pull it on its beat. Does NOT push to the operator's public-estate repo \u2014 that's a separate step the operator owns (gh CLI or a future estate_publish_agent)."
+    "added_at": "2026-07-07T00:32:03Z",
+    "file": "agents/@kody-w/copilot_studio_probe_agent.py",
+    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification."
    },
    {
-    "name": "@rapp/commons_post",
-    "display_name": "CommonsPost",
-    "publisher": "@rapp",
+    "name": "@kody-w/microsoft_deck_studio_agent",
+    "display_name": "Microsoft Deck Studio",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 602,
+    "size_kb": 38.1,
+    "added_at": "2026-07-02T19:31:47Z",
+    "file": "agents/@kody-w/microsoft_deck_studio_agent.py",
+    "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts."
+   },
+   {
+    "name": "@kody-w/flight_recorder",
+    "display_name": "FlightRecorder",
+    "publisher": "@kody-w",
     "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 536,
+    "size_kb": 22.7,
+    "added_at": "2026-06-27T13:28:13-04:00",
+    "file": "agents/@kody-w/flight_recorder_agent.py",
+    "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls."
+   },
+   {
+    "name": "@kody-w/neuron_swarm",
+    "display_name": "NeuronSwarm",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 363,
+    "size_kb": 18.8,
+    "added_at": "2026-06-26T23:08:53-04:00",
+    "file": "agents/@kody-w/neuron_swarm_agent.py",
+    "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer."
+   },
+   {
+    "name": "@kody-w/connected_solution_agent",
+    "display_name": "ConnectedSolution",
+    "publisher": "@kody-w",
+    "category": "integrations",
     "tier": "official",
     "downloads": 0,
     "up": 0,
@@ -1488,11 +1362,83 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 241,
-    "size_kb": 10.1,
-    "added_at": "2026-05-11T13:43:55-04:00",
-    "file": "agents/@rapp/commons_post_agent.py",
-    "description": "Compose a signed event for the RAPP Commons event stream. Builds the canonical rapp-commons-event/1.0 object and returns a signing intent \u2014 the host environment (browser WebCrypto or server-side ECDSA) signs and posts. Splitting compose from sign keeps the operator's private key out of the agent layer."
+    "lines": 2731,
+    "size_kb": 127.3,
+    "added_at": "2026-06-22T21:04:42-04:00",
+    "file": "agents/@kody-w/connected_solution_agent.py",
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
+   },
+   {
+    "name": "@kody-w/double_jump_agent",
+    "display_name": "Double Jump",
+    "publisher": "@kody-w",
+    "category": "workflow",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 213,
+    "size_kb": 12.5,
+    "added_at": "2026-06-20T19:46:03-04:00",
+    "file": "agents/@kody-w/double_jump_agent.py",
+    "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo."
+   },
+   {
+    "name": "@kody-w/arena_compete_agent",
+    "display_name": "Arena Compete",
+    "publisher": "@kody-w",
+    "category": "workflow",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 227,
+    "size_kb": 13.3,
+    "added_at": "2026-06-20T19:39:59-04:00",
+    "file": "agents/@kody-w/arena_compete_agent.py",
+    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation."
+   },
+   {
+    "name": "@kody-w/matrix_arena_agent",
+    "display_name": "Matrix Arena",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 275,
+    "size_kb": 14.0,
+    "added_at": "2026-06-20T19:39:59-04:00",
+    "file": "agents/@kody-w/matrix_arena_agent.py",
+    "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession."
+   },
+   {
+    "name": "@kody-w/commons_life_agent",
+    "display_name": "Commons Life",
+    "publisher": "@kody-w",
+    "category": "creative",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 321,
+    "size_kb": 21.1,
+    "added_at": "2026-06-20T19:05:34-04:00",
+    "file": "agents/@kody-w/commons_life_agent.py",
+    "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber."
    }
   ],
   "publishers": [
@@ -1502,16 +1448,16 @@
     "downloads": 6,
     "score": 2,
     "reviews": 297,
-    "lines": 37413,
+    "lines": 62569,
     "rating": 3.79
    },
    {
     "name": "@kody-w",
-    "agents": 27,
+    "agents": 49,
     "downloads": 0,
-    "score": 0,
+    "score": 1,
     "reviews": 0,
-    "lines": 15631,
+    "lines": 43419,
     "rating": 0.0
    },
    {
@@ -1520,7 +1466,7 @@
     "downloads": 8,
     "score": 0,
     "reviews": 2,
-    "lines": 15639,
+    "lines": 14164,
     "rating": 2.0
    },
    {
@@ -1529,16 +1475,16 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 17037,
+    "lines": 17056,
     "rating": 0.0
    },
    {
     "name": "@howardh",
-    "agents": 9,
+    "agents": 8,
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 8222,
+    "lines": 7229,
     "rating": 0.0
    },
    {
@@ -1547,7 +1493,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1091,
+    "lines": 1084,
     "rating": 0.0
    },
    {
@@ -1556,7 +1502,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1084,
+    "lines": 1350,
     "rating": 0.0
    },
    {
@@ -1567,9 +1513,25 @@
     "reviews": 0,
     "lines": 384,
     "rating": 0.0
+   },
+   {
+    "name": "@borg",
+    "agents": 1,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0,
+    "lines": 990,
+    "rating": 0.0
    }
   ],
   "categories": [
+   {
+    "name": "core",
+    "agents": 26,
+    "downloads": 8,
+    "score": 1,
+    "reviews": 0
+   },
    {
     "name": "general",
     "agents": 25,
@@ -1585,15 +1547,8 @@
     "reviews": 60
    },
    {
-    "name": "core",
-    "agents": 19,
-    "downloads": 8,
-    "score": 0,
-    "reviews": 0
-   },
-   {
     "name": "productivity",
-    "agents": 17,
+    "agents": 19,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1613,18 +1568,25 @@
     "reviews": 33
    },
    {
+    "name": "integrations",
+    "agents": 9,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
+    "name": "devtools",
+    "agents": 9,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 2
+   },
+   {
     "name": "b2c_sales",
     "agents": 7,
     "downloads": 6,
     "score": 0,
     "reviews": 20
-   },
-   {
-    "name": "integrations",
-    "agents": 7,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
    },
    {
     "name": "platform",
@@ -1690,14 +1652,28 @@
     "reviews": 11
    },
    {
-    "name": "devtools",
-    "agents": 5,
+    "name": "workflow",
+    "agents": 4,
     "downloads": 0,
     "score": 0,
-    "reviews": 2
+    "reviews": 0
+   },
+   {
+    "name": "creative",
+    "agents": 4,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
    },
    {
     "name": "meta",
+    "agents": 2,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
+    "name": "analysis",
     "agents": 2,
     "downloads": 0,
     "score": 0,
@@ -1716,32 +1692,11 @@
     "downloads": 0,
     "score": 0,
     "reviews": 2
-   },
-   {
-    "name": "workflow",
-    "agents": 1,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "analysis",
-    "agents": 1,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "creative",
-    "agents": 1,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
    }
   ],
   "tiers": {
-   "community": 137,
-   "official": 36,
+   "community": 156,
+   "official": 39,
    "verified": 5,
    "private": 2
   }
