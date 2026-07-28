@@ -1,0 +1,72 @@
+name: Critic Panel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/**'        # a publish: the code changed, so the verdict must be re-earned
+      - 'state/votes.json' # a vote: the audience meter moved
+  workflow_dispatch:
+    inputs:
+      agent:
+        description: 'Review one agent (@publisher/slug). Blank = whatever needs it.'
+        required: false
+      limit:
+        description: 'Max agents this run'
+        required: false
+        default: '12'
+      force:
+        description: 'Re-review even when nothing changed'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '40 4 * * *'  # daily backfill so coverage keeps growing
+
+permissions:
+  contents: write
+  models: read            # GitHub Models inference for the critic panel
+
+concurrency:
+  group: critic-panel
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run the critic panel
+        # The panel calls the GitHub Models API. If inference is unavailable
+        # the script falls back to its deterministic rubric, so every agent
+        # still gets a scored verdict and the run still succeeds.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RAR_CRITIC_BACKEND: models
+        run: |
+          python scripts/critic_review.py \
+            ${{ github.event.inputs.agent && format('--agent {0}', github.event.inputs.agent) || '' }} \
+            ${{ github.event.inputs.force == 'true' && '--force' || '' }} \
+            --limit ${{ github.event.inputs.limit || '12' }}
+
+      - name: Fold scores into the metrics snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python scripts/build_metrics.py
+
+      - name: Commit verdicts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/critic_reviews.json state/metrics.json state/metrics_history.json
+          if git diff --staged --quiet; then
+            echo "No verdict changes"
+          else
+            git commit -m "chore: critic panel verdicts $(date -u +%Y-%m-%dT%H:%M)"
+            git pull --rebase --strategy-option=ours origin main || true
+            git push
+          fi

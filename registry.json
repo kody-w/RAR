@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-26T02:11:32.356758+00:00",
+  "generated_at": "2026-07-28T18:28:13.913295+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
@@ -408,9 +408,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@aibast-agents-library/account_risk_assessment",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "display_name": "Account Risk Assessment",
-      "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data.",
+      "description": "Scores deal risk, churn probability, and financial health with mitigation advice \u2014 on built-in demo accounts, or on real figures you supply via account_data.",
       "author": "AIBAST",
       "tags": [
         "b2b",
@@ -429,9 +429,9 @@
       "_install_filename": "rar_aibast_agents_library_account_risk_assessment_agent.py",
       "_stack": "account_intelligence",
       "_stack_vertical": "b2b_sales",
-      "_sha256": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+      "_sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
       "_lifecycle": "notarized",
-      "_receipt": "rar_3742ba5207cc90266f608cb25368b95f86d35b9463ab3046ef09f6810077549f",
+      "_receipt": "rar_982226fd5fa15251f197d4f4fc845cc5643df972b55a746278baadfc7b516136",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -448,8 +448,8 @@
         ]
       },
       "_seed": 15010362534912467138,
-      "_size_kb": 23.0,
-      "_lines": 495,
+      "_size_kb": 31.6,
+      "_lines": 662,
       "_has_card": true,
       "_added_at": "2026-04-03T16:15:52-04:00",
       "_first_commit_sha": "30e0bd1ef41076c582f99ae1a4226b8993e57227",
@@ -10745,8 +10745,8 @@
         "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
         "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py"
       ],
-      "_size_kb": 203.5,
-      "_lines": 4227
+      "_size_kb": 212.1,
+      "_lines": 4394
     },
     {
       "type": "stack",

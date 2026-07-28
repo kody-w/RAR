@@ -1,0 +1,84 @@
+{
+ "schema": "rar-critic-transcript/1.0",
+ "agent": "@aibast-agents-library/account_risk_assessment",
+ "file_sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
+ "version": "1.1.0",
+ "generated_at": "2026-07-28T18:25:11Z",
+ "frame_count": 9,
+ "total_bytes": 11788,
+ "note": "Proof behind the critic verdicts. Frames are ordered and individually hashed so a reader can stream them one at a time and verify none was altered.",
+ "frames": [
+  {
+   "kind": "manifest",
+   "label": "What was reviewed",
+   "bytes": 383,
+   "sha256": "a5021dbfc19392b53e10d9762a666414efed2b8914ab289d80aafdbfa56b8b9c",
+   "text": "{\n \"agent\": \"@aibast-agents-library/account_risk_assessment\",\n \"version\": \"1.1.0\",\n \"file\": \"agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py\",\n \"file_sha256\": \"83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343\",\n \"reviewed_at\": \"2026-07-28T18:25:11Z\",\n \"harness_tier\": \"brainstem-loader\",\n \"brainstem_running\": true\n}",
+   "i": 0
+  },
+  {
+   "kind": "summary",
+   "label": "Run transcript given to the panel",
+   "bytes": 1718,
+   "sha256": "c0445448f8f32b016117fd2265ea51f07059027de0d410f93fb972db4b87c30b",
+   "text": "LOADED: yes, via brainstem-loader in 0.182s. Classes registered: RiskAssessmentAgent.\nRAN perform(operation=\u2026, account_name=\u2026): ok. Returned str of 932 chars in 0.0s. First output: '**No risk data for \"harness probe\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company\\'s numbers under your account\\'s name.\\n\\n**Accounts this agent can assess:**\\n\\n| Account | Industry | Deal Stage | O'\nRAN no-args probe: ok.\nINPUT SENSITIVITY: passed \u2014 different arguments produced different output and the requested entity is reflected back in the response.\n`python risk_assessment_agent.py` exited 0 as the contract requires.\nHOT-LOADED INTO THE RUNNING BRAINSTEM and exercised through /chat (claude-haiku-4.5, 6.6s): the model chose this tool on its own. Agent log: \"[RiskAssessmentAgent] **Accounts available in this agent's demo dataset**\\n\\n| Account | Industry | Deal Stage | Days in Stage | Opportunity |\\n|---|---|---|---|---|\\n| Acme Corporation | Manufacturing | Proposal | 34 | $2,4\". It answered: '**Success**: The tool returned a composite deal risk score of 62/100 for Acme Corporation (38% win probability in 21 days), identified seven risk factors including missing CTO stakeholder relationships and competitive pricing pressure, and recommended two immediate mitigations: intro to the champion and a TCO analysis.'\nWITH ALL CREDENTIALS STRIPPED: still ran and returned output \u2014 '**No risk data for \"harness probe\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another '",
+   "i": 1
+  },
+  {
+   "kind": "calls",
+   "label": "Direct perform() calls",
+   "bytes": 1229,
+   "sha256": "191ae7be4a495f342867cdd6b56b75055978ee556e5813d4db832f8065c6a296",
+   "text": "[\n {\n  \"agent\": \"RiskAssessmentAgent\",\n  \"args\": {\n   \"operation\": \"assess_deal_risk\",\n   \"account_name\": \"harness probe\"\n  },\n  \"declared_params\": [\n   \"operation\",\n   \"account_name\",\n   \"account_data\"\n  ],\n  \"seconds\": 0.0,\n  \"ok\": true,\n  \"return_type\": \"str\",\n  \"returns_str\": true,\n  \"output_chars\": 932,\n  \"output_preview\": \"**No risk data for \\\"harness probe\\\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company's numbers under your account's name.\\n\\n**Accounts this agent can assess:**\\n\\n| Account | Industry | Deal Stage | Opportunity |\\n|---|---|---|---|\\n| Acme Corporation | Manufacturing | Proposal | $2,400,000 |\\n| Contoso Ltd | Technology | Negotiation | $1,100,000 |\\n| Fabrikam Industries | Manufacturing | Discovery | $890,000 |\\n| Northwind Traders | Retail | Qualification | $540,000 |\\n\\nRe-run `assess_deal_risk` with one of the names above, or pass your own figures with `account_data` to score a\",\n  \"empty\": false,\n  \"printed_chars\": 0\n },\n {\n  \"agent\": \"RiskAssessmentAgent\",\n  \"args\": {},\n  \"probe\": \"no-args\",\n  \"ok\": true,\n  \"returns_str\": true,\n  \"output_chars\": 1106\n }\n]",
+   "i": 2
+  },
+  {
+   "kind": "sensitivity",
+   "label": "Input-sensitivity probe",
+   "bytes": 551,
+   "sha256": "79cef34f0ff659746e7d3bd853cca4de831ea0da69011e55a5ca86c7c80ff8fc",
+   "text": "{\n \"tested\": true,\n \"variants\": 2,\n \"identical_outputs\": 0,\n \"ignores_input\": false,\n \"sentinel_echoed\": true,\n \"sample\": \"**No risk data for \\\"Qwertzuiop Holdings BV\\\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company's numbers under your account's name.\\n\\n**Accounts this agent can assess:**\\n\\n| Account | Industry | Deal Stage | Opportunity |\\n|---|---|---|---|\\n| Acme Corporation | Manufacturing | Pro\",\n \"errors\": []\n}",
+   "i": 3
+  },
+  {
+   "kind": "chat",
+   "label": "Hot-loaded into the running brainstem and driven through /chat",
+   "bytes": 1934,
+   "sha256": "c967c48a683e37d8e0d008bd5096068d0af5784f720ce0551b8c58c89838d935",
+   "text": "{\n \"attempted\": true,\n \"imported\": true,\n \"installed_as\": \"risk_assessment_agent.py\",\n \"tool_invoked\": true,\n \"removed\": true,\n \"import_response\": {\n  \"message\": \"Agent risk_assessment_agent.py imported successfully.\"\n },\n \"loaded_classes\": [],\n \"prompt\": \"Use your Account Risk Assessment tool now. Task: Scores deal risk, churn probability, and financial health with mitigation advice \\u2014 on built-in demo accounts, or on real figures you supply via account_data. Invoke the tool with reasonable arguments, then tell me in one line whether the tool succeeded and what it returned.\",\n \"seconds\": 6.6,\n \"model\": \"claude-haiku-4.5\",\n \"reply\": \"**Success**: The tool returned a composite deal risk score of 62/100 for Acme Corporation (38% win probability in 21 days), identified seven risk factors including missing CTO stakeholder relationships and competitive pricing pressure, and recommended two immediate mitigations: intro to the champion and a TCO analysis.\",\n \"agent_logs\": \"[RiskAssessmentAgent] **Accounts available in this agent's demo dataset**\\n\\n| Account | Industry | Deal Stage | Days in Stage | Opportunity |\\n|---|---|---|---|---|\\n| Acme Corporation | Manufacturing | Proposal | 34 | $2,400,000 |\\n| Contoso Ltd | Technology | Negotiation | 12 | $1,100,000 |\\n| Fabrikam Industries | Manufacturing | Discovery | 18 | $890,000 |\\n| Northwind Traders | Retail | Qualification | 7 | $540,000 |\\n\\nThese are built-in demo figures, not live CRM data. To assess a real account, pass `account_data` with your own numbers.\\n[RiskAssessmentAgent] **Deal Risk Assessment: Acme Corporation**\\n\\n| Metric | Value |\\n|---|---|\\n| Deal Stage | Proposal |\\n| Days in Stage | 34 |\\n| Opportunity Value | $2,400,000 |\\n| Composite Risk Score | 62/100 |\\n| Win Probability | 38% |\\n| Expected Close | 21 days |\\n\\n**Risk Factors:**\\n\\n| Factor | Category | Severity | Score |\\n|---|---|---|---|\\n| No CTO re\",\n \"reply_chars\": 320\n}",
+   "i": 4
+  },
+  {
+   "kind": "standalone",
+   "label": "Standalone `python agent.py` run",
+   "bytes": 76,
+   "sha256": "9d433d813fbb5b1770a8a04d41f4c08607fd6a1ca70386a8bea59baa424585bb",
+   "text": "{\n \"ran\": true,\n \"exit_code\": 0,\n \"stdout_chars\": 3618,\n \"stderr_tail\": \"\"\n}",
+   "i": 5
+  },
+  {
+   "kind": "no_credentials",
+   "label": "Re-run with every credential stripped",
+   "bytes": 354,
+   "sha256": "b23137a0dfd0d59dc24bfbd655f13bd4dae4ef78636d1e3c4a06a09999c75f8a",
+   "text": "{\n \"loaded\": true,\n \"ok\": true,\n \"exception\": null,\n \"preview\": \"**No risk data for \\\"harness probe\\\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company's numbers under your account's name.\\n\\n**Accounts this agent can assess:*\"\n}",
+   "i": 6
+  },
+  {
+   "kind": "handoff",
+   "label": "Continue this review on your own brainstem",
+   "bytes": 2837,
+   "sha256": "6d43eb2b734b65fc4e2e1f3f46f39d4ecb85b5d2030b191e858f356a410496dd",
+   "text": "{\n \"how\": \"POST the conversation_history below to your local brainstem: curl -s -X POST http://127.0.0.1:7071/chat -H 'Content-Type: application/json' -d @handoff.json  \\u2014 or run: python scripts/resume_review.py <agent>\",\n \"user_input\": \"Pick up this review where you left off. Propose the smallest change to this agent that would move the weakest critic score the most, and explain what you would re-test to prove it worked.\",\n \"conversation_history\": [\n  {\n   \"role\": \"assistant\",\n   \"content\": \"I reviewed @aibast-agents-library/account_risk_assessment v1.1.0 (file sha256 83406f30bfc1). I loaded it on a brainstem and ran it. Here is exactly what happened:\\n\\nLOADED: yes, via brainstem-loader in 0.182s. Classes registered: RiskAssessmentAgent.\\nRAN perform(operation=\\u2026, account_name=\\u2026): ok. Returned str of 932 chars in 0.0s. First output: '**No risk data for \\\"harness probe\\\"**\\\\n\\\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company\\\\'s numbers under your account\\\\'s name.\\\\n\\\\n**Accounts this agent can assess:**\\\\n\\\\n| Account | Industry | Deal Stage | O'\\nRAN no-args probe: ok.\\nINPUT SENSITIVITY: passed \\u2014 different arguments produced different output and the requested entity is reflected back in the response.\\n`python risk_assessment_agent.py` exited 0 as the contract requires.\\nHOT-LOADED INTO THE RUNNING BRAINSTEM and exercised through /chat (claude-haiku-4.5, 6.6s): the model chose this tool on its own. Agent log: \\\"[RiskAssessmentAgent] **Accounts available in this agent's demo dataset**\\\\n\\\\n| Account | Industry | Deal Stage | Days in Stage | Opportunity |\\\\n|---|---|---|---|---|\\\\n| Acme Corporation | Manufacturing | Proposal | 34 | $2,4\\\". It answered: '**Success**: The tool returned a composite deal risk score of 62/100 for Acme Corporation (38% win probability in 21 days), identified seven risk factors including missing CTO stakeholder relationships and competitive pricing pressure, and recommended two immediate mitigations: intro to the champion and a TCO analysis.'\\nWITH ALL CREDENTIALS STRIPPED: still ran and returned output \\u2014 '**No risk data for \\\"harness probe\\\"**\\\\n\\\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another '\\n\\nThe panel concluded:\\n- The Architect scored 78/100: Fresh on struct\\n- Security Sentinel scored 85/100: Robust synthetic risk scoring with graceful unknown account handling\\n- The Pragmatist scored 78/100: Fresh on value\\n- Docs Desk scored 90/100: Robust synthetic risk scoring with clear outputs and graceful fallback\\n- The Maintainer scored 90/100: Clean input handling; never mixes up accounts\"\n  }\n ]\n}",
+   "i": 7
+  },
+  {
+   "kind": "verdicts",
+   "label": "What each critic concluded",
+   "bytes": 2706,
+   "sha256": "e182bfe62de3f8f301e9c002dad5445451ac47c4a6d53ffb477cb861c0bc43f0",
+   "text": "[\n {\n  \"critic\": \"The Architect\",\n  \"score\": 78,\n  \"headline\": \"Fresh on struct\",\n  \"review\": \"Reading for the shape of the file at 662 lines, this holds up. The file shows it loaded cleanly on a real brainstem and perform() returned 932 chars of real output. Scored by rubric against the run transcript \\u2014 no model backend was reachable for this pass.\",\n  \"backend\": \"rubric\"\n },\n {\n  \"critic\": \"Security Sentinel\",\n  \"score\": 85,\n  \"headline\": \"Robust synthetic risk scoring with graceful unknown account handling\",\n  \"review\": \"The agent successfully loaded and ran without any env var dependencies, adhering to the no-network-in-init rule. It returns detailed, varied risk assessment reports based on input accounts, demonstrated by the distinct output for 'Acme Corporation' and the graceful fallback message for unknown accounts like 'harness probe'. The agent\\u2019s synthetic data approach is clearly documented, so the canned nature of the output is transparent, which justifies a high score but not full marks.\",\n  \"backend\": \"github-models:openai/gpt-4.1-mini\"\n },\n {\n  \"critic\": \"The Pragmatist\",\n  \"score\": 78,\n  \"headline\": \"Fresh on value\",\n  \"review\": \"Reading for whether this does real work for a real person, this holds up. The file shows it loaded cleanly on a real brainstem and perform() returned 932 chars of real output. Scored by rubric against the run transcript \\u2014 no model backend was reachable for this pass.\",\n  \"backend\": \"rubric\"\n },\n {\n  \"critic\": \"Docs Desk\",\n  \"score\": 90,\n  \"headline\": \"Robust synthetic risk scoring with clear outputs and graceful fallback\",\n  \"review\": \"The agent loaded and ran successfully, returning detailed, context-sensitive risk assessment summaries as strings within milliseconds. It gracefully handled unknown accounts by explicitly stating no data was available rather than guessing, which demonstrates good defensive design. The absence of required environment variables and external credentials confirms it runs standalone on synthetic data, making it reliable and reproducible.\",\n  \"backend\": \"github-models:openai/gpt-4.1-mini\"\n },\n {\n  \"critic\": \"The Maintainer\",\n  \"score\": 90,\n  \"headline\": \"Clean input handling; never mixes up accounts\",\n  \"review\": \"The transcript confirms that perform() returns a formatted str, reflects the requested account, and gracefully handles unknown entities without crashing or mislabeling demo data. The agent survived credential stripping and input probes, always returning accurate demo or error output. It never quietly substitutes real data for unknown accounts, preventing dangerous misattribution \\u2014 a rare strength for demo agents.\",\n  \"backend\": \"github-models:openai/gpt-4.1\"\n }\n]",
+   "i": 8
+  }
+ ]
+}

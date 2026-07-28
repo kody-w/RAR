@@ -35,14 +35,14 @@
     },
     "@aibast-agents-library/account_risk_assessment": {
       "canonical_path": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
-      "latest_receipt": "rar_3742ba5207cc90266f608cb25368b95f86d35b9463ab3046ef09f6810077549f",
+      "latest_receipt": "rar_982226fd5fa15251f197d4f4fc845cc5643df972b55a746278baadfc7b516136",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+      "sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.1"
+      "updated_at": "2026-07-28T18:22:45.332118+00:00",
+      "version": "1.1.0"
     },
     "@aibast-agents-library/acquisition_support": {
       "canonical_path": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
@@ -2455,5 +2455,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-26T02:09:02.638179+00:00"
+  "updated_at": "2026-07-28T18:22:45.332118+00:00"
 }

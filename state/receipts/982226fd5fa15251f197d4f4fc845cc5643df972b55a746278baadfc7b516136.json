@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-07-28"
+ },
+ "action": "agent.update",
+ "agent": "@aibast-agents-library/account_risk_assessment",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343"
+ },
+ "canonical_path": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-07-28T18:22:45.332118+00:00",
+ "id": "rar_982226fd5fa15251f197d4f4fc845cc5643df972b55a746278baadfc7b516136",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+  "receipt": "rar_3742ba5207cc90266f608cb25368b95f86d35b9463ab3046ef09f6810077549f",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_982226fd5fa15251f197d4f4",
+ "revision_id": "982226fd5fa15251f197d4f4fc845cc5643df972b55a746278baadfc7b516136",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "account_risk_assessment 1.1.0: unknown accounts now return an explicit no-data response instead of silently substituting the default account; adds account_data for scoring real accounts and a list_accounts operation"
+ },
+ "version": "1.1.0"
+}

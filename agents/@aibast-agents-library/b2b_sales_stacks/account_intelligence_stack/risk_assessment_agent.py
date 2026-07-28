@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_risk_assessment",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "display_name": "Account Risk Assessment",
-    "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data.",
+    "description": "Scores deal risk, churn probability, and financial health with mitigation advice — on built-in demo accounts, or on real figures you supply via account_data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "risk-assessment", "churn-prediction", "deal-risk"],
     "category": "b2b_sales",
@@ -39,6 +39,8 @@ __manifest__ = {
 # ═══════════════════════════════════════════════════════════════
 # SYNTHETIC DATA LAYER
 # ═══════════════════════════════════════════════════════════════
+
+_DEFAULT_ACCOUNT = "acme"
 
 _ACCOUNTS = {
     "acme": {
@@ -172,13 +174,131 @@ _FINANCIAL_HEALTH = {
 # ═══════════════════════════════════════════════════════════════
 
 def _resolve_account(query):
-    if not query:
-        return "acme"
-    q = query.lower().strip()
+    """Resolve an account name to a fixture key, or None when there is no match.
+
+    This used to fall back to "acme" for anything it did not recognise, which meant
+    asking about a company the agent has never heard of returned Acme Corporation's
+    risk numbers with no indication that the question had been quietly swapped. For
+    a tool whose output lands in a forecast review, silently answering about the
+    wrong account is worse than refusing to answer.
+    """
+    if not query or not str(query).strip():
+        return _DEFAULT_ACCOUNT
+    q = str(query).lower().strip()
     for key in _ACCOUNTS:
         if key in q or q in _ACCOUNTS[key]["name"].lower():
             return key
-    return "acme"
+    # Looser pass: match on any significant word of the fixture name.
+    for key, acct in _ACCOUNTS.items():
+        for word in acct["name"].lower().split():
+            if len(word) > 3 and word in q:
+                return key
+    return None
+
+
+_CUSTOM_KEY = "__caller_supplied__"
+
+
+def _register_custom_account(data):
+    """Score a real account the caller passes in, instead of only demo fixtures.
+
+    The demo dataset made this agent a showpiece; accepting `account_data` makes it
+    usable on an actual deal. Risk factors are derived from the supplied numbers by
+    documented rules below, so the output is traceable to the input rather than
+    invented.
+    """
+    if not isinstance(data, dict) or not str(data.get("name", "")).strip():
+        raise ValueError("account_data must be an object containing at least a non-empty 'name'.")
+
+    def _num(key, default=0, integer=False):
+        raw = data.get(key, default)
+        try:
+            val = float(raw or 0)
+        except (TypeError, ValueError):
+            raise ValueError(f"account_data.{key} must be a number, got {raw!r}")
+        if val < 0:
+            raise ValueError(f"account_data.{key} cannot be negative, got {raw!r}")
+        return int(val) if integer else val
+
+    acct = {
+        "id": "caller-supplied",
+        "name": str(data["name"]).strip(),
+        "industry": str(data.get("industry", "Unspecified")),
+        "revenue": _num("revenue", integer=True),
+        "employees": _num("employees", integer=True),
+        "current_spend": _num("current_spend", integer=True),
+        "opportunity_value": _num("opportunity_value", integer=True),
+        "contract_renewal": str(data.get("contract_renewal", "unknown")),
+        "deal_stage": str(data.get("deal_stage", "Unspecified")),
+        "days_in_stage": _num("days_in_stage", integer=True),
+        "expected_close_days": _num("expected_close_days", integer=True),
+    }
+
+    factors = []
+    if acct["days_in_stage"] > 30:
+        factors.append({"factor": f"Stalled {acct['days_in_stage']} days in {acct['deal_stage']}",
+                        "category": "Momentum", "severity": "High" if acct["days_in_stage"] > 60 else "Medium",
+                        "weight": 0.25, "score": min(95, 45 + acct["days_in_stage"])})
+    if acct["current_spend"] and acct["opportunity_value"] > acct["current_spend"] * 2:
+        factors.append({"factor": "Opportunity is a large multiple of current spend",
+                        "category": "Financial", "severity": "Medium", "weight": 0.20, "score": 65})
+    if acct["expected_close_days"] > 60:
+        factors.append({"factor": f"Close date {acct['expected_close_days']} days out",
+                        "category": "Momentum", "severity": "Medium", "weight": 0.15, "score": 55})
+    if not acct["revenue"]:
+        factors.append({"factor": "No company revenue supplied — financial risk is unscored",
+                        "category": "Data", "severity": "Medium", "weight": 0.15, "score": 50})
+    if not factors:
+        factors.append({"factor": "No elevated risk signals in the supplied figures",
+                        "category": "General", "severity": "Low", "weight": 0.10, "score": 25})
+
+    _ACCOUNTS[_CUSTOM_KEY] = acct
+    _RISK_FACTORS[_CUSTOM_KEY] = factors
+    # Churn and financial scoring need signals the caller has not supplied. Rather
+    # than fabricate them, mark them absent so those operations say so plainly.
+    _CHURN_INDICATORS[_CUSTOM_KEY] = {}
+    _FINANCIAL_HEALTH[_CUSTOM_KEY] = {}
+    return _CUSTOM_KEY
+
+
+def _clear_custom_account():
+    for table in (_ACCOUNTS, _RISK_FACTORS, _CHURN_INDICATORS, _FINANCIAL_HEALTH):
+        table.pop(_CUSTOM_KEY, None)
+
+
+def _list_accounts_message():
+    rows = "\n".join(
+        f"| {a['name']} | {a['industry']} | {a['deal_stage']} | {a['days_in_stage']:.0f} | ${a['opportunity_value']:,.0f} |"
+        for k, a in _ACCOUNTS.items() if k != _CUSTOM_KEY
+    )
+    return (
+        "**Accounts available in this agent's demo dataset**\n\n"
+        "| Account | Industry | Deal Stage | Days in Stage | Opportunity |\n|---|---|---|---|---|\n"
+        f"{rows}\n\n"
+        "These are built-in demo figures, not live CRM data. To assess a real account, pass "
+        "`account_data` with your own numbers."
+    )
+
+
+def _unknown_account_message(query, operation):
+    """What to say when we genuinely do not have data for what was asked."""
+    known = "\n".join(
+        f"| {a['name']} | {a['industry']} | {a['deal_stage']} | ${a['opportunity_value']:,} |"
+        for a in _ACCOUNTS.values()
+    )
+    return (
+        f"**No risk data for \"{query}\"**\n\n"
+        f"This agent ships with a built-in demo dataset and has no record of that account, "
+        f"so it will not produce a risk assessment for it. Guessing here would put another "
+        f"company's numbers under your account's name.\n\n"
+        f"**Accounts this agent can assess:**\n\n"
+        f"| Account | Industry | Deal Stage | Opportunity |\n|---|---|---|---|\n{known}\n\n"
+        f"Re-run `{operation}` with one of the names above, or pass your own figures with "
+        f"`account_data` to score a real account:\n\n"
+        f"```json\n{{\"operation\": \"{operation}\", \"account_data\": {{\"name\": \"{query}\", "
+        f"\"deal_stage\": \"Proposal\", \"days_in_stage\": 30, \"opportunity_value\": 500000, "
+        f"\"current_spend\": 100000, \"expected_close_days\": 45}}}}\n```"
+    )
 
 
 def _composite_risk_score(key):
@@ -232,6 +352,11 @@ class RiskAssessmentAgent(BasicAgent):
         churn_prediction  - churn probability with contributing factors
         financial_risk    - financial health assessment
         executive_summary - consolidated risk executive summary
+        list_accounts     - list the demo accounts this agent can assess
+
+    Unknown account names return an explicit "no data" response listing what is
+    available, rather than silently substituting another account's numbers. Pass
+    account_data to score a real account from your own figures.
     """
 
     def __init__(self):
@@ -246,13 +371,21 @@ class RiskAssessmentAgent(BasicAgent):
                         "type": "string",
                         "enum": [
                             "assess_deal_risk", "churn_prediction",
-                            "financial_risk", "executive_summary",
+                            "financial_risk", "executive_summary", "list_accounts",
                         ],
                         "description": "The risk assessment to perform",
                     },
                     "account_name": {
                         "type": "string",
-                        "description": "Account name (e.g. 'Acme Corporation')",
+                        "description": ("Account to assess. Must be one of the agent's demo accounts — "
+                                        "call list_accounts to see them. An unrecognised name returns an "
+                                        "explicit 'no data' response rather than another account's figures."),
+                    },
+                    "account_data": {
+                        "type": "object",
+                        "description": ("Score a real account instead of a demo one. Requires 'name'; "
+                                        "optionally deal_stage, days_in_stage, opportunity_value, "
+                                        "current_spend, expected_close_days, revenue, employees, industry."),
                     },
                 },
                 "required": ["operation"],
@@ -262,17 +395,51 @@ class RiskAssessmentAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         op = kwargs.get("operation", "assess_deal_risk")
-        key = _resolve_account(kwargs.get("account_name", ""))
         dispatch = {
             "assess_deal_risk": self._assess_deal_risk,
             "churn_prediction": self._churn_prediction,
             "financial_risk": self._financial_risk,
             "executive_summary": self._executive_summary,
         }
+        if op == "list_accounts":
+            return _list_accounts_message()
         handler = dispatch.get(op)
         if not handler:
-            return f"**Error:** Unknown operation `{op}`."
-        return handler(key)
+            valid = ", ".join(sorted(list(dispatch) + ["list_accounts"]))
+            return f"**Error:** Unknown operation `{op}`.\n\nValid operations: {valid}."
+
+        account_data = kwargs.get("account_data")
+        if account_data:
+            if op in ("churn_prediction", "financial_risk"):
+                return (f"**`{op}` needs signals you have not supplied**\n\n"
+                        f"Churn and financial scoring depend on usage, support and credit data that "
+                        f"`account_data` does not carry, and this agent will not invent them. "
+                        f"Use `assess_deal_risk` or `executive_summary` with your figures, or run "
+                        f"`{op}` against a demo account (`list_accounts`).")
+            try:
+                key = _register_custom_account(account_data)
+            except ValueError as e:
+                return f"**Error:** {e}"
+            try:
+                body = handler(key)
+            except Exception as e:
+                return f"**Error:** could not score the supplied account — {type(e).__name__}: {e}"
+            finally:
+                _clear_custom_account()
+            return (body + "\n\n_Scored from the figures you supplied, not from the demo dataset._")
+
+        requested = kwargs.get("account_name", "")
+        key = _resolve_account(requested)
+        if key is None:
+            return _unknown_account_message(requested, op)
+        body = handler(key)
+        if not requested:
+            body += (f"\n\n_No account was named, so this shows the default demo account "
+                     f"({_ACCOUNTS[_DEFAULT_ACCOUNT]['name']}). Pass `account_name`, or `account_data` "
+                     f"for a real account._")
+        else:
+            body += "\n\n_Figures are from this agent's built-in demo dataset, not live CRM data._"
+        return body
 
     # ── assess_deal_risk ──────────────────────────────────────
     def _assess_deal_risk(self, key):

@@ -1,0 +1,621 @@
+{
+ "schema": "rar-critic/1.0",
+ "generated_at": "2026-07-28T18:25:11Z",
+ "thresholds": {
+  "fresh_at": 60,
+  "certified_critic": 75,
+  "certified_user": 60,
+  "certified_min_reviews": 5,
+  "certified_min_user_signal": 3
+ },
+ "panel": [
+  {
+   "id": "architect",
+   "name": "The Architect",
+   "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused"
+  },
+  {
+   "id": "sentinel",
+   "name": "Security Sentinel",
+   "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing"
+  },
+  {
+   "id": "pragmatist",
+   "name": "The Pragmatist",
+   "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product"
+  },
+  {
+   "id": "docs",
+   "name": "Docs Desk",
+   "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone"
+  },
+  {
+   "id": "maintainer",
+   "name": "The Maintainer",
+   "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
+  }
+ ],
+ "stats": {
+  "agents_scored": 6,
+  "critic_reviews": 27,
+  "avg_critic_score": 97,
+  "avg_user_score": 50,
+  "by_state": {
+   "fresh": 6
+  }
+ },
+ "agents": {
+  "@aibast_agents_library/account_intelligence": {
+   "name": "@aibast-agents-library/account_intelligence",
+   "display_name": "Account Intelligence",
+   "sha256": "db3bf0e8b9dc53a4c16c879a11501783a03b923fa7142132f5d0ad0037d1f376",
+   "version": "1.2.0",
+   "vote_tally": "2/0",
+   "critic_score": 80,
+   "critic_avg": 73.8,
+   "critic_count": 5,
+   "user_score": 100,
+   "user_signal": 2,
+   "state": "fresh",
+   "backends": [
+    "rubric"
+   ],
+   "reviewed_at": "2026-07-28T17:58:39Z",
+   "trigger": "never reviewed",
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 69,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 644 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 59,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows environment reads the manifest never declares and 644 lines, which is a long single read. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 83,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 87,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 71,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    }
+   ]
+  },
+  "@aibast_agents_library/account_intelligence_orchestrator_agent": {
+   "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
+   "display_name": "Account Intelligence Orchestrator",
+   "sha256": "d1ea6994c730d10e73f1687afe32c41b0ca8f233d19fc692ea572fda18bc2d1b",
+   "version": "1.0.1",
+   "vote_tally": "0/0",
+   "critic_score": 100,
+   "critic_avg": 70.8,
+   "critic_count": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "fresh",
+   "backends": [
+    "rubric"
+   ],
+   "reviewed_at": "2026-07-28T17:58:40Z",
+   "trigger": "never reviewed",
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 76,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 457 lines, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on sec",
+     "review": "Reading for how it treats secrets and failure, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:39Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 80,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    }
+   ]
+  },
+  "@aibast_agents_library/action_prioritization": {
+   "name": "@aibast-agents-library/action_prioritization",
+   "display_name": "Action Prioritization",
+   "sha256": "ebd28d87a1c31ff50a12afcab1aa8cfc0d2ae2d7f52bbe2e412d882b605b6d0e",
+   "version": "1.0.1",
+   "vote_tally": "0/0",
+   "critic_score": 100,
+   "critic_avg": 70.8,
+   "critic_count": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "fresh",
+   "backends": [
+    "rubric"
+   ],
+   "reviewed_at": "2026-07-28T17:58:40Z",
+   "trigger": "never reviewed",
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 76,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 398 lines, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on sec",
+     "review": "Reading for how it treats secrets and failure, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 80,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    }
+   ]
+  },
+  "@aibast_agents_library/competitive_intelligence": {
+   "name": "@aibast-agents-library/competitive_intelligence",
+   "display_name": "Competitive Intelligence",
+   "sha256": "f97b7a55aa7c6eabaf26e0b624c1a2d92ca024abf881212080c0da5fbef3f8e4",
+   "version": "1.0.1",
+   "vote_tally": "0/0",
+   "critic_score": 100,
+   "critic_avg": 70.8,
+   "critic_count": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "fresh",
+   "backends": [
+    "rubric"
+   ],
+   "reviewed_at": "2026-07-28T17:58:40Z",
+   "trigger": "never reviewed",
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 76,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 441 lines, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on sec",
+     "review": "Reading for how it treats secrets and failure, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 80,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 60,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T17:58:40Z"
+    }
+   ]
+  },
+  "@kody_w/rar_remote_agent": {
+   "name": "@kody-w/rar_remote_agent",
+   "display_name": "RAR Remote Agent",
+   "sha256": "5917d0f6f98d4c6acff59f1c96a1df4990750671f5a86b3ba21c204204f132ee",
+   "version": "1.7.3",
+   "vote_tally": "0/0",
+   "critic_score": 100,
+   "critic_avg": 80.0,
+   "critic_count": 2,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "fresh",
+   "backends": [
+    "github-models:openai/gpt-4.1",
+    "github-models:openai/gpt-4.1-mini"
+   ],
+   "reviewed_at": "2026-07-28T17:59:23Z",
+   "trigger": "never reviewed",
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 75,
+     "fresh": true,
+     "headline": "Strong separation; minor boundary violations",
+     "review": "The agent maintains good structure, with actions separated into methods and parameters clearly documented. It does not declare any required env vars, but relies on GITHUB_TOKEN from the environment and gracefully degrades to CLI fallback, which is acceptable. However, it imports from utils/storage_factory and agents.basic_agent, violating the single-file package constraint by depending on external, non-standard modules. All network calls are handled outside __init__, and perform returns str as required. Overall, the design is sound, but the external imports reduce its score.",
+     "backend": "github-models:openai/gpt-4.1",
+     "at": "2026-07-28T17:59:20Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 85,
+     "fresh": true,
+     "headline": "Solid token handling, minor env var assumptions",
+     "review": "The agent does not declare required environment variables yet reads the GITHUB_TOKEN implicitly and falls back to the 'gh auth token' CLI, providing robust secret handling without hardcoding tokens. It gracefully handles missing tokens by returning error messages rather than crashing. No network calls occur in __init__, and the use of optional storage_manager is well guarded. However, the lack of explicit requires_env declaration for GITHUB_TOKEN weakens clarity, and some methods catch broad exceptions which could mask issues. Overall, secure and well-structured with minor room for clearer secret declaration and narrower error handling.",
+     "backend": "github-models:openai/gpt-4.1-mini",
+     "at": "2026-07-28T17:59:23Z"
+    }
+   ]
+  },
+  "@aibast_agents_library/account_risk_assessment": {
+   "name": "@aibast-agents-library/account_risk_assessment",
+   "display_name": "Account Risk Assessment",
+   "sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
+   "version": "1.1.0",
+   "vote_tally": "0/1",
+   "critic_score": 100,
+   "critic_avg": 84.2,
+   "critic_count": 5,
+   "user_score": 0,
+   "user_signal": 1,
+   "state": "fresh",
+   "backends": [
+    "github-models:openai/gpt-4.1",
+    "github-models:openai/gpt-4.1-mini",
+    "rubric"
+   ],
+   "run": {
+    "tier": "brainstem-loader",
+    "brainstem_running": true,
+    "loaded": true,
+    "classes": [
+     "RiskAssessmentAgent"
+    ],
+    "load_seconds": 0.182,
+    "calls": [
+     {
+      "agent": "RiskAssessmentAgent",
+      "probe": null,
+      "ok": true,
+      "seconds": 0.0,
+      "return_type": "str",
+      "returns_str": true,
+      "output_chars": 932,
+      "output_preview": "**No risk data for \"harness probe\"**\n\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company's numbers under your account's name.\n\n**Accounts this agent can assess:**\n\n| Account | Industry | Deal Stage | Opportunity |\n|---|---|---|---|\n| Acme Corporation | Manufacturing | Proposal | $2,400,000 |\n| Contoso Ltd | Technology | Negotiation | $1,100,000 |\n| Fabrikam Industries | Manufacturing | Discovery | $890,000 |\n| Northwind Traders | Retail | Qualification | $540,000 |\n\nRe-run `assess_deal_risk` with one of the names above, or pass your own figures with `account_data` to score a",
+      "exception": null,
+      "message": null
+     },
+     {
+      "agent": "RiskAssessmentAgent",
+      "probe": "no-args",
+      "ok": true,
+      "seconds": null,
+      "return_type": null,
+      "returns_str": true,
+      "output_chars": 1106,
+      "output_preview": null,
+      "exception": null,
+      "message": null
+     }
+    ],
+    "standalone_run": {
+     "ran": true,
+     "exit_code": 0,
+     "stdout_chars": 3618,
+     "stderr_tail": ""
+    },
+    "no_credentials": {
+     "loaded": true,
+     "ok": true,
+     "exception": null,
+     "preview": "**No risk data for \"harness probe\"**\n\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company's numbers under your account's name.\n\n**Accounts this agent can assess:*"
+    },
+    "side_effects": {
+     "files_written": []
+    },
+    "chat_probe": {
+     "attempted": true,
+     "imported": true,
+     "installed_as": "risk_assessment_agent.py",
+     "tool_invoked": true,
+     "removed": true,
+     "import_response": {
+      "message": "Agent risk_assessment_agent.py imported successfully."
+     },
+     "loaded_classes": [],
+     "prompt": "Use your Account Risk Assessment tool now. Task: Scores deal risk, churn probability, and financial health with mitigation advice \u2014 on built-in demo accounts, or on real figures you supply via account_data. Invoke the tool with reasonable arguments, then tell me in one line whether the tool succeeded and what it returned.",
+     "seconds": 6.6,
+     "model": "claude-haiku-4.5",
+     "reply": "**Success**: The tool returned a composite deal risk score of 62/100 for Acme Corporation (38% win probability in 21 days), identified seven risk factors including missing CTO stakeholder relationships and competitive pricing pressure, and recommended two immediate mitigations: intro to the champion and a TCO analysis.",
+     "agent_logs": "[RiskAssessmentAgent] **Accounts available in this agent's demo dataset**\n\n| Account | Industry | Deal Stage | Days in Stage | Opportunity |\n|---|---|---|---|---|\n| Acme Corporation | Manufacturing | Proposal | 34 | $2,400,000 |\n| Contoso Ltd | Technology | Negotiation | 12 | $1,100,000 |\n| Fabrikam Industries | Manufacturing | Discovery | 18 | $890,000 |\n| Northwind Traders | Retail | Qualification | 7 | $540,000 |\n\nThese are built-in demo figures, not live CRM data. To assess a real account, pass `account_data` with your own numbers.\n[RiskAssessmentAgent] **Deal Risk Assessment: Acme Corporation**\n\n| Metric | Value |\n|---|---|\n| Deal Stage | Proposal |\n| Days in Stage | 34 |\n| Opportunity Value | $2,400,000 |\n| Composite Risk Score | 62/100 |\n| Win Probability | 38% |\n| Expected Close | 21 days |\n\n**Risk Factors:**\n\n| Factor | Category | Severity | Score |\n|---|---|---|---|\n| No CTO re",
+     "reply_chars": 320
+    },
+    "transcript": "LOADED: yes, via brainstem-loader in 0.182s. Classes registered: RiskAssessmentAgent.\nRAN perform(operation=\u2026, account_name=\u2026): ok. Returned str of 932 chars in 0.0s. First output: '**No risk data for \"harness probe\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another company\\'s numbers under your account\\'s name.\\n\\n**Accounts this agent can assess:**\\n\\n| Account | Industry | Deal Stage | O'\nRAN no-args probe: ok.\nINPUT SENSITIVITY: passed \u2014 different arguments produced different output and the requested entity is reflected back in the response.\n`python risk_assessment_agent.py` exited 0 as the contract requires.\nHOT-LOADED INTO THE RUNNING BRAINSTEM and exercised through /chat (claude-haiku-4.5, 6.6s): the model chose this tool on its own. Agent log: \"[RiskAssessmentAgent] **Accounts available in this agent's demo dataset**\\n\\n| Account | Industry | Deal Stage | Days in Stage | Opportunity |\\n|---|---|---|---|---|\\n| Acme Corporation | Manufacturing | Proposal | 34 | $2,4\". It answered: '**Success**: The tool returned a composite deal risk score of 62/100 for Acme Corporation (38% win probability in 21 days), identified seven risk factors including missing CTO stakeholder relationships and competitive pricing pressure, and recommended two immediate mitigations: intro to the champion and a TCO analysis.'\nWITH ALL CREDENTIALS STRIPPED: still ran and returned output \u2014 '**No risk data for \"harness probe\"**\\n\\nThis agent ships with a built-in demo dataset and has no record of that account, so it will not produce a risk assessment for it. Guessing here would put another '"
+   },
+   "reviewed_at": "2026-07-28T18:25:11Z",
+   "trigger": "forced",
+   "evidence": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/state/critic_transcripts/aibast_agents_library__account_risk_assessment.json",
+    "path": "state/critic_transcripts/aibast_agents_library__account_risk_assessment.json",
+    "frame_count": 9,
+    "total_bytes": 11788,
+    "file_sha12": "83406f30bfc1",
+    "sha256": "3549c294403ef90506553e5d466c06dcc908ce98c95a460516e741b4482dc28e"
+   },
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 662 lines, this holds up. The file shows it loaded cleanly on a real brainstem and perform() returned 932 chars of real output. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T18:24:30Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 85,
+     "fresh": true,
+     "headline": "Robust synthetic risk scoring with graceful unknown account handling",
+     "review": "The agent successfully loaded and ran without any env var dependencies, adhering to the no-network-in-init rule. It returns detailed, varied risk assessment reports based on input accounts, demonstrated by the distinct output for 'Acme Corporation' and the graceful fallback message for unknown accounts like 'harness probe'. The agent\u2019s synthetic data approach is clearly documented, so the canned nature of the output is transparent, which justifies a high score but not full marks.",
+     "backend": "github-models:openai/gpt-4.1-mini",
+     "at": "2026-07-28T18:24:33Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows it loaded cleanly on a real brainstem and perform() returned 932 chars of real output. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-28T18:24:48Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 90,
+     "fresh": true,
+     "headline": "Robust synthetic risk scoring with clear outputs and graceful fallback",
+     "review": "The agent loaded and ran successfully, returning detailed, context-sensitive risk assessment summaries as strings within milliseconds. It gracefully handled unknown accounts by explicitly stating no data was available rather than guessing, which demonstrates good defensive design. The absence of required environment variables and external credentials confirms it runs standalone on synthetic data, making it reliable and reproducible.",
+     "backend": "github-models:openai/gpt-4.1-mini",
+     "at": "2026-07-28T18:24:51Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 90,
+     "fresh": true,
+     "headline": "Clean input handling; never mixes up accounts",
+     "review": "The transcript confirms that perform() returns a formatted str, reflects the requested account, and gracefully handles unknown entities without crashing or mislabeling demo data. The agent survived credential stripping and input probes, always returning accurate demo or error output. It never quietly substitutes real data for unknown accounts, preventing dangerous misattribution \u2014 a rare strength for demo agents.",
+     "backend": "github-models:openai/gpt-4.1",
+     "at": "2026-07-28T18:25:11Z"
+    }
+   ],
+   "history": [
+    {
+     "critic_score": 100,
+     "critic_avg": 92.7,
+     "critic_count": 3,
+     "user_score": 0,
+     "state": "fresh",
+     "version": "1.0.1",
+     "sha256": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+     "reviewed_at": "2026-07-28T18:11:19Z",
+     "ran_ok": true,
+     "loaded": true,
+     "headlines": [
+      "Clean structure, synthetic data, contract honored",
+      "Robust risk agent with strong synthetic data and graceful fallback",
+      "All core risk summaries delivered, no env required"
+     ]
+    },
+    {
+     "critic_score": 100,
+     "critic_avg": 91.0,
+     "critic_count": 5,
+     "user_score": 0,
+     "state": "fresh",
+     "version": "1.0.1",
+     "sha256": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+     "reviewed_at": "2026-07-28T18:14:16Z",
+     "ran_ok": true,
+     "loaded": true,
+     "headlines": [
+      "Robust risk agent, clean single-file design",
+      "Robust synthetic data risk agent with graceful no-env handling",
+      "Runs reliably, delivers actionable B2B risk summaries",
+      "Robust risk agent with clear output and no env needed",
+      "Runs reliably, clear summaries, zero credential friction"
+     ]
+    },
+    {
+     "critic_score": 20,
+     "critic_avg": 48.8,
+     "critic_count": 5,
+     "user_score": 0,
+     "state": "rotten",
+     "version": "1.0.1",
+     "sha256": "76f4b257fd2c7e0ca370b11d80d10833dc86305d9364320b75377072dd247353",
+     "reviewed_at": "2026-07-28T18:18:30Z",
+     "ran_ok": true,
+     "loaded": true,
+     "headlines": [
+      "Fresh on struct",
+      "Agent returns canned output ignoring input silently",
+      "Always returns Acme data, ignores requested account",
+      "Agent returns canned data ignoring inputs",
+      "Rotten on robust"
+     ]
+    },
+    {
+     "critic_score": 100,
+     "critic_avg": 92.8,
+     "critic_count": 5,
+     "user_score": 0,
+     "state": "fresh",
+     "version": "1.1.0",
+     "sha256": "83406f30bfc183fa0cf3edab2f8f40451090afdf860cd6cba5816c3e2048e343",
+     "reviewed_at": "2026-07-28T18:23:46Z",
+     "ran_ok": true,
+     "loaded": true,
+     "headlines": [
+      "Fresh on struct",
+      "Robust risk assessment with synthetic data, no secrets needed",
+      "Fresh on value",
+      "Robust synthetic risk analysis with clear, detailed outputs",
+      "Robust demo risk assessor, handles unknowns cleanly"
+     ]
+    }
+   ]
+  }
+ }
+}
